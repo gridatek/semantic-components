@@ -40,7 +40,7 @@
     "@tiptap/extension-highlight": "^3.2.1",
     "@tiptap/extension-history": "^3.2.1",
     "@tiptap/extension-horizontal-rule": "^3.2.1",
-    "@tiptap/extension-image": "^3.2.1",
+    "@tiptap/extension-image": "^3.3.0",
     "@tiptap/extension-italic": "^3.2.1",
     "@tiptap/extension-link": "^3.2.1",
     "@tiptap/extension-list-item": "^3.2.1",
