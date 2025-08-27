@@ -28,7 +28,7 @@
     "@supabase/supabase-js": "^2.56.0",
     "@tailwindcss/postcss": "^4.1.12",
     "@tiptap/core": "^3.2.1",
-    "@tiptap/extension-blockquote": "^3.2.1",
+    "@tiptap/extension-blockquote": "^3.3.0",
     "@tiptap/extension-bold": "^3.2.1",
     "@tiptap/extension-bullet-list": "^3.2.1",
     "@tiptap/extension-code": "^3.2.1",
