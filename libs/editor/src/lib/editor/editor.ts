@@ -134,18 +134,12 @@ export class ScEditor implements ControlValueAccessor {
     }
 
     // Use consolidated list extensions
-    if (this.extensions.bulletList() || this.extensions.orderedList()) {
+    if (this.extensions.list()) {
       const { BulletList, OrderedList, ListItem } = await import('@tiptap/extension-list');
 
       extensions.push(ListItem);
-
-      if (this.extensions.bulletList()) {
-        extensions.push(BulletList);
-      }
-
-      if (this.extensions.orderedList()) {
-        extensions.push(OrderedList);
-      }
+      extensions.push(BulletList);
+      extensions.push(OrderedList);
     }
 
     if (this.extensions.strike()) {
