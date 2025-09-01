@@ -173,7 +173,7 @@ export class ScEditor implements ControlValueAccessor {
     }
 
     // Use UndoRedo instead of History (v3 change)
-    if (this.extensions.history()) {
+    if (this.extensions.undoRedo()) {
       const { UndoRedo } = await import('@tiptap/extensions');
       extensions.push(UndoRedo);
     }

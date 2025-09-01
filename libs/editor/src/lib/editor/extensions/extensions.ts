@@ -2,10 +2,10 @@ import { Injectable, computed, signal } from '@angular/core';
 
 @Injectable()
 export class ScExtensions {
-  //history extension
+  //undoRedo extension
   undo = signal<boolean>(false);
   redo = signal<boolean>(false);
-  history = computed(() => this.undo() || this.redo());
+  undoRedo = computed(() => this.undo() || this.redo());
 
   //link extension
   setLink = signal<boolean>(false);
