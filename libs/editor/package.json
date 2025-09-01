@@ -27,30 +27,22 @@
     "@tiptap/extension-youtube": "^3.0.7",
     "@tiptap/extension-link": "^3.0.7",
     "@tiptap/extension-text-align": "^3.0.7",
-    "@tiptap/extension-list-item": "^3.0.7",
-    "@tiptap/extension-bullet-list": "^3.0.7",
-    "@tiptap/extension-ordered-list": "^3.0.7",
     "@tiptap/extension-strike": "^3.0.7",
     "@tiptap/extension-italic": "^3.0.7",
     "@tiptap/extension-bold": "^3.0.7",
     "@tiptap/extension-horizontal-rule": "^3.0.7",
     "@tiptap/extension-blockquote": "^3.0.7",
     "@tiptap/extension-code": "^3.0.7",
-    "@tiptap/extension-history": "^3.0.7",
-    "@tiptap/extension-table-header": "^3.0.7",
-    "@tiptap/extension-table-row": "^3.0.7",
-    "@tiptap/extension-table-cell": "^3.0.7",
     "@tiptap/extension-table": "^3.0.7",
-    "@semantic-components/ui": "0.57.0"
+    "@semantic-components/ui": "0.57.0",
+    "@tiptap/extension-list": "^3.3.0",
+    "@tiptap/extensions": "^3.3.0"
   },
   "peerDependenciesMeta": {
     "@tiptap/extension-blockquote": {
       "optional": true
     },
     "@tiptap/extension-bold": {
-      "optional": true
-    },
-    "@tiptap/extension-bullet-list": {
       "optional": true
     },
     "@tiptap/extension-code": {
@@ -65,9 +57,6 @@
     "@tiptap/extension-highlight": {
       "optional": true
     },
-    "@tiptap/extension-history": {
-      "optional": true
-    },
     "@tiptap/extension-horizontal-rule": {
       "optional": true
     },
@@ -78,12 +67,6 @@
       "optional": true
     },
     "@tiptap/extension-link": {
-      "optional": true
-    },
-    "@tiptap/extension-list-item": {
-      "optional": true
-    },
-    "@tiptap/extension-ordered-list": {
       "optional": true
     },
     "@tiptap/extension-text-style": {
@@ -101,16 +84,13 @@
     "@tiptap/extension-youtube": {
       "optional": true
     },
-    "@tiptap/extension-table-header": {
-      "optional": true
-    },
-    "@tiptap/extension-table-row": {
-      "optional": true
-    },
-    "@tiptap/extension-table-cell": {
-      "optional": true
-    },
     "@tiptap/extension-table": {
+      "optional": true
+    },
+    "@tiptap/extension-list": {
+      "optional": true
+    },
+    "@tiptap/extensions": {
       "optional": true
     }
   },

@@ -83,7 +83,7 @@ export class ScEditor implements ControlValueAccessor {
     extensions.push(Paragraph);
     extensions.push(Text);
 
-    // try {
+    // Load extensions from consolidated packages
     if (this.extensions.highlight()) {
       const Highlight = (await import('@tiptap/extension-highlight')).Highlight;
       extensions.push(Highlight);
@@ -133,18 +133,12 @@ export class ScEditor implements ControlValueAccessor {
       );
     }
 
-    if (this.extensions.bulletList() || this.extensions.orderedList()) {
-      const ListItem = (await import('@tiptap/extension-list-item')).ListItem;
+    // Use consolidated list extensions
+    if (this.extensions.list()) {
+      const { BulletList, OrderedList, ListItem } = await import('@tiptap/extension-list');
+
       extensions.push(ListItem);
-    }
-
-    if (this.extensions.bulletList()) {
-      const BulletList = (await import('@tiptap/extension-bullet-list')).BulletList;
       extensions.push(BulletList);
-    }
-
-    if (this.extensions.orderedList()) {
-      const OrderedList = (await import('@tiptap/extension-ordered-list')).OrderedList;
       extensions.push(OrderedList);
     }
 
@@ -178,32 +172,25 @@ export class ScEditor implements ControlValueAccessor {
       extensions.push(Code);
     }
 
-    if (this.extensions.history()) {
-      const History = (await import('@tiptap/extension-history')).History;
-      extensions.push(History);
+    // Use UndoRedo instead of History (v3 change)
+    if (this.extensions.undoRedo()) {
+      const { UndoRedo } = await import('@tiptap/extensions');
+      extensions.push(UndoRedo);
     }
 
+    // Use consolidated table extensions
     if (this.extensions.table()) {
-      const TableHeader = (await import('@tiptap/extension-table-header')).TableHeader;
+      const { Table, TableRow, TableCell, TableHeader } = await import('@tiptap/extension-table');
+
       extensions.push(TableHeader);
-
-      const TableRow = (await import('@tiptap/extension-table-row')).TableRow;
       extensions.push(TableRow);
-
-      const TableCell = (await import('@tiptap/extension-table-cell')).TableCell;
       extensions.push(TableCell);
-
-      const Table = (await import('@tiptap/extension-table')).Table;
-
       extensions.push(
         Table.configure({
           resizable: true,
         }),
       );
     }
-    // } catch (e) {
-    //   console.log(e);
-    // }
 
     this.editor = new Editor({
       element: this.editorContent().nativeElement,

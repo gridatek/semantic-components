@@ -2,10 +2,15 @@ import { Injectable, computed, signal } from '@angular/core';
 
 @Injectable()
 export class ScExtensions {
-  //history extension
+  //undoRedo extension
   undo = signal<boolean>(false);
   redo = signal<boolean>(false);
-  history = computed(() => this.undo() || this.redo());
+  undoRedo = computed(() => this.undo() || this.redo());
+
+  //list extension
+  bulletList = signal<boolean>(false);
+  orderedList = signal<boolean>(false);
+  list = computed(() => this.bulletList() || this.orderedList());
 
   //link extension
   setLink = signal<boolean>(false);
@@ -32,8 +37,7 @@ export class ScExtensions {
   strike = signal<boolean>(false);
   italic = signal<boolean>(false);
   blockquote = signal<boolean>(false);
-  bulletList = signal<boolean>(false);
-  orderedList = signal<boolean>(false);
+
   horizontalRule = signal<boolean>(false);
   textStyle = signal<boolean>(false);
   table = signal<boolean>(false);
