@@ -1,0 +1,120 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Development Commands
+
+### Building
+
+- `npx nx build` - Build all projects
+- `npx nx build ui` - Build the UI library specifically
+- `npx nx build app` - Build the demo application
+- `npx nx run-many -t build` - Build all projects (used in release process)
+
+### Development Server
+
+- `npx nx serve app` - Start development server for the demo app (default port 4200)
+- `npx nx serve-static app` - Serve built static files
+
+### Testing
+
+- `npx nx test` - Run all tests
+- `npx nx test ui` - Run tests for UI library
+- `npx nx test app` - Run tests for demo app
+- `npx nx test --ci --codeCoverage` - Run tests in CI mode with coverage
+
+### Linting & Formatting
+
+- `npx nx lint` - Lint all projects
+- `npx nx lint ui` - Lint UI library
+- `npx prettier --write --ignore-unknown **/*` - Format all files (configured in lint-staged)
+
+### End-to-End Testing
+
+- `npx nx e2e` - Run Playwright e2e tests
+
+### Release
+
+- `npx nx release` - Create a release for libraries (independent versioning)
+
+## Project Architecture
+
+### Monorepo Structure
+
+This is an **Nx monorepo** with the following structure:
+
+- **`apps/app/`** - Demo application showcasing the component library
+  - Angular application (prefix: `app`)
+  - Serves as documentation and examples for the component library
+  - Uses Tailwind CSS for styling
+
+- **`libs/`** - Component libraries and utilities:
+  - **`ui/`** - Main semantic components library (prefix: `sc`)
+  - **`breadcrumb/`** - Breadcrumb navigation components
+  - **`carousel/`** - Carousel/slider components
+  - **`code-highlighter/`** - Code syntax highlighting
+  - **`editor/`** - Rich text editor components (TipTap-based)
+  - **`experimental/`** - Experimental components
+  - **`image-cropper/`** - Image cropping functionality
+  - **`logging/`** - Logging utilities
+  - **`re-captcha/`** - reCAPTCHA integration
+  - **`supabase/`** - Supabase integration utilities
+  - **`utils/`** - Shared utility functions
+
+### Technology Stack
+
+- **Framework**: Angular 20.x with Angular CDK
+- **Build System**: Nx 21.x
+- **Styling**: Tailwind CSS v4.x
+- **Testing**: Jest + Playwright
+- **Package Manager**: npm
+- **Linting**: ESLint + Prettier
+- **Rich Text Editor**: TipTap 3.x
+- **Icons**: Lucide Icons (@semantic-icons/lucide-icons)
+- **Database**: Supabase integration
+
+### Key Architectural Patterns
+
+#### Semantic Components Philosophy
+
+Components prioritize semantic HTML, accessibility, and modular design:
+
+- Use meaningful HTML elements over generic `<div>` structures
+- Self-contained components managing their own logic, UI, style, and state
+- Reusable across different application parts without modification
+- Hide implementation details, expose only necessary interfaces
+
+#### Component Generation
+
+- Components use `sc` prefix (Semantic Components)
+- Generated with inline styles and templates
+- ViewEncapsulation.None and OnPush change detection by default
+- Skip test generation by default (configured in nx.json)
+
+#### Library Build Process
+
+- Libraries use Angular Package Format via `@nx/angular:package`
+- Custom license copying via `@semantic-icons/nx-generators:copy-license`
+- Independent versioning for library releases
+
+### Development Guidelines
+
+#### Component Development
+
+- Follow the semantic HTML approach - use appropriate elements for content meaning
+- Implement accessibility features using Angular CDK
+- Use Tailwind CSS classes for styling
+- Components should be self-contained and reusable
+
+#### Testing Strategy
+
+- Jest for unit testing
+- Playwright for e2e testing
+- Tests can be run with coverage reporting in CI mode
+
+#### Code Quality
+
+- ESLint configuration includes Angular-specific rules
+- Prettier formatting with import sorting
+- Husky pre-commit hooks with lint-staged
+- Commitlint for conventional commit messages
