@@ -7,6 +7,11 @@ export class ScExtensions {
   redo = signal<boolean>(false);
   undoRedo = computed(() => this.undo() || this.redo());
 
+  //list extension
+  bulletList = signal<boolean>(false);
+  orderedList = signal<boolean>(false);
+  list = computed(() => this.bulletList() || this.orderedList());
+
   //link extension
   setLink = signal<boolean>(false);
   unsetLink = signal<boolean>(false);
@@ -32,7 +37,7 @@ export class ScExtensions {
   strike = signal<boolean>(false);
   italic = signal<boolean>(false);
   blockquote = signal<boolean>(false);
-  list = signal<boolean>(false);
+
   horizontalRule = signal<boolean>(false);
   textStyle = signal<boolean>(false);
   table = signal<boolean>(false);
