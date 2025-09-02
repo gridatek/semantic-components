@@ -84,7 +84,7 @@
     "@nx/plugin": "21.4.1",
     "@nx/web": "21.4.1",
     "@nx/workspace": "21.4.1",
-    "@playwright/test": "^1.53.2",
+    "@playwright/test": "^1.55.0",
     "@schematics/angular": "^20.2.0",
     "@semantic-icons/nx-generators": "^0.52.0",
     "@swc-node/register": "~1.11.1",
