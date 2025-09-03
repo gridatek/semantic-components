@@ -107,7 +107,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-preset-angular": "14.6.0",
     "jsonc-eslint-parser": "^2.4.0",
-    "lint-staged": "^16.1.4",
+    "lint-staged": "^16.1.6",
     "ng-packagr": "20.1.0",
     "nx": "21.4.1",
     "postcss": "^8.5.6",
