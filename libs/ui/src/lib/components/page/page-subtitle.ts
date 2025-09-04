@@ -26,9 +26,10 @@ export class ScPageSubtitle {
     alias: 'class',
   });
 
+  // Page subtitle with refined styling - no border to work better within page headers
   protected readonly class = computed(() =>
     cn(
-      'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
+      'scroll-m-20 text-xl font-medium tracking-tight text-muted-foreground first:mt-0',
       this.classInput(),
     ),
   );

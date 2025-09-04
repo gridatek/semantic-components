@@ -26,5 +26,9 @@ export class ScPageHeader {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('space-y-4 mb-8', this.classInput()));
+  // Page header with proper spacing and visual hierarchy
+  // Provides consistent spacing for title, subtitle, and description elements
+  protected readonly class = computed(() =>
+    cn('space-y-4 py-8 px-6 border-b border-gray-100 bg-gray-50/50', this.classInput()),
+  );
 }

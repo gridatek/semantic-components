@@ -26,5 +26,8 @@ export class ScPageDescription {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('text-xl text-muted-foreground', this.classInput()));
+  // Page description with comfortable reading size and spacing
+  protected readonly class = computed(() =>
+    cn('text-lg text-muted-foreground leading-relaxed', this.classInput()),
+  );
 }
