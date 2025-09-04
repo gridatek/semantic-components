@@ -16,7 +16,7 @@ flowchart TD
   E1 --> E1b[page-section-subtitle]
   E1 --> E1c[page-section-description]
   E --> E2[page-section-content]
-  E --> E1[page-section-footer]
+  E --> E3[page-section-footer]
   A --> F[page-footer]
 ```
 
