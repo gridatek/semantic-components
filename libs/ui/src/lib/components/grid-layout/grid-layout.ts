@@ -34,6 +34,12 @@ export class ScGridLayout {
   readonly lgCols = input<1 | 2 | 3 | 4 | 5 | 6 | 12 | undefined>(undefined);
   readonly xlCols = input<1 | 2 | 3 | 4 | 5 | 6 | 12 | undefined>(undefined);
 
+  // Alignment options
+  readonly alignItems = input<'start' | 'center' | 'end' | 'stretch'>('stretch');
+  readonly justifyContent = input<'start' | 'center' | 'end' | 'between' | 'around' | 'evenly'>(
+    'start',
+  );
+
   // Static class mappings for Tailwind CSS compilation
   private readonly gridColsMap = {
     1: 'grid-cols-1',
@@ -97,10 +103,28 @@ export class ScGridLayout {
     8: 'gap-8',
   } as const;
 
+  private readonly alignItemsMap = {
+    start: 'items-start',
+    center: 'items-center',
+    end: 'items-end',
+    stretch: 'items-stretch',
+  } as const;
+
+  private readonly justifyContentMap = {
+    start: 'justify-start',
+    center: 'justify-center',
+    end: 'justify-end',
+    between: 'justify-between',
+    around: 'justify-around',
+    evenly: 'justify-evenly',
+  } as const;
+
   // Responsive grid system with static class names for Tailwind CSS
-  // Usage: <sc-grid-layout [cols]="2" [mdCols]="3" [lgCols]="4" [gap]="4">
+  // Usage: <sc-grid-layout [cols]="2" [mdCols]="3" [lgCols]="4" [gap]="4" alignItems="center" justifyContent="center">
   protected readonly class = computed(() => {
     const baseGrid = `grid ${this.gridColsMap[this.cols()]} ${this.gapMap[this.gap()]}`;
+
+    const alignmentClasses = `${this.alignItemsMap[this.alignItems()]} ${this.justifyContentMap[this.justifyContent()]}`;
 
     const responsiveClasses = [
       this.smCols() ? this.smGridColsMap[this.smCols()!] : '',
@@ -111,6 +135,6 @@ export class ScGridLayout {
       .filter(Boolean)
       .join(' ');
 
-    return cn(baseGrid, responsiveClasses, this.classInput());
+    return cn(baseGrid, alignmentClasses, responsiveClasses, this.classInput());
   });
 }
