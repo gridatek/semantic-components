@@ -26,5 +26,7 @@ export class ScPageHeroSection {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('relative py-12 md:py-20 lg:py-24', this.classInput()),
+  );
 }

@@ -26,5 +26,5 @@ export class ScPageSectionDescription {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn('text-lg text-muted-foreground', this.classInput()));
 }

@@ -26,5 +26,5 @@ export class ScPageBreadcrumbSection {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn('py-2 mb-4', this.classInput()));
 }

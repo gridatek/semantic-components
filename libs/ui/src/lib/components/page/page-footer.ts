@@ -26,5 +26,5 @@ export class ScPageFooter {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn('mt-8 pt-8 border-t', this.classInput()));
 }

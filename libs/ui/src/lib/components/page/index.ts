@@ -9,4 +9,8 @@ export * from './page-content';
 export * from './page-footer';
 export * from './page-section';
 export * from './page-section-header';
+export * from './page-section-title';
+export * from './page-section-subtitle';
+export * from './page-section-description';
+export * from './page-section-content';
 export * from './page-section-footer';

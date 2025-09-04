@@ -26,5 +26,10 @@ export class ScPageSubtitle {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
+      this.classInput(),
+    ),
+  );
 }

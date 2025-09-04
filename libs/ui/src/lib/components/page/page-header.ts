@@ -26,5 +26,5 @@ export class ScPageHeader {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn('space-y-4 mb-8', this.classInput()));
 }
