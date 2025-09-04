@@ -148,7 +148,8 @@ export class CommandDialogDemo {
     const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate, {
       title: 'Search Commands',
       description: 'Type a command or search...',
-      maxWidth: '600px',
+      width: '600px',
+      height: '400px',
       disableClose: false,
     });
 
