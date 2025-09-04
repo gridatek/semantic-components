@@ -2,7 +2,7 @@ import { Directive, ElementRef, inject, model } from '@angular/core';
 
 @Directive({
   host: {
-    '[value]': 'value()',
+    '[attr.value]': 'value()',
     '(input)': 'handleInput()',
     'data-slot': 'control',
   },

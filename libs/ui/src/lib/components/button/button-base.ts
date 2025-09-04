@@ -34,7 +34,7 @@ export type ButtonVariants = VariantProps<typeof buttonVariants>;
 @Directive({
   host: {
     '[class]': 'class()',
-    '[type]': 'type()',
+    '[attr.type]': 'type()',
     '[attr.data-disabled]': 'disabled()',
   },
 })
