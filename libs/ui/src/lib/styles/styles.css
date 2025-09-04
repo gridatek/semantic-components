@@ -174,7 +174,3 @@ html,
 body {
   height: 100%;
 }
-
-pre.shiki {
-  @apply p-6 rounded-md overflow-auto border border-border;
-}
