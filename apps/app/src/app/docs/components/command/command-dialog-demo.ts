@@ -10,15 +10,12 @@ import {
   ScCommandList,
   ScCommandSeparator,
   ScCommandShortcut,
-  ScDialog,
-  ScDialogContent,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-command-dialog-demo',
   imports: [
     ScButton,
-    // ScCommand,
     ScCommandDialog,
     ScCommandInput,
     ScCommandList,
@@ -27,8 +24,6 @@ import {
     ScCommandItem,
     ScCommandSeparator,
     ScCommandShortcut,
-    ScDialog,
-    ScDialogContent,
   ],
   template: `
     <div class="flex items-center justify-center min-h-[200px] p-4">
@@ -48,12 +43,9 @@ import {
 
     <!-- Command Dialog -->
     @if (isDialogOpen()) {
-      <div class="fixed inset-0 z-50" sc-dialog>
+      <div class="fixed inset-0 z-50">
         <button class="fixed inset-0 bg-black/50" (click)="closeDialog()">x</button>
-        <div
-          class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"
-          sc-dialog-content
-        >
+        <div class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
           <sc-command-dialog>
             <sc-command-input placeholder="Type a command or search..." />
             <sc-command-list>
