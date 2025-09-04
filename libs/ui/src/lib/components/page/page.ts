@@ -26,7 +26,5 @@ export class ScPage {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn('container mx-auto px-4 py-6 space-y-8', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('container mx-auto', this.classInput()));
 }
