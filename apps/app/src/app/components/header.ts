@@ -10,7 +10,7 @@ import { AppStateService } from '../app-state.service';
   selector: 'app-header',
   imports: [ScThemeToggler, RouterLink, RouterLinkActive, NgClass],
   template: `
-    <div class="flex h-14 items-center px-4 justify-between">
+    <div class="flex h-14 items-center px-4 justify-between md:justify-start">
       <div class="md:hidden">
         <!-- Mobile Menu Toggle -->
         <button
@@ -36,7 +36,10 @@ import { AppStateService } from '../app-state.service';
         </button>
       </div>
 
-      <div class="md:mr-4 flex">
+      <!-- Logo - Centered on mobile, left-aligned on desktop -->
+      <div
+        class="absolute left-1/2 transform -translate-x-1/2 md:relative md:left-auto md:transform-none md:mr-4 flex"
+      >
         <a class="md:mr-6 flex items-center md:space-x-2" routerLink="/">
           <svg
             class="h-6 w-6"
