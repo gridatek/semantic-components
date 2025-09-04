@@ -132,7 +132,7 @@ import {
 
       <sc-page-footer>
         <div class="flex justify-between items-center">
-          <p class="text-sm text-muted-foreground">© 2024 CMS. Built with semantic components.</p>
+          <p class="text-sm text-muted-foreground">© 2025 CMS. Built with semantic components.</p>
           <div class="text-sm text-muted-foreground">Version 1.0.0</div>
         </div>
       </sc-page-footer>
