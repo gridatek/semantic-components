@@ -290,6 +290,5 @@ export const appRoutes: Route[] = [
       },
     ],
   },
-
   { path: '**', redirectTo: '/landing', pathMatch: 'full' },
 ];
