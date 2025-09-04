@@ -54,15 +54,6 @@ import { CmsHeroBanner } from '../components/hero-banner';
         </nav>
       </sc-page-breadcrumb-section>
 
-      <sc-page-header>
-        <h1 sc-page-title>CMS Dashboard</h1>
-        <h2 sc-page-subtitle>Content Management System</h2>
-        <p sc-page-description>
-          Manage your content with ease using our semantic component library. This example
-          demonstrates the page structure components in action.
-        </p>
-      </sc-page-header>
-
       <sc-page-content>
         <sc-page-section>
           <sc-page-section-header>

@@ -10,6 +10,10 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./pages/home').then((m) => m.HomePage),
       },
       {
+        path: 'about',
+        loadComponent: () => import('./pages/about').then((m) => m.AboutPage),
+      },
+      {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full',
