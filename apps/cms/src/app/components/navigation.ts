@@ -1,55 +1,45 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
+
 @Component({
   selector: 'cms-navigation',
-  imports: [RouterModule],
+  imports: [RouterModule, ScNav, ScNavList, ScNavLink],
   template: `
-    <nav class="bg-white border-b border-gray-200 shadow-sm">
+    <div class="bg-white border-b border-gray-200 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-          <div class="flex">
-            <div class="flex-shrink-0 flex items-center">
-              <h1 class="text-xl font-bold text-gray-900">CMS</h1>
-            </div>
-            <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <a
-                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                routerLink="/home"
-                routerLinkActive="border-blue-500 text-gray-900"
-              >
-                Home
-              </a>
-              <a
-                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                routerLink="/about"
-                routerLinkActive="border-blue-500 text-gray-900"
-              >
-                About
-              </a>
-              <a
-                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                href="#"
-              >
-                Content
-              </a>
-              <a
-                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                href="#"
-              >
-                Media
-              </a>
-              <a
-                class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                href="#"
-              >
-                Settings
-              </a>
-            </div>
+        <div class="flex justify-between items-center h-16">
+          <!-- Brand -->
+          <div class="flex-shrink-0">
+            <h1 class="text-xl font-bold text-gray-900">CMS</h1>
           </div>
-          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+
+          <!-- Main Navigation -->
+          <nav class="hidden sm:flex" sc-nav>
+            <ul sc-nav-list>
+              <li>
+                <a sc-nav-link routerLink="/home" routerLinkActive="active-page">Home</a>
+              </li>
+              <li>
+                <a sc-nav-link routerLink="/about" routerLinkActive="active-page">About</a>
+              </li>
+              <li>
+                <a sc-nav-link href="#">Content</a>
+              </li>
+              <li>
+                <a sc-nav-link href="#">Media</a>
+              </li>
+              <li>
+                <a sc-nav-link href="#">Settings</a>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- User Actions -->
+          <div class="hidden sm:flex sm:items-center space-x-4">
             <button
-              class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               type="button"
             >
               <span class="sr-only">View notifications</span>
@@ -68,29 +58,26 @@ import { RouterModule } from '@angular/router';
               </svg>
             </button>
 
-            <div class="ml-3 relative">
-              <div class="flex items-center">
-                <button
-                  class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  type="button"
-                >
-                  <span class="sr-only">Open user menu</span>
-                  <div class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
-                    <span class="text-sm font-medium text-gray-700">U</span>
-                  </div>
-                </button>
+            <button
+              class="rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              type="button"
+            >
+              <span class="sr-only">Open user menu</span>
+              <div class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
+                <span class="text-sm font-medium text-gray-700">U</span>
               </div>
-            </div>
+            </button>
           </div>
 
-          <div class="-mr-2 flex items-center sm:hidden">
+          <!-- Mobile menu button -->
+          <div class="sm:hidden">
             <button
-              class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
               type="button"
             >
               <span class="sr-only">Open main menu</span>
               <svg
-                class="block h-6 w-6"
+                class="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
@@ -106,7 +93,7 @@ import { RouterModule } from '@angular/router';
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   `,
   styles: ``,
 })
