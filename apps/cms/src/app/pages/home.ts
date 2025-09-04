@@ -40,10 +40,6 @@ import {
     ScPageFooter,
   ],
   template: `
-    <br />
-    <br />
-    <br />
-
     <sc-page>
       <sc-page-hero-section>
         <div
