@@ -54,7 +54,7 @@ export class ScSheetManager {
 
     scSheetRef.instance.templateRef.set(templateRef);
 
-    this.overlayRef.backdropClick().subscribe(() => this.state.set('closed'));
+    this.overlayRef.backdropClick().subscribe(() => this.close());
   }
 
   close() {

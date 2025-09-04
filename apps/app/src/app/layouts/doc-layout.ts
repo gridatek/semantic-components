@@ -140,13 +140,11 @@ export default class DocLayout {
     });
 
     effect(() => {
-      const a = this.appStateService.mobileMenu();
+      const isOpen = this.appStateService.mobileMenu();
 
-      if (a) {
+      if (isOpen) {
         this.openSheet();
-      }
-
-      if (!a) {
+      } else {
         this.scSheetManager.close();
       }
     });

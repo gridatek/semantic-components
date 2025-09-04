@@ -9,7 +9,7 @@ import { AppStateService } from '../app-state.service';
 
 @Component({
   selector: 'app-header',
-  imports: [ScButton, ScThemeToggler, RouterLink, RouterLinkActive, NgClass, SiMenuIcon],
+  imports: [ScButton, ScThemeToggler, RouterLink, RouterLinkActive, SiMenuIcon],
   template: `
     <div class="flex h-14 items-center px-4">
       <!-- Mobile: Menu button -->
@@ -112,7 +112,7 @@ export class Header {
   private readonly router = inject(Router);
 
   constructor() {
-    this.router.events.forEach((event) => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (this.appStateService.mobileMenu()) {
           this.appStateService.mobileMenu.set(false);
