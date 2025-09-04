@@ -46,14 +46,16 @@ import { PageInfo } from '../core/types';
   template: `
     <div class="flex-1 flex">
       <!-- Sidebar -->
-      <div
-        class="hidden md:flex border-r border-border/40 w-[280px] shrink-0 md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto"
-      >
-        <ng-template #sidebar>
-          <app-sidebar />
-        </ng-template>
-        <ng-container *ngTemplateOutlet="sidebarRef()" />
-      </div>
+      @if (showSidebar()) {
+        <div
+          class="hidden md:flex border-r border-border/40 w-[280px] shrink-0 md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto"
+        >
+          <ng-template #sidebar>
+            <app-sidebar />
+          </ng-template>
+          <ng-container *ngTemplateOutlet="sidebarRef()" />
+        </div>
+      }
 
       <ng-template #sheet>
         <div class="flex flex-col" sc-sheet>
@@ -155,6 +157,11 @@ export default class DocLayout {
       }
     });
   }
+
+  readonly showSidebar = computed(() => {
+    const path = this.currentPath();
+    return path !== '/landing';
+  });
 
   pageInfo = computed<PageInfo | undefined>(() => {
     const p: PageInfo = { current: undefined, previous: undefined, next: undefined };
