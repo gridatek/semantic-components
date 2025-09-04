@@ -2,21 +2,18 @@ import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
-import { ScThemeToggler } from '@semantic-components/ui';
+import { ScButton, ScThemeToggler } from '@semantic-components/ui';
 
 import { AppStateService } from '../app-state.service';
 
 @Component({
   selector: 'app-header',
-  imports: [ScThemeToggler, RouterLink, RouterLinkActive, NgClass],
+  imports: [ScButton, ScThemeToggler, RouterLink, RouterLinkActive, NgClass],
   template: `
     <div class="flex h-14 items-center px-4 justify-between md:justify-start">
       <div class="md:hidden">
         <!-- Mobile Menu Toggle -->
-        <button
-          class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2"
-          (click)="toggleMobileMenu()"
-        >
+        <button (click)="toggleMobileMenu()" sc-button variant="outline" size="icon">
           <svg
             class="h-4 w-4"
             xmlns="http://www.w3.org/2000/svg"
