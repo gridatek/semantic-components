@@ -178,7 +178,3 @@ body {
 pre.shiki {
   @apply p-6 rounded-md overflow-auto border border-border;
 }
-
-.cdk-overlay-dark-backdrop {
-  @apply data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 bg-black/50;
-}
