@@ -5,7 +5,6 @@ import {
   ScPage,
   ScPageContent,
   ScPageDescription,
-  ScPageFooter,
   ScPageHeader,
   ScPageSection,
   ScPageSectionContent,
@@ -30,7 +29,6 @@ import {
     ScPageSectionTitle,
     ScPageSectionDescription,
     ScPageSectionContent,
-    ScPageFooter,
     ScGridLayout,
   ],
   template: `
@@ -108,16 +106,6 @@ import {
           </sc-page-section-content>
         </sc-page-section>
       </sc-page-content>
-
-      <sc-page-footer>
-        <div class="flex justify-between items-center">
-          <p class="text-sm text-muted-foreground">
-            Ready to get started?
-            <a class="text-blue-600 hover:underline" href="#">Contact us today</a>
-          </p>
-          <div class="text-sm text-muted-foreground">Last updated: January 2025</div>
-        </div>
-      </sc-page-footer>
     </sc-page>
   `,
 })

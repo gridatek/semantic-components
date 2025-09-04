@@ -16,6 +16,7 @@ import {
 } from '@semantic-components/ui';
 
 import { CmsHeroBanner } from '../components/hero-banner';
+import { CmsNewsletter } from '../components/newsletter';
 
 @Component({
   selector: 'cms-home',
@@ -33,6 +34,7 @@ import { CmsHeroBanner } from '../components/hero-banner';
     ScPageFooter,
     ScGridLayout,
     CmsHeroBanner,
+    CmsNewsletter,
   ],
   template: `
     <sc-page>
@@ -106,10 +108,7 @@ import { CmsHeroBanner } from '../components/hero-banner';
       </sc-page-content>
 
       <sc-page-footer>
-        <div class="flex justify-between items-center">
-          <p class="text-sm text-muted-foreground">© 2025 CMS. Built with semantic components.</p>
-          <div class="text-sm text-muted-foreground">Version 1.0.0</div>
-        </div>
+        <cms-newsletter></cms-newsletter>
       </sc-page-footer>
     </sc-page>
   `,
