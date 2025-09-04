@@ -15,7 +15,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '[attr.role]': '"listbox"',
     '[attr.aria-label]': '"Command suggestions"',
     'data-slot': 'command-list',
@@ -25,9 +25,11 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandList {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto', this.class()),
+  protected readonly class = computed(() =>
+    cn('max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto', this.classInput()),
   );
 }

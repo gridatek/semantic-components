@@ -18,7 +18,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '[attr.data-disabled]': 'disabled()',
     '[attr.data-selected]': 'selected()',
     '(click)': 'onClick()',
@@ -34,12 +34,14 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandItem {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-      this.class(),
+      this.classInput(),
     ),
   );
 
@@ -64,5 +66,10 @@ export class ScCommandItem {
     if (!this.disabled()) {
       this.mouseEnter.emit();
     }
+  }
+
+  // For keyboard navigation support
+  focus() {
+    // Will be handled by the parent component
   }
 }
