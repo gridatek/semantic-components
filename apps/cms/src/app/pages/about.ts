@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import {
   ScPage,
-  ScPageBreadcrumbSection,
   ScPageContent,
   ScPageDescription,
   ScPageFooter,
@@ -20,7 +19,6 @@ import {
   selector: 'cms-about',
   imports: [
     ScPage,
-    ScPageBreadcrumbSection,
     ScPageHeader,
     ScPageTitle,
     ScPageSubtitle,
@@ -35,14 +33,6 @@ import {
   ],
   template: `
     <sc-page>
-      <sc-page-breadcrumb-section>
-        <nav class="text-sm">
-          <span class="text-muted-foreground">Home</span>
-          <span class="text-muted-foreground mx-2">/</span>
-          <span class="text-foreground">About</span>
-        </nav>
-      </sc-page-breadcrumb-section>
-
       <sc-page-header>
         <h1 sc-page-title>About Our CMS</h1>
         <h2 sc-page-subtitle>Building the future of content management</h2>

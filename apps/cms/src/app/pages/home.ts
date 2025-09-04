@@ -2,11 +2,8 @@ import { Component } from '@angular/core';
 
 import {
   ScPage,
-  ScPageBreadcrumbSection,
   ScPageContent,
-  ScPageDescription,
   ScPageFooter,
-  ScPageHeader,
   ScPageHeroSection,
   ScPageSection,
   ScPageSectionContent,
@@ -15,8 +12,6 @@ import {
   ScPageSectionHeader,
   ScPageSectionSubtitle,
   ScPageSectionTitle,
-  ScPageSubtitle,
-  ScPageTitle,
 } from '@semantic-components/ui';
 
 import { CmsHeroBanner } from '../components/hero-banner';
@@ -26,11 +21,6 @@ import { CmsHeroBanner } from '../components/hero-banner';
   imports: [
     ScPage,
     ScPageHeroSection,
-    ScPageBreadcrumbSection,
-    ScPageHeader,
-    ScPageTitle,
-    ScPageSubtitle,
-    ScPageDescription,
     ScPageContent,
     ScPageSection,
     ScPageSectionHeader,
@@ -47,12 +37,6 @@ import { CmsHeroBanner } from '../components/hero-banner';
       <sc-page-hero-section>
         <cms-hero-banner></cms-hero-banner>
       </sc-page-hero-section>
-
-      <sc-page-breadcrumb-section>
-        <nav class="text-sm">
-          <span class="text-muted-foreground">Home</span>
-        </nav>
-      </sc-page-breadcrumb-section>
 
       <sc-page-content>
         <sc-page-section>
