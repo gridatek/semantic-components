@@ -26,7 +26,5 @@ export class ScPageTitle {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn('scroll-m-20 text-3xl font-bold tracking-tight', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('', this.classInput()));
 }

@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-page-footer',
+  selector: 'sc-page-section-header',
   imports: [],
   template: `
     <ng-content />
@@ -21,7 +21,7 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPageFooter {
+export class ScPageSectionHeader {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

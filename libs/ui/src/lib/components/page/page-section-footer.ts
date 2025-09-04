@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-section-description',
+  selector: 'sc-page-section-footer',
   imports: [],
   template: `
-    <p>section-description works!</p>
+    <p>page-section-footer works!</p>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SectionDescription {}
+export class PageSectionFooter {}
