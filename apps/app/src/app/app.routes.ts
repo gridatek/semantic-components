@@ -280,13 +280,7 @@ export const appRoutes: Route[] = [
           },
         ],
       },
-      { path: '', redirectTo: '/landing', pathMatch: 'full' },
-      {
-        // Wildcard route for a 404 page
-        path: '**',
-        loadComponent: () => import('./landing/landing-page'),
-        title: '404 Not Found Page',
-      },
+      { path: '**', redirectTo: '/landing', pathMatch: 'full' },
     ],
   },
 ];
