@@ -26,8 +26,8 @@ export class ScPageSectionHeader {
     alias: 'class',
   });
 
-  // Section header with tight spacing for title/subtitle/description
+  // Section header with tight spacing for title/subtitle/description - centered alignment
   protected readonly class = computed(() =>
-    cn('inline-block w-full space-y-2 mb-6', this.classInput()),
+    cn('inline-block w-full space-y-2 mb-6 text-center', this.classInput()),
   );
 }
