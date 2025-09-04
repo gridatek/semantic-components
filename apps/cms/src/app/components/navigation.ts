@@ -6,6 +6,7 @@ import {
   ScButton,
   ScCommandDialog,
   ScCommandEmpty,
+  ScCommandInput,
   ScCommandItem,
   ScCommandList,
   ScDialog,
@@ -23,6 +24,7 @@ import {
     FormsModule,
     ScButton,
     ScCommandDialog,
+    ScCommandInput,
     ScCommandList,
     ScCommandEmpty,
     ScCommandItem,
@@ -34,12 +36,12 @@ import {
     ScThemeToggler,
   ],
   template: `
-    <div class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
+    <div class="bg-background border-b border-border shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Brand -->
           <div class="flex-shrink-0">
-            <h1 class="text-xl font-bold text-gray-900 dark:text-white">CMS</h1>
+            <h1 class="text-xl font-bold text-foreground">CMS</h1>
           </div>
 
           <!-- Main Navigation -->
@@ -89,7 +91,7 @@ import {
             <sc-theme-toggler></sc-theme-toggler>
 
             <button
-              class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              class="p-1 rounded-full text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring"
               type="button"
             >
               <span class="sr-only">View notifications</span>
@@ -113,8 +115,8 @@ import {
               type="button"
             >
               <span class="sr-only">Open user menu</span>
-              <div class="h-8 w-8 rounded-full bg-gray-300 flex items-center justify-center">
-                <span class="text-sm font-medium text-gray-700">U</span>
+              <div class="h-8 w-8 rounded-full bg-secondary flex items-center justify-center">
+                <span class="text-sm font-medium text-foreground">U</span>
               </div>
             </button>
           </div>
@@ -122,7 +124,7 @@ import {
           <!-- Mobile menu button -->
           <div class="sm:hidden">
             <button
-              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              class="inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring"
               (click)="toggleMobileMenu()"
               type="button"
             >
@@ -162,9 +164,7 @@ import {
       <!-- Mobile menu -->
       @if (isMobileMenuOpen()) {
         <div class="sm:hidden">
-          <div
-            class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
-          >
+          <div class="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border">
             <nav sc-nav>
               <div class="space-y-1">
                 <a
@@ -213,7 +213,7 @@ import {
             </nav>
 
             <!-- Mobile search -->
-            <div class="px-3 py-2 border-t border-gray-200 dark:border-gray-700 mt-2 pt-4">
+            <div class="px-3 py-2 border-t border-border mt-2 pt-4">
               <button
                 class="w-full justify-start text-sm text-muted-foreground mb-4"
                 (click)="openSearchDialog(); closeMobileMenu()"
@@ -233,7 +233,7 @@ import {
             </div>
 
             <!-- Mobile theme toggler -->
-            <div class="px-3 py-2 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="px-3 py-2 border-t border-border pt-4">
               <sc-theme-toggler></sc-theme-toggler>
             </div>
           </div>
@@ -250,12 +250,7 @@ import {
           sc-dialog-content
         >
           <sc-command-dialog>
-            <input
-              #searchInput
-              [(ngModel)]="searchQuery"
-              sc-command-input
-              placeholder="Type a command or search..."
-            />
+            <sc-command-input placeholder="Type a command or search..." />
             <sc-command-list>
               <sc-command-empty>No results found.</sc-command-empty>
               <sc-command-item (click)="selectResult('home')">
