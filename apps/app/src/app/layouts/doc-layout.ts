@@ -46,16 +46,15 @@ import { PageInfo } from '../core/types';
   template: `
     <div class="flex-1 flex">
       <!-- Sidebar -->
-      @if (showSidebar()) {
-        <div
-          class="hidden md:flex border-r border-border/40 w-[280px] shrink-0 md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto"
-        >
-          <ng-template #sidebar>
-            <app-sidebar />
-          </ng-template>
-          <ng-container *ngTemplateOutlet="sidebarRef()" />
-        </div>
-      }
+      <div
+        class="hidden md:flex border-r border-border/40 shrink-0 md:sticky md:top-14 md:h-[calc(100vh-56px)] md:overflow-y-auto"
+        [style.width]="showSidebar() ? '280px' : '0px'"
+      >
+        <ng-template #sidebar>
+          <app-sidebar />
+        </ng-template>
+        <ng-container *ngTemplateOutlet="sidebarRef()" />
+      </div>
 
       <ng-template #sheet>
         <div class="flex flex-col" sc-sheet>
@@ -110,13 +109,14 @@ import { PageInfo } from '../core/types';
               </div>
             </div>
           </div>
-
-          <!-- Table of Contents -->
-          <div
-            class="hidden lg:block sticky top-14 h-[calc(100vh-56px)] w-[240px] shrink-0 overflow-y-auto py-6 pl-8 pr-4"
-          >
-            <app-table-of-contents />
-          </div>
+          @if (showSidebar()) {
+            <!-- Table of Contents -->
+            <div
+              class="hidden lg:block sticky top-14 h-[calc(100vh-56px)] w-[240px] shrink-0 overflow-y-auto py-6 pl-8 pr-4"
+            >
+              <app-table-of-contents />
+            </div>
+          }
         </div>
       </main>
     </div>
