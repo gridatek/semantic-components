@@ -29,6 +29,9 @@ export class ScPageHeader {
   // Page header with centered content and proper spacing
   // Provides consistent spacing for title, subtitle, and description elements
   protected readonly class = computed(() =>
-    cn('space-y-4 py-8 px-6 border-b border-gray-100 bg-gray-50/50 text-center', this.classInput()),
+    cn(
+      'inline-block w-full space-y-4 py-8 px-6 border-b border-gray-100 bg-gray-50/50 text-center',
+      this.classInput(),
+    ),
   );
 }

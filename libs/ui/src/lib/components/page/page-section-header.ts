@@ -26,5 +26,8 @@ export class ScPageSectionHeader {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('space-y-2 mb-4', this.classInput()));
+  // Section header with tight spacing for title/subtitle/description
+  protected readonly class = computed(() =>
+    cn('inline-block w-full space-y-2 mb-6', this.classInput()),
+  );
 }

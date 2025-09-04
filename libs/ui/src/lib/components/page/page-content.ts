@@ -26,5 +26,8 @@ export class ScPageContent {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('space-y-16', this.classInput()));
+  // Page content with max width constraint and generous spacing between sections
+  protected readonly class = computed(() =>
+    cn('inline-block w-full max-w-4xl mx-auto px-6 py-8 space-y-16', this.classInput()),
+  );
 }

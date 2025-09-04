@@ -26,5 +26,6 @@ export class ScPageSectionContent {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('space-y-4', this.classInput()));
+  // Section content with inline-block layout for proper spacing and alignment
+  protected readonly class = computed(() => cn('inline-block w-full space-y-4', this.classInput()));
 }

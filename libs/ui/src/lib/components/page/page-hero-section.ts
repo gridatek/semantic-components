@@ -26,7 +26,9 @@ export class ScPageHeroSection {
     alias: 'class',
   });
 
+  // Hero section with responsive padding and inline-block layout
+  // Designed to connect directly to navigation when used as first element
   protected readonly class = computed(() =>
-    cn('relative py-12 md:py-20 lg:py-24', this.classInput()),
+    cn('inline-block w-full relative py-12 md:py-20 lg:py-24', this.classInput()),
   );
 }
