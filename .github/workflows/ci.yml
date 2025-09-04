@@ -2,12 +2,12 @@ name: CI
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 2 * * *'
-  push:
-    branches:
-      - main
-  pull_request:
+#  schedule:
+#    - cron: '0 2 * * *'
+#  push:
+#    branches:
+#      - main
+#  pull_request:
 
 permissions:
   actions: read
