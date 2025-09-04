@@ -3,18 +3,18 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'cms-footer',
   template: `
-    <footer class="bg-gray-50 border-t border-gray-200">
+    <footer class="bg-secondary border-t border-border">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="py-8">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div class="col-span-1 md:col-span-2">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">CMS</h3>
-              <p class="text-sm text-gray-600 mb-4">
+              <h3 class="text-lg font-semibold text-foreground mb-4">CMS</h3>
+              <p class="text-sm text-muted-foreground mb-4">
                 A powerful content management system built with semantic components. Manage your
                 content with ease and consistency.
               </p>
               <div class="flex space-x-4">
-                <a class="text-gray-400 hover:text-gray-500" href="#">
+                <a class="text-muted-foreground hover:text-foreground" href="#">
                   <span class="sr-only">GitHub</span>
                   <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                     <path
@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
                     />
                   </svg>
                 </a>
-                <a class="text-gray-400 hover:text-gray-500" href="#">
+                <a class="text-muted-foreground hover:text-foreground" href="#">
                   <span class="sr-only">Twitter</span>
                   <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                     <path
@@ -36,47 +36,71 @@ import { Component } from '@angular/core';
             </div>
 
             <div>
-              <h4 class="text-sm font-semibold text-gray-900 tracking-wider uppercase mb-4">
+              <h4 class="text-sm font-semibold text-foreground tracking-wider uppercase mb-4">
                 Content
               </h4>
               <ul class="space-y-2">
-                <li><a class="text-sm text-gray-600 hover:text-gray-900" href="#">Articles</a></li>
-                <li><a class="text-sm text-gray-600 hover:text-gray-900" href="#">Pages</a></li>
                 <li>
-                  <a class="text-sm text-gray-600 hover:text-gray-900" href="#">Media Library</a>
+                  <a class="text-sm text-muted-foreground hover:text-foreground" href="#">
+                    Articles
+                  </a>
                 </li>
                 <li>
-                  <a class="text-sm text-gray-600 hover:text-gray-900" href="#">Categories</a>
+                  <a class="text-sm text-muted-foreground hover:text-foreground" href="#">Pages</a>
+                </li>
+                <li>
+                  <a class="text-sm text-muted-foreground hover:text-foreground" href="#">
+                    Media Library
+                  </a>
+                </li>
+                <li>
+                  <a class="text-sm text-muted-foreground hover:text-foreground" href="#">
+                    Categories
+                  </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 class="text-sm font-semibold text-gray-900 tracking-wider uppercase mb-4">
+              <h4 class="text-sm font-semibold text-foreground tracking-wider uppercase mb-4">
                 Support
               </h4>
               <ul class="space-y-2">
                 <li>
-                  <a class="text-sm text-gray-600 hover:text-gray-900" href="#">Documentation</a>
+                  <a class="text-sm text-muted-foreground hover:text-foreground" href="#">
+                    Documentation
+                  </a>
                 </li>
                 <li>
-                  <a class="text-sm text-gray-600 hover:text-gray-900" href="#">Help Center</a>
+                  <a class="text-sm text-muted-foreground hover:text-foreground" href="#">
+                    Help Center
+                  </a>
                 </li>
-                <li><a class="text-sm text-gray-600 hover:text-gray-900" href="#">Contact</a></li>
-                <li><a class="text-sm text-gray-600 hover:text-gray-900" href="#">Status</a></li>
+                <li>
+                  <a class="text-sm text-muted-foreground hover:text-foreground" href="#">
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a class="text-sm text-muted-foreground hover:text-foreground" href="#">Status</a>
+                </li>
               </ul>
             </div>
           </div>
 
-          <div class="mt-8 pt-8 border-t border-gray-200">
+          <div class="mt-8 pt-8 border-t border-border">
             <div class="flex flex-col md:flex-row justify-between items-center">
-              <p class="text-sm text-gray-500">
+              <p class="text-sm text-muted-foreground">
                 © {{ currentYear }} CMS. All rights reserved. Built with semantic components.
               </p>
               <div class="flex space-x-6 mt-4 md:mt-0">
-                <a class="text-sm text-gray-500 hover:text-gray-900" href="#">Privacy Policy</a>
-                <a class="text-sm text-gray-500 hover:text-gray-900" href="#">Terms of Service</a>
-                <a class="text-sm text-gray-500 hover:text-gray-900" href="#">Cookies</a>
+                <a class="text-sm text-muted-foreground hover:text-foreground" href="#">
+                  Privacy Policy
+                </a>
+                <a class="text-sm text-muted-foreground hover:text-foreground" href="#">
+                  Terms of Service
+                </a>
+                <a class="text-sm text-muted-foreground hover:text-foreground" href="#">Cookies</a>
               </div>
             </div>
           </div>
