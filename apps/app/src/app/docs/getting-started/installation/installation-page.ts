@@ -279,7 +279,7 @@ import { TocHeadingDirective } from '../../../components/toc/toc-heading.directi
       </div>
 
       <sc-code-highlighter
-        code="@import '@semantic-components/ui/styles.css';"
+        code="@import '@semantic-components/ui/styles';"
         language="shellscript"
       />
     </div>

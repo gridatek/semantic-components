@@ -28,6 +28,9 @@
   "exports": {
     "./styles.css": {
       "style": "./index.css"
+    },
+    "./styles": {
+      "style": "./index.css"
     }
   }
 }
