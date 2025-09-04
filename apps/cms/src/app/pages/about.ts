@@ -79,7 +79,7 @@ import {
 
           <sc-page-section-content>
             <sc-grid-layout [cols]="1" [mdCols]="2" [lgCols]="3" [gap]="6">
-              <div class="p-6 border rounded-lg">
+              <div class="p-6 border border-border rounded-lg bg-background">
                 <h4 class="font-semibold mb-3 text-blue-600">Accessibility First</h4>
                 <p class="text-sm text-muted-foreground">
                   Every component is designed with accessibility in mind, ensuring compliance with
@@ -87,7 +87,7 @@ import {
                 </p>
               </div>
 
-              <div class="p-6 border rounded-lg">
+              <div class="p-6 border border-border rounded-lg bg-background">
                 <h4 class="font-semibold mb-3 text-green-600">Semantic HTML</h4>
                 <p class="text-sm text-muted-foreground">
                   We use meaningful HTML elements that convey structure and purpose to both users
@@ -95,7 +95,7 @@ import {
                 </p>
               </div>
 
-              <div class="p-6 border rounded-lg">
+              <div class="p-6 border border-border rounded-lg bg-background">
                 <h4 class="font-semibold mb-3 text-purple-600">Developer Experience</h4>
                 <p class="text-sm text-muted-foreground">
                   Clean APIs, comprehensive documentation, and consistent patterns make development
