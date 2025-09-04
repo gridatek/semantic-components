@@ -27,7 +27,7 @@
   },
   "exports": {
     "./styles.css": {
-      "style": "./styles.css"
+      "style": "./index.css"
     }
   }
 }
