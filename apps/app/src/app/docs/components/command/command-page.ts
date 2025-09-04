@@ -22,7 +22,7 @@ import { CommandDialogDemoSection } from './command-dialog-demo-section';
       </sc-page-header>
       <sc-page-content>
         <app-command-demo-section />
-        <command-dialog-demo-section />
+        <app-command-dialog-demo-section />
       </sc-page-content>
     </sc-page>
   `,
