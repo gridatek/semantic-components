@@ -1,11 +1,38 @@
 import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ScNav, ScNavLink, ScNavList, ScThemeToggler } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScCommandDialog,
+  ScCommandEmpty,
+  ScCommandItem,
+  ScCommandList,
+  ScDialog,
+  ScDialogContent,
+  ScNav,
+  ScNavLink,
+  ScNavList,
+  ScThemeToggler,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'cms-navigation',
-  imports: [RouterModule, ScNav, ScNavList, ScNavLink, ScThemeToggler],
+  imports: [
+    RouterModule,
+    FormsModule,
+    ScButton,
+    ScCommandDialog,
+    ScCommandList,
+    ScCommandEmpty,
+    ScCommandItem,
+    ScDialog,
+    ScDialogContent,
+    ScNav,
+    ScNavList,
+    ScNavLink,
+    ScThemeToggler,
+  ],
   template: `
     <div class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,6 +62,27 @@ import { ScNav, ScNavLink, ScNavList, ScThemeToggler } from '@semantic-component
               </li>
             </ul>
           </nav>
+
+          <!-- Search Button -->
+          <div class="hidden sm:flex flex-1 justify-center px-8">
+            <button
+              class="w-full max-w-md justify-start text-sm text-muted-foreground"
+              (click)="openSearchDialog()"
+              sc-button
+              variant="outline"
+            >
+              <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              Search...
+              <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘K</span>
+            </button>
+          </div>
 
           <!-- User Actions -->
           <div class="hidden sm:flex sm:items-center space-x-4">
@@ -164,19 +212,79 @@ import { ScNav, ScNavLink, ScNavList, ScThemeToggler } from '@semantic-component
               </div>
             </nav>
 
-            <!-- Mobile theme toggler -->
+            <!-- Mobile search -->
             <div class="px-3 py-2 border-t border-gray-200 dark:border-gray-700 mt-2 pt-4">
+              <button
+                class="w-full justify-start text-sm text-muted-foreground mb-4"
+                (click)="openSearchDialog(); closeMobileMenu()"
+                sc-button
+                variant="outline"
+              >
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+                Search...
+              </button>
+            </div>
+
+            <!-- Mobile theme toggler -->
+            <div class="px-3 py-2 border-t border-gray-200 dark:border-gray-700 pt-4">
               <sc-theme-toggler></sc-theme-toggler>
             </div>
           </div>
         </div>
       }
     </div>
+
+    <!-- Search Dialog -->
+    @if (isSearchOpen()) {
+      <div class="fixed inset-0 z-50" sc-dialog>
+        <div class="fixed inset-0 bg-black/50" (click)="closeSearchDialog()"></div>
+        <div
+          class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"
+          sc-dialog-content
+        >
+          <sc-command-dialog>
+            <input
+              #searchInput
+              [(ngModel)]="searchQuery"
+              sc-command-input
+              placeholder="Type a command or search..."
+            />
+            <sc-command-list>
+              <sc-command-empty>No results found.</sc-command-empty>
+              <sc-command-item (click)="selectResult('home')">
+                <span>🏠 Home</span>
+              </sc-command-item>
+              <sc-command-item (click)="selectResult('about')">
+                <span>ℹ️ About</span>
+              </sc-command-item>
+              <sc-command-item (click)="selectResult('content')">
+                <span>📝 Content</span>
+              </sc-command-item>
+              <sc-command-item (click)="selectResult('media')">
+                <span>🖼️ Media</span>
+              </sc-command-item>
+              <sc-command-item (click)="selectResult('settings')">
+                <span>⚙️ Settings</span>
+              </sc-command-item>
+            </sc-command-list>
+          </sc-command-dialog>
+        </div>
+      </div>
+    }
   `,
   styles: ``,
 })
 export class CmsNavigation {
   isMobileMenuOpen = signal(false);
+  isSearchOpen = signal(false);
+  searchQuery = '';
 
   toggleMobileMenu() {
     this.isMobileMenuOpen.update((isOpen) => !isOpen);
@@ -184,5 +292,22 @@ export class CmsNavigation {
 
   closeMobileMenu() {
     this.isMobileMenuOpen.set(false);
+  }
+
+  openSearchDialog() {
+    this.isSearchOpen.set(true);
+    this.searchQuery = '';
+  }
+
+  closeSearchDialog() {
+    this.isSearchOpen.set(false);
+    this.searchQuery = '';
+  }
+
+  selectResult(result: string) {
+    console.log('Selected:', result);
+    this.closeSearchDialog();
+    // Add navigation logic here based on result
+    // For example: this.router.navigate([`/${result}`]);
   }
 }
