@@ -179,54 +179,5 @@ import { TocHeadingDirective } from '../../../components/toc/toc-heading.directi
   `,
 })
 export class CommandDemoSection {
-  protected demoCode = `<sc-command class="rounded-lg border shadow-md">
-  <sc-command-input placeholder="Type a command or search..." />
-  <sc-command-list>
-    <sc-command-empty>No results found.</sc-command-empty>
-    <sc-command-group heading="Suggestions">
-      <sc-command-item>
-        <svg class="mr-2 h-4 w-4">
-          <!-- Calendar Icon -->
-        </svg>
-        <span>Calendar</span>
-      </sc-command-item>
-      <sc-command-item>
-        <svg class="mr-2 h-4 w-4">
-          <!-- Emoji Icon -->
-        </svg>
-        <span>Search Emoji</span>
-      </sc-command-item>
-      <sc-command-item>
-        <svg class="mr-2 h-4 w-4">
-          <!-- Calculator Icon -->
-        </svg>
-        <span>Calculator</span>
-      </sc-command-item>
-    </sc-command-group>
-    <sc-command-separator />
-    <sc-command-group heading="Settings">
-      <sc-command-item>
-        <svg class="mr-2 h-4 w-4">
-          <!-- Profile Icon -->
-        </svg>
-        <span>Profile</span>
-        <sc-command-shortcut>⌘P</sc-command-shortcut>
-      </sc-command-item>
-      <sc-command-item>
-        <svg class="mr-2 h-4 w-4">
-          <!-- Mail Icon -->
-        </svg>
-        <span>Mail</span>
-        <sc-command-shortcut>⌘B</sc-command-shortcut>
-      </sc-command-item>
-      <sc-command-item>
-        <svg class="mr-2 h-4 w-4">
-          <!-- Settings Icon -->
-        </svg>
-        <span>Settings</span>
-        <sc-command-shortcut>⌘S</sc-command-shortcut>
-      </sc-command-item>
-    </sc-command-group>
-  </sc-command-list>
-</sc-command>`;
+  protected demoCode = ``;
 }
