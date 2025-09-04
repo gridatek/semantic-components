@@ -56,12 +56,16 @@ import { PageInfo } from '../core/types';
       </div>
 
       <ng-template #sheet>
-        <div sc-sheet>
-          <button sc-sheet-close>
-            <svg class="size-4" si-x-icon></svg>
-            <span class="sr-only">Close</span>
-          </button>
-          <ng-container *ngTemplateOutlet="sidebarRef()" />
+        <div class="flex flex-col" sc-sheet>
+          <div class="flex items-center justify-end">
+            <button sc-sheet-close>
+              <svg class="size-4" si-x-icon></svg>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+          <div class="flex-1 overflow-y-auto scrollbar-hide">
+            <ng-container *ngTemplateOutlet="sidebarRef()" />
+          </div>
         </div>
       </ng-template>
 
