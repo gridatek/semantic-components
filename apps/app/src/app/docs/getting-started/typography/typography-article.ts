@@ -16,29 +16,32 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         <article class="prose border p-8 rounded-lg">
           <h1>Garlic bread with cheese: What the science tells us</h1>
           <p>
-            For years parents have espoused the health benefits of eating garlic bread with cheese to their
-            children, with the food earning such an iconic status in our culture that kids will often dress
-            up as warm, cheesy loaf for Halloween.
+            For years parents have espoused the health benefits of eating garlic bread with cheese
+            to their children, with the food earning such an iconic status in our culture that kids
+            will often dress up as warm, cheesy loaf for Halloween.
           </p>
           <p>
-            But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
-            springing up around the country.
+            But a recent study shows that the celebrated appetizer may be linked to a series of
+            rabies cases springing up around the country.
           </p>
-          
+
           <h2>The Study</h2>
           <p>
-            The study, published in the <em>Journal of Culinary Science</em>, examined over 1,000 cases
-            of garlic bread consumption across 15 states. The findings were <strong>particularly alarming</strong>
+            The study, published in the
+            <em>Journal of Culinary Science</em>
+            , examined over 1,000 cases of garlic bread consumption across 15 states. The findings
+            were
+            <strong>particularly alarming</strong>
             for families with young children.
           </p>
-          
+
           <blockquote>
             <p>
-              We found a direct correlation between garlic bread consumption and unusual behavior patterns
-              that closely resembled early-stage rabies symptoms.
+              We found a direct correlation between garlic bread consumption and unusual behavior
+              patterns that closely resembled early-stage rabies symptoms.
             </p>
           </blockquote>
-          
+
           <h3>Key Findings</h3>
           <ul>
             <li>73% of subjects showed increased aggression when garlic bread was removed</li>
@@ -46,21 +49,22 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
             <li>Participants demonstrated an uncontrollable urge to bite others</li>
             <li>Fear of water was reported in 12% of severe cases</li>
           </ul>
-          
+
           <h3>Research Methodology</h3>
           <p>
-            The researchers used a <a href="#">double-blind study design</a> to ensure accuracy. 
-            Participants were given either real garlic bread or a placebo made from regular bread
-            with garlic powder.
+            The researchers used a
+            <a href="#">double-blind study design</a>
+            to ensure accuracy. Participants were given either real garlic bread or a placebo made
+            from regular bread with garlic powder.
           </p>
-          
-          <pre><code>function analyzeGarlicBreadData(samples) {
-  return samples.filter(sample => {
+
+          <pre><code>function analyzeGarlicBreadData(samples) {{ '{' }}
+  return samples.filter(sample => {{ '{' }}
     return sample.garlicContent > 0.5 && 
            sample.cheeseRatio >= 0.3;
-  });
-}</code></pre>
-          
+  {{ '}' }});
+{{ '}' }}</code></pre>
+
           <h4>Statistical Analysis</h4>
           <table>
             <thead>
@@ -93,22 +97,23 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
               </tr>
             </tbody>
           </table>
-          
-          <hr>
-          
+
+          <hr />
+
           <h2>Expert Opinions</h2>
           <p>
-            Dr. Margaret Breadsworth, a leading expert in <code>culinary psychology</code>, 
-            commented on the findings: "While these results are concerning, we must remember 
-            that correlation does not imply causation."
+            Dr. Margaret Breadsworth, a leading expert in
+            <code>culinary psychology</code>
+            , commented on the findings: "While these results are concerning, we must remember that
+            correlation does not imply causation."
           </p>
-          
+
           <ol>
             <li>The study sample size was relatively small</li>
             <li>Environmental factors were not fully controlled</li>
             <li>Long-term effects remain unknown</li>
           </ol>
-          
+
           <figure>
             <div class="bg-gray-100 p-8 text-center text-gray-500 rounded">
               [Chart showing garlic bread consumption vs. symptom severity]
@@ -126,14 +131,19 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         <article class="prose prose-lg border p-8 rounded-lg">
           <h1>The Economics of Cheese Production</h1>
           <p>
-            The global cheese market has experienced unprecedented growth over the past decade,
-            with artisanal varieties leading the charge in premium pricing and consumer demand.
+            The global cheese market has experienced unprecedented growth over the past decade, with
+            artisanal varieties leading the charge in premium pricing and consumer demand.
           </p>
           <h2>Market Trends</h2>
           <p>
-            From <strong>aged cheddars</strong> to exotic <em>blue cheeses</em>, consumers are 
-            increasingly willing to pay premium prices for quality dairy products. This trend
-            has created new opportunities for <a href="#">small-scale producers</a>.
+            From
+            <strong>aged cheddars</strong>
+            to exotic
+            <em>blue cheeses</em>
+            , consumers are increasingly willing to pay premium prices for quality dairy products.
+            This trend has created new opportunities for
+            <a href="#">small-scale producers</a>
+            .
           </p>
           <blockquote>
             <p>The artisanal cheese market represents the future of dairy production.</p>
@@ -147,12 +157,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         <article class="prose prose-xl border p-8 rounded-lg">
           <h1>Climate Change and Agriculture</h1>
           <p>
-            Rising temperatures and changing precipitation patterns are forcing farmers
-            worldwide to adapt their growing techniques and crop selections.
+            Rising temperatures and changing precipitation patterns are forcing farmers worldwide to
+            adapt their growing techniques and crop selections.
           </p>
           <p>
-            <strong>Sustainable farming practices</strong> are becoming essential for 
-            maintaining crop yields while minimizing environmental impact.
+            <strong>Sustainable farming practices</strong>
+            are becoming essential for maintaining crop yields while minimizing environmental
+            impact.
           </p>
         </article>
       </section>
@@ -163,17 +174,17 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         <article class="prose prose-blog border p-8 rounded-lg">
           <h1>Photography in the Digital Age</h1>
           <p>
-            The transition from film to digital photography has revolutionized how we
-            capture, edit, and share images with the world.
+            The transition from film to digital photography has revolutionized how we capture, edit,
+            and share images with the world.
           </p>
-          
+
           <div class="bg-blue-100 p-8 text-center text-blue-600 rounded">
             [Responsive image that extends beyond container on mobile]
           </div>
-          
+
           <p>
-            Modern cameras offer unprecedented control over every aspect of image capture,
-            from ISO sensitivity to white balance adjustments.
+            Modern cameras offer unprecedented control over every aspect of image capture, from ISO
+            sensitivity to white balance adjustments.
           </p>
         </article>
       </section>
@@ -187,20 +198,26 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
             <article class="prose border p-6 rounded-lg">
               <h2>Morning Routines</h2>
               <p>
-                Starting your day with <a href="#">intentional habits</a> can significantly
-                impact your <strong>productivity</strong> and overall well-being.
+                Starting your day with
+                <a href="#">intentional habits</a>
+                can significantly impact your
+                <strong>productivity</strong>
+                and overall well-being.
               </p>
               <code>const morning = 'coffee + meditation';</code>
             </article>
           </div>
-          
+
           <div>
             <h3 class="text-lg font-medium mb-4">Dark Mode</h3>
             <article class="prose dark border p-6 rounded-lg bg-gray-900">
               <h2>Evening Routines</h2>
               <p>
-                Winding down with <a href="#">relaxing activities</a> helps prepare
-                your mind and body for <strong>restorative sleep</strong>.
+                Winding down with
+                <a href="#">relaxing activities</a>
+                helps prepare your mind and body for
+                <strong>restorative sleep</strong>
+                .
               </p>
               <code>const evening = 'tea + reading';</code>
             </article>
@@ -214,7 +231,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         <article class="prose border p-8 rounded-lg">
           <h1>Mixed Content Example</h1>
           <p>This content follows normal prose styling rules for consistent typography.</p>
-          
+
           <div class="not-prose">
             <h3 class="text-xl font-bold text-blue-600 mb-2">Custom Component</h3>
             <p class="text-sm text-gray-500 mb-4">
@@ -224,7 +241,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
               Call to Action
             </button>
           </div>
-          
+
           <p>After the custom section, we return to standard prose typography styling.</p>
         </article>
       </section>
