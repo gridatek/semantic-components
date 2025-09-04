@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   ViewEncapsulation,
   afterNextRender,
   computed,
   contentChild,
+  effect,
   forwardRef,
   inject,
   input,
@@ -22,6 +24,9 @@ import Text from '@tiptap/extension-text';
 
 import { ScEditorContent } from './editor-content';
 import { ScExtensions } from './extensions/extensions';
+import { ScImportExport } from './services/import-export.service';
+import { ScKeyboardShortcuts } from './services/keyboard-shortcuts.service';
+import { ScWordCount } from './services/word-count.service';
 
 @Component({
   selector: 'sc-editor',
@@ -42,10 +47,16 @@ import { ScExtensions } from './extensions/extensions';
       multi: true,
     },
     ScExtensions,
+    ScKeyboardShortcuts,
+    ScWordCount,
+    ScImportExport,
   ],
 })
-export class ScEditor implements ControlValueAccessor {
+export class ScEditor implements ControlValueAccessor, OnDestroy {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly keyboardShortcuts = inject(ScKeyboardShortcuts);
+  private readonly wordCount = inject(ScWordCount);
+  private readonly importExport = inject(ScImportExport);
 
   readonly editorContent = contentChild.required(ScEditorContent);
 
@@ -56,6 +67,9 @@ export class ScEditor implements ControlValueAccessor {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
+
+  readonly characterLimit = input<number | null>(null);
+  readonly wordLimit = input<number | null>(null);
 
   protected readonly class = computed(() =>
     cn('block border rounded-md dark:border-gray-700', this.classInput()),
@@ -73,6 +87,14 @@ export class ScEditor implements ControlValueAccessor {
   constructor() {
     afterNextRender(async () => {
       await this.createEditor();
+    });
+
+    // Update word count limits when they change
+    effect(() => {
+      if (this.editor) {
+        this.wordCount.setCharacterLimit(this.characterLimit());
+        this.wordCount.setWordLimit(this.wordLimit());
+      }
     });
   }
 
@@ -172,6 +194,11 @@ export class ScEditor implements ControlValueAccessor {
       extensions.push(Code);
     }
 
+    if (this.extensions.codeBlock()) {
+      const CodeBlock = (await import('@tiptap/extension-code-block')).CodeBlock;
+      extensions.push(CodeBlock);
+    }
+
     // Use UndoRedo instead of History (v3 change)
     if (this.extensions.undoRedo()) {
       const { UndoRedo } = await import('@tiptap/extensions');
@@ -211,6 +238,24 @@ export class ScEditor implements ControlValueAccessor {
     this.editor.on('blur', () => {
       this.onTouched();
     });
+
+    // Setup keyboard shortcuts
+    this.keyboardShortcuts.setEditor(this.editor);
+
+    // Setup word count
+    this.wordCount.setEditor(this.editor);
+    this.wordCount.setCharacterLimit(this.characterLimit());
+    this.wordCount.setWordLimit(this.wordLimit());
+
+    // Setup import/export
+    this.importExport.setEditor(this.editor);
+  }
+
+  ngOnDestroy() {
+    this.keyboardShortcuts.destroy();
+    if (this.editor) {
+      this.editor.destroy();
+    }
   }
 
   writeValue(value: string): void {
