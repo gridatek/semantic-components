@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
-  ElementRef,
   HostListener,
   OnDestroy,
   QueryList,
