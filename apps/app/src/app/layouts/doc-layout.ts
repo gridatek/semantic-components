@@ -183,7 +183,7 @@ export default class DocLayout {
   private openSheet() {
     const config = new ScSheetConfig();
     config.side = 'left';
-    config.width = '300';
+    config.width = '350px';
 
     this.scSheetManager.open(this.sheetRef(), config);
   }
