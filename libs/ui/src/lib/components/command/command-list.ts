@@ -18,6 +18,7 @@ import { cn } from '@semantic-components/utils';
     '[class]': 'classes()',
     '[attr.role]': '"listbox"',
     '[attr.aria-label]': '"Command suggestions"',
+    'data-slot': 'command-list',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -27,6 +28,6 @@ export class ScCommandList {
   class = input<string>('');
 
   classes = computed(() =>
-    cn('block max-h-[300px] overflow-y-auto overflow-x-hidden', this.class()),
+    cn('max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto', this.class()),
   );
 }

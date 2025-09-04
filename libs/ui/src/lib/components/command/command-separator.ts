@@ -16,6 +16,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'classes()',
+    'data-slot': 'command-separator',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -24,5 +25,5 @@ import { cn } from '@semantic-components/utils';
 export class ScCommandSeparator {
   class = input<string>('');
 
-  classes = computed(() => cn('block -mx-1 h-px bg-border', this.class()));
+  classes = computed(() => cn('bg-border -mx-1 h-px', this.class()));
 }

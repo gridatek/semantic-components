@@ -27,6 +27,7 @@ import { cn } from '@semantic-components/utils';
     '(mouseenter)': 'onMouseEnter()',
     '[attr.role]': '"option"',
     '[attr.tabindex]': 'disabled() ? -1 : 0',
+    'data-slot': 'command-item',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -37,7 +38,7 @@ export class ScCommandItem {
 
   classes = computed(() =>
     cn(
-      "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+      "data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
       this.class(),
     ),
   );

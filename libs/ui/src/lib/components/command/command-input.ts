@@ -16,18 +16,20 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   selector: 'sc-command-input',
   imports: [SiSearchIcon, FormsModule],
   template: `
-    <svg class="mr-2 size-4 shrink-0 opacity-50" si-search-icon></svg>
+    <svg class="size-4 shrink-0 opacity-50" si-search-icon></svg>
     <input
-      class="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+      class="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
       #inputElement
       [(ngModel)]="value"
       [placeholder]="placeholder()"
       (keydown)="onKeydown($event)"
       (input)="onInput($event)"
+      data-slot="command-input"
     />
   `,
   host: {
     '[class]': 'classes()',
+    'data-slot': 'command-input-wrapper',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -36,7 +38,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 export class ScCommandInput {
   class = input<string>('');
 
-  classes = computed(() => cn('flex items-center border-b px-3', this.class()));
+  classes = computed(() => cn('flex h-9 items-center gap-2 border-b px-3', this.class()));
 
   placeholder = input('');
 

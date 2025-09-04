@@ -14,7 +14,9 @@ import { ScCommand } from './command';
   selector: 'sc-command-dialog',
   imports: [ScCommand],
   template: `
-    <sc-command class="">
+    <sc-command
+      class="[&_[data-slot=command-input-wrapper]]:h-12 [&_[data-slot=command-input]]:h-12 [&_[data-slot=command-item]]:px-2 [&_[data-slot=command-item]]:py-3"
+    >
       <ng-content />
     </sc-command>
   `,
@@ -28,5 +30,5 @@ import { ScCommand } from './command';
 export class ScCommandDialog {
   class = input<string>('');
 
-  classes = computed(() => cn('block overflow-hidden p-0 shadow-lg', this.class()));
+  classes = computed(() => cn('overflow-hidden p-0 shadow-lg', this.class()));
 }

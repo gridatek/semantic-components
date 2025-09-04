@@ -16,6 +16,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'classes()',
+    'data-slot': 'command-shortcut',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -25,6 +26,6 @@ export class ScCommandShortcut {
   class = input<string>('');
 
   classes = computed(() =>
-    cn('block ml-auto text-xs tracking-widest text-muted-foreground', this.class()),
+    cn('text-muted-foreground ml-auto text-xs tracking-widest', this.class()),
   );
 }

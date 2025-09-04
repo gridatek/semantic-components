@@ -22,6 +22,7 @@ import { cn } from '@semantic-components/utils';
     '[attr.aria-expanded]': 'true',
     '[attr.aria-haspopup]': '"listbox"',
     '(keydown)': 'onKeyDown($event)',
+    'data-slot': 'command',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

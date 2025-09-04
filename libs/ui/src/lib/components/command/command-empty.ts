@@ -16,6 +16,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'classes()',
+    'data-slot': 'command-empty',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

@@ -23,6 +23,7 @@ import { ScCommandGroupHeading } from './command-group-heading';
     '[class]': 'classes()',
     '[attr.role]': '"group"',
     '[attr.aria-labelledby]': 'heading() ? "command-group-heading" : null',
+    'data-slot': 'command-group',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -31,7 +32,7 @@ import { ScCommandGroupHeading } from './command-group-heading';
 export class ScCommandGroup {
   class = input<string>('');
 
-  classes = computed(() => cn('block overflow-hidden p-1 text-foreground px-2', this.class()));
+  classes = computed(() => cn('text-foreground overflow-hidden p-1', this.class()));
 
   heading = input('');
 }
