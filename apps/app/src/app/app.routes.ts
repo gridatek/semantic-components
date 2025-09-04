@@ -109,6 +109,11 @@ export const appRoutes: Route[] = [
             title: 'Chart Page',
           },
           {
+            path: 'components/command',
+            loadComponent: () => import('./docs/components/command/command-page'),
+            title: 'Command Page',
+          },
+          {
             path: 'components/checkbox',
             loadComponent: () => import('./docs/components/checkbox/checkbox-page'),
             title: 'Checkbox Page',
