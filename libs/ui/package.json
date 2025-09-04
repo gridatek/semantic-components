@@ -31,6 +31,12 @@
     },
     "./styles": {
       "style": "./index.css"
+    },
+    "./styles/typography.css": {
+      "style": "./typography.css"
+    },
+    "./styles/typography": {
+      "style": "./typography.css"
     }
   }
 }
