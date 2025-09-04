@@ -2,13 +2,13 @@
 
 @import 'tailwindcss';
 
-@plugin '@tailwindcss/typography';
-
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
-
 @import './tiptap-styles.css';
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --radius: 0.625rem;
