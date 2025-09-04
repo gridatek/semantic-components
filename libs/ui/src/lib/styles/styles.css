@@ -1,14 +1,13 @@
 @import url('@angular/cdk/overlay-prebuilt.css');
-@import './angular-cdk-styles.css';
+@import './angular-cdk.css';
 
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
 
-@import './tiptap-styles.css';
-@import './scrollbar-styles.css';
-
-@plugin '@tailwindcss/typography';
+@import './tiptap.css';
+@import './scrollbar.css';
+@import './typography.css';
 
 @custom-variant dark (&:is(.dark *));
 
