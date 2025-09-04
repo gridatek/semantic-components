@@ -3,6 +3,7 @@ export * from './command-input';
 export * from './command-list';
 export * from './command-empty';
 export * from './command-group';
+export * from './command-group-heading';
 export * from './command-item';
 export * from './command-shortcut';
 export * from './command-separator';

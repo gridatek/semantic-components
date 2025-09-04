@@ -16,6 +16,8 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'classes()',
+    '[attr.role]': '"listbox"',
+    '[attr.aria-label]': '"Command suggestions"',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

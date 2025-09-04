@@ -4,6 +4,8 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  output,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -16,6 +18,10 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'classes()',
+    '[attr.role]': '"combobox"',
+    '[attr.aria-expanded]': 'true',
+    '[attr.aria-haspopup]': '"listbox"',
+    '(keydown)': 'onKeyDown($event)',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -30,4 +36,25 @@ export class ScCommand {
       this.class(),
     ),
   );
+
+  readonly loading = input<boolean>(false);
+  readonly empty = input<boolean>(false);
+  readonly query = signal<string>('');
+
+  readonly commandSelect = output<string>();
+  readonly queryChange = output<string>();
+
+  onKeyDown(event: KeyboardEvent) {
+    // Handle escape key
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.query.set('');
+      this.queryChange.emit('');
+    }
+  }
+
+  updateQuery(query: string) {
+    this.query.set(query);
+    this.queryChange.emit(query);
+  }
 }
