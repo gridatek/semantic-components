@@ -130,6 +130,12 @@
             "description": "Autocomplete input and command palette with a list of suggestions."
           },
           {
+            "id": "command",
+            "title": "Command",
+            "path": "/docs/components/command",
+            "description": "Fast, composable, styled command menu for Angular."
+          },
+          {
             "id": "context-menu",
             "title": "Context Menu",
             "path": "/docs/components/context-menu",
