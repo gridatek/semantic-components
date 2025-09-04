@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 
 import {
-  ScCard,
-  ScCardContent,
-  ScCardHeader,
-  ScCardTitle,
   ScCommand,
   ScCommandEmpty,
   ScCommandGroup,
