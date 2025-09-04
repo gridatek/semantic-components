@@ -8,12 +8,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `npx nx build` - Build all projects
 - `npx nx build ui` - Build the UI library specifically
-- `npx nx build app` - Build the demo application
+- `npx nx build app` - Build the main demo application
 - `npx nx run-many -t build` - Build all projects (used in release process)
 
 ### Development Server
 
-- `npx nx serve app` - Start development server for the demo app (default port 4200)
+- `npx nx serve app` - Start development server for the main demo app (default port 4200)
+- `npx nx serve breadcrumb-showcase` - Start breadcrumb showcase app
+- `npx nx serve image-cropper-showcase` - Start image cropper showcase app
 - `npx nx serve-static app` - Serve built static files
 
 ### Testing
@@ -43,10 +45,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is an **Nx monorepo** with the following structure:
 
-- **`apps/app/`** - Demo application showcasing the component library
+- **`apps/app/`** - Main demo application showcasing the component library
   - Angular application (prefix: `app`)
   - Serves as documentation and examples for the component library
   - Uses Tailwind CSS for styling
+- **`apps/breadcrumb-showcase/`** - Dedicated showcase for breadcrumb components
+- **`apps/image-cropper-showcase/`** - Dedicated showcase for image cropper components
 
 - **`libs/`** - Component libraries and utilities:
   - **`ui/`** - Main semantic components library (prefix: `sc`)
@@ -118,10 +122,3 @@ Components prioritize semantic HTML, accessibility, and modular design:
 - Prettier formatting with import sorting
 - Husky pre-commit hooks with lint-staged
 - Commitlint for conventional commit messages
-
-# important-instruction-reminders
-
-Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (\*.md) or README files. Only create documentation files if explicitly requested by the User.
