@@ -1,3 +1,21 @@
+/**
+ * Semantic Components - Custom Scrollbar Styles
+ * 
+ * Cross-browser scrollbar customization that integrates with the design system.
+ * 
+ * Features:
+ * - Slim 8px scrollbars for better space utilization
+ * - Theme-aware colors that adapt to light/dark modes
+ * - Smooth hover interactions with opacity changes
+ * - Cross-browser support (WebKit and Firefox)
+ * - Rounded thumb design for modern appearance
+ * 
+ * Browser Support:
+ * - WebKit browsers (Chrome, Safari, Edge): Full custom styling
+ * - Firefox: Thin scrollbars with theme colors
+ * - Other browsers: Fall back to system scrollbars
+ */
+
 /* Scrollbar styles for WebKit browsers */
 ::-webkit-scrollbar {
   width: 8px;

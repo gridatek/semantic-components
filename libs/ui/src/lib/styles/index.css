@@ -1,3 +1,21 @@
+/**
+ * Semantic Components - Main Styles Entry Point
+ * 
+ * This is the main stylesheet that imports all component styles and sets up
+ * the base styling system for the @semantic-components/ui library.
+ * 
+ * Import order:
+ * 1. External dependencies (Angular CDK, Tailwind CSS)
+ * 2. Third-party integration styles (CDK customizations)
+ * 3. Core framework setup (Tailwind, animations)
+ * 4. Theme system (colors, variables, dark mode)
+ * 5. Component-specific styles (editor, code, scrollbar, typography)
+ * 6. Base HTML element styles
+ * 
+ * Usage:
+ * @import '@semantic-components/ui/styles';
+ */
+
 @import url('@angular/cdk/overlay-prebuilt.css');
 @import './cdk.css';
 

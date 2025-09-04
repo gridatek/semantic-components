@@ -1,3 +1,32 @@
+/**
+ * Semantic Components - Typography System
+ * 
+ * Comprehensive typography styles for prose content and text-heavy interfaces.
+ * Replaces the default Tailwind Typography plugin with custom implementation.
+ * 
+ * Features:
+ * - Semantic prose classes (.prose, .prose-sm, .prose-lg, .prose-xl, .prose-2xl)
+ * - Complete typography scale with consistent vertical rhythm
+ * - Dark mode support with automatic color adjustments
+ * - Responsive typography that scales appropriately
+ * - Custom link styling with hover effects
+ * - Table formatting with proper borders and spacing
+ * - Code block and inline code styling
+ * - Blockquote styling with visual accent
+ * - List formatting (ordered and unordered)
+ * - Figure and caption handling
+ * - Integration with design system color tokens
+ * 
+ * Used by:
+ * - Article component for blog posts and documentation
+ * - Rich text editor output formatting
+ * - Markdown content rendering
+ * - Documentation pages and help text
+ * 
+ * Note: This replaces @tailwindcss/typography plugin for better control
+ * and integration with the semantic design system.
+ */
+
 .prose {
   --prose-color: var(--color-gray-700);
   --prose-heading-color: var(--color-gray-950);

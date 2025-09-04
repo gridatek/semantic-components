@@ -1,3 +1,24 @@
+/**
+ * Semantic Components - Theme System
+ * 
+ * Contains all theme-related styles including:
+ * - CSS custom properties for colors, spacing, and design tokens
+ * - Light and dark mode color schemes using OKLCH color space
+ * - Tailwind CSS theme configuration and color mappings
+ * - Component animations and keyframe definitions
+ * - Responsive design tokens and utility classes
+ * 
+ * Color System:
+ * - Uses OKLCH for better color consistency and accessibility
+ * - Supports automatic dark mode with .dark class
+ * - Includes semantic color tokens (primary, secondary, muted, etc.)
+ * - Chart colors for data visualization
+ * - Sidebar-specific color tokens
+ * 
+ * This file should be imported after Tailwind CSS core but before
+ * component-specific styles to ensure proper CSS cascade.
+ */
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
