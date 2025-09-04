@@ -18,10 +18,6 @@ import {
 @Component({
   selector: 'app-command-demo',
   imports: [
-    ScCard,
-    ScCardHeader,
-    ScCardTitle,
-    ScCardContent,
     ScCommand,
     ScCommandInput,
     ScCommandList,
@@ -32,7 +28,7 @@ import {
     ScCommandShortcut,
   ],
   template: `
-    <sc-command class="rounded-lg border shadow-md">
+    <sc-command class="rounded-lg border shadow-md md:min-w-[450px]">
       <sc-command-input placeholder="Type a command or search..." />
       <sc-command-list>
         <sc-command-empty>No results found.</sc-command-empty>
