@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import {
+  ScGridLayout,
   ScPage,
   ScPageContent,
   ScPageDescription,
@@ -30,6 +31,7 @@ import {
     ScPageSectionDescription,
     ScPageSectionContent,
     ScPageFooter,
+    ScGridLayout,
   ],
   template: `
     <sc-page>
@@ -78,7 +80,7 @@ import {
           </sc-page-section-header>
 
           <sc-page-section-content>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <sc-grid-layout [cols]="1" [mdCols]="2" [lgCols]="3" [gap]="6">
               <div class="p-6 border rounded-lg">
                 <h4 class="font-semibold mb-3 text-blue-600">Accessibility First</h4>
                 <p class="text-sm text-muted-foreground">
@@ -102,7 +104,7 @@ import {
                   enjoyable.
                 </p>
               </div>
-            </div>
+            </sc-grid-layout>
           </sc-page-section-content>
         </sc-page-section>
       </sc-page-content>

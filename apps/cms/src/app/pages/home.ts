@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import {
+  ScGridLayout,
   ScPage,
   ScPageContent,
   ScPageFooter,
@@ -30,6 +31,7 @@ import { CmsHeroBanner } from '../components/hero-banner';
     ScPageSectionContent,
     ScPageSectionFooter,
     ScPageFooter,
+    ScGridLayout,
     CmsHeroBanner,
   ],
   template: `
@@ -49,7 +51,7 @@ import { CmsHeroBanner } from '../components/hero-banner';
           </sc-page-section-header>
 
           <sc-page-section-content>
-            <div class="grid md:grid-cols-2 gap-6">
+            <sc-grid-layout [cols]="1" [mdCols]="2" [gap]="6">
               <div class="p-6 border rounded-lg">
                 <h4 class="font-semibold mb-2">Page Components</h4>
                 <p class="text-muted-foreground">
@@ -64,7 +66,7 @@ import { CmsHeroBanner } from '../components/hero-banner';
                   screen sizes.
                 </p>
               </div>
-            </div>
+            </sc-grid-layout>
           </sc-page-section-content>
 
           <sc-page-section-footer>
