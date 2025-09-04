@@ -29,7 +29,7 @@ export class ScPageFooter {
   // Page footer with subtle separation and appropriate spacing
   protected readonly class = computed(() =>
     cn(
-      'block w-full mt-12 pt-8 border-t border-gray-100 text-sm text-muted-foreground',
+      'block w-full my-12 py-8 border-t border-gray-100 text-sm text-muted-foreground',
       this.classInput(),
     ),
   );
