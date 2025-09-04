@@ -103,7 +103,7 @@ import {
                     />
                   </svg>
                   <span>Create New</span>
-                  <sc-command-shortcut>⌘N</sc-command-shortcut>
+                  <span sc-command-shortcut>⌘N</span>
                 </sc-command-item>
                 <sc-command-item (click)="selectItem('search')">
                   <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -115,7 +115,7 @@ import {
                     />
                   </svg>
                   <span>Search Files</span>
-                  <sc-command-shortcut>⌘F</sc-command-shortcut>
+                  <span sc-command-shortcut>⌘F</span>
                 </sc-command-item>
                 <sc-command-item (click)="selectItem('settings')">
                   <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -133,7 +133,7 @@ import {
                     />
                   </svg>
                   <span>Settings</span>
-                  <sc-command-shortcut>⌘,</sc-command-shortcut>
+                  <span sc-command-shortcut>⌘,</span>
                 </sc-command-item>
               </sc-command-group>
             </sc-command-list>

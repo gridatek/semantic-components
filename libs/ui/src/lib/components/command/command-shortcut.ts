@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-command-shortcut',
+  selector: 'span[sc-command-shortcut]',
   imports: [],
   template: `
     <ng-content />

@@ -75,7 +75,7 @@ import {
               />
             </svg>
             <span>Profile</span>
-            <sc-command-shortcut>⌘P</sc-command-shortcut>
+            <span sc-command-shortcut>⌘P</span>
           </sc-command-item>
           <sc-command-item>
             <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@ import {
               />
             </svg>
             <span>Mail</span>
-            <sc-command-shortcut>⌘B</sc-command-shortcut>
+            <span sc-command-shortcut>⌘B</span>
           </sc-command-item>
           <sc-command-item>
             <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,7 +105,7 @@ import {
               />
             </svg>
             <span>Settings</span>
-            <sc-command-shortcut>⌘S</sc-command-shortcut>
+            <span sc-command-shortcut>⌘S</span>
           </sc-command-item>
         </sc-command-group>
       </sc-command-list>
