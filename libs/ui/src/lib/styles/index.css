@@ -24,25 +24,8 @@
 @import 'tw-animate-css';
 
 @import './theme.css';
+@import './base.css';
 @import './editor.css';
 @import './scrollbar.css';
 @import './code.css';
 @import './typography.css';
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-html {
-  interpolate-size: allow-keywords;
-}
-
-html,
-body {
-  height: 100%;
-}
