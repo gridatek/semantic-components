@@ -28,6 +28,6 @@ export class ScPageSectionHeader {
 
   // Section header with tight spacing for title/subtitle/description - centered alignment
   protected readonly class = computed(() =>
-    cn('inline-block w-full space-y-2 mb-6 text-center', this.classInput()),
+    cn('block w-full space-y-2 mb-6 text-center', this.classInput()),
   );
 }

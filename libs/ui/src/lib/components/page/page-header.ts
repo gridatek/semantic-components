@@ -12,7 +12,9 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-page-header',
   imports: [],
   template: `
-    <ng-content />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4 text-center">
+      <ng-content />
+    </div>
   `,
   host: {
     '[class]': 'class()',
@@ -26,12 +28,9 @@ export class ScPageHeader {
     alias: 'class',
   });
 
-  // Page header with centered content and proper spacing
+  // Page header with full-width background and constrained, centered content
   // Provides consistent spacing for title, subtitle, and description elements
   protected readonly class = computed(() =>
-    cn(
-      'inline-block w-full space-y-4 py-8 px-6 border-b border-gray-100 bg-gray-50/50 text-center',
-      this.classInput(),
-    ),
+    cn('block w-full border-b border-gray-100 bg-gray-50/50', this.classInput()),
   );
 }

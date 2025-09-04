@@ -27,5 +27,5 @@ export class ScPageSection {
   });
 
   // Page section with structured spacing between header, content, and footer
-  protected readonly class = computed(() => cn('inline-block w-full space-y-6', this.classInput()));
+  protected readonly class = computed(() => cn('block w-full space-y-6', this.classInput()));
 }

@@ -26,8 +26,8 @@ export class ScPageContent {
     alias: 'class',
   });
 
-  // Page content with full width and generous spacing between sections
+  // Page content with container width like navigation and footer, generous spacing between sections
   protected readonly class = computed(() =>
-    cn('inline-block w-full px-6 py-8 space-y-16', this.classInput()),
+    cn('block w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16', this.classInput()),
   );
 }
