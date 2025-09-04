@@ -15,5 +15,5 @@ import { RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppRoot {
-  protected readonly class = signal('size-full');
+  protected readonly class = signal('min-h-screen');
 }
