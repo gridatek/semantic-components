@@ -25,5 +25,5 @@ import { cn } from '@semantic-components/utils';
 export class ScCommandSeparator {
   class = input<string>('');
 
-  classes = computed(() => cn('bg-border -mx-1 h-px', this.class()));
+  classes = computed(() => cn('block bg-border h-px', this.class()));
 }
