@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
@@ -73,28 +73,107 @@ import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
           <div class="sm:hidden">
             <button
               class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              (click)="toggleMobileMenu()"
               type="button"
             >
-              <span class="sr-only">Open main menu</span>
-              <svg
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
+              <span class="sr-only">
+                {{ isMobileMenuOpen() ? 'Close main menu' : 'Open main menu' }}
+              </span>
+              @if (!isMobileMenuOpen()) {
+                <svg
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+              } @else {
+                <svg
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              }
             </button>
           </div>
         </div>
       </div>
+
+      <!-- Mobile menu -->
+      @if (isMobileMenuOpen()) {
+        <div class="sm:hidden">
+          <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+            <nav sc-nav>
+              <div class="space-y-1">
+                <a
+                  class="block px-3 py-2 text-base font-medium"
+                  (click)="closeMobileMenu()"
+                  sc-nav-link
+                  routerLink="/home"
+                  routerLinkActive="active-page"
+                >
+                  Home
+                </a>
+                <a
+                  class="block px-3 py-2 text-base font-medium"
+                  (click)="closeMobileMenu()"
+                  sc-nav-link
+                  routerLink="/about"
+                  routerLinkActive="active-page"
+                >
+                  About
+                </a>
+                <a
+                  class="block px-3 py-2 text-base font-medium"
+                  (click)="closeMobileMenu()"
+                  sc-nav-link
+                  href="#"
+                >
+                  Content
+                </a>
+                <a
+                  class="block px-3 py-2 text-base font-medium"
+                  (click)="closeMobileMenu()"
+                  sc-nav-link
+                  href="#"
+                >
+                  Media
+                </a>
+                <a
+                  class="block px-3 py-2 text-base font-medium"
+                  (click)="closeMobileMenu()"
+                  sc-nav-link
+                  href="#"
+                >
+                  Settings
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+      }
     </div>
   `,
   styles: ``,
 })
-export class CmsNavigation {}
+export class CmsNavigation {
+  isMobileMenuOpen = signal(false);
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen.update((isOpen) => !isOpen);
+  }
+
+  closeMobileMenu() {
+    this.isMobileMenuOpen.set(false);
+  }
+}
