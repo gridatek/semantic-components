@@ -1,18 +1,18 @@
 import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
+import { ScNav, ScNavLink, ScNavList, ScThemeToggler } from '@semantic-components/ui';
 
 @Component({
   selector: 'cms-navigation',
-  imports: [RouterModule, ScNav, ScNavList, ScNavLink],
+  imports: [RouterModule, ScNav, ScNavList, ScNavLink, ScThemeToggler],
   template: `
-    <div class="bg-white border-b border-gray-200 shadow-sm">
+    <div class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Brand -->
           <div class="flex-shrink-0">
-            <h1 class="text-xl font-bold text-gray-900">CMS</h1>
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">CMS</h1>
           </div>
 
           <!-- Main Navigation -->
@@ -38,6 +38,8 @@ import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
 
           <!-- User Actions -->
           <div class="hidden sm:flex sm:items-center space-x-4">
+            <sc-theme-toggler></sc-theme-toggler>
+
             <button
               class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               type="button"
@@ -72,7 +74,7 @@ import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
           <!-- Mobile menu button -->
           <div class="sm:hidden">
             <button
-              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
               (click)="toggleMobileMenu()"
               type="button"
             >
@@ -112,7 +114,9 @@ import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
       <!-- Mobile menu -->
       @if (isMobileMenuOpen()) {
         <div class="sm:hidden">
-          <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+          <div
+            class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
+          >
             <nav sc-nav>
               <div class="space-y-1">
                 <a
@@ -159,6 +163,11 @@ import { ScNav, ScNavLink, ScNavList } from '@semantic-components/ui';
                 </a>
               </div>
             </nav>
+
+            <!-- Mobile theme toggler -->
+            <div class="px-3 py-2 border-t border-gray-200 dark:border-gray-700 mt-2 pt-4">
+              <sc-theme-toggler></sc-theme-toggler>
+            </div>
           </div>
         </div>
       }
