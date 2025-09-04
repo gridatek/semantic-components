@@ -55,7 +55,7 @@ export class ScAutocompleteItem implements Highlightable {
     return this.item().id === this.selectedItem()?.id;
   });
 
-  private readonly _isActive = signal(false);
+  protected readonly _isActive = signal(false);
 
   disabled: boolean | undefined;
 

@@ -67,7 +67,7 @@ export class ScSlider {
     });
   }
 
-  protected handleInput(event: KeyboardEvent) {
+  protected handleInput(event: Event) {
     if (!event.target) return;
     this.value.set(+(event.target as HTMLInputElement).value);
   }
