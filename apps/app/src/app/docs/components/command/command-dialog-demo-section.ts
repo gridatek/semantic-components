@@ -19,12 +19,12 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
 import { TocHeadingDirective } from '../../../components/toc/toc-heading.directive';
 
 @Component({
-  selector: 'command-dialog-demo-section',
+  selector: 'app-command-dialog-demo-section',
   imports: [
     TocHeadingDirective,
     PreviewCodeTabs,
     ScButton,
-    ScCommand,
+    // ScCommand,
     ScCommandDialog,
     ScCommandInput,
     ScCommandList,
@@ -68,7 +68,7 @@ import { TocHeadingDirective } from '../../../components/toc/toc-heading.directi
       <!-- Command Dialog -->
       @if (isDialogOpen()) {
         <div class="fixed inset-0 z-50" sc-dialog>
-          <div class="fixed inset-0 bg-black/50" (click)="closeDialog()"></div>
+          <button class="fixed inset-0 bg-black/50" (click)="closeDialog()">x</button>
           <div
             class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"
             sc-dialog-content
