@@ -31,6 +31,6 @@ export class ScPageHeader {
   // Page header with full-width background and constrained, centered content
   // Provides consistent spacing for title, subtitle, and description elements
   protected readonly class = computed(() =>
-    cn('block w-full border-b border-gray-100 bg-gray-50/50', this.classInput()),
+    cn('block w-full border-b border-border bg-secondary/50', this.classInput()),
   );
 }
