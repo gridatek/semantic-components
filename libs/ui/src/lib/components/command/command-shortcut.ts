@@ -15,7 +15,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     'data-slot': 'command-shortcut',
   },
   styles: ``,
@@ -23,9 +23,11 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandShortcut {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('text-muted-foreground ml-auto text-xs tracking-widest', this.class()),
+  protected readonly class = computed(() =>
+    cn('text-muted-foreground ml-auto text-xs tracking-widest', this.classInput()),
   );
 }
