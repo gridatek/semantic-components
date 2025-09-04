@@ -37,5 +37,6 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-family);
   }
 }
