@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'cms-footer',
   template: `
-    <footer class="bg-secondary border-t border-border">
+    <footer class="bg-background border-t border-border">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="py-8">
           <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
