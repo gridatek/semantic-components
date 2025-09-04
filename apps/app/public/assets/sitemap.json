@@ -25,6 +25,12 @@
             "title": "Typography",
             "path": "/docs/getting-started/typography",
             "description": "Styles for headings, paragraphs, lists...etc."
+          },
+          {
+            "id": "typography-article",
+            "title": "Typography Article",
+            "path": "/docs/getting-started/typography-article",
+            "description": "Comprehensive test of the typography.css system and prose classes."
           }
         ]
       },

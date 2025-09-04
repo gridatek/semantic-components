@@ -49,6 +49,11 @@ export const appRoutes: Route[] = [
             title: 'Typography Page',
           },
           {
+            path: 'getting-started/typography-article',
+            loadComponent: () => import('./docs/getting-started/typography/typography-article'),
+            title: 'Typography Article Page',
+          },
+          {
             path: 'components/accordion',
             loadComponent: () => import('./docs/components/accordion/accordion-page'),
             title: 'Accordion Page',
