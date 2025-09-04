@@ -39,3 +39,13 @@
   scrollbar-width: auto;
   scrollbar-color: oklch(from var(--muted-foreground) l c h / 50%) var(--muted);
 }
+
+/* Hidden scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
