@@ -3,33 +3,19 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 import { ScButton, ScThemeToggler } from '@semantic-components/ui';
+import { SiMenuIcon } from '@semantic-icons/lucide-icons';
 
 import { AppStateService } from '../app-state.service';
 
 @Component({
   selector: 'app-header',
-  imports: [ScButton, ScThemeToggler, RouterLink, RouterLinkActive, NgClass],
+  imports: [ScButton, ScThemeToggler, RouterLink, RouterLinkActive, NgClass, SiMenuIcon],
   template: `
     <div class="flex h-14 items-center px-4 justify-between md:justify-start">
       <div class="md:hidden">
         <!-- Mobile Menu Toggle -->
         <button (click)="toggleMobileMenu()" sc-button variant="outline" size="icon">
-          <svg
-            class="h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <line x1="4" x2="20" y1="12" y2="12"></line>
-            <line x1="4" x2="20" y1="6" y2="6"></line>
-            <line x1="4" x2="20" y1="18" y2="18"></line>
-          </svg>
+          <svg si-menu-icon></svg>
         </button>
       </div>
 
