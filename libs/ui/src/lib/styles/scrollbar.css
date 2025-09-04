@@ -4,7 +4,7 @@
  * Cross-browser scrollbar customization that integrates with the design system.
  * 
  * Features:
- * - Slim 8px scrollbars for better space utilization
+ * - 12px scrollbars for better visibility and usability
  * - Theme-aware colors that adapt to light/dark modes
  * - Smooth hover interactions with opacity changes
  * - Cross-browser support (WebKit and Firefox)
@@ -12,14 +12,14 @@
  * 
  * Browser Support:
  * - WebKit browsers (Chrome, Safari, Edge): Full custom styling
- * - Firefox: Thin scrollbars with theme colors
+ * - Firefox: Auto-width scrollbars with theme colors
  * - Other browsers: Fall back to system scrollbars
  */
 
 /* Scrollbar styles for WebKit browsers */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
@@ -27,15 +27,15 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground/30 rounded-full;
+  @apply bg-muted-foreground/50 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted-foreground/50;
+  @apply bg-muted-foreground/70;
 }
 
 /* Scrollbar styles for Firefox */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: oklch(from var(--muted-foreground) l c h / 30%) var(--muted);
+  scrollbar-width: auto;
+  scrollbar-color: oklch(from var(--muted-foreground) l c h / 50%) var(--muted);
 }

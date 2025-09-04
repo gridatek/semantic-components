@@ -26,7 +26,7 @@
 
 @import './theme.css';
 @import './base.css';
-@import './editor.css';
 @import './scrollbar.css';
+@import './editor.css';
 @import './code.css';
 @import './typography.css';
