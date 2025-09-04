@@ -37,7 +37,7 @@ import { ScCommandItem } from './command-item';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommand implements AfterContentInit, OnDestroy {
-  @ContentChildren(ScCommandItem) items!: QueryList<ScCommandItem>;
+  @ContentChildren(ScCommandItem, { descendants: true }) items!: QueryList<ScCommandItem>;
 
   private activeIndex = signal<number>(-1);
   private destroy$ = new Subject<void>();
