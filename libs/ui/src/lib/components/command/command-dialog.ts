@@ -30,7 +30,7 @@ export interface CommandDialogData {
 @Injectable({
   providedIn: 'root',
 })
-export class CommandDialogService {
+export class CommandDialog {
   private dialog = inject(Dialog);
 
   openComponent<T>(component: ComponentType<T>, config?: CommandDialogConfig): DialogRef<T, any> {

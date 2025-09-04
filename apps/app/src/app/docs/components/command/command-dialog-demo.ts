@@ -131,7 +131,7 @@ import {
                 />
               </svg>
               <span>Settings</span>
-              <span sc-command-shortcut>⌘,</span>
+              <span sc-command-shortcut>⌘S</span>
             </sc-command-item>
           </sc-command-group>
         </sc-command-list>

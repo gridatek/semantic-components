@@ -95,6 +95,20 @@ export class ScCommand implements AfterContentInit, OnDestroy {
     itemsArray.forEach((item, i) => {
       item.selected.set(i === index);
     });
+
+    // Scroll active item into view
+    if (index >= 0 && itemsArray[index]) {
+      setTimeout(() => {
+        const activeElement = itemsArray[index].elementRef?.nativeElement;
+        if (activeElement) {
+          activeElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'nearest',
+          });
+        }
+      });
+    }
   }
 
   ngAfterContentInit() {

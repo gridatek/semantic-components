@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   booleanAttribute,
   computed,
+  inject,
   input,
   output,
   signal,
@@ -34,6 +36,8 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandItem {
+  readonly elementRef = inject(ElementRef);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
