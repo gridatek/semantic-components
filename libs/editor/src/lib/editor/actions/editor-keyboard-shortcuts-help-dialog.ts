@@ -1,25 +1,33 @@
 import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
+import { ScCard, ScCardContent, ScCardHeader, ScCardTitle } from '@semantic-components/ui';
+
 import { ShortcutMapping } from '../services/keyboard-shortcuts.service';
 
 @Component({
   selector: 'sc-editor-keyboard-shortcuts-help-dialog',
-  imports: [],
+  imports: [ScCard, ScCardHeader, ScCardTitle, ScCardContent],
   template: `
-    <div class="max-w-2xl p-4">
-      <h3 class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Keyboard Shortcuts</h3>
-      <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
-        @for (shortcut of shortcuts; track shortcut.key) {
-          <div class="flex items-center justify-between rounded bg-gray-50 p-2 dark:bg-gray-800">
-            <span class="text-sm text-gray-900 dark:text-white">{{ shortcut.description }}</span>
-            <kbd
-              class="inline-flex items-center rounded border border-gray-200 bg-white px-2 py-1 text-xs font-medium text-gray-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-400"
+    <div class="max-w-2xl" sc-card>
+      <div sc-card-header>
+        <h2 sc-card-title>Keyboard Shortcuts</h2>
+      </div>
+      <div sc-card-content>
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+          @for (shortcut of shortcuts; track shortcut.key) {
+            <div
+              class="flex items-center justify-between rounded-md border border-border bg-background/50 p-3"
             >
-              {{ formatShortcut(shortcut) }}
-            </kbd>
-          </div>
-        }
+              <span class="text-sm font-medium">{{ shortcut.description }}</span>
+              <kbd
+                class="inline-flex items-center rounded border border-border bg-muted px-2 py-1 text-xs font-mono text-muted-foreground"
+              >
+                {{ formatShortcut(shortcut) }}
+              </kbd>
+            </div>
+          }
+        </div>
       </div>
     </div>
   `,
