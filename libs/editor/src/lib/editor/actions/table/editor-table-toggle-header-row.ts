@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiRectangleHorizontalIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
 
 @Component({
   selector: 'sc-editor-table-toggle-header-row',
-  imports: [ScButton, ScTooltip, SiRectangleHorizontalIcon],
+  imports: [ScToggle, ScTooltip, SiRectangleHorizontalIcon],
   template: `
     <button
       (click)="toggleHeaderRow()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       size="sm"
       scTooltip="Toggle header row"
       type="button"

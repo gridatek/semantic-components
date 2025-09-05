@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiWrenchIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
 
 @Component({
   selector: 'sc-editor-table-fix',
-  imports: [ScButton, ScTooltip, SiWrenchIcon],
+  imports: [ScToggle, ScTooltip, SiWrenchIcon],
   template: `
     <button
       (click)="fixTables()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       size="sm"
       scTooltip="Fix table structure"
       type="button"

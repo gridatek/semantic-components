@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiSquareIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
 
 @Component({
   selector: 'sc-editor-table-toggle-header-cell',
-  imports: [ScButton, ScTooltip, SiSquareIcon],
+  imports: [ScToggle, ScTooltip, SiSquareIcon],
   template: `
     <button
       (click)="toggleHeaderCell()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       size="sm"
       scTooltip="Toggle header cell"
       type="button"

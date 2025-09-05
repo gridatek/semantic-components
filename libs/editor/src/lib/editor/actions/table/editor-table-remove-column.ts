@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiGrid2x2XIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
 
 @Component({
   selector: 'sc-editor-table-remove-column',
-  imports: [ScButton, ScTooltip, SiGrid2x2XIcon],
+  imports: [ScToggle, ScTooltip, SiGrid2x2XIcon],
   template: `
     <button
       (click)="deleteColumn()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       size="sm"
       scTooltip="Remove column"
       type="button"

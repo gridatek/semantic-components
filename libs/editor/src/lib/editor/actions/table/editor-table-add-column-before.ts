@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiBetweenVerticalEndIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
 
 @Component({
   selector: 'sc-editor-table-add-column-before',
-  imports: [ScButton, ScTooltip, SiBetweenVerticalEndIcon],
+  imports: [ScToggle, ScTooltip, SiBetweenVerticalEndIcon],
   template: `
     <button
       (click)="addColumnBefore()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       size="sm"
       scTooltip="Add column before"
       type="button"

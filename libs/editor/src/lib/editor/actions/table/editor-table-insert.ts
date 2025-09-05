@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiTableIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
@@ -8,12 +8,12 @@ import { ScExtensions } from '../../extensions/extensions';
 
 @Component({
   selector: 'sc-editor-table-insert',
-  imports: [ScButton, ScTooltip, SiTableIcon],
+  imports: [ScToggle, ScTooltip, SiTableIcon],
   template: `
     <button
       (click)="insertTable()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       size="sm"
       scTooltip="Insert table"
       type="button"

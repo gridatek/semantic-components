@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiBetweenHorizontalEndIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
 
 @Component({
   selector: 'sc-editor-table-add-row-before',
-  imports: [ScButton, ScTooltip, SiBetweenHorizontalEndIcon],
+  imports: [ScToggle, ScTooltip, SiBetweenHorizontalEndIcon],
   template: `
     <button
       (click)="addRowBefore()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       size="sm"
       scTooltip="Add row before"
       type="button"

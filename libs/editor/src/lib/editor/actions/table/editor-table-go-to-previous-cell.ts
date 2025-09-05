@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiChevronLeftIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
 
 @Component({
   selector: 'sc-editor-table-go-to-previous-cell',
-  imports: [ScButton, ScTooltip, SiChevronLeftIcon],
+  imports: [ScToggle, ScTooltip, SiChevronLeftIcon],
   template: `
     <button
       (click)="goToPreviousCell()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       size="sm"
       scTooltip="Previous cell"
       type="button"
