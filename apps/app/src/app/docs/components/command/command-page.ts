@@ -1,31 +1,26 @@
 import { Component } from '@angular/core';
 
-// import { CommandAdvancedDemoSection } from './command-advanced-demo-section';
-// import { CommandBasicDemoSection } from './command-basic-demo-section';
-// import { CommandDemo2Section } from './command-demo2-section';
-// import { CommandDemoSection } from './command-demo-section';
-// import { CommandDialogDemoSection } from './command-dialog-demo-section';
+import { CommandAdvancedDemoSection } from './command-advanced-demo-section';
+import { CommandBasicDemoSection } from './command-basic-demo-section';
+import { CommandDemoSection } from './command-demo-section';
+import { CommandDialogDemoSection } from './command-dialog-demo-section';
 import { CommandHttpResourceDemoSection } from './command-http-resource-demo-section';
+import { CommandInteractiveDemoSection } from './command-interactive-demo-section';
 import { CommandTriggerDemoSection } from './command-trigger-demo-section';
-
-// import { CommandInteractiveDemoSection } from './command-interactive-demo-section';
 
 @Component({
   selector: 'app-command-page',
   imports: [
-    // CommandDemoSection,
-    // CommandDemo2Section,
-    // CommandDialogDemoSection,
-    // CommandBasicDemoSection,
-    // CommandAdvancedDemoSection,
-    // CommandInteractiveDemoSection,
+    CommandDemoSection,
+    CommandDialogDemoSection,
+    CommandBasicDemoSection,
+    CommandAdvancedDemoSection,
+    CommandInteractiveDemoSection,
     CommandHttpResourceDemoSection,
     CommandTriggerDemoSection,
   ],
   template: `
-    <!--    <app-command-demo-section />
-
-    <app-command-demo2-section />
+    <app-command-demo-section />
 
     <app-command-dialog-demo-section />
 
@@ -33,7 +28,7 @@ import { CommandTriggerDemoSection } from './command-trigger-demo-section';
 
     <app-command-advanced-demo-section title="Advanced Command Palette" />
 
-    <app-command-interactive-demo-section title="Interactive Command Dialog" />-->
+    <app-command-interactive-demo-section title="Interactive Command Dialog" />
 
     <app-command-http-resource-demo-section
       title="Command with HttpResource"
