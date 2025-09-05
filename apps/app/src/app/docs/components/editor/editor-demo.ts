@@ -21,15 +21,22 @@ import {
   ScEditorParagraph,
   ScEditorRedo,
   ScEditorStrike,
+  ScEditorTableAddCellAttribute,
   ScEditorTableAddColumn,
+  ScEditorTableAddColumnBefore,
   ScEditorTableAddRow,
+  ScEditorTableAddRowBefore,
   ScEditorTableDelete,
   ScEditorTableFix,
+  ScEditorTableGoToNextCell,
+  ScEditorTableGoToPreviousCell,
   ScEditorTableInsert,
   ScEditorTableMergeCells,
+  ScEditorTableMergeOrSplit,
   ScEditorTableRemoveColumn,
   ScEditorTableRemoveRow,
   ScEditorTableSplitCells,
+  ScEditorTableToggleHeaderCell,
   ScEditorTableToggleHeaderColumn,
   ScEditorTableToggleHeaderRow,
   ScEditorTextAlignCenter,
@@ -87,14 +94,21 @@ import { ScSeparator } from '@semantic-components/ui';
     ScExtensionLink,
     ScEditorTableInsert,
     ScEditorTableDelete,
+    ScEditorTableAddColumnBefore,
     ScEditorTableAddColumn,
+    ScEditorTableAddRowBefore,
     ScEditorTableAddRow,
     ScEditorTableRemoveColumn,
     ScEditorTableRemoveRow,
     ScEditorTableMergeCells,
     ScEditorTableSplitCells,
+    ScEditorTableMergeOrSplit,
     ScEditorTableToggleHeaderRow,
     ScEditorTableToggleHeaderColumn,
+    ScEditorTableToggleHeaderCell,
+    ScEditorTableAddCellAttribute,
+    ScEditorTableGoToPreviousCell,
+    ScEditorTableGoToNextCell,
     ScEditorTableFix,
     ScExtensionTextStyle,
     ScExtensionYoutube,
@@ -149,16 +163,24 @@ import { ScSeparator } from '@semantic-components/ui';
             <sc-editor-table-insert />
             <sc-editor-table-delete />
             <sc-separator class="h-5" orientation="vertical" />
+            <sc-editor-table-add-column-before />
             <sc-editor-table-add-column />
+            <sc-editor-table-add-row-before />
             <sc-editor-table-add-row />
             <sc-editor-table-remove-column />
             <sc-editor-table-remove-row />
             <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-table-merge-cells />
             <sc-editor-table-split-cells />
+            <sc-editor-table-merge-or-split />
             <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-table-toggle-header-row />
             <sc-editor-table-toggle-header-column />
+            <sc-editor-table-toggle-header-cell />
+            <sc-separator class="h-5" orientation="vertical" />
+            <sc-editor-table-add-cell-attribute />
+            <sc-editor-table-go-to-previous-cell />
+            <sc-editor-table-go-to-next-cell />
             <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-table-fix />
             <sc-separator class="h-5" orientation="vertical" />
