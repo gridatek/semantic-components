@@ -1,10 +1,43 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { Component, TemplateRef, ViewChild, computed, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import { CommandItemModel, CommandTriggerConfig, ScCommandTrigger } from '@semantic-components/ui';
+import {
+  CommandTriggerConfig,
+  ScCommand,
+  ScCommandEmpty,
+  ScCommandGroup,
+  ScCommandInput,
+  ScCommandItem,
+  ScCommandList,
+  ScCommandSeparator,
+  ScCommandTrigger,
+} from '@semantic-components/ui';
+
+export interface CommandItemModel {
+  id: string;
+  label: string;
+  description?: string;
+  icon?: string;
+  category: string;
+  action: () => void;
+  disabled?: boolean;
+}
 
 @Component({
   selector: 'app-command-trigger-demo',
-  imports: [ScCommandTrigger],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ScCommandTrigger,
+    ScCommand,
+    ScCommandInput,
+    ScCommandList,
+    ScCommandEmpty,
+    ScCommandGroup,
+    ScCommandItem,
+  ],
   template: `
     <div class="space-y-8">
       <div class="prose prose-sm max-w-none">
@@ -80,32 +113,59 @@ import { CommandItemModel, CommandTriggerConfig, ScCommandTrigger } from '@seman
       <div class="space-y-4">
         <h4 class="text-lg font-medium">Different Keyboard Shortcuts</h4>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <sc-command-trigger [config]="basicConfig">
+          <sc-command-trigger
+            [config]="basicConfig"
+            [dialogTemplate]="basicTemplate"
+            (dialogOpened)="onDialogOpened('Basic')"
+            (dialogClosed)="onDialogClosed($event)"
+          >
             <span slot="icon">⌘</span>
             Basic Commands
           </sc-command-trigger>
 
-          <sc-command-trigger [config]="apiConfig">
+          <sc-command-trigger
+            [config]="apiConfig"
+            [dialogTemplate]="apiTemplate"
+            (dialogOpened)="onDialogOpened('API Search')"
+            (dialogClosed)="onDialogClosed($event)"
+          >
             <span slot="icon">🌐</span>
             API Search
           </sc-command-trigger>
 
-          <sc-command-trigger [config]="customConfig">
+          <sc-command-trigger
+            [config]="customConfig"
+            [dialogTemplate]="customTemplate"
+            (dialogOpened)="onDialogOpened('Quick Actions')"
+            (dialogClosed)="onDialogClosed($event)"
+          >
             <span slot="icon">⚡</span>
             Quick Actions
           </sc-command-trigger>
 
-          <sc-command-trigger [config]="smallConfig">
+          <sc-command-trigger
+            [config]="smallConfig"
+            [dialogTemplate]="basicTemplate"
+            (dialogOpened)="onDialogOpened('Quick Search')"
+          >
             <span slot="icon">🔍</span>
             Quick Search
           </sc-command-trigger>
 
-          <sc-command-trigger [config]="largeConfig">
+          <sc-command-trigger
+            [config]="largeConfig"
+            [dialogTemplate]="customTemplate"
+            (dialogOpened)="onDialogOpened('Advanced')"
+          >
             <span slot="icon">🚀</span>
             Advanced
           </sc-command-trigger>
 
-          <sc-command-trigger [config]="eventConfig">
+          <sc-command-trigger
+            [config]="eventConfig"
+            [dialogTemplate]="eventTemplate"
+            (dialogOpened)="onDialogOpened('Events')"
+          >
             <span slot="icon">📊</span>
             Events
           </sc-command-trigger>
@@ -147,7 +207,6 @@ import { CommandItemModel, CommandTriggerConfig, ScCommandTrigger } from '@seman
         <div class="flex gap-4">
           <sc-command-trigger
             [config]="eventConfig"
-            (dialogOpened)="onDialogOpened()"
             (dialogClosed)="onDialogClosed($event)"
             (commandExecuted)="onCommandExecuted($event)"
           >
@@ -200,10 +259,225 @@ import { CommandItemModel, CommandTriggerConfig, ScCommandTrigger } from '@seman
         </div>
       </div>
     </div>
+
+    <!-- Dialog Templates -->
+
+    <!-- Basic Template -->
+    <ng-template #basicTemplate>
+      <sc-command (commandSelect)="onCommandSelect($event, 'basic')">
+        <sc-command-input
+          [(ngModel)]="basicSearchQuery"
+          (search)="onSearchChange($event, 'basic')"
+          placeholder="Search basic commands..."
+        />
+        <sc-command-list class="max-h-96">
+          @if (filteredBasicCommands().length === 0) {
+            <sc-command-empty>
+              <div class="text-center py-8">
+                <div class="text-4xl mb-2">🔍</div>
+                <div class="text-sm text-gray-500">No commands found</div>
+              </div>
+            </sc-command-empty>
+          }
+
+          @for (group of groupedBasicCommands(); track group.name) {
+            <sc-command-group [heading]="group.name">
+              @for (command of group.items; track command.id) {
+                <sc-command-item class="cursor-pointer" [value]="command.id">
+                  @if (command.icon) {
+                    <span class="mr-2">{{ command.icon }}</span>
+                  }
+                  <div class="flex-1">
+                    <div class="font-medium">{{ command.label }}</div>
+                    @if (command.description) {
+                      <div class="text-xs text-gray-500">{{ command.description }}</div>
+                    }
+                  </div>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
+        </sc-command-list>
+      </sc-command>
+    </ng-template>
+
+    <!-- API Template -->
+    <ng-template #apiTemplate>
+      <sc-command (commandSelect)="onCommandSelect($event, 'api')">
+        <sc-command-input
+          [(ngModel)]="apiSearchQuery"
+          (search)="onSearchChange($event, 'api')"
+          placeholder="Search API... (type 2+ chars)"
+        />
+        <sc-command-list class="max-h-96">
+          @if (apiResource.isLoading()) {
+            <div class="flex items-center justify-center py-8">
+              <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+              <span class="ml-2 text-gray-600">Loading API results...</span>
+            </div>
+          }
+
+          @if (apiResource.error()) {
+            <div class="p-4 text-center text-red-600">
+              <p class="mb-2">Failed to load results</p>
+              <button
+                class="px-3 py-1 text-sm bg-red-100 rounded hover:bg-red-200"
+                (click)="retryApiSearch()"
+              >
+                Retry
+              </button>
+            </div>
+          }
+
+          @if (filteredApiCommands().length === 0 && !apiResource.isLoading()) {
+            <sc-command-empty>
+              <div class="text-center py-8">
+                <div class="text-4xl mb-2">🌐</div>
+                <div class="text-sm text-gray-500">
+                  @if (apiSearchQuery().length < 2) {
+                    Type 2+ characters to search API
+                  } @else {
+                    No API results found
+                  }
+                </div>
+              </div>
+            </sc-command-empty>
+          }
+
+          @for (group of groupedApiCommands(); track group.name) {
+            <sc-command-group [heading]="group.name">
+              @for (command of group.items; track command.id) {
+                <sc-command-item class="cursor-pointer" [value]="command.id">
+                  @if (command.icon) {
+                    <span class="mr-2">{{ command.icon }}</span>
+                  }
+                  <div class="flex-1">
+                    <div class="font-medium">{{ command.label }}</div>
+                    @if (command.description) {
+                      <div class="text-xs text-gray-500">{{ command.description }}</div>
+                    }
+                  </div>
+                  <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded">API</span>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
+        </sc-command-list>
+      </sc-command>
+    </ng-template>
+
+    <!-- Custom Template -->
+    <ng-template #customTemplate>
+      <sc-command (commandSelect)="onCommandSelect($event, 'custom')">
+        <sc-command-input
+          [(ngModel)]="customSearchQuery"
+          (search)="onSearchChange($event, 'custom')"
+          placeholder="Search quick actions..."
+        />
+        <sc-command-list class="max-h-96">
+          @for (group of groupedCustomCommands(); track group.name) {
+            <sc-command-group [heading]="group.name">
+              @for (command of group.items; track command.id) {
+                <sc-command-item
+                  class="cursor-pointer"
+                  [value]="command.id"
+                  [disabled]="command.disabled"
+                  [class.opacity-50]="command.disabled"
+                >
+                  @if (command.icon) {
+                    <span class="mr-2">{{ command.icon }}</span>
+                  }
+                  <div class="flex-1">
+                    <div class="font-medium">{{ command.label }}</div>
+                    @if (command.description) {
+                      <div class="text-xs text-gray-500">{{ command.description }}</div>
+                    }
+                  </div>
+                  @if (command.disabled) {
+                    <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded">Disabled</span>
+                  }
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
+        </sc-command-list>
+      </sc-command>
+    </ng-template>
+
+    <!-- Event Template -->
+    <ng-template #eventTemplate>
+      <sc-command (commandSelect)="onCommandSelect($event, 'event')">
+        <sc-command-input
+          [(ngModel)]="eventSearchQuery"
+          (search)="onSearchChange($event, 'event')"
+          placeholder="Search events..."
+        />
+        <sc-command-list class="max-h-96">
+          @for (group of groupedEventCommands(); track group.name) {
+            <sc-command-group [heading]="group.name">
+              @for (command of group.items; track command.id) {
+                <sc-command-item class="cursor-pointer" [value]="command.id">
+                  @if (command.icon) {
+                    <span class="mr-2">{{ command.icon }}</span>
+                  }
+                  <div class="flex-1">
+                    <div class="font-medium">{{ command.label }}</div>
+                    @if (command.description) {
+                      <div class="text-xs text-gray-500">{{ command.description }}</div>
+                    }
+                  </div>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
+        </sc-command-list>
+      </sc-command>
+    </ng-template>
   `,
 })
 export class CommandTriggerDemo {
+  @ViewChild('basicTemplate') basicTemplate!: TemplateRef<any>;
+  @ViewChild('apiTemplate') apiTemplate!: TemplateRef<any>;
+  @ViewChild('customTemplate') customTemplate!: TemplateRef<any>;
+  @ViewChild('eventTemplate') eventTemplate!: TemplateRef<any>;
+
+  private http = inject(HttpClient);
+
+  // Signals for search queries
+  basicSearchQuery = signal('');
+  apiSearchQuery = signal('');
+  customSearchQuery = signal('');
+  eventSearchQuery = signal('');
+
   lastEvent = '';
+
+  // HTTP Resource for API search
+  apiResource = httpResource(
+    () => {
+      const query = this.apiSearchQuery();
+      if (!query || query.length < 2) return undefined;
+
+      return {
+        url: `https://jsonplaceholder.typicode.com/posts?q=${encodeURIComponent(query)}`,
+        method: 'GET' as const,
+      };
+    },
+    {
+      parse: (response) => {
+        const data = response as any[];
+        return data.slice(0, 5).map(
+          (post): CommandItemModel => ({
+            id: `api-${post.id}`,
+            label: post.title.substring(0, 30) + '...',
+            description: post.body.substring(0, 60) + '...',
+            icon: '🔍',
+            category: 'Search Results',
+            action: () => this.showAlert(`API: ${post.title}`),
+          }),
+        );
+      },
+    },
+  );
 
   // Basic configuration
   basicConfig: CommandTriggerConfig = {
@@ -307,9 +581,127 @@ export class CommandTriggerDemo {
     ],
   };
 
-  onDialogOpened() {
-    this.lastEvent = 'Dialog opened';
-    console.log('Command dialog opened');
+  // Basic commands data
+  basicCommands: CommandItemModel[] = [
+    {
+      id: 'search',
+      label: 'Search',
+      description: 'Search for items',
+      icon: '🔍',
+      category: 'General',
+      action: () => this.showAlert('Search opened'),
+    },
+    {
+      id: 'settings',
+      label: 'Settings',
+      description: 'Open settings',
+      icon: '⚙️',
+      category: 'General',
+      action: () => this.showAlert('Settings opened'),
+    },
+    {
+      id: 'help',
+      label: 'Help',
+      description: 'Get help',
+      icon: '❓',
+      category: 'Support',
+      action: () => this.showAlert('Help opened'),
+    },
+  ];
+
+  // Computed properties for filtering
+  filteredBasicCommands = computed(() => {
+    const query = this.basicSearchQuery().toLowerCase();
+    return this.basicCommands.filter(
+      (cmd) =>
+        cmd.label.toLowerCase().includes(query) || cmd.description?.toLowerCase().includes(query),
+    );
+  });
+
+  filteredApiCommands = computed(() => {
+    return this.apiResource.hasValue() ? this.apiResource.value() : [];
+  });
+
+  filteredCustomCommands = computed(() => {
+    const query = this.customSearchQuery().toLowerCase();
+    return (
+      this.customConfig.staticCommands?.filter(
+        (cmd) =>
+          cmd.label.toLowerCase().includes(query) || cmd.description?.toLowerCase().includes(query),
+      ) || []
+    );
+  });
+
+  filteredEventCommands = computed(() => {
+    const query = this.eventSearchQuery().toLowerCase();
+    return (
+      this.eventConfig.staticCommands?.filter(
+        (cmd) =>
+          cmd.label.toLowerCase().includes(query) || cmd.description?.toLowerCase().includes(query),
+      ) || []
+    );
+  });
+
+  // Grouped commands
+  groupedBasicCommands = computed(() => {
+    const commands = this.filteredBasicCommands();
+    const groups = commands.reduce(
+      (acc, cmd) => {
+        if (!acc[cmd.category]) acc[cmd.category] = [];
+        acc[cmd.category].push(cmd);
+        return acc;
+      },
+      {} as Record<string, CommandItemModel[]>,
+    );
+
+    return Object.entries(groups).map(([name, items]) => ({ name, items }));
+  });
+
+  groupedApiCommands = computed(() => {
+    const commands = this.filteredApiCommands();
+    const groups = commands.reduce(
+      (acc, cmd) => {
+        if (!acc[cmd.category]) acc[cmd.category] = [];
+        acc[cmd.category].push(cmd);
+        return acc;
+      },
+      {} as Record<string, CommandItemModel[]>,
+    );
+
+    return Object.entries(groups).map(([name, items]) => ({ name, items }));
+  });
+
+  groupedCustomCommands = computed(() => {
+    const commands = this.filteredCustomCommands();
+    const groups = commands.reduce(
+      (acc, cmd) => {
+        if (!acc[cmd.category]) acc[cmd.category] = [];
+        acc[cmd.category].push(cmd);
+        return acc;
+      },
+      {} as Record<string, CommandItemModel[]>,
+    );
+
+    return Object.entries(groups).map(([name, items]) => ({ name, items }));
+  });
+
+  groupedEventCommands = computed(() => {
+    const commands = this.filteredEventCommands();
+    const groups = commands.reduce(
+      (acc, cmd) => {
+        if (!acc[cmd.category]) acc[cmd.category] = [];
+        acc[cmd.category].push(cmd);
+        return acc;
+      },
+      {} as Record<string, CommandItemModel[]>,
+    );
+
+    return Object.entries(groups).map(([name, items]) => ({ name, items }));
+  });
+
+  onDialogOpened(type: string) {
+    this.lastEvent = `${type} dialog opened`;
+    console.log(`${type} dialog opened`);
   }
 
   onDialogClosed(result: any) {
@@ -317,9 +709,59 @@ export class CommandTriggerDemo {
     console.log('Command dialog closed:', result);
   }
 
-  onCommandExecuted(command: CommandItemModel) {
+  onCommandExecuted(command: any) {
     this.lastEvent = `Command executed: ${command.label}`;
     console.log('Command executed:', command);
+  }
+
+  onSearchChange(query: string, type: string) {
+    switch (type) {
+      case 'basic':
+        this.basicSearchQuery.set(query);
+        break;
+      case 'api':
+        this.apiSearchQuery.set(query);
+        break;
+      case 'custom':
+        this.customSearchQuery.set(query);
+        break;
+      case 'event':
+        this.eventSearchQuery.set(query);
+        break;
+    }
+  }
+
+  onCommandSelect(commandId: string, type: string) {
+    console.log(`Command selected: ${commandId} from ${type}`);
+
+    // Find and execute command based on type
+    let command: CommandItemModel | undefined;
+
+    switch (type) {
+      case 'basic':
+        command = this.basicCommands.find((cmd) => cmd.id === commandId);
+        break;
+      case 'api':
+        command = this.filteredApiCommands().find((cmd) => cmd.id === commandId);
+        break;
+      case 'custom':
+        command = this.customConfig.staticCommands?.find((cmd) => cmd.id === commandId);
+        break;
+      case 'event':
+        command = this.eventConfig.staticCommands?.find((cmd) => cmd.id === commandId);
+        break;
+    }
+
+    if (command && !command.disabled) {
+      command.action();
+      this.onCommandExecuted(command);
+    }
+  }
+
+  retryApiSearch() {
+    const currentQuery = this.apiSearchQuery();
+    this.apiSearchQuery.set('');
+    setTimeout(() => this.apiSearchQuery.set(currentQuery), 0);
   }
 
   private showAlert(message: string) {
