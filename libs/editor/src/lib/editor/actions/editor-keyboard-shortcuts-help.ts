@@ -10,6 +10,7 @@ import {
 import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiInfoIcon } from '@semantic-icons/lucide-icons';
 
+import { ScKeyboardShortcuts } from '../services/keyboard-shortcuts.service';
 import { ScEditorKeyboardShortcutsHelpDialog } from './editor-keyboard-shortcuts-help-dialog';
 
 @Component({
@@ -38,11 +39,13 @@ export class ScEditorKeyboardShortcutsHelp {
   });
 
   private readonly dialog = inject(Dialog);
+  private readonly keyboardShortcuts = inject(ScKeyboardShortcuts);
 
   protected openHelp() {
     this.dialog.open(ScEditorKeyboardShortcutsHelpDialog, {
       width: '600px',
       maxWidth: '90vw',
+      data: this.keyboardShortcuts.getShortcuts(),
     });
   }
 }

@@ -1,6 +1,7 @@
+import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScKeyboardShortcuts } from '../services/keyboard-shortcuts.service';
+import { ShortcutMapping } from '../services/keyboard-shortcuts.service';
 
 @Component({
   selector: 'sc-editor-keyboard-shortcuts-help-dialog',
@@ -27,10 +28,10 @@ import { ScKeyboardShortcuts } from '../services/keyboard-shortcuts.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorKeyboardShortcutsHelpDialog {
-  private readonly keyboardShortcuts = inject(ScKeyboardShortcuts);
+  private readonly data = inject<ShortcutMapping[]>(DIALOG_DATA);
 
   get shortcuts() {
-    return this.keyboardShortcuts.getShortcuts();
+    return this.data || [];
   }
 
   formatShortcut(shortcut: any): string {
