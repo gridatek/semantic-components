@@ -4,8 +4,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { ScSeparator } from '@semantic-components/ui';
 import { ScTooltip } from '@semantic-components/ui';
 
+import {
+  AttributeData,
+  ScAddCellAttributeDialog,
+} from '../actions/table/add-cell-attribute-dialog';
 import { ScEditor } from '../editor';
-import { AttributeData, ScAddCellAttributeDialog } from '../toolbar/add-cell-attribute-dialog';
 import { ScExtensions } from './extensions';
 
 @Component({

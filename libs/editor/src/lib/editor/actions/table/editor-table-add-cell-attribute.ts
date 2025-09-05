@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiSettingsIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { AttributeData, ScAddCellAttributeDialog } from '../../toolbar/add-cell-attribute-dialog';
+import { AttributeData, ScAddCellAttributeDialog } from './add-cell-attribute-dialog';
 
 @Component({
   selector: 'sc-editor-table-add-cell-attribute',
