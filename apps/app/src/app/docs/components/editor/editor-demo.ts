@@ -17,6 +17,7 @@ import {
   ScEditorImport,
   ScEditorItalic,
   ScEditorOrderedList,
+  ScEditorParagraph,
   ScEditorRedo,
   ScEditorStrike,
   ScEditorTextAlignCenter,
@@ -27,6 +28,13 @@ import {
   ScEditorUndo,
   ScEditorUnsetLink,
   ScEditorWordCount,
+  ScExtensionColor,
+  ScExtensionFontFamily,
+  ScExtensionImage,
+  ScExtensionLink,
+  ScExtensionTable,
+  ScExtensionTextStyle,
+  ScExtensionYoutube,
 } from '@semantic-components/editor';
 import { ScSeparator } from '@semantic-components/ui';
 
@@ -44,6 +52,7 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorBlockquote,
     ScEditorBulletList,
     ScEditorOrderedList,
+    ScEditorParagraph,
     ScSeparator,
     ScEditorGroup,
     ScEditorStrike,
@@ -60,36 +69,78 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorExport,
     ScEditorHelp,
     ScEditorImport,
+    ScExtensionColor,
+    ScExtensionFontFamily,
+    ScExtensionImage,
+    ScExtensionLink,
+    ScExtensionTable,
+    ScExtensionTextStyle,
+    ScExtensionYoutube,
   ],
   template: `
     <form [formGroup]="editorForm">
       <sc-editor formControlName="content">
         <sc-editor-toolbar>
           <sc-editor-group>
+            <!-- History Actions -->
             <sc-editor-undo />
             <sc-editor-redo />
             <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Text Formatting -->
             <sc-editor-bold />
             <sc-editor-italic />
             <sc-editor-underline />
+            <sc-editor-strike />
             <sc-editor-highlight />
-            <sc-editor-unset-link />
             <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Structure -->
+            <sc-editor-paragraph />
+            <sc-editor-blockquote />
+            <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Lists -->
+            <sc-editor-bullet-list />
+            <sc-editor-ordered-list />
+            <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Text Alignment -->
             <sc-editor-text-align-left />
             <sc-editor-text-align-center />
             <sc-editor-text-align-right />
             <sc-separator class="h-5" orientation="vertical" />
-            <sc-editor-bullet-list />
-            <sc-editor-ordered-list />
-            <sc-editor-blockquote />
-            <sc-separator class="h-5" orientation="vertical" />
-            <sc-editor-strike />
-            <sc-editor-horizontal-rule />
+
+            <!-- Code -->
             <sc-editor-code />
             <sc-editor-code-block />
+            <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Media & Links -->
+            <sc-extension-image />
+            <sc-extension-youtube />
+            <sc-extension-link />
+            <sc-editor-unset-link />
+            <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Tables -->
+            <sc-extension-table />
+            <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Styling -->
+            <sc-extension-text-style />
+            <sc-extension-color />
+            <sc-extension-font-family />
+            <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Other Elements -->
+            <sc-editor-horizontal-rule />
+            <sc-separator class="h-5" orientation="vertical" />
+
+            <!-- Import/Export & Help -->
+            <sc-editor-import />
             <sc-editor-export />
             <sc-editor-help />
-            <sc-editor-import />
           </sc-editor-group>
         </sc-editor-toolbar>
         <sc-editor-content />
@@ -105,16 +156,58 @@ import { ScSeparator } from '@semantic-components/ui';
 export class EditorDemo {
   protected readonly editorForm = new FormGroup({
     content: new FormControl(`
-      <h1>Garlic bread with cheese: What the science tells us</h1>
-  <p>
-    For years parents have espoused the health benefits of eating garlic bread with cheese to their
-    children, with the food earning such an iconic status in our culture that kids will often dress
-    up as warm, cheesy loaf for Halloween.
-  </p>
-  <p>
-    But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
-    springing up around the country.
-  </p>
-  `),
+      <h1>Comprehensive Editor Demo</h1>
+      <p>
+        This demo showcases <strong>all available editor features</strong> including <em>italic text</em>, 
+        <u>underline</u>, <s>strikethrough</s>, and <mark>highlighted text</mark>.
+      </p>
+      
+      <h2>Text Formatting Examples</h2>
+      <p>
+        You can format text with <code>inline code</code> or create code blocks:
+      </p>
+      
+      <pre><code>function example() {
+  console.log('Hello World!');
+}</code></pre>
+      
+      <h3>Lists and Structure</h3>
+      <ul>
+        <li>Bullet point one</li>
+        <li>Bullet point two</li>
+      </ul>
+      
+      <ol>
+        <li>Numbered list item</li>
+        <li>Another numbered item</li>
+      </ol>
+      
+      <blockquote>
+        <p>This is a blockquote to demonstrate quote formatting.</p>
+      </blockquote>
+      
+      <h4>Tables</h4>
+      <table>
+        <tr>
+          <th>Header 1</th>
+          <th>Header 2</th>
+        </tr>
+        <tr>
+          <td>Cell 1</td>
+          <td>Cell 2</td>
+        </tr>
+      </table>
+      
+      <p style="text-align: center">This text is center-aligned</p>
+      <p style="text-align: right">This text is right-aligned</p>
+      
+      <hr>
+      
+      <h5>Media Support</h5>
+      <p>The editor supports images and YouTube videos (use the toolbar buttons to add them).</p>
+      
+      <h6>Getting Started</h6>
+      <p>Use the toolbar above to test all the available formatting options!</p>
+    `),
   });
 }
