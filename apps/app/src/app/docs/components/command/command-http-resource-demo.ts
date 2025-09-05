@@ -1,9 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, httpResource } from '@angular/common/http';
-import { Component, ElementRef, ViewChild, computed, effect, inject, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  TemplateRef,
+  ViewChild,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
+  CommandDialog,
   ScCommand,
   ScCommandEmpty,
   ScCommandGroup,
@@ -38,39 +48,145 @@ export interface CommandItem {
   template: `
     <div class="space-y-6">
       <div class="prose prose-sm max-w-none">
-        <h3>Command with HttpResource</h3>
+        <h3>Command with HttpResource in Dialog</h3>
         <p class="text-muted-foreground">
-          Demonstrates command component using Angular's httpResource for dynamic search results.
-          Type a search query to see API results combined with static commands.
+          Interactive command palette in a dialog using httpResource for dynamic API search results
+          combined with static commands. Press Cmd/Ctrl+K or click the button to open.
         </p>
       </div>
 
-      <sc-command class="rounded-lg border shadow-md min-w-[450px]">
+      <!-- Demo Trigger Section -->
+      <div
+        class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8"
+      >
+        <div class="text-center space-y-4">
+          <div class="text-6xl mb-4">⌘</div>
+          <h3 class="text-xl font-semibold text-gray-900">HttpResource Command Palette</h3>
+          <p class="text-gray-600 max-w-md mx-auto">
+            Click the button below or press
+            <kbd class="bg-white px-2 py-1 rounded text-sm border">⌘K</kbd>
+            to test httpResource integration with dialog
+          </p>
+
+          <button
+            class="inline-flex items-center gap-3 bg-white border border-gray-300 rounded-lg px-6 py-3 hover:bg-gray-50 transition-colors shadow-sm"
+            (click)="openDialog()"
+          >
+            <svg
+              class="w-5 h-5 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <span class="font-medium">Open HttpResource Command</span>
+            <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-mono">⌘K</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-green-50 rounded-lg p-6">
+          <h4 class="font-medium text-green-900 mb-3">🚀 HttpResource Features</h4>
+          <ul class="space-y-2 text-sm text-green-800">
+            <li class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+              Real-time API search with debouncing
+            </li>
+            <li class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+              Automatic loading and error states
+            </li>
+            <li class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+              Combined static + dynamic results
+            </li>
+            <li class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+              Signal-based reactive architecture
+            </li>
+            <li class="flex items-center gap-2">
+              <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+              Computed properties for filtering
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-blue-50 rounded-lg p-6">
+          <h4 class="font-medium text-blue-900 mb-3">⌨️ Testing Instructions</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between items-center">
+              <span class="text-blue-800">Open Dialog</span>
+              <kbd class="bg-white px-2 py-1 rounded text-xs border">⌘K</kbd>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-blue-800">Type 2+ chars</span>
+              <span class="text-blue-600 text-xs">Triggers API search</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-blue-800">Navigate Commands</span>
+              <kbd class="bg-white px-2 py-1 rounded text-xs border">↑ ↓</kbd>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-blue-800">Select Command</span>
+              <kbd class="bg-white px-2 py-1 rounded text-xs border">Enter</kbd>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Command Dialog Template -->
+    <ng-template #commandTemplate>
+      <sc-command (commandSelect)="onCommandSelect($event)">
+        <!-- Close Button -->
+        <button
+          class="absolute right-4 top-4 rounded-md p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors z-10"
+          (click)="commandDialogService.closeAll()"
+          type="button"
+          title="Close (Esc)"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
         <sc-command-input
-          #searchInput
           [(ngModel)]="searchQuery"
-          (ngModelChange)="onSearchChange($event)"
-          placeholder="Type to search..."
+          (search)="onSearchChange($event)"
+          placeholder="Search commands... (type 2+ chars for API results)"
         />
 
-        <sc-command-list class="max-h-80">
+        <sc-command-list class="max-h-96">
           <!-- Loading State -->
           @if (apiResource.isLoading()) {
-            <div class="flex items-center justify-center py-6">
-              <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
-              <span class="ml-2 text-gray-600 text-sm">Searching...</span>
+            <div class="flex items-center justify-center py-8">
+              <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+              <span class="ml-2 text-gray-600">Loading API results...</span>
             </div>
           }
 
           <!-- Error State -->
           @if (apiResource.error()) {
             <div class="p-4 text-center text-red-600">
-              <p class="text-sm">Failed to load results</p>
+              <p class="mb-2">Failed to load API results</p>
               <button
-                class="mt-2 px-3 py-1 text-xs bg-red-100 rounded hover:bg-red-200"
+                class="px-3 py-1 text-sm bg-red-100 rounded hover:bg-red-200"
                 (click)="retrySearch()"
               >
-                Retry
+                Retry API Search
               </button>
             </div>
           }
@@ -78,11 +194,15 @@ export interface CommandItem {
           <!-- No Results -->
           @if (groupedCommands().length === 0 && !apiResource.isLoading()) {
             <sc-command-empty>
-              <div class="text-center py-6">
-                <div class="text-4xl mb-2">🔍</div>
-                <div class="text-sm text-gray-500">No commands found</div>
-                @if (searchQuery().length > 0) {
-                  <div class="text-xs text-gray-400 mt-1">Try searching for something else</div>
+              <div class="text-center py-8">
+                <div class="text-5xl mb-4">🔍</div>
+                <div class="text-lg font-medium text-gray-900 mb-2">No commands found</div>
+                @if (searchQuery().length === 0) {
+                  <div class="text-sm text-gray-500">Start typing to search...</div>
+                } @else if (searchQuery().length < 2) {
+                  <div class="text-sm text-gray-500">Type 2+ characters for API search</div>
+                } @else {
+                  <div class="text-sm text-gray-500">Try a different search term</div>
                 }
               </div>
             </sc-command-empty>
@@ -92,20 +212,31 @@ export interface CommandItem {
           @for (group of groupedCommands(); track group.name) {
             <sc-command-group [heading]="group.name">
               @for (command of group.items; track command.id) {
-                <sc-command-item
-                  class="cursor-pointer"
-                  [value]="command.id"
-                  (click)="executeCommand(command)"
-                >
+                <sc-command-item class="cursor-pointer group relative" [value]="command.id">
                   @if (command.icon) {
-                    <span class="mr-2">{{ command.icon }}</span>
+                    <span
+                      class="mr-3 text-lg group-hover:scale-110 transition-transform duration-200"
+                    >
+                      {{ command.icon }}
+                    </span>
                   }
+
                   <div class="flex-1 min-w-0">
-                    <div class="font-medium">{{ command.label }}</div>
+                    <div
+                      class="font-medium text-gray-900 group-hover:text-blue-700 transition-colors"
+                    >
+                      {{ command.label }}
+                    </div>
                     @if (command.description) {
                       <div class="text-xs text-gray-500 mt-0.5">{{ command.description }}</div>
                     }
                   </div>
+
+                  @if (command.id.startsWith('api-')) {
+                    <span class="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded ml-2">
+                      API
+                    </span>
+                  }
                 </sc-command-item>
               }
             </sc-command-group>
@@ -115,21 +246,7 @@ export interface CommandItem {
           }
         </sc-command-list>
       </sc-command>
-
-      <!-- Demo Info -->
-      <div class="bg-blue-50 rounded-lg p-4">
-        <div class="text-sm">
-          <div class="font-medium text-blue-900 mb-2">HttpResource Demo</div>
-          <ul class="space-y-1 text-blue-800">
-            <li>• Static commands are always shown</li>
-            <li>• Type 2+ characters to trigger API search</li>
-            <li>• API results are combined with static commands</li>
-            <li>• Loading and error states are handled automatically</li>
-            <li>• Uses JSONPlaceholder API for demonstration</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    </ng-template>
   `,
   styles: [
     `
@@ -138,9 +255,10 @@ export interface CommandItem {
   ],
 })
 export class CommandHttpResourceDemo {
-  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
 
   private http = inject(HttpClient);
+  commandDialogService = inject(CommandDialog);
 
   // Signals for reactive state
   searchQuery = signal('');
@@ -232,16 +350,54 @@ export class CommandHttpResourceDemo {
   });
 
   constructor() {
-    // Focus input on component init
-    effect(() => {
-      setTimeout(() => {
-        this.searchInput?.nativeElement?.focus();
-      }, 0);
+    // Global keyboard shortcut for dialog
+    if (typeof window !== 'undefined') {
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          this.openDialog();
+        }
+      });
+    }
+  }
+
+  openDialog() {
+    this.searchQuery.set('');
+
+    const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate, {
+      title: 'HttpResource Command Palette',
+      description: 'Search commands with real-time API integration',
+      width: '700px',
+      height: '550px',
+      disableClose: false,
+      hasBackdrop: true,
+      backdropClass: ['backdrop-blur-sm', 'bg-black/20'],
+    });
+
+    dialogRef.closed.subscribe((result) => {
+      console.log('HttpResource command dialog closed:', result);
     });
   }
 
   onSearchChange(query: string) {
     this.searchQuery.set(query);
+  }
+
+  onCommandSelect(commandId: string) {
+    console.log('Command executed:', commandId);
+
+    // Find and execute the command
+    const allCommands = this.filteredCommands();
+    const command = allCommands.find((cmd) => cmd.id === commandId);
+
+    if (command) {
+      command.action();
+    }
+
+    // Auto-close dialog after command execution
+    setTimeout(() => {
+      this.commandDialogService.closeAll();
+    }, 100);
   }
 
   executeCommand(command: CommandItem) {
@@ -257,13 +413,17 @@ export class CommandHttpResourceDemo {
   private showNotification(message: string) {
     const toast = document.createElement('div');
     toast.className =
-      'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg z-50';
+      'fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-md shadow-lg z-50 transition-opacity duration-300';
     toast.textContent = message;
 
     document.body.appendChild(toast);
 
+    // Remove after 3 seconds
     setTimeout(() => {
-      document.body.removeChild(toast);
-    }, 3000);
+      toast.style.opacity = '0';
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 300);
+    }, 2700);
   }
 }
