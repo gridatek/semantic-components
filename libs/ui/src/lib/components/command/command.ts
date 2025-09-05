@@ -59,6 +59,7 @@ export class ScCommand implements AfterContentInit, OnDestroy {
 
   readonly loading = input<boolean>(false);
   readonly empty = input<boolean>(false);
+  readonly error = input<boolean>(false);
   readonly query = signal<string>('');
   readonly filter = input<(value: string, search: string) => boolean>();
 

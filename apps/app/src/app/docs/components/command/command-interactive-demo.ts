@@ -4,7 +4,6 @@ import { Component, OnInit, TemplateRef, ViewChild, inject } from '@angular/core
 import {
   CommandDialog,
   ScCommand,
-  ScCommandEmpty,
   ScCommandGroup,
   ScCommandInput,
   ScCommandItem,
@@ -23,7 +22,6 @@ import { CommandCategory, MockCommandService } from './mock-command.service';
     ScCommand,
     ScCommandInput,
     ScCommandList,
-    ScCommandEmpty,
     ScCommandGroup,
     ScCommandItem,
     ScCommandSeparator,
@@ -188,69 +186,69 @@ import { CommandCategory, MockCommandService } from './mock-command.service';
         <sc-command-input [placeholder]="searchPlaceholder" />
 
         <sc-command-list class="max-h-96">
-          <sc-command-empty>
-            <div class="flex flex-col items-center text-center py-12">
-              <div class="text-5xl mb-4">🔍</div>
-              <div class="text-lg font-medium text-gray-900 mb-2">No commands found</div>
-              <div class="text-sm text-gray-500 mb-4">
-                Try searching for "file", "settings", "help", or "theme"
-              </div>
-              <div class="text-xs text-gray-400 bg-gray-50 px-4 py-2 rounded-lg max-w-sm">
-                💡
-                <strong>Tip:</strong>
-                Use fuzzy search for partial matches like "newf" → "New File"
-              </div>
-            </div>
-          </sc-command-empty>
-
           @if (commandCategories$ | async; as categories) {
-            @for (category of categories; track category.id) {
-              <sc-command-group [heading]="category.label">
-                @for (command of category.items; track command.id) {
-                  <sc-command-item
-                    class="cursor-pointer group relative"
-                    [value]="command.id"
-                    [disabled]="command.disabled"
-                  >
-                    @if (command.icon) {
-                      <span
-                        class="mr-3 text-lg group-hover:scale-110 transition-transform duration-200"
-                      >
-                        {{ command.icon }}
-                      </span>
-                    }
-
-                    <div class="flex-1 min-w-0">
-                      <div
-                        class="font-medium text-gray-900 group-hover:text-blue-700 transition-colors"
-                      >
-                        {{ command.label }}
-                      </div>
-                      @if (command.description) {
-                        <div class="text-xs text-gray-500 mt-0.5">{{ command.description }}</div>
+            @if (categories.length === 0 && showEmptyState) {
+              <div class="flex flex-col items-center text-center py-12">
+                <div class="text-5xl mb-4">🔍</div>
+                <div class="text-lg font-medium text-gray-900 mb-2">No commands found</div>
+                <div class="text-sm text-gray-500 mb-4">
+                  Try searching for "file", "settings", "help", or "theme"
+                </div>
+                <div class="text-xs text-gray-400 bg-gray-50 px-4 py-2 rounded-lg max-w-sm">
+                  💡
+                  <strong>Tip:</strong>
+                  Use fuzzy search for partial matches like "newf" → "New File"
+                </div>
+              </div>
+            } @else {
+              @for (category of categories; track category.id) {
+                <sc-command-group [heading]="category.label">
+                  @for (command of category.items; track command.id) {
+                    <sc-command-item
+                      class="cursor-pointer group relative"
+                      [value]="command.id"
+                      [disabled]="command.disabled"
+                    >
+                      @if (command.icon) {
+                        <span
+                          class="mr-3 text-lg group-hover:scale-110 transition-transform duration-200"
+                        >
+                          {{ command.icon }}
+                        </span>
                       }
-                    </div>
 
-                    @if (command.shortcut) {
-                      <span
-                        class="opacity-50 group-hover:opacity-100 transition-opacity bg-gray-100 group-hover:bg-blue-100"
-                        sc-command-shortcut
-                      >
-                        {{ command.shortcut }}
-                      </span>
-                    }
+                      <div class="flex-1 min-w-0">
+                        <div
+                          class="font-medium text-gray-900 group-hover:text-blue-700 transition-colors"
+                        >
+                          {{ command.label }}
+                        </div>
+                        @if (command.description) {
+                          <div class="text-xs text-gray-500 mt-0.5">{{ command.description }}</div>
+                        }
+                      </div>
 
-                    @if (command.disabled) {
-                      <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded ml-2">
-                        Disabled
-                      </span>
-                    }
-                  </sc-command-item>
+                      @if (command.shortcut) {
+                        <span
+                          class="opacity-50 group-hover:opacity-100 transition-opacity bg-gray-100 group-hover:bg-blue-100"
+                          sc-command-shortcut
+                        >
+                          {{ command.shortcut }}
+                        </span>
+                      }
+
+                      @if (command.disabled) {
+                        <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded ml-2">
+                          Disabled
+                        </span>
+                      }
+                    </sc-command-item>
+                  }
+                </sc-command-group>
+
+                @if (!$last) {
+                  <sc-command-separator />
                 }
-              </sc-command-group>
-
-              @if (!$last) {
-                <sc-command-separator />
               }
             }
           }
@@ -263,6 +261,7 @@ export class CommandInteractiveDemo implements OnInit {
   commandDialogService = inject(CommandDialog);
   commandCategories$!: Observable<CommandCategory[]>;
   searchPlaceholder = 'Search all commands...';
+  showEmptyState = false;
 
   @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
 

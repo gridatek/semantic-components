@@ -314,6 +314,24 @@ export class MockCommandService {
   }
 
   /**
+   * Simulate loading state with delay
+   */
+  getCommandsWithLoading(): Observable<CommandCategory[]> {
+    return this.getCommandsByCategory().pipe(delay(2000));
+  }
+
+  /**
+   * Simulate error state
+   */
+  getCommandsWithError(): Observable<CommandCategory[]> {
+    return new Observable((subscriber) => {
+      setTimeout(() => {
+        subscriber.error(new Error('Failed to load commands'));
+      }, 1000);
+    });
+  }
+
+  /**
    * Get suggested commands based on context (mock data)
    */
   getSuggestedCommands(): Observable<CommandItem[]> {
