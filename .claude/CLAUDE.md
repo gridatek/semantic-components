@@ -51,6 +51,7 @@ This is an **Nx monorepo** with the following structure:
   - Uses Tailwind CSS for styling
 - **`apps/breadcrumb-showcase/`** - Dedicated showcase for breadcrumb components
 - **`apps/image-cropper-showcase/`** - Dedicated showcase for image cropper components
+- **`apps/cms/`** - Content Management System application
 
 - **`libs/`** - Component libraries and utilities:
   - **`ui/`** - Main semantic components library (prefix: `sc`)
@@ -122,3 +123,33 @@ Components prioritize semantic HTML, accessibility, and modular design:
 - Prettier formatting with import sorting
 - Husky pre-commit hooks with lint-staged
 - Commitlint for conventional commit messages
+
+## Important Instructions
+
+- Do what has been asked; nothing more, nothing less
+- NEVER create files unless they're absolutely necessary for achieving your goal
+- ALWAYS prefer editing an existing file to creating a new one
+- NEVER proactively create documentation files (\*.md) or README files. Only create documentation files if explicitly requested by the User
+
+## Additional Development Notes
+
+### Component Generation Configuration
+
+The nx.json file contains specific generator defaults:
+
+- Components are generated with inline styles and templates (`inlineStyle: true`, `inlineTemplate: true`)
+- Tests are skipped by default (`skipTests: true`)
+- Components use `ViewEncapsulation.None` and `OnPush` change detection
+- Components are placed in `components/` directory with flat structure
+- Default project for components is `ui` library with `sc` prefix
+
+### Build Process
+
+Libraries use a two-step build process:
+
+1. `@nx/angular:package` - Creates Angular Package Format output
+2. `@semantic-icons/nx-generators:copy-license` - Copies license files to distribution
+
+### Release Process
+
+The project uses independent versioning for libraries (`projectsRelationship: "independent"`) with a pre-version command that builds all projects before release.
