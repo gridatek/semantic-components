@@ -15,7 +15,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     'data-slot': 'command-empty',
   },
   styles: ``,
@@ -23,7 +23,11 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandEmpty {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('block py-6 text-center text-sm', this.class()));
+  protected readonly class = computed(() =>
+    cn('block py-6 text-center text-sm', this.classInput()),
+  );
 }

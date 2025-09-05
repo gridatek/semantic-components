@@ -15,7 +15,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     'data-slot': 'command-separator',
   },
   styles: ``,
@@ -23,7 +23,9 @@ import { cn } from '@semantic-components/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandSeparator {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('block bg-border h-px', this.class()));
+  protected readonly class = computed(() => cn('block bg-border h-px', this.classInput()));
 }

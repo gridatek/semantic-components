@@ -20,7 +20,7 @@ import { ScCommandGroupHeading } from './command-group-heading';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     '[attr.role]': '"group"',
     '[attr.aria-labelledby]': 'heading() ? "command-group-heading" : null',
     'data-slot': 'command-group',
@@ -30,9 +30,13 @@ import { ScCommandGroupHeading } from './command-group-heading';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandGroup {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('text-foreground overflow-hidden p-1', this.class()));
+  protected readonly class = computed(() =>
+    cn('text-foreground overflow-hidden p-1', this.classInput()),
+  );
 
   heading = input('');
 }

@@ -15,16 +15,18 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandGroupHeading {
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() =>
-    cn('block px-2 font-medium text-muted-foreground py-1.5 text-xs', this.class()),
+  protected readonly class = computed(() =>
+    cn('block px-2 font-medium text-muted-foreground py-1.5 text-xs', this.classInput()),
   );
 }

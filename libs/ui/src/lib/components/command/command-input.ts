@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Optional,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   model,
   output,
@@ -11,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
+
+import { ScCommand } from './command';
 
 @Component({
   selector: 'sc-command-input',
@@ -36,6 +40,8 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandInput {
+  private command = inject(ScCommand, { optional: true });
+
   class = input<string>('');
 
   classes = computed(() => cn('flex h-9 items-center gap-2 border-b px-3', this.class()));
@@ -49,10 +55,22 @@ export class ScCommandInput {
 
   onInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.search.emit(target.value);
+    const searchValue = target.value;
+
+    // Update the parent command component if available
+    if (this.command) {
+      this.command.updateQuery(searchValue);
+    }
+
+    this.search.emit(searchValue);
   }
 
   onKeydown(event: KeyboardEvent) {
+    // Let the parent handle navigation keys
+    if (['ArrowDown', 'ArrowUp', 'Enter', 'Escape'].includes(event.key) && this.command) {
+      // Don't emit keydown for navigation keys, let parent handle
+      return;
+    }
     this.keydown.emit(event);
   }
 }
