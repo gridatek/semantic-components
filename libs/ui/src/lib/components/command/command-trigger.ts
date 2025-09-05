@@ -23,7 +23,7 @@ import { ScCommandItem } from './command-item';
 import { ScCommandList } from './command-list';
 import { ScCommandSeparator } from './command-separator';
 
-export interface CommandItem {
+export interface CommandItemModel {
   id: string;
   label: string;
   description?: string;
@@ -40,7 +40,7 @@ export interface CommandTriggerConfig {
   width?: string;
   height?: string;
   apiUrl?: string;
-  staticCommands?: CommandItem[];
+  staticCommands?: CommandItemModel[];
   enableGlobalShortcut?: boolean;
   shortcutKey?: string; // The key for the shortcut (default: 'k')
   requiresShift?: boolean; // Whether Shift key is required (default: false)
@@ -224,7 +224,7 @@ export class ScCommandTrigger {
   triggerClass = input<string>('');
 
   // Outputs
-  commandExecuted = output<CommandItem>();
+  commandExecuted = output<CommandItemModel>();
   dialogOpened = output<void>();
   dialogClosed = output<any>();
 
@@ -250,7 +250,7 @@ export class ScCommandTrigger {
   });
 
   // Default static commands
-  private defaultCommands: CommandItem[] = [
+  private defaultCommands: CommandItemModel[] = [
     {
       id: 'search',
       label: 'Search',
@@ -286,7 +286,7 @@ export class ScCommandTrigger {
       parse: (response) => {
         const data = response as any[];
         return data.slice(0, 5).map(
-          (item, index): CommandItem => ({
+          (item, index): CommandItemModel => ({
             id: `api-${item.id || index}`,
             label: item.title || item.name || item.label || `Result ${index + 1}`,
             description: item.description || item.body?.substring(0, 60) + '...' || '',
@@ -323,7 +323,7 @@ export class ScCommandTrigger {
         acc[cmd.category].push(cmd);
         return acc;
       },
-      {} as Record<string, CommandItem[]>,
+      {} as Record<string, CommandItemModel[]>,
     );
 
     return Object.entries(groups).map(([name, items]) => ({ name, items }));

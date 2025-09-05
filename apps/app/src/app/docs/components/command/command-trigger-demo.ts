@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { CommandItem, CommandTriggerConfig, ScCommandTrigger } from '@semantic-components/ui';
+import { CommandItemModel, CommandTriggerConfig, ScCommandTrigger } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-command-trigger-demo',
@@ -317,7 +317,7 @@ export class CommandTriggerDemo {
     console.log('Command dialog closed:', result);
   }
 
-  onCommandExecuted(command: CommandItem) {
+  onCommandExecuted(command: CommandItemModel) {
     this.lastEvent = `Command executed: ${command.label}`;
     console.log('Command executed:', command);
   }
