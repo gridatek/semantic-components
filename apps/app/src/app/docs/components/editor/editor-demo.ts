@@ -12,11 +12,11 @@ import {
   ScEditorExport,
   ScEditorFooter,
   ScEditorGroup,
-  ScEditorHelp,
   ScEditorHighlight,
   ScEditorHorizontalRule,
   ScEditorImport,
   ScEditorItalic,
+  ScEditorKeyboardShortcutsHelp,
   ScEditorOrderedList,
   ScEditorParagraph,
   ScEditorRedo,
@@ -86,7 +86,6 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorCodeBlock,
     ScEditorWordCount,
     ScEditorExport,
-    ScEditorHelp,
     ScEditorImport,
     ScExtensionColor,
     ScExtensionFontFamily,
@@ -112,6 +111,7 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorTableFix,
     ScExtensionTextStyle,
     ScExtensionYoutube,
+    ScEditorKeyboardShortcutsHelp,
   ],
   template: `
     <form [formGroup]="editorForm">
@@ -198,7 +198,7 @@ import { ScSeparator } from '@semantic-components/ui';
             <!-- Import/Export & Help -->
             <sc-editor-import />
             <sc-editor-export />
-            <sc-editor-help />
+            <sc-editor-keyboard-shortcuts-help />
           </sc-editor-group>
         </sc-editor-toolbar>
         <sc-editor-content />
