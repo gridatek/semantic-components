@@ -1,7 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 
 import {
-  CommandDialogService,
+  CommandDialog,
   ScButton,
   ScCommand,
   ScCommandEmpty,
@@ -142,7 +142,7 @@ import {
 export class CommandDialogDemo {
   @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
 
-  constructor(private commandDialogService: CommandDialogService) {}
+  constructor(private commandDialogService: CommandDialog) {}
 
   openDialog() {
     const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate, {
