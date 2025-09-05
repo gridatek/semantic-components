@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Optional,
   ViewEncapsulation,
   computed,
   inject,
@@ -32,7 +31,7 @@ import { ScCommand } from './command';
     />
   `,
   host: {
-    '[class]': 'classes()',
+    '[class]': 'class()',
     'data-slot': 'command-input-wrapper',
   },
   styles: ``,
@@ -42,9 +41,13 @@ import { ScCommand } from './command';
 export class ScCommandInput {
   private command = inject(ScCommand, { optional: true });
 
-  class = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
-  classes = computed(() => cn('flex h-9 items-center gap-2 border-b px-3', this.class()));
+  protected readonly class = computed(() =>
+    cn('flex h-9 items-center gap-2 border-b px-3', this.classInput()),
+  );
 
   placeholder = input('');
 
