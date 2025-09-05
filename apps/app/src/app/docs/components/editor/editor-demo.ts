@@ -21,6 +21,12 @@ import {
   ScEditorParagraph,
   ScEditorRedo,
   ScEditorStrike,
+  ScEditorTableAddColumn,
+  ScEditorTableAddRow,
+  ScEditorTableDelete,
+  ScEditorTableInsert,
+  ScEditorTableRemoveColumn,
+  ScEditorTableRemoveRow,
   ScEditorTextAlignCenter,
   ScEditorTextAlignLeft,
   ScEditorTextAlignRight,
@@ -33,7 +39,6 @@ import {
   ScExtensionFontFamily,
   ScExtensionImage,
   ScExtensionLink,
-  ScExtensionTable,
   ScExtensionTextStyle,
   ScExtensionYoutube,
 } from '@semantic-components/editor';
@@ -75,7 +80,12 @@ import { ScSeparator } from '@semantic-components/ui';
     ScExtensionFontFamily,
     ScExtensionImage,
     ScExtensionLink,
-    ScExtensionTable,
+    ScEditorTableInsert,
+    ScEditorTableDelete,
+    ScEditorTableAddColumn,
+    ScEditorTableAddRow,
+    ScEditorTableRemoveColumn,
+    ScEditorTableRemoveRow,
     ScExtensionTextStyle,
     ScExtensionYoutube,
   ],
@@ -126,7 +136,13 @@ import { ScSeparator } from '@semantic-components/ui';
             <sc-separator class="h-5" orientation="vertical" />
 
             <!-- Tables -->
-            <sc-extension-table />
+            <sc-editor-table-insert />
+            <sc-editor-table-delete />
+            <sc-separator class="h-5" orientation="vertical" />
+            <sc-editor-table-add-column />
+            <sc-editor-table-add-row />
+            <sc-editor-table-remove-column />
+            <sc-editor-table-remove-row />
             <sc-separator class="h-5" orientation="vertical" />
 
             <!-- Styling -->
@@ -165,34 +181,34 @@ export class EditorDemo {
     content: new FormControl(`
       <h1>Comprehensive Editor Demo</h1>
       <p>
-        This demo showcases <strong>all available editor features</strong> including <em>italic text</em>, 
+        This demo showcases <strong>all available editor features</strong> including <em>italic text</em>,
         <u>underline</u>, <s>strikethrough</s>, and <mark>highlighted text</mark>.
       </p>
-      
+
       <h2>Text Formatting Examples</h2>
       <p>
         You can format text with <code>inline code</code> or create code blocks:
       </p>
-      
+
       <pre><code>function example() {
   console.log('Hello World!');
 }</code></pre>
-      
+
       <h3>Lists and Structure</h3>
       <ul>
         <li>Bullet point one</li>
         <li>Bullet point two</li>
       </ul>
-      
+
       <ol>
         <li>Numbered list item</li>
         <li>Another numbered item</li>
       </ol>
-      
+
       <blockquote>
         <p>This is a blockquote to demonstrate quote formatting.</p>
       </blockquote>
-      
+
       <h4>Tables</h4>
       <table>
         <tr>
@@ -204,15 +220,15 @@ export class EditorDemo {
           <td>Cell 2</td>
         </tr>
       </table>
-      
+
       <p style="text-align: center">This text is center-aligned</p>
       <p style="text-align: right">This text is right-aligned</p>
-      
+
       <hr>
-      
+
       <h5>Media Support</h5>
       <p>The editor supports images and YouTube videos (use the toolbar buttons to add them).</p>
-      
+
       <h6>Getting Started</h6>
       <p>Use the toolbar above to test all the available formatting options!</p>
     `),
