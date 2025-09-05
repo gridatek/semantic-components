@@ -21,6 +21,7 @@ export * from './actions/editor-text-align-right';
 export * from './actions/editor-underline';
 export * from './actions/editor-undo';
 export * from './actions/editor-unset-link';
+export * from './editor-footer';
 export * from './editor-group';
 export * from './editor-toolbar';
 export * from './extensions/extension-color';

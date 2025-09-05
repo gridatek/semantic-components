@@ -10,6 +10,7 @@ import {
   ScEditorCodeBlock,
   ScEditorContent,
   ScEditorExport,
+  ScEditorFooter,
   ScEditorGroup,
   ScEditorHelp,
   ScEditorHighlight,
@@ -43,6 +44,7 @@ import { ScSeparator } from '@semantic-components/ui';
   imports: [
     ScEditor,
     ScEditorContent,
+    ScEditorFooter,
     ScEditorUndo,
     ScEditorRedo,
     ScEditorHighlight,
@@ -145,7 +147,12 @@ import { ScSeparator } from '@semantic-components/ui';
         </sc-editor-toolbar>
         <sc-editor-content />
 
-        <sc-editor-word-count />
+        <sc-editor-footer>
+          <div class="text-xs text-gray-500 dark:text-gray-400">Rich text editor</div>
+          <div class="flex items-center space-x-4">
+            <sc-editor-word-count />
+          </div>
+        </sc-editor-footer>
       </sc-editor>
     </form>
   `,
