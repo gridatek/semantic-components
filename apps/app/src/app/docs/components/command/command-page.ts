@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { CommandAdvancedDemoSection } from './command-advanced-demo-section';
 import { CommandBasicDemoSection } from './command-basic-demo-section';
+import { CommandDemo2Section } from './command-demo2-section';
 import { CommandDemoSection } from './command-demo-section';
 import { CommandDialogDemoSection } from './command-dialog-demo-section';
 import { CommandInteractiveDemoSection } from './command-interactive-demo-section';
@@ -10,6 +11,7 @@ import { CommandInteractiveDemoSection } from './command-interactive-demo-sectio
   selector: 'app-command-page',
   imports: [
     CommandDemoSection,
+    CommandDemo2Section,
     CommandDialogDemoSection,
     CommandBasicDemoSection,
     CommandAdvancedDemoSection,
@@ -17,6 +19,8 @@ import { CommandInteractiveDemoSection } from './command-interactive-demo-sectio
   ],
   template: `
     <app-command-demo-section />
+
+    <app-command-demo2-section />
 
     <app-command-dialog-demo-section />
 
