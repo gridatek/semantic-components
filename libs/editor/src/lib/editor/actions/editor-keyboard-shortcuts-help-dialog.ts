@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { ScKeyboardShortcuts } from '../services/keyboard-shortcuts.service';
 
 @Component({
-  selector: 'sc-editor-keyboard-shortcuts-help',
+  selector: 'sc-editor-keyboard-shortcuts-help-dialog',
   imports: [],
   template: `
     <div class="max-w-2xl p-4">
@@ -26,7 +26,7 @@ import { ScKeyboardShortcuts } from '../services/keyboard-shortcuts.service';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorKeyboardShortcutsHelp {
+export class ScEditorKeyboardShortcutsHelpDialog {
   private readonly keyboardShortcuts = inject(ScKeyboardShortcuts);
 
   get shortcuts() {

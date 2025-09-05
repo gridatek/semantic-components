@@ -7,21 +7,21 @@ import {
   input,
 } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiInfoIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditorKeyboardShortcutsHelp } from '../toolbar/keyboard-shortcuts-help';
+import { ScEditorKeyboardShortcutsHelpDialog } from './editor-keyboard-shortcuts-help-dialog';
 
 @Component({
-  selector: 'sc-editor-help',
-  imports: [ScTooltip, SiInfoIcon, ScButton],
+  selector: 'sc-editor-keyboard-shortcuts-help',
+  imports: [ScTooltip, SiInfoIcon, ScToggle],
   template: `
     <button
       [attr.aria-label]="ariaLabel()"
       [scTooltip]="ariaLabel()"
       (click)="openHelp()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       type="button"
     >
       <svg si-info-icon></svg>
@@ -32,7 +32,7 @@ import { ScEditorKeyboardShortcutsHelp } from '../toolbar/keyboard-shortcuts-hel
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorHelp {
+export class ScEditorKeyboardShortcutsHelp {
   readonly ariaLabel = input('Show keyboard shortcuts', {
     alias: 'aria-label',
   });
@@ -40,7 +40,7 @@ export class ScEditorHelp {
   private readonly dialog = inject(Dialog);
 
   protected openHelp() {
-    this.dialog.open(ScEditorKeyboardShortcutsHelp, {
+    this.dialog.open(ScEditorKeyboardShortcutsHelpDialog, {
       width: '600px',
       maxWidth: '90vw',
     });
