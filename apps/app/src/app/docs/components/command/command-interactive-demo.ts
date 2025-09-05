@@ -1,5 +1,15 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 
 import {
   CommandDialog,
@@ -13,7 +23,7 @@ import {
 } from '@semantic-components/ui';
 import { Observable, map } from 'rxjs';
 
-import { CommandCategory, MockCommandService } from './mock-command.service';
+import { CommandCategory, CommandItem, MockCommandService } from './mock-command.service';
 
 @Component({
   selector: 'app-command-interactive-demo',
@@ -181,11 +191,32 @@ import { CommandCategory, MockCommandService } from './mock-command.service';
           </svg>
         </button>
 
-        <sc-command-input [placeholder]="searchPlaceholder" />
+        <sc-command-input [placeholder]="searchPlaceholder()" />
 
         <sc-command-list class="max-h-96">
+          <!-- Loading State -->
+          @if (commandResource.isLoading()) {
+            <div class="flex items-center justify-center py-8">
+              <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+              <span class="ml-2 text-gray-600">Loading additional results...</span>
+            </div>
+          }
+
+          <!-- Error State -->
+          @if (commandResource.error()) {
+            <div class="p-4 text-center text-red-600">
+              <p class="mb-2">Failed to load search results</p>
+              <button
+                class="px-3 py-1 text-sm bg-red-100 rounded hover:bg-red-200 transition-colors"
+                (click)="retryApiSearch()"
+              >
+                Retry
+              </button>
+            </div>
+          }
+
           @if (commandCategories$ | async; as categories) {
-            @if (categories.length === 0 && showEmptyState) {
+            @if (categories.length === 0 && showEmptyState()) {
               <div class="flex flex-col items-center text-center py-12">
                 <div class="text-5xl mb-4">🔍</div>
                 <div class="text-lg font-medium text-gray-900 mb-2">No commands found</div>
@@ -256,14 +287,104 @@ import { CommandCategory, MockCommandService } from './mock-command.service';
   `,
 })
 export class CommandInteractiveDemo implements OnInit {
+  private http = inject(HttpClient);
   commandDialogService = inject(CommandDialog);
   commandCategories$!: Observable<CommandCategory[]>;
-  searchPlaceholder = 'Search all commands...';
-  showEmptyState = false;
+
+  // Signals for component state
+  searchQuery = signal('');
+  selectedCategory = signal<string | null>(null);
+  searchPlaceholder = signal('Search all commands...');
+  showEmptyState = signal(false);
 
   @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
 
-  constructor(public commandService: MockCommandService) {}
+  // HTTP Resource for dynamic command search
+  commandResource = httpResource(
+    () => {
+      const query = this.searchQuery();
+      const category = this.selectedCategory();
+
+      // Only make API call if we have a search query longer than 2 characters
+      if (!query || query.length < 2) return undefined;
+
+      // For demo purposes, using JSONPlaceholder API
+      // In real implementation, this would be your command search API
+      return {
+        url: `https://jsonplaceholder.typicode.com/posts?q=${encodeURIComponent(query)}`,
+        method: 'GET' as const,
+      };
+    },
+    {
+      parse: (response) => {
+        const data = response as any[];
+        // Transform API response to CommandItem format
+        return data.slice(0, 3).map(
+          (post): CommandItem => ({
+            id: `api-${post.id}`,
+            label: `Search: ${post.title.substring(0, 30)}...`,
+            description: post.body.substring(0, 80) + '...',
+            icon: '🔍',
+            category: 'search',
+            shortcut: '',
+            action: () => this.handleApiAction(`Opened: ${post.title}`),
+          }),
+        );
+      },
+    },
+  );
+
+  // Computed properties for reactive data
+  staticCommands = computed(() => {
+    const category = this.selectedCategory();
+    // Get static commands from service, filtered by category if needed
+    // For now, using the existing service pattern
+    return [];
+  });
+
+  filteredCommands = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    const staticCommands = this.staticCommands();
+    const apiCommands = this.commandResource.hasValue() ? this.commandResource.value() : [];
+
+    // Combine static and API commands
+    return [...staticCommands, ...apiCommands];
+  });
+
+  // Computed command categories
+  computedCategories = computed(() => {
+    const commands = this.filteredCommands();
+    const groups = commands.reduce(
+      (acc, cmd) => {
+        if (!acc[cmd.category]) {
+          acc[cmd.category] = [];
+        }
+        acc[cmd.category].push(cmd);
+        return acc;
+      },
+      {} as Record<string, CommandItem[]>,
+    );
+
+    return Object.entries(groups).map(
+      ([id, items]): CommandCategory => ({
+        id,
+        label: this.getCategoryLabel(id),
+        items,
+      }),
+    );
+  });
+
+  constructor(public commandService: MockCommandService) {
+    // Effects for side effects
+    effect(() => {
+      // Update empty state based on search results
+      const hasResults = this.filteredCommands().length > 0;
+      const isLoading = this.commandResource.isLoading();
+      const hasQuery = this.searchQuery().length > 0;
+
+      this.showEmptyState.set(hasQuery && !hasResults && !isLoading);
+    });
+  }
 
   ngOnInit() {
     this.commandCategories$ = this.commandService.getCommandsByCategory();
@@ -280,27 +401,32 @@ export class CommandInteractiveDemo implements OnInit {
   }
 
   openDialog() {
-    this.searchPlaceholder = 'Search all commands...';
+    this.searchPlaceholder.set('Search all commands...');
+    this.selectedCategory.set(null);
+    this.searchQuery.set('');
     this.commandCategories$ = this.commandService.getCommandsByCategory();
     this.showDialog();
   }
 
   openDialogWithFilter(filter: string) {
+    this.selectedCategory.set(filter);
+    this.searchQuery.set('');
+
     switch (filter) {
       case 'file':
-        this.searchPlaceholder = 'Search file operations...';
+        this.searchPlaceholder.set('Search file operations...');
         this.commandCategories$ = this.commandService
           .getCommandsByCategory()
           .pipe(map((categories) => categories.filter((cat) => cat.id === 'file')));
         break;
       case 'settings':
-        this.searchPlaceholder = 'Search settings...';
+        this.searchPlaceholder.set('Search settings...');
         this.commandCategories$ = this.commandService
           .getCommandsByCategory()
           .pipe(map((categories) => categories.filter((cat) => cat.id === 'settings')));
         break;
       case 'help':
-        this.searchPlaceholder = 'Search help & support...';
+        this.searchPlaceholder.set('Search help & support...');
         this.commandCategories$ = this.commandService
           .getCommandsByCategory()
           .pipe(map((categories) => categories.filter((cat) => cat.id === 'help')));
@@ -327,10 +453,66 @@ export class CommandInteractiveDemo implements OnInit {
 
   onCommandSelect(commandId: string) {
     console.log('Command executed:', commandId);
-    this.commandService.executeCommand(commandId);
+
+    // Handle API commands vs static commands
+    if (commandId.startsWith('api-')) {
+      const apiCommands = this.commandResource.hasValue() ? this.commandResource.value() : [];
+      const command = apiCommands.find((cmd) => cmd.id === commandId);
+      if (command) {
+        command.action();
+      }
+    } else {
+      this.commandService.executeCommand(commandId);
+    }
+
     // Auto-close dialog after command execution
     setTimeout(() => {
       this.commandDialogService.closeAll();
     }, 100);
+  }
+
+  // Helper methods
+  private getCategoryLabel(categoryId: string): string {
+    const labels: Record<string, string> = {
+      file: 'File Operations',
+      navigation: 'Navigation',
+      view: 'View',
+      settings: 'Settings',
+      help: 'Help & Support',
+      development: 'Development',
+      search: 'Search Results',
+    };
+    return labels[categoryId] || categoryId;
+  }
+
+  private handleApiAction(message: string): void {
+    console.log('API Command:', message);
+    // Create a simple toast notification
+    const toast = document.createElement('div');
+    toast.className =
+      'fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-md shadow-lg z-50 transition-opacity duration-300';
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 300);
+    }, 2700);
+  }
+
+  // Method to update search query (can be used from template)
+  updateSearchQuery(query: string) {
+    this.searchQuery.set(query);
+  }
+
+  // Method to retry API search
+  retryApiSearch() {
+    const currentQuery = this.searchQuery();
+    this.searchQuery.set('');
+    setTimeout(() => this.searchQuery.set(currentQuery), 0);
   }
 }
