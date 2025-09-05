@@ -10,6 +10,7 @@
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "outputHashing": "all",
         "outputPath": "dist/apps/app",
         "index": "apps/app/src/index.html",
         "browser": "apps/app/src/main.ts",
