@@ -24,9 +24,14 @@ import {
   ScEditorTableAddColumn,
   ScEditorTableAddRow,
   ScEditorTableDelete,
+  ScEditorTableFix,
   ScEditorTableInsert,
+  ScEditorTableMergeCells,
   ScEditorTableRemoveColumn,
   ScEditorTableRemoveRow,
+  ScEditorTableSplitCells,
+  ScEditorTableToggleHeaderColumn,
+  ScEditorTableToggleHeaderRow,
   ScEditorTextAlignCenter,
   ScEditorTextAlignLeft,
   ScEditorTextAlignRight,
@@ -86,6 +91,11 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorTableAddRow,
     ScEditorTableRemoveColumn,
     ScEditorTableRemoveRow,
+    ScEditorTableMergeCells,
+    ScEditorTableSplitCells,
+    ScEditorTableToggleHeaderRow,
+    ScEditorTableToggleHeaderColumn,
+    ScEditorTableFix,
     ScExtensionTextStyle,
     ScExtensionYoutube,
   ],
@@ -143,6 +153,14 @@ import { ScSeparator } from '@semantic-components/ui';
             <sc-editor-table-add-row />
             <sc-editor-table-remove-column />
             <sc-editor-table-remove-row />
+            <sc-separator class="h-5" orientation="vertical" />
+            <sc-editor-table-merge-cells />
+            <sc-editor-table-split-cells />
+            <sc-separator class="h-5" orientation="vertical" />
+            <sc-editor-table-toggle-header-row />
+            <sc-editor-table-toggle-header-column />
+            <sc-separator class="h-5" orientation="vertical" />
+            <sc-editor-table-fix />
             <sc-separator class="h-5" orientation="vertical" />
 
             <!-- Styling -->
