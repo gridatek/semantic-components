@@ -39,7 +39,7 @@ export * from './actions/table/editor-table-add-cell-attribute';
 export * from './actions/table/editor-table-go-to-previous-cell';
 export * from './actions/table/editor-table-go-to-next-cell';
 export * from './actions/table/editor-table-fix';
-export * from './actions/table/add-cell-attribute-dialog';
+export * from './actions/table/editor-table-add-cell-attribute-dialog';
 export * from './editor-footer';
 export * from './editor-group';
 export * from './editor-toolbar';

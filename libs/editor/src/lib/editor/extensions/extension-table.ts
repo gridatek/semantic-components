@@ -7,7 +7,7 @@ import { ScTooltip } from '@semantic-components/ui';
 import {
   AttributeData,
   ScAddCellAttributeDialog,
-} from '../actions/table/add-cell-attribute-dialog';
+} from '../actions/table/editor-table-add-cell-attribute-dialog';
 import { ScEditor } from '../editor';
 import { ScExtensions } from './extensions';
 
