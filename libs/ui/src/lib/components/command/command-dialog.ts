@@ -13,7 +13,7 @@ export interface CommandDialogConfig {
   maxWidth?: string;
   maxHeight?: string;
   hasBackdrop?: boolean;
-  backdropClass?: string;
+  backdropClass?: string | string[];
   disableClose?: boolean;
   closeOnNavigation?: boolean;
   panelClass?: string | string[];
