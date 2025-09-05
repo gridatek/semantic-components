@@ -52,7 +52,7 @@ export class ScCommand implements AfterContentInit, OnDestroy {
     cn(
       'relative',
       'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
-      '[&_[data-slot=command-input-wrapper]]:h-12 [&_[data-slot=command-input]]:h-12 [&_[data-slot=command-item]]:px-2 [&_[data-slot=command-item]]:py-3',
+      '**:data-[slot=command-input-wrapper]:h-12 **:data-[slot=command-input]:h-12 **:data-[slot=command-item]:px-2 **:data-[slot=command-item]:py-3',
       this.classInput(),
     ),
   );

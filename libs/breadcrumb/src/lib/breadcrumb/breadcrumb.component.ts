@@ -113,7 +113,7 @@ import { BreadcrumbService } from './breadcrumb.service';
         height: 1rem;
         color: #9ca3af;
         margin: 0 0.25rem;
-        flex-shrink: 0;
+        shrink: 0;
       }
 
       .home-item .breadcrumb-link {

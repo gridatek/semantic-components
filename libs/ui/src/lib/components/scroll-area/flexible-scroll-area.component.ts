@@ -1,4 +1,3 @@
-// flexible-scroll-area.component.ts
 import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
@@ -20,7 +19,7 @@ import {
       class="relative"
       [ngClass]="{
         'w-full max-w-4xl': orientation() === 'horizontal',
-        'h-[8.5rem] w-96 max-w-[calc(100vw-8rem)]': orientation() === 'vertical',
+        'h-34 w-96 max-w-[calc(100vw-8rem)]': orientation() === 'vertical',
       }"
     >
       <!-- Main scroll container -->
@@ -39,7 +38,7 @@ import {
         <div
           [ngClass]="{
             'flex flex-row gap-4 p-4 min-w-max': orientation() === 'horizontal',
-            'flex flex-col gap-4 py-3 pr-6 pl-4 text-sm leading-[1.375rem] text-gray-900':
+            'flex flex-col gap-4 py-3 pr-6 pl-4 text-sm leading-5.5 text-gray-900':
               orientation() === 'vertical',
           }"
         >

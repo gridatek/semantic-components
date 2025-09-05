@@ -7,7 +7,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, viewChild } from '@ang
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="h-[8.5rem] w-96 max-w-[calc(100vw-8rem)] relative">
+    <div class="h-34 w-96 max-w-[calc(100vw-8rem)] relative">
       <div
         class="h-full overflow-y-scroll overscroll-contain rounded-md outline outline-1 -outline-offset-1 outline-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-800 scrollbar-hide"
         #viewport
@@ -15,7 +15,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, viewChild } from '@ang
         (mouseenter)="isHovering = true"
         (mouseleave)="isHovering = false"
       >
-        <div class="flex flex-col gap-4 py-3 pr-6 pl-4 text-sm leading-[1.375rem] text-gray-900">
+        <div class="flex flex-col gap-4 py-3 pr-6 pl-4 text-sm leading-5.5 text-gray-900">
           <p>
             Vernacular architecture is building done outside any academic tradition, and without
             professional guidance. It is not a particular architectural movement or style, but

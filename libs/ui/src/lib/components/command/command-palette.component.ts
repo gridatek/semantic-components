@@ -1,15 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, httpResource } from '@angular/common/http';
-import {
-  Component,
-  ElementRef,
-  ViewChild,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Component, ElementRef, ViewChild, computed, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 export interface CommandItem {
@@ -123,7 +114,7 @@ export interface CommandItem {
             >
               <!-- Icon -->
               <div
-                class="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center mr-3"
+                class="shrink-0 w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center mr-3"
               >
                 <span class="text-lg">{{ getCommandIcon(command.icon) }}</span>
               </div>
@@ -142,7 +133,7 @@ export interface CommandItem {
               </div>
 
               <!-- Keyboard shortcut hint -->
-              <div class="flex-shrink-0 text-xs text-gray-400">
+              <div class="shrink-0 text-xs text-gray-400">
                 <kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">↵</kbd>
               </div>
             </div>

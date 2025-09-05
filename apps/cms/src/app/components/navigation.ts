@@ -40,7 +40,7 @@ import {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Brand -->
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <h1 class="text-xl font-bold text-foreground">CMS</h1>
           </div>
 

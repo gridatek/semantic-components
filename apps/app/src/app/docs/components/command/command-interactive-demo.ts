@@ -38,9 +38,7 @@ import { CommandCategory, MockCommandService } from './mock-command.service';
       </div>
 
       <!-- Main Demo Section -->
-      <div
-        class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8"
-      >
+      <div class="bg-linear-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8">
         <div class="text-center space-y-4">
           <div class="text-6xl mb-4">⌘</div>
           <h3 class="text-xl font-semibold text-gray-900">Command Palette</h3>

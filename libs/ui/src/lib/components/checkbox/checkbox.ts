@@ -77,7 +77,7 @@ export class ScCheckbox {
       //Checked state
       'checked:bg-primary checked:relative',
       'checked:after:content-[""] checked:after:absolute checked:after:inset-0 checked:after:bg-primary-foreground',
-      'checked:after:mask-(image:--check-svg)',
+      'checked:after:mask-(--check-svg)',
       'checked:after:mask-no-repeat',
       'checked:after:mask-center',
       'checked:after:mask-contain',
@@ -85,7 +85,7 @@ export class ScCheckbox {
       //Indeterminate state
       'indeterminate:bg-primary indeterminate:relative',
       'indeterminate:after:content-[""] indeterminate:after:absolute indeterminate:after:inset-0 indeterminate:after:bg-primary-foreground',
-      'indeterminate:after:mask-(image:--minus-svg)',
+      'indeterminate:after:mask-(--minus-svg)',
       'indeterminate:after:mask-no-repeat',
       'indeterminate:after:mask-center',
       'indeterminate:after:mask-contain',
