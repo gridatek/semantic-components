@@ -17,5 +17,16 @@ export class CommandDialogDemoSection {
 
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = ``;
+  protected readonly code = `// Dialog service injection
+export class MyComponent {
+  commandDialogService = inject(CommandDialog);
+  
+  openCommandDialog() {
+    this.commandDialogService.open({
+      title: 'Command Palette',
+      width: '600px',
+      height: '400px'
+    });
+  }
+}`;
 }
