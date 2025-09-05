@@ -6,14 +6,14 @@ import {
   input,
 } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiUploadIcon } from '@semantic-icons/lucide-icons';
 
 import { ScImportExport } from '../services/import-export.service';
 
 @Component({
   selector: 'sc-editor-import',
-  imports: [ScTooltip, SiUploadIcon, ScButton],
+  imports: [ScTooltip, SiUploadIcon, ScToggle],
   template: `
     <input
       class="hidden"
@@ -27,8 +27,8 @@ import { ScImportExport } from '../services/import-export.service';
       [attr.aria-label]="ariaLabel()"
       [scTooltip]="ariaLabel()"
       (click)="fileInput.click()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       type="button"
     >
       <svg si-upload-icon></svg>
