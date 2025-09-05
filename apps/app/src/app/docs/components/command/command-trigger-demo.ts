@@ -76,6 +76,71 @@ import { CommandItem, CommandTriggerConfig, ScCommandTrigger } from '@semantic-c
         </div>
       </div>
 
+      <!-- Different Keyboard Shortcuts -->
+      <div class="space-y-4">
+        <h4 class="text-lg font-medium">Different Keyboard Shortcuts</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <sc-command-trigger [config]="basicConfig">
+            <span slot="icon">⌘</span>
+            Basic Commands
+          </sc-command-trigger>
+
+          <sc-command-trigger [config]="apiConfig">
+            <span slot="icon">🌐</span>
+            API Search
+          </sc-command-trigger>
+
+          <sc-command-trigger [config]="customConfig">
+            <span slot="icon">⚡</span>
+            Quick Actions
+          </sc-command-trigger>
+
+          <sc-command-trigger [config]="smallConfig">
+            <span slot="icon">🔍</span>
+            Quick Search
+          </sc-command-trigger>
+
+          <sc-command-trigger [config]="largeConfig">
+            <span slot="icon">🚀</span>
+            Advanced
+          </sc-command-trigger>
+
+          <sc-command-trigger [config]="eventConfig">
+            <span slot="icon">📊</span>
+            Events
+          </sc-command-trigger>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+          <h5 class="font-medium text-amber-800 mb-2">⌨️ Try These Shortcuts:</h5>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm text-amber-700">
+            <div>
+              <kbd class="bg-white px-2 py-1 rounded border text-xs">Ctrl+K</kbd>
+              Basic
+            </div>
+            <div>
+              <kbd class="bg-white px-2 py-1 rounded border text-xs">Ctrl+P</kbd>
+              API Search
+            </div>
+            <div>
+              <kbd class="bg-white px-2 py-1 rounded border text-xs">Ctrl+J</kbd>
+              Quick Actions
+            </div>
+            <div>
+              <kbd class="bg-white px-2 py-1 rounded border text-xs">Ctrl+Q</kbd>
+              Quick Search
+            </div>
+            <div>
+              <kbd class="bg-white px-2 py-1 rounded border text-xs">Ctrl+Shift+P</kbd>
+              Advanced
+            </div>
+            <div>
+              <kbd class="bg-white px-2 py-1 rounded border text-xs">Ctrl+E</kbd>
+              Events
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Event Handling Demo -->
       <div class="space-y-4">
         <h4 class="text-lg font-medium">Event Handling</h4>
@@ -221,6 +286,7 @@ export class CommandTriggerDemo {
   eventConfig: CommandTriggerConfig = {
     title: 'Events Demo',
     description: 'Demonstrates event handling',
+    shortcutKey: 'e', // Ctrl+E for events
     staticCommands: [
       {
         id: 'event-1',
