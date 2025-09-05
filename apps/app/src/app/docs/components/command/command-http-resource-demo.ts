@@ -64,7 +64,7 @@ export interface CommandItem {
           <h3 class="text-xl font-semibold text-gray-900">HttpResource Command Palette</h3>
           <p class="text-gray-600 max-w-md mx-auto">
             Click the button below or press
-            <kbd class="bg-white px-2 py-1 rounded text-sm border">⌘K</kbd>
+            <kbd class="bg-white px-2 py-1 rounded text-sm border">{{ keyboardShortcut() }}</kbd>
             to test httpResource integration with dialog
           </p>
 
@@ -86,7 +86,9 @@ export interface CommandItem {
               />
             </svg>
             <span class="font-medium">Open HttpResource Command</span>
-            <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-mono">⌘K</span>
+            <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-mono">
+              {{ keyboardShortcut() }}
+            </span>
           </button>
         </div>
       </div>
@@ -124,7 +126,7 @@ export interface CommandItem {
           <div class="space-y-2 text-sm">
             <div class="flex justify-between items-center">
               <span class="text-blue-800">Open Dialog</span>
-              <kbd class="bg-white px-2 py-1 rounded text-xs border">⌘K</kbd>
+              <kbd class="bg-white px-2 py-1 rounded text-xs border">{{ keyboardShortcut() }}</kbd>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-blue-800">Type 2+ chars</span>
@@ -262,6 +264,19 @@ export class CommandHttpResourceDemo {
 
   // Signals for reactive state
   searchQuery = signal('');
+
+  // OS detection for keyboard shortcuts
+  isMac = computed(() => {
+    if (typeof navigator !== 'undefined') {
+      return (
+        navigator.platform.toUpperCase().indexOf('MAC') >= 0 ||
+        navigator.userAgent.toUpperCase().indexOf('MAC') >= 0
+      );
+    }
+    return false;
+  });
+
+  keyboardShortcut = computed(() => (this.isMac() ? '⌘K' : 'Ctrl+K'));
 
   // Static commands
   private staticCommands: CommandItem[] = [
