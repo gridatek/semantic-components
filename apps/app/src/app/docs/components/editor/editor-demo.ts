@@ -7,10 +7,14 @@ import {
   ScEditorBold,
   ScEditorBulletList,
   ScEditorCode,
+  ScEditorCodeBlock,
   ScEditorContent,
+  ScEditorExport,
   ScEditorGroup,
+  ScEditorHelp,
   ScEditorHighlight,
   ScEditorHorizontalRule,
+  ScEditorImport,
   ScEditorItalic,
   ScEditorOrderedList,
   ScEditorRedo,
@@ -22,6 +26,7 @@ import {
   ScEditorUnderline,
   ScEditorUndo,
   ScEditorUnsetLink,
+  ScEditorWordCount,
 } from '@semantic-components/editor';
 import { ScSeparator } from '@semantic-components/ui';
 
@@ -50,6 +55,11 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorTextAlignLeft,
     ScEditorTextAlignCenter,
     ReactiveFormsModule,
+    ScEditorCodeBlock,
+    ScEditorWordCount,
+    ScEditorExport,
+    ScEditorHelp,
+    ScEditorImport,
   ],
   template: `
     <form [formGroup]="editorForm">
@@ -76,9 +86,15 @@ import { ScSeparator } from '@semantic-components/ui';
             <sc-editor-strike />
             <sc-editor-horizontal-rule />
             <sc-editor-code />
+            <sc-editor-code-block />
+            <sc-editor-export />
+            <sc-editor-help />
+            <sc-editor-import />
           </sc-editor-group>
         </sc-editor-toolbar>
         <sc-editor-content />
+
+        <sc-editor-word-count />
       </sc-editor>
     </form>
   `,
