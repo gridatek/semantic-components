@@ -34,6 +34,7 @@ export class ScExtensions {
   youtube = signal<boolean>(false);
   image = signal<boolean>(false);
   code = signal<boolean>(false);
+  codeBlock = signal<boolean>(false);
   strike = signal<boolean>(false);
   italic = signal<boolean>(false);
   blockquote = signal<boolean>(false);
