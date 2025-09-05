@@ -250,11 +250,7 @@ export interface CommandItem {
       </sc-command>
     </ng-template>
   `,
-  styles: [
-    `
-      @reference "tailwindcss";
-    `,
-  ],
+  styles: [``],
 })
 export class CommandHttpResourceDemo {
   @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;

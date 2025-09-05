@@ -67,11 +67,7 @@ export interface CommandTriggerConfig {
       </ng-content>
     </button>
   `,
-  styles: [
-    `
-      @reference "tailwindcss";
-    `,
-  ],
+  styles: [``],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
