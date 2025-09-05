@@ -42,6 +42,8 @@ export interface CommandTriggerConfig {
   apiUrl?: string;
   staticCommands?: CommandItem[];
   enableGlobalShortcut?: boolean;
+  shortcutKey?: string; // The key for the shortcut (default: 'k')
+  requiresShift?: boolean; // Whether Shift key is required (default: false)
 }
 
 @Component({
@@ -240,7 +242,12 @@ export class ScCommandTrigger {
     return false;
   });
 
-  keyboardShortcut = computed(() => (this.isMac() ? '⌘K' : 'Ctrl+K'));
+  keyboardShortcut = computed(() => {
+    const key = this.config().shortcutKey?.toUpperCase() || 'K';
+    const shift = this.config().requiresShift ? '+Shift' : '';
+    const base = this.isMac() ? '⌘' : 'Ctrl';
+    return `${base}${shift}+${key}`;
+  });
 
   // Default static commands
   private defaultCommands: CommandItem[] = [
@@ -326,11 +333,18 @@ export class ScCommandTrigger {
     // Global keyboard shortcut if enabled
     if (typeof window !== 'undefined') {
       document.addEventListener('keydown', (e) => {
-        if (
-          this.config().enableGlobalShortcut !== false &&
-          (e.metaKey || e.ctrlKey) &&
-          e.key === 'k'
-        ) {
+        const config = this.config();
+
+        if (config.enableGlobalShortcut === false) return;
+
+        const targetKey = config.shortcutKey?.toLowerCase() || 'k';
+        const requiresShift = config.requiresShift || false;
+
+        const hasModifier = e.metaKey || e.ctrlKey;
+        const hasShift = e.shiftKey;
+        const keyMatches = e.key.toLowerCase() === targetKey;
+
+        if (hasModifier && keyMatches && hasShift === requiresShift) {
           e.preventDefault();
           this.openDialog();
         }

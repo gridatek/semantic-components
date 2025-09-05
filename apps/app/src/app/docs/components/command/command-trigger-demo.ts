@@ -153,12 +153,14 @@ export class CommandTriggerDemo {
     placeholder: 'Type to search API...',
     apiUrl: 'https://jsonplaceholder.typicode.com/posts',
     width: '800px',
+    shortcutKey: 'p', // Ctrl+P for API search
   };
 
   // Custom commands configuration
   customConfig: CommandTriggerConfig = {
     title: 'Quick Actions',
     description: 'Predefined quick actions',
+    shortcutKey: 'j', // Ctrl+J for quick actions
     staticCommands: [
       {
         id: 'create-project',
@@ -201,6 +203,7 @@ export class CommandTriggerDemo {
     title: 'Quick Search',
     height: '400px',
     width: '500px',
+    shortcutKey: 'q', // Ctrl+Q for quick search
   };
 
   // Large configuration
@@ -210,6 +213,8 @@ export class CommandTriggerDemo {
     height: '700px',
     width: '900px',
     placeholder: 'Search commands, files, actions...',
+    shortcutKey: 'p',
+    requiresShift: true, // Ctrl+Shift+P for advanced commands
   };
 
   // Event handling configuration
