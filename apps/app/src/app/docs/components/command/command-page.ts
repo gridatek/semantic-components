@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 // import { CommandDemoSection } from './command-demo-section';
 // import { CommandDialogDemoSection } from './command-dialog-demo-section';
 import { CommandHttpResourceDemoSection } from './command-http-resource-demo-section';
+import { CommandTriggerDemoSection } from './command-trigger-demo-section';
 
 // import { CommandInteractiveDemoSection } from './command-interactive-demo-section';
 
@@ -19,6 +20,7 @@ import { CommandHttpResourceDemoSection } from './command-http-resource-demo-sec
     // CommandAdvancedDemoSection,
     // CommandInteractiveDemoSection,
     CommandHttpResourceDemoSection,
+    CommandTriggerDemoSection,
   ],
   template: `
     <!--    <app-command-demo-section />
@@ -36,6 +38,11 @@ import { CommandHttpResourceDemoSection } from './command-http-resource-demo-sec
     <app-command-http-resource-demo-section
       title="Command with HttpResource"
       description="Modern Angular command component using httpResource for dynamic search results combined with static commands."
+    />
+
+    <app-command-trigger-demo-section
+      title="Command Trigger Component"
+      description="Reusable command trigger component with configurable options, API integration, and automatic OS detection."
     />
   `,
 })

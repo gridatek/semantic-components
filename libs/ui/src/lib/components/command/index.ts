@@ -1,5 +1,4 @@
 export * from './command';
-export * from './command-palette.component';
 export * from './command-input';
 export * from './command-list';
 export * from './command-empty';
@@ -11,3 +10,4 @@ export * from './command-separator';
 export * from './command-dialog';
 export * from './command-error';
 export * from './command-loading';
+export * from './command-trigger';
