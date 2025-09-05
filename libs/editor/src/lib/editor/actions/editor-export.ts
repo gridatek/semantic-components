@@ -6,21 +6,21 @@ import {
   input,
 } from '@angular/core';
 
-import { ScButton, ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
-import { ExportOptions, ScImportExport } from '../services/import-export.service';
+import { ScImportExport } from '../services/import-export.service';
 
 @Component({
   selector: 'sc-editor-export',
-  imports: [ScTooltip, SiDownloadIcon, ScButton],
+  imports: [ScTooltip, SiDownloadIcon, ScToggle],
   template: `
     <button
       [attr.aria-label]="ariaLabel()"
       [scTooltip]="ariaLabel()"
       (click)="exportAsMarkdown()"
-      sc-button
-      variant="ghost"
+      sc-toggle
+      variant="outline"
       type="button"
     >
       <svg si-download-icon></svg>
