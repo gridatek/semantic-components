@@ -10,6 +10,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import {
   CommandDialog,
@@ -36,6 +37,7 @@ import { CommandCategory, CommandItem, MockCommandService } from './mock-command
     ScCommandItem,
     ScCommandSeparator,
     ScCommandShortcut,
+    FormsModule,
   ],
   template: `
     <div class="space-y-6">
@@ -191,7 +193,11 @@ import { CommandCategory, CommandItem, MockCommandService } from './mock-command
           </svg>
         </button>
 
-        <sc-command-input [placeholder]="searchPlaceholder()" />
+        <sc-command-input
+          [(ngModel)]="searchQuery"
+          [placeholder]="searchPlaceholder()"
+          (search)="onSearchChange($event)"
+        />
 
         <sc-command-list class="max-h-96">
           <!-- Loading State -->
@@ -514,5 +520,10 @@ export class CommandInteractiveDemo implements OnInit {
     const currentQuery = this.searchQuery();
     this.searchQuery.set('');
     setTimeout(() => this.searchQuery.set(currentQuery), 0);
+  }
+
+  // Handle search input changes
+  onSearchChange(query: string) {
+    this.searchQuery.set(query);
   }
 }

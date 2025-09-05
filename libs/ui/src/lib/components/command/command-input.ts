@@ -8,7 +8,7 @@ import {
   model,
   output,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
@@ -23,8 +23,9 @@ import { ScCommand } from './command';
     <input
       class="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
       #inputElement
-      [(ngModel)]="value"
+      [value]="internalValue"
       [placeholder]="placeholder()"
+      [disabled]="disabled"
       (keydown)="onKeydown($event)"
       (input)="onInput($event)"
       data-slot="command-input"
@@ -34,11 +35,18 @@ import { ScCommand } from './command';
     '[class]': 'class()',
     'data-slot': 'command-input-wrapper',
   },
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: ScCommandInput,
+      multi: true,
+    },
+  ],
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCommandInput {
+export class ScCommandInput implements ControlValueAccessor {
   private command = inject(ScCommand, { optional: true });
 
   readonly classInput = input<string>('', {
@@ -56,9 +64,36 @@ export class ScCommandInput {
   readonly search = output<string>();
   readonly keydown = output<KeyboardEvent>();
 
+  // ControlValueAccessor implementation
+  internalValue = '';
+  disabled = false;
+  private onChange = (value: string) => {};
+  private onTouched = () => {};
+
+  writeValue(value: string): void {
+    this.internalValue = value || '';
+    this.value.set(this.internalValue);
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
   onInput(event: Event) {
     const target = event.target as HTMLInputElement;
     const searchValue = target.value;
+
+    this.internalValue = searchValue;
+    this.value.set(searchValue);
+    this.onChange(searchValue);
 
     // Update the parent command component if available
     if (this.command) {
