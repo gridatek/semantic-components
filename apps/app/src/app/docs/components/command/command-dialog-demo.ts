@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
 
 import {
   CommandDialog,
@@ -140,9 +140,9 @@ import {
   `,
 })
 export class CommandDialogDemo {
-  @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
+  private commandDialogService = inject(CommandDialog);
 
-  constructor(private commandDialogService: CommandDialog) {}
+  @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
 
   openDialog() {
     const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate, {
