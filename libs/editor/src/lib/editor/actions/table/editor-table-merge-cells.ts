@@ -1,37 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScButton, ScTooltip } from '@semantic-components/ui';
-import { SiSplitIcon } from '@semantic-icons/lucide-icons';
+import { SiMergeIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
+import { ScEditor } from '../../editor';
 
 @Component({
-  selector: 'sc-editor-table-split-cells',
-  imports: [ScButton, ScTooltip, SiSplitIcon],
+  selector: 'sc-editor-table-merge-cells',
+  imports: [ScButton, ScTooltip, SiMergeIcon],
   template: `
     <button
-      (click)="splitCell()"
+      (click)="mergeCells()"
       sc-button
       variant="ghost"
       size="sm"
-      scTooltip="Split cells"
+      scTooltip="Merge cells"
       type="button"
     >
-      <svg class="w-4 h-4" si-split-icon></svg>
+      <svg class="w-4 h-4" si-merge-icon></svg>
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorTableSplitCells {
+export class ScEditorTableMergeCells {
   private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;
   }
 
-  splitCell() {
-    this.editor.chain().focus().splitCell().run();
+  mergeCells() {
+    this.editor.chain().focus().mergeCells().run();
   }
 }

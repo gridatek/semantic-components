@@ -1,37 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScButton, ScTooltip } from '@semantic-components/ui';
-import { SiChevronLeftIcon } from '@semantic-icons/lucide-icons';
+import { SiBetweenHorizontalEndIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
+import { ScEditor } from '../../editor';
 
 @Component({
-  selector: 'sc-editor-table-go-to-previous-cell',
-  imports: [ScButton, ScTooltip, SiChevronLeftIcon],
+  selector: 'sc-editor-table-add-row-before',
+  imports: [ScButton, ScTooltip, SiBetweenHorizontalEndIcon],
   template: `
     <button
-      (click)="goToPreviousCell()"
+      (click)="addRowBefore()"
       sc-button
       variant="ghost"
       size="sm"
-      scTooltip="Previous cell"
+      scTooltip="Add row before"
       type="button"
     >
-      <svg class="w-4 h-4" si-chevron-left-icon></svg>
+      <svg class="w-4 h-4" si-between-horizontal-end-icon></svg>
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorTableGoToPreviousCell {
+export class ScEditorTableAddRowBefore {
   private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;
   }
 
-  goToPreviousCell() {
-    this.editor.chain().focus().goToPreviousCell().run();
+  addRowBefore() {
+    this.editor.chain().focus().addRowBefore().run();
   }
 }

@@ -1,37 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScButton, ScTooltip } from '@semantic-components/ui';
-import { SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { SiWrenchIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
+import { ScEditor } from '../../editor';
 
 @Component({
-  selector: 'sc-editor-table-delete',
-  imports: [ScButton, ScTooltip, SiTrash2Icon],
+  selector: 'sc-editor-table-fix',
+  imports: [ScButton, ScTooltip, SiWrenchIcon],
   template: `
     <button
-      (click)="deleteTable()"
+      (click)="fixTables()"
       sc-button
       variant="ghost"
       size="sm"
-      scTooltip="Delete table"
+      scTooltip="Fix table structure"
       type="button"
     >
-      <svg class="w-4 h-4" si-trash-2-icon></svg>
+      <svg class="w-4 h-4" si-wrench-icon></svg>
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorTableDelete {
+export class ScEditorTableFix {
   private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;
   }
 
-  deleteTable() {
-    this.editor.chain().focus().deleteTable().run();
+  fixTables() {
+    this.editor.commands.fixTables();
   }
 }

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { ScButton, ScTooltip } from '@semantic-components/ui';
 import { SiRectangleVerticalIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
+import { ScEditor } from '../../editor';
 
 @Component({
   selector: 'sc-editor-table-toggle-header-column',

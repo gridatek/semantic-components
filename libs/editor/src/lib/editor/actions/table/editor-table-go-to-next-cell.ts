@@ -1,37 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScButton, ScTooltip } from '@semantic-components/ui';
-import { SiBetweenHorizontalStartIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
+import { ScEditor } from '../../editor';
 
 @Component({
-  selector: 'sc-editor-table-add-row',
-  imports: [ScButton, ScTooltip, SiBetweenHorizontalStartIcon],
+  selector: 'sc-editor-table-go-to-next-cell',
+  imports: [ScButton, ScTooltip, SiChevronRightIcon],
   template: `
     <button
-      (click)="addRowAfter()"
+      (click)="goToNextCell()"
       sc-button
       variant="ghost"
       size="sm"
-      scTooltip="Add row below"
+      scTooltip="Next cell"
       type="button"
     >
-      <svg class="w-4 h-4" si-between-horizontal-start-icon></svg>
+      <svg class="w-4 h-4" si-chevron-right-icon></svg>
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorTableAddRow {
+export class ScEditorTableGoToNextCell {
   private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;
   }
 
-  addRowAfter() {
-    this.editor.chain().focus().addRowAfter().run();
+  goToNextCell() {
+    this.editor.chain().focus().goToNextCell().run();
   }
 }

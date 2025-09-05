@@ -1,37 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScButton, ScTooltip } from '@semantic-components/ui';
-import { SiRectangleHorizontalIcon } from '@semantic-icons/lucide-icons';
+import { SiBetweenVerticalStartIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
+import { ScEditor } from '../../editor';
 
 @Component({
-  selector: 'sc-editor-table-toggle-header-row',
-  imports: [ScButton, ScTooltip, SiRectangleHorizontalIcon],
+  selector: 'sc-editor-table-add-column',
+  imports: [ScButton, ScTooltip, SiBetweenVerticalStartIcon],
   template: `
     <button
-      (click)="toggleHeaderRow()"
+      (click)="addColumnAfter()"
       sc-button
       variant="ghost"
       size="sm"
-      scTooltip="Toggle header row"
+      scTooltip="Add column after"
       type="button"
     >
-      <svg class="w-4 h-4" si-rectangle-horizontal-icon></svg>
+      <svg class="w-4 h-4" si-between-vertical-start-icon></svg>
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorTableToggleHeaderRow {
+export class ScEditorTableAddColumn {
   private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;
   }
 
-  toggleHeaderRow() {
-    this.editor.chain().focus().toggleHeaderRow().run();
+  addColumnAfter() {
+    this.editor.chain().focus().addColumnAfter().run();
   }
 }

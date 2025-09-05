@@ -1,37 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScButton, ScTooltip } from '@semantic-components/ui';
-import { SiBetweenHorizontalEndIcon } from '@semantic-icons/lucide-icons';
+import { SiSplitIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
+import { ScEditor } from '../../editor';
 
 @Component({
-  selector: 'sc-editor-table-add-row-before',
-  imports: [ScButton, ScTooltip, SiBetweenHorizontalEndIcon],
+  selector: 'sc-editor-table-split-cells',
+  imports: [ScButton, ScTooltip, SiSplitIcon],
   template: `
     <button
-      (click)="addRowBefore()"
+      (click)="splitCell()"
       sc-button
       variant="ghost"
       size="sm"
-      scTooltip="Add row before"
+      scTooltip="Split cells"
       type="button"
     >
-      <svg class="w-4 h-4" si-between-horizontal-end-icon></svg>
+      <svg class="w-4 h-4" si-split-icon></svg>
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorTableAddRowBefore {
+export class ScEditorTableSplitCells {
   private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;
   }
 
-  addRowBefore() {
-    this.editor.chain().focus().addRowBefore().run();
+  splitCell() {
+    this.editor.chain().focus().splitCell().run();
   }
 }

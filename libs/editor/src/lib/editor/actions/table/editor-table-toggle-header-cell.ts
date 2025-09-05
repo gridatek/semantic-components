@@ -1,37 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScButton, ScTooltip } from '@semantic-components/ui';
-import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
+import { SiSquareIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
+import { ScEditor } from '../../editor';
 
 @Component({
-  selector: 'sc-editor-table-go-to-next-cell',
-  imports: [ScButton, ScTooltip, SiChevronRightIcon],
+  selector: 'sc-editor-table-toggle-header-cell',
+  imports: [ScButton, ScTooltip, SiSquareIcon],
   template: `
     <button
-      (click)="goToNextCell()"
+      (click)="toggleHeaderCell()"
       sc-button
       variant="ghost"
       size="sm"
-      scTooltip="Next cell"
+      scTooltip="Toggle header cell"
       type="button"
     >
-      <svg class="w-4 h-4" si-chevron-right-icon></svg>
+      <svg class="w-4 h-4" si-square-icon></svg>
     </button>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorTableGoToNextCell {
+export class ScEditorTableToggleHeaderCell {
   private readonly parent = inject(ScEditor);
 
   get editor() {
     return this.parent.editor;
   }
 
-  goToNextCell() {
-    this.editor.chain().focus().goToNextCell().run();
+  toggleHeaderCell() {
+    this.editor.chain().focus().toggleHeaderCell().run();
   }
 }
