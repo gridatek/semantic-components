@@ -449,7 +449,7 @@ export class CommandInteractiveDemo implements OnInit {
       height: '550px',
       disableClose: false,
       hasBackdrop: true,
-      backdropClass: ['backdrop-blur-sm', 'bg-black/20'],
+      backdropClass: ['bg-black/20'],
     });
 
     dialogRef.closed.subscribe((result) => {

@@ -31,7 +31,7 @@ export class MyComponent {
         width: '700px',
         height: '550px',
         hasBackdrop: true,
-        backdropClass: 'backdrop-blur-sm bg-black/20'
+         backdropClass: [ 'bg-black/20'],
       }
     );
 
