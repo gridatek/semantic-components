@@ -12,12 +12,10 @@ import { cn } from '@semantic-components/utils';
   selector: 'sc-editor-footer',
   imports: [],
   template: `
-    <div [class]="class()">
-      <ng-content />
-    </div>
+    <ng-content />
   `,
   host: {
-    '[class]': 'hostClass()',
+    '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -34,6 +32,4 @@ export class ScEditorFooter {
       this.classInput(),
     ),
   );
-
-  protected readonly hostClass = computed(() => 'block');
 }
