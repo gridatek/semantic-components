@@ -1,18 +1,23 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  HostListener,
+  TemplateRef,
+  ViewChild,
   ViewEncapsulation,
   inject,
-  signal,
 } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
-import { ScButton, ScThemeToggler } from '@semantic-components/ui';
+import {
+  CommandTriggerConfig,
+  ScButton,
+  ScCommandTrigger,
+  ScThemeToggler,
+} from '@semantic-components/ui';
 import { SiMenuIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 import { AppStateService } from '../app-state.service';
-import { SearchCommandComponent } from './search-command/search-command.component';
+import { SearchCommandTemplateComponent } from './search-command/search-command-template.component';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +28,8 @@ import { SearchCommandComponent } from './search-command/search-command.componen
     RouterLinkActive,
     SiMenuIcon,
     SiSearchIcon,
-    SearchCommandComponent,
+    ScCommandTrigger,
+    SearchCommandTemplateComponent,
   ],
   template: `
     <div class="flex h-14 items-center px-4">
@@ -103,32 +109,30 @@ import { SearchCommandComponent } from './search-command/search-command.componen
       <!-- Right side: Search + GitHub + Theme toggle -->
       <div class="flex items-center ml-auto space-x-2">
         <!-- Search Trigger (Desktop) -->
-        <button
-          class="hidden md:inline-flex items-center gap-2 px-3 py-2 text-sm border border-border rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
-          (click)="openSearch()"
-          type="button"
-          title="Search"
-        >
-          <svg class="h-4 w-4 text-muted-foreground" si-search-icon></svg>
-          <span class="text-muted-foreground">Search...</span>
-          <kbd
-            class="bg-muted text-muted-foreground px-1.5 py-0.5 rounded text-xs font-mono ml-auto"
+        <div class="hidden md:block">
+          <sc-command-trigger
+            [config]="searchConfig"
+            [dialogTemplate]="searchTemplate"
+            (dialogOpened)="onSearchOpened()"
+            (dialogClosed)="onSearchClosed($event)"
           >
-            {{ keyboardShortcut }}
-          </kbd>
-        </button>
+            <svg class="h-4 w-4 text-muted-foreground" slot="icon" si-search-icon></svg>
+            <span class="text-muted-foreground">Search...</span>
+          </sc-command-trigger>
+        </div>
 
         <!-- Search Trigger (Mobile) -->
-        <button
-          class="md:hidden inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0"
-          (click)="openSearch()"
-          sc-button
-          variant="ghost"
-          size="icon"
-          title="Search"
-        >
-          <svg class="h-4 w-4" si-search-icon></svg>
-        </button>
+        <div class="md:hidden">
+          <sc-command-trigger
+            [config]="mobileSearchConfig"
+            [dialogTemplate]="searchTemplate"
+            (dialogOpened)="onSearchOpened()"
+            (dialogClosed)="onSearchClosed($event)"
+            triggerClass="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0"
+          >
+            <svg class="h-4 w-4" slot="icon" si-search-icon></svg>
+          </sc-command-trigger>
+        </div>
 
         <a
           class="hidden md:inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2"
@@ -140,8 +144,10 @@ import { SearchCommandComponent } from './search-command/search-command.componen
         <sc-theme-toggler />
       </div>
 
-      <!-- Search Command Dialog -->
-      <app-search-command [open]="searchOpen" />
+      <!-- Search Template -->
+      <ng-template #searchTemplate>
+        <app-search-command-template />
+      </ng-template>
     </div>
   `,
   styles: ``,
@@ -149,39 +155,41 @@ import { SearchCommandComponent } from './search-command/search-command.componen
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
+  @ViewChild('searchTemplate') searchTemplate!: TemplateRef<any>;
+
   private readonly appStateService = inject(AppStateService);
   private readonly router = inject(Router);
 
-  protected readonly searchOpen = signal(false);
+  // Search configurations
+  protected readonly searchConfig: CommandTriggerConfig = {
+    title: 'Search Documentation',
+    description: 'Search components, docs, and guides',
+    width: '700px',
+    height: '500px',
+    placeholder: 'Search documentation, components, and more...',
+    enableGlobalShortcut: true,
+    shortcutKey: 'k',
+  };
 
-  // OS detection for keyboard shortcuts
-  protected readonly keyboardShortcut =
-    typeof navigator !== 'undefined'
-      ? navigator.platform.toUpperCase().indexOf('MAC') >= 0
-        ? '⌘K'
-        : 'Ctrl+K'
-      : 'Ctrl+K';
+  protected readonly mobileSearchConfig: CommandTriggerConfig = {
+    title: 'Search',
+    description: 'Search components, docs, and guides',
+    width: '90vw',
+    height: '80vh',
+    placeholder: 'Search...',
+    enableGlobalShortcut: false,
+  };
 
   protected toggleMobileMenu() {
     this.appStateService.mobileMenu.update((v) => !v);
   }
 
-  protected openSearch() {
-    this.searchOpen.set(true);
+  protected onSearchOpened() {
+    console.log('Search dialog opened');
   }
 
-  @HostListener('window:keydown', ['$event'])
-  protected onKeyDown(event: KeyboardEvent) {
-    // Handle Cmd+K (Mac) or Ctrl+K (Windows/Linux) for search
-    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-      event.preventDefault();
-      this.openSearch();
-    }
-
-    // Handle Escape to close search
-    if (event.key === 'Escape' && this.searchOpen()) {
-      this.searchOpen.set(false);
-    }
+  protected onSearchClosed(result: any) {
+    console.log('Search dialog closed:', result);
   }
 
   constructor() {
@@ -189,10 +197,6 @@ export class Header {
       if (event instanceof NavigationEnd) {
         if (this.appStateService.mobileMenu()) {
           this.appStateService.mobileMenu.set(false);
-        }
-        // Close search on navigation
-        if (this.searchOpen()) {
-          this.searchOpen.set(false);
         }
       }
     });

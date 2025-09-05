@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { CommandAdvancedDemoSection } from './command-advanced-demo-section';
+import { CommandAlgoliaSearchDemoSection } from './command-algolia-search-demo-section';
 import { CommandBasicDemoSection } from './command-basic-demo-section';
 import { CommandDemoSection } from './command-demo-section';
 import { CommandDialogDemoSection } from './command-dialog-demo-section';
@@ -19,6 +20,7 @@ import { CommandTriggerDemoSection } from './command-trigger-demo-section';
     CommandInteractiveDemoSection,
     CommandHttpResourceDemoSection,
     CommandSearchDemoSection,
+    CommandAlgoliaSearchDemoSection,
     CommandTriggerDemoSection,
   ],
   template: `
@@ -38,6 +40,8 @@ import { CommandTriggerDemoSection } from './command-trigger-demo-section';
     />
 
     <app-command-search-demo-section />
+
+    <app-command-algolia-search-demo-section />
 
     <app-command-trigger-demo-section
       title="Command Trigger Component"
