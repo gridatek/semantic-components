@@ -51,8 +51,8 @@ export interface ColorData {
 
         <div class="space-y-4">
           <!-- Color Palette -->
-          <div>
-            <label class="text-sm font-medium" sc-label>Color Palette</label>
+          <fieldset>
+            <legend class="text-sm font-medium">Color Palette</legend>
             <div class="mt-2 grid grid-cols-8 gap-2">
               @for (color of colors; track $index) {
                 <button
@@ -66,7 +66,7 @@ export interface ColorData {
                 </button>
               }
             </div>
-          </div>
+          </fieldset>
 
           <!-- Custom Color Picker -->
           <div>
