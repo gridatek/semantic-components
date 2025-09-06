@@ -8,10 +8,8 @@ export class ScWindowService {
   private _window = signal<Window | null>(null);
 
   constructor() {
-    // Initialize after render to ensure we're in browser environment
-    afterNextRender(() => {
-      this.initialize();
-    });
+    // Initialize immediately if in browser, otherwise wait for render
+    this.initialize();
   }
 
   /**
@@ -31,6 +29,14 @@ export class ScWindowService {
     if (typeof window !== 'undefined') {
       this._window.set(window);
       this._isAvailable.set(true);
+    } else {
+      // If we're in SSR, try again after render
+      afterNextRender(() => {
+        if (typeof window !== 'undefined') {
+          this._window.set(window);
+          this._isAvailable.set(true);
+        }
+      });
     }
   }
 
