@@ -5,7 +5,7 @@ import { ScTooltip } from '@semantic-components/ui';
 import { SiAlignRightIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions/extensions';
+import { ScExtensions } from '../extensions';
 
 @Component({
   selector: 'sc-editor-text-align-right',

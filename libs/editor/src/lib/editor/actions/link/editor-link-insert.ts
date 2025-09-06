@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiLinkIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions/extensions';
+import { ScExtensions } from '../../extensions';
 import { LinkData, ScEditorLinkInsertDialog } from './editor-link-insert-dialog';
 
 @Component({

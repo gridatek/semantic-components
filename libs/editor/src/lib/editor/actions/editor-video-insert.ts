@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiFileVideoIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions/extensions';
+import { ScExtensions } from '../extensions';
 import { ScEditorVideoInsertDialog, VideoData } from './editor-video-insert-dialog';
 
 @Component({

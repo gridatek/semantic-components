@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiPaletteIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions/extensions';
+import { ScExtensions } from '../../extensions';
 import { ColorData, ScEditorColorDialog } from './editor-color-dialog';
 
 @Component({

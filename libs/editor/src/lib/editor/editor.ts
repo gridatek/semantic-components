@@ -25,7 +25,7 @@ import Text from '@tiptap/extension-text';
 import { ScImportExport } from './actions/import-export/import-export.service';
 import { ScKeyboardShortcuts } from './actions/keyboard-shortcuts/keyboard-shortcuts.service';
 import { ScEditorContent } from './editor-content';
-import { ScExtensions } from './extensions/extensions';
+import { ScExtensions } from './extensions';
 import { ScWordCount } from './word-count/word-count.service';
 
 @Component({

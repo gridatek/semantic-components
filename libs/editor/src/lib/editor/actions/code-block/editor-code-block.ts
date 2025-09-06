@@ -11,7 +11,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiFileCodeIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions/extensions';
+import { ScExtensions } from '../../extensions';
 import { CodeBlockData, ScEditorCodeBlockDialog } from './editor-code-block-dialog';
 
 @Component({
