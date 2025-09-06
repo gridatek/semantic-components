@@ -18,6 +18,7 @@ import {
   ScEditorImport,
   ScEditorItalic,
   ScEditorKeyboardShortcutsHelp,
+  ScEditorLinkInsert,
   ScEditorOrderedList,
   ScEditorParagraph,
   ScEditorRedo,
@@ -51,7 +52,6 @@ import {
   ScEditorWordCount,
   ScExtensionColor,
   ScExtensionFontFamily,
-  ScExtensionLink,
   ScExtensionTextStyle,
 } from '@semantic-components/editor';
 import { ScSeparator } from '@semantic-components/ui';
@@ -90,7 +90,7 @@ import { ScSeparator } from '@semantic-components/ui';
     ScExtensionColor,
     ScExtensionFontFamily,
     ScEditorImageInsert,
-    ScExtensionLink,
+    ScEditorLinkInsert,
     ScEditorTableInsert,
     ScEditorTableDelete,
     ScEditorTableAddColumnBefore,
@@ -155,7 +155,7 @@ import { ScSeparator } from '@semantic-components/ui';
             <!-- Media & Links -->
             <sc-editor-image-insert />
             <sc-editor-video-insert />
-            <sc-extension-link />
+            <sc-editor-link-insert />
             <sc-editor-unset-link />
             <sc-separator class="h-5" orientation="vertical" />
 
