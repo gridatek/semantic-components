@@ -50,7 +50,7 @@ export * from './actions/table/editor-table-add-cell-attribute-dialog';
 export * from './editor-footer';
 export * from './editor-group';
 export * from './editor-toolbar';
-export * from './extensions/extension-color';
+export * from './actions/color/editor-color';
 export * from './actions/font-family/editor-font-family';
 export * from './extensions/extension-heading';
 export * from './actions/text-style/editor-font-size';

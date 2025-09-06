@@ -8,6 +8,7 @@ import {
   ScEditorBulletList,
   ScEditorCode,
   ScEditorCodeBlock,
+  ScEditorColor,
   ScEditorContent,
   ScEditorExport,
   ScEditorFontFamily,
@@ -52,7 +53,6 @@ import {
   ScEditorUndo,
   ScEditorVideoInsert,
   ScEditorWordCount,
-  ScExtensionColor,
 } from '@semantic-components/editor';
 import { ScSeparator } from '@semantic-components/ui';
 
@@ -87,7 +87,7 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorWordCount,
     ScEditorExport,
     ScEditorImport,
-    ScExtensionColor,
+    ScEditorColor,
     ScEditorFontFamily,
     ScEditorImageInsert,
     ScEditorLinkInsert,
@@ -182,7 +182,7 @@ import { ScSeparator } from '@semantic-components/ui';
 
             <!-- Styling -->
             <sc-editor-font-size />
-            <sc-extension-color />
+            <sc-editor-color />
             <sc-editor-font-family />
             <sc-separator class="h-5" orientation="vertical" />
 
