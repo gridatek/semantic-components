@@ -57,6 +57,6 @@ export * from './extensions/extension-heading';
 export * from './actions/text-style/editor-font-size';
 export * from './actions/code-block/editor-code-block-dialog';
 export * from './services/keyboard-shortcuts.service';
-export * from './services/word-count.service';
+export * from './components/word-count.service';
 export * from './services/import-export.service';
 export * from './components/word-count-display';

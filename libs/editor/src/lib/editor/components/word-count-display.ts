@@ -9,7 +9,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScWordCount } from '../services/word-count.service';
+import { ScWordCount } from './word-count.service';
 
 @Component({
   selector: 'sc-editor-word-count',
