@@ -27,6 +27,11 @@
     margin-top: 0;
     margin-bottom: 0.8888889em;
     scroll-margin-top: 6rem;
+
+    @media (min-width: 64rem) {
+      font-size: var(--text-5xl);
+      line-height: var(--tw-leading, var(--text-5xl--line-height));
+    }
   }
 
   & h2 {
