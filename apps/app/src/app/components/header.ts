@@ -116,9 +116,17 @@ import { SearchCommandTemplateComponent } from './search-command/search-command-
             (dialogOpened)="onSearchOpened()"
             (dialogClosed)="onSearchClosed($event)"
             sc-command-trigger
+            triggerClass="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium transition-colors border border-input bg-transparent hover:bg-accent hover:text-accent-foreground rounded-md min-w-[300px] text-left"
           >
-            <svg class="h-4 w-4 text-muted-foreground" slot="icon" si-search-icon></svg>
-            <span class="text-muted-foreground">Search...</span>
+            <svg class="h-4 w-4 text-muted-foreground shrink-0" slot="icon" si-search-icon></svg>
+            <span class="text-muted-foreground flex-1">Search documentation...</span>
+            <span class="ml-auto" slot="shortcut">
+              <kbd
+                class="inline-flex items-center px-1.5 py-0.5 text-xs font-mono bg-muted text-muted-foreground border border-border rounded opacity-60"
+              >
+                ⌘K
+              </kbd>
+            </span>
           </button>
         </div>
 
@@ -130,9 +138,9 @@ import { SearchCommandTemplateComponent } from './search-command/search-command-
             (dialogOpened)="onSearchOpened()"
             (dialogClosed)="onSearchClosed($event)"
             sc-command-trigger
-            triggerClass="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0"
+            triggerClass="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-input bg-transparent hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0"
           >
-            <svg class="h-4 w-4" slot="icon" si-search-icon></svg>
+            <svg class="h-4 w-4 text-muted-foreground" slot="icon" si-search-icon></svg>
           </button>
         </div>
 
