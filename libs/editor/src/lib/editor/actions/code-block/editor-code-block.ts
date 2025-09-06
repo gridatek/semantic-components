@@ -11,7 +11,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiFileCodeIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions';
+import { ScEditorExtensions } from '../../editor-extensions';
 import { CodeBlockData, ScEditorCodeBlockDialog } from './editor-code-block-dialog';
 
 @Component({
@@ -40,7 +40,7 @@ export class ScEditorCodeBlock {
   });
 
   private readonly parent = inject(ScEditor);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
   private readonly dialog = inject(Dialog);
 
   constructor() {

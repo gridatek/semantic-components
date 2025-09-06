@@ -5,7 +5,7 @@ import { ScTooltip } from '@semantic-components/ui';
 import { SiStrikethroughIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
+import { ScEditorExtensions } from '../editor-extensions';
 
 @Component({
   selector: 'sc-editor-strike',
@@ -32,7 +32,7 @@ export class ScEditorStrike {
 
   private readonly parent = inject(ScEditor);
 
-  extensions = inject(ScExtensions);
+  extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.strike.set(true);

@@ -4,7 +4,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
+import { ScEditorExtensions } from '../editor-extensions';
 
 @Component({
   selector: 'sc-editor-horizontal-rule',
@@ -31,7 +31,7 @@ export class ScEditorHorizontalRule {
 
   private readonly parent = inject(ScEditor);
 
-  extensions = inject(ScExtensions);
+  extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.horizontalRule.set(true);

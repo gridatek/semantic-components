@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiImagePlusIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
+import { ScEditorExtensions } from '../editor-extensions';
 import { ImageData, ScEditorImageInsertDialog } from './editor-image-insert-dialog';
 
 @Component({
@@ -30,7 +30,7 @@ import { ImageData, ScEditorImageInsertDialog } from './editor-image-insert-dial
 export class ScEditorImageInsert {
   private readonly parent = inject(ScEditor);
   private readonly dialog = inject(Dialog);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.image.set(true);

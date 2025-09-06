@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiFileVideoIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
+import { ScEditorExtensions } from '../editor-extensions';
 import { ScEditorVideoInsertDialog, VideoData } from './editor-video-insert-dialog';
 
 @Component({
@@ -30,7 +30,7 @@ import { ScEditorVideoInsertDialog, VideoData } from './editor-video-insert-dial
 export class ScEditorVideoInsert {
   private readonly parent = inject(ScEditor);
   private readonly dialog = inject(Dialog);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.youtube.set(true);

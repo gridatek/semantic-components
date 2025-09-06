@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiUnlinkIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions';
+import { ScEditorExtensions } from '../../editor-extensions';
 
 @Component({
   selector: 'sc-editor-link-remove',
@@ -33,7 +33,7 @@ export class ScEditorLinkRemove {
 
   private readonly parent = inject(ScEditor);
   private readonly dialog = inject(Dialog);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.unsetLink.set(true);

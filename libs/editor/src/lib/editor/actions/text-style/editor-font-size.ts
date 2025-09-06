@@ -4,7 +4,7 @@ import { ScMenu, ScMenuItem, ScMenuTriggerFor, ScToggle, ScTooltip } from '@sema
 import { SiTypeIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions';
+import { ScEditorExtensions } from '../../editor-extensions';
 
 @Component({
   selector: 'sc-editor-font-size',
@@ -38,7 +38,7 @@ import { ScExtensions } from '../../extensions';
 })
 export class ScEditorFontSize {
   private readonly parent = inject(ScEditor);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.textStyle.set(true);

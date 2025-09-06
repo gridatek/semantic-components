@@ -4,7 +4,7 @@ import { ScMenu, ScMenuItem, ScMenuTriggerFor, ScToggle, ScTooltip } from '@sema
 import { SiTypeIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions';
+import { ScEditorExtensions } from '../../editor-extensions';
 
 @Component({
   selector: 'sc-editor-font-family',
@@ -91,7 +91,7 @@ import { ScExtensions } from '../../extensions';
 })
 export class ScEditorFontFamily {
   private readonly parent = inject(ScEditor);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.fontFamily.set(true);

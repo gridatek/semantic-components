@@ -25,7 +25,7 @@ import Text from '@tiptap/extension-text';
 import { ScImportExport } from './actions/import-export/import-export.service';
 import { ScKeyboardShortcuts } from './actions/keyboard-shortcuts/keyboard-shortcuts.service';
 import { ScEditorContent } from './editor-content';
-import { ScExtensions } from './extensions';
+import { ScEditorExtensions } from './editor-extensions';
 import { ScWordCount } from './word-count/word-count.service';
 
 @Component({
@@ -46,7 +46,7 @@ import { ScWordCount } from './word-count/word-count.service';
       useExisting: forwardRef(() => ScEditor),
       multi: true,
     },
-    ScExtensions,
+    ScEditorExtensions,
     ScKeyboardShortcuts,
     ScWordCount,
     ScImportExport,
@@ -82,7 +82,7 @@ export class ScEditor implements ControlValueAccessor, OnDestroy {
 
   editor!: Editor;
 
-  readonly extensions = inject(ScExtensions);
+  readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     afterNextRender(async () => {

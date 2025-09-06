@@ -10,7 +10,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiQuoteIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
+import { ScEditorExtensions } from '../editor-extensions';
 
 @Component({
   selector: 'sc-editor-blockquote',
@@ -39,7 +39,7 @@ export class ScEditorBlockquote {
 
   private readonly parent = inject(ScEditor);
 
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.blockquote.set(true);

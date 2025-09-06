@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiLinkIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions';
+import { ScEditorExtensions } from '../../editor-extensions';
 import { LinkData, ScEditorLinkInsertDialog } from './editor-link-insert-dialog';
 
 @Component({
@@ -30,7 +30,7 @@ import { LinkData, ScEditorLinkInsertDialog } from './editor-link-insert-dialog'
 export class ScEditorLinkInsert {
   private readonly parent = inject(ScEditor);
   private readonly dialog = inject(Dialog);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.setLink.set(true);

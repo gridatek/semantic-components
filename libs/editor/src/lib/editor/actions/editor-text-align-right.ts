@@ -5,7 +5,7 @@ import { ScTooltip } from '@semantic-components/ui';
 import { SiAlignRightIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
+import { ScEditorExtensions } from '../editor-extensions';
 
 @Component({
   selector: 'sc-editor-text-align-right',
@@ -32,7 +32,7 @@ export class ScEditorTextAlignRight {
 
   private readonly parent = inject(ScEditor);
 
-  extensions = inject(ScExtensions);
+  extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.textAlignRight.set(true);

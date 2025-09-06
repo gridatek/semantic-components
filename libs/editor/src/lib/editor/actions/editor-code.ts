@@ -4,7 +4,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiCodeIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions';
+import { ScEditorExtensions } from '../editor-extensions';
 
 @Component({
   selector: 'sc-editor-code',
@@ -31,7 +31,7 @@ export class ScEditorCode {
 
   private readonly parent = inject(ScEditor);
 
-  extensions = inject(ScExtensions);
+  extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.code.set(true);

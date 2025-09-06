@@ -4,7 +4,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiTableIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions';
+import { ScEditorExtensions } from '../../editor-extensions';
 
 @Component({
   selector: 'sc-editor-table-insert',
@@ -27,7 +27,7 @@ import { ScExtensions } from '../../extensions';
 })
 export class ScEditorTableInsert {
   private readonly parent = inject(ScEditor);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.table.set(true);

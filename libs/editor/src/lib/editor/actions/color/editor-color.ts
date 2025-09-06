@@ -5,7 +5,7 @@ import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiPaletteIcon } from '@semantic-icons/lucide-icons';
 
 import { ScEditor } from '../../editor';
-import { ScExtensions } from '../../extensions';
+import { ScEditorExtensions } from '../../editor-extensions';
 import { ColorData, ScEditorColorDialog } from './editor-color-dialog';
 
 @Component({
@@ -30,7 +30,7 @@ import { ColorData, ScEditorColorDialog } from './editor-color-dialog';
 export class ScEditorColor {
   private readonly parent = inject(ScEditor);
   private readonly dialog = inject(Dialog);
-  private readonly extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScEditorExtensions);
 
   constructor() {
     this.extensions.color.set(true);
