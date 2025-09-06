@@ -9,6 +9,8 @@ import {
   output,
 } from '@angular/core';
 
+import { PlatformService } from '@semantic-components/utils';
+
 import { CommandDialog } from './command-dialog';
 
 export interface CommandItemModel {
@@ -78,7 +80,8 @@ export interface CommandTriggerConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandTrigger {
-  commandDialogService = inject(CommandDialog);
+  private readonly commandDialogService = inject(CommandDialog);
+  private readonly platformService = inject(PlatformService);
 
   // Inputs
   config = input<CommandTriggerConfig>({});
@@ -89,22 +92,11 @@ export class ScCommandTrigger {
   dialogOpened = output<void>();
   dialogClosed = output<any>();
 
-  // OS detection for keyboard shortcuts
-  isMac = computed(() => {
-    if (typeof navigator !== 'undefined') {
-      return (
-        navigator.platform.toUpperCase().indexOf('MAC') >= 0 ||
-        navigator.userAgent.toUpperCase().indexOf('MAC') >= 0
-      );
-    }
-    return false;
-  });
-
+  // Keyboard shortcut formatting using platform service
   keyboardShortcut = computed(() => {
-    const key = this.config().shortcutKey?.toUpperCase() || 'K';
-    const shift = this.config().requiresShift ? '+Shift' : '';
-    const base = this.isMac() ? '⌘' : 'Ctrl';
-    return `${base}${shift}+${key}`;
+    const key = this.config().shortcutKey || 'K';
+    const requiresShift = this.config().requiresShift || false;
+    return this.platformService.formatShortcut(key, requiresShift);
   });
 
   constructor() {
@@ -118,7 +110,9 @@ export class ScCommandTrigger {
         const targetKey = config.shortcutKey?.toLowerCase() || 'k';
         const requiresShift = config.requiresShift || false;
 
-        const hasModifier = e.metaKey || e.ctrlKey;
+        // Use platform service to determine correct modifier key
+        const isMac = this.platformService.isMac();
+        const hasModifier = isMac ? e.metaKey : e.ctrlKey;
         const hasShift = e.shiftKey;
         const keyMatches = e.key.toLowerCase() === targetKey;
 

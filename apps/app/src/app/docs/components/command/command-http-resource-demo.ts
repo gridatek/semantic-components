@@ -22,6 +22,7 @@ import {
   ScCommandList,
   ScCommandSeparator,
 } from '@semantic-components/ui';
+import { PlatformService } from '@semantic-components/utils';
 
 export interface CommandItem {
   id: string;
@@ -254,23 +255,14 @@ export class CommandHttpResourceDemo {
   @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
 
   private http = inject(HttpClient);
+  private platformService = inject(PlatformService);
   commandDialogService = inject(CommandDialog);
 
   // Signals for reactive state
   searchQuery = signal('');
 
-  // OS detection for keyboard shortcuts
-  isMac = computed(() => {
-    if (typeof navigator !== 'undefined') {
-      return (
-        navigator.platform.toUpperCase().indexOf('MAC') >= 0 ||
-        navigator.userAgent.toUpperCase().indexOf('MAC') >= 0
-      );
-    }
-    return false;
-  });
-
-  keyboardShortcut = computed(() => (this.isMac() ? '⌘K' : 'Ctrl+K'));
+  // Keyboard shortcut using platform service
+  keyboardShortcut = computed(() => this.platformService.formatShortcut('K'));
 
   // Static commands
   private staticCommands: CommandItem[] = [

@@ -2,6 +2,7 @@ import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScCard, ScCardContent, ScCardHeader, ScCardTitle } from '@semantic-components/ui';
+import { PlatformService } from '@semantic-components/utils';
 
 import { ShortcutMapping } from './keyboard-shortcuts.service';
 
@@ -37,6 +38,7 @@ import { ShortcutMapping } from './keyboard-shortcuts.service';
 })
 export class ScEditorKeyboardShortcutsHelpDialog {
   private readonly data = inject<ShortcutMapping[]>(DIALOG_DATA);
+  private readonly platformService = inject(PlatformService);
 
   get shortcuts() {
     return this.data || [];
@@ -46,7 +48,7 @@ export class ScEditorKeyboardShortcutsHelpDialog {
     const parts: string[] = [];
 
     if (shortcut.ctrlOrCmd) {
-      parts.push(navigator.platform.indexOf('Mac') > -1 ? '⌘' : 'Ctrl');
+      parts.push(this.platformService.modifierKey());
     }
 
     if (shortcut.shift) {
