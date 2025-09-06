@@ -1,10 +1,14 @@
 import { DOCUMENT, Injectable, afterNextRender, computed, inject, signal } from '@angular/core';
 
+import { ScLocalStorageService, ScWindowService } from '@semantic-components/utils';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ScTheme {
   private readonly document = inject<Document>(DOCUMENT);
+  private readonly localStorage = inject(ScLocalStorageService);
+  private readonly windowService = inject(ScWindowService);
 
   private readonly isDarkModeSignal = signal<boolean>(false);
 
@@ -23,14 +27,16 @@ export class ScTheme {
 
   private initializeTheme(): void {
     // Check if user has a saved preference
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = this.localStorage.getItem<'light' | 'dark'>('theme');
 
     if (savedTheme) {
       this.isDarkModeSignal.set(savedTheme === 'dark');
     } else {
       // If no saved preference, check system preference
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      this.isDarkModeSignal.set(prefersDark);
+      const mediaQuery = this.windowService.matchMedia('(prefers-color-scheme: dark)');
+      if (mediaQuery) {
+        this.isDarkModeSignal.set(mediaQuery.matches);
+      }
     }
 
     // Apply the theme
@@ -40,7 +46,7 @@ export class ScTheme {
   toggleTheme(): void {
     this.isDarkModeSignal.update((t) => !t);
     this.applyTheme(this.isDarkMode());
-    localStorage.setItem('theme', this.theme());
+    this.localStorage.setItem('theme', this.theme());
   }
 
   private applyTheme(isDark: boolean): void {

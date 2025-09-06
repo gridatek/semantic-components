@@ -1,13 +1,17 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
+
+import { ScWindowService } from '../window/window.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ScPlatformService {
+  private readonly windowService = inject(ScWindowService);
   private _platform = signal<string | undefined>(undefined);
 
   constructor() {
-    if (typeof navigator !== 'undefined') {
+    const navigator = this.windowService.getNavigator();
+    if (navigator) {
       this._platform.set(navigator.platform);
     }
   }
@@ -16,7 +20,8 @@ export class ScPlatformService {
    * Returns true if the current platform is macOS
    */
   readonly isMac = computed(() => {
-    if (typeof navigator !== 'undefined') {
+    const navigator = this.windowService.getNavigator();
+    if (navigator) {
       return (
         navigator.platform.toUpperCase().indexOf('MAC') >= 0 ||
         navigator.userAgent.toUpperCase().indexOf('MAC') >= 0
@@ -29,7 +34,8 @@ export class ScPlatformService {
    * Returns true if the current platform is Windows
    */
   readonly isWindows = computed(() => {
-    if (typeof navigator !== 'undefined') {
+    const navigator = this.windowService.getNavigator();
+    if (navigator) {
       return (
         navigator.platform.toUpperCase().indexOf('WIN') >= 0 ||
         navigator.userAgent.toUpperCase().indexOf('WIN') >= 0
@@ -42,7 +48,8 @@ export class ScPlatformService {
    * Returns true if the current platform is Linux
    */
   readonly isLinux = computed(() => {
-    if (typeof navigator !== 'undefined') {
+    const navigator = this.windowService.getNavigator();
+    if (navigator) {
       return (
         navigator.platform.toUpperCase().indexOf('LINUX') >= 0 ||
         navigator.userAgent.toUpperCase().indexOf('LINUX') >= 0
