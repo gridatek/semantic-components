@@ -10,9 +10,9 @@ import {
 import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiFileCodeIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions/extensions';
-import { CodeBlockData, ScCodeBlockDialog } from '../toolbar/code-block-dialog';
+import { ScEditor } from '../../editor';
+import { ScExtensions } from '../../extensions/extensions';
+import { CodeBlockData, ScEditorCodeBlockDialog } from './editor-code-block-dialog';
 
 @Component({
   selector: 'sc-editor-code-block',
@@ -52,7 +52,7 @@ export class ScEditorCodeBlock {
   }
 
   protected toggleCodeBlock() {
-    const dialogRef = this.dialog.open<CodeBlockData>(ScCodeBlockDialog);
+    const dialogRef = this.dialog.open<CodeBlockData>(ScEditorCodeBlockDialog);
 
     dialogRef.closed.subscribe((result: CodeBlockData | undefined) => {
       if (result) {

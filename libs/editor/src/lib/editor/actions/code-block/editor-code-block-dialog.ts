@@ -10,7 +10,7 @@ export interface CodeBlockData {
 }
 
 @Component({
-  selector: 'sc-code-block-dialog',
+  selector: 'sc-editor-code-block-dialog',
   imports: [ReactiveFormsModule],
   template: `
     <div
@@ -103,7 +103,7 @@ export interface CodeBlockData {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCodeBlockDialog {
+export class ScEditorCodeBlockDialog {
   readonly dialogRef = inject<DialogRef<CodeBlockData>>(DialogRef<CodeBlockData>);
 
   readonly languages = langsArray;
