@@ -176,44 +176,34 @@
   }
 
   & img {
-    margin-top: 2em;
-    margin-bottom: 2em;
-    border-radius: 0.5rem;
-    border: 1px solid var(--prose-border);
+    @apply mt-8 mb-8 rounded-lg border;
+    border-color: var(--prose-border);
   }
 
   & figure {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    @apply mt-8 mb-8;
   }
 
   & figcaption {
+    @apply text-sm leading-tight mt-3 text-center;
     color: var(--prose-muted);
-    font-size: 0.875em;
-    line-height: 1.4;
-    margin-top: 0.8em;
-    text-align: center;
   }
 
   & video {
-    margin-top: 2em;
-    margin-bottom: 2em;
-    border-radius: 0.5rem;
+    @apply mt-8 mb-8 rounded-lg;
   }
 
   & hr {
-    border: none;
-    border-top: 1px solid var(--prose-border);
-    margin-top: 3em;
-    margin-bottom: 3em;
+    @apply border-none border-t mt-12 mb-12;
+    border-color: var(--prose-border);
   }
 
   & > :first-child {
-    margin-top: 0;
+    @apply mt-0;
   }
 
   & > :last-child {
-    margin-bottom: 0;
+    @apply mb-0;
   }
 }
 

@@ -125,7 +125,7 @@ import { ScHeading } from '@semantic-components/ui';
             Prose Typography
           </h2>
           
-          <div class="prose prose-sm lg:prose-lg max-w-none">
+          <div class="prose max-w-none">
             <!-- Headings -->
             <h3>Headings</h3>
             <h1>Heading 1</h1>
