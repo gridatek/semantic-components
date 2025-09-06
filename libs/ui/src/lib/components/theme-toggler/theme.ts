@@ -1,4 +1,12 @@
-import { DOCUMENT, Injectable, afterNextRender, computed, inject, signal } from '@angular/core';
+import {
+  DOCUMENT,
+  Injectable,
+  afterNextRender,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 
 import { ScLocalStorageService, ScWindowService } from '@semantic-components/utils';
 
@@ -11,6 +19,7 @@ export class ScTheme {
   private readonly windowService = inject(ScWindowService);
 
   private readonly isDarkModeSignal = signal<boolean>(false);
+  private readonly initialized = signal<boolean>(false);
 
   readonly isDarkMode = computed(() => this.isDarkModeSignal());
 
@@ -19,9 +28,12 @@ export class ScTheme {
   });
 
   constructor() {
-    afterNextRender(() => {
-      // Initialize theme from localStorage or system preference
-      this.initializeTheme();
+    // React to window service availability
+    effect(() => {
+      if (this.windowService.isAvailable() && !this.initialized()) {
+        this.initializeTheme();
+        this.initialized.set(true);
+      }
     });
   }
 
