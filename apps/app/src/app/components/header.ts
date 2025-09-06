@@ -14,6 +14,7 @@ import {
   ScCommandTrigger,
   ScThemeToggler,
 } from '@semantic-components/ui';
+import { ScPlatformService } from '@semantic-components/utils';
 import { SiMenuIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 import { AppStateService } from '../app-state.service';
@@ -124,7 +125,7 @@ import { SearchCommandTemplateComponent } from './search-command/search-command-
               <kbd
                 class="inline-flex items-center px-1.5 py-0.5 text-xs font-mono bg-muted text-muted-foreground border border-border rounded opacity-60"
               >
-                ⌘K
+                {{ platformService.formatShortcut('K') }}
               </kbd>
             </span>
           </button>
@@ -169,6 +170,7 @@ export class Header {
 
   private readonly appStateService = inject(AppStateService);
   private readonly router = inject(Router);
+  protected readonly platformService = inject(ScPlatformService);
 
   // Search configurations
   protected readonly searchConfig: CommandTriggerConfig = {
