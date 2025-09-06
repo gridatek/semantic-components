@@ -1,92 +1,33 @@
 /**
  * Semantic Components - Rich Text Editor Styles
  * 
- * Styles for TipTap-based rich text editor components and ProseMirror content.
+ * Editor-specific styles for TipTap-based rich text editor components.
+ * Typography is handled by the .prose utility class.
  * 
  * Features:
- * - Base typography and content styling
  * - Placeholder text handling
- * - Heading hierarchy (h1-h3) with consistent spacing
- * - List styles (ordered and unordered)
- * - Block quote styling with left border accent
- * - Code block and inline code formatting
- * - Table styling with borders and padding
- * - Dark mode compatibility
+ * - Editor-specific behavior and interactions
+ * - Focus states and selection styles
  * 
  * Used by:
  * - Rich text editor component
  * - Content management interfaces
  * - Comment and messaging systems
  * - Document editing workflows
+ * 
+ * Note: Typography styling is provided by .prose utility class
  */
 
-/* Base styles for the editor content */
+/* Base editor container */
 .ProseMirror {
-  @apply text-base text-foreground;
+  outline: none;
 }
 
 /* Placeholder */
 .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
-  @apply text-muted-foreground float-left h-0 pointer-events-none;
-}
-
-/* Headings */
-.ProseMirror h1 {
-  @apply text-3xl font-bold mt-6 mb-4;
-}
-
-.ProseMirror h2 {
-  @apply text-2xl font-bold mt-5 mb-3;
-}
-
-.ProseMirror h3 {
-  @apply text-xl font-bold mt-4 mb-2;
-}
-
-/* Paragraphs and spacing */
-.ProseMirror p {
-  @apply my-2;
-}
-
-/* Lists */
-.ProseMirror ul {
-  @apply list-disc pl-6 my-2;
-}
-
-.ProseMirror ol {
-  @apply list-decimal pl-6 my-2;
-}
-
-/* Block quotes */
-.ProseMirror blockquote {
-  @apply border-l-4 border-muted pl-4 italic my-4;
-}
-
-/* Code blocks */
-.ProseMirror pre {
-  @apply bg-muted p-2 rounded my-2 text-sm font-mono;
-}
-
-.ProseMirror code {
-  @apply bg-muted px-1 py-0.5 rounded text-sm font-mono;
-}
-
-/* Table styles */
-.ProseMirror table {
-  @apply border-collapse w-full my-4;
-}
-
-.ProseMirror th {
-  @apply border border-border bg-muted font-bold p-2;
-}
-
-.ProseMirror td {
-  @apply border border-border p-2;
-}
-
-/* Dark mode adjustments - these will be applied when dark mode is active */
-.dark .ProseMirror pre,
-.dark .ProseMirror code {
-  @apply bg-muted text-muted-foreground;
+  color: hsl(var(--muted-foreground));
+  float: left;
+  height: 0;
+  pointer-events: none;
 }
