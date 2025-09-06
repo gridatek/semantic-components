@@ -25,21 +25,26 @@ export class ScExtensions {
     () => this.textAlignRight() || this.textAlignLeft() || this.textAlignCenter(),
   );
 
-  //
+  // Typography extensions
+  bold = signal<boolean>(false);
+  italic = signal<boolean>(false);
+  underline = signal<boolean>(false);
+  strike = signal<boolean>(false);
+  code = signal<boolean>(false);
+
+  // Block extensions
+  blockquote = signal<boolean>(false);
+  codeBlock = signal<boolean>(false);
+
+  // Media extensions
+  image = signal<boolean>(false);
+  youtube = signal<boolean>(false);
+
+  // Other extensions
   highlight = signal<boolean>(false);
   color = signal<boolean>(false);
-  underline = signal<boolean>(false);
   fontFamily = signal<boolean>(false);
-  bold = signal<boolean>(false);
-  youtube = signal<boolean>(false);
-  image = signal<boolean>(false);
-  code = signal<boolean>(false);
-  codeBlock = signal<boolean>(false);
-  strike = signal<boolean>(false);
-  italic = signal<boolean>(false);
-  blockquote = signal<boolean>(false);
-
-  horizontalRule = signal<boolean>(false);
   textStyle = signal<boolean>(false);
+  horizontalRule = signal<boolean>(false);
   table = signal<boolean>(false);
 }

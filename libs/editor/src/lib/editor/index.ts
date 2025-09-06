@@ -53,7 +53,6 @@ export * from './editor-toolbar';
 export * from './actions/color/editor-color';
 export * from './actions/color/editor-color-dialog';
 export * from './actions/font-family/editor-font-family';
-export * from './extensions/extension-heading';
 export * from './actions/text-style/editor-font-size';
 export * from './actions/code-block/editor-code-block-dialog';
 export * from './actions/keyboard-shortcuts/keyboard-shortcuts.service';
