@@ -21,38 +21,41 @@ import { SearchCommandTemplateComponent } from '../../../components/search-comma
 
       <div class="flex flex-wrap gap-4">
         <!-- Desktop Style -->
-        <sc-command-trigger
+        <button
           [config]="searchConfig"
           [dialogTemplate]="searchTemplate"
           (dialogOpened)="onSearchOpened('Algolia Search')"
           (dialogClosed)="onSearchClosed($event)"
+          sc-command-trigger
         >
           <svg class="h-4 w-4 text-muted-foreground" slot="icon" si-search-icon></svg>
           <span class="text-muted-foreground">Search with Algolia...</span>
-        </sc-command-trigger>
+        </button>
 
         <!-- Compact Style -->
-        <sc-command-trigger
+        <button
           [config]="compactConfig"
           [dialogTemplate]="searchTemplate"
           (dialogOpened)="onSearchOpened('Compact Search')"
           (dialogClosed)="onSearchClosed($event)"
+          sc-command-trigger
           triggerClass="bg-primary text-primary-foreground hover:bg-primary/90"
         >
           <svg class="h-4 w-4" slot="icon" si-search-icon></svg>
           Quick Search
-        </sc-command-trigger>
+        </button>
 
         <!-- Icon Only -->
-        <sc-command-trigger
+        <button
           [config]="iconConfig"
           [dialogTemplate]="searchTemplate"
           (dialogOpened)="onSearchOpened('Icon Search')"
           (dialogClosed)="onSearchClosed($event)"
+          sc-command-trigger
           triggerClass="h-10 w-10 rounded-full bg-accent hover:bg-accent/80"
         >
           <svg class="h-5 w-5" slot="icon" si-search-icon></svg>
-        </sc-command-trigger>
+        </button>
       </div>
 
       <div class="bg-muted/50 rounded-lg p-4">

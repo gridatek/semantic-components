@@ -110,28 +110,30 @@ import { SearchCommandTemplateComponent } from './search-command/search-command-
       <div class="flex items-center ml-auto space-x-2">
         <!-- Search Trigger (Desktop) -->
         <div class="hidden md:block">
-          <sc-command-trigger
+          <button
             [config]="searchConfig"
             [dialogTemplate]="searchTemplate"
             (dialogOpened)="onSearchOpened()"
             (dialogClosed)="onSearchClosed($event)"
+            sc-command-trigger
           >
             <svg class="h-4 w-4 text-muted-foreground" slot="icon" si-search-icon></svg>
             <span class="text-muted-foreground">Search...</span>
-          </sc-command-trigger>
+          </button>
         </div>
 
         <!-- Search Trigger (Mobile) -->
         <div class="md:hidden">
-          <sc-command-trigger
+          <button
             [config]="mobileSearchConfig"
             [dialogTemplate]="searchTemplate"
             (dialogOpened)="onSearchOpened()"
             (dialogClosed)="onSearchClosed($event)"
+            sc-command-trigger
             triggerClass="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9 p-0"
           >
             <svg class="h-4 w-4" slot="icon" si-search-icon></svg>
-          </sc-command-trigger>
+          </button>
         </div>
 
         <a

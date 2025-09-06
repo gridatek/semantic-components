@@ -35,11 +35,11 @@ export interface CommandTriggerConfig {
 }
 
 @Component({
-  selector: 'sc-command-trigger',
+  selector: 'button[sc-command-trigger]',
   imports: [],
   template: `
     <!-- Trigger Button -->
-    <button
+    <!--button
       class="inline-flex items-center gap-2 px-3 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
       [class]="triggerClass()"
       (click)="openDialog()"
@@ -65,9 +65,15 @@ export interface CommandTriggerConfig {
           {{ keyboardShortcut() }}
         </kbd>
       </ng-content>
-    </button>
+    </button-->
+
+    <ng-content />
   `,
-  styles: [``],
+  host: {
+    '[class]': 'triggerClass()',
+    '(click)': 'openDialog()',
+  },
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

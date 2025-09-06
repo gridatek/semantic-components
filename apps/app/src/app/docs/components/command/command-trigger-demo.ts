@@ -52,18 +52,19 @@ export interface CommandItemModel {
       <div class="space-y-4">
         <h4 class="text-lg font-medium">Basic Usage</h4>
         <div class="flex flex-wrap gap-4">
-          <sc-command-trigger [config]="basicConfig" />
+          <button [config]="basicConfig" sc-command-trigger>Default</button>
 
-          <sc-command-trigger [config]="basicConfig">Custom Search</sc-command-trigger>
+          <button [config]="basicConfig" sc-command-trigger>Custom Search</button>
 
-          <sc-command-trigger
+          <button
             [config]="basicConfig"
+            sc-command-trigger
             triggerClass="bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
           >
             <span slot="icon">🚀</span>
             Launch Commands
             <span slot="shortcut">⌘K</span>
-          </sc-command-trigger>
+          </button>
         </div>
       </div>
 
@@ -71,10 +72,14 @@ export interface CommandItemModel {
       <div class="space-y-4">
         <h4 class="text-lg font-medium">With API Integration</h4>
         <div class="flex gap-4">
-          <sc-command-trigger [config]="apiConfig" (commandExecuted)="onCommandExecuted($event)">
+          <button
+            [config]="apiConfig"
+            (commandExecuted)="onCommandExecuted($event)"
+            sc-command-trigger
+          >
             <span slot="icon">🌐</span>
             Search API
-          </sc-command-trigger>
+          </button>
         </div>
         <div class="text-sm text-gray-600">Type 2+ characters to search JSONPlaceholder API</div>
       </div>
@@ -83,13 +88,14 @@ export interface CommandItemModel {
       <div class="space-y-4">
         <h4 class="text-lg font-medium">Custom Commands</h4>
         <div class="flex gap-4">
-          <sc-command-trigger
+          <button
             [config]="customConfig"
+            sc-command-trigger
             triggerClass="bg-green-50 border-green-300 text-green-800 hover:bg-green-100"
           >
             <span slot="icon">⚡</span>
             Quick Actions
-          </sc-command-trigger>
+          </button>
         </div>
       </div>
 
@@ -97,15 +103,15 @@ export interface CommandItemModel {
       <div class="space-y-4">
         <h4 class="text-lg font-medium">Different Sizes</h4>
         <div class="flex flex-wrap items-center gap-4">
-          <sc-command-trigger [config]="smallConfig" triggerClass="px-2 py-1 text-xs">
+          <button [config]="smallConfig" sc-command-trigger triggerClass="px-2 py-1 text-xs">
             Small
-          </sc-command-trigger>
+          </button>
 
-          <sc-command-trigger [config]="basicConfig">Default</sc-command-trigger>
+          <button [config]="basicConfig" sc-command-trigger>Default</button>
 
-          <sc-command-trigger [config]="largeConfig" triggerClass="px-4 py-3 text-lg">
+          <button [config]="largeConfig" sc-command-trigger triggerClass="px-4 py-3 text-lg">
             Large
-          </sc-command-trigger>
+          </button>
         </div>
       </div>
 
@@ -113,62 +119,68 @@ export interface CommandItemModel {
       <div class="space-y-4">
         <h4 class="text-lg font-medium">Different Keyboard Shortcuts</h4>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <sc-command-trigger
+          <button
             [config]="basicConfig"
             [dialogTemplate]="basicTemplate"
             (dialogOpened)="onDialogOpened('Basic')"
             (dialogClosed)="onDialogClosed($event)"
+            sc-command-trigger
           >
             <span slot="icon">⌘</span>
             Basic Commands
-          </sc-command-trigger>
+          </button>
 
-          <sc-command-trigger
+          <button
             [config]="apiConfig"
             [dialogTemplate]="apiTemplate"
             (dialogOpened)="onDialogOpened('API Search')"
             (dialogClosed)="onDialogClosed($event)"
+            sc-command-trigger
           >
             <span slot="icon">🌐</span>
             API Search
-          </sc-command-trigger>
+          </button>
 
-          <sc-command-trigger
+          <button
             [config]="customConfig"
             [dialogTemplate]="customTemplate"
             (dialogOpened)="onDialogOpened('Quick Actions')"
             (dialogClosed)="onDialogClosed($event)"
+            sc-command-trigger
           >
             <span slot="icon">⚡</span>
             Quick Actions
-          </sc-command-trigger>
+          </button>
 
-          <sc-command-trigger
+          <button
             [config]="smallConfig"
             [dialogTemplate]="basicTemplate"
             (dialogOpened)="onDialogOpened('Quick Search')"
+            sc-command-trigger
           >
             <span slot="icon">🔍</span>
             Quick Search
-          </sc-command-trigger>
+          </button>
 
-          <sc-command-trigger
+          <button
             [config]="largeConfig"
             [dialogTemplate]="customTemplate"
             (dialogOpened)="onDialogOpened('Advanced')"
+            sc-command-trigger
           >
             <span slot="icon">🚀</span>
             Advanced
-          </sc-command-trigger>
+          </button>
 
-          <sc-command-trigger
+          <button
             [config]="eventConfig"
             [dialogTemplate]="eventTemplate"
             (dialogOpened)="onDialogOpened('Events')"
+            sc-command-trigger
           >
             <span slot="icon">📊</span>
             Events
-          </sc-command-trigger>
+          </button>
         </div>
         <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
           <h5 class="font-medium text-amber-800 mb-2">⌨️ Try These Shortcuts:</h5>
@@ -205,14 +217,15 @@ export interface CommandItemModel {
       <div class="space-y-4">
         <h4 class="text-lg font-medium">Event Handling</h4>
         <div class="flex gap-4">
-          <sc-command-trigger
+          <button
             [config]="eventConfig"
             (dialogClosed)="onDialogClosed($event)"
             (commandExecuted)="onCommandExecuted($event)"
+            sc-command-trigger
           >
             <span slot="icon">📊</span>
             Events Demo
-          </sc-command-trigger>
+          </button>
         </div>
         @if (lastEvent) {
           <div class="p-3 bg-blue-50 rounded-lg text-sm">
