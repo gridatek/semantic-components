@@ -20,7 +20,7 @@
   /* Typography styles using CSS nesting */
   & h1 {
     color: var(--prose-body);
-    font-weight: 800;
+    font-weight: var(--font-weight-extrabold);
     font-size: 2.25rem;
     line-height: 1.1;
     letter-spacing: -0.025em;
