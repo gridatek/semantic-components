@@ -14,7 +14,7 @@ export * from './actions/import-export/editor-import';
 export * from './actions/editor-horizontal-rule';
 export * from './actions/editor-italic';
 export * from './actions/editor-ordered-list';
-export * from './actions/editor-paragraph';
+export * from './actions/editor-heading-and-paragraph-format';
 export * from './actions/editor-redo';
 export * from './actions/editor-strike';
 export * from './actions/editor-text-align-center';

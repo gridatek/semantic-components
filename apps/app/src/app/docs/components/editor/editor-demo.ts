@@ -15,6 +15,7 @@ import {
   ScEditorFontSize,
   ScEditorFooter,
   ScEditorGroup,
+  ScEditorHeadingAndParagraphFormat,
   ScEditorHighlight,
   ScEditorHorizontalRule,
   ScEditorImageInsert,
@@ -24,7 +25,6 @@ import {
   ScEditorLinkInsert,
   ScEditorLinkRemove,
   ScEditorOrderedList,
-  ScEditorParagraph,
   ScEditorRedo,
   ScEditorStrike,
   ScEditorTableAddCellAttribute,
@@ -71,7 +71,7 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorBlockquote,
     ScEditorBulletList,
     ScEditorOrderedList,
-    ScEditorParagraph,
+    ScEditorHeadingAndParagraphFormat,
     ScSeparator,
     ScEditorGroup,
     ScEditorStrike,
@@ -132,7 +132,7 @@ import { ScSeparator } from '@semantic-components/ui';
             <sc-separator class="h-5" orientation="vertical" />
 
             <!-- Structure -->
-            <sc-editor-paragraph />
+            <sc-editor-heading-and-paragraph-format />
             <sc-editor-blockquote />
             <sc-separator class="h-5" orientation="vertical" />
 

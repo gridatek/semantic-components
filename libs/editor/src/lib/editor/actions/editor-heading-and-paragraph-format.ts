@@ -14,7 +14,7 @@ import { SiHeading1Icon, SiPilcrowIcon } from '@semantic-icons/lucide-icons';
 import { ScEditor } from '../editor';
 
 @Component({
-  selector: 'sc-editor-paragraph',
+  selector: 'sc-editor-heading-and-paragraph-format',
   imports: [
     ScMenuShortcut,
     ScMenuSeparator,
@@ -34,9 +34,9 @@ import { ScEditor } from '../editor';
       sc-toggle
       variant="outline"
       size="sm"
-      scTooltip="Paragraph & headings"
+      scTooltip="Heading and paragraph formatting"
       type="button"
-      aria-label="Format as paragraph or heading"
+      aria-label="Heading and paragraph formatting options"
     >
       <svg class="w-4 h-4 shrink-0" si-pilcrow-icon></svg>
       <span class="text-sm font-medium truncate">{{ getCurrentFormat() }}</span>
@@ -154,7 +154,7 @@ import { ScEditor } from '../editor';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorParagraph {
+export class ScEditorHeadingAndParagraphFormat {
   private readonly parent = inject(ScEditor);
 
   get editor() {
