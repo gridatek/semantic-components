@@ -28,7 +28,7 @@ export class ScEditorFooter {
 
   protected readonly class = computed(() =>
     cn(
-      'flex items-center justify-between px-3 py-2 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 text-sm text-gray-600 dark:text-gray-400 rounded-b-md',
+      'flex items-center justify-between px-3 py-2 border-t border-border bg-muted text-sm text-muted-foreground rounded-b-md',
       this.classInput(),
     ),
   );

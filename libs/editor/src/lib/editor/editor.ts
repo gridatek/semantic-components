@@ -72,10 +72,7 @@ export class ScEditor implements ControlValueAccessor, OnDestroy {
   readonly wordLimit = input<number | null>(null);
 
   protected readonly class = computed(() =>
-    cn(
-      'block border border-gray-200 dark:border-gray-700 rounded-md overflow-hidden',
-      this.classInput(),
-    ),
+    cn('block border border-input rounded-md overflow-hidden', this.classInput()),
   );
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -229,7 +226,7 @@ export class ScEditor implements ControlValueAccessor, OnDestroy {
       editable: this.isEditable(),
       editorProps: {
         attributes: {
-          class: 'prose dark:prose-invert focus:outline-none max-w-full',
+          class: 'prose focus:outline-none max-w-full',
         },
       },
     });

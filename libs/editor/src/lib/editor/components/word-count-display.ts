@@ -20,7 +20,7 @@ import { ScWordCount } from '../services/word-count.service';
         <span [class]="textClass('words')">
           {{ wordCount().words }}
           @if (wordLimit()) {
-            <span class="text-gray-400">/ {{ wordLimit() }}</span>
+            <span class="text-muted-foreground">/ {{ wordLimit() }}</span>
           }
           {{ wordCount().words === 1 ? 'word' : 'words' }}
         </span>
@@ -30,7 +30,7 @@ import { ScWordCount } from '../services/word-count.service';
         <span [class]="textClass('characters')">
           {{ wordCount().characters }}
           @if (characterLimit()) {
-            <span class="text-gray-400">/ {{ characterLimit() }}</span>
+            <span class="text-muted-foreground">/ {{ characterLimit() }}</span>
           }
           {{ wordCount().characters === 1 ? 'character' : 'characters' }}
         </span>
@@ -40,7 +40,7 @@ import { ScWordCount } from '../services/word-count.service';
         <div class="flex gap-2">
           @if (characterLimit()) {
             <div class="flex items-center gap-1">
-              <div class="h-2 w-16 rounded-full bg-gray-200 dark:bg-gray-700">
+              <div class="h-2 w-16 rounded-full bg-secondary">
                 <div
                   class="h-2 rounded-full transition-all duration-300"
                   [class]="progressBarClass('characters')"
@@ -52,7 +52,7 @@ import { ScWordCount } from '../services/word-count.service';
           }
           @if (wordLimit()) {
             <div class="flex items-center gap-1">
-              <div class="h-2 w-16 rounded-full bg-gray-200 dark:bg-gray-700">
+              <div class="h-2 w-16 rounded-full bg-secondary">
                 <div
                   class="h-2 rounded-full transition-all duration-300"
                   [class]="progressBarClass('words')"
@@ -82,7 +82,7 @@ export class ScEditorWordCount {
   });
 
   protected readonly containerClass = computed(() =>
-    cn('flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400', this.classInput()),
+    cn('flex items-center gap-4 text-sm text-muted-foreground', this.classInput()),
   );
 
   protected readonly wordCount = computed(() => this.wordCountService.wordCount());
@@ -104,8 +104,8 @@ export class ScEditorWordCount {
         : this.wordCountService.isCharacterLimitExceeded();
 
     return cn('text-sm', {
-      'text-red-500 dark:text-red-400': isExceeded,
-      'text-gray-600 dark:text-gray-400': !isExceeded,
+      'text-destructive': isExceeded,
+      'text-muted-foreground': !isExceeded,
     });
   }
 

@@ -10,7 +10,7 @@ import { ScEditor } from '../editor';
   imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem],
   template: `
     <button
-      class="flex items-center justify-center rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-50 dark:bg-gray-600 dark:text-gray-400 dark:hover:bg-gray-500 dark:hover:text-white dark:focus:ring-gray-600"
+      class="flex items-center justify-center rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-50 "
       [cdkMenuTriggerFor]="typographyDropdown"
       type="button"
     >
@@ -34,11 +34,11 @@ import { ScEditor } from '../editor';
 
     <!-- Heading Dropdown -->
     <ng-template #typographyDropdown>
-      <div class="z-10 w-72 rounded bg-white p-2 shadow dark:bg-gray-700" cdkMenu>
+      <div class="z-10 w-72 rounded bg-white p-2 shadow " cdkMenu>
         <ul class="space-y-1 text-sm font-medium" aria-labelledby="typographyDropdownButton">
           <li>
             <button
-              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
+              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 "
               (cdkMenuItemTriggered)="setHeadingLevel(1)"
               data-heading-level="1"
               cdkMenuItem
@@ -47,17 +47,17 @@ import { ScEditor } from '../editor';
               Heading 1
               <div class="space-x-1.5">
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Cmd
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Alt
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   1
                 </kbd>
@@ -66,7 +66,7 @@ import { ScEditor } from '../editor';
           </li>
           <li>
             <button
-              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
+              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 "
               (cdkMenuItemTriggered)="setHeadingLevel(2)"
               data-heading-level="2"
               cdkMenuItem
@@ -75,17 +75,17 @@ import { ScEditor } from '../editor';
               Heading 2
               <div class="space-x-1.5">
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Cmd
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Alt
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   2
                 </kbd>
@@ -94,7 +94,7 @@ import { ScEditor } from '../editor';
           </li>
           <li>
             <button
-              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
+              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 "
               (cdkMenuItemTriggered)="setHeadingLevel(3)"
               data-heading-level="3"
               cdkMenuItem
@@ -103,17 +103,17 @@ import { ScEditor } from '../editor';
               Heading 3
               <div class="space-x-1.5">
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Cmd
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Alt
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   3
                 </kbd>
@@ -122,7 +122,7 @@ import { ScEditor } from '../editor';
           </li>
           <li>
             <button
-              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
+              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 "
               (cdkMenuItemTriggered)="setHeadingLevel(4)"
               data-heading-level="4"
               cdkMenuItem
@@ -131,17 +131,17 @@ import { ScEditor } from '../editor';
               Heading 4
               <div class="space-x-1.5">
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Cmd
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Alt
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   4
                 </kbd>
@@ -150,7 +150,7 @@ import { ScEditor } from '../editor';
           </li>
           <li>
             <button
-              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
+              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 "
               (cdkMenuItemTriggered)="setHeadingLevel(5)"
               data-heading-level="5"
               cdkMenuItem
@@ -159,17 +159,17 @@ import { ScEditor } from '../editor';
               Heading 5
               <div class="space-x-1.5">
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Cmd
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Alt
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   5
                 </kbd>
@@ -178,7 +178,7 @@ import { ScEditor } from '../editor';
           </li>
           <li>
             <button
-              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600"
+              class="flex w-full items-center justify-between rounded px-3 py-2 text-base text-gray-900 hover:bg-gray-100 "
               (cdkMenuItemTriggered)="setHeadingLevel(6)"
               data-heading-level="6"
               cdkMenuItem
@@ -187,17 +187,17 @@ import { ScEditor } from '../editor';
               Heading 6
               <div class="space-x-1.5">
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Cmd
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   Alt
                 </kbd>
                 <kbd
-                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 dark:border-gray-500 dark:bg-gray-600 dark:text-gray-400"
+                  class="rounded-lg border border-gray-200 bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-500 "
                 >
                   6
                 </kbd>

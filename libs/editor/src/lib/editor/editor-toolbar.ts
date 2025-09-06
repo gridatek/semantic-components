@@ -27,6 +27,6 @@ export class ScEditorToolbar {
   });
 
   protected readonly class = computed(() =>
-    cn('flex items-center justify-between border-b p-2 dark:border-gray-700', this.classInput()),
+    cn('flex items-center justify-between border-b border-border p-2', this.classInput()),
   );
 }
