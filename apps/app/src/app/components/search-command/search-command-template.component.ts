@@ -76,10 +76,7 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
               *ngFor="let result of getResultsByCategory('documentation')"
               [value]="result.objectID"
             >
-              <svg
-                class="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0"
-                si-file-text-icon
-              ></svg>
+              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-file-text-icon></svg>
               <div class="flex-1 min-w-0">
                 <div
                   class="font-medium truncate"
@@ -93,7 +90,7 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
                   {{ getBreadcrumb(result.hierarchy) }}
                 </div>
               </div>
-              <svg class="h-3 w-3 text-muted-foreground flex-shrink-0" si-external-link-icon></svg>
+              <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
             </sc-command-item>
           </sc-command-group>
 
@@ -111,7 +108,7 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
               *ngFor="let result of getResultsByCategory('component')"
               [value]="result.objectID"
             >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" si-hash-icon></svg>
+              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-hash-icon></svg>
               <div class="flex-1 min-w-0">
                 <div
                   class="font-medium truncate"
@@ -122,7 +119,7 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
                   [innerHTML]="getHighlightedText(result.content)"
                 ></div>
               </div>
-              <svg class="h-3 w-3 text-muted-foreground flex-shrink-0" si-external-link-icon></svg>
+              <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
             </sc-command-item>
           </sc-command-group>
 
@@ -141,7 +138,7 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
               *ngFor="let result of getResultsByCategory('other')"
               [value]="result.objectID"
             >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" si-search-icon></svg>
+              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-search-icon></svg>
               <div class="flex-1 min-w-0">
                 <div
                   class="font-medium truncate"
@@ -152,7 +149,7 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
                   [innerHTML]="getHighlightedText(result.content)"
                 ></div>
               </div>
-              <svg class="h-3 w-3 text-muted-foreground flex-shrink-0" si-external-link-icon></svg>
+              <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
             </sc-command-item>
           </sc-command-group>
         </ng-container>

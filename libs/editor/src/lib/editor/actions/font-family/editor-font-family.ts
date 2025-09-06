@@ -22,7 +22,7 @@ import { ScExtensions } from '../../extensions/extensions';
     </button>
 
     <ng-template #fontFamilyMenu>
-      <div class="min-w-[12rem]" sc-menu>
+      <div class="min-w-48" sc-menu>
         <button class="font-sans" (click)="setFontFamily('Poppins, ui-sans-serif')" sc-menu-item>
           Default (Poppins)
         </button>

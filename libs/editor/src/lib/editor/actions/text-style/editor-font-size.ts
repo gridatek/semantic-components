@@ -22,7 +22,7 @@ import { ScExtensions } from '../../extensions/extensions';
     </button>
 
     <ng-template #fontSizeMenu>
-      <div class="min-w-[12rem]" sc-menu>
+      <div class="min-w-48" sc-menu>
         <button class="text-base" (click)="setTextSize('16px')" sc-menu-item>16px (Default)</button>
         <button class="text-xs" (click)="setTextSize('12px')" sc-menu-item>12px (Tiny)</button>
         <button class="text-sm" (click)="setTextSize('14px')" sc-menu-item>14px (Small)</button>

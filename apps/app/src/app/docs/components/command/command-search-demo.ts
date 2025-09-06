@@ -74,7 +74,7 @@ interface MockSearchResult {
               *ngFor="let result of getComponentResults()"
               (select)="onResultSelect(result)"
             >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" si-hash-icon></svg>
+              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-hash-icon></svg>
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ result.title }}</div>
                 <div class="text-sm text-muted-foreground mt-1 line-clamp-2">
@@ -95,10 +95,7 @@ interface MockSearchResult {
               *ngFor="let result of getDocumentationResults()"
               (select)="onResultSelect(result)"
             >
-              <svg
-                class="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0"
-                si-file-text-icon
-              ></svg>
+              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-file-text-icon></svg>
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ result.title }}</div>
                 <div class="text-sm text-muted-foreground mt-1 line-clamp-2">
@@ -122,10 +119,7 @@ interface MockSearchResult {
               *ngFor="let result of getGuideResults()"
               (select)="onResultSelect(result)"
             >
-              <svg
-                class="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0"
-                si-file-text-icon
-              ></svg>
+              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-file-text-icon></svg>
               <div class="flex-1 min-w-0">
                 <div class="font-medium truncate">{{ result.title }}</div>
                 <div class="text-sm text-muted-foreground mt-1 line-clamp-2">

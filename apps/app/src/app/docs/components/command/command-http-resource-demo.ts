@@ -56,9 +56,7 @@ export interface CommandItem {
       </div>
 
       <!-- Demo Trigger Section -->
-      <div
-        class="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8"
-      >
+      <div class="bg-linear-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8">
         <div class="text-center space-y-4">
           <div class="text-6xl mb-4">⌘</div>
           <h3 class="text-xl font-semibold text-gray-900">HttpResource Command Palette</h3>
