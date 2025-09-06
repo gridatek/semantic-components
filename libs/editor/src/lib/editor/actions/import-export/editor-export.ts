@@ -9,7 +9,7 @@ import {
 import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
-import { ScImportExport } from '../services/import-export.service';
+import { ScImportExport } from './import-export.service';
 
 @Component({
   selector: 'sc-editor-export',
