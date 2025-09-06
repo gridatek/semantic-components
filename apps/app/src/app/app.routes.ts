@@ -60,6 +60,12 @@ export const appRoutes: Route[] = [
                 title: 'Typography Article Page',
               },
               {
+                path: 'getting-started/typography-comparison',
+                loadComponent: () =>
+                  import('./docs/getting-started/typography-comparison/typography-comparison-page'),
+                title: 'Typography Comparison Page',
+              },
+              {
                 path: 'components/accordion',
                 loadComponent: () => import('./docs/components/accordion/accordion-page'),
                 title: 'Accordion Page',
