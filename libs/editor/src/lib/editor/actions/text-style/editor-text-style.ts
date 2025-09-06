@@ -1,39 +1,25 @@
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScTooltip } from '@semantic-components/ui';
+import { ScToggle, ScTooltip } from '@semantic-components/ui';
+import { SiTypeIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
-import { ScExtensions } from './extensions';
+import { ScEditor } from '../../editor';
+import { ScExtensions } from '../../extensions/extensions';
 
 @Component({
-  selector: 'sc-extension-text-style',
-  imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem, ScTooltip],
+  selector: 'sc-editor-text-style',
+  imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem, ScToggle, ScTooltip, SiTypeIcon],
   template: `
     <button
-      class="cursor-pointer rounded p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
       [cdkMenuTriggerFor]="textSizeDropdown"
-      type="button"
+      sc-toggle
+      variant="outline"
+      size="sm"
       scTooltip="Text size"
+      type="button"
     >
-      <svg
-        class="size-5"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M3 6.2V5h11v1.2M8 5v14m-3 0h6m2-6.8V11h8v1.2M17 11v8m-1.5 0h3"
-        />
-      </svg>
-      <span class="sr-only">Text size</span>
+      <svg class="w-4 h-4" si-type-icon></svg>
     </button>
 
     <ng-template #textSizeDropdown>
@@ -117,10 +103,9 @@ import { ScExtensions } from './extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScExtensionTextStyle {
+export class ScEditorTextStyle {
   private readonly parent = inject(ScEditor);
-
-  extensions = inject(ScExtensions);
+  private readonly extensions = inject(ScExtensions);
 
   constructor() {
     this.extensions.textStyle.set(true);

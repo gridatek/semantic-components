@@ -53,7 +53,7 @@ export * from './editor-toolbar';
 export * from './extensions/extension-color';
 export * from './extensions/extension-font-family';
 export * from './extensions/extension-heading';
-export * from './extensions/extension-text-style';
+export * from './actions/text-style/editor-text-style';
 export * from './actions/code-block/editor-code-block-dialog';
 export * from './services/keyboard-shortcuts.service';
 export * from './services/word-count.service';

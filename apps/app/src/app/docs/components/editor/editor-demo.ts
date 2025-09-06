@@ -45,6 +45,7 @@ import {
   ScEditorTextAlignCenter,
   ScEditorTextAlignLeft,
   ScEditorTextAlignRight,
+  ScEditorTextStyle,
   ScEditorToolbar,
   ScEditorUnderline,
   ScEditorUndo,
@@ -52,7 +53,6 @@ import {
   ScEditorWordCount,
   ScExtensionColor,
   ScExtensionFontFamily,
-  ScExtensionTextStyle,
 } from '@semantic-components/editor';
 import { ScSeparator } from '@semantic-components/ui';
 
@@ -109,7 +109,7 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorTableGoToPreviousCell,
     ScEditorTableGoToNextCell,
     ScEditorTableFix,
-    ScExtensionTextStyle,
+    ScEditorTextStyle,
     ScEditorVideoInsert,
     ScEditorKeyboardShortcutsHelp,
   ],
@@ -186,7 +186,7 @@ import { ScSeparator } from '@semantic-components/ui';
             <sc-separator class="h-5" orientation="vertical" />
 
             <!-- Styling -->
-            <sc-extension-text-style />
+            <sc-editor-text-style />
             <sc-extension-color />
             <sc-extension-font-family />
             <sc-separator class="h-5" orientation="vertical" />
