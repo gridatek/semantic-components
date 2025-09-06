@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, afterNextRender, inject } from '@angular/core';
 
+import { ScWindowService } from '@semantic-components/utils';
 import { Editor } from '@tiptap/core';
 
 export interface ShortcutMapping {
@@ -15,132 +16,130 @@ export interface ShortcutMapping {
 @Injectable()
 export class ScKeyboardShortcuts {
   private readonly document = inject(DOCUMENT);
+  private readonly windowService = inject(ScWindowService);
   private editor!: Editor;
   private shortcuts: ShortcutMapping[] = [];
 
-  private readonly defaultShortcuts: ShortcutMapping[] = [
-    {
-      key: 'b',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().toggleBold().run(),
-      description: 'Toggle Bold',
-    },
-    {
-      key: 'i',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().toggleItalic().run(),
-      description: 'Toggle Italic',
-    },
-    {
-      key: 'u',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().toggleUnderline().run(),
-      description: 'Toggle Underline',
-    },
-    {
-      key: 'z',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().undo().run(),
-      description: 'Undo',
-    },
-    {
-      key: 'y',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().redo().run(),
-      description: 'Redo',
-    },
-    {
-      key: 'z',
-      ctrlOrCmd: true,
-      shift: true,
-      action: (editor) => editor.chain().focus().redo().run(),
-      description: 'Redo (Alt)',
-    },
-    {
-      key: '`',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().toggleCode().run(),
-      description: 'Toggle Inline Code',
-    },
-    {
-      key: 'k',
-      ctrlOrCmd: true,
-      action: (editor) => {
-        const url = window.prompt('Enter URL:');
-        if (url) {
-          editor.chain().focus().setLink({ href: url }).run();
-        }
+  private getDefaultShortcuts(): ShortcutMapping[] {
+    return [
+      {
+        key: 'b',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().toggleBold().run(),
+        description: 'Toggle Bold',
       },
-      description: 'Insert Link',
-    },
-    {
-      key: 'Enter',
-      ctrlOrCmd: true,
-      shift: true,
-      action: (editor) => editor.chain().focus().toggleCodeBlock().run(),
-      description: 'Insert Code Block',
-    },
-    {
-      key: '1',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().toggleHeading({ level: 1 }).run(),
-      description: 'Heading 1',
-    },
-    {
-      key: '2',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().toggleHeading({ level: 2 }).run(),
-      description: 'Heading 2',
-    },
-    {
-      key: '3',
-      ctrlOrCmd: true,
-      action: (editor) => editor.chain().focus().toggleHeading({ level: 3 }).run(),
-      description: 'Heading 3',
-    },
-    {
-      key: 'l',
-      ctrlOrCmd: true,
-      shift: true,
-      action: (editor) => editor.chain().focus().toggleBulletList().run(),
-      description: 'Toggle Bullet List',
-    },
-    {
-      key: 'o',
-      ctrlOrCmd: true,
-      shift: true,
-      action: (editor) => editor.chain().focus().toggleOrderedList().run(),
-      description: 'Toggle Ordered List',
-    },
-    {
-      key: 'q',
-      ctrlOrCmd: true,
-      shift: true,
-      action: (editor) => editor.chain().focus().toggleBlockquote().run(),
-      description: 'Toggle Blockquote',
-    },
-    {
-      key: 'e',
-      ctrlOrCmd: true,
-      shift: true,
-      action: (editor) => editor.chain().focus().setTextAlign('center').run(),
-      description: 'Center Align',
-    },
-    {
-      key: 'l',
-      ctrlOrCmd: true,
-      alt: true,
-      action: (editor) => editor.chain().focus().setTextAlign('left').run(),
-      description: 'Left Align',
-    },
-    {
-      key: 'r',
-      ctrlOrCmd: true,
-      alt: true,
-      action: (editor) => editor.chain().focus().setTextAlign('right').run(),
-      description: 'Right Align',
-    },
-  ];
+      {
+        key: 'i',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().toggleItalic().run(),
+        description: 'Toggle Italic',
+      },
+      {
+        key: 'u',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().toggleUnderline().run(),
+        description: 'Toggle Underline',
+      },
+      {
+        key: 'z',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().undo().run(),
+        description: 'Undo',
+      },
+      {
+        key: 'y',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().redo().run(),
+        description: 'Redo',
+      },
+      {
+        key: 'z',
+        ctrlOrCmd: true,
+        shift: true,
+        action: (editor) => editor.chain().focus().redo().run(),
+        description: 'Redo (Alt)',
+      },
+      {
+        key: '`',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().toggleCode().run(),
+        description: 'Toggle Inline Code',
+      },
+      {
+        key: 'k',
+        ctrlOrCmd: true,
+        action: (editor) => this.insertLinkAction(editor),
+        description: 'Insert Link',
+      },
+      {
+        key: 'Enter',
+        ctrlOrCmd: true,
+        shift: true,
+        action: (editor) => editor.chain().focus().toggleCodeBlock().run(),
+        description: 'Insert Code Block',
+      },
+      {
+        key: '1',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().toggleHeading({ level: 1 }).run(),
+        description: 'Heading 1',
+      },
+      {
+        key: '2',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().toggleHeading({ level: 2 }).run(),
+        description: 'Heading 2',
+      },
+      {
+        key: '3',
+        ctrlOrCmd: true,
+        action: (editor) => editor.chain().focus().toggleHeading({ level: 3 }).run(),
+        description: 'Heading 3',
+      },
+      {
+        key: 'l',
+        ctrlOrCmd: true,
+        shift: true,
+        action: (editor) => editor.chain().focus().toggleBulletList().run(),
+        description: 'Toggle Bullet List',
+      },
+      {
+        key: 'o',
+        ctrlOrCmd: true,
+        shift: true,
+        action: (editor) => editor.chain().focus().toggleOrderedList().run(),
+        description: 'Toggle Ordered List',
+      },
+      {
+        key: 'q',
+        ctrlOrCmd: true,
+        shift: true,
+        action: (editor) => editor.chain().focus().toggleBlockquote().run(),
+        description: 'Toggle Blockquote',
+      },
+      {
+        key: 'e',
+        ctrlOrCmd: true,
+        shift: true,
+        action: (editor) => editor.chain().focus().setTextAlign('center').run(),
+        description: 'Center Align',
+      },
+      {
+        key: 'l',
+        ctrlOrCmd: true,
+        alt: true,
+        action: (editor) => editor.chain().focus().setTextAlign('left').run(),
+        description: 'Left Align',
+      },
+      {
+        key: 'r',
+        ctrlOrCmd: true,
+        alt: true,
+        action: (editor) => editor.chain().focus().setTextAlign('right').run(),
+        description: 'Right Align',
+      },
+    ];
+  }
 
   constructor() {
     afterNextRender(() => {
@@ -150,7 +149,7 @@ export class ScKeyboardShortcuts {
 
   setEditor(editor: Editor) {
     this.editor = editor;
-    this.shortcuts = [...this.defaultShortcuts];
+    this.shortcuts = [...this.getDefaultShortcuts()];
   }
 
   addShortcut(shortcut: ShortcutMapping) {
@@ -193,6 +192,17 @@ export class ScKeyboardShortcuts {
       !!shift === !!shortcut.shift &&
       !!alt === !!shortcut.alt
     );
+  }
+
+  private insertLinkAction(editor: Editor): void {
+    // Use window service for safe access to prompt
+    const windowObj = this.windowService.window();
+    if (windowObj) {
+      const url = windowObj.prompt('Enter URL:');
+      if (url) {
+        editor.chain().focus().setLink({ href: url }).run();
+      }
+    }
   }
 
   destroy() {
