@@ -32,7 +32,20 @@ import { ScWordCount } from './word-count/word-count.service';
   selector: 'sc-editor',
   imports: [],
   template: `
-    <ng-content />
+    @if (isLoading()) {
+      <div class="flex items-center justify-center py-8">
+        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+        <span class="ml-2 text-muted-foreground">Loading editor...</span>
+      </div>
+    } @else if (loadingError()) {
+      <div class="flex items-center justify-center py-8">
+        <div class="text-destructive">
+          <span class="text-sm">Failed to load editor: {{ loadingError() }}</span>
+        </div>
+      </div>
+    } @else {
+      <ng-content />
+    }
   `,
   host: {
     '[class]': 'class()',
@@ -61,8 +74,9 @@ export class ScEditor implements ControlValueAccessor, OnDestroy {
   readonly editorContent = contentChild.required(ScEditorContent);
 
   readonly value = signal('');
-
   readonly isEditable = signal(true);
+  readonly isLoading = signal(true);
+  readonly loadingError = signal<string | null>(null);
 
   readonly classInput = input<string>('', {
     alias: 'class',
@@ -86,7 +100,14 @@ export class ScEditor implements ControlValueAccessor, OnDestroy {
 
   constructor() {
     afterNextRender(async () => {
-      await this.createEditor();
+      try {
+        await this.createEditor();
+      } catch (error) {
+        this.loadingError.set(
+          error instanceof Error ? error.message : 'Failed to initialize editor',
+        );
+        this.isLoading.set(false);
+      }
     });
 
     // Update word count limits when they change
@@ -249,6 +270,9 @@ export class ScEditor implements ControlValueAccessor, OnDestroy {
 
     // Setup import/export
     this.importExport.setEditor(this.editor);
+
+    // Editor is now fully initialized
+    this.isLoading.set(false);
   }
 
   ngOnDestroy() {
