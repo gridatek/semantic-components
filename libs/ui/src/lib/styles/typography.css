@@ -1,333 +1,609 @@
-/**
- * Semantic Components - Typography System
- * 
- * Comprehensive typography styles for prose content and text-heavy interfaces.
- * Replaces the default Tailwind Typography plugin with custom implementation.
- * 
- * Features:
- * - Semantic prose classes (.prose, .prose-sm, .prose-lg, .prose-xl, .prose-2xl)
- * - Complete typography scale with consistent vertical rhythm
- * - Dark mode support with automatic color adjustments
- * - Responsive typography that scales appropriately
- * - Custom link styling with hover effects
- * - Table formatting with proper borders and spacing
- * - Code block and inline code styling
- * - Blockquote styling with visual accent
- * - List formatting (ordered and unordered)
- * - Figure and caption handling
- * - Integration with design system color tokens
- * 
- * Used by:
- * - Article component for blog posts and documentation
- * - Rich text editor output formatting
- * - Markdown content rendering
- * - Documentation pages and help text
- * 
- * Note: This replaces @tailwindcss/typography plugin for better control
- * and integration with the semantic design system.
- */
+/* shadcn/ui compatible typography component */
+@theme {
+  /* Typography color variables using shadcn color system */
+  --prose-foreground: hsl(var(--foreground));
+  --prose-muted-foreground: hsl(var(--muted-foreground));
+  --prose-accent-foreground: hsl(var(--accent-foreground));
+  --prose-destructive: hsl(var(--destructive));
+  --prose-border: hsl(var(--border));
+  --prose-input: hsl(var(--input));
+  --prose-ring: hsl(var(--ring));
+  --prose-background: hsl(var(--background));
+  --prose-muted: hsl(var(--muted));
+  --prose-accent: hsl(var(--accent));
+  --prose-popover: hsl(var(--popover));
+  --prose-card: hsl(var(--card));
+}
 
-.prose {
-  --prose-color: var(--color-gray-700);
-  --prose-heading-color: var(--color-gray-950);
-  --prose-strong-color: var(--color-gray-950);
-  --prose-link-color: var(--color-gray-950);
-  --prose-code-color: var(--color-gray-950);
-  --prose-marker-color: color-mix(in oklab, var(--color-gray-700) 25%, transparent);
-  --prose-link-underline-color: var(--color-sky-400);
-  --prose-th-borders: var(--color-gray-300);
-  --prose-td-borders: var(--color-gray-200);
-  --prose-hr-color: color-mix(in oklab, var(--color-gray-950) 5%, transparent);
-  --prose-blockquote-border-color: var(--color-gray-300);
+/* Base typography component */
+@utility prose {
+  color: var(--prose-foreground);
+  max-width: 65ch;
+  line-height: 1.7;
 
-  &:where(.dark, .dark *) {
-    --prose-color: var(--color-gray-300);
-    --prose-heading-color: var(--color-white);
-    --prose-strong-color: var(--color-white);
-    --prose-link-color: var(--color-white);
-    --prose-code-color: var(--color-white);
-    --prose-marker-color: color-mix(in oklab, var(--color-gray-300) 35%, transparent);
-    --prose-link-underline-color: var(--color-sky-400);
-    --prose-th-borders: var(--color-gray-600);
-    --prose-td-borders: var(--color-gray-700);
-    --prose-hr-color: color-mix(in oklab, var(--color-white) 10%, transparent);
-    --prose-blockquote-border-color: var(--color-gray-600);
-  }
-  @media (prefers-color-scheme: dark) {
-    &:where(.system, .system *) {
-      --prose-color: var(--color-gray-300);
-      --prose-heading-color: var(--color-white);
-      --prose-strong-color: var(--color-white);
-      --prose-link-color: var(--color-white);
-      --prose-code-color: var(--color-white);
-      --prose-marker-color: color-mix(in oklab, var(--color-gray-300) 35%, transparent);
-      --prose-link-underline-color: var(--color-sky-400);
-      --prose-th-borders: var(--color-gray-600);
-      --prose-td-borders: var(--color-gray-700);
-      --prose-hr-color: color-mix(in oklab, var(--color-white) 10%, transparent);
-      --prose-blockquote-border-color: var(--color-gray-600);
-    }
-  }
-
-  color: var(--prose-color);
-  font-size: 0.875rem;
-  line-height: 1.75;
-
-  *:where(:not(.not-prose, .not-prose *)) + *:where(:not(.not-prose, .not-prose *)) {
-    margin-top: 1.5rem;
-  }
-
-  h2:where(:not(.not-prose, .not-prose *)) {
-    font-size: 1.125rem;
-    line-height: calc(28 / 18);
+  /* Headings */
+  & h1 {
+    color: var(--prose-foreground);
+    font-weight: 800;
+    font-size: 2.25rem;
+    line-height: 1.1;
     letter-spacing: -0.025em;
-    color: var(--prose-code-color);
-    font-weight: var(--font-weight-semibold);
-    margin-top: 5rem;
+    margin-top: 0;
+    margin-bottom: 0.8888889em;
+    scroll-margin-top: 6rem;
   }
 
-  h2:has(+ h3):where(:not(.not-prose, .not-prose *)) {
-    font-size: 0.75rem;
-    line-height: 2;
-    font-weight: var(--font-weight-medium);
-    font-family: var(--font-mono);
-    font-variant-ligatures: none;
-    letter-spacing: 0.1em;
-    color: var(--prose-color);
-    text-transform: uppercase;
+  & h2 {
+    color: var(--prose-foreground);
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    scroll-margin-top: 5rem;
+    border-bottom: 1px solid var(--prose-border);
+    padding-bottom: 0.5rem;
   }
 
-  h3:where(:not(.not-prose, .not-prose *)) {
+  & h3 {
+    color: var(--prose-foreground);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+    scroll-margin-top: 4.5rem;
+  }
+
+  & h4 {
+    color: var(--prose-foreground);
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    scroll-margin-top: 4rem;
+  }
+
+  & h5 {
+    color: var(--prose-foreground);
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  & h6 {
+    color: var(--prose-foreground);
+    font-weight: 600;
     font-size: 1rem;
-    line-height: calc(28 / 18);
-    color: var(--prose-heading-color);
-    font-weight: var(--font-weight-semibold);
-    margin-top: 4rem;
+    line-height: 1.5;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
   }
 
-  h2 + h3:where(:not(.not-prose, .not-prose *)) {
-    margin-top: 1.5rem;
+  /* Paragraphs and text */
+  & p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    line-height: 1.7;
   }
 
-  h4:where(:not(.not-prose, .not-prose *)) {
-    font-size: 0.875rem;
-    line-height: calc(28 / 14);
-    color: var(--prose-heading-color);
-    font-weight: var(--font-weight-semibold);
-    margin-top: 3rem;
+  & [data-lead] {
+    color: var(--prose-muted-foreground);
+    font-size: 1.25em;
+    line-height: 1.6;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
   }
 
-  :is(h2, h3, h4):where(:not(.not-prose, .not-prose *)) {
-    scroll-margin-top: 8rem;
-    @variant lg {
-      scroll-margin-top: 4.5rem;
-    }
-  }
-
-  ul:where(:not(.not-prose, .not-prose *)) {
-    padding-left: 1.5rem;
-    list-style-type: square;
-  }
-
-  ul li:where(:not(.not-prose, .not-prose *)) {
-    padding-left: 0.75rem;
-  }
-
-  ul li + li:where(:not(.not-prose, .not-prose *)) {
-    margin-top: 1rem;
-  }
-
-  ul li:where(:not(.not-prose, .not-prose *))::marker {
-    color: var(--prose-marker-color);
-  }
-
-  a:not(:where(:is(h2, h3, h4) *)):where(:not(.not-prose, .not-prose *)) {
-    color: var(--prose-link-color);
-    font-weight: var(--font-weight-semibold);
+  /* Links */
+  & a {
+    color: var(--prose-foreground);
     text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-color: var(--prose-link-underline-color);
-    text-decoration-thickness: 1px;
-    & code {
-      font-weight: var(--font-weight-semibold);
-    }
+    text-decoration-color: var(--prose-muted-foreground);
+    text-underline-offset: 2px;
+    font-weight: 500;
+    transition: all 0.2s ease;
   }
 
-  a:hover:where(:not(.not-prose, .not-prose *)) {
-    text-decoration-thickness: 2px;
+  & a:hover {
+    text-decoration-color: var(--prose-foreground);
   }
 
-  strong:where(:not(.not-prose, .not-prose *)) {
-    color: var(--prose-strong-color);
-    font-weight: var(--font-weight-semibold);
+  /* Strong and emphasis */
+  & strong {
+    color: var(--prose-foreground);
+    font-weight: 600;
   }
 
-  code:where(:not(.not-prose, .not-prose *)) {
-    font-variant-ligatures: none;
-    font-family: var(--font-mono);
-    font-weight: var(--font-weight-medium);
-    color: var(--prose-code-color);
+  & em {
+    font-style: italic;
+    color: var(--prose-foreground);
   }
 
-  :where(h2, h3, h4) code:where(:not(.not-prose, .not-prose *)) {
-    font-weight: var(--font-weight-semibold);
+  /* Code */
+  & code {
+    background: var(--prose-muted);
+    color: var(--prose-foreground);
+    font-weight: 500;
+    font-size: 0.875em;
+    border-radius: 0.375rem;
+    padding: 0.125rem 0.25rem;
+    border: 1px solid var(--prose-border);
   }
 
-  code:where(:not(.not-prose, .not-prose *))::before,
-  code:where(:not(.not-prose, .not-prose *))::after {
-    display: inline;
-    content: '`';
+  & pre {
+    background: var(--prose-muted);
+    color: var(--prose-foreground);
+    overflow-x: auto;
+    font-weight: 400;
+    font-size: 0.875em;
+    line-height: 1.7;
+    margin-top: 1.7em;
+    margin-bottom: 1.7em;
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--prose-border);
   }
 
-  pre:where(:not(.not-prose, .not-prose *)) {
-    margin-top: 1rem;
-    margin-bottom: 2.5rem;
+  & pre code {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    font-weight: inherit;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
   }
 
-  pre code * + *:where(:not(.not-prose, .not-prose *)) {
+  /* Keyboard shortcuts */
+  & kbd {
+    background: var(--prose-muted);
+    color: var(--prose-foreground);
+    font-weight: 500;
+    font-size: 0.875em;
+    border-radius: 0.375rem;
+    padding: 0.125rem 0.375rem;
+    border: 1px solid var(--prose-border);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    font-family: inherit;
+  }
+
+  /* Lists */
+  & ul {
+    list-style: none;
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    padding-left: 0;
+  }
+
+  & ul > li {
+    position: relative;
+    padding-left: 1.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  & ul > li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--prose-muted-foreground);
+    font-weight: bold;
+  }
+
+  & ol {
+    list-style: none;
+    counter-reset: list-counter;
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    padding-left: 0;
+  }
+
+  & ol > li {
+    position: relative;
+    counter-increment: list-counter;
+    padding-left: 1.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  & ol > li::before {
+    content: counter(list-counter) '.';
+    position: absolute;
+    left: 0;
+    color: var(--prose-muted-foreground);
+    font-weight: 500;
+  }
+
+  /* Nested lists */
+  & ul ul,
+  & ul ol,
+  & ol ul,
+  & ol ol {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+  }
+
+  /* Definition lists */
+  & dt {
+    color: var(--prose-foreground);
+    font-weight: 600;
+    margin-top: 1.25em;
+  }
+
+  & dd {
+    margin-top: 0.5em;
+    padding-left: 1.5em;
+    color: var(--prose-muted-foreground);
+  }
+
+  /* Blockquotes */
+  & blockquote {
+    color: var(--prose-muted-foreground);
+    border-left: 0.25rem solid var(--prose-border);
+    padding-left: 1rem;
+    font-style: italic;
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+    background: var(--prose-muted);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--prose-accent);
+  }
+
+  & blockquote p:first-of-type {
     margin-top: 0;
   }
 
-  pre code:where(:not(.not-prose, .not-prose *))::before,
-  pre code:where(:not(.not-prose, .not-prose *))::after {
-    content: none;
+  & blockquote p:last-of-type {
+    margin-bottom: 0;
   }
 
-  pre code:where(:not(.not-prose, .not-prose *)) {
-    font-variant-ligatures: none;
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    line-height: 2;
-  }
-
-  table:where(:not(.not-prose, .not-prose *)) {
+  /* Tables */
+  & table {
     width: 100%;
     table-layout: auto;
+    text-align: left;
     margin-top: 2em;
     margin-bottom: 2em;
-    font-size: 0.875rem;
-    line-height: 1.4;
+    font-size: 0.875em;
+    line-height: 1.7;
+    border: 1px solid var(--prose-border);
+    border-radius: 0.5rem;
+    overflow: hidden;
   }
 
-  thead:where(:not(.not-prose, .not-prose *)) {
-    border-bottom-width: 1px;
-    border-bottom-color: var(--prose-th-borders);
+  & thead {
+    background: var(--prose-muted);
+    border-bottom: 1px solid var(--prose-border);
   }
 
-  thead th:where(:not(.not-prose, .not-prose *)) {
-    color: var(--prose-heading-color);
+  & thead th {
+    color: var(--prose-foreground);
     font-weight: 600;
     vertical-align: bottom;
-    padding-inline-end: 0.6em;
-    padding-bottom: 0.8em;
-    padding-inline-start: 0.6em;
+    padding: 0.75rem;
+    text-align: left;
   }
 
-  thead th:first-child:where(:not(.not-prose, .not-prose *)) {
-    padding-inline-start: 0;
+  & tbody tr {
+    border-bottom: 1px solid var(--prose-border);
   }
 
-  thead th:last-child:where(:not(.not-prose, .not-prose *)) {
-    padding-inline-end: 0;
+  & tbody tr:last-child {
+    border-bottom: none;
   }
 
-  tbody tr:where(:not(.not-prose, .not-prose *)) {
-    border-bottom-width: 1px;
-    border-bottom-color: var(--prose-td-borders);
+  & tbody tr:hover {
+    background: var(--prose-muted);
   }
 
-  tbody tr:last-child:where(:not(.not-prose, .not-prose *)) {
-    border-bottom-width: 0;
-  }
-
-  tbody td:where(:not(.not-prose, .not-prose *)) {
-    vertical-align: baseline;
-  }
-
-  tfoot:where(:not(.not-prose, .not-prose *)) {
-    border-top-width: 1px;
-    border-top-color: var(--prose-th-borders);
-  }
-
-  tfoot td:where(:not(.not-prose, .not-prose *)) {
+  & tbody td {
+    padding: 0.75rem;
     vertical-align: top;
   }
 
-  tbody td:where(:not(.not-prose, .not-prose *)),
-  tfoot td:where(:not(.not-prose, .not-prose *)) {
-    padding-top: 0.8em;
-    padding-inline-end: 0.6em;
-    padding-bottom: 0.8em;
-    padding-inline-start: 0.6em;
+  /* Images and media */
+  & img {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-radius: 0.5rem;
+    border: 1px solid var(--prose-border);
   }
 
-  tbody td:first-child:where(:not(.not-prose, .not-prose *)),
-  tfoot td:first-child:where(:not(.not-prose, .not-prose *)) {
-    padding-inline-start: 0;
+  & figure {
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 
-  tbody td:last-child:where(:not(.not-prose, .not-prose *)),
-  tfoot td:last-child:where(:not(.not-prose, .not-prose *)) {
-    padding-inline-end: 0;
+  & figcaption {
+    color: var(--prose-muted-foreground);
+    font-size: 0.875em;
+    line-height: 1.4;
+    margin-top: 0.8em;
+    text-align: center;
   }
 
-  th:where(:not(.not-prose, .not-prose *)),
-  td:where(:not(.not-prose, .not-prose *)) {
-    text-align: start;
+  & video {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-radius: 0.5rem;
   }
 
-  td code:where(:not(.not-prose, .not-prose *)) {
-    font-size: 0.8125rem;
+  /* Horizontal rule */
+  & hr {
+    border: none;
+    border-top: 1px solid var(--prose-border);
+    margin-top: 3em;
+    margin-bottom: 3em;
   }
 
-  hr:where(:not(.not-prose, .not-prose *)) {
-    border-color: var(--prose-hr-color);
-    margin-block: --spacing(16);
-    & + h2 {
-      margin-top: --spacing(16);
-    }
-  }
-
-  blockquote {
-    font-style: italic;
-    border-inline-start-width: 0.25rem;
-    border-inline-start-color: var(--prose-blockquote-border-color);
-    padding-inline-start: 1rem;
-  }
-
-  blockquote p:first-of-type::before {
-    content: open-quote;
-  }
-
-  blockquote p:last-of-type::after {
-    content: close-quote;
-  }
-
-  figure:where(:not(.not-prose, .not-prose *)) {
-    figcaption:where(:not(.not-prose, .not-prose *)) {
-      margin-top: 0.75rem;
-      text-align: center;
-      font-size: 0.875rem;
-      line-height: var(--text-sm--line-height);
-      font-style: italic;
-      color: color-mix(in oklab, var(--prose-color) 75%, transparent);
-    }
-  }
-
-  :first-child:where(:not(.not-prose, .not-prose *)) {
+  /* Remove margins from first and last elements */
+  & > :first-child {
     margin-top: 0;
   }
 
-  :last-child:where(:not(.not-prose, .not-prose *)) {
+  & > :last-child {
     margin-bottom: 0;
   }
 }
 
-.prose-blog {
-  img:where(:not(.not-prose, .not-prose *)) {
-    @media (max-width: theme(--breakpoint-sm)) {
-      margin-inline: calc(var(--spacing) * -4);
-      max-width: calc(100% + calc(var(--spacing) * 8));
-    }
+/* Size variants following shadcn sizing principles */
+@utility prose-sm {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  max-width: 60ch;
+
+  & h1 {
+    font-size: 1.875rem;
+    margin-bottom: 0.8em;
+  }
+  & h2 {
+    font-size: 1.5rem;
+    margin-top: 1.6em;
+    margin-bottom: 0.8em;
+  }
+  & h3 {
+    font-size: 1.25rem;
+    margin-top: 1.5em;
+    margin-bottom: 0.6em;
+  }
+  & h4 {
+    font-size: 1.125rem;
+    margin-top: 1.4em;
+    margin-bottom: 0.5em;
+  }
+
+  & p {
+    margin-top: 1.1em;
+    margin-bottom: 1.1em;
+  }
+  & [data-lead] {
+    font-size: 1.125em;
+  }
+  & code {
+    font-size: 0.8em;
+  }
+  & pre {
+    font-size: 0.8em;
+    padding: 0.8rem 1rem;
+  }
+}
+
+@utility prose-lg {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  max-width: 70ch;
+
+  & h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.8em;
+  }
+  & h2 {
+    font-size: 2rem;
+    margin-top: 1.8em;
+    margin-bottom: 1em;
+  }
+  & h3 {
+    font-size: 1.75rem;
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+  }
+  & h4 {
+    font-size: 1.5rem;
+    margin-top: 1.7em;
+    margin-bottom: 0.4em;
+  }
+
+  & p {
+    margin-top: 1.3em;
+    margin-bottom: 1.3em;
+  }
+  & [data-lead] {
+    font-size: 1.2em;
+  }
+  & code {
+    font-size: 0.9em;
+  }
+  & pre {
+    font-size: 0.9em;
+    padding: 1.2rem 1.5rem;
+  }
+}
+
+@utility prose-xl {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  max-width: 75ch;
+
+  & h1 {
+    font-size: 3rem;
+    margin-bottom: 0.8em;
+  }
+  & h2 {
+    font-size: 2.25rem;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+  }
+  & h3 {
+    font-size: 1.875rem;
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+  }
+  & h4 {
+    font-size: 1.5rem;
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+  }
+
+  & p {
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+  }
+  & [data-lead] {
+    font-size: 1.2em;
+  }
+  & code {
+    font-size: 0.9em;
+  }
+  & pre {
+    font-size: 0.9em;
+    padding: 1.3rem 1.6rem;
+  }
+}
+
+/* Content wrapper utility (shadcn style) */
+@utility prose-wrapper {
+  container-type: inline-size;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Remove prose styling utility */
+@utility not-prose {
+  & * {
+    all: revert;
+  }
+}
+
+/* Typography element modifiers (shadcn style) */
+/*.prose-headings\:font-cal h1, .prose-headings\:font-cal h2, .prose-headings\:font-cal h3, 
+.prose-headings\:font-cal h4, .prose-headings\:font-cal h5, .prose-headings\:font-cal h6 {
+  font-family: var(--font-cal), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}*/
+
+.prose-headings\:tracking-tight h1,
+.prose-headings\:tracking-tight h2,
+.prose-headings\:tracking-tight h3,
+.prose-headings\:tracking-tight h4,
+.prose-headings\:tracking-tight h5,
+.prose-headings\:tracking-tight h6 {
+  letter-spacing: -0.025em;
+}
+
+.prose-code\:font-mono code,
+.prose-code\:font-mono pre {
+  font-family:
+    var(--font-mono), ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo,
+    monospace;
+}
+
+.prose-links\:no-underline a {
+  text-decoration: none;
+}
+
+.prose-links\:no-underline a:hover {
+  text-decoration: underline;
+}
+
+.prose-img\:rounded-lg img {
+  border-radius: 0.5rem;
+}
+
+.prose-img\:shadow-lg img {
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.prose-tables\:rounded-lg table {
+  border-radius: 0.5rem;
+}
+
+.prose-pre\:bg-card pre {
+  background: var(--prose-card);
+  border: 1px solid var(--prose-border);
+}
+
+.prose-blockquote\:border-accent blockquote {
+  border-left-color: var(--prose-accent);
+}
+
+/* Alert/callout style components */
+@utility prose-alert {
+  & [data-alert] {
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+    border: 1px solid var(--prose-border);
+    background: var(--prose-card);
+  }
+
+  /*  & [data-alert="info"] {
+    border-color: hsl(var(--info));
+    background: hsl(var(--info) / 0.1);
+  }
+
+  & [data-alert="warning"] {
+    border-color: hsl(var(--warning));
+    background: hsl(var(--warning) / 0.1);
+  }
+
+  & [data-alert="error"] {
+    border-color: var(--prose-destructive);
+    background: hsl(var(--destructive) / 0.1);
+  }
+
+  & [data-alert="success"] {
+    border-color: hsl(var(--success));
+    background: hsl(var(--success) / 0.1);
+  }*/
+}
+
+/* Copy button for code blocks */
+@utility prose-copy {
+  & pre {
+    position: relative;
+  }
+
+  & pre:hover [data-copy] {
+    opacity: 1;
+  }
+
+  & [data-copy] {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    background: var(--prose-background);
+    border: 1px solid var(--prose-border);
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  & [data-copy]:hover {
+    background: var(--prose-accent);
   }
 }
