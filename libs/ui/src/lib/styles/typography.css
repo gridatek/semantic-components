@@ -76,10 +76,9 @@
   }
 
   & code {
-    @apply font-medium text-sm rounded-md px-1 py-0.5 border;
+    @apply relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
     background: var(--prose-card);
     color: var(--prose-body);
-    border-color: var(--prose-border);
   }
 
   & pre {
@@ -121,49 +120,11 @@
   }
 
   & ul {
-    list-style: none;
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-    padding-left: 0;
-
-    & > li {
-      position: relative;
-      padding-left: 1.5em;
-      margin-top: 0.5em;
-      margin-bottom: 0.5em;
-
-      &::before {
-        content: '•';
-        position: absolute;
-        left: 0;
-        color: var(--prose-muted);
-        font-weight: bold;
-      }
-    }
+    @apply my-6 ml-6 list-disc [&>li]:mt-2;
   }
 
   & ol {
-    list-style: none;
-    counter-reset: list-counter;
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-    padding-left: 0;
-
-    & > li {
-      position: relative;
-      counter-increment: list-counter;
-      padding-left: 1.5em;
-      margin-top: 0.5em;
-      margin-bottom: 0.5em;
-
-      &::before {
-        content: counter(list-counter) '.';
-        position: absolute;
-        left: 0;
-        color: var(--prose-muted);
-        font-weight: 500;
-      }
-    }
+    @apply my-6 ml-6 list-decimal [&>li]:mt-2;
   }
 
   & ul ul,
@@ -187,68 +148,30 @@
   }
 
   & blockquote {
-    color: var(--prose-muted);
-    border-left: 4px solid var(--prose-border);
-    padding-left: 1rem;
-    font-style: italic;
-    margin-top: 1.6em;
-    margin-bottom: 1.6em;
-    background: var(--prose-card);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    border-left: 4px solid var(--prose-ring);
-
-    & p:first-of-type {
-      margin-top: 0;
-    }
-
-    & p:last-of-type {
-      margin-bottom: 0;
-    }
+    @apply mt-6 border-l-2 pl-6 italic;
   }
 
   & table {
-    width: 100%;
-    table-layout: auto;
-    text-align: left;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    font-size: 0.875em;
-    line-height: 1.7;
-    border: 1px solid var(--prose-border);
-    border-radius: 0.5rem;
-    overflow: hidden;
+    @apply w-full;
   }
 
   & thead {
-    background: var(--prose-card);
-    border-bottom: 1px solid var(--prose-border);
+    & tr {
+      @apply m-0 border-t p-0 even:bg-muted;
+    }
 
     & th {
-      color: var(--prose-body);
-      font-weight: 600;
-      vertical-align: bottom;
-      padding: 0.75rem;
-      text-align: left;
+      @apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
     }
   }
 
   & tbody {
     & tr {
-      border-bottom: 1px solid var(--prose-border);
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      &:hover {
-        background: var(--prose-card);
-      }
+      @apply m-0 border-t p-0 even:bg-muted;
     }
 
     & td {
-      padding: 0.75rem;
-      vertical-align: top;
+      @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
     }
   }
 
@@ -291,85 +214,6 @@
 
   & > :last-child {
     margin-bottom: 0;
-  }
-}
-
-/* Size variants */
-@utility prose-sm {
-  font-size: 0.875rem;
-  line-height: 1.6;
-  max-width: 60ch;
-
-  & h1 {
-    font-size: var(--text-4xl);
-  }
-  & h2 {
-    font-size: var(--text-2xl);
-  }
-  & h3 {
-    font-size: var(--text-xl);
-  }
-  & h4 {
-    font-size: var(--text-lg);
-  }
-  & code {
-    font-size: 0.8em;
-  }
-  & pre {
-    font-size: 0.8em;
-    padding: 0.8rem 1rem;
-  }
-}
-
-@utility prose-lg {
-  font-size: 1.125rem;
-  line-height: 1.8;
-  max-width: 70ch;
-
-  & h1 {
-    font-size: var(--text-5xl);
-  }
-  & h2 {
-    font-size: var(--text-4xl);
-  }
-  & h3 {
-    font-size: var(--text-3xl);
-  }
-  & h4 {
-    font-size: var(--text-2xl);
-  }
-  & code {
-    font-size: 0.9em;
-  }
-  & pre {
-    font-size: 0.9em;
-    padding: 1.2rem 1.5rem;
-  }
-}
-
-@utility prose-xl {
-  font-size: 1.25rem;
-  line-height: 1.8;
-  max-width: 75ch;
-
-  & h1 {
-    font-size: 3rem;
-  }
-  & h2 {
-    font-size: 2.25rem;
-  }
-  & h3 {
-    font-size: 1.875rem;
-  }
-  & h4 {
-    font-size: 1.5rem;
-  }
-  & code {
-    font-size: 0.9em;
-  }
-  & pre {
-    font-size: 0.9em;
-    padding: 1.3rem 1.6rem;
   }
 }
 
