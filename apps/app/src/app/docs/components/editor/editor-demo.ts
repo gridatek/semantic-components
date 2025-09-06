@@ -10,6 +10,7 @@ import {
   ScEditorCodeBlock,
   ScEditorContent,
   ScEditorExport,
+  ScEditorFontSize,
   ScEditorFooter,
   ScEditorGroup,
   ScEditorHighlight,
@@ -45,7 +46,6 @@ import {
   ScEditorTextAlignCenter,
   ScEditorTextAlignLeft,
   ScEditorTextAlignRight,
-  ScEditorTextStyle,
   ScEditorToolbar,
   ScEditorUnderline,
   ScEditorUndo,
@@ -109,7 +109,7 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorTableGoToPreviousCell,
     ScEditorTableGoToNextCell,
     ScEditorTableFix,
-    ScEditorTextStyle,
+    ScEditorFontSize,
     ScEditorVideoInsert,
     ScEditorKeyboardShortcutsHelp,
   ],
@@ -162,31 +162,26 @@ import { ScSeparator } from '@semantic-components/ui';
             <!-- Tables -->
             <sc-editor-table-insert />
             <sc-editor-table-delete />
-            <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-table-add-column-before />
             <sc-editor-table-add-column />
             <sc-editor-table-add-row-before />
             <sc-editor-table-add-row />
             <sc-editor-table-remove-column />
             <sc-editor-table-remove-row />
-            <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-table-merge-cells />
             <sc-editor-table-split-cells />
             <sc-editor-table-merge-or-split />
-            <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-table-toggle-header-row />
             <sc-editor-table-toggle-header-column />
             <sc-editor-table-toggle-header-cell />
-            <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-table-add-cell-attribute />
             <sc-editor-table-go-to-previous-cell />
             <sc-editor-table-go-to-next-cell />
-            <sc-separator class="h-5" orientation="vertical" />
             <sc-editor-table-fix />
             <sc-separator class="h-5" orientation="vertical" />
 
             <!-- Styling -->
-            <sc-editor-text-style />
+            <sc-editor-font-size />
             <sc-extension-color />
             <sc-extension-font-family />
             <sc-separator class="h-5" orientation="vertical" />

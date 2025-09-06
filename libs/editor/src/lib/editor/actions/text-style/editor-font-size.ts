@@ -8,7 +8,7 @@ import { ScEditor } from '../../editor';
 import { ScExtensions } from '../../extensions/extensions';
 
 @Component({
-  selector: 'sc-editor-text-style',
+  selector: 'sc-editor-font-size',
   imports: [CdkMenuTrigger, CdkMenu, CdkMenuItem, ScToggle, ScTooltip, SiTypeIcon],
   template: `
     <button
@@ -16,7 +16,7 @@ import { ScExtensions } from '../../extensions/extensions';
       sc-toggle
       variant="outline"
       size="sm"
-      scTooltip="Text size"
+      scTooltip="Font size"
       type="button"
     >
       <svg class="w-4 h-4" si-type-icon></svg>
@@ -103,7 +103,7 @@ import { ScExtensions } from '../../extensions/extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorTextStyle {
+export class ScEditorFontSize {
   private readonly parent = inject(ScEditor);
   private readonly extensions = inject(ScExtensions);
 
