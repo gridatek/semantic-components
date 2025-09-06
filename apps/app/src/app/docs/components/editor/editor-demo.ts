@@ -47,12 +47,12 @@ import {
   ScEditorUnderline,
   ScEditorUndo,
   ScEditorUnsetLink,
+  ScEditorVideoInsert,
   ScEditorWordCount,
   ScExtensionColor,
   ScExtensionFontFamily,
   ScExtensionLink,
   ScExtensionTextStyle,
-  ScExtensionYoutube,
 } from '@semantic-components/editor';
 import { ScSeparator } from '@semantic-components/ui';
 
@@ -110,7 +110,7 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorTableGoToNextCell,
     ScEditorTableFix,
     ScExtensionTextStyle,
-    ScExtensionYoutube,
+    ScEditorVideoInsert,
     ScEditorKeyboardShortcutsHelp,
   ],
   template: `
@@ -154,7 +154,7 @@ import { ScSeparator } from '@semantic-components/ui';
 
             <!-- Media & Links -->
             <sc-editor-image-insert />
-            <sc-extension-youtube />
+            <sc-editor-video-insert />
             <sc-extension-link />
             <sc-editor-unset-link />
             <sc-separator class="h-5" orientation="vertical" />
