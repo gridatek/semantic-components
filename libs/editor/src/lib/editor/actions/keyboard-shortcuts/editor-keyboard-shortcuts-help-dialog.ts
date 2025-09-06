@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 
 import { ScCard, ScCardContent, ScCardHeader, ScCardTitle } from '@semantic-components/ui';
 
-import { ShortcutMapping } from '../services/keyboard-shortcuts.service';
+import { ShortcutMapping } from './keyboard-shortcuts.service';
 
 @Component({
   selector: 'sc-editor-keyboard-shortcuts-help-dialog',

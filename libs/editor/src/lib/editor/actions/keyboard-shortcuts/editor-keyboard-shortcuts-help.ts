@@ -10,8 +10,8 @@ import {
 import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiInfoIcon } from '@semantic-icons/lucide-icons';
 
-import { ScKeyboardShortcuts } from '../services/keyboard-shortcuts.service';
 import { ScEditorKeyboardShortcutsHelpDialog } from './editor-keyboard-shortcuts-help-dialog';
+import { ScKeyboardShortcuts } from './keyboard-shortcuts.service';
 
 @Component({
   selector: 'sc-editor-keyboard-shortcuts-help',
