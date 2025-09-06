@@ -51,7 +51,7 @@ export * from './editor-footer';
 export * from './editor-group';
 export * from './editor-toolbar';
 export * from './extensions/extension-color';
-export * from './extensions/extension-font-family';
+export * from './actions/font-family/editor-font-family';
 export * from './extensions/extension-heading';
 export * from './actions/text-style/editor-font-size';
 export * from './actions/code-block/editor-code-block-dialog';
