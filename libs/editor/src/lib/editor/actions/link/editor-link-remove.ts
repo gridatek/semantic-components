@@ -4,11 +4,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@
 import { ScToggle, ScTooltip } from '@semantic-components/ui';
 import { SiUnlinkIcon } from '@semantic-icons/lucide-icons';
 
-import { ScEditor } from '../editor';
-import { ScExtensions } from '../extensions/extensions';
+import { ScEditor } from '../../editor';
+import { ScExtensions } from '../../extensions/extensions';
 
 @Component({
-  selector: 'sc-editor-unset-link',
+  selector: 'sc-editor-link-remove',
   imports: [ScTooltip, ScToggle, SiUnlinkIcon],
   template: `
     <button
@@ -17,9 +17,10 @@ import { ScExtensions } from '../extensions/extensions';
       (click)="unsetLink()"
       sc-toggle
       variant="outline"
+      size="sm"
       type="button"
     >
-      <svg si-unlink-icon></svg>
+      <svg class="w-4 h-4" si-unlink-icon></svg>
       <span class="sr-only">{{ ariaLabel }}</span>
     </button>
   `,
@@ -27,13 +28,12 @@ import { ScExtensions } from '../extensions/extensions';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEditorUnsetLink {
-  ariaLabel = 'Unset Link';
+export class ScEditorLinkRemove {
+  ariaLabel = 'Remove Link';
 
   private readonly parent = inject(ScEditor);
-  dialog = inject(Dialog);
-
-  extensions = inject(ScExtensions);
+  private readonly dialog = inject(Dialog);
+  private readonly extensions = inject(ScExtensions);
 
   constructor() {
     this.extensions.unsetLink.set(true);
