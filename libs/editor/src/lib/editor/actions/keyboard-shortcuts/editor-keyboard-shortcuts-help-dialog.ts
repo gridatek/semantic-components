@@ -2,7 +2,7 @@ import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
 import { ScCard, ScCardContent, ScCardHeader, ScCardTitle } from '@semantic-components/ui';
-import { PlatformService } from '@semantic-components/utils';
+import { ScPlatformService } from '@semantic-components/utils';
 
 import { ShortcutMapping } from './keyboard-shortcuts.service';
 
@@ -38,7 +38,7 @@ import { ShortcutMapping } from './keyboard-shortcuts.service';
 })
 export class ScEditorKeyboardShortcutsHelpDialog {
   private readonly data = inject<ShortcutMapping[]>(DIALOG_DATA);
-  private readonly platformService = inject(PlatformService);
+  private readonly platformService = inject(ScPlatformService);
 
   get shortcuts() {
     return this.data || [];

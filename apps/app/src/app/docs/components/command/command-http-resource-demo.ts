@@ -22,7 +22,7 @@ import {
   ScCommandList,
   ScCommandSeparator,
 } from '@semantic-components/ui';
-import { PlatformService } from '@semantic-components/utils';
+import { ScPlatformService } from '@semantic-components/utils';
 
 export interface CommandItem {
   id: string;
@@ -255,7 +255,7 @@ export class CommandHttpResourceDemo {
   @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
 
   private http = inject(HttpClient);
-  private platformService = inject(PlatformService);
+  private platformService = inject(ScPlatformService);
   commandDialogService = inject(CommandDialog);
 
   // Signals for reactive state

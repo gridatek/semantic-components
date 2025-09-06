@@ -9,7 +9,7 @@ import {
   output,
 } from '@angular/core';
 
-import { PlatformService } from '@semantic-components/utils';
+import { ScPlatformService } from '@semantic-components/utils';
 
 import { CommandDialog } from './command-dialog';
 
@@ -81,7 +81,7 @@ export interface CommandTriggerConfig {
 })
 export class ScCommandTrigger {
   private readonly commandDialogService = inject(CommandDialog);
-  private readonly platformService = inject(PlatformService);
+  private readonly platformService = inject(ScPlatformService);
 
   // Inputs
   config = input<CommandTriggerConfig>({});

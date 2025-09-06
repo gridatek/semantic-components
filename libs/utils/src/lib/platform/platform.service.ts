@@ -3,7 +3,7 @@ import { Injectable, computed, signal } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class PlatformService {
+export class ScPlatformService {
   private _platform = signal<string | undefined>(undefined);
 
   constructor() {
