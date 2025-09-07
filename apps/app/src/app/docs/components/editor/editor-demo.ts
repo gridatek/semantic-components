@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import {
   ScEditor,
@@ -224,7 +225,7 @@ import { ScSeparator } from '@semantic-components/ui';
         <h4 class="text-md font-semibold mt-6 mb-3">Rendered Output</h4>
         <div
           class="border rounded-lg p-4 prose prose-sm max-w-none"
-          [innerHTML]="editorForm.get('content')?.value || ''"
+          [innerHTML]="sanitizedContent()"
         ></div>
       </div>
     </div>
@@ -234,6 +235,8 @@ import { ScSeparator } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditorDemo {
+  constructor(private sanitizer: DomSanitizer) {}
+
   protected readonly editorForm = new FormGroup({
     content: new FormControl(`
       <h1>Comprehensive Editor Demo</h1>
@@ -298,4 +301,9 @@ export class EditorDemo {
       <p>Use the toolbar above to test all the available formatting options!</p>
     `),
   });
+
+  sanitizedContent() {
+    const content = this.editorForm.get('content')?.value || '';
+    return this.sanitizer.bypassSecurityTrustHtml(content);
+  }
 }
