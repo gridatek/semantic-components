@@ -114,98 +114,120 @@ import { ScSeparator } from '@semantic-components/ui';
     ScEditorKeyboardShortcutsHelp,
   ],
   template: `
-    <form [formGroup]="editorForm">
-      <sc-editor formControlName="content">
-        <sc-editor-toolbar>
-          <sc-editor-group>
-            <!-- History Actions -->
-            <sc-editor-undo />
-            <sc-editor-redo />
-            <sc-separator class="h-5" orientation="vertical" />
+    <div class="space-y-8">
+      <!-- Editor Section -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Rich Text Editor</h3>
+        <form [formGroup]="editorForm">
+          <sc-editor formControlName="content">
+            <sc-editor-toolbar>
+              <sc-editor-group>
+                <!-- History Actions -->
+                <sc-editor-undo />
+                <sc-editor-redo />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Text Formatting -->
-            <sc-editor-bold />
-            <sc-editor-italic />
-            <sc-editor-underline />
-            <sc-editor-strike />
-            <sc-editor-highlight />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Text Formatting -->
+                <sc-editor-bold />
+                <sc-editor-italic />
+                <sc-editor-underline />
+                <sc-editor-strike />
+                <sc-editor-highlight />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Structure -->
-            <sc-editor-heading-and-paragraph-format />
-            <sc-editor-blockquote />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Structure -->
+                <sc-editor-heading-and-paragraph-format />
+                <sc-editor-blockquote />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Lists -->
-            <sc-editor-bullet-list />
-            <sc-editor-ordered-list />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Lists -->
+                <sc-editor-bullet-list />
+                <sc-editor-ordered-list />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Text Alignment -->
-            <sc-editor-text-align-left />
-            <sc-editor-text-align-center />
-            <sc-editor-text-align-right />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Text Alignment -->
+                <sc-editor-text-align-left />
+                <sc-editor-text-align-center />
+                <sc-editor-text-align-right />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Code -->
-            <sc-editor-code />
-            <sc-editor-code-block />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Code -->
+                <sc-editor-code />
+                <sc-editor-code-block />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Media & Links -->
-            <sc-editor-image-insert />
-            <sc-editor-video-insert />
-            <sc-editor-link-insert />
-            <sc-editor-link-remove />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Media & Links -->
+                <sc-editor-image-insert />
+                <sc-editor-video-insert />
+                <sc-editor-link-insert />
+                <sc-editor-link-remove />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Tables -->
-            <sc-editor-table-insert />
-            <sc-editor-table-delete />
-            <sc-editor-table-add-column-before />
-            <sc-editor-table-add-column />
-            <sc-editor-table-add-row-before />
-            <sc-editor-table-add-row />
-            <sc-editor-table-remove-column />
-            <sc-editor-table-remove-row />
-            <sc-editor-table-merge-cells />
-            <sc-editor-table-split-cells />
-            <sc-editor-table-merge-or-split />
-            <sc-editor-table-toggle-header-row />
-            <sc-editor-table-toggle-header-column />
-            <sc-editor-table-toggle-header-cell />
-            <sc-editor-table-add-cell-attribute />
-            <sc-editor-table-go-to-previous-cell />
-            <sc-editor-table-go-to-next-cell />
-            <sc-editor-table-fix />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Tables -->
+                <sc-editor-table-insert />
+                <sc-editor-table-delete />
+                <sc-editor-table-add-column-before />
+                <sc-editor-table-add-column />
+                <sc-editor-table-add-row-before />
+                <sc-editor-table-add-row />
+                <sc-editor-table-remove-column />
+                <sc-editor-table-remove-row />
+                <sc-editor-table-merge-cells />
+                <sc-editor-table-split-cells />
+                <sc-editor-table-merge-or-split />
+                <sc-editor-table-toggle-header-row />
+                <sc-editor-table-toggle-header-column />
+                <sc-editor-table-toggle-header-cell />
+                <sc-editor-table-add-cell-attribute />
+                <sc-editor-table-go-to-previous-cell />
+                <sc-editor-table-go-to-next-cell />
+                <sc-editor-table-fix />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Styling -->
-            <sc-editor-font-size />
-            <sc-editor-color />
-            <sc-editor-font-family />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Styling -->
+                <sc-editor-font-size />
+                <sc-editor-color />
+                <sc-editor-font-family />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Other Elements -->
-            <sc-editor-horizontal-rule />
-            <sc-separator class="h-5" orientation="vertical" />
+                <!-- Other Elements -->
+                <sc-editor-horizontal-rule />
+                <sc-separator class="h-5" orientation="vertical" />
 
-            <!-- Import/Export & Help -->
-            <sc-editor-import />
-            <sc-editor-export />
-            <sc-editor-keyboard-shortcuts-help />
-          </sc-editor-group>
-        </sc-editor-toolbar>
-        <sc-editor-content />
+                <!-- Import/Export & Help -->
+                <sc-editor-import />
+                <sc-editor-export />
+                <sc-editor-keyboard-shortcuts-help />
+              </sc-editor-group>
+            </sc-editor-toolbar>
+            <sc-editor-content />
 
-        <sc-editor-footer>
-          <div class="text-xs text-gray-500 dark:text-gray-400">Rich text editor</div>
-          <div class="flex items-center space-x-4">
-            <sc-editor-word-count />
-          </div>
-        </sc-editor-footer>
-      </sc-editor>
-    </form>
+            <sc-editor-footer>
+              <div class="text-xs text-gray-500 dark:text-gray-400">Rich text editor</div>
+              <div class="flex items-center space-x-4">
+                <sc-editor-word-count />
+              </div>
+            </sc-editor-footer>
+          </sc-editor>
+        </form>
+      </div>
+
+      <!-- HTML Output Section -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Generated HTML</h3>
+        <div class="border rounded-lg p-4 bg-muted/30">
+          <pre
+            class="text-sm overflow-x-auto whitespace-pre-wrap"
+          ><code>{{ editorForm.get('content')?.value || '' }}</code></pre>
+        </div>
+
+        <h4 class="text-md font-semibold mt-6 mb-3">Rendered Output</h4>
+        <div
+          class="border rounded-lg p-4 prose prose-sm max-w-none"
+          [innerHTML]="editorForm.get('content')?.value || ''"
+        ></div>
+      </div>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
