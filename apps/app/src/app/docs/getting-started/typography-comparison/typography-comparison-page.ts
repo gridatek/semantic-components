@@ -84,8 +84,9 @@ import { ScHeading } from '@semantic-components/ui';
               >
                 npm install
               </code>
-              to install packages.
+              to install packages. The prose system automatically styles inline code.
             </p>
+            <pre class="overflow-x-auto rounded-lg border bg-muted p-4 mt-4"><code>npm install @semantic-components/ui</code></pre>
           </section>
 
           <!-- Table -->
@@ -159,24 +160,23 @@ import { ScHeading } from '@semantic-components/ui';
             <!-- Paragraphs -->
             <h3>Paragraphs</h3>
             <p>
-              This is a standard paragraph using the prose utility class. The prose system
-              automatically handles spacing, typography, and hierarchy.
+              This is a standard paragraph with leading-7 for optimal readability. The text flows
+              naturally with proper spacing.
             </p>
             <p>
-              This is another paragraph demonstrating the automatic spacing that prose provides
-              between elements without manual classes.
+              This is another paragraph demonstrating the spacing between multiple paragraphs in the
+              shadcn/ui system.
             </p>
             <p data-lead>
-              This is a lead paragraph using the data-lead attribute, styled automatically by the
-              prose system.
+              This is a lead paragraph with larger text and muted color, perfect for introductions.
             </p>
 
             <!-- Lists -->
             <h3>Lists</h3>
             <ul>
-              <li>First list item with prose styling</li>
-              <li>Second item with consistent spacing</li>
-              <li>Third item showing automatic hierarchy</li>
+              <li>First list item with proper spacing</li>
+              <li>Second item showing consistency</li>
+              <li>Third item demonstrating hierarchy</li>
             </ul>
             <ol>
               <li>Ordered list first item</li>
@@ -193,8 +193,9 @@ import { ScHeading } from '@semantic-components/ui';
             <p>
               Use
               <code>npm install</code>
-              to install packages.
+              to install packages. The prose system automatically styles inline code.
             </p>
+            <pre><code>npm install @semantic-components/ui</code></pre>
 
             <!-- Table -->
             <h3>Table</h3>
