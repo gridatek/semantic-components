@@ -63,51 +63,38 @@
 
 /* Modified prose utility for shadcn/ui compatibility */
 @utility prose {
-  color: var(--prose-body);
-
   /* shadcn/ui typography styles */
   & h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance lg:text-5xl mt-0 mb-4;
-    color: var(--prose-body);
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-2;
   }
 
   & h2 {
-    @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-3;
-    color: var(--prose-body);
-    border-color: var(--prose-border);
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-2;
   }
 
   & h3 {
-    @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight mb-3;
-    color: var(--prose-body);
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight mb-2;
   }
 
   & h4 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight mt-6 mb-2;
-    color: var(--prose-body);
+    @apply scroll-m-20 text-xl font-semibold tracking-tight mb-2;
   }
 
   & h5,
   & h6 {
     @apply font-semibold mt-6 mb-2;
-    color: var(--prose-body);
   }
 
   & p {
     @apply leading-7 [&:not(:first-child)]:mt-6;
-    color: var(--prose-body);
   }
 
   & [data-lead] {
-    @apply text-xl text-muted-foreground;
-    margin-top: 1.2em;
-    margin-bottom: 1.2em;
+    @apply text-xl text-muted-foreground mt-5 mb-5;
   }
 
   & .lead {
-    @apply text-xl text-muted-foreground;
-    margin-top: 1.2em;
-    margin-bottom: 1.2em;
+    @apply text-xl text-muted-foreground mt-5 mb-5;
   }
 
   & .large {
@@ -123,59 +110,31 @@
   }
 
   & a {
-    @apply font-medium underline underline-offset-4;
-    color: var(--prose-body);
-    text-decoration-color: var(--prose-muted);
-
-    &:hover {
-      color: var(--prose-accent);
-      text-decoration-color: var(--prose-accent);
-    }
+    @apply font-medium underline underline-offset-4 text-foreground decoration-muted-foreground hover:decoration-foreground;
   }
 
   & strong {
     @apply font-semibold;
-    color: var(--prose-body);
   }
 
   & em {
     @apply italic;
-    color: var(--prose-body);
   }
 
   & code {
     @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
-    background: var(--prose-muted-bg);
-    color: var(--prose-body);
   }
 
   & pre {
-    @apply overflow-x-auto rounded-lg border bg-muted p-4;
-    background: var(--prose-muted-bg);
-    color: var(--prose-body);
-    border-color: var(--prose-border);
-    margin-top: 1.7em;
-    margin-bottom: 1.7em;
-    font-size: 0.875em;
-    line-height: 1.7;
+    @apply overflow-x-auto rounded-lg border bg-muted p-4 mt-7 mb-7 text-sm leading-7;
 
     & code {
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0;
-      font-weight: normal;
-      color: inherit;
-      font-size: inherit;
-      font-family: inherit;
-      line-height: inherit;
+      @apply bg-transparent border-0 p-0 font-normal text-inherit text-sm font-mono leading-7;
     }
   }
 
   & kbd {
     @apply inline-flex h-5 max-h-full items-center rounded border bg-muted px-1 font-mono text-[10px] font-medium text-muted-foreground;
-    background: var(--prose-muted-bg);
-    border-color: var(--prose-border);
   }
 
   & ul {
@@ -190,42 +149,23 @@
   & ul ol,
   & ol ul,
   & ol ol {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    @apply mt-2 mb-2;
   }
 
   & li > p {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    @apply mt-4 mb-4;
   }
 
   & dt {
-    color: var(--prose-body);
-    font-weight: 600;
-    margin-top: 1.25em;
+    @apply font-semibold mt-5;
   }
 
   & dd {
-    margin-top: 0.5em;
-    padding-left: 1.625em;
-    color: var(--prose-muted);
+    @apply mt-2 pl-7 text-muted-foreground;
   }
 
   & blockquote {
-    @apply mt-6 border-l-2 pl-6 italic;
-    border-color: var(--prose-border);
-    color: var(--prose-muted);
-    margin-top: 1.6em;
-    margin-bottom: 1.6em;
-    font-style: italic;
-
-    & p:first-of-type::before {
-      content: none;
-    }
-
-    & p:last-of-type::after {
-      content: none;
-    }
+    @apply mt-6 border-l-2 pl-6 italic mb-6;
   }
 
   & table {
