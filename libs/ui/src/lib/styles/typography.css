@@ -1,4 +1,4 @@
-/* shadcn/ui typography component */
+/* shadcn/ui inspired typography utilities */
 @theme {
   /* Typography colors using shadcn's design tokens */
   --prose-body: hsl(var(--foreground));
@@ -7,61 +7,141 @@
   --prose-border: hsl(var(--border));
   --prose-background: hsl(var(--background));
   --prose-card: hsl(var(--card));
+  --prose-muted-bg: hsl(var(--muted));
   --prose-destructive: hsl(var(--destructive));
   --prose-ring: hsl(var(--ring));
 }
 
-/* Base prose utility */
+/* shadcn/ui heading utilities */
+@utility h1 {
+  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+}
+
+@utility h2 {
+  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+}
+
+@utility h3 {
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+@utility h4 {
+  @apply scroll-m-20 text-xl font-semibold tracking-tight;
+}
+
+@utility p {
+  @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+
+@utility blockquote {
+  @apply mt-6 border-l-2 pl-6 italic;
+}
+
+@utility list {
+  @apply my-6 ml-6 [&>li]:mt-2;
+}
+
+@utility inline-code {
+  @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+}
+
+@utility lead {
+  @apply text-xl text-muted-foreground;
+}
+
+@utility large {
+  @apply text-lg font-semibold;
+}
+
+@utility small {
+  @apply text-sm font-medium leading-none;
+}
+
+@utility muted {
+  @apply text-sm text-muted-foreground;
+}
+
+/* Modified prose utility for shadcn/ui compatibility */
 @utility prose {
   color: var(--prose-body);
   max-width: 65ch;
   line-height: 1.7;
 
-  /* Typography styles using CSS nesting */
+  /* shadcn/ui typography styles */
   & h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-2;
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
     color: var(--prose-body);
+    margin-top: 0;
+    margin-bottom: 0.8333em;
   }
 
   & h2 {
-    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mb-2;
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
     color: var(--prose-body);
     border-color: var(--prose-border);
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
   }
 
   & h3 {
-    @apply scroll-m-20 text-2xl font-semibold tracking-tight mb-2;
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
     color: var(--prose-body);
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
   }
 
   & h4 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight mb-2;
+    @apply scroll-m-20 text-xl font-semibold tracking-tight;
     color: var(--prose-body);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
   }
 
   & h5,
   & h6 {
-    @apply font-semibold mt-7 mb-3;
+    @apply font-semibold;
     color: var(--prose-body);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
   }
 
   & p {
     @apply leading-7 [&:not(:first-child)]:mt-6;
+    color: var(--prose-body);
   }
 
   & [data-lead] {
-    @apply text-xl leading-7 [&:not(:first-child)]:mt-6;
-    color: var(--prose-muted);
+    @apply text-xl text-muted-foreground;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+  }
+
+  & .lead {
+    @apply text-xl text-muted-foreground;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em;
+  }
+
+  & .large {
+    @apply text-lg font-semibold;
+  }
+
+  & .small {
+    @apply text-sm font-medium leading-none;
+  }
+
+  & .muted {
+    @apply text-sm text-muted-foreground;
   }
 
   & a {
-    @apply underline font-medium transition-all duration-200;
+    @apply font-medium underline underline-offset-4;
     color: var(--prose-body);
     text-decoration-color: var(--prose-muted);
-    text-underline-offset: 2px;
 
     &:hover {
-      text-decoration-color: var(--prose-body);
+      color: var(--prose-accent);
+      text-decoration-color: var(--prose-accent);
     }
   }
 
@@ -76,30 +156,27 @@
   }
 
   & code {
-    @apply relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
-    background: var(--prose-card);
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+    background: var(--prose-muted-bg);
     color: var(--prose-body);
   }
 
   & pre {
-    background: var(--prose-card);
+    @apply overflow-x-auto rounded-lg border bg-muted p-4;
+    background: var(--prose-muted-bg);
     color: var(--prose-body);
-    overflow-x: auto;
-    font-weight: 400;
-    font-size: 0.875em;
-    line-height: 1.7;
+    border-color: var(--prose-border);
     margin-top: 1.7em;
     margin-bottom: 1.7em;
-    border-radius: 0.5rem;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--prose-border);
+    font-size: 0.875em;
+    line-height: 1.7;
 
     & code {
       background: transparent;
       border: none;
       border-radius: 0;
       padding: 0;
-      font-weight: inherit;
+      font-weight: normal;
       color: inherit;
       font-size: inherit;
       font-family: inherit;
@@ -108,15 +185,9 @@
   }
 
   & kbd {
-    background: var(--prose-card);
-    color: var(--prose-body);
-    font-weight: 500;
-    font-size: 0.875em;
-    border-radius: 0.375rem;
-    padding: 0.125rem 0.375rem;
-    border: 1px solid var(--prose-border);
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    font-family: inherit;
+    @apply inline-flex h-5 max-h-full items-center rounded border bg-muted px-1 font-mono text-[10px] font-medium text-muted-foreground;
+    background: var(--prose-muted-bg);
+    border-color: var(--prose-border);
   }
 
   & ul {
@@ -131,8 +202,13 @@
   & ul ol,
   & ol ul,
   & ol ol {
-    margin-top: 0.75em;
-    margin-bottom: 0.75em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  & li > p {
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 
   & dt {
@@ -143,67 +219,216 @@
 
   & dd {
     margin-top: 0.5em;
-    padding-left: 1.5em;
+    padding-left: 1.625em;
     color: var(--prose-muted);
   }
 
   & blockquote {
     @apply mt-6 border-l-2 pl-6 italic;
+    border-color: var(--prose-border);
+    color: var(--prose-muted);
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+    font-style: italic;
+
+    & p:first-of-type::before {
+      content: none;
+    }
+
+    & p:last-of-type::after {
+      content: none;
+    }
   }
 
   & table {
     @apply w-full;
+    width: 100%;
+    table-layout: auto;
+    text-align: left;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-size: 0.875em;
+    line-height: 1.7;
   }
 
   & thead {
-    & tr {
-      @apply m-0 border-t p-0 even:bg-muted;
-    }
+    border-bottom-width: 1px;
+    border-bottom-color: var(--prose-border);
 
     & th {
-      @apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
+      color: var(--prose-body);
+      font-weight: 600;
+      vertical-align: bottom;
+      padding-right: 0.5714em;
+      padding-bottom: 0.5714em;
+      padding-left: 0.5714em;
+    }
+
+    & th:first-child {
+      padding-left: 0;
+    }
+
+    & th:last-child {
+      padding-right: 0;
     }
   }
 
   & tbody {
     & tr {
-      @apply m-0 border-t p-0 even:bg-muted;
+      border-bottom-width: 1px;
+      border-bottom-color: var(--prose-border);
+    }
+
+    & tr:last-child {
+      border-bottom-width: 0;
     }
 
     & td {
-      @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+      color: var(--prose-body);
+      vertical-align: baseline;
+      padding-right: 0.5714em;
+      padding-top: 0.5714em;
+      padding-bottom: 0.5714em;
+      padding-left: 0.5714em;
+    }
+
+    & td:first-child {
+      padding-left: 0;
+    }
+
+    & td:last-child {
+      padding-right: 0;
     }
   }
 
   & img {
-    @apply mt-8 mb-8 rounded-lg border;
+    @apply rounded-lg border;
     border-color: var(--prose-border);
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 
   & figure {
-    @apply mt-8 mb-8;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    & > * {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
 
   & figcaption {
-    @apply text-sm leading-tight mt-3 text-center;
+    @apply text-sm leading-6;
     color: var(--prose-muted);
+    margin-top: 0.8571em;
+    text-align: center;
   }
 
   & video {
-    @apply mt-8 mb-8 rounded-lg;
+    @apply rounded-lg;
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 
   & hr {
-    @apply border-none border-t mt-12 mb-12;
-    border-color: var(--prose-border);
+    @apply border-border;
+    border-top-width: 1px;
+    margin-top: 3em;
+    margin-bottom: 3em;
   }
 
   & > :first-child {
-    @apply mt-0;
+    margin-top: 0;
   }
 
   & > :last-child {
-    @apply mb-0;
+    margin-bottom: 0;
+  }
+}
+
+/* Prose size modifiers following shadcn/ui scaling */
+@utility prose-sm {
+  font-size: 0.875rem;
+  line-height: 1.7;
+
+  & h1 {
+    @apply text-3xl lg:text-4xl;
+  }
+
+  & h2 {
+    @apply text-2xl;
+  }
+
+  & h3 {
+    @apply text-xl;
+  }
+
+  & h4 {
+    @apply text-lg;
+  }
+}
+
+@utility prose-lg {
+  font-size: 1.125rem;
+  line-height: 1.7;
+
+  & h1 {
+    @apply text-5xl lg:text-6xl;
+  }
+
+  & h2 {
+    @apply text-4xl;
+  }
+
+  & h3 {
+    @apply text-3xl;
+  }
+
+  & h4 {
+    @apply text-2xl;
+  }
+}
+
+@utility prose-xl {
+  font-size: 1.25rem;
+  line-height: 1.8;
+
+  & h1 {
+    @apply text-6xl lg:text-7xl;
+  }
+
+  & h2 {
+    @apply text-5xl;
+  }
+
+  & h3 {
+    @apply text-4xl;
+  }
+
+  & h4 {
+    @apply text-3xl;
+  }
+}
+
+@utility prose-2xl {
+  font-size: 1.5rem;
+  line-height: 1.8;
+
+  & h1 {
+    @apply text-7xl lg:text-8xl;
+  }
+
+  & h2 {
+    @apply text-6xl;
+  }
+
+  & h3 {
+    @apply text-5xl;
+  }
+
+  & h4 {
+    @apply text-4xl;
   }
 }
 
