@@ -149,7 +149,7 @@
   }
 
   & pre {
-    @apply overflow-x-auto rounded-lg border bg-muted p-4 mt-7 mb-7 text-sm leading-7;
+    @apply overflow-x-auto rounded-lg border bg-muted p-4 mt-4 text-sm leading-7;
 
     & code {
       @apply bg-transparent border-0 p-0 font-normal text-inherit text-sm font-mono leading-7;
