@@ -201,7 +201,7 @@
     }
 
     & th {
-      @apply border px-4 py-2 text-left font-bold;
+      @apply border px-4 py-2 text-left font-bold bg-muted;
     }
   }
 
