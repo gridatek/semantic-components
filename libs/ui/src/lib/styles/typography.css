@@ -14,15 +14,15 @@
 
 /* shadcn/ui heading utilities */
 @utility h1 {
-  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+  @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance lg:text-5xl;
 }
 
 @utility h2 {
-  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
 @utility h3 {
-  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
 }
 
 @utility h4 {
@@ -69,25 +69,21 @@
 
   /* shadcn/ui typography styles */
   & h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance lg:text-5xl;
     color: var(--prose-body);
     margin-top: 0;
     margin-bottom: 0.8333em;
   }
 
   & h2 {
-    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+    @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
     color: var(--prose-body);
     border-color: var(--prose-border);
-    margin-top: 1.6em;
-    margin-bottom: 0.6em;
   }
 
   & h3 {
-    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+    @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
     color: var(--prose-body);
-    margin-top: 1.6em;
-    margin-bottom: 0.6em;
   }
 
   & h4 {
