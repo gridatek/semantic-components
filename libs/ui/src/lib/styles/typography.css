@@ -64,15 +64,11 @@
 /* Modified prose utility for shadcn/ui compatibility */
 @utility prose {
   color: var(--prose-body);
-  max-width: 65ch;
-  line-height: 1.7;
 
   /* shadcn/ui typography styles */
   & h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance lg:text-5xl;
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance lg:text-5xl mt-0 mb-4;
     color: var(--prose-body);
-    margin-top: 0;
-    margin-bottom: 0.8333em;
   }
 
   & h2 {
@@ -340,91 +336,6 @@
 
   & > :last-child {
     margin-bottom: 0;
-  }
-}
-
-/* Prose size modifiers following shadcn/ui scaling */
-@utility prose-sm {
-  font-size: 0.875rem;
-  line-height: 1.7;
-
-  & h1 {
-    @apply text-3xl lg:text-4xl;
-  }
-
-  & h2 {
-    @apply text-2xl;
-  }
-
-  & h3 {
-    @apply text-xl;
-  }
-
-  & h4 {
-    @apply text-lg;
-  }
-}
-
-@utility prose-lg {
-  font-size: 1.125rem;
-  line-height: 1.7;
-
-  & h1 {
-    @apply text-5xl lg:text-6xl;
-  }
-
-  & h2 {
-    @apply text-4xl;
-  }
-
-  & h3 {
-    @apply text-3xl;
-  }
-
-  & h4 {
-    @apply text-2xl;
-  }
-}
-
-@utility prose-xl {
-  font-size: 1.25rem;
-  line-height: 1.8;
-
-  & h1 {
-    @apply text-6xl lg:text-7xl;
-  }
-
-  & h2 {
-    @apply text-5xl;
-  }
-
-  & h3 {
-    @apply text-4xl;
-  }
-
-  & h4 {
-    @apply text-3xl;
-  }
-}
-
-@utility prose-2xl {
-  font-size: 1.5rem;
-  line-height: 1.8;
-
-  & h1 {
-    @apply text-7xl lg:text-8xl;
-  }
-
-  & h2 {
-    @apply text-6xl;
-  }
-
-  & h3 {
-    @apply text-5xl;
-  }
-
-  & h4 {
-    @apply text-4xl;
   }
 }
 
