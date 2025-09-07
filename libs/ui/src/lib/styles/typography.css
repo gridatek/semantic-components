@@ -259,6 +259,16 @@
   & > :last-child {
     margin-bottom: 0;
   }
+
+  /* TipTap table support - handles th in tbody structure */
+  & tbody th {
+    @apply border border-border px-4 py-2 text-left font-bold bg-muted;
+  }
+
+  /* Ensure all th elements get proper styling regardless of location */
+  & th:not(thead th) {
+    @apply border border-border px-4 py-2 text-left font-bold bg-muted;
+  }
 }
 
 /* Utilities */
