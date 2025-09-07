@@ -151,72 +151,84 @@ import { ScHeading } from '@semantic-components/ui';
 
           <div class="prose max-w-none">
             <!-- Headings -->
-            <h3>Headings</h3>
-            <h1>Heading 1</h1>
-            <h2>Heading 2</h2>
-            <h3>Heading 3</h3>
-            <h4>Heading 4</h4>
+            <section class="mb-8">
+              <h3>Headings</h3>
+              <h1>Heading 1</h1>
+              <h2>Heading 2</h2>
+              <h3>Heading 3</h3>
+              <h4>Heading 4</h4>
+            </section>
 
             <!-- Paragraphs -->
-            <h3>Paragraphs</h3>
-            <p>
-              This is a standard paragraph with leading-7 for optimal readability. The text flows
-              naturally with proper spacing.
-            </p>
-            <p>
-              This is another paragraph demonstrating the spacing between multiple paragraphs in the
-              shadcn/ui system.
-            </p>
-            <p data-lead>
-              This is a lead paragraph with larger text and muted color, perfect for introductions.
-            </p>
+            <section class="mb-8">
+              <h3>Paragraphs</h3>
+              <p>
+                This is a standard paragraph with leading-7 for optimal readability. The text flows
+                naturally with proper spacing.
+              </p>
+              <p>
+                This is another paragraph demonstrating the spacing between multiple paragraphs in the
+                shadcn/ui system.
+              </p>
+              <p data-lead>
+                This is a lead paragraph with larger text and muted color, perfect for introductions.
+              </p>
+            </section>
 
             <!-- Lists -->
-            <h3>Lists</h3>
-            <ul>
-              <li>First list item with proper spacing</li>
-              <li>Second item showing consistency</li>
-              <li>Third item demonstrating hierarchy</li>
-            </ul>
-            <ol>
-              <li>Ordered list first item</li>
-              <li>Second numbered item</li>
-              <li>Third in sequence</li>
-            </ol>
+            <section class="mb-8">
+              <h3>Lists</h3>
+              <ul>
+                <li>First list item with proper spacing</li>
+                <li>Second item showing consistency</li>
+                <li>Third item demonstrating hierarchy</li>
+              </ul>
+              <ol>
+                <li>Ordered list first item</li>
+                <li>Second numbered item</li>
+                <li>Third in sequence</li>
+              </ol>
+            </section>
 
             <!-- Blockquote -->
-            <h3>Blockquote</h3>
-            <blockquote>"The best design is the simplest one that works."</blockquote>
+            <section class="mb-8">
+              <h3>Blockquote</h3>
+              <blockquote>"The best design is the simplest one that works."</blockquote>
+            </section>
 
             <!-- Code -->
-            <h3>Code</h3>
-            <p>
-              Use
-              <code>npm install</code>
-              to install packages. The prose system automatically styles inline code.
-            </p>
-            <pre><code>npm install @semantic-components/ui</code></pre>
+            <section class="mb-8">
+              <h3>Code</h3>
+              <p>
+                Use
+                <code>npm install</code>
+                to install packages. The prose system automatically styles inline code.
+              </p>
+              <pre><code>npm install @semantic-components/ui</code></pre>
+            </section>
 
             <!-- Table -->
-            <h3>Table</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Component</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Button</td>
-                  <td>Complete</td>
-                </tr>
-                <tr>
-                  <td>Input</td>
-                  <td>In Progress</td>
-                </tr>
-              </tbody>
-            </table>
+            <section class="mb-8">
+              <h3>Table</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Component</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Button</td>
+                    <td>Complete</td>
+                  </tr>
+                  <tr>
+                    <td>Input</td>
+                    <td>In Progress</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
           </div>
         </div>
       </div>
