@@ -72,29 +72,25 @@
   }
 
   & h2 {
-    @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+    @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-3;
     color: var(--prose-body);
     border-color: var(--prose-border);
   }
 
   & h3 {
-    @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
+    @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight mb-3;
     color: var(--prose-body);
   }
 
   & h4 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+    @apply scroll-m-20 text-xl font-semibold tracking-tight mt-6 mb-2;
     color: var(--prose-body);
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
   }
 
   & h5,
   & h6 {
-    @apply font-semibold;
+    @apply font-semibold mt-6 mb-2;
     color: var(--prose-body);
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
   }
 
   & p {
