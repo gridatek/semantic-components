@@ -1,14 +1,15 @@
-import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
   OnDestroy,
   OnInit,
   forwardRef,
+  inject,
   input,
+  linkedSignal,
   output,
   viewChild,
 } from '@angular/core';
@@ -43,7 +44,7 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
           <sc-combobox-input
             #singleInput
             #trigger="cdkOverlayOrigin"
-            [inputId]="inputId()"
+            [inputId]="id()"
             [placeholder]="placeholder()"
             [showToggleButton]="showToggleButton()"
             [isOpen]="isOpen"
@@ -63,7 +64,7 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
           <sc-combobox-multi-input
             #multiInput
             #trigger="cdkOverlayOrigin"
-            [inputId]="inputId()"
+            [inputId]="id()"
             [placeholder]="placeholder()"
             [selectedValues]="selectedValues"
             [items]="items()"
@@ -180,7 +181,12 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
   ],
 })
 export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
-  readonly inputId = input<string>('');
+  readonly idInput = input<string>(inject(_IdGenerator).getId('sc-combobox-'), {
+    alias: 'id',
+  });
+
+  readonly id = linkedSignal(() => this.idInput());
+
   readonly placeholder = input<string>('Type to search...');
   readonly items = input<(string | ScComboboxItem)[]>([]);
   readonly multiple = input<boolean>(false);

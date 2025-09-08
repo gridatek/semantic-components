@@ -13,6 +13,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { ScCombobox } from '../combobox';
 import { ScInput } from '../input';
 import { ScLabel } from '../label';
 
@@ -47,10 +48,13 @@ export class ScField {
 
   readonly scInput = contentChild(ScInput);
 
+  readonly scCombobox = contentChild(ScCombobox);
+
   constructor() {
     afterNextRender(() => {
       this.scLabel()?.for.set(this.id());
       this.scInput()?.id.set(this.id());
+      this.scCombobox()?.id.set(this.id());
     });
   }
 }
