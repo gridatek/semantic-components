@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 
 import {
@@ -24,7 +23,6 @@ interface MockSearchResult {
 @Component({
   selector: 'app-command-search-demo',
   imports: [
-    CommonModule,
     ScCommand,
     ScCommandInput,
     ScCommandList,
@@ -59,76 +57,89 @@ interface MockSearchResult {
           </div>
         </sc-command-empty>
 
-        <sc-command-loading *ngIf="isLoading()">
-          <div class="flex items-center justify-center py-6">
-            <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
-            <span class="ml-2 text-sm text-muted-foreground">Searching...</span>
-          </div>
-        </sc-command-loading>
+        @if (isLoading()) {
+          <sc-command-loading>
+            <div class="flex items-center justify-center py-6">
+              <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
+              <span class="ml-2 text-sm text-muted-foreground">Searching...</span>
+            </div>
+          </sc-command-loading>
+        }
 
-        <ng-container *ngIf="!isLoading() && filteredResults().length > 0">
+        @if (!isLoading() && filteredResults().length > 0) {
           <!-- Components -->
-          <sc-command-group *ngIf="getComponentResults().length > 0" heading="Components">
-            <sc-command-item
-              class="flex items-start gap-3 p-3"
-              *ngFor="let result of getComponentResults()"
-              (select)="onResultSelect(result)"
-            >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-hash-icon></svg>
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ result.title }}</div>
-                <div class="text-sm text-muted-foreground mt-1 line-clamp-2">
-                  {{ result.content }}
-                </div>
-              </div>
-            </sc-command-item>
-          </sc-command-group>
-
+          @if (getComponentResults().length > 0) {
+            <sc-command-group heading="Components">
+              @for (result of getComponentResults(); track result) {
+                <sc-command-item
+                  class="flex items-start gap-3 p-3"
+                  (select)="onResultSelect(result)"
+                >
+                  <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-hash-icon></svg>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium truncate">{{ result.title }}</div>
+                    <div class="text-sm text-muted-foreground mt-1 line-clamp-2">
+                      {{ result.content }}
+                    </div>
+                  </div>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
           <!-- Documentation -->
-          <sc-command-separator
-            *ngIf="getComponentResults().length > 0 && getDocumentationResults().length > 0"
-          />
-
-          <sc-command-group *ngIf="getDocumentationResults().length > 0" heading="Documentation">
-            <sc-command-item
-              class="flex items-start gap-3 p-3"
-              *ngFor="let result of getDocumentationResults()"
-              (select)="onResultSelect(result)"
-            >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-file-text-icon></svg>
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ result.title }}</div>
-                <div class="text-sm text-muted-foreground mt-1 line-clamp-2">
-                  {{ result.content }}
-                </div>
-              </div>
-            </sc-command-item>
-          </sc-command-group>
-
+          @if (getComponentResults().length > 0 && getDocumentationResults().length > 0) {
+            <sc-command-separator />
+          }
+          @if (getDocumentationResults().length > 0) {
+            <sc-command-group heading="Documentation">
+              @for (result of getDocumentationResults(); track result) {
+                <sc-command-item
+                  class="flex items-start gap-3 p-3"
+                  (select)="onResultSelect(result)"
+                >
+                  <svg
+                    class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0"
+                    si-file-text-icon
+                  ></svg>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium truncate">{{ result.title }}</div>
+                    <div class="text-sm text-muted-foreground mt-1 line-clamp-2">
+                      {{ result.content }}
+                    </div>
+                  </div>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
           <!-- Guides -->
-          <sc-command-separator
-            *ngIf="
-              (getComponentResults().length > 0 || getDocumentationResults().length > 0) &&
-              getGuideResults().length > 0
-            "
-          />
-
-          <sc-command-group *ngIf="getGuideResults().length > 0" heading="Guides">
-            <sc-command-item
-              class="flex items-start gap-3 p-3"
-              *ngFor="let result of getGuideResults()"
-              (select)="onResultSelect(result)"
-            >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-file-text-icon></svg>
-              <div class="flex-1 min-w-0">
-                <div class="font-medium truncate">{{ result.title }}</div>
-                <div class="text-sm text-muted-foreground mt-1 line-clamp-2">
-                  {{ result.content }}
-                </div>
-              </div>
-            </sc-command-item>
-          </sc-command-group>
-        </ng-container>
+          @if (
+            (getComponentResults().length > 0 || getDocumentationResults().length > 0) &&
+            getGuideResults().length > 0
+          ) {
+            <sc-command-separator />
+          }
+          @if (getGuideResults().length > 0) {
+            <sc-command-group heading="Guides">
+              @for (result of getGuideResults(); track result) {
+                <sc-command-item
+                  class="flex items-start gap-3 p-3"
+                  (select)="onResultSelect(result)"
+                >
+                  <svg
+                    class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0"
+                    si-file-text-icon
+                  ></svg>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium truncate">{{ result.title }}</div>
+                    <div class="text-sm text-muted-foreground mt-1 line-clamp-2">
+                      {{ result.content }}
+                    </div>
+                  </div>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
+        }
       </sc-command-list>
     </sc-command>
   `,

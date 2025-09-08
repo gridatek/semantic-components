@@ -1,5 +1,4 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   Component,
@@ -21,7 +20,7 @@ import { ScOptionComponent } from './option';
 @Component({
   selector: 'sc-select',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -63,17 +62,18 @@ import { ScOptionComponent } from './option';
       </div>
 
       <!-- Dropdown Panel -->
-      <div
-        class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden animate-in slide-in-from-top-2"
-        *ngIf="isOpen"
-        [id]="'dropdown-' + componentId"
-        [attr.aria-labelledby]="'trigger-' + componentId"
-        role="listbox"
-      >
-        <div class="max-h-60 overflow-y-auto py-1">
-          <ng-content></ng-content>
+      @if (isOpen) {
+        <div
+          class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden animate-in slide-in-from-top-2"
+          [id]="'dropdown-' + componentId"
+          [attr.aria-labelledby]="'trigger-' + componentId"
+          role="listbox"
+        >
+          <div class="max-h-60 overflow-y-auto py-1">
+            <ng-content></ng-content>
+          </div>
         </div>
-      </div>
+      }
     </div>
   `,
   styles: [

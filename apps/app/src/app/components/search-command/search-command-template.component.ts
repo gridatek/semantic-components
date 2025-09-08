@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -25,7 +24,6 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
 @Component({
   selector: 'app-search-command-template',
   imports: [
-    CommonModule,
     ScCommand,
     ScCommandInput,
     ScCommandList,
@@ -58,101 +56,100 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
           </div>
         </sc-command-empty>
 
-        <sc-command-loading *ngIf="isLoading()">
-          <div class="flex items-center justify-center py-8">
-            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-            <span class="ml-2 text-sm text-muted-foreground">Searching...</span>
-          </div>
-        </sc-command-loading>
+        @if (isLoading()) {
+          <sc-command-loading>
+            <div class="flex items-center justify-center py-8">
+              <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+              <span class="ml-2 text-sm text-muted-foreground">Searching...</span>
+            </div>
+          </sc-command-loading>
+        }
 
-        <ng-container *ngIf="searchResults()?.length">
+        @if (searchResults().length) {
           <!-- Documentation Results -->
-          <sc-command-group
-            *ngIf="getResultsByCategory('documentation').length"
-            heading="Documentation"
-          >
-            <sc-command-item
-              class="flex items-start gap-3 p-3"
-              *ngFor="let result of getResultsByCategory('documentation')"
-              [value]="result.objectID"
-            >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-file-text-icon></svg>
-              <div class="flex-1 min-w-0">
-                <div
-                  class="font-medium truncate"
-                  [innerHTML]="getHighlightedText(result.title)"
-                ></div>
-                <div
-                  class="text-sm text-muted-foreground mt-1 line-clamp-2"
-                  [innerHTML]="getHighlightedText(result.content)"
-                ></div>
-                <div class="text-xs text-muted-foreground mt-1" *ngIf="result.hierarchy">
-                  {{ getBreadcrumb(result.hierarchy) }}
-                </div>
-              </div>
-              <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
-            </sc-command-item>
-          </sc-command-group>
-
+          @if (getResultsByCategory('documentation').length) {
+            <sc-command-group heading="Documentation">
+              @for (result of getResultsByCategory('documentation'); track result) {
+                <sc-command-item class="flex items-start gap-3 p-3" [value]="result.objectID">
+                  <svg
+                    class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0"
+                    si-file-text-icon
+                  ></svg>
+                  <div class="flex-1 min-w-0">
+                    <div
+                      class="font-medium truncate"
+                      [innerHTML]="getHighlightedText(result.title)"
+                    ></div>
+                    <div
+                      class="text-sm text-muted-foreground mt-1 line-clamp-2"
+                      [innerHTML]="getHighlightedText(result.content)"
+                    ></div>
+                    @if (result.hierarchy) {
+                      <div class="text-xs text-muted-foreground mt-1">
+                        {{ getBreadcrumb(result.hierarchy) }}
+                      </div>
+                    }
+                  </div>
+                  <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
           <!-- Component Results -->
-          <sc-command-separator
-            *ngIf="
-              getResultsByCategory('documentation').length &&
-              getResultsByCategory('component').length
-            "
-          />
-
-          <sc-command-group *ngIf="getResultsByCategory('component').length" heading="Components">
-            <sc-command-item
-              class="flex items-start gap-3 p-3"
-              *ngFor="let result of getResultsByCategory('component')"
-              [value]="result.objectID"
-            >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-hash-icon></svg>
-              <div class="flex-1 min-w-0">
-                <div
-                  class="font-medium truncate"
-                  [innerHTML]="getHighlightedText(result.title)"
-                ></div>
-                <div
-                  class="text-sm text-muted-foreground mt-1 line-clamp-2"
-                  [innerHTML]="getHighlightedText(result.content)"
-                ></div>
-              </div>
-              <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
-            </sc-command-item>
-          </sc-command-group>
-
+          @if (
+            getResultsByCategory('documentation').length && getResultsByCategory('component').length
+          ) {
+            <sc-command-separator />
+          }
+          @if (getResultsByCategory('component').length) {
+            <sc-command-group heading="Components">
+              @for (result of getResultsByCategory('component'); track result) {
+                <sc-command-item class="flex items-start gap-3 p-3" [value]="result.objectID">
+                  <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-hash-icon></svg>
+                  <div class="flex-1 min-w-0">
+                    <div
+                      class="font-medium truncate"
+                      [innerHTML]="getHighlightedText(result.title)"
+                    ></div>
+                    <div
+                      class="text-sm text-muted-foreground mt-1 line-clamp-2"
+                      [innerHTML]="getHighlightedText(result.content)"
+                    ></div>
+                  </div>
+                  <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
           <!-- Other Results -->
-          <sc-command-separator
-            *ngIf="
-              (getResultsByCategory('documentation').length ||
-                getResultsByCategory('component').length) &&
-              getResultsByCategory('other').length
-            "
-          />
-
-          <sc-command-group *ngIf="getResultsByCategory('other').length" heading="Other">
-            <sc-command-item
-              class="flex items-start gap-3 p-3"
-              *ngFor="let result of getResultsByCategory('other')"
-              [value]="result.objectID"
-            >
-              <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-search-icon></svg>
-              <div class="flex-1 min-w-0">
-                <div
-                  class="font-medium truncate"
-                  [innerHTML]="getHighlightedText(result.title)"
-                ></div>
-                <div
-                  class="text-sm text-muted-foreground mt-1 line-clamp-2"
-                  [innerHTML]="getHighlightedText(result.content)"
-                ></div>
-              </div>
-              <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
-            </sc-command-item>
-          </sc-command-group>
-        </ng-container>
+          @if (
+            (getResultsByCategory('documentation').length ||
+              getResultsByCategory('component').length) &&
+            getResultsByCategory('other').length
+          ) {
+            <sc-command-separator />
+          }
+          @if (getResultsByCategory('other').length) {
+            <sc-command-group heading="Other">
+              @for (result of getResultsByCategory('other'); track result) {
+                <sc-command-item class="flex items-start gap-3 p-3" [value]="result.objectID">
+                  <svg class="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" si-search-icon></svg>
+                  <div class="flex-1 min-w-0">
+                    <div
+                      class="font-medium truncate"
+                      [innerHTML]="getHighlightedText(result.title)"
+                    ></div>
+                    <div
+                      class="text-sm text-muted-foreground mt-1 line-clamp-2"
+                      [innerHTML]="getHighlightedText(result.content)"
+                    ></div>
+                  </div>
+                  <svg class="h-3 w-3 text-muted-foreground shrink-0" si-external-link-icon></svg>
+                </sc-command-item>
+              }
+            </sc-command-group>
+          }
+        }
       </sc-command-list>
     </sc-command>
   `,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -6,7 +5,7 @@ import { ScOptionComponent, ScSelectComponent } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-demo2',
-  imports: [ScSelectComponent, ScOptionComponent, FormsModule, CommonModule],
+  imports: [ScSelectComponent, ScOptionComponent, FormsModule],
   template: `
     <div class="min-h-screen bg-gray-50 p-8">
       <div class="max-w-md mx-auto space-y-8">
@@ -30,12 +29,14 @@ import { ScOptionComponent, ScSelectComponent } from '@semantic-components/ui';
           </div>
 
           <!-- Display selected value -->
-          <div class="mt-4 p-4 bg-blue-50 rounded-lg" *ngIf="selectedFruit">
-            <p class="text-sm text-blue-800">
-              <strong>Selected fruit:</strong>
-              {{ selectedFruit }}
-            </p>
-          </div>
+          @if (selectedFruit) {
+            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+              <p class="text-sm text-blue-800">
+                <strong>Selected fruit:</strong>
+                {{ selectedFruit }}
+              </p>
+            </div>
+          }
 
           <!-- Another example with different options -->
           <div class="mt-6">
