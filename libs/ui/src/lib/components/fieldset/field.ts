@@ -54,11 +54,11 @@ export class ScField {
         '[&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-primary [&:has([data-slot=control]:focus)_label]:bg-background [&:has([data-slot=control]:focus)_label]:px-1 [&:has([data-slot=control]:focus)_label]:-ml-1',
       this.floatingLabel() &&
         '[&:has([data-slot=control]:focus)_label]:[top:var(--floating-label-top-offset)]',
-      // Floating label states - has value
+      // Floating label states - has value (using :not(:placeholder-shown))
       this.floatingLabel() &&
-        '[&:has([data-slot=control][data-has-value])_label]:text-xs [&:has([data-slot=control][data-has-value])_label]:text-muted-foreground [&:has([data-slot=control][data-has-value])_label]:bg-background [&:has([data-slot=control][data-has-value])_label]:px-1 [&:has([data-slot=control][data-has-value])_label]:-ml-1',
+        '[&:has([data-slot=control]:not(:placeholder-shown))_label]:text-xs [&:has([data-slot=control]:not(:placeholder-shown))_label]:text-muted-foreground [&:has([data-slot=control]:not(:placeholder-shown))_label]:bg-background [&:has([data-slot=control]:not(:placeholder-shown))_label]:px-1 [&:has([data-slot=control]:not(:placeholder-shown))_label]:-ml-1',
       this.floatingLabel() &&
-        '[&:has([data-slot=control][data-has-value])_label]:[top:var(--floating-label-top-offset)]',
+        '[&:has([data-slot=control]:not(:placeholder-shown))_label]:[top:var(--floating-label-top-offset)]',
       this.classInput(),
     ),
   );
@@ -117,102 +117,18 @@ export class ScField {
           }
         }
 
-        // Add floating label value tracking and set placeholder
+        // Set placeholder for floating label (required for :not(:placeholder-shown) to work)
         const isFloatingLabel = this.floatingLabel();
         console.log('🏷️ Is floating label:', isFloatingLabel);
 
         if (isFloatingLabel) {
-          console.log(
-            '🚀 Setting up floating label tracking for element:',
-            controlRef.nativeElement,
-          );
-          this.setupFloatingLabelTracking(controlRef.nativeElement);
+          console.log('🚀 Setting placeholder for floating label');
           this.setFloatingLabelPlaceholder(controlRef.nativeElement, component);
         }
       } else {
         console.warn('❌ No control element found with data-slot="control"');
       }
     });
-  }
-
-  private setupFloatingLabelTracking(controlElement: HTMLElement) {
-    const updateValueState = () => {
-      const hasValue = this.checkHasValue(controlElement);
-      console.log('🏷️ Floating label debug - updateValueState:', {
-        element: controlElement,
-        tagName: controlElement.tagName,
-        hasValue,
-        nativeValue: (controlElement as HTMLInputElement).value,
-        currentDataAttribute: controlElement.getAttribute('data-has-value'),
-      });
-
-      if (hasValue) {
-        controlElement.setAttribute('data-has-value', '');
-      } else {
-        controlElement.removeAttribute('data-has-value');
-      }
-    };
-
-    // Listen for various input events
-    ['input', 'change', 'blur', 'focus'].forEach((eventType) => {
-      controlElement.addEventListener(eventType, updateValueState);
-    });
-
-    // Initial check
-    updateValueState();
-  }
-
-  private checkHasValue(element: HTMLElement): boolean {
-    console.log('🔍 Checking has value for element:', element);
-
-    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-      const inputValue = (element as HTMLInputElement).value.trim();
-      console.log('📝 Native input value:', inputValue);
-      if (inputValue !== '') return true;
-    }
-
-    // For custom components, check common value patterns
-    const component = (element as any)?.__ngContext__?.[8];
-    console.log('🎯 Component from context:', component);
-
-    if (component) {
-      // Check common value signal names
-      if (component.value?.() !== undefined && component.value?.() !== '') {
-        console.log('✅ Found component.value():', component.value?.());
-        return true;
-      }
-      if (component.selectedValue?.() !== undefined && component.selectedValue?.() !== '') {
-        console.log('✅ Found component.selectedValue():', component.selectedValue?.());
-        return true;
-      }
-      if (component.ngModel !== undefined && component.ngModel !== '') {
-        console.log('✅ Found component.ngModel:', component.ngModel);
-        return true;
-      }
-
-      // Check for ScInput host directive value
-      const hostDirectives = (component as any)?._hostDirectives;
-      console.log('🎭 Host directives:', hostDirectives);
-      if (hostDirectives) {
-        for (const directive of hostDirectives) {
-          console.log('🎭 Checking directive:', directive);
-          if (directive?.value?.() !== undefined && directive.value?.() !== '') {
-            console.log('✅ Found directive.value():', directive.value?.());
-            return true;
-          }
-        }
-      }
-
-      // Additional debugging - check all properties
-      console.log('🔎 Component properties:', Object.getOwnPropertyNames(component));
-      console.log(
-        '🔎 Component prototype:',
-        Object.getOwnPropertyNames(Object.getPrototypeOf(component)),
-      );
-    }
-
-    console.log('❌ No value found');
-    return false;
   }
 
   private setFloatingLabelPlaceholder(element: HTMLElement, component?: any) {
