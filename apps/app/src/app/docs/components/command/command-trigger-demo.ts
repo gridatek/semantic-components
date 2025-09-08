@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { Component, TemplateRef, ViewChild, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +27,6 @@ export interface CommandItemModel {
 @Component({
   selector: 'app-command-trigger-demo',
   imports: [
-    CommonModule,
     FormsModule,
     ScCommandTrigger,
     ScCommand,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { HttpClient, httpResource } from '@angular/common/http';
 import {
   Component,
@@ -36,7 +35,6 @@ export interface CommandItem {
 @Component({
   selector: 'app-command-http-resource-demo',
   imports: [
-    CommonModule,
     FormsModule,
     ScCommand,
     ScCommandInput,

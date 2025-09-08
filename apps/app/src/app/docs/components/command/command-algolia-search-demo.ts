@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 
 import { CommandTriggerConfig, ScCommandTrigger } from '@semantic-components/ui';
@@ -8,7 +7,7 @@ import { SearchCommandTemplateComponent } from '../../../components/search-comma
 
 @Component({
   selector: 'app-command-algolia-search-demo',
-  imports: [CommonModule, ScCommandTrigger, SiSearchIcon, SearchCommandTemplateComponent],
+  imports: [ScCommandTrigger, SiSearchIcon, SearchCommandTemplateComponent],
   template: `
     <div class="space-y-6">
       <div class="prose prose-sm max-w-none">
