@@ -103,7 +103,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
   private overlayRef: OverlayRef | null = null;
   private onChange = (value: any) => {};
   private onTouched = () => {};
-  private keyManager!: ActiveDescendantKeyManager<ScOptionComponent>;
+  public keyManager!: ActiveDescendantKeyManager<ScOptionComponent>;
 
   constructor(
     private overlay: Overlay,
