@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 
 import {
   ScCommand,
@@ -205,14 +205,14 @@ import { CommandCategory, CommandItem, MockCommandService } from './mock-command
   `,
 })
 export class CommandAdvancedDemo implements OnInit {
+  commandService = inject(MockCommandService);
+
   commandCategories$!: Observable<CommandCategory[]>;
   useCustomFilter = false;
   commandCount = 25;
   disabledCount = 1;
 
   readonly searchQuery = new BehaviorSubject<string>('');
-
-  constructor(public commandService: MockCommandService) {}
 
   ngOnInit() {
     this.loadAllCommands();

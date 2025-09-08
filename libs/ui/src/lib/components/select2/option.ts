@@ -25,6 +25,8 @@ import { cn } from '@semantic-components/utils';
   },
 })
 export class ScOptionComponent implements Highlightable {
+  element = inject(ElementRef);
+
   readonly id = signal<string>(inject(_IdGenerator).getId('sc-option-'));
 
   readonly classInput = input<string>('', {
@@ -54,8 +56,6 @@ export class ScOptionComponent implements Highlightable {
   protected readonly _disabled = computed(() => this.disabledInput() || this.disabled);
 
   selected = signal(false);
-
-  constructor(public element: ElementRef) {}
 
   setActiveStyles(): void {
     this.highlighted.set(true);

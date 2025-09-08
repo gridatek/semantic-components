@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
@@ -177,16 +177,14 @@ import { AlgoliaSearchService, SearchResult } from '../../services/algolia-searc
   ],
 })
 export class SearchCommandTemplateComponent implements OnInit, OnDestroy {
+  private algoliaService = inject(AlgoliaSearchService);
+  private router = inject(Router);
+
   searchQuery = signal('');
   searchResults = signal<SearchResult[]>([]);
   isLoading = signal(false);
 
   private destroy$ = new Subject<void>();
-
-  constructor(
-    private algoliaService: AlgoliaSearchService,
-    private router: Router,
-  ) {}
 
   ngOnInit(): void {
     // Subscribe to search results

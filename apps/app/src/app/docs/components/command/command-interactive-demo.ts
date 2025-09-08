@@ -293,6 +293,8 @@ import { CommandCategory, CommandItem, MockCommandService } from './mock-command
   `,
 })
 export class CommandInteractiveDemo implements OnInit {
+  commandService = inject(MockCommandService);
+
   private http = inject(HttpClient);
   commandDialogService = inject(CommandDialog);
   commandCategories$!: Observable<CommandCategory[]>;
@@ -380,7 +382,7 @@ export class CommandInteractiveDemo implements OnInit {
     );
   });
 
-  constructor(public commandService: MockCommandService) {
+  constructor() {
     // Effects for side effects
     effect(() => {
       // Update empty state based on search results
