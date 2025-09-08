@@ -50,10 +50,10 @@ export class ScField {
         '[&_label]:top-1/2 [&_label]:-translate-y-1/2 [&_label]:text-sm [&_label]:text-muted-foreground [&_label]:origin-left',
       // Floating label states - focused
       this.floatingLabel() &&
-        '[&:has([data-slot=control]:focus)_label]:top-0 [&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-primary [&:has([data-slot=control]:focus)_label]:bg-background [&:has([data-slot=control]:focus)_label]:px-1 [&:has([data-slot=control]:focus)_label]:-ml-1',
+        '[&:has([data-slot=control]:focus)_label]:-top-1 [&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-primary [&:has([data-slot=control]:focus)_label]:bg-background [&:has([data-slot=control]:focus)_label]:px-1 [&:has([data-slot=control]:focus)_label]:-ml-1',
       // Floating label states - has value
       this.floatingLabel() &&
-        '[&:has([data-slot=control][data-has-value])_label]:top-0 [&:has([data-slot=control][data-has-value])_label]:text-xs [&:has([data-slot=control][data-has-value])_label]:text-muted-foreground [&:has([data-slot=control][data-has-value])_label]:bg-background [&:has([data-slot=control][data-has-value])_label]:px-1 [&:has([data-slot=control][data-has-value])_label]:-ml-1',
+        '[&:has([data-slot=control][data-has-value])_label]:-top-1 [&:has([data-slot=control][data-has-value])_label]:text-xs [&:has([data-slot=control][data-has-value])_label]:text-muted-foreground [&:has([data-slot=control][data-has-value])_label]:bg-background [&:has([data-slot=control][data-has-value])_label]:px-1 [&:has([data-slot=control][data-has-value])_label]:-ml-1',
       this.classInput(),
     ),
   );
