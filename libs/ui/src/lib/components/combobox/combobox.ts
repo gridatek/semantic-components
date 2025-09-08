@@ -7,10 +7,10 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  ViewChild,
   forwardRef,
   input,
   output,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -110,7 +110,7 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
 
         <!-- Dropdown Panel using CDK Overlay -->
         <ng-template
-          [cdkConnectedOverlayOrigin]="triggerElement"
+          [cdkConnectedOverlayOrigin]="triggerElement()"
           [cdkConnectedOverlayOpen]="isOpen"
           [cdkConnectedOverlayWidth]="triggerWidth"
           [cdkConnectedOverlayHasBackdrop]="false"
@@ -196,11 +196,11 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   readonly selectionChange = output<any>();
   readonly searchChange = output<string>();
 
-  @ViewChild('singleInput') singleInput?: ScComboboxInput;
-  @ViewChild('multiInput') multiInput?: ScComboboxMultiInput;
-  @ViewChild('panel') panel?: ScComboboxPanel;
-  @ViewChild('container') containerElement!: ElementRef<HTMLDivElement>;
-  @ViewChild('trigger', { read: ElementRef }) triggerElement!: ElementRef;
+  readonly singleInput = viewChild<ScComboboxInput>('singleInput');
+  readonly multiInput = viewChild<ScComboboxMultiInput>('multiInput');
+  readonly panel = viewChild<ScComboboxPanel>('panel');
+  readonly containerElement = viewChild.required<ElementRef<HTMLDivElement>>('container');
+  readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
   selectedValue: any = null;
   selectedValues: Set<string> = new Set();
@@ -252,15 +252,17 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     this.initKeyManager();
 
     // Watch for options changes
-    if (this.panel) {
-      this.panel.options.changes.pipe(takeUntil(this.destroy$)).subscribe(() => {
+    const panel = this.panel();
+    if (panel) {
+      panel.options.changes.pipe(takeUntil(this.destroy$)).subscribe(() => {
         this.initKeyManager();
       });
     }
 
     // Set trigger width
-    if (this.triggerElement) {
-      this.triggerWidth = this.triggerElement.nativeElement.offsetWidth;
+    const triggerElement = this.triggerElement();
+    if (triggerElement) {
+      this.triggerWidth = triggerElement.nativeElement.offsetWidth;
     }
   }
 
@@ -270,7 +272,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   }
 
   private initKeyManager() {
-    const options = this.panel?.options;
+    const options = this.panel()?.options;
     if (options && options.length) {
       this.keyManager = new ActiveDescendantKeyManager(options).withWrap().withTypeAhead(300);
 
@@ -296,8 +298,9 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
         const item = this.items().find((i) => this.getItemValue(i) === value);
         if (item) {
           const searchQuery = this.getItemLabel(item);
-          if (this.singleInput) {
-            this.singleInput.searchQuery = searchQuery;
+          const singleInput = this.singleInput();
+          if (singleInput) {
+            singleInput.searchQuery = searchQuery;
           }
         }
       }
@@ -409,15 +412,16 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   handleBlur() {
     this.onTouched();
     setTimeout(() => {
-      if (!this.containerElement?.nativeElement.contains(document.activeElement)) {
+      if (!this.containerElement()?.nativeElement.contains(document.activeElement)) {
         this.close();
       }
     }, 200);
   }
 
   setActiveItem(item: string | ScComboboxItem) {
-    if (this.keyManager && this.panel) {
-      const index = this.panel.options.toArray().findIndex((option) => {
+    const panel = this.panel();
+    if (this.keyManager && panel) {
+      const index = panel.options.toArray().findIndex((option) => {
         const optionValue = this.getItemValue(option.item());
         const itemValue = this.getItemValue(item);
         return optionValue === itemValue;
@@ -437,8 +441,9 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
       const label = this.getItemLabel(item);
 
       this.selectedValue = value;
-      if (this.singleInput) {
-        this.singleInput.searchQuery = label;
+      const singleInput = this.singleInput();
+      if (singleInput) {
+        singleInput.searchQuery = label;
       }
       this.onChange(value);
       this.selectionChange.emit(value);
@@ -458,8 +463,9 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     const valuesArray = Array.from(this.selectedValues);
     this.onChange(valuesArray);
     this.selectionChange.emit(valuesArray);
-    if (this.multiInput) {
-      this.multiInput.searchQuery = '';
+    const multiInput = this.multiInput();
+    if (multiInput) {
+      multiInput.searchQuery = '';
     }
   }
 
@@ -502,9 +508,10 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     // Initialize key manager when opening
     setTimeout(() => {
       this.initKeyManager();
-      if (this.keyManager && this.selectedValue && this.panel) {
+      const panel = this.panel();
+      if (this.keyManager && this.selectedValue && panel) {
         // Set active item to selected value
-        const selectedIndex = this.panel.options.toArray().findIndex((option) => {
+        const selectedIndex = panel.options.toArray().findIndex((option) => {
           const optionValue = this.getItemValue(option.item());
           return optionValue === this.selectedValue;
         });

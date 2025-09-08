@@ -1,5 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { Component, ElementRef, ViewChild, input, output } from '@angular/core';
+import { Component, ElementRef, input, output, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ScComboboxItem } from './combobox-types';
@@ -57,8 +57,8 @@ import { ScComboboxItem } from './combobox-types';
   `,
 })
 export class ScComboboxMultiInput {
-  @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
-  @ViewChild('trigger', { read: ElementRef }) triggerElement!: ElementRef;
+  readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
+  readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
   readonly placeholder = input<string>('Type to search...');
   readonly selectedValues = input<Set<string>>(new Set());
