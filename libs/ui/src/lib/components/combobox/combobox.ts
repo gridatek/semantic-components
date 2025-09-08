@@ -154,6 +154,9 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
       }
     </div>
   `,
+  host: {
+    'data-slot': 'control',
+  },
   styles: [
     `
       :host {
