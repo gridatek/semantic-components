@@ -2,12 +2,11 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Output,
   ViewEncapsulation,
   computed,
   inject,
   input,
+  output,
 } from '@angular/core';
 
 import { finalize } from 'rxjs/operators';
@@ -219,7 +218,7 @@ export class ScFileUpload {
   readonly maxFileSize = input(5); // Default max size in MB
   readonly multiple = input(false);
   readonly uploadUrl = input('/api/upload');
-  @Output() uploadComplete = new EventEmitter<any>();
+  readonly uploadComplete = output<any>();
 
   files: File[] = [];
   isDragging = false;

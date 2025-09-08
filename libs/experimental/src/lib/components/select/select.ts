@@ -4,11 +4,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
-  EventEmitter,
-  Output,
   QueryList,
   ViewEncapsulation,
   input,
+  output,
 } from '@angular/core';
 
 import { ScOption } from './option';
@@ -63,7 +62,7 @@ export class ScSelect implements AfterContentInit {
   readonly placeholder = input('Select an option');
   readonly displayWith = input<(value: any) => string>((value) => value?.toString() || '');
 
-  @Output() selectionChange = new EventEmitter<any>();
+  readonly selectionChange = output<any>();
 
   @ContentChildren(ScOption) options!: QueryList<ScOption>;
 

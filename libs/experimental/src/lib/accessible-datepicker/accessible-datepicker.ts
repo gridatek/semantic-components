@@ -1,13 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   HostListener,
   OnInit,
-  Output,
   ViewEncapsulation,
   forwardRef,
   input,
+  output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -238,7 +237,7 @@ export class ScAccessibleDatepicker implements OnInit, ControlValueAccessor {
   readonly id = input('accessible-datepicker');
   readonly ariaLabel = input('Date picker');
   readonly ariaDescribedBy = input('');
-  @Output() dateChange = new EventEmitter<Temporal.PlainDate>();
+  readonly dateChange = output<Temporal.PlainDate>();
 
   isCalendarOpen = false;
   isDisabled = false;

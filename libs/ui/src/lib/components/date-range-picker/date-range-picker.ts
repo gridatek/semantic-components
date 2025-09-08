@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   OnInit,
-  Output,
   ViewEncapsulation,
   input,
+  output,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -229,7 +228,7 @@ export class ScDateRangePicker implements OnInit {
   readonly endDate = input<Temporal.PlainDate>(Temporal.Now.plainDateISO());
   readonly minDate = input<Temporal.PlainDate | null>(null);
   readonly maxDate = input<Temporal.PlainDate | null>(null);
-  @Output() dateRangeSelected = new EventEmitter<{
+  readonly dateRangeSelected = output<{
     startDate: Temporal.PlainDate;
     endDate: Temporal.PlainDate;
   }>();

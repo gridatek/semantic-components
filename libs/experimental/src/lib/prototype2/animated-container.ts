@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Output,
   ViewEncapsulation,
   effect,
   input,
+  output,
   signal,
 } from '@angular/core';
 
@@ -30,7 +29,7 @@ export class AnimatedContainer {
   readonly state = input<'visible' | 'hidden'>('visible');
   readonly animation = input<'fade' | 'slide' | 'zoom' | 'collapse'>('fade');
   readonly duration = input<'fast' | 'normal' | 'slow'>('normal');
-  @Output() stateChange = new EventEmitter<AnimationState>();
+  readonly stateChange = output<AnimationState>();
 
   protected readonly currentState = signal<AnimationState>('initial');
 

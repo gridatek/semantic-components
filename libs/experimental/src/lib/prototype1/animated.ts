@@ -2,14 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   NgZone,
   OnInit,
-  Output,
   ViewEncapsulation,
   inject,
   input,
   linkedSignal,
+  output,
   signal,
 } from '@angular/core';
 
@@ -65,8 +64,8 @@ export class AnimatedContent implements OnInit {
   readonly title = linkedSignal(() => this.titleInput());
   readonly content = linkedSignal(() => this.contentInput());
 
-  @Output() confirm = new EventEmitter<void>();
-  @Output() cancel = new EventEmitter<void>();
+  readonly confirm = output<void>();
+  readonly cancel = output<void>();
 
   animationState = signal<'entering' | 'visible' | 'exiting'>('entering');
 

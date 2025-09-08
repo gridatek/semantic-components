@@ -1,13 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   OnChanges,
   OnInit,
-  Output,
   ViewEncapsulation,
   input,
   linkedSignal,
+  output,
 } from '@angular/core';
 
 @Component({
@@ -82,7 +81,7 @@ export class ScRating implements OnInit, OnChanges {
   readonly interactive = input(true);
   readonly showRatingValue = input(false);
   readonly allowHalfStars = input(true);
-  @Output() ratingChange = new EventEmitter<number>();
+  readonly ratingChange = output<number>();
 
   positions: number[] = [];
   hoverRating = 0;

@@ -2,7 +2,6 @@ import { Highlightable, _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
   ElementRef,
-  Input,
   booleanAttribute,
   computed,
   inject,
@@ -42,7 +41,7 @@ export class ScOptionComponent implements Highlightable {
     ),
   );
 
-  @Input() value: any;
+  readonly value = input<any>();
 
   highlighted = signal(false);
 

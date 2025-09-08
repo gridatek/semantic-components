@@ -3,24 +3,22 @@ import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 // Option component for ActiveDescendantKeyManager
 import { Highlightable } from '@angular/cdk/a11y';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
-import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  Directive,
   ElementRef,
-  EventEmitter,
-  HostListener,
   Input,
   OnDestroy,
   OnInit,
-  Output,
   QueryList,
   ViewChild,
   ViewChildren,
   forwardRef,
+  inject,
+  input,
+  output,
 } from '@angular/core';
-import { Directive } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
@@ -37,17 +35,17 @@ export interface ComboboxItem {
   standalone: true,
   host: {
     '[class.bg-blue-50]': 'isActive',
-    '[attr.aria-selected]': 'isSelected',
+    '[attr.aria-selected]': 'isSelected()',
     role: 'option',
   },
 })
 export class ComboboxOptionDirective implements Highlightable {
-  @Input() item!: string | ComboboxItem;
-  @Input() isSelected: boolean = false;
+  private element = inject(ElementRef);
+
+  readonly item = input.required<string | ComboboxItem>();
+  readonly isSelected = input<boolean>(false);
   isActive: boolean = false;
   disabled?: boolean = false;
-
-  constructor(private element: ElementRef) {}
 
   setActiveStyles(): void {
     this.isActive = true;
@@ -59,14 +57,15 @@ export class ComboboxOptionDirective implements Highlightable {
   }
 
   getLabel?(): string {
-    return typeof this.item === 'string' ? this.item : this.item.label;
+    const item = this.item();
+    return typeof item === 'string' ? item : item.label;
   }
 }
 
 @Component({
   selector: 'sc-combobox',
   standalone: true,
-  imports: [CommonModule, FormsModule, OverlayModule, ComboboxOptionDirective],
+  imports: [FormsModule, OverlayModule, ComboboxOptionDirective],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -76,127 +75,133 @@ export class ComboboxOptionDirective implements Highlightable {
   ],
   template: `
     <div class="combobox-container" #container>
-      <label class="block text-sm font-medium text-gray-700 mb-2" *ngIf="label">
-        {{ label }}
-      </label>
+      @if (label) {
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          {{ label }}
+        </label>
+      }
       <div class="relative">
         <!-- Single Select Input -->
-        <div class="relative" *ngIf="!multiple">
-          <input
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
-            #inputElement
-            #trigger="cdkOverlayOrigin"
-            [(ngModel)]="searchQuery"
-            [placeholder]="placeholder"
-            [attr.aria-expanded]="isOpen"
-            [attr.aria-controls]="listboxId"
-            [attr.aria-activedescendant]="activeItemId"
-            (input)="handleInput($event)"
-            (focus)="open()"
-            (blur)="handleBlur()"
-            (keydown)="handleKeydown($event)"
-            cdkOverlayOrigin
-            type="text"
-            role="combobox"
-            aria-autocomplete="list"
-          />
-          <button
-            class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-            *ngIf="showToggleButton"
-            (click)="toggle()"
-            type="button"
-            tabindex="-1"
-          >
-            <svg
-              class="w-5 h-5 transition-transform duration-200"
-              [class.rotate-180]="isOpen"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Multi Select Input with Chips -->
-        <div
-          class="min-h-[42px] w-full px-3 py-1 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent transition duration-200 flex flex-wrap gap-2 items-center"
-          #trigger="cdkOverlayOrigin"
-          *ngIf="multiple"
-          cdkOverlayOrigin
-        >
-          <div class="selected-chips flex flex-wrap gap-2">
-            <div
-              class="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-sm"
-              *ngFor="let value of selectedValues"
-            >
-              {{ getItemLabel(value) }}
+        @if (!multiple()) {
+          <div class="relative">
+            <input
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+              #inputElement
+              #trigger="cdkOverlayOrigin"
+              [(ngModel)]="searchQuery"
+              [placeholder]="placeholder()"
+              [attr.aria-expanded]="isOpen"
+              [attr.aria-controls]="listboxId"
+              [attr.aria-activedescendant]="activeItemId"
+              (input)="handleInput($event)"
+              (focus)="open()"
+              (blur)="handleBlur()"
+              (keydown)="handleKeydown($event)"
+              cdkOverlayOrigin
+              type="text"
+              role="combobox"
+              aria-autocomplete="list"
+            />
+            @if (showToggleButton()) {
               <button
-                class="hover:text-blue-900"
-                (click)="removeChip(value, $event)"
+                class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                (click)="toggle()"
                 type="button"
                 tabindex="-1"
               >
-                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  class="w-5 h-5 transition-transform duration-200"
+                  [class.rotate-180]="isOpen"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
-                    fill-rule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  ></path>
                 </svg>
               </button>
-            </div>
+            }
           </div>
-          <input
-            class="flex-1 min-w-[150px] outline-none py-1"
-            #inputElement
-            [(ngModel)]="searchQuery"
-            [placeholder]="placeholder"
-            [attr.aria-expanded]="isOpen"
-            [attr.aria-controls]="listboxId"
-            [attr.aria-activedescendant]="activeItemId"
-            (input)="handleInput($event)"
-            (focus)="open()"
-            (blur)="handleBlur()"
-            (keydown)="handleKeydown($event)"
-            type="text"
-            role="combobox"
-            aria-autocomplete="list"
-          />
-        </div>
+        }
+
+        <!-- Multi Select Input with Chips -->
+        @if (multiple()) {
+          <div
+            class="min-h-[42px] w-full px-3 py-1 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent transition duration-200 flex flex-wrap gap-2 items-center"
+            #trigger="cdkOverlayOrigin"
+            cdkOverlayOrigin
+          >
+            <div class="selected-chips flex flex-wrap gap-2">
+              @for (value of selectedValues; track value) {
+                <div
+                  class="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-sm"
+                >
+                  {{ getItemLabel(value) }}
+                  <button
+                    class="hover:text-blue-900"
+                    (click)="removeChip(value, $event)"
+                    type="button"
+                    tabindex="-1"
+                  >
+                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              }
+            </div>
+            <input
+              class="flex-1 min-w-[150px] outline-none py-1"
+              #inputElement
+              [(ngModel)]="searchQuery"
+              [placeholder]="placeholder()"
+              [attr.aria-expanded]="isOpen"
+              [attr.aria-controls]="listboxId"
+              [attr.aria-activedescendant]="activeItemId"
+              (input)="handleInput($event)"
+              (focus)="open()"
+              (blur)="handleBlur()"
+              (keydown)="handleKeydown($event)"
+              type="text"
+              role="combobox"
+              aria-autocomplete="list"
+            />
+          </div>
+        }
 
         <!-- Loading Spinner (for async) -->
-        <div
-          class="loading-spinner absolute right-3 top-1/2 transform -translate-y-1/2"
-          *ngIf="async && isLoading"
-        >
-          <svg
-            class="animate-spin h-5 w-5 text-purple-500"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              class="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"
-            ></circle>
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
-          </svg>
-        </div>
+        @if (async() && isLoading) {
+          <div class="loading-spinner absolute right-3 top-1/2 transform -translate-y-1/2">
+            <svg
+              class="animate-spin h-5 w-5 text-purple-500"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+          </div>
+        }
 
         <!-- Dropdown Panel using CDK Overlay -->
         <ng-template
@@ -212,107 +217,111 @@ export class ComboboxOptionDirective implements Highlightable {
           <div
             class="combobox-panel bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto"
             [id]="listboxId"
-            [attr.aria-multiselectable]="multiple"
+            [attr.aria-multiselectable]="multiple()"
             role="listbox"
           >
             <!-- No Results -->
-            <div class="px-4 py-3 text-gray-500 text-sm" *ngIf="filteredItems.length === 0">
-              No results found
-            </div>
+            @if (filteredItems.length === 0) {
+              <div class="px-4 py-3 text-gray-500 text-sm">No results found</div>
+            }
 
             <!-- Grouped Options -->
-            <ng-container *ngIf="grouped && filteredItems.length > 0">
-              <ng-container *ngFor="let group of getGroups()">
+            @if (grouped() && filteredItems.length > 0) {
+              @for (group of getGroups(); track group) {
                 <div
                   class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider bg-gray-50 group-header"
                 >
                   {{ group.name }}
                 </div>
+                @for (item of group.items; track item; let i = $index) {
+                  <div
+                    class="combobox-option px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
+                    [item]="item"
+                    [isSelected]="isItemSelected(item)"
+                    [id]="'option-' + group.name + '-' + i"
+                    (click)="selectItem(item)"
+                    (mouseenter)="setActiveItem(item)"
+                    appComboboxOption
+                  >
+                    <div class="flex flex-col">
+                      <span class="text-gray-900">{{ item.label }}</span>
+                      @if (item.subtitle) {
+                        <span class="text-xs text-gray-500">
+                          {{ item.subtitle }}
+                        </span>
+                      }
+                    </div>
+                    @if (multiple() && isItemSelected(item)) {
+                      <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    }
+                  </div>
+                }
+              }
+            }
+
+            <!-- Non-grouped Options -->
+            @if (!grouped() && filteredItems.length > 0) {
+              @for (item of filteredItems; track item; let i = $index) {
                 <div
                   class="combobox-option px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
-                  *ngFor="let item of group.items; let i = index"
                   [item]="item"
                   [isSelected]="isItemSelected(item)"
-                  [id]="'option-' + group.name + '-' + i"
+                  [id]="'option-' + i"
                   (click)="selectItem(item)"
                   (mouseenter)="setActiveItem(item)"
                   appComboboxOption
                 >
                   <div class="flex flex-col">
-                    <span class="text-gray-900">{{ item.label }}</span>
-                    <span class="text-xs text-gray-500" *ngIf="item.subtitle">
-                      {{ item.subtitle }}
-                    </span>
+                    <span class="text-gray-900">{{ getItemLabel(item) }}</span>
+                    @if (getItemSubtitle(item)) {
+                      <span class="text-xs text-gray-500">
+                        {{ getItemSubtitle(item) }}
+                      </span>
+                    }
                   </div>
-                  <svg
-                    class="w-5 h-5 text-blue-600"
-                    *ngIf="multiple && isItemSelected(item)"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
+                  @if (multiple() && isItemSelected(item)) {
+                    <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  }
                 </div>
-              </ng-container>
-            </ng-container>
-
-            <!-- Non-grouped Options -->
-            <ng-container *ngIf="!grouped && filteredItems.length > 0">
-              <div
-                class="combobox-option px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
-                *ngFor="let item of filteredItems; let i = index"
-                [item]="item"
-                [isSelected]="isItemSelected(item)"
-                [id]="'option-' + i"
-                (click)="selectItem(item)"
-                (mouseenter)="setActiveItem(item)"
-                appComboboxOption
-              >
-                <div class="flex flex-col">
-                  <span class="text-gray-900">{{ getItemLabel(item) }}</span>
-                  <span class="text-xs text-gray-500" *ngIf="getItemSubtitle(item)">
-                    {{ getItemSubtitle(item) }}
-                  </span>
-                </div>
-                <svg
-                  class="w-5 h-5 text-blue-600"
-                  *ngIf="multiple && isItemSelected(item)"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </div>
-            </ng-container>
+              }
+            }
           </div>
         </ng-template>
       </div>
 
       <!-- Status Display -->
-      <p class="mt-2 text-sm text-gray-500" *ngIf="showStatus">
-        <ng-container *ngIf="!multiple">
-          Selected:
-          <span class="font-medium">
-            {{ selectedValue ? getItemLabel(selectedValue) : 'None' }}
-          </span>
-        </ng-container>
-        <ng-container *ngIf="multiple">
-          Selected count:
-          <span class="font-medium">{{ selectedValues.size }}</span>
-        </ng-container>
-      </p>
-      <p class="mt-2 text-sm text-gray-500" *ngIf="async && showStatus">
-        Status:
-        <span class="font-medium">{{ isLoading ? 'Loading...' : 'Ready' }}</span>
-      </p>
+      @if (showStatus()) {
+        <p class="mt-2 text-sm text-gray-500">
+          @if (!multiple()) {
+            Selected:
+            <span class="font-medium">
+              {{ selectedValue ? getItemLabel(selectedValue) : 'None' }}
+            </span>
+          }
+          @if (multiple()) {
+            Selected count:
+            <span class="font-medium">{{ selectedValues.size }}</span>
+          }
+        </p>
+      }
+      @if (async() && showStatus()) {
+        <p class="mt-2 text-sm text-gray-500">
+          Status:
+          <span class="font-medium">{{ isLoading ? 'Loading...' : 'Ready' }}</span>
+        </p>
+      }
     </div>
   `,
   styles: [
@@ -383,17 +392,17 @@ export class ComboboxOptionDirective implements Highlightable {
 })
 export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input() label: string = '';
-  @Input() placeholder: string = 'Type to search...';
-  @Input() items: (string | ComboboxItem)[] = [];
-  @Input() multiple: boolean = false;
-  @Input() async: boolean = false;
-  @Input() grouped: boolean = false;
-  @Input() showStatus: boolean = true;
-  @Input() showToggleButton: boolean = true;
-  @Input() asyncSearchFn?: (query: string) => Promise<ComboboxItem[]>;
+  readonly placeholder = input<string>('Type to search...');
+  readonly items = input<(string | ComboboxItem)[]>([]);
+  readonly multiple = input<boolean>(false);
+  readonly async = input<boolean>(false);
+  readonly grouped = input<boolean>(false);
+  readonly showStatus = input<boolean>(true);
+  readonly showToggleButton = input<boolean>(true);
+  readonly asyncSearchFn = input<(query: string) => Promise<ComboboxItem[]>>();
 
-  @Output() selectionChange = new EventEmitter<any>();
-  @Output() searchChange = new EventEmitter<string>();
+  readonly selectionChange = output<any>();
+  readonly searchChange = output<string>();
 
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
   @ViewChild('container') containerElement!: ElementRef<HTMLDivElement>;
@@ -435,9 +444,9 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   ];
 
   ngOnInit() {
-    this.filteredItems = [...this.items];
+    this.filteredItems = [...this.items()];
 
-    if (this.async) {
+    if (this.async()) {
       this.searchSubject
         .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
         .subscribe((query) => {
@@ -484,12 +493,12 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   }
 
   writeValue(value: any): void {
-    if (this.multiple) {
+    if (this.multiple()) {
       this.selectedValues = new Set(value || []);
     } else {
       this.selectedValue = value;
       if (value) {
-        const item = this.items.find((i) => this.getItemValue(i) === value);
+        const item = this.items().find((i) => this.getItemValue(i) === value);
         if (item) {
           this.searchQuery = this.getItemLabel(item);
         }
@@ -508,7 +517,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   handleInput(event: Event) {
     const value = (event.target as HTMLInputElement).value.toLowerCase();
 
-    if (this.async) {
+    if (this.async()) {
       this.searchSubject.next(value);
     } else {
       this.filterItems(value);
@@ -520,9 +529,9 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
 
   filterItems(query: string) {
     if (!query) {
-      this.filteredItems = [...this.items];
+      this.filteredItems = [...this.items()];
     } else {
-      this.filteredItems = this.items.filter((item) => {
+      this.filteredItems = this.items().filter((item) => {
         const label = this.getItemLabel(item).toLowerCase();
         return label.includes(query);
       });
@@ -538,8 +547,9 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     this.isLoading = true;
 
     try {
-      if (this.asyncSearchFn) {
-        this.filteredItems = await this.asyncSearchFn(query);
+      const asyncSearchFn = this.asyncSearchFn();
+      if (asyncSearchFn) {
+        this.filteredItems = await asyncSearchFn(query);
       } else {
         // Default mock implementation
         await new Promise((resolve) => setTimeout(resolve, 500));
@@ -586,7 +596,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
         event.preventDefault();
         const activeItem = this.keyManager.activeItem;
         if (activeItem) {
-          this.selectItem(activeItem.item);
+          this.selectItem(activeItem.item());
         }
       } else if (event.key === 'Escape') {
         event.preventDefault();
@@ -610,7 +620,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   setActiveItem(item: string | ComboboxItem) {
     if (this.keyManager) {
       const index = this.options.toArray().findIndex((option) => {
-        const optionValue = this.getItemValue(option.item);
+        const optionValue = this.getItemValue(option.item());
         const itemValue = this.getItemValue(item);
         return optionValue === itemValue;
       });
@@ -622,7 +632,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   }
 
   selectItem(item: string | ComboboxItem) {
-    if (this.multiple) {
+    if (this.multiple()) {
       this.toggleMultiSelect(item);
     } else {
       const value = this.getItemValue(item);
@@ -661,7 +671,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
 
   isItemSelected(item: string | ComboboxItem): boolean {
     const value = this.getItemValue(item);
-    if (this.multiple) {
+    if (this.multiple()) {
       return this.selectedValues.has(value);
     }
     return this.selectedValue === value;
@@ -672,7 +682,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     if (typeof item === 'string') return item;
 
     // If item is a value from selectedValues, find the actual item
-    const actualItem = this.items.find((i) => {
+    const actualItem = this.items().find((i) => {
       if (typeof i === 'string') return i === item;
       return i.value === item;
     });
@@ -716,7 +726,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
       if (this.keyManager && this.selectedValue) {
         // Set active item to selected value
         const selectedIndex = this.options.toArray().findIndex((option) => {
-          const optionValue = this.getItemValue(option.item);
+          const optionValue = this.getItemValue(option.item());
           return optionValue === this.selectedValue;
         });
         if (selectedIndex >= 0) {

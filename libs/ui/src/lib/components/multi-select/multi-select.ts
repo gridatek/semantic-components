@@ -2,13 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   OnInit,
-  Output,
   ViewEncapsulation,
   inject,
   input,
+  output,
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -173,7 +172,7 @@ export class ScMultiSelect implements OnInit {
   readonly showError = input(false);
   readonly errorMessage = input('This field is required');
 
-  @Output() selectionChange = new EventEmitter<ScOptionModel[]>();
+  readonly selectionChange = output<ScOptionModel[]>();
 
   protected readonly isOpen = signal(false);
   searchText = '';

@@ -4,10 +4,10 @@ import {
   Component,
   ElementRef,
   HostListener,
-  Input,
   OnDestroy,
   contentChildren,
   forwardRef,
+  input,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -43,7 +43,7 @@ import { ScOptionComponent } from './option';
         tabindex="0"
       >
         <span class="truncate" [class.text-gray-400]="!selectedOption">
-          {{ selectedOption ? selectedOption.getLabel() : placeholder }}
+          {{ selectedOption ? selectedOption.getLabel() : placeholder() }}
         </span>
         <svg
           class="w-5 h-5 text-gray-400 transition-transform duration-200"
@@ -108,7 +108,7 @@ import { ScOptionComponent } from './option';
   ],
 })
 export class ScSelectComponent implements AfterContentInit, ControlValueAccessor, OnDestroy {
-  @Input() placeholder = 'Select an option';
+  readonly placeholder = input('Select an option');
   readonly options = contentChildren(ScOptionComponent);
   readonly trigger = viewChild.required<ElementRef>('trigger');
 
@@ -246,7 +246,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
     this.selectedOption = option;
 
     // Emit value
-    this.onChange(option.value);
+    this.onChange(option.value());
     this.onTouched();
 
     // Close dropdown
@@ -256,7 +256,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
 
   // ControlValueAccessor implementation
   writeValue(value: any): void {
-    const option = this.options()?.find((opt) => opt.value === value);
+    const option = this.options()?.find((opt) => opt.value() === value);
     if (option) {
       this.selectedOption = option;
       option.selected.set(true);
