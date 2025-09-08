@@ -1,5 +1,14 @@
 import { Highlightable, _IdGenerator } from '@angular/cdk/a11y';
-import { Component, ElementRef, Input, computed, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  booleanAttribute,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
@@ -26,7 +35,7 @@ export class ScOptionComponent implements Highlightable {
     cn(
       'block px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors duration-150',
       this.highlighted() === true && 'bg-blue-100 text-blue-900',
-      this.disabled === true && 'pointer-events-none opacity-50',
+      this._disabled() === true && 'pointer-events-none opacity-50',
       this.classInput(),
     ),
   );
@@ -35,10 +44,16 @@ export class ScOptionComponent implements Highlightable {
 
   highlighted = signal(false);
 
-  @Input()
   disabled = false;
 
-  selected = false;
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+
+  protected readonly _disabled = computed(() => this.disabledInput() || this.disabled);
+
+  selected = signal(false);
 
   constructor(public element: ElementRef) {}
 
@@ -51,7 +66,7 @@ export class ScOptionComponent implements Highlightable {
   }
 
   select() {
-    if (!this.disabled) {
+    if (!this._disabled()) {
       // Selection will be handled by parent component
     }
   }

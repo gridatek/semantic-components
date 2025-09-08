@@ -242,8 +242,8 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
     if (option.disabled) return;
 
     // Update selection state
-    this.options.forEach((opt) => (opt.selected = false));
-    option.selected = true;
+    this.options.forEach((opt) => opt.selected.set(false));
+    option.selected.set(true);
     this.selectedOption = option;
 
     // Emit value
@@ -260,7 +260,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
     const option = this.options?.find((opt) => opt.value === value);
     if (option) {
       this.selectedOption = option;
-      option.selected = true;
+      option.selected.set(true);
     }
   }
 
