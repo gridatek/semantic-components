@@ -26,7 +26,11 @@ import { ScLabel } from '../label';
   host: {
     '[class]': 'class()',
   },
-  styles: ``,
+  styles: `
+    :host {
+      --floating-label-top-offset: -0.25rem; /* -top-1 equivalent */
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -50,10 +54,14 @@ export class ScField {
         '[&_label]:top-1/2 [&_label]:-translate-y-1/2 [&_label]:text-sm [&_label]:text-muted-foreground [&_label]:origin-left',
       // Floating label states - focused
       this.floatingLabel() &&
-        '[&:has([data-slot=control]:focus)_label]:-top-1 [&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-primary [&:has([data-slot=control]:focus)_label]:bg-background [&:has([data-slot=control]:focus)_label]:px-1 [&:has([data-slot=control]:focus)_label]:-ml-1',
+        '[&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-primary [&:has([data-slot=control]:focus)_label]:bg-background [&:has([data-slot=control]:focus)_label]:px-1 [&:has([data-slot=control]:focus)_label]:-ml-1',
+      this.floatingLabel() &&
+        '[&:has([data-slot=control]:focus)_label]:[top:var(--floating-label-top-offset)]',
       // Floating label states - has value
       this.floatingLabel() &&
-        '[&:has([data-slot=control][data-has-value])_label]:-top-1 [&:has([data-slot=control][data-has-value])_label]:text-xs [&:has([data-slot=control][data-has-value])_label]:text-muted-foreground [&:has([data-slot=control][data-has-value])_label]:bg-background [&:has([data-slot=control][data-has-value])_label]:px-1 [&:has([data-slot=control][data-has-value])_label]:-ml-1',
+        '[&:has([data-slot=control][data-has-value])_label]:text-xs [&:has([data-slot=control][data-has-value])_label]:text-muted-foreground [&:has([data-slot=control][data-has-value])_label]:bg-background [&:has([data-slot=control][data-has-value])_label]:px-1 [&:has([data-slot=control][data-has-value])_label]:-ml-1',
+      this.floatingLabel() &&
+        '[&:has([data-slot=control][data-has-value])_label]:[top:var(--floating-label-top-offset)]',
       this.classInput(),
     ),
   );
