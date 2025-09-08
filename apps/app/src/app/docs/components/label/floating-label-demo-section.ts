@@ -26,35 +26,33 @@ export class FloatingLabelDemoSection {
 </sc-field>
 
 <!-- Floating labels -->
-<sc-field [floating]="true">
+<sc-field [floatingLabel]="true">
   <label sc-label>Full Name</label>
-  <input sc-input [(ngModel)]="name" placeholder=" " />
+  <input sc-input [(ngModel)]="name" />
 </sc-field>
 
 <!-- Floating label with combobox -->
-<sc-field [floating]="true">
+<sc-field [floatingLabel]="true">
   <label sc-label>Select Country</label>
   <sc-combobox
     [(ngModel)]="country"
     [items]="countries"
-    placeholder=" "
   />
 </sc-field>
 
 <!-- Floating label with textarea -->
-<sc-field [floating]="true">
+<sc-field [floatingLabel]="true">
   <label sc-label>Additional Notes</label>
-  <textarea sc-input [(ngModel)]="notes" rows="3" placeholder=" "></textarea>
+  <textarea sc-input [(ngModel)]="notes" rows="3"></textarea>
 </sc-field>
 
 <!-- Floating label with multi-select -->
-<sc-field [floating]="true">
+<sc-field [floatingLabel]="true">
   <label sc-label>Programming Languages</label>
   <sc-combobox
     [(ngModel)]="languages"
     [items]="programmingLanguages"
     [multiple]="true"
-    placeholder=" "
   />
 </sc-field>`;
 }
