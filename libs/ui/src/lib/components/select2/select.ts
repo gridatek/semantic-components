@@ -133,10 +133,15 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
       });
     });
 
-    // Update active descendant for screen readers
+    // Update active descendant for screen readers and scroll to active item
     this.keyManager.change.pipe(takeUntil(this.destroy$)).subscribe(() => {
       const activeItem = this.keyManager.activeItem;
       this.activeDescendant = activeItem ? activeItem.id : null;
+
+      // Scroll active item into view
+      if (activeItem) {
+        this.scrollToOption(activeItem);
+      }
     });
   }
 
