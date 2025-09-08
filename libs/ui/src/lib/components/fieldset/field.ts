@@ -2,6 +2,7 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   afterNextRender,
   computed,
@@ -13,8 +14,6 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScCombobox } from '../combobox';
-import { ScInput } from '../input';
 import { ScLabel } from '../label';
 
 @Component({
@@ -45,16 +44,30 @@ export class ScField {
   readonly id = signal<string>(inject(_IdGenerator).getId('sc-field-'));
 
   readonly scLabel = contentChild(ScLabel);
-
-  readonly scInput = contentChild(ScInput);
-
-  readonly scCombobox = contentChild(ScCombobox);
+  readonly formControl = contentChild('[data-slot="control"]', {
+    read: ElementRef,
+    descendants: true,
+  });
 
   constructor() {
     afterNextRender(() => {
-      this.scLabel()?.for.set(this.id());
-      this.scInput()?.id.set(this.id());
-      this.scCombobox()?.id.set(this.id());
+      const fieldId = this.id();
+
+      // Set label for attribute
+      this.scLabel()?.for.set(fieldId);
+
+      // Auto-detect and set ID on the form control with data-slot="control"
+      const controlRef = this.formControl();
+      if (controlRef) {
+        const component = (controlRef.nativeElement as any)?.__ngContext__?.[8]; // Get component instance
+
+        if (component) {
+          // Set ID signal
+          if (component.id?.set) {
+            component.id.set(fieldId);
+          }
+        }
+      }
     });
   }
 }
