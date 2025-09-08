@@ -43,7 +43,7 @@ import {
           }"
         >
           <!-- Projected content from parent component -->
-          <ng-content></ng-content>
+          <ng-content />
         </div>
       </div>
 

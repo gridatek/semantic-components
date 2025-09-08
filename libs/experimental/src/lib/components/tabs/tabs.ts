@@ -25,7 +25,7 @@ import { ScTabsHeader } from './tabs-header';
           [attr.data-state]="tab.active() ? 'active' : ''"
           (click)="selectTab(tab)"
         >
-          <ng-container [ngTemplateOutlet]="tab.label()"></ng-container>
+          <ng-container [ngTemplateOutlet]="tab.label()" />
         </button>
       } @empty {
         <p>There are no tabs.</p>

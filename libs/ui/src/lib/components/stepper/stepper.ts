@@ -57,7 +57,7 @@ import {
 
       <!-- Step content -->
       <div class="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-        <ng-container [ngTemplateOutlet]="selected ? selected.content : null"></ng-container>
+        <ng-container [ngTemplateOutlet]="selected ? selected.content : null" />
 
         <!-- Navigation buttons -->
         <div class="flex justify-between mt-8">

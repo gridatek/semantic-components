@@ -39,7 +39,7 @@ import { CmsNewsletter } from '../components/newsletter';
   template: `
     <sc-page>
       <sc-page-hero-section>
-        <cms-hero-banner></cms-hero-banner>
+        <cms-hero-banner />
       </sc-page-hero-section>
 
       <sc-page-content>
@@ -108,7 +108,7 @@ import { CmsNewsletter } from '../components/newsletter';
       </sc-page-content>
 
       <sc-page-footer>
-        <cms-newsletter></cms-newsletter>
+        <cms-newsletter />
       </sc-page-footer>
     </sc-page>
   `,

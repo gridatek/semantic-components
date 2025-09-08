@@ -32,9 +32,7 @@ interface NavItem {
     >
       <h4 class="text-base font-semibold mb-4 text-gray-800">On This Page</h4>
       <nav>
-        <ng-container
-          *ngTemplateOutlet="navTemplate; context: { items: navItems(), level: 1 }"
-        ></ng-container>
+        <ng-container *ngTemplateOutlet="navTemplate; context: { items: navItems(), level: 1 }" />
       </nav>
     </div>
 
@@ -58,7 +56,7 @@ interface NavItem {
             @if (item.children && item.children.length > 0) {
               <ng-container
                 *ngTemplateOutlet="navTemplate; context: { items: item.children, level: level + 1 }"
-              ></ng-container>
+              />
             }
           </li>
         }

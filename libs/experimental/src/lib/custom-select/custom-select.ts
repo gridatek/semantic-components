@@ -74,7 +74,7 @@ import { CustomOption } from './custom-option';
         [style.width.px]="selectWidth"
       >
         <div class="py-1">
-          <ng-content></ng-content>
+          <ng-content />
         </div>
       </div>
     </ng-template>

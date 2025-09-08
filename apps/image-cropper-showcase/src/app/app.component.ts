@@ -13,7 +13,7 @@ import { ImageCropperComponent } from './image-cropper.component';
       </div>
 
       <div class="content">
-        <app-image-cropper></app-image-cropper>
+        <app-image-cropper />
       </div>
     </div>
   `,

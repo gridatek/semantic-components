@@ -71,11 +71,11 @@ import { BreadcrumbComponent } from '@semantic-components/breadcrumb';
           [enableNavigation]="true"
           homeLabel="Dashboard"
           homeUrl="/dashboard"
-        ></lib-breadcrumb>
+        />
       </header>
 
       <main class="app-main">
-        <router-outlet></router-outlet>
+        <router-outlet />
       </main>
     </div>
   `,

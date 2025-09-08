@@ -9,13 +9,13 @@ import { CmsNavigation } from '../components/navigation';
   imports: [RouterModule, CmsNavigation, CmsFooter],
   template: `
     <div class="min-h-screen flex flex-col">
-      <cms-navigation></cms-navigation>
+      <cms-navigation />
 
       <main class="flex-1">
-        <router-outlet></router-outlet>
+        <router-outlet />
       </main>
 
-      <cms-footer></cms-footer>
+      <cms-footer />
     </div>
   `,
   styles: ``,

@@ -25,7 +25,7 @@ import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
             (selectionChange)="onFruitChange($event)"
             label="Choose a fruit"
             placeholder="Type to search..."
-          ></sc-combobox>
+          />
           <p class="mt-4 text-sm text-gray-600">
             Selected value in parent:
             <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedFruit || 'None' }}</code>
@@ -42,7 +42,7 @@ import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
             (selectionChange)="onTechnologiesChange($event)"
             label="Select technologies"
             placeholder="Add technologies..."
-          ></sc-combobox>
+          />
           <p class="mt-4 text-sm text-gray-600">
             Selected values:
             <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedTechnologies | json }}</code>
@@ -59,7 +59,7 @@ import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
             (selectionChange)="onUserChange($event)"
             label="Search users"
             placeholder="Start typing to search..."
-          ></sc-combobox>
+          />
           <p class="mt-4 text-sm text-gray-600">
             Selected user:
             <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedUser || 'None' }}</code>
@@ -76,7 +76,7 @@ import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
             (selectionChange)="onCountryChange($event)"
             label="Select a country"
             placeholder="Search countries..."
-          ></sc-combobox>
+          />
           <p class="mt-4 text-sm text-gray-600">
             Selected country:
             <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedCountry || 'None' }}</code>
@@ -92,7 +92,7 @@ import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
               label="Select your favorite programming language"
               placeholder="Choose a language..."
               formControlName="language"
-            ></sc-combobox>
+            />
 
             <sc-combobox
               [items]="frameworks"
@@ -100,7 +100,7 @@ import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
               label="Select frameworks"
               placeholder="Choose frameworks..."
               formControlName="frameworks"
-            ></sc-combobox>
+            />
 
             <div class="mt-4 p-4 bg-gray-50 rounded">
               <h3 class="font-semibold text-gray-700 mb-2">Form Values:</h3>
@@ -120,7 +120,7 @@ import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
                 [showToggleButton]="false"
                 label="Without toggle button"
                 placeholder="Type to search..."
-              ></sc-combobox>
+              />
             </div>
             <div>
               <sc-combobox
@@ -129,7 +129,7 @@ import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
                 [showStatus]="false"
                 label="Without status display"
                 placeholder="Type to search..."
-              ></sc-combobox>
+              />
             </div>
           </div>
         </div>

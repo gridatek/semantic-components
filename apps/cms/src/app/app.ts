@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   selector: 'cms-root',
   template: `
-    <router-outlet></router-outlet>
+    <router-outlet />
   `,
   styles: ``,
 })

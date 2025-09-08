@@ -26,7 +26,7 @@ import { ScTabsService } from './tabs.service';
           tabindex="0"
           role="tabpanel"
         >
-          <ng-container [ngTemplateOutlet]="tabPanelContent.templateRef"></ng-container>
+          <ng-container [ngTemplateOutlet]="tabPanelContent.templateRef" />
         </div>
       }
     }

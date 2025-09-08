@@ -69,7 +69,7 @@ import { ScOptionComponent } from './option';
           role="listbox"
         >
           <div class="max-h-60 overflow-y-auto py-1">
-            <ng-content></ng-content>
+            <ng-content />
           </div>
         </div>
       }

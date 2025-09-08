@@ -88,7 +88,7 @@ import {
 
           <!-- User Actions -->
           <div class="hidden sm:flex sm:items-center space-x-4">
-            <sc-theme-toggler></sc-theme-toggler>
+            <sc-theme-toggler />
 
             <button
               class="p-1 rounded-full text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring"
@@ -234,7 +234,7 @@ import {
 
             <!-- Mobile theme toggler -->
             <div class="px-3 py-2 border-t border-border pt-4">
-              <sc-theme-toggler></sc-theme-toggler>
+              <sc-theme-toggler />
             </div>
           </div>
         </div>

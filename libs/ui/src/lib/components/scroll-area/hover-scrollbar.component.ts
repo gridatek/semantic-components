@@ -30,7 +30,7 @@ import {
         #contentContainer
         [ngClass]="{ 'hover-scrollbar': isScrollable }"
       >
-        <ng-content></ng-content>
+        <ng-content />
       </div>
     </div>
   `,

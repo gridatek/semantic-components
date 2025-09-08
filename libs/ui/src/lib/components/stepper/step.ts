@@ -14,7 +14,7 @@ import {
   template: `
     <ng-template>
       <div class="step-content">
-        <ng-content></ng-content>
+        <ng-content />
       </div>
     </ng-template>
   `,

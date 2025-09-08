@@ -18,7 +18,7 @@ import {
       [attr.aria-selected]="active"
       role="option"
     >
-      <ng-content></ng-content>
+      <ng-content />
     </div>
   `,
   styles: ``,

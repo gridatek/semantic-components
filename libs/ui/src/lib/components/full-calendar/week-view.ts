@@ -37,7 +37,7 @@ import { ScDayView } from './day-view';
     <div class="grid grid-cols-7 gap-4">
       @for (day of weekDays; track day) {
         <div>
-          <sc-day-view [date]="day"></sc-day-view>
+          <sc-day-view [date]="day" />
           <!-- Pass each day to Day Component -->
         </div>
       }

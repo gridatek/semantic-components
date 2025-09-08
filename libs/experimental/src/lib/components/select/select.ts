@@ -49,7 +49,7 @@ import { ScOption } from './option';
           class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto focus:outline-none"
           role="listbox"
         >
-          <ng-content></ng-content>
+          <ng-content />
         </div>
       }
     </div>
