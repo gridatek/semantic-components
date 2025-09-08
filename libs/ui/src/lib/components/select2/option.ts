@@ -1,62 +1,51 @@
 import { Highlightable } from '@angular/cdk/a11y';
-import {
-  AfterContentInit,
-  Component,
-  ElementRef,
-  Input,
-  computed,
-  input,
-  signal,
-} from '@angular/core';
-
-import { cn } from '@semantic-components/utils';
+import { Component, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Component({
-  selector: 'sc-option2',
+  selector: 'sc-option',
   template: `
     <ng-content></ng-content>
   `,
   standalone: true,
   host: {
-    '[class]': 'class()',
-    role: 'option',
-    tabindex: '0',
+    '[class]': '"px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors duration-150"',
+    '[attr.role]': '"option"',
+    '[attr.id]': 'id',
+    '(click)': 'select()',
   },
 })
-export class ScOptionComponent implements AfterContentInit, Highlightable {
+export class ScOptionComponent implements Highlightable {
   @Input() value: any;
-  content: string = '';
-  active = signal(false);
+  @Input() id: string = `option-${Math.random().toString(36).substr(2, 9)}`;
 
-  readonly classInput = input<string>('', {
-    alias: 'class',
-  });
+  @HostBinding('class.bg-blue-100')
+  @HostBinding('class.text-blue-900')
+  highlighted = false;
 
-  protected readonly class = computed(() =>
-    cn(
-      'block px-4 py-2 text-sm cursor-pointer transition-colors hover:bg-gray-100 focus:bg-blue-100 focus:text-blue-700 focus:outline-none',
-      this.active() && 'bg-blue-50 text-blue-600 font-medium',
-      this.classInput(),
-    ),
-  );
+  @HostBinding('class.pointer-events-none')
+  @HostBinding('class.opacity-50')
+  @Input()
+  disabled = false;
 
-  constructor(private elementRef: ElementRef) {}
+  selected = false;
 
-  ngAfterContentInit() {
-    // Extract text content after content projection
-    this.content = this.elementRef.nativeElement.textContent?.trim() || '';
-  }
+  constructor(private element: ElementRef) {}
 
-  // Highlightable interface implementation
   setActiveStyles(): void {
-    this.active.set(true);
+    this.highlighted = true;
   }
 
   setInactiveStyles(): void {
-    this.active.set(false);
+    this.highlighted = false;
+  }
+
+  select() {
+    if (!this.disabled) {
+      // Selection will be handled by parent component
+    }
   }
 
   getLabel(): string {
-    return this.content;
+    return this.element.nativeElement.textContent || '';
   }
 }
