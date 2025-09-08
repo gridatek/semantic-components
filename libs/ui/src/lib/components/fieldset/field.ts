@@ -63,10 +63,12 @@ export class ScField {
     ),
   );
 
+  private readonly _idGenerator = inject(_IdGenerator);
+
   readonly id = computed(() => {
     const control = this.formControl();
     const componentType = control?.nativeElement.tagName.toLowerCase() || 'field';
-    return inject(_IdGenerator).getId(`sc-${componentType}-`);
+    return this._idGenerator.getId(`sc-${componentType}-`);
   });
 
   readonly scLabel = contentChild(ScLabel);
