@@ -8,10 +8,13 @@
 - ✅ **Multi-Selection** - Select multiple items with chip display
 - ✅ **Async Loading** - Load items dynamically with loading indicator
 - ✅ **Grouped Items** - Organize items into groups
-- ✅ **Keyboard Navigation** - Full keyboard support (Arrow keys, Enter, Escape)
+- ✅ **CDK Integration** - Uses Angular CDK's ActiveDescendantKeyManager for proper keyboard navigation
+- ✅ **CDK Overlay** - Proper dropdown positioning with CDK Overlay
+- ✅ **Keyboard Navigation** - Full keyboard support with proper ARIA attributes
+- ✅ **Typeahead** - Type to quickly find items
 - ✅ **Search/Filter** - Type to filter items
 - ✅ **Form Integration** - Works with Template-driven and Reactive Forms
-- ✅ **Accessibility** - ARIA attributes and roles
+- ✅ **Accessibility** - Full ARIA support with CDK a11y features
 
 ### Input Properties
 
@@ -48,7 +51,7 @@ import { ComboboxComponent } from './combobox.component';
   standalone: true,
   imports: [ComboboxComponent, FormsModule],
   template: `
-    <sc-combobox [(ngModel)]="selectedItem" [items]="items" label="Select an item"></sc-combobox>
+    <app-combobox [(ngModel)]="selectedItem" [items]="items" label="Select an item"></app-combobox>
   `,
 })
 export class ExampleComponent {
@@ -70,21 +73,21 @@ items: ComboboxItem[] = [
 ### Multi-Select Mode
 
 ```typescript
-<sc-combobox
+<app-combobox
   [items]="technologies"
   [multiple]="true"
   [(ngModel)]="selectedTechs"
-></sc-combobox>
+></app-combobox>
 ```
 
 ### Async Search
 
 ```typescript
-<sc-combobox
+<app-combobox
   [async]="true"
   [asyncSearchFn]="searchFunction"
   [(ngModel)]="selectedValue"
-></sc-combobox>
+></app-combobox>
 
 // In component:
 searchFunction = async (query: string): Promise<ComboboxItem[]> => {
@@ -103,16 +106,16 @@ form = new FormGroup({
 
 // Template:
 <form [formGroup]="form">
-  <sc-combobox
+  <app-combobox
     [items]="countries"
     formControlName="country"
-  ></sc-combobox>
+  ></app-combobox>
 
-  <sc-combobox
+  <app-combobox
     [items]="skills"
     [multiple]="true"
     formControlName="skills"
-  ></sc-combobox>
+  ></app-combobox>
 </form>
 ```
 
