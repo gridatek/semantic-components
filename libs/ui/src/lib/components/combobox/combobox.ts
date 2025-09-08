@@ -70,7 +70,7 @@ export class ComboboxOptionDirective implements Highlightable {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ComboboxComponent),
+      useExisting: forwardRef(() => ScCombobox),
       multi: true,
     },
   ],
@@ -381,7 +381,7 @@ export class ComboboxOptionDirective implements Highlightable {
     `,
   ],
 })
-export class ComboboxComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input() label: string = '';
   @Input() placeholder: string = 'Type to search...';
   @Input() items: (string | ComboboxItem)[] = [];
