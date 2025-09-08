@@ -42,23 +42,23 @@ The `ScField` component is a generic wrapper that automatically handles label-to
 
 ### Floating Labels
 
-Enable floating labels by setting the `floating` input to `true`. The label will animate from inside the input to above it when the field gains focus or has a value.
+Enable floating labels by setting the `floatingLabel` input to `true`. The label will animate from inside the input to above it when the field gains focus or has a value. ScField automatically calls `placeholder.set(" ")` on components that expose a writable placeholder signal.
 
 ```html
 <!-- Basic floating label -->
-<sc-field [floating]="true">
+<sc-field [floatingLabel]="true">
   <label sc-label>Email Address</label>
   <input sc-input />
 </sc-field>
 
 <!-- Floating label with combobox -->
-<sc-field [floating]="true">
+<sc-field [floatingLabel]="true">
   <label sc-label>Choose Country</label>
   <sc-combobox [items]="countries" [(ngModel)]="selectedCountry" />
 </sc-field>
 
 <!-- Floating label with textarea -->
-<sc-field [floating]="true">
+<sc-field [floatingLabel]="true">
   <label sc-label>Your Message</label>
   <textarea sc-input rows="4"></textarea>
 </sc-field>
@@ -138,7 +138,7 @@ Description (only if directly after control)
 
 ### Floating Label Styles
 
-When `[floating]="true"`, different CSS classes are applied:
+When `[floatingLabel]="true"`, different CSS classes are applied:
 
 ```css
 // Container positioning
@@ -170,7 +170,7 @@ To make any component work with `ScField`:
 })
 ```
 
-### 2. Expose id signal
+### 2. Expose id signal and writable placeholder
 
 ```typescript
 export class MyFormComponent {
@@ -179,6 +179,12 @@ export class MyFormComponent {
   });
 
   readonly id = linkedSignal(() => this.idInput());
+
+  // For floating label support - expose writable placeholder signal
+  readonly placeholderInput = input<string>('Default placeholder', {
+    alias: 'placeholder',
+  });
+  readonly placeholder = linkedSignal(() => this.placeholderInput());
 }
 ```
 

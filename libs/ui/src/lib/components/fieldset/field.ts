@@ -35,22 +35,23 @@ export class ScField {
     alias: 'class',
   });
 
-  readonly floating = input<boolean>(false);
+  readonly floatingLabel = input<boolean>(false);
 
   protected readonly class = computed(() =>
     cn(
       // Regular field spacing
-      !this.floating() &&
+      !this.floatingLabel() &&
         '*:data-[slot=control]:mt-2 [&>[data-slot=control]+[data-slot=description]]:mt-2',
       // Floating label positioning
-      this.floating() && 'relative',
-      this.floating() &&
+      this.floatingLabel() && 'relative',
+      this.floatingLabel() &&
         '[&_label]:absolute [&_label]:left-3 [&_label]:transition-all [&_label]:duration-200 [&_label]:ease-in-out [&_label]:pointer-events-none',
-      this.floating() && '[&_label]:top-1/2 [&_label]:-translate-y-1/2 [&_label]:text-gray-500',
+      this.floatingLabel() &&
+        '[&_label]:top-1/2 [&_label]:-translate-y-1/2 [&_label]:text-gray-500',
       // Floating label states
-      this.floating() &&
+      this.floatingLabel() &&
         '[&:has([data-slot=control]:focus)_label]:top-0 [&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-blue-600 [&:has([data-slot=control]:focus)_label]:bg-white [&:has([data-slot=control]:focus)_label]:px-1',
-      this.floating() &&
+      this.floatingLabel() &&
         '[&:has([data-slot=control][data-has-value])_label]:top-0 [&:has([data-slot=control][data-has-value])_label]:text-xs [&:has([data-slot=control][data-has-value])_label]:text-gray-600 [&:has([data-slot=control][data-has-value])_label]:bg-white [&:has([data-slot=control][data-has-value])_label]:px-1',
       this.classInput(),
     ),
@@ -87,9 +88,10 @@ export class ScField {
           }
         }
 
-        // Add floating label value tracking
-        if (this.floating()) {
+        // Add floating label value tracking and set placeholder
+        if (this.floatingLabel()) {
           this.setupFloatingLabelTracking(controlRef.nativeElement);
+          this.setFloatingLabelPlaceholder(controlRef.nativeElement, component);
         }
       }
     });
@@ -130,5 +132,18 @@ export class ScField {
     }
 
     return false;
+  }
+
+  private setFloatingLabelPlaceholder(element: HTMLElement, component?: any) {
+    // For custom components, directly set placeholder signal
+    if (component && component.placeholder?.set) {
+      component.placeholder.set(' ');
+      return;
+    }
+
+    // Fallback for native inputs
+    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+      (element as HTMLInputElement).placeholder = ' ';
+    }
   }
 }

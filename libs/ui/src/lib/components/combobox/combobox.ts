@@ -190,7 +190,10 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
 
   readonly id = linkedSignal(() => this.idInput());
 
-  readonly placeholder = input<string>('Type to search...');
+  readonly placeholderInput = input<string>('Type to search...', {
+    alias: 'placeholder',
+  });
+  readonly placeholder = linkedSignal(() => this.placeholderInput());
   readonly items = input<(string | ScComboboxItem)[]>([]);
   readonly multiple = input<boolean>(false);
   readonly async = input<boolean>(false);
