@@ -2,7 +2,7 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 // Option component for ActiveDescendantKeyManager
 import { Highlightable } from '@angular/cdk/a11y';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import {
@@ -200,7 +200,7 @@ export class ComboboxOptionDirective implements Highlightable {
 
         <!-- Dropdown Panel using CDK Overlay -->
         <ng-template
-          [cdkConnectedOverlayOrigin]="trigger"
+          [cdkConnectedOverlayOrigin]="triggerElement"
           [cdkConnectedOverlayOpen]="isOpen"
           [cdkConnectedOverlayWidth]="triggerWidth"
           [cdkConnectedOverlayHasBackdrop]="false"
@@ -417,7 +417,7 @@ export class ComboboxComponent implements OnInit, OnDestroy, AfterViewInit, Cont
   private onTouched: any = () => {};
 
   // CDK Overlay positions
-  positions = [
+  positions: ConnectedPosition[] = [
     {
       originX: 'start',
       originY: 'bottom',
