@@ -49,12 +49,10 @@ export class ScOptionComponent implements AfterContentInit, Highlightable {
 
   // Highlightable interface implementation
   setActiveStyles(): void {
-    console.log('setActiveStyles called');
     this.active.set(true);
   }
 
   setInactiveStyles(): void {
-    console.log('setInactiveStyles called');
     this.active.set(false);
   }
 

@@ -63,11 +63,8 @@ import { ScOptionComponent } from './option';
           role="listbox"
         >
           <sc-option2
-            *ngFor="let option of options; trackBy: trackByValue; index as i"
+            *ngFor="let option of options; trackBy: trackByValue"
             [value]="option.value"
-            [class.bg-blue-50]="option.value === value || keyManager.activeItemIndex === i"
-            [class.text-blue-600]="option.value === value || keyManager.activeItemIndex === i"
-            [class.font-medium]="option.value === value || keyManager.activeItemIndex === i"
             [attr.aria-selected]="option.value === value"
             (click)="selectOption(option)"
           >
@@ -201,12 +198,9 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
 
     this.isOpen = true;
 
-    // Initialize key manager and focus first option after overlay is attached
+    // Initialize key manager after overlay is attached
     setTimeout(() => {
       this.keyManager.setFirstItemActive();
-      if (this.keyManager.activeItem) {
-        (this.keyManager.activeItem as any).elementRef.nativeElement.focus();
-      }
     }, 0);
   }
 
