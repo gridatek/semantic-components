@@ -2,7 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, ElementRef, ViewChild, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ComboboxItem } from './combobox-types';
+import { ScComboboxItem } from './combobox-types';
 
 @Component({
   selector: 'sc-combobox-multi-input',
@@ -56,13 +56,13 @@ import { ComboboxItem } from './combobox-types';
     </div>
   `,
 })
-export class ComboboxMultiInputComponent {
+export class ScComboboxMultiInput {
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
   @ViewChild('trigger', { read: ElementRef }) triggerElement!: ElementRef;
 
   readonly placeholder = input<string>('Type to search...');
   readonly selectedValues = input<Set<string>>(new Set());
-  readonly items = input<(string | ComboboxItem)[]>([]);
+  readonly items = input<(string | ScComboboxItem)[]>([]);
   readonly isOpen = input<boolean>(false);
   readonly listboxId = input<string>('');
   readonly activeItemId = input<string | null>(null);

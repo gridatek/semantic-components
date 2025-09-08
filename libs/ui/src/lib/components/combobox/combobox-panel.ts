@@ -1,12 +1,12 @@
 import { Component, QueryList, ViewChildren, input, output } from '@angular/core';
 
-import { ComboboxOptionDirective } from './combobox-option.directive';
-import { ComboboxItem } from './combobox-types';
+import { ScComboboxOption } from './combobox-option';
+import { ScComboboxItem } from './combobox-types';
 
 @Component({
   selector: 'sc-combobox-panel',
   standalone: true,
-  imports: [ComboboxOptionDirective],
+  imports: [ScComboboxOption],
   template: `
     <div
       class="combobox-panel bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto"
@@ -137,28 +137,28 @@ import { ComboboxItem } from './combobox-types';
     `,
   ],
 })
-export class ComboboxPanelComponent {
-  @ViewChildren(ComboboxOptionDirective) options!: QueryList<ComboboxOptionDirective>;
+export class ScComboboxPanel {
+  @ViewChildren(ScComboboxOption) options!: QueryList<ScComboboxOption>;
 
   readonly listboxId = input<string>('');
-  readonly filteredItems = input<(string | ComboboxItem)[]>([]);
+  readonly filteredItems = input<(string | ScComboboxItem)[]>([]);
   readonly multiple = input<boolean>(false);
   readonly grouped = input<boolean>(false);
   readonly selectedValue = input<any>(null);
   readonly selectedValues = input<Set<string>>(new Set());
 
-  readonly itemSelected = output<string | ComboboxItem>();
-  readonly itemActiveChange = output<string | ComboboxItem>();
+  readonly itemSelected = output<string | ScComboboxItem>();
+  readonly itemActiveChange = output<string | ScComboboxItem>();
 
-  selectItem(item: string | ComboboxItem) {
+  selectItem(item: string | ScComboboxItem) {
     this.itemSelected.emit(item);
   }
 
-  setActiveItem(item: string | ComboboxItem) {
+  setActiveItem(item: string | ScComboboxItem) {
     this.itemActiveChange.emit(item);
   }
 
-  isItemSelected(item: string | ComboboxItem): boolean {
+  isItemSelected(item: string | ScComboboxItem): boolean {
     const value = this.getItemValue(item);
     if (this.multiple()) {
       return this.selectedValues().has(value);
@@ -166,20 +166,20 @@ export class ComboboxPanelComponent {
     return this.selectedValue() === value;
   }
 
-  getItemLabel(item: string | ComboboxItem): string {
+  getItemLabel(item: string | ScComboboxItem): string {
     return typeof item === 'string' ? item : item.label;
   }
 
-  getItemValue(item: string | ComboboxItem): string {
+  getItemValue(item: string | ScComboboxItem): string {
     return typeof item === 'string' ? item : item.value;
   }
 
-  getItemSubtitle(item: string | ComboboxItem): string | undefined {
+  getItemSubtitle(item: string | ScComboboxItem): string | undefined {
     return typeof item === 'string' ? undefined : item.subtitle;
   }
 
-  getGroups(): { name: string; items: ComboboxItem[] }[] {
-    const groups: { [key: string]: ComboboxItem[] } = {};
+  getGroups(): { name: string; items: ScComboboxItem[] }[] {
+    const groups: { [key: string]: ScComboboxItem[] } = {};
 
     this.filteredItems().forEach((item) => {
       if (typeof item !== 'string') {

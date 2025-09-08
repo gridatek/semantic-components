@@ -52,7 +52,7 @@ import { FormsModule } from '@angular/forms';
     </div>
   `,
 })
-export class ComboboxInputComponent {
+export class ScComboboxInput {
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
   @ViewChild('trigger', { read: ElementRef }) triggerElement!: ElementRef;
 

@@ -16,23 +16,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
-import { ComboboxInputComponent } from './combobox-input.component';
-import { ComboboxMultiInputComponent } from './combobox-multi-input.component';
-import { ComboboxOptionDirective } from './combobox-option.directive';
-import { ComboboxPanelComponent } from './combobox-panel.component';
-import { ComboboxItem } from './combobox-types';
+import { ScComboboxInput } from './combobox-input';
+import { ScComboboxMultiInput } from './combobox-multi-input';
+import { ScComboboxOption } from './combobox-option';
+import { ScComboboxPanel } from './combobox-panel';
+import { ScComboboxItem } from './combobox-types';
 
-export { ComboboxItem } from './combobox-types';
+export { ScComboboxItem as ComboboxItem } from './combobox-types';
 
 @Component({
   selector: 'sc-combobox',
   standalone: true,
-  imports: [
-    OverlayModule,
-    ComboboxInputComponent,
-    ComboboxMultiInputComponent,
-    ComboboxPanelComponent,
-  ],
+  imports: [OverlayModule, ScComboboxInput, ScComboboxMultiInput, ScComboboxPanel],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -190,33 +185,33 @@ export { ComboboxItem } from './combobox-types';
 export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input() label: string = '';
   readonly placeholder = input<string>('Type to search...');
-  readonly items = input<(string | ComboboxItem)[]>([]);
+  readonly items = input<(string | ScComboboxItem)[]>([]);
   readonly multiple = input<boolean>(false);
   readonly async = input<boolean>(false);
   readonly grouped = input<boolean>(false);
   readonly showStatus = input<boolean>(true);
   readonly showToggleButton = input<boolean>(true);
-  readonly asyncSearchFn = input<(query: string) => Promise<ComboboxItem[]>>();
+  readonly asyncSearchFn = input<(query: string) => Promise<ScComboboxItem[]>>();
 
   readonly selectionChange = output<any>();
   readonly searchChange = output<string>();
 
-  @ViewChild('singleInput') singleInput?: ComboboxInputComponent;
-  @ViewChild('multiInput') multiInput?: ComboboxMultiInputComponent;
-  @ViewChild('panel') panel?: ComboboxPanelComponent;
+  @ViewChild('singleInput') singleInput?: ScComboboxInput;
+  @ViewChild('multiInput') multiInput?: ScComboboxMultiInput;
+  @ViewChild('panel') panel?: ScComboboxPanel;
   @ViewChild('container') containerElement!: ElementRef<HTMLDivElement>;
   @ViewChild('trigger', { read: ElementRef }) triggerElement!: ElementRef;
 
   selectedValue: any = null;
   selectedValues: Set<string> = new Set();
-  filteredItems: (string | ComboboxItem)[] = [];
+  filteredItems: (string | ScComboboxItem)[] = [];
   isOpen: boolean = false;
   isLoading: boolean = false;
   listboxId: string = `listbox-${Math.random().toString(36).substr(2, 9)}`;
   activeItemId: string | null = null;
   triggerWidth: number = 0;
 
-  keyManager!: ActiveDescendantKeyManager<ComboboxOptionDirective>;
+  keyManager!: ActiveDescendantKeyManager<ScComboboxOption>;
   private searchSubject = new BehaviorSubject<string>('');
   private destroy$ = new Subject<void>();
   private onChange: any = () => {};
@@ -420,7 +415,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     }, 200);
   }
 
-  setActiveItem(item: string | ComboboxItem) {
+  setActiveItem(item: string | ScComboboxItem) {
     if (this.keyManager && this.panel) {
       const index = this.panel.options.toArray().findIndex((option) => {
         const optionValue = this.getItemValue(option.item());
@@ -434,7 +429,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     }
   }
 
-  selectItem(item: string | ComboboxItem) {
+  selectItem(item: string | ScComboboxItem) {
     if (this.multiple()) {
       this.toggleMultiSelect(item);
     } else {
@@ -451,7 +446,7 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     }
   }
 
-  toggleMultiSelect(item: string | ComboboxItem) {
+  toggleMultiSelect(item: string | ScComboboxItem) {
     const value = this.getItemValue(item);
 
     if (this.selectedValues.has(value)) {
@@ -492,11 +487,11 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
     return typeof item === 'string' ? item : item.label;
   }
 
-  getItemValue(item: string | ComboboxItem): string {
+  getItemValue(item: string | ScComboboxItem): string {
     return typeof item === 'string' ? item : item.value;
   }
 
-  getItemSubtitle(item: string | ComboboxItem): string | undefined {
+  getItemSubtitle(item: string | ScComboboxItem): string | undefined {
     return typeof item === 'string' ? undefined : item.subtitle;
   }
 

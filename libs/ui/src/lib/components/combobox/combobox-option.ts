@@ -1,7 +1,7 @@
 import { Highlightable } from '@angular/cdk/a11y';
 import { Directive, ElementRef, inject, input } from '@angular/core';
 
-import { ComboboxItem } from './combobox-types';
+import { ScComboboxItem } from './combobox-types';
 
 @Directive({
   selector: '[appComboboxOption]',
@@ -12,10 +12,10 @@ import { ComboboxItem } from './combobox-types';
     role: 'option',
   },
 })
-export class ComboboxOptionDirective implements Highlightable {
+export class ScComboboxOption implements Highlightable {
   private element = inject(ElementRef);
 
-  readonly item = input.required<string | ComboboxItem>();
+  readonly item = input.required<string | ScComboboxItem>();
   readonly isSelected = input<boolean>(false);
   isActive: boolean = false;
   disabled?: boolean = false;
