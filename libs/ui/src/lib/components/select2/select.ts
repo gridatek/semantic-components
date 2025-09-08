@@ -13,6 +13,7 @@ import {
   QueryList,
   TemplateRef,
   ViewChild,
+  ViewContainerRef,
   forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -107,6 +108,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
   constructor(
     private overlay: Overlay,
     private elementRef: ElementRef,
+    private viewContainerRef: ViewContainerRef,
   ) {}
 
   ngAfterContentInit() {
@@ -175,7 +177,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
       backdropClass: 'cdk-overlay-transparent-backdrop',
     });
 
-    const portal = new TemplatePortal(this.dropdownTemplate, this.elementRef);
+    const portal = new TemplatePortal(this.dropdownTemplate, this.viewContainerRef);
     this.overlayRef.attach(portal);
 
     this.overlayRef.backdropClick().subscribe(() => {
