@@ -86,7 +86,7 @@ import { ScOptionComponent, ScSelectComponent } from '@semantic-components/ui';
     </div>
   `,
   host: {
-    class: 'block w-[180px]',
+    class: 'block',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

@@ -8,7 +8,7 @@ import { Component, ElementRef, HostBinding, Input } from '@angular/core';
   `,
   standalone: true,
   host: {
-    '[class]': '"px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors duration-150"',
+    '[class]': '"block px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors duration-150"',
     '[attr.role]': '"option"',
     '[attr.id]': 'id',
     '(click)': 'select()',
