@@ -2,9 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   TemplateRef,
-  ViewChild,
   ViewEncapsulation,
   inject,
+  viewChild,
 } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -166,7 +166,7 @@ import { SearchCommandTemplateComponent } from './search-command/search-command-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
-  @ViewChild('searchTemplate') searchTemplate!: TemplateRef<any>;
+  readonly searchTemplate = viewChild.required<TemplateRef<any>>('searchTemplate');
 
   private readonly appStateService = inject(AppStateService);
   private readonly router = inject(Router);

@@ -2,14 +2,13 @@ import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import {
   AfterContentInit,
   Component,
-  ContentChildren,
   ElementRef,
   HostListener,
   Input,
   OnDestroy,
-  QueryList,
-  ViewChild,
+  contentChildren,
   forwardRef,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -110,8 +109,8 @@ import { ScOptionComponent } from './option';
 })
 export class ScSelectComponent implements AfterContentInit, ControlValueAccessor, OnDestroy {
   @Input() placeholder = 'Select an option';
-  @ContentChildren(ScOptionComponent) options!: QueryList<ScOptionComponent>;
-  @ViewChild('trigger') trigger!: ElementRef;
+  readonly options = contentChildren(ScOptionComponent);
+  readonly trigger = viewChild.required<ElementRef>('trigger');
 
   isOpen = false;
   selectedOption: ScOptionComponent | null = null;
@@ -124,10 +123,10 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
   private onTouched: () => void = () => {};
 
   ngAfterContentInit() {
-    this.keyManager = new ActiveDescendantKeyManager(this.options).withWrap().withTypeAhead();
+    this.keyManager = new ActiveDescendantKeyManager(this.options()).withWrap().withTypeAhead();
 
     // Set up option click handlers
-    this.options.forEach((option) => {
+    this.options().forEach((option) => {
       option.element.nativeElement.addEventListener('click', () => {
         this.selectOption(option);
       });
@@ -190,7 +189,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
         case 'Escape':
           event.preventDefault();
           this.close();
-          this.trigger.nativeElement.focus();
+          this.trigger().nativeElement.focus();
           break;
         case 'ArrowUp':
         case 'ArrowDown':
@@ -208,7 +207,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    if (!this.trigger.nativeElement.contains(event.target) && this.isOpen) {
+    if (!this.trigger().nativeElement.contains(event.target) && this.isOpen) {
       this.close();
     }
   }
@@ -221,7 +220,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
     this.isOpen = true;
     // Set initial active item
     if (this.selectedOption) {
-      const index = this.options.toArray().indexOf(this.selectedOption);
+      const index = this.options().indexOf(this.selectedOption);
       if (index >= 0) {
         this.keyManager.setActiveItem(index);
         // Scroll to selected option after a tick to ensure DOM is updated
@@ -242,7 +241,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
     if (option.disabled) return;
 
     // Update selection state
-    this.options.forEach((opt) => opt.selected.set(false));
+    this.options().forEach((opt) => opt.selected.set(false));
     option.selected.set(true);
     this.selectedOption = option;
 
@@ -252,12 +251,12 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
 
     // Close dropdown
     this.close();
-    this.trigger.nativeElement.focus();
+    this.trigger().nativeElement.focus();
   }
 
   // ControlValueAccessor implementation
   writeValue(value: any): void {
-    const option = this.options?.find((opt) => opt.value === value);
+    const option = this.options()?.find((opt) => opt.value === value);
     if (option) {
       this.selectedOption = option;
       option.selected.set(true);

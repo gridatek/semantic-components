@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, TemplateRef, viewChild } from '@angular/core';
 
 import { CommandTriggerConfig, ScCommandTrigger } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
@@ -105,7 +105,7 @@ import { SearchCommandTemplateComponent } from '../../../components/search-comma
   `,
 })
 export class CommandAlgoliaSearchDemo {
-  @ViewChild('searchTemplate') searchTemplate!: TemplateRef<any>;
+  readonly searchTemplate = viewChild.required<TemplateRef<any>>('searchTemplate');
 
   lastEvent = '';
 

@@ -4,11 +4,11 @@ import {
   Component,
   OnInit,
   TemplateRef,
-  ViewChild,
   computed,
   effect,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -305,7 +305,7 @@ export class CommandInteractiveDemo implements OnInit {
   searchPlaceholder = signal('Search all commands...');
   showEmptyState = signal(false);
 
-  @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
+  readonly commandTemplate = viewChild.required<TemplateRef<any>>('commandTemplate');
 
   // HTTP Resource for dynamic command search
   commandResource = httpResource(
@@ -444,7 +444,7 @@ export class CommandInteractiveDemo implements OnInit {
   }
 
   private showDialog() {
-    const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate, {
+    const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate(), {
       title: 'Command Palette',
       description: 'Search and execute commands',
       width: '700px',

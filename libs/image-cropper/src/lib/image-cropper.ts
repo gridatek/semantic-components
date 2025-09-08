@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface CropSettings {
@@ -373,10 +373,10 @@ interface CropBox {
   ],
 })
 export class ScImageCropper implements OnInit {
-  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('imageElement') imageElement!: ElementRef<HTMLImageElement>;
-  @ViewChild('cropContainer') cropContainer!: ElementRef<HTMLDivElement>;
-  @ViewChild('previewCanvas') previewCanvas!: ElementRef<HTMLCanvasElement>;
+  readonly fileInput = viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
+  readonly imageElement = viewChild.required<ElementRef<HTMLImageElement>>('imageElement');
+  readonly cropContainer = viewChild.required<ElementRef<HTMLDivElement>>('cropContainer');
+  readonly previewCanvas = viewChild.required<ElementRef<HTMLCanvasElement>>('previewCanvas');
 
   imageLoaded = false;
   imageSrc = '';
@@ -440,15 +440,16 @@ export class ScImageCropper implements OnInit {
 
   onImageLoad() {
     this.imageLoaded = true;
-    this.originalImage = this.imageElement.nativeElement;
+    this.originalImage = this.imageElement().nativeElement;
     this.resetCrop();
     this.updatePreview();
   }
 
   resetCrop() {
-    if (!this.cropContainer) return;
+    const cropContainer = this.cropContainer();
+    if (!cropContainer) return;
 
-    const containerRect = this.cropContainer.nativeElement.getBoundingClientRect();
+    const containerRect = cropContainer.nativeElement.getBoundingClientRect();
     this.cropBox = {
       x: containerRect.width * 0.25,
       y: containerRect.height * 0.25,
@@ -576,9 +577,10 @@ export class ScImageCropper implements OnInit {
   }
 
   private constrainCropBox() {
-    if (!this.cropContainer) return;
+    const cropContainer = this.cropContainer();
+    if (!cropContainer) return;
 
-    const containerRect = this.cropContainer.nativeElement.getBoundingClientRect();
+    const containerRect = cropContainer.nativeElement.getBoundingClientRect();
 
     // Constrain position
     this.cropBox.x = Math.max(
@@ -596,9 +598,10 @@ export class ScImageCropper implements OnInit {
   }
 
   private updatePreview() {
-    if (!this.originalImage || !this.previewCanvas) return;
+    const previewCanvas = this.previewCanvas();
+    if (!this.originalImage || !previewCanvas) return;
 
-    const canvas = this.previewCanvas.nativeElement;
+    const canvas = previewCanvas.nativeElement;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -606,7 +609,7 @@ export class ScImageCropper implements OnInit {
     canvas.height = this.cropSettings.height;
 
     // Calculate the actual image dimensions and crop area
-    const containerRect = this.cropContainer.nativeElement.getBoundingClientRect();
+    const containerRect = this.cropContainer().nativeElement.getBoundingClientRect();
     const scaleX = this.originalImage.naturalWidth / containerRect.width;
     const scaleY = this.originalImage.naturalHeight / containerRect.height;
 
@@ -629,9 +632,10 @@ export class ScImageCropper implements OnInit {
   }
 
   cropAndDownload() {
-    if (!this.originalImage || !this.previewCanvas) return;
+    const previewCanvas = this.previewCanvas();
+    if (!this.originalImage || !previewCanvas) return;
 
-    const canvas = this.previewCanvas.nativeElement;
+    const canvas = previewCanvas.nativeElement;
     const mimeType = `image/${this.cropSettings.format}`;
     const quality = this.cropSettings.quality / 100;
 

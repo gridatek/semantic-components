@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild, inject } from '@angular/core';
+import { Component, TemplateRef, inject, viewChild } from '@angular/core';
 
 import {
   CommandDialog,
@@ -159,10 +159,10 @@ import {
 export class CommandDialogDemo {
   commandDialogService = inject(CommandDialog);
 
-  @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
+  readonly commandTemplate = viewChild.required<TemplateRef<any>>('commandTemplate');
 
   openDialog() {
-    const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate, {
+    const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate(), {
       title: 'Search Commands',
       description: 'Type a command or search...',
       width: '600px',

@@ -3,11 +3,11 @@ import {
   Component,
   ElementRef,
   TemplateRef,
-  ViewChild,
   computed,
   effect,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -250,7 +250,7 @@ export interface CommandItem {
   styles: [``],
 })
 export class CommandHttpResourceDemo {
-  @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
+  readonly commandTemplate = viewChild.required<TemplateRef<any>>('commandTemplate');
 
   private http = inject(HttpClient);
   private platformService = inject(ScPlatformService);
@@ -363,7 +363,7 @@ export class CommandHttpResourceDemo {
   openDialog() {
     this.searchQuery.set('');
 
-    const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate, {
+    const dialogRef = this.commandDialogService.openTemplate(this.commandTemplate(), {
       title: 'HttpResource Command Palette',
       description: 'Search commands with real-time API integration',
       width: '700px',

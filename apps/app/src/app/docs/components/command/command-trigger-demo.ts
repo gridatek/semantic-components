@@ -1,5 +1,5 @@
 import { HttpClient, httpResource } from '@angular/common/http';
-import { Component, TemplateRef, ViewChild, computed, inject, signal } from '@angular/core';
+import { Component, TemplateRef, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
@@ -447,10 +447,10 @@ export interface CommandItemModel {
   `,
 })
 export class CommandTriggerDemo {
-  @ViewChild('basicTemplate') basicTemplate!: TemplateRef<any>;
-  @ViewChild('apiTemplate') apiTemplate!: TemplateRef<any>;
-  @ViewChild('customTemplate') customTemplate!: TemplateRef<any>;
-  @ViewChild('eventTemplate') eventTemplate!: TemplateRef<any>;
+  readonly basicTemplate = viewChild.required<TemplateRef<any>>('basicTemplate');
+  readonly apiTemplate = viewChild.required<TemplateRef<any>>('apiTemplate');
+  readonly customTemplate = viewChild.required<TemplateRef<any>>('customTemplate');
+  readonly eventTemplate = viewChild.required<TemplateRef<any>>('eventTemplate');
 
   private http = inject(HttpClient);
 
