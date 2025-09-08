@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ComboboxItem, ScCombobox } from '@semantic-components/ui';
+import { ComboboxItem, ScCombobox, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-grouped-combobox-demo',
-  imports: [FormsModule, ScCombobox],
+  imports: [FormsModule, ScCombobox, ScLabel],
   template: `
+    <label class="mb-2" sc-label for="country-combobox">Select a country</label>
     <sc-combobox
       [(ngModel)]="selectedCountry"
       [items]="countries"
       [grouped]="true"
+      [inputId]="'country-combobox'"
       (selectionChange)="onCountryChange($event)"
-      label="Select a country"
       placeholder="Search countries..."
     />
     <p class="mt-4 text-sm text-gray-600">

@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
         #inputElement
         #trigger="cdkOverlayOrigin"
         [(ngModel)]="searchQuery"
+        [id]="inputId()"
         [placeholder]="placeholder()"
         [attr.aria-expanded]="isOpen()"
         [attr.aria-controls]="listboxId()"
@@ -56,6 +57,7 @@ export class ScComboboxInput {
   readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
   readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
+  readonly inputId = input<string>('');
   readonly placeholder = input<string>('Type to search...');
   readonly showToggleButton = input<boolean>(true);
   readonly isOpen = input<boolean>(false);

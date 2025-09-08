@@ -37,17 +37,13 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
   ],
   template: `
     <div class="combobox-container" #container>
-      @if (label) {
-        <label class="block text-sm font-medium text-gray-700 mb-2">
-          {{ label }}
-        </label>
-      }
       <div class="relative">
         <!-- Single Select Input -->
         @if (!multiple()) {
           <sc-combobox-input
             #singleInput
             #trigger="cdkOverlayOrigin"
+            [inputId]="inputId()"
             [placeholder]="placeholder()"
             [showToggleButton]="showToggleButton()"
             [isOpen]="isOpen"
@@ -67,6 +63,7 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
           <sc-combobox-multi-input
             #multiInput
             #trigger="cdkOverlayOrigin"
+            [inputId]="inputId()"
             [placeholder]="placeholder()"
             [selectedValues]="selectedValues"
             [items]="items()"
@@ -183,7 +180,7 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
   ],
 })
 export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
-  @Input() label: string = '';
+  readonly inputId = input<string>('');
   readonly placeholder = input<string>('Type to search...');
   readonly items = input<(string | ScComboboxItem)[]>([]);
   readonly multiple = input<boolean>(false);

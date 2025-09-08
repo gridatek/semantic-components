@@ -19,11 +19,12 @@ export class BasicComboboxDemoSection {
   readonly title = input<string>('Basic Combobox');
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = `<sc-combobox
+  protected readonly code = `<label sc-label for="fruit-combobox" class="mb-2">Choose a fruit</label>
+<sc-combobox
   [(ngModel)]="selectedFruit"
   [items]="fruits"
+  [inputId]="'fruit-combobox'"
   (selectionChange)="onFruitChange($event)"
-  label="Choose a fruit"
   placeholder="Type to search..."
 />`;
 }

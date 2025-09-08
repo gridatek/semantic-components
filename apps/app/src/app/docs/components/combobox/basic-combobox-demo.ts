@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ScCombobox } from '@semantic-components/ui';
+import { ScCombobox, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-combobox-demo',
-  imports: [FormsModule, ScCombobox],
+  imports: [FormsModule, ScCombobox, ScLabel],
   template: `
+    <label class="mb-2" sc-label for="fruit-combobox">Choose a fruit</label>
     <sc-combobox
       [(ngModel)]="selectedFruit"
       [items]="fruits"
+      [inputId]="'fruit-combobox'"
       (selectionChange)="onFruitChange($event)"
-      label="Choose a fruit"
       placeholder="Type to search..."
     />
     <p class="mt-4 text-sm text-gray-600">

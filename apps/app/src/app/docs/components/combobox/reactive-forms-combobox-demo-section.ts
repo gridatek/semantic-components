@@ -19,20 +19,31 @@ export class ReactiveFormsComboboxDemoSection {
   readonly title = input<string>('Reactive Forms Integration');
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = `<form [formGroup]="demoForm">
-  <sc-combobox
-    [items]="programmingLanguages"
-    label="Select your favorite programming language"
-    placeholder="Choose a language..."
-    formControlName="language"
-  />
+  protected readonly code = `<form class="space-y-4" [formGroup]="demoForm">
+  <div>
+    <label sc-label for="language-combobox" class="mb-2">Select your favorite programming language</label>
+    <sc-combobox
+      [items]="programmingLanguages"
+      [inputId]="'language-combobox'"
+      placeholder="Choose a language..."
+      formControlName="language"
+    />
+  </div>
 
-  <sc-combobox
-    [items]="frameworks"
-    [multiple]="true"
-    label="Select frameworks"
-    placeholder="Choose frameworks..."
-    formControlName="frameworks"
-  />
+  <div>
+    <label sc-label for="frameworks-combobox" class="mb-2">Select frameworks</label>
+    <sc-combobox
+      [items]="frameworks"
+      [multiple]="true"
+      [inputId]="'frameworks-combobox'"
+      placeholder="Choose frameworks..."
+      formControlName="frameworks"
+    />
+  </div>
+
+  <div class="mt-4 p-4 bg-gray-50 rounded">
+    <h3 class="font-semibold text-gray-700 mb-2">Form Values:</h3>
+    <pre class="text-sm">{{ demoForm.value | json }}</pre>
+  </div>
 </form>`;
 }

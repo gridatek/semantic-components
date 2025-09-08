@@ -19,19 +19,26 @@ export class CustomConfigComboboxDemoSection {
   readonly title = input<string>('Custom Configuration');
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = `<sc-combobox
-  [(ngModel)]="customConfig1"
-  [items]="fruits"
-  [showToggleButton]="false"
-  label="Without toggle button"
-  placeholder="Type to search..."
-/>
-
-<sc-combobox
-  [(ngModel)]="customConfig2"
-  [items]="fruits"
-  [showStatus]="false"
-  label="Without status display"
-  placeholder="Type to search..."
-/>`;
+  protected readonly code = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div>
+    <label sc-label for="no-toggle-combobox" class="mb-2">Without toggle button</label>
+    <sc-combobox
+      [(ngModel)]="customConfig1"
+      [items]="fruits"
+      [showToggleButton]="false"
+      [inputId]="'no-toggle-combobox'"
+      placeholder="Type to search..."
+    />
+  </div>
+  <div>
+    <label sc-label for="no-status-combobox" class="mb-2">Without status display</label>
+    <sc-combobox
+      [(ngModel)]="customConfig2"
+      [items]="fruits"
+      [showStatus]="false"
+      [inputId]="'no-status-combobox'"
+      placeholder="Type to search..."
+    />
+  </div>
+</div>`;
 }

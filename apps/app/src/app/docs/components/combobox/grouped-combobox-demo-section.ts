@@ -19,12 +19,13 @@ export class GroupedComboboxDemoSection {
   readonly title = input<string>('Grouped Combobox');
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = `<sc-combobox
+  protected readonly code = `<label sc-label for="country-combobox" class="mb-2">Select a country</label>
+<sc-combobox
   [(ngModel)]="selectedCountry"
   [items]="countries"
   [grouped]="true"
+  [inputId]="'country-combobox'"
   (selectionChange)="onCountryChange($event)"
-  label="Select a country"
   placeholder="Search countries..."
 />`;
 }

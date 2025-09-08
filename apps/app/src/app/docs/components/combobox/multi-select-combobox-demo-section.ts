@@ -19,12 +19,13 @@ export class MultiSelectComboboxDemoSection {
   readonly title = input<string>('Multi-select Combobox');
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = `<sc-combobox
+  protected readonly code = `<label sc-label for="technologies-combobox" class="mb-2">Select technologies</label>
+<sc-combobox
   [(ngModel)]="selectedTechnologies"
   [items]="technologies"
   [multiple]="true"
+  [inputId]="'technologies-combobox'"
   (selectionChange)="onTechnologiesChange($event)"
-  label="Select technologies"
   placeholder="Add technologies..."
 />`;
 }

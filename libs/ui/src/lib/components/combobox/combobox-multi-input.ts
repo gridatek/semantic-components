@@ -41,6 +41,7 @@ import { ScComboboxItem } from './combobox-types';
         class="flex-1 min-w-[150px] outline-none py-1"
         #inputElement
         [(ngModel)]="searchQuery"
+        [id]="inputId()"
         [placeholder]="placeholder()"
         [attr.aria-expanded]="isOpen()"
         [attr.aria-controls]="listboxId()"
@@ -60,6 +61,7 @@ export class ScComboboxMultiInput {
   readonly inputElement = viewChild.required<ElementRef<HTMLInputElement>>('inputElement');
   readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
+  readonly inputId = input<string>('');
   readonly placeholder = input<string>('Type to search...');
   readonly selectedValues = input<Set<string>>(new Set());
   readonly items = input<(string | ScComboboxItem)[]>([]);
