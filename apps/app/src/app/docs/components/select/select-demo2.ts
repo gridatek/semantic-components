@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -5,7 +6,7 @@ import { ScOptionComponent, ScSelectComponent } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-demo2',
-  imports: [ScSelectComponent, ScOptionComponent, FormsModule],
+  imports: [ScSelectComponent, ScOptionComponent, FormsModule, CommonModule],
   template: `
     <div class="min-h-screen bg-gray-50 p-8">
       <div class="max-w-md mx-auto space-y-8">

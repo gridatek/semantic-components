@@ -29,7 +29,7 @@ export class ScOptionComponent implements Highlightable {
 
   selected = false;
 
-  constructor(private element: ElementRef) {}
+  constructor(public element: ElementRef) {}
 
   setActiveStyles(): void {
     this.highlighted = true;
