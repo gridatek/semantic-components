@@ -1,3 +1,4 @@
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { ConnectedPosition, Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
@@ -59,27 +60,25 @@ import { ScOptionComponent } from './option';
         <div
           class="py-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-auto z-50"
           style="min-width: 100%"
+          role="listbox"
         >
-          <div
-            class="px-4 py-2 text-sm cursor-pointer transition-colors hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-            *ngFor="let option of options; trackBy: trackByValue"
-            [class.bg-blue-50]="option.value === value"
-            [class.text-blue-600]="option.value === value"
-            [class.font-medium]="option.value === value"
+          <sc-option2
+            *ngFor="let option of options; trackBy: trackByValue; index as i"
+            [value]="option.value"
+            [class.bg-blue-50]="option.value === value || keyManager.activeItemIndex === i"
+            [class.text-blue-600]="option.value === value || keyManager.activeItemIndex === i"
+            [class.font-medium]="option.value === value || keyManager.activeItemIndex === i"
             [attr.aria-selected]="option.value === value"
             (click)="selectOption(option)"
-            (keydown)="onOptionKeydown($event, option)"
-            tabindex="0"
-            role="option"
           >
             {{ option.content }}
-          </div>
+          </sc-option2>
         </div>
       </ng-template>
     </div>
   `,
   standalone: true,
-  imports: [CommonModule, OverlayModule],
+  imports: [CommonModule, OverlayModule, ScOptionComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -104,6 +103,7 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
   private overlayRef: OverlayRef | null = null;
   private onChange = (value: any) => {};
   private onTouched = () => {};
+  private keyManager!: ActiveDescendantKeyManager<ScOptionComponent>;
 
   constructor(
     private overlay: Overlay,
@@ -113,8 +113,23 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
 
   ngAfterContentInit() {
     this.options = this.optionComponents.toArray();
+    this.keyManager = new ActiveDescendantKeyManager(this.optionComponents)
+      .withWrap()
+      .withTypeAhead();
+
+    // Subscribe to key manager changes to update active styles
+    this.keyManager.change.subscribe(() => {
+      // Clear all active states first
+      this.options.forEach((option) => option.setInactiveStyles());
+      // Set active state for current item
+      if (this.keyManager.activeItem) {
+        this.keyManager.activeItem.setActiveStyles();
+      }
+    });
+
     this.optionComponents.changes.subscribe(() => {
       this.options = this.optionComponents.toArray();
+      this.keyManager.updateActiveItem(0);
     });
   }
 
@@ -185,6 +200,14 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
     });
 
     this.isOpen = true;
+
+    // Initialize key manager and focus first option after overlay is attached
+    setTimeout(() => {
+      this.keyManager.setFirstItemActive();
+      if (this.keyManager.activeItem) {
+        (this.keyManager.activeItem as any).elementRef.nativeElement.focus();
+      }
+    }, 0);
   }
 
   closeDropdown() {
@@ -205,61 +228,32 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
   }
 
   onTriggerKeydown(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'Enter':
-      case ' ':
-      case 'ArrowDown':
+    if (this.isOpen) {
+      // Handle keyboard navigation when dropdown is open
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        const activeItem = this.keyManager.activeItem;
+        if (activeItem) {
+          this.selectOption(activeItem);
+        }
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        this.closeDropdown();
+      } else {
+        this.keyManager.onKeydown(event);
+      }
+    } else {
+      // Open dropdown on Enter, Space, or Arrow keys
+      if (
+        event.key === 'Enter' ||
+        event.key === ' ' ||
+        event.key === 'ArrowDown' ||
+        event.key === 'ArrowUp'
+      ) {
         event.preventDefault();
         this.openDropdown();
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        this.openDropdown();
-        break;
-      case 'Escape':
-        this.closeDropdown();
-        break;
+      }
     }
-  }
-
-  onOptionKeydown(event: KeyboardEvent, option: ScOptionComponent) {
-    switch (event.key) {
-      case 'Enter':
-      case ' ':
-        event.preventDefault();
-        this.selectOption(option);
-        break;
-      case 'Escape':
-        this.closeDropdown();
-        this.triggerElement.nativeElement.focus();
-        break;
-      case 'ArrowDown':
-        event.preventDefault();
-        this.focusNextOption(option);
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        this.focusPreviousOption(option);
-        break;
-    }
-  }
-
-  private focusNextOption(currentOption: ScOptionComponent) {
-    const currentIndex = this.options.indexOf(currentOption);
-    const nextIndex = (currentIndex + 1) % this.options.length;
-    const nextElement = this.overlayRef?.overlayElement.querySelectorAll('[role="option"]')[
-      nextIndex
-    ] as HTMLElement;
-    nextElement?.focus();
-  }
-
-  private focusPreviousOption(currentOption: ScOptionComponent) {
-    const currentIndex = this.options.indexOf(currentOption);
-    const prevIndex = currentIndex === 0 ? this.options.length - 1 : currentIndex - 1;
-    const prevElement = this.overlayRef?.overlayElement.querySelectorAll('[role="option"]')[
-      prevIndex
-    ] as HTMLElement;
-    prevElement?.focus();
   }
 
   trackByValue(index: number, option: ScOptionComponent): any {
