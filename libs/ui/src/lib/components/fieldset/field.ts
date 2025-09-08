@@ -41,7 +41,11 @@ export class ScField {
     ),
   );
 
-  readonly id = signal<string>(inject(_IdGenerator).getId('sc-field-'));
+  readonly id = computed(() => {
+    const control = this.formControl();
+    const componentType = control?.nativeElement.tagName.toLowerCase() || 'field';
+    return inject(_IdGenerator).getId(`sc-${componentType}-`);
+  });
 
   readonly scLabel = contentChild(ScLabel);
   readonly formControl = contentChild('[data-slot="control"]', {
