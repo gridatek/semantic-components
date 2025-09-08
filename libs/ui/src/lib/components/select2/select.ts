@@ -21,7 +21,7 @@ import { ScOptionComponent } from './option';
 @Component({
   selector: 'sc-select',
   standalone: true,
-  imports: [CommonModule, ScOptionComponent],
+  imports: [CommonModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -145,6 +145,26 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
     this.destroy$.complete();
   }
 
+  private scrollToOption(option: ScOptionComponent) {
+    const optionEl = option.element.nativeElement;
+    const panel = optionEl.parentElement;
+
+    if (!panel) return;
+
+    const panelTop = panel.scrollTop;
+    const panelBottom = panelTop + panel.clientHeight;
+    const optionTop = optionEl.offsetTop;
+    const optionBottom = optionTop + optionEl.clientHeight;
+
+    if (optionTop < panelTop) {
+      // Option is above visible area
+      panel.scrollTop = optionTop;
+    } else if (optionBottom > panelBottom) {
+      // Option is below visible area
+      panel.scrollTop = optionBottom - panel.clientHeight;
+    }
+  }
+
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
     if (!this.isOpen && (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown')) {
@@ -199,6 +219,8 @@ export class ScSelectComponent implements AfterContentInit, ControlValueAccessor
       const index = this.options.toArray().indexOf(this.selectedOption);
       if (index >= 0) {
         this.keyManager.setActiveItem(index);
+        // Scroll to selected option after a tick to ensure DOM is updated
+        setTimeout(() => this.scrollToOption(this.selectedOption!), 0);
       }
     } else {
       this.keyManager.setFirstItemActive();
