@@ -40,6 +40,37 @@ The `ScField` component is a generic wrapper that automatically handles label-to
 </sc-field>
 ```
 
+### Floating Labels
+
+Enable floating labels by setting the `floating` input to `true`. The label will animate from inside the input to above it when the field gains focus or has a value.
+
+```html
+<!-- Basic floating label -->
+<sc-field [floating]="true">
+  <label sc-label>Email Address</label>
+  <input sc-input />
+</sc-field>
+
+<!-- Floating label with combobox -->
+<sc-field [floating]="true">
+  <label sc-label>Choose Country</label>
+  <sc-combobox [items]="countries" [(ngModel)]="selectedCountry" />
+</sc-field>
+
+<!-- Floating label with textarea -->
+<sc-field [floating]="true">
+  <label sc-label>Your Message</label>
+  <textarea sc-input rows="4"></textarea>
+</sc-field>
+```
+
+#### Floating Label Behavior
+
+- **Default state**: Label positioned inside the input field
+- **Focus state**: Label floats up, scales down, and changes color to primary
+- **Has value state**: Label remains floated even when not focused
+- **Smooth animations**: CSS transitions for all state changes
+
 ## Architecture
 
 ### Content Projection
@@ -81,18 +112,20 @@ afterNextRender(() => {
 
 ## CSS Spacing
 
+### Regular Fields
+
 Uses Tailwind's advanced selectors for consistent spacing:
 
 ```css
 '*:data-[slot=control]:mt-2 [&>[data-slot=control]+[data-slot=description]]:mt-2'
 ```
 
-### Breakdown:
+**Breakdown:**
 
 - `*:data-[slot=control]:mt-2` - Any element with `data-slot="control"` gets `margin-top: 0.5rem`
 - `[&>[data-slot=control]+[data-slot=description]]:mt-2` - Description gets top margin only when immediately following a control
 
-### Visual Result:
+**Visual Result:**
 
 ```
 Label
@@ -101,6 +134,25 @@ Control
   ↓ (mt-2 = 8px)
 Description (only if directly after control)
   ↓ (mt-2 = 8px)
+```
+
+### Floating Label Styles
+
+When `[floating]="true"`, different CSS classes are applied:
+
+```css
+// Container positioning
+'relative'
+
+// Label positioning and animations
+'[&_label]:absolute [&_label]:left-3 [&_label]:transition-all [&_label]:duration-200 [&_label]:ease-in-out [&_label]:pointer-events-none'
+'[&_label]:top-1/2 [&_label]:-translate-y-1/2 [&_label]:text-gray-500'
+
+// Focus state
+'[&:has([data-slot=control]:focus)_label]:top-0 [&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-blue-600 [&:has([data-slot=control]:focus)_label]:bg-white [&:has([data-slot=control]:focus)_label]:px-1'
+
+// Has value state
+'[&:has([data-slot=control][data-has-value])_label]:top-0 [&:has([data-slot=control][data-has-value])_label]:text-xs [&:has([data-slot=control][data-has-value])_label]:text-gray-600 [&:has([data-slot=control][data-has-value])_label]:bg-white [&:has([data-slot=control][data-has-value])_label]:px-1'
 ```
 
 ## Making Components Compatible
