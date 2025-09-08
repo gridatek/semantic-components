@@ -27,7 +27,7 @@ import { ScLabel } from '../label';
     '[class]': 'class()',
   },
   styles: `
-    :host {
+    .sc-field {
       --floating-label-top-offset: -0.25rem; /* -top-1 equivalent */
     }
   `,
@@ -43,6 +43,8 @@ export class ScField {
 
   protected readonly class = computed(() =>
     cn(
+      // Base class for CSS variables
+      'sc-field',
       // Regular field spacing
       !this.floatingLabel() &&
         '*:data-[slot=control]:mt-2 [&>[data-slot=control]+[data-slot=description]]:mt-2',
