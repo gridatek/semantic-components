@@ -1,18 +1,29 @@
+// combobox.component.ts
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+// Option component for ActiveDescendantKeyManager
+import { Highlightable } from '@angular/cdk/a11y';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   Output,
+  QueryList,
   ViewChild,
+  ViewChildren,
   forwardRef,
 } from '@angular/core';
+import { Directive } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { BehaviorSubject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 export interface ComboboxItem {
   label: string;
@@ -21,14 +32,45 @@ export interface ComboboxItem {
   group?: string;
 }
 
+@Directive({
+  selector: '[appComboboxOption]',
+  standalone: true,
+  host: {
+    '[class.bg-blue-50]': 'isActive',
+    '[attr.aria-selected]': 'isSelected',
+    role: 'option',
+  },
+})
+export class ComboboxOptionDirective implements Highlightable {
+  @Input() item!: string | ComboboxItem;
+  @Input() isSelected: boolean = false;
+  isActive: boolean = false;
+  disabled?: boolean = false;
+
+  constructor(private element: ElementRef) {}
+
+  setActiveStyles(): void {
+    this.isActive = true;
+    this.element.nativeElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  setInactiveStyles(): void {
+    this.isActive = false;
+  }
+
+  getLabel?(): string {
+    return typeof this.item === 'string' ? this.item : this.item.label;
+  }
+}
+
 @Component({
   selector: 'sc-combobox',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, OverlayModule, ComboboxOptionDirective],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScCombobox),
+      useExisting: forwardRef(() => ComboboxComponent),
       multi: true,
     },
   ],
@@ -43,14 +85,17 @@ export interface ComboboxItem {
           <input
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
             #inputElement
+            #trigger="cdkOverlayOrigin"
             [(ngModel)]="searchQuery"
             [placeholder]="placeholder"
             [attr.aria-expanded]="isOpen"
             [attr.aria-controls]="listboxId"
+            [attr.aria-activedescendant]="activeItemId"
             (input)="handleInput($event)"
             (focus)="open()"
             (blur)="handleBlur()"
             (keydown)="handleKeydown($event)"
+            cdkOverlayOrigin
             type="text"
             role="combobox"
             aria-autocomplete="list"
@@ -60,6 +105,7 @@ export interface ComboboxItem {
             *ngIf="showToggleButton"
             (click)="toggle()"
             type="button"
+            tabindex="-1"
           >
             <svg
               class="w-5 h-5 transition-transform duration-200"
@@ -81,7 +127,9 @@ export interface ComboboxItem {
         <!-- Multi Select Input with Chips -->
         <div
           class="min-h-[42px] w-full px-3 py-1 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent transition duration-200 flex flex-wrap gap-2 items-center"
+          #trigger="cdkOverlayOrigin"
           *ngIf="multiple"
+          cdkOverlayOrigin
         >
           <div class="selected-chips flex flex-wrap gap-2">
             <div
@@ -89,7 +137,12 @@ export interface ComboboxItem {
               *ngFor="let value of selectedValues"
             >
               {{ getItemLabel(value) }}
-              <button class="hover:text-blue-900" (click)="removeChip(value, $event)" type="button">
+              <button
+                class="hover:text-blue-900"
+                (click)="removeChip(value, $event)"
+                type="button"
+                tabindex="-1"
+              >
                 <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fill-rule="evenodd"
@@ -107,6 +160,7 @@ export interface ComboboxItem {
             [placeholder]="placeholder"
             [attr.aria-expanded]="isOpen"
             [attr.aria-controls]="listboxId"
+            [attr.aria-activedescendant]="activeItemId"
             (input)="handleInput($event)"
             (focus)="open()"
             (blur)="handleBlur()"
@@ -144,40 +198,84 @@ export interface ComboboxItem {
           </svg>
         </div>
 
-        <!-- Dropdown Panel -->
-        <div
-          class="combobox-panel absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto"
-          [id]="listboxId"
-          [class.hidden]="!isOpen"
-          [attr.aria-multiselectable]="multiple"
-          role="listbox"
+        <!-- Dropdown Panel using CDK Overlay -->
+        <ng-template
+          [cdkConnectedOverlayOrigin]="trigger"
+          [cdkConnectedOverlayOpen]="isOpen"
+          [cdkConnectedOverlayWidth]="triggerWidth"
+          [cdkConnectedOverlayHasBackdrop]="false"
+          [cdkConnectedOverlayPositions]="positions"
+          (backdropClick)="close()"
+          (detach)="close()"
+          cdkConnectedOverlay
         >
-          <!-- No Results -->
-          <div class="px-4 py-3 text-gray-500 text-sm" *ngIf="filteredItems.length === 0">
-            No results found
-          </div>
+          <div
+            class="combobox-panel bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto"
+            [id]="listboxId"
+            [attr.aria-multiselectable]="multiple"
+            role="listbox"
+          >
+            <!-- No Results -->
+            <div class="px-4 py-3 text-gray-500 text-sm" *ngIf="filteredItems.length === 0">
+              No results found
+            </div>
 
-          <!-- Grouped Options -->
-          <ng-container *ngIf="grouped && filteredItems.length > 0">
-            <ng-container *ngFor="let group of getGroups()">
-              <div
-                class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider bg-gray-50 group-header"
-              >
-                {{ group.name }}
-              </div>
+            <!-- Grouped Options -->
+            <ng-container *ngIf="grouped && filteredItems.length > 0">
+              <ng-container *ngFor="let group of getGroups()">
+                <div
+                  class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider bg-gray-50 group-header"
+                >
+                  {{ group.name }}
+                </div>
+                <div
+                  class="combobox-option px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
+                  *ngFor="let item of group.items; let i = index"
+                  [item]="item"
+                  [isSelected]="isItemSelected(item)"
+                  [id]="'option-' + group.name + '-' + i"
+                  (click)="selectItem(item)"
+                  (mouseenter)="setActiveItem(item)"
+                  appComboboxOption
+                >
+                  <div class="flex flex-col">
+                    <span class="text-gray-900">{{ item.label }}</span>
+                    <span class="text-xs text-gray-500" *ngIf="item.subtitle">
+                      {{ item.subtitle }}
+                    </span>
+                  </div>
+                  <svg
+                    class="w-5 h-5 text-blue-600"
+                    *ngIf="multiple && isItemSelected(item)"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <!-- Non-grouped Options -->
+            <ng-container *ngIf="!grouped && filteredItems.length > 0">
               <div
                 class="combobox-option px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
-                *ngFor="let item of group.items; let i = index"
-                [class.bg-blue-50]="selectedIndex === getGlobalIndex(group.name, i)"
-                [attr.aria-selected]="isItemSelected(item)"
+                *ngFor="let item of filteredItems; let i = index"
+                [item]="item"
+                [isSelected]="isItemSelected(item)"
+                [id]="'option-' + i"
                 (click)="selectItem(item)"
-                (mouseenter)="selectedIndex = getGlobalIndex(group.name, i)"
-                role="option"
+                (mouseenter)="setActiveItem(item)"
+                appComboboxOption
               >
                 <div class="flex flex-col">
-                  <span class="text-gray-900">{{ item.label }}</span>
-                  <span class="text-xs text-gray-500" *ngIf="item.subtitle">
-                    {{ item.subtitle }}
+                  <span class="text-gray-900">{{ getItemLabel(item) }}</span>
+                  <span class="text-xs text-gray-500" *ngIf="getItemSubtitle(item)">
+                    {{ getItemSubtitle(item) }}
                   </span>
                 </div>
                 <svg
@@ -194,40 +292,8 @@ export interface ComboboxItem {
                 </svg>
               </div>
             </ng-container>
-          </ng-container>
-
-          <!-- Non-grouped Options -->
-          <ng-container *ngIf="!grouped && filteredItems.length > 0">
-            <div
-              class="combobox-option px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
-              *ngFor="let item of filteredItems; let i = index"
-              [class.bg-blue-50]="selectedIndex === i"
-              [attr.aria-selected]="isItemSelected(item)"
-              (click)="selectItem(item)"
-              (mouseenter)="selectedIndex = i"
-              role="option"
-            >
-              <div class="flex flex-col">
-                <span class="text-gray-900">{{ getItemLabel(item) }}</span>
-                <span class="text-xs text-gray-500" *ngIf="getItemSubtitle(item)">
-                  {{ getItemSubtitle(item) }}
-                </span>
-              </div>
-              <svg
-                class="w-5 h-5 text-blue-600"
-                *ngIf="multiple && isItemSelected(item)"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </div>
-          </ng-container>
-        </div>
+          </div>
+        </ng-template>
       </div>
 
       <!-- Status Display -->
@@ -315,7 +381,7 @@ export interface ComboboxItem {
     `,
   ],
 })
-export class ScCombobox implements OnInit, ControlValueAccessor {
+export class ComboboxComponent implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   @Input() label: string = '';
   @Input() placeholder: string = 'Type to search...';
   @Input() items: (string | ComboboxItem)[] = [];
@@ -331,26 +397,88 @@ export class ScCombobox implements OnInit, ControlValueAccessor {
 
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
   @ViewChild('container') containerElement!: ElementRef<HTMLDivElement>;
+  @ViewChild('trigger', { read: ElementRef }) triggerElement!: ElementRef;
+  @ViewChildren(ComboboxOptionDirective) options!: QueryList<ComboboxOptionDirective>;
 
   searchQuery: string = '';
   selectedValue: any = null;
   selectedValues: Set<string> = new Set();
   filteredItems: (string | ComboboxItem)[] = [];
-  selectedIndex: number = -1;
   isOpen: boolean = false;
   isLoading: boolean = false;
   listboxId: string = `listbox-${Math.random().toString(36).substr(2, 9)}`;
+  activeItemId: string | null = null;
+  triggerWidth: number = 0;
 
+  keyManager!: ActiveDescendantKeyManager<ComboboxOptionDirective>;
   private searchSubject = new BehaviorSubject<string>('');
+  private destroy$ = new Subject<void>();
   private onChange: any = () => {};
   private onTouched: any = () => {};
+
+  // CDK Overlay positions
+  positions = [
+    {
+      originX: 'start',
+      originY: 'bottom',
+      overlayX: 'start',
+      overlayY: 'top',
+      offsetY: 4,
+    },
+    {
+      originX: 'start',
+      originY: 'top',
+      overlayX: 'start',
+      overlayY: 'bottom',
+      offsetY: -4,
+    },
+  ];
 
   ngOnInit() {
     this.filteredItems = [...this.items];
 
     if (this.async) {
-      this.searchSubject.pipe(debounceTime(500), distinctUntilChanged()).subscribe((query) => {
-        this.performAsyncSearch(query);
+      this.searchSubject
+        .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
+        .subscribe((query) => {
+          this.performAsyncSearch(query);
+        });
+    }
+  }
+
+  ngAfterViewInit() {
+    // Initialize key manager after view init when options are available
+    this.initKeyManager();
+
+    // Watch for options changes
+    this.options.changes.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.initKeyManager();
+    });
+
+    // Set trigger width
+    if (this.triggerElement) {
+      this.triggerWidth = this.triggerElement.nativeElement.offsetWidth;
+    }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private initKeyManager() {
+    if (this.options && this.options.length) {
+      this.keyManager = new ActiveDescendantKeyManager(this.options).withWrap().withTypeAhead(300);
+
+      // Update aria-activedescendant
+      this.keyManager.change.pipe(takeUntil(this.destroy$)).subscribe(() => {
+        const activeItem = this.keyManager.activeItem;
+        if (activeItem) {
+          const element = activeItem['element'].nativeElement;
+          this.activeItemId = element.id;
+        } else {
+          this.activeItemId = null;
+        }
       });
     }
   }
@@ -444,27 +572,29 @@ export class ScCombobox implements OnInit, ControlValueAccessor {
   handleKeydown(event: KeyboardEvent) {
     if (!this.isOpen && (event.key === 'ArrowDown' || event.key === 'Enter')) {
       this.open();
+      event.preventDefault();
       return;
     }
 
-    switch (event.key) {
-      case 'ArrowDown':
+    if (!this.isOpen) {
+      return;
+    }
+
+    // Let the key manager handle navigation
+    if (this.keyManager) {
+      if (event.key === 'Enter') {
         event.preventDefault();
-        this.selectNext();
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        this.selectPrevious();
-        break;
-      case 'Enter':
-        event.preventDefault();
-        if (this.selectedIndex >= 0 && this.filteredItems[this.selectedIndex]) {
-          this.selectItem(this.filteredItems[this.selectedIndex]);
+        const activeItem = this.keyManager.activeItem;
+        if (activeItem) {
+          this.selectItem(activeItem.item);
         }
-        break;
-      case 'Escape':
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
         this.close();
-        break;
+      } else {
+        // Handle arrow keys and typeahead
+        this.keyManager.onKeydown(event);
+      }
     }
   }
 
@@ -477,12 +607,18 @@ export class ScCombobox implements OnInit, ControlValueAccessor {
     }, 200);
   }
 
-  selectNext() {
-    this.selectedIndex = Math.min(this.selectedIndex + 1, this.filteredItems.length - 1);
-  }
+  setActiveItem(item: string | ComboboxItem) {
+    if (this.keyManager) {
+      const index = this.options.toArray().findIndex((option) => {
+        const optionValue = this.getItemValue(option.item);
+        const itemValue = this.getItemValue(item);
+        return optionValue === itemValue;
+      });
 
-  selectPrevious() {
-    this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+      if (index >= 0) {
+        this.keyManager.setActiveItem(index);
+      }
+    }
   }
 
   selectItem(item: string | ComboboxItem) {
@@ -533,6 +669,18 @@ export class ScCombobox implements OnInit, ControlValueAccessor {
 
   getItemLabel(item: any): string {
     if (!item) return '';
+    if (typeof item === 'string') return item;
+
+    // If item is a value from selectedValues, find the actual item
+    const actualItem = this.items.find((i) => {
+      if (typeof i === 'string') return i === item;
+      return i.value === item;
+    });
+
+    if (actualItem) {
+      return typeof actualItem === 'string' ? actualItem : actualItem.label;
+    }
+
     return typeof item === 'string' ? item : item.label;
   }
 
@@ -558,29 +706,33 @@ export class ScCombobox implements OnInit, ControlValueAccessor {
     return Object.entries(groups).map(([name, items]) => ({ name, items }));
   }
 
-  getGlobalIndex(groupName: string, localIndex: number): number {
-    let globalIndex = 0;
-    const groups = this.getGroups();
-
-    for (const group of groups) {
-      if (group.name === groupName) {
-        return globalIndex + localIndex;
-      }
-      globalIndex += group.items.length;
-    }
-
-    return -1;
-  }
-
   open() {
     if (this.isOpen) return;
     this.isOpen = true;
+
+    // Initialize key manager when opening
+    setTimeout(() => {
+      this.initKeyManager();
+      if (this.keyManager && this.selectedValue) {
+        // Set active item to selected value
+        const selectedIndex = this.options.toArray().findIndex((option) => {
+          const optionValue = this.getItemValue(option.item);
+          return optionValue === this.selectedValue;
+        });
+        if (selectedIndex >= 0) {
+          this.keyManager.setActiveItem(selectedIndex);
+        }
+      }
+    });
   }
 
   close() {
     if (!this.isOpen) return;
     this.isOpen = false;
-    this.selectedIndex = -1;
+    this.activeItemId = null;
+    if (this.keyManager) {
+      this.keyManager.setActiveItem(-1);
+    }
   }
 
   toggle() {
@@ -588,13 +740,6 @@ export class ScCombobox implements OnInit, ControlValueAccessor {
       this.close();
     } else {
       this.open();
-    }
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.containerElement?.nativeElement.contains(event.target as Node)) {
-      this.close();
     }
   }
 }
