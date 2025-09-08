@@ -2,35 +2,31 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ComboboxItem, ScCombobox, ScLabel } from '@semantic-components/ui';
+import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-reactive-forms-combobox-demo',
-  imports: [CommonModule, ReactiveFormsModule, ScCombobox, ScLabel],
+  imports: [CommonModule, ReactiveFormsModule, ScCombobox, ScField, ScLabel],
   template: `
     <form class="space-y-4" [formGroup]="demoForm">
-      <div>
-        <label class="mb-2" sc-label for="language-combobox">
-          Select your favorite programming language
-        </label>
+      <sc-field>
+        <label sc-label>Select your favorite programming language</label>
         <sc-combobox
           [items]="programmingLanguages"
-          [inputId]="'language-combobox'"
           placeholder="Choose a language..."
           formControlName="language"
         />
-      </div>
+      </sc-field>
 
-      <div>
-        <label class="mb-2" sc-label for="frameworks-combobox">Select frameworks</label>
+      <sc-field>
+        <label sc-label>Select frameworks</label>
         <sc-combobox
           [items]="frameworks"
           [multiple]="true"
-          [inputId]="'frameworks-combobox'"
           placeholder="Choose frameworks..."
           formControlName="frameworks"
         />
-      </div>
+      </sc-field>
 
       <div class="mt-4 p-4 bg-gray-50 rounded">
         <h3 class="font-semibold text-gray-700 mb-2">Form Values:</h3>

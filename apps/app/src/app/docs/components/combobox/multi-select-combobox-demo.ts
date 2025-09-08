@@ -2,21 +2,22 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ComboboxItem, ScCombobox, ScLabel } from '@semantic-components/ui';
+import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-multi-select-combobox-demo',
-  imports: [CommonModule, FormsModule, ScCombobox, ScLabel],
+  imports: [CommonModule, FormsModule, ScCombobox, ScField, ScLabel],
   template: `
-    <label class="mb-2" sc-label for="technologies-combobox">Select technologies</label>
-    <sc-combobox
-      [(ngModel)]="selectedTechnologies"
-      [items]="technologies"
-      [multiple]="true"
-      [inputId]="'technologies-combobox'"
-      (selectionChange)="onTechnologiesChange($event)"
-      placeholder="Add technologies..."
-    />
+    <sc-field>
+      <label sc-label>Select technologies</label>
+      <sc-combobox
+        [(ngModel)]="selectedTechnologies"
+        [items]="technologies"
+        [multiple]="true"
+        (selectionChange)="onTechnologiesChange($event)"
+        placeholder="Add technologies..."
+      />
+    </sc-field>
     <p class="mt-4 text-sm text-gray-600">
       Selected values:
       <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedTechnologies | json }}</code>

@@ -1,33 +1,31 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ScCombobox, ScLabel } from '@semantic-components/ui';
+import { ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-custom-config-combobox-demo',
-  imports: [FormsModule, ScCombobox, ScLabel],
+  imports: [FormsModule, ScCombobox, ScField, ScLabel],
   template: `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div>
-        <label class="mb-2" sc-label for="no-toggle-combobox">Without toggle button</label>
+      <sc-field>
+        <label sc-label>Without toggle button</label>
         <sc-combobox
           [(ngModel)]="customConfig1"
           [items]="fruits"
           [showToggleButton]="false"
-          [inputId]="'no-toggle-combobox'"
           placeholder="Type to search..."
         />
-      </div>
-      <div>
-        <label class="mb-2" sc-label for="no-status-combobox">Without status display</label>
+      </sc-field>
+      <sc-field>
+        <label sc-label>Without status display</label>
         <sc-combobox
           [(ngModel)]="customConfig2"
           [items]="fruits"
           [showStatus]="false"
-          [inputId]="'no-status-combobox'"
           placeholder="Type to search..."
         />
-      </div>
+      </sc-field>
     </div>
   `,
   styles: ``,

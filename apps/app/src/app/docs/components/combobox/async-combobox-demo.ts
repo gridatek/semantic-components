@@ -1,21 +1,22 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ComboboxItem, ScCombobox, ScLabel } from '@semantic-components/ui';
+import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-async-combobox-demo',
-  imports: [FormsModule, ScCombobox, ScLabel],
+  imports: [FormsModule, ScCombobox, ScField, ScLabel],
   template: `
-    <label class="mb-2" sc-label for="users-combobox">Search users</label>
-    <sc-combobox
-      [(ngModel)]="selectedUser"
-      [async]="true"
-      [asyncSearchFn]="searchUsers"
-      [inputId]="'users-combobox'"
-      (selectionChange)="onUserChange($event)"
-      placeholder="Start typing to search..."
-    />
+    <sc-field>
+      <label sc-label>Search users</label>
+      <sc-combobox
+        [(ngModel)]="selectedUser"
+        [async]="true"
+        [asyncSearchFn]="searchUsers"
+        (selectionChange)="onUserChange($event)"
+        placeholder="Start typing to search..."
+      />
+    </sc-field>
     <p class="mt-4 text-sm text-gray-600">
       Selected user:
       <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedUser || 'None' }}</code>

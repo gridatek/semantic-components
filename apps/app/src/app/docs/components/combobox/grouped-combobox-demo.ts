@@ -1,21 +1,22 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ComboboxItem, ScCombobox, ScLabel } from '@semantic-components/ui';
+import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-grouped-combobox-demo',
-  imports: [FormsModule, ScCombobox, ScLabel],
+  imports: [FormsModule, ScCombobox, ScField, ScLabel],
   template: `
-    <label class="mb-2" sc-label for="country-combobox">Select a country</label>
-    <sc-combobox
-      [(ngModel)]="selectedCountry"
-      [items]="countries"
-      [grouped]="true"
-      [inputId]="'country-combobox'"
-      (selectionChange)="onCountryChange($event)"
-      placeholder="Search countries..."
-    />
+    <sc-field>
+      <label sc-label>Select a country</label>
+      <sc-combobox
+        [(ngModel)]="selectedCountry"
+        [items]="countries"
+        [grouped]="true"
+        (selectionChange)="onCountryChange($event)"
+        placeholder="Search countries..."
+      />
+    </sc-field>
     <p class="mt-4 text-sm text-gray-600">
       Selected country:
       <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedCountry || 'None' }}</code>
