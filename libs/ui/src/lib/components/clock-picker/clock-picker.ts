@@ -291,7 +291,6 @@ export interface TimeValue {
       width: 2px;
     }
 
-    /* Material Design Selection Circle at tip */
     .sc-clock-picker-hand::after {
       content: '';
       position: absolute;
