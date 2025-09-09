@@ -18,12 +18,13 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { ScOption } from './option';
 import { ScSelectContent } from './select-content';
+import { ScSelectDropdown } from './select-dropdown';
 import { ScSelectTrigger } from './select-trigger';
 import { ScSelectValue } from './select-value';
 
 @Component({
   selector: 'sc-select',
-  imports: [ScSelectTrigger, ScSelectValue, ScSelectContent],
+  imports: [ScSelectTrigger, ScSelectValue, ScSelectDropdown, ScSelectContent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -65,12 +66,11 @@ import { ScSelectValue } from './select-value';
       <!-- Dropdown Panel -->
       @if (isOpen) {
         <div
-          class="absolute top-full z-50 mt-1 w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
           [id]="'dropdown-' + componentId"
           [attr.aria-labelledby]="'trigger-' + componentId"
-          sc-select-content
+          sc-select-dropdown
         >
-          <div class="max-h-60 overflow-y-auto p-1">
+          <div sc-select-content>
             <ng-content />
           </div>
         </div>
