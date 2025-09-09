@@ -34,9 +34,10 @@ export class ScOption implements Highlightable {
 
   protected readonly class = computed(() =>
     cn(
-      'block px-4 py-2 cursor-pointer hover:bg-gray-100 transition-colors duration-150',
-      this.highlighted() === true && 'bg-blue-100 text-blue-900',
-      this._disabled() === true && 'pointer-events-none opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      this.highlighted() && 'bg-accent text-accent-foreground',
+      this.selected() && 'bg-accent text-accent-foreground',
+      this._disabled() && 'pointer-events-none opacity-50',
       this.classInput(),
     ),
   );

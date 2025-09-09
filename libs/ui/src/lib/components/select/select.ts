@@ -1,10 +1,12 @@
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
   OnDestroy,
+  ViewEncapsulation,
   contentChildren,
   forwardRef,
   input,
@@ -15,11 +17,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
 import { ScOption } from './option';
+import { ScSelectContent } from './select-content';
+import { ScSelectTrigger } from './select-trigger';
+import { ScSelectValue } from './select-value';
 
 @Component({
   selector: 'sc-select',
-  standalone: true,
-  imports: [],
+  imports: [ScSelectTrigger, ScSelectValue, ScSelectContent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -30,82 +34,52 @@ import { ScOption } from './option';
   template: `
     <div class="relative w-full">
       <!-- Select Trigger -->
-      <div
-        class="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+      <button
         #trigger
-        [class.border-blue-500]="isOpen"
+        [isOpen]="isOpen"
         [attr.aria-expanded]="isOpen"
         [attr.aria-haspopup]="true"
         [attr.aria-controls]="'dropdown-' + componentId"
         [attr.aria-activedescendant]="activeDescendant"
         (click)="toggle()"
-        role="combobox"
-        tabindex="0"
+        sc-select-trigger
       >
-        <span class="truncate" [class.text-gray-400]="!selectedOption">
+        <span [placeholder]="placeholder()" sc-select-value>
           {{ selectedOption ? selectedOption.getLabel() : placeholder() }}
         </span>
         <svg
-          class="w-5 h-5 text-gray-400 transition-transform duration-200"
+          class="h-4 w-4 opacity-50"
           [class.rotate-180]="isOpen"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <path
-            fill-rule="evenodd"
-            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          />
+          <path d="m6 9 6 6 6-6" />
         </svg>
-      </div>
+      </button>
 
       <!-- Dropdown Panel -->
       @if (isOpen) {
         <div
-          class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden animate-in slide-in-from-top-2"
+          class="absolute top-full z-50 mt-1 w-full overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
           [id]="'dropdown-' + componentId"
           [attr.aria-labelledby]="'trigger-' + componentId"
-          role="listbox"
+          sc-select-content
         >
-          <div class="max-h-60 overflow-y-auto py-1">
+          <div class="max-h-60 overflow-y-auto p-1">
             <ng-content />
           </div>
         </div>
       }
     </div>
   `,
-  styles: [
-    `
-      @keyframes animate-in {
-        from {
-          opacity: 0;
-          transform: translateY(-8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .animate-in {
-        animation: animate-in 0.2s ease-out;
-      }
-
-      @keyframes slide-in-from-top-2 {
-        from {
-          transform: translateY(-0.5rem);
-        }
-        to {
-          transform: translateY(0);
-        }
-      }
-
-      .slide-in-from-top-2 {
-        animation: slide-in-from-top-2 0.2s ease-out;
-      }
-    `,
-  ],
+  styles: ``,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestroy {
   readonly placeholder = input('Select an option');
