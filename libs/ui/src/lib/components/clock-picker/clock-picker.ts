@@ -262,51 +262,75 @@ export interface TimeValue {
       color: white; /* oklch(var(--primary-foreground)) */
     }
 
+    /* Material Design Clock Hand */
     .sc-clock-picker-hand {
       position: absolute;
       top: 50%;
       left: 50%;
       width: 2px;
-      background: #dc2626; /* red-600 for high visibility - oklch(var(--primary)) */
+      background: #3b82f6; /* Material blue primary - oklch(var(--primary)) */
       transform-origin: 50% 100%;
-      transition: transform 0.1s ease-out;
-      z-index: 10;
-      height: 90px;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 15;
+      height: 106px; /* Reaches close to numbers (110px - 4px for circle) */
       border-radius: 1px;
       cursor: grab;
-      margin-top: -90px;
+      margin-top: -106px;
       margin-left: -1px;
     }
 
     .sc-clock-picker-hand:hover {
-      background: #dc2626; /* red-600 for high visibility - oklch(var(--primary)) */
-      width: 3px;
-      margin-left: -1.5px;
+      background: #2563eb; /* Darker blue on hover */
+      width: 2px;
+      margin-left: -1px;
     }
 
     .sc-clock-picker-hand.dragging {
       cursor: grabbing;
       transition: none;
-      width: 3px;
-      margin-left: -1.5px;
+      background: #2563eb;
+      width: 2px;
+      margin-left: -1px;
     }
 
+    /* Material Design Selection Circle at tip */
     .sc-clock-picker-hand::after {
       content: '';
       position: absolute;
-      top: -6px;
+      top: -10px; /* Positioned at the tip */
       left: 50%;
-      width: 12px;
-      height: 12px;
-      background: #dc2626; /* red-600 for high visibility - oklch(var(--primary)) */
-      border: 2px solid white; /* oklch(var(--background)) */
+      width: 20px;
+      height: 20px;
+      background: #3b82f6; /* Material blue primary */
+      border: 4px solid #f8fafc; /* Light background border */
       border-radius: 50%;
       transform: translateX(-50%);
       cursor: grab;
+      box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.12),
+        0 4px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sc-clock-picker-hand:hover::after {
+      width: 24px;
+      height: 24px;
+      top: -12px;
+      background: #2563eb;
+      box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.16),
+        0 8px 16px rgba(0, 0, 0, 0.12);
     }
 
     .sc-clock-picker-hand.dragging::after {
       cursor: grabbing;
+      width: 26px;
+      height: 26px;
+      top: -13px;
+      background: #1d4ed8;
+      box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.2),
+        0 12px 24px rgba(0, 0, 0, 0.15);
     }
 
     .sc-clock-picker-disabled {
@@ -652,11 +676,13 @@ export class ScClockPicker {
     const centerX = this.clockFaceRect.left + this.clockFaceRect.width / 2;
     const centerY = this.clockFaceRect.top + this.clockFaceRect.height / 2;
 
-    // Calculate angle from center to mouse/touch position
+    // Calculate angle from center to mouse/touch position using Material Design approach
     const x = clientX - centerX;
     const y = clientY - centerY;
-    // Calculate angle where 0° is at the top (12 o'clock position)
-    let angle = (Math.atan2(x, -y) * 180) / Math.PI;
+    // Use atan2(y, x) and convert to degrees, then adjust for 12 o'clock starting position
+    let angle = (Math.atan2(y, x) * 180) / Math.PI;
+    // Adjust so 0° is at 12 o'clock (top) instead of 3 o'clock (right)
+    angle = (angle + 90) % 360;
     if (angle < 0) angle += 360;
 
     // Update time based on current mode
@@ -708,8 +734,10 @@ export class ScClockPicker {
       const x = e.clientX - centerX;
       const y = e.clientY - centerY;
 
-      // Calculate angle where 0° is at the top (12 o'clock position)
-      let angle = (Math.atan2(x, -y) * 180) / Math.PI;
+      // Calculate angle using Material Design approach
+      let angle = (Math.atan2(y, x) * 180) / Math.PI;
+      // Adjust so 0° is at 12 o'clock (top) instead of 3 o'clock (right)
+      angle = (angle + 90) % 360;
       if (angle < 0) angle += 360;
 
       if (this.mode() === 'hours') {
