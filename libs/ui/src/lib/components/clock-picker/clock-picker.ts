@@ -438,17 +438,20 @@ export class ScClockPicker {
     const isHours = this.mode() === 'hours';
     if (isHours) {
       const hours = this.format() === '12h' ? this.formattedHours() : this.value().hours;
-      // For 12-hour format: 12 positions around the clock (0-360 degrees)
-      // 12 o'clock = 0°, 1 o'clock = 30°, 2 o'clock = 60°, etc.
-      // We need to handle the special case where 12 should point to 0°
-      let displayHour = hours;
-      if (this.format() === '12h' && hours === 12) {
-        displayHour = 0; // 12 o'clock points to top (0°)
+
+      if (this.format() === '12h') {
+        // 12-hour format: 30 degrees per hour (360/12 = 30)
+        let displayHour = hours;
+        if (hours === 12) {
+          displayHour = 0; // 12 o'clock points to top (0°)
+        }
+        return displayHour * 30;
+      } else {
+        // 24-hour format: 15 degrees per hour (360/24 = 15)
+        return hours * 15;
       }
-      return displayHour * 30; // 30 degrees per hour (360/12 = 30)
     } else {
       // For minutes: point to exact minute position
-      // Handle the wrap-around from 59 to 0 smoothly
       const minutes = this.value().minutes;
       return (minutes * 6) % 360; // 6 degrees per minute (360/60 = 6)
     }
