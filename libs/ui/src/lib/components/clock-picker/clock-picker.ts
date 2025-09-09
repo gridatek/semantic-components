@@ -120,7 +120,10 @@ export interface TimeValue {
         <!-- Clock Hand -->
         <div
           class="sc-clock-picker-hand"
+          [class.dragging]="isDragging()"
           [style.transform]="'rotate(' + currentAngle() + 'deg)'"
+          (mousedown)="startDragging($event)"
+          (touchstart)="startDragging($event)"
         ></div>
       </div>
     </div>
@@ -267,22 +270,40 @@ export interface TimeValue {
       background: hsl(var(--primary));
       transform-origin: bottom center;
       transform: translate(-50%, -100%);
-      transition: transform 0.2s ease-out;
+      transition: transform 0.1s ease-out;
       z-index: 10;
       height: 100px;
       border-radius: 1px;
+      cursor: grab;
+    }
+
+    .sc-clock-picker-hand:hover {
+      background: hsl(var(--primary));
+      width: 3px;
+    }
+
+    .sc-clock-picker-hand.dragging {
+      cursor: grabbing;
+      transition: none;
+      width: 3px;
     }
 
     .sc-clock-picker-hand::after {
       content: '';
       position: absolute;
-      top: -4px;
+      top: -6px;
       left: 50%;
-      width: 8px;
-      height: 8px;
+      width: 12px;
+      height: 12px;
       background: hsl(var(--primary));
+      border: 2px solid hsl(var(--background));
       border-radius: 50%;
       transform: translateX(-50%);
+      cursor: grab;
+    }
+
+    .sc-clock-picker-hand.dragging::after {
+      cursor: grabbing;
     }
 
     .sc-clock-picker-disabled {
@@ -314,6 +335,9 @@ export class ScClockPicker {
 
   // Internal state
   readonly mode = signal<'hours' | 'minutes'>('hours');
+  readonly isDragging = signal<boolean>(false);
+  private dragStartAngle = 0;
+  private clockFaceRect: DOMRect | null = null;
 
   // Computed values
   readonly rootClass = computed(() =>
@@ -573,6 +597,87 @@ export class ScClockPicker {
     }
 
     this.value.set({ ...current, hours: actualHours });
+  }
+
+  startDragging(event: MouseEvent | TouchEvent) {
+    if (this.disabled()) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const clockFace = this.elementRef.nativeElement.querySelector('.sc-clock-picker-face');
+    if (!clockFace) return;
+
+    this.clockFaceRect = clockFace.getBoundingClientRect();
+    this.isDragging.set(true);
+
+    // Add global event listeners
+    const handleMove = (e: MouseEvent | TouchEvent) => this.handleDrag(e);
+    const handleEnd = () => this.stopDragging(handleMove, handleEnd);
+
+    document.addEventListener('mousemove', handleMove);
+    document.addEventListener('mouseup', handleEnd);
+    document.addEventListener('touchmove', handleMove, { passive: false });
+    document.addEventListener('touchend', handleEnd);
+
+    // Handle the initial position
+    this.handleDrag(event);
+  }
+
+  private handleDrag(event: MouseEvent | TouchEvent) {
+    if (!this.isDragging() || !this.clockFaceRect) return;
+
+    event.preventDefault();
+
+    // Get coordinates from mouse or touch event
+    const clientX = 'touches' in event ? event.touches[0]?.clientX : event.clientX;
+    const clientY = 'touches' in event ? event.touches[0]?.clientY : event.clientY;
+
+    if (clientX === undefined || clientY === undefined) return;
+
+    // Calculate center of clock face
+    const centerX = this.clockFaceRect.left + this.clockFaceRect.width / 2;
+    const centerY = this.clockFaceRect.top + this.clockFaceRect.height / 2;
+
+    // Calculate angle from center to mouse/touch position
+    const x = clientX - centerX;
+    const y = clientY - centerY;
+    let angle = (Math.atan2(y, x) * 180) / Math.PI + 90;
+    if (angle < 0) angle += 360;
+
+    // Update time based on current mode
+    this.updateTimeFromAngle(angle);
+  }
+
+  private updateTimeFromAngle(angle: number) {
+    const current = this.value();
+
+    if (this.mode() === 'hours') {
+      const hourCount = this.format() === '12h' ? 12 : 24;
+      let selectedHour = Math.round(angle / (360 / hourCount)) % hourCount;
+
+      if (this.format() === '12h' && selectedHour === 0) {
+        selectedHour = 12;
+      }
+
+      this.selectNumber(selectedHour);
+    } else {
+      // For minutes, snap to 5-minute intervals
+      const minuteAngle = Math.round(angle / 30) * 30; // Snap to 30-degree increments (5-minute intervals)
+      const selectedMinute = ((minuteAngle / 30) * 5) % 60;
+      this.selectNumber(selectedMinute);
+    }
+  }
+
+  private stopDragging(handleMove: (e: MouseEvent | TouchEvent) => void, handleEnd: () => void) {
+    this.isDragging.set(false);
+    this.clockFaceRect = null;
+
+    // Remove global event listeners
+    document.removeEventListener('mousemove', handleMove);
+    document.removeEventListener('mouseup', handleEnd);
+    document.removeEventListener('touchmove', handleMove);
+    document.removeEventListener('touchend', handleEnd);
   }
 
   private setupClickHandlers() {
