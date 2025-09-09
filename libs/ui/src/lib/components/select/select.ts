@@ -18,6 +18,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { Subject, takeUntil } from 'rxjs';
 
 import { ScOption } from './option';
@@ -28,7 +29,7 @@ import { ScSelectValue } from './select-value';
 
 @Component({
   selector: 'sc-select',
-  imports: [ScSelectTrigger, ScSelectValue, ScSelectDropdown, ScSelectContent],
+  imports: [ScSelectTrigger, ScSelectValue, ScSelectDropdown, ScSelectContent, SiChevronDownIcon],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -51,19 +52,7 @@ import { ScSelectValue } from './select-value';
       <span [placeholder]="placeholder()" sc-select-value>
         {{ selectedOption ? selectedOption.getLabel() : placeholder() }}
       </span>
-      <svg
-        class="h-4 w-4 opacity-50"
-        [class.rotate-180]="isOpen"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="m6 9 6 6 6-6" />
-      </svg>
+      <svg class="h-4 w-4 opacity-50" [class.rotate-180]="isOpen" si-chevron-down-icon></svg>
     </button>
 
     <!-- Dropdown Panel -->
