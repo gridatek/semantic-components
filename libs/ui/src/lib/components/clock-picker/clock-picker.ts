@@ -284,7 +284,7 @@ export interface TimeValue {
       width: 2px;
       background: #3b82f6; /* Material blue primary - oklch(var(--primary)) */
       transform-origin: 50% 100%;
-      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       z-index: 15;
       height: 110px; /* Back to original radius to reach the numbers */
       border-radius: 1px;
@@ -531,10 +531,8 @@ export class ScClockPicker {
       console.log('New value being set:', newValue);
       this.value.set(newValue); // Reset minutes to 0 when selecting hour
       console.log('Value after set:', this.value());
-      // Only auto-switch to minutes if this wasn't from dragging
-      if (!this.hasDragged) {
-        setTimeout(() => this.mode.set('minutes'), 100);
-      }
+      // Always auto-switch to minutes after hour selection
+      setTimeout(() => this.mode.set('minutes'), 500); // Increased delay to let hand animation finish
     } else {
       this.value.set({ ...current, minutes: num });
     }
@@ -782,7 +780,7 @@ export class ScClockPicker {
 
     // After dragging hours, automatically switch to minutes mode
     if (this.mode() === 'hours' && this.hasDragged) {
-      setTimeout(() => this.mode.set('minutes'), 100);
+      setTimeout(() => this.mode.set('minutes'), 500); // Increased delay to let hand animation finish
     }
   }
 
