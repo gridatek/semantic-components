@@ -11,6 +11,8 @@ An interactive time picker component with a visual clock interface for selecting
 - **Auto Mode Switching**: Automatically transitions from hours to minutes selection
 - **Accessibility**: Full keyboard navigation and screen reader support
 - **Touch Friendly**: Optimized for both mouse and touch interactions
+- **Visual Feedback**: Subtle hover effects and scale animations
+- **Customizable Theming**: CSS custom properties for easy customization
 
 ## Usage
 
@@ -67,4 +69,21 @@ interface TimeValue {
 
 ```html
 <div [(value)]="time" [disabled]="true" sc-clock-picker></div>
+```
+
+## Customization
+
+The clock-picker supports theming through CSS custom properties:
+
+```css
+.my-custom-clock {
+  --clock-primary: #10b981; /* Primary color (hand, selected) */
+  --clock-primary-foreground: #ffffff; /* Primary text color */
+  --clock-background: #ffffff; /* Component background */
+  --clock-foreground: #111827; /* Default text color */
+  --clock-border: #d1d5db; /* Border color */
+  --clock-accent: #f3f4f6; /* Hover background */
+  --clock-accent-foreground: #111827; /* Hover text color */
+  --clock-muted-foreground: #6b7280; /* Muted text (separator) */
+}
 ```

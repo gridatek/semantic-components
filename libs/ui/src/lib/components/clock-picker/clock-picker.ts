@@ -148,13 +148,13 @@ export interface TimeValue {
       flex-direction: column;
       align-items: center;
       padding: 1.5rem;
-      background: white; /* oklch(var(--background)) */
-      border: 1px solid #e2e8f0; /* oklch(var(--border)) */
+      background: var(--background);
+      border: 1px solid var(--border);
       border-radius: 0.5rem;
       box-shadow:
         0 1px 3px 0 rgb(0 0 0 / 0.1),
         0 1px 2px -1px rgb(0 0 0 / 0.1);
-      color: #0f172a; /* oklch(var(--foreground)) */
+      color: var(--foreground);
       min-width: 20rem;
       gap: 1.5rem;
     }
@@ -179,8 +179,9 @@ export interface TimeValue {
       padding: 0.25rem 0.5rem;
       border-radius: 0.25rem;
       transition:
-        background-color 0.15s ease-in-out,
-        border-color 0.15s ease-in-out;
+        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       border: 2px solid transparent;
       background: transparent;
       color: inherit;
@@ -188,21 +189,22 @@ export interface TimeValue {
     }
 
     .sc-clock-picker-time-part:hover {
-      background: #f1f5f9; /* oklch(var(--accent)) */
+      background: var(--accent);
+      transform: scale(1.02);
     }
 
     .sc-clock-picker-time-part:focus {
-      background: #f1f5f9; /* oklch(var(--accent)) */
+      background: var(--accent);
       outline: none;
     }
 
     .sc-clock-picker-time-part.active {
-      border-color: #3b82f6; /* oklch(var(--primary)) */
-      background: rgb(59 130 246 / 0.1); /* oklch(var(--primary) / 0.1) */
+      border-color: var(--primary);
+      background: color-mix(in srgb, var(--primary) 10%, transparent);
     }
 
     .sc-clock-picker-separator {
-      color: #64748b; /* oklch(var(--muted-foreground)) */
+      color: var(--muted-foreground);
     }
 
     .sc-clock-picker-period {
@@ -217,8 +219,8 @@ export interface TimeValue {
       width: 280px;
       height: 280px;
       border-radius: 50%;
-      border: 2px solid #e2e8f0; /* oklch(var(--border)) */
-      background: #f8fafc; /* oklch(var(--card)) */
+      border: 2px solid var(--border);
+      background: var(--card);
       margin: 0 auto;
     }
 
@@ -228,10 +230,10 @@ export interface TimeValue {
       left: 50%;
       width: 8px;
       height: 8px;
-      background: #dc2626; /* Red for debugging visibility */
+      background: var(--primary);
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      z-index: 25; /* Higher than hand to see if aligned */
+      z-index: 25;
     }
 
     .sc-clock-picker-number {
@@ -245,35 +247,42 @@ export interface TimeValue {
       font-weight: 500;
       border-radius: 50%;
       transition:
-        background-color 0.15s ease-in-out,
-        color 0.15s ease-in-out;
+        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 15;
       background: transparent;
-      color: #0f172a; /* oklch(var(--foreground)) */
+      color: var(--foreground);
       border: none;
       cursor: pointer;
       user-select: none;
     }
 
     .sc-clock-picker-number:hover {
-      background: #f1f5f9; /* oklch(var(--accent)) */
-      color: #0f172a; /* oklch(var(--accent-foreground)) */
+      background: var(--accent);
+      color: var(--accent-foreground);
+      transform: scale(1.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .sc-clock-picker-number:focus {
-      background: #f1f5f9; /* oklch(var(--accent)) */
-      color: #0f172a; /* oklch(var(--accent-foreground)) */
+      background: var(--accent);
+      color: var(--accent-foreground);
+      transform: scale(1.05);
       outline: none;
     }
 
     .sc-clock-picker-number:focus-visible {
-      outline: 2px solid #3b82f6; /* oklch(var(--ring)) */
+      outline: 2px solid var(--ring);
       outline-offset: 2px;
     }
 
     .sc-clock-picker-number.selected {
-      background: #3b82f6; /* oklch(var(--primary)) */
-      color: white; /* oklch(var(--primary-foreground)) */
+      background: var(--primary);
+      color: var(--primary-foreground);
+      transform: scale(1.15);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
     }
 
     /* Material Design Clock Hand */
@@ -282,11 +291,11 @@ export interface TimeValue {
       top: 50%;
       left: 50%;
       width: 2px;
-      background: #3b82f6; /* Material blue primary - oklch(var(--primary)) */
+      background: var(--primary);
       transform-origin: 50% 100%;
       transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       z-index: 15;
-      height: 110px; /* Back to original radius to reach the numbers */
+      height: 110px;
       border-radius: 1px;
       margin-top: -110px;
       margin-left: 0px;
@@ -294,12 +303,12 @@ export interface TimeValue {
     }
 
     .sc-clock-picker-hand:hover {
-      background: #2563eb; /* Darker blue on hover */
+      background: color-mix(in srgb, var(--primary) 80%, black);
     }
 
     .sc-clock-picker-hand.dragging {
       transition: none;
-      background: #2563eb;
+      background: color-mix(in srgb, var(--primary) 80%, black);
     }
 
     .sc-clock-picker-hand-knob {
@@ -308,31 +317,30 @@ export interface TimeValue {
       left: 50%;
       width: 32px; /* Same as time number circles */
       height: 32px; /* Same as time number circles */
-      background: rgba(34, 197, 94, 0.8); /* Green for debugging visibility */
+      background: transparent; /* Invisible by default */
       border: none;
       border-radius: 50%;
       transform: translateX(-50%);
       cursor: grab;
       pointer-events: all;
-      box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.12),
-        0 4px 8px rgba(0, 0, 0, 0.08);
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 25; /* Higher than selected numbers */
+      transition:
+        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .sc-clock-picker-hand-knob:hover {
-      background: rgba(37, 99, 235, 0.7); /* Slightly more opaque on hover */
-      box-shadow:
-        0 4px 8px rgba(0, 0, 0, 0.16),
-        0 8px 16px rgba(0, 0, 0, 0.12);
+      background: color-mix(in srgb, var(--primary) 15%, transparent);
+      transform: translateX(-50%) scale(1.1);
+      box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 20%, transparent);
     }
 
     .sc-clock-picker-hand-knob.dragging {
       cursor: grabbing;
-      background: rgba(29, 78, 216, 0.8); /* More opaque when dragging */
-      box-shadow:
-        0 6px 12px rgba(0, 0, 0, 0.2),
-        0 12px 24px rgba(0, 0, 0, 0.15);
+      background: color-mix(in srgb, var(--primary) 25%, transparent);
+      transform: translateX(-50%) scale(1.05);
+      box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
     }
 
     .sc-clock-picker-disabled {
@@ -447,14 +455,6 @@ export class ScClockPicker {
   readonly currentAngle = computed(() => {
     const isHours = this.mode() === 'hours';
     const currentValue = this.value();
-    console.log(
-      'currentAngle - mode:',
-      this.mode(),
-      'hours:',
-      currentValue.hours,
-      'minutes:',
-      currentValue.minutes,
-    );
 
     let rawAngle: number;
 
@@ -468,17 +468,14 @@ export class ScClockPicker {
           displayHour = 0; // 12 o'clock points to top (0°)
         }
         rawAngle = displayHour * 30;
-        console.log('12h angle:', rawAngle, 'for hour:', displayHour);
       } else {
         // 24-hour format: 15 degrees per hour (360/24 = 15)
         rawAngle = currentValue.hours * 15;
-        console.log('24h angle:', rawAngle, 'for hour:', currentValue.hours);
       }
     } else {
       // For minutes: point to exact minute position
       const minutes = currentValue.minutes;
       rawAngle = minutes * 6; // 6 degrees per minute (360/60 = 6)
-      console.log('minutes angle:', rawAngle, 'for minutes:', minutes);
     }
 
     // Calculate the shortest path for smooth transitions ONLY when not dragging
@@ -524,8 +521,6 @@ export class ScClockPicker {
   }
 
   selectNumber(num: number) {
-    console.log('selectNumber called with:', num);
-
     if (this.disabled()) return;
 
     const current = this.value();
@@ -540,7 +535,6 @@ export class ScClockPicker {
       }
       // Only update if hour is different
       if (current.hours !== hours) {
-        console.log('Setting hour to:', hours, 'and resetting minutes to 0');
         const newValue = { ...current, hours, minutes: 0 };
         this.value.set(newValue);
         // Only auto-switch to minutes for clicks, not for drags
@@ -553,7 +547,6 @@ export class ScClockPicker {
       const minutes = num >= 60 ? 0 : Math.max(0, Math.min(59, num));
       // Only update if minutes are different
       if (current.minutes !== minutes) {
-        console.log('Setting minutes from', num, 'to', minutes);
         this.value.set({ ...current, minutes });
       }
     }
@@ -801,15 +794,6 @@ export class ScClockPicker {
 
       // Ensure minute is in 0-59 range
       selectedMinute = Math.max(0, Math.min(59, selectedMinute));
-
-      console.log(
-        'Drag update - angle:',
-        angle,
-        'normalized:',
-        normalizedAngle,
-        'selectedMinute:',
-        selectedMinute,
-      );
 
       // Only update if minutes are different
       if (current.minutes !== selectedMinute) {

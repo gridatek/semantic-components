@@ -19,34 +19,38 @@ import {
       line-height: 1.25rem;
       border-radius: 0.25rem;
       transition:
-        background-color 0.15s ease-in-out,
-        color 0.15s ease-in-out,
-        border-color 0.15s ease-in-out;
-      border: 1px solid #e2e8f0; /* oklch(var(--border)) */
+        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid var(--border);
       background: transparent;
-      color: #0f172a; /* oklch(var(--foreground)) */
+      color: var(--foreground);
+      cursor: pointer;
     }
 
     button[sc-clock-picker-period-button]:hover {
-      background: #f1f5f9; /* oklch(var(--accent)) */
-      color: #0f172a; /* oklch(var(--accent-foreground)) */
+      background: var(--accent);
+      color: var(--accent-foreground);
+      transform: scale(1.02);
     }
 
     button[sc-clock-picker-period-button]:focus {
-      background: #f1f5f9; /* oklch(var(--accent)) */
-      color: #0f172a; /* oklch(var(--accent-foreground)) */
+      background: var(--accent);
+      color: var(--accent-foreground);
       outline: none;
     }
 
     button[sc-clock-picker-period-button]:focus-visible {
-      outline: 2px solid #3b82f6; /* oklch(var(--ring)) */
+      outline: 2px solid var(--ring);
       outline-offset: 2px;
     }
 
     button[sc-clock-picker-period-button][data-active='true'] {
-      background: #3b82f6; /* oklch(var(--primary)) */
-      color: white; /* oklch(var(--primary-foreground)) */
-      border-color: #3b82f6; /* oklch(var(--primary)) */
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-color: var(--primary);
+      transform: scale(1.05);
     }
 
     button[sc-clock-picker-period-button][data-disabled='true'] {
