@@ -122,9 +122,23 @@ export interface TimeValue {
           class="sc-clock-picker-hand"
           [class.dragging]="isDragging()"
           [style.transform]="'rotate(' + currentAngle() + 'deg)'"
-          (mousedown)="startDragging($event)"
-          (touchstart)="startDragging($event)"
-        ></div>
+        >
+          <div
+            class="sc-clock-picker-hand-knob"
+            [class.dragging]="isDragging()"
+            [attr.aria-label]="mode() === 'hours' ? 'Drag to select hour' : 'Drag to select minute'"
+            [attr.aria-valuemin]="mode() === 'hours' ? (format() === '12h' ? 1 : 0) : 0"
+            [attr.aria-valuemax]="mode() === 'hours' ? (format() === '12h' ? 12 : 23) : 59"
+            [attr.aria-valuenow]="mode() === 'hours' ? formattedHours() : value().minutes"
+            [attr.aria-valuetext]="
+              mode() === 'hours' ? formattedHours() + ' hours' : value().minutes + ' minutes'
+            "
+            (mousedown)="startDragging($event)"
+            (touchstart)="startDragging($event)"
+            role="slider"
+            tabindex="0"
+          ></div>
+        </div>
       </div>
     </div>
   `,
@@ -274,49 +288,46 @@ export interface TimeValue {
       z-index: 15;
       height: 110px; /* Back to original radius to reach the numbers */
       border-radius: 1px;
-      cursor: grab;
       margin-top: -110px;
-      margin-left: 0px; /* Moved one pixel to the right */
+      margin-left: 0px;
+      pointer-events: none; /* Let the knob handle interactions */
     }
 
     .sc-clock-picker-hand:hover {
       background: #2563eb; /* Darker blue on hover */
-      width: 2px;
     }
 
     .sc-clock-picker-hand.dragging {
-      cursor: grabbing;
       transition: none;
       background: #2563eb;
-      width: 2px;
     }
 
-    .sc-clock-picker-hand::after {
-      content: '';
+    .sc-clock-picker-hand-knob {
       position: absolute;
       top: -16px; /* Centered at the tip of the hand */
       left: 50%;
       width: 32px; /* Same as time number circles */
       height: 32px; /* Same as time number circles */
       background: rgba(34, 197, 94, 0.8); /* Green for debugging visibility */
-      border: none; /* No border to see time numbers through */
+      border: none;
       border-radius: 50%;
-      transform: translateX(-50%); /* Back to center */
+      transform: translateX(-50%);
       cursor: grab;
+      pointer-events: all;
       box-shadow:
         0 2px 4px rgba(0, 0, 0, 0.12),
         0 4px 8px rgba(0, 0, 0, 0.08);
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .sc-clock-picker-hand:hover::after {
+    .sc-clock-picker-hand-knob:hover {
       background: rgba(37, 99, 235, 0.7); /* Slightly more opaque on hover */
       box-shadow:
         0 4px 8px rgba(0, 0, 0, 0.16),
         0 8px 16px rgba(0, 0, 0, 0.12);
     }
 
-    .sc-clock-picker-hand.dragging::after {
+    .sc-clock-picker-hand-knob.dragging {
       cursor: grabbing;
       background: rgba(29, 78, 216, 0.8); /* More opaque when dragging */
       box-shadow:
@@ -356,6 +367,7 @@ export class ScClockPicker {
   readonly isDragging = signal<boolean>(false);
   private dragStartAngle = 0;
   private clockFaceRect: DOMRect | null = null;
+  private hasDragged = false;
 
   // Computed values
   readonly rootClass = computed(() =>
@@ -503,8 +515,10 @@ export class ScClockPicker {
       console.log('New value being set:', newValue);
       this.value.set(newValue); // Reset minutes to 0 when selecting hour
       console.log('Value after set:', this.value());
-      // Delay mode switch to prevent click interference
-      setTimeout(() => this.mode.set('minutes'), 100);
+      // Only auto-switch to minutes if this wasn't from dragging
+      if (!this.hasDragged) {
+        setTimeout(() => this.mode.set('minutes'), 100);
+      }
     } else {
       this.value.set({ ...current, minutes: num });
     }
@@ -665,6 +679,7 @@ export class ScClockPicker {
 
     this.clockFaceRect = clockFace.getBoundingClientRect();
     this.isDragging.set(true);
+    this.hasDragged = false; // Reset drag flag
 
     // Add global event listeners
     const handleMove = (e: MouseEvent | TouchEvent) => this.handleDrag(e);
@@ -683,6 +698,9 @@ export class ScClockPicker {
     if (!this.isDragging() || !this.clockFaceRect) return;
 
     event.preventDefault();
+
+    // Mark that we've actually dragged (moved)
+    this.hasDragged = true;
 
     // Get coordinates from mouse or touch event
     const clientX = 'touches' in event ? event.touches[0]?.clientX : event.clientX;
