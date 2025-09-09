@@ -736,12 +736,21 @@ export class ScClockPicker {
         selectedHour = 12;
       }
 
-      this.selectNumber(selectedHour);
+      // Update hours directly without calling selectNumber to avoid mode switch
+      let hours = selectedHour;
+      if (this.format() === '12h') {
+        if (current.period === 'PM' && selectedHour !== 12) {
+          hours = selectedHour + 12;
+        } else if (current.period === 'AM' && selectedHour === 12) {
+          hours = 0;
+        }
+      }
+      this.value.set({ ...current, hours });
     } else {
       // For minutes, snap to 5-minute intervals
       const minuteAngle = Math.round(angle / 30) * 30; // Snap to 30-degree increments (5-minute intervals)
       const selectedMinute = ((minuteAngle / 30) * 5) % 60;
-      this.selectNumber(selectedMinute);
+      this.value.set({ ...current, minutes: selectedMinute });
     }
   }
 
@@ -754,6 +763,11 @@ export class ScClockPicker {
     document.removeEventListener('mouseup', handleEnd);
     document.removeEventListener('touchmove', handleMove);
     document.removeEventListener('touchend', handleEnd);
+
+    // After dragging hours, automatically switch to minutes mode
+    if (this.mode() === 'hours' && this.hasDragged) {
+      setTimeout(() => this.mode.set('minutes'), 100);
+    }
   }
 
   private setupClickHandlers() {
