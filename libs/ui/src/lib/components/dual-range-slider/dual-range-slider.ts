@@ -106,24 +106,28 @@ export class ScDualRangeSlider {
   protected onMinChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     const value = Number(target.value);
+    const currentMax = this.maxValue();
 
-    if (value <= this.maxValue()) {
-      this.minValue.set(value);
+    if (value > currentMax) {
+      // If min tries to go past max, set both to the attempted value
+      this.minValue.set(currentMax);
+      this.maxValue.set(value);
     } else {
-      // Prevent crossing over max value
-      this.minValue.set(this.maxValue());
+      this.minValue.set(value);
     }
   }
 
   protected onMaxChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     const value = Number(target.value);
+    const currentMin = this.minValue();
 
-    if (value >= this.minValue()) {
-      this.maxValue.set(value);
+    if (value < currentMin) {
+      // If max tries to go below min, set both to the attempted value
+      this.maxValue.set(currentMin);
+      this.minValue.set(value);
     } else {
-      // Prevent going below min value
-      this.maxValue.set(this.minValue());
+      this.maxValue.set(value);
     }
   }
 }
