@@ -1,71 +1,67 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
-  effect,
   input,
   model,
-  viewChildren,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
+import { ScDualRangeSliderRange } from './dual-range-slider-range';
+import { ScDualRangeSliderRoot } from './dual-range-slider-root';
+import { ScDualRangeSliderThumb } from './dual-range-slider-thumb';
+import { ScDualRangeSliderTrack } from './dual-range-slider-track';
+
 @Component({
   selector: 'div[sc-dual-range-slider]',
-  imports: [],
+  imports: [
+    ScDualRangeSliderRoot,
+    ScDualRangeSliderTrack,
+    ScDualRangeSliderRange,
+    ScDualRangeSliderThumb,
+  ],
   template: `
-    <div class="relative">
+    <div [class]="class()" sc-dual-range-slider-root>
       <!-- Track background -->
-      <div class="absolute w-full h-2 bg-input rounded-full"></div>
+      <div sc-dual-range-slider-track></div>
 
       <!-- Selected range track -->
       <div
-        class="absolute h-2 bg-primary rounded-full z-10"
         [style.left]="minPercentage() + '%'"
         [style.right]="100 - maxPercentage() + '%'"
+        sc-dual-range-slider-range
       ></div>
 
       <!-- Min value slider -->
       <input
-        class="absolute w-full h-2 z-20 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-track]:h-2 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:border-none"
-        #minSlider
+        class="z-20"
         [value]="minValue()"
         [min]="min()"
         [max]="max()"
         [step]="step()"
-        (input)="onMinChange($event)"
-        type="range"
+        (valueChange)="onMinChange($event)"
+        sc-dual-range-slider-thumb
       />
 
       <!-- Max value slider -->
       <input
-        class="absolute w-full h-2 z-30 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-track]:h-2 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:border-none"
-        #maxSlider
+        class="z-30"
         [value]="maxValue()"
         [min]="min()"
         [max]="max()"
         [step]="step()"
-        (input)="onMaxChange($event)"
-        type="range"
+        (valueChange)="onMaxChange($event)"
+        sc-dual-range-slider-thumb
       />
     </div>
   `,
-  host: {
-    '[class]': 'class()',
-  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDualRangeSlider {
-  readonly classInput = input<string>('', {
-    alias: 'class',
-  });
-
-  protected readonly class = computed(() => cn('relative w-full py-4', this.classInput()));
-
   readonly min = input(0);
   readonly max = input(100);
   readonly step = input(1);
@@ -73,25 +69,7 @@ export class ScDualRangeSlider {
   readonly minValue = model<number>(20);
   readonly maxValue = model<number>(80);
 
-  readonly minSlider = viewChildren<ElementRef<HTMLInputElement>>('minSlider');
-  readonly maxSlider = viewChildren<ElementRef<HTMLInputElement>>('maxSlider');
-
-  constructor() {
-    // Sync input values when model changes
-    effect(() => {
-      const minEl = this.minSlider()[0]?.nativeElement;
-      if (minEl && Number(minEl.value) !== this.minValue()) {
-        minEl.value = this.minValue().toString();
-      }
-    });
-
-    effect(() => {
-      const maxEl = this.maxSlider()[0]?.nativeElement;
-      if (maxEl && Number(maxEl.value) !== this.maxValue()) {
-        maxEl.value = this.maxValue().toString();
-      }
-    });
-  }
+  protected readonly class = computed(() => cn('relative'));
 
   protected readonly minPercentage = computed(() => {
     const range = this.max() - this.min();
@@ -103,9 +81,7 @@ export class ScDualRangeSlider {
     return range > 0 ? ((this.maxValue() - this.min()) * 100) / range : 100;
   });
 
-  protected onMinChange(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    const value = Number(target.value);
+  protected onMinChange(value: number): void {
     const currentMax = this.maxValue();
 
     if (value > currentMax) {
@@ -117,9 +93,7 @@ export class ScDualRangeSlider {
     }
   }
 
-  protected onMaxChange(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    const value = Number(target.value);
+  protected onMaxChange(value: number): void {
     const currentMin = this.minValue();
 
     if (value < currentMin) {
