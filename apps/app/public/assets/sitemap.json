@@ -190,6 +190,12 @@
             "description": "Accessible one-time password component with copy paste functionality."
           },
           {
+            "id": "input-phone",
+            "title": "Input Phone",
+            "path": "/docs/components/input-phone",
+            "description": "Phone number input with tel type and mobile-optimized keyboard."
+          },
+          {
             "id": "label",
             "title": "Label",
             "path": "/docs/components/label",

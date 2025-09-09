@@ -79,3 +79,4 @@ export * from './lib/components/rating';
 export * from './lib/components/on-this-page';
 export * from './lib/components/tabs';
 export * from './lib/components/grid-layout';
+export * from './lib/components/input-phone';

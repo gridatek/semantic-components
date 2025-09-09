@@ -191,6 +191,11 @@ export const appRoutes: Route[] = [
                 title: 'Input OTP Page',
               },
               {
+                path: 'components/input-phone',
+                loadComponent: () => import('./docs/components/input-phone/input-phone-page'),
+                title: 'Input Phone Page',
+              },
+              {
                 path: 'components/label',
                 loadComponent: () => import('./docs/components/label/label-page'),
                 title: 'Label Page',
