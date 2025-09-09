@@ -18,11 +18,11 @@ import { cn } from '@semantic-components/utils';
   template: `
     <div class="relative">
       <!-- Track background -->
-      <div class="absolute top-1/2 -translate-y-1/2 w-full h-2 bg-input rounded-full"></div>
+      <div class="absolute w-full h-2 bg-input rounded-full"></div>
 
       <!-- Selected range track -->
       <div
-        class="absolute top-1/2 -translate-y-1/2 h-2 bg-primary rounded-full z-10"
+        class="absolute h-2 bg-primary rounded-full z-10"
         [style.left]="minPercentage() + '%'"
         [style.right]="100 - maxPercentage() + '%'"
       ></div>
