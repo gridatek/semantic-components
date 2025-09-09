@@ -22,6 +22,11 @@ import { ScClockPickerHandKnob } from './clock-picker-hand-knob';
       [attr.aria-valuemax]="valueMax()"
       [attr.aria-valuenow]="valueNow()"
       [attr.aria-valuetext]="valueText()"
+      [dragging]="isDragging()"
+      [value]="valueNow()"
+      [mode]="mode()"
+      [format]="format()"
+      [angle]="angle()"
       (mousedown)="dragStarted.emit($event)"
       (touchstart)="dragStarted.emit($event)"
       sc-clock-picker-hand-knob
@@ -47,6 +52,8 @@ export class ScClockPickerHand {
   readonly valueMax = input<number>(59);
   readonly valueNow = input<number>(0);
   readonly valueText = input<string>('');
+  readonly mode = input<'hours' | 'minutes'>('hours');
+  readonly format = input<'12h' | '24h'>('12h');
   readonly classInput = input<string>('', {
     alias: 'class',
   });

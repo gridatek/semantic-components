@@ -41,9 +41,8 @@ export class ScClockPickerNumber {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute w-8 h-8 flex items-center justify-center text-sm font-medium rounded-full transition-all duration-200 z-[15] bg-transparent text-foreground border-none cursor-pointer select-none hover:bg-accent hover:text-accent-foreground hover:scale-110 hover:shadow-md focus:bg-accent focus:text-accent-foreground focus:scale-105 focus:outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2',
-      this.selected() &&
-        'bg-primary text-primary-foreground scale-[1.15] shadow-lg shadow-primary/30',
+      'absolute w-8 h-8 flex items-center justify-center text-sm font-medium rounded-full transition-all duration-200 z-[10] bg-transparent text-foreground border-none cursor-pointer select-none hover:bg-accent hover:text-accent-foreground hover:scale-110 hover:shadow-md focus:bg-accent focus:text-accent-foreground focus:scale-105 focus:outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2',
+      this.selected() && 'opacity-0 pointer-events-none',
       this.classInput(),
     ),
   );

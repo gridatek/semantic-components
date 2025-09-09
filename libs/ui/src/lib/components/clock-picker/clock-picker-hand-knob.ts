@@ -11,7 +11,14 @@ import { cn } from '@semantic-components/utils';
 @Component({
   selector: 'div[sc-clock-picker-hand-knob]',
   imports: [],
-  template: ``,
+  template: `
+    <span
+      class="text-xs font-medium text-primary-foreground select-none"
+      [style.transform]="'rotate(' + -angle() + 'deg)'"
+    >
+      {{ displayValue() }}
+    </span>
+  `,
   host: {
     '[class]': 'class()',
   },
@@ -21,14 +28,29 @@ import { cn } from '@semantic-components/utils';
 })
 export class ScClockPickerHandKnob {
   readonly dragging = input<boolean>(false);
+  readonly value = input<number>(0);
+  readonly mode = input<'hours' | 'minutes'>('hours');
+  readonly format = input<'12h' | '24h'>('12h');
+  readonly angle = input<number>(0);
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
+  protected readonly displayValue = computed(() => {
+    const val = this.value();
+    if (this.mode() === 'hours') {
+      if (this.format() === '12h') {
+        return val === 0 ? 12 : val > 12 ? val - 12 : val;
+      }
+      return val;
+    }
+    return val.toString().padStart(2, '0');
+  });
+
   protected readonly class = computed(() =>
     cn(
-      'absolute -top-6 left-1/2 w-10 h-10 bg-transparent border-none rounded-full -translate-x-1/2 cursor-grab pointer-events-auto z-[25] transition-all duration-200 ease-out hover:bg-primary/15 hover:scale-110 hover:shadow-md hover:shadow-primary/20',
-      this.dragging() && 'cursor-grabbing bg-primary/25 scale-105 shadow-lg shadow-primary/30',
+      'absolute -top-5 left-1/2 w-10 h-10 bg-primary border-2 border-primary-foreground/20 rounded-full -translate-x-1/2 -translate-y-1/2 cursor-grab pointer-events-auto z-[30] transition-all duration-200 ease-out flex items-center justify-center hover:bg-primary/80 hover:scale-110 hover:shadow-md hover:shadow-primary/20',
+      this.dragging() && 'cursor-grabbing bg-primary/90 scale-105 shadow-lg shadow-primary/30',
       this.classInput(),
     ),
   );

@@ -127,10 +127,12 @@ export interface TimeValue {
         [ariaLabel]="mode() === 'hours' ? 'Drag to select hour' : 'Drag to select minute'"
         [valueMin]="mode() === 'hours' ? (format() === '12h' ? 1 : 0) : 0"
         [valueMax]="mode() === 'hours' ? (format() === '12h' ? 12 : 23) : 59"
-        [valueNow]="mode() === 'hours' ? formattedHours() : value().minutes"
+        [valueNow]="mode() === 'hours' ? value().hours : value().minutes"
         [valueText]="
           mode() === 'hours' ? formattedHours() + ' hours' : value().minutes + ' minutes'
         "
+        [mode]="mode()"
+        [format]="format()"
         (dragStarted)="onDragStart($event)"
         sc-clock-picker-hand
       ></div>
