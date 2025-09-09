@@ -7,6 +7,7 @@ import {
   HostListener,
   OnDestroy,
   ViewEncapsulation,
+  computed,
   contentChildren,
   forwardRef,
   input,
@@ -14,6 +15,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
 import { Subject, takeUntil } from 'rxjs';
 
 import { ScOption } from './option';
@@ -33,55 +35,62 @@ import { ScSelectValue } from './select-value';
     },
   ],
   template: `
-    <div class="relative w-full">
-      <!-- Select Trigger -->
-      <button
-        #trigger
-        [isOpen]="isOpen"
-        [attr.aria-expanded]="isOpen"
-        [attr.aria-haspopup]="true"
-        [attr.aria-controls]="'dropdown-' + componentId"
-        [attr.aria-activedescendant]="activeDescendant"
-        (click)="toggle()"
-        sc-select-trigger
+    <!-- Select Trigger -->
+    <button
+      #trigger
+      [isOpen]="isOpen"
+      [attr.aria-expanded]="isOpen"
+      [attr.aria-haspopup]="true"
+      [attr.aria-controls]="'dropdown-' + componentId"
+      [attr.aria-activedescendant]="activeDescendant"
+      (click)="toggle()"
+      sc-select-trigger
+    >
+      <span [placeholder]="placeholder()" sc-select-value>
+        {{ selectedOption ? selectedOption.getLabel() : placeholder() }}
+      </span>
+      <svg
+        class="h-4 w-4 opacity-50"
+        [class.rotate-180]="isOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
-        <span [placeholder]="placeholder()" sc-select-value>
-          {{ selectedOption ? selectedOption.getLabel() : placeholder() }}
-        </span>
-        <svg
-          class="h-4 w-4 opacity-50"
-          [class.rotate-180]="isOpen"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </button>
+        <path d="m6 9 6 6 6-6" />
+      </svg>
+    </button>
 
-      <!-- Dropdown Panel -->
-      @if (isOpen) {
-        <div
-          [id]="'dropdown-' + componentId"
-          [attr.aria-labelledby]="'trigger-' + componentId"
-          sc-select-dropdown
-        >
-          <div sc-select-content>
-            <ng-content />
-          </div>
+    <!-- Dropdown Panel -->
+    @if (isOpen) {
+      <div
+        [id]="'dropdown-' + componentId"
+        [attr.aria-labelledby]="'trigger-' + componentId"
+        sc-select-dropdown
+      >
+        <div sc-select-content>
+          <ng-content />
         </div>
-      }
-    </div>
+      </div>
+    }
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestroy {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('block relative w-full', this.classInput()));
+
   readonly placeholder = input('Select an option');
   readonly options = contentChildren(ScOption);
   readonly trigger = viewChild.required<ElementRef>('trigger');
