@@ -436,8 +436,18 @@ export class ScClockPicker {
 
   readonly currentAngle = computed(() => {
     const isHours = this.mode() === 'hours';
+    const currentValue = this.value();
+    console.log(
+      'currentAngle - mode:',
+      this.mode(),
+      'hours:',
+      currentValue.hours,
+      'minutes:',
+      currentValue.minutes,
+    );
+
     if (isHours) {
-      const hours = this.format() === '12h' ? this.formattedHours() : this.value().hours;
+      const hours = this.format() === '12h' ? this.formattedHours() : currentValue.hours;
 
       if (this.format() === '12h') {
         // 12-hour format: 30 degrees per hour (360/12 = 30)
@@ -445,15 +455,21 @@ export class ScClockPicker {
         if (hours === 12) {
           displayHour = 0; // 12 o'clock points to top (0°)
         }
-        return displayHour * 30;
+        const angle = displayHour * 30;
+        console.log('12h angle:', angle, 'for hour:', displayHour);
+        return angle;
       } else {
         // 24-hour format: 15 degrees per hour (360/24 = 15)
-        return hours * 15;
+        const angle = currentValue.hours * 15;
+        console.log('24h angle:', angle, 'for hour:', currentValue.hours);
+        return angle;
       }
     } else {
       // For minutes: point to exact minute position
-      const minutes = this.value().minutes;
-      return (minutes * 6) % 360; // 6 degrees per minute (360/60 = 6)
+      const minutes = currentValue.minutes;
+      const angle = (minutes * 6) % 360; // 6 degrees per minute (360/60 = 6)
+      console.log('minutes angle:', angle, 'for minutes:', minutes);
+      return angle;
     }
   });
 
@@ -482,7 +498,8 @@ export class ScClockPicker {
           hours = 0;
         }
       }
-      this.value.set({ ...current, hours });
+      console.log('Setting hour to:', hours, 'and resetting minutes to 0');
+      this.value.set({ ...current, hours, minutes: 0 }); // Reset minutes to 0 when selecting hour
       this.mode.set('minutes');
     } else {
       this.value.set({ ...current, minutes: num });
