@@ -166,6 +166,12 @@ export const appRoutes: Route[] = [
                 title: 'Date Picker Page',
               },
               {
+                path: 'components/dual-range-slider',
+                loadComponent: () =>
+                  import('./docs/components/dual-range-slider/dual-range-slider-page'),
+                title: 'Dual Range Slider Page',
+              },
+              {
                 path: 'components/dialog',
                 loadComponent: () => import('./docs/components/dialog/dialog-page'),
                 title: 'Dialog Page',

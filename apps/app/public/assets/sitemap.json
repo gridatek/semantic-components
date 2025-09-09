@@ -160,6 +160,12 @@
             "description": "A date picker component."
           },
           {
+            "id": "dual-range-slider",
+            "title": "Dual Range Slider",
+            "path": "/docs/components/dual-range-slider",
+            "description": "A dual-thumb slider for selecting value ranges."
+          },
+          {
             "id": "dialog",
             "title": "Dialog",
             "path": "/docs/components/dialog",
