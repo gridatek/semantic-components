@@ -272,7 +272,7 @@ export interface TimeValue {
       transform-origin: 50% 100%;
       transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 15;
-      height: 110px; /* Exact radius to reach the numbers */
+      height: 110px; /* Back to original radius to reach the numbers */
       border-radius: 1px;
       cursor: grab;
       margin-top: -110px;
@@ -297,14 +297,14 @@ export interface TimeValue {
     .sc-clock-picker-hand::after {
       content: '';
       position: absolute;
-      top: -18px; /* Moved up for better alignment */
+      top: -16px; /* Centered at the tip of the hand */
       left: 50%;
       width: 32px; /* Same as time number circles */
       height: 32px; /* Same as time number circles */
       background: rgba(34, 197, 94, 0.8); /* Green for debugging visibility */
       border: none; /* No border to see time numbers through */
       border-radius: 50%;
-      transform: translateX(-53%); /* Moved even more to the left */
+      transform: translateX(-50%); /* Back to center */
       cursor: grab;
       box-shadow:
         0 2px 4px rgba(0, 0, 0, 0.12),
