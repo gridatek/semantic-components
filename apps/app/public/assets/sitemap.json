@@ -322,6 +322,12 @@
             "description": "Displays a form textarea or a component that looks like a textarea."
           },
           {
+            "id": "time-picker",
+            "title": "Time Picker",
+            "path": "/docs/components/time-picker",
+            "description": "A time picker component with 12/24 hour format support and optional seconds."
+          },
+          {
             "id": "toast",
             "title": "Toast",
             "path": "/docs/components/toast",

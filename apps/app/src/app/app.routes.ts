@@ -303,6 +303,11 @@ export const appRoutes: Route[] = [
                 title: 'Textarea Page',
               },
               {
+                path: 'components/time-picker',
+                loadComponent: () => import('./docs/components/time-picker/time-picker-page'),
+                title: 'Time Picker Page',
+              },
+              {
                 path: 'components/toast',
                 loadComponent: () => import('./docs/components/toast/toast-page'),
                 title: 'Toast Page',
