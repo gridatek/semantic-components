@@ -212,12 +212,12 @@ export interface TimeValue {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 6px;
-      height: 6px;
-      background: #3b82f6; /* Material blue primary */
+      width: 8px;
+      height: 8px;
+      background: #dc2626; /* Red for debugging visibility */
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      z-index: 20;
+      z-index: 25; /* Higher than hand to see if aligned */
     }
 
     .sc-clock-picker-number {
@@ -272,10 +272,10 @@ export interface TimeValue {
       transform-origin: 50% 100%;
       transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 15;
-      height: 106px; /* Reaches close to numbers (110px - 4px for circle) */
+      height: 110px; /* Exact radius to reach the numbers */
       border-radius: 1px;
       cursor: grab;
-      margin-top: -106px;
+      margin-top: -110px;
       margin-left: -1px;
     }
 
@@ -297,11 +297,11 @@ export interface TimeValue {
     .sc-clock-picker-hand::after {
       content: '';
       position: absolute;
-      top: -20px; /* Positioned slightly higher */
+      top: -16px; /* Centered at the tip of 110px hand (32px / 2 = 16px) */
       left: 50%;
       width: 32px; /* Same as time number circles */
       height: 32px; /* Same as time number circles */
-      background: rgba(59, 130, 246, 0.6); /* Semi-transparent blue */
+      background: rgba(34, 197, 94, 0.8); /* Green for debugging visibility */
       border: none; /* No border to see time numbers through */
       border-radius: 50%;
       transform: translateX(-50%);
