@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ClockPickerDemoSection } from './clock-picker-demo-section';
+import { ClockPicker12hDemoSection } from './clock-picker-12h-demo-section';
+import { ClockPicker24hDemoSection } from './clock-picker-24h-demo-section';
+import { ClockPickerDisabledDemoSection } from './clock-picker-disabled-demo-section';
 
 @Component({
   selector: 'app-clock-picker-page',
-  imports: [ClockPickerDemoSection],
+  imports: [ClockPicker12hDemoSection, ClockPicker24hDemoSection, ClockPickerDisabledDemoSection],
   template: `
-    <app-clock-picker-demo-section />
-
-    <h2 class="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight my-10">Examples</h2>
-
-    <app-clock-picker-demo-section title="Interactive Clock Picker" level="3" />
+    <app-clock-picker-12h-demo-section />
+    <app-clock-picker-24h-demo-section />
+    <app-clock-picker-disabled-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
