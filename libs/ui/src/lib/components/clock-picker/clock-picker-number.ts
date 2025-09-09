@@ -2,9 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   input,
   output,
 } from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'button[sc-clock-picker-number]',
@@ -12,59 +15,11 @@ import {
   template: `
     <ng-content />
   `,
-  styles: `
-    button[sc-clock-picker-number] {
-      position: absolute;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 50%;
-      transition:
-        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 15;
-      background: transparent;
-      color: var(--foreground);
-      border: none;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    button[sc-clock-picker-number]:hover {
-      background: var(--accent);
-      color: var(--accent-foreground);
-      transform: scale(1.1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    button[sc-clock-picker-number]:focus {
-      background: var(--accent);
-      color: var(--accent-foreground);
-      transform: scale(1.05);
-      outline: none;
-    }
-
-    button[sc-clock-picker-number]:focus-visible {
-      outline: 2px solid var(--ring);
-      outline-offset: 2px;
-    }
-
-    button[sc-clock-picker-number][data-selected='true'] {
-      background: var(--primary);
-      color: var(--primary-foreground);
-      transform: scale(1.15);
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    '[class]': 'class()',
     type: 'button',
     role: 'gridcell',
     tabindex: '-1',
@@ -73,7 +28,6 @@ import {
     '[style.left.px]': 'x()',
     '[style.top.px]': 'y()',
     '(click)': 'clicked.emit(value())',
-    '[class.sc-clock-picker-number]': 'true',
   },
 })
 export class ScClockPickerNumber {
@@ -81,6 +35,18 @@ export class ScClockPickerNumber {
   readonly x = input.required<number>();
   readonly y = input.required<number>();
   readonly selected = input<boolean>(false);
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() =>
+    cn(
+      'absolute w-8 h-8 flex items-center justify-center text-sm font-medium rounded-full transition-all duration-200 z-[15] bg-transparent text-foreground border-none cursor-pointer select-none hover:bg-accent hover:text-accent-foreground hover:scale-110 hover:shadow-md focus:bg-accent focus:text-accent-foreground focus:scale-105 focus:outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2',
+      this.selected() &&
+        'bg-primary text-primary-foreground scale-[1.15] shadow-lg shadow-primary/30',
+      this.classInput(),
+    ),
+  );
 
   readonly clicked = output<number>();
 }

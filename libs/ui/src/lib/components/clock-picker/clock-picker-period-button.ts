@@ -2,9 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   input,
   output,
 } from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'button[sc-clock-picker-period-button]',
@@ -12,55 +15,8 @@ import {
   template: `
     <ng-content />
   `,
-  styles: `
-    button[sc-clock-picker-period-button] {
-      padding: 0.125rem 0.5rem;
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-      border-radius: 0.25rem;
-      transition:
-        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--foreground);
-      cursor: pointer;
-    }
-
-    button[sc-clock-picker-period-button]:hover {
-      background: var(--accent);
-      color: var(--accent-foreground);
-      transform: scale(1.02);
-    }
-
-    button[sc-clock-picker-period-button]:focus {
-      background: var(--accent);
-      color: var(--accent-foreground);
-      outline: none;
-    }
-
-    button[sc-clock-picker-period-button]:focus-visible {
-      outline: 2px solid var(--ring);
-      outline-offset: 2px;
-    }
-
-    button[sc-clock-picker-period-button][data-active='true'] {
-      background: var(--primary);
-      color: var(--primary-foreground);
-      border-color: var(--primary);
-      transform: scale(1.05);
-    }
-
-    button[sc-clock-picker-period-button][data-disabled='true'] {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    '[class]': 'class()',
     type: 'button',
     '[attr.data-active]': 'active() ? "true" : null',
     '[attr.data-disabled]': 'disabled() ? "true" : null',
@@ -68,13 +24,27 @@ import {
     '[attr.tabindex]': 'disabled() ? -1 : 0',
     '(click)': 'handleClick($event)',
     '(keydown)': 'handleKeydown($event)',
-    '[class.sc-clock-picker-period-button]': 'true',
   },
+  styles: ``,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScClockPickerPeriodButton {
   readonly active = input<boolean>(false);
   readonly disabled = input<boolean>(false);
   readonly period = input.required<'AM' | 'PM'>();
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() =>
+    cn(
+      'py-0.5 px-2 text-sm leading-5 rounded border border-border bg-transparent text-foreground cursor-pointer transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:scale-[1.02] focus:bg-accent focus:text-accent-foreground focus:outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2',
+      this.active() && 'bg-primary text-primary-foreground border-primary scale-105',
+      this.disabled() && 'opacity-50 pointer-events-none',
+      this.classInput(),
+    ),
+  );
 
   readonly clicked = output<'AM' | 'PM'>();
   readonly keyPressed = output<{ period: 'AM' | 'PM'; event: KeyboardEvent }>();

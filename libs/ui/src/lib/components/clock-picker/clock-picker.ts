@@ -136,45 +136,26 @@ export interface TimeValue {
       ></div>
     </div>
   `,
-  styles: `
-    .sc-clock-picker {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.5rem;
-      background: var(--background);
-      border: 1px solid var(--border);
-      border-radius: 0.5rem;
-      box-shadow:
-        0 1px 3px 0 rgb(0 0 0 / 0.1),
-        0 1px 2px -1px rgb(0 0 0 / 0.1);
-      color: var(--foreground);
-      min-width: 20rem;
-      gap: 1.5rem;
-    }
-
-    .sc-clock-picker-disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
+    '[class]': 'class()',
     '[attr.data-state]': 'mode()',
     '[attr.data-format]': 'format()',
     '[attr.data-disabled]': 'disabled()',
     role: 'group',
     'aria-label': 'Time picker',
     '[attr.aria-disabled]': 'disabled()',
-    '[class]': 'rootClass()',
   },
 })
 export class ScClockPicker {
   // Inputs
   readonly format = input<'12h' | '24h'>('12h');
   readonly disabled = input<boolean>(false);
-  readonly classInput = input<string>('');
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
 
   // Value model
   readonly value = model<TimeValue>({ hours: 12, minutes: 0, period: 'PM' });
@@ -188,8 +169,12 @@ export class ScClockPicker {
   private previousAngle = 0;
 
   // Computed values
-  readonly rootClass = computed(() =>
-    cn('sc-clock-picker-root', this.disabled() && 'sc-clock-picker-disabled', this.classInput()),
+  protected readonly class = computed(() =>
+    cn(
+      'flex flex-col items-center p-6 bg-background border border-border rounded-lg shadow-sm text-foreground min-w-80 gap-6',
+      this.disabled() && 'opacity-50 pointer-events-none',
+      this.classInput(),
+    ),
   );
 
   readonly formattedHours = computed(() => {

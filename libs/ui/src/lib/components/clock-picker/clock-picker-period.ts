@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 @Component({
   selector: 'div[sc-clock-picker-period]',
@@ -6,18 +14,17 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   template: `
     <ng-content />
   `,
-  styles: `
-    .sc-clock-picker-period {
-      display: flex;
-      flex-direction: column;
-      margin-left: 0.5rem;
-      gap: 0.25rem;
-    }
-  `,
   host: {
-    '[class.sc-clock-picker-period]': 'true',
+    '[class]': 'class()',
   },
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScClockPickerPeriod {}
+export class ScClockPickerPeriod {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('flex flex-col ml-2 gap-1', this.classInput()));
+}

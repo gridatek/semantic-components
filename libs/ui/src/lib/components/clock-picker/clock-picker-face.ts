@@ -4,10 +4,13 @@ import {
   ElementRef,
   ViewEncapsulation,
   afterNextRender,
+  computed,
   inject,
   input,
   output,
 } from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 import { ScClockPickerCenter } from './clock-picker-center';
 
@@ -18,19 +21,9 @@ import { ScClockPickerCenter } from './clock-picker-center';
     <div sc-clock-picker-center></div>
     <ng-content />
   `,
-  styles: `
-    .sc-clock-picker-face {
-      position: relative;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      background: var(--card);
-      margin: 0 auto;
-    }
-  `,
+  styles: ``,
   host: {
-    '[class.sc-clock-picker-face]': 'true',
+    '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.tabindex]': 'tabindex()',
     role: 'grid',
@@ -44,6 +37,16 @@ export class ScClockPickerFace {
 
   readonly ariaLabel = input<string>('');
   readonly tabindex = input<number>(0);
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() =>
+    cn(
+      'relative w-[280px] h-[280px] rounded-full border-2 border-border bg-card mx-auto',
+      this.classInput(),
+    ),
+  );
 
   readonly keyPressed = output<KeyboardEvent>();
   readonly faceClicked = output<{ clientX: number; clientY: number; rect: DOMRect }>();
