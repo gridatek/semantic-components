@@ -22,7 +22,7 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectDropdown {
+export class ScSelectDropdownPanel {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

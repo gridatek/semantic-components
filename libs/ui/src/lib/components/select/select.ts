@@ -23,13 +23,19 @@ import { Subject, takeUntil } from 'rxjs';
 
 import { ScOption } from './option';
 import { ScSelectContent } from './select-content';
-import { ScSelectDropdown } from './select-dropdown';
+import { ScSelectDropdownPanel } from './select-dropdown-panel';
 import { ScSelectTrigger } from './select-trigger';
 import { ScSelectValue } from './select-value';
 
 @Component({
   selector: 'sc-select',
-  imports: [ScSelectTrigger, ScSelectValue, ScSelectDropdown, ScSelectContent, SiChevronDownIcon],
+  imports: [
+    ScSelectTrigger,
+    ScSelectValue,
+    ScSelectDropdownPanel,
+    ScSelectContent,
+    SiChevronDownIcon,
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
