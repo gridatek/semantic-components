@@ -1,68 +1,25 @@
-import { ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
-import { Directionality } from '@angular/cdk/bidi';
-import { hasModifierKey } from '@angular/cdk/keycodes';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { _getEventTarget } from '@angular/cdk/platform';
-import { TemplatePortal } from '@angular/cdk/portal';
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
+  AfterContentInit,
   Component,
   ElementRef,
-  Injector,
-  TemplateRef,
-  ViewContainerRef,
-  ViewEncapsulation,
-  booleanAttribute,
-  computed,
+  HostListener,
+  OnDestroy,
   contentChildren,
-  effect,
   forwardRef,
-  inject,
   input,
-  linkedSignal,
-  model,
-  signal,
-  untracked,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+import { Subject, takeUntil } from 'rxjs';
 
 import { ScOption } from './option';
 
 @Component({
   selector: 'sc-select',
-  imports: [SiChevronDownIcon],
-  template: `
-    <button
-      class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
-      #scSelectTrigger
-      [disabled]="disabled()"
-      [attr.aria-expanded]="isExpanded()"
-      [attr.aria-controls]="panelId"
-      (click)="open()"
-      type="button"
-      role="combobox"
-    >
-      {{ label() }}
-      <svg class="size-4 opacity-50" si-chevron-down-icon></svg>
-    </button>
-
-    <ng-template #panelTemplate>
-      <ul
-        class="relative max-h-96 w-full overflow-auto rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
-        [id]="panelId"
-        role="listbox"
-      >
-        <ng-content />
-      </ul>
-    </ng-template>
-  `,
-  styles: ``,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -70,240 +27,251 @@ import { ScOption } from './option';
       multi: true,
     },
   ],
+  template: `
+    <div class="relative w-full">
+      <!-- Select Trigger -->
+      <div
+        class="flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+        #trigger
+        [class.border-blue-500]="isOpen"
+        [attr.aria-expanded]="isOpen"
+        [attr.aria-haspopup]="true"
+        [attr.aria-controls]="'dropdown-' + componentId"
+        [attr.aria-activedescendant]="activeDescendant"
+        (click)="toggle()"
+        role="combobox"
+        tabindex="0"
+      >
+        <span class="truncate" [class.text-gray-400]="!selectedOption">
+          {{ selectedOption ? selectedOption.getLabel() : placeholder() }}
+        </span>
+        <svg
+          class="w-5 h-5 text-gray-400 transition-transform duration-200"
+          [class.rotate-180]="isOpen"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+
+      <!-- Dropdown Panel -->
+      @if (isOpen) {
+        <div
+          class="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden animate-in slide-in-from-top-2"
+          [id]="'dropdown-' + componentId"
+          [attr.aria-labelledby]="'trigger-' + componentId"
+          role="listbox"
+        >
+          <div class="max-h-60 overflow-y-auto py-1">
+            <ng-content />
+          </div>
+        </div>
+      }
+    </div>
+  `,
+  styles: [
+    `
+      @keyframes animate-in {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-in {
+        animation: animate-in 0.2s ease-out;
+      }
+
+      @keyframes slide-in-from-top-2 {
+        from {
+          transform: translateY(-0.5rem);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .slide-in-from-top-2 {
+        animation: slide-in-from-top-2 0.2s ease-out;
+      }
+    `,
+  ],
 })
-export class ScSelect implements ControlValueAccessor {
-  private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly overlay = inject(Overlay);
-  private readonly directionality = inject(Directionality, { optional: true });
-  private readonly viewContainerRef = inject(ViewContainerRef);
-  private portal: TemplatePortal<unknown> | null = null;
-  readonly scSelectTrigger = viewChild.required<ElementRef<HTMLButtonElement>>('scSelectTrigger');
-
-  protected readonly panelId: string = inject(_IdGenerator).getId('sc-select-panel-');
-  readonly panelTemplate = viewChild.required<TemplateRef<unknown>>('panelTemplate');
-
-  readonly placeholder = input<string>('');
-
-  readonly isOpen = signal<boolean>(false);
-
+export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestroy {
+  readonly placeholder = input('Select an option');
   readonly options = contentChildren(ScOption);
+  readonly trigger = viewChild.required<ElementRef>('trigger');
 
-  private readonly activeDescendant = signal<string | null>(null);
+  isOpen = false;
+  selectedOption: ScOption | null = null;
+  keyManager!: ActiveDescendantKeyManager<ScOption>;
+  activeDescendant: string | null = null;
+  componentId = Math.random().toString(36).substr(2, 9);
 
-  readonly disabledInput = input<boolean, unknown>(false, {
-    alias: 'disabled',
-    transform: booleanAttribute,
-  });
-  readonly disabled = linkedSignal(() => this.disabledInput());
+  private destroy$ = new Subject<void>();
+  private onChange: (value: any) => void = () => {};
+  private onTouched: () => void = () => {};
 
-  constructor() {
-    effect(() => {
-      //TODO scroll into option when the panel is open
-      if (this.isOpen()) {
-        this.syncSelectedState(this.value(), this.options(), this.options()[0]);
+  ngAfterContentInit() {
+    this.keyManager = new ActiveDescendantKeyManager(this.options()).withWrap().withTypeAhead();
+
+    // Set up option click handlers
+    this.options().forEach((option) => {
+      option.element.nativeElement.addEventListener('click', () => {
+        this.selectOption(option);
+      });
+    });
+
+    // Update active descendant for screen readers and scroll to active item
+    this.keyManager.change.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      const activeItem = this.keyManager.activeItem;
+      this.activeDescendant = activeItem ? activeItem.id() : null;
+
+      // Scroll active item into view
+      if (activeItem) {
+        this.scrollToOption(activeItem);
       }
     });
-
-    this.keyManager.change.subscribe(() =>
-      this.activeDescendant.set(this.keyManager.activeItem?.id() ?? null),
-    );
   }
 
-  /**
-   * Scrolls an option into view.
-   * @param option Option to be scrolled into view.
-   * @param position Position to which to align the option relative to the scrollable container.
-   */
-  scrollOptionIntoView(option: ScOption, position: ScrollLogicalPosition) {
-    option.nativeElement.scrollIntoView({ block: position, inline: position });
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  private readonly injector = inject(Injector);
-  private readonly keyManager = new ActiveDescendantKeyManager(this.options, this.injector)
-    .withHomeAndEnd(true)
-    .withPageUpDown(true)
-    .withVerticalOrientation(true);
+  private scrollToOption(option: ScOption) {
+    const optionEl = option.element.nativeElement;
+    const panel = optionEl.parentElement;
 
-  readonly value = model<unknown>(undefined);
+    if (!panel) return;
 
-  writeValue(value: unknown): void {
-    this.value.set(value);
-  }
+    const panelTop = panel.scrollTop;
+    const panelBottom = panelTop + panel.clientHeight;
+    const optionTop = optionEl.offsetTop;
+    const optionBottom = optionTop + optionEl.clientHeight;
 
-  setValue(value: unknown) {
-    this.value.set(value);
-    this.onChange(value);
-    this.changeDetectorRef.markForCheck();
-    this.close();
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChange: (value: unknown) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouched: () => void = () => {};
-
-  registerOnChange(fn: (value: unknown) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled.set(isDisabled);
-  }
-
-  label = computed(() => {
-    if (this.value()) {
-      return this.options()
-        .find((element) => element.value() === this.value())
-        ?.label();
+    if (optionTop < panelTop) {
+      // Option is above visible area
+      panel.scrollTop = optionTop;
+    } else if (optionBottom > panelBottom) {
+      // Option is below visible area
+      panel.scrollTop = optionBottom - panel.clientHeight;
     }
-
-    return this.placeholder();
-  });
-
-  isExpanded = computed(() => {
-    return this.isOpen();
-  });
-
-  private _overlayRef: OverlayRef | null = null;
-
-  private _getOverlayRef(): OverlayRef {
-    if (this._overlayRef) {
-      return this._overlayRef;
-    }
-
-    const positionStrategy = this.overlay
-      .position()
-      .flexibleConnectedTo(this.scSelectTrigger())
-      .withFlexibleDimensions(false)
-      .withPush(false)
-      .withPositions([
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'top',
-          offsetY: 8,
-        },
-        {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'start',
-          overlayY: 'bottom',
-          offsetY: -8,
-        },
-      ]);
-
-    this._overlayRef = this.overlay.create({
-      positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition(),
-      direction: this.directionality || 'ltr',
-      hasBackdrop: false,
-    });
-
-    this._overlayRef.keydownEvents().subscribe((event) => {
-      this._handleKeydown(event);
-    });
-
-    this._overlayRef.outsidePointerEvents().subscribe((event) => {
-      const target = _getEventTarget(event) as HTMLElement;
-      const origin = this.scSelectTrigger().nativeElement;
-
-      if (target && target !== origin && !origin.contains(target)) {
-        this.close();
-      }
-    });
-
-    return this._overlayRef;
   }
 
-  open(): void {
-    if (this.isOpen()) {
+  @HostListener('keydown', ['$event'])
+  onKeydown(event: KeyboardEvent) {
+    if (!this.isOpen && (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown')) {
+      event.preventDefault();
+      this.open();
       return;
     }
 
-    this.isOpen.set(true);
-
-    const overlayRef = this._getOverlayRef();
-
-    overlayRef.updateSize({ width: this.scSelectTrigger().nativeElement.offsetWidth });
-    this.portal ??= new TemplatePortal(this.panelTemplate(), this.viewContainerRef);
-    overlayRef.attach(this.portal);
-  }
-
-  close(): void {
-    if (this.isOpen()) {
-      this.focusOnTrigger();
-      this.isOpen.set(false);
-      this._overlayRef?.detach();
-    }
-  }
-
-  focusOnTrigger() {
-    this.scSelectTrigger().nativeElement.focus();
-  }
-
-  /**
-   * Synchronizes the internal state of the component based on a specific selected date.
-   * @param value Currently selected date.
-   * @param options Options rendered out in the timepicker.
-   * @param fallback Option to set as active if no option is selected.
-   */
-  private syncSelectedState(
-    value: unknown,
-    options: readonly ScOption[],
-    fallback: ScOption | null,
-  ): void {
-    let hasSelected = false;
-
-    for (const option of options) {
-      if (value && option.value() === value) {
-        this.scrollOptionIntoView(option, 'center');
-        untracked(() => this.keyManager.setActiveItem(option));
-        hasSelected = true;
-      }
-    }
-
-    // If no option was selected, we need to reset the key manager since
-    // it might be holding onto an option that no longer exists.
-    if (!hasSelected) {
-      if (fallback) {
-        untracked(() => this.keyManager.setActiveItem(fallback));
-        this.scrollOptionIntoView(fallback, 'center');
-      } else {
-        untracked(() => this.keyManager.setActiveItem(-1));
+    if (this.isOpen) {
+      switch (event.key) {
+        case 'Enter':
+        case ' ':
+          event.preventDefault();
+          if (this.keyManager.activeItem) {
+            this.selectOption(this.keyManager.activeItem);
+          }
+          break;
+        case 'Escape':
+          event.preventDefault();
+          this.close();
+          this.trigger().nativeElement.focus();
+          break;
+        case 'ArrowUp':
+        case 'ArrowDown':
+          event.preventDefault();
+          this.keyManager.onKeydown(event);
+          break;
+        case 'Tab':
+          this.close();
+          break;
+        default:
+          this.keyManager.onKeydown(event);
       }
     }
   }
 
-  /** Handles keyboard events while the overlay is open. */
-  private _handleKeydown(event: KeyboardEvent): void {
-    const key = event.key;
-
-    if (key === 'Tab') {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (!this.trigger().nativeElement.contains(event.target) && this.isOpen) {
       this.close();
-    } else if (key === 'Escape' && !hasModifierKey(event)) {
-      event.preventDefault();
-      this.close();
-    } else if (key === 'Enter') {
-      event.preventDefault();
+    }
+  }
 
-      if (this.keyManager.activeItem) {
-        this.setValue(this.keyManager.activeItem.value() ?? '');
-      } else {
-        this.close();
+  toggle() {
+    this.isOpen ? this.close() : this.open();
+  }
+
+  open() {
+    this.isOpen = true;
+    // Set initial active item
+    if (this.selectedOption) {
+      const index = this.options().indexOf(this.selectedOption);
+      if (index >= 0) {
+        this.keyManager.setActiveItem(index);
+        // Scroll to selected option after a tick to ensure DOM is updated
+        setTimeout(() => this.scrollToOption(this.selectedOption!), 0);
       }
     } else {
-      const previousActive = this.keyManager.activeItem;
-      this.keyManager.onKeydown(event);
-      const currentActive = this.keyManager.activeItem;
-
-      if (currentActive && currentActive !== previousActive) {
-        this.scrollOptionIntoView(currentActive, 'nearest');
-      }
+      this.keyManager.setFirstItemActive();
     }
+  }
+
+  close() {
+    this.isOpen = false;
+    this.keyManager.setActiveItem(-1);
+    this.activeDescendant = null;
+  }
+
+  selectOption(option: ScOption) {
+    if (option.disabled) return;
+
+    // Update selection state
+    this.options().forEach((opt) => opt.selected.set(false));
+    option.selected.set(true);
+    this.selectedOption = option;
+
+    // Emit value
+    this.onChange(option.value());
+    this.onTouched();
+
+    // Close dropdown
+    this.close();
+    this.trigger().nativeElement.focus();
+  }
+
+  // ControlValueAccessor implementation
+  writeValue(value: any): void {
+    const option = this.options()?.find((opt) => opt.value() === value);
+    if (option) {
+      this.selectedOption = option;
+      option.selected.set(true);
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    // Handle disabled state if needed
   }
 }
