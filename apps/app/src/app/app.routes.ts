@@ -295,6 +295,11 @@ export const appRoutes: Route[] = [
                 loadComponent: () => import('./docs/components/tooltip/tooltip-page'),
                 title: 'Tooltip Page',
               },
+              {
+                path: 'components/touch-area',
+                loadComponent: () => import('./docs/components/touch-area/touch-area-page'),
+                title: 'Touch Area Page',
+              },
             ],
           },
         ],

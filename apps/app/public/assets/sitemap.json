@@ -314,6 +314,12 @@
             "title": "Tooltip",
             "path": "/docs/components/tooltip",
             "description": "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it."
+          },
+          {
+            "id": "touch-area",
+            "title": "Touch Area",
+            "path": "/docs/components/touch-area",
+            "description": "Expands small interactive elements to meet minimum touch target requirements on touch devices."
           }
         ]
       }
