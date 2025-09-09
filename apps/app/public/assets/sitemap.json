@@ -256,6 +256,12 @@
             "description": "Visually or semantically separates content."
           },
           {
+            "id": "scrub-area",
+            "title": "Scrub Area",
+            "path": "/docs/components/scrub-area",
+            "description": "Interactive area for changing numeric values by horizontal dragging."
+          },
+          {
             "id": "sheet",
             "title": "Sheet",
             "path": "/docs/components/sheet",

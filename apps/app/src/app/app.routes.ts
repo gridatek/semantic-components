@@ -246,6 +246,11 @@ export const appRoutes: Route[] = [
                 title: 'Separator Page',
               },
               {
+                path: 'components/scrub-area',
+                loadComponent: () => import('./docs/components/scrub-area/scrub-area-page'),
+                title: 'Scrub Area Page',
+              },
+              {
                 path: 'components/sheet',
                 loadComponent: () => import('./docs/components/sheet/sheet-page'),
                 title: 'Sheet Page',
