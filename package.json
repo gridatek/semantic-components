@@ -27,6 +27,7 @@
     "@semantic-icons/lucide-icons": "^0.56.0",
     "@supabase/supabase-js": "^2.57.0",
     "@tailwindcss/postcss": "^4.1.13",
+    "@tanstack/angular-table": "^8.21.3",
     "@tiptap/core": "^3.4.1",
     "@tiptap/extension-blockquote": "^3.4.1",
     "@tiptap/extension-bold": "^3.4.1",
@@ -66,7 +67,6 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@types/algoliasearch": "^3.34.11",
     "@angular-devkit/build-angular": "20.2.2",
     "@angular-devkit/core": "20.2.2",
     "@angular-devkit/schematics": "20.2.2",
@@ -95,6 +95,7 @@
     "@swc/core": "~1.13.5",
     "@swc/helpers": "^0.5.17",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/algoliasearch": "^3.34.11",
     "@types/express": "5.0.3",
     "@types/jest": "^29.5.14",
     "@types/node": "24.2.0",
