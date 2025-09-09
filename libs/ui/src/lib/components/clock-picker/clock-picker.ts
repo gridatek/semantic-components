@@ -289,12 +289,12 @@ export interface TimeValue {
     .sc-clock-picker-hand::after {
       content: '';
       position: absolute;
-      top: -16px; /* Centered on tip (32px / 2 = 16px) */
+      top: -20px; /* Positioned slightly higher */
       left: 50%;
       width: 32px; /* Same as time number circles */
       height: 32px; /* Same as time number circles */
-      background: #3b82f6; /* Material blue primary */
-      border: 2px solid #f8fafc; /* Thinner border for larger circle */
+      background: rgba(59, 130, 246, 0.6); /* Semi-transparent blue */
+      border: none; /* No border to see time numbers through */
       border-radius: 50%;
       transform: translateX(-50%);
       cursor: grab;
@@ -305,7 +305,7 @@ export interface TimeValue {
     }
 
     .sc-clock-picker-hand:hover::after {
-      background: #2563eb;
+      background: rgba(37, 99, 235, 0.7); /* Slightly more opaque on hover */
       box-shadow:
         0 4px 8px rgba(0, 0, 0, 0.16),
         0 8px 16px rgba(0, 0, 0, 0.12);
@@ -313,7 +313,7 @@ export interface TimeValue {
 
     .sc-clock-picker-hand.dragging::after {
       cursor: grabbing;
-      background: #1d4ed8;
+      background: rgba(29, 78, 216, 0.8); /* More opaque when dragging */
       box-shadow:
         0 6px 12px rgba(0, 0, 0, 0.2),
         0 12px 24px rgba(0, 0, 0, 0.15);
