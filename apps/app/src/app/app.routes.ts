@@ -126,6 +126,11 @@ export const appRoutes: Route[] = [
                 title: 'Chart Page',
               },
               {
+                path: 'components/clock-picker',
+                loadComponent: () => import('./docs/components/clock-picker/clock-picker-page'),
+                title: 'Clock Picker Page',
+              },
+              {
                 path: 'components/command',
                 loadComponent: () => import('./docs/components/command/command-page'),
                 title: 'Command Page',

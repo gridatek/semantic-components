@@ -112,6 +112,12 @@
             "description": "Beautiful charts. Built using chart.js."
           },
           {
+            "id": "clock-picker",
+            "title": "Clock Picker",
+            "path": "/docs/components/clock-picker",
+            "description": "An interactive clock interface for time selection with 12h/24h format support."
+          },
+          {
             "id": "checkbox",
             "title": "Checkbox",
             "path": "/docs/components/checkbox",
