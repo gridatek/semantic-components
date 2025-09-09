@@ -430,8 +430,9 @@ export class ScClockPicker {
       return displayHour * 30; // 30 degrees per hour (360/12 = 30)
     } else {
       // For minutes: point to exact minute position
-      // Don't round - show precise minute position
-      return this.value().minutes * 6; // 6 degrees per minute (360/60 = 6)
+      // Handle the wrap-around from 59 to 0 smoothly
+      const minutes = this.value().minutes;
+      return (minutes * 6) % 360; // 6 degrees per minute (360/60 = 6)
     }
   });
 
@@ -654,7 +655,8 @@ export class ScClockPicker {
     // Calculate angle from center to mouse/touch position
     const x = clientX - centerX;
     const y = clientY - centerY;
-    let angle = (Math.atan2(y, x) * 180) / Math.PI + 90;
+    // Calculate angle where 0° is at the top (12 o'clock position)
+    let angle = (Math.atan2(x, -y) * 180) / Math.PI;
     if (angle < 0) angle += 360;
 
     // Update time based on current mode
@@ -706,7 +708,8 @@ export class ScClockPicker {
       const x = e.clientX - centerX;
       const y = e.clientY - centerY;
 
-      let angle = (Math.atan2(y, x) * 180) / Math.PI + 90;
+      // Calculate angle where 0° is at the top (12 o'clock position)
+      let angle = (Math.atan2(x, -y) * 180) / Math.PI;
       if (angle < 0) angle += 360;
 
       if (this.mode() === 'hours') {
