@@ -4,44 +4,49 @@ import {
   ViewEncapsulation,
   computed,
   input,
-  numberAttribute,
-  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-circular-progress',
+  selector: 'div[sc-circular-progress]',
   imports: [],
   template: `
-    <svg class="relative -rotate-90" [attr.height]="radius() * 2" [attr.width]="radius() * 2">
-      <!-- Background Circle -->
+    <svg
+      class="transform -rotate-90"
+      [attr.width]="size()"
+      [attr.height]="size()"
+      [attr.viewBox]="'0 0 ' + size() + ' ' + size()"
+    >
+      <!-- Background circle -->
       <circle
-        class="fill-transparent text-gray-200"
-        [attr.stroke-width]="stroke()"
-        [attr.r]="normalizedRadius()"
-        [attr.cx]="radius()"
-        [attr.cy]="radius()"
-        stroke="currentColor"
-      ></circle>
+        class="fill-none stroke-muted"
+        [attr.cx]="center()"
+        [attr.cy]="center()"
+        [attr.r]="radius()"
+        [attr.stroke-width]="strokeWidth()"
+      />
 
-      <!-- Progress Circle -->
+      <!-- Progress circle -->
       <circle
-        class="fill-transparent text-primary transition-all duration-300"
-        [attr.stroke-width]="stroke()"
-        [attr.r]="normalizedRadius()"
-        [attr.cx]="radius()"
-        [attr.cy]="radius()"
+        class="fill-none stroke-primary transition-all duration-300 ease-in-out"
+        [attr.cx]="center()"
+        [attr.cy]="center()"
+        [attr.r]="radius()"
+        [attr.stroke-width]="strokeWidth()"
         [attr.stroke-dasharray]="circumference()"
-        [attr.stroke-dashoffset]="strokeDashoffset()"
-        stroke="currentColor"
-        stroke-linecap="round"
-      ></circle>
+        [attr.stroke-dashoffset]="strokeDashOffset()"
+        [attr.stroke-linecap]="strokeLinecap()"
+      />
     </svg>
 
-    <!-- Progress Text -->
-    <div class="absolute flex items-center justify-center text-xl font-semibold text-primary">
-      {{ value() }}%
+    <!-- Center content -->
+    <div class="absolute inset-0 flex items-center justify-center">
+      <ng-content>
+        @if (showValue()) {
+          <span class="text-sm font-medium text-foreground">{{ value() }}%</span>
+        }
+      </ng-content>
     </div>
   `,
   host: {
@@ -56,27 +61,30 @@ export class ScCircularProgress {
     alias: 'class',
   });
 
+  readonly value = input<number>(0);
+  readonly max = input<number>(100);
+  readonly size = input<number>(64);
+  readonly strokeWidth = input<number>(4);
+  readonly strokeLinecap = input<'round' | 'butt' | 'square'>('round');
+  readonly showValue = input<boolean>(false);
+
   protected readonly class = computed(() =>
-    cn('flex justify-center items-center relative h-[100px] w-[100px]', this.classInput()),
+    cn('relative inline-flex items-center justify-center', this.classInput()),
   );
 
-  // Progress percentage
-  readonly value = input<number, unknown>(0, {
-    transform: numberAttribute,
+  protected readonly center = computed(() => this.size() / 2);
+
+  protected readonly radius = computed(() => {
+    return (this.size() - this.strokeWidth()) / 2;
   });
 
-  protected readonly radius = signal(50); // Radius of the circle
-  protected readonly stroke = signal(8); // Thickness of the stroke
+  protected readonly circumference = computed(() => {
+    return 2 * Math.PI * this.radius();
+  });
 
-  // Adjusted radius for the stroke width
-  protected readonly normalizedRadius = computed(() => this.radius() - this.stroke() * 0.5);
-
-  // Circle circumference
-  protected readonly circumference = computed(() => this.normalizedRadius() * 2 * Math.PI);
-
-  // Dash offset for progress
-  // Calculate stroke-dashoffset based on progress
-  protected readonly strokeDashoffset = computed(() => {
-    return this.circumference() - (this.value() / 100) * this.circumference();
+  protected readonly strokeDashOffset = computed(() => {
+    const progress = Math.min(Math.max(this.value(), 0), this.max());
+    const percentage = (progress / this.max()) * 100;
+    return this.circumference() - (percentage / 100) * this.circumference();
   });
 }

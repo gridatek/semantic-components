@@ -151,6 +151,12 @@ export const appRoutes: Route[] = [
                 title: 'Checkbox Group Page',
               },
               {
+                path: 'components/circular-progress',
+                loadComponent: () =>
+                  import('./docs/components/circular-progress/circular-progress-page'),
+                title: 'Circular Progress Page',
+              },
+              {
                 path: 'components/collapsible',
                 loadComponent: () => import('./docs/components/collapsible/collapsible-page'),
                 title: 'Collapsible Page',

@@ -124,6 +124,12 @@
             "description": "Provides shared state to a series of checkboxes."
           },
           {
+            "id": "circular-progress",
+            "title": "Circular Progress",
+            "path": "/docs/components/circular-progress",
+            "description": "A circular progress indicator with customizable size, stroke, and content."
+          },
+          {
             "id": "clock-picker",
             "title": "Clock Picker",
             "path": "/docs/components/clock-picker",
