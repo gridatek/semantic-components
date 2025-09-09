@@ -67,6 +67,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@types/algoliasearch": "^4.0.4",
     "@angular-devkit/build-angular": "20.2.2",
     "@angular-devkit/core": "20.2.2",
     "@angular-devkit/schematics": "20.2.2",
@@ -95,7 +96,6 @@
     "@swc/core": "~1.13.5",
     "@swc/helpers": "^0.5.17",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@types/algoliasearch": "^3.34.11",
     "@types/express": "5.0.3",
     "@types/jest": "^29.5.14",
     "@types/node": "24.2.0",
