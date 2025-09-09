@@ -282,7 +282,6 @@ export interface TimeValue {
     .sc-clock-picker-hand:hover {
       background: #2563eb; /* Darker blue on hover */
       width: 2px;
-      margin-left: -1px; /* Adjust for 2px width */
     }
 
     .sc-clock-picker-hand.dragging {
@@ -290,7 +289,6 @@ export interface TimeValue {
       transition: none;
       background: #2563eb;
       width: 2px;
-      margin-left: -1px; /* Adjust for 2px width */
     }
 
     /* Material Design Selection Circle at tip */
@@ -486,6 +484,8 @@ export class ScClockPicker {
   }
 
   selectNumber(num: number) {
+    console.log('selectNumber called with:', num);
+
     if (this.disabled()) return;
 
     const current = this.value();
