@@ -1,4 +1,4 @@
-import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -10,7 +10,9 @@ import {
   computed,
   contentChildren,
   forwardRef,
+  inject,
   input,
+  signal,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -41,7 +43,7 @@ import { ScSelectValue } from './select-value';
       [isOpen]="isOpen"
       [attr.aria-expanded]="isOpen"
       [attr.aria-haspopup]="true"
-      [attr.aria-controls]="'dropdown-' + componentId"
+      [attr.aria-controls]="'dropdown-' + id()"
       [attr.aria-activedescendant]="activeDescendant"
       (click)="toggle()"
       sc-select-trigger
@@ -66,11 +68,7 @@ import { ScSelectValue } from './select-value';
 
     <!-- Dropdown Panel -->
     @if (isOpen) {
-      <div
-        [id]="'dropdown-' + componentId"
-        [attr.aria-labelledby]="'trigger-' + componentId"
-        sc-select-dropdown
-      >
+      <div [id]="'dropdown-' + id()" [attr.aria-labelledby]="'trigger-' + id()" sc-select-dropdown>
         <div sc-select-content>
           <ng-content />
         </div>
@@ -99,7 +97,8 @@ export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestr
   selectedOption: ScOption | null = null;
   keyManager!: ActiveDescendantKeyManager<ScOption>;
   activeDescendant: string | null = null;
-  componentId = Math.random().toString(36).substr(2, 9);
+
+  readonly id = signal<string>(inject(_IdGenerator).getId('sc-select-'));
 
   private destroy$ = new Subject<void>();
   private onChange: (value: any) => void = () => {};
