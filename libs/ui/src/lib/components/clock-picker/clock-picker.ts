@@ -209,7 +209,15 @@ export interface TimeValue {
     }
 
     .sc-clock-picker-center {
-      display: none; /* Hide center dot - only show the draggable circle at hand tip */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: #3b82f6; /* Material blue primary */
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
     }
 
     .sc-clock-picker-number {
