@@ -1,10 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
+  effect,
   input,
   model,
+  viewChildren,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -27,6 +30,7 @@ import { cn } from '@semantic-components/utils';
       <!-- Min value slider -->
       <input
         class="absolute w-full h-2 z-20 appearance-none bg-transparent cursor-pointer [&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-track]:h-2 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none"
+        #minSlider
         [value]="minValue()"
         [min]="min()"
         [max]="max()"
@@ -38,6 +42,7 @@ import { cn } from '@semantic-components/utils';
       <!-- Max value slider -->
       <input
         class="absolute w-full h-2 z-20 appearance-none bg-transparent cursor-pointer [&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-track]:h-2 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none"
+        #maxSlider
         [value]="maxValue()"
         [min]="min()"
         [max]="max()"
@@ -68,6 +73,26 @@ export class ScDualRangeSlider {
   readonly minValue = model<number>(20);
   readonly maxValue = model<number>(80);
 
+  readonly minSlider = viewChildren<ElementRef<HTMLInputElement>>('minSlider');
+  readonly maxSlider = viewChildren<ElementRef<HTMLInputElement>>('maxSlider');
+
+  constructor() {
+    // Sync input values when model changes
+    effect(() => {
+      const minEl = this.minSlider()[0]?.nativeElement;
+      if (minEl && Number(minEl.value) !== this.minValue()) {
+        minEl.value = this.minValue().toString();
+      }
+    });
+
+    effect(() => {
+      const maxEl = this.maxSlider()[0]?.nativeElement;
+      if (maxEl && Number(maxEl.value) !== this.maxValue()) {
+        maxEl.value = this.maxValue().toString();
+      }
+    });
+  }
+
   protected readonly minPercentage = computed(() => {
     const range = this.max() - this.min();
     return range > 0 ? ((this.minValue() - this.min()) * 100) / range : 0;
@@ -79,22 +104,26 @@ export class ScDualRangeSlider {
   });
 
   protected onMinChange(event: Event): void {
-    const value = Number((event.target as HTMLInputElement).value);
+    const target = event.target as HTMLInputElement;
+    const value = Number(target.value);
+
     if (value <= this.maxValue()) {
       this.minValue.set(value);
     } else {
-      // Reset to current value if trying to exceed max
-      (event.target as HTMLInputElement).value = this.minValue().toString();
+      // Prevent crossing over max value
+      this.minValue.set(this.maxValue());
     }
   }
 
   protected onMaxChange(event: Event): void {
-    const value = Number((event.target as HTMLInputElement).value);
+    const target = event.target as HTMLInputElement;
+    const value = Number(target.value);
+
     if (value >= this.minValue()) {
       this.maxValue.set(value);
     } else {
-      // Reset to current value if trying to go below min
-      (event.target as HTMLInputElement).value = this.maxValue().toString();
+      // Prevent going below min value
+      this.maxValue.set(this.minValue());
     }
   }
 }
