@@ -101,7 +101,7 @@
     "@typescript-eslint/utils": "^8.42.0",
     "angular-eslint": "^20.1.1",
     "autoprefixer": "^10.4.21",
-    "eslint": "^9.34.0",
+    "eslint": "^9.35.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-playwright": "^2.2.2",
     "husky": "^9.1.7",
