@@ -39,6 +39,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `npx nx release` - Create a release for libraries (independent versioning)
 
+### Local Development
+
+- `npx nx local-registry` - Start local package registry for testing
+
 ## Project Architecture
 
 ### Monorepo Structure
@@ -66,17 +70,27 @@ This is an **Nx monorepo** with the following structure:
   - **`supabase/`** - Supabase integration utilities
   - **`utils/`** - Shared utility functions
 
+- **`docs/`** - Development documentation and utility guides
+- **`.verdaccio/`** - Local package registry configuration
+
 ### Technology Stack
 
 - **Framework**: Angular 20.x with Angular CDK
 - **Build System**: Nx 21.x
-- **Styling**: Tailwind CSS v4.x
+- **Styling**: Tailwind CSS v4.x with class variance utilities
 - **Testing**: Jest + Playwright
 - **Package Manager**: npm
-- **Linting**: ESLint + Prettier
+- **Linting**: ESLint + Prettier (with import sorting and attribute organization)
 - **Rich Text Editor**: TipTap 3.x
 - **Icons**: Lucide Icons (@semantic-icons/lucide-icons)
 - **Database**: Supabase integration
+- **Search**: Algolia search integration
+- **Animation**: Motion animation library
+- **Syntax Highlighting**: Shiki
+- **Charts**: Chart.js
+- **Carousel**: Embla Carousel
+- **Fonts**: Inter and JetBrains Mono via @fontsource
+- **Local Registry**: Verdaccio for package testing
 
 ### Key Architectural Patterns
 
