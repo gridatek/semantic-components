@@ -131,6 +131,11 @@ export const appRoutes: Route[] = [
                 title: 'Clock Picker Page',
               },
               {
+                path: 'components/color-picker',
+                loadComponent: () => import('./docs/components/color-picker/color-picker-page'),
+                title: 'Color Picker Page',
+              },
+              {
                 path: 'components/command',
                 loadComponent: () => import('./docs/components/command/command-page'),
                 title: 'Command Page',

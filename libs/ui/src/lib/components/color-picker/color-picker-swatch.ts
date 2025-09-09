@@ -9,20 +9,27 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-file-upload',
+  selector: 'div[sc-color-picker-swatch]',
   imports: [],
-  template: ``,
+  template: `
+    <ng-content />
+  `,
   host: {
     '[class]': 'class()',
+    '[style.backgroundColor]': 'color()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScFileUpload {
+export class ScColorPickerSwatch {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  readonly color = input<string>('#000000');
+
+  protected readonly class = computed(() =>
+    cn('border border-border rounded-md shadow-sm', this.classInput()),
+  );
 }

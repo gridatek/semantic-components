@@ -130,6 +130,12 @@
             "description": "An interactive clock interface for time selection with 12h/24h format support."
           },
           {
+            "id": "color-picker",
+            "title": "Color Picker",
+            "path": "/docs/components/color-picker",
+            "description": "Interactive color picker with hue, saturation, and lightness controls."
+          },
+          {
             "id": "collapsible",
             "title": "Collapsible",
             "path": "/docs/components/collapsible",

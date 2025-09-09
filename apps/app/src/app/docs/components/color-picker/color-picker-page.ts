@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { ColorPickerDemoSection } from './color-picker-demo-section';
+
 @Component({
-  selector: 'sc-event-calendar',
-  imports: [],
+  selector: 'app-color-picker-page',
+  imports: [ColorPickerDemoSection],
   template: `
-    <p>event-calendar works!</p>
+    <app-color-picker-demo-section />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScEventCalendar {}
+export default class ColorPickerPage {}
