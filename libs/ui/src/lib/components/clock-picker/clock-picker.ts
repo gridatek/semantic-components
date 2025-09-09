@@ -304,7 +304,7 @@ export interface TimeValue {
       background: rgba(34, 197, 94, 0.8); /* Green for debugging visibility */
       border: none; /* No border to see time numbers through */
       border-radius: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-53%); /* Moved even more to the left */
       cursor: grab;
       box-shadow:
         0 2px 4px rgba(0, 0, 0, 0.12),
