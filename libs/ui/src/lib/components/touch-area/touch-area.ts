@@ -28,7 +28,7 @@ export class ScTouchArea {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute top-1/2 left-1/2 -translate-1/2 pointer-fine:hidden size-[max(100%, 44px)]',
+      'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-fine:hidden min-w-[44px] min-h-[44px] w-full h-full',
       this.classInput(),
     ),
   );
