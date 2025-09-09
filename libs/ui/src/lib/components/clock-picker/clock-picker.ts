@@ -504,7 +504,8 @@ export class ScClockPicker {
       console.log('New value being set:', newValue);
       this.value.set(newValue); // Reset minutes to 0 when selecting hour
       console.log('Value after set:', this.value());
-      // this.mode.set('minutes'); // Temporarily disabled to debug
+      // Delay mode switch to prevent click interference
+      setTimeout(() => this.mode.set('minutes'), 100);
     } else {
       this.value.set({ ...current, minutes: num });
     }
