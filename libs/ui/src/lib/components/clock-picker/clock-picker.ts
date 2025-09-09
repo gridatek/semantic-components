@@ -477,21 +477,27 @@ export class ScClockPicker {
     } else {
       // For minutes: point to exact minute position
       const minutes = currentValue.minutes;
-      rawAngle = (minutes * 6) % 360; // 6 degrees per minute (360/60 = 6)
+      rawAngle = minutes * 6; // 6 degrees per minute (360/60 = 6)
       console.log('minutes angle:', rawAngle, 'for minutes:', minutes);
     }
 
-    // Calculate the shortest path for smooth transitions
+    // Calculate the shortest path for smooth transitions ONLY when not dragging
     if (!this.isDragging()) {
-      const angleDiff = rawAngle - this.previousAngle;
+      // Normalize both angles to 0-360 range for proper comparison
+      const normalizedRaw = ((rawAngle % 360) + 360) % 360;
+      const normalizedPrev = ((this.previousAngle % 360) + 360) % 360;
+      const angleDiff = normalizedRaw - normalizedPrev;
 
       // If the difference is more than 180 degrees, go the other way
       if (angleDiff > 180) {
-        rawAngle -= 360;
+        rawAngle = this.previousAngle - (360 - angleDiff);
       } else if (angleDiff < -180) {
-        rawAngle += 360;
+        rawAngle = this.previousAngle + (360 + angleDiff);
       }
 
+      this.previousAngle = rawAngle;
+    } else {
+      // During dragging, just use the raw angle and update previous
       this.previousAngle = rawAngle;
     }
 
@@ -525,16 +531,24 @@ export class ScClockPicker {
           hours = 0;
         }
       }
-      console.log('Setting hour to:', hours, 'and resetting minutes to 0');
-      console.log('Current value before:', current);
-      const newValue = { ...current, hours, minutes: 0 };
-      console.log('New value being set:', newValue);
-      this.value.set(newValue); // Reset minutes to 0 when selecting hour
-      console.log('Value after set:', this.value());
-      // Always auto-switch to minutes after hour selection
-      setTimeout(() => this.mode.set('minutes'), 500); // Increased delay to let hand animation finish
+      // Only update if hour is different
+      if (current.hours !== hours) {
+        console.log('Setting hour to:', hours, 'and resetting minutes to 0');
+        const newValue = { ...current, hours, minutes: 0 };
+        this.value.set(newValue);
+        // Only auto-switch to minutes for clicks, not for drags
+        if (!this.isDragging()) {
+          setTimeout(() => this.mode.set('minutes'), 500);
+        }
+      }
     } else {
-      this.value.set({ ...current, minutes: num });
+      // Handle minute selection - ensure it's in valid range
+      const minutes = num >= 60 ? 0 : Math.max(0, Math.min(59, num));
+      // Only update if minutes are different
+      if (current.minutes !== minutes) {
+        console.log('Setting minutes from', num, 'to', minutes);
+        this.value.set({ ...current, minutes });
+      }
     }
   }
 
@@ -759,12 +773,41 @@ export class ScClockPicker {
           hours = 0;
         }
       }
-      this.value.set({ ...current, hours });
+
+      // Only update if hour is different
+      if (current.hours !== hours) {
+        // Reset minutes to 0 when selecting a new hour (like clicking)
+        this.value.set({ ...current, hours, minutes: 0 });
+      }
     } else {
-      // For minutes, snap to 5-minute intervals
-      const minuteAngle = Math.round(angle / 30) * 30; // Snap to 30-degree increments (5-minute intervals)
-      const selectedMinute = ((minuteAngle / 30) * 5) % 60;
-      this.value.set({ ...current, minutes: selectedMinute });
+      // For minutes: normalize angle to 0-360 range first
+      const normalizedAngle = ((angle % 360) + 360) % 360;
+
+      // Snap to 5-minute intervals (30-degree increments)
+      const minuteAngle = Math.round(normalizedAngle / 30) * 30;
+      let selectedMinute = (minuteAngle / 30) * 5;
+
+      // Handle the 360° case (should be 0 minutes, not 60)
+      if (selectedMinute >= 60) {
+        selectedMinute = 0;
+      }
+
+      // Ensure minute is in 0-59 range
+      selectedMinute = Math.max(0, Math.min(59, selectedMinute));
+
+      console.log(
+        'Drag update - angle:',
+        angle,
+        'normalized:',
+        normalizedAngle,
+        'selectedMinute:',
+        selectedMinute,
+      );
+
+      // Only update if minutes are different
+      if (current.minutes !== selectedMinute) {
+        this.value.set({ ...current, minutes: selectedMinute });
+      }
     }
   }
 
@@ -778,9 +821,9 @@ export class ScClockPicker {
     document.removeEventListener('touchmove', handleMove);
     document.removeEventListener('touchend', handleEnd);
 
-    // After dragging hours, automatically switch to minutes mode
+    // After dragging hours, immediately switch to minutes mode
     if (this.mode() === 'hours' && this.hasDragged) {
-      setTimeout(() => this.mode.set('minutes'), 500); // Increased delay to let hand animation finish
+      this.mode.set('minutes');
     }
   }
 
