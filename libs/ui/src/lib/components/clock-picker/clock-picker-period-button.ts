@@ -68,6 +68,7 @@ import {
     '[attr.tabindex]': 'disabled() ? -1 : 0',
     '(click)': 'handleClick($event)',
     '(keydown)': 'handleKeydown($event)',
+    '[class.sc-clock-picker-period-button]': 'true',
   },
 })
 export class ScClockPickerPeriodButton {

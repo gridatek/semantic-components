@@ -2,11 +2,8 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
-  afterNextRender,
   computed,
-  inject,
   input,
   model,
   signal,
@@ -14,7 +11,15 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { ScClockPickerDisplay } from './clock-picker-display';
+import { ScClockPickerFace } from './clock-picker-face';
+import { ScClockPickerHand } from './clock-picker-hand';
+import { ScClockPickerNumber } from './clock-picker-number';
+import { ScClockPickerPeriod } from './clock-picker-period';
 import { ScClockPickerPeriodButton } from './clock-picker-period-button';
+import { ScClockPickerSeparator } from './clock-picker-separator';
+import { ScClockPickerTime } from './clock-picker-time';
+import { ScClockPickerTimePart } from './clock-picker-time-part';
 
 export interface TimeValue {
   hours: number;
@@ -24,122 +29,111 @@ export interface TimeValue {
 
 @Component({
   selector: 'div[sc-clock-picker]',
-  imports: [CommonModule, ScClockPickerPeriodButton],
+  imports: [
+    CommonModule,
+    ScClockPickerPeriodButton,
+    ScClockPickerDisplay,
+    ScClockPickerTime,
+    ScClockPickerTimePart,
+    ScClockPickerSeparator,
+    ScClockPickerPeriod,
+    ScClockPickerFace,
+    ScClockPickerNumber,
+    ScClockPickerHand,
+  ],
   template: `
-    <div class="sc-clock-picker" [class]="rootClass()">
-      <!-- Time Display -->
-      <div class="sc-clock-picker-display">
-        <div class="sc-clock-picker-time">
-          <button
-            class="sc-clock-picker-time-part"
-            [class.active]="mode() === 'hours'"
-            [attr.aria-label]="'Select hours, currently ' + formattedHours()"
-            [attr.aria-selected]="mode() === 'hours'"
-            (click)="setMode('hours')"
-            (keydown)="handleTimePartKeydown($event, 'hours')"
-            type="button"
-            role="tab"
-            tabindex="0"
-          >
-            {{ formattedHours() }}
-          </button>
-          <span class="sc-clock-picker-separator" aria-hidden="true">:</span>
-          <button
-            class="sc-clock-picker-time-part"
-            [class.active]="mode() === 'minutes'"
-            [attr.aria-label]="'Select minutes, currently ' + formattedMinutes()"
-            [attr.aria-selected]="mode() === 'minutes'"
-            (click)="setMode('minutes')"
-            (keydown)="handleTimePartKeydown($event, 'minutes')"
-            type="button"
-            role="tab"
-            tabindex="0"
-          >
-            {{ formattedMinutes() }}
-          </button>
-          @if (format() === '12h') {
-            <div class="sc-clock-picker-period">
-              <button
-                [active]="value().period === 'AM'"
-                [disabled]="disabled()"
-                [period]="'AM'"
-                [attr.aria-label]="'AM'"
-                (clicked)="togglePeriod($event)"
-                (keyPressed)="handlePeriodKeydown($event.event, $event.period)"
-                sc-clock-picker-period-button
-              >
-                AM
-              </button>
-              <button
-                [active]="value().period === 'PM'"
-                [disabled]="disabled()"
-                [period]="'PM'"
-                [attr.aria-label]="'PM'"
-                (clicked)="togglePeriod($event)"
-                (keyPressed)="handlePeriodKeydown($event.event, $event.period)"
-                sc-clock-picker-period-button
-              >
-                PM
-              </button>
-            </div>
-          }
-        </div>
-      </div>
-
-      <!-- Clock Face -->
-      <div
-        class="sc-clock-picker-face"
-        #clockFace
-        [attr.aria-label]="mode() === 'hours' ? 'Select hour' : 'Select minute'"
-        (keydown)="handleClockFaceKeydown($event)"
-        role="grid"
-        tabindex="0"
-      >
-        <div class="sc-clock-picker-center" aria-hidden="true"></div>
-
-        <!-- Hour/Minute Numbers -->
-        @for (number of currentNumbers(); track number.value) {
-          <button
-            class="sc-clock-picker-number"
-            [class.selected]="number.selected"
-            [style.left.px]="number.x"
-            [style.top.px]="number.y"
-            [attr.aria-label]="
-              mode() === 'hours' ? 'Hour ' + number.display : 'Minute ' + number.display
-            "
-            [attr.aria-selected]="number.selected"
-            [tabindex]="-1"
-            (click)="selectNumber(number.value)"
-            type="button"
-            role="gridcell"
-          >
-            {{ number.display }}
-          </button>
-        }
-
-        <!-- Clock Hand -->
-        <div
-          class="sc-clock-picker-hand"
-          [class.dragging]="isDragging()"
-          [style.transform]="'rotate(' + currentAngle() + 'deg)'"
+    <!-- Time Display -->
+    <div sc-clock-picker-display>
+      <div sc-clock-picker-time>
+        <button
+          [active]="mode() === 'hours'"
+          [value]="formattedHours()"
+          [ariaLabel]="'Select hours, currently ' + formattedHours()"
+          [ariaSelected]="mode() === 'hours'"
+          (clicked)="setMode('hours')"
+          (keyPressed)="handleTimePartKeydown($event, 'hours')"
+          sc-clock-picker-time-part
         >
-          <div
-            class="sc-clock-picker-hand-knob"
-            [class.dragging]="isDragging()"
-            [attr.aria-label]="mode() === 'hours' ? 'Drag to select hour' : 'Drag to select minute'"
-            [attr.aria-valuemin]="mode() === 'hours' ? (format() === '12h' ? 1 : 0) : 0"
-            [attr.aria-valuemax]="mode() === 'hours' ? (format() === '12h' ? 12 : 23) : 59"
-            [attr.aria-valuenow]="mode() === 'hours' ? formattedHours() : value().minutes"
-            [attr.aria-valuetext]="
-              mode() === 'hours' ? formattedHours() + ' hours' : value().minutes + ' minutes'
-            "
-            (mousedown)="startDragging($event)"
-            (touchstart)="startDragging($event)"
-            role="slider"
-            tabindex="0"
-          ></div>
-        </div>
+          {{ formattedHours() }}
+        </button>
+
+        <span sc-clock-picker-separator>:</span>
+
+        <button
+          [active]="mode() === 'minutes'"
+          [value]="formattedMinutes()"
+          [ariaLabel]="'Select minutes, currently ' + formattedMinutes()"
+          [ariaSelected]="mode() === 'minutes'"
+          (clicked)="setMode('minutes')"
+          (keyPressed)="handleTimePartKeydown($event, 'minutes')"
+          sc-clock-picker-time-part
+        >
+          {{ formattedMinutes() }}
+        </button>
+
+        @if (format() === '12h') {
+          <div sc-clock-picker-period>
+            <button
+              [active]="value().period === 'AM'"
+              [disabled]="disabled()"
+              [period]="'AM'"
+              [ariaLabel]="'AM'"
+              (clicked)="togglePeriod($event)"
+              (keyPressed)="handlePeriodKeydown($event.event, $event.period)"
+              sc-clock-picker-period-button
+            >
+              AM
+            </button>
+            <button
+              [active]="value().period === 'PM'"
+              [disabled]="disabled()"
+              [period]="'PM'"
+              [ariaLabel]="'PM'"
+              (clicked)="togglePeriod($event)"
+              (keyPressed)="handlePeriodKeydown($event.event, $event.period)"
+              sc-clock-picker-period-button
+            >
+              PM
+            </button>
+          </div>
+        }
       </div>
+    </div>
+
+    <!-- Clock Face -->
+    <div
+      [ariaLabel]="mode() === 'hours' ? 'Select hour' : 'Select minute'"
+      [tabindex]="0"
+      (keyPressed)="handleClockFaceKeydown($event)"
+      (faceClicked)="handleFaceClick($event)"
+      sc-clock-picker-face
+    >
+      @for (number of currentNumbers(); track number.value) {
+        <button
+          [value]="number.value"
+          [x]="number.x"
+          [y]="number.y"
+          [selected]="number.selected"
+          (clicked)="selectNumber($event)"
+          sc-clock-picker-number
+        >
+          {{ number.display }}
+        </button>
+      }
+
+      <div
+        [angle]="currentAngle()"
+        [isDragging]="isDragging()"
+        [ariaLabel]="mode() === 'hours' ? 'Drag to select hour' : 'Drag to select minute'"
+        [valueMin]="mode() === 'hours' ? (format() === '12h' ? 1 : 0) : 0"
+        [valueMax]="mode() === 'hours' ? (format() === '12h' ? 12 : 23) : 59"
+        [valueNow]="mode() === 'hours' ? formattedHours() : value().minutes"
+        [valueText]="
+          mode() === 'hours' ? formattedHours() + ' hours' : value().minutes + ' minutes'
+        "
+        (dragStarted)="onDragStart($event)"
+        sc-clock-picker-hand
+      ></div>
     </div>
   `,
   styles: `
@@ -159,190 +153,6 @@ export interface TimeValue {
       gap: 1.5rem;
     }
 
-    .sc-clock-picker-display {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .sc-clock-picker-time {
-      display: flex;
-      align-items: center;
-      font-size: 2.25rem;
-      line-height: 2.5rem;
-      font-family:
-        ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
-      gap: 0.5rem;
-    }
-
-    .sc-clock-picker-time-part {
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      transition:
-        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 2px solid transparent;
-      background: transparent;
-      color: inherit;
-      cursor: pointer;
-    }
-
-    .sc-clock-picker-time-part:hover {
-      background: var(--accent);
-      transform: scale(1.02);
-    }
-
-    .sc-clock-picker-time-part:focus {
-      background: var(--accent);
-      outline: none;
-    }
-
-    .sc-clock-picker-time-part.active {
-      border-color: var(--primary);
-      background: color-mix(in srgb, var(--primary) 10%, transparent);
-    }
-
-    .sc-clock-picker-separator {
-      color: var(--muted-foreground);
-    }
-
-    .sc-clock-picker-period {
-      display: flex;
-      flex-direction: column;
-      margin-left: 0.5rem;
-      gap: 0.25rem;
-    }
-
-    .sc-clock-picker-face {
-      position: relative;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      background: var(--card);
-      margin: 0 auto;
-    }
-
-    .sc-clock-picker-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 8px;
-      height: 8px;
-      background: var(--primary);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 25;
-    }
-
-    .sc-clock-picker-number {
-      position: absolute;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 50%;
-      transition:
-        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 15;
-      background: transparent;
-      color: var(--foreground);
-      border: none;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .sc-clock-picker-number:hover {
-      background: var(--accent);
-      color: var(--accent-foreground);
-      transform: scale(1.1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .sc-clock-picker-number:focus {
-      background: var(--accent);
-      color: var(--accent-foreground);
-      transform: scale(1.05);
-      outline: none;
-    }
-
-    .sc-clock-picker-number:focus-visible {
-      outline: 2px solid var(--ring);
-      outline-offset: 2px;
-    }
-
-    .sc-clock-picker-number.selected {
-      background: var(--primary);
-      color: var(--primary-foreground);
-      transform: scale(1.15);
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
-    }
-
-    /* Material Design Clock Hand */
-    .sc-clock-picker-hand {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 2px;
-      background: var(--primary);
-      transform-origin: 50% 100%;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      z-index: 15;
-      height: 110px;
-      border-radius: 1px;
-      margin-top: -110px;
-      margin-left: 0px;
-      pointer-events: none; /* Let the knob handle interactions */
-    }
-
-    .sc-clock-picker-hand:hover {
-      background: color-mix(in srgb, var(--primary) 80%, black);
-    }
-
-    .sc-clock-picker-hand.dragging {
-      transition: none;
-      background: color-mix(in srgb, var(--primary) 80%, black);
-    }
-
-    .sc-clock-picker-hand-knob {
-      position: absolute;
-      top: -16px; /* Centered at the tip of the hand */
-      left: 50%;
-      width: 32px; /* Same as time number circles */
-      height: 32px; /* Same as time number circles */
-      background: transparent; /* Invisible by default */
-      border: none;
-      border-radius: 50%;
-      transform: translateX(-50%);
-      cursor: grab;
-      pointer-events: all;
-      z-index: 25; /* Higher than selected numbers */
-      transition:
-        background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .sc-clock-picker-hand-knob:hover {
-      background: color-mix(in srgb, var(--primary) 15%, transparent);
-      transform: translateX(-50%) scale(1.1);
-      box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 20%, transparent);
-    }
-
-    .sc-clock-picker-hand-knob.dragging {
-      cursor: grabbing;
-      background: color-mix(in srgb, var(--primary) 25%, transparent);
-      transform: translateX(-50%) scale(1.05);
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 30%, transparent);
-    }
-
     .sc-clock-picker-disabled {
       opacity: 0.5;
       pointer-events: none;
@@ -357,11 +167,10 @@ export interface TimeValue {
     role: 'group',
     'aria-label': 'Time picker',
     '[attr.aria-disabled]': 'disabled()',
+    '[class]': 'rootClass()',
   },
 })
 export class ScClockPicker {
-  private readonly elementRef = inject(ElementRef);
-
   // Inputs
   readonly format = input<'12h' | '24h'>('12h');
   readonly disabled = input<boolean>(false);
@@ -501,11 +310,7 @@ export class ScClockPicker {
     return rawAngle;
   });
 
-  constructor() {
-    afterNextRender(() => {
-      this.setupClickHandlers();
-    });
-  }
+  constructor() {}
 
   setMode(newMode: 'hours' | 'minutes') {
     if (!this.disabled()) {
@@ -696,13 +501,20 @@ export class ScClockPicker {
     this.value.set({ ...current, hours: actualHours });
   }
 
+  onDragStart(event: MouseEvent | TouchEvent) {
+    this.startDragging(event);
+  }
+
   startDragging(event: MouseEvent | TouchEvent) {
     if (this.disabled()) return;
 
     event.preventDefault();
     event.stopPropagation();
 
-    const clockFace = this.elementRef.nativeElement.querySelector('.sc-clock-picker-face');
+    // The clock face rect will be provided by the face component click event
+    // For now, we'll get it from the event target's parent
+    const target = event.target as HTMLElement;
+    const clockFace = target.closest('[sc-clock-picker-face]');
     if (!clockFace) return;
 
     this.clockFaceRect = clockFace.getBoundingClientRect();
@@ -823,36 +635,30 @@ export class ScClockPicker {
     }
   }
 
-  private setupClickHandlers() {
-    const clockFace = this.elementRef.nativeElement.querySelector('.sc-clock-picker-face');
-    if (!clockFace) return;
+  handleFaceClick(event: { clientX: number; clientY: number; rect: DOMRect }) {
+    if (this.disabled()) return;
 
-    clockFace.addEventListener('click', (e: MouseEvent) => {
-      if (this.disabled()) return;
+    const centerX = event.rect.left + event.rect.width / 2;
+    const centerY = event.rect.top + event.rect.height / 2;
 
-      const rect = clockFace.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
+    const x = event.clientX - centerX;
+    const y = event.clientY - centerY;
 
-      const x = e.clientX - centerX;
-      const y = e.clientY - centerY;
+    // Calculate angle using Material Design approach
+    let angle = (Math.atan2(y, x) * 180) / Math.PI;
+    // Adjust so 0° is at 12 o'clock (top) instead of 3 o'clock (right)
+    angle = (angle + 90) % 360;
+    if (angle < 0) angle += 360;
 
-      // Calculate angle using Material Design approach
-      let angle = (Math.atan2(y, x) * 180) / Math.PI;
-      // Adjust so 0° is at 12 o'clock (top) instead of 3 o'clock (right)
-      angle = (angle + 90) % 360;
-      if (angle < 0) angle += 360;
-
-      if (this.mode() === 'hours') {
-        const hourCount = this.format() === '12h' ? 12 : 24;
-        const selectedHour = Math.round(angle / (360 / hourCount)) % hourCount;
-        const displayHour = this.format() === '12h' && selectedHour === 0 ? 12 : selectedHour;
-        this.selectNumber(displayHour);
-      } else {
-        const selectedMinute = Math.round(angle / 6) % 60;
-        const roundedMinute = Math.round(selectedMinute / 5) * 5;
-        this.selectNumber(roundedMinute);
-      }
-    });
+    if (this.mode() === 'hours') {
+      const hourCount = this.format() === '12h' ? 12 : 24;
+      const selectedHour = Math.round(angle / (360 / hourCount)) % hourCount;
+      const displayHour = this.format() === '12h' && selectedHour === 0 ? 12 : selectedHour;
+      this.selectNumber(displayHour);
+    } else {
+      const selectedMinute = Math.round(angle / 6) % 60;
+      const roundedMinute = Math.round(selectedMinute / 5) * 5;
+      this.selectNumber(roundedMinute);
+    }
   }
 }
