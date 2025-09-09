@@ -368,6 +368,7 @@ export class ScClockPicker {
   private dragStartAngle = 0;
   private clockFaceRect: DOMRect | null = null;
   private hasDragged = false;
+  private previousAngle = 0;
 
   // Computed values
   readonly rootClass = computed(() =>
@@ -455,6 +456,8 @@ export class ScClockPicker {
       currentValue.minutes,
     );
 
+    let rawAngle: number;
+
     if (isHours) {
       const hours = this.format() === '12h' ? this.formattedHours() : currentValue.hours;
 
@@ -464,22 +467,35 @@ export class ScClockPicker {
         if (hours === 12) {
           displayHour = 0; // 12 o'clock points to top (0°)
         }
-        const angle = displayHour * 30;
-        console.log('12h angle:', angle, 'for hour:', displayHour);
-        return angle;
+        rawAngle = displayHour * 30;
+        console.log('12h angle:', rawAngle, 'for hour:', displayHour);
       } else {
         // 24-hour format: 15 degrees per hour (360/24 = 15)
-        const angle = currentValue.hours * 15;
-        console.log('24h angle:', angle, 'for hour:', currentValue.hours);
-        return angle;
+        rawAngle = currentValue.hours * 15;
+        console.log('24h angle:', rawAngle, 'for hour:', currentValue.hours);
       }
     } else {
       // For minutes: point to exact minute position
       const minutes = currentValue.minutes;
-      const angle = (minutes * 6) % 360; // 6 degrees per minute (360/60 = 6)
-      console.log('minutes angle:', angle, 'for minutes:', minutes);
-      return angle;
+      rawAngle = (minutes * 6) % 360; // 6 degrees per minute (360/60 = 6)
+      console.log('minutes angle:', rawAngle, 'for minutes:', minutes);
     }
+
+    // Calculate the shortest path for smooth transitions
+    if (!this.isDragging()) {
+      const angleDiff = rawAngle - this.previousAngle;
+
+      // If the difference is more than 180 degrees, go the other way
+      if (angleDiff > 180) {
+        rawAngle -= 360;
+      } else if (angleDiff < -180) {
+        rawAngle += 360;
+      }
+
+      this.previousAngle = rawAngle;
+    }
+
+    return rawAngle;
   });
 
   constructor() {
