@@ -14,15 +14,14 @@
       "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/supabase/ng-package.json"
+        "project": "libs/supabase/ng-package.json",
+        "tsConfig": "libs/supabase/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
           "tsConfig": "libs/supabase/tsconfig.lib.prod.json"
         },
-        "development": {
-          "tsConfig": "libs/supabase/tsconfig.lib.json"
-        }
+        "development": {}
       },
       "defaultConfiguration": "production"
     },
