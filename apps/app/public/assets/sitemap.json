@@ -202,6 +202,12 @@
             "description": "Displays a form input field or a component that looks like an input field."
           },
           {
+            "id": "input-number",
+            "title": "Input Number",
+            "path": "/docs/components/input-number",
+            "description": "A number input with validation, spinner controls, and precision formatting."
+          },
+          {
             "id": "input-otp",
             "title": "Input OTP",
             "path": "/docs/components/input-otp",

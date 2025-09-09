@@ -203,6 +203,11 @@ export const appRoutes: Route[] = [
                 title: 'Input Page',
               },
               {
+                path: 'components/input-number',
+                loadComponent: () => import('./docs/components/input-number/input-number-page'),
+                title: 'Input Number Page',
+              },
+              {
                 path: 'components/input-otp',
                 loadComponent: () => import('./docs/components/input-otp/input-otp-page'),
                 title: 'Input OTP Page',
