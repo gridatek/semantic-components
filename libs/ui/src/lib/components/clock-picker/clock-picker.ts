@@ -276,13 +276,13 @@ export interface TimeValue {
       border-radius: 1px;
       cursor: grab;
       margin-top: -110px;
-      margin-left: -1px;
+      margin-left: 0px; /* Moved one pixel to the right */
     }
 
     .sc-clock-picker-hand:hover {
       background: #2563eb; /* Darker blue on hover */
       width: 2px;
-      margin-left: -1px;
+      margin-left: -1px; /* Adjust for 2px width */
     }
 
     .sc-clock-picker-hand.dragging {
@@ -290,14 +290,14 @@ export interface TimeValue {
       transition: none;
       background: #2563eb;
       width: 2px;
-      margin-left: -1px;
+      margin-left: -1px; /* Adjust for 2px width */
     }
 
     /* Material Design Selection Circle at tip */
     .sc-clock-picker-hand::after {
       content: '';
       position: absolute;
-      top: -16px; /* Centered at the tip of 110px hand (32px / 2 = 16px) */
+      top: -17px; /* Moved one pixel up for better alignment */
       left: 50%;
       width: 32px; /* Same as time number circles */
       height: 32px; /* Same as time number circles */
