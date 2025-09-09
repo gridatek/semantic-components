@@ -134,13 +134,13 @@ export interface TimeValue {
       flex-direction: column;
       align-items: center;
       padding: 1.5rem;
-      background: hsl(var(--background));
-      border: 1px solid hsl(var(--border));
+      background: white; /* oklch(var(--background)) */
+      border: 1px solid #e2e8f0; /* oklch(var(--border)) */
       border-radius: 0.5rem;
       box-shadow:
         0 1px 3px 0 rgb(0 0 0 / 0.1),
         0 1px 2px -1px rgb(0 0 0 / 0.1);
-      color: hsl(var(--foreground));
+      color: #0f172a; /* oklch(var(--foreground)) */
       min-width: 20rem;
       gap: 1.5rem;
     }
@@ -174,21 +174,21 @@ export interface TimeValue {
     }
 
     .sc-clock-picker-time-part:hover {
-      background: hsl(var(--accent));
+      background: #f1f5f9; /* oklch(var(--accent)) */
     }
 
     .sc-clock-picker-time-part:focus {
-      background: hsl(var(--accent));
+      background: #f1f5f9; /* oklch(var(--accent)) */
       outline: none;
     }
 
     .sc-clock-picker-time-part.active {
-      border-color: hsl(var(--primary));
-      background: hsl(var(--primary) / 0.1);
+      border-color: #3b82f6; /* oklch(var(--primary)) */
+      background: rgb(59 130 246 / 0.1); /* oklch(var(--primary) / 0.1) */
     }
 
     .sc-clock-picker-separator {
-      color: hsl(var(--muted-foreground));
+      color: #64748b; /* oklch(var(--muted-foreground)) */
     }
 
     .sc-clock-picker-period {
@@ -203,8 +203,8 @@ export interface TimeValue {
       width: 280px;
       height: 280px;
       border-radius: 50%;
-      border: 2px solid hsl(var(--border));
-      background: hsl(var(--card));
+      border: 2px solid #e2e8f0; /* oklch(var(--border)) */
+      background: #f8fafc; /* oklch(var(--card)) */
       margin: 0 auto;
     }
 
@@ -214,7 +214,7 @@ export interface TimeValue {
       left: 50%;
       width: 8px;
       height: 8px;
-      background: hsl(var(--primary));
+      background: #3b82f6; /* oklch(var(--primary)) */
       border-radius: 50%;
       transform: translate(-50%, -50%);
       z-index: 20;
@@ -235,31 +235,31 @@ export interface TimeValue {
         color 0.15s ease-in-out;
       z-index: 15;
       background: transparent;
-      color: hsl(var(--foreground));
+      color: #0f172a; /* oklch(var(--foreground)) */
       border: none;
       cursor: pointer;
       user-select: none;
     }
 
     .sc-clock-picker-number:hover {
-      background: hsl(var(--accent));
-      color: hsl(var(--accent-foreground));
+      background: #f1f5f9; /* oklch(var(--accent)) */
+      color: #0f172a; /* oklch(var(--accent-foreground)) */
     }
 
     .sc-clock-picker-number:focus {
-      background: hsl(var(--accent));
-      color: hsl(var(--accent-foreground));
+      background: #f1f5f9; /* oklch(var(--accent)) */
+      color: #0f172a; /* oklch(var(--accent-foreground)) */
       outline: none;
     }
 
     .sc-clock-picker-number:focus-visible {
-      outline: 2px solid hsl(var(--ring));
+      outline: 2px solid #3b82f6; /* oklch(var(--ring)) */
       outline-offset: 2px;
     }
 
     .sc-clock-picker-number.selected {
-      background: hsl(var(--primary));
-      color: hsl(var(--primary-foreground));
+      background: #3b82f6; /* oklch(var(--primary)) */
+      color: white; /* oklch(var(--primary-foreground)) */
     }
 
     .sc-clock-picker-hand {
@@ -267,25 +267,28 @@ export interface TimeValue {
       top: 50%;
       left: 50%;
       width: 2px;
-      background: hsl(var(--primary));
-      transform-origin: bottom center;
-      transform: translate(-50%, -100%);
+      background: #dc2626; /* red-600 for high visibility - oklch(var(--primary)) */
+      transform-origin: 50% 100%;
       transition: transform 0.1s ease-out;
       z-index: 10;
-      height: 100px;
+      height: 90px;
       border-radius: 1px;
       cursor: grab;
+      margin-top: -90px;
+      margin-left: -1px;
     }
 
     .sc-clock-picker-hand:hover {
-      background: hsl(var(--primary));
+      background: #dc2626; /* red-600 for high visibility - oklch(var(--primary)) */
       width: 3px;
+      margin-left: -1.5px;
     }
 
     .sc-clock-picker-hand.dragging {
       cursor: grabbing;
       transition: none;
       width: 3px;
+      margin-left: -1.5px;
     }
 
     .sc-clock-picker-hand::after {
@@ -295,8 +298,8 @@ export interface TimeValue {
       left: 50%;
       width: 12px;
       height: 12px;
-      background: hsl(var(--primary));
-      border: 2px solid hsl(var(--background));
+      background: #dc2626; /* red-600 for high visibility - oklch(var(--primary)) */
+      border: 2px solid white; /* oklch(var(--background)) */
       border-radius: 50%;
       transform: translateX(-50%);
       cursor: grab;
@@ -347,7 +350,10 @@ export class ScClockPicker {
   readonly formattedHours = computed(() => {
     const hours = this.value().hours;
     if (this.format() === '12h') {
-      return hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
+      // Convert 24-hour to 12-hour format
+      if (hours === 0) return 12; // midnight -> 12 AM
+      if (hours > 12) return hours - 12; // 13-23 -> 1-11 PM
+      return hours; // 1-12 -> 1-12
     }
     return hours;
   });
@@ -414,12 +420,18 @@ export class ScClockPicker {
     const isHours = this.mode() === 'hours';
     if (isHours) {
       const hours = this.format() === '12h' ? this.formattedHours() : this.value().hours;
-      const hourCount = this.format() === '12h' ? 12 : 24;
-      return (hours % hourCount) * (360 / hourCount) - 90;
+      // For 12-hour format: 12 positions around the clock (0-360 degrees)
+      // 12 o'clock = 0°, 1 o'clock = 30°, 2 o'clock = 60°, etc.
+      // We need to handle the special case where 12 should point to 0°
+      let displayHour = hours;
+      if (this.format() === '12h' && hours === 12) {
+        displayHour = 0; // 12 o'clock points to top (0°)
+      }
+      return displayHour * 30; // 30 degrees per hour (360/12 = 30)
     } else {
-      // For minutes, we want the hand to point to the exact minute position
-      // Each minute is 6 degrees (360/60), but on the clock face we show 5-minute intervals
-      return this.value().minutes * 6 - 90;
+      // For minutes: point to exact minute position
+      // Don't round - show precise minute position
+      return this.value().minutes * 6; // 6 degrees per minute (360/60 = 6)
     }
   });
 

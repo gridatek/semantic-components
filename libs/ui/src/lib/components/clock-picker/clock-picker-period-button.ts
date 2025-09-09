@@ -22,31 +22,31 @@ import {
         background-color 0.15s ease-in-out,
         color 0.15s ease-in-out,
         border-color 0.15s ease-in-out;
-      border: 1px solid hsl(var(--border));
+      border: 1px solid #e2e8f0; /* oklch(var(--border)) */
       background: transparent;
-      color: hsl(var(--foreground));
+      color: #0f172a; /* oklch(var(--foreground)) */
     }
 
     button[sc-clock-picker-period-button]:hover {
-      background: hsl(var(--accent));
-      color: hsl(var(--accent-foreground));
+      background: #f1f5f9; /* oklch(var(--accent)) */
+      color: #0f172a; /* oklch(var(--accent-foreground)) */
     }
 
     button[sc-clock-picker-period-button]:focus {
-      background: hsl(var(--accent));
-      color: hsl(var(--accent-foreground));
+      background: #f1f5f9; /* oklch(var(--accent)) */
+      color: #0f172a; /* oklch(var(--accent-foreground)) */
       outline: none;
     }
 
     button[sc-clock-picker-period-button]:focus-visible {
-      outline: 2px solid hsl(var(--ring));
+      outline: 2px solid #3b82f6; /* oklch(var(--ring)) */
       outline-offset: 2px;
     }
 
     button[sc-clock-picker-period-button][data-active='true'] {
-      background: hsl(var(--primary));
-      color: hsl(var(--primary-foreground));
-      border-color: hsl(var(--primary));
+      background: #3b82f6; /* oklch(var(--primary)) */
+      color: white; /* oklch(var(--primary-foreground)) */
+      border-color: #3b82f6; /* oklch(var(--primary)) */
     }
 
     button[sc-clock-picker-period-button][data-disabled='true'] {
