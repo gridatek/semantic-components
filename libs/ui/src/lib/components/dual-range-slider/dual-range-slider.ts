@@ -5,16 +5,13 @@ import {
   computed,
   input,
   model,
-  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
-import { ScSlider } from '../slider/slider';
-
 @Component({
   selector: 'div[sc-dual-range-slider]',
-  imports: [ScSlider],
+  imports: [],
   template: `
     <div class="relative">
       <!-- Track background -->
@@ -29,24 +26,24 @@ import { ScSlider } from '../slider/slider';
 
       <!-- Min value slider -->
       <input
-        class="absolute w-full z-20 bg-transparent [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary"
-        [(value)]="minValue"
+        class="absolute w-full h-2 z-20 appearance-none bg-transparent cursor-pointer [&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-track]:h-2 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none"
+        [value]="minValue()"
         [min]="min()"
         [max]="max()"
         [step]="step()"
         (input)="onMinChange($event)"
-        sc-slider
+        type="range"
       />
 
       <!-- Max value slider -->
       <input
-        class="absolute w-full z-20 bg-transparent [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary"
-        [(value)]="maxValue"
+        class="absolute w-full h-2 z-20 appearance-none bg-transparent cursor-pointer [&::-webkit-slider-runnable-track]:h-2 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:size-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-background [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:-mt-1.5 [&::-moz-range-track]:h-2 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-none [&::-moz-range-thumb]:size-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-background [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none"
+        [value]="maxValue()"
         [min]="min()"
         [max]="max()"
         [step]="step()"
         (input)="onMaxChange($event)"
-        sc-slider
+        type="range"
       />
     </div>
   `,
