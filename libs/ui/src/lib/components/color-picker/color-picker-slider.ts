@@ -25,7 +25,7 @@ import { cn } from '@semantic-components/utils';
     >
       <!-- Slider indicator -->
       <div
-        class="absolute w-4 h-full border-2 border-white rounded shadow-md pointer-events-none -translate-x-1/2"
+        class="absolute w-0.5 h-full bg-white shadow-sm pointer-events-none -translate-x-1/2"
         [style.left]="indicatorPosition() + '%'"
       ></div>
     </div>
@@ -55,7 +55,7 @@ export class ScColorPickerSlider {
   private readonly isDragging = signal(false);
 
   protected readonly class = computed(() =>
-    cn('relative border border-border rounded-md overflow-hidden', this.classInput()),
+    cn('relative rounded-md border border-input overflow-hidden', this.classInput()),
   );
 
   protected readonly sliderBackground = computed(() => {

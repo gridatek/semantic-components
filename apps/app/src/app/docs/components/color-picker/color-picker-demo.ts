@@ -13,12 +13,16 @@ import { ScColorPicker } from '@semantic-components/ui';
           Select colors using the interactive color picker interface.
         </p>
         <div class="space-y-4">
-          <div class="max-w-sm" [(color)]="selectedColor1" sc-color-picker></div>
+          <div
+            class="max-w-xs p-4 border rounded-lg bg-popover"
+            [(color)]="selectedColor1"
+            sc-color-picker
+          ></div>
           <div class="flex items-center gap-4">
             <span class="text-sm">Selected color:</span>
             <div class="flex items-center gap-2">
               <div
-                class="w-6 h-6 border border-border rounded"
+                class="w-6 h-6 border border-input rounded"
                 [style.backgroundColor]="selectedColor1()"
               ></div>
               <span class="font-mono text-sm">{{ selectedColor1() }}</span>
@@ -33,12 +37,16 @@ import { ScColorPicker } from '@semantic-components/ui';
           Color picker initialized with a custom color value.
         </p>
         <div class="space-y-4">
-          <div class="max-w-sm" [(color)]="selectedColor2" sc-color-picker></div>
+          <div
+            class="max-w-xs p-4 border rounded-lg bg-popover"
+            [(color)]="selectedColor2"
+            sc-color-picker
+          ></div>
           <div class="flex items-center gap-4">
             <span class="text-sm">Selected color:</span>
             <div class="flex items-center gap-2">
               <div
-                class="w-6 h-6 border border-border rounded"
+                class="w-6 h-6 border border-input rounded"
                 [style.backgroundColor]="selectedColor2()"
               ></div>
               <span class="font-mono text-sm">{{ selectedColor2() }}</span>
@@ -53,10 +61,14 @@ import { ScColorPicker } from '@semantic-components/ui';
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-4">
             <h4 class="font-medium">Primary Color</h4>
-            <div class="w-full" [(color)]="primaryColor" sc-color-picker></div>
+            <div
+              class="p-3 border rounded-lg bg-popover"
+              [(color)]="primaryColor"
+              sc-color-picker
+            ></div>
             <div class="flex items-center gap-2">
               <div
-                class="w-4 h-4 border border-border rounded"
+                class="w-4 h-4 border border-input rounded"
                 [style.backgroundColor]="primaryColor()"
               ></div>
               <span class="font-mono text-xs">{{ primaryColor() }}</span>
@@ -64,10 +76,14 @@ import { ScColorPicker } from '@semantic-components/ui';
           </div>
           <div class="space-y-4">
             <h4 class="font-medium">Secondary Color</h4>
-            <div class="w-full" [(color)]="secondaryColor" sc-color-picker></div>
+            <div
+              class="p-3 border rounded-lg bg-popover"
+              [(color)]="secondaryColor"
+              sc-color-picker
+            ></div>
             <div class="flex items-center gap-2">
               <div
-                class="w-4 h-4 border border-border rounded"
+                class="w-4 h-4 border border-input rounded"
                 [style.backgroundColor]="secondaryColor()"
               ></div>
               <span class="font-mono text-xs">{{ secondaryColor() }}</span>

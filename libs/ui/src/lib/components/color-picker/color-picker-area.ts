@@ -25,7 +25,7 @@ import { cn } from '@semantic-components/utils';
     >
       <!-- Color indicator -->
       <div
-        class="absolute w-3 h-3 border-2 border-white rounded-full shadow-md pointer-events-none -translate-x-1/2 -translate-y-1/2"
+        class="absolute w-4 h-4 border-2 border-white rounded-full shadow-sm pointer-events-none -translate-x-1/2 -translate-y-1/2"
         [style.left]="indicatorX() + 'px'"
         [style.top]="indicatorY() + 'px'"
       ></div>
@@ -55,7 +55,7 @@ export class ScColorPickerArea {
   private readonly isDragging = signal(false);
 
   protected readonly class = computed(() =>
-    cn('relative border border-border rounded-md overflow-hidden', this.classInput()),
+    cn('rounded-md border border-input overflow-hidden', this.classInput()),
   );
 
   protected readonly backgroundGradient = computed(() => {

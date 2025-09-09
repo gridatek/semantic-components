@@ -19,40 +19,38 @@ import { ScColorPickerSwatch } from './color-picker-swatch';
   selector: 'div[sc-color-picker]',
   imports: [ScColorPickerSwatch, ScColorPickerArea, ScColorPickerInput, ScColorPickerSlider],
   template: `
-    <div class="space-y-4">
-      <!-- Color preview swatch -->
-      <div class="w-full h-12" [color]="color()" sc-color-picker-swatch></div>
+    <!-- Color preview swatch -->
+    <div class="w-full h-10" [color]="color()" sc-color-picker-swatch></div>
 
-      <!-- Saturation/Lightness area -->
-      <div
-        class="w-full h-48"
-        [hue]="hue()"
-        [saturation]="saturation()"
-        [lightness]="lightness()"
-        (colorChange)="onAreaChange($event)"
-        sc-color-picker-area
-      ></div>
+    <!-- Saturation/Lightness area -->
+    <div
+      class="relative w-full h-40"
+      [hue]="hue()"
+      [saturation]="saturation()"
+      [lightness]="lightness()"
+      (colorChange)="onAreaChange($event)"
+      sc-color-picker-area
+    ></div>
 
-      <!-- Hue slider -->
-      <div
-        class="w-full h-4"
-        [value]="hue()"
-        [min]="0"
-        [max]="360"
-        (valueChange)="onHueChange($event)"
-        sc-color-picker-slider
-        type="hue"
-      ></div>
+    <!-- Hue slider -->
+    <div
+      class="w-full h-3"
+      [value]="hue()"
+      [min]="0"
+      [max]="360"
+      (valueChange)="onHueChange($event)"
+      sc-color-picker-slider
+      type="hue"
+    ></div>
 
-      <!-- Hex input -->
-      <input
-        class="w-full"
-        [value]="color()"
-        (valueChange)="onHexChange($event)"
-        sc-color-picker-input
-        placeholder="#000000"
-      />
-    </div>
+    <!-- Hex input -->
+    <input
+      class="w-full"
+      [value]="color()"
+      (valueChange)="onHexChange($event)"
+      sc-color-picker-input
+      placeholder="#000000"
+    />
   `,
   host: {
     '[class]': 'class()',
@@ -66,9 +64,7 @@ export class ScColorPicker {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn('p-4 bg-background border rounded-lg', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('space-y-3', this.classInput()));
 
   readonly color = model<string>('#000000');
 

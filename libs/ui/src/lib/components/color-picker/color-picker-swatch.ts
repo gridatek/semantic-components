@@ -30,6 +30,6 @@ export class ScColorPickerSwatch {
   readonly color = input<string>('#000000');
 
   protected readonly class = computed(() =>
-    cn('border border-border rounded-md shadow-sm', this.classInput()),
+    cn('rounded-md border border-input shadow-sm', this.classInput()),
   );
 }
