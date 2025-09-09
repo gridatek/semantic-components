@@ -53,7 +53,7 @@ export class ScClockPickerHandKnob {
 
   protected readonly class = computed(() => {
     return cn(
-      `absolute left-1/2 bg-primary border-2 border-primary-foreground/20 rounded-full -translate-x-1/2 -translate-y-1/2 cursor-grab pointer-events-auto z-[30] transition-all duration-200 ease-out flex items-center justify-center hover:bg-primary/80 hover:scale-110 hover:shadow-md hover:shadow-primary/20`,
+      `absolute left-1/2 bg-primary border-2 border-primary-foreground/20 rounded-full -translate-x-1/2 -translate-y-1/2 cursor-grab pointer-events-auto z-30 transition-all duration-200 ease-out flex items-center justify-center hover:bg-primary/80 hover:scale-110 hover:shadow-md hover:shadow-primary/20`,
       this.is24HourMode() && 'w-8 h-8 -top-4',
       !this.is24HourMode() && 'w-10 h-10 -top-5',
       this.dragging() && 'cursor-grabbing bg-primary/90 scale-105 shadow-lg shadow-primary/30',

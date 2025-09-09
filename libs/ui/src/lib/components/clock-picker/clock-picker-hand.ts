@@ -60,7 +60,7 @@ export class ScClockPickerHand {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute top-1/2 left-1/2 w-0.5 bg-primary origin-bottom z-[15] h-[92px] rounded-sm -mt-[92px] pointer-events-none transition-transform duration-[400ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:bg-primary/80',
+      'absolute top-1/2 left-1/2 w-0.5 bg-primary origin-bottom z-15 h-[92px] rounded-sm -mt-[92px] pointer-events-none transition-transform duration-400 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:bg-primary/80',
       this.isDragging() && 'transition-none bg-primary/80',
       this.classInput(),
     ),

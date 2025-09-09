@@ -38,15 +38,15 @@ import { ScHeading } from '@semantic-components/ui';
           <!-- Paragraphs -->
           <section class="mb-8">
             <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight mb-4">Paragraphs</h3>
-            <p class="leading-7 [&:not(:first-child)]:mt-6">
+            <p class="leading-7 not-first:mt-6">
               This is a standard paragraph with leading-7 for optimal readability. The text flows
               naturally with proper spacing.
             </p>
-            <p class="leading-7 [&:not(:first-child)]:mt-6">
+            <p class="leading-7 not-first:mt-6">
               This is another paragraph demonstrating the spacing between multiple paragraphs in the
               shadcn/ui system.
             </p>
-            <p class="text-xl text-muted-foreground leading-7 [&:not(:first-child)]:mt-6">
+            <p class="text-xl text-muted-foreground leading-7 not-first:mt-6">
               This is a lead paragraph with larger text and muted color, perfect for introductions.
             </p>
           </section>

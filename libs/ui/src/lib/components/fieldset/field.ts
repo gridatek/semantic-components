@@ -53,12 +53,12 @@ export class ScField {
       this.floatingLabel() &&
         '[&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-primary [&:has([data-slot=control]:focus)_label]:bg-background [&:has([data-slot=control]:focus)_label]:px-1 [&:has([data-slot=control]:focus)_label]:-ml-1',
       this.floatingLabel() &&
-        '[&:has([data-slot=control]:focus)_label]:[top:var(--floating-label-top-offset)]',
+        '[&:has([data-slot=control]:focus)_label]:top-(--floating-label-top-offset)',
       // Floating label states - has value (using :not(:placeholder-shown))
       this.floatingLabel() &&
         '[&:has([data-slot=control]:not(:placeholder-shown))_label]:text-xs [&:has([data-slot=control]:not(:placeholder-shown))_label]:text-muted-foreground [&:has([data-slot=control]:not(:placeholder-shown))_label]:bg-background [&:has([data-slot=control]:not(:placeholder-shown))_label]:px-1 [&:has([data-slot=control]:not(:placeholder-shown))_label]:-ml-1',
       this.floatingLabel() &&
-        '[&:has([data-slot=control]:not(:placeholder-shown))_label]:[top:var(--floating-label-top-offset)]',
+        '[&:has([data-slot=control]:not(:placeholder-shown))_label]:top-(--floating-label-top-offset)',
       this.classInput(),
     ),
   );

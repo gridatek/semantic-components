@@ -29,7 +29,7 @@ export class ScClockPickerCenter {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute top-1/2 left-1/2 w-2 h-2 bg-primary rounded-full -translate-x-1/2 -translate-y-1/2 z-[25]',
+      'absolute top-1/2 left-1/2 w-2 h-2 bg-primary rounded-full -translate-x-1/2 -translate-y-1/2 z-25',
       this.classInput(),
     ),
   );
