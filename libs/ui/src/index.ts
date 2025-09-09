@@ -62,7 +62,6 @@ export * from './lib/components/comments';
 export * from './lib/components/tags';
 export * from './lib/components/combobox';
 export * from './lib/components/clock-picker';
-export * from './lib/components/image-placeholder';
 export * from './lib/components/fieldset';
 export * from './lib/components/touch-area';
 export * from './lib/components/scroll-spy';
