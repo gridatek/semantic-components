@@ -297,7 +297,7 @@ export interface TimeValue {
     .sc-clock-picker-hand::after {
       content: '';
       position: absolute;
-      top: -17px; /* Moved one pixel up for better alignment */
+      top: -18px; /* Moved up for better alignment */
       left: 50%;
       width: 32px; /* Same as time number circles */
       height: 32px; /* Same as time number circles */
