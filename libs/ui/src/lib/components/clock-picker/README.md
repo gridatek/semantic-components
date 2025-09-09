@@ -10,7 +10,7 @@ An interactive time picker component with a visual clock interface for selecting
 - **Multiple Interaction Methods**: Click numbers or drag the hand to set time
 - **Smooth Animations**: Fluid transitions and smart shortest-path rotations
 - **Auto Mode Switching**: Automatically transitions from hours to minutes selection
-- **Accessibility**: Full keyboard navigation and screen reader support
+- **Accessibility**: Full keyboard navigation and screen reader support with comprehensive keyboard shortcuts
 - **Touch Friendly**: Optimized for both mouse and touch interactions
 - **Visual Feedback**: Subtle hover effects and scale animations
 - **Customizable Theming**: CSS custom properties for easy customization
@@ -226,6 +226,53 @@ keyPressed: EventEmitter<{
   period: 'AM' | 'PM';
 }>;
 ```
+
+## Keyboard Navigation
+
+The clock-picker provides comprehensive keyboard support for accessibility and power users:
+
+### Time Display (Hours/Minutes Buttons)
+
+| Key                     | Action                                   |
+| ----------------------- | ---------------------------------------- |
+| `↑` / `↓`               | Increment/decrement by 1 unit            |
+| `Page Up` / `Page Down` | Large increments (3/6 hours, 15 minutes) |
+| `Home` / `End`          | Jump to minimum/maximum values           |
+| `Tab`                   | Move from hours to minutes               |
+| `Enter` / `Space`       | Activate the time part for editing       |
+
+### Clock Face Navigation
+
+| Key                     | Action                                   |
+| ----------------------- | ---------------------------------------- |
+| `↑` / `↓` / `←` / `→`   | Navigate by 1 hour or 5 minutes          |
+| `Page Up` / `Page Down` | Large increments (3/6 hours, 15 minutes) |
+| `Home` / `End`          | Jump to first/last position              |
+| `0-9`                   | Direct numeric selection                 |
+| `Enter` / `Space`       | Switch from hours to minutes mode        |
+| `Escape`                | Remove focus from clock face             |
+| `Tab`                   | Natural tab order navigation             |
+
+### AM/PM Period Buttons (12-hour format)
+
+| Key                   | Action                |
+| --------------------- | --------------------- |
+| `↑` / `↓` / `←` / `→` | Toggle between AM/PM  |
+| `A` / `a`             | Set to AM             |
+| `P` / `p`             | Set to PM             |
+| `Enter` / `Space`     | Select current period |
+
+### Numeric Input Details
+
+- **Hours Mode**: Press `1-9` for direct hour selection, `0` for 10 in 12h format
+- **Minutes Mode**: Press `0-9` to jump to corresponding 5-minute increment (0=00, 1=05, 2=10, etc.)
+- **24-hour Format**: Numeric keys work for single-digit hours (0-9)
+
+### Navigation Flow
+
+1. **Tab Order**: Hours → Minutes → AM/PM (if 12h) → Clock Face
+2. **Mode Switching**: Selecting an hour automatically switches to minutes mode
+3. **Focus Management**: Clock face can be focused independently for direct manipulation
 
 ## Customization
 

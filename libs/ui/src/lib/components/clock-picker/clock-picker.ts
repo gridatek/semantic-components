@@ -394,6 +394,52 @@ export class ScClockPicker {
           this.value.set({ ...current, minutes: newValue });
         }
         break;
+      case 'PageUp':
+        event.preventDefault();
+        if (part === 'hours') {
+          const increment = this.format() === '12h' ? 3 : 6; // 3 hours for 12h, 6 for 24h
+          newValue =
+            this.format() === '12h'
+              ? ((this.formattedHours() + increment - 1) % 12) + 1
+              : (current.hours + increment) % 24;
+          this.updateHours(newValue);
+        } else {
+          newValue = (current.minutes + 15) % 60; // 15 minute increments
+          this.value.set({ ...current, minutes: newValue });
+        }
+        break;
+      case 'PageDown':
+        event.preventDefault();
+        if (part === 'hours') {
+          const decrement = this.format() === '12h' ? 3 : 6;
+          newValue =
+            this.format() === '12h'
+              ? ((this.formattedHours() - decrement - 1 + 12) % 12) + 1
+              : (current.hours - decrement + 24) % 24;
+          this.updateHours(newValue);
+        } else {
+          newValue = (current.minutes - 15 + 60) % 60;
+          this.value.set({ ...current, minutes: newValue });
+        }
+        break;
+      case 'Home':
+        event.preventDefault();
+        if (part === 'hours') {
+          newValue = this.format() === '12h' ? 1 : 0;
+          this.updateHours(newValue);
+        } else {
+          this.value.set({ ...current, minutes: 0 });
+        }
+        break;
+      case 'End':
+        event.preventDefault();
+        if (part === 'hours') {
+          newValue = this.format() === '12h' ? 12 : 23;
+          this.updateHours(newValue);
+        } else {
+          this.value.set({ ...current, minutes: 59 });
+        }
+        break;
       case 'Tab':
         if (part === 'hours' && !event.shiftKey) {
           event.preventDefault();
@@ -414,6 +460,8 @@ export class ScClockPicker {
     switch (event.key) {
       case 'ArrowUp':
       case 'ArrowDown':
+      case 'ArrowLeft':
+      case 'ArrowRight':
         event.preventDefault();
         this.togglePeriod(period === 'AM' ? 'PM' : 'AM');
         break;
@@ -421,6 +469,16 @@ export class ScClockPicker {
       case ' ':
         event.preventDefault();
         this.togglePeriod(period);
+        break;
+      case 'A':
+      case 'a':
+        event.preventDefault();
+        this.togglePeriod('AM');
+        break;
+      case 'P':
+      case 'p':
+        event.preventDefault();
+        this.togglePeriod('PM');
         break;
     }
   }
@@ -433,6 +491,7 @@ export class ScClockPicker {
 
     switch (event.key) {
       case 'ArrowRight':
+      case 'ArrowDown':
         event.preventDefault();
         if (isHours) {
           const nextHour =
@@ -446,6 +505,7 @@ export class ScClockPicker {
         }
         break;
       case 'ArrowLeft':
+      case 'ArrowUp':
         event.preventDefault();
         if (isHours) {
           const prevHour =
@@ -458,6 +518,52 @@ export class ScClockPicker {
           this.value.set({ ...current, minutes: prevMinute });
         }
         break;
+      case 'PageUp':
+        event.preventDefault();
+        if (isHours) {
+          const increment = this.format() === '12h' ? 3 : 6;
+          const nextHour =
+            this.format() === '12h'
+              ? ((this.formattedHours() + increment - 1) % 12) + 1
+              : (current.hours + increment) % 24;
+          this.updateHours(nextHour);
+        } else {
+          const nextMinute = (current.minutes + 15) % 60;
+          this.value.set({ ...current, minutes: nextMinute });
+        }
+        break;
+      case 'PageDown':
+        event.preventDefault();
+        if (isHours) {
+          const decrement = this.format() === '12h' ? 3 : 6;
+          const prevHour =
+            this.format() === '12h'
+              ? ((this.formattedHours() - decrement - 1 + 12) % 12) + 1
+              : (current.hours - decrement + 24) % 24;
+          this.updateHours(prevHour);
+        } else {
+          const prevMinute = (current.minutes - 15 + 60) % 60;
+          this.value.set({ ...current, minutes: prevMinute });
+        }
+        break;
+      case 'Home':
+        event.preventDefault();
+        if (isHours) {
+          const firstHour = this.format() === '12h' ? 12 : 0;
+          this.updateHours(firstHour);
+        } else {
+          this.value.set({ ...current, minutes: 0 });
+        }
+        break;
+      case 'End':
+        event.preventDefault();
+        if (isHours) {
+          const lastHour = this.format() === '12h' ? 11 : 23;
+          this.updateHours(lastHour);
+        } else {
+          this.value.set({ ...current, minutes: 55 }); // Last 5-minute increment
+        }
+        break;
       case 'Enter':
       case ' ':
         event.preventDefault();
@@ -467,6 +573,35 @@ export class ScClockPicker {
         break;
       case 'Escape':
         (event.target as HTMLElement)?.blur();
+        break;
+      case 'Tab':
+        // Allow natural tab flow - don't prevent default
+        break;
+      default:
+        // Handle numeric input for direct number selection
+        const numKey = parseInt(event.key);
+        if (!isNaN(numKey) && numKey >= 0 && numKey <= 9) {
+          event.preventDefault();
+          if (isHours) {
+            // For hours, handle 1-9 and 0 for 10-12 in 12h format
+            if (this.format() === '12h') {
+              if (numKey === 0) {
+                this.updateHours(10);
+              } else if (numKey <= 9) {
+                this.updateHours(numKey);
+              }
+            } else {
+              // For 24h, handle 0-9 for first digit, could be enhanced for double digits
+              this.updateHours(numKey);
+            }
+          } else {
+            // For minutes, snap to nearest 5-minute increment
+            const targetMinute = numKey * 5;
+            if (targetMinute <= 55) {
+              this.value.set({ ...current, minutes: targetMinute });
+            }
+          }
+        }
         break;
     }
   }
