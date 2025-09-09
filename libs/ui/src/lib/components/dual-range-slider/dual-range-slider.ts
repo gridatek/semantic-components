@@ -10,66 +10,65 @@ import {
 import { cn } from '@semantic-components/utils';
 
 import { ScDualRangeSliderRange } from './dual-range-slider-range';
-import { ScDualRangeSliderRoot } from './dual-range-slider-root';
 import { ScDualRangeSliderThumb } from './dual-range-slider-thumb';
 import { ScDualRangeSliderTrack } from './dual-range-slider-track';
 
 @Component({
   selector: 'div[sc-dual-range-slider]',
-  imports: [
-    ScDualRangeSliderRoot,
-    ScDualRangeSliderTrack,
-    ScDualRangeSliderRange,
-    ScDualRangeSliderThumb,
-  ],
+  imports: [ScDualRangeSliderTrack, ScDualRangeSliderRange, ScDualRangeSliderThumb],
   template: `
-    <div [class]="class()" sc-dual-range-slider-root>
-      <!-- Track background -->
-      <div sc-dual-range-slider-track></div>
+    <!-- Track background -->
+    <div sc-dual-range-slider-track></div>
 
-      <!-- Selected range track -->
-      <div
-        [style.left]="minPercentage() + '%'"
-        [style.right]="100 - maxPercentage() + '%'"
-        sc-dual-range-slider-range
-      ></div>
+    <!-- Selected range track -->
+    <div
+      [style.left]="minPercentage() + '%'"
+      [style.right]="100 - maxPercentage() + '%'"
+      sc-dual-range-slider-range
+    ></div>
 
-      <!-- Min value slider -->
-      <input
-        class="z-20"
-        [value]="minValue()"
-        [min]="min()"
-        [max]="max()"
-        [step]="step()"
-        (valueChange)="onMinChange($event)"
-        sc-dual-range-slider-thumb
-      />
+    <!-- Min value slider -->
+    <input
+      class="z-20"
+      [value]="minValue()"
+      [min]="min()"
+      [max]="max()"
+      [step]="step()"
+      (valueChange)="onMinChange($event)"
+      sc-dual-range-slider-thumb
+    />
 
-      <!-- Max value slider -->
-      <input
-        class="z-30"
-        [value]="maxValue()"
-        [min]="min()"
-        [max]="max()"
-        [step]="step()"
-        (valueChange)="onMaxChange($event)"
-        sc-dual-range-slider-thumb
-      />
-    </div>
+    <!-- Max value slider -->
+    <input
+      class="z-30"
+      [value]="maxValue()"
+      [min]="min()"
+      [max]="max()"
+      [step]="step()"
+      (valueChange)="onMaxChange($event)"
+      sc-dual-range-slider-thumb
+    />
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDualRangeSlider {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('block relative w-full py-4', this.classInput()));
+
   readonly min = input(0);
   readonly max = input(100);
   readonly step = input(1);
 
   readonly minValue = model<number>(20);
   readonly maxValue = model<number>(80);
-
-  protected readonly class = computed(() => cn('relative'));
 
   protected readonly minPercentage = computed(() => {
     const range = this.max() - this.min();
