@@ -39,8 +39,13 @@ export class ScClockPickerPeriodButton {
 
   protected readonly class = computed(() =>
     cn(
-      'py-0.5 px-2 text-sm leading-5 rounded border border-border bg-transparent text-foreground cursor-pointer transition-all duration-200 hover:bg-accent hover:text-accent-foreground hover:scale-[1.02] focus:bg-accent focus:text-accent-foreground focus:outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2',
-      this.active() && 'bg-primary text-primary-foreground border-primary scale-105',
+      'py-0.5 px-2 text-sm leading-5 rounded border cursor-pointer transition-all duration-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-2',
+      // Inactive state
+      !this.active() &&
+        'border-border bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground hover:scale-[1.02] focus:bg-accent focus:text-accent-foreground',
+      // Active state with stronger styling
+      this.active() &&
+        'bg-primary text-primary-foreground border-primary scale-105 shadow-sm font-medium',
       this.disabled() && 'opacity-50 pointer-events-none',
       this.classInput(),
     ),
