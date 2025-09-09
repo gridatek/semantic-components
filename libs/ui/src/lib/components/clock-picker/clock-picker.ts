@@ -499,8 +499,12 @@ export class ScClockPicker {
         }
       }
       console.log('Setting hour to:', hours, 'and resetting minutes to 0');
-      this.value.set({ ...current, hours, minutes: 0 }); // Reset minutes to 0 when selecting hour
-      this.mode.set('minutes');
+      console.log('Current value before:', current);
+      const newValue = { ...current, hours, minutes: 0 };
+      console.log('New value being set:', newValue);
+      this.value.set(newValue); // Reset minutes to 0 when selecting hour
+      console.log('Value after set:', this.value());
+      // this.mode.set('minutes'); // Temporarily disabled to debug
     } else {
       this.value.set({ ...current, minutes: num });
     }
