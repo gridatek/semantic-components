@@ -512,6 +512,13 @@ export class ScClockPicker {
 
   setMode(newMode: 'hours' | 'minutes') {
     if (!this.disabled()) {
+      // When switching to minutes mode, ensure minutes stay at 0
+      if (newMode === 'minutes') {
+        const current = this.value();
+        if (current.minutes !== 0) {
+          this.value.set({ ...current, minutes: 0 });
+        }
+      }
       this.mode.set(newMode);
     }
   }
@@ -774,9 +781,9 @@ export class ScClockPicker {
         }
       }
 
-      // Only update if hour is different
-      if (current.hours !== hours) {
-        // Reset minutes to 0 when selecting a new hour (like clicking)
+      // Only update if hour is different OR if dragging and minutes aren't 0
+      if (current.hours !== hours || (this.isDragging() && current.minutes !== 0)) {
+        // Reset minutes to 0 when selecting hours (clicking or dragging)
         this.value.set({ ...current, hours, minutes: 0 });
       }
     } else {
@@ -821,9 +828,14 @@ export class ScClockPicker {
     document.removeEventListener('touchmove', handleMove);
     document.removeEventListener('touchend', handleEnd);
 
-    // After dragging hours, immediately switch to minutes mode
+    // After dragging hours, set minutes to 0 and wait for hand animation before switching
     if (this.mode() === 'hours' && this.hasDragged) {
-      this.mode.set('minutes');
+      const current = this.value();
+      if (current.minutes !== 0) {
+        this.value.set({ ...current, minutes: 0 });
+      }
+      // Wait for hand animation to complete before switching to minutes
+      setTimeout(() => this.mode.set('minutes'), 400); // Match the hand transition duration
     }
   }
 
