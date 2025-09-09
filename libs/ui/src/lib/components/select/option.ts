@@ -10,11 +10,19 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'sc-option',
+  imports: [SiCheckIcon],
   template: `
     <ng-content />
+
+    @if (selected()) {
+      <span class="absolute right-2 flex size-3.5 items-center justify-center">
+        <svg class="size-4" si-check-icon></svg>
+      </span>
+    }
   `,
   host: {
     '[attr.id]': 'id()',
