@@ -226,6 +226,12 @@
             "description": "Phone number input with tel type and mobile-optimized keyboard."
           },
           {
+            "id": "input-group",
+            "title": "Input Group",
+            "path": "/docs/components/input-group",
+            "description": "Combines input fields with icons using CSS Grid for enhanced visual context."
+          },
+          {
             "id": "label",
             "title": "Label",
             "path": "/docs/components/label",

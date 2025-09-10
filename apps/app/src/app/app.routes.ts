@@ -223,6 +223,11 @@ export const appRoutes: Route[] = [
                 title: 'Input Password Page',
               },
               {
+                path: 'components/input-group',
+                loadComponent: () => import('./docs/components/input-group/input-group-page'),
+                title: 'Input Group Page',
+              },
+              {
                 path: 'components/label',
                 loadComponent: () => import('./docs/components/label/label-page'),
                 title: 'Label Page',
