@@ -83,10 +83,6 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
           </div>
         </form>
       </div>
-
-      <div code>
-        <pre><code>{{ codeExample }}</code></pre>
-      </div>
     </app-preview-code-tabs>
   `,
   styles: ``,
