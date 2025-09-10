@@ -27,6 +27,12 @@ export class PasswordValidationService {
     this._rules.set(rules.length > 0 ? rules : DEFAULT_PASSWORD_RULES);
   }
 
+  addRules(additionalRules: PasswordRule[]): void {
+    const currentRules = this._rules();
+    const mergedRules = [...DEFAULT_PASSWORD_RULES, ...additionalRules];
+    this._rules.set(mergedRules);
+  }
+
   reset(): void {
     this._password.set('');
   }

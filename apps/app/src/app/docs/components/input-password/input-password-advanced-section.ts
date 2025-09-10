@@ -101,35 +101,11 @@ export class InputPasswordAdvancedSection {
     password: ['', [Validators.required]],
   });
 
-  private readonly customRules: PasswordRule[] = [
+  private readonly additionalRules: PasswordRule[] = [
     {
-      id: 'minLength',
+      id: 'longerPassword',
       regex: /.{12,}/,
-      message: 'At least 12 characters',
-      weight: 2,
-    },
-    {
-      id: 'hasNumber',
-      regex: /\d/,
-      message: 'At least 1 number',
-      weight: 1,
-    },
-    {
-      id: 'hasLowercase',
-      regex: /[a-z]/,
-      message: 'At least 1 lowercase letter',
-      weight: 1,
-    },
-    {
-      id: 'hasUppercase',
-      regex: /[A-Z]/,
-      message: 'At least 1 uppercase letter',
-      weight: 1,
-    },
-    {
-      id: 'hasSpecialChar',
-      regex: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
-      message: 'At least 1 special character',
+      message: 'At least 12 characters (enhanced)',
       weight: 1,
     },
     {
@@ -139,6 +115,12 @@ export class InputPasswordAdvancedSection {
       message: 'No sequential characters',
       weight: 2,
     },
+    {
+      id: 'noRepeating',
+      regex: /^(?!.*(.)\\1{2,})/,
+      message: 'No repeating characters (3+)',
+      weight: 1,
+    },
   ];
 
   toggleCustomRules(): void {
@@ -146,36 +128,39 @@ export class InputPasswordAdvancedSection {
     this.useCustomRules.set(newUseCustom);
 
     if (newUseCustom) {
-      this.validationService.updateRules(this.customRules);
+      this.validationService.addRules(this.additionalRules);
     } else {
       this.validationService.updateRules([]);
     }
   }
 
-  protected readonly codeExample = `// Custom validation rules
-const customRules: PasswordRule[] = [
+  protected readonly codeExample = `// Additional validation rules (added to default rules)
+const additionalRules: PasswordRule[] = [
   {
-    id: 'minLength',
+    id: 'longerPassword',
     regex: /.{12,}/,
-    message: 'At least 12 characters',
-    weight: 2,
-  },
-  {
-    id: 'hasSpecialChar',
-    regex: /[!@#$%^&*()_+\\-=\\[\\]{};':"\\\\|,.<>\\/?]/,
-    message: 'At least 1 special character',
+    message: 'At least 12 characters (enhanced)',
     weight: 1,
   },
   {
     id: 'noSequential',
-    regex: /^(?!.*(?:012|123|abc|bcd))/i,
+    regex: /^(?!.*(?:012|123|234|345|456|567|678|789|890|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz))/i,
     message: 'No sequential characters',
     weight: 2,
+  },
+  {
+    id: 'noRepeating',
+    regex: /^(?!.*(.)\\1{2,})/,
+    message: 'No repeating characters (3+)',
+    weight: 1,
   }
 ];
 
-// Update validation rules
-validationService.updateRules(customRules);
+// Add additional rules (keeps default rules + adds these)
+validationService.addRules(additionalRules);
+
+// Reset to default rules only
+validationService.updateRules([]);
 
 // Template with advanced features
 <div [showPercentage]="true" sc-input-password-strength>
