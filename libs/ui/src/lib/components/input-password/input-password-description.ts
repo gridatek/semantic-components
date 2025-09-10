@@ -36,7 +36,8 @@ export class ScInputPasswordDescription {
     const score = this.strengthScore();
     if (score === 0) return 'Enter a password';
     if (score <= 2) return 'Weak password';
-    if (score === 3) return 'Medium password';
+    if (score <= 3) return 'Medium password';
+    if (score === 4) return 'Good password';
     return 'Strong password';
   });
 }

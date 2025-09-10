@@ -19,7 +19,7 @@ import { cn } from '@semantic-components/utils';
   host: {
     '[id]': 'id',
     '[type]': 'isVisible() ? "text" : "password"',
-    '[attr.aria-invalid]': 'strengthScore() < 4',
+    '[attr.aria-invalid]': 'strengthScore() < 5',
     placeholder: 'Password',
     '[attr.aria-describedby]': 'ariaDescribedby()',
     '[class]': 'class()',

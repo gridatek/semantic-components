@@ -17,7 +17,7 @@ import { ScProgress } from '../progress';
     <sc-progress
       [class]="progressClass()"
       [value]="strengthScore()"
-      max="4"
+      max="5"
       aria-label="Password strength"
     />
     <ng-content />
@@ -52,6 +52,7 @@ export class ScInputPasswordStrength {
     if (score <= 1) return '*:data-[slot=indicator]:bg-red-500';
     if (score <= 2) return '*:data-[slot=indicator]:bg-orange-500';
     if (score === 3) return '*:data-[slot=indicator]:bg-amber-500';
+    if (score === 4) return '*:data-[slot=indicator]:bg-blue-500';
     return '*:data-[slot=indicator]:bg-emerald-500';
   });
 }
