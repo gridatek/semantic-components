@@ -14,14 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import {
-  PasswordValidationService,
-  ScInputPasswordDescription,
-  ScInputPasswordField,
-  ScInputPasswordRequirements,
-  ScInputPasswordStrength,
-  ScInputPasswordToggle,
-} from '@semantic-components/ui';
+import { ScInputPasswordField, ScInputPasswordToggle } from '@semantic-components/ui';
 import { ScButton, ScLabel } from '@semantic-components/ui';
 
 import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
@@ -32,14 +25,10 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
     ReactiveFormsModule,
     ScInputPasswordField,
     ScInputPasswordToggle,
-    ScInputPasswordStrength,
-    ScInputPasswordDescription,
-    ScInputPasswordRequirements,
     ScLabel,
     ScButton,
     PreviewCodeTabs,
   ],
-  providers: [PasswordValidationService],
   template: `
     <app-preview-code-tabs>
       <div class="space-y-4" preview>
@@ -55,7 +44,6 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
                 [placeholder]="'Enter your password'"
                 sc-input-password-field
                 formControlName="password"
-                ariaDescribedby="confirm-password-description"
               />
               <button
                 [isVisible]="isPasswordVisible()"
@@ -63,15 +51,6 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
                 sc-input-password-toggle
               ></button>
             </div>
-          </div>
-
-          <div [animate]="true" [size]="'md'" sc-input-password-strength>
-            <p
-              id="confirm-password-description"
-              [showHelp]="true"
-              sc-input-password-description
-            ></p>
-            <ul [size]="'md'" [compact]="false" sc-input-password-requirements></ul>
           </div>
 
           <div class="space-y-2">
@@ -146,19 +125,47 @@ readonly form = this.fb.group({
   confirmPassword: ['', [Validators.required]]
 }, { validators: this.passwordMatchValidator });
 
-<!-- Template -->
+<!-- Template - Focus on confirmation pattern -->
 <form [formGroup]="form">
-  <!-- Password field with validation -->
-  <input sc-input-password-field formControlName="password" />
-  <div sc-input-password-strength>
-    <p sc-input-password-description></p>
-    <ul sc-input-password-requirements></ul>
+  <!-- Simple password field -->
+  <div class="space-y-2">
+    <label for="password" sc-label>Password*</label>
+    <div class="relative">
+      <input
+        id="password"
+        [isVisible]="isPasswordVisible()"
+        sc-input-password-field
+        formControlName="password"
+      />
+      <button
+        [isVisible]="isPasswordVisible()"
+        (visibilityChange)="isPasswordVisible.set($event)"
+        sc-input-password-toggle
+      ></button>
+    </div>
   </div>
 
-  <!-- Confirm password field -->
-  <input sc-input-password-field formControlName="confirmPassword" />
-  @if (form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched) {
-    <p class="text-destructive">Passwords do not match</p>
-  }
+  <!-- Confirm password field with validation -->
+  <div class="space-y-2">
+    <label for="confirmPassword" sc-label>Confirm Password*</label>
+    <div class="relative">
+      <input
+        id="confirmPassword"
+        [isVisible]="isConfirmVisible()"
+        sc-input-password-field
+        formControlName="confirmPassword"
+      />
+      <button
+        [isVisible]="isConfirmVisible()"
+        (visibilityChange)="isConfirmVisible.set($event)"
+        sc-input-password-toggle
+      ></button>
+    </div>
+    
+    <!-- Error message for confirmation -->
+    @if (form.hasError('passwordMismatch') && form.get('confirmPassword')?.touched) {
+      <p class="text-sm text-destructive">Passwords do not match</p>
+    }
+  </div>
 </form>`;
 }
