@@ -5,7 +5,13 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 import {
   PasswordRule,
@@ -156,6 +162,70 @@ import { ScButton } from '@semantic-components/ui';
           </div>
         </form>
       </div>
+
+      <!-- Password Confirmation Example -->
+      <div class="space-y-2">
+        <h3 class="text-lg font-semibold">Password with Confirmation</h3>
+        <form class="space-y-4" [formGroup]="confirmationForm">
+          <div class="space-y-2">
+            <label for="confirm-password" sc-label>Password*</label>
+            <div class="relative">
+              <input
+                id="confirm-password"
+                [isVisible]="isConfirmPasswordVisible()"
+                [required]="true"
+                [placeholder]="'Enter your password'"
+                sc-input-password-field
+                formControlName="password"
+                ariaDescribedby="confirm-password-description"
+              />
+              <button
+                [isVisible]="isConfirmPasswordVisible()"
+                (visibilityChange)="isConfirmPasswordVisible.set($event)"
+                sc-input-password-toggle
+              ></button>
+            </div>
+          </div>
+
+          <div [animate]="true" [size]="'md'" sc-input-password-strength>
+            <p
+              id="confirm-password-description"
+              [showHelp]="true"
+              sc-input-password-description
+            ></p>
+            <ul [size]="'md'" [compact]="false" sc-input-password-requirements></ul>
+          </div>
+
+          <div class="space-y-2">
+            <label for="confirm-password-repeat" sc-label>Confirm Password*</label>
+            <div class="relative">
+              <input
+                id="confirm-password-repeat"
+                [isVisible]="isConfirmRepeatVisible()"
+                [required]="true"
+                [placeholder]="'Repeat your password'"
+                sc-input-password-field
+                formControlName="confirmPassword"
+              />
+              <button
+                [isVisible]="isConfirmRepeatVisible()"
+                (visibilityChange)="isConfirmRepeatVisible.set($event)"
+                sc-input-password-toggle
+              ></button>
+            </div>
+            @if (
+              confirmationForm.hasError('passwordMismatch') &&
+              confirmationForm.get('confirmPassword')?.touched
+            ) {
+              <p class="text-sm text-destructive">Passwords do not match</p>
+            }
+          </div>
+
+          <button class="w-full" [disabled]="!confirmationForm.valid" sc-button type="submit">
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   `,
   styles: ``,
@@ -169,6 +239,8 @@ export class InputPasswordModernDemo {
   readonly isBasicVisible = signal(false);
   readonly isAdvancedVisible = signal(false);
   readonly isCompactVisible = signal(false);
+  readonly isConfirmPasswordVisible = signal(false);
+  readonly isConfirmRepeatVisible = signal(false);
   readonly useCustomRules = signal(false);
 
   readonly basicForm: FormGroup = this.fb.group({
@@ -182,6 +254,14 @@ export class InputPasswordModernDemo {
   readonly compactForm: FormGroup = this.fb.group({
     password: ['', [Validators.required]],
   });
+
+  readonly confirmationForm: FormGroup = this.fb.group(
+    {
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+    },
+    { validators: this.passwordMatchValidator },
+  );
 
   private readonly customRules: PasswordRule[] = [
     {
@@ -222,6 +302,13 @@ export class InputPasswordModernDemo {
       weight: 2,
     },
   ];
+
+  passwordMatchValidator(form: AbstractControl) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
 
   toggleCustomRules(): void {
     const newUseCustom = !this.useCustomRules();
