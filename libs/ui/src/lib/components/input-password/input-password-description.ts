@@ -13,7 +13,7 @@ import { cn } from '@semantic-components/utils';
   imports: [],
   template: `
     @if (showHelp()) {
-      <span class="text-muted-foreground">Password requirements:</span>
+      <span class="text-sm text-muted-foreground">Your password must include:</span>
     }
   `,
   host: {
