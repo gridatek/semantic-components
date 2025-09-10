@@ -8,18 +8,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
-import { SiCheckIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 import { PasswordValidationService } from './password-validation.service';
 
-export interface PasswordRequirement {
-  met: boolean;
-  text: string;
-}
-
 @Component({
   selector: 'ul[sc-input-password-requirements]',
-  imports: [SiCheckIcon, SiXIcon],
+  imports: [SiCheckIcon],
   template: `
     @for (validation of validations(); track validation.rule.id) {
       <li
