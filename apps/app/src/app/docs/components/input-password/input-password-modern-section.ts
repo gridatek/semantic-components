@@ -1,15 +1,25 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
-import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
-import { InputPasswordModernDemo } from './input-password-modern-demo';
+import { InputPasswordAdvancedSection } from './input-password-advanced-section';
+import { InputPasswordBasicSection } from './input-password-basic-section';
+import { InputPasswordCompactSection } from './input-password-compact-section';
+import { InputPasswordConfirmationSection } from './input-password-confirmation-section';
 
 @Component({
   selector: 'app-input-password-modern-section',
-  imports: [PreviewCodeTabs, InputPasswordModernDemo],
+  imports: [
+    InputPasswordBasicSection,
+    InputPasswordAdvancedSection,
+    InputPasswordCompactSection,
+    InputPasswordConfirmationSection,
+  ],
   template: `
-    <app-preview-code-tabs [code]="code" [title]="title()" [level]="level()">
-      <app-input-password-modern-demo />
-    </app-preview-code-tabs>
+    <div class="space-y-8">
+      <app-input-password-basic-section [title]="'Basic Password Input'" />
+      <app-input-password-advanced-section [title]="'Custom Validation Rules'" />
+      <app-input-password-compact-section [title]="'Compact Layout'" />
+      <app-input-password-confirmation-section [title]="'Password with Confirmation'" />
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -18,58 +28,4 @@ import { InputPasswordModernDemo } from './input-password-modern-demo';
 export class InputPasswordModernSection {
   readonly title = input<string>('');
   readonly level = input<'2' | '3'>('2');
-
-  protected readonly code = `// Modern password input with full form integration
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { 
-  ScInputPasswordField, 
-  ScInputPasswordToggle,
-  ScInputPasswordStrength,
-  ScInputPasswordDescription,
-  ScInputPasswordRequirements,
-  PasswordValidationService 
-} from '@semantic-components/ui';
-
-@Component({
-  providers: [PasswordValidationService], // Scoped validation service
-  template: \`
-    <form [formGroup]="form">
-      <div class="space-y-2">
-        <label for="password" sc-label [required]="true">Password</label>
-        <div class="relative">
-          <input
-            id="password"
-            sc-input-password-field
-            formControlName="password"
-            [isVisible]="isVisible()"
-            [required]="true"
-            ariaDescribedby="password-description"
-          />
-          <button
-            sc-input-password-toggle
-            [isVisible]="isVisible()"
-            [controlsId]="'password'"
-            (visibilityChange)="isVisible.set($event)"
-          />
-        </div>
-      </div>
-
-      <!-- Real-time validation feedback -->
-      <div sc-input-password-strength [animate]="true" [size]="'md'">
-        <p id="password-description" sc-input-password-description />
-        <ul sc-input-password-requirements [size]="'md'" />
-      </div>
-
-      <button sc-button [disabled]="!form.valid">Submit</button>
-    </form>
-  \`
-})
-export class PasswordFormComponent {
-  private readonly fb = inject(FormBuilder);
-  
-  readonly isVisible = signal(false);
-  readonly form = this.fb.group({
-    password: ['', [Validators.required]]
-  });
-}`;
 }
