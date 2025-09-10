@@ -22,6 +22,7 @@ import { PasswordValidationService } from './password-validation.service';
       [attr.aria-label]="strengthLabel()"
       [attr.aria-valuenow]="validation().percentage"
       [attr.aria-valuetext]="strengthText()"
+      [attr.title]="tooltipText()"
       max="100"
       role="progressbar"
     />
@@ -57,6 +58,11 @@ export class ScInputPasswordStrength {
     const validation = this.validation();
     const percentage = this.showPercentage() ? ` (${validation.percentage}%)` : '';
     return `${validation.message}${percentage}`;
+  });
+
+  protected readonly tooltipText = computed(() => {
+    const validation = this.validation();
+    return `Password strength: ${validation.message} (${validation.percentage}%)`;
   });
 
   protected readonly progressClass = computed(() => {
