@@ -4,3 +4,5 @@ export * from './input-password-toggle';
 export * from './input-password-strength';
 export * from './input-password-description';
 export * from './input-password-requirements';
+export * from './password-validation.types';
+export * from './password-validation.service';

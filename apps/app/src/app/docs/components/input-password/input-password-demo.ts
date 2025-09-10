@@ -40,7 +40,6 @@ export interface ValidationRule {
         <input
           id="password-field"
           [isVisible]="isVisible()"
-          [strengthScore]="strengthScore()"
           (passwordChange)="onPasswordChange($event)"
           sc-input-password-field
           aria-describedby="password-description"
@@ -52,13 +51,9 @@ export interface ValidationRule {
         ></button>
       </div>
 
-      <div [strengthScore]="strengthScore()" sc-input-password-strength>
-        <p
-          id="password-description"
-          [strengthScore]="strengthScore()"
-          sc-input-password-description
-        ></p>
-        <ul [requirements]="requirements()" sc-input-password-requirements></ul>
+      <div sc-input-password-strength>
+        <p id="password-description" sc-input-password-description></p>
+        <ul sc-input-password-requirements></ul>
       </div>
     </div>
   `,

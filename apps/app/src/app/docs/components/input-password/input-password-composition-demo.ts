@@ -40,7 +40,6 @@ interface ValidationRule {
           <input
             id="custom-password"
             [isVisible]="isVisible()"
-            [strengthScore]="strengthScore()"
             (passwordChange)="onPasswordChange($event)"
             sc-input-password-field
             aria-describedby="custom-password-description"
@@ -55,14 +54,10 @@ interface ValidationRule {
 
       <!-- Separate strength indicator -->
       <div class="rounded-lg border p-4">
-        <div [strengthScore]="strengthScore()" sc-input-password-strength>
+        <div sc-input-password-strength>
           <h4 class="text-sm font-semibold mb-2">Password Strength</h4>
-          <p
-            id="custom-password-description"
-            [strengthScore]="strengthScore()"
-            sc-input-password-description
-          ></p>
-          <ul [requirements]="requirements()" sc-input-password-requirements></ul>
+          <p id="custom-password-description" sc-input-password-description></p>
+          <ul sc-input-password-requirements></ul>
         </div>
       </div>
     </div>
