@@ -8,20 +8,20 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScInputPasswordDescription } from './input-password-description';
-import { ScInputPasswordField } from './input-password-field';
-import { ScInputPasswordRequirements } from './input-password-requirements';
-import { ScInputPasswordStrength } from './input-password-strength';
-import { ScInputPasswordToggle } from './input-password-toggle';
+// import { ScInputPasswordDescription } from './input-password-description';
+// import { ScInputPasswordField } from './input-password-field';
+// import { ScInputPasswordRequirements } from './input-password-requirements';
+// import { ScInputPasswordStrength } from './input-password-strength';
+// import { ScInputPasswordToggle } from './input-password-toggle';
 
 @Component({
   selector: 'div[sc-input-password]',
   imports: [
-    ScInputPasswordField,
-    ScInputPasswordToggle,
-    ScInputPasswordStrength,
-    ScInputPasswordDescription,
-    ScInputPasswordRequirements,
+    // ScInputPasswordField,
+    // ScInputPasswordToggle,
+    // ScInputPasswordStrength,
+    // ScInputPasswordDescription,
+    // ScInputPasswordRequirements,
   ],
   template: `
     <ng-content />
