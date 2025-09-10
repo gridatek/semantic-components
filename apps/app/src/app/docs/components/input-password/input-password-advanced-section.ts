@@ -99,8 +99,9 @@ export class InputPasswordAdvancedSection {
   });
 
   constructor() {
-    // Apply custom rules by default
+    // Apply custom rules and update specific message
     this.validationService.addRules(this.additionalRules);
+    this.validationService.updateRuleMessage('minLength', 'Minimum 8 characters required');
   }
 
   private readonly additionalRules: PasswordRule[] = [

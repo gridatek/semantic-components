@@ -33,6 +33,14 @@ export class PasswordValidationService {
     this._rules.set(mergedRules);
   }
 
+  updateRuleMessage(ruleId: string, newMessage: string): void {
+    const currentRules = this._rules();
+    const updatedRules = currentRules.map((rule) =>
+      rule.id === ruleId ? { ...rule, message: newMessage } : rule,
+    );
+    this._rules.set(updatedRules);
+  }
+
   reset(): void {
     this._password.set('');
   }
