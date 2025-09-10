@@ -75,12 +75,9 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
             ></ul>
           </div>
 
-          <div class="grid grid-cols-2 gap-4">
-            <button (click)="toggleCustomRules()" sc-button variant="outline" type="button">
-              {{ useCustomRules() ? 'Use Default Rules' : 'Use Custom Rules' }}
-            </button>
-            <button [disabled]="!advancedForm.valid" sc-button type="submit">Submit</button>
-          </div>
+          <button class="w-full" [disabled]="!advancedForm.valid" sc-button type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </app-preview-code-tabs>
@@ -95,11 +92,16 @@ export class InputPasswordAdvancedSection {
 
   readonly title = input<string>('Custom Validation Rules');
   readonly isVisible = signal(false);
-  readonly useCustomRules = signal(false);
+  readonly useCustomRules = signal(true);
 
   readonly advancedForm: FormGroup = this.fb.group({
     password: ['', [Validators.required]],
   });
+
+  constructor() {
+    // Apply custom rules by default
+    this.validationService.addRules(this.additionalRules);
+  }
 
   private readonly additionalRules: PasswordRule[] = [
     {
@@ -111,28 +113,11 @@ export class InputPasswordAdvancedSection {
     {
       id: 'noSequential',
       regex:
-        /^(?!.*(?:012|123|234|345|456|567|678|789|890|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz))/i,
+        /^(?=.+)(?!.*(?:012|123|234|345|456|567|678|789|890|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz))/i,
       message: 'No sequential characters',
       weight: 2,
     },
-    {
-      id: 'noRepeating',
-      regex: /^(?!.*(.)\\1{2,})/,
-      message: 'No repeating characters (3+)',
-      weight: 1,
-    },
   ];
-
-  toggleCustomRules(): void {
-    const newUseCustom = !this.useCustomRules();
-    this.useCustomRules.set(newUseCustom);
-
-    if (newUseCustom) {
-      this.validationService.addRules(this.additionalRules);
-    } else {
-      this.validationService.updateRules([]);
-    }
-  }
 
   protected readonly codeExample = `// Additional validation rules (added to default rules)
 const additionalRules: PasswordRule[] = [
@@ -144,16 +129,10 @@ const additionalRules: PasswordRule[] = [
   },
   {
     id: 'noSequential',
-    regex: /^(?!.*(?:012|123|234|345|456|567|678|789|890|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz))/i,
+    regex: /^(?=.+)(?!.*(?:012|123|234|345|456|567|678|789|890|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz))/i,
     message: 'No sequential characters',
     weight: 2,
   },
-  {
-    id: 'noRepeating',
-    regex: /^(?!.*(.)\\1{2,})/,
-    message: 'No repeating characters (3+)',
-    weight: 1,
-  }
 ];
 
 // Add additional rules (keeps default rules + adds these)
