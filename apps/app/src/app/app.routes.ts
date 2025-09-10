@@ -218,6 +218,11 @@ export const appRoutes: Route[] = [
                 title: 'Input Phone Page',
               },
               {
+                path: 'components/input-password',
+                loadComponent: () => import('./docs/components/input-password/input-password-page'),
+                title: 'Input Password Page',
+              },
+              {
                 path: 'components/label',
                 loadComponent: () => import('./docs/components/label/label-page'),
                 title: 'Label Page',
