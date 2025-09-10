@@ -8,14 +8,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import {
-  PasswordValidationService,
-  ScInputPasswordDescription,
-  ScInputPasswordField,
-  ScInputPasswordRequirements,
-  ScInputPasswordStrength,
-  ScInputPasswordToggle,
-} from '@semantic-components/ui';
+import { ScInputPasswordField, ScInputPasswordToggle } from '@semantic-components/ui';
 import { ScButton, ScLabel } from '@semantic-components/ui';
 
 import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
@@ -26,14 +19,10 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
     ReactiveFormsModule,
     ScInputPasswordField,
     ScInputPasswordToggle,
-    ScInputPasswordStrength,
-    ScInputPasswordDescription,
-    ScInputPasswordRequirements,
     ScLabel,
     ScButton,
     PreviewCodeTabs,
   ],
-  providers: [PasswordValidationService],
   template: `
     <app-preview-code-tabs>
       <div class="space-y-4" preview>
@@ -48,7 +37,6 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
                 [required]="true"
                 sc-input-password-field
                 formControlName="password"
-                ariaDescribedby="basic-password-description"
               />
               <button
                 [isVisible]="isVisible()"
@@ -56,11 +44,6 @@ import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-c
                 sc-input-password-toggle
               ></button>
             </div>
-          </div>
-
-          <div [animate]="true" [size]="'md'" sc-input-password-strength>
-            <p id="basic-password-description" [showHelp]="true" sc-input-password-description></p>
-            <ul [size]="'md'" [compact]="false" sc-input-password-requirements></ul>
           </div>
 
           <button class="w-full" [disabled]="!basicForm.valid" sc-button type="submit">
@@ -84,13 +67,15 @@ export class InputPasswordBasicSection {
     password: ['', [Validators.required]],
   });
 
-  protected readonly codeExample = `<form [formGroup]="passwordForm">
+  protected readonly codeExample = `// Basic password input - just the field with toggle
+<form [formGroup]="passwordForm">
   <div class="space-y-2">
     <label for="password" sc-label>Password*</label>
     <div class="relative">
       <input
         id="password"
         [isVisible]="isVisible()"
+        [required]="true"
         sc-input-password-field
         formControlName="password"
       />
@@ -102,13 +87,14 @@ export class InputPasswordBasicSection {
     </div>
   </div>
 
-  <div sc-input-password-strength>
-    <p sc-input-password-description></p>
-    <ul sc-input-password-requirements></ul>
-  </div>
-
   <button [disabled]="!passwordForm.valid" sc-button>
     Submit
   </button>
-</form>`;
+</form>
+
+// Component setup
+readonly isVisible = signal(false);
+readonly passwordForm = this.fb.group({
+  password: ['', [Validators.required]]
+});`;
 }
