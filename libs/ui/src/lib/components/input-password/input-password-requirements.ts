@@ -27,16 +27,16 @@ export interface PasswordRequirement {
         [attr.data-requirement]="validation.rule.id"
         [attr.aria-describedby]="validation.rule.id + '-status'"
       >
-        <div class="flex-shrink-0" [class]="iconClass(validation.isValid)">
-          @if (validation.isValid) {
-            <svg [attr.size]="iconSize()" si-check-icon strokeWidth="2" aria-hidden="true"></svg>
-          } @else {
-            <svg [attr.size]="iconSize()" si-x-icon strokeWidth="2" aria-hidden="true"></svg>
-          }
-        </div>
         <span [class]="textClass(validation.isValid)" [id]="validation.rule.id + '-status'">
           {{ validation.rule.message }}
         </span>
+        <div class="flex-shrink-0 ml-auto" [class]="iconClass(validation.isValid)">
+          @if (hasUserInput() && validation.isValid) {
+            <svg [attr.size]="iconSize()" si-check-icon strokeWidth="2" aria-hidden="true"></svg>
+          } @else if (hasUserInput() && !validation.isValid) {
+            <svg [attr.size]="iconSize()" si-x-icon strokeWidth="2" aria-hidden="true"></svg>
+          }
+        </div>
         <span class="sr-only">
           {{ validation.isValid ? '- Requirement met' : '- Requirement not met' }}
         </span>
@@ -62,6 +62,7 @@ export class ScInputPasswordRequirements {
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly validations = computed(() => this.validationService.validation().validations);
+  readonly hasUserInput = computed(() => this.validationService.password().length > 0);
 
   protected readonly class = computed(() => {
     const spaceClass = this.compact() ? 'space-y-1' : 'space-y-1.5';
