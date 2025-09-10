@@ -6,9 +6,7 @@ import { InputGroupDemoSection } from './input-group-demo-section';
   selector: 'app-input-group-page',
   imports: [InputGroupDemoSection],
   template: `
-    <app-input-group-demo-section title="Input Group" />
-
-    <div class="prose prose-slate dark:prose-invert max-w-none mt-8">
+    <div class="prose prose-slate dark:prose-invert max-w-none mt-4">
       <p>
         Input groups allow you to combine input fields with icons to provide visual context and
         improve user experience. The component uses CSS Grid to layout icons and input controls
