@@ -33,8 +33,6 @@ export interface PasswordRequirement {
         <div class="flex-shrink-0 ml-auto" [class]="iconClass(validation.isValid)">
           @if (hasUserInput() && validation.isValid) {
             <svg [attr.size]="iconSize()" si-check-icon strokeWidth="2" aria-hidden="true"></svg>
-          } @else if (hasUserInput() && !validation.isValid) {
-            <svg [attr.size]="iconSize()" si-x-icon strokeWidth="2" aria-hidden="true"></svg>
           }
         </div>
         <span class="sr-only">
