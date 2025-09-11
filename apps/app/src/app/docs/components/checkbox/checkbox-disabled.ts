@@ -1,19 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScCheckbox } from '@semantic-components/ui';
+import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-disabled',
-  imports: [ScCheckbox],
+  imports: [ScCheckbox, ScLabel, ScField],
   template: `
-    <div class="flex items-center space-x-2">
-      <input id="terms2" sc-checkbox disabled />
-      <label
-        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        for="terms2"
-      >
-        Accept terms and conditions
-      </label>
+    <div sc-field orientation="horizontal-checkbox" controlId="terms2">
+      <input sc-checkbox disabled />
+      <label sc-label>Accept terms and conditions</label>
     </div>
   `,
   styles: ``,
