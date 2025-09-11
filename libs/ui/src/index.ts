@@ -60,6 +60,7 @@ export * from './lib/components/color-picker';
 export * from './lib/components/range-slider';
 export * from './lib/components/dual-range-slider';
 export * from './lib/components/stepper';
+export * from './lib/components/flex-layout';
 export * from './lib/components/tabs';
 export * from './lib/components/grid-layout';
 export * from './lib/components/input-phone';
