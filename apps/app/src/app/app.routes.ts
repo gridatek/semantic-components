@@ -348,11 +348,6 @@ export const appRoutes: Route[] = [
                 title: 'Toggle Group Page',
               },
               {
-                path: 'components/toggle-switch',
-                loadComponent: () => import('./docs/components/toggle-switch/toggle-switch-page'),
-                title: 'Toggle Switch Page',
-              },
-              {
                 path: 'components/tooltip',
                 loadComponent: () => import('./docs/components/tooltip/tooltip-page'),
                 title: 'Tooltip Page',

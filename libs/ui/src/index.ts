@@ -57,7 +57,6 @@ export * from './lib/components/field';
 export * from './lib/components/fieldset';
 export * from './lib/components/touch-area';
 export * from './lib/components/color-picker';
-export * from './lib/components/toggle-switch';
 export * from './lib/components/range-slider';
 export * from './lib/components/dual-range-slider';
 export * from './lib/components/stepper';
