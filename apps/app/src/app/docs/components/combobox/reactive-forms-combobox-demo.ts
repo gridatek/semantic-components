@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
+import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-reactive-forms-combobox-demo',
@@ -39,7 +39,7 @@ import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReactiveFormsComboboxDemo {
-  programmingLanguages: ComboboxItem[] = [
+  programmingLanguages: ScComboboxItem[] = [
     { label: 'TypeScript', value: 'typescript' },
     { label: 'JavaScript', value: 'javascript' },
     { label: 'Python', value: 'python' },
@@ -52,7 +52,7 @@ export class ReactiveFormsComboboxDemo {
     { label: 'Ruby', value: 'ruby' },
   ];
 
-  frameworks: ComboboxItem[] = [
+  frameworks: ScComboboxItem[] = [
     { label: 'Angular', value: 'angular' },
     { label: 'React', value: 'react' },
     { label: 'Vue', value: 'vue' },
