@@ -14,7 +14,7 @@ import { cn } from '@semantic-components/utils';
 import { cva } from 'class-variance-authority';
 
 const fileUploadVariants = cva(
-  'relative border-2 border-dashed rounded-lg p-6 text-center transition-colors cursor-pointer',
+  'block relative border-2 border-dashed rounded-lg p-6 text-center transition-colors cursor-pointer',
   {
     variants: {
       variant: {
@@ -131,6 +131,8 @@ const fileUploadVariants = cva(
   `,
   host: {
     'data-slot': 'control',
+    '[id]': 'id()',
+    class: 'block',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -138,6 +140,8 @@ const fileUploadVariants = cva(
 })
 export class ScFileUpload {
   private readonly elementRef = inject(ElementRef);
+
+  readonly id = signal('');
 
   readonly classInput = input<string>('', {
     alias: 'class',
