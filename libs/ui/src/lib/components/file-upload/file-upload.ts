@@ -14,16 +14,16 @@ import { cn } from '@semantic-components/utils';
 import { cva } from 'class-variance-authority';
 
 const fileUploadVariants = cva(
-  'block relative border-2 border-dashed rounded-lg p-6 text-center transition-colors cursor-pointer',
+  'flex flex-col items-center justify-center border-2 border-dashed rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
   {
     variants: {
       variant: {
-        default: 'border-border hover:border-primary/50',
+        default: 'border-muted-foreground/25 hover:border-muted-foreground/50',
         active: 'border-primary bg-primary/5',
         error: 'border-destructive bg-destructive/5',
       },
       size: {
-        default: 'min-h-[200px]',
+        default: 'min-h-[200px] p-6',
         sm: 'min-h-[150px] p-4',
         lg: 'min-h-[250px] p-8',
       },
@@ -55,37 +55,41 @@ const fileUploadVariants = cva(
         type="file"
       />
 
-      <div class="flex flex-col items-center gap-2">
-        <div class="rounded-full bg-muted p-3">
-          <svg
-            class="h-6 w-6 text-muted-foreground"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-            />
-          </svg>
+      <div class="mx-auto max-w-[400px]">
+        <svg
+          class="mx-auto h-12 w-12 text-muted-foreground"
+          stroke="currentColor"
+          fill="none"
+          viewBox="0 0 48 48"
+          aria-hidden="true"
+        >
+          <path
+            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+        <div class="mt-4 text-center">
+          <div class="text-sm font-semibold">
+            <span class="text-primary">Click to upload</span>
+            <span class="text-muted-foreground">or drag and drop</span>
+          </div>
+
+          @if (accept() || maxSize()) {
+            <div class="mt-2 space-y-1">
+              @if (accept()) {
+                <p class="text-xs text-muted-foreground">{{ accept() }}</p>
+              }
+              @if (maxSize()) {
+                <p class="text-xs text-muted-foreground">
+                  Max file size: {{ formatFileSize(maxSize()) }}
+                </p>
+              }
+            </div>
+          }
         </div>
-
-        <div class="text-sm">
-          <span class="font-medium text-primary">Click to upload</span>
-          <span class="text-muted-foreground">or drag and drop</span>
-        </div>
-
-        @if (accept()) {
-          <p class="text-xs text-muted-foreground">{{ accept() }}</p>
-        }
-
-        @if (maxSize()) {
-          <p class="text-xs text-muted-foreground">
-            Max file size: {{ formatFileSize(maxSize()) }}
-          </p>
-        }
       </div>
 
       @if (selectedFiles().length > 0) {
