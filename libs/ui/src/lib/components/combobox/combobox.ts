@@ -214,11 +214,11 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   selectedValue: any = null;
   selectedValues: Set<string> = new Set();
   filteredItems: (string | ScComboboxItem)[] = [];
-  isOpen: boolean = false;
-  isLoading: boolean = false;
-  listboxId: string = `listbox-${Math.random().toString(36).substr(2, 9)}`;
+  isOpen = false;
+  isLoading = false;
+  listboxId = `listbox-${Math.random().toString(36).substr(2, 9)}`;
   activeItemId: string | null = null;
-  triggerWidth: number = 0;
+  triggerWidth = 0;
 
   keyManager!: ActiveDescendantKeyManager<ScComboboxOption>;
   private searchSubject = new BehaviorSubject<string>('');

@@ -75,7 +75,7 @@ export class ScComboboxMultiInput {
   readonly keydownChange = output<KeyboardEvent>();
   readonly chipRemoved = output<string>();
 
-  searchQuery: string = '';
+  searchQuery = '';
 
   handleInput(event: Event) {
     this.inputChange.emit(event);

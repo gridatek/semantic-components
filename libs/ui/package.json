@@ -17,7 +17,8 @@
     "@semantic-icons/lucide-icons": ">=0.0.1",
     "@semantic-components/utils": "0.46.0",
     "@angular/router": ">=19.0.0",
-    "@js-temporal/polyfill": ">=0.4.4"
+    "@js-temporal/polyfill": ">=0.4.4",
+    "@tanstack/angular-table": "^8.21.3"
   },
   "sideEffects": false,
   "repository": {

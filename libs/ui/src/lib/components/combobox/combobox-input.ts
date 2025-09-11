@@ -70,7 +70,7 @@ export class ScComboboxInput {
   readonly keydownChange = output<KeyboardEvent>();
   readonly toggleChange = output<void>();
 
-  searchQuery: string = '';
+  searchQuery = '';
 
   handleInput(event: Event) {
     this.inputChange.emit(event);

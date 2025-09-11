@@ -1,11 +1,17 @@
 import { ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
+import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   HostListener,
   OnDestroy,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
   ViewEncapsulation,
   computed,
   contentChildren,
@@ -61,14 +67,14 @@ import { ScSelectValue } from './select-value';
       <svg class="h-4 w-4 opacity-50" [class.rotate-180]="isOpen" si-chevron-down-icon></svg>
     </button>
 
-    <!-- Dropdown Panel -->
-    @if (isOpen) {
+    <!-- Dropdown Panel Template -->
+    <ng-template #dropdownPanel>
       <div [id]="'dropdown-' + id()" [attr.aria-labelledby]="'trigger-' + id()" sc-select-dropdown>
         <div sc-select-content>
           <ng-content />
         </div>
       </div>
-    }
+    </ng-template>
   `,
   host: {
     '[class]': 'class()',
@@ -77,7 +83,7 @@ import { ScSelectValue } from './select-value';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestroy {
+export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAccessor, OnDestroy {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -86,7 +92,9 @@ export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestr
 
   readonly placeholder = input('Select an option');
   readonly options = contentChildren(ScOption);
-  readonly trigger = viewChild.required<ElementRef>('trigger');
+
+  @ViewChild('trigger', { static: false }) trigger!: ElementRef;
+  @ViewChild('dropdownPanel', { static: false }) dropdownPanel!: TemplateRef<any>;
 
   isOpen = false;
   selectedOption: ScOption | null = null;
@@ -98,6 +106,16 @@ export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestr
   private destroy$ = new Subject<void>();
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
+  private overlay = inject(Overlay);
+  private viewContainerRef = inject(ViewContainerRef);
+  private overlayRef: OverlayRef | null = null;
+  private portal: TemplatePortal | null = null;
+
+  ngAfterViewInit() {
+    // View is now initialized, overlay can be created
+    console.log('View initialized, trigger:', this.trigger?.nativeElement);
+    console.log('Dropdown panel template:', this.dropdownPanel);
+  }
 
   ngAfterContentInit() {
     this.keyManager = new ActiveDescendantKeyManager(this.options()).withWrap().withTypeAhead();
@@ -124,6 +142,7 @@ export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestr
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    this.closeOverlay();
   }
 
   private scrollToOption(option: ScOption) {
@@ -166,7 +185,7 @@ export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestr
         case 'Escape':
           event.preventDefault();
           this.close();
-          this.trigger().nativeElement.focus();
+          this.trigger?.nativeElement?.focus();
           break;
         case 'ArrowUp':
         case 'ArrowDown':
@@ -182,19 +201,18 @@ export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestr
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.trigger().nativeElement.contains(event.target) && this.isOpen) {
-      this.close();
-    }
-  }
-
   toggle() {
     this.isOpen ? this.close() : this.open();
   }
 
   open() {
+    console.log('Open called, isOpen:', this.isOpen);
+    if (this.isOpen) return;
+
     this.isOpen = true;
+    console.log('Calling createOverlay...');
+    this.createOverlay();
+
     // Set initial active item
     if (this.selectedOption) {
       const index = this.options().indexOf(this.selectedOption);
@@ -209,9 +227,97 @@ export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestr
   }
 
   close() {
+    if (!this.isOpen) return;
+
     this.isOpen = false;
     this.keyManager.setActiveItem(-1);
     this.activeDescendant = null;
+    this.closeOverlay();
+  }
+
+  private createOverlay() {
+    console.log('createOverlay called');
+    if (this.overlayRef) {
+      console.log('Overlay already exists, returning');
+      return;
+    }
+
+    const triggerEl = this.trigger?.nativeElement;
+    console.log('Trigger element:', triggerEl);
+    if (!triggerEl) {
+      console.error('Trigger element not found!');
+      return;
+    }
+
+    const panelTemplate = this.dropdownPanel;
+    console.log('Panel template:', panelTemplate);
+    if (!panelTemplate) {
+      console.error('Panel template not found!');
+      return;
+    }
+
+    const positionStrategy = this.overlay
+      .position()
+      .flexibleConnectedTo(triggerEl)
+      .withPositions([
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'start',
+          overlayY: 'top',
+        },
+        {
+          originX: 'start',
+          originY: 'top',
+          overlayX: 'start',
+          overlayY: 'bottom',
+        },
+      ])
+      .withFlexibleDimensions(false)
+      .withPush(false);
+
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
+
+    const config: OverlayConfig = {
+      positionStrategy,
+      scrollStrategy,
+      width: triggerEl.getBoundingClientRect().width,
+      maxHeight: 256, // max-h-64 equivalent
+      hasBackdrop: false,
+    };
+
+    console.log('Creating overlay with config:', config);
+    this.overlayRef = this.overlay.create(config);
+    console.log('Overlay created:', this.overlayRef);
+
+    this.portal = new TemplatePortal(panelTemplate, this.viewContainerRef);
+    console.log('Portal created:', this.portal);
+
+    console.log('Attaching portal to overlay...');
+    this.overlayRef.attach(this.portal);
+    console.log('Portal attached successfully');
+
+    // Close on backdrop click
+    this.overlayRef
+      .outsidePointerEvents()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        console.log('Outside click detected, closing...');
+        this.close();
+      });
+  }
+
+  private closeOverlay() {
+    console.log('closeOverlay called');
+    if (this.overlayRef) {
+      console.log('Disposing overlay...');
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+      this.portal = null;
+      console.log('Overlay disposed');
+    } else {
+      console.log('No overlay to close');
+    }
   }
 
   selectOption(option: ScOption) {
@@ -228,7 +334,7 @@ export class ScSelect implements AfterContentInit, ControlValueAccessor, OnDestr
 
     // Close dropdown
     this.close();
-    this.trigger().nativeElement.focus();
+    this.trigger?.nativeElement?.focus();
   }
 
   // ControlValueAccessor implementation

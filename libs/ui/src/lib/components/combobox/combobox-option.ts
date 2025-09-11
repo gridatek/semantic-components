@@ -17,7 +17,7 @@ export class ScComboboxOption implements Highlightable {
 
   readonly item = input.required<string | ScComboboxItem>();
   readonly isSelected = input<boolean>(false);
-  isActive: boolean = false;
+  isActive = false;
   disabled?: boolean = false;
 
   setActiveStyles(): void {
