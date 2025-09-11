@@ -49,7 +49,7 @@ Modern spacing between items
 
 - `'0'` - No gap
 - `'1'` - 4px gap
-- `'2'` - 8px gap
+- `'2'` - 8px gap **[default]**
 - `'3'` - 12px gap
 - `'4'` - 16px gap
 - `'6'` - 24px gap

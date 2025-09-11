@@ -56,6 +56,7 @@ export const flexLayoutVariants = cva('flex', {
   defaultVariants: {
     direction: 'row',
     align: 'center',
+    gap: '2',
   },
 });
 
@@ -83,7 +84,7 @@ export class ScFlexLayout {
   readonly wrap = input<FlexLayoutVariants['wrap']>();
   readonly justify = input<FlexLayoutVariants['justify']>();
   readonly align = input<FlexLayoutVariants['align']>('center');
-  readonly gap = input<FlexLayoutVariants['gap']>();
+  readonly gap = input<FlexLayoutVariants['gap']>('2');
   readonly responsive = input<FlexLayoutVariants['responsive']>();
 
   protected readonly class = computed(() =>
