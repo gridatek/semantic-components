@@ -47,7 +47,7 @@ export class ScCheckboxGroup implements AfterContentInit, ControlValueAccessor {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('space-y-2', this.classInput()));
+  protected readonly class = computed(() => cn('block space-y-2', this.classInput()));
 
   readonly disabledInput = input<boolean, unknown>(false, {
     alias: 'disabled',
