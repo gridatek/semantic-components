@@ -110,8 +110,10 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
         <ng-template
           [cdkConnectedOverlayOrigin]="triggerElement()"
           [cdkConnectedOverlayOpen]="isOpen"
-          [cdkConnectedOverlayWidth]="triggerWidth"
-          [cdkConnectedOverlayHasBackdrop]="false"
+          [cdkConnectedOverlayWidth]="triggerWidth + 'px'"
+          [cdkConnectedOverlayMinWidth]="triggerWidth + 'px'"
+          [cdkConnectedOverlayHasBackdrop]="true"
+          [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
           [cdkConnectedOverlayPositions]="positions"
           (backdropClick)="close()"
           (detach)="close()"
@@ -125,6 +127,9 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
             [grouped]="grouped()"
             [selectedValue]="selectedValue"
             [selectedValues]="selectedValues"
+            [style.width.px]="triggerWidth"
+            [style.min-width.px]="triggerWidth"
+            [style.max-width.px]="triggerWidth"
             (itemSelected)="selectItem($event)"
             (itemActiveChange)="setActiveItem($event)"
           />

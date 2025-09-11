@@ -9,7 +9,7 @@ import { ScComboboxItem } from './combobox-types';
   imports: [ScComboboxOption],
   template: `
     <div
-      class="combobox-panel bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto"
+      class="combobox-panel w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto"
       [id]="listboxId()"
       [attr.aria-multiselectable]="multiple()"
       role="listbox"
@@ -109,6 +109,12 @@ import { ScComboboxItem } from './combobox-types';
 
       .combobox-panel {
         animation: slideDown 0.2s ease-out;
+        box-sizing: border-box;
+      }
+
+      .combobox-option {
+        width: 100%;
+        box-sizing: border-box;
       }
 
       /* Focus styles */
