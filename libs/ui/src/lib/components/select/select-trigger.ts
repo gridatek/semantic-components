@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 
@@ -31,6 +33,7 @@ export class ScSelectTrigger {
   });
 
   readonly isOpen = input<boolean>(false);
+  readonly elementRef = inject(ElementRef);
 
   protected readonly class = computed(() =>
     cn(

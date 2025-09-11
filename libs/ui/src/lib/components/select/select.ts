@@ -92,7 +92,7 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
   readonly placeholder = input('Select an option');
   readonly options = contentChildren(ScOption);
-  readonly trigger = viewChild.required<ElementRef>('trigger');
+  readonly trigger = viewChild.required<ScSelectTrigger>('trigger');
   readonly dropdownPanel = viewChild.required<TemplateRef<any>>('dropdownPanel');
 
   isOpen = false;
@@ -112,7 +112,8 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
   ngAfterViewInit() {
     // View is now initialized, overlay can be created
-    console.log('View initialized, trigger:', this.trigger()?.nativeElement);
+    console.log('View initialized, trigger component:', this.trigger());
+    console.log('Trigger element:', this.trigger()?.elementRef?.nativeElement);
     console.log('Dropdown panel template:', this.dropdownPanel());
   }
 
@@ -184,7 +185,7 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
         case 'Escape':
           event.preventDefault();
           this.close();
-          this.trigger()?.nativeElement?.focus();
+          this.trigger()?.elementRef?.nativeElement?.focus();
           break;
         case 'ArrowUp':
         case 'ArrowDown':
@@ -245,7 +246,7 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
       return;
     }
 
-    const triggerEl = this.trigger()?.nativeElement;
+    const triggerEl = this.trigger()?.elementRef?.nativeElement;
     console.log('Trigger element:', triggerEl);
     if (!triggerEl) {
       console.error('Trigger element not found!');
@@ -337,7 +338,7 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
     // Close dropdown
     this.close();
-    this.trigger()?.nativeElement?.focus();
+    this.trigger()?.elementRef?.nativeElement?.focus();
   }
 
   // ControlValueAccessor implementation
