@@ -193,6 +193,11 @@ export const appRoutes: Route[] = [
                 title: 'Editor Page',
               },
               {
+                path: 'components/file-upload',
+                loadComponent: () => import('./docs/components/file-upload/file-upload-page'),
+                title: 'File Upload Page',
+              },
+              {
                 path: 'components/hover-card',
                 loadComponent: () => import('./docs/components/hover-card/hover-card-page'),
                 title: 'Hover Card Page',
