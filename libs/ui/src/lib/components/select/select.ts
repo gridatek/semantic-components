@@ -112,9 +112,6 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
   ngAfterViewInit() {
     // View is now initialized, overlay can be created
-    console.log('View initialized, trigger component:', this.trigger());
-    console.log('Trigger element:', this.trigger()?.elementRef?.nativeElement);
-    console.log('Dropdown panel template:', this.dropdownPanel());
   }
 
   ngAfterContentInit() {
@@ -206,11 +203,9 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
   }
 
   open() {
-    console.log('Open called, isOpen:', this.isOpen);
     if (this.isOpen) return;
 
     this.isOpen = true;
-    console.log('Calling createOverlay...');
 
     // Wait a tick to ensure ViewChild is available
     setTimeout(() => {
@@ -240,23 +235,17 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
   }
 
   private createOverlay() {
-    console.log('createOverlay called');
     if (this.overlayRef) {
-      console.log('Overlay already exists, returning');
       return;
     }
 
     const triggerEl = this.trigger()?.elementRef?.nativeElement;
-    console.log('Trigger element:', triggerEl);
     if (!triggerEl) {
-      console.error('Trigger element not found!');
       return;
     }
 
     const panelTemplate = this.dropdownPanel();
-    console.log('Panel template:', panelTemplate);
     if (!panelTemplate) {
-      console.error('Panel template not found!');
       return;
     }
 
@@ -290,37 +279,24 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
       hasBackdrop: false,
     };
 
-    console.log('Creating overlay with config:', config);
     this.overlayRef = this.overlay.create(config);
-    console.log('Overlay created:', this.overlayRef);
-
     this.portal = new TemplatePortal(panelTemplate, this.viewContainerRef);
-    console.log('Portal created:', this.portal);
-
-    console.log('Attaching portal to overlay...');
     this.overlayRef.attach(this.portal);
-    console.log('Portal attached successfully');
 
     // Close on backdrop click
     this.overlayRef
       .outsidePointerEvents()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        console.log('Outside click detected, closing...');
         this.close();
       });
   }
 
   private closeOverlay() {
-    console.log('closeOverlay called');
     if (this.overlayRef) {
-      console.log('Disposing overlay...');
       this.overlayRef.dispose();
       this.overlayRef = null;
       this.portal = null;
-      console.log('Overlay disposed');
-    } else {
-      console.log('No overlay to close');
     }
   }
 
