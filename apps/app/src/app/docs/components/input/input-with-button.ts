@@ -6,7 +6,7 @@ import { ScButton, ScFlexLayout, ScInput } from '@semantic-components/ui';
   selector: 'app-input-with-button',
   imports: [ScInput, ScButton, ScFlexLayout],
   template: `
-    <div sc-flex-layout spacing="2">
+    <div sc-flex-layout gap="2">
       <input sc-input type="email" placeholder="Email" />
       <button sc-button type="submit">Subscribe</button>
     </div>
