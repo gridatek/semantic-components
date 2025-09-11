@@ -9,7 +9,8 @@
   "license": "MIT",
   "peerDependencies": {
     "clsx": "^2.1.1",
-    "tailwind-merge": ">=3.0.0"
+    "tailwind-merge": ">=3.0.0",
+    "@angular/core": ">=20.3.0"
   },
   "sideEffects": false,
   "repository": {
