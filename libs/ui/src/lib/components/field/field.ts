@@ -83,78 +83,23 @@ export class ScField {
     ),
   );
 
-  private readonly _idGenerator = inject(_IdGenerator);
-  private readonly _elementRef = inject(ElementRef);
-
-  readonly id = computed(() => {
-    // Use provided controlId if available
-    const providedId = this.controlId();
-    if (providedId) {
-      return providedId;
-    }
-
-    // Fallback to auto-generated ID
-    const control = this.formControl();
-    const componentType = control?.nativeElement.tagName.toLowerCase() || 'field';
-    return this._idGenerator.getId(`sc-${componentType}-`);
-  });
+  private readonly idGenerator = inject(_IdGenerator);
+  private readonly elementRef = inject(ElementRef);
 
   readonly scLabel = contentChild(ScLabel);
   readonly formControl = contentChild('[data-slot="control"]', {
-    read: ElementRef,
     descendants: true,
   });
 
   constructor() {
-    console.log('🏗️ ScField constructor called');
-
     afterNextRender(() => {
-      console.log('🔄 ScField afterNextRender called');
-      const fieldId = this.id();
-      const customId = this.controlId();
-      console.log('🆔 Field ID:', fieldId, customId ? '(custom)' : '(auto-generated)');
+      const fieldId = this.controlId();
 
-      // Set label for attribute
-      const label = this.scLabel();
-      console.log('🏷️ Label found:', label);
-      label?.for.set(fieldId);
+      console.log(this.formControl());
 
-      // Auto-detect and set ID on the form control with data-slot="control"
-      let controlRef = this.formControl();
-      console.log('🎛️ Control ref from contentChild:', controlRef);
-
-      // Fallback: Use querySelector if contentChild fails
-      if (!controlRef) {
-        const hostElement = this._elementRef.nativeElement;
-        const controlElement = hostElement.querySelector('[data-slot="control"]') as HTMLElement;
-        console.log('🔄 Fallback querySelector found:', controlElement);
-        if (controlElement) {
-          controlRef = { nativeElement: controlElement };
-        }
-      }
-
-      if (controlRef) {
-        const component = (controlRef.nativeElement as any)?.__ngContext__?.[8]; // Get component instance
-        console.log('🎯 Component instance:', component);
-
-        if (component) {
-          // Set ID signal
-          if (component.id?.set) {
-            component.id.set(fieldId);
-            console.log('✅ Set component ID to:', fieldId);
-          }
-        }
-
-        // Set placeholder for floating label (required for :not(:placeholder-shown) to work)
-        const isFloatingLabel = this.floatingLabel();
-        console.log('🏷️ Is floating label:', isFloatingLabel);
-
-        if (isFloatingLabel) {
-          console.log('🚀 Setting placeholder for floating label');
-          this.setFloatingLabelPlaceholder(controlRef.nativeElement, component);
-        }
-      } else {
-        console.warn('❌ No control element found with data-slot="control"');
+      if (fieldId) {
+        this.scLabel()?.for.set(fieldId);
+        // this.formControl()?.id?.set(fieldId);
       }
     });
   }

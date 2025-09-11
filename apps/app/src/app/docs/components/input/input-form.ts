@@ -46,9 +46,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <fieldset sc-fieldset>
-        <div sc-field>
+        <div sc-field controlId="username">
           <label sc-label>Username</label>
-          <input sc-input type="text" formControlName="username" placeholder="shadcn" />
+          <input sc-input formControlName="username" placeholder="shadcn" />
           <p sc-field-description>This is your public display name.</p>
           @if (
             form.get('username')?.invalid &&
