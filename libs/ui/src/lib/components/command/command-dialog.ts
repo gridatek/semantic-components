@@ -4,7 +4,7 @@ import { Injectable, TemplateRef, inject } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-export interface CommandDialogConfig {
+export interface ScCommandDialogConfig {
   title?: string;
   description?: string;
   showCloseButton?: boolean;
@@ -20,7 +20,7 @@ export interface CommandDialogConfig {
   data?: any;
 }
 
-export interface CommandDialogData {
+export interface ScCommandDialogData {
   title?: string;
   description?: string;
   showCloseButton?: boolean;
@@ -30,20 +30,20 @@ export interface CommandDialogData {
 @Injectable({
   providedIn: 'root',
 })
-export class CommandDialog {
+export class ScCommandDialog {
   private dialog = inject(Dialog);
 
-  openComponent<T>(component: ComponentType<T>, config?: CommandDialogConfig): DialogRef<T, any> {
+  openComponent<T>(component: ComponentType<T>, config?: ScCommandDialogConfig): DialogRef<T, any> {
     const dialogConfig = this.buildConfig(config);
     return this.dialog.open(component, dialogConfig as any);
   }
 
-  openTemplate<T>(template: TemplateRef<T>, config?: CommandDialogConfig): DialogRef<T, any> {
+  openTemplate<T>(template: TemplateRef<T>, config?: ScCommandDialogConfig): DialogRef<T, any> {
     const dialogConfig = this.buildConfig(config);
     return this.dialog.open(template, dialogConfig as any);
   }
 
-  private buildConfig(config?: CommandDialogConfig): DialogConfig {
+  private buildConfig(config?: ScCommandDialogConfig): DialogConfig {
     return {
       width: config?.width,
       height: config?.height,

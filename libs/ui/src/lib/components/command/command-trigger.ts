@@ -11,7 +11,7 @@ import {
 
 import { ScPlatformService } from '@semantic-components/utils';
 
-import { CommandDialog } from './command-dialog';
+import { ScCommandDialog } from './command-dialog';
 
 export interface CommandItemModel {
   id: string;
@@ -80,7 +80,7 @@ export interface CommandTriggerConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandTrigger {
-  private readonly commandDialogService = inject(CommandDialog);
+  private readonly commandDialogService = inject(ScCommandDialog);
   private readonly platformService = inject(ScPlatformService);
 
   // Inputs
