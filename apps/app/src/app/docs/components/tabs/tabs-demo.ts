@@ -55,11 +55,11 @@ import {
             </div>
 
             <div class="space-y-2" sc-card-content>
-              <div class="space-y-1" sc-field>
+              <div class="space-y-1" sc-field controlId="account-name">
                 <label sc-label>Name</label>
                 <input sc-input value="Pedro Duarte" data-slot="control" />
               </div>
-              <div class="space-y-1" sc-field>
+              <div class="space-y-1" sc-field controlId="account-username">
                 <label sc-label>Username</label>
                 <input sc-input value="@peduarte" data-slot="control" />
               </div>
@@ -79,11 +79,11 @@ import {
               </p>
             </div>
             <div class="space-y-2" sc-card-content>
-              <div class="space-y-1" sc-field>
+              <div class="space-y-1" sc-field controlId="current-password">
                 <label sc-label>Current password</label>
                 <input sc-input type="password" data-slot="control" />
               </div>
-              <div class="space-y-1" sc-field>
+              <div class="space-y-1" sc-field controlId="new-password">
                 <label sc-label>New password</label>
                 <input sc-input type="password" data-slot="control" />
               </div>

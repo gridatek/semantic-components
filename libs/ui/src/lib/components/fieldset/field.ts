@@ -58,6 +58,8 @@ export class ScField {
 
   readonly floatingLabel = input<boolean>(false);
 
+  readonly controlId = input<string>();
+
   protected readonly class = computed(() =>
     cn(
       fieldVariants({
@@ -71,6 +73,13 @@ export class ScField {
   private readonly _elementRef = inject(ElementRef);
 
   readonly id = computed(() => {
+    // Use provided controlId if available
+    const providedId = this.controlId();
+    if (providedId) {
+      return providedId;
+    }
+
+    // Fallback to auto-generated ID
     const control = this.formControl();
     const componentType = control?.nativeElement.tagName.toLowerCase() || 'field';
     return this._idGenerator.getId(`sc-${componentType}-`);
@@ -88,7 +97,8 @@ export class ScField {
     afterNextRender(() => {
       console.log('🔄 ScField afterNextRender called');
       const fieldId = this.id();
-      console.log('🆔 Field ID:', fieldId);
+      const customId = this.controlId();
+      console.log('🆔 Field ID:', fieldId, customId ? '(custom)' : '(auto-generated)');
 
       // Set label for attribute
       const label = this.scLabel();

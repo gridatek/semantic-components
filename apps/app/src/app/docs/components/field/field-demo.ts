@@ -36,12 +36,12 @@ import {
       </div>
 
       <div class="space-y-4" sc-card-content>
-        <div sc-field>
+        <div sc-field controlId="user-email">
           <label sc-label>Email</label>
           <input sc-input type="email" placeholder="Enter your email" data-slot="control" />
         </div>
 
-        <div sc-field>
+        <div sc-field controlId="user-name">
           <label sc-label>Name</label>
           <input sc-input placeholder="Enter your name" data-slot="control" />
         </div>

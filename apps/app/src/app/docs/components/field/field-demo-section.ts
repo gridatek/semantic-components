@@ -22,7 +22,7 @@ export class FieldDemoSection {
 
   protected readonly code = `import { ScField, ScInput, ScLabel } from '@semantic-components/ui';
 
-<div sc-field>
+<div sc-field controlId="user-email">
   <label sc-label>Email</label>
   <input sc-input type="email" placeholder="Enter your email" data-slot="control" />
 </div>`;
