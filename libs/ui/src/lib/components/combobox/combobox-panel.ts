@@ -97,39 +97,6 @@ import { ScComboboxItem } from './combobox-types';
       }
     </div>
   `,
-  styles: [
-    `
-      /* Custom animations */
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .combobox-panel {
-        box-sizing: border-box;
-      }
-
-      .combobox-option {
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      .combobox-option:hover {
-        @apply bg-accent text-accent-foreground;
-      }
-
-      /* Focus styles */
-      .combobox-option:focus {
-        outline: none;
-      }
-    `,
-  ],
 })
 export class ScComboboxPanel {
   @ViewChildren(ScComboboxOption) options!: QueryList<ScComboboxOption>;

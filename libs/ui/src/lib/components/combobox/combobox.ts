@@ -161,32 +161,8 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
   `,
   host: {
     'data-slot': 'control',
+    class: 'block',
   },
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-
-      /* Tailwind animation classes */
-      .animate-spin {
-        animation: spin 1s linear infinite;
-      }
-
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .rotate-180 {
-        transform: rotate(180deg);
-      }
-    `,
-  ],
 })
 export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
   readonly idInput = input<string>(inject(_IdGenerator).getId('sc-combobox-'), {
