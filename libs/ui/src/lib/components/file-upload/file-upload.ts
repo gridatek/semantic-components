@@ -72,10 +72,7 @@ const fileUploadVariants = cva(
         </svg>
 
         <div class="mt-4 text-center">
-          <div class="text-sm font-semibold">
-            <span class="text-primary">Click to upload</span>
-            <span class="text-muted-foreground">or drag and drop</span>
-          </div>
+          <div class="text-sm font-semibold text-foreground">Click to upload or drag and drop</div>
 
           @if (accept() || maxSize()) {
             <div class="mt-2 space-y-1">
