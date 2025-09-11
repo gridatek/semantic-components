@@ -8,6 +8,8 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScField,
+  ScFieldset,
   ScInput,
   ScLabel,
   ScOption,
@@ -24,6 +26,8 @@ import {
     ScCardContent,
     ScCardFooter,
     ScButton,
+    ScFieldset,
+    ScField,
     ScLabel,
     ScInput,
     ScSelect,
@@ -37,21 +41,21 @@ import {
       </div>
       <div sc-card-content>
         <form>
-          <div class="grid w-full items-center gap-4">
-            <div class="flex flex-col space-y-1.5">
-              <label sc-label for="name">Name</label>
-              <input id="name" sc-input placeholder="Name of your project" />
+          <fieldset sc-fieldset>
+            <div sc-field controlId="project-name">
+              <label sc-label>Name</label>
+              <input sc-input placeholder="Name of your project" data-slot="control" />
             </div>
-            <div class="flex flex-col space-y-1.5">
-              <label sc-label for="framework">Framework</label>
-              <sc-select id="framework" placeholder="Select">
+            <div sc-field controlId="project-framework">
+              <label sc-label>Framework</label>
+              <sc-select placeholder="Select" data-slot="control">
                 <sc-option value="next">Next.js</sc-option>
                 <sc-option value="sveltekit">SvelteKit</sc-option>
                 <sc-option value="astro">Astro</sc-option>
                 <sc-option value="nuxt">Nuxt.js</sc-option>
               </sc-select>
             </div>
-          </div>
+          </fieldset>
         </form>
       </div>
       <div class="flex justify-between" sc-card-footer>
