@@ -50,7 +50,7 @@ import { ScComboboxItem } from './combobox-types';
         (input)="handleInput($event)"
         (focus)="focusChange.emit()"
         (blur)="blurChange.emit()"
-        (keydown)="keydownChange.emit($event)"
+        (keydown)="handleKeydown($event)"
         type="text"
         role="combobox"
         aria-autocomplete="list"
@@ -80,6 +80,21 @@ export class ScComboboxMultiInput {
 
   handleInput(event: Event) {
     this.inputChange.emit(event);
+  }
+
+  handleKeydown(event: KeyboardEvent) {
+    // Handle Delete/Backspace when input is empty to remove last chip
+    if ((event.key === 'Backspace' || event.key === 'Delete') && this.searchQuery === '') {
+      event.preventDefault();
+      const selectedValuesArray = Array.from(this.selectedValues());
+      if (selectedValuesArray.length > 0) {
+        const lastValue = selectedValuesArray[selectedValuesArray.length - 1];
+        this.chipRemoved.emit(lastValue);
+      }
+    } else {
+      // Emit keydown for other keys to be handled by parent
+      this.keydownChange.emit(event);
+    }
   }
 
   removeChip(value: string, event: Event) {
