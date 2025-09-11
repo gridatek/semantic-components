@@ -30,9 +30,16 @@ const fieldVariants = cva('', {
         '[&:has([data-slot=control]:not(:placeholder-shown))_label]:top-(--floating-label-top-offset)',
       ],
     },
+    orientation: {
+      vertical: 'flex flex-col',
+      horizontal: 'grid grid-cols-4 items-center gap-4 [&_[data-slot=control]]:col-span-3',
+      'horizontal-right':
+        'grid grid-cols-4 items-center gap-4 [&_label]:text-right [&_[data-slot=control]]:col-span-3',
+    },
   },
   defaultVariants: {
     type: 'regular',
+    orientation: 'vertical',
   },
 });
 
@@ -60,10 +67,13 @@ export class ScField {
 
   readonly controlId = input<string>();
 
+  readonly orientation = input<'vertical' | 'horizontal' | 'horizontal-right'>('vertical');
+
   protected readonly class = computed(() =>
     cn(
       fieldVariants({
         type: this.floatingLabel() ? 'floating' : 'regular',
+        orientation: this.orientation(),
       }),
       this.classInput(),
     ),

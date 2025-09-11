@@ -13,6 +13,8 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScField,
+  ScFieldset,
   ScInput,
   ScLabel,
   ScSheet,
@@ -29,6 +31,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScSheet,
     ScCardHeader,
     ScCardFooter,
+    ScFieldset,
+    ScField,
     ScInput,
     ScLabel,
     ScCardTitle,
@@ -52,15 +56,17 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           <h2 sc-card-title>Edit profile</h2>
           <p sc-card-description>Make changes to your profile here. Click save when you're done.</p>
         </div>
-        <div class="grid gap-4 py-4">
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label class="text-right" sc-label for="name">Name</label>
-            <input class="col-span-3" id="name" sc-input value="Pedro Duarte" />
-          </div>
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label class="text-right" sc-label for="username">Username</label>
-            <input class="col-span-3" id="username" sc-input value="@peduarte" />
-          </div>
+        <div class="py-4">
+          <fieldset sc-fieldset>
+            <div sc-field controlId="profile-name" orientation="horizontal-right">
+              <label sc-label>Name</label>
+              <input sc-input value="Pedro Duarte" data-slot="control" />
+            </div>
+            <div sc-field controlId="profile-username" orientation="horizontal-right">
+              <label sc-label>Username</label>
+              <input sc-input value="@peduarte" data-slot="control" />
+            </div>
+          </fieldset>
         </div>
         <div sc-card-footer>
           <button sc-button type="submit">Save changes</button>
