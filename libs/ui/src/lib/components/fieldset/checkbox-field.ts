@@ -9,12 +9,13 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-checkbox-field',
+  selector: 'div[sc-checkbox-field]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
+    'data-slot': 'checkbox-field',
     '[class]': 'class()',
   },
   styles: ``,

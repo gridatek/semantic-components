@@ -7,10 +7,10 @@ import { ScField, ScInput, ScLabel } from '@semantic-components/ui';
   selector: 'app-floating-label-demo',
   imports: [FormsModule, ScField, ScInput, ScLabel],
   template: `
-    <sc-field [floatingLabel]="true">
+    <div [floatingLabel]="true" sc-field>
       <label sc-label>Full Name</label>
       <input [(ngModel)]="floatingName" sc-input />
-    </sc-field>
+    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

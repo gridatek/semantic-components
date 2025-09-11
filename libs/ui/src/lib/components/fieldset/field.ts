@@ -18,12 +18,13 @@ import { cn } from '@semantic-components/utils';
 import { ScLabel } from '../label';
 
 @Component({
-  selector: 'sc-field',
+  selector: 'div[sc-field]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
+    'data-slot': 'field',
     '[class]': 'class()',
     '[style.--floating-label-top-offset]': '"-0.25rem"' /* -top-1 equivalent */,
   },

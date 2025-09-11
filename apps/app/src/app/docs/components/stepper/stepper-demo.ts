@@ -43,20 +43,20 @@ import {
               Let's start by setting up your account information.
             </p>
             <fieldset class="space-y-4" sc-fieldset>
-              <sc-field>
+              <div sc-field>
                 <label sc-label for="full-name">Full Name</label>
                 <input id="full-name" sc-input type="text" placeholder="Enter your full name" />
                 <p sc-field-description>
                   Enter your full legal name as it appears on official documents
                 </p>
-              </sc-field>
-              <sc-field>
+              </div>
+              <div sc-field>
                 <label sc-label for="email">Email Address</label>
                 <input id="email" sc-input type="email" placeholder="Enter your email" />
                 <p sc-field-description>
                   We'll use this email for account verification and important notifications
                 </p>
-              </sc-field>
+              </div>
             </fieldset>
           </div>
         </sc-step>
@@ -68,12 +68,12 @@ import {
               Add more details to help us personalize your experience.
             </p>
             <fieldset class="space-y-4" sc-fieldset>
-              <sc-field>
+              <div sc-field>
                 <label sc-label for="company">Company</label>
                 <input id="company" sc-input type="text" placeholder="Your company name" />
                 <p sc-field-description>The organization you work for (optional)</p>
-              </sc-field>
-              <sc-field>
+              </div>
+              <div sc-field>
                 <label sc-label for="role">Role</label>
                 <sc-select id="role">
                   <sc-option value="">Select your role</sc-option>
@@ -85,7 +85,7 @@ import {
                 <p sc-field-description>
                   Choose the role that best describes your primary job function
                 </p>
-              </sc-field>
+              </div>
             </fieldset>
           </div>
         </sc-step>
@@ -100,22 +100,22 @@ import {
               <fieldset sc-fieldset>
                 <legend sc-legend>Notifications</legend>
                 <div class="space-y-3">
-                  <sc-checkbox-field>
+                  <div sc-checkbox-field>
                     <input id="email-notifications" sc-checkbox type="checkbox" checked />
                     <label sc-label for="email-notifications">Email notifications</label>
-                  </sc-checkbox-field>
-                  <sc-checkbox-field>
+                  </div>
+                  <div sc-checkbox-field>
                     <input id="sms-notifications" sc-checkbox type="checkbox" />
                     <label sc-label for="sms-notifications">SMS notifications</label>
-                  </sc-checkbox-field>
+                  </div>
                 </div>
               </fieldset>
               <fieldset sc-fieldset>
                 <legend sc-legend>Privacy</legend>
-                <sc-checkbox-field>
+                <div sc-checkbox-field>
                   <input id="public-profile" sc-checkbox type="checkbox" />
                   <label sc-label for="public-profile">Make profile public</label>
-                </sc-checkbox-field>
+                </div>
               </fieldset>
             </div>
           </div>

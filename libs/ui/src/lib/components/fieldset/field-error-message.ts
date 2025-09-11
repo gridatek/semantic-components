@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'sc-error-message',
+  selector: 'sc-field-error-message',
   imports: [],
   template: `
     <p>error-message works!</p>
@@ -10,4 +10,4 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScErrorMessage {}
+export class ScFieldErrorMessage {}
