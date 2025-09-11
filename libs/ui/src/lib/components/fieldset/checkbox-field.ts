@@ -15,7 +15,7 @@ import { cn } from '@semantic-components/utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'checkbox-field',
+    'data-slot': 'field',
     '[class]': 'class()',
   },
   styles: ``,
