@@ -19,7 +19,7 @@ import { ScLabel } from '../label';
 const fieldVariants = cva('', {
   variants: {
     type: {
-      regular: '*:data-[slot=control]:mt-3 [&>[data-slot=control]+[data-slot=description]]:mt-2',
+      regular: '*:data-[slot=control]:mt-1 [&>[data-slot=control]+[data-slot=description]]:mt-2',
       floating: [
         'relative',
         '[&_label]:absolute [&_label]:left-3 [&_label]:z-10 [&_label]:transition-all [&_label]:duration-200 [&_label]:ease-in-out [&_label]:pointer-events-none',
