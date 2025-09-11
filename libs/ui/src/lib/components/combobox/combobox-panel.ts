@@ -48,11 +48,11 @@ import { ScComboboxItem } from './combobox-types';
 
       <!-- Grouped Options -->
       @if (!isLoading() && grouped() && filteredItems().length > 0) {
-        @for (group of getGroups(); track group) {
+        @for (group of getGroups(); track group.name) {
           <div class="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
             {{ group.name }}
           </div>
-          @for (item of group.items; track item; let i = $index) {
+          @for (item of group.items; track item.value; let i = $index) {
             <div
               class="combobox-option relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
               [item]="item"
@@ -89,7 +89,7 @@ import { ScComboboxItem } from './combobox-types';
 
       <!-- Non-grouped Options -->
       @if (!isLoading() && !grouped() && filteredItems().length > 0) {
-        @for (item of filteredItems(); track item; let i = $index) {
+        @for (item of filteredItems(); track getItemValue(item); let i = $index) {
           <div
             class="combobox-option relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
             [item]="item"
