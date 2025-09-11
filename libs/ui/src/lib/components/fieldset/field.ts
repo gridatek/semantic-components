@@ -35,6 +35,7 @@ const fieldVariants = cva('', {
       horizontal: 'grid grid-cols-4 items-center gap-4 [&_[data-slot=control]]:col-span-3',
       'horizontal-right':
         'grid grid-cols-4 items-center gap-4 [&_label]:text-right [&_[data-slot=control]]:col-span-3',
+      'horizontal-checkbox': 'flex items-center gap-2 min-h-[44px] group relative',
     },
   },
   defaultVariants: {
@@ -67,7 +68,9 @@ export class ScField {
 
   readonly controlId = input<string>();
 
-  readonly orientation = input<'vertical' | 'horizontal' | 'horizontal-right'>('vertical');
+  readonly orientation = input<
+    'vertical' | 'horizontal' | 'horizontal-right' | 'horizontal-checkbox'
+  >('vertical');
 
   protected readonly class = computed(() =>
     cn(

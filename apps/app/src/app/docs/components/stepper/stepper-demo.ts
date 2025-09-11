@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import {
   ScCheckbox,
-  ScCheckboxField,
   ScField,
   ScFieldDescription,
   ScFieldset,
@@ -28,7 +27,6 @@ import {
     ScHeading,
     ScOption,
     ScField,
-    ScCheckboxField,
     ScFieldDescription,
     ScFieldset,
     ScLegend,
@@ -100,11 +98,11 @@ import {
               <fieldset sc-fieldset>
                 <legend sc-legend>Notifications</legend>
                 <div class="space-y-3">
-                  <div sc-checkbox-field>
+                  <div sc-field orientation="horizontal-checkbox">
                     <input id="email-notifications" sc-checkbox type="checkbox" checked />
                     <label sc-label for="email-notifications">Email notifications</label>
                   </div>
-                  <div sc-checkbox-field>
+                  <div sc-field orientation="horizontal-checkbox">
                     <input id="sms-notifications" sc-checkbox type="checkbox" />
                     <label sc-label for="sms-notifications">SMS notifications</label>
                   </div>
@@ -112,7 +110,7 @@ import {
               </fieldset>
               <fieldset sc-fieldset>
                 <legend sc-legend>Privacy</legend>
-                <div sc-checkbox-field>
+                <div sc-field orientation="horizontal-checkbox">
                   <input id="public-profile" sc-checkbox type="checkbox" />
                   <label sc-label for="public-profile">Make profile public</label>
                 </div>
