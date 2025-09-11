@@ -121,11 +121,6 @@ export const appRoutes: Route[] = [
                 title: 'Carousel Page',
               },
               {
-                path: 'components/chart',
-                loadComponent: () => import('./docs/components/chart/chart-page'),
-                title: 'Chart Page',
-              },
-              {
                 path: 'components/clock-picker',
                 loadComponent: () => import('./docs/components/clock-picker/clock-picker-page'),
                 title: 'Clock Picker Page',
