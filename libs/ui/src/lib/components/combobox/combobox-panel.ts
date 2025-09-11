@@ -128,25 +128,6 @@ import { ScComboboxItem } from './combobox-types';
       .combobox-option:focus {
         outline: none;
       }
-
-      /* Scrollbar styling */
-      .combobox-panel::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      .combobox-panel::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
-      }
-
-      .combobox-panel::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 4px;
-      }
-
-      .combobox-panel::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
     `,
   ],
 })
