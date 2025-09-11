@@ -27,5 +27,7 @@ export class ScFieldDescription {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('text-sm text-muted-foreground', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('text-xs text-muted-foreground mt-1', this.classInput()),
+  );
 }
