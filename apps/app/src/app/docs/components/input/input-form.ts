@@ -6,6 +6,7 @@ import {
   ScButton,
   ScField,
   ScFieldDescription,
+  ScFieldErrorMessage,
   ScFieldset,
   ScInput,
   ScLabel,
@@ -20,6 +21,7 @@ import {
     ScLabel,
     ScButton,
     ScFieldDescription,
+    ScFieldErrorMessage,
     ScField,
     ScFieldset,
   ],
@@ -34,12 +36,12 @@ import {
             form.get('username')?.invalid &&
             (form.get('username')?.dirty || form.get('username')?.touched)
           ) {
-            <div class="text-sm text-destructive">
+            <div sc-field-error-message>
               @if (form.get('username')?.errors?.['required']) {
-                <div>Username is required.</div>
+                Username is required.
               }
               @if (form.get('username')?.errors?.['minlength']) {
-                <div>Username must be at least 2 characters.</div>
+                Username must be at least 2 characters.
               }
             </div>
           }
