@@ -45,7 +45,7 @@ const fieldVariants = cva('', {
   host: {
     'data-slot': 'field',
     '[class]': 'class()',
-    '[style.--floating-label-top-offset]': '"-0.25rem"' /* -top-1 equivalent */,
+    '[style.--floating-label-top-offset]': '"0"',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
