@@ -26,5 +26,7 @@ export class ScCheckboxItem {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('flex items-center gap-2', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('flex items-center gap-2 text-sm font-normal', this.classInput()),
+  );
 }

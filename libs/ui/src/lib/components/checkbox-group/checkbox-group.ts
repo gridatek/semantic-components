@@ -27,6 +27,7 @@ import { ScCheckbox, ScCheckboxChange } from '../checkbox/checkbox';
   `,
   host: {
     '[class]': 'class()',
+    'data-slot': 'control',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
