@@ -12,7 +12,7 @@ import {
   selector: 'app-checkbox-with-text',
   imports: [ScCheckbox, ScFieldDescription, ScField, ScLabel, ScLabelGroup],
   template: `
-    <div sc-field orientation="horizontal-checkbox" controlId="terms1">
+    <div sc-field orientation="checkbox-with-text" controlId="terms1">
       <input sc-checkbox />
       <div sc-label-group>
         <label sc-label>Accept terms and conditions</label>
