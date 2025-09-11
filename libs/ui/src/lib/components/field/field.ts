@@ -1,4 +1,3 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -83,37 +82,26 @@ export class ScField {
     ),
   );
 
-  private readonly idGenerator = inject(_IdGenerator);
   private readonly elementRef = inject(ElementRef);
 
   readonly scLabel = contentChild(ScLabel);
-  readonly formControl = contentChild('[data-slot="control"]', {
-    descendants: true,
-  });
 
   constructor() {
     afterNextRender(() => {
       const fieldId = this.controlId();
 
-      console.log(this.formControl());
+      // Find control element using querySelector
+      const hostElement = this.elementRef.nativeElement;
+      const controlElement = hostElement.querySelector('[data-slot="control"]');
 
       if (fieldId) {
         this.scLabel()?.for.set(fieldId);
-        // this.formControl()?.id?.set(fieldId);
+
+        if (controlElement) {
+          // Set ID directly on the DOM element
+          controlElement.id = fieldId;
+        }
       }
     });
-  }
-
-  private setFloatingLabelPlaceholder(element: HTMLElement, component?: any) {
-    // For custom components, directly set placeholder signal
-    if (component && component.placeholder?.set) {
-      component.placeholder.set(' ');
-      return;
-    }
-
-    // Fallback for native inputs
-    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-      (element as HTMLInputElement).placeholder = ' ';
-    }
   }
 }
