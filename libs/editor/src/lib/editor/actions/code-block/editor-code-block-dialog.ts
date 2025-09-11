@@ -142,6 +142,7 @@ export class ScEditorCodeBlockDialog {
       sql: 'SQL',
       yaml: 'YAML',
       xml: 'XML',
+      bash: 'Bash',
     };
 
     return languageNames[lang] || lang;

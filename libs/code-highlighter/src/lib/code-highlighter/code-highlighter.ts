@@ -11,8 +11,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { ScButton } from '@semantic-components/ui';
-import { ScTheme } from '@semantic-components/ui';
+import { ScButton, ScTheme } from '@semantic-components/ui';
 import { cn } from '@semantic-components/utils';
 import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 

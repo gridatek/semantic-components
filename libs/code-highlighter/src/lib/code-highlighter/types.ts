@@ -25,6 +25,7 @@ export const langsArray = [
   'sql',
   'yaml',
   'xml',
+  'bash',
 ] as const;
 // Create a type from the array elements
 export type LangType = (typeof langsArray)[number];
