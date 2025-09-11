@@ -43,7 +43,7 @@ export class ScField {
     cn(
       // Regular field spacing
       !this.floatingLabel() &&
-        '*:data-[slot=control]:mt-2 [&>[data-slot=control]+[data-slot=description]]:mt-2',
+        '*:data-[slot=control]:mt-3 [&>[data-slot=control]+[data-slot=description]]:mt-2',
       // Floating label positioning
       this.floatingLabel() && 'relative',
       this.floatingLabel() &&
