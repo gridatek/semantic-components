@@ -190,6 +190,12 @@
             "description": "An editor using Tiptap."
           },
           {
+            "id": "field",
+            "title": "Field",
+            "path": "/docs/components/field",
+            "description": "The ScField component provides automatic accessibility features and form field management, eliminating the need to manually manage label-input relationships."
+          },
+          {
             "id": "file-upload",
             "title": "File Upload",
             "path": "/docs/components/file-upload",

@@ -8,6 +8,7 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScField,
   ScInput,
   ScLabel,
   ScTab,
@@ -31,6 +32,7 @@ import {
     ScCardDescription,
     ScCardContent,
     ScCardFooter,
+    ScField,
     ScLabel,
     ScInput,
     ScButton,
@@ -53,13 +55,13 @@ import {
             </div>
 
             <div class="space-y-2" sc-card-content>
-              <div class="space-y-1">
-                <label sc-label for="name">Name</label>
-                <input id="name" sc-input value="Pedro Duarte" />
+              <div class="space-y-1" sc-field>
+                <label sc-label>Name</label>
+                <input sc-input value="Pedro Duarte" data-slot="control" />
               </div>
-              <div class="space-y-1">
-                <label sc-label for="username">Username</label>
-                <input id="username" sc-input value="@peduarte" />
+              <div class="space-y-1" sc-field>
+                <label sc-label>Username</label>
+                <input sc-input value="@peduarte" data-slot="control" />
               </div>
             </div>
             <div sc-card-footer>
@@ -77,13 +79,13 @@ import {
               </p>
             </div>
             <div class="space-y-2" sc-card-content>
-              <div class="space-y-1">
-                <label sc-label for="current">Current password</label>
-                <input id="current" sc-input type="password" />
+              <div class="space-y-1" sc-field>
+                <label sc-label>Current password</label>
+                <input sc-input type="password" data-slot="control" />
               </div>
-              <div class="space-y-1">
-                <label sc-label for="new">New password</label>
-                <input id="new" sc-input type="password" />
+              <div class="space-y-1" sc-field>
+                <label sc-label>New password</label>
+                <input sc-input type="password" data-slot="control" />
               </div>
             </div>
             <div sc-card-footer>

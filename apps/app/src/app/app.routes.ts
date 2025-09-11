@@ -193,6 +193,11 @@ export const appRoutes: Route[] = [
                 title: 'Editor Page',
               },
               {
+                path: 'components/field',
+                loadComponent: () => import('./docs/components/field/field-page'),
+                title: 'Field Page',
+              },
+              {
                 path: 'components/file-upload',
                 loadComponent: () => import('./docs/components/file-upload/file-upload-page'),
                 title: 'File Upload Page',
