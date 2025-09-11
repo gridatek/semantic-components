@@ -6,9 +6,9 @@ import { ScField, ScInput, ScLabel } from '@semantic-components/ui';
   selector: 'app-input-with-label',
   imports: [ScField, ScInput, ScLabel],
   template: `
-    <div class="w-full max-w-sm" sc-field controlId="email">
+    <div sc-field controlId="email">
       <label sc-label>Email</label>
-      <input sc-input type="email" placeholder="Email" data-slot="control" />
+      <input sc-input type="email" placeholder="Email" />
     </div>
   `,
   styles: ``,
