@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
+import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-async-combobox-demo',
@@ -30,7 +30,7 @@ export class AsyncComboboxDemo {
   selectedUser: string = '';
 
   // Async search function
-  searchUsers = async (query: string): Promise<ComboboxItem[]> => {
+  searchUsers = async (query: string): Promise<ScComboboxItem[]> => {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 800));
 

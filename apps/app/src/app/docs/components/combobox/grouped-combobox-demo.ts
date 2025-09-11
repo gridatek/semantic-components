@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
+import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-grouped-combobox-demo',
@@ -27,7 +27,7 @@ import { ComboboxItem, ScCombobox, ScField, ScLabel } from '@semantic-components
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GroupedComboboxDemo {
-  countries: ComboboxItem[] = [
+  countries: ScComboboxItem[] = [
     { label: 'United States', value: 'us', group: 'North America' },
     { label: 'Canada', value: 'ca', group: 'North America' },
     { label: 'Mexico', value: 'mx', group: 'North America' },
