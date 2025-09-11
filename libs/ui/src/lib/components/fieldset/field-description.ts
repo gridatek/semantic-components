@@ -9,20 +9,20 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'p[sc-description]',
+  selector: 'p[sc-field-description]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'description',
+    'data-slot': 'field-description',
     '[class]': 'class()',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScDescription {
+export class ScFieldDescription {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

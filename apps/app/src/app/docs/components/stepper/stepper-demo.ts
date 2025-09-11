@@ -4,6 +4,7 @@ import {
   ScCheckbox,
   ScCheckboxField,
   ScField,
+  ScFieldDescription,
   ScFieldset,
   ScHeading,
   ScInput,
@@ -28,6 +29,7 @@ import {
     ScOption,
     ScField,
     ScCheckboxField,
+    ScFieldDescription,
     ScFieldset,
     ScLegend,
   ],
@@ -44,10 +46,16 @@ import {
               <sc-field>
                 <label sc-label for="full-name">Full Name</label>
                 <input id="full-name" sc-input type="text" placeholder="Enter your full name" />
+                <p sc-field-description>
+                  Enter your full legal name as it appears on official documents
+                </p>
               </sc-field>
               <sc-field>
                 <label sc-label for="email">Email Address</label>
                 <input id="email" sc-input type="email" placeholder="Enter your email" />
+                <p sc-field-description>
+                  We'll use this email for account verification and important notifications
+                </p>
               </sc-field>
             </fieldset>
           </div>
@@ -63,6 +71,7 @@ import {
               <sc-field>
                 <label sc-label for="company">Company</label>
                 <input id="company" sc-input type="text" placeholder="Your company name" />
+                <p sc-field-description>The organization you work for (optional)</p>
               </sc-field>
               <sc-field>
                 <label sc-label for="role">Role</label>
@@ -73,6 +82,9 @@ import {
                   <sc-option value="manager">Manager</sc-option>
                   <sc-option value="other">Other</sc-option>
                 </sc-select>
+                <p sc-field-description>
+                  Choose the role that best describes your primary job function
+                </p>
               </sc-field>
             </fieldset>
           </div>
