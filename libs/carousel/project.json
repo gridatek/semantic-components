@@ -10,15 +10,14 @@
       "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/carousel/ng-package.json"
+        "project": "libs/carousel/ng-package.json",
+        "tsConfig": "libs/carousel/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
           "tsConfig": "libs/carousel/tsconfig.lib.prod.json"
         },
-        "development": {
-          "tsConfig": "libs/carousel/tsconfig.lib.json"
-        }
+        "development": {}
       },
       "defaultConfiguration": "production"
     },
@@ -31,7 +30,8 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/carousel/jest.config.ts"
+        "jestConfig": "libs/carousel/jest.config.ts",
+        "tsConfig": "libs/carousel/tsconfig.spec.json"
       }
     },
     "lint": {
