@@ -9,6 +9,7 @@ import {
   input,
   model,
   output,
+  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
@@ -46,7 +47,7 @@ export class ScScrubArea {
   );
 
   private element = inject(ElementRef);
-  private isDragging = false;
+  protected readonly isDragging = signal(false);
   private startX = 0;
   private startValue = 0;
 
@@ -55,7 +56,7 @@ export class ScScrubArea {
     if (event.button !== 0) return; // Only left mouse button
 
     event.preventDefault();
-    this.isDragging = true;
+    this.isDragging.set(true);
     this.startX = event.clientX;
     this.startValue = this.value();
 
@@ -76,7 +77,7 @@ export class ScScrubArea {
   };
 
   private onMouseUp = () => {
-    this.isDragging = false;
+    this.isDragging.set(false);
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
     document.body.style.cursor = '';
