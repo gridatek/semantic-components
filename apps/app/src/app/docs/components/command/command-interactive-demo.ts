@@ -13,8 +13,8 @@ import {
 import { FormsModule } from '@angular/forms';
 
 import {
-  CommandDialog,
   ScCommand,
+  ScCommandDialog,
   ScCommandGroup,
   ScCommandInput,
   ScCommandItem,
@@ -296,7 +296,7 @@ export class CommandInteractiveDemo implements OnInit {
   commandService = inject(MockCommandService);
 
   private http = inject(HttpClient);
-  commandDialogService = inject(CommandDialog);
+  commandDialogService = inject(ScCommandDialog);
   commandCategories$!: Observable<CommandCategory[]>;
 
   // Signals for component state

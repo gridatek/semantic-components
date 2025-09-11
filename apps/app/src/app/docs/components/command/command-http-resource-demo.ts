@@ -1,19 +1,10 @@
 import { HttpClient, httpResource } from '@angular/common/http';
-import {
-  Component,
-  ElementRef,
-  TemplateRef,
-  computed,
-  effect,
-  inject,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, TemplateRef, computed, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import {
-  CommandDialog,
   ScCommand,
+  ScCommandDialog,
   ScCommandEmpty,
   ScCommandGroup,
   ScCommandInput,
@@ -254,7 +245,7 @@ export class CommandHttpResourceDemo {
 
   private http = inject(HttpClient);
   private platformService = inject(ScPlatformService);
-  commandDialogService = inject(CommandDialog);
+  commandDialogService = inject(ScCommandDialog);
 
   // Signals for reactive state
   searchQuery = signal('');

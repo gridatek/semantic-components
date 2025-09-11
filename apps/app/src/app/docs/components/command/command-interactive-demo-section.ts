@@ -19,7 +19,7 @@ export class CommandInteractiveDemoSection {
 
   protected readonly code = `// Service injection
 export class MyComponent {
-  commandDialogService = inject(CommandDialog);
+  commandDialogService = inject(ScCommandDialog);
 
   @ViewChild('commandTemplate') commandTemplate!: TemplateRef<any>;
 

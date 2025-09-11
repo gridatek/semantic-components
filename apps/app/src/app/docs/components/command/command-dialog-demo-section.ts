@@ -19,7 +19,7 @@ export class CommandDialogDemoSection {
 
   protected readonly code = `// Dialog service injection
 export class MyComponent {
-  commandDialogService = inject(CommandDialog);
+  commandDialogService = inject(ScCommandDialog);
   
   openCommandDialog() {
     this.commandDialogService.open({

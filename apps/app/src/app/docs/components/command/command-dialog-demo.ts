@@ -157,7 +157,7 @@ import {
   `,
 })
 export class CommandDialogDemo {
-  commandDialogService = inject(CommandDialog);
+  commandDialogService = inject(ScCommandDialog);
 
   readonly commandTemplate = viewChild.required<TemplateRef<any>>('commandTemplate');
 
