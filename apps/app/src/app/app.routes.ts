@@ -298,6 +298,11 @@ export const appRoutes: Route[] = [
                 title: 'Slider Page',
               },
               {
+                path: 'components/stepper',
+                loadComponent: () => import('./docs/components/stepper/stepper-page'),
+                title: 'Stepper Page',
+              },
+              {
                 path: 'components/switch',
                 loadComponent: () => import('./docs/components/switch/switch-page'),
                 title: 'Switch Page',

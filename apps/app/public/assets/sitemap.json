@@ -316,6 +316,12 @@
             "description": "An input where the user selects a value from within a given range."
           },
           {
+            "id": "stepper",
+            "title": "Stepper",
+            "path": "/docs/components/stepper",
+            "description": "A sequence of logical steps used to guide users through complex processes."
+          },
+          {
             "id": "switch",
             "title": "Switch",
             "path": "/docs/components/switch",
