@@ -22,7 +22,7 @@ import { cn } from '@semantic-components/utils';
   `,
   host: {
     '[class]': 'class()',
-    '[style.cursor]': 'isDragging ? "ew-resize" : "ew-resize"',
+    '[style.cursor]': 'isDragging() ? "ew-resize" : "ew-resize"',
     '[style.user-select]': '"none"',
   },
   styles: ``,
