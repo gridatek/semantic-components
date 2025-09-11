@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -12,15 +11,7 @@ import {
 
 @Component({
   selector: 'app-checkbox-group-demo',
-  imports: [
-    ScCheckboxGroup,
-    ScCheckboxItem,
-    ReactiveFormsModule,
-    ScCheckbox,
-    ScLabel,
-    ScField,
-    JsonPipe,
-  ],
+  imports: [ScCheckboxGroup, ScCheckboxItem, ReactiveFormsModule, ScCheckbox, ScLabel, ScField],
   template: `
     <form [formGroup]="toppingsForm">
       <div sc-field>
@@ -35,11 +26,6 @@ import {
         </sc-checkbox-group>
       </div>
     </form>
-
-    <div class="mt-4 p-4 bg-blue-50 rounded">
-      <h3 class="font-semibold mb-2">Form Value:</h3>
-      <pre>{{ toppingsForm.value | json }}</pre>
-    </div>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

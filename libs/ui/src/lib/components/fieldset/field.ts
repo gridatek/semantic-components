@@ -7,15 +7,34 @@ import {
   afterNextRender,
   computed,
   contentChild,
-  effect,
   inject,
   input,
-  signal,
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+import { cva } from 'class-variance-authority';
 
 import { ScLabel } from '../label';
+
+const fieldVariants = cva('', {
+  variants: {
+    type: {
+      regular: '*:data-[slot=control]:mt-3 [&>[data-slot=control]+[data-slot=description]]:mt-2',
+      floating: [
+        'relative',
+        '[&_label]:absolute [&_label]:left-3 [&_label]:z-10 [&_label]:transition-all [&_label]:duration-200 [&_label]:ease-in-out [&_label]:pointer-events-none',
+        '[&_label]:top-1/2 [&_label]:-translate-y-1/2 [&_label]:text-sm [&_label]:text-muted-foreground [&_label]:origin-left',
+        '[&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-primary [&:has([data-slot=control]:focus)_label]:bg-background [&:has([data-slot=control]:focus)_label]:px-1 [&:has([data-slot=control]:focus)_label]:-ml-1',
+        '[&:has([data-slot=control]:focus)_label]:top-(--floating-label-top-offset)',
+        '[&:has([data-slot=control]:not(:placeholder-shown))_label]:text-xs [&:has([data-slot=control]:not(:placeholder-shown))_label]:text-muted-foreground [&:has([data-slot=control]:not(:placeholder-shown))_label]:bg-background [&:has([data-slot=control]:not(:placeholder-shown))_label]:px-1 [&:has([data-slot=control]:not(:placeholder-shown))_label]:-ml-1',
+        '[&:has([data-slot=control]:not(:placeholder-shown))_label]:top-(--floating-label-top-offset)',
+      ],
+    },
+  },
+  defaultVariants: {
+    type: 'regular',
+  },
+});
 
 @Component({
   selector: 'div[sc-field]',
@@ -41,25 +60,9 @@ export class ScField {
 
   protected readonly class = computed(() =>
     cn(
-      // Regular field spacing
-      !this.floatingLabel() &&
-        '*:data-[slot=control]:mt-3 [&>[data-slot=control]+[data-slot=description]]:mt-2',
-      // Floating label positioning
-      this.floatingLabel() && 'relative',
-      this.floatingLabel() &&
-        '[&_label]:absolute [&_label]:left-3 [&_label]:z-10 [&_label]:transition-all [&_label]:duration-200 [&_label]:ease-in-out [&_label]:pointer-events-none',
-      this.floatingLabel() &&
-        '[&_label]:top-1/2 [&_label]:-translate-y-1/2 [&_label]:text-sm [&_label]:text-muted-foreground [&_label]:origin-left',
-      // Floating label states - focused
-      this.floatingLabel() &&
-        '[&:has([data-slot=control]:focus)_label]:text-xs [&:has([data-slot=control]:focus)_label]:text-primary [&:has([data-slot=control]:focus)_label]:bg-background [&:has([data-slot=control]:focus)_label]:px-1 [&:has([data-slot=control]:focus)_label]:-ml-1',
-      this.floatingLabel() &&
-        '[&:has([data-slot=control]:focus)_label]:top-(--floating-label-top-offset)',
-      // Floating label states - has value (using :not(:placeholder-shown))
-      this.floatingLabel() &&
-        '[&:has([data-slot=control]:not(:placeholder-shown))_label]:text-xs [&:has([data-slot=control]:not(:placeholder-shown))_label]:text-muted-foreground [&:has([data-slot=control]:not(:placeholder-shown))_label]:bg-background [&:has([data-slot=control]:not(:placeholder-shown))_label]:px-1 [&:has([data-slot=control]:not(:placeholder-shown))_label]:-ml-1',
-      this.floatingLabel() &&
-        '[&:has([data-slot=control]:not(:placeholder-shown))_label]:top-(--floating-label-top-offset)',
+      fieldVariants({
+        type: this.floatingLabel() ? 'floating' : 'regular',
+      }),
       this.classInput(),
     ),
   );
