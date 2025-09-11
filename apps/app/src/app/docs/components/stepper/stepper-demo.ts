@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import {
   ScCheckbox,
+  ScCheckboxField,
+  ScField,
   ScHeading,
   ScInput,
   ScLabel,
@@ -13,7 +15,18 @@ import {
 
 @Component({
   selector: 'app-stepper-demo',
-  imports: [ScStepper, ScStep, ScInput, ScLabel, ScSelect, ScCheckbox, ScHeading, ScOption],
+  imports: [
+    ScStepper,
+    ScStep,
+    ScInput,
+    ScLabel,
+    ScSelect,
+    ScCheckbox,
+    ScHeading,
+    ScOption,
+    ScField,
+    ScCheckboxField,
+  ],
   template: `
     <div class="w-full max-w-4xl">
       <sc-stepper (stepCompleteEvent)="onStepComplete()">
@@ -24,14 +37,14 @@ import {
               Let's start by setting up your account information.
             </p>
             <div class="space-y-4">
-              <div class="space-y-2">
+              <sc-field>
                 <label sc-label for="full-name">Full Name</label>
                 <input id="full-name" sc-input type="text" placeholder="Enter your full name" />
-              </div>
-              <div class="space-y-2">
+              </sc-field>
+              <sc-field>
                 <label sc-label for="email">Email Address</label>
                 <input id="email" sc-input type="email" placeholder="Enter your email" />
-              </div>
+              </sc-field>
             </div>
           </div>
         </sc-step>
@@ -43,11 +56,11 @@ import {
               Add more details to help us personalize your experience.
             </p>
             <div class="space-y-4">
-              <div class="space-y-2">
+              <sc-field>
                 <label sc-label for="company">Company</label>
                 <input id="company" sc-input type="text" placeholder="Your company name" />
-              </div>
-              <div class="space-y-2">
+              </sc-field>
+              <sc-field>
                 <label sc-label for="role">Role</label>
                 <sc-select id="role">
                   <sc-option value="">Select your role</sc-option>
@@ -56,7 +69,7 @@ import {
                   <sc-option value="manager">Manager</sc-option>
                   <sc-option value="other">Other</sc-option>
                 </sc-select>
-              </div>
+              </sc-field>
             </div>
           </div>
         </sc-step>
@@ -71,22 +84,22 @@ import {
               <div>
                 <h4 class="text-sm font-medium leading-none mb-3">Notifications</h4>
                 <div class="space-y-3">
-                  <div class="flex items-center space-x-2">
+                  <sc-checkbox-field>
                     <input id="email-notifications" sc-checkbox type="checkbox" checked />
                     <label sc-label for="email-notifications">Email notifications</label>
-                  </div>
-                  <div class="flex items-center space-x-2">
+                  </sc-checkbox-field>
+                  <sc-checkbox-field>
                     <input id="sms-notifications" sc-checkbox type="checkbox" />
                     <label sc-label for="sms-notifications">SMS notifications</label>
-                  </div>
+                  </sc-checkbox-field>
                 </div>
               </div>
               <div>
                 <h4 class="text-sm font-medium leading-none mb-3">Privacy</h4>
-                <div class="flex items-center space-x-2">
+                <sc-checkbox-field>
                   <input id="public-profile" sc-checkbox type="checkbox" />
                   <label sc-label for="public-profile">Make profile public</label>
-                </div>
+                </sc-checkbox-field>
               </div>
             </div>
           </div>
