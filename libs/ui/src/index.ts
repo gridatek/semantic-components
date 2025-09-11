@@ -53,6 +53,7 @@ export * from './lib/components/page';
 export * from './lib/components/typography';
 export * from './lib/components/combobox';
 export * from './lib/components/clock-picker';
+export * from './lib/components/field';
 export * from './lib/components/fieldset';
 export * from './lib/components/touch-area';
 export * from './lib/components/color-picker';
