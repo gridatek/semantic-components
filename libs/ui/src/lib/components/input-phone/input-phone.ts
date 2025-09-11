@@ -28,7 +28,7 @@ import { ScPlainInput } from '../input/plain-input';
     '[type]': '"tel"',
     '[placeholder]': 'placeholder() || "Enter phone number"',
     '[autocomplete]': '"tel"',
-    '[inputmode]': '"tel"',
+    '[attr.inputmode]': '"tel"',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,

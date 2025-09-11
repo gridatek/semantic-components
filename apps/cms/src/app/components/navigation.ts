@@ -23,7 +23,6 @@ import {
     RouterModule,
     FormsModule,
     ScButton,
-    ScCommandDialog,
     ScCommandInput,
     ScCommandList,
     ScCommandEmpty,
@@ -249,27 +248,25 @@ import {
           class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg"
           sc-dialog-content
         >
-          <sc-command-dialog>
-            <sc-command-input placeholder="Type a command or search..." />
-            <sc-command-list>
-              <sc-command-empty>No results found.</sc-command-empty>
-              <sc-command-item (click)="selectResult('home')">
-                <span>🏠 Home</span>
-              </sc-command-item>
-              <sc-command-item (click)="selectResult('about')">
-                <span>ℹ️ About</span>
-              </sc-command-item>
-              <sc-command-item (click)="selectResult('content')">
-                <span>📝 Content</span>
-              </sc-command-item>
-              <sc-command-item (click)="selectResult('media')">
-                <span>🖼️ Media</span>
-              </sc-command-item>
-              <sc-command-item (click)="selectResult('settings')">
-                <span>⚙️ Settings</span>
-              </sc-command-item>
-            </sc-command-list>
-          </sc-command-dialog>
+          <sc-command-input placeholder="Type a command or search..." />
+          <sc-command-list>
+            <sc-command-empty>No results found.</sc-command-empty>
+            <sc-command-item (click)="selectResult('home')">
+              <span>🏠 Home</span>
+            </sc-command-item>
+            <sc-command-item (click)="selectResult('about')">
+              <span>ℹ️ About</span>
+            </sc-command-item>
+            <sc-command-item (click)="selectResult('content')">
+              <span>📝 Content</span>
+            </sc-command-item>
+            <sc-command-item (click)="selectResult('media')">
+              <span>🖼️ Media</span>
+            </sc-command-item>
+            <sc-command-item (click)="selectResult('settings')">
+              <span>⚙️ Settings</span>
+            </sc-command-item>
+          </sc-command-list>
         </div>
       </div>
     }

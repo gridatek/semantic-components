@@ -23,8 +23,6 @@ import { ScComboboxOption } from './combobox-option';
 import { ScComboboxPanel } from './combobox-panel';
 import { ScComboboxItem } from './combobox-types';
 
-export { ScComboboxItem as ComboboxItem } from './combobox-types';
-
 @Component({
   selector: 'sc-combobox',
   imports: [OverlayModule, ScComboboxInput, ScComboboxMultiInput, ScComboboxPanel],
