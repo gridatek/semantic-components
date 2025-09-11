@@ -316,30 +316,12 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
       const asyncSearchFn = this.asyncSearchFn();
       if (asyncSearchFn) {
         this.filteredItems = await asyncSearchFn(query);
+        this.open();
       } else {
-        // Default mock implementation
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        const mockUsers = [
-          'John Doe',
-          'Jane Smith',
-          'Bob Johnson',
-          'Alice Williams',
-          'Charlie Brown',
-          'Diana Prince',
-          'Eve Adams',
-          'Frank Miller',
-        ];
-
-        this.filteredItems = mockUsers
-          .filter((user) => user.toLowerCase().includes(query))
-          .map((user) => ({
-            label: user,
-            value: user.toLowerCase().replace(' ', '_'),
-            subtitle: `@${user.toLowerCase().replace(' ', '_')}`,
-          }));
+        // No default implementation - asyncSearchFn is required for async mode
+        console.warn('asyncSearchFn is required when using async mode');
+        this.filteredItems = [];
       }
-
-      this.open();
     } finally {
       this.isLoading = false;
     }
