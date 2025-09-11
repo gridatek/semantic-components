@@ -7,7 +7,7 @@ import { ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
   selector: 'app-basic-combobox-demo',
   imports: [FormsModule, ScCombobox, ScField, ScLabel],
   template: `
-    <sc-field>
+    <div sc-field>
       <label sc-label>Choose a fruit</label>
       <sc-combobox
         [(ngModel)]="selectedFruit"
@@ -15,7 +15,7 @@ import { ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
         (selectionChange)="onFruitChange($event)"
         placeholder="Type to search..."
       />
-    </sc-field>
+    </div>
     <p class="mt-4 text-sm text-gray-600">
       Selected value in parent:
       <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedFruit || 'None' }}</code>

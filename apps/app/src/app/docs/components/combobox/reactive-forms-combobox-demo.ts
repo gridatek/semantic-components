@@ -9,16 +9,16 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
   imports: [CommonModule, ReactiveFormsModule, ScCombobox, ScField, ScLabel],
   template: `
     <form class="space-y-4" [formGroup]="demoForm">
-      <sc-field>
+      <div sc-field>
         <label sc-label>Select your favorite programming language</label>
         <sc-combobox
           [items]="programmingLanguages"
           placeholder="Choose a language..."
           formControlName="language"
         />
-      </sc-field>
+      </div>
 
-      <sc-field>
+      <div sc-field>
         <label sc-label>Select frameworks</label>
         <sc-combobox
           [items]="frameworks"
@@ -26,7 +26,7 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
           placeholder="Choose frameworks..."
           formControlName="frameworks"
         />
-      </sc-field>
+      </div>
 
       <div class="mt-4 p-4 bg-gray-50 rounded">
         <h3 class="font-semibold text-gray-700 mb-2">Form Values:</h3>

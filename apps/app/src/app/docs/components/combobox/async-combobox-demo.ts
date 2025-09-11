@@ -7,7 +7,7 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
   selector: 'app-async-combobox-demo',
   imports: [FormsModule, ScCombobox, ScField, ScLabel],
   template: `
-    <sc-field>
+    <div sc-field>
       <label sc-label>Search users</label>
       <sc-combobox
         [(ngModel)]="selectedUser"
@@ -16,7 +16,7 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
         (selectionChange)="onUserChange($event)"
         placeholder="Start typing to search..."
       />
-    </sc-field>
+    </div>
     <p class="mt-4 text-sm text-gray-600">
       Selected user:
       <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedUser || 'None' }}</code>

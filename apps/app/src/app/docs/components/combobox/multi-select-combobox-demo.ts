@@ -8,7 +8,7 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
   selector: 'app-multi-select-combobox-demo',
   imports: [CommonModule, FormsModule, ScCombobox, ScField, ScLabel],
   template: `
-    <sc-field>
+    <div sc-field>
       <label sc-label>Select technologies</label>
       <sc-combobox
         [(ngModel)]="selectedTechnologies"
@@ -17,7 +17,7 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
         (selectionChange)="onTechnologiesChange($event)"
         placeholder="Add technologies..."
       />
-    </sc-field>
+    </div>
     <p class="mt-4 text-sm text-gray-600">
       Selected values:
       <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedTechnologies | json }}</code>

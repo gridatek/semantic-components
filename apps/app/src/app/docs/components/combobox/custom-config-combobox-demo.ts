@@ -8,7 +8,7 @@ import { ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
   imports: [FormsModule, ScCombobox, ScField, ScLabel],
   template: `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <sc-field>
+      <div sc-field>
         <label sc-label>Without toggle button</label>
         <sc-combobox
           [(ngModel)]="customConfig1"
@@ -16,8 +16,8 @@ import { ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
           [showToggleButton]="false"
           placeholder="Type to search..."
         />
-      </sc-field>
-      <sc-field>
+      </div>
+      <div sc-field>
         <label sc-label>Without status display</label>
         <sc-combobox
           [(ngModel)]="customConfig2"
@@ -25,7 +25,7 @@ import { ScCombobox, ScField, ScLabel } from '@semantic-components/ui';
           [showStatus]="false"
           placeholder="Type to search..."
         />
-      </sc-field>
+      </div>
     </div>
   `,
   styles: ``,

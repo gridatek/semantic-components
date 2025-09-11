@@ -7,7 +7,7 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
   selector: 'app-grouped-combobox-demo',
   imports: [FormsModule, ScCombobox, ScField, ScLabel],
   template: `
-    <sc-field>
+    <div sc-field>
       <label sc-label>Select a country</label>
       <sc-combobox
         [(ngModel)]="selectedCountry"
@@ -16,7 +16,7 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
         (selectionChange)="onCountryChange($event)"
         placeholder="Search countries..."
       />
-    </sc-field>
+    </div>
     <p class="mt-4 text-sm text-gray-600">
       Selected country:
       <code class="bg-gray-100 px-2 py-1 rounded">{{ selectedCountry || 'None' }}</code>
