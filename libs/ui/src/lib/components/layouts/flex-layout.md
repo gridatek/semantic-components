@@ -55,12 +55,6 @@ Modern spacing between items
 - `'6'` - 24px gap
 - `'8'` - 32px gap
 
-### spacing
-
-Legacy space-x-\* classes (use gap instead)
-
-- Same values as gap but uses space-x-\* classes
-
 ### wrap
 
 Controls item wrapping
@@ -83,7 +77,7 @@ Predefined responsive patterns
 ### Input with Button
 
 ```html
-<div sc-flex-layout spacing="2">
+<div sc-flex-layout gap="2">
   <input sc-input placeholder="Email" />
   <button sc-button>Subscribe</button>
 </div>
@@ -155,7 +149,7 @@ You can still add custom Tailwind classes via the `class` attribute:
 
 ## Tips
 
-1. **Use `gap` instead of `spacing`** - Modern approach, works in all directions
+1. **Use `gap` for spacing** - Modern approach, works in all directions
 2. **Start simple** - Most layouts only need `direction` and `gap`
 3. **Combine patterns** - Use nested ScFlexLayout for complex layouts
 4. **Mobile-first** - Use `responsive` props for mobile-friendly layouts
