@@ -10,27 +10,28 @@ import { ScComboboxItem } from './combobox-types';
   imports: [FormsModule, OverlayModule],
   template: `
     <div
-      class="min-h-[42px] w-full px-3 py-1 border border-gray-300 rounded-lg focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent transition duration-200 flex flex-wrap gap-2 items-center"
+      class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-wrap gap-2 min-h-[2.5rem]"
       #trigger="cdkOverlayOrigin"
       cdkOverlayOrigin
     >
       <div class="selected-chips flex flex-wrap gap-2">
         @for (value of selectedValues(); track value) {
           <div
-            class="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-sm"
+            class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 gap-1"
           >
             {{ getItemLabel(value) }}
             <button
-              class="hover:text-blue-900"
+              class="ml-1 h-3 w-3 rounded-full outline-none ring-offset-background transition-colors hover:bg-secondary-foreground/20 focus:bg-secondary-foreground/20 focus:outline-none"
               (click)="removeChip(value, $event)"
               type="button"
               tabindex="-1"
             >
-              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
-                  fill-rule="evenodd"
-                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
             </button>
@@ -38,7 +39,7 @@ import { ScComboboxItem } from './combobox-types';
         }
       </div>
       <input
-        class="flex-1 min-w-[150px] outline-none py-1"
+        class="flex-1 min-w-[8rem] bg-transparent outline-none placeholder:text-muted-foreground"
         #inputElement
         [(ngModel)]="searchQuery"
         [id]="inputId()"

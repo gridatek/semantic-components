@@ -9,27 +9,25 @@ import { ScComboboxItem } from './combobox-types';
   imports: [ScComboboxOption],
   template: `
     <div
-      class="combobox-panel w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto"
+      class="combobox-panel relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
       [id]="listboxId()"
       [attr.aria-multiselectable]="multiple()"
       role="listbox"
     >
       <!-- No Results -->
       @if (filteredItems().length === 0) {
-        <div class="px-4 py-3 text-gray-500 text-sm">No results found</div>
+        <div class="py-6 text-center text-sm text-muted-foreground">No results found</div>
       }
 
       <!-- Grouped Options -->
       @if (grouped() && filteredItems().length > 0) {
         @for (group of getGroups(); track group) {
-          <div
-            class="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider bg-gray-50 group-header"
-          >
+          <div class="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
             {{ group.name }}
           </div>
           @for (item of group.items; track item; let i = $index) {
             <div
-              class="combobox-option px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
+              class="combobox-option relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
               [item]="item"
               [isSelected]="isItemSelected(item)"
               [id]="'option-' + group.name + '-' + i"
@@ -38,21 +36,24 @@ import { ScComboboxItem } from './combobox-types';
               appComboboxOption
             >
               <div class="flex flex-col">
-                <span class="text-gray-900">{{ item.label }}</span>
+                <span>{{ item.label }}</span>
                 @if (item.subtitle) {
-                  <span class="text-xs text-gray-500">
+                  <span class="text-xs text-muted-foreground">
                     {{ item.subtitle }}
                   </span>
                 }
               </div>
               @if (multiple() && isItemSelected(item)) {
-                <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                <span class="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </span>
               }
             </div>
           }
@@ -63,7 +64,7 @@ import { ScComboboxItem } from './combobox-types';
       @if (!grouped() && filteredItems().length > 0) {
         @for (item of filteredItems(); track item; let i = $index) {
           <div
-            class="combobox-option px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center justify-between"
+            class="combobox-option relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
             [item]="item"
             [isSelected]="isItemSelected(item)"
             [id]="'option-' + i"
@@ -72,21 +73,24 @@ import { ScComboboxItem } from './combobox-types';
             appComboboxOption
           >
             <div class="flex flex-col">
-              <span class="text-gray-900">{{ getItemLabel(item) }}</span>
+              <span>{{ getItemLabel(item) }}</span>
               @if (getItemSubtitle(item)) {
-                <span class="text-xs text-gray-500">
+                <span class="text-xs text-muted-foreground">
                   {{ getItemSubtitle(item) }}
                 </span>
               }
             </div>
             @if (multiple() && isItemSelected(item)) {
-              <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              <span class="absolute right-2 flex h-3.5 w-3.5 items-center justify-center">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </span>
             }
           </div>
         }
@@ -108,13 +112,16 @@ import { ScComboboxItem } from './combobox-types';
       }
 
       .combobox-panel {
-        animation: slideDown 0.2s ease-out;
         box-sizing: border-box;
       }
 
       .combobox-option {
         width: 100%;
         box-sizing: border-box;
+      }
+
+      .combobox-option:hover {
+        @apply bg-accent text-accent-foreground;
       }
 
       /* Focus styles */

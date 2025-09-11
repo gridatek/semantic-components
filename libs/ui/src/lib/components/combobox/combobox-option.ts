@@ -7,7 +7,8 @@ import { ScComboboxItem } from './combobox-types';
   selector: '[appComboboxOption]',
   standalone: true,
   host: {
-    '[class.bg-blue-50]': 'isActive',
+    '[class.bg-accent]': 'isActive',
+    '[class.text-accent-foreground]': 'isActive',
     '[attr.aria-selected]': 'isSelected()',
     role: 'option',
   },

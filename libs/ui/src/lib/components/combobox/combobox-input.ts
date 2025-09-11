@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   template: `
     <div class="relative">
       <input
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200"
+        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
         #inputElement
         #trigger="cdkOverlayOrigin"
         [(ngModel)]="searchQuery"
@@ -29,13 +29,13 @@ import { FormsModule } from '@angular/forms';
       />
       @if (showToggleButton()) {
         <button
-          class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 opacity-50 hover:opacity-100"
           (click)="toggleChange.emit()"
           type="button"
           tabindex="-1"
         >
           <svg
-            class="w-5 h-5 transition-transform duration-200"
+            class="h-4 w-4 shrink-0 transition-transform duration-200"
             [class.rotate-180]="isOpen()"
             fill="none"
             stroke="currentColor"
@@ -45,8 +45,8 @@ import { FormsModule } from '@angular/forms';
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            ></path>
+              d="m6 9 6 6 6-6"
+            />
           </svg>
         </button>
       }
