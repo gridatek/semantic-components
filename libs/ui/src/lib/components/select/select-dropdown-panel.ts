@@ -29,7 +29,7 @@ export class ScSelectDropdownPanel {
 
   protected readonly class = computed(() =>
     cn(
-      'min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md',
+      'w-full min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md',
       this.classInput(),
     ),
   );

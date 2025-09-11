@@ -258,12 +258,14 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
           originY: 'bottom',
           overlayX: 'start',
           overlayY: 'top',
+          offsetY: 4, // mt-1 equivalent (4px margin top)
         },
         {
           originX: 'start',
           originY: 'top',
           overlayX: 'start',
           overlayY: 'bottom',
+          offsetY: -4, // negative margin when positioned above
         },
       ])
       .withFlexibleDimensions(false)
