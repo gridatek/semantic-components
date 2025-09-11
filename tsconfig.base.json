@@ -19,11 +19,8 @@
       "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
       "@semantic-components/code-highlighter": ["libs/code-highlighter/src/index.ts"],
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
-      "@semantic-components/experimental": ["libs/experimental/src/index.ts"],
       "@semantic-components/image-cropper": ["libs/image-cropper/src/index.ts"],
-      "@semantic-components/logging": ["libs/logging/src/index.ts"],
       "@semantic-components/re-captcha": ["libs/re-captcha/src/index.ts"],
-      "@semantic-components/supabase": ["libs/supabase/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
       "@semantic-components/utils": ["libs/utils/src/index.ts"]
     }

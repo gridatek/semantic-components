@@ -6,7 +6,6 @@ import { BreadcrumbService } from './breadcrumb.service';
 
 @Component({
   selector: 'lib-breadcrumb',
-  standalone: true,
   imports: [RouterModule, JsonPipe],
   template: `
     {{ breadcrumbs() | json }}

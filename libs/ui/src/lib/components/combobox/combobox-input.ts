@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'sc-combobox-input',
-  standalone: true,
   imports: [FormsModule, OverlayModule],
   template: `
     <div class="relative">

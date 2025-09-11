@@ -5,7 +5,6 @@ import { ScComboboxItem } from './combobox-types';
 
 @Component({
   selector: 'sc-combobox-panel',
-  standalone: true,
   imports: [ScComboboxOption],
   template: `
     <div

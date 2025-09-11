@@ -4,7 +4,6 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, viewChild } from '@ang
 
 @Component({
   selector: 'sc-horizontal-scroll-area',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div class="relative w-full max-w-4xl">

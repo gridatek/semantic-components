@@ -27,7 +27,6 @@ export { ScComboboxItem as ComboboxItem } from './combobox-types';
 
 @Component({
   selector: 'sc-combobox',
-  standalone: true,
   imports: [OverlayModule, ScComboboxInput, ScComboboxMultiInput, ScComboboxPanel],
   providers: [
     {

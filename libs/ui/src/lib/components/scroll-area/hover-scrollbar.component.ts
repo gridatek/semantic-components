@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'sc-hover-scrollbar',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div

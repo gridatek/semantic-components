@@ -5,7 +5,6 @@ import { ScComboboxItem } from './combobox-types';
 
 @Directive({
   selector: '[scComboboxOption]',
-  standalone: true,
   host: {
     '[class.bg-accent]': 'isActive',
     '[class.text-accent-foreground]': 'isActive',

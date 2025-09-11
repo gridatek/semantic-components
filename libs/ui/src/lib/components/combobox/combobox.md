@@ -48,7 +48,6 @@ import { ComboboxComponent } from './combobox.component';
 
 @Component({
   selector: 'app-example',
-  standalone: true,
   imports: [ComboboxComponent, FormsModule],
   template: `
     <app-combobox [(ngModel)]="selectedItem" [items]="items" label="Select an item"></app-combobox>

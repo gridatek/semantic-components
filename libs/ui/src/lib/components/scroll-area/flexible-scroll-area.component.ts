@@ -12,7 +12,6 @@ import {
 
 @Component({
   selector: 'sc-flexible-scroll-area',
-  standalone: true,
   imports: [CommonModule],
   template: `
     <div

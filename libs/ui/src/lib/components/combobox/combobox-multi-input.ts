@@ -6,7 +6,6 @@ import { ScComboboxItem } from './combobox-types';
 
 @Component({
   selector: 'sc-combobox-multi-input',
-  standalone: true,
   imports: [FormsModule, OverlayModule],
   template: `
     <div
