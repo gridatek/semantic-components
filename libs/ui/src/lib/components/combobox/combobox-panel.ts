@@ -60,7 +60,7 @@ import { ScComboboxItem } from './combobox-types';
               [id]="'option-' + group.name + '-' + i"
               (click)="selectItem(item)"
               (mouseenter)="setActiveItem(item)"
-              appComboboxOption
+              scComboboxOption
             >
               <div class="flex flex-col">
                 <span>{{ item.label }}</span>
@@ -97,7 +97,7 @@ import { ScComboboxItem } from './combobox-types';
             [id]="'option-' + i"
             (click)="selectItem(item)"
             (mouseenter)="setActiveItem(item)"
-            appComboboxOption
+            scComboboxOption
           >
             <div class="flex flex-col">
               <span>{{ getItemLabel(item) }}</span>

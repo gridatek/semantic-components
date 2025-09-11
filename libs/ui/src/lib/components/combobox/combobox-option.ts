@@ -4,7 +4,7 @@ import { Directive, ElementRef, inject, input } from '@angular/core';
 import { ScComboboxItem } from './combobox-types';
 
 @Directive({
-  selector: '[appComboboxOption]',
+  selector: '[scComboboxOption]',
   standalone: true,
   host: {
     '[class.bg-accent]': 'isActive',
