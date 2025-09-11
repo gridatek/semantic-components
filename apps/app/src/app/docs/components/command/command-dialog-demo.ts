@@ -1,9 +1,9 @@
 import { Component, TemplateRef, inject, viewChild } from '@angular/core';
 
 import {
-  CommandDialog,
   ScButton,
   ScCommand,
+  ScCommandDialog,
   ScCommandEmpty,
   ScCommandGroup,
   ScCommandInput,
