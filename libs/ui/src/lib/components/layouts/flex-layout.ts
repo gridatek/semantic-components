@@ -55,6 +55,12 @@ export const flexLayoutVariants = cva('flex', {
       '6': 'space-x-6',
       '8': 'space-x-8',
     },
+    responsive: {
+      mobile: 'flex-col md:flex-row',
+      desktop: 'flex-row',
+      'stack-mobile': 'flex-col lg:flex-row',
+      'stack-tablet': 'flex-col md:flex-row',
+    },
   },
   defaultVariants: {
     direction: 'row',
@@ -88,6 +94,7 @@ export class ScFlexLayout {
   readonly align = input<FlexLayoutVariants['align']>('center');
   readonly gap = input<FlexLayoutVariants['gap']>();
   readonly spacing = input<FlexLayoutVariants['spacing']>();
+  readonly responsive = input<FlexLayoutVariants['responsive']>();
 
   protected readonly class = computed(() =>
     cn(
@@ -98,6 +105,7 @@ export class ScFlexLayout {
         align: this.align(),
         gap: this.gap(),
         spacing: this.spacing(),
+        responsive: this.responsive(),
       }),
       this.classInput(),
     ),
