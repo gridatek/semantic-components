@@ -9,6 +9,7 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScField,
+  ScFieldset,
   ScInput,
   ScLabel,
   ScTab,
@@ -36,6 +37,7 @@ import {
     ScLabel,
     ScInput,
     ScButton,
+    ScFieldset,
   ],
   template: `
     <div class="w-[400px]" sc-tabs value="account">
@@ -54,15 +56,17 @@ import {
               </p>
             </div>
 
-            <div class="space-y-2" sc-card-content>
-              <div class="space-y-1" sc-field controlId="account-name">
-                <label sc-label>Name</label>
-                <input sc-input value="Pedro Duarte" data-slot="control" />
-              </div>
-              <div class="space-y-1" sc-field controlId="account-username">
-                <label sc-label>Username</label>
-                <input sc-input value="@peduarte" data-slot="control" />
-              </div>
+            <div sc-card-content>
+              <fieldset sc-fieldset>
+                <div sc-field controlId="account-name">
+                  <label sc-label>Name</label>
+                  <input sc-input value="Pedro Duarte" data-slot="control" />
+                </div>
+                <div sc-field controlId="account-username">
+                  <label sc-label>Username</label>
+                  <input sc-input value="@peduarte" data-slot="control" />
+                </div>
+              </fieldset>
             </div>
             <div sc-card-footer>
               <button sc-button type="submit">Save changes</button>
@@ -78,15 +82,17 @@ import {
                 Change your password here. After saving, you'll be logged out.
               </p>
             </div>
-            <div class="space-y-2" sc-card-content>
-              <div class="space-y-1" sc-field controlId="current-password">
-                <label sc-label>Current password</label>
-                <input sc-input type="password" data-slot="control" />
-              </div>
-              <div class="space-y-1" sc-field controlId="new-password">
-                <label sc-label>New password</label>
-                <input sc-input type="password" data-slot="control" />
-              </div>
+            <div sc-card-content>
+              <fieldset sc-fieldset>
+                <div sc-field controlId="current-password">
+                  <label sc-label>Current password</label>
+                  <input sc-input type="password" data-slot="control" />
+                </div>
+                <div sc-field controlId="new-password">
+                  <label sc-label>New password</label>
+                  <input sc-input type="password" data-slot="control" />
+                </div>
+              </fieldset>
             </div>
             <div sc-card-footer>
               <button sc-button>Save password</button>
