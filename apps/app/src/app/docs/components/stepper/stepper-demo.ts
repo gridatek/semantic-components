@@ -4,9 +4,11 @@ import {
   ScCheckbox,
   ScCheckboxField,
   ScField,
+  ScFieldset,
   ScHeading,
   ScInput,
   ScLabel,
+  ScLegend,
   ScOption,
   ScSelect,
   ScStep,
@@ -26,6 +28,8 @@ import {
     ScOption,
     ScField,
     ScCheckboxField,
+    ScFieldset,
+    ScLegend,
   ],
   template: `
     <div class="w-full max-w-4xl">
@@ -36,7 +40,7 @@ import {
             <p class="text-sm text-muted-foreground">
               Let's start by setting up your account information.
             </p>
-            <div class="space-y-4">
+            <fieldset class="space-y-4" sc-fieldset>
               <sc-field>
                 <label sc-label for="full-name">Full Name</label>
                 <input id="full-name" sc-input type="text" placeholder="Enter your full name" />
@@ -45,7 +49,7 @@ import {
                 <label sc-label for="email">Email Address</label>
                 <input id="email" sc-input type="email" placeholder="Enter your email" />
               </sc-field>
-            </div>
+            </fieldset>
           </div>
         </sc-step>
 
@@ -55,7 +59,7 @@ import {
             <p class="text-sm text-muted-foreground">
               Add more details to help us personalize your experience.
             </p>
-            <div class="space-y-4">
+            <fieldset class="space-y-4" sc-fieldset>
               <sc-field>
                 <label sc-label for="company">Company</label>
                 <input id="company" sc-input type="text" placeholder="Your company name" />
@@ -70,7 +74,7 @@ import {
                   <sc-option value="other">Other</sc-option>
                 </sc-select>
               </sc-field>
-            </div>
+            </fieldset>
           </div>
         </sc-step>
 
@@ -81,8 +85,8 @@ import {
               Configure your account settings and notifications.
             </p>
             <div class="space-y-6">
-              <div>
-                <h4 class="text-sm font-medium leading-none mb-3">Notifications</h4>
+              <fieldset sc-fieldset>
+                <legend sc-legend>Notifications</legend>
                 <div class="space-y-3">
                   <sc-checkbox-field>
                     <input id="email-notifications" sc-checkbox type="checkbox" checked />
@@ -93,14 +97,14 @@ import {
                     <label sc-label for="sms-notifications">SMS notifications</label>
                   </sc-checkbox-field>
                 </div>
-              </div>
-              <div>
-                <h4 class="text-sm font-medium leading-none mb-3">Privacy</h4>
+              </fieldset>
+              <fieldset sc-fieldset>
+                <legend sc-legend>Privacy</legend>
                 <sc-checkbox-field>
                   <input id="public-profile" sc-checkbox type="checkbox" />
                   <label sc-label for="public-profile">Make profile public</label>
                 </sc-checkbox-field>
-              </div>
+              </fieldset>
             </div>
           </div>
         </sc-step>
