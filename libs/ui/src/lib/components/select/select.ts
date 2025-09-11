@@ -92,9 +92,8 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
   readonly placeholder = input('Select an option');
   readonly options = contentChildren(ScOption);
-
-  @ViewChild('trigger', { static: false }) trigger!: ElementRef;
-  @ViewChild('dropdownPanel', { static: false }) dropdownPanel!: TemplateRef<any>;
+  readonly trigger = viewChild.required<ElementRef>('trigger');
+  readonly dropdownPanel = viewChild.required<TemplateRef<any>>('dropdownPanel');
 
   isOpen = false;
   selectedOption: ScOption | null = null;
@@ -113,8 +112,8 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
   ngAfterViewInit() {
     // View is now initialized, overlay can be created
-    console.log('View initialized, trigger:', this.trigger?.nativeElement);
-    console.log('Dropdown panel template:', this.dropdownPanel);
+    console.log('View initialized, trigger:', this.trigger()?.nativeElement);
+    console.log('Dropdown panel template:', this.dropdownPanel());
   }
 
   ngAfterContentInit() {
@@ -185,7 +184,7 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
         case 'Escape':
           event.preventDefault();
           this.close();
-          this.trigger?.nativeElement?.focus();
+          this.trigger()?.nativeElement?.focus();
           break;
         case 'ArrowUp':
         case 'ArrowDown':
@@ -211,19 +210,23 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
     this.isOpen = true;
     console.log('Calling createOverlay...');
-    this.createOverlay();
 
-    // Set initial active item
-    if (this.selectedOption) {
-      const index = this.options().indexOf(this.selectedOption);
-      if (index >= 0) {
-        this.keyManager.setActiveItem(index);
-        // Scroll to selected option after a tick to ensure DOM is updated
-        setTimeout(() => this.scrollToOption(this.selectedOption!), 0);
+    // Wait a tick to ensure ViewChild is available
+    setTimeout(() => {
+      this.createOverlay();
+
+      // Set initial active item
+      if (this.selectedOption) {
+        const index = this.options().indexOf(this.selectedOption);
+        if (index >= 0) {
+          this.keyManager.setActiveItem(index);
+          // Scroll to selected option after a tick to ensure DOM is updated
+          setTimeout(() => this.scrollToOption(this.selectedOption!), 0);
+        }
+      } else {
+        this.keyManager.setFirstItemActive();
       }
-    } else {
-      this.keyManager.setFirstItemActive();
-    }
+    }, 0);
   }
 
   close() {
@@ -242,14 +245,14 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
       return;
     }
 
-    const triggerEl = this.trigger?.nativeElement;
+    const triggerEl = this.trigger()?.nativeElement;
     console.log('Trigger element:', triggerEl);
     if (!triggerEl) {
       console.error('Trigger element not found!');
       return;
     }
 
-    const panelTemplate = this.dropdownPanel;
+    const panelTemplate = this.dropdownPanel();
     console.log('Panel template:', panelTemplate);
     if (!panelTemplate) {
       console.error('Panel template not found!');
@@ -334,7 +337,7 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
     // Close dropdown
     this.close();
-    this.trigger?.nativeElement?.focus();
+    this.trigger()?.nativeElement?.focus();
   }
 
   // ControlValueAccessor implementation
