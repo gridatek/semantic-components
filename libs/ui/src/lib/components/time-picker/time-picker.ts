@@ -70,7 +70,7 @@ interface TimeValue {
         <!-- AM/PM -->
         <div class="flex flex-col border border-input rounded bg-background overflow-hidden">
           <button
-            class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+            class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-1 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed border-0"
             [class.bg-primary]="period() === 'AM'"
             [class.text-primary-foreground]="period() === 'AM'"
             [class.hover:bg-primary/90]="period() === 'AM'"
@@ -80,9 +80,9 @@ interface TimeValue {
           >
             AM
           </button>
-          <div class="border-t border-input"></div>
+          <div class="h-px bg-border"></div>
           <button
-            class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+            class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-1 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed border-0"
             [class.bg-primary]="period() === 'PM'"
             [class.text-primary-foreground]="period() === 'PM'"
             [class.hover:bg-primary/90]="period() === 'PM'"
