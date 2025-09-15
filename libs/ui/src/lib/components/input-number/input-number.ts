@@ -19,45 +19,44 @@ import { scInputStyles } from '../input/input';
   selector: 'div[sc-input-number]',
   imports: [],
   template: `
-    <div class="relative">
-      <input
-        class="w-full pr-8"
-        #inputElement
-        [class]="inputClass()"
-        [value]="formattedValue()"
-        [placeholder]="placeholder()"
-        [disabled]="disabled()"
-        [min]="min()"
-        [max]="max()"
-        [step]="step()"
-        (input)="handleInput($event)"
-        (blur)="handleBlur($event)"
-        (keydown)="handleKeyDown($event)"
-        (focus)="handleFocus()"
-        type="number"
-      />
+    <input
+      class="w-full pr-8"
+      #inputElement
+      [class]="inputClass()"
+      [value]="formattedValue()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [attr.data-min]="min()"
+      [attr.data-max]="max()"
+      [attr.data-step]="step()"
+      (input)="handleInput($event)"
+      (blur)="handleBlur($event)"
+      (keydown)="handleKeyDown($event)"
+      (focus)="handleFocus()"
+      type="text"
+      inputmode="numeric"
+    />
 
-      @if (showControls()) {
-        <div class="absolute right-0 top-0 h-full flex flex-col border-l border-input">
-          <button
-            class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center border-b border-input"
-            [disabled]="disabled() || isAtMax()"
-            (click)="increment()"
-            type="button"
-          >
-            ▲
-          </button>
-          <button
-            class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center"
-            [disabled]="disabled() || isAtMin()"
-            (click)="decrement()"
-            type="button"
-          >
-            ▼
-          </button>
-        </div>
-      }
-    </div>
+    @if (showControls()) {
+      <div class="absolute right-0 top-0 h-full flex flex-col border-l border-input">
+        <button
+          class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center border-b border-input"
+          [disabled]="disabled() || isAtMax()"
+          (click)="increment()"
+          type="button"
+        >
+          ▲
+        </button>
+        <button
+          class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center"
+          [disabled]="disabled() || isAtMin()"
+          (click)="decrement()"
+          type="button"
+        >
+          ▼
+        </button>
+      </div>
+    }
   `,
   host: {
     '[class]': 'class()',
@@ -132,8 +131,27 @@ export class ScInputNumber {
     const target = event.target as HTMLInputElement;
     const stringValue = target.value;
 
+    // Allow empty input or just minus sign for better UX
     if (stringValue === '' || stringValue === '-') {
-      // Allow empty or just minus sign for better UX
+      this.hasError.set(false);
+      return;
+    }
+
+    // Validate numeric input with regex to prevent non-numeric characters
+    const numericRegex = this.allowNegative() ? /^-?(\d+\.?\d*|\.\d+)$/ : /^(\d+\.?\d*|\.\d+)$/;
+
+    if (!numericRegex.test(stringValue)) {
+      // Remove invalid characters and keep only valid numeric input
+      const cleanValue = this.cleanNumericInput(stringValue);
+      target.value = cleanValue;
+
+      if (cleanValue !== '') {
+        const numericValue = parseFloat(cleanValue);
+        if (!isNaN(numericValue)) {
+          this.value.set(numericValue);
+          this.hasError.set(false);
+        }
+      }
       return;
     }
 
@@ -269,5 +287,35 @@ export class ScInputNumber {
     if (inputElement && !this.isFocused()) {
       inputElement.value = this.formattedValue();
     }
+  }
+
+  private cleanNumericInput(value: string): string {
+    // Remove all non-numeric characters except decimal point and minus sign
+    let cleaned = value.replace(/[^\d.-]/g, '');
+
+    // Handle multiple decimal points - keep only the first one
+    const decimalIndex = cleaned.indexOf('.');
+    if (decimalIndex !== -1) {
+      cleaned =
+        cleaned.substring(0, decimalIndex + 1) +
+        cleaned.substring(decimalIndex + 1).replace(/\./g, '');
+    }
+
+    // Handle multiple minus signs - keep only the first one and only at the beginning
+    if (this.allowNegative()) {
+      const minusIndex = cleaned.indexOf('-');
+      if (minusIndex > 0) {
+        // Remove minus signs that are not at the beginning
+        cleaned = cleaned.replace(/-/g, '');
+      } else if (minusIndex === 0) {
+        // Keep only the first minus sign at the beginning
+        cleaned = '-' + cleaned.substring(1).replace(/-/g, '');
+      }
+    } else {
+      // Remove all minus signs if negative values are not allowed
+      cleaned = cleaned.replace(/-/g, '');
+    }
+
+    return cleaned;
   }
 }
