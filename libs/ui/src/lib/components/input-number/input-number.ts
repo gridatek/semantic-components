@@ -16,10 +16,11 @@ import { SiChevronDownIcon, SiChevronUpIcon } from '@semantic-icons/lucide-icons
 
 import { scInputStyles } from '../input/input';
 import { ScInputNumberButton } from './input-number-button';
+import { ScInputNumberControls } from './input-number-controls';
 
 @Component({
   selector: 'div[sc-input-number]',
-  imports: [SiChevronUpIcon, SiChevronDownIcon, ScInputNumberButton],
+  imports: [SiChevronUpIcon, SiChevronDownIcon, ScInputNumberButton, ScInputNumberControls],
   template: `
     <input
       class="w-full pr-8"
@@ -40,7 +41,7 @@ import { ScInputNumberButton } from './input-number-button';
     />
 
     @if (showControls()) {
-      <div class="absolute right-0 top-0 h-full flex flex-col border-l border-input">
+      <div sc-input-number-controls>
         <button
           [disabled]="disabled() || isAtMax()"
           (click)="increment()"
