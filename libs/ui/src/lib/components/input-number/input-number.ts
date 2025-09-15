@@ -12,12 +12,13 @@ import {
 } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+import { SiChevronDownIcon, SiChevronUpIcon } from '@semantic-icons/lucide-icons';
 
 import { scInputStyles } from '../input/input';
 
 @Component({
   selector: 'div[sc-input-number]',
-  imports: [],
+  imports: [SiChevronUpIcon, SiChevronDownIcon],
   template: `
     <input
       class="w-full pr-8"
@@ -45,7 +46,7 @@ import { scInputStyles } from '../input/input';
           (click)="increment()"
           type="button"
         >
-          ▲
+          <svg class="h-3 w-3" si-chevron-up-icon></svg>
         </button>
         <button
           class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center"
@@ -53,7 +54,7 @@ import { scInputStyles } from '../input/input';
           (click)="decrement()"
           type="button"
         >
-          ▼
+          <svg class="h-3 w-3" si-chevron-down-icon></svg>
         </button>
       </div>
     }
