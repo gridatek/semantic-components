@@ -11,7 +11,9 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
-import { ScInputNumber } from '../input-number/input-number';
+import { ScTimePickerField } from './time-picker-field';
+import { ScTimePickerPeriod } from './time-picker-period';
+import { ScTimePickerSeparator } from './time-picker-separator';
 
 interface TimeValue {
   hours: number;
@@ -21,78 +23,53 @@ interface TimeValue {
 
 @Component({
   selector: 'div[sc-time-picker]',
-  imports: [ScInputNumber],
+  imports: [ScTimePickerField, ScTimePickerPeriod, ScTimePickerSeparator],
   template: `
     <div class="flex items-center space-x-1">
       <!-- Hours -->
       <div
-        class="w-16"
         [(value)]="hoursValue"
         [min]="is24HourFormat() ? 0 : 1"
         [max]="is24HourFormat() ? 23 : 12"
         [disabled]="disabled()"
-        [showControls]="true"
         [step]="1"
-        sc-input-number
+        sc-time-picker-field
       ></div>
 
-      <span class="text-sm font-medium">:</span>
+      <span sc-time-picker-separator></span>
 
       <!-- Minutes -->
       <div
-        class="w-16"
         [(value)]="minutesValue"
         [min]="0"
         [max]="59"
         [disabled]="disabled()"
-        [showControls]="true"
         [step]="step()"
-        sc-input-number
+        sc-time-picker-field
       ></div>
 
       @if (showSeconds()) {
-        <span class="text-sm font-medium">:</span>
+        <span sc-time-picker-separator></span>
 
         <!-- Seconds -->
         <div
-          class="w-16"
           [(value)]="secondsValue"
           [min]="0"
           [max]="59"
           [disabled]="disabled()"
-          [showControls]="true"
           [step]="step()"
-          sc-input-number
+          sc-time-picker-field
         ></div>
       }
 
       @if (!is24HourFormat()) {
         <!-- AM/PM -->
-        <div class="flex flex-col border border-input rounded bg-background overflow-hidden">
-          <button
-            class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-1 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed border-0"
-            [class.bg-primary]="period() === 'AM'"
-            [class.text-primary-foreground]="period() === 'AM'"
-            [class.hover:bg-primary/90]="period() === 'AM'"
-            [disabled]="disabled()"
-            (click)="setPeriod('AM')"
-            type="button"
-          >
-            AM
-          </button>
-          <div class="h-px bg-border"></div>
-          <button
-            class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-1 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed border-0"
-            [class.bg-primary]="period() === 'PM'"
-            [class.text-primary-foreground]="period() === 'PM'"
-            [class.hover:bg-primary/90]="period() === 'PM'"
-            [disabled]="disabled()"
-            (click)="setPeriod('PM')"
-            type="button"
-          >
-            PM
-          </button>
-        </div>
+        <div
+          [(value)]="period"
+          [disabled]="disabled()"
+          (periodChange)="onPeriodChange($event)"
+          sc-time-picker-period
+        ></div>
       }
     </div>
   `,
@@ -172,8 +149,8 @@ export class ScTimePicker {
     });
   }
 
-  protected setPeriod(newPeriod: 'AM' | 'PM'): void {
-    if (this.disabled() || this.is24HourFormat() || this.period() === newPeriod) return;
+  protected onPeriodChange(newPeriod: 'AM' | 'PM'): void {
+    if (this.disabled() || this.is24HourFormat()) return;
 
     const current = this.value();
     let newHours = current.hours;
@@ -184,7 +161,6 @@ export class ScTimePicker {
       newHours -= 12;
     }
 
-    this.period.set(newPeriod);
     this.updateTime({ ...current, hours: newHours });
   }
 
