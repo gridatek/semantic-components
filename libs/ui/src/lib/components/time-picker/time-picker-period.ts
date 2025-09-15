@@ -26,7 +26,6 @@ import { cn } from '@semantic-components/utils';
       >
         AM
       </button>
-      <div class="h-px bg-border"></div>
       <button
         class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-1 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed border-0"
         [class.bg-primary]="value() === 'PM'"
