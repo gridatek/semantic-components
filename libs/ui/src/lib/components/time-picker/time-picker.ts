@@ -68,14 +68,29 @@ interface TimeValue {
 
       @if (!is24HourFormat()) {
         <!-- AM/PM -->
-        <div class="flex flex-col">
+        <div class="flex flex-col border border-input rounded bg-background overflow-hidden">
           <button
-            class="px-2 py-1 text-xs border border-input rounded bg-background hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+            class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+            [class.bg-primary]="period() === 'AM'"
+            [class.text-primary-foreground]="period() === 'AM'"
+            [class.hover:bg-primary/90]="period() === 'AM'"
             [disabled]="disabled()"
-            (click)="toggleAmPm()"
+            (click)="setPeriod('AM')"
             type="button"
           >
-            {{ period() }}
+            AM
+          </button>
+          <div class="border-t border-input"></div>
+          <button
+            class="px-1.5 py-0.5 text-xs hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+            [class.bg-primary]="period() === 'PM'"
+            [class.text-primary-foreground]="period() === 'PM'"
+            [class.hover:bg-primary/90]="period() === 'PM'"
+            [disabled]="disabled()"
+            (click)="setPeriod('PM')"
+            type="button"
+          >
+            PM
           </button>
         </div>
       }
@@ -157,11 +172,10 @@ export class ScTimePicker {
     });
   }
 
-  protected toggleAmPm(): void {
-    if (this.disabled() || this.is24HourFormat()) return;
+  protected setPeriod(newPeriod: 'AM' | 'PM'): void {
+    if (this.disabled() || this.is24HourFormat() || this.period() === newPeriod) return;
 
     const current = this.value();
-    const newPeriod = this.period() === 'AM' ? 'PM' : 'AM';
     let newHours = current.hours;
 
     if (newPeriod === 'PM' && newHours < 12) {
