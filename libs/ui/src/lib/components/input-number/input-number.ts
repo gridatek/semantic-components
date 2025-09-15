@@ -63,6 +63,7 @@ import { ScInputNumberControls } from './input-number-controls';
   `,
   host: {
     '[class]': 'class()',
+    'data-slot': 'control',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
