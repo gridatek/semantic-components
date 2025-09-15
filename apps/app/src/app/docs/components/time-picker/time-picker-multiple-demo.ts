@@ -17,17 +17,17 @@ interface TimeValue {
       <p class="text-sm text-muted-foreground">
         Multiple time pickers for scheduling or time ranges.
       </p>
-      <div class="space-y-4">
+      <div class="space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="space-y-2">
-            <label class="text-sm font-medium">Start Time</label>
+          <div class="space-y-3">
+            <label class="block text-sm font-medium">Start Time</label>
             <div [(value)]="startTime" [is24HourFormat]="false" sc-time-picker></div>
             <div class="text-xs text-muted-foreground">
               {{ formatTime(startTime()) }}
             </div>
           </div>
-          <div class="space-y-2">
-            <label class="text-sm font-medium">End Time</label>
+          <div class="space-y-3">
+            <label class="block text-sm font-medium">End Time</label>
             <div [(value)]="endTime" [is24HourFormat]="false" sc-time-picker></div>
             <div class="text-xs text-muted-foreground">
               {{ formatTime(endTime()) }}
