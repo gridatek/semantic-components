@@ -41,7 +41,7 @@ import { scInputStyles } from '../input/input';
     @if (showControls()) {
       <div class="absolute right-0 top-0 h-full flex flex-col border-l border-input">
         <button
-          class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center border-b border-input"
+          class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center border-b border-input rounded-tr-md"
           [disabled]="disabled() || isAtMax()"
           (click)="increment()"
           type="button"
@@ -49,7 +49,7 @@ import { scInputStyles } from '../input/input';
           <svg class="h-3 w-3" si-chevron-up-icon></svg>
         </button>
         <button
-          class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center"
+          class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center rounded-br-md"
           [disabled]="disabled() || isAtMin()"
           (click)="decrement()"
           type="button"
