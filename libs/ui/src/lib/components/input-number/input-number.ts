@@ -15,10 +15,11 @@ import { cn } from '@semantic-components/utils';
 import { SiChevronDownIcon, SiChevronUpIcon } from '@semantic-icons/lucide-icons';
 
 import { scInputStyles } from '../input/input';
+import { ScInputNumberButton } from './input-number-button';
 
 @Component({
   selector: 'div[sc-input-number]',
-  imports: [SiChevronUpIcon, SiChevronDownIcon],
+  imports: [SiChevronUpIcon, SiChevronDownIcon, ScInputNumberButton],
   template: `
     <input
       class="w-full pr-8"
@@ -41,18 +42,18 @@ import { scInputStyles } from '../input/input';
     @if (showControls()) {
       <div class="absolute right-0 top-0 h-full flex flex-col border-l border-input">
         <button
-          class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center border-b border-input rounded-tr-md"
           [disabled]="disabled() || isAtMax()"
           (click)="increment()"
-          type="button"
+          sc-input-number-button
+          position="top"
         >
           <svg class="h-3 w-3" si-chevron-up-icon></svg>
         </button>
         <button
-          class="flex-1 px-2 hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed text-xs flex items-center justify-center rounded-br-md"
           [disabled]="disabled() || isAtMin()"
           (click)="decrement()"
-          type="button"
+          sc-input-number-button
+          position="bottom"
         >
           <svg class="h-3 w-3" si-chevron-down-icon></svg>
         </button>
