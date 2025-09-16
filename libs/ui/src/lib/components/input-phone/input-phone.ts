@@ -19,7 +19,7 @@ import {
 import { cn } from '@semantic-components/utils';
 import { PhoneNumberFormat, PhoneNumberUtil } from 'google-libphonenumber';
 
-interface Country {
+interface ScCountry {
   code: string;
   name: string;
   dialCode: string;
@@ -208,10 +208,10 @@ export class ScInputPhone implements OnInit, ControlValueAccessor {
   }>();
 
   phoneNumber: string = '';
-  selectedCountry: Country = { code: 'US', name: 'United States', dialCode: '+1', flag: '🇺🇸' };
+  selectedCountry: ScCountry = { code: 'US', name: 'United States', dialCode: '+1', flag: '🇺🇸' };
   showCountryDropdown: boolean = false;
   countrySearchTerm: string = '';
-  filteredCountries: Country[] = [];
+  filteredCountries: ScCountry[] = [];
 
   isValid: boolean = false;
   isInvalid: boolean = false;
@@ -223,7 +223,7 @@ export class ScInputPhone implements OnInit, ControlValueAccessor {
   private onChange = (value: any) => {};
   protected onTouched = () => {};
 
-  countries: Country[] = [
+  countries: ScCountry[] = [
     { code: 'US', name: 'United States', dialCode: '+1', flag: '🇺🇸' },
     { code: 'GB', name: 'United Kingdom', dialCode: '+44', flag: '🇬🇧' },
     { code: 'CA', name: 'Canada', dialCode: '+1', flag: '🇨🇦' },
@@ -310,7 +310,7 @@ export class ScInputPhone implements OnInit, ControlValueAccessor {
     this.showCountryDropdown = false;
   }
 
-  selectCountry(country: Country): void {
+  selectCountry(country: ScCountry): void {
     this.selectedCountry = country;
     this.showCountryDropdown = false;
     this.validatePhoneNumber();
