@@ -52,7 +52,7 @@ interface ScCountry {
         <!-- Country Selector -->
         <div class="relative">
           <button
-            class="inline-flex items-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-r-0 rounded-r-none"
+            class="inline-flex items-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-r-0 rounded-r-none h-10"
             #countryTrigger="cdkOverlayOrigin"
             [class.border-destructive]="isInvalid()"
             (click)="toggleCountryDropdown()"
