@@ -380,7 +380,7 @@ export class ScInputPhone {
 
   private emitPhoneChange(): void {
     const phoneNumber = this.value();
-    let phoneData = {
+    const phoneData = {
       isValid: this.isValid(),
       phoneNumber,
       formattedNumber: this.formattedNumber(),
