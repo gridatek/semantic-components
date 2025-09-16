@@ -5,16 +5,14 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
+  model,
+  output,
+  signal,
 } from '@angular/core';
-import { EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
-import {
-  ControlValueAccessor,
-  FormsModule,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 import { PhoneNumberFormat, PhoneNumberUtil } from 'google-libphonenumber';
@@ -28,29 +26,34 @@ interface ScCountry {
 
 @Component({
   selector: 'sc-input-phone',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, CommonModule],
   template: `
-    <div class="relative">
-      <label class="block text-sm font-medium text-gray-700 mb-2" *ngIf="label">
-        {{ label }}
-        <span class="text-red-500" *ngIf="required">*</span>
-      </label>
+    <div [class]="class()">
+      @if (label()) {
+        <label
+          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          [for]="id()"
+        >
+          {{ label() }}
+          @if (required()) {
+            <span class="text-destructive">*</span>
+          }
+        </label>
+      }
 
-      <div class="relative flex">
+      <div class="flex">
         <!-- Country Selector -->
         <div class="relative">
           <button
-            class="flex items-center px-3 py-2 border border-r-0 border-gray-300 rounded-l-md bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-            [class.border-red-300]="isInvalid"
-            [class.focus:ring-red-500]="isInvalid"
-            [class.focus:border-red-500]="isInvalid"
+            class="inline-flex items-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-r-0 rounded-r-none"
+            [class.border-destructive]="isInvalid()"
             (click)="toggleCountryDropdown()"
             type="button"
           >
-            <span class="text-lg mr-2">{{ selectedCountry.flag }}</span>
-            <span class="text-sm text-gray-600">{{ selectedCountry.dialCode }}</span>
+            <span class="mr-2">{{ selectedCountry().flag }}</span>
+            <span class="text-muted-foreground">{{ selectedCountry().dialCode }}</span>
             <svg
-              class="w-4 h-4 ml-2 text-gray-400"
+              class="ml-2 h-4 w-4 opacity-50"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -59,147 +62,103 @@ interface ScCountry {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
+                d="m6 9 6 6 6-6"
+              />
             </svg>
           </button>
 
           <!-- Country Dropdown -->
-          <div
-            class="absolute top-full left-0 mt-1 w-80 bg-white border border-gray-300 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto"
-            *ngIf="showCountryDropdown"
-          >
-            <div class="p-2">
-              <input
-                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                [(ngModel)]="countrySearchTerm"
-                (input)="filterCountries()"
-                type="text"
-                placeholder="Search countries..."
-              />
+          @if (showCountryDropdown()) {
+            <div
+              class="absolute top-full left-0 z-50 mt-1 w-80 rounded-md border bg-popover p-0 text-popover-foreground shadow-md"
+            >
+              <div class="p-2">
+                <input
+                  class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  [value]="countrySearchTerm()"
+                  (input)="onCountrySearchChange($event)"
+                  type="text"
+                  placeholder="Search countries..."
+                />
+              </div>
+              <div class="max-h-60 overflow-y-auto">
+                @for (country of filteredCountries(); track country.code) {
+                  <div
+                    class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground cursor-pointer"
+                    (click)="selectCountry(country)"
+                  >
+                    <span class="mr-3">{{ country.flag }}</span>
+                    <span class="flex-1">{{ country.name }}</span>
+                    <span class="text-muted-foreground">{{ country.dialCode }}</span>
+                  </div>
+                }
+              </div>
             </div>
-            <ul class="py-1">
-              <li
-                class="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                *ngFor="let country of filteredCountries"
-                (click)="selectCountry(country)"
-              >
-                <span class="text-lg mr-3">{{ country.flag }}</span>
-                <span class="flex-1 text-sm">{{ country.name }}</span>
-                <span class="text-sm text-gray-500">{{ country.dialCode }}</span>
-              </li>
-            </ul>
-          </div>
+          }
         </div>
 
         <!-- Phone Number Input -->
         <input
-          class="flex-1 px-3 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed transition-colors"
-          [(ngModel)]="phoneNumber"
-          [placeholder]="placeholder"
-          [disabled]="disabled"
-          [class.border-red-300]="isInvalid"
-          [class.focus:ring-red-500]="isInvalid"
-          [class.focus:border-red-500]="isInvalid"
-          [class.border-green-300]="isValid && phoneNumber"
-          [class.focus:ring-green-500]="isValid && phoneNumber"
-          [class.focus:border-green-500]="isValid && phoneNumber"
+          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-l-none border-l-0"
+          [value]="value()"
+          [placeholder]="placeholder()"
+          [disabled]="disabled()"
+          [class.border-destructive]="isInvalid()"
+          [id]="id()"
           (input)="onPhoneNumberChange($event)"
-          (blur)="onTouched()"
+          (blur)="onBlur()"
           (focus)="onFocus()"
           type="tel"
         />
-
-        <!-- Validation Icons -->
-        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
-          <svg
-            class="w-5 h-5 text-green-500"
-            *ngIf="isValid && phoneNumber"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 13l4 4L19 7"
-            ></path>
-          </svg>
-          <svg
-            class="w-5 h-5 text-red-500"
-            *ngIf="isInvalid && phoneNumber"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </div>
       </div>
 
-      <!-- Error Message -->
-      <div class="mt-1 text-sm text-red-600" *ngIf="errorMessage && (isTouched || showErrors)">
-        {{ errorMessage }}
-      </div>
+      @if (errorMessage() && (isTouched() || showErrors())) {
+        <p class="text-sm text-destructive mt-2">{{ errorMessage() }}</p>
+      }
 
-      <!-- Helper Text -->
-      <div class="mt-1 text-sm text-gray-500" *ngIf="helperText && !errorMessage">
-        {{ helperText }}
-      </div>
+      @if (helperText() && !errorMessage()) {
+        <p class="text-sm text-muted-foreground mt-2">{{ helperText() }}</p>
+      }
 
-      <!-- Formatted Number Display -->
-      <div class="mt-1 text-sm text-gray-600" *ngIf="formattedNumber && isValid">
-        International format: {{ formattedNumber }}
-      </div>
+      @if (formattedNumber() && isValid()) {
+        <p class="text-sm text-muted-foreground mt-2">
+          International format: {{ formattedNumber() }}
+        </p>
+      }
     </div>
 
     <!-- Click Outside Detector -->
-    <div
-      class="fixed inset-0 z-40"
-      *ngIf="showCountryDropdown"
-      (click)="closeCountryDropdown()"
-    ></div>
+    @if (showCountryDropdown()) {
+      <div class="fixed inset-0 z-40" (click)="closeCountryDropdown()"></div>
+    }
   `,
-  host: {
-    '[class]': 'class()',
-  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScInputPhone),
-      multi: true,
-    },
-  ],
 })
-export class ScInputPhone implements OnInit, ControlValueAccessor {
+export class ScInputPhone {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn('space-y-2', this.classInput()));
 
   readonly idInput = input<string>(inject(_IdGenerator).getId('sc-input-phone-'), {
     alias: 'id',
   });
+  readonly id = computed(() => this.idInput());
 
-  @Input() label: string = '';
-  @Input() placeholder: string = 'Enter phone number';
-  @Input() required: boolean = false;
-  @Input() disabled: boolean = false;
-  @Input() helperText: string = '';
-  @Input() showErrors: boolean = false;
-  @Input() defaultCountry: string = 'US';
+  readonly label = input<string>('');
+  readonly placeholder = input<string>('Enter phone number');
+  readonly required = input<boolean>(false);
+  readonly disabled = input<boolean>(false);
+  readonly helperText = input<string>('');
+  readonly showErrors = input<boolean>(false);
+  readonly defaultCountry = input<string>('US');
 
-  @Output() phoneChange = new EventEmitter<{
+  readonly value = model<string>('');
+
+  readonly phoneChange = output<{
     isValid: boolean;
     phoneNumber: string;
     formattedNumber: string;
@@ -207,23 +166,25 @@ export class ScInputPhone implements OnInit, ControlValueAccessor {
     nationalNumber: string;
   }>();
 
-  phoneNumber: string = '';
-  selectedCountry: ScCountry = { code: 'US', name: 'United States', dialCode: '+1', flag: '🇺🇸' };
-  showCountryDropdown: boolean = false;
-  countrySearchTerm: string = '';
-  filteredCountries: ScCountry[] = [];
+  protected readonly selectedCountry = signal<ScCountry>({
+    code: 'US',
+    name: 'United States',
+    dialCode: '+1',
+    flag: '🇺🇸',
+  });
+  protected readonly showCountryDropdown = signal<boolean>(false);
+  protected readonly countrySearchTerm = signal<string>('');
+  protected readonly filteredCountries = signal<ScCountry[]>([]);
 
-  isValid: boolean = false;
-  isInvalid: boolean = false;
-  isTouched: boolean = false;
-  errorMessage: string = '';
-  formattedNumber: string = '';
+  protected readonly isValid = signal<boolean>(false);
+  protected readonly isInvalid = signal<boolean>(false);
+  protected readonly isTouched = signal<boolean>(false);
+  protected readonly errorMessage = signal<string>('');
+  protected readonly formattedNumber = signal<string>('');
 
-  private phoneUtil = PhoneNumberUtil.getInstance();
-  private onChange = (value: any) => {};
-  protected onTouched = () => {};
+  private readonly phoneUtil = PhoneNumberUtil.getInstance();
 
-  countries: ScCountry[] = [
+  private readonly countries: ScCountry[] = [
     { code: 'US', name: 'United States', dialCode: '+1', flag: '🇺🇸' },
     { code: 'GB', name: 'United Kingdom', dialCode: '+44', flag: '🇬🇧' },
     { code: 'CA', name: 'Canada', dialCode: '+1', flag: '🇨🇦' },
@@ -256,127 +217,126 @@ export class ScInputPhone implements OnInit, ControlValueAccessor {
     { code: 'RU', name: 'Russia', dialCode: '+7', flag: '🇷🇺' },
   ];
 
-  ngOnInit() {
-    const defaultCountryData = this.countries.find((c) => c.code === this.defaultCountry);
-    if (defaultCountryData) {
-      this.selectedCountry = defaultCountryData;
-    }
-    this.filteredCountries = [...this.countries];
-  }
+  constructor() {
+    // Initialize filtered countries and default country
+    this.filteredCountries.set([...this.countries]);
 
-  writeValue(value: any): void {
-    if (value) {
-      this.phoneNumber = value;
+    effect(() => {
+      const defaultCountryData = this.countries.find((c) => c.code === this.defaultCountry());
+      if (defaultCountryData) {
+        this.selectedCountry.set(defaultCountryData);
+      }
+    });
+
+    // Validate phone number when value changes
+    effect(() => {
       this.validatePhoneNumber();
-    }
+    });
   }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  onPhoneNumberChange(event: any): void {
-    this.phoneNumber = event.target.value;
-    this.validatePhoneNumber();
-    this.onChange(this.phoneNumber);
-    this.emitPhoneChange();
-  }
-
-  onFocus(): void {
-    // Reset validation states on focus for better UX
-    if (!this.phoneNumber) {
-      this.isInvalid = false;
-      this.errorMessage = '';
-    }
-  }
-
-  toggleCountryDropdown(): void {
-    this.showCountryDropdown = !this.showCountryDropdown;
-    if (this.showCountryDropdown) {
-      this.countrySearchTerm = '';
-      this.filteredCountries = [...this.countries];
-    }
-  }
-
-  closeCountryDropdown(): void {
-    this.showCountryDropdown = false;
-  }
-
-  selectCountry(country: ScCountry): void {
-    this.selectedCountry = country;
-    this.showCountryDropdown = false;
+  protected onPhoneNumberChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.value.set(target.value);
     this.validatePhoneNumber();
     this.emitPhoneChange();
   }
 
-  filterCountries(): void {
-    const term = this.countrySearchTerm.toLowerCase();
-    this.filteredCountries = this.countries.filter(
+  protected onFocus(): void {
+    if (!this.value()) {
+      this.isInvalid.set(false);
+      this.errorMessage.set('');
+    }
+  }
+
+  protected onBlur(): void {
+    this.isTouched.set(true);
+  }
+
+  protected toggleCountryDropdown(): void {
+    this.showCountryDropdown.update((show) => !show);
+    if (this.showCountryDropdown()) {
+      this.countrySearchTerm.set('');
+      this.filteredCountries.set([...this.countries]);
+    }
+  }
+
+  protected closeCountryDropdown(): void {
+    this.showCountryDropdown.set(false);
+  }
+
+  protected selectCountry(country: ScCountry): void {
+    this.selectedCountry.set(country);
+    this.showCountryDropdown.set(false);
+    this.validatePhoneNumber();
+    this.emitPhoneChange();
+  }
+
+  protected onCountrySearchChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.countrySearchTerm.set(target.value);
+    this.filterCountries();
+  }
+
+  protected filterCountries(): void {
+    const term = this.countrySearchTerm().toLowerCase();
+    const filtered = this.countries.filter(
       (country) =>
         country.name.toLowerCase().includes(term) ||
         country.dialCode.includes(term) ||
         country.code.toLowerCase().includes(term),
     );
+    this.filteredCountries.set(filtered);
   }
 
   private validatePhoneNumber(): void {
-    if (!this.phoneNumber || this.phoneNumber.trim() === '') {
-      this.isValid = false;
-      this.isInvalid = false;
-      this.errorMessage = this.required ? 'Phone number is required' : '';
-      this.formattedNumber = '';
+    const phoneNumber = this.value();
+
+    if (!phoneNumber || phoneNumber.trim() === '') {
+      this.isValid.set(false);
+      this.isInvalid.set(false);
+      this.errorMessage.set(this.required() ? 'Phone number is required' : '');
+      this.formattedNumber.set('');
       return;
     }
 
     try {
-      // Parse the phone number with the selected country
-      const phoneNumberObj = this.phoneUtil.parse(this.phoneNumber, this.selectedCountry.code);
-
-      // Check if the number is valid
+      const phoneNumberObj = this.phoneUtil.parse(phoneNumber, this.selectedCountry().code);
       const isValidNumber = this.phoneUtil.isValidNumber(phoneNumberObj);
 
       if (isValidNumber) {
-        this.isValid = true;
-        this.isInvalid = false;
-        this.errorMessage = '';
-        this.formattedNumber = this.phoneUtil.format(
-          phoneNumberObj,
-          PhoneNumberFormat.INTERNATIONAL,
+        this.isValid.set(true);
+        this.isInvalid.set(false);
+        this.errorMessage.set('');
+        this.formattedNumber.set(
+          this.phoneUtil.format(phoneNumberObj, PhoneNumberFormat.INTERNATIONAL),
         );
       } else {
-        this.isValid = false;
-        this.isInvalid = true;
-        this.errorMessage = 'Please enter a valid phone number';
-        this.formattedNumber = '';
+        this.isValid.set(false);
+        this.isInvalid.set(true);
+        this.errorMessage.set('Please enter a valid phone number');
+        this.formattedNumber.set('');
       }
     } catch (error) {
-      this.isValid = false;
-      this.isInvalid = true;
-      this.errorMessage = 'Please enter a valid phone number';
-      this.formattedNumber = '';
+      this.isValid.set(false);
+      this.isInvalid.set(true);
+      this.errorMessage.set('Please enter a valid phone number');
+      this.formattedNumber.set('');
     }
   }
 
   private emitPhoneChange(): void {
+    const phoneNumber = this.value();
     let phoneData = {
-      isValid: this.isValid,
-      phoneNumber: this.phoneNumber,
-      formattedNumber: this.formattedNumber,
-      countryCode: this.selectedCountry.code,
+      isValid: this.isValid(),
+      phoneNumber,
+      formattedNumber: this.formattedNumber(),
+      countryCode: this.selectedCountry().code,
       nationalNumber: '',
     };
 
-    if (this.isValid && this.phoneNumber) {
+    if (this.isValid() && phoneNumber) {
       try {
-        const phoneNumberObj = this.phoneUtil.parse(this.phoneNumber, this.selectedCountry.code);
+        const phoneNumberObj = this.phoneUtil.parse(phoneNumber, this.selectedCountry().code);
         phoneData.nationalNumber = this.phoneUtil.format(
           phoneNumberObj,
           PhoneNumberFormat.NATIONAL,
