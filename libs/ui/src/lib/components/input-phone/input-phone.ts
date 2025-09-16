@@ -1,4 +1,10 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
+import {
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  ConnectedPosition,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -11,6 +17,7 @@ import {
   model,
   output,
   signal,
+  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -26,7 +33,7 @@ interface ScCountry {
 
 @Component({
   selector: 'sc-input-phone',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, OverlayModule],
   template: `
     <div [class]="class()">
       @if (label()) {
@@ -46,8 +53,10 @@ interface ScCountry {
         <div class="relative">
           <button
             class="inline-flex items-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-r-0 rounded-r-none"
+            #countryTrigger="cdkOverlayOrigin"
             [class.border-destructive]="isInvalid()"
             (click)="toggleCountryDropdown()"
+            cdkOverlayOrigin
             type="button"
           >
             <span class="mr-2">{{ selectedCountry().flag }}</span>
@@ -66,35 +75,6 @@ interface ScCountry {
               />
             </svg>
           </button>
-
-          <!-- Country Dropdown -->
-          @if (showCountryDropdown()) {
-            <div
-              class="absolute top-full left-0 z-50 mt-1 w-80 rounded-md border bg-popover p-0 text-popover-foreground shadow-md"
-            >
-              <div class="p-2">
-                <input
-                  class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  [value]="countrySearchTerm()"
-                  (input)="onCountrySearchChange($event)"
-                  type="text"
-                  placeholder="Search countries..."
-                />
-              </div>
-              <div class="max-h-60 overflow-y-auto">
-                @for (country of filteredCountries(); track country.code) {
-                  <div
-                    class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground cursor-pointer"
-                    (click)="selectCountry(country)"
-                  >
-                    <span class="mr-3">{{ country.flag }}</span>
-                    <span class="flex-1">{{ country.name }}</span>
-                    <span class="text-muted-foreground">{{ country.dialCode }}</span>
-                  </div>
-                }
-              </div>
-            </div>
-          }
         </div>
 
         <!-- Phone Number Input -->
@@ -127,10 +107,41 @@ interface ScCountry {
       }
     </div>
 
-    <!-- Click Outside Detector -->
-    @if (showCountryDropdown()) {
-      <div class="fixed inset-0 z-40" (click)="closeCountryDropdown()"></div>
-    }
+    <!-- Country Dropdown Overlay -->
+    <ng-template
+      [cdkConnectedOverlayOrigin]="countryTrigger"
+      [cdkConnectedOverlayOpen]="showCountryDropdown()"
+      [cdkConnectedOverlayPositions]="overlayPositions"
+      [cdkConnectedOverlayHasBackdrop]="true"
+      [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
+      (backdropClick)="closeCountryDropdown()"
+      cdkConnectedOverlay
+      cdkConnectedOverlayPanelClass="z-50"
+    >
+      <div class="w-80 rounded-md border bg-popover p-0 text-popover-foreground shadow-md">
+        <div class="p-2">
+          <input
+            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            [value]="countrySearchTerm()"
+            (input)="onCountrySearchChange($event)"
+            type="text"
+            placeholder="Search countries..."
+          />
+        </div>
+        <div class="max-h-60 overflow-y-auto">
+          @for (country of filteredCountries(); track country.code) {
+            <div
+              class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground cursor-pointer"
+              (click)="selectCountry(country)"
+            >
+              <span class="mr-3">{{ country.flag }}</span>
+              <span class="flex-1">{{ country.name }}</span>
+              <span class="text-muted-foreground">{{ country.dialCode }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </ng-template>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
@@ -181,6 +192,25 @@ export class ScInputPhone {
   protected readonly isTouched = signal<boolean>(false);
   protected readonly errorMessage = signal<string>('');
   protected readonly formattedNumber = signal<string>('');
+
+  protected readonly countryTrigger = viewChild.required<CdkOverlayOrigin>('countryTrigger');
+
+  protected readonly overlayPositions: ConnectedPosition[] = [
+    {
+      originX: 'start',
+      originY: 'bottom',
+      overlayX: 'start',
+      overlayY: 'top',
+      offsetY: 4,
+    },
+    {
+      originX: 'start',
+      originY: 'top',
+      overlayX: 'start',
+      overlayY: 'bottom',
+      offsetY: -4,
+    },
+  ];
 
   private readonly phoneUtil = PhoneNumberUtil.getInstance();
 
