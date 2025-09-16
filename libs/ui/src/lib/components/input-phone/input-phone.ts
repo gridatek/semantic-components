@@ -48,14 +48,21 @@ interface ScCountry {
         </label>
       }
 
-      <div class="flex">
+      <div
+        class="flex has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring has-[:focus-visible]:ring-offset-2 rounded-md ring-offset-background"
+        [class.ring-2]="isInputFocused() || showCountryDropdown()"
+        [class.ring-ring]="isInputFocused() || showCountryDropdown()"
+        [class.ring-offset-2]="isInputFocused() || showCountryDropdown()"
+      >
         <!-- Country Selector -->
         <div class="relative">
           <button
-            class="inline-flex items-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-r-0 rounded-r-none h-10"
+            class="inline-flex items-center whitespace-nowrap rounded-l-md border border-input bg-background px-3 py-2 text-sm transition-colors focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 border-r-0 h-10"
             #countryTrigger="cdkOverlayOrigin"
             [class.border-destructive]="isInvalid()"
             (click)="toggleCountryDropdown()"
+            (focus)="onCountryFocus()"
+            (blur)="onCountryBlur()"
             cdkOverlayOrigin
             type="button"
           >
@@ -79,15 +86,15 @@ interface ScCountry {
 
         <!-- Phone Number Input -->
         <input
-          class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-l-none border-l-0"
+          class="flex h-10 w-full rounded-r-md border border-input bg-background px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 border-l-0"
           [value]="value()"
           [placeholder]="placeholder()"
           [disabled]="disabled()"
           [class.border-destructive]="isInvalid()"
           [id]="id()"
           (input)="onPhoneNumberChange($event)"
-          (blur)="onBlur()"
-          (focus)="onFocus()"
+          (blur)="onInputBlur()"
+          (focus)="onInputFocus()"
           type="tel"
         />
       </div>
@@ -190,6 +197,7 @@ export class ScInputPhone {
   protected readonly isValid = signal<boolean>(false);
   protected readonly isInvalid = signal<boolean>(false);
   protected readonly isTouched = signal<boolean>(false);
+  protected readonly isInputFocused = signal<boolean>(false);
   protected readonly errorMessage = signal<string>('');
   protected readonly formattedNumber = signal<string>('');
 
@@ -271,15 +279,30 @@ export class ScInputPhone {
     this.emitPhoneChange();
   }
 
-  protected onFocus(): void {
+  protected onInputFocus(): void {
+    this.isInputFocused.set(true);
     if (!this.value()) {
       this.isInvalid.set(false);
       this.errorMessage.set('');
     }
   }
 
-  protected onBlur(): void {
+  protected onInputBlur(): void {
+    this.isInputFocused.set(false);
     this.isTouched.set(true);
+  }
+
+  protected onCountryFocus(): void {
+    this.isInputFocused.set(true);
+  }
+
+  protected onCountryBlur(): void {
+    // Small delay to allow for dropdown interaction
+    setTimeout(() => {
+      if (!this.showCountryDropdown()) {
+        this.isInputFocused.set(false);
+      }
+    }, 100);
   }
 
   protected toggleCountryDropdown(): void {
@@ -292,6 +315,7 @@ export class ScInputPhone {
 
   protected closeCountryDropdown(): void {
     this.showCountryDropdown.set(false);
+    this.isInputFocused.set(false);
   }
 
   protected selectCountry(country: ScCountry): void {
