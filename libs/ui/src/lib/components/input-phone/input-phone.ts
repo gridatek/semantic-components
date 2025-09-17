@@ -66,7 +66,16 @@ interface ScCountry {
             cdkOverlayOrigin
             type="button"
           >
-            <span class="mr-2">{{ selectedCountry().flag }}</span>
+            <div
+              class="w-6 h-4 rounded-sm overflow-hidden bg-gray-200 flex items-center justify-center mr-2"
+            >
+              <img
+                class="w-full h-full object-cover"
+                [src]="'https://flagcdn.com/w20/' + selectedCountry().code.toLowerCase() + '.png'"
+                [alt]="selectedCountry().name + ' flag'"
+                loading="lazy"
+              />
+            </div>
             <span class="text-muted-foreground">{{ selectedCountry().dialCode }}</span>
             <svg
               class="ml-2 h-4 w-4 opacity-50"
@@ -141,7 +150,16 @@ interface ScCountry {
               class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground cursor-pointer"
               (click)="selectCountry(country)"
             >
-              <span class="mr-3">{{ country.flag }}</span>
+              <div
+                class="w-6 h-4 rounded-sm overflow-hidden bg-gray-200 flex items-center justify-center mr-3"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  [src]="'https://flagcdn.com/w20/' + country.code.toLowerCase() + '.png'"
+                  [alt]="country.name + ' flag'"
+                  loading="lazy"
+                />
+              </div>
               <span class="flex-1">{{ country.name }}</span>
               <span class="text-muted-foreground">{{ country.dialCode }}</span>
             </div>
@@ -180,7 +198,7 @@ export class ScInputPhone {
     isValid: boolean;
     phoneNumber: string;
     formattedNumber: string;
-    countryCode: string;
+    countryFlag: string;
     nationalNumber: string;
   }>();
 
@@ -384,7 +402,7 @@ export class ScInputPhone {
       isValid: this.isValid(),
       phoneNumber,
       formattedNumber: this.formattedNumber(),
-      countryCode: this.selectedCountry().code,
+      countryFlag: this.selectedCountry().flag,
       nationalNumber: '',
     };
 
