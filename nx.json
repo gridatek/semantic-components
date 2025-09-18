@@ -128,6 +128,9 @@
       "project": "ui",
       "skipTests": true,
       "flat": true
+    },
+    "@nx/angular:component": {
+      "style": "css"
     }
   }
 }
