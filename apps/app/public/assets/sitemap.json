@@ -196,6 +196,12 @@
             "description": "A drag-and-drop file upload component with support for multiple files, file type restrictions, and size validation."
           },
           {
+            "id": "flex-layout",
+            "title": "Flex Layout",
+            "path": "/docs/components/flex-layout",
+            "description": "A flexible layout component using CSS Flexbox with direction, alignment, gap, and responsive options."
+          },
+          {
             "id": "grid-layout",
             "title": "Grid Layout",
             "path": "/docs/components/grid-layout",

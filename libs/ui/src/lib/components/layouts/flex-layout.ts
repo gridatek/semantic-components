@@ -43,8 +43,12 @@ export const flexLayoutVariants = cva('flex', {
       '2': 'gap-2',
       '3': 'gap-3',
       '4': 'gap-4',
+      '5': 'gap-5',
       '6': 'gap-6',
       '8': 'gap-8',
+      '10': 'gap-10',
+      '12': 'gap-12',
+      '16': 'gap-16',
     },
     responsive: {
       mobile: 'flex-col md:flex-row',
@@ -53,14 +57,9 @@ export const flexLayoutVariants = cva('flex', {
       'stack-tablet': 'flex-col md:flex-row',
     },
   },
-  defaultVariants: {
-    direction: 'row',
-    align: 'center',
-    gap: '2',
-  },
 });
 
-type FlexLayoutVariants = VariantProps<typeof flexLayoutVariants>;
+export type FlexLayoutVariants = VariantProps<typeof flexLayoutVariants>;
 
 @Component({
   selector: 'div[sc-flex-layout]',
@@ -80,6 +79,7 @@ export class ScFlexLayout {
     alias: 'class',
   });
 
+  // Flex configuration inputs
   readonly direction = input<FlexLayoutVariants['direction']>('row');
   readonly wrap = input<FlexLayoutVariants['wrap']>();
   readonly justify = input<FlexLayoutVariants['justify']>();

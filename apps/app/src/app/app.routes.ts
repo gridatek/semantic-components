@@ -198,6 +198,11 @@ export const appRoutes: Route[] = [
                 title: 'File Upload Page',
               },
               {
+                path: 'components/flex-layout',
+                loadComponent: () => import('./docs/components/flex-layout/flex-layout-page'),
+                title: 'Flex Layout Page',
+              },
+              {
                 path: 'components/grid-layout',
                 loadComponent: () => import('./docs/components/grid-layout/grid-layout-page'),
                 title: 'Grid Layout Page',
