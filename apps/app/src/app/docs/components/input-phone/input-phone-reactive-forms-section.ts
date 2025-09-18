@@ -1,50 +1,45 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
-import { InputPhoneDemo } from './input-phone-demo';
+import { InputPhoneReactiveFormsDemo } from './input-phone-reactive-forms-demo';
 
 @Component({
-  selector: 'app-input-phone-demo-section',
-  imports: [InputPhoneDemo, PreviewCodeTabs],
+  selector: 'app-input-phone-reactive-forms-section',
+  imports: [PreviewCodeTabs, InputPhoneReactiveFormsDemo],
   template: `
     <app-preview-code-tabs [code]="code" [title]="title()" [level]="level()">
-      <app-input-phone-demo />
+      <app-input-phone-reactive-forms-demo />
     </app-preview-code-tabs>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputPhoneDemoSection {
+export class InputPhoneReactiveFormsSection {
   readonly title = input<string>('');
 
   readonly level = input<'2' | '3'>('2');
 
   protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ScInputPhone } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-input-phone-demo',
-  imports: [ScInputPhone],
+  selector: 'app-input-phone-reactive-forms-demo',
+  imports: [ScInputPhone, ReactiveFormsModule],
   template: \`
     <sc-input-phone
-      [required]="true"
-      (phoneChange)="onPhoneChange($event)"
+      [formControl]="phoneControl"
       label="Phone Number"
       placeholder="Enter your phone number"
-      defaultCountry="US"
-      helperText="We'll use this to contact you"
     ></sc-input-phone>
   \`,
   styles: \`\`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputPhoneDemo {
-  onPhoneChange(phoneData: any) {
-    console.log('Phone validation result:', phoneData);
-    // phoneData contains: isValid, phoneNumber, formattedNumber, countryCode, nationalNumber
-  }
+export class InputPhoneReactiveFormsDemo {
+  phoneControl = new FormControl('');
 }`;
 }
