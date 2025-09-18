@@ -115,6 +115,8 @@ export class ScFlexLayout {
   readonly lgDirection = input<FlexLayoutVariants['lgDirection']>();
   readonly xlDirection = input<FlexLayoutVariants['xlDirection']>();
   readonly basis = input<FlexLayoutVariants['basis']>();
+  readonly grow = input<boolean>(false);
+  readonly shrink = input<boolean>(false);
 
   protected readonly class = computed(() =>
     cn(
@@ -130,6 +132,10 @@ export class ScFlexLayout {
         xlDirection: this.xlDirection(),
         basis: this.basis(),
       }),
+      // Grow
+      this.grow() && 'grow',
+      // Shrink
+      this.shrink() && 'shrink',
       this.classInput(),
     ),
   );
