@@ -207,25 +207,40 @@ export class FileUploader implements OnInit, OnDestroy {
   }
 
   private createCustomUploader() {
-    return {
-      name: 'StorageProviderUploader',
-      type: 'acquirer',
-      install: () => {},
-      uninstall: () => {},
-      upload: async (fileIDs: string[]) => {
-        if (!this.storageProvider) {
+    const self = this;
+    const BasePlugin = (window as any).Uppy.BasePlugin;
+
+    // Create a proper Uppy plugin class extending BasePlugin
+    class StorageProviderUploader extends BasePlugin {
+      id = 'StorageProviderUploader';
+      type = 'uploader';
+
+      constructor(uppy: any, opts: any = {}) {
+        super(uppy, opts);
+      }
+
+      install() {
+        (this as any)['uppy'].addUploader(this.upload.bind(this));
+      }
+
+      uninstall() {
+        (this as any)['uppy'].removeUploader(this.upload.bind(this));
+      }
+
+      async upload(fileIDs: string[]) {
+        if (!self.storageProvider) {
           throw new Error('Storage provider not initialized');
         }
 
         const promises = fileIDs.map(async (fileID) => {
-          const file = this.uppy.getFile(fileID);
+          const file = (this as any)['uppy'].getFile(fileID);
 
           try {
-            const result = await this.storageProvider!.upload(file.data, {
-              path: this.uploadPath(),
-              bucket: this.bucket(),
+            const result = await self.storageProvider!.upload(file.data, {
+              path: self.uploadPath(),
+              bucket: self.bucket(),
               onProgress: (progress) => {
-                this.uppy.emit('upload-progress', file, {
+                (this as any)['uppy'].emit('upload-progress', file, {
                   uploader: this,
                   bytesUploaded: Math.round(file.size * (progress / 100)),
                   bytesTotal: file.size,
@@ -233,16 +248,18 @@ export class FileUploader implements OnInit, OnDestroy {
               },
             });
 
-            this.uppy.emit('upload-success', file, { body: result });
+            (this as any)['uppy'].emit('upload-success', file, { body: result });
             return { successful: [{ ...file, response: { body: result } }], failed: [] };
           } catch (error) {
-            this.uppy.emit('upload-error', file, error);
+            (this as any)['uppy'].emit('upload-error', file, error);
             return { successful: [], failed: [{ ...file, error }] };
           }
         });
 
         return Promise.all(promises);
-      },
-    };
+      }
+    }
+
+    return StorageProviderUploader;
   }
 }
