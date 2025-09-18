@@ -22,7 +22,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
           <div
             class="h-64 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 border rounded-lg"
             sc-center-layout
-            strategy="flex"
+            strategy="flex-center"
           >
             <div class="bg-card border rounded-lg p-6 max-w-md">
               <div sc-stack-layout gap="3">
@@ -49,7 +49,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="h-48 bg-purple-50 dark:bg-purple-950 border rounded-lg"
               sc-center-layout
-              strategy="flex"
+              strategy="flex-center"
             >
               <div class="bg-white dark:bg-gray-800 border rounded p-4 text-center">
                 <div sc-stack-layout gap="2">
@@ -67,7 +67,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="h-48 bg-green-50 dark:bg-green-950 border rounded-lg"
               sc-center-layout
-              strategy="grid"
+              strategy="grid-center"
             >
               <div class="bg-white dark:bg-gray-800 border rounded p-4 text-center">
                 <div sc-stack-layout gap="2">
@@ -85,7 +85,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="h-48 bg-orange-50 dark:bg-orange-950 border rounded-lg"
               sc-center-layout
-              strategy="absolute"
+              strategy="absolute-center"
             >
               <div class="bg-white dark:bg-gray-800 border rounded p-4 text-center">
                 <div sc-stack-layout gap="2">
@@ -124,7 +124,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
           <div
             class="h-96 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 border rounded-lg"
             sc-center-layout
-            strategy="flex"
+            strategy="flex-center"
           >
             <div class="bg-card border rounded-lg p-8 w-full max-w-md">
               <div sc-stack-layout gap="6">
@@ -183,7 +183,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
           <div
             class="h-64 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg"
             sc-center-layout
-            strategy="flex"
+            strategy="flex-center"
           >
             <div class="text-center max-w-md">
               <div sc-stack-layout gap="4">
@@ -219,7 +219,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
           <div
             class="h-48 bg-blue-50 dark:bg-blue-950 border rounded-lg"
             sc-center-layout
-            strategy="flex"
+            strategy="flex-center"
           >
             <div class="text-center">
               <div sc-stack-layout gap="4">
@@ -245,7 +245,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
           <div
             class="h-80 bg-black/20 border rounded-lg backdrop-blur-sm"
             sc-center-layout
-            strategy="flex"
+            strategy="flex-center"
           >
             <div class="bg-card border rounded-lg p-6 w-full max-w-lg mx-4">
               <div sc-stack-layout gap="4">
@@ -285,7 +285,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
           <div
             class="h-64 bg-gray-50 dark:bg-gray-900 border rounded-lg"
             sc-center-layout
-            strategy="flex"
+            strategy="flex-center"
           >
             <div class="text-center max-w-sm">
               <div sc-stack-layout gap="4">
@@ -316,7 +316,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
           <div
             class="h-96 bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-lg"
             sc-center-layout
-            strategy="flex"
+            strategy="flex-center"
           >
             <div class="text-center max-w-2xl px-6">
               <div sc-stack-layout gap="6">

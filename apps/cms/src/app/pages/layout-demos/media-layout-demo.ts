@@ -19,7 +19,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
       <section>
         <h2 class="text-2xl font-semibold mb-4 px-8">Basic Image + Text Layout</h2>
         <div class="px-8">
-          <div sc-media-layout direction="left" mediaWidth="md" gap="6">
+          <div sc-media-layout direction="media-left" mediaWidth="md" gap="6">
             <img
               class="rounded-lg object-cover w-full h-full"
               slot="media"
@@ -52,7 +52,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
       <section>
         <h2 class="text-2xl font-semibold mb-4 px-8">Right Media Layout</h2>
         <div class="px-8">
-          <div sc-media-layout direction="right" mediaWidth="lg" gap="8">
+          <div sc-media-layout direction="media-right" mediaWidth="lg" gap="8">
             <div>
               <div sc-stack-layout gap="4">
                 <h3 class="text-xl font-semibold">Sustainable Development</h3>
@@ -95,7 +95,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="bg-card border rounded-lg p-4"
               sc-media-layout
-              direction="left"
+              direction="media-left"
               mediaWidth="sm"
               gap="4"
             >
@@ -121,7 +121,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="bg-card border rounded-lg p-4"
               sc-media-layout
-              direction="left"
+              direction="media-left"
               mediaWidth="md"
               gap="4"
             >
@@ -147,7 +147,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="bg-card border rounded-lg p-4"
               sc-media-layout
-              direction="left"
+              direction="media-left"
               mediaWidth="lg"
               gap="4"
             >
@@ -173,7 +173,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
       <section>
         <h2 class="text-2xl font-semibold mb-4 px-8">Video Content Layout</h2>
         <div class="px-8">
-          <div sc-media-layout direction="left" mediaWidth="lg" gap="6">
+          <div sc-media-layout direction="media-left" mediaWidth="lg" gap="6">
             <div class="bg-black rounded-lg overflow-hidden aspect-video" slot="media">
               <div class="w-full h-full flex items-center justify-center text-white">
                 <div class="text-center">
@@ -218,7 +218,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="bg-card border rounded-lg p-6"
               sc-media-layout
-              direction="left"
+              direction="media-left"
               mediaWidth="md"
               gap="6"
             >
@@ -263,7 +263,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="bg-card border rounded-lg p-6"
               sc-media-layout
-              direction="right"
+              direction="media-right"
               mediaWidth="md"
               gap="6"
             >
@@ -316,7 +316,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="bg-card border rounded-lg p-4"
               sc-media-layout
-              direction="left"
+              direction="media-left"
               mediaWidth="sm"
               gap="4"
             >
@@ -347,7 +347,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="bg-card border rounded-lg p-4"
               sc-media-layout
-              direction="left"
+              direction="media-left"
               mediaWidth="sm"
               gap="4"
             >
@@ -381,7 +381,7 @@ import { ScMediaLayout, ScStackLayout } from '@semantic-components/layouts';
       <section class="pb-12">
         <h2 class="text-2xl font-semibold mb-4 px-8">Blog Post Layout</h2>
         <div class="px-8">
-          <div sc-media-layout direction="left" mediaWidth="lg" gap="8">
+          <div sc-media-layout direction="media-left" mediaWidth="lg" gap="8">
             <img
               class="rounded-lg object-cover w-full h-full"
               slot="media"

@@ -168,7 +168,7 @@ import { ScSplitLayout, ScStackLayout } from '@semantic-components/layouts';
 
             <!-- Editor Area -->
             <div class="bg-background">
-              <div sc-split-layout direction="vertical" ratio="80:20" gap="0" class="h-full">
+              <div sc-split-layout direction="vertical" ratio="80-20" gap="0" class="h-full">
                 <!-- Code Editor -->
                 <div>
                   <div class="border-b p-3 bg-muted/20">
