@@ -208,6 +208,12 @@
             "description": "A flexible CSS Grid layout component with responsive breakpoints, gap control, and flow options."
           },
           {
+            "id": "masonry-layout",
+            "title": "Masonry Layout",
+            "path": "/docs/components/masonry-layout",
+            "description": "A masonry layout component using CSS columns for Pinterest-style layouts with responsive breakpoints."
+          },
+          {
             "id": "hover-card",
             "title": "Hover Card",
             "path": "/docs/components/hover-card",

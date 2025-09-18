@@ -208,6 +208,11 @@ export const appRoutes: Route[] = [
                 title: 'Grid Layout Page',
               },
               {
+                path: 'components/masonry-layout',
+                loadComponent: () => import('./docs/components/masonry-layout/masonry-layout-page'),
+                title: 'Masonry Layout Page',
+              },
+              {
                 path: 'components/hover-card',
                 loadComponent: () => import('./docs/components/hover-card/hover-card-page'),
                 title: 'Hover Card Page',
