@@ -31,7 +31,11 @@ export interface UploadEvent {
 @Component({
   selector: 'sc-file-uploader',
   imports: [],
-  templateUrl: './file-uploader.html',
+  template: `
+    <div class="sc-file-uploader" #uploaderContainer>
+      <!-- Uppy will be mounted here -->
+    </div>
+  `,
   styleUrl: './file-uploader.css',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,7 +51,7 @@ export class FileUploader implements OnInit, OnDestroy {
   readonly uploadProgress = output<number>();
   readonly uploadError = output<Error>();
 
-  private readonly uploaderElement = viewChild.required<ElementRef>('uploader');
+  private readonly uploaderContainer = viewChild.required<ElementRef>('uploaderContainer');
   private uppy: any;
   private storageProvider: StorageProvider | null = null;
 
@@ -77,8 +81,8 @@ export class FileUploader implements OnInit, OnDestroy {
 
   private async initializeUppy() {
     try {
+      // Load Uppy from CDN to avoid build dependencies
       const Uppy = await this.loadUppyFromCDN();
-
       const config = this.config();
 
       this.uppy = new Uppy({
@@ -93,7 +97,7 @@ export class FileUploader implements OnInit, OnDestroy {
       // Set up custom uploader function
       this.uppy.use(this.createCustomUploader());
 
-      // Set up UI based on variant
+      // Setup UI based on variant
       await this.setupUI();
 
       // Event listeners
@@ -120,11 +124,11 @@ export class FileUploader implements OnInit, OnDestroy {
 
   private async setupUI() {
     const variant = this.variant();
-    const target = this.uploaderElement().nativeElement;
+    const target = this.uploaderContainer().nativeElement;
 
     switch (variant) {
       case 'dashboard':
-        const Dashboard = await this.loadUppyPlugin('dashboard');
+        const Dashboard = await this.loadUppyPlugin('Dashboard');
         this.uppy.use(Dashboard, {
           target,
           inline: true,
@@ -133,15 +137,50 @@ export class FileUploader implements OnInit, OnDestroy {
         break;
 
       case 'drag-drop':
-        const DragDrop = await this.loadUppyPlugin('drag-drop');
+        const DragDrop = await this.loadUppyPlugin('DragDrop');
         this.uppy.use(DragDrop, { target });
         break;
 
       case 'file-input':
-        const FileInput = await this.loadUppyPlugin('file-input');
+        const FileInput = await this.loadUppyPlugin('FileInput');
         this.uppy.use(FileInput, { target });
         break;
     }
+  }
+
+  private async loadUppyFromCDN(): Promise<any> {
+    if ((window as any).Uppy) {
+      return (window as any).Uppy;
+    }
+
+    return new Promise((resolve, reject) => {
+      this.loadUppyStyles();
+
+      const script = document.createElement('script');
+      script.src = 'https://releases.transloadit.com/uppy/v4.3.0/uppy.min.js';
+      script.onload = () => resolve((window as any).Uppy);
+      script.onerror = () => reject(new Error('Failed to load Uppy from CDN'));
+      document.head.appendChild(script);
+    });
+  }
+
+  private async loadUppyPlugin(pluginName: string): Promise<any> {
+    if ((window as any).Uppy?.[pluginName]) {
+      return (window as any).Uppy[pluginName];
+    }
+
+    throw new Error(`Uppy plugin ${pluginName} not found. Make sure Uppy core is loaded.`);
+  }
+
+  private loadUppyStyles(): void {
+    if (document.querySelector('link[href*="uppy"]')) {
+      return; // Styles already loaded
+    }
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://releases.transloadit.com/uppy/v4.3.0/uppy.min.css';
+    document.head.appendChild(link);
   }
 
   private createCustomUploader() {
@@ -182,53 +221,5 @@ export class FileUploader implements OnInit, OnDestroy {
         return Promise.all(promises);
       },
     };
-  }
-
-  private async loadUppyFromCDN(): Promise<any> {
-    if ((window as any).Uppy) {
-      return (window as any).Uppy;
-    }
-
-    return new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = 'https://releases.transloadit.com/uppy/v4.3.0/uppy.min.js';
-      script.onload = () => {
-        this.loadUppyStyles();
-        resolve((window as any).Uppy);
-      };
-      script.onerror = () => reject(new Error('Failed to load Uppy from CDN'));
-      document.head.appendChild(script);
-    });
-  }
-
-  private async loadUppyPlugin(pluginName: string): Promise<any> {
-    const pluginMap: Record<string, string> = {
-      dashboard: 'Dashboard',
-      'drag-drop': 'DragDrop',
-      'file-input': 'FileInput',
-    };
-
-    const className = pluginMap[pluginName];
-    if ((window as any).Uppy?.[className]) {
-      return (window as any).Uppy[className];
-    }
-
-    // If core Uppy is loaded but plugin isn't, it should be available
-    if ((window as any).Uppy && (window as any).Uppy[className]) {
-      return (window as any).Uppy[className];
-    }
-
-    throw new Error(`Uppy plugin ${className} not found. Make sure Uppy core is loaded.`);
-  }
-
-  private loadUppyStyles(): void {
-    if (document.querySelector('link[href*="uppy"]')) {
-      return; // Styles already loaded
-    }
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://releases.transloadit.com/uppy/v4.3.0/uppy.min.css';
-    document.head.appendChild(link);
   }
 }

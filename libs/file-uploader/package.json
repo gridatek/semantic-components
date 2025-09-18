@@ -5,14 +5,6 @@
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0"
   },
-  "dependencies": {
-    "@uppy/core": "^4.3.0",
-    "@uppy/dashboard": "^4.4.0",
-    "@uppy/drag-drop": "^4.3.0",
-    "@uppy/file-input": "^4.3.0",
-    "@uppy/progress-bar": "^4.3.0",
-    "@uppy/status-bar": "^4.3.0"
-  },
   "optionalDependencies": {
     "@supabase/supabase-js": "^2.39.0"
   },

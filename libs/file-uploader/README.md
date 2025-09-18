@@ -23,6 +23,8 @@ For Supabase support:
 npm install @supabase/supabase-js
 ```
 
+> **Note**: This library loads Uppy dynamically from CDN to avoid build dependencies. No additional Uppy packages need to be installed.
+
 ## Basic Usage
 
 ### With Supabase
