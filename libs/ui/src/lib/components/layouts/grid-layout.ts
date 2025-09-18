@@ -41,6 +41,7 @@ export const gridLayoutVariants = cva('grid', {
       center: 'items-center',
       end: 'items-end',
       stretch: 'items-stretch',
+      baseline: 'items-baseline',
     },
     justify: {
       start: 'justify-start',
