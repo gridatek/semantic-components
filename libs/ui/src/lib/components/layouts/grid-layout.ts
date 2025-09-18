@@ -143,12 +143,6 @@ export const gridLayoutVariants = cva('grid', {
       'col-dense': 'grid-flow-col-dense',
     },
   },
-  defaultVariants: {
-    cols: 1,
-    gap: 6,
-    align: 'stretch',
-    justify: 'start',
-  },
 });
 
 export type GridLayoutVariants = VariantProps<typeof gridLayoutVariants>;
