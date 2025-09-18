@@ -74,6 +74,13 @@ export const flexLayoutVariants = cva('flex', {
       col: 'xl:flex-col',
       'col-reverse': 'xl:flex-col-reverse',
     },
+    basis: {
+      undefined: '',
+      auto: 'basis-auto',
+      '0': 'basis-0',
+      '1': 'basis-1',
+      full: 'basis-full',
+    },
   },
 });
 
@@ -107,6 +114,7 @@ export class ScFlexLayout {
   readonly mdDirection = input<FlexLayoutVariants['mdDirection']>();
   readonly lgDirection = input<FlexLayoutVariants['lgDirection']>();
   readonly xlDirection = input<FlexLayoutVariants['xlDirection']>();
+  readonly basis = input<FlexLayoutVariants['basis']>();
 
   protected readonly class = computed(() =>
     cn(
@@ -120,6 +128,7 @@ export class ScFlexLayout {
         mdDirection: this.mdDirection(),
         lgDirection: this.lgDirection(),
         xlDirection: this.xlDirection(),
+        basis: this.basis(),
       }),
       this.classInput(),
     ),
