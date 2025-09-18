@@ -35,8 +35,8 @@ export class FileUploaderDemo {
   supabaseConfig: ProviderConfig = {
     provider: 'supabase',
     config: {
-      url: 'your-supabase-url',
-      anonKey: 'your-supabase-anon-key',
+      url: 'https://placeholder.supabase.co',
+      anonKey: 'placeholder-anon-key',
       defaultBucket: 'uploads',
     },
   };

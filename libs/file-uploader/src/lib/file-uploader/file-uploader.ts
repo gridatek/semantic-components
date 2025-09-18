@@ -160,15 +160,21 @@ export class FileUploader implements OnInit, OnDestroy {
       const script = document.createElement('script');
       script.src = 'https://releases.transloadit.com/uppy/v4.3.0/uppy.min.js';
       script.onload = () => {
-        // Uppy should be available as a global constructor function
-        if (typeof (window as any).Uppy === 'function') {
-          resolve((window as any).Uppy);
+        const uppy = (window as any).Uppy;
+        console.log('Uppy object structure:', uppy);
+        console.log('Uppy object keys:', Object.keys(uppy || {}));
+
+        // Check multiple possible access patterns
+        if (typeof uppy === 'function') {
+          resolve(uppy);
+        } else if (uppy && typeof uppy.Core === 'function') {
+          resolve(uppy.Core);
+        } else if (uppy && typeof uppy.Uppy === 'function') {
+          resolve(uppy.Uppy);
+        } else if (uppy && typeof uppy.default === 'function') {
+          resolve(uppy.default);
         } else {
-          console.error('Uppy global:', (window as any).Uppy);
-          console.error(
-            'Window keys containing "uppy":',
-            Object.keys(window).filter((key) => key.toLowerCase().includes('uppy')),
-          );
+          console.error('Failed to find Uppy constructor. Available:', uppy);
           reject(new Error('Uppy constructor not found after loading CDN'));
         }
       };
