@@ -196,6 +196,12 @@
             "description": "A drag-and-drop file upload component with support for multiple files, file type restrictions, and size validation."
           },
           {
+            "id": "grid-layout",
+            "title": "Grid Layout",
+            "path": "/docs/components/grid-layout",
+            "description": "A flexible CSS Grid layout component with responsive breakpoints, gap control, and flow options."
+          },
+          {
             "id": "hover-card",
             "title": "Hover Card",
             "path": "/docs/components/hover-card",
