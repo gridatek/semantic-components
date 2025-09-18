@@ -7,24 +7,26 @@ import { ScFlexLayout } from '@semantic-components/ui';
   imports: [ScFlexLayout],
   template: `
     <div class="space-y-8 w-full">
-      <!-- Mobile First: Stack on mobile, row on desktop -->
+      <!-- Mobile First: Stack on mobile, row on medium+ -->
       <div>
         <h4 class="text-sm font-medium mb-2">Mobile First (Column → Row)</h4>
-        <p class="text-xs text-gray-500 mb-4">responsive="mobile" - Stacks on mobile, row on md+</p>
-        <div class="w-full" sc-flex-layout responsive="mobile" gap="4">
+        <p class="text-xs text-gray-500 mb-4">
+          direction="col" mdDirection="row" - Stacks on mobile, row on md+
+        </p>
+        <div class="w-full" sc-flex-layout direction="col" mdDirection="row" gap="4">
           <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 text-center flex-1">Card 1</div>
           <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 text-center flex-1">Card 2</div>
           <div class="bg-blue-100 dark:bg-blue-900 rounded-lg p-4 text-center flex-1">Card 3</div>
         </div>
       </div>
 
-      <!-- Stack on Tablet -->
+      <!-- Stack on Small Devices -->
       <div>
-        <h4 class="text-sm font-medium mb-2">Stack on Tablet (Column → Row)</h4>
+        <h4 class="text-sm font-medium mb-2">Stack on Small Devices</h4>
         <p class="text-xs text-gray-500 mb-4">
-          responsive="stack-tablet" - Column until md, then row
+          direction="col" smDirection="row" - Column until sm, then row
         </p>
-        <div class="w-full" sc-flex-layout responsive="stack-tablet" gap="4">
+        <div class="w-full" sc-flex-layout direction="col" smDirection="row" gap="4">
           <div class="bg-green-100 dark:bg-green-900 rounded-lg p-4 text-center flex-1">
             Content A
           </div>
@@ -37,13 +39,13 @@ import { ScFlexLayout } from '@semantic-components/ui';
         </div>
       </div>
 
-      <!-- Stack on Mobile -->
+      <!-- Desktop Only Row -->
       <div>
-        <h4 class="text-sm font-medium mb-2">Stack on Mobile Only (Column → Row)</h4>
+        <h4 class="text-sm font-medium mb-2">Desktop Only Row</h4>
         <p class="text-xs text-gray-500 mb-4">
-          responsive="stack-mobile" - Column until lg, then row
+          direction="col" lgDirection="row" - Column until lg, then row
         </p>
-        <div class="w-full" sc-flex-layout responsive="stack-mobile" gap="4">
+        <div class="w-full" sc-flex-layout direction="col" lgDirection="row" gap="4">
           <div class="bg-purple-100 dark:bg-purple-900 rounded-lg p-4 text-center flex-1">
             Section 1
           </div>
@@ -56,19 +58,29 @@ import { ScFlexLayout } from '@semantic-components/ui';
         </div>
       </div>
 
-      <!-- Always Row -->
+      <!-- Multiple Breakpoints -->
       <div>
-        <h4 class="text-sm font-medium mb-2">Always Row</h4>
-        <p class="text-xs text-gray-500 mb-4">responsive="desktop" - Always row layout</p>
-        <div class="w-full" sc-flex-layout responsive="desktop" gap="4">
+        <h4 class="text-sm font-medium mb-2">Multiple Breakpoints</h4>
+        <p class="text-xs text-gray-500 mb-4">
+          direction="col" smDirection="row" lgDirection="col-reverse" - Changes at multiple
+          breakpoints
+        </p>
+        <div
+          class="w-full"
+          sc-flex-layout
+          direction="col"
+          smDirection="row"
+          lgDirection="col-reverse"
+          gap="4"
+        >
           <div class="bg-orange-100 dark:bg-orange-900 rounded-lg p-4 text-center flex-1">
-            Always
+            Item 1
           </div>
           <div class="bg-orange-100 dark:bg-orange-900 rounded-lg p-4 text-center flex-1">
-            Horizontal
+            Item 2
           </div>
           <div class="bg-orange-100 dark:bg-orange-900 rounded-lg p-4 text-center flex-1">
-            Layout
+            Item 3
           </div>
         </div>
       </div>

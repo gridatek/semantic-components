@@ -50,11 +50,29 @@ export const flexLayoutVariants = cva('flex', {
       '12': 'gap-12',
       '16': 'gap-16',
     },
-    responsive: {
-      mobile: 'flex-col md:flex-row',
-      desktop: 'flex-row',
-      'stack-mobile': 'flex-col lg:flex-row',
-      'stack-tablet': 'flex-col md:flex-row',
+    smDirection: {
+      row: 'sm:flex-row',
+      'row-reverse': 'sm:flex-row-reverse',
+      col: 'sm:flex-col',
+      'col-reverse': 'sm:flex-col-reverse',
+    },
+    mdDirection: {
+      row: 'md:flex-row',
+      'row-reverse': 'md:flex-row-reverse',
+      col: 'md:flex-col',
+      'col-reverse': 'md:flex-col-reverse',
+    },
+    lgDirection: {
+      row: 'lg:flex-row',
+      'row-reverse': 'lg:flex-row-reverse',
+      col: 'lg:flex-col',
+      'col-reverse': 'lg:flex-col-reverse',
+    },
+    xlDirection: {
+      row: 'xl:flex-row',
+      'row-reverse': 'xl:flex-row-reverse',
+      col: 'xl:flex-col',
+      'col-reverse': 'xl:flex-col-reverse',
     },
   },
 });
@@ -85,7 +103,10 @@ export class ScFlexLayout {
   readonly justify = input<FlexLayoutVariants['justify']>();
   readonly align = input<FlexLayoutVariants['align']>('center');
   readonly gap = input<FlexLayoutVariants['gap']>('2');
-  readonly responsive = input<FlexLayoutVariants['responsive']>();
+  readonly smDirection = input<FlexLayoutVariants['smDirection']>();
+  readonly mdDirection = input<FlexLayoutVariants['mdDirection']>();
+  readonly lgDirection = input<FlexLayoutVariants['lgDirection']>();
+  readonly xlDirection = input<FlexLayoutVariants['xlDirection']>();
 
   protected readonly class = computed(() =>
     cn(
@@ -95,7 +116,10 @@ export class ScFlexLayout {
         justify: this.justify(),
         align: this.align(),
         gap: this.gap(),
-        responsive: this.responsive(),
+        smDirection: this.smDirection(),
+        mdDirection: this.mdDirection(),
+        lgDirection: this.lgDirection(),
+        xlDirection: this.xlDirection(),
       }),
       this.classInput(),
     ),
