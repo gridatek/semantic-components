@@ -135,6 +135,13 @@ export const gridLayoutVariants = cva('grid', {
       max: 'grid-rows-[max-content]',
       fr: 'grid-rows-[1fr]',
     },
+    flow: {
+      row: 'grid-flow-row',
+      col: 'grid-flow-col',
+      dense: 'grid-flow-dense',
+      'row-dense': 'grid-flow-row-dense',
+      'col-dense': 'grid-flow-col-dense',
+    },
   },
   defaultVariants: {
     cols: 1,
@@ -170,6 +177,7 @@ export class ScGridLayout {
   readonly gap = input<GridLayoutVariants['gap']>(6);
   readonly rows = input<GridLayoutVariants['rows']>();
   readonly rowSizing = input<GridLayoutVariants['rowSizing']>();
+  readonly flow = input<GridLayoutVariants['flow']>();
   readonly smCols = input<GridLayoutVariants['smCols']>();
   readonly mdCols = input<GridLayoutVariants['mdCols']>();
   readonly lgCols = input<GridLayoutVariants['lgCols']>();
@@ -187,6 +195,7 @@ export class ScGridLayout {
         gap: this.gap(),
         rows: this.rows(),
         rowSizing: this.rowSizing(),
+        flow: this.flow(),
         align: this.align(),
         justify: this.justify(),
         smCols: this.smCols(),
