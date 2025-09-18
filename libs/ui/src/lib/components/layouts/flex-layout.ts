@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   input,
 } from '@angular/core';
@@ -114,8 +115,14 @@ export class ScFlexLayout {
   readonly lgDirection = input<FlexLayoutVariants['lgDirection']>();
   readonly xlDirection = input<FlexLayoutVariants['xlDirection']>();
   readonly basis = input<FlexLayoutVariants['basis']>();
-  readonly grow = input<boolean>(false);
-  readonly shrink = input<boolean>(false);
+
+  readonly grow = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
+
+  readonly shrink = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   protected readonly class = computed(() =>
     cn(
