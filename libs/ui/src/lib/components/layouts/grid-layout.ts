@@ -93,7 +93,7 @@ export const gridLayoutVariants = cva('grid', {
 export type GridLayoutVariants = VariantProps<typeof gridLayoutVariants>;
 
 @Component({
-  selector: 'sc-grid-layout',
+  selector: 'div[sc-grid-layout]',
   imports: [],
   template: `
     <ng-content />
