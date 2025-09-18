@@ -77,7 +77,7 @@ export class FileUploader implements OnInit, OnDestroy {
 
   private async initializeUppy() {
     try {
-      const { default: Uppy } = await import('@uppy/core');
+      const Uppy = await this.loadUppyFromCDN();
 
       const config = this.config();
 
@@ -124,7 +124,7 @@ export class FileUploader implements OnInit, OnDestroy {
 
     switch (variant) {
       case 'dashboard':
-        const { default: Dashboard } = await import('@uppy/dashboard');
+        const Dashboard = await this.loadUppyPlugin('dashboard');
         this.uppy.use(Dashboard, {
           target,
           inline: true,
@@ -133,12 +133,12 @@ export class FileUploader implements OnInit, OnDestroy {
         break;
 
       case 'drag-drop':
-        const { default: DragDrop } = await import('@uppy/drag-drop');
+        const DragDrop = await this.loadUppyPlugin('drag-drop');
         this.uppy.use(DragDrop, { target });
         break;
 
       case 'file-input':
-        const { default: FileInput } = await import('@uppy/file-input');
+        const FileInput = await this.loadUppyPlugin('file-input');
         this.uppy.use(FileInput, { target });
         break;
     }
@@ -182,5 +182,53 @@ export class FileUploader implements OnInit, OnDestroy {
         return Promise.all(promises);
       },
     };
+  }
+
+  private async loadUppyFromCDN(): Promise<any> {
+    if ((window as any).Uppy) {
+      return (window as any).Uppy;
+    }
+
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://releases.transloadit.com/uppy/v4.3.0/uppy.min.js';
+      script.onload = () => {
+        this.loadUppyStyles();
+        resolve((window as any).Uppy);
+      };
+      script.onerror = () => reject(new Error('Failed to load Uppy from CDN'));
+      document.head.appendChild(script);
+    });
+  }
+
+  private async loadUppyPlugin(pluginName: string): Promise<any> {
+    const pluginMap: Record<string, string> = {
+      dashboard: 'Dashboard',
+      'drag-drop': 'DragDrop',
+      'file-input': 'FileInput',
+    };
+
+    const className = pluginMap[pluginName];
+    if ((window as any).Uppy?.[className]) {
+      return (window as any).Uppy[className];
+    }
+
+    // If core Uppy is loaded but plugin isn't, it should be available
+    if ((window as any).Uppy && (window as any).Uppy[className]) {
+      return (window as any).Uppy[className];
+    }
+
+    throw new Error(`Uppy plugin ${className} not found. Make sure Uppy core is loaded.`);
+  }
+
+  private loadUppyStyles(): void {
+    if (document.querySelector('link[href*="uppy"]')) {
+      return; // Styles already loaded
+    }
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://releases.transloadit.com/uppy/v4.3.0/uppy.min.css';
+    document.head.appendChild(link);
   }
 }
