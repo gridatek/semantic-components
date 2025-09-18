@@ -213,6 +213,11 @@ export const appRoutes: Route[] = [
                 title: 'Masonry Layout Page',
               },
               {
+                path: 'components/gallery-layout',
+                loadComponent: () => import('./docs/components/gallery-layout/gallery-layout-page'),
+                title: 'Gallery Layout Page',
+              },
+              {
                 path: 'components/hover-card',
                 loadComponent: () => import('./docs/components/hover-card/hover-card-page'),
                 title: 'Hover Card Page',
