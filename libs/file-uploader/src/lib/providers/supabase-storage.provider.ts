@@ -19,7 +19,11 @@ export class SupabaseStorageProvider implements StorageProvider {
       const { createClient } = await import('@supabase/supabase-js');
       this.supabase = createClient(this.config.url, this.config.anonKey);
     } catch (error) {
-      throw new Error('Supabase client is required. Please install @supabase/supabase-js');
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      throw new Error(
+        `Failed to initialize Supabase client: ${message}. ` +
+          'Please install @supabase/supabase-js: npm install @supabase/supabase-js',
+      );
     }
   }
 

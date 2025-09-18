@@ -149,7 +149,8 @@ export class FileUploader implements OnInit, OnDestroy {
   }
 
   private async loadUppyFromCDN(): Promise<any> {
-    if ((window as any).Uppy) {
+    // Check if Uppy is already loaded
+    if (typeof (window as any).Uppy === 'function') {
       return (window as any).Uppy;
     }
 
@@ -158,18 +159,34 @@ export class FileUploader implements OnInit, OnDestroy {
 
       const script = document.createElement('script');
       script.src = 'https://releases.transloadit.com/uppy/v4.3.0/uppy.min.js';
-      script.onload = () => resolve((window as any).Uppy);
+      script.onload = () => {
+        // Uppy should be available as a global constructor function
+        if (typeof (window as any).Uppy === 'function') {
+          resolve((window as any).Uppy);
+        } else {
+          console.error('Uppy global:', (window as any).Uppy);
+          console.error(
+            'Window keys containing "uppy":',
+            Object.keys(window).filter((key) => key.toLowerCase().includes('uppy')),
+          );
+          reject(new Error('Uppy constructor not found after loading CDN'));
+        }
+      };
       script.onerror = () => reject(new Error('Failed to load Uppy from CDN'));
       document.head.appendChild(script);
     });
   }
 
   private async loadUppyPlugin(pluginName: string): Promise<any> {
-    if ((window as any).Uppy?.[pluginName]) {
-      return (window as any).Uppy[pluginName];
+    // Wait for Uppy to be available and check for plugins
+    const uppy = (window as any).Uppy;
+    if (uppy && uppy[pluginName]) {
+      return uppy[pluginName];
     }
 
-    throw new Error(`Uppy plugin ${pluginName} not found. Make sure Uppy core is loaded.`);
+    throw new Error(
+      `Uppy plugin ${pluginName} not found. Make sure Uppy CDN includes all plugins.`,
+    );
   }
 
   private loadUppyStyles(): void {

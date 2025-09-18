@@ -25,7 +25,7 @@
     "@fontsource/jetbrains-mono": "^5.2.6",
     "@js-temporal/polyfill": "^0.5.1",
     "@semantic-icons/lucide-icons": "^0.56.0",
-    "@supabase/supabase-js": "^2.57.0",
+    "@supabase/supabase-js": "^2.57.4",
     "@tailwindcss/postcss": "^4.1.13",
     "@tanstack/angular-table": "^8.21.3",
     "@tiptap/core": "^3.4.2",
