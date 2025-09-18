@@ -9,7 +9,7 @@ import {
 
 @Component({
   selector: 'app-articles',
-  imports: [ScSidebarLayout, ScStackLayout, ScSplitLayout, ScHeaderLayout],
+  imports: [ScStackLayout, ScSplitLayout, ScHeaderLayout],
   template: `
     <div class="min-h-screen" sc-header-layout>
       <!-- Header -->
@@ -37,7 +37,7 @@ import {
       </div>
 
       <!-- Main Content -->
-      <div sc-split-layout direction="horizontal" ratio="75-25" gap="0">
+      <div sc-split-layout direction="horizontal" ratio="70-30" gap="0">
         <!-- Articles List -->
         <div class="bg-background">
           <div class="p-6">

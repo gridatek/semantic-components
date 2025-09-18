@@ -11,7 +11,8 @@ import { ScSplitLayout, ScStackLayout } from '@semantic-components/layouts';
       <div class="p-8">
         <h1 class="text-3xl font-bold mb-4">ScSplitLayout Demo</h1>
         <p class="text-lg text-muted-foreground">
-          Horizontal and vertical splits with configurable ratios and resizable panes.
+          Flexible split layouts for creating multi-panel interfaces with precise control over
+          sizing.
         </p>
       </div>
 
@@ -19,28 +20,29 @@ import { ScSplitLayout, ScStackLayout } from '@semantic-components/layouts';
       <section>
         <h2 class="text-2xl font-semibold mb-4 px-8">Basic Horizontal Split</h2>
         <div class="px-8">
-          <div sc-split-layout direction="horizontal" ratio="50:50" gap="4" class="h-64">
+          <div class="h-64" sc-split-layout direction="horizontal" ratio="50-50" gap="4">
             <div class="bg-card border rounded-lg p-6">
               <div sc-stack-layout gap="3">
                 <h3 class="font-semibold">Left Panel</h3>
                 <p class="text-sm text-muted-foreground">
-                  This is the left side of a 50:50 horizontal split. Both panels have equal width.
+                  This is the left panel content. Perfect for navigation, sidebars, or secondary
+                  information.
                 </p>
-                <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded">
-                  <p class="text-sm">Content area 1</p>
-                </div>
+                <button class="bg-primary text-primary-foreground px-4 py-2 rounded w-fit">
+                  Left Action
+                </button>
               </div>
             </div>
-
             <div class="bg-card border rounded-lg p-6">
               <div sc-stack-layout gap="3">
                 <h3 class="font-semibold">Right Panel</h3>
                 <p class="text-sm text-muted-foreground">
-                  This is the right side of the split. You can put any content here.
+                  This is the right panel content. Ideal for main content, details, or primary
+                  actions.
                 </p>
-                <div class="bg-green-100 dark:bg-green-900 p-3 rounded">
-                  <p class="text-sm">Content area 2</p>
-                </div>
+                <button class="bg-secondary text-secondary-foreground px-4 py-2 rounded w-fit">
+                  Right Action
+                </button>
               </div>
             </div>
           </div>
@@ -48,44 +50,33 @@ import { ScSplitLayout, ScStackLayout } from '@semantic-components/layouts';
       </section>
 
       <!-- Different Ratios -->
-      <section class="px-8">
-        <h2 class="text-2xl font-semibold mb-4">Different Split Ratios</h2>
-        <div class="space-y-6">
-          <!-- 30:70 Split -->
-          <div>
-            <h3 class="font-medium mb-2">30:70 Split</h3>
-            <div sc-split-layout direction="horizontal" ratio="30:70" gap="3" class="h-32">
-              <div class="bg-purple-100 dark:bg-purple-900 rounded p-4 flex items-center justify-center">
-                <span class="text-sm font-medium">30%</span>
+      <section>
+        <h2 class="text-2xl font-semibold mb-4 px-8">Different Split Ratios</h2>
+        <div class="px-8">
+          <div sc-stack-layout gap="6">
+            <div class="h-32" sc-split-layout direction="horizontal" ratio="30-70" gap="3">
+              <div
+                class="bg-blue-100 dark:bg-blue-950 border rounded-lg p-4 flex items-center justify-center"
+              >
+                <span class="font-medium">30%</span>
               </div>
-              <div class="bg-purple-200 dark:bg-purple-800 rounded p-4 flex items-center justify-center">
-                <span class="text-sm font-medium">70%</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 70:30 Split -->
-          <div>
-            <h3 class="font-medium mb-2">70:30 Split</h3>
-            <div sc-split-layout direction="horizontal" ratio="70:30" gap="3" class="h-32">
-              <div class="bg-orange-100 dark:bg-orange-900 rounded p-4 flex items-center justify-center">
-                <span class="text-sm font-medium">70%</span>
-              </div>
-              <div class="bg-orange-200 dark:bg-orange-800 rounded p-4 flex items-center justify-center">
-                <span class="text-sm font-medium">30%</span>
+              <div
+                class="bg-green-100 dark:bg-green-950 border rounded-lg p-4 flex items-center justify-center"
+              >
+                <span class="font-medium">70%</span>
               </div>
             </div>
-          </div>
 
-          <!-- 25:75 Split -->
-          <div>
-            <h3 class="font-medium mb-2">25:75 Split</h3>
-            <div sc-split-layout direction="horizontal" ratio="25:75" gap="3" class="h-32">
-              <div class="bg-teal-100 dark:bg-teal-900 rounded p-4 flex items-center justify-center">
-                <span class="text-sm font-medium">25%</span>
+            <div class="h-32" sc-split-layout direction="horizontal" ratio="70-30" gap="3">
+              <div
+                class="bg-purple-100 dark:bg-purple-950 border rounded-lg p-4 flex items-center justify-center"
+              >
+                <span class="font-medium">70%</span>
               </div>
-              <div class="bg-teal-200 dark:bg-teal-800 rounded p-4 flex items-center justify-center">
-                <span class="text-sm font-medium">75%</span>
+              <div
+                class="bg-orange-100 dark:bg-orange-950 border rounded-lg p-4 flex items-center justify-center"
+              >
+                <span class="font-medium">30%</span>
               </div>
             </div>
           </div>
@@ -94,246 +85,81 @@ import { ScSplitLayout, ScStackLayout } from '@semantic-components/layouts';
 
       <!-- Vertical Split -->
       <section>
-        <h2 class="text-2xl font-semibold mb-4 px-8">Vertical Split</h2>
+        <h2 class="text-2xl font-semibold mb-4 px-8">Vertical Split Layout</h2>
         <div class="px-8">
-          <div sc-split-layout direction="vertical" ratio="40:60" gap="4" class="h-96">
+          <div class="h-96" sc-split-layout direction="vertical" ratio="40-60" gap="4">
             <div class="bg-card border rounded-lg p-6">
               <div sc-stack-layout gap="3">
-                <h3 class="font-semibold">Top Panel (40%)</h3>
+                <h3 class="font-semibold">Top Panel</h3>
                 <p class="text-sm text-muted-foreground">
-                  This is the top section of a vertical split layout. Great for headers, toolbars, or preview areas.
+                  This is the top panel content. Great for headers, toolbars, or summary
+                  information.
+                </p>
+              </div>
+            </div>
+            <div class="bg-card border rounded-lg p-6">
+              <div sc-stack-layout gap="3">
+                <h3 class="font-semibold">Bottom Panel</h3>
+                <p class="text-sm text-muted-foreground">
+                  This is the bottom panel content. Perfect for detailed content, logs, or extended
+                  information.
                 </p>
                 <div class="grid grid-cols-3 gap-2">
-                  <div class="bg-red-100 dark:bg-red-900 p-2 rounded text-center text-xs">Tool 1</div>
-                  <div class="bg-red-100 dark:bg-red-900 p-2 rounded text-center text-xs">Tool 2</div>
-                  <div class="bg-red-100 dark:bg-red-900 p-2 rounded text-center text-xs">Tool 3</div>
+                  <div class="bg-gray-100 dark:bg-gray-800 rounded p-2 text-center text-xs">
+                    Item 1
+                  </div>
+                  <div class="bg-gray-100 dark:bg-gray-800 rounded p-2 text-center text-xs">
+                    Item 2
+                  </div>
+                  <div class="bg-gray-100 dark:bg-gray-800 rounded p-2 text-center text-xs">
+                    Item 3
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div class="bg-card border rounded-lg p-6">
-              <div sc-stack-layout gap="3">
-                <h3 class="font-semibold">Bottom Panel (60%)</h3>
+      <!-- Nested Splits -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4 px-8">Nested Split Layouts</h2>
+        <div class="px-8">
+          <div class="h-80" sc-split-layout direction="horizontal" ratio="30-70" gap="4">
+            <div class="bg-card border rounded-lg p-4">
+              <div sc-stack-layout gap="4">
+                <h3 class="font-semibold">Sidebar</h3>
+                <nav class="space-y-2">
+                  <a class="block py-2 px-3 bg-primary text-primary-foreground rounded" href="#">
+                    Dashboard
+                  </a>
+                  <a class="block py-2 px-3 hover:bg-muted rounded" href="#">Analytics</a>
+                  <a class="block py-2 px-3 hover:bg-muted rounded" href="#">Reports</a>
+                  <a class="block py-2 px-3 hover:bg-muted rounded" href="#">Settings</a>
+                </nav>
+              </div>
+            </div>
+            <div sc-split-layout direction="vertical" ratio="20-80" gap="4">
+              <div class="bg-muted/30 border rounded-lg p-4">
+                <h3 class="font-semibold">Header Area</h3>
+                <p class="text-sm text-muted-foreground">Page title and actions</p>
+              </div>
+              <div class="bg-card border rounded-lg p-4">
+                <h3 class="font-semibold">Main Content</h3>
                 <p class="text-sm text-muted-foreground">
-                  This is the bottom section with more space. Perfect for main content, editors, or detailed views.
+                  Primary content area with nested layout structure
                 </p>
-                <div class="bg-muted p-4 rounded">
-                  <p class="text-sm">Main content area with more vertical space for detailed information.</p>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Code Editor Example -->
-      <section>
-        <h2 class="text-2xl font-semibold mb-4 px-8">Code Editor Layout Example</h2>
-        <div class="px-8">
-          <div sc-split-layout direction="horizontal" ratio="25:75" gap="0" class="h-96 border rounded-lg overflow-hidden">
-            <!-- File Explorer -->
-            <div class="bg-muted/30 border-r">
-              <div class="border-b p-3">
-                <h3 class="font-semibold text-sm">Explorer</h3>
-              </div>
-              <div class="p-3">
-                <div sc-stack-layout gap="1">
-                  <div class="flex items-center gap-2 text-sm">
-                    <span class="w-4 h-4 text-center">📁</span>
-                    <span>src</span>
-                  </div>
-                  <div class="flex items-center gap-2 text-sm ml-4">
-                    <span class="w-4 h-4 text-center">📁</span>
-                    <span>components</span>
-                  </div>
-                  <div class="flex items-center gap-2 text-sm ml-8">
-                    <span class="w-4 h-4 text-center">📄</span>
-                    <span class="text-blue-600 dark:text-blue-400">Button.tsx</span>
-                  </div>
-                  <div class="flex items-center gap-2 text-sm ml-8">
-                    <span class="w-4 h-4 text-center">📄</span>
-                    <span>Input.tsx</span>
-                  </div>
-                  <div class="flex items-center gap-2 text-sm ml-4">
-                    <span class="w-4 h-4 text-center">📁</span>
-                    <span>layouts</span>
-                  </div>
-                  <div class="flex items-center gap-2 text-sm ml-8">
-                    <span class="w-4 h-4 text-center">📄</span>
-                    <span>SplitLayout.tsx</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Editor Area -->
-            <div class="bg-background">
-              <div sc-split-layout direction="vertical" ratio="80-20" gap="0" class="h-full">
-                <!-- Code Editor -->
-                <div>
-                  <div class="border-b p-3 bg-muted/20">
-                    <div class="flex items-center gap-2">
-                      <span class="text-sm">Button.tsx</span>
-                      <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    </div>
-                  </div>
-                  <div class="p-4 font-mono text-sm bg-gray-50 dark:bg-gray-900 h-full">
-                    <div sc-stack-layout gap="0">
-                      <span class="text-purple-600 dark:text-purple-400">import</span>
-                      <span class="text-blue-600 dark:text-blue-400">interface ButtonProps {</span>
-                      <span class="ml-4">children: React.ReactNode;</span>
-                      <span class="ml-4">onClick?: () => void;</span>
-                      <span class="text-blue-600 dark:text-blue-400">}</span>
-                      <span></span>
-                      <span class="text-green-600 dark:text-green-400">export const Button = ({ children, onClick }: ButtonProps) => {</span>
-                      <span class="ml-4 text-purple-600 dark:text-purple-400">return</span>
-                      <span class="ml-8">&lt;button onClick={onClick}&gt;{children}&lt;/button&gt;</span>
-                      <span class="text-green-600 dark:text-green-400">}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Terminal -->
-                <div class="border-t bg-black text-green-400">
-                  <div class="border-b p-2 bg-muted/20 text-foreground">
-                    <span class="text-sm">Terminal</span>
-                  </div>
-                  <div class="p-3 font-mono text-sm">
-                    <div sc-stack-layout gap="1">
-                      <span>$ npm run dev</span>
-                      <span>✓ Local:    http://localhost:3000</span>
-                      <span>✓ ready in 150ms</span>
-                      <span class="opacity-60">▶</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Email Client Example -->
-      <section>
-        <h2 class="text-2xl font-semibold mb-4 px-8">Email Client Layout</h2>
-        <div class="px-8">
-          <div sc-split-layout direction="horizontal" ratio="30:70" gap="0" class="h-96 border rounded-lg overflow-hidden">
-            <!-- Sidebar -->
-            <div class="bg-muted/30 border-r">
-              <div class="border-b p-4">
-                <h3 class="font-semibold">Mailbox</h3>
-              </div>
-              <div class="p-2">
-                <div sc-stack-layout gap="1">
-                  <a href="#" class="flex items-center gap-2 px-3 py-2 rounded bg-primary text-primary-foreground text-sm">
-                    <span>📥</span>
-                    <span>Inbox</span>
-                    <span class="ml-auto bg-primary-foreground text-primary px-1.5 py-0.5 rounded text-xs">12</span>
-                  </a>
-                  <a href="#" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-muted text-sm">
-                    <span>📤</span>
-                    <span>Sent</span>
-                  </a>
-                  <a href="#" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-muted text-sm">
-                    <span>📋</span>
-                    <span>Drafts</span>
-                    <span class="ml-auto text-muted-foreground text-xs">3</span>
-                  </a>
-                  <a href="#" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-muted text-sm">
-                    <span>⭐</span>
-                    <span>Starred</span>
-                  </a>
-                  <a href="#" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-muted text-sm">
-                    <span>🗑️</span>
-                    <span>Trash</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Main Content -->
-            <div class="bg-background">
-              <div sc-split-layout direction="vertical" ratio="50:50" gap="0" class="h-full">
-                <!-- Email List -->
-                <div class="border-b">
-                  <div class="border-b p-4">
-                    <h3 class="font-semibold">Inbox</h3>
-                  </div>
-                  <div class="overflow-y-auto">
-                    <div sc-stack-layout gap="0">
-                      <div class="border-b p-3 hover:bg-muted/50 cursor-pointer bg-blue-50 dark:bg-blue-950">
-                        <div class="flex items-start justify-between">
-                          <div sc-stack-layout gap="1">
-                            <div class="flex items-center gap-2">
-                              <span class="font-medium text-sm">John Doe</span>
-                              <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                            </div>
-                            <p class="text-sm text-muted-foreground">Meeting Follow-up</p>
-                          </div>
-                          <span class="text-xs text-muted-foreground">2m ago</span>
-                        </div>
-                      </div>
-                      <div class="border-b p-3 hover:bg-muted/50 cursor-pointer">
-                        <div class="flex items-start justify-between">
-                          <div sc-stack-layout gap="1">
-                            <span class="font-medium text-sm">Sarah Wilson</span>
-                            <p class="text-sm text-muted-foreground">Project Update</p>
-                          </div>
-                          <span class="text-xs text-muted-foreground">1h ago</span>
-                        </div>
-                      </div>
-                      <div class="border-b p-3 hover:bg-muted/50 cursor-pointer">
-                        <div class="flex items-start justify-between">
-                          <div sc-stack-layout gap="1">
-                            <span class="font-medium text-sm">Team Newsletter</span>
-                            <p class="text-sm text-muted-foreground">Weekly Updates</p>
-                          </div>
-                          <span class="text-xs text-muted-foreground">3h ago</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Email Content -->
-                <div class="p-6">
-                  <div sc-stack-layout gap="4">
-                    <div>
-                      <h3 class="text-lg font-semibold">Meeting Follow-up</h3>
-                      <div class="flex items-center gap-2 text-sm text-muted-foreground mt-1">
-                        <span>From: john.doe@company.com</span>
-                        <span>•</span>
-                        <span>Today at 2:30 PM</span>
-                      </div>
-                    </div>
-                    <div class="prose prose-sm max-w-none">
-                      <p>Hi there,</p>
-                      <p>
-                        Thank you for the productive meeting this morning. As discussed, I'm sending over the
-                        action items we agreed upon:
-                      </p>
-                      <ul>
-                        <li>Update project timeline by Friday</li>
-                        <li>Schedule design review session</li>
-                        <li>Prepare user testing scenarios</li>
-                      </ul>
-                      <p>Let me know if you have any questions!</p>
-                      <p>Best regards,<br/>John</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Resizable Split Example -->
+      <!-- Dashboard Example -->
       <section class="pb-12">
         <h2 class="text-2xl font-semibold mb-4 px-8">Dashboard with Resizable Panels</h2>
         <div class="px-8">
-          <div sc-split-layout direction="horizontal" ratio="40:60" gap="4" class="h-80">
-            <!-- Left Panel: Charts -->
+          <div class="h-80" sc-split-layout direction="horizontal" ratio="40-60" gap="4">
             <div class="bg-card border rounded-lg p-4">
               <div sc-stack-layout gap="4">
                 <h3 class="font-semibold">Analytics Overview</h3>
@@ -349,59 +175,42 @@ import { ScSplitLayout, ScStackLayout } from '@semantic-components/layouts';
                     </div>
                   </div>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                  <div class="bg-muted p-3 rounded">
-                    <div class="text-sm text-muted-foreground">Users</div>
-                    <div class="text-lg font-bold">1,234</div>
-                  </div>
-                  <div class="bg-muted p-3 rounded">
-                    <div class="text-sm text-muted-foreground">Sales</div>
-                    <div class="text-lg font-bold">$56,789</div>
-                  </div>
-                </div>
               </div>
             </div>
-
-            <!-- Right Panel: Data Table -->
             <div class="bg-card border rounded-lg p-4">
               <div sc-stack-layout gap="4">
-                <div class="flex items-center justify-between">
-                  <h3 class="font-semibold">Recent Orders</h3>
-                  <button class="text-sm text-primary hover:underline">View All</button>
-                </div>
-                <div class="overflow-x-auto">
+                <h3 class="font-semibold">Recent Orders</h3>
+                <div class="overflow-auto">
                   <table class="w-full text-sm">
                     <thead>
-                      <tr class="border-b text-left">
-                        <th class="pb-2">Order ID</th>
-                        <th class="pb-2">Customer</th>
-                        <th class="pb-2">Amount</th>
-                        <th class="pb-2">Status</th>
+                      <tr class="border-b">
+                        <th class="text-left py-2">Order</th>
+                        <th class="text-left py-2">Customer</th>
+                        <th class="text-left py-2">Amount</th>
+                        <th class="text-left py-2">Status</th>
                       </tr>
                     </thead>
-                    <tbody class="text-muted-foreground">
+                    <tbody class="space-y-1">
                       <tr class="border-b">
                         <td class="py-2">#12345</td>
-                        <td class="py-2">John Smith</td>
-                        <td class="py-2">$129.99</td>
+                        <td class="py-2">John Doe</td>
+                        <td class="py-2">$299.00</td>
                         <td class="py-2">
-                          <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Completed</span>
+                          <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">
+                            Completed
+                          </span>
                         </td>
                       </tr>
                       <tr class="border-b">
                         <td class="py-2">#12346</td>
-                        <td class="py-2">Sarah Johnson</td>
-                        <td class="py-2">$89.50</td>
+                        <td class="py-2">Jane Smith</td>
+                        <td class="py-2">$149.99</td>
                         <td class="py-2">
-                          <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs">Pending</span>
-                        </td>
-                      </tr>
-                      <tr class="border-b">
-                        <td class="py-2">#12347</td>
-                        <td class="py-2">Mike Brown</td>
-                        <td class="py-2">$299.00</td>
-                        <td class="py-2">
-                          <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">Processing</span>
+                          <span
+                            class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs"
+                          >
+                            Pending
+                          </span>
                         </td>
                       </tr>
                     </tbody>

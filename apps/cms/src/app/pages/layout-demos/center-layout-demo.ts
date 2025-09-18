@@ -103,7 +103,7 @@ import { ScCenterLayout, ScStackLayout } from '@semantic-components/layouts';
             <div
               class="h-48 bg-pink-50 dark:bg-pink-950 border rounded-lg"
               sc-center-layout
-              strategy="transform"
+              strategy="absolute-center"
             >
               <div class="bg-white dark:bg-gray-800 border rounded p-4 text-center">
                 <div sc-stack-layout gap="2">

@@ -166,7 +166,7 @@ import { ScDashboardLayout, ScSidebarLayout, ScStackLayout } from '@semantic-com
           </div>
 
           <!-- Content Grid -->
-          <div sc-dashboard-layout layout="two-thirds-third" gap="6">
+          <div sc-dashboard-layout layout="two-column" gap="6">
             <!-- Recent Articles -->
             <div class="bg-card border rounded-lg">
               <div class="border-b p-6">

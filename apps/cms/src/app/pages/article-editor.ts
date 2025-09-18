@@ -9,7 +9,7 @@ import {
 
 @Component({
   selector: 'app-article-editor',
-  imports: [ScSplitLayout, ScStackLayout, ScHeaderLayout, ScSidebarLayout],
+  imports: [ScSplitLayout, ScStackLayout, ScHeaderLayout],
   template: `
     <div class="h-screen" sc-header-layout>
       <!-- Header -->
@@ -40,7 +40,7 @@ import {
       <div class="h-full" sc-split-layout direction="horizontal" ratio="70-30" gap="0">
         <!-- Editor Area -->
         <div class="bg-background">
-          <div class="h-full" sc-split-layout direction="vertical" ratio="15-85" gap="0">
+          <div class="h-full" sc-split-layout direction="vertical" ratio="20-80" gap="0">
             <!-- Article Meta -->
             <div class="border-b bg-muted/30 p-6">
               <div sc-stack-layout gap="4">
