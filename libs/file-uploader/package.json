@@ -5,5 +5,8 @@
     "@angular/common": "^20.3.0",
     "@angular/core": "^20.3.0"
   },
+  "optionalDependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  },
   "sideEffects": false
 }
