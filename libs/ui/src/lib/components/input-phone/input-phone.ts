@@ -155,6 +155,7 @@ interface ScCountry {
         </div>
         <div
           class="max-h-60 overflow-y-auto"
+          #countryListContainer
           [attr.aria-label]="'Country selection'"
           role="listbox"
         >
@@ -239,6 +240,8 @@ export class ScInputPhone implements ControlValueAccessor {
 
   protected readonly countryTrigger = viewChild.required<CdkOverlayOrigin>('countryTrigger');
   protected readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
+  protected readonly countryListContainer =
+    viewChild<ElementRef<HTMLDivElement>>('countryListContainer');
   protected readonly activeCountryIndex = signal<number>(-1);
 
   protected readonly overlayPositions: ConnectedPosition[] = [
@@ -384,10 +387,12 @@ export class ScInputPhone implements ControlValueAccessor {
       event.preventDefault();
       const nextIndex = currentIndex < filteredCountries.length - 1 ? currentIndex + 1 : 0;
       this.activeCountryIndex.set(nextIndex);
+      this.scrollToActiveCountry();
     } else if (event.key === 'ArrowUp') {
       event.preventDefault();
       const prevIndex = currentIndex > 0 ? currentIndex - 1 : filteredCountries.length - 1;
       this.activeCountryIndex.set(prevIndex);
+      this.scrollToActiveCountry();
     } else if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       const activeCountry = filteredCountries[currentIndex];
@@ -400,9 +405,11 @@ export class ScInputPhone implements ControlValueAccessor {
     } else if (event.key === 'Home') {
       event.preventDefault();
       this.activeCountryIndex.set(0);
+      this.scrollToActiveCountry();
     } else if (event.key === 'End') {
       event.preventDefault();
       this.activeCountryIndex.set(filteredCountries.length - 1);
+      this.scrollToActiveCountry();
     }
   }
 
@@ -425,8 +432,26 @@ export class ScInputPhone implements ControlValueAccessor {
     // Reset active index to first item when filtering
     if (filtered.length > 0) {
       this.activeCountryIndex.set(0);
+      setTimeout(() => this.scrollToActiveCountry(), 0);
     } else {
       this.activeCountryIndex.set(-1);
+    }
+  }
+
+  protected scrollToActiveCountry(): void {
+    const container = this.countryListContainer()?.nativeElement;
+    const activeIndex = this.activeCountryIndex();
+
+    if (!container || activeIndex < 0) return;
+
+    const activeElement = container.querySelector(`#country-option-${activeIndex}`) as HTMLElement;
+
+    if (activeElement) {
+      activeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest',
+      });
     }
   }
 
