@@ -198,6 +198,11 @@ export const appRoutes: Route[] = [
                 title: 'File Upload Page',
               },
               {
+                path: 'components/grid-layout',
+                loadComponent: () => import('./docs/components/grid-layout/grid-layout-page'),
+                title: 'Grid Layout Page',
+              },
+              {
                 path: 'components/hover-card',
                 loadComponent: () => import('./docs/components/hover-card/hover-card-page'),
                 title: 'Hover Card Page',
