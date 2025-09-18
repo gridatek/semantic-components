@@ -164,15 +164,14 @@ export class FileUploader implements OnInit, OnDestroy {
         console.log('Uppy object structure:', uppy);
         console.log('Uppy object keys:', Object.keys(uppy || {}));
 
-        // Check multiple possible access patterns
-        if (typeof uppy === 'function') {
-          resolve(uppy);
-        } else if (uppy && typeof uppy.Core === 'function') {
-          resolve(uppy.Core);
-        } else if (uppy && typeof uppy.Uppy === 'function') {
+        // In Uppy v4.x, Core has been renamed to Uppy
+        if (uppy && typeof uppy.Uppy === 'function') {
           resolve(uppy.Uppy);
-        } else if (uppy && typeof uppy.default === 'function') {
-          resolve(uppy.default);
+        } else if (uppy && typeof uppy.Core === 'function') {
+          // Fallback for older versions
+          resolve(uppy.Core);
+        } else if (typeof uppy === 'function') {
+          resolve(uppy);
         } else {
           console.error('Failed to find Uppy constructor. Available:', uppy);
           reject(new Error('Uppy constructor not found after loading CDN'));
@@ -190,6 +189,7 @@ export class FileUploader implements OnInit, OnDestroy {
       return uppy[pluginName];
     }
 
+    console.error(`Available Uppy plugins:`, Object.keys(uppy || {}));
     throw new Error(
       `Uppy plugin ${pluginName} not found. Make sure Uppy CDN includes all plugins.`,
     );
