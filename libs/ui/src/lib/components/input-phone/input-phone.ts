@@ -1,14 +1,10 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import {
-  CdkConnectedOverlay,
-  CdkOverlayOrigin,
-  ConnectedPosition,
-  OverlayModule,
-} from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   effect,
@@ -19,7 +15,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 import { PhoneNumberFormat, PhoneNumberUtil } from 'google-libphonenumber';
@@ -34,6 +30,13 @@ interface ScCountry {
 @Component({
   selector: 'sc-input-phone',
   imports: [FormsModule, CommonModule, OverlayModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: ScInputPhone,
+      multi: true,
+    },
+  ],
   template: `
     <div [class]="class()">
       @if (label()) {
@@ -138,17 +141,32 @@ interface ScCountry {
         <div class="p-2">
           <input
             class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            #searchInput
             [value]="countrySearchTerm()"
+            [attr.aria-expanded]="showCountryDropdown()"
+            [attr.aria-activedescendant]="'country-option-' + activeCountryIndex()"
             (input)="onCountrySearchChange($event)"
+            (keydown)="onKeydown($event)"
             type="text"
             placeholder="Search countries..."
+            role="combobox"
+            aria-label="Search countries"
           />
         </div>
-        <div class="max-h-60 overflow-y-auto">
-          @for (country of filteredCountries(); track country.code) {
+        <div
+          class="max-h-60 overflow-y-auto"
+          [attr.aria-label]="'Country selection'"
+          role="listbox"
+        >
+          @for (country of filteredCountries(); track country.code; let i = $index) {
             <div
               class="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground cursor-pointer"
+              [class.bg-accent]="i === activeCountryIndex()"
+              [class.text-accent-foreground]="i === activeCountryIndex()"
+              [attr.aria-selected]="i === activeCountryIndex()"
+              [id]="'country-option-' + i"
               (click)="selectCountry(country)"
+              role="option"
             >
               <div
                 class="w-6 h-4 rounded-sm overflow-hidden bg-gray-200 flex items-center justify-center mr-3"
@@ -172,7 +190,7 @@ interface ScCountry {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScInputPhone {
+export class ScInputPhone implements ControlValueAccessor {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -220,6 +238,8 @@ export class ScInputPhone {
   protected readonly formattedNumber = signal<string>('');
 
   protected readonly countryTrigger = viewChild.required<CdkOverlayOrigin>('countryTrigger');
+  protected readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
+  protected readonly activeCountryIndex = signal<number>(-1);
 
   protected readonly overlayPositions: ConnectedPosition[] = [
     {
@@ -239,6 +259,9 @@ export class ScInputPhone {
   ];
 
   private readonly phoneUtil = PhoneNumberUtil.getInstance();
+
+  private onChange = (value: string) => {};
+  private onTouched = () => {};
 
   private readonly countries: ScCountry[] = [
     { code: 'US', name: 'United States', dialCode: '+1', flag: '🇺🇸' },
@@ -293,6 +316,7 @@ export class ScInputPhone {
   protected onPhoneNumberChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.value.set(target.value);
+    this.onChange(target.value);
     this.validatePhoneNumber();
     this.emitPhoneChange();
   }
@@ -308,6 +332,7 @@ export class ScInputPhone {
   protected onInputBlur(): void {
     this.isInputFocused.set(false);
     this.isTouched.set(true);
+    this.onTouched();
   }
 
   protected onCountryFocus(): void {
@@ -328,6 +353,12 @@ export class ScInputPhone {
     if (this.showCountryDropdown()) {
       this.countrySearchTerm.set('');
       this.filteredCountries.set([...this.countries]);
+      this.activeCountryIndex.set(0);
+
+      // Focus the search input after a short delay to ensure the overlay is rendered
+      setTimeout(() => {
+        this.searchInput()?.nativeElement.focus();
+      }, 50);
     }
   }
 
@@ -341,6 +372,38 @@ export class ScInputPhone {
     this.showCountryDropdown.set(false);
     this.validatePhoneNumber();
     this.emitPhoneChange();
+  }
+
+  protected onKeydown(event: KeyboardEvent): void {
+    if (!this.showCountryDropdown()) return;
+
+    const filteredCountries = this.filteredCountries();
+    const currentIndex = this.activeCountryIndex();
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      const nextIndex = currentIndex < filteredCountries.length - 1 ? currentIndex + 1 : 0;
+      this.activeCountryIndex.set(nextIndex);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : filteredCountries.length - 1;
+      this.activeCountryIndex.set(prevIndex);
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      const activeCountry = filteredCountries[currentIndex];
+      if (activeCountry) {
+        this.selectCountry(activeCountry);
+      }
+    } else if (event.key === 'Escape') {
+      event.preventDefault();
+      this.closeCountryDropdown();
+    } else if (event.key === 'Home') {
+      event.preventDefault();
+      this.activeCountryIndex.set(0);
+    } else if (event.key === 'End') {
+      event.preventDefault();
+      this.activeCountryIndex.set(filteredCountries.length - 1);
+    }
   }
 
   protected onCountrySearchChange(event: Event): void {
@@ -358,6 +421,13 @@ export class ScInputPhone {
         country.code.toLowerCase().includes(term),
     );
     this.filteredCountries.set(filtered);
+
+    // Reset active index to first item when filtering
+    if (filtered.length > 0) {
+      this.activeCountryIndex.set(0);
+    } else {
+      this.activeCountryIndex.set(-1);
+    }
   }
 
   private validatePhoneNumber(): void {
@@ -388,7 +458,7 @@ export class ScInputPhone {
         this.errorMessage.set('Please enter a valid phone number');
         this.formattedNumber.set('');
       }
-    } catch (error) {
+    } catch {
       this.isValid.set(false);
       this.isInvalid.set(true);
       this.errorMessage.set('Please enter a valid phone number');
@@ -413,11 +483,29 @@ export class ScInputPhone {
           phoneNumberObj,
           PhoneNumberFormat.NATIONAL,
         );
-      } catch (error) {
+      } catch {
         // Handle parsing error
       }
     }
 
     this.phoneChange.emit(phoneData);
+  }
+
+  writeValue(value: string): void {
+    this.value.set(value || '');
+    this.validatePhoneNumber();
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    // The disabled state is handled through the disabled input signal
+    // Angular will manage this automatically
   }
 }
