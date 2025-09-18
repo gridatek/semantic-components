@@ -25,6 +25,12 @@ export const gridLayoutVariants = cva('grid', {
       11: 'grid-cols-11',
       12: 'grid-cols-12',
     },
+    colSizing: {
+      auto: 'grid-cols-[auto]',
+      min: 'grid-cols-[min-content]',
+      max: 'grid-cols-[max-content]',
+      fr: 'grid-cols-[1fr]',
+    },
     gap: {
       0: 'gap-0',
       1: 'gap-1',
@@ -109,6 +115,26 @@ export const gridLayoutVariants = cva('grid', {
       11: 'xl:grid-cols-11',
       12: 'xl:grid-cols-12',
     },
+    rows: {
+      1: 'grid-rows-1',
+      2: 'grid-rows-2',
+      3: 'grid-rows-3',
+      4: 'grid-rows-4',
+      5: 'grid-rows-5',
+      6: 'grid-rows-6',
+      7: 'grid-rows-7',
+      8: 'grid-rows-8',
+      9: 'grid-rows-9',
+      10: 'grid-rows-10',
+      11: 'grid-rows-11',
+      12: 'grid-rows-12',
+    },
+    rowSizing: {
+      auto: 'grid-rows-[auto]',
+      min: 'grid-rows-[min-content]',
+      max: 'grid-rows-[max-content]',
+      fr: 'grid-rows-[1fr]',
+    },
   },
   defaultVariants: {
     cols: 1,
@@ -140,7 +166,10 @@ export class ScGridLayout {
 
   // Grid configuration inputs
   readonly cols = input<GridLayoutVariants['cols']>(1);
+  readonly colSizing = input<GridLayoutVariants['colSizing']>();
   readonly gap = input<GridLayoutVariants['gap']>(6);
+  readonly rows = input<GridLayoutVariants['rows']>();
+  readonly rowSizing = input<GridLayoutVariants['rowSizing']>();
   readonly smCols = input<GridLayoutVariants['smCols']>();
   readonly mdCols = input<GridLayoutVariants['mdCols']>();
   readonly lgCols = input<GridLayoutVariants['lgCols']>();
@@ -154,7 +183,10 @@ export class ScGridLayout {
     cn(
       gridLayoutVariants({
         cols: this.cols(),
+        colSizing: this.colSizing(),
         gap: this.gap(),
+        rows: this.rows(),
+        rowSizing: this.rowSizing(),
         align: this.align(),
         justify: this.justify(),
         smCols: this.smCols(),
