@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   input,
 } from '@angular/core';
@@ -37,11 +38,11 @@ export const dashboardLayoutVariants = cva('grid gap-4', {
       '6': 'p-6',
       '8': 'p-8',
     },
-    dense: {
-      undefined: '',
-      true: 'auto-rows-auto grid-flow-row-dense',
-      false: '',
-    },
+    // dense: {
+    //   undefined: '',
+    //   true: 'auto-rows-auto grid-flow-row-dense',
+    //   false: '',
+    // },
   },
 });
 
@@ -68,7 +69,12 @@ export class ScDashboardLayout {
   readonly layout = input<DashboardLayoutVariants['layout']>('auto-fit');
   readonly gap = input<DashboardLayoutVariants['gap']>('4');
   readonly padding = input<DashboardLayoutVariants['padding']>();
-  readonly dense = input<DashboardLayoutVariants['dense']>();
+
+  // readonly dense = input<DashboardLayoutVariants['dense']>();
+
+  readonly dense = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   protected readonly class = computed(() =>
     cn(
@@ -76,8 +82,9 @@ export class ScDashboardLayout {
         layout: this.layout(),
         gap: this.gap(),
         padding: this.padding(),
-        dense: this.dense(),
+        // dense: this.dense(),
       }),
+      this.dense() && 'auto-rows-auto grid-flow-row-dense',
       this.classInput(),
     ),
   );

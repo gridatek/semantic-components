@@ -53,7 +53,7 @@ import { CmsNewsletter } from '../components/newsletter';
           </sc-page-section-header>
 
           <sc-page-section-content>
-            <sc-grid-layout [cols]="1" [mdCols]="2" [gap]="6">
+            <div sc-grid-layout cols="1" mdCols="2" gap="6">
               <div class="p-6 border rounded-lg">
                 <h4 class="font-semibold mb-2">Page Components</h4>
                 <p class="text-muted-foreground">
@@ -68,7 +68,7 @@ import { CmsNewsletter } from '../components/newsletter';
                   screen sizes.
                 </p>
               </div>
-            </sc-grid-layout>
+            </div>
           </sc-page-section-content>
 
           <sc-page-section-footer>

@@ -78,7 +78,7 @@ import {
           </sc-page-section-header>
 
           <sc-page-section-content>
-            <sc-grid-layout [cols]="1" [mdCols]="2" [lgCols]="3" [gap]="6">
+            <div sc-grid-layout cols="1" mdCols="2" lgCols="3" gap="6">
               <div class="p-6 border border-border rounded-lg">
                 <h4 class="font-semibold mb-3 text-blue-600">Accessibility First</h4>
                 <p class="text-sm text-muted-foreground">
@@ -102,7 +102,7 @@ import {
                   enjoyable.
                 </p>
               </div>
-            </sc-grid-layout>
+            </div>
           </sc-page-section-content>
         </sc-page-section>
       </sc-page-content>
