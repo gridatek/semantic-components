@@ -15,7 +15,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 import { PhoneNumberFormat, PhoneNumberUtil } from 'google-libphonenumber';
@@ -30,6 +30,13 @@ interface ScCountry {
 @Component({
   selector: 'sc-input-phone',
   imports: [FormsModule, CommonModule, OverlayModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: ScInputPhone,
+      multi: true,
+    },
+  ],
   template: `
     <div [class]="class()">
       @if (label()) {
@@ -183,7 +190,7 @@ interface ScCountry {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScInputPhone {
+export class ScInputPhone implements ControlValueAccessor {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -253,6 +260,9 @@ export class ScInputPhone {
 
   private readonly phoneUtil = PhoneNumberUtil.getInstance();
 
+  private onChange = (value: string) => {};
+  private onTouched = () => {};
+
   private readonly countries: ScCountry[] = [
     { code: 'US', name: 'United States', dialCode: '+1', flag: '🇺🇸' },
     { code: 'GB', name: 'United Kingdom', dialCode: '+44', flag: '🇬🇧' },
@@ -306,6 +316,7 @@ export class ScInputPhone {
   protected onPhoneNumberChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.value.set(target.value);
+    this.onChange(target.value);
     this.validatePhoneNumber();
     this.emitPhoneChange();
   }
@@ -321,6 +332,7 @@ export class ScInputPhone {
   protected onInputBlur(): void {
     this.isInputFocused.set(false);
     this.isTouched.set(true);
+    this.onTouched();
   }
 
   protected onCountryFocus(): void {
@@ -477,5 +489,23 @@ export class ScInputPhone {
     }
 
     this.phoneChange.emit(phoneData);
+  }
+
+  writeValue(value: string): void {
+    this.value.set(value || '');
+    this.validatePhoneNumber();
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    // The disabled state is handled through the disabled input signal
+    // Angular will manage this automatically
   }
 }
