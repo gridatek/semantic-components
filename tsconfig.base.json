@@ -21,6 +21,7 @@
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
       "@semantic-components/file-uploader": ["libs/file-uploader/src/index.ts"],
       "@semantic-components/image-cropper": ["libs/image-cropper/src/index.ts"],
+      "@semantic-components/layouts": ["libs/layouts/src/index.ts"],
       "@semantic-components/re-captcha": ["libs/re-captcha/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
       "@semantic-components/utils": ["libs/utils/src/index.ts"]
