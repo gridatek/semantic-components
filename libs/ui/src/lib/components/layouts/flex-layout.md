@@ -52,8 +52,12 @@ Modern spacing between items
 - `'2'` - 8px gap **[default]**
 - `'3'` - 12px gap
 - `'4'` - 16px gap
+- `'5'` - 20px gap
 - `'6'` - 24px gap
 - `'8'` - 32px gap
+- `'10'` - 40px gap
+- `'12'` - 48px gap
+- `'16'` - 64px gap
 
 ### wrap
 
@@ -63,14 +67,70 @@ Controls item wrapping
 - `'wrap'` - Allow wrapping
 - `'wrap-reverse'` - Wrap in reverse
 
-### responsive
+### Responsive Direction
 
-Predefined responsive patterns
+Control flex direction at different breakpoints
 
-- `'mobile'` - Stack on mobile, row on desktop
-- `'desktop'` - Always horizontal
-- `'stack-mobile'` - Stack until large screens
-- `'stack-tablet'` - Stack until medium screens
+#### smDirection
+
+Direction from small screens and up
+
+- `'row'` - Horizontal layout
+- `'row-reverse'` - Horizontal reversed
+- `'col'` - Vertical layout
+- `'col-reverse'` - Vertical reversed
+
+#### mdDirection
+
+Direction from medium screens and up
+
+- `'row'` - Horizontal layout
+- `'row-reverse'` - Horizontal reversed
+- `'col'` - Vertical layout
+- `'col-reverse'` - Vertical reversed
+
+#### lgDirection
+
+Direction from large screens and up
+
+- `'row'` - Horizontal layout
+- `'row-reverse'` - Horizontal reversed
+- `'col'` - Vertical layout
+- `'col-reverse'` - Vertical reversed
+
+#### xlDirection
+
+Direction from extra large screens and up
+
+- `'row'` - Horizontal layout
+- `'row-reverse'` - Horizontal reversed
+- `'col'` - Vertical layout
+- `'col-reverse'` - Vertical reversed
+
+### Flex Sizing
+
+#### basis
+
+Control the initial main size of flex items
+
+- `'auto'` - Size based on content
+- `'0'` - Start from zero size
+- `'1'` - Take up equal space (flex-basis: 0 + flex-grow: 1)
+- `'full'` - Take full width/height
+
+#### grow
+
+Allow flex items to grow (boolean)
+
+- `true` - Item can grow to fill available space
+- `false` - Item maintains its size **[default]**
+
+#### shrink
+
+Control how flex items shrink (boolean)
+
+- `true` - Item can shrink when space is limited **[default]**
+- `false` - Item maintains its minimum size
 
 ## Common Examples
 
@@ -96,7 +156,7 @@ Predefined responsive patterns
 ### Navigation (Responsive)
 
 ```html
-<div sc-flex-layout responsive="mobile" justify="between">
+<div sc-flex-layout direction="col" mdDirection="row" justify="between">
   <img src="logo.png" />
   <nav>Menu items</nav>
 </div>
@@ -147,9 +207,50 @@ You can still add custom Tailwind classes via the `class` attribute:
 </div>
 ```
 
+### Flex Sizing Examples
+
+```html
+<!-- Growing item to fill space -->
+<div sc-flex-layout direction="row" gap="4">
+  <div>Fixed size</div>
+  <div sc-flex-layout grow>This grows to fill space</div>
+  <div>Fixed size</div>
+</div>
+
+<!-- Preventing shrinkage -->
+<div sc-flex-layout direction="row" gap="4">
+  <div>Shrinks normally</div>
+  <div sc-flex-layout shrink="false">Won't shrink</div>
+</div>
+
+<!-- Combined with basis -->
+<div sc-flex-layout direction="row" gap="4">
+  <div sc-flex-layout basis="auto">Auto size</div>
+  <div sc-flex-layout basis="0" grow>Equal flex</div>
+  <div sc-flex-layout basis="full">Full width</div>
+</div>
+```
+
+### Responsive Examples
+
+```html
+<!-- Mobile first: stack on mobile, row on medium+ -->
+<div sc-flex-layout direction="col" mdDirection="row" gap="4">
+  <div>Card 1</div>
+  <div>Card 2</div>
+</div>
+
+<!-- Complex responsive behavior -->
+<div sc-flex-layout direction="col" smDirection="row" lgDirection="col-reverse" gap="4">
+  <div>Responsive item</div>
+  <div>Another item</div>
+</div>
+```
+
 ## Tips
 
 1. **Use `gap` for spacing** - Modern approach, works in all directions
 2. **Start simple** - Most layouts only need `direction` and `gap`
 3. **Combine patterns** - Use nested ScFlexLayout for complex layouts
-4. **Mobile-first** - Use `responsive` props for mobile-friendly layouts
+4. **Mobile-first** - Use responsive direction props for mobile-friendly layouts
+5. **Flex sizing** - Use `grow`, `shrink`, and `basis` for precise control over item sizing

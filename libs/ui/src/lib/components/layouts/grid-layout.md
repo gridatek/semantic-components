@@ -14,16 +14,23 @@ A flexible CSS Grid layout component built with Class Variance Authority (CVA) f
 
 ## Props
 
-| Prop      | Type                                                                | Default     | Description                             |
-| --------- | ------------------------------------------------------------------- | ----------- | --------------------------------------- |
-| `cols`    | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '12'`                    | `'1'`       | Number of columns in the grid           |
-| `gap`     | `'0' \| '1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8'`       | `'6'`       | Gap between grid items                  |
-| `align`   | `'start' \| 'center' \| 'end' \| 'stretch'`                         | `'stretch'` | Vertical alignment of grid items        |
-| `justify` | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'` | `'start'`   | Horizontal distribution of grid items   |
-| `smCols`  | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '12'`                    | `undefined` | Columns at small breakpoint (sm:)       |
-| `mdCols`  | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '12'`                    | `undefined` | Columns at medium breakpoint (md:)      |
-| `lgCols`  | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '12'`                    | `undefined` | Columns at large breakpoint (lg:)       |
-| `xlCols`  | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '12'`                    | `undefined` | Columns at extra-large breakpoint (xl:) |
+| Prop         | Type                                                                                  | Default     | Description                             |
+| ------------ | ------------------------------------------------------------------------------------- | ----------- | --------------------------------------- |
+| `cols`       | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `'1'`       | Number of columns in the grid           |
+| `rows`       | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Number of rows in the grid              |
+| `gap`        | `'0' \| '1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '8' \| '10' \| '12' \| '16'`        | `'6'`       | Gap between grid items                  |
+| `align`      | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'`                             | `'stretch'` | Vertical alignment of grid items        |
+| `justify`    | `'start' \| 'center' \| 'end' \| 'between' \| 'around' \| 'evenly'`                   | `'start'`   | Horizontal distribution of grid items   |
+| `smCols`     | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Columns at small breakpoint (sm:)       |
+| `mdCols`     | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Columns at medium breakpoint (md:)      |
+| `lgCols`     | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Columns at large breakpoint (lg:)       |
+| `xlCols`     | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Columns at extra-large breakpoint (xl:) |
+| `smRows`     | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Rows at small breakpoint (sm:)          |
+| `mdRows`     | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Rows at medium breakpoint (md:)         |
+| `lgRows`     | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Rows at large breakpoint (lg:)          |
+| `xlRows`     | `'1' \| '2' \| '3' \| '4' \| '5' \| '6' \| '7' \| '8' \| '9' \| '10' \| '11' \| '12'` | `undefined` | Rows at extra-large breakpoint (xl:)    |
+| `colsSizing` | `'auto' \| 'min' \| 'max' \| 'fr'`                                                    | `undefined` | Column sizing strategy                  |
+| `rowsSizing` | `'auto' \| 'min' \| 'max' \| 'fr'`                                                    | `undefined` | Row sizing strategy                     |
 
 ## Examples
 
@@ -79,6 +86,52 @@ A flexible CSS Grid layout component built with Class Variance Authority (CVA) f
 </div>
 ```
 
+### Grid with Rows
+
+```html
+<!-- Fixed grid with specific rows and columns -->
+<div sc-grid-layout cols="3" rows="2" gap="4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+  <div>Item 4</div>
+  <div>Item 5</div>
+  <div>Item 6</div>
+</div>
+```
+
+### Advanced Sizing
+
+```html
+<!-- Auto-sized columns -->
+<div sc-grid-layout cols="3" colsSizing="auto" gap="4">
+  <div>Short</div>
+  <div>Medium length content</div>
+  <div>Very long content that will make this column wider</div>
+</div>
+
+<!-- Fractional rows -->
+<div class="h-96" sc-grid-layout cols="1" rows="3" rowsSizing="fr" gap="4">
+  <div>Equal height section 1</div>
+  <div>Equal height section 2</div>
+  <div>Equal height section 3</div>
+</div>
+```
+
+### Responsive Rows
+
+```html
+<!-- Different row counts on different screens -->
+<div sc-grid-layout cols="2" rows="3" mdRows="2" lgRows="1" gap="4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+  <div>Item 4</div>
+  <div>Item 5</div>
+  <div>Item 6</div>
+</div>
+```
+
 ### Form Layout
 
 ```html
@@ -121,11 +174,19 @@ A flexible CSS Grid layout component built with Class Variance Authority (CVA) f
 - Use Tailwind's `col-span-*` classes for items that should span multiple columns
 - Available spans: `col-span-1` through `col-span-12`
 
+### Sizing Strategies
+
+- **`auto`**: Columns/rows size to fit their content
+- **`min`**: Uses `min-content` for tight wrapping
+- **`max`**: Uses `max-content` for maximum content width
+- **`fr`**: Uses fractional units for equal distribution
+
 ### Performance
 
 - Grid classes are pre-generated and cached
 - All variants are type-safe and optimized
 - Use appropriate breakpoints to avoid unnecessary complexity
+- Combine `colsSizing` and `rowsSizing` for precise control
 
 ## Integration with Other Components
 
