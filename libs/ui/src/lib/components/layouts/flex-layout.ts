@@ -75,7 +75,6 @@ export const flexLayoutVariants = cva('flex', {
       'col-reverse': 'xl:flex-col-reverse',
     },
     basis: {
-      undefined: '',
       auto: 'basis-auto',
       '0': 'basis-0',
       '1': 'basis-1',
