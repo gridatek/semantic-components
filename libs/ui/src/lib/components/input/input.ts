@@ -14,6 +14,7 @@ import {
 
 import { cn } from '@semantic-components/utils';
 
+import { ScControl } from '../field/control';
 import { ScPlainInput } from './plain-input';
 
 export const scInputStyles = signal(
@@ -34,6 +35,9 @@ export const scInputStyles = signal(
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [
+    {
+      directive: ScControl,
+    },
     {
       directive: ScPlainInput,
       inputs: ['value'],

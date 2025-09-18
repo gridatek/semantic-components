@@ -1,12 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
   afterNextRender,
   computed,
   contentChild,
-  inject,
   input,
 } from '@angular/core';
 
@@ -14,6 +12,7 @@ import { cn } from '@semantic-components/utils';
 import { cva } from 'class-variance-authority';
 
 import { ScLabel } from '../label';
+import { ScControl } from './control';
 
 const fieldVariants = cva('', {
   variants: {
@@ -82,25 +81,17 @@ export class ScField {
     ),
   );
 
-  private readonly elementRef = inject(ElementRef);
-
   readonly scLabel = contentChild(ScLabel);
+
+  readonly scControl = contentChild(ScControl);
 
   constructor() {
     afterNextRender(() => {
       const fieldId = this.controlId();
 
-      // Find control element using querySelector
-      const hostElement = this.elementRef.nativeElement;
-      const controlElement = hostElement.querySelector('[data-slot="control"]');
-
       if (fieldId) {
         this.scLabel()?.for.set(fieldId);
-
-        if (controlElement) {
-          // Set ID directly on the DOM element
-          controlElement.id = fieldId;
-        }
+        this.scControl()?.id.set(fieldId);
       }
     });
   }
