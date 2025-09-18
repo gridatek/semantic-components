@@ -6,7 +6,7 @@ import { ScHeaderLayout, ScSidebarLayout, ScStackLayout } from '@semantic-compon
   selector: 'app-settings',
   imports: [ScSidebarLayout, ScStackLayout, ScHeaderLayout],
   template: `
-    <div class="min-h-screen" sc-header-layout>
+    <header class="min-h-screen" sc-header-layout>
       <!-- Header -->
       <div class="bg-card border-b" slot="header">
         <div class="px-6 py-4">
@@ -336,7 +336,7 @@ A modern content management system for developers and content creators.</textare
           </div>
         </div>
       </div>
-    </div>
+    </header>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

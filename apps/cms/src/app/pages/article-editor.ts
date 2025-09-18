@@ -11,7 +11,7 @@ import {
   selector: 'app-article-editor',
   imports: [ScSplitLayout, ScStackLayout, ScHeaderLayout],
   template: `
-    <div class="h-screen" sc-header-layout>
+    <header class="h-screen" sc-header-layout>
       <!-- Header -->
       <div class="bg-card border-b" slot="header">
         <div class="px-6 py-3">
@@ -372,7 +372,7 @@ Learn how to create and maintain component libraries that scale with your organi
           </div>
         </div>
       </div>
-    </div>
+    </header>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

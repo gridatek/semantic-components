@@ -11,7 +11,7 @@ import {
   selector: 'app-articles',
   imports: [ScStackLayout, ScSplitLayout, ScHeaderLayout],
   template: `
-    <div class="min-h-screen" sc-header-layout>
+    <header class="min-h-screen" sc-header-layout>
       <!-- Header -->
       <div class="bg-card border-b" slot="header">
         <div class="px-6 py-4">
@@ -481,7 +481,7 @@ import {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
