@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ScTimezonePicker } from '@semantic-components/timezone';
 
 @Component({
-  selector: 'app-timezone-demo',
+  selector: 'app-timezone-picker-demo',
   imports: [ScTimezonePicker],
   template: `
     <sc-timezone-picker placeholder="Choisissez un fuseau horaire"></sc-timezone-picker>
@@ -12,4 +12,4 @@ import { ScTimezonePicker } from '@semantic-components/timezone';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimezoneDemo {}
+export class TimezonePickerDemo {}

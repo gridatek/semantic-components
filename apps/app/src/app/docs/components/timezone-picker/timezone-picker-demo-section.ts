@@ -1,21 +1,21 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
 
 import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
-import { TimezoneDemo } from './timezone-demo';
+import { TimezonePickerDemo } from './timezone-picker-demo';
 
 @Component({
-  selector: 'app-timezone-demo-section',
-  imports: [PreviewCodeTabs, TimezoneDemo],
+  selector: 'app-timezone-picker-demo-section',
+  imports: [PreviewCodeTabs, TimezonePickerDemo],
   template: `
     <app-preview-code-tabs [code]="code" [title]="title()" [level]="level()">
-      <app-timezone-demo />
+      <app-timezone-picker-demo />
     </app-preview-code-tabs>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimezoneDemoSection {
+export class TimezonePickerDemoSection {
   readonly title = input<string>('');
 
   readonly level = input<'2' | '3'>('2');

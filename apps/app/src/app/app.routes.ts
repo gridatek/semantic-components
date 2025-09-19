@@ -366,7 +366,8 @@ export const appRoutes: Route[] = [
               },
               {
                 path: 'components/timezone-picker',
-                loadComponent: () => import('./docs/components/timezone/timezone-page'),
+                loadComponent: () =>
+                  import('./docs/components/timezone-picker/timezone-picker-page'),
                 title: 'Timezone Picker Page',
               },
               {
