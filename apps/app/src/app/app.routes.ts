@@ -172,6 +172,12 @@ export const appRoutes: Route[] = [
                 title: 'Date Picker Page',
               },
               {
+                path: 'components/date-time-picker',
+                loadComponent: () =>
+                  import('./docs/components/date-time-picker/date-time-picker-page'),
+                title: 'Date Time Picker Page',
+              },
+              {
                 path: 'components/dual-range-slider',
                 loadComponent: () =>
                   import('./docs/components/dual-range-slider/dual-range-slider-page'),

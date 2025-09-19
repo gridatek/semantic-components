@@ -166,6 +166,12 @@
             "description": "A date picker component."
           },
           {
+            "id": "date-time-picker",
+            "title": "Date Time Picker",
+            "path": "/docs/components/date-time-picker",
+            "description": "A date time picker component."
+          },
+          {
             "id": "dual-range-slider",
             "title": "Dual Range Slider",
             "path": "/docs/components/dual-range-slider",
