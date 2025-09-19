@@ -532,7 +532,7 @@ export class ScDateRangePicker implements OnInit {
     return date > this.tempRange.startDate && date < this.tempRange.endDate;
   }
 
-  private isDateDisabled(date: Date): boolean {
+  protected isDateDisabled(date: Date): boolean {
     if (this.minDate && date < this.minDate) return true;
     if (this.maxDate && date > this.maxDate) return true;
     return false;
