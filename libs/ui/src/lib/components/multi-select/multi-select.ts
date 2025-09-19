@@ -19,14 +19,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
-import { ScComboboxMultiInput } from '../combobox/combobox-multi-input';
-import { ScComboboxOption } from '../combobox/combobox-option';
-import { ScComboboxPanel } from '../combobox/combobox-panel';
-import { ScComboboxItem } from '../combobox/combobox-types';
+import { ScAutocompleteMultiInput } from '../autocomplete/autocomplete-multi-input';
+import { ScAutocompleteOption } from '../autocomplete/autocomplete-option';
+import { ScAutocompletePanel } from '../autocomplete/autocomplete-panel';
+import { ScAutocompleteItem } from '../autocomplete/autocomplete-types';
 
 @Component({
   selector: 'sc-multi-select',
-  imports: [OverlayModule, ScComboboxMultiInput, ScComboboxPanel],
+  imports: [OverlayModule, ScAutocompleteMultiInput, ScAutocompletePanel],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -38,7 +38,7 @@ import { ScComboboxItem } from '../combobox/combobox-types';
     <div class="multi-select-container" #container>
       <div class="relative">
         <!-- Multi Select Input with Chips -->
-        <sc-combobox-multi-input
+        <sc-autocomplete-multi-input
           #multiInput
           #trigger="cdkOverlayOrigin"
           [inputId]="id()"
@@ -69,7 +69,7 @@ import { ScComboboxItem } from '../combobox/combobox-types';
           (detach)="close()"
           cdkConnectedOverlay
         >
-          <sc-combobox-panel
+          <sc-autocomplete-panel
             #panel
             [listboxId]="listboxId"
             [filteredItems]="filteredItems"
@@ -121,29 +121,29 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     alias: 'placeholder',
   });
   readonly placeholder = linkedSignal(() => this.placeholderInput());
-  readonly items = input<(string | ScComboboxItem)[]>([]);
+  readonly items = input<(string | ScAutocompleteItem)[]>([]);
   readonly async = input<boolean>(false);
   readonly grouped = input<boolean>(false);
   readonly showStatus = input<boolean>(true);
-  readonly asyncSearchFn = input<(query: string) => Promise<ScComboboxItem[]>>();
+  readonly asyncSearchFn = input<(query: string) => Promise<ScAutocompleteItem[]>>();
 
   readonly selectionChange = output<string[]>();
   readonly searchChange = output<string>();
 
-  readonly multiInput = viewChild<ScComboboxMultiInput>('multiInput');
-  readonly panel = viewChild<ScComboboxPanel>('panel');
+  readonly multiInput = viewChild<ScAutocompleteMultiInput>('multiInput');
+  readonly panel = viewChild<ScAutocompletePanel>('panel');
   readonly containerElement = viewChild.required<ElementRef<HTMLDivElement>>('container');
   readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
   selectedValues: Set<string> = new Set();
-  filteredItems: (string | ScComboboxItem)[] = [];
+  filteredItems: (string | ScAutocompleteItem)[] = [];
   isOpen = false;
   isLoading = false;
   listboxId = `listbox-${Math.random().toString(36).substr(2, 9)}`;
   activeItemId: string | null = null;
   triggerWidth = 0;
 
-  keyManager!: ActiveDescendantKeyManager<ScComboboxOption>;
+  keyManager!: ActiveDescendantKeyManager<ScAutocompleteOption>;
   private searchSubject = new BehaviorSubject<string>('');
   private destroy$ = new Subject<void>();
   private onChange: any = () => {};
@@ -207,7 +207,7 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
       });
   }
 
-  private filterItems(searchTerm: string): (string | ScComboboxItem)[] {
+  private filterItems(searchTerm: string): (string | ScAutocompleteItem)[] {
     if (!searchTerm) return [...this.items()];
 
     const lowerSearchTerm = searchTerm.toLowerCase();
@@ -227,7 +227,7 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     if (this.panel()) {
       const options = this.panel()!.options;
       if (options.length > 0) {
-        this.keyManager = new ActiveDescendantKeyManager<ScComboboxOption>(options).withWrap();
+        this.keyManager = new ActiveDescendantKeyManager<ScAutocompleteOption>(options).withWrap();
         this.keyManager.change.pipe(takeUntil(this.destroy$)).subscribe((activeIndex) => {
           const activeOption = options.toArray()[activeIndex];
           this.activeItemId = activeOption ? this.getItemValue(activeOption.item()) : null;
@@ -299,7 +299,7 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     }
   }
 
-  selectItem(item: string | ScComboboxItem) {
+  selectItem(item: string | ScAutocompleteItem) {
     const value = this.getItemValue(item);
     if (this.selectedValues.has(value)) {
       this.selectedValues.delete(value);
@@ -319,11 +319,11 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     this.selectionChange.emit(selectedArray);
   }
 
-  setActiveItem(item: string | ScComboboxItem) {
+  setActiveItem(item: string | ScAutocompleteItem) {
     this.activeItemId = this.getItemValue(item);
   }
 
-  getItemValue(item: string | ScComboboxItem): string {
+  getItemValue(item: string | ScAutocompleteItem): string {
     return typeof item === 'string' ? item : item.value;
   }
 

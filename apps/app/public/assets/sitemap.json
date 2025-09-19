@@ -64,6 +64,12 @@
             "description": "Displays content within a desired ratio."
           },
           {
+            "id": "autocomplete",
+            "title": "Autocomplete",
+            "path": "/docs/components/autocomplete",
+            "description": "A search input component with dropdown suggestions that filters as you type."
+          },
+          {
             "id": "avatar",
             "title": "Avatar",
             "path": "/docs/components/avatar",

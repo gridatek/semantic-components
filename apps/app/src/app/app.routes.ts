@@ -86,6 +86,11 @@ export const appRoutes: Route[] = [
                 title: 'Aspect Ratio Page',
               },
               {
+                path: 'components/autocomplete',
+                loadComponent: () => import('./docs/components/autocomplete/autocomplete-page'),
+                title: 'Autocomplete Page',
+              },
+              {
                 path: 'components/avatar',
                 loadComponent: () => import('./docs/components/avatar/avatar-page'),
                 title: 'Avatar Page',
