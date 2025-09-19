@@ -1,124 +1,95 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnDestroy, OnInit, forwardRef, inject, input, signal } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { map, startWith } from 'rxjs/operators';
-
-import { Observable, Subject, of } from 'rxjs';
+import { ScCombobox, ScComboboxItem } from '@semantic-components/ui';
+import { Subject } from 'rxjs';
 
 import { TimezoneService } from './timezone.service';
 
 @Component({
   selector: 'sc-timezone-picker',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [ScCombobox, CommonModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ScTimezonePicker),
+      multi: true,
+    },
+  ],
   template: `
-    <div class="tz-container">
-      <input
-        class="tz-input"
-        [formControl]="control"
-        [placeholder]="placeholder"
-        [attr.aria-label]="placeholder"
-        type="text"
-      />
-
-      <div class="tz-dropdown" *ngIf="options$ | async as opts">
-        <div
-          class="tz-option"
-          *ngFor="let opt of opts"
-          [attr.aria-label]="opt.label"
-          [attr.aria-selected]="false"
-          (click)="control.setValue(opt)"
-          (keydown.enter)="control.setValue(opt)"
-          (keydown.space)="control.setValue(opt)"
-          tabindex="0"
-          role="option"
-        >
-          <span class="tz-label">{{ opt.label }}</span>
-          <small class="tz-id">{{ opt.value }}</small>
-        </div>
-      </div>
-    </div>
+    <sc-combobox
+      [placeholder]="placeholder()"
+      [items]="timezones()"
+      [showStatus]="false"
+      (selectionChange)="onSelectionChange($event)"
+    />
   `,
-  styles: `
-    .tz-container {
-      position: relative;
-      width: 100%;
-      max-width: 480px;
-    }
-
-    .tz-input {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    .tz-dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      max-height: 240px;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      background: #fff;
-      z-index: 1000;
-    }
-
-    .tz-option {
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-
-    .tz-option:hover {
-      background: #f5f5f5;
-    }
-
-    .tz-label {
-      display: block;
-    }
-    .tz-id {
-      opacity: 0.6;
-      font-size: 0.8em;
-    }
-  `,
+  host: {
+    'data-slot': 'control',
+  },
 })
-export class ScTimezonePicker implements OnInit, OnDestroy {
-  @Input() locale: string | undefined;
-  @Input() placeholder = 'Select timezone';
+export class ScTimezonePicker implements OnInit, OnDestroy, ControlValueAccessor {
+  readonly locale = input<string>();
+  readonly placeholder = input<string>('Select timezone');
+  readonly id = input<string>();
 
-  @ViewChild('panel') panel!: ElementRef;
+  protected readonly timezones = signal<ScComboboxItem[]>([]);
 
-  control = new FormControl();
-  options$: Observable<{ value: string; label: string }[]> = of([]);
-
-  private allTimezones: { value: string; label: string }[] = [];
   private destroy$ = new Subject<void>();
   private tzService = inject(TimezoneService);
+  private onChange: (value: string) => void = () => {
+    // Intentionally empty - implemented by Angular forms
+  };
+  private onTouched: () => void = () => {
+    // Intentionally empty - implemented by Angular forms
+  };
+  private hasInitialValue = false;
 
   async ngOnInit() {
-    const loc = this.locale || navigator.language.split('-')[0];
-    this.allTimezones = await this.tzService.getTimezones(loc);
-    this.options$ = this.control.valueChanges.pipe(
-      startWith(''),
-      map((v) => (typeof v === 'string' ? v : v?.label || v || '')),
-      map((text) => this._filter(text)),
-    );
+    const locale = this.locale() || navigator.language.split('-')[0];
+    const timezoneData = await this.tzService.getTimezones(locale);
 
+    // Convert to ScComboboxItem format
+    const items: ScComboboxItem[] = timezoneData.map((tz) => ({
+      label: tz.label,
+      value: tz.value,
+      subtitle: tz.value, // Show timezone ID as subtitle
+    }));
+
+    this.timezones.set(items);
+
+    // Set default to browser timezone if available
     const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const initial = this.allTimezones.find((t) => t.value === browserTz);
-    if (initial) this.control.setValue(initial);
+    const defaultItem = items.find((item) => item.value === browserTz);
+    if (defaultItem && !this.hasInitialValue) {
+      this.writeValue(defaultItem.value);
+    }
   }
 
-  displayFn(option: { label: string; value: string } | null): string {
-    return option?.label || '';
+  onSelectionChange(value: string) {
+    this.onChange(value);
+    this.onTouched();
   }
 
-  private _filter(text: string) {
-    const lower = text.toLowerCase();
-    return this.allTimezones
-      .filter((o) => o.label.toLowerCase().includes(lower) || o.value.toLowerCase().includes(lower))
-      .slice(0, 200);
+  // ControlValueAccessor implementation
+  writeValue(value: string): void {
+    // The combobox will handle displaying the selected value
+    if (value) {
+      this.hasInitialValue = true;
+    }
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(_isDisabled: boolean): void {
+    // Handle disabled state if needed
   }
 
   ngOnDestroy() {
