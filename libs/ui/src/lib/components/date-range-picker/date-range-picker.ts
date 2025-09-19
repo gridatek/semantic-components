@@ -523,7 +523,7 @@ export class ScDateRangePicker implements OnInit {
     this.isSelectingEnd = false;
   }
 
-  private isValidRange(): boolean {
+  protected isValidRange(): boolean {
     return !!(this.tempRange.startDate && this.tempRange.endDate);
   }
 
