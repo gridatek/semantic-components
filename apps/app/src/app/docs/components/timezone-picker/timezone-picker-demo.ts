@@ -1,17 +1,32 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { ScTimezonePicker, TimezoneChangeEvent } from '@semantic-components/timezone';
-import { ScField, ScFieldErrorMessage, ScLabel } from '@semantic-components/ui';
+import { TimezoneService } from '@semantic-components/timezone';
+import {
+  ScCombobox2,
+  ScCombobox2Item,
+  ScField,
+  ScFieldErrorMessage,
+  ScLabel,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-timezone-picker-demo',
-  imports: [ScTimezonePicker, ScField, ScLabel, ScFieldErrorMessage, ReactiveFormsModule, JsonPipe],
+  imports: [ScCombobox2, ScField, ScLabel, ScFieldErrorMessage, ReactiveFormsModule, JsonPipe],
   template: `
     <div class="space-y-8">
       <!-- Basic usage with built-in label -->
-      <sc-timezone-picker
+      <sc-combobox2
+        [items]="timezoneItems()"
+        [config]="{ searchPlaceholder: 'Search timezones...', showSearch: true }"
         label="Timezone"
         placeholder="Search for your timezone..."
         helperText="Start typing to search through available timezones"
@@ -20,36 +35,32 @@ import { ScField, ScFieldErrorMessage, ScLabel } from '@semantic-components/ui';
       <!-- With form control and validation -->
       <div sc-field>
         <label sc-label>Timezone (Required)</label>
-        <sc-timezone-picker
+        <sc-combobox2
           [formControl]="timezoneControl"
           [required]="true"
           [showErrors]="true"
+          [items]="timezoneItems()"
+          [config]="{ searchPlaceholder: 'Search timezones...', showSearch: true }"
+          (selectionChange)="onTimezoneChange($event)"
           placeholder="Search timezones..."
-          locale="en"
         />
         @if (timezoneControl.errors?.['required'] && timezoneControl.touched) {
           <div sc-field-error-message>Timezone is required</div>
         }
       </div>
 
-      <!-- Localized version -->
-      <sc-timezone-picker
-        label="Fuseau horaire"
-        placeholder="Rechercher un fuseau horaire..."
-        locale="fr"
-        helperText="Version française avec locale FR"
-      />
-
       <!-- With event handling -->
-      <sc-timezone-picker
-        (timezoneChange)="onTimezoneChange($event)"
+      <sc-combobox2
+        [items]="timezoneItems()"
+        [config]="{ searchPlaceholder: 'Search timezones...', showSearch: true }"
+        (selectionChange)="onTimezoneSelection($event)"
         label="Timezone with Events"
         placeholder="Select timezone to see event data..."
       />
 
       @if (selectedTimezoneData) {
         <div class="p-4 bg-muted rounded-md">
-          <h4 class="font-medium mb-2">Event Data:</h4>
+          <h4 class="font-medium mb-2">Selected Timezone Data:</h4>
           <pre class="text-sm">{{ selectedTimezoneData | json }}</pre>
         </div>
       }
@@ -65,11 +76,29 @@ import { ScField, ScFieldErrorMessage, ScLabel } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimezonePickerDemo {
-  timezoneControl = new FormControl('', [Validators.required]);
-  selectedTimezoneData: TimezoneChangeEvent | null = null;
+export class TimezonePickerDemo implements OnInit {
+  private timezoneService = inject(TimezoneService);
 
-  onTimezoneChange(event: TimezoneChangeEvent) {
-    this.selectedTimezoneData = event;
+  timezoneControl = new FormControl('', [Validators.required]);
+  timezoneItems = signal<ScCombobox2Item[]>([]);
+  selectedTimezoneData: ScCombobox2Item | null = null;
+
+  async ngOnInit() {
+    const timezones = await this.timezoneService.getTimezones();
+    const items: ScCombobox2Item[] = timezones.map((tz) => ({
+      id: tz.id,
+      label: tz.label,
+      subtitle: tz.city,
+      data: tz,
+    }));
+    this.timezoneItems.set(items);
+  }
+
+  onTimezoneChange(item: ScCombobox2Item | null) {
+    // Handle form control change
+  }
+
+  onTimezoneSelection(item: ScCombobox2Item | null) {
+    this.selectedTimezoneData = item;
   }
 }
