@@ -162,6 +162,12 @@ export const appRoutes: Route[] = [
                 title: 'Combobox Page',
               },
               {
+                path: 'components/combobox2',
+                loadComponent: () =>
+                  import('./docs/components/combobox2').then((m) => m.Combobox2DemoPage),
+                title: 'Combobox2 Page',
+              },
+              {
                 path: 'components/context-menu',
                 loadComponent: () => import('./docs/components/context-menu/context-menu-page'),
                 title: 'Context Menu Page',
