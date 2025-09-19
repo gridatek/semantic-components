@@ -22,7 +22,6 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
         <label sc-label>Select frameworks</label>
         <sc-combobox
           [items]="frameworks"
-          [multiple]="true"
           placeholder="Choose frameworks..."
           formControlName="frameworks"
         />

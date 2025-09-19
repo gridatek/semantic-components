@@ -13,7 +13,6 @@ import { ScCombobox, ScComboboxItem, ScField, ScLabel } from '@semantic-componen
       <sc-combobox
         [(ngModel)]="selectedTechnologies"
         [items]="technologies"
-        [multiple]="true"
         (selectionChange)="onTechnologiesChange($event)"
         placeholder="Add technologies..."
       />
