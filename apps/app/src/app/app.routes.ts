@@ -365,6 +365,12 @@ export const appRoutes: Route[] = [
                 title: 'Time Picker Page',
               },
               {
+                path: 'components/timezone-picker',
+                loadComponent: () =>
+                  import('./docs/components/timezone-picker/timezone-picker-page'),
+                title: 'Timezone Picker Page',
+              },
+              {
                 path: 'components/toast',
                 loadComponent: () => import('./docs/components/toast/toast-page'),
                 title: 'Toast Page',

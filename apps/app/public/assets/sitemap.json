@@ -394,6 +394,12 @@
             "description": "A time picker component with 12/24 hour format support and optional seconds."
           },
           {
+            "id": "timezone-picker",
+            "title": "Timezone Picker",
+            "path": "/docs/components/timezone-picker",
+            "description": "A timezone picker component."
+          },
+          {
             "id": "toast",
             "title": "Toast",
             "path": "/docs/components/toast",
