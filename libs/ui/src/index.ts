@@ -4,6 +4,7 @@ export * from './lib/components/calendar';
 export * from './lib/components/range-calendar';
 export * from './lib/components/date-picker';
 export * from './lib/components/date-range-picker';
+export * from './lib/components/date-time-picker';
 export * from './lib/components/nav';
 export * from './lib/components/theme-toggler';
 export * from './lib/components/link';
