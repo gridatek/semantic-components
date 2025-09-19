@@ -18,14 +18,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
 import { ScComboboxInput } from './combobox-input';
-import { ScComboboxMultiInput } from './combobox-multi-input';
 import { ScComboboxOption } from './combobox-option';
 import { ScComboboxPanel } from './combobox-panel';
 import { ScComboboxItem } from './combobox-types';
 
 @Component({
   selector: 'sc-combobox',
-  imports: [OverlayModule, ScComboboxInput, ScComboboxMultiInput, ScComboboxPanel],
+  imports: [OverlayModule, ScComboboxInput, ScComboboxPanel],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -37,45 +36,22 @@ import { ScComboboxItem } from './combobox-types';
     <div class="combobox-container" #container>
       <div class="relative">
         <!-- Single Select Input -->
-        @if (!multiple()) {
-          <sc-combobox-input
-            #singleInput
-            #trigger="cdkOverlayOrigin"
-            [inputId]="id()"
-            [placeholder]="placeholder()"
-            [showToggleButton]="showToggleButton()"
-            [isOpen]="isOpen"
-            [listboxId]="listboxId"
-            [activeItemId]="activeItemId"
-            (inputChange)="handleInput($event)"
-            (focusChange)="open()"
-            (blurChange)="handleBlur()"
-            (keydownChange)="handleKeydown($event)"
-            (toggleChange)="toggle()"
-            cdkOverlayOrigin
-          />
-        }
-
-        <!-- Multi Select Input with Chips -->
-        @if (multiple()) {
-          <sc-combobox-multi-input
-            #multiInput
-            #trigger="cdkOverlayOrigin"
-            [inputId]="id()"
-            [placeholder]="placeholder()"
-            [selectedValues]="selectedValues"
-            [items]="items()"
-            [isOpen]="isOpen"
-            [listboxId]="listboxId"
-            [activeItemId]="activeItemId"
-            (inputChange)="handleInput($event)"
-            (focusChange)="open()"
-            (blurChange)="handleBlur()"
-            (keydownChange)="handleKeydown($event)"
-            (chipRemoved)="removeChip($event)"
-            cdkOverlayOrigin
-          />
-        }
+        <sc-combobox-input
+          #singleInput
+          #trigger="cdkOverlayOrigin"
+          [inputId]="id()"
+          [placeholder]="placeholder()"
+          [showToggleButton]="showToggleButton()"
+          [isOpen]="isOpen"
+          [listboxId]="listboxId"
+          [activeItemId]="activeItemId"
+          (inputChange)="handleInput($event)"
+          (focusChange)="open()"
+          (blurChange)="handleBlur()"
+          (keydownChange)="handleKeydown($event)"
+          (toggleChange)="toggle()"
+          cdkOverlayOrigin
+        />
 
         <!-- Dropdown Panel using CDK Overlay -->
         <ng-template
@@ -94,10 +70,10 @@ import { ScComboboxItem } from './combobox-types';
             #panel
             [listboxId]="listboxId"
             [filteredItems]="filteredItems"
-            [multiple]="multiple()"
+            [multiple]="false"
             [grouped]="grouped()"
             [selectedValue]="selectedValue"
-            [selectedValues]="selectedValues"
+            [selectedValues]="emptySet"
             [isLoading]="isLoading"
             [style.width.px]="triggerWidth"
             [style.min-width.px]="triggerWidth"
@@ -111,16 +87,10 @@ import { ScComboboxItem } from './combobox-types';
       <!-- Status Display -->
       @if (showStatus()) {
         <p class="mt-2 text-sm text-gray-500">
-          @if (!multiple()) {
-            Selected:
-            <span class="font-medium">
-              {{ selectedValue ? getItemLabel(selectedValue) : 'None' }}
-            </span>
-          }
-          @if (multiple()) {
-            Selected count:
-            <span class="font-medium">{{ selectedValues.size }}</span>
-          }
+          Selected:
+          <span class="font-medium">
+            {{ selectedValue ? getItemLabel(selectedValue) : 'None' }}
+          </span>
         </p>
       }
       @if (async() && showStatus()) {
@@ -148,7 +118,6 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   });
   readonly placeholder = linkedSignal(() => this.placeholderInput());
   readonly items = input<(string | ScComboboxItem)[]>([]);
-  readonly multiple = input<boolean>(false);
   readonly async = input<boolean>(false);
   readonly grouped = input<boolean>(false);
   readonly showStatus = input<boolean>(true);
@@ -159,14 +128,13 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   readonly searchChange = output<string>();
 
   readonly singleInput = viewChild<ScComboboxInput>('singleInput');
-  readonly multiInput = viewChild<ScComboboxMultiInput>('multiInput');
   readonly panel = viewChild<ScComboboxPanel>('panel');
   readonly containerElement = viewChild.required<ElementRef<HTMLDivElement>>('container');
   readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
   selectedValue: any = null;
-  selectedValues: Set<string> = new Set();
   filteredItems: (string | ScComboboxItem)[] = [];
+  emptySet = new Set<string>();
   isOpen = false;
   isLoading = false;
   listboxId = `listbox-${Math.random().toString(36).substr(2, 9)}`;
@@ -252,18 +220,14 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   }
 
   writeValue(value: any): void {
-    if (this.multiple()) {
-      this.selectedValues = new Set(value || []);
-    } else {
-      this.selectedValue = value;
-      if (value) {
-        const item = this.items().find((i) => this.getItemValue(i) === value);
-        if (item) {
-          const searchQuery = this.getItemLabel(item);
-          const singleInput = this.singleInput();
-          if (singleInput) {
-            singleInput.searchQuery = searchQuery;
-          }
+    this.selectedValue = value;
+    if (value) {
+      const item = this.items().find((i) => this.getItemValue(i) === value);
+      if (item) {
+        const searchQuery = this.getItemLabel(item);
+        const singleInput = this.singleInput();
+        if (singleInput) {
+          singleInput.searchQuery = searchQuery;
         }
       }
     }
@@ -378,46 +342,17 @@ export class ScCombobox implements OnInit, OnDestroy, AfterViewInit, ControlValu
   }
 
   selectItem(item: string | ScComboboxItem) {
-    if (this.multiple()) {
-      this.toggleMultiSelect(item);
-    } else {
-      const value = this.getItemValue(item);
-      const label = this.getItemLabel(item);
-
-      this.selectedValue = value;
-      const singleInput = this.singleInput();
-      if (singleInput) {
-        singleInput.searchQuery = label;
-      }
-      this.onChange(value);
-      this.selectionChange.emit(value);
-      this.close();
-    }
-  }
-
-  toggleMultiSelect(item: string | ScComboboxItem) {
     const value = this.getItemValue(item);
+    const label = this.getItemLabel(item);
 
-    if (this.selectedValues.has(value)) {
-      this.selectedValues.delete(value);
-    } else {
-      this.selectedValues.add(value);
+    this.selectedValue = value;
+    const singleInput = this.singleInput();
+    if (singleInput) {
+      singleInput.searchQuery = label;
     }
-
-    const valuesArray = Array.from(this.selectedValues);
-    this.onChange(valuesArray);
-    this.selectionChange.emit(valuesArray);
-    const multiInput = this.multiInput();
-    if (multiInput) {
-      multiInput.searchQuery = '';
-    }
-  }
-
-  removeChip(value: string) {
-    this.selectedValues.delete(value);
-    const valuesArray = Array.from(this.selectedValues);
-    this.onChange(valuesArray);
-    this.selectionChange.emit(valuesArray);
+    this.onChange(value);
+    this.selectionChange.emit(value);
+    this.close();
   }
 
   getItemLabel(item: any): string {

@@ -54,6 +54,7 @@ export * from './lib/components/page';
 export * from './lib/components/typography';
 export * from './lib/components/combobox';
 export * from './lib/components/combobox2';
+export * from './lib/components/multi-select';
 export * from './lib/components/clock-picker';
 export * from './lib/components/field';
 export * from './lib/components/fieldset';
