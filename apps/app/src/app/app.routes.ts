@@ -286,6 +286,11 @@ export const appRoutes: Route[] = [
                 title: 'Menu Bar Page',
               },
               {
+                path: 'components/multi-select',
+                loadComponent: () => import('./docs/components/multi-select/multi-select-page'),
+                title: 'Multi Select Page',
+              },
+              {
                 path: 'components/pagination',
                 loadComponent: () => import('./docs/components/pagination/pagination-page'),
                 title: 'Pagination Page',
