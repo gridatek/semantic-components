@@ -2,72 +2,88 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class TimezoneService {
-  private cache: Record<string, any> = {};
+  private cache: Record<string, unknown> = {};
 
   // Public: returns array of { value, label } for a given locale
-  async getTimezones(locale: string = 'en'): Promise<{ value: string; label: string }[]> {
+  async getTimezones(locale = 'en'): Promise<{ value: string; label: string }[]> {
     const tzData = await this.loadLocale(locale);
-    const zones = Intl.supportedValuesOf('timeZone');
+    const zones = this.getSupportedTimezones();
 
-    return zones.map((tz) => ({ value: tz, label: this.getLabel(tz, tzData, locale) }));
+    return zones.map((tz: string) => ({
+      value: tz,
+      label: this.getLabel(tz, tzData as Record<string, unknown>, locale),
+    }));
   }
 
-  // Lazy-load CLDR locale JSON and cache
-  private async loadLocale(locale: string): Promise<any> {
+  private getSupportedTimezones(): string[] {
+    // Use Intl.supportedValuesOf if available (ES2022+), otherwise fallback to common timezones
+    if (
+      'supportedValuesOf' in Intl &&
+      typeof (Intl as Record<string, unknown>)['supportedValuesOf'] === 'function'
+    ) {
+      return (
+        (Intl as Record<string, unknown>)['supportedValuesOf'] as (input: string) => string[]
+      )('timeZone');
+    }
+
+    // Fallback list of common timezones
+    return [
+      'UTC',
+      'Africa/Cairo',
+      'Africa/Johannesburg',
+      'Africa/Lagos',
+      'America/New_York',
+      'America/Chicago',
+      'America/Denver',
+      'America/Los_Angeles',
+      'America/Mexico_City',
+      'America/Sao_Paulo',
+      'America/Argentina/Buenos_Aires',
+      'Asia/Tokyo',
+      'Asia/Shanghai',
+      'Asia/Kolkata',
+      'Asia/Dubai',
+      'Asia/Singapore',
+      'Asia/Seoul',
+      'Asia/Hong_Kong',
+      'Asia/Bangkok',
+      'Asia/Manila',
+      'Australia/Sydney',
+      'Australia/Melbourne',
+      'Europe/London',
+      'Europe/Berlin',
+      'Europe/Paris',
+      'Europe/Rome',
+      'Europe/Madrid',
+      'Europe/Amsterdam',
+      'Europe/Stockholm',
+      'Europe/Moscow',
+      'Pacific/Auckland',
+      'Pacific/Honolulu',
+    ];
+  }
+
+  // Simple fallback without CLDR dependency
+  private async loadLocale(locale: string): Promise<unknown> {
     const short = (locale || 'en').split('-')[0];
     if (this.cache[short]) return this.cache[short];
 
-    try {
-      const data = await import(
-        /* webpackChunkName: "tz-[request]" */
-        `cldr-localenames-full/main/${short}/timeZoneNames.json`
-      );
-      const tzData = (data as any).default.main[short].timeZoneNames;
-      this.cache[short] = tzData;
-      return tzData;
-    } catch (err) {
-      // Fallback to English
-      if (short !== 'en') {
-        const enData = await import('cldr-localenames-full/main/en/timeZoneNames.json');
-        const tzData = (enData as any).default.main.en.timeZoneNames;
-        this.cache['en'] = tzData;
-        return tzData;
-      }
-      // If even English failed (unlikely), return empty
-      return {};
-    }
+    // For now, return empty object since we'll use simple city name extraction
+    // In the future, this could be enhanced with actual locale data
+    const emptyData = {};
+    this.cache[short] = emptyData;
+    return emptyData;
   }
 
-  // Build human-friendly label with translated city (from CLDR) and localized offset
-  private getLabel(tz: string, tzData: any, locale: string): string {
+  // Build human-friendly label with city name and localized offset
+  private getLabel(tz: string, _tzData: Record<string, unknown>, locale: string): string {
     const parts = tz.split('/');
-    const region = parts[0];
     const city = parts.slice(1).join('/'); // some tz have multiple parts
 
-    // CLDR structure: tzData["zoneFormats"] or tzData['zone']? we're using localenames: tzData['zone'] is sometimes nested.
-    // The cldr-localenames-full timeZoneNames has a structure; we attempt common lookups.
-    let translated = undefined;
+    // Simple city name extraction (replacing underscores with spaces)
+    const cityName = city ? city.replace(/_/g, ' ').split('/').pop() || tz : tz;
 
-    try {
-      // Preferred: tzData['zone']?.[region]?.[city]
-      translated = tzData?.zone?.[region]?.[city];
-    } catch (e) {
-      translated = undefined;
-    }
-
-    // fallback to nested keys or region-city combinations
-    if (!translated) {
-      // sometimes CLDR uses 'Europe' : { 'Berlin' : '...' }
-      const cityKey = city.replace(/_/g, ' ');
-      translated =
-        tzData?.zone?.[region]?.[cityKey] ||
-        tzData?.[region]?.[city] ||
-        tzData?.[region]?.[cityKey];
-    }
-
-    if (!translated) translated = city.replace(/_/g, ' ').split('/').pop() || tz;
-
-    // Localized offset
+    // Get localized offset using Intl.DateTimeFormat
     const now = new Date();
     const formatter = new Intl.DateTimeFormat(locale, {
       timeZone: tz,
@@ -78,8 +94,7 @@ export class TimezoneService {
       formatter.formatToParts(now).find((p) => p.type === 'timeZoneName')?.value || '';
     const offsetLabel = offsetPart ? `(${offsetPart})` : '';
 
-    // Example label: "(GMT+02:00) Berlin" — keep GMT prefix standardized for clarity
-    // Some locales may use different wording; we keep a consistent format but localize the offset itself
-    return `${offsetLabel} ${translated}`.trim();
+    // Example label: "(GMT+02:00) Berlin"
+    return `${offsetLabel} ${cityName}`.trim();
   }
 }

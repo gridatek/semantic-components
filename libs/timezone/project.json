@@ -2,7 +2,7 @@
   "name": "timezone",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/timezone/src",
-  "prefix": "lib",
+  "prefix": "sc",
   "projectType": "library",
   "release": {
     "version": {

@@ -1,6 +1,5 @@
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { map, startWith } from 'rxjs/operators';
@@ -23,7 +22,17 @@ import { TimezoneService } from './timezone.service';
       />
 
       <div class="tz-dropdown" *ngIf="options$ | async as opts">
-        <div class="tz-option" *ngFor="let opt of opts" (click)="control.setValue(opt)">
+        <div
+          class="tz-option"
+          *ngFor="let opt of opts"
+          [attr.aria-label]="opt.label"
+          [attr.aria-selected]="false"
+          (click)="control.setValue(opt)"
+          (keydown.enter)="control.setValue(opt)"
+          (keydown.space)="control.setValue(opt)"
+          tabindex="0"
+          role="option"
+        >
           <span class="tz-label">{{ opt.label }}</span>
           <small class="tz-id">{{ opt.value }}</small>
         </div>
@@ -84,14 +93,8 @@ export class ScTimezonePicker implements OnInit, OnDestroy {
   options$: Observable<{ value: string; label: string }[]> = of([]);
 
   private allTimezones: { value: string; label: string }[] = [];
-  private overlayRef!: OverlayRef;
   private destroy$ = new Subject<void>();
-
-  constructor(
-    private tzService: TimezoneService,
-    private overlay: Overlay,
-    private elementRef: ElementRef,
-  ) {}
+  private tzService = inject(TimezoneService);
 
   async ngOnInit() {
     const loc = this.locale || navigator.language.split('-')[0];
@@ -107,7 +110,7 @@ export class ScTimezonePicker implements OnInit, OnDestroy {
     if (initial) this.control.setValue(initial);
   }
 
-  displayFn(option: any): string {
+  displayFn(option: { label: string; value: string } | null): string {
     return option?.label || '';
   }
 
