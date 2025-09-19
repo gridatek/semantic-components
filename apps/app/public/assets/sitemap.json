@@ -298,6 +298,12 @@
             "description": "A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands."
           },
           {
+            "id": "multi-select",
+            "title": "Multi Select",
+            "path": "/docs/components/multi-select",
+            "description": "A versatile multi-select component that allows users to select multiple items from a dropdown list with chips for selected values."
+          },
+          {
             "id": "pagination",
             "title": "Pagination",
             "path": "/docs/components/pagination",
