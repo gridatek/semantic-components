@@ -12,10 +12,10 @@ import {
   viewChild,
 } from '@angular/core';
 
-import { ScCombobox2Config, ScCombobox2Item } from './types';
+import { ScComboboxConfig, ScComboboxItem } from './types';
 
 @Component({
-  selector: 'sc-combobox2-dropdown',
+  selector: 'sc-combobox-dropdown',
   imports: [CommonModule, OverlayModule],
   template: `
     <ng-template
@@ -38,8 +38,8 @@ import { ScCombobox2Config, ScCombobox2Item } from './types';
               #searchInput
               [value]="searchTerm()"
               [attr.aria-expanded]="isOpen()"
-              [attr.aria-activedescendant]="'combobox2-option-' + activeIndex()"
-              [attr.aria-controls]="'combobox2-listbox'"
+              [attr.aria-activedescendant]="'combobox-option-' + activeIndex()"
+              [attr.aria-controls]="'combobox-listbox'"
               [placeholder]="config().searchPlaceholder || 'Search...'"
               (input)="searchChange.emit($event)"
               (keydown)="keydownEvent.emit($event)"
@@ -53,7 +53,7 @@ import { ScCombobox2Config, ScCombobox2Item } from './types';
           class="max-h-60 overflow-y-auto"
           #itemListContainer
           [attr.aria-label]="'Option selection'"
-          [id]="'combobox2-listbox'"
+          [id]="'combobox-listbox'"
           role="listbox"
         >
           @if (isLoading()) {
@@ -71,7 +71,7 @@ import { ScCombobox2Config, ScCombobox2Item } from './types';
                 [class.bg-accent]="i === activeIndex()"
                 [class.text-accent-foreground]="i === activeIndex()"
                 [attr.aria-selected]="i === activeIndex()"
-                [id]="'combobox2-option-' + i"
+                [id]="'combobox-option-' + i"
                 (click)="itemSelect.emit(item)"
                 (keydown.enter)="itemSelect.emit(item)"
                 (keydown.space)="itemSelect.emit(item)"
@@ -102,23 +102,23 @@ import { ScCombobox2Config, ScCombobox2Item } from './types';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCombobox2Dropdown {
+export class ScComboboxDropdown {
   readonly overlayOrigin = input.required<CdkOverlayOrigin>();
   readonly isOpen = input<boolean>(false);
-  readonly items = input.required<ScCombobox2Item[]>();
+  readonly items = input.required<ScComboboxItem[]>();
   readonly searchTerm = input<string>('');
   readonly activeIndex = input<number>(-1);
   readonly overlayPositions = input.required<ConnectedPosition[]>();
   readonly overlayWidth = input<number>(400);
-  readonly config = input<ScCombobox2Config>({} as ScCombobox2Config);
+  readonly config = input<ScComboboxConfig>({} as ScComboboxConfig);
   readonly isLoading = input<boolean>(false);
-  readonly itemTemplate = input<TemplateRef<{ $implicit: ScCombobox2Item; index: number }> | null>(
+  readonly itemTemplate = input<TemplateRef<{ $implicit: ScComboboxItem; index: number }> | null>(
     null,
   );
 
   readonly searchChange = output<Event>();
   readonly keydownEvent = output<KeyboardEvent>();
-  readonly itemSelect = output<ScCombobox2Item>();
+  readonly itemSelect = output<ScComboboxItem>();
   readonly backdropClick = output<void>();
 
   readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
@@ -130,9 +130,7 @@ export class ScCombobox2Dropdown {
 
     if (!container || activeIndex < 0) return;
 
-    const activeElement = container.querySelector(
-      `#combobox2-option-${activeIndex}`,
-    ) as HTMLElement;
+    const activeElement = container.querySelector(`#combobox-option-${activeIndex}`) as HTMLElement;
 
     if (activeElement) {
       activeElement.scrollIntoView({

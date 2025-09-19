@@ -9,10 +9,10 @@ import {
   output,
 } from '@angular/core';
 
-import { ScCombobox2Item } from './types';
+import { ScComboboxItem } from './types';
 
 @Component({
-  selector: 'sc-combobox2-trigger',
+  selector: 'sc-combobox-trigger',
   imports: [CommonModule],
   template: `
     <button
@@ -52,12 +52,12 @@ import { ScCombobox2Item } from './types';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCombobox2Trigger {
-  readonly selectedItem = input.required<ScCombobox2Item | null>();
+export class ScComboboxTrigger {
+  readonly selectedItem = input.required<ScComboboxItem | null>();
   readonly placeholder = input<string>('Select option...');
   readonly isInvalid = input<boolean>(false);
   readonly disabled = input<boolean>(false);
-  readonly triggerTemplate = input<TemplateRef<{ $implicit: ScCombobox2Item | null }> | null>(null);
+  readonly triggerTemplate = input<TemplateRef<{ $implicit: ScComboboxItem | null }> | null>(null);
 
   readonly triggerClick = output<void>();
   readonly triggerFocus = output<void>();

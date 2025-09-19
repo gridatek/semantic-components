@@ -11,8 +11,8 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { TimezoneService } from '@semantic-components/timezone';
 import {
-  ScCombobox2,
-  ScCombobox2Item,
+  ScCombobox,
+  ScComboboxItem,
   ScField,
   ScFieldErrorMessage,
   ScLabel,
@@ -20,11 +20,11 @@ import {
 
 @Component({
   selector: 'app-timezone-picker-demo',
-  imports: [ScCombobox2, ScField, ScLabel, ScFieldErrorMessage, ReactiveFormsModule, JsonPipe],
+  imports: [ScCombobox, ScField, ScLabel, ScFieldErrorMessage, ReactiveFormsModule, JsonPipe],
   template: `
     <div class="space-y-8">
       <!-- Basic usage with built-in label -->
-      <sc-combobox2
+      <sc-combobox
         [items]="timezoneItems()"
         [config]="{ searchPlaceholder: 'Search timezones...', showSearch: true }"
         label="Timezone"
@@ -35,7 +35,7 @@ import {
       <!-- With form control and validation -->
       <div sc-field>
         <label sc-label>Timezone (Required)</label>
-        <sc-combobox2
+        <sc-combobox
           [formControl]="timezoneControl"
           [required]="true"
           [showErrors]="true"
@@ -50,7 +50,7 @@ import {
       </div>
 
       <!-- With event handling -->
-      <sc-combobox2
+      <sc-combobox
         [items]="timezoneItems()"
         [config]="{ searchPlaceholder: 'Search timezones...', showSearch: true }"
         (selectionChange)="onTimezoneSelection($event)"
@@ -80,12 +80,12 @@ export class TimezonePickerDemo implements OnInit {
   private timezoneService = inject(TimezoneService);
 
   timezoneControl = new FormControl('', [Validators.required]);
-  timezoneItems = signal<ScCombobox2Item[]>([]);
-  selectedTimezoneData: ScCombobox2Item | null = null;
+  timezoneItems = signal<ScComboboxItem[]>([]);
+  selectedTimezoneData: ScComboboxItem | null = null;
 
   async ngOnInit() {
     const timezones = await this.timezoneService.getTimezones();
-    const items: ScCombobox2Item[] = timezones.map((tz) => ({
+    const items: ScComboboxItem[] = timezones.map((tz) => ({
       id: tz.id,
       label: tz.label,
       subtitle: tz.city,
@@ -94,11 +94,11 @@ export class TimezonePickerDemo implements OnInit {
     this.timezoneItems.set(items);
   }
 
-  onTimezoneChange(item: ScCombobox2Item | null) {
+  onTimezoneChange(item: ScComboboxItem | null) {
     // Handle form control change
   }
 
-  onTimezoneSelection(item: ScCombobox2Item | null) {
+  onTimezoneSelection(item: ScComboboxItem | null) {
     this.selectedTimezoneData = item;
   }
 }

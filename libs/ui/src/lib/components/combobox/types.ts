@@ -1,11 +1,11 @@
-export interface ScCombobox2Item {
+export interface ScComboboxItem {
   id: string;
   label: string;
   subtitle?: string;
   data?: unknown;
 }
 
-export interface ScCombobox2Config {
+export interface ScComboboxConfig {
   searchPlaceholder?: string;
   emptyMessage?: string;
   loadingMessage?: string;

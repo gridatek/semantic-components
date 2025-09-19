@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
-import { ScCombobox2, ScCombobox2Item } from './combobox2';
+import { ScCombobox, ScComboboxItem } from './combobox';
 
 @Component({
-  selector: 'sc-combobox2-demo',
-  imports: [ScCombobox2, ReactiveFormsModule],
+  selector: 'sc-combobox-demo',
+  imports: [ScCombobox, ReactiveFormsModule],
   template: `
     <div class="space-y-8">
       <!-- Basic usage -->
-      <sc-combobox2
+      <sc-combobox
         [items]="countries"
         label="Country"
         placeholder="Select country..."
@@ -17,7 +17,7 @@ import { ScCombobox2, ScCombobox2Item } from './combobox2';
       />
 
       <!-- With custom trigger template -->
-      <sc-combobox2
+      <sc-combobox
         [items]="countries"
         [formControl]="countryControl"
         label="Country with Flag"
@@ -41,10 +41,10 @@ import { ScCombobox2, ScCombobox2Item } from './combobox2';
             </div>
           </div>
         </ng-template>
-      </sc-combobox2>
+      </sc-combobox>
 
       <!-- Timezone example -->
-      <sc-combobox2
+      <sc-combobox
         [items]="timezones"
         [config]="{ searchPlaceholder: 'Search timezones...' }"
         label="Timezone"
@@ -93,7 +93,7 @@ import { ScCombobox2, ScCombobox2Item } from './combobox2';
             </div>
           </div>
         </ng-template>
-      </sc-combobox2>
+      </sc-combobox>
 
       <!-- Current values -->
       <div class="p-4 bg-muted rounded-md">
@@ -109,10 +109,10 @@ import { ScCombobox2, ScCombobox2Item } from './combobox2';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCombobox2Demo {
+export class ScComboboxDemo {
   countryControl = new FormControl('');
 
-  countries: ScCombobox2Item[] = [
+  countries: ScComboboxItem[] = [
     { id: 'US', label: 'United States', subtitle: 'North America' },
     { id: 'GB', label: 'United Kingdom', subtitle: 'Europe' },
     { id: 'CA', label: 'Canada', subtitle: 'North America' },
@@ -123,7 +123,7 @@ export class ScCombobox2Demo {
     { id: 'BR', label: 'Brazil', subtitle: 'South America' },
   ];
 
-  timezones: ScCombobox2Item[] = [
+  timezones: ScComboboxItem[] = [
     { id: 'America/New_York', label: 'New York', subtitle: 'GMT-05:00' },
     { id: 'Europe/London', label: 'London', subtitle: 'GMT+00:00' },
     { id: 'Europe/Paris', label: 'Paris', subtitle: 'GMT+01:00' },
