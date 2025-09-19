@@ -74,7 +74,7 @@ import { TimezoneService } from './timezone.service';
     }
   `,
 })
-export class TimezonePickerComponent implements OnInit, OnDestroy {
+export class ScTimezonePicker implements OnInit, OnDestroy {
   @Input() locale: string | undefined;
   @Input() placeholder = 'Select timezone';
 
