@@ -151,12 +151,6 @@
             "id": "combobox",
             "title": "Combobox",
             "path": "/docs/components/combobox",
-            "description": "Autocomplete input and command palette with a list of suggestions."
-          },
-          {
-            "id": "combobox2",
-            "title": "Combobox2",
-            "path": "/docs/components/combobox2",
             "description": "A versatile combo box component with custom templates, perfect for country pickers, timezone selectors, and more."
           },
           {
