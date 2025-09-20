@@ -349,7 +349,7 @@ export class ScAutocomplete implements OnDestroy, AfterViewInit, ControlValueAcc
     // If item is a value from selectedValues, find the actual item
     const actualItem = this.items().find((i) => {
       if (typeof i === 'string') return i === item;
-      return i.value === item;
+      return i.id === item;
     });
 
     if (actualItem) {

@@ -104,7 +104,7 @@ export class ScAutocompleteMultiInput {
   getItemLabel(value: string): string {
     const item = this.items().find((i) => {
       if (typeof i === 'string') return i === value;
-      return i.value === value;
+      return i.id === value;
     });
 
     if (item) {

@@ -165,7 +165,7 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
       if (typeof originalItem === 'string') {
         return originalItem;
       }
-      // Otherwise return as SearchableItem (which includes converted ScAutocompleteItem)
+      // Otherwise return as SearchableItem
       return item;
     });
   });

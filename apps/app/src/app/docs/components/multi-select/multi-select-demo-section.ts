@@ -89,48 +89,48 @@ export class MultiSelectDemo {
 
   protected readonly objectItems = [
     {
-      value: 'angular',
+      id: 'angular',
       label: 'Angular',
       subtitle: 'Web framework for building mobile and desktop apps',
     },
     {
-      value: 'react',
+      id: 'react',
       label: 'React',
       subtitle: 'JavaScript library for building user interfaces',
     },
     {
-      value: 'vue',
+      id: 'vue',
       label: 'Vue.js',
       subtitle: 'Progressive framework for building user interfaces',
     },
     {
-      value: 'svelte',
+      id: 'svelte',
       label: 'Svelte',
       subtitle: 'Cybernetically enhanced web apps',
     },
     {
-      value: 'typescript',
+      id: 'typescript',
       label: 'TypeScript',
       subtitle: 'JavaScript with syntax for types',
     },
     {
-      value: 'javascript',
+      id: 'javascript',
       label: 'JavaScript',
       subtitle: 'High-level programming language',
     },
   ];
 
   protected readonly groupedItems = [
-    { value: 'frontend', label: 'Frontend', group: 'Development' },
-    { value: 'backend', label: 'Backend', group: 'Development' },
-    { value: 'fullstack', label: 'Full Stack', group: 'Development' },
-    { value: 'mobile', label: 'Mobile', group: 'Development' },
-    { value: 'design', label: 'UI/UX Design', group: 'Design' },
-    { value: 'graphics', label: 'Graphic Design', group: 'Design' },
-    { value: 'branding', label: 'Branding', group: 'Design' },
-    { value: 'marketing', label: 'Digital Marketing', group: 'Marketing' },
-    { value: 'seo', label: 'SEO', group: 'Marketing' },
-    { value: 'content', label: 'Content Strategy', group: 'Marketing' },
+    { id: 'frontend', label: 'Frontend', group: 'Development' },
+    { id: 'backend', label: 'Backend', group: 'Development' },
+    { id: 'fullstack', label: 'Full Stack', group: 'Development' },
+    { id: 'mobile', label: 'Mobile', group: 'Development' },
+    { id: 'design', label: 'UI/UX Design', group: 'Design' },
+    { id: 'graphics', label: 'Graphic Design', group: 'Design' },
+    { id: 'branding', label: 'Branding', group: 'Design' },
+    { id: 'marketing', label: 'Digital Marketing', group: 'Marketing' },
+    { id: 'seo', label: 'SEO', group: 'Marketing' },
+    { id: 'content', label: 'Content Strategy', group: 'Marketing' },
   ];
 
   onSelectionChange(selected: string[]) {
