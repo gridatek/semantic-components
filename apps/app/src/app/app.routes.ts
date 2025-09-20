@@ -141,6 +141,11 @@ export const appRoutes: Route[] = [
                 title: 'Command Page',
               },
               {
+                path: 'components/cookie-consent',
+                loadComponent: () => import('./docs/components/cookie-consent/cookie-consent-page'),
+                title: 'Cookie Consent Page',
+              },
+              {
                 path: 'components/checkbox',
                 loadComponent: () => import('./docs/components/checkbox/checkbox-page'),
                 title: 'Checkbox Page',

@@ -160,6 +160,12 @@
             "description": "Fast, composable, styled command menu for Angular."
           },
           {
+            "id": "cookie-consent",
+            "title": "Cookie Consent",
+            "path": "/docs/components/cookie-consent",
+            "description": "A GDPR-compliant cookie consent banner with multi-language support and customizable preferences for managing user privacy settings."
+          },
+          {
             "id": "context-menu",
             "title": "Context Menu",
             "path": "/docs/components/context-menu",
