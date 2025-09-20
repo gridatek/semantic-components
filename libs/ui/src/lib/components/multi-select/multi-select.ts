@@ -170,16 +170,19 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
   protected readonly isOpen = computed(() => this.dropdownBehavior.isOpen());
   protected readonly isLoading = computed(() => this.searchBehavior.isLoading());
   protected readonly filteredItems = computed(() => {
-    return this.searchBehavior.filteredItems().map((item) => {
-      // Convert back to original format for template compatibility
-      if (item.subtitle || item.group) {
-        return fromSearchableItem(item);
-      }
-      // If it's a simple item, return as string if original was string
+    const searchableItems = this.searchBehavior.filteredItems();
+    // Convert to format expected by selector panel: (string | SearchableItem)[]
+    return searchableItems.map((item) => {
+      // Find the original item to preserve string format when appropriate
       const originalItem = this.items().find((orig) =>
         typeof orig === 'string' ? orig === item.id : orig.value === item.id,
       );
-      return typeof originalItem === 'string' ? item.id : fromSearchableItem(item);
+      // If original was a string, return as string
+      if (typeof originalItem === 'string') {
+        return originalItem;
+      }
+      // Otherwise return as SearchableItem (which includes converted ScAutocompleteItem)
+      return item;
     });
   });
 
@@ -368,8 +371,12 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     this.activeItemId = typeof item === 'string' ? item : item.id;
   }
 
-  getItemValue(item: string | ScAutocompleteItem): string {
-    return typeof item === 'string' ? item : item.value;
+  getItemValue(item: string | ScAutocompleteItem | SearchableItem): string {
+    if (typeof item === 'string') {
+      return item;
+    }
+    // Handle both ScAutocompleteItem (has 'value') and SearchableItem (has 'id')
+    return 'value' in item ? item.value : item.id;
   }
 
   getItemLabel(value: string): string {
