@@ -7,6 +7,7 @@ export interface CookiePreferences {
   analytics: boolean;
   marketing: boolean;
   functional: boolean;
+  [key: string]: boolean;
 }
 
 @Injectable({

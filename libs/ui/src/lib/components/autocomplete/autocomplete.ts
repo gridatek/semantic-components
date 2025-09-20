@@ -23,19 +23,13 @@ import { SearchBehavior, SearchableItem } from '../shared/search-behavior';
 import { SelectionBehavior } from '../shared/selection-behavior';
 import { ScSelectorPanel } from '../shared/selector-panel';
 import { ScAutocompleteInput } from './autocomplete-input';
-import { ScAutocompleteItem } from './autocomplete-types';
 
-// Helper function to convert ScAutocompleteItem to SearchableItem
-function toSearchableItem(item: string | ScAutocompleteItem): SearchableItem {
+// Helper function to convert string to SearchableItem
+function toSearchableItem(item: string | SearchableItem): SearchableItem {
   if (typeof item === 'string') {
     return { id: item, label: item };
   }
-  return {
-    id: item.value,
-    label: item.label,
-    subtitle: item.subtitle,
-    group: item.group,
-  };
+  return item;
 }
 
 @Component({
@@ -136,12 +130,12 @@ export class ScAutocomplete implements OnDestroy, AfterViewInit, ControlValueAcc
     alias: 'placeholder',
   });
   readonly placeholder = linkedSignal(() => this.placeholderInput());
-  readonly items = input<(string | ScAutocompleteItem)[]>([]);
+  readonly items = input<(string | SearchableItem)[]>([]);
   readonly async = input<boolean>(false);
   readonly grouped = input<boolean>(false);
   readonly showStatus = input<boolean>(true);
   readonly showToggleButton = input<boolean>(true);
-  readonly asyncSearchFn = input<(query: string) => Promise<ScAutocompleteItem[]>>();
+  readonly asyncSearchFn = input<(query: string) => Promise<SearchableItem[]>>();
 
   readonly selectionChange = output<any>();
   readonly searchChange = output<string>();
@@ -365,11 +359,11 @@ export class ScAutocomplete implements OnDestroy, AfterViewInit, ControlValueAcc
     return typeof item === 'string' ? item : item.label;
   }
 
-  getItemValue(item: string | ScAutocompleteItem): string {
-    return typeof item === 'string' ? item : item.value;
+  getItemValue(item: string | SearchableItem): string {
+    return typeof item === 'string' ? item : item.id;
   }
 
-  getItemSubtitle(item: string | ScAutocompleteItem): string | undefined {
+  getItemSubtitle(item: string | SearchableItem): string | undefined {
     return typeof item === 'string' ? undefined : item.subtitle;
   }
 

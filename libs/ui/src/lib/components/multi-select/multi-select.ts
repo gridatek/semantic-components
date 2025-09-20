@@ -23,33 +23,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 
 import { ScAutocompleteMultiInput } from '../autocomplete/autocomplete-multi-input';
-import { ScAutocompleteItem } from '../autocomplete/autocomplete-types';
 import { DropdownBehavior } from '../shared/dropdown-behavior';
 import { SearchBehavior, SearchableItem } from '../shared/search-behavior';
 import { SelectionBehavior } from '../shared/selection-behavior';
 import { ScSelectorPanel } from '../shared/selector-panel';
 
-// Helper function to convert ScAutocompleteItem to SearchableItem
-function toSearchableItem(item: string | ScAutocompleteItem): SearchableItem {
+// Helper function to convert string to SearchableItem
+function toSearchableItem(item: string | SearchableItem): SearchableItem {
   if (typeof item === 'string') {
     return { id: item, label: item };
   }
-  return {
-    id: item.value,
-    label: item.label,
-    subtitle: item.subtitle,
-    group: item.group,
-  };
-}
-
-// Helper function to convert back to ScAutocompleteItem
-function fromSearchableItem(searchableItem: SearchableItem): ScAutocompleteItem {
-  return {
-    value: searchableItem.id,
-    label: searchableItem.label,
-    subtitle: searchableItem.subtitle,
-    group: searchableItem.group,
-  };
+  return item;
 }
 
 @Component({
@@ -152,11 +136,11 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     alias: 'placeholder',
   });
   readonly placeholder = linkedSignal(() => this.placeholderInput());
-  readonly items = input<(string | ScAutocompleteItem)[]>([]);
+  readonly items = input<(string | SearchableItem)[]>([]);
   readonly async = input<boolean>(false);
   readonly grouped = input<boolean>(false);
   readonly showStatus = input<boolean>(true);
-  readonly asyncSearchFn = input<(query: string) => Promise<ScAutocompleteItem[]>>();
+  readonly asyncSearchFn = input<(query: string) => Promise<SearchableItem[]>>();
 
   readonly selectionChange = output<string[]>();
   readonly searchChange = output<string>();
@@ -175,7 +159,7 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     return searchableItems.map((item) => {
       // Find the original item to preserve string format when appropriate
       const originalItem = this.items().find((orig) =>
-        typeof orig === 'string' ? orig === item.id : orig.value === item.id,
+        typeof orig === 'string' ? orig === item.id : orig.id === item.id,
       );
       // If original was a string, return as string
       if (typeof originalItem === 'string') {
@@ -371,18 +355,14 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     this.activeItemId = typeof item === 'string' ? item : item.id;
   }
 
-  getItemValue(item: string | ScAutocompleteItem | SearchableItem): string {
-    if (typeof item === 'string') {
-      return item;
-    }
-    // Handle both ScAutocompleteItem (has 'value') and SearchableItem (has 'id')
-    return 'value' in item ? item.value : item.id;
+  getItemValue(item: string | SearchableItem): string {
+    return typeof item === 'string' ? item : item.id;
   }
 
   getItemLabel(value: string): string {
     const item = this.items().find((i) => {
       if (typeof i === 'string') return i === value;
-      return i.value === value;
+      return i.id === value;
     });
 
     if (item) {

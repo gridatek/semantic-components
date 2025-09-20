@@ -2,7 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, ElementRef, input, output, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ScAutocompleteItem } from './autocomplete-types';
+import { SearchableItem } from '../shared/search-behavior';
 
 @Component({
   selector: 'sc-autocomplete-multi-input',
@@ -64,7 +64,7 @@ export class ScAutocompleteMultiInput {
   readonly inputId = input<string>('');
   readonly placeholder = input<string>('Type to search...');
   readonly selectedValues = input<Set<string>>(new Set());
-  readonly items = input<(string | ScAutocompleteItem)[]>([]);
+  readonly items = input<(string | SearchableItem)[]>([]);
   readonly isOpen = input<boolean>(false);
   readonly listboxId = input<string>('');
   readonly activeItemId = input<string | null>(null);
