@@ -3,27 +3,70 @@ import {
   Component,
   EventEmitter,
   Inject,
-  Input,
   LOCALE_ID,
   OnInit,
   Output,
   ViewEncapsulation,
+  computed,
+  input,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { cn } from '@semantic-components/utils';
+import { VariantProps, cva } from 'class-variance-authority';
+
+import { ScButton } from '../button/button';
+import { ScCard } from '../card/card';
+import { ScSwitch } from '../switch/switch';
 import { CookiePreferences } from './cookie.service';
+
+export const cookieConsentVariants = cva(
+  'fixed inset-0 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+  {
+    variants: {
+      position: {
+        bottom: 'flex items-end justify-center',
+        center: 'flex items-center justify-center',
+        top: 'flex items-start justify-center pt-4',
+      },
+    },
+    defaultVariants: {
+      position: 'bottom',
+    },
+  },
+);
+
+export const cookieConsentContentVariants = cva(
+  'grid w-full gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+  {
+    variants: {
+      position: {
+        bottom:
+          'max-w-4xl mx-4 mb-4 rounded-lg data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
+        center:
+          'max-w-2xl mx-4 rounded-lg data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]',
+        top: 'max-w-4xl mx-4 mt-4 rounded-lg data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
+      },
+    },
+    defaultVariants: {
+      position: 'bottom',
+    },
+  },
+);
+
+export type CookieConsentVariants = VariantProps<typeof cookieConsentVariants>;
 
 @Component({
   selector: 'sc-cookie-consent',
-  imports: [FormsModule],
+  imports: [FormsModule, ScButton, ScCard, ScSwitch],
   template: `
     <!-- Language Selector -->
-    @if (showLanguageSelector) {
+    @if (showLanguageSelector()) {
       <div class="fixed top-4 right-4 z-50">
-        <div class="bg-white rounded-lg shadow-lg p-2">
-          <div class="flex items-center space-x-2">
+        <div class="p-2" sc-card>
+          <div class="flex items-center gap-2">
             <svg
-              class="w-4 h-4 text-gray-500"
+              class="size-4 text-muted-foreground"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -36,7 +79,7 @@ import { CookiePreferences } from './cookie.service';
               ></path>
             </svg>
             <select
-              class="border-none focus:ring-0 text-sm bg-transparent"
+              class="border-none focus:ring-0 text-sm bg-transparent text-foreground"
               [(ngModel)]="currentLanguage"
               (change)="onLanguageChange($event)"
             >
@@ -53,79 +96,82 @@ import { CookiePreferences } from './cookie.service';
     <!-- Cookie Consent Banner -->
     @if (showConsent && !showPreferences) {
       <div
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-center z-40"
+        [class]="consentOverlayClass()"
         role="dialog"
         aria-labelledby="cookie-title"
         aria-describedby="cookie-description"
+        data-state="open"
       >
-        <div class="bg-white w-full max-w-4xl mx-4 mb-4 rounded-lg shadow-2xl">
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <svg
-                class="w-6 h-6 text-blue-600 mr-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+        <div [class]="consentContentClass()">
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="size-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <h2 class="text-xl font-semibold tracking-tight" id="cookie-title">
+              {{ getTranslation('title') }}
+            </h2>
+          </div>
+          <p class="text-muted-foreground mb-6 leading-relaxed" id="cookie-description">
+            {{ getTranslation('description') }}
+          </p>
+          <div class="flex flex-wrap gap-3 mb-4">
+            <button
+              [variant]="'primary'"
+              [attr.aria-label]="getTranslation('acceptAll')"
+              (click)="acceptAll()"
+              sc-button
+            >
+              {{ getTranslation('acceptAll') }}
+            </button>
+            <button
+              [variant]="'secondary'"
+              [attr.aria-label]="getTranslation('rejectAll')"
+              (click)="rejectAll()"
+              sc-button
+            >
+              {{ getTranslation('rejectAll') }}
+            </button>
+            <button
+              [variant]="'outline'"
+              [attr.aria-label]="getTranslation('customize')"
+              (click)="openPreferences()"
+              sc-button
+            >
+              <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                 ></path>
               </svg>
-              <h2 class="text-xl font-bold text-gray-900" id="cookie-title">
-                {{ getTranslation('title') }}
-              </h2>
-            </div>
-            <p class="text-gray-600 mb-6 leading-relaxed" id="cookie-description">
-              {{ getTranslation('description') }}
-            </p>
-            <div class="flex flex-wrap gap-3 mb-4">
-              <button
-                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
-                [attr.aria-label]="getTranslation('acceptAll')"
-                (click)="acceptAll()"
-              >
-                {{ getTranslation('acceptAll') }}
-              </button>
-              <button
-                class="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-gray-500"
-                [attr.aria-label]="getTranslation('rejectAll')"
-                (click)="rejectAll()"
-              >
-                {{ getTranslation('rejectAll') }}
-              </button>
-              <button
-                class="bg-white text-gray-700 px-6 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors font-medium flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500"
-                [attr.aria-label]="getTranslation('customize')"
-                (click)="openPreferences()"
-              >
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                  ></path>
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  ></path>
-                </svg>
-                {{ getTranslation('customize') }}
-              </button>
-            </div>
-            <div class="flex space-x-4 text-sm text-blue-600">
-              <a class="hover:underline focus:underline focus:outline-none" href="#">
-                {{ getTranslation('privacyPolicy') }}
-              </a>
-              <a class="hover:underline focus:underline focus:outline-none" href="#">
-                {{ getTranslation('cookiePolicy') }}
-              </a>
-            </div>
+              {{ getTranslation('customize') }}
+            </button>
+          </div>
+          <div class="flex gap-4 text-sm">
+            <a
+              class="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              href="#"
+            >
+              {{ getTranslation('privacyPolicy') }}
+            </a>
+            <a
+              class="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              href="#"
+            >
+              {{ getTranslation('cookiePolicy') }}
+            </a>
           </div>
         </div>
       </div>
@@ -134,98 +180,73 @@ import { CookiePreferences } from './cookie.service';
     <!-- Cookie Preferences Modal -->
     @if (showPreferences) {
       <div
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+        [class]="preferencesOverlayClass()"
         role="dialog"
         aria-labelledby="preferences-title"
+        data-state="open"
       >
-        <div class="bg-white w-full max-w-2xl rounded-lg shadow-2xl max-h-[90vh] overflow-y-auto">
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="text-xl font-bold text-gray-900" id="preferences-title">
-                {{ getTranslation('cookiePreferences') }}
-              </h2>
-              <button
-                class="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                (click)="closePreferences()"
-                aria-label="Close preferences"
-              >
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <div class="space-y-6">
-              @for (category of cookieCategories; track category) {
-                <div class="border border-gray-200 rounded-lg p-4">
-                  <div class="flex items-center justify-between mb-2">
-                    <div class="flex items-center">
-                      <span class="text-xl mr-3">{{ category.icon }}</span>
-                      <h3 class="font-semibold text-gray-900">
-                        {{ getTranslation(category.key) }}
-                      </h3>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                      <input
-                        class="sr-only"
-                        [checked]="cookiePreferences[category.key]"
-                        [disabled]="category.key === 'necessary'"
-                        [attr.aria-label]="'Toggle ' + getTranslation(category.key)"
-                        (change)="togglePreference(category.key, $event)"
-                        type="checkbox"
-                      />
-                      <div
-                        class="w-11 h-6 rounded-full transition-colors"
-                        [class.bg-blue-600]="cookiePreferences[category.key]"
-                        [class.bg-gray-300]="!cookiePreferences[category.key]"
-                        [class.opacity-50]="category.key === 'necessary'"
-                        [class.cursor-not-allowed]="category.key === 'necessary'"
-                      >
-                        <div
-                          class="w-5 h-5 bg-white rounded-full shadow transform transition-transform mt-0.5"
-                          [class.translate-x-5]="cookiePreferences[category.key]"
-                          [class.translate-x-0.5]="!cookiePreferences[category.key]"
-                        ></div>
-                      </div>
-                    </label>
+        <div [class]="preferencesContentClass()">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-semibold tracking-tight" id="preferences-title">
+              {{ getTranslation('cookiePreferences') }}
+            </h2>
+            <button
+              [variant]="'ghost'"
+              [size]="'icon'"
+              (click)="closePreferences()"
+              sc-button
+              aria-label="Close preferences"
+            >
+              <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div class="space-y-6">
+            @for (category of cookieCategories; track category) {
+              <div class="p-4" sc-card>
+                <div class="flex items-center justify-between mb-2">
+                  <div class="flex items-center gap-3">
+                    <span class="text-xl">{{ category.icon }}</span>
+                    <h3 class="font-semibold">
+                      {{ getTranslation(category.key) }}
+                    </h3>
                   </div>
-                  <p class="text-sm text-gray-600">
-                    {{ getTranslation(category.key + 'Desc') }}
-                  </p>
+                  <input
+                    [checked]="cookiePreferences[category.key]"
+                    [disabled]="category.key === 'necessary'"
+                    [attr.aria-label]="'Toggle ' + getTranslation(category.key)"
+                    (checkedChange)="togglePreference(category.key, $event)"
+                    sc-switch
+                    type="checkbox"
+                  />
                 </div>
-              }
-            </div>
-            <div class="flex gap-3 mt-8">
-              <button
-                class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                (click)="savePreferences()"
-              >
-                <svg
-                  class="w-4 h-4 inline mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  ></path>
-                </svg>
-                {{ getTranslation('savePreferences') }}
-              </button>
-              <button
-                class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-gray-500"
-                (click)="closePreferences()"
-              >
-                {{ getTranslation('cancel') }}
-              </button>
-            </div>
+                <p class="text-sm text-muted-foreground">
+                  {{ getTranslation(category.key + 'Desc') }}
+                </p>
+              </div>
+            }
+          </div>
+          <div class="flex gap-3 mt-8">
+            <button class="flex-1" [variant]="'primary'" (click)="savePreferences()" sc-button>
+              <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                ></path>
+              </svg>
+              {{ getTranslation('savePreferences') }}
+            </button>
+            <button [variant]="'outline'" (click)="closePreferences()" sc-button>
+              {{ getTranslation('cancel') }}
+            </button>
           </div>
         </div>
       </div>
@@ -233,9 +254,9 @@ import { CookiePreferences } from './cookie.service';
 
     <!-- Demo Content (remove in production) -->
     @if (!showConsent) {
-      <div class="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div class="min-h-screen bg-muted/50 flex items-center justify-center">
         <div class="max-w-2xl mx-auto p-8 text-center">
-          <div class="w-16 h-16 mx-auto mb-4 text-blue-600">
+          <div class="size-16 mx-auto mb-4 text-primary">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"
@@ -245,9 +266,9 @@ import { CookiePreferences } from './cookie.service';
               ></path>
             </svg>
           </div>
-          <h1 class="text-2xl font-bold text-gray-900 mb-4">Cookie Consent Saved</h1>
-          <p class="text-gray-600 mb-6">Cookie preferences have been saved successfully.</p>
-          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h1 class="text-2xl font-bold mb-4">Cookie Consent Saved</h1>
+          <p class="text-muted-foreground mb-6">Cookie preferences have been saved successfully.</p>
+          <div class="p-6 mb-6" sc-card>
             <h3 class="font-semibold mb-3">Current Preferences:</h3>
             <div class="space-y-2 text-left">
               @for (pref of getPreferencesArray(); track pref) {
@@ -266,24 +287,35 @@ import { CookiePreferences } from './cookie.service';
               }
             </div>
           </div>
-          <button
-            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-            (click)="showConsentBanner()"
-          >
+          <button [variant]="'primary'" (click)="showConsentBanner()" sc-button>
             Show Cookie Banner Again
           </button>
         </div>
       </div>
     }
   `,
+  host: {
+    '[class]': 'class()',
+  },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCookieConsent implements OnInit {
-  @Input() showLanguageSelector: boolean = true;
-  @Output() preferencesChanged = new EventEmitter<CookiePreferences>();
-  @Output() consentGiven = new EventEmitter<CookiePreferences>();
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('relative', this.classInput()));
+
+  readonly showLanguageSelector = input<boolean>(true);
+  readonly position = input<CookieConsentVariants['position']>('bottom');
+
+  @Output()
+  preferencesChanged = new EventEmitter<CookiePreferences>();
+
+  @Output()
+  consentGiven = new EventEmitter<CookiePreferences>();
 
   showConsent = true;
   showPreferences = false;
@@ -295,6 +327,25 @@ export class ScCookieConsent implements OnInit {
     marketing: false,
     functional: false,
   };
+
+  // Computed classes using the variants
+  readonly consentOverlayClass = computed(() =>
+    cn(cookieConsentVariants({ position: this.position() })),
+  );
+
+  readonly consentContentClass = computed(() =>
+    cn(cookieConsentContentVariants({ position: this.position() })),
+  );
+
+  readonly preferencesOverlayClass = computed(() =>
+    cn('fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4'),
+  );
+
+  readonly preferencesContentClass = computed(() =>
+    cn(
+      'bg-background w-full max-w-2xl rounded-lg border shadow-lg max-h-[90vh] overflow-y-auto p-6',
+    ),
+  );
 
   cookieCategories = [
     { key: 'necessary', icon: '🔒' },
@@ -444,12 +495,12 @@ export class ScCookieConsent implements OnInit {
     this.showPreferences = false;
   }
 
-  togglePreference(type: keyof CookiePreferences, event: any) {
+  togglePreference(type: keyof CookiePreferences, checked: boolean) {
     if (type === 'necessary') return; // Can't disable necessary cookies
 
     this.cookiePreferences = {
       ...this.cookiePreferences,
-      [type]: event.target.checked,
+      [type]: checked,
     };
   }
 
