@@ -1,11 +1,10 @@
-import { ActiveDescendantKeyManager, _IdGenerator } from '@angular/cdk/a11y';
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { OverlayModule } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
-  OnInit,
   computed,
   effect,
   forwardRef,
@@ -13,19 +12,17 @@ import {
   input,
   linkedSignal,
   output,
-  signal,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { DropdownBehavior } from '../shared/dropdown-behavior';
 import { SearchBehavior, SearchableItem } from '../shared/search-behavior';
 import { SelectionBehavior } from '../shared/selection-behavior';
+import { ScSelectorPanel } from '../shared/selector-panel';
 import { ScAutocompleteInput } from './autocomplete-input';
-import { ScAutocompleteOption } from './autocomplete-option';
-import { ScAutocompletePanel } from './autocomplete-panel';
 import { ScAutocompleteItem } from './autocomplete-types';
 
 // Helper function to convert ScAutocompleteItem to SearchableItem
@@ -41,19 +38,9 @@ function toSearchableItem(item: string | ScAutocompleteItem): SearchableItem {
   };
 }
 
-// Helper function to convert back to ScAutocompleteItem
-function fromSearchableItem(searchableItem: SearchableItem): ScAutocompleteItem {
-  return {
-    value: searchableItem.id,
-    label: searchableItem.label,
-    subtitle: searchableItem.subtitle,
-    group: searchableItem.group,
-  };
-}
-
 @Component({
   selector: 'sc-autocomplete',
-  imports: [OverlayModule, ScAutocompleteInput, ScAutocompletePanel],
+  imports: [OverlayModule, ScAutocompleteInput, ScSelectorPanel],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -95,20 +82,18 @@ function fromSearchableItem(searchableItem: SearchableItem): ScAutocompleteItem 
           (detach)="close()"
           cdkConnectedOverlay
         >
-          <sc-autocomplete-panel
+          <sc-selector-panel
             #panel
-            [listboxId]="listboxId"
-            [filteredItems]="filteredItems()"
+            [items]="filteredItems()"
             [multiple]="false"
             [grouped]="grouped()"
-            [selectedValue]="selectedValue()"
-            [selectedValues]="emptySet"
+            [selectedValues]="selectedValuesSet()"
             [isLoading]="isLoading()"
             [style.width.px]="triggerWidth"
             [style.min-width.px]="triggerWidth"
             [style.max-width.px]="triggerWidth"
             (itemSelected)="selectItem($event)"
-            (itemActiveChange)="setActiveItem($event)"
+            (itemHovered)="setActiveItem($event)"
           />
         </ng-template>
       </div>
@@ -135,7 +120,7 @@ function fromSearchableItem(searchableItem: SearchableItem): ScAutocompleteItem 
     class: 'block',
   },
 })
-export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+export class ScAutocomplete implements OnDestroy, AfterViewInit, ControlValueAccessor {
   // Shared behaviors
   protected readonly dropdownBehavior = new DropdownBehavior();
   protected readonly search = new SearchBehavior<SearchableItem>();
@@ -162,7 +147,7 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   readonly searchChange = output<string>();
 
   readonly singleInput = viewChild<ScAutocompleteInput>('singleInput');
-  readonly panel = viewChild<ScAutocompletePanel>('panel');
+  readonly panel = viewChild<ScSelectorPanel>('panel');
   readonly containerElement = viewChild.required<ElementRef<HTMLDivElement>>('container');
   readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
@@ -170,17 +155,7 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   protected readonly isOpen = computed(() => this.dropdownBehavior.isOpen());
   protected readonly isLoading = computed(() => this.search.isLoading());
   protected readonly filteredItems = computed(() => {
-    return this.search.filteredItems().map((item) => {
-      // Convert back to original format for template compatibility
-      if (item.subtitle || item.group) {
-        return fromSearchableItem(item);
-      }
-      // If it's a simple item, return as string if original was string
-      const originalItem = this.items().find((orig) =>
-        typeof orig === 'string' ? orig === item.id : orig.value === item.id,
-      );
-      return typeof originalItem === 'string' ? item.id : fromSearchableItem(item);
-    });
+    return this.search.filteredItems();
   });
 
   protected readonly selectedValue = computed(() => {
@@ -188,13 +163,16 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
     return selected ? selected.id : null;
   });
 
+  protected readonly selectedValuesSet = computed(() => {
+    const selected = this.selection.selectedItems();
+    return new Set(selected.map((item) => item.id));
+  });
+
   // Legacy properties for template compatibility
-  emptySet = new Set<string>();
   listboxId = `listbox-${Math.random().toString(36).substr(2, 9)}`;
   activeItemId: string | null = null;
   triggerWidth = 0;
 
-  keyManager!: ActiveDescendantKeyManager<ScAutocompleteOption>;
   private destroy$ = new Subject<void>();
   private onChange: any = () => {};
   private onTouched: any = () => {};
@@ -249,22 +227,7 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
     });
   }
 
-  ngOnInit() {
-    // Behaviors are already set up in constructor
-  }
-
   ngAfterViewInit() {
-    // Initialize key manager after view init when options are available
-    this.initKeyManager();
-
-    // Watch for options changes
-    const panel = this.panel();
-    if (panel) {
-      panel.options.changes.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        this.initKeyManager();
-      });
-    }
-
     // Update trigger width
     this.updateTriggerWidth();
   }
@@ -273,24 +236,6 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
     this.search.destroy();
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  private initKeyManager() {
-    const options = this.panel()?.options;
-    if (options && options.length) {
-      this.keyManager = new ActiveDescendantKeyManager(options).withWrap().withTypeAhead(300);
-
-      // Update aria-activedescendant
-      this.keyManager.change.pipe(takeUntil(this.destroy$)).subscribe(() => {
-        const activeItem = this.keyManager.activeItem;
-        if (activeItem) {
-          const element = activeItem['element'].nativeElement;
-          this.activeItemId = element.id;
-        } else {
-          this.activeItemId = null;
-        }
-      });
-    }
   }
 
   private updateTriggerWidth() {
@@ -355,30 +300,26 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   }
 
   handleKeydown(event: KeyboardEvent) {
-    if (!this.isOpen && (event.key === 'ArrowDown' || event.key === 'Enter')) {
+    if (!this.isOpen() && (event.key === 'ArrowDown' || event.key === 'Enter')) {
       this.open();
       event.preventDefault();
       return;
     }
 
-    if (!this.isOpen) {
+    if (!this.isOpen()) {
       return;
     }
 
-    // Let the key manager handle navigation
-    if (this.keyManager) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        const activeItem = this.keyManager.activeItem;
-        if (activeItem) {
-          this.selectItem(activeItem.item());
-        }
-      } else if (event.key === 'Escape') {
-        event.preventDefault();
-        this.close();
-      } else {
-        // Handle arrow keys and typeahead
-        this.keyManager.onKeydown(event);
+    // Basic keyboard handling
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.close();
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      // Select first filtered item if available
+      const firstItem = this.filteredItems()[0];
+      if (firstItem) {
+        this.selectItem(firstItem);
       }
     }
   }
@@ -392,23 +333,17 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
     }, 200);
   }
 
-  setActiveItem(item: string | ScAutocompleteItem) {
-    const panel = this.panel();
-    if (this.keyManager && panel) {
-      const index = panel.options.toArray().findIndex((option) => {
-        const optionValue = this.getItemValue(option.item());
-        const itemValue = this.getItemValue(item);
-        return optionValue === itemValue;
-      });
-
-      if (index >= 0) {
-        this.keyManager.setActiveItem(index);
-      }
-    }
+  setActiveItem(item: string | SearchableItem) {
+    // Active item handling can be implemented if needed
   }
 
-  selectItem(item: string | ScAutocompleteItem) {
-    const searchableItem = toSearchableItem(item);
+  selectItem(item: string | SearchableItem) {
+    let searchableItem: SearchableItem;
+    if (typeof item === 'string') {
+      searchableItem = { id: item, label: item };
+    } else {
+      searchableItem = item;
+    }
     this.selection.selectItem(searchableItem);
     this.close();
   }
@@ -441,32 +376,12 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   open() {
     if (this.dropdownBehavior.isOpen()) return;
     this.dropdownBehavior.open();
-
-    // Initialize key manager when opening
-    setTimeout(() => {
-      this.initKeyManager();
-      const panel = this.panel();
-      const selectedValue = this.selectedValue();
-      if (this.keyManager && selectedValue && panel) {
-        // Set active item to selected value
-        const selectedIndex = panel.options.toArray().findIndex((option) => {
-          const optionValue = this.getItemValue(option.item());
-          return optionValue === selectedValue;
-        });
-        if (selectedIndex >= 0) {
-          this.keyManager.setActiveItem(selectedIndex);
-        }
-      }
-    });
   }
 
   close() {
     if (!this.dropdownBehavior.isOpen()) return;
     this.dropdownBehavior.close();
     this.activeItemId = null;
-    if (this.keyManager) {
-      this.keyManager.setActiveItem(-1);
-    }
   }
 
   toggle() {

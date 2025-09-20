@@ -12,6 +12,11 @@ The shared behaviors follow a composition-over-inheritance pattern, allowing com
 - **`SearchBehavior`** - Handles search/filtering with debounced input
 - **`SelectionBehavior`** - Manages single/multi-selection logic
 
+### Available Components
+
+- **`ScSelectorOption`** - Common directive for option items with consistent styling and behavior
+- **`ScSelectorPanel`** - Reusable panel component for displaying filtered options with support for grouping and custom templates
+
 ## 📚 Behavior Classes
 
 ### DropdownBehavior
@@ -190,6 +195,96 @@ export class MyComponent {
   validate() {
     return this.selection.validate(); // validation errors or null
   }
+}
+```
+
+## 🧩 Shared Components
+
+### ScSelectorOption Directive
+
+A directive that provides consistent styling and behavior for option items across all selector components.
+
+```typescript
+import { ScSelectorOption } from '@semantic-components/ui';
+
+@Component({
+  template: `
+    @for (item of items(); track item.id) {
+      <div
+        [item]="item"
+        [isSelected]="isSelected(item)"
+        [disabled]="isDisabled(item)"
+        (click)="selectItem(item)"
+        (mouseenter)="setActiveItem(item)"
+        scSelectorOption
+      >
+        <div class="flex-1">
+          <div class="font-medium">{{ item.label }}</div>
+          @if (item.subtitle) {
+            <div class="text-xs text-muted-foreground">{{ item.subtitle }}</div>
+          }
+        </div>
+      </div>
+    }
+  `,
+})
+export class MyComponent {
+  // The directive automatically provides:
+  // - Consistent hover and active styles
+  // - Proper ARIA attributes
+  // - Smooth scrolling when highlighted
+  // - Disabled state handling
+}
+```
+
+### ScSelectorPanel Component
+
+A complete panel component that handles the display of options with built-in support for loading states, empty states, grouping, and custom templates.
+
+```typescript
+import { ScSelectorPanel } from '@semantic-components/ui';
+
+@Component({
+  template: `
+    <sc-selector-panel
+      [items]="filteredItems()"
+      [multiple]="true"
+      [grouped]="true"
+      [isLoading]="isLoading()"
+      [selectedValues]="selectedValues()"
+      [disabledValues]="disabledValues()"
+      [loadingMessage]="'Searching...'"
+      [emptyMessage]="'No results found'"
+      (itemSelected)="onItemSelected($event)"
+      (itemHovered)="onItemHovered($event)"
+    >
+      <!-- Optional custom item template -->
+      <ng-template itemTemplate let-item let-selected="selected">
+        <div class="flex items-center space-x-2">
+          <img class="w-6 h-6 rounded-full" [src]="item.avatar" />
+          <div class="flex-1">
+            <div class="font-medium">{{ item.label }}</div>
+            <div class="text-xs text-muted-foreground">{{ item.email }}</div>
+          </div>
+          @if (selected) {
+            <svg class="w-4 h-4 text-primary" fill="currentColor">
+              <!-- checkmark icon -->
+            </svg>
+          }
+        </div>
+      </ng-template>
+    </sc-selector-panel>
+  `,
+})
+export class MyComponent {
+  // The panel automatically handles:
+  // - Loading states with customizable messages
+  // - Empty states when no items match
+  // - Grouping items by the 'group' property
+  // - Multi-select with checkmarks
+  // - Custom item templates
+  // - Disabled items
+  // - Keyboard navigation support
 }
 ```
 
