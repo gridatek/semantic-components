@@ -6,21 +6,50 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  computed,
+  effect,
   forwardRef,
   inject,
   input,
   linkedSignal,
   output,
+  signal,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
 
+import { DropdownBehavior } from '../shared/dropdown-behavior';
+import { SearchBehavior, SearchableItem } from '../shared/search-behavior';
+import { SelectionBehavior } from '../shared/selection-behavior';
 import { ScAutocompleteInput } from './autocomplete-input';
 import { ScAutocompleteOption } from './autocomplete-option';
 import { ScAutocompletePanel } from './autocomplete-panel';
 import { ScAutocompleteItem } from './autocomplete-types';
+
+// Helper function to convert ScAutocompleteItem to SearchableItem
+function toSearchableItem(item: string | ScAutocompleteItem): SearchableItem {
+  if (typeof item === 'string') {
+    return { id: item, label: item };
+  }
+  return {
+    id: item.value,
+    label: item.label,
+    subtitle: item.subtitle,
+    group: item.group,
+  };
+}
+
+// Helper function to convert back to ScAutocompleteItem
+function fromSearchableItem(searchableItem: SearchableItem): ScAutocompleteItem {
+  return {
+    value: searchableItem.id,
+    label: searchableItem.label,
+    subtitle: searchableItem.subtitle,
+    group: searchableItem.group,
+  };
+}
 
 @Component({
   selector: 'sc-autocomplete',
@@ -42,7 +71,7 @@ import { ScAutocompleteItem } from './autocomplete-types';
           [inputId]="id()"
           [placeholder]="placeholder()"
           [showToggleButton]="showToggleButton()"
-          [isOpen]="isOpen"
+          [isOpen]="isOpen()"
           [listboxId]="listboxId"
           [activeItemId]="activeItemId"
           (inputChange)="handleInput($event)"
@@ -56,7 +85,7 @@ import { ScAutocompleteItem } from './autocomplete-types';
         <!-- Dropdown Panel using CDK Overlay -->
         <ng-template
           [cdkConnectedOverlayOrigin]="triggerElement()"
-          [cdkConnectedOverlayOpen]="isOpen"
+          [cdkConnectedOverlayOpen]="isOpen()"
           [cdkConnectedOverlayWidth]="triggerWidth + 'px'"
           [cdkConnectedOverlayMinWidth]="triggerWidth + 'px'"
           [cdkConnectedOverlayHasBackdrop]="true"
@@ -69,12 +98,12 @@ import { ScAutocompleteItem } from './autocomplete-types';
           <sc-autocomplete-panel
             #panel
             [listboxId]="listboxId"
-            [filteredItems]="filteredItems"
+            [filteredItems]="filteredItems()"
             [multiple]="false"
             [grouped]="grouped()"
-            [selectedValue]="selectedValue"
+            [selectedValue]="selectedValue()"
             [selectedValues]="emptySet"
-            [isLoading]="isLoading"
+            [isLoading]="isLoading()"
             [style.width.px]="triggerWidth"
             [style.min-width.px]="triggerWidth"
             [style.max-width.px]="triggerWidth"
@@ -89,14 +118,14 @@ import { ScAutocompleteItem } from './autocomplete-types';
         <p class="mt-2 text-sm text-gray-500">
           Selected:
           <span class="font-medium">
-            {{ selectedValue ? getItemLabel(selectedValue) : 'None' }}
+            {{ selectedValue() ? getItemLabel(selectedValue()) : 'None' }}
           </span>
         </p>
       }
       @if (async() && showStatus()) {
         <p class="mt-2 text-sm text-gray-500">
           Status:
-          <span class="font-medium">{{ isLoading ? 'Loading...' : 'Ready' }}</span>
+          <span class="font-medium">{{ isLoading() ? 'Loading...' : 'Ready' }}</span>
         </p>
       }
     </div>
@@ -107,6 +136,11 @@ import { ScAutocompleteItem } from './autocomplete-types';
   },
 })
 export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+  // Shared behaviors
+  protected readonly dropdownBehavior = new DropdownBehavior();
+  protected readonly search = new SearchBehavior<SearchableItem>();
+  protected readonly selection = new SelectionBehavior<SearchableItem>();
+
   readonly idInput = input<string>(inject(_IdGenerator).getId('sc-autocomplete-'), {
     alias: 'id',
   });
@@ -132,49 +166,91 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   readonly containerElement = viewChild.required<ElementRef<HTMLDivElement>>('container');
   readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
-  selectedValue: any = null;
-  filteredItems: (string | ScAutocompleteItem)[] = [];
+  // Computed properties using shared behaviors
+  protected readonly isOpen = computed(() => this.dropdownBehavior.isOpen());
+  protected readonly isLoading = computed(() => this.search.isLoading());
+  protected readonly filteredItems = computed(() => {
+    return this.search.filteredItems().map((item) => {
+      // Convert back to original format for template compatibility
+      if (item.subtitle || item.group) {
+        return fromSearchableItem(item);
+      }
+      // If it's a simple item, return as string if original was string
+      const originalItem = this.items().find((orig) =>
+        typeof orig === 'string' ? orig === item.id : orig.value === item.id,
+      );
+      return typeof originalItem === 'string' ? item.id : fromSearchableItem(item);
+    });
+  });
+
+  protected readonly selectedValue = computed(() => {
+    const selected = this.selection.selectedItems()[0];
+    return selected ? selected.id : null;
+  });
+
+  // Legacy properties for template compatibility
   emptySet = new Set<string>();
-  isOpen = false;
-  isLoading = false;
   listboxId = `listbox-${Math.random().toString(36).substr(2, 9)}`;
   activeItemId: string | null = null;
   triggerWidth = 0;
 
   keyManager!: ActiveDescendantKeyManager<ScAutocompleteOption>;
-  private searchSubject = new BehaviorSubject<string>('');
   private destroy$ = new Subject<void>();
   private onChange: any = () => {};
   private onTouched: any = () => {};
 
-  // CDK Overlay positions
-  positions: ConnectedPosition[] = [
-    {
-      originX: 'start',
-      originY: 'bottom',
-      overlayX: 'start',
-      overlayY: 'top',
-      offsetY: 4,
-    },
-    {
-      originX: 'start',
-      originY: 'top',
-      overlayX: 'start',
-      overlayY: 'bottom',
-      offsetY: -4,
-    },
-  ];
+  // CDK Overlay positions (using dropdown behavior's default positions)
+  get positions() {
+    return this.dropdownBehavior.defaultPositions;
+  }
+
+  constructor() {
+    // Setup behaviors
+    this.selection.setConfig({ multiple: false });
+
+    // Sync items with search behavior
+    effect(() => {
+      const searchableItems = this.items().map(toSearchableItem);
+      this.search.setItems(searchableItems);
+    });
+
+    // Update trigger width when dropdown opens
+    effect(() => {
+      if (this.dropdownBehavior.isOpen()) {
+        this.updateTriggerWidth();
+      }
+    });
+
+    // Handle selection changes
+    effect(() => {
+      const selected = this.selection.selectedItems()[0];
+      const value = selected ? selected.id : null;
+      this.onChange(value);
+      this.selectionChange.emit(value);
+
+      // Update input display
+      if (selected) {
+        const singleInput = this.singleInput();
+        if (singleInput) {
+          singleInput.searchQuery = selected.label;
+        }
+      }
+    });
+
+    // Handle search changes
+    effect(() => {
+      const searchTerm = this.search.searchTerm();
+      this.searchChange.emit(searchTerm);
+
+      // Handle async search if configured
+      if (this.async() && this.asyncSearchFn()) {
+        this.handleAsyncSearch(searchTerm);
+      }
+    });
+  }
 
   ngOnInit() {
-    this.filteredItems = [...this.items()];
-
-    if (this.async()) {
-      this.searchSubject
-        .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.destroy$))
-        .subscribe((query) => {
-          this.performAsyncSearch(query);
-        });
-    }
+    // Behaviors are already set up in constructor
   }
 
   ngAfterViewInit() {
@@ -189,14 +265,12 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
       });
     }
 
-    // Set trigger width
-    const triggerElement = this.triggerElement();
-    if (triggerElement) {
-      this.triggerWidth = triggerElement.nativeElement.offsetWidth;
-    }
+    // Update trigger width
+    this.updateTriggerWidth();
   }
 
   ngOnDestroy() {
+    this.search.destroy();
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -219,17 +293,20 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
     }
   }
 
+  private updateTriggerWidth() {
+    this.dropdownBehavior.updateTriggerWidth(this.triggerElement());
+    const triggerEl = this.triggerElement()?.nativeElement;
+    if (triggerEl) {
+      this.triggerWidth = triggerEl.offsetWidth;
+    }
+  }
+
   writeValue(value: any): void {
-    this.selectedValue = value;
     if (value) {
-      const item = this.items().find((i) => this.getItemValue(i) === value);
-      if (item) {
-        const searchQuery = this.getItemLabel(item);
-        const singleInput = this.singleInput();
-        if (singleInput) {
-          singleInput.searchQuery = searchQuery;
-        }
-      }
+      const allSearchableItems = this.items().map(toSearchableItem);
+      this.selection.setSelectedValues([value], allSearchableItems);
+    } else {
+      this.selection.clearSelection();
     }
   }
 
@@ -242,49 +319,38 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   }
 
   handleInput(event: Event) {
-    const value = (event.target as HTMLInputElement).value.toLowerCase();
+    const value = (event.target as HTMLInputElement).value;
+    this.search.updateSearch(value);
 
-    if (this.async()) {
-      this.searchSubject.next(value);
-    } else {
-      this.filterItems(value);
+    if (!this.async()) {
       this.open();
     }
-
-    this.searchChange.emit(value);
   }
 
-  filterItems(query: string) {
-    if (!query) {
-      this.filteredItems = [...this.items()];
-    } else {
-      this.filteredItems = this.items().filter((item) => {
-        const label = this.getItemLabel(item).toLowerCase();
-        return label.includes(query);
-      });
-    }
-  }
-
-  async performAsyncSearch(query: string) {
-    if (!query) {
-      this.filteredItems = [];
+  // Async search handling (if needed)
+  private async handleAsyncSearch(searchTerm: string) {
+    if (!searchTerm) {
+      this.search.setItems([]);
       return;
     }
 
-    this.isLoading = true;
-
+    this.search.setLoading(true);
     try {
       const asyncSearchFn = this.asyncSearchFn();
       if (asyncSearchFn) {
-        this.filteredItems = await asyncSearchFn(query);
+        const results = await asyncSearchFn(searchTerm);
+        const searchableResults = results.map(toSearchableItem);
+        this.search.setItems(searchableResults);
         this.open();
       } else {
-        // No default implementation - asyncSearchFn is required for async mode
         console.warn('asyncSearchFn is required when using async mode');
-        this.filteredItems = [];
+        this.search.setItems([]);
       }
+    } catch (error) {
+      console.error('Search failed:', error);
+      this.search.setItems([]);
     } finally {
-      this.isLoading = false;
+      this.search.setLoading(false);
     }
   }
 
@@ -342,16 +408,8 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   }
 
   selectItem(item: string | ScAutocompleteItem) {
-    const value = this.getItemValue(item);
-    const label = this.getItemLabel(item);
-
-    this.selectedValue = value;
-    const singleInput = this.singleInput();
-    if (singleInput) {
-      singleInput.searchQuery = label;
-    }
-    this.onChange(value);
-    this.selectionChange.emit(value);
+    const searchableItem = toSearchableItem(item);
+    this.selection.selectItem(searchableItem);
     this.close();
   }
 
@@ -381,18 +439,19 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   }
 
   open() {
-    if (this.isOpen) return;
-    this.isOpen = true;
+    if (this.dropdownBehavior.isOpen()) return;
+    this.dropdownBehavior.open();
 
     // Initialize key manager when opening
     setTimeout(() => {
       this.initKeyManager();
       const panel = this.panel();
-      if (this.keyManager && this.selectedValue && panel) {
+      const selectedValue = this.selectedValue();
+      if (this.keyManager && selectedValue && panel) {
         // Set active item to selected value
         const selectedIndex = panel.options.toArray().findIndex((option) => {
           const optionValue = this.getItemValue(option.item());
-          return optionValue === this.selectedValue;
+          return optionValue === selectedValue;
         });
         if (selectedIndex >= 0) {
           this.keyManager.setActiveItem(selectedIndex);
@@ -402,8 +461,8 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   }
 
   close() {
-    if (!this.isOpen) return;
-    this.isOpen = false;
+    if (!this.dropdownBehavior.isOpen()) return;
+    this.dropdownBehavior.close();
     this.activeItemId = null;
     if (this.keyManager) {
       this.keyManager.setActiveItem(-1);
@@ -411,10 +470,6 @@ export class ScAutocomplete implements OnInit, OnDestroy, AfterViewInit, Control
   }
 
   toggle() {
-    if (this.isOpen) {
-      this.close();
-    } else {
-      this.open();
-    }
+    this.dropdownBehavior.toggle();
   }
 }

@@ -8,11 +8,14 @@ import {
   OnDestroy,
   OnInit,
   ViewEncapsulation,
+  computed,
+  effect,
   forwardRef,
   inject,
   input,
   linkedSignal,
   output,
+  signal,
   viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -23,6 +26,32 @@ import { ScAutocompleteMultiInput } from '../autocomplete/autocomplete-multi-inp
 import { ScAutocompleteOption } from '../autocomplete/autocomplete-option';
 import { ScAutocompletePanel } from '../autocomplete/autocomplete-panel';
 import { ScAutocompleteItem } from '../autocomplete/autocomplete-types';
+import { DropdownBehavior } from '../shared/dropdown-behavior';
+import { SearchBehavior, SearchableItem } from '../shared/search-behavior';
+import { SelectionBehavior } from '../shared/selection-behavior';
+
+// Helper function to convert ScAutocompleteItem to SearchableItem
+function toSearchableItem(item: string | ScAutocompleteItem): SearchableItem {
+  if (typeof item === 'string') {
+    return { id: item, label: item };
+  }
+  return {
+    id: item.value,
+    label: item.label,
+    subtitle: item.subtitle,
+    group: item.group,
+  };
+}
+
+// Helper function to convert back to ScAutocompleteItem
+function fromSearchableItem(searchableItem: SearchableItem): ScAutocompleteItem {
+  return {
+    value: searchableItem.id,
+    label: searchableItem.label,
+    subtitle: searchableItem.subtitle,
+    group: searchableItem.group,
+  };
+}
 
 @Component({
   selector: 'sc-multi-select',
@@ -43,9 +72,9 @@ import { ScAutocompleteItem } from '../autocomplete/autocomplete-types';
           #trigger="cdkOverlayOrigin"
           [inputId]="id()"
           [placeholder]="placeholder()"
-          [selectedValues]="selectedValues"
+          [selectedValues]="selectedValues()"
           [items]="items()"
-          [isOpen]="isOpen"
+          [isOpen]="isOpen()"
           [listboxId]="listboxId"
           [activeItemId]="activeItemId"
           (inputChange)="handleInput($event)"
@@ -59,7 +88,7 @@ import { ScAutocompleteItem } from '../autocomplete/autocomplete-types';
         <!-- Dropdown Panel using CDK Overlay -->
         <ng-template
           [cdkConnectedOverlayOrigin]="triggerElement()"
-          [cdkConnectedOverlayOpen]="isOpen"
+          [cdkConnectedOverlayOpen]="isOpen()"
           [cdkConnectedOverlayWidth]="triggerWidth + 'px'"
           [cdkConnectedOverlayMinWidth]="triggerWidth + 'px'"
           [cdkConnectedOverlayHasBackdrop]="true"
@@ -72,12 +101,12 @@ import { ScAutocompleteItem } from '../autocomplete/autocomplete-types';
           <sc-autocomplete-panel
             #panel
             [listboxId]="listboxId"
-            [filteredItems]="filteredItems"
+            [filteredItems]="filteredItems()"
             [multiple]="true"
             [grouped]="grouped()"
             [selectedValue]="null"
-            [selectedValues]="selectedValues"
-            [isLoading]="isLoading"
+            [selectedValues]="selectedValues()"
+            [isLoading]="isLoading()"
             [style.width.px]="triggerWidth"
             [style.min-width.px]="triggerWidth"
             [style.max-width.px]="triggerWidth"
@@ -91,13 +120,13 @@ import { ScAutocompleteItem } from '../autocomplete/autocomplete-types';
       @if (showStatus()) {
         <p class="mt-2 text-sm text-gray-500">
           Selected count:
-          <span class="font-medium">{{ selectedValues.size }}</span>
+          <span class="font-medium">{{ selectedValues().size }}</span>
         </p>
       }
       @if (async() && showStatus()) {
         <p class="mt-2 text-sm text-gray-500">
           Status:
-          <span class="font-medium">{{ isLoading ? 'Loading...' : 'Ready' }}</span>
+          <span class="font-medium">{{ isLoading() ? 'Loading...' : 'Ready' }}</span>
         </p>
       }
     </div>
@@ -111,6 +140,11 @@ import { ScAutocompleteItem } from '../autocomplete/autocomplete-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor {
+  // Shared behaviors
+  protected readonly dropdownBehavior = new DropdownBehavior();
+  protected readonly search = new SearchBehavior<SearchableItem>();
+  protected readonly selection = new SelectionBehavior<SearchableItem>();
+
   readonly idInput = input<string>(inject(_IdGenerator).getId('sc-multi-select-'), {
     alias: 'id',
   });
@@ -135,44 +169,80 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
   readonly containerElement = viewChild.required<ElementRef<HTMLDivElement>>('container');
   readonly triggerElement = viewChild.required('trigger', { read: ElementRef });
 
-  selectedValues: Set<string> = new Set();
-  filteredItems: (string | ScAutocompleteItem)[] = [];
-  isOpen = false;
-  isLoading = false;
+  // Computed properties using shared behaviors
+  protected readonly isOpen = computed(() => this.dropdownBehavior.isOpen());
+  protected readonly isLoading = computed(() => this.search.isLoading());
+  protected readonly filteredItems = computed(() => {
+    return this.search.filteredItems().map((item) => {
+      // Convert back to original format for template compatibility
+      if (item.subtitle || item.group) {
+        return fromSearchableItem(item);
+      }
+      // If it's a simple item, return as string if original was string
+      const originalItem = this.items().find((orig) =>
+        typeof orig === 'string' ? orig === item.id : orig.value === item.id,
+      );
+      return typeof originalItem === 'string' ? item.id : fromSearchableItem(item);
+    });
+  });
+
+  protected readonly selectedValues = computed(() => {
+    return new Set(this.selection.selectedValues());
+  });
+
+  // Legacy properties for template compatibility
   listboxId = `listbox-${Math.random().toString(36).substr(2, 9)}`;
   activeItemId: string | null = null;
   triggerWidth = 0;
 
   keyManager!: ActiveDescendantKeyManager<ScAutocompleteOption>;
-  private searchSubject = new BehaviorSubject<string>('');
   private destroy$ = new Subject<void>();
   private onChange: any = () => {};
   private onTouched: any = () => {};
 
-  // CDK Overlay positions
-  positions: ConnectedPosition[] = [
-    {
-      originX: 'start',
-      originY: 'bottom',
-      overlayX: 'start',
-      overlayY: 'top',
-      offsetY: 4,
-    },
-    {
-      originX: 'start',
-      originY: 'top',
-      overlayX: 'start',
-      overlayY: 'bottom',
-      offsetY: -4,
-    },
-  ];
+  // CDK Overlay positions (using dropdown behavior's default positions)
+  get positions() {
+    return this.dropdownBehavior.defaultPositions;
+  }
+
+  constructor() {
+    // Setup behaviors
+    this.selection.setConfig({ multiple: true });
+
+    // Sync items with search behavior
+    effect(() => {
+      const searchableItems = this.items().map(toSearchableItem);
+      this.search.setItems(searchableItems);
+    });
+
+    // Update trigger width when dropdown opens
+    effect(() => {
+      if (this.dropdownBehavior.isOpen()) {
+        this.updateTriggerWidth();
+      }
+    });
+
+    // Handle selection changes
+    effect(() => {
+      const selectedItems = this.selection.selectedItems();
+      const selectedArray = selectedItems.map((item) => item.id);
+      this.onChange(selectedArray);
+      this.selectionChange.emit(selectedArray);
+    });
+
+    // Handle search changes
+    effect(() => {
+      const searchTerm = this.search.searchTerm();
+      this.searchChange.emit(searchTerm);
+    });
+  }
 
   ngOnInit() {
-    this.filteredItems = [...this.items()];
-    this.setupSearch();
+    // Behaviors are already set up in constructor
   }
 
   ngOnDestroy() {
+    this.search.destroy();
     this.destroy$.next();
     this.destroy$.complete();
   }
@@ -182,45 +252,21 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
     this.setupKeyManager();
   }
 
-  private setupSearch() {
-    this.searchSubject
-      .pipe(debounceTime(200), distinctUntilChanged(), takeUntil(this.destroy$))
-      .subscribe(async (searchTerm) => {
-        this.searchChange.emit(searchTerm);
-
-        if (this.async() && this.asyncSearchFn()) {
-          this.isLoading = true;
-          try {
-            const results = await this.asyncSearchFn()!(searchTerm);
-            this.filteredItems = results;
-          } catch (error) {
-            console.error('Search failed:', error);
-            this.filteredItems = [];
-          } finally {
-            this.isLoading = false;
-          }
-        } else {
-          this.filteredItems = this.filterItems(searchTerm);
-        }
-
-        this.setupKeyManager();
-      });
-  }
-
-  private filterItems(searchTerm: string): (string | ScAutocompleteItem)[] {
-    if (!searchTerm) return [...this.items()];
-
-    const lowerSearchTerm = searchTerm.toLowerCase();
-    return this.items().filter((item) => {
-      if (typeof item === 'string') {
-        return item.toLowerCase().includes(lowerSearchTerm);
+  // Async search handling (if needed)
+  private async handleAsyncSearch(searchTerm: string) {
+    if (this.async() && this.asyncSearchFn()) {
+      this.search.setLoading(true);
+      try {
+        const results = await this.asyncSearchFn()!(searchTerm);
+        const searchableResults = results.map(toSearchableItem);
+        this.search.setItems(searchableResults);
+      } catch (error) {
+        console.error('Search failed:', error);
+        this.search.setItems([]);
+      } finally {
+        this.search.setLoading(false);
       }
-      return (
-        item.label.toLowerCase().includes(lowerSearchTerm) ||
-        item.value.toLowerCase().includes(lowerSearchTerm) ||
-        item.subtitle?.toLowerCase().includes(lowerSearchTerm)
-      );
-    });
+    }
   }
 
   private setupKeyManager() {
@@ -237,6 +283,7 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
   }
 
   private updateTriggerWidth() {
+    this.dropdownBehavior.updateTriggerWidth(this.triggerElement());
     const triggerEl = this.triggerElement()?.nativeElement;
     if (triggerEl) {
       this.triggerWidth = triggerEl.offsetWidth;
@@ -244,21 +291,25 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
   }
 
   open() {
-    if (!this.isOpen) {
-      this.isOpen = true;
-      this.updateTriggerWidth();
+    if (!this.dropdownBehavior.isOpen()) {
+      this.dropdownBehavior.open();
       setTimeout(() => this.setupKeyManager(), 0);
     }
   }
 
   close() {
-    this.isOpen = false;
+    this.dropdownBehavior.close();
     this.activeItemId = null;
   }
 
   handleInput(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.searchSubject.next(input.value);
+    this.search.updateSearch(input.value);
+
+    // Handle async search if configured
+    if (this.async() && this.asyncSearchFn()) {
+      this.handleAsyncSearch(input.value);
+    }
   }
 
   handleBlur() {
@@ -272,7 +323,7 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
   }
 
   handleKeydown(event: KeyboardEvent) {
-    if (!this.isOpen) {
+    if (!this.dropdownBehavior.isOpen()) {
       if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter') {
         this.open();
       }
@@ -300,23 +351,15 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
   }
 
   selectItem(item: string | ScAutocompleteItem) {
-    const value = this.getItemValue(item);
-    if (this.selectedValues.has(value)) {
-      this.selectedValues.delete(value);
-    } else {
-      this.selectedValues.add(value);
-    }
-
-    const selectedArray = Array.from(this.selectedValues);
-    this.onChange(selectedArray);
-    this.selectionChange.emit(selectedArray);
+    const searchableItem = toSearchableItem(item);
+    this.selection.toggleItem(searchableItem);
   }
 
   removeChip(value: string) {
-    this.selectedValues.delete(value);
-    const selectedArray = Array.from(this.selectedValues);
-    this.onChange(selectedArray);
-    this.selectionChange.emit(selectedArray);
+    const itemToRemove = this.selection.selectedItems().find((item) => item.id === value);
+    if (itemToRemove) {
+      this.selection.deselectItem(itemToRemove);
+    }
   }
 
   setActiveItem(item: string | ScAutocompleteItem) {
@@ -343,9 +386,10 @@ export class ScMultiSelect implements OnInit, OnDestroy, AfterViewInit, ControlV
   // ControlValueAccessor implementation
   writeValue(value: string[] | null): void {
     if (value && Array.isArray(value)) {
-      this.selectedValues = new Set(value);
+      const allSearchableItems = this.items().map(toSearchableItem);
+      this.selection.setSelectedValues(value, allSearchableItems);
     } else {
-      this.selectedValues = new Set();
+      this.selection.clearSelection();
     }
   }
 

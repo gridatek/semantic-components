@@ -67,3 +67,4 @@ export * from './lib/components/tabs';
 export * from './lib/components/layouts';
 export * from './lib/components/input-phone';
 export * from './lib/components/scrub-area';
+export * from './lib/components/shared';

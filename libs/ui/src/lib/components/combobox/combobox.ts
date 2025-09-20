@@ -22,9 +22,32 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cn } from '@semantic-components/utils';
 import { Subject } from 'rxjs';
 
+import { DropdownBehavior } from '../shared/dropdown-behavior';
+import { SearchBehavior, SearchableItem } from '../shared/search-behavior';
+import { SelectionBehavior } from '../shared/selection-behavior';
 import { ScComboboxDropdown } from './combobox-dropdown';
 import { ScComboboxTrigger } from './combobox-trigger';
 import { ScComboboxConfig, ScComboboxItem } from './types';
+
+// Helper function to convert ScComboboxItem to SearchableItem
+function toSearchableItem(item: ScComboboxItem): SearchableItem {
+  return {
+    id: item.id,
+    label: item.label,
+    subtitle: item.subtitle,
+    data: item.data,
+  };
+}
+
+// Helper function to convert back to ScComboboxItem
+function fromSearchableItem(searchableItem: SearchableItem): ScComboboxItem {
+  return {
+    id: searchableItem.id,
+    label: searchableItem.label,
+    subtitle: searchableItem.subtitle,
+    data: searchableItem['data'],
+  };
+}
 
 @Component({
   selector: 'sc-combobox',
@@ -98,6 +121,11 @@ import { ScComboboxConfig, ScComboboxItem } from './types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCombobox implements ControlValueAccessor, OnDestroy {
+  // Shared behaviors
+  protected readonly dropdownBehavior = new DropdownBehavior();
+  protected readonly searchBehavior = new SearchBehavior<SearchableItem>();
+  protected readonly selectionBehavior = new SelectionBehavior<SearchableItem>();
+
   readonly class = input<string>('');
   readonly id = input<string>(inject(_IdGenerator).getId('sc-combobox-'));
 
@@ -121,11 +149,17 @@ export class ScCombobox implements ControlValueAccessor, OnDestroy {
   readonly selectionChange = output<ScComboboxItem | null>();
   readonly searchChange = output<string>();
 
-  protected readonly selectedItem = signal<ScComboboxItem | null>(null);
-  protected readonly showDropdown = signal<boolean>(false);
-  protected readonly searchTerm = signal<string>('');
-  protected readonly filteredItems = signal<ScComboboxItem[]>([]);
-  protected readonly isLoading = signal<boolean>(false);
+  // Computed properties using shared behaviors
+  protected readonly selectedItem = computed(() => {
+    const selected = this.selectionBehavior.selectedItems()[0];
+    return selected ? fromSearchableItem(selected) : null;
+  });
+  protected readonly showDropdown = computed(() => this.dropdownBehavior.isOpen());
+  protected readonly searchTerm = computed(() => this.searchBehavior.searchTerm());
+  protected readonly filteredItems = computed(() => {
+    return this.searchBehavior.filteredItems().map(fromSearchableItem);
+  });
+  protected readonly isLoading = computed(() => this.searchBehavior.isLoading());
 
   protected readonly isValid = signal<boolean>(false);
   protected readonly isInvalid = signal<boolean>(false);
@@ -137,22 +171,10 @@ export class ScCombobox implements ControlValueAccessor, OnDestroy {
   protected readonly activeItemIndex = signal<number>(-1);
   protected readonly overlayWidth = signal<number>(400);
 
-  protected readonly overlayPositions: ConnectedPosition[] = [
-    {
-      originX: 'start',
-      originY: 'bottom',
-      overlayX: 'start',
-      overlayY: 'top',
-      offsetY: 4,
-    },
-    {
-      originX: 'start',
-      originY: 'top',
-      overlayX: 'start',
-      overlayY: 'bottom',
-      offsetY: -4,
-    },
-  ];
+  // Use dropdown behavior's positions
+  get overlayPositions() {
+    return this.dropdownBehavior.defaultPositions;
+  }
 
   private readonly destroy$ = new Subject<void>();
   private onChange = (_value: string | null) => {
@@ -163,42 +185,74 @@ export class ScCombobox implements ControlValueAccessor, OnDestroy {
   };
 
   constructor() {
-    // Initialize filtered items
+    // Setup behaviors
+    this.selectionBehavior.setConfig({ multiple: false });
+
+    // Sync items with search behavior
     effect(() => {
-      this.updateFilteredItems();
+      const searchableItems = this.items().map(toSearchableItem);
+      this.searchBehavior.setItems(searchableItems);
     });
 
-    // Set overlay width based on trigger
+    // Update trigger width when dropdown opens
     effect(() => {
-      const triggerElement = this.trigger()?.elementRef?.nativeElement;
-      if (triggerElement) {
-        this.overlayWidth.set(Math.max(400, triggerElement.offsetWidth));
+      if (this.dropdownBehavior.isOpen()) {
+        this.dropdownBehavior.updateTriggerWidth(this.trigger().elementRef);
+        const triggerElement = this.trigger()?.elementRef?.nativeElement;
+        if (triggerElement) {
+          this.overlayWidth.set(Math.max(400, triggerElement.offsetWidth));
+        }
+      }
+    });
+
+    // Handle selection changes
+    effect(() => {
+      const selected = this.selectionBehavior.selectedItems()[0];
+      const item = selected ? fromSearchableItem(selected) : null;
+      this.onChange(item?.id || null);
+      this.selectionChange.emit(item);
+
+      // Update validation
+      this.isValid.set(!!item);
+      this.isInvalid.set(!item && this.required());
+      this.errorMessage.set(!item && this.required() ? 'Selection is required' : '');
+    });
+
+    // Handle search changes
+    effect(() => {
+      const searchTerm = this.searchBehavior.searchTerm();
+      this.searchChange.emit(searchTerm);
+    });
+
+    // Reset active index when filtered items change
+    effect(() => {
+      const filteredItems = this.filteredItems();
+      if (filteredItems.length > 0) {
+        this.activeItemIndex.set(0);
+        setTimeout(() => this.scrollToActiveItem(), 0);
+      } else {
+        this.activeItemIndex.set(-1);
       }
     });
   }
 
   protected toggleDropdown(): void {
-    this.showDropdown.update((show) => !show);
-    if (this.showDropdown()) {
-      this.searchTerm.set('');
+    this.dropdownBehavior.toggle();
+    if (this.dropdownBehavior.isOpen()) {
+      this.searchBehavior.clearSearch();
       this.activeItemIndex.set(0);
       this.dropdown()?.focusSearchInput();
     }
   }
 
   protected closeDropdown(): void {
-    this.showDropdown.set(false);
+    this.dropdownBehavior.close();
   }
 
   protected selectItem(item: ScComboboxItem): void {
-    this.selectedItem.set(item);
-    this.showDropdown.set(false);
-    this.isValid.set(true);
-    this.isInvalid.set(false);
-    this.errorMessage.set('');
-
-    this.onChange(item.id);
-    this.selectionChange.emit(item);
+    const searchableItem = toSearchableItem(item);
+    this.selectionBehavior.selectItem(searchableItem);
+    this.dropdownBehavior.close();
   }
 
   protected onTriggerFocus(): void {
@@ -219,13 +273,11 @@ export class ScCombobox implements ControlValueAccessor, OnDestroy {
 
   protected onSearchChange(event: Event): void {
     const target = event.target as HTMLInputElement;
-    this.searchTerm.set(target.value);
-    this.searchChange.emit(target.value);
-    this.updateFilteredItems();
+    this.searchBehavior.updateSearch(target.value);
   }
 
   protected onKeydown(event: KeyboardEvent): void {
-    if (!this.showDropdown()) return;
+    if (!this.dropdownBehavior.isOpen()) return;
 
     const filteredItems = this.filteredItems();
     const currentIndex = this.activeItemIndex();
@@ -256,38 +308,6 @@ export class ScCombobox implements ControlValueAccessor, OnDestroy {
     this.dropdown()?.scrollToActiveItem();
   }
 
-  private updateFilteredItems(): void {
-    const items = this.items();
-    const searchTerm = this.searchTerm();
-    const filterFn = this.filterFn();
-
-    if (filterFn) {
-      this.filteredItems.set(filterFn(items, searchTerm));
-    } else {
-      this.filteredItems.set(this.defaultFilter(items, searchTerm));
-    }
-
-    // Reset active index when filtering
-    if (this.filteredItems().length > 0) {
-      this.activeItemIndex.set(0);
-      setTimeout(() => this.scrollToActiveItem(), 0);
-    } else {
-      this.activeItemIndex.set(-1);
-    }
-  }
-
-  private defaultFilter(items: ScComboboxItem[], searchTerm: string): ScComboboxItem[] {
-    if (!searchTerm) return items;
-
-    const term = searchTerm.toLowerCase();
-    return items.filter(
-      (item) =>
-        item.label.toLowerCase().includes(term) ||
-        item.subtitle?.toLowerCase().includes(term) ||
-        item.id.toLowerCase().includes(term),
-    );
-  }
-
   private validateSelection(): void {
     if (this.required() && !this.selectedItem()) {
       this.isValid.set(false);
@@ -303,14 +323,10 @@ export class ScCombobox implements ControlValueAccessor, OnDestroy {
   // ControlValueAccessor implementation
   writeValue(value: string | null): void {
     if (value) {
-      const item = this.items().find((item) => item.id === value);
-      if (item) {
-        this.selectedItem.set(item);
-        this.isValid.set(true);
-      }
+      const allSearchableItems = this.items().map(toSearchableItem);
+      this.selectionBehavior.setSelectedValues([value], allSearchableItems);
     } else {
-      this.selectedItem.set(null);
-      this.isValid.set(false);
+      this.selectionBehavior.clearSelection();
     }
   }
 
@@ -327,6 +343,7 @@ export class ScCombobox implements ControlValueAccessor, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.searchBehavior.destroy();
     this.destroy$.next();
     this.destroy$.complete();
   }

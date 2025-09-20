@@ -13,6 +13,7 @@ import {
   ViewEncapsulation,
   computed,
   contentChildren,
+  effect,
   forwardRef,
   inject,
   input,
@@ -25,6 +26,7 @@ import { cn } from '@semantic-components/utils';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { Subject, takeUntil } from 'rxjs';
 
+import { DropdownBehavior } from '../shared/dropdown-behavior';
 import { ScOption } from './option';
 import { ScSelectContent } from './select-content';
 import { ScSelectDropdownPanel } from './select-dropdown-panel';
@@ -51,8 +53,8 @@ import { ScSelectValue } from './select-value';
     <!-- Select Trigger -->
     <button
       #trigger
-      [isOpen]="isOpen"
-      [attr.aria-expanded]="isOpen"
+      [isOpen]="isOpen()"
+      [attr.aria-expanded]="isOpen()"
       [attr.aria-haspopup]="true"
       [attr.aria-controls]="'dropdown-' + id()"
       [attr.aria-activedescendant]="activeDescendant"
@@ -62,7 +64,7 @@ import { ScSelectValue } from './select-value';
       <span [placeholder]="placeholder()" sc-select-value>
         {{ selectedOption ? selectedOption.getLabel() : placeholder() }}
       </span>
-      <svg class="h-4 w-4 opacity-50" [class.rotate-180]="isOpen" si-chevron-down-icon></svg>
+      <svg class="h-4 w-4 opacity-50" [class.rotate-180]="isOpen()" si-chevron-down-icon></svg>
     </button>
 
     <!-- Dropdown Panel Template -->
@@ -83,6 +85,9 @@ import { ScSelectValue } from './select-value';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAccessor, OnDestroy {
+  // Shared dropdown behavior
+  protected readonly dropdownBehavior = new DropdownBehavior();
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -94,7 +99,8 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
   readonly trigger = viewChild.required<ScSelectTrigger>('trigger');
   readonly dropdownPanel = viewChild.required<TemplateRef<any>>('dropdownPanel');
 
-  isOpen = false;
+  // Use dropdown behavior's state
+  protected readonly isOpen = computed(() => this.dropdownBehavior.isOpen());
   selectedOption: ScOption | null = null;
   keyManager!: ActiveDescendantKeyManager<ScOption>;
   activeDescendant: string | null = null;
@@ -108,6 +114,18 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
   private viewContainerRef = inject(ViewContainerRef);
   private overlayRef: OverlayRef | null = null;
   private portal: TemplatePortal | null = null;
+
+  constructor() {
+    // React to dropdown state changes
+    effect(() => {
+      const isOpen = this.dropdownBehavior.isOpen();
+      if (isOpen) {
+        this.openOverlay();
+      } else {
+        this.closeOverlay();
+      }
+    });
+  }
 
   ngAfterViewInit() {
     // View is now initialized, overlay can be created
@@ -163,13 +181,16 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
   @HostListener('keydown', ['$event'])
   onKeydown(event: KeyboardEvent) {
-    if (!this.isOpen && (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown')) {
+    if (
+      !this.isOpen() &&
+      (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown')
+    ) {
       event.preventDefault();
       this.open();
       return;
     }
 
-    if (this.isOpen) {
+    if (this.isOpen()) {
       switch (event.key) {
         case 'Enter':
         case ' ':
@@ -198,39 +219,38 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
   }
 
   toggle() {
-    this.isOpen ? this.close() : this.open();
+    this.dropdownBehavior.toggle();
   }
 
   open() {
-    if (this.isOpen) return;
+    this.dropdownBehavior.open();
+  }
 
-    this.isOpen = true;
+  private openOverlay() {
+    if (this.isOpen()) {
+      // Wait a tick to ensure ViewChild is available
+      setTimeout(() => {
+        this.createOverlay();
 
-    // Wait a tick to ensure ViewChild is available
-    setTimeout(() => {
-      this.createOverlay();
-
-      // Set initial active item
-      if (this.selectedOption) {
-        const index = this.options().indexOf(this.selectedOption);
-        if (index >= 0) {
-          this.keyManager.setActiveItem(index);
-          // Scroll to selected option after a tick to ensure DOM is updated
-          setTimeout(() => this.scrollToOption(this.selectedOption!), 0);
+        // Set initial active item
+        if (this.selectedOption) {
+          const index = this.options().indexOf(this.selectedOption);
+          if (index >= 0) {
+            this.keyManager.setActiveItem(index);
+            // Scroll to selected option after a tick to ensure DOM is updated
+            setTimeout(() => this.scrollToOption(this.selectedOption!), 0);
+          }
+        } else {
+          this.keyManager.setFirstItemActive();
         }
-      } else {
-        this.keyManager.setFirstItemActive();
-      }
-    }, 0);
+      }, 0);
+    }
   }
 
   close() {
-    if (!this.isOpen) return;
-
-    this.isOpen = false;
+    this.dropdownBehavior.close();
     this.keyManager.setActiveItem(-1);
     this.activeDescendant = null;
-    this.closeOverlay();
   }
 
   private createOverlay() {
@@ -272,6 +292,9 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
 
     const scrollStrategy = this.overlay.scrollStrategies.reposition();
 
+    // Update dropdown behavior's trigger width
+    this.dropdownBehavior.updateTriggerWidth(this.trigger().elementRef);
+
     const config: OverlayConfig = {
       positionStrategy,
       scrollStrategy,
@@ -284,12 +307,12 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
     this.portal = new TemplatePortal(panelTemplate, this.viewContainerRef);
     this.overlayRef.attach(this.portal);
 
-    // Close on backdrop click
+    // Close on backdrop click using dropdown behavior
     this.overlayRef
       .outsidePointerEvents()
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.close();
+        this.dropdownBehavior.handleBackdropClick();
       });
   }
 
