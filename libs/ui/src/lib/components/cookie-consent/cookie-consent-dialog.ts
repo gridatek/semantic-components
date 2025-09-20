@@ -36,7 +36,7 @@ export const cookieConsentVariants = cva(
 );
 
 export const cookieConsentContentVariants = cva(
-  'bg-background border shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+  'bg-background border shadow-lg p-6 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
   {
     variants: {
       position: {
