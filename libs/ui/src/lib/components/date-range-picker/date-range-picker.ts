@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -23,7 +22,7 @@ export interface QuickRange {
 
 @Component({
   selector: 'sc-date-range-picker',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   template: `
     <div class="relative">
       <!-- Main Input Display -->
@@ -49,97 +48,40 @@ export interface QuickRange {
       </div>
 
       <!-- Calendar Dropdown -->
-      <div
-        class="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-xl z-50 p-4 min-w-max"
-        *ngIf="showCalendar"
-      >
-        <!-- Quick Range Buttons -->
-        <div class="mb-4 pb-4 border-b border-gray-100">
-          <h4 class="text-sm font-medium text-gray-900 mb-3">Quick Ranges</h4>
-          <div class="flex flex-wrap gap-2">
-            <button
-              class="px-3 py-1 text-xs bg-gray-100 hover:bg-blue-100 hover:text-blue-700 rounded-full transition-colors"
-              *ngFor="let range of quickRanges"
-              (click)="selectQuickRange(range)"
-            >
-              {{ range.label }}
-            </button>
-          </div>
-        </div>
-
-        <!-- Custom Range Input -->
-        <div class="mb-4">
-          <div class="flex items-center space-x-3 mb-3">
-            <div class="flex-1">
-              <label class="block text-xs font-medium text-gray-500 mb-1">Start Date</label>
-              <input
-                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md bg-gray-50"
-                [value]="selectedRange.startDate ? formatDate(selectedRange.startDate) : ''"
-                type="text"
-                readonly
-                placeholder="Select start date"
-              />
-            </div>
-            <div class="flex items-center pt-5">
-              <svg
-                class="w-4 h-4 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <label class="block text-xs font-medium text-gray-500 mb-1">End Date</label>
-              <input
-                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md bg-gray-50"
-                [value]="selectedRange.endDate ? formatDate(selectedRange.endDate) : ''"
-                type="text"
-                readonly
-                placeholder="Select end date"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Calendar Grid -->
-        <div class="flex space-x-4">
-          <!-- Left Calendar (Start Month) -->
-          <div class="flex-1">
-            <div class="flex items-center justify-between mb-4">
-              <button
-                class="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                (click)="previousMonth('left')"
-              >
-                <svg
-                  class="w-5 h-5 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+      @if (showCalendar) {
+        <div
+          class="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-xl z-50 p-4 min-w-max"
+        >
+          <!-- Quick Range Buttons -->
+          <div class="mb-4 pb-4 border-b border-gray-100">
+            <h4 class="text-sm font-medium text-gray-900 mb-3">Quick Ranges</h4>
+            <div class="flex flex-wrap gap-2">
+              @for (range of quickRanges; track range) {
+                <button
+                  class="px-3 py-1 text-xs bg-gray-100 hover:bg-blue-100 hover:text-blue-700 rounded-full transition-colors"
+                  (click)="selectQuickRange(range)"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 19l-7-7 7-7"
-                  ></path>
-                </svg>
-              </button>
-              <h3 class="text-sm font-semibold text-gray-900">
-                {{ getMonthYear(leftMonth) }}
-              </h3>
-              <button
-                class="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                (click)="nextMonth('left')"
-              >
+                  {{ range.label }}
+                </button>
+              }
+            </div>
+          </div>
+          <!-- Custom Range Input -->
+          <div class="mb-4">
+            <div class="flex items-center space-x-3 mb-3">
+              <div class="flex-1">
+                <label class="block text-xs font-medium text-gray-500 mb-1">Start Date</label>
+                <input
+                  class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md bg-gray-50"
+                  [value]="selectedRange.startDate ? formatDate(selectedRange.startDate) : ''"
+                  type="text"
+                  readonly
+                  placeholder="Select start date"
+                />
+              </div>
+              <div class="flex items-center pt-5">
                 <svg
-                  class="w-5 h-5 text-gray-600"
+                  class="w-4 h-4 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -151,128 +93,178 @@ export interface QuickRange {
                     d="M9 5l7 7-7 7"
                   ></path>
                 </svg>
-              </button>
-            </div>
-
-            <!-- Days of Week -->
-            <div class="grid grid-cols-7 gap-1 mb-2">
-              <div
-                class="text-center text-xs font-medium text-gray-500 py-1"
-                *ngFor="let day of daysOfWeek"
-              >
-                {{ day }}
               </div>
-            </div>
-
-            <!-- Calendar Days -->
-            <div class="grid grid-cols-7 gap-1">
-              <button
-                class="h-8 text-sm rounded-md transition-colors disabled:cursor-default disabled:opacity-50"
-                *ngFor="let day of getDaysInMonth(leftMonth)"
-                [disabled]="!day || isDateDisabled(day)"
-                [class]="getDayClasses(day, 'left')"
-                (click)="selectDate(day)"
-              >
-                {{ day?.getDate() }}
-              </button>
+              <div class="flex-1">
+                <label class="block text-xs font-medium text-gray-500 mb-1">End Date</label>
+                <input
+                  class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md bg-gray-50"
+                  [value]="selectedRange.endDate ? formatDate(selectedRange.endDate) : ''"
+                  type="text"
+                  readonly
+                  placeholder="Select end date"
+                />
+              </div>
             </div>
           </div>
-
-          <!-- Right Calendar (End Month) -->
-          <div class="flex-1">
-            <div class="flex items-center justify-between mb-4">
-              <button
-                class="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                (click)="previousMonth('right')"
-              >
-                <svg
-                  class="w-5 h-5 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+          <!-- Calendar Grid -->
+          <div class="flex space-x-4">
+            <!-- Left Calendar (Start Month) -->
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-4">
+                <button
+                  class="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                  (click)="previousMonth('left')"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 19l-7-7 7-7"
-                  ></path>
-                </svg>
-              </button>
-              <h3 class="text-sm font-semibold text-gray-900">
-                {{ getMonthYear(rightMonth) }}
-              </h3>
-              <button
-                class="p-1 hover:bg-gray-100 rounded-full transition-colors"
-                (click)="nextMonth('right')"
-              >
-                <svg
-                  class="w-5 h-5 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  <svg
+                    class="w-5 h-5 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 19l-7-7 7-7"
+                    ></path>
+                  </svg>
+                </button>
+                <h3 class="text-sm font-semibold text-gray-900">
+                  {{ getMonthYear(leftMonth) }}
+                </h3>
+                <button
+                  class="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                  (click)="nextMonth('left')"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Days of Week -->
-            <div class="grid grid-cols-7 gap-1 mb-2">
-              <div
-                class="text-center text-xs font-medium text-gray-500 py-1"
-                *ngFor="let day of daysOfWeek"
-              >
-                {{ day }}
+                  <svg
+                    class="w-5 h-5 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <!-- Days of Week -->
+              <div class="grid grid-cols-7 gap-1 mb-2">
+                @for (day of daysOfWeek; track day) {
+                  <div class="text-center text-xs font-medium text-gray-500 py-1">
+                    {{ day }}
+                  </div>
+                }
+              </div>
+              <!-- Calendar Days -->
+              <div class="grid grid-cols-7 gap-1">
+                @for (day of getDaysInMonth(leftMonth); track day) {
+                  <button
+                    class="h-8 text-sm rounded-md transition-colors disabled:cursor-default disabled:opacity-50"
+                    [disabled]="!day || isDateDisabled(day)"
+                    [class]="getDayClasses(day, 'left')"
+                    (click)="selectDate(day)"
+                  >
+                    {{ day?.getDate() }}
+                  </button>
+                }
               </div>
             </div>
-
-            <!-- Calendar Days -->
-            <div class="grid grid-cols-7 gap-1">
+            <!-- Right Calendar (End Month) -->
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-4">
+                <button
+                  class="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                  (click)="previousMonth('right')"
+                >
+                  <svg
+                    class="w-5 h-5 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 19l-7-7 7-7"
+                    ></path>
+                  </svg>
+                </button>
+                <h3 class="text-sm font-semibold text-gray-900">
+                  {{ getMonthYear(rightMonth) }}
+                </h3>
+                <button
+                  class="p-1 hover:bg-gray-100 rounded-full transition-colors"
+                  (click)="nextMonth('right')"
+                >
+                  <svg
+                    class="w-5 h-5 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <!-- Days of Week -->
+              <div class="grid grid-cols-7 gap-1 mb-2">
+                @for (day of daysOfWeek; track day) {
+                  <div class="text-center text-xs font-medium text-gray-500 py-1">
+                    {{ day }}
+                  </div>
+                }
+              </div>
+              <!-- Calendar Days -->
+              <div class="grid grid-cols-7 gap-1">
+                @for (day of getDaysInMonth(rightMonth); track day) {
+                  <button
+                    class="h-8 text-sm rounded-md transition-colors disabled:cursor-default disabled:opacity-50"
+                    [disabled]="!day || isDateDisabled(day)"
+                    [class]="getDayClasses(day, 'right')"
+                    (click)="selectDate(day)"
+                  >
+                    {{ day?.getDate() }}
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
+          <!-- Footer Actions -->
+          <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+            <button
+              class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+              (click)="clearSelection()"
+            >
+              Clear
+            </button>
+            <div class="flex space-x-2">
               <button
-                class="h-8 text-sm rounded-md transition-colors disabled:cursor-default disabled:opacity-50"
-                *ngFor="let day of getDaysInMonth(rightMonth)"
-                [disabled]="!day || isDateDisabled(day)"
-                [class]="getDayClasses(day, 'right')"
-                (click)="selectDate(day)"
+                class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+                (click)="cancelSelection()"
               >
-                {{ day?.getDate() }}
+                Cancel
+              </button>
+              <button
+                class="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                [disabled]="!isValidRange()"
+                (click)="applySelection()"
+              >
+                Apply
               </button>
             </div>
           </div>
         </div>
-
-        <!-- Footer Actions -->
-        <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
-          <button
-            class="px-3 py-1 text-sm text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
-            (click)="clearSelection()"
-          >
-            Clear
-          </button>
-
-          <div class="flex space-x-2">
-            <button
-              class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
-              (click)="cancelSelection()"
-            >
-              Cancel
-            </button>
-            <button
-              class="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
-              [disabled]="!isValidRange()"
-              (click)="applySelection()"
-            >
-              Apply
-            </button>
-          </div>
-        </div>
-      </div>
+      }
     </div>
   `,
   styles: [

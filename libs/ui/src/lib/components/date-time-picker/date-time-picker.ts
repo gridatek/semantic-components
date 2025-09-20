@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -21,7 +20,7 @@ export interface DateTimeValue {
 
 @Component({
   selector: 'sc-date-time-picker',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   template: `
     <div class="relative">
       <!-- Main Input -->
@@ -80,150 +79,150 @@ export interface DateTimeValue {
       </div>
 
       <!-- Calendar Dropdown -->
-      <div
-        class="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-80"
-        *ngIf="showCalendar"
-      >
-        <!-- Calendar Header -->
-        <div class="flex items-center justify-between mb-4">
-          <button
-            class="p-1 hover:bg-gray-100 rounded-full transition-colors"
-            (click)="previousMonth()"
-          >
-            <svg
-              class="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              ></path>
-            </svg>
-          </button>
-          <h3 class="text-lg font-semibold text-gray-900">
-            {{ getMonthYear(currentMonth) }}
-          </h3>
-          <button
-            class="p-1 hover:bg-gray-100 rounded-full transition-colors"
-            (click)="nextMonth()"
-          >
-            <svg
-              class="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 5l7 7-7 7"
-              ></path>
-            </svg>
-          </button>
-        </div>
-
-        <!-- Days of Week -->
-        <div class="grid grid-cols-7 gap-1 mb-2">
-          <div
-            class="text-center text-xs font-medium text-gray-500 py-2"
-            *ngFor="let day of daysOfWeek"
-          >
-            {{ day }}
-          </div>
-        </div>
-
-        <!-- Calendar Days -->
-        <div class="grid grid-cols-7 gap-1">
-          <button
-            class="h-8 text-sm rounded-md transition-colors disabled:cursor-default"
-            *ngFor="let day of getDaysInMonth(currentMonth)"
-            [disabled]="!day"
-            [class]="getDayClasses(day)"
-            (click)="selectDate(day)"
-          >
-            {{ day?.getDate() }}
-          </button>
-        </div>
-
-        <!-- Today Button -->
-        <div class="flex justify-end mt-4 pt-3 border-t border-gray-100">
-          <button
-            class="px-3 py-1 text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-            (click)="selectToday()"
-          >
-            Today
-          </button>
-        </div>
-      </div>
-
-      <!-- Time Picker Dropdown -->
-      <div
-        class="absolute top-full right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 w-64"
-        *ngIf="showTimePicker"
-      >
-        <h4 class="text-sm font-medium text-gray-900 mb-3">Select Time</h4>
-
-        <div class="flex items-center space-x-3">
-          <!-- Hours -->
-          <div class="flex-1">
-            <label class="block text-xs text-gray-500 mb-1">Hours</label>
-            <select
-              class="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-              [(ngModel)]="selectedTime.hours"
-              (change)="onTimeChange()"
-            >
-              <option *ngFor="let hour of hours" [value]="hour">
-                {{ hour.toString().padStart(2, '0') }}
-              </option>
-            </select>
-          </div>
-
-          <!-- Minutes -->
-          <div class="flex-1">
-            <label class="block text-xs text-gray-500 mb-1">Minutes</label>
-            <select
-              class="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-              [(ngModel)]="selectedTime.minutes"
-              (change)="onTimeChange()"
-            >
-              <option *ngFor="let minute of minutes" [value]="minute">
-                {{ minute.toString().padStart(2, '0') }}
-              </option>
-            </select>
-          </div>
-
-          <!-- AM/PM -->
-          <div class="flex-1">
-            <label class="block text-xs text-gray-500 mb-1">AM/PM</label>
-            <select
-              class="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-              [(ngModel)]="selectedTime.ampm"
-              (change)="onTimeChange()"
-            >
-              <option value="AM">AM</option>
-              <option value="PM">PM</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Quick Time Buttons -->
-        <div class="mt-4 pt-3 border-t border-gray-100">
-          <div class="flex flex-wrap gap-2">
+      @if (showCalendar) {
+        <div
+          class="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-80"
+        >
+          <!-- Calendar Header -->
+          <div class="flex items-center justify-between mb-4">
             <button
-              class="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors"
-              *ngFor="let time of quickTimes"
-              (click)="selectQuickTime(time)"
+              class="p-1 hover:bg-gray-100 rounded-full transition-colors"
+              (click)="previousMonth()"
             >
-              {{ time.label }}
+              <svg
+                class="w-5 h-5 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                ></path>
+              </svg>
+            </button>
+            <h3 class="text-lg font-semibold text-gray-900">
+              {{ getMonthYear(currentMonth) }}
+            </h3>
+            <button
+              class="p-1 hover:bg-gray-100 rounded-full transition-colors"
+              (click)="nextMonth()"
+            >
+              <svg
+                class="w-5 h-5 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <!-- Days of Week -->
+          <div class="grid grid-cols-7 gap-1 mb-2">
+            @for (day of daysOfWeek; track day) {
+              <div class="text-center text-xs font-medium text-gray-500 py-2">
+                {{ day }}
+              </div>
+            }
+          </div>
+          <!-- Calendar Days -->
+          <div class="grid grid-cols-7 gap-1">
+            @for (day of getDaysInMonth(currentMonth); track day) {
+              <button
+                class="h-8 text-sm rounded-md transition-colors disabled:cursor-default"
+                [disabled]="!day"
+                [class]="getDayClasses(day)"
+                (click)="selectDate(day)"
+              >
+                {{ day?.getDate() }}
+              </button>
+            }
+          </div>
+          <!-- Today Button -->
+          <div class="flex justify-end mt-4 pt-3 border-t border-gray-100">
+            <button
+              class="px-3 py-1 text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+              (click)="selectToday()"
+            >
+              Today
             </button>
           </div>
         </div>
-      </div>
+      }
+
+      <!-- Time Picker Dropdown -->
+      @if (showTimePicker) {
+        <div
+          class="absolute top-full right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 w-64"
+        >
+          <h4 class="text-sm font-medium text-gray-900 mb-3">Select Time</h4>
+          <div class="flex items-center space-x-3">
+            <!-- Hours -->
+            <div class="flex-1">
+              <label class="block text-xs text-gray-500 mb-1">Hours</label>
+              <select
+                class="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                [(ngModel)]="selectedTime.hours"
+                (change)="onTimeChange()"
+              >
+                @for (hour of hours; track hour) {
+                  <option [value]="hour">
+                    {{ hour.toString().padStart(2, '0') }}
+                  </option>
+                }
+              </select>
+            </div>
+            <!-- Minutes -->
+            <div class="flex-1">
+              <label class="block text-xs text-gray-500 mb-1">Minutes</label>
+              <select
+                class="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                [(ngModel)]="selectedTime.minutes"
+                (change)="onTimeChange()"
+              >
+                @for (minute of minutes; track minute) {
+                  <option [value]="minute">
+                    {{ minute.toString().padStart(2, '0') }}
+                  </option>
+                }
+              </select>
+            </div>
+            <!-- AM/PM -->
+            <div class="flex-1">
+              <label class="block text-xs text-gray-500 mb-1">AM/PM</label>
+              <select
+                class="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                [(ngModel)]="selectedTime.ampm"
+                (change)="onTimeChange()"
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+          </div>
+          <!-- Quick Time Buttons -->
+          <div class="mt-4 pt-3 border-t border-gray-100">
+            <div class="flex flex-wrap gap-2">
+              @for (time of quickTimes; track time) {
+                <button
+                  class="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors"
+                  (click)="selectQuickTime(time)"
+                >
+                  {{ time.label }}
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+      }
     </div>
   `,
   styles: [

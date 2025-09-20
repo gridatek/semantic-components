@@ -1,6 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { CdkOverlayOrigin, ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -51,7 +50,7 @@ function fromSearchableItem(searchableItem: SearchableItem): ScComboboxItem {
 
 @Component({
   selector: 'sc-combobox',
-  imports: [ScComboboxTrigger, ScComboboxDropdown, OverlayModule, CommonModule],
+  imports: [ScComboboxTrigger, ScComboboxDropdown, OverlayModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

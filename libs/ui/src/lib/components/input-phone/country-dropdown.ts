@@ -1,5 +1,4 @@
 import { CdkOverlayOrigin, ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +14,7 @@ import { ScCountry } from './types';
 
 @Component({
   selector: 'sc-country-dropdown',
-  imports: [CommonModule, OverlayModule],
+  imports: [OverlayModule],
   template: `
     <ng-template
       [cdkConnectedOverlayOrigin]="overlayOrigin()"

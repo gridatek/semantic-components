@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -30,7 +29,6 @@ export interface TimeValue {
 @Component({
   selector: 'div[sc-clock-picker]',
   imports: [
-    CommonModule,
     ScClockPickerPeriodButton,
     ScClockPickerDisplay,
     ScClockPickerTime,
