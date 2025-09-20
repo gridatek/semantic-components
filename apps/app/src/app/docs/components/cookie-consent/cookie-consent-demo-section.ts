@@ -20,44 +20,50 @@ export class CookieConsentDemoSection {
 
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+  protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 
-import { ScCookieConsent, CookiePreferences } from '@semantic-components/ui';
+import { CookieService, ScCookieConsentDialog, ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-cookie-consent-demo',
-  imports: [ScCookieConsent],
+  imports: [ScCookieConsentDialog, ScButton],
   template: \`
     <div class="space-y-6">
-      <!-- Basic Cookie Consent -->
+      <!-- Service-based Cookie Consent -->
       <div class="space-y-2">
-        <label class="text-sm font-medium">Cookie Consent</label>
+        <label class="text-sm font-medium">Service-based Cookie Consent</label>
         <p class="text-sm text-gray-600">
-          Interactive cookie consent banner with multi-language support and customizable preferences.
+          Modern service-based approach using Angular CDK dialogs with multi-language support and customizable preferences.
         </p>
-        <div class="border border-gray-200 rounded-lg overflow-hidden">
-          <sc-cookie-consent
-            [showLanguageSelector]="true"
-            (preferencesChanged)="onPreferencesChanged($event)"
-            (consentGiven)="onConsentGiven($event)"
-          />
-        </div>
-      </div>
 
-      <!-- Event Log -->
-      @if (events.length > 0) {
-        <div class="space-y-2">
-          <label class="text-sm font-medium">Events</label>
-          <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 space-y-2">
-            @for (event of events; track $index) {
-              <div class="text-sm p-3 bg-white rounded border-l-4 border-blue-500">
-                <div class="font-medium">{{ event.type }}</div>
-                <div class="text-gray-600 text-xs mt-1">{{ event.timestamp }}</div>
-              </div>
-            }
+        <!-- Cookie Consent Dialog Component (handles templates automatically) -->
+        <sc-cookie-consent-dialog />
+
+        <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 space-y-4">
+          <div class="flex flex-wrap gap-3">
+            <button [variant]="'primary'" (click)="showConsent()" sc-button>
+              Show Cookie Consent
+            </button>
+            <button [variant]="'secondary'" (click)="showPreferences()" sc-button>
+              Show Preferences
+            </button>
+            <button [variant]="'outline'" (click)="clearPreferences()" sc-button>
+              Clear Preferences
+            </button>
+          </div>
+
+          <!-- Current Status -->
+          <div class="space-y-2">
+            <h4 class="font-medium">Current Status:</h4>
+            <div class="text-sm space-y-1">
+              <div>Consent Dialog Open: <span class="font-mono">{{ cookieService.isConsentDialogOpen() }}</span></div>
+              <div>Preferences Dialog Open: <span class="font-mono">{{ cookieService.isPreferencesDialogOpen() }}</span></div>
+              <div>Current Language: <span class="font-mono">{{ cookieService.currentLanguage() }}</span></div>
+              <div>Should Show Consent: <span class="font-mono">{{ cookieService.shouldShowConsent() }}</span></div>
+            </div>
           </div>
         </div>
-      }
+      </div>
     </div>
   \`,
   styles: \`\`,
@@ -65,26 +71,28 @@ import { ScCookieConsent, CookiePreferences } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CookieConsentDemo {
-  events: Array<{ type: string; timestamp: string }> = [];
+  readonly cookieService = inject(CookieService);
 
-  onPreferencesChanged(preferences: CookiePreferences) {
-    this.addEvent('Preferences changed');
-    console.log('Cookie preferences changed:', preferences);
-  }
-
-  onConsentGiven(preferences: CookiePreferences) {
-    this.addEvent('Consent given');
-    console.log('Cookie consent given:', preferences);
-  }
-
-  private addEvent(type: string) {
-    this.events.unshift({
-      type,
-      timestamp: new Date().toLocaleTimeString(),
-    });
-    if (this.events.length > 5) {
-      this.events = this.events.slice(0, 5);
+  showConsent() {
+    const consentDialog = document.querySelector('sc-cookie-consent-dialog') as any;
+    if (consentDialog) {
+      consentDialog.showConsent({
+        showLanguageSelector: true,
+        position: 'bottom',
+        autoShow: false
+      });
     }
+  }
+
+  showPreferences() {
+    const consentDialog = document.querySelector('sc-cookie-consent-dialog') as any;
+    if (consentDialog) {
+      consentDialog.showPreferences();
+    }
+  }
+
+  clearPreferences() {
+    this.cookieService.clearPreferences();
   }
 }`;
 }
