@@ -142,7 +142,10 @@ export const appRoutes: Route[] = [
               },
               {
                 path: 'components/cookie-consent',
-                loadComponent: () => import('./docs/components/cookie-consent/cookie-consent-page'),
+                loadComponent: () =>
+                  import('./docs/components/cookie-consent/cookie-consent-page').then(
+                    (m) => m.CookieConsentPage,
+                  ),
                 title: 'Cookie Consent Page',
               },
               {
