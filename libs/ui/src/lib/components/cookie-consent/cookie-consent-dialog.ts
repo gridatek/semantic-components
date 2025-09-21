@@ -18,15 +18,15 @@ import { ScCard } from '../card/card';
 import { ScSwitch } from '../switch/switch';
 import { CookieConsentOptions, CookiePreferences, CookieService } from './cookie.service';
 
-// Component variants for styling
+// Component variants for styling (CDK Overlay handles positioning)
 export const cookieConsentVariants = cva(
-  'fixed inset-0 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 z-50',
+  'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 p-4',
   {
     variants: {
       position: {
-        bottom: 'flex items-end justify-center p-4',
-        center: 'flex items-center justify-center p-4',
-        top: 'flex items-start justify-center p-4 pt-8',
+        bottom: 'flex items-end justify-center',
+        center: 'flex items-center justify-center',
+        top: 'flex items-start justify-center',
       },
     },
     defaultVariants: {
@@ -158,7 +158,7 @@ export type CookieConsentVariants = VariantProps<typeof cookieConsentVariants>;
 
     <!-- Preferences Template -->
     <ng-template #preferencesTemplate>
-      <div class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+      <div class="p-4">
         <div
           class="bg-background w-full max-w-2xl rounded-lg border shadow-lg max-h-[90vh] overflow-y-auto p-6"
         >

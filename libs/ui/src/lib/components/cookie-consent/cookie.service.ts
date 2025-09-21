@@ -167,10 +167,18 @@ export class CookieService {
   showConsentDialog(templateRef: TemplateRef<unknown>, options?: CookieConsentOptions) {
     if (this.isConsentDialogOpen()) return;
 
+    const position = options?.position || 'bottom';
+
     const dialogRef = this.dialog.open(templateRef, {
-      hasBackdrop: true,
+      hasBackdrop: false,
       disableClose: true,
-      panelClass: 'cookie-consent-dialog',
+      panelClass: ['cookie-consent-dialog', `cookie-consent-${position}`],
+      position:
+        position === 'bottom'
+          ? { bottom: '0' }
+          : position === 'top'
+            ? { top: '0' }
+            : { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' },
       data: { options },
     });
 
@@ -190,6 +198,7 @@ export class CookieService {
       hasBackdrop: true,
       disableClose: false,
       panelClass: 'cookie-preferences-dialog',
+      position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' },
     });
 
     this.isPreferencesDialogOpen.set(true);
