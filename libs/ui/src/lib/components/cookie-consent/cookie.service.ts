@@ -1,4 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
+import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { Injectable, TemplateRef, computed, inject, signal } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -13,7 +14,7 @@ export interface CookiePreferences {
 
 export interface CookieConsentOptions {
   showLanguageSelector?: boolean;
-  position?: 'bottom' | 'center' | 'top';
+  position?: 'bottom-left' | 'bottom-center' | 'bottom-right';
   autoShow?: boolean;
 }
 
@@ -22,6 +23,7 @@ export interface CookieConsentOptions {
 })
 export class CookieService {
   private readonly dialog = inject(Dialog);
+  private readonly scrollStrategies = inject(ScrollStrategyOptions);
 
   private preferencesSubject = new BehaviorSubject<CookiePreferences | null>(null);
   public preferences$: Observable<CookiePreferences | null> =
@@ -167,18 +169,13 @@ export class CookieService {
   showConsentDialog(templateRef: TemplateRef<unknown>, options?: CookieConsentOptions) {
     if (this.isConsentDialogOpen()) return;
 
-    const position = options?.position || 'bottom';
+    const position = options?.position || 'bottom-center';
 
     const dialogRef = this.dialog.open(templateRef, {
       hasBackdrop: false,
       disableClose: true,
       panelClass: ['cookie-consent-dialog', `cookie-consent-${position}`],
-      position:
-        position === 'bottom'
-          ? { bottom: '0' }
-          : position === 'top'
-            ? { top: '0' }
-            : { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' },
+      scrollStrategy: this.scrollStrategies.noop(),
       data: { options },
     });
 
@@ -198,7 +195,6 @@ export class CookieService {
       hasBackdrop: true,
       disableClose: false,
       panelClass: 'cookie-preferences-dialog',
-      position: { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' },
     });
 
     this.isPreferencesDialogOpen.set(true);

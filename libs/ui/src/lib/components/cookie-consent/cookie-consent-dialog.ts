@@ -18,37 +18,35 @@ import { ScCard } from '../card/card';
 import { ScSwitch } from '../switch/switch';
 import { CookieConsentOptions, CookiePreferences, CookieService } from './cookie.service';
 
-// Component variants for styling (CDK Overlay handles positioning)
+// Component variants for styling with CSS positioning
 export const cookieConsentVariants = cva(
-  'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 p-4',
+  'fixed bottom-0 p-4 z-50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
   {
     variants: {
       position: {
-        bottom: 'flex items-end justify-center',
-        center: 'flex items-center justify-center',
-        top: 'flex items-start justify-center',
+        'bottom-left': 'left-0',
+        'bottom-center': 'left-1/2 -translate-x-1/2',
+        'bottom-right': 'right-0',
       },
     },
     defaultVariants: {
-      position: 'bottom',
+      position: 'bottom-center',
     },
   },
 );
 
 export const cookieConsentContentVariants = cva(
-  'bg-background border shadow-lg p-6 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+  'bg-background border shadow-lg p-6 rounded-t-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
   {
     variants: {
       position: {
-        bottom:
-          'w-full max-w-2xl rounded-t-lg data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
-        center:
-          'w-full max-w-lg rounded-lg data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
-        top: 'w-full max-w-2xl rounded-b-lg data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
+        'bottom-left': 'w-full max-w-lg',
+        'bottom-center': 'w-full max-w-2xl',
+        'bottom-right': 'w-full max-w-lg',
       },
     },
     defaultVariants: {
-      position: 'bottom',
+      position: 'bottom-center',
     },
   },
 );
@@ -158,7 +156,7 @@ export type CookieConsentVariants = VariantProps<typeof cookieConsentVariants>;
 
     <!-- Preferences Template -->
     <ng-template #preferencesTemplate>
-      <div class="p-4">
+      <div class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
         <div
           class="bg-background w-full max-w-2xl rounded-lg border shadow-lg max-h-[90vh] overflow-y-auto p-6"
         >
@@ -269,7 +267,7 @@ export class ScCookieConsentDialog implements AfterViewInit {
 
   readonly options = signal<CookieConsentOptions>({
     showLanguageSelector: true,
-    position: 'bottom',
+    position: 'bottom-center',
     autoShow: true,
   });
 
