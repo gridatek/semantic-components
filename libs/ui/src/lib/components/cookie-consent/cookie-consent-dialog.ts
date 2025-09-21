@@ -249,7 +249,7 @@ export type CookieConsentVariants = VariantProps<typeof cookieConsentVariants>;
               </svg>
               {{ cookieService.getTranslation('savePreferences') }}
             </button>
-            <button [variant]="'outline'" (click)="cookieService.closeAllDialogs()" sc-button>
+            <button [variant]="'outline'" (click)="cancelPreferences()" sc-button>
               {{ cookieService.getTranslation('cancel') }}
             </button>
           </div>
@@ -324,6 +324,25 @@ export class ScCookieConsentDialog implements AfterViewInit {
 
   savePreferences() {
     this.cookieService.saveCustomPreferences(this.tempPreferences());
+  }
+
+  cancelPreferences() {
+    // Reset temp preferences to original values (discarding changes)
+    const current = this.cookieService.getPreferences() || {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      functional: false,
+    };
+    this.tempPreferences.set(current);
+
+    // Close preferences dialog and reopen consent dialog
+    this.cookieService.closeAllDialogs();
+
+    // Only reopen consent if no preferences were previously saved
+    if (!this.cookieService.getPreferences()) {
+      this.cookieService.showConsentDialog(this.consentTemplate(), this.options());
+    }
   }
 
   onLanguageChange(value: string) {
