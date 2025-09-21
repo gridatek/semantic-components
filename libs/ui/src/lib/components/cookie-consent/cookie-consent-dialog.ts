@@ -61,8 +61,8 @@ export type CookieConsentVariants = VariantProps<typeof cookieConsentVariants>;
   template: `
     <!-- Cookie Consent Template -->
     <ng-template #consentTemplate>
-      <div [class]="consentOverlayClass()">
-        <div [class]="consentContentClass()">
+      <div [class]="consentOverlayClass()" [attr.data-state]="'open'">
+        <div [class]="consentContentClass()" [attr.data-state]="'open'">
           <div class="flex items-center justify-between mb-4">
             <div class="flex items-center gap-3">
               <svg
