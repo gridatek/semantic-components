@@ -8,13 +8,15 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { cn } from '@semantic-components/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 
 import { ScButton } from '../button/button';
 import { ScCard } from '../card/card';
+import { ScOption } from '../select/option';
+import { ScSelect } from '../select/select';
 import { ScSwitch } from '../switch/switch';
 import { CookieConsentOptions, CookiePreferences, CookieService } from './cookie.service';
 
@@ -55,7 +57,7 @@ export type CookieConsentVariants = VariantProps<typeof cookieConsentVariants>;
 
 @Component({
   selector: 'sc-cookie-consent-dialog',
-  imports: [FormsModule, ScButton, ScCard, ScSwitch],
+  imports: [FormsModule, ReactiveFormsModule, ScButton, ScCard, ScSelect, ScOption, ScSwitch],
   template: `
     <!-- Cookie Consent Template -->
     <ng-template #consentTemplate>
@@ -95,16 +97,16 @@ export type CookieConsentVariants = VariantProps<typeof cookieConsentVariants>;
                     d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   ></path>
                 </svg>
-                <select
-                  class="border-none focus:ring-0 text-sm bg-transparent text-foreground"
-                  [value]="cookieService.currentLanguage()"
-                  (change)="onLanguageChange($event)"
+                <sc-select
+                  class="w-24 text-sm"
+                  [ngModel]="cookieService.currentLanguage()"
+                  (ngModelChange)="onLanguageChange($event)"
                 >
-                  <option value="en">English</option>
-                  <option value="es">Español</option>
-                  <option value="fr">Français</option>
-                  <option value="de">Deutsch</option>
-                </select>
+                  <sc-option value="en">English</sc-option>
+                  <sc-option value="es">Español</sc-option>
+                  <sc-option value="fr">Français</sc-option>
+                  <sc-option value="de">Deutsch</sc-option>
+                </sc-select>
               </div>
             }
           </div>
@@ -180,16 +182,16 @@ export type CookieConsentVariants = VariantProps<typeof cookieConsentVariants>;
                       d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     ></path>
                   </svg>
-                  <select
-                    class="border-none focus:ring-0 text-sm bg-transparent text-foreground"
-                    [value]="cookieService.currentLanguage()"
-                    (change)="onLanguageChange($event)"
+                  <sc-select
+                    class="w-24 text-sm"
+                    [ngModel]="cookieService.currentLanguage()"
+                    (ngModelChange)="onLanguageChange($event)"
                   >
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                    <option value="fr">Français</option>
-                    <option value="de">Deutsch</option>
-                  </select>
+                    <sc-option value="en">English</sc-option>
+                    <sc-option value="es">Español</sc-option>
+                    <sc-option value="fr">Français</sc-option>
+                    <sc-option value="de">Deutsch</sc-option>
+                  </sc-select>
                 </div>
               }
               <button
@@ -324,7 +326,7 @@ export class ScCookieConsentDialog implements AfterViewInit {
     this.cookieService.saveCustomPreferences(this.tempPreferences());
   }
 
-  onLanguageChange(event: any) {
-    this.cookieService.setLanguage(event.target.value);
+  onLanguageChange(value: string) {
+    this.cookieService.setLanguage(value);
   }
 }
