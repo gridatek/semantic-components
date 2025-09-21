@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  inject,
+  viewChild,
+} from '@angular/core';
 
 import { CookieService, ScButton, ScCookieConsentDialog } from '@semantic-components/ui';
 
@@ -16,7 +22,7 @@ import { CookieService, ScButton, ScCookieConsentDialog } from '@semantic-compon
         </p>
 
         <!-- Cookie Consent Dialog Component (handles templates automatically) -->
-        <sc-cookie-consent-dialog />
+        <sc-cookie-consent-dialog #cookieDialog />
 
         <div class="border border-gray-200 rounded-lg p-4 bg-gray-50 space-y-4">
           <div class="flex flex-wrap gap-3">
@@ -112,12 +118,12 @@ import { CookieService, ScButton, ScCookieConsentDialog } from '@semantic-compon
 })
 export class CookieConsentDemo {
   readonly cookieService = inject(CookieService);
+  readonly cookieDialog = viewChild<ScCookieConsentDialog>('cookieDialog');
 
   showConsent() {
-    // Clear preferences to show consent dialog
-    const consentDialog = document.querySelector('sc-cookie-consent-dialog') as any;
-    if (consentDialog) {
-      consentDialog.showConsent({
+    const dialog = this.cookieDialog();
+    if (dialog) {
+      dialog.showConsent({
         showLanguageSelector: true,
         position: 'bottom-center',
         autoShow: false,
@@ -126,9 +132,9 @@ export class CookieConsentDemo {
   }
 
   showPreferences() {
-    const consentDialog = document.querySelector('sc-cookie-consent-dialog') as any;
-    if (consentDialog) {
-      consentDialog.showPreferences();
+    const dialog = this.cookieDialog();
+    if (dialog) {
+      dialog.showPreferences();
     }
   }
 

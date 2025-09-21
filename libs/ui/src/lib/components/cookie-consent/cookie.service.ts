@@ -1,5 +1,4 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { Injectable, TemplateRef, computed, inject, signal } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -23,7 +22,6 @@ export interface CookieConsentOptions {
 })
 export class CookieService {
   private readonly dialog = inject(Dialog);
-  private readonly scrollStrategies = inject(ScrollStrategyOptions);
 
   private preferencesSubject = new BehaviorSubject<CookiePreferences | null>(null);
   public preferences$: Observable<CookiePreferences | null> =
@@ -167,17 +165,13 @@ export class CookieService {
 
   // Dialog methods
   showConsentDialog(templateRef: TemplateRef<unknown>, options?: CookieConsentOptions) {
-    if (this.isConsentDialogOpen()) return;
+    if (this.isConsentDialogOpen()) {
+      return;
+    }
 
     const position = options?.position || 'bottom-center';
 
-    const dialogRef = this.dialog.open(templateRef, {
-      hasBackdrop: false,
-      disableClose: true,
-      panelClass: ['cookie-consent-dialog', `cookie-consent-${position}`],
-      scrollStrategy: this.scrollStrategies.noop(),
-      data: { options },
-    });
+    const dialogRef = this.dialog.open(templateRef);
 
     this.isConsentDialogOpen.set(true);
 
@@ -191,11 +185,7 @@ export class CookieService {
   showPreferencesDialog(templateRef: TemplateRef<unknown>) {
     if (this.isPreferencesDialogOpen()) return;
 
-    const dialogRef = this.dialog.open(templateRef, {
-      hasBackdrop: true,
-      disableClose: false,
-      panelClass: 'cookie-preferences-dialog',
-    });
+    const dialogRef = this.dialog.open(templateRef);
 
     this.isPreferencesDialogOpen.set(true);
 

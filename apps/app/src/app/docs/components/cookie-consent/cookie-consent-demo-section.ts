@@ -78,7 +78,7 @@ export class CookieConsentDemo {
     if (consentDialog) {
       consentDialog.showConsent({
         showLanguageSelector: true,
-        position: 'bottom',
+        position: 'bottom-center',
         autoShow: false
       });
     }
