@@ -82,7 +82,6 @@
     "@nx/devkit": "21.6.4",
     "@nx/eslint": "21.6.4",
     "@nx/eslint-plugin": "21.6.4",
-    "@nx/jest": "21.6.4",
     "@nx/js": "21.6.4",
     "@nx/playwright": "21.6.4",
     "@nx/plugin": "21.6.4",
