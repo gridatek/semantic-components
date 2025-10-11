@@ -70,14 +70,6 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/breadcrumb-showcase/jest.config.ts",
-        "tsConfig": "apps/breadcrumb-showcase/tsconfig.spec.json"
-      }
-    },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
