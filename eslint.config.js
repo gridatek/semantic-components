@@ -44,6 +44,8 @@ module.exports = [
       '@typescript-eslint/prefer-namespace-keyword': 'off',
       '@typescript-eslint/no-var-requires': 'off',
       'no-useless-escape': 'off',
+      'no-case-declarations': 'off',
+      'prefer-const': 'off',
     },
   },
   // {
