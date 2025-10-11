@@ -17,4 +17,7 @@ updates:
       - dependency-name: 'ng-packagr'
       - dependency-name: '@schematics/angular'
       - dependency-name: 'angular-eslint'
+      # Ignore all updates for verdaccio
       - dependency-name: 'verdaccio'
+      # Ignore all updates for typescript
+      - dependency-name: 'typescript'

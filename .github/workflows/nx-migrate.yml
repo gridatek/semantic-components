@@ -1,103 +1,22 @@
-name: Nx migrate
-
+name: Nx Migrate
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '0 1 * * *' # Daily at 1 AM
 
 jobs:
-  migrate:
+  nx-migrate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # This enables task distribution via Nx Cloud
-      # Run this command as early as possible, before dependencies are installed
-      # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
-      # Uncomment this line to enable task distribution
-      # - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
-
-      # Cache node_modules
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '22'
           cache: 'npm'
 
-      - run: npm ci --legacy-peer-deps
-      - run: npx playwright install --with-deps
-      - uses: nrwl/nx-set-shas@v4
-
-      - name: Check if @nx/workspace is outdated
-        id: nx-workspace-outdated
-        run: |
-          IS_OUTDATED=$(test ! -z "$(npm outdated @nx/workspace)" && echo true || echo false)
-          echo $IS_OUTDATED
-          echo "outdated=$IS_OUTDATED" >> $GITHUB_OUTPUT
-
-      - name: Update @nx/workspace
-        if: steps.nx-workspace-outdated.outputs.outdated == 'true'
-        run: npx nx migrate latest
-
-      - name: Install dependencies
-        if: steps.nx-workspace-outdated.outputs.outdated == 'true'
-        run: npm i --legacy-peer-deps
-
-      - name: Check if has migrations
-        if: steps.nx-workspace-outdated.outputs.outdated == 'true'
-        id: nx-workspace-has-migrations
-        run: |
-          HAS_MIGRATIONS=$(test -f migrations.json && echo true || echo false)
-          echo $HAS_MIGRATIONS
-          echo "has_migrations=$HAS_MIGRATIONS" >> $GITHUB_OUTPUT
-
-      - name: Run @nx/workspace migrations
-        if: steps.nx-workspace-has-migrations.outputs.has_migrations == 'true'
-        run: npx nx migrate --run-migrations
-
-      - name: Setup Git
-        if: steps.nx-workspace-outdated.outputs.outdated == 'true'
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-
-      - name: Commit changes
-        if: steps.nx-workspace-outdated.outputs.outdated == 'true'
-        run: |
-          LAST_VERSION=$(npm view @nx/workspace version)
-          git add .
-          [[ $(git status --porcelain) ]] && git commit -m "build: update nx to version ${LAST_VERSION}" || echo "nothing to commit"
-
-      - name: Remove migrations.json & commit
-        if: steps.nx-workspace-has-migrations.outputs.has_migrations == 'true'
-        run: |
-          git rm -f migrations.json
-          git commit -m "build: remove migrations.json"
-
-      - name: E2E tests
-        id: e2e
-        if: steps.nx-workspace-outdated.outputs.outdated == 'true'
-        continue-on-error: true
-        run: npx nx run-many -t lint test build e2e --skip-nx-cache
-        env:
-          NX_VERBOSE_LOGGING: 'true'
-          GITHUB_ACTIONS: 'true'
-
-      - name: Push changes
-        if: steps.nx-workspace-outdated.outputs.outdated == 'true' && steps.e2e.outcome == 'success'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-
-      - name: Create PR
-        if: steps.nx-workspace-outdated.outputs.outdated == 'true' && steps.e2e.outcome != 'success'
-        run: |
-          LAST_VERSION=$(npm view @nx/workspace version)
-          BRANCH="update-nx-${LAST_VERSION}-${{ github.run_id }}-${{ github.run_attempt }}"
-          git checkout -b ${BRANCH}
-          git push -f --set-upstream origin ${BRANCH}
-          gh pr view ${BRANCH} || gh pr create -t "build: update nx to version ${LAST_VERSION}" -b "Update nx to version ${LAST_VERSION}."
+      - uses: gridatek/nx-migrate-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
