@@ -2,8 +2,9 @@
   "name": "@semantic-components/layouts",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^20.3.0",
-    "@angular/core": "^20.3.0"
+    "@angular/core": "^20.3.0",
+    "@semantic-components/utils": "0.46.0",
+    "class-variance-authority": "^0.7.1"
   },
   "sideEffects": false
 }
