@@ -89,9 +89,8 @@ export class ScEditor implements ControlValueAccessor, OnDestroy {
     cn('block border border-input rounded-md overflow-hidden', this.classInput()),
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: (value: string) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   onTouched: () => void = () => {};
 
   editor!: Editor;
