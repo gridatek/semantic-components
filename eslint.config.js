@@ -43,6 +43,7 @@ module.exports = [
       '@typescript-eslint/adjacent-overload-signatures': 'off',
       '@typescript-eslint/prefer-namespace-keyword': 'off',
       '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/no-this-alias': 'off',
       'no-useless-escape': 'off',
       'no-case-declarations': 'off',
       'prefer-const': 'off',
