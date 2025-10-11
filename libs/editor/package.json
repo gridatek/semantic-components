@@ -36,7 +36,10 @@
     "@tiptap/extension-table": "^3.0.7",
     "@semantic-components/ui": "0.57.0",
     "@tiptap/extension-list": "^3.3.0",
-    "@tiptap/extensions": "^3.3.0"
+    "@tiptap/extensions": "^3.3.0",
+    "@semantic-components/code-highlighter": "0.4.0",
+    "@angular/common": "20.3.1",
+    "@tiptap/extension-code-block": "^3.4.4"
   },
   "peerDependenciesMeta": {
     "@tiptap/extension-blockquote": {
