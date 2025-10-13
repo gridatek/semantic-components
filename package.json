@@ -29,7 +29,7 @@
     "@tailwindcss/postcss": "^4.1.14",
     "@tanstack/angular-table": "^8.21.3",
     "@tiptap/core": "^3.6.6",
-    "@tiptap/extension-blockquote": "^3.4.4",
+    "@tiptap/extension-blockquote": "^3.6.6",
     "@tiptap/extension-bold": "^3.4.4",
     "@tiptap/extension-code": "^3.6.6",
     "@tiptap/extension-code-block": "^3.4.4",
