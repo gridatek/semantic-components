@@ -55,7 +55,7 @@
     "@tiptap/extensions": "^3.6.6",
     "@tiptap/pm": "^3.6.6",
     "algoliasearch": "^5.37.0",
-    "chart.js": "^4.5.0",
+    "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel": "^8.6.0",
