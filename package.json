@@ -105,7 +105,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-playwright": "^2.2.2",
     "husky": "^9.1.7",
-    "jsonc-eslint-parser": "^2.4.0",
+    "jsonc-eslint-parser": "^2.4.1",
     "lint-staged": "^16.1.6",
     "ng-packagr": "^20.3.0",
     "nx": "21.6.4",
