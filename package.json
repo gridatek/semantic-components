@@ -53,7 +53,7 @@
     "@tiptap/extension-underline": "^3.7.0",
     "@tiptap/extension-youtube": "^3.4.4",
     "@tiptap/extensions": "^3.7.1",
-    "@tiptap/pm": "^3.6.6",
+    "@tiptap/pm": "^3.7.2",
     "algoliasearch": "^5.40.1",
     "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.1",
