@@ -62,7 +62,7 @@
     "embla-carousel-autoplay": "^8.6.0",
     "express": "~5.1.0",
     "google-libphonenumber": "^3.2.43",
-    "motion": "^12.23.12",
+    "motion": "^12.23.24",
     "rxjs": "~7.8.2",
     "shiki": "^3.12.2",
     "tailwind-merge": "^3.3.1"
