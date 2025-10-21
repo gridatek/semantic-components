@@ -21,7 +21,7 @@
     "@angular/platform-server": "20.3.1",
     "@angular/router": "20.3.1",
     "@angular/ssr": "20.3.2",
-    "@fontsource/inter": "^5.2.6",
+    "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@js-temporal/polyfill": "^0.5.1",
     "@semantic-icons/lucide-icons": "^0.56.0",
