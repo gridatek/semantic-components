@@ -106,7 +106,7 @@
     "eslint-plugin-playwright": "^2.2.2",
     "husky": "^9.1.7",
     "jsonc-eslint-parser": "^2.4.1",
-    "lint-staged": "^16.2.4",
+    "lint-staged": "^16.2.6",
     "ng-packagr": "^20.3.0",
     "nx": "21.6.5",
     "postcss": "^8.5.6",
