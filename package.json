@@ -45,7 +45,7 @@
     "@tiptap/extension-link": "^3.10.1",
     "@tiptap/extension-list": "^3.10.1",
     "@tiptap/extension-paragraph": "^3.9.1",
-    "@tiptap/extension-strike": "^3.9.0",
+    "@tiptap/extension-strike": "^3.10.1",
     "@tiptap/extension-table": "^3.10.1",
     "@tiptap/extension-text": "^3.7.2",
     "@tiptap/extension-text-align": "^3.10.1",
