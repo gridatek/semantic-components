@@ -94,7 +94,7 @@
     "@swc/cli": "0.7.8",
     "@swc/core": "~1.15.0",
     "@swc/helpers": "^0.5.17",
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@types/algoliasearch": "^4.0.4",
     "@types/express": "5.0.5",
     "@types/google-libphonenumber": "^7.4.30",
