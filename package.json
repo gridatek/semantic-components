@@ -28,7 +28,7 @@
     "@supabase/supabase-js": "^2.79.0",
     "@tailwindcss/postcss": "^4.1.16",
     "@tanstack/angular-table": "^8.21.3",
-    "@tiptap/core": "^3.6.6",
+    "@tiptap/core": "^3.10.2",
     "@tiptap/extension-blockquote": "^3.10.1",
     "@tiptap/extension-bold": "^3.10.1",
     "@tiptap/extension-code": "^3.9.0",
