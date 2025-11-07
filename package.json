@@ -50,7 +50,7 @@
     "@tiptap/extension-text": "^3.10.1",
     "@tiptap/extension-text-align": "^3.10.1",
     "@tiptap/extension-text-style": "^3.9.1",
-    "@tiptap/extension-underline": "^3.10.1",
+    "@tiptap/extension-underline": "^3.10.2",
     "@tiptap/extension-youtube": "^3.10.1",
     "@tiptap/extensions": "^3.10.2",
     "@tiptap/pm": "^3.6.6",
