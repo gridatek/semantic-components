@@ -36,7 +36,7 @@
     "@tiptap/extension-color": "^3.10.2",
     "@tiptap/extension-document": "^3.10.1",
     "@tiptap/extension-font-family": "^3.10.2",
-    "@tiptap/extension-heading": "^3.10.2",
+    "@tiptap/extension-heading": "^3.10.4",
     "@tiptap/extension-highlight": "^3.10.2",
     "@tiptap/extension-history": "^3.10.1",
     "@tiptap/extension-horizontal-rule": "^3.10.2",
