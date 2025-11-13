@@ -98,7 +98,7 @@
     "@types/algoliasearch": "^4.0.4",
     "@types/express": "5.0.5",
     "@types/google-libphonenumber": "^7.4.30",
-    "@types/node": "24.10.0",
+    "@types/node": "24.10.1",
     "@typescript-eslint/utils": "^8.46.3",
     "autoprefixer": "^10.4.22",
     "eslint": "^9.39.1",
