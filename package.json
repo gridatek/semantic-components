@@ -47,7 +47,7 @@
     "@tiptap/extension-paragraph": "^3.11.0",
     "@tiptap/extension-strike": "^3.11.0",
     "@tiptap/extension-table": "^3.11.1",
-    "@tiptap/extension-text": "^3.11.0",
+    "@tiptap/extension-text": "^3.11.1",
     "@tiptap/extension-text-align": "^3.11.0",
     "@tiptap/extension-text-style": "^3.11.1",
     "@tiptap/extension-underline": "^3.11.0",
