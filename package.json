@@ -48,7 +48,7 @@
     "@tiptap/extension-strike": "^3.13.0",
     "@tiptap/extension-table": "^3.13.0",
     "@tiptap/extension-text": "^3.13.0",
-    "@tiptap/extension-text-align": "^3.12.1",
+    "@tiptap/extension-text-align": "^3.13.0",
     "@tiptap/extension-text-style": "^3.13.0",
     "@tiptap/extension-underline": "^3.12.0",
     "@tiptap/extension-youtube": "^3.13.0",
