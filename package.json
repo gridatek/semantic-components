@@ -26,7 +26,7 @@
     "@js-temporal/polyfill": "^0.5.1",
     "@semantic-icons/lucide-icons": "^0.56.0",
     "@supabase/supabase-js": "^2.87.1",
-    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/postcss": "^4.1.18",
     "@tanstack/angular-table": "^8.21.3",
     "@tiptap/core": "^3.13.0",
     "@tiptap/extension-blockquote": "^3.13.0",
