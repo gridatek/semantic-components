@@ -92,7 +92,7 @@
     "@semantic-icons/nx-generators": "^0.52.0",
     "@swc-node/register": "~1.11.1",
     "@swc/cli": "0.7.9",
-    "@swc/core": "~1.15.3",
+    "@swc/core": "~1.15.4",
     "@swc/helpers": "^0.5.17",
     "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@types/algoliasearch": "^4.0.4",
