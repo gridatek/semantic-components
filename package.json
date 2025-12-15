@@ -100,7 +100,7 @@
     "@types/google-libphonenumber": "^7.4.30",
     "@types/node": "25.0.1",
     "@typescript-eslint/utils": "^8.49.0",
-    "autoprefixer": "^10.4.22",
+    "autoprefixer": "^10.4.23",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-playwright": "^2.4.0",
