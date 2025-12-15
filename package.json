@@ -77,7 +77,7 @@
     "@angular/language-service": "20.3.1",
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
-    "@eslint/js": "^9.37.0",
+    "@eslint/js": "^9.39.2",
     "@nx/angular": "22.2.3",
     "@nx/devkit": "22.2.3",
     "@nx/eslint": "22.2.3",
