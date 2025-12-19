@@ -251,7 +251,7 @@ export class ImageCropperComponent implements OnInit, OnDestroy {
     wide: 'https://picsum.photos/1000/400?random=4',
   };
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onWindowResize() {
     if (this.showOverlay() && this.sourceImage()) {
       // Debounce resize events
