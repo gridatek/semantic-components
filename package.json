@@ -54,7 +54,7 @@
     "@tiptap/extension-underline": "^3.13.0",
     "@tiptap/extension-youtube": "^3.13.0",
     "@tiptap/extensions": "^3.13.0",
-    "@tiptap/pm": "^3.13.0",
+    "@tiptap/pm": "^3.14.0",
     "algoliasearch": "^5.46.1",
     "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.1",
