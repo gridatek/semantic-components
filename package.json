@@ -100,7 +100,7 @@
     "@types/express": "5.0.6",
     "@types/google-libphonenumber": "^7.4.30",
     "@types/node": "25.0.3",
-    "@typescript-eslint/utils": "^8.49.0",
+    "@typescript-eslint/utils": "^8.50.1",
     "autoprefixer": "^10.4.23",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "10.1.8",
