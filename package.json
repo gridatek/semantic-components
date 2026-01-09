@@ -65,7 +65,7 @@
     "google-libphonenumber": "^3.2.43",
     "motion": "^12.24.12",
     "rxjs": "~7.8.2",
-    "shiki": "^3.20.0",
+    "shiki": "^3.21.0",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
