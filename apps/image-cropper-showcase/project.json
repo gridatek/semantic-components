@@ -7,13 +7,12 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/image-cropper-showcase",
         "index": "apps/image-cropper-showcase/src/index.html",
         "browser": "apps/image-cropper-showcase/src/main.ts",
-        "polyfills": [],
         "tsConfig": "apps/image-cropper-showcase/tsconfig.app.json",
         "assets": [
           {
@@ -22,7 +21,8 @@
           }
         ],
         "styles": ["apps/image-cropper-showcase/src/styles.css"],
-        "scripts": []
+        "scripts": [],
+        "polyfills": ["@angular/localize/init"]
       },
       "configurations": {
         "production": {
@@ -49,8 +49,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "continuous": true,
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "image-cropper-showcase:build:production"
@@ -59,26 +58,34 @@
           "buildTarget": "image-cropper-showcase:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "continuous": true
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "@angular/build:extract-i18n",
       "options": {
-        "buildTarget": "image-cropper-showcase:build"
+        "buildTarget": "image-cropper-showcase:build",
+        "format": "json",
+        "outputPath": "apps/image-cropper-showcase/public/i18n",
+        "outFile": "messages.json"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint"
     },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {}
+    },
     "serve-static": {
-      "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "image-cropper-showcase:build",
         "port": 4200,
         "staticFilePath": "dist/apps/image-cropper-showcase/browser",
         "spa": true
-      }
+      },
+      "continuous": true
     }
   }
 }
