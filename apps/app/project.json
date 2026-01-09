@@ -7,13 +7,12 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/app",
         "index": "apps/app/src/index.html",
         "browser": "apps/app/src/main.ts",
-        "polyfills": [],
         "tsConfig": "apps/app/tsconfig.app.json",
         "assets": [
           {
@@ -23,7 +22,8 @@
           "apps/app/src/_redirects"
         ],
         "styles": ["apps/app/src/styles.css"],
-        "scripts": []
+        "scripts": [],
+        "polyfills": ["@angular/localize/init"]
       },
       "configurations": {
         "production": {
@@ -50,7 +50,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "app:build:production"
@@ -63,13 +63,20 @@
       "continuous": true
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "@angular/build:extract-i18n",
       "options": {
-        "buildTarget": "app:build"
+        "buildTarget": "app:build",
+        "format": "json",
+        "outputPath": "apps/app/public/i18n",
+        "outFile": "messages.json"
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {}
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
@@ -78,7 +85,8 @@
         "port": 4200,
         "staticFilePath": "dist/apps/app/browser",
         "spa": true
-      }
+      },
+      "continuous": true
     }
   }
 }
