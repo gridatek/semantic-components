@@ -2,10 +2,10 @@ import { AccordionContent } from '@angular/aria/accordion';
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[scNewAccordionContent]',
+  selector: '[scAccordionContent]',
   hostDirectives: [AccordionContent],
   host: {
     'data-slot': 'accordion-content',
   },
 })
-export class ScNewAccordionContent {}
+export class ScAccordionContent {}

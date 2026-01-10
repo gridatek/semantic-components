@@ -1,4 +1,4 @@
-# New Accordion
+# Accordion
 
 A set of wrapper directives for Angular ARIA's accordion components that include built-in styling and animations, following shadcn/ui design patterns.
 
@@ -10,17 +10,17 @@ These wrapper directives provide a cleaner, more opinionated implementation of A
 
 The accordion system is split into semantic components with distinct responsibilities:
 
-- **ScNewAccordionGroup**: Container that manages expansion behavior
-- **ScNewAccordionTrigger**: Interactive button that toggles panels
-- **ScNewAccordionPanel**: Wrapper for panel content with overflow handling
-- **ScNewAccordionContent**: Plain content wrapper (use when you need custom animations or static content)
-- **ScNewAccordionAnimatedContent**: Animated content wrapper with built-in slide/fade transitions
+- **ScAccordionGroup**: Container that manages expansion behavior
+- **ScAccordionTrigger**: Interactive button that toggles panels
+- **ScAccordionPanel**: Wrapper for panel content with overflow handling
+- **ScAccordionContent**: Plain content wrapper (use when you need custom animations or static content)
+- **ScAccordionAnimatedContent**: Animated content wrapper with built-in slide/fade transitions
 
 All components include `data-slot` attributes for programmatic identification and testing.
 
 ## Components
 
-### ScNewAccordionGroup
+### ScAccordionGroup
 
 Wraps `@angular/aria/accordion`'s `AccordionGroup` directive with built-in container styling.
 
@@ -34,17 +34,17 @@ Wraps `@angular/aria/accordion`'s `AccordionGroup` directive with built-in conta
 **Usage:**
 
 ```html
-<div scNewAccordionGroup [multiExpandable]="false">
+<div scAccordionGroup [multiExpandable]="false">
   <!-- Accordion items -->
 </div>
 
 <!-- With custom styling -->
-<div class="max-w-2xl" scNewAccordionGroup [multiExpandable]="false">
+<div class="max-w-2xl" scAccordionGroup [multiExpandable]="false">
   <!-- Accordion items -->
 </div>
 ```
 
-### ScNewAccordionTrigger
+### ScAccordionTrigger
 
 Wraps `@angular/aria/accordion`'s `AccordionTrigger` directive with button styling.
 
@@ -59,13 +59,13 @@ Wraps `@angular/aria/accordion`'s `AccordionTrigger` directive with button styli
 **Usage:**
 
 ```html
-<button scNewAccordionTrigger panelId="item1" [expanded]="true">
+<button scAccordionTrigger panelId="item1" [expanded]="true">
   Question text
   <svg si-chevron-down-icon></svg>
 </button>
 ```
 
-### ScNewAccordionPanel
+### ScAccordionPanel
 
 Wraps `@angular/aria/accordion`'s `AccordionPanel` directive with layout constraints.
 
@@ -79,14 +79,14 @@ Wraps `@angular/aria/accordion`'s `AccordionPanel` directive with layout constra
 **Usage:**
 
 ```html
-<div scNewAccordionPanel panelId="item1">
-  <ng-template scNewAccordionContent>
-    <div scNewAccordionAnimatedContent>Content here</div>
+<div scAccordionPanel panelId="item1">
+  <ng-template scAccordionContent>
+    <div scAccordionAnimatedContent>Content here</div>
   </ng-template>
 </div>
 ```
 
-### ScNewAccordionContent
+### ScAccordionContent
 
 Wraps `@angular/aria/accordion`'s `AccordionContent` directive without additional styling or animations.
 
@@ -99,7 +99,7 @@ Wraps `@angular/aria/accordion`'s `AccordionContent` directive without additiona
 **Usage:**
 
 ```html
-<ng-template scNewAccordionContent>
+<ng-template scAccordionContent>
   <!-- Your custom content with optional animations -->
   <div>Static content without animations</div>
 </ng-template>
@@ -112,7 +112,7 @@ Wraps `@angular/aria/accordion`'s `AccordionContent` directive without additiona
 - Third-party animation libraries
 - Performance-critical scenarios where animations should be disabled
 
-### ScNewAccordionAnimatedContent
+### ScAccordionAnimatedContent
 
 Provides built-in slide and fade animations for accordion content.
 
@@ -126,13 +126,13 @@ Provides built-in slide and fade animations for accordion content.
 **Usage:**
 
 ```html
-<ng-template scNewAccordionContent>
-  <div scNewAccordionAnimatedContent>Answer content here</div>
+<ng-template scAccordionContent>
+  <div scAccordionAnimatedContent>Answer content here</div>
 </ng-template>
 
 <!-- With custom styling -->
-<ng-template scNewAccordionContent>
-  <div class="text-base" scNewAccordionAnimatedContent>Custom styled content</div>
+<ng-template scAccordionContent>
+  <div class="text-base" scAccordionAnimatedContent>Custom styled content</div>
 </ng-template>
 ```
 
@@ -147,30 +147,30 @@ Provides built-in slide and fade animations for accordion content.
 
 ```typescript
 import {
-  ScNewAccordionAnimatedContent,
-  ScNewAccordionContent,
-  ScNewAccordionGroup,
-  ScNewAccordionPanel,
-  ScNewAccordionTrigger,
+  ScAccordionAnimatedContent,
+  ScAccordionContent,
+  ScAccordionGroup,
+  ScAccordionPanel,
+  ScAccordionTrigger,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-faq',
   imports: [
-    ScNewAccordionGroup,
-    ScNewAccordionTrigger,
-    ScNewAccordionPanel,
-    ScNewAccordionContent,
-    ScNewAccordionAnimatedContent,
+    ScAccordionGroup,
+    ScAccordionTrigger,
+    ScAccordionPanel,
+    ScAccordionContent,
+    ScAccordionAnimatedContent,
     SiChevronDownIcon,
   ],
   template: `
-    <div [multiExpandable]="false" scNewAccordionGroup>
+    <div [multiExpandable]="false" scAccordionGroup>
       <!-- FAQ Item 1 -->
       <div>
         <h3 class="flex">
-          <button [expanded]="true" scNewAccordionTrigger panelId="faq1">
+          <button [expanded]="true" scAccordionTrigger panelId="faq1">
             Is it accessible?
             <svg
               class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
@@ -178,9 +178,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             ></svg>
           </button>
         </h3>
-        <div scNewAccordionPanel panelId="faq1">
-          <ng-template scNewAccordionContent>
-            <div scNewAccordionAnimatedContent>Yes. It adheres to the WAI-ARIA design pattern.</div>
+        <div scAccordionPanel panelId="faq1">
+          <ng-template scAccordionContent>
+            <div scAccordionAnimatedContent>Yes. It adheres to the WAI-ARIA design pattern.</div>
           </ng-template>
         </div>
       </div>
@@ -188,7 +188,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       <!-- FAQ Item 2 -->
       <div>
         <h3 class="flex">
-          <button scNewAccordionTrigger panelId="faq2">
+          <button scAccordionTrigger panelId="faq2">
             Does it support keyboard navigation?
             <svg
               class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
@@ -196,9 +196,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             ></svg>
           </button>
         </h3>
-        <div scNewAccordionPanel panelId="faq2">
-          <ng-template scNewAccordionContent>
-            <div scNewAccordionAnimatedContent>
+        <div scAccordionPanel panelId="faq2">
+          <ng-template scAccordionContent>
+            <div scAccordionAnimatedContent>
               Yes. It supports arrow keys, Home, and End for navigation.
             </div>
           </ng-template>
@@ -217,17 +217,17 @@ export class FaqComponent {}
 Standard FAQ with smooth animations:
 
 ```html
-<div scNewAccordionGroup [multiExpandable]="false">
+<div scAccordionGroup [multiExpandable]="false">
   <div>
     <h3 class="flex">
-      <button scNewAccordionTrigger panelId="q1">
+      <button scAccordionTrigger panelId="q1">
         What is your return policy?
         <svg si-chevron-down-icon></svg>
       </button>
     </h3>
-    <div scNewAccordionPanel panelId="q1">
-      <ng-template scNewAccordionContent>
-        <div scNewAccordionAnimatedContent>You can return items within 30 days of purchase.</div>
+    <div scAccordionPanel panelId="q1">
+      <ng-template scAccordionContent>
+        <div scAccordionAnimatedContent>You can return items within 30 days of purchase.</div>
       </ng-template>
     </div>
   </div>
@@ -239,13 +239,13 @@ Standard FAQ with smooth animations:
 Settings that don't benefit from animations:
 
 ```html
-<div scNewAccordionGroup [multiExpandable]="true">
+<div scAccordionGroup [multiExpandable]="true">
   <div>
     <h3 class="flex">
-      <button scNewAccordionTrigger panelId="display">Display Settings</button>
+      <button scAccordionTrigger panelId="display">Display Settings</button>
     </h3>
-    <div scNewAccordionPanel panelId="display">
-      <ng-template scNewAccordionContent>
+    <div scAccordionPanel panelId="display">
+      <ng-template scAccordionContent>
         <!-- Static form without animations for instant feedback -->
         <form class="p-4">
           <label>
@@ -264,13 +264,13 @@ Settings that don't benefit from animations:
 Using third-party animation library:
 
 ```html
-<div scNewAccordionGroup [multiExpandable]="true">
+<div scAccordionGroup [multiExpandable]="true">
   <div>
     <h3 class="flex">
-      <button scNewAccordionTrigger panelId="docs1">API Reference</button>
+      <button scAccordionTrigger panelId="docs1">API Reference</button>
     </h3>
-    <div scNewAccordionPanel panelId="docs1">
-      <ng-template scNewAccordionContent>
+    <div scAccordionPanel panelId="docs1">
+      <ng-template scAccordionContent>
         <div class="p-4" @customAnimation>
           <!-- Your custom animation defined in component -->
           API documentation content
@@ -288,7 +288,7 @@ Using third-party animation library:
 Only one panel can be open at a time. When you open a panel, others close automatically.
 
 ```html
-<div scNewAccordionGroup [multiExpandable]="false">
+<div scAccordionGroup [multiExpandable]="false">
   <!-- Items -->
 </div>
 ```
@@ -300,7 +300,7 @@ Only one panel can be open at a time. When you open a panel, others close automa
 Multiple panels can be open simultaneously.
 
 ```html
-<div scNewAccordionGroup [multiExpandable]="true">
+<div scAccordionGroup [multiExpandable]="true">
   <!-- Items -->
 </div>
 ```
@@ -323,7 +323,7 @@ All Angular ARIA accessibility features are preserved:
 
 The accordion animation system is separated into two components:
 
-### ScNewAccordionAnimatedContent
+### ScAccordionAnimatedContent
 
 Provides built-in animations using Tailwind CSS (from `tw-animate-css`):
 
@@ -331,7 +331,7 @@ Provides built-in animations using Tailwind CSS (from `tw-animate-css`):
 - **Closing**: Content slides up and fades out
 - Uses Angular's `animate.enter` and `animate.leave` compiler features
 
-### ScNewAccordionContent
+### ScAccordionContent
 
 Plain wrapper without animations, allowing you to:
 
@@ -346,15 +346,15 @@ The trigger automatically rotates chevron icons (SVG elements) 180° when the pa
 
 ## Styling Customization
 
-All components (except `ScNewAccordionContent`) accept a `class` input for style overrides. Additional classes are merged with the default styles using the `cn()` utility.
+All components (except `ScAccordionContent`) accept a `class` input for style overrides. Additional classes are merged with the default styles using the `cn()` utility.
 
 ```html
 <!-- Customize any component -->
-<div class="max-w-2xl" scNewAccordionGroup [multiExpandable]="false">
-  <button class="font-bold" scNewAccordionTrigger panelId="item1">Question</button>
-  <div class="text-base" scNewAccordionPanel panelId="item1">
-    <ng-template scNewAccordionContent>
-      <div class="px-8" scNewAccordionAnimatedContent>Content</div>
+<div class="max-w-2xl" scAccordionGroup [multiExpandable]="false">
+  <button class="font-bold" scAccordionTrigger panelId="item1">Question</button>
+  <div class="text-base" scAccordionPanel panelId="item1">
+    <ng-template scAccordionContent>
+      <div class="px-8" scAccordionAnimatedContent>Content</div>
     </ng-template>
   </div>
 </div>
@@ -400,17 +400,17 @@ All components (except `ScNewAccordionContent`) accept a `class` input for style
 ### After (With Wrappers)
 
 ```html
-<div scNewAccordionGroup [multiExpandable]="false">
+<div scAccordionGroup [multiExpandable]="false">
   <div>
     <h3 class="flex">
-      <button scNewAccordionTrigger panelId="faq1" [expanded]="true">
+      <button scAccordionTrigger panelId="faq1" [expanded]="true">
         Question
         <svg si-chevron-down-icon></svg>
       </button>
     </h3>
-    <div scNewAccordionPanel panelId="faq1">
-      <ng-template scNewAccordionContent>
-        <div scNewAccordionAnimatedContent>Answer</div>
+    <div scAccordionPanel panelId="faq1">
+      <ng-template scAccordionContent>
+        <div scAccordionAnimatedContent>Answer</div>
       </ng-template>
     </div>
   </div>
@@ -434,7 +434,7 @@ Components that wrap Angular ARIA directives use the `hostDirectives` feature fo
 
 ```typescript
 @Directive({
-  selector: '[scNewAccordionTrigger]',
+  selector: '[scAccordionTrigger]',
   hostDirectives: [
     {
       directive: AccordionTrigger,
@@ -446,7 +446,7 @@ Components that wrap Angular ARIA directives use the `hostDirectives` feature fo
     '[class]': 'class()',
   },
 })
-export class ScNewAccordionTrigger {
+export class ScAccordionTrigger {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('...default classes...', this.classInput()));
 }
@@ -456,14 +456,14 @@ export class ScNewAccordionTrigger {
 
 The split architecture separates concerns:
 
-- **ScNewAccordionContent**: Wraps Angular ARIA's `AccordionContent` directive only
-- **ScNewAccordionAnimatedContent**: Standalone directive with animation configuration
+- **ScAccordionContent**: Wraps Angular ARIA's `AccordionContent` directive only
+- **ScAccordionAnimatedContent**: Standalone directive with animation configuration
 
 This allows users to choose:
 
-1. Use `ScNewAccordionAnimatedContent` for built-in animations
-2. Use plain `ScNewAccordionContent` with custom animation directives
-3. Use plain `ScNewAccordionContent` with static content (no animations)
+1. Use `ScAccordionAnimatedContent` for built-in animations
+2. Use plain `ScAccordionContent` with custom animation directives
+3. Use plain `ScAccordionContent` with static content (no animations)
 
 ### Data Slots
 

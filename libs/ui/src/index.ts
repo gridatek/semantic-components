@@ -33,7 +33,6 @@ export * from './lib/components/slider';
 export * from './lib/components/checkbox';
 export * from './lib/components/checkbox-group';
 export * from './lib/components/accordion';
-export * from './lib/components/new-accordion';
 export * from './lib/components/switch';
 export * from './lib/components/radio-group';
 export * from './lib/components/hover-card';

@@ -3,7 +3,7 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/utils';
 
 @Directive({
-  selector: '[scNewAccordionAnimatedContent]',
+  selector: '[scAccordionAnimatedContent]',
   host: {
     'data-slot': 'accordion-animated-content',
     '[class]': 'class()',
@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/utils';
     'animate.leave': 'animate-accordion-up',
   },
 })
-export class ScNewAccordionAnimatedContent {
+export class ScAccordionAnimatedContent {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

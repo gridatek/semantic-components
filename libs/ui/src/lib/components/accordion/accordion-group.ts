@@ -4,7 +4,7 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/utils';
 
 @Directive({
-  selector: '[scNewAccordionGroup]',
+  selector: '[scAccordionGroup]',
   hostDirectives: [
     {
       directive: AccordionGroup,
@@ -16,7 +16,7 @@ import { cn } from '@semantic-components/utils';
     '[class]': 'class()',
   },
 })
-export class ScNewAccordionGroup {
+export class ScAccordionGroup {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

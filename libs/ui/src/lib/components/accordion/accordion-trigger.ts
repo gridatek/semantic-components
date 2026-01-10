@@ -4,7 +4,7 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/utils';
 
 @Directive({
-  selector: 'button[scNewAccordionTrigger]',
+  selector: 'button[scAccordionTrigger]',
   hostDirectives: [
     {
       directive: AccordionTrigger,
@@ -16,7 +16,7 @@ import { cn } from '@semantic-components/utils';
     '[class]': 'class()',
   },
 })
-export class ScNewAccordionTrigger {
+export class ScAccordionTrigger {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
