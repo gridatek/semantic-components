@@ -39,6 +39,7 @@ import {
     <div class="w-[400px]" ngTabs>
       <div
         class="grid h-9 w-full grid-cols-2 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground"
+        [selectedTab]="'account'"
         ngTabList
       >
         <button
