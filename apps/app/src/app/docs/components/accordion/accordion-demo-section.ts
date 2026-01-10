@@ -1,4 +1,26 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
+
+import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
+import { AccordionDemo } from './accordion-demo';
+
+@Component({
+  selector: 'app-accordion-demo-section',
+  imports: [AccordionDemo, PreviewCodeTabs],
+  template: `
+    <app-preview-code-tabs [code]="code" [title]="title()" [level]="level()">
+      <app-accordion-demo />
+    </app-preview-code-tabs>
+  `,
+  styles: ``,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class AccordionDemoSection {
+  readonly title = input<string>('');
+
+  readonly level = input<'2' | '3'>('2');
+
+  protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
   ScAccordionAnimatedContent,
@@ -10,7 +32,7 @@ import {
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-new-accordion-demo',
+  selector: 'app-accordion-demo',
   imports: [
     ScAccordionAnimatedContent,
     ScAccordionGroup,
@@ -19,7 +41,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionContent,
     SiChevronDownIcon,
   ],
-  template: `
+  template: \`
     <div [multiExpandable]="false" scAccordionGroup>
       <!-- FAQ Item 1 -->
       <div>
@@ -80,11 +102,12 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
     </div>
-  `,
+  \`,
   host: {
     class: 'block w-80',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewAccordionDemo {}
+export class AccordionDemo {}`;
+}

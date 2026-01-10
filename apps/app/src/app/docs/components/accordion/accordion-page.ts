@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { NewAccordionDemoSection } from './new-accordion-demo-section';
-import { NewAccordionMultiDemoSection } from './new-accordion-multi-demo-section';
+import { AccordionDemoSection } from './accordion-demo-section';
+import { AccordionMultiDemoSection } from './accordion-multi-demo-section';
 
 @Component({
   selector: 'app-accordion-page',
-  imports: [NewAccordionDemoSection, NewAccordionMultiDemoSection],
+  imports: [AccordionDemoSection, AccordionMultiDemoSection],
   template: `
-    <app-new-accordion-demo-section title="Angular ARIA Accordion (Single Expansion)" />
-    <app-new-accordion-multi-demo-section title="Angular ARIA Accordion (Multi Expansion)" />
+    <app-accordion-demo-section title="Angular ARIA Accordion (Single Expansion)" />
+    <app-accordion-multi-demo-section title="Angular ARIA Accordion (Multi Expansion)" />
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

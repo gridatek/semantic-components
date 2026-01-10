@@ -1,26 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from '@angular/core';
-
-import { PreviewCodeTabs } from '../../../components/preview-code-tabs/preview-code-tabs';
-import { NewAccordionMultiDemo } from './new-accordion-multi-demo';
-
-@Component({
-  selector: 'app-new-accordion-multi-demo-section',
-  imports: [NewAccordionMultiDemo, PreviewCodeTabs],
-  template: `
-    <app-preview-code-tabs [code]="code" [title]="title()" [level]="level()">
-      <app-new-accordion-multi-demo />
-    </app-preview-code-tabs>
-  `,
-  styles: ``,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class NewAccordionMultiDemoSection {
-  readonly title = input<string>('');
-
-  readonly level = input<'2' | '3'>('2');
-
-  protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
   ScAccordionAnimatedContent,
@@ -32,7 +10,7 @@ import {
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-new-accordion-multi-demo',
+  selector: 'app-accordion-multi-demo',
   imports: [
     ScAccordionGroup,
     ScAccordionTrigger,
@@ -41,7 +19,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScAccordionAnimatedContent,
     SiChevronDownIcon,
   ],
-  template: \`
+  template: `
     <div [multiExpandable]="true" scAccordionGroup>
       <!-- FAQ Item 1 -->
       <div>
@@ -56,9 +34,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </h3>
         <div scAccordionPanel panelId="multi-faq1">
           <ng-template scAccordionContent>
-            <div scAccordionAnimatedContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </div>
+            <div scAccordionAnimatedContent>Yes. It adheres to the WAI-ARIA design pattern.</div>
           </ng-template>
         </div>
       </div>
@@ -104,12 +80,11 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
     </div>
-  \`,
+  `,
   host: {
     class: 'block w-80',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewAccordionMultiDemo {}`;
-}
+export class AccordionMultiDemo {}
