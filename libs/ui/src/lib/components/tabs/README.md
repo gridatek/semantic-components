@@ -1,4 +1,4 @@
-# New Tabs
+# Tabs
 
 A set of wrapper directives for Angular ARIA's tabs components that include built-in styling, following shadcn/ui design patterns.
 
@@ -10,17 +10,17 @@ These wrapper directives provide a cleaner, more opinionated implementation of A
 
 The tabs system is split into semantic components with distinct responsibilities:
 
-- **ScNewTabs**: Container that manages the overall tabs context
-- **ScNewTabList**: Container for tab buttons with built-in styling
-- **ScNewTab**: Individual tab button with hover and selection states
-- **ScNewTabPanel**: Panel container for tab content
-- **ScNewTabContent**: Template directive for lazy-loaded content
+- **ScTabs**: Container that manages the overall tabs context
+- **ScTabList**: Container for tab buttons with built-in styling
+- **ScTab**: Individual tab button with hover and selection states
+- **ScTabPanel**: Panel container for tab content
+- **ScTabContent**: Template directive for lazy-loaded content
 
 All components include `data-slot` attributes for programmatic identification and testing.
 
 ## Components
 
-### ScNewTabs
+### ScTabs
 
 Wraps `@angular/aria/tabs`'s `Tabs` directive.
 
@@ -32,12 +32,12 @@ Wraps `@angular/aria/tabs`'s `Tabs` directive.
 **Usage:**
 
 ```html
-<div scNewTabs>
+<div scTabs>
   <!-- Tab list and panels -->
 </div>
 ```
 
-### ScNewTabList
+### ScTabList
 
 Wraps `@angular/aria/tabs`'s `TabList` directive with built-in styling.
 
@@ -52,13 +52,13 @@ Wraps `@angular/aria/tabs`'s `TabList` directive with built-in styling.
 **Usage:**
 
 ```html
-<div scNewTabList [selectedTab]="'account'">
-  <button scNewTab value="account">Account</button>
-  <button scNewTab value="password">Password</button>
+<div scTabList [selectedTab]="'account'">
+  <button scTab value="account">Account</button>
+  <button scTab value="password">Password</button>
 </div>
 ```
 
-### ScNewTab
+### ScTab
 
 Wraps `@angular/aria/tabs`'s `Tab` directive with button styling.
 
@@ -73,10 +73,10 @@ Wraps `@angular/aria/tabs`'s `Tab` directive with button styling.
 **Usage:**
 
 ```html
-<button scNewTab value="account">Account</button>
+<button scTab value="account">Account</button>
 ```
 
-### ScNewTabPanel
+### ScTabPanel
 
 Wraps `@angular/aria/tabs`'s `TabPanel` directive with spacing.
 
@@ -90,14 +90,14 @@ Wraps `@angular/aria/tabs`'s `TabPanel` directive with spacing.
 **Usage:**
 
 ```html
-<div scNewTabPanel value="account">
-  <ng-template scNewTabContent>
+<div scTabPanel value="account">
+  <ng-template scTabContent>
     <!-- Panel content -->
   </ng-template>
 </div>
 ```
 
-### ScNewTabContent
+### ScTabContent
 
 Wraps `@angular/aria/tabs`'s `TabContent` directive for lazy loading.
 
@@ -110,7 +110,7 @@ Wraps `@angular/aria/tabs`'s `TabContent` directive for lazy loading.
 **Usage:**
 
 ```html
-<ng-template scNewTabContent>
+<ng-template scTabContent>
   <p>This content will be loaded when the tab is first selected.</p>
 </ng-template>
 ```
@@ -118,33 +118,27 @@ Wraps `@angular/aria/tabs`'s `TabContent` directive for lazy loading.
 ## Complete Example
 
 ```typescript
-import {
-  ScNewTab,
-  ScNewTabContent,
-  ScNewTabList,
-  ScNewTabPanel,
-  ScNewTabs,
-} from '@semantic-components/ui';
+import { ScTab, ScTabContent, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-settings',
-  imports: [ScNewTabs, ScNewTabList, ScNewTab, ScNewTabPanel, ScNewTabContent],
+  imports: [ScTabs, ScTabList, ScTab, ScTabPanel, ScTabContent],
   template: `
-    <div scNewTabs>
-      <div [selectedTab]="'account'" scNewTabList>
-        <button scNewTab value="account">Account</button>
-        <button scNewTab value="password">Password</button>
+    <div scTabs>
+      <div [selectedTab]="'account'" scTabList>
+        <button scTab value="account">Account</button>
+        <button scTab value="password">Password</button>
       </div>
 
-      <div scNewTabPanel value="account">
-        <ng-template scNewTabContent>
+      <div scTabPanel value="account">
+        <ng-template scTabContent>
           <h2>Account Settings</h2>
           <p>Manage your account settings here.</p>
         </ng-template>
       </div>
 
-      <div scNewTabPanel value="password">
-        <ng-template scNewTabContent>
+      <div scTabPanel value="password">
+        <ng-template scTabContent>
           <h2>Password Settings</h2>
           <p>Change your password here.</p>
         </ng-template>
@@ -162,10 +156,10 @@ export class SettingsComponent {}
 Tabs are displayed inline with automatic width:
 
 ```html
-<div scNewTabList [selectedTab]="'tab1'">
-  <button scNewTab value="tab1">Tab 1</button>
-  <button scNewTab value="tab2">Tab 2</button>
-  <button scNewTab value="tab3">Tab 3</button>
+<div scTabList [selectedTab]="'tab1'">
+  <button scTab value="tab1">Tab 1</button>
+  <button scTab value="tab2">Tab 2</button>
+  <button scTab value="tab3">Tab 3</button>
 </div>
 ```
 
@@ -174,9 +168,9 @@ Tabs are displayed inline with automatic width:
 Use grid layout for evenly distributed tabs:
 
 ```html
-<div class="grid w-full grid-cols-2" scNewTabList [selectedTab]="'tab1'">
-  <button scNewTab value="tab1">Tab 1</button>
-  <button scNewTab value="tab2">Tab 2</button>
+<div class="grid w-full grid-cols-2" scTabList [selectedTab]="'tab1'">
+  <button scTab value="tab1">Tab 1</button>
+  <button scTab value="tab2">Tab 2</button>
 </div>
 ```
 
@@ -223,13 +217,13 @@ All Angular ARIA accessibility features are preserved:
 ### After (With Wrappers)
 
 ```html
-<div scNewTabs>
-  <div scNewTabList [selectedTab]="'account'">
-    <button scNewTab value="account">Account</button>
+<div scTabs>
+  <div scTabList [selectedTab]="'account'">
+    <button scTab value="account">Account</button>
   </div>
 
-  <div scNewTabPanel value="account">
-    <ng-template scNewTabContent>Content here</ng-template>
+  <div scTabPanel value="account">
+    <ng-template scTabContent>Content here</ng-template>
   </div>
 </div>
 ```
@@ -247,7 +241,7 @@ These wrappers use Angular's `hostDirectives` feature to compose the original An
 
 ```typescript
 @Directive({
-  selector: 'button[scNewTab]',
+  selector: 'button[scTab]',
   hostDirectives: [
     {
       directive: Tab,
@@ -259,7 +253,7 @@ These wrappers use Angular's `hostDirectives` feature to compose the original An
     '[class]': 'class()',
   },
 })
-export class ScNewTab {
+export class ScTab {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('...default classes...', this.classInput()));
 }

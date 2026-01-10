@@ -21,7 +21,7 @@ export class TabsDemoSection {
   readonly level = input<'2' | '3'>('2');
 
   protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-  
+
 import {
   ScButton,
   ScCard,
@@ -30,11 +30,14 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScField,
+  ScFieldset,
   ScInput,
   ScLabel,
   ScTab,
   ScTabContent,
-  ScTabLabel,
+  ScTabList,
+  ScTabPanel,
   ScTabs,
 } from '@semantic-components/ui';
 
@@ -42,8 +45,9 @@ import {
   selector: 'app-tabs-demo',
   imports: [
     ScTabs,
+    ScTabList,
     ScTab,
-    ScTabLabel,
+    ScTabPanel,
     ScTabContent,
     ScCard,
     ScCardHeader,
@@ -51,15 +55,21 @@ import {
     ScCardDescription,
     ScCardContent,
     ScCardFooter,
+    ScField,
     ScLabel,
     ScInput,
     ScButton,
+    ScFieldset,
   ],
   template: \`
-    <sc-tabs class="w-[400px]" tabsHeaderClass="grid w-full grid-cols-2">
-      <sc-tab>
-        <sc-tab-label>Account</sc-tab-label>
-        <sc-tab-content>
+    <div class="w-[400px]" scTabs>
+      <div class="grid w-full grid-cols-2" scTabList [selectedTab]="'account'">
+        <button scTab value="account">Account</button>
+        <button scTab value="password">Password</button>
+      </div>
+
+      <div scTabPanel value="account">
+        <ng-template scTabContent>
           <div sc-card>
             <div sc-card-header>
               <h2 sc-card-title>Account</h2>
@@ -68,26 +78,27 @@ import {
               </p>
             </div>
 
-            <div class="space-y-2" sc-card-content>
-              <div class="space-y-1">
-                <label sc-label for="name">Name</label>
-                <input id="name" sc-input value="Pedro Duarte" />
-              </div>
-              <div class="space-y-1">
-                <label sc-label for="username">Username</label>
-                <input id="username" sc-input value="@peduarte" />
-              </div>
+            <div sc-card-content>
+              <fieldset sc-fieldset>
+                <div sc-field controlId="account-name">
+                  <label sc-label>Name</label>
+                  <input sc-input value="Pedro Duarte" data-slot="control" />
+                </div>
+                <div sc-field controlId="account-username">
+                  <label sc-label>Username</label>
+                  <input sc-input value="@peduarte" data-slot="control" />
+                </div>
+              </fieldset>
             </div>
             <div sc-card-footer>
               <button sc-button type="submit">Save changes</button>
             </div>
           </div>
-        </sc-tab-content>
-      </sc-tab>
+        </ng-template>
+      </div>
 
-      <sc-tab>
-        <sc-tab-label>Password</sc-tab-label>
-        <sc-tab-content>
+      <div scTabPanel value="password">
+        <ng-template scTabContent>
           <div sc-card>
             <div sc-card-header>
               <h2 sc-card-title>Password</h2>
@@ -95,25 +106,29 @@ import {
                 Change your password here. After saving, you'll be logged out.
               </p>
             </div>
-            <div class="space-y-2" sc-card-content>
-              <div class="space-y-1">
-                <label sc-label for="current">Current password</label>
-                <input id="current" sc-input type="password" />
-              </div>
-              <div class="space-y-1">
-                <label sc-label for="new">New password</label>
-                <input id="new" sc-input type="password" />
-              </div>
+            <div sc-card-content>
+              <fieldset sc-fieldset>
+                <div sc-field controlId="current-password">
+                  <label sc-label>Current password</label>
+                  <input sc-input type="password" data-slot="control" />
+                </div>
+                <div sc-field controlId="new-password">
+                  <label sc-label>New password</label>
+                  <input sc-input type="password" data-slot="control" />
+                </div>
+              </fieldset>
             </div>
             <div sc-card-footer>
               <button sc-button>Save password</button>
             </div>
           </div>
-        </sc-tab-content>
-      </sc-tab>
-    </sc-tabs>
+        </ng-template>
+      </div>
+    </div>
   \`,
-  styles: \`\`,
+  host: {
+    class: 'block',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

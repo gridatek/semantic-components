@@ -13,9 +13,9 @@ import {
   ScInput,
   ScLabel,
   ScTab,
+  ScTabContent,
   ScTabList,
-  ScTabPanelContent,
-  ScTabPanels,
+  ScTabPanel,
   ScTabs,
 } from '@semantic-components/ui';
 
@@ -25,8 +25,8 @@ import {
     ScTabs,
     ScTabList,
     ScTab,
-    ScTabPanels,
-    ScTabPanelContent,
+    ScTabPanel,
+    ScTabContent,
     ScCard,
     ScCardHeader,
     ScCardTitle,
@@ -40,14 +40,14 @@ import {
     ScFieldset,
   ],
   template: `
-    <div class="w-[400px]" sc-tabs value="account">
-      <div class="grid w-full grid-cols-2" sc-tab-list>
-        <button value="account" sc-tab>Account</button>
-        <button value="password" sc-tab>Password</button>
+    <div class="w-[400px]" scTabs>
+      <div class="grid w-full grid-cols-2" [selectedTab]="'account'" scTabList>
+        <button scTab value="account">Account</button>
+        <button scTab value="password">Password</button>
       </div>
 
-      <div sc-tab-panels>
-        <ng-template scTabPanelContent="account">
+      <div scTabPanel value="account">
+        <ng-template scTabContent>
           <div sc-card>
             <div sc-card-header>
               <h2 sc-card-title>Account</h2>
@@ -73,8 +73,10 @@ import {
             </div>
           </div>
         </ng-template>
+      </div>
 
-        <ng-template scTabPanelContent="password">
+      <div scTabPanel value="password">
+        <ng-template scTabContent>
           <div sc-card>
             <div sc-card-header>
               <h2 sc-card-title>Password</h2>
@@ -102,7 +104,9 @@ import {
       </div>
     </div>
   `,
-  styles: ``,
+  host: {
+    class: 'block',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

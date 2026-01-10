@@ -1,25 +1,29 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { TabList } from '@angular/aria/tabs';
+import { Directive, computed, input } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
-@Component({
-  selector: 'div[sc-tab-list]',
-  imports: [],
-  template: `
-    <ng-content />
-  `,
+@Directive({
+  selector: '[scTabList]',
+  hostDirectives: [
+    {
+      directive: TabList,
+      inputs: [
+        'orientation',
+        'wrap',
+        'softDisabled',
+        'focusMode',
+        'selectionMode',
+        'selectedTab',
+        'disabled',
+      ],
+      outputs: ['selectedTabChange'],
+    },
+  ],
   host: {
+    'data-slot': 'tab-list',
     '[class]': 'class()',
   },
-  styles: ``,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTabList {
   readonly classInput = input<string>('', {

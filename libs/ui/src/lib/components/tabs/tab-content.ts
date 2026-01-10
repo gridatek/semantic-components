@@ -2,10 +2,10 @@ import { TabContent } from '@angular/aria/tabs';
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: 'ng-template[scNewTabContent]',
+  selector: 'ng-template[scTabContent]',
   hostDirectives: [TabContent],
   host: {
     'data-slot': 'tab-content',
   },
 })
-export class ScNewTabContent {}
+export class ScTabContent {}
