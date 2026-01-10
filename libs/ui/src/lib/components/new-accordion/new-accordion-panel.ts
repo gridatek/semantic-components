@@ -1,5 +1,7 @@
 import { AccordionPanel } from '@angular/aria/accordion';
-import { Directive } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 @Directive({
   selector: '[scNewAccordionPanel]',
@@ -10,7 +12,13 @@ import { Directive } from '@angular/core';
     },
   ],
   host: {
-    class: 'overflow-hidden text-sm',
+    '[class]': 'class()',
   },
 })
-export class ScNewAccordionPanel {}
+export class ScNewAccordionPanel {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() => cn('overflow-hidden text-sm', this.classInput()));
+}
