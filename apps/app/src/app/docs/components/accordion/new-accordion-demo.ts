@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import {
+  ScNewAccordionAnimatedContent,
   ScNewAccordionContent,
   ScNewAccordionGroup,
   ScNewAccordionPanel,
@@ -11,6 +12,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-new-accordion-demo',
   imports: [
+    ScNewAccordionAnimatedContent,
     ScNewAccordionGroup,
     ScNewAccordionTrigger,
     ScNewAccordionPanel,
@@ -32,7 +34,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </h3>
         <div scNewAccordionPanel panelId="faq1">
           <ng-template scNewAccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            <div scNewAccordionAnimatedContent>Yes. It adheres to the WAI-ARIA design pattern.</div>
           </ng-template>
         </div>
       </div>
@@ -50,7 +52,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </h3>
         <div scNewAccordionPanel panelId="faq2">
           <ng-template scNewAccordionContent>
-            Yes. It supports arrow keys, Home, and End for navigation between accordion triggers.
+            <div scNewAccordionAnimatedContent>
+              Yes. It supports arrow keys, Home, and End for navigation between accordion triggers.
+            </div>
           </ng-template>
         </div>
       </div>
@@ -68,8 +72,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </h3>
         <div scNewAccordionPanel panelId="faq3">
           <ng-template scNewAccordionContent>
-            By default, yes. But this demo has multiExpandable set to false, so only one panel can
-            be open at a time.
+            <div scNewAccordionAnimatedContent>
+              By default, yes. But this demo has multiExpandable set to false, so only one panel can
+              be open at a time.
+            </div>
           </ng-template>
         </div>
       </div>
