@@ -1,5 +1,7 @@
 import { AccordionGroup } from '@angular/aria/accordion';
-import { Directive } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
+
+import { cn } from '@semantic-components/utils';
 
 @Directive({
   selector: '[scNewAccordionGroup]',
@@ -10,7 +12,15 @@ import { Directive } from '@angular/core';
     },
   ],
   host: {
-    class: 'w-full divide-y divide-border rounded-md border',
+    '[class]': 'class()',
   },
 })
-export class ScNewAccordionGroup {}
+export class ScNewAccordionGroup {
+  readonly classInput = input<string>('', {
+    alias: 'class',
+  });
+
+  protected readonly class = computed(() =>
+    cn('w-full divide-y divide-border rounded-md border', this.classInput()),
+  );
+}
