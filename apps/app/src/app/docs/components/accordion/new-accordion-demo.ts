@@ -27,7 +27,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <button [expanded]="true" scNewAccordionTrigger panelId="faq1">
             Is it accessible?
             <svg
-              class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+              class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 pointer-events-none"
               si-chevron-down-icon
             ></svg>
           </button>
@@ -45,7 +45,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <button scNewAccordionTrigger panelId="faq2">
             Does it support keyboard navigation?
             <svg
-              class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+              class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 pointer-events-none"
               si-chevron-down-icon
             ></svg>
           </button>
@@ -65,7 +65,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <button scNewAccordionTrigger panelId="faq3">
             Can multiple panels be open at once?
             <svg
-              class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200"
+              class="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 pointer-events-none"
               si-chevron-down-icon
             ></svg>
           </button>
