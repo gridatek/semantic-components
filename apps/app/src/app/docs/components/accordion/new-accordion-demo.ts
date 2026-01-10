@@ -34,11 +34,14 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             ></svg>
           </button>
         </h3>
-        <div ngAccordionPanel panelId="faq1">
+        <div
+          class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          [attr.data-state]="trigger1.expanded() ? 'open' : 'closed'"
+          ngAccordionPanel
+          panelId="faq1"
+        >
           <ng-template ngAccordionContent>
-            <div class="pb-4 pt-0 px-4 text-sm">
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </div>
+            <div class="pb-4 pt-0 px-4">Yes. It adheres to the WAI-ARIA design pattern.</div>
           </ng-template>
         </div>
       </div>
@@ -59,9 +62,14 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             ></svg>
           </button>
         </h3>
-        <div ngAccordionPanel panelId="faq2">
+        <div
+          class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          [attr.data-state]="trigger2.expanded() ? 'open' : 'closed'"
+          ngAccordionPanel
+          panelId="faq2"
+        >
           <ng-template ngAccordionContent>
-            <div class="pb-4 pt-0 px-4 text-sm">
+            <div class="pb-4 pt-0 px-4">
               Yes. It supports arrow keys, Home, and End for navigation between accordion triggers.
             </div>
           </ng-template>
@@ -84,9 +92,14 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             ></svg>
           </button>
         </h3>
-        <div ngAccordionPanel panelId="faq3">
+        <div
+          class="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+          [attr.data-state]="trigger3.expanded() ? 'open' : 'closed'"
+          ngAccordionPanel
+          panelId="faq3"
+        >
           <ng-template ngAccordionContent>
-            <div class="pb-4 pt-0 px-4 text-sm">
+            <div class="pb-4 pt-0 px-4">
               By default, yes. But this demo has multiExpandable set to false, so only one panel can
               be open at a time.
             </div>
