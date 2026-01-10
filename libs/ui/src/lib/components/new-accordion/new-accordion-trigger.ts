@@ -12,6 +12,7 @@ import { cn } from '@semantic-components/utils';
     },
   ],
   host: {
+    'data-slot': 'accordion-trigger',
     '[class]': 'class()',
   },
 })

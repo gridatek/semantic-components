@@ -5,6 +5,7 @@ import { cn } from '@semantic-components/utils';
 @Directive({
   selector: '[scNewAccordionAnimatedContent]',
   host: {
+    'data-slot': 'accordion-animated-content',
     '[class]': 'class()',
     'animate.enter': 'animate-accordion-down',
     'animate.leave': 'animate-accordion-up',
