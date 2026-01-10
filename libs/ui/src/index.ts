@@ -64,6 +64,7 @@ export * from './lib/components/range-slider';
 export * from './lib/components/dual-range-slider';
 export * from './lib/components/stepper';
 export * from './lib/components/tabs';
+export * from './lib/components/new-tabs';
 export * from './lib/components/layouts';
 export * from './lib/components/input-phone';
 export * from './lib/components/scrub-area';
