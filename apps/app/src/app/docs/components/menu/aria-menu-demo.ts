@@ -219,4 +219,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AriaMenuDemo {}
+export class AriaMenuDemo {
+  mainMenu = viewChild<Menu<string>>('mainMenu');
+  subMenu = viewChild<Menu<string>>('subMenu');
+}
