@@ -20,8 +20,9 @@ export class AriaMenuDemoSection {
 
   readonly level = input<'2' | '3'>('2');
 
-  protected readonly code = `import { Menu, MenuContent, MenuItem, MenuTrigger } from '@angular/aria/menu';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+  protected readonly code = `import { OverlayModule } from '@angular/cdk/overlay';
+import { Menu, MenuContent, MenuItem, MenuTrigger } from '@angular/aria/menu';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from '@angular/core';
 
 import { ScButton } from '@semantic-components/ui';
 import {
@@ -49,6 +50,7 @@ import {
     MenuItem,
     MenuTrigger,
     MenuContent,
+    OverlayModule,
     ScButton,
     SiUserIcon,
     SiCreditCardIcon,
@@ -67,14 +69,25 @@ import {
     SiChevronRightIcon,
   ],
   template: \`
-    <button ngMenuTrigger [menu]="myMenu" sc-button variant="outline">Open</button>
+    <button ngMenuTrigger #origin #trigger="ngMenuTrigger" [menu]="myMenu()" sc-button variant="outline">
+      Open
+    </button>
 
-    <div
-      class="z-50 min-w-48 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
-      ngMenu
-      #myMenu="ngMenu"
+    <ng-template
+      [cdkConnectedOverlayOpen]="trigger.expanded()"
+      [cdkConnectedOverlayOrigin]="origin"
+      cdkConnectedOverlayUsePopover="inline"
+      [cdkConnectedOverlayPositions]="[
+        { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 4 }
+      ]"
+      cdkAttachPopoverAsChild
     >
-      <ng-template ngMenuContent>
+      <div
+        class="z-50 min-w-48 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
+        #myMenu="ngMenu"
+        ngMenu
+      >
+        <ng-template ngMenuContent>
         <div class="px-2 py-1.5 text-sm font-semibold">My Account</div>
         <div class="-mx-1 my-1 h-px bg-muted"></div>
 
@@ -130,46 +143,57 @@ import {
           class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
           ngMenuItem
           [value]="'invite'"
-          [submenu]="subMenu"
+          [submenu]="subMenu()"
+          #inviteItem
         >
           <svg si-user-plus-icon></svg>
           <span>Invite users</span>
           <svg class="ml-auto" si-chevron-right-icon></svg>
         </button>
 
-        <div
-          class="z-50 min-w-48 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
-          ngMenu
-          #subMenu="ngMenu"
+        <ng-template
+          [cdkConnectedOverlayOpen]="myMenuRef().visible()"
+          [cdkConnectedOverlayOrigin]="inviteItem"
+          cdkConnectedOverlayUsePopover="inline"
+          [cdkConnectedOverlayPositions]="[
+            { originX: 'end', originY: 'top', overlayY: 'top', overlayX: 'start', offsetX: 6 }
+          ]"
+          cdkAttachPopoverAsChild
         >
-          <ng-template ngMenuContent>
-            <button
-              class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-              ngMenuItem
-              [value]="'email'"
-            >
-              <svg si-mail-icon></svg>
-              <span>Email</span>
-            </button>
-            <button
-              class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-              ngMenuItem
-              [value]="'message'"
-            >
-              <svg si-message-square-icon></svg>
-              <span>Message</span>
-            </button>
-            <div class="-mx-1 my-1 h-px bg-muted"></div>
-            <button
-              class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-              ngMenuItem
-              [value]="'more'"
-            >
-              <svg si-circle-plus-icon></svg>
-              <span>More...</span>
-            </button>
-          </ng-template>
-        </div>
+          <div
+            class="z-50 min-w-48 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
+            #subMenu="ngMenu"
+            ngMenu
+          >
+            <ng-template ngMenuContent>
+              <button
+                class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                [value]="'email'"
+                ngMenuItem
+              >
+                <svg si-mail-icon></svg>
+                <span>Email</span>
+              </button>
+              <button
+                class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                [value]="'message'"
+                ngMenuItem
+              >
+                <svg si-message-square-icon></svg>
+                <span>Message</span>
+              </button>
+              <div class="-mx-1 my-1 h-px bg-muted"></div>
+              <button
+                class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+                [value]="'more'"
+                ngMenuItem
+              >
+                <svg si-circle-plus-icon></svg>
+                <span>More...</span>
+              </button>
+            </ng-template>
+          </div>
+        </ng-template>
 
         <button
           class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
@@ -220,8 +244,9 @@ import {
           <span>Log out</span>
           <span class="ml-auto text-xs tracking-widest text-muted-foreground">⇧⌘Q</span>
         </button>
-      </ng-template>
-    </div>
+        </ng-template>
+      </div>
+    </ng-template>
   \`,
   host: {
     class: 'block',
@@ -229,5 +254,16 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AriaMenuDemo {}`;
+export class AriaMenuDemo {
+  readonly myMenuRef = viewChild<Menu<string>>('myMenu');
+  readonly subMenuRef = viewChild<Menu<string>>('subMenu');
+
+  myMenu() {
+    return this.myMenuRef();
+  }
+
+  subMenu() {
+    return this.subMenuRef();
+  }
+}`;
 }

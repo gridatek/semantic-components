@@ -1,7 +1,7 @@
 import { Menu, MenuContent, MenuItem, MenuTrigger } from '@angular/aria/menu';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from '@angular/core';
 
-import { ScButton } from '@semantic-components/ui';
 import {
   SiChevronRightIcon,
   SiCirclePlusIcon,
@@ -27,7 +27,7 @@ import {
     MenuItem,
     MenuTrigger,
     MenuContent,
-    ScButton,
+    OverlayModule,
     SiUserIcon,
     SiCreditCardIcon,
     SiSettingsIcon,
@@ -45,161 +45,173 @@ import {
     SiChevronRightIcon,
   ],
   template: `
-    <button [menu]="myMenu" ngMenuTrigger sc-button variant="outline">Open</button>
+    <button #trigger="ngMenuTrigger" #triggerBtn [menu]="formatMenuRef" ngMenuTrigger>
+      Open Menu
+    </button>
 
-    <div
-      class="z-50 min-w-48 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
-      #myMenu="ngMenu"
-      ngMenu
+    <ng-template
+      [cdkConnectedOverlayOrigin]="triggerBtn"
+      [cdkConnectedOverlayOpen]="trigger.expanded()"
+      cdkConnectedOverlay
     >
-      <ng-template ngMenuContent>
-        <div class="px-2 py-1.5 text-sm font-semibold">My Account</div>
-        <div class="-mx-1 my-1 h-px bg-muted"></div>
+      <div class="menu-container" #formatMenuRef="ngMenu" ngMenu>
+        <ng-template ngMenuContent>
+          <button [value]="'profile'" ngMenuItem>
+            <svg si-user-icon></svg>
+            <span>Profile</span>
+            <span>⇧⌘P</span>
+          </button>
+          <button [value]="'billing'" ngMenuItem>
+            <svg si-credit-card-icon></svg>
+            <span>Billing</span>
+            <span>⌘B</span>
+          </button>
+          <button [value]="'settings'" ngMenuItem>
+            <svg si-settings-icon></svg>
+            <span>Settings</span>
+            <span>⌘S</span>
+          </button>
+          <button [value]="'keyboard'" ngMenuItem>
+            <svg si-keyboard-icon></svg>
+            <span>Keyboard shortcuts</span>
+            <span>⌘K</span>
+          </button>
 
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'profile'"
-          ngMenuItem
-        >
-          <svg si-user-icon></svg>
-          <span>Profile</span>
-          <span class="ml-auto text-xs tracking-widest text-muted-foreground">⇧⌘P</span>
-        </button>
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'billing'"
-          ngMenuItem
-        >
-          <svg si-credit-card-icon></svg>
-          <span>Billing</span>
-          <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘B</span>
-        </button>
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'settings'"
-          ngMenuItem
-        >
-          <svg si-settings-icon></svg>
-          <span>Settings</span>
-          <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘S</span>
-        </button>
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'keyboard'"
-          ngMenuItem
-        >
-          <svg si-keyboard-icon></svg>
-          <span>Keyboard shortcuts</span>
-          <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘K</span>
-        </button>
+          <hr />
 
-        <div class="-mx-1 my-1 h-px bg-muted"></div>
+          <button [value]="'team'" ngMenuItem>
+            <svg si-users-icon></svg>
+            <span>Team</span>
+          </button>
 
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'team'"
-          ngMenuItem
-        >
-          <svg si-users-icon></svg>
-          <span>Team</span>
-        </button>
+          <button #inviteItem="ngMenuItem" [value]="'invite'" [submenu]="inviteMenuRef" ngMenuItem>
+            <svg si-user-plus-icon></svg>
+            <span>Invite users</span>
+            <svg si-chevron-right-icon></svg>
+          </button>
 
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'invite'"
-          [submenu]="subMenu"
-          ngMenuItem
-        >
-          <svg si-user-plus-icon></svg>
-          <span>Invite users</span>
-          <svg class="ml-auto" si-chevron-right-icon></svg>
-        </button>
+          <div class="menu-container" #inviteMenuRef="ngMenu" ngMenu style="position: absolute;">
+            <ng-template ngMenuContent>
+              <button [value]="'email'" ngMenuItem>
+                <svg si-mail-icon></svg>
+                <span>Email</span>
+              </button>
+              <button [value]="'message'" ngMenuItem>
+                <svg si-message-square-icon></svg>
+                <span>Message</span>
+              </button>
+              <hr />
+              <button [value]="'more'" ngMenuItem>
+                <svg si-circle-plus-icon></svg>
+                <span>More...</span>
+              </button>
+            </ng-template>
+          </div>
 
-        <div
-          class="z-50 min-w-48 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
-          #subMenu="ngMenu"
-          ngMenu
-        >
-          <ng-template ngMenuContent>
-            <button
-              class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-              [value]="'email'"
-              ngMenuItem
-            >
-              <svg si-mail-icon></svg>
-              <span>Email</span>
-            </button>
-            <button
-              class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-              [value]="'message'"
-              ngMenuItem
-            >
-              <svg si-message-square-icon></svg>
-              <span>Message</span>
-            </button>
-            <div class="-mx-1 my-1 h-px bg-muted"></div>
-            <button
-              class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-              [value]="'more'"
-              ngMenuItem
-            >
-              <svg si-circle-plus-icon></svg>
-              <span>More...</span>
-            </button>
-          </ng-template>
-        </div>
+          <button [value]="'newteam'" ngMenuItem>
+            <svg si-plus-icon></svg>
+            <span>New Team</span>
+            <span>⌘+T</span>
+          </button>
 
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'newteam'"
-          ngMenuItem
-        >
-          <svg si-plus-icon></svg>
-          <span>New Team</span>
-          <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘+T</span>
-        </button>
+          <hr />
 
-        <div class="-mx-1 my-1 h-px bg-muted"></div>
+          <button [value]="'github'" ngMenuItem>
+            <svg si-github-icon></svg>
+            <span>GitHub</span>
+          </button>
+          <button [value]="'support'" ngMenuItem>
+            <svg si-life-buoy-icon></svg>
+            <span>Support</span>
+          </button>
+          <button [value]="'api'" [disabled]="true" ngMenuItem>
+            <svg si-cloud-icon></svg>
+            <span>API</span>
+          </button>
 
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'github'"
-          ngMenuItem
-        >
-          <svg si-github-icon></svg>
-          <span>GitHub</span>
-        </button>
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'support'"
-          ngMenuItem
-        >
-          <svg si-life-buoy-icon></svg>
-          <span>Support</span>
-        </button>
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'api'"
-          [disabled]="true"
-          ngMenuItem
-        >
-          <svg si-cloud-icon></svg>
-          <span>API</span>
-        </button>
+          <hr />
 
-        <div class="-mx-1 my-1 h-px bg-muted"></div>
+          <button [value]="'logout'" ngMenuItem>
+            <svg si-log-out-icon></svg>
+            <span>Log out</span>
+            <span>⇧⌘Q</span>
+          </button>
+        </ng-template>
+      </div>
+    </ng-template>
+  `,
+  styles: `
+    .menu-container {
+      min-width: 12rem;
+      overflow: hidden;
+      border-radius: 0.375rem;
+      border: 1px solid hsl(var(--border));
+      background-color: hsl(var(--popover));
+      padding: 0.25rem;
+      color: hsl(var(--popover-foreground));
+      box-shadow:
+        0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1);
+      z-index: 50;
+    }
 
-        <button
-          class="relative flex w-full cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-          [value]="'logout'"
-          ngMenuItem
-        >
-          <svg si-log-out-icon></svg>
-          <span>Log out</span>
-          <span class="ml-auto text-xs tracking-widest text-muted-foreground">⇧⌘Q</span>
-        </button>
-      </ng-template>
-    </div>
+    .menu-container button {
+      position: relative;
+      display: flex;
+      width: 100%;
+      cursor: pointer;
+      user-select: none;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 0.125rem;
+      padding: 0.375rem 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      outline: none;
+      transition-property: color, background-color;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+      background: transparent;
+      border: none;
+      text-align: left;
+    }
+
+    .menu-container button:hover {
+      background-color: hsl(var(--accent));
+      color: hsl(var(--accent-foreground));
+    }
+
+    .menu-container button:focus {
+      background-color: hsl(var(--accent));
+      color: hsl(var(--accent-foreground));
+    }
+
+    .menu-container button[disabled] {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .menu-container button svg {
+      pointer-events: none;
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+    }
+
+    .menu-container button span:last-child {
+      margin-left: auto;
+      font-size: 0.75rem;
+      line-height: 1rem;
+      letter-spacing: 0.05em;
+      color: hsl(var(--muted-foreground));
+    }
+
+    .menu-container hr {
+      margin: 0.25rem -0.25rem;
+      height: 1px;
+      border: none;
+      background-color: hsl(var(--muted));
+    }
   `,
   host: {
     class: 'block',
