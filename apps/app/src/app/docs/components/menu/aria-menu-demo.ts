@@ -187,7 +187,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
       </div>
     </ng-template>
   `,
-  styles: ``,
+  styles: `
+    [ngMenu][data-visible='false'] {
+      display: none;
+    }
+  `,
   host: {
     class: 'flex justify-center',
   },
