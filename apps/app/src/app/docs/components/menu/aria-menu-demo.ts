@@ -1,6 +1,13 @@
 import { Menu, MenuContent, MenuItem, MenuTrigger } from '@angular/aria/menu';
-import { OverlayModule } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from '@angular/core';
+import { ConnectedOverlayPositionChange, OverlayModule } from '@angular/cdk/overlay';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  signal,
+  viewChild,
+} from '@angular/core';
 
 import {
   SiArchiveIcon,
@@ -49,14 +56,15 @@ import {
         { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetY: 4 },
         { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetY: -4 },
       ]"
+      (positionChange)="onMainMenuPositionChange($event)"
       cdkAttachPopoverAsChild
     >
       <div
         class="z-50 min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
         #formatMenu="ngMenu"
+        [animate.enter]="mainMenuEnterAnimation()"
+        [animate.leave]="mainMenuLeaveAnimation()"
         ngMenu
-        animate.enter="animate-in fade-in-0 zoom-in-95 slide-in-from-top-2"
-        animate.leave="animate-out fade-out-0 zoom-out-95 slide-out-to-top-2"
       >
         <ng-template ngMenuContent>
           <div
@@ -112,14 +120,15 @@ import {
                 offsetX: -6,
               },
             ]"
+            (positionChange)="onSubMenuPositionChange($event)"
             cdkAttachPopoverAsChild
           >
             <div
               class="z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg"
               #categorizeMenu="ngMenu"
+              [animate.enter]="subMenuEnterAnimation()"
+              [animate.leave]="subMenuLeaveAnimation()"
               ngMenu
-              animate.enter="animate-in fade-in-0 zoom-in-95 slide-in-from-left-2"
-              animate.leave="animate-out fade-out-0 zoom-out-95 slide-out-to-left-2"
             >
               <ng-template ngMenuContent>
                 <div
@@ -196,4 +205,50 @@ import {
 export class AriaMenuDemo {
   formatMenu = viewChild<Menu<string>>('formatMenu');
   categorizeMenu = viewChild<Menu<string>>('categorizeMenu');
+
+  // Track position for main menu (vertical: top/bottom)
+  private mainMenuPosition = signal<'top' | 'bottom'>('bottom');
+
+  // Track position for submenu (horizontal: left/right)
+  private subMenuPosition = signal<'left' | 'right'>('right');
+
+  // Dynamic animations for main menu based on position
+  mainMenuEnterAnimation = computed(() => {
+    const position = this.mainMenuPosition();
+    const slideDirection = position === 'bottom' ? 'slide-in-from-top-2' : 'slide-in-from-bottom-2';
+    return `animate-in fade-in-0 zoom-in-95 ${slideDirection}`;
+  });
+
+  mainMenuLeaveAnimation = computed(() => {
+    const position = this.mainMenuPosition();
+    const slideDirection = position === 'bottom' ? 'slide-out-to-top-2' : 'slide-out-to-bottom-2';
+    return `animate-out fade-out-0 zoom-out-95 ${slideDirection}`;
+  });
+
+  // Dynamic animations for submenu based on position
+  subMenuEnterAnimation = computed(() => {
+    const position = this.subMenuPosition();
+    const slideDirection = position === 'right' ? 'slide-in-from-left-2' : 'slide-in-from-right-2';
+    return `animate-in fade-in-0 zoom-in-95 ${slideDirection}`;
+  });
+
+  subMenuLeaveAnimation = computed(() => {
+    const position = this.subMenuPosition();
+    const slideDirection = position === 'right' ? 'slide-out-to-left-2' : 'slide-out-to-right-2';
+    return `animate-out fade-out-0 zoom-out-95 ${slideDirection}`;
+  });
+
+  onMainMenuPositionChange(event: ConnectedOverlayPositionChange): void {
+    // overlayY === 'top' means overlay is below the trigger (opening downward)
+    // overlayY === 'bottom' means overlay is above the trigger (opening upward)
+    const position = event.connectionPair.overlayY === 'top' ? 'bottom' : 'top';
+    this.mainMenuPosition.set(position);
+  }
+
+  onSubMenuPositionChange(event: ConnectedOverlayPositionChange): void {
+    // overlayX === 'start' means overlay is to the right of the trigger
+    // overlayX === 'end' means overlay is to the left of the trigger
+    const position = event.connectionPair.overlayX === 'start' ? 'right' : 'left';
+    this.subMenuPosition.set(position);
+  }
 }
