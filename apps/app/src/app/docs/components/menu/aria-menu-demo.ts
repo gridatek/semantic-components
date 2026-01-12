@@ -45,6 +45,9 @@ import {
       [cdkConnectedOverlay]="{ origin, usePopover: 'inline' }"
       [cdkConnectedOverlayPositions]="[
         { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 4 },
+        { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -4 },
+        { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top', offsetY: 4 },
+        { originX: 'end', originY: 'top', overlayX: 'end', overlayY: 'bottom', offsetY: -4 },
       ]"
       cdkAttachPopoverAsChild
     >
@@ -92,7 +95,22 @@ import {
             [cdkConnectedOverlayOpen]="formatMenu.visible()"
             [cdkConnectedOverlay]="{ origin: categorizeItem, usePopover: 'inline' }"
             [cdkConnectedOverlayPositions]="[
-              { originX: 'end', originY: 'top', overlayY: 'top', overlayX: 'start', offsetX: 6 },
+              { originX: 'end', originY: 'top', overlayX: 'start', overlayY: 'top', offsetX: 6 },
+              { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top', offsetX: -6 },
+              {
+                originX: 'end',
+                originY: 'bottom',
+                overlayX: 'start',
+                overlayY: 'bottom',
+                offsetX: 6,
+              },
+              {
+                originX: 'start',
+                originY: 'bottom',
+                overlayX: 'end',
+                overlayY: 'bottom',
+                offsetX: -6,
+              },
             ]"
             cdkAttachPopoverAsChild
           >
