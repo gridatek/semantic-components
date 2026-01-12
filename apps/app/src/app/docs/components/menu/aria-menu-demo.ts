@@ -32,7 +32,7 @@ import {
   ],
   template: `
     <button
-      class="flex cursor-pointer items-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
       #origin
       #trigger="ngMenuTrigger"
       [menu]="formatMenu()"
@@ -49,42 +49,42 @@ import {
       cdkAttachPopoverAsChild
     >
       <div
-        class="w-56 rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md"
+        class="z-50 min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
         #formatMenu="ngMenu"
         ngMenu
       >
         <ng-template ngMenuContent>
           <div
-            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             ngMenuItem
             value="Mark as read"
           >
-            <svg class="size-4 text-muted-foreground" si-mail-check-icon aria-hidden="true"></svg>
+            <svg si-mail-check-icon aria-hidden="true"></svg>
             <span class="flex-1">Mark as read</span>
           </div>
           <div
-            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             ngMenuItem
             value="Snooze"
           >
-            <svg class="size-4 text-muted-foreground" si-clock-icon aria-hidden="true"></svg>
+            <svg si-clock-icon aria-hidden="true"></svg>
             <span class="flex-1">Snooze</span>
           </div>
-          <div class="my-1 h-px bg-border" role="separator" aria-orientation="horizontal"></div>
           <div
-            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            class="-mx-1 my-1 h-px bg-border"
+            role="separator"
+            aria-orientation="horizontal"
+          ></div>
+          <div
+            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             #categorizeItem
             [submenu]="categorizeMenu()"
             ngMenuItem
             value="Categorize"
           >
-            <svg class="size-4 text-muted-foreground" si-tag-icon aria-hidden="true"></svg>
+            <svg si-tag-icon aria-hidden="true"></svg>
             <span class="flex-1">Categorize</span>
-            <svg
-              class="size-4 text-muted-foreground"
-              si-chevron-right-icon
-              aria-hidden="true"
-            ></svg>
+            <svg class="ml-auto" si-chevron-right-icon aria-hidden="true"></svg>
           </div>
           <ng-template
             [cdkConnectedOverlayOpen]="formatMenu.visible()"
@@ -95,61 +95,65 @@ import {
             cdkAttachPopoverAsChild
           >
             <div
-              class="w-56 rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md"
+              class="z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg"
               #categorizeMenu="ngMenu"
               ngMenu
             >
               <ng-template ngMenuContent>
                 <div
-                  class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+                  class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
                   ngMenuItem
                   value="Mark as important"
                 >
-                  <svg class="size-4 text-muted-foreground" si-star-icon aria-hidden="true"></svg>
+                  <svg si-star-icon aria-hidden="true"></svg>
                   <span class="flex-1">Mark as important</span>
                 </div>
                 <div
-                  class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+                  class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
                   ngMenuItem
                   value="Star"
                 >
-                  <svg class="size-4 text-muted-foreground" si-star-icon aria-hidden="true"></svg>
+                  <svg si-star-icon aria-hidden="true"></svg>
                   <span class="flex-1">Star</span>
                 </div>
                 <div
-                  class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+                  class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
                   ngMenuItem
                   value="Label"
                 >
-                  <svg class="size-4 text-muted-foreground" si-tag-icon aria-hidden="true"></svg>
+                  <svg si-tag-icon aria-hidden="true"></svg>
                   <span class="flex-1">Label</span>
                 </div>
               </ng-template>
             </div>
           </ng-template>
-          <div class="my-1 h-px bg-border" role="separator" aria-orientation="horizontal"></div>
           <div
-            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            class="-mx-1 my-1 h-px bg-border"
+            role="separator"
+            aria-orientation="horizontal"
+          ></div>
+          <div
+            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             ngMenuItem
             value="Archive"
           >
-            <svg class="size-4 text-muted-foreground" si-archive-icon aria-hidden="true"></svg>
+            <svg si-archive-icon aria-hidden="true"></svg>
             <span class="flex-1">Archive</span>
           </div>
           <div
-            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             ngMenuItem
             value="Report spam"
           >
-            <svg class="size-4 text-muted-foreground" si-flag-icon aria-hidden="true"></svg>
+            <svg si-flag-icon aria-hidden="true"></svg>
             <span class="flex-1">Report spam</span>
           </div>
           <div
-            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             ngMenuItem
             value="Delete"
           >
-            <svg class="size-4 text-muted-foreground" si-trash-2-icon aria-hidden="true"></svg>
+            <svg si-trash-2-icon aria-hidden="true"></svg>
             <span class="flex-1">Delete</span>
           </div>
         </ng-template>
