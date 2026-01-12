@@ -2,9 +2,34 @@ import { Menu, MenuContent, MenuItem, MenuTrigger } from '@angular/aria/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from '@angular/core';
 
+import {
+  SiArchiveIcon,
+  SiChevronRightIcon,
+  SiClockIcon,
+  SiFlagIcon,
+  SiMailCheckIcon,
+  SiStarIcon,
+  SiTagIcon,
+  SiTrash2Icon,
+} from '@semantic-icons/lucide-icons';
+
 @Component({
   selector: 'app-aria-menu-demo',
-  imports: [Menu, MenuContent, MenuItem, MenuTrigger, OverlayModule],
+  imports: [
+    Menu,
+    MenuContent,
+    MenuItem,
+    MenuTrigger,
+    OverlayModule,
+    SiArchiveIcon,
+    SiChevronRightIcon,
+    SiClockIcon,
+    SiFlagIcon,
+    SiMailCheckIcon,
+    SiStarIcon,
+    SiTagIcon,
+    SiTrash2Icon,
+  ],
   template: `
     <button
       class="flex cursor-pointer items-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -34,13 +59,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
             ngMenuItem
             value="Mark as read"
           >
-            <span
-              class="material-symbols-outlined text-base text-muted-foreground"
-              translate="no"
-              aria-hidden="true"
-            >
-              mark_email_read
-            </span>
+            <svg class="size-4 text-muted-foreground" si-mail-check-icon aria-hidden="true"></svg>
             <span class="flex-1">Mark as read</span>
           </div>
           <div
@@ -48,13 +67,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
             ngMenuItem
             value="Snooze"
           >
-            <span
-              class="material-symbols-outlined text-base text-muted-foreground"
-              translate="no"
-              aria-hidden="true"
-            >
-              snooze
-            </span>
+            <svg class="size-4 text-muted-foreground" si-clock-icon aria-hidden="true"></svg>
             <span class="flex-1">Snooze</span>
           </div>
           <div class="my-1 h-px bg-border" role="separator" aria-orientation="horizontal"></div>
@@ -65,21 +78,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
             ngMenuItem
             value="Categorize"
           >
-            <span
-              class="material-symbols-outlined text-base text-muted-foreground"
-              translate="no"
-              aria-hidden="true"
-            >
-              category
-            </span>
+            <svg class="size-4 text-muted-foreground" si-tag-icon aria-hidden="true"></svg>
             <span class="flex-1">Categorize</span>
-            <span
-              class="material-symbols-outlined text-base text-muted-foreground"
-              translate="no"
+            <svg
+              class="size-4 text-muted-foreground"
+              si-chevron-right-icon
               aria-hidden="true"
-            >
-              arrow_right
-            </span>
+            ></svg>
           </div>
           <ng-template
             [cdkConnectedOverlayOpen]="formatMenu.visible()"
@@ -100,13 +105,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
                   ngMenuItem
                   value="Mark as important"
                 >
-                  <span
-                    class="material-symbols-outlined text-base text-muted-foreground"
-                    translate="no"
-                    aria-hidden="true"
-                  >
-                    label_important
-                  </span>
+                  <svg class="size-4 text-muted-foreground" si-star-icon aria-hidden="true"></svg>
                   <span class="flex-1">Mark as important</span>
                 </div>
                 <div
@@ -114,13 +113,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
                   ngMenuItem
                   value="Star"
                 >
-                  <span
-                    class="material-symbols-outlined text-base text-muted-foreground"
-                    translate="no"
-                    aria-hidden="true"
-                  >
-                    star
-                  </span>
+                  <svg class="size-4 text-muted-foreground" si-star-icon aria-hidden="true"></svg>
                   <span class="flex-1">Star</span>
                 </div>
                 <div
@@ -128,13 +121,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
                   ngMenuItem
                   value="Label"
                 >
-                  <span
-                    class="material-symbols-outlined text-base text-muted-foreground"
-                    translate="no"
-                    aria-hidden="true"
-                  >
-                    label
-                  </span>
+                  <svg class="size-4 text-muted-foreground" si-tag-icon aria-hidden="true"></svg>
                   <span class="flex-1">Label</span>
                 </div>
               </ng-template>
@@ -146,13 +133,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
             ngMenuItem
             value="Archive"
           >
-            <span
-              class="material-symbols-outlined text-base text-muted-foreground"
-              translate="no"
-              aria-hidden="true"
-            >
-              archive
-            </span>
+            <svg class="size-4 text-muted-foreground" si-archive-icon aria-hidden="true"></svg>
             <span class="flex-1">Archive</span>
           </div>
           <div
@@ -160,13 +141,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
             ngMenuItem
             value="Report spam"
           >
-            <span
-              class="material-symbols-outlined text-base text-muted-foreground"
-              translate="no"
-              aria-hidden="true"
-            >
-              report
-            </span>
+            <svg class="size-4 text-muted-foreground" si-flag-icon aria-hidden="true"></svg>
             <span class="flex-1">Report spam</span>
           </div>
           <div
@@ -174,13 +149,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
             ngMenuItem
             value="Delete"
           >
-            <span
-              class="material-symbols-outlined text-base text-muted-foreground"
-              translate="no"
-              aria-hidden="true"
-            >
-              delete
-            </span>
+            <svg class="size-4 text-muted-foreground" si-trash-2-icon aria-hidden="true"></svg>
             <span class="flex-1">Delete</span>
           </div>
         </ng-template>
