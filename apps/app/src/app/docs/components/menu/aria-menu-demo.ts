@@ -6,7 +6,15 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
   selector: 'app-aria-menu-demo',
   imports: [Menu, MenuContent, MenuItem, MenuTrigger, OverlayModule],
   template: `
-    <button #origin #trigger="ngMenuTrigger" [menu]="formatMenu()" ngMenuTrigger>Open Menu</button>
+    <button
+      class="flex cursor-pointer items-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      #origin
+      #trigger="ngMenuTrigger"
+      [menu]="formatMenu()"
+      ngMenuTrigger
+    >
+      Open Menu
+    </button>
     <ng-template
       [cdkConnectedOverlayOpen]="trigger.expanded()"
       [cdkConnectedOverlay]="{ origin, usePopover: 'inline' }"
@@ -15,33 +23,61 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
       ]"
       cdkAttachPopoverAsChild
     >
-      <div class="menu" #formatMenu="ngMenu" ngMenu>
+      <div
+        class="w-56 rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md"
+        #formatMenu="ngMenu"
+        ngMenu
+      >
         <ng-template ngMenuContent>
-          <div ngMenuItem value="Mark as read">
-            <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+          <div
+            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            ngMenuItem
+            value="Mark as read"
+          >
+            <span
+              class="material-symbols-outlined text-base text-muted-foreground"
+              translate="no"
+              aria-hidden="true"
+            >
               mark_email_read
             </span>
-            <span class="label">Mark as read</span>
+            <span class="flex-1">Mark as read</span>
           </div>
-          <div ngMenuItem value="Snooze">
-            <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+          <div
+            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            ngMenuItem
+            value="Snooze"
+          >
+            <span
+              class="material-symbols-outlined text-base text-muted-foreground"
+              translate="no"
+              aria-hidden="true"
+            >
               snooze
             </span>
-            <span class="label">Snooze</span>
+            <span class="flex-1">Snooze</span>
           </div>
-          <div class="separator" role="separator" aria-orientation="horizontal"></div>
+          <div class="my-1 h-px bg-border" role="separator" aria-orientation="horizontal"></div>
           <div
-            class="menu-item"
+            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
             #categorizeItem
             [submenu]="categorizeMenu()"
             ngMenuItem
             value="Categorize"
           >
-            <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+            <span
+              class="material-symbols-outlined text-base text-muted-foreground"
+              translate="no"
+              aria-hidden="true"
+            >
               category
             </span>
-            <span class="label">Categorize</span>
-            <span class="icon material-symbols-outlined arrow" translate="no" aria-hidden="true">
+            <span class="flex-1">Categorize</span>
+            <span
+              class="material-symbols-outlined text-base text-muted-foreground"
+              translate="no"
+              aria-hidden="true"
+            >
               arrow_right
             </span>
           </div>
@@ -53,123 +89,107 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, viewChild } from
             ]"
             cdkAttachPopoverAsChild
           >
-            <div class="menu" #categorizeMenu="ngMenu" ngMenu>
+            <div
+              class="w-56 rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md"
+              #categorizeMenu="ngMenu"
+              ngMenu
+            >
               <ng-template ngMenuContent>
-                <div ngMenuItem value="Mark as important">
-                  <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+                <div
+                  class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+                  ngMenuItem
+                  value="Mark as important"
+                >
+                  <span
+                    class="material-symbols-outlined text-base text-muted-foreground"
+                    translate="no"
+                    aria-hidden="true"
+                  >
                     label_important
                   </span>
-                  <span class="label">Mark as important</span>
+                  <span class="flex-1">Mark as important</span>
                 </div>
-                <div ngMenuItem value="Star">
-                  <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+                <div
+                  class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+                  ngMenuItem
+                  value="Star"
+                >
+                  <span
+                    class="material-symbols-outlined text-base text-muted-foreground"
+                    translate="no"
+                    aria-hidden="true"
+                  >
                     star
                   </span>
-                  <span class="label">Star</span>
+                  <span class="flex-1">Star</span>
                 </div>
-                <div ngMenuItem value="Label">
-                  <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+                <div
+                  class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+                  ngMenuItem
+                  value="Label"
+                >
+                  <span
+                    class="material-symbols-outlined text-base text-muted-foreground"
+                    translate="no"
+                    aria-hidden="true"
+                  >
                     label
                   </span>
-                  <span class="label">Label</span>
+                  <span class="flex-1">Label</span>
                 </div>
               </ng-template>
             </div>
           </ng-template>
-          <div class="separator" role="separator" aria-orientation="horizontal"></div>
-          <div ngMenuItem value="Archive">
-            <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+          <div class="my-1 h-px bg-border" role="separator" aria-orientation="horizontal"></div>
+          <div
+            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            ngMenuItem
+            value="Archive"
+          >
+            <span
+              class="material-symbols-outlined text-base text-muted-foreground"
+              translate="no"
+              aria-hidden="true"
+            >
               archive
             </span>
-            <span class="label">Archive</span>
+            <span class="flex-1">Archive</span>
           </div>
-          <div ngMenuItem value="Report spam">
-            <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+          <div
+            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            ngMenuItem
+            value="Report spam"
+          >
+            <span
+              class="material-symbols-outlined text-base text-muted-foreground"
+              translate="no"
+              aria-hidden="true"
+            >
               report
             </span>
-            <span class="label">Report spam</span>
+            <span class="flex-1">Report spam</span>
           </div>
-          <div ngMenuItem value="Delete">
-            <span class="icon material-symbols-outlined" translate="no" aria-hidden="true">
+          <div
+            class="group relative flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[active='true']:bg-accent data-[active='true']:text-accent-foreground"
+            ngMenuItem
+            value="Delete"
+          >
+            <span
+              class="material-symbols-outlined text-base text-muted-foreground"
+              translate="no"
+              aria-hidden="true"
+            >
               delete
             </span>
-            <span class="label">Delete</span>
+            <span class="flex-1">Delete</span>
           </div>
         </ng-template>
       </div>
     </ng-template>
   `,
-  styles: `
-    @import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
-    :host {
-      display: flex;
-      justify-content: center;
-      font-family: var(--inter-font);
-      --border-color: color-mix(in srgb, var(--full-contrast) 20%, var(--page-background));
-    }
-    [ngMenuTrigger] {
-      display: flex;
-      cursor: pointer;
-      align-items: center;
-      padding: 0.6rem 2rem;
-      border-radius: 0.5rem;
-      color: var(--primary-contrast);
-      border: 1px solid var(--border-color);
-      background-color: var(--page-background);
-    }
-    [ngMenuTrigger] .icon {
-      font-size: 1.5rem;
-      opacity: 0.875;
-    }
-    [ngMenu] {
-      margin: 0;
-      width: 15rem;
-      padding: 0.25rem;
-      border-radius: 0.5rem;
-      border: 1px solid var(--border-color);
-      background-color: var(--page-background);
-    }
-    [ngMenu][data-visible='false'] {
-      display: none;
-    }
-    [ngMenuItem] {
-      outline: none;
-      display: flex;
-      cursor: pointer;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem;
-      font-size: 0.875rem;
-      border-radius: 0.25rem;
-    }
-    [ngMenuTrigger]:hover,
-    [ngMenuItem][data-active='true'] {
-      background: color-mix(in srgb, var(--border-color) 10%, transparent);
-    }
-    [ngMenuItem]:focus,
-    [ngMenuTrigger]:focus {
-      outline: 2px solid var(--vivid-pink);
-    }
-    [ngMenuItem] .icon {
-      opacity: 0.875;
-      font-size: 1.25rem;
-    }
-    [ngMenuItem] .label {
-      flex: 1;
-      opacity: 0.875;
-      font-size: 0.875rem;
-    }
-    [ngMenuItem]:not([aria-expanded='true']) .arrow {
-      opacity: 0.5;
-    }
-    [ngMenu] .separator {
-      border-top: 1px solid var(--border-color);
-      margin: 0.25rem 0;
-      opacity: 0.25;
-    }
-  `,
+  styles: ``,
   host: {
-    class: 'block',
+    class: 'flex justify-center',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
