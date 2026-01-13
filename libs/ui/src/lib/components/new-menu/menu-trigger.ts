@@ -2,8 +2,7 @@ import { MenuTrigger } from '@angular/aria/menu';
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[scMenuTrigger]',
-  exportAs: 'scMenuTrigger',
+  selector: '[scAriaMenuTrigger]',
   hostDirectives: [
     {
       directive: MenuTrigger,
@@ -11,7 +10,7 @@ import { Directive } from '@angular/core';
     },
   ],
   host: {
-    'data-slot': 'menu-trigger',
+    'data-slot': 'aria-menu-trigger',
   },
 })
-export class ScMenuTrigger {}
+export class ScAriaMenuTrigger {}

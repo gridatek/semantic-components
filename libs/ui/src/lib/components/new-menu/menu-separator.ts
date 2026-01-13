@@ -3,16 +3,16 @@ import { Component, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'sc-menu-separator',
+  selector: 'sc-aria-menu-separator',
   template: '',
   host: {
-    'data-slot': 'menu-separator',
+    'data-slot': 'aria-menu-separator',
     role: 'separator',
     'aria-orientation': 'horizontal',
     '[class]': 'class()',
   },
 })
-export class ScMenuSeparator {
+export class ScAriaMenuSeparator {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

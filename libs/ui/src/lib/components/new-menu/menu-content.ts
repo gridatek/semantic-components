@@ -2,10 +2,10 @@ import { MenuContent } from '@angular/aria/menu';
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[scMenuContent]',
+  selector: '[scAriaMenuContent]',
   hostDirectives: [MenuContent],
   host: {
-    'data-slot': 'menu-content',
+    'data-slot': 'aria-menu-content',
   },
 })
-export class ScMenuContent {}
+export class ScAriaMenuContent {}

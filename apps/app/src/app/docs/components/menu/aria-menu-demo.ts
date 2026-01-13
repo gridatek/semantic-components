@@ -1,4 +1,4 @@
-import { Menu, MenuContent, MenuItem, MenuTrigger } from '@angular/aria/menu';
+import { Menu } from '@angular/aria/menu';
 import { ConnectedOverlayPositionChange, OverlayModule } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
@@ -9,6 +9,13 @@ import {
   viewChild,
 } from '@angular/core';
 
+import {
+  ScAriaMenu,
+  ScAriaMenuContent,
+  ScAriaMenuItem,
+  ScAriaMenuSeparator,
+  ScAriaMenuTrigger,
+} from '@semantic-components/ui';
 import {
   SiArchiveIcon,
   SiChevronRightIcon,
@@ -23,10 +30,11 @@ import {
 @Component({
   selector: 'app-aria-menu-demo',
   imports: [
-    Menu,
-    MenuContent,
-    MenuItem,
-    MenuTrigger,
+    ScAriaMenu,
+    ScAriaMenuContent,
+    ScAriaMenuItem,
+    ScAriaMenuSeparator,
+    ScAriaMenuTrigger,
     OverlayModule,
     SiArchiveIcon,
     SiChevronRightIcon,
@@ -43,7 +51,7 @@ import {
       #origin
       #trigger="ngMenuTrigger"
       [menu]="formatMenu()"
-      ngMenuTrigger
+      scAriaMenuTrigger
     >
       Open Menu
     </button>
@@ -60,41 +68,22 @@ import {
       cdkAttachPopoverAsChild
     >
       <div
-        class="z-50 min-w-[8rem] overflow-x-hidden overflow-y-auto rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
         #formatMenu="ngMenu"
         [animate.enter]="mainMenuEnterAnimation()"
         [animate.leave]="mainMenuLeaveAnimation()"
-        ngMenu
+        scAriaMenu
       >
-        <ng-template ngMenuContent>
-          <div
-            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-            ngMenuItem
-            value="Mark as read"
-          >
+        <ng-template scAriaMenuContent>
+          <div scAriaMenuItem value="Mark as read">
             <svg si-mail-check-icon aria-hidden="true"></svg>
             <span class="flex-1">Mark as read</span>
           </div>
-          <div
-            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-            ngMenuItem
-            value="Snooze"
-          >
+          <div scAriaMenuItem value="Snooze">
             <svg si-clock-icon aria-hidden="true"></svg>
             <span class="flex-1">Snooze</span>
           </div>
-          <div
-            class="-mx-1 my-1 h-px bg-border"
-            role="separator"
-            aria-orientation="horizontal"
-          ></div>
-          <div
-            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-            #categorizeItem
-            [submenu]="categorizeMenu()"
-            ngMenuItem
-            value="Categorize"
-          >
+          <sc-aria-menu-separator />
+          <div #categorizeItem [submenu]="categorizeMenu()" scAriaMenuItem value="Categorize">
             <svg si-tag-icon aria-hidden="true"></svg>
             <span class="flex-1">Categorize</span>
             <svg class="ml-auto" si-chevron-right-icon aria-hidden="true"></svg>
@@ -124,66 +113,37 @@ import {
             cdkAttachPopoverAsChild
           >
             <div
-              class="z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg"
               #categorizeMenu="ngMenu"
               [animate.enter]="subMenuEnterAnimation()"
               [animate.leave]="subMenuLeaveAnimation()"
-              ngMenu
+              scAriaMenu
             >
-              <ng-template ngMenuContent>
-                <div
-                  class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-                  ngMenuItem
-                  value="Mark as important"
-                >
+              <ng-template scAriaMenuContent>
+                <div scAriaMenuItem value="Mark as important">
                   <svg si-star-icon aria-hidden="true"></svg>
                   <span class="flex-1">Mark as important</span>
                 </div>
-                <div
-                  class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-                  ngMenuItem
-                  value="Star"
-                >
+                <div scAriaMenuItem value="Star">
                   <svg si-star-icon aria-hidden="true"></svg>
                   <span class="flex-1">Star</span>
                 </div>
-                <div
-                  class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-                  ngMenuItem
-                  value="Label"
-                >
+                <div scAriaMenuItem value="Label">
                   <svg si-tag-icon aria-hidden="true"></svg>
                   <span class="flex-1">Label</span>
                 </div>
               </ng-template>
             </div>
           </ng-template>
-          <div
-            class="-mx-1 my-1 h-px bg-border"
-            role="separator"
-            aria-orientation="horizontal"
-          ></div>
-          <div
-            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-            ngMenuItem
-            value="Archive"
-          >
+          <sc-aria-menu-separator />
+          <div scAriaMenuItem value="Archive">
             <svg si-archive-icon aria-hidden="true"></svg>
             <span class="flex-1">Archive</span>
           </div>
-          <div
-            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-            ngMenuItem
-            value="Report spam"
-          >
+          <div scAriaMenuItem value="Report spam">
             <svg si-flag-icon aria-hidden="true"></svg>
             <span class="flex-1">Report spam</span>
           </div>
-          <div
-            class="focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
-            ngMenuItem
-            value="Delete"
-          >
+          <div scAriaMenuItem value="Delete">
             <svg si-trash-2-icon aria-hidden="true"></svg>
             <span class="flex-1">Delete</span>
           </div>
@@ -207,10 +167,10 @@ export class AriaMenuDemo {
   categorizeMenu = viewChild<Menu<string>>('categorizeMenu');
 
   // Track position for main menu (vertical: top/bottom)
-  private mainMenuPosition = signal<'top' | 'bottom'>('bottom');
+  private readonly mainMenuPosition = signal<'top' | 'bottom'>('bottom');
 
   // Track position for submenu (horizontal: left/right)
-  private subMenuPosition = signal<'left' | 'right'>('right');
+  private readonly subMenuPosition = signal<'left' | 'right'>('right');
 
   // Dynamic animations for main menu based on position
   mainMenuEnterAnimation = computed(() => {
