@@ -55,12 +55,7 @@ import {
       [positions]="mainOverlay.positions()"
       scAriaMenuOverlay
     >
-      <div
-        #formatMenu="ngMenu"
-        [animate.enter]="mainOverlay.enterAnimation()"
-        [animate.leave]="mainOverlay.leaveAnimation()"
-        scAriaMenu
-      >
+      <div #formatMenu="ngMenu" scAriaMenu>
         <ng-template scAriaMenuContent>
           <div scAriaMenuItem value="Mark as read">
             <svg si-mail-check-icon aria-hidden="true"></svg>
@@ -84,12 +79,7 @@ import {
             scAriaMenuOverlay
             variant="submenu"
           >
-            <div
-              #categorizeMenu="ngMenu"
-              [animate.enter]="subOverlay.enterAnimation()"
-              [animate.leave]="subOverlay.leaveAnimation()"
-              scAriaMenu
-            >
+            <div #categorizeMenu="ngMenu" scAriaMenu>
               <ng-template scAriaMenuContent>
                 <div scAriaMenuItem value="Mark as important">
                   <svg si-star-icon aria-hidden="true"></svg>
