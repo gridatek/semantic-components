@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'div[sc-select-scroll-up-button]',
+  selector: 'span[sc-select-value-legacy]',
   imports: [],
   template: `
     <ng-content />
@@ -21,15 +21,12 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectScrollUpButton {
+export class ScSelectValueLegacy {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn(
-      'flex cursor-default items-center justify-center py-1 text-muted-foreground hover:text-foreground',
-      this.classInput(),
-    ),
-  );
+  readonly placeholder = input<string>('');
+
+  protected readonly class = computed(() => cn('pointer-events-none', this.classInput()));
 }

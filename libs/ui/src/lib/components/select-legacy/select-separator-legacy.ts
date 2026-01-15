@@ -9,11 +9,9 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'div[sc-select-scroll-down-button]',
+  selector: 'hr[sc-select-separator-legacy]',
   imports: [],
-  template: `
-    <ng-content />
-  `,
+  template: ``,
   host: {
     '[class]': 'class()',
   },
@@ -21,15 +19,10 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectScrollDownButton {
+export class ScSelectSeparatorLegacy {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
-    cn(
-      'flex cursor-default items-center justify-center py-1 text-muted-foreground hover:text-foreground',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn('-mx-1 my-1 h-px bg-muted', this.classInput()));
 }

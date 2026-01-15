@@ -9,24 +9,28 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'div[sc-select-label]',
+  selector: 'div[sc-select-dropdown-legacy]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
     '[class]': 'class()',
+    role: 'listbox',
   },
   styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectLabel {
+export class ScSelectDropdownPanelLegacy {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
 
   protected readonly class = computed(() =>
-    cn('px-2 py-1.5 text-sm font-semibold text-muted-foreground', this.classInput()),
+    cn(
+      'w-full min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md',
+      this.classInput(),
+    ),
   );
 }

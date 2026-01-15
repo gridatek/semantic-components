@@ -13,7 +13,7 @@ import { cn } from '@semantic-components/utils';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'sc-option',
+  selector: 'sc-option-legacy',
   imports: [SiCheckIcon],
   template: `
     <ng-content />
@@ -31,10 +31,10 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     '(click)': 'select()',
   },
 })
-export class ScOption implements Highlightable {
+export class ScOptionLegacy implements Highlightable {
   element = inject(ElementRef);
 
-  readonly id = signal<string>(inject(_IdGenerator).getId('sc-option-'));
+  readonly id = signal<string>(inject(_IdGenerator).getId('sc-option-legacy-'));
 
   readonly classInput = input<string>('', {
     alias: 'class',

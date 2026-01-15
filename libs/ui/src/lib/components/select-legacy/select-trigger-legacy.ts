@@ -11,7 +11,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'button[sc-select-trigger]',
+  selector: 'button[sc-select-trigger-legacy]',
   imports: [],
   template: `
     <ng-content />
@@ -27,7 +27,7 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectTrigger {
+export class ScSelectTriggerLegacy {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

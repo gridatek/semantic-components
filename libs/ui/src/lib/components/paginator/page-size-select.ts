@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ScOption, ScSelect } from '../select';
+import { ScOptionLegacy, ScSelectLegacy } from '../select-legacy';
 import { PaginatorService } from './paginator.service';
 
 @Component({
   selector: 'div[sc-page-size-select]',
-  imports: [ScSelect, ScOption, ReactiveFormsModule],
+  imports: [ScSelectLegacy, ScOptionLegacy, ReactiveFormsModule],
   template: `
-    <sc-select [formControl]="paginatorService.pageSizeFormControl">
+    <sc-select-legacy [formControl]="paginatorService.pageSizeFormControl">
       @for (pageSizeOption of paginatorService.pageSizeOptions(); track $index) {
-        <sc-option [value]="pageSizeOption">{{ pageSizeOption }}</sc-option>
+        <sc-option-legacy [value]="pageSizeOption">{{ pageSizeOption }}</sc-option-legacy>
       }
-    </sc-select>
+    </sc-select-legacy>
   `,
   styles: ``,
   encapsulation: ViewEncapsulation.None,

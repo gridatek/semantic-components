@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/utils';
 
 @Component({
-  selector: 'div[sc-select-item]',
+  selector: 'div[sc-select-item-legacy]',
   imports: [],
   template: `
     <ng-content />
@@ -23,7 +23,7 @@ import { cn } from '@semantic-components/utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectItem {
+export class ScSelectItemLegacy {
   readonly classInput = input<string>('', {
     alias: 'class',
   });

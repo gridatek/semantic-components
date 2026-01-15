@@ -27,25 +27,25 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { Subject, takeUntil } from 'rxjs';
 
 import { DropdownBehavior } from '../shared/dropdown-behavior';
-import { ScOption } from './option';
-import { ScSelectContent } from './select-content';
-import { ScSelectDropdownPanel } from './select-dropdown-panel';
-import { ScSelectTrigger } from './select-trigger';
-import { ScSelectValue } from './select-value';
+import { ScOptionLegacy } from './option-legacy';
+import { ScSelectContentLegacy } from './select-content-legacy';
+import { ScSelectDropdownPanelLegacy } from './select-dropdown-panel-legacy';
+import { ScSelectTriggerLegacy } from './select-trigger-legacy';
+import { ScSelectValueLegacy } from './select-value-legacy';
 
 @Component({
-  selector: 'sc-select',
+  selector: 'sc-select-legacy',
   imports: [
-    ScSelectTrigger,
-    ScSelectValue,
-    ScSelectDropdownPanel,
-    ScSelectContent,
+    ScSelectTriggerLegacy,
+    ScSelectValueLegacy,
+    ScSelectDropdownPanelLegacy,
+    ScSelectContentLegacy,
     SiChevronDownIcon,
   ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ScSelect),
+      useExisting: forwardRef(() => ScSelectLegacy),
       multi: true,
     },
   ],
@@ -59,9 +59,9 @@ import { ScSelectValue } from './select-value';
       [attr.aria-controls]="'dropdown-' + id()"
       [attr.aria-activedescendant]="activeDescendant"
       (click)="toggle()"
-      sc-select-trigger
+      sc-select-trigger-legacy
     >
-      <span [placeholder]="placeholder()" sc-select-value>
+      <span [placeholder]="placeholder()" sc-select-value-legacy>
         {{ selectedOption ? selectedOption.getLabel() : placeholder() }}
       </span>
       <svg class="h-4 w-4 opacity-50" [class.rotate-180]="isOpen()" si-chevron-down-icon></svg>
@@ -69,8 +69,12 @@ import { ScSelectValue } from './select-value';
 
     <!-- Dropdown Panel Template -->
     <ng-template #dropdownPanel>
-      <div [id]="'dropdown-' + id()" [attr.aria-labelledby]="'trigger-' + id()" sc-select-dropdown>
-        <div sc-select-content>
+      <div
+        [id]="'dropdown-' + id()"
+        [attr.aria-labelledby]="'trigger-' + id()"
+        sc-select-dropdown-legacy
+      >
+        <div sc-select-content-legacy>
           <ng-content />
         </div>
       </div>
@@ -84,7 +88,9 @@ import { ScSelectValue } from './select-value';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAccessor, OnDestroy {
+export class ScSelectLegacy
+  implements AfterContentInit, AfterViewInit, ControlValueAccessor, OnDestroy
+{
   // Shared dropdown behavior
   protected readonly dropdownBehavior = new DropdownBehavior();
 
@@ -95,17 +101,17 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
   protected readonly class = computed(() => cn('block relative w-full', this.classInput()));
 
   readonly placeholder = input('Select an option');
-  readonly options = contentChildren(ScOption);
-  readonly trigger = viewChild.required<ScSelectTrigger>('trigger');
+  readonly options = contentChildren(ScOptionLegacy);
+  readonly trigger = viewChild.required<ScSelectTriggerLegacy>('trigger');
   readonly dropdownPanel = viewChild.required<TemplateRef<any>>('dropdownPanel');
 
   // Use dropdown behavior's state
   protected readonly isOpen = computed(() => this.dropdownBehavior.isOpen());
-  selectedOption: ScOption | null = null;
-  keyManager!: ActiveDescendantKeyManager<ScOption>;
+  selectedOption: ScOptionLegacy | null = null;
+  keyManager!: ActiveDescendantKeyManager<ScOptionLegacy>;
   activeDescendant: string | null = null;
 
-  readonly id = signal<string>(inject(_IdGenerator).getId('sc-select-'));
+  readonly id = signal<string>(inject(_IdGenerator).getId('sc-select-legacy-'));
 
   private destroy$ = new Subject<void>();
   private onChange: (value: any) => void = () => {};
@@ -159,7 +165,7 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
     this.closeOverlay();
   }
 
-  private scrollToOption(option: ScOption) {
+  private scrollToOption(option: ScOptionLegacy) {
     const optionEl = option.element.nativeElement;
     const panel = optionEl.parentElement;
 
@@ -324,7 +330,7 @@ export class ScSelect implements AfterContentInit, AfterViewInit, ControlValueAc
     }
   }
 
-  selectOption(option: ScOption) {
+  selectOption(option: ScOptionLegacy) {
     if (option.disabled) return;
 
     // Update selection state
