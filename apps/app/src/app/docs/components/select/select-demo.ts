@@ -52,7 +52,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         />
         <svg
           class="size-4 opacity-50 text-muted-foreground transition-transform duration-150 pointer-events-none absolute right-3"
-          [class.rotate-180]="combobox()?.expanded()"
           si-chevron-down-icon
         ></svg>
       </div>
@@ -62,8 +61,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           [cdkConnectedOverlayOpen]="true"
         >
           <div
-            class="bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 relative z-50 min-w-[8rem] overflow-hidden rounded-md border shadow-md mt-1 p-1"
-            [attr.data-state]="combobox()?.expanded() ? 'open' : 'closed'"
+            class="bg-popover text-popover-foreground relative z-50 min-w-[8rem] rounded-md border shadow-md mt-1 p-1"
             data-slot="select-content"
           >
             <div class="flex flex-col gap-0.5 overflow-y-auto max-h-60" ngListbox>
@@ -93,7 +91,33 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   host: {
     class: 'block w-[180px]',
   },
-  styles: ``,
+  styles: `
+    /* Hide popup when combobox is closed */
+    [ngCombobox]:has([ngComboboxInput][aria-expanded='false']) [data-slot='select-content'] {
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      overflow: hidden;
+      transition:
+        max-height 150ms ease-in,
+        visibility 0s 150ms,
+        opacity 150ms ease-in;
+    }
+    /* Show popup when combobox is open */
+    [ngCombobox]:has([ngComboboxInput][aria-expanded='true']) [data-slot='select-content'] {
+      max-height: 24rem;
+      opacity: 1;
+      visibility: visible;
+      transition:
+        max-height 150ms ease-out,
+        visibility 0s,
+        opacity 25ms ease-out;
+    }
+    /* Rotate arrow when expanded */
+    [ngComboboxInput][aria-expanded='true'] ~ svg {
+      transform: rotate(180deg);
+    }
+  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
