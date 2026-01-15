@@ -12,8 +12,8 @@ import {
   ScFieldset,
   ScInput,
   ScLabel,
-  ScOption,
-  ScSelect,
+  ScOptionLegacy,
+  ScSelectLegacy,
 } from '@semantic-components/ui';
 
 @Component({
@@ -30,8 +30,8 @@ import {
     ScField,
     ScLabel,
     ScInput,
-    ScSelect,
-    ScOption,
+    ScSelectLegacy,
+    ScOptionLegacy,
   ],
   template: `
     <div class="w-[350px]" sc-card>
@@ -48,12 +48,12 @@ import {
             </div>
             <div sc-field controlId="project-framework">
               <label sc-label>Framework</label>
-              <sc-select placeholder="Select" data-slot="control">
-                <sc-option value="next">Next.js</sc-option>
-                <sc-option value="sveltekit">SvelteKit</sc-option>
-                <sc-option value="astro">Astro</sc-option>
-                <sc-option value="nuxt">Nuxt.js</sc-option>
-              </sc-select>
+              <sc-select-legacy placeholder="Select" data-slot="control">
+                <sc-option-legacy value="next">Next.js</sc-option-legacy>
+                <sc-option-legacy value="sveltekit">SvelteKit</sc-option-legacy>
+                <sc-option-legacy value="astro">Astro</sc-option-legacy>
+                <sc-option-legacy value="nuxt">Nuxt.js</sc-option-legacy>
+              </sc-select-legacy>
             </div>
           </fieldset>
         </form>

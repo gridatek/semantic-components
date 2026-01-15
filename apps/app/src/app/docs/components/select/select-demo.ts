@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { ScOption, ScSelect } from '@semantic-components/ui';
+import { ScOptionLegacy, ScSelectLegacy } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-demo',
-  imports: [ScSelect, ScOption],
+  imports: [ScSelectLegacy, ScOptionLegacy],
   template: `
-    <sc-select placeholder="Select a fruit">
-      <sc-option value="apple">Apple</sc-option>
-      <sc-option value="banana">Banana</sc-option>
-      <sc-option value="blueberry">Blueberry</sc-option>
-      <sc-option value="grapes">Grapes</sc-option>
-      <sc-option value="pineapple">Pineapple</sc-option>
-    </sc-select>
+    <sc-select-legacy placeholder="Select a fruit">
+      <sc-option-legacy value="apple">Apple</sc-option-legacy>
+      <sc-option-legacy value="banana">Banana</sc-option-legacy>
+      <sc-option-legacy value="blueberry">Blueberry</sc-option-legacy>
+      <sc-option-legacy value="grapes">Grapes</sc-option-legacy>
+      <sc-option-legacy value="pineapple">Pineapple</sc-option-legacy>
+    </sc-select-legacy>
   `,
   host: {
     class: 'block w-[180px]',

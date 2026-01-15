@@ -21,7 +21,7 @@ export class CardDemoSection {
   readonly level = input<'2' | '3'>('2');
 
   protected readonly code = `import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-  
+
 import {
   ScButton,
   ScCard,
@@ -32,8 +32,8 @@ import {
   ScCardTitle,
   ScInput,
   ScLabel,
-  ScOption,
-  ScSelect,
+  ScOptionLegacy,
+  ScSelectLegacy,
 } from '@semantic-components/ui';
 
 @Component({
@@ -48,8 +48,8 @@ import {
     ScButton,
     ScLabel,
     ScInput,
-    ScSelect,
-    ScOption,
+    ScSelectLegacy,
+    ScOptionLegacy,
   ],
   template: \`
     <div class="w-[350px]" sc-card>
@@ -66,12 +66,12 @@ import {
             </div>
             <div class="flex flex-col space-y-1.5">
               <label sc-label for="framework">Framework</label>
-              <sc-select id="framework" placeholder="Select">
-                <sc-option value="next">Next.js</sc-option>
-                <sc-option value="sveltekit">SvelteKit</sc-option>
-                <sc-option value="astro">Astro</sc-option>
-                <sc-option value="nuxt">Nuxt.js</sc-option>
-              </sc-select>
+              <sc-select-legacy id="framework" placeholder="Select">
+                <sc-option-legacy value="next">Next.js</sc-option-legacy>
+                <sc-option-legacy value="sveltekit">SvelteKit</sc-option-legacy>
+                <sc-option-legacy value="astro">Astro</sc-option-legacy>
+                <sc-option-legacy value="nuxt">Nuxt.js</sc-option-legacy>
+              </sc-select-legacy>
             </div>
           </div>
         </form>

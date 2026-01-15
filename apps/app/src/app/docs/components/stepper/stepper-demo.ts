@@ -9,8 +9,8 @@ import {
   ScInput,
   ScLabel,
   ScLegend,
-  ScOption,
-  ScSelect,
+  ScOptionLegacy,
+  ScSelectLegacy,
   ScStep,
   ScStepper,
 } from '@semantic-components/ui';
@@ -22,10 +22,10 @@ import {
     ScStep,
     ScInput,
     ScLabel,
-    ScSelect,
+    ScSelectLegacy,
     ScCheckbox,
     ScHeading,
-    ScOption,
+    ScOptionLegacy,
     ScField,
     ScFieldDescription,
     ScFieldset,
@@ -73,13 +73,13 @@ import {
               </div>
               <div sc-field>
                 <label sc-label for="role">Role</label>
-                <sc-select id="role">
-                  <sc-option value="">Select your role</sc-option>
-                  <sc-option value="developer">Developer</sc-option>
-                  <sc-option value="designer">Designer</sc-option>
-                  <sc-option value="manager">Manager</sc-option>
-                  <sc-option value="other">Other</sc-option>
-                </sc-select>
+                <sc-select-legacy id="role">
+                  <sc-option-legacy value="">Select your role</sc-option-legacy>
+                  <sc-option-legacy value="developer">Developer</sc-option-legacy>
+                  <sc-option-legacy value="designer">Designer</sc-option-legacy>
+                  <sc-option-legacy value="manager">Manager</sc-option-legacy>
+                  <sc-option-legacy value="other">Other</sc-option-legacy>
+                </sc-select-legacy>
                 <p sc-field-description>
                   Choose the role that best describes your primary job function
                 </p>
