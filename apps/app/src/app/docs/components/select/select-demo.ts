@@ -5,70 +5,85 @@ import {
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   afterRenderEffect,
   computed,
-  signal,
   viewChild,
   viewChildren,
 } from '@angular/core';
+
+import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-select-demo',
   imports: [
     Combobox,
     ComboboxInput,
-    ComboboxPopup,
     ComboboxPopupContainer,
     Listbox,
     Option,
-    OverlayModule,
+    CdkConnectedOverlay,
+    SiChevronDownIcon,
+    SiCheckIcon,
   ],
   template: `
     <div ngCombobox readonly>
-      <div class="select" #origin>
-        <span class="combobox-label">
-          <span
-            class="selected-label-icon material-symbols-outlined"
-            translate="no"
-            aria-hidden="true"
-          >
-            {{ displayIcon() }}
-          </span>
-          <span class="selected-label-text">{{ displayValue() }}</span>
+      <button
+        class="border-input data-[placeholder]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 h-9 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4"
+        #origin
+        type="button"
+      >
+        <span
+          class="line-clamp-1 flex items-center gap-2 pointer-events-none"
+          data-slot="select-value"
+        >
+          {{ displayValue() }}
         </span>
-        <input aria-label="Label dropdown" placeholder="Select a label" ngComboboxInput />
-        <span class="example-arrow material-symbols-outlined" translate="no" aria-hidden="true">
-          arrow_drop_down
-        </span>
-      </div>
+        <input
+          class="sr-only"
+          aria-label="Select dropdown"
+          placeholder="Select an option"
+          ngComboboxInput
+        />
+        <svg
+          class="size-4 opacity-50 text-muted-foreground transition-transform duration-150"
+          [class.rotate-180]="combobox()?.expanded()"
+          si-chevron-down-icon
+        ></svg>
+      </button>
       <ng-template ngComboboxPopupContainer>
         <ng-template
-          [cdkConnectedOverlay]="{ origin, usePopover: 'inline', matchWidth: true }"
+          [cdkConnectedOverlayOrigin]="origin"
           [cdkConnectedOverlayOpen]="true"
+          [cdkConnectedOverlayWidth]="origin.offsetWidth"
+          cdkConnectedOverlay
         >
-          <div class="example-popup-container">
-            <div ngListbox>
+          <div
+            class="bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border shadow-md mt-1"
+            [attr.data-state]="combobox()?.expanded() ? 'open' : 'closed'"
+            data-slot="select-content"
+          >
+            <div class="p-1 overflow-y-auto max-h-60" ngListbox>
               @for (label of labels; track label.value) {
-                <div [value]="label.value" [label]="label.value" ngOption>
+                <div
+                  class="focus:bg-accent focus:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4"
+                  [value]="label.value"
+                  [label]="label.value"
+                  data-slot="select-item"
+                  ngOption
+                >
+                  <span class="flex-1">{{ label.value }}</span>
                   <span
-                    class="example-option-icon material-symbols-outlined"
-                    translate="no"
-                    aria-hidden="true"
+                    class="absolute right-2 flex size-3.5 items-center justify-center"
+                    data-slot="select-item-indicator"
                   >
-                    {{ label.icon }}
-                  </span>
-                  <span class="example-option-text">{{ label.value }}</span>
-                  <span
-                    class="example-option-check material-symbols-outlined"
-                    translate="no"
-                    aria-hidden="true"
-                  >
-                    check
+                    @if (isSelected(label.value)) {
+                      <svg class="size-4" si-check-icon></svg>
+                    }
                   </span>
                 </div>
               }
@@ -81,127 +96,7 @@ import {
   host: {
     class: 'block w-[180px]',
   },
-  styles: `
-    :host {
-      display: flex;
-      justify-content: center;
-      font-family: var(--inter-font);
-    }
-    .select {
-      display: flex;
-      position: relative;
-      align-items: center;
-      color: color-mix(in srgb, var(--hot-pink) 90%, var(--primary-contrast));
-      background-color: color-mix(in srgb, var(--hot-pink) 5%, transparent);
-      border-radius: 0.5rem;
-      border: 1px solid color-mix(in srgb, var(--hot-pink) 80%, transparent);
-    }
-    .select:hover {
-      background-color: color-mix(in srgb, var(--hot-pink) 15%, transparent);
-    }
-    .select:has([ngComboboxInput][aria-disabled='true']) {
-      opacity: 0.6;
-      cursor: default;
-    }
-    .selected-label-icon {
-      font-size: 1.25rem;
-    }
-    [ngComboboxInput] {
-      opacity: 0;
-      cursor: pointer;
-      padding: 0 3rem;
-      height: 2.5rem;
-      border: none;
-    }
-    [ngCombobox]:focus-within .select {
-      outline: 2px solid color-mix(in srgb, var(--hot-pink) 50%, transparent);
-    }
-    .combobox-label {
-      gap: 1rem;
-      left: 1rem;
-      display: flex;
-      position: absolute;
-      align-items: center;
-      pointer-events: none;
-    }
-    .example-arrow {
-      right: 1rem;
-      position: absolute;
-      pointer-events: none;
-      transition: transform 150ms ease-in-out;
-    }
-    [ngComboboxInput][aria-expanded='true'] ~ .example-arrow {
-      transform: rotate(180deg);
-    }
-    .example-popup-container {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 8px;
-      border-radius: 0.5rem;
-      background-color: var(--septenary-contrast);
-      font-size: 0.9rem;
-      max-height: 11rem;
-      opacity: 1;
-      visibility: visible;
-      transition:
-        max-height 150ms ease-out,
-        visibility 0s,
-        opacity 25ms ease-out;
-    }
-    [ngListbox] {
-      gap: 2px;
-      height: 100%;
-      display: flex;
-      overflow: auto;
-      flex-direction: column;
-    }
-    [ngCombobox]:has([ngComboboxInput][aria-expanded='false']) .example-popup-container {
-      max-height: 0;
-      opacity: 0;
-      visibility: hidden;
-      transition:
-        max-height 150ms ease-in,
-        visibility 0s 150ms,
-        opacity 150ms ease-in;
-    }
-    [ngCombobox]:has([ngComboboxInput][aria-expanded='true']) [ngListbox] {
-      display: flex;
-    }
-    [ngOption] {
-      display: flex;
-      cursor: pointer;
-      align-items: center;
-      margin: 1px;
-      padding: 0 1rem;
-      min-height: 2.25rem;
-      border-radius: 0.5rem;
-    }
-    [ngOption]:hover {
-      background-color: color-mix(in srgb, var(--primary-contrast) 5%, transparent);
-    }
-    [ngOption][data-active='true'] {
-      outline-offset: -2px;
-      outline: 2px solid color-mix(in srgb, var(--hot-pink) 50%, transparent);
-    }
-    [ngOption][aria-selected='true'] {
-      color: var(--hot-pink);
-      background-color: color-mix(in srgb, var(--hot-pink) 5%, transparent);
-    }
-    .example-option-icon {
-      font-size: 1.25rem;
-      padding-right: 1rem;
-    }
-    [ngOption]:not([aria-selected='true']) .example-option-check {
-      display: none;
-    }
-    .example-option-icon,
-    .example-option-check {
-      font-size: 0.9rem;
-    }
-    .example-option-text {
-      flex: 1;
-    }
-  `,
+  styles: ``,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -212,31 +107,30 @@ export class SelectDemo {
   options = viewChildren<Option<string>>(Option);
   /** A reference to the ng aria combobox. */
   combobox = viewChild<Combobox<string>>(Combobox);
-  /** The icon that is displayed in the combobox. */
-  displayIcon = computed(() => {
-    const values = this.listbox()?.values() || [];
-    const label = this.labels.find((label) => label.value === values[0]);
-    return label ? label.icon : '';
-  });
+
   /** The string that is displayed in the combobox. */
   displayValue = computed(() => {
     const values = this.listbox()?.values() || [];
-    return values.length ? values[0] : 'Select a label';
+    return values.length ? values[0] : 'Select an option';
   });
-  /** The labels that are available for selection. */
+
+  /** Check if a value is selected */
+  isSelected(value: string): boolean {
+    const values = this.listbox()?.values() || [];
+    return values.includes(value);
+  }
+
+  /** The options that are available for selection. */
   labels = [
-    { value: 'Important', icon: 'label' },
-    { value: 'Starred', icon: 'star' },
-    { value: 'Work', icon: 'work' },
-    { value: 'Personal', icon: 'person' },
-    { value: 'To Do', icon: 'checklist' },
-    { value: 'Later', icon: 'schedule' },
-    { value: 'Read', icon: 'menu_book' },
-    { value: 'Travel', icon: 'flight' },
+    { value: 'Apple' },
+    { value: 'Banana' },
+    { value: 'Blueberry' },
+    { value: 'Grapes' },
+    { value: 'Pineapple' },
   ];
+
   constructor() {
     // Scrolls to the active item when the active option changes.
-    // The slight delay here is to ensure animations are done before scrolling.
     afterRenderEffect(() => {
       const option = this.options().find((opt) => opt.active());
       setTimeout(() => option?.element.scrollIntoView({ block: 'nearest' }), 50);
