@@ -25,7 +25,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: `
-    <div sc-select placeholder="Select a fruit">
+    <div scSelect placeholder="Select a fruit">
       <div scSelectTrigger>
         <span class="absolute left-3" scSelectValue></span>
         <svg class="absolute right-3" scSelectIcon si-chevron-down-icon></svg>
