@@ -43,7 +43,12 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           cdkConnectedOverlay
         >
           <div
-            class="bg-popover text-popover-foreground relative z-50 min-w-[8rem] rounded-md border shadow-md p-1 flex flex-col gap-0.5 transition-[max-height,opacity,visibility] duration-150 overflow-hidden max-h-0 opacity-0 invisible ease-in group-data-[expanded=true]/select:overflow-y-auto group-data-[expanded=true]/select:max-h-60 group-data-[expanded=true]/select:opacity-100 group-data-[expanded=true]/select:visible group-data-[expanded=true]/select:ease-out"
+            class="bg-popover text-popover-foreground relative z-50 min-w-[8rem] rounded-md border shadow-md p-1 flex flex-col gap-0.5 transition-[max-height,opacity,visibility] duration-150"
+            [class]="
+              combobox.expanded()
+                ? 'overflow-y-auto max-h-60 opacity-100 visible ease-out'
+                : 'overflow-hidden max-h-0 opacity-0 invisible ease-in'
+            "
             ngListbox
           >
             @for (fruit of fruits; track fruit) {
@@ -71,10 +76,12 @@ export class SelectDemo {
 
   debugExpanded(el: EventTarget | null) {
     if (!(el instanceof HTMLInputElement)) return;
+    const combobox = el.closest('[ngCombobox]');
     console.log('=== INPUT TRIGGER ===');
     console.log('aria-expanded:', el.getAttribute('aria-expanded'));
     setTimeout(() => {
       console.log('aria-expanded (after):', el.getAttribute('aria-expanded'));
+      console.log('combobox data-expanded:', combobox?.getAttribute('data-expanded'));
     }, 100);
   }
 }
