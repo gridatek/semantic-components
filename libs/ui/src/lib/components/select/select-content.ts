@@ -30,7 +30,7 @@ export class ScSelectContent {
       // Closed state (default)
       'overflow-hidden max-h-0 opacity-0 invisible ease-in',
       // Open state (when parent has aria-expanded=true)
-      'group-has-[[aria-expanded=true]]:overflow-y-auto group-has-[[aria-expanded=true]]:max-h-60 group-has-[[aria-expanded=true]]:opacity-100 group-has-[[aria-expanded=true]]:visible group-has-[[aria-expanded=true]]:ease-out',
+      'group-has-[[aria-expanded=true]]/select:overflow-y-auto group-has-[[aria-expanded=true]]/select:max-h-60 group-has-[[aria-expanded=true]]/select:opacity-100 group-has-[[aria-expanded=true]]/select:visible group-has-[[aria-expanded=true]]/select:ease-out',
       this.classInput(),
     ),
   );

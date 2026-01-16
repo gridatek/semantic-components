@@ -1,3 +1,5 @@
+import { ComboboxPopupContainer } from '@angular/aria/combobox';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import {
@@ -23,23 +25,34 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectItemIndicator,
     SiChevronDownIcon,
     SiCheckIcon,
+    ComboboxPopupContainer,
+    OverlayModule,
   ],
   template: `
     <div scSelect placeholder="Select a fruit">
-      <div scSelectTrigger>
+      <div #origin scSelectTrigger>
         <span scSelectValue></span>
         <svg scSelectIcon si-chevron-down-icon></svg>
       </div>
-      <div scSelectContent>
-        @for (fruit of fruits; track fruit) {
-          <div [value]="fruit" scSelectItem>
-            <span>{{ fruit }}</span>
-            <span scSelectItemIndicator>
-              <svg si-check-icon></svg>
-            </span>
+      <ng-template ngComboboxPopupContainer>
+        <ng-template
+          [cdkConnectedOverlayOrigin]="origin"
+          [cdkConnectedOverlayOpen]="true"
+          [cdkConnectedOverlayWidth]="origin.offsetWidth"
+          cdkConnectedOverlay
+        >
+          <div scSelectContent>
+            @for (fruit of fruits; track fruit) {
+              <div [value]="fruit" scSelectItem>
+                <span>{{ fruit }}</span>
+                <span scSelectItemIndicator>
+                  <svg si-check-icon></svg>
+                </span>
+              </div>
+            }
           </div>
-        }
-      </div>
+        </ng-template>
+      </ng-template>
     </div>
   `,
   host: {

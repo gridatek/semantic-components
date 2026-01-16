@@ -28,7 +28,9 @@ export class ScSelect {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('group block relative w-full', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('group/select block relative w-full', this.classInput()),
+  );
 
   constructor() {
     // Sync placeholder input to state
