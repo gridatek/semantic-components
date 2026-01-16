@@ -16,7 +16,7 @@ export class ScSelectItemIndicator {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute right-2 flex size-3.5 items-center justify-center [div:not([aria-selected=true])_&]:hidden',
+      'absolute right-2 flex size-3.5 items-center justify-center [&_svg]:size-4 [div:not([aria-selected=true])_&]:hidden',
       this.classInput(),
     ),
   );

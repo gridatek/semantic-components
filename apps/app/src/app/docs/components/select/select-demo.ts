@@ -27,15 +27,15 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scSelect placeholder="Select a fruit">
       <div scSelectTrigger>
-        <span class="absolute left-3" scSelectValue></span>
-        <svg class="absolute right-3" scSelectIcon si-chevron-down-icon></svg>
+        <span scSelectValue></span>
+        <svg scSelectIcon si-chevron-down-icon></svg>
       </div>
       <div scSelectContent>
         @for (fruit of fruits; track fruit) {
           <div [value]="fruit" scSelectItem>
-            <span class="flex-1">{{ fruit }}</span>
+            <span>{{ fruit }}</span>
             <span scSelectItemIndicator>
-              <svg class="size-4" si-check-icon></svg>
+              <svg si-check-icon></svg>
             </span>
           </div>
         }

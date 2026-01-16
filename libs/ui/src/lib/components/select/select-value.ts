@@ -31,6 +31,9 @@ export class ScSelectValue {
   });
 
   protected readonly class = computed(() =>
-    cn('line-clamp-1 flex flex-1 items-center gap-2 pointer-events-none', this.classInput()),
+    cn(
+      'absolute left-3 line-clamp-1 flex flex-1 items-center gap-2 pointer-events-none',
+      this.classInput(),
+    ),
   );
 }
