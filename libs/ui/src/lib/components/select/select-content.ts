@@ -23,7 +23,14 @@ export class ScSelectContent {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-popover text-popover-foreground relative z-50 min-w-[8rem] rounded-md border shadow-md p-1 flex flex-col gap-0.5 overflow-y-auto max-h-60',
+      // Base styles
+      'bg-popover text-popover-foreground relative z-50 min-w-[8rem] rounded-md border shadow-md p-1 flex flex-col gap-0.5',
+      // Transition
+      'transition-[max-height,opacity,visibility] duration-150',
+      // Closed state (default)
+      'overflow-hidden max-h-0 opacity-0 invisible ease-in',
+      // Open state (when parent has aria-expanded=true)
+      'group-has-[[aria-expanded=true]]:overflow-y-auto group-has-[[aria-expanded=true]]:max-h-60 group-has-[[aria-expanded=true]]:opacity-100 group-has-[[aria-expanded=true]]:visible group-has-[[aria-expanded=true]]:ease-out',
       this.classInput(),
     ),
   );
