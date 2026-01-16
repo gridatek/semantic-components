@@ -1,5 +1,5 @@
 import { ComboboxInput } from '@angular/aria/combobox';
-import { Directive, computed, input } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
@@ -12,6 +12,9 @@ import { cn } from '@semantic-components/utils';
   },
 })
 export class ScSelectTrigger {
+  /** The element reference for overlay positioning. */
+  readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });

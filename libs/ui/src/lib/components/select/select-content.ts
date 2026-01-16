@@ -1,7 +1,9 @@
 import { Listbox } from '@angular/aria/listbox';
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, effect, inject, input } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScSelectState } from './select-state';
 
 @Directive({
   selector: '[scSelectContent]',
@@ -12,6 +14,9 @@ import { cn } from '@semantic-components/utils';
   },
 })
 export class ScSelectContent {
+  private readonly state = inject(ScSelectState);
+  private readonly listbox = inject(Listbox);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -22,4 +27,11 @@ export class ScSelectContent {
       this.classInput(),
     ),
   );
+
+  constructor() {
+    // Register the listbox with the state
+    effect(() => {
+      this.state.registerListbox(this.listbox);
+    });
+  }
 }

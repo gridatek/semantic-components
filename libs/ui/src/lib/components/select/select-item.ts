@@ -1,7 +1,9 @@
 import { Option } from '@angular/aria/listbox';
-import { Directive, computed, input } from '@angular/core';
+import { Directive, OnDestroy, computed, inject, input } from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
+
+import { ScSelectState } from './select-state';
 
 @Directive({
   selector: '[scSelectItem]',
@@ -16,7 +18,10 @@ import { cn } from '@semantic-components/utils';
     '[class]': 'class()',
   },
 })
-export class ScSelectItem {
+export class ScSelectItem implements OnDestroy {
+  private readonly state = inject(ScSelectState);
+  private readonly option = inject(Option);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -27,4 +32,12 @@ export class ScSelectItem {
       this.classInput(),
     ),
   );
+
+  constructor() {
+    this.state.registerOption(this.option);
+  }
+
+  ngOnDestroy(): void {
+    this.state.unregisterOption(this.option);
+  }
 }

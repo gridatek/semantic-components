@@ -1,15 +1,31 @@
-import { Directive, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 
 import { cn } from '@semantic-components/utils';
 
-@Directive({
+import { ScSelectState } from './select-state';
+
+@Component({
   selector: '[scSelectValue]',
+  template: `
+    {{ state.displayValue() }}
+  `,
   host: {
     'data-slot': 'select-value',
     '[class]': 'class()',
   },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelectValue {
+  protected readonly state = inject(ScSelectState);
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
