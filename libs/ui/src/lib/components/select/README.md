@@ -60,40 +60,6 @@ import {
 } from '@semantic-components/ui';
 ```
 
-## Required Styles
-
-Add these styles to handle popup visibility and icon rotation:
-
-```css
-/* Hide popup when closed */
-[scSelect]:has([scSelectTrigger][aria-expanded='false']) [scSelectContent] {
-  max-height: 0;
-  opacity: 0;
-  visibility: hidden;
-  overflow: hidden;
-  transition:
-    max-height 150ms ease-in,
-    visibility 0s 150ms,
-    opacity 150ms ease-in;
-}
-
-/* Show popup when open */
-[scSelect]:has([scSelectTrigger][aria-expanded='true']) [scSelectContent] {
-  max-height: 24rem;
-  opacity: 1;
-  visibility: visible;
-  transition:
-    max-height 150ms ease-out,
-    visibility 0s,
-    opacity 25ms ease-out;
-}
-
-/* Rotate arrow when expanded */
-[scSelectTrigger][aria-expanded='true'] [scSelectIcon] {
-  transform: rotate(180deg);
-}
-```
-
 ## Accessing Selected Values
 
 Use `viewChild` to access the `Listbox` and get selected values:
