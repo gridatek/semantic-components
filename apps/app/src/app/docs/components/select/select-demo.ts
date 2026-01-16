@@ -7,7 +7,6 @@ import {
   ViewEncapsulation,
   afterRenderEffect,
   computed,
-  signal,
   viewChild,
   viewChildren,
 } from '@angular/core';
