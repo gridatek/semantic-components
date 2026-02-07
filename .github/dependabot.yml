@@ -8,15 +8,16 @@ updates:
       time: '03:00'
       timezone: 'Europe/Paris'
     ignore:
-      # Ignore updates to packages that start with '@nx'
-      # Wildcards match zero or more arbitrary characters
-      - dependency-name: '@nx*'
-      - dependency-name: 'nx'
-      # Ignore all updates for angular
-      - dependency-name: '@angular*'
-      - dependency-name: 'ng-packagr'
-      - dependency-name: '@schematics/angular'
-      # Ignore all updates for verdaccio
-      - dependency-name: 'verdaccio'
-      # Ignore all updates for typescript
-      - dependency-name: 'typescript'
+      - dependency-name: '*'
+#      # Ignore updates to packages that start with '@nx'
+#      # Wildcards match zero or more arbitrary characters
+#      - dependency-name: '@nx*'
+#      - dependency-name: 'nx'
+#      # Ignore all updates for angular
+#      - dependency-name: '@angular*'
+#      - dependency-name: 'ng-packagr'
+#      - dependency-name: '@schematics/angular'
+#      # Ignore all updates for verdaccio
+#      - dependency-name: 'verdaccio'
+#      # Ignore all updates for typescript
+#      - dependency-name: 'typescript'
