@@ -1,12 +1,12 @@
-name: Deploy Angular App to Cloudflare Pages
+name: Deploy to Cloudflare Pages
 
 on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-showcase:
     runs-on: ubuntu-latest
-    name: Deploy Angular App
+    name: Deploy Showcase
 
     steps:
       - name: Checkout repository
@@ -30,3 +30,30 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist/apps/showcase/browser --project-name=semantic-components
+
+  deploy-blocks:
+    runs-on: ubuntu-latest
+    name: Deploy Blocks
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build Angular app
+        run: npx nx build blocks
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist/apps/blocks --project-name=semantic-components-blocks
