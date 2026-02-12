@@ -2,8 +2,9 @@
   "name": "@semantic-components/carousel",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^21.1.0",
-    "@angular/core": "^21.1.0"
+    "@angular/core": ">=21.1.0",
+    "@semantic-components/ui": ">=0.0.1",
+    "embla-carousel": ">=8.6.0"
   },
   "sideEffects": false
 }

@@ -60,7 +60,7 @@ export class ScImageCompareDirective implements ScImageCompare {
     this.position.set(Math.max(0, Math.min(100, position)));
   }
 
-  moveSlider(direction: 'forward' | 'backward', step: number = 1): void {
+  moveSlider(direction: 'forward' | 'backward', step = 1): void {
     const current = this.position();
     const newPosition =
       direction === 'forward'

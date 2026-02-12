@@ -120,7 +120,7 @@ export class ScPdfViewerRoot {
     this.loaded.emit({ totalPages: this.totalPages() });
   }
 
-  onError(message: string = 'Unable to load the PDF document.'): void {
+  onError(message = 'Unable to load the PDF document.'): void {
     this.isLoading.set(false);
     this.error.set(message);
     this.errorEvent.emit({

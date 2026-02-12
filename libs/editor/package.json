@@ -1,9 +1,13 @@
 {
   "name": "@semantic-components/editor",
-  "version": "0.0.1",
+  "version": "0.4.0",
   "peerDependencies": {
-    "@angular/common": "^21.1.0",
-    "@angular/core": "^21.1.0"
+    "@angular/core": ">=21.1.0",
+    "@semantic-components/ui": ">=0.0.1",
+    "@tiptap/core": ">=3.18.0",
+    "@tiptap/extension-placeholder": ">=3.18.0",
+    "@tiptap/extension-text-align": ">=3.18.0",
+    "@tiptap/starter-kit": ">=3.18.0"
   },
   "sideEffects": false
 }

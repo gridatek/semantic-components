@@ -2,8 +2,10 @@
   "name": "@semantic-components/code",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^21.1.0",
-    "@angular/core": "^21.1.0"
+    "@angular/core": ">=21.1.0",
+    "@angular/platform-browser": ">=21.1.4",
+    "shiki": ">=3.21.0",
+    "@semantic-components/ui": ">=0.0.1"
   },
   "sideEffects": false
 }
