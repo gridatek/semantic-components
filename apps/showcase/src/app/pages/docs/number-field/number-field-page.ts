@@ -8,8 +8,8 @@ import {
   ScCodeViewerContent,
   ScCodeViewerHeader,
   ScCodeViewerLabel,
-  ScCopyButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
+import { ScCopyButton } from '@semantic-components/ui-lab';
 import BasicNumberFieldDemoContainer from './demos/basic-number-field-demo-container';
 import ScrubbingNumberFieldDemoContainer from './demos/scrubbing-number-field-demo-container';
 import PriceNumberFieldDemoContainer from './demos/price-number-field-demo-container';
