@@ -18,5 +18,10 @@
     "shiki": ">=3.21.0",
     "@semantic-components/ui": "0.60.0"
   },
+  "exports": {
+    "./styles": {
+      "default": "./src/lib/styles/index.css"
+    }
+  },
   "sideEffects": false
 }

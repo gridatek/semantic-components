@@ -18,5 +18,10 @@
     "clsx": ">=2.1.1",
     "tailwind-merge": ">=3.4.0"
   },
+  "exports": {
+    "./styles": {
+      "default": "./src/lib/styles/index.css"
+    }
+  },
   "sideEffects": false
 }

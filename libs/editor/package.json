@@ -20,5 +20,10 @@
     "@tiptap/extension-text-align": ">=3.18.0",
     "@tiptap/starter-kit": ">=3.18.0"
   },
+  "exports": {
+    "./styles": {
+      "default": "./src/lib/styles/index.css"
+    }
+  },
   "sideEffects": false
 }
