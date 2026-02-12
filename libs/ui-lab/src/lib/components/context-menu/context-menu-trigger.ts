@@ -6,7 +6,7 @@ import {
   input,
   TemplateRef,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScContextMenu } from './context-menu';
 import { ScContextMenuContent } from './context-menu-content';
 

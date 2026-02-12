@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScMenuTrigger } from './menu-trigger';
 import { ScMenu } from './menu';
 

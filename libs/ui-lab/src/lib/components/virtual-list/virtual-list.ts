@@ -15,7 +15,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import type { VirtualListItem, VirtualListRange } from './virtual-list-types';
 
 @Component({

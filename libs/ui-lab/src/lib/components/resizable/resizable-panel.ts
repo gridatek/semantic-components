@@ -1,5 +1,5 @@
 import { computed, Directive, inject, input, signal } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ResizableDirection } from './resizable.types';
 import { ScResizablePanelGroup } from './resizable-panel-group';
 

@@ -11,7 +11,7 @@ import {
   contentChild,
   afterNextRender,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScInfiniteScrollLoader } from './infinite-scroll-loader';
 import { ScInfiniteScrollEnd } from './infinite-scroll-end';
 

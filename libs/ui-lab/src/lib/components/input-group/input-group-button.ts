@@ -1,6 +1,6 @@
 import { computed, Directive, input } from '@angular/core';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { buttonVariants, type ScButtonVariants } from '../button/button';
 
 const inputGroupButtonVariants = cva(

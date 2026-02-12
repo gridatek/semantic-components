@@ -1,5 +1,5 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import type { StatCardSize } from './stat-card-types';
 
 @Directive({

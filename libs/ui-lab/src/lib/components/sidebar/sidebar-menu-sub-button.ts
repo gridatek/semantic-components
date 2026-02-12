@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 const sizeStyles: Record<'sm' | 'md', string> = {
   sm: 'text-xs',

@@ -11,7 +11,7 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScSpeedDialAction } from './speed-dial-action';
 import type {
   SpeedDialAction,

@@ -12,7 +12,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScSidebarState } from './sidebar-state.service';
 
 const SIDEBAR_STORAGE_KEY = 'sc-sidebar-state';

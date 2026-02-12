@@ -12,7 +12,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScContextMenuContent } from './context-menu-content';
 
 @Component({

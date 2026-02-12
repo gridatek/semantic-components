@@ -10,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { SC_CHECKBOX_FIELD } from './checkbox-types';
 
 export const SC_CHECKBOX = 'SC_CHECKBOX';

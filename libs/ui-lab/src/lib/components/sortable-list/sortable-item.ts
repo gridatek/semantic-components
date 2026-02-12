@@ -8,7 +8,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { SC_SORTABLE_LIST, ScSortableList } from './sortable-list';
 
 // Token for sortable item context

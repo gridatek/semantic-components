@@ -6,7 +6,7 @@ import {
   model,
   output,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 export type SortDirection = 'asc' | 'desc' | null;
 

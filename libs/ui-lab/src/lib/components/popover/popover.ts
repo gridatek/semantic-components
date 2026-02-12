@@ -9,7 +9,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScPopoverProvider } from './popover-provider';
 
 type ScPopoverState = 'open' | 'closed';

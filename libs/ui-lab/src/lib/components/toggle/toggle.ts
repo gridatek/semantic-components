@@ -1,5 +1,5 @@
 import { computed, Directive, input, model } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 export type ToggleVariant = 'default' | 'outline';
 export type ToggleSize = 'default' | 'sm' | 'lg';

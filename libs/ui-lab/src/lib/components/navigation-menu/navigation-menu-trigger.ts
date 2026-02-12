@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScNavigationMenuItem } from './navigation-menu-item';
 
 @Component({

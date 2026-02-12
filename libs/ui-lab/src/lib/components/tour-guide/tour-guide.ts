@@ -11,7 +11,7 @@ import {
   DoCheck,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 export interface TourStep {
   target: string; // CSS selector for the target element

@@ -10,7 +10,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
 type ScAlertDialogState = 'open' | 'closed';

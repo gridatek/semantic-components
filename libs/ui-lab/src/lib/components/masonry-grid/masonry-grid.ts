@@ -12,7 +12,7 @@ import {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScMasonryItem } from './masonry-item';
 import { DEFAULT_BREAKPOINTS, type MasonryBreakpoint } from './masonry-types';
 

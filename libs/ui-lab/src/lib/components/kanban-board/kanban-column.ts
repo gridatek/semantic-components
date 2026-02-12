@@ -7,7 +7,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScKanbanCard } from './kanban-card';
 import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
 

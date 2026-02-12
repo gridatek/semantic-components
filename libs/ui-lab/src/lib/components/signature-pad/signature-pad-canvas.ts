@@ -12,7 +12,7 @@ import {
   DestroyRef,
   effect,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
 
 @Component({

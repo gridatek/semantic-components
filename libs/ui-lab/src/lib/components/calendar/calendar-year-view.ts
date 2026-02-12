@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Grid, GridRow, GridCell, GridCellWidget } from '@angular/aria/grid';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 interface YearInfo {
   label: string;

@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { SC_DOCK } from './dock';
 import type { DockItem } from './dock-types';
 

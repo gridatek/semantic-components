@@ -1,5 +1,5 @@
 import { computed, Directive, InjectionToken, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { CHART_COLORS, ChartConfig } from './chart-types';
 
 // Token for chart context

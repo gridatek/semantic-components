@@ -1,5 +1,5 @@
 import { computed, Directive, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScPopoverProvider } from './popover-provider';
 
 @Directive({
