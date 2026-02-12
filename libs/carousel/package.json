@@ -3,7 +3,7 @@
   "version": "0.60.0",
   "peerDependencies": {
     "@angular/core": ">=21.1.0",
-    "@semantic-components/ui": "workspace:*",
+    "@semantic-components/ui": "0.60.0",
     "embla-carousel": ">=8.6.0"
   },
   "sideEffects": false

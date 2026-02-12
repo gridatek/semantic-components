@@ -57,19 +57,19 @@ Push the version commit and tag:
 git push --follow-tags
 ```
 
-## Workspace Protocol
+## Cross-Library Dependencies
 
-Libraries that depend on `@semantic-components/ui` use the `workspace:*` protocol in their `peerDependencies`:
+Libraries that depend on `@semantic-components/ui` use an exact version in their `peerDependencies`:
 
 ```json
 {
   "peerDependencies": {
-    "@semantic-components/ui": "workspace:*"
+    "@semantic-components/ui": "0.60.0"
   }
 }
 ```
 
-During `nx release`, this is automatically replaced with the actual version (e.g., `"0.61.0"`) in the published `dist/` package.json. The source files always keep `workspace:*`.
+When `nx release` bumps versions, it automatically updates these peer dependency references across all libraries via the `updateDependents` feature.
 
 ## Prerequisites
 
