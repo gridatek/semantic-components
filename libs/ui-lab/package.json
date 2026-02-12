@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/ui-lab",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "peerDependencies": {
     "@angular/core": ">=21.1.0",
     "@angular/router": ">=21.1.1",
@@ -11,7 +11,7 @@
     "rxjs": ">=7.8.2",
     "@angular/platform-browser": ">=21.1.1",
     "@semantic-icons/lucide-icons": ">=0.56.0",
-    "@semantic-components/ui": ">=0.0.1",
+    "@semantic-components/ui": ">=0.0.0",
     "class-variance-authority": ">=0.7.1"
   },
   "sideEffects": false

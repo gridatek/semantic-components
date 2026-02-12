@@ -70,8 +70,18 @@
     }
   },
   "release": {
+    "projects": ["libs/*"],
     "version": {
-      "preVersionCommand": "npx nx run-many -t build"
+      "preVersionCommand": "npx nx run-many -t build",
+      "manifestRootsToUpdate": ["dist/{projectRoot}"],
+      "currentVersionResolver": "disk"
+    },
+    "changelog": {
+      "projectChangelogs": false,
+      "workspaceChangelog": {
+        "createRelease": "github",
+        "file": "CHANGELOG.md"
+      }
     }
   }
 }
