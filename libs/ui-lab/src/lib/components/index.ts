@@ -71,7 +71,6 @@ export * from './qr-code';
 export * from './radio-group';
 export * from './rating-field';
 export * from './resizable';
-export * from './editor';
 export * from './scroll-area';
 export * from './search-input';
 export * from './select';

@@ -15,7 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@semantic-components/ui-lab": ["libs/ui-lab/src/index.ts"]
+      "@semantic-components/ui-lab": ["libs/ui-lab/src/index.ts"],
+      "@semantic-components/ui": ["libs/ui/src/index.ts"],
+      "@semantic-components/code": ["libs/code/src/index.ts"],
+      "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
+      "@semantic-components/editor": ["libs/editor/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

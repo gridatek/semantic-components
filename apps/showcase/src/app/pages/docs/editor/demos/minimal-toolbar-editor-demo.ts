@@ -15,7 +15,7 @@ import {
   ScEditorCount,
   ScEditorWordCount,
   ScEditorCharCount,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/editor';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
