@@ -6,7 +6,7 @@ import {
   model,
   output,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 // Token for file upload context
 export const SC_FILE_UPLOAD = new InjectionToken<ScFileUpload>(

@@ -12,7 +12,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScPdfViewerToolbar } from './pdf-viewer-toolbar';
 import {
   DEFAULT_TOOLBAR_CONFIG,

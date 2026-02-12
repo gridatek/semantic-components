@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { cn } from '../utils';
+import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'sc-sidebar-layout',

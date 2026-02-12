@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { TreeItem } from '@angular/aria/tree';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScTreeItemGroup } from './tree-item-group';
 
 // Token for tree item context

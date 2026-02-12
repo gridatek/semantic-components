@@ -9,7 +9,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScPopoverTrigger } from './popover-trigger';
 
 export type PopoverAlign = 'start' | 'center' | 'end';

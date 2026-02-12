@@ -35,8 +35,8 @@ import {
   ScAlertDialogPortal,
   ScAlertDialogTitle,
   ScAlertDialogTrigger,
-  ScButton,
 } from '@semantic-components/ui-lab';
+import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-alert-dialog-demo',

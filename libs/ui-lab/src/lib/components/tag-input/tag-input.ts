@@ -8,7 +8,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 // Token for tag input context
 export const SC_TAG_INPUT = new InjectionToken<ScTagInput>('SC_TAG_INPUT');

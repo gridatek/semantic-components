@@ -6,7 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
 export interface ScPasswordRequirement {

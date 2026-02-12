@@ -1,7 +1,7 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { MenuItem } from '@angular/aria/menu';
 import { computed, Directive, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Directive({
   selector: 'div[sc-menu-sub-trigger]',

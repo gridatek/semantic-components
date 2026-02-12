@@ -11,6 +11,8 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
   ScCodeViewerLanguage,
+} from '@semantic-components/code';
+import {
   ScCopyButton,
   ScTab,
   ScTabList,

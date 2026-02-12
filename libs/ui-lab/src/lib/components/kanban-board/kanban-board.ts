@@ -7,7 +7,7 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScKanbanColumn } from './kanban-column';
 import type {
   KanbanCard,

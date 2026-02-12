@@ -1,5 +1,5 @@
 import { computed, Directive, inject, input, OnInit } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScAvatar } from './avatar';
 
 @Directive({

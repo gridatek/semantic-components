@@ -36,7 +36,7 @@ import {
   ScEditorCount,
   ScEditorWordCount,
   ScEditorCharCount,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/editor';
 
 @Component({
   selector: 'app-readonly-editor-demo',

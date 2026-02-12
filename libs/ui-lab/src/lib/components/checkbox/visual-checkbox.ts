@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScCheckboxIndicator } from './checkbox-indicator';
 import { SC_CHECKBOX_FIELD } from './checkbox-types';
 

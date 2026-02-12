@@ -10,7 +10,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import type { AnimatedCounterEasing } from './animated-counter-types';
 import { DEFAULT_COUNTER_OPTIONS } from './animated-counter-types';
 

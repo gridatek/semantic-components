@@ -7,7 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import type { DockItem, DockPosition, DockSize } from './dock-types';
 import { DEFAULT_DOCK_OPTIONS } from './dock-types';
 

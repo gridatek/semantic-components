@@ -6,7 +6,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Directive({
   selector: 'input[sc-opt-field-slot-input]',

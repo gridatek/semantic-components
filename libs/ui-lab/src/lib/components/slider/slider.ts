@@ -14,7 +14,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import type { FormValueControl } from '@angular/forms/signals';
 import { fromEvent, merge } from 'rxjs';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScSliderTrack } from './slider-track';
 import { ScSliderRange } from './slider-range';
 import { ScSliderThumb } from './slider-thumb';

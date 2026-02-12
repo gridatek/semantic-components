@@ -1,6 +1,6 @@
 import { computed, Directive, inject, input } from '@angular/core';
 import { Tree } from '@angular/aria/tree';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Directive({
   selector: 'ul[sc-tree]',

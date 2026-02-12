@@ -3,8 +3,8 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
-  ScButton,
   ScEmpty,
   ScEmptyHeader,
   ScEmptyMedia,

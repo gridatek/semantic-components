@@ -12,7 +12,7 @@ import {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 export interface SpotlightOptions {
   target: string | Element;

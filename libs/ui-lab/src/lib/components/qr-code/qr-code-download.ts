@@ -5,7 +5,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScQrCode, QRErrorCorrectionLevel } from './qr-code';
 
 @Component({

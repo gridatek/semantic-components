@@ -1,5 +1,5 @@
 import { computed, Directive, input, output } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Directive({
   selector: 'button[sc-toast-close]',

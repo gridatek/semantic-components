@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { SC_SIGNATURE_PAD } from './signature-pad';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'button[sc-signature-pad-pen-color]',

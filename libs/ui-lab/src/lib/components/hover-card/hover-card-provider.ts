@@ -8,7 +8,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScHoverCardTrigger } from './hover-card-trigger';
 
 export type HoverCardSide = 'top' | 'right' | 'bottom' | 'left';

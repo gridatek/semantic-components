@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 const fieldVariants = cva(
   'gap-2 group/field flex w-full data-[invalid=true]:text-destructive',

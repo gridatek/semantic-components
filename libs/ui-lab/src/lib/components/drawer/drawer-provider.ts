@@ -17,7 +17,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScBackdrop } from '../backdrop';
 import { ScDrawerPortal } from './drawer-portal';
 

@@ -7,7 +7,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE } from './data-table';
 
 @Component({

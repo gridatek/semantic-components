@@ -13,7 +13,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScNavbar } from './navbar';
 
 @Component({

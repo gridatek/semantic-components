@@ -8,8 +8,8 @@ import {
   ScCodeViewerContent,
   ScCodeViewerHeader,
   ScCodeViewerLabel,
-  ScCopyButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
+import { ScCopyButton } from '@semantic-components/ui-lab';
 import BasicTableDemoContainer from './demos/basic-table-demo-container';
 import CaptionTableDemoContainer from './demos/caption-table-demo-container';
 import FooterTableDemoContainer from './demos/footer-table-demo-container';

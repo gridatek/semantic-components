@@ -10,7 +10,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'sc-countdown-simple',

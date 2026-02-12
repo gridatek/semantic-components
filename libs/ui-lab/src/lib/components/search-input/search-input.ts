@@ -11,7 +11,7 @@ import {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import type { SearchSuggestion } from './search-input-types';
 import { DEFAULT_SEARCH_OPTIONS } from './search-input-types';
 

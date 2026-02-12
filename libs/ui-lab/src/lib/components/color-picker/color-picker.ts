@@ -6,7 +6,7 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 export interface HSV {
   h: number; // 0-360

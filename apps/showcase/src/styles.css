@@ -1,1 +1,3 @@
-@import '../../../libs/ui-lab/src/lib/styles/index.css';
+@import '../../../libs/ui/src/lib/styles/index.css';
+@import '../../../libs/editor/src/lib/styles/index.css';
+@import '../../../libs/code/src/lib/styles/index.css';

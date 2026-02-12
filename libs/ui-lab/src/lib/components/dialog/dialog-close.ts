@@ -1,7 +1,7 @@
 import { computed, Directive, inject, input } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScDialogProvider } from './dialog-provider';
-import { buttonVariants, ScButtonVariants } from '../button';
+import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
 @Directive({
   selector: 'button[sc-dialog-close]',

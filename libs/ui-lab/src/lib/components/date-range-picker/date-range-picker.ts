@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScCalendar, DateRange } from '../calendar';
 
 export interface DateRangePreset {

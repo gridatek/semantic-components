@@ -40,7 +40,7 @@ import {
   ScEditorSeparator,
   ScEditorBulletListButton,
   ScEditorNumberedListButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/editor';
 import {
   SiBoldIcon,
   SiItalicIcon,

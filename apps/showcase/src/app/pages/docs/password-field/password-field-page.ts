@@ -8,8 +8,8 @@ import {
   ScCodeViewerContent,
   ScCodeViewerHeader,
   ScCodeViewerLabel,
-  ScCopyButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
+import { ScCopyButton } from '@semantic-components/ui-lab';
 import BasicPasswordFieldDemoContainer from './demos/basic-password-field-demo-container';
 import ShowDefaultPasswordFieldDemoContainer from './demos/show-default-password-field-demo-container';
 import DisabledPasswordFieldDemoContainer from './demos/disabled-password-field-demo-container';

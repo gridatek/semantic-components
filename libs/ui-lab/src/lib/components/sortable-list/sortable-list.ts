@@ -7,7 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 export interface SortableEvent<T> {
   item: T;

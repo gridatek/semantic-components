@@ -1,6 +1,6 @@
 import { Directive, inject, input, computed } from '@angular/core';
 import { AccordionTrigger } from '@angular/aria/accordion';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Directive({
   selector: 'svg[sc-accordion-trigger-icon]',

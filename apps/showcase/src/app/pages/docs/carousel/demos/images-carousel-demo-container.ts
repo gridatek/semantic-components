@@ -35,7 +35,7 @@ import {
   ScCarouselItem,
   ScCarouselNext,
   ScCarouselPrevious,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/carousel';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,

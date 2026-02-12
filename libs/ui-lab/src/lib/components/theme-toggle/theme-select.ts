@@ -7,7 +7,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { SC_FIELD } from '../field';
 import { ScTheme, Theme } from './theme.service';
 

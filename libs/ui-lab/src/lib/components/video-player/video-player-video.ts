@@ -10,7 +10,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 import type { ScVideoSource, ScVideoTrack } from './video-player-types';
 
