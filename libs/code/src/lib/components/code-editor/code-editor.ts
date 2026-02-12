@@ -5,24 +5,27 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'span[sc-code-viewer-label]',
+  selector: 'div[sc-code-editor]',
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'code-viewer-label',
+    'data-slot': 'code-editor',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCodeViewerLabel {
+export class ScCodeEditor {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-xs font-medium text-muted-foreground', this.classInput()),
+    cn(
+      'overflow-hidden rounded-lg border border-border bg-muted focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+      this.classInput(),
+    ),
   );
 }

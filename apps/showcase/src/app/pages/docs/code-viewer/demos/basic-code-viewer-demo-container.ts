@@ -31,7 +31,7 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
   ScCopyButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
 
 @Component({
   selector: 'app-basic-code-viewer-demo',

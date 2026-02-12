@@ -36,7 +36,7 @@ import {
   ScCodeEditorLabel,
   ScCodeEditorCopyButton,
   ScCodeEditorLanguage,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
 
 @Component({
   selector: 'app-interactive-code-editor-demo',

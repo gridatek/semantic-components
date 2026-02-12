@@ -9,7 +9,7 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
   ScCopyButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
 import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
@@ -70,7 +70,7 @@ export default class CodeViewerPage {
   ScCodeViewerLabel,
   ScCodeViewerContent,
   ScCopyButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
 
 @Component({
   imports: [

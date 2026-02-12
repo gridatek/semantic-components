@@ -5,26 +5,26 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-code-editor-header]',
+  selector: 'div[sc-code-viewer-header]',
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'code-editor-header',
+    'data-slot': 'code-viewer-header',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCodeEditorHeader {
+export class ScCodeViewerHeader {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'flex items-center justify-between border-b border-border bg-background/50 px-3 py-2',
+      'flex items-center justify-between border-b border-border px-4 py-2',
       this.classInput(),
     ),
   );

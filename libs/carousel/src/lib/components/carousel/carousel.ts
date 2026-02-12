@@ -15,7 +15,7 @@ import EmblaCarousel, {
   EmblaOptionsType,
   EmblaPluginType,
 } from 'embla-carousel';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 import { ScCarouselViewport } from './carousel-viewport';
 
 export type ScCarouselOrientation = 'horizontal' | 'vertical';

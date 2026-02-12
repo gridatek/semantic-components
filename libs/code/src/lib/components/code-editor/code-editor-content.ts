@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { codeToHtml } from 'shiki';
-import { cn } from '../../utils';
+import { cn } from '@semantic-components/ui';
 
 export type ScCodeEditorLanguage =
   | 'angular-ts'

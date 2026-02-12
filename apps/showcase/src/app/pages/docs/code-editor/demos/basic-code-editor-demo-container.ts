@@ -34,7 +34,7 @@ import {
   ScCodeEditorHeader,
   ScCodeEditorLabel,
   ScCodeEditorCopyButton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/code';
 
 @Component({
   selector: 'app-basic-code-editor-demo',
