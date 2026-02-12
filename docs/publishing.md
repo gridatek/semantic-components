@@ -57,6 +57,20 @@ Push the version commit and tag:
 git push --follow-tags
 ```
 
+## Workspace Protocol
+
+Libraries that depend on `@semantic-components/ui` use the `workspace:*` protocol in their `peerDependencies`:
+
+```json
+{
+  "peerDependencies": {
+    "@semantic-components/ui": "workspace:*"
+  }
+}
+```
+
+During `nx release`, this is automatically replaced with the actual version (e.g., `"0.61.0"`) in the published `dist/` package.json. The source files always keep `workspace:*`.
+
 ## Prerequisites
 
 - `NPM_TOKEN` secret configured in GitHub repository settings (for CI)
