@@ -19,7 +19,12 @@
             "input": "apps/blocks/public"
           }
         ],
-        "styles": ["apps/blocks/src/styles.css"]
+        "styles": ["apps/blocks/src/styles.css"],
+        "server": "apps/blocks/src/main.server.ts",
+        "outputMode": "server",
+        "ssr": {
+          "entry": "apps/blocks/src/server.ts"
+        }
       },
       "configurations": {
         "production": {

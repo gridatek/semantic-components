@@ -8,6 +8,10 @@ import {
   withRouterConfig,
 } from '@angular/router';
 import { appRoutes } from './app.routes';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,5 +23,6 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       }),
     ),
+    provideClientHydration(withEventReplay()),
   ],
 };
