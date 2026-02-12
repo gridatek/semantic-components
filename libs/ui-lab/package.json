@@ -1,6 +1,17 @@
 {
   "name": "@semantic-components/ui-lab",
   "version": "0.60.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gridatek/semantic-components",
+    "directory": "libs/ui-lab"
+  },
   "peerDependencies": {
     "@angular/core": ">=21.1.0",
     "@angular/router": ">=21.1.1",

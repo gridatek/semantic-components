@@ -1,6 +1,17 @@
 {
   "name": "@semantic-components/code",
   "version": "0.60.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gridatek/semantic-components",
+    "directory": "libs/code"
+  },
   "peerDependencies": {
     "@angular/core": ">=21.1.0",
     "@angular/platform-browser": ">=21.1.4",
