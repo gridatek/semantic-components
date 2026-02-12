@@ -8,8 +8,8 @@ import {
   ScCodeViewerContent,
   ScCodeViewerHeader,
   ScCodeViewerLabel,
-  ScCopyButton,
 } from '@semantic-components/code';
+import { ScCopyButton } from '@semantic-components/ui-lab';
 import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
