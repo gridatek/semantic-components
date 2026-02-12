@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/ui-lab",
-  "version": "0.62.0",
+  "version": "0.63.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -22,7 +22,7 @@
     "rxjs": ">=7.8.2",
     "@angular/platform-browser": ">=21.1.1",
     "@semantic-icons/lucide-icons": ">=0.56.0",
-    "@semantic-components/ui": "0.62.0",
+    "@semantic-components/ui": "0.63.0",
     "class-variance-authority": ">=0.7.1"
   },
   "sideEffects": false
