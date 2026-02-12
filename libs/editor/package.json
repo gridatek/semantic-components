@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/editor",
-  "version": "0.0.0",
+  "version": "0.60.0",
   "peerDependencies": {
     "@angular/core": ">=21.1.0",
     "@semantic-components/ui": ">=0.0.0",

@@ -73,7 +73,7 @@
     "projects": ["libs/*"],
     "version": {
       "preVersionCommand": "npx nx run-many -t build",
-      "manifestRootsToUpdate": ["dist/{projectRoot}"],
+      "manifestRootsToUpdate": ["{projectRoot}", "dist/{projectRoot}"],
       "currentVersionResolver": "disk"
     },
     "changelog": false
