@@ -76,6 +76,9 @@
       "manifestRootsToUpdate": ["{projectRoot}", "dist/{projectRoot}"],
       "currentVersionResolver": "disk"
     },
-    "changelog": false
+    "changelog": {
+      "projectChangelogs": false,
+      "workspaceChangelog": false
+    }
   }
 }
