@@ -76,12 +76,6 @@
       "manifestRootsToUpdate": ["dist/{projectRoot}"],
       "currentVersionResolver": "disk"
     },
-    "changelog": {
-      "projectChangelogs": false,
-      "workspaceChangelog": {
-        "createRelease": "github",
-        "file": "CHANGELOG.md"
-      }
-    }
+    "changelog": false
   }
 }
