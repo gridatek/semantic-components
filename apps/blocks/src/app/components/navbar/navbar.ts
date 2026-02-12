@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScNavbar,
   ScNavbarProvider,
@@ -14,7 +15,6 @@ import {
   ScNavbarMobilePortal,
   ScNavbarMobileMenu,
   ScNavbarMobileLink,
-  ScButton,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,

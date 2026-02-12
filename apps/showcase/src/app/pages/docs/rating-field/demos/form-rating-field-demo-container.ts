@@ -25,11 +25,11 @@ export class FormRatingFieldDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScRatingField,
   ScRatingItemGroup,
   ScRatingFieldItem,
-  ScButton,
 } from '@semantic-components/ui-lab';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 import { JsonPipe } from '@angular/common';

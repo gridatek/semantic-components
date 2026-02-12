@@ -28,7 +28,7 @@ export class VariantsButtonDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui-lab';
+import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-variants-button-demo',

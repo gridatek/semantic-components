@@ -6,9 +6,8 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ScButtonVariants } from '@semantic-components/ui';
 import { ScCarousel } from './carousel';
-import { buttonVariants, ScButtonVariants } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'button[sc-carousel-previous]',

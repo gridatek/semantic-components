@@ -6,8 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { buttonVariants, ScButtonVariants } from '@semantic-components/ui-lab';
+import { buttonVariants, cn, ScButtonVariants } from '@semantic-components/ui';
 import { ScCarousel } from './carousel';
 
 @Component({

@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScLink } from '@semantic-components/ui-lab';
+import { ScLink } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-as-link-button-demo',

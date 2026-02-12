@@ -1,5 +1,5 @@
 import { booleanAttribute, computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { buttonVariants, type ScButtonVariants } from '../button';
 
 @Directive({

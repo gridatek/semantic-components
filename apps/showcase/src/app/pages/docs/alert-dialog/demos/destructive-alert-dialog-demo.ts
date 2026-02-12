@@ -3,6 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScAlertDialogProvider,
   ScAlertDialogAction,
@@ -14,7 +15,6 @@ import {
   ScAlertDialogPortal,
   ScAlertDialogTitle,
   ScAlertDialogTrigger,
-  ScButton,
 } from '@semantic-components/ui-lab';
 
 @Component({

@@ -20,8 +20,8 @@ export class ScDialogDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
-  ScButton,
   ScDialogProvider,
   ScDialogClose,
   ScDialog,

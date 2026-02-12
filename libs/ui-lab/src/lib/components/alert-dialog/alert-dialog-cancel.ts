@@ -1,7 +1,7 @@
 import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
-import { buttonVariants, ScButtonVariants } from '../button';
+import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
 @Directive({
   selector: 'button[sc-alert-dialog-cancel]',
