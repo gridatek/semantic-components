@@ -1,0 +1,10 @@
+@layer base {
+  * {
+    interpolate-size: allow-keywords;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+}

@@ -1,18 +1,4 @@
 {
-  "printWidth": 100,
   "singleQuote": true,
-  "htmlWhitespaceSensitivity": "ignore",
-  "overrides": [
-    {
-      "files": "*.html",
-      "options": {
-        "parser": "html"
-      }
-    }
-  ],
-  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-organize-attributes"],
-  "importOrderParserPlugins": ["typescript", "decorators-legacy"],
-  "importOrder": ["^@angular/(.*)$", "^rxjs/(.*)$", "<THIRD_PARTY_MODULES>", "^[./]"],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "htmlWhitespaceSensitivity": "ignore"
 }

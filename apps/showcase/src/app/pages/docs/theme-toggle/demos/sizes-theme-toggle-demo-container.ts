@@ -1,0 +1,105 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { SizesThemeToggleDemo } from './sizes-theme-toggle-demo';
+
+@Component({
+  selector: 'app-sizes-theme-toggle-demo-container',
+  imports: [DemoContainer, SizesThemeToggleDemo],
+  template: `
+    <app-demo-container
+      title="Sizes"
+      demoUrl="/demos/theme-toggle/sizes-theme-toggle-demo"
+      [code]="code"
+    >
+      <app-sizes-theme-toggle-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block' },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class SizesThemeToggleDemoContainer {
+  readonly code = `import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
+import { ScThemeToggle } from '@semantic-components/ui-lab';
+import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
+
+@Component({
+  selector: 'app-sizes-theme-toggle-demo',
+  imports: [ScThemeToggle, SiSunIcon, SiMoonIcon],
+  template: \`
+    <div class="flex items-center gap-4">
+      <div class="flex flex-col items-center gap-2">
+        <button
+          sc-theme-toggle
+          variant="outline"
+          size="sm"
+          #toggle1="scThemeToggle"
+        >
+          @if (toggle1.isDark()) {
+            <svg si-sun-icon></svg>
+          } @else {
+            <svg si-moon-icon></svg>
+          }
+        </button>
+        <span class="text-xs text-muted-foreground">Small</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <button
+          sc-theme-toggle
+          variant="outline"
+          size="default"
+          #toggle2="scThemeToggle"
+        >
+          @if (toggle2.isDark()) {
+            <svg si-sun-icon></svg>
+          } @else {
+            <svg si-moon-icon></svg>
+          }
+        </button>
+        <span class="text-xs text-muted-foreground">Default</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <button
+          sc-theme-toggle
+          variant="outline"
+          size="lg"
+          #toggle3="scThemeToggle"
+        >
+          @if (toggle3.isDark()) {
+            <svg si-sun-icon></svg>
+          } @else {
+            <svg si-moon-icon></svg>
+          }
+        </button>
+        <span class="text-xs text-muted-foreground">Large</span>
+      </div>
+      <div class="flex flex-col items-center gap-2">
+        <button
+          sc-theme-toggle
+          variant="outline"
+          size="icon"
+          #toggle4="scThemeToggle"
+        >
+          @if (toggle4.isDark()) {
+            <svg si-sun-icon></svg>
+          } @else {
+            <svg si-moon-icon></svg>
+          }
+        </button>
+        <span class="text-xs text-muted-foreground">Icon</span>
+      </div>
+    </div>
+  \`,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class SizesThemeToggleDemo {}`;
+}

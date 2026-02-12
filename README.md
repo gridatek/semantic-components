@@ -1,37 +1,82 @@
-# **Semantic Components**
+# Semantic Components
 
-<p align="center">
-    <img src="./logo.svg" width="50%">
-</p>
+A collection of accessible, customizable UI components for Angular applications.
 
-**Semantic Components** are **self-contained, meaningful, and reusable UI elements**. They prioritize **semantic HTML**, **accessibility**, and **modular design**, making UI more readable, maintainable, and accessible.
+## Features
 
-Built using **Angular CDK** and **Tailwind CSS**, this UI library ensures:
+### Modern Angular Architecture
 
-- **Lightweight & Flexible Components**
-- **Accessibility (A11y) Support**
+- **Angular 21+** with standalone components (no NgModules)
+- **Signals** for reactive state management
+- **OnPush change detection** for optimal performance
+- **TypeScript-first** with strict type safety
 
-## **Key Characteristics**
+### Declarative
 
-### 1️⃣ **Semantic Naming**
+- **State-driven UI** - Control components through template bindings, not imperative methods
+- **No .open() calls** - Use `[open]="signal()"` instead of `dialog.open()`
+- **Template-based** - Everything lives in your templates, easy to see and understand
+- **Reactive by default** - UI automatically updates with your state
 
-Uses **HTML elements that convey meaning** instead of relying on generic `<div>` structures.
+### Composable
 
-### 2️⃣ **Encapsulation**
+- **Specialized components** instead of one monolithic component with many inputs
+- **Slot-based patterns** - Compose UIs by nesting components together
+- **Maximum flexibility** - Build exactly what you need without prop drilling
+- **Single responsibility** - Each component has one clear purpose
 
-Each component manages its own **logic, UI, style, and state**, ensuring modularity and separation of concerns.
+### Comprehensive Component Library
 
-### 3️⃣ **Reusability**
+- **70+ production-ready components** including forms, navigation, data display, and feedback
+- **Advanced components** like Data Tables, Charts, Rich Text Editor, Kanban Board, and more
+- **Form components** with validation, field composition, and accessibility built-in
 
-Components should be **reusable across different parts of an application** without modification.
+### Accessibility First
 
-### 4️⃣ **Abstraction**
+- **WCAG AA compliant** with full keyboard navigation
+- **ARIA attributes** and semantic HTML
+- **Focus management** and screen reader support
+- **Color contrast** and responsive touch targets
 
-Semantic components should **hide implementation details** and expose only necessary interfaces.
+### Modern Styling
 
-## **Why Use Semantic Components?**
+- **Tailwind CSS 4** for utility-first styling
+- **CSS custom properties** for easy theming
+- **Dark mode support** built-in
+- **Responsive design** with mobile-first approach
 
-- 🎯 **Improves Accessibility (A11y)** – Uses proper HTML elements & ARIA attributes
-- 🚀 **Enhances Maintainability** – Self-contained, modular design makes updates easier
-- 🔄 **Encourages Reusability** – Reduces duplication and speeds up development
-- 🧩 **Boosts Readability** – Developers can understand the codebase faster
+### Developer Experience
+
+- **Comprehensive documentation** with live examples
+- **Type-safe APIs** with input/output functions
+- **Predictable patterns** across all components
+- **Tree-shakeable** for optimal bundle sizes
+
+## Development
+
+This project uses [Nx](https://nx.dev) as the build system.
+
+### Prerequisites
+
+- Node.js
+- npm or yarn
+
+### Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Run the showcase app
+npx nx serve showcase
+
+# Run tests
+npx nx test
+
+# Build the library
+npx nx build
+```
+
+## License
+
+MIT

@@ -15,17 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@semantic-components/breadcrumb": ["libs/breadcrumb/src/index.ts"],
-      "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
-      "@semantic-components/code-highlighter": ["libs/code-highlighter/src/index.ts"],
-      "@semantic-components/editor": ["libs/editor/src/index.ts"],
-      "@semantic-components/file-uploader": ["libs/file-uploader/src/index.ts"],
-      "@semantic-components/image-cropper": ["libs/image-cropper/src/index.ts"],
-      "@semantic-components/layouts": ["libs/layouts/src/index.ts"],
-      "@semantic-components/re-captcha": ["libs/re-captcha/src/index.ts"],
-      "@semantic-components/timezone": ["libs/timezone/src/index.ts"],
-      "@semantic-components/ui": ["libs/ui/src/index.ts"],
-      "@semantic-components/utils": ["libs/utils/src/index.ts"]
+      "@semantic-components/ui-lab": ["libs/ui-lab/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

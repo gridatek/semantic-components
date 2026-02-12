@@ -1,0 +1,62 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ColorsQrCodeDemo } from './colors-qr-code-demo';
+
+@Component({
+  selector: 'app-colors-qr-code-demo-container',
+  imports: [DemoContainer, ColorsQrCodeDemo],
+  template: `
+    <app-demo-container
+      title="Custom Colors"
+      demoUrl="/demos/qr-code/colors-qr-code-demo"
+      [code]="code"
+    >
+      <app-colors-qr-code-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block' },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ColorsQrCodeDemoContainer {
+  readonly code = `import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
+import { ScQrCode } from '@semantic-components/ui-lab';
+
+@Component({
+  selector: 'app-colors-qr-code-demo',
+  imports: [ScQrCode],
+  template: \`
+    <div class="flex gap-4 flex-wrap">
+      <sc-qr-code
+        [value]="'Blue QR'"
+        [size]="150"
+        [foregroundColor]="'#1d4ed8'"
+        [backgroundColor]="'#dbeafe'"
+      />
+      <sc-qr-code
+        [value]="'Green QR'"
+        [size]="150"
+        [foregroundColor]="'#166534'"
+        [backgroundColor]="'#dcfce7'"
+      />
+      <sc-qr-code
+        [value]="'Purple QR'"
+        [size]="150"
+        [foregroundColor]="'#7c3aed'"
+        [backgroundColor]="'#f3e8ff'"
+      />
+    </div>
+  \`,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ColorsQrCodeDemo {}`;
+}

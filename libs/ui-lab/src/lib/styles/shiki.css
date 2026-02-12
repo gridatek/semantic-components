@@ -1,0 +1,48 @@
+/* Shiki syntax highlighting styles - generic and reusable */
+
+pre.shiki {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+pre.shiki,
+pre.shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark pre.shiki,
+.dark pre.shiki span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+pre.shiki code {
+  font-family:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
+}
+
+/* Line numbers support */
+.shiki-line-numbers pre.shiki code {
+  counter-reset: line;
+}
+
+.shiki-line-numbers pre.shiki code .line {
+  display: inline-block;
+  width: 100%;
+}
+
+.shiki-line-numbers pre.shiki code .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: oklch(from var(--muted-foreground) l c h / 0.5);
+  user-select: none;
+}

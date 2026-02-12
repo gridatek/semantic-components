@@ -1,8 +1,0 @@
-{
-  "eslint.validate": ["json"],
-  "tailwindCSS.includeLanguages": {
-    "typescript": "javascript"
-  },
-  "tailwindCSS.classFunctions": ["cva", "cx", "cn"],
-  "nxConsole.generateAiAgentRules": true
-}

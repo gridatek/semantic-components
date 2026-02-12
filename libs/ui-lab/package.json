@@ -1,0 +1,24 @@
+{
+  "name": "@semantic-components/ui-lab",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/core": ">=21.1.0",
+    "@angular/router": ">=21.1.1",
+    "clsx": ">=2.1.1",
+    "tailwind-merge": ">=3.4.0",
+    "@angular/cdk": ">=21.1.1",
+    "@angular/forms": ">=21.1.1",
+    "@angular/common": ">=21.1.1",
+    "@angular/aria": ">=21.1.1",
+    "rxjs": ">=7.8.2",
+    "@angular/platform-browser": ">=21.1.1",
+    "shiki": ">=3.21.0",
+    "@semantic-icons/lucide-icons": ">=0.56.0",
+    "embla-carousel": ">=8.6.0",
+    "@tiptap/core": ">=3.18.0",
+    "@tiptap/starter-kit": ">=3.18.0",
+    "@tiptap/extension-text-align": ">=3.18.0",
+    "@tiptap/extension-placeholder": ">=3.18.0"
+  },
+  "sideEffects": false
+}
