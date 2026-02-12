@@ -116,6 +116,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    interpolate-size: allow-keywords;
   }
   body {
     @apply bg-background text-foreground;
