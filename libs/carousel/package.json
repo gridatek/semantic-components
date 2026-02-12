@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/carousel",
-  "version": "0.61.0",
+  "version": "0.62.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -14,7 +14,7 @@
   },
   "peerDependencies": {
     "@angular/core": ">=21.1.0",
-    "@semantic-components/ui": "0.61.0",
+    "@semantic-components/ui": "0.62.0",
     "embla-carousel": ">=8.6.0"
   },
   "sideEffects": false
