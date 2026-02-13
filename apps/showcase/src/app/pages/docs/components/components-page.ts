@@ -6,17 +6,27 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
+import {
+  ScBadge,
+  ScToggleGroup,
+  ScToggleGroupItem,
+} from '@semantic-components/ui-lab';
 import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
 import {
   ComponentCategory,
-  ComponentItem,
+  ComponentLibrary,
   COMPONENTS,
 } from '../../../data/components';
 
 @Component({
   selector: 'app-components-page',
-  imports: [RouterLink, ComponentStatusBadge, ScToggleGroup, ScToggleGroupItem],
+  imports: [
+    RouterLink,
+    ComponentStatusBadge,
+    ScBadge,
+    ScToggleGroup,
+    ScToggleGroupItem,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -67,12 +77,20 @@ import {
             <div class="mt-3 flex flex-wrap items-center gap-2">
               <app-component-status-badge [status]="item.status" />
               <span
-                class="text-muted-foreground bg-muted inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium"
+                sc-badge
+                variant="outline"
+                [style.background-color]="categoryColor.bg"
+                [style.color]="categoryColor.text"
+                [style.border-color]="categoryColor.text"
               >
                 {{ item.category }}
               </span>
               <span
-                class="text-muted-foreground bg-muted inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium"
+                sc-badge
+                variant="outline"
+                [style.background-color]="libraryColors[item.library].bg"
+                [style.color]="libraryColors[item.library].text"
+                [style.border-color]="libraryColors[item.library].text"
               >
                 {{ item.library }}
               </span>
@@ -98,6 +116,37 @@ export default class ComponentsPage {
     'Editor',
     'Advanced',
   ];
+
+  readonly categoryColor = {
+    bg: 'color-mix(in oklch, var(--primary) 15%, transparent)',
+    text: 'var(--primary)',
+  };
+
+  readonly libraryColors: Record<
+    ComponentLibrary,
+    { bg: string; text: string }
+  > = {
+    ui: {
+      bg: 'color-mix(in oklch, var(--chart-1) 15%, transparent)',
+      text: 'var(--chart-1)',
+    },
+    'ui-lab': {
+      bg: 'color-mix(in oklch, var(--chart-2) 15%, transparent)',
+      text: 'var(--chart-2)',
+    },
+    carousel: {
+      bg: 'color-mix(in oklch, var(--chart-3) 15%, transparent)',
+      text: 'var(--chart-3)',
+    },
+    code: {
+      bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',
+      text: 'var(--chart-4)',
+    },
+    editor: {
+      bg: 'color-mix(in oklch, var(--chart-5) 15%, transparent)',
+      text: 'var(--chart-5)',
+    },
+  };
 
   readonly filterCategory = signal<string | null>('All');
 
