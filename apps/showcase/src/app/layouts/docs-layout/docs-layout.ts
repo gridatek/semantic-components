@@ -152,23 +152,23 @@ import { COMPONENTS } from '../../data/components';
                     <li sc-sidebar-menu-sub-item>
                       <a
                         sc-sidebar-menu-sub-button
-                        routerLink="/docs/getting-started/editor"
-                        routerLinkActive
-                        #editorRla="routerLinkActive"
-                        [isActive]="editorRla.isActive"
-                      >
-                        <span>Editor</span>
-                      </a>
-                    </li>
-                    <li sc-sidebar-menu-sub-item>
-                      <a
-                        sc-sidebar-menu-sub-button
                         routerLink="/docs/getting-started/carousel"
                         routerLinkActive
                         #carouselRla="routerLinkActive"
                         [isActive]="carouselRla.isActive"
                       >
                         <span>Carousel</span>
+                      </a>
+                    </li>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
+                        routerLink="/docs/getting-started/editor"
+                        routerLinkActive
+                        #editorRla="routerLinkActive"
+                        [isActive]="editorRla.isActive"
+                      >
+                        <span>Editor</span>
                       </a>
                     </li>
                     <li sc-sidebar-menu-sub-item>
