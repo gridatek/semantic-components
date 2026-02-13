@@ -291,9 +291,7 @@ import { COMPONENTS } from '../../data/components';
 
         <div class="flex flex-1">
           <div #contentArea class="flex-1 p-6">
-            <div class="max-w-4xl">
-              <router-outlet />
-            </div>
+            <router-outlet />
           </div>
 
           <aside class="hidden xl:block w-56 border-l shrink-0">
