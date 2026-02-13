@@ -28,6 +28,14 @@ export const gettingStartedRoutes: Route[] = [
         path: 'carousel',
         loadComponent: () => import('../pages/getting-started/carousel.page'),
       },
+      {
+        path: 'code',
+        loadComponent: () => import('../pages/getting-started/code.page'),
+      },
+      {
+        path: 'editor',
+        loadComponent: () => import('../pages/getting-started/editor.page'),
+      },
     ],
   },
 ];

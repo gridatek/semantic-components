@@ -157,6 +157,28 @@ import { COMPONENTS } from '../../data/components';
                         <span>Carousel</span>
                       </a>
                     </li>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
+                        routerLink="/docs/getting-started/code"
+                        routerLinkActive
+                        #codeRla="routerLinkActive"
+                        [isActive]="codeRla.isActive"
+                      >
+                        <span>Code</span>
+                      </a>
+                    </li>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
+                        routerLink="/docs/getting-started/editor"
+                        routerLinkActive
+                        #editorRla="routerLinkActive"
+                        [isActive]="editorRla.isActive"
+                      >
+                        <span>Editor</span>
+                      </a>
+                    </li>
                   </ul>
                 </li>
               </ul>
