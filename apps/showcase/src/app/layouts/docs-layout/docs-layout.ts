@@ -40,7 +40,6 @@ import {
 import {
   SiBoxIcon,
   SiDownloadIcon,
-  SiHomeIcon,
   SiMoonIcon,
   SiSunIcon,
 } from '@semantic-icons/lucide-icons';
@@ -78,7 +77,6 @@ import { COMPONENTS } from '../../data/components';
     ScThemeToggle,
     SiSunIcon,
     SiMoonIcon,
-    SiHomeIcon,
     SiBoxIcon,
     SiDownloadIcon,
     Logo,
@@ -107,7 +105,7 @@ import { COMPONENTS } from '../../data/components';
 
         <div sc-sidebar-content>
           <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Getting Started</div>
+            <div sc-sidebar-group-label>Documentation</div>
             <div sc-sidebar-group-content>
               <ul sc-sidebar-menu>
                 <li sc-sidebar-menu-item>
@@ -183,27 +181,6 @@ import { COMPONENTS } from '../../data/components';
                       </a>
                     </li>
                   </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Components</div>
-            <div sc-sidebar-group-content>
-              <ul sc-sidebar-menu>
-                <li sc-sidebar-menu-item>
-                  <a
-                    sc-sidebar-menu-button
-                    routerLink="/docs/components"
-                    [routerLinkActiveOptions]="{ exact: true }"
-                    routerLinkActive
-                    #overviewRla="routerLinkActive"
-                    [isActive]="overviewRla.isActive"
-                  >
-                    <svg si-home-icon></svg>
-                    <span>Overview</span>
-                  </a>
                 </li>
                 <li sc-sidebar-menu-item>
                   <a sc-sidebar-menu-button>
