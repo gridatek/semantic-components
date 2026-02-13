@@ -8,8 +8,21 @@ export const gettingStartedRoutes: Route[] = [
     children: [
       {
         path: '',
+        redirectTo: 'prerequisites',
+        pathMatch: 'full',
+      },
+      {
+        path: 'prerequisites',
         loadComponent: () =>
-          import('../pages/getting-started/getting-started.page'),
+          import('../pages/getting-started/prerequisites.page'),
+      },
+      {
+        path: 'core',
+        loadComponent: () => import('../pages/getting-started/core.page'),
+      },
+      {
+        path: 'carousel',
+        loadComponent: () => import('../pages/getting-started/carousel.page'),
       },
     ],
   },

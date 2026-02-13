@@ -109,15 +109,44 @@ import { COMPONENTS } from '../../data/components';
             <div sc-sidebar-group-content>
               <ul sc-sidebar-menu>
                 <li sc-sidebar-menu-item>
-                  <a
-                    sc-sidebar-menu-button
-                    routerLink="/docs/getting-started"
-                    routerLinkActive
-                    #gettingStartedRla="routerLinkActive"
-                    [isActive]="gettingStartedRla.isActive"
-                  >
+                  <a sc-sidebar-menu-button>
                     <span>Installation</span>
                   </a>
+                  <ul sc-sidebar-menu-sub>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
+                        routerLink="/docs/getting-started/prerequisites"
+                        routerLinkActive
+                        #prerequisitesRla="routerLinkActive"
+                        [isActive]="prerequisitesRla.isActive"
+                      >
+                        <span>Prerequisites</span>
+                      </a>
+                    </li>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
+                        routerLink="/docs/getting-started/core"
+                        routerLinkActive
+                        #coreRla="routerLinkActive"
+                        [isActive]="coreRla.isActive"
+                      >
+                        <span>Core</span>
+                      </a>
+                    </li>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
+                        routerLink="/docs/getting-started/carousel"
+                        routerLinkActive
+                        #carouselRla="routerLinkActive"
+                        [isActive]="carouselRla.isActive"
+                      >
+                        <span>Carousel</span>
+                      </a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>

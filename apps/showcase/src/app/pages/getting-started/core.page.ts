@@ -15,7 +15,7 @@ import { ScCopyButton, ScSeparator } from '@semantic-components/ui-lab';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
-  selector: 'app-getting-started-page',
+  selector: 'app-core-page',
   imports: [
     TocHeading,
     ScCodeViewer,
@@ -29,25 +29,30 @@ import { TocHeading } from '../../components/toc/toc-heading';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Getting Started</h1>
+        <h1 class="text-3xl font-bold tracking-tight">Core Library</h1>
         <p class="text-muted-foreground">
-          Install and configure Semantic Components in your Angular project.
+          Install and configure the core
+          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
+            &#64;semantic-components/ui
+          </code>
+          package.
         </p>
       </div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
-          1. Install Angular Aria and CDK
+          1. Install the package
         </h2>
-        <p class="text-muted-foreground">
-          Semantic Components depends on Angular Aria and Angular CDK.
-        </p>
         <div sc-code-viewer>
           <div sc-code-viewer-header>
             <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="step1Code"></button>
+            <button sc-copy-button [value]="installCode"></button>
           </div>
-          <div sc-code-viewer-content [code]="step1Code" language="bash"></div>
+          <div
+            sc-code-viewer-content
+            [code]="installCode"
+            language="bash"
+          ></div>
         </div>
       </section>
 
@@ -55,65 +60,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
-          2. Set up Tailwind CSS
-        </h2>
-        <p class="text-muted-foreground">
-          Tailwind CSS v4 is required. Follow the official Angular guide to set
-          it up:
-        </p>
-        <a
-          sc-link
-          variant="outline"
-          href="https://tailwindcss.com/docs/installation/framework-guides/angular"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Tailwind CSS - Angular Installation Guide
-        </a>
-      </section>
-
-      <div sc-separator></div>
-
-      <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          3. Install utilities
-        </h2>
-        <p class="text-muted-foreground">
-          Install the required utility libraries for class management and
-          animations.
-        </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="step3Code"></button>
-          </div>
-          <div sc-code-viewer-content [code]="step3Code" language="bash"></div>
-        </div>
-      </section>
-
-      <div sc-separator></div>
-
-      <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          4. Install Semantic Components
-        </h2>
-        <p class="text-muted-foreground">
-          Install the UI library and icon set.
-        </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="step4Code"></button>
-          </div>
-          <div sc-code-viewer-content [code]="step4Code" language="bash"></div>
-        </div>
-      </section>
-
-      <div sc-separator></div>
-
-      <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          5. Configure styles
+          2. Configure styles
         </h2>
         <p class="text-muted-foreground">
           Set up the theme styles for your project. Pick one of the two options
@@ -175,7 +122,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
-          6. Configure Tailwind source
+          3. Configure Tailwind source
         </h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source so its classes are included in
@@ -186,9 +133,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <div sc-code-viewer>
           <div sc-code-viewer-header>
             <span sc-code-viewer-label>css</span>
-            <button sc-copy-button [value]="step6Code"></button>
+            <button sc-copy-button [value]="sourceCode"></button>
           </div>
-          <div sc-code-viewer-content [code]="step6Code" language="css"></div>
+          <div sc-code-viewer-content [code]="sourceCode" language="css"></div>
         </div>
       </section>
 
@@ -216,21 +163,15 @@ import { TocHeading } from '../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class GettingStartedPage {
-  readonly step1Code = 'npm install @angular/aria @angular/cdk';
-
-  readonly step3Code =
-    'npm install class-variance-authority clsx tailwind-merge tw-animate-css';
-
-  readonly step4Code =
-    'npm install @semantic-icons/lucide-icons @semantic-components/ui';
-
-  readonly step6Code = '@source "../node_modules/@semantic-components/ui";';
+export default class CorePage {
+  readonly installCode = 'npm install @semantic-components/ui';
 
   readonly stylesDefaultCode = '@import "@semantic-components/ui/styles";';
 
   readonly stylesCustomCdkCode =
     "@import url('@angular/cdk/overlay-prebuilt.css');";
+
+  readonly sourceCode = '@source "../node_modules/@semantic-components/ui";';
 
   readonly usageCode = `import { ScButton } from '@semantic-components/ui';
 
