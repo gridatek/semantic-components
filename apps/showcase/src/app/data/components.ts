@@ -2,12 +2,25 @@ export type ComponentStatus = 'Experimental' | 'Developer Preview' | 'Stable';
 
 export type ComponentLibrary = 'ui' | 'ui-lab' | 'carousel' | 'code' | 'editor';
 
+export type ComponentCategory =
+  | 'Forms'
+  | 'Buttons & Actions'
+  | 'Navigation'
+  | 'Layout'
+  | 'Data Display'
+  | 'Feedback'
+  | 'Overlay'
+  | 'Media'
+  | 'Editor'
+  | 'Advanced';
+
 export interface ComponentItem {
   name: string;
   path: string;
   description: string;
   status: ComponentStatus;
   library: ComponentLibrary;
+  category: ComponentCategory;
 }
 
 export const COMPONENTS: ComponentItem[] = [
@@ -17,6 +30,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A vertically stacked set of interactive headings.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Alert',
@@ -24,6 +38,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays important messages to the user.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Feedback',
   },
   {
     name: 'Alert Dialog',
@@ -31,6 +46,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A modal dialog for important alerts requiring confirmation.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Feedback',
   },
   {
     name: 'Animated Counter',
@@ -38,6 +54,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Numbers that animate up/down.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Aspect Ratio',
@@ -45,6 +62,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays content within a fixed aspect ratio.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Audio Player',
@@ -52,6 +70,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A custom audio player with controls.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Avatar',
@@ -59,6 +78,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An image element with a fallback for representing users.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Avatar Group',
@@ -66,6 +86,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Stacked/overlapping avatars with overflow.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Badge',
@@ -73,6 +94,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays a small status indicator or label.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Barcode Scanner',
@@ -80,6 +102,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Scan barcodes using the camera.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Breadcrumb',
@@ -87,6 +110,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays the path to the current resource.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Navigation',
   },
   {
     name: 'Button',
@@ -94,6 +118,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A clickable button with multiple variants.',
     status: 'Experimental',
     library: 'ui',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Button Group',
@@ -101,6 +126,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Groups buttons together with merged borders and rounding.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Calendar',
@@ -108,6 +134,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A date picker calendar component.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Card',
@@ -115,6 +142,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A container for grouping related content.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Carousel',
@@ -122,6 +150,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A slideshow for cycling through elements.',
     status: 'Experimental',
     library: 'carousel',
+    category: 'Media',
   },
   {
     name: 'Chart',
@@ -129,6 +158,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Beautiful charts for data visualization.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Checkbox',
@@ -136,6 +166,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A control for toggling a single option on or off.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Code Editor',
@@ -143,6 +174,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A syntax-highlighted code editor.',
     status: 'Experimental',
     library: 'code',
+    category: 'Editor',
   },
   {
     name: 'Code Viewer',
@@ -150,6 +182,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Display syntax-highlighted code with copy functionality.',
     status: 'Experimental',
     library: 'code',
+    category: 'Editor',
   },
   {
     name: 'Collapsible',
@@ -157,6 +190,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An interactive component that expands and collapses.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Color Picker',
@@ -164,6 +198,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A component for selecting colors.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Combobox',
@@ -171,6 +206,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An autocomplete input with filtering.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Command',
@@ -178,6 +214,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A command palette for quick actions and search.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Overlay',
   },
   {
     name: 'Confetti',
@@ -185,6 +222,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Celebration animation effect.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Feedback',
   },
   {
     name: 'Context Menu',
@@ -192,6 +230,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A menu displayed on right-click.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Overlay',
   },
   {
     name: 'Copy Button',
@@ -199,6 +238,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A button that copies text to clipboard.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Countdown',
@@ -206,6 +246,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A countdown timer display.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Data Table',
@@ -213,6 +254,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An advanced table with sorting and filtering.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Date Picker',
@@ -220,6 +262,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A popover-based date selection component.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Date Range Picker',
@@ -227,6 +270,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Select a range of dates with a calendar.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Dialog',
@@ -235,6 +279,7 @@ export const COMPONENTS: ComponentItem[] = [
       'A modal dialog that interrupts the user with important content.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Feedback',
   },
   {
     name: 'Diff Viewer',
@@ -242,6 +287,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Compare and display text differences.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Editor',
   },
   {
     name: 'Dock',
@@ -249,6 +295,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'macOS-style icon dock with magnification.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Drawer',
@@ -256,6 +303,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A touch-friendly drawer that slides from the bottom.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Overlay',
   },
   {
     name: 'Emoji Picker',
@@ -263,6 +311,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A picker for selecting emojis.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Editor',
@@ -270,6 +319,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Composable WYSIWYG editor with customizable toolbar.',
     status: 'Experimental',
     library: 'editor',
+    category: 'Editor',
   },
   {
     name: 'Empty',
@@ -277,6 +327,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Placeholder for empty content.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Field',
@@ -285,6 +336,7 @@ export const COMPONENTS: ComponentItem[] = [
       'A flexible field composition system for building accessible forms.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'File Upload',
@@ -292,6 +344,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A drag-and-drop file upload component.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Hover Card',
@@ -299,6 +352,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A card that appears when hovering over an element.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Overlay',
   },
   {
     name: 'Image Annotator',
@@ -306,6 +360,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Draw and markup on images.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Image Compare',
@@ -313,6 +368,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Compare two images with a slider.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Image Cropper',
@@ -320,6 +376,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A tool for cropping and resizing images.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Infinite Scroll',
@@ -327,6 +384,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Load more content as the user scrolls.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Input',
@@ -334,6 +392,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A text input field for user data entry.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Input Group',
@@ -342,6 +401,7 @@ export const COMPONENTS: ComponentItem[] = [
       'A composable input group for combining inputs with addons, buttons, and text.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Opt Field',
@@ -349,6 +409,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An input for entering one-time passwords.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Kanban Board',
@@ -356,6 +417,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A drag-and-drop task board.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Kbd',
@@ -363,6 +425,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays keyboard shortcuts and keys.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Label',
@@ -370,6 +433,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Renders an accessible label for form controls.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Link',
@@ -377,6 +441,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A styled anchor element with button variants.',
     status: 'Experimental',
     library: 'ui',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Language Switcher',
@@ -384,6 +449,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Switch between different languages.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Lightbox',
@@ -391,6 +457,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A full-screen image viewer.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Marquee',
@@ -398,6 +465,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A scrolling text or content animation.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Masonry Grid',
@@ -405,6 +473,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Pinterest-style layout with varying item heights.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Menu',
@@ -412,6 +481,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays a menu with a list of actions or options.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Navigation',
   },
   {
     name: 'Mention Input',
@@ -419,6 +489,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An input with mention suggestions.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Multi-Select',
@@ -426,6 +497,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A select component for multiple selections.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Native Checkbox',
@@ -433,6 +505,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A directive for native checkbox inputs with custom styling.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Navbar',
@@ -440,6 +513,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A responsive navigation bar with mobile menu support.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Navigation',
   },
   {
     name: 'Navigation Menu',
@@ -447,6 +521,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A navigation menu with links and dropdowns.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Navigation',
   },
   {
     name: 'Notification Center',
@@ -454,6 +529,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Grouped notification management with filtering.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Number Field',
@@ -461,6 +537,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A composable numeric input with scrubbing support.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Org Chart',
@@ -468,6 +545,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Hierarchical organization visualization.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'PDF Viewer',
@@ -475,6 +553,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Document viewer with navigation and zoom controls.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Pagination',
@@ -482,6 +561,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Navigation controls for paging through content.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Navigation',
   },
   {
     name: 'Password Field',
@@ -489,6 +569,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A composable password input with visibility toggle.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Phone Input',
@@ -496,6 +577,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An input for international phone numbers.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Popover',
@@ -503,6 +585,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays floating content in relation to a trigger.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Overlay',
   },
   {
     name: 'Progress',
@@ -510,6 +593,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays an indicator showing completion progress.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'QR Code',
@@ -517,6 +601,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Generate and display QR codes.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Radio Group',
@@ -524,6 +609,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A group of radio buttons for single selection.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Rating Field',
@@ -531,6 +617,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A composable rating field for feedback and reviews.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Resizable',
@@ -538,6 +625,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A component that can be resized by dragging.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Scroll Area',
@@ -545,6 +633,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A custom scrollable area with styled scrollbars.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Search Input',
@@ -552,6 +641,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Search with autocomplete suggestions.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Select',
@@ -559,6 +649,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays a list of options for the user to pick from.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Separator',
@@ -566,6 +657,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Visually separates content with a line.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Layout',
   },
   {
     name: 'Sheet',
@@ -573,6 +665,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A panel that slides in from the edge of the screen.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Overlay',
   },
   {
     name: 'Sidebar',
@@ -580,6 +673,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A collapsible side navigation panel.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Navigation',
   },
   {
     name: 'Signature Pad',
@@ -587,6 +681,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A canvas for capturing signatures.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Skeleton',
@@ -594,6 +689,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A placeholder to show while content is loading.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Slider',
@@ -601,6 +697,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An input for selecting a value from a range.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Range Slider',
@@ -608,6 +705,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An input for selecting a range with min and max values.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Sortable List',
@@ -615,6 +713,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A drag-and-drop sortable list.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Speed Dial',
@@ -622,6 +721,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Floating action button with expandable menu.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Spinner',
@@ -629,6 +729,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A loading indicator animation.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Feedback',
   },
   {
     name: 'Split Button',
@@ -636,6 +737,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Button with dropdown actions.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Spotlight',
@@ -643,6 +745,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A spotlight search interface.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Overlay',
   },
   {
     name: 'Stat Card',
@@ -650,6 +753,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Statistics and metrics display.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Stepper',
@@ -657,6 +761,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Guides users through a multi-step process.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Navigation',
   },
   {
     name: 'Switch',
@@ -664,6 +769,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A toggle control for switching between two states.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Table',
@@ -671,6 +777,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A responsive table for displaying tabular data.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Tabs',
@@ -678,6 +785,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Organize content into multiple sections with tabs.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Navigation',
   },
   {
     name: 'Tag Input',
@@ -685,6 +793,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'An input for adding and managing tags.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Textarea',
@@ -692,6 +801,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A multi-line text input field.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Theme Toggle',
@@ -699,6 +809,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Switch between light and dark themes.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Time Picker',
@@ -706,6 +817,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A component for selecting time values.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Timeline',
@@ -713,6 +825,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Displays events in chronological order.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Timezone',
@@ -720,6 +833,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A component for selecting and displaying timezones.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Forms',
   },
   {
     name: 'Toast',
@@ -727,6 +841,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A brief notification that appears temporarily.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Feedback',
   },
   {
     name: 'Toggle',
@@ -734,6 +849,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A two-state button that can be on or off.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Toggle Group',
@@ -741,6 +857,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A set of toggle buttons that work together.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Toolbar',
@@ -749,6 +866,7 @@ export const COMPONENTS: ComponentItem[] = [
       'A container for grouping a set of controls, such as toggle buttons.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Buttons & Actions',
   },
   {
     name: 'Tooltip',
@@ -756,6 +874,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A popup that displays information on hover or focus.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Overlay',
   },
   {
     name: 'Tour Guide',
@@ -763,6 +882,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Create interactive product tours.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Transfer List',
@@ -770,6 +890,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Move items between two lists.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
   {
     name: 'Tree',
@@ -777,6 +898,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A hierarchical view of nested items.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Data Display',
   },
   {
     name: 'Video Player',
@@ -784,6 +906,7 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'A custom video player with controls.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Media',
   },
   {
     name: 'Virtual List',
@@ -791,5 +914,6 @@ export const COMPONENTS: ComponentItem[] = [
     description: 'Virtualized scrolling for large lists.',
     status: 'Experimental',
     library: 'ui-lab',
+    category: 'Advanced',
   },
 ];
