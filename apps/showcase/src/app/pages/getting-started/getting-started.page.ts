@@ -124,28 +124,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
-          5. Configure Tailwind source
-        </h2>
-        <p class="text-muted-foreground">
-          Add the library as a Tailwind source so its classes are included in
-          the build. Add this to your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
-          :
-        </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>css</span>
-            <button sc-copy-button [value]="step5Code"></button>
-          </div>
-          <div sc-code-viewer-content [code]="step5Code" language="css"></div>
-        </div>
-      </section>
-
-      <div sc-separator></div>
-
-      <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          6. Configure styles
+          5. Configure styles
         </h2>
         <p class="text-muted-foreground">
           Choose one of the two options to set up your theme styles.
@@ -209,6 +188,27 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div sc-separator></div>
 
       <section class="space-y-4">
+        <h2 toc class="text-xl font-semibold tracking-tight">
+          6. Configure Tailwind source
+        </h2>
+        <p class="text-muted-foreground">
+          Add the library as a Tailwind source so its classes are included in
+          the build. Add this to your
+          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          :
+        </p>
+        <div sc-code-viewer>
+          <div sc-code-viewer-header>
+            <span sc-code-viewer-label>css</span>
+            <button sc-copy-button [value]="step6Code"></button>
+          </div>
+          <div sc-code-viewer-content [code]="step6Code" language="css"></div>
+        </div>
+      </section>
+
+      <div sc-separator></div>
+
+      <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
         <p class="text-muted-foreground">
           Import and use components in your Angular templates:
@@ -239,7 +239,7 @@ export default class GettingStartedPage {
   readonly step4Code =
     'npm install @semantic-icons/lucide-icons @semantic-components/ui';
 
-  readonly step5Code = '@source "../node_modules/@semantic-components/ui";';
+  readonly step6Code = '@source "../node_modules/@semantic-components/ui";';
 
   readonly stylesEasyCode = '@import "@semantic-components/ui/styles";';
 
