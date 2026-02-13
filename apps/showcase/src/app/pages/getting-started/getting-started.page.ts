@@ -124,7 +124,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Import the pre-built styles in your
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
-          . This gives you the default shadcn theme out of the box.
+          . This includes the default shadcn theme and Angular CDK styles.
         </p>
         <div sc-code-viewer>
           <div sc-code-viewer-header>
@@ -144,7 +144,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           copy the CSS variables from the shadcn/ui manual installation guide
           into your
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
-          .
+          :
         </p>
         <a
           sc-link
@@ -155,6 +155,20 @@ import { TocHeading } from '../../components/toc/toc-heading';
         >
           shadcn/ui - Manual Installation (Configure styles)
         </a>
+        <p class="text-muted-foreground">
+          You also need to import the Angular CDK overlay styles manually:
+        </p>
+        <div sc-code-viewer>
+          <div sc-code-viewer-header>
+            <span sc-code-viewer-label>css</span>
+            <button sc-copy-button [value]="stylesCustomCdkCode"></button>
+          </div>
+          <div
+            sc-code-viewer-content
+            [code]="stylesCustomCdkCode"
+            language="css"
+          ></div>
+        </div>
       </section>
 
       <div sc-separator></div>
@@ -214,6 +228,9 @@ export default class GettingStartedPage {
   readonly step6Code = '@source "../node_modules/@semantic-components/ui";';
 
   readonly stylesDefaultCode = '@import "@semantic-components/ui/styles";';
+
+  readonly stylesCustomCdkCode =
+    "@import url('@angular/cdk/overlay-prebuilt.css');";
 
   readonly usageCode = `import { ScButton } from '@semantic-components/ui';
 
