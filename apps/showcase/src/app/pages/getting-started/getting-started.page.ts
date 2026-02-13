@@ -149,7 +149,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <a
           sc-link
           variant="outline"
-          href="https://ui.shadcn.com/docs/installation/manual"
+          href="https://ui.shadcn.com/docs/installation/manual#configure-styles"
           target="_blank"
           rel="noopener noreferrer"
         >
