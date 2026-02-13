@@ -39,6 +39,7 @@ import {
 } from '@semantic-components/ui-lab';
 import {
   SiBoxIcon,
+  SiDownloadIcon,
   SiHomeIcon,
   SiMoonIcon,
   SiSunIcon,
@@ -79,6 +80,7 @@ import { COMPONENTS } from '../../data/components';
     SiMoonIcon,
     SiHomeIcon,
     SiBoxIcon,
+    SiDownloadIcon,
     Logo,
     Toc,
   ],
@@ -110,6 +112,7 @@ import { COMPONENTS } from '../../data/components';
               <ul sc-sidebar-menu>
                 <li sc-sidebar-menu-item>
                   <a sc-sidebar-menu-button>
+                    <svg si-download-icon></svg>
                     <span>Installation</span>
                   </a>
                   <ul sc-sidebar-menu-sub>
