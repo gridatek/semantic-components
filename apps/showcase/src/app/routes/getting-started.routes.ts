@@ -25,16 +25,16 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/ui-lab.page'),
       },
       {
+        path: 'editor',
+        loadComponent: () => import('../pages/getting-started/editor.page'),
+      },
+      {
         path: 'carousel',
         loadComponent: () => import('../pages/getting-started/carousel.page'),
       },
       {
         path: 'code',
         loadComponent: () => import('../pages/getting-started/code.page'),
-      },
-      {
-        path: 'editor',
-        loadComponent: () => import('../pages/getting-started/editor.page'),
       },
     ],
   },
