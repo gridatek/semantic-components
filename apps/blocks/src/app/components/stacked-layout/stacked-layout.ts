@@ -9,7 +9,9 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-stacked-layout',
   imports: [RouterOutlet],
   template: `
-    <ng-content select="[slot=navbar]" />
+    <header data-slot="stacked-layout-header" class="sticky top-0 z-50">
+      <ng-content select="[slot=navbar]" />
+    </header>
 
     <main data-slot="stacked-layout-content" class="flex-1">
       <router-outlet />

@@ -97,6 +97,9 @@ import {
       </div>
     </section>
   `,
+  host: {
+    class: 'block',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

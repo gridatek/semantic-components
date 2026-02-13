@@ -12,7 +12,9 @@ import { cn } from '@semantic-components/ui';
   selector: 'sc-stacked-layout',
   imports: [RouterOutlet],
   template: `
-    <ng-content select="[scNavbar]" />
+    <header data-slot="stacked-layout-header" class="sticky top-0 z-50">
+      <ng-content select="[scNavbar]" />
+    </header>
 
     <main data-slot="stacked-layout-content" class="flex-1">
       <router-outlet />

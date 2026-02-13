@@ -184,7 +184,7 @@ import { Logo } from '../logo/logo';
     </div>
   `,
   host: {
-    class: 'block sticky top-0 z-50',
+    class: 'block',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

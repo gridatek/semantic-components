@@ -23,6 +23,9 @@ import { Logo } from '../logo/logo';
       </div>
     </footer>
   `,
+  host: {
+    class: 'block',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

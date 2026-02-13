@@ -50,7 +50,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div sc-navbar-provider>
-      <nav sc-navbar class="sticky top-0 z-50">
+      <nav sc-navbar>
         <div sc-navbar-group>
           <a sc-navbar-brand routerLink="/">
             <svg

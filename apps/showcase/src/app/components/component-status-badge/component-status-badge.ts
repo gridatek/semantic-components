@@ -20,6 +20,9 @@ const variantMap: Record<ComponentStatus, ScBadgeVariants['variant']> = {
   template: `
     <span sc-badge [variant]="variant()">{{ status() }}</span>
   `,
+  host: {
+    class: 'block',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -32,6 +32,9 @@ import { ScLink } from '@semantic-components/ui';
       </div>
     </section>
   `,
+  host: {
+    class: 'block',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
