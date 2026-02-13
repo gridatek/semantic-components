@@ -375,24 +375,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'as-link-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/button/demos/as-link-button-demo').then(
-            (m) => m.AsLinkButtonDemo,
-          ),
-      },
-      {
         path: 'loading-button-demo',
         loadComponent: () =>
           import('../pages/docs/button/demos/loading-button-demo').then(
             (m) => m.LoadingButtonDemo,
-          ),
-      },
-      {
-        path: 'disabled-link-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/button/demos/disabled-link-button-demo').then(
-            (m) => m.DisabledLinkButtonDemo,
           ),
       },
     ],
