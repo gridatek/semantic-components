@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/editor",
-  "version": "0.63.0",
+  "version": "0.64.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -14,7 +14,7 @@
   },
   "peerDependencies": {
     "@angular/core": ">=21.1.0",
-    "@semantic-components/ui": "0.63.0",
+    "@semantic-components/ui": "0.64.0",
     "@tiptap/core": ">=3.18.0",
     "@tiptap/extension-placeholder": ">=3.18.0",
     "@tiptap/extension-text-align": ">=3.18.0",
