@@ -8,8 +8,13 @@ export const gettingStartedRoutes: Route[] = [
     children: [
       {
         path: '',
-        redirectTo: 'prerequisites',
+        redirectTo: 'introduction',
         pathMatch: 'full',
+      },
+      {
+        path: 'introduction',
+        loadComponent: () =>
+          import('../pages/getting-started/introduction.page'),
       },
       {
         path: 'prerequisites',

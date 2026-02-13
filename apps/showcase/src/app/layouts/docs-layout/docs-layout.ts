@@ -38,6 +38,7 @@ import {
   ScThemeToggle,
 } from '@semantic-components/ui-lab';
 import {
+  SiBookOpenTextIcon,
   SiBoxIcon,
   SiDownloadIcon,
   SiMoonIcon,
@@ -77,6 +78,7 @@ import { COMPONENTS } from '../../data/components';
     ScThemeToggle,
     SiSunIcon,
     SiMoonIcon,
+    SiBookOpenTextIcon,
     SiBoxIcon,
     SiDownloadIcon,
     Logo,
@@ -108,6 +110,37 @@ import { COMPONENTS } from '../../data/components';
             <div sc-sidebar-group-label>Documentation</div>
             <div sc-sidebar-group-content>
               <ul sc-sidebar-menu>
+                <li sc-sidebar-menu-item>
+                  <a sc-sidebar-menu-button>
+                    <svg si-book-open-text-icon></svg>
+                    <span>Semantic Components</span>
+                  </a>
+                  <ul sc-sidebar-menu-sub>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
+                        routerLink="/docs/getting-started/introduction"
+                        routerLinkActive
+                        #introRla="routerLinkActive"
+                        [isActive]="introRla.isActive"
+                      >
+                        <span>Introduction</span>
+                      </a>
+                    </li>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
+                        routerLink="/docs/components"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                        routerLinkActive
+                        #componentsListRla="routerLinkActive"
+                        [isActive]="componentsListRla.isActive"
+                      >
+                        <span>Components</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
                 <li sc-sidebar-menu-item>
                   <a sc-sidebar-menu-button>
                     <svg si-download-icon></svg>
