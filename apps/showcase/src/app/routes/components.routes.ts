@@ -249,6 +249,10 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/language-switcher/language-switcher-page'),
       },
       {
+        path: 'link',
+        loadComponent: () => import('../pages/docs/link/link-page'),
+      },
+      {
         path: 'lightbox',
         loadComponent: () => import('../pages/docs/lightbox/lightbox-page'),
       },

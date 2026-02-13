@@ -2014,6 +2014,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/link',
+    children: [
+      {
+        path: 'variants-link-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/variants-link-demo').then(
+            (m) => m.VariantsLinkDemo,
+          ),
+      },
+      {
+        path: 'sizes-link-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/sizes-link-demo').then(
+            (m) => m.SizesLinkDemo,
+          ),
+      },
+      {
+        path: 'disabled-link-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/disabled-link-demo').then(
+            (m) => m.DisabledLinkDemo,
+          ),
+      },
+      {
+        path: 'with-icons-link-demo',
+        loadComponent: () =>
+          import('../pages/docs/link/demos/with-icons-link-demo').then(
+            (m) => m.WithIconsLinkDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/lightbox',
     children: [
       {

@@ -372,6 +372,13 @@ export const COMPONENTS: ComponentItem[] = [
     library: 'ui-lab',
   },
   {
+    name: 'Link',
+    path: 'link',
+    description: 'A styled anchor element with button variants.',
+    status: 'Experimental',
+    library: 'ui',
+  },
+  {
     name: 'Language Switcher',
     path: 'language-switcher',
     description: 'Switch between different languages.',
