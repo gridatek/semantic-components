@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import { TocItem } from './toc.service';
 
 @Component({
@@ -36,12 +38,15 @@ import { TocItem } from './toc.service';
   `,
   host: {
     'data-slot': 'toc',
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Toc {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   readonly items = input<TocItem[]>([]);
   readonly activeId = input<string>('');
 

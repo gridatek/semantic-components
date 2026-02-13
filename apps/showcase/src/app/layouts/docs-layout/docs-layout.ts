@@ -2,9 +2,11 @@ import {
   afterNextRender,
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   inject,
+  input,
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
@@ -44,6 +46,7 @@ import {
   SiMoonIcon,
   SiSunIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from '@semantic-components/ui';
 import { filter } from 'rxjs';
 
 import { Logo } from '../../components/logo/logo';
@@ -307,12 +310,15 @@ import { COMPONENTS } from '../../data/components';
     </div>
   `,
   host: {
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocsLayout {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   protected readonly tocService = inject(TocService);

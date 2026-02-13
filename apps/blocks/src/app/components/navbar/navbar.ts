@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  input,
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ScButton } from '@semantic-components/ui';
+import { cn, ScButton } from '@semantic-components/ui';
 import {
   ScNavbar,
   ScNavbarProvider,
@@ -196,9 +198,12 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
   `,
   host: {
     'data-slot': 'navbar',
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Navbar {}
+export class Navbar {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+}

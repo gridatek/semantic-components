@@ -1,8 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  input,
   ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-hero-section',
@@ -35,9 +38,12 @@ import {
   `,
   host: {
     'data-slot': 'hero-section',
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroSection {}
+export class HeroSection {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+}

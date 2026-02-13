@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  input,
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ScLink } from '@semantic-components/ui';
+import { cn, ScLink } from '@semantic-components/ui';
 import {
   ScNavbar,
   ScNavbarActions,
@@ -184,11 +186,14 @@ import { Logo } from '../logo/logo';
     </div>
   `,
   host: {
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Navbar {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   protected readonly featuredComponents = COMPONENTS.slice(0, 5);
 }

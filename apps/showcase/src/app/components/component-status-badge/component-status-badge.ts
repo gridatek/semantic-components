@@ -5,6 +5,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import { ScBadge, ScBadgeVariants } from '@semantic-components/ui-lab';
 import { ComponentStatus } from '../../data/components';
 
@@ -21,12 +22,15 @@ const variantMap: Record<ComponentStatus, ScBadgeVariants['variant']> = {
     <span sc-badge [variant]="variant()">{{ status() }}</span>
   `,
   host: {
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentStatusBadge {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   readonly status = input.required<ComponentStatus>();
 
   protected readonly variant = computed(() => variantMap[this.status()]);

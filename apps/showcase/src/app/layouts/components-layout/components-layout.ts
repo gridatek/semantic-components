@@ -2,9 +2,11 @@ import {
   afterNextRender,
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   inject,
+  input,
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -16,6 +18,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
+import { cn } from '@semantic-components/ui';
 import { filter } from 'rxjs';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
@@ -65,12 +68,15 @@ import { COMPONENTS } from '../../data/components';
   `,
   host: {
     'data-slot': 'components-layout',
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentsLayout {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   protected readonly tocService = inject(TocService);

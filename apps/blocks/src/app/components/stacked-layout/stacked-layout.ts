@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  input,
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-stacked-layout',
@@ -21,9 +24,14 @@ import { RouterOutlet } from '@angular/router';
   `,
   host: {
     'data-slot': 'stacked-layout',
-    class: 'min-h-screen flex flex-col block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StackedLayout {}
+export class StackedLayout {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() =>
+    cn('min-h-screen flex flex-col block', this.classInput()),
+  );
+}

@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  input,
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScLink } from '@semantic-components/ui';
+import { cn, ScLink } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-hero-section',
@@ -33,9 +35,12 @@ import { ScLink } from '@semantic-components/ui';
     </section>
   `,
   host: {
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroSection {}
+export class HeroSection {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+}
