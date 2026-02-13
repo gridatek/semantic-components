@@ -10,14 +10,7 @@ import {
   ScCodeViewerLabel,
 } from '@semantic-components/code';
 import { ScLink } from '@semantic-components/ui';
-import {
-  ScCopyButton,
-  ScSeparator,
-  ScTabs,
-  ScTabList,
-  ScTab,
-  ScTabPanel,
-} from '@semantic-components/ui-lab';
+import { ScCopyButton, ScSeparator } from '@semantic-components/ui-lab';
 
 import { TocHeading } from '../../components/toc/toc-heading';
 
@@ -32,10 +25,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCopyButton,
     ScSeparator,
     ScLink,
-    ScTabs,
-    ScTabList,
-    ScTab,
-    ScTabPanel,
   ],
   template: `
     <div class="space-y-8">
@@ -127,62 +116,45 @@ import { TocHeading } from '../../components/toc/toc-heading';
           5. Configure styles
         </h2>
         <p class="text-muted-foreground">
-          Choose one of the two options to set up your theme styles.
+          Set up the theme styles for your project. Pick one of the two options
+          below.
         </p>
 
-        <div sc-tabs>
+        <h3 class="text-lg font-medium">Option A: Default theme</h3>
+        <p class="text-muted-foreground">
+          Import the pre-built styles in your
+          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          . This gives you the default shadcn theme out of the box.
+        </p>
+        <div sc-code-viewer>
+          <div sc-code-viewer-header>
+            <span sc-code-viewer-label>css</span>
+            <button sc-copy-button [value]="stylesDefaultCode"></button>
+          </div>
           <div
-            sc-tab-list
-            [selectedTab]="'easy'"
-            class="grid w-full grid-cols-2"
-          >
-            <button sc-tab value="easy">Easy</button>
-            <button sc-tab value="manual">Manual</button>
-          </div>
-          <div sc-tab-panel value="easy">
-            <div class="space-y-4 pt-4">
-              <p class="text-muted-foreground">
-                Import the pre-built styles in your
-                <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
-                  styles.css
-                </code>
-                :
-              </p>
-              <div sc-code-viewer>
-                <div sc-code-viewer-header>
-                  <span sc-code-viewer-label>css</span>
-                  <button sc-copy-button [value]="stylesEasyCode"></button>
-                </div>
-                <div
-                  sc-code-viewer-content
-                  [code]="stylesEasyCode"
-                  language="css"
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div sc-tab-panel value="manual">
-            <div class="space-y-4 pt-4">
-              <p class="text-muted-foreground">
-                For full control over the theme, copy the CSS variables from the
-                shadcn/ui manual installation guide into your
-                <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
-                  styles.css
-                </code>
-                :
-              </p>
-              <a
-                sc-link
-                variant="outline"
-                href="https://ui.shadcn.com/docs/installation/manual"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                shadcn/ui - Manual Installation (Configure styles)
-              </a>
-            </div>
-          </div>
+            sc-code-viewer-content
+            [code]="stylesDefaultCode"
+            language="css"
+          ></div>
         </div>
+
+        <h3 class="text-lg font-medium">Option B: Custom theme</h3>
+        <p class="text-muted-foreground">
+          For full control over colors, border radius, and other design tokens,
+          copy the CSS variables from the shadcn/ui manual installation guide
+          into your
+          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          .
+        </p>
+        <a
+          sc-link
+          variant="outline"
+          href="https://ui.shadcn.com/docs/installation/manual"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          shadcn/ui - Manual Installation (Configure styles)
+        </a>
       </section>
 
       <div sc-separator></div>
@@ -241,7 +213,7 @@ export default class GettingStartedPage {
 
   readonly step6Code = '@source "../node_modules/@semantic-components/ui";';
 
-  readonly stylesEasyCode = '@import "@semantic-components/ui/styles";';
+  readonly stylesDefaultCode = '@import "@semantic-components/ui/styles";';
 
   readonly usageCode = `import { ScButton } from '@semantic-components/ui';
 
