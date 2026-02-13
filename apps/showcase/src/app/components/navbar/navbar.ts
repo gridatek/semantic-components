@@ -62,7 +62,7 @@ import { Logo } from '../logo/logo';
   ],
   template: `
     <div sc-navbar-provider>
-      <nav sc-navbar class="sticky top-0 z-50">
+      <nav sc-navbar>
         <div sc-navbar-group>
           <!-- Brand -->
           <a sc-navbar-brand href="#">
@@ -183,6 +183,9 @@ import { Logo } from '../logo/logo';
       </div>
     </div>
   `,
+  host: {
+    class: 'block sticky top-0 z-50',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
