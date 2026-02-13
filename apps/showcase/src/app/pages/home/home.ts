@@ -3,13 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { RouterLink } from '@angular/router';
+import { ScLink } from '@semantic-components/ui';
 import { HeroSection } from '../../components/hero-section/hero-section';
 import { FeatureGrid } from '../../components/feature-grid/feature-grid';
 
 @Component({
   selector: 'app-home',
-  imports: [ScButton, HeroSection, FeatureGrid],
+  imports: [RouterLink, ScLink, HeroSection, FeatureGrid],
   template: `
     <app-hero-section />
 
@@ -22,7 +23,9 @@ import { FeatureGrid } from '../../components/feature-grid/feature-grid';
         <p class="text-muted-foreground">
           Join thousands of developers building with our component library.
         </p>
-        <button sc-button size="lg">Start Building Today</button>
+        <a sc-link size="lg" routerLink="/docs/getting-started">
+          Start Building Today
+        </a>
       </div>
     </section>
   `,

@@ -3,11 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { RouterLink } from '@angular/router';
+import { ScLink } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-hero-section',
-  imports: [ScButton],
+  imports: [RouterLink, ScLink],
   template: `
     <section
       class="py-20 px-4 md:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30"
@@ -21,10 +22,12 @@ import { ScButton } from '@semantic-components/ui';
           web applications. Start building beautiful interfaces today.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button sc-button size="lg">Get Started Free</button>
-          <button sc-button variant="outline" size="lg">
-            View Documentation
-          </button>
+          <a sc-link size="lg" routerLink="/docs/getting-started">
+            Get Started
+          </a>
+          <a sc-link variant="outline" size="lg" routerLink="/docs/components">
+            View Components
+          </a>
         </div>
       </div>
     </section>

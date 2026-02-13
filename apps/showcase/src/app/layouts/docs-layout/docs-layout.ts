@@ -105,6 +105,25 @@ import { COMPONENTS } from '../../data/components';
 
         <div sc-sidebar-content>
           <div sc-sidebar-group>
+            <div sc-sidebar-group-label>Getting Started</div>
+            <div sc-sidebar-group-content>
+              <ul sc-sidebar-menu>
+                <li sc-sidebar-menu-item>
+                  <a
+                    sc-sidebar-menu-button
+                    routerLink="/docs/getting-started"
+                    routerLinkActive
+                    #gettingStartedRla="routerLinkActive"
+                    [isActive]="gettingStartedRla.isActive"
+                  >
+                    <span>Installation</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div sc-sidebar-group>
             <div sc-sidebar-group-label>Components</div>
             <div sc-sidebar-group-content>
               <ul sc-sidebar-menu>

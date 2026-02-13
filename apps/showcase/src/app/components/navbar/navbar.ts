@@ -4,7 +4,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ScButton } from '@semantic-components/ui';
+import { ScLink } from '@semantic-components/ui';
 import {
   ScNavbar,
   ScNavbarActions,
@@ -46,7 +46,7 @@ import { Logo } from '../logo/logo';
     ScNavbarMobileMenu,
     ScNavbarMobileLink,
     ScNavbarMobileTrigger,
-    ScButton,
+    ScLink,
     ScThemeToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
@@ -116,7 +116,7 @@ import { Logo } from '../logo/logo';
               </li>
 
               <li sc-navigation-menu-item>
-                <a sc-navigation-menu-link routerLink="/docs/components">
+                <a sc-navigation-menu-link routerLink="/docs/getting-started">
                   Docs
                 </a>
               </li>
@@ -126,7 +126,13 @@ import { Logo } from '../logo/logo';
 
         <!-- Actions -->
         <div sc-navbar-actions>
-          <button sc-button class="hidden md:inline-flex">Get Started</button>
+          <a
+            sc-link
+            class="hidden md:inline-flex"
+            routerLink="/docs/getting-started"
+          >
+            Get Started
+          </a>
           <button sc-theme-toggle #themeToggle="scThemeToggle">
             @if (themeToggle.isDark()) {
               <svg si-sun-icon></svg>
@@ -170,7 +176,9 @@ import { Logo } from '../logo/logo';
             Components
           </a>
           <hr class="my-2 border-border" />
-          <button sc-button class="w-full mt-2">Get Started</button>
+          <a sc-link class="w-full mt-2" routerLink="/docs/getting-started">
+            Get Started
+          </a>
         </div>
       </div>
     </div>
