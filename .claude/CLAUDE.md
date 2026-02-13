@@ -23,7 +23,15 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 
 ### Components
 
-- Components used as element selectors (e.g. `<app-navbar>`) MUST set `class: 'block'` in the `host` object. Custom elements default to `display: inline`, which breaks layout features like sticky positioning.
+- Components used as element selectors (e.g. `<app-navbar>`) MUST use the `classInput` pattern to ensure `display: block` and allow class merging from consumers. Custom elements default to `display: inline`, which breaks layout features like sticky positioning. The pattern:
+  ```typescript
+  // host: { '[class]': 'class()' }
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+  ```
+
+  - Import `cn` from `@semantic-components/ui`.
+  - Simple demo components can use static `host: { class: 'block' }` instead.
 - Keep components small and focused on a single responsibility
 - Use `input()` and `output()` functions instead of decorators
 - Use `computed()` for derived state
