@@ -23,6 +23,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 
 ### Components
 
+- Components used as element selectors (e.g. `<app-navbar>`) MUST set `class: 'block'` in the `host` object. Custom elements default to `display: inline`, which breaks layout features like sticky positioning.
 - Keep components small and focused on a single responsibility
 - Use `input()` and `output()` functions instead of decorators
 - Use `computed()` for derived state
