@@ -30,6 +30,7 @@ import {
       <div
         sc-toggle-group
         type="single"
+        class="flex-wrap"
         [(value)]="filterCategory"
         aria-label="Filter components by category"
       >
