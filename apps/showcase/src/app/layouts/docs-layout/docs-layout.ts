@@ -138,6 +138,17 @@ import { COMPONENTS } from '../../data/components';
                     <li sc-sidebar-menu-sub-item>
                       <a
                         sc-sidebar-menu-sub-button
+                        routerLink="/docs/getting-started/ui-lab"
+                        routerLinkActive
+                        #uiLabRla="routerLinkActive"
+                        [isActive]="uiLabRla.isActive"
+                      >
+                        <span>UI Lab</span>
+                      </a>
+                    </li>
+                    <li sc-sidebar-menu-sub-item>
+                      <a
+                        sc-sidebar-menu-sub-button
                         routerLink="/docs/getting-started/carousel"
                         routerLinkActive
                         #carouselRla="routerLinkActive"
