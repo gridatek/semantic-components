@@ -135,7 +135,7 @@ import { COMPONENTS } from '../../data/components';
                         #coreRla="routerLinkActive"
                         [isActive]="coreRla.isActive"
                       >
-                        <span>Core</span>
+                        <span>UI Core</span>
                       </a>
                     </li>
                     <li sc-sidebar-menu-sub-item>

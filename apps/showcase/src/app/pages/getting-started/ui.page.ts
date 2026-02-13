@@ -15,7 +15,7 @@ import { ScCopyButton, ScSeparator } from '@semantic-components/ui-lab';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
-  selector: 'app-core-page',
+  selector: 'app-ui-page',
   imports: [
     TocHeading,
     ScCodeViewer,
@@ -163,7 +163,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CorePage {
+export default class UiPage {
   readonly installCode = 'npm install @semantic-components/ui';
 
   readonly stylesDefaultCode = '@import "@semantic-components/ui/styles";';

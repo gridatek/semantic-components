@@ -18,7 +18,7 @@ export const gettingStartedRoutes: Route[] = [
       },
       {
         path: 'core',
-        loadComponent: () => import('../pages/getting-started/core.page'),
+        loadComponent: () => import('../pages/getting-started/ui.page'),
       },
       {
         path: 'ui-lab',
