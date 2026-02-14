@@ -70,6 +70,11 @@ import { TocHeading } from '../../components/toc/toc-heading';
             — Styled with Tailwind CSS and class-variance-authority for
             consistent, customizable variants
           </li>
+          <li>
+            <strong>Tree-shakable</strong>
+            — Optimized for production with only the components you use included
+            in your bundle
+          </li>
         </ul>
       </section>
 
