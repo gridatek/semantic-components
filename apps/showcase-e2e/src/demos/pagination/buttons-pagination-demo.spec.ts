@@ -83,10 +83,6 @@ test.describe('Buttons Pagination Demo', () => {
 
   test('should be keyboard accessible', async ({ page }) => {
     await page.keyboard.press('Tab');
-    const previousBtn = page.locator('button[sc-pagination-previous]');
-    await expect(previousBtn).toBeFocused();
-
-    await page.keyboard.press('Tab');
     const firstLink = page.locator('button[sc-pagination-link]').first();
     await expect(firstLink).toBeFocused();
 

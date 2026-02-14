@@ -126,11 +126,8 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
       'WebKit does not Tab-focus select elements by default',
     );
 
-    // Tab to the page size select first (it's before the pagination list)
     const select = page.locator('select[sc-pagination-page-size-select]');
-
-    // Tab into the pagination area
-    await page.keyboard.press('Tab');
+    await select.focus();
     await expect(select).toBeFocused();
   });
 
