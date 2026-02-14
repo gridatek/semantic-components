@@ -5,12 +5,11 @@ import {
 } from '@angular/core';
 import { ScNavigationMenuDemoContainer } from './demos/navigation-menu-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-navigation-menu-page',
-  imports: [ScNavigationMenuDemoContainer, TocHeading, ComponentStatusBadge],
+  imports: [ScNavigationMenuDemoContainer, TocHeading, ComponentBadges],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
           A collection of links for navigating websites with hover-activated
           dropdowns.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="navigation-menu" />
       </div>
 
       <section class="space-y-8">
@@ -31,8 +30,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class NavigationMenuPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'navigation-menu',
-  )!.status;
-}
+export default class NavigationMenuPage {}

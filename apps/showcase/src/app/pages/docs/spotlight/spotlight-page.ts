@@ -8,8 +8,7 @@ import { CustomOverlaySpotlightDemoContainer } from './demos/custom-overlay-spot
 import { PlacementSpotlightDemoContainer } from './demos/placement-spotlight-demo-container';
 import { InteractiveSpotlightDemoContainer } from './demos/interactive-spotlight-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-spotlight-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     PlacementSpotlightDemoContainer,
     InteractiveSpotlightDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -28,7 +27,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Highlight specific UI elements with a spotlight overlay effect.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="spotlight" />
       </div>
 
       <section class="space-y-8">
@@ -43,7 +42,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SpotlightPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'spotlight')!
-    .status;
-}
+export default class SpotlightPage {}

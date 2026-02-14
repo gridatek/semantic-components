@@ -18,8 +18,7 @@ import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-
 import RequirementsPasswordFieldDemoContainer from './demos/requirements-password-field-demo-container';
 import FullPasswordFieldDemoContainer from './demos/full-password-field-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-password-field-page',
@@ -37,7 +36,7 @@ import { COMPONENTS } from '../../../data/components';
     RequirementsPasswordFieldDemoContainer,
     FullPasswordFieldDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -46,7 +45,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A composable password input component with visibility toggle.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="password-field" />
       </div>
 
       <section class="space-y-4">
@@ -80,9 +79,6 @@ import { COMPONENTS } from '../../../data/components';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class PasswordFieldPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'password-field',
-  )!.status;
   readonly usageCode = `import {
   ScPasswordField,
   ScPasswordFieldInputGroup,

@@ -11,8 +11,7 @@ import { DestructiveSplitButtonDemoContainer } from './demos/destructive-split-b
 import { DisabledSplitButtonDemoContainer } from './demos/disabled-split-button-demo-container';
 import { FormSplitButtonDemoContainer } from './demos/form-split-button-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-split-button-page',
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
     DisabledSplitButtonDemoContainer,
     FormSplitButtonDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -35,7 +34,7 @@ import { COMPONENTS } from '../../../data/components';
           A button with a main action and a dropdown for additional related
           actions.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="split-button" />
       </div>
 
       <section class="space-y-8">
@@ -53,7 +52,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SplitButtonPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'split-button')!
-    .status;
-}
+export default class SplitButtonPage {}

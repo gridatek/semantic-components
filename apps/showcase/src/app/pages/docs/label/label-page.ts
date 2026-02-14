@@ -7,8 +7,7 @@ import { BasicLabelDemoContainer } from './demos/basic-label-demo-container';
 import { CheckboxLabelDemoContainer } from './demos/checkbox-label-demo-container';
 import { FieldLabelDemoContainer } from './demos/field-label-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-label-page',
@@ -17,7 +16,7 @@ import { COMPONENTS } from '../../../data/components';
     CheckboxLabelDemoContainer,
     FieldLabelDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -26,7 +25,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Renders an accessible label associated with controls.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="label" />
       </div>
 
       <section class="space-y-8">
@@ -40,6 +39,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class LabelPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'label')!.status;
-}
+export default class LabelPage {}

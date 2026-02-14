@@ -12,8 +12,7 @@ import { StepSliderDemoContainer } from './demos/step-slider-demo-container';
 import { TemperatureSliderDemoContainer } from './demos/temperature-slider-demo-container';
 import { VolumeSliderDemoContainer } from './demos/volume-slider-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-slider-page',
@@ -27,7 +26,7 @@ import { COMPONENTS } from '../../../data/components';
     TemperatureSliderDemoContainer,
     SignalFormsSliderDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -36,7 +35,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           An input where the user selects a value from within a given range.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="slider" />
       </div>
 
       <section class="space-y-8">
@@ -55,7 +54,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SliderPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'slider')!
-    .status;
-}
+export default class SliderPage {}

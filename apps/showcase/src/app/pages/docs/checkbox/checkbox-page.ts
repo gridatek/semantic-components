@@ -12,8 +12,7 @@ import { LabelCheckboxDemoContainer } from './demos/label-checkbox-demo-containe
 import { SignalFormsCheckboxDemoContainer } from './demos/signal-forms-checkbox-demo-container';
 import { WithDescriptionCheckboxDemoContainer } from './demos/with-description-checkbox-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-checkbox-page',
@@ -27,7 +26,7 @@ import { COMPONENTS } from '../../../data/components';
     SignalFormsCheckboxDemoContainer,
     CustomThemeCheckboxDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -37,7 +36,7 @@ import { COMPONENTS } from '../../../data/components';
           A control that allows the user to toggle between checked and not
           checked.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="checkbox" />
       </div>
 
       <section class="space-y-8">
@@ -56,7 +55,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CheckboxPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'checkbox')!
-    .status;
-}
+export default class CheckboxPage {}

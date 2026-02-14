@@ -9,8 +9,7 @@ import { CustomTriggerMentionInputDemoContainer } from './demos/custom-trigger-m
 import { DisabledMentionInputDemoContainer } from './demos/disabled-mention-input-demo-container';
 import { FormMentionInputDemoContainer } from './demos/form-mention-input-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-mention-input-page',
@@ -21,7 +20,7 @@ import { COMPONENTS } from '../../../data/components';
     DisabledMentionInputDemoContainer,
     FormMentionInputDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -31,7 +30,7 @@ import { COMPONENTS } from '../../../data/components';
           Text input with &#64;mention support for users, channels, or custom
           entities.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="mention-input" />
       </div>
 
       <section class="space-y-8">
@@ -47,7 +46,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class MentionInputPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'mention-input')!
-    .status;
-}
+export default class MentionInputPage {}

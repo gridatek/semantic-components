@@ -11,8 +11,7 @@ import { ProductBarcodeScannerDemoContainer } from './demos/product-barcode-scan
 import { QrCodeBarcodeScannerDemoContainer } from './demos/qr-code-barcode-scanner-demo-container';
 import { SingleScanBarcodeScannerDemoContainer } from './demos/single-scan-barcode-scanner-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-barcode-scanner-page',
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
     FormatsBarcodeScannerDemoContainer,
     BrowserSupportBarcodeScannerDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -35,7 +34,7 @@ import { COMPONENTS } from '../../../data/components';
           Scan barcodes and QR codes using your device's camera with the Barcode
           Detection API.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="barcode-scanner" />
       </div>
 
       <section class="space-y-8">
@@ -53,8 +52,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class BarcodeScannerPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'barcode-scanner',
-  )!.status;
-}
+export default class BarcodeScannerPage {}

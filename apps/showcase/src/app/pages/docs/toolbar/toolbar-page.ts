@@ -5,12 +5,11 @@ import {
 } from '@angular/core';
 import { BasicToolbarDemoContainer } from './demos/basic-toolbar-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-toolbar-page',
-  imports: [BasicToolbarDemoContainer, TocHeading, ComponentStatusBadge],
+  imports: [BasicToolbarDemoContainer, TocHeading, ComponentBadges],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -18,7 +17,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A container for grouping a set of controls, such as toggle buttons.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="toolbar" />
       </div>
 
       <section class="space-y-8">
@@ -30,7 +29,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ToolbarPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'toolbar')!
-    .status;
-}
+export default class ToolbarPage {}

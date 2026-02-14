@@ -13,8 +13,7 @@ import { SettingsPanelLanguageSwitcherDemoContainer } from './demos/settings-pan
 import { SizesLanguageSwitcherDemoContainer } from './demos/sizes-language-switcher-demo-container';
 import { VariantsLanguageSwitcherDemoContainer } from './demos/variants-language-switcher-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-language-switcher-page',
@@ -29,7 +28,7 @@ import { COMPONENTS } from '../../../data/components';
     NavigationLanguageSwitcherDemoContainer,
     SettingsPanelLanguageSwitcherDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -40,7 +39,7 @@ import { COMPONENTS } from '../../../data/components';
           localize. Changing the language will refresh the page to load the
           appropriate locale bundle.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="language-switcher" />
       </div>
 
       <section class="space-y-8">
@@ -60,8 +59,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class LanguageSwitcherPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'language-switcher',
-  )!.status;
-}
+export default class LanguageSwitcherPage {}

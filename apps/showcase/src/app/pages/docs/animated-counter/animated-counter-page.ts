@@ -7,8 +7,7 @@ import { BasicAnimatedCounterDemoContainer } from './demos/basic-animated-counte
 import { EasingAnimatedCounterDemoContainer } from './demos/easing-animated-counter-demo-container';
 import { PrefixAnimatedCounterDemoContainer } from './demos/prefix-animated-counter-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-animated-counter-page',
@@ -17,14 +16,14 @@ import { COMPONENTS } from '../../../data/components';
     EasingAnimatedCounterDemoContainer,
     PrefixAnimatedCounterDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight">AnimatedCounter</h1>
         <p class="text-muted-foreground">A animated counter component.</p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="animated-counter" />
       </div>
 
       <section class="space-y-8">
@@ -38,8 +37,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AnimatedCounterPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'animated-counter',
-  )!.status;
-}
+export default class AnimatedCounterPage {}

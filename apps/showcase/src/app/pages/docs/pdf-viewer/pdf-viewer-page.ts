@@ -8,8 +8,7 @@ import { MinimalPdfViewerDemoContainer } from './demos/minimal-pdf-viewer-demo-c
 import { CustomToolbarPdfViewerDemoContainer } from './demos/custom-toolbar-pdf-viewer-demo-container';
 import { InteractivePdfViewerDemoContainer } from './demos/interactive-pdf-viewer-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-pdf-viewer-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     CustomToolbarPdfViewerDemoContainer,
     InteractivePdfViewerDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -29,7 +28,7 @@ import { COMPONENTS } from '../../../data/components';
           A document viewer component for displaying PDF files with navigation,
           zoom, and toolbar controls.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="pdf-viewer" />
       </div>
 
       <section class="space-y-8">
@@ -44,7 +43,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class PdfViewerPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'pdf-viewer')!
-    .status;
-}
+export default class PdfViewerPage {}

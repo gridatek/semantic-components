@@ -12,8 +12,7 @@ import {
 import { ScCopyButton } from '@semantic-components/ui-lab';
 import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-code-viewer-page',
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
     ScCopyButton,
     BasicCodeViewerDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -34,7 +33,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Display syntax-highlighted code with copy functionality.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="code-viewer" />
       </div>
 
       <section class="space-y-4">
@@ -62,8 +61,6 @@ import { COMPONENTS } from '../../../data/components';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CodeViewerPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'code-viewer')!
-    .status;
   readonly usageCode = `import {
   ScCodeViewer,
   ScCodeViewerHeader,

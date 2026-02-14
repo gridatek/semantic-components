@@ -12,8 +12,7 @@ import { RgbColorPickerDemoContainer } from './demos/rgb-color-picker-demo-conta
 import { SimpleColorPickerDemoContainer } from './demos/simple-color-picker-demo-container';
 import { SwatchesColorPickerDemoContainer } from './demos/swatches-color-picker-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-color-picker-page',
@@ -27,7 +26,7 @@ import { COMPONENTS } from '../../../data/components';
     HslColorPickerDemoContainer,
     PreviewColorPickerDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -36,7 +35,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A component for selecting colors with various formats.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="color-picker" />
       </div>
 
       <section class="space-y-8">
@@ -55,7 +54,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ColorPickerPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'color-picker')!
-    .status;
-}
+export default class ColorPickerPage {}

@@ -8,8 +8,7 @@ import { ComplexVirtualListDemoContainer } from './demos/complex-virtual-list-de
 import { ScrollControlsVirtualListDemoContainer } from './demos/scroll-controls-virtual-list-demo-container';
 import { CustomHeightVirtualListDemoContainer } from './demos/custom-height-virtual-list-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-virtual-list-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     ScrollControlsVirtualListDemoContainer,
     CustomHeightVirtualListDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -28,7 +27,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Efficiently render large lists by only rendering visible items.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="virtual-list" />
       </div>
 
       <section class="space-y-8">
@@ -43,7 +42,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class VirtualListPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'virtual-list')!
-    .status;
-}
+export default class VirtualListPage {}

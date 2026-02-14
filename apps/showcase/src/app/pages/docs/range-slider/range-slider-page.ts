@@ -8,8 +8,7 @@ import { PriceRangeSliderDemoContainer } from './demos/price-range-slider-demo-c
 import { TemperatureRangeSliderDemoContainer } from './demos/temperature-range-slider-demo-container';
 import { DisabledRangeSliderDemoContainer } from './demos/disabled-range-slider-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-range-slider-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     TemperatureRangeSliderDemoContainer,
     DisabledRangeSliderDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -29,7 +28,7 @@ import { COMPONENTS } from '../../../data/components';
           An input where the user selects a range with minimum and maximum
           values from within a given range using dual thumbs.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="range-slider" />
       </div>
 
       <section class="space-y-8">
@@ -44,7 +43,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RangeSliderPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'range-slider')!
-    .status;
-}
+export default class RangeSliderPage {}

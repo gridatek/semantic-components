@@ -9,8 +9,7 @@ import { OutlineToggleGroupDemoContainer } from './demos/outline-toggle-group-de
 import { SingleToggleGroupDemoContainer } from './demos/single-toggle-group-demo-container';
 import { SizesToggleGroupDemoContainer } from './demos/sizes-toggle-group-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-toggle-group-page',
@@ -21,7 +20,7 @@ import { COMPONENTS } from '../../../data/components';
     SizesToggleGroupDemoContainer,
     DisabledToggleGroupDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -30,7 +29,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A set of two-state buttons that can be toggled on or off.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="toggle-group" />
       </div>
 
       <section class="space-y-8">
@@ -46,7 +45,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ToggleGroupPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'toggle-group')!
-    .status;
-}
+export default class ToggleGroupPage {}

@@ -11,8 +11,7 @@ import { FormMultiSelectDemoContainer } from './demos/form-multi-select-demo-con
 import { NosearchMultiSelectDemoContainer } from './demos/nosearch-multi-select-demo-container';
 import { SelectallMultiSelectDemoContainer } from './demos/selectall-multi-select-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-multi-select-page',
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
     DisabledMultiSelectDemoContainer,
     FormMultiSelectDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -35,7 +34,7 @@ import { COMPONENTS } from '../../../data/components';
           Select multiple options from a dropdown with chips, search, and
           select-all functionality.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="multi-select" />
       </div>
 
       <section class="space-y-8">
@@ -53,7 +52,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class MultiSelectPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'multi-select')!
-    .status;
-}
+export default class MultiSelectPage {}

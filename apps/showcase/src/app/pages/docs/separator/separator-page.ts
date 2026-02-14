@@ -7,8 +7,7 @@ import { BasicSeparatorDemoContainer } from './demos/basic-separator-demo-contai
 import { CardSeparatorDemoContainer } from './demos/card-separator-demo-container';
 import { VerticalSeparatorDemoContainer } from './demos/vertical-separator-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-separator-page',
@@ -17,7 +16,7 @@ import { COMPONENTS } from '../../../data/components';
     VerticalSeparatorDemoContainer,
     CardSeparatorDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -26,7 +25,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Visually or semantically separates content.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="separator" />
       </div>
 
       <section class="space-y-8">
@@ -40,7 +39,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SeparatorPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'separator')!
-    .status;
-}
+export default class SeparatorPage {}

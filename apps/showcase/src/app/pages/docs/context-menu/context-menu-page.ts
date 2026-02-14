@@ -5,12 +5,11 @@ import {
 } from '@angular/core';
 import { ScContextMenuDemoContainer } from './demos/context-menu-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-context-menu-page',
-  imports: [ScContextMenuDemoContainer, TocHeading, ComponentStatusBadge],
+  imports: [ScContextMenuDemoContainer, TocHeading, ComponentBadges],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
           Displays a menu at the pointer position when triggered by a
           right-click.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="context-menu" />
       </div>
 
       <section class="space-y-8">
@@ -31,7 +30,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ContextMenuPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'context-menu')!
-    .status;
-}
+export default class ContextMenuPage {}

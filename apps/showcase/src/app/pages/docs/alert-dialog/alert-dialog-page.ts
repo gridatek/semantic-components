@@ -6,8 +6,7 @@ import {
 import { BasicAlertDialogDemoContainer } from './demos/basic-alert-dialog-demo-container';
 import { DestructiveAlertDialogDemoContainer } from './demos/destructive-alert-dialog-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-alert-dialog-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     BasicAlertDialogDemoContainer,
     DestructiveAlertDialogDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
           A modal dialog that interrupts the user with important content and
           expects a response.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="alert-dialog" />
       </div>
 
       <section class="space-y-8">
@@ -38,7 +37,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AlertDialogPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'alert-dialog')!
-    .status;
-}
+export default class AlertDialogPage {}

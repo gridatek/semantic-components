@@ -7,8 +7,7 @@ import { GroupedNotificationCenterDemoContainer } from './demos/grouped-notifica
 import { FlatNotificationCenterDemoContainer } from './demos/flat-notification-center-demo-container';
 import { EmptyNotificationCenterDemoContainer } from './demos/empty-notification-center-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-notification-center-page',
@@ -17,7 +16,7 @@ import { COMPONENTS } from '../../../data/components';
     FlatNotificationCenterDemoContainer,
     EmptyNotificationCenterDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -27,7 +26,7 @@ import { COMPONENTS } from '../../../data/components';
           A grouped notification management component with filtering, read
           states, and actions.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="notification-center" />
       </div>
 
       <section class="space-y-8">
@@ -41,8 +40,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class NotificationCenterPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'notification-center',
-  )!.status;
-}
+export default class NotificationCenterPage {}

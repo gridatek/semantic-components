@@ -10,8 +10,7 @@ import { DotSeparatorOptFieldDemoContainer } from './demos/dot-separator-opt-fie
 import { DisabledOptFieldDemoContainer } from './demos/disabled-opt-field-demo-container';
 import { VerificationOptFieldDemoContainer } from './demos/verification-opt-field-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-opt-field-page',
@@ -23,7 +22,7 @@ import { COMPONENTS } from '../../../data/components';
     DisabledOptFieldDemoContainer,
     VerificationOptFieldDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -32,7 +31,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Accessible one-time password component with copy paste functionality.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="opt-field" />
       </div>
 
       <section class="space-y-8">
@@ -49,7 +48,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class OptFieldPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'opt-field')!
-    .status;
-}
+export default class OptFieldPage {}

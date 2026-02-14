@@ -9,8 +9,7 @@ import { DisabledComboboxDemoContainer } from './demos/disabled-combobox-demo-co
 import { FormComboboxDemoContainer } from './demos/form-combobox-demo-container';
 import { MultipleComboboxDemoContainer } from './demos/multiple-combobox-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-combobox-page',
@@ -21,7 +20,7 @@ import { COMPONENTS } from '../../../data/components';
     CountriesComboboxDemoContainer,
     FormComboboxDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -30,7 +29,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Autocomplete input and command palette with a list of suggestions.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="combobox" />
       </div>
 
       <section class="space-y-8">
@@ -46,7 +45,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ComboboxPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'combobox')!
-    .status;
-}
+export default class ComboboxPage {}

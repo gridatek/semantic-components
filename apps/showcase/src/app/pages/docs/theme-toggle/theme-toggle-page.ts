@@ -10,8 +10,7 @@ import { SizesThemeToggleDemoContainer } from './demos/sizes-theme-toggle-demo-c
 import { ThemeSelectDemoContainer } from './demos/theme-select-demo-container';
 import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-theme-toggle-page',
@@ -23,7 +22,7 @@ import { COMPONENTS } from '../../../data/components';
     NavigationThemeToggleDemoContainer,
     SettingsPanelThemeToggleDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -33,7 +32,7 @@ import { COMPONENTS } from '../../../data/components';
           A component for switching between light and dark themes with system
           preference support.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="theme-toggle" />
       </div>
 
       <section class="space-y-8">
@@ -50,7 +49,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ThemeTogglePage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'theme-toggle')!
-    .status;
-}
+export default class ThemeTogglePage {}

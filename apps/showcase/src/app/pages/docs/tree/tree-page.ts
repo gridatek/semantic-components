@@ -7,8 +7,7 @@ import { FileExplorerTreeDemoContainer } from './demos/file-explorer-tree-demo-c
 import { NavigationTreeDemoContainer } from './demos/navigation-tree-demo-container';
 import { SimpleTreeDemoContainer } from './demos/simple-tree-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-tree-page',
@@ -17,7 +16,7 @@ import { COMPONENTS } from '../../../data/components';
     NavigationTreeDemoContainer,
     SimpleTreeDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -26,7 +25,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A hierarchical collapsible tree for displaying nested data.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="tree" />
       </div>
 
       <section class="space-y-8">
@@ -40,6 +39,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TreePage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'tree')!.status;
-}
+export default class TreePage {}

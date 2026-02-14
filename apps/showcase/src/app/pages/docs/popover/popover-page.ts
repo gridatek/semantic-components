@@ -10,8 +10,7 @@ import { LeftPopoverDemoContainer } from './demos/left-popover-demo-container';
 import { AlignStartPopoverDemoContainer } from './demos/align-start-popover-demo-container';
 import { AlignEndPopoverDemoContainer } from './demos/align-end-popover-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-popover-page',
@@ -23,7 +22,7 @@ import { COMPONENTS } from '../../../data/components';
     AlignStartPopoverDemoContainer,
     AlignEndPopoverDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -32,7 +31,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Displays rich content in a portal, triggered by a button.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="popover" />
       </div>
 
       <section class="space-y-8">
@@ -49,7 +48,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class PopoverPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'popover')!
-    .status;
-}
+export default class PopoverPage {}

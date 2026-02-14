@@ -6,8 +6,7 @@ import {
 import { BasicInputGroupDemoContainer } from './demos/basic-input-group-demo-container';
 import { ButtonInputGroupDemoContainer } from './demos/button-input-group-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-input-group-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     BasicInputGroupDemoContainer,
     ButtonInputGroupDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
           A composable input group for combining inputs with addons, buttons,
           and text.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="input-group" />
       </div>
 
       <section class="space-y-8">
@@ -38,7 +37,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class InputGroupPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'input-group')!
-    .status;
-}
+export default class InputGroupPage {}

@@ -13,8 +13,7 @@ import { QuietZoneQrCodeDemoContainer } from './demos/quiet-zone-qr-code-demo-co
 import { DownloadQrCodeDemoContainer } from './demos/download-qr-code-demo-container';
 import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-qr-code-page',
@@ -29,7 +28,7 @@ import { COMPONENTS } from '../../../data/components';
     DownloadQrCodeDemoContainer,
     UseCasesQrCodeDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -39,7 +38,7 @@ import { COMPONENTS } from '../../../data/components';
           Generate QR codes from text or URLs with customizable colors and logo
           support.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="qr-code" />
       </div>
 
       <section class="space-y-8">
@@ -59,7 +58,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class QrCodePage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'qr-code')!
-    .status;
-}
+export default class QrCodePage {}

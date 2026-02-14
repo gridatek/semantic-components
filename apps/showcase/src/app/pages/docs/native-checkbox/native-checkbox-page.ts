@@ -7,8 +7,7 @@ import { BasicNativeCheckboxDemoContainer } from './demos/basic-native-checkbox-
 import { IndeterminateNativeCheckboxDemoContainer } from './demos/indeterminate-native-checkbox-demo-container';
 import { SignalFormsNativeCheckboxDemoContainer } from './demos/signal-forms-native-checkbox-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-native-checkbox-page',
@@ -17,7 +16,7 @@ import { COMPONENTS } from '../../../data/components';
     IndeterminateNativeCheckboxDemoContainer,
     SignalFormsNativeCheckboxDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -27,7 +26,7 @@ import { COMPONENTS } from '../../../data/components';
           A native input checkbox directive that works seamlessly with Angular
           forms and Signal Forms.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="native-checkbox" />
       </div>
 
       <section class="space-y-8">
@@ -41,8 +40,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class NativeCheckboxPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'native-checkbox',
-  )!.status;
-}
+export default class NativeCheckboxPage {}

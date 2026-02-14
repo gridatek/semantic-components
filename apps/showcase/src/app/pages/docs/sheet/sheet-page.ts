@@ -8,8 +8,7 @@ import { LeftSheetDemoContainer } from './demos/left-sheet-demo-container';
 import { TopSheetDemoContainer } from './demos/top-sheet-demo-container';
 import { BottomSheetDemoContainer } from './demos/bottom-sheet-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-sheet-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     TopSheetDemoContainer,
     BottomSheetDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -29,7 +28,7 @@ import { COMPONENTS } from '../../../data/components';
           Extends the Dialog component to display content that complements the
           main content of the screen. Slides in from the edge of the screen.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="sheet" />
       </div>
 
       <section class="space-y-8">
@@ -44,6 +43,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SheetPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'sheet')!.status;
-}
+export default class SheetPage {}

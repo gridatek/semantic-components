@@ -16,8 +16,7 @@ import { OutputTagInputDemoContainer } from './demos/output-tag-input-demo-conta
 import { ValidationTagInputDemoContainer } from './demos/validation-tag-input-demo-container';
 import { VariantsTagInputDemoContainer } from './demos/variants-tag-input-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-tag-input-page',
@@ -35,7 +34,7 @@ import { COMPONENTS } from '../../../data/components';
     EmailTagInputDemoContainer,
     OutputTagInputDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -44,7 +43,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A multi-tag input component with chips for adding and removing tags.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="tag-input" />
       </div>
 
       <section class="space-y-8">
@@ -67,7 +66,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TagInputPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'tag-input')!
-    .status;
-}
+export default class TagInputPage {}

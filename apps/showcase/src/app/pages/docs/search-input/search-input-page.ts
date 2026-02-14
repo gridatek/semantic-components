@@ -7,8 +7,7 @@ import { BasicSearchInputDemoContainer } from './demos/basic-search-input-demo-c
 import { LoadingSearchInputDemoContainer } from './demos/loading-search-input-demo-container';
 import { CategoriesSearchInputDemoContainer } from './demos/categories-search-input-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-search-input-page',
@@ -17,14 +16,14 @@ import { COMPONENTS } from '../../../data/components';
     LoadingSearchInputDemoContainer,
     CategoriesSearchInputDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight">SearchInput</h1>
         <p class="text-muted-foreground">A search input component.</p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="search-input" />
       </div>
 
       <section class="space-y-8">
@@ -38,7 +37,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SearchInputPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'search-input')!
-    .status;
-}
+export default class SearchInputPage {}

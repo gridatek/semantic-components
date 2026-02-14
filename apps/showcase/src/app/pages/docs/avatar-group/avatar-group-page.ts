@@ -10,8 +10,7 @@ import { SizesAvatarGroupDemoContainer } from './demos/sizes-avatar-group-demo-c
 import { SpacingAvatarGroupDemoContainer } from './demos/spacing-avatar-group-demo-container';
 import { TeamAvatarGroupDemoContainer } from './demos/team-avatar-group-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-avatar-group-page',
@@ -23,7 +22,7 @@ import { COMPONENTS } from '../../../data/components';
     FallbackAvatarGroupDemoContainer,
     TeamAvatarGroupDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -33,7 +32,7 @@ import { COMPONENTS } from '../../../data/components';
           Display a group of avatars with stacked/overlapping layout and
           overflow indicator.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="avatar-group" />
       </div>
 
       <section class="space-y-8">
@@ -50,7 +49,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AvatarGroupPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'avatar-group')!
-    .status;
-}
+export default class AvatarGroupPage {}

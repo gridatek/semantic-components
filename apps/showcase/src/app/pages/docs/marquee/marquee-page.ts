@@ -13,8 +13,7 @@ import { PauseOnHoverMarqueeDemoContainer } from './demos/pause-on-hover-marquee
 import { GalleryMarqueeDemoContainer } from './demos/gallery-marquee-demo-container';
 import { StackedMarqueeDemoContainer } from './demos/stacked-marquee-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-marquee-page',
@@ -29,7 +28,7 @@ import { COMPONENTS } from '../../../data/components';
     GalleryMarqueeDemoContainer,
     StackedMarqueeDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -39,7 +38,7 @@ import { COMPONENTS } from '../../../data/components';
           Scrolling content with smooth animations, multiple directions, and
           customizable speed.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="marquee" />
       </div>
 
       <section class="space-y-8">
@@ -59,7 +58,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class MarqueePage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'marquee')!
-    .status;
-}
+export default class MarqueePage {}

@@ -7,8 +7,7 @@ import { HorizontalStepperDemoContainer } from './demos/horizontal-stepper-demo-
 import { VerticalStepperDemoContainer } from './demos/vertical-stepper-demo-container';
 import { SimpleStepperDemoContainer } from './demos/simple-stepper-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-stepper-page',
@@ -17,7 +16,7 @@ import { COMPONENTS } from '../../../data/components';
     VerticalStepperDemoContainer,
     SimpleStepperDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -26,7 +25,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A multi-step wizard component for guiding users through a process.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="stepper" />
       </div>
 
       <section class="space-y-8">
@@ -40,7 +39,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class StepperPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'stepper')!
-    .status;
-}
+export default class StepperPage {}

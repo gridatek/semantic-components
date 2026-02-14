@@ -10,8 +10,7 @@ import { FormSwitchDemoContainer } from './demos/form-switch-demo-container';
 import { SignalFormsSwitchDemoContainer } from './demos/signal-forms-switch-demo-container';
 import { StateSwitchDemoContainer } from './demos/state-switch-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-switch-page',
@@ -23,7 +22,7 @@ import { COMPONENTS } from '../../../data/components';
     DescriptionSwitchDemoContainer,
     SignalFormsSwitchDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -33,7 +32,7 @@ import { COMPONENTS } from '../../../data/components';
           A control that allows the user to toggle between checked and not
           checked.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="switch" />
       </div>
 
       <section class="space-y-8">
@@ -50,7 +49,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SwitchPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'switch')!
-    .status;
-}
+export default class SwitchPage {}

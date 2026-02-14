@@ -10,8 +10,7 @@ import { ThreePanelsResizableDemoContainer } from './demos/three-panels-resizabl
 import { NestedResizableDemoContainer } from './demos/nested-resizable-demo-container';
 import { IdeLayoutResizableDemoContainer } from './demos/ide-layout-resizable-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-resizable-page',
@@ -23,7 +22,7 @@ import { COMPONENTS } from '../../../data/components';
     NestedResizableDemoContainer,
     IdeLayoutResizableDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -32,7 +31,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Accessible resizable panel groups and layouts with keyboard support.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="resizable" />
       </div>
 
       <section class="space-y-8">
@@ -49,7 +48,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ResizablePage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'resizable')!
-    .status;
-}
+export default class ResizablePage {}

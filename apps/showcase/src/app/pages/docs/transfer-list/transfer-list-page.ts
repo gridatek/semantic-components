@@ -6,8 +6,7 @@ import {
 import { BasicTransferListDemoContainer } from './demos/basic-transfer-list-demo-container';
 import { NoSearchTransferListDemoContainer } from './demos/no-search-transfer-list-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-transfer-list-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     BasicTransferListDemoContainer,
     NoSearchTransferListDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -24,7 +23,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Move items between two lists with search and selection controls.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="transfer-list" />
       </div>
 
       <section class="space-y-8">
@@ -37,7 +36,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TransferListPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'transfer-list')!
-    .status;
-}
+export default class TransferListPage {}

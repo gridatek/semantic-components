@@ -8,8 +8,7 @@ import { CustomSeparatorBreadcrumbDemoContainer } from './demos/custom-separator
 import { EllipsisBreadcrumbDemoContainer } from './demos/ellipsis-breadcrumb-demo-container';
 import { LongerPathBreadcrumbDemoContainer } from './demos/longer-path-breadcrumb-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-breadcrumb-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     CustomSeparatorBreadcrumbDemoContainer,
     LongerPathBreadcrumbDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -28,7 +27,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Displays the path to the current resource using a hierarchy of links.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="breadcrumb" />
       </div>
 
       <section class="space-y-8">
@@ -43,7 +42,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class BreadcrumbPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'breadcrumb')!
-    .status;
-}
+export default class BreadcrumbPage {}

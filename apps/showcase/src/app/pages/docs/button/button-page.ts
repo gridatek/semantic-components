@@ -9,8 +9,7 @@ import { SizesButtonDemoContainer } from './demos/sizes-button-demo-container';
 import { VariantsButtonDemoContainer } from './demos/variants-button-demo-container';
 import { WithIconsButtonDemoContainer } from './demos/with-icons-button-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-button-page',
@@ -21,7 +20,7 @@ import { COMPONENTS } from '../../../data/components';
     DisabledButtonDemoContainer,
     LoadingButtonDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -30,7 +29,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Displays a button or a component that looks like a button.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="button" />
       </div>
 
       <section class="space-y-8">
@@ -46,7 +45,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ButtonPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'button')!
-    .status;
-}
+export default class ButtonPage {}

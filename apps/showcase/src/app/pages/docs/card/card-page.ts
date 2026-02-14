@@ -8,8 +8,7 @@ import { FormCardDemoContainer } from './demos/form-card-demo-container';
 import { NotificationCardDemoContainer } from './demos/notification-card-demo-container';
 import { StatsCardDemoContainer } from './demos/stats-card-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-card-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     NotificationCardDemoContainer,
     StatsCardDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -28,7 +27,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Displays a card with header, content, and footer.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="card" />
       </div>
 
       <section class="space-y-8">
@@ -43,6 +42,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CardPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'card')!.status;
-}
+export default class CardPage {}

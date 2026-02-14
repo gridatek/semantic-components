@@ -11,8 +11,7 @@ import { FormInputDemoContainer } from './demos/form-input-demo-container';
 import { LabelInputDemoContainer } from './demos/label-input-demo-container';
 import { TypesInputDemoContainer } from './demos/types-input-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-input-page',
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
     ButtonInputDemoContainer,
     FormInputDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -35,7 +34,7 @@ import { COMPONENTS } from '../../../data/components';
           Displays a form input field or a component that looks like an input
           field.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="input" />
       </div>
 
       <section class="space-y-8">
@@ -53,6 +52,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class InputPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'input')!.status;
-}
+export default class InputPage {}

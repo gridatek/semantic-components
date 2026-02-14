@@ -6,8 +6,7 @@ import {
 import { BasicEmptyDemoContainer } from './demos/basic-empty-demo-container';
 import { ActionsEmptyDemoContainer } from './demos/actions-empty-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-empty-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     BasicEmptyDemoContainer,
     ActionsEmptyDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -24,7 +23,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A composable empty state component for displaying placeholder content.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="empty" />
       </div>
 
       <section class="space-y-8">
@@ -37,6 +36,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class EmptyPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'empty')!.status;
-}
+export default class EmptyPage {}

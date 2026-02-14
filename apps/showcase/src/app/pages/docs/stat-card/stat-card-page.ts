@@ -8,8 +8,7 @@ import { SizesStatCardDemoContainer } from './demos/sizes-stat-card-demo-contain
 import { VariantsStatCardDemoContainer } from './demos/variants-stat-card-demo-container';
 import { DescriptionStatCardDemoContainer } from './demos/description-stat-card-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-stat-card-page',
@@ -19,14 +18,14 @@ import { COMPONENTS } from '../../../data/components';
     VariantsStatCardDemoContainer,
     DescriptionStatCardDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight">StatCard</h1>
         <p class="text-muted-foreground">A stat card component.</p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="stat-card" />
       </div>
 
       <section class="space-y-8">
@@ -41,7 +40,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class StatCardPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'stat-card')!
-    .status;
-}
+export default class StatCardPage {}

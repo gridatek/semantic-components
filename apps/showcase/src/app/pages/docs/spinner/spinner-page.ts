@@ -8,8 +8,7 @@ import { ColorsSpinnerDemoContainer } from './demos/colors-spinner-demo-containe
 import { ButtonSpinnerDemoContainer } from './demos/button-spinner-demo-container';
 import { OverlaySpinnerDemoContainer } from './demos/overlay-spinner-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-spinner-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     ButtonSpinnerDemoContainer,
     OverlaySpinnerDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -28,7 +27,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Loading indicators with multiple animation styles and sizes.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="spinner" />
       </div>
 
       <section class="space-y-8">
@@ -43,7 +42,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SpinnerPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'spinner')!
-    .status;
-}
+export default class SpinnerPage {}

@@ -8,8 +8,7 @@ import { ImageGalleryMasonryGridDemoContainer } from './demos/image-gallery-maso
 import { BreakpointsMasonryGridDemoContainer } from './demos/breakpoints-masonry-grid-demo-container';
 import { CardsMasonryGridDemoContainer } from './demos/cards-masonry-grid-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-masonry-grid-page',
@@ -19,7 +18,7 @@ import { COMPONENTS } from '../../../data/components';
     BreakpointsMasonryGridDemoContainer,
     CardsMasonryGridDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -29,7 +28,7 @@ import { COMPONENTS } from '../../../data/components';
           A Pinterest-style layout that arranges items in columns with varying
           heights.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="masonry-grid" />
       </div>
 
       <section class="space-y-8">
@@ -44,7 +43,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class MasonryGridPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'masonry-grid')!
-    .status;
-}
+export default class MasonryGridPage {}

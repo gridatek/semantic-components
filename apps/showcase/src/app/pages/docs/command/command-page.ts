@@ -6,8 +6,7 @@ import {
 import { ScCommandDemoContainer } from './demos/command-demo-container';
 import { ScCommandDialogDemoContainer } from './demos/command-dialog-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-command-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     ScCommandDemoContainer,
     ScCommandDialogDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -24,7 +23,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A command palette for fast, keyboard-driven navigation and actions.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="command" />
       </div>
 
       <section class="space-y-8">
@@ -37,7 +36,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CommandPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'command')!
-    .status;
-}
+export default class CommandPage {}

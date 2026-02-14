@@ -7,8 +7,7 @@ import { VerticalScrollAreaDemoContainer } from './demos/vertical-scroll-area-de
 import { HorizontalScrollAreaDemoContainer } from './demos/horizontal-scroll-area-demo-container';
 import { BothScrollAreaDemoContainer } from './demos/both-scroll-area-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-scroll-area-page',
@@ -17,7 +16,7 @@ import { COMPONENTS } from '../../../data/components';
     HorizontalScrollAreaDemoContainer,
     BothScrollAreaDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -27,7 +26,7 @@ import { COMPONENTS } from '../../../data/components';
           Augments native scroll functionality for custom, cross-browser styling
           with a custom scrollbar.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="scroll-area" />
       </div>
 
       <section class="space-y-8">
@@ -41,7 +40,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ScrollAreaPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'scroll-area')!
-    .status;
-}
+export default class ScrollAreaPage {}

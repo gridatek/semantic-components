@@ -7,8 +7,7 @@ import { BasicAccordionDemoContainer } from './demos/basic-accordion-demo-contai
 import { DisabledAccordionDemoContainer } from './demos/disabled-accordion-demo-container';
 import { MultipleAccordionDemoContainer } from './demos/multiple-accordion-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-accordion-page',
@@ -17,7 +16,7 @@ import { COMPONENTS } from '../../../data/components';
     DisabledAccordionDemoContainer,
     MultipleAccordionDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -27,7 +26,7 @@ import { COMPONENTS } from '../../../data/components';
           A vertically stacked set of interactive headings that reveal or hide
           associated content.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="accordion" />
       </div>
 
       <section class="space-y-8">
@@ -41,7 +40,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class AccordionPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'accordion')!
-    .status;
-}
+export default class AccordionPage {}

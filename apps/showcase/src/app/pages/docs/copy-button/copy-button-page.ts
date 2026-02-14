@@ -14,8 +14,7 @@ import { TimeoutCopyButtonDemoContainer } from './demos/timeout-copy-button-demo
 import { DisabledCopyButtonDemoContainer } from './demos/disabled-copy-button-demo-container';
 import { UsecasesCopyButtonDemoContainer } from './demos/usecases-copy-button-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-copy-button-page',
@@ -31,7 +30,7 @@ import { COMPONENTS } from '../../../data/components';
     DisabledCopyButtonDemoContainer,
     UsecasesCopyButtonDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -40,7 +39,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           A button component that copies text to clipboard with visual feedback.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="copy-button" />
       </div>
 
       <section class="space-y-8">
@@ -61,7 +60,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CopyButtonPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'copy-button')!
-    .status;
-}
+export default class CopyButtonPage {}

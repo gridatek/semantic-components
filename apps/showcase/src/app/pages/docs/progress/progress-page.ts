@@ -9,8 +9,7 @@ import { CustomStylingProgressDemoContainer } from './demos/custom-styling-progr
 import { SignalFormsProgressDemoContainer } from './demos/signal-forms-progress-demo-container';
 import { ValuesProgressDemoContainer } from './demos/values-progress-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-progress-page',
@@ -21,7 +20,7 @@ import { COMPONENTS } from '../../../data/components';
     CustomStylingProgressDemoContainer,
     SignalFormsProgressDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -31,7 +30,7 @@ import { COMPONENTS } from '../../../data/components';
           Displays an indicator showing the completion progress of a task,
           typically displayed as a progress bar.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="progress" />
       </div>
 
       <section class="space-y-8">
@@ -47,7 +46,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ProgressPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'progress')!
-    .status;
-}
+export default class ProgressPage {}

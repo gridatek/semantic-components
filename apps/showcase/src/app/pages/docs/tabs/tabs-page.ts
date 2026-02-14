@@ -6,8 +6,7 @@ import {
 import { BasicTabsDemoContainer } from './demos/basic-tabs-demo-container';
 import { DisabledTabsDemoContainer } from './demos/disabled-tabs-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-tabs-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     BasicTabsDemoContainer,
     DisabledTabsDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
           A set of layered sections of content, known as tab panels, displayed
           one at a time.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="tabs" />
       </div>
 
       <section class="space-y-8">
@@ -38,6 +37,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TabsPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'tabs')!.status;
-}
+export default class TabsPage {}

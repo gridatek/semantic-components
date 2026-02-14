@@ -10,8 +10,7 @@ import { SizesSpeedDialDemoContainer } from './demos/sizes-speed-dial-demo-conta
 import { WithoutLabelsSpeedDialDemoContainer } from './demos/without-labels-speed-dial-demo-container';
 import { DisabledActionsSpeedDialDemoContainer } from './demos/disabled-actions-speed-dial-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-speed-dial-page',
@@ -23,7 +22,7 @@ import { COMPONENTS } from '../../../data/components';
     WithoutLabelsSpeedDialDemoContainer,
     DisabledActionsSpeedDialDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -33,7 +32,7 @@ import { COMPONENTS } from '../../../data/components';
           A floating action button that expands to reveal a set of related
           actions.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="speed-dial" />
       </div>
 
       <section class="space-y-8">
@@ -50,7 +49,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SpeedDialPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'speed-dial')!
-    .status;
-}
+export default class SpeedDialPage {}

@@ -11,8 +11,7 @@ import { NoClearDateRangePickerDemoContainer } from './demos/no-clear-date-range
 import { DisabledDateRangePickerDemoContainer } from './demos/disabled-date-range-picker-demo-container';
 import { AnalyticsDateRangePickerDemoContainer } from './demos/analytics-date-range-picker-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-date-range-picker-page',
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
     DisabledDateRangePickerDemoContainer,
     AnalyticsDateRangePickerDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -35,7 +34,7 @@ import { COMPONENTS } from '../../../data/components';
           Select a range of dates with presets, min/max constraints, and various
           display formats.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="date-range-picker" />
       </div>
 
       <section class="space-y-8">
@@ -53,8 +52,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class DateRangePickerPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'date-range-picker',
-  )!.status;
-}
+export default class DateRangePickerPage {}

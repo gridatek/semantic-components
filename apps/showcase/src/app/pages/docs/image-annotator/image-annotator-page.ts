@@ -6,8 +6,7 @@ import {
 import { BasicImageAnnotatorDemoContainer } from './demos/basic-image-annotator-demo-container';
 import { CustomSizeImageAnnotatorDemoContainer } from './demos/custom-size-image-annotator-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-image-annotator-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     BasicImageAnnotatorDemoContainer,
     CustomSizeImageAnnotatorDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -24,7 +23,7 @@ import { COMPONENTS } from '../../../data/components';
         <p class="text-muted-foreground">
           Draw, mark up, and annotate images with various tools.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="image-annotator" />
       </div>
 
       <section class="space-y-8">
@@ -37,8 +36,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ImageAnnotatorPage {
-  readonly componentStatus = COMPONENTS.find(
-    (c) => c.path === 'image-annotator',
-  )!.status;
-}
+export default class ImageAnnotatorPage {}

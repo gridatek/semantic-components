@@ -6,8 +6,7 @@ import {
 import { BasicKanbanBoardDemoContainer } from './demos/basic-kanban-board-demo-container';
 import { MinimalKanbanBoardDemoContainer } from './demos/minimal-kanban-board-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-kanban-board-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     BasicKanbanBoardDemoContainer,
     MinimalKanbanBoardDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
           Drag-and-drop task board for project management and workflow
           visualization.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="kanban-board" />
       </div>
 
       <section class="space-y-8">
@@ -38,7 +37,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class KanbanBoardPage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'kanban-board')!
-    .status;
-}
+export default class KanbanBoardPage {}

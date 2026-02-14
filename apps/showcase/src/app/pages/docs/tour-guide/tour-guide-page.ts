@@ -6,8 +6,7 @@ import {
 import { FullTourGuideDemoContainer } from './demos/full-tour-guide-demo-container';
 import { MinimalTourGuideDemoContainer } from './demos/minimal-tour-guide-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-tour-guide-page',
@@ -15,7 +14,7 @@ import { COMPONENTS } from '../../../data/components';
     FullTourGuideDemoContainer,
     MinimalTourGuideDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
@@ -25,7 +24,7 @@ import { COMPONENTS } from '../../../data/components';
           Step-by-step UI tour component for onboarding users and highlighting
           features.
         </p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="tour-guide" />
       </div>
 
       <section class="space-y-8">
@@ -38,7 +37,4 @@ import { COMPONENTS } from '../../../data/components';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TourGuidePage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'tour-guide')!
-    .status;
-}
+export default class TourGuidePage {}

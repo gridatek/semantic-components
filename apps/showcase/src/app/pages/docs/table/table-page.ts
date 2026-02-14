@@ -15,8 +15,7 @@ import CaptionTableDemoContainer from './demos/caption-table-demo-container';
 import FooterTableDemoContainer from './demos/footer-table-demo-container';
 import UsersTableDemoContainer from './demos/users-table-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { COMPONENTS } from '../../../data/components';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-table-page',
@@ -31,14 +30,14 @@ import { COMPONENTS } from '../../../data/components';
     FooterTableDemoContainer,
     UsersTableDemoContainer,
     TocHeading,
-    ComponentStatusBadge,
+    ComponentBadges,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight">Table</h1>
         <p class="text-muted-foreground">A responsive table component.</p>
-        <app-component-status-badge [status]="componentStatus" />
+        <app-component-badges path="table" />
       </div>
 
       <section class="space-y-4">
@@ -69,7 +68,6 @@ import { COMPONENTS } from '../../../data/components';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class TablePage {
-  readonly componentStatus = COMPONENTS.find((c) => c.path === 'table')!.status;
   readonly usageCode = `import {
   ScTable,
   ScTableBody,
