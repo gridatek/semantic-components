@@ -409,6 +409,15 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Forms',
   },
   {
+    name: 'Item',
+    path: 'item',
+    description:
+      'A flexible layout component for displaying structured content.',
+    status: 'Experimental',
+    library: 'ui',
+    category: 'Layout',
+  },
+  {
     name: 'Opt Field',
     path: 'opt-field',
     description: 'An input for entering one-time passwords.',

@@ -265,6 +265,11 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/infinite-scroll/infinite-scroll-page'),
       },
       {
+        path: 'item',
+        title: 'Item - Semantic Components',
+        loadComponent: () => import('../pages/docs/item/item-page'),
+      },
+      {
         path: 'input',
         title: 'Input - Semantic Components',
         loadComponent: () => import('../pages/docs/input/input-page'),

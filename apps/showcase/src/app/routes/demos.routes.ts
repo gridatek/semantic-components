@@ -1713,6 +1713,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/item',
+    children: [
+      {
+        path: 'basic-item-demo',
+        loadComponent: () =>
+          import('../pages/docs/item/demos/basic-item-demo').then(
+            (m) => m.BasicItemDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/input',
     children: [
       {
