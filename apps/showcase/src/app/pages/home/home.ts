@@ -21,7 +21,7 @@ import { FeatureGrid } from '../../components/feature-grid/feature-grid';
       <div class="max-w-4xl mx-auto text-center space-y-6">
         <h2 class="text-2xl md:text-3xl font-bold">Ready to get started?</h2>
         <p class="text-muted-foreground">
-          Join thousands of developers building with our component library.
+          Explore the docs, browse components, and start building.
         </p>
         <a sc-link size="lg" routerLink="/docs/getting-started">
           Start Building Today
