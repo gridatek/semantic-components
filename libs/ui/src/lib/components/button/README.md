@@ -12,20 +12,19 @@ Displays a button or a component that looks like a button.
 
 ### ScButton
 
-Button directive that can be applied to `button` or `a` elements.
+Button directive applied to `button` elements.
 
-**Selector:** `button[sc-button], a[sc-button]`
+**Selector:** `button[sc-button]`
 
 **Inputs:**
 
-| Input      | Type                              | Default     | Description                                                  |
-| ---------- | --------------------------------- | ----------- | ------------------------------------------------------------ |
-| `variant`  | `ButtonVariant`                   | `'default'` | Visual style variant                                         |
-| `size`     | `ButtonSize`                      | `'default'` | Size of the button                                           |
-| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'`  | Button type attribute (only applied to `<button>` elements)  |
-| `href`     | `string`                          | `'#'`       | Href attribute (only applied to `<a>` elements, overridable) |
-| `disabled` | `boolean`                         | `false`     | Disables the button (sets `aria-disabled`)                   |
-| `class`    | `string`                          | `''`        | Additional CSS classes                                       |
+| Input      | Type                              | Default     | Description            |
+| ---------- | --------------------------------- | ----------- | ---------------------- |
+| `variant`  | `ButtonVariant`                   | `'default'` | Visual style variant   |
+| `size`     | `ButtonSize`                      | `'default'` | Size of the button     |
+| `type`     | `'button' \| 'submit' \| 'reset'` | `'button'`  | Button type attribute  |
+| `disabled` | `boolean`                         | `false`     | Disables the button    |
+| `class`    | `string`                          | `''`        | Additional CSS classes |
 
 **ButtonVariant:**
 
@@ -91,19 +90,6 @@ Button directive that can be applied to `button` or `a` elements.
 <button sc-button disabled>Disabled</button>
 ```
 
-### As Link
-
-`ScButton` automatically sets `href="#"` on `<a>` elements. Override with `[href]` for real navigation:
-
-```html
-<!-- Default href="#" -->
-<a sc-button>Link Button</a>
-<a sc-button variant="outline">Outline Link</a>
-
-<!-- Custom href -->
-<a sc-button href="/somewhere">Navigate</a>
-```
-
 ### Form Submit
 
 By default, `sc-button` sets `type="button"` to prevent accidental form submissions. Use `type="submit"` explicitly for submit buttons:
@@ -130,14 +116,14 @@ By default, `sc-button` sets `type="button"` to prevent accidental form submissi
 ## Features
 
 - **Multiple Variants**: 6 visual variants for different use cases
-- **Size Options**: 4 sizes including icon-only
+- **Size Options**: 8 sizes including icon-only variants
 - **Icon Support**: Automatic sizing for nested SVG icons
-- **Link Support**: Works on both `button` and `a` elements
-- **Disabled State**: Built-in disabled styling
+- **Disabled State**: Built-in disabled styling with `aria-disabled`
 
 ## Accessibility
 
-- Uses native `button` or `a` elements
+- Uses native `button` element
 - Supports native `disabled` attribute
+- Sets `aria-disabled` for assistive technology
 - Focus ring for keyboard navigation
 - Proper contrast ratios for all variants
