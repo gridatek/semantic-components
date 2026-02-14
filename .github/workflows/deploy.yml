@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      - name: Create production config
+        run: echo '{"devMode":false}' > apps/showcase/public/config.json
+
       - name: Build Angular app
         run: npx nx build showcase
 
@@ -47,6 +50,9 @@ jobs:
 
       - name: Install dependencies
         run: npm i
+
+      - name: Create production config
+        run: echo '{"devMode":false}' > apps/blocks/public/config.json
 
       - name: Build Angular app
         run: npx nx build blocks
