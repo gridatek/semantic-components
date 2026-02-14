@@ -6,9 +6,31 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import {
+  SiAccessibilityIcon,
+  SiCodeXmlIcon,
+  SiGrid2x2Icon,
+  SiLayoutIcon,
+  SiMoonIcon,
+  SiNotebookIcon,
+  SiSparklesIcon,
+  SiTagIcon,
+  SiTerminalIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-feature-grid',
+  imports: [
+    SiCodeXmlIcon,
+    SiNotebookIcon,
+    SiGrid2x2Icon,
+    SiSparklesIcon,
+    SiTerminalIcon,
+    SiAccessibilityIcon,
+    SiTagIcon,
+    SiLayoutIcon,
+    SiMoonIcon,
+  ],
   template: `
     <section class="py-16 px-4 md:px-6 lg:px-8">
       <div class="max-w-6xl mx-auto">
@@ -21,22 +43,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-code-xml-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <path d="m18 16 4-4-4-4" />
-                <path d="m6 8-4 4 4 4" />
-                <path d="m14.5 4-5 16" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Semantic</h3>
             <p class="text-muted-foreground">
@@ -49,22 +59,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-notebook-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <path
-                  d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"
-                />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Declarative</h3>
             <p class="text-muted-foreground">
@@ -77,23 +75,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-grid2x2-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <rect width="8" height="8" x="2" y="2" rx="1" />
-                <rect width="8" height="8" x="14" y="2" rx="1" />
-                <rect width="8" height="8" x="2" y="14" rx="1" />
-                <rect width="8" height="8" x="14" y="14" rx="1" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Composable</h3>
             <p class="text-muted-foreground">
@@ -106,22 +91,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-sparkles-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <path
-                  d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"
-                />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Modern</h3>
             <p class="text-muted-foreground">
@@ -134,21 +107,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-terminal-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <polyline points="4 17 10 11 4 5" />
-                <line x1="12" x2="20" y1="19" y2="19" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Type Safe</h3>
             <p class="text-muted-foreground">
@@ -161,21 +123,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-accessibility-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="m16 10-4 4-4-4" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Accessible</h3>
             <p class="text-muted-foreground">
@@ -188,23 +139,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-tag-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <path
-                  d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"
-                />
-                <path d="M7 7h.01" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Tailwind CSS & CVA</h3>
             <p class="text-muted-foreground">
@@ -217,22 +155,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-layout-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <rect width="18" height="18" x="3" y="3" rx="2" />
-                <path d="M3 9h18" />
-                <path d="M9 21V9" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Responsive Design</h3>
             <p class="text-muted-foreground">
@@ -245,20 +171,10 @@ import { cn } from '@semantic-components/ui';
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
+                si-moon-icon
+                class="size-6 text-primary"
                 aria-hidden="true"
-              >
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="text-lg font-semibold mb-2">Dark Mode Ready</h3>
             <p class="text-muted-foreground">
