@@ -192,16 +192,6 @@ import { Logo } from '../logo/logo';
         <div sc-navbar-mobile-menu>
           <a
             sc-navbar-mobile-link
-            routerLink="/"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            #mobileHomeRla="routerLinkActive"
-            [active]="mobileHomeRla.isActive"
-          >
-            Home
-          </a>
-          <a
-            sc-navbar-mobile-link
             routerLink="/docs/components"
             routerLinkActive="active"
             #mobileComponentsRla="routerLinkActive"
@@ -209,9 +199,14 @@ import { Logo } from '../logo/logo';
           >
             Components
           </a>
-          <hr class="my-2 border-border" />
-          <a sc-link class="w-full mt-2" routerLink="/docs/getting-started">
-            Get Started
+          <a
+            sc-navbar-mobile-link
+            routerLink="/docs/getting-started"
+            routerLinkActive="active"
+            #mobileDocsRla="routerLinkActive"
+            [active]="mobileDocsRla.isActive"
+          >
+            Documentation
           </a>
         </div>
       </div>
