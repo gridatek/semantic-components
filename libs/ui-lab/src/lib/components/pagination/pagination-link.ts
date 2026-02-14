@@ -18,7 +18,6 @@ import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
     '[attr.aria-current]': 'isActive() ? "page" : null',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.href]': 'isAnchor() ? "#" : null',
-    '[attr.role]': 'isAnchor() && disabled() ? "link" : null',
     '(click)': 'onClick($event)',
   },
 })

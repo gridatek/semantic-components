@@ -20,7 +20,6 @@ import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
     '[attr.aria-label]': '"Go to next page"',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.href]': 'isAnchor() ? "#" : null',
-    '[attr.role]': 'isAnchor() && disabled() ? "link" : null',
     '(click)': 'onClick($event)',
   },
   template: `

@@ -6,10 +6,8 @@ import { buttonVariants, type ScButtonVariants } from '../button';
   selector: 'a[sc-link]',
   host: {
     'data-slot': 'link',
-    '[attr.href]': '!disabled() ? href() : null',
-    '[attr.role]': 'disabled() ? "link" : null',
+    '[attr.href]': 'href()',
     '[attr.aria-disabled]': 'disabled() || null',
-    '[attr.tabindex]': 'disabled() ? -1 : null',
     '[class]': 'class()',
   },
 })
