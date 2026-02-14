@@ -75,7 +75,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-grid2x2-icon
+                si-grid-2x2-icon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
