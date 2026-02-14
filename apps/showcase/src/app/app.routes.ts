@@ -14,6 +14,7 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: '',
+        title: 'Semantic Components',
         loadComponent: () => import('./pages/home/home'),
       },
     ],

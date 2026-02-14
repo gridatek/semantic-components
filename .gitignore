@@ -45,5 +45,3 @@ Thumbs.db
 
 __screenshots__/
 
-# Runtime config
-apps/showcase/public/config.json
