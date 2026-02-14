@@ -73,7 +73,7 @@ import { Logo } from '../logo/logo';
           <!-- Brand -->
           <a sc-navbar-brand href="#">
             <svg app-logo class="size-6"></svg>
-            <span>Semantic Components</span>
+            <span class="hidden sm:inline">Semantic Components</span>
           </a>
 
           <!-- Desktop Navigation -->
