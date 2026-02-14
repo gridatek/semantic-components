@@ -144,8 +144,9 @@ test.describe('Basic Pagination Demo', () => {
   });
 
   test('should be keyboard navigable', async ({ page }) => {
-    await page.keyboard.press('Tab');
     const firstPageLink = page.locator('button[sc-pagination-link]').first();
+    await expect(firstPageLink).toBeVisible();
+    await page.keyboard.press('Tab');
     await expect(firstPageLink).toBeFocused();
   });
 });

@@ -82,8 +82,9 @@ test.describe('Buttons Pagination Demo', () => {
   });
 
   test('should be keyboard accessible', async ({ page }) => {
-    await page.keyboard.press('Tab');
     const firstLink = page.locator('button[sc-pagination-link]').first();
+    await expect(firstLink).toBeVisible();
+    await page.keyboard.press('Tab');
     await expect(firstLink).toBeFocused();
 
     await page.keyboard.press('Enter');
