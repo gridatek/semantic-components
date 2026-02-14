@@ -19,6 +19,7 @@ import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
     '[class]': 'class()',
     '[attr.aria-label]': '"Go to previous page"',
     '[attr.aria-disabled]': 'disabled() || null',
+    '[attr.tabindex]': 'disabled() ? -1 : null',
     '[attr.href]': 'isAnchor() ? "#" : null',
     '(click)': 'onClick($event)',
   },

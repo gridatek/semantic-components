@@ -8,6 +8,7 @@ import { buttonVariants, type ScButtonVariants } from '../button';
     'data-slot': 'link',
     '[attr.href]': 'href()',
     '[attr.aria-disabled]': 'disabled() || null',
+    '[attr.tabindex]': 'disabled() ? -1 : null',
     '[class]': 'class()',
   },
 })
