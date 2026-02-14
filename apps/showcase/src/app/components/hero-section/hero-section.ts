@@ -17,7 +17,7 @@ import { cn, ScLink } from '@semantic-components/ui';
     >
       <div class="max-w-4xl mx-auto text-center space-y-6">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-          The Missing UI Components for Angular
+          The Missing Piece in the Angular World
         </h1>
         <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
           Beautifully crafted UI components for modern Angular, built with
