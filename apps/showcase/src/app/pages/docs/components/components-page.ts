@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -12,11 +13,8 @@ import {
   ScToggleGroupItem,
 } from '@semantic-components/ui-lab';
 import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import {
-  ComponentCategory,
-  ComponentLibrary,
-  VISIBLE_COMPONENTS,
-} from '../../../data/components';
+import { ComponentCategory, ComponentLibrary } from '../../../data/components';
+import { ComponentsService } from '../../../services/components.service';
 
 @Component({
   selector: 'app-components-page',
@@ -104,6 +102,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ComponentsPage {
+  private readonly componentsService = inject(ComponentsService);
+
   readonly categories: ComponentCategory[] = [
     'Forms',
     'Buttons & Actions',
@@ -152,10 +152,11 @@ export default class ComponentsPage {
 
   readonly filteredComponents = computed(() => {
     const category = this.filterCategory();
+    const visible = this.componentsService.visibleComponents();
     const items =
       category && category !== 'All'
-        ? VISIBLE_COMPONENTS.filter((item) => item.category === category)
-        : VISIBLE_COMPONENTS;
+        ? visible.filter((item) => item.category === category)
+        : visible;
     return items.slice().sort((a, b) => a.name.localeCompare(b.name));
   });
 }

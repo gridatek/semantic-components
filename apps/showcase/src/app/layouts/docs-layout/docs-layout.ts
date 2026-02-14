@@ -52,7 +52,7 @@ import { filter } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
-import { VISIBLE_COMPONENTS } from '../../data/components';
+import { ComponentsService } from '../../services/components.service';
 
 @Component({
   selector: 'app-docs-layout',
@@ -224,7 +224,7 @@ import { VISIBLE_COMPONENTS } from '../../data/components';
                     <span>Components</span>
                   </a>
                   <ul sc-sidebar-menu-sub>
-                    @for (item of components; track item.path) {
+                    @for (item of components(); track item.path) {
                       <li sc-sidebar-menu-sub-item>
                         <a
                           sc-sidebar-menu-sub-button
@@ -322,11 +322,12 @@ export class DocsLayout {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   protected readonly tocService = inject(TocService);
+  private readonly componentsService = inject(ComponentsService);
 
   private readonly contentArea =
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
-  readonly components = VISIBLE_COMPONENTS;
+  readonly components = this.componentsService.visibleComponents;
 
   constructor() {
     afterNextRender(() => {

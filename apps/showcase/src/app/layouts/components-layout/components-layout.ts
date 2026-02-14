@@ -22,7 +22,7 @@ import { cn } from '@semantic-components/ui';
 import { filter } from 'rxjs';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
-import { VISIBLE_COMPONENTS } from '../../data/components';
+import { ComponentsService } from '../../services/components.service';
 
 @Component({
   selector: 'app-components-layout',
@@ -36,7 +36,7 @@ import { VISIBLE_COMPONENTS } from '../../data/components';
         <nav class="space-y-1">
           <h4 class="font-semibold mb-4">Components</h4>
 
-          @for (item of components; track item.path) {
+          @for (item of components(); track item.path) {
             <a
               [routerLink]="'/docs/components/' + item.path"
               routerLinkActive="bg-accent text-accent-foreground"
@@ -80,11 +80,12 @@ export class ComponentsLayout {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
   protected readonly tocService = inject(TocService);
+  private readonly componentsService = inject(ComponentsService);
 
   private readonly contentArea =
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
-  readonly components = VISIBLE_COMPONENTS;
+  readonly components = this.componentsService.visibleComponents;
 
   constructor() {
     afterNextRender(() => {

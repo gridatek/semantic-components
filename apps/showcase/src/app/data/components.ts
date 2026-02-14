@@ -926,5 +926,3 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Advanced',
   },
 ];
-
-export const VISIBLE_COMPONENTS = COMPONENTS.filter((c) => !c.hidden);

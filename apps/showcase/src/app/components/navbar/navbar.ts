@@ -33,7 +33,7 @@ import {
   SiSunIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
-import { VISIBLE_COMPONENTS } from '../../data/components';
+import { ComponentsService } from '../../services/components.service';
 import { GithubService } from '../../services/github.service';
 import { Logo } from '../logo/logo';
 
@@ -86,7 +86,7 @@ import { Logo } from '../logo/logo';
                     class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
                   >
                     @for (
-                      component of featuredComponents;
+                      component of featuredComponents();
                       track component.path
                     ) {
                       <li>
@@ -227,7 +227,10 @@ export default class Navbar {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  protected readonly featuredComponents = VISIBLE_COMPONENTS.slice(0, 5);
+  private readonly componentsService = inject(ComponentsService);
+  protected readonly featuredComponents = computed(() =>
+    this.componentsService.visibleComponents().slice(0, 5),
+  );
 
   private readonly github = inject(GithubService);
   protected readonly starCount = this.github.starCount;
