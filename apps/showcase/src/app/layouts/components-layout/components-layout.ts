@@ -22,7 +22,7 @@ import { cn } from '@semantic-components/ui';
 import { filter } from 'rxjs';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
-import { COMPONENTS } from '../../data/components';
+import { VISIBLE_COMPONENTS } from '../../data/components';
 
 @Component({
   selector: 'app-components-layout',
@@ -84,7 +84,7 @@ export class ComponentsLayout {
   private readonly contentArea =
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
-  readonly components = COMPONENTS;
+  readonly components = VISIBLE_COMPONENTS;
 
   constructor() {
     afterNextRender(() => {

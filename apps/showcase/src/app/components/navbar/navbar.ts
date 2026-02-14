@@ -33,7 +33,7 @@ import {
   SiSunIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
-import { COMPONENTS } from '../../data/components';
+import { VISIBLE_COMPONENTS } from '../../data/components';
 import { GithubService } from '../../services/github.service';
 import { Logo } from '../logo/logo';
 
@@ -227,7 +227,7 @@ export default class Navbar {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  protected readonly featuredComponents = COMPONENTS.slice(0, 5);
+  protected readonly featuredComponents = VISIBLE_COMPONENTS.slice(0, 5);
 
   private readonly github = inject(GithubService);
   protected readonly starCount = this.github.starCount;

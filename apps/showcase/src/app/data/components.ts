@@ -21,6 +21,7 @@ export interface ComponentItem {
   status: ComponentStatus;
   library: ComponentLibrary;
   category: ComponentCategory;
+  hidden?: boolean;
 }
 
 export const COMPONENTS: ComponentItem[] = [
@@ -55,6 +56,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Aspect Ratio',
@@ -834,6 +836,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Toast',
@@ -899,6 +902,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Video Player',
@@ -917,3 +921,5 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Advanced',
   },
 ];
+
+export const VISIBLE_COMPONENTS = COMPONENTS.filter((c) => !c.hidden);

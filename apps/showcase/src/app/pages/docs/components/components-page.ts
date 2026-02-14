@@ -15,7 +15,7 @@ import { ComponentStatusBadge } from '../../../components/component-status-badge
 import {
   ComponentCategory,
   ComponentLibrary,
-  COMPONENTS,
+  VISIBLE_COMPONENTS,
 } from '../../../data/components';
 
 @Component({
@@ -154,8 +154,8 @@ export default class ComponentsPage {
     const category = this.filterCategory();
     const items =
       category && category !== 'All'
-        ? COMPONENTS.filter((item) => item.category === category)
-        : COMPONENTS;
+        ? VISIBLE_COMPONENTS.filter((item) => item.category === category)
+        : VISIBLE_COMPONENTS;
     return items.slice().sort((a, b) => a.name.localeCompare(b.name));
   });
 }
