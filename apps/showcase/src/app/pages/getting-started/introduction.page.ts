@@ -14,8 +14,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight">Introduction</h1>
         <p class="text-muted-foreground">
-          A collection of beautifully designed, accessible, and reusable
-          components built with Angular and Tailwind CSS.
+          The missing piece in the Angular world. Beautifully crafted UI
+          components for modern Angular, built with Tailwind CSS on top of
+          Angular Aria and Angular CDK.
         </p>
       </div>
 
@@ -24,23 +25,50 @@ import { TocHeading } from '../../components/toc/toc-heading';
           What is Semantic Components?
         </h2>
         <p class="text-muted-foreground">
-          Semantic Components is an open-source UI library for Angular inspired
-          by shadcn/ui. It provides a set of high-quality components that are
-          accessible, customizable, and built on top of Angular ARIA and
-          Tailwind CSS.
+          Semantic Components is an open-source UI library for Angular. It
+          provides a set of semantic, declarative, and composable components
+          that are accessible, customizable, and built on top of Angular Aria,
+          Angular CDK, and Tailwind CSS.
         </p>
       </section>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Features</h2>
         <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
-          <li>Built with Angular signals and modern Angular APIs</li>
-          <li>Styled with Tailwind CSS and fully customizable themes</li>
-          <li>Accessible by default with Angular ARIA</li>
-          <li>Tree-shakable and optimized for production</li>
           <li>
-            Multiple packages for different needs: core UI, carousel, editor,
-            and code components
+            <strong>Semantic</strong>
+            — Components with meaningful names and intuitive APIs that make your
+            templates read like documentation
+          </li>
+          <li>
+            <strong>Declarative</strong>
+            — Configure components through clean, readable templates instead of
+            imperative code
+          </li>
+          <li>
+            <strong>Composable</strong>
+            — Mix and match small, focused components to build complex UIs that
+            fit your needs
+          </li>
+          <li>
+            <strong>Modern</strong>
+            — Powered by signals, standalone components, control flow, and the
+            latest Angular APIs
+          </li>
+          <li>
+            <strong>Type Safe</strong>
+            — Built with strict TypeScript for full type checking and
+            autocompletion out of the box
+          </li>
+          <li>
+            <strong>Accessible</strong>
+            — Built with ARIA attributes, keyboard navigation, and screen reader
+            support
+          </li>
+          <li>
+            <strong>Tailwind CSS &amp; CVA</strong>
+            — Styled with Tailwind CSS and class-variance-authority for
+            consistent, customizable variants
           </li>
         </ul>
       </section>
