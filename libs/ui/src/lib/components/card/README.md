@@ -10,7 +10,7 @@ A container for grouping related content with header, body, and footer sections.
     <h3 sc-card-title>Title</h3>
     <p sc-card-description>Description</p>
   </div>
-  <div sc-card-content>
+  <div sc-card-body>
     <p>Content goes here.</p>
   </div>
   <div sc-card-footer>
@@ -82,11 +82,11 @@ Action area positioned at the top-right of the card header.
 | ------- | -------- | ------- | ---------------------- |
 | `class` | `string` | `''`    | Additional CSS classes |
 
-### ScCardContent
+### ScCardBody
 
-Main content area of the card.
+Main body area of the card.
 
-**Selector:** `div[sc-card-content]`
+**Selector:** `div[sc-card-body]`
 
 **Inputs:**
 
@@ -116,7 +116,7 @@ Footer section of the card with a muted background and top border.
     <h3 sc-card-title>Card Title</h3>
     <p sc-card-description>Card description goes here.</p>
   </div>
-  <div sc-card-content>
+  <div sc-card-body>
     <p>Card content goes here.</p>
   </div>
   <div sc-card-footer>
@@ -136,7 +136,7 @@ Footer section of the card with a muted background and top border.
       <button sc-button variant="outline" size="sm">View all</button>
     </div>
   </div>
-  <div sc-card-content>
+  <div sc-card-body>
     <p>Content here.</p>
   </div>
 </div>
@@ -149,7 +149,7 @@ Footer section of the card with a muted background and top border.
   <div sc-card-header>
     <h3 sc-card-title>Compact Card</h3>
   </div>
-  <div sc-card-content>
+  <div sc-card-body>
     <p>Smaller padding and gaps.</p>
   </div>
 </div>

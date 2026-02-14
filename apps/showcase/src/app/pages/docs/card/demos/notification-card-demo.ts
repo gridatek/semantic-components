@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
@@ -13,20 +13,14 @@ import {
 
 @Component({
   selector: 'app-notification-card-demo',
-  imports: [
-    ScCard,
-    ScCardContent,
-    ScCardDescription,
-    ScCardHeader,
-    ScCardTitle,
-  ],
+  imports: [ScCard, ScCardBody, ScCardDescription, ScCardHeader, ScCardTitle],
   template: `
     <div sc-card class="w-[380px]">
       <div sc-card-header>
         <h3 sc-card-title>Notifications</h3>
         <p sc-card-description>You have 3 unread messages.</p>
       </div>
-      <div sc-card-content class="grid gap-4">
+      <div sc-card-body class="grid gap-4">
         <div class="flex items-center space-x-4 rounded-md border p-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"

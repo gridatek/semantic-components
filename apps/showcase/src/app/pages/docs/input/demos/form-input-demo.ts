@@ -7,7 +7,7 @@ import {
 import { email, form, FormField, required } from '@angular/forms/signals';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScCardTitle,
 } from '@semantic-components/ui';
@@ -25,7 +25,7 @@ interface CreateAccountForm {
   imports: [
     FormField,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScCardTitle,
     ScField,
@@ -37,7 +37,7 @@ interface CreateAccountForm {
       <div sc-card-header>
         <h4 sc-card-title class="text-base">Create Account</h4>
       </div>
-      <div sc-card-content class="grid gap-4">
+      <div sc-card-body class="grid gap-4">
         <div class="grid grid-cols-2 gap-4">
           <div sc-field>
             <label sc-label>First name</label>

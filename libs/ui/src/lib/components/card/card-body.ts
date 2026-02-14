@@ -2,13 +2,13 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[sc-card-content]',
+  selector: 'div[sc-card-body]',
   host: {
-    'data-slot': 'card-content',
+    'data-slot': 'card-body',
     '[class]': 'class()',
   },
 })
-export class ScCardContent {
+export class ScCardBody {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

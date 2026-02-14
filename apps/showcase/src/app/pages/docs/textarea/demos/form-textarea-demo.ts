@@ -7,7 +7,7 @@ import {
 import { form, FormField, required, email } from '@angular/forms/signals';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardHeader,
   ScCardTitle,
 } from '@semantic-components/ui';
@@ -30,7 +30,7 @@ interface ContactForm {
   imports: [
     FormField,
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardHeader,
     ScCardTitle,
     ScField,
@@ -43,7 +43,7 @@ interface ContactForm {
       <div sc-card-header>
         <h4 sc-card-title class="text-base">Contact Us</h4>
       </div>
-      <div sc-card-content class="grid gap-4">
+      <div sc-card-body class="grid gap-4">
         <div class="grid grid-cols-2 gap-4">
           <div sc-field>
             <label sc-label>Name</label>

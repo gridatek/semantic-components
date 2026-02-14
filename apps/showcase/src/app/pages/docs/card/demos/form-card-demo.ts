@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScCard,
-  ScCardContent,
+  ScCardBody,
   ScCardDescription,
   ScCardFooter,
   ScCardHeader,
@@ -17,7 +17,7 @@ import { ScInput, ScLabel } from '@semantic-components/ui-lab';
   selector: 'app-form-card-demo',
   imports: [
     ScCard,
-    ScCardContent,
+    ScCardBody,
     ScCardDescription,
     ScCardFooter,
     ScCardHeader,
@@ -31,7 +31,7 @@ import { ScInput, ScLabel } from '@semantic-components/ui-lab';
         <h3 sc-card-title>Create project</h3>
         <p sc-card-description>Deploy your new project in one-click.</p>
       </div>
-      <div sc-card-content>
+      <div sc-card-body>
         <div class="grid w-full items-center gap-4">
           <div class="flex flex-col space-y-1.5">
             <label sc-label for="name">Name</label>
