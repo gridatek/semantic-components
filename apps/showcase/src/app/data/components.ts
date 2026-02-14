@@ -225,6 +225,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Feedback',
+    hidden: true,
   },
   {
     name: 'Context Menu',
@@ -249,6 +250,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Data Table',
@@ -298,6 +300,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Drawer',
@@ -468,6 +471,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Masonry Grid',
@@ -748,6 +752,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Overlay',
+    hidden: true,
   },
   {
     name: 'Stat Card',
