@@ -40,8 +40,8 @@ import { cn } from '@semantic-components/ui';
             </div>
             <h3 class="text-lg font-semibold mb-2">Semantic</h3>
             <p class="text-muted-foreground">
-              Built with meaningful HTML elements for better structure, SEO, and
-              developer experience.
+              Components with meaningful names and intuitive APIs that make your
+              templates read like documentation.
             </p>
           </div>
           <div class="p-6 rounded-lg border bg-card">
