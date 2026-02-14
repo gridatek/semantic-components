@@ -10,7 +10,7 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-card-demo',

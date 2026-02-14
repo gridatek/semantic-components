@@ -1,19 +1,19 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: '[sc-card]',
+  selector: '[sc-card-title]',
   host: {
-    'data-slot': 'card',
+    'data-slot': 'card-title',
     '[class]': 'class()',
   },
 })
-export class ScCard {
+export class ScCardTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'rounded-lg border bg-card text-card-foreground shadow-sm',
+      'text-base leading-snug font-medium group-data-[size=sm]/card:text-sm',
       this.classInput(),
     ),
   );

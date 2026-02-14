@@ -9,7 +9,7 @@ import {
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-notification-card-demo',

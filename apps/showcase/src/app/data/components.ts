@@ -143,7 +143,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'card',
     description: 'A container for grouping related content.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Layout',
   },
   {

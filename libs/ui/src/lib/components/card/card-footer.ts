@@ -1,8 +1,8 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: '[sc-card-footer]',
+  selector: 'div[sc-card-footer]',
   host: {
     'data-slot': 'card-footer',
     '[class]': 'class()',
@@ -12,6 +12,9 @@ export class ScCardFooter {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex items-center p-6 pt-0', this.classInput()),
+    cn(
+      'bg-muted/50 rounded-b-xl border-t p-4 group-data-[size=sm]/card:p-3 flex items-center',
+      this.classInput(),
+    ),
   );
 }
