@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   ViewEncapsulation,
 } from '@angular/core';
@@ -26,12 +27,14 @@ import {
   ScThemeToggle,
 } from '@semantic-components/ui-lab';
 import {
+  SiGithubIcon,
   SiMenuIcon,
   SiMoonIcon,
   SiSunIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { COMPONENTS } from '../../data/components';
+import { GithubService } from '../../services/github.service';
 import { Logo } from '../logo/logo';
 
 @Component({
@@ -56,6 +59,7 @@ import { Logo } from '../logo/logo';
     ScNavigationMenuLink,
     ScNavigationMenuList,
     ScNavigationMenuTrigger,
+    SiGithubIcon,
     SiSunIcon,
     SiMoonIcon,
     SiMenuIcon,
@@ -130,6 +134,34 @@ import { Logo } from '../logo/logo';
         <div sc-navbar-actions>
           <a
             sc-link
+            variant="ghost"
+            href="https://github.com/gridatek/semantic-components"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="hidden md:inline-flex gap-1"
+          >
+            <svg si-github-icon></svg>
+            @if (starCount()) {
+              <span class="text-muted-foreground w-fit text-xs tabular-nums">
+                {{ starCount() }}
+              </span>
+            }
+          </a>
+          <a
+            sc-link
+            variant="ghost"
+            size="icon"
+            href="https://github.com/gridatek/semantic-components"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="md:hidden"
+          >
+            <svg si-github-icon></svg>
+          </a>
+          <a
+            sc-link
             class="hidden md:inline-flex"
             routerLink="/docs/getting-started"
           >
@@ -196,4 +228,7 @@ export default class Navbar {
   protected readonly class = computed(() => cn('block', this.classInput()));
 
   protected readonly featuredComponents = COMPONENTS.slice(0, 5);
+
+  private readonly github = inject(GithubService);
+  protected readonly starCount = this.github.starCount;
 }

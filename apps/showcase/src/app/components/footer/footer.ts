@@ -5,13 +5,13 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ScLink } from '@semantic-components/ui';
 import { SiGithubIcon, SiHeartIcon } from '@semantic-icons/lucide-icons';
 import { Logo } from '../logo/logo';
 
 @Component({
   selector: 'app-footer',
-  imports: [Logo, SiGithubIcon, SiHeartIcon],
+  imports: [Logo, ScLink, SiGithubIcon, SiHeartIcon],
   template: `
     <footer class="border-t py-8 px-4 md:px-6 lg:px-8">
       <div
@@ -32,13 +32,15 @@ import { Logo } from '../logo/logo';
             for the Angular community. Open source.
           </p>
           <a
+            sc-link
+            variant="ghost"
+            size="icon"
             href="https://github.com/gridatek/semantic-components"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            class="text-muted-foreground hover:text-foreground transition-colors"
           >
-            <svg si-github-icon class="size-5"></svg>
+            <svg si-github-icon></svg>
           </a>
         </div>
       </div>
