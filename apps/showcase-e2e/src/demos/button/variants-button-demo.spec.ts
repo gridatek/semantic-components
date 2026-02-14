@@ -70,8 +70,9 @@ test.describe('Variants Button Demo', () => {
   });
 
   test('should be focusable via keyboard', async ({ page }) => {
-    await page.keyboard.press('Tab');
     const defaultBtn = page.getByRole('button', { name: 'Default' });
+    await expect(defaultBtn).toBeVisible();
+    await page.keyboard.press('Tab');
     await expect(defaultBtn).toBeFocused();
   });
 });
