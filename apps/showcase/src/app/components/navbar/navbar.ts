@@ -123,7 +123,7 @@ import { Logo } from '../logo/logo';
 
               <li sc-navigation-menu-item>
                 <a sc-navigation-menu-link routerLink="/docs/getting-started">
-                  Docs
+                  Documentation
                 </a>
               </li>
             </ul>
