@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { cn, ScLink } from '@semantic-components/ui';
+import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-hero-section',
-  imports: [RouterLink, ScLink],
+  imports: [RouterLink, ScLink, SiGithubIcon, SiStarIcon],
   template: `
     <section
       class="py-20 px-4 md:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30"
@@ -29,6 +30,18 @@ import { cn, ScLink } from '@semantic-components/ui';
           </a>
           <a sc-link variant="outline" size="lg" routerLink="/docs/components">
             View Components
+          </a>
+          <a
+            sc-link
+            variant="outline"
+            size="lg"
+            href="https://github.com/gridatek/semantic-components"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg si-github-icon class="size-4"></svg>
+            Star on GitHub
+            <svg si-star-icon class="size-4"></svg>
           </a>
         </div>
       </div>
