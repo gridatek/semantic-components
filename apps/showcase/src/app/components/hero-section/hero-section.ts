@@ -20,8 +20,8 @@ import { cn, ScLink } from '@semantic-components/ui';
           The Missing UI Components for Angular
         </h1>
         <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          A collection of components built for modern Angular using Tailwind CSS
-          and on top of Angular Aria and Angular CDK.
+          Beautifully crafted UI components for modern Angular, built with
+          Tailwind CSS on top of Angular Aria and Angular CDK.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a sc-link size="lg" routerLink="/docs/getting-started">
