@@ -396,7 +396,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'input',
     description: 'A text input field for user data entry.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
   },
   {

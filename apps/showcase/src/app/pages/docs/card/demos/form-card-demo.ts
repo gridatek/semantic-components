@@ -13,10 +13,10 @@ import {
   ScCardTitle,
   ScField,
   ScFieldGroup,
+  ScInput,
   ScLabel,
 } from '@semantic-components/ui';
 import {
-  ScInput,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,

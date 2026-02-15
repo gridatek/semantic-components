@@ -11,6 +11,7 @@ export * from './checkbox';
 export * from './dialog';
 export * from './drawer';
 export * from './field';
+export * from './input';
 export * from './item';
 export * from './kbd';
 export * from './label';

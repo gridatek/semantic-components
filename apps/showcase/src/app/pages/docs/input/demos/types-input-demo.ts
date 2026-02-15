@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { ScField, ScLabel } from '@semantic-components/ui';
-import { ScInput } from '@semantic-components/ui-lab';
+import { ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-types-input-demo',

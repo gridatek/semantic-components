@@ -36,10 +36,10 @@ import {
   ScCardBody,
   ScCardHeader,
   ScCardTitle,
+  ScInput,
   ScLabel,
   ScTextarea,
 } from '@semantic-components/ui';
-import { ScInput } from '@semantic-components/ui-lab';
 
 interface ContactForm {
   name: string;

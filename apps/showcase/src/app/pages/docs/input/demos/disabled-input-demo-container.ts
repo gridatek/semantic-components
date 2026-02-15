@@ -31,7 +31,7 @@ export class DisabledInputDemoContainer {
 } from '@angular/core';
 import { disabled, form, FormField } from '@angular/forms/signals';
 import { ScField, ScLabel } from '@semantic-components/ui';
-import { ScInput } from '@semantic-components/ui-lab';
+import { ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-input-demo',
