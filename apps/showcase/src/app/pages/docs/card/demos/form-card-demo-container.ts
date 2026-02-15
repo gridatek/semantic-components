@@ -37,7 +37,7 @@ import {
   ScCardHeader,
   ScCardTitle,
 } from '@semantic-components/ui';
-import { ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScField, ScFieldGroup, ScInput, ScLabel } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-form-card-demo',
@@ -49,6 +49,8 @@ import { ScInput, ScLabel } from '@semantic-components/ui-lab';
     ScCardFooter,
     ScCardHeader,
     ScCardTitle,
+    ScField,
+    ScFieldGroup,
     ScInput,
     ScLabel,
   ],
@@ -59,12 +61,12 @@ import { ScInput, ScLabel } from '@semantic-components/ui-lab';
         <p sc-card-description>Deploy your new project in one-click.</p>
       </div>
       <div sc-card-body>
-        <div class="grid w-full items-center gap-4">
-          <div class="flex flex-col space-y-1.5">
+        <div sc-field-group>
+          <div sc-field>
             <label sc-label for="name">Name</label>
             <input sc-input id="name" placeholder="Name of your project" />
           </div>
-          <div class="flex flex-col space-y-1.5">
+          <div sc-field>
             <label sc-label for="framework">Framework</label>
             <select
               id="framework"
