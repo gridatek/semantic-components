@@ -4,9 +4,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScLabel,
-  ScCheckboxField,
   ScCheckbox,
+  ScCheckboxField,
+  ScLabel,
 } from '@semantic-components/ui-lab';
 
 @Component({

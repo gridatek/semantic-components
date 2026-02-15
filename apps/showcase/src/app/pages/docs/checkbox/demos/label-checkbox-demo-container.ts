@@ -29,7 +29,7 @@ export class LabelCheckboxDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScCheckboxField, ScCheckbox } from '@semantic-components/ui-lab';
+import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-label-checkbox-demo',

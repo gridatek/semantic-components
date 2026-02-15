@@ -28,6 +28,7 @@ export class FormCardDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScField, ScFieldGroup } from '@semantic-components/ui';
 import {
   ScButton,
   ScCard,
@@ -36,16 +37,12 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
-} from '@semantic-components/ui';
-import {
-  ScField,
-  ScFieldGroup,
   ScInput,
   ScLabel,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

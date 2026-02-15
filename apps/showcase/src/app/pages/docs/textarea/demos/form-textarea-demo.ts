@@ -6,17 +6,13 @@ import {
 } from '@angular/core';
 import { form, FormField, required, email } from '@angular/forms/signals';
 import {
+  ScField,
   ScCard,
   ScCardBody,
   ScCardHeader,
   ScCardTitle,
 } from '@semantic-components/ui';
-import {
-  ScField,
-  ScInput,
-  ScLabel,
-  ScTextarea,
-} from '@semantic-components/ui-lab';
+import { ScInput, ScLabel, ScTextarea } from '@semantic-components/ui-lab';
 
 interface ContactForm {
   name: string;

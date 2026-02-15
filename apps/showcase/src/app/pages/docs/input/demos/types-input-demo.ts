@@ -5,7 +5,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { ScField, ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScField } from '@semantic-components/ui';
+import { ScInput, ScLabel } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-types-input-demo',

@@ -8,10 +8,9 @@ import {
   ScFieldLegend,
   ScFieldGroup,
   ScField,
-  ScLabel,
   ScFieldDescription,
-  ScInput,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { ScInput, ScLabel } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-fieldset-demo',

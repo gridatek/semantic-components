@@ -15,13 +15,10 @@ import {
   ScDialogPortal,
   ScDialogTitle,
   ScDialogTrigger,
-} from '@semantic-components/ui';
-import {
   ScField,
   ScFieldGroup,
-  ScInput,
-  ScLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { ScInput, ScLabel } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

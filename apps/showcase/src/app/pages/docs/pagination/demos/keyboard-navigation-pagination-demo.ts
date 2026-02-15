@@ -4,8 +4,8 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScField } from '@semantic-components/ui';
 import {
-  ScField,
   ScLabel,
   ScPagination,
   ScPaginationChange,

@@ -5,12 +5,10 @@ import {
 } from '@angular/core';
 import {
   ScField,
-  ScLabel,
   ScFieldGroup,
   ScFieldSeparator,
-  ScSeparator,
-  ScInput,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { ScInput, ScLabel, ScSeparator } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-separator-field-demo',

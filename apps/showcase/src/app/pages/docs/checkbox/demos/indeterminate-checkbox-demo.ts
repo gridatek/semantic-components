@@ -6,8 +6,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScCheckboxField,
   ScCheckbox,
+  ScCheckboxField,
   ScLabel,
 } from '@semantic-components/ui-lab';
 

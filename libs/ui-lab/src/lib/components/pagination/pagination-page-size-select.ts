@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_FIELD } from '../field';
+import { SC_FIELD } from '@semantic-components/ui';
 import { ScPagination } from './pagination';
 
 @Directive({

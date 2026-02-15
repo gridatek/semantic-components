@@ -31,7 +31,7 @@ export class SignalFormsCheckboxDemoContainer {
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
-import { ScCheckboxField, ScCheckbox, ScLabel } from '@semantic-components/ui-lab';
+import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui-lab';
 import { JsonPipe } from '@angular/common';
 
 interface CheckboxFormModel {

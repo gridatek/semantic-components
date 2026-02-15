@@ -5,12 +5,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField, maxLength } from '@angular/forms/signals';
-import {
-  ScField,
-  ScFieldDescription,
-  ScLabel,
-  ScTextarea,
-} from '@semantic-components/ui-lab';
+import { ScField, ScFieldDescription } from '@semantic-components/ui';
+import { ScLabel, ScTextarea } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-maxlength-textarea-demo',

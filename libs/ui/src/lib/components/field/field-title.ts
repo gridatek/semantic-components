@@ -1,19 +1,19 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: 'fieldset[sc-field-set]',
+  selector: '[sc-field-title]',
   host: {
-    'data-slot': 'field-set',
+    'data-slot': 'field-title',
     '[class]': 'class()',
   },
 })
-export class ScFieldSet {
+export class ScFieldTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'gap-4 has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3 flex flex-col',
+      'gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50 flex w-fit items-center leading-snug',
       this.classInput(),
     ),
   );

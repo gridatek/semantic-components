@@ -30,12 +30,8 @@ export class LabelInputDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
-import {
-  ScField,
-  ScFieldError,
-  ScInput,
-  ScLabel,
-} from '@semantic-components/ui-lab';
+import { ScField, ScFieldError } from '@semantic-components/ui';
+import { ScInput, ScLabel } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-label-input-demo',

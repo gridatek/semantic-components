@@ -27,7 +27,6 @@ export * from './diff-viewer';
 export * from './dock';
 export * from './emoji-picker';
 export * from './empty';
-export * from './field';
 export * from './file-upload';
 export * from './hover-card';
 export * from './image-annotator';

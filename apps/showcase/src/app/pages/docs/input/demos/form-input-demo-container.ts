@@ -30,13 +30,15 @@ export class FormInputDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { email, form, FormField, required } from '@angular/forms/signals';
+import { ScField } from '@semantic-components/ui';
 import {
   ScCard,
   ScCardBody,
   ScCardHeader,
   ScCardTitle,
-} from '@semantic-components/ui';
-import { ScField, ScInput, ScLabel } from '@semantic-components/ui-lab';
+  ScInput,
+  ScLabel,
+} from '@semantic-components/ui-lab';
 
 interface CreateAccountForm {
   firstName: string;

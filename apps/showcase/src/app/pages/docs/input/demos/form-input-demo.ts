@@ -10,8 +10,9 @@ import {
   ScCardBody,
   ScCardHeader,
   ScCardTitle,
+  ScField,
 } from '@semantic-components/ui';
-import { ScField, ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScInput, ScLabel } from '@semantic-components/ui-lab';
 
 interface CreateAccountForm {
   firstName: string;
