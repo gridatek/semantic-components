@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -9,11 +10,10 @@ import {
   ScCheckbox,
   ScLabel,
 } from '@semantic-components/ui-lab';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-indeterminate-checkbox-demo',
-  imports: [ScCheckboxField, ScCheckbox, ScLabel, FormsModule],
+  imports: [ScCheckboxField, ScCheckbox, ScLabel],
   template: `
     <div class="flex flex-col gap-4">
       <div sc-checkbox-field>
@@ -29,15 +29,15 @@ import { FormsModule } from '@angular/forms';
       </div>
       <div class="ml-6 flex flex-col gap-2">
         <div sc-checkbox-field>
-          <input type="checkbox" sc-checkbox [(ngModel)]="item1" id="item1" />
+          <input type="checkbox" sc-checkbox [(checked)]="item1" id="item1" />
           <label sc-label for="item1">Item 1</label>
         </div>
         <div sc-checkbox-field>
-          <input type="checkbox" sc-checkbox [(ngModel)]="item2" id="item2" />
+          <input type="checkbox" sc-checkbox [(checked)]="item2" id="item2" />
           <label sc-label for="item2">Item 2</label>
         </div>
         <div sc-checkbox-field>
-          <input type="checkbox" sc-checkbox [(ngModel)]="item3" id="item3" />
+          <input type="checkbox" sc-checkbox [(checked)]="item3" id="item3" />
           <label sc-label for="item3">Item 3</label>
         </div>
       </div>
@@ -51,13 +51,15 @@ export class IndeterminateCheckboxDemo {
   readonly item2 = signal(false);
   readonly item3 = signal(false);
 
-  readonly allSelected = () => this.item1() && this.item2() && this.item3();
-  readonly someSelected = () => {
+  readonly allSelected = computed(
+    () => this.item1() && this.item2() && this.item3(),
+  );
+  readonly someSelected = computed(() => {
     const selected = [this.item1(), this.item2(), this.item3()].filter(
       Boolean,
     ).length;
     return selected > 0 && selected < 3;
-  };
+  });
 
   toggleAll(event: Event): void {
     const checked = (event.target as HTMLInputElement).checked;
