@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScItem,
-  ScItemContent,
+  ScItemBody,
   ScItemDescription,
   ScItemGroup,
   ScItemMedia,
@@ -22,7 +22,7 @@ import {
   selector: 'app-basic-item-demo',
   imports: [
     ScItem,
-    ScItemContent,
+    ScItemBody,
     ScItemDescription,
     ScItemGroup,
     ScItemMedia,
@@ -38,7 +38,7 @@ import {
         <div sc-item-media variant="icon">
           <svg si-bell-icon></svg>
         </div>
-        <div sc-item-content>
+        <div sc-item-body>
           <div sc-item-title>Notifications</div>
           <p sc-item-description>Manage your notification preferences.</p>
         </div>
@@ -50,7 +50,7 @@ import {
         <div sc-item-media variant="icon">
           <svg si-lock-icon></svg>
         </div>
-        <div sc-item-content>
+        <div sc-item-body>
           <div sc-item-title>Privacy</div>
           <p sc-item-description>Control your privacy settings.</p>
         </div>
@@ -62,7 +62,7 @@ import {
         <div sc-item-media variant="icon">
           <svg si-settings-icon></svg>
         </div>
-        <div sc-item-content>
+        <div sc-item-body>
           <div sc-item-title>Settings</div>
           <p sc-item-description>Configure your account preferences.</p>
         </div>

@@ -2,7 +2,7 @@ export * from './item-group';
 export * from './item-separator';
 export * from './item';
 export * from './item-media';
-export * from './item-content';
+export * from './item-body';
 export * from './item-title';
 export * from './item-description';
 export * from './item-actions';

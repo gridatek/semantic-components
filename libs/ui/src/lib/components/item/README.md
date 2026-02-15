@@ -10,7 +10,7 @@ A flexible layout component for displaying structured content with media, titles
     <div sc-item-media variant="icon">
       <svg><!-- icon --></svg>
     </div>
-    <div sc-item-content>
+    <div sc-item-body>
       <div sc-item-title>Title</div>
       <p sc-item-description>Description text</p>
     </div>
@@ -96,11 +96,11 @@ Container for media content (icons, images) within an item.
 - `icon` - Sized for icons
 - `image` - Sized for images with overflow hidden
 
-### ScItemContent
+### ScItemBody
 
-Flexible content area within an item.
+Main body area within an item.
 
-**Selector:** `div[sc-item-content]`
+**Selector:** `div[sc-item-body]`
 
 **Inputs:**
 
@@ -175,14 +175,14 @@ Full-width footer row within an item.
 ```html
 <div sc-item-group>
   <div sc-item>
-    <div sc-item-content>
+    <div sc-item-body>
       <div sc-item-title>Notifications</div>
       <p sc-item-description>Manage your notification preferences.</p>
     </div>
   </div>
   <div sc-item-separator></div>
   <div sc-item>
-    <div sc-item-content>
+    <div sc-item-body>
       <div sc-item-title>Privacy</div>
       <p sc-item-description>Control your privacy settings.</p>
     </div>
@@ -197,7 +197,7 @@ Full-width footer row within an item.
   <div sc-item-media variant="icon">
     <svg><!-- icon --></svg>
   </div>
-  <div sc-item-content>
+  <div sc-item-body>
     <div sc-item-title>Settings</div>
     <p sc-item-description>Configure your account.</p>
   </div>
@@ -208,7 +208,7 @@ Full-width footer row within an item.
 
 ```html
 <div sc-item>
-  <div sc-item-content>
+  <div sc-item-body>
     <div sc-item-title>Profile</div>
     <p sc-item-description>Update your personal information.</p>
   </div>
