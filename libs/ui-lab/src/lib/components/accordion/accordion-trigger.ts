@@ -6,10 +6,15 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { AccordionTrigger } from '@angular/aria/accordion';
+import {
+  SiChevronDownIcon,
+  SiChevronUpIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: '[scAccordionTrigger]',
+  imports: [SiChevronDownIcon, SiChevronUpIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   hostDirectives: [
@@ -26,35 +31,15 @@ import { cn } from '@semantic-components/ui';
   template: `
     <ng-content />
     <svg
+      si-chevron-down-icon
       data-slot="accordion-trigger-icon"
       class="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
+    ></svg>
     <svg
+      si-chevron-up-icon
       data-slot="accordion-trigger-icon"
       class="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <path d="m18 15-6-6-6 6" />
-    </svg>
+    ></svg>
   `,
 })
 export class ScAccordionTrigger {
