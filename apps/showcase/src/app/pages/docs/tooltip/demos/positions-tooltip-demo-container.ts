@@ -28,7 +28,7 @@ export class PositionsTooltipDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTooltipTrigger } from '@semantic-components/ui-lab';
+import { ScTooltipTrigger } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-positions-tooltip-demo',

@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTooltipTrigger } from '@semantic-components/ui-lab';
+import { ScTooltipTrigger } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-delay-tooltip-demo',

@@ -898,7 +898,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'tooltip',
     description: 'A popup that displays information on hover or focus.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Overlay',
   },
   {

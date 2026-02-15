@@ -77,7 +77,6 @@ export * from './toast';
 export * from './toggle';
 export * from './toggle-group';
 export * from './toolbar';
-export * from './tooltip';
 export * from './tour-guide';
 export * from './transfer-list';
 export * from './tree';
