@@ -43,9 +43,6 @@ export class ScTooltipTrigger {
   /** Whether the tooltip is disabled */
   readonly disabled = input<boolean>(false, { alias: 'tooltipDisabled' });
 
-  /** Custom CSS class for the tooltip */
-  readonly tooltipClass = input<string>('', { alias: 'tooltipClass' });
-
   private readonly tooltipId = this.idGenerator.getId('sc-tooltip-');
   private showTimeout: ReturnType<typeof setTimeout> | null = null;
   private hideTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -121,7 +118,6 @@ export class ScTooltipTrigger {
       {
         content: this.content(),
         position: this.position(),
-        tooltipClass: this.tooltipClass(),
       },
       this.tooltipId,
     );

@@ -87,7 +87,6 @@ const positionMap: Record<ScTooltipPosition, ConnectedPosition[]> = {
 export interface ScTooltipConfig {
   content: string;
   position: ScTooltipPosition;
-  tooltipClass: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -145,7 +144,6 @@ export class ScTooltipManager {
           provide: SC_TOOLTIP_DATA,
           useValue: {
             content: config.content,
-            tooltipClass: config.tooltipClass,
             tooltipId,
           },
         },
