@@ -12,13 +12,8 @@ import {
   ScCodeViewerLabel,
   ScCodeViewerLanguage,
 } from '@semantic-components/code';
-import {
-  ScCopyButton,
-  ScTab,
-  ScTabList,
-  ScTabPanel,
-  ScTabs,
-} from '@semantic-components/ui-lab';
+import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
+import { ScCopyButton } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-demo-container',

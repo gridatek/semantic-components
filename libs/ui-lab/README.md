@@ -4,11 +4,11 @@ Experimental and extended UI components and layouts for the Semantic Components 
 
 ## Contents
 
-- **Components**: Accordion, Alert, Dialog, Tabs, Table, Sidebar, and many more
+- **Components**: Alert, Dialog, Table, Sidebar, and many more
 - **Layouts**: Auth layout, Sidebar layout, Stacked layout
 
 ## Usage
 
 ```ts
-import { ScDialog, ScTabs, ScSidebar } from '@semantic-components/ui-lab';
+import { ScDialog, ScAlert, ScSidebar } from '@semantic-components/ui-lab';
 ```

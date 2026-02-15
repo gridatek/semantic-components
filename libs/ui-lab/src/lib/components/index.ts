@@ -83,7 +83,6 @@ export * from './stat-card';
 export * from './stepper';
 export * from './switch';
 export * from './table';
-export * from './tabs';
 export * from './tag-input';
 export * from './textarea';
 export * from './theme-toggle';

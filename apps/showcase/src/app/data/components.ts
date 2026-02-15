@@ -808,7 +808,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'tabs',
     description: 'Organize content into multiple sections with tabs.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Navigation',
   },
   {

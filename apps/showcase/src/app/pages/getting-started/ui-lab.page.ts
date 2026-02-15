@@ -105,19 +105,18 @@ export default class UiLabPage {
   readonly sourceCode =
     '@source "../node_modules/@semantic-components/ui-lab";';
 
-  readonly usageCode = `import { ScTabs, ScTabList, ScTab, ScTabPanel } from '@semantic-components/ui-lab';
+  readonly usageCode = `import { ScDialog, ScDialogContent, ScDialogTrigger } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-example',
-  imports: [ScTabs, ScTabList, ScTab, ScTabPanel],
+  imports: [ScDialog, ScDialogContent, ScDialogTrigger],
   template: \`
-    <div scTabs>
-      <div scTabList [selectedTab]="'tab1'" class="grid w-full grid-cols-2">
-        <button scTab value="tab1">Tab 1</button>
-        <button scTab value="tab2">Tab 2</button>
-      </div>
-      <div scTabPanel value="tab1">Content 1</div>
-      <div scTabPanel value="tab2">Content 2</div>
+    <div scDialog>
+      <button scDialogTrigger>Open Dialog</button>
+      <ng-template scDialogContent>
+        <h2>Dialog Title</h2>
+        <p>Dialog content goes here.</p>
+      </ng-template>
     </div>
   \`,
 })
