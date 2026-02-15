@@ -70,7 +70,6 @@ export * from './spotlight';
 export * from './stat-card';
 export * from './stepper';
 export * from './switch';
-export * from './table';
 export * from './tag-input';
 export * from './theme-toggle';
 export * from './time-picker';

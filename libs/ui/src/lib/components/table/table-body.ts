@@ -1,17 +1,17 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: 'caption[sc-table-caption]',
+  selector: 'tbody[sc-table-body]',
   host: {
-    'data-slot': 'table-caption',
+    'data-slot': 'table-body',
     '[class]': 'class()',
   },
 })
-export class ScTableCaption {
+export class ScTableBody {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('mt-4 text-sm text-muted-foreground', this.classInput()),
+    cn('[&_tr:last-child]:border-0', this.classInput()),
   );
 }

@@ -10,7 +10,7 @@ import {
   ScTableHeaderCell,
   ScTableHeader,
   ScTableRow,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-users-table-demo',

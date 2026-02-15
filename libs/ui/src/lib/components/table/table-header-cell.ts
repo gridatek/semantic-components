@@ -1,19 +1,19 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: 'tfoot[sc-table-footer]',
+  selector: 'th[sc-table-header-cell]',
   host: {
-    'data-slot': 'table-footer',
+    'data-slot': 'table-header-cell',
     '[class]': 'class()',
   },
 })
-export class ScTableFooter {
+export class ScTableHeaderCell {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'border-t bg-muted/50 font-medium [&>tr]:last:border-b-0',
+      'h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
       this.classInput(),
     ),
   );
