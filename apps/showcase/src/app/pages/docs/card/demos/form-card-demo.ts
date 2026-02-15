@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScCard,
   ScCardBody,
   ScCardDescription,
@@ -16,6 +17,7 @@ import { ScInput, ScLabel } from '@semantic-components/ui-lab';
 @Component({
   selector: 'app-form-card-demo',
   imports: [
+    ScButton,
     ScCard,
     ScCardBody,
     ScCardDescription,
@@ -53,16 +55,8 @@ import { ScInput, ScLabel } from '@semantic-components/ui-lab';
         </div>
       </div>
       <div sc-card-footer class="flex justify-between">
-        <button
-          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
-        >
-          Cancel
-        </button>
-        <button
-          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
-        >
-          Deploy
-        </button>
+        <button sc-button variant="outline">Cancel</button>
+        <button sc-button>Deploy</button>
       </div>
     </div>
   `,
