@@ -95,7 +95,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'badge',
     description: 'Displays a small status indicator or label.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Data Display',
   },
   {

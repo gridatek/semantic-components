@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScBadge } from '@semantic-components/ui-lab';
+import { ScBadge } from '@semantic-components/ui';
 import { ComponentStatusBadge } from '../component-status-badge/component-status-badge';
 import {
   ComponentItem,
