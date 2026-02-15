@@ -28,7 +28,7 @@ export class VariantsKbdDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScKbd } from '@semantic-components/ui-lab';
+import { ScKbd } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-variants-kbd-demo',

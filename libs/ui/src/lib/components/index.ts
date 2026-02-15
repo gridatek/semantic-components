@@ -12,6 +12,7 @@ export * from './dialog';
 export * from './drawer';
 export * from './field';
 export * from './item';
+export * from './kbd';
 export * from './label';
 export * from './link';
 export * from './sheet';
