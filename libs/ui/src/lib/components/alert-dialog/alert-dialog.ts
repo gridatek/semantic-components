@@ -13,7 +13,7 @@ import {
 import { cn } from '../../utils';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
-type ScAlertDialogState = 'open' | 'closed';
+type ScAlertDialogState = 'idle' | 'open' | 'closed';
 
 @Component({
   selector: 'div[sc-alert-dialog]',
@@ -26,7 +26,9 @@ type ScAlertDialogState = 'open' | 'closed';
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'titleId',
     '[attr.aria-describedby]': 'descriptionId',
-    '[attr.data-state]': 'state()',
+    '[attr.data-idle]': 'state() === "idle" ? "" : null',
+    '[attr.data-open]': 'state() === "open" ? "" : null',
+    '[attr.data-closed]': 'state() === "closed" ? "" : null',
     '[class]': 'class()',
     '[tabindex]': '-1',
     '(animationend)': 'onAnimationEnd($event)',
@@ -39,7 +41,7 @@ export class ScAlertDialog {
 
   readonly alertDialogProvider = inject(ScAlertDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly state = signal<ScAlertDialogState>('closed');
+  protected readonly state = signal<ScAlertDialogState>('idle');
 
   readonly dialogId = inject(_IdGenerator).getId('sc-alert-dialog-');
 
@@ -48,11 +50,11 @@ export class ScAlertDialog {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-background ring-foreground/10 fixed top-1/2 left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl p-4 ring-1 outline-none',
+      'relative bg-background ring-foreground/10 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-xl p-4 text-sm ring-1 duration-100 outline-none',
       'max-w-xs sm:max-w-sm',
-      'animate-in fade-in-0 zoom-in-95 duration-300',
-      'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:duration-300',
-      'group/alert-dialog-content',
+      'data-idle:opacity-0',
+      'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
+      'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
       this.classInput(),
     ),
   );
@@ -71,6 +73,7 @@ export class ScAlertDialog {
       this.state() === 'closed' &&
       event.target === this.elementRef.nativeElement
     ) {
+      this.state.set('idle');
       this.alertDialogProvider.onDialogAnimationComplete();
     }
   }
