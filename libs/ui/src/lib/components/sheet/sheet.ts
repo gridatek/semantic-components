@@ -11,23 +11,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScSheetProvider, SheetSide } from './sheet-provider';
+import { ScSheetProvider } from './sheet-provider';
 
 type ScSheetState = 'idle' | 'open' | 'closed';
-
-const sidePositionClasses: Record<SheetSide, string> = {
-  top: 'inset-x-0 top-0 border-b',
-  right: 'inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm',
-  bottom: 'inset-x-0 bottom-0 border-t',
-  left: 'inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm',
-};
-
-const sideAnimationClasses: Record<SheetSide, string> = {
-  top: 'data-open:slide-in-from-top data-closed:slide-out-to-top',
-  right: 'data-open:slide-in-from-right data-closed:slide-out-to-right',
-  bottom: 'data-open:slide-in-from-bottom data-closed:slide-out-to-bottom',
-  left: 'data-open:slide-in-from-left data-closed:slide-out-to-left',
-};
 
 @Component({
   selector: 'div[sc-sheet]',
@@ -40,6 +26,7 @@ const sideAnimationClasses: Record<SheetSide, string> = {
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'titleId',
     '[attr.aria-describedby]': 'descriptionId',
+    '[attr.data-side]': 'sheetProvider.side()',
     '[attr.data-idle]': 'state() === "idle" ? "" : null',
     '[attr.data-open]': 'state() === "open" ? "" : null',
     '[attr.data-closed]': 'state() === "closed" ? "" : null',
@@ -61,19 +48,25 @@ export class ScSheet {
   readonly titleId = `${this.sheetId}-title`;
   readonly descriptionId = `${this.sheetId}-description`;
 
-  protected readonly class = computed(() => {
-    const side = this.sheetProvider.side();
-
-    return cn(
-      'bg-background fixed z-50 flex flex-col gap-4 p-6 shadow-lg duration-300',
-      sidePositionClasses[side],
+  protected readonly class = computed(() =>
+    cn(
+      'bg-background fixed z-50 flex flex-col gap-4 p-6 shadow-lg duration-200 ease-in-out transition',
+      // Position based on side
+      'data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t',
+      'data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-r data-[side=left]:sm:max-w-sm',
+      'data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-l data-[side=right]:sm:max-w-sm',
+      'data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b',
+      // Animations
       'data-idle:opacity-0',
       'data-open:animate-in data-open:fade-in-0',
-      sideAnimationClasses[side],
+      'data-[side=right]:data-closed:slide-out-to-right-10 data-[side=right]:data-open:slide-in-from-right-10',
+      'data-[side=left]:data-closed:slide-out-to-left-10 data-[side=left]:data-open:slide-in-from-left-10',
+      'data-[side=top]:data-closed:slide-out-to-top-10 data-[side=top]:data-open:slide-in-from-top-10',
+      'data-[side=bottom]:data-closed:slide-out-to-bottom-10 data-[side=bottom]:data-open:slide-in-from-bottom-10',
       'data-closed:animate-out data-closed:fade-out-0',
       this.classInput(),
-    );
-  });
+    ),
+  );
 
   constructor() {
     // Sync state with provider's open signal
