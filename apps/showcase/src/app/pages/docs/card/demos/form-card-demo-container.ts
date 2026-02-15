@@ -85,7 +85,11 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                   <option value="vue">Vue</option>
                   <option value="svelte">Svelte</option>
                 </select>
-                <svg si-chevron-down-icon sc-native-select-icon aria-hidden="true"></svg>
+                <svg
+                  si-chevron-down-icon
+                  sc-native-select-icon
+                  aria-hidden="true"
+                ></svg>
               </div>
             </div>
           </div>

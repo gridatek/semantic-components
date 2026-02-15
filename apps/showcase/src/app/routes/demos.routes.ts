@@ -2334,6 +2334,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/native-select',
+    children: [
+      {
+        path: 'basic-native-select-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-select/demos/basic-native-select-demo').then(
+            (m) => m.BasicNativeSelectDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/navigation-menu',
     children: [
       {

@@ -523,6 +523,14 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Forms',
   },
   {
+    name: 'Native Select',
+    path: 'native-select',
+    description: 'A styled native select element with a custom chevron icon.',
+    status: 'Experimental',
+    library: 'ui',
+    category: 'Forms',
+  },
+  {
     name: 'Navbar',
     path: 'navbar',
     description: 'A responsive navigation bar with mobile menu support.',
