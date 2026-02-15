@@ -1,17 +1,28 @@
-import { computed, Directive, input } from '@angular/core';
-import { cn } from '../../utils';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { computed, Directive, inject, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
+import { SC_FIELD } from '../field';
 
 @Directive({
   selector: 'select[sc-native-select]',
   host: {
     'data-slot': 'native-select',
+    '[attr.id]': 'id()',
     '[attr.data-size]': 'size()',
     '[class]': 'class()',
   },
 })
 export class ScNativeSelect {
+  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly fallbackId = inject(_IdGenerator).getId('sc-native-select-');
+
+  readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');
+
+  readonly id = computed(
+    () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
 
   protected readonly class = computed(() =>
     cn(

@@ -4,11 +4,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScField,
+  ScLabel,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
-} from '@semantic-components/ui';
-import { ScField, ScLabel } from '@semantic-components/ui-lab';
+} from '@semantic-components/ui-lab';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -23,9 +24,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div sc-field class="w-[280px]">
-      <label sc-label for="framework">Framework</label>
+      <label sc-label>Framework</label>
       <div sc-native-select-container>
-        <select sc-native-select id="framework">
+        <select sc-native-select>
           <option value="">Select a framework</option>
           <option value="next">Next.js</option>
           <option value="angular">Angular</option>

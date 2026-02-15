@@ -11,15 +11,15 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
-  ScNativeSelect,
-  ScNativeSelectContainer,
-  ScNativeSelectIcon,
 } from '@semantic-components/ui';
 import {
   ScField,
   ScFieldGroup,
   ScInput,
   ScLabel,
+  ScNativeSelect,
+  ScNativeSelectContainer,
+  ScNativeSelectIcon,
 } from '@semantic-components/ui-lab';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -52,13 +52,13 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         <div sc-card-body>
           <div sc-field-group>
             <div sc-field>
-              <label sc-label for="name">Name</label>
-              <input sc-input id="name" placeholder="Name of your project" />
+              <label sc-label>Name</label>
+              <input sc-input placeholder="Name of your project" />
             </div>
             <div sc-field>
-              <label sc-label for="framework">Framework</label>
+              <label sc-label>Framework</label>
               <div sc-native-select-container>
-                <select sc-native-select id="framework">
+                <select sc-native-select>
                   <option value="">Select a framework</option>
                   <option value="next">Next.js</option>
                   <option value="angular">Angular</option>
