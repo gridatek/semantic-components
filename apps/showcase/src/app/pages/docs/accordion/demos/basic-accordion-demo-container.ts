@@ -36,7 +36,7 @@ import {
   ScAccordionItem,
   ScAccordionPanel,
   ScAccordionTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-accordion-demo',

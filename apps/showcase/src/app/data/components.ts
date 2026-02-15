@@ -30,7 +30,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'accordion',
     description: 'A vertically stacked set of interactive headings.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Layout',
   },
   {
