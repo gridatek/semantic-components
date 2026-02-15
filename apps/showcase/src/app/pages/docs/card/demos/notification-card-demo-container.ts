@@ -34,6 +34,11 @@ import {
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
+  ScItem,
+  ScItemBody,
+  ScItemDescription,
+  ScItemMedia,
+  ScItemTitle,
 } from '@semantic-components/ui';
 import { SiBellIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
 
@@ -45,6 +50,11 @@ import { SiBellIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
+    ScItem,
+    ScItemBody,
+    ScItemDescription,
+    ScItemMedia,
+    ScItemTitle,
     SiBellIcon,
     SiMailIcon,
   ],
@@ -55,22 +65,22 @@ import { SiBellIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
         <p sc-card-description>You have 3 unread messages.</p>
       </div>
       <div sc-card-body class="grid gap-4">
-        <div class="flex items-center space-x-4 rounded-md border p-4">
-          <svg si-bell-icon class="size-6"></svg>
-          <div class="flex-1 space-y-1">
-            <p class="text-sm font-medium leading-none">Push Notifications</p>
-            <p class="text-sm text-muted-foreground">
-              Send notifications to device.
-            </p>
+        <div sc-item variant="outline">
+          <div sc-item-media variant="icon">
+            <svg si-bell-icon></svg>
+          </div>
+          <div sc-item-body>
+            <div sc-item-title>Push Notifications</div>
+            <p sc-item-description>Send notifications to device.</p>
           </div>
         </div>
-        <div class="flex items-center space-x-4 rounded-md border p-4">
-          <svg si-mail-icon class="size-6"></svg>
-          <div class="flex-1 space-y-1">
-            <p class="text-sm font-medium leading-none">Email Notifications</p>
-            <p class="text-sm text-muted-foreground">
-              Receive emails about activity.
-            </p>
+        <div sc-item variant="outline">
+          <div sc-item-media variant="icon">
+            <svg si-mail-icon></svg>
+          </div>
+          <div sc-item-body>
+            <div sc-item-title>Email Notifications</div>
+            <p sc-item-description>Receive emails about activity.</p>
           </div>
         </div>
       </div>
