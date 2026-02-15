@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSpinner } from '@semantic-components/ui-lab';
+import { ScSpinner } from '@semantic-components/ui';
 import { SiLoader2Icon } from '@semantic-icons/lucide-icons';
 
 @Component({

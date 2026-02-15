@@ -751,7 +751,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'spinner',
     description: 'A loading indicator animation.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Feedback',
   },
   {

@@ -11,4 +11,5 @@ export * from './field';
 export * from './item';
 export * from './link';
 export * from './sheet';
+export * from './spinner';
 export * from './tabs';

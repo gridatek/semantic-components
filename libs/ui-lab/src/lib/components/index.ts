@@ -92,5 +92,4 @@ export * from './tree';
 export * from './video-player';
 export * from './virtual-list';
 export * from './split-button';
-export * from './spinner';
 export * from './language-switcher';
