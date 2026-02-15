@@ -105,18 +105,14 @@ export default class UiLabPage {
   readonly sourceCode =
     '@source "../node_modules/@semantic-components/ui-lab";';
 
-  readonly usageCode = `import { ScDialog, ScDialogContent, ScDialogTrigger } from '@semantic-components/ui-lab';
+  readonly usageCode = `import { ScAlert } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-example',
-  imports: [ScDialog, ScDialogContent, ScDialogTrigger],
+  imports: [ScAlert],
   template: \`
-    <div scDialog>
-      <button scDialogTrigger>Open Dialog</button>
-      <ng-template scDialogContent>
-        <h2>Dialog Title</h2>
-        <p>Dialog content goes here.</p>
-      </ng-template>
+    <div sc-alert variant="info">
+      <p>This is an informational alert message.</p>
     </div>
   \`,
 })

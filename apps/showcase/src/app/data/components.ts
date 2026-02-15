@@ -282,7 +282,7 @@ export const COMPONENTS: ComponentItem[] = [
     description:
       'A modal dialog that interrupts the user with important content.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Feedback',
   },
   {
