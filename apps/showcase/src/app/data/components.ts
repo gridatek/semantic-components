@@ -38,7 +38,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'alert',
     description: 'Displays important messages to the user.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Feedback',
   },
   {
