@@ -1,5 +1,5 @@
 export { ScDrawerProvider } from './drawer-provider';
-export type { DrawerDirection } from './drawer-provider';
+export type { ScDrawerDirection } from './drawer-provider';
 export { ScDrawer } from './drawer';
 export { ScDrawerTrigger } from './drawer-trigger';
 export { ScDrawerPortal } from './drawer-portal';

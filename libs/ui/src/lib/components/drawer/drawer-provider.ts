@@ -21,7 +21,7 @@ import { cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScDrawerPortal } from './drawer-portal';
 
-export type DrawerDirection = 'top' | 'right' | 'bottom' | 'left';
+export type ScDrawerDirection = 'top' | 'right' | 'bottom' | 'left';
 
 @Component({
   selector: 'div[sc-drawer-provider]',
@@ -51,7 +51,7 @@ export class ScDrawerProvider {
   private readonly viewContainerRef = inject(ViewContainerRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly direction = input<DrawerDirection>('bottom');
+  readonly direction = input<ScDrawerDirection>('bottom');
 
   private readonly overlayTemplate =
     viewChild.required<TemplateRef<unknown>>('overlayTemplate');
