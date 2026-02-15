@@ -65,7 +65,7 @@ export class ScField implements ScFieldContext {
   readonly invalidInput = input<boolean>(false, { alias: 'invalid' });
   readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
 
-  private readonly formFieldDirective = contentChild(FormField);
+  private readonly formField = contentChild(FormField);
 
   protected readonly role = computed(() => {
     // Only LABEL preserves native semantics, DIV gets role="group"
@@ -75,12 +75,16 @@ export class ScField implements ScFieldContext {
 
   readonly invalid = computed(() => {
     if (this.invalidInput()) return true;
-    return this.formFieldDirective()?.state().invalid() ?? false;
+    return (
+      (this.formField()?.state().touched() &&
+        this.formField()?.state().invalid()) ??
+      false
+    );
   });
 
   readonly disabled = computed(() => {
     if (this.disabledInput()) return true;
-    return this.formFieldDirective()?.state().disabled() ?? false;
+    return this.formField()?.state().disabled() ?? false;
   });
 
   protected readonly class = computed(() =>

@@ -26,7 +26,12 @@ export class ScInput {
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  readonly invalid = computed(() => this.formField?.state().invalid() ?? false);
+  readonly invalid = computed(
+    () =>
+      (this.formField?.state().touched() &&
+        this.formField?.state().invalid()) ??
+      false,
+  );
 
   readonly disabled = computed(
     () => this.formField?.state().disabled() ?? false,
