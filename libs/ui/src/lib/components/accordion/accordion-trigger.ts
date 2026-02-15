@@ -10,7 +10,7 @@ import {
   SiChevronDownIcon,
   SiChevronUpIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Component({
   selector: '[scAccordionTrigger]',

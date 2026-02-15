@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { TabPanel } from '@angular/aria/tabs';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Component({
   selector: '[scTabPanel]',

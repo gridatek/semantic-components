@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { AccordionPanel } from '@angular/aria/accordion';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Component({
   selector: '[scAccordionPanel]',
