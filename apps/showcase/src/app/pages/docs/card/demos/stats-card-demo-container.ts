@@ -50,7 +50,7 @@ import {
       <div sc-card>
         <div sc-card-header class="pb-2">
           <p sc-card-description>Total Revenue</p>
-          <h3 sc-card-title class="text-4xl">$45,231.89</h3>
+          <h3 sc-card-title class="text-2xl">$45,231.89</h3>
         </div>
         <div sc-card-body>
           <p class="text-xs text-muted-foreground">+20.1% from last month</p>
@@ -59,7 +59,7 @@ import {
       <div sc-card>
         <div sc-card-header class="pb-2">
           <p sc-card-description>Subscriptions</p>
-          <h3 sc-card-title class="text-4xl">+2,350</h3>
+          <h3 sc-card-title class="text-2xl">+2,350</h3>
         </div>
         <div sc-card-body>
           <p class="text-xs text-muted-foreground">+180.1% from last month</p>
@@ -68,7 +68,7 @@ import {
       <div sc-card>
         <div sc-card-header class="pb-2">
           <p sc-card-description>Active Now</p>
-          <h3 sc-card-title class="text-4xl">+573</h3>
+          <h3 sc-card-title class="text-2xl">+573</h3>
         </div>
         <div sc-card-body>
           <p class="text-xs text-muted-foreground">+201 since last hour</p>
