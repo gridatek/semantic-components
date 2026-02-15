@@ -14,31 +14,31 @@ import {
   selector: 'app-disabled-tabs-demo',
   imports: [ScTabs, ScTabPanel, ScTabList, ScTab],
   template: `
-    <div sc-tabs class="w-[500px]">
-      <div sc-tab-list [selectedTab]="'overview'">
-        <button sc-tab value="overview">Overview</button>
-        <button sc-tab value="analytics">Analytics</button>
-        <button sc-tab value="reports">Reports</button>
-        <button sc-tab value="notifications" [disabled]="true">
+    <div scTabs class="w-[500px]">
+      <div scTabList [selectedTab]="'overview'">
+        <button scTab value="overview">Overview</button>
+        <button scTab value="analytics">Analytics</button>
+        <button scTab value="reports">Reports</button>
+        <button scTab value="notifications" [disabled]="true">
           Notifications
         </button>
       </div>
-      <div sc-tab-panel value="overview">
+      <div scTabPanel value="overview">
         <p class="text-sm text-muted-foreground">
           Overview content. View your dashboard summary and key metrics.
         </p>
       </div>
-      <div sc-tab-panel value="analytics">
+      <div scTabPanel value="analytics">
         <p class="text-sm text-muted-foreground">
           Analytics content. Dive deep into your data and discover insights.
         </p>
       </div>
-      <div sc-tab-panel value="reports">
+      <div scTabPanel value="reports">
         <p class="text-sm text-muted-foreground">
           Reports content. Generate and download detailed reports.
         </p>
       </div>
-      <div sc-tab-panel value="notifications">
+      <div scTabPanel value="notifications">
         <p class="text-sm text-muted-foreground">
           Notifications content. Manage your notification preferences.
         </p>

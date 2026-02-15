@@ -14,16 +14,12 @@ import {
   selector: 'app-basic-tabs-demo',
   imports: [ScTabs, ScTabPanel, ScTabList, ScTab],
   template: `
-    <div sc-tabs class="w-[400px]">
-      <div
-        sc-tab-list
-        [selectedTab]="'account'"
-        class="grid w-full grid-cols-2"
-      >
-        <button sc-tab value="account">Account</button>
-        <button sc-tab value="password">Password</button>
+    <div scTabs class="w-[400px]">
+      <div scTabList [selectedTab]="'account'" class="grid w-full grid-cols-2">
+        <button scTab value="account">Account</button>
+        <button scTab value="password">Password</button>
       </div>
-      <div sc-tab-panel value="account">
+      <div scTabPanel value="account">
         <div class="space-y-4 rounded-lg border p-4">
           <div class="space-y-2">
             <h3 class="text-lg font-medium">Account</h3>
@@ -54,7 +50,7 @@ import {
           </button>
         </div>
       </div>
-      <div sc-tabs-panel value="password">
+      <div scTabPanel value="password">
         <div class="space-y-4 rounded-lg border p-4">
           <div class="space-y-2">
             <h3 class="text-lg font-medium">Password</h3>

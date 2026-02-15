@@ -75,21 +75,21 @@ import {
         <p class="text-sm text-muted-foreground">{{ description() }}</p>
       }
 
-      <div sc-tabs class="w-full">
-        <div sc-tab-list selectedTab="preview">
-          <button sc-tab value="preview">Preview</button>
-          <button sc-tab value="code">Code</button>
+      <div scTabs class="w-full">
+        <div scTabList selectedTab="preview">
+          <button scTab value="preview">Preview</button>
+          <button scTab value="code">Code</button>
         </div>
 
         <div
-          sc-tab-panel
+          scTabPanel
           value="preview"
           class="flex min-h-40 items-center justify-center rounded-md border p-6"
         >
           <ng-content />
         </div>
 
-        <div sc-tab-panel value="code">
+        <div scTabPanel value="code">
           <div sc-code-viewer>
             <div sc-code-viewer-header>
               <span sc-code-viewer-label>{{ language() }}</span>

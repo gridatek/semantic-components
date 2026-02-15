@@ -111,13 +111,13 @@ export default class UiLabPage {
   selector: 'app-example',
   imports: [ScTabs, ScTabList, ScTab, ScTabPanel],
   template: \`
-    <div sc-tabs>
-      <div sc-tab-list [selectedTab]="'tab1'" class="grid w-full grid-cols-2">
-        <button sc-tab value="tab1">Tab 1</button>
-        <button sc-tab value="tab2">Tab 2</button>
+    <div scTabs>
+      <div scTabList [selectedTab]="'tab1'" class="grid w-full grid-cols-2">
+        <button scTab value="tab1">Tab 1</button>
+        <button scTab value="tab2">Tab 2</button>
       </div>
-      <div sc-tab-panel value="tab1">Content 1</div>
-      <div sc-tab-panel value="tab2">Content 2</div>
+      <div scTabPanel value="tab1">Content 1</div>
+      <div scTabPanel value="tab2">Content 2</div>
     </div>
   \`,
 })
