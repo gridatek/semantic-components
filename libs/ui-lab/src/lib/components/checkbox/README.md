@@ -6,14 +6,13 @@ A control that allows the user to toggle between checked and not checked.
 
 - `ScCheckboxField` (selector: `[sc-checkbox-field]`) - Grid container that observes input state and positions children via `data-slot`
 - `ScCheckbox` - Directive for native input (applied to `input[type="checkbox"]`)
-- `ScCheckboxIndicator` - Directive for styling the visual checkbox box (applied to `span`)
-- `ScVisualCheckbox` - Component for visual representation (rendered automatically by `ScCheckboxField`)
+- `ScCheckboxIndicator` - Component for visual representation (rendered automatically by `ScCheckboxField`)
 
 ## Usage
 
 ```html
 <div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [(ngModel)]="accepted" id="terms" />
+  <input type="checkbox" sc-checkbox [(checked)]="accepted" id="terms" />
   <label sc-label for="terms">Accept terms and conditions</label>
 </div>
 ```
@@ -24,7 +23,7 @@ When a `data-slot="field-description"` child is present, the label automatically
 
 ```html
 <div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [(ngModel)]="marketing" id="marketing" />
+  <input type="checkbox" sc-checkbox [(checked)]="marketing" id="marketing" />
   <label sc-label for="marketing">Marketing emails</label>
   <p sc-field-description>Receive emails about new products, features, and more.</p>
 </div>
@@ -36,7 +35,7 @@ Use `<label>` as the host element for implicit label association:
 
 ```html
 <label sc-checkbox-field class="cursor-pointer">
-  <input type="checkbox" sc-checkbox [(ngModel)]="option" />
+  <input type="checkbox" sc-checkbox [(checked)]="option" />
   Option text
 </label>
 ```
@@ -69,7 +68,7 @@ Note: Add `FormField` to your component's `imports` array to use the `[formField
 
 ```html
 <div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [(ngModel)]="allSelected" [indeterminate]="someSelected" />
+  <input type="checkbox" sc-checkbox [checked]="allSelected()" [indeterminate]="someSelected()" (change)="toggleAll($event)" />
   <label sc-label for="select-all">Select all</label>
 </div>
 ```
@@ -83,7 +82,7 @@ Note: Add `FormField` to your component's `imports` array to use the `[formField
 </div>
 
 <div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [(ngModel)]="checked" [disabled]="true" id="disabled-checked" />
+  <input type="checkbox" sc-checkbox [(checked)]="checked" [disabled]="true" id="disabled-checked" />
   <label sc-label for="disabled-checked">Disabled checked</label>
 </div>
 ```
@@ -110,7 +109,7 @@ Customize colors using CSS variables:
 ```html
 <div style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);">
   <div sc-checkbox-field>
-    <input type="checkbox" sc-checkbox [(ngModel)]="purple" id="purple" />
+    <input type="checkbox" sc-checkbox [(checked)]="purple" id="purple" />
     <label sc-label for="purple">Purple checkbox</label>
   </div>
 </div>
@@ -146,23 +145,20 @@ OKLCH format parameters:
 
 Note: Standard input attributes (`id`, `name`, `checked`, `disabled`) are set directly on the native input element.
 
-### ScVisualCheckbox (`sc-visual-checkbox`)
+### ScCheckboxIndicator (`sc-checkbox-indicator`)
 
-| Input | Type | Default | Description |
-| ----- | ---- | ------- | ----------- |
-
-Note: `ScVisualCheckbox` is rendered automatically by `ScCheckboxField`. You do not need to add it manually.
+Note: `ScCheckboxIndicator` is rendered automatically by `ScCheckboxField`. You do not need to add it manually.
 
 ## Data Slots
 
 Children are positioned in the grid using `data-slot` attributes:
 
-| Data Slot           | Grid Position | Component            |
-| ------------------- | ------------- | -------------------- |
-| `checkbox`          | col-1, row-1  | `ScCheckbox`         |
-| `visual-checkbox`   | col-1, row-1  | `ScVisualCheckbox`   |
-| `label`             | col-2, row-1  | `ScLabel`            |
-| `field-description` | col-2, row-2  | `ScFieldDescription` |
+| Data Slot            | Grid Position | Component             |
+| -------------------- | ------------- | --------------------- |
+| `checkbox`           | col-1, row-1  | `ScCheckbox`          |
+| `checkbox-indicator` | col-1, row-1  | `ScCheckboxIndicator` |
+| `label`              | col-2, row-1  | `ScLabel`             |
+| `field-description`  | col-2, row-2  | `ScFieldDescription`  |
 
 ## Context API
 
@@ -223,7 +219,7 @@ Children are positioned using `*:data-[slot=...]` selectors on the parent, follo
 │  col-1 (1rem)   │  col-2 (1fr)                       │
 │  ┌────────────┐ │                                    │
 │  │ ScCheckbox │ │  <label data-slot="label">         │  row-1
-│  │ + Visual   │ │                                    │
+│  │ + Indicator│ │                                    │
 │  │ (overlap)  │ │                                    │
 │  └────────────┘ │                                    │
 │                 │  <p data-slot="field-description">  │  row-2
@@ -237,28 +233,26 @@ Children are positioned using `*:data-[slot=...]` selectors on the parent, follo
 ```
 [sc-checkbox-field] (grid container, provides context)
 ├── <ng-content select="[sc-checkbox]" />  (projected input, col-1 row-1)
-├── span[sc-visual-checkbox]               (visual, col-1 row-1, pointer-events-none)
-│   └── span[sc-checkbox-indicator]        (box with border/background)
-│       ├── <svg si-check-icon>            (checkmark icon)
-│       └── <svg si-minus-icon>            (indeterminate icon)
+├── span[sc-checkbox-indicator]            (visual, col-1 row-1, pointer-events-none)
+│   ├── <svg si-check-icon>               (checkmark icon)
+│   └── <svg si-minus-icon>               (indeterminate icon)
 └── <ng-content />                         (label, description, col-2)
 ```
 
-**Template ordering:** The input is projected first (via `<ng-content select="[sc-checkbox]" />`), then the visual checkbox is rendered, then remaining content. This ensures the `peer` class on the input correctly enables `peer-focus-visible` and `peer-disabled` styles on the visual checkbox.
+**Template ordering:** The input is projected first (via `<ng-content select="[sc-checkbox]" />`), then the checkbox indicator is rendered, then remaining content. This ensures the `peer` class on the input correctly enables `peer-focus-visible` and `peer-disabled` styles on the indicator.
 
 ### Styling Breakdown
 
 - **ScCheckboxField**: `grid grid-cols-[1rem_1fr] items-start gap-x-2 gap-y-1` - Grid container with data-slot positioning
 - **ScCheckbox**: `peer size-4 cursor-pointer opacity-0` - Invisible native input (16px x 16px)
-- **ScVisualCheckbox**: `pointer-events-none size-4` - Visual container, clicks pass through to input
-- **ScCheckboxIndicator**: `size-4 border rounded-sm` - Actual visual checkbox box
+- **ScCheckboxIndicator**: `pointer-events-none size-4 border rounded-sm` - Visual checkbox box with icons, clicks pass through to input
 
 ### State Flow
 
 ```
 Native Input (source of truth)
   ├─ User interactions (click, keyboard)
-  ├─ Form bindings (ngModel, formField)
+  ├─ Model bindings ([(checked)])
   └─ Attributes (checked, disabled, indeterminate)
          ↓
 ScCheckboxField (observer)
@@ -266,7 +260,7 @@ ScCheckboxField (observer)
   ├─ Reads signals from ScCheckbox directly
   └─ Provides context via SC_CHECKBOX_FIELD token
          ↓
-ScVisualCheckbox (renderer)
+ScCheckboxIndicator (renderer)
   ├─ inject(SC_CHECKBOX_FIELD)
   └─ Renders based on checkbox.dataState()
 ```
@@ -276,7 +270,7 @@ ScVisualCheckbox (renderer)
 1. User interacts with native input (click, keyboard)
 2. Input's `(change)` event handler updates the `checked` model signal
 3. ScCheckboxField's computed signals react to changes (zoneless-compatible)
-4. ScVisualCheckbox injects context and renders accordingly
+4. ScCheckboxIndicator injects context and renders accordingly
 5. CSS peer selectors style based on input state (focus, disabled, etc.)
 
 ### Benefits
