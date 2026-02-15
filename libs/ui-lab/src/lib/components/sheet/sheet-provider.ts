@@ -17,8 +17,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { ScBackdrop } from '../backdrop';
+import { cn, ScBackdrop } from '@semantic-components/ui';
 import { ScSheetPortal } from './sheet-portal';
 
 export type SheetSide = 'top' | 'right' | 'bottom' | 'left';

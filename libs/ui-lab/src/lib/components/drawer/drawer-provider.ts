@@ -17,8 +17,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { ScBackdrop } from '../backdrop';
+import { cn, ScBackdrop } from '@semantic-components/ui';
 import { ScDrawerPortal } from './drawer-portal';
 
 export type DrawerDirection = 'top' | 'right' | 'bottom' | 'left';

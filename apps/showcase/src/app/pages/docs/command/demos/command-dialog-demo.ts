@@ -24,7 +24,7 @@ import {
   ScDialogProvider,
   ScDialogPortal,
   ScDialog,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 interface CommandItem {
   value: string;

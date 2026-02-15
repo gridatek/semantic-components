@@ -17,8 +17,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { ScBackdrop } from '../backdrop';
+import { cn, ScBackdrop } from '@semantic-components/ui';
 import { ScAlertDialogPortal } from './alert-dialog-portal';
 
 @Component({
