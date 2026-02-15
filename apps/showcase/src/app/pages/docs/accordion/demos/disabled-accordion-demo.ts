@@ -4,61 +4,58 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScAccordion,
-  ScAccordionPanel,
-  ScAccordionItem,
-  ScAccordionTrigger,
+  ScAccordionBody,
   ScAccordionContent,
-  ScAccordionHeader,
-  ScAccordionTriggerIcon,
+  ScAccordionGroup,
+  ScAccordionItem,
+  ScAccordionPanel,
+  ScAccordionTrigger,
 } from '@semantic-components/ui-lab';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-disabled-accordion-demo',
   imports: [
-    ScAccordion,
-    ScAccordionPanel,
+    ScAccordionGroup,
     ScAccordionItem,
     ScAccordionTrigger,
+    ScAccordionPanel,
     ScAccordionContent,
-    ScAccordionHeader,
-    SiChevronDownIcon,
-    ScAccordionTriggerIcon,
+    ScAccordionBody,
   ],
   template: `
-    <div sc-accordion [multiExpandable]="false" class="w-full max-w-md">
-      <div sc-accordion-item>
-        <div sc-accordion-header>
-          <button sc-accordion-trigger panelId="enabled-1" [expanded]="true">
-            Enabled Item
-            <svg si-chevron-down-icon sc-accordion-trigger-icon></svg>
-          </button>
-        </div>
-        <div sc-accordion-panel panelId="enabled-1">
-          <div sc-accordion-content>This item can be toggled normally.</div>
-        </div>
-      </div>
-      <div sc-accordion-item>
-        <div sc-accordion-header>
-          <button sc-accordion-trigger panelId="disabled-1" [disabled]="true">
-            Disabled Item
-            <svg si-chevron-down-icon sc-accordion-trigger-icon></svg>
-          </button>
-        </div>
-        <div sc-accordion-panel panelId="disabled-1">
-          <div sc-accordion-content>This content won't be shown.</div>
+    <div scAccordionGroup [multiExpandable]="false" class="w-full max-w-md">
+      <div scAccordionItem>
+        <button scAccordionTrigger panelId="enabled-1" [expanded]="true">
+          Enabled Item
+        </button>
+        <div scAccordionPanel panelId="enabled-1">
+          <ng-template scAccordionContent>
+            <sc-accordion-body>
+              This item can be toggled normally.
+            </sc-accordion-body>
+          </ng-template>
         </div>
       </div>
-      <div sc-accordion-item>
-        <div sc-accordion-header>
-          <button sc-accordion-trigger panelId="enabled-2">
-            Another Enabled Item
-            <svg si-chevron-down-icon sc-accordion-trigger-icon></svg>
-          </button>
+      <div scAccordionItem>
+        <button scAccordionTrigger panelId="disabled-1" [disabled]="true">
+          Disabled Item
+        </button>
+        <div scAccordionPanel panelId="disabled-1">
+          <ng-template scAccordionContent>
+            <sc-accordion-body>This content won't be shown.</sc-accordion-body>
+          </ng-template>
         </div>
-        <div sc-accordion-panel panelId="enabled-2">
-          <div sc-accordion-content>This item also works normally.</div>
+      </div>
+      <div scAccordionItem>
+        <button scAccordionTrigger panelId="enabled-2">
+          Another Enabled Item
+        </button>
+        <div scAccordionPanel panelId="enabled-2">
+          <ng-template scAccordionContent>
+            <sc-accordion-body>
+              This item also works normally.
+            </sc-accordion-body>
+          </ng-template>
         </div>
       </div>
     </div>
