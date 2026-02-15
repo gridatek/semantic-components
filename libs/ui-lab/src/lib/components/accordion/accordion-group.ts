@@ -19,7 +19,7 @@ import { cn } from '@semantic-components/ui';
     },
   ],
   host: {
-    'data-slot': 'accordion',
+    'data-slot': 'accordion-group',
     '[class]': 'class()',
   },
   template: `
