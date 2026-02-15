@@ -32,6 +32,7 @@ import {
   ScAccordionBody,
   ScAccordionContent,
   ScAccordionGroup,
+  ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
   ScAccordionTrigger,
@@ -41,46 +42,57 @@ import {
   selector: 'app-basic-accordion-demo',
   imports: [
     ScAccordionGroup,
+    ScAccordionHeader,
     ScAccordionItem,
     ScAccordionTrigger,
     ScAccordionPanel,
     ScAccordionContent,
     ScAccordionBody,
   ],
+  host: { class: 'block' },
   template: \`
-    <div scAccordionGroup [multiExpandable]="false" class="w-full max-w-md">
+    <div scAccordionGroup [multiExpandable]="false" class="w-full max-w-lg">
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="item-1">
-          Is it accessible?
-        </button>
-        <div scAccordionPanel panelId="item-1">
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="shipping" [expanded]="true">
+            What are your shipping options?
+          </button>
+        </div>
+        <div scAccordionPanel panelId="shipping">
           <ng-template scAccordionContent>
             <sc-accordion-body>
-              Yes. It adheres to the WAI-ARIA design pattern.
+              We offer standard (5-7 days), express (2-3 days), and overnight
+              shipping. Free shipping on international orders.
             </sc-accordion-body>
           </ng-template>
         </div>
       </div>
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="item-2">
-          Is it styled?
-        </button>
-        <div scAccordionPanel panelId="item-2">
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="returns">
+            What is your return policy?
+          </button>
+        </div>
+        <div scAccordionPanel panelId="returns">
           <ng-template scAccordionContent>
             <sc-accordion-body>
-              Yes. It comes with default styles that match other components.
+              Returns accepted within 30 days. Items must be unused and in
+              original packaging. Refunds processed within 5-7 business days.
             </sc-accordion-body>
           </ng-template>
         </div>
       </div>
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="item-3">
-          Is it animated?
-        </button>
-        <div scAccordionPanel panelId="item-3">
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="support">
+            How can I contact customer support?
+          </button>
+        </div>
+        <div scAccordionPanel panelId="support">
           <ng-template scAccordionContent>
             <sc-accordion-body>
-              Yes. It's animated by default with smooth transitions.
+              Reach us via email, live chat, or phone. We respond within 24
+              hours during business days.
             </sc-accordion-body>
           </ng-template>
         </div>

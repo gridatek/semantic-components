@@ -32,6 +32,7 @@ import {
   ScAccordionBody,
   ScAccordionContent,
   ScAccordionGroup,
+  ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
   ScAccordionTrigger,
@@ -41,18 +42,22 @@ import {
   selector: 'app-multiple-accordion-demo',
   imports: [
     ScAccordionGroup,
+    ScAccordionHeader,
     ScAccordionItem,
     ScAccordionTrigger,
     ScAccordionPanel,
     ScAccordionContent,
     ScAccordionBody,
   ],
+  host: { class: 'block' },
   template: \`
-    <div scAccordionGroup [multiExpandable]="true" class="w-full max-w-md">
+    <div scAccordionGroup [multiExpandable]="true" class="w-full max-w-lg">
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="item-a" [expanded]="true">
-          Can I open multiple items?
-        </button>
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="item-a" [expanded]="true">
+            Can I open multiple items?
+          </button>
+        </div>
         <div scAccordionPanel panelId="item-a">
           <ng-template scAccordionContent>
             <sc-accordion-body>
@@ -63,9 +68,11 @@ import {
         </div>
       </div>
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="item-b" [expanded]="true">
-          How does it work?
-        </button>
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="item-b" [expanded]="true">
+            How does it work?
+          </button>
+        </div>
         <div scAccordionPanel panelId="item-b">
           <ng-template scAccordionContent>
             <sc-accordion-body>
@@ -76,9 +83,11 @@ import {
         </div>
       </div>
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="item-c">
-          What about accessibility?
-        </button>
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="item-c">
+            What about accessibility?
+          </button>
+        </div>
         <div scAccordionPanel panelId="item-c">
           <ng-template scAccordionContent>
             <sc-accordion-body>

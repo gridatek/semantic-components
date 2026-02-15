@@ -7,6 +7,7 @@ import {
   ScAccordionBody,
   ScAccordionContent,
   ScAccordionGroup,
+  ScAccordionHeader,
   ScAccordionItem,
   ScAccordionPanel,
   ScAccordionTrigger,
@@ -16,18 +17,22 @@ import {
   selector: 'app-disabled-accordion-demo',
   imports: [
     ScAccordionGroup,
+    ScAccordionHeader,
     ScAccordionItem,
     ScAccordionTrigger,
     ScAccordionPanel,
     ScAccordionContent,
     ScAccordionBody,
   ],
+  host: { class: 'block' },
   template: `
-    <div scAccordionGroup [multiExpandable]="false" class="w-full max-w-md">
+    <div scAccordionGroup [multiExpandable]="false" class="w-full max-w-lg">
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="enabled-1" [expanded]="true">
-          Enabled Item
-        </button>
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="enabled-1" [expanded]="true">
+            Enabled Item
+          </button>
+        </div>
         <div scAccordionPanel panelId="enabled-1">
           <ng-template scAccordionContent>
             <sc-accordion-body>
@@ -37,9 +42,11 @@ import {
         </div>
       </div>
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="disabled-1" [disabled]="true">
-          Disabled Item
-        </button>
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="disabled-1" [disabled]="true">
+            Disabled Item
+          </button>
+        </div>
         <div scAccordionPanel panelId="disabled-1">
           <ng-template scAccordionContent>
             <sc-accordion-body>This content won't be shown.</sc-accordion-body>
@@ -47,9 +54,11 @@ import {
         </div>
       </div>
       <div scAccordionItem>
-        <button scAccordionTrigger panelId="enabled-2">
-          Another Enabled Item
-        </button>
+        <div scAccordionHeader>
+          <button scAccordionTrigger panelId="enabled-2">
+            Another Enabled Item
+          </button>
+        </div>
         <div scAccordionPanel panelId="enabled-2">
           <ng-template scAccordionContent>
             <sc-accordion-body>
