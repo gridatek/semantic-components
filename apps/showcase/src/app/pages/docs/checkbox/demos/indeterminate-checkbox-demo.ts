@@ -5,8 +5,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
-import { ScLabel } from '@semantic-components/ui-lab';
+import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-indeterminate-checkbox-demo',

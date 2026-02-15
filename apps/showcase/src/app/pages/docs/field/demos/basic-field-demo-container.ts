@@ -32,9 +32,8 @@ import {
   ScField,
   ScLabel,
   ScFieldDescription,
-  ScInput,
 } from "@semantic-components/ui";
-import { ScInput, ScLabel, ScSeparator } from "@semantic-components/ui-lab";
+import { ScInput } from "@semantic-components/ui-lab";
 
 @Component({
   selector: 'app-basic-field-demo',

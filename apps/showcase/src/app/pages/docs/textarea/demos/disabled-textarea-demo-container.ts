@@ -30,8 +30,8 @@ export class DisabledTextareaDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { disabled, form, FormField } from '@angular/forms/signals';
-import { ScField } from '@semantic-components/ui';
-import { ScLabel, ScTextarea } from '@semantic-components/ui-lab';
+import { ScField, ScLabel } from '@semantic-components/ui';
+import { ScTextarea } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-disabled-textarea-demo',

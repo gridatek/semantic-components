@@ -17,8 +17,9 @@ import {
   ScSheetTrigger,
   ScField,
   ScFieldGroup,
+  ScLabel,
 } from '@semantic-components/ui';
-import { ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-right-sheet-demo',

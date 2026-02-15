@@ -5,8 +5,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
-import { ScField, ScFieldError } from '@semantic-components/ui';
-import { ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScField, ScFieldError, ScLabel } from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-error-field-demo',

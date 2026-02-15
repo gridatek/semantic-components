@@ -17,8 +17,9 @@ import {
   ScDialogTrigger,
   ScField,
   ScFieldGroup,
+  ScLabel,
 } from '@semantic-components/ui';
-import { ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScInput } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

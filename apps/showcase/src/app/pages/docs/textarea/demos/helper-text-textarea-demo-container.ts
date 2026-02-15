@@ -30,8 +30,8 @@ export class HelperTextTextareaDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { ScField, ScFieldDescription } from '@semantic-components/ui';
-import { ScLabel, ScTextarea } from '@semantic-components/ui-lab';
+import { ScField, ScFieldDescription, ScLabel } from '@semantic-components/ui';
+import { ScTextarea } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-helper-text-textarea-demo',

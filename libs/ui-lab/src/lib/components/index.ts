@@ -34,7 +34,6 @@ export * from './input-group';
 export * from './opt-field';
 export * from './kanban-board';
 export * from './kbd';
-export * from './label';
 export * from './lightbox';
 export * from './marquee';
 export * from './masonry-grid';

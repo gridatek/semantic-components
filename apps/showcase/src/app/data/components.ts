@@ -446,7 +446,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'label',
     description: 'Renders an accessible label for form controls.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
   },
   {

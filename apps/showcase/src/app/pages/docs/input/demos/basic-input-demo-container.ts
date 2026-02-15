@@ -30,8 +30,8 @@ export class BasicInputDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { ScField } from '@semantic-components/ui';
-import { ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScField, ScLabel } from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-input-demo',

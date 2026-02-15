@@ -30,8 +30,8 @@ export class ButtonInputDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { ScField } from '@semantic-components/ui';
-import { ScButton, ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScButton, ScField, ScLabel } from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-button-input-demo',

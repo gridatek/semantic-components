@@ -7,8 +7,9 @@ import {
   ScField,
   ScFieldGroup,
   ScFieldSeparator,
+  ScLabel,
 } from '@semantic-components/ui';
-import { ScInput, ScLabel, ScSeparator } from '@semantic-components/ui-lab';
+import { ScInput, ScSeparator } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-separator-field-demo',

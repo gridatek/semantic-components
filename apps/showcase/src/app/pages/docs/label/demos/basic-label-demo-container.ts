@@ -24,8 +24,8 @@ export class BasicLabelDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScField } from '@semantic-components/ui';
-import { ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { ScField, ScLabel } from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-label-demo',

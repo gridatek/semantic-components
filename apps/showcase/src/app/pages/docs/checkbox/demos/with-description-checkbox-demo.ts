@@ -8,8 +8,8 @@ import {
   ScCheckbox,
   ScCheckboxField,
   ScFieldDescription,
+  ScLabel,
 } from '@semantic-components/ui';
-import { ScLabel } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-with-description-checkbox-demo',
