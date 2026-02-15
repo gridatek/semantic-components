@@ -13,11 +13,11 @@ import { cn } from '@semantic-components/ui';
 import { SC_FIELD } from '../field';
 import { SC_CHECKBOX_FIELD, type ScCheckboxContext } from './checkbox-types';
 import { ScCheckbox } from './checkbox';
-import { ScCheckboxIndicator } from './checkbox-indicator';
+import { ScCheckboxVisual } from './checkbox-visual';
 
 @Component({
   selector: 'div[sc-checkbox-field], label[sc-checkbox-field]',
-  imports: [ScCheckboxIndicator],
+  imports: [ScCheckboxVisual],
   providers: [
     { provide: SC_CHECKBOX_FIELD, useExisting: ScCheckboxField },
     { provide: SC_FIELD, useExisting: ScCheckboxField },
@@ -31,7 +31,7 @@ import { ScCheckboxIndicator } from './checkbox-indicator';
   },
   template: `
     <ng-content select="[sc-checkbox]" />
-    <span sc-checkbox-indicator></span>
+    <span sc-checkbox-visual></span>
     <ng-content />
   `,
   encapsulation: ViewEncapsulation.None,
@@ -68,7 +68,7 @@ export class ScCheckboxField implements ScCheckboxContext {
     cn(
       'grid grid-cols-[1rem_1fr] items-start gap-x-2 gap-y-1',
       '*:data-[slot=checkbox]:col-start-1 *:data-[slot=checkbox]:row-start-1',
-      '*:data-[slot=checkbox-indicator]:col-start-1 *:data-[slot=checkbox-indicator]:row-start-1',
+      '*:data-[slot=checkbox-visual]:col-start-1 *:data-[slot=checkbox-visual]:row-start-1',
       '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1',
       '*:data-[slot=field-description]:col-start-2 *:data-[slot=field-description]:row-start-2',
       'has-[>[data-slot=field-description]]:*:data-[slot=label]:font-medium',

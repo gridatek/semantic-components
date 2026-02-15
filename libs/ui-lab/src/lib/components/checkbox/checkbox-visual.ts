@@ -11,10 +11,10 @@ import { cn } from '@semantic-components/ui';
 import { SC_CHECKBOX_FIELD } from './checkbox-types';
 
 @Component({
-  selector: 'span[sc-checkbox-indicator]',
+  selector: 'span[sc-checkbox-visual]',
   imports: [SiCheckIcon, SiMinusIcon],
   host: {
-    'data-slot': 'checkbox-indicator',
+    'data-slot': 'checkbox-visual',
     '[class]': 'class()',
     '[attr.data-state]': 'checkbox.dataState()',
     '[attr.aria-hidden]': 'true',
@@ -29,7 +29,7 @@ import { SC_CHECKBOX_FIELD } from './checkbox-types';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCheckboxIndicator {
+export class ScCheckboxVisual {
   readonly checkbox = inject(SC_CHECKBOX_FIELD);
   readonly classInput = input<string>('', { alias: 'class' });
 
