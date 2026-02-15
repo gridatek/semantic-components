@@ -36,8 +36,12 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScNativeSelect,
+  ScNativeSelectContainer,
+  ScNativeSelectIcon,
 } from '@semantic-components/ui';
 import { ScField, ScFieldGroup, ScInput, ScLabel } from '@semantic-components/ui-lab';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-form-card-demo',
@@ -53,6 +57,10 @@ import { ScField, ScFieldGroup, ScInput, ScLabel } from '@semantic-components/ui
     ScFieldGroup,
     ScInput,
     ScLabel,
+    ScNativeSelect,
+    ScNativeSelectContainer,
+    ScNativeSelectIcon,
+    SiChevronDownIcon,
   ],
   template: \`
     <form>
@@ -69,16 +77,16 @@ import { ScField, ScFieldGroup, ScInput, ScLabel } from '@semantic-components/ui
             </div>
             <div sc-field>
               <label sc-label for="framework">Framework</label>
-              <select
-                id="framework"
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              >
-                <option value="">Select a framework</option>
-                <option value="next">Next.js</option>
-                <option value="angular">Angular</option>
-                <option value="vue">Vue</option>
-                <option value="svelte">Svelte</option>
-              </select>
+              <div sc-native-select-container>
+                <select sc-native-select id="framework">
+                  <option value="">Select a framework</option>
+                  <option value="next">Next.js</option>
+                  <option value="angular">Angular</option>
+                  <option value="vue">Vue</option>
+                  <option value="svelte">Svelte</option>
+                </select>
+                <svg si-chevron-down-icon sc-native-select-icon aria-hidden="true"></svg>
+              </div>
             </div>
           </div>
         </div>
