@@ -5,6 +5,7 @@ export * from './aspect-ratio';
 export * from './backdrop';
 export * from './badge';
 export * from './button';
+export * from './button-group';
 export * from './card';
 export * from './dialog';
 export * from './drawer';

@@ -4,7 +4,6 @@ export * from './avatar';
 export * from './avatar-group';
 export * from './barcode-scanner';
 export * from './breadcrumb';
-export * from './button-group';
 export * from './calendar';
 export * from './chart';
 export * from './checkbox';

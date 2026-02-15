@@ -127,7 +127,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'button-group',
     description: 'Groups buttons together with merged borders and rounding.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Buttons & Actions',
   },
   {
