@@ -3,7 +3,7 @@ export * from './fieldset';
 export { ScLegend } from './legend';
 export type { ScLegendVariant } from './legend';
 export * from './field-group';
-export * from './field-content';
+export * from './field-body';
 export * from './field-title';
 export * from './field-description';
 export * from './field-separator';

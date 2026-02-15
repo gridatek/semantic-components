@@ -8,7 +8,7 @@ A flexible field composition system for building accessible forms with labels, d
 - `ScFieldset` - Fieldset container for grouping related fields
 - `ScLegend` - Legend element for fieldsets
 - `ScFieldGroup` - Container for multiple fields
-- `ScFieldContent` - Content wrapper for field elements
+- `ScFieldBody` - Content wrapper for field elements
 - `ScFieldLabel` - Label element
 - `ScFieldTitle` - Alternative title element (non-label)
 - `ScFieldDescription` - Description/help text
@@ -64,7 +64,7 @@ import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/
   template: `
     <div sc-field [orientation]="'responsive'">
       <label sc-field-label for="name">Name</label>
-      <div sc-field-content>
+      <div sc-field-body>
         <input id="name" type="text" />
         <p sc-field-description>Enter your full name.</p>
       </div>
@@ -257,7 +257,7 @@ interface ScFieldErrorItem {
 
 ### Other Components
 
-All other components (`ScFieldset`, `ScFieldGroup`, `ScFieldContent`, `ScFieldLabel`, `ScFieldTitle`, `ScFieldDescription`, `ScFieldSeparator`) accept a `class` input for additional styling.
+All other components (`ScFieldset`, `ScFieldGroup`, `ScFieldBody`, `ScFieldLabel`, `ScFieldTitle`, `ScFieldDescription`, `ScFieldSeparator`) accept a `class` input for additional styling.
 
 ## Layout Orientations
 
@@ -316,7 +316,7 @@ The component uses `data-slot` attributes for targeted styling:
 - `data-slot="fieldset"` - Fieldset container
 - `data-slot="legend"` - Legend element
 - `data-slot="field-group"` - Field group container
-- `data-slot="field-content"` - Content wrapper
+- `data-slot="field-body"` - Content wrapper
 - `data-slot="field-label"` - Label element
 - `data-slot="field-title"` - Title element
 - `data-slot="field-description"` - Description text
