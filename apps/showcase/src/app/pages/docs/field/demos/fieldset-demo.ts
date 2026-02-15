@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScFieldSet,
-  ScFieldLegend,
+  ScLegend,
   ScFieldGroup,
   ScField,
   ScFieldDescription,
@@ -16,7 +16,7 @@ import { ScInput, ScLabel } from '@semantic-components/ui-lab';
   selector: 'app-fieldset-demo',
   imports: [
     ScFieldSet,
-    ScFieldLegend,
+    ScLegend,
     ScFieldGroup,
     ScField,
     ScLabel,
@@ -25,7 +25,7 @@ import { ScInput, ScLabel } from '@semantic-components/ui-lab';
   ],
   template: `
     <fieldset sc-field-set>
-      <legend sc-field-legend>Personal Information</legend>
+      <legend sc-legend>Personal Information</legend>
       <p sc-field-description>Please provide your personal details below.</p>
 
       <div sc-field-group>

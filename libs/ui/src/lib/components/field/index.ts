@@ -1,6 +1,6 @@
 export * from './field';
 export * from './field-set';
-export * from './field-legend';
+export { ScLegend, ScLegendVariant } from './legend';
 export * from './field-group';
 export * from './field-content';
 export * from './field-title';

@@ -6,7 +6,7 @@ A flexible field composition system for building accessible forms with labels, d
 
 - `ScField` - Main field wrapper with orientation support
 - `ScFieldSet` - Fieldset container for grouping related fields
-- `ScFieldLegend` - Legend element for fieldsets
+- `ScLegend` - Legend element for fieldsets
 - `ScFieldGroup` - Container for multiple fields
 - `ScFieldContent` - Content wrapper for field elements
 - `ScFieldLabel` - Label element
@@ -168,7 +168,7 @@ export class MyComponent {
 @Component({
   template: `
     <fieldset sc-field-set>
-      <legend sc-field-legend>Personal Information</legend>
+      <legend sc-legend>Personal Information</legend>
 
       <div sc-field-group>
         <div sc-field>
@@ -233,7 +233,7 @@ export class MyComponent {
 | `disabled`    | `boolean`                                    | `false`      | Whether field is disabled |
 | `class`       | `string`                                     | `''`         | Additional CSS classes    |
 
-### ScFieldLegend
+### ScLegend
 
 | Input     | Type                  | Default    | Description            |
 | --------- | --------------------- | ---------- | ---------------------- |
@@ -314,7 +314,7 @@ The component uses `data-slot` attributes for targeted styling:
 
 - `data-slot="field"` - Main field container
 - `data-slot="field-set"` - Fieldset container
-- `data-slot="field-legend"` - Legend element
+- `data-slot="legend"` - Legend element
 - `data-slot="field-group"` - Field group container
 - `data-slot="field-content"` - Content wrapper
 - `data-slot="field-label"` - Label element
