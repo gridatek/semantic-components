@@ -30,11 +30,10 @@ export class CustomThemeCheckboxDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScCheckboxField, ScCheckbox, ScLabel } from '@semantic-components/ui-lab';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-custom-theme-checkbox-demo',
-  imports: [ScCheckboxField, ScCheckbox, ScLabel, FormsModule],
+  imports: [ScCheckboxField, ScCheckbox, ScLabel],
   template: \`
     <div
       class="space-y-3"
@@ -44,7 +43,7 @@ import { FormsModule } from '@angular/forms';
         <input
           type="checkbox"
           sc-checkbox
-          [(ngModel)]="checked"
+          [(checked)]="checked"
           id="purple-theme"
         />
         <label sc-label for="purple-theme">Purple color scheme</label>

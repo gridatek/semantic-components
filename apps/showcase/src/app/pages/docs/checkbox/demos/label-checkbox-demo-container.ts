@@ -30,25 +30,24 @@ export class LabelCheckboxDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScCheckboxField, ScCheckbox } from '@semantic-components/ui-lab';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-label-checkbox-demo',
-  imports: [ScCheckboxField, ScCheckbox, FormsModule],
+  imports: [ScCheckboxField, ScCheckbox],
   template: \`
     <div class="space-y-4">
       <label sc-checkbox-field class="cursor-pointer">
-        <input type="checkbox" sc-checkbox [(ngModel)]="option1" id="option1" />
+        <input type="checkbox" sc-checkbox [(checked)]="option1" id="option1" />
         One
       </label>
 
       <label sc-checkbox-field class="cursor-pointer">
-        <input type="checkbox" sc-checkbox [(ngModel)]="option2" id="option2" />
+        <input type="checkbox" sc-checkbox [(checked)]="option2" id="option2" />
         Two
       </label>
 
       <label sc-checkbox-field class="cursor-pointer">
-        <input type="checkbox" sc-checkbox [(ngModel)]="option3" id="option3" />
+        <input type="checkbox" sc-checkbox [(checked)]="option3" id="option3" />
         Three with a much longer label that spans multiple lines to demonstrate
         how the checkbox aligns with the first line of text
       </label>

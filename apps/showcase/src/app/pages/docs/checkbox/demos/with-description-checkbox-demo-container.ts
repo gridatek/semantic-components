@@ -35,23 +35,16 @@ import {
   ScLabel,
   ScFieldDescription,
 } from '@semantic-components/ui-lab';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-with-description-checkbox-demo',
-  imports: [
-    ScCheckboxField,
-    ScCheckbox,
-    ScLabel,
-    ScFieldDescription,
-    FormsModule,
-  ],
+  imports: [ScCheckboxField, ScCheckbox, ScLabel, ScFieldDescription],
   template: \`
     <div sc-checkbox-field>
       <input
         type="checkbox"
         sc-checkbox
-        [(ngModel)]="marketing"
+        [(checked)]="marketing"
         id="marketing"
       />
       <label sc-label for="marketing">Marketing emails</label>
