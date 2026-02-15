@@ -15,6 +15,10 @@ export class ScAlertDialogTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-base font-medium', this.classInput()),
+    cn(
+      'text-base font-medium',
+      'sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2',
+      this.classInput(),
+    ),
   );
 }
