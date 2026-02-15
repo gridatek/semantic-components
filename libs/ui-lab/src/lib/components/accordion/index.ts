@@ -1,7 +1,6 @@
-export { ScAccordion } from './accordion';
-export { ScAccordionPanel } from './accordion-panel';
+export { ScAccordionGroup } from './accordion-group';
 export { ScAccordionItem } from './accordion-item';
 export { ScAccordionTrigger } from './accordion-trigger';
-export { ScAccordionHeader } from './accordion-header';
+export { ScAccordionPanel } from './accordion-panel';
 export { ScAccordionContent } from './accordion-content';
-export { ScAccordionTriggerIcon } from './accordion-trigger-icon';
+export { ScAccordionBody } from './accordion-body';

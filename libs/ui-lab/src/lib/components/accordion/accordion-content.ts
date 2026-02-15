@@ -1,31 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive } from '@angular/core';
+import { AccordionContent } from '@angular/aria/accordion';
 
-@Component({
-  selector: 'div[sc-accordion-content]',
-  template: `
-    <ng-content />
-  `,
-  host: {
-    'data-slot': 'accordion-content',
-    '[class]': 'class()',
-  },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: 'ng-template[scAccordionContent]',
+  hostDirectives: [AccordionContent],
 })
-export class ScAccordionContent {
-  readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() =>
-    cn(
-      'pt-0 pb-2.5 [&_a]:hover:text-foreground [&_a]:underline [&_a]:underline-offset-3 [&_p:not(:last-child)]:mb-4',
-      this.classInput(),
-    ),
-  );
-}
+export class ScAccordionContent {}

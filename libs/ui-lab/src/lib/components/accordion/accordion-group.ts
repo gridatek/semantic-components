@@ -1,4 +1,3 @@
-import { AccordionGroup } from '@angular/aria/accordion';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,30 +5,30 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { AccordionGroup } from '@angular/aria/accordion';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-accordion]',
+  selector: '[scAccordionGroup]',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   hostDirectives: [
     {
       directive: AccordionGroup,
-      inputs: ['disabled', 'multiExpandable', 'wrap'],
+      inputs: ['multiExpandable', 'disabled', 'wrap', 'softDisabled'],
     },
   ],
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'accordion',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ng-content />
+  `,
 })
-export class ScAccordion {
+export class ScAccordionGroup {
   readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() =>
+  readonly class = computed(() =>
     cn('flex w-full flex-col', this.classInput()),
   );
 }

@@ -1,17 +1,25 @@
-import { computed, Directive, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Directive({
-  selector: 'div[sc-accordion-item]',
+@Component({
+  selector: '[scAccordionItem]',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     'data-slot': 'accordion-item',
     '[class]': 'class()',
   },
+  template: `
+    <ng-content />
+  `,
 })
 export class ScAccordionItem {
   readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() =>
-    cn('not-last:border-b', this.classInput()),
-  );
+  readonly class = computed(() => cn('not-last:border-b', this.classInput()));
 }
