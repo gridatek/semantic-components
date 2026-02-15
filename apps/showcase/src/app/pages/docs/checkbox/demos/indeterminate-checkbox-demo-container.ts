@@ -37,10 +37,10 @@ import { ScCheckboxField, ScCheckbox, ScLabel } from '@semantic-components/ui-la
   imports: [ScCheckboxField, ScCheckbox, ScLabel],
   template: \`
     <div class="flex flex-col gap-4">
-      <div sc-checkbox-field>
+      <div scCheckboxField>
         <input
           type="checkbox"
-          sc-checkbox
+          scCheckbox
           [checked]="allSelected()"
           [indeterminate]="someSelected()"
           (change)="toggleAll($event)"
@@ -49,16 +49,16 @@ import { ScCheckboxField, ScCheckbox, ScLabel } from '@semantic-components/ui-la
         <label sc-label for="select-all">Select all</label>
       </div>
       <div class="ml-6 flex flex-col gap-2">
-        <div sc-checkbox-field>
-          <input type="checkbox" sc-checkbox [(checked)]="item1" id="item1" />
+        <div scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="item1" id="item1" />
           <label sc-label for="item1">Item 1</label>
         </div>
-        <div sc-checkbox-field>
-          <input type="checkbox" sc-checkbox [(checked)]="item2" id="item2" />
+        <div scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="item2" id="item2" />
           <label sc-label for="item2">Item 2</label>
         </div>
-        <div sc-checkbox-field>
-          <input type="checkbox" sc-checkbox [(checked)]="item3" id="item3" />
+        <div scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="item3" id="item3" />
           <label sc-label for="item3">Item 3</label>
         </div>
       </div>

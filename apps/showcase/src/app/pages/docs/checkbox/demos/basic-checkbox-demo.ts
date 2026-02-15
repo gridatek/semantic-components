@@ -14,8 +14,8 @@ import {
   selector: 'app-basic-checkbox-demo',
   imports: [ScCheckboxField, ScCheckbox, ScLabel],
   template: `
-    <div sc-checkbox-field>
-      <input type="checkbox" sc-checkbox [(checked)]="terms" id="terms" />
+    <div scCheckboxField>
+      <input type="checkbox" scCheckbox [(checked)]="terms" id="terms" />
       <label sc-label for="terms">Accept terms and conditions</label>
     </div>
     <p class="text-sm text-muted-foreground mt-2">Checked: {{ terms() }}</p>

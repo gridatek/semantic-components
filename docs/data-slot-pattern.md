@@ -7,9 +7,9 @@ This document explains how `data-slot` attributes are used in Semantic Component
 Every sub-component in the library sets a `data-slot` attribute on its host element. Parent containers use these attributes to position children in a CSS Grid layout.
 
 ```html
-<div sc-checkbox-field>
+<div scCheckboxField>
   <!-- grid container -->
-  <input sc-checkbox data-slot="checkbox" />
+  <input scCheckbox data-slot="checkbox" />
   <!-- col-1, row-1 -->
   <label sc-label data-slot="label">...</label>
   <!-- col-2, row-1 -->
@@ -76,8 +76,8 @@ While the library follows the "layout only" rule internally, consumers are free 
 ### Overriding a Specific Slot
 
 ```html
-<div sc-checkbox-field class="*:data-[slot=label]:text-blue-600 *:data-[slot=label]:uppercase">
-  <input type="checkbox" sc-checkbox id="custom" />
+<div scCheckboxField class="*:data-[slot=label]:text-blue-600 *:data-[slot=label]:uppercase">
+  <input type="checkbox" scCheckbox id="custom" />
   <label sc-label for="custom">Custom styled label</label>
 </div>
 ```
@@ -87,8 +87,8 @@ The `*:data-[slot=label]:text-blue-600` selector targets the label by its slot a
 ### Overriding the Visual Checkbox
 
 ```html
-<div sc-checkbox-field class="*:data-[slot=visual-checkbox]:rounded-full *:data-[slot=visual-checkbox]:ring-offset-4">
-  <input type="checkbox" sc-checkbox id="round" />
+<div scCheckboxField class="*:data-[slot=visual-checkbox]:rounded-full *:data-[slot=visual-checkbox]:ring-offset-4">
+  <input type="checkbox" scCheckbox id="round" />
   <label sc-label for="round">Round checkbox</label>
 </div>
 ```
@@ -99,8 +99,8 @@ Consumers can combine `:has()` with `data-slot` for conditional styling:
 
 ```html
 <!-- Make description red when checkbox is unchecked -->
-<div sc-checkbox-field class="has-[[data-state=unchecked]]:*:data-[slot=field-description]:text-destructive">
-  <input type="checkbox" sc-checkbox id="required" />
+<div scCheckboxField class="has-[[data-state=unchecked]]:*:data-[slot=field-description]:text-destructive">
+  <input type="checkbox" scCheckbox id="required" />
   <label sc-label for="required">Required field</label>
   <p sc-field-description>You must accept to continue.</p>
 </div>
@@ -112,12 +112,12 @@ For repeated overrides, wrap multiple fields:
 
 ```html
 <div class="*:*:data-[slot=label]:text-sm *:*:data-[slot=label]:text-muted-foreground space-y-4">
-  <div sc-checkbox-field>
-    <input type="checkbox" sc-checkbox id="a" />
+  <div scCheckboxField>
+    <input type="checkbox" scCheckbox id="a" />
     <label sc-label for="a">Option A</label>
   </div>
-  <div sc-checkbox-field>
-    <input type="checkbox" sc-checkbox id="b" />
+  <div scCheckboxField>
+    <input type="checkbox" scCheckbox id="b" />
     <label sc-label for="b">Option B</label>
   </div>
 </div>
@@ -135,7 +135,7 @@ Consumer overrides through `data-slot` are always visible in the template. There
 
 ### Components Are Portable
 
-Because a component's visual styles don't depend on a specific parent, the same `ScLabel` or `ScFieldDescription` directive works inside `sc-checkbox-field`, `sc-radio-field`, `sc-switch-field`, or any other container. The parent only needs to position it.
+Because a component's visual styles don't depend on a specific parent, the same `ScLabel` or `ScFieldDescription` directive works inside `scCheckboxField`, `sc-radio-field`, `sc-switch-field`, or any other container. The parent only needs to position it.
 
 ## Available Data Slots
 

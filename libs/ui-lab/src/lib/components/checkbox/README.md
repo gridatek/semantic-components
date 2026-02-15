@@ -4,15 +4,15 @@ A control that allows the user to toggle between checked and not checked.
 
 ## Components
 
-- `ScCheckboxField` (selector: `[sc-checkbox-field]`) - Grid container that observes input state and positions children via `data-slot`
+- `ScCheckboxField` (selector: `[scCheckboxField]`) - Grid container that observes input state and positions children via `data-slot`
 - `ScCheckbox` - Directive for native input (applied to `input[type="checkbox"]`)
 - `ScCheckboxVisual` - Component for visual representation (rendered automatically by `ScCheckboxField`)
 
 ## Usage
 
 ```html
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [(checked)]="accepted" id="terms" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox [(checked)]="accepted" id="terms" />
   <label sc-label for="terms">Accept terms and conditions</label>
 </div>
 ```
@@ -22,8 +22,8 @@ A control that allows the user to toggle between checked and not checked.
 When a `data-slot="field-description"` child is present, the label automatically becomes `font-medium`:
 
 ```html
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [(checked)]="marketing" id="marketing" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox [(checked)]="marketing" id="marketing" />
   <label sc-label for="marketing">Marketing emails</label>
   <p sc-field-description>Receive emails about new products, features, and more.</p>
 </div>
@@ -34,8 +34,8 @@ When a `data-slot="field-description"` child is present, the label automatically
 Use `<label>` as the host element for implicit label association:
 
 ```html
-<label sc-checkbox-field class="cursor-pointer">
-  <input type="checkbox" sc-checkbox [(checked)]="option" />
+<label scCheckboxField class="cursor-pointer">
+  <input type="checkbox" scCheckbox [(checked)]="option" />
   Option text
 </label>
 ```
@@ -56,8 +56,8 @@ readonly myForm = form(this.formModel, (schemaPath) => {
 ```
 
 ```html
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [formField]="myForm.acceptTerms" id="terms" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox [formField]="myForm.acceptTerms" id="terms" />
   <label sc-label for="terms">Accept terms and conditions</label>
 </div>
 ```
@@ -67,8 +67,8 @@ Note: Add `FormField` to your component's `imports` array to use the `[formField
 ## Indeterminate State
 
 ```html
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [checked]="allSelected()" [indeterminate]="someSelected()" (change)="toggleAll($event)" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox [checked]="allSelected()" [indeterminate]="someSelected()" (change)="toggleAll($event)" />
   <label sc-label for="select-all">Select all</label>
 </div>
 ```
@@ -76,13 +76,13 @@ Note: Add `FormField` to your component's `imports` array to use the `[formField
 ## Disabled
 
 ```html
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [disabled]="true" id="disabled-unchecked" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox [disabled]="true" id="disabled-unchecked" />
   <label sc-label for="disabled-unchecked">Disabled unchecked</label>
 </div>
 
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [(checked)]="checked" [disabled]="true" id="disabled-checked" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox [(checked)]="checked" [disabled]="true" id="disabled-checked" />
   <label sc-label for="disabled-checked">Disabled checked</label>
 </div>
 ```
@@ -108,8 +108,8 @@ Customize colors using CSS variables:
 
 ```html
 <div style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);">
-  <div sc-checkbox-field>
-    <input type="checkbox" sc-checkbox [(checked)]="purple" id="purple" />
+  <div scCheckboxField>
+    <input type="checkbox" scCheckbox [(checked)]="purple" id="purple" />
     <label sc-label for="purple">Purple checkbox</label>
   </div>
 </div>
@@ -130,13 +130,13 @@ OKLCH format parameters:
 
 ## Inputs
 
-### ScCheckboxField (`[sc-checkbox-field]`)
+### ScCheckboxField (`[scCheckboxField]`)
 
 | Input   | Type     | Default | Description            |
 | ------- | -------- | ------- | ---------------------- |
 | `class` | `string` | `''`    | Additional CSS classes |
 
-### ScCheckbox (`sc-checkbox`)
+### ScCheckbox (`scCheckbox`)
 
 | Input           | Type      | Default | Description                       |
 | --------------- | --------- | ------- | --------------------------------- |
@@ -145,7 +145,7 @@ OKLCH format parameters:
 
 Note: Standard input attributes (`id`, `name`, `checked`, `disabled`) are set directly on the native input element.
 
-### ScCheckboxVisual (`sc-checkbox-visual`)
+### ScCheckboxVisual (`scCheckboxVisual`)
 
 Note: `ScCheckboxVisual` is rendered automatically by `ScCheckboxField`. You do not need to add it manually.
 
@@ -162,7 +162,7 @@ Children are positioned in the grid using `data-slot` attributes:
 
 ## Context API
 
-The `sc-checkbox-field` component provides a context via dependency injection that child components can access:
+The `scCheckboxField` component provides a context via dependency injection that child components can access:
 
 ```typescript
 export interface ScCheckboxContext {
@@ -231,15 +231,15 @@ Children are positioned using `*:data-[slot=...]` selectors on the parent, follo
 ### Component Structure
 
 ```
-[sc-checkbox-field] (grid container, provides context)
-├── <ng-content select="[sc-checkbox]" />  (projected input, col-1 row-1)
-├── span[sc-checkbox-visual]            (visual, col-1 row-1, pointer-events-none)
+[scCheckboxField] (grid container, provides context)
+├── <ng-content select="[scCheckbox]" />  (projected input, col-1 row-1)
+├── span[scCheckboxVisual]            (visual, col-1 row-1, pointer-events-none)
 │   ├── <svg si-check-icon>               (checkmark icon)
 │   └── <svg si-minus-icon>               (indeterminate icon)
 └── <ng-content />                         (label, description, col-2)
 ```
 
-**Template ordering:** The input is projected first (via `<ng-content select="[sc-checkbox]" />`), then the checkbox visual is rendered, then remaining content. This ensures the `peer` class on the input correctly enables `peer-focus-visible` and `peer-disabled` styles on the visual.
+**Template ordering:** The input is projected first (via `<ng-content select="[scCheckbox]" />`), then the checkbox visual is rendered, then remaining content. This ensures the `peer` class on the input correctly enables `peer-focus-visible` and `peer-disabled` styles on the visual.
 
 ### Styling Breakdown
 

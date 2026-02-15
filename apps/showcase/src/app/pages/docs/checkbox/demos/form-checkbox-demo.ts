@@ -18,28 +18,28 @@ import {
       <div class="space-y-4">
         <h4 class="font-semibold">Notification Preferences</h4>
         <div class="space-y-4">
-          <div sc-checkbox-field>
+          <div scCheckboxField>
             <input
               type="checkbox"
-              sc-checkbox
+              scCheckbox
               [(checked)]="emailNotif"
               id="email-notif"
             />
             <label sc-label for="email-notif">Email notifications</label>
           </div>
-          <div sc-checkbox-field>
+          <div scCheckboxField>
             <input
               type="checkbox"
-              sc-checkbox
+              scCheckbox
               [(checked)]="smsNotif"
               id="sms-notif"
             />
             <label sc-label for="sms-notif">SMS notifications</label>
           </div>
-          <div sc-checkbox-field>
+          <div scCheckboxField>
             <input
               type="checkbox"
-              sc-checkbox
+              scCheckbox
               [(checked)]="pushNotif"
               id="push-notif"
             />

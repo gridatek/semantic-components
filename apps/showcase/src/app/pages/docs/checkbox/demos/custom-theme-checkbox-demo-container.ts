@@ -39,10 +39,10 @@ import { ScCheckboxField, ScCheckbox, ScLabel } from '@semantic-components/ui-la
       class="space-y-3"
       style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);"
     >
-      <div sc-checkbox-field>
+      <div scCheckboxField>
         <input
           type="checkbox"
-          sc-checkbox
+          scCheckbox
           [(checked)]="checked"
           id="purple-theme"
         />

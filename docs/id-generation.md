@@ -7,8 +7,8 @@ This document explains how field components auto-generate IDs and provide them t
 Connecting a `<label>` to its control requires matching `id` and `for` attributes:
 
 ```html
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox id="terms" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox id="terms" />
   <label sc-label for="terms">Accept terms</label>
 </div>
 ```
@@ -20,8 +20,8 @@ This is tedious, error-prone, and creates maintenance overhead — especially wh
 Field components auto-generate an ID and share it with their children via the `SC_FIELD` token. Labels read this token automatically. No manual `id` or `for` needed:
 
 ```html
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox />
   <label sc-label>Accept terms</label>
 </div>
 ```
@@ -29,7 +29,7 @@ Field components auto-generate an ID and share it with their children via the `S
 The generated DOM:
 
 ```html
-<div sc-checkbox-field>
+<div scCheckboxField>
   <input type="checkbox" id="sc-checkbox-field-0" />
   <label for="sc-checkbox-field-0">Accept terms</label>
 </div>
@@ -124,8 +124,8 @@ Both the `<input>` and the `<label>` point to the same ID without any manual wir
 Consumers can override the auto-generated ID at the field level:
 
 ```html
-<div sc-checkbox-field id="accept-terms">
-  <input type="checkbox" sc-checkbox />
+<div scCheckboxField id="accept-terms">
+  <input type="checkbox" scCheckbox />
   <label sc-label>Accept terms</label>
 </div>
 ```
@@ -135,8 +135,8 @@ Both the input and label will use `accept-terms`.
 Or override at the control level for full manual control:
 
 ```html
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox id="my-checkbox" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox id="my-checkbox" />
   <label sc-label for="my-checkbox">Accept terms</label>
 </div>
 ```

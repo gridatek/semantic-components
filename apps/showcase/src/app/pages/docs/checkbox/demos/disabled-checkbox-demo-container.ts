@@ -35,19 +35,19 @@ import { ScCheckboxField, ScCheckbox, ScLabel } from '@semantic-components/ui-la
   imports: [ScCheckboxField, ScCheckbox, ScLabel],
   template: \`
     <div class="flex flex-col gap-4">
-      <div sc-checkbox-field>
+      <div scCheckboxField>
         <input
           type="checkbox"
-          sc-checkbox
+          scCheckbox
           [disabled]="true"
           id="disabled-unchecked"
         />
         <label sc-label for="disabled-unchecked">Disabled unchecked</label>
       </div>
-      <div sc-checkbox-field>
+      <div scCheckboxField>
         <input
           type="checkbox"
-          sc-checkbox
+          scCheckbox
           [checked]="true"
           [disabled]="true"
           id="disabled-checked"

@@ -40,10 +40,10 @@ import {
   selector: 'app-with-description-checkbox-demo',
   imports: [ScCheckboxField, ScCheckbox, ScLabel, ScFieldDescription],
   template: \`
-    <div sc-checkbox-field>
+    <div scCheckboxField>
       <input
         type="checkbox"
-        sc-checkbox
+        scCheckbox
         [(checked)]="marketing"
         id="marketing"
       />

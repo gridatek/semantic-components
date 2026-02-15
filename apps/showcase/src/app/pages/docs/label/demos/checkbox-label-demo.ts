@@ -13,8 +13,8 @@ import {
   selector: 'app-checkbox-label-demo',
   imports: [ScLabel, ScCheckboxField, ScCheckbox],
   template: `
-    <div sc-checkbox-field>
-      <input type="checkbox" sc-checkbox id="terms-label" />
+    <div scCheckboxField>
+      <input type="checkbox" scCheckbox id="terms-label" />
       <label sc-label [for]="'terms-label'">Accept terms and conditions</label>
     </div>
   `,

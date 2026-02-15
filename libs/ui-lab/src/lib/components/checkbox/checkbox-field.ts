@@ -16,7 +16,7 @@ import { ScCheckbox } from './checkbox';
 import { ScCheckboxVisual } from './checkbox-visual';
 
 @Component({
-  selector: 'div[sc-checkbox-field], label[sc-checkbox-field]',
+  selector: 'div[scCheckboxField], label[scCheckboxField]',
   imports: [ScCheckboxVisual],
   providers: [
     { provide: SC_CHECKBOX_FIELD, useExisting: ScCheckboxField },
@@ -30,8 +30,8 @@ import { ScCheckboxVisual } from './checkbox-visual';
     '[attr.data-disabled]': 'disabled() ? "" : null',
   },
   template: `
-    <ng-content select="[sc-checkbox]" />
-    <span sc-checkbox-visual></span>
+    <ng-content select="[scCheckbox]" />
+    <span scCheckboxVisual></span>
     <ng-content />
   `,
   encapsulation: ViewEncapsulation.None,

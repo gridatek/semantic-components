@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_CHECKBOX_FIELD } from './checkbox-types';
 
 @Component({
-  selector: 'span[sc-checkbox-visual]',
+  selector: 'span[scCheckboxVisual]',
   imports: [SiCheckIcon, SiMinusIcon],
   host: {
     'data-slot': 'checkbox-visual',

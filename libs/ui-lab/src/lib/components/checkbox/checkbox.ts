@@ -16,7 +16,7 @@ import { SC_CHECKBOX_FIELD } from './checkbox-types';
 export const SC_CHECKBOX = 'SC_CHECKBOX';
 
 @Directive({
-  selector: 'input[type="checkbox"][sc-checkbox]',
+  selector: 'input[type="checkbox"][scCheckbox]',
   host: {
     'data-slot': 'checkbox',
     '[id]': 'id()',

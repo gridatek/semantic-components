@@ -46,10 +46,10 @@ interface CheckboxFormModel {
   template: \`
     <form>
       <div class="space-y-4">
-        <div sc-checkbox-field>
+        <div scCheckboxField>
           <input
             type="checkbox"
-            sc-checkbox
+            scCheckbox
             id="newsletter-custom"
             [formField]="checkboxForm.newsletter"
           />
@@ -58,10 +58,10 @@ interface CheckboxFormModel {
           </label>
         </div>
 
-        <div sc-checkbox-field>
+        <div scCheckboxField>
           <input
             type="checkbox"
-            sc-checkbox
+            scCheckbox
             id="marketing-custom"
             [formField]="checkboxForm.marketing"
           />
@@ -70,10 +70,10 @@ interface CheckboxFormModel {
           </label>
         </div>
 
-        <div sc-checkbox-field>
+        <div scCheckboxField>
           <input
             type="checkbox"
-            sc-checkbox
+            scCheckbox
             id="terms-custom"
             [formField]="checkboxForm.acceptTerms"
           />
