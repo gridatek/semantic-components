@@ -17,13 +17,14 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn, ScBackdrop } from '@semantic-components/ui';
-import { ScDrawerPortal } from './drawer-portal';
+import { cn } from '../../utils';
+import { ScBackdrop } from '../backdrop';
+import { ScSheetPortal } from './sheet-portal';
 
-export type DrawerDirection = 'top' | 'right' | 'bottom' | 'left';
+export type SheetSide = 'top' | 'right' | 'bottom' | 'left';
 
 @Component({
-  selector: 'div[sc-drawer-provider]',
+  selector: 'div[sc-sheet-provider]',
   imports: [OverlayModule, ScBackdrop, CdkTrapFocus, NgTemplateOutlet],
   template: `
     <ng-content />
@@ -34,28 +35,28 @@ export type DrawerDirection = 'top' | 'right' | 'bottom' | 'left';
         (animationComplete)="onBackdropAnimationComplete()"
       ></div>
       <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
-        <ng-container [ngTemplateOutlet]="drawerPortal().templateRef" />
+        <ng-container [ngTemplateOutlet]="sheetPortal().templateRef" />
       </div>
     </ng-template>
   `,
   host: {
-    'data-slot': 'drawer-provider',
+    'data-slot': 'sheet-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScDrawerProvider {
+export class ScSheetProvider {
   private readonly overlay = inject(Overlay);
   private readonly viewContainerRef = inject(ViewContainerRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly direction = input<DrawerDirection>('bottom');
+  readonly side = input<SheetSide>('right');
 
   private readonly overlayTemplate =
     viewChild.required<TemplateRef<unknown>>('overlayTemplate');
 
-  protected readonly drawerPortal = contentChild.required(ScDrawerPortal);
+  protected readonly sheetPortal = contentChild.required(ScSheetPortal);
 
   readonly open = model<boolean>(false);
   readonly overlayOpen = signal<boolean>(false);
@@ -82,14 +83,14 @@ export class ScDrawerProvider {
 
     effect(() => {
       if (this.overlayOpen()) {
-        this.attachDrawer();
+        this.attachSheet();
       } else {
-        this.detachDrawer();
+        this.detachSheet();
       }
     });
   }
 
-  onDrawerAnimationComplete(): void {
+  onSheetAnimationComplete(): void {
     if (!this.open()) {
       this.animationsCompleted.update((n) => n + 1);
     }
@@ -110,15 +111,15 @@ export class ScDrawerProvider {
         scrollStrategy: this.overlay.scrollStrategies.block(),
       });
 
-      this.overlayRef.backdropClick().subscribe(() => this.closeDrawer());
+      this.overlayRef.backdropClick().subscribe(() => this.closeSheet());
       this.overlayRef.keydownEvents().subscribe((event) => {
-        if (event.key === 'Escape') this.closeDrawer();
+        if (event.key === 'Escape') this.closeSheet();
       });
     }
     return this.overlayRef;
   }
 
-  private attachDrawer(): void {
+  private attachSheet(): void {
     const ref = this.getOverlayRef();
     if (!ref.hasAttached()) {
       const portal = new TemplatePortal(
@@ -129,13 +130,13 @@ export class ScDrawerProvider {
     }
   }
 
-  private detachDrawer(): void {
+  private detachSheet(): void {
     if (this.overlayRef?.hasAttached()) {
       this.overlayRef.detach();
     }
   }
 
-  private closeDrawer(): void {
+  private closeSheet(): void {
     this.open.set(false);
   }
 }

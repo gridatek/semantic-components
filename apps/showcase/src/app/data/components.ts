@@ -46,7 +46,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'alert-dialog',
     description: 'A modal dialog for important alerts requiring confirmation.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Feedback',
   },
   {
@@ -307,7 +307,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'drawer',
     description: 'A touch-friendly drawer that slides from the bottom.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Overlay',
   },
   {
@@ -687,7 +687,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'sheet',
     description: 'A panel that slides in from the edge of the screen.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Overlay',
   },
   {

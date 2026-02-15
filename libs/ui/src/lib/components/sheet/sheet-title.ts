@@ -1,20 +1,20 @@
 import { computed, Directive, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScSheet } from './sheet';
 
 @Directive({
-  selector: 'p[sc-sheet-description]',
+  selector: 'h2[sc-sheet-title]',
   host: {
-    'data-slot': 'sheet-description',
-    '[id]': 'sheet.descriptionId',
+    'data-slot': 'sheet-title',
+    '[id]': 'sheet.titleId',
     '[class]': 'class()',
   },
 })
-export class ScSheetDescription {
+export class ScSheetTitle {
   readonly sheet = inject(ScSheet);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-muted-foreground text-sm', this.classInput()),
+    cn('text-lg font-semibold text-foreground', this.classInput()),
   );
 }

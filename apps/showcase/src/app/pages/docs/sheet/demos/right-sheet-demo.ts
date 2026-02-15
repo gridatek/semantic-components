@@ -13,7 +13,7 @@ import {
   ScSheetPortal,
   ScSheetTitle,
   ScSheetTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-right-sheet-demo',

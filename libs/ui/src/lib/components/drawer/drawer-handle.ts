@@ -1,17 +1,17 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[sc-sheet-header]',
+  selector: 'div[sc-drawer-handle]',
   host: {
-    'data-slot': 'sheet-header',
+    'data-slot': 'drawer-handle',
     '[class]': 'class()',
   },
 })
-export class ScSheetHeader {
+export class ScDrawerHandle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex flex-col gap-2 text-center sm:text-left', this.classInput()),
+    cn('mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted', this.classInput()),
   );
 }

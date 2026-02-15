@@ -35,7 +35,7 @@ import {
   ScAlertDialogPortal,
   ScAlertDialogTitle,
   ScAlertDialogTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({

@@ -10,7 +10,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScSheetProvider, SheetSide } from './sheet-provider';
 
 type ScSheetState = 'open' | 'closed';

@@ -1,17 +1,17 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: 'h2[sc-drawer-title]',
+  selector: 'div[sc-drawer-footer]',
   host: {
-    'data-slot': 'drawer-title',
+    'data-slot': 'drawer-footer',
     '[class]': 'class()',
   },
 })
-export class ScDrawerTitle {
+export class ScDrawerFooter {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-lg font-semibold leading-none tracking-tight', this.classInput()),
+    cn('mt-auto flex flex-col gap-2 p-4', this.classInput()),
   );
 }

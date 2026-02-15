@@ -7,7 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { DrawerDirection, ScDrawerProvider } from './drawer-provider';
 
 type ScDrawerState = 'open' | 'closed';
