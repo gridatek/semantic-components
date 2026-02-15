@@ -1,45 +1,34 @@
-import { TabContent, TabPanel } from '@angular/aria/tabs';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  inject,
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { TabPanel } from '@angular/aria/tabs';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-tab-panel]',
-  imports: [TabContent],
+  selector: '[scTabPanel]',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   hostDirectives: [
     {
       directive: TabPanel,
-      inputs: ['value'],
+      inputs: ['value', 'id'],
     },
   ],
-  template: `
-    <ng-template ngTabContent>
-      <ng-content />
-    </ng-template>
-  `,
   host: {
-    'data-slot': 'tab-panel',
+    'data-slot': 'tabs-content',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ng-content />
+  `,
 })
 export class ScTabPanel {
-  protected readonly tabPanel = inject(TabPanel);
-
   readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() =>
-    cn(
-      'mt-2 ring-offset-background',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      this.classInput(),
-    ),
+  readonly class = computed(() =>
+    cn('text-sm flex-1 outline-none [&[inert]]:hidden', this.classInput()),
   );
 }
