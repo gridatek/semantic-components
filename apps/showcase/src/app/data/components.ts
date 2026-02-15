@@ -438,7 +438,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'kbd',
     description: 'Displays keyboard shortcuts and keys.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Data Display',
   },
   {
