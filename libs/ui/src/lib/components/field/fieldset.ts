@@ -2,13 +2,13 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'fieldset[sc-field-set]',
+  selector: 'fieldset[sc-fieldset]',
   host: {
-    'data-slot': 'field-set',
+    'data-slot': 'fieldset',
     '[class]': 'class()',
   },
 })
-export class ScFieldSet {
+export class ScFieldset {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

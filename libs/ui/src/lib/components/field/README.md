@@ -5,7 +5,7 @@ A flexible field composition system for building accessible forms with labels, d
 ## Components
 
 - `ScField` - Main field wrapper with orientation support
-- `ScFieldSet` - Fieldset container for grouping related fields
+- `ScFieldset` - Fieldset container for grouping related fields
 - `ScLegend` - Legend element for fieldsets
 - `ScFieldGroup` - Container for multiple fields
 - `ScFieldContent` - Content wrapper for field elements
@@ -167,7 +167,7 @@ export class MyComponent {
 ```typescript
 @Component({
   template: `
-    <fieldset sc-field-set>
+    <fieldset sc-fieldset>
       <legend sc-legend>Personal Information</legend>
 
       <div sc-field-group>
@@ -257,7 +257,7 @@ interface ScFieldErrorItem {
 
 ### Other Components
 
-All other components (`ScFieldSet`, `ScFieldGroup`, `ScFieldContent`, `ScFieldLabel`, `ScFieldTitle`, `ScFieldDescription`, `ScFieldSeparator`) accept a `class` input for additional styling.
+All other components (`ScFieldset`, `ScFieldGroup`, `ScFieldContent`, `ScFieldLabel`, `ScFieldTitle`, `ScFieldDescription`, `ScFieldSeparator`) accept a `class` input for additional styling.
 
 ## Layout Orientations
 
@@ -313,7 +313,7 @@ Use the `errors` input with an array of error objects, or use content projection
 The component uses `data-slot` attributes for targeted styling:
 
 - `data-slot="field"` - Main field container
-- `data-slot="field-set"` - Fieldset container
+- `data-slot="fieldset"` - Fieldset container
 - `data-slot="legend"` - Legend element
 - `data-slot="field-group"` - Field group container
 - `data-slot="field-content"` - Content wrapper

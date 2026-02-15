@@ -29,7 +29,7 @@ export class FieldsetDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScFieldSet,
+  ScFieldset,
   ScLegend,
   ScFieldGroup,
   ScField,
@@ -40,7 +40,7 @@ import { ScInput, ScLabel } from "@semantic-components/ui-lab";
 @Component({
   selector: 'app-fieldset-demo',
   imports: [
-    ScFieldSet,
+    ScFieldset,
     ScLegend,
     ScFieldGroup,
     ScField,
@@ -49,7 +49,7 @@ import { ScInput, ScLabel } from "@semantic-components/ui-lab";
     ScInput,
   ],
   template: \`
-    <fieldset sc-field-set>
+    <fieldset sc-fieldset>
       <legend sc-legend>Personal Information</legend>
       <p sc-field-description>Please provide your personal details below.</p>
 
