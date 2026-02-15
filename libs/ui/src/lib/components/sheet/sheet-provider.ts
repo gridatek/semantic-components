@@ -21,7 +21,7 @@ import { cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';
 import { ScSheetPortal } from './sheet-portal';
 
-export type SheetSide = 'top' | 'right' | 'bottom' | 'left';
+export type ScSheetSide = 'top' | 'right' | 'bottom' | 'left';
 
 @Component({
   selector: 'div[sc-sheet-provider]',
@@ -51,7 +51,7 @@ export class ScSheetProvider {
   private readonly viewContainerRef = inject(ViewContainerRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly side = input<SheetSide>('right');
+  readonly side = input<ScSheetSide>('right');
 
   private readonly overlayTemplate =
     viewChild.required<TemplateRef<unknown>>('overlayTemplate');

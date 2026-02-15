@@ -1,5 +1,5 @@
 export { ScSheetProvider } from './sheet-provider';
-export type { SheetSide } from './sheet-provider';
+export type { ScSheetSide } from './sheet-provider';
 export { ScSheetTrigger } from './sheet-trigger';
 export { ScSheetPortal } from './sheet-portal';
 export { ScSheet } from './sheet';
