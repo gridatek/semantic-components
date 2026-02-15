@@ -84,7 +84,7 @@ import {
         <div
           scTabPanel
           value="preview"
-          class="flex min-h-40 items-center justify-center rounded-md border p-6"
+          class="flex min-h-40 items-center justify-center rounded-md border p-6 *:contents"
         >
           <ng-content />
         </div>

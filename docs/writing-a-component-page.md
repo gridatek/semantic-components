@@ -201,6 +201,29 @@ This gives Playwright isolated URLs:
 - If a demo is not registered here, it cannot be tested in isolation.
 - The `.then((m) => m.BasicAccordionDemo)` pattern requires the demo to use a **named export**.
 
+## Demo Container Preview Layout
+
+The demo container's preview panel uses `flex justify-center` with `*:contents` on its children:
+
+```html
+<div class="flex min-h-40 items-center justify-center rounded-md border p-6 *:contents">
+  <ng-content />
+</div>
+```
+
+### Why `*:contents`?
+
+In Angular, every component renders inside a host element (e.g., `<app-basic-accordion-demo>`). When the preview panel uses `flex justify-center`, this host element becomes a flex child and **shrinks to its content width**. This causes full-width components like accordion to change width when panels open/close.
+
+In React/shadcn, there is no wrapper element — the component's root element (e.g., the accordion `<div>`) is the direct flex child. If that element has `w-full`, it stretches properly.
+
+`*:contents` bridges this gap. It sets `display: contents` on the Angular host elements, removing them from the layout tree. The demo's actual template content becomes the direct flex child — exactly like React. This means:
+
+- **Full-width demos** (e.g., accordion with `w-full max-w-lg`) stretch properly and stay stable
+- **Small demos** (e.g., buttons) shrink to content and get centered by `justify-center`
+
+The demo container affects only the demo host element, not the demo's children.
+
 ## Summary Checklist
 
 1. Identify all distinct behaviors/variants of the component
