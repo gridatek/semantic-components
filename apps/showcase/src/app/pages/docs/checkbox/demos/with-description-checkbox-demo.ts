@@ -4,12 +4,12 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScFieldDescription } from '@semantic-components/ui';
 import {
   ScCheckbox,
   ScCheckboxField,
-  ScLabel,
-} from '@semantic-components/ui-lab';
+  ScFieldDescription,
+} from '@semantic-components/ui';
+import { ScLabel } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-with-description-checkbox-demo',

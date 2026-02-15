@@ -9,8 +9,8 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SC_FIELD } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { SC_FIELD } from '../field';
 import { SC_CHECKBOX_FIELD, type ScCheckboxContext } from './checkbox-types';
 import { ScCheckbox } from './checkbox';
 import { ScCheckboxVisual } from './checkbox-visual';

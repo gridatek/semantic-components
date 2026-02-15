@@ -6,7 +6,6 @@ export * from './barcode-scanner';
 export * from './breadcrumb';
 export * from './calendar';
 export * from './chart';
-export * from './checkbox';
 export * from './native-checkbox';
 export * from './native-select';
 export * from './collapsible';

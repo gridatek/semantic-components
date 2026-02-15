@@ -29,8 +29,8 @@ export class WithDescriptionCheckboxDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScFieldDescription } from '@semantic-components/ui';
-import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui-lab';
+import { ScCheckbox, ScCheckboxField, ScFieldDescription } from '@semantic-components/ui';
+import { ScLabel } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-with-description-checkbox-demo',

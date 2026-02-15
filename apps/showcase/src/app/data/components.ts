@@ -167,7 +167,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'checkbox',
     description: 'A control for toggling a single option on or off.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
   },
   {
