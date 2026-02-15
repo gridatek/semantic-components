@@ -34,7 +34,8 @@ type ScTooltipState = 'open' | 'closed';
     'aria-atomic': 'true',
     '[id]': 'data.tooltipId',
     '[class]': 'hostClass()',
-    '[attr.data-state]': 'state()',
+    '[attr.data-open]': 'state() === "open" ? true : null',
+    '[attr.data-closed]': 'state() === "closed" ? true : null',
     '(animationend)': 'onAnimationEnd($event)',
   },
   encapsulation: ViewEncapsulation.None,
@@ -49,8 +50,9 @@ export class ScTooltip {
 
   protected readonly hostClass = computed(() =>
     cn(
-      'bg-primary text-primary-foreground z-50 rounded-md px-3 py-1.5 text-xs max-w-xs',
-      'animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95',
+      'bg-primary text-primary-foreground z-50 rounded-md px-3 py-1.5 text-xs w-fit max-w-xs',
+      'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
+      'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
     ),
   );
 
