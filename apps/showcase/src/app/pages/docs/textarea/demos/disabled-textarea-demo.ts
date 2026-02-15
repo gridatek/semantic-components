@@ -5,8 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { disabled, form, FormField } from '@angular/forms/signals';
-import { ScField, ScLabel } from '@semantic-components/ui';
-import { ScTextarea } from '@semantic-components/ui-lab';
+import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-textarea-demo',

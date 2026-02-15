@@ -1,8 +1,8 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { computed, Directive, inject, input } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
-import { cn } from '@semantic-components/ui';
-import { SC_FIELD } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { SC_FIELD } from '../field';
 
 @Directive({
   selector: 'textarea[sc-textarea]',

@@ -72,7 +72,6 @@ export * from './stepper';
 export * from './switch';
 export * from './table';
 export * from './tag-input';
-export * from './textarea';
 export * from './theme-toggle';
 export * from './time-picker';
 export * from './timeline';

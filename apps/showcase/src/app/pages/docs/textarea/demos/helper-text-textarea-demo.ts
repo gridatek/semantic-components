@@ -5,8 +5,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { ScField, ScFieldDescription, ScLabel } from '@semantic-components/ui';
-import { ScTextarea } from '@semantic-components/ui-lab';
+import {
+  ScField,
+  ScFieldDescription,
+  ScLabel,
+  ScTextarea,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-helper-text-textarea-demo',

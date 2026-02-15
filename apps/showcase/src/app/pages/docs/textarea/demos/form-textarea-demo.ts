@@ -12,8 +12,9 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScLabel,
+  ScTextarea,
 } from '@semantic-components/ui';
-import { ScInput, ScTextarea } from '@semantic-components/ui-lab';
+import { ScInput } from '@semantic-components/ui-lab';
 
 interface ContactForm {
   name: string;

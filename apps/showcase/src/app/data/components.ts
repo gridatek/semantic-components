@@ -824,7 +824,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'textarea',
     description: 'A multi-line text input field.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
   },
   {

@@ -30,16 +30,16 @@ export class FormTextareaDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField, required, email } from '@angular/forms/signals';
-import { ScField } from '@semantic-components/ui';
 import {
+  ScField,
   ScCard,
   ScCardBody,
   ScCardHeader,
   ScCardTitle,
-  ScInput,
   ScLabel,
   ScTextarea,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui-lab';
 
 interface ContactForm {
   name: string;

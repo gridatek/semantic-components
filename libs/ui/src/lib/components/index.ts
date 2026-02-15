@@ -17,3 +17,4 @@ export * from './link';
 export * from './sheet';
 export * from './spinner';
 export * from './tabs';
+export * from './textarea';
