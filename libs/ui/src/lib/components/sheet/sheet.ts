@@ -13,7 +13,7 @@ import {
 import { cn } from '../../utils';
 import { ScSheetProvider, SheetSide } from './sheet-provider';
 
-type ScSheetState = 'open' | 'closed';
+type ScSheetState = 'idle' | 'open' | 'closed';
 
 const sidePositionClasses: Record<SheetSide, string> = {
   top: 'inset-x-0 top-0 border-b',
@@ -23,10 +23,10 @@ const sidePositionClasses: Record<SheetSide, string> = {
 };
 
 const sideAnimationClasses: Record<SheetSide, string> = {
-  top: 'slide-in-from-top data-[state=closed]:slide-out-to-top',
-  right: 'slide-in-from-right data-[state=closed]:slide-out-to-right',
-  bottom: 'slide-in-from-bottom data-[state=closed]:slide-out-to-bottom',
-  left: 'slide-in-from-left data-[state=closed]:slide-out-to-left',
+  top: 'data-open:slide-in-from-top data-closed:slide-out-to-top',
+  right: 'data-open:slide-in-from-right data-closed:slide-out-to-right',
+  bottom: 'data-open:slide-in-from-bottom data-closed:slide-out-to-bottom',
+  left: 'data-open:slide-in-from-left data-closed:slide-out-to-left',
 };
 
 @Component({
@@ -40,7 +40,9 @@ const sideAnimationClasses: Record<SheetSide, string> = {
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'titleId',
     '[attr.aria-describedby]': 'descriptionId',
-    '[attr.data-state]': 'state()',
+    '[attr.data-idle]': 'state() === "idle" ? "" : null',
+    '[attr.data-open]': 'state() === "open" ? "" : null',
+    '[attr.data-closed]': 'state() === "closed" ? "" : null',
     '[class]': 'class()',
     '[tabindex]': '-1',
     '(animationend)': 'onAnimationEnd($event)',
@@ -53,7 +55,7 @@ export class ScSheet {
 
   readonly sheetProvider = inject(ScSheetProvider);
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly state = signal<ScSheetState>('closed');
+  protected readonly state = signal<ScSheetState>('idle');
 
   readonly sheetId = inject(_IdGenerator).getId('sc-sheet-');
   readonly titleId = `${this.sheetId}-title`;
@@ -63,11 +65,12 @@ export class ScSheet {
     const side = this.sheetProvider.side();
 
     return cn(
-      'bg-background fixed z-50 flex flex-col gap-4 p-6 shadow-lg',
+      'bg-background fixed z-50 flex flex-col gap-4 p-6 shadow-lg duration-300',
       sidePositionClasses[side],
-      'animate-in fade-in-0 duration-300',
+      'data-idle:opacity-0',
+      'data-open:animate-in data-open:fade-in-0',
       sideAnimationClasses[side],
-      'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:duration-300',
+      'data-closed:animate-out data-closed:fade-out-0',
       this.classInput(),
     );
   });
@@ -86,6 +89,7 @@ export class ScSheet {
       this.state() === 'closed' &&
       event.target === this.elementRef.nativeElement
     ) {
+      this.state.set('idle');
       this.sheetProvider.onSheetAnimationComplete();
     }
   }
