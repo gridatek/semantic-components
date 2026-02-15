@@ -12,6 +12,6 @@ export class ScDrawerDescription {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-sm text-muted-foreground', this.classInput()),
+    cn('text-muted-foreground text-sm', this.classInput()),
   );
 }

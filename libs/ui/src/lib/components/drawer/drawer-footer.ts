@@ -12,6 +12,6 @@ export class ScDrawerFooter {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('mt-auto flex flex-col gap-2 p-4', this.classInput()),
+    cn('gap-2 p-4 mt-auto flex flex-col', this.classInput()),
   );
 }

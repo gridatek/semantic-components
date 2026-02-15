@@ -12,6 +12,9 @@ export class ScDrawerHandle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted', this.classInput()),
+    cn(
+      'bg-muted mt-4 h-1 w-[100px] rounded-full mx-auto hidden shrink-0 group-data-[direction=bottom]/drawer:block',
+      this.classInput(),
+    ),
   );
 }

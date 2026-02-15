@@ -12,6 +12,9 @@ export class ScDrawerHeader {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('grid gap-1.5 p-4 text-center sm:text-left', this.classInput()),
+    cn(
+      'gap-0.5 p-4 group-data-[direction=bottom]/drawer:text-center group-data-[direction=top]/drawer:text-center md:gap-0.5 md:text-left flex flex-col',
+      this.classInput(),
+    ),
   );
 }
