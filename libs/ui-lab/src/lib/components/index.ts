@@ -1,5 +1,4 @@
 export * from './animated-counter';
-export * from './aspect-ratio';
 export * from './audio-player';
 export * from './avatar';
 export * from './avatar-group';

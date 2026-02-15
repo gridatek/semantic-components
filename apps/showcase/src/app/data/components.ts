@@ -63,7 +63,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'aspect-ratio',
     description: 'Displays content within a fixed aspect ratio.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Layout',
   },
   {
