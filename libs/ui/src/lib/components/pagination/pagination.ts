@@ -1,11 +1,9 @@
 import {
   computed,
   Directive,
-  effect,
   input,
+  linkedSignal,
   output,
-  signal,
-  untracked,
 } from '@angular/core';
 import { cn } from '../../utils';
 
@@ -37,25 +35,12 @@ export class ScPagination {
   readonly totalItems = input<number>(0);
   readonly pageSizes = input<number[]>([10, 25, 50, 100]); // Available page size options
 
-  // Internal state
-  readonly currentPage = signal(1);
-  readonly pageSize = signal(10);
+  // Internal state (synced from inputs, writable for programmatic updates)
+  readonly currentPage = linkedSignal(() => this.currentPageInput());
+  readonly pageSize = linkedSignal(() => this.pageSizeInput());
 
   // Output events
   readonly change = output<ScPaginationChange>();
-
-  constructor() {
-    // Sync inputs to internal state
-    effect(() => {
-      const inputPage = this.currentPageInput();
-      untracked(() => this.currentPage.set(inputPage));
-    });
-
-    effect(() => {
-      const inputSize = this.pageSizeInput();
-      untracked(() => this.pageSize.set(inputSize));
-    });
-  }
 
   protected readonly class = computed(() =>
     cn('mx-auto flex w-full justify-center', this.classInput()),
