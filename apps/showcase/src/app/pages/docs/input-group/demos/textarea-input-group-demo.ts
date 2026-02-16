@@ -7,21 +7,17 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
   ScInputGroupText,
-  ScInputGroupTextarea,
+  ScTextarea,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-textarea-input-group-demo',
-  imports: [
-    ScInputGroup,
-    ScInputGroupAddon,
-    ScInputGroupText,
-    ScInputGroupTextarea,
-  ],
+  imports: [ScInputGroup, ScInputGroupAddon, ScInputGroupText, ScTextarea],
   template: `
     <div sc-input-group>
       <textarea
-        sc-input-group-textarea
+        sc-textarea
+        variant="group"
         placeholder="Type your message..."
       ></textarea>
       <div sc-input-group-addon align="block-end" class="border-t">

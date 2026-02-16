@@ -7,7 +7,7 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
   ScInputGroupButton,
-  ScInputGroupInput,
+  ScInput,
   ScInputGroupText,
 } from '@semantic-components/ui';
 import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
@@ -18,7 +18,7 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     ScInputGroup,
     ScInputGroupAddon,
     ScInputGroupButton,
-    ScInputGroupInput,
+    ScInput,
     ScInputGroupText,
     SiSearchIcon,
     SiXIcon,
@@ -30,7 +30,7 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           <svg si-search-icon></svg>
         </span>
       </div>
-      <input sc-input-group-input placeholder="Search..." />
+      <input sc-input variant="group" placeholder="Search..." />
       <div sc-input-group-addon align="inline-end">
         <button sc-input-group-button size="icon-xs">
           <svg si-x-icon></svg>

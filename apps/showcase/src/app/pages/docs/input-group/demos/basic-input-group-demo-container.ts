@@ -31,7 +31,7 @@ export class BasicInputGroupDemoContainer {
 import {
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupInput,
+  ScInput,
   ScInputGroupText,
 } from '@semantic-components/ui';
 import { SiMailIcon } from '@semantic-icons/lucide-icons';
@@ -41,7 +41,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupInput,
+    ScInput,
     ScInputGroupText,
     SiMailIcon,
   ],
@@ -52,7 +52,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
           <svg si-mail-icon></svg>
         </span>
       </div>
-      <input sc-input-group-input placeholder="Email address" />
+      <input sc-input variant="group" placeholder="Email address" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

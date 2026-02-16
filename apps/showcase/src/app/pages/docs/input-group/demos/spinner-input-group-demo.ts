@@ -6,7 +6,7 @@ import {
 import {
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupInput,
+  ScInput,
   ScSpinner,
 } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
@@ -16,7 +16,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupInput,
+    ScInput,
     ScSpinner,
     SiLoaderCircleIcon,
   ],
@@ -25,7 +25,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       <div sc-input-group-addon>
         <svg sc-spinner si-loader-circle-icon class="size-4"></svg>
       </div>
-      <input sc-input-group-input placeholder="Loading..." disabled />
+      <input sc-input variant="group" placeholder="Loading..." disabled />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

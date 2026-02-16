@@ -4,9 +4,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupInput,
   ScInputGroupText,
 } from '@semantic-components/ui';
 import { SiMailIcon } from '@semantic-icons/lucide-icons';
@@ -14,9 +14,9 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-input-group-demo',
   imports: [
+    ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupInput,
     ScInputGroupText,
     SiMailIcon,
   ],
@@ -27,7 +27,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
           <svg si-mail-icon></svg>
         </span>
       </div>
-      <input sc-input-group-input placeholder="Email address" />
+      <input sc-input variant="group" placeholder="Email address" />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

@@ -31,7 +31,7 @@ export class TextInputGroupDemoContainer {
 import {
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupInput,
+  ScInput,
   ScInputGroupText,
 } from '@semantic-components/ui';
 
@@ -40,7 +40,7 @@ import {
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupInput,
+    ScInput,
     ScInputGroupText,
   ],
   template: \`
@@ -49,7 +49,7 @@ import {
         <div sc-input-group-addon>
           <span sc-input-group-text>$</span>
         </div>
-        <input sc-input-group-input placeholder="Amount" />
+        <input sc-input variant="group" placeholder="Amount" />
         <div sc-input-group-addon align="inline-end">
           <span sc-input-group-text>USD</span>
         </div>
@@ -58,10 +58,10 @@ import {
         <div sc-input-group-addon>
           <span sc-input-group-text>https://</span>
         </div>
-        <input sc-input-group-input placeholder="example.com" />
+        <input sc-input variant="group" placeholder="example.com" />
       </div>
       <div sc-input-group>
-        <input sc-input-group-input placeholder="Email" />
+        <input sc-input variant="group" placeholder="Email" />
         <div sc-input-group-addon align="inline-end">
           <span sc-input-group-text>@company.com</span>
         </div>

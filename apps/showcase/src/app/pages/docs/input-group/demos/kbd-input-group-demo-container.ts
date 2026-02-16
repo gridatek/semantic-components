@@ -31,7 +31,7 @@ export class KbdInputGroupDemoContainer {
 import {
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupInput,
+  ScInput,
   ScInputGroupText,
   ScKbd,
 } from '@semantic-components/ui';
@@ -42,7 +42,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupInput,
+    ScInput,
     ScInputGroupText,
     ScKbd,
     SiSearchIcon,
@@ -54,7 +54,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
           <svg si-search-icon></svg>
         </span>
       </div>
-      <input sc-input-group-input placeholder="Search..." />
+      <input sc-input variant="group" placeholder="Search..." />
       <div sc-input-group-addon align="inline-end">
         <kbd sc-kbd>\u2318K</kbd>
       </div>
