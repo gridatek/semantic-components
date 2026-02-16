@@ -23,6 +23,7 @@ type ScHoverCardState = 'idle' | 'open' | 'closed';
   host: {
     'data-slot': 'hover-card',
     '[class]': 'class()',
+    '[attr.data-idle]': 'state() === "idle" ? true : null',
     '[attr.data-open]': 'state() === "open" ? true : null',
     '[attr.data-closed]': 'state() === "closed" ? true : null',
     '[attr.data-side]': 'hoverCardProvider.side()',
@@ -44,6 +45,7 @@ export class ScHoverCard {
   protected readonly class = computed(() =>
     cn(
       'z-50 w-64 rounded-lg ring-1 ring-foreground/10 bg-popover p-2.5 text-sm text-popover-foreground shadow-md outline-hidden',
+      'data-idle:opacity-0',
       'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 duration-100',
       'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
       'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
