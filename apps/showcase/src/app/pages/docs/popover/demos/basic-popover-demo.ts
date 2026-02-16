@@ -46,19 +46,19 @@ import {
             <p sc-popover-description>Set the dimensions for the layer.</p>
           </div>
           <div sc-field-group>
-            <div sc-field>
+            <div sc-field orientation="horizontal">
               <label sc-label>Width</label>
               <input sc-input value="100%" />
             </div>
-            <div sc-field>
+            <div sc-field orientation="horizontal">
               <label sc-label>Max. width</label>
               <input sc-input value="300px" />
             </div>
-            <div sc-field>
+            <div sc-field orientation="horizontal">
               <label sc-label>Height</label>
               <input sc-input value="25px" />
             </div>
-            <div sc-field>
+            <div sc-field orientation="horizontal">
               <label sc-label>Max. height</label>
               <input sc-input value="none" />
             </div>
