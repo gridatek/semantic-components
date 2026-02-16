@@ -73,6 +73,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Avatar',
@@ -81,6 +82,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Avatar Group',
@@ -89,6 +91,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Badge',
@@ -105,6 +108,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Breadcrumb',
@@ -113,6 +117,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Navigation',
+    hidden: true,
   },
   {
     name: 'Button',
@@ -137,6 +142,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Card',
@@ -161,6 +167,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Checkbox',
@@ -177,6 +184,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'code',
     category: 'Editor',
+    hidden: true,
   },
   {
     name: 'Code Viewer',
@@ -185,6 +193,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'code',
     category: 'Editor',
+    hidden: true,
   },
   {
     name: 'Collapsible',
@@ -193,6 +202,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Layout',
+    hidden: true,
   },
   {
     name: 'Color Picker',
@@ -201,6 +211,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Combobox',
@@ -209,6 +220,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Command',
@@ -217,6 +229,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Overlay',
+    hidden: true,
   },
   {
     name: 'Confetti',
@@ -234,6 +247,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Overlay',
+    hidden: true,
   },
   {
     name: 'Copy Button',
@@ -242,6 +256,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Buttons & Actions',
+    hidden: true,
   },
   {
     name: 'Countdown',
@@ -259,6 +274,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Date Picker',
@@ -267,6 +283,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Date Range Picker',
@@ -275,6 +292,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Dialog',
@@ -292,6 +310,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Editor',
+    hidden: true,
   },
   {
     name: 'Dock',
@@ -317,6 +336,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Editor',
@@ -325,6 +345,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'editor',
     category: 'Editor',
+    hidden: true,
   },
   {
     name: 'Empty',
@@ -333,6 +354,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Layout',
+    hidden: true,
   },
   {
     name: 'Field',
@@ -350,6 +372,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Hover Card',
@@ -366,6 +389,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Image Compare',
@@ -374,6 +398,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Image Cropper',
@@ -382,6 +407,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Infinite Scroll',
@@ -390,6 +416,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Input',
@@ -407,6 +434,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Item',
@@ -424,6 +452,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Kanban Board',
@@ -432,6 +461,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Kbd',
@@ -464,6 +494,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Lightbox',
@@ -472,6 +503,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Marquee',
@@ -489,6 +521,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Layout',
+    hidden: true,
   },
   {
     name: 'Menu',
@@ -497,6 +530,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Navigation',
+    hidden: true,
   },
   {
     name: 'Mention Input',
@@ -505,6 +539,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Multi-Select',
@@ -513,6 +548,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Native Checkbox',
@@ -521,6 +557,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Native Select',
@@ -529,6 +566,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Navbar',
@@ -537,6 +575,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Navigation',
+    hidden: true,
   },
   {
     name: 'Navigation Menu',
@@ -545,6 +584,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Navigation',
+    hidden: true,
   },
   {
     name: 'Notification Center',
@@ -553,6 +593,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Number Field',
@@ -561,6 +602,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Org Chart',
@@ -569,6 +611,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'PDF Viewer',
@@ -577,6 +620,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Pagination',
@@ -593,6 +637,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Phone Input',
@@ -601,6 +646,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Popover',
@@ -617,6 +663,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'QR Code',
@@ -625,6 +672,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Radio Group',
@@ -633,6 +681,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Rating Field',
@@ -641,6 +690,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Resizable',
@@ -649,6 +699,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Layout',
+    hidden: true,
   },
   {
     name: 'Scroll Area',
@@ -657,6 +708,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Layout',
+    hidden: true,
   },
   {
     name: 'Search Input',
@@ -665,6 +717,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Select',
@@ -673,6 +726,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Separator',
@@ -681,6 +735,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Layout',
+    hidden: true,
   },
   {
     name: 'Sheet',
@@ -697,6 +752,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Navigation',
+    hidden: true,
   },
   {
     name: 'Signature Pad',
@@ -705,6 +761,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Skeleton',
@@ -713,6 +770,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Slider',
@@ -721,6 +779,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Range Slider',
@@ -729,6 +788,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Sortable List',
@@ -737,6 +797,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Speed Dial',
@@ -745,6 +806,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Buttons & Actions',
+    hidden: true,
   },
   {
     name: 'Spinner',
@@ -761,6 +823,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Buttons & Actions',
+    hidden: true,
   },
   {
     name: 'Spotlight',
@@ -778,6 +841,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Stepper',
@@ -786,6 +850,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Navigation',
+    hidden: true,
   },
   {
     name: 'Switch',
@@ -794,6 +859,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Table',
@@ -818,6 +884,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Textarea',
@@ -834,6 +901,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Buttons & Actions',
+    hidden: true,
   },
   {
     name: 'Time Picker',
@@ -842,6 +910,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
+    hidden: true,
   },
   {
     name: 'Timeline',
@@ -850,6 +919,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Data Display',
+    hidden: true,
   },
   {
     name: 'Timezone',
@@ -867,6 +937,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Feedback',
+    hidden: true,
   },
   {
     name: 'Toggle',
@@ -875,6 +946,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Buttons & Actions',
+    hidden: true,
   },
   {
     name: 'Toggle Group',
@@ -883,6 +955,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Buttons & Actions',
+    hidden: true,
   },
   {
     name: 'Toolbar',
@@ -892,6 +965,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Buttons & Actions',
+    hidden: true,
   },
   {
     name: 'Tooltip',
@@ -908,6 +982,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Transfer List',
@@ -916,6 +991,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
   {
     name: 'Tree',
@@ -933,6 +1009,7 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
+    hidden: true,
   },
   {
     name: 'Virtual List',
@@ -941,5 +1018,6 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Advanced',
+    hidden: true,
   },
 ];
