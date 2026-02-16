@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   input,
   ViewEncapsulation,
 } from '@angular/core';
@@ -14,6 +15,7 @@ import {
 } from '@semantic-components/code';
 import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
 import { ScCopyButton } from '@semantic-components/ui-lab';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-demo-container',
@@ -34,7 +36,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
       @if (title()) {
         <div class="flex items-center gap-2">
           <h3 toc class="text-sm font-medium">{{ title() }}</h3>
-          @if (demoUrl()) {
+          @if (demoUrl() && devMode()) {
             <a
               [href]="demoUrl()"
               target="_blank"
@@ -108,9 +110,13 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoContainer {
+  private readonly config = inject(ConfigService);
+
   readonly title = input<string>('');
   readonly description = input<string>('');
   readonly demoUrl = input<string>('');
   readonly code = input.required<string>();
   readonly language = input<ScCodeViewerLanguage>('angular-ts');
+
+  protected readonly devMode = this.config.devMode;
 }
