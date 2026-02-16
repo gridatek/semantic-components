@@ -28,7 +28,7 @@ export class ScTextarea {
   readonly variant = input<'default' | 'group'>('default');
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly disabledInput = input(false, {
+  readonly disabledInput = input<boolean, unknown>(false, {
     alias: 'disabled',
     transform: booleanAttribute,
   });
