@@ -8,16 +8,16 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScPagination } from './pagination';
 import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
 @Component({
-  selector: 'a[sc-pagination-first], button[sc-pagination-first]',
+  selector: 'a[sc-pagination-last], button[sc-pagination-last]',
   host: {
-    'data-slot': 'pagination-first',
+    'data-slot': 'pagination-last',
     '[class]': 'class()',
-    '[attr.aria-label]': '"Go to first page"',
+    '[attr.aria-label]': '"Go to last page"',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
     '[attr.href]': 'isAnchor() ? "#" : null',
@@ -29,7 +29,7 @@ import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPaginationFirst {
+export class ScPaginationLast {
   private readonly pagination = inject(ScPagination, { optional: true });
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
@@ -45,7 +45,7 @@ export class ScPaginationFirst {
   protected readonly disabled = computed(() => {
     if (this.disabledInput()) return true;
     if (this.pagination) {
-      return this.pagination.currentPage() === 1;
+      return this.pagination.currentPage() === this.pagination.totalPages();
     }
     return false;
   });
@@ -60,6 +60,7 @@ export class ScPaginationFirst {
       this.classInput(),
     ),
   );
+
   onClick(event: Event): void {
     event.preventDefault();
 
@@ -68,7 +69,8 @@ export class ScPaginationFirst {
     }
 
     if (this.pagination) {
-      this.pagination.goToPage(1);
+      const lastPage = this.pagination.totalPages();
+      this.pagination.goToPage(lastPage);
     }
   }
 }

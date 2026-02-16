@@ -8,16 +8,16 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScPagination } from './pagination';
 import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
 @Component({
-  selector: 'a[sc-pagination-previous], button[sc-pagination-previous]',
+  selector: 'a[sc-pagination-first], button[sc-pagination-first]',
   host: {
-    'data-slot': 'pagination-previous',
+    'data-slot': 'pagination-first',
     '[class]': 'class()',
-    '[attr.aria-label]': '"Go to previous page"',
+    '[attr.aria-label]': '"Go to first page"',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
     '[attr.href]': 'isAnchor() ? "#" : null',
@@ -29,7 +29,7 @@ import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPaginationPrevious {
+export class ScPaginationFirst {
   private readonly pagination = inject(ScPagination, { optional: true });
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
@@ -56,7 +56,6 @@ export class ScPaginationPrevious {
 
   protected readonly class = computed(() =>
     cn(
-      'pl-1.5!',
       buttonVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
@@ -70,8 +69,7 @@ export class ScPaginationPrevious {
     }
 
     if (this.pagination) {
-      const previousPage = this.pagination.currentPage() - 1;
-      this.pagination.goToPage(previousPage);
+      this.pagination.goToPage(1);
     }
   }
 }

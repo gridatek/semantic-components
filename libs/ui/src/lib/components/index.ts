@@ -17,6 +17,7 @@ export * from './item';
 export * from './kbd';
 export * from './label';
 export * from './link';
+export * from './pagination';
 export * from './popover';
 export * from './sheet';
 export * from './spinner';

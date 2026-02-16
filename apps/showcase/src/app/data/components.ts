@@ -583,7 +583,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'pagination',
     description: 'Navigation controls for paging through content.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Navigation',
   },
   {

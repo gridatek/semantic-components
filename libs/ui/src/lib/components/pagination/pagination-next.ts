@@ -1,54 +1,62 @@
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
   computed,
-  Directive,
   ElementRef,
   inject,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScPagination } from './pagination';
 import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
-@Directive({
-  selector: 'a[sc-pagination-link], button[sc-pagination-link]',
+@Component({
+  selector: 'a[sc-pagination-next], button[sc-pagination-next]',
   host: {
-    'data-slot': 'pagination-link',
+    'data-slot': 'pagination-next',
     '[class]': 'class()',
-    '[attr.aria-current]': 'isActive() ? "page" : null',
+    '[attr.aria-label]': '"Go to next page"',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
     '[attr.href]': 'isAnchor() ? "#" : null',
     '(click)': 'onClick($event)',
   },
+  template: `
+    <ng-content />
+  `,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPaginationLink {
+export class ScPaginationNext {
   private readonly pagination = inject(ScPagination, { optional: true });
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly page = input<number>();
-
-  readonly variant = computed(() => (this.isActive() ? 'outline' : 'ghost'));
-
-  readonly size = input<ScButtonVariants['size']>('icon');
-
-  readonly disabled = input<boolean, unknown>(false, {
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
     transform: booleanAttribute,
+  });
+
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('default');
+
+  protected readonly disabled = computed(() => {
+    if (this.disabledInput()) return true;
+    if (this.pagination) {
+      return this.pagination.currentPage() === this.pagination.totalPages();
+    }
+    return false;
   });
 
   protected readonly isAnchor = computed(
     () => this.elementRef.nativeElement.tagName === 'A',
   );
 
-  protected readonly isActive = computed(() => {
-    const pageNum = this.page();
-    if (pageNum === undefined || !this.pagination) return false;
-    return pageNum === this.pagination.currentPage();
-  });
-
   protected readonly class = computed(() =>
     cn(
+      'pr-1.5!',
       buttonVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
@@ -61,9 +69,9 @@ export class ScPaginationLink {
       return;
     }
 
-    const pageNum = this.page();
-    if (pageNum !== undefined && this.pagination) {
-      this.pagination.goToPage(pageNum);
+    if (this.pagination) {
+      const nextPage = this.pagination.currentPage() + 1;
+      this.pagination.goToPage(nextPage);
     }
   }
 }

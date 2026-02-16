@@ -8,16 +8,16 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScPagination } from './pagination';
 import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
 @Component({
-  selector: 'a[sc-pagination-next], button[sc-pagination-next]',
+  selector: 'a[sc-pagination-previous], button[sc-pagination-previous]',
   host: {
-    'data-slot': 'pagination-next',
+    'data-slot': 'pagination-previous',
     '[class]': 'class()',
-    '[attr.aria-label]': '"Go to next page"',
+    '[attr.aria-label]': '"Go to previous page"',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
     '[attr.href]': 'isAnchor() ? "#" : null',
@@ -29,7 +29,7 @@ import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScPaginationNext {
+export class ScPaginationPrevious {
   private readonly pagination = inject(ScPagination, { optional: true });
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
@@ -45,7 +45,7 @@ export class ScPaginationNext {
   protected readonly disabled = computed(() => {
     if (this.disabledInput()) return true;
     if (this.pagination) {
-      return this.pagination.currentPage() === this.pagination.totalPages();
+      return this.pagination.currentPage() === 1;
     }
     return false;
   });
@@ -56,7 +56,7 @@ export class ScPaginationNext {
 
   protected readonly class = computed(() =>
     cn(
-      'pr-1.5!',
+      'pl-1.5!',
       buttonVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
@@ -70,8 +70,8 @@ export class ScPaginationNext {
     }
 
     if (this.pagination) {
-      const nextPage = this.pagination.currentPage() + 1;
-      this.pagination.goToPage(nextPage);
+      const previousPage = this.pagination.currentPage() - 1;
+      this.pagination.goToPage(previousPage);
     }
   }
 }
