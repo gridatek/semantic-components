@@ -13,7 +13,7 @@ import {
 import { cn } from '@semantic-components/ui';
 import { ScHoverCardProvider } from './hover-card-provider';
 
-type ScHoverCardState = 'open' | 'closed';
+type ScHoverCardState = 'idle' | 'open' | 'closed';
 
 @Component({
   selector: 'div[sc-hover-card]',
@@ -38,7 +38,7 @@ export class ScHoverCard {
 
   readonly hoverCardProvider = inject(ScHoverCardProvider);
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly state = signal<ScHoverCardState>('closed');
+  readonly state = signal<ScHoverCardState>('idle');
   readonly animationComplete = output<void>();
 
   protected readonly class = computed(() =>
@@ -57,7 +57,11 @@ export class ScHoverCard {
     // Sync state with provider's open signal
     effect(() => {
       const isOpen = this.hoverCardProvider.open();
-      this.state.set(isOpen ? 'open' : 'closed');
+      if (isOpen) {
+        this.state.set('open');
+      } else if (this.state() === 'open') {
+        this.state.set('closed');
+      }
     });
   }
 
