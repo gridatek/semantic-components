@@ -356,7 +356,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'hover-card',
     description: 'A card that appears when hovering over an element.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Overlay',
   },
   {

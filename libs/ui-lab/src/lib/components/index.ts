@@ -24,7 +24,6 @@ export * from './dock';
 export * from './emoji-picker';
 export * from './empty';
 export * from './file-upload';
-export * from './hover-card';
 export * from './image-annotator';
 export * from './image-compare';
 export * from './image-cropper';

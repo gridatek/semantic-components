@@ -8,7 +8,7 @@ import {
   ScHoverCardPortal,
   ScHoverCard,
   ScHoverCardTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-hover-card-demo',

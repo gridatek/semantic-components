@@ -10,7 +10,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScHoverCardProvider } from './hover-card-provider';
 
 type ScHoverCardState = 'open' | 'closed';
