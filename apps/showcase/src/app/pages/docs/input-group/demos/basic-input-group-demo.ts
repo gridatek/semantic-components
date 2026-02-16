@@ -8,7 +8,7 @@ import {
   ScInputGroupAddon,
   ScInputGroupInput,
   ScInputGroupText,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiMailIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

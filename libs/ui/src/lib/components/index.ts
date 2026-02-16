@@ -14,6 +14,7 @@ export * from './drawer';
 export * from './field';
 export * from './hover-card';
 export * from './input';
+export * from './input-group';
 export * from './item';
 export * from './kbd';
 export * from './label';

@@ -422,9 +422,8 @@ export const COMPONENTS: ComponentItem[] = [
     description:
       'A composable input group for combining inputs with addons, buttons, and text.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Item',

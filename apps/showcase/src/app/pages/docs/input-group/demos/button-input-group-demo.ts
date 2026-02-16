@@ -9,7 +9,7 @@ import {
   ScInputGroupButton,
   ScInputGroupInput,
   ScInputGroupText,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

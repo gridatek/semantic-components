@@ -10,7 +10,11 @@ import { ButtonInputGroupDemo } from './button-input-group-demo';
   selector: 'app-button-input-group-demo-container',
   imports: [DemoContainer, ButtonInputGroupDemo],
   template: `
-    <app-demo-container title="With Button" [code]="code">
+    <app-demo-container
+      title="With Button"
+      demoUrl="/demos/input-group/button-input-group-demo"
+      [code]="code"
+    >
       <app-button-input-group-demo />
     </app-demo-container>
   `,
@@ -30,7 +34,7 @@ import {
   ScInputGroupButton,
   ScInputGroupInput,
   ScInputGroupText,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

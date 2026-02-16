@@ -10,7 +10,11 @@ import { BasicInputGroupDemo } from './basic-input-group-demo';
   selector: 'app-basic-input-group-demo-container',
   imports: [DemoContainer, BasicInputGroupDemo],
   template: `
-    <app-demo-container title="Basic" [code]="code">
+    <app-demo-container
+      title="Basic"
+      demoUrl="/demos/input-group/basic-input-group-demo"
+      [code]="code"
+    >
       <app-basic-input-group-demo />
     </app-demo-container>
   `,
@@ -29,7 +33,7 @@ import {
   ScInputGroupAddon,
   ScInputGroupInput,
   ScInputGroupText,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiMailIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
