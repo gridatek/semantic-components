@@ -1,33 +1,26 @@
 import {
   booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
   computed,
+  Directive,
   ElementRef,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScPagination } from './pagination';
 import { buttonVariants, ScButtonVariants } from '../button/button';
 
-@Component({
+@Directive({
   selector: 'a[sc-pagination-last], button[sc-pagination-last]',
   host: {
     'data-slot': 'pagination-last',
     '[class]': 'class()',
-    '[attr.aria-label]': '"Go to last page"',
+    'aria-label': 'Go to last page',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
     '[attr.href]': 'isAnchor() ? "#" : null',
     '(click)': 'onClick($event)',
   },
-  template: `
-    <ng-content />
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPaginationLast {
   private readonly pagination = inject(ScPagination, { optional: true });

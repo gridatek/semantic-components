@@ -1,24 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
-@Component({
+@Directive({
   selector: 'span[sc-pagination-ellipsis]',
   host: {
     'data-slot': 'pagination-ellipsis',
-    '[attr.aria-hidden]': 'true',
+    'aria-hidden': 'true',
     '[class]': 'class()',
   },
-  template: `
-    <ng-content />
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPaginationEllipsis {
   readonly classInput = input<string>('', { alias: 'class' });

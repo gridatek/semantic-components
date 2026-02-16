@@ -1,33 +1,26 @@
 import {
   booleanAttribute,
-  ChangeDetectionStrategy,
-  Component,
   computed,
+  Directive,
   ElementRef,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScPagination } from './pagination';
 import { buttonVariants, ScButtonVariants } from '../button/button';
 
-@Component({
+@Directive({
   selector: 'a[sc-pagination-first], button[sc-pagination-first]',
   host: {
     'data-slot': 'pagination-first',
     '[class]': 'class()',
-    '[attr.aria-label]': '"Go to first page"',
+    'aria-label': 'Go to first page',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',
     '[attr.href]': 'isAnchor() ? "#" : null',
     '(click)': 'onClick($event)',
   },
-  template: `
-    <ng-content />
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPaginationFirst {
   private readonly pagination = inject(ScPagination, { optional: true });
