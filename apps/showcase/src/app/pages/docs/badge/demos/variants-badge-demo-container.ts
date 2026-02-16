@@ -10,7 +10,11 @@ import { VariantsBadgeDemo } from './variants-badge-demo';
   selector: 'app-variants-badge-demo-container',
   imports: [DemoContainer, VariantsBadgeDemo],
   template: `
-    <app-demo-container title="Variants" [code]="code">
+    <app-demo-container
+      title="Variants"
+      demoUrl="/demos/badge/variants-badge-demo"
+      [code]="code"
+    >
       <app-variants-badge-demo />
     </app-demo-container>
   `,

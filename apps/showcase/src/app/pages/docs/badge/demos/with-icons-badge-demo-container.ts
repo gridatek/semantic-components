@@ -10,7 +10,11 @@ import { WithIconsBadgeDemo } from './with-icons-badge-demo';
   selector: 'app-with-icons-badge-demo-container',
   imports: [DemoContainer, WithIconsBadgeDemo],
   template: `
-    <app-demo-container title="With" [code]="code">
+    <app-demo-container
+      title="With Icons"
+      demoUrl="/demos/badge/with-icons-badge-demo"
+      [code]="code"
+    >
       <app-with-icons-badge-demo />
     </app-demo-container>
   `,
