@@ -19,9 +19,9 @@ import {
     ScToolbarSeparator,
   ],
   template: `
-    <div sc-toolbar [values]="['bold']">
-      <div sc-toolbar-widget-group>
-        <button sc-toolbar-widget value="bold" aria-label="Bold">
+    <div scToolbar [values]="['bold']">
+      <div scToolbarWidgetGroup>
+        <button scToolbarWidget value="bold" aria-label="Bold">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -38,7 +38,7 @@ import {
             <path d="M15 20a4 4 0 0 0 0-8H6v8" />
           </svg>
         </button>
-        <button sc-toolbar-widget value="italic" aria-label="Italic">
+        <button scToolbarWidget value="italic" aria-label="Italic">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -56,7 +56,7 @@ import {
             <line x1="15" x2="9" y1="4" y2="20" />
           </svg>
         </button>
-        <button sc-toolbar-widget value="underline" aria-label="Underline">
+        <button scToolbarWidget value="underline" aria-label="Underline">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -75,10 +75,10 @@ import {
         </button>
       </div>
 
-      <div sc-toolbar-separator></div>
+      <div scToolbarSeparator></div>
 
-      <div sc-toolbar-widget-group>
-        <button sc-toolbar-widget value="align-left" aria-label="Align left">
+      <div scToolbarWidgetGroup>
+        <button scToolbarWidget value="align-left" aria-label="Align left">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -97,7 +97,7 @@ import {
           </svg>
         </button>
         <button
-          sc-toolbar-widget
+          scToolbarWidget
           value="align-center"
           aria-label="Align center"
         >
@@ -118,7 +118,7 @@ import {
             <line x1="19" x2="5" y1="18" y2="18" />
           </svg>
         </button>
-        <button sc-toolbar-widget value="align-right" aria-label="Align right">
+        <button scToolbarWidget value="align-right" aria-label="Align right">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

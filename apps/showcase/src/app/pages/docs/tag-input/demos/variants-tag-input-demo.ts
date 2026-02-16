@@ -17,29 +17,29 @@ import {
     <div class="space-y-3 max-w-md">
       <div class="space-y-1">
         <label class="text-xs text-muted-foreground">Default</label>
-        <div sc-tag-input [(tags)]="variantDefault">
+        <div scTagInput [(tags)]="variantDefault">
           @for (tag of variantDefault(); track tag) {
-            <span sc-tag-input-tag [tag]="tag" variant="default"></span>
+            <span scTagInputTag [tag]="tag" variant="default"></span>
           }
-          <input sc-tag-input-field />
+          <input scTagInputField />
         </div>
       </div>
       <div class="space-y-1">
         <label class="text-xs text-muted-foreground">Secondary</label>
-        <div sc-tag-input [(tags)]="variantSecondary">
+        <div scTagInput [(tags)]="variantSecondary">
           @for (tag of variantSecondary(); track tag) {
-            <span sc-tag-input-tag [tag]="tag" variant="secondary"></span>
+            <span scTagInputTag [tag]="tag" variant="secondary"></span>
           }
-          <input sc-tag-input-field />
+          <input scTagInputField />
         </div>
       </div>
       <div class="space-y-1">
         <label class="text-xs text-muted-foreground">Outline</label>
-        <div sc-tag-input [(tags)]="variantOutline">
+        <div scTagInput [(tags)]="variantOutline">
           @for (tag of variantOutline(); track tag) {
-            <span sc-tag-input-tag [tag]="tag" variant="outline"></span>
+            <span scTagInputTag [tag]="tag" variant="outline"></span>
           }
-          <input sc-tag-input-field />
+          <input scTagInputField />
         </div>
       </div>
     </div>

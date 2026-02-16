@@ -31,33 +31,33 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
   imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
   template: \`
     <div class="space-y-2">
-      <sc-marquee [duration]="30" [gap]="24">
+      <scMarquee [duration]="30" [gap]="24">
         @for (emoji of row1Emojis; track emoji) {
-          <span sc-marquee-item class="text-3xl">{{ emoji }}</span>
+          <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
         }
-        <ng-container sc-marquee-clone>
+        <ng-container scMarqueeClone>
           @for (emoji of row1Emojis; track emoji) {
-            <span sc-marquee-item class="text-3xl">{{ emoji }}</span>
+            <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
           }
         </ng-container>
       </sc-marquee>
-      <sc-marquee [duration]="25" [reverse]="true" [gap]="24">
+      <scMarquee [duration]="25" [reverse]="true" [gap]="24">
         @for (emoji of row2Emojis; track emoji) {
-          <span sc-marquee-item class="text-3xl">{{ emoji }}</span>
+          <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
         }
-        <ng-container sc-marquee-clone>
+        <ng-container scMarqueeClone>
           @for (emoji of row2Emojis; track emoji) {
-            <span sc-marquee-item class="text-3xl">{{ emoji }}</span>
+            <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
           }
         </ng-container>
       </sc-marquee>
-      <sc-marquee [duration]="35" [gap]="24">
+      <scMarquee [duration]="35" [gap]="24">
         @for (emoji of row3Emojis; track emoji) {
-          <span sc-marquee-item class="text-3xl">{{ emoji }}</span>
+          <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
         }
-        <ng-container sc-marquee-clone>
+        <ng-container scMarqueeClone>
           @for (emoji of row3Emojis; track emoji) {
-            <span sc-marquee-item class="text-3xl">{{ emoji }}</span>
+            <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
           }
         </ng-container>
       </sc-marquee>

@@ -39,14 +39,14 @@ import {
   selector: 'app-basic-opt-field-demo',
   imports: [ScOptField, ScOptFieldSlotGroup, ScOptFieldSlot],
   template: \`
-    <div sc-opt-field [(value)]="otp">
-      <div sc-opt-field-slot-group>
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
+    <div scOptField [(value)]="otp">
+      <div scOptFieldSlotGroup>
+        <scOptFieldSlot />
+        <scOptFieldSlot />
+        <scOptFieldSlot />
+        <scOptFieldSlot />
+        <scOptFieldSlot />
+        <scOptFieldSlot />
       </div>
     </div>
     <p class="text-sm text-muted-foreground mt-4">

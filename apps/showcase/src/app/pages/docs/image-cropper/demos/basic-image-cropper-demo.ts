@@ -17,7 +17,7 @@ import {
   imports: [ScImageCropper, ScImageCropperContainer, ScImageCropperControls],
   template: `
     <div
-      sc-image-cropper
+      scImageCropper
       #cropper="scImageCropper"
       [src]="imageSrc()"
       [(cropArea)]="cropArea"
@@ -25,12 +25,12 @@ import {
       class="space-y-4"
     >
       <div
-        sc-image-cropper-container
+        scImageCropperContainer
         #container
         class="rounded-lg overflow-hidden border"
       ></div>
 
-      <div sc-image-cropper-controls></div>
+      <div scImageCropperControls></div>
 
       <div class="flex gap-4">
         <button

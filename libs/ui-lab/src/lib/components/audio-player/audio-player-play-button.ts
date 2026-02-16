@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
-  selector: 'button[sc-audio-player-play-button]',
+  selector: 'button[scAudioPlayerPlayButton]',
   template: '<ng-content />',
   host: {
     'data-slot': 'audio-player-play-button',

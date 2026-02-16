@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { buttonVariants, type ScButtonVariants } from '../button';
 
 @Directive({
-  selector: 'a[sc-link]',
+  selector: 'a[scLink]',
   host: {
     'data-slot': 'link',
     '[attr.href]': 'href()',

@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
 
 @Component({
-  selector: 'button[sc-stepper-trigger]',
+  selector: 'button[scStepperTrigger]',
   template: `
     @if (stepperItem.state() === 'complete') {
       <svg

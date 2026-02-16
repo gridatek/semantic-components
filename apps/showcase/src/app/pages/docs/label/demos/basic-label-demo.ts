@@ -10,9 +10,9 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-basic-label-demo',
   imports: [ScField, ScInput, ScLabel],
   template: `
-    <div sc-field>
-      <label sc-label>Email</label>
-      <input sc-input type="email" placeholder="Enter your email" />
+    <div scField>
+      <label scLabel>Email</label>
+      <input scInput type="email" placeholder="Enter your email" />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 
 @Directive({
-  selector: 'label[sc-label]',
+  selector: 'label[scLabel]',
   host: {
     'data-slot': 'label',
     '[attr.for]': 'for()',

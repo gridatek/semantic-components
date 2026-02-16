@@ -60,7 +60,7 @@ import {
         </div>
         <div scAccordionPanel panelId="item-a">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <scAccordionBody>
               Yes! When using multiExpandable, you can have multiple accordion
               items open at the same time.
             </sc-accordion-body>
@@ -75,7 +75,7 @@ import {
         </div>
         <div scAccordionPanel panelId="item-b">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <scAccordionBody>
               Each trigger has an expanded input that you can bind to with
               [(expanded)] for two-way binding.
             </sc-accordion-body>
@@ -90,7 +90,7 @@ import {
         </div>
         <div scAccordionPanel panelId="item-c">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <scAccordionBody>
               Each item uses proper ARIA attributes including aria-expanded and
               role="region" for the content.
             </sc-accordion-body>

@@ -15,8 +15,8 @@ import { ScTimezoneService } from './timezone.service';
  *
  * @example
  * ```html
- * <sc-timezone-select></sc-timezone-select>
- * <sc-timezone-select [showOffset]="true"></sc-timezone-select>
+ * <scTimezoneSelect></sc-timezone-select>
+ * <scTimezoneSelect [showOffset]="true"></sc-timezone-select>
  * ```
  */
 @Component({

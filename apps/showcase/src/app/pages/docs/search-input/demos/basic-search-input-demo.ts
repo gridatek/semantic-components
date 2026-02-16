@@ -12,7 +12,7 @@ import type { SearchSuggestion } from '@semantic-components/ui-lab';
   imports: [ScSearchInput],
   template: `
     <div class="space-y-4">
-      <sc-search-input
+      <scSearchInput
         [suggestions]="suggestions"
         (search)="onSearch($event)"
         (suggestionSelect)="onSelect($event)"

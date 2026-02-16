@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-navbar-brand]',
+  selector: '[scNavbarBrand]',
   host: {
     'data-slot': 'navbar-brand',
     '[class]': 'class()',

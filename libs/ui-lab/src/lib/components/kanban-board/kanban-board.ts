@@ -23,7 +23,7 @@ import type {
   template: `
     <div [class]="containerClass()" role="region" aria-label="Kanban board">
       @for (column of sortedColumns(); track column.id) {
-        <sc-kanban-column
+        <scKanbanColumn
           [column]="column"
           [cards]="getCardsForColumn(column.id)"
           [disabled]="disabled()"

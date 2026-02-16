@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-stat-card-description]',
+  selector: '[scStatCardDescription]',
   host: {
     'data-slot': 'stat-card-description',
     '[class]': 'class()',

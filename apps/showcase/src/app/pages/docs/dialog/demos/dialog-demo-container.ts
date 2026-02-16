@@ -64,37 +64,37 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: \`
-    <div sc-dialog-provider [(open)]="isOpen">
-      <button sc-dialog-trigger sc-button variant="outline">Open Dialog</button>
+    <div scDialogProvider [(open)]="isOpen">
+      <button scDialogTrigger scButton variant="outline">Open Dialog</button>
       <ng-template scDialogPortal>
         <form>
-          <div sc-dialog class="sm:max-w-sm">
-            <button sc-dialog-close>
+          <div scDialog class="sm:max-w-sm">
+            <button scDialogClose>
               <svg si-x-icon></svg>
               <span class="sr-only">Close</span>
             </button>
-            <div sc-dialog-header>
-              <h2 sc-dialog-title>Edit profile</h2>
-              <p sc-dialog-description>
+            <div scDialogHeader>
+              <h2 scDialogTitle>Edit profile</h2>
+              <p scDialogDescription>
                 Make changes to your profile here. Click save when you're
                 done.
               </p>
             </div>
-            <div sc-field-group>
-              <div sc-field orientation="horizontal">
-                <label sc-label>Name</label>
-                <input cdkFocusInitial sc-input value="Pedro Duarte" />
+            <div scFieldGroup>
+              <div scField orientation="horizontal">
+                <label scLabel>Name</label>
+                <input cdkFocusInitial scInput value="Pedro Duarte" />
               </div>
-              <div sc-field orientation="horizontal">
-                <label sc-label>Username</label>
-                <input sc-input value="@peduarte" />
+              <div scField orientation="horizontal">
+                <label scLabel>Username</label>
+                <input scInput value="@peduarte" />
               </div>
             </div>
-            <div sc-dialog-footer>
-              <button sc-button variant="outline" (click)="isOpen.set(false)">
+            <div scDialogFooter>
+              <button scButton variant="outline" (click)="isOpen.set(false)">
                 Cancel
               </button>
-              <button sc-button type="submit">Save changes</button>
+              <button scButton type="submit">Save changes</button>
             </div>
           </div>
         </form>

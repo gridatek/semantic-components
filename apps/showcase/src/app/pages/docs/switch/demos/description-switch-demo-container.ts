@@ -39,7 +39,7 @@ import { ScSwitch } from '@semantic-components/ui-lab';
           Enable dark mode for a better viewing experience in low light.
         </p>
       </div>
-      <button sc-switch id="dark-mode"></button>
+      <button scSwitch id="dark-mode"></button>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

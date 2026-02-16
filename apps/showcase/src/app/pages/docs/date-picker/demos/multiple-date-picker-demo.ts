@@ -10,7 +10,7 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
   selector: 'app-multiple-date-picker-demo',
   imports: [ScDatePicker],
   template: `
-    <sc-date-picker
+    <scDatePicker
       mode="multiple"
       [(selectedDates)]="selectedDates"
       placeholder="Select dates"

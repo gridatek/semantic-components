@@ -46,24 +46,24 @@ import {
   ],
   template: \`
     <div
-      sc-image-cropper
+      scImageCropper
       [src]="imageSrc()"
       [aspectRatio]="selectedAspectRatio()"
       [containerHeight]="300"
       class="space-y-4"
     >
       <div
-        sc-image-cropper-container
+        scImageCropperContainer
         class="rounded-lg overflow-hidden border"
       ></div>
 
       <div class="flex items-center justify-between">
         <div
-          sc-image-cropper-aspect-ratio
+          scImageCropperAspectRatio
           [options]="aspectRatioOptions"
           (aspectRatioChange)="onAspectRatioChange($event)"
         ></div>
-        <div sc-image-cropper-controls></div>
+        <div scImageCropperControls></div>
       </div>
     </div>
   \`,

@@ -5,7 +5,7 @@ A date picker component with calendar popup for selecting dates.
 ## Usage
 
 ```html
-<sc-date-picker [(selected)]="date" />
+<scDatePicker [(selected)]="date" />
 ```
 
 ## Component
@@ -43,25 +43,25 @@ Date picker combining a trigger button with a calendar popover.
 ### Default
 
 ```html
-<sc-date-picker [(selected)]="date" />
+<scDatePicker [(selected)]="date" />
 ```
 
 ### With Custom Placeholder
 
 ```html
-<sc-date-picker [(selected)]="date" placeholder="Select your birthday" />
+<scDatePicker [(selected)]="date" placeholder="Select your birthday" />
 ```
 
 ### Date Range Picker
 
 ```html
-<sc-date-picker mode="range" [(selectedRange)]="range" placeholder="Pick a date range" />
+<scDatePicker mode="range" [(selectedRange)]="range" placeholder="Pick a date range" />
 ```
 
 ### Multiple Dates
 
 ```html
-<sc-date-picker mode="multiple" [(selectedDates)]="dates" placeholder="Select dates" />
+<scDatePicker mode="multiple" [(selectedDates)]="dates" placeholder="Select dates" />
 ```
 
 ### With Date Constraints
@@ -72,7 +72,7 @@ maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
 ```
 
 ```html
-<sc-date-picker [(selected)]="date" [minDate]="minDate" [maxDate]="maxDate" />
+<scDatePicker [(selected)]="date" [minDate]="minDate" [maxDate]="maxDate" />
 ```
 
 ### Form Example
@@ -80,7 +80,7 @@ maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
 ```html
 <div class="space-y-2">
   <label class="text-sm font-medium">Date of Birth</label>
-  <sc-date-picker [(selected)]="dob" placeholder="Select date of birth" [maxDate]="today" />
+  <scDatePicker [(selected)]="dob" placeholder="Select date of birth" [maxDate]="today" />
 </div>
 ```
 

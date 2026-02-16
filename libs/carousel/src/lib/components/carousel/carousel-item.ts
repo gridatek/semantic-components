@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import { ScCarousel } from './carousel';
 
 @Directive({
-  selector: 'div[sc-carousel-item]',
+  selector: 'div[scCarouselItem]',
   host: {
     'data-slot': 'carousel-item',
     role: 'group',

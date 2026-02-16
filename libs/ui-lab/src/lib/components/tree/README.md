@@ -14,16 +14,16 @@ A hierarchical collapsible tree for displaying nested data. Built with Angular A
 ## Quick Start
 
 ```html
-<ul sc-tree #tree="scTree">
-  <li sc-tree-item [parent]="tree.tree" value="folder">
-    <button sc-tree-item-trigger>
-      <svg sc-tree-item-icon><!-- folder icon --></svg>
+<ul scTree #tree="scTree">
+  <li scTreeItem [parent]="tree.tree" value="folder">
+    <button scTreeItemTrigger>
+      <svg scTreeItemIcon><!-- folder icon --></svg>
       <span>Folder</span>
     </button>
-    <ul sc-tree-item-group>
-      <li sc-tree-item [parent]="tree.tree" value="file">
-        <button sc-tree-item-trigger>
-          <svg sc-tree-item-icon><!-- file icon --></svg>
+    <ul scTreeItemGroup>
+      <li scTreeItem [parent]="tree.tree" value="file">
+        <button scTreeItemTrigger>
+          <svg scTreeItemIcon><!-- file icon --></svg>
           <span>File.ts</span>
         </button>
       </li>
@@ -39,24 +39,24 @@ To create a tree:
 1. **Add the root tree** with a template reference:
 
    ```html
-   <ul sc-tree #tree="scTree"></ul>
+   <ul scTree #tree="scTree"></ul>
    ```
 
 2. **Add tree items** with parent binding and unique value:
 
    ```html
-   <li sc-tree-item [parent]="tree.tree" value="unique-id"></li>
+   <li scTreeItem [parent]="tree.tree" value="unique-id"></li>
    ```
 
 3. **Add a clickable trigger** to expand/collapse:
 
    ```html
-   <button sc-tree-item-trigger>Item Label</button>
+   <button scTreeItemTrigger>Item Label</button>
    ```
 
 4. **Wrap nested children** (no additional bindings needed):
    ```html
-   <ul sc-tree-item-group>
+   <ul scTreeItemGroup>
      <!-- Child items here -->
    </ul>
    ```
@@ -74,7 +74,7 @@ To create a tree:
 
 Root container with tree role. Uses Angular ARIA's `Tree` directive.
 
-**Selector:** `ul[sc-tree]`
+**Selector:** `ul[scTree]`
 
 **Inputs:**
 
@@ -86,7 +86,7 @@ Root container with tree role. Uses Angular ARIA's `Tree` directive.
 
 Individual tree item that can have children. Uses Angular ARIA's `TreeItem` directive.
 
-**Selector:** `li[sc-tree-item]`
+**Selector:** `li[scTreeItem]`
 
 **Required Inputs:**
 
@@ -117,7 +117,7 @@ Individual tree item that can have children. Uses Angular ARIA's `TreeItem` dire
 
 Clickable button to expand/collapse the item.
 
-**Selector:** `button[sc-tree-item-trigger]`
+**Selector:** `button[scTreeItemTrigger]`
 
 Automatically includes:
 
@@ -129,7 +129,7 @@ Automatically includes:
 
 Container for nested child items. Uses Angular ARIA's `TreeItemGroup` directive internally.
 
-**Selector:** `ul[sc-tree-item-group]`
+**Selector:** `ul[scTreeItemGroup]`
 
 **Inputs:**
 
@@ -143,42 +143,42 @@ Automatically connects to its parent tree item - no manual bindings required. Hi
 
 Optional icon slot for tree items.
 
-**Selector:** `[sc-tree-item-icon]`
+**Selector:** `[scTreeItemIcon]`
 
 ## Examples
 
 ### File Explorer with Icons
 
 ```html
-<ul sc-tree #tree="scTree">
-  <li sc-tree-item [parent]="tree.tree" value="src" [expanded]="true">
-    <button sc-tree-item-trigger>
-      <svg sc-tree-item-icon class="text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+<ul scTree #tree="scTree">
+  <li scTreeItem [parent]="tree.tree" value="src" [expanded]="true">
+    <button scTreeItemTrigger>
+      <svg scTreeItemIcon class="text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
       </svg>
       <span>src</span>
     </button>
-    <ul sc-tree-item-group>
-      <li sc-tree-item [parent]="tree.tree" value="app" [expanded]="true">
-        <button sc-tree-item-trigger>
-          <svg sc-tree-item-icon class="text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <ul scTreeItemGroup>
+      <li scTreeItem [parent]="tree.tree" value="app" [expanded]="true">
+        <button scTreeItemTrigger>
+          <svg scTreeItemIcon class="text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
           </svg>
           <span>app</span>
         </button>
-        <ul sc-tree-item-group>
-          <li sc-tree-item [parent]="tree.tree" value="main">
-            <button sc-tree-item-trigger>
-              <svg sc-tree-item-icon class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <ul scTreeItemGroup>
+          <li scTreeItem [parent]="tree.tree" value="main">
+            <button scTreeItemTrigger>
+              <svg scTreeItemIcon class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
                 <path d="M14 2v4a2 2 0 0 0 2 2h4" />
               </svg>
               <span>main.ts</span>
             </button>
           </li>
-          <li sc-tree-item [parent]="tree.tree" value="app-component">
-            <button sc-tree-item-trigger>
-              <svg sc-tree-item-icon class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <li scTreeItem [parent]="tree.tree" value="app-component">
+            <button scTreeItemTrigger>
+              <svg scTreeItemIcon class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
                 <path d="M14 2v4a2 2 0 0 0 2 2h4" />
               </svg>
@@ -195,29 +195,29 @@ Optional icon slot for tree items.
 ### Navigation Tree
 
 ```html
-<ul sc-tree #tree="scTree">
-  <li sc-tree-item [parent]="tree.tree" value="getting-started" [expanded]="true">
-    <button sc-tree-item-trigger>Getting Started</button>
-    <ul sc-tree-item-group>
-      <li sc-tree-item [parent]="tree.tree" value="intro">
-        <button sc-tree-item-trigger>Introduction</button>
+<ul scTree #tree="scTree">
+  <li scTreeItem [parent]="tree.tree" value="getting-started" [expanded]="true">
+    <button scTreeItemTrigger>Getting Started</button>
+    <ul scTreeItemGroup>
+      <li scTreeItem [parent]="tree.tree" value="intro">
+        <button scTreeItemTrigger>Introduction</button>
       </li>
-      <li sc-tree-item [parent]="tree.tree" value="install">
-        <button sc-tree-item-trigger>Installation</button>
+      <li scTreeItem [parent]="tree.tree" value="install">
+        <button scTreeItemTrigger>Installation</button>
       </li>
-      <li sc-tree-item [parent]="tree.tree" value="config">
-        <button sc-tree-item-trigger>Configuration</button>
+      <li scTreeItem [parent]="tree.tree" value="config">
+        <button scTreeItemTrigger>Configuration</button>
       </li>
     </ul>
   </li>
-  <li sc-tree-item [parent]="tree.tree" value="components">
-    <button sc-tree-item-trigger>Components</button>
-    <ul sc-tree-item-group>
-      <li sc-tree-item [parent]="tree.tree" value="button">
-        <button sc-tree-item-trigger>Button</button>
+  <li scTreeItem [parent]="tree.tree" value="components">
+    <button scTreeItemTrigger>Components</button>
+    <ul scTreeItemGroup>
+      <li scTreeItem [parent]="tree.tree" value="button">
+        <button scTreeItemTrigger>Button</button>
       </li>
-      <li sc-tree-item [parent]="tree.tree" value="input">
-        <button sc-tree-item-trigger>Input</button>
+      <li scTreeItem [parent]="tree.tree" value="input">
+        <button scTreeItemTrigger>Input</button>
       </li>
     </ul>
   </li>
@@ -227,23 +227,23 @@ Optional icon slot for tree items.
 ### Simple Tree (No Icons)
 
 ```html
-<ul sc-tree #tree="scTree">
-  <li sc-tree-item [parent]="tree.tree" value="fruits">
-    <button sc-tree-item-trigger>Fruits</button>
-    <ul sc-tree-item-group>
-      <li sc-tree-item [parent]="tree.tree" value="apple">
-        <button sc-tree-item-trigger>Apple</button>
+<ul scTree #tree="scTree">
+  <li scTreeItem [parent]="tree.tree" value="fruits">
+    <button scTreeItemTrigger>Fruits</button>
+    <ul scTreeItemGroup>
+      <li scTreeItem [parent]="tree.tree" value="apple">
+        <button scTreeItemTrigger>Apple</button>
       </li>
-      <li sc-tree-item [parent]="tree.tree" value="banana">
-        <button sc-tree-item-trigger>Banana</button>
+      <li scTreeItem [parent]="tree.tree" value="banana">
+        <button scTreeItemTrigger>Banana</button>
       </li>
     </ul>
   </li>
-  <li sc-tree-item [parent]="tree.tree" value="vegetables">
-    <button sc-tree-item-trigger>Vegetables</button>
-    <ul sc-tree-item-group>
-      <li sc-tree-item [parent]="tree.tree" value="carrot">
-        <button sc-tree-item-trigger>Carrot</button>
+  <li scTreeItem [parent]="tree.tree" value="vegetables">
+    <button scTreeItemTrigger>Vegetables</button>
+    <ul scTreeItemGroup>
+      <li scTreeItem [parent]="tree.tree" value="carrot">
+        <button scTreeItemTrigger>Carrot</button>
       </li>
     </ul>
   </li>
@@ -258,12 +258,12 @@ Access the Angular ARIA `TreeItem` instance to programmatically control expansio
 @Component({
   imports: [ScTree, ScTreeItem, ScTreeItemTrigger, ScTreeItemGroup],
   template: `
-    <ul sc-tree #tree="scTree">
-      <li sc-tree-item [parent]="tree.tree" value="item" #item="scTreeItem">
-        <button sc-tree-item-trigger>Item (Expanded: {{ item.treeItem.expanded() }})</button>
-        <ul sc-tree-item-group>
-          <li sc-tree-item [parent]="tree.tree" value="child">
-            <button sc-tree-item-trigger>Child</button>
+    <ul scTree #tree="scTree">
+      <li scTreeItem [parent]="tree.tree" value="item" #item="scTreeItem">
+        <button scTreeItemTrigger>Item (Expanded: {{ item.treeItem.expanded() }})</button>
+        <ul scTreeItemGroup>
+          <li scTreeItem [parent]="tree.tree" value="child">
+            <button scTreeItemTrigger>Child</button>
           </li>
         </ul>
       </li>
@@ -301,9 +301,9 @@ This design prioritizes developer experience while maintaining full Angular ARIA
 All components accept a `class` input for custom styling:
 
 ```html
-<ul sc-tree #tree="scTree" class="border rounded-lg p-4">
-  <li sc-tree-item [parent]="tree.tree" value="item" class="my-custom-item">
-    <button sc-tree-item-trigger class="font-bold hover:bg-blue-100">Custom Styled Item</button>
+<ul scTree #tree="scTree" class="border rounded-lg p-4">
+  <li scTreeItem [parent]="tree.tree" value="item" class="my-custom-item">
+    <button scTreeItemTrigger class="font-bold hover:bg-blue-100">Custom Styled Item</button>
   </li>
 </ul>
 ```
@@ -320,8 +320,8 @@ All components accept a `class` input for custom styling:
 Use the `sc-tree-item-icon` attribute on any SVG or icon element:
 
 ```html
-<button sc-tree-item-trigger>
-  <svg sc-tree-item-icon class="text-blue-500">
+<button scTreeItemTrigger>
+  <svg scTreeItemIcon class="text-blue-500">
     <!-- Your custom icon -->
   </svg>
   <span>Item Label</span>

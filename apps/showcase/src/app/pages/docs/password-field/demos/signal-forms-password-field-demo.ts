@@ -25,25 +25,25 @@ import { ScLabel } from '@semantic-components/ui';
   ],
   template: `
     <div class="max-w-sm space-y-4">
-      <div sc-password-field class="space-y-2">
+      <div scPasswordField class="space-y-2">
         <label
-          sc-label
+          scLabel
           [class.text-destructive]="
             loginForm.password().invalid() && loginForm.password().touched()
           "
         >
           Password
         </label>
-        <div sc-password-field-input-group>
+        <div scPasswordFieldInputGroup>
           <input
-            sc-password-field-input
+            scPasswordFieldInput
             [formField]="loginForm.password"
             placeholder="Enter password"
             [class.border-destructive]="
               loginForm.password().invalid() && loginForm.password().touched()
             "
           />
-          <button sc-password-field-toggle></button>
+          <button scPasswordFieldToggle></button>
         </div>
         @if (loginForm.password().invalid() && loginForm.password().touched()) {
           <p class="text-sm font-medium text-destructive" role="alert">

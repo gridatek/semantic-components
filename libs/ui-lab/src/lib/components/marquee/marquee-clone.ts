@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-marquee-clone]',
+  selector: '[scMarqueeClone]',
   host: {
     'data-slot': 'marquee-clone',
     '[class]': 'class()',

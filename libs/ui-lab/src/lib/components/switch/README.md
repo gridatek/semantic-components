@@ -9,14 +9,14 @@ A control that allows the user to toggle between checked and not checked.
 ## Usage
 
 ```html
-<button sc-switch></button>
+<button scSwitch></button>
 ```
 
 ## With Label
 
 ```html
 <div class="flex items-center space-x-2">
-  <button sc-switch id="airplane-mode"></button>
+  <button scSwitch id="airplane-mode"></button>
   <label for="airplane-mode">Airplane Mode</label>
 </div>
 ```
@@ -26,7 +26,7 @@ A control that allows the user to toggle between checked and not checked.
 ```typescript
 @Component({
   template: `
-    <button sc-switch [(checked)]="enabled"></button>
+    <button scSwitch [(checked)]="enabled"></button>
     <p>Switch is {{ enabled() ? 'on' : 'off' }}</p>
   `,
 })
@@ -51,7 +51,7 @@ readonly myForm = form(this.formModel, (schemaPath) => {
 ```
 
 ```html
-<button sc-switch [formField]="myForm.notifications" id="notifications"></button>
+<button scSwitch [formField]="myForm.notifications" id="notifications"></button>
 <label for="notifications">Enable notifications</label>
 ```
 
@@ -60,8 +60,8 @@ Note: Add `FormField` to your component's `imports` array to use the `[formField
 ## Disabled State
 
 ```html
-<button sc-switch [disabled]="true"></button>
-<button sc-switch [checked]="true" [disabled]="true"></button>
+<button scSwitch [disabled]="true"></button>
+<button scSwitch [checked]="true" [disabled]="true"></button>
 ```
 
 ## In a Form
@@ -72,7 +72,7 @@ Note: Add `FormField` to your component's `imports` array to use the `[formField
     <label for="notifications">Notifications</label>
     <p class="text-sm text-muted-foreground">Receive email notifications.</p>
   </div>
-  <button sc-switch [(checked)]="notifications" id="notifications"></button>
+  <button scSwitch [(checked)]="notifications" id="notifications"></button>
 </div>
 ```
 

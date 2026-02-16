@@ -13,16 +13,16 @@ import { ScInput } from '@semantic-components/ui';
   imports: [FormField, ScButton, ScField, ScInput, ScLabel],
   template: `
     <div class="flex max-w-sm items-end gap-2">
-      <div sc-field class="flex-1">
-        <label sc-label>Email</label>
+      <div scField class="flex-1">
+        <label scLabel>Email</label>
         <input
-          sc-input
+          scInput
           type="email"
           [formField]="emailForm.email"
           placeholder="Email"
         />
       </div>
-      <button sc-button>Subscribe</button>
+      <button scButton>Subscribe</button>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

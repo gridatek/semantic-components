@@ -9,7 +9,7 @@ Connecting a `<label>` to its control requires matching `id` and `for` attribute
 ```html
 <div scCheckboxField>
   <input type="checkbox" scCheckbox id="terms" />
-  <label sc-label for="terms">Accept terms</label>
+  <label scLabel for="terms">Accept terms</label>
 </div>
 ```
 
@@ -22,7 +22,7 @@ Field components auto-generate an ID and share it with their children via the `S
 ```html
 <div scCheckboxField>
   <input type="checkbox" scCheckbox />
-  <label sc-label>Accept terms</label>
+  <label scLabel>Accept terms</label>
 </div>
 ```
 
@@ -126,7 +126,7 @@ Consumers can override the auto-generated ID at the field level:
 ```html
 <div scCheckboxField id="accept-terms">
   <input type="checkbox" scCheckbox />
-  <label sc-label>Accept terms</label>
+  <label scLabel>Accept terms</label>
 </div>
 ```
 
@@ -137,7 +137,7 @@ Or override at the control level for full manual control:
 ```html
 <div scCheckboxField>
   <input type="checkbox" scCheckbox id="my-checkbox" />
-  <label sc-label for="my-checkbox">Accept terms</label>
+  <label scLabel for="my-checkbox">Accept terms</label>
 </div>
 ```
 
@@ -166,7 +166,7 @@ Every field component should:
 
 ```typescript
 @Component({
-  selector: '[sc-my-field]',
+  selector: '[scMyField]',
   providers: [
     { provide: SC_MY_FIELD, useExisting: ScMyField },
     { provide: SC_FIELD, useExisting: ScMyField },
@@ -181,7 +181,7 @@ The child control reads the field's ID as its default:
 
 ```typescript
 @Directive({
-  selector: 'input[sc-my-input]',
+  selector: 'input[scMyInput]',
   host: { '[id]': 'id()' },
 })
 export class ScMyInput {

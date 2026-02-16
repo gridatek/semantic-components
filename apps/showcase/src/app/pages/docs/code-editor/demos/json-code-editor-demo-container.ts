@@ -46,16 +46,16 @@ import {
     ScCodeEditorCopyButton,
   ],
   template: \`
-    <div sc-code-editor>
-      <div sc-code-editor-header>
+    <div scCodeEditor>
+      <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
           <span class="text-sm text-muted-foreground">config.json</span>
-          <span sc-code-editor-label>json</span>
+          <span scCodeEditorLabel>json</span>
         </div>
-        <button sc-code-editor-copy-button [code]="jsonCode"></button>
+        <button scCodeEditorCopyButton [code]="jsonCode"></button>
       </div>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="jsonCode"
         language="json"
         filename="config.json"

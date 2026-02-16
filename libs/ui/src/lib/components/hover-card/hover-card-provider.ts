@@ -107,7 +107,7 @@ const positionMap: Record<PositionKey, ConnectedPosition> = {
 };
 
 @Component({
-  selector: 'div[sc-hover-card-provider]',
+  selector: 'div[scHoverCardProvider]',
   imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />

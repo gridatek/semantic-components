@@ -89,12 +89,12 @@ import { ConfigService } from '../../services/config.service';
     Toc,
   ],
   template: `
-    <div sc-sidebar-provider class="min-h-svh">
-      <div sc-sidebar side="left" variant="sidebar" collapsible="icon">
-        <div sc-sidebar-header>
-          <ul sc-sidebar-menu>
-            <li sc-sidebar-menu-item>
-              <a sc-sidebar-menu-button size="lg" routerLink="/">
+    <div scSidebarProvider class="min-h-svh">
+      <div scSidebar side="left" variant="sidebar" collapsible="icon">
+        <div scSidebarHeader>
+          <ul scSidebarMenu>
+            <li scSidebarMenuItem>
+              <a scSidebarMenuButton size="lg" routerLink="/">
                 <svg app-logo class="!size-8"></svg>
                 <div class="grid flex-1 text-left text-sm leading-tight">
                   <span class="truncate font-semibold">
@@ -109,20 +109,20 @@ import { ConfigService } from '../../services/config.service';
           </ul>
         </div>
 
-        <div sc-sidebar-content>
-          <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Documentation</div>
-            <div sc-sidebar-group-content>
-              <ul sc-sidebar-menu>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+        <div scSidebarContent>
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Documentation</div>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg si-book-open-text-icon></svg>
                     <span>Semantic Components</span>
                   </a>
-                  <ul sc-sidebar-menu-sub>
-                    <li sc-sidebar-menu-sub-item>
+                  <ul scSidebarMenuSub>
+                    <li scSidebarMenuSubItem>
                       <a
-                        sc-sidebar-menu-sub-button
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/introduction"
                         routerLinkActive
                         #introRla="routerLinkActive"
@@ -131,9 +131,9 @@ import { ConfigService } from '../../services/config.service';
                         <span>Introduction</span>
                       </a>
                     </li>
-                    <li sc-sidebar-menu-sub-item>
+                    <li scSidebarMenuSubItem>
                       <a
-                        sc-sidebar-menu-sub-button
+                        scSidebarMenuSubButton
                         routerLink="/docs/components"
                         [routerLinkActiveOptions]="{ exact: true }"
                         routerLinkActive
@@ -145,15 +145,15 @@ import { ConfigService } from '../../services/config.service';
                     </li>
                   </ul>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg si-download-icon></svg>
                     <span>Installation</span>
                   </a>
-                  <ul sc-sidebar-menu-sub>
-                    <li sc-sidebar-menu-sub-item>
+                  <ul scSidebarMenuSub>
+                    <li scSidebarMenuSubItem>
                       <a
-                        sc-sidebar-menu-sub-button
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/prerequisites"
                         routerLinkActive
                         #prerequisitesRla="routerLinkActive"
@@ -162,9 +162,9 @@ import { ConfigService } from '../../services/config.service';
                         <span>Prerequisites</span>
                       </a>
                     </li>
-                    <li sc-sidebar-menu-sub-item>
+                    <li scSidebarMenuSubItem>
                       <a
-                        sc-sidebar-menu-sub-button
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/ui"
                         routerLinkActive
                         #coreRla="routerLinkActive"
@@ -174,9 +174,9 @@ import { ConfigService } from '../../services/config.service';
                       </a>
                     </li>
                     @if (devMode()) {
-                      <li sc-sidebar-menu-sub-item>
+                      <li scSidebarMenuSubItem>
                         <a
-                          sc-sidebar-menu-sub-button
+                          scSidebarMenuSubButton
                           routerLink="/docs/getting-started/ui-lab"
                           routerLinkActive
                           #uiLabRla="routerLinkActive"
@@ -187,9 +187,9 @@ import { ConfigService } from '../../services/config.service';
                       </li>
                     }
 
-                    <li sc-sidebar-menu-sub-item>
+                    <li scSidebarMenuSubItem>
                       <a
-                        sc-sidebar-menu-sub-button
+                        scSidebarMenuSubButton
                         routerLink="/docs/getting-started/carousel"
                         routerLinkActive
                         #carouselRla="routerLinkActive"
@@ -200,9 +200,9 @@ import { ConfigService } from '../../services/config.service';
                     </li>
 
                     @if (devMode()) {
-                      <li sc-sidebar-menu-sub-item>
+                      <li scSidebarMenuSubItem>
                         <a
-                          sc-sidebar-menu-sub-button
+                          scSidebarMenuSubButton
                           routerLink="/docs/getting-started/editor"
                           routerLinkActive
                           #editorRla="routerLinkActive"
@@ -211,9 +211,9 @@ import { ConfigService } from '../../services/config.service';
                           <span>Editor</span>
                         </a>
                       </li>
-                      <li sc-sidebar-menu-sub-item>
+                      <li scSidebarMenuSubItem>
                         <a
-                          sc-sidebar-menu-sub-button
+                          scSidebarMenuSubButton
                           routerLink="/docs/getting-started/code"
                           routerLinkActive
                           #codeRla="routerLinkActive"
@@ -225,16 +225,16 @@ import { ConfigService } from '../../services/config.service';
                     }
                   </ul>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg si-box-icon></svg>
                     <span>Components</span>
                   </a>
-                  <ul sc-sidebar-menu-sub>
+                  <ul scSidebarMenuSub>
                     @for (item of components(); track item.path) {
-                      <li sc-sidebar-menu-sub-item>
+                      <li scSidebarMenuSubItem>
                         <a
-                          sc-sidebar-menu-sub-button
+                          scSidebarMenuSubButton
                           [routerLink]="'/docs/components/' + item.path"
                           routerLinkActive
                           #rla="routerLinkActive"
@@ -251,11 +251,11 @@ import { ConfigService } from '../../services/config.service';
           </div>
         </div>
 
-        <div sc-sidebar-footer>
-          <ul sc-sidebar-menu>
-            <li sc-sidebar-menu-item>
+        <div scSidebarFooter>
+          <ul scSidebarMenu>
+            <li scSidebarMenuItem>
               <button
-                sc-theme-toggle
+                scThemeToggle
                 #themeToggle="scThemeToggle"
                 class="w-full"
               >
@@ -269,14 +269,14 @@ import { ConfigService } from '../../services/config.service';
           </ul>
         </div>
 
-        <button sc-sidebar-rail></button>
+        <button scSidebarRail></button>
       </div>
 
-      <main sc-sidebar-inset>
+      <main scSidebarInset>
         <header
           class="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background px-4"
         >
-          <button sc-sidebar-trigger>
+          <button scSidebarTrigger>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -293,7 +293,7 @@ import { ConfigService } from '../../services/config.service';
             </svg>
             <span class="sr-only">Toggle Sidebar</span>
           </button>
-          <div sc-separator orientation="vertical" class="h-4"></div>
+          <div scSeparator orientation="vertical" class="h-4"></div>
           <span class="text-sm font-medium text-muted-foreground">
             Documentation
           </span>

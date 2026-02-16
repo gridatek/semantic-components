@@ -48,18 +48,18 @@ import { SiFolderIcon } from '@semantic-icons/lucide-icons';
     SiFolderIcon,
   ],
   template: \`
-    <div sc-empty class="border">
-      <div sc-empty-header>
-        <div sc-empty-media variant="icon">
+    <div scEmpty class="border">
+      <div scEmptyHeader>
+        <div scEmptyMedia variant="icon">
           <svg si-folder-icon></svg>
         </div>
-        <div sc-empty-title>No projects yet</div>
-        <div sc-empty-description>
+        <div scEmptyTitle>No projects yet</div>
+        <div scEmptyDescription>
           Get started by creating your first project.
         </div>
       </div>
-      <div sc-empty-content>
-        <button sc-button>Create Project</button>
+      <div scEmptyContent>
+        <button scButton>Create Project</button>
       </div>
     </div>
   \`,

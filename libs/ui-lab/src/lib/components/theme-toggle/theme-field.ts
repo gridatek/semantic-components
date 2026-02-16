@@ -12,7 +12,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_FIELD } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-theme-field], label[sc-theme-field]',
+  selector: 'div[scThemeField], label[scThemeField]',
   providers: [{ provide: SC_FIELD, useExisting: ScThemeField }],
   host: {
     '[attr.role]': 'role()',

@@ -48,18 +48,18 @@ import {
     ScCardTitle,
   ],
   template: \`
-    <div sc-card class="w-[350px]">
-      <div sc-card-header>
-        <h3 sc-card-title>Card Title</h3>
-        <p sc-card-description>Card description goes here.</p>
+    <div scCard class="w-[350px]">
+      <div scCardHeader>
+        <h3 scCardTitle>Card Title</h3>
+        <p scCardDescription>Card description goes here.</p>
       </div>
-      <div sc-card-body>
+      <div scCardBody>
         <p>
           Card content goes here. This is where the main content of the card
           lives.
         </p>
       </div>
-      <div sc-card-footer>
+      <div scCardFooter>
         <p class="text-sm text-muted-foreground">Card footer</p>
       </div>
     </div>

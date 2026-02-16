@@ -40,15 +40,15 @@ import {
   imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardChange],
   template: \`
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div sc-stat-card variant="default">
+      <div scStatCard variant="default">
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label>Default</p>
-            <p sc-stat-card-value>1,234</p>
+            <p scStatCardLabel>Default</p>
+            <p scStatCardValue>1,234</p>
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
-          <span sc-stat-card-change trend="up">
+          <span scStatCardChange trend="up">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -65,15 +65,15 @@ import {
         </div>
       </div>
 
-      <div sc-stat-card variant="outline">
+      <div scStatCard variant="outline">
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label>Outline</p>
-            <p sc-stat-card-value>5,678</p>
+            <p scStatCardLabel>Outline</p>
+            <p scStatCardValue>5,678</p>
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
-          <span sc-stat-card-change trend="down">
+          <span scStatCardChange trend="down">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -90,15 +90,15 @@ import {
         </div>
       </div>
 
-      <div sc-stat-card variant="filled">
+      <div scStatCard variant="filled">
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label>Filled</p>
-            <p sc-stat-card-value>9,012</p>
+            <p scStatCardLabel>Filled</p>
+            <p scStatCardValue>9,012</p>
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
-          <span sc-stat-card-change trend="up">
+          <span scStatCardChange trend="up">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"

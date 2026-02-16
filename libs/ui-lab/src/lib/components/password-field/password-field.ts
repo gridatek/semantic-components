@@ -31,7 +31,7 @@ export const SC_PASSWORD_FIELD = new InjectionToken<ScPasswordFieldContext>(
 );
 
 @Directive({
-  selector: 'div[sc-password-field], label[sc-password-field]',
+  selector: 'div[scPasswordField], label[scPasswordField]',
   exportAs: 'scPasswordField',
   providers: [
     { provide: SC_PASSWORD_FIELD, useExisting: ScPasswordField },

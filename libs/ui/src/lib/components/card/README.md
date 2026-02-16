@@ -5,15 +5,15 @@ A container for grouping related content with header, body, and footer sections.
 ## Usage
 
 ```html
-<div sc-card>
-  <div sc-card-header>
-    <h3 sc-card-title>Title</h3>
-    <p sc-card-description>Description</p>
+<div scCard>
+  <div scCardHeader>
+    <h3 scCardTitle>Title</h3>
+    <p scCardDescription>Description</p>
   </div>
-  <div sc-card-body>
+  <div scCardBody>
     <p>Content goes here.</p>
   </div>
-  <div sc-card-footer>
+  <div scCardFooter>
     <p>Footer</p>
   </div>
 </div>
@@ -25,7 +25,7 @@ A container for grouping related content with header, body, and footer sections.
 
 The main card container.
 
-**Selector:** `div[sc-card]`
+**Selector:** `div[scCard]`
 
 **Inputs:**
 
@@ -38,7 +38,7 @@ The main card container.
 
 Header section of the card. Supports grid layout with automatic columns when a card action is present.
 
-**Selector:** `div[sc-card-header]`
+**Selector:** `div[scCardHeader]`
 
 **Inputs:**
 
@@ -50,7 +50,7 @@ Header section of the card. Supports grid layout with automatic columns when a c
 
 Title text within a card header.
 
-**Selector:** `[sc-card-title]`
+**Selector:** `[scCardTitle]`
 
 **Inputs:**
 
@@ -62,7 +62,7 @@ Title text within a card header.
 
 Description text within a card header.
 
-**Selector:** `[sc-card-description]`
+**Selector:** `[scCardDescription]`
 
 **Inputs:**
 
@@ -74,7 +74,7 @@ Description text within a card header.
 
 Action area positioned at the top-right of the card header.
 
-**Selector:** `div[sc-card-action]`
+**Selector:** `div[scCardAction]`
 
 **Inputs:**
 
@@ -86,7 +86,7 @@ Action area positioned at the top-right of the card header.
 
 Main body area of the card.
 
-**Selector:** `div[sc-card-body]`
+**Selector:** `div[scCardBody]`
 
 **Inputs:**
 
@@ -98,7 +98,7 @@ Main body area of the card.
 
 Footer section of the card with a muted background and top border.
 
-**Selector:** `div[sc-card-footer]`
+**Selector:** `div[scCardFooter]`
 
 **Inputs:**
 
@@ -111,15 +111,15 @@ Footer section of the card with a muted background and top border.
 ### Basic
 
 ```html
-<div sc-card class="w-[350px]">
-  <div sc-card-header>
-    <h3 sc-card-title>Card Title</h3>
-    <p sc-card-description>Card description goes here.</p>
+<div scCard class="w-[350px]">
+  <div scCardHeader>
+    <h3 scCardTitle>Card Title</h3>
+    <p scCardDescription>Card description goes here.</p>
   </div>
-  <div sc-card-body>
+  <div scCardBody>
     <p>Card content goes here.</p>
   </div>
-  <div sc-card-footer>
+  <div scCardFooter>
     <p class="text-sm text-muted-foreground">Card footer</p>
   </div>
 </div>
@@ -128,15 +128,15 @@ Footer section of the card with a muted background and top border.
 ### With Action
 
 ```html
-<div sc-card>
-  <div sc-card-header>
-    <h3 sc-card-title>Notifications</h3>
-    <p sc-card-description>You have 3 unread messages.</p>
-    <div sc-card-action>
-      <button sc-button variant="outline" size="sm">View all</button>
+<div scCard>
+  <div scCardHeader>
+    <h3 scCardTitle>Notifications</h3>
+    <p scCardDescription>You have 3 unread messages.</p>
+    <div scCardAction>
+      <button scButton variant="outline" size="sm">View all</button>
     </div>
   </div>
-  <div sc-card-body>
+  <div scCardBody>
     <p>Content here.</p>
   </div>
 </div>
@@ -145,11 +145,11 @@ Footer section of the card with a muted background and top border.
 ### Small Size
 
 ```html
-<div sc-card size="sm">
-  <div sc-card-header>
-    <h3 sc-card-title>Compact Card</h3>
+<div scCard size="sm">
+  <div scCardHeader>
+    <h3 scCardTitle>Compact Card</h3>
   </div>
-  <div sc-card-body>
+  <div scCardBody>
     <p>Smaller padding and gaps.</p>
   </div>
 </div>

@@ -17,7 +17,7 @@ export const SC_TAG_INPUT = new InjectionToken<ScTagInput>('SC_TAG_INPUT');
 // TagInput
 // ============================================================================
 @Directive({
-  selector: '[sc-tag-input]',
+  selector: '[scTagInput]',
   exportAs: 'scTagInput',
   providers: [{ provide: SC_TAG_INPUT, useExisting: ScTagInput }],
   host: {

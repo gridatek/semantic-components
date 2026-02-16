@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import type { StatCardSize } from './stat-card-types';
 
 @Directive({
-  selector: '[sc-stat-card-label]',
+  selector: '[scStatCardLabel]',
   host: {
     'data-slot': 'stat-card-label',
     '[class]': 'class()',

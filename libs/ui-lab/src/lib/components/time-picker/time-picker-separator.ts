@@ -5,7 +5,7 @@ import { cn } from '@semantic-components/ui';
 // TimePickerSeparator
 // ============================================================================
 @Directive({
-  selector: '[sc-time-picker-separator]',
+  selector: '[scTimePickerSeparator]',
   host: {
     'data-slot': 'time-picker-separator',
     '[class]': 'class()',

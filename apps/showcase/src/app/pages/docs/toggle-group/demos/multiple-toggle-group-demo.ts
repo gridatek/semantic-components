@@ -12,12 +12,12 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
   template: `
     <div class="space-y-4">
       <div
-        sc-toggle-group
+        scToggleGroup
         type="multiple"
         [(value)]="formatting"
         aria-label="Text formatting"
       >
-        <button sc-toggle-group-item value="bold" aria-label="Toggle bold">
+        <button scToggleGroupItem value="bold" aria-label="Toggle bold">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -34,7 +34,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
             <path d="M15 20a4 4 0 0 0 0-8H6v8" />
           </svg>
         </button>
-        <button sc-toggle-group-item value="italic" aria-label="Toggle italic">
+        <button scToggleGroupItem value="italic" aria-label="Toggle italic">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -53,7 +53,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
           </svg>
         </button>
         <button
-          sc-toggle-group-item
+          scToggleGroupItem
           value="underline"
           aria-label="Toggle underline"
         >

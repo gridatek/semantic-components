@@ -40,7 +40,7 @@ import {
   selector: 'app-product-barcode-scanner-demo',
   imports: [ScBarcodeScanner],
   template: \`
-    <sc-barcode-scanner
+    <scBarcodeScanner
       [formats]="productFormats"
       (detected)="onDetected($event)"
       class="max-w-md"

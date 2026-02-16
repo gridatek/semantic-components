@@ -39,11 +39,11 @@ import {
   imports: [ScLink, SiExternalLinkIcon, SiMailIcon],
   template: \`
     <div class="flex flex-wrap items-center gap-4">
-      <a sc-link href="#">
+      <a scLink href="#">
         <svg si-mail-icon></svg>
         Email
       </a>
-      <a sc-link variant="outline" href="#">
+      <a scLink variant="outline" href="#">
         Open
         <svg si-external-link-icon></svg>
       </a>

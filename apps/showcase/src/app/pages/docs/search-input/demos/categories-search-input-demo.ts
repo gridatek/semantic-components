@@ -11,7 +11,7 @@ import type { SearchSuggestion } from '@semantic-components/ui-lab';
   selector: 'app-categories-search-input-demo',
   imports: [ScSearchInput],
   template: `
-    <sc-search-input
+    <scSearchInput
       [suggestions]="categorizedSuggestions"
       placeholder="Search products..."
       (suggestionSelect)="onSelect($event)"

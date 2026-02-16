@@ -6,27 +6,27 @@ A container for grouping a set of controls, such as toggle buttons. Built on `@a
 
 | Component              | Selector                       | Description                                                                        |
 | ---------------------- | ------------------------------ | ---------------------------------------------------------------------------------- |
-| `ScToolbar`            | `div[sc-toolbar]`              | Root toolbar container. Wraps `Toolbar` from `@angular/aria/toolbar`.              |
-| `ScToolbarWidget`      | `button[sc-toolbar-widget]`    | A toggleable button within the toolbar. Wraps `ToolbarWidget`.                     |
-| `ScToolbarWidgetGroup` | `div[sc-toolbar-widget-group]` | Groups related widgets together. Wraps `ToolbarWidgetGroup`.                       |
-| `ScToolbarSeparator`   | `div[sc-toolbar-separator]`    | A visual divider between widget groups. Auto-determines perpendicular orientation. |
+| `ScToolbar`            | `div[scToolbar]`              | Root toolbar container. Wraps `Toolbar` from `@angular/aria/toolbar`.              |
+| `ScToolbarWidget`      | `button[scToolbarWidget]`    | A toggleable button within the toolbar. Wraps `ToolbarWidget`.                     |
+| `ScToolbarWidgetGroup` | `div[scToolbarWidgetGroup]` | Groups related widgets together. Wraps `ToolbarWidgetGroup`.                       |
+| `ScToolbarSeparator`   | `div[scToolbarSeparator]`    | A visual divider between widget groups. Auto-determines perpendicular orientation. |
 
 ## Usage
 
 ```html
-<div sc-toolbar [values]="['bold']">
-  <div sc-toolbar-widget-group>
-    <button sc-toolbar-widget value="bold" aria-label="Bold">B</button>
-    <button sc-toolbar-widget value="italic" aria-label="Italic">I</button>
-    <button sc-toolbar-widget value="underline" aria-label="Underline">U</button>
+<div scToolbar [values]="['bold']">
+  <div scToolbarWidgetGroup>
+    <button scToolbarWidget value="bold" aria-label="Bold">B</button>
+    <button scToolbarWidget value="italic" aria-label="Italic">I</button>
+    <button scToolbarWidget value="underline" aria-label="Underline">U</button>
   </div>
 
-  <div sc-toolbar-separator></div>
+  <div scToolbarSeparator></div>
 
-  <div sc-toolbar-widget-group>
-    <button sc-toolbar-widget value="align-left" aria-label="Align left">L</button>
-    <button sc-toolbar-widget value="align-center" aria-label="Align center">C</button>
-    <button sc-toolbar-widget value="align-right" aria-label="Align right">R</button>
+  <div scToolbarWidgetGroup>
+    <button scToolbarWidget value="align-left" aria-label="Align left">L</button>
+    <button scToolbarWidget value="align-center" aria-label="Align center">C</button>
+    <button scToolbarWidget value="align-right" aria-label="Align right">R</button>
   </div>
 </div>
 ```

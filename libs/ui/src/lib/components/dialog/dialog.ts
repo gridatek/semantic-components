@@ -16,7 +16,7 @@ import { ScDialogProvider } from './dialog-provider';
 type ScDialogState = 'idle' | 'open' | 'closed';
 
 @Component({
-  selector: 'div[sc-dialog]',
+  selector: 'div[scDialog]',
   template: `
     <ng-content />
   `,

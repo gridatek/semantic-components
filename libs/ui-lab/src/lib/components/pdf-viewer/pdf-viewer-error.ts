@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Component({
-  selector: '[sc-pdf-viewer-error]',
+  selector: '[scPdfViewerError]',
   template: `
     @if (pdfViewer.error()) {
       <div [class]="overlayClass()">

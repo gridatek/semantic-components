@@ -26,20 +26,20 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="space-y-3">
-      <div sc-signature-pad #pad="scSignaturePad" class="relative inline-block">
+      <div scSignaturePad #pad="scSignaturePad" class="relative inline-block">
         <canvas
-          sc-signature-pad-canvas
+          scSignaturePadCanvas
           [(value)]="signature"
           [width]="400"
           [height]="200"
           (signatureChange)="onSignatureChange($event)"
         ></canvas>
 
-        <div sc-signature-pad-controls>
-          <button sc-signature-pad-undo>
+        <div scSignaturePadControls>
+          <button scSignaturePadUndo>
             <svg si-undo-icon class="size-4"></svg>
           </button>
-          <button sc-signature-pad-clear>
+          <button scSignaturePadClear>
             <svg si-trash-2-icon class="size-4"></svg>
           </button>
         </div>

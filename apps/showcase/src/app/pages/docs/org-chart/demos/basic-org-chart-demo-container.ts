@@ -36,7 +36,7 @@ import {
   imports: [ScOrgChart],
   template: \`
     <div class="border rounded-lg overflow-auto">
-      <sc-org-chart
+      <scOrgChart
         [data]="orgData()"
         (nodeClick)="onNodeClick($event)"
       />

@@ -31,7 +31,7 @@ import { ScLanguageSelect } from '@semantic-components/ui-lab';
   imports: [ScLanguageSelect],
   template: \`
     <div class="max-w-xs">
-      <sc-language-select [showNativeLabels]="false"></sc-language-select>
+      <scLanguageSelect [showNativeLabels]="false"></sc-language-select>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScDrawerProvider } from './drawer-provider';
 
 @Directive({
-  selector: 'button[sc-drawer-trigger]',
+  selector: 'button[scDrawerTrigger]',
   host: {
     'data-slot': 'drawer-trigger',
     type: 'button',

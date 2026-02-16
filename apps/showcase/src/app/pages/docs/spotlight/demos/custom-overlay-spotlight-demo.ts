@@ -53,13 +53,13 @@ import {
         Highlight Actions
       </button>
 
-      <sc-spotlight #spotlight [overlayOpacity]="0.8" [showClose]="false">
-        <sc-spotlight-title>Quick Actions</sc-spotlight-title>
-        <sc-spotlight-description>
+      <scSpotlight #spotlight [overlayOpacity]="0.8" [showClose]="false">
+        <scSpotlightTitle>Quick Actions</sc-spotlight-title>
+        <scSpotlightDescription>
           Access frequently used actions from here. You can customize which
           actions appear.
         </sc-spotlight-description>
-        <sc-spotlight-actions>
+        <scSpotlightActions>
           <button
             type="button"
             (click)="spotlight.close()"

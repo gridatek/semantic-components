@@ -13,7 +13,7 @@ import { ScDrawerProvider } from './drawer-provider';
 type ScDrawerState = 'idle' | 'open' | 'closed';
 
 @Directive({
-  selector: 'div[sc-drawer]',
+  selector: 'div[scDrawer]',
   host: {
     'data-slot': 'drawer',
     role: 'dialog',

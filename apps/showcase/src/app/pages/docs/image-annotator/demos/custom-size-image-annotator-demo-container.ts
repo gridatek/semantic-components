@@ -31,7 +31,7 @@ import { ScImageAnnotator } from '@semantic-components/ui-lab';
   selector: 'app-custom-size-image-annotator-demo',
   imports: [ScImageAnnotator],
   template: \`
-    <sc-image-annotator [src]="imageSrc()" [width]="400" [height]="300" />
+    <scImageAnnotator [src]="imageSrc()" [width]="400" [height]="300" />
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

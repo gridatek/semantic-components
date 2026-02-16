@@ -36,11 +36,11 @@ interface PlanFormModel {
   selector: 'app-descriptions-radio-group-demo',
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: \`
-    <div sc-radio-group class="gap-4">
-      <label sc-radio-field class="flex items-start space-x-3">
+    <div scRadioGroup class="gap-4">
+      <label scRadioField class="flex items-start space-x-3">
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="free"
           [formField]="planForm.plan"
           id="plan-free"
@@ -53,10 +53,10 @@ interface PlanFormModel {
           </p>
         </div>
       </label>
-      <label sc-radio-field class="flex items-start space-x-3">
+      <label scRadioField class="flex items-start space-x-3">
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="pro"
           [formField]="planForm.plan"
           id="plan-pro"
@@ -69,10 +69,10 @@ interface PlanFormModel {
           </p>
         </div>
       </label>
-      <label sc-radio-field class="flex items-start space-x-3">
+      <label scRadioField class="flex items-start space-x-3">
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="enterprise"
           [formField]="planForm.plan"
           id="plan-enterprise"

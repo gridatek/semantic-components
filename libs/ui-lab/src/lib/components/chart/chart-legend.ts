@@ -9,7 +9,7 @@ import { cn } from '@semantic-components/ui';
 import { CHART_COLORS } from './chart-types';
 
 @Component({
-  selector: '[sc-chart-legend]',
+  selector: '[scChartLegend]',
   template: `
     <div class="flex flex-wrap items-center justify-center gap-4">
       @for (item of items(); track item.label; let i = $index) {

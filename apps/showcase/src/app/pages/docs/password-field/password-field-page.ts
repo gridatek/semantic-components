@@ -50,13 +50,13 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>angular-ts</span>
-            <button sc-copy-button [value]="usageCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>angular-ts</span>
+            <button scCopyButton [value]="usageCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="usageCode"
             language="angular-ts"
           ></div>
@@ -98,15 +98,15 @@ export default class PasswordFieldPage {
   ],
   template: \`
     <div class="space-y-2">
-      <label sc-label for="password">Password</label>
-      <div sc-password-field [(value)]="password">
-        <div sc-password-field-input-group>
+      <label scLabel for="password">Password</label>
+      <div scPasswordField [(value)]="password">
+        <div scPasswordFieldInputGroup>
           <input
-            sc-password-field-input
+            scPasswordFieldInput
             id="password"
             placeholder="Enter password"
           />
-          <button sc-password-field-toggle></button>
+          <button scPasswordFieldToggle></button>
         </div>
       </div>
     </div>

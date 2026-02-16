@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'span[sc-avatar-badge]',
+  selector: 'span[scAvatarBadge]',
   host: {
     'data-slot': 'avatar-badge',
     '[class]': 'class()',

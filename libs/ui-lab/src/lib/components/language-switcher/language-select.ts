@@ -15,8 +15,8 @@ import { ScLanguageService } from './language.service';
  *
  * @example
  * ```html
- * <sc-language-select></sc-language-select>
- * <sc-language-select [showNativeLabels]="true"></sc-language-select>
+ * <scLanguageSelect></sc-language-select>
+ * <scLanguageSelect [showNativeLabels]="true"></sc-language-select>
  * ```
  */
 @Component({

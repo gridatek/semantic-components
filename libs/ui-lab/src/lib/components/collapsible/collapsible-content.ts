@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-collapsible-content]',
+  selector: 'div[scCollapsibleContent]',
   template: `
     <ng-content />
   `,

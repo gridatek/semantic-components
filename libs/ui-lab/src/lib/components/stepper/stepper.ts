@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_STEPPER, StepperOrientation } from './stepper-types';
 
 @Directive({
-  selector: '[sc-stepper]',
+  selector: '[scStepper]',
   providers: [{ provide: SC_STEPPER, useExisting: ScStepper }],
   host: {
     'data-slot': 'stepper',

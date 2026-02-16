@@ -109,7 +109,7 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
               [class.border-primary]="dropIndex() === idx"
               [class.pt-2]="dropIndex() === idx"
             >
-              <sc-kanban-card
+              <scKanbanCard
                 [card]="card"
                 [disabled]="disabled()"
                 [showDelete]="showDeleteCard()"

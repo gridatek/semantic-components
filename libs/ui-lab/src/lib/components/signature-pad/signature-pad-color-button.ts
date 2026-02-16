@@ -10,7 +10,7 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'button[sc-signature-pad-pen-color]',
+  selector: 'button[scSignaturePadPenColor]',
   template: '<ng-content />',
   host: {
     type: 'button',

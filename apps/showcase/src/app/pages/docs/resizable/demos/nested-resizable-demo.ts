@@ -14,25 +14,25 @@ import {
   imports: [ScResizableHandle, ScResizablePanel, ScResizablePanelGroup],
   template: `
     <div
-      sc-resizable-panel-group
+      scResizablePanelGroup
       direction="horizontal"
       class="min-h-[300px] max-w-lg rounded-lg border"
     >
-      <div sc-resizable-panel [defaultSize]="30">
+      <div scResizablePanel [defaultSize]="30">
         <div class="flex h-full items-center justify-center p-6">
           <span class="font-semibold">Sidebar</span>
         </div>
       </div>
-      <div sc-resizable-handle></div>
-      <div sc-resizable-panel [defaultSize]="70">
-        <div sc-resizable-panel-group direction="vertical" class="h-full">
-          <div sc-resizable-panel [defaultSize]="40">
+      <div scResizableHandle></div>
+      <div scResizablePanel [defaultSize]="70">
+        <div scResizablePanelGroup direction="vertical" class="h-full">
+          <div scResizablePanel [defaultSize]="40">
             <div class="flex h-full items-center justify-center p-6">
               <span class="font-semibold">Top</span>
             </div>
           </div>
-          <div sc-resizable-handle></div>
-          <div sc-resizable-panel [defaultSize]="60">
+          <div scResizableHandle></div>
+          <div scResizablePanel [defaultSize]="60">
             <div class="flex h-full items-center justify-center p-6">
               <span class="font-semibold">Bottom</span>
             </div>

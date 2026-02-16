@@ -17,7 +17,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
           [disabled]="true"
           id="disabled-unchecked"
         />
-        <label sc-label for="disabled-unchecked">Disabled unchecked</label>
+        <label scLabel for="disabled-unchecked">Disabled unchecked</label>
       </div>
       <div scCheckboxField>
         <input
@@ -27,7 +27,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
           [disabled]="true"
           id="disabled-checked"
         />
-        <label sc-label for="disabled-checked">Disabled checked</label>
+        <label scLabel for="disabled-checked">Disabled checked</label>
       </div>
     </div>
   `,

@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'span[sc-dock-badge]',
+  selector: 'span[scDockBadge]',
   template: `
     <ng-content />
   `,

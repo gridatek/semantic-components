@@ -66,21 +66,21 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <form>
-      <div sc-card class="w-[350px]">
-        <div sc-card-header>
-          <h3 sc-card-title>Create project</h3>
-          <p sc-card-description>Deploy your new project in one-click.</p>
+      <div scCard class="w-[350px]">
+        <div scCardHeader>
+          <h3 scCardTitle>Create project</h3>
+          <p scCardDescription>Deploy your new project in one-click.</p>
         </div>
-        <div sc-card-body>
-          <div sc-field-group>
-            <div sc-field>
-              <label sc-label>Name</label>
-              <input sc-input placeholder="Name of your project" />
+        <div scCardBody>
+          <div scFieldGroup>
+            <div scField>
+              <label scLabel>Name</label>
+              <input scInput placeholder="Name of your project" />
             </div>
-            <div sc-field>
-              <label sc-label>Framework</label>
-              <div sc-native-select-container>
-                <select sc-native-select>
+            <div scField>
+              <label scLabel>Framework</label>
+              <div scNativeSelectContainer>
+                <select scNativeSelect>
                   <option value="">Select a framework</option>
                   <option value="next">Next.js</option>
                   <option value="angular">Angular</option>
@@ -89,16 +89,16 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                 </select>
                 <svg
                   si-chevron-down-icon
-                  sc-native-select-icon
+                  scNativeSelectIcon
                   aria-hidden="true"
                 ></svg>
               </div>
             </div>
           </div>
         </div>
-        <div sc-card-footer class="flex justify-between">
-          <button sc-button variant="outline">Cancel</button>
-          <button sc-button>Deploy</button>
+        <div scCardFooter class="flex justify-between">
+          <button scButton variant="outline">Cancel</button>
+          <button scButton>Deploy</button>
         </div>
       </div>
     </form>

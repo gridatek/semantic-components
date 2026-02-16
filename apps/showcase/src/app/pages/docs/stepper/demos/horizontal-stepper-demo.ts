@@ -33,34 +33,34 @@ import {
   ],
   template: `
     <div class="rounded-lg border p-6">
-      <div sc-stepper [(activeStep)]="activeStep">
-        <div sc-stepper-list>
-          <div sc-stepper-item [step]="0">
-            <button sc-stepper-trigger></button>
+      <div scStepper [(activeStep)]="activeStep">
+        <div scStepperList>
+          <div scStepperItem [step]="0">
+            <button scStepperTrigger></button>
             <div class="flex flex-col">
-              <span sc-stepper-title>Account</span>
-              <span sc-stepper-description>Create your account</span>
+              <span scStepperTitle>Account</span>
+              <span scStepperDescription>Create your account</span>
             </div>
           </div>
-          <div sc-stepper-separator></div>
-          <div sc-stepper-item [step]="1">
-            <button sc-stepper-trigger></button>
+          <div scStepperSeparator></div>
+          <div scStepperItem [step]="1">
+            <button scStepperTrigger></button>
             <div class="flex flex-col">
-              <span sc-stepper-title>Profile</span>
-              <span sc-stepper-description>Set up your profile</span>
+              <span scStepperTitle>Profile</span>
+              <span scStepperDescription>Set up your profile</span>
             </div>
           </div>
-          <div sc-stepper-separator></div>
-          <div sc-stepper-item [step]="2">
-            <button sc-stepper-trigger></button>
+          <div scStepperSeparator></div>
+          <div scStepperItem [step]="2">
+            <button scStepperTrigger></button>
             <div class="flex flex-col">
-              <span sc-stepper-title>Complete</span>
-              <span sc-stepper-description>Review and submit</span>
+              <span scStepperTitle>Complete</span>
+              <span scStepperDescription>Review and submit</span>
             </div>
           </div>
         </div>
 
-        <div sc-stepper-content [step]="0">
+        <div scStepperContent [step]="0">
           <div class="space-y-4">
             <div class="space-y-2">
               <label class="text-sm font-medium">Email</label>
@@ -81,7 +81,7 @@ import {
           </div>
         </div>
 
-        <div sc-stepper-content [step]="1">
+        <div scStepperContent [step]="1">
           <div class="space-y-4">
             <div class="space-y-2">
               <label class="text-sm font-medium">Full Name</label>
@@ -102,7 +102,7 @@ import {
           </div>
         </div>
 
-        <div sc-stepper-content [step]="2">
+        <div scStepperContent [step]="2">
           <div class="space-y-4">
             <p class="text-sm text-muted-foreground">
               Review your information and click submit to complete registration.
@@ -114,8 +114,8 @@ import {
         </div>
 
         <div class="mt-6 flex justify-between">
-          <button sc-stepper-previous>Previous</button>
-          <button sc-stepper-next>
+          <button scStepperPrevious>Previous</button>
+          <button scStepperNext>
             {{ activeStep() === 2 ? 'Submit' : 'Next' }}
           </button>
         </div>

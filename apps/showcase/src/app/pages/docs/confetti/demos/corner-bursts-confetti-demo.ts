@@ -10,7 +10,7 @@ import { ScConfetti } from '@semantic-components/ui-lab';
   selector: 'app-corner-bursts-confetti-demo',
   imports: [ScConfetti],
   template: `
-    <sc-confetti #confetti />
+    <scConfetti #confetti />
     <button
       class="inline-flex items-center justify-center rounded-md bg-cyan-600 px-4 py-2 text-sm font-medium text-white hover:bg-cyan-700"
       (click)="fire()"

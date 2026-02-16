@@ -12,17 +12,17 @@ import { ScKbd } from '@semantic-components/ui';
     <div class="space-y-2">
       <p class="text-sm text-muted-foreground">
         Press
-        <kbd sc-kbd>⌘</kbd>
-        <kbd sc-kbd>K</kbd>
+        <kbd scKbd>⌘</kbd>
+        <kbd scKbd>K</kbd>
         to open the command palette, or
-        <kbd sc-kbd>Esc</kbd>
+        <kbd scKbd>Esc</kbd>
         to close it.
       </p>
       <p class="text-sm text-muted-foreground">
         Use
-        <kbd sc-kbd>Tab</kbd>
+        <kbd scKbd>Tab</kbd>
         to navigate between fields and
-        <kbd sc-kbd>Enter</kbd>
+        <kbd scKbd>Enter</kbd>
         to submit.
       </p>
     </div>

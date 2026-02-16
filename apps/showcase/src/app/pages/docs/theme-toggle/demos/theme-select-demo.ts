@@ -10,9 +10,9 @@ import { ScThemeField, ScThemeSelect } from '@semantic-components/ui-lab';
   imports: [ScThemeField, ScThemeSelect],
   template: `
     <div class="space-y-4">
-      <div sc-theme-field class="max-w-xs">
+      <div scThemeField class="max-w-xs">
         <label class="text-sm font-medium">Theme</label>
-        <select sc-theme-select>
+        <select scThemeSelect>
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="system">System</option>

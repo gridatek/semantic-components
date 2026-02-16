@@ -60,12 +60,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     RouterLinkActive,
   ],
   template: `
-    <div sc-sidebar-provider class="min-h-svh">
-      <div sc-sidebar side="left" variant="sidebar" collapsible="icon">
-        <div sc-sidebar-header>
-          <ul sc-sidebar-menu>
-            <li sc-sidebar-menu-item>
-              <a sc-sidebar-menu-button size="lg">
+    <div scSidebarProvider class="min-h-svh">
+      <div scSidebar side="left" variant="sidebar" collapsible="icon">
+        <div scSidebarHeader>
+          <ul scSidebarMenu>
+            <li scSidebarMenuItem>
+              <a scSidebarMenuButton size="lg">
                 <div
                   class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"
                 >
@@ -94,17 +94,17 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
               </a>
             </li>
           </ul>
-          <input sc-sidebar-input type="search" placeholder="Search..." />
+          <input scSidebarInput type="search" placeholder="Search..." />
         </div>
 
-        <div sc-sidebar-content>
-          <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Platform</div>
-            <div sc-sidebar-group-content>
-              <ul sc-sidebar-menu>
-                <li sc-sidebar-menu-item>
+        <div scSidebarContent>
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Platform</div>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
+                <li scSidebarMenuItem>
                   <a
-                    sc-sidebar-menu-button
+                    scSidebarMenuButton
                     routerLink="/dashboard"
                     routerLinkActive
                     #dashboardRla="routerLinkActive"
@@ -129,9 +129,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Dashboard</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
+                <li scSidebarMenuItem>
                   <a
-                    sc-sidebar-menu-button
+                    scSidebarMenuButton
                     routerLink="/users"
                     routerLinkActive
                     #usersRla="routerLinkActive"
@@ -155,11 +155,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     </svg>
                     <span>Users</span>
                   </a>
-                  <div sc-sidebar-menu-badge>12</div>
+                  <div scSidebarMenuBadge>12</div>
                 </li>
-                <li sc-sidebar-menu-item>
+                <li scSidebarMenuItem>
                   <a
-                    sc-sidebar-menu-button
+                    scSidebarMenuButton
                     routerLink="/settings"
                     routerLinkActive
                     #settingsRla="routerLinkActive"
@@ -183,7 +183,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     </svg>
                     <span>Settings</span>
                   </a>
-                  <button sc-sidebar-menu-action [showOnHover]="true">
+                  <button scSidebarMenuAction [showOnHover]="true">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -205,11 +205,11 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
             </div>
           </div>
 
-          <div sc-sidebar-separator></div>
+          <div scSidebarSeparator></div>
 
-          <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Projects</div>
-            <button sc-sidebar-group-action>
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Projects</div>
+            <button scSidebarGroupAction>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -225,10 +225,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                 <path d="M12 5v14" />
               </svg>
             </button>
-            <div sc-sidebar-group-content>
-              <ul sc-sidebar-menu>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -247,10 +247,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     </svg>
                     <span>Design Engineering</span>
                   </a>
-                  <ul sc-sidebar-menu-sub>
-                    <li sc-sidebar-menu-sub-item>
+                  <ul scSidebarMenuSub>
+                    <li scSidebarMenuSubItem>
                       <a
-                        sc-sidebar-menu-sub-button
+                        scSidebarMenuSubButton
                         routerLink="/projects/overview"
                         routerLinkActive
                         #overviewRla="routerLinkActive"
@@ -259,9 +259,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                         <span>Overview</span>
                       </a>
                     </li>
-                    <li sc-sidebar-menu-sub-item>
+                    <li scSidebarMenuSubItem>
                       <a
-                        sc-sidebar-menu-sub-button
+                        scSidebarMenuSubButton
                         routerLink="/projects/components"
                         routerLinkActive
                         #componentsRla="routerLinkActive"
@@ -270,9 +270,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                         <span>Components</span>
                       </a>
                     </li>
-                    <li sc-sidebar-menu-sub-item>
+                    <li scSidebarMenuSubItem>
                       <a
-                        sc-sidebar-menu-sub-button
+                        scSidebarMenuSubButton
                         routerLink="/projects/templates"
                         routerLinkActive
                         #templatesRla="routerLinkActive"
@@ -283,9 +283,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     </li>
                   </ul>
                 </li>
-                <li sc-sidebar-menu-item>
+                <li scSidebarMenuItem>
                   <a
-                    sc-sidebar-menu-button
+                    scSidebarMenuButton
                     routerLink="/projects/sales"
                     routerLinkActive
                     #salesRla="routerLinkActive"
@@ -310,9 +310,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Sales & Marketing</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
+                <li scSidebarMenuItem>
                   <a
-                    sc-sidebar-menu-button
+                    scSidebarMenuButton
                     routerLink="/projects/travel"
                     routerLinkActive
                     #travelRla="routerLinkActive"
@@ -341,33 +341,33 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
             </div>
           </div>
 
-          <div sc-sidebar-separator></div>
+          <div scSidebarSeparator></div>
 
-          <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Loading Example</div>
-            <div sc-sidebar-group-content>
-              <ul sc-sidebar-menu>
-                <li sc-sidebar-menu-item>
-                  <div sc-sidebar-menu-skeleton [showIcon]="true"></div>
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Loading Example</div>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
+                <li scSidebarMenuItem>
+                  <div scSidebarMenuSkeleton [showIcon]="true"></div>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <div sc-sidebar-menu-skeleton [showIcon]="true"></div>
+                <li scSidebarMenuItem>
+                  <div scSidebarMenuSkeleton [showIcon]="true"></div>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <div sc-sidebar-menu-skeleton></div>
+                <li scSidebarMenuItem>
+                  <div scSidebarMenuSkeleton></div>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div sc-sidebar-separator></div>
+          <div scSidebarSeparator></div>
 
-          <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Resources</div>
-            <div sc-sidebar-group-content>
-              <ul sc-sidebar-menu>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Resources</div>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -386,8 +386,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Documentation</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -406,8 +406,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Help Center</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -426,8 +426,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Feedback</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -451,14 +451,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
             </div>
           </div>
 
-          <div sc-sidebar-separator></div>
+          <div scSidebarSeparator></div>
 
-          <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Integrations</div>
-            <div sc-sidebar-group-content>
-              <ul sc-sidebar-menu>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Integrations</div>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -478,8 +478,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>GitHub</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -497,8 +497,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Email</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -517,8 +517,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Slack</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -539,8 +539,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Website</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -557,8 +557,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Jira</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -581,14 +581,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
             </div>
           </div>
 
-          <div sc-sidebar-separator></div>
+          <div scSidebarSeparator></div>
 
-          <div sc-sidebar-group>
-            <div sc-sidebar-group-label>Account</div>
-            <div sc-sidebar-group-content>
-              <ul sc-sidebar-menu>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+          <div scSidebarGroup>
+            <div scSidebarGroupLabel>Account</div>
+            <div scSidebarGroupContent>
+              <ul scSidebarMenu>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -606,8 +606,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Profile</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -625,8 +625,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Security</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -644,8 +644,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Notifications</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -663,8 +663,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                     <span>Billing</span>
                   </a>
                 </li>
-                <li sc-sidebar-menu-item>
-                  <a sc-sidebar-menu-button>
+                <li scSidebarMenuItem>
+                  <a scSidebarMenuButton>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -688,10 +688,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           </div>
         </div>
 
-        <div sc-sidebar-footer>
-          <ul sc-sidebar-menu>
-            <li sc-sidebar-menu-item>
-              <a sc-sidebar-menu-button size="lg">
+        <div scSidebarFooter>
+          <ul scSidebarMenu>
+            <li scSidebarMenuItem>
+              <a scSidebarMenuButton size="lg">
                 <div
                   class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-accent-foreground"
                 >
@@ -721,14 +721,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           </ul>
         </div>
 
-        <button sc-sidebar-rail></button>
+        <button scSidebarRail></button>
       </div>
 
-      <main sc-sidebar-inset>
+      <main scSidebarInset>
         <header
           class="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4"
         >
-          <button sc-sidebar-trigger>
+          <button scSidebarTrigger>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

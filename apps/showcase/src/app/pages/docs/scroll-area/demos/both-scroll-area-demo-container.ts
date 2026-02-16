@@ -30,7 +30,7 @@ import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
   selector: 'app-both-scroll-area-demo',
   imports: [ScScrollArea, ScScrollBar],
   template: \`
-    <div sc-scroll-area class="h-72 w-72 rounded-md border">
+    <div scScrollArea class="h-72 w-72 rounded-md border">
       <div class="p-4" style="width: 500px;">
         <h4 class="mb-4 text-sm font-medium leading-none">
           Content with both scrollbars
@@ -50,8 +50,8 @@ import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
           }
         </div>
       </div>
-      <div sc-scroll-bar orientation="vertical"></div>
-      <div sc-scroll-bar orientation="horizontal"></div>
+      <div scScrollBar orientation="vertical"></div>
+      <div scScrollBar orientation="horizontal"></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

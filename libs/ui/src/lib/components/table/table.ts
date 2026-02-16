@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'table[sc-table]',
+  selector: 'table[scTable]',
   host: {
     'data-slot': 'table',
     '[class]': 'class()',

@@ -16,19 +16,19 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Text Marquee
 
 ```html
-<sc-marquee-text text="Breaking news: This is scrolling text!" [duration]="15" />
+<scMarqueeText text="Breaking news: This is scrolling text!" [duration]="15" />
 ```
 
 ### Content Marquee
 
 ```html
-<sc-marquee [duration]="30" [gap]="24">
+<scMarquee [duration]="30" [gap]="24">
   @for (item of items; track item) {
-  <div sc-marquee-item>{{ item }}</div>
+  <div scMarqueeItem>{{ item }}</div>
   }
-  <ng-container sc-marquee-clone>
+  <ng-container scMarqueeClone>
     @for (item of items; track item) {
-    <div sc-marquee-item>{{ item }}</div>
+    <div scMarqueeItem>{{ item }}</div>
     }
   </ng-container>
 </sc-marquee>
@@ -37,7 +37,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Vertical Marquee
 
 ```html
-<sc-marquee direction="vertical" [duration]="20">
+<scMarquee direction="vertical" [duration]="20">
   <!-- items -->
 </sc-marquee>
 ```
@@ -45,7 +45,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Reversed Direction
 
 ```html
-<sc-marquee [reverse]="true">
+<scMarquee [reverse]="true">
   <!-- items -->
 </sc-marquee>
 ```
@@ -99,13 +99,13 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Logo Carousel
 
 ```html
-<sc-marquee [duration]="30" [gap]="48">
+<scMarquee [duration]="30" [gap]="48">
   @for (logo of logos; track logo) {
-  <div sc-marquee-item class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
+  <div scMarqueeItem class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
   }
-  <ng-container sc-marquee-clone>
+  <ng-container scMarqueeClone>
     @for (logo of logos; track logo) {
-    <div sc-marquee-item class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
+    <div scMarqueeItem class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
     }
   </ng-container>
 </sc-marquee>
@@ -114,14 +114,14 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Testimonials
 
 ```html
-<sc-marquee [duration]="40" [gap]="24">
+<scMarquee [duration]="40" [gap]="24">
   @for (testimonial of testimonials; track testimonial.name) {
-  <div sc-marquee-item class="w-80 p-4 border rounded">
+  <div scMarqueeItem class="w-80 p-4 border rounded">
     <p>"{{ testimonial.quote }}"</p>
     <p class="font-medium">{{ testimonial.name }}</p>
   </div>
   }
-  <ng-container sc-marquee-clone>
+  <ng-container scMarqueeClone>
     <!-- duplicate content -->
   </ng-container>
 </sc-marquee>
@@ -131,11 +131,11 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 
 ```html
 <div class="h-48 overflow-hidden">
-  <sc-marquee direction="vertical" [duration]="20">
+  <scMarquee direction="vertical" [duration]="20">
     @for (notification of notifications; track notification.id) {
-    <div sc-marquee-item class="p-3 border rounded">{{ notification.icon }} {{ notification.title }}</div>
+    <div scMarqueeItem class="p-3 border rounded">{{ notification.icon }} {{ notification.title }}</div>
     }
-    <ng-container sc-marquee-clone>
+    <ng-container scMarqueeClone>
       <!-- duplicate content -->
     </ng-container>
   </sc-marquee>
@@ -146,9 +146,9 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 
 ```html
 <div class="space-y-2">
-  <sc-marquee [duration]="30"><!-- row 1 --></sc-marquee>
-  <sc-marquee [duration]="25" [reverse]="true"><!-- row 2 --></sc-marquee>
-  <sc-marquee [duration]="35"><!-- row 3 --></sc-marquee>
+  <scMarquee [duration]="30"><!-- row 1 --></sc-marquee>
+  <scMarquee [duration]="25" [reverse]="true"><!-- row 2 --></sc-marquee>
+  <scMarquee [duration]="35"><!-- row 3 --></sc-marquee>
 </div>
 ```
 
@@ -156,13 +156,13 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 
 ```html
 <!-- Fast -->
-<sc-marquee-text text="Fast" [duration]="10" />
+<scMarqueeText text="Fast" [duration]="10" />
 
 <!-- Normal -->
-<sc-marquee-text text="Normal" [duration]="20" />
+<scMarqueeText text="Normal" [duration]="20" />
 
 <!-- Slow -->
-<sc-marquee-text text="Slow" [duration]="40" />
+<scMarqueeText text="Slow" [duration]="40" />
 ```
 
 ## How It Works

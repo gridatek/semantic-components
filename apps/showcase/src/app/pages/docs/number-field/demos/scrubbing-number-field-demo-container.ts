@@ -53,32 +53,32 @@ import { ScLabel } from '@semantic-components/ui';
   template: \`
     <div class="space-y-6">
       <div
-        sc-number-field
+        scNumberField
         [(value)]="opacity"
         [min]="0"
         [max]="100"
         [scrubSpeed]="0.5"
       >
-        <div sc-number-field-scrub-area>
-          <label sc-label>Opacity (%)</label>
+        <div scNumberFieldScrubArea>
+          <label scLabel>Opacity (%)</label>
         </div>
 
-        <div sc-number-field-group>
-          <button sc-number-field-decrement></button>
-          <input sc-number-field-input />
-          <button sc-number-field-increment></button>
+        <div scNumberFieldGroup>
+          <button scNumberFieldDecrement></button>
+          <input scNumberFieldInput />
+          <button scNumberFieldIncrement></button>
         </div>
       </div>
 
-      <div sc-number-field [(value)]="rotation" [min]="0" [max]="360">
-        <div sc-number-field-scrub-area>
-          <label sc-label>Rotation (deg)</label>
+      <div scNumberField [(value)]="rotation" [min]="0" [max]="360">
+        <div scNumberFieldScrubArea>
+          <label scLabel>Rotation (deg)</label>
         </div>
 
-        <div sc-number-field-group>
-          <button sc-number-field-decrement></button>
-          <input sc-number-field-input />
-          <button sc-number-field-increment></button>
+        <div scNumberFieldGroup>
+          <button scNumberFieldDecrement></button>
+          <input scNumberFieldInput />
+          <button scNumberFieldIncrement></button>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-signature-pad-controls]',
+  selector: 'div[scSignaturePadControls]',
   template: '<ng-content />',
   host: {
     'data-slot': 'signature-pad-controls',

@@ -4,7 +4,7 @@ import { cn } from '@semantic-components/ui';
 export const SC_RADIO = 'SC_RADIO';
 
 @Directive({
-  selector: 'input[type="radio"][sc-radio]',
+  selector: 'input[type="radio"][scRadio]',
   host: {
     'data-slot': 'radio',
     '[class]': 'class()',

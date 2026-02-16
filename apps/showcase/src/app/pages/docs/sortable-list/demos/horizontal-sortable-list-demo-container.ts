@@ -37,15 +37,15 @@ import {
   template: \`
     <div class="max-w-lg">
       <div
-        sc-sortable-list
+        scSortableList
         [(items)]="items"
         orientation="horizontal"
         class="gap-3 flex-wrap"
       >
-        <div sc-sortable-overlay></div>
+        <div scSortableOverlay></div>
         @for (item of items(); track item; let i = $index) {
           <div
-            sc-sortable-item
+            scSortableItem
             [index]="i"
             [item]="item"
             class="flex items-center justify-center size-16 rounded-md border bg-background text-sm font-medium"

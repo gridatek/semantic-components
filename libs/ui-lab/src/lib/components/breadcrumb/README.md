@@ -15,18 +15,18 @@ Displays the path to the current resource using a hierarchy of links.
 ## Usage
 
 ```html
-<nav sc-breadcrumb>
-  <ol sc-breadcrumb-list>
-    <li sc-breadcrumb-item>
-      <a sc-breadcrumb-link href="/">Home</a>
+<nav scBreadcrumb>
+  <ol scBreadcrumbList>
+    <li scBreadcrumbItem>
+      <a scBreadcrumbLink href="/">Home</a>
     </li>
-    <li sc-breadcrumb-separator></li>
-    <li sc-breadcrumb-item>
-      <a sc-breadcrumb-link href="/components">Components</a>
+    <li scBreadcrumbSeparator></li>
+    <li scBreadcrumbItem>
+      <a scBreadcrumbLink href="/components">Components</a>
     </li>
-    <li sc-breadcrumb-separator></li>
-    <li sc-breadcrumb-item>
-      <span sc-breadcrumb-page>Breadcrumb</span>
+    <li scBreadcrumbSeparator></li>
+    <li scBreadcrumbItem>
+      <span scBreadcrumbPage>Breadcrumb</span>
     </li>
   </ol>
 </nav>
@@ -37,18 +37,18 @@ Displays the path to the current resource using a hierarchy of links.
 For long paths, use the ellipsis to indicate collapsed items:
 
 ```html
-<nav sc-breadcrumb>
-  <ol sc-breadcrumb-list>
-    <li sc-breadcrumb-item>
-      <a sc-breadcrumb-link href="/">Home</a>
+<nav scBreadcrumb>
+  <ol scBreadcrumbList>
+    <li scBreadcrumbItem>
+      <a scBreadcrumbLink href="/">Home</a>
     </li>
-    <li sc-breadcrumb-separator></li>
-    <li sc-breadcrumb-item>
-      <span sc-breadcrumb-ellipsis></span>
+    <li scBreadcrumbSeparator></li>
+    <li scBreadcrumbItem>
+      <span scBreadcrumbEllipsis></span>
     </li>
-    <li sc-breadcrumb-separator></li>
-    <li sc-breadcrumb-item>
-      <span sc-breadcrumb-page>Current Page</span>
+    <li scBreadcrumbSeparator></li>
+    <li scBreadcrumbItem>
+      <span scBreadcrumbPage>Current Page</span>
     </li>
   </ol>
 </nav>
@@ -59,7 +59,7 @@ For long paths, use the ellipsis to indicate collapsed items:
 Pass content to the separator to customize it:
 
 ```html
-<li sc-breadcrumb-separator>/</li>
+<li scBreadcrumbSeparator>/</li>
 ```
 
 ## With RouterLink
@@ -67,8 +67,8 @@ Pass content to the separator to customize it:
 Use Angular's routerLink for navigation:
 
 ```html
-<li sc-breadcrumb-item>
-  <a sc-breadcrumb-link routerLink="/components">Components</a>
+<li scBreadcrumbItem>
+  <a scBreadcrumbLink routerLink="/components">Components</a>
 </li>
 ```
 

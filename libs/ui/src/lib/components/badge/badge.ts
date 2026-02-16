@@ -27,7 +27,7 @@ const badgeVariants = cva(
 export type ScBadgeVariants = VariantProps<typeof badgeVariants>;
 
 @Directive({
-  selector: 'div[sc-badge], span[sc-badge]',
+  selector: 'div[scBadge], span[scBadge]',
   host: {
     'data-slot': 'badge',
     '[class]': 'class()',

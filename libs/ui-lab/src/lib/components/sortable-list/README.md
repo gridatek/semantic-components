@@ -5,9 +5,9 @@ A drag and drop list component for reordering items.
 ## Usage
 
 ```html
-<div sc-sortable-list [(items)]="items" class="gap-2">
+<div scSortableList [(items)]="items" class="gap-2">
   @for (item of items(); track item; let i = $index) {
-  <div sc-sortable-item [index]="i" [item]="item" class="p-3 border rounded-md">{{ item }}</div>
+  <div scSortableItem [index]="i" [item]="item" class="p-3 border rounded-md">{{ item }}</div>
   }
 </div>
 ```
@@ -18,7 +18,7 @@ A drag and drop list component for reordering items.
 
 Root container that manages sortable state.
 
-**Selector:** `[sc-sortable-list]`
+**Selector:** `[scSortableList]`
 
 **Inputs:**
 
@@ -55,7 +55,7 @@ Root container that manages sortable state.
 
 Individual draggable item.
 
-**Selector:** `[sc-sortable-item]`
+**Selector:** `[scSortableItem]`
 
 **Inputs:**
 
@@ -76,7 +76,7 @@ Individual draggable item.
 
 Optional drag handle (use with `handleOnly`).
 
-**Selector:** `[sc-sortable-handle]`
+**Selector:** `[scSortableHandle]`
 
 **Inputs:**
 
@@ -88,7 +88,7 @@ Optional drag handle (use with `handleOnly`).
 
 Optional overlay during drag (prevents interaction with other elements).
 
-**Selector:** `[sc-sortable-overlay]`
+**Selector:** `[scSortableOverlay]`
 
 ## Types
 
@@ -107,9 +107,9 @@ interface SortableEvent<T> {
 ### Basic
 
 ```html
-<div sc-sortable-list [(items)]="items" class="gap-2">
+<div scSortableList [(items)]="items" class="gap-2">
   @for (item of items(); track item; let i = $index) {
-  <div sc-sortable-item [index]="i" [item]="item" class="p-3 border rounded-md">{{ item }}</div>
+  <div scSortableItem [index]="i" [item]="item" class="p-3 border rounded-md">{{ item }}</div>
   }
 </div>
 ```
@@ -117,10 +117,10 @@ interface SortableEvent<T> {
 ### With Drag Handle
 
 ```html
-<div sc-sortable-list [(items)]="items" [handleOnly]="true" class="gap-2">
+<div scSortableList [(items)]="items" [handleOnly]="true" class="gap-2">
   @for (item of items(); track item; let i = $index) {
-  <div sc-sortable-item [index]="i" [item]="item" class="flex items-center gap-3 p-3 border">
-    <span sc-sortable-handle></span>
+  <div scSortableItem [index]="i" [item]="item" class="flex items-center gap-3 p-3 border">
+    <span scSortableHandle></span>
     <span>{{ item }}</span>
   </div>
   }
@@ -130,9 +130,9 @@ interface SortableEvent<T> {
 ### Horizontal Layout
 
 ```html
-<div sc-sortable-list [(items)]="items" orientation="horizontal" class="gap-3">
+<div scSortableList [(items)]="items" orientation="horizontal" class="gap-3">
   @for (item of items(); track item; let i = $index) {
-  <div sc-sortable-item [index]="i" [item]="item" class="p-4 border rounded-md">{{ item }}</div>
+  <div scSortableItem [index]="i" [item]="item" class="p-4 border rounded-md">{{ item }}</div>
   }
 </div>
 ```
@@ -140,11 +140,11 @@ interface SortableEvent<T> {
 ### Task List
 
 ```html
-<div sc-sortable-list [(items)]="tasks" [handleOnly]="true" class="gap-1">
-  <div sc-sortable-overlay></div>
+<div scSortableList [(items)]="tasks" [handleOnly]="true" class="gap-1">
+  <div scSortableOverlay></div>
   @for (task of tasks(); track task.id; let i = $index) {
-  <div sc-sortable-item [index]="i" [item]="task" class="flex items-center gap-3 p-3 border">
-    <span sc-sortable-handle></span>
+  <div scSortableItem [index]="i" [item]="task" class="flex items-center gap-3 p-3 border">
+    <span scSortableHandle></span>
     <input type="checkbox" [checked]="task.completed" />
     <span>{{ task.title }}</span>
   </div>
@@ -155,7 +155,7 @@ interface SortableEvent<T> {
 ### With Sort Events
 
 ```html
-<div sc-sortable-list [(items)]="items" (sortStart)="onSortStart($event)" (sortChange)="onSortChange($event)" (sortEnd)="onSortEnd($event)">...</div>
+<div scSortableList [(items)]="items" (sortStart)="onSortStart($event)" (sortChange)="onSortChange($event)" (sortEnd)="onSortEnd($event)">...</div>
 ```
 
 ```typescript
@@ -167,9 +167,9 @@ onSortChange(event: SortableEvent<Item>) {
 ### Disabled
 
 ```html
-<div sc-sortable-list [items]="items" [disabled]="true">
+<div scSortableList [items]="items" [disabled]="true">
   @for (item of items; track item; let i = $index) {
-  <div sc-sortable-item [index]="i" [item]="item" class="p-3 border opacity-60">{{ item }}</div>
+  <div scSortableItem [index]="i" [item]="item" class="p-3 border opacity-60">{{ item }}</div>
   }
 </div>
 ```
@@ -177,7 +177,7 @@ onSortChange(event: SortableEvent<Item>) {
 ### Custom Handle Icon
 
 ```html
-<span sc-sortable-handle>
+<span scSortableHandle>
   <svg class="size-5"><!-- custom icon --></svg>
 </span>
 ```
@@ -185,10 +185,10 @@ onSortChange(event: SortableEvent<Item>) {
 ### Playlist Example
 
 ```html
-<div sc-sortable-list [(items)]="songs" [handleOnly]="true" class="divide-y">
+<div scSortableList [(items)]="songs" [handleOnly]="true" class="divide-y">
   @for (song of songs(); track song.id; let i = $index) {
-  <div sc-sortable-item [index]="i" [item]="song" class="flex items-center gap-4 p-3">
-    <span sc-sortable-handle></span>
+  <div scSortableItem [index]="i" [item]="song" class="flex items-center gap-4 p-3">
+    <span scSortableHandle></span>
     <span class="text-muted-foreground">{{ i + 1 }}</span>
     <div class="flex-1">
       <p class="font-medium">{{ song.title }}</p>

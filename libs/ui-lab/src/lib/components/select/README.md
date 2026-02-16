@@ -14,33 +14,33 @@ A set of components for building accessible select dropdowns following the Singl
 
 | Component               | Selector                        | Responsibility                                                  |
 | ----------------------- | ------------------------------- | --------------------------------------------------------------- |
-| `ScSelect`              | `div[sc-select]`                | Root container, wraps `Combobox` from `@angular/aria`           |
-| `ScSelectTrigger`       | `div[sc-select-trigger]`        | Trigger button styling, exposes overlay origin                  |
-| `ScSelectInput`         | `input[sc-select-input]`        | Hidden input, wraps `ComboboxInput` from `@angular/aria`        |
-| `ScSelectValue`         | `span[sc-select-value]`         | Display selected value with styling                             |
-| `ScSelectIcon`          | `svg[sc-select-icon]`           | Chevron icon styling (use with `@semantic-icons/lucide-icons`)  |
-| `ScSelectPortal`        | `div[sc-select-portal]`         | Overlay positioning & combobox popup container (infrastructure) |
-| `ScSelectList`          | `div[sc-select-list]`           | Content container, wraps `Listbox` from `@angular/aria`         |
-| `ScSelectItem`          | `div[sc-select-item]`           | Option item styling, wraps `Option` from `@angular/aria`        |
-| `ScSelectItemIndicator` | `svg[sc-select-item-indicator]` | Checkmark icon for selected state                               |
+| `ScSelect`              | `div[scSelect]`                | Root container, wraps `Combobox` from `@angular/aria`           |
+| `ScSelectTrigger`       | `div[scSelectTrigger]`        | Trigger button styling, exposes overlay origin                  |
+| `ScSelectInput`         | `input[scSelectInput]`        | Hidden input, wraps `ComboboxInput` from `@angular/aria`        |
+| `ScSelectValue`         | `span[scSelectValue]`         | Display selected value with styling                             |
+| `ScSelectIcon`          | `svg[scSelectIcon]`           | Chevron icon styling (use with `@semantic-icons/lucide-icons`)  |
+| `ScSelectPortal`        | `div[scSelectPortal]`         | Overlay positioning & combobox popup container (infrastructure) |
+| `ScSelectList`          | `div[scSelectList]`           | Content container, wraps `Listbox` from `@angular/aria`         |
+| `ScSelectItem`          | `div[scSelectItem]`           | Option item styling, wraps `Option` from `@angular/aria`        |
+| `ScSelectItemIndicator` | `svg[scSelectItemIndicator]` | Checkmark icon for selected state                               |
 
 ## Basic Usage
 
 ### Template
 
 ```html
-<div sc-select>
-  <div sc-select-trigger>
-    <span sc-select-value>{{ displayValue() }}</span>
-    <input sc-select-input aria-label="Select" placeholder="Select an option" />
-    <svg sc-select-icon si-chevron-down-icon aria-hidden="true"></svg>
+<div scSelect>
+  <div scSelectTrigger>
+    <span scSelectValue>{{ displayValue() }}</span>
+    <input scSelectInput aria-label="Select" placeholder="Select an option" />
+    <svg scSelectIcon si-chevron-down-icon aria-hidden="true"></svg>
   </div>
-  <div sc-select-portal>
-    <div sc-select-list>
+  <div scSelectPortal>
+    <div scSelectList>
       @for (option of options; track option.value) {
-      <div sc-select-item [value]="option.value" [label]="option.label">
+      <div scSelectItem [value]="option.value" [label]="option.label">
         {{ option.label }}
-        <svg sc-select-item-indicator si-check-icon aria-hidden="true"></svg>
+        <svg scSelectItemIndicator si-check-icon aria-hidden="true"></svg>
       </div>
       }
     </div>
@@ -119,11 +119,11 @@ The select components are built with accessibility in mind:
 
 ```html
 <!-- Always provide an accessible label -->
-<input sc-select-input aria-label="Select a fruit" />
+<input scSelectInput aria-label="Select a fruit" />
 
 <!-- Hide decorative icons from screen readers -->
-<svg sc-select-icon si-chevron-down-icon aria-hidden="true"></svg>
-<svg sc-select-item-indicator si-check-icon aria-hidden="true"></svg>
+<svg scSelectIcon si-chevron-down-icon aria-hidden="true"></svg>
+<svg scSelectItemIndicator si-check-icon aria-hidden="true"></svg>
 ```
 
 ## API Reference
@@ -148,8 +148,8 @@ The select components are built with accessibility in mind:
 All components accept a `class` input for custom styling:
 
 ```html
-<div sc-select class="w-64">
-  <div sc-select-trigger class="bg-slate-100">...</div>
+<div scSelect class="w-64">
+  <div scSelectTrigger class="bg-slate-100">...</div>
 </div>
 ```
 

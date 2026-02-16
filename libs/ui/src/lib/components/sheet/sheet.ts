@@ -16,7 +16,7 @@ import { ScSheetProvider } from './sheet-provider';
 type ScSheetState = 'idle' | 'open' | 'closed';
 
 @Component({
-  selector: 'div[sc-sheet]',
+  selector: 'div[scSheet]',
   template: `
     <ng-content />
   `,

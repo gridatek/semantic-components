@@ -16,7 +16,7 @@ import { ScHoverCardProvider } from './hover-card-provider';
 type ScHoverCardState = 'open' | 'closed';
 
 @Component({
-  selector: 'div[sc-hover-card]',
+  selector: 'div[scHoverCard]',
   template: `
     <ng-content />
   `,

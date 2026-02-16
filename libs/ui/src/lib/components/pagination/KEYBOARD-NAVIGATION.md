@@ -39,7 +39,7 @@ All pagination components support full keyboard navigation following WAI-ARIA be
 **Focus indicator**: Visible focus ring using `focus-visible:ring-2`
 
 ```html
-<button sc-pagination-link [page]="2">2</button>
+<button scPaginationLink [page]="2">2</button>
 ```
 
 ### ScPaginationPrevious / ScPaginationNext
@@ -55,7 +55,7 @@ All pagination components support full keyboard navigation following WAI-ARIA be
 **Disabled state**: When disabled, element is focusable but activation does nothing
 
 ```html
-<button sc-pagination-previous [disabled]="currentPage() === 1">Previous</button>
+<button scPaginationPrevious [disabled]="currentPage() === 1">Previous</button>
 ```
 
 ### ScPaginationFirst / ScPaginationLast
@@ -71,7 +71,7 @@ All pagination components support full keyboard navigation following WAI-ARIA be
 **Disabled state**: When disabled, element is focusable but activation does nothing
 
 ```html
-<button sc-pagination-first [disabled]="currentPage() === 1">First</button>
+<button scPaginationFirst [disabled]="currentPage() === 1">First</button>
 ```
 
 ### ScPaginationPageSizeSelect
@@ -91,7 +91,7 @@ All pagination components support full keyboard navigation following WAI-ARIA be
 **Focus indicator**: Visible focus ring using `focus-visible:ring-2`
 
 ```html
-<select sc-pagination-page-size-select></select>
+<select scPaginationPageSizeSelect></select>
 ```
 
 ## Focus Management
@@ -127,7 +127,7 @@ Disabled controls remain in the tab order with `aria-disabled="true"` but do not
 ### Navigation Container
 
 ```html
-<nav sc-pagination role="navigation" aria-label="pagination"></nav>
+<nav scPagination role="navigation" aria-label="pagination"></nav>
 ```
 
 - **role="navigation"** - Identifies the pagination region
@@ -136,7 +136,7 @@ Disabled controls remain in the tab order with `aria-disabled="true"` but do not
 ### Active Page
 
 ```html
-<button sc-pagination-link [isActive]="true" aria-current="page">2</button>
+<button scPaginationLink [isActive]="true" aria-current="page">2</button>
 ```
 
 - **aria-current="page"** - Indicates the current page
@@ -144,13 +144,13 @@ Disabled controls remain in the tab order with `aria-disabled="true"` but do not
 ### Navigation Buttons
 
 ```html
-<button sc-pagination-previous aria-label="Go to previous page">Previous</button>
+<button scPaginationPrevious aria-label="Go to previous page">Previous</button>
 
-<button sc-pagination-next aria-label="Go to next page">Next</button>
+<button scPaginationNext aria-label="Go to next page">Next</button>
 
-<button sc-pagination-first aria-label="Go to first page">First</button>
+<button scPaginationFirst aria-label="Go to first page">First</button>
 
-<button sc-pagination-last aria-label="Go to last page">Last</button>
+<button scPaginationLast aria-label="Go to last page">Last</button>
 ```
 
 - **aria-label** - Provides clear button purpose for screen readers
@@ -158,7 +158,7 @@ Disabled controls remain in the tab order with `aria-disabled="true"` but do not
 ### Disabled Controls
 
 ```html
-<button sc-pagination-previous [disabled]="true" aria-disabled="true">Previous</button>
+<button scPaginationPrevious [disabled]="true" aria-disabled="true">Previous</button>
 ```
 
 - **aria-disabled="true"** - Announces disabled state to screen readers
@@ -167,7 +167,7 @@ Disabled controls remain in the tab order with `aria-disabled="true"` but do not
 ### Ellipsis (Non-interactive)
 
 ```html
-<span sc-pagination-ellipsis aria-hidden="true">
+<span scPaginationEllipsis aria-hidden="true">
   <svg><!-- dots icon --></svg>
   <span class="sr-only">More pages</span>
 </span>
@@ -184,10 +184,10 @@ Prefer `<button>` over `<a>` for client-side navigation:
 
 ```html
 <!-- Good: Button for client-side navigation -->
-<button sc-pagination-link [page]="2">2</button>
+<button scPaginationLink [page]="2">2</button>
 
 <!-- Also good: Anchor for server-side navigation -->
-<a sc-pagination-link href="/page/2">2</a>
+<a scPaginationLink href="/page/2">2</a>
 ```
 
 ### Provide Clear Labels
@@ -196,13 +196,13 @@ Always provide text labels for navigation controls:
 
 ```html
 <!-- Good: Text label provided -->
-<button sc-pagination-previous>
+<button scPaginationPrevious>
   <svg><!-- icon --></svg>
   <span>Previous</span>
 </button>
 
 <!-- Avoid: Icon only -->
-<button sc-pagination-previous>
+<button scPaginationPrevious>
   <svg><!-- icon --></svg>
 </button>
 ```
@@ -210,7 +210,7 @@ Always provide text labels for navigation controls:
 If you must use icon-only, add `aria-label`:
 
 ```html
-<button sc-pagination-previous aria-label="Go to previous page">
+<button scPaginationPrevious aria-label="Go to previous page">
   <svg><!-- icon --></svg>
 </button>
 ```
@@ -246,13 +246,13 @@ Wrap the select with a visible label:
 <!-- Good: Visible label associated -->
 <div class="flex items-center gap-2">
   <span class="text-sm text-muted-foreground">Items per page:</span>
-  <sc-pagination-page-size-select />
+  <scPaginationPageSizeSelect />
 </div>
 
 <!-- Better: Using label element -->
 <label class="flex items-center gap-2">
   <span class="text-sm text-muted-foreground">Items per page:</span>
-  <sc-pagination-page-size-select />
+  <scPaginationPageSizeSelect />
 </label>
 ```
 
@@ -278,7 +278,7 @@ export class MyComponent {
 ```
 
 ```html
-<nav sc-pagination [attr.aria-busy]="loading()" [currentPage]="currentPage()" (pageChange)="onPageChange($event)">
+<nav scPagination [attr.aria-busy]="loading()" [currentPage]="currentPage()" (pageChange)="onPageChange($event)">
   <!-- pagination content -->
 </nav>
 ```
@@ -306,7 +306,7 @@ test('pagination keyboard navigation', async ({ page }) => {
 
   // Test Tab navigation
   await page.keyboard.press('Tab');
-  await expect(page.locator('[sc-pagination-previous]')).toBeFocused();
+  await expect(page.locator('[scPaginationPrevious]')).toBeFocused();
 
   // Test Enter activation
   await page.keyboard.press('Enter');

@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'fieldset[sc-fieldset]',
+  selector: 'fieldset[scFieldset]',
   host: {
     'data-slot': 'fieldset',
     '[class]': 'class()',

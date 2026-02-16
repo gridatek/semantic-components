@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-menu-separator]',
+  selector: 'div[scMenuSeparator]',
   host: {
     role: 'separator',
     'aria-orientation': 'horizontal',

@@ -10,11 +10,11 @@ import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui';
   imports: [ScAvatar, ScAvatarFallback],
   template: `
     <div class="flex items-center gap-4">
-      <span sc-avatar>
-        <span sc-avatar-fallback>JD</span>
+      <span scAvatar>
+        <span scAvatarFallback>JD</span>
       </span>
-      <span sc-avatar>
-        <span sc-avatar-fallback>AB</span>
+      <span scAvatar>
+        <span scAvatarFallback>AB</span>
       </span>
     </div>
   `,

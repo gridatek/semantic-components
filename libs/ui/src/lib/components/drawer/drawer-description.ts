@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'p[sc-drawer-description]',
+  selector: 'p[scDrawerDescription]',
   host: {
     'data-slot': 'drawer-description',
     '[class]': 'class()',

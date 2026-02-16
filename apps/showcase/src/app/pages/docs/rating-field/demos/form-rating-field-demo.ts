@@ -32,11 +32,11 @@ interface ReviewForm {
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-2">
         <label class="text-sm font-medium">Product Rating</label>
-        <div sc-rating-field [(value)]="formModel().rating">
-          <div sc-rating-item-group class="flex gap-0.5">
+        <div scRatingField [(value)]="formModel().rating">
+          <div scRatingItemGroup class="flex gap-0.5">
             @for (i of [1, 2, 3, 4, 5]; track i) {
               <span
-                sc-rating-item
+                scRatingItem
                 [value]="i"
                 class="cursor-pointer transition-transform hover:scale-110"
               >
@@ -53,7 +53,7 @@ interface ReviewForm {
         </div>
       </div>
 
-      <button sc-button (click)="onSubmit()" class="w-fit">
+      <button scButton (click)="onSubmit()" class="w-fit">
         Submit Rating
       </button>
 

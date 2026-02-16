@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: 'nav[sc-breadcrumb]',
+  selector: 'nav[scBreadcrumb]',
   host: {
     'data-slot': 'breadcrumb',
     'aria-label': 'breadcrumb',

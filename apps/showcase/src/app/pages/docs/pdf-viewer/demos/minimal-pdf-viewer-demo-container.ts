@@ -45,14 +45,14 @@ import {
   template: \`
     <div class="h-[400px]">
       <div
-        sc-pdf-viewer
+        scPdfViewer
         src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf"
       >
-        <div sc-pdf-viewer-container class="h-full">
-          <div sc-pdf-viewer-content>
-            <div sc-pdf-viewer-loading></div>
-            <div sc-pdf-viewer-error></div>
-            <div sc-pdf-viewer-empty></div>
+        <div scPdfViewerContainer class="h-full">
+          <div scPdfViewerContent>
+            <div scPdfViewerLoading></div>
+            <div scPdfViewerError></div>
+            <div scPdfViewerEmpty></div>
           </div>
         </div>
       </div>

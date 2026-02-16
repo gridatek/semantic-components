@@ -52,13 +52,13 @@ import {
     ScPopoverTrigger,
   ],
   template: \`
-    <div sc-popover-provider side="left">
-      <button sc-button sc-popover-trigger variant="outline">Left</button>
+    <div scPopoverProvider side="left">
+      <button scButton scPopoverTrigger variant="outline">Left</button>
       <ng-template scPopoverPortal>
-        <div sc-popover>
-          <div sc-popover-header>
-            <h4 sc-popover-title>Left</h4>
-            <p sc-popover-description>This popover appears on the left.</p>
+        <div scPopover>
+          <div scPopoverHeader>
+            <h4 scPopoverTitle>Left</h4>
+            <p scPopoverDescription>This popover appears on the left.</p>
           </div>
         </div>
       </ng-template>

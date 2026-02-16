@@ -16,9 +16,9 @@ An image element with a fallback for representing the user.
 ### Basic Avatar
 
 ```html
-<span sc-avatar>
-  <img sc-avatar-image src="https://example.com/avatar.jpg" alt="User" />
-  <span sc-avatar-fallback>JD</span>
+<span scAvatar>
+  <img scAvatarImage src="https://example.com/avatar.jpg" alt="User" />
+  <span scAvatarFallback>JD</span>
 </span>
 ```
 
@@ -27,17 +27,17 @@ An image element with a fallback for representing the user.
 When no image is available:
 
 ```html
-<span sc-avatar>
-  <span sc-avatar-fallback>JD</span>
+<span scAvatar>
+  <span scAvatarFallback>JD</span>
 </span>
 ```
 
 ### With Icon Fallback
 
 ```html
-<span sc-avatar>
-  <img sc-avatar-image src="https://example.com/avatar.jpg" alt="User" />
-  <span sc-avatar-fallback>
+<span scAvatar>
+  <img scAvatarImage src="https://example.com/avatar.jpg" alt="User" />
+  <span scAvatarFallback>
     <svg class="size-5"><!-- user icon --></svg>
   </span>
 </span>
@@ -49,21 +49,21 @@ The avatar component supports three sizes: `sm`, `default`, and `lg`.
 
 ```html
 <!-- Small -->
-<span sc-avatar size="sm">
-  <img sc-avatar-image src="..." alt="User" />
-  <span sc-avatar-fallback>JD</span>
+<span scAvatar size="sm">
+  <img scAvatarImage src="..." alt="User" />
+  <span scAvatarFallback>JD</span>
 </span>
 
 <!-- Default -->
-<span sc-avatar>
-  <img sc-avatar-image src="..." alt="User" />
-  <span sc-avatar-fallback>JD</span>
+<span scAvatar>
+  <img scAvatarImage src="..." alt="User" />
+  <span scAvatarFallback>JD</span>
 </span>
 
 <!-- Large -->
-<span sc-avatar size="lg">
-  <img sc-avatar-image src="..." alt="User" />
-  <span sc-avatar-fallback>JD</span>
+<span scAvatar size="lg">
+  <img scAvatarImage src="..." alt="User" />
+  <span scAvatarFallback>JD</span>
 </span>
 ```
 
@@ -72,20 +72,20 @@ The avatar component supports three sizes: `sm`, `default`, and `lg`.
 Display a status indicator using the badge component:
 
 ```html
-<span sc-avatar>
-  <img sc-avatar-image src="..." alt="User" />
-  <span sc-avatar-fallback>JD</span>
-  <span sc-avatar-badge></span>
+<span scAvatar>
+  <img scAvatarImage src="..." alt="User" />
+  <span scAvatarFallback>JD</span>
+  <span scAvatarBadge></span>
 </span>
 ```
 
 ### Badge with Icon
 
 ```html
-<span sc-avatar>
-  <img sc-avatar-image src="..." alt="User" />
-  <span sc-avatar-fallback>JD</span>
-  <span sc-avatar-badge>
+<span scAvatar>
+  <img scAvatarImage src="..." alt="User" />
+  <span scAvatarFallback>JD</span>
+  <span scAvatarBadge>
     <svg><!-- check icon --></svg>
   </span>
 </span>
@@ -96,18 +96,18 @@ Display a status indicator using the badge component:
 Display multiple avatars with overlap:
 
 ```html
-<div sc-avatar-group>
-  <span sc-avatar>
-    <img sc-avatar-image src="..." alt="User 1" />
-    <span sc-avatar-fallback>U1</span>
+<div scAvatarGroup>
+  <span scAvatar>
+    <img scAvatarImage src="..." alt="User 1" />
+    <span scAvatarFallback>U1</span>
   </span>
-  <span sc-avatar>
-    <img sc-avatar-image src="..." alt="User 2" />
-    <span sc-avatar-fallback>U2</span>
+  <span scAvatar>
+    <img scAvatarImage src="..." alt="User 2" />
+    <span scAvatarFallback>U2</span>
   </span>
-  <span sc-avatar>
-    <img sc-avatar-image src="..." alt="User 3" />
-    <span sc-avatar-fallback>U3</span>
+  <span scAvatar>
+    <img scAvatarImage src="..." alt="User 3" />
+    <span scAvatarFallback>U3</span>
   </span>
 </div>
 ```
@@ -117,32 +117,32 @@ Display multiple avatars with overlap:
 Show overflow count for additional avatars:
 
 ```html
-<div sc-avatar-group>
-  <span sc-avatar>
-    <img sc-avatar-image src="..." alt="User 1" />
-    <span sc-avatar-fallback>U1</span>
+<div scAvatarGroup>
+  <span scAvatar>
+    <img scAvatarImage src="..." alt="User 1" />
+    <span scAvatarFallback>U1</span>
   </span>
-  <span sc-avatar>
-    <span sc-avatar-fallback>U2</span>
+  <span scAvatar>
+    <span scAvatarFallback>U2</span>
   </span>
-  <span sc-avatar>
-    <span sc-avatar-fallback>U3</span>
+  <span scAvatar>
+    <span scAvatarFallback>U3</span>
   </span>
-  <div sc-avatar-group-count>+5</div>
+  <div scAvatarGroupCount>+5</div>
 </div>
 ```
 
 ### Avatar Group with Count Icon
 
 ```html
-<div sc-avatar-group>
-  <span sc-avatar>
-    <span sc-avatar-fallback>U1</span>
+<div scAvatarGroup>
+  <span scAvatar>
+    <span scAvatarFallback>U1</span>
   </span>
-  <span sc-avatar>
-    <span sc-avatar-fallback>U2</span>
+  <span scAvatar>
+    <span scAvatarFallback>U2</span>
   </span>
-  <div sc-avatar-group-count>
+  <div scAvatarGroupCount>
     <svg><!-- users icon --></svg>
   </div>
 </div>

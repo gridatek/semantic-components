@@ -35,7 +35,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
       <!-- Up Direction -->
       <div class="relative h-48 border rounded-lg bg-muted/20">
         <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
-          <sc-speed-dial
+          <scSpeedDial
             [actions]="directionActions()"
             direction="up"
             ariaLabel="Up direction"
@@ -49,7 +49,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
       <!-- Down Direction -->
       <div class="relative h-48 border rounded-lg bg-muted/20">
         <div class="absolute top-4 left-1/2 -translate-x-1/2">
-          <sc-speed-dial
+          <scSpeedDial
             [actions]="directionActions()"
             direction="down"
             ariaLabel="Down direction"
@@ -63,7 +63,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
       <!-- Left Direction -->
       <div class="relative h-48 border rounded-lg bg-muted/20">
         <div class="absolute top-1/2 right-4 -translate-y-1/2">
-          <sc-speed-dial
+          <scSpeedDial
             [actions]="directionActions()"
             direction="left"
             ariaLabel="Left direction"
@@ -77,7 +77,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
       <!-- Right Direction -->
       <div class="relative h-48 border rounded-lg bg-muted/20">
         <div class="absolute top-1/2 left-4 -translate-y-1/2">
-          <sc-speed-dial
+          <scSpeedDial
             [actions]="directionActions()"
             direction="right"
             ariaLabel="Right direction"

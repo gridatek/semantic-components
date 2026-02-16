@@ -45,15 +45,15 @@ import {
   template: \`
     <div class="max-w-xs">
       <div
-        sc-color-picker
+        scColorPicker
         [(value)]="color"
         class="space-y-4 rounded-lg border p-4"
       >
-        <div sc-color-picker-area></div>
-        <div sc-color-picker-hue></div>
+        <div scColorPickerArea></div>
+        <div scColorPickerHue></div>
         <div class="flex items-center gap-3">
-          <div sc-color-picker-preview></div>
-          <input sc-color-picker-input format="hsl" class="flex-1" />
+          <div scColorPickerPreview></div>
+          <input scColorPickerInput format="hsl" class="flex-1" />
         </div>
       </div>
     </div>

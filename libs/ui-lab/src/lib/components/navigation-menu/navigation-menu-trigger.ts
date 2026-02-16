@@ -12,7 +12,7 @@ import { cn } from '@semantic-components/ui';
 import { ScNavigationMenuItem } from './navigation-menu-item';
 
 @Component({
-  selector: 'button[sc-navigation-menu-trigger]',
+  selector: 'button[scNavigationMenuTrigger]',
   imports: [SiChevronDownIcon],
   hostDirectives: [CdkOverlayOrigin],
   template: `

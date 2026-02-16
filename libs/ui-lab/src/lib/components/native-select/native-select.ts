@@ -4,7 +4,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_FIELD } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'select[sc-native-select]',
+  selector: 'select[scNativeSelect]',
   host: {
     'data-slot': 'native-select',
     '[attr.id]': 'id()',

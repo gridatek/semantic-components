@@ -12,7 +12,7 @@ import { ScRangeSlider } from '@semantic-components/ui-lab';
   template: `
     <div class="w-[60%]">
       <div
-        sc-range-slider
+        scRangeSlider
         [(minValue)]="minValue"
         [(maxValue)]="maxValue"
         [min-aria-label]="'Minimum value'"

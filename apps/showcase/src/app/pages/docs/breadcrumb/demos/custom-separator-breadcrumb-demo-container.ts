@@ -48,18 +48,18 @@ import {
     ScBreadcrumbSeparator,
   ],
   template: \`
-    <nav sc-breadcrumb>
-      <ol sc-breadcrumb-list>
-        <li sc-breadcrumb-item>
-          <a sc-breadcrumb-link href="#">Home</a>
+    <nav scBreadcrumb>
+      <ol scBreadcrumbList>
+        <li scBreadcrumbItem>
+          <a scBreadcrumbLink href="#">Home</a>
         </li>
-        <li sc-breadcrumb-separator>/</li>
-        <li sc-breadcrumb-item>
-          <a sc-breadcrumb-link href="#">Components</a>
+        <li scBreadcrumbSeparator>/</li>
+        <li scBreadcrumbItem>
+          <a scBreadcrumbLink href="#">Components</a>
         </li>
-        <li sc-breadcrumb-separator>/</li>
-        <li sc-breadcrumb-item>
-          <span sc-breadcrumb-page>Breadcrumb</span>
+        <li scBreadcrumbSeparator>/</li>
+        <li scBreadcrumbItem>
+          <span scBreadcrumbPage>Breadcrumb</span>
         </li>
       </ol>
     </nav>

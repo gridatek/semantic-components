@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'span[sc-pagination-ellipsis]',
+  selector: 'span[scPaginationEllipsis]',
   host: {
     'data-slot': 'pagination-ellipsis',
     'aria-hidden': 'true',

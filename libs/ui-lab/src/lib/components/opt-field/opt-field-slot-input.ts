@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'input[sc-opt-field-slot-input]',
+  selector: 'input[scOptFieldSlotInput]',
   host: {
     'data-slot': 'opt-field-slot-input',
     type: 'text',

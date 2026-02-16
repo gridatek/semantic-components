@@ -15,7 +15,7 @@ import {
 } from './notification-center';
 
 @Component({
-  selector: '[sc-notification-center-container]',
+  selector: '[scNotificationCenterContainer]',
   imports: [ScNotificationGroup, ScNotificationItem],
   template: `
     <div [class]="containerClass()">
@@ -144,7 +144,7 @@ import {
           <!-- Grouped notifications -->
           <div class="p-2 space-y-4">
             @for (group of center.groups(); track group.id) {
-              <sc-notification-group
+              <scNotificationGroup
                 [group]="group"
                 [notifications]="center.getGroupNotifications(group.id)"
                 [showDismiss]="center.showDismiss()"
@@ -170,7 +170,7 @@ import {
                     notification of center.ungroupedNotifications();
                     track notification.id
                   ) {
-                    <sc-notification-item
+                    <scNotificationItem
                       [notification]="notification"
                       [showDismiss]="center.showDismiss()"
                       (markRead)="center.onMarkRead(notification, $event)"
@@ -190,7 +190,7 @@ import {
               notification of center.filteredNotifications();
               track notification.id
             ) {
-              <sc-notification-item
+              <scNotificationItem
                 [notification]="notification"
                 [showDismiss]="center.showDismiss()"
                 (markRead)="center.onMarkRead(notification, $event)"

@@ -21,7 +21,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
       </div>
       <div class="space-y-2">
         <label class="text-sm font-medium">Interests</label>
-        <sc-multi-select
+        <scMultiSelect
           [(value)]="interestsValue"
           [options]="interestOptions"
           [showSelectAll]="true"
@@ -30,7 +30,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
       </div>
       <div class="space-y-2">
         <label class="text-sm font-medium">Preferred Contact Methods</label>
-        <sc-multi-select
+        <scMultiSelect
           [options]="contactOptions"
           [searchable]="false"
           placeholder="How can we reach you?"

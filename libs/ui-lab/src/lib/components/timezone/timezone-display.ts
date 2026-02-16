@@ -32,12 +32,12 @@ export const sizeStyles: Record<TimezoneSize, string> = {
  *
  * @example
  * ```html
- * <button sc-timezone-display></button>
- * <button sc-timezone-display variant="outline" size="sm"></button>
+ * <button scTimezoneDisplay></button>
+ * <button scTimezoneDisplay variant="outline" size="sm"></button>
  * ```
  */
 @Component({
-  selector: 'button[sc-timezone-display]',
+  selector: 'button[scTimezoneDisplay]',
   host: {
     'data-slot': 'timezone-display',
     type: 'button',

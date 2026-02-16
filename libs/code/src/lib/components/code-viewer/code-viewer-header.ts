@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-code-viewer-header]',
+  selector: 'div[scCodeViewerHeader]',
   template: `
     <ng-content />
   `,

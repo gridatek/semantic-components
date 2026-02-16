@@ -14,7 +14,7 @@ import { SC_TIME_PICKER } from './time-picker';
 // TimePickerInput
 // ============================================================================
 @Component({
-  selector: 'input[sc-time-picker-input]',
+  selector: 'input[scTimePickerInput]',
   template: ``,
   host: {
     'data-slot': 'time-picker-input',

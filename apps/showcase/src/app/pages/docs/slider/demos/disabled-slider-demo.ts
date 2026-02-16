@@ -10,7 +10,7 @@ import { ScSlider } from '@semantic-components/ui-lab';
   imports: [ScSlider],
   template: `
     <div class="w-[60%]">
-      <div sc-slider [value]="50" [disabled]="true"></div>
+      <div scSlider [value]="50" [disabled]="true"></div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

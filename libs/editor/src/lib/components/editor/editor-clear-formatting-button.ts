@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Component({
-  selector: 'button[sc-editor-clear-formatting]',
+  selector: 'button[scEditorClearFormatting]',
   template: `
     <ng-content />
   `,

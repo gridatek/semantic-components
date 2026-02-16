@@ -35,10 +35,10 @@ import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/
 
 @Component({
   template: `
-    <div sc-field>
-      <label sc-field-label for="email">Email</label>
+    <div scField>
+      <label scFieldLabel for="email">Email</label>
       <input id="email" type="email" />
-      <p sc-field-description>We'll never share your email.</p>
+      <p scFieldDescription>We'll never share your email.</p>
     </div>
   `,
 })
@@ -49,8 +49,8 @@ import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/
 ```typescript
 @Component({
   template: `
-    <div sc-field [orientation]="'horizontal'">
-      <label sc-field-label for="username">Username</label>
+    <div scField [orientation]="'horizontal'">
+      <label scFieldLabel for="username">Username</label>
       <input id="username" type="text" />
     </div>
   `,
@@ -62,11 +62,11 @@ import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/
 ```typescript
 @Component({
   template: `
-    <div sc-field [orientation]="'responsive'">
-      <label sc-field-label for="name">Name</label>
-      <div sc-field-body>
+    <div scField [orientation]="'responsive'">
+      <label scFieldLabel for="name">Name</label>
+      <div scFieldBody>
         <input id="name" type="text" />
-        <p sc-field-description>Enter your full name.</p>
+        <p scFieldDescription>Enter your full name.</p>
       </div>
     </div>
   `,
@@ -81,10 +81,10 @@ import { ScField, ScFieldLabel, ScFieldError, ScFieldErrorItem } from '@semantic
 
 @Component({
   template: `
-    <div sc-field [invalid]="errors().length > 0">
-      <label sc-field-label for="password">Password</label>
+    <div scField [invalid]="errors().length > 0">
+      <label scFieldLabel for="password">Password</label>
       <input id="password" type="password" />
-      <div sc-field-error [errors]="errors()"></div>
+      <div scFieldError [errors]="errors()"></div>
     </div>
   `,
 })
@@ -98,11 +98,11 @@ export class MyComponent {
 ```typescript
 @Component({
   template: `
-    <div sc-field [invalid]="error()">
-      <label sc-field-label for="email">Email</label>
+    <div scField [invalid]="error()">
+      <label scFieldLabel for="email">Email</label>
       <input id="email" type="email" />
       @if (error()) {
-        <div sc-field-error [errors]="[{ message: error() }]"></div>
+        <div scFieldError [errors]="[{ message: error() }]"></div>
       }
     </div>
   `,
@@ -119,14 +119,14 @@ For custom error rendering, you can use the error directive with content project
 ```typescript
 @Component({
   template: `
-    <div sc-field [invalid]="errors().length > 0">
-      <label sc-field-label for="email">Email</label>
+    <div scField [invalid]="errors().length > 0">
+      <label scFieldLabel for="email">Email</label>
       <input id="email" type="email" />
 
       @if (errors().length === 1) {
-        <div sc-field-error>{{ errors()[0].message }}</div>
+        <div scFieldError>{{ errors()[0].message }}</div>
       } @else if (errors().length > 1) {
-        <div sc-field-error>
+        <div scFieldError>
           <ul class="ml-4 flex list-disc flex-col gap-1">
             @for (error of errors(); track error.message) {
               <li>{{ error.message }}</li>
@@ -147,14 +147,14 @@ export class MyComponent {
 ```typescript
 @Component({
   template: `
-    <div sc-field-group>
-      <div sc-field>
-        <label sc-field-label for="firstName">First Name</label>
+    <div scFieldGroup>
+      <div scField>
+        <label scFieldLabel for="firstName">First Name</label>
         <input id="firstName" type="text" />
       </div>
 
-      <div sc-field>
-        <label sc-field-label for="lastName">Last Name</label>
+      <div scField>
+        <label scFieldLabel for="lastName">Last Name</label>
         <input id="lastName" type="text" />
       </div>
     </div>
@@ -167,17 +167,17 @@ export class MyComponent {
 ```typescript
 @Component({
   template: `
-    <fieldset sc-fieldset>
-      <legend sc-legend>Personal Information</legend>
+    <fieldset scFieldset>
+      <legend scLegend>Personal Information</legend>
 
-      <div sc-field-group>
-        <div sc-field>
-          <label sc-field-label for="name">Name</label>
+      <div scFieldGroup>
+        <div scField>
+          <label scFieldLabel for="name">Name</label>
           <input id="name" type="text" />
         </div>
 
-        <div sc-field>
-          <label sc-field-label for="email">Email</label>
+        <div scField>
+          <label scFieldLabel for="email">Email</label>
           <input id="email" type="email" />
         </div>
       </div>
@@ -191,16 +191,16 @@ export class MyComponent {
 ```typescript
 @Component({
   template: `
-    <div sc-field-group>
-      <div sc-field>
-        <label sc-field-label for="email">Email</label>
+    <div scFieldGroup>
+      <div scField>
+        <label scFieldLabel for="email">Email</label>
         <input id="email" type="email" />
       </div>
 
-      <div sc-field-separator>or</div>
+      <div scFieldSeparator>or</div>
 
-      <div sc-field>
-        <label sc-field-label for="phone">Phone</label>
+      <div scField>
+        <label scFieldLabel for="phone">Phone</label>
         <input id="phone" type="tel" />
       </div>
     </div>
@@ -213,10 +213,10 @@ export class MyComponent {
 ```typescript
 @Component({
   template: `
-    <div sc-field [disabled]="true">
-      <label sc-field-label for="readonly">Read-only Field</label>
+    <div scField [disabled]="true">
+      <label scFieldLabel for="readonly">Read-only Field</label>
       <input id="readonly" type="text" disabled />
-      <p sc-field-description>This field is disabled.</p>
+      <p scFieldDescription>This field is disabled.</p>
     </div>
   `,
 })

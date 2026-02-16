@@ -32,7 +32,7 @@ import type { SearchSuggestion } from '@semantic-components/ui-lab';
   selector: 'app-loading-search-input-demo',
   imports: [ScSearchInput],
   template: \`
-    <sc-search-input
+    <scSearchInput
       [suggestions]="asyncSuggestions()"
       [loading]="isLoading()"
       (search)="onAsyncSearch($event)"

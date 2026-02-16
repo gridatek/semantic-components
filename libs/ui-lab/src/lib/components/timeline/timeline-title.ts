@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-timeline-title]',
+  selector: '[scTimelineTitle]',
   host: {
     'data-slot': 'timeline-title',
     '[class]': 'class()',

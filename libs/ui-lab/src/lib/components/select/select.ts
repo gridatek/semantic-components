@@ -15,7 +15,7 @@ import { ScSelectList } from './select-list';
 import { ScSelectTrigger } from './select-trigger';
 
 @Component({
-  selector: 'div[sc-select]',
+  selector: 'div[scSelect]',
   imports: [Combobox],
   hostDirectives: [
     {

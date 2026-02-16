@@ -26,7 +26,7 @@ export const SC_TIME_PICKER = new InjectionToken<ScTimePicker>(
 // TimePicker
 // ============================================================================
 @Directive({
-  selector: '[sc-time-picker]',
+  selector: '[scTimePicker]',
   providers: [{ provide: SC_TIME_PICKER, useExisting: ScTimePicker }],
   host: {
     'data-slot': 'time-picker',

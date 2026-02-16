@@ -48,15 +48,15 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
     SiSearchIcon,
   ],
   template: \`
-    <div sc-input-group>
-      <div sc-input-group-addon>
-        <span sc-input-group-text>
+    <div scInputGroup>
+      <div scInputGroupAddon>
+        <span scInputGroupText>
           <svg si-search-icon></svg>
         </span>
       </div>
-      <input sc-input variant="group" placeholder="Search..." />
-      <div sc-input-group-addon align="inline-end">
-        <kbd sc-kbd>\u2318K</kbd>
+      <input scInput variant="group" placeholder="Search..." />
+      <div scInputGroupAddon align="inline-end">
+        <kbd scKbd>\u2318K</kbd>
       </div>
     </div>
   \`,

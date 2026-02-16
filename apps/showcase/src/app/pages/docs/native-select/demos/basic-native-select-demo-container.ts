@@ -48,10 +48,10 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: \`
-    <div sc-field class="w-[280px]">
-      <label sc-label>Framework</label>
-      <div sc-native-select-container>
-        <select sc-native-select>
+    <div scField class="w-[280px]">
+      <label scLabel>Framework</label>
+      <div scNativeSelectContainer>
+        <select scNativeSelect>
           <option value="">Select a framework</option>
           <option value="next">Next.js</option>
           <option value="angular">Angular</option>
@@ -60,7 +60,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </select>
         <svg
           si-chevron-down-icon
-          sc-native-select-icon
+          scNativeSelectIcon
           aria-hidden="true"
         ></svg>
       </div>

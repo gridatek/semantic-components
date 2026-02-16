@@ -6,7 +6,7 @@ A generic layout component that provides a stacked structure with slots for navb
 
 ```
 ┌───────────────────────────────────────────────┐
-│ sc-stacked-layout (data-slot="stacked-layout")│
+│ scStackedLayout (data-slot="stacked-layout")│
 ├───────────────────────────────────────────────┤
 │              [scNavbar]                       │
 ├───────────────────────────────────────────────┤
@@ -29,7 +29,7 @@ import { ScStackedLayout } from '@semantic-components/ui-lab';
   selector: 'app-layout',
   imports: [ScStackedLayout, MyNavbar, MyFooter],
   template: `
-    <sc-stacked-layout>
+    <scStackedLayout>
       <my-navbar scNavbar />
       <my-footer scFooter />
     </sc-stacked-layout>

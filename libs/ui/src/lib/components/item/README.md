@@ -5,17 +5,17 @@ A flexible layout component for displaying structured content with media, titles
 ## Usage
 
 ```html
-<div sc-item-group>
-  <div sc-item>
-    <div sc-item-media variant="icon">
+<div scItemGroup>
+  <div scItem>
+    <div scItemMedia variant="icon">
       <svg><!-- icon --></svg>
     </div>
-    <div sc-item-body>
-      <div sc-item-title>Title</div>
-      <p sc-item-description>Description text</p>
+    <div scItemBody>
+      <div scItemTitle>Title</div>
+      <p scItemDescription>Description text</p>
     </div>
-    <div sc-item-actions>
-      <button sc-button variant="ghost" size="icon">Action</button>
+    <div scItemActions>
+      <button scButton variant="ghost" size="icon">Action</button>
     </div>
   </div>
 </div>
@@ -27,7 +27,7 @@ A flexible layout component for displaying structured content with media, titles
 
 Groups multiple items together in a vertical list.
 
-**Selector:** `div[sc-item-group]`
+**Selector:** `div[scItemGroup]`
 
 **Host attributes:** `role="list"`
 
@@ -41,7 +41,7 @@ Groups multiple items together in a vertical list.
 
 A visual separator between items.
 
-**Selector:** `div[sc-item-separator]`
+**Selector:** `div[scItemSeparator]`
 
 **Host attributes:** `role="separator"`
 
@@ -55,7 +55,7 @@ A visual separator between items.
 
 The main item container with variant and size support.
 
-**Selector:** `div[sc-item]`
+**Selector:** `div[scItem]`
 
 **Inputs:**
 
@@ -81,7 +81,7 @@ The main item container with variant and size support.
 
 Container for media content (icons, images) within an item.
 
-**Selector:** `div[sc-item-media]`
+**Selector:** `div[scItemMedia]`
 
 **Inputs:**
 
@@ -100,7 +100,7 @@ Container for media content (icons, images) within an item.
 
 Main body area within an item.
 
-**Selector:** `div[sc-item-body]`
+**Selector:** `div[scItemBody]`
 
 **Inputs:**
 
@@ -112,7 +112,7 @@ Main body area within an item.
 
 Title text within an item.
 
-**Selector:** `div[sc-item-title]`
+**Selector:** `div[scItemTitle]`
 
 **Inputs:**
 
@@ -124,7 +124,7 @@ Title text within an item.
 
 Description text within an item.
 
-**Selector:** `p[sc-item-description]`
+**Selector:** `p[scItemDescription]`
 
 **Inputs:**
 
@@ -136,7 +136,7 @@ Description text within an item.
 
 Container for action buttons within an item.
 
-**Selector:** `div[sc-item-actions]`
+**Selector:** `div[scItemActions]`
 
 **Inputs:**
 
@@ -148,7 +148,7 @@ Container for action buttons within an item.
 
 Full-width header row within an item.
 
-**Selector:** `div[sc-item-header]`
+**Selector:** `div[scItemHeader]`
 
 **Inputs:**
 
@@ -160,7 +160,7 @@ Full-width header row within an item.
 
 Full-width footer row within an item.
 
-**Selector:** `div[sc-item-footer]`
+**Selector:** `div[scItemFooter]`
 
 **Inputs:**
 
@@ -173,18 +173,18 @@ Full-width footer row within an item.
 ### Basic
 
 ```html
-<div sc-item-group>
-  <div sc-item>
-    <div sc-item-body>
-      <div sc-item-title>Notifications</div>
-      <p sc-item-description>Manage your notification preferences.</p>
+<div scItemGroup>
+  <div scItem>
+    <div scItemBody>
+      <div scItemTitle>Notifications</div>
+      <p scItemDescription>Manage your notification preferences.</p>
     </div>
   </div>
-  <div sc-item-separator></div>
-  <div sc-item>
-    <div sc-item-body>
-      <div sc-item-title>Privacy</div>
-      <p sc-item-description>Control your privacy settings.</p>
+  <div scItemSeparator></div>
+  <div scItem>
+    <div scItemBody>
+      <div scItemTitle>Privacy</div>
+      <p scItemDescription>Control your privacy settings.</p>
     </div>
   </div>
 </div>
@@ -193,13 +193,13 @@ Full-width footer row within an item.
 ### With Media
 
 ```html
-<div sc-item>
-  <div sc-item-media variant="icon">
+<div scItem>
+  <div scItemMedia variant="icon">
     <svg><!-- icon --></svg>
   </div>
-  <div sc-item-body>
-    <div sc-item-title>Settings</div>
-    <p sc-item-description>Configure your account.</p>
+  <div scItemBody>
+    <div scItemTitle>Settings</div>
+    <p scItemDescription>Configure your account.</p>
   </div>
 </div>
 ```
@@ -207,13 +207,13 @@ Full-width footer row within an item.
 ### With Actions
 
 ```html
-<div sc-item>
-  <div sc-item-body>
-    <div sc-item-title>Profile</div>
-    <p sc-item-description>Update your personal information.</p>
+<div scItem>
+  <div scItemBody>
+    <div scItemTitle>Profile</div>
+    <p scItemDescription>Update your personal information.</p>
   </div>
-  <div sc-item-actions>
-    <button sc-button variant="outline" size="sm">Edit</button>
+  <div scItemActions>
+    <button scButton variant="outline" size="sm">Edit</button>
   </div>
 </div>
 ```

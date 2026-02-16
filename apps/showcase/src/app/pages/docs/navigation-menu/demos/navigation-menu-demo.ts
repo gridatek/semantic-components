@@ -25,18 +25,18 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
     SiSparklesIcon,
   ],
   template: `
-    <nav sc-navigation-menu>
-      <ul sc-navigation-menu-list>
+    <nav scNavigationMenu>
+      <ul scNavigationMenuList>
         <!-- Getting Started -->
-        <li sc-navigation-menu-item>
-          <button sc-navigation-menu-trigger>Getting Started</button>
-          <div sc-navigation-menu-content>
+        <li scNavigationMenuItem>
+          <button scNavigationMenuTrigger>Getting Started</button>
+          <div scNavigationMenuContent>
             <ul
               class="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]"
             >
               <li class="row-span-3">
                 <a
-                  sc-navigation-menu-link
+                  scNavigationMenuLink
                   class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                   href="#"
                 >
@@ -48,7 +48,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </a>
               </li>
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">
                     Introduction
                   </div>
@@ -60,7 +60,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </a>
               </li>
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">
                     Installation
                   </div>
@@ -72,7 +72,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </a>
               </li>
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">Typography</div>
                   <p
                     class="line-clamp-2 text-sm leading-snug text-muted-foreground"
@@ -86,14 +86,14 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
         </li>
 
         <!-- Components -->
-        <li sc-navigation-menu-item>
-          <button sc-navigation-menu-trigger>Components</button>
-          <div sc-navigation-menu-content>
+        <li scNavigationMenuItem>
+          <button scNavigationMenuTrigger>Components</button>
+          <div scNavigationMenuContent>
             <ul
               class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
             >
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">
                     Alert Dialog
                   </div>
@@ -106,7 +106,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </a>
               </li>
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">Hover Card</div>
                   <p
                     class="line-clamp-2 text-sm leading-snug text-muted-foreground"
@@ -116,7 +116,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </a>
               </li>
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">Progress</div>
                   <p
                     class="line-clamp-2 text-sm leading-snug text-muted-foreground"
@@ -126,7 +126,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </a>
               </li>
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">
                     Scroll Area
                   </div>
@@ -138,7 +138,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </a>
               </li>
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">Tabs</div>
                   <p
                     class="line-clamp-2 text-sm leading-snug text-muted-foreground"
@@ -148,7 +148,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </a>
               </li>
               <li>
-                <a sc-navigation-menu-link href="#">
+                <a scNavigationMenuLink href="#">
                   <div class="text-sm font-medium leading-none">Tooltip</div>
                   <p
                     class="line-clamp-2 text-sm leading-snug text-muted-foreground"
@@ -162,8 +162,8 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
         </li>
 
         <!-- Simple Link -->
-        <li sc-navigation-menu-item>
-          <a sc-navigation-menu-link href="#">Documentation</a>
+        <li scNavigationMenuItem>
+          <a scNavigationMenuLink href="#">Documentation</a>
         </li>
       </ul>
     </nav>

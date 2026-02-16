@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-command-shortcut]',
+  selector: '[scCommandShortcut]',
   host: {
     'data-slot': 'command-shortcut',
     '[class]': 'class()',

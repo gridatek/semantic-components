@@ -14,11 +14,11 @@ import {
   imports: [ScResizableHandle, ScResizablePanel, ScResizablePanelGroup],
   template: `
     <div
-      sc-resizable-panel-group
+      scResizablePanelGroup
       direction="horizontal"
       class="min-h-[400px] rounded-lg border"
     >
-      <div sc-resizable-panel [defaultSize]="20" [minSize]="15" [maxSize]="30">
+      <div scResizablePanel [defaultSize]="20" [minSize]="15" [maxSize]="30">
         <div class="flex h-full flex-col bg-muted/30">
           <div class="border-b p-2 text-sm font-medium">Explorer</div>
           <div class="flex-1 p-2 text-sm text-muted-foreground">
@@ -31,10 +31,10 @@ import {
           </div>
         </div>
       </div>
-      <div sc-resizable-handle></div>
-      <div sc-resizable-panel [defaultSize]="60">
-        <div sc-resizable-panel-group direction="vertical" class="h-full">
-          <div sc-resizable-panel [defaultSize]="70">
+      <div scResizableHandle></div>
+      <div scResizablePanel [defaultSize]="60">
+        <div scResizablePanelGroup direction="vertical" class="h-full">
+          <div scResizablePanel [defaultSize]="70">
             <div class="flex h-full flex-col">
               <div class="border-b p-2 text-sm font-medium">Editor</div>
               <div class="flex-1 p-4 font-mono text-sm text-muted-foreground">
@@ -42,8 +42,8 @@ import {
               </div>
             </div>
           </div>
-          <div sc-resizable-handle></div>
-          <div sc-resizable-panel [defaultSize]="30" [minSize]="15">
+          <div scResizableHandle></div>
+          <div scResizablePanel [defaultSize]="30" [minSize]="15">
             <div class="flex h-full flex-col bg-muted/30">
               <div class="border-b p-2 text-sm font-medium">Terminal</div>
               <div class="flex-1 p-2 font-mono text-sm text-muted-foreground">
@@ -53,8 +53,8 @@ import {
           </div>
         </div>
       </div>
-      <div sc-resizable-handle></div>
-      <div sc-resizable-panel [defaultSize]="20" [minSize]="15" [maxSize]="30">
+      <div scResizableHandle></div>
+      <div scResizablePanel [defaultSize]="20" [minSize]="15" [maxSize]="30">
         <div class="flex h-full flex-col bg-muted/30">
           <div class="border-b p-2 text-sm font-medium">Outline</div>
           <div class="flex-1 p-2 text-sm text-muted-foreground">

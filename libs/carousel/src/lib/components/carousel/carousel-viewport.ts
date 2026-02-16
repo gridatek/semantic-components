@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-carousel-viewport]',
+  selector: 'div[scCarouselViewport]',
   template: `
     <ng-content />
   `,

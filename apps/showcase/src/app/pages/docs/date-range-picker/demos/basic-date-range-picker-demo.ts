@@ -10,7 +10,7 @@ import { ScDateRangePicker, DateRange } from '@semantic-components/ui-lab';
   selector: 'app-basic-date-range-picker-demo',
   imports: [ScDateRangePicker],
   template: `
-    <sc-date-range-picker
+    <scDateRangePicker
       [(value)]="range"
       placeholder="Select date range"
       (apply)="onRangeApply($event)"

@@ -16,7 +16,7 @@ import type { SpeedDialAction, SpeedDialDirection } from '@/ui/speed-dial';
 ### Basic Usage
 
 ```html
-<sc-speed-dial [actions]="actions" (actionClick)="onActionClick($event)" />
+<scSpeedDial [actions]="actions" (actionClick)="onActionClick($event)" />
 ```
 
 ```typescript
@@ -42,47 +42,47 @@ onActionClick(event: SpeedDialActionClickEvent): void {
 
 ```html
 <!-- Expand upward (default) -->
-<sc-speed-dial [actions]="actions" direction="up" />
+<scSpeedDial [actions]="actions" direction="up" />
 
 <!-- Expand downward -->
-<sc-speed-dial [actions]="actions" direction="down" />
+<scSpeedDial [actions]="actions" direction="down" />
 
 <!-- Expand to the left -->
-<sc-speed-dial [actions]="actions" direction="left" />
+<scSpeedDial [actions]="actions" direction="left" />
 
 <!-- Expand to the right -->
-<sc-speed-dial [actions]="actions" direction="right" />
+<scSpeedDial [actions]="actions" direction="right" />
 ```
 
 ### Custom Icons
 
 ```html
-<sc-speed-dial [actions]="actions" [icon]="customIcon" [closeIcon]="customCloseIcon" />
+<scSpeedDial [actions]="actions" [icon]="customIcon" [closeIcon]="customCloseIcon" />
 ```
 
 ### Size Variants
 
 ```html
 <!-- Small -->
-<sc-speed-dial [actions]="actions" size="sm" actionSize="sm" />
+<scSpeedDial [actions]="actions" size="sm" actionSize="sm" />
 
 <!-- Medium (default) -->
-<sc-speed-dial [actions]="actions" size="md" actionSize="md" />
+<scSpeedDial [actions]="actions" size="md" actionSize="md" />
 
 <!-- Large -->
-<sc-speed-dial [actions]="actions" size="lg" actionSize="lg" />
+<scSpeedDial [actions]="actions" size="lg" actionSize="lg" />
 ```
 
 ### Without Labels
 
 ```html
-<sc-speed-dial [actions]="actions" [showLabels]="false" />
+<scSpeedDial [actions]="actions" [showLabels]="false" />
 ```
 
 ### Controlled Open State
 
 ```html
-<sc-speed-dial [actions]="actions" [(open)]="isOpen" (openChange)="onOpenChange($event)" />
+<scSpeedDial [actions]="actions" [(open)]="isOpen" (openChange)="onOpenChange($event)" />
 ```
 
 ### Positioning
@@ -92,13 +92,13 @@ The Speed Dial component uses inline positioning by default. For fixed or floati
 ```html
 <!-- Fixed bottom-right position -->
 <div class="fixed bottom-6 right-6 z-50">
-  <sc-speed-dial [actions]="actions" />
+  <scSpeedDial [actions]="actions" />
 </div>
 
 <!-- Absolute within container -->
 <div class="relative h-96">
   <div class="absolute bottom-4 right-4">
-    <sc-speed-dial [actions]="actions" />
+    <scSpeedDial [actions]="actions" />
   </div>
 </div>
 ```
@@ -223,7 +223,7 @@ The component uses Tailwind CSS classes and supports theming through CSS variabl
 ### Custom Styling
 
 ```html
-<sc-speed-dial [actions]="actions" class="[&_button]:bg-blue-500" />
+<scSpeedDial [actions]="actions" class="[&_button]:bg-blue-500" />
 ```
 
 ## Animation

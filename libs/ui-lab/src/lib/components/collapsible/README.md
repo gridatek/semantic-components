@@ -25,10 +25,10 @@ ScCollapsible (Root - uses AccordionGroup)
 
 | Component              | Selector                         | Description                                             |
 | ---------------------- | -------------------------------- | ------------------------------------------------------- |
-| `ScCollapsible`        | `div[sc-collapsible]`            | Root wrapper using `AccordionGroup`                     |
-| `ScCollapsibleTrigger` | `button[sc-collapsible-trigger]` | Button to toggle panel using `AccordionTrigger`         |
-| `ScCollapsiblePanel`   | `div[sc-collapsible-panel]`      | Collapsible panel with animation using `AccordionPanel` |
-| `ScCollapsibleContent` | `div[sc-collapsible-content]`    | Content styling wrapper with padding                    |
+| `ScCollapsible`        | `div[scCollapsible]`            | Root wrapper using `AccordionGroup`                     |
+| `ScCollapsibleTrigger` | `button[scCollapsibleTrigger]` | Button to toggle panel using `AccordionTrigger`         |
+| `ScCollapsiblePanel`   | `div[scCollapsiblePanel]`      | Collapsible panel with animation using `AccordionPanel` |
+| `ScCollapsibleContent` | `div[scCollapsibleContent]`    | Content styling wrapper with padding                    |
 
 ## Inputs
 
@@ -61,15 +61,15 @@ The `ScCollapsiblePanel` component wraps collapsible content using `AccordionPan
 Use `panelId` to link the trigger to its corresponding panel. Wrap content in `sc-collapsible-content` for smooth animations.
 
 ```html
-<div sc-collapsible class="w-[350px] space-y-2">
+<div scCollapsible class="w-[350px] space-y-2">
   <div class="flex items-center justify-between">
     <h4 class="text-sm font-semibold">Can I use this?</h4>
-    <button sc-collapsible-trigger panelId="faq-1">
+    <button scCollapsibleTrigger panelId="faq-1">
       <svg><!-- chevron icon --></svg>
     </button>
   </div>
-  <div sc-collapsible-panel panelId="faq-1">
-    <div sc-collapsible-content>
+  <div scCollapsiblePanel panelId="faq-1">
+    <div scCollapsibleContent>
       <p>Yes. It's free and open source.</p>
     </div>
   </div>
@@ -79,10 +79,10 @@ Use `panelId` to link the trigger to its corresponding panel. Wrap content in `s
 ### Initially Open
 
 ```html
-<div sc-collapsible>
-  <button sc-collapsible-trigger panelId="open-demo" [expanded]="true">Toggle</button>
-  <div sc-collapsible-panel panelId="open-demo">
-    <div sc-collapsible-content>This content is visible by default.</div>
+<div scCollapsible>
+  <button scCollapsibleTrigger panelId="open-demo" [expanded]="true">Toggle</button>
+  <div scCollapsiblePanel panelId="open-demo">
+    <div scCollapsibleContent>This content is visible by default.</div>
   </div>
 </div>
 ```
@@ -90,10 +90,10 @@ Use `panelId` to link the trigger to its corresponding panel. Wrap content in `s
 ### Disabled
 
 ```html
-<div sc-collapsible [disabled]="true">
-  <button sc-collapsible-trigger panelId="disabled-demo">Toggle (disabled)</button>
-  <div sc-collapsible-panel panelId="disabled-demo">
-    <div sc-collapsible-content>This cannot be toggled.</div>
+<div scCollapsible [disabled]="true">
+  <button scCollapsibleTrigger panelId="disabled-demo">Toggle (disabled)</button>
+  <div scCollapsiblePanel panelId="disabled-demo">
+    <div scCollapsibleContent>This cannot be toggled.</div>
   </div>
 </div>
 ```
@@ -105,10 +105,10 @@ Bind to the `expanded` state of the trigger.
 ```typescript
 @Component({
   template: `
-    <div sc-collapsible>
-      <button sc-collapsible-trigger panelId="controlled" [(expanded)]="isOpen">Toggle</button>
-      <div sc-collapsible-panel panelId="controlled">
-        <div sc-collapsible-content>Content</div>
+    <div scCollapsible>
+      <button scCollapsibleTrigger panelId="controlled" [(expanded)]="isOpen">Toggle</button>
+      <div scCollapsiblePanel panelId="controlled">
+        <div scCollapsibleContent>Content</div>
       </div>
     </div>
     <button (click)="isOpen.set(!isOpen())">External Toggle</button>
@@ -122,15 +122,15 @@ export class MyComponent {
 ### With Chevron Animation
 
 ```html
-<div sc-collapsible>
-  <button sc-collapsible-trigger panelId="chevron-demo" #trigger="scCollapsibleTrigger" class="flex items-center gap-2">
+<div scCollapsible>
+  <button scCollapsibleTrigger panelId="chevron-demo" #trigger="scCollapsibleTrigger" class="flex items-center gap-2">
     <span>Toggle</span>
     <svg class="size-4 transition-transform duration-200" [class.rotate-180]="trigger.expanded()">
       <path d="m6 9 6 6 6-6" />
     </svg>
   </button>
-  <div sc-collapsible-panel panelId="chevron-demo">
-    <div sc-collapsible-content>Content here</div>
+  <div scCollapsiblePanel panelId="chevron-demo">
+    <div scCollapsibleContent>Content here</div>
   </div>
 </div>
 ```
@@ -179,12 +179,12 @@ Built on `@angular/aria/accordion`, providing:
 All components accept a `class` input for custom styling:
 
 ```html
-<div sc-collapsible class="border rounded-lg p-4">
+<div scCollapsible class="border rounded-lg p-4">
   <!-- styled container -->
 </div>
 
-<div sc-collapsible-panel panelId="styled">
-  <div sc-collapsible-content class="px-4">
+<div scCollapsiblePanel panelId="styled">
+  <div scCollapsibleContent class="px-4">
     <!-- content with custom padding -->
   </div>
 </div>

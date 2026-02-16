@@ -9,7 +9,7 @@ import { cn } from '@semantic-components/ui';
 
 // Toolbar Container (Composable)
 @Component({
-  selector: '[sc-pdf-viewer-toolbar]',
+  selector: '[scPdfViewerToolbar]',
   template: `
     <ng-content />
   `,

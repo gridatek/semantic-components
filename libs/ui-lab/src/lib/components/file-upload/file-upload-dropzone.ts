@@ -12,7 +12,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Component({
-  selector: '[sc-file-upload-dropzone]',
+  selector: '[scFileUploadDropzone]',
   template: `
     <input
       #fileInput

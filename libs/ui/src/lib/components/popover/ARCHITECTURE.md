@@ -163,7 +163,7 @@ protected readonly class = computed(() =>
 Container for title and description with consistent spacing:
 
 ```typescript
-@Directive({ selector: 'div[sc-popover-header]' })
+@Directive({ selector: 'div[scPopoverHeader]' })
 // Classes: 'flex flex-col gap-0.5 text-sm'
 ```
 
@@ -172,7 +172,7 @@ Container for title and description with consistent spacing:
 Title text with medium font weight:
 
 ```typescript
-@Directive({ selector: '[sc-popover-title]' })
+@Directive({ selector: '[scPopoverTitle]' })
 // Classes: 'font-medium'
 ```
 
@@ -181,7 +181,7 @@ Title text with medium font weight:
 Description text with muted color:
 
 ```typescript
-@Directive({ selector: 'p[sc-popover-description]' })
+@Directive({ selector: 'p[scPopoverDescription]' })
 // Classes: 'text-muted-foreground'
 ```
 
@@ -190,7 +190,7 @@ Description text with muted color:
 Close button directive:
 
 ```typescript
-@Directive({ selector: 'button[sc-popover-close]' })
+@Directive({ selector: 'button[scPopoverClose]' })
 // Calls popover.open.set(false) on click
 ```
 

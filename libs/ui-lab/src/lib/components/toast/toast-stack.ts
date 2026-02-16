@@ -26,27 +26,27 @@ import { ScToaster } from './toaster';
   template: `
     @for (toast of toastService.toasts(); track toast.id) {
       <div
-        sc-toast
+        scToast
         [variant]="toast.variant ?? 'default'"
         [attr.data-state]="'open'"
       >
         <div class="grid gap-1">
           @if (toast.title) {
-            <div sc-toast-title>{{ toast.title }}</div>
+            <div scToastTitle>{{ toast.title }}</div>
           }
           @if (toast.description) {
-            <div sc-toast-description>{{ toast.description }}</div>
+            <div scToastDescription>{{ toast.description }}</div>
           }
         </div>
         @if (toast.action) {
           <button
-            sc-toast-action
+            scToastAction
             (click)="onAction(toast.id, toast.action.onClick)"
           >
             {{ toast.action.label }}
           </button>
         }
-        <button sc-toast-close (close)="dismiss(toast.id)">
+        <button scToastClose (close)="dismiss(toast.id)">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

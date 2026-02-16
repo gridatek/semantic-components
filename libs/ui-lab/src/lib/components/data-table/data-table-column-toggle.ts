@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE } from './data-table';
 
 @Component({
-  selector: '[sc-data-table-column-toggle]',
+  selector: '[scDataTableColumnToggle]',
   template: `
     <button
       type="button"

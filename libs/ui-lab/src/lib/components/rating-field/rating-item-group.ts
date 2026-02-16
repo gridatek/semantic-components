@@ -13,7 +13,7 @@ export const SC_RATING_ITEM_GROUP = new InjectionToken<ScRatingItemGroup>(
 );
 
 @Directive({
-  selector: '[sc-rating-item-group]',
+  selector: '[scRatingItemGroup]',
   providers: [
     { provide: SC_RATING_ITEM_GROUP, useExisting: ScRatingItemGroup },
   ],

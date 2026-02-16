@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { ScNavbarProvider } from './navbar-provider';
 
 @Component({
-  selector: 'button[sc-navbar-mobile-trigger]',
+  selector: 'button[scNavbarMobileTrigger]',
   exportAs: 'scNavbarMobileTrigger',
   template: `
     <ng-content />

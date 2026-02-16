@@ -50,22 +50,22 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div sc-navbar-provider>
-      <nav sc-navbar>
-        <div sc-navbar-group>
-          <a sc-navbar-brand routerLink="/">
+    <div scNavbarProvider>
+      <nav scNavbar>
+        <div scNavbarGroup>
+          <a scNavbarBrand routerLink="/">
             <span>Brand</span>
           </a>
 
           <!-- Navigation Menu with Dropdowns -->
-          <nav sc-navigation-menu class="hidden md:flex">
-            <ul sc-navigation-menu-list>
-              <li sc-navigation-menu-item>
-                <button sc-navigation-menu-trigger>Products</button>
-                <div sc-navigation-menu-content>
+          <nav scNavigationMenu class="hidden md:flex">
+            <ul scNavigationMenuList>
+              <li scNavigationMenuItem>
+                <button scNavigationMenuTrigger>Products</button>
+                <div scNavigationMenuContent>
                   <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
                     <li>
-                      <a sc-navigation-menu-link routerLink="/products/web">
+                      <a scNavigationMenuLink routerLink="/products/web">
                         <div class="text-sm font-medium leading-none">Web Apps</div>
                         <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
                           Build modern web applications
@@ -77,16 +77,16 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                 </div>
               </li>
 
-              <li sc-navigation-menu-item>
-                <a sc-navigation-menu-link routerLink="/docs">Docs</a>
+              <li scNavigationMenuItem>
+                <a scNavigationMenuLink routerLink="/docs">Docs</a>
               </li>
             </ul>
           </nav>
         </div>
 
-        <div sc-navbar-actions>
-          <button sc-button>Get Started</button>
-          <button sc-navbar-mobile-trigger #trigger="scNavbarMobileTrigger">
+        <div scNavbarActions>
+          <button scButton>Get Started</button>
+          <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
             @if (trigger.isMobileMenuOpen()) {
               <svg si-x-icon></svg>
             } @else {
@@ -100,10 +100,10 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
       </nav>
 
       <!-- Mobile Menu -->
-      <div sc-navbar-mobile-portal>
-        <div sc-navbar-mobile-menu>
-          <a sc-navbar-mobile-link routerLink="/products">Products</a>
-          <a sc-navbar-mobile-link routerLink="/docs">Docs</a>
+      <div scNavbarMobilePortal>
+        <div scNavbarMobileMenu>
+          <a scNavbarMobileLink routerLink="/products">Products</a>
+          <a scNavbarMobileLink routerLink="/docs">Docs</a>
         </div>
       </div>
     </div>
@@ -118,7 +118,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 You can control the mobile menu state using two-way binding on the provider:
 
 ```html
-<div sc-navbar-provider [(open)]="mobileMenuOpen">
+<div scNavbarProvider [(open)]="mobileMenuOpen">
   <!-- navbar content -->
 </div>
 ```
@@ -134,7 +134,7 @@ export class MyComponent {
 Use the `active` input to indicate the current page for mobile links:
 
 ```html
-<a sc-navbar-mobile-link routerLink="/about" [active]="isAboutPage">About</a>
+<a scNavbarMobileLink routerLink="/about" [active]="isAboutPage">About</a>
 ```
 
 ## With RouterLinkActive
@@ -142,7 +142,7 @@ Use the `active` input to indicate the current page for mobile links:
 For automatic active state based on the current route:
 
 ```html
-<a sc-navbar-mobile-link routerLink="/about" routerLinkActive="active" #rla="routerLinkActive" [active]="rla.isActive">About</a>
+<a scNavbarMobileLink routerLink="/about" routerLinkActive="active" #rla="routerLinkActive" [active]="rla.isActive">About</a>
 ```
 
 ## Mobile Menu Behavior
@@ -163,9 +163,9 @@ The mobile menu automatically:
 All components accept a `class` input for custom styles:
 
 ```html
-<nav sc-navbar class="sticky top-0 z-50">
-  <a sc-navbar-brand class="text-primary">Brand</a>
-  <nav sc-navigation-menu>
+<nav scNavbar class="sticky top-0 z-50">
+  <a scNavbarBrand class="text-primary">Brand</a>
+  <nav scNavigationMenu>
     <!-- navigation menu items -->
   </nav>
 </nav>
@@ -176,8 +176,8 @@ All components accept a `class` input for custom styles:
 The mobile menu container can be styled directly using the `class` input:
 
 ```html
-<div sc-navbar-mobile-portal>
-  <div sc-navbar-mobile-menu class="bg-red-500 p-8">
+<div scNavbarMobilePortal>
+  <div scNavbarMobileMenu class="bg-red-500 p-8">
     <!-- Custom background and padding -->
   </div>
 </div>

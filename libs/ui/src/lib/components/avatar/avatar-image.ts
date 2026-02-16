@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScAvatar } from './avatar';
 
 @Directive({
-  selector: 'img[sc-avatar-image]',
+  selector: 'img[scAvatarImage]',
   host: {
     'data-slot': 'avatar-image',
     '[class]': 'class()',

@@ -15,7 +15,7 @@ import {
   selector: 'sc-barcode-scanner-simple',
   imports: [ScBarcodeScanner],
   template: `
-    <sc-barcode-scanner
+    <scBarcodeScanner
       [formats]="formats()"
       [continuous]="continuous()"
       [showLastResult]="showLastResult()"

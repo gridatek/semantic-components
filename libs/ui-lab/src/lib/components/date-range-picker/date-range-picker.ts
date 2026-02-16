@@ -93,14 +93,14 @@ export interface DateRangePreset {
             <div class="p-3">
               @if (showTwoMonths()) {
                 <div class="flex gap-4">
-                  <sc-calendar
+                  <scCalendar
                     mode="range"
                     [(selectedRange)]="value"
                     [minDate]="minDate()"
                     [maxDate]="maxDate()"
                     [disabled]="disabledDates()"
                   />
-                  <sc-calendar
+                  <scCalendar
                     mode="range"
                     [(selectedRange)]="value"
                     [minDate]="minDate()"
@@ -109,7 +109,7 @@ export interface DateRangePreset {
                   />
                 </div>
               } @else {
-                <sc-calendar
+                <scCalendar
                   mode="range"
                   [(selectedRange)]="value"
                   [minDate]="minDate()"

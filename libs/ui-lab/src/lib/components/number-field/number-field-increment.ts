@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Component({
-  selector: 'button[sc-number-field-increment]',
+  selector: 'button[scNumberFieldIncrement]',
   template: `
     <ng-content>
       <svg

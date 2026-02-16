@@ -90,7 +90,7 @@ import type {
                 <div [class]="horizontalConnectorClass(isFirst, isLast)"></div>
 
                 <!-- Recursive child node -->
-                <sc-org-chart-node
+                <scOrgChartNode
                   [node]="child"
                   [direction]="direction()"
                   [collapsible]="collapsible()"

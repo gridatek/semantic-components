@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: '[sc-timeline-connector]',
+  selector: '[scTimelineConnector]',
   template: ``,
   host: {
     'data-slot': 'timeline-connector',

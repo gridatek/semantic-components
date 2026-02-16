@@ -62,44 +62,44 @@ interface ContactForm {
     ScTextarea,
   ],
   template: \`
-    <div sc-card class="max-w-lg">
-      <div sc-card-header>
-        <h4 sc-card-title class="text-base">Contact Us</h4>
+    <div scCard class="max-w-lg">
+      <div scCardHeader>
+        <h4 scCardTitle class="text-base">Contact Us</h4>
       </div>
-      <div sc-card-body class="grid gap-4">
+      <div scCardBody class="grid gap-4">
         <div class="grid grid-cols-2 gap-4">
-          <div sc-field>
-            <label sc-label>Name</label>
+          <div scField>
+            <label scLabel>Name</label>
             <input
-              sc-input
+              scInput
               type="text"
               [formField]="contactForm.name"
               placeholder="Your name"
             />
           </div>
-          <div sc-field>
-            <label sc-label>Email</label>
+          <div scField>
+            <label scLabel>Email</label>
             <input
-              sc-input
+              scInput
               type="email"
               [formField]="contactForm.email"
               placeholder="your&#64;email.com"
             />
           </div>
         </div>
-        <div sc-field>
-          <label sc-label>Subject</label>
+        <div scField>
+          <label scLabel>Subject</label>
           <input
-            sc-input
+            scInput
             type="text"
             [formField]="contactForm.subject"
             placeholder="How can we help?"
           />
         </div>
-        <div sc-field>
-          <label sc-label>Message</label>
+        <div scField>
+          <label scLabel>Message</label>
           <textarea
-            sc-textarea
+            scTextarea
             rows="4"
             [formField]="contactForm.message"
             placeholder="Please describe your inquiry in detail..."

@@ -5,28 +5,28 @@ Advanced table component with sorting, filtering, column visibility, row selecti
 ## Usage
 
 ```html
-<div sc-data-table [data]="data" [columns]="columns">
-  <input sc-data-table-filter placeholder="Search..." />
-  <div sc-data-table-column-toggle></div>
+<div scDataTable [data]="data" [columns]="columns">
+  <input scDataTableFilter placeholder="Search..." />
+  <div scDataTableColumnToggle></div>
 
   <table>
-    <thead sc-data-table-header>
+    <thead scDataTableHeader>
       <tr>
-        <th sc-data-table-head columnId="name" [sortable]="true">Name</th>
-        <th sc-data-table-head columnId="email" [sortable]="true">Email</th>
+        <th scDataTableHead columnId="name" [sortable]="true">Name</th>
+        <th scDataTableHead columnId="email" [sortable]="true">Email</th>
       </tr>
     </thead>
-    <tbody sc-data-table-body>
+    <tbody scDataTableBody>
       @for (row of data; track row.id) {
-      <tr sc-data-table-row>
-        <td sc-data-table-cell>{{ row.name }}</td>
-        <td sc-data-table-cell>{{ row.email }}</td>
+      <tr scDataTableRow>
+        <td scDataTableCell>{{ row.name }}</td>
+        <td scDataTableCell>{{ row.email }}</td>
       </tr>
       }
     </tbody>
   </table>
 
-  <div sc-data-table-pagination></div>
+  <div scDataTablePagination></div>
 </div>
 ```
 
@@ -36,7 +36,7 @@ Advanced table component with sorting, filtering, column visibility, row selecti
 
 Root container that manages table state and provides context.
 
-**Selector:** `[sc-data-table]`
+**Selector:** `[scDataTable]`
 
 **Inputs:**
 
@@ -72,19 +72,19 @@ Root container that manages table state and provides context.
 
 Table header container.
 
-**Selector:** `[sc-data-table-header]`
+**Selector:** `[scDataTableHeader]`
 
 ### ScDataTableBody
 
 Table body container.
 
-**Selector:** `[sc-data-table-body]`
+**Selector:** `[scDataTableBody]`
 
 ### ScDataTableRow
 
 Table row with selection state.
 
-**Selector:** `[sc-data-table-row]`
+**Selector:** `[scDataTableRow]`
 
 **Inputs:**
 
@@ -97,7 +97,7 @@ Table row with selection state.
 
 Table header cell with optional sorting.
 
-**Selector:** `[sc-data-table-head]`
+**Selector:** `[scDataTableHead]`
 
 **Inputs:**
 
@@ -111,13 +111,13 @@ Table header cell with optional sorting.
 
 Table data cell.
 
-**Selector:** `[sc-data-table-cell]`
+**Selector:** `[scDataTableCell]`
 
 ### ScDataTableFilter
 
 Global filter input.
 
-**Selector:** `input[sc-data-table-filter]`
+**Selector:** `input[scDataTableFilter]`
 
 **Inputs:**
 
@@ -130,13 +130,13 @@ Global filter input.
 
 Dropdown to toggle column visibility.
 
-**Selector:** `[sc-data-table-column-toggle]`
+**Selector:** `[scDataTableColumnToggle]`
 
 ### ScDataTablePagination
 
 Pagination controls with page size selector.
 
-**Selector:** `[sc-data-table-pagination]`
+**Selector:** `[scDataTablePagination]`
 
 **Inputs:**
 
@@ -192,19 +192,19 @@ interface ColumnVisibilityState {
 ### Basic Table
 
 ```html
-<div sc-data-table [data]="users" [columns]="columns">
+<div scDataTable [data]="users" [columns]="columns">
   <table>
-    <thead sc-data-table-header>
+    <thead scDataTableHeader>
       <tr>
-        <th sc-data-table-head>Name</th>
-        <th sc-data-table-head>Email</th>
+        <th scDataTableHead>Name</th>
+        <th scDataTableHead>Email</th>
       </tr>
     </thead>
-    <tbody sc-data-table-body>
+    <tbody scDataTableBody>
       @for (user of users; track user.id) {
-      <tr sc-data-table-row>
-        <td sc-data-table-cell>{{ user.name }}</td>
-        <td sc-data-table-cell>{{ user.email }}</td>
+      <tr scDataTableRow>
+        <td scDataTableCell>{{ user.name }}</td>
+        <td scDataTableCell>{{ user.email }}</td>
       </tr>
       }
     </tbody>
@@ -215,19 +215,19 @@ interface ColumnVisibilityState {
 ### With Sorting
 
 ```html
-<div #table sc-data-table [data]="users" [columns]="columns">
+<div #table scDataTable [data]="users" [columns]="columns">
   <table>
-    <thead sc-data-table-header>
+    <thead scDataTableHeader>
       <tr>
-        <th sc-data-table-head columnId="name" [sortable]="true">Name</th>
-        <th sc-data-table-head columnId="email" [sortable]="true">Email</th>
+        <th scDataTableHead columnId="name" [sortable]="true">Name</th>
+        <th scDataTableHead columnId="email" [sortable]="true">Email</th>
       </tr>
     </thead>
-    <tbody sc-data-table-body>
+    <tbody scDataTableBody>
       @for (user of table.sortedData(); track user.id) {
-      <tr sc-data-table-row>
-        <td sc-data-table-cell>{{ user.name }}</td>
-        <td sc-data-table-cell>{{ user.email }}</td>
+      <tr scDataTableRow>
+        <td scDataTableCell>{{ user.name }}</td>
+        <td scDataTableCell>{{ user.email }}</td>
       </tr>
       }
     </tbody>
@@ -238,21 +238,21 @@ interface ColumnVisibilityState {
 ### With Filtering
 
 ```html
-<div #table sc-data-table [data]="users" [columns]="columns">
-  <input sc-data-table-filter placeholder="Search users..." />
+<div #table scDataTable [data]="users" [columns]="columns">
+  <input scDataTableFilter placeholder="Search users..." />
 
   <table>
-    <thead sc-data-table-header>
+    <thead scDataTableHeader>
       <tr>
-        <th sc-data-table-head>Name</th>
-        <th sc-data-table-head>Email</th>
+        <th scDataTableHead>Name</th>
+        <th scDataTableHead>Email</th>
       </tr>
     </thead>
-    <tbody sc-data-table-body>
+    <tbody scDataTableBody>
       @for (user of table.filteredData(); track user.id) {
-      <tr sc-data-table-row>
-        <td sc-data-table-cell>{{ user.name }}</td>
-        <td sc-data-table-cell>{{ user.email }}</td>
+      <tr scDataTableRow>
+        <td scDataTableCell>{{ user.name }}</td>
+        <td scDataTableCell>{{ user.email }}</td>
       </tr>
       } @empty {
       <tr>
@@ -267,23 +267,23 @@ interface ColumnVisibilityState {
 ### With Row Selection
 
 ```html
-<div #table sc-data-table [data]="users" [columns]="columns">
+<div #table scDataTable [data]="users" [columns]="columns">
   <table>
-    <thead sc-data-table-header>
+    <thead scDataTableHeader>
       <tr>
-        <th sc-data-table-head>
+        <th scDataTableHead>
           <input type="checkbox" [checked]="table.isAllRowsSelected()" [indeterminate]="table.isSomeRowsSelected()" (change)="table.toggleAllRowSelection()" />
         </th>
-        <th sc-data-table-head>Name</th>
+        <th scDataTableHead>Name</th>
       </tr>
     </thead>
-    <tbody sc-data-table-body>
+    <tbody scDataTableBody>
       @for (user of table.sortedData(); track user.id; let i = $index) {
-      <tr sc-data-table-row [selected]="table.isRowSelected(i)">
-        <td sc-data-table-cell>
+      <tr scDataTableRow [selected]="table.isRowSelected(i)">
+        <td scDataTableCell>
           <input type="checkbox" [checked]="table.isRowSelected(i)" (change)="table.toggleRowSelection(i)" />
         </td>
-        <td sc-data-table-cell>{{ user.name }}</td>
+        <td scDataTableCell>{{ user.name }}</td>
       </tr>
       }
     </tbody>
@@ -294,8 +294,8 @@ interface ColumnVisibilityState {
 ### With Column Visibility
 
 ```html
-<div sc-data-table [data]="users" [columns]="columns">
-  <div sc-data-table-column-toggle></div>
+<div scDataTable [data]="users" [columns]="columns">
+  <div scDataTableColumnToggle></div>
   <!-- ... -->
 </div>
 ```
@@ -303,10 +303,10 @@ interface ColumnVisibilityState {
 ### With Pagination
 
 ```html
-<div sc-data-table [data]="users" [columns]="columns">
+<div scDataTable [data]="users" [columns]="columns">
   <!-- ... table ... -->
 
-  <div sc-data-table-pagination [(pageSize)]="pageSize" [(currentPage)]="currentPage" [pageSizes]="[5, 10, 25, 50]"></div>
+  <div scDataTablePagination [(pageSize)]="pageSize" [(currentPage)]="currentPage" [pageSizes]="[5, 10, 25, 50]"></div>
 </div>
 ```
 

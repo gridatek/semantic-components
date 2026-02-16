@@ -16,7 +16,7 @@ import { ScSlider } from '@semantic-components/ui-lab';
         <span class="text-2xl font-bold">{{ temperature() }}&deg;C</span>
       </div>
       <div
-        sc-slider
+        scSlider
         [(value)]="temperature"
         [min]="16"
         [max]="30"

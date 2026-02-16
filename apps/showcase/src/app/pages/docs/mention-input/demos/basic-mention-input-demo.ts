@@ -11,7 +11,7 @@ import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
   imports: [ScMentionInput],
   template: `
     <div class="max-w-lg">
-      <sc-mention-input
+      <scMentionInput
         [(value)]="value"
         [(mentions)]="mentions"
         [users]="sampleUsers"

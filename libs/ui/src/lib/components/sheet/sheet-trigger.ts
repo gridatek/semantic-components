@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScSheetProvider } from './sheet-provider';
 
 @Directive({
-  selector: 'button[sc-sheet-trigger]',
+  selector: 'button[scSheetTrigger]',
   host: {
     'data-slot': 'sheet-trigger',
     '[class]': 'class()',

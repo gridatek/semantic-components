@@ -30,10 +30,10 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
   selector: 'app-testimonials-marquee-demo',
   imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
   template: \`
-    <sc-marquee [duration]="40" [gap]="24">
+    <scMarquee [duration]="40" [gap]="24">
       @for (testimonial of testimonials; track testimonial.name) {
         <div
-          sc-marquee-item
+          scMarqueeItem
           class="w-80 rounded-lg border bg-background p-4 shadow-sm"
         >
           <p class="text-sm text-muted-foreground mb-3">
@@ -54,10 +54,10 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
           </div>
         </div>
       }
-      <ng-container sc-marquee-clone>
+      <ng-container scMarqueeClone>
         @for (testimonial of testimonials; track testimonial.name) {
           <div
-            sc-marquee-item
+            scMarqueeItem
             class="w-80 rounded-lg border bg-background p-4 shadow-sm"
           >
             <p class="text-sm text-muted-foreground mb-3">

@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'button[sc-emoji-picker-trigger]',
+  selector: 'button[scEmojiPickerTrigger]',
   template: `
     <ng-content>
       <svg

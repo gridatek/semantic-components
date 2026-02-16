@@ -11,7 +11,7 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
   imports: [ScVirtualList],
   template: `
     <div class="border rounded-lg overflow-hidden">
-      <sc-virtual-list [items]="items()" [itemHeight]="36" height="200px">
+      <scVirtualList [items]="items()" [itemHeight]="36" height="200px">
         <ng-template let-item let-index="index">
           <div
             class="flex items-center px-4 h-full border-b text-sm hover:bg-muted/50 transition-colors"

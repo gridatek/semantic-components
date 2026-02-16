@@ -20,12 +20,12 @@ import {
     ScOptFieldSlot,
   ],
   template: `
-    <div sc-opt-field [(value)]="otp">
-      <div sc-opt-field-slot-group>
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
+    <div scOptField [(value)]="otp">
+      <div scOptFieldSlotGroup>
+        <scOptFieldSlot />
+        <scOptFieldSlot />
       </div>
-      <div sc-opt-field-separator>
+      <div scOptFieldSeparator>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -41,11 +41,11 @@ import {
           <circle cx="12" cy="12" r="1" />
         </svg>
       </div>
-      <div sc-opt-field-slot-group>
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
+      <div scOptFieldSlotGroup>
+        <scOptFieldSlot />
+        <scOptFieldSlot />
       </div>
-      <div sc-opt-field-separator>
+      <div scOptFieldSeparator>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -61,9 +61,9 @@ import {
           <circle cx="12" cy="12" r="1" />
         </svg>
       </div>
-      <div sc-opt-field-slot-group>
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
+      <div scOptFieldSlotGroup>
+        <scOptFieldSlot />
+        <scOptFieldSlot />
       </div>
     </div>
     <p class="text-sm text-muted-foreground mt-4">

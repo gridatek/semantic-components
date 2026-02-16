@@ -14,7 +14,7 @@ import type { VirtualListItem, VirtualListRange } from '@/ui/virtual-list';
 ### Basic Usage
 
 ```html
-<sc-virtual-list [items]="items" [itemHeight]="48" [height]="400">
+<scVirtualList [items]="items" [itemHeight]="48" [height]="400">
   <ng-template let-item let-index="index">
     <div class="p-3 border-b">{{ index }}: {{ item }}</div>
   </ng-template>
@@ -28,7 +28,7 @@ items = Array.from({ length: 10000 }, (_, i) => `Item ${i + 1}`);
 ### Custom Item Template
 
 ```html
-<sc-virtual-list [items]="users" [itemHeight]="64">
+<scVirtualList [items]="users" [itemHeight]="64">
   <ng-template let-user let-index="index">
     <div class="flex items-center gap-3 p-3 border-b">
       <img [src]="user.avatar" class="w-10 h-10 rounded-full" />
@@ -44,7 +44,7 @@ items = Array.from({ length: 10000 }, (_, i) => `Item ${i + 1}`);
 ### With Custom Track Function
 
 ```html
-<sc-virtual-list [items]="items" [trackByFn]="trackById">
+<scVirtualList [items]="items" [trackByFn]="trackById">
   <ng-template let-item>{{ item.name }}</ng-template>
 </sc-virtual-list>
 ```
@@ -56,7 +56,7 @@ trackById = (index: number, item: User) => item.id;
 ### Listening to Range Changes
 
 ```html
-<sc-virtual-list [items]="items" (rangeChange)="onRangeChange($event)">
+<scVirtualList [items]="items" (rangeChange)="onRangeChange($event)">
   <ng-template let-item>{{ item }}</ng-template>
 </sc-virtual-list>
 ```

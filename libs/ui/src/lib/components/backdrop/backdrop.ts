@@ -15,7 +15,7 @@ import { cn } from '../../utils';
 type ScBackdropState = 'idle' | 'open' | 'closed';
 
 @Component({
-  selector: 'div[sc-backdrop]',
+  selector: 'div[scBackdrop]',
   template: '',
   host: {
     'data-slot': 'backdrop',

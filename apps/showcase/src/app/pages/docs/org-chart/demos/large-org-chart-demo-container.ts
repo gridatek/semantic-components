@@ -32,7 +32,7 @@ import { ScOrgChart, type OrgChartNode } from '@semantic-components/ui-lab';
   imports: [ScOrgChart],
   template: \`
     <div class="border rounded-lg overflow-auto max-h-[500px]">
-      <sc-org-chart [data]="orgData()" />
+      <scOrgChart [data]="orgData()" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

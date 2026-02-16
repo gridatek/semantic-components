@@ -31,7 +31,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
   imports: [ScMultiSelect],
   template: \`
     <div class="max-w-sm">
-      <sc-multi-select
+      <scMultiSelect
         [options]="options"
         [searchable]="false"
         placeholder="Select sizes..."

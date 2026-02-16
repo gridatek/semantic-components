@@ -14,8 +14,8 @@ import {
   imports: [ScChartContainer, ScBarChart],
   template: `
     <div class="max-w-2xl rounded-lg border p-6">
-      <div sc-chart-container>
-        <div sc-bar-chart [data]="monthlyData" [height]="300"></div>
+      <div scChartContainer>
+        <div scBarChart [data]="monthlyData" [height]="300"></div>
       </div>
     </div>
   `,

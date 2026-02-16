@@ -48,21 +48,21 @@ import {
     ScImageCompareLabel,
   ],
   template: \`
-    <div sc-image-compare class="w-full max-w-md aspect-square">
-      <div sc-image-compare-container>
+    <div scImageCompare class="w-full max-w-md aspect-square">
+      <div scImageCompareContainer>
         <img
-          sc-image-compare-before
+          scImageCompareBefore
           src="https://picsum.photos/500/500?grayscale&random=7"
           alt="Before"
         />
         <img
-          sc-image-compare-after
+          scImageCompareAfter
           src="https://picsum.photos/500/500?random=7"
           alt="After"
         />
-        <div sc-image-compare-slider></div>
-        <div sc-image-compare-label class="top-2 left-2">Before</div>
-        <div sc-image-compare-label class="top-2 right-2">After</div>
+        <div scImageCompareSlider></div>
+        <div scImageCompareLabel class="top-2 left-2">Before</div>
+        <div scImageCompareLabel class="top-2 right-2">After</div>
       </div>
     </div>
   \`,

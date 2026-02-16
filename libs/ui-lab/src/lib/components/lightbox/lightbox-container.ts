@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_LIGHTBOX } from './lightbox';
 
 @Component({
-  selector: '[sc-lightbox-container]',
+  selector: '[scLightboxContainer]',
   template: `
     @if (lightbox.isOpen()) {
       <div
@@ -34,7 +34,7 @@ import { SC_LIGHTBOX } from './lightbox';
           (click)="lightbox.close()"
           aria-label="Close lightbox"
         >
-          <ng-content select="[sc-lightbox-close-icon]">
+          <ng-content select="[scLightboxCloseIcon]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -57,7 +57,7 @@ import { SC_LIGHTBOX } from './lightbox';
             [disabled]="!lightbox.loop() && lightbox.currentIndex() === 0"
             aria-label="Previous image"
           >
-            <ng-content select="[sc-lightbox-prev-icon]">
+            <ng-content select="[scLightboxPrevIcon]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -89,7 +89,7 @@ import { SC_LIGHTBOX } from './lightbox';
           <!-- Loading indicator -->
           @if (lightbox.imageLoading()) {
             <div class="absolute inset-0 flex items-center justify-center">
-              <ng-content select="[sc-lightbox-loading]">
+              <ng-content select="[scLightboxLoading]">
                 <svg
                   class="size-8 animate-spin text-white"
                   xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +128,7 @@ import { SC_LIGHTBOX } from './lightbox';
             "
             aria-label="Next image"
           >
-            <ng-content select="[sc-lightbox-next-icon]">
+            <ng-content select="[scLightboxNextIcon]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

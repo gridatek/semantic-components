@@ -33,8 +33,8 @@ import {
     ScMenuTrigger,
   ],
   template: `
-    <div sc-menu-provider>
-      <button sc-menu-trigger>
+    <div scMenuProvider>
+      <button scMenuTrigger>
         <svg
           class="size-4"
           xmlns="http://www.w3.org/2000/svg"
@@ -54,9 +54,9 @@ import {
         </svg>
         Open Menu
       </button>
-      <div sc-menu-portal>
-        <div sc-menu>
-          <div sc-menu-item value="Mark as read">
+      <div scMenuPortal>
+        <div scMenu>
+          <div scMenuItem value="Mark as read">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ import {
             </svg>
             <span class="flex-1">Mark as read</span>
           </div>
-          <div sc-menu-item value="Snooze">
+          <div scMenuItem value="Snooze">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -97,10 +97,10 @@ import {
             </svg>
             <span class="flex-1">Snooze</span>
           </div>
-          <div sc-menu-separator></div>
+          <div scMenuSeparator></div>
           <!-- Submenu -->
-          <div sc-menu-sub-provider>
-            <div sc-menu-sub-trigger value="More options">
+          <div scMenuSubProvider>
+            <div scMenuSubTrigger value="More options">
               <svg
                 class="text-muted-foreground size-4"
                 xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@ import {
               </svg>
               <span class="flex-1">More options</span>
               <svg
-                sc-menu-sub-icon
+                scMenuSubIcon
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -134,9 +134,9 @@ import {
                 <path d="m9 18 6-6-6-6" />
               </svg>
             </div>
-            <div sc-menu-sub-portal>
-              <div sc-menu-sub>
-                <div sc-menu-item value="Reply">
+            <div scMenuSubPortal>
+              <div scMenuSub>
+                <div scMenuItem value="Reply">
                   <svg
                     class="text-muted-foreground size-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +155,7 @@ import {
                   </svg>
                   <span class="flex-1">Reply</span>
                 </div>
-                <div sc-menu-item value="Forward">
+                <div scMenuItem value="Forward">
                   <svg
                     class="text-muted-foreground size-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +174,7 @@ import {
                   </svg>
                   <span class="flex-1">Forward</span>
                 </div>
-                <div sc-menu-item value="Move to folder">
+                <div scMenuItem value="Move to folder">
                   <svg
                     class="text-muted-foreground size-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -197,8 +197,8 @@ import {
               </div>
             </div>
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-item value="Archive">
+          <div scMenuSeparator></div>
+          <div scMenuItem value="Archive">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,7 @@ import {
             </svg>
             <span class="flex-1">Archive</span>
           </div>
-          <div sc-menu-item value="Star">
+          <div scMenuItem value="Star">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -238,9 +238,9 @@ import {
             </svg>
             <span class="flex-1">Star</span>
           </div>
-          <div sc-menu-separator></div>
+          <div scMenuSeparator></div>
           <div
-            sc-menu-item
+            scMenuItem
             value="Delete"
             class="text-destructive hover:bg-destructive/10 data-[active=true]:bg-destructive/10"
           >

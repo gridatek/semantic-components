@@ -32,13 +32,13 @@ import { ScSplitButton, type SplitButtonAction } from '@semantic-components/ui-l
   imports: [ScSplitButton],
   template: \`
     <div class="flex flex-wrap items-center gap-4">
-      <sc-split-button label="Small" size="sm" [actions]="basicActions()" />
-      <sc-split-button
+      <scSplitButton label="Small" size="sm" [actions]="basicActions()" />
+      <scSplitButton
         label="Medium"
         size="md"
         [actions]="basicActions()"
       />
-      <sc-split-button label="Large" size="lg" [actions]="basicActions()" />
+      <scSplitButton label="Large" size="lg" [actions]="basicActions()" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

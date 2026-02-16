@@ -22,7 +22,7 @@ export const buttonGroupVariants = cva(
 export type ScButtonGroupVariants = VariantProps<typeof buttonGroupVariants>;
 
 @Directive({
-  selector: 'div[sc-button-group]',
+  selector: 'div[scButtonGroup]',
   host: {
     'data-slot': 'button-group',
     role: 'group',

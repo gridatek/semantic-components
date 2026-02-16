@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-combobox-item]',
+  selector: 'div[scComboboxItem]',
   hostDirectives: [
     {
       directive: Option,

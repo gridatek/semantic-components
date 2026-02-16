@@ -24,24 +24,24 @@ import {
   ],
   template: `
     <div
-      sc-image-compare
+      scImageCompare
       [orientation]="'vertical'"
       class="w-full max-w-sm aspect-[2/3]"
     >
-      <div sc-image-compare-container>
+      <div scImageCompareContainer>
         <img
-          sc-image-compare-before
+          scImageCompareBefore
           src="https://picsum.photos/400/600?grayscale&random=4"
           alt="Top"
         />
         <img
-          sc-image-compare-after
+          scImageCompareAfter
           src="https://picsum.photos/400/600?random=4"
           alt="Bottom"
         />
-        <div sc-image-compare-slider></div>
-        <div sc-image-compare-label class="top-2 left-2">Top</div>
-        <div sc-image-compare-label class="bottom-2 left-2">Bottom</div>
+        <div scImageCompareSlider></div>
+        <div scImageCompareLabel class="top-2 left-2">Top</div>
+        <div scImageCompareLabel class="bottom-2 left-2">Bottom</div>
       </div>
     </div>
   `,

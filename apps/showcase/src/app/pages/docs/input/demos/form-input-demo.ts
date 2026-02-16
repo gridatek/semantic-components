@@ -35,43 +35,43 @@ interface CreateAccountForm {
     ScLabel,
   ],
   template: `
-    <div sc-card class="max-w-md">
-      <div sc-card-header>
-        <h4 sc-card-title class="text-base">Create Account</h4>
+    <div scCard class="max-w-md">
+      <div scCardHeader>
+        <h4 scCardTitle class="text-base">Create Account</h4>
       </div>
-      <div sc-card-body class="grid gap-4">
+      <div scCardBody class="grid gap-4">
         <div class="grid grid-cols-2 gap-4">
-          <div sc-field>
-            <label sc-label>First name</label>
+          <div scField>
+            <label scLabel>First name</label>
             <input
-              sc-input
+              scInput
               type="text"
               [formField]="accountForm.firstName"
               placeholder="John"
             />
           </div>
-          <div sc-field>
-            <label sc-label>Last name</label>
+          <div scField>
+            <label scLabel>Last name</label>
             <input
-              sc-input
+              scInput
               type="text"
               [formField]="accountForm.lastName"
               placeholder="Doe"
             />
           </div>
         </div>
-        <div sc-field>
-          <label sc-label>Email</label>
+        <div scField>
+          <label scLabel>Email</label>
           <input
-            sc-input
+            scInput
             type="email"
             [formField]="accountForm.email"
             placeholder="john&#64;example.com"
           />
         </div>
-        <div sc-field>
-          <label sc-label>Password</label>
-          <input sc-input type="password" [formField]="accountForm.password" />
+        <div scField>
+          <label scLabel>Password</label>
+          <input scInput type="password" [formField]="accountForm.password" />
         </div>
       </div>
     </div>

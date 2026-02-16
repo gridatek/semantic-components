@@ -5,7 +5,7 @@ export type ScAvatarImageStatus = 'idle' | 'loading' | 'loaded' | 'error';
 export type ScAvatarSize = 'sm' | 'default' | 'lg';
 
 @Directive({
-  selector: 'span[sc-avatar]',
+  selector: 'span[scAvatar]',
   host: {
     'data-slot': 'avatar',
     '[attr.data-size]': 'size()',

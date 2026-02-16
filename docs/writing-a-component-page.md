@@ -40,14 +40,14 @@ import { ScAccordion, ScAccordionPanel, ScAccordionItem, ScAccordionTrigger } fr
   selector: 'app-basic-accordion-demo',
   imports: [ScAccordion, ScAccordionPanel, ScAccordionItem, ScAccordionTrigger],
   template: `
-    <div sc-accordion [value]="'item-1'" [collapsible]="true" class="w-full max-w-md">
-      <div sc-accordion-item value="item-1">
-        <button sc-accordion-trigger>Is it accessible?</button>
-        <div sc-accordion-panel>Yes. It adheres to the WAI-ARIA design pattern.</div>
+    <div scAccordion [value]="'item-1'" [collapsible]="true" class="w-full max-w-md">
+      <div scAccordionItem value="item-1">
+        <button scAccordionTrigger>Is it accessible?</button>
+        <div scAccordionPanel>Yes. It adheres to the WAI-ARIA design pattern.</div>
       </div>
-      <div sc-accordion-item value="item-2">
-        <button sc-accordion-trigger>Is it styled?</button>
-        <div sc-accordion-panel>Yes. It comes with default styles that match the other components' aesthetic.</div>
+      <div scAccordionItem value="item-2">
+        <button scAccordionTrigger>Is it styled?</button>
+        <div scAccordionPanel>Yes. It comes with default styles that match the other components' aesthetic.</div>
       </div>
     </div>
   `,

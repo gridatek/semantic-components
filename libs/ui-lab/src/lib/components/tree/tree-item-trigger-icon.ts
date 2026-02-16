@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_TREE_ITEM } from './tree-item';
 
 @Directive({
-  selector: 'svg[sc-tree-item-trigger-icon]',
+  selector: 'svg[scTreeItemTriggerIcon]',
   host: {
     'data-slot': 'tree-item-trigger-icon',
     '[class]': 'class()',

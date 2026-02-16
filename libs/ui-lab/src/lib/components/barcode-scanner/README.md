@@ -10,7 +10,7 @@ Scan barcodes and QR codes using your device's camera with the Barcode Detection
 ## Usage
 
 ```html
-<sc-barcode-scanner (detected)="onDetected($event)" />
+<scBarcodeScanner (detected)="onDetected($event)" />
 ```
 
 ## API
@@ -52,7 +52,7 @@ interface BarcodeResult {
 ### Basic Usage
 
 ```html
-<sc-barcode-scanner (detected)="onDetected($event)" />
+<scBarcodeScanner (detected)="onDetected($event)" />
 ```
 
 ```typescript
@@ -65,13 +65,13 @@ onDetected(result: BarcodeResult): void {
 ### QR Code Only
 
 ```html
-<sc-barcode-scanner [formats]="['qr_code']" (detected)="onQRDetected($event)" />
+<scBarcodeScanner [formats]="['qr_code']" (detected)="onQRDetected($event)" />
 ```
 
 ### Product Barcodes
 
 ```html
-<sc-barcode-scanner [formats]="['ean_13', 'ean_8', 'upc_a', 'upc_e']" (detected)="onProductDetected($event)" />
+<scBarcodeScanner [formats]="['ean_13', 'ean_8', 'upc_a', 'upc_e']" (detected)="onProductDetected($event)" />
 ```
 
 ### Single Scan Mode
@@ -79,13 +79,13 @@ onDetected(result: BarcodeResult): void {
 Stop scanning after first detection:
 
 ```html
-<sc-barcode-scanner [continuous]="false" (detected)="onSingleScan($event)" />
+<scBarcodeScanner [continuous]="false" (detected)="onSingleScan($event)" />
 ```
 
 ### Without Result Overlay
 
 ```html
-<sc-barcode-scanner [showLastResult]="false" (detected)="handleResult($event)" />
+<scBarcodeScanner [showLastResult]="false" (detected)="handleResult($event)" />
 ```
 
 ## Features

@@ -6,7 +6,7 @@ export type ToggleGroupVariant = 'default' | 'outline';
 export type ToggleGroupSize = 'default' | 'sm' | 'lg';
 
 @Directive({
-  selector: 'div[sc-toggle-group]',
+  selector: 'div[scToggleGroup]',
   host: {
     'data-slot': 'toggle-group',
     role: 'group',

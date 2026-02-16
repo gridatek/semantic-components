@@ -42,7 +42,7 @@ export const buttonVariants = cva(
 export type ScButtonVariants = VariantProps<typeof buttonVariants>;
 
 @Directive({
-  selector: 'button[sc-button]',
+  selector: 'button[scButton]',
   host: {
     'data-slot': 'button',
     '[attr.type]': 'type()',

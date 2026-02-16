@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-editor-toolbar-group]',
+  selector: 'div[scEditorToolbarGroup]',
   template: `
     <ng-content />
   `,

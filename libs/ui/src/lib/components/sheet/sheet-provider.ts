@@ -24,13 +24,13 @@ import { ScSheetPortal } from './sheet-portal';
 export type ScSheetSide = 'top' | 'right' | 'bottom' | 'left';
 
 @Component({
-  selector: 'div[sc-sheet-provider]',
+  selector: 'div[scSheetProvider]',
   imports: [OverlayModule, ScBackdrop, CdkTrapFocus, NgTemplateOutlet],
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
       <div
-        sc-backdrop
+        scBackdrop
         [open]="open()"
         (animationComplete)="onBackdropAnimationComplete()"
       ></div>

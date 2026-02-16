@@ -34,22 +34,22 @@ import {
   ],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div sc-alert-dialog-provider>
-      <button sc-button sc-alert-dialog-trigger variant="outline">
+    <div scAlertDialogProvider>
+      <button scButton scAlertDialogTrigger variant="outline">
         Delete Account
       </button>
       <ng-template scAlertDialogPortal>
-        <div sc-alert-dialog>
-          <div sc-alert-dialog-header>
-            <h2 sc-alert-dialog-title>Are you absolutely sure?</h2>
-            <p sc-alert-dialog-description>
+        <div scAlertDialog>
+          <div scAlertDialogHeader>
+            <h2 scAlertDialogTitle>Are you absolutely sure?</h2>
+            <p scAlertDialogDescription>
               This action cannot be undone. This will permanently delete your
               account and remove your data from our servers.
             </p>
           </div>
-          <div sc-alert-dialog-footer>
-            <button sc-alert-dialog-cancel>Cancel</button>
-            <button sc-alert-dialog-action>Continue</button>
+          <div scAlertDialogFooter>
+            <button scAlertDialogCancel>Cancel</button>
+            <button scAlertDialogAction>Continue</button>
           </div>
         </div>
       </ng-template>

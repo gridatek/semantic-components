@@ -12,34 +12,34 @@ Augments native scroll functionality for custom, cross-browser styling with a cu
 ### Vertical Scroll
 
 ```html
-<div sc-scroll-area class="h-72 w-48 rounded-md border">
+<div scScrollArea class="h-72 w-48 rounded-md border">
   <div class="p-4">
     <!-- Scrollable content -->
   </div>
-  <div sc-scroll-bar orientation="vertical"></div>
+  <div scScrollBar orientation="vertical"></div>
 </div>
 ```
 
 ### Horizontal Scroll
 
 ```html
-<div sc-scroll-area class="w-96 whitespace-nowrap rounded-md border">
+<div scScrollArea class="w-96 whitespace-nowrap rounded-md border">
   <div class="flex w-max space-x-4 p-4">
     <!-- Horizontally scrollable content -->
   </div>
-  <div sc-scroll-bar orientation="horizontal"></div>
+  <div scScrollBar orientation="horizontal"></div>
 </div>
 ```
 
 ### Both Scrollbars
 
 ```html
-<div sc-scroll-area class="h-72 w-72 rounded-md border">
+<div scScrollArea class="h-72 w-72 rounded-md border">
   <div class="p-4" style="width: 500px;">
     <!-- Content wider and taller than container -->
   </div>
-  <div sc-scroll-bar orientation="vertical"></div>
-  <div sc-scroll-bar orientation="horizontal"></div>
+  <div scScrollBar orientation="vertical"></div>
+  <div scScrollBar orientation="horizontal"></div>
 </div>
 ```
 

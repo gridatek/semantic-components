@@ -35,7 +35,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
   imports: [ScToggle],
   template: \`
     <div class="flex items-center gap-2">
-      <button sc-toggle [disabled]="true" aria-label="Toggle disabled">
+      <button scToggle [disabled]="true" aria-label="Toggle disabled">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -53,7 +53,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
         </svg>
       </button>
       <button
-        sc-toggle
+        scToggle
         [pressed]="true"
         [disabled]="true"
         aria-label="Toggle disabled pressed"

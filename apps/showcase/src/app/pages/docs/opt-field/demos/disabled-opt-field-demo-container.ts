@@ -38,14 +38,14 @@ import {
   selector: 'app-disabled-opt-field-demo',
   imports: [ScOptField, ScOptFieldSlotGroup, ScOptFieldSlot],
   template: \`
-    <div sc-opt-field [disabled]="true" value="123456">
-      <div sc-opt-field-slot-group>
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
+    <div scOptField [disabled]="true" value="123456">
+      <div scOptFieldSlotGroup>
+        <scOptFieldSlot />
+        <scOptFieldSlot />
+        <scOptFieldSlot />
+        <scOptFieldSlot />
+        <scOptFieldSlot />
+        <scOptFieldSlot />
       </div>
     </div>
   \`,

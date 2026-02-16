@@ -48,7 +48,7 @@ interface SliderFormModel {
       <div class="space-y-6">
         <div class="space-y-2">
           <label class="text-sm font-medium leading-none">Volume</label>
-          <div sc-slider [formField]="sliderForm.volume"></div>
+          <div scSlider [formField]="sliderForm.volume"></div>
           <p class="text-xs text-muted-foreground">
             Current: {{ sliderForm.volume().value() }}%
           </p>
@@ -56,7 +56,7 @@ interface SliderFormModel {
 
         <div class="space-y-2">
           <label class="text-sm font-medium leading-none">Brightness</label>
-          <div sc-slider [formField]="sliderForm.brightness"></div>
+          <div scSlider [formField]="sliderForm.brightness"></div>
           <p class="text-xs text-muted-foreground">
             Current: {{ sliderForm.brightness().value() }}%
           </p>
@@ -66,7 +66,7 @@ interface SliderFormModel {
           <label class="text-sm font-medium leading-none">
             Temperature (°C)
           </label>
-          <div sc-slider [formField]="sliderForm.temperature"></div>
+          <div scSlider [formField]="sliderForm.temperature"></div>
           <p class="text-xs text-muted-foreground">
             Current: {{ sliderForm.temperature().value() }}°C
           </p>

@@ -16,7 +16,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
         npm install &#64;angular/core
       </code>
       <button
-        sc-copy-button
+        scCopyButton
         [value]="'npm install @angular/core'"
         size="sm"
       ></button>

@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[sc-alert-dialog-footer]',
+  selector: 'div[scAlertDialogFooter]',
   host: {
     'data-slot': 'alert-dialog-footer',
     '[class]': 'class()',

@@ -62,7 +62,7 @@ import { ScTourGuide, TourService, TourOptions } from '@semantic-components/ui-l
       </div>
 
       <!-- Tour Guide Component -->
-      <sc-tour-guide />
+      <scTourGuide />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

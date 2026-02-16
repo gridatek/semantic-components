@@ -37,10 +37,10 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-2">
-        <div sc-rating-field [value]="4" [readonly]="true">
-          <div sc-rating-item-group class="flex gap-0.5">
+        <div scRatingField [value]="4" [readonly]="true">
+          <div scRatingItemGroup class="flex gap-0.5">
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span sc-rating-item [value]="i">
+              <span scRatingItem [value]="i">
                 <svg
                   si-star-icon
                   class="size-6"
@@ -56,10 +56,10 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
       </div>
 
       <div class="flex flex-col gap-2">
-        <div sc-rating-field [value]="3.5" [readonly]="true" [allowHalf]="true">
-          <div sc-rating-item-group class="flex gap-0.5">
+        <div scRatingField [value]="3.5" [readonly]="true" [allowHalf]="true">
+          <div scRatingItemGroup class="flex gap-0.5">
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span sc-rating-item [value]="i">
+              <span scRatingItem [value]="i">
                 <svg
                   si-star-icon
                   class="size-6"

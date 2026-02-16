@@ -58,9 +58,9 @@ import {
           - Close lightbox
         </li>
       </ul>
-      <div sc-lightbox [images]="images">
+      <div scLightbox [images]="images">
         <button
-          sc-lightbox-trigger
+          scLightboxTrigger
           [index]="0"
           class="inline-flex items-center gap-2 px-4 py-2 border rounded-md hover:bg-accent"
         >
@@ -78,7 +78,7 @@ import {
           </svg>
           Open Gallery
         </button>
-        <div sc-lightbox-container></div>
+        <div scLightboxContainer></div>
       </div>
     </div>
   \`,

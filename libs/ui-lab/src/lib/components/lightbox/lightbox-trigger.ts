@@ -2,7 +2,7 @@ import { Directive, inject, input } from '@angular/core';
 import { SC_LIGHTBOX } from './lightbox';
 
 @Directive({
-  selector: '[sc-lightbox-trigger]',
+  selector: '[scLightboxTrigger]',
   host: {
     'data-slot': 'lightbox-trigger',
     '[style.cursor]': '"pointer"',

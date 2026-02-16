@@ -8,10 +8,10 @@ import { ChartDataPoint } from './chart-types';
 import { ScPieChart } from './pie-chart';
 
 @Component({
-  selector: '[sc-donut-chart]',
+  selector: '[scDonutChart]',
   template: `
     <div
-      sc-pie-chart
+      scPieChart
       [data]="data()"
       [size]="size()"
       [innerRadius]="innerRadius()"

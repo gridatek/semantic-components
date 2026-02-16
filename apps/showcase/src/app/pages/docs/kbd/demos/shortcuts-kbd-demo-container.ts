@@ -37,33 +37,33 @@ import { ScKbd } from '@semantic-components/ui';
     <div class="space-y-3">
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground w-24">Copy</span>
-        <kbd sc-kbd>⌘</kbd>
+        <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>C</kbd>
+        <kbd scKbd>C</kbd>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground w-24">Paste</span>
-        <kbd sc-kbd>⌘</kbd>
+        <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>V</kbd>
+        <kbd scKbd>V</kbd>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground w-24">Undo</span>
-        <kbd sc-kbd>⌘</kbd>
+        <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>Z</kbd>
+        <kbd scKbd>Z</kbd>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground w-24">Save</span>
-        <kbd sc-kbd>⌘</kbd>
+        <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>S</kbd>
+        <kbd scKbd>S</kbd>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground w-24">Search</span>
-        <kbd sc-kbd>⌘</kbd>
+        <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>K</kbd>
+        <kbd scKbd>K</kbd>
       </div>
     </div>
   \`,

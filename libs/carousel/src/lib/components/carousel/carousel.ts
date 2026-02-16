@@ -24,7 +24,7 @@ export type ScCarouselOptions = EmblaOptionsType;
 export type ScCarouselPlugin = EmblaPluginType;
 
 @Component({
-  selector: 'div[sc-carousel]',
+  selector: 'div[scCarousel]',
   template: `
     <ng-content />
   `,

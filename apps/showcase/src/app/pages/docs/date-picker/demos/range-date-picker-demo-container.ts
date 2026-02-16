@@ -35,7 +35,7 @@ import { DateRange, ScDatePicker } from '@semantic-components/ui-lab';
   selector: 'app-range-date-picker-demo',
   imports: [ScDatePicker],
   template: \`
-    <sc-date-picker
+    <scDatePicker
       mode="range"
       [(selectedRange)]="selectedRange"
       placeholder="Pick a date range"

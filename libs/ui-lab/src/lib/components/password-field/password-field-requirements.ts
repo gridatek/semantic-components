@@ -26,7 +26,7 @@ const DEFAULT_REQUIREMENTS: ScPasswordRequirement[] = [
 ];
 
 @Component({
-  selector: '[sc-password-field-requirements]',
+  selector: '[scPasswordFieldRequirements]',
   template: `
     @if (passwordField.value()) {
       <ul class="mt-2 space-y-1 text-xs">

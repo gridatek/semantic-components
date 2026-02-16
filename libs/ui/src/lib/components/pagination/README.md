@@ -30,25 +30,25 @@ Pagination with page navigation, next and previous links. Supports both manual a
 ### Basic Example
 
 ```html
-<nav sc-pagination>
-  <ul sc-pagination-list>
-    <li sc-pagination-item>
-      <button sc-pagination-previous>
+<nav scPagination>
+  <ul scPaginationList>
+    <li scPaginationItem>
+      <button scPaginationPrevious>
         <svg si-chevron-left-icon></svg>
         <span>Previous</span>
       </button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-link [page]="1">1</button>
+    <li scPaginationItem>
+      <button scPaginationLink [page]="1">1</button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-link [page]="2">2</button>
+    <li scPaginationItem>
+      <button scPaginationLink [page]="2">2</button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-link [page]="3">3</button>
+    <li scPaginationItem>
+      <button scPaginationLink [page]="3">3</button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-next>
+    <li scPaginationItem>
+      <button scPaginationNext>
         <span>Next</span>
         <svg si-chevron-right-icon></svg>
       </button>
@@ -80,17 +80,17 @@ import {
     SiEllipsisIcon,
   ],
   template: `
-    <nav sc-pagination>
-      <ul sc-pagination-list>
-        <li sc-pagination-item>
-          <button sc-pagination-previous>
+    <nav scPagination>
+      <ul scPaginationList>
+        <li scPaginationItem>
+          <button scPaginationPrevious>
             <svg si-chevron-left-icon></svg>
             <span>Previous</span>
           </button>
         </li>
         <!-- Page items here -->
-        <li sc-pagination-item>
-          <button sc-pagination-next>
+        <li scPaginationItem>
+          <button scPaginationNext>
             <span>Next</span>
             <svg si-chevron-right-icon></svg>
           </button>
@@ -113,32 +113,32 @@ import { ScPaginationChange } from '@semantic-components/ui-lab';
 
 @Component({
   template: `
-    <nav sc-pagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (change)="onPaginationChange($event)">
-      <ul sc-pagination-list>
-        <li sc-pagination-item>
-          <button sc-pagination-previous>
+    <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (change)="onPaginationChange($event)">
+      <ul scPaginationList>
+        <li scPaginationItem>
+          <button scPaginationPrevious>
             <svg si-chevron-left-icon></svg>
             <span>Previous</span>
           </button>
         </li>
 
         @for (page of pagination.pages(); track page.value) {
-          <li sc-pagination-item>
+          <li scPaginationItem>
             @if (page.type === 'ellipsis') {
-              <span sc-pagination-ellipsis>
+              <span scPaginationEllipsis>
                 <svg si-ellipsis-icon></svg>
                 <span class="sr-only">More pages</span>
               </span>
             } @else {
-              <button sc-pagination-link [page]="page.value">
+              <button scPaginationLink [page]="page.value">
                 {{ page.value }}
               </button>
             }
           </li>
         }
 
-        <li sc-pagination-item>
-          <button sc-pagination-next>
+        <li scPaginationItem>
+          <button scPaginationNext>
             <span>Next</span>
             <svg si-chevron-right-icon></svg>
           </button>
@@ -177,12 +177,12 @@ You can also manually disable any button:
 
 ```html
 <!-- Manually disabled -->
-<button sc-pagination-previous [disabled]="true">
+<button scPaginationPrevious [disabled]="true">
   <!-- content -->
 </button>
 
 <!-- Disabled link -->
-<button sc-pagination-link [disabled]="true">1</button>
+<button scPaginationLink [disabled]="true">1</button>
 ```
 
 ## First and Last Page Navigation
@@ -190,16 +190,16 @@ You can also manually disable any button:
 Use `ScPaginationFirst` and `ScPaginationLast` for quick navigation to the first and last pages:
 
 ```html
-<nav sc-pagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (change)="onPaginationChange($event)">
-  <ul sc-pagination-list>
-    <li sc-pagination-item>
-      <button sc-pagination-first>
+<nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (change)="onPaginationChange($event)">
+  <ul scPaginationList>
+    <li scPaginationItem>
+      <button scPaginationFirst>
         <svg si-chevrons-left-icon></svg>
         <span>First</span>
       </button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-previous>
+    <li scPaginationItem>
+      <button scPaginationPrevious>
         <svg si-chevron-left-icon></svg>
         <span>Previous</span>
       </button>
@@ -207,14 +207,14 @@ Use `ScPaginationFirst` and `ScPaginationLast` for quick navigation to the first
 
     <!-- Page numbers here -->
 
-    <li sc-pagination-item>
-      <button sc-pagination-next>
+    <li scPaginationItem>
+      <button scPaginationNext>
         <span>Next</span>
         <svg si-chevron-right-icon></svg>
       </button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-last>
+    <li scPaginationItem>
+      <button scPaginationLast>
         <span>Last</span>
         <svg si-chevrons-right-icon></svg>
       </button>
@@ -233,13 +233,13 @@ import { ScPaginationChange } from '@semantic-components/ui-lab';
 
 @Component({
   template: `
-    <nav sc-pagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="pageSize()" [totalItems]="totalItems()" [pageSizes]="[10, 25, 50, 100]" (change)="onPaginationChange($event)">
+    <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="pageSize()" [totalItems]="totalItems()" [pageSizes]="[10, 25, 50, 100]" (change)="onPaginationChange($event)">
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground">Items per page:</span>
-        <sc-pagination-page-size-select />
+        <scPaginationPageSizeSelect />
       </div>
 
-      <ul sc-pagination-list>
+      <ul scPaginationList>
         <!-- Pagination items here -->
       </ul>
     </nav>
@@ -261,7 +261,7 @@ Key points:
 
 - `ScPaginationPageSizeSelect` renders only the select element
 - Wrap it with a label or other elements as needed in your template
-- Must be a child of `<nav sc-pagination>` to access pagination context
+- Must be a child of `<nav scPagination>` to access pagination context
 - Configure available options via `[pageSizes]` on the parent `ScPagination`
 - Listen to `(change)` to receive both page and pageSize updates
 - The component automatically resets to page 1 when page size changes

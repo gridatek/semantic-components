@@ -15,12 +15,12 @@ import {
   imports: [ScNotificationCenter, ScNotificationCenterContainer],
   template: `
     <div
-      sc-notification-center
+      scNotificationCenter
       [(notifications)]="notifications"
       [showFilters]="true"
       class="max-w-md h-[400px]"
     >
-      <div sc-notification-center-container class="h-full"></div>
+      <div scNotificationCenterContainer class="h-full"></div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

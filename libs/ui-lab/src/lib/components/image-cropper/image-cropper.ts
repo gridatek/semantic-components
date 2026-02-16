@@ -91,7 +91,7 @@ export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
 );
 
 @Directive({
-  selector: '[sc-image-cropper]',
+  selector: '[scImageCropper]',
   exportAs: 'scImageCropper',
   providers: [
     { provide: SC_IMAGE_CROPPER, useExisting: ScImageCropperDirective },

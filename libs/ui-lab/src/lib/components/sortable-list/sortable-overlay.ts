@@ -7,7 +7,7 @@ import {
 import { SC_SORTABLE_LIST, ScSortableList } from './sortable-list';
 
 @Component({
-  selector: '[sc-sortable-overlay]',
+  selector: '[scSortableOverlay]',
   template: `
     @if (list.isDragging()) {
       <div

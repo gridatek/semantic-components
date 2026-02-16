@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[sc-alert-dialog-media]',
+  selector: 'div[scAlertDialogMedia]',
   host: {
     'data-slot': 'alert-dialog-media',
     '[class]': 'class()',

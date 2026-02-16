@@ -19,31 +19,31 @@ interface FilterFormModel {
   selector: 'app-horizontal-radio-group-demo',
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
-    <div sc-radio-group class="flex flex-row gap-4">
-      <label sc-radio-field>
+    <div scRadioGroup class="flex flex-row gap-4">
+      <label scRadioField>
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="all"
           [formField]="filterForm.filter"
           id="h1"
         />
         <span class="text-sm font-medium">All</span>
       </label>
-      <label sc-radio-field>
+      <label scRadioField>
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="unread"
           [formField]="filterForm.filter"
           id="h2"
         />
         <span class="text-sm font-medium">Unread</span>
       </label>
-      <label sc-radio-field>
+      <label scRadioField>
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="archived"
           [formField]="filterForm.filter"
           id="h3"

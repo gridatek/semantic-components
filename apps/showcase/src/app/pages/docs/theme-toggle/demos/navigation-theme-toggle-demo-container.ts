@@ -42,7 +42,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
           Customize how the app looks on your device
         </p>
       </div>
-      <button sc-theme-toggle variant="outline" #toggle="scThemeToggle">
+      <button scThemeToggle variant="outline" #toggle="scThemeToggle">
         @if (toggle.isDark()) {
           <svg si-sun-icon></svg>
         } @else {

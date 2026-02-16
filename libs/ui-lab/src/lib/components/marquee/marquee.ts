@@ -14,7 +14,7 @@ import { cn } from '@semantic-components/ui';
       <ng-content />
     </div>
     <div [class]="innerClass()" aria-hidden="true">
-      <ng-content select="[sc-marquee-clone]" />
+      <ng-content select="[scMarqueeClone]" />
     </div>
   `,
   host: {

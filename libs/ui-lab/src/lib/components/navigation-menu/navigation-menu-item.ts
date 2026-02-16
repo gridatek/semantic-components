@@ -17,7 +17,7 @@ import { ScNavigationMenu } from './navigation-menu';
 import { ScNavigationMenuTrigger } from './navigation-menu-trigger';
 
 @Directive({
-  selector: 'li[sc-navigation-menu-item]',
+  selector: 'li[scNavigationMenuItem]',
   host: {
     'data-slot': 'navigation-menu-item',
     '[class]': 'class()',

@@ -48,15 +48,15 @@ import { ScLabel } from '@semantic-components/ui';
   ],
   template: \`
     <div
-      sc-password-field
+      scPasswordField
       [(value)]="apiKey"
       [showByDefault]="true"
       class="space-y-2"
     >
-      <label sc-label>API Key</label>
-      <div sc-password-field-input-group>
-        <input sc-password-field-input placeholder="sk-..." />
-        <button sc-password-field-toggle></button>
+      <label scLabel>API Key</label>
+      <div scPasswordFieldInputGroup>
+        <input scPasswordFieldInput placeholder="sk-..." />
+        <button scPasswordFieldToggle></button>
       </div>
     </div>
   \`,

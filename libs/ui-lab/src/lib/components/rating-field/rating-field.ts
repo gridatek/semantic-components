@@ -19,7 +19,7 @@ export const SC_RATING_FIELD = new InjectionToken<ScRatingField>(
 );
 
 @Directive({
-  selector: 'div[sc-rating-field], label[sc-rating-field]',
+  selector: 'div[scRatingField], label[scRatingField]',
   providers: [
     { provide: SC_RATING_FIELD, useExisting: ScRatingField },
     { provide: SC_FIELD, useExisting: ScRatingField },

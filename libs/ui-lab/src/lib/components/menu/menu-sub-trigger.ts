@@ -4,7 +4,7 @@ import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-menu-sub-trigger]',
+  selector: 'div[scMenuSubTrigger]',
   hostDirectives: [
     {
       directive: MenuItem,

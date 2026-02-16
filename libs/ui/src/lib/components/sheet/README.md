@@ -23,35 +23,35 @@ ScSheetProvider (root wrapper - manages open state, side + overlay lifecycle)
 
 | Component            | Selector                     | Description                                    |
 | -------------------- | ---------------------------- | ---------------------------------------------- |
-| `ScSheetProvider`    | `div[sc-sheet-provider]`     | Root wrapper, manages open state + overlay     |
-| `ScSheetTrigger`     | `button[sc-sheet-trigger]`   | Button that opens the sheet                    |
+| `ScSheetProvider`    | `div[scSheetProvider]`     | Root wrapper, manages open state + overlay     |
+| `ScSheetTrigger`     | `button[scSheetTrigger]`   | Button that opens the sheet                    |
 | `ScSheetPortal`      | `ng-template[scSheetPortal]` | Directive marking lazy content for the overlay |
-| `ScSheet`            | `div[sc-sheet]`              | Dialog panel with slide animations             |
-| `ScSheetHeader`      | `div[sc-sheet-header]`       | Header section container                       |
-| `ScSheetTitle`       | `h2[sc-sheet-title]`         | Sheet title (aria-labelledby)                  |
-| `ScSheetDescription` | `p[sc-sheet-description]`    | Sheet description (aria-describedby)           |
-| `ScSheetFooter`      | `div[sc-sheet-footer]`       | Footer section for actions                     |
-| `ScSheetClose`       | `button[sc-sheet-close]`     | Button that closes the sheet                   |
+| `ScSheet`            | `div[scSheet]`              | Dialog panel with slide animations             |
+| `ScSheetHeader`      | `div[scSheetHeader]`       | Header section container                       |
+| `ScSheetTitle`       | `h2[scSheetTitle]`         | Sheet title (aria-labelledby)                  |
+| `ScSheetDescription` | `p[scSheetDescription]`    | Sheet description (aria-describedby)           |
+| `ScSheetFooter`      | `div[scSheetFooter]`       | Footer section for actions                     |
+| `ScSheetClose`       | `button[scSheetClose]`     | Button that closes the sheet                   |
 
 ## Usage
 
 ### Basic Sheet (Right Side)
 
 ```html
-<div sc-sheet-provider>
-  <button sc-sheet-trigger>Open Sheet</button>
+<div scSheetProvider>
+  <button scSheetTrigger>Open Sheet</button>
   <ng-template scSheetPortal>
-    <div sc-sheet>
-      <button sc-sheet-close>
+    <div scSheet>
+      <button scSheetClose>
         <svg><!-- X icon --></svg>
         <span class="sr-only">Close</span>
       </button>
-      <div sc-sheet-header>
-        <h2 sc-sheet-title>Sheet Title</h2>
-        <p sc-sheet-description>Sheet description goes here.</p>
+      <div scSheetHeader>
+        <h2 scSheetTitle>Sheet Title</h2>
+        <p scSheetDescription>Sheet description goes here.</p>
       </div>
       <!-- Your content -->
-      <div sc-sheet-footer>
+      <div scSheetFooter>
         <button>Cancel</button>
         <button>Save</button>
       </div>
@@ -64,30 +64,30 @@ ScSheetProvider (root wrapper - manages open state, side + overlay lifecycle)
 
 ```html
 <!-- Left side -->
-<div sc-sheet-provider side="left">
-  <button sc-sheet-trigger>Open Left</button>
+<div scSheetProvider side="left">
+  <button scSheetTrigger>Open Left</button>
   <ng-template scSheetPortal>
-    <div sc-sheet>
+    <div scSheet>
       <!-- content -->
     </div>
   </ng-template>
 </div>
 
 <!-- Top side -->
-<div sc-sheet-provider side="top">
-  <button sc-sheet-trigger>Open Top</button>
+<div scSheetProvider side="top">
+  <button scSheetTrigger>Open Top</button>
   <ng-template scSheetPortal>
-    <div sc-sheet>
+    <div scSheet>
       <!-- content -->
     </div>
   </ng-template>
 </div>
 
 <!-- Bottom side -->
-<div sc-sheet-provider side="bottom">
-  <button sc-sheet-trigger>Open Bottom</button>
+<div scSheetProvider side="bottom">
+  <button scSheetTrigger>Open Bottom</button>
   <ng-template scSheetPortal>
-    <div sc-sheet>
+    <div scSheet>
       <!-- content -->
     </div>
   </ng-template>
@@ -99,10 +99,10 @@ ScSheetProvider (root wrapper - manages open state, side + overlay lifecycle)
 ```typescript
 @Component({
   template: `
-    <div sc-sheet-provider [(open)]="isOpen" side="right">
-      <button sc-sheet-trigger>Open</button>
+    <div scSheetProvider [(open)]="isOpen" side="right">
+      <button scSheetTrigger>Open</button>
       <ng-template scSheetPortal>
-        <div sc-sheet>
+        <div scSheet>
           <!-- content -->
         </div>
       </ng-template>
@@ -125,13 +125,13 @@ export class MyComponent {
 ### Navigation Sheet
 
 ```html
-<div sc-sheet-provider side="left">
-  <button sc-sheet-trigger>Menu</button>
+<div scSheetProvider side="left">
+  <button scSheetTrigger>Menu</button>
   <ng-template scSheetPortal>
-    <div sc-sheet>
-      <button sc-sheet-close>X</button>
-      <div sc-sheet-header>
-        <h2 sc-sheet-title>Navigation</h2>
+    <div scSheet>
+      <button scSheetClose>X</button>
+      <div scSheetHeader>
+        <h2 scSheetTitle>Navigation</h2>
       </div>
       <nav class="flex flex-col gap-2">
         <a href="#">Home</a>
@@ -238,11 +238,11 @@ const sideOpenClasses: Record<SheetSide, string> = {
 All components accept a `class` input for custom styling:
 
 ```html
-<div sc-sheet class="w-[400px]">
+<div scSheet class="w-[400px]">
   <!-- custom width -->
 </div>
 
-<div sc-sheet-footer class="flex-row-reverse">
+<div scSheetFooter class="flex-row-reverse">
   <!-- reversed button order -->
 </div>
 ```

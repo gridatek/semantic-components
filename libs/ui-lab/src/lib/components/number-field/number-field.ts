@@ -17,7 +17,7 @@ export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>(
 );
 
 @Directive({
-  selector: 'div[sc-number-field], label[sc-number-field]',
+  selector: 'div[scNumberField], label[scNumberField]',
   exportAs: 'scNumberField',
   providers: [
     { provide: SC_NUMBER_FIELD, useExisting: ScNumberField },

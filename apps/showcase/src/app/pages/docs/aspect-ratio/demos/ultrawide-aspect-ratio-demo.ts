@@ -10,7 +10,7 @@ import { ScAspectRatio } from '@semantic-components/ui';
   imports: [ScAspectRatio],
   template: `
     <div class="w-[500px] overflow-hidden rounded-md">
-      <div sc-aspect-ratio [ratio]="21 / 9">
+      <div scAspectRatio [ratio]="21 / 9">
         <img
           src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
           alt="Photo by Drew Beamer"

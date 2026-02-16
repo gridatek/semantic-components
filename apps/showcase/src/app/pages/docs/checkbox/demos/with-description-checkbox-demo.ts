@@ -22,8 +22,8 @@ import {
         [(checked)]="marketing"
         id="marketing"
       />
-      <label sc-label for="marketing">Marketing emails</label>
-      <p sc-field-description>
+      <label scLabel for="marketing">Marketing emails</label>
+      <p scFieldDescription>
         Receive emails about new products, features, and more.
       </p>
     </div>

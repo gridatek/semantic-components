@@ -10,18 +10,18 @@ import { ScKbd } from '@semantic-components/ui';
   imports: [ScKbd],
   template: `
     <div class="flex flex-wrap items-center gap-2">
-      <kbd sc-kbd>F1</kbd>
-      <kbd sc-kbd>F2</kbd>
-      <kbd sc-kbd>F3</kbd>
-      <kbd sc-kbd>F4</kbd>
-      <kbd sc-kbd>F5</kbd>
-      <kbd sc-kbd>F6</kbd>
-      <kbd sc-kbd>F7</kbd>
-      <kbd sc-kbd>F8</kbd>
-      <kbd sc-kbd>F9</kbd>
-      <kbd sc-kbd>F10</kbd>
-      <kbd sc-kbd>F11</kbd>
-      <kbd sc-kbd>F12</kbd>
+      <kbd scKbd>F1</kbd>
+      <kbd scKbd>F2</kbd>
+      <kbd scKbd>F3</kbd>
+      <kbd scKbd>F4</kbd>
+      <kbd scKbd>F5</kbd>
+      <kbd scKbd>F6</kbd>
+      <kbd scKbd>F7</kbd>
+      <kbd scKbd>F8</kbd>
+      <kbd scKbd>F9</kbd>
+      <kbd scKbd>F10</kbd>
+      <kbd scKbd>F11</kbd>
+      <kbd scKbd>F12</kbd>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

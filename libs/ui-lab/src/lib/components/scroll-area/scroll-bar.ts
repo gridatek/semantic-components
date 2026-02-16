@@ -19,7 +19,7 @@ import { ScScrollArea } from './scroll-area';
 export type ScrollBarOrientation = 'vertical' | 'horizontal';
 
 @Component({
-  selector: 'div[sc-scroll-bar]',
+  selector: 'div[scScrollBar]',
   host: {
     'data-slot': 'scroll-bar',
     '[class]': 'class()',

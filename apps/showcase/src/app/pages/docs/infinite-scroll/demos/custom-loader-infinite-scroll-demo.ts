@@ -19,7 +19,7 @@ interface Item {
   selector: 'app-custom-loader-infinite-scroll-demo',
   imports: [ScInfiniteScroll, ScInfiniteScrollLoader],
   template: `
-    <sc-infinite-scroll
+    <scInfiniteScroll
       class="h-[300px] border rounded-lg"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
@@ -34,7 +34,7 @@ interface Item {
       </div>
 
       <div
-        sc-infinite-scroll-loader
+        scInfiniteScrollLoader
         class="flex items-center justify-center py-4 gap-2"
       >
         <div

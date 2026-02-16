@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'caption[sc-table-caption]',
+  selector: 'caption[scTableCaption]',
   host: {
     'data-slot': 'table-caption',
     '[class]': 'class()',

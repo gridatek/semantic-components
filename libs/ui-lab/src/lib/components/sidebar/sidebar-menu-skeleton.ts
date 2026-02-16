@@ -9,7 +9,7 @@ import { cn } from '@semantic-components/ui';
 import { ScSkeleton } from '../skeleton';
 
 @Component({
-  selector: 'div[sc-sidebar-menu-skeleton]',
+  selector: 'div[scSidebarMenuSkeleton]',
   imports: [ScSkeleton],
   host: {
     'data-slot': 'sidebar-menu-skeleton',
@@ -17,10 +17,10 @@ import { ScSkeleton } from '../skeleton';
   },
   template: `
     @if (showIcon()) {
-      <div sc-skeleton class="size-4 rounded-md"></div>
+      <div scSkeleton class="size-4 rounded-md"></div>
     }
     <div
-      sc-skeleton
+      scSkeleton
       class="h-4 max-w-[var(--skeleton-width)] flex-1"
       [style.--skeleton-width]="width"
     ></div>

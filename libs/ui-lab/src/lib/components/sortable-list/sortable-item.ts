@@ -17,7 +17,7 @@ export const SC_SORTABLE_ITEM = new InjectionToken<ScSortableItem<unknown>>(
 );
 
 @Component({
-  selector: '[sc-sortable-item]',
+  selector: '[scSortableItem]',
   template: `
     <ng-content />
   `,

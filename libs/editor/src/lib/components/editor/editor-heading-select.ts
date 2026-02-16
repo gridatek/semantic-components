@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_EDITOR, ScEditorHeading } from './editor';
 
 @Component({
-  selector: 'select[sc-editor-heading]',
+  selector: 'select[scEditorHeading]',
   template: `
     <option value="p">Paragraph</option>
     <option value="h1">Heading 1</option>

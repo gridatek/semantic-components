@@ -33,7 +33,7 @@ import { ScCountdownSimple } from '@semantic-components/ui-lab';
     <div class="space-y-2">
       <div class="flex items-center gap-2">
         <span class="text-muted-foreground">Time remaining:</span>
-        <sc-countdown-simple
+        <scCountdownSimple
           [targetDate]="futureDate"
           format="full"
           class="text-lg font-semibold"
@@ -41,7 +41,7 @@ import { ScCountdownSimple } from '@semantic-components/ui-lab';
       </div>
       <div class="flex items-center gap-2">
         <span class="text-muted-foreground">HH:MM:SS:</span>
-        <sc-countdown-simple
+        <scCountdownSimple
           [targetDate]="shortFuture"
           format="hh:mm:ss"
           class="text-lg"
@@ -49,7 +49,7 @@ import { ScCountdownSimple } from '@semantic-components/ui-lab';
       </div>
       <div class="flex items-center gap-2">
         <span class="text-muted-foreground">MM:SS:</span>
-        <sc-countdown-simple
+        <scCountdownSimple
           [targetDate]="veryShortFuture"
           format="mm:ss"
           class="text-lg"

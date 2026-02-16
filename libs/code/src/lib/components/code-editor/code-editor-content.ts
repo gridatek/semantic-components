@@ -122,7 +122,7 @@ export function detectLanguage(
 }
 
 @Component({
-  selector: 'div[sc-code-editor-content]',
+  selector: 'div[scCodeEditorContent]',
   template: `
     <!-- Line numbers -->
     @if (showLineNumbers()) {

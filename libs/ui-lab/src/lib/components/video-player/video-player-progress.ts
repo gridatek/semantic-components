@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
-  selector: 'div[sc-video-player-progress]',
+  selector: 'div[scVideoPlayerProgress]',
   template: `
     <!-- Buffered -->
     <div

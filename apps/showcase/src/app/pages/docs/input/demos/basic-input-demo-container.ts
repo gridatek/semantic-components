@@ -37,10 +37,10 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-basic-input-demo',
   imports: [FormField, ScField, ScInput, ScLabel],
   template: \`
-    <div sc-field>
-      <label sc-label>Text</label>
+    <div scField>
+      <label scLabel>Text</label>
       <input
-        sc-input
+        scInput
         type="text"
         [formField]="textForm.text"
         placeholder="Enter text..."

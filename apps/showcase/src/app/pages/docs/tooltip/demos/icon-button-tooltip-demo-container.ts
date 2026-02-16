@@ -36,7 +36,7 @@ import { SiPlusIcon } from '@semantic-icons/lucide-icons';
   imports: [ScButton, ScTooltipTrigger, SiPlusIcon],
   template: \`
     <button
-      sc-button
+      scButton
       variant="outline"
       size="icon"
       scTooltipTrigger="Add item"

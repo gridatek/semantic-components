@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
-  selector: 'div[sc-audio-player-cover]',
+  selector: 'div[scAudioPlayerCover]',
   template: `
     @if (player.currentTrack(); as track) {
       @if (track.cover) {

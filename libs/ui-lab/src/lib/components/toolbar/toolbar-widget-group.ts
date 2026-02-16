@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-toolbar-widget-group]',
+  selector: 'div[scToolbarWidgetGroup]',
   hostDirectives: [
     {
       directive: ToolbarWidgetGroup,

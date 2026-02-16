@@ -34,7 +34,7 @@ tourService.start(options);
 
 ```html
 <!-- Add the component to your template -->
-<sc-tour-guide (stepChange)="onStepChange($event)" (tourComplete)="onTourComplete()" (tourClosed)="onTourClosed()" />
+<scTourGuide (stepChange)="onStepChange($event)" (tourComplete)="onTourComplete()" (tourClosed)="onTourClosed()" />
 ```
 
 ## API

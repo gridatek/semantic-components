@@ -8,7 +8,7 @@ import {
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
-  selector: 'audio[sc-audio-player-audio]',
+  selector: 'audio[scAudioPlayerAudio]',
   template: ``,
   host: {
     'data-slot': 'audio-player-audio',

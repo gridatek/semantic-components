@@ -21,7 +21,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
               [(checked)]="emailNotif"
               id="email-notif"
             />
-            <label sc-label for="email-notif">Email notifications</label>
+            <label scLabel for="email-notif">Email notifications</label>
           </div>
           <div scCheckboxField>
             <input
@@ -30,7 +30,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
               [(checked)]="smsNotif"
               id="sms-notif"
             />
-            <label sc-label for="sms-notif">SMS notifications</label>
+            <label scLabel for="sms-notif">SMS notifications</label>
           </div>
           <div scCheckboxField>
             <input
@@ -39,7 +39,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
               [(checked)]="pushNotif"
               id="push-notif"
             />
-            <label sc-label for="push-notif">Push notifications</label>
+            <label scLabel for="push-notif">Push notifications</label>
           </div>
         </div>
       </div>

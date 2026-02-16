@@ -14,7 +14,7 @@ import { Footer } from '../footer/footer';
   selector: 'app-stacked-layout',
   imports: [ScStackedLayout, Navbar, Footer],
   template: `
-    <sc-stacked-layout>
+    <scStackedLayout>
       <app-navbar scNavbar />
       <app-footer scFooter />
     </sc-stacked-layout>

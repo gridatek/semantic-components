@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-tree-item-icon]',
+  selector: '[scTreeItemIcon]',
   host: {
     'data-slot': 'tree-item-icon',
     '[class]': 'class()',

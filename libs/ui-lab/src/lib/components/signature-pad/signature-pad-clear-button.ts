@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD } from './signature-pad';
 
 @Component({
-  selector: 'button[sc-signature-pad-clear]',
+  selector: 'button[scSignaturePadClear]',
   template: '<ng-content />',
   host: {
     'data-slot': 'signature-pad-clear',

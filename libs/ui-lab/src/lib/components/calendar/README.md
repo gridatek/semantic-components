@@ -5,7 +5,7 @@ A fully accessible date picker component with **Angular ARIA Grid** integration,
 ## Usage
 
 ```html
-<sc-calendar [(selected)]="date" />
+<scCalendar [(selected)]="date" />
 ```
 
 ## Component
@@ -48,19 +48,19 @@ interface DateRange {
 ### Single Date Selection
 
 ```html
-<sc-calendar [(selected)]="selectedDate" />
+<scCalendar [(selected)]="selectedDate" />
 ```
 
 ### Multiple Date Selection
 
 ```html
-<sc-calendar mode="multiple" [(selectedDates)]="selectedDates" />
+<scCalendar mode="multiple" [(selectedDates)]="selectedDates" />
 ```
 
 ### Date Range Selection
 
 ```html
-<sc-calendar mode="range" [(selectedRange)]="selectedRange" />
+<scCalendar mode="range" [(selectedRange)]="selectedRange" />
 ```
 
 ### With Disabled Dates
@@ -70,7 +70,7 @@ disabledDates = [new Date(2024, 0, 1), new Date(2024, 0, 15)];
 ```
 
 ```html
-<sc-calendar [(selected)]="date" [disabled]="disabledDates" />
+<scCalendar [(selected)]="date" [disabled]="disabledDates" />
 ```
 
 ### With Min/Max Date
@@ -81,7 +81,7 @@ maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
 ```
 
 ```html
-<sc-calendar [(selected)]="date" [minDate]="minDate" [maxDate]="maxDate" />
+<scCalendar [(selected)]="date" [minDate]="minDate" [maxDate]="maxDate" />
 ```
 
 ## Features

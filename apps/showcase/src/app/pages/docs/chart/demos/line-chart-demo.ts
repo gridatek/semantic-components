@@ -14,8 +14,8 @@ import {
   imports: [ScChartContainer, ScLineChart],
   template: `
     <div class="max-w-lg rounded-lg border p-6">
-      <div sc-chart-container>
-        <div sc-line-chart [data]="lineData" [height]="250"></div>
+      <div scChartContainer>
+        <div scLineChart [data]="lineData" [height]="250"></div>
       </div>
     </div>
   `,

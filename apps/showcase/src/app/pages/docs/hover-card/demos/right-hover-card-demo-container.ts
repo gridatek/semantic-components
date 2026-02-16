@@ -44,9 +44,9 @@ import {
     ScHoverCardTrigger,
   ],
   template: \`
-    <div sc-hover-card-provider side="right">
+    <div scHoverCardProvider side="right">
       <button
-        sc-hover-card-trigger
+        scHoverCardTrigger
         class="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         <svg
@@ -69,7 +69,7 @@ import {
         More Info
       </button>
       <ng-template scHoverCardPortal>
-        <div sc-hover-card>
+        <div scHoverCard>
           <div class="space-y-2">
             <h4 class="text-sm font-semibold">Information</h4>
             <p class="text-sm text-muted-foreground">

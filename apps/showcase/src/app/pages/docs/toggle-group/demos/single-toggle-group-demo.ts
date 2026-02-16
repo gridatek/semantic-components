@@ -12,12 +12,12 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
   template: `
     <div class="space-y-4">
       <div
-        sc-toggle-group
+        scToggleGroup
         type="single"
         [(value)]="alignment"
         aria-label="Text alignment"
       >
-        <button sc-toggle-group-item value="left" aria-label="Align left">
+        <button scToggleGroupItem value="left" aria-label="Align left">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -35,7 +35,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
             <line x1="17" x2="3" y1="18" y2="18" />
           </svg>
         </button>
-        <button sc-toggle-group-item value="center" aria-label="Align center">
+        <button scToggleGroupItem value="center" aria-label="Align center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -53,7 +53,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
             <line x1="19" x2="5" y1="18" y2="18" />
           </svg>
         </button>
-        <button sc-toggle-group-item value="right" aria-label="Align right">
+        <button scToggleGroupItem value="right" aria-label="Align right">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"

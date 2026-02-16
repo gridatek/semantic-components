@@ -37,7 +37,7 @@ import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
         </div>
         @if (showInputPicker()) {
           <div class="mt-2">
-            <sc-emoji-picker
+            <scEmojiPicker
               (emojiSelect)="insertEmoji($event)"
               [maxRecent]="6"
             />

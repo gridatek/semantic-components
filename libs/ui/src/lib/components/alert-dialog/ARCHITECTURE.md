@@ -243,7 +243,7 @@ protected readonly class = computed(() =>
 
 **Animation Flow:**
 
-1. Provider renders: `<div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>`
+1. Provider renders: `<div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>`
 2. ScBackdrop receives `open` input
 3. Effect sets `state` to `'open'` or `'closed'` based on `open` value
 4. Data attribute (`data-open` / `data-closed`) triggers Tailwind animation classes
@@ -437,7 +437,7 @@ The provider's template includes the backdrop and focus trap, projecting the con
 ```html
 <ng-content />
 <ng-template #overlayTemplate>
-  <div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
+  <div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
   <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
     <ng-container [ngTemplateOutlet]="alertDialogPortal().templateRef" />
   </div>
@@ -487,7 +487,7 @@ The provider directly handles backdrop animation completion in its template — 
 
 ```html
 <!-- In provider's overlay template -->
-<div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
+<div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
 ```
 
 ```typescript
@@ -761,17 +761,17 @@ The animation system preserves accessibility:
 ## Consumer API
 
 ```html
-<div sc-alert-dialog-provider [(open)]="isOpen">
-  <button sc-alert-dialog-trigger sc-button>Delete</button>
+<div scAlertDialogProvider [(open)]="isOpen">
+  <button scAlertDialogTrigger scButton>Delete</button>
   <ng-template scAlertDialogPortal>
-    <div sc-alert-dialog>
-      <div sc-alert-dialog-header>
-        <h2 sc-alert-dialog-title>Are you sure?</h2>
-        <p sc-alert-dialog-description>This action cannot be undone.</p>
+    <div scAlertDialog>
+      <div scAlertDialogHeader>
+        <h2 scAlertDialogTitle>Are you sure?</h2>
+        <p scAlertDialogDescription>This action cannot be undone.</p>
       </div>
-      <div sc-alert-dialog-footer>
-        <button sc-alert-dialog-cancel sc-button>Cancel</button>
-        <button sc-alert-dialog-action sc-button>Continue</button>
+      <div scAlertDialogFooter>
+        <button scAlertDialogCancel scButton>Cancel</button>
+        <button scAlertDialogAction scButton>Continue</button>
       </div>
     </div>
   </ng-template>

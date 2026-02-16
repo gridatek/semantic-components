@@ -11,15 +11,15 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
   template: `
     <div class="flex items-center gap-4">
       <div class="flex flex-col items-center gap-2">
-        <button sc-language-toggle variant="default"></button>
+        <button scLanguageToggle variant="default"></button>
         <span class="text-xs text-muted-foreground">Default</span>
       </div>
       <div class="flex flex-col items-center gap-2">
-        <button sc-language-toggle variant="outline"></button>
+        <button scLanguageToggle variant="outline"></button>
         <span class="text-xs text-muted-foreground">Outline</span>
       </div>
       <div class="flex flex-col items-center gap-2">
-        <button sc-language-toggle variant="ghost"></button>
+        <button scLanguageToggle variant="ghost"></button>
         <span class="text-xs text-muted-foreground">Ghost</span>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_COMPARE } from './image-compare';
 
 @Component({
-  selector: '[sc-image-compare-label]',
+  selector: '[scImageCompareLabel]',
   template: `
     <ng-content />
   `,

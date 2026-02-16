@@ -12,7 +12,7 @@ import { SC_FIELD } from '@semantic-components/ui';
 import { ScTheme, Theme } from './theme.service';
 
 @Component({
-  selector: 'select[sc-theme-select]',
+  selector: 'select[scThemeSelect]',
   host: {
     'data-slot': 'theme-select',
     '[id]': 'id()',

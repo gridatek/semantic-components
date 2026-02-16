@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: '[sc-card-title]',
+  selector: '[scCardTitle]',
   host: {
     'data-slot': 'card-title',
     '[class]': 'class()',

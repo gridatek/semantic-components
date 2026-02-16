@@ -10,7 +10,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
   imports: [ScMultiSelect],
   template: `
     <div class="max-w-sm">
-      <sc-multi-select [options]="options" placeholder="Select frameworks..." />
+      <scMultiSelect [options]="options" placeholder="Select frameworks..." />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

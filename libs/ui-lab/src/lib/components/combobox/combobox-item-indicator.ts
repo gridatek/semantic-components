@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'svg[sc-combobox-item-indicator]',
+  selector: 'svg[scComboboxItemIndicator]',
   host: {
     'data-slot': 'combobox-item-indicator',
     '[class]': 'class()',

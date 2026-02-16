@@ -11,7 +11,7 @@ import { ScPagination } from './pagination';
 import { buttonVariants, ScButtonVariants } from '../button/button';
 
 @Directive({
-  selector: 'a[sc-pagination-link], button[sc-pagination-link]',
+  selector: 'a[scPaginationLink], button[scPaginationLink]',
   host: {
     'data-slot': 'pagination-link',
     '[class]': 'class()',

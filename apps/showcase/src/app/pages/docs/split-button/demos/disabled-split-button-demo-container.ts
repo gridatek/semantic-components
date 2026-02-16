@@ -31,7 +31,7 @@ import { ScSplitButton, type SplitButtonAction } from '@semantic-components/ui-l
   selector: 'app-disabled-split-button-demo',
   imports: [ScSplitButton],
   template: \`
-    <sc-split-button
+    <scSplitButton
       label="Disabled"
       [actions]="basicActions()"
       [disabled]="true"

@@ -10,7 +10,7 @@ import { buttonVariants, cn, ScButtonVariants } from '@semantic-components/ui';
 import { ScCarousel } from './carousel';
 
 @Component({
-  selector: 'button[sc-carousel-next]',
+  selector: 'button[scCarouselNext]',
   template: `
     <ng-content />
   `,

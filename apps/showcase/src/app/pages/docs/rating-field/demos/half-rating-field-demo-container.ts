@@ -37,11 +37,11 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, SiStarIcon],
   template: \`
     <div class="flex flex-col gap-2">
-      <div sc-rating-field [(value)]="rating" [allowHalf]="true">
-        <div sc-rating-item-group class="flex gap-0.5">
+      <div scRatingField [(value)]="rating" [allowHalf]="true">
+        <div scRatingItemGroup class="flex gap-0.5">
           @for (i of [1, 2, 3, 4, 5]; track i) {
             <span
-              sc-rating-item
+              scRatingItem
               [value]="i"
               class="relative cursor-pointer transition-transform hover:scale-110"
             >

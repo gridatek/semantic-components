@@ -37,12 +37,12 @@ import { ScSeparator } from '@semantic-components/ui-lab';
           An open-source UI component library.
         </p>
       </div>
-      <div sc-separator class="my-4"></div>
+      <div scSeparator class="my-4"></div>
       <div class="flex h-5 items-center space-x-4 text-sm">
         <div>Blog</div>
-        <div sc-separator orientation="vertical"></div>
+        <div scSeparator orientation="vertical"></div>
         <div>Docs</div>
-        <div sc-separator orientation="vertical"></div>
+        <div scSeparator orientation="vertical"></div>
         <div>Source</div>
       </div>
     </div>

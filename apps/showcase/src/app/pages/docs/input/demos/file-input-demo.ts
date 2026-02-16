@@ -10,9 +10,9 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-file-input-demo',
   imports: [ScField, ScInput, ScLabel],
   template: `
-    <div sc-field>
-      <label sc-label>Upload file</label>
-      <input sc-input type="file" />
+    <div scField>
+      <label scLabel>Upload file</label>
+      <input scInput type="file" />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

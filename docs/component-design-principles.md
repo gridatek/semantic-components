@@ -41,7 +41,7 @@ All selectors should be prefixed with `sc-` to avoid naming conflicts.
 
 ```typescript
 @Component({
-  selector: 'nav[sc-pagination]',
+  selector: 'nav[scPagination]',
   // ...
 })
 ```
@@ -54,7 +54,7 @@ Components should use `<ng-content />` to allow consumers to provide their own c
 
 ```typescript
 @Component({
-  selector: 'button[sc-pagination-previous]',
+  selector: 'button[scPaginationPrevious]',
   template: `
     <svg><!-- icon --></svg>
     <span>Previous</span>
@@ -67,7 +67,7 @@ export class ScPaginationPrevious {}
 
 ```typescript
 @Component({
-  selector: 'a[sc-pagination-previous], button[sc-pagination-previous]',
+  selector: 'a[scPaginationPrevious], button[scPaginationPrevious]',
   template: `
     <ng-content />
   `,
@@ -78,7 +78,7 @@ export class ScPaginationPrevious {}
 **Usage:**
 
 ```html
-<button sc-pagination-previous>
+<button scPaginationPrevious>
   <svg><!-- custom icon --></svg>
   <span>Previous</span>
 </button>
@@ -127,7 +127,7 @@ The library should handle all styling for different states through CSS classes a
 
 ```html
 <!-- User has to add classes manually -->
-<button sc-pagination-previous class="pointer-events-none opacity-50"></button>
+<button scPaginationPrevious class="pointer-events-none opacity-50"></button>
 ```
 
 ### ✅ Do: Provide Input-Driven Styling
@@ -151,7 +151,7 @@ export class ScPaginationPrevious {
 
 ```html
 <!-- Simple and semantic -->
-<button sc-pagination-previous [disabled]="true">
+<button scPaginationPrevious [disabled]="true">
   <!-- content -->
 </button>
 ```
@@ -179,7 +179,7 @@ Components must include appropriate ARIA attributes for accessibility.
 Include screen reader text where appropriate:
 
 ```html
-<span sc-pagination-ellipsis>
+<span scPaginationEllipsis>
   <svg><!-- ellipsis icon --></svg>
   <span class="sr-only">More pages</span>
 </span>
@@ -192,7 +192,7 @@ import { booleanAttribute, computed, Component, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'element[sc-component-name]',
+  selector: 'element[scComponentName]',
   host: {
     'data-slot': 'component-name',
     '[class]': 'class()',
@@ -241,7 +241,7 @@ readonly classInput = input<string>('', { alias: 'class' });
 This allows consumers to override or extend styles:
 
 ```html
-<button sc-pagination-link class="custom-spacing custom-color">1</button>
+<button scPaginationLink class="custom-spacing custom-color">1</button>
 ```
 
 ## Multi-Element Selectors
@@ -250,7 +250,7 @@ Support both `<a>` and `<button>` elements where appropriate:
 
 ```typescript
 @Directive({
-  selector: 'a[sc-pagination-link], button[sc-pagination-link]',
+  selector: 'a[scPaginationLink], button[scPaginationLink]',
 })
 ```
 

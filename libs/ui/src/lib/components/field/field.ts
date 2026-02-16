@@ -39,7 +39,7 @@ export interface ScFieldContext {
 export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
 
 @Directive({
-  selector: 'div[sc-field], label[sc-field]',
+  selector: 'div[scField], label[scField]',
   host: {
     '[attr.role]': 'role()',
     'data-slot': 'field',

@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-combobox-list]',
+  selector: 'div[scComboboxList]',
   imports: [],
   template: `
     <ng-content />

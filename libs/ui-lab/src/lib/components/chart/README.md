@@ -5,9 +5,9 @@ SVG-based chart components for data visualization.
 ## Usage
 
 ```html
-<div sc-chart-container>
-  <div sc-bar-chart [data]="data" [height]="300"></div>
-  <div sc-chart-legend [items]="legend"></div>
+<div scChartContainer>
+  <div scBarChart [data]="data" [height]="300"></div>
+  <div scChartLegend [items]="legend"></div>
 </div>
 ```
 
@@ -17,7 +17,7 @@ SVG-based chart components for data visualization.
 
 Root container that provides chart context and configuration.
 
-**Selector:** `[sc-chart-container]`
+**Selector:** `[scChartContainer]`
 
 **Inputs:**
 
@@ -30,7 +30,7 @@ Root container that provides chart context and configuration.
 
 Bar chart visualization.
 
-**Selector:** `[sc-bar-chart]`
+**Selector:** `[scBarChart]`
 
 **Inputs:**
 
@@ -46,7 +46,7 @@ Bar chart visualization.
 
 Line chart visualization with optional area fill.
 
-**Selector:** `[sc-line-chart]`
+**Selector:** `[scLineChart]`
 
 **Inputs:**
 
@@ -64,7 +64,7 @@ Line chart visualization with optional area fill.
 
 Pie chart visualization.
 
-**Selector:** `[sc-pie-chart]`
+**Selector:** `[scPieChart]`
 
 **Inputs:**
 
@@ -80,7 +80,7 @@ Pie chart visualization.
 
 Donut chart (pie chart with hole).
 
-**Selector:** `[sc-donut-chart]`
+**Selector:** `[scDonutChart]`
 
 **Inputs:**
 
@@ -96,7 +96,7 @@ Donut chart (pie chart with hole).
 
 Chart legend component.
 
-**Selector:** `[sc-chart-legend]`
+**Selector:** `[scChartLegend]`
 
 **Inputs:**
 
@@ -109,7 +109,7 @@ Chart legend component.
 
 Reusable tooltip component.
 
-**Selector:** `[sc-chart-tooltip]`
+**Selector:** `[scChartTooltip]`
 
 **Methods:**
 
@@ -140,8 +140,8 @@ interface ChartConfig {
 ### Bar Chart
 
 ```html
-<div sc-chart-container>
-  <div sc-bar-chart [data]="salesData" [height]="250"></div>
+<div scChartContainer>
+  <div scBarChart [data]="salesData" [height]="250"></div>
 </div>
 ```
 
@@ -156,33 +156,33 @@ salesData = [
 ### Line Chart
 
 ```html
-<div sc-chart-container>
-  <div sc-line-chart [data]="data" [height]="250"></div>
+<div scChartContainer>
+  <div scLineChart [data]="data" [height]="250"></div>
 </div>
 ```
 
 ### Area Chart
 
 ```html
-<div sc-chart-container>
-  <div sc-line-chart [data]="data" [height]="250" [showArea]="true"></div>
+<div scChartContainer>
+  <div scLineChart [data]="data" [height]="250" [showArea]="true"></div>
 </div>
 ```
 
 ### Pie Chart
 
 ```html
-<div sc-chart-container>
-  <div sc-pie-chart [data]="data" [size]="280"></div>
-  <div sc-chart-legend [items]="legend"></div>
+<div scChartContainer>
+  <div scPieChart [data]="data" [size]="280"></div>
+  <div scChartLegend [items]="legend"></div>
 </div>
 ```
 
 ### Donut Chart
 
 ```html
-<div sc-chart-container>
-  <div sc-donut-chart [data]="data" [size]="280" [innerRadius]="70"></div>
+<div scChartContainer>
+  <div scDonutChart [data]="data" [size]="280" [innerRadius]="70"></div>
 </div>
 ```
 

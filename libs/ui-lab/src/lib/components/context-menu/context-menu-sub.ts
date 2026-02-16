@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-context-menu-sub]',
+  selector: 'div[scContextMenuSub]',
   template: `
     <ng-content />
   `,

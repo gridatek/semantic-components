@@ -12,7 +12,7 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
 import { SC_CHART } from './chart-container';
 
 @Component({
-  selector: '[sc-bar-chart]',
+  selector: '[scBarChart]',
   template: `
     <svg
       [attr.viewBox]="viewBox()"

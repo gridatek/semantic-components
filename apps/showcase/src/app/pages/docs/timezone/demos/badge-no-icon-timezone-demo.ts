@@ -10,8 +10,8 @@ import { ScTimezoneBadge } from '@semantic-components/ui-lab';
   imports: [ScTimezoneBadge],
   template: `
     <div class="flex items-center gap-4">
-      <span sc-timezone-badge [showIcon]="false"></span>
-      <span sc-timezone-badge [showIcon]="false" [showLabel]="true"></span>
+      <span scTimezoneBadge [showIcon]="false"></span>
+      <span scTimezoneBadge [showIcon]="false" [showLabel]="true"></span>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

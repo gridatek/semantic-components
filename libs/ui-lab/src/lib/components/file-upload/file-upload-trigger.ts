@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Component({
-  selector: 'button[sc-file-upload-trigger]',
+  selector: 'button[scFileUploadTrigger]',
   template: `
     <input
       #fileInput

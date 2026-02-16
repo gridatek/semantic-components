@@ -9,7 +9,7 @@ import { cn } from '@semantic-components/ui';
 import { FileUploadFile } from './file-upload';
 
 @Component({
-  selector: '[sc-file-upload-item-progress]',
+  selector: '[scFileUploadItemProgress]',
   template: `
     <div
       class="h-full rounded-full bg-primary transition-all"

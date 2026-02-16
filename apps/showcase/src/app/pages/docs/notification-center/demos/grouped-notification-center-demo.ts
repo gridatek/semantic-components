@@ -16,7 +16,7 @@ import {
   imports: [ScNotificationCenter, ScNotificationCenterContainer],
   template: `
     <div
-      sc-notification-center
+      scNotificationCenter
       [(notifications)]="notifications"
       [groups]="groups()"
       (markRead)="onMarkRead($event)"
@@ -24,7 +24,7 @@ import {
       (clearAll)="onClearAll()"
       class="max-w-md h-[500px]"
     >
-      <div sc-notification-center-container class="h-full"></div>
+      <div scNotificationCenterContainer class="h-full"></div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

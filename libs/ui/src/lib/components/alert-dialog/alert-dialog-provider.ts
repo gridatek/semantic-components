@@ -22,13 +22,13 @@ import { ScBackdrop } from '../backdrop';
 import { ScAlertDialogPortal } from './alert-dialog-portal';
 
 @Component({
-  selector: 'div[sc-alert-dialog-provider]',
+  selector: 'div[scAlertDialogProvider]',
   imports: [OverlayModule, ScBackdrop, CdkTrapFocus, NgTemplateOutlet],
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
       <div
-        sc-backdrop
+        scBackdrop
         [open]="open()"
         (animationComplete)="onBackdropAnimationComplete()"
       ></div>

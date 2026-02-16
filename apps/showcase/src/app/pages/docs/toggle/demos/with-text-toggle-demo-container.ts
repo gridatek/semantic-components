@@ -35,7 +35,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
   selector: 'app-with-text-toggle-demo',
   imports: [ScToggle],
   template: \`
-    <button sc-toggle [(pressed)]="underline" aria-label="Toggle underline">
+    <button scToggle [(pressed)]="underline" aria-label="Toggle underline">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

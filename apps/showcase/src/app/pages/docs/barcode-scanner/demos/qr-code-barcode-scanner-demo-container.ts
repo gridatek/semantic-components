@@ -36,7 +36,7 @@ import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
   selector: 'app-qr-code-barcode-scanner-demo',
   imports: [ScBarcodeScanner],
   template: \`
-    <sc-barcode-scanner
+    <scBarcodeScanner
       [formats]="['qr_code']"
       (detected)="onDetected($event)"
       class="max-w-md"

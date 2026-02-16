@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'ul[sc-pagination-list]',
+  selector: 'ul[scPaginationList]',
   host: {
     'data-slot': 'pagination-list',
     '[class]': 'class()',

@@ -9,7 +9,7 @@ import { cn } from '@semantic-components/ui';
 import { ScSidebarState } from './sidebar-state.service';
 
 @Component({
-  selector: 'button[sc-sidebar-rail]',
+  selector: 'button[scSidebarRail]',
   template: '',
   host: {
     'data-slot': 'sidebar-rail',

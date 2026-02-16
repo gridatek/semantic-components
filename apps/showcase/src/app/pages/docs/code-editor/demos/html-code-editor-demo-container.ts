@@ -46,16 +46,16 @@ import {
     ScCodeEditorCopyButton,
   ],
   template: \`
-    <div sc-code-editor>
-      <div sc-code-editor-header>
+    <div scCodeEditor>
+      <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
           <span class="text-sm text-muted-foreground">index.html</span>
-          <span sc-code-editor-label>html</span>
+          <span scCodeEditorLabel>html</span>
         </div>
-        <button sc-code-editor-copy-button [code]="htmlCode"></button>
+        <button scCodeEditorCopyButton [code]="htmlCode"></button>
       </div>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="htmlCode"
         language="html"
         filename="index.html"

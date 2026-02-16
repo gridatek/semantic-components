@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
-  selector: 'div[sc-video-player-speed]',
+  selector: 'div[scVideoPlayerSpeed]',
   template: `
     <button
       type="button"

@@ -14,7 +14,7 @@ import {
   imports: [ScLanguageToggle],
   template: `
     <div class="flex items-center gap-4">
-      <button sc-language-toggle></button>
+      <button scLanguageToggle></button>
       <span class="text-sm text-muted-foreground">
         Current: {{ languageService.currentLanguage().label }}
       </span>

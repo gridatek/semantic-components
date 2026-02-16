@@ -16,7 +16,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
 
 @Component({
-  selector: 'canvas[sc-signature-pad-canvas]',
+  selector: 'canvas[scSignaturePadCanvas]',
   template: '',
   host: {
     'data-slot': 'signature-pad-canvas',

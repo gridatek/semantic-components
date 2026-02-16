@@ -35,7 +35,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
   imports: [ScToggle],
   template: \`
     <div class="flex items-center gap-2">
-      <button sc-toggle size="sm" aria-label="Toggle small">
+      <button scToggle size="sm" aria-label="Toggle small">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -52,7 +52,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
           <path d="M15 20a4 4 0 0 0 0-8H6v8" />
         </svg>
       </button>
-      <button sc-toggle size="default" aria-label="Toggle default">
+      <button scToggle size="default" aria-label="Toggle default">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -69,7 +69,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
           <path d="M15 20a4 4 0 0 0 0-8H6v8" />
         </svg>
       </button>
-      <button sc-toggle size="lg" aria-label="Toggle large">
+      <button scToggle size="lg" aria-label="Toggle large">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

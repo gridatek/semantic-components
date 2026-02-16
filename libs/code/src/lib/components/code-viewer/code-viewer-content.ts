@@ -31,7 +31,7 @@ export type ScCodeViewerLanguage =
   | 'plaintext';
 
 @Component({
-  selector: 'div[sc-code-viewer-content]',
+  selector: 'div[scCodeViewerContent]',
   template: `
     @if (highlightedHtml()) {
       <div [class]="contentClass()" [innerHTML]="highlightedHtml()"></div>

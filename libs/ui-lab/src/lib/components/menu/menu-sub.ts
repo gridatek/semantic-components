@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-menu-sub]',
+  selector: 'div[scMenuSub]',
   imports: [MenuContent],
   hostDirectives: [Menu],
   template: `

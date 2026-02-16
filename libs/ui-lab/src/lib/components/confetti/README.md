@@ -14,7 +14,7 @@ import type { ConfettiOptions, ConfettiParticle, ConfettiShape } from '@/ui/conf
 ### Basic Usage
 
 ```html
-<sc-confetti #confetti (complete)="onComplete()" />
+<scConfetti #confetti (complete)="onComplete()" />
 
 <button (click)="confetti.fire()">Fire Confetti!</button>
 ```

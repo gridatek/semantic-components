@@ -13,7 +13,7 @@ import { SC_TIME_PICKER } from './time-picker';
 // TimePickerPeriod
 // ============================================================================
 @Component({
-  selector: '[sc-time-picker-period]',
+  selector: '[scTimePickerPeriod]',
   template: `
     <button
       type="button"

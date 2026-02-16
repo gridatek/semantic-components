@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'kbd[sc-kbd-group]',
+  selector: 'kbd[scKbdGroup]',
   host: {
     'data-slot': 'kbd-group',
     '[class]': 'class()',

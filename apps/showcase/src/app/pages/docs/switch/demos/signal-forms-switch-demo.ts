@@ -31,7 +31,7 @@ interface SwitchFormModel {
             </p>
           </div>
           <button
-            sc-switch
+            scSwitch
             [formField]="switchForm.notifications"
             id="notifications-switch"
           ></button>
@@ -43,7 +43,7 @@ interface SwitchFormModel {
             <p class="text-sm text-muted-foreground">Switch to dark theme</p>
           </div>
           <button
-            sc-switch
+            scSwitch
             [formField]="switchForm.darkMode"
             id="darkmode-switch"
           ></button>
@@ -57,7 +57,7 @@ interface SwitchFormModel {
             </p>
           </div>
           <button
-            sc-switch
+            scSwitch
             [formField]="switchForm.autoSave"
             id="autosave-switch"
           ></button>

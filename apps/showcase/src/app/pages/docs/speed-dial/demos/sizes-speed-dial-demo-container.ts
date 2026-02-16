@@ -33,7 +33,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
   template: \`
     <div class="flex items-end gap-8 p-4">
       <div class="text-center">
-        <sc-speed-dial
+        <scSpeedDial
           [actions]="basicActions().slice(0, 3)"
           size="sm"
           actionSize="sm"
@@ -42,7 +42,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
         <p class="mt-2 text-xs text-muted-foreground">Small</p>
       </div>
       <div class="text-center">
-        <sc-speed-dial
+        <scSpeedDial
           [actions]="basicActions().slice(0, 3)"
           size="md"
           actionSize="md"
@@ -51,7 +51,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
         <p class="mt-2 text-xs text-muted-foreground">Medium</p>
       </div>
       <div class="text-center">
-        <sc-speed-dial
+        <scSpeedDial
           [actions]="basicActions().slice(0, 3)"
           size="lg"
           actionSize="lg"

@@ -46,20 +46,20 @@ import {
   ],
   template: \`
     <div
-      sc-image-cropper
+      scImageCropper
       [src]="imageSrc()"
       [aspectRatio]="1"
       [containerHeight]="250"
       class="space-y-4"
     >
       <div
-        sc-image-cropper-container
+        scImageCropperContainer
         class="rounded-lg overflow-hidden border"
       ></div>
 
       <div class="flex gap-8">
         <div class="flex-1">
-          <div sc-image-cropper-controls></div>
+          <div scImageCropperControls></div>
         </div>
 
         <div class="space-y-4">
@@ -67,7 +67,7 @@ import {
           <div class="space-y-3">
             <div class="text-xs text-muted-foreground">Large (100x100)</div>
             <div
-              sc-image-cropper-preview
+              scImageCropperPreview
               [width]="100"
               [height]="100"
               class="rounded-full overflow-hidden"
@@ -75,7 +75,7 @@ import {
 
             <div class="text-xs text-muted-foreground">Medium (64x64)</div>
             <div
-              sc-image-cropper-preview
+              scImageCropperPreview
               [width]="64"
               [height]="64"
               class="rounded-full overflow-hidden"
@@ -83,7 +83,7 @@ import {
 
             <div class="text-xs text-muted-foreground">Small (40x40)</div>
             <div
-              sc-image-cropper-preview
+              scImageCropperPreview
               [width]="40"
               [height]="40"
               class="rounded-full overflow-hidden"

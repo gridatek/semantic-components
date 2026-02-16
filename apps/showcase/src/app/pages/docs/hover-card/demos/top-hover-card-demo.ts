@@ -19,15 +19,15 @@ import {
     ScHoverCardTrigger,
   ],
   template: `
-    <div sc-hover-card-provider side="top" align="start">
+    <div scHoverCardProvider side="top" align="start">
       <span
-        sc-hover-card-trigger
+        scHoverCardTrigger
         class="cursor-help border-b border-dashed border-muted-foreground text-sm"
       >
         What is Angular?
       </span>
       <ng-template scHoverCardPortal>
-        <div sc-hover-card>
+        <div scHoverCard>
           <div class="space-y-2">
             <h4 class="text-sm font-semibold">Angular</h4>
             <p class="text-sm text-muted-foreground">

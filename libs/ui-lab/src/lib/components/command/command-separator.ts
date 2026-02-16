@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-command-separator]',
+  selector: '[scCommandSeparator]',
   host: {
     'data-slot': 'command-separator',
     role: 'separator',

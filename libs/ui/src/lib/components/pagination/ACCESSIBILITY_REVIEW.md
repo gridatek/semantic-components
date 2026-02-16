@@ -129,7 +129,7 @@ The page size `<select>` element has no programmatically associated label.
 <!-- keyboard-navigation-pagination-demo.ts:90-93 -->
 <label class="flex items-center gap-2">
   <span class="text-sm text-muted-foreground">Items per page:</span>
-  <sc-pagination-page-size-select />
+  <scPaginationPageSizeSelect />
 </label>
 ```
 
@@ -184,7 +184,7 @@ export class ScPaginationPageSizeSelect {
 ```html
 <!-- Consumer usage -->
 <label [for]="pageSizeRef.selectId()">Items per page:</label>
-<sc-pagination-page-size-select #pageSizeRef />
+<scPaginationPageSizeSelect #pageSizeRef />
 ```
 
 **Recommendation:** Use Option A (aria-label). It's simpler and doesn't require consumer template changes. Option B is more semantic but requires the consumer to connect the label manually.
@@ -220,7 +220,7 @@ Add an `aria-live` region that announces page changes:
 ```typescript
 // pagination.ts
 @Directive({
-  selector: 'nav[sc-pagination]',
+  selector: 'nav[scPagination]',
   host: {
     // ... existing bindings
   },
@@ -238,7 +238,7 @@ Add an `aria-live` region that announces page changes:
 
 ```typescript
 @Component({
-  selector: 'nav[sc-pagination]',
+  selector: 'nav[scPagination]',
   template: `
     <div aria-live="polite" aria-atomic="true" class="sr-only">
       Page {{ currentPage() }} of {{ totalPages() }}
@@ -252,7 +252,7 @@ Add an `aria-live` region that announces page changes:
 
 ```html
 <!-- Demo template -->
-<nav sc-pagination #pagination="scPagination" ...>
+<nav scPagination #pagination="scPagination" ...>
   <div aria-live="polite" aria-atomic="true" class="sr-only">Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}</div>
   <!-- ... pagination content ... -->
 </nav>
@@ -282,7 +282,7 @@ export class ScPaginationLiveRegion {
 
 - Create: `libs/ui/src/lib/components/pagination/pagination-live-region.ts`
 - Update: `libs/ui/src/lib/components/pagination/index.ts` (export new component)
-- Update: Demo templates to include `<sc-pagination-live-region />`
+- Update: Demo templates to include `<scPaginationLiveRegion />`
 
 ---
 

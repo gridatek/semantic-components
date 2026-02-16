@@ -29,7 +29,7 @@ const positions: ConnectedPosition[] = [
 ];
 
 @Component({
-  selector: 'div[sc-context-menu-sub-content]',
+  selector: 'div[scContextMenuSubContent]',
   imports: [OverlayModule],
   template: `
     <ng-template

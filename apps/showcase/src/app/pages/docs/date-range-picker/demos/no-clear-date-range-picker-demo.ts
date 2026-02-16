@@ -9,7 +9,7 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
   selector: 'app-no-clear-date-range-picker-demo',
   imports: [ScDateRangePicker],
   template: `
-    <sc-date-range-picker [showClear]="false" placeholder="No clear button" />
+    <scDateRangePicker [showClear]="false" placeholder="No clear button" />
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -9,7 +9,7 @@ import { ScEmojiPickerTrigger } from '@semantic-components/ui-lab';
       Use with a popover for dropdown behavior:
     </p>
     <div class="flex items-center gap-2">
-      <button sc-emoji-picker-trigger></button>
+      <button scEmojiPickerTrigger></button>
       <span class="text-sm text-muted-foreground">
         ← Click to open (requires popover)
       </span>

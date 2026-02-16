@@ -22,15 +22,15 @@ import { ScLabel } from '@semantic-components/ui';
   ],
   template: `
     <div
-      sc-password-field
+      scPasswordField
       [value]="'********'"
       [disabled]="true"
       class="space-y-2"
     >
-      <label sc-label>Password (Disabled)</label>
-      <div sc-password-field-input-group>
-        <input sc-password-field-input />
-        <button sc-password-field-toggle></button>
+      <label scLabel>Password (Disabled)</label>
+      <div scPasswordFieldInputGroup>
+        <input scPasswordFieldInput />
+        <button scPasswordFieldToggle></button>
       </div>
     </div>
   `,

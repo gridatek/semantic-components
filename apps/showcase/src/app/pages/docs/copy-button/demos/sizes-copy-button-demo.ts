@@ -13,7 +13,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground">Small:</span>
         <button
-          sc-copy-button
+          scCopyButton
           [value]="'Small'"
           size="sm"
           variant="outline"
@@ -22,7 +22,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground">Default:</span>
         <button
-          sc-copy-button
+          scCopyButton
           [value]="'Default'"
           size="default"
           variant="outline"
@@ -31,7 +31,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground">Large:</span>
         <button
-          sc-copy-button
+          scCopyButton
           [value]="'Large'"
           size="lg"
           variant="outline"
@@ -40,7 +40,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground">Icon:</span>
         <button
-          sc-copy-button
+          scCopyButton
           [value]="'Icon'"
           size="icon"
           variant="outline"

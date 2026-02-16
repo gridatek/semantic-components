@@ -4,7 +4,7 @@ import { cn } from '@semantic-components/ui';
 export type SeparatorOrientation = 'horizontal' | 'vertical';
 
 @Directive({
-  selector: 'div[sc-separator]',
+  selector: 'div[scSeparator]',
   host: {
     'data-slot': 'separator',
     role: 'separator',

@@ -3,7 +3,7 @@ import { Tree } from '@angular/aria/tree';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'ul[sc-tree]',
+  selector: 'ul[scTree]',
   hostDirectives: [Tree],
   exportAs: 'scTree',
   host: {

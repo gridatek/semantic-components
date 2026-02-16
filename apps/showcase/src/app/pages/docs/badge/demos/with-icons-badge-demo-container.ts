@@ -35,7 +35,7 @@ import { ScBadge } from '@semantic-components/ui';
   imports: [ScBadge],
   template: \`
     <div class="flex flex-wrap items-center gap-2">
-      <div sc-badge class="gap-1">
+      <div scBadge class="gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -52,7 +52,7 @@ import { ScBadge } from '@semantic-components/ui';
         </svg>
         Completed
       </div>
-      <div sc-badge variant="secondary" class="gap-1">
+      <div scBadge variant="secondary" class="gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -70,7 +70,7 @@ import { ScBadge } from '@semantic-components/ui';
         </svg>
         Pending
       </div>
-      <div sc-badge variant="destructive" class="gap-1">
+      <div scBadge variant="destructive" class="gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

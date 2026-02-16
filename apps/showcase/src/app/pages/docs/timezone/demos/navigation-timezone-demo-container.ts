@@ -37,7 +37,7 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
           Your current timezone setting
         </p>
       </div>
-      <button sc-timezone-display variant="outline"></button>
+      <button scTimezoneDisplay variant="outline"></button>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

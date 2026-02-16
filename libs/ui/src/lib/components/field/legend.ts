@@ -4,7 +4,7 @@ import { cn } from '../../utils';
 export type ScLegendVariant = 'legend' | 'label';
 
 @Directive({
-  selector: 'legend[sc-legend]',
+  selector: 'legend[scLegend]',
   host: {
     'data-slot': 'legend',
     '[attr.data-variant]': 'variant()',

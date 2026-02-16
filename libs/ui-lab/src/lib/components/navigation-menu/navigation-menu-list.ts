@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'ul[sc-navigation-menu-list]',
+  selector: 'ul[scNavigationMenuList]',
   host: {
     'data-slot': 'navigation-menu-list',
     '[class]': 'class()',

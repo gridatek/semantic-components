@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import { ScContextMenu } from './context-menu';
 
 @Directive({
-  selector: '[sc-context-menu-item]',
+  selector: '[scContextMenuItem]',
   host: {
     'data-slot': 'context-menu-item',
     role: 'menuitem',

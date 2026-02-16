@@ -149,7 +149,7 @@ function rgbToHsl(r: number, g: number, b: number): HSL {
 }
 
 @Directive({
-  selector: '[sc-color-picker]',
+  selector: '[scColorPicker]',
   providers: [{ provide: SC_COLOR_PICKER, useExisting: ScColorPicker }],
   host: {
     'data-slot': 'color-picker',

@@ -15,7 +15,7 @@ import { ScKanbanBoard, ScKanbanColumn, ScKanbanCard } from '@/ui/kanban-board';
 ### Basic Usage
 
 ```html
-<sc-kanban-board [(columns)]="columns" [(cards)]="cards" (cardMoved)="onCardMoved($event)" (cardAdded)="onCardAdded($event)" />
+<scKanbanBoard [(columns)]="columns" [(cards)]="cards" (cardMoved)="onCardMoved($event)" (cardAdded)="onCardAdded($event)" />
 ```
 
 ```typescript
@@ -73,13 +73,13 @@ cards = signal<KanbanCard[]>([
 ### Read-Only Board
 
 ```html
-<sc-kanban-board [(columns)]="columns" [(cards)]="cards" [showAddCard]="false" [showDeleteCard]="false" [showAddColumn]="false" />
+<scKanbanBoard [(columns)]="columns" [(cards)]="cards" [showAddCard]="false" [showDeleteCard]="false" [showAddColumn]="false" />
 ```
 
 ### Disabled Board
 
 ```html
-<sc-kanban-board [(columns)]="columns" [(cards)]="cards" [disabled]="true" />
+<scKanbanBoard [(columns)]="columns" [(cards)]="cards" [disabled]="true" />
 ```
 
 ## API Reference

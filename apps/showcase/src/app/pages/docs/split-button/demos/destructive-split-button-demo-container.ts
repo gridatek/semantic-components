@@ -31,7 +31,7 @@ import { ScSplitButton, type SplitButtonAction } from '@semantic-components/ui-l
   selector: 'app-destructive-split-button-demo',
   imports: [ScSplitButton],
   template: \`
-    <sc-split-button label="Manage" [actions]="manageActions()" />
+    <scSplitButton label="Manage" [actions]="manageActions()" />
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

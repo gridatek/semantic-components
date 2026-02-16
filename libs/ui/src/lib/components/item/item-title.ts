@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[sc-item-title]',
+  selector: 'div[scItemTitle]',
   host: {
     'data-slot': 'item-title',
     '[class]': 'class()',

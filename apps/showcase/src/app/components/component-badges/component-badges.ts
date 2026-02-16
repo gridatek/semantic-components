@@ -48,7 +48,7 @@ const categoryColor = {
   template: `
     <app-component-status-badge [status]="componentItem().status" />
     <span
-      sc-badge
+      scBadge
       variant="outline"
       [style.background-color]="categoryColor.bg"
       [style.color]="categoryColor.text"
@@ -57,7 +57,7 @@ const categoryColor = {
       {{ componentItem().category }}
     </span>
     <span
-      sc-badge
+      scBadge
       variant="outline"
       [style.background-color]="libColor().bg"
       [style.color]="libColor().text"

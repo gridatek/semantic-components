@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-command]',
+  selector: 'div[scCommand]',
   template: `
     <ng-content />
   `,

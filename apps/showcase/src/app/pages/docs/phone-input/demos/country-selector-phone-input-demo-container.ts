@@ -32,7 +32,7 @@ import { ScPhoneInput, Country } from '@semantic-components/ui-lab';
   imports: [ScPhoneInput],
   template: \`
     <div class="max-w-sm">
-      <sc-phone-input
+      <scPhoneInput
         [(value)]="phoneWithCountry"
         [(countryCode)]="selectedCountry"
         (countryChange)="onCountryChange($event)"

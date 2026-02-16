@@ -32,7 +32,7 @@ export type ScPaginationPage = { type: 'page'; value: number } | { type: 'ellips
 The directive now uses `exportAs: 'scPagination'` allowing template reference access:
 
 ```html
-<nav sc-pagination #pagination="scPagination" [currentPage]="1" [totalItems]="100">
+<nav scPagination #pagination="scPagination" [currentPage]="1" [totalItems]="100">
   <!-- Access pagination.pages() and pagination.totalPages() -->
 </nav>
 ```
@@ -48,32 +48,32 @@ import { Component, signal } from '@angular/core';
 
 @Component({
   template: `
-    <nav sc-pagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (pageChange)="currentPage.set($event)">
-      <ul sc-pagination-list>
-        <li sc-pagination-item>
-          <button sc-pagination-previous [disabled]="currentPage() === 1">
+    <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (pageChange)="currentPage.set($event)">
+      <ul scPaginationList>
+        <li scPaginationItem>
+          <button scPaginationPrevious [disabled]="currentPage() === 1">
             <svg class="size-4"><!-- icon --></svg>
             <span>Previous</span>
           </button>
         </li>
 
         @for (page of pagination.pages(); track page.value) {
-          <li sc-pagination-item>
+          <li scPaginationItem>
             @if (page.type === 'ellipsis') {
-              <span sc-pagination-ellipsis>
+              <span scPaginationEllipsis>
                 <svg class="size-4"><!-- ellipsis icon --></svg>
                 <span class="sr-only">More pages</span>
               </span>
             } @else {
-              <button sc-pagination-link [page]="page.value" [isActive]="page.value === currentPage()">
+              <button scPaginationLink [page]="page.value" [isActive]="page.value === currentPage()">
                 {{ page.value }}
               </button>
             }
           </li>
         }
 
-        <li sc-pagination-item>
-          <button sc-pagination-next [disabled]="currentPage() === pagination.totalPages()">
+        <li scPaginationItem>
+          <button scPaginationNext [disabled]="currentPage() === pagination.totalPages()">
             <span>Next</span>
             <svg class="size-4"><!-- icon --></svg>
           </button>
@@ -174,26 +174,26 @@ Current Page: 5, Total Pages: 10
 ### Before (Manual)
 
 ```html
-<nav sc-pagination>
-  <ul sc-pagination-list>
-    <li sc-pagination-item>
-      <button sc-pagination-previous>...</button>
+<nav scPagination>
+  <ul scPaginationList>
+    <li scPaginationItem>
+      <button scPaginationPrevious>...</button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-link>1</button>
+    <li scPaginationItem>
+      <button scPaginationLink>1</button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-link [isActive]="true">2</button>
+    <li scPaginationItem>
+      <button scPaginationLink [isActive]="true">2</button>
     </li>
     <!-- Manual ellipsis -->
-    <li sc-pagination-item>
-      <span sc-pagination-ellipsis>...</span>
+    <li scPaginationItem>
+      <span scPaginationEllipsis>...</span>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-link>10</button>
+    <li scPaginationItem>
+      <button scPaginationLink>10</button>
     </li>
-    <li sc-pagination-item>
-      <button sc-pagination-next>...</button>
+    <li scPaginationItem>
+      <button scPaginationNext>...</button>
     </li>
   </ul>
 </nav>
@@ -209,24 +209,24 @@ Current Page: 5, Total Pages: 10
 ### After (Smart)
 
 ```html
-<nav sc-pagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (pageChange)="currentPage.set($event)">
-  <ul sc-pagination-list>
-    <li sc-pagination-item>
-      <button sc-pagination-previous [disabled]="currentPage() === 1">...</button>
+<nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="10" [totalItems]="100" (pageChange)="currentPage.set($event)">
+  <ul scPaginationList>
+    <li scPaginationItem>
+      <button scPaginationPrevious [disabled]="currentPage() === 1">...</button>
     </li>
 
     @for (page of pagination.pages(); track page.value) {
-    <li sc-pagination-item>
+    <li scPaginationItem>
       @if (page.type === 'ellipsis') {
-      <span sc-pagination-ellipsis>...</span>
+      <span scPaginationEllipsis>...</span>
       } @else {
-      <button sc-pagination-link [page]="page.value" [isActive]="page.value === currentPage()">{{ page.value }}</button>
+      <button scPaginationLink [page]="page.value" [isActive]="page.value === currentPage()">{{ page.value }}</button>
       }
     </li>
     }
 
-    <li sc-pagination-item>
-      <button sc-pagination-next [disabled]="currentPage() === pagination.totalPages()">...</button>
+    <li scPaginationItem>
+      <button scPaginationNext [disabled]="currentPage() === pagination.totalPages()">...</button>
     </li>
   </ul>
 </nav>
@@ -246,7 +246,7 @@ Current Page: 5, Total Pages: 10
 ### Show More Pages (siblingCount: 2)
 
 ```html
-<nav sc-pagination [siblingCount]="2" ...>
+<nav scPagination [siblingCount]="2" ...>
   <!-- Shows more pages around current page -->
 </nav>
 ```
@@ -256,7 +256,7 @@ Result: `[1] [...] [3] [4] [5] [6] [7] [...] [15]` (instead of `[1] [...] [4] [5
 ### Hide First/Last (showEdges: false)
 
 ```html
-<nav sc-pagination [showEdges]="false" ...>
+<nav scPagination [showEdges]="false" ...>
   <!-- Only shows pages around current page -->
 </nav>
 ```
@@ -266,7 +266,7 @@ Result: `[4] [5] [6]` (instead of `[1] [...] [4] [5] [6] [...] [10]`)
 ### Compact Pagination (siblingCount: 0)
 
 ```html
-<nav sc-pagination [siblingCount]="0" ...>
+<nav scPagination [siblingCount]="0" ...>
   <!-- Shows only current page with first/last -->
 </nav>
 ```
@@ -300,10 +300,10 @@ The smart pagination feature is completely optional. Existing manual implementat
 
 ```html
 <!-- Still works exactly as before -->
-<nav sc-pagination>
-  <ul sc-pagination-list>
-    <li sc-pagination-item>
-      <a sc-pagination-link href="#">1</a>
+<nav scPagination>
+  <ul scPaginationList>
+    <li scPaginationItem>
+      <a scPaginationLink href="#">1</a>
     </li>
   </ul>
 </nav>

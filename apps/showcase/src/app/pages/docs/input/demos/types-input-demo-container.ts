@@ -38,45 +38,45 @@ import { ScInput } from '@semantic-components/ui';
   imports: [FormField, ScField, ScInput, ScLabel],
   template: \`
     <div class="grid w-full max-w-sm gap-4">
-      <div sc-field>
-        <label sc-label>Text</label>
+      <div scField>
+        <label scLabel>Text</label>
         <input
-          sc-input
+          scInput
           type="text"
           [formField]="typesForm.text"
           placeholder="Text input"
         />
       </div>
-      <div sc-field>
-        <label sc-label>Password</label>
+      <div scField>
+        <label scLabel>Password</label>
         <input
-          sc-input
+          scInput
           type="password"
           [formField]="typesForm.password"
           placeholder="Password"
         />
       </div>
-      <div sc-field>
-        <label sc-label>Number</label>
+      <div scField>
+        <label scLabel>Number</label>
         <input
-          sc-input
+          scInput
           type="number"
           [formField]="typesForm.number"
           placeholder="0"
         />
       </div>
-      <div sc-field>
-        <label sc-label>Date</label>
-        <input sc-input type="date" [formField]="typesForm.date" />
+      <div scField>
+        <label scLabel>Date</label>
+        <input scInput type="date" [formField]="typesForm.date" />
       </div>
-      <div sc-field>
-        <label sc-label>Time</label>
-        <input sc-input type="time" [formField]="typesForm.time" />
+      <div scField>
+        <label scLabel>Time</label>
+        <input scInput type="time" [formField]="typesForm.time" />
       </div>
-      <div sc-field>
-        <label sc-label>Search</label>
+      <div scField>
+        <label scLabel>Search</label>
         <input
-          sc-input
+          scInput
           type="search"
           [formField]="typesForm.search"
           placeholder="Search..."

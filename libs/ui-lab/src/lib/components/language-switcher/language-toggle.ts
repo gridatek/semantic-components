@@ -17,12 +17,12 @@ import { sizeStyles, variantStyles } from '../timezone';
  *
  * @example
  * ```html
- * <button sc-language-toggle></button>
- * <button sc-language-toggle variant="outline" size="sm"></button>
+ * <button scLanguageToggle></button>
+ * <button scLanguageToggle variant="outline" size="sm"></button>
  * ```
  */
 @Component({
-  selector: 'button[sc-language-toggle]',
+  selector: 'button[scLanguageToggle]',
   host: {
     'data-slot': 'language-toggle',
     type: 'button',

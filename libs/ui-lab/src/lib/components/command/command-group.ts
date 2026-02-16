@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-command-group]',
+  selector: 'div[scCommandGroup]',
   host: {
     'data-slot': 'command-group',
     role: 'group',

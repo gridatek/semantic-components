@@ -10,15 +10,15 @@ import { ScCopyButtonWithText } from '@semantic-components/ui-lab';
   imports: [ScCopyButtonWithText],
   template: `
     <div class="flex flex-wrap items-center gap-4">
-      <div sc-copy-button-with-text [value]="'Copy me!'"></div>
+      <div scCopyButtonWithText [value]="'Copy me!'"></div>
       <div
-        sc-copy-button-with-text
+        scCopyButtonWithText
         [value]="'Custom text'"
         copyText="Copy Link"
         copiedText="Link Copied!"
         variant="outline"
       ></div>
-      <div sc-copy-button-with-text [value]="'Small button'" size="sm"></div>
+      <div scCopyButtonWithText [value]="'Small button'" size="sm"></div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

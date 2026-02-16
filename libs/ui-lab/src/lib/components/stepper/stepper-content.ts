@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_STEPPER } from './stepper-types';
 
 @Directive({
-  selector: '[sc-stepper-content]',
+  selector: '[scStepperContent]',
   host: {
     'data-slot': 'stepper-content',
     role: 'tabpanel',

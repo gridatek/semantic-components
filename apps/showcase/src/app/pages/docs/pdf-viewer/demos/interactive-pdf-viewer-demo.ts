@@ -87,15 +87,15 @@ import {
 
       <div class="h-[600px]">
         <div
-          sc-pdf-viewer
+          scPdfViewer
           [src]="currentPdf()"
           title="Sample PDF"
           #viewer="scPdfViewer"
         >
-          <div sc-pdf-viewer-container class="h-full">
-            <div sc-pdf-viewer-toolbar>
-              <div sc-pdf-viewer-nav>
-                <button sc-pdf-viewer-prev-page>
+          <div scPdfViewerContainer class="h-full">
+            <div scPdfViewerToolbar>
+              <div scPdfViewerNav>
+                <button scPdfViewerPrevPage>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -110,8 +110,8 @@ import {
                     <path d="m15 18-6-6 6-6" />
                   </svg>
                 </button>
-                <div sc-pdf-viewer-page-info></div>
-                <button sc-pdf-viewer-next-page>
+                <div scPdfViewerPageInfo></div>
+                <button scPdfViewerNextPage>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -128,10 +128,10 @@ import {
                 </button>
               </div>
 
-              <div sc-pdf-viewer-separator></div>
+              <div scPdfViewerSeparator></div>
 
-              <div sc-pdf-viewer-zoom>
-                <button sc-pdf-viewer-zoom-out>
+              <div scPdfViewerZoom>
+                <button scPdfViewerZoomOut>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -148,8 +148,8 @@ import {
                     <path d="M8 11h6" />
                   </svg>
                 </button>
-                <select sc-pdf-viewer-zoom-select></select>
-                <button sc-pdf-viewer-zoom-in>
+                <select scPdfViewerZoomSelect></select>
+                <button scPdfViewerZoomIn>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -169,9 +169,9 @@ import {
                 </button>
               </div>
 
-              <div sc-pdf-viewer-spacer></div>
+              <div scPdfViewerSpacer></div>
 
-              <button sc-pdf-viewer-download>
+              <button scPdfViewerDownload>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -188,7 +188,7 @@ import {
                   <line x1="12" x2="12" y1="15" y2="3" />
                 </svg>
               </button>
-              <button sc-pdf-viewer-fullscreen>
+              <button scPdfViewerFullscreen>
                 @if (viewer.isFullscreen()) {
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -227,10 +227,10 @@ import {
               </button>
             </div>
 
-            <div sc-pdf-viewer-content>
-              <div sc-pdf-viewer-loading></div>
-              <div sc-pdf-viewer-error></div>
-              <div sc-pdf-viewer-empty></div>
+            <div scPdfViewerContent>
+              <div scPdfViewerLoading></div>
+              <div scPdfViewerError></div>
+              <div scPdfViewerEmpty></div>
             </div>
           </div>
         </div>

@@ -35,12 +35,12 @@ import { ScButton } from '@semantic-components/ui';
   imports: [ScButton],
   template: \`
     <div class="flex flex-wrap items-center gap-4">
-      <button sc-button>Default</button>
-      <button sc-button variant="secondary">Secondary</button>
-      <button sc-button variant="destructive">Destructive</button>
-      <button sc-button variant="outline">Outline</button>
-      <button sc-button variant="ghost">Ghost</button>
-      <button sc-button variant="link">Link</button>
+      <button scButton>Default</button>
+      <button scButton variant="secondary">Secondary</button>
+      <button scButton variant="destructive">Destructive</button>
+      <button scButton variant="outline">Outline</button>
+      <button scButton variant="ghost">Ghost</button>
+      <button scButton variant="link">Link</button>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

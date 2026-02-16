@@ -33,38 +33,38 @@ import {
     SiSettingsIcon,
   ],
   template: `
-    <div sc-item-group class="max-w-md">
-      <div sc-item>
-        <div sc-item-media variant="icon">
+    <div scItemGroup class="max-w-md">
+      <div scItem>
+        <div scItemMedia variant="icon">
           <svg si-bell-icon></svg>
         </div>
-        <div sc-item-body>
-          <div sc-item-title>Notifications</div>
-          <p sc-item-description>Manage your notification preferences.</p>
+        <div scItemBody>
+          <div scItemTitle>Notifications</div>
+          <p scItemDescription>Manage your notification preferences.</p>
         </div>
       </div>
 
-      <div sc-item-separator></div>
+      <div scItemSeparator></div>
 
-      <div sc-item>
-        <div sc-item-media variant="icon">
+      <div scItem>
+        <div scItemMedia variant="icon">
           <svg si-lock-icon></svg>
         </div>
-        <div sc-item-body>
-          <div sc-item-title>Privacy</div>
-          <p sc-item-description>Control your privacy settings.</p>
+        <div scItemBody>
+          <div scItemTitle>Privacy</div>
+          <p scItemDescription>Control your privacy settings.</p>
         </div>
       </div>
 
-      <div sc-item-separator></div>
+      <div scItemSeparator></div>
 
-      <div sc-item>
-        <div sc-item-media variant="icon">
+      <div scItem>
+        <div scItemMedia variant="icon">
           <svg si-settings-icon></svg>
         </div>
-        <div sc-item-body>
-          <div sc-item-title>Settings</div>
-          <p sc-item-description>Configure your account preferences.</p>
+        <div scItemBody>
+          <div scItemTitle>Settings</div>
+          <p scItemDescription>Configure your account preferences.</p>
         </div>
       </div>
     </div>

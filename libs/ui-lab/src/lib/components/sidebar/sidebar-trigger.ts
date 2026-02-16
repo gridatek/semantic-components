@@ -4,7 +4,7 @@ import { ScSidebarState } from './sidebar-state.service';
 import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'button[sc-sidebar-trigger]',
+  selector: 'button[scSidebarTrigger]',
   host: {
     'data-slot': 'sidebar-trigger',
     type: 'button',

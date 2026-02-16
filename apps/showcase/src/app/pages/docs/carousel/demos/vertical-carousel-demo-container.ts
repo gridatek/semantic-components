@@ -56,15 +56,15 @@ import {
   template: \`
     <div class="mx-auto flex h-[350px] w-full max-w-xs items-center">
       <div
-        sc-carousel
+        scCarousel
         orientation="vertical"
         [options]="{ align: 'start' }"
         class="w-full"
       >
-        <div sc-carousel-viewport>
-          <div sc-carousel-track class="-mt-1 h-[270px]">
+        <div scCarouselViewport>
+          <div scCarouselTrack class="-mt-1 h-[270px]">
             @for (index of items; track index) {
-              <div sc-carousel-item class="basis-1/2 pt-1">
+              <div scCarouselItem class="basis-1/2 pt-1">
                 <div class="p-1">
                   <div
                     class="flex items-center justify-center rounded-lg border bg-card p-6"
@@ -76,11 +76,11 @@ import {
             }
           </div>
         </div>
-        <button sc-carousel-previous>
+        <button scCarouselPrevious>
           <svg si-chevron-left-icon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
-        <button sc-carousel-next>
+        <button scCarouselNext>
           <svg si-chevron-right-icon></svg>
           <span class="sr-only">Next slide</span>
         </button>

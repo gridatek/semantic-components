@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
 @Component({
-  selector: 'div[sc-password-field-strength-bar]',
+  selector: 'div[scPasswordFieldStrengthBar]',
   template: ``,
   host: {
     'data-slot': 'password-field-strength-bar',

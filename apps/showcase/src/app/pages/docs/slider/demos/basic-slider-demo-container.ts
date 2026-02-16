@@ -32,7 +32,7 @@ import { ScSlider } from '@semantic-components/ui-lab';
   imports: [ScSlider],
   template: \`
     <div class="w-[60%]">
-      <div sc-slider [(value)]="basicValue"></div>
+      <div scSlider [(value)]="basicValue"></div>
       <p class="mt-2 text-sm text-muted-foreground">
         Value: {{ basicValue() }}
       </p>

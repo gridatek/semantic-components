@@ -26,7 +26,7 @@ export type ScInputGroupButtonVariants = VariantProps<
 >;
 
 @Directive({
-  selector: 'button[sc-input-group-button]',
+  selector: 'button[scInputGroupButton]',
   host: {
     'data-slot': 'input-group-button',
     type: 'button',

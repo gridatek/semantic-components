@@ -5,11 +5,11 @@ A component for selecting time values with support for 12/24 hour formats.
 ## Usage
 
 ```html
-<div sc-time-picker format="12h" [(value)]="time">
-  <input sc-time-picker-input type="hours" label="Hours" />
-  <span sc-time-picker-separator>:</span>
-  <input sc-time-picker-input type="minutes" label="Minutes" />
-  <div sc-time-picker-period></div>
+<div scTimePicker format="12h" [(value)]="time">
+  <input scTimePickerInput type="hours" label="Hours" />
+  <span scTimePickerSeparator>:</span>
+  <input scTimePickerInput type="minutes" label="Minutes" />
+  <div scTimePickerPeriod></div>
 </div>
 ```
 
@@ -19,7 +19,7 @@ A component for selecting time values with support for 12/24 hour formats.
 
 Root container that manages time state.
 
-**Selector:** `[sc-time-picker]`
+**Selector:** `[scTimePicker]`
 
 **Inputs:**
 
@@ -50,7 +50,7 @@ Root container that manages time state.
 
 Numeric input for hours, minutes, or seconds.
 
-**Selector:** `input[sc-time-picker-input]`
+**Selector:** `input[scTimePickerInput]`
 
 **Inputs:**
 
@@ -71,19 +71,19 @@ Numeric input for hours, minutes, or seconds.
 
 Visual separator (colon) between inputs.
 
-**Selector:** `[sc-time-picker-separator]`
+**Selector:** `[scTimePickerSeparator]`
 
 ### ScTimePickerPeriod
 
 AM/PM toggle buttons.
 
-**Selector:** `[sc-time-picker-period]`
+**Selector:** `[scTimePickerPeriod]`
 
 ### ScTimePickerClock
 
 Visual clock interface for selection.
 
-**Selector:** `[sc-time-picker-clock]`
+**Selector:** `[scTimePickerClock]`
 
 **Inputs:**
 
@@ -111,51 +111,51 @@ interface TimeValue {
 ### 12 Hour Format
 
 ```html
-<div sc-time-picker format="12h" [(value)]="time">
-  <input sc-time-picker-input type="hours" />
-  <span sc-time-picker-separator>:</span>
-  <input sc-time-picker-input type="minutes" />
-  <div sc-time-picker-period></div>
+<div scTimePicker format="12h" [(value)]="time">
+  <input scTimePickerInput type="hours" />
+  <span scTimePickerSeparator>:</span>
+  <input scTimePickerInput type="minutes" />
+  <div scTimePickerPeriod></div>
 </div>
 ```
 
 ### 24 Hour Format
 
 ```html
-<div sc-time-picker format="24h" [(value)]="time">
-  <input sc-time-picker-input type="hours" />
-  <span sc-time-picker-separator>:</span>
-  <input sc-time-picker-input type="minutes" />
+<div scTimePicker format="24h" [(value)]="time">
+  <input scTimePickerInput type="hours" />
+  <span scTimePickerSeparator>:</span>
+  <input scTimePickerInput type="minutes" />
 </div>
 ```
 
 ### With Seconds
 
 ```html
-<div sc-time-picker format="24h" [showSeconds]="true" [(value)]="time">
-  <input sc-time-picker-input type="hours" />
-  <span sc-time-picker-separator>:</span>
-  <input sc-time-picker-input type="minutes" />
-  <span sc-time-picker-separator>:</span>
-  <input sc-time-picker-input type="seconds" />
+<div scTimePicker format="24h" [showSeconds]="true" [(value)]="time">
+  <input scTimePickerInput type="hours" />
+  <span scTimePickerSeparator>:</span>
+  <input scTimePickerInput type="minutes" />
+  <span scTimePickerSeparator>:</span>
+  <input scTimePickerInput type="seconds" />
 </div>
 ```
 
 ### Clock Interface
 
 ```html
-<div sc-time-picker format="12h" [(value)]="time">
-  <div sc-time-picker-clock mode="hours"></div>
+<div scTimePicker format="12h" [(value)]="time">
+  <div scTimePickerClock mode="hours"></div>
 </div>
 ```
 
 ### Disabled
 
 ```html
-<div sc-time-picker [disabled]="true" [(value)]="time">
-  <input sc-time-picker-input type="hours" />
-  <span sc-time-picker-separator>:</span>
-  <input sc-time-picker-input type="minutes" />
+<div scTimePicker [disabled]="true" [(value)]="time">
+  <input scTimePickerInput type="hours" />
+  <span scTimePickerSeparator>:</span>
+  <input scTimePickerInput type="minutes" />
 </div>
 ```
 

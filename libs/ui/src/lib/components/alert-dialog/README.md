@@ -23,33 +23,33 @@ ScAlertDialogProvider (root wrapper - manages open state + overlay lifecycle)
 
 | Component                  | Selector                           | Description                                    |
 | -------------------------- | ---------------------------------- | ---------------------------------------------- |
-| `ScAlertDialogProvider`    | `div[sc-alert-dialog-provider]`    | Root wrapper, manages open state + overlay     |
-| `ScAlertDialogTrigger`     | `button[sc-alert-dialog-trigger]`  | Button that opens the dialog                   |
+| `ScAlertDialogProvider`    | `div[scAlertDialogProvider]`    | Root wrapper, manages open state + overlay     |
+| `ScAlertDialogTrigger`     | `button[scAlertDialogTrigger]`  | Button that opens the dialog                   |
 | `ScAlertDialogPortal`      | `ng-template[scAlertDialogPortal]` | Directive marking lazy content for the overlay |
-| `ScAlertDialog`            | `div[sc-alert-dialog]`             | Dialog panel with animations                   |
-| `ScAlertDialogHeader`      | `div[sc-alert-dialog-header]`      | Header section container                       |
-| `ScAlertDialogTitle`       | `h2[sc-alert-dialog-title]`        | Dialog title (aria-labelledby)                 |
-| `ScAlertDialogDescription` | `p[sc-alert-dialog-description]`   | Dialog description (aria-describedby)          |
-| `ScAlertDialogFooter`      | `div[sc-alert-dialog-footer]`      | Footer section for actions                     |
-| `ScAlertDialogCancel`      | `button[sc-alert-dialog-cancel]`   | Cancel button (closes dialog)                  |
-| `ScAlertDialogAction`      | `button[sc-alert-dialog-action]`   | Confirm/action button                          |
+| `ScAlertDialog`            | `div[scAlertDialog]`             | Dialog panel with animations                   |
+| `ScAlertDialogHeader`      | `div[scAlertDialogHeader]`      | Header section container                       |
+| `ScAlertDialogTitle`       | `h2[scAlertDialogTitle]`        | Dialog title (aria-labelledby)                 |
+| `ScAlertDialogDescription` | `p[scAlertDialogDescription]`   | Dialog description (aria-describedby)          |
+| `ScAlertDialogFooter`      | `div[scAlertDialogFooter]`      | Footer section for actions                     |
+| `ScAlertDialogCancel`      | `button[scAlertDialogCancel]`   | Cancel button (closes dialog)                  |
+| `ScAlertDialogAction`      | `button[scAlertDialogAction]`   | Confirm/action button                          |
 
 ## Usage
 
 ### Basic Alert Dialog
 
 ```html
-<div sc-alert-dialog-provider>
-  <button sc-alert-dialog-trigger>Delete Account</button>
+<div scAlertDialogProvider>
+  <button scAlertDialogTrigger>Delete Account</button>
   <ng-template scAlertDialogPortal>
-    <div sc-alert-dialog>
-      <div sc-alert-dialog-header>
-        <h2 sc-alert-dialog-title>Are you absolutely sure?</h2>
-        <p sc-alert-dialog-description>This action cannot be undone. This will permanently delete your account and remove your data from our servers.</p>
+    <div scAlertDialog>
+      <div scAlertDialogHeader>
+        <h2 scAlertDialogTitle>Are you absolutely sure?</h2>
+        <p scAlertDialogDescription>This action cannot be undone. This will permanently delete your account and remove your data from our servers.</p>
       </div>
-      <div sc-alert-dialog-footer>
-        <button sc-alert-dialog-cancel>Cancel</button>
-        <button sc-alert-dialog-action>Continue</button>
+      <div scAlertDialogFooter>
+        <button scAlertDialogCancel>Cancel</button>
+        <button scAlertDialogAction>Continue</button>
       </div>
     </div>
   </ng-template>
@@ -59,17 +59,17 @@ ScAlertDialogProvider (root wrapper - manages open state + overlay lifecycle)
 ### Destructive Action
 
 ```html
-<div sc-alert-dialog-provider>
-  <button sc-alert-dialog-trigger>Delete</button>
+<div scAlertDialogProvider>
+  <button scAlertDialogTrigger>Delete</button>
   <ng-template scAlertDialogPortal>
-    <div sc-alert-dialog>
-      <div sc-alert-dialog-header>
-        <h2 sc-alert-dialog-title>Delete item?</h2>
-        <p sc-alert-dialog-description>This action cannot be undone.</p>
+    <div scAlertDialog>
+      <div scAlertDialogHeader>
+        <h2 scAlertDialogTitle>Delete item?</h2>
+        <p scAlertDialogDescription>This action cannot be undone.</p>
       </div>
-      <div sc-alert-dialog-footer>
-        <button sc-alert-dialog-cancel>Cancel</button>
-        <button sc-alert-dialog-action class="bg-destructive text-destructive-foreground hover:bg-destructive/90">Delete</button>
+      <div scAlertDialogFooter>
+        <button scAlertDialogCancel>Cancel</button>
+        <button scAlertDialogAction class="bg-destructive text-destructive-foreground hover:bg-destructive/90">Delete</button>
       </div>
     </div>
   </ng-template>
@@ -81,10 +81,10 @@ ScAlertDialogProvider (root wrapper - manages open state + overlay lifecycle)
 ```typescript
 @Component({
   template: `
-    <div sc-alert-dialog-provider [(open)]="isOpen">
-      <button sc-alert-dialog-trigger>Open</button>
+    <div scAlertDialogProvider [(open)]="isOpen">
+      <button scAlertDialogTrigger>Open</button>
       <ng-template scAlertDialogPortal>
-        <div sc-alert-dialog>
+        <div scAlertDialog>
           <!-- content -->
         </div>
       </ng-template>
@@ -101,17 +101,17 @@ export class MyComponent {
 ```typescript
 @Component({
   template: `
-    <div sc-alert-dialog-provider>
-      <button sc-alert-dialog-trigger>Delete</button>
+    <div scAlertDialogProvider>
+      <button scAlertDialogTrigger>Delete</button>
       <ng-template scAlertDialogPortal>
-        <div sc-alert-dialog>
-          <div sc-alert-dialog-header>
-            <h2 sc-alert-dialog-title>Confirm deletion</h2>
-            <p sc-alert-dialog-description>Are you sure?</p>
+        <div scAlertDialog>
+          <div scAlertDialogHeader>
+            <h2 scAlertDialogTitle>Confirm deletion</h2>
+            <p scAlertDialogDescription>Are you sure?</p>
           </div>
-          <div sc-alert-dialog-footer>
-            <button sc-alert-dialog-cancel>Cancel</button>
-            <button sc-alert-dialog-action (click)="onDelete()">Delete</button>
+          <div scAlertDialogFooter>
+            <button scAlertDialogCancel>Cancel</button>
+            <button scAlertDialogAction (click)="onDelete()">Delete</button>
           </div>
         </div>
       </ng-template>
@@ -207,9 +207,9 @@ On `animationend`, the `closed` state resets to `idle`, which triggers overlay c
 All components accept a `class` input for custom styling:
 
 ```html
-<div sc-alert-dialog class="max-w-md">
+<div scAlertDialog class="max-w-md">
   <!-- narrower dialog -->
 </div>
 
-<button sc-alert-dialog-action class="bg-destructive">Delete</button>
+<button scAlertDialogAction class="bg-destructive">Delete</button>
 ```

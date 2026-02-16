@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-collapsible-panel]',
+  selector: 'div[scCollapsiblePanel]',
   imports: [AccordionContent],
   hostDirectives: [
     {

@@ -15,7 +15,7 @@ import {
   imports: [ScKanbanBoard],
   template: `
     <div class="h-[400px] border rounded-lg bg-muted/10">
-      <sc-kanban-board
+      <scKanbanBoard
         [(columns)]="columns"
         [(cards)]="cards"
         [showAddCard]="false"

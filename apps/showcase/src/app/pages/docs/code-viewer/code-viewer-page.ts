@@ -38,13 +38,13 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>angular-ts</span>
-            <button sc-copy-button [value]="usageCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>angular-ts</span>
+            <button scCopyButton [value]="usageCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="usageCode"
             language="angular-ts"
           ></div>
@@ -79,13 +79,13 @@ export default class CodeViewerPage {
     TocHeading,
   ],
   template: \`
-    <div sc-code-viewer>
-      <div sc-code-viewer-header>
-        <span sc-code-viewer-label>app.component.ts</span>
-        <button sc-copy-button [value]="code"></button>
+    <div scCodeViewer>
+      <div scCodeViewerHeader>
+        <span scCodeViewerLabel>app.component.ts</span>
+        <button scCopyButton [value]="code"></button>
       </div>
       <div
-        sc-code-viewer-content
+        scCodeViewerContent
         [code]="code"
         language="typescript"
         [showLineNumbers]="true"

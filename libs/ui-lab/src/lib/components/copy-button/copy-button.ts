@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'button[sc-copy-button]',
+  selector: 'button[scCopyButton]',
   exportAs: 'scCopyButton',
   template: `
     @if (copied()) {

@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'li[sc-breadcrumb-separator]',
+  selector: 'li[scBreadcrumbSeparator]',
   host: {
     'data-slot': 'breadcrumb-separator',
     role: 'presentation',

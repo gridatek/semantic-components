@@ -38,7 +38,7 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
     <p class="text-xs text-muted-foreground mb-4">
       Only dates within the next 30 days
     </p>
-    <sc-date-picker
+    <scDatePicker
       [(selected)]="selectedDate"
       [minDate]="minDate"
       [maxDate]="maxDate"

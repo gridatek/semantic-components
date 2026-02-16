@@ -45,7 +45,7 @@ import {
       </div>
 
       <!-- Tour Guide Component -->
-      <sc-tour-guide />
+      <scTourGuide />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

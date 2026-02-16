@@ -11,7 +11,7 @@ import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 
 @Directive({
-  selector: 'input[sc-input]',
+  selector: 'input[scInput]',
   host: {
     '[attr.data-slot]': 'dataSlot()',
     '[attr.id]': 'id()',

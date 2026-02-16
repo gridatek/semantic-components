@@ -4,7 +4,7 @@ import { cn } from '../../utils';
 import { ScHoverCardProvider } from './hover-card-provider';
 
 @Directive({
-  selector: '[sc-hover-card-trigger]',
+  selector: '[scHoverCardTrigger]',
   hostDirectives: [CdkOverlayOrigin],
   host: {
     'data-slot': 'hover-card-trigger',

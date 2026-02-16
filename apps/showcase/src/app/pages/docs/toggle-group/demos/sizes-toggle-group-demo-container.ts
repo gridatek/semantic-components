@@ -32,34 +32,34 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
   template: \`
     <div class="flex flex-col gap-4">
       <div
-        sc-toggle-group
+        scToggleGroup
         type="single"
         size="sm"
         aria-label="Small toggle group"
       >
-        <button sc-toggle-group-item value="a" aria-label="Option A">A</button>
-        <button sc-toggle-group-item value="b" aria-label="Option B">B</button>
-        <button sc-toggle-group-item value="c" aria-label="Option C">C</button>
+        <button scToggleGroupItem value="a" aria-label="Option A">A</button>
+        <button scToggleGroupItem value="b" aria-label="Option B">B</button>
+        <button scToggleGroupItem value="c" aria-label="Option C">C</button>
       </div>
       <div
-        sc-toggle-group
+        scToggleGroup
         type="single"
         size="default"
         aria-label="Default toggle group"
       >
-        <button sc-toggle-group-item value="a" aria-label="Option A">A</button>
-        <button sc-toggle-group-item value="b" aria-label="Option B">B</button>
-        <button sc-toggle-group-item value="c" aria-label="Option C">C</button>
+        <button scToggleGroupItem value="a" aria-label="Option A">A</button>
+        <button scToggleGroupItem value="b" aria-label="Option B">B</button>
+        <button scToggleGroupItem value="c" aria-label="Option C">C</button>
       </div>
       <div
-        sc-toggle-group
+        scToggleGroup
         type="single"
         size="lg"
         aria-label="Large toggle group"
       >
-        <button sc-toggle-group-item value="a" aria-label="Option A">A</button>
-        <button sc-toggle-group-item value="b" aria-label="Option B">B</button>
-        <button sc-toggle-group-item value="c" aria-label="Option C">C</button>
+        <button scToggleGroupItem value="a" aria-label="Option A">A</button>
+        <button scToggleGroupItem value="b" aria-label="Option B">B</button>
+        <button scToggleGroupItem value="c" aria-label="Option C">C</button>
       </div>
     </div>
   \`,

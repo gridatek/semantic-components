@@ -16,7 +16,7 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
 type ScAlertDialogState = 'idle' | 'open' | 'closed';
 
 @Component({
-  selector: 'div[sc-alert-dialog]',
+  selector: 'div[scAlertDialog]',
   template: `
     <ng-content />
   `,

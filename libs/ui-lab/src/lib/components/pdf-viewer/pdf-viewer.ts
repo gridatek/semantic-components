@@ -35,7 +35,7 @@ import {
     >
       <!-- Toolbar -->
       @if (showToolbar()) {
-        <sc-pdf-viewer-toolbar
+        <scPdfViewerToolbar
           [currentPage]="currentPage()"
           [totalPages]="totalPages()"
           [zoom]="zoom()"

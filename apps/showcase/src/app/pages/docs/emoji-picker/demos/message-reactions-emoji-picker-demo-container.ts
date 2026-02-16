@@ -68,7 +68,7 @@ import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
       </div>
       @if (showReactionPicker()) {
         <div class="mt-2">
-          <sc-emoji-picker
+          <scEmojiPicker
             [showSearch]="false"
             [showRecent]="false"
             class="w-64"

@@ -12,7 +12,7 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
 import { SC_CHART } from './chart-container';
 
 @Component({
-  selector: '[sc-pie-chart]',
+  selector: '[scPieChart]',
   template: `
     <svg
       [attr.viewBox]="viewBox()"

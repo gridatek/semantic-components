@@ -19,9 +19,9 @@ import {
     ScHoverCardTrigger,
   ],
   template: `
-    <div sc-hover-card-provider>
+    <div scHoverCardProvider>
       <a
-        sc-hover-card-trigger
+        scHoverCardTrigger
         href="https://github.com/angular"
         target="_blank"
         rel="noopener noreferrer"
@@ -30,7 +30,7 @@ import {
         &#64;angular
       </a>
       <ng-template scHoverCardPortal>
-        <div sc-hover-card>
+        <div scHoverCard>
           <div class="flex justify-between gap-4">
             <div
               class="flex size-12 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-700 text-xl font-bold text-white"

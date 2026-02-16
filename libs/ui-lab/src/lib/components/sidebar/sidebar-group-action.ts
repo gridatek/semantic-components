@@ -2,7 +2,7 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'button[sc-sidebar-group-action]',
+  selector: 'button[scSidebarGroupAction]',
   host: {
     'data-slot': 'sidebar-group-action',
     '[class]': 'class()',

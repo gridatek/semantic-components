@@ -39,7 +39,7 @@ export type MasonryLayoutMode = 'columns' | 'absolute';
       display: block;
     }
 
-    :host ::ng-deep sc-masonry-item {
+    :host ::ng-deep scMasonryItem {
       margin-bottom: var(--masonry-gap, 16px);
     }
   `,

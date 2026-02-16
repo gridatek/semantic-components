@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
 
 @Directive({
-  selector: '[sc-stepper-item]',
+  selector: '[scStepperItem]',
   providers: [{ provide: SC_STEPPER_ITEM, useExisting: ScStepperItem }],
   host: {
     'data-slot': 'stepper-item',

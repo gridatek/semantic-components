@@ -79,50 +79,50 @@ import {
       </div>
 
       <nav
-        sc-pagination
+        scPagination
         #pagination="scPagination"
         [currentPage]="currentPage()"
         [pageSize]="pageSize()"
         [totalItems]="totalItems()"
         (change)="onPaginationChange($event)"
       >
-        <ul sc-pagination-list>
-          <li sc-pagination-item>
-            <button sc-pagination-first>
+        <ul scPaginationList>
+          <li scPaginationItem>
+            <button scPaginationFirst>
               <svg si-chevrons-left-icon></svg>
               <span>First</span>
             </button>
           </li>
-          <li sc-pagination-item>
-            <button sc-pagination-previous>
+          <li scPaginationItem>
+            <button scPaginationPrevious>
               <svg si-chevron-left-icon></svg>
               <span>Previous</span>
             </button>
           </li>
 
           @for (page of pagination.pages(); track page.value) {
-            <li sc-pagination-item>
+            <li scPaginationItem>
               @if (page.type === 'ellipsis') {
-                <span sc-pagination-ellipsis>
+                <span scPaginationEllipsis>
                   <svg si-ellipsis-icon></svg>
                   <span class="sr-only">More pages</span>
                 </span>
               } @else {
-                <button sc-pagination-link [page]="page.value">
+                <button scPaginationLink [page]="page.value">
                   {{ page.value }}
                 </button>
               }
             </li>
           }
 
-          <li sc-pagination-item>
-            <button sc-pagination-next>
+          <li scPaginationItem>
+            <button scPaginationNext>
               <span>Next</span>
               <svg si-chevron-right-icon></svg>
             </button>
           </li>
-          <li sc-pagination-item>
-            <button sc-pagination-last>
+          <li scPaginationItem>
+            <button scPaginationLast>
               <span>Last</span>
               <svg si-chevrons-right-icon></svg>
             </button>

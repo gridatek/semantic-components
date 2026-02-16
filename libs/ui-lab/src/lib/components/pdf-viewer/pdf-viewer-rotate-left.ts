@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Component({
-  selector: 'button[sc-pdf-viewer-rotate-left]',
+  selector: 'button[scPdfViewerRotateLeft]',
   template: `
     <ng-content />
   `,

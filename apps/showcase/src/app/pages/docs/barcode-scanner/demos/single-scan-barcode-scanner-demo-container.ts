@@ -36,7 +36,7 @@ import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
   selector: 'app-single-scan-barcode-scanner-demo',
   imports: [ScBarcodeScanner],
   template: \`
-    <sc-barcode-scanner
+    <scBarcodeScanner
       [continuous]="false"
       (detected)="onDetected($event)"
       class="max-w-md"

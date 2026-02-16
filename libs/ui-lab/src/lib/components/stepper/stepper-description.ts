@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-stepper-description]',
+  selector: '[scStepperDescription]',
   host: {
     'data-slot': 'stepper-description',
     '[class]': 'class()',

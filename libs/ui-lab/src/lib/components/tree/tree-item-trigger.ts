@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_TREE_ITEM } from './tree-item';
 
 @Component({
-  selector: 'button[sc-tree-item-trigger], a[sc-tree-item-trigger]',
+  selector: 'button[scTreeItemTrigger], a[scTreeItemTrigger]',
   template: `
     <ng-content />
   `,

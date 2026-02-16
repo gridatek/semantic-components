@@ -11,10 +11,10 @@ import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
   selector: 'app-label-textarea-demo',
   imports: [FormField, ScField, ScLabel, ScTextarea],
   template: `
-    <div sc-field>
-      <label sc-label>Your message</label>
+    <div scField>
+      <label scLabel>Your message</label>
       <textarea
-        sc-textarea
+        scTextarea
         [formField]="textareaForm.message"
         placeholder="Type your message here."
       ></textarea>

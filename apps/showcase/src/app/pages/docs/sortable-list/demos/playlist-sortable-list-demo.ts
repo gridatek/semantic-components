@@ -33,20 +33,20 @@ interface PlaylistItem {
           <h4 class="font-medium">My Playlist</h4>
         </div>
         <div
-          sc-sortable-list
+          scSortableList
           [(items)]="playlist"
           [handleOnly]="true"
           class="divide-y"
         >
-          <div sc-sortable-overlay></div>
+          <div scSortableOverlay></div>
           @for (song of playlist(); track song.id; let i = $index) {
             <div
-              sc-sortable-item
+              scSortableItem
               [index]="i"
               [item]="song"
               class="flex items-center gap-4 px-4 py-3 hover:bg-muted/50"
             >
-              <span sc-sortable-handle class="p-1"></span>
+              <span scSortableHandle class="p-1"></span>
               <span class="w-6 text-sm text-muted-foreground">
                 {{ i + 1 }}
               </span>

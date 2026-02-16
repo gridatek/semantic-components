@@ -33,7 +33,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
   template: \`
     <div class="relative h-64 border rounded-lg bg-muted/20">
       <div class="absolute bottom-4 right-4">
-        <sc-speed-dial
+        <scSpeedDial
           [actions]="actionsWithDisabled()"
           ariaLabel="Actions with disabled items"
         />

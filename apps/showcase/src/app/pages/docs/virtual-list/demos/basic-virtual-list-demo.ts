@@ -14,7 +14,7 @@ import {
   imports: [ScVirtualList],
   template: `
     <div class="border rounded-lg overflow-hidden">
-      <sc-virtual-list
+      <scVirtualList
         [items]="items()"
         [itemHeight]="48"
         height="300px"

@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_COMPARE } from './image-compare';
 
 @Component({
-  selector: 'img[sc-image-compare-before]',
+  selector: 'img[scImageCompareBefore]',
   template: '',
   host: {
     'data-slot': 'image-compare-before',

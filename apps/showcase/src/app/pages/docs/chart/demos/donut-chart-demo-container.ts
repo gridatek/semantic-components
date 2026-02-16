@@ -40,14 +40,14 @@ import {
   imports: [ScChartContainer, ScChartLegend, ScDonutChart],
   template: \`
     <div class="max-w-sm rounded-lg border p-6">
-      <div sc-chart-container>
+      <div scChartContainer>
         <div
-          sc-donut-chart
+          scDonutChart
           [data]="pieData"
           [size]="280"
           [innerRadius]="70"
         ></div>
-        <div sc-chart-legend [items]="pieLegend"></div>
+        <div scChartLegend [items]="pieLegend"></div>
       </div>
     </div>
   \`,

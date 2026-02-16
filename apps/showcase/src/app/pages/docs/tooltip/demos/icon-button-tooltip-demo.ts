@@ -10,7 +10,7 @@ import { SiPlusIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-icon-button-tooltip-demo',
   imports: [ScButton, ScTooltipTrigger, SiPlusIcon],
   template: `
-    <button sc-button variant="outline" size="icon" scTooltipTrigger="Add item">
+    <button scButton variant="outline" size="icon" scTooltipTrigger="Add item">
       <svg si-plus-icon class="size-4"></svg>
       <span class="sr-only">Add item</span>
     </button>

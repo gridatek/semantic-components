@@ -17,7 +17,7 @@ import { cn } from '@semantic-components/ui';
 import { ScNavbar } from './navbar';
 
 @Component({
-  selector: 'div[sc-navbar-provider]',
+  selector: 'div[scNavbarProvider]',
   template: `
     <ng-content />
   `,

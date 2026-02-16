@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-opt-field-slot-caret]',
+  selector: 'div[scOptFieldSlotCaret]',
   host: {
     'data-slot': 'opt-field-slot-caret',
     '[class]': 'class()',

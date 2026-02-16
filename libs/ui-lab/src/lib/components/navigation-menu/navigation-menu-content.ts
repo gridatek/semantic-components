@@ -19,7 +19,7 @@ const position: ConnectedPosition = {
 };
 
 @Component({
-  selector: 'div[sc-navigation-menu-content]',
+  selector: 'div[scNavigationMenuContent]',
   imports: [OverlayModule],
   template: `
     @if (origin(); as origin) {

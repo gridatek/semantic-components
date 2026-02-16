@@ -21,12 +21,12 @@ import {
  *
  * @example
  * ```html
- * <button sc-language-button></button>
- * <a sc-language-button href="#"></a>
+ * <button scLanguageButton></button>
+ * <a scLanguageButton href="#"></a>
  * ```
  */
 @Component({
-  selector: 'button[sc-language-button], a[sc-language-button]',
+  selector: 'button[scLanguageButton], a[scLanguageButton]',
   host: {
     'data-slot': 'language-button',
     '[class]': 'class()',

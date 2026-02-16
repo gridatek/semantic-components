@@ -12,7 +12,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_FIELD } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-radio-field], label[sc-radio-field]',
+  selector: 'div[scRadioField], label[scRadioField]',
   imports: [],
   providers: [{ provide: SC_FIELD, useExisting: ScRadioField }],
   host: {

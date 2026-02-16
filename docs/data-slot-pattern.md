@@ -11,9 +11,9 @@ Every sub-component in the library sets a `data-slot` attribute on its host elem
   <!-- grid container -->
   <input scCheckbox data-slot="checkbox" />
   <!-- col-1, row-1 -->
-  <label sc-label data-slot="label">...</label>
+  <label scLabel data-slot="label">...</label>
   <!-- col-2, row-1 -->
-  <p sc-field-description data-slot="field-description">...</p>
+  <p scFieldDescription data-slot="field-description">...</p>
   <!-- col-2, row-2 -->
 </div>
 ```
@@ -78,7 +78,7 @@ While the library follows the "layout only" rule internally, consumers are free 
 ```html
 <div scCheckboxField class="*:data-[slot=label]:text-blue-600 *:data-[slot=label]:uppercase">
   <input type="checkbox" scCheckbox id="custom" />
-  <label sc-label for="custom">Custom styled label</label>
+  <label scLabel for="custom">Custom styled label</label>
 </div>
 ```
 
@@ -89,7 +89,7 @@ The `*:data-[slot=label]:text-blue-600` selector targets the label by its slot a
 ```html
 <div scCheckboxField class="*:data-[slot=visual-checkbox]:rounded-full *:data-[slot=visual-checkbox]:ring-offset-4">
   <input type="checkbox" scCheckbox id="round" />
-  <label sc-label for="round">Round checkbox</label>
+  <label scLabel for="round">Round checkbox</label>
 </div>
 ```
 
@@ -101,8 +101,8 @@ Consumers can combine `:has()` with `data-slot` for conditional styling:
 <!-- Make description red when checkbox is unchecked -->
 <div scCheckboxField class="has-[[data-state=unchecked]]:*:data-[slot=field-description]:text-destructive">
   <input type="checkbox" scCheckbox id="required" />
-  <label sc-label for="required">Required field</label>
-  <p sc-field-description>You must accept to continue.</p>
+  <label scLabel for="required">Required field</label>
+  <p scFieldDescription>You must accept to continue.</p>
 </div>
 ```
 
@@ -114,11 +114,11 @@ For repeated overrides, wrap multiple fields:
 <div class="*:*:data-[slot=label]:text-sm *:*:data-[slot=label]:text-muted-foreground space-y-4">
   <div scCheckboxField>
     <input type="checkbox" scCheckbox id="a" />
-    <label sc-label for="a">Option A</label>
+    <label scLabel for="a">Option A</label>
   </div>
   <div scCheckboxField>
     <input type="checkbox" scCheckbox id="b" />
-    <label sc-label for="b">Option B</label>
+    <label scLabel for="b">Option B</label>
   </div>
 </div>
 ```

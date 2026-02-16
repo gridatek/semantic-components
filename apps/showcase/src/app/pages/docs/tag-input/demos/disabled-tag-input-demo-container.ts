@@ -35,11 +35,11 @@ import {
   imports: [ScTagInput, ScTagInputField, ScTagInputTag],
   template: \`
     <div class="max-w-md">
-      <div sc-tag-input [tags]="['Angular', 'React', 'Vue']" [disabled]="true">
+      <div scTagInput [tags]="['Angular', 'React', 'Vue']" [disabled]="true">
         @for (tag of ['Angular', 'React', 'Vue']; track tag) {
-          <span sc-tag-input-tag [tag]="tag"></span>
+          <span scTagInputTag [tag]="tag"></span>
         }
-        <input sc-tag-input-field />
+        <input scTagInputField />
       </div>
     </div>
   \`,

@@ -16,7 +16,7 @@ import { ScRangeSlider } from '@semantic-components/ui-lab';
         <span>{{ minTemp() }}°C - {{ maxTemp() }}°C</span>
       </div>
       <div
-        sc-range-slider
+        scRangeSlider
         [(minValue)]="minTemp"
         [(maxValue)]="maxTemp"
         [min]="16"

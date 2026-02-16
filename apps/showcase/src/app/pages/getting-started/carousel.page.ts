@@ -48,20 +48,20 @@ import { TocHeading } from '../../components/toc/toc-heading';
           </code>
           .
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="installCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>terminal</span>
+            <button scCopyButton [value]="installCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="installCode"
             language="bash"
           ></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -72,29 +72,29 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>css</span>
-            <button sc-copy-button [value]="sourceCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>css</span>
+            <button scCopyButton [value]="sourceCode"></button>
           </div>
-          <div sc-code-viewer-content [code]="sourceCode" language="css"></div>
+          <div scCodeViewerContent [code]="sourceCode" language="css"></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
         <p class="text-muted-foreground">
           Import and use the carousel in your Angular templates:
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>angular-ts</span>
-            <button sc-copy-button [value]="usageCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>angular-ts</span>
+            <button scCopyButton [value]="usageCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="usageCode"
             language="angular-ts"
           ></div>
@@ -132,16 +132,16 @@ export default class CarouselInstallPage {
     ScCarouselNext,
   ],
   template: \`
-    <div sc-carousel>
-      <div sc-carousel-viewport>
-        <div sc-carousel-track>
-          <div sc-carousel-item>Slide 1</div>
-          <div sc-carousel-item>Slide 2</div>
-          <div sc-carousel-item>Slide 3</div>
+    <div scCarousel>
+      <div scCarouselViewport>
+        <div scCarouselTrack>
+          <div scCarouselItem>Slide 1</div>
+          <div scCarouselItem>Slide 2</div>
+          <div scCarouselItem>Slide 3</div>
         </div>
       </div>
-      <button sc-carousel-previous></button>
-      <button sc-carousel-next></button>
+      <button scCarouselPrevious></button>
+      <button scCarouselNext></button>
     </div>
   \`,
 })

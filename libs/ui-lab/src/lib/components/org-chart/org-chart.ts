@@ -21,7 +21,7 @@ import type {
   template: `
     <div [class]="containerClass()" role="tree" [attr.aria-label]="ariaLabel()">
       @if (data()) {
-        <sc-org-chart-node
+        <scOrgChartNode
           [node]="data()!"
           [direction]="direction()"
           [collapsible]="collapsible()"

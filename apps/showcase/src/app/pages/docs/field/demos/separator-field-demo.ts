@@ -23,19 +23,19 @@ import { ScSeparator } from '@semantic-components/ui-lab';
     ScInput,
   ],
   template: `
-    <div sc-field-group>
-      <div sc-field>
-        <label sc-label for="email">Email</label>
+    <div scFieldGroup>
+      <div scField>
+        <label scLabel for="email">Email</label>
         <input
-          sc-input
+          scInput
           id="email"
           type="email"
           placeholder="Enter your email"
         />
       </div>
 
-      <div sc-field-separator>
-        <div sc-separator class="absolute inset-0 top-1/2"></div>
+      <div scFieldSeparator>
+        <div scSeparator class="absolute inset-0 top-1/2"></div>
         <span
           class="text-muted-foreground px-2 bg-background relative mx-auto block w-fit"
         >
@@ -43,9 +43,9 @@ import { ScSeparator } from '@semantic-components/ui-lab';
         </span>
       </div>
 
-      <div sc-field>
-        <label sc-label for="phone">Phone</label>
-        <input sc-input id="phone" type="tel" placeholder="Enter your phone" />
+      <div scField>
+        <label scLabel for="phone">Phone</label>
+        <input scInput id="phone" type="tel" placeholder="Enter your phone" />
       </div>
     </div>
   `,

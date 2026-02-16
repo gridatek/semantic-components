@@ -55,13 +55,13 @@ import {
         Highlight Feature
       </button>
 
-      <sc-spotlight #spotlight [padding]="12" [borderRadius]="12">
-        <sc-spotlight-title>New Feature Available!</sc-spotlight-title>
-        <sc-spotlight-description>
+      <scSpotlight #spotlight [padding]="12" [borderRadius]="12">
+        <scSpotlightTitle>New Feature Available!</sc-spotlight-title>
+        <scSpotlightDescription>
           This exciting new feature helps you work more efficiently. Click to
           learn more about how it works.
         </sc-spotlight-description>
-        <sc-spotlight-actions>
+        <scSpotlightActions>
           <button
             type="button"
             (click)="spotlight.close()"

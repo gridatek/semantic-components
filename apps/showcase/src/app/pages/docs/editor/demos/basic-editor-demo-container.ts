@@ -77,31 +77,31 @@ import {
     SiListOrderedIcon,
   ],
   template: \`
-    <div sc-editor class="border rounded-lg overflow-hidden">
-      <div sc-editor-toolbar>
-        <div sc-editor-toolbar-group>
-          <button sc-editor-bold>
+    <div scEditor class="border rounded-lg overflow-hidden">
+      <div scEditorToolbar>
+        <div scEditorToolbarGroup>
+          <button scEditorBold>
             <svg si-bold-icon></svg>
             <span class="sr-only">Bold</span>
           </button>
-          <button sc-editor-italic>
+          <button scEditorItalic>
             <svg si-italic-icon></svg>
             <span class="sr-only">Italic</span>
           </button>
-          <button sc-editor-underline>
+          <button scEditorUnderline>
             <svg si-underline-icon></svg>
             <span class="sr-only">Underline</span>
           </button>
         </div>
 
-        <div sc-editor-separator></div>
+        <div scEditorSeparator></div>
 
-        <div sc-editor-toolbar-group>
-          <button sc-editor-bullet-list>
+        <div scEditorToolbarGroup>
+          <button scEditorBulletList>
             <svg si-list-icon></svg>
             <span class="sr-only">Bullet list</span>
           </button>
-          <button sc-editor-numbered-list>
+          <button scEditorNumberedList>
             <svg si-list-ordered-icon></svg>
             <span class="sr-only">Numbered list</span>
           </button>
@@ -109,15 +109,15 @@ import {
       </div>
 
       <div
-        sc-editor-content
+        scEditorContent
         [(value)]="content"
         placeholder="Start writing your content..."
       ></div>
 
-      <div sc-editor-footer>
-        <div sc-editor-count>
-          <span sc-editor-word-count></span>
-          <span sc-editor-char-count></span>
+      <div scEditorFooter>
+        <div scEditorCount>
+          <span scEditorWordCount></span>
+          <span scEditorCharCount></span>
         </div>
       </div>
     </div>

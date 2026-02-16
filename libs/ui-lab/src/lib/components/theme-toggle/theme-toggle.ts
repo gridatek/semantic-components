@@ -27,7 +27,7 @@ const sizeStyles: Record<ThemeToggleSize, string> = {
 };
 
 @Component({
-  selector: 'button[sc-theme-toggle]',
+  selector: 'button[scThemeToggle]',
   exportAs: 'scThemeToggle',
   host: {
     'data-slot': 'theme-toggle',

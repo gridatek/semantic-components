@@ -13,7 +13,7 @@ import { SC_TAG_INPUT } from './tag-input';
 // TagInputCount
 // ============================================================================
 @Component({
-  selector: '[sc-tag-input-count]',
+  selector: '[scTagInputCount]',
   template: `
     {{ tagInput.tags().length }}{{ maxText() }}
   `,

@@ -47,30 +47,30 @@ import {
   ],
   template: \`
     <div class="grid gap-4 md:grid-cols-3">
-      <div sc-card>
-        <div sc-card-header class="pb-2">
-          <p sc-card-description>Total Revenue</p>
-          <h3 sc-card-title class="text-2xl">$45,231.89</h3>
+      <div scCard>
+        <div scCardHeader class="pb-2">
+          <p scCardDescription>Total Revenue</p>
+          <h3 scCardTitle class="text-2xl">$45,231.89</h3>
         </div>
-        <div sc-card-body>
+        <div scCardBody>
           <p class="text-xs text-muted-foreground">+20.1% from last month</p>
         </div>
       </div>
-      <div sc-card>
-        <div sc-card-header class="pb-2">
-          <p sc-card-description>Subscriptions</p>
-          <h3 sc-card-title class="text-2xl">+2,350</h3>
+      <div scCard>
+        <div scCardHeader class="pb-2">
+          <p scCardDescription>Subscriptions</p>
+          <h3 scCardTitle class="text-2xl">+2,350</h3>
         </div>
-        <div sc-card-body>
+        <div scCardBody>
           <p class="text-xs text-muted-foreground">+180.1% from last month</p>
         </div>
       </div>
-      <div sc-card>
-        <div sc-card-header class="pb-2">
-          <p sc-card-description>Active Now</p>
-          <h3 sc-card-title class="text-2xl">+573</h3>
+      <div scCard>
+        <div scCardHeader class="pb-2">
+          <p scCardDescription>Active Now</p>
+          <h3 scCardTitle class="text-2xl">+573</h3>
         </div>
-        <div sc-card-body>
+        <div scCardBody>
           <p class="text-xs text-muted-foreground">+201 since last hour</p>
         </div>
       </div>

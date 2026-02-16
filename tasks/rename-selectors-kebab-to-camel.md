@@ -27,7 +27,7 @@ For each component/directive:
 ```typescript
 // Before
 @Directive({
-  selector: 'input[type="checkbox"][sc-checkbox]',
+  selector: 'input[type="checkbox"][scCheckbox]',
 })
 
 // After
@@ -39,7 +39,7 @@ For each component/directive:
 ```typescript
 // Before
 @Component({
-  selector: 'div[sc-checkbox-field], label[sc-checkbox-field]',
+  selector: 'div[scCheckboxField], label[scCheckboxField]',
 })
 
 // After
@@ -55,8 +55,8 @@ If a component's template references another component's selector, update those 
 ```typescript
 // Before (checkbox-field.ts template)
 template: `
-  <ng-content select="[sc-checkbox]" />
-  <span sc-checkbox-visual></span>
+  <ng-content select="[scCheckbox]" />
+  <span scCheckboxVisual></span>
   <ng-content />
 `,
 
@@ -72,8 +72,8 @@ template: `
 
 ```html
 <!-- Before -->
-<div sc-checkbox-field>
-  <input type="checkbox" sc-checkbox [(checked)]="value" />
+<div scCheckboxField>
+  <input type="checkbox" scCheckbox [(checked)]="value" />
 </div>
 
 <!-- After -->

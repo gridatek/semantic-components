@@ -41,16 +41,16 @@ import { ScInput } from "@semantic-components/ui-lab";
   selector: 'app-error-field-demo',
   imports: [FormField, ScField, ScFieldError, ScInput, ScLabel],
   template: \`
-    <div sc-field>
-      <label sc-label>Password</label>
+    <div scField>
+      <label scLabel>Password</label>
       <input
-        sc-input
+        scInput
         type="password"
         [formField]="passwordForm.password"
         placeholder="Enter password"
       />
       @for (error of passwordForm.password().errors(); track error.kind) {
-        <p sc-field-error>{{ error.message }}</p>
+        <p scFieldError>{{ error.message }}</p>
       }
     </div>
   \`,

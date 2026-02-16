@@ -21,16 +21,16 @@ import {
     ScCodeEditorCopyButton,
   ],
   template: `
-    <div sc-code-editor>
-      <div sc-code-editor-header>
+    <div scCodeEditor>
+      <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
           <span class="text-sm text-muted-foreground">example.js</span>
-          <span sc-code-editor-label>javascript</span>
+          <span scCodeEditorLabel>javascript</span>
         </div>
-        <button sc-code-editor-copy-button [code]="javascriptCode"></button>
+        <button scCodeEditorCopyButton [code]="javascriptCode"></button>
       </div>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="javascriptCode"
         language="javascript"
         filename="example.js"

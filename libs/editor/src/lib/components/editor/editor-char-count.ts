@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Component({
-  selector: 'span[sc-editor-char-count]',
+  selector: 'span[scEditorCharCount]',
   template: `
     {{ charCount() }} characters
   `,

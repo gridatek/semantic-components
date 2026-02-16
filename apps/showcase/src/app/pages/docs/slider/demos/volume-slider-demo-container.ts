@@ -46,7 +46,7 @@ import { ScSlider } from '@semantic-components/ui-lab';
       >
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
       </svg>
-      <div sc-slider [(value)]="volume" class="flex-1"></div>
+      <div scSlider [(value)]="volume" class="flex-1"></div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

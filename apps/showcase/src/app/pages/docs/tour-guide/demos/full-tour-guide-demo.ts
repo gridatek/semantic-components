@@ -81,7 +81,7 @@ import {
       </div>
 
       <!-- Tour Guide Component -->
-      <sc-tour-guide
+      <scTourGuide
         (stepChange)="onStepChange($event)"
         (tourComplete)="onTourComplete()"
         (tourClosed)="onTourClosed()"

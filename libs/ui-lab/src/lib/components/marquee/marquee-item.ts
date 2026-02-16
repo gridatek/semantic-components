@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-marquee-item]',
+  selector: '[scMarqueeItem]',
   host: {
     'data-slot': 'marquee-item',
     '[class]': 'class()',

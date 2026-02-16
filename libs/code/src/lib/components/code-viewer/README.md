@@ -13,21 +13,21 @@ import { ScCodeViewer, ScCodeViewerHeader, ScCodeViewerLabel, ScCodeViewerConten
 The component uses Shiki's dual-theme feature (`github-light` + `github-dark`) with `defaultColor: false` to generate CSS variable-based output. The CSS switches between `--shiki-light` and `--shiki-dark` variables based on the `.dark` class on the document root.
 
 ```
-ScCodeViewer (Root - div[sc-code-viewer])
-├── ScCodeViewerHeader (Header - div[sc-code-viewer-header])
-│   ├── ScCodeViewerLabel (Label - span[sc-code-viewer-label])
+ScCodeViewer (Root - div[scCodeViewer])
+├── ScCodeViewerHeader (Header - div[scCodeViewerHeader])
+│   ├── ScCodeViewerLabel (Label - span[scCodeViewerLabel])
 │   └── ScCopyButton (Copy button)
-└── ScCodeViewerContent (Content - div[sc-code-viewer-content])
+└── ScCodeViewerContent (Content - div[scCodeViewerContent])
 ```
 
 ## Components
 
 | Component             | Selector                      | Description                      |
 | --------------------- | ----------------------------- | -------------------------------- |
-| `ScCodeViewer`        | `div[sc-code-viewer]`         | Root container with border       |
-| `ScCodeViewerHeader`  | `div[sc-code-viewer-header]`  | Header bar with border           |
-| `ScCodeViewerLabel`   | `span[sc-code-viewer-label]`  | Label for filename or language   |
-| `ScCodeViewerContent` | `div[sc-code-viewer-content]` | Content with syntax highlighting |
+| `ScCodeViewer`        | `div[scCodeViewer]`         | Root container with border       |
+| `ScCodeViewerHeader`  | `div[scCodeViewerHeader]`  | Header bar with border           |
+| `ScCodeViewerLabel`   | `span[scCodeViewerLabel]`  | Label for filename or language   |
+| `ScCodeViewerContent` | `div[scCodeViewerContent]` | Content with syntax highlighting |
 
 ## Inputs
 
@@ -75,75 +75,75 @@ The content component with Shiki syntax highlighting.
 ### Basic Usage
 
 ```html
-<div sc-code-viewer>
-  <div sc-code-viewer-header>
-    <span sc-code-viewer-label>TypeScript</span>
-    <button sc-copy-button [value]="code"></button>
+<div scCodeViewer>
+  <div scCodeViewerHeader>
+    <span scCodeViewerLabel>TypeScript</span>
+    <button scCopyButton [value]="code"></button>
   </div>
-  <div sc-code-viewer-content [code]="code" language="typescript"></div>
+  <div scCodeViewerContent [code]="code" language="typescript"></div>
 </div>
 ```
 
 ### With Filename
 
 ```html
-<div sc-code-viewer>
-  <div sc-code-viewer-header>
-    <span sc-code-viewer-label>app.component.ts</span>
-    <button sc-copy-button [value]="code"></button>
+<div scCodeViewer>
+  <div scCodeViewerHeader>
+    <span scCodeViewerLabel>app.component.ts</span>
+    <button scCopyButton [value]="code"></button>
   </div>
-  <div sc-code-viewer-content [code]="code" language="angular-ts"></div>
+  <div scCodeViewerContent [code]="code" language="angular-ts"></div>
 </div>
 ```
 
 ### With Line Numbers
 
 ```html
-<div sc-code-viewer>
-  <div sc-code-viewer-header>
-    <span sc-code-viewer-label>{{ filename }}</span>
-    <button sc-copy-button [value]="code"></button>
+<div scCodeViewer>
+  <div scCodeViewerHeader>
+    <span scCodeViewerLabel>{{ filename }}</span>
+    <button scCopyButton [value]="code"></button>
   </div>
-  <div sc-code-viewer-content [code]="code" language="typescript" [showLineNumbers]="true"></div>
+  <div scCodeViewerContent [code]="code" language="typescript" [showLineNumbers]="true"></div>
 </div>
 ```
 
 ### Without Header
 
 ```html
-<div sc-code-viewer>
-  <div sc-code-viewer-content [code]="code" language="json"></div>
+<div scCodeViewer>
+  <div scCodeViewerContent [code]="code" language="json"></div>
 </div>
 ```
 
 ### With Max Height
 
 ```html
-<div sc-code-viewer>
-  <div sc-code-viewer-header>
-    <span sc-code-viewer-label>{{ language }}</span>
-    <button sc-copy-button [value]="code"></button>
+<div scCodeViewer>
+  <div scCodeViewerHeader>
+    <span scCodeViewerLabel>{{ language }}</span>
+    <button scCopyButton [value]="code"></button>
   </div>
-  <div sc-code-viewer-content [code]="longCode" language="typescript" maxHeight="300px"></div>
+  <div scCodeViewerContent [code]="longCode" language="typescript" maxHeight="300px"></div>
 </div>
 ```
 
 ### Custom Header Content
 
 ```html
-<div sc-code-viewer>
-  <div sc-code-viewer-header>
+<div scCodeViewer>
+  <div scCodeViewerHeader>
     <div class="flex items-center gap-2">
       <svg class="size-4"><!-- icon --></svg>
-      <span sc-code-viewer-label>{{ filename }}</span>
+      <span scCodeViewerLabel>{{ filename }}</span>
       <span class="text-xs text-muted-foreground">({{ lines }} lines)</span>
     </div>
     <div class="flex gap-2">
       <button>Download</button>
-      <button sc-copy-button [value]="code"></button>
+      <button scCopyButton [value]="code"></button>
     </div>
   </div>
-  <div sc-code-viewer-content [code]="code" [language]="language"></div>
+  <div scCodeViewerContent [code]="code" [language]="language"></div>
 </div>
 ```
 

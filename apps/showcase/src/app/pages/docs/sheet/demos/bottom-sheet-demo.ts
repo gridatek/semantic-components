@@ -29,16 +29,16 @@ import {
     ScSheetTrigger,
   ],
   template: `
-    <div sc-sheet-provider side="bottom">
+    <div scSheetProvider side="bottom">
       <button
-        sc-sheet-trigger
+        scSheetTrigger
         class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         Open Bottom Sheet
       </button>
       <ng-template scSheetPortal>
-        <div sc-sheet>
-          <button sc-sheet-close>
+        <div scSheet>
+          <button scSheetClose>
             <svg
               class="size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -57,11 +57,11 @@ import {
             </svg>
             <span class="sr-only">Close</span>
           </button>
-          <div sc-sheet-header>
-            <h2 sc-sheet-title>Cookie Settings</h2>
-            <p sc-sheet-description>Manage your cookie preferences.</p>
+          <div scSheetHeader>
+            <h2 scSheetTitle>Cookie Settings</h2>
+            <p scSheetDescription>Manage your cookie preferences.</p>
           </div>
-          <div sc-sheet-footer>
+          <div scSheetFooter>
             <button
               class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >

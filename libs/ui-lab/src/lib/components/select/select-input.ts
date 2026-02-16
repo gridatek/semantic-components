@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'input[sc-select-input]',
+  selector: 'input[scSelectInput]',
   imports: [],
   template: ``,
   hostDirectives: [ComboboxInput],

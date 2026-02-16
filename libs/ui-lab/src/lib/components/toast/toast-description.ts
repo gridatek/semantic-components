@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-toast-description]',
+  selector: '[scToastDescription]',
   host: {
     'data-slot': 'toast-description',
     '[class]': 'class()',

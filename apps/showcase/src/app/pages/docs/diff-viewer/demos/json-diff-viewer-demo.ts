@@ -9,7 +9,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
   selector: 'app-json-diff-viewer-demo',
   imports: [ScDiffViewer],
   template: `
-    <sc-diff-viewer
+    <scDiffViewer
       [oldText]="oldJson"
       [newText]="newJson"
       [oldTitle]="'config.json (before)'"

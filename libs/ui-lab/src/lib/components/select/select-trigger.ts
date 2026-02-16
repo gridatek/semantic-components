@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-select-trigger]',
+  selector: 'div[scSelectTrigger]',
   imports: [],
   template: `
     <ng-content />

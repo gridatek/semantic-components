@@ -30,7 +30,7 @@ import { ScLightboxGallery, LightboxImage } from '@semantic-components/ui-lab';
   selector: 'app-gallery-lightbox-demo',
   imports: [ScLightboxGallery],
   template: \`
-    <sc-lightbox-gallery [images]="images" class="grid-cols-4 gap-2 max-w-xl" />
+    <scLightboxGallery [images]="images" class="grid-cols-4 gap-2 max-w-xl" />
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

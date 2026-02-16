@@ -21,7 +21,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
           [(checked)]="checked"
           id="purple-theme"
         />
-        <label sc-label for="purple-theme">Purple color scheme</label>
+        <label scLabel for="purple-theme">Purple color scheme</label>
       </div>
     </div>
   `,

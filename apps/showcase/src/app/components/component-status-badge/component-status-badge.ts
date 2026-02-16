@@ -19,7 +19,7 @@ const variantMap: Record<ComponentStatus, ScBadgeVariants['variant']> = {
   selector: 'app-component-status-badge',
   imports: [ScBadge],
   template: `
-    <span sc-badge [variant]="variant()">{{ status() }}</span>
+    <span scBadge [variant]="variant()">{{ status() }}</span>
   `,
   host: {
     '[class]': 'class()',

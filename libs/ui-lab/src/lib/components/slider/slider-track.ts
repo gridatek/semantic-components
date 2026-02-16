@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-slider-track]',
+  selector: 'div[scSliderTrack]',
   host: {
     'data-slot': 'slider-track',
     '[class]': 'class()',

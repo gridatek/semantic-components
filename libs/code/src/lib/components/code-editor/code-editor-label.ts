@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'span[sc-code-editor-label]',
+  selector: 'span[scCodeEditorLabel]',
   template: `
     <ng-content />
   `,

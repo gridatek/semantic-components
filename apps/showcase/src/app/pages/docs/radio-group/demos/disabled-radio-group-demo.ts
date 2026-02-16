@@ -24,25 +24,25 @@ interface DisabledFormModel {
         <p class="text-xs text-muted-foreground mb-2">
           Individual item disabled:
         </p>
-        <div sc-radio-group>
-          <label sc-radio-field class="flex items-center space-x-2">
+        <div scRadioGroup>
+          <label scRadioField class="flex items-center space-x-2">
             <input
               type="radio"
-              sc-radio
+              scRadio
               value="option1"
               [formField]="disabledForm.individual"
               id="d1"
             />
             <span class="text-sm">Option 1</span>
           </label>
-          <label sc-radio-field class="flex items-center space-x-2">
-            <input type="radio" sc-radio value="option2" id="d2" disabled />
+          <label scRadioField class="flex items-center space-x-2">
+            <input type="radio" scRadio value="option2" id="d2" disabled />
             <span class="text-sm opacity-50">Option 2 (disabled)</span>
           </label>
-          <label sc-radio-field class="flex items-center space-x-2">
+          <label scRadioField class="flex items-center space-x-2">
             <input
               type="radio"
-              sc-radio
+              scRadio
               value="option3"
               [formField]="disabledForm.individual"
               id="d3"
@@ -53,13 +53,13 @@ interface DisabledFormModel {
       </div>
       <div>
         <p class="text-xs text-muted-foreground mb-2">Entire group disabled:</p>
-        <div sc-radio-group>
-          <label sc-radio-field class="flex items-center space-x-2">
-            <input type="radio" sc-radio value="option1" disabled id="g1" />
+        <div scRadioGroup>
+          <label scRadioField class="flex items-center space-x-2">
+            <input type="radio" scRadio value="option1" disabled id="g1" />
             <span class="text-sm opacity-50">Option 1</span>
           </label>
-          <label sc-radio-field class="flex items-center space-x-2">
-            <input type="radio" sc-radio value="option2" disabled id="g2" />
+          <label scRadioField class="flex items-center space-x-2">
+            <input type="radio" scRadio value="option2" disabled id="g2" />
             <span class="text-sm opacity-50">Option 2</span>
           </label>
         </div>

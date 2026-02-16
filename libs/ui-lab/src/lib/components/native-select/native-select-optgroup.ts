@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'optgroup[sc-native-select-optgroup]',
+  selector: 'optgroup[scNativeSelectOptgroup]',
   host: {
     'data-slot': 'native-select-optgroup',
     '[class]': 'class()',

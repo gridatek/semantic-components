@@ -14,7 +14,7 @@ import type { SplitButtonAction, SplitButtonSize, SplitButtonVariant } from '@/u
 ### Basic Usage
 
 ```html
-<sc-split-button label="Save" [actions]="actions" (mainClick)="onSave()" (actionClick)="onActionClick($event)" />
+<scSplitButton label="Save" [actions]="actions" (mainClick)="onSave()" (actionClick)="onActionClick($event)" />
 ```
 
 ```typescript
@@ -28,24 +28,24 @@ actions: SplitButtonAction[] = [
 ### With Icon
 
 ```html
-<sc-split-button label="Download" [icon]="downloadIcon" [actions]="downloadActions" />
+<scSplitButton label="Download" [icon]="downloadIcon" [actions]="downloadActions" />
 ```
 
 ### Variant Options
 
 ```html
-<sc-split-button label="Default" variant="default" [actions]="actions" />
-<sc-split-button label="Secondary" variant="secondary" [actions]="actions" />
-<sc-split-button label="Outline" variant="outline" [actions]="actions" />
-<sc-split-button label="Destructive" variant="destructive" [actions]="actions" />
+<scSplitButton label="Default" variant="default" [actions]="actions" />
+<scSplitButton label="Secondary" variant="secondary" [actions]="actions" />
+<scSplitButton label="Outline" variant="outline" [actions]="actions" />
+<scSplitButton label="Destructive" variant="destructive" [actions]="actions" />
 ```
 
 ### Size Variants
 
 ```html
-<sc-split-button label="Small" size="sm" [actions]="actions" />
-<sc-split-button label="Medium" size="md" [actions]="actions" />
-<sc-split-button label="Large" size="lg" [actions]="actions" />
+<scSplitButton label="Small" size="sm" [actions]="actions" />
+<scSplitButton label="Medium" size="md" [actions]="actions" />
+<scSplitButton label="Large" size="lg" [actions]="actions" />
 ```
 
 ## API Reference

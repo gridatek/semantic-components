@@ -46,19 +46,19 @@ import {
     ScImageCompareSlider,
   ],
   template: \`
-    <div sc-image-compare class="w-full max-w-2xl aspect-[2/1]">
-      <div sc-image-compare-container>
+    <div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+      <div scImageCompareContainer>
         <img
-          sc-image-compare-before
+          scImageCompareBefore
           src="https://picsum.photos/800/400?grayscale&random=3"
           alt="Before"
         />
         <img
-          sc-image-compare-after
+          scImageCompareAfter
           src="https://picsum.photos/800/400?random=3"
           alt="After"
         />
-        <div sc-image-compare-slider></div>
+        <div scImageCompareSlider></div>
       </div>
     </div>
   \`,

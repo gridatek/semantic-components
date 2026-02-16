@@ -28,27 +28,27 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
     SiTrash2Icon,
   ],
   template: `
-    <div sc-signature-pad class="space-y-3">
-      <div sc-signature-pad-toolbar>
-        <button sc-signature-pad-pen-width [width]="2">
+    <div scSignaturePad class="space-y-3">
+      <div scSignaturePadToolbar>
+        <button scSignaturePadPenWidth [width]="2">
           <span
             class="w-4 rounded-full bg-foreground transition-all"
             style="height: 2px"
           ></span>
         </button>
-        <button sc-signature-pad-pen-width [width]="4">
+        <button scSignaturePadPenWidth [width]="4">
           <span
             class="w-4 rounded-full bg-foreground transition-all"
             style="height: 4px"
           ></span>
         </button>
-        <button sc-signature-pad-pen-width [width]="6">
+        <button scSignaturePadPenWidth [width]="6">
           <span
             class="w-4 rounded-full bg-foreground transition-all"
             style="height: 6px"
           ></span>
         </button>
-        <button sc-signature-pad-pen-width [width]="8">
+        <button scSignaturePadPenWidth [width]="8">
           <span
             class="w-4 rounded-full bg-foreground transition-all"
             style="height: 8px"
@@ -57,13 +57,13 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       </div>
 
       <div class="relative inline-block">
-        <canvas sc-signature-pad-canvas [width]="400" [height]="200"></canvas>
+        <canvas scSignaturePadCanvas [width]="400" [height]="200"></canvas>
 
-        <div sc-signature-pad-controls>
-          <button sc-signature-pad-undo>
+        <div scSignaturePadControls>
+          <button scSignaturePadUndo>
             <svg si-undo-icon class="size-4"></svg>
           </button>
-          <button sc-signature-pad-clear>
+          <button scSignaturePadClear>
             <svg si-trash-2-icon class="size-4"></svg>
           </button>
         </div>

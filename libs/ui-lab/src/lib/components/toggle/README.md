@@ -9,7 +9,7 @@ A two-state button that can be either on or off.
 ## Usage
 
 ```html
-<button sc-toggle [(pressed)]="bold" aria-label="Toggle bold">
+<button scToggle [(pressed)]="bold" aria-label="Toggle bold">
   <svg><!-- icon --></svg>
 </button>
 ```
@@ -18,24 +18,24 @@ A two-state button that can be either on or off.
 
 ```html
 <!-- Default -->
-<button sc-toggle>Toggle</button>
+<button scToggle>Toggle</button>
 
 <!-- Outline -->
-<button sc-toggle variant="outline">Toggle</button>
+<button scToggle variant="outline">Toggle</button>
 ```
 
 ## Sizes
 
 ```html
-<button sc-toggle size="sm">Small</button>
-<button sc-toggle size="default">Default</button>
-<button sc-toggle size="lg">Large</button>
+<button scToggle size="sm">Small</button>
+<button scToggle size="default">Default</button>
+<button scToggle size="lg">Large</button>
 ```
 
 ## With Text
 
 ```html
-<button sc-toggle [(pressed)]="underline">
+<button scToggle [(pressed)]="underline">
   <svg class="mr-2 size-4"><!-- icon --></svg>
   Underline
 </button>
@@ -44,7 +44,7 @@ A two-state button that can be either on or off.
 ## Disabled
 
 ```html
-<button sc-toggle [disabled]="true">Toggle</button>
+<button scToggle [disabled]="true">Toggle</button>
 ```
 
 ## Inputs

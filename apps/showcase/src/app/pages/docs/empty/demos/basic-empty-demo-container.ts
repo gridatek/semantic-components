@@ -44,13 +44,13 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
     SiSearchIcon,
   ],
   template: \`
-    <div sc-empty class="border">
-      <div sc-empty-header>
-        <div sc-empty-media variant="icon">
+    <div scEmpty class="border">
+      <div scEmptyHeader>
+        <div scEmptyMedia variant="icon">
           <svg si-search-icon></svg>
         </div>
-        <div sc-empty-title>No results found</div>
-        <div sc-empty-description>
+        <div scEmptyTitle>No results found</div>
+        <div scEmptyDescription>
           Try adjusting your search or filter to find what you're looking for.
         </div>
       </div>

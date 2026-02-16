@@ -58,11 +58,11 @@ import {
     ScMenuTrigger,
   ],
   template: \`
-    <div sc-menu-provider>
-      <button sc-menu-trigger>Options</button>
-      <div sc-menu-portal>
-        <div sc-menu class="w-56">
-          <div sc-menu-item value="Back">
+    <div scMenuProvider>
+      <button scMenuTrigger>Options</button>
+      <div scMenuPortal>
+        <div scMenu class="w-56">
+          <div scMenuItem value="Back">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@ import {
               ⌘[
             </span>
           </div>
-          <div sc-menu-item value="Forward" aria-disabled="true">
+          <div scMenuItem value="Forward" aria-disabled="true">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@ import {
               ⌘]
             </span>
           </div>
-          <div sc-menu-item value="Reload">
+          <div scMenuItem value="Reload">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -130,9 +130,9 @@ import {
               ⌘R
             </span>
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-sub-provider>
-            <div sc-menu-sub-trigger value="More Tools">
+          <div scMenuSeparator></div>
+          <div scMenuSubProvider>
+            <div scMenuSubTrigger value="More Tools">
               <svg
                 class="text-muted-foreground size-4"
                 xmlns="http://www.w3.org/2000/svg"
@@ -152,7 +152,7 @@ import {
               </svg>
               <span class="flex-1">More Tools</span>
               <svg
-                sc-menu-sub-icon
+                scMenuSubIcon
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -166,9 +166,9 @@ import {
                 <path d="m9 18 6-6-6-6" />
               </svg>
             </div>
-            <div sc-menu-sub-portal>
-              <div sc-menu-sub>
-                <div sc-menu-item value="Save Page As...">
+            <div scMenuSubPortal>
+              <div scMenuSub>
+                <div scMenuItem value="Save Page As...">
                   <span class="flex-1">Save Page As...</span>
                   <span
                     class="ml-auto text-xs tracking-widest text-muted-foreground"
@@ -176,14 +176,14 @@ import {
                     ⌘S
                   </span>
                 </div>
-                <div sc-menu-item value="Create Shortcut...">
+                <div scMenuItem value="Create Shortcut...">
                   <span class="flex-1">Create Shortcut...</span>
                 </div>
-                <div sc-menu-item value="Name Window...">
+                <div scMenuItem value="Name Window...">
                   <span class="flex-1">Name Window...</span>
                 </div>
-                <div sc-menu-separator></div>
-                <div sc-menu-item value="Developer Tools">
+                <div scMenuSeparator></div>
+                <div scMenuItem value="Developer Tools">
                   <span class="flex-1">Developer Tools</span>
                   <span
                     class="ml-auto text-xs tracking-widest text-muted-foreground"
@@ -194,8 +194,8 @@ import {
               </div>
             </div>
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-item value="Show Full URLs">
+          <div scMenuSeparator></div>
+          <div scMenuItem value="Show Full URLs">
             <span class="flex-1">Show Full URLs</span>
           </div>
         </div>

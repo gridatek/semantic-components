@@ -30,21 +30,21 @@ import {
     ScVideoPlayerFullscreenButton,
   ],
   template: `
-    <div sc-video-player class="relative bg-black rounded-lg overflow-hidden">
+    <div scVideoPlayer class="relative bg-black rounded-lg overflow-hidden">
       <video
-        sc-video-player-video
+        scVideoPlayerVideo
         [src]="'video.mp4'"
         [poster]="'poster.jpg'"
       ></video>
 
-      <div sc-video-player-controls>
-        <div sc-video-player-progress></div>
+      <div scVideoPlayerControls>
+        <div scVideoPlayerProgress></div>
         <div class="flex items-center gap-2 mt-2">
-          <button sc-video-player-play>
+          <button scVideoPlayerPlay>
             <!-- Play/pause icon -->
           </button>
-          <span sc-video-player-time></span>
-          <button sc-video-player-fullscreen>
+          <span scVideoPlayerTime></span>
+          <button scVideoPlayerFullscreen>
             <!-- Fullscreen icon -->
           </button>
         </div>
@@ -59,77 +59,77 @@ import {
 **`ScVideoPlayer` (Directive)**
 
 - Root directive that provides context
-- **Selector**: `[sc-video-player]`
+- **Selector**: `[scVideoPlayer]`
 - Manages playback state, volume, fullscreen, etc.
 
 **`ScVideoPlayerVideo` (Component)**
 
 - Video element for playback
-- **Selector**: `video[sc-video-player-video]`
+- **Selector**: `video[scVideoPlayerVideo]`
 - **Inputs**: `src`, `sources`, `tracks`, `poster`, `autoplay`, `loop`, `muted`, `playsInline`, `aspectRatio`
 - **Outputs**: `ended`, `timeUpdate`
 
 **`ScVideoPlayerControls` (Component)**
 
 - Container for control elements (uses `<ng-content>`)
-- **Selector**: `div[sc-video-player-controls]`
+- **Selector**: `div[scVideoPlayerControls]`
 - **Default position**: Absolute bottom with gradient overlay
 
 **`ScVideoPlayerPlayButton` (Component)**
 
 - Play/pause toggle button
-- **Selector**: `button[sc-video-player-play]`
+- **Selector**: `button[scVideoPlayerPlay]`
 - **Auto state**: Reflects playing/paused state
 
 **`ScVideoPlayerProgress` (Component)**
 
 - Seek bar with buffering indicator
-- **Selector**: `div[sc-video-player-progress]`
+- **Selector**: `div[scVideoPlayerProgress]`
 - Shows buffered ranges and current progress
 
 **`ScVideoPlayerVolume` (Component)**
 
 - Volume control with mute button and slider
-- **Selector**: `div[sc-video-player-volume]`
+- **Selector**: `div[scVideoPlayerVolume]`
 - Requires `[volume-icon]` selector for icon content
 
 **`ScVideoPlayerTime` (Component)**
 
 - Current time / duration display
-- **Selector**: `span[sc-video-player-time]`
+- **Selector**: `span[scVideoPlayerTime]`
 - Automatically formats time
 
 **`ScVideoPlayerSkipButton` (Component)**
 
 - Skip forward/back button
-- **Selector**: `button[sc-video-player-skip]`
+- **Selector**: `button[scVideoPlayerSkip]`
 - **Inputs**: `seconds` (required), `ariaLabel`
 
 **`ScVideoPlayerSpeedButton` (Component)**
 
 - Playback speed menu
-- **Selector**: `div[sc-video-player-speed]`
+- **Selector**: `div[scVideoPlayerSpeed]`
 - **Inputs**: `speeds` (default: `[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]`)
 
 **`ScVideoPlayerFullscreenButton` (Component)**
 
 - Fullscreen toggle
-- **Selector**: `button[sc-video-player-fullscreen]`
+- **Selector**: `button[scVideoPlayerFullscreen]`
 
 **`ScVideoPlayerPipButton` (Component)**
 
 - Picture-in-picture toggle
-- **Selector**: `button[sc-video-player-pip]`
+- **Selector**: `button[scVideoPlayerPip]`
 
 **`ScVideoPlayerBigPlayButton` (Component)**
 
 - Large centered play button overlay
-- **Selector**: `button[sc-video-player-big-play]`
+- **Selector**: `button[scVideoPlayerBigPlay]`
 
 **`ScVideoPlayerBuffering` (Component)**
 
 - Buffering indicator (auto-shows when buffering)
-- **Selector**: `div[sc-video-player-buffering]`
+- **Selector**: `div[scVideoPlayerBuffering]`
 - Uses `<ng-content>` for custom spinner
 
 ### Flexible Examples
@@ -137,11 +137,11 @@ import {
 #### Minimal Player
 
 ```html
-<div sc-video-player class="relative">
-  <video sc-video-player-video [src]="video"></video>
+<div scVideoPlayer class="relative">
+  <video scVideoPlayerVideo [src]="video"></video>
 
-  <div sc-video-player-controls>
-    <button sc-video-player-play>Play</button>
+  <div scVideoPlayerControls>
+    <button scVideoPlayerPlay>Play</button>
   </div>
 </div>
 ```
@@ -149,14 +149,14 @@ import {
 #### With Progress and Time
 
 ```html
-<div sc-video-player class="relative">
-  <video sc-video-player-video [src]="video"></video>
+<div scVideoPlayer class="relative">
+  <video scVideoPlayerVideo [src]="video"></video>
 
-  <div sc-video-player-controls>
-    <div sc-video-player-progress class="mb-2"></div>
+  <div scVideoPlayerControls>
+    <div scVideoPlayerProgress class="mb-2"></div>
     <div class="flex items-center gap-2">
-      <button sc-video-player-play>⏯</button>
-      <span sc-video-player-time></span>
+      <button scVideoPlayerPlay>⏯</button>
+      <span scVideoPlayerTime></span>
     </div>
   </div>
 </div>
@@ -165,18 +165,18 @@ import {
 #### Full-Featured Player
 
 ```html
-<div sc-video-player class="relative bg-black rounded-lg overflow-hidden">
+<div scVideoPlayer class="relative bg-black rounded-lg overflow-hidden">
   <!-- Buffering Indicator -->
-  <div sc-video-player-buffering>
+  <div scVideoPlayerBuffering>
     <div class="size-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
   </div>
 
   <!-- Video -->
-  <video sc-video-player-video [src]="video" [poster]="poster"></video>
+  <video scVideoPlayerVideo [src]="video" [poster]="poster"></video>
 
   <!-- Big Play Button -->
   @if (!player.isPlaying()) {
-  <button sc-video-player-big-play #player="scVideoPlayer">
+  <button scVideoPlayerBigPlay #player="scVideoPlayer">
     <div class="size-20 rounded-full bg-white/90 flex items-center justify-center">
       <!-- Play icon -->
     </div>
@@ -184,25 +184,25 @@ import {
   }
 
   <!-- Controls -->
-  <div sc-video-player-controls>
-    <div sc-video-player-progress class="mb-2"></div>
+  <div scVideoPlayerControls>
+    <div scVideoPlayerProgress class="mb-2"></div>
 
     <div class="flex items-center gap-2">
-      <button sc-video-player-play>⏯</button>
-      <button sc-video-player-skip [seconds]="-10">⏪</button>
-      <button sc-video-player-skip [seconds]="10">⏩</button>
+      <button scVideoPlayerPlay>⏯</button>
+      <button scVideoPlayerSkip [seconds]="-10">⏪</button>
+      <button scVideoPlayerSkip [seconds]="10">⏩</button>
 
-      <div sc-video-player-volume>
+      <div scVideoPlayerVolume>
         <svg volume-icon><!-- Volume icon --></svg>
       </div>
 
-      <span sc-video-player-time class="ml-2"></span>
+      <span scVideoPlayerTime class="ml-2"></span>
 
       <div class="flex-1"></div>
 
-      <div sc-video-player-speed></div>
-      <button sc-video-player-pip>PiP</button>
-      <button sc-video-player-fullscreen>⛶</button>
+      <div scVideoPlayerSpeed></div>
+      <button scVideoPlayerPip>PiP</button>
+      <button scVideoPlayerFullscreen>⛶</button>
     </div>
   </div>
 </div>
@@ -212,7 +212,7 @@ import {
 
 ```html
 <video
-  sc-video-player-video
+  scVideoPlayerVideo
   [sources]="[
     { src: 'video.webm', type: 'video/webm' },
     { src: 'video.mp4', type: 'video/mp4' }
@@ -224,7 +224,7 @@ import {
 
 ```html
 <video
-  sc-video-player-video
+  scVideoPlayerVideo
   [src]="video"
   [tracks]="[
     { src: 'en.vtt', kind: 'subtitles', srclang: 'en', label: 'English', default: true },

@@ -4,7 +4,7 @@ import { cn } from '../../utils';
 import { ScPopoverProvider } from './popover-provider';
 
 @Directive({
-  selector: 'button[sc-popover-trigger]',
+  selector: 'button[scPopoverTrigger]',
   hostDirectives: [CdkOverlayOrigin],
   host: {
     'data-slot': 'popover-trigger',

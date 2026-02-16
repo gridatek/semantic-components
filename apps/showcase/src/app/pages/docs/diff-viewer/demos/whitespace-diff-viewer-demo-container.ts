@@ -37,7 +37,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
     <p class="text-sm text-muted-foreground mb-4">
       The following texts differ only in whitespace but are shown as identical.
     </p>
-    <sc-diff-viewer
+    <scDiffViewer
       [oldText]="'hello   world'"
       [newText]="'hello world'"
       [ignoreWhitespace]="true"

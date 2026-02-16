@@ -11,22 +11,22 @@ A searchable emoji picker with categories, search functionality, and recently us
 
 ```html
 <!-- Basic usage -->
-<sc-emoji-picker (emojiSelect)="onEmojiSelect($event)" />
+<scEmojiPicker (emojiSelect)="onEmojiSelect($event)" />
 
 <!-- Without search -->
-<sc-emoji-picker [showSearch]="false" />
+<scEmojiPicker [showSearch]="false" />
 
 <!-- Without category tabs -->
-<sc-emoji-picker [showCategories]="false" />
+<scEmojiPicker [showCategories]="false" />
 
 <!-- Without recently used -->
-<sc-emoji-picker [showRecent]="false" />
+<scEmojiPicker [showRecent]="false" />
 
 <!-- Custom columns -->
-<sc-emoji-picker [columns]="6" class="w-56" />
+<scEmojiPicker [columns]="6" class="w-56" />
 
 <!-- Two-way binding -->
-<sc-emoji-picker [(value)]="selectedEmoji" />
+<scEmojiPicker [(value)]="selectedEmoji" />
 ```
 
 ## API
@@ -89,11 +89,11 @@ The picker includes these default categories:
 ### With Popover
 
 ```html
-<div sc-popover-provider>
-  <button sc-popover-trigger sc-emoji-picker-trigger></button>
-  <div sc-popover-portal>
-    <div sc-popover>
-      <sc-emoji-picker (emojiSelect)="insertEmoji($event)" />
+<div scPopoverProvider>
+  <button scPopoverTrigger scEmojiPickerTrigger></button>
+  <div scPopoverPortal>
+    <div scPopover>
+      <scEmojiPicker (emojiSelect)="insertEmoji($event)" />
     </div>
   </div>
 </div>
@@ -107,7 +107,7 @@ The picker includes these default categories:
   <button (click)="showPicker = !showPicker">😀</button>
 </div>
 @if (showPicker) {
-<sc-emoji-picker (emojiSelect)="message = message + $event.emoji; showPicker = false" />
+<scEmojiPicker (emojiSelect)="message = message + $event.emoji; showPicker = false" />
 }
 ```
 
@@ -139,7 +139,7 @@ const customCategories: EmojiCategory[] = [
 ```
 
 ```html
-<sc-emoji-picker [categories]="customCategories" />
+<scEmojiPicker [categories]="customCategories" />
 ```
 
 ## Features

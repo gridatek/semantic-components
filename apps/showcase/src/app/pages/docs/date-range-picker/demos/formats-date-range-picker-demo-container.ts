@@ -37,15 +37,15 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
     <div class="flex flex-col gap-3">
       <div>
         <span class="text-sm text-muted-foreground mr-2">Short:</span>
-        <sc-date-range-picker dateFormat="short" placeholder="Short format" />
+        <scDateRangePicker dateFormat="short" placeholder="Short format" />
       </div>
       <div>
         <span class="text-sm text-muted-foreground mr-2">Long:</span>
-        <sc-date-range-picker dateFormat="long" placeholder="Long format" />
+        <scDateRangePicker dateFormat="long" placeholder="Long format" />
       </div>
       <div>
         <span class="text-sm text-muted-foreground mr-2">ISO:</span>
-        <sc-date-range-picker dateFormat="iso" placeholder="ISO format" />
+        <scDateRangePicker dateFormat="iso" placeholder="ISO format" />
       </div>
     </div>
   \`,

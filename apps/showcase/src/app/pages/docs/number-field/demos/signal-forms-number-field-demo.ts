@@ -29,10 +29,10 @@ import { ScLabel } from '@semantic-components/ui';
   ],
   template: `
     <div class="max-w-sm space-y-4">
-      <div sc-number-field [min]="0" [max]="100" class="space-y-2">
-        <div sc-number-field-scrub-area>
+      <div scNumberField [min]="0" [max]="100" class="space-y-2">
+        <div scNumberFieldScrubArea>
           <label
-            sc-label
+            scLabel
             [class.text-destructive]="
               quantityForm.quantity().invalid() &&
               quantityForm.quantity().touched()
@@ -42,17 +42,17 @@ import { ScLabel } from '@semantic-components/ui';
           </label>
         </div>
 
-        <div sc-number-field-group>
-          <button sc-number-field-decrement></button>
+        <div scNumberFieldGroup>
+          <button scNumberFieldDecrement></button>
           <input
-            sc-number-field-input
+            scNumberFieldInput
             [formField]="quantityForm.quantity"
             [class.border-destructive]="
               quantityForm.quantity().invalid() &&
               quantityForm.quantity().touched()
             "
           />
-          <button sc-number-field-increment></button>
+          <button scNumberFieldIncrement></button>
         </div>
         @if (
           quantityForm.quantity().invalid() && quantityForm.quantity().touched()

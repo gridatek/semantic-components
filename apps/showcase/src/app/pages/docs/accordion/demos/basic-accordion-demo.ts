@@ -35,7 +35,7 @@ import {
         </div>
         <div scAccordionPanel panelId="shipping">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <scAccordionBody>
               We offer standard (5-7 days), express (2-3 days), and overnight
               shipping. Free shipping on international orders.
             </sc-accordion-body>
@@ -50,7 +50,7 @@ import {
         </div>
         <div scAccordionPanel panelId="returns">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <scAccordionBody>
               Returns accepted within 30 days. Items must be unused and in
               original packaging. Refunds processed within 5-7 business days.
             </sc-accordion-body>
@@ -65,7 +65,7 @@ import {
         </div>
         <div scAccordionPanel panelId="support">
           <ng-template scAccordionContent>
-            <sc-accordion-body>
+            <scAccordionBody>
               Reach us via email, live chat, or phone. We respond within 24
               hours during business days.
             </sc-accordion-body>

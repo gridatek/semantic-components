@@ -15,7 +15,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
 import type { ScVideoSource, ScVideoTrack } from './video-player-types';
 
 @Component({
-  selector: 'video[sc-video-player-video]',
+  selector: 'video[scVideoPlayerVideo]',
   template: `
     @for (source of sources(); track source.src) {
       <source [src]="source.src" [type]="source.type || 'video/mp4'" />

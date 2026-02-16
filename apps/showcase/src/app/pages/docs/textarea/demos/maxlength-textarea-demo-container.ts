@@ -36,14 +36,14 @@ import { ScField, ScFieldDescription, ScLabel, ScTextarea } from '@semantic-comp
   selector: 'app-maxlength-textarea-demo',
   imports: [FormField, ScField, ScFieldDescription, ScLabel, ScTextarea],
   template: \`
-    <div sc-field>
-      <label sc-label>Description</label>
+    <div scField>
+      <label scLabel>Description</label>
       <textarea
-        sc-textarea
+        scTextarea
         [formField]="descForm.description"
         placeholder="Enter description..."
       ></textarea>
-      <p sc-field-description>Max 200 characters.</p>
+      <p scFieldDescription>Max 200 characters.</p>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

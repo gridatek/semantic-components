@@ -34,28 +34,28 @@ import { SiBellIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
     SiMailIcon,
   ],
   template: `
-    <div sc-card class="w-[380px]">
-      <div sc-card-header>
-        <h3 sc-card-title>Notifications</h3>
-        <p sc-card-description>You have 3 unread messages.</p>
+    <div scCard class="w-[380px]">
+      <div scCardHeader>
+        <h3 scCardTitle>Notifications</h3>
+        <p scCardDescription>You have 3 unread messages.</p>
       </div>
-      <div sc-card-body class="grid gap-4">
-        <div sc-item variant="outline">
-          <div sc-item-media variant="icon">
+      <div scCardBody class="grid gap-4">
+        <div scItem variant="outline">
+          <div scItemMedia variant="icon">
             <svg si-bell-icon></svg>
           </div>
-          <div sc-item-body>
-            <div sc-item-title>Push Notifications</div>
-            <p sc-item-description>Send notifications to device.</p>
+          <div scItemBody>
+            <div scItemTitle>Push Notifications</div>
+            <p scItemDescription>Send notifications to device.</p>
           </div>
         </div>
-        <div sc-item variant="outline">
-          <div sc-item-media variant="icon">
+        <div scItem variant="outline">
+          <div scItemMedia variant="icon">
             <svg si-mail-icon></svg>
           </div>
-          <div sc-item-body>
-            <div sc-item-title>Email Notifications</div>
-            <p sc-item-description>Receive emails about activity.</p>
+          <div scItemBody>
+            <div scItemTitle>Email Notifications</div>
+            <p scItemDescription>Receive emails about activity.</p>
           </div>
         </div>
       </div>

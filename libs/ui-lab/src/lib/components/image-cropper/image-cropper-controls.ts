@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
-  selector: '[sc-image-cropper-controls]',
+  selector: '[scImageCropperControls]',
   template: `
     <div class="flex items-center gap-2">
       <button

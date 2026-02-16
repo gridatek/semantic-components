@@ -29,37 +29,37 @@ ScContextMenu (Root)
 
 | Component                 | Selector                           | Description                          |
 | ------------------------- | ---------------------------------- | ------------------------------------ |
-| `ScContextMenu`           | `div[sc-context-menu]`             | Root wrapper with overlay management |
-| `ScContextMenuTrigger`    | `[sc-context-menu-trigger]`        | Element that triggers on right-click |
-| `ScContextMenuContent`    | `<sc-context-menu-content>`        | Menu content container               |
-| `ScContextMenuItem`       | `[sc-context-menu-item]`           | Individual menu item                 |
-| `ScContextMenuLabel`      | `[sc-context-menu-label]`          | Label for grouping items             |
-| `ScContextMenuSeparator`  | `[sc-context-menu-separator]`      | Visual separator                     |
-| `ScContextMenuShortcut`   | `[sc-context-menu-shortcut]`       | Keyboard shortcut display            |
-| `ScContextMenuSub`        | `div[sc-context-menu-sub]`         | Submenu wrapper                      |
-| `ScContextMenuSubTrigger` | `div[sc-context-menu-sub-trigger]` | Submenu trigger                      |
-| `ScContextMenuSubContent` | `div[sc-context-menu-sub-content]` | Submenu content                      |
+| `ScContextMenu`           | `div[scContextMenu]`             | Root wrapper with overlay management |
+| `ScContextMenuTrigger`    | `[scContextMenuTrigger]`        | Element that triggers on right-click |
+| `ScContextMenuContent`    | `<scContextMenuContent>`        | Menu content container               |
+| `ScContextMenuItem`       | `[scContextMenuItem]`           | Individual menu item                 |
+| `ScContextMenuLabel`      | `[scContextMenuLabel]`          | Label for grouping items             |
+| `ScContextMenuSeparator`  | `[scContextMenuSeparator]`      | Visual separator                     |
+| `ScContextMenuShortcut`   | `[scContextMenuShortcut]`       | Keyboard shortcut display            |
+| `ScContextMenuSub`        | `div[scContextMenuSub]`         | Submenu wrapper                      |
+| `ScContextMenuSubTrigger` | `div[scContextMenuSubTrigger]` | Submenu trigger                      |
+| `ScContextMenuSubContent` | `div[scContextMenuSubContent]` | Submenu content                      |
 
 ## Usage
 
 ### Basic Context Menu
 
 ```html
-<div sc-context-menu>
-  <div sc-context-menu-trigger class="h-32 w-64 border border-dashed">Right click here</div>
+<div scContextMenu>
+  <div scContextMenuTrigger class="h-32 w-64 border border-dashed">Right click here</div>
 
-  <sc-context-menu-content>
-    <div sc-context-menu-item (select)="onCut()">
+  <scContextMenuContent>
+    <div scContextMenuItem (select)="onCut()">
       Cut
-      <span sc-context-menu-shortcut>⌘X</span>
+      <span scContextMenuShortcut>⌘X</span>
     </div>
-    <div sc-context-menu-item (select)="onCopy()">
+    <div scContextMenuItem (select)="onCopy()">
       Copy
-      <span sc-context-menu-shortcut>⌘C</span>
+      <span scContextMenuShortcut>⌘C</span>
     </div>
-    <div sc-context-menu-item (select)="onPaste()">
+    <div scContextMenuItem (select)="onPaste()">
       Paste
-      <span sc-context-menu-shortcut>⌘V</span>
+      <span scContextMenuShortcut>⌘V</span>
     </div>
   </sc-context-menu-content>
 </div>
@@ -68,28 +68,28 @@ ScContextMenu (Root)
 ### With Labels and Separators
 
 ```html
-<sc-context-menu-content>
-  <span sc-context-menu-label>Edit</span>
-  <div sc-context-menu-separator></div>
-  <div sc-context-menu-item>Cut</div>
-  <div sc-context-menu-item>Copy</div>
-  <div sc-context-menu-item>Paste</div>
+<scContextMenuContent>
+  <span scContextMenuLabel>Edit</span>
+  <div scContextMenuSeparator></div>
+  <div scContextMenuItem>Cut</div>
+  <div scContextMenuItem>Copy</div>
+  <div scContextMenuItem>Paste</div>
 </sc-context-menu-content>
 ```
 
 ### With Submenu
 
 ```html
-<sc-context-menu-content>
-  <div sc-context-menu-item>Back</div>
-  <div sc-context-menu-item>Forward</div>
+<scContextMenuContent>
+  <div scContextMenuItem>Back</div>
+  <div scContextMenuItem>Forward</div>
 
-  <div sc-context-menu-sub>
-    <div sc-context-menu-sub-trigger>More Tools</div>
-    <div sc-context-menu-sub-content>
-      <div sc-context-menu-item>Save Page As...</div>
-      <div sc-context-menu-item>Create Shortcut...</div>
-      <div sc-context-menu-item>Developer Tools</div>
+  <div scContextMenuSub>
+    <div scContextMenuSubTrigger>More Tools</div>
+    <div scContextMenuSubContent>
+      <div scContextMenuItem>Save Page As...</div>
+      <div scContextMenuItem>Create Shortcut...</div>
+      <div scContextMenuItem>Developer Tools</div>
     </div>
   </div>
 </sc-context-menu-content>
@@ -98,7 +98,7 @@ ScContextMenu (Root)
 ### With Disabled Items
 
 ```html
-<div sc-context-menu-item [disabled]="true">Disabled Item</div>
+<div scContextMenuItem [disabled]="true">Disabled Item</div>
 ```
 
 ## Inputs

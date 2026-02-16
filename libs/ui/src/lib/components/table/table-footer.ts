@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'tfoot[sc-table-footer]',
+  selector: 'tfoot[scTableFooter]',
   host: {
     'data-slot': 'table-footer',
     '[class]': 'class()',

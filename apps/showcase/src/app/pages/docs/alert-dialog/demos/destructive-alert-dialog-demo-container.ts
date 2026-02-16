@@ -59,22 +59,22 @@ import { ScButton } from '@semantic-components/ui';
   ],
   encapsulation: ViewEncapsulation.None,
   template: \`
-    <div sc-alert-dialog-provider>
-      <button sc-button sc-alert-dialog-trigger variant="destructive">
+    <div scAlertDialogProvider>
+      <button scButton scAlertDialogTrigger variant="destructive">
         Delete All
       </button>
       <ng-template scAlertDialogPortal>
-        <div sc-alert-dialog>
-          <div sc-alert-dialog-header>
-            <h2 sc-alert-dialog-title>Delete all items?</h2>
-            <p sc-alert-dialog-description>
+        <div scAlertDialog>
+          <div scAlertDialogHeader>
+            <h2 scAlertDialogTitle>Delete all items?</h2>
+            <p scAlertDialogDescription>
               This will permanently delete all items in your collection. This
               action cannot be reversed.
             </p>
           </div>
-          <div sc-alert-dialog-footer>
-            <button sc-alert-dialog-cancel>Cancel</button>
-            <button sc-alert-dialog-action variant="destructive">
+          <div scAlertDialogFooter>
+            <button scAlertDialogCancel>Cancel</button>
+            <button scAlertDialogAction variant="destructive">
               Delete All
             </button>
           </div>

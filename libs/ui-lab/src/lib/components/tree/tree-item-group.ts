@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_TREE_ITEM } from './tree-item';
 
 @Component({
-  selector: 'ul[sc-tree-item-group]',
+  selector: 'ul[scTreeItemGroup]',
   imports: [TreeItemGroup],
   template: `
     <ng-template ngTreeItemGroup [ownedBy]="item.treeItem">

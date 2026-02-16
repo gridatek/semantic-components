@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'span[sc-breadcrumb-ellipsis]',
+  selector: 'span[scBreadcrumbEllipsis]',
   host: {
     'data-slot': 'breadcrumb-ellipsis',
     role: 'presentation',

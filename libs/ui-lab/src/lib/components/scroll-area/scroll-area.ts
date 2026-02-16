@@ -13,7 +13,7 @@ import { cn } from '@semantic-components/ui';
 import { ScScrollBar } from './scroll-bar';
 
 @Component({
-  selector: 'div[sc-scroll-area]',
+  selector: 'div[scScrollArea]',
   host: {
     'data-slot': 'scroll-area',
     '[class]': 'class()',
@@ -28,7 +28,7 @@ import { ScScrollBar } from './scroll-bar';
         <ng-content />
       </div>
     </div>
-    <ng-content select="[sc-scroll-bar]" />
+    <ng-content select="[scScrollBar]" />
   `,
   styles: `
     .scrollbar-none {

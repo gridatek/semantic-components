@@ -16,16 +16,16 @@ import {
   template: `
     <div class="max-w-lg space-y-2">
       <label class="text-sm font-medium">To:</label>
-      <div sc-tag-input [(tags)]="tags" placeholder="Add recipient...">
+      <div scTagInput [(tags)]="tags" placeholder="Add recipient...">
         @for (tag of tags(); track tag) {
           <span
-            sc-tag-input-tag
+            scTagInputTag
             [tag]="tag"
             variant="outline"
             class="rounded-full"
           ></span>
         }
-        <input sc-tag-input-field [addOnBlur]="true" />
+        <input scTagInputField [addOnBlur]="true" />
       </div>
     </div>
   `,

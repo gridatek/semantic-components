@@ -9,13 +9,13 @@ Displays an indicator showing the completion progress of a task, typically displ
 ## Usage
 
 ```html
-<div sc-progress [value]="33"></div>
+<div scProgress [value]="33"></div>
 ```
 
 ## With Custom Max
 
 ```html
-<div sc-progress [value]="50" [max]="200"></div>
+<div scProgress [value]="50" [max]="200"></div>
 ```
 
 ## With Signal Forms
@@ -39,7 +39,7 @@ readonly completionPercentage = computed(() => {
 ```
 
 ```html
-<div sc-progress [value]="completionPercentage()"></div>
+<div scProgress [value]="completionPercentage()"></div>
 ```
 
 Note: While progress implements `FormValueControl`, it's typically used to display computed values rather than being directly bound with `[formField]`. When using `[formField]`, you cannot use other property bindings like `[value]` or `[max]` on the same element.
@@ -49,7 +49,7 @@ Note: While progress implements `FormValueControl`, it's typically used to displ
 Override the default height or width:
 
 ```html
-<div sc-progress [value]="66" class="h-4 w-[60%]"></div>
+<div scProgress [value]="66" class="h-4 w-[60%]"></div>
 ```
 
 ## Inputs

@@ -36,7 +36,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
   imports: [ScToggle],
   template: \`
     <div class="flex items-center gap-1 rounded-md border p-1">
-      <button sc-toggle [(pressed)]="bold" aria-label="Toggle bold">
+      <button scToggle [(pressed)]="bold" aria-label="Toggle bold">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -53,7 +53,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
           <path d="M15 20a4 4 0 0 0 0-8H6v8" />
         </svg>
       </button>
-      <button sc-toggle [(pressed)]="italic" aria-label="Toggle italic">
+      <button scToggle [(pressed)]="italic" aria-label="Toggle italic">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -71,7 +71,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
           <line x1="15" x2="9" y1="4" y2="20" />
         </svg>
       </button>
-      <button sc-toggle [(pressed)]="underline" aria-label="Toggle underline">
+      <button scToggle [(pressed)]="underline" aria-label="Toggle underline">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -88,7 +88,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
           <line x1="4" x2="20" y1="20" y2="20" />
         </svg>
       </button>
-      <button sc-toggle [(pressed)]="strike" aria-label="Toggle strikethrough">
+      <button scToggle [(pressed)]="strike" aria-label="Toggle strikethrough">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

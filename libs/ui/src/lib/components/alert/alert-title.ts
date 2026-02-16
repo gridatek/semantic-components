@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: '[sc-alert-title]',
+  selector: '[scAlertTitle]',
   host: {
     'data-slot': 'alert-title',
     '[class]': 'class()',

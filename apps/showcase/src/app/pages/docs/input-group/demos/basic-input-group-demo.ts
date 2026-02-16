@@ -21,13 +21,13 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
     SiMailIcon,
   ],
   template: `
-    <div sc-input-group>
-      <div sc-input-group-addon>
-        <span sc-input-group-text>
+    <div scInputGroup>
+      <div scInputGroupAddon>
+        <span scInputGroupText>
           <svg si-mail-icon></svg>
         </span>
       </div>
-      <input sc-input variant="group" placeholder="Email address" />
+      <input scInput variant="group" placeholder="Email address" />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

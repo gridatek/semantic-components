@@ -17,15 +17,15 @@ The search input is **built into** `ScComboboxPortal`'s template (not projected)
 
 | Component                 | Selector                          | Aria Primitive                                                                   | Purpose                                 |
 | ------------------------- | --------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------- |
-| `ScCombobox`              | `div[sc-combobox]`                | `Combobox` (hostDirective, readonly)                                             | Root container                          |
-| `ScComboboxTrigger`       | `div[sc-combobox-trigger]`        | —                                                                                | Styling wrapper for trigger             |
-| `ScComboboxInput`         | `input[sc-combobox-input]`        | `ComboboxInput` (hostDirective)                                                  | Invisible input (opens dropdown)        |
-| `ScComboboxIcon`          | `svg[sc-combobox-icon]`           | —                                                                                | Chevron icon with rotation on expand    |
-| `ScComboboxPortal`        | `div[sc-combobox-portal]`         | `ComboboxPopupContainer` + `ComboboxDialog` + inner `Combobox` + `ComboboxInput` | Dialog popup with built-in search input |
-| `ScComboboxList`          | `div[sc-combobox-list]`           | `Listbox` (hostDirective)                                                        | Scrollable options list                 |
-| `ScComboboxItem`          | `div[sc-combobox-item]`           | `Option` (hostDirective)                                                         | Individual option                       |
-| `ScComboboxItemIndicator` | `svg[sc-combobox-item-indicator]` | —                                                                                | Checkmark (visible when selected)       |
-| `ScComboboxEmpty`         | `div[sc-combobox-empty]`          | —                                                                                | Empty state message                     |
+| `ScCombobox`              | `div[scCombobox]`                | `Combobox` (hostDirective, readonly)                                             | Root container                          |
+| `ScComboboxTrigger`       | `div[scComboboxTrigger]`        | —                                                                                | Styling wrapper for trigger             |
+| `ScComboboxInput`         | `input[scComboboxInput]`        | `ComboboxInput` (hostDirective)                                                  | Invisible input (opens dropdown)        |
+| `ScComboboxIcon`          | `svg[scComboboxIcon]`           | —                                                                                | Chevron icon with rotation on expand    |
+| `ScComboboxPortal`        | `div[scComboboxPortal]`         | `ComboboxPopupContainer` + `ComboboxDialog` + inner `Combobox` + `ComboboxInput` | Dialog popup with built-in search input |
+| `ScComboboxList`          | `div[scComboboxList]`           | `Listbox` (hostDirective)                                                        | Scrollable options list                 |
+| `ScComboboxItem`          | `div[scComboboxItem]`           | `Option` (hostDirective)                                                         | Individual option                       |
+| `ScComboboxItemIndicator` | `svg[scComboboxItemIndicator]` | —                                                                                | Checkmark (visible when selected)       |
+| `ScComboboxEmpty`         | `div[scComboboxEmpty]`          | —                                                                                | Empty state message                     |
 
 ### ScComboboxPortal
 
@@ -66,24 +66,24 @@ Exposes from `Option` hostDirective:
 ### Single Select
 
 ```html
-<div sc-combobox class="w-[200px]">
-  <div sc-combobox-trigger>
+<div scCombobox class="w-[200px]">
+  <div scComboboxTrigger>
     <span class="pointer-events-none absolute left-3 truncate">{{ displayValue() }}</span>
-    <input sc-combobox-input />
-    <svg sc-combobox-icon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <input scComboboxInput />
+    <svg scComboboxIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="m7 15 5 5 5-5" />
       <path d="m7 9 5-5 5 5" />
     </svg>
   </div>
-  <div sc-combobox-portal searchPlaceholder="Search..." [(searchValue)]="search">
+  <div scComboboxPortal searchPlaceholder="Search..." [(searchValue)]="search">
     @if (filteredOptions().length === 0) {
-    <div sc-combobox-empty>No results found.</div>
+    <div scComboboxEmpty>No results found.</div>
     }
-    <div sc-combobox-list [(values)]="selectedValues">
+    <div scComboboxList [(values)]="selectedValues">
       @for (option of filteredOptions(); track option.value) {
-      <div sc-combobox-item [value]="option.value" [label]="option.label">
+      <div scComboboxItem [value]="option.value" [label]="option.label">
         <span>{{ option.label }}</span>
-        <svg sc-combobox-item-indicator xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg scComboboxItemIndicator xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 6 9 17l-5-5" />
         </svg>
       </div>
@@ -126,7 +126,7 @@ constructor() {
 ### Multiple Selection
 
 ```html
-<div sc-combobox-list [multi]="true" [(values)]="selectedValues">
+<div scComboboxList [multi]="true" [(values)]="selectedValues">
   <!-- same item template -->
 </div>
 ```
@@ -134,7 +134,7 @@ constructor() {
 ### Disabled Options
 
 ```html
-<div sc-combobox-item [value]="option.value" [label]="option.label" [disabled]="true">
+<div scComboboxItem [value]="option.value" [label]="option.label" [disabled]="true">
   <!-- content -->
 </div>
 ```

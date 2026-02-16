@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
 @Component({
-  selector: 'input[sc-color-picker-input]',
+  selector: 'input[scColorPickerInput]',
   template: ``,
   host: {
     'data-slot': 'color-picker-input',

@@ -17,7 +17,7 @@ import { cn } from '@semantic-components/ui';
 import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
 
 @Component({
-  selector: 'div[sc-range-slider]',
+  selector: 'div[scRangeSlider]',
   imports: [ScSliderTrack, ScSliderRange, ScSliderThumb],
   host: {
     'data-slot': 'range-slider',
@@ -25,15 +25,15 @@ import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
     '[attr.data-disabled]': 'disabled() || null',
   },
   template: `
-    <div sc-slider-track>
+    <div scSliderTrack>
       <div
-        sc-slider-range
+        scSliderRange
         [percentage]="rangeWidth()"
         [style.left.%]="rangeStart()"
       ></div>
     </div>
     <div
-      sc-slider-thumb
+      scSliderThumb
       [percentage]="minPercentage()"
       [value]="minValue()"
       [min]="min()"
@@ -47,7 +47,7 @@ import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
       (touchStart)="onMinThumbTouchStart($event)"
     ></div>
     <div
-      sc-slider-thumb
+      scSliderThumb
       [percentage]="maxPercentage()"
       [value]="maxValue()"
       [min]="min()"

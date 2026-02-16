@@ -5,18 +5,18 @@ A drag and drop file upload zone with preview and progress support.
 ## Usage
 
 ```html
-<div sc-file-upload [multiple]="true" [(files)]="files">
-  <div sc-file-upload-dropzone>
+<div scFileUpload [multiple]="true" [(files)]="files">
+  <div scFileUploadDropzone>
     <p>Drag and drop files here or click to browse</p>
   </div>
 
-  <div sc-file-upload-list>
+  <div scFileUploadList>
     @for (file of files(); track file.id) {
-    <div sc-file-upload-item [file]="file">
-      <div sc-file-upload-item-preview [file]="file"></div>
-      <div sc-file-upload-item-name>{{ file.file.name }}</div>
-      <div sc-file-upload-item-size [file]="file"></div>
-      <button sc-file-upload-item-delete [fileId]="file.id"></button>
+    <div scFileUploadItem [file]="file">
+      <div scFileUploadItemPreview [file]="file"></div>
+      <div scFileUploadItemName>{{ file.file.name }}</div>
+      <div scFileUploadItemSize [file]="file"></div>
+      <button scFileUploadItemDelete [fileId]="file.id"></button>
     </div>
     }
   </div>
@@ -29,7 +29,7 @@ A drag and drop file upload zone with preview and progress support.
 
 Root container that manages file state.
 
-**Selector:** `[sc-file-upload]`
+**Selector:** `[scFileUpload]`
 
 **Inputs:**
 
@@ -70,7 +70,7 @@ Root container that manages file state.
 
 Drag and drop zone that also responds to clicks.
 
-**Selector:** `[sc-file-upload-dropzone]`
+**Selector:** `[scFileUploadDropzone]`
 
 **Data Attributes:**
 
@@ -83,19 +83,19 @@ Drag and drop zone that also responds to clicks.
 
 Button that opens the file picker.
 
-**Selector:** `button[sc-file-upload-trigger]`
+**Selector:** `button[scFileUploadTrigger]`
 
 ### ScFileUploadList
 
 Container for file items.
 
-**Selector:** `[sc-file-upload-list]`
+**Selector:** `[scFileUploadList]`
 
 ### ScFileUploadItem
 
 Individual file item container.
 
-**Selector:** `[sc-file-upload-item]`
+**Selector:** `[scFileUploadItem]`
 
 **Inputs:**
 
@@ -114,7 +114,7 @@ Individual file item container.
 
 File preview (shows image thumbnail for images).
 
-**Selector:** `[sc-file-upload-item-preview]`
+**Selector:** `[scFileUploadItemPreview]`
 
 **Inputs:**
 
@@ -126,13 +126,13 @@ File preview (shows image thumbnail for images).
 
 File name display.
 
-**Selector:** `[sc-file-upload-item-name]`
+**Selector:** `[scFileUploadItemName]`
 
 ### ScFileUploadItemSize
 
 Formatted file size display.
 
-**Selector:** `[sc-file-upload-item-size]`
+**Selector:** `[scFileUploadItemSize]`
 
 **Inputs:**
 
@@ -144,7 +144,7 @@ Formatted file size display.
 
 Delete button for removing a file.
 
-**Selector:** `button[sc-file-upload-item-delete]`
+**Selector:** `button[scFileUploadItemDelete]`
 
 **Inputs:**
 
@@ -156,7 +156,7 @@ Delete button for removing a file.
 
 Progress bar for upload status.
 
-**Selector:** `[sc-file-upload-item-progress]`
+**Selector:** `[scFileUploadItemProgress]`
 
 **Inputs:**
 
@@ -181,8 +181,8 @@ interface FileUploadFile {
 ### Basic Dropzone
 
 ```html
-<div sc-file-upload [multiple]="true" [(files)]="files">
-  <div sc-file-upload-dropzone class="p-8">
+<div scFileUpload [multiple]="true" [(files)]="files">
+  <div scFileUploadDropzone class="p-8">
     <div class="flex flex-col items-center gap-2">
       <p>Drag and drop files here</p>
       <p class="text-sm text-muted-foreground">or click to browse</p>
@@ -194,17 +194,17 @@ interface FileUploadFile {
 ### Image Upload
 
 ```html
-<div sc-file-upload [multiple]="true" accept="image/*" [maxSize]="5242880" [(files)]="images">
-  <div sc-file-upload-dropzone>
+<div scFileUpload [multiple]="true" accept="image/*" [maxSize]="5242880" [(files)]="images">
+  <div scFileUploadDropzone>
     <p>Upload images (PNG, JPG up to 5MB)</p>
   </div>
 
-  <div sc-file-upload-list>
+  <div scFileUploadList>
     @for (file of images(); track file.id) {
-    <div sc-file-upload-item [file]="file">
-      <div sc-file-upload-item-preview [file]="file"></div>
-      <div sc-file-upload-item-name>{{ file.file.name }}</div>
-      <button sc-file-upload-item-delete [fileId]="file.id"></button>
+    <div scFileUploadItem [file]="file">
+      <div scFileUploadItemPreview [file]="file"></div>
+      <div scFileUploadItemName>{{ file.file.name }}</div>
+      <button scFileUploadItemDelete [fileId]="file.id"></button>
     </div>
     }
   </div>
@@ -214,23 +214,23 @@ interface FileUploadFile {
 ### Button Trigger
 
 ```html
-<div sc-file-upload [(files)]="files">
-  <button sc-file-upload-trigger>Upload Files</button>
+<div scFileUpload [(files)]="files">
+  <button scFileUploadTrigger>Upload Files</button>
 </div>
 ```
 
 ### With Progress
 
 ```html
-<div sc-file-upload [(files)]="files" (filesSelected)="handleUpload($event)">
-  <div sc-file-upload-dropzone>Upload files</div>
+<div scFileUpload [(files)]="files" (filesSelected)="handleUpload($event)">
+  <div scFileUploadDropzone>Upload files</div>
 
-  <div sc-file-upload-list>
+  <div scFileUploadList>
     @for (file of files(); track file.id) {
-    <div sc-file-upload-item [file]="file">
-      <div sc-file-upload-item-name>{{ file.file.name }}</div>
+    <div scFileUploadItem [file]="file">
+      <div scFileUploadItemName>{{ file.file.name }}</div>
       @if (file.status === 'uploading') {
-      <div sc-file-upload-item-progress [file]="file"></div>
+      <div scFileUploadItemProgress [file]="file"></div>
       }
     </div>
     }

@@ -11,13 +11,13 @@ Text input with @mention support for users, channels, or custom entities.
 ### Basic Usage
 
 ```html
-<sc-mention-input [(value)]="message" [(mentions)]="mentionedUsers" [users]="availableUsers" placeholder="Type @ to mention someone..." />
+<scMentionInput [(value)]="message" [(mentions)]="mentionedUsers" [users]="availableUsers" placeholder="Type @ to mention someone..." />
 ```
 
 ### Custom Trigger Character
 
 ```html
-<sc-mention-input [users]="channels" trigger="#" placeholder="Type # to mention a channel..." />
+<scMentionInput [users]="channels" trigger="#" placeholder="Type # to mention a channel..." />
 ```
 
 ## API
@@ -72,7 +72,7 @@ interface MentionUser {
 ```typescript
 @Component({
   template: `
-    <sc-mention-input [(value)]="message" [(mentions)]="mentions" [users]="teamMembers" placeholder="Type a message..." [rows]="2" />
+    <scMentionInput [(value)]="message" [(mentions)]="mentions" [users]="teamMembers" placeholder="Type a message..." [rows]="2" />
     <button (click)="sendMessage()">Send</button>
   `,
 })
@@ -103,7 +103,7 @@ const users: MentionUser[] = [
 ### Channel Mentions
 
 ```html
-<sc-mention-input [users]="channels" trigger="#" placeholder="Mention a channel with #..." />
+<scMentionInput [users]="channels" trigger="#" placeholder="Mention a channel with #..." />
 ```
 
 ```typescript

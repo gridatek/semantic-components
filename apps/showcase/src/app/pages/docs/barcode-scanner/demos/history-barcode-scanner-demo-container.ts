@@ -36,7 +36,7 @@ import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
   selector: 'app-history-barcode-scanner-demo',
   imports: [ScBarcodeScanner],
   template: \`
-    <sc-barcode-scanner
+    <scBarcodeScanner
       [showLastResult]="false"
       (detected)="addToHistory($event)"
       class="max-w-md"

@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'span[sc-input-group-text]',
+  selector: 'span[scInputGroupText]',
   host: {
     'data-slot': 'input-group-text',
     '[class]': 'class()',

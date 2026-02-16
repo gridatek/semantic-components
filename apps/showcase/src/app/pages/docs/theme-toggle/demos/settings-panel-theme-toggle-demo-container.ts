@@ -45,7 +45,7 @@ import { ScThemeSelect } from '@semantic-components/ui-lab';
               Select your preferred theme
             </p>
           </div>
-          <select sc-theme-select id="settings-theme" class="w-32">
+          <select scThemeSelect id="settings-theme" class="w-32">
             <option value="light">Light</option>
             <option value="dark">Dark</option>
             <option value="system">System</option>

@@ -17,7 +17,7 @@ interface DemoItem {
   selector: 'app-breakpoints-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryItem],
   template: `
-    <sc-masonry-grid
+    <scMasonryGrid
       [columns]="3"
       [gap]="20"
       [breakpoints]="[
@@ -27,7 +27,7 @@ interface DemoItem {
       ]"
     >
       @for (item of items().slice(0, 9); track item.id) {
-        <sc-masonry-item>
+        <scMasonryItem>
           <div
             class="rounded-lg border bg-card p-4"
             [style.min-height.px]="item.height"

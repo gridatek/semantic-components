@@ -75,13 +75,13 @@ import {
         Highlight Help
       </button>
 
-      <sc-spotlight #spotlight [contentPlacement]="'bottom'">
-        <sc-spotlight-title>Need Help?</sc-spotlight-title>
-        <sc-spotlight-description>
+      <scSpotlight #spotlight [contentPlacement]="'bottom'">
+        <scSpotlightTitle>Need Help?</sc-spotlight-title>
+        <scSpotlightDescription>
           Our help center has guides, tutorials, and FAQs to help you get the
           most out of the application.
         </sc-spotlight-description>
-        <sc-spotlight-actions>
+        <scSpotlightActions>
           <button
             type="button"
             (click)="spotlight.close()"

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: '[sc-chart-tooltip]',
+  selector: '[scChartTooltip]',
   template: `
     @if (visible()) {
       <div

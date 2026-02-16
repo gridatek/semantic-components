@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-empty]',
+  selector: 'div[scEmpty]',
   host: {
     'data-slot': 'empty',
     '[class]': 'class()',

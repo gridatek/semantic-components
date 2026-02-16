@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Component({
-  selector: 'button[sc-editor-numbered-list]',
+  selector: 'button[scEditorNumberedList]',
   template: `
     <ng-content />
   `,

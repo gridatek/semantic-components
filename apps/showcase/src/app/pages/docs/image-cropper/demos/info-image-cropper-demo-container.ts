@@ -41,13 +41,13 @@ import {
   template: \`
     <div class="space-y-4">
       <div
-        sc-image-cropper
+        scImageCropper
         [src]="imageSrc()"
         [(cropArea)]="cropArea"
         [containerHeight]="300"
       >
         <div
-          sc-image-cropper-container
+          scImageCropperContainer
           class="rounded-lg overflow-hidden border"
         ></div>
       </div>

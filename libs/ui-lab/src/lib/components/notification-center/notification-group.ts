@@ -118,7 +118,7 @@ import type {
           aria-label="Notifications"
         >
           @for (notification of notifications(); track notification.id) {
-            <sc-notification-item
+            <scNotificationItem
               [notification]="notification"
               [showDismiss]="showDismiss()"
               (markRead)="onMarkRead(notification, $event)"

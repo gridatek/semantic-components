@@ -40,16 +40,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Semantic Components depends on Angular Aria and Angular CDK.
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="step1Code"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>terminal</span>
+            <button scCopyButton [value]="step1Code"></button>
           </div>
-          <div sc-code-viewer-content [code]="step1Code" language="bash"></div>
+          <div scCodeViewerContent [code]="step1Code" language="bash"></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -70,13 +70,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
               run the following command to install Tailwind CSS and its peer
               dependencies:
             </p>
-            <div sc-code-viewer>
-              <div sc-code-viewer-header>
-                <span sc-code-viewer-label>terminal</span>
-                <button sc-copy-button [value]="step2Code"></button>
+            <div scCodeViewer>
+              <div scCodeViewerHeader>
+                <span scCodeViewerLabel>terminal</span>
+                <button scCopyButton [value]="step2Code"></button>
               </div>
               <div
-                sc-code-viewer-content
+                scCodeViewerContent
                 [code]="step2Code"
                 language="bash"
               ></div>
@@ -98,13 +98,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
               </code>
               plugin into your PostCSS configuration.
             </p>
-            <div sc-code-viewer>
-              <div sc-code-viewer-header>
-                <span sc-code-viewer-label>.postcssrc.json</span>
-                <button sc-copy-button [value]="step3aCode"></button>
+            <div scCodeViewer>
+              <div scCodeViewerHeader>
+                <span scCodeViewerLabel>.postcssrc.json</span>
+                <button scCopyButton [value]="step3aCode"></button>
               </div>
               <div
-                sc-code-viewer-content
+                scCodeViewerContent
                 [code]="step3aCode"
                 language="json"
               ></div>
@@ -113,7 +113,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -123,16 +123,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
           Install the required utility libraries for class management and
           animations.
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="step4Code"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>terminal</span>
+            <button scCopyButton [value]="step4Code"></button>
           </div>
-          <div sc-code-viewer-content [code]="step4Code" language="bash"></div>
+          <div scCodeViewerContent [code]="step4Code" language="bash"></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -141,12 +141,12 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Install the icon library used by Semantic Components.
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="step5Code"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>terminal</span>
+            <button scCopyButton [value]="step5Code"></button>
           </div>
-          <div sc-code-viewer-content [code]="step5Code" language="bash"></div>
+          <div scCodeViewerContent [code]="step5Code" language="bash"></div>
         </div>
       </section>
     </div>

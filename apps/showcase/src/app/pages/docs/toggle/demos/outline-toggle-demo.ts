@@ -11,7 +11,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
   imports: [ScToggle],
   template: `
     <button
-      sc-toggle
+      scToggle
       variant="outline"
       [(pressed)]="italic"
       aria-label="Toggle italic"

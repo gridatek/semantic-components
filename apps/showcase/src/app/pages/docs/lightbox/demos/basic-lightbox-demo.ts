@@ -15,11 +15,11 @@ import {
   imports: [ScLightbox, ScLightboxContainer, ScLightboxTrigger],
   template: `
     <div class="space-y-2">
-      <div sc-lightbox [images]="images">
+      <div scLightbox [images]="images">
         <div class="flex gap-4">
           @for (image of images; track image.src; let i = $index) {
             <button
-              sc-lightbox-trigger
+              scLightboxTrigger
               [index]="i"
               class="w-32 h-32 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring"
             >
@@ -31,7 +31,7 @@ import {
             </button>
           }
         </div>
-        <div sc-lightbox-container></div>
+        <div scLightboxContainer></div>
       </div>
       <p class="text-sm text-muted-foreground">
         Click an image to open the lightbox. Use arrow keys or buttons to

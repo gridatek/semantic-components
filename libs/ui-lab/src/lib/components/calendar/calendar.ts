@@ -38,7 +38,7 @@ export interface DateRange {
   template: `
     <div class="flex flex-col gap-4">
       <!-- Header with navigation -->
-      <sc-calendar-header
+      <scCalendarHeader
         [label]="monthYearLabel()"
         [previousLabel]="previousAriaLabel()"
         [nextLabel]="nextAriaLabel()"
@@ -52,7 +52,7 @@ export interface DateRange {
       <!-- View content -->
       @switch (viewMode()) {
         @case ('day') {
-          <sc-calendar-day-view
+          <scCalendarDayView
             [viewDate]="viewDate()"
             [mode]="mode()"
             [selected]="selected()"
@@ -68,7 +68,7 @@ export interface DateRange {
           />
         }
         @case ('month') {
-          <sc-calendar-month-view
+          <scCalendarMonthView
             [year]="viewDate().getFullYear()"
             [selectedMonth]="viewDate().getMonth()"
             (monthSelected)="selectMonth($event)"
@@ -77,7 +77,7 @@ export interface DateRange {
           />
         }
         @case ('year') {
-          <sc-calendar-year-view
+          <scCalendarYearView
             [decadeStart]="decadeStart()"
             [selectedYear]="viewDate().getFullYear()"
             (yearSelected)="selectYear($event)"

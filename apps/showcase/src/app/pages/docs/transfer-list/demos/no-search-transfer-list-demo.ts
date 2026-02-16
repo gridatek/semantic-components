@@ -11,7 +11,7 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
   selector: 'app-no-search-transfer-list-demo',
   imports: [ScTransferList],
   template: `
-    <sc-transfer-list
+    <scTransferList
       [(sourceItems)]="sourceItems"
       [(targetItems)]="targetItems"
       [searchable]="false"

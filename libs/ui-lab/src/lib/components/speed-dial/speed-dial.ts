@@ -33,7 +33,7 @@ import type {
               open() ? i * 50 + 'ms' : (actions().length - 1 - i) * 30 + 'ms'
             "
           >
-            <sc-speed-dial-action
+            <scSpeedDialAction
               [icon]="action.icon"
               [label]="action.label"
               [disabled]="action.disabled ?? false"

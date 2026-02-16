@@ -19,31 +19,31 @@ interface SpacingFormModel {
   selector: 'app-basic-radio-group-demo',
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
-    <div sc-radio-group>
-      <label sc-radio-field class="flex items-center space-x-2">
+    <div scRadioGroup>
+      <label scRadioField class="flex items-center space-x-2">
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="default"
           [formField]="spacingForm.spacing"
           id="r1"
         />
         <span class="text-sm font-medium leading-none">Default</span>
       </label>
-      <label sc-radio-field class="flex items-center space-x-2">
+      <label scRadioField class="flex items-center space-x-2">
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="comfortable"
           [formField]="spacingForm.spacing"
           id="r2"
         />
         <span class="text-sm font-medium leading-none">Comfortable</span>
       </label>
-      <label sc-radio-field class="flex items-center space-x-2">
+      <label scRadioField class="flex items-center space-x-2">
         <input
           type="radio"
-          sc-radio
+          scRadio
           value="compact"
           [formField]="spacingForm.spacing"
           id="r3"

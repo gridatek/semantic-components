@@ -37,12 +37,12 @@ import type { DockItem } from '@semantic-components/ui-lab';
   imports: [ScDock, ScDockItems, ScDockItem, ScDockBadge],
   template: \`
     <div class="flex justify-center rounded-lg border bg-muted/30 p-8">
-      <nav sc-dock>
-        <div sc-dock-items>
+      <nav scDock>
+        <div scDockItems>
           @for (item of items; track item.id) {
-            <button sc-dock-item [item]="item">
+            <button scDockItem [item]="item">
               @if (item.badge !== undefined) {
-                <span sc-dock-badge>{{ item.badge }}</span>
+                <span scDockBadge>{{ item.badge }}</span>
               }
             </button>
           }

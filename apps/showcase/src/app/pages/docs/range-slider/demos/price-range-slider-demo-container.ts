@@ -37,7 +37,7 @@ import { ScRangeSlider } from '@semantic-components/ui-lab';
         <span>{{ '$' + minPrice() + ' - $' + maxPrice() }}</span>
       </div>
       <div
-        sc-range-slider
+        scRangeSlider
         [(minValue)]="minPrice"
         [(maxValue)]="maxPrice"
         [min]="0"

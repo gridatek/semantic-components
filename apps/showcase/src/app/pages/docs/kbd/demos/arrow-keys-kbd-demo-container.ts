@@ -35,11 +35,11 @@ import { ScKbd } from '@semantic-components/ui';
   imports: [ScKbd],
   template: \`
     <div class="flex flex-col items-center gap-1">
-      <kbd sc-kbd>↑</kbd>
+      <kbd scKbd>↑</kbd>
       <div class="flex gap-1">
-        <kbd sc-kbd>←</kbd>
-        <kbd sc-kbd>↓</kbd>
-        <kbd sc-kbd>→</kbd>
+        <kbd scKbd>←</kbd>
+        <kbd scKbd>↓</kbd>
+        <kbd scKbd>→</kbd>
       </div>
     </div>
   \`,

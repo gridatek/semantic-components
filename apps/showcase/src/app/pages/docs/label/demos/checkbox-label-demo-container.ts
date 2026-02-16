@@ -37,7 +37,7 @@ import { ScLabel } from '@semantic-components/ui';
   template: \`
     <div scCheckboxField>
       <input type="checkbox" scCheckbox id="terms-label" />
-      <label sc-label [for]="'terms-label'">Accept terms and conditions</label>
+      <label scLabel [for]="'terms-label'">Accept terms and conditions</label>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

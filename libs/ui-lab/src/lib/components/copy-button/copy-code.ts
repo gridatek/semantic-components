@@ -9,12 +9,12 @@ import { cn } from '@semantic-components/ui';
 import { ScCopyButton } from './copy-button';
 
 @Component({
-  selector: '[sc-copy-code]',
+  selector: '[scCopyCode]',
   template: `
     <div class="relative">
       <pre [class]="preClass()"><code><ng-content /></code></pre>
       <button
-        sc-copy-button
+        scCopyButton
         [value]="value()"
         class="absolute right-2 top-2"
         [variant]="'ghost'"

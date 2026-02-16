@@ -50,21 +50,21 @@ interface Task {
   template: \`
     <div class="max-w-md">
       <div
-        sc-sortable-list
+        scSortableList
         [(items)]="tasks"
         [handleOnly]="true"
         (sortChange)="onTaskReorder($event)"
         class="gap-1"
       >
-        <div sc-sortable-overlay></div>
+        <div scSortableOverlay></div>
         @for (task of tasks(); track task.id; let i = $index) {
           <div
-            sc-sortable-item
+            scSortableItem
             [index]="i"
             [item]="task"
             class="flex items-center gap-3 rounded-md border bg-background p-3 hover:bg-muted/50"
           >
-            <span sc-sortable-handle class="p-1"></span>
+            <span scSortableHandle class="p-1"></span>
             <input
               type="checkbox"
               [checked]="task.completed"

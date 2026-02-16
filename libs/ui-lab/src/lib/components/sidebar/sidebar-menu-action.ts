@@ -2,7 +2,7 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'button[sc-sidebar-menu-action]',
+  selector: 'button[scSidebarMenuAction]',
   host: {
     'data-slot': 'sidebar-menu-action',
     'data-sidebar': 'menu-action',

@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE, SortDirection } from './data-table';
 
 @Component({
-  selector: '[sc-data-table-head]',
+  selector: '[scDataTableHead]',
   template: `
     @if (sortable()) {
       <button

@@ -34,7 +34,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
   selector: 'app-basic-diff-viewer-demo',
   imports: [ScDiffViewer],
   template: \`
-    <sc-diff-viewer
+    <scDiffViewer
       [oldText]="oldCode"
       [newText]="newCode"
       [oldTitle]="'main.ts (original)'"
