@@ -30,6 +30,8 @@ export class BasicPopoverDemoContainer {
 } from '@angular/core';
 import {
   ScButton,
+  ScField,
+  ScFieldGroup,
   ScInput,
   ScLabel,
   ScPopover,
@@ -45,6 +47,8 @@ import {
   selector: 'app-basic-popover-demo',
   imports: [
     ScButton,
+    ScField,
+    ScFieldGroup,
     ScInput,
     ScLabel,
     ScPopover,
@@ -66,27 +70,22 @@ import {
             <h4 sc-popover-title>Dimensions</h4>
             <p sc-popover-description>Set the dimensions for the layer.</p>
           </div>
-          <div class="grid gap-2">
-            <div class="grid grid-cols-3 items-center gap-4">
-              <label sc-label for="width">Width</label>
-              <input sc-input id="width" value="100%" class="col-span-2" />
+          <div sc-field-group class="gap-2">
+            <div sc-field class="grid grid-cols-3 gap-4">
+              <label sc-label>Width</label>
+              <input sc-input value="100%" class="col-span-2" />
             </div>
-            <div class="grid grid-cols-3 items-center gap-4">
-              <label sc-label for="maxWidth">Max. width</label>
-              <input
-                sc-input
-                id="maxWidth"
-                value="300px"
-                class="col-span-2"
-              />
+            <div sc-field class="grid grid-cols-3 gap-4">
+              <label sc-label>Max. width</label>
+              <input sc-input value="300px" class="col-span-2" />
             </div>
-            <div class="grid grid-cols-3 items-center gap-4">
-              <label sc-label for="height">Height</label>
-              <input sc-input id="height" value="25px" class="col-span-2" />
+            <div sc-field class="grid grid-cols-3 gap-4">
+              <label sc-label>Height</label>
+              <input sc-input value="25px" class="col-span-2" />
             </div>
-            <div class="grid grid-cols-3 items-center gap-4">
-              <label sc-label for="maxHeight">Max. height</label>
-              <input sc-input id="maxHeight" value="none" class="col-span-2" />
+            <div sc-field class="grid grid-cols-3 gap-4">
+              <label sc-label>Max. height</label>
+              <input sc-input value="none" class="col-span-2" />
             </div>
           </div>
         </div>
