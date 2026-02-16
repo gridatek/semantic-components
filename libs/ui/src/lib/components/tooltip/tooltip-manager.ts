@@ -11,7 +11,7 @@ import {
   OutputRefSubscription,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { ScTooltip, SC_TOOLTIP_DATA } from './tooltip';
 
@@ -100,6 +100,7 @@ export class ScTooltipManager {
   private tooltipRef: ComponentRef<ScTooltip> | null = null;
   private currentTooltipId: string | null = null;
   private animationSubscription: OutputRefSubscription | null = null;
+  private positionSubscription: Subscription | null = null;
 
   constructor() {
     this.setupEscapeListener();
@@ -155,6 +156,22 @@ export class ScTooltipManager {
 
     this.tooltipRef = this.overlayRef.attach(portal);
 
+    // Track actual position (CDK may flip if not enough space)
+    this.positionSubscription = positionStrategy.positionChanges.subscribe(
+      (change) => {
+        const pair = change.connectionPair;
+        let side: ScTooltipPosition;
+
+        if (pair.overlayX === 'center') {
+          side = pair.overlayY === 'bottom' ? 'top' : 'bottom';
+        } else {
+          side = pair.overlayX === 'end' ? 'left' : 'right';
+        }
+
+        this.tooltipRef?.instance.side.set(side);
+      },
+    );
+
     // Subscribe to animation completion
     this.animationSubscription =
       this.tooltipRef.instance.animationComplete.subscribe(() => {
@@ -172,6 +189,11 @@ export class ScTooltipManager {
   }
 
   private disposeTooltip(): void {
+    if (this.positionSubscription) {
+      this.positionSubscription.unsubscribe();
+      this.positionSubscription = null;
+    }
+
     if (this.animationSubscription) {
       this.animationSubscription.unsubscribe();
       this.animationSubscription = null;
