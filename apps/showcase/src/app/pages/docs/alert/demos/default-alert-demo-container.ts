@@ -6,7 +6,11 @@ import { DefaultAlertDemo } from './default-alert-demo';
   selector: 'app-default-alert-demo-container',
   imports: [DemoContainer, DefaultAlertDemo],
   template: `
-    <app-demo-container title="Default" [code]="code">
+    <app-demo-container
+      title="Default"
+      demoUrl="/demos/alert/default-alert-demo"
+      [code]="code"
+    >
       <app-default-alert-demo />
     </app-demo-container>
   `,

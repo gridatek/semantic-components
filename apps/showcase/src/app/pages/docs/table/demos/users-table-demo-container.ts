@@ -10,7 +10,11 @@ import { UsersTableDemo } from './users-table-demo';
   selector: 'app-users-table-demo-container',
   imports: [DemoContainer, UsersTableDemo],
   template: `
-    <app-demo-container title="Users Table" [code]="code">
+    <app-demo-container
+      title="Users Table"
+      demoUrl="/demos/table/users-table-demo"
+      [code]="code"
+    >
       <app-users-table-demo />
     </app-demo-container>
   `,

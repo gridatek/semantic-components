@@ -11,7 +11,11 @@ import { BasicAlertDialogDemo } from './basic-alert-dialog-demo';
   imports: [DemoContainer, BasicAlertDialogDemo],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <app-demo-container title="Basic" [code]="code">
+    <app-demo-container
+      title="Basic"
+      demoUrl="/demos/alert-dialog/basic-alert-dialog-demo"
+      [code]="code"
+    >
       <app-basic-alert-dialog-demo />
     </app-demo-container>
   `,

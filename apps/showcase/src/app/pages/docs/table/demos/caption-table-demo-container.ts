@@ -10,7 +10,11 @@ import { CaptionTableDemo } from './caption-table-demo';
   selector: 'app-caption-table-demo-container',
   imports: [DemoContainer, CaptionTableDemo],
   template: `
-    <app-demo-container title="With Caption" [code]="code">
+    <app-demo-container
+      title="With Caption"
+      demoUrl="/demos/table/caption-table-demo"
+      [code]="code"
+    >
       <app-caption-table-demo />
     </app-demo-container>
   `,

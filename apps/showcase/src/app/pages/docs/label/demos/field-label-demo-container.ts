@@ -10,7 +10,11 @@ import { FieldLabelDemo } from './field-label-demo';
   selector: 'app-field-label-demo-container',
   imports: [DemoContainer, FieldLabelDemo],
   template: `
-    <app-demo-container title="With Field Context" [code]="code">
+    <app-demo-container
+      title="With Field Context"
+      demoUrl="/demos/label/field-label-demo"
+      [code]="code"
+    >
       <app-field-label-demo />
     </app-demo-container>
   `,

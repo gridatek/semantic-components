@@ -11,7 +11,11 @@ import { DestructiveAlertDialogDemo } from './destructive-alert-dialog-demo';
   imports: [DemoContainer, DestructiveAlertDialogDemo],
   encapsulation: ViewEncapsulation.None,
   template: `
-    <app-demo-container title="Destructive" [code]="code">
+    <app-demo-container
+      title="Destructive"
+      demoUrl="/demos/alert-dialog/destructive-alert-dialog-demo"
+      [code]="code"
+    >
       <app-destructive-alert-dialog-demo />
     </app-demo-container>
   `,

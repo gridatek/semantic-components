@@ -10,7 +10,11 @@ import { ColorsSpinnerDemo } from './colors-spinner-demo';
   selector: 'app-colors-spinner-demo-container',
   imports: [DemoContainer, ColorsSpinnerDemo],
   template: `
-    <app-demo-container title="Colors" [code]="code">
+    <app-demo-container
+      title="Colors"
+      demoUrl="/demos/spinner/colors-spinner-demo"
+      [code]="code"
+    >
       <app-colors-spinner-demo />
     </app-demo-container>
   `,

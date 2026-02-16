@@ -10,7 +10,11 @@ import { BasicTableDemo } from './basic-table-demo';
   selector: 'app-basic-table-demo-container',
   imports: [DemoContainer, BasicTableDemo],
   template: `
-    <app-demo-container title="Basic Table" [code]="code">
+    <app-demo-container
+      title="Basic Table"
+      demoUrl="/demos/table/basic-table-demo"
+      [code]="code"
+    >
       <app-basic-table-demo />
     </app-demo-container>
   `,

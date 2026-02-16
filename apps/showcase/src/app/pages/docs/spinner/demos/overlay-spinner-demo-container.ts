@@ -10,7 +10,11 @@ import { OverlaySpinnerDemo } from './overlay-spinner-demo';
   selector: 'app-overlay-spinner-demo-container',
   imports: [DemoContainer, OverlaySpinnerDemo],
   template: `
-    <app-demo-container title="Loading Overlay" [code]="code">
+    <app-demo-container
+      title="Loading Overlay"
+      demoUrl="/demos/spinner/overlay-spinner-demo"
+      [code]="code"
+    >
       <app-overlay-spinner-demo />
     </app-demo-container>
   `,

@@ -10,7 +10,11 @@ import { DefaultSpinnerDemo } from './default-spinner-demo';
   selector: 'app-default-spinner-demo-container',
   imports: [DemoContainer, DefaultSpinnerDemo],
   template: `
-    <app-demo-container title="Default" [code]="code">
+    <app-demo-container
+      title="Default"
+      demoUrl="/demos/spinner/default-spinner-demo"
+      [code]="code"
+    >
       <app-default-spinner-demo />
     </app-demo-container>
   `,

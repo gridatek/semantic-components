@@ -10,7 +10,11 @@ import { FooterTableDemo } from './footer-table-demo';
   selector: 'app-footer-table-demo-container',
   imports: [DemoContainer, FooterTableDemo],
   template: `
-    <app-demo-container title="With Footer" [code]="code">
+    <app-demo-container
+      title="With Footer"
+      demoUrl="/demos/table/footer-table-demo"
+      [code]="code"
+    >
       <app-footer-table-demo />
     </app-demo-container>
   `,

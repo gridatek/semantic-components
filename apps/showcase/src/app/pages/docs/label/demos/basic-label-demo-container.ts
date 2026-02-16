@@ -10,7 +10,11 @@ import { BasicLabelDemo } from './basic-label-demo';
   selector: 'app-basic-label-demo-container',
   imports: [DemoContainer, BasicLabelDemo],
   template: `
-    <app-demo-container title="Basic" [code]="code">
+    <app-demo-container
+      title="Basic"
+      demoUrl="/demos/label/basic-label-demo"
+      [code]="code"
+    >
       <app-basic-label-demo />
     </app-demo-container>
   `,

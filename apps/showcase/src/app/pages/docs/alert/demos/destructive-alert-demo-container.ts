@@ -6,7 +6,11 @@ import { DestructiveAlertDemo } from './destructive-alert-demo';
   selector: 'app-destructive-alert-demo-container',
   imports: [DemoContainer, DestructiveAlertDemo],
   template: `
-    <app-demo-container title="Destructive" [code]="code">
+    <app-demo-container
+      title="Destructive"
+      demoUrl="/demos/alert/destructive-alert-demo"
+      [code]="code"
+    >
       <app-destructive-alert-demo />
     </app-demo-container>
   `,

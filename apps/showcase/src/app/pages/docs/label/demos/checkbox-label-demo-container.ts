@@ -10,7 +10,11 @@ import { CheckboxLabelDemo } from './checkbox-label-demo';
   selector: 'app-checkbox-label-demo-container',
   imports: [DemoContainer, CheckboxLabelDemo],
   template: `
-    <app-demo-container title="With Checkbox" [code]="code">
+    <app-demo-container
+      title="With Checkbox"
+      demoUrl="/demos/label/checkbox-label-demo"
+      [code]="code"
+    >
       <app-checkbox-label-demo />
     </app-demo-container>
   `,

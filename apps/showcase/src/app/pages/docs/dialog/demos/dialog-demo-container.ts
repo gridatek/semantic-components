@@ -6,7 +6,11 @@ import { ScDialogDemo } from './dialog-demo';
   selector: 'app-dialog-demo-container',
   imports: [DemoContainer, ScDialogDemo],
   template: `
-    <app-demo-container title="Dialog" [code]="code">
+    <app-demo-container
+      title="Dialog"
+      demoUrl="/demos/dialog/dialog-demo"
+      [code]="code"
+    >
       <app-dialog-demo />
     </app-demo-container>
   `,
