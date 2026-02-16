@@ -34,7 +34,7 @@ import {
   ScAvatarGroup,
   ScAvatarGroupCount,
   ScAvatarImage,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-group-avatar-demo',

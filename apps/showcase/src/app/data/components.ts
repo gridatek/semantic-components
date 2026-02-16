@@ -80,9 +80,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'avatar',
     description: 'An image element with a fallback for representing users.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Data Display',
-    hidden: true,
   },
   {
     name: 'Badge',

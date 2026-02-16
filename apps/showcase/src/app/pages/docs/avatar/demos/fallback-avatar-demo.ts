@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui-lab';
+import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-fallback-avatar-demo',

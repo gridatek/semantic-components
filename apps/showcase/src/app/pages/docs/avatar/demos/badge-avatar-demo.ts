@@ -8,7 +8,7 @@ import {
   ScAvatarBadge,
   ScAvatarFallback,
   ScAvatarImage,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-badge-avatar-demo',

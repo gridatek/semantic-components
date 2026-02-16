@@ -32,7 +32,7 @@ import {
   ScAvatar,
   ScAvatarFallback,
   ScAvatarImage,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-avatar-demo',
