@@ -1762,6 +1762,34 @@ export const demosRoutes: Route[] = [
             (m) => m.ButtonInputGroupDemo,
           ),
       },
+      {
+        path: 'text-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/text-input-group-demo').then(
+            (m) => m.TextInputGroupDemo,
+          ),
+      },
+      {
+        path: 'kbd-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/kbd-input-group-demo').then(
+            (m) => m.KbdInputGroupDemo,
+          ),
+      },
+      {
+        path: 'spinner-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/spinner-input-group-demo').then(
+            (m) => m.SpinnerInputGroupDemo,
+          ),
+      },
+      {
+        path: 'textarea-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/textarea-input-group-demo').then(
+            (m) => m.TextareaInputGroupDemo,
+          ),
+      },
     ],
   },
   {

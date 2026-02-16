@@ -1,0 +1,67 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { KbdInputGroupDemo } from './kbd-input-group-demo';
+
+@Component({
+  selector: 'app-kbd-input-group-demo-container',
+  imports: [DemoContainer, KbdInputGroupDemo],
+  template: `
+    <app-demo-container
+      title="Kbd"
+      demoUrl="/demos/input-group/kbd-input-group-demo"
+      [code]="code"
+    >
+      <app-kbd-input-group-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block' },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class KbdInputGroupDemoContainer {
+  readonly code = `import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScInputGroupInput,
+  ScInputGroupText,
+  ScKbd,
+} from '@semantic-components/ui';
+import { SiSearchIcon } from '@semantic-icons/lucide-icons';
+
+@Component({
+  selector: 'app-kbd-input-group-demo',
+  imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScInputGroupInput,
+    ScInputGroupText,
+    ScKbd,
+    SiSearchIcon,
+  ],
+  template: \`
+    <div sc-input-group>
+      <div sc-input-group-addon>
+        <span sc-input-group-text>
+          <svg si-search-icon></svg>
+        </span>
+      </div>
+      <input sc-input-group-input placeholder="Search..." />
+      <div sc-input-group-addon align="inline-end">
+        <kbd sc-kbd>\u2318K</kbd>
+      </div>
+    </div>
+  \`,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class KbdInputGroupDemo {}`;
+}
