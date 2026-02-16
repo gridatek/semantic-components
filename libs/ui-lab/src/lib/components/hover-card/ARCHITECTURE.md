@@ -9,13 +9,13 @@ The hover card component uses a composable architecture pattern with four main c
 ```
 ScHoverCardProvider (Root Container)
 ├── ScHoverCardTrigger (Directive)
-└── ScHoverCardPortal
+└── ScHoverCardPortal (ng-template directive)
     └── ScHoverCard (Content)
 ```
 
 ### 1. ScHoverCardProvider (`hover-card-provider.ts`)
 
-**Role:** Root component that manages state and coordinates child components.
+**Role:** Root component that manages state, coordinates child components, and handles overlay positioning.
 
 **Key Responsibilities:**
 
@@ -23,6 +23,9 @@ ScHoverCardProvider (Root Container)
 - Provides configuration (side, align, delays)
 - Coordinates animation timing with overlay lifecycle
 - Exposes trigger origin for positioning
+- Uses CDK `ConnectedOverlay` for positioning
+- Maps `side` + `align` to 12 positioning configurations
+- Renders portal content via `ngTemplateOutlet`
 
 **Important Signals:**
 
@@ -44,14 +47,12 @@ overlayOpen: Signal<boolean>; // Physical state - "is DOM mounted?"
 
 ### 3. ScHoverCardPortal (`hover-card-portal.ts`)
 
-**Role:** Manages the CDK overlay and positioning.
+**Role:** Simple directive on `ng-template` that captures a `TemplateRef` for portal content.
 
 **Key Responsibilities:**
 
-- Uses CDK `ConnectedOverlay` for positioning
-- Maps `side` + `align` to 12 positioning configurations
-- Binds overlay visibility to `provider.overlayOpen()`
-- Handles positioning offsets (±4px)
+- Captures `TemplateRef` of the `ng-template` it's placed on
+- Provider queries it via `contentChild` and renders it using `ngTemplateOutlet`
 
 ### 4. ScHoverCard (`hover-card.ts`)
 
@@ -145,9 +146,9 @@ With two signals:
      this.state.set(isOpen ? 'open' : 'closed');
    });
 
-   // state = 'open' → Triggers entry animation:
-   // - animate-in fade-in-0 zoom-in-95
-   // - slide-in-from-{direction}
+   // state = 'open' → data-open attribute set → Triggers entry animation:
+   // - data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95
+   // - data-[side=...]:slide-in-from-{direction}
    ```
 
 ### Closing Sequence
@@ -173,15 +174,10 @@ With two signals:
 
    ```typescript
    // In ScHoverCard:
-   effect(() => {
-     const isOpen = this.hoverCardProvider.open();
-     this.state.set(isOpen ? 'open' : 'closed'); // Sets to 'closed'
-   });
-
-   // state = 'closed' → Triggers exit animation:
-   // - data-[state=closed]:animate-out
-   // - data-[state=closed]:fade-out-0
-   // - data-[state=closed]:zoom-out-95
+   // state = 'closed' → data-closed attribute set → Triggers exit animation:
+   // - data-closed:animate-out
+   // - data-closed:fade-out-0
+   // - data-closed:zoom-out-95
    ```
 
 4. **Animation completes → DOM cleanup**
@@ -231,18 +227,16 @@ User action: hover away
 
 ## Animation Classes
 
-Entry animations (applied when `state = 'open'`):
+Entry animations (applied via `data-open` attribute):
 
 ```css
-animate-in fade-in-0 zoom-in-95 duration-100
+data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 duration-100
 ```
 
-Exit animations (applied when `state = 'closed'` via data attributes):
+Exit animations (applied via `data-closed` attribute):
 
 ```css
-data-[state=closed]:animate-out
-data-[state=closed]:fade-out-0
-data-[state=closed]:zoom-out-95
+data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95
 ```
 
 Directional slides (based on `data-side` attribute):
@@ -256,7 +250,7 @@ data-[side=top]:slide-in-from-bottom-2
 
 ## Positioning System
 
-The portal supports 12 position combinations:
+The provider supports 12 position combinations:
 
 **Sides:** `top` | `right` | `bottom` | `left`
 **Alignments:** `start` | `center` | `end`
@@ -285,19 +279,23 @@ Example:
 
 The provider component manages shared state and configuration that child components can inject.
 
-### 2. Signal-based Reactivity
+### 2. ng-template Portal Pattern
+
+The portal is a lightweight directive on `ng-template` that captures a `TemplateRef`. The provider queries it via `contentChild` and renders it using `ngTemplateOutlet` inside the CDK overlay. This avoids extra DOM elements and allows clean separation of content from overlay logic.
+
+### 3. Signal-based Reactivity
 
 All state is managed through Angular signals for fine-grained reactivity.
 
-### 3. Effect-based Synchronization
+### 4. Effect-based Synchronization
 
 Effects automatically sync derived state (like animation state from open state).
 
-### 4. Delayed Cleanup Pattern
+### 5. Delayed Cleanup Pattern
 
 Separating logical state from physical DOM state enables animations to complete before cleanup.
 
-### 5. Composable Architecture
+### 6. Composable Architecture
 
 Each component has a single responsibility and can be composed together for flexible usage.
 
@@ -318,24 +316,12 @@ The hover card uses a more modular component-based approach, while the tooltip u
 
 ## Usage Example
 
-```typescript
+```html
 <div sc-hover-card-provider side="bottom" align="center">
-  <button sc-hover-card-trigger>
-    Hover me
-  </button>
+  <button sc-hover-card-trigger>Hover me</button>
 
-  <div sc-hover-card-portal>
-    <div sc-hover-card>
-      This is the hover card content!
-    </div>
-  </div>
+  <ng-template scHoverCardPortal>
+    <div sc-hover-card>This is the hover card content!</div>
+  </ng-template>
 </div>
 ```
-
-## Future Considerations
-
-- Add arrow/pointer support
-- Support collision detection and auto-repositioning
-- Add focus trap for accessibility
-- Support controlled mode (external state management)
-- Add animation duration configuration
