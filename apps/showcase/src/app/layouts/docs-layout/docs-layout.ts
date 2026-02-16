@@ -165,12 +165,12 @@ import { ConfigService } from '../../services/config.service';
                     <li sc-sidebar-menu-sub-item>
                       <a
                         sc-sidebar-menu-sub-button
-                        routerLink="/docs/getting-started/core"
+                        routerLink="/docs/getting-started/ui"
                         routerLinkActive
                         #coreRla="routerLinkActive"
                         [isActive]="coreRla.isActive"
                       >
-                        <span>UI Core</span>
+                        <span>UI</span>
                       </a>
                     </li>
                     @if (devMode()) {

@@ -34,7 +34,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
             &#64;semantic-components/ui-lab
           </code>
           package. This contains experimental and advanced components. Requires
-          the core library to be installed first.
+          the ui library to be installed first.
         </p>
       </div>
 

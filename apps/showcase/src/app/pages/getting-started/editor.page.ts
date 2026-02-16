@@ -34,7 +34,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
             &#64;semantic-components/editor
           </code>
           package. Provides a rich text editor powered by Tiptap. Requires the
-          core library to be installed first.
+          ui library to be installed first.
         </p>
       </div>
 

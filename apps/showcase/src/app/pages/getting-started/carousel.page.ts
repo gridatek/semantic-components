@@ -33,7 +33,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
             &#64;semantic-components/carousel
           </code>
-          package. Requires the core library to be installed first.
+          package. Requires the ui library to be installed first.
         </p>
       </div>
 

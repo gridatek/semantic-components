@@ -34,7 +34,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
             &#64;semantic-components/code
           </code>
           package. Provides code viewer and code editor components powered by
-          Shiki. Requires the core library to be installed first.
+          Shiki. Requires the ui library to be installed first.
         </p>
       </div>
 

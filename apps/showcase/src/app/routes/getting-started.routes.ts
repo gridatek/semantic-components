@@ -24,8 +24,8 @@ export const gettingStartedRoutes: Route[] = [
           import('../pages/getting-started/prerequisites.page'),
       },
       {
-        path: 'core',
-        title: 'UI Core - Semantic Components',
+        path: 'ui',
+        title: 'UI - Semantic Components',
         loadComponent: () => import('../pages/getting-started/ui.page'),
       },
       {

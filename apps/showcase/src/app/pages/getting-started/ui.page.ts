@@ -29,7 +29,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Core Library</h1>
+        <h1 class="text-3xl font-bold tracking-tight">UI</h1>
         <p class="text-muted-foreground">
           Install and configure the core
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
