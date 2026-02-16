@@ -120,9 +120,9 @@ export class ScTooltipManager {
     config: ScTooltipConfig,
     tooltipId: string,
   ): void {
-    // Close any existing tooltip first (singleton behavior)
+    // Immediately dispose any existing tooltip (skip close animation to avoid race conditions)
     if (this.overlayRef) {
-      this.hide();
+      this.disposeTooltip();
     }
 
     this.currentTooltipId = tooltipId;
