@@ -4,25 +4,31 @@ A set of Angular components for creating accessible popovers with shadcn/ui styl
 
 ## Architecture
 
-The components follow a dependency injection (DI) pattern where child components inject the parent `ScPopoverProvider` to access shared state.
+The components follow a dependency injection (DI) pattern where child components inject the parent `ScPopoverProvider` to access shared state. The portal is an `ng-template` directive that captures a `TemplateRef`, rendered by the provider via `ngTemplateOutlet` inside a CDK connected overlay.
 
 ```
-ScPopoverProvider (root wrapper - manages open state, side, align)
+ScPopoverProvider (root wrapper - manages open state, side, align, overlay)
 ├── ScPopoverTrigger (button that toggles popover)
-└── ScPopoverPortal (overlay positioning with CDK)
+└── ng-template[scPopoverPortal] (template reference for overlay content)
     └── ScPopover (floating dialog panel)
+        ├── ScPopoverHeader (optional header with title/description)
+        │   ├── ScPopoverTitle (popover title)
+        │   └── ScPopoverDescription (popover description)
         └── ScPopoverClose (optional close button)
 ```
 
 ## Components
 
-| Component           | Selector                     | Description                          |
-| ------------------- | ---------------------------- | ------------------------------------ |
-| `ScPopoverProvider` | `div[sc-popover-provider]`   | Root wrapper, manages state          |
-| `ScPopoverTrigger`  | `button[sc-popover-trigger]` | Button that toggles the popover      |
-| `ScPopoverPortal`   | `div[sc-popover-portal]`     | Overlay positioning with CDK         |
-| `ScPopover`         | `div[sc-popover]`            | Floating dialog panel                |
-| `ScPopoverClose`    | `button[sc-popover-close]`   | Optional button to close the popover |
+| Component              | Selector                       | Description                            |
+| ---------------------- | ------------------------------ | -------------------------------------- |
+| `ScPopoverProvider`    | `div[sc-popover-provider]`     | Root wrapper, manages state & overlay  |
+| `ScPopoverTrigger`     | `button[sc-popover-trigger]`   | Button that toggles the popover        |
+| `ScPopoverPortal`      | `ng-template[scPopoverPortal]` | Template reference for overlay content |
+| `ScPopover`            | `div[sc-popover]`              | Floating dialog panel                  |
+| `ScPopoverClose`       | `button[sc-popover-close]`     | Optional button to close the popover   |
+| `ScPopoverHeader`      | `div[sc-popover-header]`       | Optional header container              |
+| `ScPopoverTitle`       | `[sc-popover-title]`           | Popover title text                     |
+| `ScPopoverDescription` | `p[sc-popover-description]`    | Popover description text               |
 
 ## Usage
 
@@ -31,12 +37,14 @@ ScPopoverProvider (root wrapper - manages open state, side, align)
 ```html
 <div sc-popover-provider>
   <button sc-popover-trigger>Open Popover</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>
-      <h4 class="font-medium">Title</h4>
-      <p class="text-sm text-muted-foreground">Content goes here.</p>
+      <div sc-popover-header>
+        <h4 sc-popover-title>Title</h4>
+        <p sc-popover-description>Content goes here.</p>
+      </div>
     </div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -46,33 +54,33 @@ ScPopoverProvider (root wrapper - manages open state, side, align)
 <!-- Top -->
 <div sc-popover-provider side="top">
   <button sc-popover-trigger>Top</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>Content</div>
-  </div>
+  </ng-template>
 </div>
 
 <!-- Right -->
 <div sc-popover-provider side="right">
   <button sc-popover-trigger>Right</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>Content</div>
-  </div>
+  </ng-template>
 </div>
 
 <!-- Bottom (default) -->
 <div sc-popover-provider side="bottom">
   <button sc-popover-trigger>Bottom</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>Content</div>
-  </div>
+  </ng-template>
 </div>
 
 <!-- Left -->
 <div sc-popover-provider side="left">
   <button sc-popover-trigger>Left</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>Content</div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -82,25 +90,25 @@ ScPopoverProvider (root wrapper - manages open state, side, align)
 <!-- Align start -->
 <div sc-popover-provider align="start">
   <button sc-popover-trigger>Align Start</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>Content</div>
-  </div>
+  </ng-template>
 </div>
 
 <!-- Align center (default) -->
 <div sc-popover-provider align="center">
   <button sc-popover-trigger>Align Center</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>Content</div>
-  </div>
+  </ng-template>
 </div>
 
 <!-- Align end -->
 <div sc-popover-provider align="end">
   <button sc-popover-trigger>Align End</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>Content</div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -109,14 +117,14 @@ ScPopoverProvider (root wrapper - manages open state, side, align)
 ```html
 <div sc-popover-provider>
   <button sc-popover-trigger>Open</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover class="relative">
       <button sc-popover-close>
         <svg><!-- X icon --></svg>
       </button>
       <p>Content with close button</p>
     </div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -127,9 +135,9 @@ ScPopoverProvider (root wrapper - manages open state, side, align)
   template: `
     <div sc-popover-provider [(open)]="isOpen">
       <button sc-popover-trigger>Toggle</button>
-      <div sc-popover-portal>
+      <ng-template scPopoverPortal>
         <div sc-popover>Content</div>
-      </div>
+      </ng-template>
     </div>
   `,
 })
@@ -143,28 +151,45 @@ export class MyComponent {
 ```html
 <div sc-popover-provider>
   <button sc-popover-trigger>Update dimensions</button>
-  <div sc-popover-portal>
+  <ng-template scPopoverPortal>
     <div sc-popover>
-      <div class="grid gap-4">
-        <div class="space-y-2">
-          <h4 class="font-medium leading-none">Dimensions</h4>
-          <p class="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+      <div sc-popover-header>
+        <h4 sc-popover-title>Dimensions</h4>
+        <p sc-popover-description>Set the dimensions for the layer.</p>
+      </div>
+      <div class="grid gap-2">
+        <div class="grid grid-cols-3 items-center gap-4">
+          <label for="width">Width</label>
+          <input id="width" value="100%" class="col-span-2" />
         </div>
-        <div class="grid gap-2">
-          <div class="grid grid-cols-3 items-center gap-4">
-            <label for="width">Width</label>
-            <input id="width" value="100%" class="col-span-2" />
-          </div>
-          <div class="grid grid-cols-3 items-center gap-4">
-            <label for="height">Height</label>
-            <input id="height" value="25px" class="col-span-2" />
-          </div>
+        <div class="grid grid-cols-3 items-center gap-4">
+          <label for="height">Height</label>
+          <input id="height" value="25px" class="col-span-2" />
         </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>
 ```
+
+## Animation
+
+The popover uses `data-open`/`data-closed` boolean attributes for animation state, and `data-side` for directional slide-in animations.
+
+### Animation Classes
+
+```
+Entry: data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 duration-100
+Exit:  data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95
+Slide: data-[side=bottom]:slide-in-from-top-2
+       data-[side=top]:slide-in-from-bottom-2
+       data-[side=left]:slide-in-from-right-2
+       data-[side=right]:slide-in-from-left-2
+```
+
+### CSS Pattern
+
+The provider uses `display: contents` to be invisible in layout, letting the trigger and overlay render as if the provider wrapper doesn't exist.
 
 ## Keyboard Navigation
 
@@ -189,44 +214,6 @@ export class MyComponent {
 | `center` | Centered with trigger (default)  |
 | `start`  | Aligned to start edge of trigger |
 | `end`    | Aligned to end edge of trigger   |
-
-## How It Works
-
-### State Management
-
-`ScPopoverProvider` uses a `model` signal for the `open` state:
-
-```typescript
-readonly open = model<boolean>(false);
-```
-
-`ScPopoverTrigger` toggles the state on click:
-
-```typescript
-togglePopover(): void {
-  this.popover.open.update((v) => !v);
-}
-```
-
-### Positioning
-
-`ScPopoverPortal` uses CDK connected overlay with positions computed from `side` and `align`:
-
-```typescript
-protected readonly position = computed(() => {
-  const side = this.popover.side();
-  const align = this.popover.align();
-  return positionMap[side][align];
-});
-```
-
-### Outside Click
-
-The popover closes when clicking outside:
-
-```html
-<ng-template (overlayOutsideClick)="closePopover()"></ng-template>
-```
 
 ## Accessibility
 

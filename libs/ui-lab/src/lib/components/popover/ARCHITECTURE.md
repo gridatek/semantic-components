@@ -2,23 +2,66 @@
 
 ## Overview
 
-The popover component uses a simplified two-signal architecture pattern to ensure smooth animations before DOM cleanup. Unlike dialog/sheet/drawer components, popover has **no backdrop** and uses `cdkConnectedOverlay` for positioning relative to a trigger element.
+The popover component uses a two-signal architecture pattern to ensure smooth animations before DOM cleanup. Unlike dialog/sheet/drawer components, popover has **no backdrop** and uses `cdkConnectedOverlay` for positioning relative to a trigger element.
 
 **Popover-Specific Features:**
 
 - Uses `cdkConnectedOverlay` directive for trigger-relative positioning
 - No backdrop (closes on outside click via `overlayOutsideClick`)
 - Positioned dynamically based on `side` and `align` inputs
-- Lightweight fade + zoom animations (200ms)
+- Lightweight fade + zoom + slide animations (100ms)
+- `data-open`/`data-closed` boolean attributes for animation state
+- `data-side` attribute for directional slide-in animations
+- Provider uses `display: contents` CSS to be invisible in layout
 
 ## Component Structure
 
 ```
-ScPopoverProvider (Root State Manager)
-└── ScPopoverTrigger (Trigger Element - provides CdkOverlayOrigin)
-└── ScPopoverPortal (CDK Connected Overlay Manager)
+ScPopoverProvider (Root State Manager + Overlay Host)
+├── ScPopoverTrigger (Trigger Element - provides CdkOverlayOrigin)
+└── ng-template[scPopoverPortal] (Template captured via TemplateRef)
     └── ScPopover (Popover Content - positioned relative to trigger)
-        └── ScPopoverClose (Optional)
+        ├── ScPopoverHeader (Optional header container)
+        │   ├── ScPopoverTitle (Title text)
+        │   └── ScPopoverDescription (Description text)
+        └── ScPopoverClose (Optional close button)
+```
+
+### Portal as Directive
+
+The `ScPopoverPortal` is a **directive** on `ng-template`, not a component. It captures the `TemplateRef` which the provider renders inside the CDK connected overlay using `ngTemplateOutlet`.
+
+```typescript
+// Portal: Simple directive capturing TemplateRef
+@Directive({ selector: 'ng-template[scPopoverPortal]' })
+export class ScPopoverPortal {
+  readonly templateRef = inject(TemplateRef);
+}
+
+// Provider: Renders the portal content inside CDK overlay
+template: `
+  <ng-content />
+  @if (origin(); as origin) {
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="origin"
+      [cdkConnectedOverlayOpen]="overlayOpen()"
+      [cdkConnectedOverlayPositions]="[position()]"
+      (overlayOutsideClick)="close()"
+      (overlayKeydown)="onKeydown($event)"
+    >
+      <ng-container [ngTemplateOutlet]="popoverPortal().templateRef" />
+    </ng-template>
+  }
+`;
+```
+
+### Provider CSS: `display: contents`
+
+The provider uses `display: contents` so it doesn't create a layout box. This means the trigger and other content render as if the provider wrapper doesn't exist in the DOM layout.
+
+```typescript
+protected readonly class = computed(() => cn('contents', this.classInput()));
 ```
 
 ## The Two-Signal Pattern
@@ -56,514 +99,120 @@ readonly overlayOpen = signal<boolean>(false);
 - Stays `true` during close animation (critical!)
 - Only becomes `false` after animation completes
 - Ensures animation can play before DOM removal
-- Bound to `[cdkConnectedOverlayOpen]` in the portal template
-
-### Why Both Are Needed
-
-**The Problem:**
-
-CDK connected overlay's lifecycle is tied to the `cdkConnectedOverlayOpen` input:
-
-```typescript
-// ❌ This doesn't work:
-<ng-template [cdkConnectedOverlayOpen]="open()">
-  <!-- Content appears/disappears instantly -->
-  <!-- No time for close animation to play! -->
-</ng-template>
-```
-
-**The Solution:**
-
-Separate signals allow animation completion:
-
-```typescript
-// ✅ This works:
-<ng-template [cdkConnectedOverlayOpen]="overlayOpen()">
-  <!-- Physical state - removed AFTER animation -->
-</ng-template>
-
-// Meanwhile, open() controls animations:
-if (open()) {
-  // Logical state
-  state = 'open'; // Entry animation
-} else {
-  state = 'closed'; // Exit animation (DOM still mounted!)
-}
-```
+- Bound to `[cdkConnectedOverlayOpen]` in the provider template
 
 ## Animation Architecture
 
-### Single Animated Layer
+### Animation State Attributes
 
-Unlike dialog/sheet/drawer, popover has only **one animated element**:
+The popover uses `data-open`/`data-closed` boolean attributes instead of `data-state`:
 
-1. **Popover Content** (200ms fade + zoom)
-   - Zoom + Fade effects
-   - Managed by Tailwind animate classes
-   - Completion detected via `animationend` event
-   - No backdrop to coordinate with
+```typescript
+host: {
+  '[attr.data-open]': 'state() === "open" ? true : null',
+  '[attr.data-closed]': 'state() === "closed" ? true : null',
+  '[attr.data-side]': 'popover.side()',
+}
+```
 
-### Popover Content Animations
-
-Applied via Tailwind classes in `popover.ts`:
+### Animation Classes
 
 ```typescript
 protected readonly class = computed(() =>
   cn(
     // Base styles
-    'bg-popover text-popover-foreground z-50 w-72 rounded-md border p-4 shadow-md outline-none',
+    'bg-popover text-popover-foreground z-50 w-72 rounded-lg ring-1 ring-foreground/10 flex flex-col gap-2.5 p-2.5 text-sm shadow-md outline-hidden',
 
-    // Entry animation (fade + zoom in)
-    'animate-in fade-in-0 zoom-in-95 duration-200',
+    // Entry animation
+    'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 duration-100',
 
-    // Exit animation (triggered by data-state="closed")
-    'data-[state=closed]:animate-out',
-    'data-[state=closed]:fade-out-0',
-    'data-[state=closed]:zoom-out-95',
-    'data-[state=closed]:duration-200',
+    // Exit animation
+    'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+
+    // Directional slide-in based on side
+    'data-[side=bottom]:slide-in-from-top-2',
+    'data-[side=left]:slide-in-from-right-2',
+    'data-[side=right]:slide-in-from-left-2',
+    'data-[side=top]:slide-in-from-bottom-2',
   ),
 );
 ```
 
-**Animation Flow:**
+### Animation Flow
 
-1. `state` signal changes from `'open'` to `'closed'`
-2. `data-state` attribute updates to `"closed"`
-3. Tailwind applies exit animation classes
-4. Animation plays for 200ms
-5. `animationend` event fires
-6. Provider sets `overlayOpen = false`
-7. CDK removes the overlay from DOM
+**Opening:**
 
-**Why Shorter Duration (200ms vs 300ms)?**
+1. `open` set to `true`
+2. Provider effect sets `overlayOpen = true` (DOM mounts)
+3. Popover effect sets `state = 'open'`
+4. `data-open` attribute triggers entry animation (fade + zoom + slide)
 
-Popovers are lightweight UI elements that should appear/disappear quickly. The shorter 200ms duration makes them feel more responsive while still providing smooth visual feedback.
+**Closing:**
 
-## Complete Animation Timeline
+1. `open` set to `false`
+2. Popover effect sets `state = 'closed'`
+3. `data-closed` attribute triggers exit animation
+4. `overlayOpen` stays `true` (DOM remains for animation)
+5. `animationend` fires → `onPopoverAnimationComplete()`
+6. `overlayOpen` set to `false` → CDK removes overlay
 
-### Opening Sequence
+## Sub-Components
 
-```
-User clicks trigger:
-│
-├─ t=0ms: Trigger calls open.set(true)
-│  │
-│  └─ Provider effect:
-│     └─ overlayOpen.set(true)  ← Effect responds immediately
-│        └─ cdkConnectedOverlayOpen becomes true
-│           └─ CDK attaches connected overlay  ← DOM mounted
-│
-├─ t=0ms: Popover effect (triggered by open):
-│  └─ state.set('open')
-│     └─ data-state="open" → Entry animation starts
-│        ├─ fade-in-0
-│        ├─ zoom-in-95
-│        └─ duration-200
-│
-├─ t=0-200ms: Animation plays
-│
-└─ t=200ms: Animation complete, popover visible
-```
+### ScPopoverHeader
 
-### Closing Sequence
-
-```
-User clicks outside/presses Escape/clicks close button:
-│
-├─ t=0ms: Portal calls open.set(false)
-│  │
-│  └─ Popover effect (triggered by open):
-│     └─ state.set('closed')  ← Triggers animation
-│        └─ data-state="closed" → Exit animation starts
-│           ├─ animate-out
-│           ├─ fade-out-0
-│           ├─ zoom-out-95
-│           └─ duration-200
-│
-├─ IMPORTANT: overlayOpen is STILL true!
-│  └─ DOM remains mounted so animation can play
-│  └─ cdkConnectedOverlayOpen still true
-│
-├─ t=0-200ms: Animation plays
-│
-├─ t=~200ms: Popover animation completes
-│  └─ onAnimationEnd(event) fires
-│     └─ if (state === 'closed' && target === element):
-│        └─ provider.onPopoverAnimationComplete()
-│           └─ overlayOpen.set(false)  ← Cleanup triggered!
-│
-└─ t=~200ms: cdkConnectedOverlayOpen becomes false
-   └─ CDK detaches overlay  ← DOM removed cleanly after animation
-```
-
-## No Backdrop Coordination
-
-Unlike dialog/sheet/drawer, popover doesn't need to coordinate multiple animations:
-
-- ❌ No backdrop animation
-- ❌ No `animationsCompleted` counter
-- ✅ Single animation to track (popover itself)
-- ✅ Simpler cleanup logic
+Container for title and description with consistent spacing:
 
 ```typescript
-// Popover (simplified - no counter needed)
-onPopoverAnimationComplete(): void {
-  if (!this.open()) {
-    this.overlayOpen.set(false);  // Direct cleanup
-  }
-}
+@Directive({ selector: 'div[sc-popover-header]' })
+// Classes: 'flex flex-col gap-0.5 text-sm'
 ```
 
-Compare with dialog/sheet/drawer:
+### ScPopoverTitle
+
+Title text with medium font weight:
 
 ```typescript
-// Dialog/Sheet/Drawer (complex - counter needed)
-onDialogAnimationComplete(): void {
-  if (!this.open()) {
-    this.animationsCompleted.update(n => n + 1);  // Increment counter
-  }
-}
-
-onBackdropAnimationComplete(): void {
-  if (!this.open()) {
-    this.animationsCompleted.update(n => n + 1);  // Wait for both
-  }
-}
+@Directive({ selector: '[sc-popover-title]' })
+// Classes: 'font-medium'
 ```
 
-## State Synchronization
+### ScPopoverDescription
 
-### Provider Constructor Effects
+Description text with muted color:
 
 ```typescript
-constructor() {
-  // Effect: Sync overlayOpen with open for OPENING
-  effect(() => {
-    if (this.open()) {
-      // Opening: Mount DOM immediately so animation can start
-      this.overlayOpen.set(true);
-    }
-    // Note: When closing (open = false), overlayOpen stays true
-    // until animation completes (handled by onPopoverAnimationComplete)
-  });
-}
+@Directive({ selector: 'p[sc-popover-description]' })
+// Classes: 'text-muted-foreground'
 ```
 
-**Why no second effect?**
+### ScPopoverClose
 
-Unlike dialog/sheet/drawer, popover doesn't need a second effect to check animation counter completion. Instead, `onPopoverAnimationComplete()` directly sets `overlayOpen = false`.
-
-### Popover Constructor Effects
+Close button directive:
 
 ```typescript
-constructor() {
-  // Effect: Sync animation state with logical state
-  effect(() => {
-    const isOpen = this.popover.open();
-    this.state.set(isOpen ? 'open' : 'closed');
-  });
-}
+@Directive({ selector: 'button[sc-popover-close]' })
+// Calls popover.open.set(false) on click
 ```
-
-### Portal Template Binding
-
-```typescript
-// Portal template
-<ng-template
-  [cdkConnectedOverlayOpen]="popover.overlayOpen()"
-  [cdkConnectedOverlay]="{ origin, usePopover: 'inline' }"
-  [cdkConnectedOverlayPositions]="[position()]"
-  (overlayOutsideClick)="closePopover()"
-  (overlayKeydown)="onKeydown($event)"
->
-  <ng-content />
-</ng-template>
-```
-
-**Key Binding:**
-
-- `[cdkConnectedOverlayOpen]="popover.overlayOpen()"` - Uses **physical state**, not logical state
-- This delays DOM removal until animation completes
-
-## Animation Completion Handling
-
-### Popover Component
-
-```typescript
-protected onAnimationEnd(event: AnimationEvent): void {
-  // Only trigger cleanup when close animation completes
-  if (
-    this.state() === 'closed' &&
-    event.target === this.elementRef.nativeElement
-  ) {
-    this.popover.onPopoverAnimationComplete();
-  }
-}
-```
-
-**Why check `event.target`?**
-
-- `animationend` bubbles from child elements
-- We only care about the popover's own animation
-- Prevents false triggers from child element animations
-
-### Provider Component
-
-```typescript
-/**
- * Called by popover when its close animation completes
- */
-onPopoverAnimationComplete(): void {
-  if (!this.open()) {
-    this.overlayOpen.set(false);  // Direct cleanup (no counter)
-  }
-}
-```
-
-**Why check `!this.open()` before setting?**
-
-- User might have reopened popover during close animation
-- Guards against race conditions
-- Example: User clicks outside (close starts), then immediately clicks trigger again (reopens)
-- Without this check, overlayOpen would incorrectly be set to false for the new open cycle
 
 ## Comparison: Popover vs Dialog/Sheet/Drawer
 
-### Similarities
-
-Both use the two-signal pattern:
-
-- ✅ Logical state (`open`) drives animations
-- ✅ Physical state (`overlayOpen`) controls DOM lifecycle
-- ✅ Event-driven animation completion
-- ✅ Guard pattern to prevent race conditions
-
-### Differences
-
-| Feature           | Popover                                | Dialog/Sheet/Drawer     |
-| ----------------- | -------------------------------------- | ----------------------- |
-| **Backdrop**      | ❌ None                                | ✅ ScBackdrop component |
-| **Positioning**   | Trigger-relative (cdkConnectedOverlay) | Global (Overlay.create) |
-| **Animations**    | 1 (popover only)                       | 2 (content + backdrop)  |
-| **Coordination**  | Direct cleanup                         | Signal counter          |
-| **Duration**      | 200ms                                  | 300ms                   |
-| **Outside Click** | overlayOutsideClick                    | backdropClick           |
-
-## Key Design Decisions
-
-### 1. Separation of Concerns
-
-**Decision:** Split logical state (`open`) from physical state (`overlayOpen`)
-
-**Why:**
-
-- Logical state drives animations
-- Physical state drives DOM lifecycle (via cdkConnectedOverlayOpen)
-- Animation needs time to complete before DOM removal
-- Clean separation makes flow easier to understand
-
-### 2. Direct Cleanup (No Counter)
-
-**Decision:** Set `overlayOpen = false` directly in animation complete handler
-
-**Why:**
-
-- Only one animation to track (no backdrop)
-- No need for counter complexity
-- Simpler code, easier to understand
-- Still uses guard pattern for safety
-
-### 3. Guard Pattern
-
-**Decision:** Check `!open()` before setting `overlayOpen = false`
-
-**Why:**
-
-- User might reopen during close animation
-- Prevents overlayOpen from being set to false during new open cycle
-- Same guard pattern as dialog/sheet/drawer for consistency
-
-### 4. Effect-Based Reactivity
-
-**Decision:** Use Angular effects instead of manual subscriptions
-
-**Why:**
-
-- Automatic cleanup on component destruction
-- Declarative: describes "what" not "how"
-- Runs automatically when dependencies change
-- Easier to reason about than imperative code
-
-### 5. Shorter Animation Duration
-
-**Decision:** Use 200ms instead of 300ms for animations
-
-**Why:**
-
-- Popovers are lightweight, ephemeral UI elements
-- Should feel snappy and responsive
-- Still long enough for smooth visual feedback
-- Consistent with typical popover/tooltip timing
-
-## Animation Classes Reference
-
-### Popover Content Classes
-
-```typescript
-// Entry animation
-'animate-in fade-in-0 zoom-in-95 duration-200';
-
-// Exit animation (via data-state="closed")
-'data-[state=closed]:animate-out';
-'data-[state=closed]:fade-out-0';
-'data-[state=closed]:zoom-out-95';
-'data-[state=closed]:duration-200';
-```
-
-## Accessibility Considerations
-
-The animation system preserves accessibility:
-
-1. **Focus Management:** Popover receives tabindex="-1" for programmatic focus
-2. **ARIA Attributes:** `role="dialog"` set before animations start
-3. **Screen Readers:** Announce popover immediately (not after animation)
-4. **Keyboard:** Escape key works during animations to trigger close
-5. **Outside Click:** Click outside works during animations to trigger close
-6. **Reduced Motion:** Could add `@media (prefers-reduced-motion)` support
-
-## Performance Considerations
-
-### Efficient Rendering
-
-- Uses `ChangeDetectionStrategy.OnPush` everywhere
-- Effects only run when dependencies change
-- No manual subscriptions to manage
-- CDK handles overlay lifecycle efficiently
-
-### Animation Performance
-
-- CSS animations (GPU accelerated)
-- Opacity and transform (composited properties)
-- No layout thrashing
-- Minimal JavaScript during animation
-
-### Memory Management
-
-- Effects auto-cleanup on destroy
-- No timeout leaks (event-driven approach)
-- CDK detaches overlay after use
-- No memory leaks
-
-## Connected Overlay Benefits
-
-Using `cdkConnectedOverlay` provides:
-
-1. **Automatic Positioning**: Positions relative to trigger with collision detection
-2. **Flexible Alignment**: Configure side (top/right/bottom/left) and align (start/center/end)
-3. **Scroll Handling**: Repositions on scroll automatically
-4. **Viewport Constraints**: Stays within viewport bounds
-5. **Direction Detection**: Can flip to opposite side if not enough space
-
-## Future Enhancements
-
-### Potential Improvements
-
-1. **Variable Animation Durations:**
-   - Input property for animation duration
-   - Configurable timing for different use cases
-
-2. **Animation Events:**
-   - Output events for animation start/end
-   - External components can react to animation state
-
-3. **Reduced Motion Support:**
-   - Detect `prefers-reduced-motion`
-   - Instant show/hide if user prefers
-   - Keep accessibility benefits
-
-4. **Custom Positioning:**
-   - Support for custom ConnectedPosition configurations
-   - Fine-grained offset control
-
-5. **Hover Triggers:**
-   - Support for hover-to-open (with delay)
-   - Tooltip-like behavior option
-
-## Testing Considerations
-
-### What to Test
-
-1. **State Transitions:**
-   - open: false → true → false
-   - overlayOpen follows correctly
-   - state syncs with open
-
-2. **Animation Timing:**
-   - Animation plays for full duration (200ms)
-   - DOM not removed early
-   - Popover fades and zooms correctly
-
-3. **Positioning:**
-   - All side/align combinations work
-   - Collision detection repositions correctly
-   - Stays within viewport bounds
-
-4. **Interaction:**
-   - Outside click closes popover
-   - Escape key closes popover
-   - Trigger reopens after close
-
-5. **Edge Cases:**
-   - Rapid open/close
-   - Open during close animation
-   - Close during open animation
-
-6. **Cleanup:**
-   - No memory leaks
-   - Effects unsubscribe
-   - No hanging timeouts
-
-### Testing Strategy
-
-```typescript
-// Example test structure
-describe('Popover Animations', () => {
-  it('should keep DOM mounted during close animation', async () => {
-    // Open popover
-    provider.open.set(true);
-    fixture.detectChanges();
-
-    // Close popover
-    provider.open.set(false);
-    fixture.detectChanges();
-
-    // Immediately after close - overlayOpen should still be true
-    expect(provider.overlayOpen()).toBe(true);
-
-    // After animation completes - overlayOpen should be false
-    await delay(300); // Buffer for 200ms animation
-    expect(provider.overlayOpen()).toBe(false);
-  });
-});
-```
-
-## Summary
-
-The popover animation architecture achieves smooth, reliable animations through:
-
-1. **Two-signal pattern:** Separates intent (`open`) from DOM lifecycle (`overlayOpen`)
-2. **Event-driven completion:** Popover explicitly signals when animation is done
-3. **Direct cleanup:** No counter needed (only one animation)
-4. **Reactive updates:** Effects respond to state changes automatically
-5. **Robust timing:** No assumptions, handles browser variations
-6. **CDK integration:** Works seamlessly with `cdkConnectedOverlay`
-
-This architecture provides:
-
-- ✅ Reliable animation completion detection
-- ✅ Clean separation of concerns
-- ✅ Simpler than multi-animation overlay components
-- ✅ No race conditions or timing assumptions
-- ✅ Debuggable signal-based state
-- ✅ Better user experience (smooth, never cut off)
-- ✅ Lightweight and performant (200ms animations)
+| Feature           | Popover                                | Dialog/Sheet/Drawer       |
+| ----------------- | -------------------------------------- | ------------------------- |
+| **Backdrop**      | None                                   | ScBackdrop component      |
+| **Positioning**   | Trigger-relative (cdkConnectedOverlay) | Global (Overlay.create)   |
+| **Animations**    | 1 (popover only)                       | 2 (content + backdrop)    |
+| **Coordination**  | Direct cleanup                         | Signal counter            |
+| **Duration**      | 100ms                                  | 300ms                     |
+| **Outside Click** | overlayOutsideClick                    | backdropClick             |
+| **Portal**        | ng-template directive                  | ng-template directive     |
+| **Provider CSS**  | `display: contents`                    | `display: contents`       |
+| **State attrs**   | `data-open`/`data-closed`              | `data-open`/`data-closed` |
+
+## Accessibility
+
+- `role="dialog"` on `ScPopover`
+- `aria-haspopup="dialog"` on the trigger
+- `aria-expanded` reflects open state on trigger
+- `tabindex="-1"` on popover for programmatic focus
+- Escape key closes the popover
+- Click outside closes the popover
