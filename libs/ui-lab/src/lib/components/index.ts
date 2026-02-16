@@ -1,7 +1,6 @@
 export * from './animated-counter';
 export * from './audio-player';
 export * from './avatar';
-export * from './avatar-group';
 export * from './barcode-scanner';
 export * from './breadcrumb';
 export * from './calendar';

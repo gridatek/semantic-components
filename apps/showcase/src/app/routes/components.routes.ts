@@ -51,12 +51,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/avatar/avatar-page'),
       },
       {
-        path: 'avatar-group',
-        title: 'Avatar Group - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/avatar-group/avatar-group-page'),
-      },
-      {
         path: 'badge',
         title: 'Badge - Semantic Components',
         loadComponent: () => import('../pages/docs/badge/badge-page'),

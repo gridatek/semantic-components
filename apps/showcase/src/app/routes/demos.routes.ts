@@ -191,53 +191,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/avatar-group',
-    children: [
-      {
-        path: 'basic-avatar-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/avatar-group/demos/basic-avatar-group-demo').then(
-            (m) => m.BasicAvatarGroupDemo,
-          ),
-      },
-      {
-        path: 'sizes-avatar-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/avatar-group/demos/sizes-avatar-group-demo').then(
-            (m) => m.SizesAvatarGroupDemo,
-          ),
-      },
-      {
-        path: 'spacing-avatar-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/avatar-group/demos/spacing-avatar-group-demo').then(
-            (m) => m.SpacingAvatarGroupDemo,
-          ),
-      },
-      {
-        path: 'max-count-avatar-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/avatar-group/demos/max-count-avatar-group-demo').then(
-            (m) => m.MaxCountAvatarGroupDemo,
-          ),
-      },
-      {
-        path: 'fallback-avatar-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/avatar-group/demos/fallback-avatar-group-demo').then(
-            (m) => m.FallbackAvatarGroupDemo,
-          ),
-      },
-      {
-        path: 'team-avatar-group-demo',
-        loadComponent: () =>
-          import('../pages/docs/avatar-group/demos/team-avatar-group-demo').then(
-            (m) => m.TeamAvatarGroupDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/badge',
     children: [
       {

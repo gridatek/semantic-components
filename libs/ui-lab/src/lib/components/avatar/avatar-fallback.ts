@@ -17,7 +17,8 @@ export class ScAvatarFallback {
   protected readonly class = computed(() => {
     const status = this.avatar.imageStatus();
     return cn(
-      'flex size-full items-center justify-center rounded-full bg-muted',
+      'bg-muted text-muted-foreground flex size-full items-center justify-center rounded-full text-sm',
+      'group-data-[size=sm]/avatar:text-xs',
       status === 'loaded' && 'hidden',
       this.classInput(),
     );

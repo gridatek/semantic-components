@@ -85,15 +85,6 @@ export const COMPONENTS: ComponentItem[] = [
     hidden: true,
   },
   {
-    name: 'Avatar Group',
-    path: 'avatar-group',
-    description: 'Stacked/overlapping avatars with overflow.',
-    status: 'Experimental',
-    library: 'ui-lab',
-    category: 'Data Display',
-    hidden: true,
-  },
-  {
     name: 'Badge',
     path: 'badge',
     description: 'Displays a small status indicator or label.',
