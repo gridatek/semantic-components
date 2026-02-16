@@ -30,6 +30,10 @@ export class BasicPopoverDemoContainer {
 } from '@angular/core';
 import {
   ScButton,
+  ScField,
+  ScFieldGroup,
+  ScInput,
+  ScLabel,
   ScPopover,
   ScPopoverDescription,
   ScPopoverHeader,
@@ -43,6 +47,10 @@ import {
   selector: 'app-basic-popover-demo',
   imports: [
     ScButton,
+    ScField,
+    ScFieldGroup,
+    ScInput,
+    ScLabel,
     ScPopover,
     ScPopoverDescription,
     ScPopoverHeader,
@@ -53,45 +61,31 @@ import {
   ],
   template: \`
     <div sc-popover-provider>
-      <button sc-button sc-popover-trigger variant="outline">Open Popover</button>
+      <button sc-button sc-popover-trigger variant="outline">
+        Open Popover
+      </button>
       <ng-template scPopoverPortal>
         <div sc-popover>
           <div sc-popover-header>
             <h4 sc-popover-title>Dimensions</h4>
             <p sc-popover-description>Set the dimensions for the layer.</p>
           </div>
-          <div class="grid gap-2">
-            <div class="grid grid-cols-3 items-center gap-4">
-              <label for="width" class="text-sm">Width</label>
-              <input
-                id="width"
-                value="100%"
-                class="col-span-2 h-8 rounded-md border border-input bg-transparent px-3 text-sm"
-              />
+          <div sc-field-group>
+            <div sc-field>
+              <label sc-label>Width</label>
+              <input sc-input value="100%" />
             </div>
-            <div class="grid grid-cols-3 items-center gap-4">
-              <label for="maxWidth" class="text-sm">Max. width</label>
-              <input
-                id="maxWidth"
-                value="300px"
-                class="col-span-2 h-8 rounded-md border border-input bg-transparent px-3 text-sm"
-              />
+            <div sc-field>
+              <label sc-label>Max. width</label>
+              <input sc-input value="300px" />
             </div>
-            <div class="grid grid-cols-3 items-center gap-4">
-              <label for="height" class="text-sm">Height</label>
-              <input
-                id="height"
-                value="25px"
-                class="col-span-2 h-8 rounded-md border border-input bg-transparent px-3 text-sm"
-              />
+            <div sc-field>
+              <label sc-label>Height</label>
+              <input sc-input value="25px" />
             </div>
-            <div class="grid grid-cols-3 items-center gap-4">
-              <label for="maxHeight" class="text-sm">Max. height</label>
-              <input
-                id="maxHeight"
-                value="none"
-                class="col-span-2 h-8 rounded-md border border-input bg-transparent px-3 text-sm"
-              />
+            <div sc-field>
+              <label sc-label>Max. height</label>
+              <input sc-input value="none" />
             </div>
           </div>
         </div>
