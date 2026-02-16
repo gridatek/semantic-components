@@ -1,5 +1,5 @@
 import { computed, Directive, input, signal } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 export type ScAvatarImageStatus = 'idle' | 'loading' | 'loaded' | 'error';
 export type ScAvatarSize = 'sm' | 'default' | 'lg';

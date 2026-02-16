@@ -1,5 +1,5 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
   selector: 'span[sc-avatar-badge]',
