@@ -19,7 +19,7 @@ export class ScAvatarImage implements OnInit {
   protected readonly class = computed(() => {
     const status = this.avatar.imageStatus();
     return cn(
-      'aspect-square size-full',
+      'aspect-square size-full rounded-full object-cover',
       status !== 'loaded' && 'hidden',
       this.classInput(),
     );
