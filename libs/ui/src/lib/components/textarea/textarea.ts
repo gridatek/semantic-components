@@ -1,5 +1,11 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { computed, Directive, inject, input } from '@angular/core';
+import {
+  booleanAttribute,
+  computed,
+  Directive,
+  inject,
+  input,
+} from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
@@ -22,6 +28,10 @@ export class ScTextarea {
   readonly variant = input<'default' | 'group'>('default');
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly disabledInput = input(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
 
   protected readonly dataSlot = computed(() =>
     this.variant() === 'group' ? 'input-group-control' : 'textarea',
@@ -39,7 +49,7 @@ export class ScTextarea {
   );
 
   readonly disabled = computed(
-    () => this.formField?.state().disabled() ?? false,
+    () => this.formField?.state().disabled() ?? this.disabledInput(),
   );
 
   protected readonly class = computed(() =>
