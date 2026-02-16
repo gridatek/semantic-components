@@ -53,6 +53,7 @@ import { Logo } from '../../components/logo/logo';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
 import { ComponentsService } from '../../services/components.service';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-docs-layout',
@@ -172,17 +173,20 @@ import { ComponentsService } from '../../services/components.service';
                         <span>UI Core</span>
                       </a>
                     </li>
-                    <li sc-sidebar-menu-sub-item>
-                      <a
-                        sc-sidebar-menu-sub-button
-                        routerLink="/docs/getting-started/ui-lab"
-                        routerLinkActive
-                        #uiLabRla="routerLinkActive"
-                        [isActive]="uiLabRla.isActive"
-                      >
-                        <span>UI Lab</span>
-                      </a>
-                    </li>
+                    @if (devMode()) {
+                      <li sc-sidebar-menu-sub-item>
+                        <a
+                          sc-sidebar-menu-sub-button
+                          routerLink="/docs/getting-started/ui-lab"
+                          routerLinkActive
+                          #uiLabRla="routerLinkActive"
+                          [isActive]="uiLabRla.isActive"
+                        >
+                          <span>UI Lab</span>
+                        </a>
+                      </li>
+                    }
+
                     <li sc-sidebar-menu-sub-item>
                       <a
                         sc-sidebar-menu-sub-button
@@ -194,28 +198,31 @@ import { ComponentsService } from '../../services/components.service';
                         <span>Carousel</span>
                       </a>
                     </li>
-                    <li sc-sidebar-menu-sub-item>
-                      <a
-                        sc-sidebar-menu-sub-button
-                        routerLink="/docs/getting-started/editor"
-                        routerLinkActive
-                        #editorRla="routerLinkActive"
-                        [isActive]="editorRla.isActive"
-                      >
-                        <span>Editor</span>
-                      </a>
-                    </li>
-                    <li sc-sidebar-menu-sub-item>
-                      <a
-                        sc-sidebar-menu-sub-button
-                        routerLink="/docs/getting-started/code"
-                        routerLinkActive
-                        #codeRla="routerLinkActive"
-                        [isActive]="codeRla.isActive"
-                      >
-                        <span>Code</span>
-                      </a>
-                    </li>
+
+                    @if (devMode()) {
+                      <li sc-sidebar-menu-sub-item>
+                        <a
+                          sc-sidebar-menu-sub-button
+                          routerLink="/docs/getting-started/editor"
+                          routerLinkActive
+                          #editorRla="routerLinkActive"
+                          [isActive]="editorRla.isActive"
+                        >
+                          <span>Editor</span>
+                        </a>
+                      </li>
+                      <li sc-sidebar-menu-sub-item>
+                        <a
+                          sc-sidebar-menu-sub-button
+                          routerLink="/docs/getting-started/code"
+                          routerLinkActive
+                          #codeRla="routerLinkActive"
+                          [isActive]="codeRla.isActive"
+                        >
+                          <span>Code</span>
+                        </a>
+                      </li>
+                    }
                   </ul>
                 </li>
                 <li sc-sidebar-menu-item>
@@ -323,11 +330,13 @@ export class DocsLayout {
   private readonly destroyRef = inject(DestroyRef);
   protected readonly tocService = inject(TocService);
   private readonly componentsService = inject(ComponentsService);
+  private readonly config = inject(ConfigService);
 
   private readonly contentArea =
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
   readonly components = this.componentsService.visibleComponents;
+  protected readonly devMode = this.config.devMode;
 
   constructor() {
     afterNextRender(() => {

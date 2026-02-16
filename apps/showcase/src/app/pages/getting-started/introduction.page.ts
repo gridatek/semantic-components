@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   ViewEncapsulation,
 } from '@angular/core';
 
 import { TocHeading } from '../../components/toc/toc-heading';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-introduction-page',
@@ -85,22 +87,29 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <strong>&#64;semantic-components/ui</strong>
             — Core components like Button and Link
           </li>
-          <li>
-            <strong>&#64;semantic-components/ui-lab</strong>
-            — Extended component library with 90+ components
-          </li>
+
+          @if (devMode()) {
+            <li>
+              <strong>&#64;semantic-components/ui-lab</strong>
+              — Extended component library with 90+ components
+            </li>
+          }
+
           <li>
             <strong>&#64;semantic-components/carousel</strong>
             — Carousel powered by Embla Carousel
           </li>
-          <li>
-            <strong>&#64;semantic-components/editor</strong>
-            — Rich text editor powered by Tiptap
-          </li>
-          <li>
-            <strong>&#64;semantic-components/code</strong>
-            — Code viewer and editor powered by Shiki
-          </li>
+
+          @if (devMode()) {
+            <li>
+              <strong>&#64;semantic-components/editor</strong>
+              — Rich text editor powered by Tiptap
+            </li>
+            <li>
+              <strong>&#64;semantic-components/code</strong>
+              — Code viewer and editor powered by Shiki
+            </li>
+          }
         </ul>
       </section>
     </div>
@@ -108,4 +117,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class IntroductionPage {}
+export default class IntroductionPage {
+  private readonly config = inject(ConfigService);
+  protected readonly devMode = this.config.devMode;
+}
