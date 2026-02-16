@@ -21,11 +21,11 @@ import {
       >
         Align Start
       </button>
-      <div sc-popover-portal>
+      <ng-template scPopoverPortal>
         <div sc-popover>
           <p class="text-sm">This popover is aligned to the start.</p>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

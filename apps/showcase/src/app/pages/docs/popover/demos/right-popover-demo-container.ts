@@ -46,11 +46,11 @@ import {
       >
         Right
       </button>
-      <div sc-popover-portal>
+      <ng-template scPopoverPortal>
         <div sc-popover>
           <p class="text-sm">This popover appears on the right.</p>
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

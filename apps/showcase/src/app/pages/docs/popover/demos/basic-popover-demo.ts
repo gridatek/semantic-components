@@ -21,7 +21,7 @@ import {
       >
         Open Popover
       </button>
-      <div sc-popover-portal>
+      <ng-template scPopoverPortal>
         <div sc-popover>
           <div class="grid gap-4">
             <div class="space-y-2">
@@ -66,7 +66,7 @@ import {
             </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

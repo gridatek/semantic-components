@@ -46,11 +46,11 @@ import {
       >
         Top
       </button>
-      <div sc-popover-portal>
+      <ng-template scPopoverPortal>
         <div sc-popover>
           <p class="text-sm">This popover appears on top.</p>
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
