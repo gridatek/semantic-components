@@ -44,6 +44,18 @@ Selector: `[scTooltipTrigger]`
 | `tooltipHideDelay` | `number`                                 | `0`     | Hide delay in milliseconds           |
 | `tooltipDisabled`  | `boolean`                                | `false` | Whether the tooltip is disabled      |
 
+## Animation
+
+The tooltip uses `data-open` and `data-closed` boolean attributes for animations, and `data-side` for directional slide-in:
+
+| Attribute     | When                           | Animation                         |
+| ------------- | ------------------------------ | --------------------------------- |
+| `data-open`   | Tooltip is visible             | fade-in, zoom-in, slide-in (side) |
+| `data-closed` | Tooltip is closing             | fade-out, zoom-out                |
+| `data-side`   | Always (top/right/bottom/left) | Controls slide-in direction       |
+
+The tooltip includes an arrow element that positions itself based on `data-side`.
+
 ## Accessibility
 
 - Sets `aria-describedby` on the trigger element when tooltip is visible

@@ -100,6 +100,18 @@ The component supports 12 position combinations:
 | `left`   | `start`, `center`, `end` |
 | `right`  | `start`, `center`, `end` |
 
+## Animation
+
+The hover card uses `data-open` and `data-closed` boolean attributes for animations, and `data-side` for directional slide-in:
+
+| Attribute     | When                           | Animation                         |
+| ------------- | ------------------------------ | --------------------------------- |
+| `data-open`   | Card is visible                | fade-in, zoom-in, slide-in (side) |
+| `data-closed` | Card is closing                | fade-out, zoom-out                |
+| `data-side`   | Always (top/right/bottom/left) | Controls slide-in direction       |
+
+The overlay stays open during the close animation and is removed after `animationend` fires.
+
 ## Differences from Tooltip
 
 | Feature     | Hover Card                   | Tooltip          |
