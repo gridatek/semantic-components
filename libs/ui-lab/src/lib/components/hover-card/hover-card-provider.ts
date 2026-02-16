@@ -14,10 +14,10 @@ import { cn } from '@semantic-components/ui';
 import { ScHoverCardPortal } from './hover-card-portal';
 import { ScHoverCardTrigger } from './hover-card-trigger';
 
-export type HoverCardSide = 'top' | 'right' | 'bottom' | 'left';
-export type HoverCardAlign = 'start' | 'center' | 'end';
+export type ScHoverCardSide = 'top' | 'right' | 'bottom' | 'left';
+export type ScHoverCardAlign = 'start' | 'center' | 'end';
 
-type PositionKey = `${HoverCardSide}-${HoverCardAlign}`;
+type PositionKey = `${ScHoverCardSide}-${ScHoverCardAlign}`;
 
 const positionMap: Record<PositionKey, ConnectedPosition> = {
   'top-start': {
@@ -134,10 +134,10 @@ export class ScHoverCardProvider {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Which side the hover card appears on */
-  readonly side = input<HoverCardSide>('bottom');
+  readonly side = input<ScHoverCardSide>('bottom');
 
   /** Alignment along the side */
-  readonly align = input<HoverCardAlign>('center');
+  readonly align = input<ScHoverCardAlign>('center');
 
   /** Delay before showing hover card (ms) */
   readonly openDelay = input<number>(700);
