@@ -41,7 +41,7 @@ interface Item {
   selector: 'app-end-message-infinite-scroll-demo',
   imports: [ScInfiniteScroll],
   template: \`
-    <scInfiniteScroll
+    <sc-infinite-scroll
       class="h-[300px] border rounded-lg"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"

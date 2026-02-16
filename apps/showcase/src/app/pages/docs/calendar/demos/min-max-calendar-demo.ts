@@ -12,7 +12,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
   template: `
     <div class="space-y-4">
       <div class="rounded-md border">
-        <scCalendar
+        <sc-calendar
           [(selected)]="selectedDate"
           [minDate]="minDate"
           [maxDate]="maxDate"

@@ -16,7 +16,7 @@ import type { OrgChartNode, OrgChartNodeClickEvent } from '@/ui/org-chart';
 ### Basic Usage
 
 ```html
-<scOrgChart [data]="orgData" (nodeClick)="onNodeClick($event)" />
+<sc-org-chart [data]="orgData" (nodeClick)="onNodeClick($event)" />
 ```
 
 ```typescript
@@ -50,7 +50,7 @@ onNodeClick(event: OrgChartNodeClickEvent): void {
 ### Horizontal Layout
 
 ```html
-<scOrgChart [data]="orgData" direction="horizontal" />
+<sc-org-chart [data]="orgData" direction="horizontal" />
 ```
 
 ### With Avatars
@@ -94,13 +94,13 @@ orgData: OrgChartNode = {
 ### Compact Mode
 
 ```html
-<scOrgChart [data]="orgData" [compact]="true" />
+<sc-org-chart [data]="orgData" [compact]="true" />
 ```
 
 ### Non-collapsible
 
 ```html
-<scOrgChart [data]="orgData" [collapsible]="false" />
+<sc-org-chart [data]="orgData" [collapsible]="false" />
 ```
 
 ### Initial Expanded State
@@ -237,7 +237,7 @@ The component uses Tailwind CSS classes and supports theming:
 ### Custom Styling
 
 ```html
-<scOrgChart [data]="orgData" class="[&_button]:shadow-lg" />
+<sc-org-chart [data]="orgData" class="[&_button]:shadow-lg" />
 ```
 
 ## Features

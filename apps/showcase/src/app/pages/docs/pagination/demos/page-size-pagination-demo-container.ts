@@ -75,7 +75,7 @@ import {
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <span class="text-sm text-muted-foreground">Items per page:</span>
-            <scPaginationPageSizeSelect />
+            <sc-pagination-page-size-select />
           </div>
 
           <p class="text-sm text-muted-foreground">

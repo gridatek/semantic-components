@@ -13,7 +13,7 @@ import {
   selector: 'app-icons-split-button-demo',
   imports: [ScSplitButton],
   template: `
-    <scSplitButton
+    <sc-split-button
       label="Download"
       [icon]="downloadIcon"
       [actions]="downloadActions()"

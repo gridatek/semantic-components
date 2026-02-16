@@ -15,9 +15,9 @@ import { ScMasonryGrid, ScMasonryItem } from '@/ui/masonry-grid';
 ### Basic Usage
 
 ```html
-<scMasonryGrid [columns]="4" [gap]="16">
+<sc-masonry-grid [columns]="4" [gap]="16">
   @for (item of items; track item.id) {
-  <scMasonryItem>
+  <sc-masonry-item>
     <div class="card">
       <!-- Your content -->
     </div>
@@ -29,9 +29,9 @@ import { ScMasonryGrid, ScMasonryItem } from '@/ui/masonry-grid';
 ### Image Gallery
 
 ```html
-<scMasonryGrid [columns]="3" [gap]="12">
+<sc-masonry-grid [columns]="3" [gap]="12">
   @for (image of images; track image.id) {
-  <scMasonryItem>
+  <sc-masonry-item>
     <img [src]="image.url" [alt]="image.title" class="w-full rounded-lg" />
   </sc-masonry-item>
   }
@@ -41,7 +41,7 @@ import { ScMasonryGrid, ScMasonryItem } from '@/ui/masonry-grid';
 ### Custom Breakpoints
 
 ```html
-<scMasonryGrid
+<sc-masonry-grid
   [columns]="4"
   [gap]="16"
   [breakpoints]="[
@@ -57,7 +57,7 @@ import { ScMasonryGrid, ScMasonryItem } from '@/ui/masonry-grid';
 ### Absolute Positioning Mode
 
 ```html
-<scMasonryGrid [columns]="3" [gap]="16" layoutMode="absolute">
+<sc-masonry-grid [columns]="3" [gap]="16" layoutMode="absolute">
   <!-- items -->
 </sc-masonry-grid>
 ```

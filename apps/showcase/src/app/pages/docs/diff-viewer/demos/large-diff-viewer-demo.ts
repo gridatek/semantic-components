@@ -9,7 +9,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
   selector: 'app-large-diff-viewer-demo',
   imports: [ScDiffViewer],
   template: `
-    <scDiffViewer
+    <sc-diff-viewer
       [oldText]="oldLarge"
       [newText]="newLarge"
       [oldTitle]="'data.ts'"

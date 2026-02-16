@@ -40,7 +40,7 @@ import {
   imports: [ScKanbanBoard],
   template: \`
     <div class="h-[400px] border rounded-lg bg-muted/10">
-      <scKanbanBoard
+      <sc-kanban-board
         [(columns)]="columns"
         [(cards)]="cards"
         [showAddCard]="false"

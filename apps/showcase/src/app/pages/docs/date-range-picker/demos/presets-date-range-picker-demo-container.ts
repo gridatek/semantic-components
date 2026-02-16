@@ -40,7 +40,7 @@ import {
   selector: 'app-presets-date-range-picker-demo',
   imports: [ScDateRangePicker],
   template: \`
-    <scDateRangePicker
+    <sc-date-range-picker
       [(value)]="range"
       [presets]="presets"
       placeholder="Select date range"

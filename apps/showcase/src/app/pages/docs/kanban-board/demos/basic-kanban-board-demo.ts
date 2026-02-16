@@ -16,7 +16,7 @@ import {
   imports: [ScKanbanBoard],
   template: `
     <div class="h-[600px] border rounded-lg bg-muted/10">
-      <scKanbanBoard
+      <sc-kanban-board
         [(columns)]="columns"
         [(cards)]="cards"
         (cardMoved)="onCardMoved($event)"

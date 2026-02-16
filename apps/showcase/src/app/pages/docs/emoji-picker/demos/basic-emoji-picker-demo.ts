@@ -5,7 +5,7 @@ import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
   selector: 'app-basic-emoji-picker-demo',
   imports: [ScEmojiPicker],
   template: `
-    <scEmojiPicker (emojiSelect)="onEmojiSelect($event)" />
+    <sc-emoji-picker (emojiSelect)="onEmojiSelect($event)" />
     @if (selectedEmoji()) {
       <p class="text-sm text-muted-foreground mt-4">
         Selected: {{ selectedEmoji()?.emoji }} ({{ selectedEmoji()?.name },

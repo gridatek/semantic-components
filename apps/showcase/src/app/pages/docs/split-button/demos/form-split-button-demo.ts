@@ -15,7 +15,7 @@ import {
   template: `
     <div class="p-4 border rounded-lg bg-card">
       <div class="flex justify-end">
-        <scSplitButton
+        <sc-split-button
           label="Send"
           [icon]="sendIcon"
           [actions]="sendActions()"

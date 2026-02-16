@@ -32,7 +32,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
   imports: [ScAnimatedCounter],
   template: \`
     <div class="flex items-center gap-4">
-      <scAnimatedCounter
+      <sc-animated-counter
         [value]="value()"
         prefix="$"
         [decimalPlaces]="2"

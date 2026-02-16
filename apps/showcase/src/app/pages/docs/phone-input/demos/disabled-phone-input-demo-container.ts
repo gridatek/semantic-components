@@ -31,8 +31,8 @@ import { ScPhoneInput, ScPhoneInputSimple } from '@semantic-components/ui-lab';
   imports: [ScPhoneInput, ScPhoneInputSimple],
   template: \`
     <div class="flex flex-col gap-3 max-w-sm">
-      <scPhoneInput [disabled]="true" />
-      <scPhoneInputSimple [disabled]="true" />
+      <sc-phone-input [disabled]="true" />
+      <sc-phone-input-simple [disabled]="true" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

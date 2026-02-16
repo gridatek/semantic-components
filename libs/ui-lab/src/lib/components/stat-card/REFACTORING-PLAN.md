@@ -371,7 +371,7 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
 ### Before (Current)
 
 ```html
-<scStatCard label="Total Revenue" value="$45,231.89" [change]="20.1" changeLabel="from last month" trend="up" [icon]="revenueIcon" description="Revenue increased" variant="default" size="md" />
+<sc-stat-card label="Total Revenue" value="$45,231.89" [change]="20.1" changeLabel="from last month" trend="up" [icon]="revenueIcon" description="Revenue increased" variant="default" size="md" />
 ```
 
 ### After (Refactored)

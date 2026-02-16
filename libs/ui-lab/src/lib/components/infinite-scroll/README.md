@@ -11,7 +11,7 @@ Automatically load more content as the user scrolls to the bottom of a container
 ## Usage
 
 ```html
-<scInfiniteScroll class="h-[400px] border rounded-lg" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
+<sc-infinite-scroll class="h-[400px] border rounded-lg" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
   <div class="p-4 space-y-2">
     @for (item of items(); track item.id) {
     <div class="p-4 border rounded">{{ item.title }}</div>
@@ -41,7 +41,7 @@ Automatically load more content as the user scrolls to the bottom of a container
 Custom loading indicator. Place inside `ScInfiniteScroll`.
 
 ```html
-<scInfiniteScroll [loading]="loading()" (loadMore)="load()">
+<sc-infinite-scroll [loading]="loading()" (loadMore)="load()">
   <!-- content -->
 
   <div scInfiniteScrollLoader class="flex items-center gap-2 py-4">
@@ -57,7 +57,7 @@ Custom loading indicator. Place inside `ScInfiniteScroll`.
 Custom end message. Place inside `ScInfiniteScroll`.
 
 ```html
-<scInfiniteScroll [hasReachedEnd]="reachedEnd()" (loadMore)="load()">
+<sc-infinite-scroll [hasReachedEnd]="reachedEnd()" (loadMore)="load()">
   <!-- content -->
 
   <div scInfiniteScrollEnd class="py-4 text-center">You've reached the end!</div>
@@ -71,7 +71,7 @@ Custom end message. Place inside `ScInfiniteScroll`.
 ```typescript
 @Component({
   template: `
-    <scInfiniteScroll class="h-[400px] border rounded-lg" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
+    <sc-infinite-scroll class="h-[400px] border rounded-lg" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
       <div class="p-4 space-y-2">
         @for (item of items(); track item.id) {
           <div class="p-4 border rounded">{{ item.title }}</div>
@@ -108,7 +108,7 @@ export class MyComponent {
 Load content earlier by increasing the threshold:
 
 ```html
-<scInfiniteScroll [threshold]="200" [loading]="loading()" (loadMore)="loadMore()">
+<sc-infinite-scroll [threshold]="200" [loading]="loading()" (loadMore)="loadMore()">
   <!-- content -->
 </sc-infinite-scroll>
 ```
@@ -118,7 +118,7 @@ Load content earlier by increasing the threshold:
 Works with any content layout:
 
 ```html
-<scInfiniteScroll [loading]="loading()" (loadMore)="loadMore()">
+<sc-infinite-scroll [loading]="loading()" (loadMore)="loadMore()">
   <div class="grid grid-cols-3 gap-4 p-4">
     @for (item of items(); track item.id) {
     <div class="p-4 border rounded bg-muted/50">{{ item.title }}</div>

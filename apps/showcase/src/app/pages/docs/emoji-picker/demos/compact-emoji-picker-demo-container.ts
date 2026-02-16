@@ -30,7 +30,7 @@ import { ScEmojiPicker } from '@semantic-components/ui-lab';
   selector: 'app-compact-emoji-picker-demo',
   imports: [ScEmojiPicker],
   template: \`
-    <scEmojiPicker [columns]="6" class="w-56" />
+    <sc-emoji-picker [columns]="6" class="w-56" />
   \`,
   encapsulation: ViewEncapsulation.None,
 })

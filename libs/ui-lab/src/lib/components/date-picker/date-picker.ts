@@ -54,7 +54,7 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
         <div scPopover class="w-auto p-0">
           @switch (mode()) {
             @case ('single') {
-              <scCalendar
+              <sc-calendar
                 mode="single"
                 [(selected)]="selected"
                 [disabled]="disabled()"
@@ -64,7 +64,7 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
               />
             }
             @case ('multiple') {
-              <scCalendar
+              <sc-calendar
                 mode="multiple"
                 [(selectedDates)]="selectedDates"
                 [disabled]="disabled()"
@@ -73,7 +73,7 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
               />
             }
             @case ('range') {
-              <scCalendar
+              <sc-calendar
                 mode="range"
                 [(selectedRange)]="selectedRange"
                 [disabled]="disabled()"

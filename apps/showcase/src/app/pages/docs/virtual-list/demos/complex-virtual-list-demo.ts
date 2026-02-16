@@ -18,7 +18,7 @@ interface User {
   imports: [ScVirtualList],
   template: `
     <div class="border rounded-lg overflow-hidden">
-      <scVirtualList
+      <sc-virtual-list
         [items]="users()"
         [itemHeight]="72"
         height="360px"

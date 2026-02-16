@@ -30,7 +30,7 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
   selector: 'app-logo-marquee-demo',
   imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
   template: \`
-    <scMarquee [duration]="30" [gap]="48">
+    <sc-marquee [duration]="30" [gap]="48">
       @for (brand of brands; track brand) {
         <div
           scMarqueeItem

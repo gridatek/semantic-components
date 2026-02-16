@@ -13,7 +13,7 @@ import {
   selector: 'app-gallery-marquee-demo',
   imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
   template: `
-    <scMarquee [duration]="35" [gap]="16">
+    <sc-marquee [duration]="35" [gap]="16">
       @for (i of images; track i) {
         <div
           scMarqueeItem

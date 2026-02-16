@@ -12,7 +12,7 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
   imports: [ScTransferList],
   template: `
     <div class="flex flex-col gap-6">
-      <scTransferList
+      <sc-transfer-list
         [(sourceItems)]="sourceItems"
         [(targetItems)]="targetItems"
         sourceTitle="Available"

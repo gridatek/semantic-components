@@ -11,19 +11,19 @@ Select multiple options from a dropdown with chips, search, and select-all funct
 ### Basic Usage
 
 ```html
-<scMultiSelect [(value)]="selectedValues" [options]="options" placeholder="Select options..." />
+<sc-multi-select [(value)]="selectedValues" [options]="options" placeholder="Select options..." />
 ```
 
 ### With Select All
 
 ```html
-<scMultiSelect [options]="options" [showSelectAll]="true" placeholder="Select..." />
+<sc-multi-select [options]="options" [showSelectAll]="true" placeholder="Select..." />
 ```
 
 ### Count Display (No Chips)
 
 ```html
-<scMultiSelect [options]="options" [showChips]="false" placeholder="Select..." />
+<sc-multi-select [options]="options" [showChips]="false" placeholder="Select..." />
 ```
 
 ## API
@@ -81,7 +81,7 @@ interface MultiSelectOption {
 ```typescript
 @Component({
   template: `
-    <scMultiSelect [(value)]="selectedFruits" [options]="fruits" placeholder="Select fruits..." />
+    <sc-multi-select [(value)]="selectedFruits" [options]="fruits" placeholder="Select fruits..." />
   `,
 })
 export class FruitPicker {
@@ -111,7 +111,7 @@ const frameworks: MultiSelectOption[] = [
 <form class="space-y-4">
   <div>
     <label>Select your interests</label>
-    <scMultiSelect [(value)]="interests" [options]="interestOptions" [showSelectAll]="true" placeholder="Choose interests..." />
+    <sc-multi-select [(value)]="interests" [options]="interestOptions" [showSelectAll]="true" placeholder="Choose interests..." />
   </div>
   <button type="submit">Save</button>
 </form>
@@ -120,7 +120,7 @@ const frameworks: MultiSelectOption[] = [
 ### Without Search
 
 ```html
-<scMultiSelect [options]="sizes" [searchable]="false" placeholder="Select sizes..." />
+<sc-multi-select [options]="sizes" [searchable]="false" placeholder="Select sizes..." />
 ```
 
 ### Handling Selection Changes
@@ -128,7 +128,7 @@ const frameworks: MultiSelectOption[] = [
 ```typescript
 @Component({
   template: `
-    <scMultiSelect [options]="options" (valueChange)="onSelectionChange($event)" (optionSelect)="onOptionSelected($event)" (optionRemove)="onOptionRemoved($event)" />
+    <sc-multi-select [options]="options" (valueChange)="onSelectionChange($event)" (optionSelect)="onOptionSelected($event)" (optionRemove)="onOptionRemoved($event)" />
   `,
 })
 export class SelectHandler {

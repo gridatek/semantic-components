@@ -13,7 +13,7 @@ import {
   selector: 'app-destructive-split-button-demo',
   imports: [ScSplitButton],
   template: `
-    <scSplitButton label="Manage" [actions]="manageActions()" />
+    <sc-split-button label="Manage" [actions]="manageActions()" />
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

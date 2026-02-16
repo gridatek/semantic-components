@@ -34,7 +34,7 @@ import { ScQrCodeDownload } from '@semantic-components/ui-lab';
   selector: 'app-download-qr-code-demo',
   imports: [ScQrCodeDownload],
   template: \`
-    <scQrCodeDownload
+    <sc-qr-code-download
       [value]="'https://example.com/download'"
       [size]="200"
       [filename]="'my-qr-code'"

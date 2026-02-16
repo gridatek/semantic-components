@@ -12,7 +12,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
   template: `
     <div class="space-y-3">
       <div class="max-w-sm">
-        <scMultiSelect
+        <sc-multi-select
           [(value)]="value"
           [options]="options"
           placeholder="Select fruits..."

@@ -11,7 +11,7 @@ import { ScPhoneInputSimple } from '@semantic-components/ui-lab';
   imports: [ScPhoneInputSimple],
   template: `
     <div class="max-w-sm">
-      <scPhoneInputSimple
+      <sc-phone-input-simple
         [(value)]="phone"
         format="us"
         placeholder="(555) 555-5555"

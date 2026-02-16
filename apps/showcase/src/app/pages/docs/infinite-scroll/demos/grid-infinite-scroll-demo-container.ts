@@ -41,7 +41,7 @@ interface Item {
   selector: 'app-grid-infinite-scroll-demo',
   imports: [ScInfiniteScroll],
   template: \`
-    <scInfiniteScroll
+    <sc-infinite-scroll
       class="h-[400px] border rounded-lg"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"

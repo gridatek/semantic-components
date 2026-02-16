@@ -5,7 +5,7 @@ Side-by-side or unified view for comparing text and code changes.
 ## Usage
 
 ```html
-<scDiffViewer [oldText]="originalCode" [newText]="modifiedCode" [oldTitle]="'file.ts (original)'" [newTitle]="'file.ts (modified)'" />
+<sc-diff-viewer [oldText]="originalCode" [newText]="modifiedCode" [oldTitle]="'file.ts (original)'" [newTitle]="'file.ts (modified)'" />
 ```
 
 ## API
@@ -53,31 +53,31 @@ interface DiffLine {
 ### Basic Comparison
 
 ```html
-<scDiffViewer [oldText]="oldCode" [newText]="newCode" />
+<sc-diff-viewer [oldText]="oldCode" [newText]="newCode" />
 ```
 
 ### With Titles
 
 ```html
-<scDiffViewer [oldText]="oldCode" [newText]="newCode" [oldTitle]="'config.json (before)'" [newTitle]="'config.json (after)'" />
+<sc-diff-viewer [oldText]="oldCode" [newText]="newCode" [oldTitle]="'config.json (before)'" [newTitle]="'config.json (after)'" />
 ```
 
 ### Unified View
 
 ```html
-<scDiffViewer [oldText]="oldText" [newText]="newText" [defaultViewMode]="'unified'" />
+<sc-diff-viewer [oldText]="oldText" [newText]="newText" [defaultViewMode]="'unified'" />
 ```
 
 ### Ignore Whitespace
 
 ```html
-<scDiffViewer [oldText]="oldText" [newText]="newText" [ignoreWhitespace]="true" />
+<sc-diff-viewer [oldText]="oldText" [newText]="newText" [ignoreWhitespace]="true" />
 ```
 
 ### Minimal View
 
 ```html
-<scDiffViewer [oldText]="oldText" [newText]="newText" [showHeader]="false" [showFooter]="false" [showViewModeToggle]="false" />
+<sc-diff-viewer [oldText]="oldText" [newText]="newText" [showHeader]="false" [showFooter]="false" [showViewModeToggle]="false" />
 ```
 
 ## Utility Functions

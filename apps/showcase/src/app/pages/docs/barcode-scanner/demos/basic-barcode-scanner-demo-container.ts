@@ -36,7 +36,7 @@ import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
   selector: 'app-basic-barcode-scanner-demo',
   imports: [ScBarcodeScanner],
   template: \`
-    <scBarcodeScanner (detected)="onDetected($event)" class="max-w-md" />
+    <sc-barcode-scanner (detected)="onDetected($event)" class="max-w-md" />
     @if (lastScanned()) {
       <div class="p-4 bg-muted rounded-lg max-w-md mt-3">
         <p class="text-sm text-muted-foreground mb-1">Last scanned:</p>

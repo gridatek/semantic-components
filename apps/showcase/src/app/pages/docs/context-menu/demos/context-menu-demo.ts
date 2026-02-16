@@ -39,7 +39,7 @@ import {
         Right click here
       </div>
 
-      <scContextMenuContent>
+      <sc-context-menu-content>
         <span scContextMenuLabel>My Account</span>
         <div scContextMenuSeparator></div>
 

@@ -14,7 +14,7 @@ import type { AnimatedCounterEasing, AnimatedCounterOptions } from '@/ui/animate
 ### Basic Usage
 
 ```html
-<scAnimatedCounter [value]="count" class="text-4xl font-bold" />
+<sc-animated-counter [value]="count" class="text-4xl font-bold" />
 ```
 
 ```typescript
@@ -28,24 +28,24 @@ increment(): void {
 ### With Prefix and Suffix
 
 ```html
-<scAnimatedCounter [value]="money" prefix="$" [decimalPlaces]="2" class="text-3xl font-bold text-green-600" />
+<sc-animated-counter [value]="money" prefix="$" [decimalPlaces]="2" class="text-3xl font-bold text-green-600" />
 
-<scAnimatedCounter [value]="percent" suffix="%" [decimalPlaces]="1" class="text-3xl font-bold" />
+<sc-animated-counter [value]="percent" suffix="%" [decimalPlaces]="1" class="text-3xl font-bold" />
 ```
 
 ### Custom Easing
 
 ```html
-<scAnimatedCounter [value]="value" easing="linear" [duration]="2000" />
-<scAnimatedCounter [value]="value" easing="easeIn" [duration]="2000" />
-<scAnimatedCounter [value]="value" easing="easeOut" [duration]="2000" />
-<scAnimatedCounter [value]="value" easing="easeInOut" [duration]="2000" />
+<sc-animated-counter [value]="value" easing="linear" [duration]="2000" />
+<sc-animated-counter [value]="value" easing="easeIn" [duration]="2000" />
+<sc-animated-counter [value]="value" easing="easeOut" [duration]="2000" />
+<sc-animated-counter [value]="value" easing="easeInOut" [duration]="2000" />
 ```
 
 ### Large Numbers with Separators
 
 ```html
-<scAnimatedCounter [value]="largeNumber" separator="," class="text-3xl font-bold" />
+<sc-animated-counter [value]="largeNumber" separator="," class="text-3xl font-bold" />
 ```
 
 ## API Reference

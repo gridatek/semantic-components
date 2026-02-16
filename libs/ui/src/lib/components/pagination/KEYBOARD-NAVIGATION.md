@@ -246,13 +246,13 @@ Wrap the select with a visible label:
 <!-- Good: Visible label associated -->
 <div class="flex items-center gap-2">
   <span class="text-sm text-muted-foreground">Items per page:</span>
-  <scPaginationPageSizeSelect />
+  <sc-pagination-page-size-select />
 </div>
 
 <!-- Better: Using label element -->
 <label class="flex items-center gap-2">
   <span class="text-sm text-muted-foreground">Items per page:</span>
-  <scPaginationPageSizeSelect />
+  <sc-pagination-page-size-select />
 </label>
 ```
 

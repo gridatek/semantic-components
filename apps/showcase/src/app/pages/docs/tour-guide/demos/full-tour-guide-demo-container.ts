@@ -98,7 +98,7 @@ import { ScTourGuide, TourService, TourOptions } from '@semantic-components/ui-l
       </div>
 
       <!-- Tour Guide Component -->
-      <scTourGuide
+      <sc-tour-guide
         (stepChange)="onStepChange($event)"
         (tourComplete)="onTourComplete()"
         (tourClosed)="onTourClosed()"

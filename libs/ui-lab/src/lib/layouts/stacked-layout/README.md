@@ -29,7 +29,7 @@ import { ScStackedLayout } from '@semantic-components/ui-lab';
   selector: 'app-layout',
   imports: [ScStackedLayout, MyNavbar, MyFooter],
   template: `
-    <scStackedLayout>
+    <sc-stacked-layout>
       <my-navbar scNavbar />
       <my-footer scFooter />
     </sc-stacked-layout>

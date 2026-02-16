@@ -13,7 +13,7 @@ import {
   selector: 'app-basic-split-button-demo',
   imports: [ScSplitButton],
   template: `
-    <scSplitButton
+    <sc-split-button
       label="Save"
       [actions]="saveActions()"
       (mainClick)="onSave()"

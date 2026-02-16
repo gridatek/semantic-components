@@ -16,7 +16,7 @@ import {
   template: `
     <div class="relative h-64 border rounded-lg bg-muted/20">
       <div class="absolute bottom-4 right-4">
-        <scSpeedDial
+        <sc-speed-dial
           [actions]="basicActions()"
           (actionClick)="onActionClick($event)"
         />

@@ -15,7 +15,7 @@ import {
   imports: [ScOrgChart],
   template: `
     <div class="border rounded-lg overflow-auto">
-      <scOrgChart [data]="orgData()" (nodeClick)="onNodeClick($event)" />
+      <sc-org-chart [data]="orgData()" (nodeClick)="onNodeClick($event)" />
     </div>
     @if (selectedNode()) {
       <p class="mt-2 text-sm text-muted-foreground">

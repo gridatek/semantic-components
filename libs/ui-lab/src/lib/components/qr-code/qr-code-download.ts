@@ -13,7 +13,7 @@ import { ScQrCode, QRErrorCorrectionLevel } from './qr-code';
   imports: [ScQrCode],
   template: `
     <div [class]="containerClass()">
-      <scQrCode
+      <sc-qr-code
         [value]="value()"
         [size]="size()"
         [errorCorrectionLevel]="errorCorrectionLevel()"

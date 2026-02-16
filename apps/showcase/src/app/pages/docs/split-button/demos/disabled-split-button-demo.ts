@@ -13,7 +13,7 @@ import {
   selector: 'app-disabled-split-button-demo',
   imports: [ScSplitButton],
   template: `
-    <scSplitButton
+    <sc-split-button
       label="Disabled"
       [actions]="basicActions()"
       [disabled]="true"

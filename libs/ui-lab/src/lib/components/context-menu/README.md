@@ -27,16 +27,16 @@ ScContextMenu (Root)
 
 ## Components
 
-| Component                 | Selector                           | Description                          |
-| ------------------------- | ---------------------------------- | ------------------------------------ |
-| `ScContextMenu`           | `div[scContextMenu]`             | Root wrapper with overlay management |
-| `ScContextMenuTrigger`    | `[scContextMenuTrigger]`        | Element that triggers on right-click |
-| `ScContextMenuContent`    | `<scContextMenuContent>`        | Menu content container               |
-| `ScContextMenuItem`       | `[scContextMenuItem]`           | Individual menu item                 |
-| `ScContextMenuLabel`      | `[scContextMenuLabel]`          | Label for grouping items             |
-| `ScContextMenuSeparator`  | `[scContextMenuSeparator]`      | Visual separator                     |
-| `ScContextMenuShortcut`   | `[scContextMenuShortcut]`       | Keyboard shortcut display            |
-| `ScContextMenuSub`        | `div[scContextMenuSub]`         | Submenu wrapper                      |
+| Component                 | Selector                       | Description                          |
+| ------------------------- | ------------------------------ | ------------------------------------ |
+| `ScContextMenu`           | `div[scContextMenu]`           | Root wrapper with overlay management |
+| `ScContextMenuTrigger`    | `[scContextMenuTrigger]`       | Element that triggers on right-click |
+| `ScContextMenuContent`    | `<sc-context-menu-content>`    | Menu content container               |
+| `ScContextMenuItem`       | `[scContextMenuItem]`          | Individual menu item                 |
+| `ScContextMenuLabel`      | `[scContextMenuLabel]`         | Label for grouping items             |
+| `ScContextMenuSeparator`  | `[scContextMenuSeparator]`     | Visual separator                     |
+| `ScContextMenuShortcut`   | `[scContextMenuShortcut]`      | Keyboard shortcut display            |
+| `ScContextMenuSub`        | `div[scContextMenuSub]`        | Submenu wrapper                      |
 | `ScContextMenuSubTrigger` | `div[scContextMenuSubTrigger]` | Submenu trigger                      |
 | `ScContextMenuSubContent` | `div[scContextMenuSubContent]` | Submenu content                      |
 
@@ -48,7 +48,7 @@ ScContextMenu (Root)
 <div scContextMenu>
   <div scContextMenuTrigger class="h-32 w-64 border border-dashed">Right click here</div>
 
-  <scContextMenuContent>
+  <sc-context-menu-content>
     <div scContextMenuItem (select)="onCut()">
       Cut
       <span scContextMenuShortcut>⌘X</span>
@@ -68,7 +68,7 @@ ScContextMenu (Root)
 ### With Labels and Separators
 
 ```html
-<scContextMenuContent>
+<sc-context-menu-content>
   <span scContextMenuLabel>Edit</span>
   <div scContextMenuSeparator></div>
   <div scContextMenuItem>Cut</div>
@@ -80,7 +80,7 @@ ScContextMenu (Root)
 ### With Submenu
 
 ```html
-<scContextMenuContent>
+<sc-context-menu-content>
   <div scContextMenuItem>Back</div>
   <div scContextMenuItem>Forward</div>
 

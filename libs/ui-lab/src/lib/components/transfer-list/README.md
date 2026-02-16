@@ -14,7 +14,7 @@ import type { TransferListItem, TransferListState } from '@/ui/transfer-list';
 ### Basic Usage
 
 ```html
-<scTransferList [(sourceItems)]="sourceItems" [(targetItems)]="targetItems" (change)="onChange($event)" />
+<sc-transfer-list [(sourceItems)]="sourceItems" [(targetItems)]="targetItems" (change)="onChange($event)" />
 ```
 
 ```typescript
@@ -30,13 +30,13 @@ targetItems = signal<TransferListItem[]>([]);
 ### With Custom Titles
 
 ```html
-<scTransferList [(sourceItems)]="available" [(targetItems)]="selected" sourceTitle="Available Options" targetTitle="Selected Options" />
+<sc-transfer-list [(sourceItems)]="available" [(targetItems)]="selected" sourceTitle="Available Options" targetTitle="Selected Options" />
 ```
 
 ### Without Search
 
 ```html
-<scTransferList [(sourceItems)]="source" [(targetItems)]="target" [searchable]="false" />
+<sc-transfer-list [(sourceItems)]="source" [(targetItems)]="target" [searchable]="false" />
 ```
 
 ### With Disabled Items

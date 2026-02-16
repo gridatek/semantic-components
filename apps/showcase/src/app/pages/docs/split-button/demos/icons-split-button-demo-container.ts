@@ -31,7 +31,7 @@ import { ScSplitButton, type SplitButtonAction } from '@semantic-components/ui-l
   selector: 'app-icons-split-button-demo',
   imports: [ScSplitButton],
   template: \`
-    <scSplitButton
+    <sc-split-button
       label="Download"
       [icon]="downloadIcon"
       [actions]="downloadActions()"

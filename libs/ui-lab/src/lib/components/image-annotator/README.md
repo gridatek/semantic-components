@@ -14,7 +14,7 @@ import type { Annotation, AnnotationPoint, AnnotationTool } from '@/ui/image-ann
 ### Basic Usage
 
 ```html
-<scImageAnnotator src="https://example.com/image.jpg" [width]="800" [height]="600" (annotationsChange)="onAnnotationsChange($event)" (save)="onSave($event)" />
+<sc-image-annotator src="https://example.com/image.jpg" [width]="800" [height]="600" (annotationsChange)="onAnnotationsChange($event)" (save)="onSave($event)" />
 ```
 
 ```typescript
@@ -30,13 +30,13 @@ onSave(dataUrl: string) {
 ### With Custom Dimensions
 
 ```html
-<scImageAnnotator src="/assets/photo.png" [width]="1200" [height]="800" />
+<sc-image-annotator src="/assets/photo.png" [width]="1200" [height]="800" />
 ```
 
 ### Programmatic Control
 
 ```html
-<scImageAnnotator #annotator [src]="imageSrc" />
+<sc-image-annotator #annotator [src]="imageSrc" />
 
 <button (click)="loadAnnotations()">Load</button>
 <button (click)="clearAnnotations()">Clear</button>

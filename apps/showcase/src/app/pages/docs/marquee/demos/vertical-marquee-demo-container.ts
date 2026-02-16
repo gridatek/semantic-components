@@ -31,7 +31,7 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
   imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
   template: \`
     <div class="h-48 overflow-hidden rounded-lg border">
-      <scMarquee direction="vertical" [duration]="20" [gap]="12">
+      <sc-marquee direction="vertical" [duration]="20" [gap]="12">
         @for (notification of notifications; track notification.id) {
           <div
             scMarqueeItem

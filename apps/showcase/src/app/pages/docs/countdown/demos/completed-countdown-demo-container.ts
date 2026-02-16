@@ -31,7 +31,7 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   imports: [ScCountdown],
   template: \`
     <div class="p-6 rounded-lg border inline-block">
-      <scCountdown [targetDate]="pastDate" variant="cards" />
+      <sc-countdown [targetDate]="pastDate" variant="cards" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

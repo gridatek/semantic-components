@@ -38,7 +38,7 @@ import { ScToastStack, ScToaster } from '@semantic-components/ui-lab';
       Show Toast
     </button>
 
-    <scToastStack />
+    <sc-toast-stack />
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

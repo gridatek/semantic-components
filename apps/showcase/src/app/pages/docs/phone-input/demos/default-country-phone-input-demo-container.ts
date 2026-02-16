@@ -31,7 +31,7 @@ import { ScPhoneInput } from '@semantic-components/ui-lab';
   imports: [ScPhoneInput],
   template: \`
     <div class="max-w-sm">
-      <scPhoneInput defaultCountry="GB" />
+      <sc-phone-input defaultCountry="GB" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

@@ -19,7 +19,7 @@ interface Item {
     <p class="text-sm text-muted-foreground mb-4">
       Load more items when within 200px of the bottom (loads earlier).
     </p>
-    <scInfiniteScroll
+    <sc-infinite-scroll
       class="h-[300px] border rounded-lg"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"

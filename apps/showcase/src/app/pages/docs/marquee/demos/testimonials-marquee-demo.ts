@@ -13,7 +13,7 @@ import {
   selector: 'app-testimonials-marquee-demo',
   imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
   template: `
-    <scMarquee [duration]="40" [gap]="24">
+    <sc-marquee [duration]="40" [gap]="24">
       @for (testimonial of testimonials; track testimonial.name) {
         <div
           scMarqueeItem

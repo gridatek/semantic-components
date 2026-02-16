@@ -12,19 +12,19 @@ Countdown timer with multiple variants, customizable labels, and completion even
 ### Basic Countdown
 
 ```html
-<scCountdown [targetDate]="futureDate" (complete)="onComplete()" />
+<sc-countdown [targetDate]="futureDate" (complete)="onComplete()" />
 ```
 
 ### Simple Countdown
 
 ```html
-<scCountdownSimple [targetDate]="futureDate" format="hh:mm:ss" />
+<sc-countdown-simple [targetDate]="futureDate" format="hh:mm:ss" />
 ```
 
 ### Cards Variant
 
 ```html
-<scCountdown [targetDate]="futureDate" variant="cards" />
+<sc-countdown [targetDate]="futureDate" variant="cards" />
 ```
 
 ## API
@@ -117,7 +117,7 @@ interface CountdownTime {
 ```html
 <div class="text-center">
   <h2>Coming Soon</h2>
-  <scCountdown [targetDate]="launchDate" variant="cards" daysLabel="DAYS" hoursLabel="HRS" minutesLabel="MIN" secondsLabel="SEC" (complete)="showLaunch()" />
+  <sc-countdown [targetDate]="launchDate" variant="cards" daysLabel="DAYS" hoursLabel="HRS" minutesLabel="MIN" secondsLabel="SEC" (complete)="showLaunch()" />
 </div>
 ```
 
@@ -126,7 +126,7 @@ interface CountdownTime {
 ```html
 <div class="sale-banner">
   <span>Sale ends in:</span>
-  <scCountdownSimple [targetDate]="saleEndDate" format="hh:mm:ss" class="font-bold" />
+  <sc-countdown-simple [targetDate]="saleEndDate" format="hh:mm:ss" class="font-bold" />
 </div>
 ```
 
@@ -135,7 +135,7 @@ interface CountdownTime {
 ```typescript
 @Component({
   template: `
-    <scCountdown #timer [targetDate]="eventDate" [autoStart]="false" (complete)="onEventStart()" />
+    <sc-countdown #timer [targetDate]="eventDate" [autoStart]="false" (complete)="onEventStart()" />
     <button (click)="timer.start()">Start</button>
     <button (click)="timer.stop()">Pause</button>
   `,
@@ -152,13 +152,13 @@ export class EventTimer {
 ### Quiz Timer
 
 ```html
-<scCountdownSimple [targetDate]="quizEndTime" format="mm:ss" class="text-xl" (complete)="submitQuiz()" />
+<sc-countdown-simple [targetDate]="quizEndTime" format="mm:ss" class="text-xl" (complete)="submitQuiz()" />
 ```
 
 ### Custom Labels
 
 ```html
-<scCountdown [targetDate]="date" daysLabel="D" hoursLabel="H" minutesLabel="M" secondsLabel="S" />
+<sc-countdown [targetDate]="date" daysLabel="D" hoursLabel="H" minutesLabel="M" secondsLabel="S" />
 ```
 
 ## Accessibility

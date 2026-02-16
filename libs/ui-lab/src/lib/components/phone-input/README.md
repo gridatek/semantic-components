@@ -12,19 +12,19 @@ Phone number input with country code selector and formatting options.
 ### With Country Selector
 
 ```html
-<scPhoneInput [(value)]="phone" [(countryCode)]="country" defaultCountry="US" (countryChange)="onCountryChange($event)" />
+<sc-phone-input [(value)]="phone" [(countryCode)]="country" defaultCountry="US" (countryChange)="onCountryChange($event)" />
 ```
 
 ### Simple Input (US Format)
 
 ```html
-<scPhoneInputSimple [(value)]="phone" format="us" placeholder="(555) 555-5555" />
+<sc-phone-input-simple [(value)]="phone" format="us" placeholder="(555) 555-5555" />
 ```
 
 ### Simple Input (International Format)
 
 ```html
-<scPhoneInputSimple [(value)]="phone" format="international" placeholder="+1 555 555 5555" />
+<sc-phone-input-simple [(value)]="phone" format="international" placeholder="+1 555 555 5555" />
 ```
 
 ## API
@@ -118,7 +118,7 @@ const uk = getCountryByDialCode('+44');
   </div>
   <div>
     <label>Phone</label>
-    <scPhoneInput defaultCountry="US" />
+    <sc-phone-input defaultCountry="US" />
   </div>
   <button type="submit">Submit</button>
 </form>
@@ -129,7 +129,7 @@ const uk = getCountryByDialCode('+44');
 ```typescript
 @Component({
   template: `
-    <scPhoneInput #phone [(value)]="phoneNumber" />
+    <sc-phone-input #phone [(value)]="phoneNumber" />
     @if (phoneNumber() && phoneNumber().length < 10) {
       <p class="text-destructive text-sm">Please enter a valid phone number</p>
     }
@@ -150,7 +150,7 @@ const europeanCountries: Country[] = [
 ];
 
 // In template
-<scPhoneInput [countries]="europeanCountries" defaultCountry="GB" />
+<sc-phone-input [countries]="europeanCountries" defaultCountry="GB" />
 ```
 
 ## Accessibility

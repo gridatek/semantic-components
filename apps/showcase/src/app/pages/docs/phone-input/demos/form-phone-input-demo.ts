@@ -20,7 +20,7 @@ import { ScPhoneInput } from '@semantic-components/ui-lab';
       </div>
       <div class="space-y-2">
         <label class="text-sm font-medium">Phone Number</label>
-        <scPhoneInput defaultCountry="US" />
+        <sc-phone-input defaultCountry="US" />
       </div>
       <div class="space-y-2">
         <label class="text-sm font-medium">Email</label>

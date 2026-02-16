@@ -32,7 +32,7 @@ import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
   imports: [ScMentionInput],
   template: \`
     <div class="max-w-lg">
-      <scMentionInput
+      <sc-mention-input
         [(value)]="value"
         [(mentions)]="mentions"
         [users]="sampleUsers"

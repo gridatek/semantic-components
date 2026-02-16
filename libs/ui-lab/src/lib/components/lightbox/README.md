@@ -193,7 +193,7 @@ readonly images: LightboxImage[] = [
 ### Pre-built Gallery
 
 ```html
-<scLightboxGallery [images]="images" class="grid-cols-4 gap-2 max-w-4xl" />
+<sc-lightbox-gallery [images]="images" class="grid-cols-4 gap-2 max-w-4xl" />
 ```
 
 ### Controlled Lightbox

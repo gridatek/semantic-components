@@ -9,7 +9,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
   selector: 'app-identical-diff-viewer-demo',
   imports: [ScDiffViewer],
   template: `
-    <scDiffViewer
+    <sc-diff-viewer
       [oldText]="'const x = 1;
 const y = 2;'"
       [newText]="'const x = 1;

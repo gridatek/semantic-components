@@ -31,7 +31,7 @@ import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
   imports: [ScMentionInput],
   template: \`
     <div class="max-w-lg">
-      <scMentionInput
+      <sc-mention-input
         [users]="usersWithAvatars"
         placeholder="Mention team members..."
         [rows]="4"

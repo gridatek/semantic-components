@@ -35,19 +35,19 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   imports: [ScQrCode],
   template: \`
     <div class="flex gap-4 flex-wrap">
-      <scQrCode
+      <sc-qr-code
         [value]="'Blue QR'"
         [size]="150"
         [foregroundColor]="'#1d4ed8'"
         [backgroundColor]="'#dbeafe'"
       />
-      <scQrCode
+      <sc-qr-code
         [value]="'Green QR'"
         [size]="150"
         [foregroundColor]="'#166534'"
         [backgroundColor]="'#dcfce7'"
       />
-      <scQrCode
+      <sc-qr-code
         [value]="'Purple QR'"
         [size]="150"
         [foregroundColor]="'#7c3aed'"

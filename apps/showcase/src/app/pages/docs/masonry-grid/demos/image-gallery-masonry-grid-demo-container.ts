@@ -31,9 +31,9 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
   selector: 'app-image-gallery-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryItem],
   template: \`
-    <scMasonryGrid [columns]="3" [gap]="12">
+    <sc-masonry-grid [columns]="3" [gap]="12">
       @for (image of images(); track image.id) {
-        <scMasonryItem>
+        <sc-masonry-item>
           <div class="group relative rounded-lg overflow-hidden bg-muted">
             <img
               [src]="image.url"

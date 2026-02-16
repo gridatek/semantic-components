@@ -12,7 +12,7 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
     <p class="text-sm text-muted-foreground mb-4">
       Restrict selection to dates within the last 30 days.
     </p>
-    <scDateRangePicker
+    <sc-date-range-picker
       [minDate]="minDate"
       [maxDate]="maxDate"
       placeholder="Select within last 30 days"

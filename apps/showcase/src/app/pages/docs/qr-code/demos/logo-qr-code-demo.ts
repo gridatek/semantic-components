@@ -9,7 +9,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-logo-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <scQrCode
+    <sc-qr-code
       [value]="'https://angular.io'"
       [size]="200"
       [errorCorrectionLevel]="'H'"

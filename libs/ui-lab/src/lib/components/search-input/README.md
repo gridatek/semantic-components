@@ -14,7 +14,7 @@ import type { SearchSuggestion, SearchInputOptions } from '@/ui/search-input';
 ### Basic Usage
 
 ```html
-<scSearchInput [suggestions]="suggestions" (search)="onSearch($event)" (suggestionSelect)="onSelect($event)" />
+<sc-search-input [suggestions]="suggestions" (search)="onSearch($event)" (suggestionSelect)="onSelect($event)" />
 ```
 
 ```typescript
@@ -35,7 +35,7 @@ onSelect(suggestion: SearchSuggestion): void {
 ### With Loading State
 
 ```html
-<scSearchInput [suggestions]="results" [loading]="isLoading" (search)="onAsyncSearch($event)" />
+<sc-search-input [suggestions]="results" [loading]="isLoading" (search)="onAsyncSearch($event)" />
 ```
 
 ### With Categories

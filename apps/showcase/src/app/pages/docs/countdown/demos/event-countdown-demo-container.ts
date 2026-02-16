@@ -35,7 +35,7 @@ import { ScCountdown } from '@semantic-components/ui-lab';
     >
       <h4 class="text-lg font-semibold mb-2">Product Launch</h4>
       <p class="text-muted-foreground mb-6">Get ready for something amazing!</p>
-      <scCountdown
+      <sc-countdown
         [targetDate]="futureDate"
         variant="cards"
         daysLabel="DAYS"

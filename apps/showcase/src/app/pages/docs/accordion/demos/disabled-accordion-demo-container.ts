@@ -60,7 +60,7 @@ import {
         </div>
         <div scAccordionPanel panelId="enabled-1">
           <ng-template scAccordionContent>
-            <scAccordionBody>
+            <sc-accordion-body>
               This item can be toggled normally.
             </sc-accordion-body>
           </ng-template>
@@ -74,7 +74,7 @@ import {
         </div>
         <div scAccordionPanel panelId="disabled-1">
           <ng-template scAccordionContent>
-            <scAccordionBody>This content won't be shown.</sc-accordion-body>
+            <sc-accordion-body>This content won't be shown.</sc-accordion-body>
           </ng-template>
         </div>
       </div>
@@ -86,7 +86,7 @@ import {
         </div>
         <div scAccordionPanel panelId="enabled-2">
           <ng-template scAccordionContent>
-            <scAccordionBody>
+            <sc-accordion-body>
               This item also works normally.
             </sc-accordion-body>
           </ng-template>

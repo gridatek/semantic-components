@@ -69,7 +69,7 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
       </button>
     </div>
     <div class="border rounded-lg overflow-hidden">
-      <scVirtualList
+      <sc-virtual-list
         #controlledList
         [items]="items()"
         [itemHeight]="40"

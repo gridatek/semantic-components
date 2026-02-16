@@ -40,7 +40,7 @@ import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
         </div>
         <span class="font-medium">John Doe</span>
       </div>
-      <scMentionInput
+      <sc-mention-input
         [(value)]="commentValue"
         [users]="sampleUsers"
         placeholder="Write a comment... Use @ to mention someone"

@@ -10,7 +10,7 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   imports: [ScCountdown],
   template: `
     <div class="p-6 rounded-lg border inline-block">
-      <scCountdown [targetDate]="futureDate" />
+      <sc-countdown [targetDate]="futureDate" />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

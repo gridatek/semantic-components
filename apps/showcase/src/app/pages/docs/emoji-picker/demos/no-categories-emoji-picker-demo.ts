@@ -5,7 +5,7 @@ import { ScEmojiPicker } from '@semantic-components/ui-lab';
   selector: 'app-no-categories-emoji-picker-demo',
   imports: [ScEmojiPicker],
   template: `
-    <scEmojiPicker [showCategories]="false" class="h-72" />
+    <sc-emoji-picker [showCategories]="false" class="h-72" />
   `,
   encapsulation: ViewEncapsulation.None,
 })

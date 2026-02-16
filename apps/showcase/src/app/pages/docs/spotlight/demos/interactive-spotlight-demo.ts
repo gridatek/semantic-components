@@ -30,18 +30,18 @@ import {
         Try Premium Feature
       </button>
 
-      <scSpotlight
+      <sc-spotlight
         #spotlight
         [padding]="16"
         [borderRadius]="12"
         [overlayOpacity]="0.85"
       >
-        <scSpotlightTitle>Unlock Premium Features</sc-spotlight-title>
-        <scSpotlightDescription>
+        <sc-spotlight-title>Unlock Premium Features</sc-spotlight-title>
+        <sc-spotlight-description>
           Upgrade to premium to access advanced analytics, priority support, and
           exclusive features.
         </sc-spotlight-description>
-        <scSpotlightActions>
+        <sc-spotlight-actions>
           <button
             type="button"
             (click)="spotlight.close()"

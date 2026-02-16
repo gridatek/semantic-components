@@ -42,7 +42,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
       class="w-full max-w-sm px-3 py-2 border rounded-md"
     />
     @if (inputValue) {
-      <scQrCode [value]="inputValue" [size]="200" />
+      <sc-qr-code [value]="inputValue" [size]="200" />
     }
   \`,
   encapsulation: ViewEncapsulation.None,

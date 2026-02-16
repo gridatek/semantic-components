@@ -10,7 +10,7 @@ import { ScImageAnnotator, type Annotation } from '@semantic-components/ui-lab';
   selector: 'app-basic-image-annotator-demo',
   imports: [ScImageAnnotator],
   template: `
-    <scImageAnnotator
+    <sc-image-annotator
       [src]="imageSrc()"
       [width]="700"
       [height]="450"

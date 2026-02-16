@@ -18,7 +18,7 @@ import {
     <div class="max-w-2xl rounded-lg border p-4 space-y-4">
       <div class="flex items-center justify-between">
         <h4 class="font-medium">Analytics Dashboard</h4>
-        <scDateRangePicker
+        <sc-date-range-picker
           [(value)]="range"
           [presets]="presets"
           placeholder="Select period"

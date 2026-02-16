@@ -15,13 +15,13 @@ import { ScPdfViewer, ScPdfViewerToolbar } from '@/ui/pdf-viewer';
 ### Basic Usage
 
 ```html
-<scPdfViewer [src]="pdfUrl" [title]="'My Document'" class="h-[600px]" />
+<sc-pdf-viewer [src]="pdfUrl" [title]="'My Document'" class="h-[600px]" />
 ```
 
 ### With Event Handlers
 
 ```html
-<scPdfViewer [src]="pdfUrl" (loaded)="onLoaded($event)" (pageChange)="onPageChange($event)" (zoomChange)="onZoomChange($event)" (errorEvent)="onError($event)" />
+<sc-pdf-viewer [src]="pdfUrl" (loaded)="onLoaded($event)" (pageChange)="onPageChange($event)" (zoomChange)="onZoomChange($event)" (errorEvent)="onError($event)" />
 ```
 
 ```typescript
@@ -52,13 +52,13 @@ onError(event: PdfErrorEvent): void {
 ### Without Toolbar
 
 ```html
-<scPdfViewer [src]="pdfUrl" [showToolbar]="false" />
+<sc-pdf-viewer [src]="pdfUrl" [showToolbar]="false" />
 ```
 
 ### Custom Toolbar Configuration
 
 ```html
-<scPdfViewer
+<sc-pdf-viewer
   [src]="pdfUrl"
   [toolbarConfig]="{
     showNavigation: true,
@@ -75,7 +75,7 @@ onError(event: PdfErrorEvent): void {
 ### Initial Page and Zoom
 
 ```html
-<scPdfViewer [src]="pdfUrl" [initialPage]="3" [initialZoom]="1.5" />
+<sc-pdf-viewer [src]="pdfUrl" [initialPage]="3" [initialZoom]="1.5" />
 ```
 
 ### Programmatic Control

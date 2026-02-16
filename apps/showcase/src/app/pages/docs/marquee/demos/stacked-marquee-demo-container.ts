@@ -31,7 +31,7 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
   imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
   template: \`
     <div class="space-y-2">
-      <scMarquee [duration]="30" [gap]="24">
+      <sc-marquee [duration]="30" [gap]="24">
         @for (emoji of row1Emojis; track emoji) {
           <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
         }
@@ -41,7 +41,7 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
           }
         </ng-container>
       </sc-marquee>
-      <scMarquee [duration]="25" [reverse]="true" [gap]="24">
+      <sc-marquee [duration]="25" [reverse]="true" [gap]="24">
         @for (emoji of row2Emojis; track emoji) {
           <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
         }
@@ -51,7 +51,7 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
           }
         </ng-container>
       </sc-marquee>
-      <scMarquee [duration]="35" [gap]="24">
+      <sc-marquee [duration]="35" [gap]="24">
         @for (emoji of row3Emojis; track emoji) {
           <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
         }

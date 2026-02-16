@@ -10,9 +10,9 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
   selector: 'app-cards-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryItem],
   template: `
-    <scMasonryGrid [columns]="3" [gap]="16">
+    <sc-masonry-grid [columns]="3" [gap]="16">
       @for (card of cards(); track card.id) {
-        <scMasonryItem>
+        <sc-masonry-item>
           <div class="rounded-lg border bg-card overflow-hidden">
             @if (card.image) {
               <img

@@ -11,13 +11,13 @@ Select a range of dates with presets, min/max constraints, and various display f
 ### Basic Usage
 
 ```html
-<scDateRangePicker [(value)]="dateRange" placeholder="Select date range" />
+<sc-date-range-picker [(value)]="dateRange" placeholder="Select date range" />
 ```
 
 ### With Presets
 
 ```html
-<scDateRangePicker [(value)]="dateRange" [presets]="presets" placeholder="Select date range" />
+<sc-date-range-picker [(value)]="dateRange" [presets]="presets" placeholder="Select date range" />
 ```
 
 ```typescript
@@ -29,7 +29,7 @@ presets = createDateRangePresets();
 ### With Min/Max Dates
 
 ```html
-<scDateRangePicker [minDate]="minDate" [maxDate]="maxDate" placeholder="Select date range" />
+<sc-date-range-picker [minDate]="minDate" [maxDate]="maxDate" placeholder="Select date range" />
 ```
 
 ## API
@@ -109,7 +109,7 @@ const presets = createDateRangePresets();
 ```html
 <div class="flex justify-between">
   <h2>Analytics</h2>
-  <scDateRangePicker [(value)]="dateRange" [presets]="presets" (apply)="fetchData()" />
+  <sc-date-range-picker [(value)]="dateRange" [presets]="presets" (apply)="fetchData()" />
 </div>
 ```
 
@@ -137,7 +137,7 @@ const customPresets: DateRangePreset[] = [
 ### Booking System
 
 ```html
-<scDateRangePicker [(value)]="bookingDates" [minDate]="today" [disabledDates]="bookedDates" placeholder="Select check-in and check-out" />
+<sc-date-range-picker [(value)]="bookingDates" [minDate]="today" [disabledDates]="bookedDates" placeholder="Select check-in and check-out" />
 ```
 
 ## Accessibility

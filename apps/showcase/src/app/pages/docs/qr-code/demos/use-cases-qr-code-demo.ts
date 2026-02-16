@@ -11,19 +11,19 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   template: `
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="text-center">
-        <scQrCode [value]="'https://example.com'" [size]="120" />
+        <sc-qr-code [value]="'https://example.com'" [size]="120" />
         <p class="text-xs text-muted-foreground mt-1">Website URL</p>
       </div>
       <div class="text-center">
-        <scQrCode [value]="'tel:+1234567890'" [size]="120" />
+        <sc-qr-code [value]="'tel:+1234567890'" [size]="120" />
         <p class="text-xs text-muted-foreground mt-1">Phone Number</p>
       </div>
       <div class="text-center">
-        <scQrCode [value]="'mailto:hello@example.com'" [size]="120" />
+        <sc-qr-code [value]="'mailto:hello@example.com'" [size]="120" />
         <p class="text-xs text-muted-foreground mt-1">Email</p>
       </div>
       <div class="text-center">
-        <scQrCode
+        <sc-qr-code
           [value]="'WIFI:T:WPA;S:MyNetwork;P:password123;;'"
           [size]="120"
         />

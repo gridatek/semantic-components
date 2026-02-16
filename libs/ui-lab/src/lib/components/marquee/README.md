@@ -16,13 +16,13 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Text Marquee
 
 ```html
-<scMarqueeText text="Breaking news: This is scrolling text!" [duration]="15" />
+<sc-marquee-text text="Breaking news: This is scrolling text!" [duration]="15" />
 ```
 
 ### Content Marquee
 
 ```html
-<scMarquee [duration]="30" [gap]="24">
+<sc-marquee [duration]="30" [gap]="24">
   @for (item of items; track item) {
   <div scMarqueeItem>{{ item }}</div>
   }
@@ -37,7 +37,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Vertical Marquee
 
 ```html
-<scMarquee direction="vertical" [duration]="20">
+<sc-marquee direction="vertical" [duration]="20">
   <!-- items -->
 </sc-marquee>
 ```
@@ -45,7 +45,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Reversed Direction
 
 ```html
-<scMarquee [reverse]="true">
+<sc-marquee [reverse]="true">
   <!-- items -->
 </sc-marquee>
 ```
@@ -99,7 +99,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Logo Carousel
 
 ```html
-<scMarquee [duration]="30" [gap]="48">
+<sc-marquee [duration]="30" [gap]="48">
   @for (logo of logos; track logo) {
   <div scMarqueeItem class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
   }
@@ -114,7 +114,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ### Testimonials
 
 ```html
-<scMarquee [duration]="40" [gap]="24">
+<sc-marquee [duration]="40" [gap]="24">
   @for (testimonial of testimonials; track testimonial.name) {
   <div scMarqueeItem class="w-80 p-4 border rounded">
     <p>"{{ testimonial.quote }}"</p>
@@ -131,7 +131,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 
 ```html
 <div class="h-48 overflow-hidden">
-  <scMarquee direction="vertical" [duration]="20">
+  <sc-marquee direction="vertical" [duration]="20">
     @for (notification of notifications; track notification.id) {
     <div scMarqueeItem class="p-3 border rounded">{{ notification.icon }} {{ notification.title }}</div>
     }
@@ -146,9 +146,9 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 
 ```html
 <div class="space-y-2">
-  <scMarquee [duration]="30"><!-- row 1 --></sc-marquee>
-  <scMarquee [duration]="25" [reverse]="true"><!-- row 2 --></sc-marquee>
-  <scMarquee [duration]="35"><!-- row 3 --></sc-marquee>
+  <sc-marquee [duration]="30"><!-- row 1 --></sc-marquee>
+  <sc-marquee [duration]="25" [reverse]="true"><!-- row 2 --></sc-marquee>
+  <sc-marquee [duration]="35"><!-- row 3 --></sc-marquee>
 </div>
 ```
 
@@ -156,13 +156,13 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 
 ```html
 <!-- Fast -->
-<scMarqueeText text="Fast" [duration]="10" />
+<sc-marquee-text text="Fast" [duration]="10" />
 
 <!-- Normal -->
-<scMarqueeText text="Normal" [duration]="20" />
+<sc-marquee-text text="Normal" [duration]="20" />
 
 <!-- Slow -->
-<scMarqueeText text="Slow" [duration]="40" />
+<sc-marquee-text text="Slow" [duration]="40" />
 ```
 
 ## How It Works

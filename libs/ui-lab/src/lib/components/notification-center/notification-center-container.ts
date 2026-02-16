@@ -144,7 +144,7 @@ import {
           <!-- Grouped notifications -->
           <div class="p-2 space-y-4">
             @for (group of center.groups(); track group.id) {
-              <scNotificationGroup
+              <sc-notification-group
                 [group]="group"
                 [notifications]="center.getGroupNotifications(group.id)"
                 [showDismiss]="center.showDismiss()"
@@ -170,7 +170,7 @@ import {
                     notification of center.ungroupedNotifications();
                     track notification.id
                   ) {
-                    <scNotificationItem
+                    <sc-notification-item
                       [notification]="notification"
                       [showDismiss]="center.showDismiss()"
                       (markRead)="center.onMarkRead(notification, $event)"
@@ -190,7 +190,7 @@ import {
               notification of center.filteredNotifications();
               track notification.id
             ) {
-              <scNotificationItem
+              <sc-notification-item
                 [notification]="notification"
                 [showDismiss]="center.showDismiss()"
                 (markRead)="center.onMarkRead(notification, $event)"

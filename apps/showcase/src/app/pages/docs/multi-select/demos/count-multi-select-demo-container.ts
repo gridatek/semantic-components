@@ -32,7 +32,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
   imports: [ScMultiSelect],
   template: \`
     <div class="max-w-sm">
-      <scMultiSelect
+      <sc-multi-select
         [(value)]="value"
         [options]="options"
         [showChips]="false"

@@ -33,7 +33,7 @@ import { ScTimezoneSelect, ScTimezoneService } from '@semantic-components/ui-lab
   template: \`
     <div class="space-y-4">
       <div class="max-w-xs">
-        <scTimezoneSelect></sc-timezone-select>
+        <sc-timezone-select></sc-timezone-select>
       </div>
       <p class="text-sm text-muted-foreground">
         Current: {{ timezoneService.currentTimezone().label }} ({{

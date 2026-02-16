@@ -54,7 +54,7 @@ All 7 demo files updated to use the new composable pattern:
 All demos now:
 
 - Import all required directive sub-components
-- Use `<div scStatCard>` instead of `<scStatCard>`
+- Use `<div scStatCard>` instead of `<sc-stat-card>`
 - Use content projection for all content
 - Include inline SVG icons (no more `innerHTML`)
 - Follow consistent structure pattern
@@ -64,7 +64,7 @@ All demos now:
 ### Before (Old API)
 
 ```html
-<scStatCard label="Total Revenue" value="$45,231.89" [change]="20.1" changeLabel="from last month" trend="up" [icon]="dollarIcon" description="Revenue increased" variant="default" size="md" />
+<sc-stat-card label="Total Revenue" value="$45,231.89" [change]="20.1" changeLabel="from last month" trend="up" [icon]="dollarIcon" description="Revenue increased" variant="default" size="md" />
 ```
 
 **Issues:**
@@ -192,7 +192,7 @@ Follows the same pattern as:
 **Migration Required:**
 
 - Update imports to include sub-directives
-- Replace `<scStatCard>` with `<div scStatCard>`
+- Replace `<sc-stat-card>` with `<div scStatCard>`
 - Use content projection instead of inputs
 - Convert icon strings to inline SVG
 

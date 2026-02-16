@@ -32,22 +32,22 @@ import { ScSplitButton, type SplitButtonAction } from '@semantic-components/ui-l
   imports: [ScSplitButton],
   template: \`
     <div class="flex flex-wrap gap-4">
-      <scSplitButton
+      <sc-split-button
         label="Default"
         variant="default"
         [actions]="basicActions()"
       />
-      <scSplitButton
+      <sc-split-button
         label="Secondary"
         variant="secondary"
         [actions]="basicActions()"
       />
-      <scSplitButton
+      <sc-split-button
         label="Outline"
         variant="outline"
         [actions]="basicActions()"
       />
-      <scSplitButton
+      <sc-split-button
         label="Destructive"
         variant="destructive"
         [actions]="basicActions()"

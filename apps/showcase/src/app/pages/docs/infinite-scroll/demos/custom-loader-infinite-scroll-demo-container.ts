@@ -44,7 +44,7 @@ interface Item {
   selector: 'app-custom-loader-infinite-scroll-demo',
   imports: [ScInfiniteScroll, ScInfiniteScrollLoader],
   template: \`
-    <scInfiniteScroll
+    <sc-infinite-scroll
       class="h-[300px] border rounded-lg"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"

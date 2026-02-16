@@ -27,7 +27,7 @@ import { ScCountdownSimple } from '@semantic-components/ui-lab';
       </div>
       <div class="flex-1">
         <div class="font-semibold text-destructive">Flash Sale Ends In</div>
-        <scCountdownSimple
+        <sc-countdown-simple
           [targetDate]="shortFuture"
           format="hh:mm:ss"
           class="text-xl font-bold text-destructive"

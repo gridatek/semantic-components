@@ -5,7 +5,7 @@ import { ScEmojiPicker } from '@semantic-components/ui-lab';
   selector: 'app-no-recent-emoji-picker-demo',
   imports: [ScEmojiPicker],
   template: `
-    <scEmojiPicker [showRecent]="false" />
+    <sc-emoji-picker [showRecent]="false" />
   `,
   encapsulation: ViewEncapsulation.None,
 })

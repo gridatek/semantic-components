@@ -31,7 +31,7 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   imports: [ScCountdown],
   template: \`
     <div class="p-4 rounded-lg border inline-block">
-      <scCountdown
+      <sc-countdown
         [targetDate]="shortFuture"
         [showDays]="false"
         variant="compact"

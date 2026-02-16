@@ -129,7 +129,7 @@ The page size `<select>` element has no programmatically associated label.
 <!-- keyboard-navigation-pagination-demo.ts:90-93 -->
 <label class="flex items-center gap-2">
   <span class="text-sm text-muted-foreground">Items per page:</span>
-  <scPaginationPageSizeSelect />
+  <sc-pagination-page-size-select />
 </label>
 ```
 
@@ -184,7 +184,7 @@ export class ScPaginationPageSizeSelect {
 ```html
 <!-- Consumer usage -->
 <label [for]="pageSizeRef.selectId()">Items per page:</label>
-<scPaginationPageSizeSelect #pageSizeRef />
+<sc-pagination-page-size-select #pageSizeRef />
 ```
 
 **Recommendation:** Use Option A (aria-label). It's simpler and doesn't require consumer template changes. Option B is more semantic but requires the consumer to connect the label manually.
@@ -282,7 +282,7 @@ export class ScPaginationLiveRegion {
 
 - Create: `libs/ui/src/lib/components/pagination/pagination-live-region.ts`
 - Update: `libs/ui/src/lib/components/pagination/index.ts` (export new component)
-- Update: Demo templates to include `<scPaginationLiveRegion />`
+- Update: Demo templates to include `<sc-pagination-live-region />`
 
 ---
 

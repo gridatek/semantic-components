@@ -7,10 +7,10 @@ Highlight specific UI elements with a spotlight overlay effect for feature disco
 ```html
 <button (click)="spotlight.show('#my-element')">Show Spotlight</button>
 
-<scSpotlight #spotlight [padding]="12">
-  <scSpotlightTitle>Feature Title</sc-spotlight-title>
-  <scSpotlightDescription>Description of the highlighted feature.</sc-spotlight-description>
-  <scSpotlightActions>
+<sc-spotlight #spotlight [padding]="12">
+  <sc-spotlight-title>Feature Title</sc-spotlight-title>
+  <sc-spotlight-description>Description of the highlighted feature.</sc-spotlight-description>
+  <sc-spotlight-actions>
     <button (click)="spotlight.close()">Got it</button>
   </sc-spotlight-actions>
 </sc-spotlight>
@@ -66,19 +66,19 @@ Container for action buttons with proper spacing.
 ```html
 <button (click)="spotlight.show('#feature-card')">Highlight Feature</button>
 
-<scSpotlight #spotlight>
-  <scSpotlightTitle>New Feature!</sc-spotlight-title>
-  <scSpotlightDescription>Check out this exciting new capability.</sc-spotlight-description>
+<sc-spotlight #spotlight>
+  <sc-spotlight-title>New Feature!</sc-spotlight-title>
+  <sc-spotlight-description>Check out this exciting new capability.</sc-spotlight-description>
 </sc-spotlight>
 ```
 
 ### With Custom Styling
 
 ```html
-<scSpotlight #spotlight [padding]="16" [borderRadius]="12" [overlayOpacity]="0.85">
-  <scSpotlightTitle>Premium Feature</sc-spotlight-title>
-  <scSpotlightDescription>Upgrade to access this feature.</sc-spotlight-description>
-  <scSpotlightActions>
+<sc-spotlight #spotlight [padding]="16" [borderRadius]="12" [overlayOpacity]="0.85">
+  <sc-spotlight-title>Premium Feature</sc-spotlight-title>
+  <sc-spotlight-description>Upgrade to access this feature.</sc-spotlight-description>
+  <sc-spotlight-actions>
     <button (click)="spotlight.close()">Maybe Later</button>
     <button (click)="upgrade()">Upgrade Now</button>
   </sc-spotlight-actions>
@@ -99,7 +99,7 @@ spotlight.show(element);
 ### Input-Driven
 
 ```html
-<scSpotlight [target]="activeTarget()">
+<sc-spotlight [target]="activeTarget()">
   <!-- Content automatically updates when target changes -->
 </sc-spotlight>
 ```

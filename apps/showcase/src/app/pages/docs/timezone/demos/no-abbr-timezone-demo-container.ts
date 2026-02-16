@@ -31,7 +31,7 @@ import { ScTimezoneSelect } from '@semantic-components/ui-lab';
   imports: [ScTimezoneSelect],
   template: \`
     <div class="max-w-xs">
-      <scTimezoneSelect [showAbbr]="false"></sc-timezone-select>
+      <sc-timezone-select [showAbbr]="false"></sc-timezone-select>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
