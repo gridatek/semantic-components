@@ -12,7 +12,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScPopoverPortal } from './popover-portal';
 import { ScPopoverTrigger } from './popover-trigger';
 

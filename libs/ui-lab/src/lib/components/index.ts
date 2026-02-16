@@ -46,7 +46,6 @@ export * from './pagination';
 export * from './password-field';
 export * from './pdf-viewer';
 export * from './phone-input';
-export * from './popover';
 export * from './progress';
 export * from './qr-code';
 export * from './radio-group';

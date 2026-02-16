@@ -6,15 +6,15 @@ import {
   model,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import {
+  cn,
   ScPopoverProvider,
   ScPopoverPortal,
   ScPopover,
   ScPopoverTrigger,
   ScPopoverAlign,
   ScPopoverSide,
-} from '../popover';
+} from '@semantic-components/ui';
 import { ScCalendar, CalendarMode, DateRange } from '../calendar';
 
 @Component({

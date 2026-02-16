@@ -607,7 +607,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'popover',
     description: 'Displays floating content in relation to a trigger.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Overlay',
   },
   {

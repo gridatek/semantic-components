@@ -33,7 +33,7 @@ import {
   ScPopoverPortal,
   ScPopover,
   ScPopoverTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-top-popover-demo',
