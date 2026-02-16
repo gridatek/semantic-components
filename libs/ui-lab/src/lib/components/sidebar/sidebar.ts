@@ -7,13 +7,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
 import {
+  cn,
   ScSheet,
   ScSheetClose,
   ScSheetPortal,
   ScSheetProvider,
-} from '../sheet';
+} from '@semantic-components/ui';
 import { ScSidebarState } from './sidebar-state.service';
 
 @Component({

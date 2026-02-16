@@ -34,7 +34,7 @@ Each demo is a minimal standalone component isolating one behavior.
 
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ScAccordion, ScAccordionPanel, ScAccordionItem, ScAccordionTrigger } from '@semantic-components/ui-lab';
+import { ScAccordion, ScAccordionPanel, ScAccordionItem, ScAccordionTrigger } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-accordion-demo',

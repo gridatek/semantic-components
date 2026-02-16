@@ -28,12 +28,12 @@ export class ButtonGroupDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScButtonGroup,
   ScButtonGroupSeparator,
   ScButtonGroupText,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-button-group-demo',

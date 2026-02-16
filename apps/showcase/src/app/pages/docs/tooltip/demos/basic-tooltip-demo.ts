@@ -3,16 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTooltipTrigger } from '@semantic-components/ui-lab';
+import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-tooltip-demo',
-  imports: [ScTooltipTrigger],
+  imports: [ScButton, ScTooltipTrigger],
   template: `
-    <button
-      scTooltipTrigger="Add to library"
-      class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-    >
+    <button sc-button variant="outline" scTooltipTrigger="Add to library">
       Hover me
     </button>
   `,

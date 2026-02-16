@@ -6,15 +6,15 @@ import {
   model,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import {
+  cn,
   ScPopoverProvider,
   ScPopoverPortal,
   ScPopover,
   ScPopoverTrigger,
-  PopoverAlign,
-  PopoverSide,
-} from '../popover';
+  ScPopoverAlign,
+  ScPopoverSide,
+} from '@semantic-components/ui';
 import { ScCalendar, CalendarMode, DateRange } from '../calendar';
 
 @Component({
@@ -50,7 +50,7 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
           {{ displayText() || placeholder() }}
         </span>
       </button>
-      <div sc-popover-portal>
+      <ng-template scPopoverPortal>
         <div sc-popover class="w-auto p-0">
           @switch (mode()) {
             @case ('single') {
@@ -84,7 +84,7 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
             }
           }
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   host: {
@@ -101,8 +101,8 @@ export class ScDatePicker {
   readonly disabled = input<Date[]>([]);
   readonly minDate = input<Date | undefined>(undefined);
   readonly maxDate = input<Date | undefined>(undefined);
-  readonly side = input<PopoverSide>('bottom');
-  readonly align = input<PopoverAlign>('start');
+  readonly side = input<ScPopoverSide>('bottom');
+  readonly align = input<ScPopoverAlign>('start');
 
   // For single mode
   readonly selected = model<Date | undefined>(undefined);

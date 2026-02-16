@@ -3,12 +3,8 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ScField,
-  ScInput,
-  ScLabel,
-  ScFieldDescription,
-} from '@semantic-components/ui-lab';
+import { ScField, ScFieldDescription, ScLabel } from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-field-label-demo',

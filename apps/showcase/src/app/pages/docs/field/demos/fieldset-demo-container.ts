@@ -29,20 +29,20 @@ export class FieldsetDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScFieldSet,
-  ScFieldLegend,
+  ScFieldset,
+  ScLegend,
   ScFieldGroup,
   ScField,
-  ScLabel,
   ScFieldDescription,
-  ScInput,
-} from '@semantic-components/ui-lab';
+} from "@semantic-components/ui";
+import { ScLabel } from '@semantic-components/ui';
+import { ScInput } from "@semantic-components/ui-lab";
 
 @Component({
   selector: 'app-fieldset-demo',
   imports: [
-    ScFieldSet,
-    ScFieldLegend,
+    ScFieldset,
+    ScLegend,
     ScFieldGroup,
     ScField,
     ScLabel,
@@ -50,8 +50,8 @@ import {
     ScInput,
   ],
   template: \`
-    <fieldset sc-field-set>
-      <legend sc-field-legend>Personal Information</legend>
+    <fieldset sc-fieldset>
+      <legend sc-legend>Personal Information</legend>
       <p sc-field-description>Please provide your personal details below.</p>
 
       <div sc-field-group>

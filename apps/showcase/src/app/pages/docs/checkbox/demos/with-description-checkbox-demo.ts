@@ -5,11 +5,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScCheckboxField,
   ScCheckbox,
-  ScLabel,
+  ScCheckboxField,
   ScFieldDescription,
-} from '@semantic-components/ui-lab';
+  ScLabel,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-with-description-checkbox-demo',

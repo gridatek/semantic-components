@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScKbd } from '@semantic-components/ui-lab';
+import { ScKbd } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-kbd-demo',

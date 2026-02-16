@@ -28,7 +28,7 @@ export class InlineKbdDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScKbd } from '@semantic-components/ui-lab';
+import { ScKbd } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-inline-kbd-demo',

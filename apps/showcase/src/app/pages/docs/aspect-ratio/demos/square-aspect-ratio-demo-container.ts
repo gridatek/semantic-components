@@ -28,7 +28,7 @@ export class SquareAspectRatioDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScAspectRatio } from '@semantic-components/ui-lab';
+import { ScAspectRatio } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-square-aspect-ratio-demo',

@@ -77,7 +77,7 @@ export default class TablePage {
   ScTableHeaderCell,
   ScTableHeader,
   ScTableRow,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   imports: [

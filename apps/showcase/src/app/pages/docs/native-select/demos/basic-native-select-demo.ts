@@ -3,9 +3,8 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
-  ScField,
-  ScLabel,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,

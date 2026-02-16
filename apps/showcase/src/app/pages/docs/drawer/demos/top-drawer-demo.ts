@@ -13,7 +13,7 @@ import {
   ScDrawerProvider,
   ScDrawerTitle,
   ScDrawerTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-top-drawer-demo',

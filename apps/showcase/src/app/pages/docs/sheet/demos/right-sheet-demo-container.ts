@@ -28,7 +28,9 @@ export class RightSheetDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
+  ScButton,
   ScSheetProvider,
   ScSheetClose,
   ScSheet,
@@ -38,11 +40,19 @@ import {
   ScSheetPortal,
   ScSheetTitle,
   ScSheetTrigger,
+} from '@semantic-components/ui';
+import {
+  ScField,
+  ScFieldGroup,
+  ScInput,
+  ScLabel,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-right-sheet-demo',
   imports: [
+    SiXIcon,
+    ScButton,
     ScSheetProvider,
     ScSheetClose,
     ScSheet,
@@ -52,34 +62,20 @@ import {
     ScSheetPortal,
     ScSheetTitle,
     ScSheetTrigger,
+    ScField,
+    ScFieldGroup,
+    ScInput,
+    ScLabel,
   ],
   template: \`
     <div sc-sheet-provider>
-      <button
-        sc-sheet-trigger
-        class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-      >
+      <button sc-button sc-sheet-trigger variant="outline">
         Open Right Sheet
       </button>
       <ng-template scSheetPortal>
         <div sc-sheet>
           <button sc-sheet-close>
-            <svg
-              class="size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+            <svg si-x-icon></svg>
             <span class="sr-only">Close</span>
           </button>
           <div sc-sheet-header>
@@ -88,35 +84,18 @@ import {
               Make changes to your profile here. Click save when you're done.
             </p>
           </div>
-          <div class="grid gap-4 py-4">
-            <div class="grid grid-cols-4 items-center gap-4">
-              <label for="name" class="text-right text-sm font-medium">
-                Name
-              </label>
-              <input
-                id="name"
-                value="Pedro Duarte"
-                class="col-span-3 flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
+          <div sc-field-group>
+            <div sc-field orientation="horizontal">
+              <label sc-label>Name</label>
+              <input cdkFocusInitial sc-input value="Pedro Duarte" />
             </div>
-            <div class="grid grid-cols-4 items-center gap-4">
-              <label for="username" class="text-right text-sm font-medium">
-                Username
-              </label>
-              <input
-                id="username"
-                value="@peduarte"
-                class="col-span-3 flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
+            <div sc-field orientation="horizontal">
+              <label sc-label>Username</label>
+              <input sc-input value="@peduarte" />
             </div>
           </div>
           <div sc-sheet-footer>
-            <button
-              type="submit"
-              class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            >
-              Save changes
-            </button>
+            <button sc-button type="submit">Save changes</button>
           </div>
         </div>
       </ng-template>

@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSpinner } from '@semantic-components/ui-lab';
+import { ScSpinner } from '@semantic-components/ui';
 import { SiLoader2Icon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -11,9 +11,9 @@ import { SiLoader2Icon } from '@semantic-icons/lucide-icons';
   imports: [ScSpinner, SiLoader2Icon],
   template: `
     <div
-      class="relative h-32 rounded-lg border bg-muted/50 flex items-center justify-center"
+      class="relative h-64 w-96 rounded-lg border bg-muted/50 flex items-center justify-center"
     >
-      <div class="text-center">
+      <div class="flex flex-col items-center">
         <svg sc-spinner si-loader-2-icon class="size-8 text-primary"></svg>
         <p class="mt-2 text-sm text-muted-foreground">Loading content...</p>
       </div>

@@ -30,7 +30,7 @@ export class BasicTextareaDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui-lab';
+import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-textarea-demo',

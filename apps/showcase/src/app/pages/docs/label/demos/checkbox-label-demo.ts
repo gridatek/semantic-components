@@ -3,11 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ScLabel,
-  ScCheckboxField,
-  ScCheckbox,
-} from '@semantic-components/ui-lab';
+import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-label-demo',

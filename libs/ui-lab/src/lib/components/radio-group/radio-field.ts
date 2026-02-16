@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_FIELD } from '../field';
+import { SC_FIELD } from '@semantic-components/ui';
 
 @Component({
   selector: 'div[sc-radio-field], label[sc-radio-field]',

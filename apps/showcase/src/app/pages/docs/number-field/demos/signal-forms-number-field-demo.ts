@@ -13,7 +13,7 @@ import {
   ScNumberFieldInput,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui-lab';
+import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-signal-forms-number-field-demo',

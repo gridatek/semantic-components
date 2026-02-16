@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScBadge } from '@semantic-components/ui-lab';
+import { ScBadge } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-with-icons-badge-demo',

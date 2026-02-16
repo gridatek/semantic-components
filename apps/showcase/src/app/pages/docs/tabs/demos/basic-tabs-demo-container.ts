@@ -24,7 +24,7 @@ export class BasicTabsDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTabs, ScTabPanel, ScTabList, ScTab } from '@semantic-components/ui-lab';
+import { ScTabs, ScTabPanel, ScTabList, ScTab } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-tabs-demo',

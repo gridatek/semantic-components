@@ -33,9 +33,9 @@ import { form, FormField, required } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldError,
-  ScInput,
   ScLabel,
-} from '@semantic-components/ui-lab';
+} from "@semantic-components/ui";
+import { ScInput } from "@semantic-components/ui-lab";
 
 @Component({
   selector: 'app-error-field-demo',

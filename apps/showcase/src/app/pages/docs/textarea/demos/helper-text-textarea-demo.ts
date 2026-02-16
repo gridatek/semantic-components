@@ -10,7 +10,7 @@ import {
   ScFieldDescription,
   ScLabel,
   ScTextarea,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-helper-text-textarea-demo',

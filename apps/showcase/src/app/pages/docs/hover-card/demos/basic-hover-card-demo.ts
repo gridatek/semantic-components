@@ -8,7 +8,7 @@ import {
   ScHoverCardPortal,
   ScHoverCard,
   ScHoverCardTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-hover-card-demo',
@@ -29,7 +29,7 @@ import {
       >
         &#64;angular
       </a>
-      <div sc-hover-card-portal>
+      <ng-template scHoverCardPortal>
         <div sc-hover-card>
           <div class="flex justify-between gap-4">
             <div
@@ -68,7 +68,7 @@ import {
             </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

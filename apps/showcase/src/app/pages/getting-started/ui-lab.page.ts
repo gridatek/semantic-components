@@ -105,19 +105,14 @@ export default class UiLabPage {
   readonly sourceCode =
     '@source "../node_modules/@semantic-components/ui-lab";';
 
-  readonly usageCode = `import { ScTabs, ScTabList, ScTab, ScTabPanel } from '@semantic-components/ui-lab';
+  readonly usageCode = `import { ScAlert } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-example',
-  imports: [ScTabs, ScTabList, ScTab, ScTabPanel],
+  imports: [ScAlert],
   template: \`
-    <div scTabs>
-      <div scTabList [selectedTab]="'tab1'" class="grid w-full grid-cols-2">
-        <button scTab value="tab1">Tab 1</button>
-        <button scTab value="tab2">Tab 2</button>
-      </div>
-      <div scTabPanel value="tab1">Content 1</div>
-      <div scTabPanel value="tab2">Content 2</div>
+    <div sc-alert variant="info">
+      <p>This is an informational alert message.</p>
     </div>
   \`,
 })

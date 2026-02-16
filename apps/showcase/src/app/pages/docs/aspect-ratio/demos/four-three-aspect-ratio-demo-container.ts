@@ -28,7 +28,7 @@ export class FourThreeAspectRatioDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScAspectRatio } from '@semantic-components/ui-lab';
+import { ScAspectRatio } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-four-three-aspect-ratio-demo',

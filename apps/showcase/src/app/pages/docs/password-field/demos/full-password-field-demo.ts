@@ -4,6 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScPasswordField,
   ScPasswordFieldInputGroup,
@@ -11,7 +12,6 @@ import {
   ScPasswordFieldToggle,
   ScPasswordFieldStrength,
   ScPasswordFieldRequirements,
-  ScLabel,
 } from '@semantic-components/ui-lab';
 
 @Component({
