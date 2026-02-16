@@ -9,14 +9,21 @@ import {
   ScInputGroupInput,
   ScSpinner,
 } from '@semantic-components/ui';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-spinner-input-group-demo',
-  imports: [ScInputGroup, ScInputGroupAddon, ScInputGroupInput, ScSpinner],
+  imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScInputGroupInput,
+    ScSpinner,
+    SiLoaderCircleIcon,
+  ],
   template: `
     <div sc-input-group>
       <div sc-input-group-addon>
-        <svg sc-spinner class="size-4"></svg>
+        <svg sc-spinner si-loader-circle-icon class="size-4"></svg>
       </div>
       <input sc-input-group-input placeholder="Loading..." disabled />
     </div>
