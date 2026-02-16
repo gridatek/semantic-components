@@ -1,3 +1,4 @@
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -109,7 +110,7 @@ const positionMap: Record<PositionKey, ConnectedPosition> = {
 
 @Component({
   selector: 'div[sc-popover-provider]',
-  imports: [OverlayModule, NgTemplateOutlet],
+  imports: [OverlayModule, NgTemplateOutlet, CdkTrapFocus],
   template: `
     <ng-content />
 
@@ -122,7 +123,9 @@ const positionMap: Record<PositionKey, ConnectedPosition> = {
         (overlayOutsideClick)="close()"
         (overlayKeydown)="onKeydown($event)"
       >
-        <ng-container [ngTemplateOutlet]="popoverPortal().templateRef" />
+        <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+          <ng-container [ngTemplateOutlet]="popoverPortal().templateRef" />
+        </div>
       </ng-template>
     }
   `,

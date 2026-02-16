@@ -21,7 +21,6 @@ type ScPopoverState = 'open' | 'closed';
   `,
   host: {
     role: 'dialog',
-    tabindex: '-1',
     'data-slot': 'popover',
     '[class]': 'class()',
     '[attr.data-open]': 'state() === "open" ? true : null',
