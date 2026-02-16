@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScPagination } from './pagination';
-import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
+import { buttonVariants, ScButtonVariants } from '../button/button';
 
 @Component({
   selector: 'a[sc-pagination-first], button[sc-pagination-first]',

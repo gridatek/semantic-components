@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScPagination } from './pagination';
-import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
+import { buttonVariants, ScButtonVariants } from '../button/button';
 
 @Directive({
   selector: 'a[sc-pagination-link], button[sc-pagination-link]',
