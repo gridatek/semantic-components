@@ -4,25 +4,25 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { SizesAvatarDemo } from './sizes-avatar-demo';
+import { GroupAvatarDemo } from './group-avatar-demo';
 
 @Component({
-  selector: 'app-sizes-avatar-demo-container',
-  imports: [DemoContainer, SizesAvatarDemo],
+  selector: 'app-group-avatar-demo-container',
+  imports: [DemoContainer, GroupAvatarDemo],
   template: `
     <app-demo-container
-      title="Sizes"
-      demoUrl="/demos/avatar/sizes-avatar-demo"
+      title="Group"
+      demoUrl="/demos/avatar/group-avatar-demo"
       [code]="code"
     >
-      <app-sizes-avatar-demo />
+      <app-group-avatar-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SizesAvatarDemoContainer {
+export class GroupAvatarDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
@@ -31,15 +31,23 @@ export class SizesAvatarDemoContainer {
 import {
   ScAvatar,
   ScAvatarFallback,
+  ScAvatarGroup,
+  ScAvatarGroupCount,
   ScAvatarImage,
 } from '@semantic-components/ui-lab';
 
 @Component({
-  selector: 'app-sizes-avatar-demo',
-  imports: [ScAvatar, ScAvatarFallback, ScAvatarImage],
+  selector: 'app-group-avatar-demo',
+  imports: [
+    ScAvatar,
+    ScAvatarFallback,
+    ScAvatarGroup,
+    ScAvatarGroupCount,
+    ScAvatarImage,
+  ],
   template: \`
-    <div class="flex items-end gap-4">
-      <span sc-avatar size="sm">
+    <div sc-avatar-group>
+      <span sc-avatar>
         <img
           sc-avatar-image
           src="https://github.com/shadcn.png"
@@ -50,23 +58,24 @@ import {
       <span sc-avatar>
         <img
           sc-avatar-image
-          src="https://github.com/shadcn.png"
-          alt="@shadcn"
+          src="https://github.com/vercel.png"
+          alt="@vercel"
         />
-        <span sc-avatar-fallback>CN</span>
+        <span sc-avatar-fallback>VC</span>
       </span>
-      <span sc-avatar size="lg">
-        <img
-          sc-avatar-image
-          src="https://github.com/shadcn.png"
-          alt="@shadcn"
-        />
-        <span sc-avatar-fallback>CN</span>
+      <span sc-avatar>
+        <img sc-avatar-image src="https://github.com/nextjs.png" alt="@nextjs" />
+        <span sc-avatar-fallback>NX</span>
       </span>
+      <span sc-avatar>
+        <img sc-avatar-image src="https://github.com/react.png" alt="@react" />
+        <span sc-avatar-fallback>RC</span>
+      </span>
+      <div sc-avatar-group-count>+3</div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SizesAvatarDemo {}`;
+export class GroupAvatarDemo {}`;
 }

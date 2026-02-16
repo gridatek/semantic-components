@@ -10,7 +10,11 @@ import { BasicAvatarDemo } from './basic-avatar-demo';
   selector: 'app-basic-avatar-demo-container',
   imports: [DemoContainer, BasicAvatarDemo],
   template: `
-    <app-demo-container title="Basic" [code]="code">
+    <app-demo-container
+      title="Basic"
+      demoUrl="/demos/avatar/basic-avatar-demo"
+      [code]="code"
+    >
       <app-basic-avatar-demo />
     </app-demo-container>
   `,

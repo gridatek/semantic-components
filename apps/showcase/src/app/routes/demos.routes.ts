@@ -188,6 +188,20 @@ export const demosRoutes: Route[] = [
             (m) => m.SizesAvatarDemo,
           ),
       },
+      {
+        path: 'badge-avatar-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/badge-avatar-demo').then(
+            (m) => m.BadgeAvatarDemo,
+          ),
+      },
+      {
+        path: 'group-avatar-demo',
+        loadComponent: () =>
+          import('../pages/docs/avatar/demos/group-avatar-demo').then(
+            (m) => m.GroupAvatarDemo,
+          ),
+      },
     ],
   },
   {

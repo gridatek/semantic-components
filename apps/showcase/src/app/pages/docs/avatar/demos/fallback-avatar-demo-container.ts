@@ -10,7 +10,11 @@ import { FallbackAvatarDemo } from './fallback-avatar-demo';
   selector: 'app-fallback-avatar-demo-container',
   imports: [DemoContainer, FallbackAvatarDemo],
   template: `
-    <app-demo-container title="Fallback" [code]="code">
+    <app-demo-container
+      title="Fallback"
+      demoUrl="/demos/avatar/fallback-avatar-demo"
+      [code]="code"
+    >
       <app-fallback-avatar-demo />
     </app-demo-container>
   `,
