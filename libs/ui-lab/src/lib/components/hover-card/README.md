@@ -1,4 +1,4 @@
-# Hover Card Components
+# Hover Card
 
 For sighted users to preview content available behind a link.
 
@@ -10,32 +10,32 @@ ScHoverCardProvider (Root)
     ├── side: input ('top' | 'right' | 'bottom' | 'left')
     ├── align: input ('start' | 'center' | 'end')
     ├── openDelay: input (default: 700ms)
-    └── closeDelay: input (default: 300ms)
-         │
-         ├── ScHoverCardTrigger
-         │     ├── Injects ScHoverCardProvider
-         │     ├── Uses CdkOverlayOrigin
-         │     └── Handles hover/focus with delay
-         │
-         └── ScHoverCardPortal
-               ├── Injects ScHoverCardProvider
-               ├── Uses cdkConnectedOverlay
-               └── Positions based on side/align
-                    │
-                    └── ScHoverCard
-                          ├── Injects ScHoverCardProvider
-                          ├── Content panel with styling
-                          └── Handles hover to keep card open
+    ├── closeDelay: input (default: 300ms)
+    ├── CDK overlay positioning (via cdkConnectedOverlay)
+    │
+    ├── ScHoverCardTrigger
+    │     ├── Injects ScHoverCardProvider
+    │     ├── Uses CdkOverlayOrigin
+    │     └── Handles hover/focus with delay
+    │
+    └── ScHoverCardPortal (ng-template directive)
+          ├── Captures TemplateRef
+          └── Rendered by provider via ngTemplateOutlet
+               │
+               └── ScHoverCard
+                     ├── Injects ScHoverCardProvider
+                     ├── Content panel with styling
+                     └── Handles hover to keep card open
 ```
 
 ## Components
 
-| Component             | Selector                      | Description                                     |
-| --------------------- | ----------------------------- | ----------------------------------------------- |
-| `ScHoverCardProvider` | `div[sc-hover-card-provider]` | Root wrapper with state and configuration       |
-| `ScHoverCardTrigger`  | `[sc-hover-card-trigger]`     | Element that triggers hover card on hover/focus |
-| `ScHoverCardPortal`   | `div[sc-hover-card-portal]`   | CDK overlay positioning layer                   |
-| `ScHoverCard`         | `div[sc-hover-card]`          | The card content displayed on hover             |
+| Component             | Selector                         | Description                                     |
+| --------------------- | -------------------------------- | ----------------------------------------------- |
+| `ScHoverCardProvider` | `div[sc-hover-card-provider]`    | Root wrapper with state, configuration, overlay |
+| `ScHoverCardTrigger`  | `[sc-hover-card-trigger]`        | Element that triggers hover card on hover/focus |
+| `ScHoverCardPortal`   | `ng-template[scHoverCardPortal]` | Template directive for portal content           |
+| `ScHoverCard`         | `div[sc-hover-card]`             | The card content displayed on hover             |
 
 ## Inputs
 
@@ -53,7 +53,7 @@ ScHoverCardProvider (Root)
 ```html
 <div sc-hover-card-provider>
   <a sc-hover-card-trigger href="/profile">@username</a>
-  <div sc-hover-card-portal>
+  <ng-template scHoverCardPortal>
     <div sc-hover-card>
       <div class="flex gap-4">
         <img src="avatar.jpg" class="size-12 rounded-full" />
@@ -63,7 +63,7 @@ ScHoverCardProvider (Root)
         </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -72,9 +72,9 @@ ScHoverCardProvider (Root)
 ```html
 <div sc-hover-card-provider side="right" align="start">
   <button sc-hover-card-trigger>Hover me</button>
-  <div sc-hover-card-portal>
+  <ng-template scHoverCardPortal>
     <div sc-hover-card>Content appears to the right, aligned to the top</div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -83,9 +83,9 @@ ScHoverCardProvider (Root)
 ```html
 <div sc-hover-card-provider [openDelay]="500" [closeDelay]="200">
   <span sc-hover-card-trigger>Quick hover</span>
-  <div sc-hover-card-portal>
+  <ng-template scHoverCardPortal>
     <div sc-hover-card>Shows faster, hides faster</div>
-  </div>
+  </ng-template>
 </div>
 ```
 
