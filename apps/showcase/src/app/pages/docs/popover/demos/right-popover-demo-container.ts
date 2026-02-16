@@ -29,26 +29,37 @@ export class RightPopoverDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScPopoverProvider,
-  ScPopoverPortal,
+  ScButton,
   ScPopover,
+  ScPopoverDescription,
+  ScPopoverHeader,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTitle,
   ScPopoverTrigger,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-right-popover-demo',
-  imports: [ScPopoverProvider, ScPopoverPortal, ScPopover, ScPopoverTrigger],
+  imports: [
+    ScButton,
+    ScPopover,
+    ScPopoverDescription,
+    ScPopoverHeader,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScPopoverTitle,
+    ScPopoverTrigger,
+  ],
   template: \`
     <div sc-popover-provider side="right">
-      <button
-        sc-popover-trigger
-        class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-      >
-        Right
-      </button>
+      <button sc-button sc-popover-trigger variant="outline">Right</button>
       <ng-template scPopoverPortal>
         <div sc-popover>
-          <p class="text-sm">This popover appears on the right.</p>
+          <div sc-popover-header>
+            <h4 sc-popover-title>Right</h4>
+            <p sc-popover-description>This popover appears on the right.</p>
+          </div>
         </div>
       </ng-template>
     </div>
