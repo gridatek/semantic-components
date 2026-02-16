@@ -29,7 +29,7 @@ import {
       >
         &#64;angular
       </a>
-      <div sc-hover-card-portal>
+      <ng-template scHoverCardPortal>
         <div sc-hover-card>
           <div class="flex justify-between gap-4">
             <div
@@ -68,7 +68,7 @@ import {
             </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

@@ -43,7 +43,7 @@ import {
         </svg>
         More Info
       </button>
-      <div sc-hover-card-portal>
+      <ng-template scHoverCardPortal>
         <div sc-hover-card>
           <div class="space-y-2">
             <h4 class="text-sm font-semibold">Information</h4>
@@ -54,7 +54,7 @@ import {
             </p>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

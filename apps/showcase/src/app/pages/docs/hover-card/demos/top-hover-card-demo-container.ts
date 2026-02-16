@@ -51,7 +51,7 @@ import {
       >
         What is Angular?
       </span>
-      <div sc-hover-card-portal>
+      <ng-template scHoverCardPortal>
         <div sc-hover-card>
           <div class="space-y-2">
             <h4 class="text-sm font-semibold">Angular</h4>
@@ -73,7 +73,7 @@ import {
             </div>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
