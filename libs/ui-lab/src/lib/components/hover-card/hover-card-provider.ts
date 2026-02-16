@@ -163,9 +163,7 @@ export class ScHoverCardProvider {
     return positionMap[key];
   });
 
-  protected readonly class = computed(() =>
-    cn('relative inline-block', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
     // When opening, open overlay immediately

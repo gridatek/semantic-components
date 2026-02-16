@@ -55,9 +55,7 @@ export class ScPopoverProvider {
 
   readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
 
-  protected readonly class = computed(() =>
-    cn('relative inline-block', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
     // Synchronize overlay state with logical state for opening

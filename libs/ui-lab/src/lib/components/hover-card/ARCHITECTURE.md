@@ -275,9 +275,9 @@ Example:
 
 ## Key Design Patterns
 
-### 1. Provider Pattern
+### 1. Provider Pattern with `contents` CSS
 
-The provider component manages shared state and configuration that child components can inject.
+The provider component manages shared state and configuration that child components can inject. It uses `display: contents` (`class="contents"`) so it doesn't generate a box in the layout. This means the provider wrapper is invisible to CSS layout — its children are laid out as if the provider element didn't exist. This is critical because adding a wrapper `<div>` around the trigger would break layouts (e.g., flex, grid) and interfere with positioning. All overlay-based providers (dialog, sheet, drawer, alert-dialog, hover-card, popover) follow this convention.
 
 ### 2. ng-template Portal Pattern
 
