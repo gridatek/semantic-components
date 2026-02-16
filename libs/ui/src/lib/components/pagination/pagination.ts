@@ -24,7 +24,7 @@ export interface ScPaginationChange {
   host: {
     'data-slot': 'pagination',
     role: 'navigation',
-    '[attr.aria-label]': '"pagination"',
+    'aria-label': 'pagination',
     '[class]': 'class()',
   },
 })
@@ -48,16 +48,12 @@ export class ScPagination {
     // Sync inputs to internal state
     effect(() => {
       const inputPage = this.currentPageInput();
-      if (inputPage !== undefined) {
-        untracked(() => this.currentPage.set(inputPage));
-      }
+      untracked(() => this.currentPage.set(inputPage));
     });
 
     effect(() => {
       const inputSize = this.pageSizeInput();
-      if (inputSize !== undefined) {
-        untracked(() => this.pageSize.set(inputSize));
-      }
+      untracked(() => this.pageSize.set(inputSize));
     });
   }
 
@@ -109,7 +105,7 @@ export class ScPagination {
     currentPage: number,
     totalPages: number,
   ): ScPaginationPage[] {
-    const siblingCount = 1; // Number of pages to show on each side of current page
+    const siblingCount = 1;
     // If total pages is less than or equal to 7, show all pages
     if (totalPages <= 7) {
       return Array.from({ length: totalPages }, (_, i) => ({
@@ -121,16 +117,12 @@ export class ScPagination {
     // For more than 7 pages, always return exactly 7 items
     const pages: ScPaginationPage[] = [];
 
-    // Pattern: [1, ..., current-1, current, current+1, ..., last]
-    // Total: 7 items
-
     // First page
     pages.push({ type: 'page', value: 1 });
 
     // Calculate the range around current page
-    const maxSiblings = siblingCount;
-    let start = Math.max(2, currentPage - maxSiblings);
-    let end = Math.min(totalPages - 1, currentPage + maxSiblings);
+    let start = Math.max(2, currentPage - siblingCount);
+    let end = Math.min(totalPages - 1, currentPage + siblingCount);
 
     // Adjust to ensure we show the right number of pages
     const totalMiddleSlots = 5; // Total slots minus first and last
@@ -151,7 +143,7 @@ export class ScPagination {
       start = Math.max(2, totalPages - pageSlots);
     } else if (needLeftEllipsis && needRightEllipsis) {
       // Middle: [1, ..., current-1, current, current+1, ..., last]
-      const middlePages = pageSlots; // e.g., 3 pages in the middle
+      const middlePages = pageSlots;
       const halfPages = Math.floor(middlePages / 2);
       start = currentPage - halfPages;
       end = currentPage + (middlePages - halfPages - 1);
