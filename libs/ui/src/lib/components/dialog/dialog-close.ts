@@ -21,8 +21,8 @@ export class ScDialogClose {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute top-2 right-2',
       buttonVariants({ variant: this.variant(), size: this.size() }),
+      'absolute top-2 right-2',
       this.classInput(),
     ),
   );
