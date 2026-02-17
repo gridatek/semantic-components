@@ -6,33 +6,33 @@ test.describe('Last Page Pagination Demo', () => {
   });
 
   test('should render pagination starting on page 10', async ({ page }) => {
-    const nav = page.locator('nav[sc-pagination]');
+    const nav = page.locator('nav[scPagination]');
     await expect(nav).toBeVisible();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/10/);
   });
 
   test('should disable Next button on last page', async ({ page }) => {
-    const nextBtn = page.locator('button[sc-pagination-next]');
+    const nextBtn = page.locator('button[scPaginationNext]');
     await expect(nextBtn).toHaveAttribute('aria-disabled', 'true');
   });
 
   test('should enable Previous button on last page', async ({ page }) => {
-    const previousBtn = page.locator('button[sc-pagination-previous]');
+    const previousBtn = page.locator('button[scPaginationPrevious]');
     await expect(previousBtn).not.toHaveAttribute('aria-disabled');
   });
 
   test('should show left ellipsis only on last page', async ({ page }) => {
     // On page 10: [1, ..., 6, 7, 8, 9, 10]
-    const ellipses = page.locator('span[sc-pagination-ellipsis]');
+    const ellipses = page.locator('span[scPaginationEllipsis]');
     await expect(ellipses).toHaveCount(1);
   });
 
   test('should always show page 1 and page 10', async ({ page }) => {
-    const pageLinks = page.locator('button[sc-pagination-link]');
+    const pageLinks = page.locator('button[scPaginationLink]');
     await expect(pageLinks.first()).toHaveText(/1/);
     await expect(pageLinks.last()).toHaveText(/10/);
   });
@@ -42,7 +42,7 @@ test.describe('Last Page Pagination Demo', () => {
     await previousBtn.click();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/9/);
   });
@@ -53,7 +53,7 @@ test.describe('Last Page Pagination Demo', () => {
     const previousBtn = page.getByRole('button', { name: 'Previous' });
     await previousBtn.click();
 
-    const nextBtn = page.locator('button[sc-pagination-next]');
+    const nextBtn = page.locator('button[scPaginationNext]');
     await expect(nextBtn).not.toHaveAttribute('aria-disabled');
   });
 
@@ -65,7 +65,7 @@ test.describe('Last Page Pagination Demo', () => {
     await nextBtn.click();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/10/);
   });
@@ -73,26 +73,26 @@ test.describe('Last Page Pagination Demo', () => {
   test('should navigate to page 1 by clicking the first page link', async ({
     page,
   }) => {
-    const page1 = page.locator('button[sc-pagination-link]').first();
+    const page1 = page.locator('button[scPaginationLink]').first();
     await page1.click();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/1/);
 
-    const previousBtn = page.locator('button[sc-pagination-previous]');
+    const previousBtn = page.locator('button[scPaginationPrevious]');
     await expect(previousBtn).toHaveAttribute('aria-disabled', 'true');
   });
 
   test('should have proper aria labels on nav buttons', async ({ page }) => {
-    const previousBtn = page.locator('button[sc-pagination-previous]');
+    const previousBtn = page.locator('button[scPaginationPrevious]');
     await expect(previousBtn).toHaveAttribute(
       'aria-label',
       'Go to previous page',
     );
 
-    const nextBtn = page.locator('button[sc-pagination-next]');
+    const nextBtn = page.locator('button[scPaginationNext]');
     await expect(nextBtn).toHaveAttribute('aria-label', 'Go to next page');
   });
 });

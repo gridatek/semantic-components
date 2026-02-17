@@ -6,7 +6,7 @@ test.describe('Sizes Button Demo', () => {
   });
 
   test('should render all four size buttons', async ({ page }) => {
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     await expect(buttons).toHaveCount(4);
   });
 
@@ -26,7 +26,7 @@ test.describe('Sizes Button Demo', () => {
   });
 
   test('should render icon-only button with SVG', async ({ page }) => {
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     const iconButton = buttons.nth(3);
     await expect(iconButton).toBeVisible();
     await expect(iconButton.locator('svg')).toBeVisible();
@@ -42,7 +42,7 @@ test.describe('Sizes Button Demo', () => {
     const smButton = page.getByRole('button', { name: 'Small' });
     await expect(smButton).toHaveClass(/h-7/);
 
-    const iconButton = page.locator('button[sc-button]').nth(3);
+    const iconButton = page.locator('button[scButton]').nth(3);
     await expect(iconButton).toHaveClass(/size-8/);
   });
 

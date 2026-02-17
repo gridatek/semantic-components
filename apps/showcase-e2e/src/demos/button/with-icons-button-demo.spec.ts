@@ -6,7 +6,7 @@ test.describe('With Icons Button Demo', () => {
   });
 
   test('should render all three buttons', async ({ page }) => {
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     await expect(buttons).toHaveCount(3);
   });
 
@@ -31,7 +31,7 @@ test.describe('With Icons Button Demo', () => {
   test('should contain SVGs with pointer-events-none class', async ({
     page,
   }) => {
-    const svgs = page.locator('button[sc-button] svg');
+    const svgs = page.locator('button[scButton] svg');
     const count = await svgs.count();
     expect(count).toBe(3);
 

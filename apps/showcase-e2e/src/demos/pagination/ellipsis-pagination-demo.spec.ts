@@ -6,7 +6,7 @@ test.describe('Ellipsis Pagination Demo', () => {
   });
 
   test('should render pagination navigation', async ({ page }) => {
-    const nav = page.locator('nav[sc-pagination]');
+    const nav = page.locator('nav[scPagination]');
     await expect(nav).toBeVisible();
     await expect(nav).toHaveAttribute('role', 'navigation');
     await expect(nav).toHaveAttribute('aria-label', 'pagination');
@@ -17,15 +17,15 @@ test.describe('Ellipsis Pagination Demo', () => {
   }) => {
     // 10 pages total (100 items / 10 per page), starting at page 1
     // Pattern: [1, 2, 3, 4, 5, ..., 10]
-    const pageLinks = page.locator('button[sc-pagination-link]');
+    const pageLinks = page.locator('button[scPaginationLink]');
     await expect(pageLinks).toHaveCount(6);
 
-    const ellipses = page.locator('span[sc-pagination-ellipsis]');
+    const ellipses = page.locator('span[scPaginationEllipsis]');
     await expect(ellipses).toHaveCount(1);
   });
 
   test('should render ellipsis with aria-hidden', async ({ page }) => {
-    const ellipsis = page.locator('span[sc-pagination-ellipsis]');
+    const ellipsis = page.locator('span[scPaginationEllipsis]');
     await expect(ellipsis.first()).toHaveAttribute('aria-hidden', 'true');
     await expect(ellipsis.first()).toHaveAttribute(
       'data-slot',
@@ -34,7 +34,7 @@ test.describe('Ellipsis Pagination Demo', () => {
   });
 
   test('should render ellipsis SVG icon', async ({ page }) => {
-    const ellipsis = page.locator('span[sc-pagination-ellipsis]');
+    const ellipsis = page.locator('span[scPaginationEllipsis]');
     const svg = ellipsis.first().locator('svg');
     await expect(svg).toBeVisible();
   });
@@ -43,7 +43,7 @@ test.describe('Ellipsis Pagination Demo', () => {
     page,
   }) => {
     const srOnly = page
-      .locator('span[sc-pagination-ellipsis]')
+      .locator('span[scPaginationEllipsis]')
       .first()
       .locator('.sr-only');
     await expect(srOnly).toHaveText('More pages');
@@ -53,7 +53,7 @@ test.describe('Ellipsis Pagination Demo', () => {
     page,
   }) => {
     // Navigate to page 5 (middle)
-    const page2 = page.locator('button[sc-pagination-link]', {
+    const page2 = page.locator('button[scPaginationLink]', {
       hasText: /^\s*2\s*$/,
     });
     await page2.click();
@@ -64,7 +64,7 @@ test.describe('Ellipsis Pagination Demo', () => {
     await nextBtn.click();
 
     // Now on page 5: [1, ..., 4, 5, 6, ..., 10]
-    const ellipses = page.locator('span[sc-pagination-ellipsis]');
+    const ellipses = page.locator('span[scPaginationEllipsis]');
     await expect(ellipses).toHaveCount(2);
   });
 
@@ -77,30 +77,30 @@ test.describe('Ellipsis Pagination Demo', () => {
     }
 
     // On page 10: [1, ..., 6, 7, 8, 9, 10]
-    const ellipses = page.locator('span[sc-pagination-ellipsis]');
+    const ellipses = page.locator('span[scPaginationEllipsis]');
     await expect(ellipses).toHaveCount(1);
 
     // Verify last page is active
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/10/);
   });
 
   test('should always show first and last page numbers', async ({ page }) => {
-    const pageLinks = page.locator('button[sc-pagination-link]');
+    const pageLinks = page.locator('button[scPaginationLink]');
     await expect(pageLinks.first()).toHaveText(/1/);
     await expect(pageLinks.last()).toHaveText(/10/);
   });
 
   test('should update active page on click', async ({ page }) => {
-    const page2 = page.locator('button[sc-pagination-link]', {
+    const page2 = page.locator('button[scPaginationLink]', {
       hasText: /^\s*2\s*$/,
     });
     await page2.click();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/2/);
   });
