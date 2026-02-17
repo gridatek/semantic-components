@@ -37,7 +37,7 @@ import { SiFolderIcon } from '@semantic-icons/lucide-icons';
           Get started by creating your first project.
         </div>
       </div>
-      <div scEmptyContent>
+      <div scEmptyBody>
         <button scButton>Create Project</button>
       </div>
     </div>

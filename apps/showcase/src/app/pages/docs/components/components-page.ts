@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScBadge } from '@semantic-components/ui';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
+import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
 import { ComponentCategory, ComponentLibrary } from '../../../data/components';
 import { ComponentsService } from '../../../services/components.service';
