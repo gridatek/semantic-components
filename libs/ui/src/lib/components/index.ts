@@ -11,6 +11,7 @@ export * from './card';
 export * from './checkbox';
 export * from './dialog';
 export * from './drawer';
+export * from './empty';
 export * from './field';
 export * from './hover-card';
 export * from './input';

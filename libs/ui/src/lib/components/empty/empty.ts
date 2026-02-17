@@ -1,19 +1,19 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[scEmptyDescription]',
+  selector: 'div[scEmpty]',
   host: {
-    'data-slot': 'empty-description',
+    'data-slot': 'empty',
     '[class]': 'class()',
   },
 })
-export class ScEmptyDescription {
+export class ScEmpty {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'text-sm/relaxed text-muted-foreground [&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4',
+      'gap-4 rounded-xl border-dashed p-6 flex w-full min-w-0 flex-1 flex-col items-center justify-center text-center text-balance',
       this.classInput(),
     ),
   );

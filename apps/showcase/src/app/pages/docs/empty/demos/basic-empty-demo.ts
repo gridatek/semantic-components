@@ -9,7 +9,7 @@ import {
   ScEmptyMedia,
   ScEmptyTitle,
   ScEmptyDescription,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

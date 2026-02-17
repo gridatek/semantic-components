@@ -342,9 +342,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'empty',
     description: 'Placeholder for empty content.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Layout',
-    hidden: true,
   },
   {
     name: 'Field',
