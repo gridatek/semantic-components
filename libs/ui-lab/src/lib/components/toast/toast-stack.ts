@@ -27,6 +27,8 @@ import { ScToaster } from './toaster';
         [variant]="toast.variant ?? 'default'"
         [attr.data-state]="toast.state ?? 'open'"
         (animationend)="onAnimationEnd($event, toast.id)"
+        (pointerEnter)="toastService.pause(toast.id)"
+        (pointerLeave)="toastService.resume(toast.id)"
       >
         <div class="grid gap-1">
           @if (toast.title) {

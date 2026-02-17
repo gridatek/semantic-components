@@ -14,6 +14,8 @@ export class ScToaster {
 
   private readonly defaultDuration = 5000;
   private timeouts = new Map<string, ReturnType<typeof setTimeout>>();
+  private timerStartTimes = new Map<string, number>();
+  private timerRemaining = new Map<string, number>();
 
   private readonly idGenerator = inject(_IdGenerator);
   private readonly overlay = inject(Overlay);
@@ -41,25 +43,59 @@ export class ScToaster {
 
     // Auto-dismiss after duration (if duration > 0)
     if (toast.duration && toast.duration > 0) {
-      const timeout = setTimeout(() => {
-        this.dismiss(id);
-      }, toast.duration);
-      this.timeouts.set(id, timeout);
+      this.startTimer(id, toast.duration);
     }
 
     return id;
   }
 
   /**
+   * Pause the auto-dismiss timer for a toast (e.g. on pointer hover).
+   */
+  pause(id: string): void {
+    const timeout = this.timeouts.get(id);
+    if (!timeout) return;
+
+    clearTimeout(timeout);
+    this.timeouts.delete(id);
+
+    const startTime = this.timerStartTimes.get(id);
+    if (startTime !== undefined) {
+      const elapsed = Date.now() - startTime;
+      const remaining = (this.timerRemaining.get(id) ?? 0) - elapsed;
+      this.timerRemaining.set(id, Math.max(0, remaining));
+    }
+  }
+
+  /**
+   * Resume the auto-dismiss timer for a toast (e.g. on pointer leave).
+   */
+  resume(id: string): void {
+    const remaining = this.timerRemaining.get(id);
+    if (remaining === undefined || remaining <= 0) return;
+
+    this.startTimer(id, remaining);
+  }
+
+  private startTimer(id: string, duration: number): void {
+    this.timerRemaining.set(id, duration);
+    this.timerStartTimes.set(id, Date.now());
+    const timeout = setTimeout(() => this.dismiss(id), duration);
+    this.timeouts.set(id, timeout);
+  }
+
+  /**
    * Dismiss a specific toast by ID
    */
   dismiss(id: string): void {
-    // Clear auto-dismiss timeout if exists
+    // Clear auto-dismiss timeout and timer tracking
     const timeout = this.timeouts.get(id);
     if (timeout) {
       clearTimeout(timeout);
       this.timeouts.delete(id);
     }
+    this.timerStartTimes.delete(id);
+    this.timerRemaining.delete(id);
 
     // Set state to 'closed' to trigger exit animation.
     // Actual removal happens in toast-stack via (animationend).
@@ -81,6 +117,8 @@ export class ScToaster {
   dismissAll(): void {
     this.timeouts.forEach((timeout) => clearTimeout(timeout));
     this.timeouts.clear();
+    this.timerStartTimes.clear();
+    this.timerRemaining.clear();
     this.toastsSignal.update((toasts) =>
       toasts.map((t) => ({ ...t, state: 'closed' as const })),
     );
