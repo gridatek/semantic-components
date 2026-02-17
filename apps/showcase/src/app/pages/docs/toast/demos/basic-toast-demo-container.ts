@@ -25,11 +25,10 @@ export class BasicToastDemoContainer {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScToastStack, ScToaster } from '@semantic-components/ui-lab';
+import { ScToaster } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-toast-demo',
-  imports: [ScToastStack],
   template: \`
     <button
       class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -37,8 +36,6 @@ import { ScToastStack, ScToaster } from '@semantic-components/ui-lab';
     >
       Show Toast
     </button>
-
-    <sc-toast-stack />
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

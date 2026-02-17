@@ -1,12 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   inject,
-  input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
 import { ScToast } from './toast';
 import { ScToastAction } from './toast-action';
 import { ScToastClose } from './toast-close';
@@ -67,22 +64,14 @@ import { ScToaster } from './toaster';
   `,
   host: {
     'data-slot': 'toast-stack',
-    '[class]': 'class()',
+    class:
+      'fixed top-0 z-100 flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToastStack {
-  readonly toastService = inject(ScToaster);
-  readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() =>
-    cn(
-      'fixed top-0 z-100 flex max-h-screen w-full flex-col-reverse gap-2 p-4',
-      'sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]',
-      this.classInput(),
-    ),
-  );
+  protected readonly toastService = inject(ScToaster);
 
   protected dismiss(id: string): void {
     this.toastService.dismiss(id);
