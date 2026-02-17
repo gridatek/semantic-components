@@ -15,41 +15,43 @@ interface SpacingFormModel {
   selector: 'app-basic-radio-group-demo',
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
-    <div scRadioGroup>
-      <label scRadioField class="flex items-center space-x-2">
-        <input
-          type="radio"
-          scRadio
-          value="default"
-          [formField]="spacingForm.spacing"
-          id="r1"
-        />
-        <span class="text-sm font-medium leading-none">Default</span>
-      </label>
-      <label scRadioField class="flex items-center space-x-2">
-        <input
-          type="radio"
-          scRadio
-          value="comfortable"
-          [formField]="spacingForm.spacing"
-          id="r2"
-        />
-        <span class="text-sm font-medium leading-none">Comfortable</span>
-      </label>
-      <label scRadioField class="flex items-center space-x-2">
-        <input
-          type="radio"
-          scRadio
-          value="compact"
-          [formField]="spacingForm.spacing"
-          id="r3"
-        />
-        <span class="text-sm font-medium leading-none">Compact</span>
-      </label>
+    <div class="flex flex-col gap-4">
+      <div scRadioGroup>
+        <label scRadioField class="items-center">
+          <input
+            type="radio"
+            scRadio
+            value="default"
+            [formField]="spacingForm.spacing"
+            id="r1"
+          />
+          <span class="text-sm font-medium leading-none">Default</span>
+        </label>
+        <label scRadioField class="items-center">
+          <input
+            type="radio"
+            scRadio
+            value="comfortable"
+            [formField]="spacingForm.spacing"
+            id="r2"
+          />
+          <span class="text-sm font-medium leading-none">Comfortable</span>
+        </label>
+        <label scRadioField class="items-center">
+          <input
+            type="radio"
+            scRadio
+            value="compact"
+            [formField]="spacingForm.spacing"
+            id="r3"
+          />
+          <span class="text-sm font-medium leading-none">Compact</span>
+        </label>
+      </div>
+      <p class="text-sm text-muted-foreground">
+        Selected: {{ formModel().spacing || 'none' }}
+      </p>
     </div>
-    <p class="mt-2 text-sm text-muted-foreground">
-      Selected: {{ formModel().spacing || 'none' }}
-    </p>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
