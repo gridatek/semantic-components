@@ -13,6 +13,7 @@ export class ScToaster {
   readonly toasts = this.toastsSignal.asReadonly();
 
   private readonly defaultDuration = 5000;
+  private readonly maxToasts = 5;
   private timeouts = new Map<string, ReturnType<typeof setTimeout>>();
   private timerStartTimes = new Map<string, number>();
   private timerRemaining = new Map<string, number>();
@@ -38,6 +39,13 @@ export class ScToaster {
       action: config.action,
       duration: config.duration ?? this.defaultDuration,
     };
+
+    // Dismiss the oldest toast if the limit is exceeded
+    const current = this.toastsSignal();
+    if (current.length >= this.maxToasts) {
+      const oldest = current.find((t) => t.state !== 'closed');
+      if (oldest) this.dismiss(oldest.id);
+    }
 
     this.toastsSignal.update((toasts) => [...toasts, toast]);
 
