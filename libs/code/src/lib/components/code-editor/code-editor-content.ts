@@ -196,19 +196,19 @@ export function detectLanguage(
     }
 
     /* Transparent background for editor overlay effect */
-    [sc-code-editor-content] pre.shiki,
-    [sc-code-editor-content] pre.shiki span {
+    [scCodeEditorContent] pre.shiki,
+    [scCodeEditorContent] pre.shiki span {
       background-color: transparent !important;
     }
 
     /* Word wrap support */
-    [sc-code-editor-content] .word-wrap-enabled pre.shiki {
+    [scCodeEditorContent] .word-wrap-enabled pre.shiki {
       white-space: pre-wrap;
       word-break: break-all;
     }
 
     /* Caret color */
-    [sc-code-editor-content] textarea {
+    [scCodeEditorContent] textarea {
       caret-color: var(--primary);
     }
   `,

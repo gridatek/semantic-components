@@ -89,7 +89,7 @@ export class ScDataTableColumnToggle {
 
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    if (!target.closest('[sc-data-table-column-toggle]')) {
+    if (!target.closest('[scDataTableColumnToggle]')) {
       this.isOpen.set(false);
     }
   }

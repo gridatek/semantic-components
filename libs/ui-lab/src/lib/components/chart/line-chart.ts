@@ -204,9 +204,7 @@ export class ScLineChart {
 
   onPointHover(event: MouseEvent, point: ChartDataPoint): void {
     const circle = event.target as SVGElement;
-    const parentRect = circle
-      .closest('[sc-line-chart]')
-      ?.getBoundingClientRect();
+    const parentRect = circle.closest('[scLineChart]')?.getBoundingClientRect();
     const circleRect = circle.getBoundingClientRect();
     if (parentRect) {
       this.tooltipX.set(

@@ -171,7 +171,7 @@ export class ScBarChart {
   onBarHover(event: MouseEvent, bar: ChartDataPoint, _index: number): void {
     const rect = (event.target as SVGElement).getBoundingClientRect();
     const parentRect = (event.target as SVGElement)
-      .closest('[sc-bar-chart]')
+      .closest('[scBarChart]')
       ?.getBoundingClientRect();
     if (parentRect) {
       this.tooltipX.set(rect.left - parentRect.left + rect.width / 2);

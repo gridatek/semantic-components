@@ -60,7 +60,7 @@ export class ScRatingField {
     const allItems = this.items();
     if (allItems.length === 0) {
       throw new Error(
-        'ScRatingField: No rating items found. Add at least one [sc-rating-item] element.',
+        'ScRatingField: No rating items found. Add at least one [scRatingItem] element.',
       );
     }
     return Math.max(...allItems.map((item) => item.value()));
