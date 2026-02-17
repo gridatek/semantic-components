@@ -5,7 +5,7 @@ A styled anchor element that shares button variants for consistent styling.
 ## Usage
 
 ```html
-<a sc-link href="/dashboard">Go to Dashboard</a>
+<a scLink href="/dashboard">Go to Dashboard</a>
 ```
 
 ## Directive
@@ -14,7 +14,7 @@ A styled anchor element that shares button variants for consistent styling.
 
 Link directive applied to `a` elements. Reuses `buttonVariants` from the Button component for consistent styling.
 
-**Selector:** `a[sc-link]`
+**Selector:** `a[scLink]`
 
 **Inputs:**
 
@@ -33,22 +33,22 @@ See the [Button README](../button/README.md) for available `ButtonVariant` and `
 ### Basic
 
 ```html
-<a sc-link href="/home">Home</a>
+<a scLink href="/home">Home</a>
 ```
 
 ### Variants
 
 ```html
-<a sc-link href="/action">Default</a>
-<a sc-link variant="outline" href="/settings">Outline</a>
-<a sc-link variant="ghost" href="/about">Ghost</a>
-<a sc-link variant="link" href="/docs">Link</a>
+<a scLink href="/action">Default</a>
+<a scLink variant="outline" href="/settings">Outline</a>
+<a scLink variant="ghost" href="/about">Ghost</a>
+<a scLink variant="link" href="/docs">Link</a>
 ```
 
 ### Disabled
 
 ```html
-<a sc-link disabled>Disabled Link</a>
+<a scLink disabled>Disabled Link</a>
 ```
 
 ## Features

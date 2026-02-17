@@ -42,7 +42,7 @@ import { ScSwitch } from '@semantic-components/ui-lab';
               Receive emails about new products and features.
             </p>
           </div>
-          <button sc-switch [(checked)]="marketing" id="marketing"></button>
+          <button scSwitch [(checked)]="marketing" id="marketing"></button>
         </div>
         <div class="flex items-center justify-between">
           <div class="space-y-0.5">
@@ -53,7 +53,7 @@ import { ScSwitch } from '@semantic-components/ui-lab';
               Receive emails about your account security.
             </p>
           </div>
-          <button sc-switch [(checked)]="security" id="security"></button>
+          <button scSwitch [(checked)]="security" id="security"></button>
         </div>
         <div class="flex items-center justify-between">
           <div class="space-y-0.5">
@@ -64,7 +64,7 @@ import { ScSwitch } from '@semantic-components/ui-lab';
               Receive emails about product updates and tips.
             </p>
           </div>
-          <button sc-switch [(checked)]="updates" id="updates"></button>
+          <button scSwitch [(checked)]="updates" id="updates"></button>
         </div>
       </div>
     </div>

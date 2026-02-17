@@ -26,16 +26,16 @@ import {
       <div class="space-y-2">
         <label class="text-sm font-medium">Skills</label>
         <div
-          sc-tag-input
+          scTagInput
           [(tags)]="skillTags"
           [maxTags]="10"
           placeholder="Add a skill..."
         >
           @for (tag of skillTags(); track tag) {
-            <span sc-tag-input-tag [tag]="tag" variant="secondary"></span>
+            <span scTagInputTag [tag]="tag" variant="secondary"></span>
           }
-          <input sc-tag-input-field />
-          <span sc-tag-input-count class="ml-auto text-xs"></span>
+          <input scTagInputField />
+          <span scTagInputCount class="ml-auto text-xs"></span>
         </div>
         <p class="text-xs text-muted-foreground">Add up to 10 skills</p>
       </div>
@@ -43,16 +43,16 @@ import {
       <div class="space-y-2">
         <label class="text-sm font-medium">Categories</label>
         <div
-          sc-tag-input
+          scTagInput
           [(tags)]="categoryTags"
           [maxTags]="3"
           placeholder="Select categories..."
         >
           @for (tag of categoryTags(); track tag) {
-            <span sc-tag-input-tag [tag]="tag"></span>
+            <span scTagInputTag [tag]="tag"></span>
           }
-          <input sc-tag-input-field />
-          <button sc-tag-input-clear></button>
+          <input scTagInputField />
+          <button scTagInputClear></button>
         </div>
       </div>
     </div>

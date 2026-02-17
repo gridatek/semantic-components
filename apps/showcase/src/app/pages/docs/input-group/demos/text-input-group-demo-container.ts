@@ -45,25 +45,25 @@ import {
   ],
   template: \`
     <div class="flex w-full max-w-sm flex-col gap-4">
-      <div sc-input-group>
-        <div sc-input-group-addon>
-          <span sc-input-group-text>$</span>
+      <div scInputGroup>
+        <div scInputGroupAddon>
+          <span scInputGroupText>$</span>
         </div>
-        <input sc-input variant="group" placeholder="Amount" />
-        <div sc-input-group-addon align="inline-end">
-          <span sc-input-group-text>USD</span>
+        <input scInput variant="group" placeholder="Amount" />
+        <div scInputGroupAddon align="inline-end">
+          <span scInputGroupText>USD</span>
         </div>
       </div>
-      <div sc-input-group>
-        <div sc-input-group-addon>
-          <span sc-input-group-text>https://</span>
+      <div scInputGroup>
+        <div scInputGroupAddon>
+          <span scInputGroupText>https://</span>
         </div>
-        <input sc-input variant="group" placeholder="example.com" />
+        <input scInput variant="group" placeholder="example.com" />
       </div>
-      <div sc-input-group>
-        <input sc-input variant="group" placeholder="Email" />
-        <div sc-input-group-addon align="inline-end">
-          <span sc-input-group-text>@company.com</span>
+      <div scInputGroup>
+        <input scInput variant="group" placeholder="Email" />
+        <div scInputGroupAddon align="inline-end">
+          <span scInputGroupText>@company.com</span>
         </div>
       </div>
     </div>

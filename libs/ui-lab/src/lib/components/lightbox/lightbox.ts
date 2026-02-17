@@ -60,7 +60,7 @@ export interface ScLightbox {
 export const SC_LIGHTBOX = new InjectionToken<ScLightbox>('SC_LIGHTBOX');
 
 @Directive({
-  selector: '[sc-lightbox]',
+  selector: '[scLightbox]',
   exportAs: 'scLightbox',
   providers: [{ provide: SC_LIGHTBOX, useExisting: ScLightboxDirective }],
   host: {

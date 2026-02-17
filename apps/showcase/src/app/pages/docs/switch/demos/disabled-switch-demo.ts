@@ -11,7 +11,7 @@ import { ScSwitch } from '@semantic-components/ui-lab';
   template: `
     <div class="space-y-3">
       <div class="flex items-center space-x-2">
-        <button sc-switch [disabled]="true" id="disabled-off"></button>
+        <button scSwitch [disabled]="true" id="disabled-off"></button>
         <label
           for="disabled-off"
           class="text-sm font-medium leading-none text-muted-foreground"
@@ -21,7 +21,7 @@ import { ScSwitch } from '@semantic-components/ui-lab';
       </div>
       <div class="flex items-center space-x-2">
         <button
-          sc-switch
+          scSwitch
           [checked]="true"
           [disabled]="true"
           id="disabled-on"

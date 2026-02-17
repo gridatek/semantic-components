@@ -10,7 +10,7 @@ export type ScEditorHeading = 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 export const SC_EDITOR = new InjectionToken<ScEditor>('SC_EDITOR');
 
 @Directive({
-  selector: '[sc-editor]',
+  selector: '[scEditor]',
   exportAs: 'scEditor',
   providers: [{ provide: SC_EDITOR, useExisting: ScEditor }],
   host: {

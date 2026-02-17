@@ -6,11 +6,11 @@ test.describe('First Page Pagination Demo', () => {
   });
 
   test('should render pagination starting on page 1', async ({ page }) => {
-    const nav = page.locator('nav[sc-pagination]');
+    const nav = page.locator('nav[scPagination]');
     await expect(nav).toBeVisible();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/1/);
   });
@@ -19,12 +19,12 @@ test.describe('First Page Pagination Demo', () => {
     page,
   }) => {
     // On page 1: [1, 2, 3, 4, 5, ..., 10]
-    const pageLinks = page.locator('button[sc-pagination-link]');
+    const pageLinks = page.locator('button[scPaginationLink]');
     await expect(pageLinks.last()).toHaveText(/10/);
   });
 
   test('should disable Previous button on first page', async ({ page }) => {
-    const previousBtn = page.locator('button[sc-pagination-previous]');
+    const previousBtn = page.locator('button[scPaginationPrevious]');
     await expect(previousBtn).toHaveAttribute('aria-disabled', 'true');
     await expect(previousBtn).toHaveAttribute(
       'aria-label',
@@ -33,13 +33,13 @@ test.describe('First Page Pagination Demo', () => {
   });
 
   test('should enable Next button on first page', async ({ page }) => {
-    const nextBtn = page.locator('button[sc-pagination-next]');
+    const nextBtn = page.locator('button[scPaginationNext]');
     await expect(nextBtn).not.toHaveAttribute('aria-disabled');
     await expect(nextBtn).toHaveAttribute('aria-label', 'Go to next page');
   });
 
   test('should show right ellipsis only on first page', async ({ page }) => {
-    const ellipses = page.locator('span[sc-pagination-ellipsis]');
+    const ellipses = page.locator('span[scPaginationEllipsis]');
     await expect(ellipses).toHaveCount(1);
   });
 
@@ -48,7 +48,7 @@ test.describe('First Page Pagination Demo', () => {
     await nextBtn.click();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/2/);
   });
@@ -59,7 +59,7 @@ test.describe('First Page Pagination Demo', () => {
     const nextBtn = page.getByRole('button', { name: 'Next' });
     await nextBtn.click();
 
-    const previousBtn = page.locator('button[sc-pagination-previous]');
+    const previousBtn = page.locator('button[scPaginationPrevious]');
     await expect(previousBtn).not.toHaveAttribute('aria-disabled');
   });
 
@@ -71,13 +71,13 @@ test.describe('First Page Pagination Demo', () => {
     await previousBtn.click();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/1/);
   });
 
   test('should render page items in list items', async ({ page }) => {
-    const items = page.locator('li[sc-pagination-item]');
+    const items = page.locator('li[scPaginationItem]');
     const count = await items.count();
     // Previous + page links + ellipsis + Next = at least 4
     expect(count).toBeGreaterThanOrEqual(4);

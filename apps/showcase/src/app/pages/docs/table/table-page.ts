@@ -42,13 +42,13 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>angular-ts</span>
-            <button sc-copy-button [value]="usageCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>angular-ts</span>
+            <button scCopyButton [value]="usageCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="usageCode"
             language="angular-ts"
           ></div>
@@ -92,26 +92,26 @@ export default class TablePage {
     TocHeading,
   ],
   template: \`
-    <table sc-table>
-      <caption sc-table-caption>A list of your recent invoices.</caption>
-      <thead sc-table-header>
-        <tr sc-table-row>
-          <th sc-table-header-cell>Invoice</th>
-          <th sc-table-header-cell>Status</th>
-          <th sc-table-header-cell class="text-right">Amount</th>
+    <table scTable>
+      <caption scTableCaption>A list of your recent invoices.</caption>
+      <thead scTableHeader>
+        <tr scTableRow>
+          <th scTableHeaderCell>Invoice</th>
+          <th scTableHeaderCell>Status</th>
+          <th scTableHeaderCell class="text-right">Amount</th>
         </tr>
       </thead>
-      <tbody sc-table-body>
-        <tr sc-table-row>
-          <td sc-table-cell>INV001</td>
-          <td sc-table-cell>Paid</td>
-          <td sc-table-cell class="text-right">$250.00</td>
+      <tbody scTableBody>
+        <tr scTableRow>
+          <td scTableCell>INV001</td>
+          <td scTableCell>Paid</td>
+          <td scTableCell class="text-right">$250.00</td>
         </tr>
       </tbody>
-      <tfoot sc-table-footer>
-        <tr sc-table-row>
-          <td sc-table-cell colspan="2">Total</td>
-          <td sc-table-cell class="text-right">$250.00</td>
+      <tfoot scTableFooter>
+        <tr scTableRow>
+          <td scTableCell colspan="2">Total</td>
+          <td scTableCell class="text-right">$250.00</td>
         </tr>
       </tfoot>
     </table>

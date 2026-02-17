@@ -11,10 +11,10 @@ import type { DockItem } from '@semantic-components/ui-lab';
   imports: [ScDock, ScDockItems, ScDockItem],
   template: `
     <div class="flex justify-center rounded-lg border bg-muted/30 p-8">
-      <nav sc-dock [magnificationScale]="2">
-        <div sc-dock-items>
+      <nav scDock [magnificationScale]="2">
+        <div scDockItems>
           @for (item of items; track item.id) {
-            <button sc-dock-item [item]="item"></button>
+            <button scDockItem [item]="item"></button>
           }
         </div>
       </nav>

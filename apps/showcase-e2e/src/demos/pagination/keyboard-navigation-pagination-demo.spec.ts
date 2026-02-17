@@ -8,11 +8,11 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
   test('should render pagination with First and Last buttons', async ({
     page,
   }) => {
-    const firstBtn = page.locator('button[sc-pagination-first]');
+    const firstBtn = page.locator('button[scPaginationFirst]');
     await expect(firstBtn).toBeVisible();
     await expect(firstBtn).toHaveAttribute('data-slot', 'pagination-first');
 
-    const lastBtn = page.locator('button[sc-pagination-last]');
+    const lastBtn = page.locator('button[scPaginationLast]');
     await expect(lastBtn).toBeVisible();
     await expect(lastBtn).toHaveAttribute('data-slot', 'pagination-last');
   });
@@ -32,35 +32,35 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
   });
 
   test('should have aria-labels on navigation buttons', async ({ page }) => {
-    const firstBtn = page.locator('button[sc-pagination-first]');
+    const firstBtn = page.locator('button[scPaginationFirst]');
     await expect(firstBtn).toHaveAttribute('aria-label', 'Go to first page');
 
-    const previousBtn = page.locator('button[sc-pagination-previous]');
+    const previousBtn = page.locator('button[scPaginationPrevious]');
     await expect(previousBtn).toHaveAttribute(
       'aria-label',
       'Go to previous page',
     );
 
-    const nextBtn = page.locator('button[sc-pagination-next]');
+    const nextBtn = page.locator('button[scPaginationNext]');
     await expect(nextBtn).toHaveAttribute('aria-label', 'Go to next page');
 
-    const lastBtn = page.locator('button[sc-pagination-last]');
+    const lastBtn = page.locator('button[scPaginationLast]');
     await expect(lastBtn).toHaveAttribute('aria-label', 'Go to last page');
   });
 
   test('should disable First and Previous on first page', async ({ page }) => {
-    const firstBtn = page.locator('button[sc-pagination-first]');
+    const firstBtn = page.locator('button[scPaginationFirst]');
     await expect(firstBtn).toHaveAttribute('aria-disabled', 'true');
 
-    const previousBtn = page.locator('button[sc-pagination-previous]');
+    const previousBtn = page.locator('button[scPaginationPrevious]');
     await expect(previousBtn).toHaveAttribute('aria-disabled', 'true');
   });
 
   test('should not disable Next and Last on first page', async ({ page }) => {
-    const nextBtn = page.locator('button[sc-pagination-next]');
+    const nextBtn = page.locator('button[scPaginationNext]');
     await expect(nextBtn).not.toHaveAttribute('aria-disabled');
 
-    const lastBtn = page.locator('button[sc-pagination-last]');
+    const lastBtn = page.locator('button[scPaginationLast]');
     await expect(lastBtn).not.toHaveAttribute('aria-disabled');
   });
 
@@ -70,7 +70,7 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
 
     // 250 items / 10 per page = 25 pages
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/25/);
   });
@@ -79,10 +79,10 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
     const lastBtn = page.getByRole('button', { name: 'Last' });
     await lastBtn.click();
 
-    const nextBtnDisabled = page.locator('button[sc-pagination-next]');
+    const nextBtnDisabled = page.locator('button[scPaginationNext]');
     await expect(nextBtnDisabled).toHaveAttribute('aria-disabled', 'true');
 
-    const lastBtnDisabled = page.locator('button[sc-pagination-last]');
+    const lastBtnDisabled = page.locator('button[scPaginationLast]');
     await expect(lastBtnDisabled).toHaveAttribute('aria-disabled', 'true');
   });
 
@@ -96,18 +96,16 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
     await firstBtn.click();
 
     const activePage = page.locator(
-      'button[sc-pagination-link][aria-current="page"]',
+      'button[scPaginationLink][aria-current="page"]',
     );
     await expect(activePage).toHaveText(/1/);
   });
 
   test('should render page size selector', async ({ page }) => {
-    const pageSizeSelector = page.locator(
-      'select[sc-pagination-page-size-select]',
-    );
+    const pageSizeSelector = page.locator('select[scPaginationPageSizeSelect]');
     await expect(pageSizeSelector).toBeVisible();
 
-    const select = page.locator('select[sc-pagination-page-size-select]');
+    const select = page.locator('select[scPaginationPageSizeSelect]');
     await expect(select).toBeVisible();
   });
 
@@ -126,7 +124,7 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
       'WebKit does not Tab-focus select elements by default',
     );
 
-    const select = page.locator('select[sc-pagination-page-size-select]');
+    const select = page.locator('select[scPaginationPageSizeSelect]');
     await select.focus();
     await expect(select).toBeFocused();
   });
@@ -134,7 +132,7 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
   test('should activate page link via keyboard Enter', async ({ page }) => {
     // On page 1, First and Previous buttons are disabled (not focusable)
     // So tabbing goes directly to the first page link
-    const firstPageLink = page.locator('button[sc-pagination-link]').first();
+    const firstPageLink = page.locator('button[scPaginationLink]').first();
 
     // Focus on first page link (disabled buttons are skipped in tab order)
     await firstPageLink.focus();
@@ -142,12 +140,12 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
 
     // Tab to next page link
     await page.keyboard.press('Tab');
-    const secondPageLink = page.locator('button[sc-pagination-link]').nth(1);
+    const secondPageLink = page.locator('button[scPaginationLink]').nth(1);
     await expect(secondPageLink).toBeFocused();
   });
 
   test('should change page size via keyboard', async ({ page }) => {
-    const select = page.locator('select[sc-pagination-page-size-select]');
+    const select = page.locator('select[scPaginationPageSizeSelect]');
     await select.focus();
     await select.selectOption('25');
 
@@ -168,7 +166,7 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
   });
 
   test('should render page link aria-labels', async ({ page }) => {
-    const pageLinks = page.locator('button[sc-pagination-link]');
+    const pageLinks = page.locator('button[scPaginationLink]');
     const count = await pageLinks.count();
     for (let i = 0; i < count; i++) {
       const ariaLabel = await pageLinks.nth(i).getAttribute('aria-label');

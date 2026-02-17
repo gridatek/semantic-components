@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
 @Directive({
-  selector: '[sc-color-picker-preview]',
+  selector: '[scColorPickerPreview]',
   host: {
     'data-slot': 'color-picker-preview',
     '[class]': 'class()',

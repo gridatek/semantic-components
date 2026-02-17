@@ -24,11 +24,11 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ```html
 <sc-marquee [duration]="30" [gap]="24">
   @for (item of items; track item) {
-  <div sc-marquee-item>{{ item }}</div>
+  <div scMarqueeItem>{{ item }}</div>
   }
-  <ng-container sc-marquee-clone>
+  <ng-container scMarqueeClone>
     @for (item of items; track item) {
-    <div sc-marquee-item>{{ item }}</div>
+    <div scMarqueeItem>{{ item }}</div>
     }
   </ng-container>
 </sc-marquee>
@@ -101,11 +101,11 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ```html
 <sc-marquee [duration]="30" [gap]="48">
   @for (logo of logos; track logo) {
-  <div sc-marquee-item class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
+  <div scMarqueeItem class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
   }
-  <ng-container sc-marquee-clone>
+  <ng-container scMarqueeClone>
     @for (logo of logos; track logo) {
-    <div sc-marquee-item class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
+    <div scMarqueeItem class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
     }
   </ng-container>
 </sc-marquee>
@@ -116,12 +116,12 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ```html
 <sc-marquee [duration]="40" [gap]="24">
   @for (testimonial of testimonials; track testimonial.name) {
-  <div sc-marquee-item class="w-80 p-4 border rounded">
+  <div scMarqueeItem class="w-80 p-4 border rounded">
     <p>"{{ testimonial.quote }}"</p>
     <p class="font-medium">{{ testimonial.name }}</p>
   </div>
   }
-  <ng-container sc-marquee-clone>
+  <ng-container scMarqueeClone>
     <!-- duplicate content -->
   </ng-container>
 </sc-marquee>
@@ -133,9 +133,9 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 <div class="h-48 overflow-hidden">
   <sc-marquee direction="vertical" [duration]="20">
     @for (notification of notifications; track notification.id) {
-    <div sc-marquee-item class="p-3 border rounded">{{ notification.icon }} {{ notification.title }}</div>
+    <div scMarqueeItem class="p-3 border rounded">{{ notification.icon }} {{ notification.title }}</div>
     }
-    <ng-container sc-marquee-clone>
+    <ng-container scMarqueeClone>
       <!-- duplicate content -->
     </ng-container>
   </sc-marquee>

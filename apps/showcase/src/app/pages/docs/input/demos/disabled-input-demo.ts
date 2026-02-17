@@ -12,10 +12,10 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-disabled-input-demo',
   imports: [FormField, ScField, ScInput, ScLabel],
   template: `
-    <div sc-field>
-      <label sc-label>Disabled</label>
+    <div scField>
+      <label scLabel>Disabled</label>
       <input
-        sc-input
+        scInput
         type="text"
         [formField]="disabledForm.text"
         placeholder="Disabled input"

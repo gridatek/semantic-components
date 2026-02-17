@@ -5,11 +5,11 @@ A multi-tag input component with chips for adding and removing tags.
 ## Usage
 
 ```html
-<div sc-tag-input [(tags)]="tags">
+<div scTagInput [(tags)]="tags">
   @for (tag of tags(); track tag) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field />
+  <input scTagInputField />
 </div>
 ```
 
@@ -19,7 +19,7 @@ A multi-tag input component with chips for adding and removing tags.
 
 Root container that manages tag state.
 
-**Selector:** `[sc-tag-input]`
+**Selector:** `[scTagInput]`
 
 **Inputs:**
 
@@ -62,7 +62,7 @@ Root container that manages tag state.
 
 The input field for typing new tags.
 
-**Selector:** `input[sc-tag-input-field]`
+**Selector:** `input[scTagInputField]`
 
 **Inputs:**
 
@@ -75,7 +75,7 @@ The input field for typing new tags.
 
 Individual tag chip.
 
-**Selector:** `[sc-tag-input-tag]`
+**Selector:** `[scTagInputTag]`
 
 **Inputs:**
 
@@ -89,13 +89,13 @@ Individual tag chip.
 
 Button to clear all tags.
 
-**Selector:** `button[sc-tag-input-clear]`
+**Selector:** `button[scTagInputClear]`
 
 ### ScTagInputCount
 
 Display tag count with optional max.
 
-**Selector:** `[sc-tag-input-count]`
+**Selector:** `[scTagInputCount]`
 
 **Inputs:**
 
@@ -109,104 +109,104 @@ Display tag count with optional max.
 ### Basic
 
 ```html
-<div sc-tag-input [(tags)]="tags">
+<div scTagInput [(tags)]="tags">
   @for (tag of tags(); track tag) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field />
+  <input scTagInputField />
 </div>
 ```
 
 ### With Clear Button
 
 ```html
-<div sc-tag-input [(tags)]="tags">
+<div scTagInput [(tags)]="tags">
   @for (tag of tags(); track tag) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field />
-  <button sc-tag-input-clear></button>
+  <input scTagInputField />
+  <button scTagInputClear></button>
 </div>
 ```
 
 ### With Max Tags
 
 ```html
-<div sc-tag-input [(tags)]="tags" [maxTags]="5">
+<div scTagInput [(tags)]="tags" [maxTags]="5">
   @for (tag of tags(); track tag) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field />
+  <input scTagInputField />
 </div>
-<span sc-tag-input-count></span>
+<span scTagInputCount></span>
 ```
 
 ### Different Variants
 
 ```html
 <!-- Default (Primary) -->
-<span sc-tag-input-tag [tag]="tag" variant="default"></span>
+<span scTagInputTag [tag]="tag" variant="default"></span>
 
 <!-- Secondary -->
-<span sc-tag-input-tag [tag]="tag" variant="secondary"></span>
+<span scTagInputTag [tag]="tag" variant="secondary"></span>
 
 <!-- Outline -->
-<span sc-tag-input-tag [tag]="tag" variant="outline"></span>
+<span scTagInputTag [tag]="tag" variant="outline"></span>
 ```
 
 ### Custom Delimiters
 
 ```html
 <!-- Add tags with Space or Tab -->
-<div sc-tag-input [(tags)]="tags" [delimiters]="['Enter', ' ', 'Tab']">
+<div scTagInput [(tags)]="tags" [delimiters]="['Enter', ' ', 'Tab']">
   @for (tag of tags(); track tag) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field />
+  <input scTagInputField />
 </div>
 ```
 
 ### Allow Duplicates
 
 ```html
-<div sc-tag-input [(tags)]="tags" [allowDuplicates]="true">
+<div scTagInput [(tags)]="tags" [allowDuplicates]="true">
   @for (tag of tags(); track $index) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field />
+  <input scTagInputField />
 </div>
 ```
 
 ### Add on Blur
 
 ```html
-<div sc-tag-input [(tags)]="tags">
+<div scTagInput [(tags)]="tags">
   @for (tag of tags(); track tag) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field [addOnBlur]="true" />
+  <input scTagInputField [addOnBlur]="true" />
 </div>
 ```
 
 ### With Validation
 
 ```html
-<div sc-tag-input [(tags)]="tags" [minLength]="2" [maxLength]="20">
+<div scTagInput [(tags)]="tags" [minLength]="2" [maxLength]="20">
   @for (tag of tags(); track tag) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field />
+  <input scTagInputField />
 </div>
 ```
 
 ### Disabled
 
 ```html
-<div sc-tag-input [tags]="['Fixed', 'Tags']" [disabled]="true">
+<div scTagInput [tags]="['Fixed', 'Tags']" [disabled]="true">
   @for (tag of ['Fixed', 'Tags']; track tag) {
-  <span sc-tag-input-tag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag"></span>
   }
-  <input sc-tag-input-field />
+  <input scTagInputField />
 </div>
 ```
 
@@ -215,15 +215,15 @@ Display tag count with optional max.
 ```html
 <div class="space-y-2">
   <label class="text-sm font-medium">Skills</label>
-  <div sc-tag-input [(tags)]="skills" [maxTags]="10" placeholder="Add a skill...">
+  <div scTagInput [(tags)]="skills" [maxTags]="10" placeholder="Add a skill...">
     @for (tag of skills(); track tag) {
-    <span sc-tag-input-tag [tag]="tag" variant="secondary"></span>
+    <span scTagInputTag [tag]="tag" variant="secondary"></span>
     }
-    <input sc-tag-input-field />
+    <input scTagInputField />
   </div>
   <div class="flex justify-between text-xs text-muted-foreground">
     <span>Add up to 10 skills</span>
-    <span sc-tag-input-count></span>
+    <span scTagInputCount></span>
   </div>
 </div>
 ```
@@ -231,11 +231,11 @@ Display tag count with optional max.
 ### Email Recipients
 
 ```html
-<div sc-tag-input [(tags)]="emails" placeholder="Add recipient...">
+<div scTagInput [(tags)]="emails" placeholder="Add recipient...">
   @for (email of emails(); track email) {
-  <span sc-tag-input-tag [tag]="email" variant="outline" class="rounded-full"></span>
+  <span scTagInputTag [tag]="email" variant="outline" class="rounded-full"></span>
   }
-  <input sc-tag-input-field [addOnBlur]="true" />
+  <input scTagInputField [addOnBlur]="true" />
 </div>
 ```
 

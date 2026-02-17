@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: '[sc-pdf-viewer-spacer]',
+  selector: '[scPdfViewerSpacer]',
   template: ``,
   host: {
     'data-slot': 'pdf-viewer-spacer',

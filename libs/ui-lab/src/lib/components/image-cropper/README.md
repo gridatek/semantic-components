@@ -13,10 +13,10 @@ An interactive image cropping component with drag, resize, zoom, and aspect rati
 ## Basic Usage
 
 ```html
-<div sc-image-cropper [src]="imageUrl" [(cropArea)]="cropArea" [containerHeight]="400">
-  <div sc-image-cropper-container #container class="rounded-lg overflow-hidden border"></div>
+<div scImageCropper [src]="imageUrl" [(cropArea)]="cropArea" [containerHeight]="400">
+  <div scImageCropperContainer #container class="rounded-lg overflow-hidden border"></div>
 
-  <div sc-image-cropper-controls></div>
+  <div scImageCropperControls></div>
 
   <button (click)="cropImage(container)">Crop</button>
 </div>
@@ -36,7 +36,7 @@ async cropImage(container: InstanceType<typeof ScImageCropperContainer>) {
 
 The root directive that manages state.
 
-**Selector:** `[sc-image-cropper]`
+**Selector:** `[scImageCropper]`
 
 **Inputs:**
 
@@ -70,7 +70,7 @@ The root directive that manages state.
 
 The interactive UI component that renders the image, crop area, grid, handles, and hidden canvas.
 
-**Selector:** `[sc-image-cropper-container]`
+**Selector:** `[scImageCropperContainer]`
 
 **Inputs:**
 
@@ -89,7 +89,7 @@ The interactive UI component that renders the image, crop area, grid, handles, a
 
 Zoom slider with zoom in/out buttons.
 
-**Selector:** `[sc-image-cropper-controls]`
+**Selector:** `[scImageCropperControls]`
 
 **Inputs:**
 
@@ -101,7 +101,7 @@ Zoom slider with zoom in/out buttons.
 
 Live preview of the cropped area.
 
-**Selector:** `[sc-image-cropper-preview]`
+**Selector:** `[scImageCropperPreview]`
 
 **Inputs:**
 
@@ -115,7 +115,7 @@ Live preview of the cropped area.
 
 Aspect ratio selector with predefined options.
 
-**Selector:** `[sc-image-cropper-aspect-ratio]`
+**Selector:** `[scImageCropperAspectRatio]`
 
 **Inputs:**
 
@@ -135,10 +135,10 @@ Aspect ratio selector with predefined options.
 ### Basic Cropping
 
 ```html
-<div sc-image-cropper [src]="imageSrc()" [(cropArea)]="cropArea" [containerHeight]="400">
-  <div sc-image-cropper-container #container class="rounded-lg border"></div>
+<div scImageCropper [src]="imageSrc()" [(cropArea)]="cropArea" [containerHeight]="400">
+  <div scImageCropperContainer #container class="rounded-lg border"></div>
 
-  <div sc-image-cropper-controls></div>
+  <div scImageCropperControls></div>
 
   <button (click)="cropImage(container)">Crop Image</button>
 </div>
@@ -161,12 +161,12 @@ export class MyComponent {
 ### With Aspect Ratio Selector
 
 ```html
-<div sc-image-cropper [src]="imageSrc()" [aspectRatio]="selectedAspectRatio()" [containerHeight]="400">
-  <div sc-image-cropper-container class="rounded-lg border"></div>
+<div scImageCropper [src]="imageSrc()" [aspectRatio]="selectedAspectRatio()" [containerHeight]="400">
+  <div scImageCropperContainer class="rounded-lg border"></div>
 
-  <div sc-image-cropper-aspect-ratio [options]="aspectRatioOptions" (aspectRatioChange)="selectedAspectRatio.set($event)"></div>
+  <div scImageCropperAspectRatio [options]="aspectRatioOptions" (aspectRatioChange)="selectedAspectRatio.set($event)"></div>
 
-  <div sc-image-cropper-controls></div>
+  <div scImageCropperControls></div>
 </div>
 ```
 
@@ -183,17 +183,17 @@ readonly aspectRatioOptions = [
 ### Avatar Cropper with Preview
 
 ```html
-<div sc-image-cropper [src]="imageSrc()" [aspectRatio]="1" [containerHeight]="300">
-  <div sc-image-cropper-container class="rounded-lg border"></div>
+<div scImageCropper [src]="imageSrc()" [aspectRatio]="1" [containerHeight]="300">
+  <div scImageCropperContainer class="rounded-lg border"></div>
 
   <div class="flex gap-8">
     <div class="flex-1">
-      <div sc-image-cropper-controls></div>
+      <div scImageCropperControls></div>
     </div>
 
     <div class="space-y-4">
       <p class="text-sm font-medium">Preview:</p>
-      <div sc-image-cropper-preview [width]="100" [height]="100" class="rounded-full overflow-hidden"></div>
+      <div scImageCropperPreview [width]="100" [height]="100" class="rounded-full overflow-hidden"></div>
     </div>
   </div>
 </div>
@@ -202,8 +202,8 @@ readonly aspectRatioOptions = [
 ### Custom Output Format
 
 ```html
-<div sc-image-cropper [src]="imageSrc()" [outputType]="'image/jpeg'" [outputQuality]="0.9">
-  <div sc-image-cropper-container #container></div>
+<div scImageCropper [src]="imageSrc()" [outputType]="'image/jpeg'" [outputQuality]="0.9">
+  <div scImageCropperContainer #container></div>
   <button (click)="container.crop()">Crop as JPEG</button>
 </div>
 ```
@@ -215,10 +215,10 @@ readonly aspectRatioOptions = [
   <input type="file" accept="image/*" (change)="onFileChange($event)" />
 
   @if (uploadedImage()) {
-  <div sc-image-cropper [src]="uploadedImage()!" [containerHeight]="400">
-    <div sc-image-cropper-container #container class="rounded-lg border"></div>
+  <div scImageCropper [src]="uploadedImage()!" [containerHeight]="400">
+    <div scImageCropperContainer #container class="rounded-lg border"></div>
 
-    <div sc-image-cropper-controls></div>
+    <div scImageCropperControls></div>
 
     <button (click)="cropAndDownload(container)">Crop & Download</button>
   </div>
@@ -252,8 +252,8 @@ async cropAndDownload(container: InstanceType<typeof ScImageCropperContainer>) {
 ### Real-time Crop Info
 
 ```html
-<div sc-image-cropper [src]="imageSrc()" [(cropArea)]="cropArea">
-  <div sc-image-cropper-container class="rounded-lg border"></div>
+<div scImageCropper [src]="imageSrc()" [(cropArea)]="cropArea">
+  <div scImageCropperContainer class="rounded-lg border"></div>
 
   <div class="grid grid-cols-2 gap-4 text-sm">
     <div>X: {{ cropArea().x.toFixed(0) }}px</div>

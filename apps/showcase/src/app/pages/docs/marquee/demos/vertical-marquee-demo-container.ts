@@ -34,7 +34,7 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
       <sc-marquee direction="vertical" [duration]="20" [gap]="12">
         @for (notification of notifications; track notification.id) {
           <div
-            sc-marquee-item
+            scMarqueeItem
             class="mx-2 rounded-lg border bg-background p-3 shadow-sm"
           >
             <div class="flex items-start gap-2">
@@ -48,10 +48,10 @@ import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/u
             </div>
           </div>
         }
-        <ng-container sc-marquee-clone>
+        <ng-container scMarqueeClone>
           @for (notification of notifications; track notification.id) {
             <div
-              sc-marquee-item
+              scMarqueeItem
               class="mx-2 rounded-lg border bg-background p-3 shadow-sm"
             >
               <div class="flex items-start gap-2">

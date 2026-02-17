@@ -35,9 +35,9 @@ import { ScInput } from "@semantic-components/ui-lab";
   selector: 'app-horizontal-field-demo',
   imports: [ScField, ScLabel, ScInput],
   template: \`
-    <div sc-field [orientation]="'horizontal'">
-      <label sc-label for="username">Username</label>
-      <input sc-input id="username" type="text" placeholder="Enter username" />
+    <div scField [orientation]="'horizontal'">
+      <label scLabel for="username">Username</label>
+      <input scInput id="username" type="text" placeholder="Enter username" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

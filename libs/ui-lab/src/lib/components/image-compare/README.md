@@ -14,13 +14,13 @@ Before/after image comparison slider with keyboard and touch support. Built usin
 ## Basic Usage
 
 ```html
-<div sc-image-compare class="w-full max-w-2xl aspect-[2/1]">
-  <div sc-image-compare-container>
-    <img sc-image-compare-before src="before.jpg" alt="Before" />
-    <img sc-image-compare-after src="after.jpg" alt="After" />
-    <div sc-image-compare-slider></div>
-    <div sc-image-compare-label class="top-2 left-2">Before</div>
-    <div sc-image-compare-label class="top-2 right-2">After</div>
+<div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+  <div scImageCompareContainer>
+    <img scImageCompareBefore src="before.jpg" alt="Before" />
+    <img scImageCompareAfter src="after.jpg" alt="After" />
+    <div scImageCompareSlider></div>
+    <div scImageCompareLabel class="top-2 left-2">Before</div>
+    <div scImageCompareLabel class="top-2 right-2">After</div>
   </div>
 </div>
 ```
@@ -79,13 +79,13 @@ Label component with full positioning control.
 ### Basic Usage
 
 ```html
-<div sc-image-compare class="w-full max-w-2xl aspect-[2/1]">
-  <div sc-image-compare-container>
-    <img sc-image-compare-before src="/images/before.jpg" alt="Before" />
-    <img sc-image-compare-after src="/images/after.jpg" alt="After" />
-    <div sc-image-compare-slider></div>
-    <div sc-image-compare-label class="top-2 left-2">Before</div>
-    <div sc-image-compare-label class="top-2 right-2">After</div>
+<div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+  <div scImageCompareContainer>
+    <img scImageCompareBefore src="/images/before.jpg" alt="Before" />
+    <img scImageCompareAfter src="/images/after.jpg" alt="After" />
+    <div scImageCompareSlider></div>
+    <div scImageCompareLabel class="top-2 left-2">Before</div>
+    <div scImageCompareLabel class="top-2 right-2">After</div>
   </div>
 </div>
 ```
@@ -95,11 +95,11 @@ Label component with full positioning control.
 Simply omit the label components:
 
 ```html
-<div sc-image-compare class="w-full max-w-2xl aspect-[2/1]">
-  <div sc-image-compare-container>
-    <img sc-image-compare-before src="before.jpg" alt="Before" />
-    <img sc-image-compare-after src="after.jpg" alt="After" />
-    <div sc-image-compare-slider></div>
+<div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+  <div scImageCompareContainer>
+    <img scImageCompareBefore src="before.jpg" alt="Before" />
+    <img scImageCompareAfter src="after.jpg" alt="After" />
+    <div scImageCompareSlider></div>
   </div>
 </div>
 ```
@@ -107,13 +107,13 @@ Simply omit the label components:
 ### Vertical Orientation
 
 ```html
-<div sc-image-compare [orientation]="'vertical'" class="w-full max-w-sm aspect-[2/3]">
-  <div sc-image-compare-container>
-    <img sc-image-compare-before src="before.jpg" alt="Top" />
-    <img sc-image-compare-after src="after.jpg" alt="Bottom" />
-    <div sc-image-compare-slider></div>
-    <div sc-image-compare-label class="top-2 left-2">Top</div>
-    <div sc-image-compare-label class="bottom-2 left-2">Bottom</div>
+<div scImageCompare [orientation]="'vertical'" class="w-full max-w-sm aspect-[2/3]">
+  <div scImageCompareContainer>
+    <img scImageCompareBefore src="before.jpg" alt="Top" />
+    <img scImageCompareAfter src="after.jpg" alt="Bottom" />
+    <div scImageCompareSlider></div>
+    <div scImageCompareLabel class="top-2 left-2">Top</div>
+    <div scImageCompareLabel class="bottom-2 left-2">Bottom</div>
   </div>
 </div>
 ```
@@ -123,13 +123,13 @@ Simply omit the label components:
 Labels have full positioning control:
 
 ```html
-<div sc-image-compare class="w-full max-w-2xl aspect-[2/1]">
-  <div sc-image-compare-container>
-    <img sc-image-compare-before src="before.jpg" alt="Before" />
-    <img sc-image-compare-after src="after.jpg" alt="After" />
-    <div sc-image-compare-slider></div>
-    <div sc-image-compare-label class="bottom-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full">Original</div>
-    <div sc-image-compare-label class="bottom-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full">Enhanced</div>
+<div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+  <div scImageCompareContainer>
+    <img scImageCompareBefore src="before.jpg" alt="Before" />
+    <img scImageCompareAfter src="after.jpg" alt="After" />
+    <div scImageCompareSlider></div>
+    <div scImageCompareLabel class="bottom-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full">Original</div>
+    <div scImageCompareLabel class="bottom-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full">Enhanced</div>
   </div>
 </div>
 ```
@@ -139,11 +139,11 @@ Labels have full positioning control:
 Use content projection to customize the slider handle:
 
 ```html
-<div sc-image-compare>
-  <div sc-image-compare-container>
-    <img sc-image-compare-before src="before.jpg" alt="Before" />
-    <img sc-image-compare-after src="after.jpg" alt="After" />
-    <div sc-image-compare-slider>
+<div scImageCompare>
+  <div scImageCompareContainer>
+    <img scImageCompareBefore src="before.jpg" alt="Before" />
+    <img scImageCompareAfter src="after.jpg" alt="After" />
+    <div scImageCompareSlider>
       <!-- Custom handle content -->
       <svg><!-- Your custom icon --></svg>
     </div>
@@ -156,11 +156,11 @@ Use content projection to customize the slider handle:
 ```typescript
 @Component({
   template: `
-    <div sc-image-compare [(position)]="position" class="w-full max-w-2xl aspect-[2/1]">
-      <div sc-image-compare-container>
-        <img sc-image-compare-before src="before.jpg" alt="Before" />
-        <img sc-image-compare-after src="after.jpg" alt="After" />
-        <div sc-image-compare-slider></div>
+    <div scImageCompare [(position)]="position" class="w-full max-w-2xl aspect-[2/1]">
+      <div scImageCompareContainer>
+        <img scImageCompareBefore src="before.jpg" alt="Before" />
+        <img scImageCompareAfter src="after.jpg" alt="After" />
+        <div scImageCompareSlider></div>
       </div>
     </div>
 
@@ -179,11 +179,11 @@ readonly position = signal(25); // Start at 25%
 ```
 
 ```html
-<div sc-image-compare [(position)]="position">
-  <div sc-image-compare-container>
-    <img sc-image-compare-before src="before.jpg" alt="Before" />
-    <img sc-image-compare-after src="after.jpg" alt="After" />
-    <div sc-image-compare-slider></div>
+<div scImageCompare [(position)]="position">
+  <div scImageCompareContainer>
+    <img scImageCompareBefore src="before.jpg" alt="Before" />
+    <img scImageCompareAfter src="after.jpg" alt="After" />
+    <div scImageCompareSlider></div>
   </div>
 </div>
 ```
@@ -204,13 +204,13 @@ The component uses CSS `clip-path` for the reveal effect. Set dimensions on the 
 
 ```html
 <!-- Fixed aspect ratio -->
-<div sc-image-compare class="w-full max-w-2xl aspect-[16/9]">...</div>
+<div scImageCompare class="w-full max-w-2xl aspect-[16/9]">...</div>
 
 <!-- Square -->
-<div sc-image-compare class="w-full max-w-md aspect-square">...</div>
+<div scImageCompare class="w-full max-w-md aspect-square">...</div>
 
 <!-- Custom dimensions -->
-<div sc-image-compare class="w-[600px] h-[400px]">...</div>
+<div scImageCompare class="w-[600px] h-[400px]">...</div>
 ```
 
 ## Composable Architecture

@@ -33,15 +33,15 @@ import {
     ScMenuTrigger,
   ],
   template: `
-    <div sc-menu-provider>
-      <button sc-menu-trigger>Open</button>
-      <div sc-menu-portal>
-        <div sc-menu class="w-56">
+    <div scMenuProvider>
+      <button scMenuTrigger>Open</button>
+      <div scMenuPortal>
+        <div scMenu class="w-56">
           <div class="px-2 py-1.5 text-sm font-semibold" role="presentation">
             My Account
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-item value="Profile">
+          <div scMenuSeparator></div>
+          <div scMenuItem value="Profile">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@ import {
               ⇧⌘P
             </span>
           </div>
-          <div sc-menu-item value="Billing">
+          <div scMenuItem value="Billing">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ import {
               ⌘B
             </span>
           </div>
-          <div sc-menu-item value="Settings">
+          <div scMenuItem value="Settings">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@ import {
               ⌘S
             </span>
           </div>
-          <div sc-menu-item value="Keyboard shortcuts">
+          <div scMenuItem value="Keyboard shortcuts">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -138,9 +138,9 @@ import {
               ⌘K
             </span>
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-sub-provider>
-            <div sc-menu-sub-trigger value="Invite users">
+          <div scMenuSeparator></div>
+          <div scMenuSubProvider>
+            <div scMenuSubTrigger value="Invite users">
               <svg
                 class="text-muted-foreground size-4"
                 xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,7 @@ import {
               </svg>
               <span class="flex-1">Invite users</span>
               <svg
-                sc-menu-sub-icon
+                scMenuSubIcon
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -175,9 +175,9 @@ import {
                 <path d="m9 18 6-6-6-6" />
               </svg>
             </div>
-            <div sc-menu-sub-portal>
-              <div sc-menu-sub>
-                <div sc-menu-item value="Email">
+            <div scMenuSubPortal>
+              <div scMenuSub>
+                <div scMenuItem value="Email">
                   <svg
                     class="text-muted-foreground size-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +196,7 @@ import {
                   </svg>
                   <span class="flex-1">Email</span>
                 </div>
-                <div sc-menu-item value="Message">
+                <div scMenuItem value="Message">
                   <svg
                     class="text-muted-foreground size-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -214,8 +214,8 @@ import {
                   </svg>
                   <span class="flex-1">Message</span>
                 </div>
-                <div sc-menu-separator></div>
-                <div sc-menu-item value="More...">
+                <div scMenuSeparator></div>
+                <div scMenuItem value="More...">
                   <svg
                     class="text-muted-foreground size-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -238,8 +238,8 @@ import {
               </div>
             </div>
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-item value="GitHub">
+          <div scMenuSeparator></div>
+          <div scMenuItem value="GitHub">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -260,7 +260,7 @@ import {
             </svg>
             <span class="flex-1">GitHub</span>
           </div>
-          <div sc-menu-item value="Support">
+          <div scMenuItem value="Support">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -283,8 +283,8 @@ import {
             </svg>
             <span class="flex-1">Support</span>
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-item value="Log out">
+          <div scMenuSeparator></div>
+          <div scMenuItem value="Log out">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"

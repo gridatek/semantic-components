@@ -35,14 +35,14 @@ import { ScKbd } from '@semantic-components/ui';
   imports: [ScKbd],
   template: \`
     <div class="flex flex-wrap items-center gap-2">
-      <kbd sc-kbd>⌘</kbd>
-      <kbd sc-kbd>Shift</kbd>
-      <kbd sc-kbd>Alt</kbd>
-      <kbd sc-kbd>Ctrl</kbd>
-      <kbd sc-kbd>Enter</kbd>
-      <kbd sc-kbd>Esc</kbd>
-      <kbd sc-kbd>Tab</kbd>
-      <kbd sc-kbd>Space</kbd>
+      <kbd scKbd>⌘</kbd>
+      <kbd scKbd>Shift</kbd>
+      <kbd scKbd>Alt</kbd>
+      <kbd scKbd>Ctrl</kbd>
+      <kbd scKbd>Enter</kbd>
+      <kbd scKbd>Esc</kbd>
+      <kbd scKbd>Tab</kbd>
+      <kbd scKbd>Space</kbd>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

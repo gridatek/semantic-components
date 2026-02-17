@@ -22,25 +22,25 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
 ### Basic Stat Card
 
 ```html
-<div sc-stat-card>
+<div scStatCard>
   <div class="space-y-1">
-    <p sc-stat-card-label>Total Revenue</p>
-    <p sc-stat-card-value>$45,231.89</p>
+    <p scStatCardLabel>Total Revenue</p>
+    <p scStatCardValue>$45,231.89</p>
   </div>
-  <p sc-stat-card-description>Revenue for the current period</p>
+  <p scStatCardDescription>Revenue for the current period</p>
 </div>
 ```
 
 ### With Icon
 
 ```html
-<div sc-stat-card>
+<div scStatCard>
   <div class="flex items-start justify-between">
     <div class="space-y-1">
-      <p sc-stat-card-label>Active Users</p>
-      <p sc-stat-card-value>2,350</p>
+      <p scStatCardLabel>Active Users</p>
+      <p scStatCardValue>2,350</p>
     </div>
-    <div sc-stat-card-icon>
+    <div scStatCardIcon>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
@@ -55,14 +55,14 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
 ### With Trend Indicator
 
 ```html
-<div sc-stat-card>
+<div scStatCard>
   <div class="space-y-1">
-    <p sc-stat-card-label>Sales</p>
-    <p sc-stat-card-value>12,234</p>
+    <p scStatCardLabel>Sales</p>
+    <p scStatCardValue>12,234</p>
   </div>
 
   <div class="mt-3 flex items-center gap-2">
-    <span sc-stat-card-change trend="up">
+    <span scStatCardChange trend="up">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="m18 15-6-6-6 6" />
       </svg>
@@ -76,13 +76,13 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
 ### Complete Example
 
 ```html
-<div sc-stat-card variant="default" size="md">
+<div scStatCard variant="default" size="md">
   <div class="flex items-start justify-between">
     <div class="space-y-1">
-      <p sc-stat-card-label size="md">Total Revenue</p>
-      <p sc-stat-card-value size="md">$45,231.89</p>
+      <p scStatCardLabel size="md">Total Revenue</p>
+      <p scStatCardValue size="md">$45,231.89</p>
     </div>
-    <div sc-stat-card-icon size="md">
+    <div scStatCardIcon size="md">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
@@ -90,7 +90,7 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
   </div>
 
   <div class="mt-3 flex items-center gap-2">
-    <span sc-stat-card-change trend="up">
+    <span scStatCardChange trend="up">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="m18 15-6-6-6 6" />
       </svg>
@@ -99,7 +99,7 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
     <span class="text-xs text-muted-foreground">from last month</span>
   </div>
 
-  <p sc-stat-card-description class="mt-2">Your revenue increased significantly this month</p>
+  <p scStatCardDescription class="mt-2">Your revenue increased significantly this month</p>
 </div>
 ```
 
@@ -108,7 +108,7 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
 ### Default (with border)
 
 ```html
-<div sc-stat-card variant="default">
+<div scStatCard variant="default">
   <!-- content -->
 </div>
 ```
@@ -116,7 +116,7 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
 ### Outline (thick border)
 
 ```html
-<div sc-stat-card variant="outline">
+<div scStatCard variant="outline">
   <!-- content -->
 </div>
 ```
@@ -124,7 +124,7 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
 ### Filled (colored background)
 
 ```html
-<div sc-stat-card variant="filled">
+<div scStatCard variant="filled">
   <!-- content -->
 </div>
 ```
@@ -134,27 +134,27 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
 ### Small
 
 ```html
-<div sc-stat-card size="sm">
-  <p sc-stat-card-label size="sm">Label</p>
-  <p sc-stat-card-value size="sm">1,234</p>
+<div scStatCard size="sm">
+  <p scStatCardLabel size="sm">Label</p>
+  <p scStatCardValue size="sm">1,234</p>
 </div>
 ```
 
 ### Medium (default)
 
 ```html
-<div sc-stat-card size="md">
-  <p sc-stat-card-label size="md">Label</p>
-  <p sc-stat-card-value size="md">5,678</p>
+<div scStatCard size="md">
+  <p scStatCardLabel size="md">Label</p>
+  <p scStatCardValue size="md">5,678</p>
 </div>
 ```
 
 ### Large
 
 ```html
-<div sc-stat-card size="lg">
-  <p sc-stat-card-label size="lg">Label</p>
-  <p sc-stat-card-value size="lg">9,012</p>
+<div scStatCard size="lg">
+  <p scStatCardLabel size="lg">Label</p>
+  <p scStatCardValue size="lg">9,012</p>
 </div>
 ```
 
@@ -167,17 +167,17 @@ The `sc-stat-card-change` directive automatically applies colors based on the `t
 - `trend="neutral"` - Muted text (neutral)
 
 ```html
-<span sc-stat-card-change trend="up">
+<span scStatCardChange trend="up">
   <svg><!-- up arrow --></svg>
   <span>+12.5%</span>
 </span>
 
-<span sc-stat-card-change trend="down">
+<span scStatCardChange trend="down">
   <svg><!-- down arrow --></svg>
   <span>-5.2%</span>
 </span>
 
-<span sc-stat-card-change trend="neutral">
+<span scStatCardChange trend="neutral">
   <span>No change</span>
 </span>
 ```
@@ -270,24 +270,24 @@ type StatCardSize = 'sm' | 'md' | 'lg';
 
 ```html
 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-  <div sc-stat-card>
-    <p sc-stat-card-label>Total Revenue</p>
-    <p sc-stat-card-value>$45,231.89</p>
+  <div scStatCard>
+    <p scStatCardLabel>Total Revenue</p>
+    <p scStatCardValue>$45,231.89</p>
   </div>
 
-  <div sc-stat-card>
-    <p sc-stat-card-label>Active Users</p>
-    <p sc-stat-card-value>2,350</p>
+  <div scStatCard>
+    <p scStatCardLabel>Active Users</p>
+    <p scStatCardValue>2,350</p>
   </div>
 
-  <div sc-stat-card>
-    <p sc-stat-card-label>Sales</p>
-    <p sc-stat-card-value>12,234</p>
+  <div scStatCard>
+    <p scStatCardLabel>Sales</p>
+    <p scStatCardValue>12,234</p>
   </div>
 
-  <div sc-stat-card>
-    <p sc-stat-card-label>Conversions</p>
-    <p sc-stat-card-value>573</p>
+  <div scStatCard>
+    <p scStatCardLabel>Conversions</p>
+    <p scStatCardValue>573</p>
   </div>
 </div>
 ```
@@ -297,21 +297,21 @@ type StatCardSize = 'sm' | 'md' | 'lg';
 Since all components use content projection, you can create any layout you need:
 
 ```html
-<div sc-stat-card>
+<div scStatCard>
   <!-- Custom header with icon on left -->
   <div class="flex items-center gap-3 mb-4">
-    <div sc-stat-card-icon>
+    <div scStatCardIcon>
       <svg><!-- icon --></svg>
     </div>
-    <p sc-stat-card-label>Revenue</p>
+    <p scStatCardLabel>Revenue</p>
   </div>
 
   <!-- Centered value -->
-  <p sc-stat-card-value class="text-center">$45,231.89</p>
+  <p scStatCardValue class="text-center">$45,231.89</p>
 
   <!-- Bottom trend -->
   <div class="mt-4 flex justify-center">
-    <span sc-stat-card-change trend="up">
+    <span scStatCardChange trend="up">
       <span>↑ 20.1%</span>
     </span>
   </div>

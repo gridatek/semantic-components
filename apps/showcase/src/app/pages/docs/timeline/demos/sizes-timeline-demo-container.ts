@@ -46,31 +46,31 @@ import {
     ScTimelineDescription,
   ],
   template: \`
-    <div sc-timeline class="ml-4">
-      <div sc-timeline-item>
-        <div sc-timeline-connector></div>
-        <div sc-timeline-dot size="sm"></div>
-        <div sc-timeline-content>
-          <h4 sc-timeline-title>Small Dot</h4>
-          <p sc-timeline-description>
+    <div scTimeline class="ml-4">
+      <div scTimelineItem>
+        <div scTimelineConnector></div>
+        <div scTimelineDot size="sm"></div>
+        <div scTimelineContent>
+          <h4 scTimelineTitle>Small Dot</h4>
+          <p scTimelineDescription>
             Using size="sm" for a smaller indicator.
           </p>
         </div>
       </div>
 
-      <div sc-timeline-item>
-        <div sc-timeline-connector></div>
-        <div sc-timeline-dot size="default"></div>
-        <div sc-timeline-content>
-          <h4 sc-timeline-title>Default Dot</h4>
-          <p sc-timeline-description>
+      <div scTimelineItem>
+        <div scTimelineConnector></div>
+        <div scTimelineDot size="default"></div>
+        <div scTimelineContent>
+          <h4 scTimelineTitle>Default Dot</h4>
+          <p scTimelineDescription>
             Using default size for standard indicator.
           </p>
         </div>
       </div>
 
-      <div sc-timeline-item>
-        <div sc-timeline-dot size="lg">
+      <div scTimelineItem>
+        <div scTimelineDot size="lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -84,9 +84,9 @@ import {
             />
           </svg>
         </div>
-        <div sc-timeline-content>
-          <h4 sc-timeline-title>Large Dot with Icon</h4>
-          <p sc-timeline-description>Using size="lg" with an icon inside.</p>
+        <div scTimelineContent>
+          <h4 scTimelineTitle>Large Dot with Icon</h4>
+          <p scTimelineDescription>Using size="lg" with an icon inside.</p>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ Child `TreeItem` components need their `parent` reference during `ngOnInit`, but
 
 ```typescript
 @Component({
-  selector: 'ul[sc-tree-item-group]',
+  selector: 'ul[scTreeItemGroup]',
   template: `
     <ng-template ngTreeItemGroup [ownedBy]="item.treeItem">
       <ng-content />
@@ -40,8 +40,8 @@ export class ScTreeItemGroup {
 **Consumer Usage:**
 
 ```html
-<ul sc-tree-item-group #srcGroup>
-  <li sc-tree-item [parent]="srcGroup.group()" value="child">
+<ul scTreeItemGroup #srcGroup>
+  <li scTreeItem [parent]="srcGroup.group()" value="child">
     <!-- srcGroup.group() is undefined when TreeItem initializes -->
   </li>
 </ul>

@@ -38,7 +38,7 @@ import { ScLabel } from '@semantic-components/ui';
   template: \`
     <div scCheckboxField>
       <input type="checkbox" scCheckbox [(checked)]="terms" id="terms" />
-      <label sc-label for="terms">Accept terms and conditions</label>
+      <label scLabel for="terms">Accept terms and conditions</label>
     </div>
     <p class="text-sm text-muted-foreground mt-2">Checked: {{ terms() }}</p>
   \`,

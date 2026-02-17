@@ -14,7 +14,7 @@ import { DEFAULT_DOCK_OPTIONS } from './dock-types';
 export const SC_DOCK = new InjectionToken<ScDock>('SC_DOCK');
 
 @Directive({
-  selector: '[sc-dock]',
+  selector: '[scDock]',
   exportAs: 'scDock',
   providers: [{ provide: SC_DOCK, useExisting: ScDock }],
   host: {

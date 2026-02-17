@@ -24,7 +24,7 @@ import { ScInfiniteScrollEnd } from './infinite-scroll-end';
 
       @if (loading()) {
         <div [class]="loaderContainerClass()">
-          <ng-content select="[sc-infinite-scroll-loader]" />
+          <ng-content select="[scInfiniteScrollLoader]" />
           @if (!hasCustomLoader()) {
             <div class="flex items-center justify-center gap-2 py-4">
               <svg
@@ -55,7 +55,7 @@ import { ScInfiniteScrollEnd } from './infinite-scroll-end';
 
       @if (hasReachedEnd() && !loading()) {
         <div [class]="endContainerClass()">
-          <ng-content select="[sc-infinite-scroll-end]" />
+          <ng-content select="[scInfiniteScrollEnd]" />
           @if (!hasCustomEnd()) {
             <div class="py-4 text-center text-sm text-muted-foreground">
               {{ endMessage() }}

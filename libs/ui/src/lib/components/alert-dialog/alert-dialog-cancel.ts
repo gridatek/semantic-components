@@ -4,7 +4,7 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
 import { buttonVariants, ScButtonVariants } from '../button';
 
 @Directive({
-  selector: 'button[sc-alert-dialog-cancel]',
+  selector: 'button[scAlertDialogCancel]',
   host: {
     'data-slot': 'alert-dialog-cancel',
     type: 'button',

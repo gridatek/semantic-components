@@ -14,13 +14,13 @@ A composable empty state component for displaying placeholder content.
 ## Usage
 
 ```html
-<div sc-empty class="border">
-  <div sc-empty-header>
-    <div sc-empty-media variant="icon">
+<div scEmpty class="border">
+  <div scEmptyHeader>
+    <div scEmptyMedia variant="icon">
       <svg si-search-icon></svg>
     </div>
-    <div sc-empty-title>No results found</div>
-    <div sc-empty-description>Try adjusting your search or filter to find what you're looking for.</div>
+    <div scEmptyTitle>No results found</div>
+    <div scEmptyDescription>Try adjusting your search or filter to find what you're looking for.</div>
   </div>
 </div>
 ```
@@ -28,16 +28,16 @@ A composable empty state component for displaying placeholder content.
 ## With Actions
 
 ```html
-<div sc-empty class="border">
-  <div sc-empty-header>
-    <div sc-empty-media variant="icon">
+<div scEmpty class="border">
+  <div scEmptyHeader>
+    <div scEmptyMedia variant="icon">
       <svg si-folder-icon></svg>
     </div>
-    <div sc-empty-title>No projects yet</div>
-    <div sc-empty-description>Get started by creating your first project.</div>
+    <div scEmptyTitle>No projects yet</div>
+    <div scEmptyDescription>Get started by creating your first project.</div>
   </div>
-  <div sc-empty-content>
-    <button sc-button>Create Project</button>
+  <div scEmptyContent>
+    <button scButton>Create Project</button>
   </div>
 </div>
 ```
@@ -46,12 +46,12 @@ A composable empty state component for displaying placeholder content.
 
 ```html
 <!-- Default: transparent background -->
-<div sc-empty-media>
+<div scEmptyMedia>
   <svg si-inbox-icon class="size-12"></svg>
 </div>
 
 <!-- Icon: muted background with rounded container -->
-<div sc-empty-media variant="icon">
+<div scEmptyMedia variant="icon">
   <svg si-search-icon></svg>
 </div>
 ```

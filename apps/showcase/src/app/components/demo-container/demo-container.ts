@@ -87,13 +87,13 @@ import { ConfigService } from '../../services/config.service';
         </div>
 
         <div scTabPanel value="code">
-          <div sc-code-viewer>
-            <div sc-code-viewer-header>
-              <span sc-code-viewer-label>{{ language() }}</span>
-              <button sc-copy-button [value]="code()"></button>
+          <div scCodeViewer>
+            <div scCodeViewerHeader>
+              <span scCodeViewerLabel>{{ language() }}</span>
+              <button scCopyButton [value]="code()"></button>
             </div>
             <div
-              sc-code-viewer-content
+              scCodeViewerContent
               [code]="code()"
               [language]="language()"
               [showLineNumbers]="true"

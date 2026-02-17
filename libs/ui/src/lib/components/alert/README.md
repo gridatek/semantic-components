@@ -12,11 +12,11 @@ Displays a callout for important information.
 ## Usage
 
 ```html
-<div sc-alert>
+<div scAlert>
   <svg class="size-4"><!-- icon --></svg>
-  <h5 sc-alert-title>Heads up!</h5>
-  <div sc-alert-description>You can add components using the cli.</div>
-  <button sc-alert-action>Action</button>
+  <h5 scAlertTitle>Heads up!</h5>
+  <div scAlertDescription>You can add components using the cli.</div>
+  <button scAlertAction>Action</button>
 </div>
 ```
 
@@ -25,20 +25,20 @@ Displays a callout for important information.
 ### Default
 
 ```html
-<div sc-alert>
-  <h5 sc-alert-title>Note</h5>
-  <div sc-alert-description>This is an informational alert.</div>
-  <button sc-alert-action>Action</button>
+<div scAlert>
+  <h5 scAlertTitle>Note</h5>
+  <div scAlertDescription>This is an informational alert.</div>
+  <button scAlertAction>Action</button>
 </div>
 ```
 
 ### Destructive
 
 ```html
-<div sc-alert variant="destructive">
-  <h5 sc-alert-title>Error</h5>
-  <div sc-alert-description>Your session has expired.</div>
-  <button sc-alert-action>Action</button>
+<div scAlert variant="destructive">
+  <h5 scAlertTitle>Error</h5>
+  <div scAlertDescription>Your session has expired.</div>
+  <button scAlertAction>Action</button>
 </div>
 ```
 
@@ -47,11 +47,11 @@ Displays a callout for important information.
 Icons are automatically positioned using CSS selectors:
 
 ```html
-<div sc-alert>
+<div scAlert>
   <svg class="size-4"><!-- icon --></svg>
-  <h5 sc-alert-title>Title</h5>
-  <div sc-alert-description>Description with icon offset.</div>
-  <button sc-alert-action>Action</button>
+  <h5 scAlertTitle>Title</h5>
+  <div scAlertDescription>Description with icon offset.</div>
+  <button scAlertAction>Action</button>
 </div>
 ```
 
@@ -61,17 +61,17 @@ Use the `class` input for custom styling:
 
 ```html
 <!-- Success -->
-<div sc-alert class="border-green-500/50 text-green-600 [&>svg]:text-green-600">
-  <h5 sc-alert-title>Success!</h5>
-  <div sc-alert-description>Changes saved.</div>
-  <button sc-alert-action>Action</button>
+<div scAlert class="border-green-500/50 text-green-600 [&>svg]:text-green-600">
+  <h5 scAlertTitle>Success!</h5>
+  <div scAlertDescription>Changes saved.</div>
+  <button scAlertAction>Action</button>
 </div>
 
 <!-- Warning -->
-<div sc-alert class="border-yellow-500/50 text-yellow-600 [&>svg]:text-yellow-600">
-  <h5 sc-alert-title>Warning</h5>
-  <div sc-alert-description>Account expiring soon.</div>
-  <button sc-alert-action>Action</button>
+<div scAlert class="border-yellow-500/50 text-yellow-600 [&>svg]:text-yellow-600">
+  <h5 scAlertTitle>Warning</h5>
+  <div scAlertDescription>Account expiring soon.</div>
+  <button scAlertAction>Action</button>
 </div>
 ```
 

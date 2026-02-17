@@ -31,61 +31,61 @@ import {
     ScContextMenuTrigger,
   ],
   template: `
-    <div sc-context-menu>
+    <div scContextMenu>
       <div
-        sc-context-menu-trigger
+        scContextMenuTrigger
         class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
       >
         Right click here
       </div>
 
       <sc-context-menu-content>
-        <span sc-context-menu-label>My Account</span>
-        <div sc-context-menu-separator></div>
+        <span scContextMenuLabel>My Account</span>
+        <div scContextMenuSeparator></div>
 
-        <div sc-context-menu-item (select)="onSelect('Back')">
+        <div scContextMenuItem (select)="onSelect('Back')">
           Back
-          <span sc-context-menu-shortcut>⌘[</span>
+          <span scContextMenuShortcut>⌘[</span>
         </div>
-        <div sc-context-menu-item [disabled]="true">
+        <div scContextMenuItem [disabled]="true">
           Forward
-          <span sc-context-menu-shortcut>⌘]</span>
+          <span scContextMenuShortcut>⌘]</span>
         </div>
-        <div sc-context-menu-item (select)="onSelect('Reload')">
+        <div scContextMenuItem (select)="onSelect('Reload')">
           Reload
-          <span sc-context-menu-shortcut>⌘R</span>
+          <span scContextMenuShortcut>⌘R</span>
         </div>
 
-        <div sc-context-menu-separator></div>
+        <div scContextMenuSeparator></div>
 
         <!-- Submenu -->
-        <div sc-context-menu-sub>
-          <div sc-context-menu-sub-trigger>More Tools</div>
-          <div sc-context-menu-sub-content>
-            <div sc-context-menu-item (select)="onSelect('Save Page As')">
+        <div scContextMenuSub>
+          <div scContextMenuSubTrigger>More Tools</div>
+          <div scContextMenuSubContent>
+            <div scContextMenuItem (select)="onSelect('Save Page As')">
               Save Page As...
-              <span sc-context-menu-shortcut>⇧⌘S</span>
+              <span scContextMenuShortcut>⇧⌘S</span>
             </div>
-            <div sc-context-menu-item (select)="onSelect('Create Shortcut')">
+            <div scContextMenuItem (select)="onSelect('Create Shortcut')">
               Create Shortcut...
             </div>
-            <div sc-context-menu-item (select)="onSelect('Name Window')">
+            <div scContextMenuItem (select)="onSelect('Name Window')">
               Name Window...
             </div>
-            <div sc-context-menu-separator></div>
-            <div sc-context-menu-item (select)="onSelect('Developer Tools')">
+            <div scContextMenuSeparator></div>
+            <div scContextMenuItem (select)="onSelect('Developer Tools')">
               Developer Tools
             </div>
           </div>
         </div>
 
-        <div sc-context-menu-separator></div>
+        <div scContextMenuSeparator></div>
 
-        <div sc-context-menu-item (select)="onSelect('Show Bookmarks Bar')">
+        <div scContextMenuItem (select)="onSelect('Show Bookmarks Bar')">
           Show Bookmarks Bar
-          <span sc-context-menu-shortcut>⇧⌘B</span>
+          <span scContextMenuShortcut>⇧⌘B</span>
         </div>
-        <div sc-context-menu-item (select)="onSelect('Show Full URLs')">
+        <div scContextMenuItem (select)="onSelect('Show Full URLs')">
           Show Full URLs
         </div>
       </sc-context-menu-content>

@@ -10,7 +10,7 @@ import { ScCopyCode } from '@semantic-components/ui-lab';
   imports: [ScCopyCode],
   template: `
     <div class="max-w-lg">
-      <div sc-copy-code [value]="codeSnippet">{{ codeSnippet }}</div>
+      <div scCopyCode [value]="codeSnippet">{{ codeSnippet }}</div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

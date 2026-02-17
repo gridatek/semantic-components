@@ -42,20 +42,20 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <h2 toc class="text-xl font-semibold tracking-tight">
           1. Install the package
         </h2>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="installCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>terminal</span>
+            <button scCopyButton [value]="installCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="installCode"
             language="bash"
           ></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -66,29 +66,29 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>css</span>
-            <button sc-copy-button [value]="sourceCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>css</span>
+            <button scCopyButton [value]="sourceCode"></button>
           </div>
-          <div sc-code-viewer-content [code]="sourceCode" language="css"></div>
+          <div scCodeViewerContent [code]="sourceCode" language="css"></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
         <p class="text-muted-foreground">
           Import and use components in your Angular templates:
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>angular-ts</span>
-            <button sc-copy-button [value]="usageCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>angular-ts</span>
+            <button scCopyButton [value]="usageCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="usageCode"
             language="angular-ts"
           ></div>
@@ -111,7 +111,7 @@ export default class UiLabPage {
   selector: 'app-example',
   imports: [ScAlert],
   template: \`
-    <div sc-alert variant="info">
+    <div scAlert variant="info">
       <p>This is an informational alert message.</p>
     </div>
   \`,

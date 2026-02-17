@@ -63,18 +63,18 @@ import {
         </label>
       </div>
     </div>
-    <div sc-code-editor>
-      <div sc-code-editor-header>
+    <div scCodeEditor>
+      <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
           <span class="text-sm text-muted-foreground">
             interactive.{{ getExtension(selectedLanguage()) }}
           </span>
-          <span sc-code-editor-label>{{ selectedLanguage() }}</span>
+          <span scCodeEditorLabel>{{ selectedLanguage() }}</span>
         </div>
-        <button sc-code-editor-copy-button [code]="interactiveCode"></button>
+        <button scCodeEditorCopyButton [code]="interactiveCode"></button>
       </div>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="interactiveCode"
         [language]="selectedLanguage()"
         [showLineNumbers]="showLineNumbers()"

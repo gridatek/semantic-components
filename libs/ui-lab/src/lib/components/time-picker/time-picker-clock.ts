@@ -14,7 +14,7 @@ import { SC_TIME_PICKER } from './time-picker';
 // TimePickerClock (visual clock selector)
 // ============================================================================
 @Component({
-  selector: '[sc-time-picker-clock]',
+  selector: '[scTimePickerClock]',
   template: `
     <div class="relative">
       <svg viewBox="0 0 200 200" class="size-48">

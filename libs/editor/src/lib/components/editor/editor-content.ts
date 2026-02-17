@@ -17,7 +17,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Component({
-  selector: 'div[sc-editor-content]',
+  selector: 'div[scEditorContent]',
   template: ``, // Empty - host element is the content div
   host: {
     'data-slot': 'editor-content',

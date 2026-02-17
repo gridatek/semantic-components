@@ -3,7 +3,7 @@ import { SC_RATING_FIELD } from './rating-field';
 import { SC_RATING_ITEM_GROUP } from './rating-item-group';
 
 @Directive({
-  selector: '[sc-rating-item]',
+  selector: '[scRatingItem]',
   host: {
     'data-slot': 'rating-item',
     role: 'radio',

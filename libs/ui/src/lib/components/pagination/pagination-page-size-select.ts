@@ -5,7 +5,7 @@ import { SC_FIELD } from '../field/field';
 import { ScPagination } from './pagination';
 
 @Directive({
-  selector: 'select[sc-pagination-page-size-select]',
+  selector: 'select[scPaginationPageSizeSelect]',
   host: {
     'data-slot': 'pagination-page-size-select',
     '[attr.id]': 'id()',

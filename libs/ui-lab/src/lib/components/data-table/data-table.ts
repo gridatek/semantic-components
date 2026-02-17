@@ -36,7 +36,7 @@ export const SC_DATA_TABLE = new InjectionToken<ScDataTable<unknown>>(
 );
 
 @Directive({
-  selector: '[sc-data-table]',
+  selector: '[scDataTable]',
   exportAs: 'scDataTable',
   providers: [{ provide: SC_DATA_TABLE, useExisting: ScDataTable }],
   host: {

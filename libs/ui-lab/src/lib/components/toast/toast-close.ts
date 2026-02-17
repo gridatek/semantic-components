@@ -2,7 +2,7 @@ import { computed, Directive, input, output } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'button[sc-toast-close]',
+  selector: 'button[scToastClose]',
   host: {
     'data-slot': 'toast-close',
     type: 'button',

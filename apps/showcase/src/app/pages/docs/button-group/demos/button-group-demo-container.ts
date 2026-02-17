@@ -41,21 +41,21 @@ import {
   encapsulation: ViewEncapsulation.None,
   template: \`
     <div class="flex flex-col gap-4">
-      <div sc-button-group>
-        <button sc-button variant="outline">First</button>
-        <button sc-button variant="outline">Second</button>
-        <button sc-button variant="outline">Third</button>
+      <div scButtonGroup>
+        <button scButton variant="outline">First</button>
+        <button scButton variant="outline">Second</button>
+        <button scButton variant="outline">Third</button>
       </div>
 
-      <div sc-button-group>
-        <div sc-button-group-text>Label</div>
-        <button sc-button variant="outline">Action</button>
+      <div scButtonGroup>
+        <div scButtonGroupText>Label</div>
+        <button scButton variant="outline">Action</button>
       </div>
 
-      <div sc-button-group>
-        <button sc-button variant="outline">Left</button>
-        <div sc-button-group-separator></div>
-        <button sc-button variant="outline">Right</button>
+      <div scButtonGroup>
+        <button scButton variant="outline">Left</button>
+        <div scButtonGroupSeparator></div>
+        <button scButton variant="outline">Right</button>
       </div>
     </div>
   \`,

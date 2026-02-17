@@ -31,7 +31,7 @@ The root directive manages shared state and provides context to children.
 export const SC_COMPONENT_NAME = new InjectionToken<ScComponentName>('SC_COMPONENT_NAME');
 
 @Directive({
-  selector: '[sc-component-name]',
+  selector: '[scComponentName]',
   exportAs: 'scComponentName',
   providers: [{ provide: SC_COMPONENT_NAME, useExisting: ScComponentName }],
   host: {
@@ -99,13 +99,13 @@ export class ScComponentName {
 
 ```typescript
 @Component({
-  selector: '[sc-tabs]',
+  selector: '[scTabs]',
   template: `
     <div class="tabs-header" role="tablist">
-      <ng-content select="[sc-tab-trigger]" />
+      <ng-content select="[scTabTrigger]" />
     </div>
     <div class="tabs-content">
-      <ng-content select="[sc-tab-content]" />
+      <ng-content select="[scTabContent]" />
     </div>
   `,
   providers: [{ provide: SC_TABS, useExisting: ScTabs }],
@@ -122,7 +122,7 @@ Container components group related sub-components and apply layout styles.
 
 ```typescript
 @Component({
-  selector: '[sc-component-name-group]',
+  selector: '[scComponentNameGroup]',
   template: `
     <ng-content />
   `,
@@ -156,7 +156,7 @@ Components that perform actions (buttons, toggles, inputs).
 
 ```typescript
 @Component({
-  selector: 'button[sc-component-name-action]',
+  selector: 'button[scComponentNameAction]',
   template: `
     <ng-content>
       <!-- Default icon/content -->
@@ -200,7 +200,7 @@ Input fields that sync with parent state.
 
 ```typescript
 @Component({
-  selector: 'input[sc-component-name-input]',
+  selector: 'input[scComponentNameInput]',
   template: ``,
   host: {
     'data-slot': 'component-name-input',
@@ -258,10 +258,10 @@ component-name/
 
 ### Selectors
 
-- **Root**: `[sc-component-name]` (attribute directive)
-- **Containers**: `[sc-component-name-group]` (attribute directive)
-- **Actions**: `button[sc-component-name-action]` (element + attribute)
-- **Inputs**: `input[sc-component-name-input]` (element + attribute)
+- **Root**: `[scComponentName]` (attribute directive)
+- **Containers**: `[scComponentNameGroup]` (attribute directive)
+- **Actions**: `button[scComponentNameAction]` (element + attribute)
+- **Inputs**: `input[scComponentNameInput]` (element + attribute)
 
 ### Injection Token
 
@@ -301,7 +301,7 @@ export class ScPasswordInput {
 **Usage:**
 
 ```html
-<sc-password-input [(value)]="password" />
+<scPasswordInput [(value)]="password" />
 ```
 
 **Limitations:**
@@ -318,7 +318,7 @@ export class ScPasswordInput {
 
 // Root directive
 @Directive({
-  selector: '[sc-password-field]',
+  selector: '[scPasswordField]',
   providers: [{ provide: SC_PASSWORD_FIELD, useExisting: ScPasswordField }],
 })
 export class ScPasswordField {
@@ -333,7 +333,7 @@ export class ScPasswordField {
 
 // Group component
 @Component({
-  selector: '[sc-password-field-input-group]',
+  selector: '[scPasswordFieldInputGroup]',
   template: `
     <ng-content />
   `,
@@ -344,7 +344,7 @@ export class ScPasswordFieldInputGroup {
 
 // Input component
 @Component({
-  selector: 'input[sc-password-field-input]',
+  selector: 'input[scPasswordFieldInput]',
   template: ``,
 })
 export class ScPasswordFieldInput {
@@ -353,7 +353,7 @@ export class ScPasswordFieldInput {
 
 // Toggle component
 @Component({
-  selector: 'button[sc-password-field-toggle]',
+  selector: 'button[scPasswordFieldToggle]',
   template: `
     <ng-content><svg>...</svg></ng-content>
   `,
@@ -371,38 +371,38 @@ export class ScPasswordFieldToggle {
 
 ```html
 <!-- Basic usage -->
-<div sc-password-field [(value)]="password">
-  <div sc-password-field-input-group>
-    <input sc-password-field-input />
-    <button sc-password-field-toggle></button>
+<div scPasswordField [(value)]="password">
+  <div scPasswordFieldInputGroup>
+    <input scPasswordFieldInput />
+    <button scPasswordFieldToggle></button>
   </div>
 </div>
 
 <!-- With label -->
-<div sc-password-field [(value)]="password">
-  <label sc-label>Password</label>
-  <div sc-password-field-input-group>
-    <input sc-password-field-input placeholder="Enter password" />
-    <button sc-password-field-toggle></button>
+<div scPasswordField [(value)]="password">
+  <label scLabel>Password</label>
+  <div scPasswordFieldInputGroup>
+    <input scPasswordFieldInput placeholder="Enter password" />
+    <button scPasswordFieldToggle></button>
   </div>
 </div>
 
 <!-- Custom icon -->
-<div sc-password-field [(value)]="password">
-  <div sc-password-field-input-group>
-    <input sc-password-field-input />
-    <button sc-password-field-toggle>
+<div scPasswordField [(value)]="password">
+  <div scPasswordFieldInputGroup>
+    <input scPasswordFieldInput />
+    <button scPasswordFieldToggle>
       <span>{{ visible() ? 'Hide' : 'Show' }}</span>
     </button>
   </div>
 </div>
 
 <!-- With prefix icon -->
-<div sc-password-field [(value)]="password">
-  <div sc-password-field-input-group>
+<div scPasswordField [(value)]="password">
+  <div scPasswordFieldInputGroup>
     <svg class="ml-2"><!-- Lock icon --></svg>
-    <input sc-password-field-input class="pl-8" />
-    <button sc-password-field-toggle></button>
+    <input scPasswordFieldInput class="pl-8" />
+    <button scPasswordFieldToggle></button>
   </div>
 </div>
 ```
@@ -422,7 +422,7 @@ export class ScPasswordFieldToggle {
 export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>('SC_NUMBER_FIELD');
 
 @Directive({
-  selector: '[sc-number-field]',
+  selector: '[scNumberField]',
   providers: [{ provide: SC_NUMBER_FIELD, useExisting: ScNumberField }],
   host: {
     'data-slot': 'number-field',
@@ -457,7 +457,7 @@ export class ScNumberField {
 
 // number-field-group.ts (Container)
 @Component({
-  selector: '[sc-number-field-group]',
+  selector: '[scNumberFieldGroup]',
   template: `
     <ng-content />
   `,
@@ -475,7 +475,7 @@ export class ScNumberFieldInputGroup {
 
 // number-field-input.ts (Input)
 @Component({
-  selector: 'input[sc-number-field-input]',
+  selector: 'input[scNumberFieldInput]',
   template: ``,
   host: {
     type: 'text',
@@ -499,7 +499,7 @@ export class ScNumberFieldInput {
 
 // number-field-increment.ts (Action)
 @Component({
-  selector: 'button[sc-number-field-increment]',
+  selector: 'button[scNumberFieldIncrement]',
   template: `
     <ng-content><svg>+</svg></ng-content>
   `,
@@ -519,7 +519,7 @@ export class ScNumberFieldIncrement {
 
 // number-field-decrement.ts (Action)
 @Component({
-  selector: 'button[sc-number-field-decrement]',
+  selector: 'button[scNumberFieldDecrement]',
   template: `
     <ng-content><svg>-</svg></ng-content>
   `,
@@ -541,13 +541,13 @@ export class ScNumberFieldDecrement {
 **Usage:**
 
 ```html
-<div sc-number-field [(value)]="count" [min]="0" [max]="100">
-  <label sc-label>Count</label>
+<div scNumberField [(value)]="count" [min]="0" [max]="100">
+  <label scLabel>Count</label>
 
-  <div sc-number-field-group>
-    <button sc-number-field-decrement></button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment></button>
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -724,7 +724,7 @@ export const SC_COMPONENT = new InjectionToken<ScComponent>('SC_COMPONENT');
 
 // 2. Create directive
 @Directive({
-  selector: '[sc-component]',
+  selector: '[scComponent]',
   providers: [{ provide: SC_COMPONENT, useExisting: ScComponent }],
 })
 export class ScComponent {
@@ -765,33 +765,33 @@ For each part of the template:
 
 ```html
 <!-- Minimal usage -->
-<div sc-component [(value)]="value">
-  <input sc-component-input />
+<div scComponent [(value)]="value">
+  <input scComponentInput />
 </div>
 
 <!-- Full usage -->
-<div sc-component [(value)]="value">
-  <label sc-label>Label</label>
-  <div sc-component-group>
-    <span sc-component-prefix>$</span>
-    <input sc-component-input />
-    <span sc-component-suffix>.00</span>
+<div scComponent [(value)]="value">
+  <label scLabel>Label</label>
+  <div scComponentGroup>
+    <span scComponentPrefix>$</span>
+    <input scComponentInput />
+    <span scComponentSuffix>.00</span>
   </div>
-  <p sc-component-description>Helper text</p>
+  <p scComponentDescription>Helper text</p>
 </div>
 ```
 
 ### Pattern 2: Conditional Sub-components
 
 ```html
-<div sc-component [(value)]="value">
-  <div sc-component-group>
+<div scComponent [(value)]="value">
+  <div scComponentGroup>
     @if (showPrefix) {
-    <span sc-component-prefix>Icon</span>
+    <span scComponentPrefix>Icon</span>
     }
-    <input sc-component-input />
+    <input scComponentInput />
     @if (showClear && value()) {
-    <button sc-component-clear></button>
+    <button scComponentClear></button>
     }
   </div>
 </div>
@@ -801,20 +801,20 @@ For each part of the template:
 
 ```html
 <!-- Horizontal layout -->
-<div sc-component [(value)]="value">
-  <div sc-component-group class="flex-row">
-    <button sc-component-decrement></button>
-    <input sc-component-input />
-    <button sc-component-increment></button>
+<div scComponent [(value)]="value">
+  <div scComponentGroup class="flex-row">
+    <button scComponentDecrement></button>
+    <input scComponentInput />
+    <button scComponentIncrement></button>
   </div>
 </div>
 
 <!-- Vertical layout -->
-<div sc-component [(value)]="value">
-  <div sc-component-group class="flex-col">
-    <button sc-component-increment></button>
-    <input sc-component-input />
-    <button sc-component-decrement></button>
+<div scComponent [(value)]="value">
+  <div scComponentGroup class="flex-col">
+    <button scComponentIncrement></button>
+    <input scComponentInput />
+    <button scComponentDecrement></button>
   </div>
 </div>
 ```
@@ -864,15 +864,15 @@ For each part of the template:
 Use the root directive with `model()` for two-way binding:
 
 ```typescript
-@Directive({ selector: '[sc-component]' })
+@Directive({ selector: '[scComponent]' })
 export class ScComponent {
   readonly value = model<string>('');
 }
 ```
 
 ```html
-<div sc-component [(value)]="formControl">
-  <input sc-component-input />
+<div scComponent [(value)]="formControl">
+  <input scComponentInput />
 </div>
 ```
 

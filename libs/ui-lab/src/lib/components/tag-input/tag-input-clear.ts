@@ -13,7 +13,7 @@ import { SC_TAG_INPUT } from './tag-input';
 // TagInputClear
 // ============================================================================
 @Component({
-  selector: 'button[sc-tag-input-clear]',
+  selector: 'button[scTagInputClear]',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"

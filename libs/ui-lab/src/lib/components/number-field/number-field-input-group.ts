@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Component({
-  selector: '[sc-number-field-group]',
+  selector: '[scNumberFieldGroup]',
   template: `
     <ng-content />
   `,

@@ -5,7 +5,7 @@ A button component that copies text to clipboard with visual feedback.
 ## Usage
 
 ```html
-<button sc-copy-button [value]="textToCopy"></button>
+<button scCopyButton [value]="textToCopy"></button>
 ```
 
 ## Components
@@ -14,7 +14,7 @@ A button component that copies text to clipboard with visual feedback.
 
 Core copy button with icon and feedback animation.
 
-**Selector:** `button[sc-copy-button]`
+**Selector:** `button[scCopyButton]`
 
 **Inputs:**
 
@@ -45,7 +45,7 @@ Core copy button with icon and feedback animation.
 
 Copy button with text label.
 
-**Selector:** `[sc-copy-button-with-text]`
+**Selector:** `[scCopyButtonWithText]`
 
 **Inputs:**
 
@@ -63,7 +63,7 @@ Copy button with text label.
 
 Input field with integrated copy button.
 
-**Selector:** `[sc-copy-input]`
+**Selector:** `[scCopyInput]`
 
 **Inputs:**
 
@@ -77,7 +77,7 @@ Input field with integrated copy button.
 
 Code block with copy button.
 
-**Selector:** `[sc-copy-code]`
+**Selector:** `[scCopyCode]`
 
 **Inputs:**
 
@@ -91,55 +91,55 @@ Code block with copy button.
 ### Basic
 
 ```html
-<button sc-copy-button [value]="'Hello, World!'"></button>
+<button scCopyButton [value]="'Hello, World!'"></button>
 ```
 
 ### With Event Handler
 
 ```html
-<button sc-copy-button [value]="text" (copySuccess)="onCopied($event)" (copyError)="onError($event)"></button>
+<button scCopyButton [value]="text" (copySuccess)="onCopied($event)" (copyError)="onError($event)"></button>
 ```
 
 ### Variants
 
 ```html
-<button sc-copy-button [value]="text" variant="ghost"></button>
-<button sc-copy-button [value]="text" variant="outline"></button>
-<button sc-copy-button [value]="text" variant="default"></button>
+<button scCopyButton [value]="text" variant="ghost"></button>
+<button scCopyButton [value]="text" variant="outline"></button>
+<button scCopyButton [value]="text" variant="default"></button>
 ```
 
 ### Sizes
 
 ```html
-<button sc-copy-button [value]="text" size="sm"></button>
-<button sc-copy-button [value]="text" size="default"></button>
-<button sc-copy-button [value]="text" size="lg"></button>
-<button sc-copy-button [value]="text" size="icon"></button>
+<button scCopyButton [value]="text" size="sm"></button>
+<button scCopyButton [value]="text" size="default"></button>
+<button scCopyButton [value]="text" size="lg"></button>
+<button scCopyButton [value]="text" size="icon"></button>
 ```
 
 ### With Text Label
 
 ```html
-<div sc-copy-button-with-text [value]="'Copy this text'"></div>
+<div scCopyButtonWithText [value]="'Copy this text'"></div>
 
-<div sc-copy-button-with-text [value]="shareLink" copyText="Copy Link" copiedText="Link Copied!"></div>
+<div scCopyButtonWithText [value]="shareLink" copyText="Copy Link" copiedText="Link Copied!"></div>
 ```
 
 ### Copy Input
 
 ```html
-<div sc-copy-input [value]="'https://example.com/share/abc123'"></div>
+<div scCopyInput [value]="'https://example.com/share/abc123'"></div>
 
 <div>
   <label>API Key</label>
-  <div sc-copy-input [value]="apiKey"></div>
+  <div scCopyInput [value]="apiKey"></div>
 </div>
 ```
 
 ### Copy Code Block
 
 ```html
-<div sc-copy-code [value]="codeSnippet">{{ codeSnippet }}</div>
+<div scCopyCode [value]="codeSnippet">{{ codeSnippet }}</div>
 ```
 
 ### Inline with Text
@@ -147,20 +147,20 @@ Code block with copy button.
 ```html
 <div class="flex items-center gap-2 border rounded-md px-3 py-2">
   <code class="flex-1">npm install package</code>
-  <button sc-copy-button [value]="'npm install package'" size="sm"></button>
+  <button scCopyButton [value]="'npm install package'" size="sm"></button>
 </div>
 ```
 
 ### Custom Timeout
 
 ```html
-<button sc-copy-button [value]="text" [timeout]="5000">Copy (5s feedback)</button>
+<button scCopyButton [value]="text" [timeout]="5000">Copy (5s feedback)</button>
 ```
 
 ### Disabled
 
 ```html
-<button sc-copy-button [value]="text" [disabled]="true"></button>
+<button scCopyButton [value]="text" [disabled]="true"></button>
 ```
 
 ### Share URL Pattern
@@ -168,7 +168,7 @@ Code block with copy button.
 ```html
 <div class="flex items-center gap-2">
   <input [value]="shareUrl" readonly class="flex-1 border rounded px-3 py-2" />
-  <button sc-copy-button [value]="shareUrl" variant="outline"></button>
+  <button scCopyButton [value]="shareUrl" variant="outline"></button>
 </div>
 ```
 
@@ -178,7 +178,7 @@ Code block with copy button.
 <div class="flex items-center gap-3">
   <div class="size-10 rounded-md" [style.background]="color"></div>
   <span class="flex-1">{{ color }}</span>
-  <button sc-copy-button [value]="color" variant="ghost"></button>
+  <button scCopyButton [value]="color" variant="ghost"></button>
 </div>
 ```
 
@@ -187,7 +187,7 @@ Code block with copy button.
 ```html
 <div class="flex items-center justify-between">
   <code class="text-2xl font-bold">SAVE20</code>
-  <button sc-copy-button [value]="'SAVE20'" variant="outline">Copy Code</button>
+  <button scCopyButton [value]="'SAVE20'" variant="outline">Copy Code</button>
 </div>
 ```
 

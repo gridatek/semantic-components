@@ -45,20 +45,20 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Install the editor library and its Tiptap peer dependencies.
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="installCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>terminal</span>
+            <button scCopyButton [value]="installCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="installCode"
             language="bash"
           ></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -69,16 +69,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>css</span>
-            <button sc-copy-button [value]="stylesCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>css</span>
+            <button scCopyButton [value]="stylesCode"></button>
           </div>
-          <div sc-code-viewer-content [code]="stylesCode" language="css"></div>
+          <div scCodeViewerContent [code]="stylesCode" language="css"></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -89,29 +89,29 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>css</span>
-            <button sc-copy-button [value]="sourceCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>css</span>
+            <button scCopyButton [value]="sourceCode"></button>
           </div>
-          <div sc-code-viewer-content [code]="sourceCode" language="css"></div>
+          <div scCodeViewerContent [code]="sourceCode" language="css"></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
         <p class="text-muted-foreground">
           Import and use the editor in your Angular templates:
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>angular-ts</span>
-            <button sc-copy-button [value]="usageCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>angular-ts</span>
+            <button scCopyButton [value]="usageCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="usageCode"
             language="angular-ts"
           ></div>
@@ -149,12 +149,12 @@ export default class EditorInstallPage {
     ScEditorItalicButton,
   ],
   template: \`
-    <div sc-editor>
-      <div sc-editor-toolbar>
-        <button sc-editor-bold-button></button>
-        <button sc-editor-italic-button></button>
+    <div scEditor>
+      <div scEditorToolbar>
+        <button scEditorBoldButton></button>
+        <button scEditorItalicButton></button>
       </div>
-      <div sc-editor-content></div>
+      <div scEditorContent></div>
     </div>
   \`,
 })

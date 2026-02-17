@@ -14,7 +14,7 @@ import { SC_FIELD } from '@semantic-components/ui';
 import { ScOptFieldSlot } from './opt-field-slot';
 
 @Directive({
-  selector: 'div[sc-opt-field], label[sc-opt-field]',
+  selector: 'div[scOptField], label[scOptField]',
   providers: [{ provide: SC_FIELD, useExisting: ScOptField }],
   host: {
     '[attr.role]': 'role()',

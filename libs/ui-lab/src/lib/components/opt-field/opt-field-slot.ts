@@ -26,7 +26,7 @@ import { ScOptFieldSlotChar } from './opt-field-slot-char';
   template: `
     <input
       #input
-      sc-opt-field-slot-input
+      scOptFieldSlotInput
       [value]="char()"
       [disabled]="optField.disabled()"
       (inputChange)="onInputChange($event)"
@@ -34,9 +34,9 @@ import { ScOptFieldSlotChar } from './opt-field-slot-char';
       (focused)="onFocusChange($event)"
     />
     @if (isActive() && !isFilled()) {
-      <div sc-opt-field-slot-caret></div>
+      <div scOptFieldSlotCaret></div>
     }
-    <span sc-opt-field-slot-char [char]="char()"></span>
+    <span scOptFieldSlotChar [char]="char()"></span>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

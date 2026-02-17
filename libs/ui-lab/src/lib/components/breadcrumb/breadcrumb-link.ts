@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'a[sc-breadcrumb-link]',
+  selector: 'a[scBreadcrumbLink]',
   host: {
     'data-slot': 'breadcrumb-link',
     '[class]': 'class()',

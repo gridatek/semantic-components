@@ -19,7 +19,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-combobox-portal]',
+  selector: 'div[scComboboxPortal]',
   imports: [ComboboxPopupContainer, ComboboxDialog, Combobox, ComboboxInput],
   template: `
     <ng-template ngComboboxPopupContainer>

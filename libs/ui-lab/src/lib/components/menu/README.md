@@ -24,31 +24,31 @@ ScMenuProvider (root wrapper)
 
 | Component           | Selector                    | Description                                     |
 | ------------------- | --------------------------- | ----------------------------------------------- |
-| `ScMenuProvider`    | `div[sc-menu-provider]`     | Root wrapper that auto-connects trigger to menu |
-| `ScMenuTrigger`     | `button[sc-menu-trigger]`   | Button that opens the menu                      |
-| `ScMenuPortal`      | `div[sc-menu-portal]`       | Handles overlay positioning                     |
-| `ScMenu`            | `div[sc-menu]`              | Menu container with animations                  |
-| `ScMenuItem`        | `div[sc-menu-item]`         | Selectable menu item                            |
-| `ScMenuSeparator`   | `div[sc-menu-separator]`    | Visual separator                                |
-| `ScMenuSubProvider` | `div[sc-menu-sub-provider]` | Submenu wrapper                                 |
-| `ScMenuSubTrigger`  | `div[sc-menu-sub-trigger]`  | Item that opens submenu                         |
-| `ScMenuSubPortal`   | `div[sc-menu-sub-portal]`   | Submenu overlay positioning                     |
-| `ScMenuSub`         | `div[sc-menu-sub]`          | Submenu container with animations               |
-| `ScMenuSubIcon`     | `svg[sc-menu-sub-icon]`     | Chevron icon for submenu triggers               |
+| `ScMenuProvider`    | `div[scMenuProvider]`     | Root wrapper that auto-connects trigger to menu |
+| `ScMenuTrigger`     | `button[scMenuTrigger]`   | Button that opens the menu                      |
+| `ScMenuPortal`      | `div[scMenuPortal]`       | Handles overlay positioning                     |
+| `ScMenu`            | `div[scMenu]`              | Menu container with animations                  |
+| `ScMenuItem`        | `div[scMenuItem]`         | Selectable menu item                            |
+| `ScMenuSeparator`   | `div[scMenuSeparator]`    | Visual separator                                |
+| `ScMenuSubProvider` | `div[scMenuSubProvider]` | Submenu wrapper                                 |
+| `ScMenuSubTrigger`  | `div[scMenuSubTrigger]`  | Item that opens submenu                         |
+| `ScMenuSubPortal`   | `div[scMenuSubPortal]`   | Submenu overlay positioning                     |
+| `ScMenuSub`         | `div[scMenuSub]`          | Submenu container with animations               |
+| `ScMenuSubIcon`     | `svg[scMenuSubIcon]`     | Chevron icon for submenu triggers               |
 
 ## Usage
 
 ### Basic Menu
 
 ```html
-<div sc-menu-provider>
-  <button sc-menu-trigger>Open Menu</button>
-  <div sc-menu-portal>
-    <div sc-menu>
-      <div sc-menu-item value="edit">Edit</div>
-      <div sc-menu-item value="duplicate">Duplicate</div>
-      <div sc-menu-separator></div>
-      <div sc-menu-item value="delete">Delete</div>
+<div scMenuProvider>
+  <button scMenuTrigger>Open Menu</button>
+  <div scMenuPortal>
+    <div scMenu>
+      <div scMenuItem value="edit">Edit</div>
+      <div scMenuItem value="duplicate">Duplicate</div>
+      <div scMenuSeparator></div>
+      <div scMenuItem value="delete">Delete</div>
     </div>
   </div>
 </div>
@@ -57,21 +57,21 @@ ScMenuProvider (root wrapper)
 ### Menu with Submenu
 
 ```html
-<div sc-menu-provider>
-  <button sc-menu-trigger>Open Menu</button>
-  <div sc-menu-portal>
-    <div sc-menu>
-      <div sc-menu-item value="new">New</div>
-      <div sc-menu-separator></div>
-      <div sc-menu-sub-provider>
-        <div sc-menu-sub-trigger value="share">
+<div scMenuProvider>
+  <button scMenuTrigger>Open Menu</button>
+  <div scMenuPortal>
+    <div scMenu>
+      <div scMenuItem value="new">New</div>
+      <div scMenuSeparator></div>
+      <div scMenuSubProvider>
+        <div scMenuSubTrigger value="share">
           Share
-          <svg sc-menu-sub-icon><!-- chevron icon --></svg>
+          <svg scMenuSubIcon><!-- chevron icon --></svg>
         </div>
-        <div sc-menu-sub-portal>
-          <div sc-menu-sub>
-            <div sc-menu-item value="email">Email</div>
-            <div sc-menu-item value="message">Message</div>
+        <div scMenuSubPortal>
+          <div scMenuSub>
+            <div scMenuItem value="email">Email</div>
+            <div scMenuItem value="message">Message</div>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ ScMenuProvider (root wrapper)
 ### Menu Item with Icon
 
 ```html
-<div sc-menu-item value="settings">
+<div scMenuItem value="settings">
   <svg class="text-muted-foreground size-4" aria-hidden="true">
     <!-- icon SVG -->
   </svg>
@@ -94,7 +94,7 @@ ScMenuProvider (root wrapper)
 ### Destructive Menu Item
 
 ```html
-<div sc-menu-item value="delete" class="text-destructive hover:bg-destructive/10 data-[active=true]:bg-destructive/10">Delete</div>
+<div scMenuItem value="delete" class="text-destructive hover:bg-destructive/10 data-[active=true]:bg-destructive/10">Delete</div>
 ```
 
 ## Keyboard Navigation
@@ -168,9 +168,9 @@ The `[transition-delay:0s,150ms]` ensures visibility changes after opacity durin
 All components accept a `class` input for custom styling:
 
 ```html
-<div sc-menu class="w-64">
+<div scMenu class="w-64">
   <!-- wider menu -->
 </div>
 
-<div sc-menu-item value="special" class="font-bold">Special Item</div>
+<div scMenuItem value="special" class="font-bold">Special Item</div>
 ```

@@ -12,7 +12,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div class="flex items-center gap-4">
       <div class="flex flex-col items-center gap-2">
-        <button sc-theme-toggle variant="default" #toggle1="scThemeToggle">
+        <button scThemeToggle variant="default" #toggle1="scThemeToggle">
           @if (toggle1.isDark()) {
             <svg si-sun-icon></svg>
           } @else {
@@ -22,7 +22,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         <span class="text-xs text-muted-foreground">Default</span>
       </div>
       <div class="flex flex-col items-center gap-2">
-        <button sc-theme-toggle variant="outline" #toggle2="scThemeToggle">
+        <button scThemeToggle variant="outline" #toggle2="scThemeToggle">
           @if (toggle2.isDark()) {
             <svg si-sun-icon></svg>
           } @else {
@@ -32,7 +32,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         <span class="text-xs text-muted-foreground">Outline</span>
       </div>
       <div class="flex flex-col items-center gap-2">
-        <button sc-theme-toggle variant="ghost" #toggle3="scThemeToggle">
+        <button scThemeToggle variant="ghost" #toggle3="scThemeToggle">
           @if (toggle3.isDark()) {
             <svg si-sun-icon></svg>
           } @else {

@@ -31,10 +31,10 @@ import { ScSortableItem, ScSortableList } from '@semantic-components/ui-lab';
   imports: [ScSortableList, ScSortableItem],
   template: \`
     <div class="max-w-md">
-      <div sc-sortable-list [items]="items" [disabled]="true" class="gap-2">
+      <div scSortableList [items]="items" [disabled]="true" class="gap-2">
         @for (item of items; track item; let i = $index) {
           <div
-            sc-sortable-item
+            scSortableItem
             [index]="i"
             [item]="item"
             class="flex items-center gap-3 rounded-md border bg-muted/50 p-3 opacity-60"

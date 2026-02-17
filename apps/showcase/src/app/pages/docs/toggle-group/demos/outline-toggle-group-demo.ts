@@ -11,13 +11,13 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
   imports: [ScToggleGroup, ScToggleGroupItem],
   template: `
     <div
-      sc-toggle-group
+      scToggleGroup
       type="single"
       variant="outline"
       [(value)]="view"
       aria-label="View mode"
     >
-      <button sc-toggle-group-item value="list" aria-label="List view">
+      <button scToggleGroupItem value="list" aria-label="List view">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -38,7 +38,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
           <line x1="3" x2="3.01" y1="18" y2="18" />
         </svg>
       </button>
-      <button sc-toggle-group-item value="grid" aria-label="Grid view">
+      <button scToggleGroupItem value="grid" aria-label="Grid view">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -57,7 +57,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
           <rect width="7" height="7" x="3" y="14" rx="1" />
         </svg>
       </button>
-      <button sc-toggle-group-item value="kanban" aria-label="Kanban view">
+      <button scToggleGroupItem value="kanban" aria-label="Kanban view">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

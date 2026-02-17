@@ -13,7 +13,7 @@ import { SC_TAG_INPUT } from './tag-input';
 // TagInputTag
 // ============================================================================
 @Component({
-  selector: '[sc-tag-input-tag]',
+  selector: '[scTagInputTag]',
   template: `
     <span class="truncate">{{ tag() }}</span>
     @if (!tagInput.disabled()) {

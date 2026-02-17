@@ -16,7 +16,7 @@ import {
     <sc-marquee [duration]="30" [gap]="48">
       @for (brand of brands; track brand) {
         <div
-          sc-marquee-item
+          scMarqueeItem
           class="flex h-16 w-32 items-center justify-center rounded-lg border bg-background px-4"
         >
           <span class="text-lg font-semibold text-muted-foreground">
@@ -24,10 +24,10 @@ import {
           </span>
         </div>
       }
-      <ng-container sc-marquee-clone>
+      <ng-container scMarqueeClone>
         @for (brand of brands; track brand) {
           <div
-            sc-marquee-item
+            scMarqueeItem
             class="flex h-16 w-32 items-center justify-center rounded-lg border bg-background px-4"
           >
             <span class="text-lg font-semibold text-muted-foreground">

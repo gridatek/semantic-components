@@ -5,24 +5,24 @@ A multi-step wizard component for guiding users through a process.
 ## Usage
 
 ```html
-<div sc-stepper [(activeStep)]="currentStep">
-  <div sc-stepper-list>
-    <div sc-stepper-item [step]="0">
-      <button sc-stepper-trigger></button>
-      <span sc-stepper-title>Step 1</span>
+<div scStepper [(activeStep)]="currentStep">
+  <div scStepperList>
+    <div scStepperItem [step]="0">
+      <button scStepperTrigger></button>
+      <span scStepperTitle>Step 1</span>
     </div>
-    <div sc-stepper-separator></div>
-    <div sc-stepper-item [step]="1">
-      <button sc-stepper-trigger></button>
-      <span sc-stepper-title>Step 2</span>
+    <div scStepperSeparator></div>
+    <div scStepperItem [step]="1">
+      <button scStepperTrigger></button>
+      <span scStepperTitle>Step 2</span>
     </div>
   </div>
 
-  <div sc-stepper-content [step]="0">Step 1 content</div>
-  <div sc-stepper-content [step]="1">Step 2 content</div>
+  <div scStepperContent [step]="0">Step 1 content</div>
+  <div scStepperContent [step]="1">Step 2 content</div>
 
-  <button sc-stepper-previous>Previous</button>
-  <button sc-stepper-next>Next</button>
+  <button scStepperPrevious>Previous</button>
+  <button scStepperNext>Next</button>
 </div>
 ```
 
@@ -32,7 +32,7 @@ A multi-step wizard component for guiding users through a process.
 
 Root container that manages step state.
 
-**Selector:** `[sc-stepper]`
+**Selector:** `[scStepper]`
 
 **Inputs:**
 
@@ -61,13 +61,13 @@ Root container that manages step state.
 
 Container for step indicators.
 
-**Selector:** `[sc-stepper-list]`
+**Selector:** `[scStepperList]`
 
 ### ScStepperItem
 
 Individual step indicator.
 
-**Selector:** `[sc-stepper-item]`
+**Selector:** `[scStepperItem]`
 
 **Inputs:**
 
@@ -86,13 +86,13 @@ Individual step indicator.
 
 Clickable step button with number or check icon.
 
-**Selector:** `button[sc-stepper-trigger]`
+**Selector:** `button[scStepperTrigger]`
 
 ### ScStepperSeparator
 
 Visual line between steps.
 
-**Selector:** `[sc-stepper-separator]`
+**Selector:** `[scStepperSeparator]`
 
 **Data Attributes:**
 
@@ -104,7 +104,7 @@ Visual line between steps.
 
 Content panel for a step.
 
-**Selector:** `[sc-stepper-content]`
+**Selector:** `[scStepperContent]`
 
 **Inputs:**
 
@@ -117,19 +117,19 @@ Content panel for a step.
 
 Title text for a step.
 
-**Selector:** `[sc-stepper-title]`
+**Selector:** `[scStepperTitle]`
 
 ### ScStepperDescription
 
 Description text for a step.
 
-**Selector:** `[sc-stepper-description]`
+**Selector:** `[scStepperDescription]`
 
 ### ScStepperPrevious
 
 Button to go to previous step.
 
-**Selector:** `button[sc-stepper-previous]`
+**Selector:** `button[scStepperPrevious]`
 
 Auto-disables on first step.
 
@@ -137,47 +137,47 @@ Auto-disables on first step.
 
 Button to go to next step.
 
-**Selector:** `button[sc-stepper-next]`
+**Selector:** `button[scStepperNext]`
 
 ## Examples
 
 ### Horizontal Stepper
 
 ```html
-<div sc-stepper [(activeStep)]="step">
-  <div sc-stepper-list>
-    <div sc-stepper-item [step]="0">
-      <button sc-stepper-trigger></button>
+<div scStepper [(activeStep)]="step">
+  <div scStepperList>
+    <div scStepperItem [step]="0">
+      <button scStepperTrigger></button>
       <div class="flex flex-col">
-        <span sc-stepper-title>Account</span>
-        <span sc-stepper-description>Create your account</span>
+        <span scStepperTitle>Account</span>
+        <span scStepperDescription>Create your account</span>
       </div>
     </div>
-    <div sc-stepper-separator></div>
-    <div sc-stepper-item [step]="1">
-      <button sc-stepper-trigger></button>
+    <div scStepperSeparator></div>
+    <div scStepperItem [step]="1">
+      <button scStepperTrigger></button>
       <div class="flex flex-col">
-        <span sc-stepper-title>Profile</span>
-        <span sc-stepper-description>Set up your profile</span>
+        <span scStepperTitle>Profile</span>
+        <span scStepperDescription>Set up your profile</span>
       </div>
     </div>
-    <div sc-stepper-separator></div>
-    <div sc-stepper-item [step]="2">
-      <button sc-stepper-trigger></button>
+    <div scStepperSeparator></div>
+    <div scStepperItem [step]="2">
+      <button scStepperTrigger></button>
       <div class="flex flex-col">
-        <span sc-stepper-title>Complete</span>
-        <span sc-stepper-description>Review and submit</span>
+        <span scStepperTitle>Complete</span>
+        <span scStepperDescription>Review and submit</span>
       </div>
     </div>
   </div>
 
-  <div sc-stepper-content [step]="0">Account form...</div>
-  <div sc-stepper-content [step]="1">Profile form...</div>
-  <div sc-stepper-content [step]="2">Review...</div>
+  <div scStepperContent [step]="0">Account form...</div>
+  <div scStepperContent [step]="1">Profile form...</div>
+  <div scStepperContent [step]="2">Review...</div>
 
   <div class="flex justify-between">
-    <button sc-stepper-previous>Previous</button>
-    <button sc-stepper-next>Next</button>
+    <button scStepperPrevious>Previous</button>
+    <button scStepperNext>Next</button>
   </div>
 </div>
 ```
@@ -185,24 +185,24 @@ Button to go to next step.
 ### Vertical Stepper
 
 ```html
-<div sc-stepper orientation="vertical" [(activeStep)]="step">
-  <div sc-stepper-list>
-    <div sc-stepper-item [step]="0">
-      <button sc-stepper-trigger></button>
+<div scStepper orientation="vertical" [(activeStep)]="step">
+  <div scStepperList>
+    <div scStepperItem [step]="0">
+      <button scStepperTrigger></button>
       <div class="flex flex-col">
-        <span sc-stepper-title>Step 1</span>
-        <span sc-stepper-description>First step</span>
+        <span scStepperTitle>Step 1</span>
+        <span scStepperDescription>First step</span>
         @if (step === 0) {
         <div class="mt-4">Step 1 content here</div>
         }
       </div>
-      <div sc-stepper-separator></div>
+      <div scStepperSeparator></div>
     </div>
-    <div sc-stepper-item [step]="1">
-      <button sc-stepper-trigger></button>
+    <div scStepperItem [step]="1">
+      <button scStepperTrigger></button>
       <div class="flex flex-col">
-        <span sc-stepper-title>Step 2</span>
-        <span sc-stepper-description>Second step</span>
+        <span scStepperTitle>Step 2</span>
+        <span scStepperDescription>Second step</span>
       </div>
     </div>
   </div>
@@ -212,23 +212,23 @@ Button to go to next step.
 ### Simple Number Steps
 
 ```html
-<div sc-stepper [(activeStep)]="step">
-  <div sc-stepper-list>
-    <div sc-stepper-item [step]="0">
-      <button sc-stepper-trigger></button>
+<div scStepper [(activeStep)]="step">
+  <div scStepperList>
+    <div scStepperItem [step]="0">
+      <button scStepperTrigger></button>
     </div>
-    <div sc-stepper-separator></div>
-    <div sc-stepper-item [step]="1">
-      <button sc-stepper-trigger></button>
+    <div scStepperSeparator></div>
+    <div scStepperItem [step]="1">
+      <button scStepperTrigger></button>
     </div>
-    <div sc-stepper-separator></div>
-    <div sc-stepper-item [step]="2">
-      <button sc-stepper-trigger></button>
+    <div scStepperSeparator></div>
+    <div scStepperItem [step]="2">
+      <button scStepperTrigger></button>
     </div>
   </div>
 
-  <button sc-stepper-previous>Back</button>
-  <button sc-stepper-next>Continue</button>
+  <button scStepperPrevious>Back</button>
+  <button scStepperNext>Continue</button>
 </div>
 ```
 

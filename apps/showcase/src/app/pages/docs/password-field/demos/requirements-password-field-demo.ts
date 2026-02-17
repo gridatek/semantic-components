@@ -24,17 +24,17 @@ import {
     ScLabel,
   ],
   template: `
-    <div sc-password-field [(value)]="password" class="space-y-2">
-      <label sc-label>Password</label>
-      <div sc-password-field-input-group>
+    <div scPasswordField [(value)]="password" class="space-y-2">
+      <label scLabel>Password</label>
+      <div scPasswordFieldInputGroup>
         <input
-          sc-password-field-input
+          scPasswordFieldInput
           placeholder="Enter password"
           autocomplete="new-password"
         />
-        <button sc-password-field-toggle></button>
+        <button scPasswordFieldToggle></button>
       </div>
-      <ul sc-password-field-requirements></ul>
+      <ul scPasswordFieldRequirements></ul>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

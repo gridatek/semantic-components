@@ -10,7 +10,7 @@ import type { FormCheckboxControl } from '@angular/forms/signals';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'button[sc-switch]',
+  selector: 'button[scSwitch]',
   host: {
     'data-slot': 'switch',
     type: 'button',

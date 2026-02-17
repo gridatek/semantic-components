@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: '[sc-aspect-ratio]',
+  selector: '[scAspectRatio]',
   host: {
     'data-slot': 'aspect-ratio',
     '[class]': 'class()',

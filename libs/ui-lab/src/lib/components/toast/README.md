@@ -22,14 +22,14 @@ ScToaster (Injectable)
 
 ## Components
 
-| Component            | Selector                  | Description                                                  |
-| -------------------- | ------------------------- | ------------------------------------------------------------ |
-| `ScToastStack`       | `<sc-toast-stack>`        | Container that renders all active toasts. Place once in app. |
-| `ScToast`            | `div[sc-toast]`           | Individual toast wrapper with variant styling                |
-| `ScToastTitle`       | `[sc-toast-title]`        | Toast title text                                             |
-| `ScToastDescription` | `[sc-toast-description]`  | Toast description text                                       |
-| `ScToastAction`      | `button[sc-toast-action]` | Action button inside toast                                   |
-| `ScToastClose`       | `button[sc-toast-close]`  | Close button to dismiss toast                                |
+| Component            | Selector                | Description                                                  |
+| -------------------- | ----------------------- | ------------------------------------------------------------ |
+| `ScToastStack`       | `<sc-toast-stack>`      | Container that renders all active toasts. Place once in app. |
+| `ScToast`            | `div[scToast]`          | Individual toast wrapper with variant styling                |
+| `ScToastTitle`       | `[scToastTitle]`        | Toast title text                                             |
+| `ScToastDescription` | `[scToastDescription]`  | Toast description text                                       |
+| `ScToastAction`      | `button[scToastAction]` | Action button inside toast                                   |
+| `ScToastClose`       | `button[scToastClose]`  | Close button to dismiss toast                                |
 
 ## Service
 

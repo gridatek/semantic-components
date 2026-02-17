@@ -36,7 +36,7 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
   template: \`
     <div class="flex flex-wrap items-center gap-4">
       <button
-        sc-button
+        scButton
         variant="outline"
         scTooltipTrigger="Tooltip on top"
         tooltipPosition="top"
@@ -44,7 +44,7 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
         Top
       </button>
       <button
-        sc-button
+        scButton
         variant="outline"
         scTooltipTrigger="Tooltip on right"
         tooltipPosition="right"
@@ -52,7 +52,7 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
         Right
       </button>
       <button
-        sc-button
+        scButton
         variant="outline"
         scTooltipTrigger="Tooltip on bottom"
         tooltipPosition="bottom"
@@ -60,7 +60,7 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
         Bottom
       </button>
       <button
-        sc-button
+        scButton
         variant="outline"
         scTooltipTrigger="Tooltip on left"
         tooltipPosition="left"

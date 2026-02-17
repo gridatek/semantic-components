@@ -13,7 +13,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
     <div class="flex items-center gap-4">
       <div class="flex flex-col items-center gap-2">
         <button
-          sc-theme-toggle
+          scThemeToggle
           variant="outline"
           size="sm"
           #toggle1="scThemeToggle"
@@ -28,7 +28,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
-          sc-theme-toggle
+          scThemeToggle
           variant="outline"
           size="default"
           #toggle2="scThemeToggle"
@@ -43,7 +43,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
-          sc-theme-toggle
+          scThemeToggle
           variant="outline"
           size="lg"
           #toggle3="scThemeToggle"
@@ -58,7 +58,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
-          sc-theme-toggle
+          scThemeToggle
           variant="outline"
           size="icon"
           #toggle4="scThemeToggle"

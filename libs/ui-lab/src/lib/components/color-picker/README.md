@@ -5,12 +5,12 @@ A component for selecting colors with support for various formats and input meth
 ## Usage
 
 ```html
-<div sc-color-picker [(value)]="color" class="space-y-4">
-  <div sc-color-picker-area></div>
-  <div sc-color-picker-hue></div>
+<div scColorPicker [(value)]="color" class="space-y-4">
+  <div scColorPickerArea></div>
+  <div scColorPickerHue></div>
   <div class="flex items-center gap-3">
-    <div sc-color-picker-preview></div>
-    <input sc-color-picker-input format="hex" />
+    <div scColorPickerPreview></div>
+    <input scColorPickerInput format="hex" />
   </div>
 </div>
 ```
@@ -21,7 +21,7 @@ A component for selecting colors with support for various formats and input meth
 
 Root container that manages color state.
 
-**Selector:** `[sc-color-picker]`
+**Selector:** `[scColorPicker]`
 
 **Inputs:**
 
@@ -60,7 +60,7 @@ Root container that manages color state.
 
 Saturation/brightness selection area.
 
-**Selector:** `[sc-color-picker-area]`
+**Selector:** `[scColorPickerArea]`
 
 Features mouse and touch drag support.
 
@@ -68,19 +68,19 @@ Features mouse and touch drag support.
 
 Hue slider (rainbow gradient).
 
-**Selector:** `[sc-color-picker-hue]`
+**Selector:** `[scColorPickerHue]`
 
 ### ScColorPickerPreview
 
 Color preview swatch.
 
-**Selector:** `[sc-color-picker-preview]`
+**Selector:** `[scColorPickerPreview]`
 
 ### ScColorPickerInput
 
 Text input for color values.
 
-**Selector:** `input[sc-color-picker-input]`
+**Selector:** `input[scColorPickerInput]`
 
 **Inputs:**
 
@@ -93,7 +93,7 @@ Text input for color values.
 
 Preset color swatches.
 
-**Selector:** `[sc-color-picker-swatches]`
+**Selector:** `[scColorPickerSwatches]`
 
 **Inputs:**
 
@@ -106,7 +106,7 @@ Preset color swatches.
 
 Eye dropper button (Chrome/Edge only).
 
-**Selector:** `button[sc-color-picker-eyedropper]`
+**Selector:** `button[scColorPickerEyedropper]`
 
 Uses the EyeDropper API to pick colors from the screen.
 
@@ -137,12 +137,12 @@ interface HSL {
 ### Full Picker
 
 ```html
-<div sc-color-picker [(value)]="color" class="space-y-4 rounded-lg border p-4">
-  <div sc-color-picker-area></div>
-  <div sc-color-picker-hue></div>
+<div scColorPicker [(value)]="color" class="space-y-4 rounded-lg border p-4">
+  <div scColorPickerArea></div>
+  <div scColorPickerHue></div>
   <div class="flex items-center gap-3">
-    <div sc-color-picker-preview></div>
-    <input sc-color-picker-input format="hex" class="flex-1" />
+    <div scColorPickerPreview></div>
+    <input scColorPickerInput format="hex" class="flex-1" />
   </div>
 </div>
 ```
@@ -150,22 +150,22 @@ interface HSL {
 ### With Swatches
 
 ```html
-<div sc-color-picker [(value)]="color" class="space-y-4">
-  <div sc-color-picker-area></div>
-  <div sc-color-picker-hue></div>
-  <div sc-color-picker-swatches></div>
+<div scColorPicker [(value)]="color" class="space-y-4">
+  <div scColorPickerArea></div>
+  <div scColorPickerHue></div>
+  <div scColorPickerSwatches></div>
 </div>
 ```
 
 ### With Eye Dropper
 
 ```html
-<div sc-color-picker [(value)]="color" class="space-y-4">
-  <div sc-color-picker-area></div>
-  <div sc-color-picker-hue></div>
+<div scColorPicker [(value)]="color" class="space-y-4">
+  <div scColorPickerArea></div>
+  <div scColorPickerHue></div>
   <div class="flex gap-2">
-    <input sc-color-picker-input format="hex" class="flex-1" />
-    <button sc-color-picker-eyedropper></button>
+    <input scColorPickerInput format="hex" class="flex-1" />
+    <button scColorPickerEyedropper></button>
   </div>
 </div>
 ```
@@ -173,18 +173,18 @@ interface HSL {
 ### Custom Swatches
 
 ```html
-<div sc-color-picker [(value)]="color">
-  <div sc-color-picker-swatches [colors]="['#ff0000', '#00ff00', '#0000ff']"></div>
+<div scColorPicker [(value)]="color">
+  <div scColorPickerSwatches [colors]="['#ff0000', '#00ff00', '#0000ff']"></div>
 </div>
 ```
 
 ### Simple Swatch Only
 
 ```html
-<div sc-color-picker [(value)]="color" class="space-y-4">
-  <div sc-color-picker-swatches></div>
+<div scColorPicker [(value)]="color" class="space-y-4">
+  <div scColorPickerSwatches></div>
   <div class="flex items-center gap-3">
-    <div sc-color-picker-preview></div>
+    <div scColorPickerPreview></div>
     <span>{{ color() }}</span>
   </div>
 </div>
@@ -193,10 +193,10 @@ interface HSL {
 ### Compact
 
 ```html
-<div sc-color-picker [(value)]="color" class="w-[200px] space-y-3">
-  <div sc-color-picker-area class="h-32"></div>
-  <div sc-color-picker-hue></div>
-  <input sc-color-picker-input format="hex" />
+<div scColorPicker [(value)]="color" class="w-[200px] space-y-3">
+  <div scColorPickerArea class="h-32"></div>
+  <div scColorPickerHue></div>
+  <input scColorPickerInput format="hex" />
 </div>
 ```
 

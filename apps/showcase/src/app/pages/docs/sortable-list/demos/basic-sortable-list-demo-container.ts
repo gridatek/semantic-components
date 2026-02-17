@@ -38,11 +38,11 @@ import {
   template: \`
     <div class="space-y-4">
       <div class="max-w-md space-y-2">
-        <div sc-sortable-list [(items)]="items" class="gap-2">
-          <div sc-sortable-overlay></div>
+        <div scSortableList [(items)]="items" class="gap-2">
+          <div scSortableOverlay></div>
           @for (item of items(); track item; let i = $index) {
             <div
-              sc-sortable-item
+              scSortableItem
               [index]="i"
               [item]="item"
               class="flex items-center gap-3 rounded-md border bg-background p-3"

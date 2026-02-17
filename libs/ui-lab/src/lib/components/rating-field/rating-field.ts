@@ -19,7 +19,7 @@ export const SC_RATING_FIELD = new InjectionToken<ScRatingField>(
 );
 
 @Directive({
-  selector: 'div[sc-rating-field], label[sc-rating-field]',
+  selector: 'div[scRatingField], label[scRatingField]',
   providers: [
     { provide: SC_RATING_FIELD, useExisting: ScRatingField },
     { provide: SC_FIELD, useExisting: ScRatingField },
@@ -60,7 +60,7 @@ export class ScRatingField {
     const allItems = this.items();
     if (allItems.length === 0) {
       throw new Error(
-        'ScRatingField: No rating items found. Add at least one [sc-rating-item] element.',
+        'ScRatingField: No rating items found. Add at least one [scRatingItem] element.',
       );
     }
     return Math.max(...allItems.map((item) => item.value()));

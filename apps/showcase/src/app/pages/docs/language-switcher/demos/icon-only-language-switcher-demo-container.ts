@@ -31,7 +31,7 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
   imports: [ScLanguageToggle],
   template: \`
     <div class="flex items-center gap-4">
-      <button sc-language-toggle [iconOnly]="true" size="icon"></button>
+      <button scLanguageToggle [iconOnly]="true" size="icon"></button>
       <span class="text-sm text-muted-foreground">Globe icon only</span>
     </div>
   \`,

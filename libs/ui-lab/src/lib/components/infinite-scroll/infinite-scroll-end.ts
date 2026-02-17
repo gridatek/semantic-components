@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[sc-infinite-scroll-end]',
+  selector: '[scInfiniteScrollEnd]',
   host: {
     'data-slot': 'infinite-scroll-end',
   },

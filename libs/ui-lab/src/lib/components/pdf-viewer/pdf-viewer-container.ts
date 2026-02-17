@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Component({
-  selector: '[sc-pdf-viewer-container]',
+  selector: '[scPdfViewerContainer]',
   template: `
     <ng-content />
   `,

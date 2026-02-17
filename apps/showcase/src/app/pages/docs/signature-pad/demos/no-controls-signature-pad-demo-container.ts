@@ -31,8 +31,8 @@ import { ScSignaturePad, ScSignaturePadCanvas } from '@semantic-components/ui-la
   imports: [ScSignaturePad, ScSignaturePadCanvas],
   template: \`
     <div class="space-y-3">
-      <div sc-signature-pad #pad="scSignaturePad" class="relative inline-block">
-        <canvas sc-signature-pad-canvas [width]="400" [height]="150"></canvas>
+      <div scSignaturePad #pad="scSignaturePad" class="relative inline-block">
+        <canvas scSignaturePadCanvas [width]="400" [height]="150"></canvas>
       </div>
 
       <div class="flex gap-2">

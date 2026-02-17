@@ -27,20 +27,20 @@ import { ScLabel } from '@semantic-components/ui';
   ],
   template: `
     <div
-      sc-number-field
+      scNumberField
       [(value)]="price"
       [step]="0.01"
       [min]="0"
       [formatOptions]="formatOptions"
     >
-      <div sc-number-field-scrub-area>
-        <label sc-label>Price ($)</label>
+      <div scNumberFieldScrubArea>
+        <label scLabel>Price ($)</label>
       </div>
 
-      <div sc-number-field-group>
-        <button sc-number-field-decrement></button>
-        <input sc-number-field-input />
-        <button sc-number-field-increment></button>
+      <div scNumberFieldGroup>
+        <button scNumberFieldDecrement></button>
+        <input scNumberFieldInput />
+        <button scNumberFieldIncrement></button>
       </div>
     </div>
 

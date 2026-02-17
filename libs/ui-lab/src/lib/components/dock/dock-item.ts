@@ -12,7 +12,7 @@ import { SC_DOCK } from './dock';
 import type { DockItem } from './dock-types';
 
 @Component({
-  selector: 'button[sc-dock-item]',
+  selector: 'button[scDockItem]',
   template: `
     <span
       class="inline-flex items-center justify-center [&>svg]:w-full [&>svg]:h-full"

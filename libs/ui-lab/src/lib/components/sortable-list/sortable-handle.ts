@@ -11,7 +11,7 @@ import { SC_SORTABLE_LIST, ScSortableList } from './sortable-list';
 import { SC_SORTABLE_ITEM, ScSortableItem } from './sortable-item';
 
 @Component({
-  selector: '[sc-sortable-handle]',
+  selector: '[scSortableHandle]',
   template: `
     <ng-content>
       <svg

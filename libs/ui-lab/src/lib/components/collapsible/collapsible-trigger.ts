@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'button[sc-collapsible-trigger]',
+  selector: 'button[scCollapsibleTrigger]',
   exportAs: 'scCollapsibleTrigger',
   hostDirectives: [
     {

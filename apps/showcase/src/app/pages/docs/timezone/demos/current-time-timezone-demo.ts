@@ -14,7 +14,7 @@ import {
   imports: [ScTimezoneBadge],
   template: `
     <div class="flex items-center gap-4 rounded-lg border p-4">
-      <span sc-timezone-badge></span>
+      <span scTimezoneBadge></span>
       <span class="text-lg font-mono">
         {{ timezoneService.currentTimeFormatted() }}
       </span>

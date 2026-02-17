@@ -15,7 +15,7 @@ import { ScPopoverProvider } from './popover-provider';
 type ScPopoverState = 'open' | 'closed';
 
 @Component({
-  selector: 'div[sc-popover]',
+  selector: 'div[scPopover]',
   template: `
     <ng-content />
   `,

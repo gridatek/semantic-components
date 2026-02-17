@@ -42,7 +42,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
             class="flex-1 h-9 rounded-md border bg-muted px-3 text-sm"
           />
           <button
-            sc-copy-button
+            scCopyButton
             [value]="shareUrl"
             variant="outline"
             size="icon"
@@ -59,7 +59,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
             <p class="text-sm font-medium">#3B82F6</p>
             <p class="text-xs text-muted-foreground">Blue 500</p>
           </div>
-          <button sc-copy-button [value]="'#3B82F6'" variant="ghost"></button>
+          <button scCopyButton [value]="'#3B82F6'" variant="ghost"></button>
         </div>
       </div>
 
@@ -71,7 +71,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
         <div class="flex items-center justify-between">
           <code class="text-2xl font-bold tracking-wider">SAVE20</code>
           <button
-            sc-copy-button
+            scCopyButton
             [value]="'SAVE20'"
             variant="outline"
             size="default"

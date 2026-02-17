@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
-  selector: 'button[sc-video-player-play]',
+  selector: 'button[scVideoPlayerPlay]',
   template: '<ng-content />',
   host: {
     type: 'button',

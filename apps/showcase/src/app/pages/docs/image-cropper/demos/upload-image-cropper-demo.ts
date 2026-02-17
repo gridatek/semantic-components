@@ -47,19 +47,19 @@ import {
 
       @if (uploadedImageSrc()) {
         <div
-          sc-image-cropper
+          scImageCropper
           [src]="uploadedImageSrc()!"
           [containerHeight]="350"
           class="space-y-4"
         >
           <div
-            sc-image-cropper-container
+            scImageCropperContainer
             #container
             class="rounded-lg overflow-hidden border"
           ></div>
 
           <div class="flex items-center justify-between">
-            <div sc-image-cropper-controls></div>
+            <div scImageCropperControls></div>
             <div class="flex gap-2">
               <button
                 type="button"

@@ -15,12 +15,12 @@ import { ScTimezoneService } from './timezone.service';
  *
  * @example
  * ```html
- * <span sc-timezone-badge></span>
- * <span sc-timezone-badge [showLabel]="true"></span>
+ * <span scTimezoneBadge></span>
+ * <span scTimezoneBadge [showLabel]="true"></span>
  * ```
  */
 @Component({
-  selector: 'span[sc-timezone-badge]',
+  selector: 'span[scTimezoneBadge]',
   host: {
     'data-slot': 'timezone-badge',
     '[class]': 'class()',

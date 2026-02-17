@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
-  selector: 'div[sc-audio-player-progress]',
+  selector: 'div[scAudioPlayerProgress]',
   template: `
     <span class="text-xs text-muted-foreground w-10 text-right">
       {{ player.formatTime(player.currentTime()) }}

@@ -74,21 +74,21 @@ import {
         + Arrow - Move by 10%
       </li>
     </ul>
-    <div sc-image-compare class="w-full max-w-2xl aspect-[2/1]">
-      <div sc-image-compare-container>
+    <div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+      <div scImageCompareContainer>
         <img
-          sc-image-compare-before
+          scImageCompareBefore
           src="https://picsum.photos/800/400?grayscale&random=8"
           alt="Before"
         />
         <img
-          sc-image-compare-after
+          scImageCompareAfter
           src="https://picsum.photos/800/400?random=8"
           alt="After"
         />
-        <div sc-image-compare-slider></div>
-        <div sc-image-compare-label class="top-2 left-2">Before</div>
-        <div sc-image-compare-label class="top-2 right-2">After</div>
+        <div scImageCompareSlider></div>
+        <div scImageCompareLabel class="top-2 left-2">Before</div>
+        <div scImageCompareLabel class="top-2 right-2">After</div>
       </div>
     </div>
   \`,

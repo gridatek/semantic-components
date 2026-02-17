@@ -10,7 +10,7 @@ import { ScToggle } from '@semantic-components/ui-lab';
   selector: 'app-basic-toggle-demo',
   imports: [ScToggle],
   template: `
-    <button sc-toggle [(pressed)]="bold" aria-label="Toggle bold">
+    <button scToggle [(pressed)]="bold" aria-label="Toggle bold">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

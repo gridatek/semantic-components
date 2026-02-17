@@ -34,9 +34,9 @@ import {
     SiChevronDownIcon,
   ],
   template: `
-    <div sc-select>
-      <div sc-select-trigger>
-        <span sc-select-value>
+    <div scSelect>
+      <div scSelectTrigger>
+        <span scSelectValue>
           @if (displayIcon(); as icon) {
             <svg
               class="text-muted-foreground size-4"
@@ -96,16 +96,16 @@ import {
           <span class="truncate">{{ displayValue() }}</span>
         </span>
         <input
-          sc-select-input
+          scSelectInput
           aria-label="Label dropdown"
           placeholder="Select a label"
         />
-        <svg sc-select-icon si-chevron-down-icon aria-hidden="true"></svg>
+        <svg scSelectIcon si-chevron-down-icon aria-hidden="true"></svg>
       </div>
-      <div sc-select-portal>
-        <div sc-select-list>
+      <div scSelectPortal>
+        <div scSelectList>
           @for (label of labels; track label.value) {
-            <div sc-select-item [value]="label.value" [label]="label.value">
+            <div scSelectItem [value]="label.value" [label]="label.value">
               <svg
                 class="text-muted-foreground size-4 shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +162,7 @@ import {
               </svg>
               <span class="flex-1">{{ label.value }}</span>
               <svg
-                sc-select-item-indicator
+                scSelectItemIndicator
                 si-check-icon
                 aria-hidden="true"
               ></svg>

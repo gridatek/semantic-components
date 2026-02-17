@@ -20,7 +20,7 @@ import { ScSliderRange } from './slider-range';
 import { ScSliderThumb } from './slider-thumb';
 
 @Component({
-  selector: 'div[sc-slider]',
+  selector: 'div[scSlider]',
   imports: [ScSliderTrack, ScSliderRange, ScSliderThumb],
   host: {
     'data-slot': 'slider',
@@ -28,11 +28,11 @@ import { ScSliderThumb } from './slider-thumb';
     '[attr.data-disabled]': 'disabled() || null',
   },
   template: `
-    <div sc-slider-track>
-      <div sc-slider-range [percentage]="percentage()"></div>
+    <div scSliderTrack>
+      <div scSliderRange [percentage]="percentage()"></div>
     </div>
     <div
-      sc-slider-thumb
+      scSliderThumb
       [percentage]="percentage()"
       [value]="value()"
       [min]="min()"

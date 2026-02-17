@@ -11,7 +11,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
 import { ZOOM_LEVELS } from './pdf-viewer-types';
 
 @Component({
-  selector: 'select[sc-pdf-viewer-zoom-select]',
+  selector: 'select[scPdfViewerZoomSelect]',
   template: `
     @for (level of zoomLevels; track level.value) {
       <option [value]="level.value">{{ level.label }}</option>

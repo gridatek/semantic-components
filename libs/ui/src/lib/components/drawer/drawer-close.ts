@@ -2,7 +2,7 @@ import { Directive, inject } from '@angular/core';
 import { ScDrawerProvider } from './drawer-provider';
 
 @Directive({
-  selector: 'button[sc-drawer-close]',
+  selector: 'button[scDrawerClose]',
   host: {
     'data-slot': 'drawer-close',
     type: 'button',

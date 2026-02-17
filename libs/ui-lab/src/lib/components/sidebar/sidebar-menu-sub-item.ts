@@ -2,7 +2,7 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'li[sc-sidebar-menu-sub-item]',
+  selector: 'li[scSidebarMenuSubItem]',
   host: {
     'data-slot': 'sidebar-menu-sub-item',
     '[class]': 'class()',

@@ -27,7 +27,7 @@ export const itemVariants = cva(
 export type ScItemVariants = VariantProps<typeof itemVariants>;
 
 @Directive({
-  selector: 'div[sc-item]',
+  selector: 'div[scItem]',
   host: {
     'data-slot': 'item',
     '[attr.data-variant]': 'variant()',

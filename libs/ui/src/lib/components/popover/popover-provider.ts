@@ -109,7 +109,7 @@ const positionMap: Record<PositionKey, ConnectedPosition> = {
 };
 
 @Component({
-  selector: 'div[sc-popover-provider]',
+  selector: 'div[scPopoverProvider]',
   imports: [OverlayModule, NgTemplateOutlet, CdkTrapFocus],
   template: `
     <ng-content />

@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
-  selector: 'span[sc-video-player-time]',
+  selector: 'span[scVideoPlayerTime]',
   template: `
     {{ player.formatTime(player.currentTime()) }} /
     {{ player.formatTime(player.duration()) }}

@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
 @Component({
-  selector: '[sc-password-field-input-group]',
+  selector: '[scPasswordFieldInputGroup]',
   template: `
     <ng-content />
   `,

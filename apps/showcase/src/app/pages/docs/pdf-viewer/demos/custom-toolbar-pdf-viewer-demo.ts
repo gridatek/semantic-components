@@ -35,14 +35,14 @@ import {
   template: `
     <div class="h-[400px]">
       <div
-        sc-pdf-viewer
+        scPdfViewer
         src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf"
       >
-        <div sc-pdf-viewer-container class="h-full">
+        <div scPdfViewerContainer class="h-full">
           <!-- Custom toolbar with only navigation -->
-          <div sc-pdf-viewer-toolbar>
-            <div sc-pdf-viewer-nav>
-              <button sc-pdf-viewer-prev-page>
+          <div scPdfViewerToolbar>
+            <div scPdfViewerNav>
+              <button scPdfViewerPrevPage>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -57,8 +57,8 @@ import {
                   <path d="m15 18-6-6 6-6" />
                 </svg>
               </button>
-              <div sc-pdf-viewer-page-info></div>
-              <button sc-pdf-viewer-next-page>
+              <div scPdfViewerPageInfo></div>
+              <button scPdfViewerNextPage>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -76,10 +76,10 @@ import {
             </div>
           </div>
 
-          <div sc-pdf-viewer-content>
-            <div sc-pdf-viewer-loading></div>
-            <div sc-pdf-viewer-error></div>
-            <div sc-pdf-viewer-empty></div>
+          <div scPdfViewerContent>
+            <div scPdfViewerLoading></div>
+            <div scPdfViewerError></div>
+            <div scPdfViewerEmpty></div>
           </div>
         </div>
       </div>

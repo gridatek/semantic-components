@@ -14,28 +14,28 @@ A composable input group for combining inputs with addons, buttons, and text.
 ## Usage
 
 ```html
-<div sc-input-group>
-  <div sc-input-group-addon>
-    <span sc-input-group-text>
+<div scInputGroup>
+  <div scInputGroupAddon>
+    <span scInputGroupText>
       <svg si-mail-icon></svg>
     </span>
   </div>
-  <input sc-input-group-input placeholder="Email address" />
+  <input scInputGroupInput placeholder="Email address" />
 </div>
 ```
 
 ## With Button
 
 ```html
-<div sc-input-group>
-  <div sc-input-group-addon>
-    <span sc-input-group-text>
+<div scInputGroup>
+  <div scInputGroupAddon>
+    <span scInputGroupText>
       <svg si-search-icon></svg>
     </span>
   </div>
-  <input sc-input-group-input placeholder="Search..." />
-  <div sc-input-group-addon align="inline-end">
-    <button sc-input-group-button size="icon-xs">
+  <input scInputGroupInput placeholder="Search..." />
+  <div scInputGroupAddon align="inline-end">
+    <button scInputGroupButton size="icon-xs">
       <svg si-x-icon></svg>
     </button>
   </div>

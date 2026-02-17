@@ -11,7 +11,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-command-item]',
+  selector: 'div[scCommandItem]',
   hostDirectives: [
     {
       directive: Option,

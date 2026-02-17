@@ -11,8 +11,8 @@ import { SiLoader2Icon } from '@semantic-icons/lucide-icons';
   selector: 'app-loading-button-demo',
   imports: [ScButton, ScSpinner, SiLoader2Icon],
   template: `
-    <button sc-button disabled>
-      <svg sc-spinner si-loader-2-icon></svg>
+    <button scButton disabled>
+      <svg scSpinner si-loader-2-icon></svg>
       Please wait
     </button>
   `,

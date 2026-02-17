@@ -23,7 +23,7 @@ export const SC_SIGNATURE_PAD = new InjectionToken<ScSignaturePad>(
 );
 
 @Directive({
-  selector: '[sc-signature-pad]',
+  selector: '[scSignaturePad]',
   exportAs: 'scSignaturePad',
   providers: [{ provide: SC_SIGNATURE_PAD, useExisting: ScSignaturePad }],
   host: {

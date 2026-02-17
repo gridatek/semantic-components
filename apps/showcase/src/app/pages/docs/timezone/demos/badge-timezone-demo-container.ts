@@ -31,10 +31,10 @@ import { ScTimezoneBadge } from '@semantic-components/ui-lab';
   imports: [ScTimezoneBadge],
   template: \`
     <div class="flex items-center gap-4">
-      <span sc-timezone-badge></span>
-      <span sc-timezone-badge [showLabel]="true"></span>
-      <span sc-timezone-badge [showOffset]="true"></span>
-      <span sc-timezone-badge [showLabel]="true" [showOffset]="true"></span>
+      <span scTimezoneBadge></span>
+      <span scTimezoneBadge [showLabel]="true"></span>
+      <span scTimezoneBadge [showOffset]="true"></span>
+      <span scTimezoneBadge [showLabel]="true" [showOffset]="true"></span>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

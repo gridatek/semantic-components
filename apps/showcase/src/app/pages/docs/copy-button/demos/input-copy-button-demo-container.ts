@@ -34,14 +34,14 @@ import { ScCopyInput } from '@semantic-components/ui-lab';
       <div>
         <label class="text-sm font-medium">Share Link</label>
         <div
-          sc-copy-input
+          scCopyInput
           [value]="'https://example.com/share/abc123'"
           class="mt-1"
         ></div>
       </div>
       <div>
         <label class="text-sm font-medium">API Key</label>
-        <div sc-copy-input [value]="'sk_live_abc123xyz789'" class="mt-1"></div>
+        <div scCopyInput [value]="'sk_live_abc123xyz789'" class="mt-1"></div>
       </div>
     </div>
   \`,

@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
 @Component({
-  selector: 'button[sc-password-field-toggle]',
+  selector: 'button[scPasswordFieldToggle]',
   template: `
     <ng-content>
       @if (passwordField.visible()) {

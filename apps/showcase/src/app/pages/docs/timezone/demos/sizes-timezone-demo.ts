@@ -11,20 +11,20 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
   template: `
     <div class="flex items-center gap-4">
       <div class="flex flex-col items-center gap-2">
-        <button sc-timezone-display variant="outline" size="sm"></button>
+        <button scTimezoneDisplay variant="outline" size="sm"></button>
         <span class="text-xs text-muted-foreground">Small</span>
       </div>
       <div class="flex flex-col items-center gap-2">
-        <button sc-timezone-display variant="outline" size="default"></button>
+        <button scTimezoneDisplay variant="outline" size="default"></button>
         <span class="text-xs text-muted-foreground">Default</span>
       </div>
       <div class="flex flex-col items-center gap-2">
-        <button sc-timezone-display variant="outline" size="lg"></button>
+        <button scTimezoneDisplay variant="outline" size="lg"></button>
         <span class="text-xs text-muted-foreground">Large</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
-          sc-timezone-display
+          scTimezoneDisplay
           variant="outline"
           size="icon"
           [iconOnly]="true"

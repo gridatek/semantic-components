@@ -3,7 +3,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-command-list]',
+  selector: 'div[scCommandList]',
   hostDirectives: [Listbox],
   host: {
     'data-slot': 'command-list',

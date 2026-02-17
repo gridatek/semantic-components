@@ -14,7 +14,7 @@ import { SC_TAG_INPUT } from './tag-input';
 // TagInputField
 // ============================================================================
 @Component({
-  selector: 'input[sc-tag-input-field]',
+  selector: 'input[scTagInputField]',
   template: ``,
   host: {
     'data-slot': 'tag-input-field',

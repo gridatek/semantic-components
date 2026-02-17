@@ -49,9 +49,9 @@ interface UserFormModel {
     <form>
       <div class="space-y-4">
         <div class="space-y-2">
-          <label sc-label>Form Completion</label>
+          <label scLabel>Form Completion</label>
           <div
-            sc-progress
+            scProgress
             [value]="formCompletionPercentage()"
             class="w-full"
           ></div>
@@ -61,7 +61,7 @@ interface UserFormModel {
         </div>
 
         <div class="space-y-2">
-          <label sc-label for="name">Name</label>
+          <label scLabel for="name">Name</label>
           <input
             type="text"
             id="name"
@@ -72,7 +72,7 @@ interface UserFormModel {
         </div>
 
         <div class="space-y-2">
-          <label sc-label for="email">Email</label>
+          <label scLabel for="email">Email</label>
           <input
             type="email"
             id="email"
@@ -83,7 +83,7 @@ interface UserFormModel {
         </div>
 
         <div class="space-y-2">
-          <label sc-label for="bio">Bio</label>
+          <label scLabel for="bio">Bio</label>
           <textarea
             id="bio"
             [formField]="userForm.bio"

@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-navbar-actions]',
+  selector: 'div[scNavbarActions]',
   template: `
     <ng-content />
   `,

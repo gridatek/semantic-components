@@ -11,7 +11,7 @@ import { ScMenuSubProvider } from './menu-sub-provider';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-menu-sub-portal]',
+  selector: 'div[scMenuSubPortal]',
   imports: [OverlayModule],
   template: `
     @if (origin(); as origin) {

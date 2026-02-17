@@ -11,7 +11,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
   template: `
     <div class="flex items-center gap-4">
       <button
-        sc-copy-button
+        scCopyButton
         [value]="'Long feedback'"
         [timeout]="5000"
         variant="outline"

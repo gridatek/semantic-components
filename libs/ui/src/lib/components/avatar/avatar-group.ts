@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[sc-avatar-group]',
+  selector: 'div[scAvatarGroup]',
   host: {
     'data-slot': 'avatar-group',
     '[class]': 'class()',

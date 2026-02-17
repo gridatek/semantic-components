@@ -10,7 +10,7 @@ import { ScButton } from '@semantic-components/ui';
   imports: [ScButton],
   template: `
     <div class="flex flex-wrap items-center gap-4">
-      <button sc-button>
+      <button scButton>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -28,7 +28,7 @@ import { ScButton } from '@semantic-components/ui';
         </svg>
         Upload
       </button>
-      <button sc-button variant="outline">
+      <button scButton variant="outline">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -46,7 +46,7 @@ import { ScButton } from '@semantic-components/ui';
         </svg>
         Export
       </button>
-      <button sc-button variant="secondary">
+      <button scButton variant="secondary">
         Settings
         <svg
           xmlns="http://www.w3.org/2000/svg"

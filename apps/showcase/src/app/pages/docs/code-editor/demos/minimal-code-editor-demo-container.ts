@@ -34,9 +34,9 @@ import { ScCodeEditor, ScCodeEditorContent } from '@semantic-components/code';
   selector: 'app-minimal-code-editor-demo',
   imports: [ScCodeEditor, ScCodeEditorContent],
   template: \`
-    <div sc-code-editor>
+    <div scCodeEditor>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="minimalCode"
         language="javascript"
         class="max-h-[150px]"

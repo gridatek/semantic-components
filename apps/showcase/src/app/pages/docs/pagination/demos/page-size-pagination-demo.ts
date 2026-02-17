@@ -42,7 +42,7 @@ import {
   template: `
     <div class="space-y-4">
       <nav
-        sc-pagination
+        scPagination
         #pagination="scPagination"
         [currentPage]="currentPage()"
         [pageSize]="pageSize()"
@@ -51,11 +51,11 @@ import {
         (change)="onPaginationChange($event)"
       >
         <div class="flex items-center justify-between">
-          <div sc-field orientation="horizontal" class="w-auto">
-            <label sc-label class="text-sm text-muted-foreground">
+          <div scField orientation="horizontal" class="w-auto">
+            <label scLabel class="text-sm text-muted-foreground">
               Items per page:
             </label>
-            <select sc-pagination-page-size-select>
+            <select scPaginationPageSizeSelect>
               @for (size of pagination.pageSizes(); track size) {
                 <option [value]="size">{{ size }}</option>
               }
@@ -70,31 +70,31 @@ import {
           </p>
         </div>
 
-        <ul sc-pagination-list>
-          <li sc-pagination-item>
-            <button sc-pagination-previous>
+        <ul scPaginationList>
+          <li scPaginationItem>
+            <button scPaginationPrevious>
               <svg si-chevron-left-icon></svg>
               <span>Previous</span>
             </button>
           </li>
 
           @for (page of pagination.pages(); track page.value) {
-            <li sc-pagination-item>
+            <li scPaginationItem>
               @if (page.type === 'ellipsis') {
-                <span sc-pagination-ellipsis>
+                <span scPaginationEllipsis>
                   <svg si-ellipsis-icon></svg>
                   <span class="sr-only">More pages</span>
                 </span>
               } @else {
-                <button sc-pagination-link [page]="page.value">
+                <button scPaginationLink [page]="page.value">
                   {{ page.value }}
                 </button>
               }
             </li>
           }
 
-          <li sc-pagination-item>
-            <button sc-pagination-next>
+          <li scPaginationItem>
+            <button scPaginationNext>
               <span>Next</span>
               <svg si-chevron-right-icon></svg>
             </button>

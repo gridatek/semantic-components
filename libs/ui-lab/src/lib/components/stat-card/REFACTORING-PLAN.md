@@ -45,38 +45,38 @@ Following the pattern from `libs/ui/src/lib/components/card/`:
 
 1. **`sc-stat-card`** (Container)
    - File: `stat-card.ts`
-   - Selector: `[sc-stat-card]`
+   - Selector: `[scStatCard]`
    - Purpose: Main container with base card styling
    - Styling: Border, background, padding, rounded corners
 
 2. **`sc-stat-card-label`** (Label Text)
    - File: `stat-card-label.ts`
-   - Selector: `[sc-stat-card-label]`
+   - Selector: `[scStatCardLabel]`
    - Purpose: Label/title text styling
    - Styling: Font size, color (muted), font weight
 
 3. **`sc-stat-card-value`** (Primary Value)
    - File: `stat-card-value.ts`
-   - Selector: `[sc-stat-card-value]`
+   - Selector: `[scStatCardValue]`
    - Purpose: Main value/metric display
    - Styling: Large font, bold, tracking
 
 4. **`sc-stat-card-icon`** (Icon Container)
    - File: `stat-card-icon.ts`
-   - Selector: `[sc-stat-card-icon]`
+   - Selector: `[scStatCardIcon]`
    - Purpose: Icon container styling
    - Styling: Background, padding, rounded, icon size
 
 5. **`sc-stat-card-change`** (Change Indicator)
    - File: `stat-card-change.ts`
-   - Selector: `[sc-stat-card-change]`
+   - Selector: `[scStatCardChange]`
    - Purpose: Trend/change indicator styling
    - Inputs: `trend: 'up' | 'down' | 'neutral'`
    - Styling: Color based on trend (green/red), font size, flex layout
 
 6. **`sc-stat-card-description`** (Description Text)
    - File: `stat-card-description.ts`
-   - Selector: `[sc-stat-card-description]`
+   - Selector: `[scStatCardDescription]`
    - Purpose: Additional description text styling
    - Styling: Small font, muted color
 
@@ -110,7 +110,7 @@ import { cn } from '../../utils';
 import type { StatCardVariant, StatCardSize } from './stat-card-types';
 
 @Directive({
-  selector: '[sc-stat-card]',
+  selector: '[scStatCard]',
   host: {
     'data-slot': 'stat-card',
     '[class]': 'class()',
@@ -149,7 +149,7 @@ import { cn } from '../../utils';
 import type { StatCardSize } from './stat-card-types';
 
 @Directive({
-  selector: '[sc-stat-card-label]',
+  selector: '[scStatCardLabel]',
   host: {
     'data-slot': 'stat-card-label',
     '[class]': 'class()',
@@ -175,7 +175,7 @@ import { cn } from '../../utils';
 import type { StatCardSize } from './stat-card-types';
 
 @Directive({
-  selector: '[sc-stat-card-value]',
+  selector: '[scStatCardValue]',
   host: {
     'data-slot': 'stat-card-value',
     '[class]': 'class()',
@@ -201,7 +201,7 @@ import { cn } from '../../utils';
 import type { StatCardSize } from './stat-card-types';
 
 @Directive({
-  selector: '[sc-stat-card-icon]',
+  selector: '[scStatCardIcon]',
   host: {
     'data-slot': 'stat-card-icon',
     '[class]': 'class()',
@@ -227,7 +227,7 @@ import { cn } from '../../utils';
 import type { StatCardTrend } from './stat-card-types';
 
 @Directive({
-  selector: '[sc-stat-card-change]',
+  selector: '[scStatCardChange]',
   host: {
     'data-slot': 'stat-card-change',
     '[class]': 'class()',
@@ -252,7 +252,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: '[sc-stat-card-description]',
+  selector: '[scStatCardDescription]',
   host: {
     'data-slot': 'stat-card-description',
     '[class]': 'class()',
@@ -292,25 +292,25 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
 ### Basic Stat Card
 
 ```html
-<div sc-stat-card>
+<div scStatCard>
   <div class="space-y-1">
-    <p sc-stat-card-label>Total Revenue</p>
-    <p sc-stat-card-value>$45,231.89</p>
+    <p scStatCardLabel>Total Revenue</p>
+    <p scStatCardValue>$45,231.89</p>
   </div>
-  <p sc-stat-card-description>Revenue for the current period</p>
+  <p scStatCardDescription>Revenue for the current period</p>
 </div>
 ```
 
 ### With Icon
 
 ```html
-<div sc-stat-card>
+<div scStatCard>
   <div class="flex items-start justify-between">
     <div class="space-y-1">
-      <p sc-stat-card-label>Active Users</p>
-      <p sc-stat-card-value>2,350</p>
+      <p scStatCardLabel>Active Users</p>
+      <p scStatCardValue>2,350</p>
     </div>
-    <div sc-stat-card-icon>
+    <div scStatCardIcon>
       <svg><!-- users icon --></svg>
     </div>
   </div>
@@ -320,18 +320,18 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
 ### With Trend
 
 ```html
-<div sc-stat-card>
+<div scStatCard>
   <div class="space-y-1">
-    <p sc-stat-card-label>Sales</p>
-    <p sc-stat-card-value>12,234</p>
+    <p scStatCardLabel>Sales</p>
+    <p scStatCardValue>12,234</p>
   </div>
 
   <div class="mt-3 flex items-center gap-2">
-    <span sc-stat-card-change trend="up">
+    <span scStatCardChange trend="up">
       <svg><!-- up arrow icon --></svg>
       <span>+20.1%</span>
     </span>
-    <span sc-stat-card-description>from last month</span>
+    <span scStatCardDescription>from last month</span>
   </div>
 </div>
 ```
@@ -339,13 +339,13 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
 ### Complex Example (Replaces Current Implementation)
 
 ```html
-<div sc-stat-card variant="default" size="md">
+<div scStatCard variant="default" size="md">
   <div class="flex items-start justify-between">
     <div class="space-y-1">
-      <p sc-stat-card-label size="md">Total Revenue</p>
-      <p sc-stat-card-value size="md">$45,231.89</p>
+      <p scStatCardLabel size="md">Total Revenue</p>
+      <p scStatCardValue size="md">$45,231.89</p>
     </div>
-    <div sc-stat-card-icon size="md">
+    <div scStatCardIcon size="md">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
@@ -353,7 +353,7 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
   </div>
 
   <div class="mt-3 flex items-center gap-2">
-    <span sc-stat-card-change trend="up">
+    <span scStatCardChange trend="up">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <path d="m18 15-6-6-6 6" />
       </svg>
@@ -362,7 +362,7 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
     <span class="text-xs text-muted-foreground">from last month</span>
   </div>
 
-  <p sc-stat-card-description class="mt-2">Your revenue increased significantly this month</p>
+  <p scStatCardDescription class="mt-2">Your revenue increased significantly this month</p>
 </div>
 ```
 
@@ -377,26 +377,26 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
 ### After (Refactored)
 
 ```html
-<div sc-stat-card variant="default" size="md">
+<div scStatCard variant="default" size="md">
   <div class="flex items-start justify-between">
     <div class="space-y-1">
-      <p sc-stat-card-label size="md">Total Revenue</p>
-      <p sc-stat-card-value size="md">$45,231.89</p>
+      <p scStatCardLabel size="md">Total Revenue</p>
+      <p scStatCardValue size="md">$45,231.89</p>
     </div>
-    <div sc-stat-card-icon size="md">
+    <div scStatCardIcon size="md">
       <svg><!-- revenue icon --></svg>
     </div>
   </div>
 
   <div class="mt-3 flex items-center gap-2">
-    <span sc-stat-card-change trend="up">
+    <span scStatCardChange trend="up">
       <svg><!-- up arrow --></svg>
       <span>+20.1%</span>
     </span>
     <span class="text-xs text-muted-foreground">from last month</span>
   </div>
 
-  <p sc-stat-card-description class="mt-2">Revenue increased</p>
+  <p scStatCardDescription class="mt-2">Revenue increased</p>
 </div>
 ```
 
@@ -463,7 +463,7 @@ grep -r "ScStatCard" apps/showcase/
 
 - Follow the exact pattern from `card` component
 - All components are **Directives**, not Components (no templates)
-- Use attribute selectors: `[sc-stat-card]`
+- Use attribute selectors: `[scStatCard]`
 - Include `data-slot` attribute
 - Support `class` input for all directives
 - Remove all `innerHTML` usage

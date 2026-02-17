@@ -24,37 +24,37 @@ ScDrawerProvider (root wrapper - manages open state + overlay lifecycle)
 
 | Component             | Selector                      | Description                                        |
 | --------------------- | ----------------------------- | -------------------------------------------------- |
-| `ScDrawerProvider`    | `div[sc-drawer-provider]`     | Root wrapper, manages open state + overlay         |
-| `ScDrawerTrigger`     | `button[sc-drawer-trigger]`   | Button that opens the drawer                       |
+| `ScDrawerProvider`    | `div[scDrawerProvider]`     | Root wrapper, manages open state + overlay         |
+| `ScDrawerTrigger`     | `button[scDrawerTrigger]`   | Button that opens the drawer                       |
 | `ScDrawerPortal`      | `ng-template[scDrawerPortal]` | Directive marking lazy content for the overlay     |
-| `ScDrawer`            | `div[sc-drawer]`              | Drawer directive with directional slide animations |
-| `ScDrawerHeader`      | `div[sc-drawer-header]`       | Header section container                           |
-| `ScDrawerTitle`       | `h2[sc-drawer-title]`         | Drawer title (aria-labelledby)                     |
-| `ScDrawerDescription` | `p[sc-drawer-description]`    | Drawer description (aria-describedby)              |
-| `ScDrawerHandle`      | `div[sc-drawer-handle]`       | Visual drag handle indicator                       |
-| `ScDrawerFooter`      | `div[sc-drawer-footer]`       | Footer section for actions                         |
-| `ScDrawerClose`       | `button[sc-drawer-close]`     | Close button (sets `type="button"` automatically)  |
+| `ScDrawer`            | `div[scDrawer]`              | Drawer directive with directional slide animations |
+| `ScDrawerHeader`      | `div[scDrawerHeader]`       | Header section container                           |
+| `ScDrawerTitle`       | `h2[scDrawerTitle]`         | Drawer title (aria-labelledby)                     |
+| `ScDrawerDescription` | `p[scDrawerDescription]`    | Drawer description (aria-describedby)              |
+| `ScDrawerHandle`      | `div[scDrawerHandle]`       | Visual drag handle indicator                       |
+| `ScDrawerFooter`      | `div[scDrawerFooter]`       | Footer section for actions                         |
+| `ScDrawerClose`       | `button[scDrawerClose]`     | Close button (sets `type="button"` automatically)  |
 
 ## Usage
 
 ### Basic Drawer
 
 ```html
-<div sc-drawer-provider direction="bottom" [(open)]="isOpen">
-  <button sc-drawer-trigger>Open Drawer</button>
+<div scDrawerProvider direction="bottom" [(open)]="isOpen">
+  <button scDrawerTrigger>Open Drawer</button>
   <ng-template scDrawerPortal>
-    <div sc-drawer>
-      <div sc-drawer-handle></div>
-      <div sc-drawer-header>
-        <h2 sc-drawer-title>Drawer Title</h2>
-        <p sc-drawer-description>Drawer description text.</p>
+    <div scDrawer>
+      <div scDrawerHandle></div>
+      <div scDrawerHeader>
+        <h2 scDrawerTitle>Drawer Title</h2>
+        <p scDrawerDescription>Drawer description text.</p>
       </div>
       <div class="p-4">
         <!-- Main content -->
       </div>
-      <div sc-drawer-footer>
-        <button sc-drawer-close>Cancel</button>
-        <button sc-drawer-close>Submit</button>
+      <div scDrawerFooter>
+        <button scDrawerClose>Cancel</button>
+        <button scDrawerClose>Submit</button>
       </div>
     </div>
   </ng-template>
@@ -68,10 +68,10 @@ You can control the drawer state programmatically using the `open` model:
 ```typescript
 @Component({
   template: `
-    <div sc-drawer-provider direction="bottom" [(open)]="isOpen">
-      <button sc-drawer-trigger>Open</button>
+    <div scDrawerProvider direction="bottom" [(open)]="isOpen">
+      <button scDrawerTrigger>Open</button>
       <ng-template scDrawerPortal>
-        <div sc-drawer>
+        <div scDrawer>
           <!-- content -->
         </div>
       </ng-template>
@@ -97,21 +97,21 @@ The drawer can slide in from any edge of the screen. The `direction` input is se
 
 ```html
 <!-- Bottom (default) -->
-<div sc-drawer-provider direction="bottom">
-  <button sc-drawer-trigger>Open</button>
+<div scDrawerProvider direction="bottom">
+  <button scDrawerTrigger>Open</button>
   <ng-template scDrawerPortal>
-    <div sc-drawer>...</div>
+    <div scDrawer>...</div>
   </ng-template>
 </div>
 
 <!-- Top -->
-<div sc-drawer-provider direction="top">...</div>
+<div scDrawerProvider direction="top">...</div>
 
 <!-- Left -->
-<div sc-drawer-provider direction="left">...</div>
+<div scDrawerProvider direction="left">...</div>
 
 <!-- Right -->
-<div sc-drawer-provider direction="right">...</div>
+<div scDrawerProvider direction="right">...</div>
 ```
 
 ## Keyboard Navigation
@@ -189,11 +189,11 @@ On `animationend`, the `closed` state triggers overlay cleanup via `onDrawerAnim
 All components accept a `class` input for custom styling:
 
 ```html
-<div sc-drawer class="max-h-[80vh]">
+<div scDrawer class="max-h-[80vh]">
   <!-- constrained height drawer -->
 </div>
 
-<div sc-drawer-footer class="flex-row-reverse">
+<div scDrawerFooter class="flex-row-reverse">
   <!-- reversed button order -->
 </div>
 ```

@@ -46,32 +46,32 @@ import {
     ScAvatarImage,
   ],
   template: \`
-    <div sc-avatar-group>
-      <span sc-avatar>
+    <div scAvatarGroup>
+      <span scAvatar>
         <img
-          sc-avatar-image
+          scAvatarImage
           src="https://github.com/shadcn.png"
           alt="@shadcn"
         />
-        <span sc-avatar-fallback>CN</span>
+        <span scAvatarFallback>CN</span>
       </span>
-      <span sc-avatar>
+      <span scAvatar>
         <img
-          sc-avatar-image
+          scAvatarImage
           src="https://github.com/vercel.png"
           alt="@vercel"
         />
-        <span sc-avatar-fallback>VC</span>
+        <span scAvatarFallback>VC</span>
       </span>
-      <span sc-avatar>
-        <img sc-avatar-image src="https://github.com/nextjs.png" alt="@nextjs" />
-        <span sc-avatar-fallback>NX</span>
+      <span scAvatar>
+        <img scAvatarImage src="https://github.com/nextjs.png" alt="@nextjs" />
+        <span scAvatarFallback>NX</span>
       </span>
-      <span sc-avatar>
-        <img sc-avatar-image src="https://github.com/react.png" alt="@react" />
-        <span sc-avatar-fallback>RC</span>
+      <span scAvatar>
+        <img scAvatarImage src="https://github.com/react.png" alt="@react" />
+        <span scAvatarFallback>RC</span>
       </span>
-      <div sc-avatar-group-count>+3</div>
+      <div scAvatarGroupCount>+3</div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

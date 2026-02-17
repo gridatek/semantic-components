@@ -50,16 +50,16 @@ import {
     <div class="flex items-center gap-4">
       <span class="text-sm font-medium">Quantity:</span>
       <div
-        sc-number-field
+        scNumberField
         [(value)]="quantity"
         [min]="1"
         [max]="10"
         class="w-28"
       >
-        <div sc-number-field-group>
-          <button sc-number-field-decrement></button>
-          <input sc-number-field-input />
-          <button sc-number-field-increment></button>
+        <div scNumberFieldGroup>
+          <button scNumberFieldDecrement></button>
+          <input scNumberFieldInput />
+          <button scNumberFieldIncrement></button>
         </div>
       </div>
     </div>

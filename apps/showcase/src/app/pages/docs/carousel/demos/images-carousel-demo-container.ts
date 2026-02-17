@@ -55,11 +55,11 @@ import {
   ],
   template: \`
     <div class="mx-auto w-full max-w-md">
-      <div sc-carousel class="w-full">
-        <div sc-carousel-viewport>
-          <div sc-carousel-track>
+      <div scCarousel class="w-full">
+        <div scCarouselViewport>
+          <div scCarouselTrack>
             @for (image of images; track image.alt) {
-              <div sc-carousel-item>
+              <div scCarouselItem>
                 <div class="p-1">
                   <div
                     class="flex aspect-video items-center justify-center rounded-lg border bg-muted"
@@ -73,11 +73,11 @@ import {
             }
           </div>
         </div>
-        <button sc-carousel-previous>
+        <button scCarouselPrevious>
           <svg si-chevron-left-icon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
-        <button sc-carousel-next>
+        <button scCarouselNext>
           <svg si-chevron-right-icon></svg>
           <span class="sr-only">Next slide</span>
         </button>

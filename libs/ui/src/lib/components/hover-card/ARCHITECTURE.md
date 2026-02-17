@@ -317,11 +317,11 @@ The hover card uses a more modular component-based approach, while the tooltip u
 ## Usage Example
 
 ```html
-<div sc-hover-card-provider side="bottom" align="center">
-  <button sc-hover-card-trigger>Hover me</button>
+<div scHoverCardProvider side="bottom" align="center">
+  <button scHoverCardTrigger>Hover me</button>
 
   <ng-template scHoverCardPortal>
-    <div sc-hover-card>This is the hover card content!</div>
+    <div scHoverCard>This is the hover card content!</div>
   </ng-template>
 </div>
 ```

@@ -24,13 +24,13 @@ import { ScDrawerPortal } from './drawer-portal';
 export type ScDrawerDirection = 'top' | 'right' | 'bottom' | 'left';
 
 @Component({
-  selector: 'div[sc-drawer-provider]',
+  selector: 'div[scDrawerProvider]',
   imports: [OverlayModule, ScBackdrop, CdkTrapFocus, NgTemplateOutlet],
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
       <div
-        sc-backdrop
+        scBackdrop
         [open]="open()"
         (animationComplete)="onBackdropAnimationComplete()"
       ></div>

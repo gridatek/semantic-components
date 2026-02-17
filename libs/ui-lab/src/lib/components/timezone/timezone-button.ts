@@ -21,12 +21,12 @@ import {
  *
  * @example
  * ```html
- * <button sc-timezone-button></button>
- * <button sc-timezone-button variant="outline"></button>
+ * <button scTimezoneButton></button>
+ * <button scTimezoneButton variant="outline"></button>
  * ```
  */
 @Component({
-  selector: 'button[sc-timezone-button]',
+  selector: 'button[scTimezoneButton]',
   host: {
     'data-slot': 'timezone-button',
     type: 'button',

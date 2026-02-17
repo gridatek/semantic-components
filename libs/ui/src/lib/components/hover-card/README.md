@@ -32,10 +32,10 @@ ScHoverCardProvider (Root)
 
 | Component             | Selector                         | Description                                     |
 | --------------------- | -------------------------------- | ----------------------------------------------- |
-| `ScHoverCardProvider` | `div[sc-hover-card-provider]`    | Root wrapper with state, configuration, overlay |
-| `ScHoverCardTrigger`  | `[sc-hover-card-trigger]`        | Element that triggers hover card on hover/focus |
+| `ScHoverCardProvider` | `div[scHoverCardProvider]`    | Root wrapper with state, configuration, overlay |
+| `ScHoverCardTrigger`  | `[scHoverCardTrigger]`        | Element that triggers hover card on hover/focus |
 | `ScHoverCardPortal`   | `ng-template[scHoverCardPortal]` | Template directive for portal content           |
-| `ScHoverCard`         | `div[sc-hover-card]`             | The card content displayed on hover             |
+| `ScHoverCard`         | `div[scHoverCard]`             | The card content displayed on hover             |
 
 ## Inputs
 
@@ -51,10 +51,10 @@ ScHoverCardProvider (Root)
 ## Usage
 
 ```html
-<div sc-hover-card-provider>
-  <a sc-hover-card-trigger href="/profile">@username</a>
+<div scHoverCardProvider>
+  <a scHoverCardTrigger href="/profile">@username</a>
   <ng-template scHoverCardPortal>
-    <div sc-hover-card>
+    <div scHoverCard>
       <div class="flex gap-4">
         <img src="avatar.jpg" class="size-12 rounded-full" />
         <div>
@@ -70,10 +70,10 @@ ScHoverCardProvider (Root)
 ### With Custom Position
 
 ```html
-<div sc-hover-card-provider side="right" align="start">
-  <button sc-hover-card-trigger>Hover me</button>
+<div scHoverCardProvider side="right" align="start">
+  <button scHoverCardTrigger>Hover me</button>
   <ng-template scHoverCardPortal>
-    <div sc-hover-card>Content appears to the right, aligned to the top</div>
+    <div scHoverCard>Content appears to the right, aligned to the top</div>
   </ng-template>
 </div>
 ```
@@ -81,10 +81,10 @@ ScHoverCardProvider (Root)
 ### With Custom Delays
 
 ```html
-<div sc-hover-card-provider [openDelay]="500" [closeDelay]="200">
-  <span sc-hover-card-trigger>Quick hover</span>
+<div scHoverCardProvider [openDelay]="500" [closeDelay]="200">
+  <span scHoverCardTrigger>Quick hover</span>
   <ng-template scHoverCardPortal>
-    <div sc-hover-card>Shows faster, hides faster</div>
+    <div scHoverCard>Shows faster, hides faster</div>
   </ng-template>
 </div>
 ```

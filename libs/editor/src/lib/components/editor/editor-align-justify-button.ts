@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Component({
-  selector: 'button[sc-editor-align-justify]',
+  selector: 'button[scEditorAlignJustify]',
   template: `
     <ng-content />
   `,

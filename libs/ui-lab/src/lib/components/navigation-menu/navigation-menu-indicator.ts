@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-navigation-menu-indicator]',
+  selector: 'div[scNavigationMenuIndicator]',
   template: `
     <div
       class="bg-border relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm shadow-md"

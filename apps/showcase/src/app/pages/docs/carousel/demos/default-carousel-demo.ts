@@ -30,11 +30,11 @@ import {
   ],
   template: `
     <div class="mx-auto w-full max-w-xs">
-      <div sc-carousel class="w-full">
-        <div sc-carousel-viewport>
-          <div sc-carousel-track>
+      <div scCarousel class="w-full">
+        <div scCarouselViewport>
+          <div scCarouselTrack>
             @for (index of items; track index) {
-              <div sc-carousel-item>
+              <div scCarouselItem>
                 <div class="p-1">
                   <div
                     class="flex aspect-square items-center justify-center rounded-lg border bg-card p-6"
@@ -46,11 +46,11 @@ import {
             }
           </div>
         </div>
-        <button sc-carousel-previous>
+        <button scCarouselPrevious>
           <svg si-chevron-left-icon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
-        <button sc-carousel-next>
+        <button scCarouselNext>
           <svg si-chevron-right-icon></svg>
           <span class="sr-only">Next slide</span>
         </button>

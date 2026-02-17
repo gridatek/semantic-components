@@ -15,7 +15,7 @@ import {
 } from './notification-center';
 
 @Component({
-  selector: '[sc-notification-center-container]',
+  selector: '[scNotificationCenterContainer]',
   imports: [ScNotificationGroup, ScNotificationItem],
   template: `
     <div [class]="containerClass()">

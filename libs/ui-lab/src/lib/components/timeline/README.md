@@ -16,22 +16,22 @@ Display a sequence of events or activities in chronological order.
 ## Usage
 
 ```html
-<div sc-timeline>
-  <div sc-timeline-item>
-    <div sc-timeline-connector></div>
-    <div sc-timeline-dot></div>
-    <div sc-timeline-content>
-      <h4 sc-timeline-title>Event Title</h4>
-      <p sc-timeline-description>Event description goes here.</p>
-      <span sc-timeline-time>January 2024</span>
+<div scTimeline>
+  <div scTimelineItem>
+    <div scTimelineConnector></div>
+    <div scTimelineDot></div>
+    <div scTimelineContent>
+      <h4 scTimelineTitle>Event Title</h4>
+      <p scTimelineDescription>Event description goes here.</p>
+      <span scTimelineTime>January 2024</span>
     </div>
   </div>
 
-  <div sc-timeline-item>
-    <div sc-timeline-dot></div>
-    <div sc-timeline-content>
-      <h4 sc-timeline-title>Last Event</h4>
-      <p sc-timeline-description>No connector for the last item.</p>
+  <div scTimelineItem>
+    <div scTimelineDot></div>
+    <div scTimelineContent>
+      <h4 scTimelineTitle>Last Event</h4>
+      <p scTimelineDescription>No connector for the last item.</p>
     </div>
   </div>
 </div>
@@ -112,13 +112,13 @@ Display a sequence of events or activities in chronological order.
 ### With Status Icons
 
 ```html
-<div sc-timeline-item>
-  <div sc-timeline-connector></div>
-  <div sc-timeline-dot variant="success">
+<div scTimelineItem>
+  <div scTimelineConnector></div>
+  <div scTimelineDot variant="success">
     <svg class="size-3"><!-- check icon --></svg>
   </div>
-  <div sc-timeline-content>
-    <h4 sc-timeline-title>Completed</h4>
+  <div scTimelineContent>
+    <h4 scTimelineTitle>Completed</h4>
   </div>
 </div>
 ```
@@ -126,16 +126,16 @@ Display a sequence of events or activities in chronological order.
 ### Activity Feed
 
 ```html
-<div sc-timeline>
-  <div sc-timeline-item class="pb-4">
-    <div sc-timeline-connector></div>
-    <div sc-timeline-dot size="sm"></div>
-    <div sc-timeline-content class="space-y-0">
+<div scTimeline>
+  <div scTimelineItem class="pb-4">
+    <div scTimelineConnector></div>
+    <div scTimelineDot size="sm"></div>
+    <div scTimelineContent class="space-y-0">
       <p class="text-sm">
         <span class="font-medium">John Doe</span>
         created a new project
       </p>
-      <span sc-timeline-time>2 hours ago</span>
+      <span scTimelineTime>2 hours ago</span>
     </div>
   </div>
 </div>
@@ -144,16 +144,16 @@ Display a sequence of events or activities in chronological order.
 ### Order Tracking
 
 ```html
-<div sc-timeline>
-  <div sc-timeline-item>
-    <div sc-timeline-connector></div>
-    <div sc-timeline-dot variant="success" size="lg">
+<div scTimeline>
+  <div scTimelineItem>
+    <div scTimelineConnector></div>
+    <div scTimelineDot variant="success" size="lg">
       <svg class="size-4"><!-- package icon --></svg>
     </div>
-    <div sc-timeline-content>
-      <h4 sc-timeline-title>Shipped</h4>
-      <p sc-timeline-description>Your package is on its way.</p>
-      <span sc-timeline-time>Jan 16, 2024</span>
+    <div scTimelineContent>
+      <h4 scTimelineTitle>Shipped</h4>
+      <p scTimelineDescription>Your package is on its way.</p>
+      <span scTimelineTime>Jan 16, 2024</span>
     </div>
   </div>
 </div>

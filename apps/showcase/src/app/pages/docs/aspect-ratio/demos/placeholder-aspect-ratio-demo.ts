@@ -10,7 +10,7 @@ import { ScAspectRatio } from '@semantic-components/ui';
   imports: [ScAspectRatio],
   template: `
     <div class="w-[450px] overflow-hidden rounded-md">
-      <div sc-aspect-ratio [ratio]="16 / 9" class="bg-muted">
+      <div scAspectRatio [ratio]="16 / 9" class="bg-muted">
         <div class="flex size-full items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

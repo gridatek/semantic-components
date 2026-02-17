@@ -32,7 +32,7 @@ import { ScLightboxContainer } from './lightbox-container';
     </div>
 
     <div
-      sc-lightbox
+      scLightbox
       #lightbox="scLightbox"
       [images]="images()"
       [loop]="loop()"
@@ -41,7 +41,7 @@ import { ScLightboxContainer } from './lightbox-container';
       [showZoom]="showZoom()"
       [showThumbnails]="showThumbnails()"
     >
-      <div sc-lightbox-container></div>
+      <div scLightboxContainer></div>
     </div>
   `,
   host: {

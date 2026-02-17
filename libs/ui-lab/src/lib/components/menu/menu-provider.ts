@@ -13,7 +13,7 @@ import { ScMenuTrigger } from './menu-trigger';
 import { ScMenu } from './menu';
 
 @Component({
-  selector: 'div[sc-menu-provider]',
+  selector: 'div[scMenuProvider]',
   imports: [],
   template: `
     <ng-content />

@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-combobox-trigger]',
+  selector: 'div[scComboboxTrigger]',
   host: {
     'data-slot': 'combobox-trigger',
     '[class]': 'class()',

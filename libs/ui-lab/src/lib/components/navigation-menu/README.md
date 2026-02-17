@@ -28,24 +28,24 @@ ScNavigationMenu (Root - nav element)
 
 | Component                 | Selector                             | Description                                 |
 | ------------------------- | ------------------------------------ | ------------------------------------------- |
-| `ScNavigationMenu`        | `nav[sc-navigation-menu]`            | Root navigation wrapper                     |
-| `ScNavigationMenuList`    | `ul[sc-navigation-menu-list]`        | List container for items                    |
-| `ScNavigationMenuItem`    | `li[sc-navigation-menu-item]`        | Individual menu item with optional dropdown |
-| `ScNavigationMenuTrigger` | `button[sc-navigation-menu-trigger]` | Button that shows dropdown on hover         |
-| `ScNavigationMenuContent` | `div[sc-navigation-menu-content]`    | Dropdown content container                  |
-| `ScNavigationMenuLink`    | `a[sc-navigation-menu-link]`         | Simple navigation link (no dropdown)        |
+| `ScNavigationMenu`        | `nav[scNavigationMenu]`            | Root navigation wrapper                     |
+| `ScNavigationMenuList`    | `ul[scNavigationMenuList]`        | List container for items                    |
+| `ScNavigationMenuItem`    | `li[scNavigationMenuItem]`        | Individual menu item with optional dropdown |
+| `ScNavigationMenuTrigger` | `button[scNavigationMenuTrigger]` | Button that shows dropdown on hover         |
+| `ScNavigationMenuContent` | `div[scNavigationMenuContent]`    | Dropdown content container                  |
+| `ScNavigationMenuLink`    | `a[scNavigationMenuLink]`         | Simple navigation link (no dropdown)        |
 
 ## Usage
 
 ### Basic Navigation
 
 ```html
-<nav sc-navigation-menu>
-  <ul sc-navigation-menu-list>
+<nav scNavigationMenu>
+  <ul scNavigationMenuList>
     <!-- Item with dropdown -->
-    <li sc-navigation-menu-item>
-      <button sc-navigation-menu-trigger>Products</button>
-      <div sc-navigation-menu-content>
+    <li scNavigationMenuItem>
+      <button scNavigationMenuTrigger>Products</button>
+      <div scNavigationMenuContent>
         <ul class="grid gap-3 p-4 w-[400px]">
           <li>
             <a href="/product-a">Product A</a>
@@ -58,8 +58,8 @@ ScNavigationMenu (Root - nav element)
     </li>
 
     <!-- Simple link -->
-    <li sc-navigation-menu-item>
-      <a sc-navigation-menu-link href="/about">About</a>
+    <li scNavigationMenuItem>
+      <a scNavigationMenuLink href="/about">About</a>
     </li>
   </ul>
 </nav>
@@ -68,9 +68,9 @@ ScNavigationMenu (Root - nav element)
 ### Mega Menu Style
 
 ```html
-<li sc-navigation-menu-item>
-  <button sc-navigation-menu-trigger>Components</button>
-  <div sc-navigation-menu-content>
+<li scNavigationMenuItem>
+  <button scNavigationMenuTrigger>Components</button>
+  <div scNavigationMenuContent>
     <ul class="grid w-[600px] gap-3 p-4 md:grid-cols-2">
       <li>
         <a class="block p-3 rounded-md hover:bg-accent" href="#">
@@ -87,7 +87,7 @@ ScNavigationMenu (Root - nav element)
 ### With Featured Section
 
 ```html
-<div sc-navigation-menu-content>
+<div scNavigationMenuContent>
   <ul class="grid gap-3 p-4 lg:grid-cols-[.75fr_1fr]">
     <!-- Featured card spanning rows -->
     <li class="row-span-3">

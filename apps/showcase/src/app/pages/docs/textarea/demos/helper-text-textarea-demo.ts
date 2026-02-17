@@ -16,14 +16,14 @@ import {
   selector: 'app-helper-text-textarea-demo',
   imports: [FormField, ScField, ScFieldDescription, ScLabel, ScTextarea],
   template: `
-    <div sc-field>
-      <label sc-label>Bio</label>
+    <div scField>
+      <label scLabel>Bio</label>
       <textarea
-        sc-textarea
+        scTextarea
         [formField]="bioForm.bio"
         placeholder="Tell us about yourself"
       ></textarea>
-      <p sc-field-description>
+      <p scFieldDescription>
         Your bio will be visible on your public profile.
       </p>
     </div>

@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { ScContextMenuSub } from './context-menu-sub';
 
 @Component({
-  selector: 'div[sc-context-menu-sub-trigger]',
+  selector: 'div[scContextMenuSubTrigger]',
   hostDirectives: [CdkOverlayOrigin],
   template: `
     <ng-content />

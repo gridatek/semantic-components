@@ -47,13 +47,13 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>angular-ts</span>
-            <button sc-copy-button [value]="usageCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>angular-ts</span>
+            <button scCopyButton [value]="usageCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="usageCode"
             language="angular-ts"
           ></div>
@@ -96,15 +96,15 @@ export default class NumberFieldPage {
     TocHeading,
   ],
   template: \`
-    <div sc-number-field [(value)]="quantity" [min]="1" [max]="10">
-      <div sc-number-field-scrub-area>
-        <label sc-label>Quantity</label>
+    <div scNumberField [(value)]="quantity" [min]="1" [max]="10">
+      <div scNumberFieldScrubArea>
+        <label scLabel>Quantity</label>
       </div>
 
-      <div sc-number-field-group>
-        <button sc-number-field-decrement></button>
-        <input sc-number-field-input />
-        <button sc-number-field-increment></button>
+      <div scNumberFieldGroup>
+        <button scNumberFieldDecrement></button>
+        <input scNumberFieldInput />
+        <button scNumberFieldIncrement></button>
       </div>
     </div>
   \`,

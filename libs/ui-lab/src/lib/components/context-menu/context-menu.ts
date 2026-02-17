@@ -16,7 +16,7 @@ import { cn } from '@semantic-components/ui';
 import { ScContextMenuContent } from './context-menu-content';
 
 @Component({
-  selector: 'div[sc-context-menu]',
+  selector: 'div[scContextMenu]',
   template: `
     <ng-content />
   `,

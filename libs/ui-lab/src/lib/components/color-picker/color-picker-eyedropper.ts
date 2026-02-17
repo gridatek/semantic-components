@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
 @Component({
-  selector: 'button[sc-color-picker-eyedropper]',
+  selector: 'button[scColorPickerEyedropper]',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"

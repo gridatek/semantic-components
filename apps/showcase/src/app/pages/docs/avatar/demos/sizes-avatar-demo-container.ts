@@ -39,29 +39,29 @@ import {
   imports: [ScAvatar, ScAvatarFallback, ScAvatarImage],
   template: \`
     <div class="flex items-end gap-4">
-      <span sc-avatar size="sm">
+      <span scAvatar size="sm">
         <img
-          sc-avatar-image
+          scAvatarImage
           src="https://github.com/shadcn.png"
           alt="@shadcn"
         />
-        <span sc-avatar-fallback>CN</span>
+        <span scAvatarFallback>CN</span>
       </span>
-      <span sc-avatar>
+      <span scAvatar>
         <img
-          sc-avatar-image
+          scAvatarImage
           src="https://github.com/shadcn.png"
           alt="@shadcn"
         />
-        <span sc-avatar-fallback>CN</span>
+        <span scAvatarFallback>CN</span>
       </span>
-      <span sc-avatar size="lg">
+      <span scAvatar size="lg">
         <img
-          sc-avatar-image
+          scAvatarImage
           src="https://github.com/shadcn.png"
           alt="@shadcn"
         />
-        <span sc-avatar-fallback>CN</span>
+        <span scAvatarFallback>CN</span>
       </span>
     </div>
   \`,

@@ -251,7 +251,7 @@ protected readonly class = computed(() =>
 
 **Animation Flow:**
 
-1. Provider renders: `<div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>`
+1. Provider renders: `<div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>`
 2. ScBackdrop receives `open` input
 3. Sets `data-state` based on `open` value
 4. Tailwind applies appropriate animation classes
@@ -445,7 +445,7 @@ The provider's template includes the backdrop and focus trap, projecting the con
 ```html
 <ng-content />
 <ng-template #overlayTemplate>
-  <div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
+  <div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
   <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
     <ng-container [ngTemplateOutlet]="drawerPortal().templateRef" />
   </div>
@@ -503,7 +503,7 @@ The provider directly handles backdrop animation completion in its template -- n
 
 ```html
 <!-- In provider's overlay template -->
-<div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
+<div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
 ```
 
 ```typescript
@@ -819,18 +819,18 @@ The animation system preserves accessibility:
 ## Consumer API
 
 ```html
-<div sc-drawer-provider direction="bottom" [(open)]="isOpen">
-  <button sc-drawer-trigger sc-button>Open</button>
+<div scDrawerProvider direction="bottom" [(open)]="isOpen">
+  <button scDrawerTrigger scButton>Open</button>
   <ng-template scDrawerPortal>
-    <div sc-drawer>
-      <div sc-drawer-handle></div>
-      <div sc-drawer-header>
-        <h2 sc-drawer-title>Title</h2>
-        <p sc-drawer-description>Description</p>
+    <div scDrawer>
+      <div scDrawerHandle></div>
+      <div scDrawerHeader>
+        <h2 scDrawerTitle>Title</h2>
+        <p scDrawerDescription>Description</p>
       </div>
       <!-- content -->
-      <div sc-drawer-footer>
-        <button sc-drawer-close sc-button>Close</button>
+      <div scDrawerFooter>
+        <button scDrawerClose scButton>Close</button>
       </div>
     </div>
   </ng-template>
@@ -940,7 +940,7 @@ describe('Drawer Animations', () => {
     provider.open.set(true);
     fixture.detectChanges();
 
-    const drawer = fixture.debugElement.query(By.css('[sc-drawer]'));
+    const drawer = fixture.debugElement.query(By.css('[scDrawer]'));
     expect(drawer.nativeElement.classList.contains('slide-in-from-left')).toBe(true);
   });
 });

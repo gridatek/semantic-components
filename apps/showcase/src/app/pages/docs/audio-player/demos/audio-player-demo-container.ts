@@ -74,42 +74,42 @@ import {
   ],
   template: \`
     <div
-      sc-audio-player
+      scAudioPlayer
       #player="scAudioPlayer"
       [tracks]="tracks"
       class="flex flex-col gap-3 p-4 bg-card border rounded-lg max-w-md"
     >
       <!-- Cover -->
       <div
-        sc-audio-player-cover
+        scAudioPlayerCover
         class="w-full aspect-square max-w-[200px] mx-auto"
       ></div>
 
       <!-- Track Info -->
-      <div sc-audio-player-info class="text-center"></div>
+      <div scAudioPlayerInfo class="text-center"></div>
 
       <!-- Progress -->
-      <div sc-audio-player-progress></div>
+      <div scAudioPlayerProgress></div>
 
       <!-- Controls -->
       <div class="flex items-center justify-center gap-2">
-        <button sc-audio-player-shuffle>
+        <button scAudioPlayerShuffle>
           <svg si-shuffle-icon></svg>
         </button>
-        <button sc-audio-player-previous>
+        <button scAudioPlayerPrevious>
           <svg si-skip-back-icon></svg>
         </button>
-        <button sc-audio-player-play-button>
+        <button scAudioPlayerPlayButton>
           @if (player.isPlaying()) {
             <svg si-pause-icon></svg>
           } @else {
             <svg si-play-icon></svg>
           }
         </button>
-        <button sc-audio-player-next>
+        <button scAudioPlayerNext>
           <svg si-skip-forward-icon></svg>
         </button>
-        <button sc-audio-player-repeat>
+        <button scAudioPlayerRepeat>
           @if (player.repeat() === 'one') {
             <svg si-repeat-1-icon></svg>
           } @else {
@@ -119,7 +119,7 @@ import {
       </div>
 
       <!-- Volume -->
-      <div sc-audio-player-volume class="justify-center"></div>
+      <div scAudioPlayerVolume class="justify-center"></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

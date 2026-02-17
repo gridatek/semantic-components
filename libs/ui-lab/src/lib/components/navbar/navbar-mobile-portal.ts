@@ -18,7 +18,7 @@ import { cn } from '@semantic-components/ui';
 import { ScNavbarProvider } from './navbar-provider';
 
 @Component({
-  selector: 'div[sc-navbar-mobile-portal]',
+  selector: 'div[scNavbarMobilePortal]',
   imports: [OverlayModule, CdkTrapFocus],
   template: `
     <ng-template #mobileMenuTemplate>

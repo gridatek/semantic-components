@@ -16,11 +16,11 @@ import {
   imports: [JsonPipe, ScTagInput, ScTagInputField, ScTagInputTag],
   template: `
     <div class="max-w-md space-y-4">
-      <div sc-tag-input [(tags)]="tags">
+      <div scTagInput [(tags)]="tags">
         @for (tag of tags(); track tag) {
-          <span sc-tag-input-tag [tag]="tag"></span>
+          <span scTagInputTag [tag]="tag"></span>
         }
-        <input sc-tag-input-field />
+        <input scTagInputField />
       </div>
       <div class="rounded-md border p-4 bg-muted/50">
         <pre class="text-sm">{{ tags() | json }}</pre>

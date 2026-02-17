@@ -13,14 +13,14 @@ import { ScCodeEditor, ScCodeEditorHeader, ScCodeEditorLabel, ScCodeEditorFooter
 The component uses Shiki's dual-theme feature (`github-light` + `github-dark`) with `defaultColor: false` to generate CSS variable-based output. The CSS switches between `--shiki-light` and `--shiki-dark` variables based on the `.dark` class on the document root.
 
 ```
-ScCodeEditor (Root - div[sc-code-editor])
-├── ScCodeEditorHeader (Header - div[sc-code-editor-header])
-│   ├── ScCodeEditorLabel (Label - span[sc-code-editor-label])
+ScCodeEditor (Root - div[scCodeEditor])
+├── ScCodeEditorHeader (Header - div[scCodeEditorHeader])
+│   ├── ScCodeEditorLabel (Label - span[scCodeEditorLabel])
 │   └── ScCodeEditorCopyButton (Copy button)
-├── ScCodeEditorContent (Content - div[sc-code-editor-content])
+├── ScCodeEditorContent (Content - div[scCodeEditorContent])
 │   ├── Line numbers (optional)
 │   └── Editable textarea with syntax highlighting
-└── ScCodeEditorFooter (Footer - div[sc-code-editor-footer])
+└── ScCodeEditorFooter (Footer - div[scCodeEditorFooter])
     └── Cursor position and stats
 ```
 
@@ -28,12 +28,12 @@ ScCodeEditor (Root - div[sc-code-editor])
 
 | Component                | Selector                             | Description                           |
 | ------------------------ | ------------------------------------ | ------------------------------------- |
-| `ScCodeEditor`           | `div[sc-code-editor]`                | Root container with border and focus  |
-| `ScCodeEditorHeader`     | `div[sc-code-editor-header]`         | Header bar with border                |
-| `ScCodeEditorLabel`      | `span[sc-code-editor-label]`         | Label for filename or language        |
-| `ScCodeEditorContent`    | `div[sc-code-editor-content]`        | Editable code area with highlighting  |
-| `ScCodeEditorCopyButton` | `button[sc-code-editor-copy-button]` | Copy button with visual feedback      |
-| `ScCodeEditorFooter`     | `div[sc-code-editor-footer]`         | Footer with cursor position and stats |
+| `ScCodeEditor`           | `div[scCodeEditor]`                | Root container with border and focus  |
+| `ScCodeEditorHeader`     | `div[scCodeEditorHeader]`         | Header bar with border                |
+| `ScCodeEditorLabel`      | `span[scCodeEditorLabel]`         | Label for filename or language        |
+| `ScCodeEditorContent`    | `div[scCodeEditorContent]`        | Editable code area with highlighting  |
+| `ScCodeEditorCopyButton` | `button[scCodeEditorCopyButton]` | Copy button with visual feedback      |
+| `ScCodeEditorFooter`     | `div[scCodeEditorFooter]`         | Footer with cursor position and stats |
 
 ## Inputs
 
@@ -116,26 +116,26 @@ Copy button that shows a checkmark on successful copy for 2 seconds.
 ### Basic Usage
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-content [(value)]="code" language="typescript"></div>
+<div scCodeEditor>
+  <div scCodeEditorContent [(value)]="code" language="typescript"></div>
 </div>
 ```
 
 ### Full Featured Editor
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-header>
+<div scCodeEditor>
+  <div scCodeEditorHeader>
     <div class="flex items-center gap-2">
       <span class="text-sm text-muted-foreground">{{ filename }}</span>
-      <span sc-code-editor-label>{{ language }}</span>
+      <span scCodeEditorLabel>{{ language }}</span>
     </div>
-    <button sc-code-editor-copy-button [code]="code"></button>
+    <button scCodeEditorCopyButton [code]="code"></button>
   </div>
 
-  <div sc-code-editor-content [(value)]="code" [language]="language" [filename]="filename" [showLineNumbers]="true" (cursorChange)="onCursorChange($event)"></div>
+  <div scCodeEditorContent [(value)]="code" [language]="language" [filename]="filename" [showLineNumbers]="true" (cursorChange)="onCursorChange($event)"></div>
 
-  <div sc-code-editor-footer>
+  <div scCodeEditorFooter>
     <div class="flex items-center gap-3">
       <span>Ln {{ line }}, Col {{ column }}</span>
     </div>
@@ -150,45 +150,45 @@ Copy button that shows a checkmark on successful copy for 2 seconds.
 ### Minimal Editor (No Header/Footer)
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-content [(value)]="code" language="json" [showLineNumbers]="false"></div>
+<div scCodeEditor>
+  <div scCodeEditorContent [(value)]="code" language="json" [showLineNumbers]="false"></div>
 </div>
 ```
 
 ### With Auto-Detect Language
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-header>
-    <span sc-code-editor-label>{{ detectedLanguage }}</span>
-    <button sc-code-editor-copy-button [code]="code"></button>
+<div scCodeEditor>
+  <div scCodeEditorHeader>
+    <span scCodeEditorLabel>{{ detectedLanguage }}</span>
+    <button scCodeEditorCopyButton [code]="code"></button>
   </div>
 
-  <div sc-code-editor-content [(value)]="code" [autoDetectLanguage]="true" (languageDetected)="detectedLanguage = $event"></div>
+  <div scCodeEditorContent [(value)]="code" [autoDetectLanguage]="true" (languageDetected)="detectedLanguage = $event"></div>
 </div>
 ```
 
 ### Read-Only Mode
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-content [(value)]="code" language="typescript" [readonly]="true"></div>
+<div scCodeEditor>
+  <div scCodeEditorContent [(value)]="code" language="typescript" [readonly]="true"></div>
 </div>
 ```
 
 ### With Word Wrap
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-content [(value)]="longCode" language="markdown" [wordWrap]="true" class="max-h-[400px]"></div>
+<div scCodeEditor>
+  <div scCodeEditorContent [(value)]="longCode" language="markdown" [wordWrap]="true" class="max-h-[400px]"></div>
 </div>
 ```
 
 ### Custom Tab Size
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-content [(value)]="code" language="python" [tabSize]="4" [insertSpaces]="true"></div>
+<div scCodeEditor>
+  <div scCodeEditorContent [(value)]="code" language="python" [tabSize]="4" [insertSpaces]="true"></div>
 </div>
 ```
 
@@ -206,10 +206,10 @@ export class MyComponent {
 ```
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-content [(value)]="code" language="typescript" (cursorChange)="onCursorChange($event)"></div>
+<div scCodeEditor>
+  <div scCodeEditorContent [(value)]="code" language="typescript" (cursorChange)="onCursorChange($event)"></div>
 
-  <div sc-code-editor-footer>
+  <div scCodeEditorFooter>
     <span>Ln {{ cursorPosition().line }}, Col {{ cursorPosition().column }}</span>
   </div>
 </div>
@@ -344,18 +344,18 @@ greet('World');`);
 ```
 
 ```html
-<div sc-code-editor>
-  <div sc-code-editor-header>
+<div scCodeEditor>
+  <div scCodeEditorHeader>
     <div class="flex items-center gap-2">
       <span class="text-sm text-muted-foreground">{{ filename() }}</span>
-      <span sc-code-editor-label>{{ language() }}</span>
+      <span scCodeEditorLabel>{{ language() }}</span>
     </div>
-    <button sc-code-editor-copy-button [code]="code()"></button>
+    <button scCodeEditorCopyButton [code]="code()"></button>
   </div>
 
-  <div sc-code-editor-content [(value)]="code" [language]="language()" [filename]="filename()" [showLineNumbers]="true" [tabSize]="2" [insertSpaces]="true" class="max-h-[600px] min-h-[300px]"></div>
+  <div scCodeEditorContent [(value)]="code" [language]="language()" [filename]="filename()" [showLineNumbers]="true" [tabSize]="2" [insertSpaces]="true" class="max-h-[600px] min-h-[300px]"></div>
 
-  <div sc-code-editor-footer>
+  <div scCodeEditorFooter>
     <div class="flex items-center gap-3">
       <span>Ln {{ stats().line }}, Col {{ stats().column }}</span>
     </div>

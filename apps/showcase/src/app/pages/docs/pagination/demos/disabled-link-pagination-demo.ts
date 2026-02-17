@@ -36,36 +36,36 @@ import {
   ],
   template: `
     <nav
-      sc-pagination
+      scPagination
       #pagination="scPagination"
       [currentPage]="currentPage()"
       [totalItems]="30"
       [pageSize]="10"
       (change)="onPaginationChange($event)"
     >
-      <ul sc-pagination-list>
-        <li sc-pagination-item>
-          <a sc-pagination-previous>
+      <ul scPaginationList>
+        <li scPaginationItem>
+          <a scPaginationPrevious>
             <svg si-chevron-left-icon></svg>
             <span>Previous</span>
           </a>
         </li>
         @for (page of pagination.pages(); track page.value) {
-          <li sc-pagination-item>
+          <li scPaginationItem>
             @if (page.type === 'ellipsis') {
-              <span sc-pagination-ellipsis>
+              <span scPaginationEllipsis>
                 <svg si-ellipsis-icon></svg>
                 <span class="sr-only">More pages</span>
               </span>
             } @else {
-              <a sc-pagination-link [page]="page.value">
+              <a scPaginationLink [page]="page.value">
                 {{ page.value }}
               </a>
             }
           </li>
         }
-        <li sc-pagination-item>
-          <a sc-pagination-next>
+        <li scPaginationItem>
+          <a scPaginationNext>
             <span>Next</span>
             <svg si-chevron-right-icon></svg>
           </a>

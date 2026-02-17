@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 @Component({
-  selector: 'nav[sc-navbar]',
+  selector: 'nav[scNavbar]',
   hostDirectives: [CdkOverlayOrigin],
   template: `
     <ng-content />

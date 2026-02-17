@@ -3,7 +3,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-menu-item]',
+  selector: 'div[scMenuItem]',
   hostDirectives: [
     {
       directive: MenuItem,

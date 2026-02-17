@@ -67,21 +67,21 @@ import { ScEditor, ScEditorContent, ScEditorToolbar, ScEditorToolbarGroup, ScEdi
   selector: 'app-example',
   imports: [ScEditor, ScEditorContent, ScEditorToolbar, ScEditorToolbarGroup, ScEditorBoldButton, ScEditorItalicButton, ScEditorUnderlineButton, ScEditorFooter, ScEditorCount, ScEditorWordCount, ScEditorCharCount],
   template: `
-    <div sc-editor class="border rounded-lg overflow-hidden">
-      <div sc-editor-toolbar>
-        <div sc-editor-toolbar-group>
-          <button sc-editor-bold>Bold</button>
-          <button sc-editor-italic>Italic</button>
-          <button sc-editor-underline>Underline</button>
+    <div scEditor class="border rounded-lg overflow-hidden">
+      <div scEditorToolbar>
+        <div scEditorToolbarGroup>
+          <button scEditorBold>Bold</button>
+          <button scEditorItalic>Italic</button>
+          <button scEditorUnderline>Underline</button>
         </div>
       </div>
 
-      <div sc-editor-content [(value)]="content" placeholder="Start typing..."></div>
+      <div scEditorContent [(value)]="content" placeholder="Start typing..."></div>
 
-      <div sc-editor-footer>
-        <div sc-editor-count>
-          <span sc-editor-word-count></span>
-          <span sc-editor-char-count></span>
+      <div scEditorFooter>
+        <div scEditorCount>
+          <span scEditorWordCount></span>
+          <span scEditorCharCount></span>
         </div>
       </div>
     </div>
@@ -98,7 +98,7 @@ export class ExampleComponent {
 
 Root directive that manages editor state and provides context to child components.
 
-**Selector**: `[sc-editor]`
+**Selector**: `[scEditor]`
 
 **Inputs**:
 
@@ -131,7 +131,7 @@ Root directive that manages editor state and provides context to child component
 
 Content area where text editing happens.
 
-**Selector**: `div[sc-editor-content]`
+**Selector**: `div[scEditorContent]`
 
 **Inputs**:
 
@@ -271,59 +271,59 @@ Colors are defined in OKLCH format and automatically adapt to light/dark themes.
 
 ```html
 <!-- Custom font and text size -->
-<div sc-editor-content class="font-serif text-lg"></div>
+<div scEditorContent class="font-serif text-lg"></div>
 
 <!-- Custom height constraints -->
-<div sc-editor-content class="min-h-[300px] max-h-[600px]"></div>
+<div scEditorContent class="min-h-[300px] max-h-[600px]"></div>
 
 <!-- Remove default padding -->
-<div sc-editor-content class="p-0"></div>
+<div scEditorContent class="p-0"></div>
 
 <!-- Default: Both counts with standard layout -->
-<div sc-editor-footer>
-  <div sc-editor-count>
-    <span sc-editor-word-count></span>
-    <span sc-editor-char-count></span>
+<div scEditorFooter>
+  <div scEditorCount>
+    <span scEditorWordCount></span>
+    <span scEditorCharCount></span>
   </div>
 </div>
 
 <!-- Only word count -->
-<div sc-editor-footer>
-  <div sc-editor-count>
-    <span sc-editor-word-count></span>
+<div scEditorFooter>
+  <div scEditorCount>
+    <span scEditorWordCount></span>
   </div>
 </div>
 
 <!-- Only character count -->
-<div sc-editor-footer>
-  <div sc-editor-count>
-    <span sc-editor-char-count></span>
+<div scEditorFooter>
+  <div scEditorCount>
+    <span scEditorCharCount></span>
   </div>
 </div>
 
 <!-- Custom separator and styling -->
-<div sc-editor-footer>
-  <div sc-editor-count>
-    <span sc-editor-word-count class="text-blue-600"></span>
+<div scEditorFooter>
+  <div scEditorCount>
+    <span scEditorWordCount class="text-blue-600"></span>
     <span class="text-muted-foreground">•</span>
-    <span sc-editor-char-count class="text-green-600"></span>
+    <span scEditorCharCount class="text-green-600"></span>
   </div>
 </div>
 
 <!-- Footer with additional content -->
-<div sc-editor-footer>
+<div scEditorFooter>
   <button class="text-sm text-primary hover:underline">Save draft</button>
-  <div sc-editor-count>
-    <span sc-editor-word-count></span>
-    <span sc-editor-char-count></span>
+  <div scEditorCount>
+    <span scEditorWordCount></span>
+    <span scEditorCharCount></span>
   </div>
 </div>
 
 <!-- Without using ScEditorCount container -->
-<div sc-editor-footer class="justify-between">
+<div scEditorFooter class="justify-between">
   <div class="flex gap-2">
-    <span sc-editor-word-count class="text-xs"></span>
-    <span sc-editor-char-count class="text-xs"></span>
+    <span scEditorWordCount class="text-xs"></span>
+    <span scEditorCharCount class="text-xs"></span>
   </div>
   <button>Submit</button>
 </div>

@@ -12,7 +12,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_COMPARE } from './image-compare';
 
 @Component({
-  selector: '[sc-image-compare-container]',
+  selector: '[scImageCompareContainer]',
   template: `
     <ng-content />
   `,

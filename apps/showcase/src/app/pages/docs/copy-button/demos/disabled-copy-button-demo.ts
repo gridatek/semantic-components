@@ -14,13 +14,13 @@ import {
   template: `
     <div class="flex items-center gap-4">
       <button
-        sc-copy-button
+        scCopyButton
         [value]="'Cannot copy'"
         [disabled]="true"
         variant="outline"
       ></button>
       <div
-        sc-copy-button-with-text
+        scCopyButtonWithText
         [value]="'Cannot copy'"
         [disabled]="true"
         variant="outline"

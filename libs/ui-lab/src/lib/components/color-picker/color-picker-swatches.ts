@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
 @Component({
-  selector: '[sc-color-picker-swatches]',
+  selector: '[scColorPickerSwatches]',
   template: `
     @for (color of colors(); track color) {
       <button

@@ -52,13 +52,13 @@ import {
     ScPopoverTrigger,
   ],
   template: \`
-    <div sc-popover-provider align="end">
-      <button sc-button sc-popover-trigger variant="outline">Align End</button>
+    <div scPopoverProvider align="end">
+      <button scButton scPopoverTrigger variant="outline">Align End</button>
       <ng-template scPopoverPortal>
-        <div sc-popover>
-          <div sc-popover-header>
-            <h4 sc-popover-title>Align End</h4>
-            <p sc-popover-description>This popover is aligned to the end.</p>
+        <div scPopover>
+          <div scPopoverHeader>
+            <h4 scPopoverTitle>Align End</h4>
+            <p scPopoverDescription>This popover is aligned to the end.</p>
           </div>
         </div>
       </ng-template>

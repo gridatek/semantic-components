@@ -12,27 +12,27 @@ import { ScKbd } from '@semantic-components/ui';
     <div class="space-y-3">
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground w-32">Screenshot</span>
-        <kbd sc-kbd>⌘</kbd>
+        <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>Shift</kbd>
+        <kbd scKbd>Shift</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>4</kbd>
+        <kbd scKbd>4</kbd>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground w-32">Force Quit</span>
-        <kbd sc-kbd>⌘</kbd>
+        <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>Option</kbd>
+        <kbd scKbd>Option</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>Esc</kbd>
+        <kbd scKbd>Esc</kbd>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-sm text-muted-foreground w-32">Dev Tools</span>
-        <kbd sc-kbd>⌘</kbd>
+        <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>Option</kbd>
+        <kbd scKbd>Option</kbd>
         <span class="text-muted-foreground">+</span>
-        <kbd sc-kbd>I</kbd>
+        <kbd scKbd>I</kbd>
       </div>
     </div>
   `,

@@ -35,11 +35,11 @@ import {
   selector: 'app-info-lightbox-demo',
   imports: [ScLightbox, ScLightboxContainer, ScLightboxTrigger],
   template: \`
-    <div sc-lightbox [images]="images">
+    <div scLightbox [images]="images">
       <div class="flex gap-4">
         @for (image of images; track image.src; let i = $index) {
           <button
-            sc-lightbox-trigger
+            scLightboxTrigger
             [index]="i"
             class="w-40 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring"
           >
@@ -54,7 +54,7 @@ import {
           </button>
         }
       </div>
-      <div sc-lightbox-container></div>
+      <div scLightboxContainer></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

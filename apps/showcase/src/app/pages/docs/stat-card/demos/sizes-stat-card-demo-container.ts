@@ -40,13 +40,13 @@ import {
   imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon],
   template: \`
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div sc-stat-card size="sm">
+      <div scStatCard size="sm">
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label size="sm">Small</p>
-            <p sc-stat-card-value size="sm">1,234</p>
+            <p scStatCardLabel size="sm">Small</p>
+            <p scStatCardValue size="sm">1,234</p>
           </div>
-          <div sc-stat-card-icon size="sm">
+          <div scStatCardIcon size="sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -66,13 +66,13 @@ import {
         </div>
       </div>
 
-      <div sc-stat-card size="md">
+      <div scStatCard size="md">
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label size="md">Medium</p>
-            <p sc-stat-card-value size="md">5,678</p>
+            <p scStatCardLabel size="md">Medium</p>
+            <p scStatCardValue size="md">5,678</p>
           </div>
-          <div sc-stat-card-icon size="md">
+          <div scStatCardIcon size="md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -92,13 +92,13 @@ import {
         </div>
       </div>
 
-      <div sc-stat-card size="lg">
+      <div scStatCard size="lg">
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label size="lg">Large</p>
-            <p sc-stat-card-value size="lg">9,012</p>
+            <p scStatCardLabel size="lg">Large</p>
+            <p scStatCardValue size="lg">9,012</p>
           </div>
-          <div sc-stat-card-icon size="lg">
+          <div scStatCardIcon size="lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

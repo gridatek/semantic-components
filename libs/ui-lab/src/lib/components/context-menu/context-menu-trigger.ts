@@ -11,7 +11,7 @@ import { ScContextMenu } from './context-menu';
 import { ScContextMenuContent } from './context-menu-content';
 
 @Directive({
-  selector: '[sc-context-menu-trigger]',
+  selector: '[scContextMenuTrigger]',
   host: {
     'data-slot': 'context-menu-trigger',
     '[class]': 'class()',

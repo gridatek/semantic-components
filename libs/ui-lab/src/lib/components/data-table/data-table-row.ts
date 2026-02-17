@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-data-table-row]',
+  selector: '[scDataTableRow]',
   host: {
     'data-slot': 'data-table-row',
     '[class]': 'class()',

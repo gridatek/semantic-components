@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
 @Directive({
-  selector: 'button[sc-alert-dialog-trigger]',
+  selector: 'button[scAlertDialogTrigger]',
   host: {
     'data-slot': 'alert-dialog-trigger',
     type: 'button',

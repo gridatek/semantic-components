@@ -54,7 +54,7 @@ interface CheckboxFormModel {
             id="newsletter-custom"
             [formField]="checkboxForm.newsletter"
           />
-          <label sc-label for="newsletter-custom">
+          <label scLabel for="newsletter-custom">
             Subscribe to newsletter
           </label>
         </div>
@@ -66,7 +66,7 @@ interface CheckboxFormModel {
             id="marketing-custom"
             [formField]="checkboxForm.marketing"
           />
-          <label sc-label for="marketing-custom">
+          <label scLabel for="marketing-custom">
             Receive marketing emails
           </label>
         </div>
@@ -78,7 +78,7 @@ interface CheckboxFormModel {
             id="terms-custom"
             [formField]="checkboxForm.acceptTerms"
           />
-          <label sc-label for="terms-custom">Accept terms and conditions</label>
+          <label scLabel for="terms-custom">Accept terms and conditions</label>
         </div>
       </div>
 

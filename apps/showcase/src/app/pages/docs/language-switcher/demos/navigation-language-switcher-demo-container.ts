@@ -37,7 +37,7 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
           Choose your preferred language
         </p>
       </div>
-      <button sc-language-toggle variant="outline"></button>
+      <button scLanguageToggle variant="outline"></button>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

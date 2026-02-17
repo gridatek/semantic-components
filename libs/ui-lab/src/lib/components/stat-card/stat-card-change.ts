@@ -3,7 +3,7 @@ import { cn } from '@semantic-components/ui';
 import type { StatCardTrend } from './stat-card-types';
 
 @Directive({
-  selector: '[sc-stat-card-change]',
+  selector: '[scStatCardChange]',
   host: {
     'data-slot': 'stat-card-change',
     '[class]': 'class()',

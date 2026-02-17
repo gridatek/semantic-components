@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Component({
-  selector: 'input[sc-number-field-input]',
+  selector: 'input[scNumberFieldInput]',
   template: ``,
   host: {
     'data-slot': 'number-field-input',

@@ -17,7 +17,7 @@ const sizeClasses: Record<ToggleSize, string> = {
 };
 
 @Directive({
-  selector: 'button[sc-toggle]',
+  selector: 'button[scToggle]',
   host: {
     'data-slot': 'toggle',
     type: 'button',

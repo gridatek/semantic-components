@@ -44,7 +44,7 @@ export const SC_NOTIFICATION_CENTER = new InjectionToken<ScNotificationCenter>(
 );
 
 @Directive({
-  selector: '[sc-notification-center]',
+  selector: '[scNotificationCenter]',
   exportAs: 'scNotificationCenter',
   providers: [
     {

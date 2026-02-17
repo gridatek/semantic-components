@@ -32,20 +32,20 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
   template: \`
     <div class="flex items-center gap-4">
       <div class="flex flex-col items-center gap-2">
-        <button sc-language-toggle variant="outline" size="sm"></button>
+        <button scLanguageToggle variant="outline" size="sm"></button>
         <span class="text-xs text-muted-foreground">Small</span>
       </div>
       <div class="flex flex-col items-center gap-2">
-        <button sc-language-toggle variant="outline" size="default"></button>
+        <button scLanguageToggle variant="outline" size="default"></button>
         <span class="text-xs text-muted-foreground">Default</span>
       </div>
       <div class="flex flex-col items-center gap-2">
-        <button sc-language-toggle variant="outline" size="lg"></button>
+        <button scLanguageToggle variant="outline" size="lg"></button>
         <span class="text-xs text-muted-foreground">Large</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
-          sc-language-toggle
+          scLanguageToggle
           variant="outline"
           size="icon"
           [iconOnly]="true"

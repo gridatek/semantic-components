@@ -58,14 +58,14 @@ interface ComboboxOption {
   ],
   template: \`
     <div class="space-y-4">
-      <div sc-combobox class="w-[200px]">
-        <div sc-combobox-trigger>
+      <div scCombobox class="w-[200px]">
+        <div scComboboxTrigger>
           <span class="pointer-events-none absolute left-3 truncate">
             {{ displayValue() }}
           </span>
-          <input sc-combobox-input />
+          <input scComboboxInput />
           <svg
-            sc-combobox-icon
+            scComboboxIcon
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
@@ -79,23 +79,23 @@ interface ComboboxOption {
           </svg>
         </div>
         <div
-          sc-combobox-portal
+          scComboboxPortal
           searchPlaceholder="Search language..."
           [(searchValue)]="search"
         >
           @if (filteredOptions().length === 0) {
-            <div sc-combobox-empty>No results found.</div>
+            <div scComboboxEmpty>No results found.</div>
           }
-          <div sc-combobox-list [multi]="true" [(values)]="selectedValues">
+          <div scComboboxList [multi]="true" [(values)]="selectedValues">
             @for (option of filteredOptions(); track option.value) {
               <div
-                sc-combobox-item
+                scComboboxItem
                 [value]="option.value"
                 [label]="option.label"
               >
                 <span>{{ option.label }}</span>
                 <svg
-                  sc-combobox-item-indicator
+                  scComboboxItemIndicator
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="none"

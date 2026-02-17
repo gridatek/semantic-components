@@ -35,9 +35,9 @@ import {
   selector: 'app-single-lightbox-demo',
   imports: [ScLightbox, ScLightboxContainer, ScLightboxTrigger],
   template: \`
-    <div sc-lightbox [images]="[image]">
+    <div scLightbox [images]="[image]">
       <button
-        sc-lightbox-trigger
+        scLightboxTrigger
         [index]="0"
         class="w-48 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring"
       >
@@ -47,7 +47,7 @@ import {
           class="w-full aspect-video object-cover"
         />
       </button>
-      <div sc-lightbox-container></div>
+      <div scLightboxContainer></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

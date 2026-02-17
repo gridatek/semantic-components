@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { ScResizablePanelGroup } from './resizable-panel-group';
 
 @Component({
-  selector: '[sc-resizable-handle]',
+  selector: '[scResizableHandle]',
   host: {
     'data-slot': 'resizable-handle',
     'data-panel-resize-handle': '',

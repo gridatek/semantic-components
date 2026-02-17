@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-skeleton]',
+  selector: 'div[scSkeleton]',
   host: {
     'data-slot': 'skeleton',
     '[class]': 'class()',

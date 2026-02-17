@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScPopoverProvider } from './popover-provider';
 
 @Directive({
-  selector: 'button[sc-popover-close]',
+  selector: 'button[scPopoverClose]',
   host: {
     'data-slot': 'popover-close',
     '[class]': 'class()',

@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'a[sc-navbar-mobile-link], button[sc-navbar-mobile-link]',
+  selector: 'a[scNavbarMobileLink], button[scNavbarMobileLink]',
   host: {
     'data-slot': 'navbar-mobile-link',
     '[class]': 'class()',

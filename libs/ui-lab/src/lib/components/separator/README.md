@@ -11,7 +11,7 @@ Visually or semantically separates content.
 ### Horizontal Separator (default)
 
 ```html
-<div sc-separator></div>
+<div scSeparator></div>
 ```
 
 ### Vertical Separator
@@ -19,9 +19,9 @@ Visually or semantically separates content.
 ```html
 <div class="flex h-5 items-center space-x-4">
   <div>Item 1</div>
-  <div sc-separator orientation="vertical"></div>
+  <div scSeparator orientation="vertical"></div>
   <div>Item 2</div>
-  <div sc-separator orientation="vertical"></div>
+  <div scSeparator orientation="vertical"></div>
   <div>Item 3</div>
 </div>
 ```
@@ -39,17 +39,17 @@ Visually or semantically separates content.
 The separator uses the `bg-border` color by default. Override with custom classes:
 
 ```html
-<div sc-separator class="bg-red-500"></div>
+<div scSeparator class="bg-red-500"></div>
 ```
 
 Custom thickness:
 
 ```html
 <!-- Thicker horizontal separator -->
-<div sc-separator class="h-0.5"></div>
+<div scSeparator class="h-0.5"></div>
 
 <!-- Thicker vertical separator -->
-<div sc-separator orientation="vertical" class="w-0.5"></div>
+<div scSeparator orientation="vertical" class="w-0.5"></div>
 ```
 
 ## Accessibility

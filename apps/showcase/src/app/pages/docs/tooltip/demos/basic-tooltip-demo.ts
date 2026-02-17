@@ -9,7 +9,7 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
   selector: 'app-basic-tooltip-demo',
   imports: [ScButton, ScTooltipTrigger],
   template: `
-    <button sc-button variant="outline" scTooltipTrigger="Add to library">
+    <button scButton variant="outline" scTooltipTrigger="Add to library">
       Hover me
     </button>
   `,

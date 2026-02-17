@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'nav[sc-navigation-menu]',
+  selector: 'nav[scNavigationMenu]',
   template: `
     <ng-content />
   `,

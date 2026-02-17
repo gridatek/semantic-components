@@ -10,8 +10,8 @@ import { ScSkeleton } from '@semantic-components/ui-lab';
   imports: [ScSkeleton],
   template: `
     <div class="space-y-2">
-      <div sc-skeleton class="h-4 w-[250px]"></div>
-      <div sc-skeleton class="h-4 w-[200px]"></div>
+      <div scSkeleton class="h-4 w-[250px]"></div>
+      <div scSkeleton class="h-4 w-[200px]"></div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

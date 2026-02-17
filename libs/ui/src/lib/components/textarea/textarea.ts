@@ -11,7 +11,7 @@ import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 
 @Directive({
-  selector: 'textarea[sc-textarea]',
+  selector: 'textarea[scTextarea]',
   host: {
     '[attr.data-slot]': 'dataSlot()',
     '[attr.id]': 'id()',

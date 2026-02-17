@@ -36,8 +36,8 @@ import {
   imports: [ScFileUpload, ScFileUploadDropzone],
   template: \`
     <div class="max-w-lg">
-      <div sc-file-upload [(files)]="file">
-        <div sc-file-upload-dropzone class="p-6">
+      <div scFileUpload [(files)]="file">
+        <div scFileUploadDropzone class="p-6">
           <div class="flex flex-col items-center gap-2 text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"

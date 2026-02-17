@@ -12,7 +12,7 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
 import { SC_CHART } from './chart-container';
 
 @Component({
-  selector: '[sc-pie-chart]',
+  selector: '[scPieChart]',
   template: `
     <svg
       [attr.viewBox]="viewBox()"
@@ -171,7 +171,7 @@ export class ScPieChart {
     slice: { label: string; value: number; percentage: number; color: string },
   ): void {
     const path = event.target as SVGElement;
-    const parentRect = path.closest('[sc-pie-chart]')?.getBoundingClientRect();
+    const parentRect = path.closest('[scPieChart]')?.getBoundingClientRect();
     if (parentRect) {
       const pathRect = path.getBoundingClientRect();
       this.tooltipX.set(pathRect.left - parentRect.left + pathRect.width / 2);

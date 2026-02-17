@@ -85,25 +85,25 @@ import {
   ],
   template: \`
     <div
-      sc-video-player
+      scVideoPlayer
       #player="scVideoPlayer"
       class="relative bg-black rounded-lg overflow-hidden max-w-2xl"
     >
       <!-- Buffering Indicator -->
-      <div sc-video-player-buffering>
+      <div scVideoPlayerBuffering>
         <svg si-loader-icon></svg>
       </div>
 
       <!-- Video -->
       <video
-        sc-video-player-video
+        scVideoPlayerVideo
         [src]="sampleVideo"
         [poster]="samplePoster"
       ></video>
 
       <!-- Big Play Button -->
       @if (!player.isPlaying() && !player.isBuffering()) {
-        <button sc-video-player-big-play>
+        <button scVideoPlayerBigPlay>
           <div
             class="size-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform"
           >
@@ -113,12 +113,12 @@ import {
       }
 
       <!-- Controls -->
-      <div sc-video-player-controls>
-        <div sc-video-player-progress class="mb-2"></div>
+      <div scVideoPlayerControls>
+        <div scVideoPlayerProgress class="mb-2"></div>
 
         <div class="flex items-center gap-2">
           <!-- Play/Pause -->
-          <button sc-video-player-play>
+          <button scVideoPlayerPlay>
             @if (player.isPlaying()) {
               <svg si-pause-icon></svg>
             } @else {
@@ -128,7 +128,7 @@ import {
 
           <!-- Skip Back -->
           <button
-            sc-video-player-skip
+            scVideoPlayerSkip
             [seconds]="-10"
             ariaLabel="Skip back 10 seconds"
           >
@@ -137,7 +137,7 @@ import {
 
           <!-- Skip Forward -->
           <button
-            sc-video-player-skip
+            scVideoPlayerSkip
             [seconds]="10"
             ariaLabel="Skip forward 10 seconds"
           >
@@ -145,7 +145,7 @@ import {
           </button>
 
           <!-- Volume -->
-          <div sc-video-player-volume>
+          <div scVideoPlayerVolume>
             @if (player.isMuted() || player.volume() === 0) {
               <svg volume-icon si-volume-x-icon></svg>
             } @else {
@@ -154,21 +154,21 @@ import {
           </div>
 
           <!-- Time -->
-          <span sc-video-player-time class="ml-2"></span>
+          <span scVideoPlayerTime class="ml-2"></span>
 
           <!-- Spacer -->
           <div class="flex-1"></div>
 
           <!-- Playback Speed -->
-          <div sc-video-player-speed></div>
+          <div scVideoPlayerSpeed></div>
 
           <!-- Picture in Picture -->
-          <button sc-video-player-pip>
+          <button scVideoPlayerPip>
             <svg si-picture-in-picture-2-icon></svg>
           </button>
 
           <!-- Fullscreen -->
-          <button sc-video-player-fullscreen>
+          <button scVideoPlayerFullscreen>
             @if (player.isFullscreen()) {
               <svg si-minimize-icon></svg>
             } @else {

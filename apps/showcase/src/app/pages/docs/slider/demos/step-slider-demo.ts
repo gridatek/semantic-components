@@ -11,7 +11,7 @@ import { ScSlider } from '@semantic-components/ui-lab';
   imports: [ScSlider],
   template: `
     <div class="w-[60%]">
-      <div sc-slider [(value)]="stepValue" [step]="10"></div>
+      <div scSlider [(value)]="stepValue" [step]="10"></div>
       <p class="mt-2 text-sm text-muted-foreground">Value: {{ stepValue() }}</p>
     </div>
   `,

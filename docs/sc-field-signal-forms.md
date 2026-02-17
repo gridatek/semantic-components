@@ -31,7 +31,7 @@ Both layers read from the same Signal Forms state, but use different HTML attrib
 
 ```typescript
 @Directive({
-  selector: '[sc-field]',
+  selector: '[scField]',
   host: {
     '[attr.data-invalid]': 'invalid()',
     '[attr.data-disabled]': 'disabled()',
@@ -63,7 +63,7 @@ These inject `FormField` directly since `[formField]` lives on the same host ele
 
 ```typescript
 @Directive({
-  selector: 'input[sc-input]',
+  selector: 'input[scInput]',
   host: {
     '[attr.aria-invalid]': 'invalid() || null',
     '[attr.disabled]': 'disabled() || null',
@@ -84,11 +84,11 @@ The `|| null` ensures the attribute is removed entirely when `false` (not set to
 ### Basic field with validation and errors
 
 ```html
-<div sc-field>
-  <label sc-label>Email</label>
-  <input sc-input type="email" [formField]="myForm.email" placeholder="Email" />
+<div scField>
+  <label scLabel>Email</label>
+  <input scInput type="email" [formField]="myForm.email" placeholder="Email" />
   @for (error of myForm.email().errors(); track error.kind) {
-  <p sc-field-error>{{ error.message }}</p>
+  <p scFieldError>{{ error.message }}</p>
   }
 </div>
 ```
@@ -103,7 +103,7 @@ readonly myForm = form(this.formModel, (s) => {
 
 When the field is invalid:
 
-- The `<div sc-field>` gets `data-invalid="true"` → label turns red via `data-[invalid=true]:text-destructive`
+- The `<div scField>` gets `data-invalid="true"` → label turns red via `data-[invalid=true]:text-destructive`
 - The `<input>` gets `aria-invalid="true"` → red ring/border via `aria-invalid:ring-destructive/20`
 - Error messages render below the input via `sc-field-error` (`role="alert"`, red text)
 
@@ -124,16 +124,16 @@ The template pattern is always the same — loop over `errors()` and display `er
 
 ```html
 @for (error of myForm.name().errors(); track error.kind) {
-<p sc-field-error>{{ error.message }}</p>
+<p scFieldError>{{ error.message }}</p>
 }
 ```
 
 ### Disabled field
 
 ```html
-<div sc-field>
-  <label sc-label>Disabled</label>
-  <input sc-input type="text" [formField]="myForm.text" placeholder="..." />
+<div scField>
+  <label scLabel>Disabled</label>
+  <input scInput type="text" [formField]="myForm.text" placeholder="..." />
 </div>
 ```
 
@@ -146,18 +146,18 @@ readonly myForm = form(this.formModel, (s) => {
 
 When disabled:
 
-- The `<div sc-field>` gets `data-disabled="true"` → label opacity reduced via `group-data-[disabled=true]/field:opacity-50`
+- The `<div scField>` gets `data-disabled="true"` → label opacity reduced via `group-data-[disabled=true]/field:opacity-50`
 - The `<input>` gets native `disabled` → grayed out, non-interactive via `disabled:opacity-50 disabled:cursor-not-allowed`
 
 ### Field with description
 
 ```html
-<div sc-field>
-  <label sc-label>Bio</label>
-  <textarea sc-textarea [formField]="myForm.bio" placeholder="Tell us about yourself"></textarea>
-  <p sc-field-description>Max 500 characters.</p>
+<div scField>
+  <label scLabel>Bio</label>
+  <textarea scTextarea [formField]="myForm.bio" placeholder="Tell us about yourself"></textarea>
+  <p scFieldDescription>Max 500 characters.</p>
   @for (error of myForm.bio().errors(); track error.kind) {
-  <p sc-field-error>{{ error.message }}</p>
+  <p scFieldError>{{ error.message }}</p>
   }
 </div>
 ```
@@ -183,27 +183,27 @@ readonly contactForm = form(this.formModel, (s) => {
 ```
 
 ```html
-<div sc-field>
-  <label sc-label>Name</label>
-  <input sc-input type="text" [formField]="contactForm.name" placeholder="John Doe" />
+<div scField>
+  <label scLabel>Name</label>
+  <input scInput type="text" [formField]="contactForm.name" placeholder="John Doe" />
   @for (error of contactForm.name().errors(); track error.kind) {
-  <p sc-field-error>{{ error.message }}</p>
+  <p scFieldError>{{ error.message }}</p>
   }
 </div>
 
-<div sc-field>
-  <label sc-label>Email</label>
-  <input sc-input type="email" [formField]="contactForm.email" placeholder="john@example.com" />
+<div scField>
+  <label scLabel>Email</label>
+  <input scInput type="email" [formField]="contactForm.email" placeholder="john@example.com" />
   @for (error of contactForm.email().errors(); track error.kind) {
-  <p sc-field-error>{{ error.message }}</p>
+  <p scFieldError>{{ error.message }}</p>
   }
 </div>
 
-<div sc-field>
-  <label sc-label>Message</label>
-  <textarea sc-textarea [formField]="contactForm.message" placeholder="Your message..."></textarea>
+<div scField>
+  <label scLabel>Message</label>
+  <textarea scTextarea [formField]="contactForm.message" placeholder="Your message..."></textarea>
   @for (error of contactForm.message().errors(); track error.kind) {
-  <p sc-field-error>{{ error.message }}</p>
+  <p scFieldError>{{ error.message }}</p>
   }
 </div>
 ```
@@ -213,9 +213,9 @@ readonly contactForm = form(this.formModel, (s) => {
 ScField can be used without Signal Forms by passing `[invalid]` and `[disabled]` manually:
 
 ```html
-<div sc-field [invalid]="true">
-  <label sc-label>Email</label>
-  <input sc-input type="email" placeholder="Email" />
+<div scField [invalid]="true">
+  <label scLabel>Email</label>
+  <input scInput type="email" placeholder="Email" />
 </div>
 ```
 
@@ -227,16 +227,16 @@ Note: the input won't have `aria-invalid` in this case since there's no `FormFie
 
 ```html
 <!-- Label auto-connects to input via SC_FIELD -->
-<div sc-field>
-  <label sc-label>Email</label>
-  <input sc-input type="email" [formField]="myForm.email" />
+<div scField>
+  <label scLabel>Email</label>
+  <input scInput type="email" [formField]="myForm.email" />
 </div>
 ```
 
 Generated DOM:
 
 ```html
-<div sc-field id="sc-field-0" data-invalid="true">
+<div scField id="sc-field-0" data-invalid="true">
   <label for="sc-field-0">Email</label>
   <input id="sc-field-0" aria-invalid="true" />
 </div>
@@ -265,13 +265,13 @@ When refactoring other field components to follow this pattern:
 
 ### For demos:
 
-1. Wrap controls inside `<div sc-field>` with `<label sc-label>`
+1. Wrap controls inside `<div scField>` with `<label scLabel>`
 2. Use `form()` + `FormField` binding: `[formField]="myForm.fieldName"`
 3. Use validators with messages: `required(s.field, { message: '...' })`
 4. Display errors in template:
    ```html
    @for (error of myForm.field().errors(); track error.kind) {
-   <p sc-field-error>{{ error.message }}</p>
+   <p scFieldError>{{ error.message }}</p>
    }
    ```
 5. Remove all manual `id`/`for` wiring

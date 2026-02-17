@@ -50,28 +50,28 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
     SiTrash2Icon,
   ],
   template: \`
-    <div sc-signature-pad class="space-y-3">
-      <div sc-signature-pad-toolbar>
-        <button sc-signature-pad-pen-color [color]="'#000000'">
+    <div scSignaturePad class="space-y-3">
+      <div scSignaturePadToolbar>
+        <button scSignaturePadPenColor [color]="'#000000'">
           <span
             class="size-4 rounded-full border border-border transition-transform data-[active]:scale-110"
             [attr.data-active]="'#000000'"
             style="background-color: #000000"
           ></span>
         </button>
-        <button sc-signature-pad-pen-color [color]="'#1d4ed8'">
+        <button scSignaturePadPenColor [color]="'#1d4ed8'">
           <span
             class="size-4 rounded-full border border-border transition-transform"
             style="background-color: #1d4ed8"
           ></span>
         </button>
-        <button sc-signature-pad-pen-color [color]="'#dc2626'">
+        <button scSignaturePadPenColor [color]="'#dc2626'">
           <span
             class="size-4 rounded-full border border-border transition-transform"
             style="background-color: #dc2626"
           ></span>
         </button>
-        <button sc-signature-pad-pen-color [color]="'#16a34a'">
+        <button scSignaturePadPenColor [color]="'#16a34a'">
           <span
             class="size-4 rounded-full border border-border transition-transform"
             style="background-color: #16a34a"
@@ -80,13 +80,13 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       </div>
 
       <div class="relative inline-block">
-        <canvas sc-signature-pad-canvas [width]="400" [height]="200"></canvas>
+        <canvas scSignaturePadCanvas [width]="400" [height]="200"></canvas>
 
-        <div sc-signature-pad-controls>
-          <button sc-signature-pad-undo>
+        <div scSignaturePadControls>
+          <button scSignaturePadUndo>
             <svg si-undo-icon class="size-4"></svg>
           </button>
-          <button sc-signature-pad-clear>
+          <button scSignaturePadClear>
             <svg si-trash-2-icon class="size-4"></svg>
           </button>
         </div>

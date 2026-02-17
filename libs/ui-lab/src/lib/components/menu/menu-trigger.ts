@@ -4,7 +4,7 @@ import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'button[sc-menu-trigger]',
+  selector: 'button[scMenuTrigger]',
   hostDirectives: [MenuTrigger, CdkOverlayOrigin],
   host: {
     'data-slot': 'menu-trigger',

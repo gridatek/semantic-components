@@ -12,7 +12,7 @@ import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-combobox]',
+  selector: 'div[scCombobox]',
   imports: [Combobox],
   hostDirectives: [
     {

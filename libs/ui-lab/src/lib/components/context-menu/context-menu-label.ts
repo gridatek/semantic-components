@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-context-menu-label]',
+  selector: '[scContextMenuLabel]',
   host: {
     'data-slot': 'context-menu-label',
     '[class]': 'class()',

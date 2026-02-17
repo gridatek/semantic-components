@@ -12,7 +12,7 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
 import { SC_CHART } from './chart-container';
 
 @Component({
-  selector: '[sc-line-chart]',
+  selector: '[scLineChart]',
   template: `
     <svg
       [attr.viewBox]="viewBox()"
@@ -204,9 +204,7 @@ export class ScLineChart {
 
   onPointHover(event: MouseEvent, point: ChartDataPoint): void {
     const circle = event.target as SVGElement;
-    const parentRect = circle
-      .closest('[sc-line-chart]')
-      ?.getBoundingClientRect();
+    const parentRect = circle.closest('[scLineChart]')?.getBoundingClientRect();
     const circleRect = circle.getBoundingClientRect();
     if (parentRect) {
       this.tooltipX.set(

@@ -9,31 +9,31 @@ An input where the user selects a range with minimum and maximum values from wit
 ## Usage
 
 ```html
-<div sc-range-slider [(minValue)]="minPrice" [(maxValue)]="maxPrice"></div>
+<div scRangeSlider [(minValue)]="minPrice" [(maxValue)]="maxPrice"></div>
 ```
 
 ## With Min/Max Bounds
 
 ```html
-<div sc-range-slider [(minValue)]="minPrice" [(maxValue)]="maxPrice" [min]="0" [max]="1000"></div>
+<div scRangeSlider [(minValue)]="minPrice" [(maxValue)]="maxPrice" [min]="0" [max]="1000"></div>
 ```
 
 ## With Step
 
 ```html
-<div sc-range-slider [(minValue)]="minTemp" [(maxValue)]="maxTemp" [min]="0" [max]="40" [step]="1"></div>
+<div scRangeSlider [(minValue)]="minTemp" [(maxValue)]="maxTemp" [min]="0" [max]="40" [step]="1"></div>
 ```
 
 ## With Labels
 
 ```html
-<div sc-range-slider [(minValue)]="minPrice" [(maxValue)]="maxPrice" [min]="0" [max]="1000" [minLabel]="'Minimum price'" [maxLabel]="'Maximum price'"></div>
+<div scRangeSlider [(minValue)]="minPrice" [(maxValue)]="maxPrice" [min]="0" [max]="1000" [minLabel]="'Minimum price'" [maxLabel]="'Maximum price'"></div>
 ```
 
 ## Disabled
 
 ```html
-<div sc-range-slider [minValue]="25" [maxValue]="75" [disabled]="true"></div>
+<div scRangeSlider [minValue]="25" [maxValue]="75" [disabled]="true"></div>
 ```
 
 ## Display Range
@@ -44,7 +44,7 @@ An input where the user selects a range with minimum and maximum values from wit
     <span>Price Range</span>
     <span>\${{ minPrice() }} - \${{ maxPrice() }}</span>
   </div>
-  <div sc-range-slider [(minValue)]="minPrice" [(maxValue)]="maxPrice" [min]="0" [max]="1000"></div>
+  <div scRangeSlider [(minValue)]="minPrice" [(maxValue)]="maxPrice" [min]="0" [max]="1000"></div>
 </div>
 ```
 

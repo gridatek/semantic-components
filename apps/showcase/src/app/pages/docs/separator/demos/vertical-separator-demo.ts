@@ -11,11 +11,11 @@ import { ScSeparator } from '@semantic-components/ui-lab';
   template: `
     <div class="flex h-5 items-center space-x-4 text-sm">
       <div>Home</div>
-      <div sc-separator orientation="vertical"></div>
+      <div scSeparator orientation="vertical"></div>
       <div>Products</div>
-      <div sc-separator orientation="vertical"></div>
+      <div scSeparator orientation="vertical"></div>
       <div>About</div>
-      <div sc-separator orientation="vertical"></div>
+      <div scSeparator orientation="vertical"></div>
       <div>Contact</div>
     </div>
   `,

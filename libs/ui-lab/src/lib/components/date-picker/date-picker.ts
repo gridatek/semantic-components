@@ -27,8 +27,8 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
     ScCalendar,
   ],
   template: `
-    <div sc-popover-provider [(open)]="open" [side]="side()" [align]="align()">
-      <button sc-popover-trigger type="button" [class]="triggerClass()">
+    <div scPopoverProvider [(open)]="open" [side]="side()" [align]="align()">
+      <button scPopoverTrigger type="button" [class]="triggerClass()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -51,7 +51,7 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
         </span>
       </button>
       <ng-template scPopoverPortal>
-        <div sc-popover class="w-auto p-0">
+        <div scPopover class="w-auto p-0">
           @switch (mode()) {
             @case ('single') {
               <sc-calendar

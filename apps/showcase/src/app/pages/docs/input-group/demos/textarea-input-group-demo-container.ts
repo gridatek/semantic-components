@@ -44,10 +44,10 @@ import {
     ScTextarea,
   ],
   template: \`
-    <div sc-input-group>
-      <textarea sc-textarea variant="group" placeholder="Type your message..."></textarea>
-      <div sc-input-group-addon align="block-end" class="border-t">
-        <span sc-input-group-text>0/280</span>
+    <div scInputGroup>
+      <textarea scTextarea variant="group" placeholder="Type your message..."></textarea>
+      <div scInputGroupAddon align="block-end" class="border-t">
+        <span scInputGroupText>0/280</span>
       </div>
     </div>
   \`,

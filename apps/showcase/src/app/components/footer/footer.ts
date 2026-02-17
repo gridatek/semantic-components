@@ -32,7 +32,7 @@ import { Logo } from '../logo/logo';
             for the Angular community. Open source.
           </p>
           <a
-            sc-link
+            scLink
             variant="ghost"
             size="icon"
             href="https://github.com/gridatek/semantic-components"

@@ -22,13 +22,13 @@ import {
   template: `
     <div class="max-w-[200px]">
       <div
-        sc-color-picker
+        scColorPicker
         [(value)]="color"
         class="space-y-3 rounded-lg border p-3"
       >
-        <div sc-color-picker-area class="h-32"></div>
-        <div sc-color-picker-hue></div>
-        <input sc-color-picker-input format="hex" />
+        <div scColorPickerArea class="h-32"></div>
+        <div scColorPickerHue></div>
+        <input scColorPickerInput format="hex" />
       </div>
     </div>
   `,

@@ -21,11 +21,11 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: `
-    <div sc-collapsible class="w-[350px] space-y-2">
+    <div scCollapsible class="w-[350px] space-y-2">
       <div class="flex items-center justify-between space-x-4 px-4">
         <h4 class="text-sm font-semibold">Initially Open</h4>
         <button
-          sc-collapsible-trigger
+          scCollapsibleTrigger
           panelId="collapsible-open"
           [expanded]="true"
           #trigger="scCollapsibleTrigger"
@@ -39,8 +39,8 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <span class="sr-only">Toggle</span>
         </button>
       </div>
-      <div sc-collapsible-panel panelId="collapsible-open">
-        <div sc-collapsible-content>
+      <div scCollapsiblePanel panelId="collapsible-open">
+        <div scCollapsibleContent>
           <div class="rounded-md border px-4 py-3 text-sm">
             This collapsible is open by default. You can toggle it closed by
             clicking the button.

@@ -37,14 +37,14 @@ import {
   imports: [ScTagInput, ScTagInputField, ScTagInputTag, ScTagInputCount],
   template: \`
     <div class="max-w-md space-y-2">
-      <div sc-tag-input [(tags)]="tags" [maxTags]="5">
+      <div scTagInput [(tags)]="tags" [maxTags]="5">
         @for (tag of tags(); track tag) {
-          <span sc-tag-input-tag [tag]="tag"></span>
+          <span scTagInputTag [tag]="tag"></span>
         }
-        <input sc-tag-input-field />
+        <input scTagInputField />
       </div>
       <div class="flex justify-end">
-        <span sc-tag-input-count></span>
+        <span scTagInputCount></span>
       </div>
     </div>
   \`,

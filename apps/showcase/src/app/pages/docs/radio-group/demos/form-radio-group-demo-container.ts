@@ -41,21 +41,21 @@ interface NotificationFormModel {
         <h4 id="notify-heading" class="font-semibold">
           Notification Preferences
         </h4>
-        <div sc-radio-group class="gap-3">
-          <label sc-radio-field class="flex items-center space-x-2">
+        <div scRadioGroup class="gap-3">
+          <label scRadioField class="flex items-center space-x-2">
             <input
               type="radio"
-              sc-radio
+              scRadio
               value="all"
               [formField]="notificationForm.notify"
               id="notify-all"
             />
             <span class="text-sm font-medium">All new messages</span>
           </label>
-          <label sc-radio-field class="flex items-center space-x-2">
+          <label scRadioField class="flex items-center space-x-2">
             <input
               type="radio"
-              sc-radio
+              scRadio
               value="mentions"
               [formField]="notificationForm.notify"
               id="notify-mentions"
@@ -64,10 +64,10 @@ interface NotificationFormModel {
               Direct messages and mentions
             </span>
           </label>
-          <label sc-radio-field class="flex items-center space-x-2">
+          <label scRadioField class="flex items-center space-x-2">
             <input
               type="radio"
-              sc-radio
+              scRadio
               value="none"
               [formField]="notificationForm.notify"
               id="notify-none"

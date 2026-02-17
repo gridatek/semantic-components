@@ -28,17 +28,17 @@ interface KanbanCard {
   ],
   template: `
     <div class="max-w-md">
-      <div sc-sortable-list [(items)]="cards" [handleOnly]="true" class="gap-3">
-        <div sc-sortable-overlay></div>
+      <div scSortableList [(items)]="cards" [handleOnly]="true" class="gap-3">
+        <div scSortableOverlay></div>
         @for (card of cards(); track card.id; let i = $index) {
           <div
-            sc-sortable-item
+            scSortableItem
             [index]="i"
             [item]="card"
             class="rounded-lg border bg-card p-4 shadow-sm"
           >
             <div class="flex items-start gap-3">
-              <span sc-sortable-handle class="mt-1 p-1"></span>
+              <span scSortableHandle class="mt-1 p-1"></span>
               <div class="flex-1 space-y-2">
                 <h4 class="font-medium">{{ card.title }}</h4>
                 <p class="text-sm text-muted-foreground">

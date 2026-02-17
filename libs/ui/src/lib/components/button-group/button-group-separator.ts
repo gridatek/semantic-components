@@ -4,7 +4,7 @@ import { cn } from '../../utils';
 export type ButtonGroupSeparatorOrientation = 'horizontal' | 'vertical';
 
 @Directive({
-  selector: 'div[sc-button-group-separator]',
+  selector: 'div[scButtonGroupSeparator]',
   host: {
     'data-slot': 'button-group-separator',
     role: 'separator',

@@ -6,12 +6,12 @@ test.describe('Disabled Button Demo', () => {
   });
 
   test('should render all four disabled buttons', async ({ page }) => {
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     await expect(buttons).toHaveCount(4);
   });
 
   test('should have aria-disabled on all buttons', async ({ page }) => {
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     const count = await buttons.count();
     for (let i = 0; i < count; i++) {
       await expect(buttons.nth(i)).toHaveAttribute('aria-disabled', 'true');
@@ -43,7 +43,7 @@ test.describe('Disabled Button Demo', () => {
   });
 
   test('should have reduced opacity when disabled', async ({ page }) => {
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     const count = await buttons.count();
     for (let i = 0; i < count; i++) {
       const opacity = await buttons
@@ -55,7 +55,7 @@ test.describe('Disabled Button Demo', () => {
 
   test('should not be focusable via keyboard tab', async ({ page }) => {
     await page.keyboard.press('Tab');
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     const count = await buttons.count();
     for (let i = 0; i < count; i++) {
       await expect(buttons.nth(i)).not.toBeFocused();

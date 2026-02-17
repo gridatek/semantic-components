@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
-  selector: '[sc-image-cropper-aspect-ratio]',
+  selector: '[scImageCropperAspectRatio]',
   template: `
     <div class="flex items-center gap-1">
       @for (option of options(); track option.value) {

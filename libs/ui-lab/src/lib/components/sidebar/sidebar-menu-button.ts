@@ -29,7 +29,7 @@ export type ScSidebarMenuButtonVariants = VariantProps<
 >;
 
 @Directive({
-  selector: 'button[sc-sidebar-menu-button], a[sc-sidebar-menu-button]',
+  selector: 'button[scSidebarMenuButton], a[scSidebarMenuButton]',
   host: {
     'data-slot': 'sidebar-menu-button',
     '[class]': 'class()',

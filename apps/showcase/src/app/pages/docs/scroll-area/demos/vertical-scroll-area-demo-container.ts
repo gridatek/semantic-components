@@ -35,7 +35,7 @@ interface Tag {
   selector: 'app-vertical-scroll-area-demo',
   imports: [ScScrollArea, ScScrollBar],
   template: \`
-    <div sc-scroll-area class="h-72 w-48 rounded-md border">
+    <div scScrollArea class="h-72 w-48 rounded-md border">
       <div class="p-4">
         <h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
         @for (tag of tags; track tag.id) {
@@ -47,7 +47,7 @@ interface Tag {
           }
         }
       </div>
-      <div sc-scroll-bar orientation="vertical"></div>
+      <div scScrollBar orientation="vertical"></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

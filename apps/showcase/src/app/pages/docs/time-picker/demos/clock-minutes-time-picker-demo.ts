@@ -15,8 +15,8 @@ import {
   imports: [ScTimePicker, ScTimePickerClock],
   template: `
     <div class="flex items-start gap-8">
-      <div sc-time-picker format="12h" [(value)]="time">
-        <div sc-time-picker-clock mode="minutes"></div>
+      <div scTimePicker format="12h" [(value)]="time">
+        <div scTimePickerClock mode="minutes"></div>
       </div>
       <div class="space-y-2">
         <p class="text-sm font-medium">Selected Time</p>

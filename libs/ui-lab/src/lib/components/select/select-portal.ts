@@ -12,7 +12,7 @@ import { ScSelect } from './select';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-select-portal]',
+  selector: 'div[scSelectPortal]',
   imports: [ComboboxPopupContainer, OverlayModule],
   template: `
     <ng-template ngComboboxPopupContainer>

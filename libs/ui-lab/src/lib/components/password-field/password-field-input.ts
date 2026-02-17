@@ -11,7 +11,7 @@ import { SC_FIELD } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
 @Component({
-  selector: 'input[sc-password-field-input]',
+  selector: 'input[scPasswordFieldInput]',
   template: ``,
   host: {
     'data-slot': 'password-field-input',

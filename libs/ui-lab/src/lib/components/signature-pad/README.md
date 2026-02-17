@@ -15,14 +15,14 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
 @Component({
   imports: [ScSignaturePad, ScSignaturePadCanvas, ScSignaturePadControls, ScSignaturePadUndoButton, ScSignaturePadClearButton, SiUndoIcon, SiTrash2Icon],
   template: `
-    <div sc-signature-pad class="relative inline-block">
-      <canvas sc-signature-pad-canvas [(value)]="signature" [width]="400" [height]="200"></canvas>
+    <div scSignaturePad class="relative inline-block">
+      <canvas scSignaturePadCanvas [(value)]="signature" [width]="400" [height]="200"></canvas>
 
-      <div sc-signature-pad-controls>
-        <button sc-signature-pad-undo>
+      <div scSignaturePadControls>
+        <button scSignaturePadUndo>
           <svg si-undo-icon class="size-4"></svg>
         </button>
-        <button sc-signature-pad-clear>
+        <button scSignaturePadClear>
           <svg si-trash-2-icon class="size-4"></svg>
         </button>
       </div>
@@ -40,13 +40,13 @@ export class MyComponent {
 
 - Root directive that provides context
 - Manages signature state and drawing logic
-- **Selector**: `[sc-signature-pad]`
+- **Selector**: `[scSignaturePad]`
 - **Inputs**: `disabled`, `penColor`, `penWidth`, `backgroundColor`
 
 **`ScSignaturePadCanvas` (Component)**
 
 - Canvas element for drawing
-- **Selector**: `canvas[sc-signature-pad-canvas]`
+- **Selector**: `canvas[scSignaturePadCanvas]`
 - **Inputs**: `width`, `height`, `ariaLabel`, `class`
 - **Model**: `value` (two-way bindable data URL)
 - **Outputs**: `signatureChange`, `strokeEnd`
@@ -54,38 +54,38 @@ export class MyComponent {
 **`ScSignaturePadControls` (Component)**
 
 - Container for control buttons (uses `<ng-content>`)
-- **Selector**: `div[sc-signature-pad-controls]`
+- **Selector**: `div[scSignaturePadControls]`
 - **Default position**: `absolute top-2 right-2`
 
 **`ScSignaturePadUndoButton` (Component)**
 
 - Undo last stroke
-- **Selector**: `button[sc-signature-pad-undo]`
+- **Selector**: `button[scSignaturePadUndo]`
 - **Auto-disabled**: When no strokes to undo
 
 **`ScSignaturePadClearButton` (Component)**
 
 - Clear entire signature
-- **Selector**: `button[sc-signature-pad-clear]`
+- **Selector**: `button[scSignaturePadClear]`
 - **Auto-disabled**: When signature is empty
 
 **`ScSignaturePadToolbar` (Component)**
 
 - Optional container for toolbar items (uses `<ng-content>`)
-- **Selector**: `div[sc-signature-pad-toolbar]`
+- **Selector**: `div[scSignaturePadToolbar]`
 - **Default styling**: Flex row with gap
 
 **`ScSignaturePadColorButton` (Component)**
 
 - Button to select pen color
-- **Selector**: `button[sc-signature-pad-pen-color]`
+- **Selector**: `button[scSignaturePadPenColor]`
 - **Inputs**: `color` (required, hex color string)
 - **Auto-active**: When color matches current pen color
 
 **`ScSignaturePadWidthButton` (Component)**
 
 - Button to select pen width
-- **Selector**: `button[sc-signature-pad-pen-width]`
+- **Selector**: `button[scSignaturePadPenWidth]`
 - **Inputs**: `width` (required, number in pixels)
 - **Auto-active**: When width matches current pen width
 
@@ -94,13 +94,13 @@ export class MyComponent {
 #### Custom Button Layout
 
 ```html
-<div sc-signature-pad>
-  <canvas sc-signature-pad-canvas [width]="500" [height]="250"></canvas>
+<div scSignaturePad>
+  <canvas scSignaturePadCanvas [width]="500" [height]="250"></canvas>
 
   <!-- Controls at bottom instead of top-right -->
-  <div sc-signature-pad-controls class="static mt-2 justify-center">
-    <button sc-signature-pad-undo class="px-4 py-2">Undo</button>
-    <button sc-signature-pad-clear class="px-4 py-2">Clear</button>
+  <div scSignaturePadControls class="static mt-2 justify-center">
+    <button scSignaturePadUndo class="px-4 py-2">Undo</button>
+    <button scSignaturePadClear class="px-4 py-2">Clear</button>
   </div>
 </div>
 ```
@@ -108,14 +108,14 @@ export class MyComponent {
 #### With Custom Buttons
 
 ```html
-<div sc-signature-pad #pad>
-  <canvas sc-signature-pad-canvas [(value)]="signature"></canvas>
+<div scSignaturePad #pad>
+  <canvas scSignaturePadCanvas [(value)]="signature"></canvas>
 
-  <div sc-signature-pad-controls>
-    <button sc-signature-pad-undo>
+  <div scSignaturePadControls>
+    <button scSignaturePadUndo>
       <svg si-undo-icon></svg>
     </button>
-    <button sc-signature-pad-clear>
+    <button scSignaturePadClear>
       <svg si-trash-icon></svg>
     </button>
     <!-- Add your own buttons -->
@@ -129,14 +129,14 @@ export class MyComponent {
 #### Without Controls Container
 
 ```html
-<div sc-signature-pad>
-  <canvas sc-signature-pad-canvas></canvas>
+<div scSignaturePad>
+  <canvas scSignaturePadCanvas></canvas>
 </div>
 
 <!-- External controls -->
 <div class="flex gap-2 mt-2">
-  <button sc-signature-pad-undo>Undo</button>
-  <button sc-signature-pad-clear>Clear</button>
+  <button scSignaturePadUndo>Undo</button>
+  <button scSignaturePadClear>Clear</button>
   <button (click)="save()">Save</button>
 </div>
 ```
@@ -144,26 +144,26 @@ export class MyComponent {
 #### With Color Selection
 
 ```html
-<div sc-signature-pad class="space-y-3">
+<div scSignaturePad class="space-y-3">
   <!-- Color toolbar -->
-  <div sc-signature-pad-toolbar>
-    <button sc-signature-pad-pen-color [color]="'#000000'">
+  <div scSignaturePadToolbar>
+    <button scSignaturePadPenColor [color]="'#000000'">
       <span class="size-4 rounded-full border" style="background: #000000"></span>
     </button>
-    <button sc-signature-pad-pen-color [color]="'#1d4ed8'">
+    <button scSignaturePadPenColor [color]="'#1d4ed8'">
       <span class="size-4 rounded-full border" style="background: #1d4ed8"></span>
     </button>
-    <button sc-signature-pad-pen-color [color]="'#dc2626'">
+    <button scSignaturePadPenColor [color]="'#dc2626'">
       <span class="size-4 rounded-full border" style="background: #dc2626"></span>
     </button>
   </div>
 
   <!-- Canvas -->
   <div class="relative inline-block">
-    <canvas sc-signature-pad-canvas></canvas>
-    <div sc-signature-pad-controls>
-      <button sc-signature-pad-undo>Undo</button>
-      <button sc-signature-pad-clear>Clear</button>
+    <canvas scSignaturePadCanvas></canvas>
+    <div scSignaturePadControls>
+      <button scSignaturePadUndo>Undo</button>
+      <button scSignaturePadClear>Clear</button>
     </div>
   </div>
 </div>
@@ -172,21 +172,21 @@ export class MyComponent {
 #### With Width Selection
 
 ```html
-<div sc-signature-pad class="space-y-3">
-  <div sc-signature-pad-toolbar>
-    <button sc-signature-pad-pen-width [width]="2">
+<div scSignaturePad class="space-y-3">
+  <div scSignaturePadToolbar>
+    <button scSignaturePadPenWidth [width]="2">
       <span class="w-4 rounded-full bg-foreground" style="height: 2px"></span>
     </button>
-    <button sc-signature-pad-pen-width [width]="4">
+    <button scSignaturePadPenWidth [width]="4">
       <span class="w-4 rounded-full bg-foreground" style="height: 4px"></span>
     </button>
-    <button sc-signature-pad-pen-width [width]="6">
+    <button scSignaturePadPenWidth [width]="6">
       <span class="w-4 rounded-full bg-foreground" style="height: 6px"></span>
     </button>
   </div>
 
   <div class="relative inline-block">
-    <canvas sc-signature-pad-canvas></canvas>
+    <canvas scSignaturePadCanvas></canvas>
   </div>
 </div>
 ```
@@ -194,12 +194,12 @@ export class MyComponent {
 #### Combined Toolbar
 
 ```html
-<div sc-signature-pad-toolbar>
+<div scSignaturePadToolbar>
   <!-- Colors -->
-  <button sc-signature-pad-pen-color [color]="'#000000'">
+  <button scSignaturePadPenColor [color]="'#000000'">
     <span class="size-4 rounded-full border" style="background: #000000"></span>
   </button>
-  <button sc-signature-pad-pen-color [color]="'#1d4ed8'">
+  <button scSignaturePadPenColor [color]="'#1d4ed8'">
     <span class="size-4 rounded-full border" style="background: #1d4ed8"></span>
   </button>
 
@@ -207,10 +207,10 @@ export class MyComponent {
   <div class="w-px h-6 bg-border"></div>
 
   <!-- Widths -->
-  <button sc-signature-pad-pen-width [width]="2">
+  <button scSignaturePadPenWidth [width]="2">
     <span class="w-4 rounded-full bg-foreground" style="height: 2px"></span>
   </button>
-  <button sc-signature-pad-pen-width [width]="4">
+  <button scSignaturePadPenWidth [width]="4">
     <span class="w-4 rounded-full bg-foreground" style="height: 4px"></span>
   </button>
 </div>

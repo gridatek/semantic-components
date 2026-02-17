@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Component({
-  selector: '[sc-number-field-scrub-area]',
+  selector: '[scNumberFieldScrubArea]',
   template: `
     <ng-content />
   `,

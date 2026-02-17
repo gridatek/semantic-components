@@ -9,7 +9,7 @@ import { cn } from '@semantic-components/ui';
 import { ScCopyButton } from './copy-button';
 
 @Component({
-  selector: '[sc-copy-input]',
+  selector: '[scCopyInput]',
   template: `
     <div class="flex">
       <input
@@ -19,7 +19,7 @@ import { ScCopyButton } from './copy-button';
         [class]="inputClass()"
       />
       <button
-        sc-copy-button
+        scCopyButton
         [value]="value()"
         [variant]="'outline'"
         [size]="'icon'"

@@ -23,7 +23,7 @@ export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
 );
 
 @Directive({
-  selector: '[sc-pdf-viewer]',
+  selector: '[scPdfViewer]',
   exportAs: 'scPdfViewer',
   providers: [{ provide: SC_PDF_VIEWER, useExisting: ScPdfViewerRoot }],
   host: {

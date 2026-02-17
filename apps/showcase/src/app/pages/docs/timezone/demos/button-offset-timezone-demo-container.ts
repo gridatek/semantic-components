@@ -30,7 +30,7 @@ import { ScTimezoneButton } from '@semantic-components/ui-lab';
   selector: 'app-button-offset-timezone-demo',
   imports: [ScTimezoneButton],
   template: \`
-    <button sc-timezone-button variant="outline" [showOffset]="true"></button>
+    <button scTimezoneButton variant="outline" [showOffset]="true"></button>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

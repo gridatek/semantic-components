@@ -21,7 +21,7 @@ export const SC_SORTABLE_LIST = new InjectionToken<ScSortableList<unknown>>(
 );
 
 @Directive({
-  selector: '[sc-sortable-list]',
+  selector: '[scSortableList]',
   exportAs: 'scSortableList',
   providers: [{ provide: SC_SORTABLE_LIST, useExisting: ScSortableList }],
   host: {

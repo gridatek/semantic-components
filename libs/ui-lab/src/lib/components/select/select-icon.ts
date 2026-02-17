@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'svg[sc-select-icon]',
+  selector: 'svg[scSelectIcon]',
   host: {
     'data-slot': 'select-icon',
     '[class]': 'class()',

@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-context-menu-shortcut]',
+  selector: '[scContextMenuShortcut]',
   host: {
     'data-slot': 'context-menu-shortcut',
     '[class]': 'class()',

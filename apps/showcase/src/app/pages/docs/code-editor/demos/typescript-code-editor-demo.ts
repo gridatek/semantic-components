@@ -21,16 +21,16 @@ import {
     ScCodeEditorCopyButton,
   ],
   template: `
-    <div sc-code-editor>
-      <div sc-code-editor-header>
+    <div scCodeEditor>
+      <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
           <span class="text-sm text-muted-foreground">component.ts</span>
-          <span sc-code-editor-label>typescript</span>
+          <span scCodeEditorLabel>typescript</span>
         </div>
-        <button sc-code-editor-copy-button [code]="typescriptCode"></button>
+        <button scCodeEditorCopyButton [code]="typescriptCode"></button>
       </div>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="typescriptCode"
         language="typescript"
         filename="component.ts"

@@ -25,14 +25,14 @@ import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
           Tailwind CSS on top of Angular Aria and Angular CDK.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a sc-link size="lg" routerLink="/docs/getting-started">
+          <a scLink size="lg" routerLink="/docs/getting-started">
             Get Started
           </a>
-          <a sc-link variant="outline" size="lg" routerLink="/docs/components">
+          <a scLink variant="outline" size="lg" routerLink="/docs/components">
             View Components
           </a>
           <a
-            sc-link
+            scLink
             variant="outline"
             size="lg"
             href="https://github.com/gridatek/semantic-components"

@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScAvatar } from './avatar';
 
 @Directive({
-  selector: 'span[sc-avatar-fallback]',
+  selector: 'span[scAvatarFallback]',
   host: {
     'data-slot': 'avatar-fallback',
     '[class]': 'class()',

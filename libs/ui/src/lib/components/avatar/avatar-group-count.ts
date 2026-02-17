@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[sc-avatar-group-count]',
+  selector: 'div[scAvatarGroupCount]',
   host: {
     'data-slot': 'avatar-group-count',
     '[class]': 'class()',

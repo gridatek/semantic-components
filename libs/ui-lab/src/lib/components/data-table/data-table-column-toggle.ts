@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE } from './data-table';
 
 @Component({
-  selector: '[sc-data-table-column-toggle]',
+  selector: '[scDataTableColumnToggle]',
   template: `
     <button
       type="button"
@@ -89,7 +89,7 @@ export class ScDataTableColumnToggle {
 
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    if (!target.closest('[sc-data-table-column-toggle]')) {
+    if (!target.closest('[scDataTableColumnToggle]')) {
       this.isOpen.set(false);
     }
   }

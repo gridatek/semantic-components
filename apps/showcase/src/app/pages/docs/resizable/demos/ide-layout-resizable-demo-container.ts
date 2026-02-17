@@ -35,12 +35,12 @@ import {
   imports: [ScResizableHandle, ScResizablePanel, ScResizablePanelGroup],
   template: \`
     <div
-      sc-resizable-panel-group
+      scResizablePanelGroup
       direction="horizontal"
       class="min-h-[400px] rounded-lg border"
     >
       <div
-        sc-resizable-panel
+        scResizablePanel
         [defaultSize]="20"
         [minSize]="15"
         [maxSize]="30"
@@ -57,10 +57,10 @@ import {
           </div>
         </div>
       </div>
-      <div sc-resizable-handle></div>
-      <div sc-resizable-panel [defaultSize]="60">
-        <div sc-resizable-panel-group direction="vertical" class="h-full">
-          <div sc-resizable-panel [defaultSize]="70">
+      <div scResizableHandle></div>
+      <div scResizablePanel [defaultSize]="60">
+        <div scResizablePanelGroup direction="vertical" class="h-full">
+          <div scResizablePanel [defaultSize]="70">
             <div class="flex h-full flex-col">
               <div class="border-b p-2 text-sm font-medium">Editor</div>
               <div
@@ -70,8 +70,8 @@ import {
               </div>
             </div>
           </div>
-          <div sc-resizable-handle></div>
-          <div sc-resizable-panel [defaultSize]="30" [minSize]="15">
+          <div scResizableHandle></div>
+          <div scResizablePanel [defaultSize]="30" [minSize]="15">
             <div class="flex h-full flex-col bg-muted/30">
               <div class="border-b p-2 text-sm font-medium">Terminal</div>
               <div
@@ -83,9 +83,9 @@ import {
           </div>
         </div>
       </div>
-      <div sc-resizable-handle></div>
+      <div scResizableHandle></div>
       <div
-        sc-resizable-panel
+        scResizablePanel
         [defaultSize]="20"
         [minSize]="15"
         [maxSize]="30"

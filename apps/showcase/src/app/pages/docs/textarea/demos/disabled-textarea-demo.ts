@@ -11,10 +11,10 @@ import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
   selector: 'app-disabled-textarea-demo',
   imports: [FormField, ScField, ScLabel, ScTextarea],
   template: `
-    <div sc-field>
-      <label sc-label>Disabled</label>
+    <div scField>
+      <label scLabel>Disabled</label>
       <textarea
-        sc-textarea
+        scTextarea
         [formField]="disabledForm.message"
         placeholder="Disabled textarea"
       ></textarea>

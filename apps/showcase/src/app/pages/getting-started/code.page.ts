@@ -47,20 +47,20 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">shiki</code>
           .
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>terminal</span>
-            <button sc-copy-button [value]="installCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>terminal</span>
+            <button scCopyButton [value]="installCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="installCode"
             language="bash"
           ></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -71,16 +71,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>css</span>
-            <button sc-copy-button [value]="stylesCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>css</span>
+            <button scCopyButton [value]="stylesCode"></button>
           </div>
-          <div sc-code-viewer-content [code]="stylesCode" language="css"></div>
+          <div scCodeViewerContent [code]="stylesCode" language="css"></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">
@@ -91,29 +91,29 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>css</span>
-            <button sc-copy-button [value]="sourceCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>css</span>
+            <button scCopyButton [value]="sourceCode"></button>
           </div>
-          <div sc-code-viewer-content [code]="sourceCode" language="css"></div>
+          <div scCodeViewerContent [code]="sourceCode" language="css"></div>
         </div>
       </section>
 
-      <div sc-separator></div>
+      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
         <p class="text-muted-foreground">
           Import and use the code viewer in your Angular templates:
         </p>
-        <div sc-code-viewer>
-          <div sc-code-viewer-header>
-            <span sc-code-viewer-label>angular-ts</span>
-            <button sc-copy-button [value]="usageCode"></button>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>angular-ts</span>
+            <button scCopyButton [value]="usageCode"></button>
           </div>
           <div
-            sc-code-viewer-content
+            scCodeViewerContent
             [code]="usageCode"
             language="angular-ts"
           ></div>
@@ -142,11 +142,11 @@ export default class CodeInstallPage {
   selector: 'app-example',
   imports: [ScCodeViewer, ScCodeViewerContent, ScCodeViewerHeader, ScCodeViewerLabel],
   template: \`
-    <div sc-code-viewer>
-      <div sc-code-viewer-header>
-        <span sc-code-viewer-label>typescript</span>
+    <div scCodeViewer>
+      <div scCodeViewerHeader>
+        <span scCodeViewerLabel>typescript</span>
       </div>
-      <div sc-code-viewer-content [code]="code" language="typescript"></div>
+      <div scCodeViewerContent [code]="code" language="typescript"></div>
     </div>
   \`,
 })

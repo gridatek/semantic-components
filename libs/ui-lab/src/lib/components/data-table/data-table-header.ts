@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: '[sc-data-table-header]',
+  selector: '[scDataTableHeader]',
   template: `
     <ng-content />
   `,

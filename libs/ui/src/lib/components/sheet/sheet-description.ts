@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScSheet } from './sheet';
 
 @Directive({
-  selector: 'p[sc-sheet-description]',
+  selector: 'p[scSheetDescription]',
   host: {
     'data-slot': 'sheet-description',
     '[id]': 'sheet.descriptionId',

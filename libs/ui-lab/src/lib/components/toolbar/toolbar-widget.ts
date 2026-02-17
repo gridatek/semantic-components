@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'button[sc-toolbar-widget]',
+  selector: 'button[scToolbarWidget]',
   hostDirectives: [
     {
       directive: ToolbarWidget,

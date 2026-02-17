@@ -15,7 +15,7 @@ import { ScNavbarProvider } from './navbar-provider';
 type ScNavbarMobileMenuState = 'open' | 'closed';
 
 @Component({
-  selector: 'div[sc-navbar-mobile-menu]',
+  selector: 'div[scNavbarMobileMenu]',
   template: `
     <ng-content />
   `,

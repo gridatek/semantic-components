@@ -16,8 +16,8 @@ import {
   imports: [ScTimePicker, ScTimePickerClock, ScTimePickerPeriod],
   template: `
     <div class="flex items-start gap-8">
-      <div sc-time-picker format="12h" [(value)]="time">
-        <div sc-time-picker-clock mode="hours"></div>
+      <div scTimePicker format="12h" [(value)]="time">
+        <div scTimePickerClock mode="hours"></div>
       </div>
       <div class="space-y-2">
         <p class="text-sm font-medium">Selected Hour</p>
@@ -25,8 +25,8 @@ import {
           {{ (time()?.hours ?? 0) % 12 || 12 }}:00
           {{ (time()?.hours ?? 0) >= 12 ? 'PM' : 'AM' }}
         </p>
-        <div sc-time-picker format="12h" [(value)]="time">
-          <div sc-time-picker-period></div>
+        <div scTimePicker format="12h" [(value)]="time">
+          <div scTimePickerPeriod></div>
         </div>
       </div>
     </div>

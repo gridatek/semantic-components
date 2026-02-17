@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-video-player-controls]',
+  selector: 'div[scVideoPlayerControls]',
   template: '<ng-content />',
   host: {
     '[class]': 'class()',

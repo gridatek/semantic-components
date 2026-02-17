@@ -41,34 +41,34 @@ import { ScInput } from '@semantic-components/ui';
     ScLabel,
   ],
   template: `
-    <div sc-sheet-provider>
-      <button sc-button sc-sheet-trigger variant="outline">
+    <div scSheetProvider>
+      <button scButton scSheetTrigger variant="outline">
         Open Right Sheet
       </button>
       <ng-template scSheetPortal>
-        <div sc-sheet>
-          <button sc-sheet-close>
+        <div scSheet>
+          <button scSheetClose>
             <svg si-x-icon></svg>
             <span class="sr-only">Close</span>
           </button>
-          <div sc-sheet-header>
-            <h2 sc-sheet-title>Edit profile</h2>
-            <p sc-sheet-description>
+          <div scSheetHeader>
+            <h2 scSheetTitle>Edit profile</h2>
+            <p scSheetDescription>
               Make changes to your profile here. Click save when you're done.
             </p>
           </div>
-          <div sc-field-group>
-            <div sc-field orientation="horizontal">
-              <label sc-label>Name</label>
-              <input cdkFocusInitial sc-input value="Pedro Duarte" />
+          <div scFieldGroup>
+            <div scField orientation="horizontal">
+              <label scLabel>Name</label>
+              <input cdkFocusInitial scInput value="Pedro Duarte" />
             </div>
-            <div sc-field orientation="horizontal">
-              <label sc-label>Username</label>
-              <input sc-input value="@peduarte" />
+            <div scField orientation="horizontal">
+              <label scLabel>Username</label>
+              <input scInput value="@peduarte" />
             </div>
           </div>
-          <div sc-sheet-footer>
-            <button sc-button type="submit">Save changes</button>
+          <div scSheetFooter>
+            <button scButton type="submit">Save changes</button>
           </div>
         </div>
       </ng-template>

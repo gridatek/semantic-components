@@ -23,35 +23,35 @@ ScDialogProvider (root wrapper - manages open state + overlay lifecycle)
 
 | Component             | Selector                      | Description                                       |
 | --------------------- | ----------------------------- | ------------------------------------------------- |
-| `ScDialogProvider`    | `div[sc-dialog-provider]`     | Root wrapper, manages open state + overlay        |
-| `ScDialogTrigger`     | `button[sc-dialog-trigger]`   | Button that opens the dialog                      |
+| `ScDialogProvider`    | `div[scDialogProvider]`     | Root wrapper, manages open state + overlay        |
+| `ScDialogTrigger`     | `button[scDialogTrigger]`   | Button that opens the dialog                      |
 | `ScDialogPortal`      | `ng-template[scDialogPortal]` | Directive marking lazy content for the overlay    |
-| `ScDialog`            | `div[sc-dialog]`              | Dialog panel with animations                      |
-| `ScDialogHeader`      | `div[sc-dialog-header]`       | Header section container                          |
-| `ScDialogTitle`       | `h2[sc-dialog-title]`         | Dialog title (aria-labelledby)                    |
-| `ScDialogDescription` | `p[sc-dialog-description]`    | Dialog description (aria-describedby)             |
-| `ScDialogFooter`      | `div[sc-dialog-footer]`       | Footer section for actions                        |
-| `ScDialogClose`       | `button[sc-dialog-close]`     | Close button (sets `type="button"` automatically) |
+| `ScDialog`            | `div[scDialog]`              | Dialog panel with animations                      |
+| `ScDialogHeader`      | `div[scDialogHeader]`       | Header section container                          |
+| `ScDialogTitle`       | `h2[scDialogTitle]`         | Dialog title (aria-labelledby)                    |
+| `ScDialogDescription` | `p[scDialogDescription]`    | Dialog description (aria-describedby)             |
+| `ScDialogFooter`      | `div[scDialogFooter]`       | Footer section for actions                        |
+| `ScDialogClose`       | `button[scDialogClose]`     | Close button (sets `type="button"` automatically) |
 
 ## Usage
 
 ### Basic Dialog
 
 ```html
-<div sc-dialog-provider [(open)]="isOpen">
-  <button sc-dialog-trigger>Open Dialog</button>
+<div scDialogProvider [(open)]="isOpen">
+  <button scDialogTrigger>Open Dialog</button>
   <ng-template scDialogPortal>
-    <div sc-dialog>
-      <button sc-dialog-close>
+    <div scDialog>
+      <button scDialogClose>
         <svg><!-- X icon --></svg>
         <span class="sr-only">Close</span>
       </button>
-      <div sc-dialog-header>
-        <h2 sc-dialog-title>Dialog Title</h2>
-        <p sc-dialog-description>Dialog description goes here.</p>
+      <div scDialogHeader>
+        <h2 scDialogTitle>Dialog Title</h2>
+        <p scDialogDescription>Dialog description goes here.</p>
       </div>
       <!-- Your content -->
-      <div sc-dialog-footer>
+      <div scDialogFooter>
         <button>Cancel</button>
         <button>Save</button>
       </div>
@@ -67,10 +67,10 @@ You can control the dialog state programmatically using the `open` model:
 ```typescript
 @Component({
   template: `
-    <div sc-dialog-provider [(open)]="isOpen">
-      <button sc-dialog-trigger>Open</button>
+    <div scDialogProvider [(open)]="isOpen">
+      <button scDialogTrigger>Open</button>
       <ng-template scDialogPortal>
-        <div sc-dialog>
+        <div scDialog>
           <!-- content -->
         </div>
       </ng-template>
@@ -93,17 +93,17 @@ export class MyComponent {
 ### Form Dialog
 
 ```html
-<div sc-dialog-provider [(open)]="isOpen">
-  <button sc-dialog-trigger>Edit Profile</button>
+<div scDialogProvider [(open)]="isOpen">
+  <button scDialogTrigger>Edit Profile</button>
   <ng-template scDialogPortal>
     <form>
-      <div sc-dialog>
-        <button sc-dialog-close>
+      <div scDialog>
+        <button scDialogClose>
           <svg><!-- X icon --></svg>
         </button>
-        <div sc-dialog-header>
-          <h2 sc-dialog-title>Edit profile</h2>
-          <p sc-dialog-description>Make changes to your profile here.</p>
+        <div scDialogHeader>
+          <h2 scDialogTitle>Edit profile</h2>
+          <p scDialogDescription>Make changes to your profile here.</p>
         </div>
         <div class="grid gap-4 py-4">
           <div class="grid grid-cols-4 items-center gap-4">
@@ -111,7 +111,7 @@ export class MyComponent {
             <input id="name" class="col-span-3" />
           </div>
         </div>
-        <div sc-dialog-footer>
+        <div scDialogFooter>
           <button type="submit">Save changes</button>
         </div>
       </div>
@@ -198,11 +198,11 @@ On `animationend`, the `closed` state resets to `idle`, which triggers overlay c
 All components accept a `class` input for custom styling:
 
 ```html
-<div sc-dialog class="max-w-2xl">
+<div scDialog class="max-w-2xl">
   <!-- wider dialog -->
 </div>
 
-<div sc-dialog-footer class="flex-row-reverse">
+<div scDialogFooter class="flex-row-reverse">
   <!-- reversed button order -->
 </div>
 ```

@@ -10,7 +10,7 @@ import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-progress]',
+  selector: 'div[scProgress]',
   host: {
     role: 'progressbar',
     'data-slot': 'progress',

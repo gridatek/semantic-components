@@ -30,7 +30,7 @@ import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
   selector: 'app-horizontal-scroll-area-demo',
   imports: [ScScrollArea, ScScrollBar],
   template: \`
-    <div sc-scroll-area class="w-96 whitespace-nowrap rounded-md border">
+    <div scScrollArea class="w-96 whitespace-nowrap rounded-md border">
       <div class="flex w-max space-x-4 p-4">
         @for (artwork of artworks; track artwork.artist) {
           <figure class="shrink-0">
@@ -50,7 +50,7 @@ import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
           </figure>
         }
       </div>
-      <div sc-scroll-bar orientation="horizontal"></div>
+      <div scScrollBar orientation="horizontal"></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

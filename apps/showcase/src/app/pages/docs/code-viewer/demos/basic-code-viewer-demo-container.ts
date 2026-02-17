@@ -43,13 +43,13 @@ import {
     ScCopyButton,
   ],
   template: \`
-    <div sc-code-viewer>
-      <div sc-code-viewer-header>
-        <span sc-code-viewer-label>app.ts</span>
-        <button sc-copy-button [value]="sampleCode()"></button>
+    <div scCodeViewer>
+      <div scCodeViewerHeader>
+        <span scCodeViewerLabel>app.ts</span>
+        <button scCopyButton [value]="sampleCode()"></button>
       </div>
       <div
-        sc-code-viewer-content
+        scCodeViewerContent
         [code]="sampleCode()"
         language="typescript"
         [showLineNumbers]="true"

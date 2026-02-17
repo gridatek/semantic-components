@@ -16,7 +16,7 @@ import { ScTreeItemGroup } from './tree-item-group';
 export const SC_TREE_ITEM = new InjectionToken<ScTreeItem>('SC_TREE_ITEM');
 
 @Component({
-  selector: 'li[sc-tree-item]',
+  selector: 'li[scTreeItem]',
   hostDirectives: [
     {
       directive: TreeItem,

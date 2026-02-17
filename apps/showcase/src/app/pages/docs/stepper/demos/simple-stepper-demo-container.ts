@@ -48,28 +48,28 @@ import {
   ],
   template: \`
     <div class="rounded-lg border p-6">
-      <div sc-stepper [(activeStep)]="activeStep">
-        <div sc-stepper-list>
-          <div sc-stepper-item [step]="0">
-            <button sc-stepper-trigger></button>
+      <div scStepper [(activeStep)]="activeStep">
+        <div scStepperList>
+          <div scStepperItem [step]="0">
+            <button scStepperTrigger></button>
           </div>
-          <div sc-stepper-separator></div>
-          <div sc-stepper-item [step]="1">
-            <button sc-stepper-trigger></button>
+          <div scStepperSeparator></div>
+          <div scStepperItem [step]="1">
+            <button scStepperTrigger></button>
           </div>
-          <div sc-stepper-separator></div>
-          <div sc-stepper-item [step]="2">
-            <button sc-stepper-trigger></button>
+          <div scStepperSeparator></div>
+          <div scStepperItem [step]="2">
+            <button scStepperTrigger></button>
           </div>
-          <div sc-stepper-separator></div>
-          <div sc-stepper-item [step]="3">
-            <button sc-stepper-trigger></button>
+          <div scStepperSeparator></div>
+          <div scStepperItem [step]="3">
+            <button scStepperTrigger></button>
           </div>
         </div>
 
         <div class="mt-6 flex justify-center gap-2">
-          <button sc-stepper-previous>Back</button>
-          <button sc-stepper-next>Continue</button>
+          <button scStepperPrevious>Back</button>
+          <button scStepperNext>Continue</button>
         </div>
       </div>
     </div>

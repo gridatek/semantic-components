@@ -6,7 +6,7 @@ test.describe('Variants Button Demo', () => {
   });
 
   test('should render all six variant buttons', async ({ page }) => {
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     await expect(buttons).toHaveCount(6);
   });
 
@@ -42,7 +42,7 @@ test.describe('Variants Button Demo', () => {
   });
 
   test('should have type="button" on all buttons', async ({ page }) => {
-    const buttons = page.locator('button[sc-button]');
+    const buttons = page.locator('button[scButton]');
     const count = await buttons.count();
     for (let i = 0; i < count; i++) {
       await expect(buttons.nth(i)).toHaveAttribute('type', 'button');

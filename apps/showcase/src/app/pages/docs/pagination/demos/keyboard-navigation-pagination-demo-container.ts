@@ -103,7 +103,7 @@ import {
       </div>
 
       <nav
-        sc-pagination
+        scPagination
         #pagination="scPagination"
         [currentPage]="currentPage()"
         [pageSize]="pageSize()"
@@ -125,10 +125,10 @@ import {
           </p>
         </div>
 
-        <ul sc-pagination-list>
-          <li sc-pagination-item>
+        <ul scPaginationList>
+          <li scPaginationItem>
             <button
-              sc-pagination-first
+              scPaginationFirst
               [disabled]="currentPage() === 1"
               aria-label="Go to first page"
             >
@@ -136,9 +136,9 @@ import {
               <span>First</span>
             </button>
           </li>
-          <li sc-pagination-item>
+          <li scPaginationItem>
             <button
-              sc-pagination-previous
+              scPaginationPrevious
               [disabled]="currentPage() === 1"
               aria-label="Go to previous page"
             >
@@ -148,15 +148,15 @@ import {
           </li>
 
           @for (page of pagination.pages(); track page.value) {
-            <li sc-pagination-item>
+            <li scPaginationItem>
               @if (page.type === 'ellipsis') {
-                <span sc-pagination-ellipsis aria-hidden="true">
+                <span scPaginationEllipsis aria-hidden="true">
                   <svg si-ellipsis-icon></svg>
                   <span class="sr-only">More pages</span>
                 </span>
               } @else {
                 <button
-                  sc-pagination-link
+                  scPaginationLink
                   [page]="page.value"
                   [attr.aria-label]="'Go to page ' + page.value"
                 >
@@ -166,9 +166,9 @@ import {
             </li>
           }
 
-          <li sc-pagination-item>
+          <li scPaginationItem>
             <button
-              sc-pagination-next
+              scPaginationNext
               [disabled]="currentPage() === pagination.totalPages()"
               aria-label="Go to next page"
             >
@@ -176,9 +176,9 @@ import {
               <svg si-chevron-right-icon></svg>
             </button>
           </li>
-          <li sc-pagination-item>
+          <li scPaginationItem>
             <button
-              sc-pagination-last
+              scPaginationLast
               [disabled]="currentPage() === pagination.totalPages()"
               aria-label="Go to last page"
             >

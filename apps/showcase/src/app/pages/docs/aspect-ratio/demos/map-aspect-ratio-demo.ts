@@ -11,7 +11,7 @@ import { ScAspectRatio } from '@semantic-components/ui';
   imports: [ScAspectRatio, SiMapPinIcon],
   template: `
     <div class="w-[450px] overflow-hidden rounded-md border">
-      <div sc-aspect-ratio [ratio]="3 / 2" class="bg-muted">
+      <div scAspectRatio [ratio]="3 / 2" class="bg-muted">
         <div class="flex size-full items-center justify-center">
           <svg si-map-pin-icon class="size-10 text-muted-foreground"></svg>
         </div>

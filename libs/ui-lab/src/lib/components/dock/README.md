@@ -36,10 +36,10 @@ import type { DockItem, DockPosition, DockSize } from '@/ui/dock';
 ### Basic Usage
 
 ```html
-<nav sc-dock (itemClick)="onItemClick($event)">
-  <div sc-dock-items>
+<nav scDock (itemClick)="onItemClick($event)">
+  <div scDockItems>
     @for (item of items; track item.id) {
-    <button sc-dock-item [item]="item"></button>
+    <button scDockItem [item]="item"></button>
     }
   </div>
 </nav>
@@ -60,12 +60,12 @@ onItemClick(item: DockItem): void {
 ### With Badges
 
 ```html
-<nav sc-dock>
-  <div sc-dock-items>
+<nav scDock>
+  <div scDockItems>
     @for (item of items; track item.id) {
-    <button sc-dock-item [item]="item">
+    <button scDockItem [item]="item">
       @if (item.badge !== undefined) {
-      <span sc-dock-badge>{{ item.badge }}</span>
+      <span scDockBadge>{{ item.badge }}</span>
       }
     </button>
     }
@@ -83,10 +83,10 @@ items: DockItem[] = [
 ### Without Magnification
 
 ```html
-<nav sc-dock [magnification]="false">
-  <div sc-dock-items>
+<nav scDock [magnification]="false">
+  <div scDockItems>
     @for (item of items; track item.id) {
-    <button sc-dock-item [item]="item"></button>
+    <button scDockItem [item]="item"></button>
     }
   </div>
 </nav>
@@ -95,10 +95,10 @@ items: DockItem[] = [
 ### Custom Magnification Scale
 
 ```html
-<nav sc-dock [magnificationScale]="2">
-  <div sc-dock-items>
+<nav scDock [magnificationScale]="2">
+  <div scDockItems>
     @for (item of items; track item.id) {
-    <button sc-dock-item [item]="item"></button>
+    <button scDockItem [item]="item"></button>
     }
   </div>
 </nav>
@@ -107,10 +107,10 @@ items: DockItem[] = [
 ### Size Variants
 
 ```html
-<nav sc-dock size="sm">
-  <div sc-dock-items>
+<nav scDock size="sm">
+  <div scDockItems>
     @for (item of items; track item.id) {
-    <button sc-dock-item [item]="item"></button>
+    <button scDockItem [item]="item"></button>
     }
   </div>
 </nav>
@@ -120,7 +120,7 @@ items: DockItem[] = [
 
 ### ScDock (Directive)
 
-**Selector**: `[sc-dock]`
+**Selector**: `[scDock]`
 
 #### Inputs
 
@@ -140,7 +140,7 @@ items: DockItem[] = [
 
 ### ScDockItems (Component)
 
-**Selector**: `div[sc-dock-items]`
+**Selector**: `div[scDockItems]`
 
 Container for dock items. Automatically styled based on parent dock configuration.
 
@@ -152,7 +152,7 @@ Container for dock items. Automatically styled based on parent dock configuratio
 
 ### ScDockItem (Component)
 
-**Selector**: `button[sc-dock-item]`
+**Selector**: `button[scDockItem]`
 
 Individual dock item button.
 
@@ -165,7 +165,7 @@ Individual dock item button.
 
 ### ScDockBadge (Component)
 
-**Selector**: `span[sc-dock-badge]`
+**Selector**: `span[scDockBadge]`
 
 Badge indicator for dock items.
 

@@ -35,10 +35,10 @@ import { ScButton } from '@semantic-components/ui';
   imports: [ScButton],
   template: \`
     <div class="flex flex-wrap items-center gap-4">
-      <button sc-button size="lg">Large</button>
-      <button sc-button size="default">Default</button>
-      <button sc-button size="sm">Small</button>
-      <button sc-button size="icon">
+      <button scButton size="lg">Large</button>
+      <button scButton size="default">Default</button>
+      <button scButton size="sm">Small</button>
+      <button scButton size="icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

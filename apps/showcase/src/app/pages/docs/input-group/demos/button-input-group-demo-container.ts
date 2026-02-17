@@ -49,15 +49,15 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: \`
-    <div sc-input-group>
-      <div sc-input-group-addon>
-        <span sc-input-group-text>
+    <div scInputGroup>
+      <div scInputGroupAddon>
+        <span scInputGroupText>
           <svg si-search-icon></svg>
         </span>
       </div>
-      <input sc-input variant="group" placeholder="Search..." />
-      <div sc-input-group-addon align="inline-end">
-        <button sc-input-group-button size="icon-xs">
+      <input scInput variant="group" placeholder="Search..." />
+      <div scInputGroupAddon align="inline-end">
+        <button scInputGroupButton size="icon-xs">
           <svg si-x-icon></svg>
         </button>
       </div>

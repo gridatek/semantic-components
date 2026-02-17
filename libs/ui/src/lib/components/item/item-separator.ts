@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[sc-item-separator]',
+  selector: 'div[scItemSeparator]',
   host: {
     'data-slot': 'item-separator',
     role: 'separator',

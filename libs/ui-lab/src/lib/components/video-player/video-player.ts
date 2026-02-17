@@ -5,7 +5,7 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
 );
 
 @Directive({
-  selector: '[sc-video-player]',
+  selector: '[scVideoPlayer]',
   exportAs: 'scVideoPlayer',
   providers: [{ provide: SC_VIDEO_PLAYER, useExisting: ScVideoPlayer }],
   host: {

@@ -240,7 +240,7 @@ protected readonly class = computed(() =>
 
 **Animation Flow:**
 
-1. Provider renders: `<div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>`
+1. Provider renders: `<div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>`
 2. ScBackdrop receives `open` input
 3. Effect sets `state` to `'open'` or `'closed'` based on `open` value
 4. Data attribute (`data-open` / `data-closed`) triggers Tailwind animation classes
@@ -434,7 +434,7 @@ The provider's template includes the backdrop and focus trap, projecting the con
 ```html
 <ng-content />
 <ng-template #overlayTemplate>
-  <div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
+  <div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
   <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
     <ng-container [ngTemplateOutlet]="dialogPortal().templateRef" />
   </div>
@@ -482,7 +482,7 @@ The provider directly handles backdrop animation completion in its template — 
 
 ```html
 <!-- In provider's overlay template -->
-<div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
+<div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
 ```
 
 ```typescript
@@ -745,18 +745,18 @@ The animation system preserves accessibility:
 ## Consumer API
 
 ```html
-<div sc-dialog-provider [(open)]="isOpen">
-  <button sc-dialog-trigger sc-button>Open</button>
+<div scDialogProvider [(open)]="isOpen">
+  <button scDialogTrigger scButton>Open</button>
   <ng-template scDialogPortal>
-    <div sc-dialog>
-      <button sc-dialog-close>...</button>
-      <div sc-dialog-header>
-        <h2 sc-dialog-title>Title</h2>
-        <p sc-dialog-description>Description</p>
+    <div scDialog>
+      <button scDialogClose>...</button>
+      <div scDialogHeader>
+        <h2 scDialogTitle>Title</h2>
+        <p scDialogDescription>Description</p>
       </div>
       <!-- content -->
-      <div sc-dialog-footer>
-        <button sc-button>Save</button>
+      <div scDialogFooter>
+        <button scButton>Save</button>
       </div>
     </div>
   </ng-template>

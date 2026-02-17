@@ -50,25 +50,25 @@ import { ScInput } from "@semantic-components/ui-lab";
     ScInput,
   ],
   template: \`
-    <fieldset sc-fieldset>
-      <legend sc-legend>Personal Information</legend>
-      <p sc-field-description>Please provide your personal details below.</p>
+    <fieldset scFieldset>
+      <legend scLegend>Personal Information</legend>
+      <p scFieldDescription>Please provide your personal details below.</p>
 
-      <div sc-field-group>
-        <div sc-field>
-          <label sc-label for="firstName">First Name</label>
-          <input sc-input id="firstName" type="text" placeholder="John" />
+      <div scFieldGroup>
+        <div scField>
+          <label scLabel for="firstName">First Name</label>
+          <input scInput id="firstName" type="text" placeholder="John" />
         </div>
 
-        <div sc-field>
-          <label sc-label for="lastName">Last Name</label>
-          <input sc-input id="lastName" type="text" placeholder="Doe" />
+        <div scField>
+          <label scLabel for="lastName">Last Name</label>
+          <input scInput id="lastName" type="text" placeholder="Doe" />
         </div>
 
-        <div sc-field>
-          <label sc-label for="email">Email</label>
+        <div scField>
+          <label scLabel for="email">Email</label>
           <input
-            sc-input
+            scInput
             id="email"
             type="email"
             placeholder="john.doe@example.com"

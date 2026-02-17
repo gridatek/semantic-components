@@ -16,15 +16,15 @@ The Number Field component follows a composable pattern with multiple sub-compon
 ## Basic Usage
 
 ```html
-<div sc-number-field [(value)]="quantity" [min]="1" [max]="10">
-  <div sc-number-field-scrub-area>
-    <label sc-label>Quantity</label>
+<div scNumberField [(value)]="quantity" [min]="1" [max]="10">
+  <div scNumberFieldScrubArea>
+    <label scLabel>Quantity</label>
   </div>
 
-  <div sc-number-field-group>
-    <button sc-number-field-decrement></button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment></button>
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -35,7 +35,7 @@ The Number Field component follows a composable pattern with multiple sub-compon
 
 Root container directive that manages the numeric state and provides context to child components.
 
-**Selector:** `[sc-number-field]`
+**Selector:** `[scNumberField]`
 
 **Inputs:**
 
@@ -66,7 +66,7 @@ Root container directive that manages the numeric state and provides context to 
 
 An interactive area (typically wrapping a label) that allows users to scrub (drag) to change the value.
 
-**Selector:** `[sc-number-field-scrub-area]`
+**Selector:** `[scNumberFieldScrubArea]`
 
 **Features:**
 
@@ -85,7 +85,7 @@ An interactive area (typically wrapping a label) that allows users to scrub (dra
 
 Container for grouping the input field with increment/decrement buttons.
 
-**Selector:** `[sc-number-field-group]`
+**Selector:** `[scNumberFieldGroup]`
 
 **Inputs:**
 
@@ -97,7 +97,7 @@ Container for grouping the input field with increment/decrement buttons.
 
 The input field for displaying and editing the numeric value.
 
-**Selector:** `input[sc-number-field-input]`
+**Selector:** `input[scNumberFieldInput]`
 
 **Features:**
 
@@ -116,7 +116,7 @@ The input field for displaying and editing the numeric value.
 
 Button to increase the value by the step amount.
 
-**Selector:** `button[sc-number-field-increment]`
+**Selector:** `button[scNumberFieldIncrement]`
 
 **Features:**
 
@@ -134,7 +134,7 @@ Button to increase the value by the step amount.
 
 Button to decrease the value by the step amount.
 
-**Selector:** `button[sc-number-field-decrement]`
+**Selector:** `button[scNumberFieldDecrement]`
 
 **Features:**
 
@@ -153,15 +153,15 @@ Button to decrease the value by the step amount.
 ### Basic with Label
 
 ```html
-<div sc-number-field [(value)]="count" [min]="0" [max]="100">
-  <div sc-number-field-scrub-area>
-    <label sc-label>Count</label>
+<div scNumberField [(value)]="count" [min]="0" [max]="100">
+  <div scNumberFieldScrubArea>
+    <label scLabel>Count</label>
   </div>
 
-  <div sc-number-field-group>
-    <button sc-number-field-decrement></button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment></button>
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -169,15 +169,15 @@ Button to decrease the value by the step amount.
 ### With Custom Step
 
 ```html
-<div sc-number-field [(value)]="price" [step]="0.5" [min]="0">
-  <div sc-number-field-scrub-area>
-    <label sc-label>Price</label>
+<div scNumberField [(value)]="price" [step]="0.5" [min]="0">
+  <div scNumberFieldScrubArea>
+    <label scLabel>Price</label>
   </div>
 
-  <div sc-number-field-group>
-    <button sc-number-field-decrement></button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment></button>
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -185,15 +185,15 @@ Button to decrease the value by the step amount.
 ### Decimal Values with Formatting
 
 ```html
-<div sc-number-field [(value)]="amount" [step]="0.01" [min]="0" [formatOptions]="{ minimumFractionDigits: 2, maximumFractionDigits: 2 }">
-  <div sc-number-field-scrub-area>
-    <label sc-label>Amount ($)</label>
+<div scNumberField [(value)]="amount" [step]="0.01" [min]="0" [formatOptions]="{ minimumFractionDigits: 2, maximumFractionDigits: 2 }">
+  <div scNumberFieldScrubArea>
+    <label scLabel>Amount ($)</label>
   </div>
 
-  <div sc-number-field-group>
-    <button sc-number-field-decrement></button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment></button>
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -201,15 +201,15 @@ Button to decrease the value by the step amount.
 ### Custom Scrub Speed
 
 ```html
-<div sc-number-field [(value)]="opacity" [min]="0" [max]="100" [scrubSpeed]="0.5">
-  <div sc-number-field-scrub-area>
-    <label sc-label>Opacity (%)</label>
+<div scNumberField [(value)]="opacity" [min]="0" [max]="100" [scrubSpeed]="0.5">
+  <div scNumberFieldScrubArea>
+    <label scLabel>Opacity (%)</label>
   </div>
 
-  <div sc-number-field-group>
-    <button sc-number-field-decrement></button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment></button>
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -217,15 +217,15 @@ Button to decrease the value by the step amount.
 ### Disabled State
 
 ```html
-<div sc-number-field [value]="10" [disabled]="true">
-  <div sc-number-field-scrub-area>
-    <label sc-label>Locked Value</label>
+<div scNumberField [value]="10" [disabled]="true">
+  <div scNumberFieldScrubArea>
+    <label scLabel>Locked Value</label>
   </div>
 
-  <div sc-number-field-group>
-    <button sc-number-field-decrement></button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment></button>
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -233,11 +233,11 @@ Button to decrease the value by the step amount.
 ### Without Label (Input Group Only)
 
 ```html
-<div sc-number-field [(value)]="quantity" [min]="1" [max]="10">
-  <div sc-number-field-group>
-    <button sc-number-field-decrement></button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment></button>
+<div scNumberField [(value)]="quantity" [min]="1" [max]="10">
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement></button>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement></button>
   </div>
 </div>
 ```
@@ -245,17 +245,17 @@ Button to decrease the value by the step amount.
 ### Custom Icons
 
 ```html
-<div sc-number-field [(value)]="volume">
-  <div sc-number-field-scrub-area>
-    <label sc-label>Volume</label>
+<div scNumberField [(value)]="volume">
+  <div scNumberFieldScrubArea>
+    <label scLabel>Volume</label>
   </div>
 
-  <div sc-number-field-group>
-    <button sc-number-field-decrement>
+  <div scNumberFieldGroup>
+    <button scNumberFieldDecrement>
       <svg><!-- Custom minus icon --></svg>
     </button>
-    <input sc-number-field-input />
-    <button sc-number-field-increment>
+    <input scNumberFieldInput />
+    <button scNumberFieldIncrement>
       <svg><!-- Custom plus icon --></svg>
     </button>
   </div>
@@ -266,15 +266,15 @@ Button to decrease the value by the step amount.
 
 ```html
 <div class="space-y-2">
-  <div sc-number-field [(value)]="age" [min]="0" [max]="120">
-    <div sc-number-field-scrub-area>
-      <label sc-label>Age</label>
+  <div scNumberField [(value)]="age" [min]="0" [max]="120">
+    <div scNumberFieldScrubArea>
+      <label scLabel>Age</label>
     </div>
 
-    <div sc-number-field-group>
-      <button sc-number-field-decrement></button>
-      <input sc-number-field-input />
-      <button sc-number-field-increment></button>
+    <div scNumberFieldGroup>
+      <button scNumberFieldDecrement></button>
+      <input scNumberFieldInput />
+      <button scNumberFieldIncrement></button>
     </div>
   </div>
   <p class="text-sm text-muted-foreground">Your age in years</p>

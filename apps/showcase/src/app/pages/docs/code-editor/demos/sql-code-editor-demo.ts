@@ -21,16 +21,16 @@ import {
     ScCodeEditorCopyButton,
   ],
   template: `
-    <div sc-code-editor>
-      <div sc-code-editor-header>
+    <div scCodeEditor>
+      <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
           <span class="text-sm text-muted-foreground">query.sql</span>
-          <span sc-code-editor-label>sql</span>
+          <span scCodeEditorLabel>sql</span>
         </div>
-        <button sc-code-editor-copy-button [code]="sqlCode"></button>
+        <button scCodeEditorCopyButton [code]="sqlCode"></button>
       </div>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="sqlCode"
         language="sql"
         filename="query.sql"

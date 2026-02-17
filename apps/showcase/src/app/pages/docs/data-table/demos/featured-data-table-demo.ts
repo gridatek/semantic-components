@@ -140,21 +140,21 @@ const SAMPLE_DATA: User[] = [
     ScDataTablePagination,
   ],
   template: `
-    <div sc-data-table [data]="data" [columns]="columns">
+    <div scDataTable [data]="data" [columns]="columns">
       <div class="flex items-center justify-between py-4">
         <input
-          sc-data-table-filter
+          scDataTableFilter
           placeholder="Search all columns..."
           class="max-w-sm"
         />
-        <div sc-data-table-column-toggle></div>
+        <div scDataTableColumnToggle></div>
       </div>
 
       <div class="rounded-md border">
         <table class="w-full caption-bottom text-sm">
-          <thead sc-data-table-header>
+          <thead scDataTableHeader>
             <tr>
-              <th sc-data-table-head class="w-[50px]">
+              <th scDataTableHead class="w-[50px]">
                 <input
                   type="checkbox"
                   class="size-4 rounded border-primary"
@@ -163,27 +163,27 @@ const SAMPLE_DATA: User[] = [
                   (change)="toggleAllSelection()"
                 />
               </th>
-              <th sc-data-table-head columnId="name" [sortable]="true">Name</th>
-              <th sc-data-table-head columnId="email" [sortable]="true">
+              <th scDataTableHead columnId="name" [sortable]="true">Name</th>
+              <th scDataTableHead columnId="email" [sortable]="true">
                 Email
               </th>
-              <th sc-data-table-head columnId="role" [sortable]="true">Role</th>
-              <th sc-data-table-head columnId="status" [sortable]="true">
+              <th scDataTableHead columnId="role" [sortable]="true">Role</th>
+              <th scDataTableHead columnId="status" [sortable]="true">
                 Status
               </th>
-              <th sc-data-table-head columnId="createdAt" [sortable]="true">
+              <th scDataTableHead columnId="createdAt" [sortable]="true">
                 Created
               </th>
-              <th sc-data-table-head class="w-[80px]">Actions</th>
+              <th scDataTableHead class="w-[80px]">Actions</th>
             </tr>
           </thead>
-          <tbody sc-data-table-body>
+          <tbody scDataTableBody>
             @for (row of paginatedData(); track row.id) {
               <tr
-                sc-data-table-row
+                scDataTableRow
                 [selected]="rowSelection().has(getRowIndex(row))"
               >
-                <td sc-data-table-cell>
+                <td scDataTableCell>
                   <input
                     type="checkbox"
                     class="size-4 rounded border-primary"
@@ -191,9 +191,9 @@ const SAMPLE_DATA: User[] = [
                     (change)="toggleRowSelection(getRowIndex(row))"
                   />
                 </td>
-                <td sc-data-table-cell class="font-medium">{{ row.name }}</td>
-                <td sc-data-table-cell>{{ row.email }}</td>
-                <td sc-data-table-cell>
+                <td scDataTableCell class="font-medium">{{ row.name }}</td>
+                <td scDataTableCell>{{ row.email }}</td>
+                <td scDataTableCell>
                   <span
                     class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
                     [class]="getRoleBadgeClass(row.role)"
@@ -201,7 +201,7 @@ const SAMPLE_DATA: User[] = [
                     {{ row.role }}
                   </span>
                 </td>
-                <td sc-data-table-cell>
+                <td scDataTableCell>
                   <span
                     class="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium"
                     [class]="getStatusBadgeClass(row.status)"
@@ -213,8 +213,8 @@ const SAMPLE_DATA: User[] = [
                     {{ row.status }}
                   </span>
                 </td>
-                <td sc-data-table-cell>{{ formatDate(row.createdAt) }}</td>
-                <td sc-data-table-cell>
+                <td scDataTableCell>{{ formatDate(row.createdAt) }}</td>
+                <td scDataTableCell>
                   <button
                     type="button"
                     class="inline-flex size-8 items-center justify-center rounded-md hover:bg-muted"
@@ -246,7 +246,7 @@ const SAMPLE_DATA: User[] = [
       </div>
 
       <div
-        sc-data-table-pagination
+        scDataTablePagination
         [(pageSize)]="pageSize"
         [(currentPage)]="currentPage"
       ></div>

@@ -32,7 +32,7 @@ import { ScSwitch } from '@semantic-components/ui-lab';
   imports: [ScSwitch],
   template: \`
     <div class="flex items-center space-x-2">
-      <button sc-switch [(checked)]="notifications" id="notifications"></button>
+      <button scSwitch [(checked)]="notifications" id="notifications"></button>
       <label for="notifications" class="text-sm font-medium leading-none">
         Notifications: {{ notifications() ? 'On' : 'Off' }}
       </label>

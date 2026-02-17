@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE } from './data-table';
 
 @Component({
-  selector: '[sc-data-table-pagination]',
+  selector: '[scDataTablePagination]',
   template: `
     <div class="flex items-center justify-between px-2">
       <div class="text-sm text-muted-foreground">

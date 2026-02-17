@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: '[sc-field-group]',
+  selector: '[scFieldGroup]',
   host: {
     'data-slot': 'field-group',
     '[class]': 'class()',

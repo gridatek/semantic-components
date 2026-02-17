@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: '[sc-popover-title]',
+  selector: '[scPopoverTitle]',
   host: {
     'data-slot': 'popover-title',
     '[class]': 'class()',

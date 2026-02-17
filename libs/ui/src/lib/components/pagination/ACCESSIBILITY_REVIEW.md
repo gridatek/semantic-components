@@ -220,7 +220,7 @@ Add an `aria-live` region that announces page changes:
 ```typescript
 // pagination.ts
 @Directive({
-  selector: 'nav[sc-pagination]',
+  selector: 'nav[scPagination]',
   host: {
     // ... existing bindings
   },
@@ -238,7 +238,7 @@ Add an `aria-live` region that announces page changes:
 
 ```typescript
 @Component({
-  selector: 'nav[sc-pagination]',
+  selector: 'nav[scPagination]',
   template: `
     <div aria-live="polite" aria-atomic="true" class="sr-only">
       Page {{ currentPage() }} of {{ totalPages() }}
@@ -252,7 +252,7 @@ Add an `aria-live` region that announces page changes:
 
 ```html
 <!-- Demo template -->
-<nav sc-pagination #pagination="scPagination" ...>
+<nav scPagination #pagination="scPagination" ...>
   <div aria-live="polite" aria-atomic="true" class="sr-only">Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}</div>
   <!-- ... pagination content ... -->
 </nav>

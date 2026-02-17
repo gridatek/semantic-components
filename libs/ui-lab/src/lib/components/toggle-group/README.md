@@ -11,17 +11,17 @@ A set of two-state buttons that can be toggled on or off.
 
 ```html
 <!-- Single selection -->
-<div sc-toggle-group type="single" [(value)]="alignment" aria-label="Text alignment">
-  <button sc-toggle-group-item value="left" aria-label="Align left">Left</button>
-  <button sc-toggle-group-item value="center" aria-label="Align center">Center</button>
-  <button sc-toggle-group-item value="right" aria-label="Align right">Right</button>
+<div scToggleGroup type="single" [(value)]="alignment" aria-label="Text alignment">
+  <button scToggleGroupItem value="left" aria-label="Align left">Left</button>
+  <button scToggleGroupItem value="center" aria-label="Align center">Center</button>
+  <button scToggleGroupItem value="right" aria-label="Align right">Right</button>
 </div>
 
 <!-- Multiple selection -->
-<div sc-toggle-group type="multiple" [(value)]="formatting" aria-label="Text formatting">
-  <button sc-toggle-group-item value="bold" aria-label="Toggle bold">B</button>
-  <button sc-toggle-group-item value="italic" aria-label="Toggle italic">I</button>
-  <button sc-toggle-group-item value="underline" aria-label="Toggle underline">U</button>
+<div scToggleGroup type="multiple" [(value)]="formatting" aria-label="Text formatting">
+  <button scToggleGroupItem value="bold" aria-label="Toggle bold">B</button>
+  <button scToggleGroupItem value="italic" aria-label="Toggle italic">I</button>
+  <button scToggleGroupItem value="underline" aria-label="Toggle underline">U</button>
 </div>
 ```
 
@@ -29,39 +29,39 @@ A set of two-state buttons that can be toggled on or off.
 
 ```html
 <!-- Default -->
-<div sc-toggle-group type="single">
-  <button sc-toggle-group-item value="a">A</button>
-  <button sc-toggle-group-item value="b">B</button>
+<div scToggleGroup type="single">
+  <button scToggleGroupItem value="a">A</button>
+  <button scToggleGroupItem value="b">B</button>
 </div>
 
 <!-- Outline -->
-<div sc-toggle-group type="single" variant="outline">
-  <button sc-toggle-group-item value="a">A</button>
-  <button sc-toggle-group-item value="b">B</button>
+<div scToggleGroup type="single" variant="outline">
+  <button scToggleGroupItem value="a">A</button>
+  <button scToggleGroupItem value="b">B</button>
 </div>
 ```
 
 ## Sizes
 
 ```html
-<div sc-toggle-group type="single" size="sm">...</div>
-<div sc-toggle-group type="single" size="default">...</div>
-<div sc-toggle-group type="single" size="lg">...</div>
+<div scToggleGroup type="single" size="sm">...</div>
+<div scToggleGroup type="single" size="default">...</div>
+<div scToggleGroup type="single" size="lg">...</div>
 ```
 
 ## Disabled
 
 ```html
 <!-- Disable entire group -->
-<div sc-toggle-group type="single" [disabled]="true">
-  <button sc-toggle-group-item value="a">A</button>
-  <button sc-toggle-group-item value="b">B</button>
+<div scToggleGroup type="single" [disabled]="true">
+  <button scToggleGroupItem value="a">A</button>
+  <button scToggleGroupItem value="b">B</button>
 </div>
 
 <!-- Disable individual items -->
-<div sc-toggle-group type="single">
-  <button sc-toggle-group-item value="a">A</button>
-  <button sc-toggle-group-item value="b" [disabled]="true">B</button>
+<div scToggleGroup type="single">
+  <button scToggleGroupItem value="a">A</button>
+  <button scToggleGroupItem value="b" [disabled]="true">B</button>
 </div>
 ```
 

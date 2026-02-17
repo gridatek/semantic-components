@@ -35,8 +35,8 @@ import { ScKbd } from '@semantic-components/ui';
   imports: [ScKbd],
   template: \`
     <div class="flex items-center gap-4">
-      <kbd sc-kbd>⌘</kbd>
-      <kbd sc-kbd>K</kbd>
+      <kbd scKbd>⌘</kbd>
+      <kbd scKbd>K</kbd>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

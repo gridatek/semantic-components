@@ -11,7 +11,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-select-list]',
+  selector: 'div[scSelectList]',
   imports: [],
   template: `
     <ng-content />

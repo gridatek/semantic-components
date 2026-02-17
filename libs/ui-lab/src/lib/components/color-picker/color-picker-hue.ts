@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
 @Component({
-  selector: '[sc-color-picker-hue]',
+  selector: '[scColorPickerHue]',
   template: `
     <div
       class="relative h-full w-full cursor-pointer rounded-md"

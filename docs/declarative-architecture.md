@@ -50,8 +50,8 @@ export class MyComponent {
 <!-- Template -->
 <button (click)="dialogOpen.set(true)">Open Dialog</button>
 
-<div sc-dialog [open]="dialogOpen()">
-  <div sc-dialog-content>{{ message() }}</div>
+<div scDialog [open]="dialogOpen()">
+  <div scDialogContent>{{ message() }}</div>
 </div>
 ```
 
@@ -71,18 +71,18 @@ Components don't have `.open()`, `.show()`, or `.close()` methods. Instead, they
 
 ```html
 <!-- Dialog -->
-<div sc-dialog [open]="isDialogOpen()">
-  <div sc-dialog-content>Content</div>
+<div scDialog [open]="isDialogOpen()">
+  <div scDialogContent>Content</div>
 </div>
 
 <!-- Sheet -->
-<div sc-sheet [open]="isSheetOpen()">
-  <div sc-sheet-content>Content</div>
+<div scSheet [open]="isSheetOpen()">
+  <div scSheetContent>Content</div>
 </div>
 
 <!-- Popover -->
-<div sc-popover [open]="isPopoverOpen()">
-  <div sc-popover-content>Content</div>
+<div scPopover [open]="isPopoverOpen()">
+  <div scPopoverContent>Content</div>
 </div>
 ```
 
@@ -94,8 +94,8 @@ Everything rendered should be visible in the template:
 
 ```html
 @if (showDialog()) {
-<div sc-dialog [open]="true">
-  <div sc-dialog-content>{{ dialogMessage() }}</div>
+<div scDialog [open]="true">
+  <div scDialogContent>{{ dialogMessage() }}</div>
 </div>
 }
 ```
@@ -134,9 +134,9 @@ export class MyComponent {
 ```
 
 ```html
-<div sc-dialog [open]="isOpen()">
-  <div sc-dialog-header>Data</div>
-  <div sc-dialog-content>
+<div scDialog [open]="isOpen()">
+  <div scDialogHeader>Data</div>
+  <div scDialogContent>
     @if (hasData()) {
     <ul>
       @for (item of data(); track item) {
@@ -147,7 +147,7 @@ export class MyComponent {
     <p>No data</p>
     }
   </div>
-  <div sc-dialog-footer>
+  <div scDialogFooter>
     <button (click)="close()">Close</button>
   </div>
 </div>
@@ -163,7 +163,7 @@ The `ScThemeToggle` component needs to display different icons based on the curr
 
 ```typescript
 @Component({
-  selector: 'button[sc-theme-toggle]',
+  selector: 'button[scThemeToggle]',
   template: `
     <svg *ngIf="isDark"><!-- Sun icon --></svg>
     <svg *ngIf="!isDark"><!-- Moon icon --></svg>
@@ -181,7 +181,7 @@ export class ScThemeToggle {
 **Usage:**
 
 ```html
-<button sc-theme-toggle></button>
+<button scThemeToggle></button>
 ```
 
 **Problem:** The consumer has no control over the icons. The template is hidden inside the component.
@@ -190,7 +190,7 @@ export class ScThemeToggle {
 
 ```typescript
 @Component({
-  selector: 'button[sc-theme-toggle]',
+  selector: 'button[scThemeToggle]',
   exportAs: 'scThemeToggle',
   template: `
     <ng-content />
@@ -211,7 +211,7 @@ export class ScThemeToggle {
 **Usage:**
 
 ```html
-<button sc-theme-toggle #themeToggle="scThemeToggle">
+<button scThemeToggle #themeToggle="scThemeToggle">
   @if (themeToggle.isDark()) {
   <svg><!-- Sun icon --></svg>
   } @else {
@@ -233,7 +233,7 @@ export class ScThemeToggle {
 **With Custom Icons:**
 
 ```html
-<button sc-theme-toggle #toggle="scThemeToggle">
+<button scThemeToggle #toggle="scThemeToggle">
   @if (toggle.isDark()) {
   <svg si-sun-icon class="size-5"></svg>
   } @else {
@@ -245,7 +245,7 @@ export class ScThemeToggle {
 **With Text:**
 
 ```html
-<button sc-theme-toggle #toggle="scThemeToggle" class="gap-2">
+<button scThemeToggle #toggle="scThemeToggle" class="gap-2">
   @if (toggle.isDark()) {
   <svg si-sun-icon></svg>
   <span>Light</span>
@@ -259,7 +259,7 @@ export class ScThemeToggle {
 **With Custom Logic:**
 
 ```html
-<button sc-theme-toggle #toggle="scThemeToggle">
+<button scThemeToggle #toggle="scThemeToggle">
   @switch (theme()) { @case ('light') {
   <svg si-sun-icon></svg>
   } @case ('dark') {
@@ -295,7 +295,7 @@ Use `exportAs` and template references to expose component state:
 
 ```typescript
 @Component({
-  selector: 'button[sc-theme-toggle]',
+  selector: 'button[scThemeToggle]',
   exportAs: 'scThemeToggle', // 👈 Export as
 })
 export class ScThemeToggle {
@@ -304,7 +304,7 @@ export class ScThemeToggle {
 ```
 
 ```html
-<button sc-theme-toggle #toggle="scThemeToggle">{{ toggle.isDark() ? 'Light' : 'Dark' }}</button>
+<button scThemeToggle #toggle="scThemeToggle">{{ toggle.isDark() ? 'Light' : 'Dark' }}</button>
 ```
 
 ### When to Make Properties Public
@@ -364,10 +364,10 @@ export class MyComponent {
 ```html
 <button (click)="dialogOpen.set(true)">Open</button>
 
-<div sc-dialog [open]="dialogOpen()">
-  <div sc-dialog-header>Confirm</div>
-  <div sc-dialog-content>{{ message() }}</div>
-  <div sc-dialog-footer>
+<div scDialog [open]="dialogOpen()">
+  <div scDialogHeader>Confirm</div>
+  <div scDialogContent>{{ message() }}</div>
+  <div scDialogFooter>
     <button (click)="dialogOpen.set(false)">Cancel</button>
     <button (click)="confirm()">Confirm</button>
   </div>
@@ -444,7 +444,7 @@ export class ScThemeToggle {
  *
  * @example
  * ```html
- * <button sc-theme-toggle #toggle="scThemeToggle">
+ * <button scThemeToggle #toggle="scThemeToggle">
  *   @if (toggle.isDark()) {
  *     <svg>Sun</svg>
  *   } @else {
@@ -499,7 +499,7 @@ Move logic to template:
 <!-- After -->
 <button (click)="dialogOpen.set(true)">Open</button>
 
-<div sc-dialog [open]="dialogOpen()">
+<div scDialog [open]="dialogOpen()">
   <!-- content -->
 </div>
 ```
@@ -510,10 +510,10 @@ Replace hidden templates with consumer-provided content:
 
 ```html
 <!-- Before (hidden in component) -->
-<button sc-theme-toggle></button>
+<button scThemeToggle></button>
 
 <!-- After (visible in template) -->
-<button sc-theme-toggle #toggle="scThemeToggle">
+<button scThemeToggle #toggle="scThemeToggle">
   @if (toggle.isDark()) {
   <svg>Sun</svg>
   }
@@ -559,10 +559,10 @@ openDialog() {
 ```html
 <button (click)="dialogOpen.set(true)">Open</button>
 
-<div sc-dialog [open]="dialogOpen()">
-  <div sc-dialog-header>Title</div>
-  <div sc-dialog-content>Content</div>
-  <div sc-dialog-footer>
+<div scDialog [open]="dialogOpen()">
+  <div scDialogHeader>Title</div>
+  <div scDialogContent>Content</div>
+  <div scDialogFooter>
     <button (click)="dialogOpen.set(false)">Close</button>
   </div>
 </div>

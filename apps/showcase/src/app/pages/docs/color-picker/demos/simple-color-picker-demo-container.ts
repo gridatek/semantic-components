@@ -43,14 +43,14 @@ import {
   template: \`
     <div class="max-w-xs">
       <div
-        sc-color-picker
+        scColorPicker
         [(value)]="color"
         class="space-y-4 rounded-lg border p-4"
       >
-        <div sc-color-picker-swatches [colors]="swatches"></div>
+        <div scColorPickerSwatches [colors]="swatches"></div>
         <div class="flex items-center gap-3">
-          <div sc-color-picker-preview></div>
-          <input sc-color-picker-input format="hex" class="flex-1" />
+          <div scColorPickerPreview></div>
+          <input scColorPickerInput format="hex" class="flex-1" />
         </div>
       </div>
     </div>

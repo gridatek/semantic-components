@@ -54,7 +54,7 @@ All 7 demo files updated to use the new composable pattern:
 All demos now:
 
 - Import all required directive sub-components
-- Use `<div sc-stat-card>` instead of `<sc-stat-card>`
+- Use `<div scStatCard>` instead of `<sc-stat-card>`
 - Use content projection for all content
 - Include inline SVG icons (no more `innerHTML`)
 - Follow consistent structure pattern
@@ -78,26 +78,26 @@ All demos now:
 ### After (New API)
 
 ```html
-<div sc-stat-card variant="default" size="md">
+<div scStatCard variant="default" size="md">
   <div class="flex items-start justify-between">
     <div class="space-y-1">
-      <p sc-stat-card-label size="md">Total Revenue</p>
-      <p sc-stat-card-value size="md">$45,231.89</p>
+      <p scStatCardLabel size="md">Total Revenue</p>
+      <p scStatCardValue size="md">$45,231.89</p>
     </div>
-    <div sc-stat-card-icon size="md">
+    <div scStatCardIcon size="md">
       <svg><!-- custom icon --></svg>
     </div>
   </div>
 
   <div class="mt-3 flex items-center gap-2">
-    <span sc-stat-card-change trend="up">
+    <span scStatCardChange trend="up">
       <svg><!-- arrow icon --></svg>
       <span>+20.1%</span>
     </span>
     <span class="text-xs text-muted-foreground">from last month</span>
   </div>
 
-  <p sc-stat-card-description>Revenue increased</p>
+  <p scStatCardDescription>Revenue increased</p>
 </div>
 ```
 
@@ -192,7 +192,7 @@ Follows the same pattern as:
 **Migration Required:**
 
 - Update imports to include sub-directives
-- Replace `<sc-stat-card>` with `<div sc-stat-card>`
+- Replace `<sc-stat-card>` with `<div scStatCard>`
 - Use content projection instead of inputs
 - Convert icon strings to inline SVG
 

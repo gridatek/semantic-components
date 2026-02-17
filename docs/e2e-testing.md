@@ -31,7 +31,7 @@ npx nx run showcase-e2e:e2e-ci
 ## Fixing Common Issues
 
 - **Timeout:** The dev server may be slow to start. Check that `showcase` or `blocks` app serves correctly on its own first (`npx nx run showcase:serve`).
-- **Selector not found:** Inspect the page manually; component selectors use `[sc-*]` attributes (e.g., `button[sc-button]`).
+- **Selector not found:** Inspect the page manually; component selectors use `[sc-*]` attributes (e.g., `button[scButton]`).
 - **Flaky tests:** Use `await expect(...).toHaveText()` (auto-retrying) instead of raw `innerText()` checks.
 - **Wrong base URL:** Override with `BASE_URL` env var if ports differ.
 
@@ -48,7 +48,7 @@ test.describe('My Component Demo', () => {
   });
 
   test('should render correctly', async ({ page }) => {
-    await expect(page.locator('[sc-my-component]')).toBeVisible();
+    await expect(page.locator('[scMyComponent]')).toBeVisible();
   });
 });
 ```

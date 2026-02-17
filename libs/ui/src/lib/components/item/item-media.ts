@@ -22,7 +22,7 @@ export const itemMediaVariants = cva(
 export type ScItemMediaVariants = VariantProps<typeof itemMediaVariants>;
 
 @Directive({
-  selector: 'div[sc-item-media]',
+  selector: 'div[scItemMedia]',
   host: {
     'data-slot': 'item-media',
     '[attr.data-variant]': 'variant()',

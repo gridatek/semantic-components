@@ -34,7 +34,7 @@ interface Item {
       </div>
 
       <div
-        sc-infinite-scroll-loader
+        scInfiniteScrollLoader
         class="flex items-center justify-center py-4 gap-2"
       >
         <div

@@ -12,16 +12,16 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-label-input-demo',
   imports: [FormField, ScField, ScFieldError, ScInput, ScLabel],
   template: `
-    <div sc-field>
-      <label sc-label>Email</label>
+    <div scField>
+      <label scLabel>Email</label>
       <input
-        sc-input
+        scInput
         type="email"
         [formField]="emailForm.email"
         placeholder="Email"
       />
       @for (error of emailForm.email().errors(); track error.kind) {
-        <p sc-field-error>{{ error.message }}</p>
+        <p scFieldError>{{ error.message }}</p>
       }
     </div>
     <pre class="mt-4 text-xs">

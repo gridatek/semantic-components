@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-slider-thumb]',
+  selector: 'div[scSliderThumb]',
   host: {
     'data-slot': 'slider-thumb',
     '[class]': 'class()',

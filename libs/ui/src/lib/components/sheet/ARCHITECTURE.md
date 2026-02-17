@@ -244,7 +244,7 @@ protected readonly class = computed(() =>
 
 **Animation Flow:**
 
-1. Provider renders: `<div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>`
+1. Provider renders: `<div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>`
 2. ScBackdrop receives `open` input
 3. Sets `data-state` based on `open` value
 4. Tailwind applies appropriate animation classes
@@ -438,7 +438,7 @@ The provider's template includes the backdrop and focus trap, projecting the con
 ```html
 <ng-content />
 <ng-template #overlayTemplate>
-  <div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
+  <div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
   <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
     <ng-container [ngTemplateOutlet]="sheetPortal().templateRef" />
   </div>
@@ -485,7 +485,7 @@ The provider directly handles backdrop animation completion in its template -- n
 
 ```html
 <!-- In provider's overlay template -->
-<div sc-backdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
+<div scBackdrop [open]="open()" (animationComplete)="onBackdropAnimationComplete()"></div>
 ```
 
 ```typescript
@@ -775,18 +775,18 @@ The animation system preserves accessibility:
 ## Consumer API
 
 ```html
-<div sc-sheet-provider [(open)]="isOpen" side="right">
-  <button sc-sheet-trigger sc-button>Open</button>
+<div scSheetProvider [(open)]="isOpen" side="right">
+  <button scSheetTrigger scButton>Open</button>
   <ng-template scSheetPortal>
-    <div sc-sheet>
-      <button sc-sheet-close>...</button>
-      <div sc-sheet-header>
-        <h2 sc-sheet-title>Title</h2>
-        <p sc-sheet-description>Description</p>
+    <div scSheet>
+      <button scSheetClose>...</button>
+      <div scSheetHeader>
+        <h2 scSheetTitle>Title</h2>
+        <p scSheetDescription>Description</p>
       </div>
       <!-- content -->
-      <div sc-sheet-footer>
-        <button sc-button>Save</button>
+      <div scSheetFooter>
+        <button scButton>Save</button>
       </div>
     </div>
   </ng-template>
@@ -885,7 +885,7 @@ describe('Sheet Animations', () => {
     provider.open.set(true);
     fixture.detectChanges();
 
-    const sheet = fixture.debugElement.query(By.css('[sc-sheet]'));
+    const sheet = fixture.debugElement.query(By.css('[scSheet]'));
     expect(sheet.nativeElement.classList.contains('slide-in-from-left')).toBe(true);
   });
 });

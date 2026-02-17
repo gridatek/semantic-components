@@ -44,7 +44,7 @@ Custom loading indicator. Place inside `ScInfiniteScroll`.
 <sc-infinite-scroll [loading]="loading()" (loadMore)="load()">
   <!-- content -->
 
-  <div sc-infinite-scroll-loader class="flex items-center gap-2 py-4">
+  <div scInfiniteScrollLoader class="flex items-center gap-2 py-4">
     <div class="size-2 bg-primary rounded-full animate-bounce"></div>
     <div class="size-2 bg-primary rounded-full animate-bounce"></div>
     <div class="size-2 bg-primary rounded-full animate-bounce"></div>
@@ -60,7 +60,7 @@ Custom end message. Place inside `ScInfiniteScroll`.
 <sc-infinite-scroll [hasReachedEnd]="reachedEnd()" (loadMore)="load()">
   <!-- content -->
 
-  <div sc-infinite-scroll-end class="py-4 text-center">You've reached the end!</div>
+  <div scInfiniteScrollEnd class="py-4 text-center">You've reached the end!</div>
 </sc-infinite-scroll>
 ```
 

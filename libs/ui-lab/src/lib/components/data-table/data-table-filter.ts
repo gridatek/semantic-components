@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE } from './data-table';
 
 @Component({
-  selector: 'input[sc-data-table-filter]',
+  selector: 'input[scDataTableFilter]',
   template: ``,
   host: {
     'data-slot': 'data-table-filter',

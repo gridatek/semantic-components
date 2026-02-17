@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { ScCommand } from './command';
 
 @Component({
-  selector: 'div[sc-command-input]',
+  selector: 'div[scCommandInput]',
   template: `
     <svg
       class="mr-2 size-4 shrink-0 opacity-50"

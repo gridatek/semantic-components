@@ -15,7 +15,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 @Component({
   imports: [ScThemeToggle, SiSunIcon, SiMoonIcon],
   template: `
-    <button sc-theme-toggle #toggle="scThemeToggle">
+    <button scThemeToggle #toggle="scThemeToggle">
       @if (toggle.isDark()) {
         <svg si-sun-icon></svg>
       } @else {
@@ -31,7 +31,7 @@ export class MyComponent {}
 
 ```html
 <!-- Default variant -->
-<button sc-theme-toggle variant="default" #toggle="scThemeToggle">
+<button scThemeToggle variant="default" #toggle="scThemeToggle">
   @if (toggle.isDark()) {
   <svg si-sun-icon></svg>
   } @else {
@@ -40,7 +40,7 @@ export class MyComponent {}
 </button>
 
 <!-- Outline variant -->
-<button sc-theme-toggle variant="outline" #toggle="scThemeToggle">
+<button scThemeToggle variant="outline" #toggle="scThemeToggle">
   @if (toggle.isDark()) {
   <svg si-sun-icon></svg>
   } @else {
@@ -49,7 +49,7 @@ export class MyComponent {}
 </button>
 
 <!-- Ghost variant -->
-<button sc-theme-toggle variant="ghost" #toggle="scThemeToggle">
+<button scThemeToggle variant="ghost" #toggle="scThemeToggle">
   @if (toggle.isDark()) {
   <svg si-sun-icon></svg>
   } @else {
@@ -61,7 +61,7 @@ export class MyComponent {}
 ### With Sizes
 
 ```html
-<button sc-theme-toggle size="sm" #toggle="scThemeToggle">
+<button scThemeToggle size="sm" #toggle="scThemeToggle">
   @if (toggle.isDark()) {
   <svg si-sun-icon></svg>
   } @else {
@@ -80,9 +80,9 @@ import { ScThemeField, ScThemeSelect } from '@semantic-components/ui-lab';
 @Component({
   imports: [ScThemeField, ScThemeSelect],
   template: `
-    <div sc-theme-field>
+    <div scThemeField>
       <label class="text-sm font-medium">Theme</label>
-      <select sc-theme-select>
+      <select scThemeSelect>
         <option value="light">Light</option>
         <option value="dark">Dark</option>
         <option value="system">System</option>
@@ -96,9 +96,9 @@ export class MyComponent {}
 With translations:
 
 ```html
-<div sc-theme-field>
+<div scThemeField>
   <label>Thème</label>
-  <select sc-theme-select>
+  <select scThemeSelect>
     <option value="light">Lumière</option>
     <option value="dark">Sombre</option>
     <option value="system">Système</option>
@@ -111,7 +111,7 @@ Without ScThemeField (custom layout, manual IDs):
 ```html
 <div class="custom-layout">
   <label for="my-theme">Choose theme</label>
-  <select sc-theme-select id="my-theme">
+  <select scThemeSelect id="my-theme">
     <option value="light">Light</option>
     <option value="dark">Dark</option>
     <option value="system">System</option>
@@ -151,7 +151,7 @@ export class MyComponent {
 
 A button that toggles between light and dark themes. Uses content projection for icons following the declarative architecture pattern.
 
-**Selector:** `button[sc-theme-toggle]`
+**Selector:** `button[scThemeToggle]`
 
 **Export As:** `scThemeToggle`
 
@@ -181,7 +181,7 @@ Use a template reference variable with `#toggle="scThemeToggle"` to access the `
 
 A dropdown select for choosing between light, dark, and system themes. Follows the composable pattern - consumers provide the label, options, and IDs for full control and i18n support.
 
-**Selector:** `select[sc-theme-select]`
+**Selector:** `select[scThemeSelect]`
 
 **Inputs:**
 
@@ -203,7 +203,7 @@ Consumers must provide the option elements via content projection. The values mu
 
 A container component for theme select with consistent spacing and automatic ID management.
 
-**Selector:** `div[sc-theme-field]`
+**Selector:** `div[scThemeField]`
 
 **Inputs:**
 

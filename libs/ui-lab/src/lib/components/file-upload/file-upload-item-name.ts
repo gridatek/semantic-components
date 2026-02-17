@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[sc-file-upload-item-name]',
+  selector: '[scFileUploadItemName]',
   host: {
     'data-slot': 'file-upload-item-name',
     '[class]': 'class()',

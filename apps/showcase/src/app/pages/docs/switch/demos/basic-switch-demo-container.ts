@@ -31,7 +31,7 @@ import { ScSwitch } from '@semantic-components/ui-lab';
   imports: [ScSwitch],
   template: \`
     <div class="flex items-center space-x-2">
-      <button sc-switch id="airplane-mode"></button>
+      <button scSwitch id="airplane-mode"></button>
       <label for="airplane-mode" class="text-sm font-medium leading-none">
         Airplane Mode
       </label>

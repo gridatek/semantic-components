@@ -35,10 +35,10 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-field-label-demo',
   imports: [ScField, ScInput, ScLabel, ScFieldDescription],
   template: \`
-    <div sc-field>
-      <label sc-label>Email</label>
-      <input sc-input type="email" placeholder="Enter your email" />
-      <p sc-field-description>
+    <div scField>
+      <label scLabel>Email</label>
+      <input scInput type="email" placeholder="Enter your email" />
+      <p scFieldDescription>
         The label automatically links to the input via the field context.
       </p>
     </div>

@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-editor-separator]',
+  selector: 'div[scEditorSeparator]',
   template: ``,
   host: {
     'data-slot': 'editor-separator',

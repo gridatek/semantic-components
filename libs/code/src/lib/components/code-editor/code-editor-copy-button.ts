@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'button[sc-code-editor-copy-button]',
+  selector: 'button[scCodeEditorCopyButton]',
   template: `
     @if (copied()) {
       <svg

@@ -47,20 +47,20 @@ import { ScLabel } from '@semantic-components/ui';
           (change)="toggleAll($event)"
           id="select-all"
         />
-        <label sc-label for="select-all">Select all</label>
+        <label scLabel for="select-all">Select all</label>
       </div>
       <div class="ml-6 flex flex-col gap-2">
         <div scCheckboxField>
           <input type="checkbox" scCheckbox [(checked)]="item1" id="item1" />
-          <label sc-label for="item1">Item 1</label>
+          <label scLabel for="item1">Item 1</label>
         </div>
         <div scCheckboxField>
           <input type="checkbox" scCheckbox [(checked)]="item2" id="item2" />
-          <label sc-label for="item2">Item 2</label>
+          <label scLabel for="item2">Item 2</label>
         </div>
         <div scCheckboxField>
           <input type="checkbox" scCheckbox [(checked)]="item3" id="item3" />
-          <label sc-label for="item3">Item 3</label>
+          <label scLabel for="item3">Item 3</label>
         </div>
       </div>
     </div>

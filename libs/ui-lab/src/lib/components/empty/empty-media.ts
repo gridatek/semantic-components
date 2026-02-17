@@ -4,7 +4,7 @@ import { cn } from '@semantic-components/ui';
 type EmptyMediaVariant = 'default' | 'icon';
 
 @Directive({
-  selector: 'div[sc-empty-media]',
+  selector: 'div[scEmptyMedia]',
   host: {
     'data-slot': 'empty-icon',
     '[attr.data-variant]': 'variant()',

@@ -11,7 +11,7 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
   template: `
     <div class="flex flex-wrap items-center gap-4">
       <button
-        sc-button
+        scButton
         variant="outline"
         scTooltipTrigger="Instant tooltip (no delay)"
         [tooltipDelay]="0"
@@ -19,14 +19,14 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
         No delay
       </button>
       <button
-        sc-button
+        scButton
         variant="outline"
         scTooltipTrigger="Default delay (200ms)"
       >
         Default (200ms)
       </button>
       <button
-        sc-button
+        scButton
         variant="outline"
         scTooltipTrigger="Slow tooltip (500ms)"
         [tooltipDelay]="500"

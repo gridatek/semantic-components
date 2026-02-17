@@ -21,16 +21,16 @@ import {
     ScCodeEditorCopyButton,
   ],
   template: `
-    <div sc-code-editor>
-      <div sc-code-editor-header>
+    <div scCodeEditor>
+      <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
           <span class="text-sm text-muted-foreground">script.py</span>
-          <span sc-code-editor-label>python</span>
+          <span scCodeEditorLabel>python</span>
         </div>
-        <button sc-code-editor-copy-button [code]="pythonCode"></button>
+        <button scCodeEditorCopyButton [code]="pythonCode"></button>
       </div>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="pythonCode"
         language="python"
         filename="script.py"

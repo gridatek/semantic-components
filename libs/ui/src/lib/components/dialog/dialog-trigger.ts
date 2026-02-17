@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScDialogProvider } from './dialog-provider';
 
 @Directive({
-  selector: 'button[sc-dialog-trigger]',
+  selector: 'button[scDialogTrigger]',
   host: {
     'data-slot': 'dialog-trigger',
     type: 'button',

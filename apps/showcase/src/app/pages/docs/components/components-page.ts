@@ -33,14 +33,14 @@ import { ComponentsService } from '../../../services/components.service';
       </div>
 
       <div
-        sc-toggle-group
+        scToggleGroup
         type="single"
         class="flex-wrap"
         [(value)]="filterCategory"
         aria-label="Filter components by category"
       >
         <button
-          sc-toggle-group-item
+          scToggleGroupItem
           value="All"
           class="data-[state=on]:border data-[state=on]:border-input"
         >
@@ -48,7 +48,7 @@ import { ComponentsService } from '../../../services/components.service';
         </button>
         @for (category of categories; track category) {
           <button
-            sc-toggle-group-item
+            scToggleGroupItem
             [value]="category"
             class="data-[state=on]:border data-[state=on]:border-input"
           >
@@ -72,7 +72,7 @@ import { ComponentsService } from '../../../services/components.service';
             <div class="mt-3 flex flex-wrap items-center gap-2">
               <app-component-status-badge [status]="item.status" />
               <span
-                sc-badge
+                scBadge
                 variant="outline"
                 [style.background-color]="categoryColor.bg"
                 [style.color]="categoryColor.text"
@@ -81,7 +81,7 @@ import { ComponentsService } from '../../../services/components.service';
                 {{ item.category }}
               </span>
               <span
-                sc-badge
+                scBadge
                 variant="outline"
                 [style.background-color]="libraryColors[item.library].bg"
                 [style.color]="libraryColors[item.library].text"

@@ -19,7 +19,7 @@ const sizeClasses: Record<ToggleGroupSize, string> = {
 };
 
 @Directive({
-  selector: 'button[sc-toggle-group-item]',
+  selector: 'button[scToggleGroupItem]',
   host: {
     'data-slot': 'toggle-group-item',
     type: 'button',

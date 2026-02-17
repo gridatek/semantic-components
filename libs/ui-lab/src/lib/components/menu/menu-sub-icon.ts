@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'svg[sc-menu-sub-icon]',
+  selector: 'svg[scMenuSubIcon]',
   host: {
     'data-slot': 'menu-sub-icon',
     '[class]': 'class()',

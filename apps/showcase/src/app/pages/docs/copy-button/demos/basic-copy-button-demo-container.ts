@@ -37,7 +37,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
           Click to copy "Hello, World!"
         </span>
         <button
-          sc-copy-button
+          scCopyButton
           [value]="'Hello, World!'"
           (copySuccess)="onCopy($event)"
         ></button>

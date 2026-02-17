@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'div[sc-radio-group]',
+  selector: 'div[scRadioGroup]',
   host: {
     'data-slot': 'radio-group',
     role: 'radiogroup',

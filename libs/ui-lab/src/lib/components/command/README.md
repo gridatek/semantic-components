@@ -30,15 +30,15 @@ ScCommand (Root)
 
 | Component               | Selector                     | Description                    |
 | ----------------------- | ---------------------------- | ------------------------------ |
-| `ScCommand`             | `div[sc-command]`            | Root wrapper with search state |
-| `ScCommandInput`        | `div[sc-command-input]`      | Search input with icon         |
-| `ScCommandList`         | `div[sc-command-list]`       | Scrollable results container   |
-| `ScCommandEmpty`        | `div[sc-command-empty]`      | Shown when no results match    |
-| `ScCommandGroup`        | `div[sc-command-group]`      | Group of related items         |
-| `ScCommandGroupHeading` | `[sc-command-group-heading]` | Group heading text             |
-| `ScCommandItem`         | `div[sc-command-item]`       | Individual command item        |
-| `ScCommandSeparator`    | `[sc-command-separator]`     | Visual separator               |
-| `ScCommandShortcut`     | `[sc-command-shortcut]`      | Keyboard shortcut display      |
+| `ScCommand`             | `div[scCommand]`            | Root wrapper with search state |
+| `ScCommandInput`        | `div[scCommandInput]`      | Search input with icon         |
+| `ScCommandList`         | `div[scCommandList]`       | Scrollable results container   |
+| `ScCommandEmpty`        | `div[scCommandEmpty]`      | Shown when no results match    |
+| `ScCommandGroup`        | `div[scCommandGroup]`      | Group of related items         |
+| `ScCommandGroupHeading` | `[scCommandGroupHeading]` | Group heading text             |
+| `ScCommandItem`         | `div[scCommandItem]`       | Individual command item        |
+| `ScCommandSeparator`    | `[scCommandSeparator]`     | Visual separator               |
+| `ScCommandShortcut`     | `[scCommandShortcut]`      | Keyboard shortcut display      |
 
 ## Inputs
 
@@ -70,21 +70,21 @@ ScCommand (Root)
 ### Basic Command
 
 ```html
-<div sc-command class="rounded-lg border shadow-md">
-  <div sc-command-input placeholder="Type a command..." />
-  <div sc-command-list>
-    <div sc-command-empty>No results found.</div>
-    <div sc-command-group>
-      <span sc-command-group-heading>Actions</span>
-      <div sc-command-item value="new file" (select)="newFile()">
+<div scCommand class="rounded-lg border shadow-md">
+  <div scCommandInput placeholder="Type a command..." />
+  <div scCommandList>
+    <div scCommandEmpty>No results found.</div>
+    <div scCommandGroup>
+      <span scCommandGroupHeading>Actions</span>
+      <div scCommandItem value="new file" (select)="newFile()">
         <svg>...</svg>
         <span>New File</span>
-        <span sc-command-shortcut>⌘N</span>
+        <span scCommandShortcut>⌘N</span>
       </div>
-      <div sc-command-item value="open file" (select)="openFile()">
+      <div scCommandItem value="open file" (select)="openFile()">
         <svg>...</svg>
         <span>Open File</span>
-        <span sc-command-shortcut>⌘O</span>
+        <span scCommandShortcut>⌘O</span>
       </div>
     </div>
   </div>
@@ -94,17 +94,17 @@ ScCommand (Root)
 ### With Multiple Groups
 
 ```html
-<div sc-command-list>
-  <div sc-command-group>
-    <span sc-command-group-heading>Suggestions</span>
-    <div sc-command-item value="calendar">Calendar</div>
-    <div sc-command-item value="calculator">Calculator</div>
+<div scCommandList>
+  <div scCommandGroup>
+    <span scCommandGroupHeading>Suggestions</span>
+    <div scCommandItem value="calendar">Calendar</div>
+    <div scCommandItem value="calculator">Calculator</div>
   </div>
-  <div sc-command-separator></div>
-  <div sc-command-group>
-    <span sc-command-group-heading>Settings</span>
-    <div sc-command-item value="profile">Profile</div>
-    <div sc-command-item value="billing">Billing</div>
+  <div scCommandSeparator></div>
+  <div scCommandGroup>
+    <span scCommandGroupHeading>Settings</span>
+    <div scCommandItem value="profile">Profile</div>
+    <div scCommandItem value="billing">Billing</div>
   </div>
 </div>
 ```
@@ -112,7 +112,7 @@ ScCommand (Root)
 ### With Keywords for Better Search
 
 ```html
-<div sc-command-item value="profile" [keywords]="['account', 'user', 'settings']" (select)="goToProfile()">Profile</div>
+<div scCommandItem value="profile" [keywords]="['account', 'user', 'settings']" (select)="goToProfile()">Profile</div>
 ```
 
 Items will match if the search query matches either the `value` or any of the `keywords`.
@@ -120,12 +120,12 @@ Items will match if the search query matches either the `value` or any of the `k
 ### In a Dialog
 
 ```html
-<div sc-dialog-provider [(open)]="open">
+<div scDialogProvider [(open)]="open">
   <ng-template scDialogPortal>
-    <div sc-dialog class="p-0">
-      <div sc-command>
-        <div sc-command-input />
-        <div sc-command-list>
+    <div scDialog class="p-0">
+      <div scCommand>
+        <div scCommandInput />
+        <div scCommandList>
           <!-- items -->
         </div>
       </div>

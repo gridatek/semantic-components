@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_STEPPER } from './stepper-types';
 
 @Component({
-  selector: 'button[sc-stepper-next]',
+  selector: 'button[scStepperNext]',
   template: `
     <ng-content />
   `,

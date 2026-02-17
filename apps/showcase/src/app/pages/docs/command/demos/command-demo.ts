@@ -43,21 +43,21 @@ interface CommandItem {
   template: `
     <div class="flex flex-col gap-8">
       <div class="w-full max-w-md">
-        <div sc-command class="rounded-lg border shadow-md">
-          <div sc-command-input placeholder="Type a command or search..."></div>
-          <div sc-command-list>
+        <div scCommand class="rounded-lg border shadow-md">
+          <div scCommandInput placeholder="Type a command or search..."></div>
+          <div scCommandList>
             @if (
               filteredSuggestions().length === 0 &&
               filteredSettings().length === 0
             ) {
-              <div sc-command-empty>No results found.</div>
+              <div scCommandEmpty>No results found.</div>
             }
             @if (filteredSuggestions().length > 0) {
-              <div sc-command-group>
-                <span sc-command-group-heading>Suggestions</span>
+              <div scCommandGroup>
+                <span scCommandGroupHeading>Suggestions</span>
                 @for (item of filteredSuggestions(); track item.value) {
                   <div
-                    sc-command-item
+                    scCommandItem
                     [value]="item.value"
                     [label]="item.label"
                     (select)="onSelect(item.label)"
@@ -74,14 +74,14 @@ interface CommandItem {
             @if (
               filteredSuggestions().length > 0 && filteredSettings().length > 0
             ) {
-              <div sc-command-separator></div>
+              <div scCommandSeparator></div>
             }
             @if (filteredSettings().length > 0) {
-              <div sc-command-group>
-                <span sc-command-group-heading>Settings</span>
+              <div scCommandGroup>
+                <span scCommandGroupHeading>Settings</span>
                 @for (item of filteredSettings(); track item.value) {
                   <div
-                    sc-command-item
+                    scCommandItem
                     [value]="item.value"
                     [label]="item.label"
                     (select)="onSelect(item.label)"
@@ -92,7 +92,7 @@ interface CommandItem {
                     ></span>
                     <span>{{ item.label }}</span>
                     @if (item.shortcut) {
-                      <span sc-command-shortcut>{{ item.shortcut }}</span>
+                      <span scCommandShortcut>{{ item.shortcut }}</span>
                     }
                   </div>
                 }

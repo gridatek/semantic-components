@@ -13,10 +13,10 @@ The component consists of three directives:
 ## Basic Usage
 
 ```html
-<div sc-rating-field [(value)]="rating">
-  <div sc-rating-item-group>
+<div scRatingField [(value)]="rating">
+  <div scRatingItemGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span sc-rating-item [value]="i">
+    <span scRatingItem [value]="i">
       <svg si-star-icon class="size-5"></svg>
     </span>
     }
@@ -66,10 +66,10 @@ Container directive that manages hover state and keyboard navigation. No inputs 
 ### Half-Star Rating
 
 ```html
-<div sc-rating-field [(value)]="rating" [allowHalf]="true">
-  <div sc-rating-item-group>
+<div scRatingField [(value)]="rating" [allowHalf]="true">
+  <div scRatingItemGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span sc-rating-item [value]="i">
+    <span scRatingItem [value]="i">
       <svg si-star-icon class="size-6"></svg>
     </span>
     }
@@ -80,10 +80,10 @@ Container directive that manages hover state and keyboard navigation. No inputs 
 ### Custom Icons (Hearts)
 
 ```html
-<div sc-rating-field [(value)]="rating">
-  <div sc-rating-item-group>
+<div scRatingField [(value)]="rating">
+  <div scRatingItemGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span sc-rating-item [value]="i">
+    <span scRatingItem [value]="i">
       <svg si-heart-icon class="size-5"></svg>
     </span>
     }
@@ -94,10 +94,10 @@ Container directive that manages hover state and keyboard navigation. No inputs 
 ### Readonly Display
 
 ```html
-<div sc-rating-field [value]="4.5" [readonly]="true">
-  <div sc-rating-item-group>
+<div scRatingField [value]="4.5" [readonly]="true">
+  <div scRatingItemGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span sc-rating-item [value]="i">
+    <span scRatingItem [value]="i">
       <svg si-star-icon class="size-5"></svg>
     </span>
     }
@@ -134,16 +134,16 @@ Items expose a `data-state` attribute with values:
 Use CSS to style based on state:
 
 ```css
-[sc-rating-item][data-state='full'] svg {
+[scRatingItem][data-state='full'] svg {
   fill: gold;
   color: gold;
 }
 
-[sc-rating-item][data-state='half'] svg {
+[scRatingItem][data-state='half'] svg {
   fill: url(#half-gradient);
 }
 
-[sc-rating-item][data-state='empty'] svg {
+[scRatingItem][data-state='empty'] svg {
   fill: none;
   color: gray;
 }

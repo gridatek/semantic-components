@@ -98,26 +98,26 @@ import { ScSidebarProvider, ScSidebar, ScSidebarTrigger, ScSidebarHeader, ScSide
     // ... other imports
   ],
   template: `
-    <div sc-sidebar-provider>
-      <div sc-sidebar>
-        <div sc-sidebar-header>
+    <div scSidebarProvider>
+      <div scSidebar>
+        <div scSidebarHeader>
           <h2>My App</h2>
         </div>
 
-        <div sc-sidebar-content>
-          <ul sc-sidebar-menu>
-            <li sc-sidebar-menu-item>
-              <a sc-sidebar-menu-button routerLink="/dashboard">Dashboard</a>
+        <div scSidebarContent>
+          <ul scSidebarMenu>
+            <li scSidebarMenuItem>
+              <a scSidebarMenuButton routerLink="/dashboard">Dashboard</a>
             </li>
           </ul>
         </div>
 
-        <div sc-sidebar-footer>User Info</div>
+        <div scSidebarFooter>User Info</div>
       </div>
 
-      <main sc-sidebar-inset>
+      <main scSidebarInset>
         <header>
-          <button sc-sidebar-trigger>Toggle</button>
+          <button scSidebarTrigger>Toggle</button>
         </header>
         <router-outlet />
       </main>
@@ -132,12 +132,12 @@ export class AppLayout {}
 ### With Submenu
 
 ```html
-<ul sc-sidebar-menu>
-  <li sc-sidebar-menu-item>
-    <a sc-sidebar-menu-button>Projects</a>
-    <ul sc-sidebar-menu-sub>
-      <li sc-sidebar-menu-sub-item>
-        <a sc-sidebar-menu-sub-button routerLink="/projects/1">Project 1</a>
+<ul scSidebarMenu>
+  <li scSidebarMenuItem>
+    <a scSidebarMenuButton>Projects</a>
+    <ul scSidebarMenuSub>
+      <li scSidebarMenuSubItem>
+        <a scSidebarMenuSubButton routerLink="/projects/1">Project 1</a>
       </li>
     </ul>
   </li>
@@ -147,10 +147,10 @@ export class AppLayout {}
 ### With Groups
 
 ```html
-<div sc-sidebar-group>
-  <div sc-sidebar-group-label>Navigation</div>
-  <div sc-sidebar-group-content>
-    <ul sc-sidebar-menu>
+<div scSidebarGroup>
+  <div scSidebarGroupLabel>Navigation</div>
+  <div scSidebarGroupContent>
+    <ul scSidebarMenu>
       <!-- menu items -->
     </ul>
   </div>
@@ -161,11 +161,11 @@ export class AppLayout {}
 
 ```html
 <!-- Default sidebar -->
-<div sc-sidebar variant="sidebar" collapsible="icon">
+<div scSidebar variant="sidebar" collapsible="icon">
   <!-- Floating sidebar -->
-  <div sc-sidebar variant="floating" collapsible="icon">
+  <div scSidebar variant="floating" collapsible="icon">
     <!-- Inset sidebar -->
-    <div sc-sidebar variant="inset" collapsible="icon"></div>
+    <div scSidebar variant="inset" collapsible="icon"></div>
   </div>
 </div>
 ```
@@ -175,7 +175,7 @@ export class AppLayout {}
 ```typescript
 @Component({
   template: `
-    <div sc-sidebar-provider [(open)]="sidebarOpen">
+    <div scSidebarProvider [(open)]="sidebarOpen">
       <!-- sidebar content -->
     </div>
   `,

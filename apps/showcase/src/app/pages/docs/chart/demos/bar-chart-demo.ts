@@ -15,9 +15,9 @@ import {
   imports: [ScChartContainer, ScChartLegend, ScBarChart],
   template: `
     <div class="max-w-lg rounded-lg border p-6">
-      <div sc-chart-container>
-        <div sc-bar-chart [data]="barData" [height]="250"></div>
-        <div sc-chart-legend [items]="barLegend"></div>
+      <div scChartContainer>
+        <div scBarChart [data]="barData" [height]="250"></div>
+        <div scChartLegend [items]="barLegend"></div>
       </div>
     </div>
   `,

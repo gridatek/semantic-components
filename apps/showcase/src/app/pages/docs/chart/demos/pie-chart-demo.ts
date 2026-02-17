@@ -15,9 +15,9 @@ import {
   imports: [ScChartContainer, ScChartLegend, ScPieChart],
   template: `
     <div class="max-w-sm rounded-lg border p-6">
-      <div sc-chart-container>
-        <div sc-pie-chart [data]="pieData" [size]="280"></div>
-        <div sc-chart-legend [items]="pieLegend"></div>
+      <div scChartContainer>
+        <div scPieChart [data]="pieData" [size]="280"></div>
+        <div scChartLegend [items]="pieLegend"></div>
       </div>
     </div>
   `,

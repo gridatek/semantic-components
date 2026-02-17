@@ -14,8 +14,8 @@ import {
   selector: 'app-basic-opt-field-demo',
   imports: [ScOptField, ScOptFieldSlotGroup, ScOptFieldSlot],
   template: `
-    <div sc-opt-field [(value)]="otp">
-      <div sc-opt-field-slot-group>
+    <div scOptField [(value)]="otp">
+      <div scOptFieldSlotGroup>
         <sc-opt-field-slot />
         <sc-opt-field-slot />
         <sc-opt-field-slot />

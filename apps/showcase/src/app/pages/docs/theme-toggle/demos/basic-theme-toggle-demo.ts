@@ -12,7 +12,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   imports: [ScThemeToggle, SiSunIcon, SiMoonIcon],
   template: `
     <div class="flex items-center gap-4">
-      <button sc-theme-toggle #toggle="scThemeToggle">
+      <button scThemeToggle #toggle="scThemeToggle">
         @if (toggle.isDark()) {
           <svg si-sun-icon></svg>
         } @else {

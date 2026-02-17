@@ -5,14 +5,14 @@ Accessible resizable panel groups and layouts with keyboard support.
 ## Usage
 
 ```html
-<div sc-resizable-panel-group direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
-  <div sc-resizable-panel [defaultSize]="50">
+<div scResizablePanelGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
+  <div scResizablePanel [defaultSize]="50">
     <div class="flex h-full items-center justify-center p-6">
       <span class="font-semibold">One</span>
     </div>
   </div>
-  <div sc-resizable-handle></div>
-  <div sc-resizable-panel [defaultSize]="50">
+  <div scResizableHandle></div>
+  <div scResizablePanel [defaultSize]="50">
     <div class="flex h-full items-center justify-center p-6">
       <span class="font-semibold">Two</span>
     </div>
@@ -26,7 +26,7 @@ Accessible resizable panel groups and layouts with keyboard support.
 
 Container directive for a group of resizable panels.
 
-**Selector:** `[sc-resizable-panel-group]`
+**Selector:** `[scResizablePanelGroup]`
 
 **Inputs:**
 
@@ -39,7 +39,7 @@ Container directive for a group of resizable panels.
 
 Individual resizable panel within a panel group.
 
-**Selector:** `[sc-resizable-panel]`
+**Selector:** `[scResizablePanel]`
 
 **Inputs:**
 
@@ -58,7 +58,7 @@ Individual resizable panel within a panel group.
 
 Drag handle between panels for resizing.
 
-**Selector:** `[sc-resizable-handle]`
+**Selector:** `[scResizableHandle]`
 
 **Inputs:**
 
@@ -72,46 +72,46 @@ Drag handle between panels for resizing.
 ### Vertical Layout
 
 ```html
-<div sc-resizable-panel-group direction="vertical" class="min-h-[300px] max-w-md rounded-lg border">
-  <div sc-resizable-panel [defaultSize]="30">Header</div>
-  <div sc-resizable-handle></div>
-  <div sc-resizable-panel [defaultSize]="70">Content</div>
+<div scResizablePanelGroup direction="vertical" class="min-h-[300px] max-w-md rounded-lg border">
+  <div scResizablePanel [defaultSize]="30">Header</div>
+  <div scResizableHandle></div>
+  <div scResizablePanel [defaultSize]="70">Content</div>
 </div>
 ```
 
 ### With Handle Icon
 
 ```html
-<div sc-resizable-panel-group direction="horizontal">
-  <div sc-resizable-panel [defaultSize]="30">Sidebar</div>
-  <div sc-resizable-handle [withHandle]="true"></div>
-  <div sc-resizable-panel [defaultSize]="70">Content</div>
+<div scResizablePanelGroup direction="horizontal">
+  <div scResizablePanel [defaultSize]="30">Sidebar</div>
+  <div scResizableHandle [withHandle]="true"></div>
+  <div scResizablePanel [defaultSize]="70">Content</div>
 </div>
 ```
 
 ### Three Panels with Size Constraints
 
 ```html
-<div sc-resizable-panel-group direction="horizontal">
-  <div sc-resizable-panel [defaultSize]="25" [minSize]="15">Left</div>
-  <div sc-resizable-handle [withHandle]="true"></div>
-  <div sc-resizable-panel [defaultSize]="50">Center</div>
-  <div sc-resizable-handle [withHandle]="true"></div>
-  <div sc-resizable-panel [defaultSize]="25" [minSize]="15">Right</div>
+<div scResizablePanelGroup direction="horizontal">
+  <div scResizablePanel [defaultSize]="25" [minSize]="15">Left</div>
+  <div scResizableHandle [withHandle]="true"></div>
+  <div scResizablePanel [defaultSize]="50">Center</div>
+  <div scResizableHandle [withHandle]="true"></div>
+  <div scResizablePanel [defaultSize]="25" [minSize]="15">Right</div>
 </div>
 ```
 
 ### Nested Panels
 
 ```html
-<div sc-resizable-panel-group direction="horizontal" class="min-h-[300px]">
-  <div sc-resizable-panel [defaultSize]="30">Sidebar</div>
-  <div sc-resizable-handle></div>
-  <div sc-resizable-panel [defaultSize]="70">
-    <div sc-resizable-panel-group direction="vertical" class="h-full">
-      <div sc-resizable-panel [defaultSize]="40">Top</div>
-      <div sc-resizable-handle></div>
-      <div sc-resizable-panel [defaultSize]="60">Bottom</div>
+<div scResizablePanelGroup direction="horizontal" class="min-h-[300px]">
+  <div scResizablePanel [defaultSize]="30">Sidebar</div>
+  <div scResizableHandle></div>
+  <div scResizablePanel [defaultSize]="70">
+    <div scResizablePanelGroup direction="vertical" class="h-full">
+      <div scResizablePanel [defaultSize]="40">Top</div>
+      <div scResizableHandle></div>
+      <div scResizablePanel [defaultSize]="60">Bottom</div>
     </div>
   </div>
 </div>

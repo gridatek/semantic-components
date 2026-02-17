@@ -29,18 +29,18 @@ import {
     ScDrawerTrigger,
   ],
   template: `
-    <div sc-drawer-provider direction="top">
+    <div scDrawerProvider direction="top">
       <button
-        sc-drawer-trigger
+        scDrawerTrigger
         class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         Open Top Drawer
       </button>
       <ng-template scDrawerPortal>
-        <div sc-drawer>
-          <div sc-drawer-header>
-            <h2 sc-drawer-title>Notifications</h2>
-            <p sc-drawer-description>You have 3 unread notifications.</p>
+        <div scDrawer>
+          <div scDrawerHeader>
+            <h2 scDrawerTitle>Notifications</h2>
+            <p scDrawerDescription>You have 3 unread notifications.</p>
           </div>
           <div class="p-4">
             <div class="space-y-4">
@@ -60,9 +60,9 @@ import {
               </div>
             </div>
           </div>
-          <div sc-drawer-footer>
+          <div scDrawerFooter>
             <button
-              sc-drawer-close
+              scDrawerClose
               class="inline-flex h-9 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               Mark all as read

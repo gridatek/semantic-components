@@ -67,21 +67,21 @@ import { Logo } from '../logo/logo';
     Logo,
   ],
   template: `
-    <div sc-navbar-provider>
-      <nav sc-navbar>
-        <div sc-navbar-group>
+    <div scNavbarProvider>
+      <nav scNavbar>
+        <div scNavbarGroup>
           <!-- Brand -->
-          <a sc-navbar-brand href="#">
+          <a scNavbarBrand href="#">
             <svg app-logo class="size-6"></svg>
             <span class="hidden sm:inline">Semantic Components</span>
           </a>
 
           <!-- Desktop Navigation -->
-          <nav sc-navigation-menu class="hidden md:flex">
-            <ul sc-navigation-menu-list>
-              <li sc-navigation-menu-item>
-                <button sc-navigation-menu-trigger>Components</button>
-                <div sc-navigation-menu-content>
+          <nav scNavigationMenu class="hidden md:flex">
+            <ul scNavigationMenuList>
+              <li scNavigationMenuItem>
+                <button scNavigationMenuTrigger>Components</button>
+                <div scNavigationMenuContent>
                   <ul
                     class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
                   >
@@ -91,7 +91,7 @@ import { Logo } from '../logo/logo';
                     ) {
                       <li>
                         <a
-                          sc-navigation-menu-link
+                          scNavigationMenuLink
                           [routerLink]="'/docs/components/' + component.path"
                         >
                           <div class="text-sm font-medium leading-none">
@@ -106,7 +106,7 @@ import { Logo } from '../logo/logo';
                       </li>
                     }
                     <li>
-                      <a sc-navigation-menu-link routerLink="/docs/components">
+                      <a scNavigationMenuLink routerLink="/docs/components">
                         <div class="text-sm font-medium leading-none">
                           View All
                         </div>
@@ -121,8 +121,8 @@ import { Logo } from '../logo/logo';
                 </div>
               </li>
 
-              <li sc-navigation-menu-item>
-                <a sc-navigation-menu-link routerLink="/docs/getting-started">
+              <li scNavigationMenuItem>
+                <a scNavigationMenuLink routerLink="/docs/getting-started">
                   Documentation
                 </a>
               </li>
@@ -131,9 +131,9 @@ import { Logo } from '../logo/logo';
         </div>
 
         <!-- Actions -->
-        <div sc-navbar-actions>
+        <div scNavbarActions>
           <a
-            sc-link
+            scLink
             variant="ghost"
             href="https://github.com/gridatek/semantic-components"
             target="_blank"
@@ -149,7 +149,7 @@ import { Logo } from '../logo/logo';
             }
           </a>
           <a
-            sc-link
+            scLink
             variant="ghost"
             size="icon"
             href="https://github.com/gridatek/semantic-components"
@@ -161,20 +161,20 @@ import { Logo } from '../logo/logo';
             <svg si-github-icon></svg>
           </a>
           <a
-            sc-link
+            scLink
             class="hidden md:inline-flex"
             routerLink="/docs/getting-started"
           >
             Get Started
           </a>
-          <button sc-theme-toggle #themeToggle="scThemeToggle">
+          <button scThemeToggle #themeToggle="scThemeToggle">
             @if (themeToggle.isDark()) {
               <svg si-sun-icon></svg>
             } @else {
               <svg si-moon-icon></svg>
             }
           </button>
-          <button sc-navbar-mobile-trigger #trigger="scNavbarMobileTrigger">
+          <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
             @if (trigger.isMobileMenuOpen()) {
               <svg si-x-icon></svg>
             } @else {
@@ -188,10 +188,10 @@ import { Logo } from '../logo/logo';
       </nav>
 
       <!-- Mobile Menu -->
-      <div sc-navbar-mobile-portal>
-        <div sc-navbar-mobile-menu>
+      <div scNavbarMobilePortal>
+        <div scNavbarMobileMenu>
           <a
-            sc-navbar-mobile-link
+            scNavbarMobileLink
             routerLink="/docs/components"
             routerLinkActive="active"
             #mobileComponentsRla="routerLinkActive"
@@ -200,7 +200,7 @@ import { Logo } from '../logo/logo';
             Components
           </a>
           <a
-            sc-navbar-mobile-link
+            scNavbarMobileLink
             routerLink="/docs/getting-started"
             routerLinkActive="active"
             #mobileDocsRla="routerLinkActive"

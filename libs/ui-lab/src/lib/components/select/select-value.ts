@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'span[sc-select-value]',
+  selector: 'span[scSelectValue]',
   imports: [],
   template: `
     <ng-content />

@@ -2,7 +2,7 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'option[sc-native-select-option]',
+  selector: 'option[scNativeSelectOption]',
   host: {
     'data-slot': 'native-select-option',
     '[class]': 'class()',

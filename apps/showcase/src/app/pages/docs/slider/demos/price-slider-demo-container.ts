@@ -36,7 +36,7 @@ import { ScSlider } from '@semantic-components/ui-lab';
         <span>Price</span>
         <span class="text-muted-foreground">{{ '$' + price() }}</span>
       </div>
-      <div sc-slider [(value)]="price" [min]="0" [max]="1000" [step]="50"></div>
+      <div scSlider [(value)]="price" [min]="0" [max]="1000" [step]="50"></div>
       <div class="flex justify-between text-xs text-muted-foreground">
         <span>$0</span>
         <span>$1000</span>

@@ -12,19 +12,19 @@ import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
   imports: [FormField, ScField, ScLabel, ScTextarea],
   template: `
     <div class="grid w-full gap-4">
-      <div sc-field>
-        <label sc-label>Small (2 rows)</label>
+      <div scField>
+        <label scLabel>Small (2 rows)</label>
         <textarea
-          sc-textarea
+          scTextarea
           rows="2"
           [formField]="rowsForm.small"
           placeholder="Small textarea"
         ></textarea>
       </div>
-      <div sc-field>
-        <label sc-label>Large (6 rows)</label>
+      <div scField>
+        <label scLabel>Large (6 rows)</label>
         <textarea
-          sc-textarea
+          scTextarea
           rows="6"
           [formField]="rowsForm.large"
           placeholder="Large textarea"

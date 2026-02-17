@@ -20,7 +20,7 @@ const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
 const MOBILE_BREAKPOINT = 768;
 
 @Component({
-  selector: 'div[sc-sidebar-provider]',
+  selector: 'div[scSidebarProvider]',
   template: '<ng-content />',
   providers: [ScSidebarState],
   host: {

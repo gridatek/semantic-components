@@ -30,8 +30,8 @@ import {
   ],
   template: `
     <div class="max-w-lg">
-      <div sc-file-upload [multiple]="true" [(files)]="files">
-        <div sc-file-upload-dropzone class="p-8">
+      <div scFileUpload [multiple]="true" [(files)]="files">
+        <div scFileUploadDropzone class="p-8">
           <div class="flex flex-col items-center gap-2 text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,10 +57,10 @@ import {
         </div>
 
         @if (files().length > 0) {
-          <div sc-file-upload-list>
+          <div scFileUploadList>
             @for (file of files(); track file.id) {
-              <div sc-file-upload-item [file]="file">
-                <div sc-file-upload-item-preview [file]="file">
+              <div scFileUploadItem [file]="file">
+                <div scFileUploadItemPreview [file]="file">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -80,10 +80,10 @@ import {
                   </svg>
                 </div>
                 <div class="flex-1 min-w-0">
-                  <div sc-file-upload-item-name>{{ file.file.name }}</div>
-                  <div sc-file-upload-item-size [file]="file"></div>
+                  <div scFileUploadItemName>{{ file.file.name }}</div>
+                  <div scFileUploadItemSize [file]="file"></div>
                 </div>
-                <button sc-file-upload-item-delete [fileId]="file.id"></button>
+                <button scFileUploadItemDelete [fileId]="file.id"></button>
               </div>
             }
           </div>

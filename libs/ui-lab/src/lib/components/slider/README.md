@@ -9,19 +9,19 @@ An input where the user selects a value from within a given range.
 ## Usage
 
 ```html
-<div sc-slider [(value)]="volume"></div>
+<div scSlider [(value)]="volume"></div>
 ```
 
 ## With Min/Max
 
 ```html
-<div sc-slider [(value)]="price" [min]="0" [max]="1000"></div>
+<div scSlider [(value)]="price" [min]="0" [max]="1000"></div>
 ```
 
 ## With Step
 
 ```html
-<div sc-slider [(value)]="quantity" [step]="10"></div>
+<div scSlider [(value)]="quantity" [step]="10"></div>
 ```
 
 ## With Signal Forms
@@ -42,7 +42,7 @@ readonly myForm = form(this.formModel, (schemaPath) => {
 ```
 
 ```html
-<div sc-slider [formField]="myForm.volume"></div>
+<div scSlider [formField]="myForm.volume"></div>
 ```
 
 Note: Add `FormField` to your component's `imports` array to use the `[formField]` directive. When using `[formField]`, you cannot use other property bindings like `[min]` or `[max]` on the same element. Instead, use validators in the form schema.
@@ -50,7 +50,7 @@ Note: Add `FormField` to your component's `imports` array to use the `[formField
 ## Disabled
 
 ```html
-<div sc-slider [value]="50" [disabled]="true"></div>
+<div scSlider [value]="50" [disabled]="true"></div>
 ```
 
 ## With Labels
@@ -61,7 +61,7 @@ Note: Add `FormField` to your component's `imports` array to use the `[formField
     <span>Volume</span>
     <span>{{ volume() }}%</span>
   </div>
-  <div sc-slider [(value)]="volume"></div>
+  <div scSlider [(value)]="volume"></div>
 </div>
 ```
 

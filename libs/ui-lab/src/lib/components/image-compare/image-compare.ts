@@ -20,7 +20,7 @@ export const SC_IMAGE_COMPARE = new InjectionToken<ScImageCompare>(
 );
 
 @Directive({
-  selector: '[sc-image-compare]',
+  selector: '[scImageCompare]',
   exportAs: 'scImageCompare',
   providers: [
     { provide: SC_IMAGE_COMPARE, useExisting: ScImageCompareDirective },

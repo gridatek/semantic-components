@@ -21,7 +21,7 @@ const alertVariants = cva(
 export type ScAlertVariants = VariantProps<typeof alertVariants>;
 
 @Directive({
-  selector: '[sc-alert]',
+  selector: '[scAlert]',
   host: {
     'data-slot': 'alert',
     role: 'alert',

@@ -26,15 +26,15 @@ import { ScLabel } from '@semantic-components/ui';
     ScLabel,
   ],
   template: `
-    <div sc-number-field [(value)]="count" [min]="0" [max]="100">
-      <div sc-number-field-scrub-area>
-        <label sc-label>Count</label>
+    <div scNumberField [(value)]="count" [min]="0" [max]="100">
+      <div scNumberFieldScrubArea>
+        <label scLabel>Count</label>
       </div>
 
-      <div sc-number-field-group>
-        <button sc-number-field-decrement></button>
-        <input sc-number-field-input />
-        <button sc-number-field-increment></button>
+      <div scNumberFieldGroup>
+        <button scNumberFieldDecrement></button>
+        <input scNumberFieldInput />
+        <button scNumberFieldIncrement></button>
       </div>
     </div>
 

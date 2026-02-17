@@ -12,15 +12,15 @@ Full-screen image viewer with zoom, navigation, and keyboard support. Built usin
 ## Basic Usage
 
 ```html
-<div sc-lightbox [images]="images">
+<div scLightbox [images]="images">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
-    <button sc-lightbox-trigger [index]="i" class="w-32 h-32 rounded overflow-hidden">
+    <button scLightboxTrigger [index]="i" class="w-32 h-32 rounded overflow-hidden">
       <img [src]="image.src" [alt]="image.alt" class="size-full object-cover" />
     </button>
     }
   </div>
-  <div sc-lightbox-container></div>
+  <div scLightboxContainer></div>
 </div>
 ```
 
@@ -42,7 +42,7 @@ interface LightboxImage {
 
 The root directive that manages state.
 
-**Selector:** `[sc-lightbox]`
+**Selector:** `[scLightbox]`
 
 **Inputs:**
 
@@ -90,7 +90,7 @@ The root directive that manages state.
 
 The full-screen overlay component that renders all UI.
 
-**Selector:** `[sc-lightbox-container]`
+**Selector:** `[scLightboxContainer]`
 
 **Inputs:**
 
@@ -100,16 +100,16 @@ The full-screen overlay component that renders all UI.
 
 **Content Projection Slots:**
 
-- `[sc-lightbox-close-icon]` - Custom close button icon
-- `[sc-lightbox-prev-icon]` - Custom previous button icon
-- `[sc-lightbox-next-icon]` - Custom next button icon
-- `[sc-lightbox-loading]` - Custom loading indicator
+- `[scLightboxCloseIcon]` - Custom close button icon
+- `[scLightboxPrevIcon]` - Custom previous button icon
+- `[scLightboxNextIcon]` - Custom next button icon
+- `[scLightboxLoading]` - Custom loading indicator
 
 ### ScLightboxTrigger
 
 Directive that opens the lightbox when clicked.
 
-**Selector:** `[sc-lightbox-trigger]`
+**Selector:** `[scLightboxTrigger]`
 
 **Inputs:**
 
@@ -142,15 +142,15 @@ Pre-built gallery grid with integrated lightbox.
 ### Basic Lightbox
 
 ```html
-<div sc-lightbox [images]="images">
+<div scLightbox [images]="images">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
-    <button sc-lightbox-trigger [index]="i" class="w-32 h-32 rounded-lg overflow-hidden">
+    <button scLightboxTrigger [index]="i" class="w-32 h-32 rounded-lg overflow-hidden">
       <img [src]="image.src" [alt]="image.alt" class="size-full object-cover" />
     </button>
     }
   </div>
-  <div sc-lightbox-container></div>
+  <div scLightboxContainer></div>
 </div>
 ```
 
@@ -165,15 +165,15 @@ readonly images: LightboxImage[] = [
 ### With Image Info
 
 ```html
-<div sc-lightbox [images]="images">
+<div scLightbox [images]="images">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
-    <button sc-lightbox-trigger [index]="i">
+    <button scLightboxTrigger [index]="i">
       <img [src]="image.thumbnail || image.src" [alt]="image.alt" />
     </button>
     }
   </div>
-  <div sc-lightbox-container></div>
+  <div scLightboxContainer></div>
 </div>
 ```
 
@@ -201,9 +201,9 @@ readonly images: LightboxImage[] = [
 ```typescript
 @Component({
   template: `
-    <div sc-lightbox [images]="images" [(isOpen)]="isOpen" [(currentIndex)]="currentIndex">
+    <div scLightbox [images]="images" [(isOpen)]="isOpen" [(currentIndex)]="currentIndex">
       <button (click)="isOpen.set(true)">Open Lightbox</button>
-      <div sc-lightbox-container></div>
+      <div scLightboxContainer></div>
     </div>
 
     <p>Currently showing image {{ currentIndex() + 1 }}</p>
@@ -221,9 +221,9 @@ export class MyComponent {
 ```typescript
 @Component({
   template: `
-    <div sc-lightbox #lightbox="scLightbox" [images]="images">
+    <div scLightbox #lightbox="scLightbox" [images]="images">
       <button (click)="lightbox.open(2)">Open at Image 3</button>
-      <div sc-lightbox-container></div>
+      <div scLightboxContainer></div>
     </div>
   `,
 })
@@ -235,15 +235,15 @@ export class MyComponent {
 ### Without Thumbnails or Zoom
 
 ```html
-<div sc-lightbox [images]="images" [showThumbnails]="false" [showZoom]="false">
+<div scLightbox [images]="images" [showThumbnails]="false" [showZoom]="false">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
-    <button sc-lightbox-trigger [index]="i">
+    <button scLightboxTrigger [index]="i">
       <img [src]="image.src" [alt]="image.alt" />
     </button>
     }
   </div>
-  <div sc-lightbox-container></div>
+  <div scLightboxContainer></div>
 </div>
 ```
 
@@ -252,31 +252,31 @@ export class MyComponent {
 Use content projection to customize icons:
 
 ```html
-<div sc-lightbox [images]="images">
+<div scLightbox [images]="images">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
-    <button sc-lightbox-trigger [index]="i">
+    <button scLightboxTrigger [index]="i">
       <img [src]="image.src" [alt]="image.alt" />
     </button>
     }
   </div>
 
-  <div sc-lightbox-container>
+  <div scLightboxContainer>
     <!-- Custom close icon -->
-    <svg sc-lightbox-close-icon>
+    <svg scLightboxCloseIcon>
       <!-- Your custom close icon -->
     </svg>
 
     <!-- Custom navigation icons -->
-    <svg sc-lightbox-prev-icon>
+    <svg scLightboxPrevIcon>
       <!-- Your custom prev icon -->
     </svg>
-    <svg sc-lightbox-next-icon>
+    <svg scLightboxNextIcon>
       <!-- Your custom next icon -->
     </svg>
 
     <!-- Custom loading indicator -->
-    <div sc-lightbox-loading>
+    <div scLightboxLoading>
       <span>Loading...</span>
     </div>
   </div>
@@ -289,7 +289,7 @@ Use content projection to customize icons:
 @Component({
   template: `
     <div
-      sc-lightbox
+      scLightbox
       [images]="images"
       (opened)="onOpened($event)"
       (closed)="onClosed()"
@@ -297,12 +297,12 @@ Use content projection to customize icons:
     >
       <div class="flex gap-4">
         @for (image of images; track image.src; let i = $index) {
-          <button sc-lightbox-trigger [index]="i">
+          <button scLightboxTrigger [index]="i">
             <img [src]="image.src" [alt]="image.alt" />
           </button>
         }
       </div>
-      <div sc-lightbox-container></div>
+      <div scLightboxContainer></div>
     </div>
   `,
 })
@@ -326,16 +326,16 @@ export class MyComponent {
 ### No Loop
 
 ```html
-<div sc-lightbox [images]="images" [loop]="false">
+<div scLightbox [images]="images" [loop]="false">
   <!-- Previous/Next buttons will be disabled at start/end -->
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
-    <button sc-lightbox-trigger [index]="i">
+    <button scLightboxTrigger [index]="i">
       <img [src]="image.src" [alt]="image.alt" />
     </button>
     }
   </div>
-  <div sc-lightbox-container></div>
+  <div scLightboxContainer></div>
 </div>
 ```
 

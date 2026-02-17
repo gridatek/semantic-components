@@ -15,11 +15,11 @@ import {
   imports: [ScTagInput, ScTagInputField, ScTagInputTag],
   template: `
     <div class="max-w-md">
-      <div sc-tag-input [(tags)]="tags" [allowDuplicates]="true">
+      <div scTagInput [(tags)]="tags" [allowDuplicates]="true">
         @for (tag of tags(); track $index) {
-          <span sc-tag-input-tag [tag]="tag" variant="secondary"></span>
+          <span scTagInputTag [tag]="tag" variant="secondary"></span>
         }
-        <input sc-tag-input-field />
+        <input scTagInputField />
       </div>
     </div>
   `,

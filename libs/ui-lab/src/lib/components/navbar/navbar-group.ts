@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[sc-navbar-group]',
+  selector: 'div[scNavbarGroup]',
   template: `
     <ng-content />
   `,

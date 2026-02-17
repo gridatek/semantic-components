@@ -40,20 +40,20 @@ import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui-lab
       class="space-y-3"
       style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);"
     >
-      <div sc-radio-group>
-        <label sc-radio-field class="flex items-center space-x-2">
+      <div scRadioGroup>
+        <label scRadioField class="flex items-center space-x-2">
           <input
             type="radio"
-            sc-radio
+            scRadio
             value="option1"
             [formField]="themeForm.selected"
           />
           <span class="text-sm">Option 1</span>
         </label>
-        <label sc-radio-field class="flex items-center space-x-2">
+        <label scRadioField class="flex items-center space-x-2">
           <input
             type="radio"
-            sc-radio
+            scRadio
             value="option2"
             [formField]="themeForm.selected"
           />

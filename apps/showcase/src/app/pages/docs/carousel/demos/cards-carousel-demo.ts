@@ -30,11 +30,11 @@ import {
   ],
   template: `
     <div class="mx-auto w-full max-w-sm">
-      <div sc-carousel class="w-full">
-        <div sc-carousel-viewport>
-          <div sc-carousel-track>
+      <div scCarousel class="w-full">
+        <div scCarouselViewport>
+          <div scCarouselTrack>
             @for (card of cards; track card.title) {
-              <div sc-carousel-item>
+              <div scCarouselItem>
                 <div class="p-1">
                   <div class="rounded-lg border bg-card p-6">
                     <h4 class="font-semibold">{{ card.title }}</h4>
@@ -47,11 +47,11 @@ import {
             }
           </div>
         </div>
-        <button sc-carousel-previous>
+        <button scCarouselPrevious>
           <svg si-chevron-left-icon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
-        <button sc-carousel-next>
+        <button scCarouselNext>
           <svg si-chevron-right-icon></svg>
           <span class="sr-only">Next slide</span>
         </button>

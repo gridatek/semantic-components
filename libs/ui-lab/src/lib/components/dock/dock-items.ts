@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_DOCK } from './dock';
 
 @Component({
-  selector: 'div[sc-dock-items]',
+  selector: 'div[scDockItems]',
   template: `
     <ng-content />
   `,

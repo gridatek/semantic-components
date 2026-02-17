@@ -9,7 +9,7 @@ import { cn } from '@semantic-components/ui';
 import { FileUploadFile } from './file-upload';
 
 @Component({
-  selector: '[sc-file-upload-item-preview]',
+  selector: '[scFileUploadItemPreview]',
   template: `
     @if (isImage()) {
       <img

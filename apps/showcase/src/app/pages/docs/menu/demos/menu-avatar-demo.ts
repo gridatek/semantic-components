@@ -23,9 +23,9 @@ import {
     ScMenuTrigger,
   ],
   template: `
-    <div sc-menu-provider>
+    <div scMenuProvider>
       <button
-        sc-menu-trigger
+        scMenuTrigger
         class="size-10 rounded-full border-0 bg-transparent p-0 shadow-none hover:bg-transparent hover:opacity-80"
       >
         <img
@@ -34,8 +34,8 @@ import {
           class="size-10 rounded-full"
         />
       </button>
-      <div sc-menu-portal>
-        <div sc-menu class="w-56">
+      <div scMenuPortal>
+        <div scMenu class="w-56">
           <div class="flex items-center gap-2 px-2 py-1.5" role="presentation">
             <img
               src="https://github.com/shadcn.png"
@@ -49,8 +49,8 @@ import {
               </span>
             </div>
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-item value="Profile">
+          <div scMenuSeparator></div>
+          <div scMenuItem value="Profile">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ import {
               ⇧⌘P
             </span>
           </div>
-          <div sc-menu-item value="Billing">
+          <div scMenuItem value="Billing">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ import {
               ⌘B
             </span>
           </div>
-          <div sc-menu-item value="Settings">
+          <div scMenuItem value="Settings">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -118,8 +118,8 @@ import {
               ⌘S
             </span>
           </div>
-          <div sc-menu-separator></div>
-          <div sc-menu-item value="Team">
+          <div scMenuSeparator></div>
+          <div scMenuItem value="Team">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ import {
             </svg>
             <span class="flex-1">Team</span>
           </div>
-          <div sc-menu-item value="New Team">
+          <div scMenuItem value="New Team">
             <svg
               class="text-muted-foreground size-4"
               xmlns="http://www.w3.org/2000/svg"
@@ -163,9 +163,9 @@ import {
               ⌘+T
             </span>
           </div>
-          <div sc-menu-separator></div>
+          <div scMenuSeparator></div>
           <div
-            sc-menu-item
+            scMenuItem
             value="Log out"
             class="text-destructive hover:bg-destructive/10 data-[active=true]:bg-destructive/10"
           >

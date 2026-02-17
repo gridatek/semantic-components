@@ -12,10 +12,10 @@ import { ScSkeleton } from '@semantic-components/ui-lab';
     <div class="space-y-3">
       @for (i of [1, 2, 3, 4]; track i) {
         <div class="flex items-center space-x-4">
-          <div sc-skeleton class="size-10 rounded-full"></div>
+          <div scSkeleton class="size-10 rounded-full"></div>
           <div class="flex-1 space-y-2">
-            <div sc-skeleton class="h-4 w-3/4"></div>
-            <div sc-skeleton class="h-3 w-1/2"></div>
+            <div scSkeleton class="h-4 w-3/4"></div>
+            <div scSkeleton class="h-3 w-1/2"></div>
           </div>
         </div>
       }

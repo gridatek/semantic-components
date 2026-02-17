@@ -10,10 +10,10 @@ import { cn } from '@semantic-components/ui';
 import { ScCopyButton } from './copy-button';
 
 @Component({
-  selector: '[sc-copy-button-with-text]',
+  selector: '[scCopyButtonWithText]',
   template: `
     <button
-      sc-copy-button
+      scCopyButton
       [value]="value()"
       [disabled]="disabled()"
       [timeout]="timeout()"

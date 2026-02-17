@@ -47,13 +47,13 @@ import {
   ],
   template: \`
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div sc-stat-card>
+      <div scStatCard>
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label>Total Revenue</p>
-            <p sc-stat-card-value>$45,231.89</p>
+            <p scStatCardLabel>Total Revenue</p>
+            <p scStatCardValue>$45,231.89</p>
           </div>
-          <div sc-stat-card-icon>
+          <div scStatCardIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -71,7 +71,7 @@ import {
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
-          <span sc-stat-card-change trend="up">
+          <span scStatCardChange trend="up">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -89,13 +89,13 @@ import {
         </div>
       </div>
 
-      <div sc-stat-card>
+      <div scStatCard>
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label>Subscriptions</p>
-            <p sc-stat-card-value>2,350</p>
+            <p scStatCardLabel>Subscriptions</p>
+            <p scStatCardValue>2,350</p>
           </div>
-          <div sc-stat-card-icon>
+          <div scStatCardIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -115,7 +115,7 @@ import {
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
-          <span sc-stat-card-change trend="down">
+          <span scStatCardChange trend="down">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -133,13 +133,13 @@ import {
         </div>
       </div>
 
-      <div sc-stat-card>
+      <div scStatCard>
         <div class="flex items-start justify-between">
           <div class="space-y-1">
-            <p sc-stat-card-label>Active Now</p>
-            <p sc-stat-card-value>573</p>
+            <p scStatCardLabel>Active Now</p>
+            <p scStatCardValue>573</p>
           </div>
-          <div sc-stat-card-icon>
+          <div scStatCardIcon>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

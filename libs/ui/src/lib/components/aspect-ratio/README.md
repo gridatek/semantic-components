@@ -9,7 +9,7 @@ Displays content within a desired ratio.
 ## Usage
 
 ```html
-<div sc-aspect-ratio [ratio]="16 / 9">
+<div scAspectRatio [ratio]="16 / 9">
   <img src="..." alt="..." class="size-full object-cover" />
 </div>
 ```
@@ -19,7 +19,7 @@ Displays content within a desired ratio.
 ### 16:9 (Widescreen)
 
 ```html
-<div sc-aspect-ratio [ratio]="16 / 9">
+<div scAspectRatio [ratio]="16 / 9">
   <img src="..." alt="..." class="size-full object-cover" />
 </div>
 ```
@@ -27,7 +27,7 @@ Displays content within a desired ratio.
 ### 4:3 (Standard)
 
 ```html
-<div sc-aspect-ratio [ratio]="4 / 3">
+<div scAspectRatio [ratio]="4 / 3">
   <img src="..." alt="..." class="size-full object-cover" />
 </div>
 ```
@@ -35,7 +35,7 @@ Displays content within a desired ratio.
 ### 1:1 (Square)
 
 ```html
-<div sc-aspect-ratio [ratio]="1">
+<div scAspectRatio [ratio]="1">
   <img src="..." alt="..." class="size-full object-cover" />
 </div>
 ```
@@ -43,7 +43,7 @@ Displays content within a desired ratio.
 ### 21:9 (Ultrawide)
 
 ```html
-<div sc-aspect-ratio [ratio]="21 / 9">
+<div scAspectRatio [ratio]="21 / 9">
   <img src="..." alt="..." class="size-full object-cover" />
 </div>
 ```
@@ -51,7 +51,7 @@ Displays content within a desired ratio.
 ### 9:16 (Portrait)
 
 ```html
-<div sc-aspect-ratio [ratio]="9 / 16">
+<div scAspectRatio [ratio]="9 / 16">
   <img src="..." alt="..." class="size-full object-cover" />
 </div>
 ```
@@ -59,7 +59,7 @@ Displays content within a desired ratio.
 ## With Placeholder
 
 ```html
-<div sc-aspect-ratio [ratio]="16 / 9" class="bg-muted">
+<div scAspectRatio [ratio]="16 / 9" class="bg-muted">
   <div class="flex size-full items-center justify-center">
     <span class="text-muted-foreground">No image</span>
   </div>
@@ -69,7 +69,7 @@ Displays content within a desired ratio.
 ## Video Container
 
 ```html
-<div sc-aspect-ratio [ratio]="16 / 9">
+<div scAspectRatio [ratio]="16 / 9">
   <iframe src="..." class="size-full" allowfullscreen></iframe>
 </div>
 ```

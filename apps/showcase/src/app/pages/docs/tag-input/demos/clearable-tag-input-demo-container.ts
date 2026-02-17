@@ -37,12 +37,12 @@ import {
   imports: [ScTagInput, ScTagInputField, ScTagInputTag, ScTagInputClear],
   template: \`
     <div class="max-w-md">
-      <div sc-tag-input [(tags)]="tags">
+      <div scTagInput [(tags)]="tags">
         @for (tag of tags(); track tag) {
-          <span sc-tag-input-tag [tag]="tag"></span>
+          <span scTagInputTag [tag]="tag"></span>
         }
-        <input sc-tag-input-field />
-        <button sc-tag-input-clear></button>
+        <input scTagInputField />
+        <button scTagInputClear></button>
       </div>
     </div>
   \`,

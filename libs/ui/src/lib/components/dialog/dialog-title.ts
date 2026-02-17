@@ -3,7 +3,7 @@ import { cn } from '../../utils';
 import { ScDialog } from './dialog';
 
 @Directive({
-  selector: 'h2[sc-dialog-title]',
+  selector: 'h2[scDialogTitle]',
   host: {
     'data-slot': 'dialog-title',
     '[id]': 'dialog.titleId',

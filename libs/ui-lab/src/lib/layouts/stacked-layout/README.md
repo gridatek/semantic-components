@@ -6,7 +6,7 @@ A generic layout component that provides a stacked structure with slots for navb
 
 ```
 ┌───────────────────────────────────────────────┐
-│ sc-stacked-layout (data-slot="stacked-layout")│
+│ scStackedLayout (data-slot="stacked-layout")│
 ├───────────────────────────────────────────────┤
 │              [scNavbar]                       │
 ├───────────────────────────────────────────────┤

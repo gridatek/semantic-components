@@ -17,13 +17,13 @@ import {
   selector: 'app-readonly-editor-demo',
   imports: [ScEditor, ScEditorContent, ScEditorFooter, ScEditorCount],
   template: `
-    <div sc-editor [readonly]="true" class="border rounded-lg overflow-hidden">
-      <div sc-editor-content [(value)]="content"></div>
+    <div scEditor [readonly]="true" class="border rounded-lg overflow-hidden">
+      <div scEditorContent [(value)]="content"></div>
 
-      <div sc-editor-footer>
-        <div sc-editor-count>
-          <span sc-editor-word-count></span>
-          <span sc-editor-char-count></span>
+      <div scEditorFooter>
+        <div scEditorCount>
+          <span scEditorWordCount></span>
+          <span scEditorCharCount></span>
         </div>
       </div>
     </div>

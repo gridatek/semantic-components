@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Component({
-  selector: 'button[sc-file-upload-item-delete]',
+  selector: 'button[scFileUploadItemDelete]',
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"

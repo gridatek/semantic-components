@@ -35,14 +35,14 @@ import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
     SiItalicIcon,
   ],
   template: `
-    <div sc-editor class="border rounded-lg overflow-hidden">
-      <div sc-editor-toolbar>
-        <div sc-editor-toolbar-group>
-          <button sc-editor-bold>
+    <div scEditor class="border rounded-lg overflow-hidden">
+      <div scEditorToolbar>
+        <div scEditorToolbarGroup>
+          <button scEditorBold>
             <svg si-bold-icon></svg>
             <span class="sr-only">Bold</span>
           </button>
-          <button sc-editor-italic>
+          <button scEditorItalic>
             <svg si-italic-icon></svg>
             <span class="sr-only">Italic</span>
           </button>
@@ -50,15 +50,15 @@ import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
       </div>
 
       <div
-        sc-editor-content
+        scEditorContent
         [(value)]="content"
         placeholder="Simple text formatting only..."
       ></div>
 
-      <div sc-editor-footer>
-        <div sc-editor-count>
-          <span sc-editor-word-count></span>
-          <span sc-editor-char-count></span>
+      <div scEditorFooter>
+        <div scEditorCount>
+          <span scEditorWordCount></span>
+          <span scEditorCharCount></span>
         </div>
       </div>
     </div>

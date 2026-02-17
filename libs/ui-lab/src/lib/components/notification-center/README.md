@@ -22,8 +22,8 @@ import { ScNotificationCenter, ScNotificationCenterContainer, type Notification,
 ### Basic Usage
 
 ```html
-<div sc-notification-center [(notifications)]="notifications" (markRead)="onMarkRead($event)" (dismiss)="onDismiss($event)">
-  <div sc-notification-center-container></div>
+<div scNotificationCenter [(notifications)]="notifications" (markRead)="onMarkRead($event)" (dismiss)="onDismiss($event)">
+  <div scNotificationCenterContainer></div>
 </div>
 ```
 
@@ -53,8 +53,8 @@ notifications = signal<Notification[]>([
 ### With Groups
 
 ```html
-<div sc-notification-center [(notifications)]="notifications" [groups]="groups()">
-  <div sc-notification-center-container></div>
+<div scNotificationCenter [(notifications)]="notifications" [groups]="groups()">
+  <div scNotificationCenterContainer></div>
 </div>
 ```
 
@@ -125,24 +125,24 @@ notifications = signal<Notification[]>([
 ### Custom Empty State
 
 ```html
-<div sc-notification-center [(notifications)]="notifications" emptyTitle="All caught up!" emptyDescription="No new notifications to show.">
-  <div sc-notification-center-container></div>
+<div scNotificationCenter [(notifications)]="notifications" emptyTitle="All caught up!" emptyDescription="No new notifications to show.">
+  <div scNotificationCenterContainer></div>
 </div>
 ```
 
 ### Without Filters
 
 ```html
-<div sc-notification-center [(notifications)]="notifications" [showFilters]="false">
-  <div sc-notification-center-container></div>
+<div scNotificationCenter [(notifications)]="notifications" [showFilters]="false">
+  <div scNotificationCenterContainer></div>
 </div>
 ```
 
 ### Custom Container Styling
 
 ```html
-<div sc-notification-center [(notifications)]="notifications" class="max-w-md h-[500px]">
-  <div sc-notification-center-container class="h-full"></div>
+<div scNotificationCenter [(notifications)]="notifications" class="max-w-md h-[500px]">
+  <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
 
@@ -154,7 +154,7 @@ The root directive that manages notification state and business logic.
 
 #### Selector
 
-`[sc-notification-center]`
+`[scNotificationCenter]`
 
 #### Inputs
 
@@ -186,7 +186,7 @@ The root directive that manages notification state and business logic.
 `scNotificationCenter` - Access directive instance via template reference variable
 
 ```html
-<div sc-notification-center #center="scNotificationCenter">
+<div scNotificationCenter #center="scNotificationCenter">
   <!-- Access center.totalUnread(), center.filteredNotifications(), etc. -->
 </div>
 ```
@@ -197,7 +197,7 @@ The container component that renders the notification center UI.
 
 #### Selector
 
-`[sc-notification-center-container]`
+`[scNotificationCenterContainer]`
 
 #### Inputs
 
@@ -233,13 +233,13 @@ The notification center follows a composable architecture pattern that separates
 ### Example with Template Reference
 
 ```html
-<div sc-notification-center #center="scNotificationCenter" [(notifications)]="notifications">
+<div scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications">
   <!-- Access state -->
   <p>Total unread: {{ center.totalUnread() }}</p>
   <p>Filtered: {{ center.filteredNotifications().length }}</p>
 
   <!-- Use the standard container -->
-  <div sc-notification-center-container></div>
+  <div scNotificationCenterContainer></div>
 </div>
 ```
 
@@ -248,7 +248,7 @@ The notification center follows a composable architecture pattern that separates
 You can build custom UIs by accessing the directive's state:
 
 ```html
-<div sc-notification-center #center="scNotificationCenter" [(notifications)]="notifications">
+<div scNotificationCenter #center="scNotificationCenter" [(notifications)]="notifications">
   <!-- Custom UI using directive state -->
   <div class="custom-header">
     <h2>{{ center.title() }}</h2>

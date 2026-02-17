@@ -46,16 +46,16 @@ import {
     ScCodeEditorCopyButton,
   ],
   template: \`
-    <div sc-code-editor>
-      <div sc-code-editor-header>
+    <div scCodeEditor>
+      <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
           <span class="text-sm text-muted-foreground">README.md</span>
-          <span sc-code-editor-label>markdown</span>
+          <span scCodeEditorLabel>markdown</span>
         </div>
-        <button sc-code-editor-copy-button [code]="longLineCode"></button>
+        <button scCodeEditorCopyButton [code]="longLineCode"></button>
       </div>
       <div
-        sc-code-editor-content
+        scCodeEditorContent
         [(value)]="longLineCode"
         language="markdown"
         filename="README.md"

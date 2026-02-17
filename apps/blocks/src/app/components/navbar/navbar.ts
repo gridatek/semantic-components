@@ -51,10 +51,10 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div sc-navbar-provider>
-      <nav sc-navbar>
-        <div sc-navbar-group>
-          <a sc-navbar-brand routerLink="/">
+    <div scNavbarProvider>
+      <nav scNavbar>
+        <div scNavbarGroup>
+          <a scNavbarBrand routerLink="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -72,16 +72,16 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
             <span>Brand</span>
           </a>
 
-          <nav sc-navigation-menu class="hidden md:flex">
-            <ul sc-navigation-menu-list>
-              <li sc-navigation-menu-item>
-                <button sc-navigation-menu-trigger>Features</button>
-                <div sc-navigation-menu-content>
+          <nav scNavigationMenu class="hidden md:flex">
+            <ul scNavigationMenuList>
+              <li scNavigationMenuItem>
+                <button scNavigationMenuTrigger>Features</button>
+                <div scNavigationMenuContent>
                   <ul
                     class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2"
                   >
                     <li>
-                      <a sc-navigation-menu-link href="#">
+                      <a scNavigationMenuLink href="#">
                         <div class="text-sm font-medium leading-none">
                           Analytics
                         </div>
@@ -93,7 +93,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       </a>
                     </li>
                     <li>
-                      <a sc-navigation-menu-link href="#">
+                      <a scNavigationMenuLink href="#">
                         <div class="text-sm font-medium leading-none">
                           Reports
                         </div>
@@ -105,7 +105,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       </a>
                     </li>
                     <li>
-                      <a sc-navigation-menu-link href="#">
+                      <a scNavigationMenuLink href="#">
                         <div class="text-sm font-medium leading-none">
                           Automation
                         </div>
@@ -117,7 +117,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       </a>
                     </li>
                     <li>
-                      <a sc-navigation-menu-link href="#">
+                      <a scNavigationMenuLink href="#">
                         <div class="text-sm font-medium leading-none">
                           Integration
                         </div>
@@ -132,27 +132,27 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                 </div>
               </li>
 
-              <li sc-navigation-menu-item>
-                <a sc-navigation-menu-link routerLink="/">Pricing</a>
+              <li scNavigationMenuItem>
+                <a scNavigationMenuLink routerLink="/">Pricing</a>
               </li>
 
-              <li sc-navigation-menu-item>
-                <a sc-navigation-menu-link href="#">About</a>
+              <li scNavigationMenuItem>
+                <a scNavigationMenuLink href="#">About</a>
               </li>
 
-              <li sc-navigation-menu-item>
-                <a sc-navigation-menu-link routerLink="/dashboard">Dashboard</a>
+              <li scNavigationMenuItem>
+                <a scNavigationMenuLink routerLink="/dashboard">Dashboard</a>
               </li>
             </ul>
           </nav>
         </div>
 
-        <div sc-navbar-actions>
-          <button sc-button variant="ghost" class="hidden md:inline-flex">
+        <div scNavbarActions>
+          <button scButton variant="ghost" class="hidden md:inline-flex">
             Sign In
           </button>
-          <button sc-button class="hidden md:inline-flex">Get Started</button>
-          <button sc-navbar-mobile-trigger #trigger="scNavbarMobileTrigger">
+          <button scButton class="hidden md:inline-flex">Get Started</button>
+          <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
             @if (trigger.isMobileMenuOpen()) {
               <svg si-x-icon></svg>
             } @else {
@@ -165,10 +165,10 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
         </div>
       </nav>
 
-      <div sc-navbar-mobile-portal>
-        <div sc-navbar-mobile-menu>
+      <div scNavbarMobilePortal>
+        <div scNavbarMobileMenu>
           <a
-            sc-navbar-mobile-link
+            scNavbarMobileLink
             routerLink="/"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -177,11 +177,11 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           >
             Home
           </a>
-          <a sc-navbar-mobile-link href="#" [active]="false">Features</a>
-          <a sc-navbar-mobile-link href="#" [active]="false">Pricing</a>
-          <a sc-navbar-mobile-link href="#" [active]="false">About</a>
+          <a scNavbarMobileLink href="#" [active]="false">Features</a>
+          <a scNavbarMobileLink href="#" [active]="false">Pricing</a>
+          <a scNavbarMobileLink href="#" [active]="false">About</a>
           <a
-            sc-navbar-mobile-link
+            scNavbarMobileLink
             routerLink="/dashboard"
             routerLinkActive="active"
             #mobileDashboardRla="routerLinkActive"
@@ -190,8 +190,8 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
             Dashboard
           </a>
           <hr class="my-2 border-border" />
-          <button sc-button variant="ghost" class="w-full">Sign In</button>
-          <button sc-button class="w-full">Get Started</button>
+          <button scButton variant="ghost" class="w-full">Sign In</button>
+          <button scButton class="w-full">Get Started</button>
         </div>
       </div>
     </div>

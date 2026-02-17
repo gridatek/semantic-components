@@ -5,7 +5,7 @@ Displays a button or a component that looks like a button.
 ## Usage
 
 ```html
-<button sc-button>Click me</button>
+<button scButton>Click me</button>
 ```
 
 ## Directive
@@ -14,7 +14,7 @@ Displays a button or a component that looks like a button.
 
 Button directive applied to `button` elements.
 
-**Selector:** `button[sc-button]`
+**Selector:** `button[scButton]`
 
 **Inputs:**
 
@@ -51,21 +51,21 @@ Button directive applied to `button` elements.
 ### Variants
 
 ```html
-<button sc-button>Default</button>
-<button sc-button variant="secondary">Secondary</button>
-<button sc-button variant="destructive">Destructive</button>
-<button sc-button variant="outline">Outline</button>
-<button sc-button variant="ghost">Ghost</button>
-<button sc-button variant="link">Link</button>
+<button scButton>Default</button>
+<button scButton variant="secondary">Secondary</button>
+<button scButton variant="destructive">Destructive</button>
+<button scButton variant="outline">Outline</button>
+<button scButton variant="ghost">Ghost</button>
+<button scButton variant="link">Link</button>
 ```
 
 ### Sizes
 
 ```html
-<button sc-button size="lg">Large</button>
-<button sc-button size="default">Default</button>
-<button sc-button size="sm">Small</button>
-<button sc-button size="icon">
+<button scButton size="lg">Large</button>
+<button scButton size="default">Default</button>
+<button scButton size="sm">Small</button>
+<button scButton size="icon">
   <svg><!-- icon --></svg>
 </button>
 ```
@@ -73,12 +73,12 @@ Button directive applied to `button` elements.
 ### With Icons
 
 ```html
-<button sc-button>
+<button scButton>
   <svg><!-- icon --></svg>
   Upload
 </button>
 
-<button sc-button variant="outline">
+<button scButton variant="outline">
   Settings
   <svg><!-- icon --></svg>
 </button>
@@ -87,7 +87,7 @@ Button directive applied to `button` elements.
 ### Disabled
 
 ```html
-<button sc-button disabled>Disabled</button>
+<button scButton disabled>Disabled</button>
 ```
 
 ### Form Submit
@@ -96,10 +96,10 @@ By default, `sc-button` sets `type="button"` to prevent accidental form submissi
 
 ```html
 <form>
-  <button sc-button variant="outline">Cancel</button>
+  <button scButton variant="outline">Cancel</button>
   <!-- type="button" by default, won't submit -->
 
-  <button sc-button type="submit">Save</button>
+  <button scButton type="submit">Save</button>
   <!-- explicit type="submit" -->
 </form>
 ```
@@ -107,8 +107,8 @@ By default, `sc-button` sets `type="button"` to prevent accidental form submissi
 ### Loading State
 
 ```html
-<button sc-button disabled>
-  <svg sc-spinner si-loader-2-icon></svg>
+<button scButton disabled>
+  <svg scSpinner si-loader-2-icon></svg>
   Please wait
 </button>
 ```

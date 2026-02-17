@@ -15,30 +15,30 @@ import type { DockItem } from '@semantic-components/ui-lab';
     >
       <div class="text-center">
         <p class="mb-2 text-xs text-muted-foreground">Small</p>
-        <nav sc-dock size="sm">
-          <div sc-dock-items>
+        <nav scDock size="sm">
+          <div scDockItems>
             @for (item of items; track item.id) {
-              <button sc-dock-item [item]="item"></button>
+              <button scDockItem [item]="item"></button>
             }
           </div>
         </nav>
       </div>
       <div class="text-center">
         <p class="mb-2 text-xs text-muted-foreground">Medium (Default)</p>
-        <nav sc-dock size="md">
-          <div sc-dock-items>
+        <nav scDock size="md">
+          <div scDockItems>
             @for (item of items; track item.id) {
-              <button sc-dock-item [item]="item"></button>
+              <button scDockItem [item]="item"></button>
             }
           </div>
         </nav>
       </div>
       <div class="text-center">
         <p class="mb-2 text-xs text-muted-foreground">Large</p>
-        <nav sc-dock size="lg">
-          <div sc-dock-items>
+        <nav scDock size="lg">
+          <div scDockItems>
             @for (item of items; track item.id) {
-              <button sc-dock-item [item]="item"></button>
+              <button scDockItem [item]="item"></button>
             }
           </div>
         </nav>

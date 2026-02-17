@@ -26,11 +26,11 @@ export const SC_AUDIO_PLAYER = new InjectionToken<ScAudioPlayer>(
 );
 
 @Component({
-  selector: '[sc-audio-player]',
+  selector: '[scAudioPlayer]',
   imports: [ScAudioPlayerAudio],
   template: `
     <ng-content />
-    <audio sc-audio-player-audio class="hidden"></audio>
+    <audio scAudioPlayerAudio class="hidden"></audio>
   `,
   exportAs: 'scAudioPlayer',
   providers: [{ provide: SC_AUDIO_PLAYER, useExisting: ScAudioPlayer }],

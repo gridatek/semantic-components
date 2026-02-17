@@ -25,15 +25,15 @@ import { ScLabel } from '@semantic-components/ui';
     ScLabel,
   ],
   template: `
-    <div sc-number-field [value]="42" [disabled]="true">
-      <div sc-number-field-scrub-area>
-        <label sc-label>Locked Value</label>
+    <div scNumberField [value]="42" [disabled]="true">
+      <div scNumberFieldScrubArea>
+        <label scLabel>Locked Value</label>
       </div>
 
-      <div sc-number-field-group>
-        <button sc-number-field-decrement></button>
-        <input sc-number-field-input />
-        <button sc-number-field-increment></button>
+      <div scNumberFieldGroup>
+        <button scNumberFieldDecrement></button>
+        <input scNumberFieldInput />
+        <button scNumberFieldIncrement></button>
       </div>
     </div>
   `,

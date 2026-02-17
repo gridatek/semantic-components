@@ -16,16 +16,16 @@ import {
     <sc-marquee [duration]="35" [gap]="16">
       @for (i of images; track i) {
         <div
-          sc-marquee-item
+          scMarqueeItem
           class="h-32 w-48 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center"
         >
           <span class="text-4xl opacity-50">📷</span>
         </div>
       }
-      <ng-container sc-marquee-clone>
+      <ng-container scMarqueeClone>
         @for (i of images; track i) {
           <div
-            sc-marquee-item
+            scMarqueeItem
             class="h-32 w-48 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center"
           >
             <span class="text-4xl opacity-50">📷</span>

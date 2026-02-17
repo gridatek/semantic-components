@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { ScToastVariant } from './toast.types';
 
 @Component({
-  selector: 'div[sc-toast]',
+  selector: 'div[scToast]',
   template: `
     <ng-content />
   `,

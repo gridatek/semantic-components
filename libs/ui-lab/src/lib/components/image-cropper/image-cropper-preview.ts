@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
-  selector: '[sc-image-cropper-preview]',
+  selector: '[scImageCropperPreview]',
   template: `
     <div
       class="overflow-hidden bg-muted"

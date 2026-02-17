@@ -18,7 +18,7 @@ import { cn, ScLink } from '@semantic-components/ui';
         <p class="text-muted-foreground">
           Explore the docs, browse components, and start building.
         </p>
-        <a sc-link size="lg" routerLink="/docs/getting-started">
+        <a scLink size="lg" routerLink="/docs/getting-started">
           Start Building Today
         </a>
       </div>
