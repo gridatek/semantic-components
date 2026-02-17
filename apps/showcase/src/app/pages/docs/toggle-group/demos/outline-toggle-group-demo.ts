@@ -5,10 +5,21 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
+import {
+  SiKanbanIcon,
+  SiLayoutGridIcon,
+  SiListIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-outline-toggle-group-demo',
-  imports: [ScToggleGroup, ScToggleGroupItem],
+  imports: [
+    ScToggleGroup,
+    ScToggleGroupItem,
+    SiListIcon,
+    SiLayoutGridIcon,
+    SiKanbanIcon,
+  ],
   template: `
     <div
       scToggleGroup
@@ -18,61 +29,13 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
       aria-label="View mode"
     >
       <button scToggleGroupItem value="list" aria-label="List view">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <line x1="8" x2="21" y1="6" y2="6" />
-          <line x1="8" x2="21" y1="12" y2="12" />
-          <line x1="8" x2="21" y1="18" y2="18" />
-          <line x1="3" x2="3.01" y1="6" y2="6" />
-          <line x1="3" x2="3.01" y1="12" y2="12" />
-          <line x1="3" x2="3.01" y1="18" y2="18" />
-        </svg>
+        <svg si-list-icon></svg>
       </button>
       <button scToggleGroupItem value="grid" aria-label="Grid view">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <rect width="7" height="7" x="3" y="3" rx="1" />
-          <rect width="7" height="7" x="14" y="3" rx="1" />
-          <rect width="7" height="7" x="14" y="14" rx="1" />
-          <rect width="7" height="7" x="3" y="14" rx="1" />
-        </svg>
+        <svg si-layout-grid-icon></svg>
       </button>
       <button scToggleGroupItem value="kanban" aria-label="Kanban view">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4"
-        >
-          <rect width="6" height="14" x="4" y="5" rx="2" />
-          <rect width="6" height="10" x="14" y="7" rx="2" />
-        </svg>
+        <svg si-kanban-icon></svg>
       </button>
     </div>
   `,
