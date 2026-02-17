@@ -939,9 +939,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'toggle-group',
     description: 'A set of toggle buttons that work together.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Buttons & Actions',
-    hidden: true,
   },
   {
     name: 'Toolbar',

@@ -4,7 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
+import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-outline-toggle-group-demo',

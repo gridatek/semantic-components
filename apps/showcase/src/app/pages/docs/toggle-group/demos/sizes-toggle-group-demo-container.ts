@@ -24,7 +24,7 @@ export class SizesToggleGroupDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
+import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-sizes-toggle-group-demo',

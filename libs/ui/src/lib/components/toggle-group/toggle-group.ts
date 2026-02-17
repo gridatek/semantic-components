@@ -1,28 +1,37 @@
 import { computed, Directive, input, model } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-
-export type ToggleGroupType = 'single' | 'multiple';
-export type ToggleGroupVariant = 'default' | 'outline';
-export type ToggleGroupSize = 'default' | 'sm' | 'lg';
+import { cn } from '../../utils';
+import { type ScToggleVariants } from '../toggle/toggle';
 
 @Directive({
   selector: 'div[scToggleGroup]',
   host: {
     'data-slot': 'toggle-group',
     role: 'group',
+    '[attr.data-variant]': 'variant()',
+    '[attr.data-size]': 'size()',
+    '[attr.data-spacing]': 'spacing()',
+    '[attr.data-orientation]': 'orientation()',
+    '[attr.data-horizontal]': 'orientation() === "horizontal" ? "" : null',
+    '[attr.data-vertical]': 'orientation() === "vertical" ? "" : null',
+    '[style.--gap]': 'spacing()',
     '[class]': 'class()',
   },
 })
 export class ScToggleGroup {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly type = input<ToggleGroupType>('single');
+  readonly type = input<'single' | 'multiple'>('single');
   readonly value = model<string | string[] | null>(null);
   readonly disabled = input<boolean>(false);
-  readonly variant = input<ToggleGroupVariant>('default');
-  readonly size = input<ToggleGroupSize>('default');
+  readonly variant = input<ScToggleVariants['variant']>('default');
+  readonly size = input<ScToggleVariants['size']>('default');
+  readonly spacing = input<number>(0);
+  readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
 
   protected readonly class = computed(() =>
-    cn('flex items-center justify-center gap-1', this.classInput()),
+    cn(
+      'rounded-lg data-[size=sm]:rounded-[min(var(--radius-md),10px)] group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] data-vertical:flex-col data-vertical:items-stretch',
+      this.classInput(),
+    ),
   );
 
   isSelected(itemValue: string): boolean {

@@ -25,7 +25,7 @@ export class MultipleToggleGroupDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui-lab';
+import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-multiple-toggle-group-demo',
