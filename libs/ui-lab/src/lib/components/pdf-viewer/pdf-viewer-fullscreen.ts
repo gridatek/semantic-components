@@ -6,7 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Component({
@@ -31,6 +31,6 @@ export class ScPdfViewerFullscreen {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('p-2 rounded-lg hover:bg-muted transition-colors', this.classInput()),
+    cn(buttonVariants({ variant: 'ghost', size: 'icon' }), this.classInput()),
   );
 }

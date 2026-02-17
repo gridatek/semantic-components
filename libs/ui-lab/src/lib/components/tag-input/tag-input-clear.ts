@@ -6,7 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_TAG_INPUT } from './tag-input';
 
 // ============================================================================
@@ -45,10 +45,8 @@ export class ScTagInputClear {
 
   protected readonly class = computed(() =>
     cn(
-      'ml-auto inline-flex size-6 items-center justify-center rounded-md',
-      'text-muted-foreground hover:text-foreground hover:bg-muted',
-      'disabled:pointer-events-none disabled:opacity-50',
-      'focus:outline-none focus:ring-1 focus:ring-ring',
+      buttonVariants({ variant: 'ghost', size: 'icon-xs' }),
+      'ml-auto text-muted-foreground',
       this.classInput(),
     ),
   );

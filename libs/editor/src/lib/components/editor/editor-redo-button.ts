@@ -6,7 +6,7 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Component({
@@ -30,10 +30,7 @@ export class ScEditorRedoButton {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'p-1.5 rounded hover:bg-accent disabled:opacity-50 [&_svg]:size-4',
-      this.classInput(),
-    ),
+    cn(buttonVariants({ variant: 'ghost', size: 'icon' }), this.classInput()),
   );
 
   onClick(): void {

@@ -6,7 +6,7 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD } from './signature-pad';
 
 @Component({
@@ -29,12 +29,7 @@ export class ScSignaturePadUndoButton {
   readonly ariaLabel = input<string>('Undo last stroke');
 
   protected readonly class = computed(() =>
-    cn(
-      'p-1.5 rounded-md bg-background/80 border hover:bg-accent',
-      'disabled:opacity-50 disabled:cursor-not-allowed',
-      'focus:outline-none focus:ring-2 focus:ring-ring',
-      this.classInput(),
-    ),
+    cn(buttonVariants({ variant: 'outline', size: 'icon' }), this.classInput()),
   );
 
   protected readonly isDisabled = computed(
