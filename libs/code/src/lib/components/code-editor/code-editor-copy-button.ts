@@ -6,7 +6,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'button[scCodeEditorCopyButton]',
@@ -54,7 +54,8 @@ export class ScCodeEditorCopyButton {
 
   protected readonly class = computed(() =>
     cn(
-      'rounded p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground',
+      buttonVariants({ variant: 'ghost', size: 'icon' }),
+      'text-muted-foreground',
       this.classInput(),
     ),
   );

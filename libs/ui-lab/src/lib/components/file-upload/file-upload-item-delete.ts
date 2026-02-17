@@ -6,7 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Component({
@@ -46,9 +46,8 @@ export class ScFileUploadItemDelete {
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex size-8 items-center justify-center rounded-md text-muted-foreground',
-      'transition-colors hover:bg-accent hover:text-foreground',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+      buttonVariants({ variant: 'ghost', size: 'icon' }),
+      'text-muted-foreground',
       this.classInput(),
     ),
   );

@@ -5,7 +5,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'button[scEmojiPickerTrigger]',
@@ -38,11 +38,6 @@ export class ScEmojiPickerTrigger {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'inline-flex items-center justify-center rounded-md p-2',
-      'hover:bg-accent hover:text-accent-foreground transition-colors',
-      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
-      this.classInput(),
-    ),
+    cn(buttonVariants({ variant: 'ghost', size: 'icon' }), this.classInput()),
   );
 }
