@@ -1,6 +1,9 @@
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { inject, Injectable, signal } from '@angular/core';
-import { ScToastConfig, ScToastData } from './toast.types';
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { ScToastConfig, ScToastData } from './toast.types';
+import { ScToastStack } from './toast-stack';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +16,16 @@ export class ScToaster {
   private timeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
   private readonly idGenerator = inject(_IdGenerator);
+  private readonly overlay = inject(Overlay);
+
+  private overlayRef: OverlayRef | null = null;
 
   /**
    * Show a new toast notification
    */
   show(config: ScToastConfig): string {
+    this.ensureOverlay();
+
     const id = this.idGenerator.getId('sc-toast-');
 
     const toast: ScToastData = {
@@ -63,5 +71,20 @@ export class ScToaster {
     this.timeouts.forEach((timeout) => clearTimeout(timeout));
     this.timeouts.clear();
     this.toastsSignal.set([]);
+  }
+
+  private ensureOverlay(): void {
+    if (this.overlayRef) {
+      return;
+    }
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy: this.overlay.position().global(),
+      hasBackdrop: false,
+      panelClass: 'sc-toast-overlay',
+    });
+
+    const portal = new ComponentPortal(ScToastStack);
+    this.overlayRef.attach(portal);
   }
 }
