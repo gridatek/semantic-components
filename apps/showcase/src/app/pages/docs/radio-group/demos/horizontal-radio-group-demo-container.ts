@@ -26,7 +26,7 @@ export class HorizontalRadioGroupDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui-lab';
+import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui';
 
 interface FilterFormModel {
   filter: string;

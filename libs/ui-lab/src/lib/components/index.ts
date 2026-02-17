@@ -43,7 +43,6 @@ export * from './pdf-viewer';
 export * from './phone-input';
 export * from './progress';
 export * from './qr-code';
-export * from './radio-group';
 export * from './rating-field';
 export * from './resizable';
 export * from './scroll-area';

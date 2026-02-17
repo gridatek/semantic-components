@@ -22,6 +22,7 @@ export * from './label';
 export * from './link';
 export * from './pagination';
 export * from './popover';
+export * from './radio-group';
 export * from './sheet';
 export * from './spinner';
 export * from './table';

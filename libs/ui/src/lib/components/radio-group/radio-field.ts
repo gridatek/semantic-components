@@ -8,8 +8,8 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SC_FIELD } from '@semantic-components/ui';
+import { SC_FIELD } from '../field/field';
+import { cn } from '../../utils';
 
 @Component({
   selector: 'div[scRadioField], label[scRadioField]',

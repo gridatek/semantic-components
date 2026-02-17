@@ -667,9 +667,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'radio-group',
     description: 'A group of radio buttons for single selection.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Rating Field',

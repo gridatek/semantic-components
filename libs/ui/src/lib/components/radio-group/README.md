@@ -13,7 +13,7 @@ A set of checkable buttons where only one button can be checked at a time.
 ```typescript
 import { Component, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui-lab';
+import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui';
 
 interface FormModel {
   option: string;
