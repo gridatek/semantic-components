@@ -9,7 +9,7 @@ Displays an empty state with optional media, header, and action content.
 - `ScEmptyMedia` - Icon or image wrapper with variant support
 - `ScEmptyTitle` - Short heading for the empty state
 - `ScEmptyDescription` - Explanatory text below the title
-- `ScEmptyContent` - Slot for action buttons or additional content
+- `ScEmptyBody` - Slot for action buttons or additional content
 
 ## Usage
 
@@ -36,7 +36,7 @@ Displays an empty state with optional media, header, and action content.
     <div scEmptyTitle>No projects yet</div>
     <div scEmptyDescription>Get started by creating your first project.</div>
   </div>
-  <div scEmptyContent>
+  <div scEmptyBody>
     <button scButton>Create Project</button>
   </div>
 </div>
@@ -82,7 +82,7 @@ Displays an empty state with optional media, header, and action content.
 | ------- | -------- | ------- | ---------------------- |
 | `class` | `string` | `''`    | Additional CSS classes |
 
-### ScEmptyContent
+### ScEmptyBody
 
 | Input   | Type     | Default | Description            |
 | ------- | -------- | ------- | ---------------------- |

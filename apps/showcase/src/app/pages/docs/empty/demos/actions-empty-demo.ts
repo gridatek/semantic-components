@@ -10,7 +10,7 @@ import {
   ScEmptyMedia,
   ScEmptyTitle,
   ScEmptyDescription,
-  ScEmptyContent,
+  ScEmptyBody,
 } from '@semantic-components/ui';
 import { SiFolderIcon } from '@semantic-icons/lucide-icons';
 
@@ -23,7 +23,7 @@ import { SiFolderIcon } from '@semantic-icons/lucide-icons';
     ScEmptyMedia,
     ScEmptyTitle,
     ScEmptyDescription,
-    ScEmptyContent,
+    ScEmptyBody,
     SiFolderIcon,
   ],
   template: `
