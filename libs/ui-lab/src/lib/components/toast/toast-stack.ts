@@ -25,7 +25,8 @@ import { ScToaster } from './toaster';
       <div
         scToast
         [variant]="toast.variant ?? 'default'"
-        [attr.data-state]="'open'"
+        [attr.data-state]="toast.state ?? 'open'"
+        (animationend)="onAnimationEnd($event, toast.id)"
       >
         <div class="grid gap-1">
           @if (toast.title) {
@@ -80,5 +81,15 @@ export class ScToastStack {
   protected onAction(id: string, onClick: () => void): void {
     onClick();
     this.toastService.dismiss(id);
+  }
+
+  protected onAnimationEnd(event: AnimationEvent, id: string): void {
+    // Ignore events bubbling up from child elements
+    if (event.target !== event.currentTarget) return;
+
+    const toast = this.toastService.toasts().find((t) => t.id === id);
+    if (toast?.state === 'closed') {
+      this.toastService.remove(id);
+    }
   }
 }

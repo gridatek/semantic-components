@@ -54,13 +54,24 @@ export class ScToaster {
    * Dismiss a specific toast by ID
    */
   dismiss(id: string): void {
-    // Clear timeout if exists
+    // Clear auto-dismiss timeout if exists
     const timeout = this.timeouts.get(id);
     if (timeout) {
       clearTimeout(timeout);
       this.timeouts.delete(id);
     }
 
+    // Set state to 'closed' to trigger exit animation.
+    // Actual removal happens in toast-stack via (animationend).
+    this.toastsSignal.update((toasts) =>
+      toasts.map((t) => (t.id === id ? { ...t, state: 'closed' as const } : t)),
+    );
+  }
+
+  /**
+   * Called by toast-stack after the exit animation completes.
+   */
+  remove(id: string): void {
     this.toastsSignal.update((toasts) => toasts.filter((t) => t.id !== id));
   }
 
@@ -70,7 +81,9 @@ export class ScToaster {
   dismissAll(): void {
     this.timeouts.forEach((timeout) => clearTimeout(timeout));
     this.timeouts.clear();
-    this.toastsSignal.set([]);
+    this.toastsSignal.update((toasts) =>
+      toasts.map((t) => ({ ...t, state: 'closed' as const })),
+    );
   }
 
   private ensureOverlay(): void {
