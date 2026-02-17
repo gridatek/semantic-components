@@ -28,7 +28,7 @@ export class DisabledToggleDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScToggle } from '@semantic-components/ui-lab';
+import { ScToggle } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-toggle-demo',

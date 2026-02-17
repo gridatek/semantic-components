@@ -66,7 +66,6 @@ export * from './time-picker';
 export * from './timeline';
 export * from './timezone';
 export * from './toast';
-export * from './toggle';
 export * from './toggle-group';
 export * from './toolbar';
 export * from './tour-guide';

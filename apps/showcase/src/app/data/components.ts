@@ -931,9 +931,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'toggle',
     description: 'A two-state button that can be on or off.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Buttons & Actions',
-    hidden: true,
   },
   {
     name: 'Toggle Group',
