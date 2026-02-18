@@ -12,6 +12,6 @@ export class ScBreadcrumbLink {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('transition-colors hover:text-foreground', this.classInput()),
+    cn('hover:text-foreground transition-colors', this.classInput()),
   );
 }

@@ -15,6 +15,6 @@ export class ScBreadcrumbPage {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('font-normal text-foreground', this.classInput()),
+    cn('text-foreground font-normal', this.classInput()),
   );
 }
