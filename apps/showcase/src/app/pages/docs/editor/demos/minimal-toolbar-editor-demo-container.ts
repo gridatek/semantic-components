@@ -64,11 +64,11 @@ import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
       <div scEditorToolbar>
         <div scEditorToolbarGroup>
           <button scEditorBold>
-            <svg si-bold-icon></svg>
+            <svg siBoldIcon></svg>
             <span class="sr-only">Bold</span>
           </button>
           <button scEditorItalic>
-            <svg si-italic-icon></svg>
+            <svg siItalicIcon></svg>
             <span class="sr-only">Italic</span>
           </button>
         </div>

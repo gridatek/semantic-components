@@ -15,7 +15,7 @@ import { SiAlertTriangleIcon } from '@semantic-icons/lucide-icons';
   imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiAlertTriangleIcon],
   template: `
     <div scAlert variant="destructive">
-      <svg si-alert-triangle-icon></svg>
+      <svg siAlertTriangleIcon></svg>
       <h5 scAlertTitle>Error</h5>
       <div scAlertDescription>
         Your session has expired. Please log in again.

@@ -17,7 +17,7 @@ import { SiItalicIcon } from '@semantic-icons/lucide-icons';
       [(pressed)]="italic"
       aria-label="Toggle italic"
     >
-      <svg si-italic-icon></svg>
+      <svg siItalicIcon></svg>
     </button>
   `,
   encapsulation: ViewEncapsulation.None,

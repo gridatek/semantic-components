@@ -66,7 +66,7 @@ import {
     >
       <!-- Buffering Indicator -->
       <div scVideoPlayerBuffering>
-        <svg si-loader-icon></svg>
+        <svg siLoaderIcon></svg>
       </div>
 
       <!-- Video -->
@@ -82,7 +82,7 @@ import {
           <div
             class="size-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform"
           >
-            <svg si-play-icon></svg>
+            <svg siPlayIcon></svg>
           </div>
         </button>
       }
@@ -95,9 +95,9 @@ import {
           <!-- Play/Pause -->
           <button scVideoPlayerPlay>
             @if (player.isPlaying()) {
-              <svg si-pause-icon></svg>
+              <svg siPauseIcon></svg>
             } @else {
-              <svg si-play-icon></svg>
+              <svg siPlayIcon></svg>
             }
           </button>
 
@@ -107,7 +107,7 @@ import {
             [seconds]="-10"
             ariaLabel="Skip back 10 seconds"
           >
-            <svg si-rotate-ccw-icon></svg>
+            <svg siRotateCcwIcon></svg>
           </button>
 
           <!-- Skip Forward -->
@@ -116,15 +116,15 @@ import {
             [seconds]="10"
             ariaLabel="Skip forward 10 seconds"
           >
-            <svg si-rotate-cw-icon></svg>
+            <svg siRotateCwIcon></svg>
           </button>
 
           <!-- Volume -->
           <div scVideoPlayerVolume>
             @if (player.isMuted() || player.volume() === 0) {
-              <svg volume-icon si-volume-x-icon></svg>
+              <svg volume-icon siVolumeXIcon></svg>
             } @else {
-              <svg volume-icon si-volume-2-icon></svg>
+              <svg volume-icon siVolume2Icon></svg>
             }
           </div>
 
@@ -139,15 +139,15 @@ import {
 
           <!-- Picture in Picture -->
           <button scVideoPlayerPip>
-            <svg si-picture-in-picture-2-icon></svg>
+            <svg siPictureInPicture2Icon></svg>
           </button>
 
           <!-- Fullscreen -->
           <button scVideoPlayerFullscreen>
             @if (player.isFullscreen()) {
-              <svg si-minimize-icon></svg>
+              <svg siMinimizeIcon></svg>
             } @else {
-              <svg si-maximize-icon></svg>
+              <svg siMaximizeIcon></svg>
             }
           </button>
         </div>

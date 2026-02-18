@@ -36,7 +36,7 @@ import {
     <div scItemGroup class="max-w-md">
       <div scItem>
         <div scItemMedia variant="icon">
-          <svg si-bell-icon></svg>
+          <svg siBellIcon></svg>
         </div>
         <div scItemBody>
           <div scItemTitle>Notifications</div>
@@ -48,7 +48,7 @@ import {
 
       <div scItem>
         <div scItemMedia variant="icon">
-          <svg si-lock-icon></svg>
+          <svg siLockIcon></svg>
         </div>
         <div scItemBody>
           <div scItemTitle>Privacy</div>
@@ -60,7 +60,7 @@ import {
 
       <div scItem>
         <div scItemMedia variant="icon">
-          <svg si-settings-icon></svg>
+          <svg siSettingsIcon></svg>
         </div>
         <div scItemBody>
           <div scItemTitle>Settings</div>

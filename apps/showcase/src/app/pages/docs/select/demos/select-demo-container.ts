@@ -121,7 +121,7 @@ import {
           aria-label="Label dropdown"
           placeholder="Select a label"
         />
-        <svg scSelectIcon si-chevron-down-icon aria-hidden="true"></svg>
+        <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
       <div scSelectPortal>
         <div scSelectList>
@@ -184,7 +184,7 @@ import {
               <span class="flex-1">{{ label.value }}</span>
               <svg
                 scSelectItemIndicator
-                si-check-icon
+                siCheckIcon
                 aria-hidden="true"
               ></svg>
             </div>

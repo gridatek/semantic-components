@@ -38,13 +38,13 @@ import {
   template: \`
     <div scToggleGroup type="single" variant="outline" [(value)]="view" aria-label="View mode">
       <button scToggleGroupItem value="list" aria-label="List view">
-        <svg si-list-icon></svg>
+        <svg siListIcon></svg>
       </button>
       <button scToggleGroupItem value="grid" aria-label="Grid view">
-        <svg si-layout-grid-icon></svg>
+        <svg siLayoutGridIcon></svg>
       </button>
       <button scToggleGroupItem value="kanban" aria-label="Kanban view">
-        <svg si-kanban-icon></svg>
+        <svg siKanbanIcon></svg>
       </button>
     </div>
   \`,

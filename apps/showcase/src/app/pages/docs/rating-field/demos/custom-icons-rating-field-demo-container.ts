@@ -46,7 +46,7 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
               class="cursor-pointer transition-transform hover:scale-110"
             >
               <svg
-                si-heart-icon
+                siHeartIcon
                 class="size-6 transition-colors"
                 [class.fill-red-500]="i <= rating()"
                 [class.text-red-500]="i <= rating()"

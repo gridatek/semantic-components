@@ -30,7 +30,7 @@ import { SiFolderIcon } from '@semantic-icons/lucide-icons';
     <div scEmpty class="border">
       <div scEmptyHeader>
         <div scEmptyMedia variant="icon">
-          <svg si-folder-icon></svg>
+          <svg siFolderIcon></svg>
         </div>
         <div scEmptyTitle>No projects yet</div>
         <div scEmptyDescription>

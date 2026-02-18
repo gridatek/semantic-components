@@ -31,12 +31,12 @@ import { cn } from '../../utils';
   template: `
     <ng-content />
     <svg
-      si-chevron-down-icon
+      siChevronDownIcon
       data-slot="accordion-trigger-icon"
       class="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
     ></svg>
     <svg
-      si-chevron-up-icon
+      siChevronUpIcon
       data-slot="accordion-trigger-icon"
       class="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
     ></svg>

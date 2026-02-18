@@ -48,7 +48,7 @@ import { ScInput } from '@semantic-components/ui';
       <ng-template scSheetPortal>
         <div scSheet>
           <button scSheetClose>
-            <svg si-x-icon></svg>
+            <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
           <div scSheetHeader>

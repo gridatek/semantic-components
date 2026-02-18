@@ -61,7 +61,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                   class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                   href="#"
                 >
-                  <svg si-sparkles-icon class="size-6"></svg>
+                  <svg siSparklesIcon class="size-6"></svg>
                   <div class="mb-2 mt-4 text-lg font-medium">SC Components</div>
                   <p class="text-sm leading-tight text-muted-foreground">
                     Beautiful Angular components built with Tailwind CSS.

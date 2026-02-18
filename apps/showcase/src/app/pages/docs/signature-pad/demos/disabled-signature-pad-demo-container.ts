@@ -50,10 +50,10 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
 
       <div scSignaturePadControls>
         <button scSignaturePadUndo>
-          <svg si-undo-icon class="size-4"></svg>
+          <svg siUndoIcon class="size-4"></svg>
         </button>
         <button scSignaturePadClear>
-          <svg si-trash-2-icon class="size-4"></svg>
+          <svg siTrash2Icon class="size-4"></svg>
         </button>
       </div>
     </div>

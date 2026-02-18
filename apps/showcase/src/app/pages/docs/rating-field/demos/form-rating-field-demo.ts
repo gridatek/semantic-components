@@ -41,7 +41,7 @@ interface ReviewForm {
                 class="cursor-pointer transition-transform hover:scale-110"
               >
                 <svg
-                  si-star-icon
+                  siStarIcon
                   class="size-6 transition-colors"
                   [class.fill-yellow-400]="i <= formModel().rating"
                   [class.text-yellow-400]="i <= formModel().rating"
@@ -53,9 +53,7 @@ interface ReviewForm {
         </div>
       </div>
 
-      <button scButton (click)="onSubmit()" class="w-fit">
-        Submit Rating
-      </button>
+      <button scButton (click)="onSubmit()" class="w-fit">Submit Rating</button>
 
       @if (submitted) {
         <div class="rounded-md bg-muted p-4">

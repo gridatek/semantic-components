@@ -88,7 +88,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                   <option value="svelte">Svelte</option>
                 </select>
                 <svg
-                  si-chevron-down-icon
+                  siChevronDownIcon
                   scNativeSelectIcon
                   aria-hidden="true"
                 ></svg>

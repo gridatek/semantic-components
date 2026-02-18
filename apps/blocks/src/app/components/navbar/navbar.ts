@@ -154,9 +154,9 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           <button scButton class="hidden md:inline-flex">Get Started</button>
           <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
             @if (trigger.isMobileMenuOpen()) {
-              <svg si-x-icon></svg>
+              <svg siXIcon></svg>
             } @else {
-              <svg si-menu-icon></svg>
+              <svg siMenuIcon></svg>
             }
             <span class="sr-only">
               {{ trigger.isMobileMenuOpen() ? 'Close menu' : 'Open menu' }}

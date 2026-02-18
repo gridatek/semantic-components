@@ -49,7 +49,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
     <div scInputGroup>
       <div scInputGroupAddon>
         <span scInputGroupText>
-          <svg si-mail-icon></svg>
+          <svg siMailIcon></svg>
         </span>
       </div>
       <input scInput variant="group" placeholder="Email address" />

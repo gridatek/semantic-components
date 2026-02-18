@@ -41,7 +41,7 @@ import { SiPlusIcon } from '@semantic-icons/lucide-icons';
       size="icon"
       scTooltipTrigger="Add item"
     >
-      <svg si-plus-icon class="size-4"></svg>
+      <svg siPlusIcon class="size-4"></svg>
       <span class="sr-only">Add item</span>
     </button>
   \`,

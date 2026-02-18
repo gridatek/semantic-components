@@ -42,7 +42,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
           @for (i of [1, 2, 3, 4, 5]; track i) {
             <span scRatingItem [value]="i" class="opacity-50">
               <svg
-                si-star-icon
+                siStarIcon
                 class="size-6"
                 [class.fill-yellow-400]="i <= rating()"
                 [class.text-yellow-400]="i <= rating()"

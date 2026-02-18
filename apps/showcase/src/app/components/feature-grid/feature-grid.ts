@@ -43,7 +43,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-code-xml-icon
+                siCodeXmlIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
@@ -59,7 +59,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-notebook-icon
+                siNotebookIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
@@ -75,7 +75,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-grid-2x2-icon
+                siGrid2x2Icon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
@@ -91,7 +91,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-sparkles-icon
+                siSparklesIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
@@ -107,7 +107,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-terminal-icon
+                siTerminalIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
@@ -123,7 +123,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-accessibility-icon
+                siAccessibilityIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
@@ -139,7 +139,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-tag-icon
+                siTagIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
@@ -155,7 +155,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-layout-icon
+                siLayoutIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
@@ -171,7 +171,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                si-moon-icon
+                siMoonIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>

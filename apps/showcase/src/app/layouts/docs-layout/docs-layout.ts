@@ -115,7 +115,7 @@ import { ConfigService } from '../../services/config.service';
               <ul scSidebarMenu>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg si-book-open-text-icon></svg>
+                    <svg siBookOpenTextIcon></svg>
                     <span>Semantic Components</span>
                   </a>
                   <ul scSidebarMenuSub>
@@ -146,7 +146,7 @@ import { ConfigService } from '../../services/config.service';
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg si-download-icon></svg>
+                    <svg siDownloadIcon></svg>
                     <span>Installation</span>
                   </a>
                   <ul scSidebarMenuSub>
@@ -226,7 +226,7 @@ import { ConfigService } from '../../services/config.service';
                 </li>
                 <li scSidebarMenuItem>
                   <a scSidebarMenuButton>
-                    <svg si-box-icon></svg>
+                    <svg siBoxIcon></svg>
                     <span>Components</span>
                   </a>
                   <ul scSidebarMenuSub>
@@ -255,9 +255,9 @@ import { ConfigService } from '../../services/config.service';
             <li scSidebarMenuItem>
               <button scThemeToggle #themeToggle="scThemeToggle" class="w-full">
                 @if (themeToggle.isDark()) {
-                  <svg si-sun-icon></svg>
+                  <svg siSunIcon></svg>
                 } @else {
-                  <svg si-moon-icon></svg>
+                  <svg siMoonIcon></svg>
                 }
               </button>
             </li>

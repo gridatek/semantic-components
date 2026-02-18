@@ -71,7 +71,7 @@ import {
       <ul scPaginationList>
         <li scPaginationItem>
           <a scPaginationPrevious>
-            <svg si-chevron-left-icon></svg>
+            <svg siChevronLeftIcon></svg>
             <span>Previous</span>
           </a>
         </li>
@@ -79,7 +79,7 @@ import {
           <li scPaginationItem>
             @if (page.type === 'ellipsis') {
               <span scPaginationEllipsis>
-                <svg si-ellipsis-icon></svg>
+                <svg siEllipsisIcon></svg>
                 <span class="sr-only">More pages</span>
               </span>
             } @else {
@@ -92,7 +92,7 @@ import {
         <li scPaginationItem>
           <a scPaginationNext>
             <span>Next</span>
-            <svg si-chevron-right-icon></svg>
+            <svg siChevronRightIcon></svg>
           </a>
         </li>
       </ul>

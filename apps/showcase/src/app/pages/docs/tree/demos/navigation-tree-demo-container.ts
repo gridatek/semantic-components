@@ -67,26 +67,26 @@ import {
           [expanded]="true"
         >
           <button scTreeItemTrigger>
-            <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
-            <svg scTreeItemIcon si-home-icon></svg>
+            <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
+            <svg scTreeItemIcon siHomeIcon></svg>
             <span>Getting Started</span>
           </button>
           <ul scTreeItemGroup>
             <li scTreeItem [parent]="tree.tree" value="introduction">
               <button scTreeItemTrigger>
-                <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
+                <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Introduction</span>
               </button>
             </li>
             <li scTreeItem [parent]="tree.tree" value="installation">
               <button scTreeItemTrigger>
-                <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
+                <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Installation</span>
               </button>
             </li>
             <li scTreeItem [parent]="tree.tree" value="configuration">
               <button scTreeItemTrigger>
-                <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
+                <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Configuration</span>
               </button>
             </li>
@@ -94,26 +94,26 @@ import {
         </li>
         <li scTreeItem [parent]="tree.tree" value="components">
           <button scTreeItemTrigger>
-            <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
-            <svg scTreeItemIcon si-book-open-icon></svg>
+            <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
+            <svg scTreeItemIcon siBookOpenIcon></svg>
             <span>Components</span>
           </button>
           <ul scTreeItemGroup>
             <li scTreeItem [parent]="tree.tree" value="button">
               <button scTreeItemTrigger>
-                <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
+                <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Button</span>
               </button>
             </li>
             <li scTreeItem [parent]="tree.tree" value="input">
               <button scTreeItemTrigger>
-                <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
+                <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Input</span>
               </button>
             </li>
             <li scTreeItem [parent]="tree.tree" value="select">
               <button scTreeItemTrigger>
-                <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
+                <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Select</span>
               </button>
             </li>
@@ -121,20 +121,20 @@ import {
         </li>
         <li scTreeItem [parent]="tree.tree" value="api-reference">
           <button scTreeItemTrigger>
-            <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
-            <svg scTreeItemIcon si-settings-icon></svg>
+            <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
+            <svg scTreeItemIcon siSettingsIcon></svg>
             <span>API Reference</span>
           </button>
           <ul scTreeItemGroup>
             <li scTreeItem [parent]="tree.tree" value="overview">
               <button scTreeItemTrigger>
-                <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
+                <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Overview</span>
               </button>
             </li>
             <li scTreeItem [parent]="tree.tree" value="hooks">
               <button scTreeItemTrigger>
-                <svg scTreeItemTriggerIcon si-chevron-right-icon></svg>
+                <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Hooks</span>
               </button>
             </li>

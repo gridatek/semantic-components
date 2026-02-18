@@ -57,7 +57,7 @@ import { SiBellIcon, SiLockIcon, SiSettingsIcon } from '@semantic-icons/lucide-i
     <div scItemGroup class="max-w-md">
       <div scItem>
         <div scItemMedia variant="icon">
-          <svg si-bell-icon></svg>
+          <svg siBellIcon></svg>
         </div>
         <div scItemBody>
           <div scItemTitle>Notifications</div>
@@ -69,7 +69,7 @@ import { SiBellIcon, SiLockIcon, SiSettingsIcon } from '@semantic-icons/lucide-i
 
       <div scItem>
         <div scItemMedia variant="icon">
-          <svg si-lock-icon></svg>
+          <svg siLockIcon></svg>
         </div>
         <div scItemBody>
           <div scItemTitle>Privacy</div>
@@ -81,7 +81,7 @@ import { SiBellIcon, SiLockIcon, SiSettingsIcon } from '@semantic-icons/lucide-i
 
       <div scItem>
         <div scItemMedia variant="icon">
-          <svg si-settings-icon></svg>
+          <svg siSettingsIcon></svg>
         </div>
         <div scItemBody>
           <div scItemTitle>Settings</div>

@@ -21,7 +21,7 @@ import {
         (click)="previous.emit()"
         [attr.aria-label]="previousLabel()"
       >
-        <svg si-chevron-left-icon class="size-4"></svg>
+        <svg siChevronLeftIcon class="size-4"></svg>
       </button>
       <button
         type="button"
@@ -38,7 +38,7 @@ import {
         (click)="next.emit()"
         [attr.aria-label]="nextLabel()"
       >
-        <svg si-chevron-right-icon class="size-4"></svg>
+        <svg siChevronRightIcon class="size-4"></svg>
       </button>
     </div>
   `,

@@ -26,7 +26,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
     <div scEmpty class="border">
       <div scEmptyHeader>
         <div scEmptyMedia variant="icon">
-          <svg si-search-icon></svg>
+          <svg siSearchIcon></svg>
         </div>
         <div scEmptyTitle>No results found</div>
         <div scEmptyDescription>

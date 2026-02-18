@@ -44,9 +44,9 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       </div>
       <button scThemeToggle variant="outline" #toggle="scThemeToggle">
         @if (toggle.isDark()) {
-          <svg si-sun-icon></svg>
+          <svg siSunIcon></svg>
         } @else {
-          <svg si-moon-icon></svg>
+          <svg siMoonIcon></svg>
         }
       </button>
     </div>

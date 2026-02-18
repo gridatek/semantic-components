@@ -14,9 +14,9 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
     <div class="flex items-center gap-4">
       <button scThemeToggle #toggle="scThemeToggle">
         @if (toggle.isDark()) {
-          <svg si-sun-icon></svg>
+          <svg siSunIcon></svg>
         } @else {
-          <svg si-moon-icon></svg>
+          <svg siMoonIcon></svg>
         }
       </button>
       <span class="text-sm text-muted-foreground">

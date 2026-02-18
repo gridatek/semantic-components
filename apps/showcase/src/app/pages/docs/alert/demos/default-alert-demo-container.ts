@@ -35,7 +35,7 @@ import { SiAlertCircleIcon } from '@semantic-icons/lucide-icons';
   imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiAlertCircleIcon],
   template: \`
     <div scAlert>
-      <svg si-alert-circle-icon></svg>
+      <svg siAlertCircleIcon></svg>
       <h5 scAlertTitle>Heads up!</h5>
       <div scAlertDescription>
         You can add components to your app using the cli.

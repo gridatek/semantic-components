@@ -141,7 +141,7 @@ import { Logo } from '../logo/logo';
             aria-label="GitHub"
             class="hidden md:inline-flex gap-1"
           >
-            <svg si-github-icon></svg>
+            <svg siGithubIcon></svg>
             @if (starCount()) {
               <span class="text-muted-foreground w-fit text-xs tabular-nums">
                 {{ starCount() }}
@@ -158,7 +158,7 @@ import { Logo } from '../logo/logo';
             aria-label="GitHub"
             class="md:hidden"
           >
-            <svg si-github-icon></svg>
+            <svg siGithubIcon></svg>
           </a>
           <a
             scLink
@@ -169,16 +169,16 @@ import { Logo } from '../logo/logo';
           </a>
           <button scThemeToggle #themeToggle="scThemeToggle">
             @if (themeToggle.isDark()) {
-              <svg si-sun-icon></svg>
+              <svg siSunIcon></svg>
             } @else {
-              <svg si-moon-icon></svg>
+              <svg siMoonIcon></svg>
             }
           </button>
           <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
             @if (trigger.isMobileMenuOpen()) {
-              <svg si-x-icon></svg>
+              <svg siXIcon></svg>
             } @else {
-              <svg si-menu-icon></svg>
+              <svg siMenuIcon></svg>
             }
             <span class="sr-only">
               {{ trigger.isMobileMenuOpen() ? 'Close menu' : 'Open menu' }}

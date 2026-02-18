@@ -24,16 +24,16 @@ import {
   template: `
     <div class="flex items-center gap-1 rounded-md border p-1">
       <button scToggle [(pressed)]="bold" aria-label="Toggle bold">
-        <svg si-bold-icon></svg>
+        <svg siBoldIcon></svg>
       </button>
       <button scToggle [(pressed)]="italic" aria-label="Toggle italic">
-        <svg si-italic-icon></svg>
+        <svg siItalicIcon></svg>
       </button>
       <button scToggle [(pressed)]="underline" aria-label="Toggle underline">
-        <svg si-underline-icon></svg>
+        <svg siUnderlineIcon></svg>
       </button>
       <button scToggle [(pressed)]="strike" aria-label="Toggle strikethrough">
-        <svg si-strikethrough-icon></svg>
+        <svg siStrikethroughIcon></svg>
       </button>
     </div>
   `,

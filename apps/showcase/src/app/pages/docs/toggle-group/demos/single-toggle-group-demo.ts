@@ -29,13 +29,13 @@ import {
         aria-label="Text alignment"
       >
         <button scToggleGroupItem value="left" aria-label="Align left">
-          <svg si-align-left-icon></svg>
+          <svg siAlignLeftIcon></svg>
         </button>
         <button scToggleGroupItem value="center" aria-label="Align center">
-          <svg si-align-center-icon></svg>
+          <svg siAlignCenterIcon></svg>
         </button>
         <button scToggleGroupItem value="right" aria-label="Align right">
-          <svg si-align-right-icon></svg>
+          <svg siAlignRightIcon></svg>
         </button>
       </div>
       <p class="text-sm text-muted-foreground">

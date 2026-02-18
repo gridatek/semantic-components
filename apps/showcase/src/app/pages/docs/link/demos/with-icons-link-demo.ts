@@ -12,12 +12,12 @@ import { SiExternalLinkIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div class="flex flex-wrap items-center gap-4">
       <a scLink href="#">
-        <svg si-mail-icon></svg>
+        <svg siMailIcon></svg>
         Email
       </a>
       <a scLink variant="outline" href="#">
         Open
-        <svg si-external-link-icon></svg>
+        <svg siExternalLinkIcon></svg>
       </a>
     </div>
   `,

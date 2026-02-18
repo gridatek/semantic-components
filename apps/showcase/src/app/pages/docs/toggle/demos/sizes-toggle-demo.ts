@@ -12,13 +12,13 @@ import { SiBoldIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div class="flex items-center gap-2">
       <button scToggle size="sm" aria-label="Toggle small">
-        <svg si-bold-icon></svg>
+        <svg siBoldIcon></svg>
       </button>
       <button scToggle size="default" aria-label="Toggle default">
-        <svg si-bold-icon></svg>
+        <svg siBoldIcon></svg>
       </button>
       <button scToggle size="lg" aria-label="Toggle large">
-        <svg si-bold-icon></svg>
+        <svg siBoldIcon></svg>
       </button>
     </div>
   `,

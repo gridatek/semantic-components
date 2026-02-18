@@ -67,7 +67,7 @@ import { SiBellIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
       <div scCardBody class="grid gap-4">
         <div scItem variant="outline">
           <div scItemMedia variant="icon">
-            <svg si-bell-icon></svg>
+            <svg siBellIcon></svg>
           </div>
           <div scItemBody>
             <div scItemTitle>Push Notifications</div>
@@ -76,7 +76,7 @@ import { SiBellIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
         </div>
         <div scItem variant="outline">
           <div scItemMedia variant="icon">
-            <svg si-mail-icon></svg>
+            <svg siMailIcon></svg>
           </div>
           <div scItemBody>
             <div scItemTitle>Email Notifications</div>

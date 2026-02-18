@@ -69,26 +69,26 @@ import {
       <!-- Controls -->
       <div class="flex items-center justify-center gap-2">
         <button scAudioPlayerShuffle>
-          <svg si-shuffle-icon></svg>
+          <svg siShuffleIcon></svg>
         </button>
         <button scAudioPlayerPrevious>
-          <svg si-skip-back-icon></svg>
+          <svg siSkipBackIcon></svg>
         </button>
         <button scAudioPlayerPlayButton>
           @if (player.isPlaying()) {
-            <svg si-pause-icon></svg>
+            <svg siPauseIcon></svg>
           } @else {
-            <svg si-play-icon></svg>
+            <svg siPlayIcon></svg>
           }
         </button>
         <button scAudioPlayerNext>
-          <svg si-skip-forward-icon></svg>
+          <svg siSkipForwardIcon></svg>
         </button>
         <button scAudioPlayerRepeat>
           @if (player.repeat() === 'one') {
-            <svg si-repeat-1-icon></svg>
+            <svg siRepeat1Icon></svg>
           } @else {
-            <svg si-repeat-icon></svg>
+            <svg siRepeatIcon></svg>
           }
         </button>
       </div>

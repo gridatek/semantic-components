@@ -47,11 +47,11 @@ import {
           </div>
         </div>
         <button scCarouselPrevious>
-          <svg si-chevron-left-icon></svg>
+          <svg siChevronLeftIcon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
         <button scCarouselNext>
-          <svg si-chevron-right-icon></svg>
+          <svg siChevronRightIcon></svg>
           <span class="sr-only">Next slide</span>
         </button>
       </div>

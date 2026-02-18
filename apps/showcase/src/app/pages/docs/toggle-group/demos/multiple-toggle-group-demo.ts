@@ -30,17 +30,17 @@ import {
         aria-label="Text formatting"
       >
         <button scToggleGroupItem value="bold" aria-label="Toggle bold">
-          <svg si-bold-icon></svg>
+          <svg siBoldIcon></svg>
         </button>
         <button scToggleGroupItem value="italic" aria-label="Toggle italic">
-          <svg si-italic-icon></svg>
+          <svg siItalicIcon></svg>
         </button>
         <button
           scToggleGroupItem
           value="underline"
           aria-label="Toggle underline"
         >
-          <svg si-underline-icon></svg>
+          <svg siUnderlineIcon></svg>
         </button>
       </div>
       <p class="text-sm text-muted-foreground">

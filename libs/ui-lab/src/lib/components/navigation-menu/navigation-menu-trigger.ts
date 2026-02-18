@@ -18,7 +18,7 @@ import { ScNavigationMenuItem } from './navigation-menu-item';
   template: `
     <ng-content />
     <svg
-      si-chevron-down-icon
+      siChevronDownIcon
       class="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
     ></svg>
   `,

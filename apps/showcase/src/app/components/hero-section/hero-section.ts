@@ -25,9 +25,7 @@ import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
           Tailwind CSS on top of Angular Aria and Angular CDK.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a scLink size="lg" routerLink="/docs/getting-started">
-            Get Started
-          </a>
+          <a scLink size="lg" routerLink="/docs/getting-started">Get Started</a>
           <a scLink variant="outline" size="lg" routerLink="/docs/components">
             View Components
           </a>
@@ -39,9 +37,9 @@ import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
             target="_blank"
             rel="noopener noreferrer"
           >
-            <svg si-github-icon class="size-4"></svg>
+            <svg siGithubIcon class="size-4"></svg>
             Star on GitHub
-            <svg si-star-icon class="size-4"></svg>
+            <svg siStarIcon class="size-4"></svg>
           </a>
         </div>
       </div>

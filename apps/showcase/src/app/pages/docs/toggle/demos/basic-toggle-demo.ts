@@ -12,7 +12,7 @@ import { SiBoldIcon } from '@semantic-icons/lucide-icons';
   imports: [ScToggle, SiBoldIcon],
   template: `
     <button scToggle [(pressed)]="bold" aria-label="Toggle bold">
-      <svg si-bold-icon></svg>
+      <svg siBoldIcon></svg>
     </button>
   `,
   encapsulation: ViewEncapsulation.None,

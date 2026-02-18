@@ -56,15 +56,15 @@ import {
       <div scEditorToolbar>
         <div scEditorToolbarGroup>
           <button scEditorBold>
-            <svg si-bold-icon class="size-4"></svg>
+            <svg siBoldIcon class="size-4"></svg>
             <span class="sr-only">Bold</span>
           </button>
           <button scEditorItalic>
-            <svg si-italic-icon class="size-4"></svg>
+            <svg siItalicIcon class="size-4"></svg>
             <span class="sr-only">Italic</span>
           </button>
           <button scEditorUnderline>
-            <svg si-underline-icon class="size-4"></svg>
+            <svg siUnderlineIcon class="size-4"></svg>
             <span class="sr-only">Underline</span>
           </button>
         </div>
@@ -73,11 +73,11 @@ import {
 
         <div scEditorToolbarGroup>
           <button scEditorBulletList>
-            <svg si-list-icon class="size-4"></svg>
+            <svg siListIcon class="size-4"></svg>
             <span class="sr-only">Bullet list</span>
           </button>
           <button scEditorNumberedList>
-            <svg si-list-ordered-icon class="size-4"></svg>
+            <svg siListOrderedIcon class="size-4"></svg>
             <span class="sr-only">Numbered list</span>
           </button>
         </div>

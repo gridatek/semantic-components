@@ -35,7 +35,7 @@ import { SiLoader2Icon } from '@semantic-icons/lucide-icons';
   selector: 'app-default-spinner-demo',
   imports: [ScSpinner, SiLoader2Icon],
   template: \`
-    <svg scSpinner si-loader-2-icon></svg>
+    <svg scSpinner siLoader2Icon></svg>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

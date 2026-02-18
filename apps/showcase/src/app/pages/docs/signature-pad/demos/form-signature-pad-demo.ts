@@ -35,19 +35,15 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       </div>
       <div>
         <label class="block text-sm font-medium mb-1">Signature</label>
-        <div
-          scSignaturePad
-          #pad="scSignaturePad"
-          class="relative inline-block"
-        >
+        <div scSignaturePad #pad="scSignaturePad" class="relative inline-block">
           <canvas scSignaturePadCanvas [width]="400" [height]="150"></canvas>
 
           <div scSignaturePadControls>
             <button scSignaturePadUndo>
-              <svg si-undo-icon class="size-4"></svg>
+              <svg siUndoIcon class="size-4"></svg>
             </button>
             <button scSignaturePadClear>
-              <svg si-trash-2-icon class="size-4"></svg>
+              <svg siTrash2Icon class="size-4"></svg>
             </button>
           </div>
         </div>

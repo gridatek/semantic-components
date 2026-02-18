@@ -12,7 +12,7 @@ import { SiUnderlineIcon } from '@semantic-icons/lucide-icons';
   imports: [ScToggle, SiUnderlineIcon],
   template: `
     <button scToggle [(pressed)]="underline" aria-label="Toggle underline">
-      <svg si-underline-icon></svg>
+      <svg siUnderlineIcon></svg>
       Underline
     </button>
   `,

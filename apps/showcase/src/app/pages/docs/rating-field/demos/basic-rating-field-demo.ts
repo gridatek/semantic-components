@@ -25,7 +25,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
               class="cursor-pointer transition-transform hover:scale-110"
             >
               <svg
-                si-star-icon
+                siStarIcon
                 class="size-6 transition-colors"
                 [class.fill-yellow-400]="i <= rating()"
                 [class.text-yellow-400]="i <= rating()"

@@ -40,7 +40,7 @@ import { ScSidebarState } from './sidebar-state.service';
             class="bg-sidebar text-sidebar-foreground p-0 flex h-full flex-col"
           >
             <button scSheetClose>
-              <svg si-x-icon></svg>
+              <svg siXIcon></svg>
               <span class="sr-only">Close</span>
             </button>
             <ng-container *ngTemplateOutlet="content" />

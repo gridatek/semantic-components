@@ -25,7 +25,7 @@ import { Logo } from '../logo/logo';
           <p class="text-sm text-muted-foreground">
             Built with
             <svg
-              si-heart-icon
+              siHeartIcon
               class="inline size-4 fill-red-500 text-red-500"
               aria-label="heart"
             ></svg>
@@ -40,7 +40,7 @@ import { Logo } from '../logo/logo';
             rel="noopener noreferrer"
             aria-label="GitHub"
           >
-            <svg si-github-icon></svg>
+            <svg siGithubIcon></svg>
           </a>
         </div>
       </div>

@@ -48,7 +48,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         <form>
           <div scDialog class="sm:max-w-sm">
             <button scDialogClose>
-              <svg si-x-icon></svg>
+              <svg siXIcon></svg>
               <span class="sr-only">Close</span>
             </button>
             <div scDialogHeader>
