@@ -46,51 +46,33 @@ interface SwitchFormModel {
   template: \`
     <form>
       <div class="space-y-4">
-        <div class="flex items-center justify-between">
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [formField]="switchForm.notifications" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium leading-none">Enable Notifications</p>
             <p class="text-sm text-muted-foreground">
               Receive notifications about your account activity
             </p>
           </div>
-          <label scSwitchField aria-label="Enable Notifications">
-            <input
-              type="checkbox"
-              scSwitch
-              [formField]="switchForm.notifications"
-            />
-          </label>
-        </div>
+        </label>
 
-        <div class="flex items-center justify-between">
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [formField]="switchForm.darkMode" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium leading-none">Dark Mode</p>
             <p class="text-sm text-muted-foreground">Switch to dark theme</p>
           </div>
-          <label scSwitchField aria-label="Dark Mode">
-            <input
-              type="checkbox"
-              scSwitch
-              [formField]="switchForm.darkMode"
-            />
-          </label>
-        </div>
+        </label>
 
-        <div class="flex items-center justify-between">
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [formField]="switchForm.autoSave" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium leading-none">Auto Save</p>
             <p class="text-sm text-muted-foreground">
               Automatically save your work
             </p>
           </div>
-          <label scSwitchField aria-label="Auto Save">
-            <input
-              type="checkbox"
-              scSwitch
-              [formField]="switchForm.autoSave"
-            />
-          </label>
-        </div>
+        </label>
       </div>
 
       <div class="mt-6 rounded-md bg-muted p-4">

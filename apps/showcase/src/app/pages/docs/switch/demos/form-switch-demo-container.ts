@@ -25,47 +25,41 @@ export class FormSwitchDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSwitch } from '@semantic-components/ui-lab';
+import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-form-switch-demo',
-  imports: [ScSwitch],
+  imports: [ScSwitch, ScSwitchField],
   template: \`
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
-        <div class="flex items-center justify-between">
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [(checked)]="marketing" />
           <div class="space-y-0.5">
-            <label for="marketing" class="text-sm font-medium">
-              Marketing emails
-            </label>
+            <p class="text-sm font-medium">Marketing emails</p>
             <p class="text-sm text-muted-foreground">
               Receive emails about new products and features.
             </p>
           </div>
-          <button scSwitch [(checked)]="marketing" id="marketing"></button>
-        </div>
-        <div class="flex items-center justify-between">
+        </label>
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [(checked)]="security" />
           <div class="space-y-0.5">
-            <label for="security" class="text-sm font-medium">
-              Security emails
-            </label>
+            <p class="text-sm font-medium">Security emails</p>
             <p class="text-sm text-muted-foreground">
               Receive emails about your account security.
             </p>
           </div>
-          <button scSwitch [(checked)]="security" id="security"></button>
-        </div>
-        <div class="flex items-center justify-between">
+        </label>
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [(checked)]="updates" />
           <div class="space-y-0.5">
-            <label for="updates" class="text-sm font-medium">
-              Product updates
-            </label>
+            <p class="text-sm font-medium">Product updates</p>
             <p class="text-sm text-muted-foreground">
               Receive emails about product updates and tips.
             </p>
           </div>
-          <button scSwitch [(checked)]="updates" id="updates"></button>
-        </div>
+        </label>
       </div>
     </div>
   \`,

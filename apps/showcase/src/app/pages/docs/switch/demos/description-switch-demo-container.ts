@@ -30,17 +30,15 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   selector: 'app-description-switch-demo',
   imports: [ScSwitch, ScSwitchField],
   template: \`
-    <div class="flex flex-row items-center justify-between rounded-lg border p-4">
+    <label scSwitchField class="flex-row-reverse justify-between rounded-lg border p-4 w-full">
+      <input type="checkbox" scSwitch />
       <div class="space-y-0.5">
         <p class="text-base font-medium">Dark Mode</p>
         <p class="text-sm text-muted-foreground">
           Enable dark mode for a better viewing experience in low light.
         </p>
       </div>
-      <label scSwitchField aria-label="Dark Mode">
-        <input type="checkbox" scSwitch />
-      </label>
-    </div>
+    </label>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

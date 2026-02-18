@@ -12,39 +12,33 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   template: `
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
-        <div class="flex items-center justify-between">
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [(checked)]="marketing" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Marketing emails</p>
             <p class="text-sm text-muted-foreground">
               Receive emails about new products and features.
             </p>
           </div>
-          <label scSwitchField aria-label="Marketing emails">
-            <input type="checkbox" scSwitch [(checked)]="marketing" />
-          </label>
-        </div>
-        <div class="flex items-center justify-between">
+        </label>
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [(checked)]="security" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Security emails</p>
             <p class="text-sm text-muted-foreground">
               Receive emails about your account security.
             </p>
           </div>
-          <label scSwitchField aria-label="Security emails">
-            <input type="checkbox" scSwitch [(checked)]="security" />
-          </label>
-        </div>
-        <div class="flex items-center justify-between">
+        </label>
+        <label scSwitchField class="flex-row-reverse justify-between w-full">
+          <input type="checkbox" scSwitch [(checked)]="updates" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Product updates</p>
             <p class="text-sm text-muted-foreground">
               Receive emails about product updates and tips.
             </p>
           </div>
-          <label scSwitchField aria-label="Product updates">
-            <input type="checkbox" scSwitch [(checked)]="updates" />
-          </label>
-        </div>
+        </label>
       </div>
     </div>
   `,
