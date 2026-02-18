@@ -10,8 +10,8 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/aria": "^21.1.4",
-    "@angular/cdk": "^21.1.4",
+    "@angular/aria": "^21.1.5",
+    "@angular/cdk": "^21.1.5",
     "@angular/common": "~21.1.4",
     "@angular/compiler": "~21.1.4",
     "@angular/core": "~21.1.4",
