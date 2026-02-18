@@ -105,9 +105,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'breadcrumb',
     description: 'Displays the path to the current resource.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Navigation',
-    hidden: true,
   },
   {
     name: 'Button',
