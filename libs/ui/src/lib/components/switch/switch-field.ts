@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   contentChild,
+  ElementRef,
   inject,
   input,
   ViewEncapsulation,
@@ -15,7 +16,7 @@ import { ScSwitch } from './switch';
 import { ScSwitchVisual } from './switch-visual';
 
 @Component({
-  selector: 'label[scSwitchField]',
+  selector: 'div[scSwitchField], label[scSwitchField]',
   imports: [ScSwitchVisual],
   providers: [
     { provide: SC_SWITCH_FIELD, useExisting: ScSwitchField },
@@ -23,6 +24,7 @@ import { ScSwitchVisual } from './switch-visual';
   ],
   host: {
     'data-slot': 'switch-field',
+    '[attr.role]': 'role()',
     '[class]': 'class()',
     '[attr.data-state]': 'dataState()',
     '[attr.data-disabled]': 'disabled() ? "" : null',
@@ -36,7 +38,13 @@ import { ScSwitchVisual } from './switch-visual';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSwitchField implements ScSwitchContext {
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly switchInput = contentChild(ScSwitch);
+
+  protected readonly role = computed(() => {
+    const tagName = this.elementRef.nativeElement.tagName;
+    return tagName === 'LABEL' ? null : 'group';
+  });
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-switch-field-'));
