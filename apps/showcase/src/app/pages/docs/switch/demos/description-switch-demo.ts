@@ -3,22 +3,24 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSwitch } from '@semantic-components/ui-lab';
+import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-description-switch-demo',
-  imports: [ScSwitch],
+  imports: [ScSwitch, ScSwitchField],
   template: `
     <div
       class="flex flex-row items-center justify-between rounded-lg border p-4"
     >
       <div class="space-y-0.5">
-        <label for="dark-mode" class="text-base font-medium">Dark Mode</label>
+        <p class="text-base font-medium">Dark Mode</p>
         <p class="text-sm text-muted-foreground">
           Enable dark mode for a better viewing experience in low light.
         </p>
       </div>
-      <button scSwitch id="dark-mode"></button>
+      <label scSwitchField aria-label="Dark Mode">
+        <input type="checkbox" scSwitch />
+      </label>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

@@ -25,18 +25,18 @@ export class StateSwitchDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSwitch } from '@semantic-components/ui-lab';
+import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-state-switch-demo',
-  imports: [ScSwitch],
+  imports: [ScSwitch, ScSwitchField],
   template: \`
-    <div class="flex items-center space-x-2">
-      <button scSwitch [(checked)]="notifications" id="notifications"></button>
-      <label for="notifications" class="text-sm font-medium leading-none">
+    <label scSwitchField>
+      <input type="checkbox" scSwitch [(checked)]="notifications" />
+      <span class="text-sm font-medium leading-none">
         Notifications: {{ notifications() ? 'On' : 'Off' }}
-      </label>
-    </div>
+      </span>
+    </label>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

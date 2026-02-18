@@ -4,10 +4,10 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { JsonPipe } from '@angular/common';
 import { form, FormField } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
-import { ScSwitch } from '@semantic-components/ui-lab';
-import { JsonPipe } from '@angular/common';
+import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 interface SwitchFormModel {
   notifications: boolean;
@@ -17,56 +17,52 @@ interface SwitchFormModel {
 
 @Component({
   selector: 'app-signal-forms-switch-demo',
-  imports: [ScSwitch, JsonPipe, FormField],
+  imports: [ScSwitch, ScSwitchField, JsonPipe, FormField],
   template: `
     <form>
       <div class="space-y-4">
         <div class="flex items-center justify-between">
           <div class="space-y-0.5">
-            <label class="text-sm font-medium leading-none">
-              Enable Notifications
-            </label>
+            <p class="text-sm font-medium leading-none">Enable Notifications</p>
             <p class="text-sm text-muted-foreground">
               Receive notifications about your account activity
             </p>
           </div>
-          <button
-            scSwitch
-            [formField]="switchForm.notifications"
-            id="notifications-switch"
-          ></button>
+          <label scSwitchField aria-label="Enable Notifications">
+            <input
+              type="checkbox"
+              scSwitch
+              [formField]="switchForm.notifications"
+            />
+          </label>
         </div>
 
         <div class="flex items-center justify-between">
           <div class="space-y-0.5">
-            <label class="text-sm font-medium leading-none">Dark Mode</label>
+            <p class="text-sm font-medium leading-none">Dark Mode</p>
             <p class="text-sm text-muted-foreground">Switch to dark theme</p>
           </div>
-          <button
-            scSwitch
-            [formField]="switchForm.darkMode"
-            id="darkmode-switch"
-          ></button>
+          <label scSwitchField aria-label="Dark Mode">
+            <input type="checkbox" scSwitch [formField]="switchForm.darkMode" />
+          </label>
         </div>
 
         <div class="flex items-center justify-between">
           <div class="space-y-0.5">
-            <label class="text-sm font-medium leading-none">Auto Save</label>
+            <p class="text-sm font-medium leading-none">Auto Save</p>
             <p class="text-sm text-muted-foreground">
               Automatically save your work
             </p>
           </div>
-          <button
-            scSwitch
-            [formField]="switchForm.autoSave"
-            id="autosave-switch"
-          ></button>
+          <label scSwitchField aria-label="Auto Save">
+            <input type="checkbox" scSwitch [formField]="switchForm.autoSave" />
+          </label>
         </div>
       </div>
 
-      <div class="mt-6 p-4 bg-muted rounded-md">
+      <div class="mt-6 rounded-md bg-muted p-4">
         <p class="text-sm font-medium">Form Values:</p>
-        <pre class="text-xs mt-2">{{ formModel() | json }}</pre>
+        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>
     </form>
   `,

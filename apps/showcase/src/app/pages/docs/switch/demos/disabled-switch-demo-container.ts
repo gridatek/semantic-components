@@ -24,36 +24,25 @@ export class DisabledSwitchDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSwitch } from '@semantic-components/ui-lab';
+import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-switch-demo',
-  imports: [ScSwitch],
+  imports: [ScSwitch, ScSwitchField],
   template: \`
     <div class="space-y-3">
-      <div class="flex items-center space-x-2">
-        <button scSwitch [disabled]="true" id="disabled-off"></button>
-        <label
-          for="disabled-off"
-          class="text-sm font-medium leading-none text-muted-foreground"
-        >
+      <label scSwitchField>
+        <input type="checkbox" scSwitch disabled />
+        <span class="text-sm font-medium leading-none text-muted-foreground">
           Disabled (Off)
-        </label>
-      </div>
-      <div class="flex items-center space-x-2">
-        <button
-          scSwitch
-          [checked]="true"
-          [disabled]="true"
-          id="disabled-on"
-        ></button>
-        <label
-          for="disabled-on"
-          class="text-sm font-medium leading-none text-muted-foreground"
-        >
+        </span>
+      </label>
+      <label scSwitchField>
+        <input type="checkbox" scSwitch [checked]="true" disabled />
+        <span class="text-sm font-medium leading-none text-muted-foreground">
           Disabled (On)
-        </label>
-      </div>
+        </span>
+      </label>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

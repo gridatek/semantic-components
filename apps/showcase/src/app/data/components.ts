@@ -842,9 +842,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'switch',
     description: 'A toggle control for switching between two states.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Table',

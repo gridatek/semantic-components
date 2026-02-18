@@ -3,18 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSwitch } from '@semantic-components/ui-lab';
+import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-switch-demo',
-  imports: [ScSwitch],
+  imports: [ScSwitch, ScSwitchField],
   template: `
-    <div class="flex items-center space-x-2">
-      <button scSwitch id="airplane-mode"></button>
-      <label for="airplane-mode" class="text-sm font-medium leading-none">
-        Airplane Mode
-      </label>
-    </div>
+    <label scSwitchField>
+      <input type="checkbox" scSwitch />
+      <span class="text-sm font-medium leading-none">Airplane Mode</span>
+    </label>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
