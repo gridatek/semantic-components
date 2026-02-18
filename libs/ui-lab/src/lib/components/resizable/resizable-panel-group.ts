@@ -10,7 +10,7 @@ import { ScResizableHandle } from './resizable-handle';
     'data-slot': 'resizable-panel-group',
     'data-panel-group': '',
     '[class]': 'class()',
-    '[attr.data-direction]': 'direction()',
+    '[attr.aria-orientation]': 'direction()',
   },
 })
 export class ScResizablePanelGroup {
@@ -25,7 +25,10 @@ export class ScResizablePanelGroup {
   });
 
   protected readonly class = computed(() =>
-    cn('flex size-full data-[direction=vertical]:flex-col', this.classInput()),
+    cn(
+      'flex h-full w-full aria-[orientation=vertical]:flex-col',
+      this.classInput(),
+    ),
   );
 
   getPanels() {

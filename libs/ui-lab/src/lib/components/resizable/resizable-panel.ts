@@ -39,7 +39,6 @@ export class ScResizablePanel {
   protected readonly maxSizePx = computed(() => `${this.maxSize()}%`);
 
   constructor() {
-    // Initialize size from defaultSize
     this.size.set(this.defaultSize());
   }
 
