@@ -4,13 +4,15 @@ Displays the path to the current resource using a hierarchy of links.
 
 ## Components
 
-- `ScBreadcrumb` - Root nav element with aria-label
-- `ScBreadcrumbList` - Ordered list container
-- `ScBreadcrumbItem` - Individual item wrapper
-- `ScBreadcrumbLink` - Clickable link to a page
-- `ScBreadcrumbPage` - Current page (non-clickable)
-- `ScBreadcrumbSeparator` - Visual separator between items
-- `ScBreadcrumbEllipsis` - Collapsed items indicator
+| Component               | Selector                     | Role                                               |
+| ----------------------- | ---------------------------- | -------------------------------------------------- |
+| `ScBreadcrumb`          | `nav[scBreadcrumb]`          | Root `<nav>` with `aria-label="breadcrumb"`        |
+| `ScBreadcrumbList`      | `ol[scBreadcrumbList]`       | Ordered list container                             |
+| `ScBreadcrumbItem`      | `li[scBreadcrumbItem]`       | Individual item wrapper                            |
+| `ScBreadcrumbLink`      | `a[scBreadcrumbLink]`        | Clickable link to a page                           |
+| `ScBreadcrumbPage`      | `span[scBreadcrumbPage]`     | Current page with `aria-current="page"`            |
+| `ScBreadcrumbSeparator` | `li[scBreadcrumbSeparator]`  | Visual separator (defaults to `ChevronRight` icon) |
+| `ScBreadcrumbEllipsis`  | `span[scBreadcrumbEllipsis]` | Collapsed items indicator with `Ellipsis` icon     |
 
 ## Usage
 
@@ -32,9 +34,7 @@ Displays the path to the current resource using a hierarchy of links.
 </nav>
 ```
 
-## With Ellipsis
-
-For long paths, use the ellipsis to indicate collapsed items:
+### With Ellipsis
 
 ```html
 <nav scBreadcrumb>
@@ -54,27 +54,16 @@ For long paths, use the ellipsis to indicate collapsed items:
 </nav>
 ```
 
-## Custom Separator
-
-Pass content to the separator to customize it:
+### Custom Separator
 
 ```html
 <li scBreadcrumbSeparator>/</li>
 ```
 
-## With RouterLink
-
-Use Angular's routerLink for navigation:
+### With RouterLink
 
 ```html
 <li scBreadcrumbItem>
   <a scBreadcrumbLink routerLink="/components">Components</a>
 </li>
 ```
-
-## Accessibility
-
-- Uses semantic `<nav>` element with `aria-label="breadcrumb"`
-- Uses `<ol>` for ordered list semantics
-- Current page marked with `aria-current="page"`
-- Separators are hidden from assistive technology with `aria-hidden="true"`
