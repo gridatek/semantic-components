@@ -24,7 +24,7 @@ export class CardSeparatorDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSeparator } from '@semantic-components/ui-lab';
+import { ScSeparator } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-card-separator-demo',

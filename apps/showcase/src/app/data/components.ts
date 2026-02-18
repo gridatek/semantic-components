@@ -720,9 +720,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'separator',
     description: 'Visually separates content with a line.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Layout',
-    hidden: true,
   },
   {
     name: 'Sheet',

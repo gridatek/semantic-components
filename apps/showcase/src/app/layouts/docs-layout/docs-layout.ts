@@ -36,7 +36,6 @@ import {
   ScSidebarProvider,
   ScSidebarRail,
   ScSidebarTrigger,
-  ScSeparator,
   ScThemeToggle,
 } from '@semantic-components/ui-lab';
 import {
@@ -46,7 +45,7 @@ import {
   SiMoonIcon,
   SiSunIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
+import { cn, ScSeparator } from '@semantic-components/ui';
 import { filter } from 'rxjs';
 
 import { Logo } from '../../components/logo/logo';
@@ -254,11 +253,7 @@ import { ConfigService } from '../../services/config.service';
         <div scSidebarFooter>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
-              <button
-                scThemeToggle
-                #themeToggle="scThemeToggle"
-                class="w-full"
-              >
+              <button scThemeToggle #themeToggle="scThemeToggle" class="w-full">
                 @if (themeToggle.isDark()) {
                   <svg si-sun-icon></svg>
                 } @else {

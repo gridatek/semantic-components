@@ -9,7 +9,8 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { ScCopyButton, ScSeparator } from '@semantic-components/ui-lab';
+import { ScSeparator } from '@semantic-components/ui';
+import { ScCopyButton } from '@semantic-components/ui-lab';
 
 import { TocHeading } from '../../components/toc/toc-heading';
 
@@ -75,11 +76,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
                 <span scCodeViewerLabel>terminal</span>
                 <button scCopyButton [value]="step2Code"></button>
               </div>
-              <div
-                scCodeViewerContent
-                [code]="step2Code"
-                language="bash"
-              ></div>
+              <div scCodeViewerContent [code]="step2Code" language="bash"></div>
             </div>
           </div>
 
