@@ -8,9 +8,11 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '@semantic-components/ui';
+import { ScProgressIndicator } from './progress-indicator';
 
 @Component({
-  selector: 'div[scProgress]',
+  selector: '[scProgress]',
+  imports: [ScProgressIndicator],
   host: {
     role: 'progressbar',
     'data-slot': 'progress',
@@ -21,11 +23,7 @@ import { cn } from '@semantic-components/ui';
     '[attr.data-state]': 'state()',
   },
   template: `
-    <div
-      data-slot="progress-indicator"
-      [class]="indicatorClass()"
-      [style.transform]="'translateX(-' + (100 - percentage()) + '%)'"
-    ></div>
+    <div scProgressIndicator></div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,7 +33,7 @@ export class ScProgress implements FormValueControl<number | null> {
   readonly value = model<number | null>(null);
   readonly max = input<number | undefined>(100);
 
-  protected readonly percentage = computed(() => {
+  readonly percentage = computed(() => {
     const val = this.value();
     const maxVal = this.max() ?? 100;
     if (val === null || maxVal === 0) return 0;
@@ -51,12 +49,8 @@ export class ScProgress implements FormValueControl<number | null> {
 
   protected readonly class = computed(() =>
     cn(
-      'relative h-2 w-full overflow-hidden rounded-full bg-primary/20',
+      'bg-muted relative flex h-1 w-full items-center overflow-x-hidden rounded-full',
       this.classInput(),
     ),
-  );
-
-  protected readonly indicatorClass = computed(() =>
-    cn('h-full w-full flex-1 bg-primary transition-all'),
   );
 }
