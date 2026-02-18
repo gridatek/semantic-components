@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScCollapsible,
+  ScCollapsibleBody,
   ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
@@ -15,6 +16,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-open-collapsible-demo',
   imports: [
     ScCollapsible,
+    ScCollapsibleBody,
     ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -40,12 +42,14 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </button>
       </div>
       <div scCollapsiblePanel panelId="collapsible-open">
-        <div scCollapsibleContent>
-          <div class="rounded-md border px-4 py-3 text-sm">
-            This collapsible is open by default. You can toggle it closed by
-            clicking the button.
-          </div>
-        </div>
+        <ng-template scCollapsibleContent>
+          <sc-collapsible-body>
+            <div class="rounded-md border px-4 py-3 text-sm">
+              This collapsible is open by default. You can toggle it closed by
+              clicking the button.
+            </div>
+          </sc-collapsible-body>
+        </ng-template>
       </div>
     </div>
   `,

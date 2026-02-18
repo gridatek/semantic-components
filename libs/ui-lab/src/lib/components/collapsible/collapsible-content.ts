@@ -1,28 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive } from '@angular/core';
+import { AccordionContent } from '@angular/aria/accordion';
 
-@Component({
-  selector: 'div[scCollapsibleContent]',
-  template: `
-    <ng-content />
-  `,
-  host: {
-    'data-slot': 'collapsible-content',
-    '[class]': 'class()',
-  },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: 'ng-template[scCollapsibleContent]',
+  hostDirectives: [AccordionContent],
 })
-export class ScCollapsibleContent {
-  readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() =>
-    cn('pt-0 pb-2.5', this.classInput()),
-  );
-}
+export class ScCollapsibleContent {}

@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScCollapsible,
+  ScCollapsibleBody,
   ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
@@ -15,6 +16,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-basic-collapsible-demo',
   imports: [
     ScCollapsible,
+    ScCollapsibleBody,
     ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -42,14 +44,16 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         &#64;angular/core
       </div>
       <div scCollapsiblePanel panelId="collapsible-1">
-        <div scCollapsibleContent class="space-y-2">
-          <div class="rounded-md border px-4 py-3 font-mono text-sm">
-            &#64;angular/common
-          </div>
-          <div class="rounded-md border px-4 py-3 font-mono text-sm">
-            &#64;angular/forms
-          </div>
-        </div>
+        <ng-template scCollapsibleContent>
+          <sc-collapsible-body class="space-y-2">
+            <div class="rounded-md border px-4 py-3 font-mono text-sm">
+              &#64;angular/common
+            </div>
+            <div class="rounded-md border px-4 py-3 font-mono text-sm">
+              &#64;angular/forms
+            </div>
+          </sc-collapsible-body>
+        </ng-template>
       </div>
     </div>
   `,

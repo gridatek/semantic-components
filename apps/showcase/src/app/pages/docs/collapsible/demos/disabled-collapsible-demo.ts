@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScCollapsible,
+  ScCollapsibleBody,
   ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
@@ -15,6 +16,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-disabled-collapsible-demo',
   imports: [
     ScCollapsible,
+    ScCollapsibleBody,
     ScCollapsibleContent,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -37,11 +39,13 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         </button>
       </div>
       <div scCollapsiblePanel panelId="collapsible-disabled">
-        <div scCollapsibleContent>
-          <div class="rounded-md border px-4 py-3 text-sm">
-            This content is hidden.
-          </div>
-        </div>
+        <ng-template scCollapsibleContent>
+          <sc-collapsible-body>
+            <div class="rounded-md border px-4 py-3 text-sm">
+              This content is hidden.
+            </div>
+          </sc-collapsible-body>
+        </ng-template>
       </div>
     </div>
   `,

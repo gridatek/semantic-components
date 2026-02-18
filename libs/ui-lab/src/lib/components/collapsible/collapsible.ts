@@ -9,7 +9,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[scCollapsible]',
+  selector: '[scCollapsible]',
   hostDirectives: [
     {
       directive: AccordionGroup,

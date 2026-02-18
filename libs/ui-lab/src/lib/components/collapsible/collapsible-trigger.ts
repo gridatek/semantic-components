@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'button[scCollapsibleTrigger]',
+  selector: '[scCollapsibleTrigger]',
   exportAs: 'scCollapsibleTrigger',
   hostDirectives: [
     {
@@ -26,7 +26,7 @@ import { cn } from '@semantic-components/ui';
     'data-slot': 'collapsible-trigger',
     type: 'button',
     '[attr.data-state]': 'trigger.expanded() ? "open" : "closed"',
-    '[disabled]': 'trigger.disabled()',
+    '[attr.disabled]': 'trigger.disabled() || null',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

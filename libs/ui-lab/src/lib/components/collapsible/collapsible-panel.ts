@@ -1,4 +1,3 @@
-import { AccordionContent, AccordionPanel } from '@angular/aria/accordion';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,11 +5,11 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { AccordionPanel } from '@angular/aria/accordion';
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'div[scCollapsiblePanel]',
-  imports: [AccordionContent],
+  selector: '[scCollapsiblePanel]',
   hostDirectives: [
     {
       directive: AccordionPanel,
@@ -18,15 +17,7 @@ import { cn } from '@semantic-components/ui';
     },
   ],
   template: `
-    <ng-template ngAccordionContent>
-      <div
-        class="overflow-hidden"
-        animate.enter="animate-collapsible-down"
-        animate.leave="animate-collapsible-up"
-      >
-        <ng-content />
-      </div>
-    </ng-template>
+    <ng-content />
   `,
   host: {
     'data-slot': 'collapsible-panel',
