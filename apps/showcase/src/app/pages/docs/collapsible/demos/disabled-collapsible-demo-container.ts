@@ -30,7 +30,7 @@ import {
   ScCollapsibleContent,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

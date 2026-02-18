@@ -6,7 +6,6 @@ export * from './calendar';
 export * from './chart';
 export * from './native-checkbox';
 export * from './native-select';
-export * from './collapsible';
 export * from './color-picker';
 export * from './combobox';
 export * from './command';

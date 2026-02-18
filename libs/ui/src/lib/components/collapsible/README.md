@@ -13,22 +13,23 @@ ScCollapsible (Root - uses AccordionGroup)
     │     ├── expanded: boolean
     │     └── disabled: boolean
     │
-    └── ScCollapsiblePanel (uses AccordionPanel + animation wrapper)
+    └── ScCollapsiblePanel (uses AccordionPanel)
           ├── panelId: string (links to trigger)
-          ├── animate.enter / animate.leave (on internal div)
           │
-          └── ScCollapsibleContent (content styling wrapper)
-                └── [your content here]
+          └── ng-template[scCollapsibleContent] (lazy content directive)
+                └── sc-collapsible-body (animation wrapper)
+                      └── [your content here]
 ```
 
 ## Components
 
-| Component              | Selector                         | Description                                             |
-| ---------------------- | -------------------------------- | ------------------------------------------------------- |
-| `ScCollapsible`        | `div[scCollapsible]`            | Root wrapper using `AccordionGroup`                     |
-| `ScCollapsibleTrigger` | `button[scCollapsibleTrigger]` | Button to toggle panel using `AccordionTrigger`         |
-| `ScCollapsiblePanel`   | `div[scCollapsiblePanel]`      | Collapsible panel with animation using `AccordionPanel` |
-| `ScCollapsibleContent` | `div[scCollapsibleContent]`    | Content styling wrapper with padding                    |
+| Component              | Selector                            | Description                                        |
+| ---------------------- | ----------------------------------- | -------------------------------------------------- |
+| `ScCollapsible`        | `[scCollapsible]`                   | Root wrapper using `AccordionGroup`                |
+| `ScCollapsibleTrigger` | `[scCollapsibleTrigger]`            | Button to toggle panel using `AccordionTrigger`    |
+| `ScCollapsiblePanel`   | `[scCollapsiblePanel]`              | Panel wrapper using `AccordionPanel`               |
+| `ScCollapsibleContent` | `ng-template[scCollapsibleContent]` | Lazy content directive using `AccordionContent`    |
+| `ScCollapsibleBody`    | `sc-collapsible-body`               | Animation wrapper with expand/collapse transitions |
 
 ## Inputs
 
@@ -52,13 +53,11 @@ ScCollapsible (Root - uses AccordionGroup)
 | --------- | -------- | ------------ | ---------------------------------------- |
 | `panelId` | `string` | **required** | Links panel to its corresponding trigger |
 
-The `ScCollapsiblePanel` component wraps collapsible content using `AccordionPanel` from Angular ARIA. It includes an internal animated div wrapper with `overflow-hidden` class and Angular's `animate.enter`/`animate.leave` directives for smooth expand/collapse transitions.
-
 ## Usage
 
 ### Basic Collapsible
 
-Use `panelId` to link the trigger to its corresponding panel. Wrap content in `sc-collapsible-content` for smooth animations.
+Use `panelId` to link the trigger to its corresponding panel. Wrap content in `ng-template[scCollapsibleContent]` with `sc-collapsible-body` for smooth animations.
 
 ```html
 <div scCollapsible class="w-[350px] space-y-2">
@@ -69,9 +68,11 @@ Use `panelId` to link the trigger to its corresponding panel. Wrap content in `s
     </button>
   </div>
   <div scCollapsiblePanel panelId="faq-1">
-    <div scCollapsibleContent>
-      <p>Yes. It's free and open source.</p>
-    </div>
+    <ng-template scCollapsibleContent>
+      <sc-collapsible-body>
+        <p>Yes. It's free and open source.</p>
+      </sc-collapsible-body>
+    </ng-template>
   </div>
 </div>
 ```
@@ -82,7 +83,9 @@ Use `panelId` to link the trigger to its corresponding panel. Wrap content in `s
 <div scCollapsible>
   <button scCollapsibleTrigger panelId="open-demo" [expanded]="true">Toggle</button>
   <div scCollapsiblePanel panelId="open-demo">
-    <div scCollapsibleContent>This content is visible by default.</div>
+    <ng-template scCollapsibleContent>
+      <sc-collapsible-body>This content is visible by default.</sc-collapsible-body>
+    </ng-template>
   </div>
 </div>
 ```
@@ -93,7 +96,9 @@ Use `panelId` to link the trigger to its corresponding panel. Wrap content in `s
 <div scCollapsible [disabled]="true">
   <button scCollapsibleTrigger panelId="disabled-demo">Toggle (disabled)</button>
   <div scCollapsiblePanel panelId="disabled-demo">
-    <div scCollapsibleContent>This cannot be toggled.</div>
+    <ng-template scCollapsibleContent>
+      <sc-collapsible-body>This cannot be toggled.</sc-collapsible-body>
+    </ng-template>
   </div>
 </div>
 ```
@@ -108,7 +113,9 @@ Bind to the `expanded` state of the trigger.
     <div scCollapsible>
       <button scCollapsibleTrigger panelId="controlled" [(expanded)]="isOpen">Toggle</button>
       <div scCollapsiblePanel panelId="controlled">
-        <div scCollapsibleContent>Content</div>
+        <ng-template scCollapsibleContent>
+          <sc-collapsible-body>Content</sc-collapsible-body>
+        </ng-template>
       </div>
     </div>
     <button (click)="isOpen.set(!isOpen())">External Toggle</button>
@@ -130,21 +137,23 @@ export class MyComponent {
     </svg>
   </button>
   <div scCollapsiblePanel panelId="chevron-demo">
-    <div scCollapsibleContent>Content here</div>
+    <ng-template scCollapsibleContent>
+      <sc-collapsible-body>Content here</sc-collapsible-body>
+    </ng-template>
   </div>
 </div>
 ```
 
 ## Animations
 
-The collapsible uses Angular's animation system through an internal div wrapper within the `ScCollapsiblePanel` component:
+The collapsible uses Angular's animation system through the `ScCollapsibleBody` component:
 
-- **Opening**: When a panel expands, Angular applies the `animate-collapsible-down` class via `animate.enter` on the internal animated div
-- **Closing**: When a panel collapses, Angular applies the `animate-collapsible-up` class via `animate.leave` on the internal animated div
+- **Opening**: When a panel expands, Angular applies the `animate-collapsible-down` class via `animate.enter` on the body element
+- **Closing**: When a panel collapses, Angular applies the `animate-collapsible-up` class via `animate.leave` on the body element
 - **Height Calculation**: The component automatically sets the `--radix-collapsible-content-height` CSS variable to the actual content height, ensuring smooth animations
 - **Timing**: Angular handles all animation timing and cleanup automatically
 
-The animations are defined in the `tw-animate-css` package and create a smooth slide-down/slide-up effect. The `overflow-hidden` class on the animated wrapper ensures content is properly clipped during the transition.
+The animations are defined in the `tw-animate-css` package and create a smooth slide-down/slide-up effect. The `overflow-hidden` class on the body wrapper ensures content is properly clipped during the transition.
 
 ## Data Attributes
 
@@ -184,8 +193,10 @@ All components accept a `class` input for custom styling:
 </div>
 
 <div scCollapsiblePanel panelId="styled">
-  <div scCollapsibleContent class="px-4">
-    <!-- content with custom padding -->
-  </div>
+  <ng-template scCollapsibleContent>
+    <sc-collapsible-body class="px-4">
+      <!-- content with custom padding -->
+    </sc-collapsible-body>
+  </ng-template>
 </div>
 ```
