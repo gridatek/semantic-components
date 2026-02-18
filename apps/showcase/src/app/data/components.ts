@@ -190,9 +190,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'collapsible',
     description: 'An interactive component that expands and collapses.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Layout',
-    hidden: true,
   },
   {
     name: 'Color Picker',

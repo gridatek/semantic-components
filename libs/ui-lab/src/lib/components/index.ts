@@ -1,7 +1,6 @@
 export * from './animated-counter';
 export * from './audio-player';
 export * from './barcode-scanner';
-export * from './breadcrumb';
 export * from './calendar';
 export * from './chart';
 export * from './native-checkbox';
