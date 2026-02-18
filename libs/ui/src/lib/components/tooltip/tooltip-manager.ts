@@ -1,18 +1,14 @@
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
 import {
   ComponentRef,
-  DestroyRef,
   ElementRef,
   inject,
   Injectable,
   Injector,
   OutputRefSubscription,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { ScTooltip, SC_TOOLTIP_DATA } from './tooltip';
 
 export type ScTooltipPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -93,27 +89,12 @@ export interface ScTooltipConfig {
 export class ScTooltipManager {
   private readonly overlay = inject(Overlay);
   private readonly injector = inject(Injector);
-  private readonly document = inject(DOCUMENT);
-  private readonly destroyRef = inject(DestroyRef);
 
   private overlayRef: OverlayRef | null = null;
   private tooltipRef: ComponentRef<ScTooltip> | null = null;
   private currentTooltipId: string | null = null;
   private animationSubscription: OutputRefSubscription | null = null;
   private positionSubscription: Subscription | null = null;
-
-  constructor() {
-    this.setupEscapeListener();
-  }
-
-  private setupEscapeListener(): void {
-    fromEvent<KeyboardEvent>(this.document, 'keydown')
-      .pipe(
-        filter((event) => event.key === 'Escape'),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(() => this.hide());
-  }
 
   show(
     elementRef: ElementRef,
@@ -155,6 +136,10 @@ export class ScTooltipManager {
     const portal = new ComponentPortal(ScTooltip, null, tooltipInjector);
 
     this.tooltipRef = this.overlayRef.attach(portal);
+
+    this.overlayRef.keydownEvents().subscribe((event) => {
+      if (event.key === 'Escape') this.hide();
+    });
 
     // Track actual position (CDK may flip if not enough space)
     this.positionSubscription = positionStrategy.positionChanges.subscribe(
