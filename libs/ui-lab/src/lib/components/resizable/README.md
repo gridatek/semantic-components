@@ -1,6 +1,14 @@
 # Resizable
 
-Accessible resizable panel groups and layouts with keyboard support.
+Accessible resizable panel groups and layouts with drag support.
+
+## Components
+
+| Component               | Selector                  | Role                                                                                 |
+| ----------------------- | ------------------------- | ------------------------------------------------------------------------------------ |
+| `ScResizablePanelGroup` | `[scResizablePanelGroup]` | Container with `aria-orientation`. Inputs: `direction`                               |
+| `ScResizablePanel`      | `[scResizablePanel]`      | Individual panel. Inputs: `defaultSize`, `minSize`, `maxSize`                        |
+| `ScResizableHandle`     | `[scResizableHandle]`     | Drag handle with `aria-orientation`. Inputs: `withHandle` (show `GripVertical` icon) |
 
 ## Usage
 
@@ -19,55 +27,6 @@ Accessible resizable panel groups and layouts with keyboard support.
   </div>
 </div>
 ```
-
-## Components
-
-### ScResizablePanelGroup
-
-Container directive for a group of resizable panels.
-
-**Selector:** `[scResizablePanelGroup]`
-
-**Inputs:**
-
-| Input       | Type                         | Default        | Description                    |
-| ----------- | ---------------------------- | -------------- | ------------------------------ |
-| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout direction of the panels |
-| `class`     | `string`                     | `''`           | Additional CSS classes         |
-
-### ScResizablePanel
-
-Individual resizable panel within a panel group.
-
-**Selector:** `[scResizablePanel]`
-
-**Inputs:**
-
-| Input         | Type     | Default | Description                        |
-| ------------- | -------- | ------- | ---------------------------------- |
-| `defaultSize` | `number` | `50`    | Initial size as percentage (0-100) |
-| `minSize`     | `number` | `10`    | Minimum size as percentage         |
-| `maxSize`     | `number` | `90`    | Maximum size as percentage         |
-| `class`       | `string` | `''`    | Additional CSS classes             |
-
-**Methods:**
-
-- `setSize(size: number)`: Programmatically set the panel size
-
-### ScResizableHandle
-
-Drag handle between panels for resizing.
-
-**Selector:** `[scResizableHandle]`
-
-**Inputs:**
-
-| Input        | Type      | Default | Description                           |
-| ------------ | --------- | ------- | ------------------------------------- |
-| `withHandle` | `boolean` | `false` | Show a visual grip icon on the handle |
-| `class`      | `string`  | `''`    | Additional CSS classes                |
-
-## Examples
 
 ### Vertical Layout
 
@@ -89,7 +48,7 @@ Drag handle between panels for resizing.
 </div>
 ```
 
-### Three Panels with Size Constraints
+### Size Constraints
 
 ```html
 <div scResizablePanelGroup direction="horizontal">
@@ -116,18 +75,3 @@ Drag handle between panels for resizing.
   </div>
 </div>
 ```
-
-## Features
-
-- **Mouse and Touch Support**: Drag handles work with both mouse and touch devices
-- **Flexible Sizing**: Panels use flex-grow for proportional sizing
-- **Size Constraints**: Set minimum and maximum sizes for panels
-- **Nested Groups**: Panel groups can be nested for complex layouts
-- **Visual Handle**: Optional grip icon for better affordance
-- **Direction Support**: Both horizontal and vertical layouts
-
-## Accessibility
-
-- Handles have focus styles for keyboard navigation
-- Proper cursor styles indicate resize direction
-- Touch-friendly hit areas
