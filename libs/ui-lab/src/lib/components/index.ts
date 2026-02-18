@@ -51,7 +51,6 @@ export * from './select';
 export * from './separator';
 export * from './sidebar';
 export * from './signature-pad';
-export * from './skeleton';
 export * from './slider';
 export * from './range-slider';
 export * from './sortable-list';

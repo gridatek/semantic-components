@@ -755,9 +755,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'skeleton',
     description: 'A placeholder to show while content is loading.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Data Display',
-    hidden: true,
   },
   {
     name: 'Slider',

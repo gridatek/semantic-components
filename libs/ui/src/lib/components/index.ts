@@ -24,6 +24,7 @@ export * from './pagination';
 export * from './popover';
 export * from './radio-group';
 export * from './sheet';
+export * from './skeleton';
 export * from './spinner';
 export * from './table';
 export * from './tabs';

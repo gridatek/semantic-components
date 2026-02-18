@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSkeleton } from '../skeleton';
+import { ScSkeleton } from '@semantic-components/ui';
 
 @Component({
   selector: 'div[scSidebarMenuSkeleton]',

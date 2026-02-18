@@ -24,7 +24,7 @@ export class ArticleSkeletonDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSkeleton } from '@semantic-components/ui-lab';
+import { ScSkeleton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-article-skeleton-demo',

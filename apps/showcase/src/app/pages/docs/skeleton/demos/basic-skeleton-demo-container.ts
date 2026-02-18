@@ -24,7 +24,7 @@ export class BasicSkeletonDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSkeleton } from '@semantic-components/ui-lab';
+import { ScSkeleton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-skeleton-demo',
