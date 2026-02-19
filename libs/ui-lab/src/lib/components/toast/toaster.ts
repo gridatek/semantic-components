@@ -167,7 +167,6 @@ export class ScToaster {
     this.overlayRef = this.overlay.create({
       positionStrategy: this.overlay.position().global(),
       hasBackdrop: false,
-      panelClass: 'sc-toast-overlay',
     });
 
     const portal = new ComponentPortal(ScToastStack);
