@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
+import { ScToastPosition } from './toast.types';
 import {
   SiCircleCheckIcon,
   SiInfoIcon,
@@ -94,14 +97,30 @@ import { ScToaster } from './toaster';
   `,
   host: {
     'data-slot': 'toast-stack',
-    class:
-      'fixed top-0 z-100 flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToastStack {
   protected readonly toastService = inject(ScToaster);
+
+  private readonly positionClasses: Record<ScToastPosition, string> = {
+    'top-left': 'fixed top-0 left-0 flex-col',
+    'top-center': 'fixed top-0 left-1/2 -translate-x-1/2 flex-col',
+    'top-right': 'fixed top-0 right-0 flex-col',
+    'bottom-left': 'fixed bottom-0 left-0 flex-col-reverse',
+    'bottom-center':
+      'fixed bottom-0 left-1/2 -translate-x-1/2 flex-col-reverse',
+    'bottom-right': 'fixed bottom-0 right-0 flex-col-reverse',
+  };
+
+  protected readonly class = computed(() =>
+    cn(
+      'z-100 flex max-h-screen w-full gap-2 p-4 md:max-w-[420px]',
+      this.positionClasses[this.toastService.position()],
+    ),
+  );
 
   protected dismiss(id: string): void {
     this.toastService.dismiss(id);

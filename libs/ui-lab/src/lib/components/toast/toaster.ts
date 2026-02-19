@@ -2,7 +2,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { inject, Injectable, signal } from '@angular/core';
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { ScToastConfig, ScToastData } from './toast.types';
+import { ScToastConfig, ScToastData, ScToastPosition } from './toast.types';
 import { ScToastStack } from './toast-stack';
 
 @Injectable({
@@ -11,6 +11,9 @@ import { ScToastStack } from './toast-stack';
 export class ScToaster {
   private readonly toastsSignal = signal<ScToastData[]>([]);
   readonly toasts = this.toastsSignal.asReadonly();
+
+  private readonly positionSignal = signal<ScToastPosition>('bottom-right');
+  readonly position = this.positionSignal.asReadonly();
 
   private readonly defaultDuration = 5000;
   private readonly maxToasts = 5;
@@ -26,6 +29,10 @@ export class ScToaster {
   /**
    * Show a new toast notification
    */
+  setPosition(position: ScToastPosition): void {
+    this.positionSignal.set(position);
+  }
+
   show(config: ScToastConfig): string {
     this.ensureOverlay();
 
