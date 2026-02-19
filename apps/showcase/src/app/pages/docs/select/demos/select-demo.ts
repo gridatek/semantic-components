@@ -17,6 +17,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import {
   ScSelect,
+  ScSelectIcon,
   ScSelectList,
   ScSelectItem,
   ScSelectPortal,
@@ -28,6 +29,7 @@ import {
   selector: 'app-select-demo',
   imports: [
     ScSelect,
+    ScSelectIcon,
     ScSelectList,
     ScSelectItem,
     ScSelectPortal,
@@ -49,60 +51,28 @@ import {
           @if (displayIcon(); as icon) {
             @switch (icon) {
               @case ('tag') {
-                <svg
-                  class="text-muted-foreground size-4"
-                  siTagIcon
-                  aria-hidden="true"
-                ></svg>
+                <svg scSelectIcon siTagIcon aria-hidden="true"></svg>
               }
               @case ('star') {
-                <svg
-                  class="text-muted-foreground size-4"
-                  siStarIcon
-                  aria-hidden="true"
-                ></svg>
+                <svg scSelectIcon siStarIcon aria-hidden="true"></svg>
               }
               @case ('briefcase') {
-                <svg
-                  class="text-muted-foreground size-4"
-                  siBriefcaseIcon
-                  aria-hidden="true"
-                ></svg>
+                <svg scSelectIcon siBriefcaseIcon aria-hidden="true"></svg>
               }
               @case ('user') {
-                <svg
-                  class="text-muted-foreground size-4"
-                  siUserIcon
-                  aria-hidden="true"
-                ></svg>
+                <svg scSelectIcon siUserIcon aria-hidden="true"></svg>
               }
               @case ('square-check') {
-                <svg
-                  class="text-muted-foreground size-4"
-                  siSquareCheckIcon
-                  aria-hidden="true"
-                ></svg>
+                <svg scSelectIcon siSquareCheckIcon aria-hidden="true"></svg>
               }
               @case ('clock') {
-                <svg
-                  class="text-muted-foreground size-4"
-                  siClockIcon
-                  aria-hidden="true"
-                ></svg>
+                <svg scSelectIcon siClockIcon aria-hidden="true"></svg>
               }
               @case ('book') {
-                <svg
-                  class="text-muted-foreground size-4"
-                  siBookIcon
-                  aria-hidden="true"
-                ></svg>
+                <svg scSelectIcon siBookIcon aria-hidden="true"></svg>
               }
               @case ('plane') {
-                <svg
-                  class="text-muted-foreground size-4"
-                  siPlaneIcon
-                  aria-hidden="true"
-                ></svg>
+                <svg scSelectIcon siPlaneIcon aria-hidden="true"></svg>
               }
             }
           }
@@ -115,60 +85,28 @@ import {
             <div scSelectItem [value]="label.value" [label]="label.value">
               @switch (label.icon) {
                 @case ('tag') {
-                  <svg
-                    class="text-muted-foreground size-4 shrink-0"
-                    siTagIcon
-                    aria-hidden="true"
-                  ></svg>
+                  <svg scSelectIcon siTagIcon aria-hidden="true"></svg>
                 }
                 @case ('star') {
-                  <svg
-                    class="text-muted-foreground size-4 shrink-0"
-                    siStarIcon
-                    aria-hidden="true"
-                  ></svg>
+                  <svg scSelectIcon siStarIcon aria-hidden="true"></svg>
                 }
                 @case ('briefcase') {
-                  <svg
-                    class="text-muted-foreground size-4 shrink-0"
-                    siBriefcaseIcon
-                    aria-hidden="true"
-                  ></svg>
+                  <svg scSelectIcon siBriefcaseIcon aria-hidden="true"></svg>
                 }
                 @case ('user') {
-                  <svg
-                    class="text-muted-foreground size-4 shrink-0"
-                    siUserIcon
-                    aria-hidden="true"
-                  ></svg>
+                  <svg scSelectIcon siUserIcon aria-hidden="true"></svg>
                 }
                 @case ('square-check') {
-                  <svg
-                    class="text-muted-foreground size-4 shrink-0"
-                    siSquareCheckIcon
-                    aria-hidden="true"
-                  ></svg>
+                  <svg scSelectIcon siSquareCheckIcon aria-hidden="true"></svg>
                 }
                 @case ('clock') {
-                  <svg
-                    class="text-muted-foreground size-4 shrink-0"
-                    siClockIcon
-                    aria-hidden="true"
-                  ></svg>
+                  <svg scSelectIcon siClockIcon aria-hidden="true"></svg>
                 }
                 @case ('book') {
-                  <svg
-                    class="text-muted-foreground size-4 shrink-0"
-                    siBookIcon
-                    aria-hidden="true"
-                  ></svg>
+                  <svg scSelectIcon siBookIcon aria-hidden="true"></svg>
                 }
                 @case ('plane') {
-                  <svg
-                    class="text-muted-foreground size-4 shrink-0"
-                    siPlaneIcon
-                    aria-hidden="true"
-                  ></svg>
+                  <svg scSelectIcon siPlaneIcon aria-hidden="true"></svg>
                 }
               }
               <span class="flex-1">{{ label.value }}</span>

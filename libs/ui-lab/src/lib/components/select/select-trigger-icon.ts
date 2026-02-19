@@ -2,16 +2,19 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: 'svg[scSelectIcon]',
+  selector: 'svg[scSelectTriggerIcon]',
   host: {
-    'data-slot': 'select-icon',
+    'data-slot': 'select-trigger-icon',
     '[class]': 'class()',
   },
 })
-export class ScSelectIcon {
+export class ScSelectTriggerIcon {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-muted-foreground size-4 shrink-0', this.classInput()),
+    cn(
+      'text-muted-foreground pointer-events-none size-4 shrink-0',
+      this.classInput(),
+    ),
   );
 }

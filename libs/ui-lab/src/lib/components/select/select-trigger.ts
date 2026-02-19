@@ -12,11 +12,11 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 
 import { ScSelectInput } from './select-input';
-import { ScSelectIcon } from './select-icon';
+import { ScSelectTriggerIcon } from './select-trigger-icon';
 
 @Component({
   selector: 'div[scSelectTrigger]',
-  imports: [ScSelectInput, ScSelectIcon, SiChevronDownIcon],
+  imports: [ScSelectInput, ScSelectTriggerIcon, SiChevronDownIcon],
   template: `
     <ng-content />
     <input
@@ -24,7 +24,7 @@ import { ScSelectIcon } from './select-icon';
       [attr.aria-label]="ariaLabel()"
       [placeholder]="placeholder()"
     />
-    <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
+    <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
   `,
   hostDirectives: [CdkOverlayOrigin],
   host: {
