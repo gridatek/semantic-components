@@ -1,16 +1,26 @@
 import { Option } from '@angular/aria/listbox';
 import {
+  ChangeDetectionStrategy,
+  Component,
   computed,
-  Directive,
   effect,
   ElementRef,
   inject,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 
-@Directive({
+import { ScSelectItemIndicator } from './select-item-indicator';
+
+@Component({
   selector: 'div[scSelectItem]',
+  imports: [ScSelectItemIndicator, SiCheckIcon],
+  template: `
+    <ng-content />
+    <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
+  `,
   hostDirectives: [
     {
       directive: Option,
@@ -21,6 +31,8 @@ import { cn } from '@semantic-components/ui';
     'data-slot': 'select-item',
     '[class]': 'class()',
   },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelectItem {
   readonly classInput = input<string>('', { alias: 'class' });

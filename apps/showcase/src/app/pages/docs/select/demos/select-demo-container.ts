@@ -26,12 +26,10 @@ export class ScSelectDemoContainer {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import {
   ScSelect,
   ScSelectList,
   ScSelectItem,
-  ScSelectItemIndicator,
   ScSelectPortal,
   ScSelectTrigger,
   ScSelectValue,
@@ -43,11 +41,9 @@ import {
     ScSelect,
     ScSelectList,
     ScSelectItem,
-    ScSelectItemIndicator,
     ScSelectPortal,
     ScSelectTrigger,
     ScSelectValue,
-    SiCheckIcon,
   ],
   template: \`
     <div scSelect placeholder="Select a label">
@@ -171,11 +167,6 @@ import {
                 }
               </svg>
               <span class="flex-1">{{ label.value }}</span>
-              <svg
-                scSelectItemIndicator
-                siCheckIcon
-                aria-hidden="true"
-              ></svg>
             </div>
           }
         </div>
