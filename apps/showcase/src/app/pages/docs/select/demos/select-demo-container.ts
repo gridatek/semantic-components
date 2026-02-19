@@ -26,12 +26,10 @@ export class ScSelectDemoContainer {
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import {
   ScSelect,
   ScSelectList,
-  ScSelectIcon,
-  ScSelectInput,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectPortal,
@@ -44,19 +42,16 @@ import {
   imports: [
     ScSelect,
     ScSelectList,
-    ScSelectIcon,
-    ScSelectInput,
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectPortal,
     ScSelectTrigger,
     ScSelectValue,
     SiCheckIcon,
-    SiChevronDownIcon,
   ],
   template: \`
     <div scSelect>
-      <div scSelectTrigger>
+      <div scSelectTrigger aria-label="Label dropdown" placeholder="Select a label">
         <span scSelectValue>
           @if (displayIcon(); as icon) {
             <svg
@@ -116,12 +111,6 @@ import {
           }
           <span class="truncate">{{ displayValue() }}</span>
         </span>
-        <input
-          scSelectInput
-          aria-label="Label dropdown"
-          placeholder="Select a label"
-        />
-        <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
       <div scSelectPortal>
         <div scSelectList>

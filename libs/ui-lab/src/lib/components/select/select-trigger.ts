@@ -7,13 +7,23 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+
+import { ScSelectInput } from './select-input';
+import { ScSelectIcon } from './select-icon';
 
 @Component({
   selector: 'div[scSelectTrigger]',
-  imports: [],
+  imports: [ScSelectInput, ScSelectIcon, SiChevronDownIcon],
   template: `
     <ng-content />
+    <input
+      scSelectInput
+      [attr.aria-label]="ariaLabel()"
+      [placeholder]="placeholder()"
+    />
+    <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
   `,
   hostDirectives: [CdkOverlayOrigin],
   host: {
@@ -26,6 +36,8 @@ import { cn } from '@semantic-components/ui';
 export class ScSelectTrigger {
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
+  readonly placeholder = input<string>('');
 
   protected readonly class = computed(() =>
     cn(
