@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScSelectList } from './select-list';
 import { ScSelectPortal } from './select-portal';
 import { ScSelectTrigger } from './select-trigger';

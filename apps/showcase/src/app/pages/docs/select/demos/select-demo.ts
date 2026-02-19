@@ -23,7 +23,7 @@ import {
   ScSelectPortal,
   ScSelectTrigger,
   ScSelectValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-demo',

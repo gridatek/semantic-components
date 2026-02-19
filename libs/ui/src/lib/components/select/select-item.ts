@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 import { ScSelectItemIndicator } from './select-item-indicator';
 

@@ -708,9 +708,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'select',
     description: 'Displays a list of options for the user to pick from.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Separator',
