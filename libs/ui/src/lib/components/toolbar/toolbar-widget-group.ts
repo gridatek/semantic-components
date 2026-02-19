@@ -30,6 +30,6 @@ export class ScToolbarWidgetGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex items-center gap-0', this.classInput()),
+    cn('flex items-center gap-0.5', this.classInput()),
   );
 }

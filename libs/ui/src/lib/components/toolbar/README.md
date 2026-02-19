@@ -110,6 +110,11 @@ A container for grouping a set of controls, such as toggle buttons, with keyboar
 | ------- | -------- | ------- | ---------------------- |
 | `class` | `string` | `''`    | Additional CSS classes |
 
+## Styling
+
+- `ScToolbarWidget` reuses `toggleVariants` from the Toggle component for consistent hover, focus, disabled, and sizing styles.
+- `ScToolbarWidgetGroup` uses a small gap (`gap-0.5`) between widgets so focus rings remain visible.
+
 ## Accessibility
 
 - Built on `@angular/aria/toolbar` for full ARIA toolbar pattern support
