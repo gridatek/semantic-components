@@ -7,9 +7,11 @@ import {
   effect,
   inject,
   input,
+  model,
   ViewEncapsulation,
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
+import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '@semantic-components/ui';
 import { ScSelectList } from './select-list';
 import { ScSelectTrigger } from './select-trigger';
@@ -32,9 +34,10 @@ import { ScSelectTrigger } from './select-trigger';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelect {
+export class ScSelect implements FormValueControl<string> {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly placeholder = input<string>('');
+  readonly value = model<string>('');
 
   private readonly trigger = contentChild(ScSelectTrigger);
   private readonly content = contentChild(ScSelectList, {
@@ -54,5 +57,12 @@ export class ScSelect {
 
   constructor() {
     effect(() => signalSetFn(this.combobox.readonly[SIGNAL], true));
+
+    // Sync listbox selection → model
+    effect(() => {
+      const vals = this.values();
+      const selected = vals.length > 0 ? String(vals[0]) : '';
+      this.value.set(selected);
+    });
   }
 }
