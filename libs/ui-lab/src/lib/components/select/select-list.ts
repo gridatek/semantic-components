@@ -25,7 +25,8 @@ import { cn } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelectList {
-  readonly listbox = inject(Listbox);
+  private readonly listbox = inject(Listbox);
+  readonly values = computed(() => this.listbox.values());
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly combobox = inject(Combobox);

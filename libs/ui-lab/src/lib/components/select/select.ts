@@ -64,7 +64,7 @@ export class ScSelect implements FormValueControl<string> {
   protected readonly selectPortal = contentChild.required(ScSelectPortal);
 
   readonly origin = computed(() => this.trigger()?.overlayOrigin);
-  readonly values = computed(() => this.content()?.listbox.values() ?? []);
+  readonly values = computed(() => this.content()?.values() ?? []);
   readonly displayValue = computed(() => {
     const vals = this.values();
     return vals.length > 0 ? String(vals[0]) : '';
