@@ -9,7 +9,7 @@ The components follow a dependency injection (DI) pattern where parent wrapper c
 ```
 ScMenuProvider (root wrapper)
 ├── ScMenuTrigger (button that opens menu)
-└── ScMenuPortal (overlay positioning)
+└── ScMenuPortal (template ref for menu content)
     └── ScMenu (menu container with Menu directive)
         ├── ScMenuItem (menu items)
         ├── ScMenuSeparator (visual divider)
@@ -24,17 +24,17 @@ ScMenuProvider (root wrapper)
 
 | Component           | Selector                    | Description                                     |
 | ------------------- | --------------------------- | ----------------------------------------------- |
-| `ScMenuProvider`    | `div[scMenuProvider]`     | Root wrapper that auto-connects trigger to menu |
-| `ScMenuTrigger`     | `button[scMenuTrigger]`   | Button that opens the menu                      |
-| `ScMenuPortal`      | `div[scMenuPortal]`       | Handles overlay positioning                     |
-| `ScMenu`            | `div[scMenu]`              | Menu container with animations                  |
-| `ScMenuItem`        | `div[scMenuItem]`         | Selectable menu item                            |
-| `ScMenuSeparator`   | `div[scMenuSeparator]`    | Visual separator                                |
-| `ScMenuSubProvider` | `div[scMenuSubProvider]` | Submenu wrapper                                 |
-| `ScMenuSubTrigger`  | `div[scMenuSubTrigger]`  | Item that opens submenu                         |
-| `ScMenuSubPortal`   | `div[scMenuSubPortal]`   | Submenu overlay positioning                     |
-| `ScMenuSub`         | `div[scMenuSub]`          | Submenu container with animations               |
-| `ScMenuSubIcon`     | `svg[scMenuSubIcon]`     | Chevron icon for submenu triggers               |
+| `ScMenuProvider`    | `div[scMenuProvider]`       | Root wrapper that auto-connects trigger to menu |
+| `ScMenuTrigger`     | `button[scMenuTrigger]`     | Button that opens the menu                      |
+| `ScMenuPortal`      | `ng-template[scMenuPortal]` | Provides template ref for overlay content       |
+| `ScMenu`            | `div[scMenu]`               | Menu container with animations                  |
+| `ScMenuItem`        | `div[scMenuItem]`           | Selectable menu item                            |
+| `ScMenuSeparator`   | `div[scMenuSeparator]`      | Visual separator                                |
+| `ScMenuSubProvider` | `div[scMenuSubProvider]`    | Submenu wrapper                                 |
+| `ScMenuSubTrigger`  | `div[scMenuSubTrigger]`     | Item that opens submenu                         |
+| `ScMenuSubPortal`   | `div[scMenuSubPortal]`      | Submenu overlay positioning                     |
+| `ScMenuSub`         | `div[scMenuSub]`            | Submenu container with animations               |
+| `ScMenuSubIcon`     | `svg[scMenuSubIcon]`        | Chevron icon for submenu triggers               |
 
 ## Usage
 
@@ -43,14 +43,14 @@ ScMenuProvider (root wrapper)
 ```html
 <div scMenuProvider>
   <button scMenuTrigger>Open Menu</button>
-  <div scMenuPortal>
+  <ng-template scMenuPortal>
     <div scMenu>
       <div scMenuItem value="edit">Edit</div>
       <div scMenuItem value="duplicate">Duplicate</div>
       <div scMenuSeparator></div>
       <div scMenuItem value="delete">Delete</div>
     </div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -59,7 +59,7 @@ ScMenuProvider (root wrapper)
 ```html
 <div scMenuProvider>
   <button scMenuTrigger>Open Menu</button>
-  <div scMenuPortal>
+  <ng-template scMenuPortal>
     <div scMenu>
       <div scMenuItem value="new">New</div>
       <div scMenuSeparator></div>
@@ -76,7 +76,7 @@ ScMenuProvider (root wrapper)
         </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -130,11 +130,21 @@ This eliminates the need for template variables like `#menu="ngMenu"`.
 
 ### Overlay Positioning
 
-`ScMenuPortal` injects `ScMenuProvider` to access the trigger's `CdkOverlayOrigin` and `expanded` state:
+`ScMenuProvider` handles overlay positioning internally using CDK connected overlay. It queries the `ScMenuPortal` directive via `contentChild` to get the template ref, and renders it inside the overlay using `NgTemplateOutlet`:
 
 ```typescript
-protected readonly origin = computed(() => this.scMenu.origin());
-protected readonly expanded = computed(() => this.scMenu.trigger()?.expanded() ?? false);
+protected readonly menuPortal = contentChild.required(ScMenuPortal);
+protected readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
+protected readonly expanded = computed(() => this.triggerChild()?.trigger?.expanded() ?? false);
+```
+
+`ScMenuPortal` is a simple directive that exposes the `ng-template`'s `TemplateRef`:
+
+```typescript
+@Directive({ selector: 'ng-template[scMenuPortal]' })
+export class ScMenuPortal {
+  readonly templateRef = inject(TemplateRef);
+}
 ```
 
 ### Animations
