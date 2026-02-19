@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  forwardRef,
   inject,
   input,
   ViewEncapsulation,
@@ -37,7 +38,9 @@ export class ScSelectTrigger {
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaLabel = input<string>('', { alias: 'aria-label' });
-  readonly placeholder = input<string>('');
+
+  private readonly select = inject(forwardRef(() => ScSelect));
+  readonly placeholder = computed(() => this.select.placeholder());
 
   protected readonly class = computed(() =>
     cn(
@@ -46,3 +49,6 @@ export class ScSelectTrigger {
     ),
   );
 }
+
+// Lazy import to avoid circular dependency
+import { ScSelect } from './select';

@@ -34,6 +34,7 @@ import { ScSelectTrigger } from './select-trigger';
 })
 export class ScSelect {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly placeholder = input<string>('');
 
   private readonly trigger = contentChild(ScSelectTrigger);
   private readonly content = contentChild(ScSelectList, {

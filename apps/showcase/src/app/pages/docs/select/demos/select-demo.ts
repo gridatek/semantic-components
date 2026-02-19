@@ -29,12 +29,8 @@ import {
     SiCheckIcon,
   ],
   template: `
-    <div scSelect>
-      <div
-        scSelectTrigger
-        aria-label="Label dropdown"
-        placeholder="Select a label"
-      >
+    <div scSelect placeholder="Select a label">
+      <div scSelectTrigger aria-label="Label dropdown">
         <span scSelectValue>
           @if (displayIcon(); as icon) {
             <svg
