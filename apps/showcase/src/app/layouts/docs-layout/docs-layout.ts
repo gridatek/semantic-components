@@ -267,7 +267,7 @@ import { ConfigService } from '../../services/config.service';
         <button scSidebarRail></button>
       </div>
 
-      <main scSidebarInset>
+      <main scSidebarInset class="min-w-0 overflow-x-hidden">
         <header
           class="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background px-4"
         >
@@ -295,7 +295,7 @@ import { ConfigService } from '../../services/config.service';
         </header>
 
         <div class="flex flex-1">
-          <div #contentArea class="flex-1 p-6">
+          <div #contentArea class="min-w-0 flex-1 p-6">
             <router-outlet />
           </div>
 
