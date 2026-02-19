@@ -7,7 +7,9 @@ import { ActionToastDemoContainer } from './demos/action-toast-demo-container';
 import { BasicToastDemoContainer } from './demos/basic-toast-demo-container';
 import { DestructiveToastDemoContainer } from './demos/destructive-toast-demo-container';
 import { DurationToastDemoContainer } from './demos/duration-toast-demo-container';
+import { PositionToastDemoContainer } from './demos/position-toast-demo-container';
 import { TitleToastDemoContainer } from './demos/title-toast-demo-container';
+import { VariantsToastDemoContainer } from './demos/variants-toast-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
@@ -19,6 +21,8 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     ActionToastDemoContainer,
     DestructiveToastDemoContainer,
     DurationToastDemoContainer,
+    VariantsToastDemoContainer,
+    PositionToastDemoContainer,
     TocHeading,
     ComponentBadges,
   ],
@@ -39,6 +43,8 @@ import { ComponentBadges } from '../../../components/component-badges/component-
         <app-action-toast-demo-container />
         <app-destructive-toast-demo-container />
         <app-duration-toast-demo-container />
+        <app-variants-toast-demo-container />
+        <app-position-toast-demo-container />
       </section>
     </div>
   `,
