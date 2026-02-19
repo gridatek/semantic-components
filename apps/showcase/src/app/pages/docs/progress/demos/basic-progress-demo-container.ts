@@ -14,7 +14,7 @@ import { BasicProgressDemo } from './basic-progress-demo';
       <app-basic-progress-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -38,7 +38,7 @@ import { ScProgress } from '@semantic-components/ui';
       <p class="text-sm text-muted-foreground">{{ progress() }}% complete</p>
     </div>
   \`,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
