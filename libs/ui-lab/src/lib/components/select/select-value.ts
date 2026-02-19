@@ -24,9 +24,6 @@ export class ScSelectValue {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'pointer-events-none absolute left-3 flex items-center gap-2 truncate',
-      this.classInput(),
-    ),
+    cn('pointer-events-none', this.classInput()),
   );
 }

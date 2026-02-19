@@ -38,10 +38,11 @@ export class ScSelectItem {
 
   protected readonly class = computed(() =>
     cn(
-      'relative flex min-h-9 cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 pr-8 text-sm outline-none transition-colors',
-      'hover:bg-accent hover:text-accent-foreground',
-      'data-[active=true]:ring-2 data-[active=true]:ring-ring data-[active=true]:ring-offset-1',
+      'relative flex w-full cursor-default select-none items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden',
+      'data-[active=true]:bg-accent data-[active=true]:text-accent-foreground',
       'aria-selected:bg-accent/50 aria-selected:text-accent-foreground',
+      'data-disabled:pointer-events-none data-disabled:opacity-50',
+      '[&_svg:not([class*=size-])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0',
       this.classInput(),
     ),
   );

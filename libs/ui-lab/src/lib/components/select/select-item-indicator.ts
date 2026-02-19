@@ -13,7 +13,7 @@ export class ScSelectItemIndicator {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute right-2 size-4 opacity-0 [[aria-selected=true]>&]:opacity-100',
+      'pointer-events-none absolute right-2 flex size-4 items-center justify-center opacity-0 [[aria-selected=true]>&]:opacity-100',
       this.classInput(),
     ),
   );
