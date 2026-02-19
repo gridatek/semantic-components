@@ -18,7 +18,8 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
     'data-slot': 'resizable-handle',
     'data-panel-resize-handle': '',
     '[class]': 'class()',
-    '[attr.aria-orientation]': 'group.direction()',
+    '[attr.aria-orientation]':
+      'group.direction() === "horizontal" ? "vertical" : "horizontal"',
     '(mousedown)': 'onMouseDown($event)',
     '(touchstart)': 'onTouchStart($event)',
   },
