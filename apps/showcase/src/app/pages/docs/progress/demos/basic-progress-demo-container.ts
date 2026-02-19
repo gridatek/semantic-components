@@ -34,10 +34,11 @@ import { ScProgress } from '@semantic-components/ui';
   imports: [ScProgress],
   template: \`
     <div class="space-y-2">
-      <div scProgress [value]="progress()" class="w-[60%]"></div>
+      <div scProgress [value]="progress()"></div>
       <p class="text-sm text-muted-foreground">{{ progress() }}% complete</p>
     </div>
   \`,
+  host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
