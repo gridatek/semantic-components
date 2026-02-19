@@ -4,7 +4,14 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiCircleCheckIcon,
+  SiInfoIcon,
+  SiLoaderCircleIcon,
+  SiOctagonXIcon,
+  SiTriangleAlertIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 import { ScToast } from './toast';
 import { ScToastAction } from './toast-action';
 import { ScToastClose } from './toast-close';
@@ -16,6 +23,11 @@ import { ScToaster } from './toaster';
   selector: 'sc-toast-stack',
   imports: [
     SiXIcon,
+    SiCircleCheckIcon,
+    SiInfoIcon,
+    SiLoaderCircleIcon,
+    SiOctagonXIcon,
+    SiTriangleAlertIcon,
     ScToast,
     ScToastTitle,
     ScToastDescription,
@@ -32,6 +44,32 @@ import { ScToaster } from './toaster';
         (pointerEnter)="toastService.pause(toast.id)"
         (pointerLeave)="toastService.resume(toast.id)"
       >
+        @switch (toast.variant) {
+          @case ('success') {
+            <svg
+              siCircleCheckIcon
+              class="size-4 shrink-0 text-green-600 dark:text-green-400"
+            ></svg>
+          }
+          @case ('info') {
+            <svg
+              siInfoIcon
+              class="size-4 shrink-0 text-blue-600 dark:text-blue-400"
+            ></svg>
+          }
+          @case ('warning') {
+            <svg
+              siTriangleAlertIcon
+              class="size-4 shrink-0 text-yellow-600 dark:text-yellow-400"
+            ></svg>
+          }
+          @case ('error') {
+            <svg siOctagonXIcon class="size-4 shrink-0"></svg>
+          }
+          @case ('loading') {
+            <svg siLoaderCircleIcon class="size-4 shrink-0 animate-spin"></svg>
+          }
+        }
         <div class="grid gap-1">
           @if (toast.title) {
             <div scToastTitle>{{ toast.title }}</div>

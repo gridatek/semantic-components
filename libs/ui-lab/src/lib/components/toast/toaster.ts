@@ -14,9 +14,9 @@ export class ScToaster {
 
   private readonly defaultDuration = 5000;
   private readonly maxToasts = 5;
-  private timeouts = new Map<string, ReturnType<typeof setTimeout>>();
-  private timerStartTimes = new Map<string, number>();
-  private timerRemaining = new Map<string, number>();
+  private readonly timeouts = new Map<string, ReturnType<typeof setTimeout>>();
+  private readonly timerStartTimes = new Map<string, number>();
+  private readonly timerRemaining = new Map<string, number>();
 
   private readonly idGenerator = inject(_IdGenerator);
   private readonly overlay = inject(Overlay);
@@ -90,6 +90,26 @@ export class ScToaster {
     this.timerStartTimes.set(id, Date.now());
     const timeout = setTimeout(() => this.dismiss(id), duration);
     this.timeouts.set(id, timeout);
+  }
+
+  success(config: Omit<ScToastConfig, 'variant'>): string {
+    return this.show({ ...config, variant: 'success' });
+  }
+
+  info(config: Omit<ScToastConfig, 'variant'>): string {
+    return this.show({ ...config, variant: 'info' });
+  }
+
+  warning(config: Omit<ScToastConfig, 'variant'>): string {
+    return this.show({ ...config, variant: 'warning' });
+  }
+
+  error(config: Omit<ScToastConfig, 'variant'>): string {
+    return this.show({ ...config, variant: 'error' });
+  }
+
+  loading(config: Omit<ScToastConfig, 'variant'>): string {
+    return this.show({ ...config, variant: 'loading' });
   }
 
   /**

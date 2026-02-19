@@ -1,4 +1,11 @@
-export type ScToastVariant = 'default' | 'destructive';
+export type ScToastVariant =
+  | 'default'
+  | 'destructive'
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'error'
+  | 'loading';
 
 export interface ScToastData {
   id: string;
