@@ -36,8 +36,8 @@ export class ScToolbar {
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex items-center gap-1 rounded-lg border bg-background p-1',
-      this.toolbar.orientation() === 'vertical' && 'flex-col',
+      'flex w-fit items-center gap-1 rounded-lg border bg-background p-1',
+      this.toolbar.orientation() === 'vertical' && 'flex-col items-stretch',
       this.classInput(),
     ),
   );
