@@ -77,7 +77,7 @@ import {
           class="size-10 rounded-full"
         />
       </button>
-      <div scMenuPortal>
+      <ng-template scMenuPortal>
         <div scMenu class="w-56">
           <div class="flex items-center gap-2 px-2 py-1.5" role="presentation">
             <img
@@ -139,7 +139,7 @@ import {
             </span>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

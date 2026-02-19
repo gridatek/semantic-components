@@ -88,7 +88,7 @@ import {
   template: \`
     <div scMenuProvider>
       <button scButton scMenuTrigger variant="outline">Open</button>
-      <div scMenuPortal>
+      <ng-template scMenuPortal>
         <div scMenu class="w-56">
           <div class="px-2 py-1.5 text-sm font-semibold" role="presentation">
             My Account
@@ -165,7 +165,7 @@ import {
             </span>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

@@ -1,3 +1,5 @@
+import { NgTemplateOutlet } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,12 +13,32 @@ import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '@semantic-components/ui';
 import { ScMenuTrigger } from './menu-trigger';
 import { ScMenu } from './menu';
+import { ScMenuPortal } from './menu-portal';
 
 @Component({
   selector: 'div[scMenuProvider]',
-  imports: [],
+  imports: [OverlayModule, NgTemplateOutlet],
   template: `
     <ng-content />
+
+    @if (origin(); as origin) {
+      <ng-template
+        [cdkConnectedOverlayOpen]="expanded()"
+        [cdkConnectedOverlay]="{ origin, usePopover: 'inline' }"
+        [cdkConnectedOverlayPositions]="[
+          {
+            originX: 'start',
+            originY: 'bottom',
+            overlayX: 'start',
+            overlayY: 'top',
+            offsetY: 4,
+          },
+        ]"
+        cdkAttachPopoverAsChild
+      >
+        <ng-container [ngTemplateOutlet]="menuPortal().templateRef" />
+      </ng-template>
+    }
   `,
   host: {
     'data-slot': 'menu-provider',
@@ -30,10 +52,15 @@ export class ScMenuProvider {
 
   private readonly triggerChild = contentChild(ScMenuTrigger);
   private readonly content = contentChild(ScMenu, { descendants: true });
+  protected readonly menuPortal = contentChild.required(ScMenuPortal);
 
   readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
   readonly trigger = computed(() => this.triggerChild()?.trigger);
   readonly menu = computed(() => this.content()?.menu);
+
+  protected readonly expanded = computed(
+    () => this.triggerChild()?.trigger?.expanded() ?? false,
+  );
 
   protected readonly class = computed(() => cn('relative', this.classInput()));
 

@@ -49,7 +49,7 @@ import {
   template: `
     <div scMenuProvider>
       <button scButton scMenuTrigger variant="outline">Options</button>
-      <div scMenuPortal>
+      <ng-template scMenuPortal>
         <div scMenu class="w-56">
           <div scMenuItem value="Back">
             <svg
@@ -128,7 +128,7 @@ import {
             <span class="flex-1">Show Full URLs</span>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

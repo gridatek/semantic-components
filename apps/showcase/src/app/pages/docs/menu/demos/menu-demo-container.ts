@@ -89,7 +89,7 @@ import {
         <svg siMenuIcon class="size-4" aria-hidden="true"></svg>
         Open Menu
       </button>
-      <div scMenuPortal>
+      <ng-template scMenuPortal>
         <div scMenu>
           <div scMenuItem value="Mark as read">
             <svg siMailCheckIcon class="text-muted-foreground size-4" aria-hidden="true"></svg>
@@ -143,7 +143,7 @@ import {
             <span class="flex-1">Delete</span>
           </div>
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
 
