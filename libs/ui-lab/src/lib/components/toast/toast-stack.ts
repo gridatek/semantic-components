@@ -42,6 +42,7 @@ import { ScToaster } from './toaster';
       <div
         scToast
         [variant]="toast.variant ?? 'default'"
+        [position]="toastService.position()"
         [attr.data-state]="toast.state ?? 'open'"
         (animationend)="onAnimationEnd($event, toast.id)"
         (pointerEnter)="toastService.pause(toast.id)"
@@ -106,13 +107,12 @@ export class ScToastStack {
   protected readonly toastService = inject(ScToaster);
 
   private readonly positionClasses: Record<ScToastPosition, string> = {
-    'top-left': 'fixed top-0 left-0 flex-col',
-    'top-center': 'fixed top-0 left-1/2 -translate-x-1/2 flex-col',
-    'top-right': 'fixed top-0 right-0 flex-col',
-    'bottom-left': 'fixed bottom-0 left-0 flex-col-reverse',
-    'bottom-center':
-      'fixed bottom-0 left-1/2 -translate-x-1/2 flex-col-reverse',
-    'bottom-right': 'fixed bottom-0 right-0 flex-col-reverse',
+    'top-left': 'fixed top-0 left-0 flex-col-reverse',
+    'top-center': 'fixed top-0 left-1/2 -translate-x-1/2 flex-col-reverse',
+    'top-right': 'fixed top-0 right-0 flex-col-reverse',
+    'bottom-left': 'fixed bottom-0 left-0 flex-col',
+    'bottom-center': 'fixed bottom-0 left-1/2 -translate-x-1/2 flex-col',
+    'bottom-right': 'fixed bottom-0 right-0 flex-col',
   };
 
   protected readonly class = computed(() =>

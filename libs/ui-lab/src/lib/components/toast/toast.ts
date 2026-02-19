@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScToastVariant } from './toast.types';
+import { ScToastPosition, ScToastVariant } from './toast.types';
 
 @Component({
   selector: 'div[scToast]',
@@ -29,6 +29,7 @@ import { ScToastVariant } from './toast.types';
 export class ScToast {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScToastVariant>('default');
+  readonly position = input<ScToastPosition>('bottom-right');
 
   /** Emitted when pointer enters the toast (pause auto-dismiss) */
   readonly pointerEnter = output<void>();
@@ -39,7 +40,10 @@ export class ScToast {
   protected readonly class = computed(() =>
     cn(
       'group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden rounded-md border p-4 pr-6 shadow-lg transition-all',
-      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full',
+      this.position().startsWith('bottom')
+        ? 'data-[state=open]:slide-in-from-bottom-full'
+        : 'data-[state=open]:slide-in-from-top-full',
       this.variantClass(),
       this.classInput(),
     ),
