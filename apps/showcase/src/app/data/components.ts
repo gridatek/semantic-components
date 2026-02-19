@@ -941,9 +941,8 @@ export const COMPONENTS: ComponentItem[] = [
     description:
       'A container for grouping a set of controls, such as toggle buttons.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Buttons & Actions',
-    hidden: true,
   },
   {
     name: 'Tooltip',

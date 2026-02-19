@@ -59,7 +59,6 @@ export * from './theme-toggle';
 export * from './time-picker';
 export * from './timeline';
 export * from './timezone';
-export * from './toolbar';
 export * from './tour-guide';
 export * from './transfer-list';
 export * from './tree';

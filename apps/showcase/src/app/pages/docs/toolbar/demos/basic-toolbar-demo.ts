@@ -8,7 +8,7 @@ import {
   ScToolbarSeparator,
   ScToolbarWidget,
   ScToolbarWidgetGroup,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-toolbar-demo',
@@ -96,11 +96,7 @@ import {
             <line x1="17" x2="3" y1="18" y2="18" />
           </svg>
         </button>
-        <button
-          scToolbarWidget
-          value="align-center"
-          aria-label="Align center"
-        >
+        <button scToolbarWidget value="align-center" aria-label="Align center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
