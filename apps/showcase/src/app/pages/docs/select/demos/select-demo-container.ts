@@ -180,15 +180,12 @@ export class ScSelectDemo {
   private readonly select = viewChild.required(ScSelect);
 
   displayIcon = computed(() => {
-    const values = this.select().values();
-    const label = this.labels.find((label) => label.value === values[0]);
+    const value = this.select().value();
+    const label = this.labels.find((label) => label.value === value);
     return label ? label.icon : '';
   });
 
-  displayValue = computed(() => {
-    const values = this.select().values();
-    return values.length ? values[0] : 'Select a label';
-  });
+  displayValue = computed(() => this.select().value() || 'Select a label');
 
   labels = [
     { value: 'Important', icon: 'label' },
