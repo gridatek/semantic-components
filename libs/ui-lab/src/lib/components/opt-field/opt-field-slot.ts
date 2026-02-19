@@ -15,7 +15,7 @@ import { ScOptFieldSlotCaret } from './opt-field-slot-caret';
 import { ScOptFieldSlotChar } from './opt-field-slot-char';
 
 @Component({
-  selector: 'sc-opt-field-slot',
+  selector: 'div[scOptFieldSlot]',
   imports: [ScOptFieldSlotInput, ScOptFieldSlotCaret, ScOptFieldSlotChar],
   host: {
     'data-slot': 'opt-field-slot',

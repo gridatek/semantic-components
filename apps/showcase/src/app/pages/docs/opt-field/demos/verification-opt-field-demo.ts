@@ -31,9 +31,9 @@ import {
         <div class="flex justify-center">
           <div scOptField [(value)]="code">
             <div scOptFieldSlotGroup>
-              <sc-opt-field-slot />
-              <sc-opt-field-slot />
-              <sc-opt-field-slot />
+              <div scOptFieldSlot></div>
+              <div scOptFieldSlot></div>
+              <div scOptFieldSlot></div>
             </div>
             <div scOptFieldSeparator>
               <svg
@@ -52,9 +52,9 @@ import {
               </svg>
             </div>
             <div scOptFieldSlotGroup>
-              <sc-opt-field-slot />
-              <sc-opt-field-slot />
-              <sc-opt-field-slot />
+              <div scOptFieldSlot></div>
+              <div scOptFieldSlot></div>
+              <div scOptFieldSlot></div>
             </div>
           </div>
         </div>

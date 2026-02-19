@@ -47,9 +47,9 @@ import {
   template: \`
     <div scOptField [(value)]="otp">
       <div scOptFieldSlotGroup>
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
       </div>
       <div scOptFieldSeparator>
         <svg
@@ -68,9 +68,9 @@ import {
         </svg>
       </div>
       <div scOptFieldSlotGroup>
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
       </div>
     </div>
     <p class="text-sm text-muted-foreground mt-4">

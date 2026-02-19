@@ -40,12 +40,12 @@ import {
   template: \`
     <div scOptField [disabled]="true" value="123456">
       <div scOptFieldSlotGroup>
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
-        <sc-opt-field-slot />
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
+        <div scOptFieldSlot></div>
       </div>
     </div>
   \`,
