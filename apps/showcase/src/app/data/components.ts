@@ -917,9 +917,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'toast',
     description: 'A brief notification that appears temporarily.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Feedback',
-    hidden: true,
   },
   {
     name: 'Toggle',
