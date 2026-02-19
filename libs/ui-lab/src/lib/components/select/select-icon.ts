@@ -5,6 +5,7 @@ import { cn } from '@semantic-components/ui';
   selector: 'svg[scSelectIcon]',
   host: {
     'data-slot': 'select-icon',
+    'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })

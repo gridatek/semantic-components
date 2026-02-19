@@ -51,28 +51,28 @@ import {
           @if (displayIcon(); as icon) {
             @switch (icon) {
               @case ('tag') {
-                <svg scSelectIcon siTagIcon aria-hidden="true"></svg>
+                <svg scSelectIcon siTagIcon></svg>
               }
               @case ('star') {
-                <svg scSelectIcon siStarIcon aria-hidden="true"></svg>
+                <svg scSelectIcon siStarIcon></svg>
               }
               @case ('briefcase') {
-                <svg scSelectIcon siBriefcaseIcon aria-hidden="true"></svg>
+                <svg scSelectIcon siBriefcaseIcon></svg>
               }
               @case ('user') {
-                <svg scSelectIcon siUserIcon aria-hidden="true"></svg>
+                <svg scSelectIcon siUserIcon></svg>
               }
               @case ('square-check') {
-                <svg scSelectIcon siSquareCheckIcon aria-hidden="true"></svg>
+                <svg scSelectIcon siSquareCheckIcon></svg>
               }
               @case ('clock') {
-                <svg scSelectIcon siClockIcon aria-hidden="true"></svg>
+                <svg scSelectIcon siClockIcon></svg>
               }
               @case ('book') {
-                <svg scSelectIcon siBookIcon aria-hidden="true"></svg>
+                <svg scSelectIcon siBookIcon></svg>
               }
               @case ('plane') {
-                <svg scSelectIcon siPlaneIcon aria-hidden="true"></svg>
+                <svg scSelectIcon siPlaneIcon></svg>
               }
             }
           }
@@ -85,28 +85,28 @@ import {
             <div scSelectItem [value]="label.value" [label]="label.value">
               @switch (label.icon) {
                 @case ('tag') {
-                  <svg scSelectIcon siTagIcon aria-hidden="true"></svg>
+                  <svg scSelectIcon siTagIcon></svg>
                 }
                 @case ('star') {
-                  <svg scSelectIcon siStarIcon aria-hidden="true"></svg>
+                  <svg scSelectIcon siStarIcon></svg>
                 }
                 @case ('briefcase') {
-                  <svg scSelectIcon siBriefcaseIcon aria-hidden="true"></svg>
+                  <svg scSelectIcon siBriefcaseIcon></svg>
                 }
                 @case ('user') {
-                  <svg scSelectIcon siUserIcon aria-hidden="true"></svg>
+                  <svg scSelectIcon siUserIcon></svg>
                 }
                 @case ('square-check') {
-                  <svg scSelectIcon siSquareCheckIcon aria-hidden="true"></svg>
+                  <svg scSelectIcon siSquareCheckIcon></svg>
                 }
                 @case ('clock') {
-                  <svg scSelectIcon siClockIcon aria-hidden="true"></svg>
+                  <svg scSelectIcon siClockIcon></svg>
                 }
                 @case ('book') {
-                  <svg scSelectIcon siBookIcon aria-hidden="true"></svg>
+                  <svg scSelectIcon siBookIcon></svg>
                 }
                 @case ('plane') {
-                  <svg scSelectIcon siPlaneIcon aria-hidden="true"></svg>
+                  <svg scSelectIcon siPlaneIcon></svg>
                 }
               }
               <span class="flex-1">{{ label.value }}</span>
