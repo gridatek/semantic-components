@@ -26,7 +26,7 @@ export class DestructiveToastDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScToaster } from '@semantic-components/ui-lab';
+import { ScToaster } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-destructive-toast-demo',

@@ -60,7 +60,6 @@ export * from './theme-toggle';
 export * from './time-picker';
 export * from './timeline';
 export * from './timezone';
-export * from './toast';
 export * from './toolbar';
 export * from './tour-guide';
 export * from './transfer-list';

@@ -6,9 +6,11 @@ Overall the architecture is clean: a root-provided service (`ScToaster`) manages
 
 **1. Dismiss animation never plays**
 `toast-stack.ts:32` — `data-state` is hardcoded to `'open'`:
+
 ```html
 [attr.data-state]="'open'"
 ```
+
 The CSS classes reference `data-[state=closed]:animate-out`, `data-[state=closed]:fade-out-80`, etc., but the state is never set to `closed` before the toast is removed from the DOM. `ScToaster.dismiss()` immediately removes the toast from the signal array, so the element is destroyed instantly without any exit animation.
 
 **Fix:** Introduce a `state` property on `ScToastData`, set it to `'closed'` on dismiss, wait for the animation to complete (via `animationend` event or a fixed delay), then remove from the array.
@@ -58,16 +60,16 @@ Per the project conventions, element-selector components should include `'block'
 
 ### Summary
 
-| Severity | Issue | File |
-|----------|-------|------|
-| Bug | Dismiss animation never plays | `toast-stack.ts`, `toaster.ts` |
-| Bug | Hover-pause outputs wired but unconnected | `toast.ts`, `toast-stack.ts` |
-| Bug | Duplicate rendering with multiple stacks | Demo files |
-| A11y | Live region should be on container | `toast-stack.ts`, `toast.ts` |
-| A11y | SVG icon missing `aria-hidden` | `toast-stack.ts` |
-| Design | Private CDK API usage | `toaster.ts` |
-| Design | No max toast limit | `toaster.ts` |
-| Design | Unintentionally public field | `toast-stack.ts` |
-| Minor | No swipe-to-dismiss | — |
+| Severity | Issue                                     | File                           |
+| -------- | ----------------------------------------- | ------------------------------ |
+| Bug      | Dismiss animation never plays             | `toast-stack.ts`, `toaster.ts` |
+| Bug      | Hover-pause outputs wired but unconnected | `toast.ts`, `toast-stack.ts`   |
+| Bug      | Duplicate rendering with multiple stacks  | Demo files                     |
+| A11y     | Live region should be on container        | `toast-stack.ts`, `toast.ts`   |
+| A11y     | SVG icon missing `aria-hidden`            | `toast-stack.ts`               |
+| Design   | Private CDK API usage                     | `toaster.ts`                   |
+| Design   | No max toast limit                        | `toaster.ts`                   |
+| Design   | Unintentionally public field              | `toast-stack.ts`               |
+| Minor    | No swipe-to-dismiss                       | —                              |
 
 The highest priority fixes are the dismiss animation bug (#1), the hover-pause gap (#2), and the duplicate rendering issue (#3), as they directly affect user experience.

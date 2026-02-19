@@ -1,17 +1,17 @@
 import { computed, Directive, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: '[scToastTitle]',
+  selector: '[scToastDescription]',
   host: {
-    'data-slot': 'toast-title',
+    'data-slot': 'toast-description',
     '[class]': 'class()',
   },
 })
-export class ScToastTitle {
+export class ScToastDescription {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-sm font-semibold', this.classInput()),
+    cn('text-sm opacity-90', this.classInput()),
   );
 }
