@@ -24,7 +24,7 @@ export class ValuesProgressDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScProgress } from '@semantic-components/ui-lab';
+import { ScProgress } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-values-progress-demo',

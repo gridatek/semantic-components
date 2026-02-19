@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScProgressIndicator } from './progress-indicator';
 
 @Component({
