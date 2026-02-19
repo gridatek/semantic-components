@@ -22,6 +22,7 @@ import { ScSelectTrigger } from './select-trigger';
 
 @Component({
   selector: 'div[scSelect]',
+  exportAs: 'scSelect',
   imports: [Combobox, ComboboxPopupContainer, OverlayModule, NgTemplateOutlet],
   hostDirectives: [
     {
@@ -65,6 +66,7 @@ export class ScSelect implements FormValueControl<string> {
 
   readonly origin = computed(() => this.trigger()?.overlayOrigin);
   readonly values = computed(() => this.content()?.values() ?? []);
+  readonly displayValue = computed(() => this.value() || this.placeholder());
   protected readonly class = computed(() => cn('relative', this.classInput()));
 
   private readonly combobox = inject(Combobox);

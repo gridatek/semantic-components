@@ -43,7 +43,7 @@ import {
     SiUserIcon,
   ],
   template: `
-    <div scSelect placeholder="Select a label">
+    <div scSelect #select="scSelect" placeholder="Select a label">
       <div scSelectTrigger aria-label="Label dropdown">
         <span scSelectValue>
           @if (displayIcon(); as icon) {
@@ -106,7 +106,7 @@ import {
               }
             }
           }
-          <span class="truncate">{{ displayValue() }}</span>
+          <span class="truncate">{{ select.displayValue() }}</span>
         </span>
       </div>
       <ng-template scSelectPortal>
@@ -189,8 +189,6 @@ export class ScSelectDemo {
     const label = this.labels.find((label) => label.value === value);
     return label ? label.icon : '';
   });
-
-  displayValue = computed(() => this.select().value() || 'Select a label');
 
   labels = [
     { value: 'Important', icon: 'tag' },
