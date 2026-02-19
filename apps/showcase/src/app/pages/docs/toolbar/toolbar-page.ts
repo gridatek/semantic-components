@@ -16,6 +16,16 @@ import { ComponentBadges } from '../../../components/component-badges/component-
         <h1 class="text-3xl font-bold tracking-tight">Toolbar</h1>
         <p class="text-muted-foreground">
           A container for grouping a set of controls, such as toggle buttons.
+          Built on top of
+          <a
+            href="https://angular.dev/api/aria/toolbar"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            &#64;angular/aria/toolbar
+          </a>
+          .
         </p>
         <app-component-badges path="toolbar" />
       </div>

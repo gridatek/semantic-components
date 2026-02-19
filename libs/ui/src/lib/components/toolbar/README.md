@@ -1,6 +1,6 @@
 # Toolbar
 
-A container for grouping a set of controls, such as toggle buttons, with keyboard navigation support.
+A container for grouping a set of controls, such as toggle buttons, with keyboard navigation support. Built on top of [`@angular/aria/toolbar`](https://angular.dev/api/aria/toolbar).
 
 ## Components
 
