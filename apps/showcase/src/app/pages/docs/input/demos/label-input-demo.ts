@@ -20,8 +20,10 @@ import { ScInput } from '@semantic-components/ui';
         [formField]="emailForm.email"
         placeholder="Email"
       />
-      @for (error of emailForm.email().errors(); track error.kind) {
-        <p scFieldError>{{ error.message }}</p>
+      @if (emailForm.email().touched() && emailForm.email().invalid()) {
+        @for (error of emailForm.email().errors(); track error.kind) {
+          <p scFieldError>{{ error.message }}</p>
+        }
       }
     </div>
     <pre class="mt-4 text-xs">
