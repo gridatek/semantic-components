@@ -30,7 +30,6 @@ import {
   SiSettingsIcon,
   SiUserIcon,
   SiUserPlusIcon,
-  SiUsersIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -60,7 +59,6 @@ import {
     SiSettingsIcon,
     SiUserIcon,
     SiUserPlusIcon,
-    SiUsersIcon,
   ],
   template: `
     <div scMenuProvider>

@@ -28,6 +28,7 @@ export class MenuToolsDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScMenu,
   ScMenuItem,
@@ -41,10 +42,18 @@ import {
   ScMenuProvider,
   ScMenuTrigger,
 } from '@semantic-components/ui-lab';
+import {
+  SiArrowLeftIcon,
+  SiArrowRightIcon,
+  SiChevronRightIcon,
+  SiRefreshCwIcon,
+  SiWrenchIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-menu-tools-demo',
   imports: [
+    ScButton,
     ScMenu,
     ScMenuItem,
     ScMenuPortal,
@@ -56,75 +65,33 @@ import {
     ScMenuSubTrigger,
     ScMenuProvider,
     ScMenuTrigger,
+    SiArrowLeftIcon,
+    SiArrowRightIcon,
+    SiChevronRightIcon,
+    SiRefreshCwIcon,
+    SiWrenchIcon,
   ],
   template: \`
     <div scMenuProvider>
-      <button scMenuTrigger>Options</button>
+      <button scButton scMenuTrigger variant="outline">Options</button>
       <div scMenuPortal>
         <div scMenu class="w-56">
           <div scMenuItem value="Back">
-            <svg
-              class="text-muted-foreground size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m12 19-7-7 7-7" />
-              <path d="M19 12H5" />
-            </svg>
+            <svg siArrowLeftIcon class="text-muted-foreground size-4" aria-hidden="true"></svg>
             <span class="flex-1">Back</span>
             <span class="ml-auto text-xs tracking-widest text-muted-foreground">
               ⌘[
             </span>
           </div>
           <div scMenuItem value="Forward" aria-disabled="true">
-            <svg
-              class="text-muted-foreground size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m12 5 7 7-7 7" />
-              <path d="M5 12h14" />
-            </svg>
+            <svg siArrowRightIcon class="text-muted-foreground size-4" aria-hidden="true"></svg>
             <span class="flex-1">Forward</span>
             <span class="ml-auto text-xs tracking-widest text-muted-foreground">
               ⌘]
             </span>
           </div>
           <div scMenuItem value="Reload">
-            <svg
-              class="text-muted-foreground size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-              <path d="M3 3v5h5" />
-              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
-              <path d="M16 16h5v5" />
-            </svg>
+            <svg siRefreshCwIcon class="text-muted-foreground size-4" aria-hidden="true"></svg>
             <span class="flex-1">Reload</span>
             <span class="ml-auto text-xs tracking-widest text-muted-foreground">
               ⌘R
@@ -133,38 +100,9 @@ import {
           <div scMenuSeparator></div>
           <div scMenuSubProvider>
             <div scMenuSubTrigger value="More Tools">
-              <svg
-                class="text-muted-foreground size-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path
-                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
-                />
-              </svg>
+              <svg siWrenchIcon class="text-muted-foreground size-4" aria-hidden="true"></svg>
               <span class="flex-1">More Tools</span>
-              <svg
-                scMenuSubIcon
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
+              <svg scMenuSubIcon siChevronRightIcon></svg>
             </div>
             <div scMenuSubPortal>
               <div scMenuSub>
