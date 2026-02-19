@@ -1,4 +1,7 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Combobox } from '@angular/aria/combobox';
+import { ComboboxPopupContainer } from '@angular/aria/combobox';
+import { OverlayModule } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,11 +17,12 @@ import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '@semantic-components/ui';
 import { ScSelectList } from './select-list';
+import { ScSelectPortal } from './select-portal';
 import { ScSelectTrigger } from './select-trigger';
 
 @Component({
   selector: 'div[scSelect]',
-  imports: [Combobox],
+  imports: [Combobox, ComboboxPopupContainer, OverlayModule, NgTemplateOutlet],
   hostDirectives: [
     {
       directive: Combobox,
@@ -26,6 +30,20 @@ import { ScSelectTrigger } from './select-trigger';
   ],
   template: `
     <ng-content />
+    <ng-template ngComboboxPopupContainer>
+      @if (origin(); as origin) {
+        <ng-template
+          [cdkConnectedOverlay]="{
+            origin,
+            usePopover: 'inline',
+            matchWidth: true,
+          }"
+          [cdkConnectedOverlayOpen]="true"
+        >
+          <ng-container [ngTemplateOutlet]="selectPortal().templateRef" />
+        </ng-template>
+      }
+    </ng-template>
   `,
   host: {
     'data-slot': 'select',
@@ -43,6 +61,7 @@ export class ScSelect implements FormValueControl<string> {
   private readonly content = contentChild(ScSelectList, {
     descendants: true,
   });
+  protected readonly selectPortal = contentChild.required(ScSelectPortal);
 
   readonly origin = computed(() => this.trigger()?.overlayOrigin);
   readonly values = computed(() => this.content()?.listbox.values() ?? []);

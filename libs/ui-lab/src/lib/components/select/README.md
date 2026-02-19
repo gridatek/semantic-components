@@ -9,42 +9,43 @@ A set of components for building accessible select dropdowns following the Singl
 - Automatic scroll-to-active on keyboard navigation
 - Overlay positioning with CDK
 - Customizable styling via `class` input
+- Signal forms support via `FormValueControl<string>`
 
 ## Components
 
-| Component               | Selector                        | Responsibility                                                  |
-| ----------------------- | ------------------------------- | --------------------------------------------------------------- |
-| `ScSelect`              | `div[scSelect]`                | Root container, wraps `Combobox` from `@angular/aria`           |
-| `ScSelectTrigger`       | `div[scSelectTrigger]`        | Trigger button styling, exposes overlay origin                  |
-| `ScSelectInput`         | `input[scSelectInput]`        | Hidden input, wraps `ComboboxInput` from `@angular/aria`        |
-| `ScSelectValue`         | `span[scSelectValue]`         | Display selected value with styling                             |
-| `ScSelectIcon`          | `svg[scSelectIcon]`           | Chevron icon styling (use with `@semantic-icons/lucide-icons`)  |
-| `ScSelectPortal`        | `div[scSelectPortal]`         | Overlay positioning & combobox popup container (infrastructure) |
-| `ScSelectList`          | `div[scSelectList]`           | Content container, wraps `Listbox` from `@angular/aria`         |
-| `ScSelectItem`          | `div[scSelectItem]`           | Option item styling, wraps `Option` from `@angular/aria`        |
-| `ScSelectItemIndicator` | `svg[scSelectItemIndicator]` | Checkmark icon for selected state                               |
+| Component         | Selector                      | Responsibility                                                                              |
+| ----------------- | ----------------------------- | ------------------------------------------------------------------------------------------- |
+| `ScSelect`        | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<string>` |
+| `ScSelectTrigger` | `div[scSelectTrigger]`        | Trigger button, internally renders hidden input and chevron icon                            |
+| `ScSelectValue`   | `span[scSelectValue]`         | Display selected value with styling                                                         |
+| `ScSelectPortal`  | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                 |
+| `ScSelectList`    | `div[scSelectList]`           | Content container, wraps `Listbox` from `@angular/aria`                                     |
+| `ScSelectItem`    | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                             |
+
+### Internal Components (not exported)
+
+| Component               | Selector                     | Responsibility                                           |
+| ----------------------- | ---------------------------- | -------------------------------------------------------- |
+| `ScSelectInput`         | `input[scSelectInput]`       | Hidden input, wraps `ComboboxInput` from `@angular/aria` |
+| `ScSelectIcon`          | `svg[scSelectIcon]`          | Chevron icon styling                                     |
+| `ScSelectItemIndicator` | `svg[scSelectItemIndicator]` | Checkmark icon for selected state                        |
 
 ## Basic Usage
 
 ### Template
 
 ```html
-<div scSelect>
-  <div scSelectTrigger>
+<div scSelect placeholder="Select an option">
+  <div scSelectTrigger aria-label="Select">
     <span scSelectValue>{{ displayValue() }}</span>
-    <input scSelectInput aria-label="Select" placeholder="Select an option" />
-    <svg scSelectIcon si-chevron-down-icon aria-hidden="true"></svg>
   </div>
-  <div scSelectPortal>
+  <ng-template scSelectPortal>
     <div scSelectList>
       @for (option of options; track option.value) {
-      <div scSelectItem [value]="option.value" [label]="option.label">
-        {{ option.label }}
-        <svg scSelectItemIndicator si-check-icon aria-hidden="true"></svg>
-      </div>
+      <div scSelectItem [value]="option.value" [label]="option.label">{{ option.label }}</div>
       }
     </div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -52,12 +53,11 @@ A set of components for building accessible select dropdowns following the Singl
 
 ```typescript
 import { ChangeDetectionStrategy, Component, computed, viewChild } from '@angular/core';
-import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
-import { ScSelect, ScSelectList, ScSelectIcon, ScSelectInput, ScSelectItem, ScSelectItemIndicator, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@app/ui/select';
+import { ScSelect, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-example',
-  imports: [ScSelect, ScSelectList, ScSelectIcon, ScSelectInput, ScSelectItem, ScSelectItemIndicator, ScSelectPortal, ScSelectTrigger, ScSelectValue, SiCheckIcon, SiChevronDownIcon],
+  imports: [ScSelect, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue],
   template: `
     ...
   `,
@@ -77,6 +77,18 @@ export class ExampleComponent {
     { value: 'option3', label: 'Option 3' },
   ];
 }
+```
+
+## Signal Forms
+
+`ScSelect` implements `FormValueControl<string>`, making it compatible with Angular signal forms:
+
+```typescript
+readonly fruit = new FormControl<string>('');
+```
+
+```html
+<div [formControl]="fruit" scSelect placeholder="Pick a fruit">...</div>
 ```
 
 ## Accessing Selected Values
@@ -110,30 +122,35 @@ When navigating with keyboard, the dropdown automatically scrolls to keep the ac
 The select components are built with accessibility in mind:
 
 - Uses `@angular/aria/combobox` and `@angular/aria/listbox` for proper ARIA roles
-- `aria-label` on the input for screen reader support
-- `aria-hidden="true"` on decorative icons
+- `aria-label` on the trigger for screen reader support
+- Decorative icons (chevron, checkmark) are internal with `aria-hidden="true"`
 - Visual focus indicators for keyboard navigation
 - Selected state indicated via `aria-selected`
 
 ### Required Accessibility Attributes
 
 ```html
-<!-- Always provide an accessible label -->
-<input scSelectInput aria-label="Select a fruit" />
-
-<!-- Hide decorative icons from screen readers -->
-<svg scSelectIcon si-chevron-down-icon aria-hidden="true"></svg>
-<svg scSelectItemIndicator si-check-icon aria-hidden="true"></svg>
+<!-- Always provide an accessible label on the trigger -->
+<div scSelectTrigger aria-label="Select a fruit"></div>
 ```
 
 ## API Reference
 
 ### ScSelect
 
-| Property   | Type     | Description                       |
-| ---------- | -------- | --------------------------------- |
-| `class`    | `string` | Additional CSS classes            |
-| `values()` | `signal` | Signal containing selected values |
+| Property      | Type                | Description                                            |
+| ------------- | ------------------- | ------------------------------------------------------ |
+| `class`       | `string`            | Additional CSS classes                                 |
+| `placeholder` | `string`            | Placeholder text for the hidden input                  |
+| `value`       | `model<string>`     | Two-way bound selected value (signal forms compatible) |
+| `values()`    | `Signal<unknown[]>` | Signal containing selected values                      |
+
+### ScSelectTrigger
+
+| Property     | Type     | Description                           |
+| ------------ | -------- | ------------------------------------- |
+| `class`      | `string` | Additional CSS classes                |
+| `aria-label` | `string` | Accessible label for the hidden input |
 
 ### ScSelectItem
 
@@ -148,23 +165,24 @@ The select components are built with accessibility in mind:
 All components accept a `class` input for custom styling:
 
 ```html
-<div scSelect class="w-64">
-  <div scSelectTrigger class="bg-slate-100">...</div>
+<div scSelect class="w-64" placeholder="Choose...">
+  <div scSelectTrigger class="bg-slate-100" aria-label="Choose">...</div>
 </div>
 ```
 
 ## Architecture
 
 ```
-ScSelect (root, wraps Combobox)
+ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl)
 ├── ScSelectTrigger (trigger + overlay origin)
-│   ├── ScSelectValue (display value)
-│   ├── ScSelectInput (wraps ComboboxInput)
-│   └── ScSelectIcon (chevron icon)
-└── ScSelectPortal (overlay infrastructure)
+│   ├── ScSelectValue (display value) [projected content]
+│   ├── ScSelectInput (hidden combobox input) [internal]
+│   └── ScSelectIcon + SiChevronDownIcon [internal]
+└── ScSelectPortal (ng-template marking lazy overlay content)
     └── ScSelectList (wraps Listbox)
         └── ScSelectItem (wraps Option)
-            └── ScSelectItemIndicator (checkmark icon)
+            ├── [projected content]
+            └── ScSelectItemIndicator + SiCheckIcon [internal]
 ```
 
 ## Dependencies
@@ -172,4 +190,4 @@ ScSelect (root, wraps Combobox)
 - `@angular/aria/combobox` - Combobox behavior
 - `@angular/aria/listbox` - Listbox and option behavior
 - `@angular/cdk/overlay` - Overlay positioning
-- `@semantic-icons/lucide-icons` - Icon library
+- `@semantic-icons/lucide-icons` - Icon library (used internally)

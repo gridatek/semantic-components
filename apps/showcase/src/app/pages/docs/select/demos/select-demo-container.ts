@@ -108,7 +108,7 @@ import {
           <span class="truncate">{{ displayValue() }}</span>
         </span>
       </div>
-      <div scSelectPortal>
+      <ng-template scSelectPortal>
         <div scSelectList>
           @for (label of labels; track label.value) {
             <div scSelectItem [value]="label.value" [label]="label.value">
@@ -170,7 +170,7 @@ import {
             </div>
           }
         </div>
-      </div>
+      </ng-template>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
