@@ -47,7 +47,7 @@ export class ScToast {
 
   private readonly variantClass = computed(() => {
     const variantClasses: Record<ScToastVariant, string> = {
-      default: 'border bg-background text-foreground',
+      default: 'border-border bg-card text-card-foreground shadow-lg',
       destructive:
         'destructive group border-destructive bg-destructive text-destructive-foreground',
     };

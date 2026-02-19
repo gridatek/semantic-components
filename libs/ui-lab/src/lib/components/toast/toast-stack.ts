@@ -4,6 +4,7 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { ScToast } from './toast';
 import { ScToastAction } from './toast-action';
 import { ScToastClose } from './toast-close';
@@ -14,6 +15,7 @@ import { ScToaster } from './toaster';
 @Component({
   selector: 'sc-toast-stack',
   imports: [
+    SiXIcon,
     ScToast,
     ScToastTitle,
     ScToastDescription,
@@ -47,21 +49,7 @@ import { ScToaster } from './toaster';
           </button>
         }
         <button scToastClose (close)="dismiss(toast.id)">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
+          <svg siXIcon class="size-4"></svg>
         </button>
       </div>
     }
@@ -87,7 +75,6 @@ export class ScToastStack {
   }
 
   protected onAnimationEnd(event: AnimationEvent, id: string): void {
-    // Ignore events bubbling up from child elements
     if (event.target !== event.currentTarget) return;
 
     const toast = this.toastService.toasts().find((t) => t.id === id);
