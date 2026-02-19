@@ -43,6 +43,7 @@ import {
   SiBoxIcon,
   SiDownloadIcon,
   SiMoonIcon,
+  SiPanelLeftIcon,
   SiSunIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn, ScSeparator } from '@semantic-components/ui';
@@ -84,6 +85,7 @@ import { ConfigService } from '../../services/config.service';
     SiBookOpenTextIcon,
     SiBoxIcon,
     SiDownloadIcon,
+    SiPanelLeftIcon,
     Logo,
     Toc,
   ],
@@ -272,20 +274,7 @@ import { ConfigService } from '../../services/config.service';
           class="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background px-4"
         >
           <button scSidebarTrigger>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect width="18" height="18" x="3" y="3" rx="2" />
-              <path d="M9 3v18" />
-            </svg>
+            <svg siPanelLeftIcon></svg>
             <span class="sr-only">Toggle Sidebar</span>
           </button>
           <div scSeparator orientation="vertical" class="h-4"></div>
