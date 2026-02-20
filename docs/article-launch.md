@@ -236,13 +236,22 @@ This approach is fully tree-shakable — only the icons you import end up in you
 npm install @semantic-components/ui
 ```
 
+Add the styles to your global stylesheet:
+
+```css
+@import '@semantic-components/ui/styles';
+@source "../node_modules/@semantic-components/ui";
+```
+
+The `@import` brings in the CDK overlay styles and the shadcn-compatible CSS variables (colors, radius, spacing tokens). The `@source` tells Tailwind v4 to scan the library's files so its utility classes are included in your build.
+
 Then import what you need directly in your standalone component:
 
 ```typescript
-import { ScButton, ScDialog, ScDialogContent, ScDialogTitle } from '@semantic-components/ui';
+import { ScButton, ScDialog, ScDialogBody, ScDialogTitle } from '@semantic-components/ui';
 
 @Component({
-  imports: [ScButton, ScDialog, ScDialogContent, ScDialogTitle],
+  imports: [ScButton, ScDialog, ScDialogBody, ScDialogTitle],
   template: `
     <button scButton>Open Dialog</button>
   `,
