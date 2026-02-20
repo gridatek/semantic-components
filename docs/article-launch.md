@@ -191,12 +191,10 @@ export class ScButton {
 
 This library makes deliberate choices that prioritize the future of Angular over backwards compatibility. That means it is **not for every project** — and that's intentional.
 
-- **Zoneless only.** The library is built for zoneless Angular apps. If your app still depends on `zone.js` for change detection, it won't work as expected.
-- **OnPush only.** All components use `ChangeDetectionStrategy.OnPush`. There is no `Default` fallback.
+- **Zoneless only.** The library is built for zoneless Angular apps.
+- **OnPush only.** All components use `ChangeDetectionStrategy.OnPush`.
 - **Signal-based forms only.** Form integrations are designed around signals, not `NgModel` or reactive forms.
 - **No NgModules.** Everything is standalone. There are no module exports, no `forRoot()`, no compatibility shims for module-based apps.
-
-If your project is greenfield or already on modern Angular, these are features, not limitations. If you're maintaining a large legacy codebase, this library is probably not the right fit yet.
 
 ---
 
