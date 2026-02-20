@@ -123,6 +123,8 @@ This also composes across components. A button can be a drawer trigger, a toolti
 
 One element. Three responsibilities. No wrappers.
 
+The tradeoff is verbosity. Because you own the structure, you write more template code than you would with a batteries-included component that hides everything behind inputs. That's a deliberate choice — explicit over implicit. You always know what's in the DOM because you put it there.
+
 ### Tailwind + CVA for Variants
 
 The library follows the [shadcn/ui](https://ui.shadcn.com) design system — same CSS variables, same color tokens (`bg-primary`, `text-muted-foreground`, `border-input`…), same default styles. If you're already familiar with shadcn, the visual language is instantly recognizable. If you're starting fresh, you get a well-thought-out design system out of the box.
