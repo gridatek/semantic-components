@@ -19,6 +19,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!pdfViewer.canGoPrev()',
+    '[attr.aria-disabled]': '!pdfViewer.canGoPrev() || null',
     '[attr.aria-label]': '"Previous page"',
     '(click)': 'pdfViewer.goToPrevPage()',
   },

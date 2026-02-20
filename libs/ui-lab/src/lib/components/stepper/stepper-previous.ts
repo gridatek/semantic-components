@@ -19,6 +19,7 @@ import { SC_STEPPER } from './stepper-types';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'stepper.activeStep() === 0',
+    '[attr.aria-disabled]': 'stepper.activeStep() === 0 || null',
     '(click)': 'stepper.prevStep()',
   },
   encapsulation: ViewEncapsulation.None,

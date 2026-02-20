@@ -17,6 +17,7 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'isDisabled()',
+    '[attr.aria-disabled]': 'isDisabled() || null',
     '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'onClick()',
   },

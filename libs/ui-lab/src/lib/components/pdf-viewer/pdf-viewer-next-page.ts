@@ -19,6 +19,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!pdfViewer.canGoNext()',
+    '[attr.aria-disabled]': '!pdfViewer.canGoNext() || null',
     '[attr.aria-label]': '"Next page"',
     '(click)': 'pdfViewer.goToNextPage()',
   },

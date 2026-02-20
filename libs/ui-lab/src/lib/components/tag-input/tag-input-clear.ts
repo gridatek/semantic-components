@@ -32,6 +32,8 @@ import { SC_TAG_INPUT } from './tag-input';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'tagInput.disabled() || tagInput.tags().length === 0',
+    '[attr.aria-disabled]':
+      'tagInput.disabled() || tagInput.tags().length === 0 || null',
     '(click)': 'onClick($event)',
     '[attr.aria-label]': '"Clear all tags"',
   },

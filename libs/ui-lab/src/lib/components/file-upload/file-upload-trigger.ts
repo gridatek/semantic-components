@@ -29,6 +29,7 @@ import { SC_FILE_UPLOAD } from './file-upload';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'fileUpload.disabled()',
+    '[attr.aria-disabled]': 'fileUpload.disabled() || null',
     '(click)': 'openFilePicker($event)',
   },
   encapsulation: ViewEncapsulation.None,
