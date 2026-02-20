@@ -25,12 +25,6 @@ A collection of accessible, customizable UI components for Angular applications.
 - **Maximum flexibility** - Build exactly what you need without prop drilling
 - **Single responsibility** - Each component has one clear purpose
 
-### Comprehensive Component Library
-
-- **40+ production-ready components** including forms, navigation, data display, and feedback
-- **Advanced components** like Data Tables, Charts, Rich Text Editor, Kanban Board, and more
-- **Form components** with validation, field composition, and accessibility built-in
-
 ### Accessibility First
 
 - **WCAG AA compliant** with full keyboard navigation
