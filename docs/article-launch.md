@@ -125,6 +125,8 @@ One element. Three responsibilities. No wrappers.
 
 ### Tailwind + CVA for Variants
 
+The library follows the [shadcn/ui](https://ui.shadcn.com) design system — same CSS variables, same color tokens (`bg-primary`, `text-muted-foreground`, `border-input`…), same default styles. If you're already familiar with shadcn, the visual language is instantly recognizable. If you're starting fresh, you get a well-thought-out design system out of the box.
+
 Styles are written in Tailwind CSS and managed with [class-variance-authority](https://cva.style). This means:
 
 - Zero runtime CSS-in-JS overhead
@@ -161,7 +163,7 @@ The rest of the library's design comes down to three non-negotiables:
 <button scButton variant="outline" scDrawerTrigger>Open</button>
 ```
 
-**Modern Angular, all the way down.** Signals (`input()`, `output()`, `computed()`), standalone components, native control flow (`@if`, `@for`), `inject()`, and OnPush everywhere. No legacy APIs, no NgModules, no compromises.
+**Modern Angular, all the way down.** Signals (`input()`, `output()`, `computed()`), standalone components, native control flow (`@if`, `@for`), `inject()`, and OnPush everywhere. Overlays and positioning are built on `@angular/cdk`. Accessible patterns like focus trapping and live regions use `@angular/cdk/a11y` and `@angular/aria`. Forms are signal-based. The library is also zoneless-compatible — no `zone.js` required. No legacy APIs, no NgModules, no compromises.
 
 ```typescript
 @Directive({ selector: 'button[scButton]' })
@@ -172,7 +174,20 @@ export class ScButton {
 }
 ```
 
-**Accessible by default.** Every component is built to pass WCAG AA minimums — proper ARIA attributes, full keyboard navigation, focus management on dialogs and drawers, and screen reader support.
+**Accessible by default.** Every component is built to pass WCAG AA minimums — proper ARIA attributes, full keyboard navigation, focus management on dialogs and drawers, and screen reader support. Where possible, this is powered by Angular CDK's accessibility primitives (`@angular/cdk/a11y`) rather than hand-rolled solutions.
+
+---
+
+## Tradeoffs
+
+This library makes deliberate choices that prioritize the future of Angular over backwards compatibility. That means it is **not for every project** — and that's intentional.
+
+- **Zoneless only.** The library is built for zoneless Angular apps. If your app still depends on `zone.js` for change detection, it won't work as expected.
+- **OnPush only.** All components use `ChangeDetectionStrategy.OnPush`. There is no `Default` fallback.
+- **Signal-based forms only.** Form integrations are designed around signals, not `NgModel` or reactive forms driven by `BehaviorSubject`.
+- **No NgModules.** Everything is standalone. There are no module exports, no `forRoot()`, no compatibility shims for module-based apps.
+
+If your project is greenfield or already on modern Angular, these are features, not limitations. If you're maintaining a large legacy codebase, this library is probably not the right fit yet.
 
 ---
 
