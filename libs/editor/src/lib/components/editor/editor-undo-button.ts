@@ -19,6 +19,7 @@ import { SC_EDITOR } from './editor';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled() || !editor.canUndo()',
+    '[attr.aria-disabled]': 'editor.disabled() || !editor.canUndo() || null',
     '[attr.title]': '"Undo (Ctrl+Z)"',
     '(click)': 'onClick()',
   },

@@ -19,6 +19,7 @@ import { SC_EDITOR } from './editor';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled() || !editor.canRedo()',
+    '[attr.aria-disabled]': 'editor.disabled() || !editor.canRedo() || null',
     '[attr.title]': '"Redo (Ctrl+Y)"',
     '(click)': 'onClick()',
   },

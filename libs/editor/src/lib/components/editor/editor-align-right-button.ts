@@ -19,6 +19,7 @@ import { SC_EDITOR } from './editor';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
+    '[attr.aria-disabled]': 'editor.disabled() || null',
     '[attr.aria-pressed]': 'editor.alignment() === "right"',
     '[attr.title]': '"Align right"',
     '(click)': 'onClick()',

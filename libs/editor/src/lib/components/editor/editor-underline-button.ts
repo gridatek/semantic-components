@@ -19,6 +19,7 @@ import { SC_EDITOR } from './editor';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
+    '[attr.aria-disabled]': 'editor.disabled() || null',
     '[attr.aria-pressed]': 'editor.isUnderline()',
     '[attr.title]': '"Underline (Ctrl+U)"',
     '(click)': 'onClick()',
