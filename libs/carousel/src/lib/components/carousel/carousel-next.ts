@@ -19,6 +19,7 @@ import { ScCarousel } from './carousel';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!carousel.canScrollNext()',
+    '[attr.aria-disabled]': '!carousel.canScrollNext() || null',
     '(click)': 'carousel.scrollNext()',
   },
   encapsulation: ViewEncapsulation.None,
