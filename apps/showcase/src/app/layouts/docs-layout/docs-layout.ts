@@ -20,7 +20,7 @@ import {
 } from '@angular/router';
 import {
   ScSidebar,
-  ScSidebarContent,
+  ScSidebarBody,
   ScSidebarFooter,
   ScSidebarGroup,
   ScSidebarGroupContent,
@@ -64,7 +64,7 @@ import { ConfigService } from '../../services/config.service';
     ScSidebarProvider,
     ScSidebar,
     ScSidebarHeader,
-    ScSidebarContent,
+    ScSidebarBody,
     ScSidebarFooter,
     ScSidebarGroup,
     ScSidebarGroupLabel,
@@ -110,7 +110,7 @@ import { ConfigService } from '../../services/config.service';
           </ul>
         </div>
 
-        <div scSidebarContent>
+        <div scSidebarBody>
           <div scSidebarGroup>
             <div scSidebarGroupLabel>Documentation</div>
             <div scSidebarGroupContent>

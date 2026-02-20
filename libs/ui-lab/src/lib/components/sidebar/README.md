@@ -16,7 +16,7 @@ A comprehensive sidebar component system for Angular applications with collapsib
 
 - `ScSidebarHeader` - Header section
 - `ScSidebarFooter` - Footer section
-- `ScSidebarContent` - Scrollable content area
+- `ScSidebarBody` - Scrollable content area
 - `ScSidebarSeparator` - Visual separator
 - `ScSidebarInput` - Styled input for search
 
@@ -56,9 +56,9 @@ The sidebar uses a clever layout technique to push content to the side instead o
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│ ScSidebarProvider (flex container)                     │
+│ ScSidebarProvider (flex container)                      │
 │ ┌─────────────────────┬─────────────────────────────┐   │
-│ │  ScSidebar         │  ScSidebarInset            │   │
+│ │  ScSidebar          │  ScSidebarInset             │   │
 │ │ ┌─────────────────┐ │  (main content)             │   │
 │ │ │ Gap Div         │ │                             │   │
 │ │ │ • Width: 16rem  │ │  <header>                   │   │
@@ -88,7 +88,7 @@ This architecture ensures smooth transitions and proper content flow without Jav
 ## Basic Usage
 
 ```typescript
-import { ScSidebarProvider, ScSidebar, ScSidebarTrigger, ScSidebarHeader, ScSidebarContent, ScSidebarFooter, ScSidebarMenu, ScSidebarMenuItem, ScSidebarMenuButton, ScSidebarInset } from '@semantic-components/ui-lab';
+import { ScSidebarProvider, ScSidebar, ScSidebarTrigger, ScSidebarHeader, ScSidebarBody, ScSidebarFooter, ScSidebarMenu, ScSidebarMenuItem, ScSidebarMenuButton, ScSidebarInset } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-layout',
@@ -104,7 +104,7 @@ import { ScSidebarProvider, ScSidebar, ScSidebarTrigger, ScSidebarHeader, ScSide
           <h2>My App</h2>
         </div>
 
-        <div scSidebarContent>
+        <div scSidebarBody>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
               <a scSidebarMenuButton routerLink="/dashboard">Dashboard</a>

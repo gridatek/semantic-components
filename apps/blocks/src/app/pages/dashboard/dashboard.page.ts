@@ -8,7 +8,7 @@ import {
   ScSidebar,
   ScSidebarTrigger,
   ScSidebarHeader,
-  ScSidebarContent,
+  ScSidebarBody,
   ScSidebarFooter,
   ScSidebarMenu,
   ScSidebarMenuItem,
@@ -37,7 +37,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     ScSidebar,
     ScSidebarTrigger,
     ScSidebarHeader,
-    ScSidebarContent,
+    ScSidebarBody,
     ScSidebarFooter,
     ScSidebarMenu,
     ScSidebarMenuItem,
@@ -97,7 +97,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           <input scSidebarInput type="search" placeholder="Search..." />
         </div>
 
-        <div scSidebarContent>
+        <div scSidebarBody>
           <div scSidebarGroup>
             <div scSidebarGroupLabel>Platform</div>
             <div scSidebarGroupContent>

@@ -5,7 +5,7 @@ export { ScSidebarRail } from './sidebar-rail';
 export { ScSidebarInset } from './sidebar-inset';
 export { ScSidebarHeader } from './sidebar-header';
 export { ScSidebarFooter } from './sidebar-footer';
-export { ScSidebarContent } from './sidebar-content';
+export { ScSidebarBody } from './sidebar-body';
 export { ScSidebarSeparator } from './sidebar-separator';
 export { ScSidebarInput } from './sidebar-input';
 export { ScSidebarGroup } from './sidebar-group';
