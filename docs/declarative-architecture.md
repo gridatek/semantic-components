@@ -51,7 +51,7 @@ export class MyComponent {
 <button (click)="dialogOpen.set(true)">Open Dialog</button>
 
 <div scDialog [open]="dialogOpen()">
-  <div scDialogContent>{{ message() }}</div>
+  <div scDialogBody>{{ message() }}</div>
 </div>
 ```
 
@@ -72,7 +72,7 @@ Components don't have `.open()`, `.show()`, or `.close()` methods. Instead, they
 ```html
 <!-- Dialog -->
 <div scDialog [open]="isDialogOpen()">
-  <div scDialogContent>Content</div>
+  <div scDialogBody>Content</div>
 </div>
 
 <!-- Sheet -->
@@ -95,7 +95,7 @@ Everything rendered should be visible in the template:
 ```html
 @if (showDialog()) {
 <div scDialog [open]="true">
-  <div scDialogContent>{{ dialogMessage() }}</div>
+  <div scDialogBody>{{ dialogMessage() }}</div>
 </div>
 }
 ```
@@ -136,7 +136,7 @@ export class MyComponent {
 ```html
 <div scDialog [open]="isOpen()">
   <div scDialogHeader>Data</div>
-  <div scDialogContent>
+  <div scDialogBody>
     @if (hasData()) {
     <ul>
       @for (item of data(); track item) {
@@ -366,7 +366,7 @@ export class MyComponent {
 
 <div scDialog [open]="dialogOpen()">
   <div scDialogHeader>Confirm</div>
-  <div scDialogContent>{{ message() }}</div>
+  <div scDialogBody>{{ message() }}</div>
   <div scDialogFooter>
     <button (click)="dialogOpen.set(false)">Cancel</button>
     <button (click)="confirm()">Confirm</button>
@@ -561,7 +561,7 @@ openDialog() {
 
 <div scDialog [open]="dialogOpen()">
   <div scDialogHeader>Title</div>
-  <div scDialogContent>Content</div>
+  <div scDialogBody>Content</div>
   <div scDialogFooter>
     <button (click)="dialogOpen.set(false)">Close</button>
   </div>
