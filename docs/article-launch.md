@@ -18,14 +18,14 @@ Every directive or component is named to describe its **role** in the interface,
 <button matTooltip="Save changes">Save</button>
 ```
 
-In Semantic Components, the name tells you exactly what role the element plays:
+In Semantic Components, each piece has its own name that reflects its exact role:
 
 ```html
 <!-- Semantic Components -->
 <button scTooltipTrigger="Save changes">Save</button>
 ```
 
-`scTooltipTrigger` — this element _triggers_ a tooltip. That distinction matters as the UI grows. `ScDrawerTrigger`, `ScSelectValue`, `ScSelectTrigger`, `ScSidebarBody` — you know what each piece does before reading a single line of docs.
+`scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectValue`, `ScSelectTrigger`, `ScSidebarBody` — you know exactly what each piece does before reading a single line of docs.
 
 This principle extends to the **HTML elements themselves**. When possible, directives are applied to the right native element rather than a generic `<div>`. The sidebar menu is a real `<ul>` with real `<li>` items. A menu button is a real `<button>` or `<a>`. This is not just stylistic — it means screen readers, keyboard users, and search engines see meaningful structure.
 
