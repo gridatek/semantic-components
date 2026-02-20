@@ -27,7 +27,7 @@ In Semantic Components, each piece has its own name that reflects its exact role
 
 `scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectValue`, `ScSelectTrigger`, `ScSidebarBody` — you know exactly what each piece does before reading a single line of docs.
 
-This principle extends to the **HTML elements themselves**. When possible, directives are applied to the right native element rather than a generic `<div>`. The sidebar menu is a real `<ul>` with real `<li>` items. A menu button is a real `<button>` or `<a>`. This is not just stylistic — it means screen readers, keyboard users, and search engines see meaningful structure.
+This principle extends to the **HTML elements themselves**. When possible, components/directives are applied to the right native element rather than a generic `<div>`. The sidebar menu is a real `<ul>` with real `<li>` items. A menu button is a real `<button>` or `<a>`. This is not just stylistic — it means screen readers, keyboard users, and search engines see meaningful structure.
 
 ```html
 <ul scSidebarMenu>
@@ -157,7 +157,7 @@ export const buttonVariants = cva('inline-flex items-center justify-center round
 
 The rest of the library's design comes down to three non-negotiables:
 
-**Attribute selectors over element selectors.** Instead of custom elements like `<sc-button>`, the library uses attribute selectors on native HTML. No extra wrapper elements, native accessibility roles preserved, and multiple directives can stack on the same element:
+**Attribute selectors over element selectors.** Instead of custom elements like `<sc-button>`, the library uses attribute selectors on native HTML. No extra wrapper elements, native accessibility roles preserved, and multiple components/directives can stack on the same element:
 
 ```html
 <button scButton variant="outline" scDrawerTrigger>Open</button>
