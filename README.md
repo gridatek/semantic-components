@@ -52,31 +52,6 @@ A collection of accessible, customizable UI components for Angular applications.
 - **Predictable patterns** across all components
 - **Tree-shakeable** for optimal bundle sizes
 
-## Development
-
-This project uses [Nx](https://nx.dev) as the build system.
-
-### Prerequisites
-
-- Node.js
-- npm or yarn
-
-### Getting Started
-
-```bash
-# Install dependencies
-npm install
-
-# Run the showcase app
-npx nx serve showcase
-
-# Run tests
-npx nx test
-
-# Build the library
-npx nx build
-```
-
 ## License
 
 MIT
