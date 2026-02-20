@@ -7,7 +7,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendarDayView } from './calendar-day-view';
 import { ScCalendarMonthView } from './calendar-month-view';

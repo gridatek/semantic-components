@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Temporal } from '@js-temporal/polyfill';
-import { ScCalendar } from '@semantic-components/ui-lab';
+import { ScCalendar } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-multiple-date-calendar-demo',

@@ -4,7 +4,8 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScDateRangePicker, ScDateRange } from '@semantic-components/ui-lab';
+import { ScDateRange } from '@semantic-components/ui';
+import { ScDateRangePicker } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-date-range-picker-demo',

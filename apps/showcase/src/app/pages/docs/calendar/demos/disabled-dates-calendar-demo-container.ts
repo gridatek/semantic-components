@@ -31,7 +31,7 @@ export class DisabledDatesCalendarDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { Temporal } from '@js-temporal/polyfill';
-import { ScCalendar } from '@semantic-components/ui-lab';
+import { ScCalendar } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-dates-calendar-demo',

@@ -1,7 +1,6 @@
 export * from './animated-counter';
 export * from './audio-player';
 export * from './barcode-scanner';
-export * from './calendar';
 export * from './chart';
 export * from './native-checkbox';
 export * from './native-select';
@@ -13,7 +12,6 @@ export * from './context-menu';
 export * from './copy-button';
 export * from './countdown';
 export * from './data-table';
-export * from './date-picker';
 export * from './date-range-picker';
 export * from './diff-viewer';
 export * from './dock';

@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Grid, GridRow, GridCell, GridCellWidget } from '@angular/aria/grid';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendarValue, ScDateRange } from './calendar';
 

@@ -30,7 +30,7 @@ export class MultipleDatePickerDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { Temporal } from '@js-temporal/polyfill';
-import { ScDatePicker } from '@semantic-components/ui-lab';
+import { ScDatePicker } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-multiple-date-picker-demo',

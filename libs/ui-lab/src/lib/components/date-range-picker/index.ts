@@ -3,4 +3,4 @@ export {
   createScDateRangePresets,
 } from './date-range-picker';
 export type { ScDateRangePreset } from './date-range-picker';
-export type { ScDateRange } from '../calendar';
+export type { ScDateRange } from '@semantic-components/ui';

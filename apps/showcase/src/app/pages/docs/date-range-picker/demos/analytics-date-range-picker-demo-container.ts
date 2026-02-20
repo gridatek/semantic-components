@@ -29,9 +29,9 @@ export class AnalyticsDateRangePickerDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScDateRange } from '@semantic-components/ui';
 import {
   ScDateRangePicker,
-  ScDateRange,
   ScDateRangePreset,
   createScDateRangePresets,
 } from '@semantic-components/ui-lab';

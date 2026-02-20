@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Temporal } from '@js-temporal/polyfill';
-import { ScDateRange, ScCalendar } from '@semantic-components/ui-lab';
+import { ScDateRange, ScCalendar } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-range-calendar-demo',

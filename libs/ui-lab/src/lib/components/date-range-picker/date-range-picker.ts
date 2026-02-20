@@ -10,9 +10,8 @@ import {
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ScCalendar, ScDateRange } from '@semantic-components/ui';
 import { Temporal } from '@js-temporal/polyfill';
-import { ScCalendar, ScDateRange } from '../calendar';
 
 export interface ScDateRangePreset {
   label: string;

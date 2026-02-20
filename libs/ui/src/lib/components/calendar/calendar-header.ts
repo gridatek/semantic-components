@@ -5,7 +5,7 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton } from '../button';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
