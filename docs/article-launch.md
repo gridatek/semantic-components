@@ -7,6 +7,14 @@ After waiting so long for an Angular UI library that actually met my needs, I de
 
 ---
 
+## Why Semantic Components?
+
+The Angular ecosystem has always had fewer off-the-shelf UI options compared to React. Libraries like shadcn/ui, Radix, and Headless UI have raised the bar for what a component library can be — and Angular deserves the same quality.
+
+Semantic Components is my attempt to bring that standard to Angular, while leaning fully into what makes Angular great: strong typing, a compiler that catches errors early, a predictable change detection model, and signals.
+
+---
+
 ## Core Design Principles
 
 ### Semantic by Name
@@ -245,14 +253,6 @@ export class MyComponent {}
 ```
 
 No module registration. No `forRoot()`. Just import and use.
-
----
-
-## Why Semantic Components?
-
-The Angular ecosystem has always had fewer off-the-shelf UI options compared to React. Libraries like shadcn/ui, Radix, and Headless UI have raised the bar for what a component library can be — and Angular deserves the same quality.
-
-Semantic Components is my attempt to bring that standard to Angular, while leaning fully into what makes Angular great: strong typing, a compiler that catches errors early, a predictable change detection model, and signals.
 
 ---
 
