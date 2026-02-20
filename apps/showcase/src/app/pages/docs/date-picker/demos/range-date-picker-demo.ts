@@ -4,7 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { DateRange, ScDatePicker } from '@semantic-components/ui-lab';
+import { ScDateRange, ScDatePicker } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-range-date-picker-demo',
@@ -12,7 +12,7 @@ import { DateRange, ScDatePicker } from '@semantic-components/ui-lab';
   template: `
     <sc-date-picker
       mode="range"
-      [(selectedRange)]="selectedRange"
+      [(value)]="selectedRange"
       placeholder="Pick a date range"
     />
     @if (selectedRange().from) {
@@ -30,7 +30,7 @@ import { DateRange, ScDatePicker } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RangeDatePickerDemo {
-  readonly selectedRange = signal<DateRange>({
+  readonly selectedRange = signal<ScDateRange>({
     from: undefined,
     to: undefined,
   });

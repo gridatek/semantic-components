@@ -13,13 +13,15 @@ import { ScCalendarMonthView } from './calendar-month-view';
 import { ScCalendarYearView } from './calendar-year-view';
 import { ScCalendarHeader } from './calendar-header';
 
-export type CalendarMode = 'single' | 'multiple' | 'range';
-export type CalendarViewMode = 'day' | 'month' | 'year';
+export type ScCalendarMode = 'single' | 'multiple' | 'range';
+export type ScCalendarViewMode = 'day' | 'month' | 'year';
 
-export interface DateRange {
+export interface ScDateRange {
   from: Date | undefined;
   to: Date | undefined;
 }
+
+export type ScCalendarValue = Date | Date[] | ScDateRange | undefined;
 
 @Component({
   selector: 'sc-calendar',
@@ -55,9 +57,7 @@ export interface DateRange {
           <sc-calendar-day-view
             [viewDate]="viewDate()"
             [mode]="mode()"
-            [selected]="selected()"
-            [selectedDates]="selectedDates()"
-            [selectedRange]="selectedRange()"
+            [value]="value()"
             [disabled]="disabled()"
             [minDate]="minDate()"
             [maxDate]="maxDate()"
@@ -93,22 +93,17 @@ export interface DateRange {
 })
 export class ScCalendar {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly mode = input<CalendarMode>('single');
+  readonly mode = input<ScCalendarMode>('single');
   readonly disabled = input<Date[]>([]);
   readonly minDate = input<Date | undefined>(undefined);
   readonly maxDate = input<Date | undefined>(undefined);
 
-  // For single mode
-  readonly selected = model<Date | undefined>(undefined);
-  // For multiple mode
-  readonly selectedDates = model<Date[]>([]);
-  // For range mode
-  readonly selectedRange = model<DateRange>({ from: undefined, to: undefined });
+  readonly value = model<ScCalendarValue>(undefined);
 
   readonly weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
   protected readonly viewDate = signal(new Date());
-  protected readonly viewMode = signal<CalendarViewMode>('day');
+  protected readonly viewMode = signal<ScCalendarViewMode>('day');
   protected readonly decadeStart = signal<number>(
     Math.floor(new Date().getFullYear() / 12) * 12,
   );
@@ -170,26 +165,27 @@ export class ScCalendar {
     const mode = this.mode();
 
     if (mode === 'single') {
-      this.selected.set(date);
+      this.value.set(date);
     } else if (mode === 'multiple') {
-      const current = this.selectedDates();
+      const current = (this.value() as Date[] | undefined) ?? [];
       const exists = current.some((d) => this.isSameDay(d, date));
       if (exists) {
-        this.selectedDates.set(current.filter((d) => !this.isSameDay(d, date)));
+        this.value.set(current.filter((d) => !this.isSameDay(d, date)));
       } else {
-        this.selectedDates.set([...current, date]);
+        this.value.set([...current, date]);
       }
     } else if (mode === 'range') {
-      const range = this.selectedRange();
+      const range = (this.value() as ScDateRange | undefined) ?? {
+        from: undefined,
+        to: undefined,
+      };
       if (!range.from || (range.from && range.to)) {
-        // Start new range
-        this.selectedRange.set({ from: date, to: undefined });
+        this.value.set({ from: date, to: undefined });
       } else {
-        // Complete the range
         if (date < range.from) {
-          this.selectedRange.set({ from: date, to: range.from });
+          this.value.set({ from: date, to: range.from });
         } else {
-          this.selectedRange.set({ from: range.from, to: date });
+          this.value.set({ from: range.from, to: date });
         }
       }
     }

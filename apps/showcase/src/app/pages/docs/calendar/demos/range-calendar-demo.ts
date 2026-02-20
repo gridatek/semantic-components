@@ -5,7 +5,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { DateRange, ScCalendar } from '@semantic-components/ui-lab';
+import { ScDateRange, ScCalendar } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-range-calendar-demo',
@@ -13,7 +13,7 @@ import { DateRange, ScCalendar } from '@semantic-components/ui-lab';
   template: `
     <div class="space-y-4">
       <div class="rounded-md border">
-        <sc-calendar mode="range" [(selectedRange)]="selectedRange" />
+        <sc-calendar mode="range" [(value)]="selectedRange" />
       </div>
 
       <div class="space-y-2">
@@ -68,7 +68,7 @@ import { DateRange, ScCalendar } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RangeCalendarDemo {
-  readonly selectedRange = signal<DateRange>({
+  readonly selectedRange = signal<ScDateRange>({
     from: undefined,
     to: undefined,
   });

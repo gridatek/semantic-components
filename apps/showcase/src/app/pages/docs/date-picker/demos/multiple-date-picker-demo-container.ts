@@ -37,7 +37,7 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
   template: \`
     <sc-date-picker
       mode="multiple"
-      [(selectedDates)]="selectedDates"
+      [(value)]="selectedDates"
       placeholder="Select dates"
     />
     @if (selectedDates().length > 0) {

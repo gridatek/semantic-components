@@ -15,7 +15,12 @@ import {
   ScPopoverAlign,
   ScPopoverSide,
 } from '@semantic-components/ui';
-import { ScCalendar, CalendarMode, DateRange } from '../calendar';
+import {
+  ScCalendar,
+  ScCalendarMode,
+  ScCalendarValue,
+  ScDateRange,
+} from '../calendar';
 
 @Component({
   selector: 'sc-date-picker',
@@ -52,37 +57,14 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
       </button>
       <ng-template scPopoverPortal>
         <div scPopover class="w-auto p-0">
-          @switch (mode()) {
-            @case ('single') {
-              <sc-calendar
-                mode="single"
-                [(selected)]="selected"
-                [disabled]="disabled()"
-                [minDate]="minDate()"
-                [maxDate]="maxDate()"
-                (selected)="onDateSelected()"
-              />
-            }
-            @case ('multiple') {
-              <sc-calendar
-                mode="multiple"
-                [(selectedDates)]="selectedDates"
-                [disabled]="disabled()"
-                [minDate]="minDate()"
-                [maxDate]="maxDate()"
-              />
-            }
-            @case ('range') {
-              <sc-calendar
-                mode="range"
-                [(selectedRange)]="selectedRange"
-                [disabled]="disabled()"
-                [minDate]="minDate()"
-                [maxDate]="maxDate()"
-                (selectedRange)="onRangeSelected()"
-              />
-            }
-          }
+          <sc-calendar
+            [mode]="mode()"
+            [(value)]="value"
+            [disabled]="disabled()"
+            [minDate]="minDate()"
+            [maxDate]="maxDate()"
+            (valueChange)="onValueChange()"
+          />
         </div>
       </ng-template>
     </div>
@@ -96,7 +78,7 @@ import { ScCalendar, CalendarMode, DateRange } from '../calendar';
 })
 export class ScDatePicker {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly mode = input<CalendarMode>('single');
+  readonly mode = input<ScCalendarMode>('single');
   readonly placeholder = input<string>('Pick a date');
   readonly disabled = input<Date[]>([]);
   readonly minDate = input<Date | undefined>(undefined);
@@ -104,12 +86,7 @@ export class ScDatePicker {
   readonly side = input<ScPopoverSide>('bottom');
   readonly align = input<ScPopoverAlign>('start');
 
-  // For single mode
-  readonly selected = model<Date | undefined>(undefined);
-  // For multiple mode
-  readonly selectedDates = model<Date[]>([]);
-  // For range mode
-  readonly selectedRange = model<DateRange>({ from: undefined, to: undefined });
+  readonly value = model<ScCalendarValue>(undefined);
 
   readonly open = model<boolean>(false);
 
@@ -127,21 +104,25 @@ export class ScDatePicker {
 
   protected readonly displayText = computed(() => {
     const mode = this.mode();
+    const val = this.value();
 
     if (mode === 'single') {
-      const date = this.selected();
+      const date = val as Date | undefined;
       return date ? this.formatDate(date) : '';
     }
 
     if (mode === 'multiple') {
-      const dates = this.selectedDates();
+      const dates = (val as Date[] | undefined) ?? [];
       if (dates.length === 0) return '';
       if (dates.length === 1) return this.formatDate(dates[0]);
       return `${dates.length} dates selected`;
     }
 
     if (mode === 'range') {
-      const range = this.selectedRange();
+      const range = (val as ScDateRange | undefined) ?? {
+        from: undefined,
+        to: undefined,
+      };
       if (!range.from) return '';
       if (!range.to) return this.formatDate(range.from);
       return `${this.formatDate(range.from)} - ${this.formatDate(range.to)}`;
@@ -158,18 +139,19 @@ export class ScDatePicker {
     });
   }
 
-  protected onDateSelected(): void {
-    // Close popover after single date selection
-    if (this.mode() === 'single' && this.selected()) {
+  protected onValueChange(): void {
+    const mode = this.mode();
+    const val = this.value();
+
+    if (mode === 'single' && val) {
       this.open.set(false);
     }
-  }
 
-  protected onRangeSelected(): void {
-    // Close popover after range is complete
-    const range = this.selectedRange();
-    if (range.from && range.to) {
-      this.open.set(false);
+    if (mode === 'range') {
+      const range = val as ScDateRange | undefined;
+      if (range?.from && range?.to) {
+        this.open.set(false);
+      }
     }
   }
 }

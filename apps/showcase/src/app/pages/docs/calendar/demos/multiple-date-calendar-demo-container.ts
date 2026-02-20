@@ -37,7 +37,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
   template: \`
     <div class="space-y-4">
       <div class="rounded-md border">
-        <sc-calendar mode="multiple" [(selectedDates)]="selectedDates" />
+        <sc-calendar mode="multiple" [(value)]="selectedDates" />
       </div>
 
       <div class="space-y-2">

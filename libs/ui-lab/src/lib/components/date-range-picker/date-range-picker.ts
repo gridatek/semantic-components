@@ -11,16 +11,16 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScCalendar, DateRange } from '../calendar';
+import { ScCalendar, ScDateRange } from '../calendar';
 
-export interface DateRangePreset {
+export interface ScDateRangePreset {
   label: string;
-  value: DateRange;
+  value: ScDateRange;
 }
 
 @Component({
   selector: 'sc-date-range-picker',
-  exportAs: 'scDateRangePicker',
+  exportAs: 'scScDateRangePicker',
   template: `
     <div [class]="containerClass()">
       <!-- Trigger Button -->
@@ -95,14 +95,14 @@ export interface DateRangePreset {
                 <div class="flex gap-4">
                   <sc-calendar
                     mode="range"
-                    [(selectedRange)]="value"
+                    [(value)]="value"
                     [minDate]="minDate()"
                     [maxDate]="maxDate()"
                     [disabled]="disabledDates()"
                   />
                   <sc-calendar
                     mode="range"
-                    [(selectedRange)]="value"
+                    [(value)]="value"
                     [minDate]="minDate()"
                     [maxDate]="maxDate()"
                     [disabled]="disabledDates()"
@@ -111,7 +111,7 @@ export interface DateRangePreset {
               } @else {
                 <sc-calendar
                   mode="range"
-                  [(selectedRange)]="value"
+                  [(value)]="value"
                   [minDate]="minDate()"
                   [maxDate]="maxDate()"
                   [disabled]="disabledDates()"
@@ -172,21 +172,21 @@ export class ScDateRangePicker {
   readonly minDate = input<Date | undefined>(undefined);
   readonly maxDate = input<Date | undefined>(undefined);
   readonly disabledDates = input<Date[]>([]);
-  readonly presets = input<DateRangePreset[]>([]);
+  readonly presets = input<ScDateRangePreset[]>([]);
   readonly showTwoMonths = input<boolean>(false);
   readonly showClear = input<boolean>(true);
   readonly dateFormat = input<string>('short');
 
-  readonly value = model<DateRange>({ from: undefined, to: undefined });
+  readonly value = model<ScDateRange>({ from: undefined, to: undefined });
 
-  readonly valueChange = output<DateRange>();
-  readonly apply = output<DateRange>();
+  readonly valueChange = output<ScDateRange>();
+  readonly apply = output<ScDateRange>();
 
   protected readonly dropdownOpen = signal(false);
 
   private readonly triggerEl =
     viewChild<ElementRef<HTMLButtonElement>>('triggerEl');
-  private pendingValue: DateRange = { from: undefined, to: undefined };
+  private pendingValue: ScDateRange = { from: undefined, to: undefined };
 
   protected readonly displayValue = computed(() => {
     const range = this.value();
@@ -216,7 +216,7 @@ export class ScDateRangePicker {
     ),
   );
 
-  protected presetClass(preset: DateRangePreset): string {
+  protected presetClass(preset: ScDateRangePreset): string {
     const isActive = this.isPresetActive(preset);
     return cn(
       'text-left px-3 py-2 text-sm rounded-md',
@@ -225,7 +225,7 @@ export class ScDateRangePicker {
     );
   }
 
-  private isPresetActive(preset: DateRangePreset): boolean {
+  private isPresetActive(preset: ScDateRangePreset): boolean {
     const current = this.value();
     if (!current.from || !current.to || !preset.value.from || !preset.value.to)
       return false;
@@ -261,7 +261,7 @@ export class ScDateRangePicker {
     this.dropdownOpen.set(false);
   }
 
-  selectPreset(preset: DateRangePreset): void {
+  selectPreset(preset: ScDateRangePreset): void {
     this.value.set({ ...preset.value });
   }
 
@@ -308,13 +308,13 @@ export class ScDateRangePicker {
     this.triggerEl()?.nativeElement.focus();
   }
 
-  getRange(): DateRange {
+  getRange(): ScDateRange {
     return this.value();
   }
 }
 
 // Helper function to create common presets
-export function createDateRangePresets(): DateRangePreset[] {
+export function createScDateRangePresets(): ScDateRangePreset[] {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 

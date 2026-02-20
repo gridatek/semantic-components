@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Grid, GridRow, GridCell, GridCellWidget } from '@angular/aria/grid';
 import { cn } from '@semantic-components/ui';
+import { ScCalendarValue, ScDateRange } from './calendar';
 
 interface DayInfo {
   date: Date;
@@ -97,15 +98,7 @@ export class ScCalendarDayView {
 
   readonly viewDate = input.required<Date>();
   readonly mode = input.required<'single' | 'multiple' | 'range'>();
-  readonly selected = input<Date | undefined>(undefined);
-  readonly selectedDates = input<Date[]>([]);
-  readonly selectedRange = input<{
-    from: Date | undefined;
-    to: Date | undefined;
-  }>({
-    from: undefined,
-    to: undefined,
-  });
+  readonly value = input<ScCalendarValue>(undefined);
   readonly disabled = input<Date[]>([]);
   readonly minDate = input<Date | undefined>(undefined);
   readonly maxDate = input<Date | undefined>(undefined);
@@ -191,20 +184,30 @@ export class ScCalendarDayView {
     );
   }
 
+  private getRange(): ScDateRange {
+    return (
+      (this.value() as ScDateRange | undefined) ?? {
+        from: undefined,
+        to: undefined,
+      }
+    );
+  }
+
   protected isSelected(date: Date): boolean {
     const mode = this.mode();
 
     if (mode === 'single') {
-      const selected = this.selected();
+      const selected = this.value() as Date | undefined;
       return selected ? this.isSameDay(date, selected) : false;
     }
 
     if (mode === 'multiple') {
-      return this.selectedDates().some((d) => this.isSameDay(date, d));
+      const dates = (this.value() as Date[] | undefined) ?? [];
+      return dates.some((d) => this.isSameDay(date, d));
     }
 
     if (mode === 'range') {
-      const range = this.selectedRange();
+      const range = this.getRange();
       if (range.from && this.isSameDay(date, range.from)) return true;
       if (range.to && this.isSameDay(date, range.to)) return true;
       if (range.from && range.to && date > range.from && date < range.to)
@@ -216,19 +219,19 @@ export class ScCalendarDayView {
 
   protected isRangeStart(date: Date): boolean {
     if (this.mode() !== 'range') return false;
-    const range = this.selectedRange();
+    const range = this.getRange();
     return range.from ? this.isSameDay(date, range.from) : false;
   }
 
   protected isRangeEnd(date: Date): boolean {
     if (this.mode() !== 'range') return false;
-    const range = this.selectedRange();
+    const range = this.getRange();
     return range.to ? this.isSameDay(date, range.to) : false;
   }
 
   protected isRangeMiddle(date: Date): boolean {
     if (this.mode() !== 'range') return false;
-    const range = this.selectedRange();
+    const range = this.getRange();
     if (!range.from || !range.to) return false;
     return date > range.from && date < range.to;
   }

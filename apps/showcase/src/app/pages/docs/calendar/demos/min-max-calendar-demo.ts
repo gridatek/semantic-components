@@ -13,7 +13,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
     <div class="space-y-4">
       <div class="rounded-md border">
         <sc-calendar
-          [(selected)]="selectedDate"
+          [(value)]="selectedDate"
           [minDate]="minDate"
           [maxDate]="maxDate"
         />

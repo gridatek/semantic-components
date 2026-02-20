@@ -38,7 +38,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
   template: \`
     <div class="space-y-4">
       <div class="rounded-md border">
-        <sc-calendar [(selected)]="selectedDate" [disabled]="disabledDates()" />
+        <sc-calendar [(value)]="selectedDate" [disabled]="disabledDates()" />
       </div>
 
       <div class="space-y-2">

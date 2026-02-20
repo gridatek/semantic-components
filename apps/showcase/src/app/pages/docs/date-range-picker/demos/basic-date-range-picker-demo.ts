@@ -4,7 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScDateRangePicker, DateRange } from '@semantic-components/ui-lab';
+import { ScDateRangePicker, ScDateRange } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-date-range-picker-demo',
@@ -28,9 +28,9 @@ import { ScDateRangePicker, DateRange } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicDateRangePickerDemo {
-  readonly range = signal<DateRange>({ from: undefined, to: undefined });
+  readonly range = signal<ScDateRange>({ from: undefined, to: undefined });
 
-  onRangeApply(range: DateRange): void {
+  onRangeApply(range: ScDateRange): void {
     console.log('Range applied:', range);
   }
 }

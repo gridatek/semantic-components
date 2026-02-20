@@ -31,9 +31,9 @@ export class AnalyticsDateRangePickerDemoContainer {
 } from '@angular/core';
 import {
   ScDateRangePicker,
-  DateRange,
-  DateRangePreset,
-  createDateRangePresets,
+  ScDateRange,
+  ScDateRangePreset,
+  createScDateRangePresets,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -69,7 +69,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnalyticsDateRangePickerDemo {
-  readonly range = signal<DateRange>({ from: undefined, to: undefined });
-  readonly presets: DateRangePreset[] = createDateRangePresets();
+  readonly range = signal<ScDateRange>({ from: undefined, to: undefined });
+  readonly presets: ScDateRangePreset[] = createScDateRangePresets();
 }`;
 }

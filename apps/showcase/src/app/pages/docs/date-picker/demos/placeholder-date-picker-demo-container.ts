@@ -36,7 +36,7 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
   imports: [ScDatePicker],
   template: \`
     <sc-date-picker
-      [(selected)]="selectedDate"
+      [(value)]="selectedDate"
       placeholder="Select your birthday"
     />
   \`,

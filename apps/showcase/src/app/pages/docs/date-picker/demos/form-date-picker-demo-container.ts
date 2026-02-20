@@ -39,7 +39,7 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
       <div class="space-y-2">
         <label class="text-sm font-medium">Date of Birth</label>
         <sc-date-picker
-          [(selected)]="dob"
+          [(value)]="dob"
           placeholder="Select date of birth"
           [maxDate]="today"
         />
@@ -47,7 +47,7 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
       <div class="space-y-2">
         <label class="text-sm font-medium">Appointment Date</label>
         <sc-date-picker
-          [(selected)]="appointment"
+          [(value)]="appointment"
           placeholder="Select appointment"
           [minDate]="today"
         />
