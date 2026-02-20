@@ -22,6 +22,7 @@ interface YearInfo {
 
 @Component({
   selector: 'sc-calendar-year-view',
+  host: { class: 'block' },
   imports: [Grid, GridRow, GridCell, GridCellWidget],
   template: `
     <table

@@ -13,6 +13,7 @@ import {
 
 @Component({
   selector: 'sc-calendar-header',
+  host: { class: 'block' },
   imports: [ScButton, SiChevronLeftIcon, SiChevronRightIcon],
   template: `
     <div class="relative flex items-center justify-center pt-1">

@@ -113,7 +113,9 @@ export class ScCalendar {
     Math.floor(Temporal.Now.plainDateISO().year / 12) * 12,
   );
 
-  protected readonly class = computed(() => cn('p-3', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('block p-3 w-[276px]', this.classInput()),
+  );
 
   protected readonly monthYearLabel = computed(() => {
     const date = this.viewDate();
