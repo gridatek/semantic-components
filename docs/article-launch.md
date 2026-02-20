@@ -95,26 +95,44 @@ Instead of custom elements like `<sc-button>`, the library uses attribute select
 
 ### Fully Composable
 
-Complex components are built by composing smaller, focused pieces. The Select component is a good example:
+Each component is a set of small, focused pieces that you assemble yourself. There are no magic `[content]` inputs or hidden `<ng-content>` slots — you write the structure, and the pieces plug into it.
+
+The Select is a good example of how far this goes:
 
 ```html
 <div scSelect #select="scSelect" placeholder="Select a label">
   <div scSelectTrigger aria-label="Label dropdown">
     <span scSelectValue>
+      @if (displayIcon(); as icon) {
+      <svg scSelectIcon siTagIcon></svg>
+      }
       <span class="truncate">{{ select.displayValue() }}</span>
     </span>
   </div>
   <ng-template scSelectPortal>
     <div scSelectList>
       @for (item of items; track item.value) {
-      <div scSelectItem [value]="item.value" [label]="item.label">{{ item.label }}</div>
+      <div scSelectItem [value]="item.value" [label]="item.label">
+        <svg scSelectIcon siTagIcon></svg>
+        <span>{{ item.label }}</span>
+      </div>
       }
     </div>
   </ng-template>
 </div>
 ```
 
-You control every part of the structure. No magic slots, no hidden internals.
+You own the trigger layout, the item layout, the icons, the display value. Want a custom empty state in the list? Add it. Want a header above the items? Add it. The library gives you the behavior — keyboard navigation, selection state, accessibility — and you provide the markup.
+
+This also composes across components. A button can be a drawer trigger, a tooltip trigger, and an icon button all at once:
+
+```html
+<button scButton size="icon" scDrawerTrigger scTooltipTrigger="Open menu">
+  <svg siMenuIcon></svg>
+</button>
+```
+
+One element. Three responsibilities. No wrappers.
 
 ### Modern Angular — All the Way Down
 
