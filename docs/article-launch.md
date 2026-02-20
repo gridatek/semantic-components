@@ -22,7 +22,7 @@ In Semantic Components, the name tells you exactly what role the element plays:
 
 ```html
 <!-- Semantic Components -->
-<button scTooltipTrigger tooltip="Save changes">Save</button>
+<button scTooltipTrigger="Save changes">Save</button>
 ```
 
 `scTooltipTrigger` — this element _triggers_ a tooltip. That distinction matters as the UI grows. `ScDrawerTrigger`, `ScSelectValue`, `ScSelectTrigger`, `ScSidebarBody` — you know what each piece does before reading a single line of docs.
