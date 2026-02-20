@@ -76,6 +76,10 @@ readonly isOpen = signal(false);
 
 The open state is a signal. The trigger, the portal, the close button — all declared in the template. No service injection, no imperative show/hide, no `ViewContainerRef` gymnastics. You read the template and immediately understand the full structure of the dialog.
 
+The naming reinforces this. `ScDialog` is not a service — it's the `<div role="dialog">` element itself. In Angular Material, `MatDialog` is a service you inject and call `.open()` on. Here, `scDialog` is the thing rendered in the DOM. Same naming principle: the name describes exactly what the piece _is_, not what it _does behind the scenes_.
+
+There is a tradeoff: `scDialogProvider` requires an extra wrapper element in the DOM. It acts as the coordination point between the trigger, the portal, and the close button — sharing state through Angular's DI tree. It's a conscious choice in favor of keeping everything in the template, at the cost of one extra `<div>` that you may need to style or account for in your layout.
+
 ### Attribute Selectors Over Element Selectors
 
 Instead of custom elements like `<sc-button>`, the library uses attribute selectors applied to native HTML elements. This means:
