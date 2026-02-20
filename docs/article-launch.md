@@ -207,44 +207,6 @@ If your project is greenfield or already on modern Angular, these are features, 
 | Display    | Badge, Avatar, Skeleton, Spinner, Progress, Kbd, Empty                            |
 | Data       | Table, Accordion, Collapsible                                                     |
 
-### `@semantic-components/ui-lab` — Extended Library
-
-Experimental and more complex components, including a full **Sidebar** system:
-
-```html
-<div scSidebarProvider>
-  <div scSidebar collapsible="icon">
-    <div scSidebarHeader>...</div>
-
-    <div scSidebarBody>
-      <div scSidebarGroup>
-        <div scSidebarGroupLabel>Navigation</div>
-        <div scSidebarGroupContent>
-          <ul scSidebarMenu>
-            <li scSidebarMenuItem>
-              <a scSidebarMenuButton routerLink="/dashboard">Dashboard</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div scSidebarFooter>...</div>
-    <button scSidebarRail></button>
-  </div>
-
-  <main scSidebarInset>
-    <router-outlet />
-  </main>
-</div>
-```
-
-Features out of the box: icon-only collapse mode, keyboard shortcut (`Ctrl/Cmd + B`), localStorage state persistence, and mobile sheet drawer.
-
-### `@semantic-components/carousel` — Embla-Powered
-
-A carousel built on top of [Embla Carousel](https://www.embla-carousel.com), with Angular signals driving all reactive state.
-
 ---
 
 ## Icons: `@semantic-icons/lucide-icons`
@@ -315,4 +277,4 @@ Feedback, stars, and contributions are very welcome. If you're building Angular 
 
 ---
 
-_Built with Angular v20+, Tailwind CSS v4, and a lot of respect for the people using it._
+_Built with Angular v21+, Tailwind CSS v4, and a lot of respect for the people using it._
