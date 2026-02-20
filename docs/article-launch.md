@@ -122,7 +122,9 @@ The Select is a good example of how far this goes:
 </div>
 ```
 
-You own the trigger layout, the item layout, the icons, the display value. Want a custom empty state in the list? Add it. Want a header above the items? Add it. The library gives you the behavior — keyboard navigation, selection state, accessibility — and you provide the markup.
+- **You own the structure** — the trigger layout, the item layout, the icons, the display value
+- **You extend freely** — want a custom empty state in the list? A header above the items? Just add it
+- **The library handles behavior** — keyboard navigation, selection state, ARIA attributes — you handle the markup
 
 This also composes across components. A button can be a drawer trigger, a tooltip trigger, and an icon button all at once:
 
