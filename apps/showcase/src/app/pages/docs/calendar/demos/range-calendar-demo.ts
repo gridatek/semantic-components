@@ -13,7 +13,7 @@ import { ScDateRange, ScCalendar } from '@semantic-components/ui-lab';
   imports: [ScCalendar],
   template: `
     <div class="space-y-4">
-      <div class="rounded-md border">
+      <div class="w-fit rounded-md border">
         <sc-calendar mode="range" [(value)]="selectedRange" />
       </div>
 
