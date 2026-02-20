@@ -42,6 +42,40 @@ This principle extends to the **HTML elements themselves**. When possible, direc
 
 You're not hiding a list inside a stack of `<div>` wrappers. The HTML is as semantic as the API.
 
+### Declarative Templates
+
+The entire UI is described in the template — no imperative `open()`, `close()`, or `DialogService.create()` calls. Take the dialog as an example:
+
+```html
+<div scDialogProvider [(open)]="isOpen">
+  <button scDialogTrigger scButton variant="outline">Open Dialog</button>
+
+  <ng-template scDialogPortal>
+    <div scDialog>
+      <button scDialogClose>
+        <svg siXIcon></svg>
+        <span class="sr-only">Close</span>
+      </button>
+      <div scDialogHeader>
+        <h2 scDialogTitle>Edit profile</h2>
+        <p scDialogDescription>Make changes to your profile here.</p>
+      </div>
+      <!-- content -->
+      <div scDialogFooter>
+        <button scButton variant="outline" (click)="isOpen.set(false)">Cancel</button>
+        <button scButton type="submit">Save changes</button>
+      </div>
+    </div>
+  </ng-template>
+</div>
+```
+
+```typescript
+readonly isOpen = signal(false);
+```
+
+The open state is a signal. The trigger, the portal, the close button — all declared in the template. No service injection, no imperative show/hide, no `ViewContainerRef` gymnastics. You read the template and immediately understand the full structure of the dialog.
+
 ### Attribute Selectors Over Element Selectors
 
 Instead of custom elements like `<sc-button>`, the library uses attribute selectors applied to native HTML elements. This means:
