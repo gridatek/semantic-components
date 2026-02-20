@@ -17,7 +17,7 @@ Semantic Components is my attempt to bring that standard to Angular, while leani
 
 ## Core Design Principles
 
-### Semantic by Name
+### Semantic
 
 Every directive or component is named to describe its **role** in the interface, not just the feature it belongs to. Take the tooltip as an example. Angular Material gives you a single `matTooltip` directive — it conflates the tooltip itself with what triggers it, everything in one attribute:
 
@@ -50,7 +50,7 @@ This principle extends to the **HTML elements themselves**. When possible, compo
 
 You're not hiding a list inside a stack of `<div>` wrappers. The HTML is as semantic as the API.
 
-### Declarative Templates
+### Declarative
 
 The entire UI is described in the template — no imperative `open()`, `close()`, or `DialogService.create()` calls. Take the dialog as an example:
 
@@ -88,7 +88,7 @@ The naming reinforces this. `ScDialog` is not a service — it's the `<div role=
 
 There is a tradeoff: `scDialogProvider` requires an extra wrapper element in the DOM. It acts as the coordination point between the trigger, the portal, and the close button — sharing state through Angular's DI tree. It's a conscious choice in favor of keeping everything in the template, at the cost of one extra `<div>` that you may need to style or account for in your layout.
 
-### Fully Composable
+### Composable
 
 Each component is a set of small, focused pieces that you assemble yourself. There are no magic `[content]` inputs or hidden `<ng-content>` slots — you write the structure, and the pieces plug into it.
 
