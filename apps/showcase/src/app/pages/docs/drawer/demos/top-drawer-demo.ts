@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScDrawer,
   ScDrawerClose,
   ScDrawerDescription,
@@ -18,6 +19,7 @@ import {
 @Component({
   selector: 'app-top-drawer-demo',
   imports: [
+    ScButton,
     ScDrawer,
     ScDrawerClose,
     ScDrawerDescription,
@@ -30,10 +32,7 @@ import {
   ],
   template: `
     <div scDrawerProvider direction="top">
-      <button
-        scDrawerTrigger
-        class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-      >
+      <button scButton variant="outline" scDrawerTrigger>
         Open Top Drawer
       </button>
       <ng-template scDrawerPortal>
@@ -61,10 +60,7 @@ import {
             </div>
           </div>
           <div scDrawerFooter>
-            <button
-              scDrawerClose
-              class="inline-flex h-9 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            >
+            <button scButton class="w-full" scDrawerClose>
               Mark all as read
             </button>
           </div>

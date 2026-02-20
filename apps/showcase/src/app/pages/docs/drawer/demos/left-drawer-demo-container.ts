@@ -29,6 +29,7 @@ export class LeftDrawerDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScDrawer,
   ScDrawerDescription,
   ScDrawerHeader,
@@ -41,6 +42,7 @@ import {
 @Component({
   selector: 'app-left-drawer-demo',
   imports: [
+    ScButton,
     ScDrawer,
     ScDrawerDescription,
     ScDrawerHeader,
@@ -51,12 +53,7 @@ import {
   ],
   template: \`
     <div scDrawerProvider direction="left">
-      <button
-        scDrawerTrigger
-        class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-      >
-        Open Left Drawer
-      </button>
+      <button scButton variant="outline" scDrawerTrigger>Open Left Drawer</button>
       <ng-template scDrawerPortal>
         <div scDrawer>
           <div scDrawerHeader>
