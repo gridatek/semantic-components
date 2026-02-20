@@ -248,7 +248,7 @@ No module registration. No `forRoot()`. Just import and use.
 
 ---
 
-## Why Angular?
+## Why Semantic Components?
 
 The Angular ecosystem has always had fewer off-the-shelf UI options compared to React. Libraries like shadcn/ui, Radix, and Headless UI have raised the bar for what a component library can be — and Angular deserves the same quality.
 
