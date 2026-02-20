@@ -5,6 +5,7 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
@@ -12,20 +13,23 @@ import {
 
 @Component({
   selector: 'sc-calendar-header',
-  imports: [SiChevronLeftIcon, SiChevronRightIcon],
+  imports: [ScButton, SiChevronLeftIcon, SiChevronRightIcon],
   template: `
     <div class="relative flex items-center justify-center pt-1">
       <button
-        type="button"
-        class="absolute left-1 inline-flex size-7 items-center justify-center rounded-md border border-input bg-transparent p-0 opacity-50 hover:opacity-100 transition-opacity"
+        scButton
+        variant="outline"
+        size="icon-sm"
+        class="absolute left-1 opacity-50 hover:opacity-100 transition-opacity"
         (click)="previous.emit()"
         [attr.aria-label]="previousLabel()"
       >
         <svg siChevronLeftIcon class="size-4"></svg>
       </button>
       <button
-        type="button"
-        class="text-sm font-medium hover:text-primary transition-colors px-3 py-1 rounded-md hover:bg-accent"
+        scButton
+        variant="ghost"
+        size="sm"
         (click)="headerClick.emit()"
         [attr.aria-label]="headerLabel()"
         [attr.aria-expanded]="expanded()"
@@ -33,8 +37,10 @@ import {
         {{ label() }}
       </button>
       <button
-        type="button"
-        class="absolute right-1 inline-flex size-7 items-center justify-center rounded-md border border-input bg-transparent p-0 opacity-50 hover:opacity-100 transition-opacity"
+        scButton
+        variant="outline"
+        size="icon-sm"
+        class="absolute right-1 opacity-50 hover:opacity-100 transition-opacity"
         (click)="next.emit()"
         [attr.aria-label]="nextLabel()"
       >
