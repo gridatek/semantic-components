@@ -80,19 +80,6 @@ The naming reinforces this. `ScDialog` is not a service — it's the `<div role=
 
 There is a tradeoff: `scDialogProvider` requires an extra wrapper element in the DOM. It acts as the coordination point between the trigger, the portal, and the close button — sharing state through Angular's DI tree. It's a conscious choice in favor of keeping everything in the template, at the cost of one extra `<div>` that you may need to style or account for in your layout.
 
-### Attribute Selectors Over Element Selectors
-
-Instead of custom elements like `<sc-button>`, the library uses attribute selectors applied to native HTML elements. This means:
-
-- No extra wrapper elements in the DOM
-- Native elements keep their accessibility roles
-- Multiple attributes can be stacked on the same element
-
-```html
-<!-- Native button, two attribute selectors -->
-<button scButton variant="outline" scDrawerTrigger>Open</button>
-```
-
 ### Fully Composable
 
 Each component is a set of small, focused pieces that you assemble yourself. There are no magic `[content]` inputs or hidden `<ng-content>` slots — you write the structure, and the pieces plug into it.
@@ -136,35 +123,6 @@ This also composes across components. A button can be a drawer trigger, a toolti
 
 One element. Three responsibilities. No wrappers.
 
-### Modern Angular — All the Way Down
-
-The library is built exclusively with modern Angular APIs:
-
-- **Signals** for reactive state (`input()`, `output()`, `computed()`, `signal()`)
-- **Standalone components** — no NgModules anywhere
-- **Native control flow** — `@if`, `@for`, `@switch` instead of structural directives
-- **`inject()`** instead of constructor injection
-- **OnPush** change detection everywhere
-
-```typescript
-@Directive({
-  selector: 'button[scButton]',
-  host: {
-    'data-slot': 'button',
-    '[attr.type]': 'type()',
-    '[disabled]': 'disabled()',
-    '[class]': 'class()',
-  },
-})
-export class ScButton {
-  readonly variant = input<ScButtonVariants['variant']>('default');
-  readonly size = input<ScButtonVariants['size']>('default');
-  readonly disabled = input<boolean, unknown>(false, {
-    transform: booleanAttribute,
-  });
-}
-```
-
 ### Tailwind + CVA for Variants
 
 Styles are written in Tailwind CSS and managed with [class-variance-authority](https://cva.style). This means:
@@ -193,14 +151,28 @@ export const buttonVariants = cva('inline-flex items-center justify-center round
 });
 ```
 
-### Accessible by Default
+### Built on Solid Foundations
 
-Every component is built to pass WCAG AA minimums:
+The rest of the library's design comes down to three non-negotiables:
 
-- Proper ARIA attributes on all interactive elements
-- Full keyboard navigation
-- Focus management on dialogs, drawers, and sheets
-- Screen reader support
+**Attribute selectors over element selectors.** Instead of custom elements like `<sc-button>`, the library uses attribute selectors on native HTML. No extra wrapper elements, native accessibility roles preserved, and multiple directives can stack on the same element:
+
+```html
+<button scButton variant="outline" scDrawerTrigger>Open</button>
+```
+
+**Modern Angular, all the way down.** Signals (`input()`, `output()`, `computed()`), standalone components, native control flow (`@if`, `@for`), `inject()`, and OnPush everywhere. No legacy APIs, no NgModules, no compromises.
+
+```typescript
+@Directive({ selector: 'button[scButton]' })
+export class ScButton {
+  readonly variant = input<ScButtonVariants['variant']>('default');
+  readonly size = input<ScButtonVariants['size']>('default');
+  readonly disabled = input<boolean, unknown>(false, { transform: booleanAttribute });
+}
+```
+
+**Accessible by default.** Every component is built to pass WCAG AA minimums — proper ARIA attributes, full keyboard navigation, focus management on dialogs and drawers, and screen reader support.
 
 ---
 
