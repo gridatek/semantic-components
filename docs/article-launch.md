@@ -27,6 +27,21 @@ In Semantic Components, the name tells you exactly what role the element plays:
 
 `scTooltipTrigger` — this element _triggers_ a tooltip. That distinction matters as the UI grows. `ScDrawerTrigger`, `ScSelectValue`, `ScSelectTrigger`, `ScSidebarBody` — you know what each piece does before reading a single line of docs.
 
+This principle extends to the **HTML elements themselves**. When possible, directives are applied to the right native element rather than a generic `<div>`. The sidebar menu is a real `<ul>` with real `<li>` items. A menu button is a real `<button>` or `<a>`. This is not just stylistic — it means screen readers, keyboard users, and search engines see meaningful structure.
+
+```html
+<ul scSidebarMenu>
+  <li scSidebarMenuItem>
+    <a scSidebarMenuButton routerLink="/dashboard">Dashboard</a>
+  </li>
+  <li scSidebarMenuItem>
+    <button scSidebarMenuButton>Settings</button>
+  </li>
+</ul>
+```
+
+You're not hiding a list inside a stack of `<div>` wrappers. The HTML is as semantic as the API.
+
 ### Directive-Based, Not Component-Based
 
 Most pieces of the library are Angular `@Directive` classes applied to semantic HTML elements. This means:
