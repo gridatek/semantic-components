@@ -42,16 +42,16 @@ This principle extends to the **HTML elements themselves**. When possible, direc
 
 You're not hiding a list inside a stack of `<div>` wrappers. The HTML is as semantic as the API.
 
-### Directive-Based, Not Component-Based
+### Attribute Selectors Over Element Selectors
 
-Most pieces of the library are Angular `@Directive` classes applied to semantic HTML elements. This means:
+Instead of custom elements like `<sc-button>`, the library uses attribute selectors applied to native HTML elements. This means:
 
-- No extra wrapper `<div>` in the DOM
+- No extra wrapper elements in the DOM
 - Native elements keep their accessibility roles
-- You can stack multiple directives on the same element
+- Multiple attributes can be stacked on the same element
 
 ```html
-<!-- One element, two directives -->
+<!-- Native button, two attribute selectors -->
 <button scButton variant="outline" scDrawerTrigger>Open</button>
 ```
 
