@@ -185,7 +185,7 @@ This library makes deliberate choices that prioritize the future of Angular over
 
 - **Zoneless only.** The library is built for zoneless Angular apps. If your app still depends on `zone.js` for change detection, it won't work as expected.
 - **OnPush only.** All components use `ChangeDetectionStrategy.OnPush`. There is no `Default` fallback.
-- **Signal-based forms only.** Form integrations are designed around signals, not `NgModel` or reactive forms driven by `BehaviorSubject`.
+- **Signal-based forms only.** Form integrations are designed around signals, not `NgModel` or reactive forms.
 - **No NgModules.** Everything is standalone. There are no module exports, no `forRoot()`, no compatibility shims for module-based apps.
 
 If your project is greenfield or already on modern Angular, these are features, not limitations. If you're maintaining a large legacy codebase, this library is probably not the right fit yet.
@@ -196,7 +196,7 @@ If your project is greenfield or already on modern Angular, these are features, 
 
 ### `@semantic-components/ui` — Core Library
 
-40+ production-ready components:
+40+ components:
 
 | Category   | Components                                                                        |
 | ---------- | --------------------------------------------------------------------------------- |
@@ -212,7 +212,7 @@ If your project is greenfield or already on modern Angular, these are features, 
 
 ## Icons: `@semantic-icons/lucide-icons`
 
-Icons are distributed as Angular directives from `@semantic-icons/lucide-icons`. Every icon is a standalone directive you apply to an `<svg>` element:
+Icons are distributed as Angular components from `@semantic-icons/lucide-icons`. Every icon is a standalone component you apply to an `<svg>` element:
 
 ```html
 <svg siStarIcon></svg>
@@ -256,18 +256,6 @@ Semantic Components is my attempt to bring that standard to Angular, while leani
 
 ---
 
-## Status and Roadmap
-
-The library is at **v0.65** and actively developed. It's already being used in production in real projects.
-
-What's coming:
-
-- More `ui-lab` components graduating to stable
-- More showcase demos and documentation
-- More icon sets under `@semantic-icons/*`
-
----
-
 ## Links
 
 - **GitHub:** https://github.com/gridatek/semantic-components
@@ -275,7 +263,3 @@ What's coming:
 - **License:** MIT
 
 Feedback, stars, and contributions are very welcome. If you're building Angular apps and tired of fighting your UI library, give Semantic Components a try.
-
----
-
-_Built with Angular v21+, Tailwind CSS v4, and a lot of respect for the people using it._
