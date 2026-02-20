@@ -11,7 +11,21 @@ After waiting so long for an Angular UI library that actually met my needs, I de
 
 ### Semantic by Name
 
-Every component is named to describe its role in the interface, not its implementation. `ScDrawerTrigger`, `ScSelectValue`, `ScSidebarBody` — you know what they do before reading a single line of docs.
+Every directive or component is named to describe its **role** in the interface, not just the component it belongs to. Take the tooltip as an example. Angular Material gives you a single `matTooltip` directive you slap on any element:
+
+```html
+<!-- Angular Material -->
+<button matTooltip="Save changes">Save</button>
+```
+
+In Semantic Components, the name tells you exactly what role the element plays:
+
+```html
+<!-- Semantic Components -->
+<button scTooltipTrigger tooltip="Save changes">Save</button>
+```
+
+`scTooltipTrigger` — this element _triggers_ a tooltip. That distinction matters as the UI grows. `ScDrawerTrigger`, `ScSelectValue`, `ScSelectTrigger`, `ScSidebarBody` — you know what each piece does before reading a single line of docs.
 
 ### Directive-Based, Not Component-Based
 
