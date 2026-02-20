@@ -129,9 +129,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'calendar',
     description: 'A date picker calendar component.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Card',
@@ -269,9 +268,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'date-picker',
     description: 'A popover-based date selection component.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Date Range Picker',
