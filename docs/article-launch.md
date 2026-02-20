@@ -172,7 +172,7 @@ The rest of the library's design is guided by a few core principles:
 <button scButton variant="outline" scDrawerTrigger>Open</button>
 ```
 
-**Modern Angular, all the way down.** Signals (`input()`, `output()`, `computed()`), standalone components, native control flow (`@if`, `@for`), `inject()`, and OnPush everywhere. Overlays and positioning are built on `@angular/cdk`. Accessible patterns like focus trapping and live regions use `@angular/cdk/a11y` and `@angular/aria`. Forms are signal-based. The library is also zoneless-compatible — no `zone.js` required. No legacy APIs, no NgModules, no compromises.
+**Modern Angular, all the way down.** Signals (`input()`, `output()`, `computed()`), standalone components, native control flow (`@if`, `@for`), `inject()`, and OnPush everywhere. Overlays and positioning are built on `@angular/cdk`. Accessible patterns like focus trapping and live regions use `@angular/cdk/a11y` and `@angular/aria`. Forms are signal-based. The library is also zoneless-compatible — no `zone.js` required. No legacy APIs, no NgModules.
 
 ```typescript
 @Directive({ selector: 'button[scButton]' })
@@ -183,7 +183,7 @@ export class ScButton {
 }
 ```
 
-**Accessible by default.** Every component is built to pass WCAG AA minimums — proper ARIA attributes, full keyboard navigation, focus management on dialogs and drawers, and screen reader support. Where possible, this is powered by Angular CDK's accessibility primitives (`@angular/cdk/a11y`) rather than hand-rolled solutions.
+**Accessible by default.** Every component is built to pass WCAG AA minimums — proper ARIA attributes, full keyboard navigation, focus management on dialogs and drawers, and screen reader support. Where possible, this is powered by Angular CDK's accessibility primitives (`@angular/cdk/a11y`) and `@angular/aria` rather than hand-rolled solutions.
 
 ---
 
