@@ -131,7 +131,6 @@ The library follows the [shadcn/ui](https://ui.shadcn.com) design system — sam
 
 Styles are written in Tailwind CSS and managed with [class-variance-authority](https://cva.style). This means:
 
-- Zero runtime CSS-in-JS overhead
 - Predictable, overridable class names
 - Consistent variants (`default`, `outline`, `ghost`, `destructive`, `link`) across all components
 
@@ -157,7 +156,7 @@ export const buttonVariants = cva('inline-flex items-center justify-center round
 
 ### Built on Solid Foundations
 
-The rest of the library's design comes down to three non-negotiables:
+The rest of the library's design is guided by a few core principles:
 
 **Attribute selectors over element selectors.** Instead of custom elements like `<sc-button>`, the library uses attribute selectors on native HTML. No extra wrapper elements, native accessibility roles preserved, and multiple components/directives can stack on the same element:
 
