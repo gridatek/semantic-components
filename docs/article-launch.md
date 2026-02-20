@@ -11,7 +11,7 @@ After waiting so long for an Angular UI library that actually met my needs, I de
 
 ### Semantic by Name
 
-Every directive or component is named to describe its **role** in the interface, not just the component it belongs to. Take the tooltip as an example. Angular Material gives you a single `matTooltip` directive you slap on any element:
+Every directive or component is named to describe its **role** in the interface, not just the feature it belongs to. Take the tooltip as an example. Angular Material gives you a single `matTooltip` directive — it conflates the tooltip itself with what triggers it, everything in one attribute:
 
 ```html
 <!-- Angular Material -->
