@@ -30,14 +30,14 @@ export class LoadingButtonDemoContainer {
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScSpinner } from '@semantic-components/ui';
-import { SiLoader2Icon } from '@semantic-icons/lucide-icons';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-loading-button-demo',
-  imports: [ScButton, ScSpinner, SiLoader2Icon],
+  imports: [ScButton, ScSpinner, SiLoaderCircleIcon],
   template: \`
     <button scButton disabled>
-      <svg scSpinner siLoader2Icon></svg>
+      <svg scSpinner siLoaderCircleIcon></svg>
       Please wait
     </button>
   \`,

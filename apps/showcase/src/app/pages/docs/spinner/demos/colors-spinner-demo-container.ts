@@ -29,19 +29,19 @@ export class ColorsSpinnerDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScSpinner } from '@semantic-components/ui';
-import { SiLoader2Icon } from '@semantic-icons/lucide-icons';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-colors-spinner-demo',
-  imports: [ScSpinner, SiLoader2Icon],
+  imports: [ScSpinner, SiLoaderCircleIcon],
   template: \`
     <div class="flex items-center gap-6">
-      <svg scSpinner siLoader2Icon class="text-primary"></svg>
-      <svg scSpinner siLoader2Icon class="text-blue-500"></svg>
-      <svg scSpinner siLoader2Icon class="text-green-500"></svg>
-      <svg scSpinner siLoader2Icon class="text-yellow-500"></svg>
-      <svg scSpinner siLoader2Icon class="text-red-500"></svg>
-      <svg scSpinner siLoader2Icon class="text-purple-500"></svg>
+      <svg scSpinner siLoaderCircleIcon class="text-primary"></svg>
+      <svg scSpinner siLoaderCircleIcon class="text-blue-500"></svg>
+      <svg scSpinner siLoaderCircleIcon class="text-green-500"></svg>
+      <svg scSpinner siLoaderCircleIcon class="text-yellow-500"></svg>
+      <svg scSpinner siLoaderCircleIcon class="text-red-500"></svg>
+      <svg scSpinner siLoaderCircleIcon class="text-purple-500"></svg>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

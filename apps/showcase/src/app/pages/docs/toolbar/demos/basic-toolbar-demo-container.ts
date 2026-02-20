@@ -35,9 +35,9 @@ import {
   ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
-  SiAlignCenterIcon,
-  SiAlignLeftIcon,
-  SiAlignRightIcon,
+  SiTextAlignCenterIcon,
+  SiTextAlignStartIcon,
+  SiTextAlignEndIcon,
   SiBoldIcon,
   SiItalicIcon,
   SiUnderlineIcon,
@@ -53,9 +53,9 @@ import {
     SiBoldIcon,
     SiItalicIcon,
     SiUnderlineIcon,
-    SiAlignLeftIcon,
-    SiAlignCenterIcon,
-    SiAlignRightIcon,
+    SiTextAlignStartIcon,
+    SiTextAlignCenterIcon,
+    SiTextAlignEndIcon,
   ],
   template: \`
     <div scToolbar [values]="['bold']">
@@ -75,13 +75,13 @@ import {
 
       <div scToolbarWidgetGroup>
         <button scToolbarWidget value="align-left" aria-label="Align left">
-          <svg siAlignLeftIcon></svg>
+          <svg siTextAlignStartIcon></svg>
         </button>
         <button scToolbarWidget value="align-center" aria-label="Align center">
-          <svg siAlignCenterIcon></svg>
+          <svg siTextAlignCenterIcon></svg>
         </button>
         <button scToolbarWidget value="align-right" aria-label="Align right">
-          <svg siAlignRightIcon></svg>
+          <svg siTextAlignEndIcon></svg>
         </button>
       </div>
     </div>

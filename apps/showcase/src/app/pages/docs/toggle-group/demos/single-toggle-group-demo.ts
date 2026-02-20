@@ -6,9 +6,9 @@ import {
 } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
-  SiAlignCenterIcon,
-  SiAlignLeftIcon,
-  SiAlignRightIcon,
+  SiTextAlignCenterIcon,
+  SiTextAlignStartIcon,
+  SiTextAlignEndIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -16,9 +16,9 @@ import {
   imports: [
     ScToggleGroup,
     ScToggleGroupItem,
-    SiAlignLeftIcon,
-    SiAlignCenterIcon,
-    SiAlignRightIcon,
+    SiTextAlignStartIcon,
+    SiTextAlignCenterIcon,
+    SiTextAlignEndIcon,
   ],
   template: `
     <div class="space-y-4">
@@ -29,13 +29,13 @@ import {
         aria-label="Text alignment"
       >
         <button scToggleGroupItem value="left" aria-label="Align left">
-          <svg siAlignLeftIcon></svg>
+          <svg siTextAlignStartIcon></svg>
         </button>
         <button scToggleGroupItem value="center" aria-label="Align center">
-          <svg siAlignCenterIcon></svg>
+          <svg siTextAlignCenterIcon></svg>
         </button>
         <button scToggleGroupItem value="right" aria-label="Align right">
-          <svg siAlignRightIcon></svg>
+          <svg siTextAlignEndIcon></svg>
         </button>
       </div>
       <p class="text-sm text-muted-foreground">

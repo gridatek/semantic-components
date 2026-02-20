@@ -4,13 +4,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScSpinner } from '@semantic-components/ui';
-import { SiLoader2Icon } from '@semantic-icons/lucide-icons';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-default-spinner-demo',
-  imports: [ScSpinner, SiLoader2Icon],
+  imports: [ScSpinner, SiLoaderCircleIcon],
   template: `
-    <svg scSpinner siLoader2Icon></svg>
+    <svg scSpinner siLoaderCircleIcon></svg>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -8,14 +8,14 @@ import {
   ScAlertDescription,
   ScAlertTitle,
 } from '@semantic-components/ui';
-import { SiAlertTriangleIcon } from '@semantic-icons/lucide-icons';
+import { SiTriangleAlertIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-destructive-alert-demo',
-  imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiAlertTriangleIcon],
+  imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiTriangleAlertIcon],
   template: `
     <div scAlert variant="destructive">
-      <svg siAlertTriangleIcon></svg>
+      <svg siTriangleAlertIcon></svg>
       <h5 scAlertTitle>Error</h5>
       <div scAlertDescription>
         Your session has expired. Please log in again.

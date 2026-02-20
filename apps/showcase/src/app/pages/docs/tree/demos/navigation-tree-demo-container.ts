@@ -38,7 +38,7 @@ import {
 } from '@semantic-components/ui-lab';
 import {
   SiChevronRightIcon,
-  SiHomeIcon,
+  SiHouseIcon,
   SiBookOpenIcon,
   SiSettingsIcon,
 } from '@semantic-icons/lucide-icons';
@@ -53,7 +53,7 @@ import {
     ScTreeItemGroup,
     ScTreeItemIcon,
     SiChevronRightIcon,
-    SiHomeIcon,
+    SiHouseIcon,
     SiBookOpenIcon,
     SiSettingsIcon,
   ],
@@ -68,7 +68,7 @@ import {
         >
           <button scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
-            <svg scTreeItemIcon siHomeIcon></svg>
+            <svg scTreeItemIcon siHouseIcon></svg>
             <span>Getting Started</span>
           </button>
           <ul scTreeItemGroup>

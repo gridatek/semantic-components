@@ -26,7 +26,7 @@ import {
   SiLogOutIcon,
   SiMailIcon,
   SiMessageSquareIcon,
-  SiPlusCircleIcon,
+  SiCirclePlusIcon,
   SiSettingsIcon,
   SiUserIcon,
   SiUserPlusIcon,
@@ -55,7 +55,7 @@ import {
     SiLogOutIcon,
     SiMailIcon,
     SiMessageSquareIcon,
-    SiPlusCircleIcon,
+    SiCirclePlusIcon,
     SiSettingsIcon,
     SiUserIcon,
     SiUserPlusIcon,
@@ -145,7 +145,7 @@ import {
                 <div scMenuSeparator></div>
                 <div scMenuItem value="More...">
                   <svg
-                    siPlusCircleIcon
+                    siCirclePlusIcon
                     class="text-muted-foreground size-4"
                     aria-hidden="true"
                   ></svg>

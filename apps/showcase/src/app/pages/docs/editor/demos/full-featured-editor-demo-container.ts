@@ -65,10 +65,10 @@ import {
   SiStrikethroughIcon,
   SiUndoIcon,
   SiRedoIcon,
-  SiAlignLeftIcon,
-  SiAlignCenterIcon,
-  SiAlignRightIcon,
-  SiAlignJustifyIcon,
+  SiTextAlignStartIcon,
+  SiTextAlignCenterIcon,
+  SiTextAlignEndIcon,
+  SiTextAlignJustifyIcon,
   SiListIcon,
   SiListOrderedIcon,
   SiLinkIcon,
@@ -114,10 +114,10 @@ import {
     SiStrikethroughIcon,
     SiUndoIcon,
     SiRedoIcon,
-    SiAlignLeftIcon,
-    SiAlignCenterIcon,
-    SiAlignRightIcon,
-    SiAlignJustifyIcon,
+    SiTextAlignStartIcon,
+    SiTextAlignCenterIcon,
+    SiTextAlignEndIcon,
+    SiTextAlignJustifyIcon,
     SiListIcon,
     SiListOrderedIcon,
     SiLinkIcon,
@@ -175,19 +175,19 @@ import {
 
         <div scEditorToolbarGroup>
           <button scEditorAlignLeft>
-            <svg siAlignLeftIcon class="size-4"></svg>
+            <svg siTextAlignStartIcon class="size-4"></svg>
             <span class="sr-only">Align left</span>
           </button>
           <button scEditorAlignCenter>
-            <svg siAlignCenterIcon class="size-4"></svg>
+            <svg siTextAlignCenterIcon class="size-4"></svg>
             <span class="sr-only">Align center</span>
           </button>
           <button scEditorAlignRight>
-            <svg siAlignRightIcon class="size-4"></svg>
+            <svg siTextAlignEndIcon class="size-4"></svg>
             <span class="sr-only">Align right</span>
           </button>
           <button scEditorAlignJustify>
-            <svg siAlignJustifyIcon class="size-4"></svg>
+            <svg siTextAlignJustifyIcon class="size-4"></svg>
             <span class="sr-only">Align justify</span>
           </button>
         </div>

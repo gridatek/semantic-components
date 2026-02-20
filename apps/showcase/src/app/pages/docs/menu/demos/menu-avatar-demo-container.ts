@@ -40,7 +40,7 @@ import {
 import {
   SiCreditCardIcon,
   SiLogOutIcon,
-  SiPlusCircleIcon,
+  SiCirclePlusIcon,
   SiSettingsIcon,
   SiUserIcon,
   SiUsersIcon,
@@ -58,7 +58,7 @@ import {
     ScMenuTrigger,
     SiCreditCardIcon,
     SiLogOutIcon,
-    SiPlusCircleIcon,
+    SiCirclePlusIcon,
     SiSettingsIcon,
     SiUserIcon,
     SiUsersIcon,
@@ -120,7 +120,7 @@ import {
             <span class="flex-1">Team</span>
           </div>
           <div scMenuItem value="New Team">
-            <svg siPlusCircleIcon class="text-muted-foreground size-4" aria-hidden="true"></svg>
+            <svg siCirclePlusIcon class="text-muted-foreground size-4" aria-hidden="true"></svg>
             <span class="flex-1">New Team</span>
             <span class="ml-auto text-xs tracking-widest text-muted-foreground">
               ⌘+T

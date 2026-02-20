@@ -10,7 +10,7 @@ import {
   SiAccessibilityIcon,
   SiCodeXmlIcon,
   SiGrid2x2Icon,
-  SiLayoutIcon,
+  SiLayoutGridIcon,
   SiMoonIcon,
   SiNotebookIcon,
   SiSparklesIcon,
@@ -28,7 +28,7 @@ import {
     SiTerminalIcon,
     SiAccessibilityIcon,
     SiTagIcon,
-    SiLayoutIcon,
+    SiLayoutGridIcon,
     SiMoonIcon,
   ],
   template: `
@@ -155,7 +155,7 @@ import {
               class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4"
             >
               <svg
-                siLayoutIcon
+                siLayoutGridIcon
                 class="size-6 text-primary"
                 aria-hidden="true"
               ></svg>
