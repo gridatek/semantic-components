@@ -11,6 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendar, ScDateRange } from '../calendar';
 
 export interface ScDateRangePreset {
@@ -169,9 +170,9 @@ export class ScDateRangePicker {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly placeholder = input<string>('Select date range');
   readonly disabled = input<boolean>(false);
-  readonly minDate = input<Date | undefined>(undefined);
-  readonly maxDate = input<Date | undefined>(undefined);
-  readonly disabledDates = input<Date[]>([]);
+  readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
+  readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
+  readonly disabledDates = input<Temporal.PlainDate[]>([]);
   readonly presets = input<ScDateRangePreset[]>([]);
   readonly showTwoMonths = input<boolean>(false);
   readonly showClear = input<boolean>(true);
@@ -230,16 +231,8 @@ export class ScDateRangePicker {
     if (!current.from || !current.to || !preset.value.from || !preset.value.to)
       return false;
     return (
-      this.isSameDay(current.from, preset.value.from) &&
-      this.isSameDay(current.to, preset.value.to)
-    );
-  }
-
-  private isSameDay(a: Date, b: Date): boolean {
-    return (
-      a.getDate() === b.getDate() &&
-      a.getMonth() === b.getMonth() &&
-      a.getFullYear() === b.getFullYear()
+      current.from.equals(preset.value.from) &&
+      current.to.equals(preset.value.to)
     );
   }
 
@@ -282,26 +275,26 @@ export class ScDateRangePicker {
     this.valueChange.emit({ from: undefined, to: undefined });
   }
 
-  formatDate(date: Date): string {
+  formatDate(date: Temporal.PlainDate): string {
     const format = this.dateFormat();
     if (format === 'short') {
-      return date.toLocaleDateString('en-US', {
+      return date.toLocaleString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
       });
     }
     if (format === 'long') {
-      return date.toLocaleDateString('en-US', {
+      return date.toLocaleString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
       });
     }
     if (format === 'iso') {
-      return date.toISOString().split('T')[0];
+      return date.toString();
     }
-    return date.toLocaleDateString();
+    return date.toLocaleString();
   }
 
   focus(): void {
@@ -315,26 +308,19 @@ export class ScDateRangePicker {
 
 // Helper function to create common presets
 export function createScDateRangePresets(): ScDateRangePreset[] {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const today = Temporal.Now.plainDateISO();
+  const yesterday = today.subtract({ days: 1 });
 
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
+  const last7Days = today.subtract({ days: 6 });
+  const last14Days = today.subtract({ days: 13 });
+  const last30Days = today.subtract({ days: 29 });
 
-  const last7Days = new Date(today);
-  last7Days.setDate(last7Days.getDate() - 6);
+  const thisMonthStart = today.with({ day: 1 });
+  const thisMonthEnd = today.with({ day: today.daysInMonth });
 
-  const last14Days = new Date(today);
-  last14Days.setDate(last14Days.getDate() - 13);
-
-  const last30Days = new Date(today);
-  last30Days.setDate(last30Days.getDate() - 29);
-
-  const thisMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
-  const thisMonthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-
-  const lastMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-  const lastMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+  const lastMonth = today.subtract({ months: 1 });
+  const lastMonthStart = lastMonth.with({ day: 1 });
+  const lastMonthEnd = lastMonth.with({ day: lastMonth.daysInMonth });
 
   return [
     { label: 'Today', value: { from: today, to: today } },

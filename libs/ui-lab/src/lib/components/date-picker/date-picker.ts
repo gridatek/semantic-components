@@ -15,6 +15,7 @@ import {
   ScPopoverAlign,
   ScPopoverSide,
 } from '@semantic-components/ui';
+import { Temporal } from '@js-temporal/polyfill';
 import {
   ScCalendar,
   ScCalendarMode,
@@ -80,9 +81,9 @@ export class ScDatePicker {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly mode = input<ScCalendarMode>('single');
   readonly placeholder = input<string>('Pick a date');
-  readonly disabled = input<Date[]>([]);
-  readonly minDate = input<Date | undefined>(undefined);
-  readonly maxDate = input<Date | undefined>(undefined);
+  readonly disabled = input<Temporal.PlainDate[]>([]);
+  readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
+  readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
   readonly side = input<ScPopoverSide>('bottom');
   readonly align = input<ScPopoverAlign>('start');
 
@@ -107,12 +108,12 @@ export class ScDatePicker {
     const val = this.value();
 
     if (mode === 'single') {
-      const date = val as Date | undefined;
+      const date = val as Temporal.PlainDate | undefined;
       return date ? this.formatDate(date) : '';
     }
 
     if (mode === 'multiple') {
-      const dates = (val as Date[] | undefined) ?? [];
+      const dates = (val as Temporal.PlainDate[] | undefined) ?? [];
       if (dates.length === 0) return '';
       if (dates.length === 1) return this.formatDate(dates[0]);
       return `${dates.length} dates selected`;
@@ -131,8 +132,8 @@ export class ScDatePicker {
     return '';
   });
 
-  private formatDate(date: Date): string {
-    return date.toLocaleDateString('en-US', {
+  private formatDate(date: Temporal.PlainDate): string {
+    return date.toLocaleString('en-US', {
       month: 'short',
       day: 'numeric',
       year: 'numeric',

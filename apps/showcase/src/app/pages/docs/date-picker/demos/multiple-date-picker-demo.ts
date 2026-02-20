@@ -4,6 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScDatePicker } from '@semantic-components/ui-lab';
 
 @Component({
@@ -25,5 +26,5 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultipleDatePickerDemo {
-  readonly selectedDates = signal<Date[]>([]);
+  readonly selectedDates = signal<Temporal.PlainDate[]>([]);
 }

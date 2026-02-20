@@ -17,8 +17,8 @@ import { ScDateRangePicker, ScDateRange } from '@semantic-components/ui-lab';
     />
     <p class="text-sm text-muted-foreground mt-4">
       @if (range().from && range().to) {
-        Selected: {{ range().from?.toLocaleDateString() }} -
-        {{ range().to?.toLocaleDateString() }}
+        Selected: {{ range().from?.toLocaleString() }} -
+        {{ range().to?.toLocaleString() }}
       } @else {
         No range selected
       }

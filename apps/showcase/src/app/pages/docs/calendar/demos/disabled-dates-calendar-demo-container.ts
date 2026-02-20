@@ -30,6 +30,7 @@ export class DisabledDatesCalendarDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendar } from '@semantic-components/ui-lab';
 
 @Component({
@@ -58,7 +59,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
               <p class="text-sm font-medium">Selected Date</p>
               <p class="text-sm text-muted-foreground">
                 {{
-                  date.toLocaleDateString('en-US', {
+                  date.toLocaleString('en-US', {
                     weekday: 'long',
                     year: 'numeric',
                     month: 'long',
@@ -89,27 +90,26 @@ import { ScCalendar } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledDatesCalendarDemo {
-  readonly selectedDate = signal<Date | undefined>(undefined);
-  readonly disabledDates = signal<Date[]>(this.getWeekendDates());
+  readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);
+  readonly disabledDates = signal<Temporal.PlainDate[]>(this.getWeekendDates());
 
   clearSelection(): void {
     this.selectedDate.set(undefined);
   }
 
-  private getWeekendDates(): Date[] {
-    const weekends: Date[] = [];
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
+  private getWeekendDates(): Temporal.PlainDate[] {
+    const weekends: Temporal.PlainDate[] = [];
+    const today = Temporal.Now.plainDateISO();
+    const start = today.with({ day: 1 });
+    const nextMonth = start.add({ months: 1 });
+    const end = nextMonth.with({ day: nextMonth.daysInMonth });
 
-    for (let m = month; m <= month + 1; m++) {
-      const daysInMonth = new Date(year, m + 1, 0).getDate();
-      for (let d = 1; d <= daysInMonth; d++) {
-        const date = new Date(year, m, d);
-        if (date.getDay() === 0 || date.getDay() === 6) {
-          weekends.push(date);
-        }
+    let current = start;
+    while (Temporal.PlainDate.compare(current, end) <= 0) {
+      if (current.dayOfWeek === 6 || current.dayOfWeek === 7) {
+        weekends.push(current);
       }
+      current = current.add({ days: 1 });
     }
     return weekends;
   }

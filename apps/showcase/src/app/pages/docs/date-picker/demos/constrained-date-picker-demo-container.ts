@@ -29,6 +29,7 @@ export class ConstrainedDatePickerDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScDatePicker } from '@semantic-components/ui-lab';
 
 @Component({
@@ -49,8 +50,8 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConstrainedDatePickerDemo {
-  readonly selectedDate = signal<Date | undefined>(undefined);
-  readonly minDate = new Date();
-  readonly maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+  readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);
+  readonly minDate = Temporal.Now.plainDateISO();
+  readonly maxDate = Temporal.Now.plainDateISO().add({ days: 30 });
 }`;
 }

@@ -29,6 +29,7 @@ export class PlaceholderDatePickerDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScDatePicker } from '@semantic-components/ui-lab';
 
 @Component({
@@ -44,6 +45,6 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlaceholderDatePickerDemo {
-  readonly selectedDate = signal<Date | undefined>(undefined);
+  readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);
 }`;
 }

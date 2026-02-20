@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Grid, GridRow, GridCell, GridCellWidget } from '@angular/aria/grid';
 import { cn } from '@semantic-components/ui';
+import { Temporal } from '@js-temporal/polyfill';
 
 interface YearInfo {
   label: string;
@@ -76,7 +77,7 @@ export class ScCalendarYearView {
 
   protected readonly years = computed((): YearInfo[] => {
     const decadeStart = this.decadeStart();
-    const currentYear = new Date().getFullYear();
+    const currentYear = Temporal.Now.plainDateISO().year;
     const selectedYear = this.selectedYear();
 
     return Array.from({ length: 12 }, (_, i) => {

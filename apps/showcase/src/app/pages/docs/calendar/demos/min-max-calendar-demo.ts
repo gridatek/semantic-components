@@ -4,6 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendar } from '@semantic-components/ui-lab';
 
 @Component({
@@ -26,7 +27,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
             <p>
               Min Date:
               {{
-                minDate.toLocaleDateString('en-US', {
+                minDate.toLocaleString('en-US', {
                   weekday: 'short',
                   year: 'numeric',
                   month: 'short',
@@ -37,7 +38,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
             <p>
               Max Date:
               {{
-                maxDate.toLocaleDateString('en-US', {
+                maxDate.toLocaleString('en-US', {
                   weekday: 'short',
                   year: 'numeric',
                   month: 'short',
@@ -56,7 +57,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
               <p class="text-sm font-medium">Selected Date</p>
               <p class="text-sm text-muted-foreground">
                 {{
-                  date.toLocaleDateString('en-US', {
+                  date.toLocaleString('en-US', {
                     weekday: 'long',
                     year: 'numeric',
                     month: 'long',
@@ -87,9 +88,9 @@ import { ScCalendar } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinMaxCalendarDemo {
-  readonly selectedDate = signal<Date | undefined>(undefined);
-  readonly minDate = new Date();
-  readonly maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000);
+  readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);
+  readonly minDate = Temporal.Now.plainDateISO();
+  readonly maxDate = Temporal.Now.plainDateISO().add({ days: 30 });
 
   clearSelection(): void {
     this.selectedDate.set(undefined);

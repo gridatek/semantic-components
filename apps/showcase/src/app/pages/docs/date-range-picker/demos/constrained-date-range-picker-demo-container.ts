@@ -28,6 +28,7 @@ export class ConstrainedDateRangePickerDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScDateRangePicker } from '@semantic-components/ui-lab';
 
 @Component({
@@ -47,7 +48,7 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConstrainedDateRangePickerDemo {
-  readonly minDate = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-  readonly maxDate = new Date();
+  readonly minDate = Temporal.Now.plainDateISO().subtract({ days: 30 });
+  readonly maxDate = Temporal.Now.plainDateISO();
 }`;
 }

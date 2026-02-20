@@ -10,10 +10,11 @@ import {
 } from '@angular/core';
 import { Grid, GridRow, GridCell, GridCellWidget } from '@angular/aria/grid';
 import { cn } from '@semantic-components/ui';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendarValue, ScDateRange } from './calendar';
 
 interface DayInfo {
-  date: Date;
+  date: Temporal.PlainDate;
   isToday: boolean;
   isOutsideMonth: boolean;
   disabled: boolean;
@@ -49,7 +50,7 @@ interface DayInfo {
       <tbody>
         @for (week of weeks(); track $index) {
           <tr ngGridRow class="mt-2 flex w-full">
-            @for (day of week; track day?.date?.getTime() ?? $index) {
+            @for (day of week; track day?.date?.toString() ?? $index) {
               @if (day) {
                 <td
                   ngGridCell
@@ -61,7 +62,13 @@ interface DayInfo {
                     ngGridCellWidget
                     type="button"
                     [class]="getDayClass(day)"
-                    [attr.aria-label]="day.date.toDateString()"
+                    [attr.aria-label]="
+                      day.date.toLocaleString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })
+                    "
                     [attr.data-today]="day.isToday || null"
                     [attr.data-selected]="isSelected(day.date) || null"
                     [attr.data-outside]="day.isOutsideMonth || null"
@@ -69,10 +76,10 @@ interface DayInfo {
                     [attr.data-range-start]="isRangeStart(day.date) || null"
                     [attr.data-range-end]="isRangeEnd(day.date) || null"
                     [attr.data-range-middle]="isRangeMiddle(day.date) || null"
-                    [attr.data-day]="day.date.getDate()"
+                    [attr.data-day]="day.date.day"
                     (click)="handleDateClick(day.date)"
                   >
-                    {{ day.date.getDate() }}
+                    {{ day.date.day }}
                   </button>
                 </td>
               } @else {
@@ -96,14 +103,14 @@ interface DayInfo {
 export class ScCalendarDayView {
   private readonly _dayButtons = viewChildren(GridCellWidget);
 
-  readonly viewDate = input.required<Date>();
+  readonly viewDate = input.required<Temporal.PlainDate>();
   readonly mode = input.required<'single' | 'multiple' | 'range'>();
   readonly value = input<ScCalendarValue>(undefined);
-  readonly disabled = input<Date[]>([]);
-  readonly minDate = input<Date | undefined>(undefined);
-  readonly maxDate = input<Date | undefined>(undefined);
+  readonly disabled = input<Temporal.PlainDate[]>([]);
+  readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
+  readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
 
-  readonly dateSelected = output<Date>();
+  readonly dateSelected = output<Temporal.PlainDate>();
   readonly monthScrollUp = output<void>();
   readonly monthScrollDown = output<void>();
 
@@ -111,24 +118,26 @@ export class ScCalendarDayView {
 
   protected readonly weeks = computed(() => {
     const date = this.viewDate();
-    const year = date.getFullYear();
-    const month = date.getMonth();
+    const year = date.year;
+    const month = date.month;
 
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
+    const firstDay = new Temporal.PlainDate(year, month, 1);
+    const daysInMonth = firstDay.daysInMonth;
+    // dayOfWeek: 1=Mon..7=Sun; %7 gives 0=Sun like JS Date.getDay()
+    const firstDayOfWeek = firstDay.dayOfWeek % 7;
 
     const days: (DayInfo | null)[][] = [];
     let currentWeek: (DayInfo | null)[] = [];
 
-    // Add empty cells for days before the first day of the month
-    for (let i = 0; i < firstDay.getDay(); i++) {
-      const prevDate = new Date(year, month, -firstDay.getDay() + i + 1);
+    // Add days from previous month to fill the first week
+    for (let i = 0; i < firstDayOfWeek; i++) {
+      const prevDate = firstDay.subtract({ days: firstDayOfWeek - i });
       currentWeek.push(this.createDayInfo(prevDate, true));
     }
 
     // Add days of the month
-    for (let day = 1; day <= lastDay.getDate(); day++) {
-      const currentDate = new Date(year, month, day);
+    for (let day = 1; day <= daysInMonth; day++) {
+      const currentDate = new Temporal.PlainDate(year, month, day);
       currentWeek.push(this.createDayInfo(currentDate, false));
 
       if (currentWeek.length === 7) {
@@ -139,9 +148,10 @@ export class ScCalendarDayView {
 
     // Add days from next month to fill the last week
     if (currentWeek.length > 0) {
-      let nextDay = 1;
+      const nextMonthFirst = firstDay.add({ months: 1 });
+      let nextDay = 0;
       while (currentWeek.length < 7) {
-        const nextDate = new Date(year, month + 1, nextDay++);
+        const nextDate = nextMonthFirst.add({ days: nextDay++ });
         currentWeek.push(this.createDayInfo(nextDate, true));
       }
       days.push(currentWeek);
@@ -150,13 +160,12 @@ export class ScCalendarDayView {
     return days;
   });
 
-  private createDayInfo(date: Date, isOutsideMonth: boolean): DayInfo {
-    const today = new Date();
-    const isToday =
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear();
-
+  private createDayInfo(
+    date: Temporal.PlainDate,
+    isOutsideMonth: boolean,
+  ): DayInfo {
+    const today = Temporal.Now.plainDateISO();
+    const isToday = date.equals(today);
     const disabled = this.isDateDisabled(date);
 
     return {
@@ -168,20 +177,15 @@ export class ScCalendarDayView {
     };
   }
 
-  private isDateDisabled(date: Date): boolean {
+  private isDateDisabled(date: Temporal.PlainDate): boolean {
     const disabledDates = this.disabled();
     const min = this.minDate();
     const max = this.maxDate();
 
-    if (min && date < min) return true;
-    if (max && date > max) return true;
+    if (min && Temporal.PlainDate.compare(date, min) < 0) return true;
+    if (max && Temporal.PlainDate.compare(date, max) > 0) return true;
 
-    return disabledDates.some(
-      (d) =>
-        d.getDate() === date.getDate() &&
-        d.getMonth() === date.getMonth() &&
-        d.getFullYear() === date.getFullYear(),
-    );
+    return disabledDates.some((d) => d.equals(date));
   }
 
   private getRange(): ScDateRange {
@@ -193,54 +197,54 @@ export class ScCalendarDayView {
     );
   }
 
-  protected isSelected(date: Date): boolean {
+  protected isSelected(date: Temporal.PlainDate): boolean {
     const mode = this.mode();
 
     if (mode === 'single') {
-      const selected = this.value() as Date | undefined;
-      return selected ? this.isSameDay(date, selected) : false;
+      const selected = this.value() as Temporal.PlainDate | undefined;
+      return selected ? date.equals(selected) : false;
     }
 
     if (mode === 'multiple') {
-      const dates = (this.value() as Date[] | undefined) ?? [];
-      return dates.some((d) => this.isSameDay(date, d));
+      const dates = (this.value() as Temporal.PlainDate[] | undefined) ?? [];
+      return dates.some((d) => date.equals(d));
     }
 
     if (mode === 'range') {
       const range = this.getRange();
-      if (range.from && this.isSameDay(date, range.from)) return true;
-      if (range.to && this.isSameDay(date, range.to)) return true;
-      if (range.from && range.to && date > range.from && date < range.to)
+      if (range.from && date.equals(range.from)) return true;
+      if (range.to && date.equals(range.to)) return true;
+      if (
+        range.from &&
+        range.to &&
+        Temporal.PlainDate.compare(date, range.from) > 0 &&
+        Temporal.PlainDate.compare(date, range.to) < 0
+      )
         return true;
     }
 
     return false;
   }
 
-  protected isRangeStart(date: Date): boolean {
+  protected isRangeStart(date: Temporal.PlainDate): boolean {
     if (this.mode() !== 'range') return false;
     const range = this.getRange();
-    return range.from ? this.isSameDay(date, range.from) : false;
+    return range.from ? date.equals(range.from) : false;
   }
 
-  protected isRangeEnd(date: Date): boolean {
+  protected isRangeEnd(date: Temporal.PlainDate): boolean {
     if (this.mode() !== 'range') return false;
     const range = this.getRange();
-    return range.to ? this.isSameDay(date, range.to) : false;
+    return range.to ? date.equals(range.to) : false;
   }
 
-  protected isRangeMiddle(date: Date): boolean {
+  protected isRangeMiddle(date: Temporal.PlainDate): boolean {
     if (this.mode() !== 'range') return false;
     const range = this.getRange();
     if (!range.from || !range.to) return false;
-    return date > range.from && date < range.to;
-  }
-
-  private isSameDay(a: Date, b: Date): boolean {
     return (
-      a.getDate() === b.getDate() &&
-      a.getMonth() === b.getMonth() &&
-      a.getFullYear() === b.getFullYear()
+      Temporal.PlainDate.compare(date, range.from) > 0 &&
+      Temporal.PlainDate.compare(date, range.to) < 0
     );
   }
 
@@ -264,7 +268,7 @@ export class ScCalendarDayView {
     );
   }
 
-  protected handleDateClick(date: Date): void {
+  protected handleDateClick(date: Temporal.PlainDate): void {
     this.dateSelected.emit(date);
   }
 
@@ -273,11 +277,7 @@ export class ScCalendarDayView {
     if (!day) return;
 
     const viewDate = this.viewDate();
-    const daysInMonth = new Date(
-      viewDate.getFullYear(),
-      viewDate.getMonth() + 1,
-      0,
-    ).getDate();
+    const daysInMonth = viewDate.daysInMonth;
 
     // Only handle edge cases where we need to scroll to prev/next month
     if (day > 7 && day <= daysInMonth - 7) return;

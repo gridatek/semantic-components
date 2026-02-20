@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Grid, GridRow, GridCell, GridCellWidget } from '@angular/aria/grid';
 import { cn } from '@semantic-components/ui';
+import { Temporal } from '@js-temporal/polyfill';
 
 interface MonthInfo {
   label: string;
@@ -91,16 +92,18 @@ export class ScCalendarMonthView {
     ];
     const currentMonth = this.selectedMonth();
     const year = this.year();
-    const today = new Date();
+    const today = Temporal.Now.plainDateISO();
 
-    return monthNames.map((name, index) => ({
-      label: name,
-      value: index,
-      isCurrentMonth:
-        index === today.getMonth() && year === today.getFullYear(),
-      isSelected: index === currentMonth,
-      selected: signal(index === currentMonth),
-    }));
+    return monthNames.map((name, index) => {
+      const month = index + 1; // 1-based
+      return {
+        label: name,
+        value: month,
+        isCurrentMonth: month === today.month && year === today.year,
+        isSelected: month === currentMonth,
+        selected: signal(month === currentMonth),
+      };
+    });
   });
 
   protected readonly monthRows = computed((): MonthInfo[][] => {
@@ -144,7 +147,7 @@ export class ScCalendarMonthView {
     const month = Number(monthAttr);
 
     // Only handle edge cases where we need to scroll to prev/next year
-    if (month > 2 && month < 9) return; // Middle months, let grid handle it
+    if (month > 3 && month < 10) return; // Middle months, let grid handle it
 
     const arrowLeft = event.key === 'ArrowLeft';
     const arrowRight = event.key === 'ArrowRight';
@@ -152,12 +155,12 @@ export class ScCalendarMonthView {
     const arrowDown = event.key === 'ArrowDown';
 
     // First row (Jan, Feb, Mar) + arrow up, or January + arrow left
-    if ((month === 0 && arrowLeft) || (month <= 2 && arrowUp)) {
+    if ((month === 1 && arrowLeft) || (month <= 3 && arrowUp)) {
       this.scrollUp();
     }
 
     // Last row (Oct, Nov, Dec) + arrow down, or December + arrow right
-    if ((month === 11 && arrowRight) || (month >= 9 && arrowDown)) {
+    if ((month === 12 && arrowRight) || (month >= 10 && arrowDown)) {
       this.scrollDown();
     }
   }

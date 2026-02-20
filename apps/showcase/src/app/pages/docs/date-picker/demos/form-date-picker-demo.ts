@@ -4,6 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScDatePicker } from '@semantic-components/ui-lab';
 
 @Component({
@@ -33,7 +34,7 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDatePickerDemo {
-  readonly dob = signal<Date | undefined>(undefined);
-  readonly appointment = signal<Date | undefined>(undefined);
-  readonly today = new Date();
+  readonly dob = signal<Temporal.PlainDate | undefined>(undefined);
+  readonly appointment = signal<Temporal.PlainDate | undefined>(undefined);
+  readonly today = Temporal.Now.plainDateISO();
 }

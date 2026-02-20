@@ -29,6 +29,7 @@ export class BasicDatePickerDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScDatePicker } from '@semantic-components/ui-lab';
 
 @Component({
@@ -38,7 +39,7 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
     <sc-date-picker [(value)]="selectedDate" />
     @if (selectedDate()) {
       <p class="text-sm text-muted-foreground mt-4">
-        Selected: {{ selectedDate()?.toLocaleDateString() }}
+        Selected: {{ selectedDate()?.toLocaleString() }}
       </p>
     }
   \`,
@@ -46,6 +47,6 @@ import { ScDatePicker } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicDatePickerDemo {
-  readonly selectedDate = signal<Date | undefined>(undefined);
+  readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);
 }`;
 }

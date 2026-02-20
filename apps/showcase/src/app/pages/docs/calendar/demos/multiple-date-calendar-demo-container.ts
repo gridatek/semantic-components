@@ -29,6 +29,7 @@ export class MultipleDateCalendarDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendar } from '@semantic-components/ui-lab';
 
 @Component({
@@ -56,11 +57,11 @@ import { ScCalendar } from '@semantic-components/ui-lab';
               </button>
             </div>
             <div class="flex flex-wrap gap-2">
-              @for (date of selectedDates(); track date.getTime()) {
+              @for (date of selectedDates(); track date.toString()) {
                 <span
                   class="inline-flex items-center gap-2 px-3 py-1 text-sm rounded-md border bg-background"
                 >
-                  {{ date.toLocaleDateString() }}
+                  {{ date.toLocaleString() }}
                   <button
                     type="button"
                     class="hover:text-destructive"
@@ -86,15 +87,15 @@ import { ScCalendar } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultipleDateCalendarDemo {
-  readonly selectedDates = signal<Date[]>([]);
+  readonly selectedDates = signal<Temporal.PlainDate[]>([]);
 
   clearSelection(): void {
     this.selectedDates.set([]);
   }
 
-  removeDate(dateToRemove: Date): void {
+  removeDate(dateToRemove: Temporal.PlainDate): void {
     this.selectedDates.update((dates) =>
-      dates.filter((d) => d.getTime() !== dateToRemove.getTime()),
+      dates.filter((d) => !d.equals(dateToRemove)),
     );
   }
 }`;

@@ -4,6 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendar } from '@semantic-components/ui-lab';
 
 @Component({
@@ -24,7 +25,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
               <p class="text-sm font-medium">Selected Date</p>
               <p class="text-sm text-muted-foreground">
                 {{
-                  date.toLocaleDateString('en-US', {
+                  date.toLocaleString('en-US', {
                     weekday: 'long',
                     year: 'numeric',
                     month: 'long',
@@ -55,7 +56,7 @@ import { ScCalendar } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleDateCalendarDemo {
-  readonly selectedDate = signal<Date | undefined>(undefined);
+  readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);
 
   clearSelection(): void {
     this.selectedDate.set(undefined);

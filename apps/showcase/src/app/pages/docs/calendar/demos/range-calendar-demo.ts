@@ -5,6 +5,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScDateRange, ScCalendar } from '@semantic-components/ui-lab';
 
 @Component({
@@ -33,14 +34,14 @@ import { ScDateRange, ScCalendar } from '@semantic-components/ui-lab';
               <div>
                 <p class="text-xs text-muted-foreground mb-1">From</p>
                 <p class="text-sm">
-                  {{ selectedRange().from?.toLocaleDateString() }}
+                  {{ selectedRange().from?.toLocaleString() }}
                 </p>
               </div>
               <div>
                 <p class="text-xs text-muted-foreground mb-1">To</p>
                 <p class="text-sm">
                   @if (selectedRange().to) {
-                    {{ selectedRange().to?.toLocaleDateString() }}
+                    {{ selectedRange().to?.toLocaleString() }}
                   } @else {
                     <span class="text-muted-foreground">Not selected</span>
                   }
@@ -76,8 +77,7 @@ export class RangeCalendarDemo {
   readonly dayCount = computed(() => {
     const range = this.selectedRange();
     if (range.from && range.to) {
-      const diff = range.to.getTime() - range.from.getTime();
-      return Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
+      return range.from.until(range.to).days + 1;
     }
     return null;
   });

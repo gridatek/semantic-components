@@ -8,6 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendarDayView } from './calendar-day-view';
 import { ScCalendarMonthView } from './calendar-month-view';
 import { ScCalendarYearView } from './calendar-year-view';
@@ -17,11 +18,15 @@ export type ScCalendarMode = 'single' | 'multiple' | 'range';
 export type ScCalendarViewMode = 'day' | 'month' | 'year';
 
 export interface ScDateRange {
-  from: Date | undefined;
-  to: Date | undefined;
+  from: Temporal.PlainDate | undefined;
+  to: Temporal.PlainDate | undefined;
 }
 
-export type ScCalendarValue = Date | Date[] | ScDateRange | undefined;
+export type ScCalendarValue =
+  | Temporal.PlainDate
+  | Temporal.PlainDate[]
+  | ScDateRange
+  | undefined;
 
 @Component({
   selector: 'sc-calendar',
@@ -69,8 +74,8 @@ export type ScCalendarValue = Date | Date[] | ScDateRange | undefined;
         }
         @case ('month') {
           <sc-calendar-month-view
-            [year]="viewDate().getFullYear()"
-            [selectedMonth]="viewDate().getMonth()"
+            [year]="viewDate().year"
+            [selectedMonth]="viewDate().month"
             (monthSelected)="selectMonth($event)"
             (yearScrollUp)="previousYear()"
             (yearScrollDown)="nextYear()"
@@ -79,7 +84,7 @@ export type ScCalendarValue = Date | Date[] | ScDateRange | undefined;
         @case ('year') {
           <sc-calendar-year-view
             [decadeStart]="decadeStart()"
-            [selectedYear]="viewDate().getFullYear()"
+            [selectedYear]="viewDate().year"
             (yearSelected)="selectYear($event)"
             (decadeScrollUp)="previousDecade()"
             (decadeScrollDown)="nextDecade()"
@@ -94,18 +99,18 @@ export type ScCalendarValue = Date | Date[] | ScDateRange | undefined;
 export class ScCalendar {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly mode = input<ScCalendarMode>('single');
-  readonly disabled = input<Date[]>([]);
-  readonly minDate = input<Date | undefined>(undefined);
-  readonly maxDate = input<Date | undefined>(undefined);
+  readonly disabled = input<Temporal.PlainDate[]>([]);
+  readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
+  readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
 
   readonly value = model<ScCalendarValue>(undefined);
 
   readonly weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-  protected readonly viewDate = signal(new Date());
+  protected readonly viewDate = signal(Temporal.Now.plainDateISO());
   protected readonly viewMode = signal<ScCalendarViewMode>('day');
   protected readonly decadeStart = signal<number>(
-    Math.floor(new Date().getFullYear() / 12) * 12,
+    Math.floor(Temporal.Now.plainDateISO().year / 12) * 12,
   );
 
   protected readonly class = computed(() => cn('p-3', this.classInput()));
@@ -120,19 +125,11 @@ export class ScCalendar {
     }
 
     if (mode === 'month') {
-      return date.getFullYear().toString();
+      return date.year.toString();
     }
 
-    return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
   });
-
-  private isSameDay(a: Date, b: Date): boolean {
-    return (
-      a.getDate() === b.getDate() &&
-      a.getMonth() === b.getMonth() &&
-      a.getFullYear() === b.getFullYear()
-    );
-  }
 
   protected previousAriaLabel(): string {
     const mode = this.viewMode();
@@ -161,16 +158,16 @@ export class ScCalendar {
         : 'Year view - select a year';
   }
 
-  protected selectDate(date: Date): void {
+  protected selectDate(date: Temporal.PlainDate): void {
     const mode = this.mode();
 
     if (mode === 'single') {
       this.value.set(date);
     } else if (mode === 'multiple') {
-      const current = (this.value() as Date[] | undefined) ?? [];
-      const exists = current.some((d) => this.isSameDay(d, date));
+      const current = (this.value() as Temporal.PlainDate[] | undefined) ?? [];
+      const exists = current.some((d) => d.equals(date));
       if (exists) {
-        this.value.set(current.filter((d) => !this.isSameDay(d, date)));
+        this.value.set(current.filter((d) => !d.equals(date)));
       } else {
         this.value.set([...current, date]);
       }
@@ -182,7 +179,7 @@ export class ScCalendar {
       if (!range.from || (range.from && range.to)) {
         this.value.set({ from: date, to: undefined });
       } else {
-        if (date < range.from) {
+        if (Temporal.PlainDate.compare(date, range.from) < 0) {
           this.value.set({ from: date, to: range.from });
         } else {
           this.value.set({ from: range.from, to: date });
@@ -198,7 +195,7 @@ export class ScCalendar {
       this.viewMode.set('month');
     } else if (current === 'month') {
       this.viewMode.set('year');
-      const currentYear = this.viewDate().getFullYear();
+      const currentYear = this.viewDate().year;
       this.decadeStart.set(Math.floor(currentYear / 12) * 12);
     }
   }
@@ -219,31 +216,19 @@ export class ScCalendar {
   }
 
   protected previousMonth(): void {
-    const current = this.viewDate();
-    this.viewDate.set(
-      new Date(current.getFullYear(), current.getMonth() - 1, 1),
-    );
+    this.viewDate.update((d) => d.subtract({ months: 1 }).with({ day: 1 }));
   }
 
   protected nextMonth(): void {
-    const current = this.viewDate();
-    this.viewDate.set(
-      new Date(current.getFullYear(), current.getMonth() + 1, 1),
-    );
+    this.viewDate.update((d) => d.add({ months: 1 }).with({ day: 1 }));
   }
 
   protected previousYear(): void {
-    const current = this.viewDate();
-    this.viewDate.set(
-      new Date(current.getFullYear() - 1, current.getMonth(), 1),
-    );
+    this.viewDate.update((d) => d.subtract({ years: 1 }).with({ day: 1 }));
   }
 
   protected nextYear(): void {
-    const current = this.viewDate();
-    this.viewDate.set(
-      new Date(current.getFullYear() + 1, current.getMonth(), 1),
-    );
+    this.viewDate.update((d) => d.add({ years: 1 }).with({ day: 1 }));
   }
 
   protected previousDecade(): void {
@@ -257,13 +242,13 @@ export class ScCalendar {
   // Selection handlers - return to previous view
   protected selectMonth(month: number): void {
     const current = this.viewDate();
-    this.viewDate.set(new Date(current.getFullYear(), month, 1));
+    this.viewDate.set(new Temporal.PlainDate(current.year, month, 1));
     this.viewMode.set('day');
   }
 
   protected selectYear(year: number): void {
     const current = this.viewDate();
-    this.viewDate.set(new Date(year, current.getMonth(), 1));
+    this.viewDate.set(new Temporal.PlainDate(year, current.month, 1));
     this.viewMode.set('month');
   }
 }
