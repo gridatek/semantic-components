@@ -22,8 +22,7 @@ interface DayInfo {
 }
 
 @Component({
-  selector: 'sc-calendar-day-view',
-  host: { class: 'block' },
+  selector: '[scCalendarDayView]',
   imports: [Grid, GridRow, GridCell, GridCellWidget],
   template: `
     <table

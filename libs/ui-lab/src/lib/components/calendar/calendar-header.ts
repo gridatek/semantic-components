@@ -12,8 +12,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'sc-calendar-header',
-  host: { class: 'block' },
+  selector: '[scCalendarHeader]',
   imports: [ScButton, SiChevronLeftIcon, SiChevronRightIcon],
   template: `
     <div class="relative flex items-center justify-center pt-1">

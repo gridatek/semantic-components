@@ -21,8 +21,7 @@ interface MonthInfo {
 }
 
 @Component({
-  selector: 'sc-calendar-month-view',
-  host: { class: 'block' },
+  selector: '[scCalendarMonthView]',
   imports: [Grid, GridRow, GridCell, GridCellWidget],
   template: `
     <table

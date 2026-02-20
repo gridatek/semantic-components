@@ -45,7 +45,8 @@ export type ScCalendarValue =
   template: `
     <div class="flex flex-col gap-4">
       <!-- Header with navigation -->
-      <sc-calendar-header
+      <div
+        scCalendarHeader
         [label]="monthYearLabel()"
         [previousLabel]="previousAriaLabel()"
         [nextLabel]="nextAriaLabel()"
@@ -54,12 +55,13 @@ export type ScCalendarValue =
         (previous)="handlePrevious()"
         (next)="handleNext()"
         (headerClick)="handleHeaderClick()"
-      />
+      ></div>
 
       <!-- View content -->
       @switch (viewMode()) {
         @case ('day') {
-          <sc-calendar-day-view
+          <div
+            scCalendarDayView
             [viewDate]="viewDate()"
             [mode]="mode()"
             [value]="value()"
@@ -70,25 +72,27 @@ export type ScCalendarValue =
             (dateSelected)="selectDate($event)"
             (monthScrollUp)="previousMonth()"
             (monthScrollDown)="nextMonth()"
-          />
+          ></div>
         }
         @case ('month') {
-          <sc-calendar-month-view
+          <div
+            scCalendarMonthView
             [year]="viewDate().year"
             [selectedMonth]="viewDate().month"
             (monthSelected)="selectMonth($event)"
             (yearScrollUp)="previousYear()"
             (yearScrollDown)="nextYear()"
-          />
+          ></div>
         }
         @case ('year') {
-          <sc-calendar-year-view
+          <div
+            scCalendarYearView
             [decadeStart]="decadeStart()"
             [selectedYear]="viewDate().year"
             (yearSelected)="selectYear($event)"
             (decadeScrollUp)="previousDecade()"
             (decadeScrollDown)="nextDecade()"
-          />
+          ></div>
         }
       }
     </div>
