@@ -20,7 +20,7 @@ import {
         scButton
         variant="outline"
         size="icon-sm"
-        class="absolute left-1 opacity-50 hover:opacity-100 transition-opacity"
+        class="absolute left-1"
         (click)="previous.emit()"
         [attr.aria-label]="previousLabel()"
       >
@@ -40,7 +40,7 @@ import {
         scButton
         variant="outline"
         size="icon-sm"
-        class="absolute right-1 opacity-50 hover:opacity-100 transition-opacity"
+        class="absolute right-1"
         (click)="next.emit()"
         [attr.aria-label]="nextLabel()"
       >
