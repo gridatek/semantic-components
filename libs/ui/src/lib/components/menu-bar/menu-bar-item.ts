@@ -60,7 +60,6 @@ export class ScMenuBarItem {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   private readonly menuItem = inject(MenuItem);
-  protected readonly submenuOpen = computed(() => !!this.menuItem.expanded());
   protected readonly submenuPortal = contentChild(ScMenuPortal);
 
   private readonly scMenuBar = inject(ScMenuBar);
