@@ -146,6 +146,34 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <div scCodeViewerContent [code]="step5Code" language="bash"></div>
         </div>
       </section>
+
+      <div scSeparator></div>
+
+      <section class="space-y-4">
+        <h2 toc class="text-xl font-semibold tracking-tight">
+          5. Install Temporal polyfill
+        </h2>
+        <p class="text-muted-foreground">
+          Some components rely on the
+          <a
+            href="https://tc39.es/proposal-temporal/docs/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-foreground underline underline-offset-4"
+          >
+            Temporal API
+          </a>
+          for date and time handling. Until browsers fully support it natively,
+          install the polyfill as a temporary solution.
+        </p>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>terminal</span>
+            <button scCopyButton [value]="step6Code"></button>
+          </div>
+          <div scCodeViewerContent [code]="step6Code" language="bash"></div>
+        </div>
+      </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -166,4 +194,6 @@ export default class PrerequisitesPage {
     'npm install class-variance-authority clsx tailwind-merge tw-animate-css';
 
   readonly step5Code = 'npm install @semantic-icons/lucide-icons';
+
+  readonly step6Code = 'npm install @js-temporal/polyfill';
 }
