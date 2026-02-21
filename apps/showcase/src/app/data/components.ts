@@ -512,9 +512,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'menu',
     description: 'Displays a menu with a list of actions or options.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Navigation',
-    hidden: true,
   },
   {
     name: 'Mention Input',
