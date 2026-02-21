@@ -27,7 +27,7 @@ export * from './lightbox';
 export * from './marquee';
 export * from './masonry-grid';
 export * from './mention-input';
-export * from './menu';
+
 export * from './multi-select';
 export * from './navbar';
 export * from './navigation-menu';

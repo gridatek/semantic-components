@@ -3,15 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScMenu,
+  ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
   ScMenuProvider,
   ScMenuTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiCreditCardIcon,
   SiLogOutIcon,
@@ -26,6 +27,7 @@ import {
   imports: [
     ScButton,
     ScMenu,
+    ScMenuContent,
     ScMenuItem,
     ScMenuPortal,
     ScMenuSeparator,
@@ -54,85 +56,100 @@ import {
       </button>
       <ng-template scMenuPortal>
         <div scMenu class="w-56">
-          <div class="flex items-center gap-2 px-2 py-1.5" role="presentation">
-            <img
-              src="https://github.com/shadcn.png"
-              alt=""
-              class="size-8 rounded-full"
-            />
-            <div class="flex flex-col">
-              <span class="text-sm font-semibold">shadcn</span>
-              <span class="text-xs text-muted-foreground">
-                m&#64;example.com
+          <ng-template scMenuContent>
+            <div
+              class="flex items-center gap-2 px-2 py-1.5"
+              role="presentation"
+            >
+              <img
+                src="https://github.com/shadcn.png"
+                alt=""
+                class="size-8 rounded-full"
+              />
+              <div class="flex flex-col">
+                <span class="text-sm font-semibold">shadcn</span>
+                <span class="text-xs text-muted-foreground">
+                  m&#64;example.com
+                </span>
+              </div>
+            </div>
+            <div scMenuSeparator></div>
+            <div scMenuItem value="Profile">
+              <svg
+                siUserIcon
+                class="text-muted-foreground size-4"
+                aria-hidden="true"
+              ></svg>
+              <span class="flex-1">Profile</span>
+              <span
+                class="ml-auto text-xs tracking-widest text-muted-foreground"
+              >
+                ⇧⌘P
               </span>
             </div>
-          </div>
-          <div scMenuSeparator></div>
-          <div scMenuItem value="Profile">
-            <svg
-              siUserIcon
-              class="text-muted-foreground size-4"
-              aria-hidden="true"
-            ></svg>
-            <span class="flex-1">Profile</span>
-            <span class="ml-auto text-xs tracking-widest text-muted-foreground">
-              ⇧⌘P
-            </span>
-          </div>
-          <div scMenuItem value="Billing">
-            <svg
-              siCreditCardIcon
-              class="text-muted-foreground size-4"
-              aria-hidden="true"
-            ></svg>
-            <span class="flex-1">Billing</span>
-            <span class="ml-auto text-xs tracking-widest text-muted-foreground">
-              ⌘B
-            </span>
-          </div>
-          <div scMenuItem value="Settings">
-            <svg
-              siSettingsIcon
-              class="text-muted-foreground size-4"
-              aria-hidden="true"
-            ></svg>
-            <span class="flex-1">Settings</span>
-            <span class="ml-auto text-xs tracking-widest text-muted-foreground">
-              ⌘S
-            </span>
-          </div>
-          <div scMenuSeparator></div>
-          <div scMenuItem value="Team">
-            <svg
-              siUsersIcon
-              class="text-muted-foreground size-4"
-              aria-hidden="true"
-            ></svg>
-            <span class="flex-1">Team</span>
-          </div>
-          <div scMenuItem value="New Team">
-            <svg
-              siCirclePlusIcon
-              class="text-muted-foreground size-4"
-              aria-hidden="true"
-            ></svg>
-            <span class="flex-1">New Team</span>
-            <span class="ml-auto text-xs tracking-widest text-muted-foreground">
-              ⌘+T
-            </span>
-          </div>
-          <div scMenuSeparator></div>
-          <div
-            scMenuItem
-            value="Log out"
-            class="text-destructive hover:bg-destructive/10 data-[active=true]:bg-destructive/10"
-          >
-            <svg siLogOutIcon class="size-4" aria-hidden="true"></svg>
-            <span class="flex-1">Log out</span>
-            <span class="ml-auto text-xs tracking-widest text-muted-foreground">
-              ⇧⌘Q
-            </span>
-          </div>
+            <div scMenuItem value="Billing">
+              <svg
+                siCreditCardIcon
+                class="text-muted-foreground size-4"
+                aria-hidden="true"
+              ></svg>
+              <span class="flex-1">Billing</span>
+              <span
+                class="ml-auto text-xs tracking-widest text-muted-foreground"
+              >
+                ⌘B
+              </span>
+            </div>
+            <div scMenuItem value="Settings">
+              <svg
+                siSettingsIcon
+                class="text-muted-foreground size-4"
+                aria-hidden="true"
+              ></svg>
+              <span class="flex-1">Settings</span>
+              <span
+                class="ml-auto text-xs tracking-widest text-muted-foreground"
+              >
+                ⌘S
+              </span>
+            </div>
+            <div scMenuSeparator></div>
+            <div scMenuItem value="Team">
+              <svg
+                siUsersIcon
+                class="text-muted-foreground size-4"
+                aria-hidden="true"
+              ></svg>
+              <span class="flex-1">Team</span>
+            </div>
+            <div scMenuItem value="New Team">
+              <svg
+                siCirclePlusIcon
+                class="text-muted-foreground size-4"
+                aria-hidden="true"
+              ></svg>
+              <span class="flex-1">New Team</span>
+              <span
+                class="ml-auto text-xs tracking-widest text-muted-foreground"
+              >
+                ⌘+T
+              </span>
+            </div>
+            <div scMenuSeparator></div>
+            <div
+              scMenuItem
+              value="Log out"
+              class="text-destructive hover:bg-destructive/10 data-[active=true]:bg-destructive/10"
+            >
+              <svg siLogOutIcon class="size-4" aria-hidden="true"></svg>
+              <span class="flex-1">Log out</span>
+              <span
+                class="ml-auto text-xs tracking-widest text-muted-foreground"
+              >
+                ⇧⌘Q
+              </span>
+            </div>
+          </ng-template>
         </div>
       </ng-template>
     </div>
