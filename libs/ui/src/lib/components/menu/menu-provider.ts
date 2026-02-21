@@ -32,6 +32,13 @@ import { ScMenuPortal } from './menu-portal';
             overlayY: 'top',
             offsetY: 4,
           },
+          {
+            originX: 'start',
+            originY: 'top',
+            overlayX: 'start',
+            overlayY: 'bottom',
+            offsetY: -4,
+          },
         ]"
         cdkAttachPopoverAsChild
       >
