@@ -25,6 +25,7 @@ export * from './kbd';
 export * from './label';
 export * from './link';
 export * from './menu';
+export * from './menu-bar';
 export * from './pagination';
 export * from './popover';
 export * from './progress';
