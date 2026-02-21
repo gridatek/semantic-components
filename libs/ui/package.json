@@ -16,7 +16,14 @@
     "@angular/core": ">=21.1.0",
     "class-variance-authority": ">=0.7.1",
     "clsx": ">=2.1.1",
-    "tailwind-merge": ">=3.4.0"
+    "tailwind-merge": ">=3.4.0",
+    "@angular/aria": ">=21.1.5",
+    "@semantic-icons/lucide-icons": ">=0.58.0",
+    "@angular/common": ">=21.1.5",
+    "@angular/cdk": ">=21.1.5",
+    "@js-temporal/polyfill": ">=0.5.1",
+    "@angular/forms": ">=21.1.5",
+    "rxjs": ">=7.8.2"
   },
   "exports": {
     "./styles": {
