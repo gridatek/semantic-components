@@ -2242,6 +2242,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/menu-bar',
+    children: [
+      {
+        path: 'menu-bar-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu-bar/demos/menu-bar-demo').then(
+            (m) => m.MenuBarDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/menu',
     children: [
       {

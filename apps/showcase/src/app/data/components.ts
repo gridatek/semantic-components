@@ -516,6 +516,14 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Navigation',
   },
   {
+    name: 'Menu Bar',
+    path: 'menu-bar',
+    description: 'A horizontal menu bar with keyboard navigation support.',
+    status: 'Experimental',
+    library: 'ui',
+    category: 'Navigation',
+  },
+  {
     name: 'Mention Input',
     path: 'mention-input',
     description: 'An input with mention suggestions.',
