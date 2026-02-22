@@ -2362,6 +2362,13 @@ export const demosRoutes: Route[] = [
             (m) => m.BasicNativeSliderDemo,
           ),
       },
+      {
+        path: 'custom-color-native-slider-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-slider/demos/custom-color-native-slider-demo').then(
+            (m) => m.CustomColorNativeSliderDemo,
+          ),
+      },
     ],
   },
   {
