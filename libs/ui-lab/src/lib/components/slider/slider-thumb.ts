@@ -64,10 +64,12 @@ export class ScSliderThumb {
   }
 
   protected onMouseDown(event: MouseEvent): void {
+    event.stopPropagation();
     this.mouseDown.emit(event);
   }
 
   protected onTouchStart(event: TouchEvent): void {
+    event.stopPropagation();
     this.touchStart.emit(event);
   }
 }

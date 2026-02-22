@@ -23,6 +23,8 @@ import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
     'data-slot': 'range-slider',
     '[class]': 'class()',
     '[attr.data-disabled]': 'disabled() || null',
+    '(mousedown)': 'onTrackMouseDown($event)',
+    '(touchstart)': 'onTrackTouchStart($event)',
   },
   template: `
     <div scSliderTrack>
@@ -158,6 +160,43 @@ export class ScRangeSlider {
           }
         });
     });
+  }
+
+  protected onTrackMouseDown(event: MouseEvent): void {
+    if (this.disabled()) return;
+    event.preventDefault();
+    const thumb = this.getClosestThumb(event.clientX);
+    if (thumb === 'min') {
+      this.updateMinValueFromPosition(event.clientX);
+      this.isDraggingMin.set(true);
+    } else {
+      this.updateMaxValueFromPosition(event.clientX);
+      this.isDraggingMax.set(true);
+    }
+  }
+
+  protected onTrackTouchStart(event: TouchEvent): void {
+    if (this.disabled()) return;
+    event.preventDefault();
+    const touch = event.touches[0];
+    if (touch) {
+      const thumb = this.getClosestThumb(touch.clientX);
+      if (thumb === 'min') {
+        this.updateMinValueFromPosition(touch.clientX);
+        this.isDraggingMin.set(true);
+      } else {
+        this.updateMaxValueFromPosition(touch.clientX);
+        this.isDraggingMax.set(true);
+      }
+    }
+  }
+
+  private getClosestThumb(clientX: number): 'min' | 'max' {
+    const rect = this.elementRef.nativeElement.getBoundingClientRect();
+    const percentage = ((clientX - rect.left) / rect.width) * 100;
+    const minDist = Math.abs(percentage - this.minPercentage());
+    const maxDist = Math.abs(percentage - this.maxPercentage());
+    return minDist <= maxDist ? 'min' : 'max';
   }
 
   protected onMinThumbMouseDown(event: MouseEvent): void {

@@ -26,6 +26,8 @@ import { ScSliderThumb } from './slider-thumb';
     'data-slot': 'slider',
     '[class]': 'class()',
     '[attr.data-disabled]': 'disabled() || null',
+    '(mousedown)': 'onTrackMouseDown($event)',
+    '(touchstart)': 'onTrackTouchStart($event)',
   },
   template: `
     <div scSliderTrack>
@@ -111,6 +113,23 @@ export class ScSlider implements FormValueControl<number> {
           }
         });
     });
+  }
+
+  protected onTrackMouseDown(event: MouseEvent): void {
+    if (this.disabled()) return;
+    event.preventDefault();
+    this.updateValueFromPosition(event.clientX);
+    this.isDragging.set(true);
+  }
+
+  protected onTrackTouchStart(event: TouchEvent): void {
+    if (this.disabled()) return;
+    event.preventDefault();
+    const touch = event.touches[0];
+    if (touch) {
+      this.updateValueFromPosition(touch.clientX);
+    }
+    this.isDragging.set(true);
   }
 
   protected onThumbMouseDown(event: MouseEvent): void {
