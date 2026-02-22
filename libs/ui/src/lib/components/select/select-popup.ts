@@ -10,19 +10,19 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[scSelectContent]',
+  selector: 'div[scSelectPopup]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'select-content',
+    'data-slot': 'select-popup',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectContent {
+export class ScSelectPopup {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly combobox = inject(Combobox);

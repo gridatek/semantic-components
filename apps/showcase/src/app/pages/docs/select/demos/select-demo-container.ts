@@ -38,7 +38,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import {
   ScSelect,
-  ScSelectContent,
+  ScSelectPopup,
   ScSelectItemIcon,
   ScSelectList,
   ScSelectItem,
@@ -51,7 +51,7 @@ import {
   selector: 'app-select-demo',
   imports: [
     ScSelect,
-    ScSelectContent,
+    ScSelectPopup,
     ScSelectItemIcon,
     ScSelectList,
     ScSelectItem,
@@ -103,7 +103,7 @@ import {
         </span>
       </div>
       <ng-template scSelectPortal>
-        <div scSelectContent>
+        <div scSelectPopup>
           <div scSelectList>
             @for (label of labels; track label.value) {
               <div scSelectItem [value]="label.value" [label]="label.value">

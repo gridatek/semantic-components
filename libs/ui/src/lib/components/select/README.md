@@ -21,7 +21,7 @@ A set of components for building accessible select dropdowns following the Singl
 | `ScSelectValue`    | `span[scSelectValue]`         | Display selected value with styling                                                         |
 | `ScSelectItemIcon` | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)          |
 | `ScSelectPortal`   | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                 |
-| `ScSelectContent`  | `div[scSelectContent]`        | Popup container with styling, animation, and visibility                                     |
+| `ScSelectPopup`    | `div[scSelectPopup]`          | Popup container with styling, animation, and visibility                                     |
 | `ScSelectList`     | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                                     |
 | `ScSelectItem`     | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                             |
 
@@ -45,7 +45,7 @@ A set of components for building accessible select dropdowns following the Singl
     </span>
   </div>
   <ng-template scSelectPortal>
-    <div scSelectContent>
+    <div scSelectPopup>
       <div scSelectList>
         @for (option of options; track option.value) {
         <div scSelectItem [value]="option.value" [label]="option.label">{{ option.label }}</div>
@@ -71,11 +71,11 @@ Use `ScSelectItemIcon` for consistent icon styling in items and the value displa
 
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ScSelect, ScSelectContent, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@semantic-components/ui-lab';
+import { ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-example',
-  imports: [ScSelect, ScSelectContent, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue],
+  imports: [ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue],
   template: `
     <div scSelect #select="scSelect" placeholder="Select an option">
       <div scSelectTrigger aria-label="Select">
@@ -84,7 +84,7 @@ import { ScSelect, ScSelectContent, ScSelectItemIcon, ScSelectList, ScSelectItem
         </span>
       </div>
       <ng-template scSelectPortal>
-        <div scSelectContent>
+        <div scSelectPopup>
           <div scSelectList>
             @for (option of options; track option.value) {
               <div scSelectItem [value]="option.value" [label]="option.label">
@@ -221,7 +221,7 @@ ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, expor
 │   ├── ScSelectInput (hidden combobox input) [internal]
 │   └── ScSelectTriggerIcon + SiChevronDownIcon [internal]
 └── ScSelectPortal (ng-template marking lazy overlay content)
-    └── ScSelectContent (popup container with styling and animation)
+    └── ScSelectPopup (popup container with styling and animation)
         └── ScSelectList (wraps Listbox)
             └── ScSelectItem (wraps Option)
                 ├── ScSelectItemIcon (consumer icons) [projected content]
