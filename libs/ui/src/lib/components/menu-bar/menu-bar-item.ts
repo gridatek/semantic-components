@@ -6,10 +6,15 @@ import {
   effect,
   inject,
   input,
+  viewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
+import {
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 import { MenuItem } from '@angular/aria/menu';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
@@ -61,6 +66,7 @@ export class ScMenuBarItem {
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   private readonly menuItem = inject(MenuItem);
   protected readonly submenuPortal = contentChild(ScMenuPortal);
+  private readonly connectedOverlay = viewChild(CdkConnectedOverlay);
 
   private readonly scMenuBar = inject(ScMenuBar);
 
@@ -78,6 +84,14 @@ export class ScMenuBarItem {
       const menu = this.submenuPortal()?.menu();
       if (menu) {
         signalSetFn(this.menuItem.submenu[SIGNAL], menu);
+      }
+    });
+
+    // Force overlay to recalculate position when menu item expands
+    effect(() => {
+      const expanded = this.menuItem.expanded();
+      if (expanded) {
+        this.connectedOverlay()?.overlayRef?.updatePosition();
       }
     });
   }
