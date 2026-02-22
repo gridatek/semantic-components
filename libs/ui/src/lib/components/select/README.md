@@ -14,16 +14,19 @@ A set of components for building accessible select dropdowns following the Singl
 
 ## Components
 
-| Component          | Selector                      | Responsibility                                                                              |
-| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------- |
-| `ScSelect`         | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<string>` |
-| `ScSelectTrigger`  | `div[scSelectTrigger]`        | Trigger button, internally renders hidden input and chevron icon                            |
-| `ScSelectValue`    | `span[scSelectValue]`         | Display selected value with styling                                                         |
-| `ScSelectItemIcon` | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)          |
-| `ScSelectPortal`   | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                 |
-| `ScSelectPopup`    | `div[scSelectPopup]`          | Popup container with styling, animation, and visibility                                     |
-| `ScSelectList`     | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                                     |
-| `ScSelectItem`     | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                             |
+| Component            | Selector                      | Responsibility                                                                              |
+| -------------------- | ----------------------------- | ------------------------------------------------------------------------------------------- |
+| `ScSelect`           | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<string>` |
+| `ScSelectTrigger`    | `div[scSelectTrigger]`        | Trigger button, internally renders hidden input and chevron icon                            |
+| `ScSelectValue`      | `span[scSelectValue]`         | Display selected value with styling                                                         |
+| `ScSelectItemIcon`   | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)          |
+| `ScSelectPortal`     | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                 |
+| `ScSelectPopup`      | `div[scSelectPopup]`          | Popup container with styling, animation, and visibility                                     |
+| `ScSelectList`       | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                                     |
+| `ScSelectItem`       | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                             |
+| `ScSelectGroup`      | `div[scSelectGroup]`          | Groups related options together with vertical layout                                        |
+| `ScSelectGroupLabel` | `div[scSelectGroupLabel]`     | Label for a group of options                                                                |
+| `ScSelectSeparator`  | `[scSelectSeparator]`         | Visual separator between groups or items                                                    |
 
 ### Internal Components (not exported)
 
@@ -67,11 +70,42 @@ Use `ScSelectItemIcon` for consistent icon styling in items and the value displa
 </div>
 ```
 
+### With Groups
+
+Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize options into labeled groups.
+
+```html
+<div scSelect #select="scSelect" placeholder="Select a food">
+  <div scSelectTrigger aria-label="Food dropdown">
+    <span scSelectValue>
+      <span class="truncate">{{ select.displayValue() }}</span>
+    </span>
+  </div>
+  <ng-template scSelectPortal>
+    <div scSelectPopup>
+      <div scSelectList>
+        <div scSelectGroup>
+          <div scSelectGroupLabel>Fruits</div>
+          <div scSelectItem value="Apple" label="Apple">Apple</div>
+          <div scSelectItem value="Banana" label="Banana">Banana</div>
+        </div>
+        <div scSelectSeparator></div>
+        <div scSelectGroup>
+          <div scSelectGroupLabel>Vegetables</div>
+          <div scSelectItem value="Carrot" label="Carrot">Carrot</div>
+          <div scSelectItem value="Spinach" label="Spinach">Spinach</div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+```
+
 ### Component
 
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@semantic-components/ui-lab';
+import { ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-example',
@@ -201,6 +235,24 @@ Sets `aria-hidden="true"` automatically.
 | `label`  | `string` | The label displayed for the option |
 | `class`  | `string` | Additional CSS classes             |
 
+### ScSelectGroup
+
+| Property | Type     | Description            |
+| -------- | -------- | ---------------------- |
+| `class`  | `string` | Additional CSS classes |
+
+### ScSelectGroupLabel
+
+| Property | Type     | Description            |
+| -------- | -------- | ---------------------- |
+| `class`  | `string` | Additional CSS classes |
+
+### ScSelectSeparator
+
+| Property | Type     | Description            |
+| -------- | -------- | ---------------------- |
+| `class`  | `string` | Additional CSS classes |
+
 ### All Components
 
 All components accept a `class` input for custom styling:
@@ -223,10 +275,14 @@ ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, expor
 └── ScSelectPortal (ng-template marking lazy overlay content)
     └── ScSelectPopup (popup container with styling and animation)
         └── ScSelectList (wraps Listbox)
-            └── ScSelectItem (wraps Option)
-                ├── ScSelectItemIcon (consumer icons) [projected content]
-                ├── [projected content]
-                └── ScSelectItemIndicator + SiCheckIcon [internal]
+            ├── ScSelectGroup (groups related options)
+            │   ├── ScSelectGroupLabel (label for the group)
+            │   └── ScSelectItem (wraps Option)
+            │       ├── ScSelectItemIcon (consumer icons) [projected content]
+            │       ├── [projected content]
+            │       └── ScSelectItemIndicator + SiCheckIcon [internal]
+            ├── ScSelectSeparator (visual divider between groups)
+            └── ScSelectItem (ungrouped option)
 ```
 
 ## Dependencies
