@@ -1,8 +1,8 @@
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   forwardRef,
   inject,
   input,
@@ -26,7 +26,6 @@ import { ScSelectTriggerIcon } from './select-trigger-icon';
     />
     <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
   `,
-  hostDirectives: [CdkOverlayOrigin],
   host: {
     'data-slot': 'select-trigger',
     '[class]': 'class()',
@@ -35,7 +34,7 @@ import { ScSelectTriggerIcon } from './select-trigger-icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelectTrigger {
-  readonly overlayOrigin = inject(CdkOverlayOrigin);
+  readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaLabel = input<string>('', { alias: 'aria-label' });
 

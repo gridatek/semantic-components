@@ -67,7 +67,7 @@ export class ScSelect implements FormValueControl<string> {
   });
   protected readonly selectPortal = contentChild.required(ScSelectPortal);
 
-  readonly origin = computed(() => this.trigger()?.overlayOrigin);
+  readonly origin = computed(() => this.trigger()?.elementRef);
   readonly values = computed(() => this.content()?.values() ?? []);
   readonly displayValue = computed(() => this.value() || this.placeholder());
   protected readonly class = computed(() =>
