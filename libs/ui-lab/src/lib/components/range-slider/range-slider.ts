@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -7,7 +8,6 @@ import {
   inject,
   input,
   model,
-  OnInit,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -64,7 +64,7 @@ import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScRangeSlider implements OnInit {
+export class ScRangeSlider {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -121,41 +121,43 @@ export class ScRangeSlider implements OnInit {
     ),
   );
 
-  ngOnInit(): void {
-    merge(
-      fromEvent<MouseEvent>(document, 'mousemove'),
-      fromEvent<MouseEvent>(document, 'mouseup'),
-      fromEvent<TouchEvent>(document, 'touchmove'),
-      fromEvent<TouchEvent>(document, 'touchend'),
-    )
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((event) => {
-        if (!this.isDraggingMin() && !this.isDraggingMax()) return;
+  constructor() {
+    afterNextRender(() => {
+      merge(
+        fromEvent<MouseEvent>(document, 'mousemove'),
+        fromEvent<MouseEvent>(document, 'mouseup'),
+        fromEvent<TouchEvent>(document, 'touchmove'),
+        fromEvent<TouchEvent>(document, 'touchend'),
+      )
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((event) => {
+          if (!this.isDraggingMin() && !this.isDraggingMax()) return;
 
-        if (event.type === 'mouseup' || event.type === 'touchend') {
-          this.isDraggingMin.set(false);
-          this.isDraggingMax.set(false);
-          return;
-        }
-
-        if (event.type === 'mousemove') {
-          const clientX = (event as MouseEvent).clientX;
-          if (this.isDraggingMin()) {
-            this.updateMinValueFromPosition(clientX);
-          } else if (this.isDraggingMax()) {
-            this.updateMaxValueFromPosition(clientX);
+          if (event.type === 'mouseup' || event.type === 'touchend') {
+            this.isDraggingMin.set(false);
+            this.isDraggingMax.set(false);
+            return;
           }
-        } else if (event.type === 'touchmove') {
-          const touch = (event as TouchEvent).touches[0];
-          if (touch) {
+
+          if (event.type === 'mousemove') {
+            const clientX = (event as MouseEvent).clientX;
             if (this.isDraggingMin()) {
-              this.updateMinValueFromPosition(touch.clientX);
+              this.updateMinValueFromPosition(clientX);
             } else if (this.isDraggingMax()) {
-              this.updateMaxValueFromPosition(touch.clientX);
+              this.updateMaxValueFromPosition(clientX);
+            }
+          } else if (event.type === 'touchmove') {
+            const touch = (event as TouchEvent).touches[0];
+            if (touch) {
+              if (this.isDraggingMin()) {
+                this.updateMinValueFromPosition(touch.clientX);
+              } else if (this.isDraggingMax()) {
+                this.updateMaxValueFromPosition(touch.clientX);
+              }
             }
           }
-        }
-      });
+        });
+    });
   }
 
   protected onMinThumbMouseDown(event: MouseEvent): void {

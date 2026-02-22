@@ -1,4 +1,5 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -7,7 +8,6 @@ import {
   inject,
   input,
   model,
-  OnInit,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -49,7 +49,7 @@ import { ScSliderThumb } from './slider-thumb';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSlider implements OnInit, FormValueControl<number> {
+export class ScSlider implements FormValueControl<number> {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -84,31 +84,33 @@ export class ScSlider implements OnInit, FormValueControl<number> {
     ),
   );
 
-  ngOnInit(): void {
-    merge(
-      fromEvent<MouseEvent>(document, 'mousemove'),
-      fromEvent<MouseEvent>(document, 'mouseup'),
-      fromEvent<TouchEvent>(document, 'touchmove'),
-      fromEvent<TouchEvent>(document, 'touchend'),
-    )
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((event) => {
-        if (!this.isDragging()) return;
+  constructor() {
+    afterNextRender(() => {
+      merge(
+        fromEvent<MouseEvent>(document, 'mousemove'),
+        fromEvent<MouseEvent>(document, 'mouseup'),
+        fromEvent<TouchEvent>(document, 'touchmove'),
+        fromEvent<TouchEvent>(document, 'touchend'),
+      )
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe((event) => {
+          if (!this.isDragging()) return;
 
-        if (event.type === 'mouseup' || event.type === 'touchend') {
-          this.isDragging.set(false);
-          return;
-        }
-
-        if (event.type === 'mousemove') {
-          this.updateValueFromPosition((event as MouseEvent).clientX);
-        } else if (event.type === 'touchmove') {
-          const touch = (event as TouchEvent).touches[0];
-          if (touch) {
-            this.updateValueFromPosition(touch.clientX);
+          if (event.type === 'mouseup' || event.type === 'touchend') {
+            this.isDragging.set(false);
+            return;
           }
-        }
-      });
+
+          if (event.type === 'mousemove') {
+            this.updateValueFromPosition((event as MouseEvent).clientX);
+          } else if (event.type === 'touchmove') {
+            const touch = (event as TouchEvent).touches[0];
+            if (touch) {
+              this.updateValueFromPosition(touch.clientX);
+            }
+          }
+        });
+    });
   }
 
   protected onThumbMouseDown(event: MouseEvent): void {
