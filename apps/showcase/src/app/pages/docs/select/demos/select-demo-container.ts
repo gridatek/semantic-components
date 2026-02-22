@@ -38,6 +38,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import {
   ScSelect,
+  ScSelectContent,
   ScSelectItemIcon,
   ScSelectList,
   ScSelectItem,
@@ -50,6 +51,7 @@ import {
   selector: 'app-select-demo',
   imports: [
     ScSelect,
+    ScSelectContent,
     ScSelectItemIcon,
     ScSelectList,
     ScSelectItem,
@@ -101,38 +103,40 @@ import {
         </span>
       </div>
       <ng-template scSelectPortal>
-        <div scSelectList>
-          @for (label of labels; track label.value) {
-            <div scSelectItem [value]="label.value" [label]="label.value">
-              @switch (label.icon) {
-                @case ('tag') {
-                  <svg scSelectItemIcon siTagIcon></svg>
+        <div scSelectContent>
+          <div scSelectList>
+            @for (label of labels; track label.value) {
+              <div scSelectItem [value]="label.value" [label]="label.value">
+                @switch (label.icon) {
+                  @case ('tag') {
+                    <svg scSelectItemIcon siTagIcon></svg>
+                  }
+                  @case ('star') {
+                    <svg scSelectItemIcon siStarIcon></svg>
+                  }
+                  @case ('briefcase') {
+                    <svg scSelectItemIcon siBriefcaseIcon></svg>
+                  }
+                  @case ('user') {
+                    <svg scSelectItemIcon siUserIcon></svg>
+                  }
+                  @case ('square-check') {
+                    <svg scSelectItemIcon siSquareCheckIcon></svg>
+                  }
+                  @case ('clock') {
+                    <svg scSelectItemIcon siClockIcon></svg>
+                  }
+                  @case ('book') {
+                    <svg scSelectItemIcon siBookIcon></svg>
+                  }
+                  @case ('plane') {
+                    <svg scSelectItemIcon siPlaneIcon></svg>
+                  }
                 }
-                @case ('star') {
-                  <svg scSelectItemIcon siStarIcon></svg>
-                }
-                @case ('briefcase') {
-                  <svg scSelectItemIcon siBriefcaseIcon></svg>
-                }
-                @case ('user') {
-                  <svg scSelectItemIcon siUserIcon></svg>
-                }
-                @case ('square-check') {
-                  <svg scSelectItemIcon siSquareCheckIcon></svg>
-                }
-                @case ('clock') {
-                  <svg scSelectItemIcon siClockIcon></svg>
-                }
-                @case ('book') {
-                  <svg scSelectItemIcon siBookIcon></svg>
-                }
-                @case ('plane') {
-                  <svg scSelectItemIcon siPlaneIcon></svg>
-                }
-              }
-              <span class="flex-1">{{ label.value }}</span>
-            </div>
-          }
+                <span class="flex-1">{{ label.value }}</span>
+              </div>
+            }
+          </div>
         </div>
       </ng-template>
     </div>

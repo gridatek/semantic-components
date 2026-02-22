@@ -21,7 +21,8 @@ A set of components for building accessible select dropdowns following the Singl
 | `ScSelectValue`    | `span[scSelectValue]`         | Display selected value with styling                                                         |
 | `ScSelectItemIcon` | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)          |
 | `ScSelectPortal`   | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                 |
-| `ScSelectList`     | `div[scSelectList]`           | Content container, wraps `Listbox` from `@angular/aria`                                     |
+| `ScSelectContent`  | `div[scSelectContent]`        | Popup container with styling, animation, and visibility                                     |
+| `ScSelectList`     | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                                     |
 | `ScSelectItem`     | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                             |
 
 ### Internal Components (not exported)
@@ -44,10 +45,12 @@ A set of components for building accessible select dropdowns following the Singl
     </span>
   </div>
   <ng-template scSelectPortal>
-    <div scSelectList>
-      @for (option of options; track option.value) {
-      <div scSelectItem [value]="option.value" [label]="option.label">{{ option.label }}</div>
-      }
+    <div scSelectContent>
+      <div scSelectList>
+        @for (option of options; track option.value) {
+        <div scSelectItem [value]="option.value" [label]="option.label">{{ option.label }}</div>
+        }
+      </div>
     </div>
   </ng-template>
 </div>
@@ -68,11 +71,11 @@ Use `ScSelectItemIcon` for consistent icon styling in items and the value displa
 
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ScSelect, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@semantic-components/ui-lab';
+import { ScSelect, ScSelectContent, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-example',
-  imports: [ScSelect, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue],
+  imports: [ScSelect, ScSelectContent, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue],
   template: `
     <div scSelect #select="scSelect" placeholder="Select an option">
       <div scSelectTrigger aria-label="Select">
@@ -81,12 +84,14 @@ import { ScSelect, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal,
         </span>
       </div>
       <ng-template scSelectPortal>
-        <div scSelectList>
-          @for (option of options; track option.value) {
-            <div scSelectItem [value]="option.value" [label]="option.label">
-              {{ option.label }}
-            </div>
-          }
+        <div scSelectContent>
+          <div scSelectList>
+            @for (option of options; track option.value) {
+              <div scSelectItem [value]="option.value" [label]="option.label">
+                {{ option.label }}
+              </div>
+            }
+          </div>
         </div>
       </ng-template>
     </div>
@@ -216,11 +221,12 @@ ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, expor
 │   ├── ScSelectInput (hidden combobox input) [internal]
 │   └── ScSelectTriggerIcon + SiChevronDownIcon [internal]
 └── ScSelectPortal (ng-template marking lazy overlay content)
-    └── ScSelectList (wraps Listbox)
-        └── ScSelectItem (wraps Option)
-            ├── ScSelectItemIcon (consumer icons) [projected content]
-            ├── [projected content]
-            └── ScSelectItemIndicator + SiCheckIcon [internal]
+    └── ScSelectContent (popup container with styling and animation)
+        └── ScSelectList (wraps Listbox)
+            └── ScSelectItem (wraps Option)
+                ├── ScSelectItemIcon (consumer icons) [projected content]
+                ├── [projected content]
+                └── ScSelectItemIndicator + SiCheckIcon [internal]
 ```
 
 ## Dependencies
