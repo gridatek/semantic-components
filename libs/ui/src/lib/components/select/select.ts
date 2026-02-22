@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Combobox } from '@angular/aria/combobox';
 import { ComboboxPopupContainer } from '@angular/aria/combobox';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -40,6 +40,9 @@ import { ScSelectTrigger } from './select-trigger';
             matchWidth: true,
           }"
           [cdkConnectedOverlayOpen]="true"
+          [cdkConnectedOverlayPositions]="positions"
+          [cdkConnectedOverlayFlexibleDimensions]="true"
+          [cdkConnectedOverlayPush]="true"
         >
           <ng-container [ngTemplateOutlet]="selectPortal().templateRef" />
         </ng-template>
@@ -70,6 +73,23 @@ export class ScSelect implements FormValueControl<string> {
   protected readonly class = computed(() =>
     cn('relative min-w-36 w-fit', this.classInput()),
   );
+
+  protected readonly positions: ConnectedPosition[] = [
+    {
+      originX: 'start',
+      originY: 'bottom',
+      overlayX: 'start',
+      overlayY: 'top',
+      offsetY: 4,
+    },
+    {
+      originX: 'start',
+      originY: 'top',
+      overlayX: 'start',
+      overlayY: 'bottom',
+      offsetY: -4,
+    },
+  ];
 
   private readonly combobox = inject(Combobox);
 
