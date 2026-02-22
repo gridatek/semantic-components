@@ -7,8 +7,6 @@ import { ScSelectDemoContainer } from './demos/select-demo-container';
 import { ScSelectGroupDemoContainer } from './demos/select-group-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
-import { ScSelectAriaDemoContainer } from './demos/select-aria-demo-container';
-
 @Component({
   selector: 'app-select-page',
   imports: [
@@ -16,7 +14,6 @@ import { ScSelectAriaDemoContainer } from './demos/select-aria-demo-container';
     ScSelectGroupDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScSelectAriaDemoContainer,
   ],
   template: `
     <div class="space-y-8">
@@ -33,8 +30,6 @@ import { ScSelectAriaDemoContainer } from './demos/select-aria-demo-container';
         <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
         <app-select-demo-container />
         <app-select-group-demo-container />
-
-        <app-select-aria-demo-container />
       </section>
     </div>
   `,
