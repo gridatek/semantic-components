@@ -15,12 +15,10 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
-} from '@semantic-components/ui';
-import {
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

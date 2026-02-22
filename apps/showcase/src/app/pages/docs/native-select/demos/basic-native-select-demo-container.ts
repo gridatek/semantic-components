@@ -28,13 +28,13 @@ export class BasicNativeSelectDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScField } from '@semantic-components/ui';
 import {
+  ScField,
   ScLabel,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

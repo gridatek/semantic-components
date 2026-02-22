@@ -546,9 +546,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'native-select',
     description: 'A styled native select element with a custom chevron icon.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Navbar',
