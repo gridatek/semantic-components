@@ -11,10 +11,15 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, merge } from 'rxjs';
 import { cn } from '@semantic-components/ui';
 import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
+import {
+  calculatePercentage,
+  calculateValueFromPosition,
+  getClientX,
+  handleSliderKeydown,
+  setupDragListeners,
+} from '../slider/slider-utils';
 
 @Component({
   selector: 'div[scRangeSlider]',
@@ -23,8 +28,8 @@ import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
     'data-slot': 'range-slider',
     '[class]': 'class()',
     '[attr.data-disabled]': 'disabled() || null',
-    '(mousedown)': 'onTrackMouseDown($event)',
-    '(touchstart)': 'onTrackTouchStart($event)',
+    '(mousedown)': 'onTrackStart($event)',
+    '(touchstart)': 'onTrackStart($event)',
   },
   template: `
     <div scSliderTrack>
@@ -45,8 +50,6 @@ import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
       [aria-label]="minAriaLabel()"
       [aria-labelledby]="minAriaLabelledby()"
       (keydown)="onMinKeydown($event)"
-      (mouseDown)="onMinThumbMouseDown($event)"
-      (touchStart)="onMinThumbTouchStart($event)"
     ></div>
     <div
       scSliderThumb
@@ -59,8 +62,6 @@ import { ScSliderTrack, ScSliderRange, ScSliderThumb } from '../slider';
       [aria-label]="maxAriaLabel()"
       [aria-labelledby]="maxAriaLabelledby()"
       (keydown)="onMaxKeydown($event)"
-      (mouseDown)="onMaxThumbMouseDown($event)"
-      (touchStart)="onMaxThumbTouchStart($event)"
     ></div>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -93,27 +94,19 @@ export class ScRangeSlider {
   private readonly isDraggingMin = signal(false);
   private readonly isDraggingMax = signal(false);
 
-  protected readonly minPercentage = computed(() => {
-    const minVal = this.min();
-    const maxVal = this.max();
-    const val = this.minValue();
-    if (maxVal === minVal) return 0;
-    return ((val - minVal) / (maxVal - minVal)) * 100;
-  });
+  protected readonly minPercentage = computed(() =>
+    calculatePercentage(this.minValue(), this.min(), this.max()),
+  );
 
-  protected readonly maxPercentage = computed(() => {
-    const minVal = this.min();
-    const maxVal = this.max();
-    const val = this.maxValue();
-    if (maxVal === minVal) return 0;
-    return ((val - minVal) / (maxVal - minVal)) * 100;
-  });
+  protected readonly maxPercentage = computed(() =>
+    calculatePercentage(this.maxValue(), this.min(), this.max()),
+  );
 
   protected readonly rangeStart = computed(() => this.minPercentage());
 
-  protected readonly rangeWidth = computed(() => {
-    return this.maxPercentage() - this.minPercentage();
-  });
+  protected readonly rangeWidth = computed(
+    () => this.maxPercentage() - this.minPercentage(),
+  );
 
   protected readonly class = computed(() =>
     cn(
@@ -125,221 +118,98 @@ export class ScRangeSlider {
 
   constructor() {
     afterNextRender(() => {
-      merge(
-        fromEvent<MouseEvent>(document, 'mousemove'),
-        fromEvent<MouseEvent>(document, 'mouseup'),
-        fromEvent<TouchEvent>(document, 'touchmove'),
-        fromEvent<TouchEvent>(document, 'touchend'),
-      )
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe((event) => {
+      setupDragListeners(
+        this.destroyRef,
+        (event) => {
           if (!this.isDraggingMin() && !this.isDraggingMax()) return;
+          const clientX = getClientX(event);
+          if (clientX === null) return;
 
-          if (event.type === 'mouseup' || event.type === 'touchend') {
-            this.isDraggingMin.set(false);
-            this.isDraggingMax.set(false);
-            return;
+          if (this.isDraggingMin()) {
+            this.updateMinValueFromPosition(clientX);
+          } else if (this.isDraggingMax()) {
+            this.updateMaxValueFromPosition(clientX);
           }
-
-          if (event.type === 'mousemove') {
-            const clientX = (event as MouseEvent).clientX;
-            if (this.isDraggingMin()) {
-              this.updateMinValueFromPosition(clientX);
-            } else if (this.isDraggingMax()) {
-              this.updateMaxValueFromPosition(clientX);
-            }
-          } else if (event.type === 'touchmove') {
-            const touch = (event as TouchEvent).touches[0];
-            if (touch) {
-              if (this.isDraggingMin()) {
-                this.updateMinValueFromPosition(touch.clientX);
-              } else if (this.isDraggingMax()) {
-                this.updateMaxValueFromPosition(touch.clientX);
-              }
-            }
-          }
-        });
+        },
+        () => {
+          this.isDraggingMin.set(false);
+          this.isDraggingMax.set(false);
+        },
+      );
     });
   }
 
-  protected onTrackMouseDown(event: MouseEvent): void {
+  protected onTrackStart(event: MouseEvent | TouchEvent): void {
     if (this.disabled()) return;
     event.preventDefault();
-    const thumb = this.getClosestThumb(event.clientX);
-    if (thumb === 'min') {
-      this.updateMinValueFromPosition(event.clientX);
-      this.isDraggingMin.set(true);
-    } else {
-      this.updateMaxValueFromPosition(event.clientX);
-      this.isDraggingMax.set(true);
-    }
-  }
+    const clientX = getClientX(event);
+    if (clientX === null) return;
 
-  protected onTrackTouchStart(event: TouchEvent): void {
-    if (this.disabled()) return;
-    event.preventDefault();
-    const touch = event.touches[0];
-    if (touch) {
-      const thumb = this.getClosestThumb(touch.clientX);
-      if (thumb === 'min') {
-        this.updateMinValueFromPosition(touch.clientX);
-        this.isDraggingMin.set(true);
-      } else {
-        this.updateMaxValueFromPosition(touch.clientX);
-        this.isDraggingMax.set(true);
-      }
-    }
-  }
-
-  private getClosestThumb(clientX: number): 'min' | 'max' {
     const rect = this.elementRef.nativeElement.getBoundingClientRect();
     const percentage = ((clientX - rect.left) / rect.width) * 100;
     const minDist = Math.abs(percentage - this.minPercentage());
     const maxDist = Math.abs(percentage - this.maxPercentage());
-    return minDist <= maxDist ? 'min' : 'max';
-  }
 
-  protected onMinThumbMouseDown(event: MouseEvent): void {
-    if (this.disabled()) return;
-    event.preventDefault();
-    this.isDraggingMin.set(true);
-  }
-
-  protected onMinThumbTouchStart(event: TouchEvent): void {
-    if (this.disabled()) return;
-    event.preventDefault();
-    this.isDraggingMin.set(true);
-  }
-
-  protected onMaxThumbMouseDown(event: MouseEvent): void {
-    if (this.disabled()) return;
-    event.preventDefault();
-    this.isDraggingMax.set(true);
-  }
-
-  protected onMaxThumbTouchStart(event: TouchEvent): void {
-    if (this.disabled()) return;
-    event.preventDefault();
-    this.isDraggingMax.set(true);
+    if (minDist <= maxDist) {
+      this.updateMinValueFromPosition(clientX);
+      this.isDraggingMin.set(true);
+    } else {
+      this.updateMaxValueFromPosition(clientX);
+      this.isDraggingMax.set(true);
+    }
   }
 
   protected onMinKeydown(event: KeyboardEvent): void {
     if (this.disabled()) return;
-
-    const stepVal = this.step();
-    const minVal = this.min();
-    const maxVal = this.maxValue(); // Min thumb can't go beyond max thumb
-    let newValue = this.minValue();
-
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowUp':
-        event.preventDefault();
-        newValue = Math.min(newValue + stepVal, maxVal);
-        break;
-      case 'ArrowLeft':
-      case 'ArrowDown':
-        event.preventDefault();
-        newValue = Math.max(newValue - stepVal, minVal);
-        break;
-      case 'Home':
-        event.preventDefault();
-        newValue = minVal;
-        break;
-      case 'End':
-        event.preventDefault();
-        newValue = maxVal;
-        break;
-      case 'PageUp':
-        event.preventDefault();
-        newValue = Math.min(newValue + stepVal * 10, maxVal);
-        break;
-      case 'PageDown':
-        event.preventDefault();
-        newValue = Math.max(newValue - stepVal * 10, minVal);
-        break;
-      default:
-        return;
+    const newValue = handleSliderKeydown(
+      event,
+      this.minValue(),
+      this.step(),
+      this.min(),
+      this.maxValue(),
+    );
+    if (newValue !== null) {
+      this.minValue.set(newValue);
     }
-
-    this.minValue.set(newValue);
   }
 
   protected onMaxKeydown(event: KeyboardEvent): void {
     if (this.disabled()) return;
-
-    const stepVal = this.step();
-    const minVal = this.minValue(); // Max thumb can't go below min thumb
-    const maxVal = this.max();
-    let newValue = this.maxValue();
-
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowUp':
-        event.preventDefault();
-        newValue = Math.min(newValue + stepVal, maxVal);
-        break;
-      case 'ArrowLeft':
-      case 'ArrowDown':
-        event.preventDefault();
-        newValue = Math.max(newValue - stepVal, minVal);
-        break;
-      case 'Home':
-        event.preventDefault();
-        newValue = minVal;
-        break;
-      case 'End':
-        event.preventDefault();
-        newValue = maxVal;
-        break;
-      case 'PageUp':
-        event.preventDefault();
-        newValue = Math.min(newValue + stepVal * 10, maxVal);
-        break;
-      case 'PageDown':
-        event.preventDefault();
-        newValue = Math.max(newValue - stepVal * 10, minVal);
-        break;
-      default:
-        return;
+    const newValue = handleSliderKeydown(
+      event,
+      this.maxValue(),
+      this.step(),
+      this.minValue(),
+      this.max(),
+    );
+    if (newValue !== null) {
+      this.maxValue.set(newValue);
     }
-
-    this.maxValue.set(newValue);
   }
 
   private updateMinValueFromPosition(clientX: number): void {
-    const rect = this.elementRef.nativeElement.getBoundingClientRect();
-    const percentage = Math.max(
-      0,
-      Math.min(1, (clientX - rect.left) / rect.width),
+    const newValue = calculateValueFromPosition(
+      clientX,
+      this.elementRef,
+      this.min(),
+      this.max(),
+      this.step(),
+      this.min(),
+      this.maxValue(),
     );
-
-    const minVal = this.min();
-    const maxVal = this.maxValue(); // Min thumb can't go beyond max thumb
-    const stepVal = this.step();
-
-    let newValue = minVal + percentage * (this.max() - minVal);
-    newValue = Math.round(newValue / stepVal) * stepVal;
-    newValue = Math.max(minVal, Math.min(maxVal, newValue));
-
     this.minValue.set(newValue);
   }
 
   private updateMaxValueFromPosition(clientX: number): void {
-    const rect = this.elementRef.nativeElement.getBoundingClientRect();
-    const percentage = Math.max(
-      0,
-      Math.min(1, (clientX - rect.left) / rect.width),
+    const newValue = calculateValueFromPosition(
+      clientX,
+      this.elementRef,
+      this.min(),
+      this.max(),
+      this.step(),
+      this.minValue(),
+      this.max(),
     );
-
-    const minVal = this.minValue(); // Max thumb can't go below min thumb
-    const maxVal = this.max();
-    const stepVal = this.step();
-
-    let newValue = this.min() + percentage * (maxVal - this.min());
-    newValue = Math.round(newValue / stepVal) * stepVal;
-    newValue = Math.max(minVal, Math.min(maxVal, newValue));
-
     this.maxValue.set(newValue);
   }
 }

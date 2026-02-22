@@ -23,8 +23,6 @@ import { cn } from '@semantic-components/ui';
     '[attr.aria-label]': 'ariaLabel() ?? null',
     '[attr.aria-labelledby]': 'ariaLabelledby() ?? null',
     '(keydown)': 'onKeydown($event)',
-    '(mousedown)': 'onMouseDown($event)',
-    '(touchstart)': 'onTouchStart($event)',
   },
   template: '',
   encapsulation: ViewEncapsulation.None,
@@ -46,8 +44,6 @@ export class ScSliderThumb {
   });
 
   readonly keydown = output<KeyboardEvent>();
-  readonly mouseDown = output<MouseEvent>();
-  readonly touchStart = output<TouchEvent>();
 
   protected readonly class = computed(() =>
     cn(
@@ -61,15 +57,5 @@ export class ScSliderThumb {
 
   protected onKeydown(event: KeyboardEvent): void {
     this.keydown.emit(event);
-  }
-
-  protected onMouseDown(event: MouseEvent): void {
-    event.stopPropagation();
-    this.mouseDown.emit(event);
-  }
-
-  protected onTouchStart(event: TouchEvent): void {
-    event.stopPropagation();
-    this.touchStart.emit(event);
   }
 }

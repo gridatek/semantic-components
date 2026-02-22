@@ -11,13 +11,18 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import type { FormValueControl } from '@angular/forms/signals';
-import { fromEvent, merge } from 'rxjs';
 import { cn } from '@semantic-components/ui';
 import { ScSliderTrack } from './slider-track';
 import { ScSliderRange } from './slider-range';
 import { ScSliderThumb } from './slider-thumb';
+import {
+  calculatePercentage,
+  calculateValueFromPosition,
+  getClientX,
+  handleSliderKeydown,
+  setupDragListeners,
+} from './slider-utils';
 
 @Component({
   selector: 'div[scSlider]',
@@ -26,8 +31,8 @@ import { ScSliderThumb } from './slider-thumb';
     'data-slot': 'slider',
     '[class]': 'class()',
     '[attr.data-disabled]': 'disabled() || null',
-    '(mousedown)': 'onTrackMouseDown($event)',
-    '(touchstart)': 'onTrackTouchStart($event)',
+    '(mousedown)': 'onTrackStart($event)',
+    '(touchstart)': 'onTrackStart($event)',
   },
   template: `
     <div scSliderTrack>
@@ -44,8 +49,6 @@ import { ScSliderThumb } from './slider-thumb';
       [aria-label]="ariaLabel()"
       [aria-labelledby]="ariaLabelledby()"
       (keydown)="onKeydown($event)"
-      (mouseDown)="onThumbMouseDown($event)"
-      (touchStart)="onThumbTouchStart($event)"
     ></div>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -70,13 +73,9 @@ export class ScSlider implements FormValueControl<number> {
 
   private readonly isDragging = signal(false);
 
-  protected readonly percentage = computed(() => {
-    const minVal = this.min() ?? 0;
-    const maxVal = this.max() ?? 100;
-    const val = this.value();
-    if (maxVal === minVal) return 0;
-    return ((val - minVal) / (maxVal - minVal)) * 100;
-  });
+  protected readonly percentage = computed(() =>
+    calculatePercentage(this.value(), this.min() ?? 0, this.max() ?? 100),
+  );
 
   protected readonly class = computed(() =>
     cn(
@@ -88,119 +87,59 @@ export class ScSlider implements FormValueControl<number> {
 
   constructor() {
     afterNextRender(() => {
-      merge(
-        fromEvent<MouseEvent>(document, 'mousemove'),
-        fromEvent<MouseEvent>(document, 'mouseup'),
-        fromEvent<TouchEvent>(document, 'touchmove'),
-        fromEvent<TouchEvent>(document, 'touchend'),
-      )
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe((event) => {
+      setupDragListeners(
+        this.destroyRef,
+        (event) => {
           if (!this.isDragging()) return;
-
-          if (event.type === 'mouseup' || event.type === 'touchend') {
-            this.isDragging.set(false);
-            return;
+          const clientX = getClientX(event);
+          if (clientX !== null) {
+            this.updateValueFromPosition(clientX);
           }
-
-          if (event.type === 'mousemove') {
-            this.updateValueFromPosition((event as MouseEvent).clientX);
-          } else if (event.type === 'touchmove') {
-            const touch = (event as TouchEvent).touches[0];
-            if (touch) {
-              this.updateValueFromPosition(touch.clientX);
-            }
-          }
-        });
+        },
+        () => this.isDragging.set(false),
+      );
     });
   }
 
-  protected onTrackMouseDown(event: MouseEvent): void {
+  protected onTrackStart(event: MouseEvent | TouchEvent): void {
     if (this.disabled()) return;
     event.preventDefault();
-    this.updateValueFromPosition(event.clientX);
-    this.isDragging.set(true);
-  }
-
-  protected onTrackTouchStart(event: TouchEvent): void {
-    if (this.disabled()) return;
-    event.preventDefault();
-    const touch = event.touches[0];
-    if (touch) {
-      this.updateValueFromPosition(touch.clientX);
+    const clientX = getClientX(event);
+    if (clientX !== null) {
+      this.updateValueFromPosition(clientX);
     }
-    this.isDragging.set(true);
-  }
-
-  protected onThumbMouseDown(event: MouseEvent): void {
-    if (this.disabled()) return;
-    event.preventDefault();
-    this.isDragging.set(true);
-  }
-
-  protected onThumbTouchStart(event: TouchEvent): void {
-    if (this.disabled()) return;
-    event.preventDefault();
     this.isDragging.set(true);
   }
 
   protected onKeydown(event: KeyboardEvent): void {
     if (this.disabled()) return;
 
-    const stepVal = this.step();
     const minVal = this.min() ?? 0;
     const maxVal = this.max() ?? 100;
-    let newValue = this.value();
-
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowUp':
-        event.preventDefault();
-        newValue = Math.min(newValue + stepVal, maxVal);
-        break;
-      case 'ArrowLeft':
-      case 'ArrowDown':
-        event.preventDefault();
-        newValue = Math.max(newValue - stepVal, minVal);
-        break;
-      case 'Home':
-        event.preventDefault();
-        newValue = minVal;
-        break;
-      case 'End':
-        event.preventDefault();
-        newValue = maxVal;
-        break;
-      case 'PageUp':
-        event.preventDefault();
-        newValue = Math.min(newValue + stepVal * 10, maxVal);
-        break;
-      case 'PageDown':
-        event.preventDefault();
-        newValue = Math.max(newValue - stepVal * 10, minVal);
-        break;
-      default:
-        return;
+    const newValue = handleSliderKeydown(
+      event,
+      this.value(),
+      this.step(),
+      minVal,
+      maxVal,
+    );
+    if (newValue !== null) {
+      this.value.set(newValue);
     }
-
-    this.value.set(newValue);
   }
 
   private updateValueFromPosition(clientX: number): void {
-    const rect = this.elementRef.nativeElement.getBoundingClientRect();
-    const percentage = Math.max(
-      0,
-      Math.min(1, (clientX - rect.left) / rect.width),
-    );
-
     const minVal = this.min() ?? 0;
     const maxVal = this.max() ?? 100;
-    const stepVal = this.step();
-
-    let newValue = minVal + percentage * (maxVal - minVal);
-    newValue = Math.round(newValue / stepVal) * stepVal;
-    newValue = Math.max(minVal, Math.min(maxVal, newValue));
-
+    const newValue = calculateValueFromPosition(
+      clientX,
+      this.elementRef,
+      minVal,
+      maxVal,
+      this.step(),
+      minVal,
+      maxVal,
+    );
     this.value.set(newValue);
   }
 }
