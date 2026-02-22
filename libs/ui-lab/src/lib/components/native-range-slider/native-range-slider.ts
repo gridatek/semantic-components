@@ -9,44 +9,42 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'sc-native-range-slider',
+  selector: 'div[scNativeRangeSlider]',
   host: {
     '[class]': 'hostClass()',
   },
   template: `
-    <div class="relative flex h-3 w-full items-center">
-      <div class="absolute h-1 w-full rounded-full bg-muted"></div>
+    <div class="absolute h-1 w-full rounded-full bg-muted"></div>
 
-      <div
-        class="absolute h-1 rounded-full bg-primary"
-        [style.left.%]="minPercent()"
-        [style.right.%]="100 - maxPercent()"
-      ></div>
+    <div
+      class="absolute h-1 rounded-full bg-primary"
+      [style.left.%]="minPercent()"
+      [style.right.%]="100 - maxPercent()"
+    ></div>
 
-      <input
-        type="range"
-        [min]="min()"
-        [max]="max()"
-        [step]="step()"
-        [value]="minValue()"
-        [disabled]="disabled()"
-        [attr.aria-label]="minAriaLabel() ?? 'Minimum value'"
-        [class]="thumbClass()"
-        (input)="onMinInput($event)"
-      />
+    <input
+      type="range"
+      [min]="min()"
+      [max]="max()"
+      [step]="step()"
+      [value]="minValue()"
+      [disabled]="disabled()"
+      [attr.aria-label]="minAriaLabel() ?? 'Minimum value'"
+      [class]="thumbClass()"
+      (input)="onMinInput($event)"
+    />
 
-      <input
-        type="range"
-        [min]="min()"
-        [max]="max()"
-        [step]="step()"
-        [value]="maxValue()"
-        [disabled]="disabled()"
-        [attr.aria-label]="maxAriaLabel() ?? 'Maximum value'"
-        [class]="thumbClass()"
-        (input)="onMaxInput($event)"
-      />
-    </div>
+    <input
+      type="range"
+      [min]="min()"
+      [max]="max()"
+      [step]="step()"
+      [value]="maxValue()"
+      [disabled]="disabled()"
+      [attr.aria-label]="maxAriaLabel() ?? 'Maximum value'"
+      [class]="thumbClass()"
+      (input)="onMaxInput($event)"
+    />
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,7 +66,9 @@ export class ScNativeRangeSlider {
     alias: 'max-aria-label',
   });
 
-  protected readonly hostClass = computed(() => cn('block', this.classInput()));
+  protected readonly hostClass = computed(() =>
+    cn('relative flex h-3 w-full items-center', this.classInput()),
+  );
 
   protected readonly minPercent = computed(() => {
     const range = this.max() - this.min();

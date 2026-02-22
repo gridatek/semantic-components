@@ -34,11 +34,12 @@ import { ScNativeRangeSlider } from '@semantic-components/ui-lab';
   selector: 'app-basic-native-range-slider-demo',
   imports: [ScNativeRangeSlider],
   template: \`
-    <div class="w-[280px] space-y-2">
+    <div class="w-[280px] space-y-4">
       <label class="text-sm font-medium">
         Price range: {{ '$' + minValue }} &ndash; {{ '$' + maxValue }}
       </label>
-      <sc-native-range-slider
+      <div
+        scNativeRangeSlider
         [(minValue)]="minValue"
         [(maxValue)]="maxValue"
         [min]="0"
@@ -46,7 +47,7 @@ import { ScNativeRangeSlider } from '@semantic-components/ui-lab';
         [step]="10"
         min-aria-label="Minimum price"
         max-aria-label="Maximum price"
-      />
+      ></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
