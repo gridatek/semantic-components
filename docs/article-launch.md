@@ -105,13 +105,15 @@ The Select is a good example of how far this goes:
     </span>
   </div>
   <ng-template scSelectPortal>
-    <div scSelectList>
-      @for (item of items; track item.value) {
-      <div scSelectItem [value]="item.value" [label]="item.label">
-        <svg scSelectItemIcon siTagIcon></svg>
-        <span>{{ item.label }}</span>
+    <div scSelectPopup>
+      <div scSelectList>
+        @for (item of items; track item.value) {
+        <div scSelectItem [value]="item.value" [label]="item.label">
+          <svg scSelectItemIcon siTagIcon></svg>
+          <span>{{ item.label }}</span>
+        </div>
+        }
       </div>
-      }
     </div>
   </ng-template>
 </div>
