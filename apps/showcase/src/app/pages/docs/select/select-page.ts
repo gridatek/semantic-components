@@ -4,12 +4,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScSelectDemoContainer } from './demos/select-demo-container';
+import { ScSelectGroupDemoContainer } from './demos/select-group-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-select-page',
-  imports: [ScSelectDemoContainer, TocHeading, ComponentBadges],
+  imports: [
+    ScSelectDemoContainer,
+    ScSelectGroupDemoContainer,
+    TocHeading,
+    ComponentBadges,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -24,6 +30,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       <section class="space-y-8">
         <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
         <app-select-demo-container />
+        <app-select-group-demo-container />
       </section>
     </div>
   `,

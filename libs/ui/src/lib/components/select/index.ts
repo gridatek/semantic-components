@@ -6,3 +6,5 @@ export { ScSelectPortal } from './select-portal';
 export { ScSelectPopup } from './select-popup';
 export { ScSelectList } from './select-list';
 export { ScSelectItem } from './select-item';
+export { ScSelectGroup } from './select-group';
+export { ScSelectGroupLabel } from './select-group-label';
