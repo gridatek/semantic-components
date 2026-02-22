@@ -36,7 +36,7 @@ import { ScNativeSlider } from '@semantic-components/ui-lab';
   selector: 'app-custom-color-native-slider-demo',
   imports: [ScNativeSlider, ScField, ScLabel],
   template: \`
-    <div scField class="w-[280px]" style="--primary: oklch(0.6 0.25 30); --secondary: oklch(0.9 0.05 30)">
+    <div scField class="w-[280px]" style="--primary: oklch(0.6 0.25 30); --muted: oklch(0.9 0.05 30); --ring: oklch(0.6 0.25 30)">
       <label scLabel>Temperature — {{ value() }}</label>
       <input scNativeSlider [value]="value()" (input)="onInput($event)" />
     </div>

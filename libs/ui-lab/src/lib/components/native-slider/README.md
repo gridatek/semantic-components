@@ -40,10 +40,10 @@ Unlike `ScSlider` (which is a custom component), `ScNativeSlider` is a directive
 
 ### Custom Color
 
-Override `--primary` and `--secondary` CSS variables on a parent element to customize the fill and track colors:
+Override `--primary`, `--muted`, and `--ring` CSS variables on a parent element to customize colors:
 
 ```html
-<div style="--primary: oklch(0.6 0.25 30); --secondary: oklch(0.9 0.05 30)">
+<div style="--primary: oklch(0.6 0.25 30); --muted: oklch(0.9 0.05 30); --ring: oklch(0.6 0.25 30)">
   <input scNativeSlider [value]="temperature()" (input)="onInput($event)" />
 </div>
 ```
@@ -68,7 +68,7 @@ Standard native attributes (`min`, `max`, `value`, `step`, `disabled`) work as e
 
 Native `<input type="range">` has no universal CSS pseudo-element for styling the filled portion of the track. The directive uses two techniques for cross-browser support:
 
-- **WebKit (Chrome, Safari, Edge):** A `linear-gradient` on `::-webkit-slider-runnable-track` with a `--fill-percent` CSS variable creates a sharp color stop between the primary (filled) and secondary (unfilled) colors.
+- **WebKit (Chrome, Safari, Edge):** A `linear-gradient` on `::-webkit-slider-runnable-track` with a `--fill-percent` CSS variable creates a sharp color stop between `primary` (filled) and `muted` (unfilled).
 - **Firefox:** The native `::-moz-range-progress` pseudo-element is styled with the primary color.
 
 The `--fill-percent` variable is calculated as `(value - min) / (max - min) * 100` and updated on every `input` event.
@@ -79,15 +79,18 @@ The `--fill-percent` variable is calculated as `(value - min) / (max - min) * 10
 │  ┌──────────────────────────────────┐    │
 │  │  Track                           │    │
 │  │  ████████████░░░░░░░░░░░░░░░░░░  │    │
-│  │  ← filled →  ○  ← unfilled →    │    │
-│  │  (primary)  thumb  (secondary)   │    │
+│  │  ← filled →  ●  ← unfilled →    │    │
+│  │  (primary)  thumb  (muted)       │    │
 │  └──────────────────────────────────┘    │
 └──────────────────────────────────────────┘
 ```
 
-### Hover Effect
+### Styling
 
-The thumb displays a translucent primary-colored box-shadow ring on hover, using `oklch` relative color syntax for opacity.
+- **Thumb**: Solid `primary` color, `size-3` (12px), matching shadcn sizing
+- **Track**: `h-1` (4px), `muted` background for unfilled portion
+- **Hover**: Translucent `ring` box-shadow on thumb hover, using `oklch` relative color syntax for 50% opacity
+- **Focus**: Same ring shadow on `:focus-visible`
 
 ### Comparison with ScSlider
 
