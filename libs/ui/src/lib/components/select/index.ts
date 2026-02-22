@@ -1,5 +1,5 @@
 export { ScSelect } from './select';
-export { ScSelectItemIcon } from './select-icon';
+export { ScSelectItemIcon } from './select-item-icon';
 export { ScSelectTrigger } from './select-trigger';
 export { ScSelectValue } from './select-value';
 export { ScSelectPortal } from './select-portal';
