@@ -99,7 +99,7 @@ The Select is a good example of how far this goes:
   <div scSelectTrigger aria-label="Label dropdown">
     <span scSelectValue>
       @if (displayIcon(); as icon) {
-      <svg scSelectIcon siTagIcon></svg>
+      <svg scSelectItemIcon siTagIcon></svg>
       }
       <span class="truncate">{{ select.displayValue() }}</span>
     </span>
@@ -108,7 +108,7 @@ The Select is a good example of how far this goes:
     <div scSelectList>
       @for (item of items; track item.value) {
       <div scSelectItem [value]="item.value" [label]="item.label">
-        <svg scSelectIcon siTagIcon></svg>
+        <svg scSelectItemIcon siTagIcon></svg>
         <span>{{ item.label }}</span>
       </div>
       }

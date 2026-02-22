@@ -10,7 +10,7 @@
 
 ## 2. Internal `classInput` pattern is unnecessary
 
-`ScSelectIcon`, `ScSelectInput`, and `ScSelectItemIndicator` are now internal — consumers never pass a `class` to them. The `classInput` + `cn()` pattern exists solely for consumer class merging, which no longer applies. Their classes can be hardcoded strings.
+`ScSelectItemIcon`, `ScSelectInput`, and `ScSelectItemIndicator` are now internal — consumers never pass a `class` to them. The `classInput` + `cn()` pattern exists solely for consumer class merging, which no longer applies. Their classes can be hardcoded strings.
 
 **Files:** `select-icon.ts`, `select-input.ts`, `select-item-indicator.ts`
 

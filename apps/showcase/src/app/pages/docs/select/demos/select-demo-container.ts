@@ -38,7 +38,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import {
   ScSelect,
-  ScSelectIcon,
+  ScSelectItemIcon,
   ScSelectList,
   ScSelectItem,
   ScSelectPortal,
@@ -50,7 +50,7 @@ import {
   selector: 'app-select-demo',
   imports: [
     ScSelect,
-    ScSelectIcon,
+    ScSelectItemIcon,
     ScSelectList,
     ScSelectItem,
     ScSelectPortal,
@@ -72,28 +72,28 @@ import {
           @if (displayIcon(); as icon) {
             @switch (icon) {
               @case ('tag') {
-                <svg scSelectIcon siTagIcon></svg>
+                <svg scSelectItemIcon siTagIcon></svg>
               }
               @case ('star') {
-                <svg scSelectIcon siStarIcon></svg>
+                <svg scSelectItemIcon siStarIcon></svg>
               }
               @case ('briefcase') {
-                <svg scSelectIcon siBriefcaseIcon></svg>
+                <svg scSelectItemIcon siBriefcaseIcon></svg>
               }
               @case ('user') {
-                <svg scSelectIcon siUserIcon></svg>
+                <svg scSelectItemIcon siUserIcon></svg>
               }
               @case ('square-check') {
-                <svg scSelectIcon siSquareCheckIcon></svg>
+                <svg scSelectItemIcon siSquareCheckIcon></svg>
               }
               @case ('clock') {
-                <svg scSelectIcon siClockIcon></svg>
+                <svg scSelectItemIcon siClockIcon></svg>
               }
               @case ('book') {
-                <svg scSelectIcon siBookIcon></svg>
+                <svg scSelectItemIcon siBookIcon></svg>
               }
               @case ('plane') {
-                <svg scSelectIcon siPlaneIcon></svg>
+                <svg scSelectItemIcon siPlaneIcon></svg>
               }
             }
           }
@@ -106,28 +106,28 @@ import {
             <div scSelectItem [value]="label.value" [label]="label.value">
               @switch (label.icon) {
                 @case ('tag') {
-                  <svg scSelectIcon siTagIcon></svg>
+                  <svg scSelectItemIcon siTagIcon></svg>
                 }
                 @case ('star') {
-                  <svg scSelectIcon siStarIcon></svg>
+                  <svg scSelectItemIcon siStarIcon></svg>
                 }
                 @case ('briefcase') {
-                  <svg scSelectIcon siBriefcaseIcon></svg>
+                  <svg scSelectItemIcon siBriefcaseIcon></svg>
                 }
                 @case ('user') {
-                  <svg scSelectIcon siUserIcon></svg>
+                  <svg scSelectItemIcon siUserIcon></svg>
                 }
                 @case ('square-check') {
-                  <svg scSelectIcon siSquareCheckIcon></svg>
+                  <svg scSelectItemIcon siSquareCheckIcon></svg>
                 }
                 @case ('clock') {
-                  <svg scSelectIcon siClockIcon></svg>
+                  <svg scSelectItemIcon siClockIcon></svg>
                 }
                 @case ('book') {
-                  <svg scSelectIcon siBookIcon></svg>
+                  <svg scSelectItemIcon siBookIcon></svg>
                 }
                 @case ('plane') {
-                  <svg scSelectIcon siPlaneIcon></svg>
+                  <svg scSelectItemIcon siPlaneIcon></svg>
                 }
               }
               <span class="flex-1">{{ label.value }}</span>

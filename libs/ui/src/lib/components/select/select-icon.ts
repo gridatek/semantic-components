@@ -2,14 +2,14 @@ import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'svg[scSelectIcon]',
+  selector: 'svg[scSelectItemIcon]',
   host: {
-    'data-slot': 'select-icon',
+    'data-slot': 'select-item-icon',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
-export class ScSelectIcon {
+export class ScSelectItemIcon {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
