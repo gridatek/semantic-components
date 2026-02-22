@@ -33,6 +33,7 @@ import {
   ScSelectPopup,
   ScSelectPortal,
   ScSelectTrigger,
+  ScSelectSeparator,
   ScSelectValue,
 } from '@semantic-components/ui';
 
@@ -46,6 +47,7 @@ import {
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
+    ScSelectSeparator,
     ScSelectTrigger,
     ScSelectValue,
   ],
@@ -65,6 +67,7 @@ import {
               <div scSelectItem value="Banana" label="Banana">Banana</div>
               <div scSelectItem value="Orange" label="Orange">Orange</div>
             </div>
+            <div scSelectSeparator></div>
             <div scSelectGroup>
               <div scSelectGroupLabel>Vegetables</div>
               <div scSelectItem value="Carrot" label="Carrot">Carrot</div>

@@ -8,3 +8,4 @@ export { ScSelectList } from './select-list';
 export { ScSelectItem } from './select-item';
 export { ScSelectGroup } from './select-group';
 export { ScSelectGroupLabel } from './select-group-label';
+export { ScSelectSeparator } from './select-separator';
