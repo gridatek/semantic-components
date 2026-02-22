@@ -67,7 +67,9 @@ export class ScSelect implements FormValueControl<string> {
   readonly origin = computed(() => this.trigger()?.overlayOrigin);
   readonly values = computed(() => this.content()?.values() ?? []);
   readonly displayValue = computed(() => this.value() || this.placeholder());
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('relative min-w-36 w-fit', this.classInput()),
+  );
 
   private readonly combobox = inject(Combobox);
 
