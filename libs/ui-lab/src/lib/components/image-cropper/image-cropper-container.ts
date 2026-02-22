@@ -5,7 +5,9 @@ import {
   computed,
   ElementRef,
   inject,
+  Injector,
   input,
+  runInInjectionContext,
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
@@ -151,6 +153,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 export class ScImageCropperContainer {
   readonly cropper = inject(SC_IMAGE_CROPPER);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly injector = inject(Injector);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -190,8 +193,10 @@ export class ScImageCropperContainer {
     this.cropper.onImageLoad(img.naturalWidth, img.naturalHeight);
 
     // Initialize crop area after image loads
-    afterNextRender(() => {
-      this.cropper.initializeCropArea(this.getContainerWidth());
+    runInInjectionContext(this.injector, () => {
+      afterNextRender(() => {
+        this.cropper.initializeCropArea(this.getContainerWidth());
+      });
     });
   }
 
