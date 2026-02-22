@@ -75,7 +75,7 @@ export class ScSelect implements FormValueControl<string> {
       originY: 'bottom',
       overlayX: 'start',
       overlayY: 'top',
-      offsetY: 4,
+      offsetY: 0,
     },
     {
       originX: 'start',
