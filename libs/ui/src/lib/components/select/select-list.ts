@@ -30,7 +30,7 @@ export class ScSelectList {
 
   protected readonly class = computed(() =>
     cn(
-      'flex max-h-44 flex-col overflow-x-hidden overflow-y-auto',
+      'flex h-full flex-col overflow-x-hidden overflow-y-auto',
       this.classInput(),
     ),
   );
