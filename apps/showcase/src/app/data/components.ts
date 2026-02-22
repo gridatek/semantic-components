@@ -550,6 +550,16 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Forms',
   },
   {
+    name: 'Native Slider',
+    path: 'native-slider',
+    description:
+      'A styled native range input for selecting a value within a given range.',
+    status: 'Experimental',
+    library: 'ui-lab',
+    category: 'Forms',
+    hidden: true,
+  },
+  {
     name: 'Navbar',
     path: 'navbar',
     description: 'A responsive navigation bar with mobile menu support.',

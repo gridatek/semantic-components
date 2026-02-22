@@ -351,6 +351,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/native-select/native-select-page'),
       },
       {
+        path: 'native-slider',
+        title: 'Native Slider - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/native-slider/native-slider-page'),
+      },
+      {
         path: 'navigation-menu',
         title: 'Navigation Menu - Semantic Components',
         loadComponent: () =>

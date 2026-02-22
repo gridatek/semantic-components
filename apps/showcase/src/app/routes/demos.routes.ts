@@ -2353,6 +2353,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/native-slider',
+    children: [
+      {
+        path: 'basic-native-slider-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-slider/demos/basic-native-slider-demo').then(
+            (m) => m.BasicNativeSliderDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/navigation-menu',
     children: [
       {
