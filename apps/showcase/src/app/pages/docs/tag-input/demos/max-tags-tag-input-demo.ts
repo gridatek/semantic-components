@@ -21,9 +21,7 @@ import {
           <span scTagInputTag [tag]="tag"></span>
         }
         <input scTagInputField />
-      </div>
-      <div class="flex justify-end">
-        <span scTagInputCount></span>
+        <span scTagInputCount class="ml-auto text-xs"></span>
       </div>
     </div>
   `,
