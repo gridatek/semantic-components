@@ -29,6 +29,9 @@ export class ScSelectList {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex flex-col', this.classInput()),
+    cn(
+      'flex max-h-44 flex-col overflow-x-hidden overflow-y-auto',
+      this.classInput(),
+    ),
   );
 }
