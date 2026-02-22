@@ -2372,6 +2372,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/native-range-slider',
+    children: [
+      {
+        path: 'basic-native-range-slider-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-range-slider/demos/basic-native-range-slider-demo').then(
+            (m) => m.BasicNativeRangeSliderDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/navigation-menu',
     children: [
       {
