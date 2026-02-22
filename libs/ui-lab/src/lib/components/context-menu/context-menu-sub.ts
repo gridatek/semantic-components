@@ -6,6 +6,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { cn } from '@semantic-components/ui';
 
 @Component({
@@ -25,6 +26,12 @@ export class ScContextMenuSub {
 
   /** Whether the submenu is open */
   readonly open = signal<boolean>(false);
+
+  /** Overlay origin registered by the sub-trigger */
+  overlayOrigin: CdkOverlayOrigin | null = null;
+
+  /** Cancel hide function registered by the sub-trigger */
+  cancelTriggerHide: (() => void) | null = null;
 
   protected readonly class = computed(() => cn('relative', this.classInput()));
 

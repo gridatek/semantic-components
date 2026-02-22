@@ -49,6 +49,11 @@ export class ScContextMenuSubTrigger {
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   readonly classInput = input<string>('', { alias: 'class' });
 
+  constructor() {
+    this.submenu.overlayOrigin = this.overlayOrigin;
+    this.submenu.cancelTriggerHide = () => this.cancelHide();
+  }
+
   private showTimeout: ReturnType<typeof setTimeout> | null = null;
   private hideTimeout: ReturnType<typeof setTimeout> | null = null;
 

@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScContextMenuSub } from './context-menu-sub';
-import { ScContextMenuSubTrigger } from './context-menu-sub-trigger';
 
 const positions: ConnectedPosition[] = [
   {
@@ -34,7 +33,7 @@ const positions: ConnectedPosition[] = [
   template: `
     <ng-template
       cdkConnectedOverlay
-      [cdkConnectedOverlayOrigin]="trigger.overlayOrigin"
+      [cdkConnectedOverlayOrigin]="submenu.overlayOrigin!"
       [cdkConnectedOverlayOpen]="submenu.open()"
       [cdkConnectedOverlayPositions]="positions"
     >
@@ -57,7 +56,6 @@ const positions: ConnectedPosition[] = [
 })
 export class ScContextMenuSubContent {
   readonly submenu = inject(ScContextMenuSub);
-  readonly trigger = inject(ScContextMenuSubTrigger);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly positions = positions;
@@ -74,7 +72,7 @@ export class ScContextMenuSubContent {
   );
 
   onMouseEnter(): void {
-    this.trigger.cancelHide();
+    this.submenu.cancelTriggerHide?.();
   }
 
   onMouseLeave(): void {
