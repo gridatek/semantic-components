@@ -2372,13 +2372,13 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/native-range-slider',
+    path: 'demos/range-slider',
     children: [
       {
-        path: 'basic-native-range-slider-demo',
+        path: 'basic-range-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/native-range-slider/demos/basic-native-range-slider-demo').then(
-            (m) => m.BasicNativeRangeSliderDemo,
+          import('../pages/docs/range-slider/demos/basic-range-slider-demo').then(
+            (m) => m.BasicRangeSliderDemo,
           ),
       },
     ],

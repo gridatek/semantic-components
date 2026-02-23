@@ -550,10 +550,10 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Forms',
   },
   {
-    name: 'Native Range Slider',
-    path: 'native-range-slider',
+    name: 'Range Slider',
+    path: 'range-slider',
     description:
-      'A native dual-thumb range slider for selecting a value range using two overlaid range inputs.',
+      'A composable dual-thumb range slider for selecting a value range, built with sub-components for track, range, and thumbs.',
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',

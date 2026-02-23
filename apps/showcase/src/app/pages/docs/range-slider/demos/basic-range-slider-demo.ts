@@ -1,0 +1,49 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  ScRangeSlider,
+  ScRangeSliderMax,
+  ScRangeSliderMin,
+  ScRangeSliderRange,
+  ScRangeSliderTrack,
+} from '@semantic-components/ui-lab';
+
+@Component({
+  selector: 'app-basic-range-slider-demo',
+  imports: [
+    ScRangeSlider,
+    ScRangeSliderTrack,
+    ScRangeSliderRange,
+    ScRangeSliderMin,
+    ScRangeSliderMax,
+  ],
+  template: `
+    <div class="w-[280px] space-y-4">
+      <label class="text-sm font-medium">
+        Price range: {{ '$' + minValue }} &ndash; {{ '$' + maxValue }}
+      </label>
+      <div
+        scRangeSlider
+        [(minValue)]="minValue"
+        [(maxValue)]="maxValue"
+        [min]="0"
+        [max]="1000"
+        [step]="10"
+      >
+        <div scRangeSliderTrack></div>
+        <div scRangeSliderRange></div>
+        <input scRangeSliderMin aria-label="Minimum price" />
+        <input scRangeSliderMax aria-label="Maximum price" />
+      </div>
+    </div>
+  `,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class BasicRangeSliderDemo {
+  minValue = 200;
+  maxValue = 800;
+}

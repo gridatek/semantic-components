@@ -3,7 +3,7 @@ export * from './audio-player';
 export * from './barcode-scanner';
 export * from './chart';
 export * from './native-checkbox';
-export * from './native-range-slider';
+export * from './range-slider';
 export * from './color-picker';
 export * from './combobox';
 export * from './command';
