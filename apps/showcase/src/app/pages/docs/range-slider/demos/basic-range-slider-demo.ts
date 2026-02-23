@@ -7,7 +7,7 @@ import {
   ScRangeSlider,
   ScRangeSliderMax,
   ScRangeSliderMin,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-range-slider-demo',

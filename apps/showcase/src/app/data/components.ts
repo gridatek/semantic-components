@@ -675,11 +675,10 @@ export const COMPONENTS: ComponentItem[] = [
     name: 'Range Slider',
     path: 'range-slider',
     description:
-      'A composable dual-thumb range slider for selecting a value range, built with sub-components for track, range, and thumbs.',
+      'A dual-thumb range slider for selecting a numeric range between a minimum and maximum value.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Rating Field',

@@ -32,7 +32,7 @@ import {
   ScRangeSlider,
   ScRangeSliderMax,
   ScRangeSliderMin,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-custom-color-range-slider-demo',
