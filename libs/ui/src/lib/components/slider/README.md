@@ -1,26 +1,17 @@
-# Native Slider
+# Slider
 
 A directive that styles native `<input type="range">` elements with a filled track, hover effect, and focus ring while preserving native form behavior.
 
-## Why Native Slider?
-
-Unlike `ScSlider` (which is a custom component), `ScNativeSlider` is a directive for native HTML range inputs. This provides:
-
-- **Native form integration** - Works with `ngModel`, Reactive Forms, and Signal Forms
-- **No ControlValueAccessor needed** - The native input handles all form state
-- **Browser accessibility** - Leverages built-in browser accessibility features
-- **Smaller bundle** - No custom form control logic
-
 ## Components
 
-- `ScNativeSlider` - Directive for `<input type="range">`
+- `ScSlider` - Directive for `<input type="range">`
 
 ## Usage
 
 ### Basic
 
 ```html
-<input scNativeSlider [value]="volume()" (input)="onInput($event)" />
+<input scSlider [value]="volume()" (input)="onInput($event)" />
 ```
 
 ### With Label (ScField)
@@ -28,14 +19,14 @@ Unlike `ScSlider` (which is a custom component), `ScNativeSlider` is a directive
 ```html
 <div scField class="w-[280px]">
   <label scLabel>Volume — {{ value() }}</label>
-  <input scNativeSlider [value]="value()" (input)="onInput($event)" />
+  <input scSlider [value]="value()" (input)="onInput($event)" />
 </div>
 ```
 
 ### Custom Min/Max
 
 ```html
-<input scNativeSlider min="0" max="200" [value]="brightness()" (input)="onInput($event)" />
+<input scSlider min="0" max="200" [value]="brightness()" (input)="onInput($event)" />
 ```
 
 ### Custom Color
@@ -44,14 +35,14 @@ Override `--primary`, `--muted`, and `--ring` CSS variables on a parent element 
 
 ```html
 <div style="--primary: oklch(0.6 0.25 30); --muted: oklch(0.9 0.05 30); --ring: oklch(0.6 0.25 30)">
-  <input scNativeSlider [value]="temperature()" (input)="onInput($event)" />
+  <input scSlider [value]="temperature()" (input)="onInput($event)" />
 </div>
 ```
 
 ### Disabled
 
 ```html
-<input scNativeSlider disabled [value]="50" />
+<input scSlider disabled [value]="50" />
 ```
 
 ## Inputs
@@ -91,16 +82,6 @@ The `--fill-percent` variable is calculated as `(value - min) / (max - min) * 10
 - **Track**: `h-1` (4px), `muted` background for unfilled portion
 - **Hover**: Translucent `ring` box-shadow on thumb hover, using `oklch` relative color syntax for 50% opacity
 - **Focus**: Same ring shadow on `:focus-visible`
-
-### Comparison with ScSlider
-
-| Feature          | ScSlider            | ScNativeSlider         |
-| ---------------- | ------------------- | ---------------------- |
-| Type             | Component           | Directive              |
-| Form Integration | Two-way via model() | Native form controls   |
-| ARIA             | Manual attributes   | Native browser support |
-| Range support    | Yes (dual thumbs)   | No (single value only) |
-| Filled track     | Custom element      | CSS gradient / pseudo  |
 
 ## Accessibility
 

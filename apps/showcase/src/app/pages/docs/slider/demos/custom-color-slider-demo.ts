@@ -4,12 +4,11 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScField, ScLabel } from '@semantic-components/ui';
-import { ScNativeSlider } from '@semantic-components/ui-lab';
+import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-custom-color-native-slider-demo',
-  imports: [ScNativeSlider, ScField, ScLabel],
+  selector: 'app-custom-color-slider-demo',
+  imports: [ScSlider, ScField, ScLabel],
   template: `
     <div
       scField
@@ -17,13 +16,13 @@ import { ScNativeSlider } from '@semantic-components/ui-lab';
       style="--primary: oklch(0.6 0.25 30); --muted: oklch(0.9 0.05 30); --ring: oklch(0.6 0.25 30)"
     >
       <label scLabel>Temperature — {{ value() }}</label>
-      <input scNativeSlider [value]="value()" (input)="onInput($event)" />
+      <input scSlider [value]="value()" (input)="onInput($event)" />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomColorNativeSliderDemo {
+export class CustomColorSliderDemo {
   readonly value = signal(50);
 
   onInput(event: Event): void {
