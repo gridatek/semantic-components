@@ -10,17 +10,15 @@ import {
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScNavigationMenuItem } from './navigation-menu-item';
+import { ScNavigationMenuTriggerIcon } from './navigation-menu-trigger-icon';
 
 @Component({
   selector: 'button[scNavigationMenuTrigger]',
-  imports: [SiChevronDownIcon],
+  imports: [SiChevronDownIcon, ScNavigationMenuTriggerIcon],
   hostDirectives: [CdkOverlayOrigin],
   template: `
     <ng-content />
-    <svg
-      siChevronDownIcon
-      class="relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180"
-    ></svg>
+    <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
   `,
   host: {
     'data-slot': 'navigation-menu-trigger',
