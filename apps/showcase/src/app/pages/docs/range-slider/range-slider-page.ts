@@ -21,8 +21,8 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight">Range Slider</h1>
         <p class="text-muted-foreground">
-          A composable dual-thumb range slider for selecting a value range,
-          built with sub-components for track, range, and thumbs.
+          A dual-thumb range slider for selecting a numeric range between a
+          minimum and maximum value.
         </p>
         <app-component-badges path="range-slider" />
       </div>
