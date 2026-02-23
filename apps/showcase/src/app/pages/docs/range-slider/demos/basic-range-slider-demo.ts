@@ -5,19 +5,13 @@ import {
 } from '@angular/core';
 import {
   ScRangeSlider,
-  ScRangeSliderFilledTrack,
   ScRangeSliderMaxThumb,
   ScRangeSliderMinThumb,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-range-slider-demo',
-  imports: [
-    ScRangeSlider,
-    ScRangeSliderFilledTrack,
-    ScRangeSliderMinThumb,
-    ScRangeSliderMaxThumb,
-  ],
+  imports: [ScRangeSlider, ScRangeSliderMinThumb, ScRangeSliderMaxThumb],
   template: `
     <div class="w-[280px] space-y-4">
       <label class="text-sm font-medium">
@@ -31,7 +25,6 @@ import {
         [max]="1000"
         [step]="10"
       >
-        <div scRangeSliderFilledTrack></div>
         <input scRangeSliderMinThumb aria-label="Minimum price" />
         <input scRangeSliderMaxThumb aria-label="Maximum price" />
       </div>

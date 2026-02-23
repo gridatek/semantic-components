@@ -8,16 +8,18 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
+import { ScRangeSliderFilledTrack } from './range-slider-filled-track';
+import { ScRangeSliderTrack } from './range-slider-track';
+
 @Component({
   selector: 'div[scRangeSlider]',
+  imports: [ScRangeSliderTrack, ScRangeSliderFilledTrack],
   host: {
     '[class]': 'class()',
   },
   template: `
-    <div
-      aria-hidden="true"
-      class="absolute h-1 w-full rounded-full bg-muted"
-    ></div>
+    <div scRangeSliderTrack></div>
+    <div scRangeSliderFilledTrack></div>
     <ng-content />
   `,
   encapsulation: ViewEncapsulation.None,
