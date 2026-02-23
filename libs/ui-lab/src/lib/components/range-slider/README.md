@@ -1,6 +1,6 @@
 # Range Slider
 
-A composable range slider component for selecting a numeric range between a minimum and maximum value.
+A dual-thumb range slider for selecting a numeric range between a minimum and maximum value.
 
 ## Usage
 
