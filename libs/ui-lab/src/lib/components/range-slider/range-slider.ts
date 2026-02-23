@@ -1,4 +1,11 @@
-import { computed, Directive, input, model } from '@angular/core';
+import {
+  computed,
+  Directive,
+  ElementRef,
+  inject,
+  input,
+  model,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
@@ -7,9 +14,12 @@ import { cn } from '@semantic-components/ui';
     '[class]': 'class()',
     '[style.--min-percent]': 'minPercentCss()',
     '[style.--max-percent]': 'maxPercentCss()',
+    '(pointerdown)': 'onPointerDown($event)',
   },
 })
 export class ScRangeSlider {
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly minValue = model<number>(0);
@@ -36,6 +46,26 @@ export class ScRangeSlider {
 
   protected readonly minPercentCss = computed(() => `${this.minPercent()}%`);
   protected readonly maxPercentCss = computed(() => `${this.maxPercent()}%`);
+
+  protected onPointerDown(event: PointerEvent) {
+    if (this.disabled()) {
+      return;
+    }
+
+    const rect = this.el.nativeElement.getBoundingClientRect();
+    const percent = ((event.clientX - rect.left) / rect.width) * 100;
+    const value = this.min() + (percent / 100) * (this.max() - this.min());
+    const stepped = Math.round(value / this.step()) * this.step();
+
+    const distToMin = Math.abs(stepped - this.minValue());
+    const distToMax = Math.abs(stepped - this.maxValue());
+
+    if (distToMin <= distToMax) {
+      this.minValue.set(this.clampMin(stepped));
+    } else {
+      this.maxValue.set(this.clampMax(stepped));
+    }
+  }
 
   clampMin(val: number): number {
     return Math.min(val, this.maxValue());
