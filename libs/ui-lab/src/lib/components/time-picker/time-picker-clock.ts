@@ -10,9 +10,6 @@ import {
 import { cn } from '@semantic-components/ui';
 import { SC_TIME_PICKER } from './time-picker';
 
-// ============================================================================
-// TimePickerClock (visual clock selector)
-// ============================================================================
 @Component({
   selector: '[scTimePickerClock]',
   template: `
@@ -41,13 +38,15 @@ import { SC_TIME_PICKER } from './time-picker';
               [attr.cx]="marker.x"
               [attr.cy]="marker.y"
               r="14"
-              [class.fill-primary]="isSelected(marker.value)"
-              [class.text-primary-foreground]="isSelected(marker.value)"
+              [class.fill-primary]="selectedValue() === marker.value"
+              [class.text-primary-foreground]="selectedValue() === marker.value"
               [class.fill-accent]="
-                hoveredValue() === marker.value && !isSelected(marker.value)
+                hoveredValue() === marker.value &&
+                selectedValue() !== marker.value
               "
               [class.fill-transparent]="
-                hoveredValue() !== marker.value && !isSelected(marker.value)
+                hoveredValue() !== marker.value &&
+                selectedValue() !== marker.value
               "
               class="transition-colors"
             />
@@ -57,8 +56,8 @@ import { SC_TIME_PICKER } from './time-picker';
               text-anchor="middle"
               dominant-baseline="central"
               class="text-sm select-none"
-              [class.fill-primary-foreground]="isSelected(marker.value)"
-              [class.fill-foreground]="!isSelected(marker.value)"
+              [class.fill-primary-foreground]="selectedValue() === marker.value"
+              [class.fill-foreground]="selectedValue() !== marker.value"
             >
               {{ marker.label }}
             </text>
@@ -108,21 +107,20 @@ export class ScTimePickerClock {
 
   protected readonly markers = computed(() => {
     const isHours = this.mode() === 'hours';
-    const count = isHours ? 12 : 12; // Show 12 markers for both
     const step = isHours ? 1 : 5;
     const radius = 70;
 
     const markers: { value: number; label: string; x: number; y: number }[] =
       [];
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < 12; i++) {
       const value = isHours ? (i === 0 ? 12 : i) : i * step;
       const angle = (i * 30 - 90) * (Math.PI / 180);
       const x = 100 + radius * Math.cos(angle);
       const y = 100 + radius * Math.sin(angle);
 
       markers.push({
-        value: isHours ? (i === 0 ? 12 : i) : i * step,
+        value,
         label: value.toString().padStart(2, '0'),
         x,
         y,
@@ -132,20 +130,34 @@ export class ScTimePickerClock {
     return markers;
   });
 
+  protected readonly selectedValue = computed(() => {
+    const val = this.timePicker.value();
+    if (!val) return null;
+
+    if (this.mode() === 'hours') {
+      const hours =
+        this.timePicker.format() === '12h'
+          ? val.hours % 12 || 12
+          : val.hours % 12;
+      return hours;
+    }
+
+    return val.minutes;
+  });
+
   protected readonly selectedAngle = computed(() => {
     const val = this.timePicker.value();
     if (!val) return null;
 
-    const isHours = this.mode() === 'hours';
-    if (isHours) {
+    if (this.mode() === 'hours') {
       const hours =
         this.timePicker.format() === '12h'
           ? val.hours % 12 || 12
           : val.hours % 12;
       return (hours * 30 - 90) * (Math.PI / 180);
-    } else {
-      return (val.minutes * 6 - 90) * (Math.PI / 180);
     }
+
+    return (val.minutes * 6 - 90) * (Math.PI / 180);
   });
 
   protected readonly handX = computed(() => {
@@ -159,22 +171,6 @@ export class ScTimePickerClock {
     if (angle === null) return 100;
     return 100 + 55 * Math.sin(angle);
   });
-
-  isSelected(value: number): boolean {
-    const val = this.timePicker.value();
-    if (!val) return false;
-
-    const isHours = this.mode() === 'hours';
-    if (isHours) {
-      const hours =
-        this.timePicker.format() === '12h'
-          ? val.hours % 12 || 12
-          : val.hours % 12;
-      return hours === value || (value === 12 && hours === 0);
-    } else {
-      return val.minutes === value;
-    }
-  }
 
   selectValue(value: number): void {
     if (this.mode() === 'hours') {

@@ -17,14 +17,10 @@ export interface TimeValue {
   period?: TimePeriod;
 }
 
-// Token for time picker context
 export const SC_TIME_PICKER = new InjectionToken<ScTimePicker>(
   'SC_TIME_PICKER',
 );
 
-// ============================================================================
-// TimePicker
-// ============================================================================
 @Directive({
   selector: '[scTimePicker]',
   providers: [{ provide: SC_TIME_PICKER, useExisting: ScTimePicker }],
@@ -44,27 +40,7 @@ export class ScTimePicker {
     cn('inline-flex items-center gap-1', this.classInput()),
   );
 
-  setHours(hours: number): void {
-    const current = this.value() || { hours: 0, minutes: 0 };
-    this.value.set({ ...current, hours });
-  }
-
-  setMinutes(minutes: number): void {
-    const current = this.value() || { hours: 0, minutes: 0 };
-    this.value.set({ ...current, minutes });
-  }
-
-  setSeconds(seconds: number): void {
-    const current = this.value() || { hours: 0, minutes: 0 };
-    this.value.set({ ...current, seconds });
-  }
-
-  setPeriod(period: TimePeriod): void {
-    const current = this.value() || { hours: 0, minutes: 0 };
-    this.value.set({ ...current, period });
-  }
-
-  getFormattedTime(): string {
+  readonly formattedTime = computed(() => {
     const val = this.value();
     if (!val) return '';
 
@@ -83,5 +59,25 @@ export class ScTimePicker {
     }
 
     return time;
+  });
+
+  setHours(hours: number): void {
+    const current = this.value() || { hours: 0, minutes: 0 };
+    this.value.set({ ...current, hours });
+  }
+
+  setMinutes(minutes: number): void {
+    const current = this.value() || { hours: 0, minutes: 0 };
+    this.value.set({ ...current, minutes });
+  }
+
+  setSeconds(seconds: number): void {
+    const current = this.value() || { hours: 0, minutes: 0 };
+    this.value.set({ ...current, seconds });
+  }
+
+  setPeriod(period: TimePeriod): void {
+    const current = this.value() || { hours: 0, minutes: 0 };
+    this.value.set({ ...current, period });
   }
 }
