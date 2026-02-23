@@ -6,8 +6,8 @@ A composable range slider component for selecting a numeric range between a mini
 
 ```html
 <div scRangeSlider [(minValue)]="minValue" [(maxValue)]="maxValue" [min]="0" [max]="1000" [step]="10">
-  <input scRangeSliderMinThumb aria-label="Minimum price" />
-  <input scRangeSliderMaxThumb aria-label="Maximum price" />
+  <input scRangeSliderMin aria-label="Minimum price" />
+  <input scRangeSliderMax aria-label="Maximum price" />
 </div>
 ```
 
@@ -15,7 +15,7 @@ A composable range slider component for selecting a numeric range between a mini
 
 ### `ScRangeSlider`
 
-Main component that manages state and renders the track internally.
+Directive that manages state and renders the track via CSS gradients on the native input's track pseudo-elements.
 
 **Selector:** `div[scRangeSlider]`
 
@@ -26,32 +26,24 @@ Main component that manages state and renders the track internally.
 | `min`        | `input<number>`  | `0`     | Minimum allowed value       |
 | `max`        | `input<number>`  | `100`   | Maximum allowed value       |
 | `step`       | `input<number>`  | `1`     | Step increment              |
-| `disabled`   | `input<boolean>` | `false` | Disables both thumbs        |
+| `disabled`   | `input<boolean>` | `false` | Disables both inputs        |
 
-### `ScRangeSliderMinThumb`
+### `ScRangeSliderMin`
 
-Directive for the minimum value thumb input.
+Directive for the minimum value range input.
 
-**Selector:** `input[scRangeSliderMinThumb]`
+**Selector:** `input[scRangeSliderMin]`
 
 Automatically clamps its value so it cannot exceed `maxValue`.
 
-### `ScRangeSliderMaxThumb`
+### `ScRangeSliderMax`
 
-Directive for the maximum value thumb input.
+Directive for the maximum value range input.
 
-**Selector:** `input[scRangeSliderMaxThumb]`
+**Selector:** `input[scRangeSliderMax]`
 
 Automatically clamps its value so it cannot go below `minValue`.
 
-## Internal Directives
-
-The following directives are rendered internally by `ScRangeSlider` and are not part of the public API:
-
-- **`ScRangeSliderTrack`** — The background track (`aria-hidden`).
-- **`ScRangeSliderFilledTrack`** — The filled portion between the two thumbs (`aria-hidden`).
-
 ## Accessibility
 
-- Both track elements use `aria-hidden="true"` since they are purely decorative.
-- Thumb inputs are native `<input type="range">` elements — provide `aria-label` attributes to describe each thumb.
+- Thumb inputs are native `<input type="range">` elements — provide `aria-label` attributes to describe each input.
