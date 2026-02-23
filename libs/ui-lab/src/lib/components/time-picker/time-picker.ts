@@ -7,14 +7,14 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-export type TimeFormat = '12h' | '24h';
-export type TimePeriod = 'AM' | 'PM';
+export type ScTimeFormat = '12h' | '24h';
+export type ScTimePeriod = 'AM' | 'PM';
 
-export interface TimeValue {
+export interface ScTimeValue {
   hours: number;
   minutes: number;
   seconds?: number;
-  period?: TimePeriod;
+  period?: ScTimePeriod;
 }
 
 export const SC_TIME_PICKER = new InjectionToken<ScTimePicker>(
@@ -31,10 +31,10 @@ export const SC_TIME_PICKER = new InjectionToken<ScTimePicker>(
 })
 export class ScTimePicker {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly format = input<TimeFormat>('12h');
+  readonly format = input<ScTimeFormat>('12h');
   readonly showSeconds = input<boolean>(false);
   readonly disabled = input<boolean>(false);
-  readonly value = model<TimeValue | null>(null);
+  readonly value = model<ScTimeValue | null>(null);
 
   protected readonly class = computed(() =>
     cn('inline-flex items-center gap-1', this.classInput()),
@@ -76,7 +76,7 @@ export class ScTimePicker {
     this.value.set({ ...current, seconds });
   }
 
-  setPeriod(period: TimePeriod): void {
+  setPeriod(period: ScTimePeriod): void {
     const current = this.value() || { hours: 0, minutes: 0 };
     this.value.set({ ...current, period });
   }

@@ -9,7 +9,10 @@ A component for selecting time values with support for 12/24 hour formats.
   <input scTimePickerInput type="hours" label="Hours" />
   <span scTimePickerSeparator>:</span>
   <input scTimePickerInput type="minutes" label="Minutes" />
-  <div scTimePickerPeriod></div>
+  <div scTimePickerPeriod>
+    <button scTimePickerPeriodAM>AM</button>
+    <button scTimePickerPeriodPM>PM</button>
+  </div>
 </div>
 ```
 
@@ -32,9 +35,9 @@ Root container that manages time state.
 
 **Two-way Bindings:**
 
-| Binding | Type                | Description   |
-| ------- | ------------------- | ------------- |
-| `value` | `TimeValue \| null` | Selected time |
+| Binding | Type                  | Description   |
+| ------- | --------------------- | ------------- |
+| `value` | `ScTimeValue \| null` | Selected time |
 
 **Computed:**
 
@@ -80,9 +83,21 @@ Visual separator (colon) between inputs.
 
 ### ScTimePickerPeriod
 
-AM/PM toggle buttons.
+AM/PM toggle container. Consumers provide buttons via content projection.
 
 **Selector:** `[scTimePickerPeriod]`
+
+### ScTimePickerPeriodAM
+
+AM toggle button directive. Must be a child of `ScTimePickerPeriod`.
+
+**Selector:** `button[scTimePickerPeriodAM]`
+
+### ScTimePickerPeriodPM
+
+PM toggle button directive. Must be a child of `ScTimePickerPeriod`.
+
+**Selector:** `button[scTimePickerPeriodPM]`
 
 ### ScTimePickerClock
 
@@ -100,14 +115,14 @@ Visual clock interface for selection.
 ## Types
 
 ```typescript
-type TimeFormat = '12h' | '24h';
-type TimePeriod = 'AM' | 'PM';
+type ScTimeFormat = '12h' | '24h';
+type ScTimePeriod = 'AM' | 'PM';
 
-interface TimeValue {
+interface ScTimeValue {
   hours: number;
   minutes: number;
   seconds?: number;
-  period?: TimePeriod;
+  period?: ScTimePeriod;
 }
 ```
 
@@ -120,7 +135,10 @@ interface TimeValue {
   <input scTimePickerInput type="hours" />
   <span scTimePickerSeparator>:</span>
   <input scTimePickerInput type="minutes" />
-  <div scTimePickerPeriod></div>
+  <div scTimePickerPeriod>
+    <button scTimePickerPeriodAM>AM</button>
+    <button scTimePickerPeriodPM>PM</button>
+  </div>
 </div>
 ```
 
@@ -167,7 +185,7 @@ interface TimeValue {
 ### Setting Initial Value
 
 ```typescript
-time = signal<TimeValue>({
+time = signal<ScTimeValue>({
   hours: 9,
   minutes: 30,
   period: 'AM',

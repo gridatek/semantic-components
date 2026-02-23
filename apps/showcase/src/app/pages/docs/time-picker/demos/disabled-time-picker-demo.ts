@@ -9,7 +9,9 @@ import {
   ScTimePickerInput,
   ScTimePickerSeparator,
   ScTimePickerPeriod,
-  TimeValue,
+  ScTimePickerPeriodAM,
+  ScTimePickerPeriodPM,
+  ScTimeValue,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -19,20 +21,25 @@ import {
     ScTimePickerInput,
     ScTimePickerSeparator,
     ScTimePickerPeriod,
+    ScTimePickerPeriodAM,
+    ScTimePickerPeriodPM,
   ],
   template: `
     <div scTimePicker format="12h" [disabled]="true" [(value)]="time">
       <input scTimePickerInput type="hours" aria-label="Hours" />
       <span scTimePickerSeparator>:</span>
       <input scTimePickerInput type="minutes" aria-label="Minutes" />
-      <div scTimePickerPeriod></div>
+      <div scTimePickerPeriod>
+        <button scTimePickerPeriodAM>AM</button>
+        <button scTimePickerPeriodPM>PM</button>
+      </div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledTimePickerDemo {
-  readonly time = signal<TimeValue | null>({
+  readonly time = signal<ScTimeValue | null>({
     hours: 8,
     minutes: 0,
     period: 'AM',

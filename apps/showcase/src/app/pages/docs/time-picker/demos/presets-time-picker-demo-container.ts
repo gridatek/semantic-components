@@ -30,7 +30,9 @@ import {
   ScTimePickerInput,
   ScTimePickerSeparator,
   ScTimePickerPeriod,
-  TimeValue,
+  ScTimePickerPeriodAM,
+  ScTimePickerPeriodPM,
+  ScTimeValue,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -40,6 +42,8 @@ import {
     ScTimePickerInput,
     ScTimePickerSeparator,
     ScTimePickerPeriod,
+    ScTimePickerPeriodAM,
+    ScTimePickerPeriodPM,
   ],
   template: \`
     <div class="space-y-4">
@@ -77,7 +81,10 @@ import {
         <input scTimePickerInput type="hours" aria-label="Hours" />
         <span scTimePickerSeparator>:</span>
         <input scTimePickerInput type="minutes" aria-label="Minutes" />
-        <div scTimePickerPeriod></div>
+        <div scTimePickerPeriod>
+          <button scTimePickerPeriodAM>AM</button>
+          <button scTimePickerPeriodPM>PM</button>
+        </div>
       </div>
     </div>
   \`,
@@ -85,7 +92,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PresetsTimePickerDemo {
-  readonly time = signal<TimeValue | null>(null);
+  readonly time = signal<ScTimeValue | null>(null);
 
   setPreset(hours: number, minutes: number, period: 'AM' | 'PM'): void {
     const adjustedHours =

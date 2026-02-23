@@ -32,7 +32,7 @@ export class MinutesTimePickerClockDemoContainer {
 import {
   ScTimePicker,
   ScTimePickerClock,
-  TimeValue,
+  ScTimeValue,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -57,7 +57,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinutesTimePickerClockDemo {
-  readonly time = signal<TimeValue | null>({
+  readonly time = signal<ScTimeValue | null>({
     hours: 10,
     minutes: 30,
   });

@@ -33,12 +33,20 @@ import {
   ScTimePicker,
   ScTimePickerClock,
   ScTimePickerPeriod,
-  TimeValue,
+  ScTimePickerPeriodAM,
+  ScTimePickerPeriodPM,
+  ScTimeValue,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-hours-time-picker-clock-demo',
-  imports: [ScTimePicker, ScTimePickerClock, ScTimePickerPeriod],
+  imports: [
+    ScTimePicker,
+    ScTimePickerClock,
+    ScTimePickerPeriod,
+    ScTimePickerPeriodAM,
+    ScTimePickerPeriodPM,
+  ],
   template: \`
     <div class="flex items-start gap-8">
       <div scTimePicker format="12h" [(value)]="time">
@@ -51,7 +59,10 @@ import {
           {{ (time()?.hours ?? 0) >= 12 ? 'PM' : 'AM' }}
         </p>
         <div scTimePicker format="12h" [(value)]="time">
-          <div scTimePickerPeriod></div>
+          <div scTimePickerPeriod>
+            <button scTimePickerPeriodAM>AM</button>
+            <button scTimePickerPeriodPM>PM</button>
+          </div>
         </div>
       </div>
     </div>
@@ -60,6 +71,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HoursTimePickerClockDemo {
-  readonly time = signal<TimeValue | null>({ hours: 10, minutes: 0 });
+  readonly time = signal<ScTimeValue | null>({ hours: 10, minutes: 0 });
 }`;
 }

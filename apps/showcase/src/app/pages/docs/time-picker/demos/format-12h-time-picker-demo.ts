@@ -9,7 +9,9 @@ import {
   ScTimePickerInput,
   ScTimePickerSeparator,
   ScTimePickerPeriod,
-  TimeValue,
+  ScTimePickerPeriodAM,
+  ScTimePickerPeriodPM,
+  ScTimeValue,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -19,6 +21,8 @@ import {
     ScTimePickerInput,
     ScTimePickerSeparator,
     ScTimePickerPeriod,
+    ScTimePickerPeriodAM,
+    ScTimePickerPeriodPM,
   ],
   template: `
     <div class="flex flex-col gap-4">
@@ -26,7 +30,10 @@ import {
         <input scTimePickerInput type="hours" aria-label="Hours" />
         <span scTimePickerSeparator>:</span>
         <input scTimePickerInput type="minutes" aria-label="Minutes" />
-        <div scTimePickerPeriod></div>
+        <div scTimePickerPeriod>
+          <button scTimePickerPeriodAM>AM</button>
+          <button scTimePickerPeriodPM>PM</button>
+        </div>
       </div>
       <p class="text-sm text-muted-foreground">
         Selected: {{ formatTime(time()) }}
@@ -37,13 +44,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Format12hTimePickerDemo {
-  readonly time = signal<TimeValue | null>({
+  readonly time = signal<ScTimeValue | null>({
     hours: 9,
     minutes: 30,
     period: 'AM',
   });
 
-  formatTime(val: TimeValue | null): string {
+  formatTime(val: ScTimeValue | null): string {
     if (!val) return 'No time selected';
     const hours = val.hours % 12 || 12;
     const period = val.period || (val.hours >= 12 ? 'PM' : 'AM');

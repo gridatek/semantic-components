@@ -8,7 +8,7 @@ import {
   ScTimePicker,
   ScTimePickerInput,
   ScTimePickerSeparator,
-  TimeValue,
+  ScTimeValue,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -32,13 +32,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SecondsTimePickerDemo {
-  readonly time = signal<TimeValue | null>({
+  readonly time = signal<ScTimeValue | null>({
     hours: 10,
     minutes: 30,
     seconds: 15,
   });
 
-  formatTime(val: TimeValue | null): string {
+  formatTime(val: ScTimeValue | null): string {
     if (!val) return 'No time selected';
     return `${val.hours.toString().padStart(2, '0')}:${val.minutes.toString().padStart(2, '0')}:${(val.seconds ?? 0).toString().padStart(2, '0')}`;
   }
