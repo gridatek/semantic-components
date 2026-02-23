@@ -3784,24 +3784,29 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'clock-hours-time-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker/demos/clock-hours-time-picker-demo').then(
-            (m) => m.ClockHoursTimePickerDemo,
-          ),
-      },
-      {
-        path: 'clock-minutes-time-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker/demos/clock-minutes-time-picker-demo').then(
-            (m) => m.ClockMinutesTimePickerDemo,
-          ),
-      },
-      {
         path: 'presets-time-picker-demo',
         loadComponent: () =>
           import('../pages/docs/time-picker/demos/presets-time-picker-demo').then(
             (m) => m.PresetsTimePickerDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/time-picker-clock',
+    children: [
+      {
+        path: 'hours-time-picker-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker-clock/demos/hours-time-picker-clock-demo').then(
+            (m) => m.HoursTimePickerClockDemo,
+          ),
+      },
+      {
+        path: 'minutes-time-picker-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker-clock/demos/minutes-time-picker-clock-demo').then(
+            (m) => m.MinutesTimePickerClockDemo,
           ),
       },
     ],

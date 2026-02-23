@@ -4,21 +4,25 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ClockMinutesTimePickerDemo } from './clock-minutes-time-picker-demo';
+import { MinutesTimePickerClockDemo } from './minutes-time-picker-clock-demo';
 
 @Component({
-  selector: 'app-clock-minutes-time-picker-demo-container',
-  imports: [DemoContainer, ClockMinutesTimePickerDemo],
+  selector: 'app-minutes-time-picker-clock-demo-container',
+  imports: [DemoContainer, MinutesTimePickerClockDemo],
   template: `
-    <app-demo-container title="Clock Interface - Minutes" [code]="code">
-      <app-clock-minutes-time-picker-demo />
+    <app-demo-container
+      title="Minutes"
+      demoUrl="/demos/time-picker-clock/minutes-time-picker-clock-demo"
+      [code]="code"
+    >
+      <app-minutes-time-picker-clock-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClockMinutesTimePickerDemoContainer {
+export class MinutesTimePickerClockDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
@@ -32,7 +36,7 @@ import {
 } from '@semantic-components/ui-lab';
 
 @Component({
-  selector: 'app-clock-minutes-time-picker-demo',
+  selector: 'app-minutes-time-picker-clock-demo',
   imports: [ScTimePicker, ScTimePickerClock],
   template: \`
     <div class="flex items-start gap-8">
@@ -52,7 +56,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClockMinutesTimePickerDemo {
+export class MinutesTimePickerClockDemo {
   readonly time = signal<TimeValue | null>({
     hours: 10,
     minutes: 30,

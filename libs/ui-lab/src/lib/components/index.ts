@@ -51,6 +51,7 @@ export * from './stepper';
 export * from './tag-input';
 export * from './theme-toggle';
 export * from './time-picker';
+export * from './time-picker-clock';
 export * from './timeline';
 export * from './timezone';
 export * from './tour-guide';

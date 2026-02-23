@@ -10,9 +10,6 @@ import {
 import { cn } from '@semantic-components/ui';
 import { SC_TIME_PICKER } from './time-picker';
 
-// ============================================================================
-// TimePickerInput
-// ============================================================================
 @Component({
   selector: 'input[scTimePickerInput]',
   template: ``,
@@ -23,8 +20,6 @@ import { SC_TIME_PICKER } from './time-picker';
     '[class]': 'class()',
     '[value]': 'displayValue()',
     '[disabled]': 'timePicker.disabled()',
-    '[attr.min]': 'min()',
-    '[attr.max]': 'max()',
     '[attr.aria-label]': 'ariaLabel()',
     '(input)': 'onInput($event)',
     '(blur)': 'onBlur()',
@@ -51,10 +46,6 @@ export class ScTimePickerInput {
       this.classInput(),
     ),
   );
-
-  protected readonly min = computed(() => {
-    return 0;
-  });
 
   protected readonly max = computed(() => {
     const type = this.type();
@@ -95,7 +86,6 @@ export class ScTimePickerInput {
 
   onBlur(): void {
     this.focused.set(false);
-    // Ensure value is within bounds
     const val = this.timePicker.value();
     if (val) {
       const type = this.type();

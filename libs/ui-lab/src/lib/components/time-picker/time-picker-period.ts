@@ -9,9 +9,6 @@ import {
 import { cn } from '@semantic-components/ui';
 import { SC_TIME_PICKER } from './time-picker';
 
-// ============================================================================
-// TimePickerPeriod
-// ============================================================================
 @Component({
   selector: '[scTimePickerPeriod]',
   template: `

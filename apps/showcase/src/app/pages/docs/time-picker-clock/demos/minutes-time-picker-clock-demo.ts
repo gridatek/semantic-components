@@ -11,7 +11,7 @@ import {
 } from '@semantic-components/ui-lab';
 
 @Component({
-  selector: 'app-clock-minutes-time-picker-demo',
+  selector: 'app-minutes-time-picker-clock-demo',
   imports: [ScTimePicker, ScTimePickerClock],
   template: `
     <div class="flex items-start gap-8">
@@ -31,7 +31,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClockMinutesTimePickerDemo {
+export class MinutesTimePickerClockDemo {
   readonly time = signal<TimeValue | null>({
     hours: 10,
     minutes: 30,

@@ -36,6 +36,12 @@ Root container that manages time state.
 | ------- | ------------------- | ------------- |
 | `value` | `TimeValue \| null` | Selected time |
 
+**Computed:**
+
+| Signal          | Type     | Description           |
+| --------------- | -------- | --------------------- |
+| `formattedTime` | `string` | Formatted time string |
+
 **Methods:**
 
 | Method                | Description     |
@@ -44,7 +50,6 @@ Root container that manages time state.
 | `setMinutes(minutes)` | Set minutes     |
 | `setSeconds(seconds)` | Set seconds     |
 | `setPeriod(period)`   | Set AM/PM       |
-| `getFormattedTime()`  | Get string time |
 
 ### ScTimePickerInput
 
