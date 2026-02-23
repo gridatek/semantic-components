@@ -1,5 +1,5 @@
 import { Combobox, ComboboxPopupContainer } from '@angular/aria/combobox';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -19,6 +19,25 @@ import { ScSelectList } from './select-list';
 import { ScSelectPortal } from './select-portal';
 import { ScSelectTrigger } from './select-trigger';
 
+const positions: ConnectedPosition[] = [
+  // Below, aligned to start (preferred)
+  {
+    originX: 'start',
+    originY: 'bottom',
+    overlayX: 'start',
+    overlayY: 'top',
+    offsetY: 4,
+  },
+  // Above, aligned to start (fallback when not enough space below)
+  {
+    originX: 'start',
+    originY: 'top',
+    overlayX: 'start',
+    overlayY: 'bottom',
+    offsetY: -4,
+  },
+];
+
 @Component({
   selector: 'div[scSelect]',
   exportAs: 'scSelect',
@@ -34,12 +53,10 @@ import { ScSelectTrigger } from './select-trigger';
       @if (origin(); as origin) {
         <ng-template
           cdkConnectedOverlay
-          [cdkConnectedOverlay]="{
-            origin,
-            usePopover: 'inline',
-            matchWidth: true,
-          }"
+          [cdkConnectedOverlayOrigin]="origin"
           [cdkConnectedOverlayOpen]="true"
+          [cdkConnectedOverlayPositions]="positions"
+          [cdkConnectedOverlayMinWidth]="triggerWidth()"
         >
           <ng-container [ngTemplateOutlet]="selectPortal().templateRef" />
         </ng-template>
@@ -65,12 +82,16 @@ export class ScSelect implements FormValueControl<string> {
   protected readonly selectPortal = contentChild.required(ScSelectPortal);
 
   readonly origin = computed(() => this.trigger()?.elementRef);
+  readonly triggerWidth = computed(
+    () => this.trigger()?.elementRef.nativeElement.offsetWidth ?? 0,
+  );
   readonly values = computed(() => this.content()?.values() ?? []);
   readonly displayValue = computed(() => this.value() || this.placeholder());
   protected readonly class = computed(() =>
     cn('relative min-w-36 w-fit', this.classInput()),
   );
 
+  protected readonly positions = positions;
   protected readonly combobox = inject(Combobox);
 
   constructor() {
