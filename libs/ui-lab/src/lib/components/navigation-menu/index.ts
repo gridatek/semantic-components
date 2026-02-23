@@ -4,5 +4,6 @@ export { ScNavigationMenuIndicator } from './navigation-menu-indicator';
 export { ScNavigationMenuItem } from './navigation-menu-item';
 export { ScNavigationMenuLink } from './navigation-menu-link';
 export { ScNavigationMenuList } from './navigation-menu-list';
+export { ScNavigationMenuPortal } from './navigation-menu-portal';
 export { ScNavigationMenuTrigger } from './navigation-menu-trigger';
 export { ScNavigationMenuViewport } from './navigation-menu-viewport';
