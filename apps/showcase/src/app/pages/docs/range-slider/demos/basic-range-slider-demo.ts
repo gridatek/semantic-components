@@ -3,32 +3,37 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScNativeRangeSlider } from '@semantic-components/ui-lab';
+import {
+  ScRangeSlider,
+  ScRangeSliderMax,
+  ScRangeSliderMin,
+} from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-basic-native-range-slider-demo',
-  imports: [ScNativeRangeSlider],
+  selector: 'app-basic-range-slider-demo',
+  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax],
   template: `
     <div class="w-[280px] space-y-4">
       <label class="text-sm font-medium">
         Price range: {{ '$' + minValue }} &ndash; {{ '$' + maxValue }}
       </label>
       <div
-        scNativeRangeSlider
+        scRangeSlider
         [(minValue)]="minValue"
         [(maxValue)]="maxValue"
         [min]="0"
         [max]="1000"
         [step]="10"
-        min-aria-label="Minimum price"
-        max-aria-label="Maximum price"
-      ></div>
+      >
+        <input scRangeSliderMin aria-label="Minimum price" />
+        <input scRangeSliderMax aria-label="Maximum price" />
+      </div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicNativeRangeSliderDemo {
+export class BasicRangeSliderDemo {
   minValue = 200;
   maxValue = 800;
 }

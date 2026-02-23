@@ -4,56 +4,61 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicNativeRangeSliderDemo } from './basic-native-range-slider-demo';
+import { BasicRangeSliderDemo } from './basic-range-slider-demo';
 
 @Component({
-  selector: 'app-basic-native-range-slider-demo-container',
-  imports: [DemoContainer, BasicNativeRangeSliderDemo],
+  selector: 'app-basic-range-slider-demo-container',
+  imports: [DemoContainer, BasicRangeSliderDemo],
   template: `
     <app-demo-container
       title="Basic"
-      demoUrl="/demos/native-range-slider/basic-native-range-slider-demo"
+      demoUrl="/demos/range-slider/basic-range-slider-demo"
       [code]="code"
     >
-      <app-basic-native-range-slider-demo />
+      <app-basic-range-slider-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicNativeRangeSliderDemoContainer {
+export class BasicRangeSliderDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScNativeRangeSlider } from '@semantic-components/ui-lab';
+import {
+  ScRangeSlider,
+  ScRangeSliderMax,
+  ScRangeSliderMin,
+} from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-basic-native-range-slider-demo',
-  imports: [ScNativeRangeSlider],
+  selector: 'app-basic-range-slider-demo',
+  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax],
   template: \`
     <div class="w-[280px] space-y-4">
       <label class="text-sm font-medium">
-        Price range: {{ '$' + minValue }} &ndash; {{ '$' + maxValue }}
+        Price range: {{ '\\$' + minValue }} &ndash; {{ '\\$' + maxValue }}
       </label>
       <div
-        scNativeRangeSlider
+        scRangeSlider
         [(minValue)]="minValue"
         [(maxValue)]="maxValue"
         [min]="0"
         [max]="1000"
         [step]="10"
-        min-aria-label="Minimum price"
-        max-aria-label="Maximum price"
-      ></div>
+      >
+        <input scRangeSliderMin aria-label="Minimum price" />
+        <input scRangeSliderMax aria-label="Maximum price" />
+      </div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicNativeRangeSliderDemo {
+export class BasicRangeSliderDemo {
   minValue = 200;
   maxValue = 800;
 }`;

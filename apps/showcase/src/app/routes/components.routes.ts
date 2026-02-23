@@ -351,10 +351,10 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/native-select/native-select-page'),
       },
       {
-        path: 'native-range-slider',
-        title: 'Native Range Slider - Semantic Components',
+        path: 'range-slider',
+        title: 'Range Slider - Semantic Components',
         loadComponent: () =>
-          import('../pages/docs/native-range-slider/native-range-slider-page'),
+          import('../pages/docs/range-slider/range-slider-page'),
       },
       {
         path: 'slider',
