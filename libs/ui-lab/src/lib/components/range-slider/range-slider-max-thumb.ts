@@ -5,7 +5,7 @@ import { ScRangeSlider } from './range-slider';
 import { RANGE_SLIDER_THUMB_CLASSES } from './range-slider-thumb-base';
 
 @Directive({
-  selector: 'input[scRangeSliderMax]',
+  selector: 'input[scRangeSliderMaxThumb]',
   host: {
     type: 'range',
     '[min]': 'rangeSlider.min()',
@@ -17,7 +17,7 @@ import { RANGE_SLIDER_THUMB_CLASSES } from './range-slider-thumb-base';
     '(input)': 'onInput($event)',
   },
 })
-export class ScRangeSliderMax {
+export class ScRangeSliderMaxThumb {
   protected readonly rangeSlider = inject(ScRangeSlider);
 
   readonly classInput = input<string>('', { alias: 'class' });
