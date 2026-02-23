@@ -1,4 +1,3 @@
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,53 +9,25 @@ import {
 import { cn } from '@semantic-components/ui';
 import { ScNavigationMenuItem } from './navigation-menu-item';
 
-const position: ConnectedPosition = {
-  originX: 'start',
-  originY: 'bottom',
-  overlayX: 'start',
-  overlayY: 'top',
-  offsetY: 4,
-};
-
 @Component({
   selector: 'div[scNavigationMenuContent]',
-  imports: [OverlayModule],
   template: `
-    @if (origin(); as origin) {
-      <ng-template
-        cdkConnectedOverlay
-        [cdkConnectedOverlayOrigin]="origin"
-        [cdkConnectedOverlayOpen]="menuItem.open()"
-        [cdkConnectedOverlayPositions]="[position]"
-      >
-        <div
-          [class]="contentClass()"
-          (mouseenter)="onMouseEnter()"
-          (mouseleave)="onMouseLeave()"
-        >
-          <ng-content />
-        </div>
-      </ng-template>
-    }
+    <ng-content />
   `,
   host: {
     'data-slot': 'navigation-menu-content',
     '[class]': 'class()',
+    '(mouseenter)': 'onMouseEnter()',
+    '(mouseleave)': 'onMouseLeave()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavigationMenuContent {
-  readonly menuItem = inject(ScNavigationMenuItem);
+  private readonly menuItem = inject(ScNavigationMenuItem);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly position = position;
-
-  protected readonly origin = computed(() => this.menuItem.origin());
-
-  protected readonly class = computed(() => cn('', this.classInput()));
-
-  protected readonly contentClass = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'left-0 top-0 w-full md:absolute md:w-auto',
       'bg-popover text-popover-foreground',
@@ -67,6 +38,7 @@ export class ScNavigationMenuContent {
       'data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52',
       'data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52',
       '**:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none',
+      this.classInput(),
     ),
   );
 

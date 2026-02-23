@@ -22,6 +22,7 @@ import {
   ScNavigationMenuItem,
   ScNavigationMenuLink,
   ScNavigationMenuList,
+  ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
 } from '@semantic-components/ui-lab';
 import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
@@ -46,6 +47,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
+    ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
     SiMenuIcon,
     SiXIcon,
@@ -76,60 +78,62 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
             <ul scNavigationMenuList>
               <li scNavigationMenuItem>
                 <button scNavigationMenuTrigger>Features</button>
-                <div scNavigationMenuContent>
-                  <ul
-                    class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2"
-                  >
-                    <li>
-                      <a scNavigationMenuLink href="#">
-                        <div class="text-sm font-medium leading-none">
-                          Analytics
-                        </div>
-                        <p
-                          class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                        >
-                          Track your data and insights
-                        </p>
-                      </a>
-                    </li>
-                    <li>
-                      <a scNavigationMenuLink href="#">
-                        <div class="text-sm font-medium leading-none">
-                          Reports
-                        </div>
-                        <p
-                          class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                        >
-                          Generate detailed reports
-                        </p>
-                      </a>
-                    </li>
-                    <li>
-                      <a scNavigationMenuLink href="#">
-                        <div class="text-sm font-medium leading-none">
-                          Automation
-                        </div>
-                        <p
-                          class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                        >
-                          Automate your workflows
-                        </p>
-                      </a>
-                    </li>
-                    <li>
-                      <a scNavigationMenuLink href="#">
-                        <div class="text-sm font-medium leading-none">
-                          Integration
-                        </div>
-                        <p
-                          class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                        >
-                          Connect with your tools
-                        </p>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                <ng-template scNavigationMenuPortal>
+                  <div scNavigationMenuContent>
+                    <ul
+                      class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2"
+                    >
+                      <li>
+                        <a scNavigationMenuLink href="#">
+                          <div class="text-sm font-medium leading-none">
+                            Analytics
+                          </div>
+                          <p
+                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                          >
+                            Track your data and insights
+                          </p>
+                        </a>
+                      </li>
+                      <li>
+                        <a scNavigationMenuLink href="#">
+                          <div class="text-sm font-medium leading-none">
+                            Reports
+                          </div>
+                          <p
+                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                          >
+                            Generate detailed reports
+                          </p>
+                        </a>
+                      </li>
+                      <li>
+                        <a scNavigationMenuLink href="#">
+                          <div class="text-sm font-medium leading-none">
+                            Automation
+                          </div>
+                          <p
+                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                          >
+                            Automate your workflows
+                          </p>
+                        </a>
+                      </li>
+                      <li>
+                        <a scNavigationMenuLink href="#">
+                          <div class="text-sm font-medium leading-none">
+                            Integration
+                          </div>
+                          <p
+                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                          >
+                            Connect with your tools
+                          </p>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </ng-template>
               </li>
 
               <li scNavigationMenuItem>
