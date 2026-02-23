@@ -898,6 +898,15 @@ export const COMPONENTS: ComponentItem[] = [
     hidden: true,
   },
   {
+    name: 'Time Picker Clock',
+    path: 'time-picker-clock',
+    description: 'A visual clock interface for selecting hours or minutes.',
+    status: 'Experimental',
+    library: 'ui-lab',
+    category: 'Forms',
+    hidden: true,
+  },
+  {
     name: 'Timeline',
     path: 'timeline',
     description: 'Displays events in chronological order.',

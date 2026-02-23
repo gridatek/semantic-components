@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_TIME_PICKER } from './time-picker';
+import { SC_TIME_PICKER } from '../time-picker/time-picker';
 
 @Component({
   selector: '[scTimePickerClock]',

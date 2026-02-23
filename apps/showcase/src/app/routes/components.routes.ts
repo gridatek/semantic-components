@@ -359,8 +359,7 @@ export const componentsRoutes: Route[] = [
       {
         path: 'slider',
         title: 'Slider - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/slider/slider-page'),
+        loadComponent: () => import('../pages/docs/slider/slider-page'),
       },
       {
         path: 'navigation-menu',
@@ -550,6 +549,12 @@ export const componentsRoutes: Route[] = [
         title: 'Time Picker - Semantic Components',
         loadComponent: () =>
           import('../pages/docs/time-picker/time-picker-page'),
+      },
+      {
+        path: 'time-picker-clock',
+        title: 'Time Picker Clock - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/time-picker-clock/time-picker-clock-page'),
       },
       {
         path: 'timeline',
