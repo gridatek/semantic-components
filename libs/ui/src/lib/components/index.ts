@@ -27,6 +27,7 @@ export * from './link';
 export * from './menu';
 export * from './menu-bar';
 export * from './native-select';
+export * from './navigation-menu';
 export * from './pagination';
 export * from './popover';
 export * from './progress';

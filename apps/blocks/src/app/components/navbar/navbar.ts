@@ -6,7 +6,17 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { cn, ScButton } from '@semantic-components/ui';
+import {
+  cn,
+  ScButton,
+  ScNavigationMenu,
+  ScNavigationMenuContent,
+  ScNavigationMenuItem,
+  ScNavigationMenuLink,
+  ScNavigationMenuList,
+  ScNavigationMenuPortal,
+  ScNavigationMenuTrigger,
+} from '@semantic-components/ui';
 import {
   ScNavbar,
   ScNavbarProvider,
@@ -17,13 +27,6 @@ import {
   ScNavbarMobilePortal,
   ScNavbarMobileMenu,
   ScNavbarMobileLink,
-  ScNavigationMenu,
-  ScNavigationMenuContent,
-  ScNavigationMenuItem,
-  ScNavigationMenuLink,
-  ScNavigationMenuList,
-  ScNavigationMenuPortal,
-  ScNavigationMenuTrigger,
 } from '@semantic-components/ui-lab';
 import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 

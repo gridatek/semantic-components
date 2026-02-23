@@ -16,7 +16,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScNavigationMenu } from './navigation-menu';
 import { ScNavigationMenuPortal } from './navigation-menu-portal';
 import { ScNavigationMenuTrigger } from './navigation-menu-trigger';
