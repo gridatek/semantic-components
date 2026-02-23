@@ -11,6 +11,7 @@ const SHARED_THUMB_CLASSES = [
 
 export const MIN_THUMB_CLASSES = [
   ...SHARED_THUMB_CLASSES,
+  'z-10',
   '[&::-webkit-slider-thumb]:-mt-1.5',
   '[&::-webkit-slider-runnable-track]:appearance-none [&::-webkit-slider-runnable-track]:h-0 [&::-webkit-slider-runnable-track]:bg-transparent',
   '[&::-moz-range-track]:h-0 [&::-moz-range-track]:bg-transparent',
