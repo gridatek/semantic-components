@@ -14,7 +14,10 @@ import { cn } from '@semantic-components/ui';
     '[class]': 'class()',
   },
   template: `
-    <div class="absolute h-1 w-full rounded-full bg-muted"></div>
+    <div
+      aria-hidden="true"
+      class="absolute h-1 w-full rounded-full bg-muted"
+    ></div>
     <ng-content />
   `,
   encapsulation: ViewEncapsulation.None,

@@ -6,6 +6,7 @@ import { ScRangeSlider } from './range-slider';
 @Directive({
   selector: 'div[scRangeSliderFilledTrack]',
   host: {
+    'aria-hidden': 'true',
     '[class]': 'class()',
     '[style.left.%]': 'rangeSlider.minPercent()',
     '[style.right.%]': 'rightPercent()',
