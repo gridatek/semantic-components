@@ -29,6 +29,7 @@ export class ScNavigationMenuContent {
 
   protected readonly class = computed(() =>
     cn(
+      'block',
       'left-0 top-0 w-full md:absolute md:w-auto',
       'bg-popover text-popover-foreground',
       'rounded-md border shadow-lg',

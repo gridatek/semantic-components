@@ -77,7 +77,9 @@ export class ScNavigationMenuItem implements OnInit {
 
   protected readonly position = position;
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('block relative', this.classInput()),
+  );
 
   private hideTimeout: ReturnType<typeof setTimeout> | null = null;
 
