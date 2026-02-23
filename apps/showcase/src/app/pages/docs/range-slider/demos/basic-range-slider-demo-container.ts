@@ -31,12 +31,12 @@ export class BasicRangeSliderDemoContainer {
 import {
   ScRangeSlider,
   ScRangeSliderMax,
-  ScRangeSliderMin,
+  ScRangeSliderMinThumb,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-range-slider-demo',
-  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax],
+  imports: [ScRangeSlider, ScRangeSliderMinThumb, ScRangeSliderMax],
   template: \`
     <div class="w-[280px] space-y-4">
       <label class="text-sm font-medium">
@@ -50,7 +50,7 @@ import {
         [max]="1000"
         [step]="10"
       >
-        <input scRangeSliderMin aria-label="Minimum price" />
+        <input scRangeSliderMinThumb aria-label="Minimum price" />
         <input scRangeSliderMax aria-label="Maximum price" />
       </div>
     </div>
