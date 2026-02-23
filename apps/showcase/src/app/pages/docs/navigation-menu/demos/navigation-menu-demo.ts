@@ -9,8 +9,9 @@ import {
   ScNavigationMenuItem,
   ScNavigationMenuLink,
   ScNavigationMenuList,
+  ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -21,6 +22,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
+    ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
     SiSparklesIcon,
   ],
@@ -30,135 +32,145 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
         <!-- Getting Started -->
         <li scNavigationMenuItem>
           <button scNavigationMenuTrigger>Getting Started</button>
-          <div scNavigationMenuContent>
-            <ul
-              class="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]"
-            >
-              <li class="row-span-3">
-                <a
-                  scNavigationMenuLink
-                  class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                  href="#"
-                >
-                  <svg siSparklesIcon class="size-6"></svg>
-                  <div class="mb-2 mt-4 text-lg font-medium">SC Components</div>
-                  <p class="text-sm leading-tight text-muted-foreground">
-                    Beautiful Angular components built with Tailwind CSS.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">
-                    Introduction
-                  </div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+          <ng-template scNavigationMenuPortal>
+            <div scNavigationMenuContent>
+              <ul
+                class="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]"
+              >
+                <li class="row-span-3">
+                  <a
+                    scNavigationMenuLink
+                    class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    href="#"
                   >
-                    Re-usable components built using Angular and Tailwind CSS.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">
-                    Installation
-                  </div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                  >
-                    How to install dependencies and structure your app.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">Typography</div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                  >
-                    Styles for headings, paragraphs, lists, and more.
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </div>
+                    <svg siSparklesIcon class="size-6"></svg>
+                    <div class="mb-2 mt-4 text-lg font-medium">
+                      SC Components
+                    </div>
+                    <p class="text-sm leading-tight text-muted-foreground">
+                      Beautiful Angular components built with Tailwind CSS.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Introduction
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      Re-usable components built using Angular and Tailwind CSS.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Installation
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      How to install dependencies and structure your app.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Typography
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      Styles for headings, paragraphs, lists, and more.
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </ng-template>
         </li>
 
         <!-- Components -->
         <li scNavigationMenuItem>
           <button scNavigationMenuTrigger>Components</button>
-          <div scNavigationMenuContent>
-            <ul
-              class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-            >
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">
-                    Alert Dialog
-                  </div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                  >
-                    A modal dialog that interrupts the user with important
-                    content.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">Hover Card</div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                  >
-                    For sighted users to preview content behind a link.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">Progress</div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                  >
-                    Displays an indicator showing completion progress.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">
-                    Scroll Area
-                  </div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                  >
-                    Visually or semantically separates content.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">Tabs</div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                  >
-                    A set of layered sections of content.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <a scNavigationMenuLink href="#">
-                  <div class="text-sm font-medium leading-none">Tooltip</div>
-                  <p
-                    class="line-clamp-2 text-sm leading-snug text-muted-foreground"
-                  >
-                    A popup that displays information on hover.
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </div>
+          <ng-template scNavigationMenuPortal>
+            <div scNavigationMenuContent>
+              <ul
+                class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+              >
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Alert Dialog
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      A modal dialog that interrupts the user with important
+                      content.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Hover Card
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      For sighted users to preview content behind a link.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">Progress</div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      Displays an indicator showing completion progress.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Scroll Area
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      Visually or semantically separates content.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">Tabs</div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      A set of layered sections of content.
+                    </p>
+                  </a>
+                </li>
+                <li>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">Tooltip</div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      A popup that displays information on hover.
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </ng-template>
         </li>
 
         <!-- Simple Link -->

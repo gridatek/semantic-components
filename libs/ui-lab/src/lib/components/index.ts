@@ -28,7 +28,6 @@ export * from './masonry-grid';
 export * from './mention-input';
 export * from './multi-select';
 export * from './navbar';
-export * from './navigation-menu';
 export * from './notification-center';
 export * from './number-field';
 export * from './org-chart';

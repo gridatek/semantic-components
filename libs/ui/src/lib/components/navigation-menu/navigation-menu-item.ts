@@ -1,29 +1,61 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { NgTemplateOutlet } from '@angular/common';
+import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import {
+  ChangeDetectionStrategy,
+  Component,
   computed,
   contentChild,
   DestroyRef,
-  Directive,
   inject,
   input,
   OnInit,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScNavigationMenu } from './navigation-menu';
+import { ScNavigationMenuPortal } from './navigation-menu-portal';
 import { ScNavigationMenuTrigger } from './navigation-menu-trigger';
 
-@Directive({
+const position: ConnectedPosition = {
+  originX: 'start',
+  originY: 'bottom',
+  overlayX: 'start',
+  overlayY: 'top',
+  offsetY: 4,
+};
+
+@Component({
   selector: 'li[scNavigationMenuItem]',
+  imports: [OverlayModule, NgTemplateOutlet],
+  template: `
+    <ng-content />
+
+    @if (origin(); as origin) {
+      <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="origin"
+        [cdkConnectedOverlayOpen]="open()"
+        [cdkConnectedOverlayPositions]="[position]"
+      >
+        @if (navigationMenuPortal(); as portal) {
+          <ng-container [ngTemplateOutlet]="portal.templateRef" />
+        }
+      </ng-template>
+    }
+  `,
   host: {
     'data-slot': 'navigation-menu-item',
     '[class]': 'class()',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',
   },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavigationMenuItem implements OnInit {
   readonly navigationMenu = inject(ScNavigationMenu);
@@ -37,10 +69,17 @@ export class ScNavigationMenuItem implements OnInit {
   readonly open = signal<boolean>(false);
 
   private readonly triggerChild = contentChild(ScNavigationMenuTrigger);
+  protected readonly navigationMenuPortal = contentChild(
+    ScNavigationMenuPortal,
+  );
 
   readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  protected readonly position = position;
+
+  protected readonly class = computed(() =>
+    cn('block relative', this.classInput()),
+  );
 
   private hideTimeout: ReturnType<typeof setTimeout> | null = null;
 

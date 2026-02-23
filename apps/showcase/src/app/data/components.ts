@@ -546,9 +546,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'navigation-menu',
     description: 'A navigation menu with links and dropdowns.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Navigation',
-    hidden: true,
   },
   {
     name: 'Native Checkbox',
