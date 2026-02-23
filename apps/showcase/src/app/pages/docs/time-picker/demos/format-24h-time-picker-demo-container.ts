@@ -32,7 +32,7 @@ import {
   ScTimePickerMinutesInput,
   ScTimePickerSeparator,
   ScTimeValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-format-24h-time-picker-demo',

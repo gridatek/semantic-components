@@ -1,5 +1,5 @@
 import { computed, Directive, inject, input, signal } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { SC_TIME_PICKER } from './time-picker';
 
 @Directive({

@@ -31,12 +31,12 @@ export class HoursTimePickerClockDemoContainer {
 } from '@angular/core';
 import {
   ScTimePicker,
-  ScTimePickerClock,
   ScTimePickerPeriod,
   ScTimePickerPeriodAM,
   ScTimePickerPeriodPM,
   ScTimeValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { ScTimePickerClock } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-hours-time-picker-clock-demo',

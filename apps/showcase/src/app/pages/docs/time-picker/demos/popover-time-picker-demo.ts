@@ -10,8 +10,6 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScPopoverTrigger,
-} from '@semantic-components/ui';
-import {
   ScTimePicker,
   ScTimePickerInput,
   ScTimePickerHoursInput,
@@ -21,7 +19,7 @@ import {
   ScTimePickerPeriodAM,
   ScTimePickerPeriodPM,
   ScTimeValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

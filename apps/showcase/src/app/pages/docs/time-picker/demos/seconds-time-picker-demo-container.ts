@@ -33,7 +33,7 @@ import {
   ScTimePickerSecondsInput,
   ScTimePickerSeparator,
   ScTimeValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-seconds-time-picker-demo',

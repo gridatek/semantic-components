@@ -14,7 +14,7 @@ import {
   ScTimePickerPeriodAM,
   ScTimePickerPeriodPM,
   ScTimeValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-format-12h-time-picker-demo',

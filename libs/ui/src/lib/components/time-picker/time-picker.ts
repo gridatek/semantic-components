@@ -5,7 +5,7 @@ import {
   input,
   model,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 export type ScTimeFormat = '12h' | '24h';
 export type ScTimePeriod = 'AM' | 'PM';

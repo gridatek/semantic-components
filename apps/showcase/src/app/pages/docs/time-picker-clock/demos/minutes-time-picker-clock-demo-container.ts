@@ -29,11 +29,8 @@ export class MinutesTimePickerClockDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ScTimePicker,
-  ScTimePickerClock,
-  ScTimeValue,
-} from '@semantic-components/ui-lab';
+import { ScTimePicker, ScTimeValue } from '@semantic-components/ui';
+import { ScTimePickerClock } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-minutes-time-picker-clock-demo',
