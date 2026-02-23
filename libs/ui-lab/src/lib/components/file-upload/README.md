@@ -16,7 +16,10 @@ A drag and drop file upload zone with preview and progress support.
       <div scFileUploadItemPreview [file]="file"></div>
       <div scFileUploadItemName>{{ file.file.name }}</div>
       <div scFileUploadItemSize [file]="file"></div>
-      <button scFileUploadItemDelete [fileId]="file.id"></button>
+      <button scFileUploadItemDelete [fileId]="file.id">
+        <svg siXIcon></svg>
+        <span class="sr-only">Remove file</span>
+      </button>
     </div>
     }
   </div>
@@ -44,17 +47,17 @@ Root container that manages file state.
 
 **Two-way Bindings:**
 
-| Binding | Type               | Description    |
-| ------- | ------------------ | -------------- |
-| `files` | `FileUploadFile[]` | Selected files |
+| Binding | Type                 | Description    |
+| ------- | -------------------- | -------------- |
+| `files` | `ScFileUploadFile[]` | Selected files |
 
 **Outputs:**
 
-| Output          | Type             | Description                 |
-| --------------- | ---------------- | --------------------------- |
-| `filesSelected` | `File[]`         | Emitted when files added    |
-| `fileRemoved`   | `FileUploadFile` | Emitted when file removed   |
-| `error`         | `string`         | Emitted on validation error |
+| Output          | Type               | Description                 |
+| --------------- | ------------------ | --------------------------- |
+| `filesSelected` | `File[]`           | Emitted when files added    |
+| `fileRemoved`   | `ScFileUploadFile` | Emitted when file removed   |
+| `error`         | `string`           | Emitted on validation error |
 
 **Methods:**
 
@@ -99,10 +102,10 @@ Individual file item container.
 
 **Inputs:**
 
-| Input   | Type             | Required | Description     |
-| ------- | ---------------- | -------- | --------------- |
-| `file`  | `FileUploadFile` | Yes      | The file object |
-| `class` | `string`         | No       | Additional CSS  |
+| Input   | Type               | Required | Description     |
+| ------- | ------------------ | -------- | --------------- |
+| `file`  | `ScFileUploadFile` | Yes      | The file object |
+| `class` | `string`           | No       | Additional CSS  |
 
 **Data Attributes:**
 
@@ -118,9 +121,9 @@ File preview (shows image thumbnail for images).
 
 **Inputs:**
 
-| Input  | Type             | Required | Description     |
-| ------ | ---------------- | -------- | --------------- |
-| `file` | `FileUploadFile` | Yes      | The file object |
+| Input  | Type               | Required | Description     |
+| ------ | ------------------ | -------- | --------------- |
+| `file` | `ScFileUploadFile` | Yes      | The file object |
 
 ### ScFileUploadItemName
 
@@ -136,21 +139,31 @@ Formatted file size display.
 
 **Inputs:**
 
-| Input  | Type             | Required | Description     |
-| ------ | ---------------- | -------- | --------------- |
-| `file` | `FileUploadFile` | Yes      | The file object |
+| Input  | Type               | Required | Description     |
+| ------ | ------------------ | -------- | --------------- |
+| `file` | `ScFileUploadFile` | Yes      | The file object |
 
 ### ScFileUploadItemDelete
 
-Delete button for removing a file.
+Directive for a delete button that removes a file. Consumers provide their own icon and accessible label as projected content.
 
 **Selector:** `button[scFileUploadItemDelete]`
 
 **Inputs:**
 
-| Input    | Type     | Required | Description |
-| -------- | -------- | -------- | ----------- |
-| `fileId` | `string` | Yes      | File ID     |
+| Input    | Type     | Required | Description    |
+| -------- | -------- | -------- | -------------- |
+| `fileId` | `string` | Yes      | File ID        |
+| `class`  | `string` | No       | Additional CSS |
+
+**Example:**
+
+```html
+<button scFileUploadItemDelete [fileId]="file.id">
+  <svg siXIcon></svg>
+  <span class="sr-only">Remove file</span>
+</button>
+```
 
 ### ScFileUploadItemProgress
 
@@ -160,14 +173,14 @@ Progress bar for upload status.
 
 **Inputs:**
 
-| Input  | Type             | Required | Description     |
-| ------ | ---------------- | -------- | --------------- |
-| `file` | `FileUploadFile` | Yes      | The file object |
+| Input  | Type               | Required | Description     |
+| ------ | ------------------ | -------- | --------------- |
+| `file` | `ScFileUploadFile` | Yes      | The file object |
 
 ## Types
 
 ```typescript
-interface FileUploadFile {
+interface ScFileUploadFile {
   file: File;
   id: string;
   progress?: number;
@@ -204,7 +217,10 @@ interface FileUploadFile {
     <div scFileUploadItem [file]="file">
       <div scFileUploadItemPreview [file]="file"></div>
       <div scFileUploadItemName>{{ file.file.name }}</div>
-      <button scFileUploadItemDelete [fileId]="file.id"></button>
+      <button scFileUploadItemDelete [fileId]="file.id">
+        <svg siXIcon></svg>
+        <span class="sr-only">Remove file</span>
+      </button>
     </div>
     }
   </div>
@@ -253,4 +269,4 @@ interface FileUploadFile {
 - Hidden file input is properly labeled
 - Visual feedback for drag state
 - Keyboard accessible trigger button
-- Screen reader text for delete button
+- Delete button supports custom icon and screen reader text via content projection
