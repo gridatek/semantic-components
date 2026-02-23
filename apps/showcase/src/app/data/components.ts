@@ -533,42 +533,6 @@ export const COMPONENTS: ComponentItem[] = [
     hidden: true,
   },
   {
-    name: 'Native Checkbox',
-    path: 'native-checkbox',
-    description: 'A directive for native checkbox inputs with custom styling.',
-    status: 'Experimental',
-    library: 'ui-lab',
-    category: 'Forms',
-    hidden: true,
-  },
-  {
-    name: 'Native Select',
-    path: 'native-select',
-    description: 'A styled native select element with a custom chevron icon.',
-    status: 'Experimental',
-    library: 'ui',
-    category: 'Forms',
-  },
-  {
-    name: 'Range Slider',
-    path: 'range-slider',
-    description:
-      'A composable dual-thumb range slider for selecting a value range, built with sub-components for track, range, and thumbs.',
-    status: 'Experimental',
-    library: 'ui-lab',
-    category: 'Forms',
-    hidden: true,
-  },
-  {
-    name: 'Slider',
-    path: 'slider',
-    description:
-      'A styled native range input for selecting a value within a given range.',
-    status: 'Experimental',
-    library: 'ui',
-    category: 'Forms',
-  },
-  {
     name: 'Navbar',
     path: 'navbar',
     description: 'A responsive navigation bar with mobile menu support.',
@@ -585,6 +549,23 @@ export const COMPONENTS: ComponentItem[] = [
     library: 'ui-lab',
     category: 'Navigation',
     hidden: true,
+  },
+  {
+    name: 'Native Checkbox',
+    path: 'native-checkbox',
+    description: 'A directive for native checkbox inputs with custom styling.',
+    status: 'Experimental',
+    library: 'ui-lab',
+    category: 'Forms',
+    hidden: true,
+  },
+  {
+    name: 'Native Select',
+    path: 'native-select',
+    description: 'A styled native select element with a custom chevron icon.',
+    status: 'Experimental',
+    library: 'ui',
+    category: 'Forms',
   },
   {
     name: 'Notification Center',
@@ -691,6 +672,16 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Forms',
   },
   {
+    name: 'Range Slider',
+    path: 'range-slider',
+    description:
+      'A composable dual-thumb range slider for selecting a value range, built with sub-components for track, range, and thumbs.',
+    status: 'Experimental',
+    library: 'ui-lab',
+    category: 'Forms',
+    hidden: true,
+  },
+  {
     name: 'Rating Field',
     path: 'rating-field',
     description: 'A composable rating field for feedback and reviews.',
@@ -775,6 +766,15 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui',
     category: 'Data Display',
+  },
+  {
+    name: 'Slider',
+    path: 'slider',
+    description:
+      'A styled native range input for selecting a value within a given range.',
+    status: 'Experimental',
+    library: 'ui',
+    category: 'Forms',
   },
   {
     name: 'Sortable List',
