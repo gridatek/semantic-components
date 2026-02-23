@@ -4,12 +4,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { BasicRangeSliderDemoContainer } from './demos/basic-range-slider-demo-container';
+import { CustomColorRangeSliderDemoContainer } from './demos/custom-color-range-slider-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-range-slider-page',
-  imports: [BasicRangeSliderDemoContainer, TocHeading, ComponentBadges],
+  imports: [
+    BasicRangeSliderDemoContainer,
+    CustomColorRangeSliderDemoContainer,
+    TocHeading,
+    ComponentBadges,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -24,6 +30,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       <section class="space-y-8">
         <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
         <app-basic-range-slider-demo-container />
+        <app-custom-color-range-slider-demo-container />
       </section>
     </div>
   `,
