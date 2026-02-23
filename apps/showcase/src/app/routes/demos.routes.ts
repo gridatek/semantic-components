@@ -2381,6 +2381,13 @@ export const demosRoutes: Route[] = [
             (m) => m.BasicRangeSliderDemo,
           ),
       },
+      {
+        path: 'custom-color-range-slider-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider/demos/custom-color-range-slider-demo').then(
+            (m) => m.CustomColorRangeSliderDemo,
+          ),
+      },
     ],
   },
   {
