@@ -1,29 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  model,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, input, model } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-import { ScRangeSliderFilledTrack } from './range-slider-filled-track';
-import { ScRangeSliderTrack } from './range-slider-track';
-
-@Component({
+@Directive({
   selector: 'div[scRangeSlider]',
-  imports: [ScRangeSliderTrack, ScRangeSliderFilledTrack],
   host: {
     '[class]': 'class()',
+    '[style.--min-percent]': 'minPercentCss()',
+    '[style.--max-percent]': 'maxPercentCss()',
   },
-  template: `
-    <div scRangeSliderTrack></div>
-    <div scRangeSliderFilledTrack></div>
-    <ng-content />
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScRangeSlider {
   readonly classInput = input<string>('', { alias: 'class' });
@@ -49,6 +33,9 @@ export class ScRangeSlider {
     const range = this.max() - this.min();
     return range === 0 ? 0 : ((this.maxValue() - this.min()) / range) * 100;
   });
+
+  protected readonly minPercentCss = computed(() => `${this.minPercent()}%`);
+  protected readonly maxPercentCss = computed(() => `${this.maxPercent()}%`);
 
   clampMin(val: number): number {
     return Math.min(val, this.maxValue());

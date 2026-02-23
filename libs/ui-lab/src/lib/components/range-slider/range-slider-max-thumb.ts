@@ -2,7 +2,7 @@ import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 import { ScRangeSlider } from './range-slider';
-import { RANGE_SLIDER_THUMB_CLASSES } from './range-slider-thumb-base';
+import { MAX_THUMB_CLASSES } from './range-slider-thumb-base';
 
 @Directive({
   selector: 'input[scRangeSliderMaxThumb]',
@@ -23,7 +23,7 @@ export class ScRangeSliderMaxThumb {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(...RANGE_SLIDER_THUMB_CLASSES, this.classInput()),
+    cn(...MAX_THUMB_CLASSES, this.classInput()),
   );
 
   protected onInput(event: Event) {
