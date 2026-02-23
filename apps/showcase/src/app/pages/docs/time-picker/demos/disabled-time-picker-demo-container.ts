@@ -28,32 +28,43 @@ export class DisabledTimePickerDemoContainer {
 import {
   ScTimePicker,
   ScTimePickerInput,
+  ScTimePickerHoursInput,
+  ScTimePickerMinutesInput,
   ScTimePickerSeparator,
   ScTimePickerPeriod,
-  TimeValue,
-} from '@semantic-components/ui-lab';
+  ScTimePickerPeriodAM,
+  ScTimePickerPeriodPM,
+  ScTimeValue,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-time-picker-demo',
   imports: [
     ScTimePicker,
     ScTimePickerInput,
+    ScTimePickerHoursInput,
+    ScTimePickerMinutesInput,
     ScTimePickerSeparator,
     ScTimePickerPeriod,
+    ScTimePickerPeriodAM,
+    ScTimePickerPeriodPM,
   ],
   template: \`
     <div scTimePicker format="12h" [disabled]="true" [(value)]="time">
-      <input scTimePickerInput type="hours" aria-label="Hours" />
+      <input scTimePickerInput scTimePickerHoursInput />
       <span scTimePickerSeparator>:</span>
-      <input scTimePickerInput type="minutes" aria-label="Minutes" />
-      <div scTimePickerPeriod></div>
+      <input scTimePickerInput scTimePickerMinutesInput />
+      <div scTimePickerPeriod>
+        <button scTimePickerPeriodAM>AM</button>
+        <button scTimePickerPeriodPM>PM</button>
+      </div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledTimePickerDemo {
-  readonly time = signal<TimeValue | null>({
+  readonly time = signal<ScTimeValue | null>({
     hours: 8,
     minutes: 0,
     period: 'AM',

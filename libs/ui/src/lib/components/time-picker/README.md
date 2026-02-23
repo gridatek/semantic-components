@@ -6,10 +6,13 @@ A component for selecting time values with support for 12/24 hour formats.
 
 ```html
 <div scTimePicker format="12h" [(value)]="time">
-  <input scTimePickerInput type="hours" label="Hours" />
+  <input scTimePickerInput scTimePickerHoursInput />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput type="minutes" label="Minutes" />
-  <div scTimePickerPeriod></div>
+  <input scTimePickerInput scTimePickerMinutesInput />
+  <div scTimePickerPeriod>
+    <button scTimePickerPeriodAM>AM</button>
+    <button scTimePickerPeriodPM>PM</button>
+  </div>
 </div>
 ```
 
@@ -32,9 +35,9 @@ Root container that manages time state.
 
 **Two-way Bindings:**
 
-| Binding | Type                | Description   |
-| ------- | ------------------- | ------------- |
-| `value` | `TimeValue \| null` | Selected time |
+| Binding | Type                  | Description   |
+| ------- | --------------------- | ------------- |
+| `value` | `ScTimeValue \| null` | Selected time |
 
 **Computed:**
 
@@ -53,24 +56,54 @@ Root container that manages time state.
 
 ### ScTimePickerInput
 
-Numeric input for hours, minutes, or seconds.
+Base input directive that provides shared styling and disabled state.
 
 **Selector:** `input[scTimePickerInput]`
 
 **Inputs:**
 
-| Input   | Type                                | Required | Description    |
-| ------- | ----------------------------------- | -------- | -------------- |
-| `type`  | `'hours' \| 'minutes' \| 'seconds'` | Yes      | Input type     |
-| `label` | `string`                            | No       | Aria label     |
-| `class` | `string`                            | No       | Additional CSS |
+| Input   | Type     | Required | Description    |
+| ------- | -------- | -------- | -------------- |
+| `class` | `string` | No       | Additional CSS |
+
+### ScTimePickerHoursInput
+
+Hours input directive. Must be combined with `scTimePickerInput`.
+
+**Selector:** `input[scTimePickerHoursInput]`
 
 **Features:**
 
-- Arrow up/down to increment/decrement
+- Arrow up/down to increment/decrement hours
 - Auto-selects on focus
 - Numeric input only
-- Value clamping
+- Value clamping (1–12 for 12h, 0–23 for 24h)
+
+### ScTimePickerMinutesInput
+
+Minutes input directive. Must be combined with `scTimePickerInput`.
+
+**Selector:** `input[scTimePickerMinutesInput]`
+
+**Features:**
+
+- Arrow up/down to increment/decrement minutes
+- Auto-selects on focus
+- Numeric input only
+- Value clamping (0–59)
+
+### ScTimePickerSecondsInput
+
+Seconds input directive. Must be combined with `scTimePickerInput`.
+
+**Selector:** `input[scTimePickerSecondsInput]`
+
+**Features:**
+
+- Arrow up/down to increment/decrement seconds
+- Auto-selects on focus
+- Numeric input only
+- Value clamping (0–59)
 
 ### ScTimePickerSeparator
 
@@ -80,9 +113,21 @@ Visual separator (colon) between inputs.
 
 ### ScTimePickerPeriod
 
-AM/PM toggle buttons.
+AM/PM toggle container. Consumers provide buttons via content projection.
 
 **Selector:** `[scTimePickerPeriod]`
+
+### ScTimePickerPeriodAM
+
+AM toggle button directive. Must be a child of `ScTimePickerPeriod`.
+
+**Selector:** `button[scTimePickerPeriodAM]`
+
+### ScTimePickerPeriodPM
+
+PM toggle button directive. Must be a child of `ScTimePickerPeriod`.
+
+**Selector:** `button[scTimePickerPeriodPM]`
 
 ### ScTimePickerClock
 
@@ -100,14 +145,14 @@ Visual clock interface for selection.
 ## Types
 
 ```typescript
-type TimeFormat = '12h' | '24h';
-type TimePeriod = 'AM' | 'PM';
+type ScTimeFormat = '12h' | '24h';
+type ScTimePeriod = 'AM' | 'PM';
 
-interface TimeValue {
+interface ScTimeValue {
   hours: number;
   minutes: number;
   seconds?: number;
-  period?: TimePeriod;
+  period?: ScTimePeriod;
 }
 ```
 
@@ -117,10 +162,13 @@ interface TimeValue {
 
 ```html
 <div scTimePicker format="12h" [(value)]="time">
-  <input scTimePickerInput type="hours" />
+  <input scTimePickerInput scTimePickerHoursInput />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput type="minutes" />
-  <div scTimePickerPeriod></div>
+  <input scTimePickerInput scTimePickerMinutesInput />
+  <div scTimePickerPeriod>
+    <button scTimePickerPeriodAM>AM</button>
+    <button scTimePickerPeriodPM>PM</button>
+  </div>
 </div>
 ```
 
@@ -128,9 +176,9 @@ interface TimeValue {
 
 ```html
 <div scTimePicker format="24h" [(value)]="time">
-  <input scTimePickerInput type="hours" />
+  <input scTimePickerInput scTimePickerHoursInput />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput type="minutes" />
+  <input scTimePickerInput scTimePickerMinutesInput />
 </div>
 ```
 
@@ -138,11 +186,11 @@ interface TimeValue {
 
 ```html
 <div scTimePicker format="24h" [showSeconds]="true" [(value)]="time">
-  <input scTimePickerInput type="hours" />
+  <input scTimePickerInput scTimePickerHoursInput />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput type="minutes" />
+  <input scTimePickerInput scTimePickerMinutesInput />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput type="seconds" />
+  <input scTimePickerInput scTimePickerSecondsInput />
 </div>
 ```
 
@@ -158,16 +206,16 @@ interface TimeValue {
 
 ```html
 <div scTimePicker [disabled]="true" [(value)]="time">
-  <input scTimePickerInput type="hours" />
+  <input scTimePickerInput scTimePickerHoursInput />
   <span scTimePickerSeparator>:</span>
-  <input scTimePickerInput type="minutes" />
+  <input scTimePickerInput scTimePickerMinutesInput />
 </div>
 ```
 
 ### Setting Initial Value
 
 ```typescript
-time = signal<TimeValue>({
+time = signal<ScTimeValue>({
   hours: 9,
   minutes: 30,
   period: 'AM',

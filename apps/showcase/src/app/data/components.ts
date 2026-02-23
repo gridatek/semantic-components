@@ -892,9 +892,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'time-picker',
     description: 'A component for selecting time values.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Time Picker Clock',

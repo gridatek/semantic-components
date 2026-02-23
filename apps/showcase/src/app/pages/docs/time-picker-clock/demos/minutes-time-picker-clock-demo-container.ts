@@ -29,11 +29,8 @@ export class MinutesTimePickerClockDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ScTimePicker,
-  ScTimePickerClock,
-  TimeValue,
-} from '@semantic-components/ui-lab';
+import { ScTimePicker, ScTimeValue } from '@semantic-components/ui';
+import { ScTimePickerClock } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-minutes-time-picker-clock-demo',
@@ -57,7 +54,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinutesTimePickerClockDemo {
-  readonly time = signal<TimeValue | null>({
+  readonly time = signal<ScTimeValue | null>({
     hours: 10,
     minutes: 30,
   });

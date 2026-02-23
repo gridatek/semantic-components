@@ -6,6 +6,7 @@ import {
 import { DisabledTimePickerDemoContainer } from './demos/disabled-time-picker-demo-container';
 import { Format12hTimePickerDemoContainer } from './demos/format-12h-time-picker-demo-container';
 import { Format24hTimePickerDemoContainer } from './demos/format-24h-time-picker-demo-container';
+import { PopoverTimePickerDemoContainer } from './demos/popover-time-picker-demo-container';
 import { PresetsTimePickerDemoContainer } from './demos/presets-time-picker-demo-container';
 import { SecondsTimePickerDemoContainer } from './demos/seconds-time-picker-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -18,6 +19,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     Format24hTimePickerDemoContainer,
     SecondsTimePickerDemoContainer,
     DisabledTimePickerDemoContainer,
+    PopoverTimePickerDemoContainer,
     PresetsTimePickerDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -38,6 +40,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
         <app-format-24h-time-picker-demo-container />
         <app-seconds-time-picker-demo-container />
         <app-disabled-time-picker-demo-container />
+        <app-popover-time-picker-demo-container />
         <app-presets-time-picker-demo-container />
       </section>
     </div>

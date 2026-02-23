@@ -28,18 +28,26 @@ export class PresetsTimePickerDemoContainer {
 import {
   ScTimePicker,
   ScTimePickerInput,
+  ScTimePickerHoursInput,
+  ScTimePickerMinutesInput,
   ScTimePickerSeparator,
   ScTimePickerPeriod,
-  TimeValue,
-} from '@semantic-components/ui-lab';
+  ScTimePickerPeriodAM,
+  ScTimePickerPeriodPM,
+  ScTimeValue,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-presets-time-picker-demo',
   imports: [
     ScTimePicker,
     ScTimePickerInput,
+    ScTimePickerHoursInput,
+    ScTimePickerMinutesInput,
     ScTimePickerSeparator,
     ScTimePickerPeriod,
+    ScTimePickerPeriodAM,
+    ScTimePickerPeriodPM,
   ],
   template: \`
     <div class="space-y-4">
@@ -74,10 +82,13 @@ import {
         </button>
       </div>
       <div scTimePicker format="12h" [(value)]="time">
-        <input scTimePickerInput type="hours" aria-label="Hours" />
+        <input scTimePickerInput scTimePickerHoursInput />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput type="minutes" aria-label="Minutes" />
-        <div scTimePickerPeriod></div>
+        <input scTimePickerInput scTimePickerMinutesInput />
+        <div scTimePickerPeriod>
+          <button scTimePickerPeriodAM>AM</button>
+          <button scTimePickerPeriodPM>PM</button>
+        </div>
       </div>
     </div>
   \`,
@@ -85,7 +96,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PresetsTimePickerDemo {
-  readonly time = signal<TimeValue | null>(null);
+  readonly time = signal<ScTimeValue | null>(null);
 
   setPreset(hours: number, minutes: number, period: 'AM' | 'PM'): void {
     const adjustedHours =

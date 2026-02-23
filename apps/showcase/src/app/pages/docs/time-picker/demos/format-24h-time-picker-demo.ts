@@ -7,19 +7,27 @@ import {
 import {
   ScTimePicker,
   ScTimePickerInput,
+  ScTimePickerHoursInput,
+  ScTimePickerMinutesInput,
   ScTimePickerSeparator,
-  TimeValue,
-} from '@semantic-components/ui-lab';
+  ScTimeValue,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-format-24h-time-picker-demo',
-  imports: [ScTimePicker, ScTimePickerInput, ScTimePickerSeparator],
+  imports: [
+    ScTimePicker,
+    ScTimePickerInput,
+    ScTimePickerHoursInput,
+    ScTimePickerMinutesInput,
+    ScTimePickerSeparator,
+  ],
   template: `
     <div class="flex flex-col gap-4">
       <div scTimePicker format="24h" [(value)]="time">
-        <input scTimePickerInput type="hours" aria-label="Hours" />
+        <input scTimePickerInput scTimePickerHoursInput />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput type="minutes" aria-label="Minutes" />
+        <input scTimePickerInput scTimePickerMinutesInput />
       </div>
       <p class="text-sm text-muted-foreground">
         Selected: {{ formatTime(time()) }}
@@ -30,9 +38,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Format24hTimePickerDemo {
-  readonly time = signal<TimeValue | null>({ hours: 14, minutes: 45 });
+  readonly time = signal<ScTimeValue | null>({ hours: 14, minutes: 45 });
 
-  formatTime(val: TimeValue | null): string {
+  formatTime(val: ScTimeValue | null): string {
     if (!val) return 'No time selected';
     return `${val.hours.toString().padStart(2, '0')}:${val.minutes.toString().padStart(2, '0')}`;
   }

@@ -39,6 +39,7 @@ export * from './range-slider';
 export * from './slider';
 export * from './spinner';
 export * from './switch';
+export * from './time-picker';
 export * from './table';
 export * from './tabs';
 export * from './textarea';
