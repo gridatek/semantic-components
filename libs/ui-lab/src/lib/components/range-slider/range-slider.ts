@@ -11,7 +11,7 @@ import { cn } from '@semantic-components/ui';
 @Component({
   selector: 'div[scRangeSlider]',
   host: {
-    '[class]': 'hostClass()',
+    '[class]': 'class()',
   },
   template: `
     <ng-content />
@@ -30,7 +30,7 @@ export class ScRangeSlider {
   readonly step = input<number>(1);
   readonly disabled = input<boolean>(false);
 
-  protected readonly hostClass = computed(() =>
+  protected readonly class = computed(() =>
     cn('relative flex h-3 w-full items-center', this.classInput()),
   );
 
