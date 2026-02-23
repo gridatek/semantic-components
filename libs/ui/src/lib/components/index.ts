@@ -17,6 +17,7 @@ export * from './dialog';
 export * from './drawer';
 export * from './empty';
 export * from './field';
+export * from './file-upload';
 export * from './hover-card';
 export * from './input';
 export * from './input-group';

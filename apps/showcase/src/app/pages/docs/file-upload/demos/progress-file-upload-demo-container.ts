@@ -35,8 +35,9 @@ import {
   ScFileUploadItemSize,
   ScFileUploadItemDelete,
   ScFileUploadItemProgress,
-  FileUploadFile,
-} from '@semantic-components/ui-lab';
+  ScFileUploadFile,
+} from '@semantic-components/ui';
+import { SiFileIcon, SiUploadIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-progress-file-upload-demo',
@@ -50,6 +51,9 @@ import {
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
     ScFileUploadItemProgress,
+    SiFileIcon,
+    SiUploadIcon,
+    SiXIcon,
   ],
   template: \`
     <div class="max-w-lg">
@@ -61,22 +65,7 @@ import {
       >
         <div scFileUploadDropzone class="p-8">
           <div class="flex flex-col items-center gap-2 text-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-10 text-muted-foreground"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" x2="12" y1="3" y2="15" />
-            </svg>
+            <svg siUploadIcon class="size-10 text-muted-foreground"></svg>
             <div class="space-y-1">
               <p class="text-sm font-medium">Upload with progress</p>
               <p class="text-xs text-muted-foreground">
@@ -91,23 +80,7 @@ import {
             @for (file of files(); track file.id) {
               <div scFileUploadItem [file]="file">
                 <div scFileUploadItemPreview [file]="file">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="size-5 text-muted-foreground"
-                  >
-                    <path
-                      d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"
-                    />
-                    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-                  </svg>
+                  <svg siFileIcon class="size-5 text-muted-foreground"></svg>
                 </div>
                 <div class="flex-1 min-w-0 space-y-1">
                   <div class="flex items-center justify-between">
@@ -121,7 +94,10 @@ import {
                     <p class="text-xs text-green-600">Upload complete</p>
                   }
                 </div>
-                <button scFileUploadItemDelete [fileId]="file.id"></button>
+                <button scFileUploadItemDelete [fileId]="file.id">
+                  <svg siXIcon></svg>
+                  <span class="sr-only">Remove file</span>
+                </button>
               </div>
             }
           </div>
@@ -133,7 +109,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressFileUploadDemo {
-  readonly files = signal<FileUploadFile[]>([]);
+  readonly files = signal<ScFileUploadFile[]>([]);
 
   simulateUpload(_selectedFiles: File[]): void {
     const currentFiles = this.files();

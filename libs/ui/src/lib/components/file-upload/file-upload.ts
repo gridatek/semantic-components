@@ -6,14 +6,14 @@ import {
   model,
   output,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 // Token for file upload context
 export const SC_FILE_UPLOAD = new InjectionToken<ScFileUpload>(
   'SC_FILE_UPLOAD',
 );
 
-export interface FileUploadFile {
+export interface ScFileUploadFile {
   file: File;
   id: string;
   progress?: number;
@@ -37,9 +37,9 @@ export class ScFileUpload {
   readonly maxFiles = input<number>(0); // 0 = no limit
   readonly disabled = input<boolean>(false);
 
-  readonly files = model<FileUploadFile[]>([]);
+  readonly files = model<ScFileUploadFile[]>([]);
   readonly filesSelected = output<File[]>();
-  readonly fileRemoved = output<FileUploadFile>();
+  readonly fileRemoved = output<ScFileUploadFile>();
   readonly error = output<string>();
 
   protected readonly class = computed(() => cn('block', this.classInput()));
@@ -82,7 +82,7 @@ export class ScFileUpload {
     }
 
     if (validFiles.length > 0) {
-      const uploadFiles: FileUploadFile[] = validFiles.map((file) => ({
+      const uploadFiles: ScFileUploadFile[] = validFiles.map((file) => ({
         file,
         id: this.generateId(),
         status: 'pending' as const,
@@ -116,7 +116,7 @@ export class ScFileUpload {
 
   updateFileStatus(
     fileId: string,
-    status: FileUploadFile['status'],
+    status: ScFileUploadFile['status'],
     error?: string,
   ): void {
     this.files.update((files) =>

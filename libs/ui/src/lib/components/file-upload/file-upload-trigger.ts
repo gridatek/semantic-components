@@ -7,7 +7,8 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants } from '../button';
+import { cn } from '../../utils';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Component({
@@ -30,7 +31,7 @@ import { SC_FILE_UPLOAD } from './file-upload';
     '[class]': 'class()',
     '[disabled]': 'fileUpload.disabled()',
     '[attr.aria-disabled]': 'fileUpload.disabled() || null',
-    '(click)': 'openFilePicker($event)',
+    '(click)': 'openFilePicker()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,8 +46,7 @@ export class ScFileUploadTrigger {
     cn(buttonVariants({ variant: 'default', size: 'lg' }), this.classInput()),
   );
 
-  openFilePicker(event: Event): void {
-    event.preventDefault();
+  openFilePicker(): void {
     if (this.fileUpload.disabled()) return;
     const input = this.elementRef.nativeElement.querySelector(
       'input[type="file"]',
