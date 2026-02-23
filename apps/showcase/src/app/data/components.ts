@@ -355,9 +355,8 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'file-upload',
     description: 'A drag-and-drop file upload component.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Hover Card',

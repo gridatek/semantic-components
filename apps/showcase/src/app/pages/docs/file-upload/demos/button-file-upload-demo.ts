@@ -14,7 +14,7 @@ import {
   ScFileUploadItemSize,
   ScFileUploadItemDelete,
   ScFileUploadFile,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

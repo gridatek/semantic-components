@@ -5,31 +5,29 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScFileUploadFile } from './file-upload';
 
 @Component({
-  selector: '[scFileUploadItem]',
+  selector: '[scFileUploadItemProgress]',
   template: `
-    <ng-content />
+    <div
+      class="h-full rounded-full bg-primary transition-all"
+      [style.width.%]="file().progress || 0"
+    ></div>
   `,
   host: {
-    'data-slot': 'file-upload-item',
+    'data-slot': 'file-upload-item-progress',
     '[class]': 'class()',
-    '[attr.data-status]': 'file().status',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScFileUploadItem {
+export class ScFileUploadItemProgress {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly file = input.required<ScFileUploadFile>();
 
   protected readonly class = computed(() =>
-    cn(
-      'flex items-center gap-3 rounded-lg border bg-background p-3',
-      'data-[status=error]:border-destructive data-[status=error]:bg-destructive/10',
-      this.classInput(),
-    ),
+    cn('h-1 w-full overflow-hidden rounded-full bg-muted', this.classInput()),
   );
 }

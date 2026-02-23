@@ -7,7 +7,8 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants } from '../button';
+import { cn } from '../../utils';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Component({
