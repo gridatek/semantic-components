@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { FileUploadFile } from './file-upload';
+import { ScFileUploadFile } from './file-upload';
 
 @Component({
   selector: '[scFileUploadItem]',
@@ -23,7 +23,7 @@ import { FileUploadFile } from './file-upload';
 })
 export class ScFileUploadItem {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly file = input.required<FileUploadFile>();
+  readonly file = input.required<ScFileUploadFile>();
 
   protected readonly class = computed(() =>
     cn(

@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { FileUploadFile } from './file-upload';
+import { ScFileUploadFile } from './file-upload';
 
 @Component({
   selector: '[scFileUploadItemProgress]',
@@ -25,7 +25,7 @@ import { FileUploadFile } from './file-upload';
 })
 export class ScFileUploadItemProgress {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly file = input.required<FileUploadFile>();
+  readonly file = input.required<ScFileUploadFile>();
 
   protected readonly class = computed(() =>
     cn('h-1 w-full overflow-hidden rounded-full bg-muted', this.classInput()),

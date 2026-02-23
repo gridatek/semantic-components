@@ -14,8 +14,9 @@ import {
   ScFileUploadItemSize,
   ScFileUploadItemDelete,
   ScFileUploadItemProgress,
-  FileUploadFile,
+  ScFileUploadFile,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-progress-file-upload-demo',
@@ -29,6 +30,7 @@ import {
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
     ScFileUploadItemProgress,
+    SiXIcon,
   ],
   template: `
     <div class="max-w-lg">
@@ -100,7 +102,10 @@ import {
                     <p class="text-xs text-green-600">Upload complete</p>
                   }
                 </div>
-                <button scFileUploadItemDelete [fileId]="file.id"></button>
+                <button scFileUploadItemDelete [fileId]="file.id">
+                  <svg siXIcon></svg>
+                  <span class="sr-only">Remove file</span>
+                </button>
               </div>
             }
           </div>
@@ -112,7 +117,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressFileUploadDemo {
-  readonly files = signal<FileUploadFile[]>([]);
+  readonly files = signal<ScFileUploadFile[]>([]);
 
   simulateUpload(_selectedFiles: File[]): void {
     const currentFiles = this.files();

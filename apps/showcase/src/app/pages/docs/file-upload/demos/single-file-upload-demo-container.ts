@@ -28,7 +28,7 @@ export class SingleFileUploadDemoContainer {
 import {
   ScFileUpload,
   ScFileUploadDropzone,
-  FileUploadFile,
+  ScFileUploadFile,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -74,6 +74,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleFileUploadDemo {
-  readonly file = signal<FileUploadFile[]>([]);
+  readonly file = signal<ScFileUploadFile[]>([]);
 }`;
 }

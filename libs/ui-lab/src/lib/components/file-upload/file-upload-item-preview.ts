@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { FileUploadFile } from './file-upload';
+import { ScFileUploadFile } from './file-upload';
 
 @Component({
   selector: '[scFileUploadItemPreview]',
@@ -30,7 +30,7 @@ import { FileUploadFile } from './file-upload';
 })
 export class ScFileUploadItemPreview {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly file = input.required<FileUploadFile>();
+  readonly file = input.required<ScFileUploadFile>();
 
   protected readonly isImage = computed(() =>
     this.file().file.type.startsWith('image/'),

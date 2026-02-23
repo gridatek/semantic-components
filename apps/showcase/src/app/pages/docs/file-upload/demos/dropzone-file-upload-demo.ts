@@ -13,8 +13,9 @@ import {
   ScFileUploadItemName,
   ScFileUploadItemSize,
   ScFileUploadItemDelete,
-  FileUploadFile,
+  ScFileUploadFile,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-dropzone-file-upload-demo',
@@ -27,6 +28,7 @@ import {
     ScFileUploadItemName,
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
+    SiXIcon,
   ],
   template: `
     <div class="max-w-lg">
@@ -83,7 +85,10 @@ import {
                   <div scFileUploadItemName>{{ file.file.name }}</div>
                   <div scFileUploadItemSize [file]="file"></div>
                 </div>
-                <button scFileUploadItemDelete [fileId]="file.id"></button>
+                <button scFileUploadItemDelete [fileId]="file.id">
+                  <svg siXIcon></svg>
+                  <span class="sr-only">Remove file</span>
+                </button>
               </div>
             }
           </div>
@@ -95,5 +100,5 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropzoneFileUploadDemo {
-  readonly files = signal<FileUploadFile[]>([]);
+  readonly files = signal<ScFileUploadFile[]>([]);
 }
