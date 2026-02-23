@@ -7,22 +7,22 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SC_FIELD } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { SC_FIELD } from '../field';
 
 @Directive({
-  selector: 'input[scNativeSlider]',
+  selector: 'input[scSlider]',
   host: {
     type: 'range',
-    'data-slot': 'native-slider',
+    'data-slot': 'slider',
     '[attr.id]': 'id()',
     '[class]': 'class()',
     '(input)': 'onInput()',
   },
 })
-export class ScNativeSlider {
+export class ScSlider {
   private readonly field = inject(SC_FIELD, { optional: true });
-  private readonly fallbackId = inject(_IdGenerator).getId('sc-native-slider-');
+  private readonly fallbackId = inject(_IdGenerator).getId('sc-slider-');
   private readonly el = inject<ElementRef<HTMLInputElement>>(ElementRef);
 
   readonly idInput = input('', { alias: 'id' });

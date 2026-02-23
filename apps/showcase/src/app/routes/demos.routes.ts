@@ -2353,20 +2353,20 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/native-slider',
+    path: 'demos/slider',
     children: [
       {
-        path: 'basic-native-slider-demo',
+        path: 'basic-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/native-slider/demos/basic-native-slider-demo').then(
-            (m) => m.BasicNativeSliderDemo,
+          import('../pages/docs/slider/demos/basic-slider-demo').then(
+            (m) => m.BasicSliderDemo,
           ),
       },
       {
-        path: 'custom-color-native-slider-demo',
+        path: 'custom-color-slider-demo',
         loadComponent: () =>
-          import('../pages/docs/native-slider/demos/custom-color-native-slider-demo').then(
-            (m) => m.CustomColorNativeSliderDemo,
+          import('../pages/docs/slider/demos/custom-color-slider-demo').then(
+            (m) => m.CustomColorSliderDemo,
           ),
       },
     ],

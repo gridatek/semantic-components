@@ -4,47 +4,46 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { CustomColorNativeSliderDemo } from './custom-color-native-slider-demo';
+import { CustomColorSliderDemo } from './custom-color-slider-demo';
 
 @Component({
-  selector: 'app-custom-color-native-slider-demo-container',
-  imports: [DemoContainer, CustomColorNativeSliderDemo],
+  selector: 'app-custom-color-slider-demo-container',
+  imports: [DemoContainer, CustomColorSliderDemo],
   template: `
     <app-demo-container
       title="Custom Color"
-      demoUrl="/demos/native-slider/custom-color-native-slider-demo"
+      demoUrl="/demos/slider/custom-color-slider-demo"
       [code]="code"
     >
-      <app-custom-color-native-slider-demo />
+      <app-custom-color-slider-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomColorNativeSliderDemoContainer {
+export class CustomColorSliderDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScField, ScLabel } from '@semantic-components/ui';
-import { ScNativeSlider } from '@semantic-components/ui-lab';
+import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-custom-color-native-slider-demo',
-  imports: [ScNativeSlider, ScField, ScLabel],
+  selector: 'app-custom-color-slider-demo',
+  imports: [ScSlider, ScField, ScLabel],
   template: \`
     <div scField class="w-[280px]" style="--primary: oklch(0.6 0.25 30); --muted: oklch(0.9 0.05 30); --ring: oklch(0.6 0.25 30)">
       <label scLabel>Temperature — {{ value() }}</label>
-      <input scNativeSlider [value]="value()" (input)="onInput($event)" />
+      <input scSlider [value]="value()" (input)="onInput($event)" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomColorNativeSliderDemo {
+export class CustomColorSliderDemo {
   readonly value = signal(50);
 
   onInput(event: Event): void {

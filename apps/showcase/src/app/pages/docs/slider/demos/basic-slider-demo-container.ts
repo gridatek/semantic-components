@@ -4,47 +4,46 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicNativeSliderDemo } from './basic-native-slider-demo';
+import { BasicSliderDemo } from './basic-slider-demo';
 
 @Component({
-  selector: 'app-basic-native-slider-demo-container',
-  imports: [DemoContainer, BasicNativeSliderDemo],
+  selector: 'app-basic-slider-demo-container',
+  imports: [DemoContainer, BasicSliderDemo],
   template: `
     <app-demo-container
       title="Basic"
-      demoUrl="/demos/native-slider/basic-native-slider-demo"
+      demoUrl="/demos/slider/basic-slider-demo"
       [code]="code"
     >
-      <app-basic-native-slider-demo />
+      <app-basic-slider-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicNativeSliderDemoContainer {
+export class BasicSliderDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScField, ScLabel } from '@semantic-components/ui';
-import { ScNativeSlider } from '@semantic-components/ui-lab';
+import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-basic-native-slider-demo',
-  imports: [ScNativeSlider, ScField, ScLabel],
+  selector: 'app-basic-slider-demo',
+  imports: [ScSlider, ScField, ScLabel],
   template: \`
     <div scField class="w-[280px]">
       <label scLabel>Volume — {{ value() }}</label>
-      <input scNativeSlider [value]="value()" (input)="onInput($event)" />
+      <input scSlider [value]="value()" (input)="onInput($event)" />
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicNativeSliderDemo {
+export class BasicSliderDemo {
   readonly value = signal(50);
 
   onInput(event: Event): void {
