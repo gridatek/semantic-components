@@ -483,17 +483,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/skeleton/skeleton-page'),
       },
       {
-        path: 'slider',
-        title: 'Slider - Semantic Components',
-        loadComponent: () => import('../pages/docs/slider/slider-page'),
-      },
-      {
-        path: 'range-slider',
-        title: 'Range Slider - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/range-slider/range-slider-page'),
-      },
-      {
         path: 'sortable-list',
         title: 'Sortable List - Semantic Components',
         loadComponent: () =>

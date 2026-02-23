@@ -692,15 +692,6 @@ export const COMPONENTS: ComponentItem[] = [
     category: 'Forms',
   },
   {
-    name: 'Range Slider',
-    path: 'range-slider',
-    description: 'An input for selecting a range with min and max values.',
-    status: 'Experimental',
-    library: 'ui-lab',
-    category: 'Forms',
-    hidden: true,
-  },
-  {
     name: 'Rating Field',
     path: 'rating-field',
     description: 'A composable rating field for feedback and reviews.',
@@ -785,15 +776,6 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui',
     category: 'Data Display',
-  },
-  {
-    name: 'Slider',
-    path: 'slider',
-    description: 'An input for selecting a value from a range.',
-    status: 'Experimental',
-    library: 'ui-lab',
-    category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Sortable List',

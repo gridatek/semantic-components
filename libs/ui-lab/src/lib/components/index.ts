@@ -44,8 +44,6 @@ export * from './scroll-area';
 export * from './search-input';
 export * from './sidebar';
 export * from './signature-pad';
-export * from './slider';
-export * from './range-slider';
 export * from './sortable-list';
 export * from './speed-dial';
 export * from './spotlight';

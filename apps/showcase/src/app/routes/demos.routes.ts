@@ -3191,60 +3191,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/slider',
-    children: [
-      {
-        path: 'basic-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/basic-slider-demo').then(
-            (m) => m.BasicSliderDemo,
-          ),
-      },
-      {
-        path: 'range-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/range-slider-demo').then(
-            (m) => m.RangeSliderDemo,
-          ),
-      },
-      {
-        path: 'step-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/step-slider-demo').then(
-            (m) => m.StepSliderDemo,
-          ),
-      },
-      {
-        path: 'disabled-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/disabled-slider-demo').then(
-            (m) => m.DisabledSliderDemo,
-          ),
-      },
-      {
-        path: 'volume-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/volume-slider-demo').then(
-            (m) => m.VolumeSliderDemo,
-          ),
-      },
-      {
-        path: 'price-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/price-slider-demo').then(
-            (m) => m.PriceSliderDemo,
-          ),
-      },
-      {
-        path: 'temperature-slider-demo',
-        loadComponent: () =>
-          import('../pages/docs/slider/demos/temperature-slider-demo').then(
-            (m) => m.TemperatureSliderDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/sortable-list',
     children: [
       {
