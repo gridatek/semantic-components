@@ -7,6 +7,8 @@ import {
 import {
   ScTimePicker,
   ScTimePickerInput,
+  ScTimePickerHoursInput,
+  ScTimePickerMinutesInput,
   ScTimePickerSeparator,
   ScTimePickerPeriod,
   ScTimePickerPeriodAM,
@@ -19,6 +21,8 @@ import {
   imports: [
     ScTimePicker,
     ScTimePickerInput,
+    ScTimePickerHoursInput,
+    ScTimePickerMinutesInput,
     ScTimePickerSeparator,
     ScTimePickerPeriod,
     ScTimePickerPeriodAM,
@@ -57,9 +61,9 @@ import {
         </button>
       </div>
       <div scTimePicker format="12h" [(value)]="time">
-        <input scTimePickerInput type="hours" aria-label="Hours" />
+        <input scTimePickerInput scTimePickerHoursInput />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput type="minutes" aria-label="Minutes" />
+        <input scTimePickerInput scTimePickerMinutesInput />
         <div scTimePickerPeriod>
           <button scTimePickerPeriodAM>AM</button>
           <button scTimePickerPeriodPM>PM</button>

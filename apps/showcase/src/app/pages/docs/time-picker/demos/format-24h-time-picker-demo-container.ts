@@ -28,19 +28,27 @@ export class Format24hTimePickerDemoContainer {
 import {
   ScTimePicker,
   ScTimePickerInput,
+  ScTimePickerHoursInput,
+  ScTimePickerMinutesInput,
   ScTimePickerSeparator,
   ScTimeValue,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-format-24h-time-picker-demo',
-  imports: [ScTimePicker, ScTimePickerInput, ScTimePickerSeparator],
+  imports: [
+    ScTimePicker,
+    ScTimePickerInput,
+    ScTimePickerHoursInput,
+    ScTimePickerMinutesInput,
+    ScTimePickerSeparator,
+  ],
   template: \`
     <div class="flex flex-col gap-4">
       <div scTimePicker format="24h" [(value)]="time">
-        <input scTimePickerInput type="hours" aria-label="Hours" />
+        <input scTimePickerInput scTimePickerHoursInput />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput type="minutes" aria-label="Minutes" />
+        <input scTimePickerInput scTimePickerMinutesInput />
       </div>
       <p class="text-sm text-muted-foreground">
         Selected: {{ formatTime(time()) }}

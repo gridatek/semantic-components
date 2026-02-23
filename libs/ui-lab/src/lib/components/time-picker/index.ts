@@ -1,6 +1,9 @@
 export { SC_TIME_PICKER, ScTimePicker } from './time-picker';
 export type { ScTimeValue, ScTimeFormat, ScTimePeriod } from './time-picker';
 export { ScTimePickerInput } from './time-picker-input';
+export { ScTimePickerHoursInput } from './time-picker-hours-input';
+export { ScTimePickerMinutesInput } from './time-picker-minutes-input';
+export { ScTimePickerSecondsInput } from './time-picker-seconds-input';
 export { ScTimePickerPeriod } from './time-picker-period';
 export { ScTimePickerPeriodAM } from './time-picker-period-am';
 export { ScTimePickerPeriodPM } from './time-picker-period-pm';

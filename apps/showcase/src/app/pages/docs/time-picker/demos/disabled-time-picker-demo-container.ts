@@ -28,6 +28,8 @@ export class DisabledTimePickerDemoContainer {
 import {
   ScTimePicker,
   ScTimePickerInput,
+  ScTimePickerHoursInput,
+  ScTimePickerMinutesInput,
   ScTimePickerSeparator,
   ScTimePickerPeriod,
   ScTimePickerPeriodAM,
@@ -40,6 +42,8 @@ import {
   imports: [
     ScTimePicker,
     ScTimePickerInput,
+    ScTimePickerHoursInput,
+    ScTimePickerMinutesInput,
     ScTimePickerSeparator,
     ScTimePickerPeriod,
     ScTimePickerPeriodAM,
@@ -47,9 +51,9 @@ import {
   ],
   template: \`
     <div scTimePicker format="12h" [disabled]="true" [(value)]="time">
-      <input scTimePickerInput type="hours" aria-label="Hours" />
+      <input scTimePickerInput scTimePickerHoursInput />
       <span scTimePickerSeparator>:</span>
-      <input scTimePickerInput type="minutes" aria-label="Minutes" />
+      <input scTimePickerInput scTimePickerMinutesInput />
       <div scTimePickerPeriod>
         <button scTimePickerPeriodAM>AM</button>
         <button scTimePickerPeriodPM>PM</button>

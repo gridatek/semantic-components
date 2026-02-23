@@ -7,21 +7,31 @@ import {
 import {
   ScTimePicker,
   ScTimePickerInput,
+  ScTimePickerHoursInput,
+  ScTimePickerMinutesInput,
+  ScTimePickerSecondsInput,
   ScTimePickerSeparator,
   ScTimeValue,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-seconds-time-picker-demo',
-  imports: [ScTimePicker, ScTimePickerInput, ScTimePickerSeparator],
+  imports: [
+    ScTimePicker,
+    ScTimePickerInput,
+    ScTimePickerHoursInput,
+    ScTimePickerMinutesInput,
+    ScTimePickerSecondsInput,
+    ScTimePickerSeparator,
+  ],
   template: `
     <div class="flex flex-col gap-4">
       <div scTimePicker format="24h" [showSeconds]="true" [(value)]="time">
-        <input scTimePickerInput type="hours" aria-label="Hours" />
+        <input scTimePickerInput scTimePickerHoursInput />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput type="minutes" aria-label="Minutes" />
+        <input scTimePickerInput scTimePickerMinutesInput />
         <span scTimePickerSeparator>:</span>
-        <input scTimePickerInput type="seconds" aria-label="Seconds" />
+        <input scTimePickerInput scTimePickerSecondsInput />
       </div>
       <p class="text-sm text-muted-foreground">
         Selected: {{ formatTime(time()) }}
