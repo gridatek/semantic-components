@@ -4,12 +4,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { HeadingsTypographyDemoContainer } from './demos/headings-typography-demo-container';
+import { UnderlineTypographyDemoContainer } from './demos/underline-typography-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
   selector: 'app-typography-page',
-  imports: [HeadingsTypographyDemoContainer, TocHeading, ComponentBadges],
+  imports: [
+    HeadingsTypographyDemoContainer,
+    UnderlineTypographyDemoContainer,
+    TocHeading,
+    ComponentBadges,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -23,6 +29,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       <section class="space-y-8">
         <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
         <app-headings-typography-demo-container />
+        <app-underline-typography-demo-container />
       </section>
     </div>
   `,

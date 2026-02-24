@@ -4188,6 +4188,13 @@ export const demosRoutes: Route[] = [
             (m) => m.HeadingsTypographyDemo,
           ),
       },
+      {
+        path: 'underline-typography-demo',
+        loadComponent: () =>
+          import('../pages/docs/typography/demos/underline-typography-demo').then(
+            (m) => m.UnderlineTypographyDemo,
+          ),
+      },
     ],
   },
   {
