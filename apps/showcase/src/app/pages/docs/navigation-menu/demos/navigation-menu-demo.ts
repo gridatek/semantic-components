@@ -102,22 +102,71 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
             <div scNavigationMenuContent>
               <ul scNavigationMenuGrid>
                 <li>
-                  <a scNavigationMenuLink href="#">Alert Dialog</a>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Alert Dialog
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      A modal dialog that interrupts the user with important
+                      content.
+                    </p>
+                  </a>
                 </li>
                 <li>
-                  <a scNavigationMenuLink href="#">Hover Card</a>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Hover Card
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      For sighted users to preview content behind a link.
+                    </p>
+                  </a>
                 </li>
                 <li>
-                  <a scNavigationMenuLink href="#">Progress</a>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">Progress</div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      Displays an indicator showing completion progress.
+                    </p>
+                  </a>
                 </li>
                 <li>
-                  <a scNavigationMenuLink href="#">Scroll Area</a>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">
+                      Scroll Area
+                    </div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      Visually or semantically separates content.
+                    </p>
+                  </a>
                 </li>
                 <li>
-                  <a scNavigationMenuLink href="#">Tabs</a>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">Tabs</div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      A set of layered sections of content.
+                    </p>
+                  </a>
                 </li>
                 <li>
-                  <a scNavigationMenuLink href="#">Tooltip</a>
+                  <a scNavigationMenuLink href="#">
+                    <div class="text-sm font-medium leading-none">Tooltip</div>
+                    <p
+                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                    >
+                      A popup that displays information on hover.
+                    </p>
+                  </a>
                 </li>
               </ul>
             </div>
