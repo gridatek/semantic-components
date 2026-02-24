@@ -1,6 +1,27 @@
 import { computed, Directive, ElementRef, inject, input } from '@angular/core';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '../../utils';
+
+export const headingVariants = cva('scroll-m-20 tracking-tight', {
+  variants: {
+    level: {
+      h1: 'text-4xl font-extrabold',
+      h2: 'text-3xl font-semibold first:mt-0',
+      h3: 'text-2xl font-semibold',
+      h4: 'text-xl font-semibold',
+    },
+    underline: {
+      true: 'border-b pb-2',
+      false: '',
+    },
+  },
+  defaultVariants: {
+    underline: false,
+  },
+});
+
+export type ScHeadingVariants = VariantProps<typeof headingVariants>;
 
 @Directive({
   selector: 'h1[scHeading], h2[scHeading], h3[scHeading], h4[scHeading]',
@@ -11,17 +32,16 @@ import { cn } from '../../utils';
 })
 export class ScHeading {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly underline = input<ScHeadingVariants['underline']>(false);
 
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   protected readonly class = computed(() => {
-    const tag = this.elementRef.nativeElement.tagName.toLowerCase();
-    const styles: Record<string, string> = {
-      h1: 'scroll-m-20 text-4xl font-extrabold tracking-tight',
-      h2: 'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
-      h3: 'scroll-m-20 text-2xl font-semibold tracking-tight',
-      h4: 'scroll-m-20 text-xl font-semibold tracking-tight',
-    };
-    return cn(styles[tag] ?? '', this.classInput());
+    const level =
+      this.elementRef.nativeElement.tagName.toLowerCase() as ScHeadingVariants['level'];
+    return cn(
+      headingVariants({ level, underline: this.underline() }),
+      this.classInput(),
+    );
   });
 }
