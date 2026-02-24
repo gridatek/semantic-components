@@ -6,29 +6,17 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_SORTABLE_LIST, ScSortableList } from './sortable-list';
 import { SC_SORTABLE_ITEM, ScSortableItem } from './sortable-item';
 
 @Component({
   selector: '[scSortableHandle]',
+  imports: [SiGripVerticalIcon],
   template: `
     <ng-content>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        class="size-4"
-      >
-        <circle cx="9" cy="5" r="1" />
-        <circle cx="9" cy="12" r="1" />
-        <circle cx="9" cy="19" r="1" />
-        <circle cx="15" cy="5" r="1" />
-        <circle cx="15" cy="12" r="1" />
-        <circle cx="15" cy="19" r="1" />
-      </svg>
+      <svg siGripVerticalIcon class="size-4"></svg>
     </ng-content>
   `,
   host: {

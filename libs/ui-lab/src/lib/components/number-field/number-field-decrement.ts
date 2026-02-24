@@ -6,23 +6,16 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Component({
   selector: 'button[scNumberFieldDecrement]',
+  imports: [SiMinusIcon],
   template: `
     <ng-content>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        class="size-4"
-      >
-        <path d="M5 12h14" />
-      </svg>
+      <svg siMinusIcon class="size-4"></svg>
     </ng-content>
   `,
   host: {

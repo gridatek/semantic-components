@@ -6,11 +6,20 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
+import {
+  SiCheckIcon,
+  SiCircleXIcon,
+  SiInfoIcon,
+  SiMessageSquareIcon,
+  SiTriangleAlertIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import type { Notification, NotificationAction } from './notification-types';
 
 @Component({
   selector: 'sc-notification-item',
+  imports: [SiXIcon, SiCheckIcon, SiTriangleAlertIcon, SiCircleXIcon, SiMessageSquareIcon, SiInfoIcon],
   template: `
     <div
       [class]="itemClass()"
@@ -39,7 +48,27 @@ import type { Notification, NotificationAction } from './notification-types';
           />
         } @else {
           <div [class]="iconContainerClass()">
-            <span [innerHTML]="typeIcon()"></span>
+            @if (notification().icon) {
+              <span [innerHTML]="notification().icon"></span>
+            } @else {
+              @switch (notification().type) {
+                @case ('success') {
+                  <svg siCheckIcon class="size-5"></svg>
+                }
+                @case ('warning') {
+                  <svg siTriangleAlertIcon class="size-5"></svg>
+                }
+                @case ('error') {
+                  <svg siCircleXIcon class="size-5"></svg>
+                }
+                @case ('message') {
+                  <svg siMessageSquareIcon class="size-5"></svg>
+                }
+                @default {
+                  <svg siInfoIcon class="size-5"></svg>
+                }
+              }
+            }
           </div>
         }
       </div>
@@ -84,20 +113,7 @@ import type { Notification, NotificationAction } from './notification-types';
           (click)="onDismiss($event)"
           aria-label="Dismiss notification"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
+          <svg siXIcon class="size-4"></svg>
         </button>
       }
     </div>
@@ -146,29 +162,6 @@ export class ScNotificationItem {
         return cn(base, 'bg-muted text-muted-foreground');
     }
   });
-
-  protected typeIcon(): string {
-    const type = this.notification().type;
-    const customIcon = this.notification().icon;
-
-    if (customIcon) {
-      return customIcon;
-    }
-
-    switch (type) {
-      case 'success':
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
-      case 'warning':
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`;
-      case 'error':
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`;
-      case 'message':
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>`;
-      case 'info':
-      default:
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
-    }
-  }
 
   protected formatTime(date: Date): string {
     const now = new Date();

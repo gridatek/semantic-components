@@ -6,11 +6,21 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiLoaderCircleIcon,
+  SiMinimize2Icon,
+  SiXIcon,
+  SiZoomInIcon,
+  SiZoomOutIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_LIGHTBOX } from './lightbox';
 
 @Component({
   selector: '[scLightboxContainer]',
+  imports: [SiXIcon, SiChevronLeftIcon, SiChevronRightIcon, SiLoaderCircleIcon, SiZoomOutIcon, SiZoomInIcon, SiMinimize2Icon],
   template: `
     @if (lightbox.isOpen()) {
       <div
@@ -35,16 +45,7 @@ import { SC_LIGHTBOX } from './lightbox';
           aria-label="Close lightbox"
         >
           <ng-content select="[scLightboxCloseIcon]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-6"
-            >
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
+            <svg siXIcon class="size-6"></svg>
           </ng-content>
         </button>
 
@@ -58,16 +59,7 @@ import { SC_LIGHTBOX } from './lightbox';
             aria-label="Previous image"
           >
             <ng-content select="[scLightboxPrevIcon]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                class="size-8"
-              >
-                <path d="m15 18-6-6 6-6" />
-              </svg>
+              <svg siChevronLeftIcon class="size-8"></svg>
             </ng-content>
           </button>
         }
@@ -90,27 +82,7 @@ import { SC_LIGHTBOX } from './lightbox';
           @if (lightbox.imageLoading()) {
             <div class="absolute inset-0 flex items-center justify-center">
               <ng-content select="[scLightboxLoading]">
-                <svg
-                  class="size-8 animate-spin text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  (click)="$event.stopPropagation()"
-                >
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                  />
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
+                <svg siLoaderCircleIcon class="size-8 animate-spin text-white" (click)="$event.stopPropagation()"></svg>
               </ng-content>
             </div>
           }
@@ -129,16 +101,7 @@ import { SC_LIGHTBOX } from './lightbox';
             aria-label="Next image"
           >
             <ng-content select="[scLightboxNextIcon]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                class="size-8"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
+              <svg siChevronRightIcon class="size-8"></svg>
             </ng-content>
           </button>
         }
@@ -185,17 +148,7 @@ import { SC_LIGHTBOX } from './lightbox';
                   [disabled]="lightbox.zoomLevel() <= 0.5"
                   aria-label="Zoom out"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    class="size-5"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3M8 11h6" />
-                  </svg>
+                  <svg siZoomOutIcon class="size-5"></svg>
                 </button>
                 <span class="text-sm text-white/80 min-w-[3rem] text-center">
                   {{ Math.round(lightbox.zoomLevel() * 100) }}%
@@ -207,17 +160,7 @@ import { SC_LIGHTBOX } from './lightbox';
                   [disabled]="lightbox.zoomLevel() >= 3"
                   aria-label="Zoom in"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    class="size-5"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3M8 11h6M11 8v6" />
-                  </svg>
+                  <svg siZoomInIcon class="size-5"></svg>
                 </button>
                 <button
                   type="button"
@@ -225,19 +168,7 @@ import { SC_LIGHTBOX } from './lightbox';
                   (click)="lightbox.resetZoom()"
                   aria-label="Reset zoom"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    class="size-5"
-                  >
-                    <path d="M21 21l-6-6m6 6v-4.8m0 4.8h-4.8" />
-                    <path d="M3 16.2V21m0 0h4.8M3 21l6-6" />
-                    <path d="M21 7.8V3m0 0h-4.8M21 3l-6 6" />
-                    <path d="M3 7.8V3m0 0h4.8M3 3l6 6" />
-                  </svg>
+                  <svg siMinimize2Icon class="size-5"></svg>
                 </button>
               </div>
             }

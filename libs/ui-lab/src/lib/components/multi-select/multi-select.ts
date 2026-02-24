@@ -10,6 +10,7 @@ import {
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
+import { SiCheckIcon, SiChevronDownIcon, SiMinusIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 
 export interface MultiSelectOption {
@@ -46,16 +47,7 @@ export interface MultiSelectOption {
                   (click)="removeOption($event, option)"
                   [attr.aria-label]="'Remove ' + option.label"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    class="size-3"
-                  >
-                    <path d="M18 6 6 18M6 6l12 12" />
-                  </svg>
+                  <svg siXIcon class="size-3"></svg>
                 </button>
               </span>
             }
@@ -63,16 +55,7 @@ export interface MultiSelectOption {
             <span>{{ selectedOptions().length }} selected</span>
           }
         </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          class="size-4 shrink-0 text-muted-foreground"
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
+        <svg siChevronDownIcon class="size-4 shrink-0 text-muted-foreground"></svg>
       </button>
 
       <!-- Dropdown -->
@@ -107,27 +90,9 @@ export interface MultiSelectOption {
               >
                 <div [class]="checkboxClass(allSelected())">
                   @if (allSelected()) {
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="3"
-                      class="size-3"
-                    >
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
+                    <svg siCheckIcon class="size-3"></svg>
                   } @else if (someSelected()) {
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="3"
-                      class="size-3"
-                    >
-                      <path d="M5 12h14" />
-                    </svg>
+                    <svg siMinusIcon class="size-3"></svg>
                   }
                 </div>
                 <span>Select All</span>
@@ -148,16 +113,7 @@ export interface MultiSelectOption {
               >
                 <div [class]="checkboxClass(isSelected(option))">
                   @if (isSelected(option)) {
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="3"
-                      class="size-3"
-                    >
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
+                    <svg siCheckIcon class="size-3"></svg>
                   }
                 </div>
                 <span>{{ option.label }}</span>
@@ -189,6 +145,7 @@ export interface MultiSelectOption {
       <div class="fixed inset-0 z-40" (click)="closeDropdown()"></div>
     }
   `,
+  imports: [SiXIcon, SiChevronDownIcon, SiCheckIcon, SiMinusIcon],
   host: {
     'data-slot': 'multi-select',
   },

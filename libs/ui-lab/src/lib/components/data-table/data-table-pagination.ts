@@ -7,11 +7,18 @@ import {
   model,
   ViewEncapsulation,
 } from '@angular/core';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiChevronsLeftIcon,
+  SiChevronsRightIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE } from './data-table';
 
 @Component({
   selector: '[scDataTablePagination]',
+  imports: [SiChevronsLeftIcon, SiChevronLeftIcon, SiChevronRightIcon, SiChevronsRightIcon],
   template: `
     <div class="flex items-center justify-between px-2">
       <div class="text-sm text-muted-foreground">
@@ -46,70 +53,36 @@ import { SC_DATA_TABLE } from './data-table';
             class="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background hover:bg-accent disabled:opacity-50"
             [disabled]="currentPage() === 1"
             (click)="goToPage(1)"
+            aria-label="First page"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path d="m11 17-5-5 5-5" />
-              <path d="m18 17-5-5 5-5" />
-            </svg>
+            <svg siChevronsLeftIcon class="size-4"></svg>
           </button>
           <button
             type="button"
             class="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background hover:bg-accent disabled:opacity-50"
             [disabled]="currentPage() === 1"
             (click)="goToPage(currentPage() - 1)"
+            aria-label="Previous page"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path d="m15 18-6-6 6-6" />
-            </svg>
+            <svg siChevronLeftIcon class="size-4"></svg>
           </button>
           <button
             type="button"
             class="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background hover:bg-accent disabled:opacity-50"
             [disabled]="currentPage() === totalPages()"
             (click)="goToPage(currentPage() + 1)"
+            aria-label="Next page"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path d="m9 18 6-6-6-6" />
-            </svg>
+            <svg siChevronRightIcon class="size-4"></svg>
           </button>
           <button
             type="button"
             class="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background hover:bg-accent disabled:opacity-50"
             [disabled]="currentPage() === totalPages()"
             (click)="goToPage(totalPages())"
+            aria-label="Last page"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path d="m6 17 5-5-5-5" />
-              <path d="m13 17 5-5-5-5" />
-            </svg>
+            <svg siChevronsRightIcon class="size-4"></svg>
           </button>
         </div>
       </div>

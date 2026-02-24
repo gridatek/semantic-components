@@ -6,11 +6,13 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronDownIcon, SiChevronUpIcon, SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE, SortDirection } from './data-table';
 
 @Component({
   selector: '[scDataTableHead]',
+  imports: [SiChevronUpIcon, SiChevronDownIcon, SiChevronsUpDownIcon],
   template: `
     @if (sortable()) {
       <button
@@ -20,39 +22,11 @@ import { SC_DATA_TABLE, SortDirection } from './data-table';
       >
         <ng-content />
         @if (sortDirection() === 'asc') {
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-4"
-          >
-            <path d="m5 15 7-7 7 7" />
-          </svg>
+          <svg siChevronUpIcon class="size-4"></svg>
         } @else if (sortDirection() === 'desc') {
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-4"
-          >
-            <path d="m19 9-7 7-7-7" />
-          </svg>
+          <svg siChevronDownIcon class="size-4"></svg>
         } @else {
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-4 opacity-0 group-hover:opacity-50"
-          >
-            <path d="m7 15 5 5 5-5" />
-            <path d="m7 9 5-5 5 5" />
-          </svg>
+          <svg siChevronsUpDownIcon class="size-4 opacity-0 group-hover:opacity-50"></svg>
         }
       </button>
     } @else {

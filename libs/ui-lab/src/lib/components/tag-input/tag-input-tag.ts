@@ -6,6 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_TAG_INPUT } from './tag-input';
 
@@ -14,6 +15,7 @@ import { SC_TAG_INPUT } from './tag-input';
 // ============================================================================
 @Component({
   selector: '[scTagInputTag]',
+  imports: [SiXIcon],
   template: `
     <span class="truncate">{{ tag() }}</span>
     @if (!tagInput.disabled()) {
@@ -23,17 +25,7 @@ import { SC_TAG_INPUT } from './tag-input';
         (click)="remove($event)"
         [attr.aria-label]="'Remove ' + tag()"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          class="size-3"
-        >
-          <path d="M18 6 6 18" />
-          <path d="m6 6 12 12" />
-        </svg>
+        <svg siXIcon class="size-3"></svg>
       </button>
     }
   `,

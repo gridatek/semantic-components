@@ -7,6 +7,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import type {
   OrgChartDirection,
@@ -17,6 +18,7 @@ import type {
 
 @Component({
   selector: 'sc-org-chart-node',
+  imports: [SiChevronDownIcon],
   template: `
     <div [class]="containerClass()">
       <!-- Node Card -->
@@ -65,7 +67,7 @@ import type {
           <!-- Expand indicator -->
           @if (hasChildren()) {
             <div class="flex-shrink-0 ml-2">
-              <span [class]="expandIconClass()" [innerHTML]="expandIcon"></span>
+              <svg siChevronDownIcon [class]="expandIconClass()"></svg>
             </div>
           }
         </button>
@@ -123,8 +125,6 @@ export class ScOrgChartNode {
   readonly nodeExpand = output<OrgChartNodeExpandEvent>();
 
   protected readonly expanded = signal<boolean | null>(null);
-
-  readonly expandIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
 
   protected readonly hasChildren = computed(() => {
     const children = this.node().children;
