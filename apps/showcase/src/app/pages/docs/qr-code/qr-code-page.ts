@@ -15,6 +15,8 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-qr-code-page',
   imports: [
@@ -29,11 +31,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     UseCasesQrCodeDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">QrCode</h1>
+        <h1 scHeading>QrCode</h1>
         <p class="text-muted-foreground">
           Generate QR codes from text or URLs with customizable colors and logo
           support.
@@ -42,7 +45,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-qr-code-demo-container />
         <app-interactive-qr-code-demo-container />
         <app-sizes-qr-code-demo-container />

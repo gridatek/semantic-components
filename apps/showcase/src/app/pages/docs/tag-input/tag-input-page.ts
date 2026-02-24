@@ -18,6 +18,8 @@ import { VariantsTagInputDemoContainer } from './demos/variants-tag-input-demo-c
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-tag-input-page',
   imports: [
@@ -35,11 +37,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     OutputTagInputDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">TagInput</h1>
+        <h1 scHeading>TagInput</h1>
         <p class="text-muted-foreground">
           A multi-tag input component with chips for adding and removing tags.
         </p>
@@ -47,7 +50,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-tag-input-demo-container />
         <app-clearable-tag-input-demo-container />
         <app-max-tags-tag-input-demo-container />

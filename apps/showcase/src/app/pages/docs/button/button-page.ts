@@ -11,6 +11,8 @@ import { WithIconsButtonDemoContainer } from './demos/with-icons-button-demo-con
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-button-page',
   imports: [
@@ -21,11 +23,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     LoadingButtonDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Button</h1>
+        <h1 scHeading>Button</h1>
         <p class="text-muted-foreground">
           Displays a button or a component that looks like a button.
         </p>
@@ -33,7 +36,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-variants-button-demo-container />
         <app-sizes-button-demo-container />
         <app-with-icons-button-demo-container />

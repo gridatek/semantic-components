@@ -12,6 +12,8 @@ import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-theme-toggle-page',
   imports: [
@@ -23,11 +25,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     SettingsPanelThemeToggleDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">ThemeToggle</h1>
+        <h1 scHeading>ThemeToggle</h1>
         <p class="text-muted-foreground">
           A component for switching between light and dark themes with system
           preference support.
@@ -36,7 +39,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-theme-toggle-demo-container />
         <app-variants-theme-toggle-demo-container />
         <app-sizes-theme-toggle-demo-container />

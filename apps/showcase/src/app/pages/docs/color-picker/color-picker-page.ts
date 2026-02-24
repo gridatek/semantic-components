@@ -14,6 +14,8 @@ import { SwatchesColorPickerDemoContainer } from './demos/swatches-color-picker-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-color-picker-page',
   imports: [
@@ -27,11 +29,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     PreviewColorPickerDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">ColorPicker</h1>
+        <h1 scHeading>ColorPicker</h1>
         <p class="text-muted-foreground">
           A component for selecting colors with various formats.
         </p>
@@ -39,7 +42,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-full-color-picker-demo-container />
         <app-swatches-color-picker-demo-container />
         <app-eyedropper-color-picker-demo-container />

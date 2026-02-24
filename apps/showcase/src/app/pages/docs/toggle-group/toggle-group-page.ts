@@ -11,6 +11,8 @@ import { SizesToggleGroupDemoContainer } from './demos/sizes-toggle-group-demo-c
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-toggle-group-page',
   imports: [
@@ -21,11 +23,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     DisabledToggleGroupDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">ToggleGroup</h1>
+        <h1 scHeading>ToggleGroup</h1>
         <p class="text-muted-foreground">
           A set of two-state buttons that can be toggled on or off.
         </p>
@@ -33,7 +36,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-single-toggle-group-demo-container />
         <app-multiple-toggle-group-demo-container />
         <app-outline-toggle-group-demo-container />

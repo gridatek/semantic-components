@@ -13,6 +13,8 @@ import { ComponentStatusBadge } from '../../../components/component-status-badge
 import { ComponentCategory, ComponentLibrary } from '../../../data/components';
 import { ComponentsService } from '../../../services/components.service';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-components-page',
   imports: [
@@ -21,11 +23,12 @@ import { ComponentsService } from '../../../services/components.service';
     ScBadge,
     ScToggleGroup,
     ScToggleGroupItem,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Components</h1>
+        <h1 scHeading>Components</h1>
         <p class="text-muted-foreground">
           Beautifully designed components built with Angular ARIA and Tailwind
           CSS.

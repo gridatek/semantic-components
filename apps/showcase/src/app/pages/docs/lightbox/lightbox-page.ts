@@ -14,6 +14,8 @@ import { KeyboardLightboxDemoContainer } from './demos/keyboard-lightbox-demo-co
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-lightbox-page',
   imports: [
@@ -27,11 +29,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     KeyboardLightboxDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Lightbox</h1>
+        <h1 scHeading>Lightbox</h1>
         <p class="text-muted-foreground">
           Full-screen image viewer with zoom, navigation, and keyboard support.
         </p>
@@ -39,7 +42,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-lightbox-demo-container />
         <app-info-lightbox-demo-container />
         <app-gallery-lightbox-demo-container />

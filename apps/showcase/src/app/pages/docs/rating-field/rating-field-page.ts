@@ -13,6 +13,8 @@ import { FormRatingFieldDemoContainer } from './demos/form-rating-field-demo-con
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-rating-field-page',
   imports: [
@@ -25,11 +27,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     FormRatingFieldDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Rating Field</h1>
+        <h1 scHeading>Rating Field</h1>
         <p class="text-muted-foreground">
           A composable rating field for feedback and reviews.
         </p>
@@ -37,7 +40,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-rating-field-demo-container />
         <app-half-rating-field-demo-container />
         <app-readonly-rating-field-demo-container />

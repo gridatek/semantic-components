@@ -9,6 +9,8 @@ import { PrefixAnimatedCounterDemoContainer } from './demos/prefix-animated-coun
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-animated-counter-page',
   imports: [
@@ -17,17 +19,18 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     PrefixAnimatedCounterDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">AnimatedCounter</h1>
+        <h1 scHeading>AnimatedCounter</h1>
         <p class="text-muted-foreground">A animated counter component.</p>
         <app-component-badges path="animated-counter" />
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-animated-counter-demo-container />
         <app-easing-animated-counter-demo-container />
         <app-prefix-animated-counter-demo-container />

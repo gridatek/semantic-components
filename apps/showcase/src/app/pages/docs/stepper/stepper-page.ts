@@ -9,6 +9,8 @@ import { SimpleStepperDemoContainer } from './demos/simple-stepper-demo-containe
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-stepper-page',
   imports: [
@@ -17,11 +19,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     SimpleStepperDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Stepper</h1>
+        <h1 scHeading>Stepper</h1>
         <p class="text-muted-foreground">
           A multi-step wizard component for guiding users through a process.
         </p>
@@ -29,7 +32,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-horizontal-stepper-demo-container />
         <app-vertical-stepper-demo-container />
         <app-simple-stepper-demo-container />

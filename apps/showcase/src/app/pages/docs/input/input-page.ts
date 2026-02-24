@@ -13,6 +13,8 @@ import { TypesInputDemoContainer } from './demos/types-input-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-input-page',
   imports: [
@@ -25,11 +27,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     FormInputDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Input</h1>
+        <h1 scHeading>Input</h1>
         <p class="text-muted-foreground">
           Displays a form input field or a component that looks like an input
           field.
@@ -38,7 +41,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-input-demo-container />
         <app-label-input-demo-container />
         <app-types-input-demo-container />

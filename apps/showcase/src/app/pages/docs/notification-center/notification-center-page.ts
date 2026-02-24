@@ -9,6 +9,8 @@ import { EmptyNotificationCenterDemoContainer } from './demos/empty-notification
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-notification-center-page',
   imports: [
@@ -17,11 +19,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     EmptyNotificationCenterDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">NotificationCenter</h1>
+        <h1 scHeading>NotificationCenter</h1>
         <p class="text-muted-foreground">
           A grouped notification management component with filtering, read
           states, and actions.
@@ -30,7 +33,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-grouped-notification-center-demo-container />
         <app-flat-notification-center-demo-container />
         <app-empty-notification-center-demo-container />

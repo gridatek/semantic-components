@@ -14,6 +14,8 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
 
 import { TocHeading } from '../../components/toc/toc-heading';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-code-page',
   imports: [
@@ -24,11 +26,12 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeViewerLabel,
     ScCopyButton,
     ScSeparator,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Code</h1>
+        <h1 scHeading>Code</h1>
         <p class="text-muted-foreground">
           Install and configure the
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
@@ -40,9 +43,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          1. Install the package
-        </h2>
+        <h2 scHeading toc>1. Install the package</h2>
         <p class="text-muted-foreground">
           Install the code library and its peer dependency
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">shiki</code>
@@ -60,9 +61,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          2. Configure styles
-        </h2>
+        <h2 scHeading toc>2. Configure styles</h2>
         <p class="text-muted-foreground">
           Import the code library styles in your
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
@@ -80,9 +79,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          3. Configure Tailwind source
-        </h2>
+        <h2 scHeading toc>3. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source in your
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
@@ -100,7 +97,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
+        <h2 scHeading toc>Usage</h2>
         <p class="text-muted-foreground">
           Import and use the code viewer in your Angular templates:
         </p>

@@ -13,6 +13,8 @@ import { FormPhoneInputDemoContainer } from './demos/form-phone-input-demo-conta
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-phone-input-page',
   imports: [
@@ -25,11 +27,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     FormPhoneInputDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">PhoneInput</h1>
+        <h1 scHeading>PhoneInput</h1>
         <p class="text-muted-foreground">
           Phone number input with country code selector and formatting options.
         </p>
@@ -37,7 +40,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-country-selector-phone-input-demo-container />
         <app-default-country-phone-input-demo-container />
         <app-us-format-phone-input-demo-container />

@@ -11,6 +11,8 @@ import { MultipleBurstsConfettiDemoContainer } from './demos/multiple-bursts-con
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-confetti-page',
   imports: [
@@ -21,17 +23,18 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     CornerBurstsConfettiDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Confetti</h1>
+        <h1 scHeading>Confetti</h1>
         <p class="text-muted-foreground">A confetti component.</p>
         <app-component-badges path="confetti" />
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-confetti-demo-container />
         <app-from-element-confetti-demo-container />
         <app-custom-colors-confetti-demo-container />

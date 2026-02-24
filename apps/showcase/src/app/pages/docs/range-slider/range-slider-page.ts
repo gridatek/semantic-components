@@ -8,6 +8,8 @@ import { CustomColorRangeSliderDemoContainer } from './demos/custom-color-range-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-range-slider-page',
   imports: [
@@ -15,11 +17,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     CustomColorRangeSliderDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Range Slider</h1>
+        <h1 scHeading>Range Slider</h1>
         <p class="text-muted-foreground">
           A dual-thumb range slider for selecting a numeric range between a
           minimum and maximum value.
@@ -28,7 +31,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-range-slider-demo-container />
         <app-custom-color-range-slider-demo-container />
       </section>

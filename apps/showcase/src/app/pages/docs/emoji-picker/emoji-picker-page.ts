@@ -15,6 +15,8 @@ import { MessageReactionsEmojiPickerDemoContainer } from './demos/message-reacti
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-emoji-picker-page',
   imports: [
@@ -29,11 +31,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     MessageReactionsEmojiPickerDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">EmojiPicker</h1>
+        <h1 scHeading>EmojiPicker</h1>
         <p class="text-muted-foreground">
           A searchable emoji picker with categories and recently used emojis.
         </p>
@@ -41,7 +44,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-emoji-picker-demo-container />
         <app-no-search-emoji-picker-demo-container />
         <app-no-categories-emoji-picker-demo-container />

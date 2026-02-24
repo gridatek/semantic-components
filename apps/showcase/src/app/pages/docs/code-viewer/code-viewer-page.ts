@@ -14,6 +14,8 @@ import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-contain
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-code-viewer-page',
   imports: [
@@ -25,11 +27,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     BasicCodeViewerDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Code Viewer</h1>
+        <h1 scHeading>Code Viewer</h1>
         <p class="text-muted-foreground">
           Display syntax-highlighted code with copy functionality.
         </p>
@@ -37,7 +40,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
+        <h2 scHeading toc>Usage</h2>
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
@@ -52,7 +55,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </section>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-code-viewer-demo-container />
       </section>
     </div>

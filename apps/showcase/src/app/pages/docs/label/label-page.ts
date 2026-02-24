@@ -9,6 +9,8 @@ import { FieldLabelDemoContainer } from './demos/field-label-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-label-page',
   imports: [
@@ -17,11 +19,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     FieldLabelDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Label</h1>
+        <h1 scHeading>Label</h1>
         <p class="text-muted-foreground">
           Renders an accessible label associated with controls.
         </p>
@@ -29,7 +32,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-label-demo-container />
         <app-checkbox-label-demo-container />
         <app-field-label-demo-container />

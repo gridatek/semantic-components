@@ -12,6 +12,8 @@ import { TextareaInputGroupDemoContainer } from './demos/textarea-input-group-de
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-input-group-page',
   imports: [
@@ -23,11 +25,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     TextareaInputGroupDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Input Group</h1>
+        <h1 scHeading>Input Group</h1>
         <p class="text-muted-foreground">
           A composable input group for combining inputs with addons, buttons,
           and text.
@@ -36,7 +39,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-input-group-demo-container />
         <app-button-input-group-demo-container />
         <app-text-input-group-demo-container />

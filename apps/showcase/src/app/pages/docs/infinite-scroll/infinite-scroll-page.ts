@@ -11,6 +11,8 @@ import { GridInfiniteScrollDemoContainer } from './demos/grid-infinite-scroll-de
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-infinite-scroll-page',
   imports: [
@@ -21,11 +23,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     GridInfiniteScrollDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">InfiniteScroll</h1>
+        <h1 scHeading>InfiniteScroll</h1>
         <p class="text-muted-foreground">
           Automatically load more content as the user scrolls to the bottom.
         </p>
@@ -33,7 +36,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-infinite-scroll-demo-container />
         <app-custom-loader-infinite-scroll-demo-container />
         <app-end-message-infinite-scroll-demo-container />

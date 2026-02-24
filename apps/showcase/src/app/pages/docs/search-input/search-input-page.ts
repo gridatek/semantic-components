@@ -9,6 +9,8 @@ import { CategoriesSearchInputDemoContainer } from './demos/categories-search-in
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-search-input-page',
   imports: [
@@ -17,17 +19,18 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     CategoriesSearchInputDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">SearchInput</h1>
+        <h1 scHeading>SearchInput</h1>
         <p class="text-muted-foreground">A search input component.</p>
         <app-component-badges path="search-input" />
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-search-input-demo-container />
         <app-loading-search-input-demo-container />
         <app-categories-search-input-demo-container />

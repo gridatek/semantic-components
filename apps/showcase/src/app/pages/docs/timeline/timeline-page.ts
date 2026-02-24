@@ -11,6 +11,8 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-timeline-page',
   imports: [
@@ -21,11 +23,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     TrackingTimelineDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Timeline</h1>
+        <h1 scHeading>Timeline</h1>
         <p class="text-muted-foreground">
           Display a sequence of events or activities in chronological order.
         </p>
@@ -33,7 +36,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-timeline-demo-container />
         <app-status-timeline-demo-container />
         <app-sizes-timeline-demo-container />

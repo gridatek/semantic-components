@@ -12,6 +12,8 @@ import { CustomThemeRadioGroupDemoContainer } from './demos/custom-theme-radio-g
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-radio-group-page',
   imports: [
@@ -23,11 +25,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     CustomThemeRadioGroupDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">RadioGroup</h1>
+        <h1 scHeading>RadioGroup</h1>
         <p class="text-muted-foreground">
           A set of checkable buttons where only one button can be checked at a
           time.
@@ -36,7 +39,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-radio-group-demo-container />
         <app-descriptions-radio-group-demo-container />
         <app-disabled-radio-group-demo-container />

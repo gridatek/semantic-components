@@ -10,6 +10,8 @@ import { StatsCardDemoContainer } from './demos/stats-card-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-card-page',
   imports: [
@@ -19,11 +21,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     StatsCardDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Card</h1>
+        <h1 scHeading>Card</h1>
         <p class="text-muted-foreground">
           Displays a card with header, content, and footer.
         </p>
@@ -31,7 +34,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-card-demo-container />
         <app-form-card-demo-container />
         <app-notification-card-demo-container />

@@ -11,6 +11,8 @@ import { ValuesProgressDemoContainer } from './demos/values-progress-demo-contai
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-progress-page',
   imports: [
@@ -21,11 +23,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     SignalFormsProgressDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Progress</h1>
+        <h1 scHeading>Progress</h1>
         <p class="text-muted-foreground">
           Displays an indicator showing the completion progress of a task,
           typically displayed as a progress bar.
@@ -34,7 +37,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-progress-demo-container />
         <app-values-progress-demo-container />
         <app-custom-max-progress-demo-container />

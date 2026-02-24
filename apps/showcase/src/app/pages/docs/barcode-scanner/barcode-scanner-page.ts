@@ -13,6 +13,8 @@ import { SingleScanBarcodeScannerDemoContainer } from './demos/single-scan-barco
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-barcode-scanner-page',
   imports: [
@@ -25,11 +27,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     BrowserSupportBarcodeScannerDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">BarcodeScanner</h1>
+        <h1 scHeading>BarcodeScanner</h1>
         <p class="text-muted-foreground">
           Scan barcodes and QR codes using your device's camera with the Barcode
           Detection API.
@@ -38,7 +41,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-barcode-scanner-demo-container />
         <app-qr-code-barcode-scanner-demo-container />
         <app-product-barcode-scanner-demo-container />

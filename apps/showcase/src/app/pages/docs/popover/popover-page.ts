@@ -12,6 +12,8 @@ import { AlignEndPopoverDemoContainer } from './demos/align-end-popover-demo-con
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-popover-page',
   imports: [
@@ -23,11 +25,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     AlignEndPopoverDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Popover</h1>
+        <h1 scHeading>Popover</h1>
         <p class="text-muted-foreground">
           Displays rich content in a portal, triggered by a button.
         </p>
@@ -35,7 +38,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-popover-demo-container />
         <app-top-popover-demo-container />
         <app-right-popover-demo-container />

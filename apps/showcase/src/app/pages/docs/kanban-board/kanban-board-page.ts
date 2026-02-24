@@ -8,6 +8,8 @@ import { MinimalKanbanBoardDemoContainer } from './demos/minimal-kanban-board-de
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-kanban-board-page',
   imports: [
@@ -15,11 +17,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     MinimalKanbanBoardDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">KanbanBoard</h1>
+        <h1 scHeading>KanbanBoard</h1>
         <p class="text-muted-foreground">
           Drag-and-drop task board for project management and workflow
           visualization.
@@ -28,7 +31,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-kanban-board-demo-container />
         <app-minimal-kanban-board-demo-container />
       </section>

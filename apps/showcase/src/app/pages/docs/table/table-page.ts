@@ -17,6 +17,8 @@ import UsersTableDemoContainer from './demos/users-table-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-table-page',
   imports: [
@@ -31,17 +33,18 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     UsersTableDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Table</h1>
+        <h1 scHeading>Table</h1>
         <p class="text-muted-foreground">A responsive table component.</p>
         <app-component-badges path="table" />
       </div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
+        <h2 scHeading toc>Usage</h2>
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
@@ -56,7 +59,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </section>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-table-demo-container />
         <app-caption-table-demo-container />
         <app-footer-table-demo-container />

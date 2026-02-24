@@ -12,6 +12,8 @@ import { DisabledActionsSpeedDialDemoContainer } from './demos/disabled-actions-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-speed-dial-page',
   imports: [
@@ -23,11 +25,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     DisabledActionsSpeedDialDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">SpeedDial</h1>
+        <h1 scHeading>SpeedDial</h1>
         <p class="text-muted-foreground">
           A floating action button that expands to reveal a set of related
           actions.
@@ -36,7 +39,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-speed-dial-demo-container />
         <app-directions-speed-dial-demo-container />
         <app-custom-icons-speed-dial-demo-container />

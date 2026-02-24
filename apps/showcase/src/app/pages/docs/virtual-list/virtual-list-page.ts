@@ -10,6 +10,8 @@ import { CustomHeightVirtualListDemoContainer } from './demos/custom-height-virt
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-virtual-list-page',
   imports: [
@@ -19,11 +21,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     CustomHeightVirtualListDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Virtual List</h1>
+        <h1 scHeading>Virtual List</h1>
         <p class="text-muted-foreground">
           Efficiently render large lists by only rendering visible items.
         </p>
@@ -31,7 +34,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-virtual-list-demo-container />
         <app-complex-virtual-list-demo-container />
         <app-scroll-controls-virtual-list-demo-container />

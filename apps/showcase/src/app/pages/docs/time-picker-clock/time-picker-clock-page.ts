@@ -8,6 +8,8 @@ import { MinutesTimePickerClockDemoContainer } from './demos/minutes-time-picker
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-time-picker-clock-page',
   imports: [
@@ -15,11 +17,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     MinutesTimePickerClockDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">TimePickerClock</h1>
+        <h1 scHeading>TimePickerClock</h1>
         <p class="text-muted-foreground">
           A visual clock interface for selecting hours or minutes.
         </p>
@@ -27,7 +30,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-hours-time-picker-clock-demo-container />
         <app-minutes-time-picker-clock-demo-container />
       </section>

@@ -20,6 +20,8 @@ import FullPasswordFieldDemoContainer from './demos/full-password-field-demo-con
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-password-field-page',
   imports: [
@@ -37,11 +39,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     FullPasswordFieldDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Password Field</h1>
+        <h1 scHeading>Password Field</h1>
         <p class="text-muted-foreground">
           A composable password input component with visibility toggle.
         </p>
@@ -49,7 +52,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
+        <h2 scHeading toc>Usage</h2>
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
@@ -64,7 +67,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </section>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-password-field-demo-container />
         <app-show-default-password-field-demo-container />
         <app-disabled-password-field-demo-container />

@@ -8,6 +8,8 @@ import { CustomSizeImageAnnotatorDemoContainer } from './demos/custom-size-image
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-image-annotator-page',
   imports: [
@@ -15,11 +17,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     CustomSizeImageAnnotatorDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">ImageAnnotator</h1>
+        <h1 scHeading>ImageAnnotator</h1>
         <p class="text-muted-foreground">
           Draw, mark up, and annotate images with various tools.
         </p>
@@ -27,7 +30,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-image-annotator-demo-container />
         <app-custom-size-image-annotator-demo-container />
       </section>

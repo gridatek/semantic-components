@@ -9,6 +9,8 @@ import { BothScrollAreaDemoContainer } from './demos/both-scroll-area-demo-conta
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-scroll-area-page',
   imports: [
@@ -17,11 +19,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     BothScrollAreaDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">ScrollArea</h1>
+        <h1 scHeading>ScrollArea</h1>
         <p class="text-muted-foreground">
           A scrollable area with thin, styled scrollbars that appear on hover.
         </p>
@@ -29,7 +32,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-vertical-scroll-area-demo-container />
         <app-horizontal-scroll-area-demo-container />
         <app-both-scroll-area-demo-container />

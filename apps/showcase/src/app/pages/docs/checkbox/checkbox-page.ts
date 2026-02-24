@@ -14,6 +14,8 @@ import { WithDescriptionCheckboxDemoContainer } from './demos/with-description-c
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-checkbox-page',
   imports: [
@@ -27,11 +29,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     CustomThemeCheckboxDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Checkbox</h1>
+        <h1 scHeading>Checkbox</h1>
         <p class="text-muted-foreground">
           A control that allows the user to toggle between checked and not
           checked.
@@ -40,7 +43,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-checkbox-demo-container />
         <app-with-description-checkbox-demo-container />
         <app-label-checkbox-demo-container />

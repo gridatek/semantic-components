@@ -13,6 +13,8 @@ import { DisabledSortableListDemoContainer } from './demos/disabled-sortable-lis
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-sortable-list-page',
   imports: [
@@ -25,11 +27,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     DisabledSortableListDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">SortableList</h1>
+        <h1 scHeading>SortableList</h1>
         <p class="text-muted-foreground">
           A drag and drop list component for reordering items.
         </p>
@@ -37,7 +40,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-sortable-list-demo-container />
         <app-handle-sortable-list-demo-container />
         <app-task-list-sortable-list-demo-container />

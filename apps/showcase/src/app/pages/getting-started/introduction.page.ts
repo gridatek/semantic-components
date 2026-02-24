@@ -8,13 +8,15 @@ import {
 import { TocHeading } from '../../components/toc/toc-heading';
 import { ConfigService } from '../../services/config.service';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-introduction-page',
-  imports: [TocHeading],
+  imports: [TocHeading, ScHeading],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Introduction</h1>
+        <h1 scHeading>Introduction</h1>
         <p class="text-muted-foreground">
           The missing piece in the Angular world. Beautifully crafted UI
           components for modern Angular, built with Tailwind CSS on top of
@@ -23,9 +25,7 @@ import { ConfigService } from '../../services/config.service';
       </div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          What is Semantic Components?
-        </h2>
+        <h2 scHeading toc>What is Semantic Components?</h2>
         <p class="text-muted-foreground">
           Semantic Components is an open-source UI library for Angular. It
           provides a set of semantic, declarative, and composable components
@@ -35,7 +35,7 @@ import { ConfigService } from '../../services/config.service';
       </section>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">Features</h2>
+        <h2 scHeading toc>Features</h2>
         <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
           <li>
             <strong>Semantic</strong>
@@ -81,7 +81,7 @@ import { ConfigService } from '../../services/config.service';
       </section>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">Packages</h2>
+        <h2 scHeading toc>Packages</h2>
         <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
           <li>
             <strong>&#64;semantic-components/ui</strong>

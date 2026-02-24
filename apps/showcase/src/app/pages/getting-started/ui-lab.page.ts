@@ -14,6 +14,8 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
 
 import { TocHeading } from '../../components/toc/toc-heading';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-ui-lab-page',
   imports: [
@@ -24,11 +26,12 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeViewerLabel,
     ScCopyButton,
     ScSeparator,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">UI Lab</h1>
+        <h1 scHeading>UI Lab</h1>
         <p class="text-muted-foreground">
           Install and configure the
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
@@ -40,9 +43,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          1. Install the package
-        </h2>
+        <h2 scHeading toc>1. Install the package</h2>
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>terminal</span>
@@ -55,9 +56,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">
-          2. Configure Tailwind source
-        </h2>
+        <h2 scHeading toc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source in your
           <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
@@ -75,7 +74,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 toc class="text-xl font-semibold tracking-tight">Usage</h2>
+        <h2 scHeading toc>Usage</h2>
         <p class="text-muted-foreground">
           Import and use components in your Angular templates:
         </p>

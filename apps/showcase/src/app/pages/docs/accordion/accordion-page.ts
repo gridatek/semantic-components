@@ -9,6 +9,8 @@ import { MultipleAccordionDemoContainer } from './demos/multiple-accordion-demo-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-accordion-page',
   imports: [
@@ -17,11 +19,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     MultipleAccordionDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Accordion</h1>
+        <h1 scHeading>Accordion</h1>
         <p class="text-muted-foreground">
           A vertically stacked set of interactive headings that reveal or hide
           associated content.
@@ -30,7 +33,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-accordion-demo-container />
         <app-disabled-accordion-demo-container />
         <app-multiple-accordion-demo-container />

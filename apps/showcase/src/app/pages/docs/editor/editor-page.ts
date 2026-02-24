@@ -13,6 +13,8 @@ import { FullFeaturedEditorDemoContainer } from './demos/full-featured-editor-de
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-editor-page',
   imports: [
@@ -25,11 +27,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     FullFeaturedEditorDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Editor</h1>
+        <h1 scHeading>Editor</h1>
         <p class="text-muted-foreground">
           Composable WYSIWYG editor powered by Tiptap, with customizable
           toolbar, keyboard shortcuts, and HTML output.
@@ -38,7 +41,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-editor-demo-container />
         <app-prefilled-editor-demo-container />
         <app-minimal-toolbar-editor-demo-container />

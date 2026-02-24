@@ -10,6 +10,8 @@ import { InteractivePdfViewerDemoContainer } from './demos/interactive-pdf-viewe
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-pdf-viewer-page',
   imports: [
@@ -19,11 +21,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     InteractivePdfViewerDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">PdfViewer</h1>
+        <h1 scHeading>PdfViewer</h1>
         <p class="text-muted-foreground">
           A document viewer component for displaying PDF files with navigation,
           zoom, and toolbar controls.
@@ -32,7 +35,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-pdf-viewer-demo-container />
         <app-minimal-pdf-viewer-demo-container />
         <app-custom-toolbar-pdf-viewer-demo-container />

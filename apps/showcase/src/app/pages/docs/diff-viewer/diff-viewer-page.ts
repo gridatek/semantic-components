@@ -13,6 +13,8 @@ import { IdenticalDiffViewerDemoContainer } from './demos/identical-diff-viewer-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-diff-viewer-page',
   imports: [
@@ -25,11 +27,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     IdenticalDiffViewerDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">DiffViewer</h1>
+        <h1 scHeading>DiffViewer</h1>
         <p class="text-muted-foreground">
           Side-by-side or unified view for comparing text and code changes.
         </p>
@@ -37,7 +40,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-diff-viewer-demo-container />
         <app-unified-diff-viewer-demo-container />
         <app-json-diff-viewer-demo-container />

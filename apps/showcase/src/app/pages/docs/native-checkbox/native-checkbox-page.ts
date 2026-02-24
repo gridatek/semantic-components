@@ -9,6 +9,8 @@ import { SignalFormsNativeCheckboxDemoContainer } from './demos/signal-forms-nat
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-native-checkbox-page',
   imports: [
@@ -17,11 +19,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     SignalFormsNativeCheckboxDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Native Checkbox</h1>
+        <h1 scHeading>Native Checkbox</h1>
         <p class="text-muted-foreground">
           A native input checkbox directive that works seamlessly with Angular
           forms and Signal Forms.
@@ -30,7 +33,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-native-checkbox-demo-container />
         <app-indeterminate-native-checkbox-demo-container />
         <app-signal-forms-native-checkbox-demo-container />

@@ -12,6 +12,8 @@ import { VerificationOptFieldDemoContainer } from './demos/verification-opt-fiel
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-opt-field-page',
   imports: [
@@ -23,11 +25,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     VerificationOptFieldDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">OptField</h1>
+        <h1 scHeading>OptField</h1>
         <p class="text-muted-foreground">
           Accessible one-time password component with copy paste functionality.
         </p>
@@ -35,7 +38,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-opt-field-demo-container />
         <app-separator-opt-field-demo-container />
         <app-pin-opt-field-demo-container />

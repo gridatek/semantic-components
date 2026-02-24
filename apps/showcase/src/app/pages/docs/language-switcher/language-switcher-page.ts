@@ -15,6 +15,8 @@ import { VariantsLanguageSwitcherDemoContainer } from './demos/variants-language
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-language-switcher-page',
   imports: [
@@ -29,11 +31,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     SettingsPanelLanguageSwitcherDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">LanguageSwitcher</h1>
+        <h1 scHeading>LanguageSwitcher</h1>
         <p class="text-muted-foreground">
           A component for switching between languages with support for Angular
           localize. Changing the language will refresh the page to load the
@@ -43,7 +46,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-toggle-language-switcher-demo-container />
         <app-icon-only-language-switcher-demo-container />
         <app-variants-language-switcher-demo-container />

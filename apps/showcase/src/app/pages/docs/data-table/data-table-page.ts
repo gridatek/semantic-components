@@ -7,13 +7,20 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-data-table-page',
-  imports: [FeaturedDataTableDemoContainer, TocHeading, ComponentBadges],
+  imports: [
+    FeaturedDataTableDemoContainer,
+    TocHeading,
+    ComponentBadges,
+    ScHeading,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">DataTable</h1>
+        <h1 scHeading>DataTable</h1>
         <p class="text-muted-foreground">
           Advanced table component with sorting, filtering, column visibility,
           row selection, and pagination.
@@ -22,7 +29,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-featured-data-table-demo-container />
       </section>
     </div>

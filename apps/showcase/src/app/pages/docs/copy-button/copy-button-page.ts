@@ -16,6 +16,8 @@ import { UsecasesCopyButtonDemoContainer } from './demos/usecases-copy-button-de
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-copy-button-page',
   imports: [
@@ -31,11 +33,12 @@ import { ComponentBadges } from '../../../components/component-badges/component-
     UsecasesCopyButtonDemoContainer,
     TocHeading,
     ComponentBadges,
+    ScHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">CopyButton</h1>
+        <h1 scHeading>CopyButton</h1>
         <p class="text-muted-foreground">
           A button component that copies text to clipboard with visual feedback.
         </p>
@@ -43,7 +46,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-copy-button-demo-container />
         <app-variants-copy-button-demo-container />
         <app-sizes-copy-button-demo-container />

@@ -7,13 +7,20 @@ import { BasicNativeSelectDemoContainer } from './demos/basic-native-select-demo
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
+import { ScHeading } from '@semantic-components/ui';
+
 @Component({
   selector: 'app-native-select-page',
-  imports: [BasicNativeSelectDemoContainer, TocHeading, ComponentBadges],
+  imports: [
+    BasicNativeSelectDemoContainer,
+    TocHeading,
+    ComponentBadges,
+    ScHeading,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 class="text-3xl font-bold tracking-tight">Native Select</h1>
+        <h1 scHeading>Native Select</h1>
         <p class="text-muted-foreground">
           A styled native select element with a custom chevron icon.
         </p>
@@ -21,7 +28,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       </div>
 
       <section class="space-y-8">
-        <h2 toc class="text-xl font-semibold tracking-tight">Examples</h2>
+        <h2 scHeading toc>Examples</h2>
         <app-basic-native-select-demo-container />
       </section>
     </div>
