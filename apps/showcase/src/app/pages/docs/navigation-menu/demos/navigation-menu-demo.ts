@@ -6,6 +6,7 @@ import {
 import {
   ScNavigationMenu,
   ScNavigationMenuContent,
+  ScNavigationMenuGrid,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
   ScNavigationMenuList,
@@ -19,6 +20,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScNavigationMenu,
     ScNavigationMenuContent,
+    ScNavigationMenuGrid,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
@@ -98,9 +100,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
           <button scNavigationMenuTrigger>Components</button>
           <ng-template scNavigationMenuPortal>
             <div scNavigationMenuContent>
-              <ul
-                class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
-              >
+              <ul scNavigationMenuGrid>
                 <li>
                   <a scNavigationMenuLink href="#">
                     <div class="text-sm font-medium leading-none">
