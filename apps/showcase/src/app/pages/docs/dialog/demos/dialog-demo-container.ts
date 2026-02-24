@@ -35,13 +35,11 @@ import {
   ScDialogPortal,
   ScDialogTitle,
   ScDialogTrigger,
-} from '@semantic-components/ui';
-import {
   ScField,
   ScFieldGroup,
-  ScInput,
   ScLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -76,8 +74,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             <div scDialogHeader>
               <h2 scDialogTitle>Edit profile</h2>
               <p scDialogDescription>
-                Make changes to your profile here. Click save when you're
-                done.
+                Make changes to your profile here. Click save when you're done.
               </p>
             </div>
             <div scFieldGroup>

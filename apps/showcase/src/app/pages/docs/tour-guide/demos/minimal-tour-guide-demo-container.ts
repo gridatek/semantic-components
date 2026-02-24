@@ -25,7 +25,11 @@ export class MinimalTourGuideDemoContainer {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTourGuide, TourService, TourOptions } from '@semantic-components/ui-lab';
+import {
+  ScTourGuide,
+  TourService,
+  TourOptions,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-minimal-tour-guide-demo',

@@ -38,13 +38,7 @@ import {
 
 @Component({
   selector: 'app-stats-card-demo',
-  imports: [
-    ScCard,
-    ScCardBody,
-    ScCardDescription,
-    ScCardHeader,
-    ScCardTitle,
-  ],
+  imports: [ScCard, ScCardBody, ScCardDescription, ScCardHeader, ScCardTitle],
   template: \`
     <div class="grid gap-4 md:grid-cols-3">
       <div scCard>

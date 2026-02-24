@@ -30,8 +30,7 @@ export class IndeterminateCheckboxDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
-import { ScLabel } from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-indeterminate-checkbox-demo',

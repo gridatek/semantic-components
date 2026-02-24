@@ -29,9 +29,9 @@ export class BasicInputGroupDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInput,
   ScInputGroupText,
 } from '@semantic-components/ui';
 import { SiMailIcon } from '@semantic-icons/lucide-icons';
@@ -39,9 +39,9 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-input-group-demo',
   imports: [
+    ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScInput,
     ScInputGroupText,
     SiMailIcon,
   ],

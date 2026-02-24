@@ -29,13 +29,13 @@ export default class RequirementsPasswordFieldDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScPasswordField,
   ScPasswordFieldInputGroup,
   ScPasswordFieldInput,
   ScPasswordFieldToggle,
   ScPasswordFieldRequirements,
-  ScLabel,
 } from '@semantic-components/ui-lab';
 
 @Component({

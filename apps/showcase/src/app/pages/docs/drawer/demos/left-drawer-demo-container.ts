@@ -53,7 +53,9 @@ import {
   ],
   template: \`
     <div scDrawerProvider direction="left">
-      <button scButton variant="outline" scDrawerTrigger>Open Left Drawer</button>
+      <button scButton variant="outline" scDrawerTrigger>
+        Open Left Drawer
+      </button>
       <ng-template scDrawerPortal>
         <div scDrawer>
           <div scDrawerHeader>

@@ -37,7 +37,11 @@ import {
   ScItemSeparator,
   ScItemTitle,
 } from '@semantic-components/ui';
-import { SiBellIcon, SiLockIcon, SiSettingsIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiBellIcon,
+  SiLockIcon,
+  SiSettingsIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-item-demo',

@@ -29,10 +29,7 @@ export class WithIconsLinkDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
-import {
-  SiExternalLinkIcon,
-  SiMailIcon,
-} from '@semantic-icons/lucide-icons';
+import { SiExternalLinkIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-with-icons-link-demo',

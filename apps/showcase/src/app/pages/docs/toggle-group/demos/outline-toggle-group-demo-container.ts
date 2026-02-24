@@ -34,9 +34,21 @@ import {
 
 @Component({
   selector: 'app-outline-toggle-group-demo',
-  imports: [ScToggleGroup, ScToggleGroupItem, SiListIcon, SiLayoutGridIcon, SiKanbanIcon],
+  imports: [
+    ScToggleGroup,
+    ScToggleGroupItem,
+    SiListIcon,
+    SiLayoutGridIcon,
+    SiKanbanIcon,
+  ],
   template: \`
-    <div scToggleGroup type="single" variant="outline" [(value)]="view" aria-label="View mode">
+    <div
+      scToggleGroup
+      type="single"
+      variant="outline"
+      [(value)]="view"
+      aria-label="View mode"
+    >
       <button scToggleGroupItem value="list" aria-label="List view">
         <svg siListIcon></svg>
       </button>

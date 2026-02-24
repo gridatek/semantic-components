@@ -28,6 +28,7 @@ export class BasicAlertDialogDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScAlertDialogProvider,
   ScAlertDialogAction,
@@ -40,7 +41,6 @@ import {
   ScAlertDialogTitle,
   ScAlertDialogTrigger,
 } from '@semantic-components/ui';
-import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-alert-dialog-demo',

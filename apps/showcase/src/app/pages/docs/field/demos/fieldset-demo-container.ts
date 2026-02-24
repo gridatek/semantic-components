@@ -34,9 +34,9 @@ import {
   ScFieldGroup,
   ScField,
   ScFieldDescription,
-} from "@semantic-components/ui";
-import { ScLabel } from '@semantic-components/ui';
-import { ScInput } from "@semantic-components/ui-lab";
+  ScLabel,
+} from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-fieldset-demo',

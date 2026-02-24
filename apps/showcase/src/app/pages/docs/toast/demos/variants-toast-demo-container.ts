@@ -33,11 +33,17 @@ import { ScToaster } from '@semantic-components/ui';
   imports: [ScButton],
   template: \`
     <div class="flex flex-wrap gap-2">
-      <button scButton variant="outline" (click)="showSuccess()">Success</button>
+      <button scButton variant="outline" (click)="showSuccess()">
+        Success
+      </button>
       <button scButton variant="outline" (click)="showInfo()">Info</button>
-      <button scButton variant="outline" (click)="showWarning()">Warning</button>
+      <button scButton variant="outline" (click)="showWarning()">
+        Warning
+      </button>
       <button scButton variant="outline" (click)="showError()">Error</button>
-      <button scButton variant="outline" (click)="showLoading()">Loading</button>
+      <button scButton variant="outline" (click)="showLoading()">
+        Loading
+      </button>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
@@ -55,11 +61,15 @@ export class VariantsToastDemo {
   }
 
   showWarning(): void {
-    this.toastService.warning({ description: 'Your session is about to expire.' });
+    this.toastService.warning({
+      description: 'Your session is about to expire.',
+    });
   }
 
   showError(): void {
-    this.toastService.error({ description: 'Something went wrong. Please try again.' });
+    this.toastService.error({
+      description: 'Something went wrong. Please try again.',
+    });
   }
 
   showLoading(): void {

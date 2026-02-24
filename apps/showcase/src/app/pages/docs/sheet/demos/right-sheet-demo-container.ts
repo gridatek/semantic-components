@@ -40,13 +40,11 @@ import {
   ScSheetPortal,
   ScSheetTitle,
   ScSheetTrigger,
-} from '@semantic-components/ui';
-import {
   ScField,
   ScFieldGroup,
-  ScInput,
   ScLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-right-sheet-demo',

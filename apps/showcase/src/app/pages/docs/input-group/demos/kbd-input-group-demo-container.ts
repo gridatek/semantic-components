@@ -56,7 +56,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
       </div>
       <input scInput variant="group" placeholder="Search..." />
       <div scInputGroupAddon align="inline-end">
-        <kbd scKbd>\u2318K</kbd>
+        <kbd scKbd>&#8984;K</kbd>
       </div>
     </div>
   \`,

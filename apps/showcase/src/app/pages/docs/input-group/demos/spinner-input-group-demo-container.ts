@@ -38,7 +38,13 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-spinner-input-group-demo',
-  imports: [ScInputGroup, ScInputGroupAddon, ScInput, ScSpinner, SiLoaderCircleIcon],
+  imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScInput,
+    ScSpinner,
+    SiLoaderCircleIcon,
+  ],
   template: \`
     <div scInputGroup>
       <div scInputGroupAddon>

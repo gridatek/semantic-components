@@ -47,8 +47,8 @@ import {
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectSeparator,
     ScSelectTrigger,
+    ScSelectSeparator,
     ScSelectValue,
   ],
   template: \`

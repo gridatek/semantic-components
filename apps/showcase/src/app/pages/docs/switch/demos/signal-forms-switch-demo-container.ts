@@ -47,7 +47,11 @@ interface SwitchFormModel {
     <form>
       <div class="space-y-4">
         <label scSwitchField class="flex-row-reverse justify-between w-full">
-          <input type="checkbox" scSwitch [formField]="switchForm.notifications" />
+          <input
+            type="checkbox"
+            scSwitch
+            [formField]="switchForm.notifications"
+          />
           <div class="space-y-0.5">
             <p class="text-sm font-medium leading-none">Enable Notifications</p>
             <p class="text-sm text-muted-foreground">

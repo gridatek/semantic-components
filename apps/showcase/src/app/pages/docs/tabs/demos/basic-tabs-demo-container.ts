@@ -35,11 +35,7 @@ import { ScTabs, ScTabPanel, ScTabList, ScTab } from '@semantic-components/ui';
   imports: [ScTabs, ScTabPanel, ScTabList, ScTab],
   template: \`
     <div scTabs class="w-[400px]">
-      <div
-        scTabList
-        [selectedTab]="'account'"
-        class="grid w-full grid-cols-2"
-      >
+      <div scTabList [selectedTab]="'account'" class="grid w-full grid-cols-2">
         <button scTab value="account">Account</button>
         <button scTab value="password">Password</button>
       </div>

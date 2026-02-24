@@ -35,17 +35,32 @@ import {
 
 @Component({
   selector: 'app-multiple-toggle-group-demo',
-  imports: [ScToggleGroup, ScToggleGroupItem, SiBoldIcon, SiItalicIcon, SiUnderlineIcon],
+  imports: [
+    ScToggleGroup,
+    ScToggleGroupItem,
+    SiBoldIcon,
+    SiItalicIcon,
+    SiUnderlineIcon,
+  ],
   template: \`
     <div class="space-y-4">
-      <div scToggleGroup type="multiple" [(value)]="formatting" aria-label="Text formatting">
+      <div
+        scToggleGroup
+        type="multiple"
+        [(value)]="formatting"
+        aria-label="Text formatting"
+      >
         <button scToggleGroupItem value="bold" aria-label="Toggle bold">
           <svg siBoldIcon></svg>
         </button>
         <button scToggleGroupItem value="italic" aria-label="Toggle italic">
           <svg siItalicIcon></svg>
         </button>
-        <button scToggleGroupItem value="underline" aria-label="Toggle underline">
+        <button
+          scToggleGroupItem
+          value="underline"
+          aria-label="Toggle underline"
+        >
           <svg siUnderlineIcon></svg>
         </button>
       </div>

@@ -51,7 +51,7 @@ import {
   ],
   host: { class: 'block' },
   template: \`
-    <div scAccordionGroup [multiExpandable]="false" class="w-full max-w-lg">
+    <div scAccordionGroup [multiExpandable]="false" class="max-w-lg">
       <div scAccordionItem>
         <div scAccordionHeader>
           <button scAccordionTrigger panelId="shipping" [expanded]="true">

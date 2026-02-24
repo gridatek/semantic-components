@@ -25,7 +25,10 @@ export class BasicSplitButtonDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSplitButton, type SplitButtonAction } from '@semantic-components/ui-lab';
+import {
+  ScSplitButton,
+  type SplitButtonAction,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-split-button-demo',

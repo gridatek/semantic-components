@@ -36,7 +36,11 @@ import {
   ScFileUploadItemDelete,
   ScFileUploadFile,
 } from '@semantic-components/ui';
-import { SiFileIcon, SiUploadIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiFileIcon,
+  SiUploadIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-button-file-upload-demo',

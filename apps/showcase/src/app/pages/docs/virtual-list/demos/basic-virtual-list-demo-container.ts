@@ -29,7 +29,10 @@ export class BasicVirtualListDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScVirtualList, type VirtualListRange } from '@semantic-components/ui-lab';
+import {
+  ScVirtualList,
+  type VirtualListRange,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-virtual-list-demo',

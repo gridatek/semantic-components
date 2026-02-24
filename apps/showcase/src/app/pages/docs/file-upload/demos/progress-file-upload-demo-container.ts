@@ -37,7 +37,11 @@ import {
   ScFileUploadItemProgress,
   ScFileUploadFile,
 } from '@semantic-components/ui';
-import { SiFileIcon, SiUploadIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiFileIcon,
+  SiUploadIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-progress-file-upload-demo',

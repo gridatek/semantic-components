@@ -57,7 +57,9 @@ import {
   ],
   template: \`
     <div scDrawerProvider direction="right">
-      <button scButton variant="outline" scDrawerTrigger>Open Right Drawer</button>
+      <button scButton variant="outline" scDrawerTrigger>
+        Open Right Drawer
+      </button>
       <ng-template scDrawerPortal>
         <div scDrawer>
           <button
@@ -76,15 +78,26 @@ import {
           </div>
           <div class="space-y-4 p-4">
             <div class="flex items-center justify-between">
-              <label for="dark-mode" class="text-sm font-medium">Dark Mode</label>
+              <label for="dark-mode" class="text-sm font-medium">
+                Dark Mode
+              </label>
               <input id="dark-mode" type="checkbox" class="size-4" />
             </div>
             <div class="flex items-center justify-between">
-              <label for="notifications" class="text-sm font-medium">Notifications</label>
-              <input id="notifications" type="checkbox" class="size-4" checked />
+              <label for="notifications" class="text-sm font-medium">
+                Notifications
+              </label>
+              <input
+                id="notifications"
+                type="checkbox"
+                class="size-4"
+                checked
+              />
             </div>
             <div class="flex items-center justify-between">
-              <label for="compact" class="text-sm font-medium">Compact Mode</label>
+              <label for="compact" class="text-sm font-medium">
+                Compact Mode
+              </label>
               <input id="compact" type="checkbox" class="size-4" />
             </div>
           </div>

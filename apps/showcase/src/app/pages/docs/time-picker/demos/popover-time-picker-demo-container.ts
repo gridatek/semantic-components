@@ -63,7 +63,12 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scPopoverProvider>
-      <button scButton scPopoverTrigger variant="outline" class="w-48 justify-start gap-2">
+      <button
+        scButton
+        scPopoverTrigger
+        variant="outline"
+        class="w-48 justify-start gap-2"
+      >
         <svg siClockIcon class="size-4"></svg>
         {{ formatTime(time()) }}
       </button>

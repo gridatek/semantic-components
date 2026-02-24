@@ -25,7 +25,11 @@ export class FullTourGuideDemoContainer {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTourGuide, TourService, TourOptions } from '@semantic-components/ui-lab';
+import {
+  ScTourGuide,
+  TourService,
+  TourOptions,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-full-tour-guide-demo',
