@@ -19,6 +19,10 @@ import { cn } from '@semantic-components/ui';
   styles: `
     [data-slot='scroll-area'] {
       scrollbar-width: thin;
+      scrollbar-color: transparent transparent;
+      transition: scrollbar-color 0.2s;
+    }
+    [data-slot='scroll-area']:hover {
       scrollbar-color: var(--color-border) transparent;
     }
     [data-slot='scroll-area']::-webkit-scrollbar {
@@ -29,8 +33,12 @@ import { cn } from '@semantic-components/ui';
       background: transparent;
     }
     [data-slot='scroll-area']::-webkit-scrollbar-thumb {
-      background-color: var(--color-border);
+      background-color: transparent;
       border-radius: 9999px;
+      transition: background-color 0.2s;
+    }
+    [data-slot='scroll-area']:hover::-webkit-scrollbar-thumb {
+      background-color: var(--color-border);
     }
   `,
   encapsulation: ViewEncapsulation.None,
