@@ -7,6 +7,7 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiPlusIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScKanbanColumn } from './kanban-column';
 import type {
@@ -19,7 +20,7 @@ import type {
 
 @Component({
   selector: 'sc-kanban-board',
-  imports: [ScKanbanColumn],
+  imports: [ScKanbanColumn, SiPlusIcon],
   template: `
     <div [class]="containerClass()" role="region" aria-label="Kanban board">
       @for (column of sortedColumns(); track column.id) {
@@ -73,20 +74,7 @@ import type {
               class="w-full p-3 border-2 border-dashed rounded-lg text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-muted/30 transition-colors flex items-center justify-center gap-2"
               (click)="startAddingColumn()"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="M12 5v14" />
-              </svg>
+              <svg siPlusIcon class="size-4"></svg>
               Add Column
             </button>
           }

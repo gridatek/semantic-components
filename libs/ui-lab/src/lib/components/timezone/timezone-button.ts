@@ -6,6 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronDownIcon, SiClockIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScTimezoneService } from './timezone.service';
 import {
@@ -27,6 +28,7 @@ import {
  */
 @Component({
   selector: 'button[scTimezoneButton]',
+  imports: [SiClockIcon, SiChevronDownIcon],
   host: {
     'data-slot': 'timezone-button',
     type: 'button',
@@ -34,34 +36,9 @@ import {
     '[attr.aria-label]': 'ariaLabel()',
   },
   template: `
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="size-4"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
+    <svg siClockIcon class="size-4" aria-hidden="true"></svg>
     <span class="font-medium">{{ displayLabel() }}</span>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="size-4"
-      aria-hidden="true"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
+    <svg siChevronDownIcon class="size-4" aria-hidden="true"></svg>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

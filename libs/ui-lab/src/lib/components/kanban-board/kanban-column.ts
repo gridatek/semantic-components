@@ -7,13 +7,14 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronDownIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScKanbanCard } from './kanban-card';
 import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
 
 @Component({
   selector: 'sc-kanban-column',
-  imports: [ScKanbanCard],
+  imports: [ScKanbanCard, SiChevronDownIcon, SiPlusIcon],
   template: `
     <div [class]="columnClass()">
       <!-- Header -->
@@ -32,21 +33,7 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
               collapsed() ? 'Expand column' : 'Collapse column'
             "
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              [class]="collapsed() ? '-rotate-90' : 'rotate-0'"
-              class="transition-transform"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
+            <svg siChevronDownIcon [class]="collapsed() ? '-rotate-90 transition-transform' : 'rotate-0 transition-transform'"></svg>
           </button>
           <h3 class="font-semibold text-sm text-foreground">
             {{ column().title }}
@@ -66,20 +53,7 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
             (click)="startAddingCard()"
             aria-label="Add card"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
+            <svg siPlusIcon class="size-4"></svg>
           </button>
         }
       </div>

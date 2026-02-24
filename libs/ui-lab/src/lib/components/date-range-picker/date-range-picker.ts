@@ -10,6 +10,7 @@ import {
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
+import { SiCalendarIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn, ScCalendar, ScDateRange } from '@semantic-components/ui';
 import { Temporal } from '@js-temporal/polyfill';
 
@@ -33,21 +34,7 @@ export interface ScDateRangePreset {
         [attr.aria-expanded]="dropdownOpen()"
         [attr.aria-haspopup]="'dialog'"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-4 mr-2"
-        >
-          <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-          <line x1="16" x2="16" y1="2" y2="6" />
-          <line x1="8" x2="8" y1="2" y2="6" />
-          <line x1="3" x2="21" y1="10" y2="10" />
-        </svg>
+        <svg siCalendarIcon class="size-4 mr-2"></svg>
         <span class="flex-1 text-left">{{ displayValue() }}</span>
         @if (value().from && showClear()) {
           <button
@@ -56,16 +43,7 @@ export interface ScDateRangePreset {
             (click)="clearSelection($event)"
             aria-label="Clear selection"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
+            <svg siXIcon class="size-4"></svg>
           </button>
         }
       </button>
@@ -161,7 +139,7 @@ export interface ScDateRangePreset {
   host: {
     'data-slot': 'date-range-picker',
   },
-  imports: [ScCalendar],
+  imports: [ScCalendar, SiCalendarIcon, SiXIcon],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

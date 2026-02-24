@@ -6,6 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiBellIcon, SiCircleCheckIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScNotificationGroup } from './notification-group';
 import { ScNotificationItem } from './notification-item';
@@ -16,7 +17,7 @@ import {
 
 @Component({
   selector: '[scNotificationCenterContainer]',
-  imports: [ScNotificationGroup, ScNotificationItem],
+  imports: [ScNotificationGroup, ScNotificationItem, SiCircleCheckIcon, SiTrash2Icon, SiBellIcon],
   template: `
     <div [class]="containerClass()">
       <!-- Header -->
@@ -62,20 +63,7 @@ import {
               aria-label="Mark all as read"
               title="Mark all as read"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                <polyline points="22 4 12 14.01 9 11.01" />
-              </svg>
+              <svg siCircleCheckIcon class="size-4.5"></svg>
             </button>
           }
 
@@ -88,21 +76,7 @@ import {
               aria-label="Clear all notifications"
               title="Clear all"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M3 6h18" />
-                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-              </svg>
+              <svg siTrash2Icon class="size-4.5"></svg>
             </button>
           }
         </div>
@@ -117,21 +91,7 @@ import {
             <div
               class="w-16 h-16 mb-4 rounded-full bg-muted flex items-center justify-center"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-muted-foreground"
-              >
-                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-              </svg>
+              <svg siBellIcon class="size-8 text-muted-foreground"></svg>
             </div>
             <p class="text-sm font-medium text-foreground">
               {{ center.emptyTitle() }}

@@ -6,11 +6,13 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiCircleXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Component({
   selector: '[scPdfViewerError]',
+  imports: [SiCircleXIcon],
   template: `
     @if (pdfViewer.error()) {
       <div [class]="overlayClass()">
@@ -19,22 +21,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
             <div
               class="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-destructive"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="m15 9-6 6" />
-                <path d="m9 9 6 6" />
-              </svg>
+              <svg siCircleXIcon class="size-8 text-destructive"></svg>
             </div>
             <p class="text-sm font-medium text-foreground">
               Failed to load PDF

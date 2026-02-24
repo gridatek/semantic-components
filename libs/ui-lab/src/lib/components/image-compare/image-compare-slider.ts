@@ -6,57 +6,23 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_COMPARE } from './image-compare';
 
 @Component({
   selector: '[scImageCompareSlider]',
+  imports: [SiChevronRightIcon],
   template: `
     <div [class]="handleClass()">
       <ng-content>
         <!-- Default handle icons -->
         @if (imageCompare.orientation() === 'horizontal') {
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-5"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-5 rotate-180"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
+          <svg siChevronRightIcon class="size-5"></svg>
+          <svg siChevronRightIcon class="size-5 rotate-180"></svg>
         } @else {
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-5 -rotate-90"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-5 rotate-90"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
+          <svg siChevronRightIcon class="size-5 -rotate-90"></svg>
+          <svg siChevronRightIcon class="size-5 rotate-90"></svg>
         }
       </ng-content>
     </div>

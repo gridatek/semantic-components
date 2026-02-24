@@ -8,12 +8,18 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiChevronsLeftIcon,
+  SiChevronsRightIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import type { TransferListItem } from './transfer-list-types';
 
 @Component({
   selector: 'sc-transfer-list',
-  imports: [],
+  imports: [SiChevronRightIcon, SiChevronLeftIcon, SiChevronsRightIcon, SiChevronsLeftIcon],
   template: `
     <div [class]="containerClass()">
       <!-- Source List -->
@@ -83,19 +89,7 @@ import type { TransferListItem } from './transfer-list-types';
           (click)="moveToTarget()"
           aria-label="Move selected to right"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
+          <svg siChevronRightIcon class="size-[18px]"></svg>
         </button>
         <button
           type="button"
@@ -104,19 +98,7 @@ import type { TransferListItem } from './transfer-list-types';
           (click)="moveToSource()"
           aria-label="Move selected to left"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
+          <svg siChevronLeftIcon class="size-[18px]"></svg>
         </button>
         <button
           type="button"
@@ -125,20 +107,7 @@ import type { TransferListItem } from './transfer-list-types';
           (click)="moveAllToTarget()"
           aria-label="Move all to right"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m6 17 5-5-5-5" />
-            <path d="m13 17 5-5-5-5" />
-          </svg>
+          <svg siChevronsRightIcon class="size-[18px]"></svg>
         </button>
         <button
           type="button"
@@ -147,20 +116,7 @@ import type { TransferListItem } from './transfer-list-types';
           (click)="moveAllToSource()"
           aria-label="Move all to left"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m18 17-5-5 5-5" />
-            <path d="m11 17-5-5 5-5" />
-          </svg>
+          <svg siChevronsLeftIcon class="size-[18px]"></svg>
         </button>
       </div>
 

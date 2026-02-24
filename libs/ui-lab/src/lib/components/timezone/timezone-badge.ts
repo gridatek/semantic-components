@@ -6,6 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiClockIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScTimezoneService } from './timezone.service';
 
@@ -21,26 +22,14 @@ import { ScTimezoneService } from './timezone.service';
  */
 @Component({
   selector: 'span[scTimezoneBadge]',
+  imports: [SiClockIcon],
   host: {
     'data-slot': 'timezone-badge',
     '[class]': 'class()',
   },
   template: `
     @if (showIcon()) {
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="size-3"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
+      <svg siClockIcon class="size-3" aria-hidden="true"></svg>
     }
     <span>{{ displayText() }}</span>
   `,

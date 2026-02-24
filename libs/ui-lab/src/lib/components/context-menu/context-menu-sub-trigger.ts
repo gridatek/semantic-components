@@ -7,29 +7,17 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScContextMenuSub } from './context-menu-sub';
 
 @Component({
   selector: 'div[scContextMenuSubTrigger]',
+  imports: [SiChevronRightIcon],
   hostDirectives: [CdkOverlayOrigin],
   template: `
     <ng-content />
-    <svg
-      class="ml-auto size-4"
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-      <path d="m9 18 6-6-6-6" />
-    </svg>
+    <svg siChevronRightIcon class="ml-auto size-4" aria-hidden="true"></svg>
   `,
   host: {
     'data-slot': 'context-menu-sub-trigger',

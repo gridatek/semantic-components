@@ -11,6 +11,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import type {
   SplitButtonAction,
@@ -20,6 +21,7 @@ import type {
 
 @Component({
   selector: 'sc-split-button',
+  imports: [SiChevronDownIcon],
   template: `
     <div [class]="containerClass()" role="group">
       <!-- Main Button -->
@@ -49,11 +51,11 @@ import type {
         aria-label="More actions"
         (click)="toggleDropdown()"
       >
-        <span
-          class="inline-flex items-center justify-center transition-transform duration-200"
+        <svg
+          siChevronDownIcon
+          class="size-4 transition-transform duration-200"
           [class.rotate-180]="isOpen()"
-          [innerHTML]="chevronIcon"
-        ></span>
+        ></svg>
       </button>
 
       <!-- Dropdown Menu -->
@@ -108,8 +110,6 @@ export class ScSplitButton {
   readonly actionClick = output<SplitButtonAction>();
 
   protected readonly isOpen = signal(false);
-
-  readonly chevronIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
 
   protected readonly containerClass = computed(() =>
     cn('inline-flex', this.class()),

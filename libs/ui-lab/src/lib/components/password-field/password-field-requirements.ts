@@ -6,6 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiCheckIcon, SiCircleIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
@@ -27,39 +28,16 @@ const DEFAULT_REQUIREMENTS: ScPasswordRequirement[] = [
 
 @Component({
   selector: '[scPasswordFieldRequirements]',
+  imports: [SiCheckIcon, SiCircleIcon],
   template: `
     @if (passwordField.value()) {
       <ul class="mt-2 space-y-1 text-xs">
         @for (req of requirements(); track req.label) {
           <li [class]="requirementClass(req.test(passwordField.value()))">
             @if (req.test(passwordField.value())) {
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="inline size-3 mr-1"
-                aria-hidden="true"
-              >
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
+              <svg siCheckIcon class="inline size-3 mr-1" aria-hidden="true"></svg>
             } @else {
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="inline size-3 mr-1"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-              </svg>
+              <svg siCircleIcon class="inline size-3 mr-1" aria-hidden="true"></svg>
             }
             {{ req.label }}
           </li>

@@ -6,11 +6,13 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
   selector: '[scImageCropperControls]',
+  imports: [SiZoomOutIcon, SiZoomInIcon],
   template: `
     <div class="flex items-center gap-2">
       <button
@@ -20,18 +22,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
         (click)="cropper.zoomOut()"
         aria-label="Zoom out"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          class="size-4"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-          <path d="M8 11h6" />
-        </svg>
+        <svg siZoomOutIcon class="size-4"></svg>
       </button>
 
       <div class="flex items-center gap-2 min-w-[120px]">
@@ -53,19 +44,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
         (click)="cropper.zoomIn()"
         aria-label="Zoom in"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          class="size-4"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.3-4.3" />
-          <path d="M11 8v6" />
-          <path d="M8 11h6" />
-        </svg>
+        <svg siZoomInIcon class="size-4"></svg>
       </button>
 
       <span class="text-sm text-muted-foreground min-w-[50px] text-center">

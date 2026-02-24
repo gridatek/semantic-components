@@ -11,6 +11,7 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiPlusIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScSpeedDialAction } from './speed-dial-action';
 import type {
@@ -21,7 +22,7 @@ import type {
 
 @Component({
   selector: 'sc-speed-dial',
-  imports: [ScSpeedDialAction],
+  imports: [ScSpeedDialAction, SiPlusIcon, SiXIcon],
   template: `
     <div [class]="containerClass()" role="menu" [attr.aria-expanded]="open()">
       <!-- Actions -->
@@ -63,10 +64,21 @@ import type {
         [attr.aria-haspopup]="true"
         (click)="toggle()"
       >
-        <span
-          [class]="fabIconClass()"
-          [innerHTML]="open() ? closeIcon() : icon()"
-        ></span>
+        <span [class]="fabIconClass()">
+          @if (open()) {
+            @if (closeIcon()) {
+              <span [innerHTML]="closeIcon()"></span>
+            } @else {
+              <svg siXIcon class="size-6"></svg>
+            }
+          } @else {
+            @if (icon()) {
+              <span [innerHTML]="icon()"></span>
+            } @else {
+              <svg siPlusIcon class="size-6"></svg>
+            }
+          }
+        </span>
         @if (label() && !open()) {
           <span class="sr-only">{{ label() }}</span>
         }
@@ -91,12 +103,8 @@ export class ScSpeedDial {
 
   readonly actions = input<SpeedDialAction[]>([]);
   readonly direction = input<SpeedDialDirection>('up');
-  readonly icon = input<string>(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
-  );
-  readonly closeIcon = input<string>(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>`,
-  );
+  readonly icon = input<string>('');
+  readonly closeIcon = input<string>('');
   readonly label = input<string>('Open actions');
   readonly ariaLabel = input<string>('Speed dial');
   readonly showLabels = input(true);

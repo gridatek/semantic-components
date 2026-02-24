@@ -11,12 +11,14 @@ import {
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { Country, COUNTRIES, getCountryByCode } from './countries';
 
 @Component({
   selector: 'sc-phone-input',
   exportAs: 'scPhoneInput',
+  imports: [SiChevronDownIcon],
   template: `
     <div [class]="containerClass()">
       <!-- Country Selector -->
@@ -34,16 +36,7 @@ import { Country, COUNTRIES, getCountryByCode } from './countries';
           <span class="text-sm text-muted-foreground">
             {{ selectedCountry().dialCode }}
           </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-4 text-muted-foreground"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+          <svg siChevronDownIcon class="size-4 text-muted-foreground"></svg>
         </button>
 
         @if (dropdownOpen()) {

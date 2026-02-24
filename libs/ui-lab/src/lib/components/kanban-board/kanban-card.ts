@@ -6,6 +6,7 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import type { KanbanCard } from './kanban-types';
 
@@ -99,24 +100,12 @@ import type { KanbanCard } from './kanban-types';
           (click)="onDelete($event)"
           aria-label="Delete card"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
+          <svg siXIcon class="size-3.5"></svg>
         </button>
       }
     </div>
   `,
+  imports: [SiXIcon],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

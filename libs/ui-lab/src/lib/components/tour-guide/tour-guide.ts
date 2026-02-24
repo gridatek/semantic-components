@@ -11,6 +11,7 @@ import {
   DoCheck,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 
 export interface TourStep {
@@ -109,6 +110,7 @@ export class TourService {
 
 @Component({
   selector: 'sc-tour-guide',
+  imports: [SiXIcon],
   template: `
     @if (tourService.isActive()) {
       <div
@@ -177,17 +179,7 @@ export class TourService {
                 class="absolute top-2 right-2 p-1 rounded hover:bg-accent"
                 aria-label="Close tour"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  class="size-4"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
+                <svg siXIcon class="size-4"></svg>
               </button>
             }
 

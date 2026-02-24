@@ -7,38 +7,18 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'button[scCopyButton]',
   exportAs: 'scCopyButton',
+  imports: [SiCheckIcon, SiCopyIcon],
   template: `
     @if (copied()) {
-      <!-- Check icon -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        [class]="iconClass()"
-        class="text-green-500"
-      >
-        <path d="M20 6 9 17l-5-5" />
-      </svg>
+      <svg siCheckIcon [class]="iconClass()" class="text-green-500"></svg>
     } @else {
-      <!-- Copy icon -->
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        [class]="iconClass()"
-      >
-        <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-      </svg>
+      <svg siCopyIcon [class]="iconClass()"></svg>
     }
     <ng-content />
   `,

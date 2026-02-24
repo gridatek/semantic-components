@@ -7,6 +7,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiChevronDownIcon, SiCircleCheckIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScNotificationItem } from './notification-item';
 import type {
@@ -17,7 +18,7 @@ import type {
 
 @Component({
   selector: 'sc-notification-group',
-  imports: [ScNotificationItem],
+  imports: [ScNotificationItem, SiChevronDownIcon, SiCircleCheckIcon, SiTrash2Icon],
   template: `
     <div [class]="groupClass()">
       <!-- Group Header -->
@@ -29,21 +30,7 @@ import type {
         [attr.aria-controls]="'group-' + group().id"
       >
         <div class="flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            [class]="collapsed() ? '-rotate-90' : 'rotate-0'"
-            class="transition-transform"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
+          <svg siChevronDownIcon [class]="collapsed() ? '-rotate-90 transition-transform' : 'rotate-0 transition-transform'"></svg>
           @if (group().icon) {
             <span [innerHTML]="group().icon"></span>
           }
@@ -68,20 +55,7 @@ import type {
               (click)="onMarkAllRead($event)"
               [attr.aria-label]="'Mark all as read in ' + group().title"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                <polyline points="22 4 12 14.01 9 11.01" />
-              </svg>
+              <svg siCircleCheckIcon class="size-3.5"></svg>
             </button>
             <button
               type="button"
@@ -89,21 +63,7 @@ import type {
               (click)="onClearAll($event)"
               [attr.aria-label]="'Clear all in ' + group().title"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M3 6h18" />
-                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-              </svg>
+              <svg siTrash2Icon class="size-3.5"></svg>
             </button>
           </div>
         }
