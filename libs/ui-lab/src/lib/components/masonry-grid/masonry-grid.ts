@@ -20,6 +20,9 @@ export type MasonryLayoutMode = 'columns' | 'absolute';
 
 @Component({
   selector: 'sc-masonry-grid',
+  host: {
+    '[class]': 'class()',
+  },
   template: `
     <div
       #container
@@ -35,11 +38,7 @@ export type MasonryLayoutMode = 'columns' | 'absolute';
     </div>
   `,
   styles: `
-    :host {
-      display: block;
-    }
-
-    :host ::ng-deep scMasonryItem {
+    sc-masonry-grid sc-masonry-item {
       margin-bottom: var(--masonry-gap, 16px);
     }
   `,
@@ -58,7 +57,9 @@ export class ScMasonryGrid {
   readonly gap = input(16);
   readonly breakpoints = input<MasonryBreakpoint[]>(DEFAULT_BREAKPOINTS);
   readonly layoutMode = input<MasonryLayoutMode>('columns');
-  readonly class = input<string>('');
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
   protected readonly containerWidth = signal(0);
   protected readonly containerHeight = signal(0);
@@ -77,7 +78,7 @@ export class ScMasonryGrid {
   });
 
   protected readonly containerClass = computed(() =>
-    cn('w-full', this.class()),
+    cn('w-full', this.classInput()),
   );
 
   constructor() {

@@ -2,6 +2,7 @@ import {
   afterNextRender,
   ChangeDetectionStrategy,
   Component,
+  computed,
   DestroyRef,
   ElementRef,
   inject,
@@ -9,15 +10,18 @@ import {
   output,
   ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'sc-masonry-item',
+  host: {
+    '[class]': 'class()',
+  },
   template: `
     <ng-content />
   `,
   styles: `
-    :host {
-      display: block;
+    sc-masonry-item {
       break-inside: avoid;
     }
   `,
@@ -29,7 +33,8 @@ export class ScMasonryItem {
   private readonly destroyRef = inject(DestroyRef);
   private resizeObserver: ResizeObserver | null = null;
 
-  readonly class = input<string>('');
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
   readonly sizeChange = output<{ width: number; height: number }>();
 
