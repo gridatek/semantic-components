@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
-export interface Locale {
+export interface ScLocale {
   code: string;
   label: string;
   nativeLabel: string;
@@ -16,7 +16,7 @@ export interface Locale {
 }
 
 export interface ScLocaleConfig {
-  locales: Locale[];
+  locales: ScLocale[];
   defaultLocale: string;
   storageKey?: string;
 }
@@ -58,7 +58,7 @@ export class ScLocaleService {
   private readonly storageKey = this.config.storageKey ?? 'sc-locale';
 
   /** All available locales */
-  readonly locales = signal<Locale[]>(this.config.locales);
+  readonly locales = signal<ScLocale[]>(this.config.locales);
 
   /** Current locale code */
   readonly locale = signal<string>(this.detectCurrentLocale());
