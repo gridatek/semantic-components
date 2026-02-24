@@ -56,4 +56,3 @@ export * from './video-player';
 export * from './virtual-list';
 export * from './split-button';
 export * from './language-switcher';
-export * from './locale';
