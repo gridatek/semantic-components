@@ -4,12 +4,25 @@ import { appConfig, i18nConfig } from './app/app.config';
 import { App } from './app/app';
 
 async function main() {
-  const localeCode = localStorage.getItem('sc-locale') ?? 'en-US';
-  const locale = i18nConfig.supportedLocales.find((l) => l.code === localeCode);
+  const storageKey = i18nConfig.storageKey ?? 'sc-locale';
+  const localeCode =
+    localStorage.getItem(storageKey) ?? i18nConfig.defaultLocaleCode;
+  const locale =
+    i18nConfig.supportedLocales.find((l) => l.code === localeCode) ??
+    i18nConfig.supportedLocales.find(
+      (l) => l.code === i18nConfig.defaultLocaleCode,
+    );
 
   if (locale?.loadTranslations) {
-    const translations = await locale.loadTranslations();
-    loadTranslations(translations);
+    try {
+      const translations = await locale.loadTranslations();
+      loadTranslations(translations);
+    } catch (e) {
+      console.warn(
+        `Failed to load translations for "${locale.code}", falling back to default.`,
+        e,
+      );
+    }
   }
 
   await bootstrapApplication(App, appConfig);

@@ -23,7 +23,7 @@ export class ScLocaleManager {
     );
   });
 
-  readonly language = computed(() => this._locale().split('-')[0]);
+  readonly language = computed(() => this.currentLocale().language);
 
   readonly region = computed(() => {
     const parts = this._locale().split('-');
