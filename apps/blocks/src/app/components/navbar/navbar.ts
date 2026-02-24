@@ -178,6 +178,12 @@ import { LocaleSelect } from '../locale-select/locale-select';
                   Dashboard
                 </a>
               </li>
+
+              <li scNavigationMenuItem>
+                <a scNavigationMenuLink routerLink="/locale-test">
+                  Locale Test
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -241,6 +247,15 @@ import { LocaleSelect } from '../locale-select/locale-select';
             [active]="mobileDashboardRla.isActive"
           >
             <ng-container i18n="@@nav.dashboard">Dashboard</ng-container>
+          </a>
+          <a
+            scNavbarMobileLink
+            routerLink="/locale-test"
+            routerLinkActive="active"
+            #mobileLocaleTestRla="routerLinkActive"
+            [active]="mobileLocaleTestRla.isActive"
+          >
+            Locale Test
           </a>
           <hr class="my-2 border-border" />
           <app-locale-select class="w-full" />

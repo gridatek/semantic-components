@@ -14,6 +14,10 @@ export const appRoutes: Route[] = [
         path: '',
         loadComponent: () => import('./pages/home/home'),
       },
+      {
+        path: 'locale-test',
+        loadComponent: () => import('./pages/locale-test/locale-test'),
+      },
     ],
   },
 ];

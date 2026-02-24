@@ -1,7 +1,18 @@
+import { registerLocaleData } from '@angular/common';
 import { loadTranslations } from '@angular/localize';
+import localeFrFR from '@angular/common/locales/fr';
+import localeExtraFrFR from '@angular/common/locales/extra/fr';
+import localeArMA from '@angular/common/locales/ar-MA';
+import localeExtraArMA from '@angular/common/locales/extra/ar-MA';
+import localeArEG from '@angular/common/locales/ar-EG';
+import localeExtraArEG from '@angular/common/locales/extra/ar-EG';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig, i18nConfig } from './app/app.config';
 import { App } from './app/app';
+
+registerLocaleData(localeFrFR, 'fr-FR', localeExtraFrFR);
+registerLocaleData(localeArMA, undefined, localeExtraArMA);
+registerLocaleData(localeArEG, undefined, localeExtraArEG);
 
 async function main() {
   const storageKey = i18nConfig.storageKey ?? 'sc-locale';
