@@ -17,9 +17,9 @@ interface DemoItem {
   selector: 'app-basic-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryItem],
   template: `
-    <sc-masonry-grid [columns]="4" [gap]="16">
+    <div scMasonryGrid [columns]="4" [gap]="16">
       @for (item of items(); track item.id) {
-        <sc-masonry-item>
+        <div scMasonryItem>
           <div
             class="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
             [style.background-color]="item.color"
@@ -30,9 +30,9 @@ interface DemoItem {
               <p class="text-sm opacity-75">{{ item.height }}px tall</p>
             </div>
           </div>
-        </sc-masonry-item>
+        </div>
       }
-    </sc-masonry-grid>
+    </div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

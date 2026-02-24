@@ -13,17 +13,12 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'sc-masonry-item',
+  selector: '[scMasonryItem]',
   host: {
     '[class]': 'class()',
   },
   template: `
     <ng-content />
-  `,
-  styles: `
-    sc-masonry-item {
-      break-inside: avoid;
-    }
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,7 +29,9 @@ export class ScMasonryItem {
   private resizeObserver: ResizeObserver | null = null;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('block break-inside-avoid', this.classInput()),
+  );
 
   readonly sizeChange = output<{ width: number; height: number }>();
 

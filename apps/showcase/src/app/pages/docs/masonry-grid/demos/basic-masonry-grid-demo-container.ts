@@ -38,7 +38,7 @@ interface DemoItem {
   selector: 'app-basic-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryItem],
   template: \`
-    <sc-masonry-grid [columns]="4" [gap]="16">
+    <div scMasonryGrid [columns]="4" [gap]="16">
       @for (item of items(); track item.id) {
         <sc-masonry-item>
           <div
@@ -53,7 +53,7 @@ interface DemoItem {
           </div>
         </sc-masonry-item>
       }
-    </sc-masonry-grid>
+    </div scMasonryGrid>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

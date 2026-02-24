@@ -10,9 +10,9 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
   selector: 'app-image-gallery-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryItem],
   template: `
-    <sc-masonry-grid [columns]="3" [gap]="12">
+    <div scMasonryGrid [columns]="3" [gap]="12">
       @for (image of images(); track image.id) {
-        <sc-masonry-item>
+        <div scMasonryItem>
           <div class="group relative rounded-lg overflow-hidden bg-muted">
             <img
               [src]="image.url"
@@ -29,9 +29,9 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
               </div>
             </div>
           </div>
-        </sc-masonry-item>
+        </div>
       }
-    </sc-masonry-grid>
+    </div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

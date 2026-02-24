@@ -19,7 +19,7 @@ import { DEFAULT_BREAKPOINTS, type MasonryBreakpoint } from './masonry-types';
 export type MasonryLayoutMode = 'columns' | 'absolute';
 
 @Component({
-  selector: 'sc-masonry-grid',
+  selector: '[scMasonryGrid]',
   host: {
     '[class]': 'class()',
   },
@@ -37,16 +37,10 @@ export type MasonryLayoutMode = 'columns' | 'absolute';
       <ng-content />
     </div>
   `,
-  styles: `
-    sc-masonry-grid sc-masonry-item {
-      margin-bottom: var(--masonry-gap, 16px);
-    }
-  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMasonryGrid {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
   private resizeObserver: ResizeObserver | null = null;
 
@@ -82,15 +76,10 @@ export class ScMasonryGrid {
   );
 
   constructor() {
-    // Set CSS variable for gap
-    this.elementRef.nativeElement.style.setProperty(
-      '--masonry-gap',
-      `${this.gap()}px`,
-    );
-
     afterNextRender(() => {
       this.observeResize();
       this.updateContainerWidth();
+      this.applyItemGap();
 
       if (this.layoutMode() === 'absolute') {
         this.calculateLayout();
@@ -103,6 +92,7 @@ export class ScMasonryGrid {
 
     this.resizeObserver = new ResizeObserver(() => {
       this.updateContainerWidth();
+      this.applyItemGap();
       if (this.layoutMode() === 'absolute') {
         this.calculateLayout();
       }
@@ -122,12 +112,14 @@ export class ScMasonryGrid {
     const container = this.containerRef()?.nativeElement;
     if (container) {
       this.containerWidth.set(container.offsetWidth);
-      // Update gap CSS variable
-      this.elementRef.nativeElement.style.setProperty(
-        '--masonry-gap',
-        `${this.gap()}px`,
-      );
     }
+  }
+
+  private applyItemGap(): void {
+    const gapSize = this.gap();
+    this.items().forEach((item) => {
+      item.getElement().style.marginBottom = `${gapSize}px`;
+    });
   }
 
   private calculateLayout(): void {
@@ -172,6 +164,7 @@ export class ScMasonryGrid {
   /** Recalculate the layout manually */
   relayout(): void {
     this.updateContainerWidth();
+    this.applyItemGap();
     if (this.layoutMode() === 'absolute') {
       this.calculateLayout();
     }
