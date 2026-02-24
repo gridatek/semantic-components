@@ -23,14 +23,12 @@ export const i18nConfig: ScI18nConfig = {
   supportedLocales: [
     {
       code: 'en-US',
-      language: 'en',
       label: 'English (US)',
       nativeLabel: 'English (US)',
       direction: 'ltr',
     },
     {
       code: 'fr-FR',
-      language: 'fr',
       label: 'French (France)',
       nativeLabel: 'Français (France)',
       direction: 'ltr',
@@ -38,7 +36,6 @@ export const i18nConfig: ScI18nConfig = {
     },
     {
       code: 'ar-MA',
-      language: 'ar',
       label: 'Arabic (Morocco)',
       nativeLabel: 'العربية (المغرب)',
       direction: 'rtl',
@@ -46,7 +43,6 @@ export const i18nConfig: ScI18nConfig = {
     },
     {
       code: 'ar-EG',
-      language: 'ar',
       label: 'Arabic (Egypt)',
       nativeLabel: 'العربية (مصر)',
       direction: 'rtl',
