@@ -29,6 +29,7 @@ import { ScOptFieldSlotChar } from './opt-field-slot-char';
       scOptFieldSlotInput
       [value]="char()"
       [disabled]="optField.disabled()"
+      [ariaLabel]="ariaLabel()"
       (inputChange)="onInputChange($event)"
       (keydownEvent)="onKeydown($event)"
       (focused)="onFocusChange($event)"
@@ -51,6 +52,9 @@ export class ScOptFieldSlot {
   private readonly focused = signal<boolean>(false);
 
   readonly char = computed(() => this.optField.getChar(this.index()));
+  readonly ariaLabel = computed(
+    () => `Digit ${this.index() + 1} of ${this.optField.maxLength()}`,
+  );
   readonly isActive = computed(
     () => this.focused() && !this.optField.disabled(),
   );

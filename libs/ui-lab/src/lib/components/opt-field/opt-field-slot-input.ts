@@ -18,6 +18,7 @@ import { cn } from '@semantic-components/ui';
     maxlength: '1',
     '[value]': 'value()',
     '[disabled]': 'disabled()',
+    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
     '(input)': 'onInput($event)',
     '(keydown)': 'keydownEvent.emit($event)',
@@ -31,6 +32,7 @@ export class ScOptFieldSlotInput {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = input<string>('');
   readonly disabled = input<boolean>(false);
+  readonly ariaLabel = input<string>('');
 
   readonly inputChange = output<string>();
   readonly keydownEvent = output<KeyboardEvent>();

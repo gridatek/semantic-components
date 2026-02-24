@@ -51,7 +51,8 @@ export class ScOptField {
     const max = this.maxLength();
     const result: string[] = [];
     for (let i = 0; i < max; i++) {
-      result.push(val[i] || '');
+      const ch = val[i];
+      result.push(ch && ch !== ' ' ? ch : '');
     }
     return result;
   });
@@ -70,22 +71,18 @@ export class ScOptField {
   }
 
   setChar(index: number, char: string): void {
+    const max = this.maxLength();
     const current = this.value();
-    const chars = current.split('');
+    const chars: string[] = [];
 
-    // Pad with empty strings if needed
-    while (chars.length < index) {
-      chars.push('');
+    for (let i = 0; i < max; i++) {
+      chars.push(current[i] || ' ');
     }
 
-    chars[index] = char;
+    chars[index] = char || ' ';
 
-    // Join and trim trailing empty chars
-    let newValue = chars.join('');
-    // Keep only up to maxLength
-    newValue = newValue.slice(0, this.maxLength());
-
-    this.value.set(newValue);
+    // Join then trim trailing spaces
+    this.value.set(chars.join('').trimEnd());
   }
 
   focusSlot(index: number): void {
