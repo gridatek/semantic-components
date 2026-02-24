@@ -8,6 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { scaleBand, scaleLinear } from 'd3-scale';
 import { CHART_COLORS, ChartDataPoint } from './chart-types';
 import { SC_CHART } from './chart-container';
 
@@ -126,32 +127,36 @@ export class ScBarChart {
     return Math.max(...values, 0) * 1.1; // Add 10% padding
   });
 
+  private readonly xScale = computed(() =>
+    scaleBand<string>()
+      .domain(this.data().map((d) => d.label))
+      .range([this.padding().left, this.padding().left + this.chartWidth()])
+      .padding(this.barGap() / (this.chartWidth() / this.data().length || 1)),
+  );
+
+  private readonly yScale = computed(() =>
+    scaleLinear()
+      .domain([0, this.maxValue()])
+      .range([this.padding().top + this.chartHeight(), this.padding().top]),
+  );
+
   protected readonly gridLines = computed(() => {
-    const max = this.maxValue();
-    const lines: { y: number; label: string }[] = [];
-    const steps = 5;
+    const y = this.yScale();
+    const ticks = y.ticks(5);
 
-    for (let i = 0; i <= steps; i++) {
-      const value = (max / steps) * i;
-      const y =
-        this.padding().top +
-        this.chartHeight() -
-        (value / max) * this.chartHeight();
-      lines.push({ y, label: Math.round(value).toString() });
-    }
-
-    return lines;
+    return ticks.map((value) => ({
+      y: y(value),
+      label: Math.round(value).toString(),
+    }));
   });
 
   protected readonly bars = computed(() => {
     const data = this.data();
-    const barCount = data.length;
-    const totalGaps = (barCount - 1) * this.barGap();
-    const barWidth = (this.chartWidth() - totalGaps) / barCount;
-    const max = this.maxValue();
+    const x = this.xScale();
+    const y = this.yScale();
+    const baseline = y(0);
 
     return data.map((d, i) => {
-      const barHeight = (d.value / max) * this.chartHeight();
       const color =
         d.color ||
         this.container?.getColor(d.label, i) ||
@@ -159,10 +164,10 @@ export class ScBarChart {
 
       return {
         ...d,
-        x: this.padding().left + i * (barWidth + this.barGap()),
-        y: this.padding().top + this.chartHeight() - barHeight,
-        width: barWidth,
-        height: barHeight,
+        x: x(d.label)!,
+        y: y(d.value),
+        width: x.bandwidth(),
+        height: baseline - y(d.value),
         color,
       };
     });

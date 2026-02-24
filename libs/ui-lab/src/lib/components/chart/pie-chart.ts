@@ -8,6 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { arc, pie } from 'd3-shape';
 import { CHART_COLORS, ChartDataPoint } from './chart-types';
 import { SC_CHART } from './chart-container';
 
@@ -20,28 +21,30 @@ import { SC_CHART } from './chart-container';
       [style.height.px]="size()"
       preserveAspectRatio="xMidYMid meet"
     >
-      @for (slice of slices(); track slice.label; let i = $index) {
-        <path
-          [attr.d]="slice.path"
-          [attr.fill]="slice.color"
-          class="cursor-pointer transition-opacity hover:opacity-80"
-          (mouseenter)="onSliceHover($event, slice)"
-          (mouseleave)="onSliceLeave()"
-        />
-      }
-
-      @if (showLabels()) {
-        @for (slice of slices(); track slice.label) {
-          <text
-            [attr.x]="slice.labelX"
-            [attr.y]="slice.labelY"
-            text-anchor="middle"
-            class="pointer-events-none fill-background text-xs font-medium"
-          >
-            {{ slice.percentage }}%
-          </text>
+      <g [attr.transform]="centerTransform()">
+        @for (slice of slices(); track slice.label; let i = $index) {
+          <path
+            [attr.d]="slice.path"
+            [attr.fill]="slice.color"
+            class="cursor-pointer transition-opacity hover:opacity-80"
+            (mouseenter)="onSliceHover($event, slice)"
+            (mouseleave)="onSliceLeave()"
+          />
         }
-      }
+
+        @if (showLabels()) {
+          @for (slice of slices(); track slice.label) {
+            <text
+              [attr.x]="slice.labelX"
+              [attr.y]="slice.labelY"
+              text-anchor="middle"
+              class="pointer-events-none fill-background text-xs font-medium"
+            >
+              {{ slice.percentage }}%
+            </text>
+          }
+        }
+      </g>
     </svg>
 
     @if (hoveredSlice()) {
@@ -92,6 +95,10 @@ export class ScPieChart {
   );
   protected readonly class = computed(() => cn('', this.classInput()));
 
+  protected readonly centerTransform = computed(
+    () => `translate(${this.size() / 2},${this.size() / 2})`,
+  );
+
   protected readonly total = computed(() =>
     this.data().reduce((sum, d) => sum + d.value, 0),
   );
@@ -99,58 +106,39 @@ export class ScPieChart {
   protected readonly slices = computed(() => {
     const data = this.data();
     const total = this.total();
-    const centerX = this.size() / 2;
-    const centerY = this.size() / 2;
     const outerRadius = this.size() / 2 - 10;
     const innerR = this.innerRadius();
 
-    let startAngle = -Math.PI / 2;
-    const slices: {
-      label: string;
-      value: number;
-      percentage: number;
-      path: string;
-      color: string;
-      labelX: number;
-      labelY: number;
-    }[] = [];
+    const pieGenerator = pie<ChartDataPoint>()
+      .value((d) => d.value)
+      .sortValues(null)
+      .startAngle(-Math.PI / 2)
+      .endAngle(-Math.PI / 2 + 2 * Math.PI);
 
-    for (let i = 0; i < data.length; i++) {
-      const d = data[i];
+    const arcGenerator = arc<{ startAngle: number; endAngle: number }>()
+      .innerRadius(innerR)
+      .outerRadius(outerRadius);
+
+    const arcs = pieGenerator(data);
+
+    return arcs.map((a, i) => {
+      const d = a.data;
       const percentage = Math.round((d.value / total) * 100);
-      const angle = (d.value / total) * 2 * Math.PI;
-      const endAngle = startAngle + angle;
-
-      const x1 = centerX + outerRadius * Math.cos(startAngle);
-      const y1 = centerY + outerRadius * Math.sin(startAngle);
-      const x2 = centerX + outerRadius * Math.cos(endAngle);
-      const y2 = centerY + outerRadius * Math.sin(endAngle);
-
-      const largeArc = angle > Math.PI ? 1 : 0;
       const color =
         d.color ||
         this.container?.getColor(d.label, i) ||
         CHART_COLORS[i % CHART_COLORS.length];
 
-      let path: string;
-      if (innerR > 0) {
-        const ix1 = centerX + innerR * Math.cos(startAngle);
-        const iy1 = centerY + innerR * Math.sin(startAngle);
-        const ix2 = centerX + innerR * Math.cos(endAngle);
-        const iy2 = centerY + innerR * Math.sin(endAngle);
+      const path = arcGenerator({
+        startAngle: a.startAngle,
+        endAngle: a.endAngle,
+      })!;
+      const [labelX, labelY] = arcGenerator.centroid({
+        startAngle: a.startAngle,
+        endAngle: a.endAngle,
+      });
 
-        path = `M ${x1} ${y1} A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${x2} ${y2} L ${ix2} ${iy2} A ${innerR} ${innerR} 0 ${largeArc} 0 ${ix1} ${iy1} Z`;
-      } else {
-        path = `M ${centerX} ${centerY} L ${x1} ${y1} A ${outerRadius} ${outerRadius} 0 ${largeArc} 1 ${x2} ${y2} Z`;
-      }
-
-      const labelAngle = startAngle + angle / 2;
-      const labelRadius =
-        innerR > 0 ? (outerRadius + innerR) / 2 : outerRadius * 0.6;
-      const labelX = centerX + labelRadius * Math.cos(labelAngle);
-      const labelY = centerY + labelRadius * Math.sin(labelAngle);
-
-      slices.push({
+      return {
         label: d.label,
         value: d.value,
         percentage,
@@ -158,12 +146,8 @@ export class ScPieChart {
         color,
         labelX,
         labelY,
-      });
-
-      startAngle = endAngle;
-    }
-
-    return slices;
+      };
+    });
   });
 
   onSliceHover(
