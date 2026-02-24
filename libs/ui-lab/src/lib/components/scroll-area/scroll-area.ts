@@ -28,9 +28,6 @@ import { cn } from '@semantic-components/ui';
       width: 8px;
       height: 8px;
     }
-    [data-slot='scroll-area']::-webkit-scrollbar-track {
-      background: transparent;
-    }
     [data-slot='scroll-area']::-webkit-scrollbar-thumb {
       background-color: transparent;
       border-radius: 9999px;

@@ -23,8 +23,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
       <div class="space-y-2">
         <h1 class="text-3xl font-bold tracking-tight">ScrollArea</h1>
         <p class="text-muted-foreground">
-          Augments native scroll functionality for custom, cross-browser styling
-          with a custom scrollbar.
+          Styled native scrollbars with a consistent, cross-browser look.
         </p>
         <app-component-badges path="scroll-area" />
       </div>
