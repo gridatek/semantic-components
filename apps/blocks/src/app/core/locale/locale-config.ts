@@ -7,12 +7,12 @@ export interface ScLocale {
   direction: 'ltr' | 'rtl';
 }
 
-export interface ScLocaleConfig {
+export interface ScI18nConfig {
   supportedLocales: ScLocale[];
   defaultLocaleCode: string;
   storageKey?: string;
 }
 
-export const SC_LOCALE_CONFIG = new InjectionToken<ScLocaleConfig>(
-  'SC_LOCALE_CONFIG',
+export const SC_I18N_CONFIG = new InjectionToken<ScI18nConfig>(
+  'SC_I18N_CONFIG',
 );

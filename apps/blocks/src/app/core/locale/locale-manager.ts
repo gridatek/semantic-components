@@ -1,30 +1,32 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { SC_LOCALE_CONFIG, ScLocale } from './locale-config';
+import { SC_I18N_CONFIG } from './locale-config';
 
 @Injectable({ providedIn: 'root' })
 export class ScLocaleManager {
   private readonly document = inject(DOCUMENT);
-  private readonly config = inject(SC_LOCALE_CONFIG);
+  private readonly config = inject(SC_I18N_CONFIG);
 
   private readonly storageKey = this.config.storageKey ?? 'sc-locale';
 
-  readonly supportedLocales = signal<ScLocale[]>(this.config.supportedLocales);
+  readonly supportedLocales = this.config.supportedLocales;
 
-  readonly locale = signal<string>(this.detectLocale());
+  private readonly _locale = signal<string>(this.detectLocale());
+
+  readonly locale = this._locale.asReadonly();
 
   readonly currentLocale = computed(() => {
-    const code = this.locale();
+    const code = this._locale();
     return (
-      this.supportedLocales().find((l) => l.code === code) ??
-      this.supportedLocales()[0]
+      this.supportedLocales.find((l) => l.code === code) ??
+      this.supportedLocales[0]
     );
   });
 
-  readonly language = computed(() => this.locale().split('-')[0]);
+  readonly language = computed(() => this._locale().split('-')[0]);
 
   readonly region = computed(() => {
-    const parts = this.locale().split('-');
+    const parts = this._locale().split('-');
     return parts.length > 1 ? parts[1] : undefined;
   });
 
@@ -33,6 +35,8 @@ export class ScLocaleManager {
   readonly isRtl = computed(() => this.direction() === 'rtl');
 
   constructor() {
+    this.validateConfig();
+
     effect(() => {
       const docEl = this.document.documentElement;
       if (docEl) {
@@ -43,14 +47,30 @@ export class ScLocaleManager {
   }
 
   setLocale(code: string): void {
-    const locale = this.supportedLocales().find((l) => l.code === code);
+    const locale = this.supportedLocales.find((l) => l.code === code);
     if (!locale) {
       console.warn(`Locale "${code}" is not configured.`);
       return;
     }
 
-    this.locale.set(code);
+    this._locale.set(code);
     this.storeLocale(code);
+  }
+
+  private validateConfig(): void {
+    const { supportedLocales, defaultLocaleCode } = this.config;
+
+    if (!supportedLocales.length) {
+      throw new Error(
+        'ScLocaleManager: supportedLocales must contain at least one locale.',
+      );
+    }
+
+    if (!supportedLocales.some((l) => l.code === defaultLocaleCode)) {
+      throw new Error(
+        `ScLocaleManager: defaultLocaleCode "${defaultLocaleCode}" is not in supportedLocales.`,
+      );
+    }
   }
 
   private detectLocale(): string {
