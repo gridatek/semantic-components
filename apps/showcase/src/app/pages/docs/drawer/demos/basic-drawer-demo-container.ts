@@ -85,7 +85,9 @@ import {
               </button>
               <div class="flex-1 text-center">
                 <div class="text-7xl font-bold tracking-tighter">320</div>
-                <div class="text-muted-foreground text-[0.70rem] uppercase">Calories/day</div>
+                <div class="text-muted-foreground text-[0.70rem] uppercase">
+                  Calories/day
+                </div>
               </div>
               <button
                 scButton
@@ -100,7 +102,9 @@ import {
           </div>
           <div scDrawerFooter>
             <button scButton class="w-full" scDrawerClose>Submit</button>
-            <button scButton variant="outline" class="w-full" scDrawerClose>Cancel</button>
+            <button scButton variant="outline" class="w-full" scDrawerClose>
+              Cancel
+            </button>
           </div>
         </div>
       </ng-template>

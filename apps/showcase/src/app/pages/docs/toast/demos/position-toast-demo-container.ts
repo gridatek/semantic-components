@@ -32,12 +32,24 @@ import { ScButton, ScToaster, ScToastPosition } from '@semantic-components/ui';
   imports: [ScButton],
   template: \`
     <div class="grid grid-cols-3 gap-2 w-fit">
-      <button scButton variant="outline" (click)="show('top-left')">Top Left</button>
-      <button scButton variant="outline" (click)="show('top-center')">Top Center</button>
-      <button scButton variant="outline" (click)="show('top-right')">Top Right</button>
-      <button scButton variant="outline" (click)="show('bottom-left')">Bottom Left</button>
-      <button scButton variant="outline" (click)="show('bottom-center')">Bottom Center</button>
-      <button scButton variant="outline" (click)="show('bottom-right')">Bottom Right</button>
+      <button scButton variant="outline" (click)="show('top-left')">
+        Top Left
+      </button>
+      <button scButton variant="outline" (click)="show('top-center')">
+        Top Center
+      </button>
+      <button scButton variant="outline" (click)="show('top-right')">
+        Top Right
+      </button>
+      <button scButton variant="outline" (click)="show('bottom-left')">
+        Bottom Left
+      </button>
+      <button scButton variant="outline" (click)="show('bottom-center')">
+        Bottom Center
+      </button>
+      <button scButton variant="outline" (click)="show('bottom-right')">
+        Bottom Right
+      </button>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

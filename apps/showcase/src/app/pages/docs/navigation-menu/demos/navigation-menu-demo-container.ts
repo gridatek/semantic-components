@@ -65,7 +65,9 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                     href="#"
                   >
                     <svg siSparklesIcon class="size-6"></svg>
-                    <div class="mb-2 mt-4 text-lg font-medium">SC Components</div>
+                    <div class="mb-2 mt-4 text-lg font-medium">
+                      SC Components
+                    </div>
                     <p class="text-sm leading-tight text-muted-foreground">
                       Beautiful Angular components built with Tailwind CSS.
                     </p>
@@ -97,7 +99,9 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">Typography</div>
+                    <div class="text-sm font-medium leading-none">
+                      Typography
+                    </div>
                     <p
                       class="line-clamp-2 text-sm leading-snug text-muted-foreground"
                     >
@@ -133,7 +137,9 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">Hover Card</div>
+                    <div class="text-sm font-medium leading-none">
+                      Hover Card
+                    </div>
                     <p
                       class="line-clamp-2 text-sm leading-snug text-muted-foreground"
                     >

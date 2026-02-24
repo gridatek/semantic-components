@@ -25,7 +25,10 @@ export class BasicToggleLanguageSwitcherDemoContainer {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScLanguageService, ScLanguageToggle } from '@semantic-components/ui-lab';
+import {
+  ScLanguageService,
+  ScLanguageToggle,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-toggle-language-switcher-demo',

@@ -40,7 +40,7 @@ import {
   template: \`
     <div class="w-[280px] space-y-4">
       <label class="text-sm font-medium">
-        Price range: {{ '\\$' + minValue }} &ndash; {{ '\\$' + maxValue }}
+        Price range: {{ '$' + minValue }} &ndash; {{ '$' + maxValue }}
       </label>
       <div
         scRangeSlider

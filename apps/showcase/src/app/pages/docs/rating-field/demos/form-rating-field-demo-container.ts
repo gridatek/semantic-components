@@ -74,9 +74,7 @@ interface ReviewForm {
         </div>
       </div>
 
-      <button scButton (click)="onSubmit()" class="w-fit">
-        Submit Rating
-      </button>
+      <button scButton (click)="onSubmit()" class="w-fit">Submit Rating</button>
 
       @if (submitted) {
         <div class="rounded-md bg-muted p-4">

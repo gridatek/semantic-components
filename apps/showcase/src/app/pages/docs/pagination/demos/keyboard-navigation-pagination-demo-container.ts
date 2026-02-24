@@ -29,6 +29,7 @@ export class KeyboardNavigationPaginationDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScPagination,
   ScPaginationChange,
@@ -53,6 +54,8 @@ import {
 @Component({
   selector: 'app-keyboard-navigation-pagination-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScPagination,
     ScPaginationList,
     ScPaginationItem,
@@ -112,10 +115,16 @@ import {
         (change)="onPaginationChange($event)"
       >
         <div class="mb-4 flex items-center justify-between">
-          <label class="flex items-center gap-2">
-            <span class="text-sm text-muted-foreground">Items per page:</span>
-            <sc-pagination-page-size-select />
-          </label>
+          <div scField orientation="horizontal" class="w-auto">
+            <label scLabel class="text-sm text-muted-foreground">
+              Items per page:
+            </label>
+            <select scPaginationPageSizeSelect>
+              @for (size of pagination.pageSizes(); track size) {
+                <option [value]="size">{{ size }}</option>
+              }
+            </select>
+          </div>
 
           <p class="text-sm text-muted-foreground">
             Page {{ currentPage() }} of {{ pagination.totalPages() }} ({{

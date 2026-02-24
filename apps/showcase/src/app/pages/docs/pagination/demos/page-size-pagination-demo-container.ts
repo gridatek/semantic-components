@@ -29,6 +29,7 @@ export class PageSizePaginationDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScPagination,
   ScPaginationChange,
@@ -49,6 +50,8 @@ import {
 @Component({
   selector: 'app-page-size-pagination-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScPagination,
     ScPaginationList,
     ScPaginationItem,
@@ -73,9 +76,15 @@ import {
         (change)="onPaginationChange($event)"
       >
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="text-sm text-muted-foreground">Items per page:</span>
-            <sc-pagination-page-size-select />
+          <div scField orientation="horizontal" class="w-auto">
+            <label scLabel class="text-sm text-muted-foreground">
+              Items per page:
+            </label>
+            <select scPaginationPageSizeSelect>
+              @for (size of pagination.pageSizes(); track size) {
+                <option [value]="size">{{ size }}</option>
+              }
+            </select>
           </div>
 
           <p class="text-sm text-muted-foreground">

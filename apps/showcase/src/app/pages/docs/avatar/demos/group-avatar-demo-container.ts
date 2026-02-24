@@ -64,7 +64,11 @@ import {
         <span scAvatarFallback>VC</span>
       </span>
       <span scAvatar>
-        <img scAvatarImage src="https://github.com/nextjs.png" alt="@nextjs" />
+        <img
+          scAvatarImage
+          src="https://github.com/nextjs.png"
+          alt="@nextjs"
+        />
         <span scAvatarFallback>NX</span>
       </span>
       <span scAvatar>

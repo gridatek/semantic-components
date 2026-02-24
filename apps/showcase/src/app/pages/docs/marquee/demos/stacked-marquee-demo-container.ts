@@ -24,7 +24,11 @@ export class StackedMarqueeDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScMarquee, ScMarqueeClone, ScMarqueeItem } from '@semantic-components/ui-lab';
+import {
+  ScMarquee,
+  ScMarqueeClone,
+  ScMarqueeItem,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-stacked-marquee-demo',

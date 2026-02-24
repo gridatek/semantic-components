@@ -57,7 +57,9 @@ import {
   ],
   template: \`
     <div scDrawerProvider direction="top">
-      <button scButton variant="outline" scDrawerTrigger>Open Top Drawer</button>
+      <button scButton variant="outline" scDrawerTrigger>
+        Open Top Drawer
+      </button>
       <ng-template scDrawerPortal>
         <div scDrawer>
           <div scDrawerHeader>
@@ -68,7 +70,9 @@ import {
             <div class="space-y-4">
               <div class="flex items-start gap-4 rounded-md border p-4">
                 <div class="flex-1">
-                  <p class="text-sm font-medium">Your call has been confirmed.</p>
+                  <p class="text-sm font-medium">
+                    Your call has been confirmed.
+                  </p>
                   <p class="text-sm text-muted-foreground">5 min ago</p>
                 </div>
               </div>
@@ -81,7 +85,9 @@ import {
             </div>
           </div>
           <div scDrawerFooter>
-            <button scButton class="w-full" scDrawerClose>Mark all as read</button>
+            <button scButton class="w-full" scDrawerClose>
+              Mark all as read
+            </button>
           </div>
         </div>
       </ng-template>

@@ -25,7 +25,10 @@ export class BasicSelectTimezoneDemoContainer {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTimezoneSelect, ScTimezoneService } from '@semantic-components/ui-lab';
+import {
+  ScTimezoneSelect,
+  ScTimezoneService,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-select-timezone-demo',

@@ -49,14 +49,8 @@ import { ScQrCode } from '@semantic-components/ui-lab';
         <p class="text-xs text-muted-foreground mt-1">1 module</p>
       </div>
       <div class="text-center">
-        <sc-qr-code
-          [value]="'Standard border'"
-          [size]="150"
-          [quietZone]="4"
-        />
-        <p class="text-xs text-muted-foreground mt-1">
-          4 modules (standard)
-        </p>
+        <sc-qr-code [value]="'Standard border'" [size]="150" [quietZone]="4" />
+        <p class="text-xs text-muted-foreground mt-1">4 modules (standard)</p>
       </div>
     </div>
   \`,

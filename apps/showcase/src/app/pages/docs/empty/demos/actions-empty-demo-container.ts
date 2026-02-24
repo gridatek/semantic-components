@@ -24,15 +24,15 @@ export class ActionsEmptyDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScEmpty,
   ScEmptyHeader,
   ScEmptyMedia,
   ScEmptyTitle,
   ScEmptyDescription,
-  ScEmptyContent,
-} from '@semantic-components/ui-lab';
+  ScEmptyBody,
+} from '@semantic-components/ui';
 import { SiFolderIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -44,7 +44,7 @@ import { SiFolderIcon } from '@semantic-icons/lucide-icons';
     ScEmptyMedia,
     ScEmptyTitle,
     ScEmptyDescription,
-    ScEmptyContent,
+    ScEmptyBody,
     SiFolderIcon,
   ],
   template: \`
@@ -58,7 +58,7 @@ import { SiFolderIcon } from '@semantic-icons/lucide-icons';
           Get started by creating your first project.
         </div>
       </div>
-      <div scEmptyContent>
+      <div scEmptyBody>
         <button scButton>Create Project</button>
       </div>
     </div>

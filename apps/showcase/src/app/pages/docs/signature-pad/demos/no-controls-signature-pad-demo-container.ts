@@ -24,7 +24,10 @@ export class NoControlsSignaturePadDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSignaturePad, ScSignaturePadCanvas } from '@semantic-components/ui-lab';
+import {
+  ScSignaturePad,
+  ScSignaturePadCanvas,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-no-controls-signature-pad-demo',

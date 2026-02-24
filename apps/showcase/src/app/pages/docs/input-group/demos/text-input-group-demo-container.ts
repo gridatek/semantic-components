@@ -37,12 +37,7 @@ import {
 
 @Component({
   selector: 'app-text-input-group-demo',
-  imports: [
-    ScInputGroup,
-    ScInputGroupAddon,
-    ScInput,
-    ScInputGroupText,
-  ],
+  imports: [ScInputGroup, ScInputGroupAddon, ScInput, ScInputGroupText],
   template: \`
     <div class="flex w-full max-w-sm flex-col gap-4">
       <div scInputGroup>
@@ -63,7 +58,7 @@ import {
       <div scInputGroup>
         <input scInput variant="group" placeholder="Email" />
         <div scInputGroupAddon align="inline-end">
-          <span scInputGroupText>@company.com</span>
+          <span scInputGroupText>&#64;company.com</span>
         </div>
       </div>
     </div>

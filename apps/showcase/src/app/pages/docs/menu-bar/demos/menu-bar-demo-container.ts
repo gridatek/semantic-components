@@ -128,33 +128,69 @@ import {
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuItem value="New">
-                <svg siFileTextIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siFileTextIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">New</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘N</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;N
+                </span>
               </div>
               <div scMenuItem value="Open">
-                <svg siFolderOpenIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siFolderOpenIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Open</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘O</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;O
+                </span>
               </div>
               <div scMenuItem value="Make a copy">
-                <svg siCopyIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siCopyIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Make a copy</span>
               </div>
               <div scMenuSeparator></div>
               <div scMenuItem value="Share">
-                <svg siUserPlusIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siUserPlusIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Share</span>
-                <svg siChevronRightIcon class="ml-auto size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siChevronRightIcon
+                  class="ml-auto size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>
                       <div scMenuItem value="Share with others">
-                        <svg siUserPlusIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siUserPlusIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Share with others</span>
                       </div>
                       <div scMenuItem value="Publish to web">
-                        <svg siGlobeIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siGlobeIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Publish to web</span>
                       </div>
                     </ng-template>
@@ -162,20 +198,36 @@ import {
                 </ng-template>
               </div>
               <div scMenuItem value="Download">
-                <svg siDownloadIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siDownloadIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Download</span>
               </div>
               <div scMenuItem value="Print">
-                <svg siPrinterIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siPrinterIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Print</span>
               </div>
               <div scMenuSeparator></div>
               <div scMenuItem value="Rename">
-                <svg siPencilIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siPencilIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Rename</span>
               </div>
               <div scMenuItem value="Delete">
-                <svg siTrash2Icon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siTrash2Icon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Move to trash</span>
               </div>
             </ng-template>
@@ -190,36 +242,84 @@ import {
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuItem value="Undo">
-                <svg siUndo2Icon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siUndo2Icon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Undo</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘Z</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;Z
+                </span>
               </div>
               <div scMenuItem value="Redo">
-                <svg siRedo2Icon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siRedo2Icon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Redo</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘Y</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;Y
+                </span>
               </div>
               <div scMenuSeparator></div>
               <div scMenuItem value="Cut">
-                <svg siScissorsIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siScissorsIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Cut</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘X</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;X
+                </span>
               </div>
               <div scMenuItem value="Copy">
-                <svg siCopyIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siCopyIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Copy</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘C</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;C
+                </span>
               </div>
               <div scMenuItem value="Paste">
-                <svg siClipboardIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siClipboardIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Paste</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘V</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;V
+                </span>
               </div>
               <div scMenuSeparator></div>
               <div scMenuItem value="Find and replace">
-                <svg siSearchIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siSearchIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Find and replace</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⇧⌘H</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8679;&#8984;H
+                </span>
               </div>
             </ng-template>
           </div>
@@ -233,21 +333,37 @@ import {
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuItem value="Show print layout" [disabled]="true">
-                <svg siCheckIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siCheckIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Show print layout</span>
               </div>
               <div scMenuItem value="Show ruler" [disabled]="true">
-                <svg siCheckIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siCheckIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Show ruler</span>
               </div>
               <div scMenuSeparator></div>
               <div scMenuItem value="Zoom in">
                 <span class="flex-1">Zoom in</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘+</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;+
+                </span>
               </div>
               <div scMenuItem value="Zoom out">
                 <span class="flex-1">Zoom out</span>
-                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘-</span>
+                <span
+                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                >
+                  &#8984;-
+                </span>
               </div>
               <div scMenuSeparator></div>
               <div scMenuItem value="Full screen">
@@ -265,22 +381,42 @@ import {
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuItem value="Image">
-                <svg siImageIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siImageIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Image</span>
-                <svg siChevronRightIcon class="ml-auto size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siChevronRightIcon
+                  class="ml-auto size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>
                       <div scMenuItem value="Upload from computer">
-                        <svg siUploadIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siUploadIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Upload from computer</span>
                       </div>
                       <div scMenuItem value="Search the web">
-                        <svg siSearchIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siSearchIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Search the web</span>
                       </div>
                       <div scMenuItem value="By URL">
-                        <svg siLinkIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siLinkIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">By URL</span>
                       </div>
                     </ng-template>
@@ -288,30 +424,58 @@ import {
                 </ng-template>
               </div>
               <div scMenuItem value="Table">
-                <svg siTableIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siTableIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Table</span>
               </div>
               <div scMenuItem value="Chart">
-                <svg siChartColumnIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siChartColumnIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Chart</span>
-                <svg siChevronRightIcon class="ml-auto size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siChevronRightIcon
+                  class="ml-auto size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>
                       <div scMenuItem value="Bar">
-                        <svg siChartBarIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siChartBarIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Bar</span>
                       </div>
                       <div scMenuItem value="Column">
-                        <svg siChartColumnIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siChartColumnIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Column</span>
                       </div>
                       <div scMenuItem value="Line">
-                        <svg siChartLineIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siChartLineIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Line</span>
                       </div>
                       <div scMenuItem value="Pie">
-                        <svg siChartPieIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siChartPieIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Pie</span>
                       </div>
                     </ng-template>
@@ -319,7 +483,11 @@ import {
                 </ng-template>
               </div>
               <div scMenuItem value="Horizontal line">
-                <svg siMinusIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siMinusIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Horizontal line</span>
               </div>
             </ng-template>
@@ -334,46 +502,98 @@ import {
           <div scMenu>
             <ng-template scMenuContent>
               <div scMenuItem value="Text">
-                <svg siBoldIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siBoldIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Text</span>
-                <svg siChevronRightIcon class="ml-auto size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siChevronRightIcon
+                  class="ml-auto size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>
                       <div scMenuItem value="Bold">
-                        <svg siBoldIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siBoldIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Bold</span>
-                        <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘B</span>
+                        <span
+                          class="ml-auto text-xs tracking-widest text-muted-foreground"
+                        >
+                          &#8984;B
+                        </span>
                       </div>
                       <div scMenuItem value="Italic">
-                        <svg siItalicIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siItalicIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Italic</span>
-                        <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘I</span>
+                        <span
+                          class="ml-auto text-xs tracking-widest text-muted-foreground"
+                        >
+                          &#8984;I
+                        </span>
                       </div>
                       <div scMenuItem value="Underline">
-                        <svg siUnderlineIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siUnderlineIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Underline</span>
-                        <span class="ml-auto text-xs tracking-widest text-muted-foreground">⌘U</span>
+                        <span
+                          class="ml-auto text-xs tracking-widest text-muted-foreground"
+                        >
+                          &#8984;U
+                        </span>
                       </div>
                       <div scMenuItem value="Strikethrough">
-                        <svg siStrikethroughIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siStrikethroughIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Strikethrough</span>
-                        <span class="ml-auto text-xs tracking-widest text-muted-foreground">⇧⌘X</span>
+                        <span
+                          class="ml-auto text-xs tracking-widest text-muted-foreground"
+                        >
+                          &#8679;&#8984;X
+                        </span>
                       </div>
                       <div scMenuSeparator></div>
                       <div scMenuItem value="Size">
                         <span class="flex-1">Size</span>
-                        <svg siChevronRightIcon class="ml-auto size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siChevronRightIcon
+                          class="ml-auto size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <ng-template scMenuPortal>
                           <div scMenu>
                             <ng-template scMenuContent>
                               <div scMenuItem value="Increase font size">
                                 <span class="flex-1">Increase font size</span>
-                                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⇧⌘.</span>
+                                <span
+                                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                                >
+                                  &#8679;&#8984;.
+                                </span>
                               </div>
                               <div scMenuItem value="Decrease font size">
                                 <span class="flex-1">Decrease font size</span>
-                                <span class="ml-auto text-xs tracking-widest text-muted-foreground">⇧⌘,</span>
+                                <span
+                                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                                >
+                                  &#8679;&#8984;,
+                                </span>
                               </div>
                             </ng-template>
                           </div>
@@ -384,9 +604,17 @@ import {
                 </ng-template>
               </div>
               <div scMenuItem value="Paragraph styles">
-                <svg siTextAlignJustifyIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siTextAlignJustifyIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Paragraph styles</span>
-                <svg siChevronRightIcon class="ml-auto size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siChevronRightIcon
+                  class="ml-auto size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>
@@ -398,26 +626,50 @@ import {
                 </ng-template>
               </div>
               <div scMenuItem value="Align & indent">
-                <svg siListIndentIncreaseIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siListIndentIncreaseIcon
+                  class="size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <span class="flex-1">Align & indent</span>
-                <svg siChevronRightIcon class="ml-auto size-4 shrink-0" aria-hidden="true"></svg>
+                <svg
+                  siChevronRightIcon
+                  class="ml-auto size-4 shrink-0"
+                  aria-hidden="true"
+                ></svg>
                 <ng-template scMenuPortal>
                   <div scMenu>
                     <ng-template scMenuContent>
                       <div scMenuItem value="Align left">
-                        <svg siTextAlignStartIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siTextAlignStartIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Align left</span>
                       </div>
                       <div scMenuItem value="Align center">
-                        <svg siTextAlignCenterIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siTextAlignCenterIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Align center</span>
                       </div>
                       <div scMenuItem value="Align right">
-                        <svg siTextAlignEndIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siTextAlignEndIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Align right</span>
                       </div>
                       <div scMenuItem value="Justify">
-                        <svg siTextAlignJustifyIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+                        <svg
+                          siTextAlignJustifyIcon
+                          class="size-4 shrink-0"
+                          aria-hidden="true"
+                        ></svg>
                         <span class="flex-1">Justify</span>
                       </div>
                     </ng-template>

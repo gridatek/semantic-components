@@ -24,7 +24,10 @@ export class DisabledCopyButtonDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScCopyButton, ScCopyButtonWithText } from '@semantic-components/ui-lab';
+import {
+  ScCopyButton,
+  ScCopyButtonWithText,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-disabled-copy-button-demo',

@@ -30,8 +30,8 @@ import {
   ScCodeViewerContent,
   ScCodeViewerHeader,
   ScCodeViewerLabel,
-  ScCopyButton,
 } from '@semantic-components/code';
+import { ScCopyButton } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-code-viewer-demo',

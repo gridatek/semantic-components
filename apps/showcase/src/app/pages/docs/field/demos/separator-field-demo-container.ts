@@ -30,11 +30,12 @@ export class SeparatorFieldDemoContainer {
 } from '@angular/core';
 import {
   ScField,
-  ScLabel,
   ScFieldGroup,
   ScFieldSeparator,
-} from "@semantic-components/ui";
-import { ScInput, ScSeparator } from "@semantic-components/ui-lab";
+  ScInput,
+  ScLabel,
+  ScSeparator,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-separator-field-demo',
@@ -50,12 +51,7 @@ import { ScInput, ScSeparator } from "@semantic-components/ui-lab";
     <div scFieldGroup>
       <div scField>
         <label scLabel for="email">Email</label>
-        <input
-          scInput
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-        />
+        <input scInput id="email" type="email" placeholder="Enter your email" />
       </div>
 
       <div scFieldSeparator>

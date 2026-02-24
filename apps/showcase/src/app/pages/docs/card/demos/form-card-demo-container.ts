@@ -28,7 +28,6 @@ export class FormCardDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScField, ScFieldGroup } from '@semantic-components/ui';
 import {
   ScButton,
   ScCard,
@@ -37,6 +36,8 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScField,
+  ScFieldGroup,
   ScInput,
   ScLabel,
   ScNativeSelect,
