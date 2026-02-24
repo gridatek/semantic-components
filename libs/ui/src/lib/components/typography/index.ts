@@ -1,0 +1,1 @@
+export { ScHeading } from './heading';
