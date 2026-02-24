@@ -8,8 +8,8 @@ export interface ScLocale {
 }
 
 export interface ScLocaleConfig {
-  locales: ScLocale[];
-  defaultLocale: string;
+  supportedLocales: ScLocale[];
+  defaultLocaleCode: string;
   storageKey?: string;
 }
 

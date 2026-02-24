@@ -9,13 +9,16 @@ export class ScLocaleManager {
 
   private readonly storageKey = this.config.storageKey ?? 'sc-locale';
 
-  readonly locales = signal<ScLocale[]>(this.config.locales);
+  readonly supportedLocales = signal<ScLocale[]>(this.config.supportedLocales);
 
   readonly locale = signal<string>(this.detectLocale());
 
   readonly currentLocale = computed(() => {
     const code = this.locale();
-    return this.locales().find((l) => l.code === code) ?? this.locales()[0];
+    return (
+      this.supportedLocales().find((l) => l.code === code) ??
+      this.supportedLocales()[0]
+    );
   });
 
   readonly language = computed(() => this.locale().split('-')[0]);
@@ -40,7 +43,7 @@ export class ScLocaleManager {
   }
 
   setLocale(code: string): void {
-    const locale = this.locales().find((l) => l.code === code);
+    const locale = this.supportedLocales().find((l) => l.code === code);
     if (!locale) {
       console.warn(`Locale "${code}" is not configured.`);
       return;
@@ -52,11 +55,11 @@ export class ScLocaleManager {
 
   private detectLocale(): string {
     const stored = this.getStoredLocale();
-    if (stored && this.config.locales.some((l) => l.code === stored)) {
+    if (stored && this.config.supportedLocales.some((l) => l.code === stored)) {
       return stored;
     }
 
-    return this.config.defaultLocale;
+    return this.config.defaultLocaleCode;
   }
 
   private getStoredLocale(): string | null {

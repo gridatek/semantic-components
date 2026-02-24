@@ -2,14 +2,14 @@ import { Provider } from '@angular/core';
 import { SC_LOCALE_CONFIG, ScLocaleConfig } from './locale';
 
 export interface ScConfig {
-  locale?: ScLocaleConfig;
+  i18n?: ScLocaleConfig;
 }
 
 export function provideScConfig(config: ScConfig): Provider[] {
   const providers: Provider[] = [];
 
-  if (config.locale) {
-    providers.push({ provide: SC_LOCALE_CONFIG, useValue: config.locale });
+  if (config.i18n) {
+    providers.push({ provide: SC_LOCALE_CONFIG, useValue: config.i18n });
   }
 
   return providers;

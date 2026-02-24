@@ -26,9 +26,9 @@ export const appConfig: ApplicationConfig = {
     ),
     provideClientHydration(withEventReplay()),
     provideScConfig({
-      locale: {
-        defaultLocale: 'en-US',
-        locales: [
+      i18n: {
+        defaultLocaleCode: 'en-US',
+        supportedLocales: [
           {
             code: 'en-US',
             label: 'English (US)',
