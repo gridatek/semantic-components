@@ -12,7 +12,7 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideScConfig } from './core/provide-semantic-components-config';
+import { provideScConfig } from './core/provide-sc-config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
