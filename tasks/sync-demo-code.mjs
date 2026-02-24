@@ -4,9 +4,19 @@
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
 import { join, dirname, basename } from 'path';
+import { fileURLToPath } from 'url';
 
-const DOCS_DIR =
-  '/home/user/semantic-components/apps/showcase/src/app/pages/docs';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DOCS_DIR = join(
+  __dirname,
+  '..',
+  'apps',
+  'showcase',
+  'src',
+  'app',
+  'pages',
+  'docs',
+);
 
 function findFiles(dir, pattern) {
   const results = [];
