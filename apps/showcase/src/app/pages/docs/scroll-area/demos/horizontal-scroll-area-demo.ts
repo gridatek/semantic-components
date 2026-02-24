@@ -3,11 +3,11 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
+import { ScScrollArea } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-horizontal-scroll-area-demo',
-  imports: [ScScrollArea, ScScrollBar],
+  imports: [ScScrollArea],
   template: `
     <div scScrollArea class="w-96 whitespace-nowrap rounded-md border">
       <div class="flex w-max space-x-4 p-4">
@@ -29,7 +29,6 @@ import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
           </figure>
         }
       </div>
-      <div scScrollBar orientation="horizontal"></div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

@@ -24,11 +24,11 @@ export class BothScrollAreaDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
+import { ScScrollArea } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-both-scroll-area-demo',
-  imports: [ScScrollArea, ScScrollBar],
+  imports: [ScScrollArea],
   template: \`
     <div scScrollArea class="h-72 w-72 rounded-md border">
       <div class="p-4" style="width: 500px;">
@@ -50,8 +50,6 @@ import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
           }
         </div>
       </div>
-      <div scScrollBar orientation="vertical"></div>
-      <div scScrollBar orientation="horizontal"></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

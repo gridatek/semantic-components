@@ -24,7 +24,7 @@ export class VerticalScrollAreaDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScScrollArea, ScScrollBar } from '@semantic-components/ui-lab';
+import { ScScrollArea } from '@semantic-components/ui-lab';
 
 interface Tag {
   id: string;
@@ -33,7 +33,7 @@ interface Tag {
 
 @Component({
   selector: 'app-vertical-scroll-area-demo',
-  imports: [ScScrollArea, ScScrollBar],
+  imports: [ScScrollArea],
   template: \`
     <div scScrollArea class="h-72 w-48 rounded-md border">
       <div class="p-4">
@@ -47,7 +47,6 @@ interface Tag {
           }
         }
       </div>
-      <div scScrollBar orientation="vertical"></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
