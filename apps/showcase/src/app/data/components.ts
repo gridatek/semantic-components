@@ -699,11 +699,11 @@ export const COMPONENTS: ComponentItem[] = [
   {
     name: 'Scroll Area',
     path: 'scroll-area',
-    description: 'A custom scrollable area with styled scrollbars.',
+    description:
+      'A scrollable area with thin, styled scrollbars that appear on hover.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Layout',
-    hidden: true,
   },
   {
     name: 'Search Input',

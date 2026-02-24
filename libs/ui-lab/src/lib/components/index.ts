@@ -36,7 +36,6 @@ export * from './phone-input';
 export * from './qr-code';
 export * from './rating-field';
 export * from './resizable';
-export * from './scroll-area';
 export * from './search-input';
 export * from './sidebar';
 export * from './signature-pad';

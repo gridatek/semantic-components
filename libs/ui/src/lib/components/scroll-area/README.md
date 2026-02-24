@@ -1,6 +1,6 @@
 # Scroll Area
 
-Applies styled native scrollbar styling that matches shadcn aesthetics (thin, rounded, border-colored thumb).
+A scrollable area with thin, styled scrollbars that appear on hover.
 
 ## Usage
 
@@ -20,7 +20,7 @@ Applies styled native scrollbar styling that matches shadcn aesthetics (thin, ro
 
 ## Features
 
-- Native scrollbar styled to match shadcn design (thin, rounded, `bg-border` colored thumb)
+- Thin, rounded scrollbars hidden by default and visible on hover
 - Works in Chromium, Safari, and Firefox
 - `overflow-auto` applied by default — scrollbars appear only when content overflows
 - Keyboard and touch scrolling work natively
