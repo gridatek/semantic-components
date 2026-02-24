@@ -1,85 +1,42 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
-import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
-import { ScLocaleService } from './locale.service';
-import { LocaleSize, LocaleVariant, sizeStyles, variantStyles } from './styles';
+import { computed, Directive, inject, input } from '@angular/core';
+import { cn, toggleVariants, ScToggleVariants } from '@semantic-components/ui';
+import { ScLocaleManager } from './locale-manager';
 
 /**
- * Locale toggle button - ideal for switching between 2 locales.
- * Displays a globe icon with the current locale code.
+ * Locale toggle directive - ideal for switching between 2 locales.
+ * Toggles between 2 configured locales on click.
  *
  * @example
  * ```html
- * <button scLocaleToggle></button>
- * <button scLocaleToggle variant="outline" size="sm"></button>
+ * <button scLocaleToggle aria-label="Switch language">
+ *   <svg siGlobeIcon class="size-5"></svg>
+ * </button>
  * ```
  */
-@Component({
+@Directive({
   selector: 'button[scLocaleToggle]',
   host: {
     'data-slot': 'locale-toggle',
     type: 'button',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'toggle()',
   },
-  imports: [SiGlobeIcon],
-  template: `
-    <svg siGlobeIcon class="size-5" aria-hidden="true"></svg>
-    @if (!iconOnly()) {
-      <span class="text-xs font-semibold uppercase">
-        {{ currentLocaleCode() }}
-      </span>
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLocaleToggle {
-  private readonly localeService = inject(ScLocaleService);
+  private readonly localeManager = inject(ScLocaleManager);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<LocaleVariant>('ghost');
-  readonly size = input<LocaleSize>('default');
-  readonly iconOnly = input<boolean>(false);
-
-  protected readonly currentLocaleCode = computed(() =>
-    this.localeService.locale(),
-  );
-  protected readonly currentLocale = this.localeService.currentLocale;
-  protected readonly locales = this.localeService.locales;
+  readonly variant = input<ScToggleVariants['variant']>('default');
+  readonly size = input<ScToggleVariants['size']>('default');
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-md text-sm font-medium',
-      'ring-offset-background transition-colors',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      'disabled:pointer-events-none disabled:opacity-50',
-      '[&_svg]:pointer-events-none [&_svg]:shrink-0',
-      variantStyles[this.variant()],
-      sizeStyles[this.size()],
+      toggleVariants({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected readonly ariaLabel = computed(() => {
-    const current = this.currentLocale();
-    const langs = this.locales();
-    if (langs.length === 2) {
-      const next = langs.find((l) => l.code !== current.code);
-      return `Switch locale to ${next?.label ?? 'other locale'}. Current locale: ${current.label}`;
-    }
-    return `Current locale: ${current.label}. Click to change locale.`;
-  });
-
   protected toggle(): void {
-    this.localeService.toggleLocale();
+    this.localeManager.toggleLocale();
   }
 }

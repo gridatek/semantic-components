@@ -51,7 +51,7 @@ export const SC_LOCALE_CONFIG = new InjectionToken<ScLocaleConfig>(
 );
 
 @Injectable({ providedIn: 'root' })
-export class ScLocaleService {
+export class ScLocaleManager {
   private readonly document = inject(DOCUMENT);
   private readonly config = inject(SC_LOCALE_CONFIG);
 

@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScLocaleService } from './locale.service';
+import { ScLocaleManager } from './locale-manager';
 
 /**
  * Locale select dropdown - shows all available locales.
@@ -43,7 +43,7 @@ import { ScLocaleService } from './locale.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLocaleSelect {
-  private readonly localeService = inject(ScLocaleService);
+  private readonly localeService = inject(ScLocaleManager);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly showNativeLabels = input<boolean>(true);
