@@ -29,6 +29,7 @@ import {
   ScNavbarMobileLink,
 } from '@semantic-components/ui-lab';
 import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import { LocaleSelect } from '../locale-select/locale-select';
 
 @Component({
   selector: 'app-navbar',
@@ -54,6 +55,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     ScNavigationMenuTrigger,
     SiMenuIcon,
     SiXIcon,
+    LocaleSelect,
   ],
   template: `
     <div scNavbarProvider>
@@ -155,6 +157,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div scNavbarActions>
+          <app-locale-select class="hidden md:inline-block" />
           <button scButton variant="ghost" class="hidden md:inline-flex">
             Sign In
           </button>
@@ -197,6 +200,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
             Dashboard
           </a>
           <hr class="my-2 border-border" />
+          <app-locale-select class="w-full" />
           <button scButton variant="ghost" class="w-full">Sign In</button>
           <button scButton class="w-full">Get Started</button>
         </div>
