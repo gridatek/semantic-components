@@ -9,8 +9,12 @@ import {
 import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScLanguageService } from './language.service';
-import { LanguageSwitcherSize, LanguageSwitcherVariant } from './styles';
-import { sizeStyles, variantStyles } from '../timezone';
+import {
+  LanguageSwitcherSize,
+  LanguageSwitcherVariant,
+  sizeStyles,
+  variantStyles,
+} from './styles';
 
 /**
  * Language toggle button - ideal for switching between 2 languages.
