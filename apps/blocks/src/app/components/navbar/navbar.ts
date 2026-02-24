@@ -76,13 +76,15 @@ import { LocaleSelect } from '../locale-select/locale-select';
             >
               <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
             </svg>
-            <span>Brand</span>
+            <span i18n="@@nav.brand">Brand</span>
           </a>
 
           <nav scNavigationMenu class="hidden md:flex">
             <ul scNavigationMenuList>
               <li scNavigationMenuItem>
-                <button scNavigationMenuTrigger>Features</button>
+                <button scNavigationMenuTrigger i18n="@@nav.features">
+                  Features
+                </button>
                 <ng-template scNavigationMenuPortal>
                   <div scNavigationMenuContent>
                     <ul
@@ -90,11 +92,15 @@ import { LocaleSelect } from '../locale-select/locale-select';
                     >
                       <li>
                         <a scNavigationMenuLink href="#">
-                          <div class="text-sm font-medium leading-none">
+                          <div
+                            class="text-sm font-medium leading-none"
+                            i18n="@@nav.analytics"
+                          >
                             Analytics
                           </div>
                           <p
                             class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            i18n="@@nav.analytics.desc"
                           >
                             Track your data and insights
                           </p>
@@ -102,11 +108,15 @@ import { LocaleSelect } from '../locale-select/locale-select';
                       </li>
                       <li>
                         <a scNavigationMenuLink href="#">
-                          <div class="text-sm font-medium leading-none">
+                          <div
+                            class="text-sm font-medium leading-none"
+                            i18n="@@nav.reports"
+                          >
                             Reports
                           </div>
                           <p
                             class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            i18n="@@nav.reports.desc"
                           >
                             Generate detailed reports
                           </p>
@@ -114,11 +124,15 @@ import { LocaleSelect } from '../locale-select/locale-select';
                       </li>
                       <li>
                         <a scNavigationMenuLink href="#">
-                          <div class="text-sm font-medium leading-none">
+                          <div
+                            class="text-sm font-medium leading-none"
+                            i18n="@@nav.automation"
+                          >
                             Automation
                           </div>
                           <p
                             class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            i18n="@@nav.automation.desc"
                           >
                             Automate your workflows
                           </p>
@@ -126,11 +140,15 @@ import { LocaleSelect } from '../locale-select/locale-select';
                       </li>
                       <li>
                         <a scNavigationMenuLink href="#">
-                          <div class="text-sm font-medium leading-none">
+                          <div
+                            class="text-sm font-medium leading-none"
+                            i18n="@@nav.integration"
+                          >
                             Integration
                           </div>
                           <p
                             class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            i18n="@@nav.integration.desc"
                           >
                             Connect with your tools
                           </p>
@@ -142,15 +160,23 @@ import { LocaleSelect } from '../locale-select/locale-select';
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/">Pricing</a>
+                <a scNavigationMenuLink routerLink="/" i18n="@@nav.pricing">
+                  Pricing
+                </a>
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink href="#">About</a>
+                <a scNavigationMenuLink href="#" i18n="@@nav.about">About</a>
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/dashboard">Dashboard</a>
+                <a
+                  scNavigationMenuLink
+                  routerLink="/dashboard"
+                  i18n="@@nav.dashboard"
+                >
+                  Dashboard
+                </a>
               </li>
             </ul>
           </nav>
@@ -158,10 +184,21 @@ import { LocaleSelect } from '../locale-select/locale-select';
 
         <div scNavbarActions>
           <app-locale-select class="hidden md:inline-block" />
-          <button scButton variant="ghost" class="hidden md:inline-flex">
+          <button
+            scButton
+            variant="ghost"
+            class="hidden md:inline-flex"
+            i18n="@@nav.signIn"
+          >
             Sign In
           </button>
-          <button scButton class="hidden md:inline-flex">Get Started</button>
+          <button
+            scButton
+            class="hidden md:inline-flex"
+            i18n="@@nav.getStarted"
+          >
+            Get Started
+          </button>
           <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
             @if (trigger.isMobileMenuOpen()) {
               <svg siXIcon></svg>
@@ -185,11 +222,17 @@ import { LocaleSelect } from '../locale-select/locale-select';
             #mobileHomeRla="routerLinkActive"
             [active]="mobileHomeRla.isActive"
           >
-            Home
+            <ng-container i18n="@@nav.home">Home</ng-container>
           </a>
-          <a scNavbarMobileLink href="#" [active]="false">Features</a>
-          <a scNavbarMobileLink href="#" [active]="false">Pricing</a>
-          <a scNavbarMobileLink href="#" [active]="false">About</a>
+          <a scNavbarMobileLink href="#" [active]="false" i18n="@@nav.features">
+            Features
+          </a>
+          <a scNavbarMobileLink href="#" [active]="false" i18n="@@nav.pricing">
+            Pricing
+          </a>
+          <a scNavbarMobileLink href="#" [active]="false" i18n="@@nav.about">
+            About
+          </a>
           <a
             scNavbarMobileLink
             routerLink="/dashboard"
@@ -197,12 +240,16 @@ import { LocaleSelect } from '../locale-select/locale-select';
             #mobileDashboardRla="routerLinkActive"
             [active]="mobileDashboardRla.isActive"
           >
-            Dashboard
+            <ng-container i18n="@@nav.dashboard">Dashboard</ng-container>
           </a>
           <hr class="my-2 border-border" />
           <app-locale-select class="w-full" />
-          <button scButton variant="ghost" class="w-full">Sign In</button>
-          <button scButton class="w-full">Get Started</button>
+          <button scButton variant="ghost" class="w-full" i18n="@@nav.signIn">
+            Sign In
+          </button>
+          <button scButton class="w-full" i18n="@@nav.getStarted">
+            Get Started
+          </button>
         </div>
       </div>
     </div>

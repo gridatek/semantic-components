@@ -29,9 +29,9 @@ import { cn } from '@semantic-components/ui';
           >
             <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
           </svg>
-          <span class="font-semibold">Acme Inc</span>
+          <span class="font-semibold" i18n="@@footer.brand">Acme Inc</span>
         </div>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-sm text-muted-foreground" i18n="@@footer.tagline">
           Built with Angular and Tailwind CSS. Open source.
         </p>
       </div>

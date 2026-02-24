@@ -20,6 +20,7 @@
           }
         ],
         "styles": ["apps/blocks/src/styles.css"],
+        "polyfills": ["@angular/localize/init"],
         "server": "apps/blocks/src/main.server.ts",
         "outputMode": "server",
         "ssr": {

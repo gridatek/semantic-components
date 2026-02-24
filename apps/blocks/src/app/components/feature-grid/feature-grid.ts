@@ -12,7 +12,10 @@ import { cn } from '@semantic-components/ui';
   template: `
     <section class="py-16 px-4 md:px-6 lg:px-8">
       <div class="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
-        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">
+        <h2
+          class="text-2xl md:text-3xl font-bold text-center mb-12"
+          i18n="@@features.title"
+        >
           Features
         </h2>
         <div class="grid md:grid-cols-3 gap-8">
@@ -38,8 +41,13 @@ import { cn } from '@semantic-components/ui';
                 <path d="M9 21V9" />
               </svg>
             </div>
-            <h3 class="text-lg font-semibold mb-2">Responsive Design</h3>
-            <p class="text-muted-foreground">
+            <h3
+              class="text-lg font-semibold mb-2"
+              i18n="@@features.responsive.title"
+            >
+              Responsive Design
+            </h3>
+            <p class="text-muted-foreground" i18n="@@features.responsive.desc">
               Automatically adapts between desktop and mobile layouts with
               smooth transitions.
             </p>
@@ -65,8 +73,13 @@ import { cn } from '@semantic-components/ui';
                 <path d="m16 10-4 4-4-4" />
               </svg>
             </div>
-            <h3 class="text-lg font-semibold mb-2">Accessible</h3>
-            <p class="text-muted-foreground">
+            <h3
+              class="text-lg font-semibold mb-2"
+              i18n="@@features.accessible.title"
+            >
+              Accessible
+            </h3>
+            <p class="text-muted-foreground" i18n="@@features.accessible.desc">
               Built with ARIA attributes, keyboard navigation, and screen reader
               support.
             </p>
@@ -91,8 +104,13 @@ import { cn } from '@semantic-components/ui';
                 <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
               </svg>
             </div>
-            <h3 class="text-lg font-semibold mb-2">Dark Mode Ready</h3>
-            <p class="text-muted-foreground">
+            <h3
+              class="text-lg font-semibold mb-2"
+              i18n="@@features.darkMode.title"
+            >
+              Dark Mode Ready
+            </h3>
+            <p class="text-muted-foreground" i18n="@@features.darkMode.desc">
               Seamlessly supports light and dark themes with CSS variables.
             </p>
           </div>
