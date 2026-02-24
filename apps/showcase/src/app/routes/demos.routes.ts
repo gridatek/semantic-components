@@ -4179,6 +4179,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/typography',
+    children: [
+      {
+        path: 'headings-typography-demo',
+        loadComponent: () =>
+          import('../pages/docs/typography/demos/headings-typography-demo').then(
+            (m) => m.HeadingsTypographyDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/tree',
     children: [
       {

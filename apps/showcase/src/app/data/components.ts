@@ -989,6 +989,15 @@ export const COMPONENTS: ComponentItem[] = [
     hidden: true,
   },
   {
+    name: 'Typography',
+    path: 'typography',
+    description:
+      'Styles for headings, paragraphs, lists, and other text elements.',
+    status: 'Experimental',
+    library: 'ui',
+    category: 'Data Display',
+  },
+  {
     name: 'Video Player',
     path: 'video-player',
     description: 'A custom video player with controls.',

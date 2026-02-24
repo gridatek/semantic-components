@@ -609,6 +609,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tree/tree-page'),
       },
       {
+        path: 'typography',
+        title: 'Typography - Semantic Components',
+        loadComponent: () => import('../pages/docs/typography/typography-page'),
+      },
+      {
         path: 'video-player',
         title: 'Video Player - Semantic Components',
         loadComponent: () =>
