@@ -77,6 +77,14 @@ export class ScOptFieldSlot {
   }
 
   protected onFocusChange(isFocused: boolean): void {
+    if (isFocused) {
+      // Redirect focus to the first empty slot to enforce sequential input
+      const firstEmptyIndex = this.optField.firstEmptyIndex();
+      if (firstEmptyIndex !== -1 && this.index() > firstEmptyIndex) {
+        this.optField.focusSlot(firstEmptyIndex);
+        return;
+      }
+    }
     this.focused.set(isFocused);
   }
 

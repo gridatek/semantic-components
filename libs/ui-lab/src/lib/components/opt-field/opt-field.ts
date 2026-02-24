@@ -51,10 +51,15 @@ export class ScOptField {
     const max = this.maxLength();
     const result: string[] = [];
     for (let i = 0; i < max; i++) {
-      const ch = val[i];
-      result.push(ch && ch !== ' ' ? ch : '');
+      result.push(val[i] || '');
     }
     return result;
+  });
+
+  readonly firstEmptyIndex = computed(() => {
+    const c = this.chars();
+    const idx = c.indexOf('');
+    return idx === -1 ? -1 : idx;
   });
 
   constructor() {
@@ -71,18 +76,15 @@ export class ScOptField {
   }
 
   setChar(index: number, char: string): void {
-    const max = this.maxLength();
     const current = this.value();
-    const chars: string[] = [];
+    const before = current.slice(0, index);
+    const after = current.slice(index + 1);
 
-    for (let i = 0; i < max; i++) {
-      chars.push(current[i] || ' ');
+    if (char) {
+      this.value.set((before + char + after).slice(0, this.maxLength()));
+    } else {
+      this.value.set(before + after);
     }
-
-    chars[index] = char || ' ';
-
-    // Join then trim trailing spaces
-    this.value.set(chars.join('').trimEnd());
   }
 
   focusSlot(index: number): void {
