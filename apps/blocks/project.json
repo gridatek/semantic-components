@@ -89,8 +89,8 @@
       "options": {
         "buildTarget": "blocks:build",
         "format": "json",
-        "outputPath": "apps/blocks/public/i18n",
-        "outFile": "messages.json"
+        "outputPath": "apps/blocks/src/i18n",
+        "outFile": "messages.en-US.json"
       }
     }
   }
