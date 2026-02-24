@@ -13,6 +13,47 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { provideScConfig } from './core/provide-sc-config';
+import { ScI18nConfig } from './core/locale';
+
+const loadArabicTranslations = () =>
+  import('../i18n/ar.json').then((m) => m.default);
+
+export const i18nConfig: ScI18nConfig = {
+  defaultLocaleCode: 'en-US',
+  supportedLocales: [
+    {
+      code: 'en-US',
+      language: 'en',
+      label: 'English (US)',
+      nativeLabel: 'English (US)',
+      direction: 'ltr',
+    },
+    {
+      code: 'fr-FR',
+      language: 'fr',
+      label: 'French (France)',
+      nativeLabel: 'Français (France)',
+      direction: 'ltr',
+      loadTranslations: () => import('../i18n/fr.json').then((m) => m.default),
+    },
+    {
+      code: 'ar-MA',
+      language: 'ar',
+      label: 'Arabic (Morocco)',
+      nativeLabel: 'العربية (المغرب)',
+      direction: 'rtl',
+      loadTranslations: loadArabicTranslations,
+    },
+    {
+      code: 'ar-EG',
+      language: 'ar',
+      label: 'Arabic (Egypt)',
+      nativeLabel: 'العربية (مصر)',
+      direction: 'rtl',
+      loadTranslations: loadArabicTranslations,
+    },
+  ],
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,36 +66,6 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideClientHydration(withEventReplay()),
-    provideScConfig({
-      i18n: {
-        defaultLocaleCode: 'en-US',
-        supportedLocales: [
-          {
-            code: 'en-US',
-            label: 'English (US)',
-            nativeLabel: 'English (US)',
-            direction: 'ltr',
-          },
-          {
-            code: 'fr-FR',
-            label: 'French (France)',
-            nativeLabel: 'Français (France)',
-            direction: 'ltr',
-          },
-          {
-            code: 'ar-MA',
-            label: 'Arabic (Morocco)',
-            nativeLabel: 'العربية (المغرب)',
-            direction: 'rtl',
-          },
-          {
-            code: 'ar-EG',
-            label: 'Arabic (Egypt)',
-            nativeLabel: 'العربية (مصر)',
-            direction: 'rtl',
-          },
-        ],
-      },
-    }),
+    provideScConfig({ i18n: i18nConfig }),
   ],
 };

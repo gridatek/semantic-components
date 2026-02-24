@@ -2,9 +2,11 @@ import { InjectionToken } from '@angular/core';
 
 export interface ScLocale {
   code: string;
+  language: string;
   label: string;
   nativeLabel: string;
   direction: 'ltr' | 'rtl';
+  loadTranslations?: () => Promise<Record<string, string>>;
 }
 
 export interface ScI18nConfig {

@@ -1,20 +1,14 @@
 import { loadTranslations } from '@angular/localize';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { appConfig, i18nConfig } from './app/app.config';
 import { App } from './app/app';
 
-const translationFiles: Record<string, () => Promise<Record<string, string>>> =
-  {
-    'fr-FR': () => import('./i18n/fr-FR.json').then((m) => m.default),
-    'ar-MA': () => import('./i18n/ar-MA.json').then((m) => m.default),
-    'ar-EG': () => import('./i18n/ar-EG.json').then((m) => m.default),
-  };
-
 async function main() {
-  const locale = localStorage.getItem('sc-locale') ?? 'en-US';
+  const localeCode = localStorage.getItem('sc-locale') ?? 'en-US';
+  const locale = i18nConfig.supportedLocales.find((l) => l.code === localeCode);
 
-  if (locale !== 'en-US' && translationFiles[locale]) {
-    const translations = await translationFiles[locale]();
+  if (locale?.loadTranslations) {
+    const translations = await locale.loadTranslations();
     loadTranslations(translations);
   }
 
