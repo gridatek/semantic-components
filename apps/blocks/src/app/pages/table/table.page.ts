@@ -439,124 +439,73 @@ const columnHelper = createColumnHelper<Employee>();
 const columns: ColumnDef<Employee, unknown>[] = [
   {
     id: 'select',
-    header: ({ table }) => `
-      <input type="checkbox"
-        ${table.getIsAllPageRowsSelected() ? 'checked' : ''}
-        class="h-4 w-4 rounded border-border" />
-    `,
-    cell: ({ row }) => `
-      <input type="checkbox"
-        ${row.getIsSelected() ? 'checked' : ''}
-        ${!row.getCanSelect() ? 'disabled' : ''}
-        class="h-4 w-4 rounded border-border" />
-    `,
+    header: 'Select',
     enableSorting: false,
     enableColumnFilter: false,
   },
   {
     id: 'expand',
-    header: () => '',
-    cell: ({ row }) =>
-      row.getCanExpand()
-        ? `<button class="cursor-pointer p-1">${row.getIsExpanded() ? '▼' : '▶'}</button>`
-        : '',
+    header: '',
     enableSorting: false,
     enableColumnFilter: false,
   },
   columnHelper.accessor('id', {
     header: 'ID',
-    cell: (info) => info.getValue(),
     enableColumnFilter: false,
   }),
   columnHelper.accessor('firstName', {
     header: 'First Name',
-    cell: (info) => info.getValue(),
     enableSorting: true,
     enableColumnFilter: true,
   }),
   columnHelper.accessor('lastName', {
     header: 'Last Name',
-    cell: (info) => info.getValue(),
     enableSorting: true,
     enableColumnFilter: true,
   }),
   columnHelper.accessor('email', {
     header: 'Email',
-    cell: (info) => info.getValue(),
     enableSorting: true,
     enableColumnFilter: false,
   }),
   columnHelper.accessor('age', {
     header: 'Age',
-    cell: (info) => info.getValue(),
     enableSorting: true,
     enableColumnFilter: true,
     filterFn: 'inNumberRange',
   }),
   columnHelper.accessor('department', {
     header: 'Department',
-    cell: (info) => info.getValue(),
     enableSorting: true,
     enableColumnFilter: true,
     enableGrouping: true,
   }),
   columnHelper.accessor('role', {
     header: 'Role',
-    cell: (info) => info.getValue(),
     enableSorting: true,
     enableColumnFilter: false,
   }),
   columnHelper.accessor('salary', {
     header: 'Salary',
-    cell: (info) =>
-      new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 0,
-      }).format(info.getValue()),
     enableSorting: true,
     enableColumnFilter: false,
     aggregationFn: 'mean',
-    aggregatedCell: (info) =>
-      `Avg: ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(info.getValue() as number)}`,
   }),
   columnHelper.accessor('startDate', {
     header: 'Start Date',
-    cell: (info) => info.getValue(),
     enableSorting: true,
     enableColumnFilter: false,
   }),
   columnHelper.accessor('status', {
     header: 'Status',
-    cell: (info) => {
-      const status = info.getValue();
-      const colors: Record<string, string> = {
-        active: 'bg-green-100 text-green-800',
-        inactive: 'bg-red-100 text-red-800',
-        'on-leave': 'bg-yellow-100 text-yellow-800',
-      };
-      return `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[status]}">${status}</span>`;
-    },
     enableSorting: true,
     enableColumnFilter: true,
   }),
   columnHelper.accessor('performanceScore', {
     header: 'Performance',
-    cell: (info) => {
-      const score = info.getValue();
-      const width = score;
-      const color =
-        score >= 90
-          ? 'bg-green-500'
-          : score >= 75
-            ? 'bg-yellow-500'
-            : 'bg-red-500';
-      return `<div class="flex items-center gap-2"><div class="h-2 w-16 rounded-full bg-muted"><div class="h-2 rounded-full ${color}" style="width: ${width}%"></div></div><span class="text-sm">${score}</span></div>`;
-    },
     enableSorting: true,
     enableColumnFilter: false,
     aggregationFn: 'mean',
-    aggregatedCell: (info) => `Avg: ${Math.round(info.getValue() as number)}`,
   }),
 ];
 
