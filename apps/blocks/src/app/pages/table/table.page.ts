@@ -29,408 +29,439 @@ import {
 
 interface User {
   id: number;
+  username: string;
   firstName: string;
   lastName: string;
   email: string;
-  age: number;
-  department: string;
-  role: string;
-  salary: number;
-  startDate: string;
-  status: 'active' | 'inactive' | 'on-leave';
-  performanceScore: number;
+  role: 'admin' | 'editor' | 'viewer';
+  plan: 'free' | 'pro' | 'enterprise';
+  status: 'active' | 'inactive' | 'suspended';
+  joinedAt: string;
+  lastLoginAt: string;
+  storageUsed: number;
+  apiCalls: number;
 }
 
 const USERS: User[] = [
   {
     id: 1,
+    username: 'alice_j',
     firstName: 'Alice',
     lastName: 'Johnson',
     email: 'alice.johnson@example.com',
-    age: 32,
-    department: 'Engineering',
-    role: 'Senior Developer',
-    salary: 120000,
-    startDate: '2019-03-15',
+    role: 'admin',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 92,
+    joinedAt: '2022-01-15',
+    lastLoginAt: '2026-02-25',
+    storageUsed: 4800,
+    apiCalls: 12450,
   },
   {
     id: 2,
+    username: 'bob_s',
     firstName: 'Bob',
     lastName: 'Smith',
     email: 'bob.smith@example.com',
-    age: 28,
-    department: 'Engineering',
-    role: 'Junior Developer',
-    salary: 75000,
-    startDate: '2021-07-01',
+    role: 'editor',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 78,
+    joinedAt: '2022-03-20',
+    lastLoginAt: '2026-02-24',
+    storageUsed: 2100,
+    apiCalls: 8320,
   },
   {
     id: 3,
+    username: 'carol_w',
     firstName: 'Carol',
     lastName: 'Williams',
     email: 'carol.williams@example.com',
-    age: 45,
-    department: 'Marketing',
-    role: 'Marketing Director',
-    salary: 140000,
-    startDate: '2015-01-10',
+    role: 'viewer',
+    plan: 'free',
     status: 'active',
-    performanceScore: 95,
+    joinedAt: '2022-06-10',
+    lastLoginAt: '2026-02-20',
+    storageUsed: 340,
+    apiCalls: 1200,
   },
   {
     id: 4,
+    username: 'david_b',
     firstName: 'David',
     lastName: 'Brown',
     email: 'david.brown@example.com',
-    age: 36,
-    department: 'Sales',
-    role: 'Sales Manager',
-    salary: 110000,
-    startDate: '2018-06-20',
+    role: 'editor',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 88,
+    joinedAt: '2022-08-05',
+    lastLoginAt: '2026-02-26',
+    storageUsed: 3200,
+    apiCalls: 9540,
   },
   {
     id: 5,
+    username: 'eve_d',
     firstName: 'Eve',
     lastName: 'Davis',
     email: 'eve.davis@example.com',
-    age: 29,
-    department: 'Engineering',
-    role: 'Mid Developer',
-    salary: 95000,
-    startDate: '2020-09-12',
-    status: 'on-leave',
-    performanceScore: 85,
+    role: 'viewer',
+    plan: 'free',
+    status: 'suspended',
+    joinedAt: '2022-09-12',
+    lastLoginAt: '2025-11-03',
+    storageUsed: 120,
+    apiCalls: 450,
   },
   {
     id: 6,
+    username: 'frank_m',
     firstName: 'Frank',
     lastName: 'Miller',
     email: 'frank.miller@example.com',
-    age: 52,
-    department: 'HR',
-    role: 'HR Director',
-    salary: 130000,
-    startDate: '2012-04-05',
+    role: 'admin',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 90,
+    joinedAt: '2022-02-28',
+    lastLoginAt: '2026-02-26',
+    storageUsed: 7600,
+    apiCalls: 24100,
   },
   {
     id: 7,
+    username: 'grace_w',
     firstName: 'Grace',
     lastName: 'Wilson',
     email: 'grace.wilson@example.com',
-    age: 26,
-    department: 'Design',
-    role: 'UI Designer',
-    salary: 80000,
-    startDate: '2022-01-15',
+    role: 'editor',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 82,
+    joinedAt: '2022-11-01',
+    lastLoginAt: '2026-02-23',
+    storageUsed: 1800,
+    apiCalls: 6700,
   },
   {
     id: 8,
+    username: 'henry_m',
     firstName: 'Henry',
     lastName: 'Moore',
     email: 'henry.moore@example.com',
-    age: 41,
-    department: 'Engineering',
-    role: 'Tech Lead',
-    salary: 150000,
-    startDate: '2016-08-30',
-    status: 'active',
-    performanceScore: 97,
+    role: 'viewer',
+    plan: 'free',
+    status: 'inactive',
+    joinedAt: '2023-01-18',
+    lastLoginAt: '2025-08-14',
+    storageUsed: 80,
+    apiCalls: 210,
   },
   {
     id: 9,
+    username: 'ivy_t',
     firstName: 'Ivy',
     lastName: 'Taylor',
     email: 'ivy.taylor@example.com',
-    age: 33,
-    department: 'Marketing',
-    role: 'Content Strategist',
-    salary: 85000,
-    startDate: '2019-11-20',
+    role: 'editor',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 79,
+    joinedAt: '2022-05-22',
+    lastLoginAt: '2026-02-25',
+    storageUsed: 5100,
+    apiCalls: 15800,
   },
   {
     id: 10,
+    username: 'jack_a',
     firstName: 'Jack',
     lastName: 'Anderson',
     email: 'jack.anderson@example.com',
-    age: 38,
-    department: 'Sales',
-    role: 'Account Executive',
-    salary: 95000,
-    startDate: '2017-05-14',
+    role: 'viewer',
+    plan: 'free',
     status: 'inactive',
-    performanceScore: 71,
+    joinedAt: '2023-03-14',
+    lastLoginAt: '2025-06-20',
+    storageUsed: 50,
+    apiCalls: 130,
   },
   {
     id: 11,
+    username: 'karen_t',
     firstName: 'Karen',
     lastName: 'Thomas',
     email: 'karen.thomas@example.com',
-    age: 31,
-    department: 'Engineering',
-    role: 'DevOps Engineer',
-    salary: 115000,
-    startDate: '2020-02-28',
+    role: 'admin',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 89,
+    joinedAt: '2022-04-10',
+    lastLoginAt: '2026-02-26',
+    storageUsed: 6200,
+    apiCalls: 18900,
   },
   {
     id: 12,
+    username: 'leo_j',
     firstName: 'Leo',
     lastName: 'Jackson',
     email: 'leo.jackson@example.com',
-    age: 27,
-    department: 'Design',
-    role: 'UX Researcher',
-    salary: 78000,
-    startDate: '2022-06-10',
+    role: 'editor',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 76,
+    joinedAt: '2023-02-05',
+    lastLoginAt: '2026-02-22',
+    storageUsed: 1400,
+    apiCalls: 5200,
   },
   {
     id: 13,
+    username: 'mia_w',
     firstName: 'Mia',
     lastName: 'White',
     email: 'mia.white@example.com',
-    age: 44,
-    department: 'Finance',
-    role: 'CFO',
-    salary: 180000,
-    startDate: '2014-03-01',
+    role: 'viewer',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 96,
+    joinedAt: '2023-04-19',
+    lastLoginAt: '2026-02-21',
+    storageUsed: 920,
+    apiCalls: 3100,
   },
   {
     id: 14,
+    username: 'noah_h',
     firstName: 'Noah',
     lastName: 'Harris',
     email: 'noah.harris@example.com',
-    age: 30,
-    department: 'Engineering',
-    role: 'Backend Developer',
-    salary: 105000,
-    startDate: '2020-10-05',
+    role: 'editor',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 84,
+    joinedAt: '2022-07-30',
+    lastLoginAt: '2026-02-26',
+    storageUsed: 4500,
+    apiCalls: 14200,
   },
   {
     id: 15,
+    username: 'olivia_m',
     firstName: 'Olivia',
     lastName: 'Martin',
     email: 'olivia.martin@example.com',
-    age: 35,
-    department: 'HR',
-    role: 'Recruiter',
-    salary: 72000,
-    startDate: '2019-07-22',
+    role: 'viewer',
+    plan: 'free',
     status: 'active',
-    performanceScore: 81,
+    joinedAt: '2023-06-12',
+    lastLoginAt: '2026-02-19',
+    storageUsed: 280,
+    apiCalls: 890,
   },
   {
     id: 16,
+    username: 'paul_g',
     firstName: 'Paul',
     lastName: 'Garcia',
     email: 'paul.garcia@example.com',
-    age: 48,
-    department: 'Sales',
-    role: 'VP Sales',
-    salary: 160000,
-    startDate: '2013-09-15',
+    role: 'admin',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 93,
+    joinedAt: '2022-01-03',
+    lastLoginAt: '2026-02-26',
+    storageUsed: 8900,
+    apiCalls: 31200,
   },
   {
     id: 17,
+    username: 'quinn_m',
     firstName: 'Quinn',
     lastName: 'Martinez',
     email: 'quinn.martinez@example.com',
-    age: 25,
-    department: 'Engineering',
-    role: 'Intern',
-    salary: 50000,
-    startDate: '2023-01-09',
+    role: 'viewer',
+    plan: 'free',
     status: 'active',
-    performanceScore: 74,
+    joinedAt: '2023-08-25',
+    lastLoginAt: '2026-02-18',
+    storageUsed: 150,
+    apiCalls: 520,
   },
   {
     id: 18,
+    username: 'rachel_r',
     firstName: 'Rachel',
     lastName: 'Robinson',
     email: 'rachel.robinson@example.com',
-    age: 39,
-    department: 'Marketing',
-    role: 'SEO Specialist',
-    salary: 88000,
-    startDate: '2018-02-14',
-    status: 'on-leave',
-    performanceScore: 80,
+    role: 'editor',
+    plan: 'pro',
+    status: 'suspended',
+    joinedAt: '2022-10-08',
+    lastLoginAt: '2025-12-01',
+    storageUsed: 1600,
+    apiCalls: 4800,
   },
   {
     id: 19,
+    username: 'sam_c',
     firstName: 'Sam',
     lastName: 'Clark',
     email: 'sam.clark@example.com',
-    age: 34,
-    department: 'Finance',
-    role: 'Accountant',
-    salary: 82000,
-    startDate: '2019-05-30',
+    role: 'viewer',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 77,
+    joinedAt: '2023-05-16',
+    lastLoginAt: '2026-02-24',
+    storageUsed: 750,
+    apiCalls: 2600,
   },
   {
     id: 20,
+    username: 'tina_r',
     firstName: 'Tina',
     lastName: 'Rodriguez',
     email: 'tina.rodriguez@example.com',
-    age: 42,
-    department: 'Engineering',
-    role: 'QA Lead',
-    salary: 110000,
-    startDate: '2016-11-18',
+    role: 'editor',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 91,
+    joinedAt: '2022-09-01',
+    lastLoginAt: '2026-02-25',
+    storageUsed: 3800,
+    apiCalls: 11700,
   },
   {
     id: 21,
+    username: 'uma_l',
     firstName: 'Uma',
     lastName: 'Lee',
     email: 'uma.lee@example.com',
-    age: 29,
-    department: 'Design',
-    role: 'Graphic Designer',
-    salary: 75000,
-    startDate: '2021-03-25',
+    role: 'viewer',
+    plan: 'free',
     status: 'active',
-    performanceScore: 83,
+    joinedAt: '2023-07-20',
+    lastLoginAt: '2026-02-17',
+    storageUsed: 200,
+    apiCalls: 680,
   },
   {
     id: 22,
+    username: 'victor_w',
     firstName: 'Victor',
     lastName: 'Walker',
     email: 'victor.walker@example.com',
-    age: 37,
-    department: 'Engineering',
-    role: 'Security Engineer',
-    salary: 135000,
-    startDate: '2017-08-07',
+    role: 'admin',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 94,
+    joinedAt: '2022-03-15',
+    lastLoginAt: '2026-02-26',
+    storageUsed: 7100,
+    apiCalls: 22500,
   },
   {
     id: 23,
+    username: 'wendy_h',
     firstName: 'Wendy',
     lastName: 'Hall',
     email: 'wendy.hall@example.com',
-    age: 50,
-    department: 'HR',
-    role: 'VP People',
-    salary: 155000,
-    startDate: '2013-01-20',
+    role: 'editor',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 92,
+    joinedAt: '2022-12-10',
+    lastLoginAt: '2026-02-23',
+    storageUsed: 2400,
+    apiCalls: 7800,
   },
   {
     id: 24,
+    username: 'xander_a',
     firstName: 'Xander',
     lastName: 'Allen',
     email: 'xander.allen@example.com',
-    age: 26,
-    department: 'Sales',
-    role: 'SDR',
-    salary: 60000,
-    startDate: '2022-09-01',
-    status: 'active',
-    performanceScore: 69,
+    role: 'viewer',
+    plan: 'free',
+    status: 'inactive',
+    joinedAt: '2023-09-05',
+    lastLoginAt: '2025-10-12',
+    storageUsed: 30,
+    apiCalls: 90,
   },
   {
     id: 25,
+    username: 'yara_y',
     firstName: 'Yara',
     lastName: 'Young',
     email: 'yara.young@example.com',
-    age: 33,
-    department: 'Marketing',
-    role: 'Brand Manager',
-    salary: 98000,
-    startDate: '2019-04-12',
+    role: 'editor',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 87,
+    joinedAt: '2023-01-28',
+    lastLoginAt: '2026-02-22',
+    storageUsed: 1900,
+    apiCalls: 6100,
   },
   {
     id: 26,
+    username: 'zane_k',
     firstName: 'Zane',
     lastName: 'King',
     email: 'zane.king@example.com',
-    age: 40,
-    department: 'Engineering',
-    role: 'Staff Engineer',
-    salary: 165000,
-    startDate: '2015-06-01',
+    role: 'admin',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 98,
+    joinedAt: '2022-02-14',
+    lastLoginAt: '2026-02-26',
+    storageUsed: 9200,
+    apiCalls: 28700,
   },
   {
     id: 27,
+    username: 'amber_w',
     firstName: 'Amber',
     lastName: 'Wright',
     email: 'amber.wright@example.com',
-    age: 31,
-    department: 'Finance',
-    role: 'Financial Analyst',
-    salary: 90000,
-    startDate: '2020-08-15',
+    role: 'viewer',
+    plan: 'pro',
     status: 'inactive',
-    performanceScore: 75,
+    joinedAt: '2023-04-02',
+    lastLoginAt: '2025-09-18',
+    storageUsed: 410,
+    apiCalls: 1500,
   },
   {
     id: 28,
+    username: 'blake_l',
     firstName: 'Blake',
     lastName: 'Lopez',
     email: 'blake.lopez@example.com',
-    age: 28,
-    department: 'Design',
-    role: 'Motion Designer',
-    salary: 82000,
-    startDate: '2021-11-03',
+    role: 'editor',
+    plan: 'pro',
     status: 'active',
-    performanceScore: 86,
+    joinedAt: '2023-03-08',
+    lastLoginAt: '2026-02-21',
+    storageUsed: 1100,
+    apiCalls: 4200,
   },
   {
     id: 29,
+    username: 'chloe_h',
     firstName: 'Chloe',
     lastName: 'Hill',
     email: 'chloe.hill@example.com',
-    age: 46,
-    department: 'Engineering',
-    role: 'Engineering Manager',
-    salary: 170000,
-    startDate: '2014-07-20',
+    role: 'admin',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 95,
+    joinedAt: '2022-06-25',
+    lastLoginAt: '2026-02-26',
+    storageUsed: 6800,
+    apiCalls: 20300,
   },
   {
     id: 30,
+    username: 'derek_s',
     firstName: 'Derek',
     lastName: 'Scott',
     email: 'derek.scott@example.com',
-    age: 35,
-    department: 'Sales',
-    role: 'Sales Engineer',
-    salary: 115000,
-    startDate: '2018-10-08',
+    role: 'editor',
+    plan: 'enterprise',
     status: 'active',
-    performanceScore: 88,
+    joinedAt: '2022-11-18',
+    lastLoginAt: '2026-02-24',
+    storageUsed: 4100,
+    apiCalls: 13600,
   },
 ];
 
@@ -454,6 +485,11 @@ const columns: ColumnDef<User, any>[] = [
     header: 'ID',
     enableColumnFilter: false,
   }),
+  columnHelper.accessor('username', {
+    header: 'Username',
+    enableSorting: true,
+    enableColumnFilter: true,
+  }),
   columnHelper.accessor('firstName', {
     header: 'First Name',
     enableSorting: true,
@@ -469,44 +505,44 @@ const columns: ColumnDef<User, any>[] = [
     enableSorting: true,
     enableColumnFilter: false,
   }),
-  columnHelper.accessor('age', {
-    header: 'Age',
-    enableSorting: true,
-    enableColumnFilter: true,
-    filterFn: 'inNumberRange',
-  }),
-  columnHelper.accessor('department', {
-    header: 'Department',
+  columnHelper.accessor('role', {
+    header: 'Role',
     enableSorting: true,
     enableColumnFilter: true,
     enableGrouping: true,
   }),
-  columnHelper.accessor('role', {
-    header: 'Role',
+  columnHelper.accessor('plan', {
+    header: 'Plan',
     enableSorting: true,
-    enableColumnFilter: false,
-  }),
-  columnHelper.accessor('salary', {
-    header: 'Salary',
-    enableSorting: true,
-    enableColumnFilter: false,
-    aggregationFn: 'mean',
-  }),
-  columnHelper.accessor('startDate', {
-    header: 'Start Date',
-    enableSorting: true,
-    enableColumnFilter: false,
+    enableColumnFilter: true,
+    enableGrouping: true,
   }),
   columnHelper.accessor('status', {
     header: 'Status',
     enableSorting: true,
     enableColumnFilter: true,
   }),
-  columnHelper.accessor('performanceScore', {
-    header: 'Performance',
+  columnHelper.accessor('joinedAt', {
+    header: 'Joined',
+    enableSorting: true,
+    enableColumnFilter: false,
+  }),
+  columnHelper.accessor('lastLoginAt', {
+    header: 'Last Login',
+    enableSorting: true,
+    enableColumnFilter: false,
+  }),
+  columnHelper.accessor('storageUsed', {
+    header: 'Storage (MB)',
     enableSorting: true,
     enableColumnFilter: false,
     aggregationFn: 'mean',
+  }),
+  columnHelper.accessor('apiCalls', {
+    header: 'API Calls',
+    enableSorting: true,
+    enableColumnFilter: false,
+    aggregationFn: 'sum',
   }),
 ];
 
@@ -553,12 +589,20 @@ const columns: ColumnDef<User, any>[] = [
         <div class="flex items-center gap-2">
           <span class="text-sm font-medium">Group by:</span>
           <button
-            (click)="toggleGrouping('department')"
+            (click)="toggleGrouping('role')"
             class="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-accent"
-            [class.bg-primary]="isGroupedBy('department')"
-            [class.text-primary-foreground]="isGroupedBy('department')"
+            [class.bg-primary]="isGroupedBy('role')"
+            [class.text-primary-foreground]="isGroupedBy('role')"
           >
-            Department
+            Role
+          </button>
+          <button
+            (click)="toggleGrouping('plan')"
+            class="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-accent"
+            [class.bg-primary]="isGroupedBy('plan')"
+            [class.text-primary-foreground]="isGroupedBy('plan')"
+          >
+            Plan
           </button>
         </div>
 
@@ -676,10 +720,13 @@ const columns: ColumnDef<User, any>[] = [
                       </button>
                     } @else if (cell.getIsAggregated()) {
                       <span class="text-muted-foreground">
-                        @if (cell.column.id === 'salary') {
-                          Avg: {{ formatCurrency(asNumber(cell.getValue())) }}
-                        } @else if (cell.column.id === 'performanceScore') {
-                          Avg: {{ roundNumber(asNumber(cell.getValue())) }}
+                        @if (cell.column.id === 'storageUsed') {
+                          Avg:
+                          {{ formatNumber(asNumber(cell.getValue())) }}
+                          MB
+                        } @else if (cell.column.id === 'apiCalls') {
+                          Total:
+                          {{ formatNumber(asNumber(cell.getValue())) }}
                         } @else {
                           {{ cell.getValue() }}
                         }
@@ -697,7 +744,6 @@ const columns: ColumnDef<User, any>[] = [
                         class="h-7 w-full rounded border border-input bg-transparent px-2 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                       />
                     } @else {
-                      <!-- Select column -->
                       @if (cell.column.id === 'select') {
                         <input
                           type="checkbox"
@@ -715,19 +761,33 @@ const columns: ColumnDef<User, any>[] = [
                             {{ row.getIsExpanded() ? '▼' : '▶' }}
                           </button>
                         }
-                      } @else if (cell.column.id === 'salary') {
+                      } @else if (cell.column.id === 'role') {
                         <span
-                          (dblclick)="
-                            canEditColumn(cell.column.id)
-                              ? startEdit(
-                                  row.id,
-                                  cell.column.id,
-                                  cell.getValue()
-                                )
-                              : null
+                          class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
+                          [class.bg-purple-100]="cell.getValue() === 'admin'"
+                          [class.text-purple-800]="cell.getValue() === 'admin'"
+                          [class.bg-blue-100]="cell.getValue() === 'editor'"
+                          [class.text-blue-800]="cell.getValue() === 'editor'"
+                          [class.bg-gray-100]="cell.getValue() === 'viewer'"
+                          [class.text-gray-800]="cell.getValue() === 'viewer'"
+                        >
+                          {{ cell.getValue() }}
+                        </span>
+                      } @else if (cell.column.id === 'plan') {
+                        <span
+                          class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
+                          [class.bg-gray-100]="cell.getValue() === 'free'"
+                          [class.text-gray-700]="cell.getValue() === 'free'"
+                          [class.bg-blue-100]="cell.getValue() === 'pro'"
+                          [class.text-blue-700]="cell.getValue() === 'pro'"
+                          [class.bg-amber-100]="
+                            cell.getValue() === 'enterprise'
+                          "
+                          [class.text-amber-700]="
+                            cell.getValue() === 'enterprise'
                           "
                         >
-                          {{ formatCurrency(asNumber(cell.getValue())) }}
+                          {{ cell.getValue() }}
                         </span>
                       } @else if (cell.column.id === 'status') {
                         <span
@@ -736,33 +796,41 @@ const columns: ColumnDef<User, any>[] = [
                           [class.text-green-800]="cell.getValue() === 'active'"
                           [class.bg-red-100]="cell.getValue() === 'inactive'"
                           [class.text-red-800]="cell.getValue() === 'inactive'"
-                          [class.bg-yellow-100]="cell.getValue() === 'on-leave'"
+                          [class.bg-yellow-100]="
+                            cell.getValue() === 'suspended'
+                          "
                           [class.text-yellow-800]="
-                            cell.getValue() === 'on-leave'
+                            cell.getValue() === 'suspended'
                           "
                         >
                           {{ cell.getValue() }}
                         </span>
-                      } @else if (cell.column.id === 'performanceScore') {
+                      } @else if (cell.column.id === 'storageUsed') {
                         <div class="flex items-center gap-2">
                           <div class="h-2 w-16 rounded-full bg-muted">
                             <div
                               class="h-2 rounded-full"
                               [class.bg-green-500]="
-                                asNumber(cell.getValue()) >= 90
+                                asNumber(cell.getValue()) < 2000
                               "
                               [class.bg-yellow-500]="
-                                asNumber(cell.getValue()) >= 75 &&
-                                asNumber(cell.getValue()) < 90
+                                asNumber(cell.getValue()) >= 2000 &&
+                                asNumber(cell.getValue()) < 5000
                               "
                               [class.bg-red-500]="
-                                asNumber(cell.getValue()) < 75
+                                asNumber(cell.getValue()) >= 5000
                               "
-                              [style.width.%]="asNumber(cell.getValue())"
+                              [style.width.%]="
+                                storagePercent(asNumber(cell.getValue()))
+                              "
                             ></div>
                           </div>
-                          <span class="text-sm">{{ cell.getValue() }}</span>
+                          <span class="text-sm">
+                            {{ formatNumber(asNumber(cell.getValue())) }}
+                          </span>
                         </div>
+                      } @else if (cell.column.id === 'apiCalls') {
+                        {{ formatNumber(asNumber(cell.getValue())) }}
                       } @else {
                         <span
                           (dblclick)="
@@ -794,6 +862,10 @@ const columns: ColumnDef<User, any>[] = [
                   <td [attr.colSpan]="row.getVisibleCells().length" class="p-4">
                     <div class="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
                       <div>
+                        <span class="font-medium">Username:</span>
+                        {{ row.original.username }}
+                      </div>
+                      <div>
                         <span class="font-medium">Full Name:</span>
                         {{ row.original.firstName }}
                         {{ row.original.lastName }}
@@ -803,28 +875,32 @@ const columns: ColumnDef<User, any>[] = [
                         {{ row.original.email }}
                       </div>
                       <div>
-                        <span class="font-medium">Department:</span>
-                        {{ row.original.department }}
-                      </div>
-                      <div>
                         <span class="font-medium">Role:</span>
                         {{ row.original.role }}
                       </div>
                       <div>
-                        <span class="font-medium">Salary:</span>
-                        {{ formatCurrency(row.original.salary) }}
-                      </div>
-                      <div>
-                        <span class="font-medium">Start Date:</span>
-                        {{ row.original.startDate }}
+                        <span class="font-medium">Plan:</span>
+                        {{ row.original.plan }}
                       </div>
                       <div>
                         <span class="font-medium">Status:</span>
                         {{ row.original.status }}
                       </div>
                       <div>
-                        <span class="font-medium">Performance:</span>
-                        {{ row.original.performanceScore }}/100
+                        <span class="font-medium">Joined:</span>
+                        {{ row.original.joinedAt }}
+                      </div>
+                      <div>
+                        <span class="font-medium">Last Login:</span>
+                        {{ row.original.lastLoginAt }}
+                      </div>
+                      <div>
+                        <span class="font-medium">Storage:</span>
+                        {{ formatNumber(row.original.storageUsed) }} MB
+                      </div>
+                      <div>
+                        <span class="font-medium">API Calls:</span>
+                        {{ formatNumber(row.original.apiCalls) }}
                       </div>
                     </div>
                   </td>
@@ -908,16 +984,14 @@ const columns: ColumnDef<User, any>[] = [
           Pin ID Left
         </button>
         <button
-          (click)="toggleColumnPin('performanceScore', 'right')"
+          (click)="toggleColumnPin('apiCalls', 'right')"
           class="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-accent"
-          [class.bg-primary]="
-            columnPinning().right?.includes('performanceScore')
-          "
+          [class.bg-primary]="columnPinning().right?.includes('apiCalls')"
           [class.text-primary-foreground]="
-            columnPinning().right?.includes('performanceScore')
+            columnPinning().right?.includes('apiCalls')
           "
         >
-          Pin Performance Right
+          Pin API Calls Right
         </button>
         <button
           (click)="resetColumnPinning()"
@@ -935,16 +1009,20 @@ export default class TablePage {
   readonly globalFilter = signal('');
   readonly columnVisibility = signal<VisibilityState>({});
   readonly rowSelection = signal<RowSelectionState>({});
-  readonly pagination = signal<PaginationState>({ pageIndex: 0, pageSize: 10 });
+  readonly pagination = signal<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
   readonly expanded = signal<ExpandedState>({});
   readonly grouping = signal<GroupingState>([]);
   readonly columnPinning = signal<ColumnPinningState>({});
   readonly rowPinning = signal<RowPinningState>({ top: [], bottom: [] });
   readonly data = signal<User[]>(USERS);
 
-  readonly editingCell = signal<{ rowId: string; columnId: string } | null>(
-    null,
-  );
+  readonly editingCell = signal<{
+    rowId: string;
+    columnId: string;
+  } | null>(null);
   readonly editValue = signal<string>('');
 
   readonly columns = columns;
@@ -1044,8 +1122,12 @@ export default class TablePage {
     return Number(value) || 0;
   }
 
-  roundNumber(value: number): number {
-    return Math.round(value);
+  formatNumber(value: number): string {
+    return new Intl.NumberFormat('en-US').format(Math.round(value));
+  }
+
+  storagePercent(value: number): number {
+    return Math.min((value / 10000) * 100, 100);
   }
 
   getColumnFilterValue(columnId: string): string {
@@ -1069,7 +1151,10 @@ export default class TablePage {
     this.columnPinning.update((prev) => {
       const pinned = prev[position] ?? [];
       if (pinned.includes(columnId)) {
-        return { ...prev, [position]: pinned.filter((id) => id !== columnId) };
+        return {
+          ...prev,
+          [position]: pinned.filter((id) => id !== columnId),
+        };
       }
       return { ...prev, [position]: [...pinned, columnId] };
     });
@@ -1080,7 +1165,7 @@ export default class TablePage {
   }
 
   canEditColumn(columnId: string): boolean {
-    return columnId === 'firstName';
+    return columnId === 'username';
   }
 
   isEditing(rowId: string, columnId: string): boolean {
@@ -1109,13 +1194,5 @@ export default class TablePage {
 
   cancelEdit(): void {
     this.editingCell.set(null);
-  }
-
-  formatCurrency(value: number): string {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-    }).format(value);
   }
 }
