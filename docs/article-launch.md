@@ -4,6 +4,7 @@ After waiting so long for an Angular UI library that actually met my needs, I de
 
 **GitHub:** https://github.com/gridatek/semantic-components
 **Package:** `@semantic-components/ui`
+**Website:** `https://semantic-components.com`
 
 ---
 
