@@ -1,7 +1,7 @@
 import { booleanAttribute, Directive, input } from '@angular/core';
 
 @Directive({
-  selector: '[appButtonPattern]',
+  selector: '[scButtonPattern]',
   host: {
     '[attr.role]': "enabled() ? 'button' : null",
     '[attr.tabindex]': 'enabled() ? 0 : null',
@@ -9,9 +9,9 @@ import { booleanAttribute, Directive, input } from '@angular/core';
     '(keydown.space)': 'onKeydown($event)',
   },
 })
-export class ButtonPattern {
+export class ScButtonPattern {
   readonly enabled = input(true, {
-    alias: 'appButtonPattern',
+    alias: 'scButtonPattern',
     transform: booleanAttribute,
   });
 

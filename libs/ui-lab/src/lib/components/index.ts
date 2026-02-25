@@ -1,6 +1,7 @@
 export * from './animated-counter';
 export * from './audio-player';
 export * from './barcode-scanner';
+export * from './button-pattern';
 export * from './chart';
 export * from './native-checkbox';
 export * from './color-picker';

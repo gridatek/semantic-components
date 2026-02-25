@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonPattern } from './button-pattern';
+import { ScButtonPattern } from '@semantic-components/ui-lab';
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -551,7 +551,7 @@ const columns: ColumnDef<User, any>[] = [
   selector: 'app-table-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [FormsModule, ButtonPattern],
+  imports: [FormsModule, ScButtonPattern],
   host: { class: 'block' },
   template: `
     <div class="container mx-auto px-4 py-10">
@@ -649,7 +649,7 @@ const columns: ColumnDef<User, any>[] = [
                           class="flex items-center gap-1"
                           [class.cursor-pointer]="header.column.getCanSort()"
                           [class.select-none]="header.column.getCanSort()"
-                          [appButtonPattern]="header.column.getCanSort()"
+                          [scButtonPattern]="header.column.getCanSort()"
                           (click)="
                             header.column.getCanSort()
                               ? header.column.toggleSorting()
@@ -835,7 +835,7 @@ const columns: ColumnDef<User, any>[] = [
                         {{ formatNumber(asNumber(cell.getValue())) }}
                       } @else {
                         <span
-                          [appButtonPattern]="canEditColumn(cell.column.id)"
+                          [scButtonPattern]="canEditColumn(cell.column.id)"
                           (dblclick)="
                             canEditColumn(cell.column.id)
                               ? startEdit(
