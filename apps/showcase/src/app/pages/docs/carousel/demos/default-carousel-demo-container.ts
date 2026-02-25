@@ -71,11 +71,11 @@ import {
             }
           </div>
         </div>
-        <button scCarouselPrevious>
+        <button scCarouselPrevious class="left-2 sm:-left-12">
           <svg siChevronLeftIcon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
-        <button scCarouselNext>
+        <button scCarouselNext class="right-2 sm:-right-12">
           <svg siChevronRightIcon></svg>
           <span class="sr-only">Next slide</span>
         </button>

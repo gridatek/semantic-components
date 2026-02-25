@@ -12,6 +12,12 @@ import {
   ScCarouselPrevious,
 } from '@semantic-components/carousel';
 import {
+  ScCard,
+  ScCardDescription,
+  ScCardHeader,
+  ScCardTitle,
+} from '@semantic-components/ui';
+import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
@@ -25,6 +31,10 @@ import {
     ScCarouselItem,
     ScCarouselPrevious,
     ScCarouselNext,
+    ScCard,
+    ScCardHeader,
+    ScCardTitle,
+    ScCardDescription,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
@@ -36,22 +46,22 @@ import {
             @for (card of cards; track card.title) {
               <div scCarouselItem>
                 <div class="p-1">
-                  <div class="bg-card rounded-lg border p-6">
-                    <h4 class="font-semibold">{{ card.title }}</h4>
-                    <p class="text-muted-foreground mt-2 text-sm">
-                      {{ card.description }}
-                    </p>
+                  <div scCard size="sm">
+                    <div scCardHeader>
+                      <h4 scCardTitle>{{ card.title }}</h4>
+                      <p scCardDescription>{{ card.description }}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             }
           </div>
         </div>
-        <button scCarouselPrevious>
+        <button scCarouselPrevious class="left-2 sm:-left-12">
           <svg siChevronLeftIcon></svg>
           <span class="sr-only">Previous slide</span>
         </button>
-        <button scCarouselNext>
+        <button scCarouselNext class="right-2 sm:-right-12">
           <svg siChevronRightIcon></svg>
           <span class="sr-only">Next slide</span>
         </button>
