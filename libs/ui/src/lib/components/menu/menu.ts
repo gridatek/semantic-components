@@ -10,7 +10,7 @@ import { ScMenuPortal } from './menu-portal';
     {
       directive: Menu,
       inputs: ['id', 'wrap', 'disabled', 'typeaheadDelay', 'expansionDelay'],
-      outputs: ['onSelect'],
+      outputs: ['itemSelected'],
     },
   ],
   host: {
