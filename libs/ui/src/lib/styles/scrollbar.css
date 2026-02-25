@@ -1,10 +1,6 @@
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-  }
-
-  *:hover {
     scrollbar-color: var(--color-border) transparent;
   }
 
@@ -14,11 +10,23 @@
   }
 
   *::-webkit-scrollbar-thumb {
-    background-color: transparent;
+    background-color: var(--color-border);
     border-radius: 9999px;
   }
 
-  *:hover::-webkit-scrollbar-thumb {
+  [data-slot='scroll-area'] {
+    scrollbar-color: transparent transparent;
+  }
+
+  [data-slot='scroll-area']:hover {
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  [data-slot='scroll-area']::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  [data-slot='scroll-area']:hover::-webkit-scrollbar-thumb {
     background-color: var(--color-border);
   }
 }
