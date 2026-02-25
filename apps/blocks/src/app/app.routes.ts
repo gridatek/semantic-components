@@ -7,6 +7,10 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./pages/dashboard/dashboard.page'),
   },
   {
+    path: 'gallery',
+    loadComponent: () => import('./pages/gallery/gallery.page'),
+  },
+  {
     path: '',
     component: MainLayout,
     children: [
