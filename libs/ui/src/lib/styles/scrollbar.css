@@ -14,19 +14,19 @@
     border-radius: 9999px;
   }
 
-  [data-slot='scroll-area'] {
+  [data-slot='scroll-area'][data-show='onhover'] {
     scrollbar-color: transparent transparent;
   }
 
-  [data-slot='scroll-area']:hover {
+  [data-slot='scroll-area'][data-show='onhover']:hover {
     scrollbar-color: var(--color-border) transparent;
   }
 
-  [data-slot='scroll-area']::-webkit-scrollbar-thumb {
+  [data-slot='scroll-area'][data-show='onhover']::-webkit-scrollbar-thumb {
     background-color: transparent;
   }
 
-  [data-slot='scroll-area']:hover::-webkit-scrollbar-thumb {
+  [data-slot='scroll-area'][data-show='onhover']:hover::-webkit-scrollbar-thumb {
     background-color: var(--color-border);
   }
 }
