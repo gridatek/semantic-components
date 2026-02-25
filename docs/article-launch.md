@@ -204,17 +204,43 @@ This library makes deliberate choices that prioritize the future of Angular over
 
 ### `@semantic-components/ui` — Core Library
 
-40+ components:
+50+ components:
 
-| Category   | Components                                                                        |
-| ---------- | --------------------------------------------------------------------------------- |
-| Actions    | Button, Button Group, Link, Toggle, Toggle Group                                  |
-| Layout     | Card, Separator, Aspect Ratio, Toolbar                                            |
-| Forms      | Input, Textarea, Checkbox, Radio Group, Switch, Select, Label, Field, Input Group |
-| Overlays   | Dialog, Alert Dialog, Drawer, Sheet, Popover, Hover Card, Tooltip, Toast          |
-| Navigation | Breadcrumb, Pagination, Tabs                                                      |
-| Display    | Badge, Avatar, Skeleton, Spinner, Progress, Kbd, Empty                            |
-| Data       | Table, Accordion, Collapsible                                                     |
+| Category   | Components                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| Actions    | Button, Button Group, Link, Toggle, Toggle Group                                                        |
+| Layout     | Card, Separator, Aspect Ratio, Toolbar, Scroll Area, Typography                                         |
+| Forms      | Input, Textarea, Checkbox, Radio Group, Switch, Select, Native Select, Label, Field, Input Group, Slider, Range Slider |
+| Overlays   | Dialog, Alert Dialog, Drawer, Sheet, Popover, Hover Card, Tooltip, Toast, Backdrop                      |
+| Navigation | Breadcrumb, Pagination, Tabs, Menu, Menu Bar, Navigation Menu                                           |
+| Display    | Alert, Badge, Avatar, Skeleton, Spinner, Progress, Kbd, Empty, Item                                     |
+| Data       | Table, Accordion, Collapsible, Calendar, Date Picker, Time Picker                                       |
+| File       | File Upload                                                                                             |
+
+### `@semantic-components/ui-lab` — Experimental Library
+
+55+ components:
+
+| Category      | Components                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------- |
+| Inputs        | Combobox, Multi Select, Mention Input, Phone Input, Search Input, Tag Input, Number Field, Opt Field, Password Field |
+| Date & Time   | Date Range Picker, Time Picker Clock, Countdown, Timezone                                         |
+| Data Display  | Data Table, Chart, Diff Viewer, Org Chart, Stat Card, Timeline, Tree, Virtual List                |
+| Media         | Audio Player, Video Player, Image Annotator, Image Compare, Image Cropper, Lightbox, PDF Viewer   |
+| Overlays      | Command, Context Menu, Spotlight, Notification Center                                             |
+| Navigation    | Dock, Navbar, Sidebar, Stepper, Tour Guide                                                        |
+| Layout        | Resizable, Masonry Grid, Infinite Scroll, Kanban Board, Sortable List, Transfer List, Split Button |
+| Interaction   | Color Picker, Emoji Picker, Rating Field, Signature Pad, Barcode Scanner, QR Code                |
+| Effects       | Animated Counter, Confetti, Marquee                                                               |
+| Utilities     | Copy Button, Language Switcher, Speed Dial, Theme Toggle, Native Checkbox                         |
+
+### Additional Libraries
+
+| Library                        | Components             |
+| ------------------------------ | ---------------------- |
+| `@semantic-components/carousel` | Carousel               |
+| `@semantic-components/code`     | Code Editor, Code Viewer |
+| `@semantic-components/editor`   | Editor                 |
 
 ---
 
