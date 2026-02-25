@@ -11,6 +11,10 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./pages/gallery/gallery.page'),
   },
   {
+    path: 'table',
+    loadComponent: () => import('./pages/table/table.page'),
+  },
+  {
     path: '',
     component: MainLayout,
     children: [

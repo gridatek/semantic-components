@@ -22,7 +22,7 @@
     "@angular/ssr": "^21.1.5",
     "@js-temporal/polyfill": "^0.5.1",
     "@semantic-icons/lucide-icons": "^0.58.0",
-    "@tanstack/react-table": "^8.21.3",
+    "@tanstack/angular-table": "^8.21.3",
     "@tiptap/core": "^3.18.0",
     "@tiptap/extension-placeholder": "^3.18.0",
     "@tiptap/extension-text-align": "^3.18.0",
