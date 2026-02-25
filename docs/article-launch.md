@@ -2,8 +2,8 @@
 
 After waiting so long for an Angular UI library that actually met my needs, I decided to stop waiting and build my own. The result is **Semantic Components** — an open-source Angular UI library built on Tailwind CSS, Angular CDK, and Angular Aria, heavily inspired by [shadcn/ui](https://ui.shadcn.com).
 
-**GitHub:** https://github.com/gridatek/semantic-components
-**Package:** `@semantic-components/ui`
+**GitHub:** https://github.com/gridatek/semantic-components  
+**Package:** `@semantic-components/ui`  
 **Website:** `https://semantic-components.com`
 
 ---
