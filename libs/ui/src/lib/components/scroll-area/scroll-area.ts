@@ -11,7 +11,6 @@ import { cn } from '../../utils';
   selector: 'div[scScrollArea]',
   host: {
     'data-slot': 'scroll-area',
-    '[attr.data-show]': 'show()',
     '[class]': 'class()',
   },
   template: `
@@ -22,7 +21,6 @@ import { cn } from '../../utils';
 })
 export class ScScrollArea {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly show = input<'always' | 'onhover'>('onhover');
 
   protected readonly class = computed(() =>
     cn('overflow-auto', this.classInput()),
