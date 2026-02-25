@@ -1,3 +1,4 @@
 @import url('@angular/cdk/overlay-prebuilt.css');
 
 @import './shadcn.css';
+@import './scrollbar.css';
