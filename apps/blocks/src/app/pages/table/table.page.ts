@@ -27,7 +27,7 @@ import {
   getSortedRowModel,
 } from '@tanstack/angular-table';
 
-interface Employee {
+interface User {
   id: number;
   firstName: string;
   lastName: string;
@@ -41,7 +41,7 @@ interface Employee {
   performanceScore: number;
 }
 
-const EMPLOYEES: Employee[] = [
+const USERS: User[] = [
   {
     id: 1,
     firstName: 'Alice',
@@ -434,9 +434,10 @@ const EMPLOYEES: Employee[] = [
   },
 ];
 
-const columnHelper = createColumnHelper<Employee>();
+const columnHelper = createColumnHelper<User>();
 
-const columns: ColumnDef<Employee, unknown>[] = [
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const columns: ColumnDef<User, any>[] = [
   {
     id: 'select',
     header: 'Select',
@@ -516,7 +517,7 @@ const columns: ColumnDef<Employee, unknown>[] = [
   imports: [FormsModule],
   host: { class: 'block' },
   template: `
-    <div class="container mx-auto py-10 px-4">
+    <div class="container mx-auto px-4 py-10">
       <h1 class="mb-6 text-3xl font-bold">TanStack Table Demo</h1>
 
       <!-- Toolbar -->
@@ -582,7 +583,7 @@ const columns: ColumnDef<Employee, unknown>[] = [
               <tr class="border-b transition-colors hover:bg-muted/50">
                 @for (header of headerGroup.headers; track header.id) {
                   <th
-                    class="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0"
+                    class="h-10 px-2 text-left align-middle font-medium text-muted-foreground"
                     [class.sticky]="header.column.getIsPinned()"
                     [class.left-0]="header.column.getIsPinned() === 'left'"
                     [class.right-0]="header.column.getIsPinned() === 'right'"
@@ -591,23 +592,32 @@ const columns: ColumnDef<Employee, unknown>[] = [
                     [attr.colSpan]="header.colSpan"
                   >
                     @if (!header.isPlaceholder) {
-                      <div
-                        class="flex items-center gap-1"
-                        [class.cursor-pointer]="header.column.getCanSort()"
-                        [class.select-none]="header.column.getCanSort()"
-                        (click)="
-                          header.column.getCanSort()
-                            ? header.column.toggleSorting()
-                            : null
-                        "
-                      >
-                        <span [innerHTML]="getHeaderContent(header)"></span>
-                        @if (header.column.getIsSorted() === 'asc') {
-                          <span>↑</span>
-                        } @else if (header.column.getIsSorted() === 'desc') {
-                          <span>↓</span>
-                        }
-                      </div>
+                      @if (header.column.id === 'select') {
+                        <input
+                          type="checkbox"
+                          [checked]="table.getIsAllPageRowsSelected()"
+                          (change)="table.toggleAllPageRowsSelected()"
+                          class="h-4 w-4 rounded border-border"
+                        />
+                      } @else {
+                        <div
+                          class="flex items-center gap-1"
+                          [class.cursor-pointer]="header.column.getCanSort()"
+                          [class.select-none]="header.column.getCanSort()"
+                          (click)="
+                            header.column.getCanSort()
+                              ? header.column.toggleSorting()
+                              : null
+                          "
+                        >
+                          <span>{{ getHeaderLabel(header) }}</span>
+                          @if (header.column.getIsSorted() === 'asc') {
+                            <span>↑</span>
+                          } @else if (header.column.getIsSorted() === 'desc') {
+                            <span>↓</span>
+                          }
+                        </div>
+                      }
                     }
                   </th>
                 }
@@ -646,7 +656,7 @@ const columns: ColumnDef<Employee, unknown>[] = [
               >
                 @for (cell of row.getVisibleCells(); track cell.id) {
                   <td
-                    class="p-2 align-middle [&:has([role=checkbox])]:pr-0"
+                    class="p-2 align-middle"
                     [class.sticky]="cell.column.getIsPinned()"
                     [class.left-0]="cell.column.getIsPinned() === 'left'"
                     [class.right-0]="cell.column.getIsPinned() === 'right'"
@@ -659,16 +669,21 @@ const columns: ColumnDef<Employee, unknown>[] = [
                         class="flex cursor-pointer items-center gap-1 font-medium"
                       >
                         {{ row.getIsExpanded() ? '▼' : '▶' }}
-                        <span [innerHTML]="getCellContent(cell)"></span>
+                        <span>{{ cell.getValue() }}</span>
                         <span class="ml-1 text-muted-foreground">
                           ({{ row.subRows.length }})
                         </span>
                       </button>
                     } @else if (cell.getIsAggregated()) {
-                      <span
-                        class="text-muted-foreground"
-                        [innerHTML]="getAggregatedCellContent(cell)"
-                      ></span>
+                      <span class="text-muted-foreground">
+                        @if (cell.column.id === 'salary') {
+                          Avg: {{ formatCurrency(asNumber(cell.getValue())) }}
+                        } @else if (cell.column.id === 'performanceScore') {
+                          Avg: {{ roundNumber(asNumber(cell.getValue())) }}
+                        } @else {
+                          {{ cell.getValue() }}
+                        }
+                      </span>
                     } @else if (cell.getIsPlaceholder()) {
                       <!-- placeholder -->
                     } @else if (isEditing(row.id, cell.column.id)) {
@@ -700,9 +715,56 @@ const columns: ColumnDef<Employee, unknown>[] = [
                             {{ row.getIsExpanded() ? '▼' : '▶' }}
                           </button>
                         }
+                      } @else if (cell.column.id === 'salary') {
+                        <span
+                          (dblclick)="
+                            canEditColumn(cell.column.id)
+                              ? startEdit(
+                                  row.id,
+                                  cell.column.id,
+                                  cell.getValue()
+                                )
+                              : null
+                          "
+                        >
+                          {{ formatCurrency(asNumber(cell.getValue())) }}
+                        </span>
+                      } @else if (cell.column.id === 'status') {
+                        <span
+                          class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
+                          [class.bg-green-100]="cell.getValue() === 'active'"
+                          [class.text-green-800]="cell.getValue() === 'active'"
+                          [class.bg-red-100]="cell.getValue() === 'inactive'"
+                          [class.text-red-800]="cell.getValue() === 'inactive'"
+                          [class.bg-yellow-100]="cell.getValue() === 'on-leave'"
+                          [class.text-yellow-800]="
+                            cell.getValue() === 'on-leave'
+                          "
+                        >
+                          {{ cell.getValue() }}
+                        </span>
+                      } @else if (cell.column.id === 'performanceScore') {
+                        <div class="flex items-center gap-2">
+                          <div class="h-2 w-16 rounded-full bg-muted">
+                            <div
+                              class="h-2 rounded-full"
+                              [class.bg-green-500]="
+                                asNumber(cell.getValue()) >= 90
+                              "
+                              [class.bg-yellow-500]="
+                                asNumber(cell.getValue()) >= 75 &&
+                                asNumber(cell.getValue()) < 90
+                              "
+                              [class.bg-red-500]="
+                                asNumber(cell.getValue()) < 75
+                              "
+                              [style.width.%]="asNumber(cell.getValue())"
+                            ></div>
+                          </div>
+                          <span class="text-sm">{{ cell.getValue() }}</span>
+                        </div>
                       } @else {
                         <span
-                          [innerHTML]="getCellContent(cell)"
                           (dblclick)="
                             canEditColumn(cell.column.id)
                               ? startEdit(
@@ -718,7 +780,9 @@ const columns: ColumnDef<Employee, unknown>[] = [
                               ? 'Double-click to edit'
                               : ''
                           "
-                        ></span>
+                        >
+                          {{ cell.getValue() }}
+                        </span>
                       }
                     }
                   </td>
@@ -731,7 +795,8 @@ const columns: ColumnDef<Employee, unknown>[] = [
                     <div class="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
                       <div>
                         <span class="font-medium">Full Name:</span>
-                        {{ row.original.firstName }} {{ row.original.lastName }}
+                        {{ row.original.firstName }}
+                        {{ row.original.lastName }}
                       </div>
                       <div>
                         <span class="font-medium">Email:</span>
@@ -805,28 +870,28 @@ const columns: ColumnDef<Employee, unknown>[] = [
             [disabled]="!table.getCanPreviousPage()"
             class="inline-flex h-8 w-8 items-center justify-center rounded-md border text-sm disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
           >
-            «
+            &laquo;
           </button>
           <button
             (click)="table.previousPage()"
             [disabled]="!table.getCanPreviousPage()"
             class="inline-flex h-8 w-8 items-center justify-center rounded-md border text-sm disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
           >
-            ‹
+            &lsaquo;
           </button>
           <button
             (click)="table.nextPage()"
             [disabled]="!table.getCanNextPage()"
             class="inline-flex h-8 w-8 items-center justify-center rounded-md border text-sm disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
           >
-            ›
+            &rsaquo;
           </button>
           <button
             (click)="table.lastPage()"
             [disabled]="!table.getCanNextPage()"
             class="inline-flex h-8 w-8 items-center justify-center rounded-md border text-sm disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
           >
-            »
+            &raquo;
           </button>
         </div>
       </div>
@@ -875,7 +940,7 @@ export default class TablePage {
   readonly grouping = signal<GroupingState>([]);
   readonly columnPinning = signal<ColumnPinningState>({});
   readonly rowPinning = signal<RowPinningState>({ top: [], bottom: [] });
-  readonly data = signal<Employee[]>(EMPLOYEES);
+  readonly data = signal<User[]>(USERS);
 
   readonly editingCell = signal<{ rowId: string; columnId: string } | null>(
     null,
@@ -969,27 +1034,18 @@ export default class TablePage {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getHeaderContent(header: any): string {
+  getHeaderLabel(header: any): string {
     const headerDef = header.column.columnDef.header;
     if (typeof headerDef === 'string') return headerDef;
-    if (typeof headerDef === 'function') return headerDef(header.getContext());
     return header.column.id;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getCellContent(cell: any): string {
-    const cellDef = cell.column.columnDef.cell;
-    if (typeof cellDef === 'function')
-      return cellDef(cell.getContext()) as string;
-    return String(cell.getValue());
+  asNumber(value: unknown): number {
+    return Number(value) || 0;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getAggregatedCellContent(cell: any): string {
-    const aggDef = cell.column.columnDef.aggregatedCell;
-    if (typeof aggDef === 'function')
-      return aggDef(cell.getContext()) as string;
-    return this.getCellContent(cell);
+  roundNumber(value: number): number {
+    return Math.round(value);
   }
 
   getColumnFilterValue(columnId: string): string {
@@ -1041,7 +1097,7 @@ export default class TablePage {
     this.editValue.set(String(value ?? ''));
   }
 
-  saveEdit(row: Employee, columnId: string): void {
+  saveEdit(row: User, columnId: string): void {
     const value = this.editValue();
     this.data.update((prev) =>
       prev.map((item) =>
