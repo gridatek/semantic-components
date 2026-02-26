@@ -128,8 +128,8 @@ export class ScSelectDemo {
 
   displayIcon = computed(() => {
     const value = this.select().value();
-    const label = this.options.find((label) => label.value === value);
-    return label ? label.icon : '';
+    const option = this.options.find((o) => o.value === value);
+    return option ? option.icon : '';
   });
 
   options = [

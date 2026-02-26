@@ -40,6 +40,9 @@ export class ScSelectItem {
   private readonly option = inject(Option);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
+  readonly itemValue = computed(() => String(this.option.value()));
+  readonly itemLabel = computed(() => this.option.label() || '');
+
   constructor() {
     effect(() => {
       if (this.option.active()) {

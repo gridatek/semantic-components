@@ -3,11 +3,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChildren,
   inject,
   input,
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { ScSelectItem } from './select-item';
 
 @Component({
   selector: 'div[scSelectList]',
@@ -25,8 +27,14 @@ import { cn } from '../../utils';
 })
 export class ScSelectList {
   private readonly listbox = inject(Listbox);
+  private readonly items = contentChildren(ScSelectItem);
   readonly values = computed(() => this.listbox.values());
   readonly classInput = input<string>('', { alias: 'class' });
+
+  labelForValue(value: string): string {
+    const item = this.items().find((i) => i.itemValue() === value);
+    return item?.itemLabel() || value;
+  }
 
   protected readonly class = computed(() =>
     cn(
