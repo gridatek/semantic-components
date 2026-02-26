@@ -210,7 +210,6 @@ The select components are built with accessibility in mind:
 | `aria-label`  | `string` (required) | Accessible label for the hidden input                  |
 | `value`       | `model<unknown>`    | Two-way bound selected value (signal forms compatible) |
 | `label()`     | `Signal<string>`    | Returns `value()` or falls back to `placeholder()`     |
-| `values()`    | `Signal<unknown[]>` | Signal containing selected values                      |
 | `exportAs`    | `'scSelect'`        | Template reference for direct access                   |
 
 ### ScSelectTrigger
