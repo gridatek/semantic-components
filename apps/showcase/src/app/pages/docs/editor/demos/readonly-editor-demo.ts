@@ -15,7 +15,14 @@ import {
 
 @Component({
   selector: 'app-readonly-editor-demo',
-  imports: [ScEditor, ScEditorContent, ScEditorFooter, ScEditorCount],
+  imports: [
+    ScEditor,
+    ScEditorContent,
+    ScEditorFooter,
+    ScEditorCount,
+    ScEditorWordCount,
+    ScEditorCharCount,
+  ],
   template: `
     <div class="w-full">
       <div scEditor [readonly]="true" class="border rounded-lg overflow-hidden">
