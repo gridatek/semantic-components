@@ -84,8 +84,8 @@ import {
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
-            @for (label of labels; track label.value) {
-              <div scSelectItem [value]="label.value" [label]="label.value">
+            @for (label of options; track label.value) {
+              <div scSelectItem [value]="label.value" [label]="label.label">
                 @switch (label.icon) {
                   @case ('tag') {
                     <svg scSelectItemIcon siTagIcon></svg>
@@ -112,7 +112,7 @@ import {
                     <svg scSelectItemIcon siPlaneIcon></svg>
                   }
                 }
-                <span class="flex-1">{{ label.value }}</span>
+                <span class="flex-1">{{ label.label }}</span>
               </div>
             }
           </div>
@@ -128,18 +128,18 @@ export class ScSelectDemo {
 
   displayIcon = computed(() => {
     const value = this.select().value();
-    const label = this.labels.find((label) => label.value === value);
+    const label = this.options.find((label) => label.value === value);
     return label ? label.icon : '';
   });
 
-  labels = [
-    { value: 'Important', icon: 'tag' },
-    { value: 'Starred', icon: 'star' },
-    { value: 'Work', icon: 'briefcase' },
-    { value: 'Personal', icon: 'user' },
-    { value: 'To Do', icon: 'square-check' },
-    { value: 'Later', icon: 'clock' },
-    { value: 'Read', icon: 'book' },
-    { value: 'Travel', icon: 'plane' },
+  options = [
+    { value: 'important', label: 'Important', icon: 'tag' },
+    { value: 'starred', label: 'Starred', icon: 'star' },
+    { value: 'work', label: 'Work', icon: 'briefcase' },
+    { value: 'personal', label: 'Personal', icon: 'user' },
+    { value: 'to-do', label: 'To Do', icon: 'square-check' },
+    { value: 'later', label: 'Later', icon: 'clock' },
+    { value: 'read', label: 'Read', icon: 'book' },
+    { value: 'travel', label: 'Travel', icon: 'plane' },
   ];
 }
