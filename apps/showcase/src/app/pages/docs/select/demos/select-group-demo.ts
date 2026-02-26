@@ -13,7 +13,7 @@ import {
   ScSelectPortal,
   ScSelectTrigger,
   ScSelectSeparator,
-  ScSelectValue,
+  ScSelectLabel,
 } from '@semantic-components/ui';
 
 @Component({
@@ -28,12 +28,12 @@ import {
     ScSelectPortal,
     ScSelectTrigger,
     ScSelectSeparator,
-    ScSelectValue,
+    ScSelectLabel,
   ],
   template: `
     <div scSelect #select="scSelect" placeholder="Select a food">
       <div scSelectTrigger aria-label="Food dropdown">
-        <span scSelectValue>
+        <span scSelectLabel>
           <span class="truncate">{{ select.displayValue() }}</span>
         </span>
       </div>

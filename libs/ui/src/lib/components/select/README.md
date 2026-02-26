@@ -18,7 +18,7 @@ A set of components for building accessible select dropdowns following the Singl
 | -------------------- | ----------------------------- | ------------------------------------------------------------------------------------------- |
 | `ScSelect`           | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<string>` |
 | `ScSelectTrigger`    | `div[scSelectTrigger]`        | Trigger button, internally renders hidden input and chevron icon                            |
-| `ScSelectValue`      | `span[scSelectValue]`         | Display selected value with styling                                                         |
+| `ScSelectLabel`      | `span[scSelectLabel]`         | Display selected value with styling                                                         |
 | `ScSelectItemIcon`   | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)          |
 | `ScSelectPortal`     | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                 |
 | `ScSelectPopup`      | `div[scSelectPopup]`          | Popup container with styling, animation, and visibility                                     |
@@ -43,7 +43,7 @@ A set of components for building accessible select dropdowns following the Singl
 ```html
 <div scSelect #select="scSelect" placeholder="Select an option">
   <div scSelectTrigger aria-label="Select">
-    <span scSelectValue>
+    <span scSelectLabel>
       <span class="truncate">{{ select.displayValue() }}</span>
     </span>
   </div>
@@ -77,7 +77,7 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 ```html
 <div scSelect #select="scSelect" placeholder="Select a food">
   <div scSelectTrigger aria-label="Food dropdown">
-    <span scSelectValue>
+    <span scSelectLabel>
       <span class="truncate">{{ select.displayValue() }}</span>
     </span>
   </div>
@@ -105,15 +105,15 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue } from '@semantic-components/ui';
+import { ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-example',
-  imports: [ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectValue],
+  imports: [ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectLabel],
   template: `
     <div scSelect #select="scSelect" placeholder="Select an option">
       <div scSelectTrigger aria-label="Select">
-        <span scSelectValue>
+        <span scSelectLabel>
           <span class="truncate">{{ select.displayValue() }}</span>
         </span>
       </div>
@@ -268,7 +268,7 @@ All components accept a `class` input for custom styling:
 ```
 ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, exportAs: 'scSelect')
 ├── ScSelectTrigger (trigger + overlay origin)
-│   ├── ScSelectValue (display value) [projected content]
+│   ├── ScSelectLabel (display value) [projected content]
 │   │   └── ScSelectItemIcon (consumer icons) [projected content]
 │   ├── ScSelectInput (hidden combobox input) [internal]
 │   └── ScSelectTriggerIcon + SiChevronDownIcon [internal]

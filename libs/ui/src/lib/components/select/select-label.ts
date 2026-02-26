@@ -8,19 +8,19 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'span[scSelectValue]',
+  selector: 'span[scSelectLabel], div[scSelectLabel]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'select-value',
+    'data-slot': 'select-label',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectValue {
+export class ScSelectLabel {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

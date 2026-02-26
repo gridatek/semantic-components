@@ -23,7 +23,7 @@ import {
   ScSelectItem,
   ScSelectPortal,
   ScSelectTrigger,
-  ScSelectValue,
+  ScSelectLabel,
 } from '@semantic-components/ui';
 
 @Component({
@@ -36,7 +36,7 @@ import {
     ScSelectItem,
     ScSelectPortal,
     ScSelectTrigger,
-    ScSelectValue,
+    ScSelectLabel,
     SiBookIcon,
     SiBriefcaseIcon,
     SiClockIcon,
@@ -49,7 +49,7 @@ import {
   template: `
     <div scSelect #select="scSelect" placeholder="Select a label">
       <div scSelectTrigger aria-label="Label dropdown">
-        <span scSelectValue>
+        <span scSelectLabel>
           @if (displayIcon(); as icon) {
             @switch (icon) {
               @case ('tag') {
