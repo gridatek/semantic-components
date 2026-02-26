@@ -36,9 +36,9 @@ import { ScSelectTriggerIcon } from './select-trigger-icon';
 export class ScSelectTrigger {
   readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
 
   private readonly select = inject(forwardRef(() => ScSelect));
+  readonly ariaLabel = computed(() => this.select.ariaLabel());
   readonly placeholder = computed(() => this.select.placeholder());
 
   protected readonly class = computed(() =>

@@ -41,8 +41,8 @@ A set of components for building accessible select dropdowns following the Singl
 ### Template
 
 ```html
-<div scSelect #select="scSelect" placeholder="Select an option">
-  <div scSelectTrigger aria-label="Select">
+<div scSelect #select="scSelect" placeholder="Select an option" aria-label="Select">
+  <div scSelectTrigger>
     <span scSelectLabel>
       <span class="truncate">{{ select.label() }}</span>
     </span>
@@ -75,8 +75,8 @@ Use `ScSelectItemIcon` for consistent icon styling in items and the value displa
 Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize options into labeled groups.
 
 ```html
-<div scSelect #select="scSelect" placeholder="Select a food">
-  <div scSelectTrigger aria-label="Food dropdown">
+<div scSelect #select="scSelect" placeholder="Select a food" aria-label="Food dropdown">
+  <div scSelectTrigger>
     <span scSelectLabel>
       <span class="truncate">{{ select.label() }}</span>
     </span>
@@ -111,8 +111,8 @@ import { ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, 
   selector: 'app-example',
   imports: [ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectLabel],
   template: `
-    <div scSelect #select="scSelect" placeholder="Select an option">
-      <div scSelectTrigger aria-label="Select">
+    <div scSelect #select="scSelect" placeholder="Select an option" aria-label="Select">
+      <div scSelectTrigger>
         <span scSelectLabel>
           <span class="truncate">{{ select.label() }}</span>
         </span>
@@ -195,8 +195,8 @@ The select components are built with accessibility in mind:
 ### Required Accessibility Attributes
 
 ```html
-<!-- Always provide an accessible label on the trigger -->
-<div scSelectTrigger aria-label="Select a fruit"></div>
+<!-- Always provide an accessible label on the select -->
+<div scSelect aria-label="Select a fruit">...</div>
 ```
 
 ## API Reference
@@ -207,17 +207,17 @@ The select components are built with accessibility in mind:
 | ------------- | ------------------- | ------------------------------------------------------ |
 | `class`       | `string`            | Additional CSS classes                                 |
 | `placeholder` | `string`            | Placeholder text shown when no value is selected       |
-| `value`       | `model<string>`     | Two-way bound selected value (signal forms compatible) |
+| `aria-label`  | `string`            | Accessible label for the hidden input                  |
+| `value`       | `model<unknown>`    | Two-way bound selected value (signal forms compatible) |
 | `label()`     | `Signal<string>`    | Returns `value()` or falls back to `placeholder()`     |
 | `values()`    | `Signal<unknown[]>` | Signal containing selected values                      |
 | `exportAs`    | `'scSelect'`        | Template reference for direct access                   |
 
 ### ScSelectTrigger
 
-| Property     | Type     | Description                           |
-| ------------ | -------- | ------------------------------------- |
-| `class`      | `string` | Additional CSS classes                |
-| `aria-label` | `string` | Accessible label for the hidden input |
+| Property | Type     | Description            |
+| -------- | -------- | ---------------------- |
+| `class`  | `string` | Additional CSS classes |
 
 ### ScSelectItemIcon
 
@@ -258,8 +258,8 @@ Sets `aria-hidden="true"` automatically.
 All components accept a `class` input for custom styling:
 
 ```html
-<div scSelect class="w-64" placeholder="Choose...">
-  <div scSelectTrigger class="bg-slate-100" aria-label="Choose">...</div>
+<div scSelect class="w-64" placeholder="Choose..." aria-label="Choose">
+  <div scSelectTrigger class="bg-slate-100">...</div>
 </div>
 ```
 

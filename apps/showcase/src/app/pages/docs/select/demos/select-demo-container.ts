@@ -68,8 +68,8 @@ import {
     SiUserIcon,
   ],
   template: \`
-    <div scSelect #select="scSelect" placeholder="Select a label">
-      <div scSelectTrigger aria-label="Label dropdown">
+    <div scSelect #select="scSelect" placeholder="Select a label" aria-label="Label dropdown">
+      <div scSelectTrigger>
         <span scSelectLabel>
           @if (displayIcon(); as icon) {
             @switch (icon) {

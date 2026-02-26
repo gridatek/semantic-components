@@ -83,8 +83,8 @@ Each component is a set of small, focused pieces that you assemble yourself. The
 The Select is a good example of how far this goes:
 
 ```html
-<div scSelect #select="scSelect" placeholder="Select a label">
-  <div scSelectTrigger aria-label="Label dropdown">
+<div scSelect #select="scSelect" placeholder="Select a label" aria-label="Label dropdown">
+  <div scSelectTrigger>
     <span scSelectLabel>
       @if (displayIcon(); as icon) {
       <svg scSelectItemIcon siTagIcon></svg>

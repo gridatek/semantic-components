@@ -56,6 +56,7 @@ import { ScSelectTrigger } from './select-trigger';
 export class ScSelect implements FormValueControl<unknown> {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly placeholder = input<string>('');
+  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
   readonly value = model<unknown>(undefined);
 
   private readonly trigger = contentChild(ScSelectTrigger);

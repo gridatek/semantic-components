@@ -52,8 +52,8 @@ import {
     ScSelectLabel,
   ],
   template: \`
-    <div scSelect #select="scSelect" placeholder="Select a food">
-      <div scSelectTrigger aria-label="Food dropdown">
+    <div scSelect #select="scSelect" placeholder="Select a food" aria-label="Food dropdown">
+      <div scSelectTrigger>
         <span scSelectLabel>
           <span class="truncate">{{ select.label() }}</span>
         </span>
