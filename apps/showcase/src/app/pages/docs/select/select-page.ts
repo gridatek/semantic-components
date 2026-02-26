@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScSelectDemoContainer } from './demos/select-demo-container';
+import { ScSelectDisabledDemoContainer } from './demos/select-disabled-demo-container';
 import { ScSelectGroupDemoContainer } from './demos/select-group-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -13,6 +14,7 @@ import { ScHeading } from '@semantic-components/ui';
   selector: 'app-select-page',
   imports: [
     ScSelectDemoContainer,
+    ScSelectDisabledDemoContainer,
     ScSelectGroupDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -33,6 +35,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>Examples</h2>
         <app-select-demo-container />
         <app-select-group-demo-container />
+        <app-select-disabled-demo-container />
       </section>
     </div>
   `,
