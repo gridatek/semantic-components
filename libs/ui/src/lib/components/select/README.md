@@ -9,24 +9,24 @@ A set of components for building accessible select dropdowns following the Singl
 - Automatic scroll-to-active on keyboard navigation
 - Overlay positioning with CDK
 - Customizable styling via `class` input
-- Signal forms support via `FormValueControl<string>`
+- Signal forms support via `FormValueControl<unknown>`
 - `exportAs: 'scSelect'` for direct template access
 
 ## Components
 
-| Component            | Selector                      | Responsibility                                                                              |
-| -------------------- | ----------------------------- | ------------------------------------------------------------------------------------------- |
-| `ScSelect`           | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<string>` |
-| `ScSelectTrigger`    | `div[scSelectTrigger]`        | Trigger button, internally renders hidden input and chevron icon                            |
-| `ScSelectLabel`      | `span[scSelectLabel]`         | Display selected value with styling                                                         |
-| `ScSelectItemIcon`   | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)          |
-| `ScSelectPortal`     | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                 |
-| `ScSelectPopup`      | `div[scSelectPopup]`          | Popup container with styling, animation, and visibility                                     |
-| `ScSelectList`       | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                                     |
-| `ScSelectItem`       | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                             |
-| `ScSelectGroup`      | `div[scSelectGroup]`          | Groups related options together with vertical layout                                        |
-| `ScSelectGroupLabel` | `div[scSelectGroupLabel]`     | Label for a group of options                                                                |
-| `ScSelectSeparator`  | `[scSelectSeparator]`         | Visual separator between groups or items                                                    |
+| Component            | Selector                                    | Responsibility                                                                               |
+| -------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ScSelect`           | `div[scSelect]`                             | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<unknown>` |
+| `ScSelectTrigger`    | `div[scSelectTrigger]`                      | Trigger button, internally renders hidden input and chevron icon                             |
+| `ScSelectLabel`      | `span[scSelectLabel]`, `div[scSelectLabel]` | Display selected value with styling                                                          |
+| `ScSelectItemIcon`   | `svg[scSelectItemIcon]`                     | Icon styling for items and value display (sets `aria-hidden="true"` automatically)           |
+| `ScSelectPortal`     | `ng-template[scSelectPortal]`               | Marks lazy content template for the overlay                                                  |
+| `ScSelectPopup`      | `div[scSelectPopup]`                        | Popup container with styling, animation, and visibility                                      |
+| `ScSelectList`       | `div[scSelectList]`                         | Listbox container, wraps `Listbox` from `@angular/aria`                                      |
+| `ScSelectItem`       | `div[scSelectItem]`                         | Option item, wraps `Option`, internally renders check indicator                              |
+| `ScSelectGroup`      | `div[scSelectGroup]`                        | Groups related options together with vertical layout                                         |
+| `ScSelectGroupLabel` | `div[scSelectGroupLabel]`                   | Label for a group of options                                                                 |
+| `ScSelectSeparator`  | `[scSelectSeparator]`                       | Visual separator between groups or items                                                     |
 
 ### Internal Components (not exported)
 
@@ -155,7 +155,7 @@ Use `#select="scSelect"` to access `ScSelect` directly in the template without `
 
 ## Signal Forms
 
-`ScSelect` implements `FormValueControl<string>`, making it compatible with Angular signal forms:
+`ScSelect` implements `FormValueControl<unknown>`, making it compatible with Angular signal forms:
 
 ```typescript
 readonly fruit = new FormControl<string>('');
@@ -186,7 +186,7 @@ When navigating with keyboard, the dropdown automatically scrolls to keep the ac
 The select components are built with accessibility in mind:
 
 - Uses `@angular/aria/combobox` and `@angular/aria/listbox` for proper ARIA roles
-- `aria-label` on the trigger for screen reader support
+- `aria-label` on the select root for screen reader support
 - `ScSelectItemIcon` sets `aria-hidden="true"` automatically on decorative icons
 - Internal icons (chevron, checkmark) have `aria-hidden="true"` built in
 - Visual focus indicators for keyboard navigation
