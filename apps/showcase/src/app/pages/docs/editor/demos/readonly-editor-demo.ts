@@ -17,17 +17,20 @@ import {
   selector: 'app-readonly-editor-demo',
   imports: [ScEditor, ScEditorContent, ScEditorFooter, ScEditorCount],
   template: `
-    <div scEditor [readonly]="true" class="border rounded-lg overflow-hidden">
-      <div scEditorContent [(value)]="content"></div>
+    <div class="w-full">
+      <div scEditor [readonly]="true" class="border rounded-lg overflow-hidden">
+        <div scEditorContent [(value)]="content"></div>
 
-      <div scEditorFooter>
-        <div scEditorCount>
-          <span scEditorWordCount></span>
-          <span scEditorCharCount></span>
+        <div scEditorFooter>
+          <div scEditorCount>
+            <span scEditorWordCount></span>
+            <span scEditorCharCount></span>
+          </div>
         </div>
       </div>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

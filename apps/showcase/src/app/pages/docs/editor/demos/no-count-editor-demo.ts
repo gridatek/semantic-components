@@ -44,40 +44,43 @@ import {
     SiListOrderedIcon,
   ],
   template: `
-    <div scEditor class="border rounded-lg overflow-hidden">
-      <div scEditorToolbar>
-        <div scEditorToolbarGroup>
-          <button scEditorBold>
-            <svg siBoldIcon></svg>
-            <span class="sr-only">Bold</span>
-          </button>
-          <button scEditorItalic>
-            <svg siItalicIcon></svg>
-            <span class="sr-only">Italic</span>
-          </button>
-          <button scEditorUnderline>
-            <svg siUnderlineIcon></svg>
-            <span class="sr-only">Underline</span>
-          </button>
+    <div class="w-full">
+      <div scEditor class="border rounded-lg overflow-hidden">
+        <div scEditorToolbar>
+          <div scEditorToolbarGroup>
+            <button scEditorBold>
+              <svg siBoldIcon></svg>
+              <span class="sr-only">Bold</span>
+            </button>
+            <button scEditorItalic>
+              <svg siItalicIcon></svg>
+              <span class="sr-only">Italic</span>
+            </button>
+            <button scEditorUnderline>
+              <svg siUnderlineIcon></svg>
+              <span class="sr-only">Underline</span>
+            </button>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <button scEditorBulletList>
+              <svg siListIcon></svg>
+              <span class="sr-only">Bullet list</span>
+            </button>
+            <button scEditorNumberedList>
+              <svg siListOrderedIcon></svg>
+              <span class="sr-only">Numbered list</span>
+            </button>
+          </div>
         </div>
 
-        <div scEditorSeparator></div>
-
-        <div scEditorToolbarGroup>
-          <button scEditorBulletList>
-            <svg siListIcon></svg>
-            <span class="sr-only">Bullet list</span>
-          </button>
-          <button scEditorNumberedList>
-            <svg siListOrderedIcon></svg>
-            <span class="sr-only">Numbered list</span>
-          </button>
-        </div>
+        <div scEditorContent [(value)]="content"></div>
       </div>
-
-      <div scEditorContent [(value)]="content" minHeight="100px"></div>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

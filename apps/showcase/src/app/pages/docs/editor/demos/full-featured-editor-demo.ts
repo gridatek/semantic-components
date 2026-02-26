@@ -102,141 +102,144 @@ import {
     SiRemoveFormattingIcon,
   ],
   template: `
-    <p class="text-sm text-muted-foreground mb-4">
-      Try all the formatting options: bold, italic, headings, lists, links,
-      blockquotes, and more.
-    </p>
-    <div scEditor class="border rounded-lg overflow-hidden">
-      <div scEditorToolbar>
-        <div scEditorToolbarGroup>
-          <button scEditorUndo>
-            <svg siUndoIcon class="size-4"></svg>
-            <span class="sr-only">Undo</span>
-          </button>
-          <button scEditorRedo>
-            <svg siRedoIcon class="size-4"></svg>
-            <span class="sr-only">Redo</span>
-          </button>
+    <div class="w-full">
+      <p class="text-sm text-muted-foreground mb-4">
+        Try all the formatting options: bold, italic, headings, lists, links,
+        blockquotes, and more.
+      </p>
+      <div scEditor class="border rounded-lg overflow-hidden">
+        <div scEditorToolbar>
+          <div scEditorToolbarGroup>
+            <button scEditorUndo>
+              <svg siUndoIcon class="size-4"></svg>
+              <span class="sr-only">Undo</span>
+            </button>
+            <button scEditorRedo>
+              <svg siRedoIcon class="size-4"></svg>
+              <span class="sr-only">Redo</span>
+            </button>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <select scEditorHeading></select>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <button scEditorBold>
+              <svg siBoldIcon class="size-4"></svg>
+              <span class="sr-only">Bold</span>
+            </button>
+            <button scEditorItalic>
+              <svg siItalicIcon class="size-4"></svg>
+              <span class="sr-only">Italic</span>
+            </button>
+            <button scEditorUnderline>
+              <svg siUnderlineIcon class="size-4"></svg>
+              <span class="sr-only">Underline</span>
+            </button>
+            <button scEditorStrikethrough>
+              <svg siStrikethroughIcon class="size-4"></svg>
+              <span class="sr-only">Strikethrough</span>
+            </button>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <button scEditorAlignLeft>
+              <svg siTextAlignStartIcon class="size-4"></svg>
+              <span class="sr-only">Align left</span>
+            </button>
+            <button scEditorAlignCenter>
+              <svg siTextAlignCenterIcon class="size-4"></svg>
+              <span class="sr-only">Align center</span>
+            </button>
+            <button scEditorAlignRight>
+              <svg siTextAlignEndIcon class="size-4"></svg>
+              <span class="sr-only">Align right</span>
+            </button>
+            <button scEditorAlignJustify>
+              <svg siTextAlignJustifyIcon class="size-4"></svg>
+              <span class="sr-only">Align justify</span>
+            </button>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <button scEditorBulletList>
+              <svg siListIcon class="size-4"></svg>
+              <span class="sr-only">Bullet list</span>
+            </button>
+            <button scEditorNumberedList>
+              <svg siListOrderedIcon class="size-4"></svg>
+              <span class="sr-only">Numbered list</span>
+            </button>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <button scEditorLink>
+              <svg siLinkIcon class="size-4"></svg>
+              <span class="sr-only">Insert link</span>
+            </button>
+            <button scEditorBlockquote>
+              <svg siQuoteIcon class="size-4"></svg>
+              <span class="sr-only">Blockquote</span>
+            </button>
+            <button scEditorCode>
+              <svg siCodeIcon class="size-4"></svg>
+              <span class="sr-only">Code</span>
+            </button>
+            <button scEditorHorizontalRule>
+              <svg siMinusIcon class="size-4"></svg>
+              <span class="sr-only">Horizontal rule</span>
+            </button>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <button scEditorClearFormatting>
+              <svg siRemoveFormattingIcon class="size-4"></svg>
+              <span class="sr-only">Clear formatting</span>
+            </button>
+          </div>
         </div>
 
-        <div scEditorSeparator></div>
+        <div scEditorContent [(value)]="content" minHeight="250px"></div>
 
-        <div scEditorToolbarGroup>
-          <select scEditorHeading></select>
-        </div>
-
-        <div scEditorSeparator></div>
-
-        <div scEditorToolbarGroup>
-          <button scEditorBold>
-            <svg siBoldIcon class="size-4"></svg>
-            <span class="sr-only">Bold</span>
-          </button>
-          <button scEditorItalic>
-            <svg siItalicIcon class="size-4"></svg>
-            <span class="sr-only">Italic</span>
-          </button>
-          <button scEditorUnderline>
-            <svg siUnderlineIcon class="size-4"></svg>
-            <span class="sr-only">Underline</span>
-          </button>
-          <button scEditorStrikethrough>
-            <svg siStrikethroughIcon class="size-4"></svg>
-            <span class="sr-only">Strikethrough</span>
-          </button>
-        </div>
-
-        <div scEditorSeparator></div>
-
-        <div scEditorToolbarGroup>
-          <button scEditorAlignLeft>
-            <svg siTextAlignStartIcon class="size-4"></svg>
-            <span class="sr-only">Align left</span>
-          </button>
-          <button scEditorAlignCenter>
-            <svg siTextAlignCenterIcon class="size-4"></svg>
-            <span class="sr-only">Align center</span>
-          </button>
-          <button scEditorAlignRight>
-            <svg siTextAlignEndIcon class="size-4"></svg>
-            <span class="sr-only">Align right</span>
-          </button>
-          <button scEditorAlignJustify>
-            <svg siTextAlignJustifyIcon class="size-4"></svg>
-            <span class="sr-only">Align justify</span>
-          </button>
-        </div>
-
-        <div scEditorSeparator></div>
-
-        <div scEditorToolbarGroup>
-          <button scEditorBulletList>
-            <svg siListIcon class="size-4"></svg>
-            <span class="sr-only">Bullet list</span>
-          </button>
-          <button scEditorNumberedList>
-            <svg siListOrderedIcon class="size-4"></svg>
-            <span class="sr-only">Numbered list</span>
-          </button>
-        </div>
-
-        <div scEditorSeparator></div>
-
-        <div scEditorToolbarGroup>
-          <button scEditorLink>
-            <svg siLinkIcon class="size-4"></svg>
-            <span class="sr-only">Insert link</span>
-          </button>
-          <button scEditorBlockquote>
-            <svg siQuoteIcon class="size-4"></svg>
-            <span class="sr-only">Blockquote</span>
-          </button>
-          <button scEditorCode>
-            <svg siCodeIcon class="size-4"></svg>
-            <span class="sr-only">Code</span>
-          </button>
-          <button scEditorHorizontalRule>
-            <svg siMinusIcon class="size-4"></svg>
-            <span class="sr-only">Horizontal rule</span>
-          </button>
-        </div>
-
-        <div scEditorSeparator></div>
-
-        <div scEditorToolbarGroup>
-          <button scEditorClearFormatting>
-            <svg siRemoveFormattingIcon class="size-4"></svg>
-            <span class="sr-only">Clear formatting</span>
-          </button>
+        <div scEditorFooter>
+          <div scEditorCount>
+            <span scEditorWordCount></span>
+            <span scEditorCharCount></span>
+          </div>
         </div>
       </div>
-
-      <div scEditorContent [(value)]="content" minHeight="250px"></div>
-
-      <div scEditorFooter>
-        <div scEditorCount>
-          <span scEditorWordCount></span>
-          <span scEditorCharCount></span>
-        </div>
+      <div class="mt-4 flex gap-4">
+        <button
+          type="button"
+          (click)="clearContent()"
+          class="px-3 py-1.5 text-sm border rounded-md hover:bg-accent"
+        >
+          Clear Content
+        </button>
+        <button
+          type="button"
+          (click)="insertSampleContent()"
+          class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+        >
+          Insert Sample Content
+        </button>
       </div>
-    </div>
-    <div class="mt-4 flex gap-4">
-      <button
-        type="button"
-        (click)="clearContent()"
-        class="px-3 py-1.5 text-sm border rounded-md hover:bg-accent"
-      >
-        Clear Content
-      </button>
-      <button
-        type="button"
-        (click)="insertSampleContent()"
-        class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
-      >
-        Insert Sample Content
-      </button>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
