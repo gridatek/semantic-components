@@ -27,7 +27,7 @@ import { ScSelectItem } from './select-item';
 })
 export class ScSelectList {
   private readonly listbox = inject(Listbox);
-  private readonly items = contentChildren(ScSelectItem);
+  private readonly items = contentChildren(ScSelectItem, { descendants: true });
   readonly values = computed(() => this.listbox.values());
   readonly classInput = input<string>('', { alias: 'class' });
 
