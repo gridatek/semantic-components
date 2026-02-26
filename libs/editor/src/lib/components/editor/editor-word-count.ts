@@ -28,6 +28,7 @@ export class ScEditorWordCount {
   protected readonly class = computed(() => cn('', this.classInput()));
 
   protected readonly wordCount = computed(() => {
+    this.editor.contentVersion();
     const text = this.getPlainText().trim();
     if (!text) return 0;
     return text.split(/\s+/).filter(Boolean).length;

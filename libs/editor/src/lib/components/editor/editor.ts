@@ -41,6 +41,9 @@ export class ScEditor {
   // Tiptap editor instance
   readonly editorInstance = signal<Editor | null>(null);
 
+  // Incremented on every content update so computed signals can react
+  readonly contentVersion = signal(0);
+
   // Initialize Tiptap editor
   initializeEditor(
     element: HTMLElement,
@@ -69,6 +72,7 @@ export class ScEditor {
       content: initialContent,
       editable: !this.disabled() && !this.readonly(),
       onUpdate: () => {
+        this.contentVersion.update((v) => v + 1);
         this.updateToolbarState();
       },
       onSelectionUpdate: () => {

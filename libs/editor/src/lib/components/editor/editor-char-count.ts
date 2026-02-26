@@ -28,6 +28,7 @@ export class ScEditorCharCount {
   protected readonly class = computed(() => cn('', this.classInput()));
 
   protected readonly charCount = computed(() => {
+    this.editor.contentVersion();
     const text = this.getPlainText();
     return text.length;
   });
