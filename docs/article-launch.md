@@ -89,7 +89,7 @@ The Select is a good example of how far this goes:
       @if (displayIcon(); as icon) {
       <svg scSelectItemIcon siTagIcon></svg>
       }
-      <span class="truncate">{{ select.displayValue() }}</span>
+      <span class="truncate">{{ select.label() }}</span>
     </span>
   </div>
   <ng-template scSelectPortal>

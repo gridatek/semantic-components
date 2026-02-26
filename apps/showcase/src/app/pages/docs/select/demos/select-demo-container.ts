@@ -99,7 +99,7 @@ import {
               }
             }
           }
-          <span class="truncate">{{ select.displayValue() }}</span>
+          <span class="truncate">{{ select.label() }}</span>
         </span>
       </div>
       <ng-template scSelectPortal>

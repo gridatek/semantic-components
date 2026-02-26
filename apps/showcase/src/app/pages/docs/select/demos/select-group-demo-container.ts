@@ -55,7 +55,7 @@ import {
     <div scSelect #select="scSelect" placeholder="Select a food">
       <div scSelectTrigger aria-label="Food dropdown">
         <span scSelectLabel>
-          <span class="truncate">{{ select.displayValue() }}</span>
+          <span class="truncate">{{ select.label() }}</span>
         </span>
       </div>
       <ng-template scSelectPortal>

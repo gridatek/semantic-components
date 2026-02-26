@@ -44,7 +44,7 @@ A set of components for building accessible select dropdowns following the Singl
 <div scSelect #select="scSelect" placeholder="Select an option">
   <div scSelectTrigger aria-label="Select">
     <span scSelectLabel>
-      <span class="truncate">{{ select.displayValue() }}</span>
+      <span class="truncate">{{ select.label() }}</span>
     </span>
   </div>
   <ng-template scSelectPortal>
@@ -78,7 +78,7 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 <div scSelect #select="scSelect" placeholder="Select a food">
   <div scSelectTrigger aria-label="Food dropdown">
     <span scSelectLabel>
-      <span class="truncate">{{ select.displayValue() }}</span>
+      <span class="truncate">{{ select.label() }}</span>
     </span>
   </div>
   <ng-template scSelectPortal>
@@ -114,7 +114,7 @@ import { ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, 
     <div scSelect #select="scSelect" placeholder="Select an option">
       <div scSelectTrigger aria-label="Select">
         <span scSelectLabel>
-          <span class="truncate">{{ select.displayValue() }}</span>
+          <span class="truncate">{{ select.label() }}</span>
         </span>
       </div>
       <ng-template scSelectPortal>
@@ -148,7 +148,7 @@ Use `#select="scSelect"` to access `ScSelect` directly in the template without `
 ```html
 <div scSelect #select="scSelect" placeholder="Pick a fruit">
   ...
-  <span>{{ select.displayValue() }}</span>
+  <span>{{ select.label() }}</span>
   <span>Current value: {{ select.value() }}</span>
 </div>
 ```
@@ -203,14 +203,14 @@ The select components are built with accessibility in mind:
 
 ### ScSelect
 
-| Property         | Type                | Description                                            |
-| ---------------- | ------------------- | ------------------------------------------------------ |
-| `class`          | `string`            | Additional CSS classes                                 |
-| `placeholder`    | `string`            | Placeholder text shown when no value is selected       |
-| `value`          | `model<string>`     | Two-way bound selected value (signal forms compatible) |
-| `displayValue()` | `Signal<string>`    | Returns `value()` or falls back to `placeholder()`     |
-| `values()`       | `Signal<unknown[]>` | Signal containing selected values                      |
-| `exportAs`       | `'scSelect'`        | Template reference for direct access                   |
+| Property      | Type                | Description                                            |
+| ------------- | ------------------- | ------------------------------------------------------ |
+| `class`       | `string`            | Additional CSS classes                                 |
+| `placeholder` | `string`            | Placeholder text shown when no value is selected       |
+| `value`       | `model<string>`     | Two-way bound selected value (signal forms compatible) |
+| `label()`     | `Signal<string>`    | Returns `value()` or falls back to `placeholder()`     |
+| `values()`    | `Signal<unknown[]>` | Signal containing selected values                      |
+| `exportAs`    | `'scSelect'`        | Template reference for direct access                   |
 
 ### ScSelectTrigger
 

@@ -66,7 +66,7 @@ export class ScSelect implements FormValueControl<string> {
 
   readonly origin = computed(() => this.trigger()?.elementRef);
   readonly values = computed(() => this.content()?.values() ?? []);
-  readonly displayValue = computed(() => {
+  readonly label = computed(() => {
     const value = this.value();
     if (!value) return this.placeholder();
     const list = this.content();
