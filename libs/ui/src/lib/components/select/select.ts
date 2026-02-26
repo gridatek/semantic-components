@@ -53,10 +53,10 @@ import { ScSelectTrigger } from './select-trigger';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelect implements FormValueControl<string> {
+export class ScSelect implements FormValueControl<unknown> {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly placeholder = input<string>('');
-  readonly value = model<string>('');
+  readonly value = model<unknown>(undefined);
 
   private readonly trigger = contentChild(ScSelectTrigger);
   private readonly content = contentChild(ScSelectList, {
@@ -68,12 +68,12 @@ export class ScSelect implements FormValueControl<string> {
   readonly values = computed(() => this.content()?.values() ?? []);
   readonly label = computed(() => {
     const value = this.value();
-    if (!value) return this.placeholder();
+    if (value == null) return this.placeholder();
     const list = this.content();
     if (list) {
       return list.labelForValue(value);
     }
-    return value;
+    return String(value);
   });
   protected readonly class = computed(() =>
     cn('relative min-w-36 w-fit', this.classInput()),
@@ -87,7 +87,7 @@ export class ScSelect implements FormValueControl<string> {
     // Sync listbox selection → model
     effect(() => {
       const vals = this.values();
-      const selected = vals.length > 0 ? String(vals[0]) : '';
+      const selected = vals.length > 0 ? vals[0] : undefined;
       this.value.set(selected);
     });
   }
