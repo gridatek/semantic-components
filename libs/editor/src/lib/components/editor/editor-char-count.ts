@@ -1,25 +1,14 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  computed,
-  input,
-  inject,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-@Component({
+@Directive({
   selector: 'span[scEditorCharCount]',
-  template: `
-    {{ charCount() }} characters
-  `,
+  exportAs: 'scEditorCharCount',
   host: {
     'data-slot': 'editor-char-count',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorCharCount {
   readonly editor = inject(SC_EDITOR);
@@ -27,7 +16,7 @@ export class ScEditorCharCount {
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
-  protected readonly charCount = computed(() => {
+  readonly charCount = computed(() => {
     this.editor.contentVersion();
     const text = this.getPlainText();
     return text.length;

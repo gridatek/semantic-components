@@ -1,25 +1,14 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  computed,
-  input,
-  inject,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-@Component({
+@Directive({
   selector: 'span[scEditorWordCount]',
-  template: `
-    {{ wordCount() }} words
-  `,
+  exportAs: 'scEditorWordCount',
   host: {
     'data-slot': 'editor-word-count',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorWordCount {
   readonly editor = inject(SC_EDITOR);
@@ -27,7 +16,7 @@ export class ScEditorWordCount {
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
-  protected readonly wordCount = computed(() => {
+  readonly wordCount = computed(() => {
     this.editor.contentVersion();
     const text = this.getPlainText().trim();
     if (!text) return 0;

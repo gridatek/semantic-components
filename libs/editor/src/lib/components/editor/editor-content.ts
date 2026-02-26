@@ -1,9 +1,8 @@
 import {
   afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
   computed,
   DestroyRef,
+  Directive,
   effect,
   ElementRef,
   inject,
@@ -11,21 +10,17 @@ import {
   model,
   output,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-@Component({
+@Directive({
   selector: 'div[scEditorContent]',
-  template: ``, // Empty - host element is the content div
   host: {
     'data-slot': 'editor-content',
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorContent {
   readonly editor = inject(SC_EDITOR);

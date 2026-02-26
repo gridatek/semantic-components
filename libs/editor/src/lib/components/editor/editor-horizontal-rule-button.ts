@@ -1,19 +1,9 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  computed,
-  input,
-  inject,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-@Component({
+@Directive({
   selector: 'button[scEditorHorizontalRule]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'editor-horizontal-rule',
     type: 'button',
@@ -23,8 +13,6 @@ import { SC_EDITOR } from './editor';
     '[attr.title]': '"Horizontal line"',
     '(click)': 'onClick()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorHorizontalRuleButton {
   readonly editor = inject(SC_EDITOR);

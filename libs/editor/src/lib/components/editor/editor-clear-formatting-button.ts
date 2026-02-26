@@ -1,19 +1,9 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  computed,
-  input,
-  inject,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-@Component({
+@Directive({
   selector: 'button[scEditorClearFormatting]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'editor-clear-formatting',
     type: 'button',
@@ -23,8 +13,6 @@ import { SC_EDITOR } from './editor';
     '[attr.title]': '"Clear formatting"',
     '(click)': 'onClick()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorClearFormattingButton {
   readonly editor = inject(SC_EDITOR);

@@ -1,25 +1,26 @@
 import {
-  Component,
-  ChangeDetectionStrategy,
+  afterNextRender,
   computed,
-  input,
+  Directive,
+  ElementRef,
   inject,
-  ViewEncapsulation,
+  input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_EDITOR, ScEditorHeading } from './editor';
 
-@Component({
+const HEADING_OPTIONS: { value: string; label: string }[] = [
+  { value: 'p', label: 'Paragraph' },
+  { value: 'h1', label: 'Heading 1' },
+  { value: 'h2', label: 'Heading 2' },
+  { value: 'h3', label: 'Heading 3' },
+  { value: 'h4', label: 'Heading 4' },
+  { value: 'h5', label: 'Heading 5' },
+  { value: 'h6', label: 'Heading 6' },
+];
+
+@Directive({
   selector: 'select[scEditorHeading]',
-  template: `
-    <option value="p">Paragraph</option>
-    <option value="h1">Heading 1</option>
-    <option value="h2">Heading 2</option>
-    <option value="h3">Heading 3</option>
-    <option value="h4">Heading 4</option>
-    <option value="h5">Heading 5</option>
-    <option value="h6">Heading 6</option>
-  `,
   host: {
     'data-slot': 'editor-heading',
     '[class]': 'class()',
@@ -27,11 +28,10 @@ import { SC_EDITOR, ScEditorHeading } from './editor';
     '[value]': 'editor.currentHeading()',
     '(change)': 'onChange($event)',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorHeadingSelect {
   readonly editor = inject(SC_EDITOR);
+  private readonly elementRef = inject(ElementRef<HTMLSelectElement>);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
@@ -40,6 +40,18 @@ export class ScEditorHeadingSelect {
       this.classInput(),
     ),
   );
+
+  constructor() {
+    afterNextRender(() => {
+      const select = this.elementRef.nativeElement;
+      for (const { value, label } of HEADING_OPTIONS) {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = label;
+        select.appendChild(option);
+      }
+    });
+  }
 
   onChange(event: Event): void {
     const value = (event.target as HTMLSelectElement).value as ScEditorHeading;

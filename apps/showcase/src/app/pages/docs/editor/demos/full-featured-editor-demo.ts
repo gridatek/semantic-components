@@ -4,6 +4,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorContent,
@@ -100,6 +101,7 @@ import {
     SiCodeIcon,
     SiMinusIcon,
     SiRemoveFormattingIcon,
+    ScButton,
   ],
   template: `
     <div class="w-full">
@@ -216,24 +218,20 @@ import {
 
         <div scEditorFooter>
           <div scEditorCount>
-            <span scEditorWordCount></span>
-            <span scEditorCharCount></span>
+            <span scEditorWordCount #wc="scEditorWordCount">
+              {{ wc.wordCount() }} words
+            </span>
+            <span scEditorCharCount #cc="scEditorCharCount">
+              {{ cc.charCount() }} characters
+            </span>
           </div>
         </div>
       </div>
       <div class="mt-4 flex gap-4">
-        <button
-          type="button"
-          (click)="clearContent()"
-          class="px-3 py-1.5 text-sm border rounded-md hover:bg-accent"
-        >
+        <button scButton variant="outline" (click)="clearContent()">
           Clear Content
         </button>
-        <button
-          type="button"
-          (click)="insertSampleContent()"
-          class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
-        >
+        <button scButton (click)="insertSampleContent()">
           Insert Sample Content
         </button>
       </div>

@@ -47,8 +47,8 @@ import {
 
       <div scEditorFooter>
         <div scEditorCount>
-          <span scEditorWordCount></span>
-          <span scEditorCharCount></span>
+          <span scEditorWordCount #wc="scEditorWordCount">{{ wc.wordCount() }} words</span>
+          <span scEditorCharCount #cc="scEditorCharCount">{{ cc.charCount() }} characters</span>
         </div>
       </div>
     </div>

@@ -1,19 +1,9 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  computed,
-  input,
-  inject,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
-@Component({
+@Directive({
   selector: 'button[scEditorNumberedList]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'editor-numbered-list',
     type: 'button',
@@ -24,8 +14,6 @@ import { SC_EDITOR } from './editor';
     '[attr.title]': '"Numbered list"',
     '(click)': 'onClick()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorNumberedListButton {
   readonly editor = inject(SC_EDITOR);

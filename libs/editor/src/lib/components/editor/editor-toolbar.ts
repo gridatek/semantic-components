@@ -1,25 +1,14 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  computed,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
+@Directive({
   selector: 'div[scEditorToolbar]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'editor-toolbar',
     role: 'toolbar',
     '[attr.aria-label]': '"Text formatting"',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEditorToolbar {
   readonly classInput = input<string>('', { alias: 'class' });
