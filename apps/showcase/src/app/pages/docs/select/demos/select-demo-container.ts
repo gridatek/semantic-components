@@ -10,7 +10,11 @@ import { SelectDemo } from './select-demo';
   selector: 'app-select-demo-container',
   imports: [DemoContainer, SelectDemo],
   template: `
-    <app-demo-container title="Select" [code]="code">
+    <app-demo-container
+      title="Select"
+      demoUrl="/demos/select/select-demo"
+      [code]="code"
+    >
       <app-select-demo />
     </app-demo-container>
   `,

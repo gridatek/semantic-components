@@ -10,7 +10,11 @@ import { SelectGroupDemo } from './select-group-demo';
   selector: 'app-select-group-demo-container',
   imports: [DemoContainer, SelectGroupDemo],
   template: `
-    <app-demo-container title="Select with Groups" [code]="code">
+    <app-demo-container
+      title="Select with Groups"
+      demoUrl="/demos/select/select-group-demo"
+      [code]="code"
+    >
       <app-select-group-demo />
     </app-demo-container>
   `,

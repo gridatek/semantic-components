@@ -3049,6 +3049,13 @@ export const demosRoutes: Route[] = [
             (m) => m.SelectGroupDemo,
           ),
       },
+      {
+        path: 'select-signal-forms-demo',
+        loadComponent: () =>
+          import('../pages/docs/select/demos/select-signal-forms-demo').then(
+            (m) => m.SelectSignalFormsDemo,
+          ),
+      },
     ],
   },
   {

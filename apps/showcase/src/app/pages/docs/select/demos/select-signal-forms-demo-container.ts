@@ -10,7 +10,11 @@ import { SelectSignalFormsDemo } from './select-signal-forms-demo';
   selector: 'app-select-signal-forms-demo-container',
   imports: [DemoContainer, SelectSignalFormsDemo],
   template: `
-    <app-demo-container title="Signal Forms" [code]="code">
+    <app-demo-container
+      title="Signal Forms"
+      demoUrl="/demos/select/select-signal-forms-demo"
+      [code]="code"
+    >
       <app-select-signal-forms-demo />
     </app-demo-container>
   `,
