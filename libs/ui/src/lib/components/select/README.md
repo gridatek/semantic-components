@@ -208,6 +208,7 @@ The select components are built with accessibility in mind:
 | `class`       | `string`            | Additional CSS classes                                 |
 | `placeholder` | `string` (required) | Placeholder text shown when no value is selected       |
 | `aria-label`  | `string` (required) | Accessible label for the hidden input                  |
+| `disabled`    | `boolean`           | Disables the select control                            |
 | `value`       | `model<unknown>`    | Two-way bound selected value (signal forms compatible) |
 | `label()`     | `Signal<string>`    | Returns `value()` or falls back to `placeholder()`     |
 | `exportAs`    | `'scSelect'`        | Template reference for direct access                   |

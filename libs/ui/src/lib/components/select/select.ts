@@ -26,6 +26,7 @@ import { ScSelectTrigger } from './select-trigger';
   hostDirectives: [
     {
       directive: Combobox,
+      inputs: ['disabled'],
     },
   ],
   template: `
