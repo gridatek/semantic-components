@@ -206,8 +206,8 @@ The select components are built with accessibility in mind:
 | Property      | Type                | Description                                            |
 | ------------- | ------------------- | ------------------------------------------------------ |
 | `class`       | `string`            | Additional CSS classes                                 |
-| `placeholder` | `string`            | Placeholder text shown when no value is selected       |
-| `aria-label`  | `string`            | Accessible label for the hidden input                  |
+| `placeholder` | `string` (required) | Placeholder text shown when no value is selected       |
+| `aria-label`  | `string` (required) | Accessible label for the hidden input                  |
 | `value`       | `model<unknown>`    | Two-way bound selected value (signal forms compatible) |
 | `label()`     | `Signal<string>`    | Returns `value()` or falls back to `placeholder()`     |
 | `values()`    | `Signal<unknown[]>` | Signal containing selected values                      |
