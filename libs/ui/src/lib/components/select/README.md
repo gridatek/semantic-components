@@ -1,6 +1,6 @@
 # Select Components
 
-A set of components for building accessible select dropdowns following the Single Responsibility Principle.
+Displays a list of options for the user to pick from — mimic a native select.
 
 ## Features
 
