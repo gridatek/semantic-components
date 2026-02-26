@@ -25,8 +25,8 @@ import { ScHeading } from '@semantic-components/ui';
       <div class="space-y-2">
         <h1 scHeading>Select</h1>
         <p class="text-muted-foreground">
-          Displays a list of options for the user to pick from—triggered by a
-          button.
+          Displays a list of options for the user to pick from — mimics a native
+          select.
         </p>
         <app-component-badges path="select" />
       </div>

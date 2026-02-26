@@ -717,7 +717,8 @@ export const COMPONENTS: ComponentItem[] = [
   {
     name: 'Select',
     path: 'select',
-    description: 'Displays a list of options for the user to pick from.',
+    description:
+      'Displays a list of options for the user to pick from — mimics a native select.',
     status: 'Experimental',
     library: 'ui',
     category: 'Forms',

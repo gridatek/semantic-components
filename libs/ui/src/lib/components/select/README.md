@@ -1,6 +1,6 @@
 # Select Components
 
-Displays a list of options for the user to pick from — mimic a native select.
+Displays a list of options for the user to pick from — mimics a native select.
 
 ## Features
 
