@@ -3,9 +3,10 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSelectDemoContainer } from './demos/select-demo-container';
-import { ScSelectDisabledDemoContainer } from './demos/select-disabled-demo-container';
-import { ScSelectGroupDemoContainer } from './demos/select-group-demo-container';
+import { SelectDemoContainer } from './demos/select-demo-container';
+import { SelectDisabledDemoContainer } from './demos/select-disabled-demo-container';
+import { SelectGroupDemoContainer } from './demos/select-group-demo-container';
+import { SelectSignalFormsDemoContainer } from './demos/select-signal-forms-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { ScHeading } from '@semantic-components/ui';
@@ -13,9 +14,10 @@ import { ScHeading } from '@semantic-components/ui';
 @Component({
   selector: 'app-select-page',
   imports: [
-    ScSelectDemoContainer,
-    ScSelectDisabledDemoContainer,
-    ScSelectGroupDemoContainer,
+    SelectDemoContainer,
+    SelectDisabledDemoContainer,
+    SelectGroupDemoContainer,
+    SelectSignalFormsDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -36,6 +38,7 @@ import { ScHeading } from '@semantic-components/ui';
         <app-select-demo-container />
         <app-select-group-demo-container />
         <app-select-disabled-demo-container />
+        <app-select-signal-forms-demo-container />
       </section>
     </div>
   `,

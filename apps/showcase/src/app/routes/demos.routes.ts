@@ -3032,7 +3032,21 @@ export const demosRoutes: Route[] = [
         path: 'select-demo',
         loadComponent: () =>
           import('../pages/docs/select/demos/select-demo').then(
-            (m) => m.ScSelectDemo,
+            (m) => m.SelectDemo,
+          ),
+      },
+      {
+        path: 'select-disabled-demo',
+        loadComponent: () =>
+          import('../pages/docs/select/demos/select-disabled-demo').then(
+            (m) => m.SelectDisabledDemo,
+          ),
+      },
+      {
+        path: 'select-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/select/demos/select-group-demo').then(
+            (m) => m.SelectGroupDemo,
           ),
       },
     ],

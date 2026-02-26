@@ -4,11 +4,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ScSelectGroupDemo } from './select-group-demo';
+import { SelectGroupDemo } from './select-group-demo';
 
 @Component({
   selector: 'app-select-group-demo-container',
-  imports: [DemoContainer, ScSelectGroupDemo],
+  imports: [DemoContainer, SelectGroupDemo],
   template: `
     <app-demo-container title="Select with Groups" [code]="code">
       <app-select-group-demo />
@@ -18,7 +18,7 @@ import { ScSelectGroupDemo } from './select-group-demo';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectGroupDemoContainer {
+export class SelectGroupDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,

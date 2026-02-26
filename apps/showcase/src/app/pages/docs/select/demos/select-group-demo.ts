@@ -66,4 +66,4 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectGroupDemo {}
+export class SelectGroupDemo {}

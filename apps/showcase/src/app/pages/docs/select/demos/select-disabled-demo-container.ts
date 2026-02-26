@@ -4,11 +4,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ScSelectDisabledDemo } from './select-disabled-demo';
+import { SelectDisabledDemo } from './select-disabled-demo';
 
 @Component({
   selector: 'app-select-disabled-demo-container',
-  imports: [DemoContainer, ScSelectDisabledDemo],
+  imports: [DemoContainer, SelectDisabledDemo],
   template: `
     <app-demo-container title="Disabled Select" [code]="code">
       <app-select-disabled-demo />
@@ -18,7 +18,7 @@ import { ScSelectDisabledDemo } from './select-disabled-demo';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectDisabledDemoContainer {
+export class SelectDisabledDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,

@@ -51,4 +51,4 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectDisabledDemo {}
+export class SelectDisabledDemo {}

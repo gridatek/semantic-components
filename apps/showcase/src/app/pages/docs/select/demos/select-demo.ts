@@ -128,7 +128,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectDemo {
+export class SelectDemo {
   private readonly select = viewChild.required(ScSelect);
 
   displayIcon = computed(() => {
