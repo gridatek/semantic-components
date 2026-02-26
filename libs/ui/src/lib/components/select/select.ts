@@ -34,7 +34,6 @@ import { ScSelectTrigger } from './select-trigger';
     <ng-template ngComboboxPopupContainer>
       @if (origin(); as origin) {
         <ng-template
-          cdkConnectedOverlay
           [cdkConnectedOverlay]="{
             origin,
             usePopover: 'inline',
