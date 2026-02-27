@@ -13,7 +13,7 @@ import {
   ScVideoPlayer,
   ScVideoPlayerVideo,
   ScVideoPlayerControls,
-  ScVideoPlayerPlay,
+  ScVideoPlayerPlayPause,
   ScVideoPlayerProgress,
   ScVideoPlayerTime,
   ScVideoPlayerFullscreen,
@@ -24,7 +24,7 @@ import {
     ScVideoPlayer,
     ScVideoPlayerVideo,
     ScVideoPlayerControls,
-    ScVideoPlayerPlay,
+    ScVideoPlayerPlayPause,
     ScVideoPlayerProgress,
     ScVideoPlayerTime,
     ScVideoPlayerFullscreen,
@@ -40,7 +40,7 @@ import {
       <div scVideoPlayerControls>
         <div scVideoPlayerProgress></div>
         <div class="flex items-center gap-2 mt-2">
-          <button scVideoPlayerPlay>
+          <button scVideoPlayerPlayPause>
             <!-- Play/pause icon -->
           </button>
           <span scVideoPlayerTime></span>
@@ -75,10 +75,10 @@ import {
 - **Selector**: `div[scVideoPlayerControls]`
 - **Default position**: Absolute bottom with gradient overlay
 
-**`ScVideoPlayerPlay` (Component)**
+**`ScVideoPlayerPlayPause` (Component)**
 
 - Play/pause toggle button
-- **Selector**: `button[scVideoPlayerPlay]`
+- **Selector**: `button[scVideoPlayerPlayPause]`
 - **Auto state**: Reflects playing/paused state
 
 **`ScVideoPlayerProgress` (Component)**
@@ -141,7 +141,7 @@ import {
   <video scVideoPlayerVideo [src]="video"></video>
 
   <div scVideoPlayerControls>
-    <button scVideoPlayerPlay>Play</button>
+    <button scVideoPlayerPlayPause>Play</button>
   </div>
 </div>
 ```
@@ -155,7 +155,7 @@ import {
   <div scVideoPlayerControls>
     <div scVideoPlayerProgress class="mb-2"></div>
     <div class="flex items-center gap-2">
-      <button scVideoPlayerPlay>⏯</button>
+      <button scVideoPlayerPlayPause>⏯</button>
       <span scVideoPlayerTime></span>
     </div>
   </div>
@@ -186,7 +186,7 @@ import {
     <div scVideoPlayerProgress class="mb-2"></div>
 
     <div class="flex items-center gap-2">
-      <button scVideoPlayerPlay>⏯</button>
+      <button scVideoPlayerPlayPause>⏯</button>
       <button scVideoPlayerSkip [seconds]="-10">⏪</button>
       <button scVideoPlayerSkip [seconds]="10">⏩</button>
 

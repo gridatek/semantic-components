@@ -7,7 +7,7 @@ import {
   ScVideoPlayer,
   ScVideoPlayerVideo,
   ScVideoPlayerControls,
-  ScVideoPlayerPlay,
+  ScVideoPlayerPlayPause,
   ScVideoPlayerProgress,
   ScVideoPlayerVolume,
   ScVideoPlayerTime,
@@ -38,7 +38,7 @@ import {
     ScVideoPlayer,
     ScVideoPlayerVideo,
     ScVideoPlayerControls,
-    ScVideoPlayerPlay,
+    ScVideoPlayerPlayPause,
     ScVideoPlayerProgress,
     ScVideoPlayerVolume,
     ScVideoPlayerTime,
@@ -87,7 +87,7 @@ import {
 
         <div class="flex items-center gap-2">
           <!-- Play/Pause -->
-          <button scVideoPlayerPlay>
+          <button scVideoPlayerPlayPause>
             @if (player.isPlaying()) {
               <svg siPauseIcon></svg>
             } @else {

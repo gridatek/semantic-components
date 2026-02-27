@@ -10,7 +10,7 @@ import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
-  selector: 'button[scVideoPlayerPlay]',
+  selector: 'button[scVideoPlayerPlayPause]',
   template: '<ng-content />',
   host: {
     type: 'button',
@@ -21,7 +21,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScVideoPlayerPlay {
+export class ScVideoPlayerPlayPause {
   protected readonly player = inject(SC_VIDEO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 

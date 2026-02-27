@@ -1,7 +1,7 @@
 export { ScVideoPlayer } from './video-player';
 export { ScVideoPlayerVideo } from './video-player-video';
 export { ScVideoPlayerControls } from './video-player-controls';
-export { ScVideoPlayerPlay } from './video-player-play';
+export { ScVideoPlayerPlayPause } from './video-player-play-pause';
 export { ScVideoPlayerProgress } from './video-player-progress';
 export { ScVideoPlayerVolume } from './video-player-volume';
 export { ScVideoPlayerTime } from './video-player-time';
