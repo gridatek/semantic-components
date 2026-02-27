@@ -1,4 +1,4 @@
-# Sidebar Component (scx)
+# Sidebar
 
 A comprehensive sidebar component system for Angular applications with collapsible states, mobile responsiveness, keyboard shortcuts, and state persistence.
 
