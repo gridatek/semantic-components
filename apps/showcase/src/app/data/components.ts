@@ -692,7 +692,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'resizable',
     description: 'A component that can be resized by dragging.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Layout',
     hidden: true,
   },
