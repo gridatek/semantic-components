@@ -58,33 +58,75 @@ A comprehensive sidebar component system for Angular applications with collapsib
 The sidebar uses a clever layout technique to push content to the side instead of overlaying it:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│ ScSidebarProvider (flex container)                      │
-│ ┌─────────────────────┬─────────────────────────────┐   │
-│ │  ScSidebar          │  ScSidebarInset             │   │
-│ │ ┌─────────────────┐ │  (main content)             │   │
-│ │ │ Gap Div         │ │                             │   │
-│ │ │ • Width: 16rem  │ │  <header>                   │   │
-│ │ │ • No height     │ │    <button>Toggle</button>  │   │
-│ │ │ • Pushes content│ │  </header>                  │   │
-│ │ └─────────────────┘ │                             │   │
-│ │                     │  <main>                     │   │
-│ │ ┌─────────────────┐ │    Your content here        │   │
-│ │ │ Fixed Container │ │                             │   │
-│ │ │ (actual sidebar)│ │                             │   │
-│ │ │ • Position fixed│ │                             │   │
-│ │ │ • Overlays gap  │ │                             │   │
-│ │ └─────────────────┘ │                             │   │
-│ └─────────────────────┴─────────────────────────────┘   │
-└─────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ ScSidebarProvider (flex container)                                               │
+│                                                                                  │
+│ ┌──────────────────────────────┐│┌──────────────────────────────────────────┐    │
+│ │  ScSidebar                   │││  ScSidebarInset (main content)           │    │
+│ │                              │││                                          │    │
+│ │ ┌──────────────────────────┐ │││  ┌──────────────────────────────────┐    │    │
+│ │ │ ScSidebarGap             │ │││  │ <header>                         │    │    │
+│ │ │ • Width: 16rem           │ │││  │   <button scSidebarTrigger>      │    │    │
+│ │ │ • No height              │ │││  │     Toggle                       │    │    │
+│ │ │ • Pushes content in flex │ │││  │   </button>                      │    │    │
+│ │ └──────────────────────────┘ │││  └──────────────────────────────────┘    │    │
+│ │                              │││                                          │    │
+│ │ ┌──────────────────────────┐ │││  ┌──────────────────────────────────┐    │    │
+│ │ │ ScSidebarContainer       │ │││  │ <main>                           │    │    │
+│ │ │ (position: fixed)        │ │││  │   Your content here              │    │    │
+│ │ │                          │ │││  │                                  │    │    │
+│ │ │ ┌──────────────────────┐ │ │││  │                                  │    │    │
+│ │ │ │ ScSidebarInner       │ │ │││  │                                  │    │    │
+│ │ │ │ (bg, rounded, ring)  │ │ │││  │                                  │    │    │
+│ │ │ │                      │ │ │││  │                                  │    │    │
+│ │ │ │ ┌──────────────────┐ │ │ │││  │                                  │    │    │
+│ │ │ │ │ ScSidebarHeader  │ │ │ │││  │                                  │    │    │
+│ │ │ │ └──────────────────┘ │ │ │││  │                                  │    │    │
+│ │ │ │ ┌──────────────────┐ │ │ │││  │                                  │    │    │
+│ │ │ │ │ ScSidebarBody    │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ (scrollable)     │ │ │ │││  │                                  │    │    │
+│ │ │ │ │                  │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ ┌──────────────┐ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ScSidebarGroup│ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ ┌──────────┐ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ │GroupLabel│ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ └──────────┘ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ ┌──────────┐ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ │  Menu    │ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ │ ┌──────┐ │ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ │ │Button│ │ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ │ └──────┘ │ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ │ └──────────┘ │ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │ └──────────────┘ │ │ │ │││  │                                  │    │    │
+│ │ │ │ │                  │ │ │ │││  │                                  │    │    │
+│ │ │ │ └──────────────────┘ │ │ │││  │                                  │    │    │
+│ │ │ │ ┌──────────────────┐ │ │ │││  │                                  │    │    │
+│ │ │ │ │ ScSidebarFooter  │ │ │ │││  │                                  │    │    │
+│ │ │ │ └──────────────────┘ │ │ │││  │                                  │    │    │
+│ │ │ │                      │ │ │││  │                                  │    │    │
+│ │ │ └──────────────────────┘ │ │││  └──────────────────────────────────┘    │    │
+│ │ │                          │ │││                                          │    │
+│ │ └──────────────────────────┘ │││                                          │    │
+│ │                              │││                                          │    │
+│ └──────────────────────────────┘│└──────────────────────────────────────────┘    │
+│                                 │                                                │
+│                          ScSidebarRail                                           │
+│                          (thin clickable strip                                   │
+│                           on the edge between                                    │
+│                           sidebar and content,                                   │
+│                           click to toggle)                                       │
+│                                                                                  │
+└──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Key Concepts
 
-1. **Gap Div** - An invisible spacer with width but no height that participates in the flex layout, creating space for the sidebar
-2. **Fixed Container** - The actual sidebar content, positioned fixed to overlay the gap
-3. **Flex Layout** - The provider uses flexbox, making the gap and content area sit side-by-side
-4. **Responsive Collapse** - When collapsed, the gap width transitions to 0, allowing content to use full width
+1. **ScSidebarGap** - An invisible spacer with width but no height that participates in the flex layout, creating space for the sidebar
+2. **ScSidebarContainer** - The fixed-position wrapper that holds the actual sidebar content, overlaying the gap
+3. **ScSidebarInner** - Applies background color and variant-specific styles (rounded corners, shadow, ring for floating variant)
+4. **ScSidebarRail** - A thin invisible button on the edge between the sidebar and main content; click it to toggle the sidebar. Cursor changes to indicate collapse direction. Shows a subtle 2px border on hover
+5. **Flex Layout** - The provider uses flexbox, making the gap and content area sit side-by-side
+6. **Responsive Collapse** - When collapsed, the gap width transitions to 0, allowing content to use full width
 
 This architecture ensures smooth transitions and proper content flow without JavaScript layout calculations.
 
