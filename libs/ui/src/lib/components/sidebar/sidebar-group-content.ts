@@ -1,17 +1,17 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[scSidebarFooter]',
+  selector: 'div[scSidebarGroupContent]',
   host: {
-    'data-slot': 'sidebar-footer',
+    'data-slot': 'sidebar-group-content',
     '[class]': 'class()',
   },
 })
-export class ScSidebarFooter {
+export class ScSidebarGroupContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex flex-col gap-2 p-2', this.classInput()),
+    cn('w-full text-sm', this.classInput()),
   );
 }

@@ -36,8 +36,8 @@ import {
   ScSidebarProvider,
   ScSidebarRail,
   ScSidebarTrigger,
-  ScThemeToggle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { ScThemeToggle } from '@semantic-components/ui-lab';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,

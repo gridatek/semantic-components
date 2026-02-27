@@ -1,19 +1,19 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
-  selector: 'input[scSidebarInput]',
+  selector: 'div[scSidebarBody]',
   host: {
-    'data-slot': 'sidebar-input',
+    'data-slot': 'sidebar-body',
     '[class]': 'class()',
   },
 })
-export class ScSidebarInput {
+export class ScSidebarBody {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'h-8 w-full bg-background shadow-none focus-visible:ring-2 focus-visible:ring-sidebar-ring',
+      'no-scrollbar flex min-h-0 flex-1 flex-col gap-0 overflow-auto group-data-[collapsible=icon]:overflow-hidden',
       this.classInput(),
     ),
   );

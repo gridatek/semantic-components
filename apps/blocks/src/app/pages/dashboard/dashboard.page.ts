@@ -27,7 +27,7 @@ import {
   ScSidebarMenuAction,
   ScSidebarMenuBadge,
   ScSidebarMenuSkeleton,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({

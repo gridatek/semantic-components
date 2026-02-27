@@ -38,7 +38,6 @@ export * from './qr-code';
 export * from './rating-field';
 export * from './resizable';
 export * from './search-input';
-export * from './sidebar';
 export * from './signature-pad';
 export * from './sortable-list';
 export * from './speed-dial';

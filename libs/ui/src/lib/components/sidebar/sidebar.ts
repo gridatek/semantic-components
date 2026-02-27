@@ -12,7 +12,7 @@ import {
   ScSheetClose,
   ScSheetPortal,
   ScSheetProvider,
-} from '@semantic-components/ui';
+} from '../sheet';
 import { ScSidebarContainer } from './sidebar-container';
 import { ScSidebarGap } from './sidebar-gap';
 import { ScSidebarInner } from './sidebar-inner';

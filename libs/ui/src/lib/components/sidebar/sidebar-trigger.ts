@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { buttonVariants, ScButtonVariants } from '../button';
 import { ScSidebarState } from './sidebar-state';
-import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
 @Directive({
   selector: 'button[scSidebarTrigger]',
