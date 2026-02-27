@@ -11,12 +11,12 @@ import {
   SiVolume2Icon,
   SiVolumeXIcon,
 } from '@semantic-icons/lucide-icons';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ScSlider } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
   selector: 'div[scAudioPlayerVolume]',
-  imports: [SiVolumeXIcon, SiVolume1Icon, SiVolume2Icon],
+  imports: [SiVolumeXIcon, SiVolume1Icon, SiVolume2Icon, ScSlider],
   template: `
     <button
       type="button"
@@ -33,14 +33,15 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       }
     </button>
     <input
-      type="range"
+      scSlider
+      class="w-24"
       min="0"
       max="1"
       step="0.01"
-      [value]="player.volume()"
-      (input)="onVolumeChange($event)"
-      class="accent-primary h-1 w-20 cursor-pointer"
       aria-label="Volume"
+      [value]="player.volume()"
+      [style.--fill-percent]="player.volume() * 100 + '%'"
+      (input)="onVolumeChange($event)"
     />
   `,
   host: {
