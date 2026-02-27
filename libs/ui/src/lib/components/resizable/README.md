@@ -4,11 +4,18 @@ Accessible resizable panel groups and layouts with drag support.
 
 ## Components
 
-| Component               | Selector                  | Role                                                                                 |
-| ----------------------- | ------------------------- | ------------------------------------------------------------------------------------ |
-| `ScResizablePanelGroup` | `[scResizablePanelGroup]` | Container with `aria-orientation`. Inputs: `direction`                               |
-| `ScResizablePanel`      | `[scResizablePanel]`      | Individual panel. Inputs: `defaultSize`, `minSize`, `maxSize`                        |
-| `ScResizableHandle`     | `[scResizableHandle]`     | Drag handle with `aria-orientation`. Inputs: `withHandle` (show `GripVertical` icon) |
+| Component                    | Selector                       | Role                                                          |
+| ---------------------------- | ------------------------------ | ------------------------------------------------------------- |
+| `ScResizablePanelGroup`      | `[scResizablePanelGroup]`      | Container with `aria-orientation`. Inputs: `direction`        |
+| `ScResizablePanel`           | `[scResizablePanel]`           | Individual panel. Inputs: `defaultSize`, `minSize`, `maxSize` |
+| `ScResizableHandle`          | `[scResizableHandle]`          | Drag handle with `aria-orientation`. Inputs: `withHandle`     |
+| `ScResizableHandleIndicator` | `[scResizableHandleIndicator]` | Visual grip bar rendered inside the handle                    |
+
+## Types
+
+| Type                   | Description                  |
+| ---------------------- | ---------------------------- |
+| `ScResizableDirection` | `'horizontal' \| 'vertical'` |
 
 ## Usage
 
@@ -31,17 +38,17 @@ Accessible resizable panel groups and layouts with drag support.
 ### Vertical Layout
 
 ```html
-<div scResizablePanelGroup direction="vertical" class="min-h-[300px] max-w-md rounded-lg border">
+<div scResizablePanelGroup direction="vertical" class="h-[300px] max-w-md rounded-lg border">
   <div scResizablePanel [defaultSize]="30">Header</div>
   <div scResizableHandle></div>
   <div scResizablePanel [defaultSize]="70">Content</div>
 </div>
 ```
 
-### With Handle Icon
+### With Handle
 
 ```html
-<div scResizablePanelGroup direction="horizontal">
+<div scResizablePanelGroup direction="horizontal" class="min-h-[200px] max-w-md rounded-lg border">
   <div scResizablePanel [defaultSize]="30">Sidebar</div>
   <div scResizableHandle [withHandle]="true"></div>
   <div scResizablePanel [defaultSize]="70">Content</div>
@@ -51,7 +58,7 @@ Accessible resizable panel groups and layouts with drag support.
 ### Size Constraints
 
 ```html
-<div scResizablePanelGroup direction="horizontal">
+<div scResizablePanelGroup direction="horizontal" class="min-h-[200px] max-w-lg rounded-lg border">
   <div scResizablePanel [defaultSize]="25" [minSize]="15">Left</div>
   <div scResizableHandle [withHandle]="true"></div>
   <div scResizablePanel [defaultSize]="50">Center</div>
@@ -63,7 +70,7 @@ Accessible resizable panel groups and layouts with drag support.
 ### Nested Panels
 
 ```html
-<div scResizablePanelGroup direction="horizontal" class="min-h-[300px]">
+<div scResizablePanelGroup direction="horizontal" class="min-h-[300px] max-w-lg rounded-lg border">
   <div scResizablePanel [defaultSize]="30">Sidebar</div>
   <div scResizableHandle></div>
   <div scResizablePanel [defaultSize]="70">
