@@ -48,14 +48,9 @@ import {
     SiShuffleIcon,
   ],
   template: `
-    <div
-      scAudioPlayer
-      #player="scAudioPlayer"
-      [tracks]="tracks"
-      class="w-full max-w-md"
-    >
+    <div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks">
       <!-- Cover -->
-      <div scAudioPlayerCover class="mx-auto aspect-square w-full"></div>
+      <div scAudioPlayerCover></div>
 
       <!-- Track Info -->
       <div scAudioPlayerInfo></div>

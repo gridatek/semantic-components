@@ -49,7 +49,10 @@ export class ScAudioPlayer {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('bg-card flex flex-col gap-3 rounded-lg border p-4', this.classInput()),
+    cn(
+      'bg-card flex w-full max-w-md flex-col gap-3 rounded-lg border p-4',
+      this.classInput(),
+    ),
   );
 
   // Inputs
