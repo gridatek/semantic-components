@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  input,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -27,6 +28,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ScButtonPattern } from '@semantic-components/ui-lab';
 import {
+  type ColumnDef,
   type ColumnFiltersState,
   type ColumnPinningState,
   type ExpandedState,
@@ -46,7 +48,6 @@ import {
 } from '@tanstack/angular-table';
 
 import { DataTableColumnPinning } from './data-table-column-pinning';
-import { columns } from './data-table-columns';
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';
 import type { User } from './user.service';
@@ -393,7 +394,7 @@ import { UserService } from './user.service';
             <tr scTableRow>
               <td
                 scTableCell
-                [attr.colSpan]="columns.length"
+                [attr.colSpan]="columns().length"
                 class="h-24 text-center text-muted-foreground"
               >
                 No results.
@@ -439,12 +440,13 @@ export class DataTable {
   } | null>(null);
   readonly editValue = signal<string>('');
 
-  readonly columns = columns;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly columns = input.required<ColumnDef<any, any>[]>();
   readonly pageSizeOptions = [5, 10, 20, 30];
 
   readonly table = createAngularTable(() => ({
     data: this.data(),
-    columns: this.columns,
+    columns: this.columns(),
     state: {
       sorting: this.sorting(),
       columnFilters: this.columnFilters(),

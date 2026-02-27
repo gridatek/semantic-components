@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 
 import { DataTable } from './data-table';
+import { columns } from './data-table-columns';
 
 @Component({
   selector: 'app-data-table-page',
@@ -16,8 +17,10 @@ import { DataTable } from './data-table';
     <div class="container mx-auto px-4 py-10">
       <h1 class="mb-6 text-3xl font-bold">TanStack Table Demo</h1>
 
-      <app-data-table />
+      <app-data-table [columns]="columns" />
     </div>
   `,
 })
-export default class DataTablePage {}
+export default class DataTablePage {
+  readonly columns = columns;
+}
