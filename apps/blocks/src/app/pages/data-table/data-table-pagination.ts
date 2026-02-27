@@ -75,12 +75,17 @@ import type { Table } from '@tanstack/angular-table';
         </span>
         <ul scPaginationList>
           <li scPaginationItem>
-            <button scPaginationFirst size="icon-sm">
+            <button scPaginationFirst variant="outline" size="icon-sm">
               <svg siChevronsLeftIcon class="size-4"></svg>
             </button>
           </li>
           <li scPaginationItem>
-            <button scPaginationPrevious size="icon-sm">
+            <button
+              scPaginationPrevious
+              variant="outline"
+              size="icon-sm"
+              class="pl-0"
+            >
               <svg siChevronLeftIcon class="size-4"></svg>
             </button>
           </li>
@@ -100,12 +105,17 @@ import type { Table } from '@tanstack/angular-table';
           }
 
           <li scPaginationItem>
-            <button scPaginationNext size="icon-sm">
+            <button
+              scPaginationNext
+              variant="outline"
+              size="icon-sm"
+              class="pr-0"
+            >
               <svg siChevronRightIcon class="size-4"></svg>
             </button>
           </li>
           <li scPaginationItem>
-            <button scPaginationLast size="icon-sm">
+            <button scPaginationLast variant="outline" size="icon-sm">
               <svg siChevronsRightIcon class="size-4"></svg>
             </button>
           </li>
