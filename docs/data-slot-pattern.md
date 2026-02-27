@@ -99,7 +99,7 @@ Consumers can combine `:has()` with `data-slot` for conditional styling:
 
 ```html
 <!-- Make description red when checkbox is unchecked -->
-<div scCheckboxField class="has-[[data-state=unchecked]]:*:data-[slot=field-description]:text-destructive">
+<div scCheckboxField class="has-data-[state=unchecked]:*:data-[slot=field-description]:text-destructive">
   <input type="checkbox" scCheckbox id="required" />
   <label scLabel for="required">Required field</label>
   <p scFieldDescription>You must accept to continue.</p>

@@ -46,7 +46,7 @@ import type { Notification, NotificationAction } from './notification-types';
       }
 
       <!-- Icon or Avatar -->
-      <div class="ml-4 flex-shrink-0">
+      <div class="ml-4 shrink-0">
         @if (notification().avatar) {
           <img
             [src]="notification().avatar"
@@ -116,7 +116,7 @@ import type { Notification, NotificationAction } from './notification-types';
       @if (showDismiss()) {
         <button
           type="button"
-          class="hover:bg-muted text-muted-foreground hover:text-foreground ml-2 flex-shrink-0 rounded-full p-1 opacity-0 transition-all group-hover:opacity-100"
+          class="hover:bg-muted text-muted-foreground hover:text-foreground ml-2 shrink-0 rounded-full p-1 opacity-0 transition-all group-hover:opacity-100"
           (click)="onDismiss($event)"
           aria-label="Dismiss notification"
         >

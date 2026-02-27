@@ -45,7 +45,7 @@ export class ScCommandItem {
   protected readonly class = computed(() =>
     cn(
       'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none',
-      'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'data-disabled:pointer-events-none data-disabled:opacity-50',
       'data-[active=true]:bg-accent data-[active=true]:text-accent-foreground',
       'hover:bg-accent hover:text-accent-foreground',
       '[&>svg]:size-4 [&>svg]:shrink-0',

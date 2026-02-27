@@ -64,7 +64,7 @@ interface CommandItem {
     <div scDialogProvider [(open)]="open">
       <ng-template scDialogPortal>
         <div scDialog class="w-lg gap-0 p-0">
-          <div scCommand class="[&_[data-slot=command-input]]:h-12">
+          <div scCommand class="**:data-[slot=command-input]:h-12">
             <div scCommandInput placeholder="Type a command or search..."></div>
             <div scCommandList>
               @if (

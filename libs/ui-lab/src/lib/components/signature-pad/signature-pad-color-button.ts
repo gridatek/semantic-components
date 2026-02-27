@@ -38,7 +38,7 @@ export class ScSignaturePadColorButton {
     cn(
       'inline-flex items-center justify-center size-8 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors',
       'disabled:pointer-events-none disabled:opacity-50',
-      'data-[active]:border-primary data-[active]:bg-primary/10',
+      'data-active:border-primary data-active:bg-primary/10',
       this.classInput(),
     ),
   );

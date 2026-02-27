@@ -14,7 +14,7 @@ import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
   imports: [RouterLink, ScLink, SiGithubIcon, SiStarIcon],
   template: `
     <section
-      class="from-background to-muted/30 bg-gradient-to-b px-4 py-20 md:px-6 lg:px-8"
+      class="from-background to-muted/30 bg-linear-to-b px-4 py-20 md:px-6 lg:px-8"
     >
       <div class="mx-auto max-w-4xl space-y-6 text-center">
         <h1 class="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">

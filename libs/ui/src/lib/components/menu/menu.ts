@@ -25,7 +25,7 @@ export class ScMenu<V = string> {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-popover text-popover-foreground min-w-32 w-[15rem] rounded-lg p-1 shadow-md ring-1 ring-foreground/10 z-50 overflow-x-hidden overflow-y-auto data-[visible=false]:hidden',
+      'bg-popover text-popover-foreground min-w-32 w-60 rounded-lg p-1 shadow-md ring-1 ring-foreground/10 z-50 overflow-x-hidden overflow-y-auto data-[visible=false]:hidden',
       this.classInput(),
     ),
   );

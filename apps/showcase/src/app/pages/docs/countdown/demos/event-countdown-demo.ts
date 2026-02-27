@@ -10,7 +10,7 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   imports: [ScCountdown],
   template: `
     <div
-      class="from-primary/10 to-primary/5 max-w-md rounded-lg border bg-gradient-to-br p-8 text-center"
+      class="from-primary/10 to-primary/5 max-w-md rounded-lg border bg-linear-to-br p-8 text-center"
     >
       <h4 class="mb-2 text-lg font-semibold">Product Launch</h4>
       <p class="text-muted-foreground mb-6">Get ready for something amazing!</p>

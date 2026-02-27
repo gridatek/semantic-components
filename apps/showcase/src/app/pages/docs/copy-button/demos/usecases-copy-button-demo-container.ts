@@ -65,7 +65,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
 
       <!-- Promo Code -->
       <div
-        class="rounded-lg border bg-gradient-to-r from-purple-500/10 to-pink-500/10 p-4"
+        class="rounded-lg border bg-linear-to-r from-purple-500/10 to-pink-500/10 p-4"
       >
         <h4 class="text-sm font-medium mb-1">Your promo code</h4>
         <div class="flex items-center justify-between">

@@ -35,7 +35,7 @@ export class ScSlider {
   protected readonly class = computed(() =>
     cn(
       'w-full cursor-pointer appearance-none bg-transparent disabled:pointer-events-none disabled:opacity-50',
-      '[&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[image:linear-gradient(to_right,var(--primary)_var(--fill-percent,0%),var(--muted)_var(--fill-percent,0%))]',
+      '[&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--primary)_var(--fill-percent,0%),var(--muted)_var(--fill-percent,0%))]',
       '[&::-moz-range-track]:h-1 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-muted',
       '[&::-moz-range-progress]:h-1 [&::-moz-range-progress]:rounded-full [&::-moz-range-progress]:bg-primary',
       '[&::-webkit-slider-thumb]:size-3 [&::-webkit-slider-thumb]:-mt-1 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-0 [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:transition-shadow',

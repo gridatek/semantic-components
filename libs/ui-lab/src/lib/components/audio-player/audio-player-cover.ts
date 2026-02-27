@@ -34,6 +34,6 @@ export class ScAudioPlayerCover {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('rounded-md overflow-hidden bg-muted flex-shrink-0', this.classInput()),
+    cn('rounded-md overflow-hidden bg-muted shrink-0', this.classInput()),
   );
 }

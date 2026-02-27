@@ -37,7 +37,7 @@ import { cn } from '@semantic-components/ui';
 
     [data-slot='marquee'] > div {
       display: flex;
-      flex-shrink: 0;
+      shrink: 0;
       gap: var(--gap);
       animation: marquee var(--duration) linear infinite;
     }

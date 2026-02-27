@@ -27,6 +27,6 @@ export class ScPasswordFieldInputGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('relative', 'data-[disabled]:opacity-50', this.classInput()),
+    cn('relative', 'data-disabled:opacity-50', this.classInput()),
   );
 }

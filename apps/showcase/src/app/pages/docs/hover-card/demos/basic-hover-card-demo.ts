@@ -33,7 +33,7 @@ import {
         <div scHoverCard>
           <div class="flex justify-between gap-4">
             <div
-              class="flex size-12 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-700 text-xl font-bold text-white"
+              class="flex size-12 items-center justify-center rounded-full bg-linear-to-br from-red-500 to-red-700 text-xl font-bold text-white"
             >
               A
             </div>

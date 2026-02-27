@@ -29,7 +29,7 @@ interface User {
             class="hover:bg-muted/50 flex h-full items-center gap-4 border-b px-4 transition-colors"
           >
             <div
-              class="bg-primary/10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
+              class="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
             >
               <span class="text-primary text-sm font-medium">
                 {{ getInitials(user.name) }}

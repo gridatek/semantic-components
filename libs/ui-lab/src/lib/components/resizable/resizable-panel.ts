@@ -8,8 +8,8 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
     'data-slot': 'resizable-panel',
     'data-panel': '',
     '[class]': 'class()',
-    '[style.flex-grow]': 'size()',
-    '[style.flex-shrink]': '1',
+    '[style.grow]': 'size()',
+    '[style.shrink]': '1',
     '[style.flex-basis]': '"0%"',
     '[style.min-width]':
       'group.direction() === "horizontal" ? minSizePx() : undefined',

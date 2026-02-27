@@ -138,7 +138,7 @@ export class ScComponentNameGroup {
   readonly component = inject(SC_COMPONENT_NAME);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('inline-flex items-center rounded-md border border-input', 'focus-within:ring-1 focus-within:ring-ring', 'data-[disabled]:opacity-50', this.classInput()));
+  protected readonly class = computed(() => cn('inline-flex items-center rounded-md border border-input', 'focus-within:ring-1 focus-within:ring-ring', 'data-disabled:opacity-50', this.classInput()));
 }
 ```
 

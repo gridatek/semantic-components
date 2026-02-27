@@ -52,8 +52,8 @@ export class ScSortableItem<T> {
     cn(
       'relative select-none',
       'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md',
-      'data-[dragging]:opacity-50 data-[dragging]:z-50',
-      'data-[drag-over]:ring-2 data-[drag-over]:ring-primary',
+      'data-dragging:opacity-50 data-dragging:z-50',
+      'data-drag-over:ring-2 data-drag-over:ring-primary',
       'transition-[box-shadow,opacity]',
       this.classInput(),
     ),

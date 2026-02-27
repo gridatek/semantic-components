@@ -27,7 +27,7 @@ import {
     <div
       scImageCompare
       [(position)]="position"
-      class="aspect-[2/1] w-full max-w-2xl"
+      class="aspect-2/1 w-full max-w-2xl"
     >
       <div scImageCompareContainer>
         <img

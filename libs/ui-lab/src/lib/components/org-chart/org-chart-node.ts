@@ -37,11 +37,11 @@ import type {
             <img
               [src]="node().avatar"
               [alt]="node().name"
-              class="h-12 w-12 flex-shrink-0 rounded-full object-cover"
+              class="h-12 w-12 shrink-0 rounded-full object-cover"
             />
           } @else {
             <div
-              class="bg-primary/10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full"
+              class="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
             >
               <span class="text-primary text-lg font-semibold">
                 {{ getInitials(node().name) }}
@@ -66,7 +66,7 @@ import type {
 
           <!-- Expand indicator -->
           @if (hasChildren()) {
-            <div class="ml-2 flex-shrink-0">
+            <div class="ml-2 shrink-0">
               <svg siChevronDownIcon [class]="expandIconClass()"></svg>
             </div>
           }

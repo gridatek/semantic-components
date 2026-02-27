@@ -630,7 +630,7 @@ export class ScEmojiPicker {
 
   protected categoryTabClass(isActive: boolean): string {
     return cn(
-      'flex-shrink-0 p-2 text-lg hover:bg-accent transition-colors',
+      'shrink-0 p-2 text-lg hover:bg-accent transition-colors',
       isActive && 'bg-accent',
     );
   }

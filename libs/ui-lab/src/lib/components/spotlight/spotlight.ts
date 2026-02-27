@@ -176,7 +176,7 @@ export class ScSpotlight {
 
   protected readonly containerClass = computed(() =>
     cn(
-      'fixed inset-0 z-[9999]',
+      'fixed inset-0 z-9999',
       'animate-in fade-in-0 duration-200',
       this.class(),
     ),

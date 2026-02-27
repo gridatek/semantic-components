@@ -35,7 +35,7 @@ export class ScTreeItemTrigger {
       'cursor-pointer select-none outline-none',
       'hover:bg-accent hover:text-accent-foreground',
       'focus-visible:bg-accent focus-visible:text-accent-foreground',
-      'aria-[selected=true]:bg-accent aria-[selected=true]:text-accent-foreground',
+      'aria-selected:bg-accent aria-selected:text-accent-foreground',
       this.classInput(),
     ),
   );

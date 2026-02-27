@@ -50,7 +50,7 @@ export class ScFileUploadDropzone {
       'relative flex min-h-[150px] cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed',
       'transition-colors hover:border-primary/50 hover:bg-accent/50',
       'data-[dragging=true]:border-primary data-[dragging=true]:bg-accent',
-      'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'data-disabled:pointer-events-none data-disabled:opacity-50',
       this.classInput(),
     ),
   );

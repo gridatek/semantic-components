@@ -37,8 +37,8 @@ export class ScNumberFieldScrubArea {
     cn(
       'inline-flex items-center gap-2 mb-2',
       'select-none',
-      'data-[scrubbing]:cursor-ew-resize',
-      'data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
+      'data-scrubbing:cursor-ew-resize',
+      'data-disabled:opacity-50 data-disabled:cursor-not-allowed',
       !this.numberField.disabled() && 'cursor-ew-resize',
       this.classInput(),
     ),

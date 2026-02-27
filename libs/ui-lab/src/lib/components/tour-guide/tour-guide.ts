@@ -296,9 +296,7 @@ export class ScTourGuide implements DoCheck {
     () => this.tourService.options().allowClose ?? true,
   );
 
-  protected readonly overlayClass = computed(() =>
-    cn('fixed inset-0 z-[9999]'),
-  );
+  protected readonly overlayClass = computed(() => cn('fixed inset-0 z-9999'));
 
   protected readonly tooltipClass = computed(() =>
     cn(

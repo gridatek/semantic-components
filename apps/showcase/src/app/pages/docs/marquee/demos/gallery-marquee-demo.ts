@@ -17,7 +17,7 @@ import {
       @for (i of images; track i) {
         <div
           scMarqueeItem
-          class="from-primary/20 to-primary/5 flex h-32 w-48 items-center justify-center rounded-lg bg-gradient-to-br"
+          class="from-primary/20 to-primary/5 flex h-32 w-48 items-center justify-center rounded-lg bg-linear-to-br"
         >
           <span class="text-4xl opacity-50">📷</span>
         </div>
@@ -26,7 +26,7 @@ import {
         @for (i of images; track i) {
           <div
             scMarqueeItem
-            class="from-primary/20 to-primary/5 flex h-32 w-48 items-center justify-center rounded-lg bg-gradient-to-br"
+            class="from-primary/20 to-primary/5 flex h-32 w-48 items-center justify-center rounded-lg bg-linear-to-br"
           >
             <span class="text-4xl opacity-50">📷</span>
           </div>

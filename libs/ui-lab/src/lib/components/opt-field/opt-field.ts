@@ -43,7 +43,7 @@ export class ScOptField {
   readonly maxLength = computed(() => this.slots().length);
 
   protected readonly class = computed(() =>
-    cn('flex items-center gap-2 has-[:disabled]:opacity-50', this.classInput()),
+    cn('flex items-center gap-2 has-disabled:opacity-50', this.classInput()),
   );
 
   readonly chars = computed(() => {

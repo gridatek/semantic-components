@@ -64,7 +64,7 @@ export class ScContextMenuSubContent {
 
   protected readonly contentClass = computed(() =>
     cn(
-      'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg',
+      'z-50 min-w-32 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg',
       this.submenu.open()
         ? 'opacity-100 scale-100 transition-[opacity,transform] duration-150 ease-out'
         : 'opacity-0 scale-95 transition-[opacity,transform] duration-150 ease-in',

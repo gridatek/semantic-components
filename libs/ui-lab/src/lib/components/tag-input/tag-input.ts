@@ -51,7 +51,7 @@ export class ScTagInput {
     cn(
       'flex flex-wrap items-center gap-1.5 min-h-10 w-full rounded-md border border-input bg-background px-3 py-2',
       'focus-within:ring-1 focus-within:ring-ring focus-within:border-ring',
-      'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
+      'data-disabled:cursor-not-allowed data-disabled:opacity-50',
       this.classInput(),
     ),
   );

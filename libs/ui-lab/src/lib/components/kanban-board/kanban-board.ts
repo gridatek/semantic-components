@@ -39,7 +39,7 @@ import type {
       }
 
       @if (showAddColumn()) {
-        <div class="max-w-[320px] min-w-[280px] flex-shrink-0">
+        <div class="max-w-[320px] min-w-[280px] shrink-0">
           @if (isAddingColumn()) {
             <div class="bg-muted/30 rounded-lg border p-3">
               <input

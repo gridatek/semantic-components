@@ -54,7 +54,7 @@ interface User {
             class="flex items-center gap-4 px-4 h-full border-b hover:bg-muted/50 transition-colors"
           >
             <div
-              class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0"
+              class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
             >
               <span class="text-sm font-medium text-primary">
                 {{ getInitials(user.name) }}

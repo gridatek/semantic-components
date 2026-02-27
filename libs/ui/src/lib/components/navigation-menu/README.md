@@ -99,7 +99,7 @@ ScNavigationMenu (Root - nav element)
     <ul class="grid gap-3 p-4 lg:grid-cols-[.75fr_1fr]">
       <!-- Featured card spanning rows -->
       <li class="row-span-3">
-        <a class="from-muted/50 to-muted flex h-full flex-col justify-end rounded-md bg-gradient-to-b p-6" href="#">
+        <a class="from-muted/50 to-muted flex h-full flex-col justify-end rounded-md bg-linear-to-b p-6" href="#">
           <div class="text-lg font-medium">Featured</div>
           <p class="text-muted-foreground text-sm">Highlighted content here.</p>
         </a>

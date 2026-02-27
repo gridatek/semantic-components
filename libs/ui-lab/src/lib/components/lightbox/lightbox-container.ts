@@ -162,7 +162,7 @@ import { SC_LIGHTBOX } from './lightbox';
                 >
                   <svg siZoomOutIcon class="size-5"></svg>
                 </button>
-                <span class="min-w-[3rem] text-center text-sm text-white/80">
+                <span class="min-w-12 text-center text-sm text-white/80">
                   {{ Math.round(lightbox.zoomLevel() * 100) }}%
                 </span>
                 <button
@@ -271,7 +271,7 @@ export class ScLightboxContainer {
 
   protected thumbnailClass(index: number): string {
     return cn(
-      'size-16 rounded overflow-hidden flex-shrink-0',
+      'size-16 rounded overflow-hidden shrink-0',
       'ring-2 ring-offset-2 ring-offset-black transition-all',
       index === this.lightbox.currentIndex()
         ? 'ring-white'

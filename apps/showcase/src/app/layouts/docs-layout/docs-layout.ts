@@ -96,7 +96,7 @@ import { ConfigService } from '../../services/config.service';
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
               <a scSidebarMenuButton size="lg" routerLink="/">
-                <svg app-logo class="!size-8"></svg>
+                <svg app-logo class="size-8!"></svg>
                 <div class="grid flex-1 text-left text-sm leading-tight">
                   <span class="truncate font-semibold">
                     Semantic Components

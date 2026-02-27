@@ -46,7 +46,7 @@ import {
         id="spotlight-cta"
         type="button"
         (click)="showCTA()"
-        class="px-6 py-3 bg-gradient-to-r from-primary to-purple-600 text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+        class="px-6 py-3 bg-linear-to-r from-primary to-purple-600 text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
       >
         Try Premium Feature
       </button>
@@ -73,7 +73,7 @@ import {
           <button
             type="button"
             (click)="spotlight.close()"
-            class="px-3 py-1.5 text-sm bg-gradient-to-r from-primary to-purple-600 text-primary-foreground rounded-md"
+            class="px-3 py-1.5 text-sm bg-linear-to-r from-primary to-purple-600 text-primary-foreground rounded-md"
           >
             Upgrade Now
           </button>

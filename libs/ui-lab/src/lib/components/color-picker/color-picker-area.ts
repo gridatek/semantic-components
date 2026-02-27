@@ -20,10 +20,10 @@ import { SC_COLOR_PICKER } from './color-picker';
       (touchstart)="onTouchStart($event)"
     >
       <div
-        class="absolute inset-0 rounded-md bg-gradient-to-r from-white to-transparent"
+        class="absolute inset-0 rounded-md bg-linear-to-r from-white to-transparent"
       ></div>
       <div
-        class="absolute inset-0 rounded-md bg-gradient-to-t from-black to-transparent"
+        class="absolute inset-0 rounded-md bg-linear-to-t from-black to-transparent"
       ></div>
       <div
         class="absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-md"

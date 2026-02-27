@@ -33,7 +33,7 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       <div scSignaturePadToolbar>
         <button scSignaturePadPenColor [color]="'#000000'">
           <span
-            class="border-border size-4 rounded-full border transition-transform data-[active]:scale-110"
+            class="border-border size-4 rounded-full border transition-transform data-active:scale-110"
             [attr.data-active]="'#000000'"
             style="background-color: #000000"
           ></span>

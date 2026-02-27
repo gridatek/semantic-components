@@ -61,7 +61,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 <li class="row-span-3">
                   <a
                     scNavigationMenuLink
-                    class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    class="flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="#"
                   >
                     <svg siSparklesIcon class="size-6"></svg>

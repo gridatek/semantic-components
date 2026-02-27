@@ -74,7 +74,7 @@ import {
         + Arrow - Move by 10%
       </li>
     </ul>
-    <div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+    <div scImageCompare class="w-full max-w-2xl aspect-2/1">
       <div scImageCompareContainer>
         <img
           scImageCompareBefore

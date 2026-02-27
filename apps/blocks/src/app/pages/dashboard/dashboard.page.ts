@@ -769,7 +769,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
             </div>
           </div>
           <div
-            class="bg-muted/50 min-h-[100vh] flex-1 rounded-xl p-8 md:min-h-min"
+            class="bg-muted/50 min-h-screen flex-1 rounded-xl p-8 md:min-h-min"
           >
             <div class="space-y-4">
               <h2 class="text-2xl font-bold">Welcome to the Sidebar Demo</h2>

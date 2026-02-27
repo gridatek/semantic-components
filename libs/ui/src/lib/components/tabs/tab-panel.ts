@@ -29,6 +29,6 @@ import { cn } from '../../utils';
 export class ScTabPanel {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly class = computed(() =>
-    cn('text-sm flex-1 outline-none [&[inert]]:hidden', this.classInput()),
+    cn('text-sm flex-1 outline-none [[inert]]:hidden', this.classInput()),
   );
 }

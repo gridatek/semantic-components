@@ -36,8 +36,8 @@ export class ScMarqueeFade {
     return cn(
       'pointer-events-none absolute z-10 from-background to-transparent',
       isVertical
-        ? `top-0 left-0 right-0 h-[${this.fadeSize()}] bg-gradient-to-b`
-        : `left-0 top-0 bottom-0 w-[${this.fadeSize()}] bg-gradient-to-r`,
+        ? `top-0 left-0 right-0 h-[${this.fadeSize()}] bg-linear-to-b`
+        : `left-0 top-0 bottom-0 w-[${this.fadeSize()}] bg-linear-to-r`,
     );
   });
 
@@ -46,8 +46,8 @@ export class ScMarqueeFade {
     return cn(
       'pointer-events-none absolute z-10 from-background to-transparent',
       isVertical
-        ? `bottom-0 left-0 right-0 h-[${this.fadeSize()}] bg-gradient-to-t`
-        : `right-0 top-0 bottom-0 w-[${this.fadeSize()}] bg-gradient-to-l`,
+        ? `bottom-0 left-0 right-0 h-[${this.fadeSize()}] bg-linear-to-t`
+        : `right-0 top-0 bottom-0 w-[${this.fadeSize()}] bg-linear-to-l`,
     );
   });
 }

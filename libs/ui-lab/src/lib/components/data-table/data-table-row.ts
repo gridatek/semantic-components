@@ -16,7 +16,7 @@ export class ScDataTableRow {
   protected readonly class = computed(() =>
     cn(
       'border-b transition-colors hover:bg-muted/50',
-      'data-[selected]:bg-muted',
+      'data-selected:bg-muted',
       this.classInput(),
     ),
   );

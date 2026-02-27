@@ -21,7 +21,7 @@ import { ScSkeleton } from '@semantic-components/ui';
     }
     <div
       scSkeleton
-      class="h-4 max-w-[var(--skeleton-width)] flex-1"
+      class="h-4 max-w-(--skeleton-width) flex-1"
       [style.--skeleton-width]="width"
     ></div>
   `,

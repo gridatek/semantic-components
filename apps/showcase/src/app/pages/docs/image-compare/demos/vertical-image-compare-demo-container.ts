@@ -51,7 +51,7 @@ import {
     <div
       scImageCompare
       [orientation]="'vertical'"
-      class="w-full max-w-sm aspect-[2/3]"
+      class="w-full max-w-sm aspect-2/3"
     >
       <div scImageCompareContainer>
         <img

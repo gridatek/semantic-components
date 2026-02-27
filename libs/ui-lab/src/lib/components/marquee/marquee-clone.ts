@@ -11,7 +11,5 @@ import { cn } from '@semantic-components/ui';
 export class ScMarqueeClone {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn('flex-shrink-0', this.classInput()),
-  );
+  protected readonly class = computed(() => cn('shrink-0', this.classInput()));
 }

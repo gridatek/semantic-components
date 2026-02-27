@@ -21,7 +21,7 @@ export class ScVideoPlayerControls {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4',
+      'absolute inset-x-0 bottom-0 bg-linear-to-t from-black/80 to-transparent p-4',
       this.classInput(),
     ),
   );

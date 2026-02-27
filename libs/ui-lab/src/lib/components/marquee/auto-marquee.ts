@@ -68,6 +68,6 @@ export class ScAutoMarquee {
   protected readonly trackClass = computed(() => cn('flex'));
 
   protected readonly contentClass = computed(() =>
-    cn('flex shrink-0 items-center gap-[--marquee-gap]'),
+    cn('flex shrink-0 items-center gap-(--marquee-gap)'),
   );
 }
