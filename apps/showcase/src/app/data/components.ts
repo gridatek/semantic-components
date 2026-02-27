@@ -694,7 +694,6 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui',
     category: 'Layout',
-    hidden: true,
   },
   {
     name: 'Scroll Area',
