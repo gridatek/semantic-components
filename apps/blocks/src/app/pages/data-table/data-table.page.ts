@@ -644,6 +644,7 @@ const columns: ColumnDef<User, any>[] = [
                             type="checkbox"
                             scCheckbox
                             [checked]="table.getIsAllPageRowsSelected()"
+                            [indeterminate]="table.getIsSomePageRowsSelected()"
                             (change)="table.toggleAllPageRowsSelected()"
                           />
                         </label>
