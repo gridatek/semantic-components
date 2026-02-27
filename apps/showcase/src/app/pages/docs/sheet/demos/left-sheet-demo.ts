@@ -12,6 +12,7 @@ import {
   ScSheetPortal,
   ScSheetTitle,
   ScSheetTrigger,
+  ScButton,
 } from '@semantic-components/ui';
 
 @Component({
@@ -25,15 +26,11 @@ import {
     ScSheetPortal,
     ScSheetTitle,
     ScSheetTrigger,
+    ScButton,
   ],
   template: `
     <div scSheetProvider side="left">
-      <button
-        scSheetTrigger
-        class="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-xs transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-      >
-        Open Left Sheet
-      </button>
+      <button scButton scSheetTrigger variant="outline">Open Left Sheet</button>
       <ng-template scSheetPortal>
         <div scSheet>
           <button scSheetClose>

@@ -75,7 +75,7 @@ import {
     ScVideoPlayerBigPlay,
     ScVideoPlayerBuffering,
     ScVideoPlayerSpacer,
-  ScVideoPlayerToolbar,
+    ScVideoPlayerToolbar,
     SiPlayIcon,
     SiPauseIcon,
     SiVolumeXIcon,
@@ -88,11 +88,7 @@ import {
     SiLoaderIcon,
   ],
   template: \`
-    <div
-      scVideoPlayer
-      #player="scVideoPlayer"
-
-    >
+    <div scVideoPlayer #player="scVideoPlayer">
       <!-- Buffering Indicator -->
       <div scVideoPlayerBuffering>
         <svg siLoaderIcon></svg>
