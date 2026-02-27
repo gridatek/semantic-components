@@ -1,5 +1,4 @@
-import { Directive, input } from '@angular/core';
-import { computed } from 'node_modules/@angular/aria/types/_list-navigation-chunk';
+import { computed, Directive, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
