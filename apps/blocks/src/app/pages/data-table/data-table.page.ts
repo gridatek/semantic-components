@@ -15,6 +15,12 @@ import {
   ScInput,
   ScProgress,
 } from '@semantic-components/ui';
+import {
+  SiArrowDownIcon,
+  SiArrowUpIcon,
+  SiChevronDownIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 import { ScButtonPattern } from '@semantic-components/ui-lab';
 import {
   type ColumnDef,
@@ -133,6 +139,10 @@ const columns: ColumnDef<User, any>[] = [
     ScCheckboxField,
     ScInput,
     ScProgress,
+    SiArrowUpIcon,
+    SiArrowDownIcon,
+    SiChevronDownIcon,
+    SiChevronRightIcon,
     ScButtonPattern,
     DataTablePagination,
   ],
@@ -233,7 +243,7 @@ const columns: ColumnDef<User, any>[] = [
                         </label>
                       } @else {
                         <div
-                          class="flex items-center gap-1"
+                          class="flex items-center gap-1 [&_svg]:size-4"
                           [class.cursor-pointer]="header.column.getCanSort()"
                           [class.select-none]="header.column.getCanSort()"
                           [scButtonPattern]="header.column.getCanSort()"
@@ -245,9 +255,9 @@ const columns: ColumnDef<User, any>[] = [
                         >
                           <span>{{ getHeaderLabel(header) }}</span>
                           @if (header.column.getIsSorted() === 'asc') {
-                            <span>↑</span>
+                            <svg siArrowUpIcon></svg>
                           } @else if (header.column.getIsSorted() === 'desc') {
-                            <span>↓</span>
+                            <svg siArrowDownIcon></svg>
                           }
                         </div>
                       }
@@ -307,7 +317,11 @@ const columns: ColumnDef<User, any>[] = [
                         (click)="row.toggleExpanded()"
                         class="gap-1 font-medium"
                       >
-                        {{ row.getIsExpanded() ? '▼' : '▶' }}
+                        @if (row.getIsExpanded()) {
+                          <svg siChevronDownIcon></svg>
+                        } @else {
+                          <svg siChevronRightIcon></svg>
+                        }
                         <span>{{ cell.getValue() }}</span>
                         <span class="ml-1 text-muted-foreground">
                           ({{ row.subRows.length }})
@@ -358,7 +372,11 @@ const columns: ColumnDef<User, any>[] = [
                             size="icon-xs"
                             (click)="row.toggleExpanded()"
                           >
-                            {{ row.getIsExpanded() ? '▼' : '▶' }}
+                            @if (row.getIsExpanded()) {
+                              <svg siChevronDownIcon></svg>
+                            } @else {
+                              <svg siChevronRightIcon></svg>
+                            }
                           </button>
                         }
                       } @else if (cell.column.id === 'role') {
