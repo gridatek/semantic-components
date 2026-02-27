@@ -56,11 +56,9 @@ import {
     ScSelectLabel,
   ],
   template: \`
-    <div scSelect #select="scSelect" placeholder="Select a food" aria-label="Food dropdown">
+    <div scSelect placeholder="Select a food" aria-label="Food dropdown">
       <div scSelectTrigger>
-        <span scSelectLabel>
-          <span class="truncate">{{ select.label() }}</span>
-        </span>
+        <span scSelectLabel></span>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>

@@ -74,7 +74,6 @@ import {
   template: \`
     <div scSelect #select="scSelect" placeholder="Select a label" aria-label="Label dropdown">
       <div scSelectTrigger>
-        <span scSelectLabel>
           @if (displayIcon(); as icon) {
             @switch (icon) {
               @case ('tag') {
@@ -103,8 +102,7 @@ import {
               }
             }
           }
-          <span class="truncate">{{ select.label() }}</span>
-        </span>
+          <span scSelectLabel></span>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>

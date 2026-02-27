@@ -51,9 +51,7 @@ interface FormModel {
             [formField]="fruitForm.fruit"
           >
             <div scSelectTrigger>
-              <span scSelectLabel>
-                <span class="truncate">{{ select.label() }}</span>
-              </span>
+              <span scSelectLabel></span>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -74,9 +72,7 @@ interface FormModel {
             aria-label="Fruit dropdown"
           >
             <div scSelectTrigger>
-              <span scSelectLabel>
-                <span class="truncate">{{ select.label() }}</span>
-              </span>
+              <span scSelectLabel></span>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>

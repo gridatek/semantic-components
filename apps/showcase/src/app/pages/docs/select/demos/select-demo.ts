@@ -54,37 +54,35 @@ import {
       aria-label="Label dropdown"
     >
       <div scSelectTrigger>
-        <span scSelectLabel>
-          @if (displayIcon(); as icon) {
-            @switch (icon) {
-              @case ('tag') {
-                <svg scSelectItemIcon siTagIcon></svg>
-              }
-              @case ('star') {
-                <svg scSelectItemIcon siStarIcon></svg>
-              }
-              @case ('briefcase') {
-                <svg scSelectItemIcon siBriefcaseIcon></svg>
-              }
-              @case ('user') {
-                <svg scSelectItemIcon siUserIcon></svg>
-              }
-              @case ('square-check') {
-                <svg scSelectItemIcon siSquareCheckIcon></svg>
-              }
-              @case ('clock') {
-                <svg scSelectItemIcon siClockIcon></svg>
-              }
-              @case ('book') {
-                <svg scSelectItemIcon siBookIcon></svg>
-              }
-              @case ('plane') {
-                <svg scSelectItemIcon siPlaneIcon></svg>
-              }
+        @if (displayIcon(); as icon) {
+          @switch (icon) {
+            @case ('tag') {
+              <svg scSelectItemIcon siTagIcon></svg>
+            }
+            @case ('star') {
+              <svg scSelectItemIcon siStarIcon></svg>
+            }
+            @case ('briefcase') {
+              <svg scSelectItemIcon siBriefcaseIcon></svg>
+            }
+            @case ('user') {
+              <svg scSelectItemIcon siUserIcon></svg>
+            }
+            @case ('square-check') {
+              <svg scSelectItemIcon siSquareCheckIcon></svg>
+            }
+            @case ('clock') {
+              <svg scSelectItemIcon siClockIcon></svg>
+            }
+            @case ('book') {
+              <svg scSelectItemIcon siBookIcon></svg>
+            }
+            @case ('plane') {
+              <svg scSelectItemIcon siPlaneIcon></svg>
             }
           }
-          <span class="truncate">{{ select.label() }}</span>
-        </span>
+        }
+        <span scSelectLabel></span>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>

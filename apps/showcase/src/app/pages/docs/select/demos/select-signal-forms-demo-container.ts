@@ -23,25 +23,24 @@ import { SelectSignalFormsDemo } from './select-signal-forms-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectSignalFormsDemoContainer {
-  readonly code = `import {
+  readonly code = `import { JsonPipe } from '@angular/common';
+import {
   ChangeDetectionStrategy,
   Component,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { JsonPipe } from '@angular/common';
-import { form, FormField, FormRoot } from '@angular/forms/signals';
-import { required } from '@angular/forms/signals';
+import { form, FormRoot, required } from '@angular/forms/signals';
 import {
   ScField,
   ScLabel,
   ScSelect,
   ScSelectItem,
+  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
   ScSelectTrigger,
-  ScSelectLabel,
 } from '@semantic-components/ui';
 
 interface FormModel {
@@ -61,7 +60,6 @@ interface FormModel {
     ScSelectTrigger,
     ScSelectLabel,
     JsonPipe,
-    FormField,
     FormRoot,
   ],
   template: \`
@@ -71,15 +69,11 @@ interface FormModel {
           <label scLabel>Fruit</label>
           <div
             scSelect
-            #select="scSelect"
             placeholder="Select a fruit"
             aria-label="Fruit dropdown"
-            [formField]="fruitForm.fruit"
           >
             <div scSelectTrigger>
-              <span scSelectLabel>
-                <span class="truncate">{{ select.label() }}</span>
-              </span>
+              <span scSelectLabel></span>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -105,7 +99,7 @@ interface FormModel {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectSignalFormsDemo {
+export class SelectSignalFormsDemo {
   readonly fruits = ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple'];
 
   readonly formModel = signal<FormModel>({
