@@ -36,5 +36,7 @@ export class ScAudioPlayerInfo {
   readonly player = inject(SC_AUDIO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('text-center', this.classInput()),
+  );
 }

@@ -52,13 +52,13 @@ import {
       scAudioPlayer
       #player="scAudioPlayer"
       [tracks]="tracks"
-      class="bg-card flex w-full max-w-md flex-col gap-3 rounded-lg border p-4"
+      class="w-full max-w-md"
     >
       <!-- Cover -->
       <div scAudioPlayerCover class="mx-auto aspect-square w-full"></div>
 
       <!-- Track Info -->
-      <div scAudioPlayerInfo class="text-center"></div>
+      <div scAudioPlayerInfo></div>
 
       <!-- Progress -->
       <div scAudioPlayerProgress></div>
@@ -91,7 +91,7 @@ import {
       </div>
 
       <!-- Volume -->
-      <div scAudioPlayerVolume class="justify-center"></div>
+      <div scAudioPlayerVolume></div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

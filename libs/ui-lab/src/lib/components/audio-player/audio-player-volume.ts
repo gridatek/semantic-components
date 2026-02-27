@@ -60,7 +60,7 @@ export class ScAudioPlayerVolume {
   );
 
   protected readonly class = computed(() =>
-    cn('flex items-center gap-2', this.classInput()),
+    cn('flex items-center justify-center gap-2', this.classInput()),
   );
 
   protected onVolumeChange(event: Event): void {

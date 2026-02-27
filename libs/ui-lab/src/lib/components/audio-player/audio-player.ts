@@ -11,6 +11,7 @@ import {
   ChangeDetectionStrategy,
   ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import { ScAudioPlayerAudio } from './audio-player-audio';
 
 export interface ScAudioTrack {
@@ -36,6 +37,7 @@ export const SC_AUDIO_PLAYER = new InjectionToken<ScAudioPlayer>(
   providers: [{ provide: SC_AUDIO_PLAYER, useExisting: ScAudioPlayer }],
   host: {
     'data-slot': 'audio-player',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,6 +45,12 @@ export const SC_AUDIO_PLAYER = new InjectionToken<ScAudioPlayer>(
 export class ScAudioPlayer {
   private readonly destroyRef = inject(DestroyRef);
   private audioElement = signal<HTMLAudioElement | null>(null);
+
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() =>
+    cn('bg-card flex flex-col gap-3 rounded-lg border p-4', this.classInput()),
+  );
 
   // Inputs
   readonly tracks = input<ScAudioTrack[]>([]);
