@@ -3,6 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
   ScSheetProvider,
   ScSheetClose,
@@ -12,6 +13,7 @@ import {
   ScSheetPortal,
   ScSheetTitle,
   ScSheetTrigger,
+  ScButton,
 } from '@semantic-components/ui';
 
 @Component({
@@ -25,34 +27,16 @@ import {
     ScSheetPortal,
     ScSheetTitle,
     ScSheetTrigger,
+    ScButton,
+    SiXIcon,
   ],
   template: `
     <div scSheetProvider side="top">
-      <button
-        scSheetTrigger
-        class="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-xs transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-      >
-        Open Top Sheet
-      </button>
+      <button scButton scSheetTrigger variant="outline">Open Top Sheet</button>
       <ng-template scSheetPortal>
         <div scSheet>
           <button scSheetClose>
-            <svg
-              class="size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+            <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
           <div scSheetHeader>

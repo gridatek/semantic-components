@@ -28,6 +28,7 @@ export class LeftSheetDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
   ScSheetProvider,
   ScSheetClose,
@@ -37,6 +38,7 @@ import {
   ScSheetPortal,
   ScSheetTitle,
   ScSheetTrigger,
+  ScButton,
 } from '@semantic-components/ui';
 
 @Component({
@@ -50,34 +52,16 @@ import {
     ScSheetPortal,
     ScSheetTitle,
     ScSheetTrigger,
+    ScButton,
+    SiXIcon,
   ],
   template: \`
     <div scSheetProvider side="left">
-      <button
-        scSheetTrigger
-        class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-      >
-        Open Left Sheet
-      </button>
+      <button scButton scSheetTrigger variant="outline">Open Left Sheet</button>
       <ng-template scSheetPortal>
         <div scSheet>
           <button scSheetClose>
-            <svg
-              class="size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+            <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
           <div scSheetHeader>
