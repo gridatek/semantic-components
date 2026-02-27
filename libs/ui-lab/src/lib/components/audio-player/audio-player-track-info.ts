@@ -10,7 +10,7 @@ import { cn } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
-  selector: 'div[scAudioPlayerInfo]',
+  selector: 'div[scAudioPlayerTrackInfo]',
   template: `
     @if (player.currentTrack(); as track) {
       <p class="truncate font-medium">
@@ -26,13 +26,13 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     }
   `,
   host: {
-    'data-slot': 'audio-player-info',
+    'data-slot': 'audio-player-track-info',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScAudioPlayerInfo {
+export class ScAudioPlayerTrackInfo {
   readonly player = inject(SC_AUDIO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 

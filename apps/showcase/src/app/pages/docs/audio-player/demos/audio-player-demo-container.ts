@@ -31,7 +31,7 @@ export class AudioPlayerDemoContainer {
 import {
   ScAudioPlayer,
   ScAudioPlayerCover,
-  ScAudioPlayerInfo,
+  ScAudioPlayerTrackInfo,
   ScAudioPlayerProgress,
   ScAudioPlayerPlay,
   ScAudioPlayerPrevious,
@@ -56,7 +56,7 @@ import {
   imports: [
     ScAudioPlayer,
     ScAudioPlayerCover,
-    ScAudioPlayerInfo,
+    ScAudioPlayerTrackInfo,
     ScAudioPlayerProgress,
     ScAudioPlayerPlay,
     ScAudioPlayerPrevious,
@@ -86,7 +86,7 @@ import {
       ></div>
 
       <!-- Track Info -->
-      <div scAudioPlayerInfo class="text-center"></div>
+      <div scAudioPlayerTrackInfo class="text-center"></div>
 
       <!-- Progress -->
       <div scAudioPlayerProgress></div>

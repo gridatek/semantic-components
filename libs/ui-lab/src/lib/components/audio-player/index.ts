@@ -1,8 +1,9 @@
 export { ScAudioPlayer, SC_AUDIO_PLAYER } from './audio-player';
 export type { ScAudioTrack } from './audio-player';
 export { ScAudioPlayerCover } from './audio-player-cover';
-export { ScAudioPlayerInfo } from './audio-player-info';
+export { ScAudioPlayerTrackInfo } from './audio-player-track-info';
 export { ScAudioPlayerProgress } from './audio-player-progress';
+export { ScAudioPlayerControls } from './audio-player-controls';
 export { ScAudioPlayerPlay } from './audio-player-play';
 export { ScAudioPlayerPrevious } from './audio-player-previous';
 export { ScAudioPlayerNext } from './audio-player-next';

@@ -6,8 +6,9 @@ import {
 import {
   ScAudioPlayer,
   ScAudioPlayerCover,
-  ScAudioPlayerInfo,
+  ScAudioPlayerTrackInfo,
   ScAudioPlayerProgress,
+  ScAudioPlayerControls,
   ScAudioPlayerPlay,
   ScAudioPlayerPrevious,
   ScAudioPlayerNext,
@@ -31,8 +32,9 @@ import {
   imports: [
     ScAudioPlayer,
     ScAudioPlayerCover,
-    ScAudioPlayerInfo,
+    ScAudioPlayerTrackInfo,
     ScAudioPlayerProgress,
+    ScAudioPlayerControls,
     ScAudioPlayerPlay,
     ScAudioPlayerPrevious,
     ScAudioPlayerNext,
@@ -53,13 +55,13 @@ import {
       <div scAudioPlayerCover></div>
 
       <!-- Track Info -->
-      <div scAudioPlayerInfo></div>
+      <div scAudioPlayerTrackInfo></div>
 
       <!-- Progress -->
       <div scAudioPlayerProgress></div>
 
       <!-- Controls -->
-      <div class="flex items-center justify-center gap-2">
+      <div scAudioPlayerControls>
         <button scAudioPlayerShuffle>
           <svg siShuffleIcon></svg>
         </button>
