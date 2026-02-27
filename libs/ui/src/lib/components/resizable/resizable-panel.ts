@@ -12,7 +12,6 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
   selector: '[scResizablePanel]',
   host: {
     'data-slot': 'resizable-panel',
-    'data-panel': '',
     '[class]': 'class()',
     '[style.flex-grow]': 'size()',
     '[style.flex-shrink]': '1',
@@ -37,9 +36,7 @@ export class ScResizablePanel {
 
   readonly size = linkedSignal(() => this.defaultSize());
 
-  protected readonly class = computed(() =>
-    cn('overflow-hidden', this.classInput()),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
   protected readonly minSizePx = computed(() => `${this.minSize()}%`);
   protected readonly maxSizePx = computed(() => `${this.maxSize()}%`);

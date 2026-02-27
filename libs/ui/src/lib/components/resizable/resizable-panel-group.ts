@@ -8,7 +8,6 @@ import { ScResizableHandle } from './resizable-handle';
   selector: '[scResizablePanelGroup]',
   host: {
     'data-slot': 'resizable-panel-group',
-    'data-panel-group': '',
     '[class]': 'class()',
     '[attr.aria-orientation]': 'direction()',
   },
