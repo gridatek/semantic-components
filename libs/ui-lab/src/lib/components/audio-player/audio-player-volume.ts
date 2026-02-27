@@ -49,6 +49,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       max="1"
       step="0.01"
       aria-label="Volume"
+      [disabled]="player.isMuted()"
       [value]="player.volume()"
       [style.--fill-percent]="player.volume() * 100 + '%'"
       (input)="onVolumeChange($event)"
