@@ -55,10 +55,7 @@ import {
       class="bg-card flex max-w-md flex-col gap-3 rounded-lg border p-4"
     >
       <!-- Cover -->
-      <div
-        scAudioPlayerCover
-        class="mx-auto aspect-square w-full max-w-[200px]"
-      ></div>
+      <div scAudioPlayerCover class="mx-auto aspect-square w-full"></div>
 
       <!-- Track Info -->
       <div scAudioPlayerInfo class="text-center"></div>
