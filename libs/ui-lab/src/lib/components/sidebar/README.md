@@ -12,7 +12,7 @@ A comprehensive sidebar component system for Angular applications with collapsib
 - `ScSidebarContainer` - Fixed-position container for sidebar content (used internally by ScSidebar)
 - `ScSidebarInner` - Inner wrapper with background and variant styles (used internally by ScSidebar)
 - `ScSidebarTrigger` - Toggle button
-- `ScSidebarRail` - Resize handle for collapsing/expanding
+- `ScSidebarRail` - Thin invisible button on the sidebar edge that toggles collapse on click. Shows a 2px border on hover and changes cursor direction based on state (w-resize / e-resize)
 - `ScSidebarInset` - Main content wrapper
 
 ### Layout Components
