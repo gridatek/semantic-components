@@ -36,7 +36,9 @@ export class ScResizablePanel {
 
   readonly size = linkedSignal(() => this.defaultSize());
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly class = computed(() =>
+    cn('overflow-hidden', this.classInput()),
+  );
 
   protected readonly minSizePx = computed(() => `${this.minSize()}%`);
   protected readonly maxSizePx = computed(() => `${this.maxSize()}%`);
