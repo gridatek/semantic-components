@@ -1,6 +1,6 @@
 import { computed, Directive, input, contentChildren } from '@angular/core';
 import { cn } from '../../utils';
-import { ResizableDirection } from './resizable.types';
+import { ScResizableDirection } from './resizable.types';
 import { ScResizablePanel } from './resizable-panel';
 import { ScResizableHandle } from './resizable-handle';
 
@@ -14,7 +14,7 @@ import { ScResizableHandle } from './resizable-handle';
 })
 export class ScResizablePanelGroup {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly direction = input<ResizableDirection>('horizontal');
+  readonly direction = input<ScResizableDirection>('horizontal');
 
   private readonly panels = contentChildren(ScResizablePanel, {
     descendants: true,

@@ -8,10 +8,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { ScResizableHandleIndicator } from './resizable-handle-indicator';
 import { ScResizablePanelGroup } from './resizable-panel-group';
 
 @Component({
   selector: '[scResizableHandle]',
+  imports: [ScResizableHandleIndicator],
   host: {
     'data-slot': 'resizable-handle',
     '[class]': 'class()',
@@ -22,7 +24,7 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
   },
   template: `
     @if (withHandle()) {
-      <div class="bg-border z-10 flex h-6 w-1 shrink-0 rounded-lg"></div>
+      <div scResizableHandleIndicator></div>
     }
   `,
   encapsulation: ViewEncapsulation.None,

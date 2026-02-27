@@ -1,1 +1,1 @@
-export type ResizableDirection = 'horizontal' | 'vertical';
+export type ScResizableDirection = 'horizontal' | 'vertical';
