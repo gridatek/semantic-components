@@ -16,12 +16,19 @@ export class ScResizablePanelGroup {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly direction = input<ScResizableDirection>('horizontal');
 
-  private readonly panels = contentChildren(ScResizablePanel, {
+  private readonly allPanels = contentChildren(ScResizablePanel, {
     descendants: true,
   });
-  private readonly handles = contentChildren(ScResizableHandle, {
+  private readonly allHandles = contentChildren(ScResizableHandle, {
     descendants: true,
   });
+
+  private readonly ownPanels = computed(() =>
+    this.allPanels().filter((p) => p.group === this),
+  );
+  private readonly ownHandles = computed(() =>
+    this.allHandles().filter((h) => h.group === this),
+  );
 
   protected readonly class = computed(() =>
     cn(
@@ -31,10 +38,10 @@ export class ScResizablePanelGroup {
   );
 
   getPanels() {
-    return this.panels();
+    return this.ownPanels();
   }
 
   getHandles() {
-    return this.handles();
+    return this.ownHandles();
   }
 }
