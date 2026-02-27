@@ -72,43 +72,48 @@ import {
     SiUserIcon,
   ],
   template: \`
-    <div scSelect #select="scSelect" placeholder="Select a label" aria-label="Label dropdown">
+    <div
+      scSelect
+      #select="scSelect"
+      placeholder="Select a label"
+      aria-label="Label dropdown"
+    >
       <div scSelectTrigger>
-          @if (displayIcon(); as icon) {
-            @switch (icon) {
-              @case ('tag') {
-                <svg scSelectItemIcon siTagIcon></svg>
-              }
-              @case ('star') {
-                <svg scSelectItemIcon siStarIcon></svg>
-              }
-              @case ('briefcase') {
-                <svg scSelectItemIcon siBriefcaseIcon></svg>
-              }
-              @case ('user') {
-                <svg scSelectItemIcon siUserIcon></svg>
-              }
-              @case ('square-check') {
-                <svg scSelectItemIcon siSquareCheckIcon></svg>
-              }
-              @case ('clock') {
-                <svg scSelectItemIcon siClockIcon></svg>
-              }
-              @case ('book') {
-                <svg scSelectItemIcon siBookIcon></svg>
-              }
-              @case ('plane') {
-                <svg scSelectItemIcon siPlaneIcon></svg>
-              }
+        @if (displayIcon(); as icon) {
+          @switch (icon) {
+            @case ('tag') {
+              <svg scSelectItemIcon siTagIcon></svg>
+            }
+            @case ('star') {
+              <svg scSelectItemIcon siStarIcon></svg>
+            }
+            @case ('briefcase') {
+              <svg scSelectItemIcon siBriefcaseIcon></svg>
+            }
+            @case ('user') {
+              <svg scSelectItemIcon siUserIcon></svg>
+            }
+            @case ('square-check') {
+              <svg scSelectItemIcon siSquareCheckIcon></svg>
+            }
+            @case ('clock') {
+              <svg scSelectItemIcon siClockIcon></svg>
+            }
+            @case ('book') {
+              <svg scSelectItemIcon siBookIcon></svg>
+            }
+            @case ('plane') {
+              <svg scSelectItemIcon siPlaneIcon></svg>
             }
           }
-          <span scSelectLabel></span>
+        }
+        <span scSelectLabel></span>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
-            @for (label of labels; track label.value) {
-              <div scSelectItem [value]="label.value" [label]="label.value">
+            @for (label of options; track label.value) {
+              <div scSelectItem [value]="label.value" [label]="label.label">
                 @switch (label.icon) {
                   @case ('tag') {
                     <svg scSelectItemIcon siTagIcon></svg>
@@ -135,7 +140,7 @@ import {
                     <svg scSelectItemIcon siPlaneIcon></svg>
                   }
                 }
-                <span class="flex-1">{{ label.value }}</span>
+                <span class="flex-1">{{ label.label }}</span>
               </div>
             }
           </div>
@@ -146,24 +151,24 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectDemo {
+export class SelectDemo {
   private readonly select = viewChild.required(ScSelect);
 
   displayIcon = computed(() => {
     const value = this.select().value();
-    const label = this.labels.find((label) => label.value === value);
-    return label ? label.icon : '';
+    const option = this.options.find((o) => o.value === value);
+    return option ? option.icon : '';
   });
 
-  labels = [
-    { value: 'Important', icon: 'tag' },
-    { value: 'Starred', icon: 'star' },
-    { value: 'Work', icon: 'briefcase' },
-    { value: 'Personal', icon: 'user' },
-    { value: 'To Do', icon: 'square-check' },
-    { value: 'Later', icon: 'clock' },
-    { value: 'Read', icon: 'book' },
-    { value: 'Travel', icon: 'plane' },
+  options = [
+    { value: 'important', label: 'Important', icon: 'tag' },
+    { value: 'starred', label: 'Starred', icon: 'star' },
+    { value: 'work', label: 'Work', icon: 'briefcase' },
+    { value: 'personal', label: 'Personal', icon: 'user' },
+    { value: 'to-do', label: 'To Do', icon: 'square-check' },
+    { value: 'later', label: 'Later', icon: 'clock' },
+    { value: 'read', label: 'Read', icon: 'book' },
+    { value: 'travel', label: 'Travel', icon: 'plane' },
   ];
 }`;
 }
