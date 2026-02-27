@@ -11,8 +11,8 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./pages/gallery/gallery.page'),
   },
   {
-    path: 'table',
-    loadComponent: () => import('./pages/table/table.page'),
+    path: 'data-table',
+    loadComponent: () => import('./pages/data-table/data-table.page'),
   },
   {
     path: '',

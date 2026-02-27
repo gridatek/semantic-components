@@ -548,7 +548,7 @@ const columns: ColumnDef<User, any>[] = [
 ];
 
 @Component({
-  selector: 'app-table-page',
+  selector: 'app-data-table-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [FormsModule, ScButtonPattern],
@@ -1015,7 +1015,7 @@ const columns: ColumnDef<User, any>[] = [
     </div>
   `,
 })
-export default class TablePage {
+export default class DataTablePage {
   readonly sorting = signal<SortingState>([]);
   readonly columnFilters = signal<ColumnFiltersState>([]);
   readonly globalFilter = signal('');
