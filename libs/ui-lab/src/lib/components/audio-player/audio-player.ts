@@ -65,6 +65,7 @@ export class ScAudioPlayer {
   readonly isMuted = signal(false);
   readonly currentTime = signal(0);
   readonly duration = signal(0);
+  readonly buffered = signal(0);
   private previousVolume = 1;
 
   readonly currentTrack = computed(() => {
@@ -77,6 +78,12 @@ export class ScAudioPlayer {
     const duration = this.duration();
     if (duration === 0) return 0;
     return (this.currentTime() / duration) * 100;
+  });
+
+  readonly bufferedPercent = computed(() => {
+    const duration = this.duration();
+    if (duration === 0) return 0;
+    return (this.buffered() / duration) * 100;
   });
 
   readonly canGoPrevious = computed(() => {
@@ -203,6 +210,10 @@ export class ScAudioPlayer {
     const audio = this.audioElement();
     if (!audio) return;
     this.currentTime.set(audio.currentTime);
+
+    if (audio.buffered.length > 0) {
+      this.buffered.set(audio.buffered.end(audio.buffered.length - 1));
+    }
   }
 
   onLoadedMetadata(): void {
