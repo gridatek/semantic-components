@@ -16,19 +16,19 @@ interface Item {
   selector: 'app-threshold-infinite-scroll-demo',
   imports: [ScInfiniteScroll],
   template: `
-    <p class="text-sm text-muted-foreground mb-4">
+    <p class="text-muted-foreground mb-4 text-sm">
       Load more items when within 200px of the bottom (loads earlier).
     </p>
     <sc-infinite-scroll
-      class="h-[300px] border rounded-lg"
+      class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
       [threshold]="200"
       (loadMore)="loadMore()"
     >
-      <div class="p-4 space-y-2">
+      <div class="space-y-2 p-4">
         @for (item of items(); track item.id) {
-          <div class="p-3 border rounded">
+          <div class="rounded border p-3">
             {{ item.title }}
           </div>
         }

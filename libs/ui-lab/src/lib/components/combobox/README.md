@@ -15,17 +15,17 @@ The search input is **built into** `ScComboboxPortal`'s template (not projected)
 
 ## Components
 
-| Component                 | Selector                          | Aria Primitive                                                                   | Purpose                                 |
-| ------------------------- | --------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------- |
-| `ScCombobox`              | `div[scCombobox]`                | `Combobox` (hostDirective, readonly)                                             | Root container                          |
-| `ScComboboxTrigger`       | `div[scComboboxTrigger]`        | —                                                                                | Styling wrapper for trigger             |
-| `ScComboboxInput`         | `input[scComboboxInput]`        | `ComboboxInput` (hostDirective)                                                  | Invisible input (opens dropdown)        |
-| `ScComboboxIcon`          | `svg[scComboboxIcon]`           | —                                                                                | Chevron icon with rotation on expand    |
-| `ScComboboxPortal`        | `div[scComboboxPortal]`         | `ComboboxPopupContainer` + `ComboboxDialog` + inner `Combobox` + `ComboboxInput` | Dialog popup with built-in search input |
-| `ScComboboxList`          | `div[scComboboxList]`           | `Listbox` (hostDirective)                                                        | Scrollable options list                 |
-| `ScComboboxItem`          | `div[scComboboxItem]`           | `Option` (hostDirective)                                                         | Individual option                       |
+| Component                 | Selector                       | Aria Primitive                                                                   | Purpose                                 |
+| ------------------------- | ------------------------------ | -------------------------------------------------------------------------------- | --------------------------------------- |
+| `ScCombobox`              | `div[scCombobox]`              | `Combobox` (hostDirective, readonly)                                             | Root container                          |
+| `ScComboboxTrigger`       | `div[scComboboxTrigger]`       | —                                                                                | Styling wrapper for trigger             |
+| `ScComboboxInput`         | `input[scComboboxInput]`       | `ComboboxInput` (hostDirective)                                                  | Invisible input (opens dropdown)        |
+| `ScComboboxIcon`          | `svg[scComboboxIcon]`          | —                                                                                | Chevron icon with rotation on expand    |
+| `ScComboboxPortal`        | `div[scComboboxPortal]`        | `ComboboxPopupContainer` + `ComboboxDialog` + inner `Combobox` + `ComboboxInput` | Dialog popup with built-in search input |
+| `ScComboboxList`          | `div[scComboboxList]`          | `Listbox` (hostDirective)                                                        | Scrollable options list                 |
+| `ScComboboxItem`          | `div[scComboboxItem]`          | `Option` (hostDirective)                                                         | Individual option                       |
 | `ScComboboxItemIndicator` | `svg[scComboboxItemIndicator]` | —                                                                                | Checkmark (visible when selected)       |
-| `ScComboboxEmpty`         | `div[scComboboxEmpty]`          | —                                                                                | Empty state message                     |
+| `ScComboboxEmpty`         | `div[scComboboxEmpty]`         | —                                                                                | Empty state message                     |
 
 ### ScComboboxPortal
 

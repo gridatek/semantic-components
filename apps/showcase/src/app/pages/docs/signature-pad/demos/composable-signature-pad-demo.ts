@@ -45,7 +45,7 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
 
-      <div class="text-sm text-muted-foreground">
+      <div class="text-muted-foreground text-sm">
         Signature status:
         {{ signature() ? 'Signed' : 'Empty' }}
       </div>

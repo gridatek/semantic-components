@@ -22,7 +22,7 @@ import {
     <div scHoverCardProvider side="top" align="start">
       <span
         scHoverCardTrigger
-        class="cursor-help border-b border-dashed border-muted-foreground text-sm"
+        class="border-muted-foreground cursor-help border-b border-dashed text-sm"
       >
         What is Angular?
       </span>
@@ -30,18 +30,18 @@ import {
         <div scHoverCard>
           <div class="space-y-2">
             <h4 class="text-sm font-semibold">Angular</h4>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-muted-foreground text-sm">
               Angular is a TypeScript-based web application framework led by the
               Angular Team at Google. It's a complete rewrite of AngularJS.
             </p>
             <div class="flex gap-2 pt-2">
               <span
-                class="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
+                class="bg-primary/10 text-primary inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
               >
                 TypeScript
               </span>
               <span
-                class="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
+                class="bg-primary/10 text-primary inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
               >
                 Framework
               </span>

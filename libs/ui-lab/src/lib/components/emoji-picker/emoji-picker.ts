@@ -471,7 +471,7 @@ const DEFAULT_CATEGORIES: EmojiCategory[] = [
     <div [class]="containerClass()">
       <!-- Search -->
       @if (showSearch()) {
-        <div class="p-2 border-b">
+        <div class="border-b p-2">
           <input
             type="text"
             [value]="searchQuery()"
@@ -484,7 +484,7 @@ const DEFAULT_CATEGORIES: EmojiCategory[] = [
 
       <!-- Category tabs -->
       @if (showCategories() && !searchQuery()) {
-        <div class="flex border-b overflow-x-auto">
+        <div class="flex overflow-x-auto border-b">
           @for (category of categories(); track category.id) {
             <button
               type="button"
@@ -519,7 +519,7 @@ const DEFAULT_CATEGORIES: EmojiCategory[] = [
               </div>
             </div>
           } @else {
-            <div class="p-4 text-center text-sm text-muted-foreground">
+            <div class="text-muted-foreground p-4 text-center text-sm">
               No emoji found
             </div>
           }
@@ -549,8 +549,8 @@ const DEFAULT_CATEGORIES: EmojiCategory[] = [
       <!-- Recently used -->
       @if (showRecent() && recentEmojis().length > 0 && !searchQuery()) {
         <div class="border-t p-2">
-          <p class="text-xs text-muted-foreground mb-1">Recently used</p>
-          <div class="flex gap-1 flex-wrap">
+          <p class="text-muted-foreground mb-1 text-xs">Recently used</p>
+          <div class="flex flex-wrap gap-1">
             @for (emoji of recentEmojis(); track emoji.emoji) {
               <button
                 type="button"

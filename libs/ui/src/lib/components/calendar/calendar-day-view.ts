@@ -40,7 +40,7 @@ interface DayInfo {
           @for (day of weekDays(); track day) {
             <th
               scope="col"
-              class="w-9 rounded-md text-[0.8rem] font-normal text-muted-foreground"
+              class="text-muted-foreground w-9 rounded-md text-[0.8rem] font-normal"
             >
               {{ day }}
             </th>

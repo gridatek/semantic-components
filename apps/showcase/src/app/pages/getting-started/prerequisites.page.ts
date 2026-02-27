@@ -85,11 +85,11 @@ import { ScHeading } from '@semantic-components/ui';
             </h3>
             <p class="text-muted-foreground">
               Next, add a
-              <code class="text-sm bg-muted px-1.5 py-0.5 rounded">
+              <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
                 .postcssrc.json
               </code>
               file in the file root of the project. Add the
-              <code class="text-sm bg-muted px-1.5 py-0.5 rounded">
+              <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
                 &#64;tailwindcss/postcss
               </code>
               plugin into your PostCSS configuration.

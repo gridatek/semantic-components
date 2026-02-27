@@ -11,7 +11,7 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
   template: `
     <div class="space-y-4">
       <div>
-        <p class="text-sm text-muted-foreground mb-1">Fast (10s)</p>
+        <p class="text-muted-foreground mb-1 text-sm">Fast (10s)</p>
         <sc-marquee-text
           text="Fast scrolling text"
           [duration]="10"
@@ -19,7 +19,7 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
         />
       </div>
       <div>
-        <p class="text-sm text-muted-foreground mb-1">Normal (20s)</p>
+        <p class="text-muted-foreground mb-1 text-sm">Normal (20s)</p>
         <sc-marquee-text
           text="Normal scrolling text"
           [duration]="20"
@@ -27,7 +27,7 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
         />
       </div>
       <div>
-        <p class="text-sm text-muted-foreground mb-1">Slow (40s)</p>
+        <p class="text-muted-foreground mb-1 text-sm">Slow (40s)</p>
         <sc-marquee-text
           text="Slow scrolling text"
           [duration]="40"

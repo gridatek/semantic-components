@@ -121,7 +121,7 @@ export class TourService {
         #overlay
       >
         <!-- SVG Overlay with cutout -->
-        <svg class="absolute inset-0 w-full h-full pointer-events-none">
+        <svg class="pointer-events-none absolute inset-0 h-full w-full">
           <defs>
             <mask id="tour-mask">
               <rect x="0" y="0" width="100%" height="100%" fill="white" />
@@ -150,14 +150,14 @@ export class TourService {
         <!-- Highlight border -->
         @if (targetRect()) {
           <div
-            class="absolute border-2 border-primary rounded-lg pointer-events-none transition-all duration-300"
+            class="border-primary pointer-events-none absolute rounded-lg border-2 transition-all duration-300"
             [style.top.px]="targetRect()!.top - highlightPadding()"
             [style.left.px]="targetRect()!.left - highlightPadding()"
             [style.width.px]="targetRect()!.width + highlightPadding() * 2"
             [style.height.px]="targetRect()!.height + highlightPadding() * 2"
           >
             <div
-              class="absolute inset-0 rounded-lg animate-pulse bg-primary/10"
+              class="bg-primary/10 absolute inset-0 animate-pulse rounded-lg"
             ></div>
           </div>
         }
@@ -176,7 +176,7 @@ export class TourService {
               <button
                 type="button"
                 (click)="close()"
-                class="absolute top-2 right-2 p-1 rounded hover:bg-accent"
+                class="hover:bg-accent absolute top-2 right-2 rounded p-1"
                 aria-label="Close tour"
               >
                 <svg siXIcon class="size-4"></svg>
@@ -186,7 +186,7 @@ export class TourService {
             <!-- Step number -->
             @if (showStepNumbers()) {
               <div
-                class="absolute -top-3 -left-3 size-6 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-medium"
+                class="bg-primary text-primary-foreground absolute -top-3 -left-3 flex size-6 items-center justify-center rounded-full text-xs font-medium"
               >
                 {{ tourService.currentStep() + 1 }}
               </div>
@@ -194,27 +194,27 @@ export class TourService {
 
             <!-- Content -->
             <div class="pr-6">
-              <h3 class="font-semibold text-lg mb-2">
+              <h3 class="mb-2 text-lg font-semibold">
                 {{ currentStep()!.title }}
               </h3>
-              <p class="text-sm text-muted-foreground">
+              <p class="text-muted-foreground text-sm">
                 {{ currentStep()!.content }}
               </p>
             </div>
 
             <!-- Progress bar -->
             @if (showProgress()) {
-              <div class="mt-4 h-1 bg-muted rounded-full overflow-hidden">
+              <div class="bg-muted mt-4 h-1 overflow-hidden rounded-full">
                 <div
-                  class="h-full bg-primary transition-all duration-300"
+                  class="bg-primary h-full transition-all duration-300"
                   [style.width.%]="tourService.progress()"
                 ></div>
               </div>
             }
 
             <!-- Navigation -->
-            <div class="flex items-center justify-between mt-4 pt-4 border-t">
-              <div class="text-sm text-muted-foreground">
+            <div class="mt-4 flex items-center justify-between border-t pt-4">
+              <div class="text-muted-foreground text-sm">
                 {{ tourService.currentStep() + 1 }} of
                 {{ tourService.steps().length }}
               </div>
@@ -223,7 +223,7 @@ export class TourService {
                   <button
                     type="button"
                     (click)="previous()"
-                    class="px-3 py-1.5 text-sm border rounded-md hover:bg-accent"
+                    class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
                   >
                     Previous
                   </button>
@@ -232,7 +232,7 @@ export class TourService {
                   <button
                     type="button"
                     (click)="finish()"
-                    class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+                    class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
                   >
                     Finish
                   </button>
@@ -240,7 +240,7 @@ export class TourService {
                   <button
                     type="button"
                     (click)="next()"
-                    class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+                    class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
                   >
                     Next
                   </button>

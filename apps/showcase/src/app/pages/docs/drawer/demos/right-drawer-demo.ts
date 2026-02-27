@@ -42,7 +42,7 @@ import {
             variant="ghost"
             size="icon"
             scDrawerClose
-            class="absolute right-4 top-4"
+            class="absolute top-4 right-4"
             aria-label="Close"
           >
             <svg siXIcon></svg>

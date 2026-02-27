@@ -23,16 +23,16 @@ ScAlertDialogProvider (root wrapper - manages open state + overlay lifecycle)
 
 | Component                  | Selector                           | Description                                    |
 | -------------------------- | ---------------------------------- | ---------------------------------------------- |
-| `ScAlertDialogProvider`    | `div[scAlertDialogProvider]`    | Root wrapper, manages open state + overlay     |
-| `ScAlertDialogTrigger`     | `button[scAlertDialogTrigger]`  | Button that opens the dialog                   |
+| `ScAlertDialogProvider`    | `div[scAlertDialogProvider]`       | Root wrapper, manages open state + overlay     |
+| `ScAlertDialogTrigger`     | `button[scAlertDialogTrigger]`     | Button that opens the dialog                   |
 | `ScAlertDialogPortal`      | `ng-template[scAlertDialogPortal]` | Directive marking lazy content for the overlay |
-| `ScAlertDialog`            | `div[scAlertDialog]`             | Dialog panel with animations                   |
-| `ScAlertDialogHeader`      | `div[scAlertDialogHeader]`      | Header section container                       |
-| `ScAlertDialogTitle`       | `h2[scAlertDialogTitle]`        | Dialog title (aria-labelledby)                 |
-| `ScAlertDialogDescription` | `p[scAlertDialogDescription]`   | Dialog description (aria-describedby)          |
-| `ScAlertDialogFooter`      | `div[scAlertDialogFooter]`      | Footer section for actions                     |
-| `ScAlertDialogCancel`      | `button[scAlertDialogCancel]`   | Cancel button (closes dialog)                  |
-| `ScAlertDialogAction`      | `button[scAlertDialogAction]`   | Confirm/action button                          |
+| `ScAlertDialog`            | `div[scAlertDialog]`               | Dialog panel with animations                   |
+| `ScAlertDialogHeader`      | `div[scAlertDialogHeader]`         | Header section container                       |
+| `ScAlertDialogTitle`       | `h2[scAlertDialogTitle]`           | Dialog title (aria-labelledby)                 |
+| `ScAlertDialogDescription` | `p[scAlertDialogDescription]`      | Dialog description (aria-describedby)          |
+| `ScAlertDialogFooter`      | `div[scAlertDialogFooter]`         | Footer section for actions                     |
+| `ScAlertDialogCancel`      | `button[scAlertDialogCancel]`      | Cancel button (closes dialog)                  |
+| `ScAlertDialogAction`      | `button[scAlertDialogAction]`      | Confirm/action button                          |
 
 ## Usage
 

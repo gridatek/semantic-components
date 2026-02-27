@@ -14,8 +14,8 @@ import {
   selector: 'app-basic-speed-dial-demo',
   imports: [ScSpeedDial],
   template: `
-    <div class="relative h-64 border rounded-lg bg-muted/20">
-      <div class="absolute bottom-4 right-4">
+    <div class="bg-muted/20 relative h-64 rounded-lg border">
+      <div class="absolute right-4 bottom-4">
         <sc-speed-dial
           [actions]="basicActions()"
           (actionClick)="onActionClick($event)"
@@ -23,7 +23,7 @@ import {
       </div>
     </div>
     @if (lastAction()) {
-      <p class="mt-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mt-2 text-sm">
         Last action: {{ lastAction() }}
       </p>
     }

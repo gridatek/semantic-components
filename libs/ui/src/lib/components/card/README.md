@@ -120,7 +120,7 @@ Footer section of the card with a muted background and top border.
     <p>Card content goes here.</p>
   </div>
   <div scCardFooter>
-    <p class="text-sm text-muted-foreground">Card footer</p>
+    <p class="text-muted-foreground text-sm">Card footer</p>
   </div>
 </div>
 ```

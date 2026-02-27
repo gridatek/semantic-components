@@ -23,9 +23,7 @@ import {
         [formField]="bioForm.bio"
         placeholder="Tell us about yourself"
       ></textarea>
-      <p scFieldDescription>
-        Your bio will be visible on your public profile.
-      </p>
+      <p scFieldDescription>Your bio will be visible on your public profile.</p>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

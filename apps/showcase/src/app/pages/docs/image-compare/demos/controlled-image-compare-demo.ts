@@ -27,7 +27,7 @@ import {
     <div
       scImageCompare
       [(position)]="position"
-      class="w-full max-w-2xl aspect-[2/1]"
+      class="aspect-[2/1] w-full max-w-2xl"
     >
       <div scImageCompareContainer>
         <img
@@ -45,7 +45,7 @@ import {
         <div scImageCompareLabel class="top-2 right-2">After</div>
       </div>
     </div>
-    <div class="flex items-center gap-4 max-w-2xl mt-4">
+    <div class="mt-4 flex max-w-2xl items-center gap-4">
       <input
         type="range"
         min="0"
@@ -54,7 +54,7 @@ import {
         (input)="position.set(+$any($event.target).value)"
         class="flex-1"
       />
-      <span class="text-sm w-12 text-right">{{ position() }}%</span>
+      <span class="w-12 text-right text-sm">{{ position() }}%</span>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

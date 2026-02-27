@@ -25,7 +25,7 @@ interface SpacingFormModel {
             [formField]="spacingForm.spacing"
             id="r1"
           />
-          <span class="text-sm font-medium leading-none">Default</span>
+          <span class="text-sm leading-none font-medium">Default</span>
         </label>
         <label scRadioField class="items-center">
           <input
@@ -35,7 +35,7 @@ interface SpacingFormModel {
             [formField]="spacingForm.spacing"
             id="r2"
           />
-          <span class="text-sm font-medium leading-none">Comfortable</span>
+          <span class="text-sm leading-none font-medium">Comfortable</span>
         </label>
         <label scRadioField class="items-center">
           <input
@@ -45,10 +45,10 @@ interface SpacingFormModel {
             [formField]="spacingForm.spacing"
             id="r3"
           />
-          <span class="text-sm font-medium leading-none">Compact</span>
+          <span class="text-sm leading-none font-medium">Compact</span>
         </label>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ formModel().spacing || 'none' }}
       </p>
     </div>

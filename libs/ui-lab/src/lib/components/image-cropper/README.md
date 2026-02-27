@@ -14,7 +14,7 @@ An interactive image cropping component with drag, resize, zoom, and aspect rati
 
 ```html
 <div scImageCropper [src]="imageUrl" [(cropArea)]="cropArea" [containerHeight]="400">
-  <div scImageCropperContainer #container class="rounded-lg overflow-hidden border"></div>
+  <div scImageCropperContainer #container class="overflow-hidden rounded-lg border"></div>
 
   <div scImageCropperControls></div>
 
@@ -193,7 +193,7 @@ readonly aspectRatioOptions = [
 
     <div class="space-y-4">
       <p class="text-sm font-medium">Preview:</p>
-      <div scImageCropperPreview [width]="100" [height]="100" class="rounded-full overflow-hidden"></div>
+      <div scImageCropperPreview [width]="100" [height]="100" class="overflow-hidden rounded-full"></div>
     </div>
   </div>
 </div>

@@ -110,7 +110,7 @@ import {
                 ></svg>
                 <span class="flex-1">New</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;N
                 </span>
@@ -123,7 +123,7 @@ import {
                 ></svg>
                 <span class="flex-1">Open</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;O
                 </span>
@@ -224,7 +224,7 @@ import {
                 ></svg>
                 <span class="flex-1">Undo</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;Z
                 </span>
@@ -237,7 +237,7 @@ import {
                 ></svg>
                 <span class="flex-1">Redo</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;Y
                 </span>
@@ -251,7 +251,7 @@ import {
                 ></svg>
                 <span class="flex-1">Cut</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;X
                 </span>
@@ -264,7 +264,7 @@ import {
                 ></svg>
                 <span class="flex-1">Copy</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;C
                 </span>
@@ -277,7 +277,7 @@ import {
                 ></svg>
                 <span class="flex-1">Paste</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;V
                 </span>
@@ -291,7 +291,7 @@ import {
                 ></svg>
                 <span class="flex-1">Find and replace</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8679;&#8984;H
                 </span>
@@ -327,7 +327,7 @@ import {
               <div scMenuItem value="Zoom in">
                 <span class="flex-1">Zoom in</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;+
                 </span>
@@ -335,7 +335,7 @@ import {
               <div scMenuItem value="Zoom out">
                 <span class="flex-1">Zoom out</span>
                 <span
-                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                 >
                   &#8984;-
                 </span>
@@ -499,7 +499,7 @@ import {
                         ></svg>
                         <span class="flex-1">Bold</span>
                         <span
-                          class="ml-auto text-xs tracking-widest text-muted-foreground"
+                          class="text-muted-foreground ml-auto text-xs tracking-widest"
                         >
                           &#8984;B
                         </span>
@@ -512,7 +512,7 @@ import {
                         ></svg>
                         <span class="flex-1">Italic</span>
                         <span
-                          class="ml-auto text-xs tracking-widest text-muted-foreground"
+                          class="text-muted-foreground ml-auto text-xs tracking-widest"
                         >
                           &#8984;I
                         </span>
@@ -525,7 +525,7 @@ import {
                         ></svg>
                         <span class="flex-1">Underline</span>
                         <span
-                          class="ml-auto text-xs tracking-widest text-muted-foreground"
+                          class="text-muted-foreground ml-auto text-xs tracking-widest"
                         >
                           &#8984;U
                         </span>
@@ -538,7 +538,7 @@ import {
                         ></svg>
                         <span class="flex-1">Strikethrough</span>
                         <span
-                          class="ml-auto text-xs tracking-widest text-muted-foreground"
+                          class="text-muted-foreground ml-auto text-xs tracking-widest"
                         >
                           &#8679;&#8984;X
                         </span>
@@ -557,7 +557,7 @@ import {
                               <div scMenuItem value="Increase font size">
                                 <span class="flex-1">Increase font size</span>
                                 <span
-                                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                                 >
                                   &#8679;&#8984;.
                                 </span>
@@ -565,7 +565,7 @@ import {
                               <div scMenuItem value="Decrease font size">
                                 <span class="flex-1">Decrease font size</span>
                                 <span
-                                  class="ml-auto text-xs tracking-widest text-muted-foreground"
+                                  class="text-muted-foreground ml-auto text-xs tracking-widest"
                                 >
                                   &#8679;&#8984;,
                                 </span>

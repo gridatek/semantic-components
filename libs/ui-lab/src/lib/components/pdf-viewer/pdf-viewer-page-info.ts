@@ -17,12 +17,12 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
       [value]="pdfViewer.currentPage()"
       (change)="onPageInput($event)"
       (keydown.enter)="onPageInput($event)"
-      class="w-12 px-2 py-1 text-sm text-center border rounded bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+      class="bg-background focus:ring-ring w-12 rounded border px-2 py-1 text-center text-sm focus:ring-2 focus:outline-none"
       [attr.min]="1"
       [attr.max]="pdfViewer.totalPages()"
       aria-label="Current page"
     />
-    <span class="text-sm text-muted-foreground">
+    <span class="text-muted-foreground text-sm">
       / {{ pdfViewer.totalPages() }}
     </span>
   `,

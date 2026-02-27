@@ -16,7 +16,7 @@ import { ScCopyButton } from './copy-button';
       <button
         scCopyButton
         [value]="value()"
-        class="absolute right-2 top-2"
+        class="absolute top-2 right-2"
         [variant]="'ghost'"
         [size]="'icon'"
       ></button>

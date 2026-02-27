@@ -29,8 +29,11 @@ import { ScInfiniteScrollEnd } from './infinite-scroll-end';
           <ng-content select="[scInfiniteScrollLoader]" />
           @if (!hasCustomLoader()) {
             <div class="flex items-center justify-center gap-2 py-4">
-              <svg siLoaderCircleIcon class="size-5 animate-spin text-muted-foreground"></svg>
-              <span class="text-sm text-muted-foreground">Loading more...</span>
+              <svg
+                siLoaderCircleIcon
+                class="text-muted-foreground size-5 animate-spin"
+              ></svg>
+              <span class="text-muted-foreground text-sm">Loading more...</span>
             </div>
           }
         </div>
@@ -40,7 +43,7 @@ import { ScInfiniteScrollEnd } from './infinite-scroll-end';
         <div [class]="endContainerClass()">
           <ng-content select="[scInfiniteScrollEnd]" />
           @if (!hasCustomEnd()) {
-            <div class="py-4 text-center text-sm text-muted-foreground">
+            <div class="text-muted-foreground py-4 text-center text-sm">
               {{ endMessage() }}
             </div>
           }

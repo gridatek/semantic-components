@@ -221,7 +221,7 @@ Display tag count with optional max.
     }
     <input scTagInputField />
   </div>
-  <div class="flex justify-between text-xs text-muted-foreground">
+  <div class="text-muted-foreground flex justify-between text-xs">
     <span>Add up to 10 skills</span>
     <span scTagInputCount></span>
   </div>

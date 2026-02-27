@@ -60,7 +60,7 @@ import type { Table } from '@tanstack/angular-table';
       (change)="onPageChange($event)"
       class="flex items-center justify-between py-4"
     >
-      <div class="flex items-center gap-2 text-sm text-muted-foreground">
+      <div class="text-muted-foreground flex items-center gap-2 text-sm">
         <span>Rows per page:</span>
         <select scPaginationPageSizeSelect>
           @for (size of pageSizeOptions(); track size) {

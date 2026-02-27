@@ -34,7 +34,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h1 scHeading>Editor</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
             &#64;semantic-components/editor
           </code>
           package. Provides a rich text editor powered by Tiptap. Requires the
@@ -62,7 +62,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>2. Configure styles</h2>
         <p class="text-muted-foreground">
           Import the editor styles in your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
         <div scCodeViewer>
@@ -80,7 +80,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>3. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source in your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
         <div scCodeViewer>

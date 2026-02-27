@@ -28,7 +28,7 @@ import {
             scSortableItem
             [index]="i"
             [item]="item"
-            class="flex items-center gap-3 rounded-md border bg-background p-3"
+            class="bg-background flex items-center gap-3 rounded-md border p-3"
           >
             <span scSortableHandle class="p-1"></span>
             <span class="text-sm">{{ item }}</span>

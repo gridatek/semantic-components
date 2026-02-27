@@ -13,7 +13,7 @@ import { ScDatePicker } from '@semantic-components/ui';
   template: `
     <sc-date-picker [(value)]="selectedDate" />
     @if (selectedDate()) {
-      <p class="text-sm text-muted-foreground mt-4">
+      <p class="text-muted-foreground mt-4 text-sm">
         Selected: {{ selectedDate()?.toLocaleString() }}
       </p>
     }

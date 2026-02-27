@@ -35,7 +35,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h1 scHeading>UI</h1>
         <p class="text-muted-foreground">
           Install and configure the core
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
             &#64;semantic-components/ui
           </code>
           package.
@@ -65,7 +65,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h3 class="text-lg font-medium">Option A: Default theme</h3>
         <p class="text-muted-foreground">
           Import the pre-built styles in your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           . This includes the default shadcn theme and Angular CDK styles.
         </p>
         <div scCodeViewer>
@@ -85,7 +85,7 @@ import { ScHeading } from '@semantic-components/ui';
           For full control over colors, border radius, and other design tokens,
           copy the CSS variables from the shadcn/ui manual installation guide
           into your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
         <a
@@ -120,7 +120,7 @@ import { ScHeading } from '@semantic-components/ui';
         <p class="text-muted-foreground">
           Add the library as a Tailwind source so its classes are included in
           the build. Add this to your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
         <div scCodeViewer>

@@ -301,7 +301,7 @@ This design prioritizes developer experience while maintaining full Angular ARIA
 All components accept a `class` input for custom styling:
 
 ```html
-<ul scTree #tree="scTree" class="border rounded-lg p-4">
+<ul scTree #tree="scTree" class="rounded-lg border p-4">
   <li scTreeItem [parent]="tree.tree" value="item" class="my-custom-item">
     <button scTreeItemTrigger class="font-bold hover:bg-blue-100">Custom Styled Item</button>
   </li>

@@ -33,16 +33,16 @@ import { Country, COUNTRIES, getCountryByCode } from './countries';
           [attr.aria-label]="'Select country: ' + selectedCountry().name"
         >
           <span class="text-base">{{ selectedCountry().flag }}</span>
-          <span class="text-sm text-muted-foreground">
+          <span class="text-muted-foreground text-sm">
             {{ selectedCountry().dialCode }}
           </span>
-          <svg siChevronDownIcon class="size-4 text-muted-foreground"></svg>
+          <svg siChevronDownIcon class="text-muted-foreground size-4"></svg>
         </button>
 
         @if (dropdownOpen()) {
           <div [class]="dropdownClass()" role="listbox">
             <!-- Search -->
-            <div class="p-2 border-b">
+            <div class="border-b p-2">
               <input
                 #searchInput
                 type="text"
@@ -71,13 +71,13 @@ import { Country, COUNTRIES, getCountryByCode } from './countries';
                 >
                   <span class="text-base">{{ country.flag }}</span>
                   <span class="flex-1 text-left">{{ country.name }}</span>
-                  <span class="text-sm text-muted-foreground">
+                  <span class="text-muted-foreground text-sm">
                     {{ country.dialCode }}
                   </span>
                 </button>
               } @empty {
                 <div
-                  class="px-3 py-6 text-center text-sm text-muted-foreground"
+                  class="text-muted-foreground px-3 py-6 text-center text-sm"
                 >
                   No countries found
                 </div>

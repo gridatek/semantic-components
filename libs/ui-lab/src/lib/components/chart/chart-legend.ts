@@ -18,7 +18,7 @@ import { CHART_COLORS } from './chart-types';
             class="size-3 rounded-sm"
             [style.background-color]="item.color || getColor(i)"
           ></div>
-          <span class="text-sm text-muted-foreground">{{ item.label }}</span>
+          <span class="text-muted-foreground text-sm">{{ item.label }}</span>
         </div>
       }
     </div>

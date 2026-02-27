@@ -7,7 +7,7 @@ A drag and drop list component for reordering items.
 ```html
 <div scSortableList [(items)]="items" class="gap-2">
   @for (item of items(); track item; let i = $index) {
-  <div scSortableItem [index]="i" [item]="item" class="p-3 border rounded-md">{{ item }}</div>
+  <div scSortableItem [index]="i" [item]="item" class="rounded-md border p-3">{{ item }}</div>
   }
 </div>
 ```
@@ -109,7 +109,7 @@ interface SortableEvent<T> {
 ```html
 <div scSortableList [(items)]="items" class="gap-2">
   @for (item of items(); track item; let i = $index) {
-  <div scSortableItem [index]="i" [item]="item" class="p-3 border rounded-md">{{ item }}</div>
+  <div scSortableItem [index]="i" [item]="item" class="rounded-md border p-3">{{ item }}</div>
   }
 </div>
 ```
@@ -119,7 +119,7 @@ interface SortableEvent<T> {
 ```html
 <div scSortableList [(items)]="items" [handleOnly]="true" class="gap-2">
   @for (item of items(); track item; let i = $index) {
-  <div scSortableItem [index]="i" [item]="item" class="flex items-center gap-3 p-3 border">
+  <div scSortableItem [index]="i" [item]="item" class="flex items-center gap-3 border p-3">
     <span scSortableHandle></span>
     <span>{{ item }}</span>
   </div>
@@ -132,7 +132,7 @@ interface SortableEvent<T> {
 ```html
 <div scSortableList [(items)]="items" orientation="horizontal" class="gap-3">
   @for (item of items(); track item; let i = $index) {
-  <div scSortableItem [index]="i" [item]="item" class="p-4 border rounded-md">{{ item }}</div>
+  <div scSortableItem [index]="i" [item]="item" class="rounded-md border p-4">{{ item }}</div>
   }
 </div>
 ```
@@ -143,7 +143,7 @@ interface SortableEvent<T> {
 <div scSortableList [(items)]="tasks" [handleOnly]="true" class="gap-1">
   <div scSortableOverlay></div>
   @for (task of tasks(); track task.id; let i = $index) {
-  <div scSortableItem [index]="i" [item]="task" class="flex items-center gap-3 p-3 border">
+  <div scSortableItem [index]="i" [item]="task" class="flex items-center gap-3 border p-3">
     <span scSortableHandle></span>
     <input type="checkbox" [checked]="task.completed" />
     <span>{{ task.title }}</span>
@@ -169,7 +169,7 @@ onSortChange(event: SortableEvent<Item>) {
 ```html
 <div scSortableList [items]="items" [disabled]="true">
   @for (item of items; track item; let i = $index) {
-  <div scSortableItem [index]="i" [item]="item" class="p-3 border opacity-60">{{ item }}</div>
+  <div scSortableItem [index]="i" [item]="item" class="border p-3 opacity-60">{{ item }}</div>
   }
 </div>
 ```
@@ -192,7 +192,7 @@ onSortChange(event: SortableEvent<Item>) {
     <span class="text-muted-foreground">{{ i + 1 }}</span>
     <div class="flex-1">
       <p class="font-medium">{{ song.title }}</p>
-      <p class="text-sm text-muted-foreground">{{ song.artist }}</p>
+      <p class="text-muted-foreground text-sm">{{ song.artist }}</p>
     </div>
     <span>{{ song.duration }}</span>
   </div>

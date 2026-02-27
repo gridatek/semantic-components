@@ -14,7 +14,7 @@ Before/after image comparison slider with keyboard and touch support. Built usin
 ## Basic Usage
 
 ```html
-<div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+<div scImageCompare class="aspect-[2/1] w-full max-w-2xl">
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Before" />
     <img scImageCompareAfter src="after.jpg" alt="After" />
@@ -79,7 +79,7 @@ Label component with full positioning control.
 ### Basic Usage
 
 ```html
-<div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+<div scImageCompare class="aspect-[2/1] w-full max-w-2xl">
   <div scImageCompareContainer>
     <img scImageCompareBefore src="/images/before.jpg" alt="Before" />
     <img scImageCompareAfter src="/images/after.jpg" alt="After" />
@@ -95,7 +95,7 @@ Label component with full positioning control.
 Simply omit the label components:
 
 ```html
-<div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+<div scImageCompare class="aspect-[2/1] w-full max-w-2xl">
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Before" />
     <img scImageCompareAfter src="after.jpg" alt="After" />
@@ -107,7 +107,7 @@ Simply omit the label components:
 ### Vertical Orientation
 
 ```html
-<div scImageCompare [orientation]="'vertical'" class="w-full max-w-sm aspect-[2/3]">
+<div scImageCompare [orientation]="'vertical'" class="aspect-[2/3] w-full max-w-sm">
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Top" />
     <img scImageCompareAfter src="after.jpg" alt="Bottom" />
@@ -123,13 +123,13 @@ Simply omit the label components:
 Labels have full positioning control:
 
 ```html
-<div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+<div scImageCompare class="aspect-[2/1] w-full max-w-2xl">
   <div scImageCompareContainer>
     <img scImageCompareBefore src="before.jpg" alt="Before" />
     <img scImageCompareAfter src="after.jpg" alt="After" />
     <div scImageCompareSlider></div>
-    <div scImageCompareLabel class="bottom-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full">Original</div>
-    <div scImageCompareLabel class="bottom-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full">Enhanced</div>
+    <div scImageCompareLabel class="bottom-4 left-4 rounded-full bg-blue-500 px-3 py-1 text-white">Original</div>
+    <div scImageCompareLabel class="right-4 bottom-4 rounded-full bg-green-500 px-3 py-1 text-white">Enhanced</div>
   </div>
 </div>
 ```
@@ -156,7 +156,7 @@ Use content projection to customize the slider handle:
 ```typescript
 @Component({
   template: `
-    <div scImageCompare [(position)]="position" class="w-full max-w-2xl aspect-[2/1]">
+    <div scImageCompare [(position)]="position" class="aspect-[2/1] w-full max-w-2xl">
       <div scImageCompareContainer>
         <img scImageCompareBefore src="before.jpg" alt="Before" />
         <img scImageCompareAfter src="after.jpg" alt="After" />
@@ -204,13 +204,13 @@ The component uses CSS `clip-path` for the reveal effect. Set dimensions on the 
 
 ```html
 <!-- Fixed aspect ratio -->
-<div scImageCompare class="w-full max-w-2xl aspect-[16/9]">...</div>
+<div scImageCompare class="aspect-[16/9] w-full max-w-2xl">...</div>
 
 <!-- Square -->
-<div scImageCompare class="w-full max-w-md aspect-square">...</div>
+<div scImageCompare class="aspect-square w-full max-w-md">...</div>
 
 <!-- Custom dimensions -->
-<div scImageCompare class="w-[600px] h-[400px]">...</div>
+<div scImageCompare class="h-[400px] w-[600px]">...</div>
 ```
 
 ## Composable Architecture

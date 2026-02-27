@@ -34,7 +34,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h1 scHeading>UI Lab</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
             &#64;semantic-components/ui-lab
           </code>
           package. This contains experimental and advanced components. Requires
@@ -59,7 +59,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source in your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
         <div scCodeViewer>

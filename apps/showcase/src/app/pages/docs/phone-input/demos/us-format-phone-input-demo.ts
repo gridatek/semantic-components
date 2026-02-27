@@ -17,7 +17,7 @@ import { ScPhoneInputSimple } from '@semantic-components/ui-lab';
         placeholder="(555) 555-5555"
       />
     </div>
-    <p class="text-sm text-muted-foreground mt-2">
+    <p class="text-muted-foreground mt-2 text-sm">
       Value: {{ phone() || 'Empty' }}
     </p>
   `,

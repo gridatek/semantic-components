@@ -19,7 +19,12 @@ import type { TransferListItem } from './transfer-list-types';
 
 @Component({
   selector: 'sc-transfer-list',
-  imports: [SiChevronRightIcon, SiChevronLeftIcon, SiChevronsRightIcon, SiChevronsLeftIcon],
+  imports: [
+    SiChevronRightIcon,
+    SiChevronLeftIcon,
+    SiChevronsRightIcon,
+    SiChevronsLeftIcon,
+  ],
   template: `
     <div [class]="containerClass()">
       <!-- Source List -->
@@ -35,16 +40,16 @@ import type { TransferListItem } from './transfer-list-types';
             />
             <span class="font-medium">{{ sourceTitle() }}</span>
           </label>
-          <span class="text-xs text-muted-foreground">
+          <span class="text-muted-foreground text-xs">
             {{ selectedSourceIds().size }}/{{ sourceItems().length }}
           </span>
         </div>
 
         @if (searchable()) {
-          <div class="p-2 border-b">
+          <div class="border-b p-2">
             <input
               type="text"
-              class="w-full h-8 px-2 text-sm border rounded-md bg-background"
+              class="bg-background h-8 w-full rounded-md border px-2 text-sm"
               placeholder="Search..."
               [value]="sourceSearch()"
               (input)="sourceSearch.set($any($event.target).value)"
@@ -62,10 +67,10 @@ import type { TransferListItem } from './transfer-list-types';
                 [disabled]="item.disabled"
                 (change)="toggleSourceItem(item)"
               />
-              <div class="flex-1 min-w-0">
+              <div class="min-w-0 flex-1">
                 <div class="truncate">{{ item.label }}</div>
                 @if (item.description) {
-                  <div class="text-xs text-muted-foreground truncate">
+                  <div class="text-muted-foreground truncate text-xs">
                     {{ item.description }}
                   </div>
                 }
@@ -73,7 +78,7 @@ import type { TransferListItem } from './transfer-list-types';
             </label>
           }
           @if (filteredSourceItems().length === 0) {
-            <div class="p-4 text-center text-sm text-muted-foreground">
+            <div class="text-muted-foreground p-4 text-center text-sm">
               No items
             </div>
           }
@@ -133,16 +138,16 @@ import type { TransferListItem } from './transfer-list-types';
             />
             <span class="font-medium">{{ targetTitle() }}</span>
           </label>
-          <span class="text-xs text-muted-foreground">
+          <span class="text-muted-foreground text-xs">
             {{ selectedTargetIds().size }}/{{ targetItems().length }}
           </span>
         </div>
 
         @if (searchable()) {
-          <div class="p-2 border-b">
+          <div class="border-b p-2">
             <input
               type="text"
-              class="w-full h-8 px-2 text-sm border rounded-md bg-background"
+              class="bg-background h-8 w-full rounded-md border px-2 text-sm"
               placeholder="Search..."
               [value]="targetSearch()"
               (input)="targetSearch.set($any($event.target).value)"
@@ -160,10 +165,10 @@ import type { TransferListItem } from './transfer-list-types';
                 [disabled]="item.disabled"
                 (change)="toggleTargetItem(item)"
               />
-              <div class="flex-1 min-w-0">
+              <div class="min-w-0 flex-1">
                 <div class="truncate">{{ item.label }}</div>
                 @if (item.description) {
-                  <div class="text-xs text-muted-foreground truncate">
+                  <div class="text-muted-foreground truncate text-xs">
                     {{ item.description }}
                   </div>
                 }
@@ -171,7 +176,7 @@ import type { TransferListItem } from './transfer-list-types';
             </label>
           }
           @if (filteredTargetItems().length === 0) {
-            <div class="p-4 text-center text-sm text-muted-foreground">
+            <div class="text-muted-foreground p-4 text-center text-sm">
               No items
             </div>
           }

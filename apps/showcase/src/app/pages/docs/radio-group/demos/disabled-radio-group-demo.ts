@@ -17,7 +17,7 @@ interface DisabledFormModel {
   template: `
     <div class="flex flex-col gap-4">
       <div>
-        <p class="text-xs text-muted-foreground mb-2">
+        <p class="text-muted-foreground mb-2 text-xs">
           Individual item disabled:
         </p>
         <div scRadioGroup>
@@ -48,7 +48,7 @@ interface DisabledFormModel {
         </div>
       </div>
       <div>
-        <p class="text-xs text-muted-foreground mb-2">Entire group disabled:</p>
+        <p class="text-muted-foreground mb-2 text-xs">Entire group disabled:</p>
         <div scRadioGroup>
           <label scRadioField class="flex items-center space-x-2">
             <input type="radio" scRadio value="option1" disabled id="g1" />

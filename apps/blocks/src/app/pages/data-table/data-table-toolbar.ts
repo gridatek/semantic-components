@@ -65,7 +65,7 @@ import type { Table } from '@tanstack/angular-table';
 
     <!-- Selection Count -->
     @if (selectedRowCount() > 0) {
-      <span class="text-sm text-muted-foreground">
+      <span class="text-muted-foreground text-sm">
         {{ selectedRowCount() }} of
         {{ table().getRowModel().rows.length }} row(s) selected
       </span>

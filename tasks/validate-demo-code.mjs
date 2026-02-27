@@ -67,8 +67,12 @@ for (const containerPath of containerFiles) {
     const lines2 = escaped.split('\n');
     for (let i = 0; i < Math.max(lines1.length, lines2.length); i++) {
       if (lines1[i] !== lines2[i]) {
-        console.log('  Line ' + (i+1) + ' current : ' + JSON.stringify(lines1[i]));
-        console.log('  Line ' + (i+1) + ' expected: ' + JSON.stringify(lines2[i]));
+        console.log(
+          '  Line ' + (i + 1) + ' current : ' + JSON.stringify(lines1[i]),
+        );
+        console.log(
+          '  Line ' + (i + 1) + ' expected: ' + JSON.stringify(lines2[i]),
+        );
         break;
       }
     }

@@ -29,7 +29,7 @@ interface PlaylistItem {
   template: `
     <div class="max-w-lg">
       <div class="rounded-lg border">
-        <div class="border-b bg-muted/50 px-4 py-2">
+        <div class="bg-muted/50 border-b px-4 py-2">
           <h4 class="font-medium">My Playlist</h4>
         </div>
         <div
@@ -44,19 +44,19 @@ interface PlaylistItem {
               scSortableItem
               [index]="i"
               [item]="song"
-              class="flex items-center gap-4 px-4 py-3 hover:bg-muted/50"
+              class="hover:bg-muted/50 flex items-center gap-4 px-4 py-3"
             >
               <span scSortableHandle class="p-1"></span>
-              <span class="w-6 text-sm text-muted-foreground">
+              <span class="text-muted-foreground w-6 text-sm">
                 {{ i + 1 }}
               </span>
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium truncate">{{ song.title }}</p>
-                <p class="text-xs text-muted-foreground truncate">
+              <div class="min-w-0 flex-1">
+                <p class="truncate text-sm font-medium">{{ song.title }}</p>
+                <p class="text-muted-foreground truncate text-xs">
                   {{ song.artist }}
                 </p>
               </div>
-              <span class="text-sm text-muted-foreground">
+              <span class="text-muted-foreground text-sm">
                 {{ song.duration }}
               </span>
             </div>

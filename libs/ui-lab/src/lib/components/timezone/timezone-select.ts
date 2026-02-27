@@ -31,7 +31,7 @@ import { ScTimezoneService } from './timezone.service';
       id="timezone-select"
       [value]="currentTimezoneId()"
       (change)="onTimezoneChange($event)"
-      class="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      class="border-input bg-background ring-offset-background focus-visible:ring-ring h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
     >
       @for (tz of timezones(); track tz.id) {
         <option [value]="tz.id">

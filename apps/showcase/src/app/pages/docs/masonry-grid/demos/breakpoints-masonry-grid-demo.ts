@@ -30,11 +30,11 @@ interface DemoItem {
       @for (item of items().slice(0, 9); track item.id) {
         <div scMasonryItem>
           <div
-            class="rounded-lg border bg-card p-4"
+            class="bg-card rounded-lg border p-4"
             [style.min-height.px]="item.height"
           >
             <h4 class="font-medium">Card {{ item.id }}</h4>
-            <p class="text-sm text-muted-foreground mt-2">
+            <p class="text-muted-foreground mt-2 text-sm">
               This card has a minimum height of {{ item.height }}px. The masonry
               layout automatically arranges cards in columns.
             </p>

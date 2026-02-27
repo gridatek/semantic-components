@@ -35,7 +35,7 @@ import {
         </p>
       </div>
       <div scCardFooter>
-        <p class="text-sm text-muted-foreground">Card footer</p>
+        <p class="text-muted-foreground text-sm">Card footer</p>
       </div>
     </div>
   `,

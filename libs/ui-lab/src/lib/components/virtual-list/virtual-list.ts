@@ -33,7 +33,7 @@ import type { VirtualListItem, VirtualListRange } from './virtual-list-types';
         <!-- Rendered items -->
         <div
           [style.transform]="'translateY(' + offsetY() + 'px)'"
-          class="absolute top-0 left-0 right-0"
+          class="absolute top-0 right-0 left-0"
         >
           @for (
             item of visibleItems();

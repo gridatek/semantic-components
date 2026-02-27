@@ -37,7 +37,7 @@ import {
   template: `
     <div class="space-y-4">
       <div class="flex items-center gap-4">
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Page {{ currentPage() }} of {{ pagination.totalPages() }} ({{
             totalItems()
           }}

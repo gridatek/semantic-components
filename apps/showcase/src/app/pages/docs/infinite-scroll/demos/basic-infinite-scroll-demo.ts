@@ -17,23 +17,23 @@ interface Item {
   imports: [ScInfiniteScroll],
   template: `
     <sc-infinite-scroll
-      class="h-[400px] border rounded-lg"
+      class="h-[400px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
       (loadMore)="loadMore()"
     >
-      <div class="p-4 space-y-2">
+      <div class="space-y-2 p-4">
         @for (item of items(); track item.id) {
-          <div class="p-4 border rounded-lg">
+          <div class="rounded-lg border p-4">
             <h4 class="font-medium">{{ item.title }}</h4>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-muted-foreground text-sm">
               {{ item.description }}
             </p>
           </div>
         }
       </div>
     </sc-infinite-scroll>
-    <p class="text-sm text-muted-foreground mt-4">
+    <p class="text-muted-foreground mt-4 text-sm">
       Loaded {{ items().length }} items
     </p>
   `,

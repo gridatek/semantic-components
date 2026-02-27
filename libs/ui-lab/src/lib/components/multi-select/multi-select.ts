@@ -10,7 +10,12 @@ import {
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
-import { SiCheckIcon, SiChevronDownIcon, SiMinusIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiCheckIcon,
+  SiChevronDownIcon,
+  SiMinusIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 
 export interface MultiSelectOption {
@@ -34,7 +39,7 @@ export interface MultiSelectOption {
         [attr.aria-expanded]="dropdownOpen()"
         [attr.aria-haspopup]="'listbox'"
       >
-        <div class="flex flex-wrap gap-1 flex-1">
+        <div class="flex flex-1 flex-wrap gap-1">
           @if (selectedOptions().length === 0) {
             <span class="text-muted-foreground">{{ placeholder() }}</span>
           } @else if (showChips()) {
@@ -43,7 +48,7 @@ export interface MultiSelectOption {
                 {{ option.label }}
                 <button
                   type="button"
-                  class="ml-1 hover:text-foreground focus:outline-none"
+                  class="hover:text-foreground ml-1 focus:outline-none"
                   (click)="removeOption($event, option)"
                   [attr.aria-label]="'Remove ' + option.label"
                 >
@@ -55,7 +60,10 @@ export interface MultiSelectOption {
             <span>{{ selectedOptions().length }} selected</span>
           }
         </div>
-        <svg siChevronDownIcon class="size-4 shrink-0 text-muted-foreground"></svg>
+        <svg
+          siChevronDownIcon
+          class="text-muted-foreground size-4 shrink-0"
+        ></svg>
       </button>
 
       <!-- Dropdown -->
@@ -67,7 +75,7 @@ export interface MultiSelectOption {
         >
           <!-- Search -->
           @if (searchable()) {
-            <div class="p-2 border-b">
+            <div class="border-b p-2">
               <input
                 #searchInput
                 type="text"
@@ -82,7 +90,7 @@ export interface MultiSelectOption {
 
           <!-- Select All -->
           @if (showSelectAll()) {
-            <div class="p-1 border-b">
+            <div class="border-b p-1">
               <button
                 type="button"
                 [class]="selectAllClass()"
@@ -119,7 +127,7 @@ export interface MultiSelectOption {
                 <span>{{ option.label }}</span>
               </button>
             } @empty {
-              <div class="px-2 py-6 text-center text-sm text-muted-foreground">
+              <div class="text-muted-foreground px-2 py-6 text-center text-sm">
                 No options found
               </div>
             }
@@ -127,10 +135,10 @@ export interface MultiSelectOption {
 
           <!-- Clear All -->
           @if (showClearAll() && selectedOptions().length > 0) {
-            <div class="p-2 border-t">
+            <div class="border-t p-2">
               <button
                 type="button"
-                class="w-full text-sm text-muted-foreground hover:text-foreground"
+                class="text-muted-foreground hover:text-foreground w-full text-sm"
                 (click)="clearAll()"
               >
                 Clear all

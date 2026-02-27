@@ -19,26 +19,33 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
     <div [class]="columnClass()">
       <!-- Header -->
       <div
-        class="flex items-center justify-between p-3 border-b"
+        class="flex items-center justify-between border-b p-3"
         [style.border-top-color]="column().color || 'transparent'"
         [style.border-top-width]="column().color ? '3px' : '0'"
       >
         <div class="flex items-center gap-2">
           <button
             type="button"
-            class="p-0.5 hover:bg-muted rounded transition-colors"
+            class="hover:bg-muted rounded p-0.5 transition-colors"
             (click)="toggleCollapse()"
             [attr.aria-expanded]="!collapsed()"
             [attr.aria-label]="
               collapsed() ? 'Expand column' : 'Collapse column'
             "
           >
-            <svg siChevronDownIcon [class]="collapsed() ? '-rotate-90 transition-transform' : 'rotate-0 transition-transform'"></svg>
+            <svg
+              siChevronDownIcon
+              [class]="
+                collapsed()
+                  ? '-rotate-90 transition-transform'
+                  : 'rotate-0 transition-transform'
+              "
+            ></svg>
           </button>
-          <h3 class="font-semibold text-sm text-foreground">
+          <h3 class="text-foreground text-sm font-semibold">
             {{ column().title }}
           </h3>
-          <span class="px-1.5 py-0.5 text-xs font-medium bg-muted rounded-full">
+          <span class="bg-muted rounded-full px-1.5 py-0.5 text-xs font-medium">
             {{ cards().length }}
             @if (column().limit) {
               /{{ column().limit }}
@@ -49,7 +56,7 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
         @if (showAddButton()) {
           <button
             type="button"
-            class="p-1 hover:bg-muted rounded transition-colors text-muted-foreground hover:text-foreground"
+            class="hover:bg-muted text-muted-foreground hover:text-foreground rounded p-1 transition-colors"
             (click)="startAddingCard()"
             aria-label="Add card"
           >
@@ -60,13 +67,13 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
 
       <!-- Collapsed state -->
       @if (collapsed()) {
-        <div class="p-3 text-center text-sm text-muted-foreground">
+        <div class="text-muted-foreground p-3 text-center text-sm">
           {{ cards().length }} cards
         </div>
       } @else {
         <!-- Cards container -->
         <div
-          class="flex-1 p-2 space-y-2 overflow-y-auto min-h-[100px]"
+          class="min-h-[100px] flex-1 space-y-2 overflow-y-auto p-2"
           [class.bg-primary/5]="isDragOver()"
           [class.ring-2]="isDragOver()"
           [class.ring-primary]="isDragOver()"
@@ -97,13 +104,13 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
 
           <!-- Drop indicator at end -->
           @if (dropIndex() === cards().length && cards().length > 0) {
-            <div class="border-t-2 border-primary pt-2"></div>
+            <div class="border-primary border-t-2 pt-2"></div>
           }
 
           <!-- Empty state -->
           @if (cards().length === 0 && !isAddingCard()) {
             <div
-              class="flex items-center justify-center h-24 text-sm text-muted-foreground border-2 border-dashed rounded-lg"
+              class="text-muted-foreground flex h-24 items-center justify-center rounded-lg border-2 border-dashed text-sm"
             >
               Drop cards here
             </div>
@@ -111,27 +118,27 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
 
           <!-- Add card form -->
           @if (isAddingCard()) {
-            <div class="p-2 bg-card border rounded-lg shadow-sm">
+            <div class="bg-card rounded-lg border p-2 shadow-sm">
               <textarea
                 #addInput
-                class="w-full p-2 text-sm border rounded resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+                class="focus:ring-ring w-full resize-none rounded border p-2 text-sm focus:ring-2 focus:outline-none"
                 rows="2"
                 placeholder="Enter card title..."
                 (keydown.enter)="submitNewCard($event)"
                 (keydown.escape)="cancelAddingCard()"
                 (blur)="onInputBlur()"
               ></textarea>
-              <div class="flex items-center gap-2 mt-2">
+              <div class="mt-2 flex items-center gap-2">
                 <button
                   type="button"
-                  class="px-3 py-1.5 text-xs font-medium bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
+                  class="bg-primary text-primary-foreground hover:bg-primary/90 rounded px-3 py-1.5 text-xs font-medium transition-colors"
                   (mousedown)="submitNewCardFromButton()"
                 >
                   Add
                 </button>
                 <button
                   type="button"
-                  class="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  class="text-muted-foreground hover:text-foreground px-3 py-1.5 text-xs font-medium transition-colors"
                   (mousedown)="cancelAddingCard()"
                 >
                   Cancel
@@ -145,7 +152,7 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
         @if (!isAddingCard() && showAddButton()) {
           <button
             type="button"
-            class="w-full p-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex items-center justify-center gap-1 border-t"
+            class="text-muted-foreground hover:text-foreground hover:bg-muted/50 flex w-full items-center justify-center gap-1 border-t p-2 text-sm transition-colors"
             (click)="startAddingCard()"
           >
             <svg
@@ -169,7 +176,7 @@ import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
         <!-- Limit warning -->
         @if (isOverLimit()) {
           <div
-            class="px-3 py-1.5 text-xs text-orange-600 dark:text-orange-400 bg-orange-500/10 border-t"
+            class="border-t bg-orange-500/10 px-3 py-1.5 text-xs text-orange-600 dark:text-orange-400"
           >
             Column limit exceeded ({{ cards().length }}/{{ column().limit }})
           </div>

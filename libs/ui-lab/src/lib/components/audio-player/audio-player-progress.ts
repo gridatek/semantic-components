@@ -12,11 +12,11 @@ import { SC_AUDIO_PLAYER } from './audio-player';
 @Component({
   selector: 'div[scAudioPlayerProgress]',
   template: `
-    <span class="text-xs text-muted-foreground w-10 text-right">
+    <span class="text-muted-foreground w-10 text-right text-xs">
       {{ player.formatTime(player.currentTime()) }}
     </span>
     <div
-      class="flex-1 h-1.5 bg-muted rounded-full cursor-pointer relative group"
+      class="bg-muted group relative h-1.5 flex-1 cursor-pointer rounded-full"
       (click)="onProgressClick($event)"
       role="slider"
       [attr.aria-label]="'Seek'"
@@ -27,16 +27,16 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       (keydown)="onProgressKeydown($event)"
     >
       <div
-        class="absolute inset-y-0 left-0 bg-primary rounded-full transition-all"
+        class="bg-primary absolute inset-y-0 left-0 rounded-full transition-all"
         [style.width.%]="player.progressPercent()"
       ></div>
       <div
-        class="absolute top-1/2 -translate-y-1/2 size-3 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+        class="bg-primary pointer-events-none absolute top-1/2 size-3 -translate-y-1/2 rounded-full opacity-0 transition-opacity group-hover:opacity-100"
         [style.left.%]="player.progressPercent()"
         [style.transform]="'translate(-50%, -50%)'"
       ></div>
     </div>
-    <span class="text-xs text-muted-foreground w-10">
+    <span class="text-muted-foreground w-10 text-xs">
       {{ player.formatTime(player.duration()) }}
     </span>
   `,

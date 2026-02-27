@@ -10,7 +10,7 @@ import {
   template: `
     @if (visible()) {
       <div
-        class="pointer-events-none absolute z-50 rounded-lg border bg-background px-3 py-1.5 text-sm shadow-md"
+        class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
         [style.left.px]="x()"
         [style.top.px]="y()"
         [style.transform]="'translate(-50%, -100%) translateY(-8px)'"

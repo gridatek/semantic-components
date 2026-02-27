@@ -6,7 +6,11 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiChevronDownIcon, SiChevronUpIcon, SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiChevronDownIcon,
+  SiChevronUpIcon,
+  SiChevronsUpDownIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE, SortDirection } from './data-table';
 
@@ -17,7 +21,7 @@ import { SC_DATA_TABLE, SortDirection } from './data-table';
     @if (sortable()) {
       <button
         type="button"
-        class="flex items-center gap-1 hover:text-foreground -ml-3 h-8 px-3 rounded-md hover:bg-accent"
+        class="hover:text-foreground hover:bg-accent -ml-3 flex h-8 items-center gap-1 rounded-md px-3"
         (click)="onSort()"
       >
         <ng-content />
@@ -26,7 +30,10 @@ import { SC_DATA_TABLE, SortDirection } from './data-table';
         } @else if (sortDirection() === 'desc') {
           <svg siChevronDownIcon class="size-4"></svg>
         } @else {
-          <svg siChevronsUpDownIcon class="size-4 opacity-0 group-hover:opacity-50"></svg>
+          <svg
+            siChevronsUpDownIcon
+            class="size-4 opacity-0 group-hover:opacity-50"
+          ></svg>
         }
       </button>
     } @else {

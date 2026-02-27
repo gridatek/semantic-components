@@ -12,9 +12,9 @@ import { cn, ScLink } from '@semantic-components/ui';
   selector: 'app-cta-section',
   imports: [RouterLink, ScLink],
   template: `
-    <section class="py-16 px-4 md:px-6 lg:px-8 bg-muted/30">
-      <div class="max-w-4xl mx-auto text-center space-y-6">
-        <h2 class="text-2xl md:text-3xl font-bold">Ready to get started?</h2>
+    <section class="bg-muted/30 px-4 py-16 md:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl space-y-6 text-center">
+        <h2 class="text-2xl font-bold md:text-3xl">Ready to get started?</h2>
         <p class="text-muted-foreground">
           Explore the docs, browse components, and start building.
         </p>

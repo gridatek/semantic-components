@@ -29,7 +29,7 @@ import {
     >
       <div
         scImageCropperContainer
-        class="rounded-lg overflow-hidden border"
+        class="overflow-hidden rounded-lg border"
       ></div>
 
       <div class="flex items-center justify-between">

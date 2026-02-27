@@ -17,21 +17,21 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     @if (pdfViewer.error()) {
       <div [class]="overlayClass()">
         <ng-content>
-          <div class="flex flex-col items-center gap-3 text-center px-4">
+          <div class="flex flex-col items-center gap-3 px-4 text-center">
             <div
-              class="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center"
+              class="bg-destructive/10 flex h-16 w-16 items-center justify-center rounded-full"
             >
-              <svg siCircleXIcon class="size-8 text-destructive"></svg>
+              <svg siCircleXIcon class="text-destructive size-8"></svg>
             </div>
-            <p class="text-sm font-medium text-foreground">
+            <p class="text-foreground text-sm font-medium">
               Failed to load PDF
             </p>
-            <p class="text-sm text-muted-foreground max-w-xs">
+            <p class="text-muted-foreground max-w-xs text-sm">
               {{ pdfViewer.error() }}
             </p>
             <button
               type="button"
-              class="mt-2 px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+              class="bg-primary text-primary-foreground hover:bg-primary/90 mt-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
               (click)="pdfViewer.retry()"
             >
               Retry

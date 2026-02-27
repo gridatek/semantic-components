@@ -6,7 +6,11 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiBellIcon, SiCircleCheckIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import {
+  SiBellIcon,
+  SiCircleCheckIcon,
+  SiTrash2Icon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScNotificationGroup } from './notification-group';
 import { ScNotificationItem } from './notification-item';
@@ -17,16 +21,22 @@ import {
 
 @Component({
   selector: '[scNotificationCenterContainer]',
-  imports: [ScNotificationGroup, ScNotificationItem, SiCircleCheckIcon, SiTrash2Icon, SiBellIcon],
+  imports: [
+    ScNotificationGroup,
+    ScNotificationItem,
+    SiCircleCheckIcon,
+    SiTrash2Icon,
+    SiBellIcon,
+  ],
   template: `
     <div [class]="containerClass()">
       <!-- Header -->
-      <div class="flex items-center justify-between px-4 py-3 border-b">
+      <div class="flex items-center justify-between border-b px-4 py-3">
         <div class="flex items-center gap-2">
           <h2 class="text-lg font-semibold">{{ center.title() }}</h2>
           @if (center.totalUnread() > 0) {
             <span
-              class="px-2 py-0.5 text-xs font-medium bg-primary text-primary-foreground rounded-full"
+              class="bg-primary text-primary-foreground rounded-full px-2 py-0.5 text-xs font-medium"
             >
               {{ center.totalUnread() }}
             </span>
@@ -36,11 +46,11 @@ import {
         <div class="flex items-center gap-2">
           <!-- Filter tabs -->
           @if (center.showFilters()) {
-            <div class="flex items-center bg-muted rounded-lg p-0.5">
+            <div class="bg-muted flex items-center rounded-lg p-0.5">
               @for (f of filters; track f.value) {
                 <button
                   type="button"
-                  class="px-2.5 py-1 text-xs font-medium rounded-md transition-colors"
+                  class="rounded-md px-2.5 py-1 text-xs font-medium transition-colors"
                   [class.bg-background]="center.filter() === f.value"
                   [class.text-foreground]="center.filter() === f.value"
                   [class.shadow-sm]="center.filter() === f.value"
@@ -58,7 +68,7 @@ import {
           @if (center.totalUnread() > 0) {
             <button
               type="button"
-              class="p-1.5 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              class="hover:bg-muted text-muted-foreground hover:text-foreground rounded-lg p-1.5 transition-colors"
               (click)="center.onMarkAllRead()"
               aria-label="Mark all as read"
               title="Mark all as read"
@@ -71,7 +81,7 @@ import {
           @if (center.notifications().length > 0 && center.showClearAll()) {
             <button
               type="button"
-              class="p-1.5 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              class="hover:bg-muted text-muted-foreground hover:text-foreground rounded-lg p-1.5 transition-colors"
               (click)="center.onClearAll()"
               aria-label="Clear all notifications"
               title="Clear all"
@@ -89,20 +99,20 @@ import {
             class="flex flex-col items-center justify-center py-12 text-center"
           >
             <div
-              class="w-16 h-16 mb-4 rounded-full bg-muted flex items-center justify-center"
+              class="bg-muted mb-4 flex h-16 w-16 items-center justify-center rounded-full"
             >
-              <svg siBellIcon class="size-8 text-muted-foreground"></svg>
+              <svg siBellIcon class="text-muted-foreground size-8"></svg>
             </div>
-            <p class="text-sm font-medium text-foreground">
+            <p class="text-foreground text-sm font-medium">
               {{ center.emptyTitle() }}
             </p>
-            <p class="mt-1 text-sm text-muted-foreground">
+            <p class="text-muted-foreground mt-1 text-sm">
               {{ center.emptyDescription() }}
             </p>
           </div>
         } @else if (center.groups().length > 0) {
           <!-- Grouped notifications -->
-          <div class="p-2 space-y-4">
+          <div class="space-y-4 p-2">
             @for (group of center.groups(); track group.id) {
               <sc-notification-group
                 [group]="group"
@@ -122,7 +132,7 @@ import {
             <!-- Ungrouped notifications -->
             @if (center.ungroupedNotifications().length > 0) {
               <div>
-                <p class="px-3 py-2 text-sm font-medium text-muted-foreground">
+                <p class="text-muted-foreground px-3 py-2 text-sm font-medium">
                   Other
                 </p>
                 <div class="space-y-1">
@@ -145,7 +155,7 @@ import {
           </div>
         } @else {
           <!-- Flat list -->
-          <div class="p-2 space-y-1" role="feed" aria-label="Notifications">
+          <div class="space-y-1 p-2" role="feed" aria-label="Notifications">
             @for (
               notification of center.filteredNotifications();
               track notification.id

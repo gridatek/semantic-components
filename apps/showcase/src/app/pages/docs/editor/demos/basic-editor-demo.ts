@@ -53,7 +53,7 @@ import {
   ],
   template: `
     <div class="w-full">
-      <div scEditor class="border rounded-lg overflow-hidden">
+      <div scEditor class="overflow-hidden rounded-lg border">
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
             <button scEditorBold>
@@ -103,8 +103,8 @@ import {
       </div>
 
       <div class="mt-4">
-        <h4 class="text-sm font-medium mb-2">HTML Output:</h4>
-        <pre class="p-3 bg-muted rounded-lg text-xs overflow-x-auto max-h-32">{{
+        <h4 class="mb-2 text-sm font-medium">HTML Output:</h4>
+        <pre class="bg-muted max-h-32 overflow-x-auto rounded-lg p-3 text-xs">{{
           content()
         }}</pre>
       </div>

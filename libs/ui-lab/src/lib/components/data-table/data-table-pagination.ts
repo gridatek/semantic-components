@@ -18,10 +18,15 @@ import { SC_DATA_TABLE } from './data-table';
 
 @Component({
   selector: '[scDataTablePagination]',
-  imports: [SiChevronsLeftIcon, SiChevronLeftIcon, SiChevronRightIcon, SiChevronsRightIcon],
+  imports: [
+    SiChevronsLeftIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+    SiChevronsRightIcon,
+  ],
   template: `
     <div class="flex items-center justify-between px-2">
-      <div class="text-sm text-muted-foreground">
+      <div class="text-muted-foreground text-sm">
         @if (showSelection()) {
           {{ table.rowSelection().size }} of
           {{ table.sortedData().length }} row(s) selected.
@@ -33,7 +38,7 @@ import { SC_DATA_TABLE } from './data-table';
         <div class="flex items-center space-x-2">
           <p class="text-sm font-medium">Rows per page</p>
           <select
-            class="h-8 w-[70px] rounded-md border border-input bg-background text-sm"
+            class="border-input bg-background h-8 w-[70px] rounded-md border text-sm"
             [value]="pageSize()"
             (change)="onPageSizeChange($event)"
           >
@@ -50,7 +55,7 @@ import { SC_DATA_TABLE } from './data-table';
         <div class="flex items-center space-x-2">
           <button
             type="button"
-            class="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background hover:bg-accent disabled:opacity-50"
+            class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
             [disabled]="currentPage() === 1"
             (click)="goToPage(1)"
             aria-label="First page"
@@ -59,7 +64,7 @@ import { SC_DATA_TABLE } from './data-table';
           </button>
           <button
             type="button"
-            class="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background hover:bg-accent disabled:opacity-50"
+            class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
             [disabled]="currentPage() === 1"
             (click)="goToPage(currentPage() - 1)"
             aria-label="Previous page"
@@ -68,7 +73,7 @@ import { SC_DATA_TABLE } from './data-table';
           </button>
           <button
             type="button"
-            class="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background hover:bg-accent disabled:opacity-50"
+            class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
             [disabled]="currentPage() === totalPages()"
             (click)="goToPage(currentPage() + 1)"
             aria-label="Next page"
@@ -77,7 +82,7 @@ import { SC_DATA_TABLE } from './data-table';
           </button>
           <button
             type="button"
-            class="inline-flex size-8 items-center justify-center rounded-md border border-input bg-background hover:bg-accent disabled:opacity-50"
+            class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
             [disabled]="currentPage() === totalPages()"
             (click)="goToPage(totalPages())"
             aria-label="Last page"

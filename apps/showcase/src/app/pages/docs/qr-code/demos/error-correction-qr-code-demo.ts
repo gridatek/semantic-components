@@ -9,14 +9,14 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-error-correction-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <div class="flex gap-4 flex-wrap">
+    <div class="flex flex-wrap gap-4">
       <div class="text-center">
         <sc-qr-code
           [value]="'Error Correction Test'"
           [size]="150"
           [errorCorrectionLevel]="'L'"
         />
-        <p class="text-xs text-muted-foreground mt-1">Low (7%)</p>
+        <p class="text-muted-foreground mt-1 text-xs">Low (7%)</p>
       </div>
       <div class="text-center">
         <sc-qr-code
@@ -24,7 +24,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
           [size]="150"
           [errorCorrectionLevel]="'M'"
         />
-        <p class="text-xs text-muted-foreground mt-1">Medium (15%)</p>
+        <p class="text-muted-foreground mt-1 text-xs">Medium (15%)</p>
       </div>
       <div class="text-center">
         <sc-qr-code
@@ -32,7 +32,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
           [size]="150"
           [errorCorrectionLevel]="'Q'"
         />
-        <p class="text-xs text-muted-foreground mt-1">Quartile (25%)</p>
+        <p class="text-muted-foreground mt-1 text-xs">Quartile (25%)</p>
       </div>
       <div class="text-center">
         <sc-qr-code
@@ -40,7 +40,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
           [size]="150"
           [errorCorrectionLevel]="'H'"
         />
-        <p class="text-xs text-muted-foreground mt-1">High (30%)</p>
+        <p class="text-muted-foreground mt-1 text-xs">High (30%)</p>
       </div>
     </div>
   `,

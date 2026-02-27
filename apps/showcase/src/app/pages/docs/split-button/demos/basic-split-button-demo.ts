@@ -20,7 +20,7 @@ import {
       (actionClick)="onAction($event)"
     />
     @if (lastAction()) {
-      <p class="mt-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mt-2 text-sm">
         Action: {{ lastAction() }}
       </p>
     }

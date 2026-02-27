@@ -21,7 +21,7 @@ import {
     ScStatCardChange,
   ],
   template: `
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div scStatCard>
         <div class="flex items-start justify-between">
           <div class="space-y-1">
@@ -60,7 +60,7 @@ import {
             </svg>
             <span>+20.1%</span>
           </span>
-          <span class="text-xs text-muted-foreground">from last month</span>
+          <span class="text-muted-foreground text-xs">from last month</span>
         </div>
       </div>
 
@@ -104,7 +104,7 @@ import {
             </svg>
             <span>-10.1%</span>
           </span>
-          <span class="text-xs text-muted-foreground">from last month</span>
+          <span class="text-muted-foreground text-xs">from last month</span>
         </div>
       </div>
 
@@ -131,7 +131,7 @@ import {
           </div>
         </div>
         <div class="mt-3">
-          <span class="text-xs text-muted-foreground">since last hour</span>
+          <span class="text-muted-foreground text-xs">since last hour</span>
         </div>
       </div>
     </div>

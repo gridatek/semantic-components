@@ -29,11 +29,7 @@ type ScTooltipSide = 'top' | 'right' | 'bottom' | 'left';
     {{ data.content }}
     <span
       [attr.data-side]="side()"
-      class="absolute size-2.5 rotate-45 rounded-[2px] bg-primary z-50
-             data-[side=top]:-bottom-[5px] data-[side=top]:left-1/2 data-[side=top]:-translate-x-1/2
-             data-[side=bottom]:-top-[5px] data-[side=bottom]:left-1/2 data-[side=bottom]:-translate-x-1/2
-             data-[side=left]:-right-[5px] data-[side=left]:top-1/2 data-[side=left]:-translate-y-1/2
-             data-[side=right]:-left-[5px] data-[side=right]:top-1/2 data-[side=right]:-translate-y-1/2"
+      class="bg-primary absolute z-50 size-2.5 rotate-45 rounded-[2px] data-[side=bottom]:-top-[5px] data-[side=bottom]:left-1/2 data-[side=bottom]:-translate-x-1/2 data-[side=left]:top-1/2 data-[side=left]:-right-[5px] data-[side=left]:-translate-y-1/2 data-[side=right]:top-1/2 data-[side=right]:-left-[5px] data-[side=right]:-translate-y-1/2 data-[side=top]:-bottom-[5px] data-[side=top]:left-1/2 data-[side=top]:-translate-x-1/2"
     ></span>
   `,
   host: {

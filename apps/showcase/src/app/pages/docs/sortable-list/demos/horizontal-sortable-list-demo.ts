@@ -19,7 +19,7 @@ import {
         scSortableList
         [(items)]="items"
         orientation="horizontal"
-        class="gap-3 flex-wrap"
+        class="flex-wrap gap-3"
       >
         <div scSortableOverlay></div>
         @for (item of items(); track item; let i = $index) {
@@ -27,13 +27,13 @@ import {
             scSortableItem
             [index]="i"
             [item]="item"
-            class="flex items-center justify-center size-16 rounded-md border bg-background text-sm font-medium"
+            class="bg-background flex size-16 items-center justify-center rounded-md border text-sm font-medium"
           >
             {{ item }}
           </div>
         }
       </div>
-      <p class="mt-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mt-2 text-sm">
         Use Left/Right arrow keys to reorder.
       </p>
     </div>

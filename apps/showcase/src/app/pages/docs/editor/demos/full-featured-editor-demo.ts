@@ -105,11 +105,11 @@ import {
   ],
   template: `
     <div class="w-full">
-      <p class="text-sm text-muted-foreground mb-4">
+      <p class="text-muted-foreground mb-4 text-sm">
         Try all the formatting options: bold, italic, headings, lists, links,
         blockquotes, and more.
       </p>
-      <div scEditor class="border rounded-lg overflow-hidden">
+      <div scEditor class="overflow-hidden rounded-lg border">
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
             <button scEditorUndo>

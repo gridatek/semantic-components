@@ -15,7 +15,7 @@ import { SC_COLOR_PICKER } from './color-picker';
     @for (color of colors(); track color) {
       <button
         type="button"
-        class="size-6 rounded-md border shadow-sm transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring"
+        class="focus:ring-ring size-6 rounded-md border shadow-sm transition-transform hover:scale-110 focus:ring-2 focus:outline-none"
         [style.background-color]="color"
         [attr.aria-label]="'Select color ' + color"
         (click)="selectColor(color)"

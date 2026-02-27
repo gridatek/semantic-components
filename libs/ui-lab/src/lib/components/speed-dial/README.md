@@ -91,13 +91,13 @@ The Speed Dial component uses inline positioning by default. For fixed or floati
 
 ```html
 <!-- Fixed bottom-right position -->
-<div class="fixed bottom-6 right-6 z-50">
+<div class="fixed right-6 bottom-6 z-50">
   <sc-speed-dial [actions]="actions" />
 </div>
 
 <!-- Absolute within container -->
 <div class="relative h-96">
-  <div class="absolute bottom-4 right-4">
+  <div class="absolute right-4 bottom-4">
     <sc-speed-dial [actions]="actions" />
   </div>
 </div>

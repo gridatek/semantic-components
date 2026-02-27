@@ -36,7 +36,7 @@ import { ScHeading } from '@semantic-components/ui';
 
       <section class="space-y-4">
         <h2 scHeading toc>Features</h2>
-        <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+        <ul class="text-muted-foreground list-disc space-y-2 pl-6">
           <li>
             <strong>Semantic</strong>
             — Components with meaningful names and intuitive APIs that make your
@@ -82,7 +82,7 @@ import { ScHeading } from '@semantic-components/ui';
 
       <section class="space-y-4">
         <h2 scHeading toc>Packages</h2>
-        <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+        <ul class="text-muted-foreground list-disc space-y-2 pl-6">
           <li>
             <strong>&#64;semantic-components/ui</strong>
             — Core components like Button and Link

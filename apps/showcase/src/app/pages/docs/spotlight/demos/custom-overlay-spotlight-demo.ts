@@ -23,10 +23,10 @@ import {
     <div class="space-y-6">
       <div
         id="spotlight-actions"
-        class="p-6 border rounded-lg bg-card hover:shadow-md transition-shadow"
+        class="bg-card rounded-lg border p-6 transition-shadow hover:shadow-md"
       >
         <div
-          class="size-12 rounded-full bg-green-500/10 flex items-center justify-center mb-4"
+          class="mb-4 flex size-12 items-center justify-center rounded-full bg-green-500/10"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +39,8 @@ import {
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <h3 class="font-semibold mb-2">Quick Actions</h3>
-        <p class="text-sm text-muted-foreground">
+        <h3 class="mb-2 font-semibold">Quick Actions</h3>
+        <p class="text-muted-foreground text-sm">
           Perform common tasks with just a single click.
         </p>
       </div>
@@ -48,7 +48,7 @@ import {
       <button
         type="button"
         (click)="showActions()"
-        class="px-4 py-2 border rounded-md hover:bg-accent"
+        class="hover:bg-accent rounded-md border px-4 py-2"
       >
         Highlight Actions
       </button>
@@ -63,7 +63,7 @@ import {
           <button
             type="button"
             (click)="spotlight.close()"
-            class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+            class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
           >
             Got it
           </button>

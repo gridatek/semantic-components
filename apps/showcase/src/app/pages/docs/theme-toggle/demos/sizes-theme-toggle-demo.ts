@@ -24,7 +24,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
             <svg siMoonIcon></svg>
           }
         </button>
-        <span class="text-xs text-muted-foreground">Small</span>
+        <span class="text-muted-foreground text-xs">Small</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
@@ -39,7 +39,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
             <svg siMoonIcon></svg>
           }
         </button>
-        <span class="text-xs text-muted-foreground">Default</span>
+        <span class="text-muted-foreground text-xs">Default</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
@@ -54,7 +54,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
             <svg siMoonIcon></svg>
           }
         </button>
-        <span class="text-xs text-muted-foreground">Large</span>
+        <span class="text-muted-foreground text-xs">Large</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
@@ -69,7 +69,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
             <svg siMoonIcon></svg>
           }
         </button>
-        <span class="text-xs text-muted-foreground">Icon</span>
+        <span class="text-muted-foreground text-xs">Icon</span>
       </div>
     </div>
   `,

@@ -24,7 +24,7 @@ import {
     <div scCodeEditor>
       <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
-          <span class="text-sm text-muted-foreground">config.json</span>
+          <span class="text-muted-foreground text-sm">config.json</span>
           <span scCodeEditorLabel>json</span>
         </div>
         <button scCodeEditorCopyButton [code]="jsonCode"></button>

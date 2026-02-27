@@ -9,7 +9,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-quiet-zone-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <div class="flex gap-4 flex-wrap items-end">
+    <div class="flex flex-wrap items-end gap-4">
       <div class="text-center">
         <sc-qr-code
           [value]="'No border'"
@@ -17,15 +17,15 @@ import { ScQrCode } from '@semantic-components/ui-lab';
           [quietZone]="0"
           class="border"
         />
-        <p class="text-xs text-muted-foreground mt-1">No quiet zone</p>
+        <p class="text-muted-foreground mt-1 text-xs">No quiet zone</p>
       </div>
       <div class="text-center">
         <sc-qr-code [value]="'Small border'" [size]="150" [quietZone]="1" />
-        <p class="text-xs text-muted-foreground mt-1">1 module</p>
+        <p class="text-muted-foreground mt-1 text-xs">1 module</p>
       </div>
       <div class="text-center">
         <sc-qr-code [value]="'Standard border'" [size]="150" [quietZone]="4" />
-        <p class="text-xs text-muted-foreground mt-1">4 modules (standard)</p>
+        <p class="text-muted-foreground mt-1 text-xs">4 modules (standard)</p>
       </div>
     </div>
   `,

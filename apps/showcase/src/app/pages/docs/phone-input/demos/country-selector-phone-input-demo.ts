@@ -17,7 +17,7 @@ import { ScPhoneInput, Country } from '@semantic-components/ui-lab';
         (countryChange)="onCountryChange($event)"
       />
     </div>
-    <p class="text-sm text-muted-foreground mt-2">
+    <p class="text-muted-foreground mt-2 text-sm">
       Value: {{ phoneWithCountry() || 'Empty' }}
     </p>
   `,

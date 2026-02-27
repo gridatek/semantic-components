@@ -68,7 +68,7 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
       </svg>
       <span>+20.1%</span>
     </span>
-    <span class="text-xs text-muted-foreground">from last month</span>
+    <span class="text-muted-foreground text-xs">from last month</span>
   </div>
 </div>
 ```
@@ -96,7 +96,7 @@ import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCar
       </svg>
       <span>+20.1%</span>
     </span>
-    <span class="text-xs text-muted-foreground">from last month</span>
+    <span class="text-muted-foreground text-xs">from last month</span>
   </div>
 
   <p scStatCardDescription class="mt-2">Your revenue increased significantly this month</p>
@@ -299,7 +299,7 @@ Since all components use content projection, you can create any layout you need:
 ```html
 <div scStatCard>
   <!-- Custom header with icon on left -->
-  <div class="flex items-center gap-3 mb-4">
+  <div class="mb-4 flex items-center gap-3">
     <div scStatCardIcon>
       <svg><!-- icon --></svg>
     </div>

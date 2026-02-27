@@ -13,7 +13,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
   selector: '[scImageCropperPreview]',
   template: `
     <div
-      class="overflow-hidden bg-muted"
+      class="bg-muted overflow-hidden"
       [style.width.px]="width()"
       [style.height.px]="height()"
     >

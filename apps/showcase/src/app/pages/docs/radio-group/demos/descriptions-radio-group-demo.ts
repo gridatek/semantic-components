@@ -26,8 +26,8 @@ interface PlanFormModel {
           class="mt-1"
         />
         <div class="grid gap-1">
-          <span class="text-sm font-medium leading-none">Free</span>
-          <p class="text-sm text-muted-foreground">
+          <span class="text-sm leading-none font-medium">Free</span>
+          <p class="text-muted-foreground text-sm">
             Get started with basic features
           </p>
         </div>
@@ -42,8 +42,8 @@ interface PlanFormModel {
           class="mt-1"
         />
         <div class="grid gap-1">
-          <span class="text-sm font-medium leading-none">Pro</span>
-          <p class="text-sm text-muted-foreground">
+          <span class="text-sm leading-none font-medium">Pro</span>
+          <p class="text-muted-foreground text-sm">
             Advanced features for professionals
           </p>
         </div>
@@ -58,8 +58,8 @@ interface PlanFormModel {
           class="mt-1"
         />
         <div class="grid gap-1">
-          <span class="text-sm font-medium leading-none">Enterprise</span>
-          <p class="text-sm text-muted-foreground">
+          <span class="text-sm leading-none font-medium">Enterprise</span>
+          <p class="text-muted-foreground text-sm">
             Custom solutions for large teams
           </p>
         </div>

@@ -21,40 +21,40 @@ interface SwitchFormModel {
   template: `
     <form>
       <div class="space-y-4">
-        <label scSwitchField class="flex-row-reverse justify-between w-full">
+        <label scSwitchField class="w-full flex-row-reverse justify-between">
           <input
             type="checkbox"
             scSwitch
             [formField]="switchForm.notifications"
           />
           <div class="space-y-0.5">
-            <p class="text-sm font-medium leading-none">Enable Notifications</p>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-sm leading-none font-medium">Enable Notifications</p>
+            <p class="text-muted-foreground text-sm">
               Receive notifications about your account activity
             </p>
           </div>
         </label>
 
-        <label scSwitchField class="flex-row-reverse justify-between w-full">
+        <label scSwitchField class="w-full flex-row-reverse justify-between">
           <input type="checkbox" scSwitch [formField]="switchForm.darkMode" />
           <div class="space-y-0.5">
-            <p class="text-sm font-medium leading-none">Dark Mode</p>
-            <p class="text-sm text-muted-foreground">Switch to dark theme</p>
+            <p class="text-sm leading-none font-medium">Dark Mode</p>
+            <p class="text-muted-foreground text-sm">Switch to dark theme</p>
           </div>
         </label>
 
-        <label scSwitchField class="flex-row-reverse justify-between w-full">
+        <label scSwitchField class="w-full flex-row-reverse justify-between">
           <input type="checkbox" scSwitch [formField]="switchForm.autoSave" />
           <div class="space-y-0.5">
-            <p class="text-sm font-medium leading-none">Auto Save</p>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-sm leading-none font-medium">Auto Save</p>
+            <p class="text-muted-foreground text-sm">
               Automatically save your work
             </p>
           </div>
         </label>
       </div>
 
-      <div class="mt-6 rounded-md bg-muted p-4">
+      <div class="bg-muted mt-6 rounded-md p-4">
         <p class="text-sm font-medium">Form Values:</p>
         <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>

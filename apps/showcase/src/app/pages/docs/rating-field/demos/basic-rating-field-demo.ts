@@ -35,7 +35,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
           }
         </div>
       </div>
-      <p class="text-sm text-muted-foreground">Rating: {{ rating() }} / 5</p>
+      <p class="text-muted-foreground text-sm">Rating: {{ rating() }} / 5</p>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

@@ -14,7 +14,7 @@ import { ScProgress } from '@semantic-components/ui';
   template: `
     <div class="space-y-2">
       <div scProgress [value]="progress()"></div>
-      <p class="text-sm text-muted-foreground">{{ progress() }}% complete</p>
+      <p class="text-muted-foreground text-sm">{{ progress() }}% complete</p>
     </div>
   `,
   host: { class: 'block w-full' },

@@ -25,7 +25,7 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
       <!-- Header -->
       @if (showHeader()) {
         <div
-          class="flex items-center justify-between px-4 py-2 border-b bg-muted/30"
+          class="bg-muted/30 flex items-center justify-between border-b px-4 py-2"
         >
           <div class="flex items-center gap-4">
             @if (oldTitle() || newTitle()) {
@@ -54,7 +54,7 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
             </div>
             <!-- View mode toggle -->
             @if (showViewModeToggle()) {
-              <div class="flex items-center border rounded-md overflow-hidden">
+              <div class="flex items-center overflow-hidden rounded-md border">
                 <button
                   type="button"
                   (click)="viewMode.set('split')"
@@ -81,10 +81,10 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
           <!-- Split view -->
           <div class="flex">
             <!-- Old (left) side -->
-            <div class="flex-1 border-r min-w-0">
+            <div class="min-w-0 flex-1 border-r">
               @if (showSideHeaders()) {
                 <div
-                  class="px-3 py-1.5 text-xs font-medium text-muted-foreground bg-red-500/5 border-b"
+                  class="text-muted-foreground border-b bg-red-500/5 px-3 py-1.5 text-xs font-medium"
                 >
                   {{ oldTitle() || 'Original' }}
                 </div>
@@ -94,7 +94,7 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
                   @if (line.type !== 'added') {
                     <div [class]="getLineClass(line.type, 'old')">
                       <span
-                        class="inline-block w-12 px-2 text-right text-muted-foreground select-none border-r"
+                        class="text-muted-foreground inline-block w-12 border-r px-2 text-right select-none"
                       >
                         {{ line.oldLineNumber || '' }}
                       </span>
@@ -107,16 +107,16 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
                       ></span>
                     </div>
                   } @else {
-                    <div class="h-6 bg-muted/30"></div>
+                    <div class="bg-muted/30 h-6"></div>
                   }
                 }
               </div>
             </div>
             <!-- New (right) side -->
-            <div class="flex-1 min-w-0">
+            <div class="min-w-0 flex-1">
               @if (showSideHeaders()) {
                 <div
-                  class="px-3 py-1.5 text-xs font-medium text-muted-foreground bg-green-500/5 border-b"
+                  class="text-muted-foreground border-b bg-green-500/5 px-3 py-1.5 text-xs font-medium"
                 >
                   {{ newTitle() || 'Modified' }}
                 </div>
@@ -126,7 +126,7 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
                   @if (line.type !== 'removed') {
                     <div [class]="getLineClass(line.type, 'new')">
                       <span
-                        class="inline-block w-12 px-2 text-right text-muted-foreground select-none border-r"
+                        class="text-muted-foreground inline-block w-12 border-r px-2 text-right select-none"
                       >
                         {{ line.newLineNumber || '' }}
                       </span>
@@ -139,7 +139,7 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
                       ></span>
                     </div>
                   } @else {
-                    <div class="h-6 bg-muted/30"></div>
+                    <div class="bg-muted/30 h-6"></div>
                   }
                 }
               </div>
@@ -151,17 +151,17 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
             @for (line of diffResult().lines; track $index) {
               <div [class]="getLineClass(line.type, 'unified')">
                 <span
-                  class="inline-block w-12 px-2 text-right text-muted-foreground select-none border-r"
+                  class="text-muted-foreground inline-block w-12 border-r px-2 text-right select-none"
                 >
                   {{ line.oldLineNumber || '' }}
                 </span>
                 <span
-                  class="inline-block w-12 px-2 text-right text-muted-foreground select-none border-r"
+                  class="text-muted-foreground inline-block w-12 border-r px-2 text-right select-none"
                 >
                   {{ line.newLineNumber || '' }}
                 </span>
                 <span
-                  class="inline-block w-6 text-center select-none font-bold"
+                  class="inline-block w-6 text-center font-bold select-none"
                 >
                   @switch (line.type) {
                     @case ('added') {
@@ -187,7 +187,7 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
         <!-- Empty state -->
         @if (diffResult().lines.length === 0) {
           <div
-            class="flex items-center justify-center py-12 text-muted-foreground"
+            class="text-muted-foreground flex items-center justify-center py-12"
           >
             No differences found
           </div>
@@ -195,7 +195,7 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
 
         @if (!oldText() && !newText()) {
           <div
-            class="flex items-center justify-center py-12 text-muted-foreground"
+            class="text-muted-foreground flex items-center justify-center py-12"
           >
             No content to compare
           </div>
@@ -205,7 +205,7 @@ export type { DiffLine, DiffResult } from './diff-algorithm';
       <!-- Footer stats -->
       @if (showFooter()) {
         <div
-          class="flex items-center justify-between px-4 py-2 border-t text-xs text-muted-foreground bg-muted/30"
+          class="text-muted-foreground bg-muted/30 flex items-center justify-between border-t px-4 py-2 text-xs"
         >
           <span>{{ diffResult().lines.length }} lines</span>
           <span>

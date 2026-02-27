@@ -39,29 +39,29 @@ import type {
       }
 
       @if (showAddColumn()) {
-        <div class="flex-shrink-0 min-w-[280px] max-w-[320px]">
+        <div class="max-w-[320px] min-w-[280px] flex-shrink-0">
           @if (isAddingColumn()) {
-            <div class="p-3 bg-muted/30 border rounded-lg">
+            <div class="bg-muted/30 rounded-lg border p-3">
               <input
                 #columnInput
                 type="text"
-                class="w-full p-2 text-sm border rounded focus:outline-none focus:ring-2 focus:ring-ring"
+                class="focus:ring-ring w-full rounded border p-2 text-sm focus:ring-2 focus:outline-none"
                 placeholder="Enter column title..."
                 (keydown.enter)="submitNewColumn($event)"
                 (keydown.escape)="cancelAddingColumn()"
                 (blur)="onColumnInputBlur()"
               />
-              <div class="flex items-center gap-2 mt-2">
+              <div class="mt-2 flex items-center gap-2">
                 <button
                   type="button"
-                  class="px-3 py-1.5 text-xs font-medium bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
+                  class="bg-primary text-primary-foreground hover:bg-primary/90 rounded px-3 py-1.5 text-xs font-medium transition-colors"
                   (mousedown)="submitNewColumnFromButton()"
                 >
                   Add Column
                 </button>
                 <button
                   type="button"
-                  class="px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  class="text-muted-foreground hover:text-foreground px-3 py-1.5 text-xs font-medium transition-colors"
                   (mousedown)="cancelAddingColumn()"
                 >
                   Cancel
@@ -71,7 +71,7 @@ import type {
           } @else {
             <button
               type="button"
-              class="w-full p-3 border-2 border-dashed rounded-lg text-sm text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-muted/30 transition-colors flex items-center justify-center gap-2"
+              class="text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-muted/30 flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed p-3 text-sm transition-colors"
               (click)="startAddingColumn()"
             >
               <svg siPlusIcon class="size-4"></svg>

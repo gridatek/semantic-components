@@ -48,7 +48,7 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       <div class="flex gap-2">
         <button
           (click)="exportSignature(pad)"
-          class="px-4 py-2 text-sm border rounded-md hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-4 py-2 text-sm"
         >
           Export as PNG
         </button>

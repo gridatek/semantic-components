@@ -22,7 +22,7 @@ import { ScAspectRatio } from '@semantic-components/ui';
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="size-10 text-muted-foreground"
+            class="text-muted-foreground size-10"
           >
             <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
             <circle cx="9" cy="9" r="2" />

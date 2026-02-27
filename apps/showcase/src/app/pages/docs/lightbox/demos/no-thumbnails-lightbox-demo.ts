@@ -20,7 +20,7 @@ import {
           <button
             scLightboxTrigger
             [index]="i"
-            class="w-24 h-24 rounded overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring"
+            class="focus:ring-ring h-24 w-24 overflow-hidden rounded focus:ring-2 focus:outline-none"
           >
             <img
               [src]="image.src"

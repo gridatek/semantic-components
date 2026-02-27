@@ -34,7 +34,7 @@ import type {
       >
         @if (icon()) {
           <span
-            class="inline-flex items-center justify-center [&>svg]:w-4 [&>svg]:h-4"
+            class="inline-flex items-center justify-center [&>svg]:h-4 [&>svg]:w-4"
             [innerHTML]="icon()"
           ></span>
         }
@@ -71,7 +71,7 @@ import type {
             >
               @if (action.icon) {
                 <span
-                  class="inline-flex items-center justify-center [&>svg]:w-4 [&>svg]:h-4"
+                  class="inline-flex items-center justify-center [&>svg]:h-4 [&>svg]:w-4"
                   [innerHTML]="action.icon"
                 ></span>
               }

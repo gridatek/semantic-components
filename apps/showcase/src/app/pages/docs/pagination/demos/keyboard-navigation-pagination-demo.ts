@@ -49,30 +49,30 @@ import {
   ],
   template: `
     <div class="space-y-6">
-      <div class="rounded-lg border border-border bg-muted/50 p-4">
+      <div class="border-border bg-muted/50 rounded-lg border p-4">
         <h3 class="mb-2 font-semibold">Keyboard Navigation</h3>
-        <ul class="space-y-1 text-sm text-muted-foreground">
+        <ul class="text-muted-foreground space-y-1 text-sm">
           <li>
-            <kbd class="rounded bg-background px-1.5 py-0.5 font-mono text-xs">
+            <kbd class="bg-background rounded px-1.5 py-0.5 font-mono text-xs">
               Tab
             </kbd>
             - Move between controls
           </li>
           <li>
-            <kbd class="rounded bg-background px-1.5 py-0.5 font-mono text-xs">
+            <kbd class="bg-background rounded px-1.5 py-0.5 font-mono text-xs">
               Enter
             </kbd>
             /
-            <kbd class="rounded bg-background px-1.5 py-0.5 font-mono text-xs">
+            <kbd class="bg-background rounded px-1.5 py-0.5 font-mono text-xs">
               Space
             </kbd>
             - Activate button
           </li>
           <li>
-            <kbd class="rounded bg-background px-1.5 py-0.5 font-mono text-xs">
+            <kbd class="bg-background rounded px-1.5 py-0.5 font-mono text-xs">
               ↑
             </kbd>
-            <kbd class="rounded bg-background px-1.5 py-0.5 font-mono text-xs">
+            <kbd class="bg-background rounded px-1.5 py-0.5 font-mono text-xs">
               ↓
             </kbd>
             - Navigate page size options
@@ -91,7 +91,7 @@ import {
       >
         <div class="mb-4 flex items-center justify-between">
           <div scField orientation="horizontal" class="w-auto">
-            <label scLabel class="text-sm text-muted-foreground">
+            <label scLabel class="text-muted-foreground text-sm">
               Items per page:
             </label>
             <select scPaginationPageSizeSelect>
@@ -101,7 +101,7 @@ import {
             </select>
           </div>
 
-          <p class="text-sm text-muted-foreground">
+          <p class="text-muted-foreground text-sm">
             Page {{ currentPage() }} of {{ pagination.totalPages() }} ({{
               totalItems()
             }}

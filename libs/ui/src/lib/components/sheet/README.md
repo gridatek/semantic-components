@@ -23,15 +23,15 @@ ScSheetProvider (root wrapper - manages open state, side + overlay lifecycle)
 
 | Component            | Selector                     | Description                                    |
 | -------------------- | ---------------------------- | ---------------------------------------------- |
-| `ScSheetProvider`    | `div[scSheetProvider]`     | Root wrapper, manages open state + overlay     |
-| `ScSheetTrigger`     | `button[scSheetTrigger]`   | Button that opens the sheet                    |
+| `ScSheetProvider`    | `div[scSheetProvider]`       | Root wrapper, manages open state + overlay     |
+| `ScSheetTrigger`     | `button[scSheetTrigger]`     | Button that opens the sheet                    |
 | `ScSheetPortal`      | `ng-template[scSheetPortal]` | Directive marking lazy content for the overlay |
-| `ScSheet`            | `div[scSheet]`              | Dialog panel with slide animations             |
-| `ScSheetHeader`      | `div[scSheetHeader]`       | Header section container                       |
-| `ScSheetTitle`       | `h2[scSheetTitle]`         | Sheet title (aria-labelledby)                  |
-| `ScSheetDescription` | `p[scSheetDescription]`    | Sheet description (aria-describedby)           |
-| `ScSheetFooter`      | `div[scSheetFooter]`       | Footer section for actions                     |
-| `ScSheetClose`       | `button[scSheetClose]`     | Button that closes the sheet                   |
+| `ScSheet`            | `div[scSheet]`               | Dialog panel with slide animations             |
+| `ScSheetHeader`      | `div[scSheetHeader]`         | Header section container                       |
+| `ScSheetTitle`       | `h2[scSheetTitle]`           | Sheet title (aria-labelledby)                  |
+| `ScSheetDescription` | `p[scSheetDescription]`      | Sheet description (aria-describedby)           |
+| `ScSheetFooter`      | `div[scSheetFooter]`         | Footer section for actions                     |
+| `ScSheetClose`       | `button[scSheetClose]`       | Button that closes the sheet                   |
 
 ## Usage
 

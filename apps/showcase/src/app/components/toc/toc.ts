@@ -20,7 +20,7 @@ import { TocItem } from './toc.service';
               <a
                 [href]="'#' + item.id"
                 [class]="
-                  'block transition-colors hover:text-foreground ' +
+                  'hover:text-foreground block transition-colors ' +
                   (item.level === 3 ? 'pl-4 ' : '') +
                   (activeId() === item.id
                     ? 'text-foreground font-medium'

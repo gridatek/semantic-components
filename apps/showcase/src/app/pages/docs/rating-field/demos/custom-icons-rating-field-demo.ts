@@ -35,7 +35,7 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
           }
         </div>
       </div>
-      <p class="text-sm text-muted-foreground">Hearts: {{ rating() }} / 5</p>
+      <p class="text-muted-foreground text-sm">Hearts: {{ rating() }} / 5</p>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

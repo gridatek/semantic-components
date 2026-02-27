@@ -17,13 +17,13 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     @if (!pdfViewer.hasSource()) {
       <div [class]="overlayClass()">
         <ng-content>
-          <div class="flex flex-col items-center gap-3 text-center px-4">
+          <div class="flex flex-col items-center gap-3 px-4 text-center">
             <div
-              class="w-16 h-16 rounded-full bg-muted flex items-center justify-center"
+              class="bg-muted flex h-16 w-16 items-center justify-center rounded-full"
             >
-              <svg siFileTextIcon class="size-8 text-muted-foreground"></svg>
+              <svg siFileTextIcon class="text-muted-foreground size-8"></svg>
             </div>
-            <p class="text-sm text-muted-foreground">No PDF selected</p>
+            <p class="text-muted-foreground text-sm">No PDF selected</p>
           </div>
         </ng-content>
       </div>

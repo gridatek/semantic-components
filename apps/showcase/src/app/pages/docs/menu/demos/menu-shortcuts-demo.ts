@@ -70,7 +70,7 @@ import {
               ></svg>
               <span class="flex-1">Profile</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⇧⌘P
               </span>
@@ -83,7 +83,7 @@ import {
               ></svg>
               <span class="flex-1">Billing</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘B
               </span>
@@ -96,7 +96,7 @@ import {
               ></svg>
               <span class="flex-1">Settings</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘S
               </span>
@@ -109,7 +109,7 @@ import {
               ></svg>
               <span class="flex-1">Keyboard shortcuts</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘K
               </span>
@@ -185,7 +185,7 @@ import {
               ></svg>
               <span class="flex-1">Log out</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⇧⌘Q
               </span>

@@ -67,7 +67,7 @@ import { ScEditor, ScEditorContent, ScEditorToolbar, ScEditorToolbarGroup, ScEdi
   selector: 'app-example',
   imports: [ScEditor, ScEditorContent, ScEditorToolbar, ScEditorToolbarGroup, ScEditorBoldButton, ScEditorItalicButton, ScEditorUnderlineButton, ScEditorFooter, ScEditorCount, ScEditorWordCount, ScEditorCharCount],
   template: `
-    <div scEditor class="border rounded-lg overflow-hidden">
+    <div scEditor class="overflow-hidden rounded-lg border">
       <div scEditorToolbar>
         <div scEditorToolbarGroup>
           <button scEditorBold>Bold</button>
@@ -274,7 +274,7 @@ Colors are defined in OKLCH format and automatically adapt to light/dark themes.
 <div scEditorContent class="font-serif text-lg"></div>
 
 <!-- Custom height constraints -->
-<div scEditorContent class="min-h-[300px] max-h-[600px]"></div>
+<div scEditorContent class="max-h-[600px] min-h-[300px]"></div>
 
 <!-- Remove default padding -->
 <div scEditorContent class="p-0"></div>
@@ -312,7 +312,7 @@ Colors are defined in OKLCH format and automatically adapt to light/dark themes.
 
 <!-- Footer with additional content -->
 <div scEditorFooter>
-  <button class="text-sm text-primary hover:underline">Save draft</button>
+  <button class="text-primary text-sm hover:underline">Save draft</button>
   <div scEditorCount>
     <span scEditorWordCount></span>
     <span scEditorCharCount></span>

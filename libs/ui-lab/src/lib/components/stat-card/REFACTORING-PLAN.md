@@ -359,7 +359,7 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
       </svg>
       <span>+20.1%</span>
     </span>
-    <span class="text-xs text-muted-foreground">from last month</span>
+    <span class="text-muted-foreground text-xs">from last month</span>
   </div>
 
   <p scStatCardDescription class="mt-2">Your revenue increased significantly this month</p>
@@ -393,7 +393,7 @@ export type { StatCardSize, StatCardTrend, StatCardVariant } from './stat-card-t
       <svg><!-- up arrow --></svg>
       <span>+20.1%</span>
     </span>
-    <span class="text-xs text-muted-foreground">from last month</span>
+    <span class="text-muted-foreground text-xs">from last month</span>
   </div>
 
   <p scStatCardDescription class="mt-2">Revenue increased</p>

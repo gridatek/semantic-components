@@ -100,11 +100,11 @@ import { Logo } from '../logo/logo';
                             scNavigationMenuLink
                             [routerLink]="'/docs/components/' + component.path"
                           >
-                            <div class="text-sm font-medium leading-none">
+                            <div class="text-sm leading-none font-medium">
                               {{ component.name }}
                             </div>
                             <p
-                              class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                              class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                             >
                               {{ component.description }}
                             </p>
@@ -113,11 +113,11 @@ import { Logo } from '../logo/logo';
                       }
                       <li>
                         <a scNavigationMenuLink routerLink="/docs/components">
-                          <div class="text-sm font-medium leading-none">
+                          <div class="text-sm leading-none font-medium">
                             View All
                           </div>
                           <p
-                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
                             See all available components.
                           </p>
@@ -146,7 +146,7 @@ import { Logo } from '../logo/logo';
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            class="hidden md:inline-flex gap-1"
+            class="hidden gap-1 md:inline-flex"
           >
             <svg siGithubIcon></svg>
             @if (starCount()) {

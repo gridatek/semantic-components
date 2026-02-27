@@ -50,7 +50,7 @@ ScNavigationMenu (Root - nav element)
       <button scNavigationMenuTrigger>Products</button>
       <ng-template scNavigationMenuPortal>
         <div scNavigationMenuContent>
-          <ul class="grid gap-3 p-4 w-[400px]">
+          <ul class="grid w-[400px] gap-3 p-4">
             <li>
               <a href="/product-a">Product A</a>
             </li>
@@ -79,9 +79,9 @@ ScNavigationMenu (Root - nav element)
     <div scNavigationMenuContent>
       <ul class="grid w-[600px] gap-3 p-4 md:grid-cols-2">
         <li>
-          <a class="block p-3 rounded-md hover:bg-accent" href="#">
+          <a class="hover:bg-accent block rounded-md p-3" href="#">
             <div class="font-medium">Alert Dialog</div>
-            <p class="text-sm text-muted-foreground">Modal dialog for important content.</p>
+            <p class="text-muted-foreground text-sm">Modal dialog for important content.</p>
           </a>
         </li>
         <!-- More items... -->
@@ -99,9 +99,9 @@ ScNavigationMenu (Root - nav element)
     <ul class="grid gap-3 p-4 lg:grid-cols-[.75fr_1fr]">
       <!-- Featured card spanning rows -->
       <li class="row-span-3">
-        <a class="flex h-full flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6" href="#">
+        <a class="from-muted/50 to-muted flex h-full flex-col justify-end rounded-md bg-gradient-to-b p-6" href="#">
           <div class="text-lg font-medium">Featured</div>
-          <p class="text-sm text-muted-foreground">Highlighted content here.</p>
+          <p class="text-muted-foreground text-sm">Highlighted content here.</p>
         </a>
       </li>
       <!-- Regular links -->

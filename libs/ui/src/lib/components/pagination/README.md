@@ -235,7 +235,7 @@ import { ScPaginationChange } from '@semantic-components/ui-lab';
   template: `
     <nav scPagination #pagination="scPagination" [currentPage]="currentPage()" [pageSize]="pageSize()" [totalItems]="totalItems()" [pageSizes]="[10, 25, 50, 100]" (change)="onPaginationChange($event)">
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted-foreground">Items per page:</span>
+        <span class="text-muted-foreground text-sm">Items per page:</span>
         <sc-pagination-page-size-select />
       </div>
 

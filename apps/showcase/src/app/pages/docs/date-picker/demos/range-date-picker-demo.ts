@@ -16,7 +16,7 @@ import { ScDateRange, ScDatePicker } from '@semantic-components/ui';
       placeholder="Pick a date range"
     />
     @if (selectedRange().from) {
-      <p class="text-sm text-muted-foreground mt-4">
+      <p class="text-muted-foreground mt-4 text-sm">
         @if (selectedRange().to) {
           {{ selectedRange().from?.toLocaleString() }} -
           {{ selectedRange().to?.toLocaleString() }}

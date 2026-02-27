@@ -87,11 +87,11 @@ import {
     ScToggleGroup,
   ],
   template: `
-    <div class="min-h-screen bg-background">
+    <div class="bg-background min-h-screen">
       <div class="mx-auto max-w-6xl px-6 py-12">
         <div class="mb-12 space-y-2">
           <h1 class="text-4xl font-bold tracking-tight">Component Gallery</h1>
-          <p class="text-lg text-muted-foreground">
+          <p class="text-muted-foreground text-lg">
             A showcase of all available UI components.
           </p>
         </div>
@@ -142,7 +142,7 @@ import {
                   </p>
                 </div>
                 <div scCardBody>
-                  <p class="text-sm text-muted-foreground">
+                  <p class="text-muted-foreground text-sm">
                     This is the card body content. It can contain any elements.
                   </p>
                 </div>
@@ -163,8 +163,8 @@ import {
                       <span scAvatarFallback>JD</span>
                     </span>
                     <div class="space-y-1">
-                      <p class="text-sm font-medium leading-none">John Doe</p>
-                      <p class="text-sm text-muted-foreground">
+                      <p class="text-sm leading-none font-medium">John Doe</p>
+                      <p class="text-muted-foreground text-sm">
                         Sent you a message
                       </p>
                     </div>
@@ -223,7 +223,7 @@ import {
           <section class="space-y-4">
             <h2 class="text-2xl font-semibold tracking-tight">Input</h2>
             <div scSeparator></div>
-            <div class="grid gap-4 max-w-sm">
+            <div class="grid max-w-sm gap-4">
               <div class="space-y-2">
                 <label scLabel for="email">Email</label>
                 <input
@@ -344,13 +344,13 @@ import {
               <kbd scKbd>Ctrl</kbd>
               <span class="text-muted-foreground">+</span>
               <kbd scKbd>C</kbd>
-              <span class="ml-4 text-sm text-muted-foreground">Copy</span>
+              <span class="text-muted-foreground ml-4 text-sm">Copy</span>
             </div>
             <div class="flex items-center gap-2">
               <kbd scKbd>Ctrl</kbd>
               <span class="text-muted-foreground">+</span>
               <kbd scKbd>V</kbd>
-              <span class="ml-4 text-sm text-muted-foreground">Paste</span>
+              <span class="text-muted-foreground ml-4 text-sm">Paste</span>
             </div>
           </section>
 
@@ -359,10 +359,10 @@ import {
             <h2 class="text-2xl font-semibold tracking-tight">Separator</h2>
             <div scSeparator></div>
             <div class="space-y-1">
-              <h4 class="text-sm font-medium leading-none">
+              <h4 class="text-sm leading-none font-medium">
                 Semantic Components
               </h4>
-              <p class="text-sm text-muted-foreground">
+              <p class="text-muted-foreground text-sm">
                 An open-source UI component library.
               </p>
             </div>
@@ -421,7 +421,7 @@ import {
               <div scTabPanel value="overview">
                 <div class="rounded-lg border p-4">
                   <h3 class="text-lg font-medium">Overview</h3>
-                  <p class="text-sm text-muted-foreground">
+                  <p class="text-muted-foreground text-sm">
                     A high-level summary of your project's metrics.
                   </p>
                 </div>
@@ -429,7 +429,7 @@ import {
               <div scTabPanel value="analytics">
                 <div class="rounded-lg border p-4">
                   <h3 class="text-lg font-medium">Analytics</h3>
-                  <p class="text-sm text-muted-foreground">
+                  <p class="text-muted-foreground text-sm">
                     Detailed analytics and performance data.
                   </p>
                 </div>
@@ -437,7 +437,7 @@ import {
               <div scTabPanel value="reports">
                 <div class="rounded-lg border p-4">
                   <h3 class="text-lg font-medium">Reports</h3>
-                  <p class="text-sm text-muted-foreground">
+                  <p class="text-muted-foreground text-sm">
                     Generated reports and exportable data.
                   </p>
                 </div>

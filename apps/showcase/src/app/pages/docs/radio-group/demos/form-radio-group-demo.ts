@@ -15,7 +15,7 @@ interface NotificationFormModel {
   selector: 'app-form-radio-group-demo',
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
-    <div class="rounded-lg border p-6 max-w-md">
+    <div class="max-w-md rounded-lg border p-6">
       <div class="space-y-4">
         <h4 id="notify-heading" class="font-semibold">
           Notification Preferences

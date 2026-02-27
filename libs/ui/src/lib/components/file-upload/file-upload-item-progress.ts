@@ -12,7 +12,7 @@ import { ScFileUploadFile } from './file-upload';
   selector: '[scFileUploadItemProgress]',
   template: `
     <div
-      class="h-full rounded-full bg-primary transition-all"
+      class="bg-primary h-full rounded-full transition-all"
       [style.width.%]="file().progress || 0"
     ></div>
   `,

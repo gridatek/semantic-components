@@ -67,7 +67,7 @@ import { SC_CHART } from './chart-container';
             [attr.cy]="point.y"
             r="4"
             [attr.fill]="lineColor()"
-            class="cursor-pointer transition-all hover:r-6"
+            class="hover:r-6 cursor-pointer transition-all"
             (mouseenter)="onPointHover($event, point)"
             (mouseleave)="onPointLeave()"
           />
@@ -91,7 +91,7 @@ import { SC_CHART } from './chart-container';
 
     @if (hoveredPoint()) {
       <div
-        class="pointer-events-none absolute z-50 rounded-lg border bg-background px-3 py-1.5 text-sm shadow-md"
+        class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
         [style.left.px]="tooltipX()"
         [style.top.px]="tooltipY()"
         [style.transform]="'translate(-50%, -100%) translateY(-8px)'"

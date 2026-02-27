@@ -23,33 +23,33 @@ import {
     ScImageCompareLabel,
   ],
   template: `
-    <p class="text-sm text-muted-foreground mb-4">
+    <p class="text-muted-foreground mb-4 text-sm">
       Focus the comparison and use arrow keys to adjust. Hold Shift for larger
       steps.
     </p>
     <ul
-      class="text-sm space-y-1 list-disc list-inside text-muted-foreground mb-4"
+      class="text-muted-foreground mb-4 list-inside list-disc space-y-1 text-sm"
     >
       <li>
-        <kbd class="px-1 py-0.5 bg-muted rounded text-xs">←</kbd>
+        <kbd class="bg-muted rounded px-1 py-0.5 text-xs">←</kbd>
         /
-        <kbd class="px-1 py-0.5 bg-muted rounded text-xs">→</kbd>
+        <kbd class="bg-muted rounded px-1 py-0.5 text-xs">→</kbd>
         - Move slider
       </li>
       <li>
-        <kbd class="px-1 py-0.5 bg-muted rounded text-xs">Home</kbd>
+        <kbd class="bg-muted rounded px-1 py-0.5 text-xs">Home</kbd>
         - Go to start
       </li>
       <li>
-        <kbd class="px-1 py-0.5 bg-muted rounded text-xs">End</kbd>
+        <kbd class="bg-muted rounded px-1 py-0.5 text-xs">End</kbd>
         - Go to end
       </li>
       <li>
-        <kbd class="px-1 py-0.5 bg-muted rounded text-xs">Shift</kbd>
+        <kbd class="bg-muted rounded px-1 py-0.5 text-xs">Shift</kbd>
         + Arrow - Move by 10%
       </li>
     </ul>
-    <div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+    <div scImageCompare class="aspect-[2/1] w-full max-w-2xl">
       <div scImageCompareContainer>
         <img
           scImageCompareBefore

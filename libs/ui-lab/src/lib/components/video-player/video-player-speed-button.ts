@@ -23,7 +23,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
     </button>
     @if (showMenu()) {
       <div
-        class="absolute bottom-full right-0 mb-2 bg-black/90 rounded-lg py-2 min-w-[80px]"
+        class="absolute right-0 bottom-full mb-2 min-w-[80px] rounded-lg bg-black/90 py-2"
       >
         @for (speed of speeds(); track speed) {
           <button

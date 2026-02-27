@@ -18,7 +18,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
           actionSize="sm"
           ariaLabel="Small speed dial"
         />
-        <p class="mt-2 text-xs text-muted-foreground">Small</p>
+        <p class="text-muted-foreground mt-2 text-xs">Small</p>
       </div>
       <div class="text-center">
         <sc-speed-dial
@@ -27,7 +27,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
           actionSize="md"
           ariaLabel="Medium speed dial"
         />
-        <p class="mt-2 text-xs text-muted-foreground">Medium</p>
+        <p class="text-muted-foreground mt-2 text-xs">Medium</p>
       </div>
       <div class="text-center">
         <sc-speed-dial
@@ -36,7 +36,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
           actionSize="lg"
           ariaLabel="Large speed dial"
         />
-        <p class="mt-2 text-xs text-muted-foreground">Large</p>
+        <p class="text-muted-foreground mt-2 text-xs">Large</p>
       </div>
     </div>
   `,

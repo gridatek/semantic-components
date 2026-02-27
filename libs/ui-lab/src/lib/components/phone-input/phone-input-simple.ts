@@ -20,7 +20,7 @@ import { cn } from '@semantic-components/ui';
     <div [class]="containerClass()">
       @if (showIcon()) {
         <div
-          class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+          class="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2"
         >
           <svg siPhoneIcon class="size-4"></svg>
         </div>

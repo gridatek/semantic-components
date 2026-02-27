@@ -127,7 +127,7 @@ export function detectLanguage(
     <!-- Line numbers -->
     @if (showLineNumbers()) {
       <div
-        class="sc-code-editor-content__line-numbers flex-shrink-0 select-none border-r border-border py-3 pl-3 pr-3 text-right"
+        class="sc-code-editor-content__line-numbers border-border flex-shrink-0 border-r py-3 pr-3 pl-3 text-right select-none"
         [style.min-width.ch]="lineNumberWidth()"
         aria-hidden="true"
       >

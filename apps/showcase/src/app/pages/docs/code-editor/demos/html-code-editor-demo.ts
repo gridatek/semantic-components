@@ -24,7 +24,7 @@ import {
     <div scCodeEditor>
       <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
-          <span class="text-sm text-muted-foreground">index.html</span>
+          <span class="text-muted-foreground text-sm">index.html</span>
           <span scCodeEditorLabel>html</span>
         </div>
         <button scCodeEditorCopyButton [code]="htmlCode"></button>

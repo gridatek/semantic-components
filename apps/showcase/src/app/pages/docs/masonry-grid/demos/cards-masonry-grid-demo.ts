@@ -13,23 +13,23 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
     <div scMasonryGrid [columns]="3" [gap]="16">
       @for (card of cards(); track card.id) {
         <div scMasonryItem>
-          <div class="rounded-lg border bg-card overflow-hidden">
+          <div class="bg-card overflow-hidden rounded-lg border">
             @if (card.image) {
               <img
                 [src]="card.image"
                 [alt]="card.title"
-                class="w-full h-32 object-cover"
+                class="h-32 w-full object-cover"
               />
             }
             <div class="p-4">
               <h4 class="font-semibold">{{ card.title }}</h4>
-              <p class="text-sm text-muted-foreground mt-2">
+              <p class="text-muted-foreground mt-2 text-sm">
                 {{ card.description }}
               </p>
               @if (card.tags.length > 0) {
-                <div class="flex flex-wrap gap-1 mt-3">
+                <div class="mt-3 flex flex-wrap gap-1">
                   @for (tag of card.tags; track tag) {
-                    <span class="px-2 py-0.5 text-xs bg-muted rounded-full">
+                    <span class="bg-muted rounded-full px-2 py-0.5 text-xs">
                       {{ tag }}
                     </span>
                   }

@@ -13,15 +13,15 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
     <div scMasonryGrid [columns]="3" [gap]="12">
       @for (image of images(); track image.id) {
         <div scMasonryItem>
-          <div class="group relative rounded-lg overflow-hidden bg-muted">
+          <div class="group bg-muted relative overflow-hidden rounded-lg">
             <img
               [src]="image.url"
               [alt]="image.title"
-              class="w-full h-auto object-cover"
+              class="h-auto w-full object-cover"
               loading="lazy"
             />
             <div
-              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end"
+              class="absolute inset-0 flex items-end bg-black/60 opacity-0 transition-opacity group-hover:opacity-100"
             >
               <div class="p-4 text-white">
                 <p class="font-medium">{{ image.title }}</p>

@@ -14,7 +14,7 @@ import { cn } from '@semantic-components/ui';
     '[class]': 'class()',
   },
   template: `
-    <div class="h-4 w-px animate-caret-blink bg-foreground"></div>
+    <div class="animate-caret-blink bg-foreground h-4 w-px"></div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -10,8 +10,8 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
   selector: 'app-without-labels-speed-dial-demo',
   imports: [ScSpeedDial],
   template: `
-    <div class="relative h-64 border rounded-lg bg-muted/20">
-      <div class="absolute bottom-4 right-4">
+    <div class="bg-muted/20 relative h-64 rounded-lg border">
+      <div class="absolute right-4 bottom-4">
         <sc-speed-dial
           [actions]="basicActions()"
           [showLabels]="false"

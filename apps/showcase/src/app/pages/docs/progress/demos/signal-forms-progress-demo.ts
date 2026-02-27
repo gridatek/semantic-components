@@ -30,7 +30,7 @@ interface UserFormModel {
             [value]="formCompletionPercentage()"
             class="w-full"
           ></div>
-          <p class="text-xs text-muted-foreground">
+          <p class="text-muted-foreground text-xs">
             {{ formCompletionPercentage() }}% complete
           </p>
         </div>
@@ -41,7 +41,7 @@ interface UserFormModel {
             type="text"
             id="name"
             [formField]="userForm.name"
-            class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            class="border-input focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none"
             placeholder="Enter your name"
           />
         </div>
@@ -52,7 +52,7 @@ interface UserFormModel {
             type="email"
             id="email"
             [formField]="userForm.email"
-            class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            class="border-input focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none"
             placeholder="Enter your email"
           />
         </div>
@@ -62,15 +62,15 @@ interface UserFormModel {
           <textarea
             id="bio"
             [formField]="userForm.bio"
-            class="flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            class="border-input focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none"
             placeholder="Tell us about yourself"
           ></textarea>
         </div>
       </div>
 
-      <div class="mt-6 p-4 bg-muted rounded-md">
+      <div class="bg-muted mt-6 rounded-md p-4">
         <p class="text-sm font-medium">Form Values:</p>
-        <pre class="text-xs mt-2">{{ formModel() | json }}</pre>
+        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>
     </form>
   `,

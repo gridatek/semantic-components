@@ -17,9 +17,9 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
         <ng-content>
           <div class="flex flex-col items-center gap-3">
             <div
-              class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"
+              class="border-primary h-10 w-10 animate-spin rounded-full border-4 border-t-transparent"
             ></div>
-            <p class="text-sm text-muted-foreground">Loading PDF...</p>
+            <p class="text-muted-foreground text-sm">Loading PDF...</p>
           </div>
         </ng-content>
       </div>

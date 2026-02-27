@@ -128,7 +128,7 @@ The page size `<select>` element has no programmatically associated label.
 ```html
 <!-- keyboard-navigation-pagination-demo.ts:90-93 -->
 <label class="flex items-center gap-2">
-  <span class="text-sm text-muted-foreground">Items per page:</span>
+  <span class="text-muted-foreground text-sm">Items per page:</span>
   <sc-pagination-page-size-select />
 </label>
 ```

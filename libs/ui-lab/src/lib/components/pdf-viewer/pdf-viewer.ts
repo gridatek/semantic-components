@@ -56,17 +56,17 @@ import {
       }
 
       <!-- PDF Container -->
-      <div class="flex-1 relative overflow-hidden bg-muted/30">
+      <div class="bg-muted/30 relative flex-1 overflow-hidden">
         <!-- Loading State -->
         @if (isLoading()) {
           <div
-            class="absolute inset-0 flex items-center justify-center bg-background/80 z-10"
+            class="bg-background/80 absolute inset-0 z-10 flex items-center justify-center"
           >
             <div class="flex flex-col items-center gap-3">
               <div
-                class="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"
+                class="border-primary h-10 w-10 animate-spin rounded-full border-4 border-t-transparent"
               ></div>
-              <p class="text-sm text-muted-foreground">Loading PDF...</p>
+              <p class="text-muted-foreground text-sm">Loading PDF...</p>
             </div>
           </div>
         }
@@ -74,11 +74,11 @@ import {
         <!-- Error State -->
         @if (error()) {
           <div
-            class="absolute inset-0 flex items-center justify-center bg-background z-10"
+            class="bg-background absolute inset-0 z-10 flex items-center justify-center"
           >
-            <div class="flex flex-col items-center gap-3 text-center px-4">
+            <div class="flex flex-col items-center gap-3 px-4 text-center">
               <div
-                class="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center"
+                class="bg-destructive/10 flex h-16 w-16 items-center justify-center rounded-full"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -97,15 +97,15 @@ import {
                   <path d="m9 9 6 6" />
                 </svg>
               </div>
-              <p class="text-sm font-medium text-foreground">
+              <p class="text-foreground text-sm font-medium">
                 Failed to load PDF
               </p>
-              <p class="text-sm text-muted-foreground max-w-xs">
+              <p class="text-muted-foreground max-w-xs text-sm">
                 {{ error() }}
               </p>
               <button
                 type="button"
-                class="mt-2 px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                class="bg-primary text-primary-foreground hover:bg-primary/90 mt-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
                 (click)="retry()"
               >
                 Retry
@@ -117,7 +117,7 @@ import {
         <!-- PDF Embed -->
         @if (src() && !error()) {
           <div
-            class="w-full h-full overflow-auto"
+            class="h-full w-full overflow-auto"
             [style.transform]="'rotate(' + rotation() + 'deg)'"
             [style.transform-origin]="'center center'"
           >
@@ -125,7 +125,7 @@ import {
               #pdfObject
               [data]="safePdfUrl()"
               type="application/pdf"
-              class="w-full h-full"
+              class="h-full w-full"
               [style.min-height]="'100%'"
               (load)="onLoad()"
               (error)="onError($event)"
@@ -134,7 +134,7 @@ import {
               <iframe
                 #pdfIframe
                 [src]="safePdfUrl()"
-                class="w-full h-full border-0"
+                class="h-full w-full border-0"
                 [title]="title() || 'PDF Document'"
                 (load)="onLoad()"
                 (error)="onError($event)"
@@ -146,9 +146,9 @@ import {
         <!-- No Source -->
         @if (!src()) {
           <div class="absolute inset-0 flex items-center justify-center">
-            <div class="flex flex-col items-center gap-3 text-center px-4">
+            <div class="flex flex-col items-center gap-3 px-4 text-center">
               <div
-                class="w-16 h-16 rounded-full bg-muted flex items-center justify-center"
+                class="bg-muted flex h-16 w-16 items-center justify-center rounded-full"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -171,7 +171,7 @@ import {
                   <line x1="10" x2="8" y1="9" y2="9" />
                 </svg>
               </div>
-              <p class="text-sm text-muted-foreground">No PDF selected</p>
+              <p class="text-muted-foreground text-sm">No PDF selected</p>
             </div>
           </div>
         }

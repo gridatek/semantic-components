@@ -19,7 +19,14 @@ import type { Notification, NotificationAction } from './notification-types';
 
 @Component({
   selector: 'sc-notification-item',
-  imports: [SiXIcon, SiCheckIcon, SiTriangleAlertIcon, SiCircleXIcon, SiMessageSquareIcon, SiInfoIcon],
+  imports: [
+    SiXIcon,
+    SiCheckIcon,
+    SiTriangleAlertIcon,
+    SiCircleXIcon,
+    SiMessageSquareIcon,
+    SiInfoIcon,
+  ],
   template: `
     <div
       [class]="itemClass()"
@@ -33,18 +40,18 @@ import type { Notification, NotificationAction } from './notification-types';
       <!-- Unread indicator -->
       @if (!notification().read) {
         <div
-          class="absolute left-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary"
+          class="bg-primary absolute top-1/2 left-2 h-2 w-2 -translate-y-1/2 rounded-full"
           aria-label="Unread"
         ></div>
       }
 
       <!-- Icon or Avatar -->
-      <div class="flex-shrink-0 ml-4">
+      <div class="ml-4 flex-shrink-0">
         @if (notification().avatar) {
           <img
             [src]="notification().avatar"
             [alt]="notification().title"
-            class="w-10 h-10 rounded-full object-cover"
+            class="h-10 w-10 rounded-full object-cover"
           />
         } @else {
           <div [class]="iconContainerClass()">
@@ -74,21 +81,21 @@ import type { Notification, NotificationAction } from './notification-types';
       </div>
 
       <!-- Content -->
-      <div class="flex-1 min-w-0 ml-3">
+      <div class="ml-3 min-w-0 flex-1">
         <div class="flex items-start justify-between gap-2">
           <p
-            class="text-sm font-medium text-foreground truncate"
+            class="text-foreground truncate text-sm font-medium"
             [class.font-semibold]="!notification().read"
           >
             {{ notification().title }}
           </p>
-          <span class="text-xs text-muted-foreground whitespace-nowrap">
+          <span class="text-muted-foreground text-xs whitespace-nowrap">
             {{ formatTime(notification().timestamp) }}
           </span>
         </div>
 
         @if (notification().description) {
-          <p class="mt-0.5 text-sm text-muted-foreground line-clamp-2">
+          <p class="text-muted-foreground mt-0.5 line-clamp-2 text-sm">
             {{ notification().description }}
           </p>
         }
@@ -97,7 +104,7 @@ import type { Notification, NotificationAction } from './notification-types';
         @if (notification().action) {
           <button
             type="button"
-            class="mt-2 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+            class="text-primary hover:text-primary/80 mt-2 text-xs font-medium transition-colors"
             (click)="onActionClick($event, notification().action!)"
           >
             {{ notification().action!.label }}
@@ -109,7 +116,7 @@ import type { Notification, NotificationAction } from './notification-types';
       @if (showDismiss()) {
         <button
           type="button"
-          class="flex-shrink-0 p-1 ml-2 rounded-full opacity-0 group-hover:opacity-100 hover:bg-muted text-muted-foreground hover:text-foreground transition-all"
+          class="hover:bg-muted text-muted-foreground hover:text-foreground ml-2 flex-shrink-0 rounded-full p-1 opacity-0 transition-all group-hover:opacity-100"
           (click)="onDismiss($event)"
           aria-label="Dismiss notification"
         >

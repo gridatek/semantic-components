@@ -25,7 +25,7 @@ import {
   ],
   template: `
     <div class="w-full">
-      <div scEditor [readonly]="true" class="border rounded-lg overflow-hidden">
+      <div scEditor [readonly]="true" class="overflow-hidden rounded-lg border">
         <div scEditorContent [(value)]="content"></div>
 
         <div scEditorFooter>

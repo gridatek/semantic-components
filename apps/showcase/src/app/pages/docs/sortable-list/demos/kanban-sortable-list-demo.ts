@@ -35,13 +35,13 @@ interface KanbanCard {
             scSortableItem
             [index]="i"
             [item]="card"
-            class="rounded-lg border bg-card p-4 shadow-sm"
+            class="bg-card rounded-lg border p-4 shadow-sm"
           >
             <div class="flex items-start gap-3">
               <span scSortableHandle class="mt-1 p-1"></span>
               <div class="flex-1 space-y-2">
                 <h4 class="font-medium">{{ card.title }}</h4>
-                <p class="text-sm text-muted-foreground">
+                <p class="text-muted-foreground text-sm">
                   {{ card.description }}
                 </p>
                 <div class="flex items-center gap-2">

@@ -25,10 +25,10 @@ import type { KanbanCard } from './kanban-types';
     >
       <!-- Labels -->
       @if (card().labels?.length) {
-        <div class="flex flex-wrap gap-1 mb-2">
+        <div class="mb-2 flex flex-wrap gap-1">
           @for (label of card().labels; track label.id) {
             <span
-              class="px-1.5 py-0.5 text-xs font-medium rounded"
+              class="rounded px-1.5 py-0.5 text-xs font-medium"
               [style.background-color]="label.color + '20'"
               [style.color]="label.color"
             >
@@ -39,20 +39,20 @@ import type { KanbanCard } from './kanban-types';
       }
 
       <!-- Title -->
-      <h4 class="font-medium text-sm text-foreground leading-tight">
+      <h4 class="text-foreground text-sm leading-tight font-medium">
         {{ card().title }}
       </h4>
 
       <!-- Description -->
       @if (card().description) {
-        <p class="mt-1 text-xs text-muted-foreground line-clamp-2">
+        <p class="text-muted-foreground mt-1 line-clamp-2 text-xs">
           {{ card().description }}
         </p>
       }
 
       <!-- Footer -->
       @if (card().assignee || card().dueDate || card().priority) {
-        <div class="flex items-center justify-between mt-3 pt-2 border-t">
+        <div class="mt-3 flex items-center justify-between border-t pt-2">
           <div class="flex items-center gap-2">
             <!-- Priority -->
             @if (card().priority) {
@@ -72,14 +72,14 @@ import type { KanbanCard } from './kanban-types';
           <!-- Assignee -->
           @if (card().assignee) {
             <div
-              class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-medium flex items-center justify-center"
+              class="bg-primary/10 text-primary flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium"
               [attr.title]="card().assignee!.name"
             >
               @if (card().assignee!.avatar) {
                 <img
                   [src]="card().assignee!.avatar"
                   [alt]="card().assignee!.name"
-                  class="w-full h-full rounded-full object-cover"
+                  class="h-full w-full rounded-full object-cover"
                 />
               } @else {
                 {{
@@ -96,7 +96,7 @@ import type { KanbanCard } from './kanban-types';
       @if (showDelete()) {
         <button
           type="button"
-          class="absolute top-2 right-2 p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-opacity"
+          class="hover:bg-destructive/10 text-muted-foreground hover:text-destructive absolute top-2 right-2 rounded p-1 opacity-0 transition-opacity group-hover:opacity-100"
           (click)="onDelete($event)"
           aria-label="Delete card"
         >

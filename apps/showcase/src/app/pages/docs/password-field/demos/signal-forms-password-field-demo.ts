@@ -46,7 +46,7 @@ import { ScLabel } from '@semantic-components/ui';
           <button scPasswordFieldToggle></button>
         </div>
         @if (loginForm.password().invalid() && loginForm.password().touched()) {
-          <p class="text-sm font-medium text-destructive" role="alert">
+          <p class="text-destructive text-sm font-medium" role="alert">
             @if (hasError(loginForm.password, 'required')) {
               Password is required
             } @else if (hasError(loginForm.password, 'minLength')) {
@@ -56,9 +56,9 @@ import { ScLabel } from '@semantic-components/ui';
         }
       </div>
 
-      <div class="rounded-lg border bg-muted/50 p-4">
+      <div class="bg-muted/50 rounded-lg border p-4">
         <p class="text-sm font-medium">Form State:</p>
-        <pre class="mt-2 text-xs text-muted-foreground">{{ formState() }}</pre>
+        <pre class="text-muted-foreground mt-2 text-xs">{{ formState() }}</pre>
       </div>
     </div>
   `,

@@ -21,9 +21,9 @@ import { ScCalendar } from '@semantic-components/ui';
       </div>
 
       <div class="space-y-2">
-        <div class="p-4 rounded-md border bg-muted/50">
-          <p class="text-sm font-medium mb-2">Configuration</p>
-          <div class="space-y-1 text-xs text-muted-foreground">
+        <div class="bg-muted/50 rounded-md border p-4">
+          <p class="mb-2 text-sm font-medium">Configuration</p>
+          <div class="text-muted-foreground space-y-1 text-xs">
             <p>
               Min Date:
               {{
@@ -51,11 +51,11 @@ import { ScCalendar } from '@semantic-components/ui';
 
         @if (selectedDate(); as date) {
           <div
-            class="flex items-center justify-between p-4 rounded-md border bg-muted/50"
+            class="bg-muted/50 flex items-center justify-between rounded-md border p-4"
           >
             <div>
               <p class="text-sm font-medium">Selected Date</p>
-              <p class="text-sm text-muted-foreground">
+              <p class="text-muted-foreground text-sm">
                 {{
                   date.toLocaleString('en-US', {
                     weekday: 'long',
@@ -68,7 +68,7 @@ import { ScCalendar } from '@semantic-components/ui';
             </div>
             <button
               type="button"
-              class="px-3 py-1 text-sm rounded-md border hover:bg-accent"
+              class="hover:bg-accent rounded-md border px-3 py-1 text-sm"
               (click)="clearSelection()"
             >
               Clear
@@ -76,7 +76,7 @@ import { ScCalendar } from '@semantic-components/ui';
           </div>
         } @else {
           <p
-            class="text-sm text-muted-foreground p-4 text-center border rounded-md"
+            class="text-muted-foreground rounded-md border p-4 text-center text-sm"
           >
             No date selected. Only dates within the next 30 days are available.
           </p>

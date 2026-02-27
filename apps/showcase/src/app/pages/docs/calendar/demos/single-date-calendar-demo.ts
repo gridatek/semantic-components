@@ -19,11 +19,11 @@ import { ScCalendar } from '@semantic-components/ui';
       <div class="space-y-2">
         @if (selectedDate(); as date) {
           <div
-            class="flex items-center justify-between p-4 rounded-md border bg-muted/50"
+            class="bg-muted/50 flex items-center justify-between rounded-md border p-4"
           >
             <div>
               <p class="text-sm font-medium">Selected Date</p>
-              <p class="text-sm text-muted-foreground">
+              <p class="text-muted-foreground text-sm">
                 {{
                   date.toLocaleString('en-US', {
                     weekday: 'long',
@@ -36,7 +36,7 @@ import { ScCalendar } from '@semantic-components/ui';
             </div>
             <button
               type="button"
-              class="px-3 py-1 text-sm rounded-md border hover:bg-accent"
+              class="hover:bg-accent rounded-md border px-3 py-1 text-sm"
               (click)="clearSelection()"
             >
               Clear
@@ -44,7 +44,7 @@ import { ScCalendar } from '@semantic-components/ui';
           </div>
         } @else {
           <p
-            class="text-sm text-muted-foreground p-4 text-center border rounded-md"
+            class="text-muted-foreground rounded-md border p-4 text-center text-sm"
           >
             No date selected
           </p>

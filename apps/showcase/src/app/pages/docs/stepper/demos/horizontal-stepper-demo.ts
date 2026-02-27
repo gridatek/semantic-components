@@ -67,7 +67,7 @@ import {
               <input
                 type="email"
                 placeholder="Enter your email"
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                class="border-input bg-background flex h-10 w-full rounded-md border px-3 py-2 text-sm"
               />
             </div>
             <div class="space-y-2">
@@ -75,7 +75,7 @@ import {
               <input
                 type="password"
                 placeholder="Create a password"
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                class="border-input bg-background flex h-10 w-full rounded-md border px-3 py-2 text-sm"
               />
             </div>
           </div>
@@ -88,7 +88,7 @@ import {
               <input
                 type="text"
                 placeholder="Enter your name"
-                class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                class="border-input bg-background flex h-10 w-full rounded-md border px-3 py-2 text-sm"
               />
             </div>
             <div class="space-y-2">
@@ -96,7 +96,7 @@ import {
               <textarea
                 placeholder="Tell us about yourself"
                 rows="3"
-                class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                class="border-input bg-background flex w-full rounded-md border px-3 py-2 text-sm"
               ></textarea>
             </div>
           </div>
@@ -104,10 +104,10 @@ import {
 
         <div scStepperContent [step]="2">
           <div class="space-y-4">
-            <p class="text-sm text-muted-foreground">
+            <p class="text-muted-foreground text-sm">
               Review your information and click submit to complete registration.
             </p>
-            <div class="rounded-lg bg-muted p-4">
+            <div class="bg-muted rounded-lg p-4">
               <p class="text-sm">All steps completed! Ready to submit.</p>
             </div>
           </div>

@@ -37,7 +37,7 @@ export type ScCodeViewerLanguage =
       <div [class]="contentClass()" [innerHTML]="highlightedHtml()"></div>
     } @else {
       <pre
-        class="m-0 p-4 text-sm leading-relaxed font-mono text-foreground"
+        class="text-foreground m-0 p-4 font-mono text-sm leading-relaxed"
       ><code>{{ code() }}</code></pre>
     }
   `,

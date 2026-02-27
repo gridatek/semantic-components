@@ -188,7 +188,7 @@ Built on `@angular/aria/accordion`, providing:
 All components accept a `class` input for custom styling:
 
 ```html
-<div scCollapsible class="border rounded-lg p-4">
+<div scCollapsible class="rounded-lg border p-4">
   <!-- styled container -->
 </div>
 

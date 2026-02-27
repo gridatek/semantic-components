@@ -19,22 +19,22 @@ import { ScTabs, ScTabPanel, ScTabList, ScTab } from '@semantic-components/ui';
         </button>
       </div>
       <div scTabPanel value="overview">
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Overview content. View your dashboard summary and key metrics.
         </p>
       </div>
       <div scTabPanel value="analytics">
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Analytics content. Dive deep into your data and discover insights.
         </p>
       </div>
       <div scTabPanel value="reports">
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Reports content. Generate and download detailed reports.
         </p>
       </div>
       <div scTabPanel value="notifications">
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Notifications content. Manage your notification preferences.
         </p>
       </div>

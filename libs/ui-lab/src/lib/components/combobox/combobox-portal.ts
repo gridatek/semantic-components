@@ -21,13 +21,23 @@ import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'div[scComboboxPortal]',
-  imports: [ComboboxPopupContainer, ComboboxDialog, Combobox, ComboboxInput, SiSearchIcon],
+  imports: [
+    ComboboxPopupContainer,
+    ComboboxDialog,
+    Combobox,
+    ComboboxInput,
+    SiSearchIcon,
+  ],
   template: `
     <ng-template ngComboboxPopupContainer>
       <dialog #dialog ngComboboxDialog [class]="dialogClass()">
         <div ngCombobox filterMode="manual" [alwaysExpanded]="true">
           <div [class]="searchContainerClass()">
-            <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+            <svg
+              siSearchIcon
+              class="mr-2 size-4 shrink-0 opacity-50"
+              aria-hidden="true"
+            ></svg>
             <input
               ngComboboxInput
               type="text"

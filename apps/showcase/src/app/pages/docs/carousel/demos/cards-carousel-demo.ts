@@ -36,9 +36,9 @@ import {
             @for (card of cards; track card.title) {
               <div scCarouselItem>
                 <div class="p-1">
-                  <div class="rounded-lg border bg-card p-6">
+                  <div class="bg-card rounded-lg border p-6">
                     <h4 class="font-semibold">{{ card.title }}</h4>
-                    <p class="mt-2 text-sm text-muted-foreground">
+                    <p class="text-muted-foreground mt-2 text-sm">
                       {{ card.description }}
                     </p>
                   </div>

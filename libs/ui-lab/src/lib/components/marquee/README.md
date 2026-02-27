@@ -101,11 +101,11 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ```html
 <sc-marquee [duration]="30" [gap]="48">
   @for (logo of logos; track logo) {
-  <div scMarqueeItem class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
+  <div scMarqueeItem class="flex h-16 w-32 items-center justify-center rounded border">{{ logo }}</div>
   }
   <ng-container scMarqueeClone>
     @for (logo of logos; track logo) {
-    <div scMarqueeItem class="w-32 h-16 flex items-center justify-center border rounded">{{ logo }}</div>
+    <div scMarqueeItem class="flex h-16 w-32 items-center justify-center rounded border">{{ logo }}</div>
     }
   </ng-container>
 </sc-marquee>
@@ -116,7 +116,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 ```html
 <sc-marquee [duration]="40" [gap]="24">
   @for (testimonial of testimonials; track testimonial.name) {
-  <div scMarqueeItem class="w-80 p-4 border rounded">
+  <div scMarqueeItem class="w-80 rounded border p-4">
     <p>"{{ testimonial.quote }}"</p>
     <p class="font-medium">{{ testimonial.name }}</p>
   </div>
@@ -133,7 +133,7 @@ Scrolling content with smooth infinite animations, multiple directions, and cust
 <div class="h-48 overflow-hidden">
   <sc-marquee direction="vertical" [duration]="20">
     @for (notification of notifications; track notification.id) {
-    <div scMarqueeItem class="p-3 border rounded">{{ notification.icon }} {{ notification.title }}</div>
+    <div scMarqueeItem class="rounded border p-3">{{ notification.icon }} {{ notification.title }}</div>
     }
     <ng-container scMarqueeClone>
       <!-- duplicate content -->

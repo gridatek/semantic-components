@@ -35,7 +35,7 @@ Displays a badge or a component that looks like a badge.
 ```html
 <div class="relative">
   <button><!-- button content --></button>
-  <span scBadge class="absolute -right-1 -top-1 flex size-5 items-center justify-center p-0">3</span>
+  <span scBadge class="absolute -top-1 -right-1 flex size-5 items-center justify-center p-0">3</span>
 </div>
 ```
 

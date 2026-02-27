@@ -48,13 +48,13 @@ import {
                   <p class="text-sm font-medium">
                     Your call has been confirmed.
                   </p>
-                  <p class="text-sm text-muted-foreground">5 min ago</p>
+                  <p class="text-muted-foreground text-sm">5 min ago</p>
                 </div>
               </div>
               <div class="flex items-start gap-4 rounded-md border p-4">
                 <div class="flex-1">
                   <p class="text-sm font-medium">You have a new message!</p>
-                  <p class="text-sm text-muted-foreground">1 hour ago</p>
+                  <p class="text-muted-foreground text-sm">1 hour ago</p>
                 </div>
               </div>
             </div>

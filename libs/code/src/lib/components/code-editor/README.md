@@ -26,14 +26,14 @@ ScCodeEditor (Root - div[scCodeEditor])
 
 ## Components
 
-| Component                | Selector                             | Description                           |
-| ------------------------ | ------------------------------------ | ------------------------------------- |
-| `ScCodeEditor`           | `div[scCodeEditor]`                | Root container with border and focus  |
-| `ScCodeEditorHeader`     | `div[scCodeEditorHeader]`         | Header bar with border                |
-| `ScCodeEditorLabel`      | `span[scCodeEditorLabel]`         | Label for filename or language        |
-| `ScCodeEditorContent`    | `div[scCodeEditorContent]`        | Editable code area with highlighting  |
+| Component                | Selector                         | Description                           |
+| ------------------------ | -------------------------------- | ------------------------------------- |
+| `ScCodeEditor`           | `div[scCodeEditor]`              | Root container with border and focus  |
+| `ScCodeEditorHeader`     | `div[scCodeEditorHeader]`        | Header bar with border                |
+| `ScCodeEditorLabel`      | `span[scCodeEditorLabel]`        | Label for filename or language        |
+| `ScCodeEditorContent`    | `div[scCodeEditorContent]`       | Editable code area with highlighting  |
 | `ScCodeEditorCopyButton` | `button[scCodeEditorCopyButton]` | Copy button with visual feedback      |
-| `ScCodeEditorFooter`     | `div[scCodeEditorFooter]`         | Footer with cursor position and stats |
+| `ScCodeEditorFooter`     | `div[scCodeEditorFooter]`        | Footer with cursor position and stats |
 
 ## Inputs
 
@@ -127,7 +127,7 @@ Copy button that shows a checkmark on successful copy for 2 seconds.
 <div scCodeEditor>
   <div scCodeEditorHeader>
     <div class="flex items-center gap-2">
-      <span class="text-sm text-muted-foreground">{{ filename }}</span>
+      <span class="text-muted-foreground text-sm">{{ filename }}</span>
       <span scCodeEditorLabel>{{ language }}</span>
     </div>
     <button scCodeEditorCopyButton [code]="code"></button>
@@ -347,7 +347,7 @@ greet('World');`);
 <div scCodeEditor>
   <div scCodeEditorHeader>
     <div class="flex items-center gap-2">
-      <span class="text-sm text-muted-foreground">{{ filename() }}</span>
+      <span class="text-muted-foreground text-sm">{{ filename() }}</span>
       <span scCodeEditorLabel>{{ language() }}</span>
     </div>
     <button scCodeEditorCopyButton [code]="code()"></button>

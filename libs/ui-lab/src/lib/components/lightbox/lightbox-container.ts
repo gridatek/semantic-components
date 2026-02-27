@@ -20,7 +20,15 @@ import { SC_LIGHTBOX } from './lightbox';
 
 @Component({
   selector: '[scLightboxContainer]',
-  imports: [SiXIcon, SiChevronLeftIcon, SiChevronRightIcon, SiLoaderCircleIcon, SiZoomOutIcon, SiZoomInIcon, SiMinimize2Icon],
+  imports: [
+    SiXIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+    SiLoaderCircleIcon,
+    SiZoomOutIcon,
+    SiZoomInIcon,
+    SiMinimize2Icon,
+  ],
   template: `
     @if (lightbox.isOpen()) {
       <div
@@ -82,7 +90,11 @@ import { SC_LIGHTBOX } from './lightbox';
           @if (lightbox.imageLoading()) {
             <div class="absolute inset-0 flex items-center justify-center">
               <ng-content select="[scLightboxLoading]">
-                <svg siLoaderCircleIcon class="size-8 animate-spin text-white" (click)="$event.stopPropagation()"></svg>
+                <svg
+                  siLoaderCircleIcon
+                  class="size-8 animate-spin text-white"
+                  (click)="$event.stopPropagation()"
+                ></svg>
               </ng-content>
             </div>
           }
@@ -140,22 +152,22 @@ import { SC_LIGHTBOX } from './lightbox';
 
             <!-- Zoom controls -->
             @if (lightbox.showZoom()) {
-              <div class="flex items-center gap-1 ml-4">
+              <div class="ml-4 flex items-center gap-1">
                 <button
                   type="button"
-                  class="p-2 text-white/80 hover:text-white transition-colors"
+                  class="p-2 text-white/80 transition-colors hover:text-white"
                   (click)="lightbox.zoomOut()"
                   [disabled]="lightbox.zoomLevel() <= 0.5"
                   aria-label="Zoom out"
                 >
                   <svg siZoomOutIcon class="size-5"></svg>
                 </button>
-                <span class="text-sm text-white/80 min-w-[3rem] text-center">
+                <span class="min-w-[3rem] text-center text-sm text-white/80">
                   {{ Math.round(lightbox.zoomLevel() * 100) }}%
                 </span>
                 <button
                   type="button"
-                  class="p-2 text-white/80 hover:text-white transition-colors"
+                  class="p-2 text-white/80 transition-colors hover:text-white"
                   (click)="lightbox.zoomIn()"
                   [disabled]="lightbox.zoomLevel() >= 3"
                   aria-label="Zoom in"
@@ -164,7 +176,7 @@ import { SC_LIGHTBOX } from './lightbox';
                 </button>
                 <button
                   type="button"
-                  class="p-2 text-white/80 hover:text-white transition-colors"
+                  class="p-2 text-white/80 transition-colors hover:text-white"
                   (click)="lightbox.resetZoom()"
                   aria-label="Reset zoom"
                 >

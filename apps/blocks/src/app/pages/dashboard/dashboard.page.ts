@@ -67,7 +67,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
             <li scSidebarMenuItem>
               <a scSidebarMenuButton size="lg">
                 <div
-                  class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground"
+                  class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                 </div>
                 <div class="grid flex-1 text-left text-sm leading-tight">
                   <span class="truncate font-semibold">Acme Inc</span>
-                  <span class="truncate text-xs text-sidebar-foreground/70">
+                  <span class="text-sidebar-foreground/70 truncate text-xs">
                     Enterprise
                   </span>
                 </div>
@@ -693,7 +693,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
             <li scSidebarMenuItem>
               <a scSidebarMenuButton size="lg">
                 <div
-                  class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-accent-foreground"
+                  class="bg-sidebar-accent text-sidebar-accent-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -712,7 +712,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                 </div>
                 <div class="grid flex-1 text-left text-sm leading-tight">
                   <span class="truncate font-semibold">John Doe</span>
-                  <span class="truncate text-xs text-sidebar-foreground/70">
+                  <span class="text-sidebar-foreground/70 truncate text-xs">
                     john&#64;example.com
                   </span>
                 </div>
@@ -726,7 +726,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
       <main scSidebarInset>
         <header
-          class="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background px-4"
+          class="bg-background sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b px-4"
         >
           <button scSidebarTrigger>
             <svg
@@ -753,23 +753,23 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         <div class="flex flex-1 flex-col gap-4 p-4">
           <div class="grid auto-rows-min gap-4 md:grid-cols-3">
             <div
-              class="aspect-video rounded-xl bg-muted/50 flex items-center justify-center"
+              class="bg-muted/50 flex aspect-video items-center justify-center rounded-xl"
             >
               <p class="text-muted-foreground">Chart 1</p>
             </div>
             <div
-              class="aspect-video rounded-xl bg-muted/50 flex items-center justify-center"
+              class="bg-muted/50 flex aspect-video items-center justify-center rounded-xl"
             >
               <p class="text-muted-foreground">Chart 2</p>
             </div>
             <div
-              class="aspect-video rounded-xl bg-muted/50 flex items-center justify-center"
+              class="bg-muted/50 flex aspect-video items-center justify-center rounded-xl"
             >
               <p class="text-muted-foreground">Chart 3</p>
             </div>
           </div>
           <div
-            class="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min p-8"
+            class="bg-muted/50 min-h-[100vh] flex-1 rounded-xl p-8 md:min-h-min"
           >
             <div class="space-y-4">
               <h2 class="text-2xl font-bold">Welcome to the Sidebar Demo</h2>
@@ -777,7 +777,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                 This is a comprehensive sidebar component built with Angular. It
                 features:
               </p>
-              <ul class="list-disc list-inside space-y-2 text-muted-foreground">
+              <ul class="text-muted-foreground list-inside list-disc space-y-2">
                 <li>Collapsible sidebar with icon-only mode</li>
                 <li>Keyboard shortcut (Cmd/Ctrl + B) to toggle</li>
                 <li>Mobile-responsive with sheet drawer</li>
@@ -786,9 +786,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
                 <li>Nested menu items with submenus</li>
                 <li>Group sections with labels</li>
               </ul>
-              <div class="rounded-lg border p-4 bg-card">
-                <h3 class="font-semibold mb-2">Try these features:</h3>
-                <ol class="list-decimal list-inside space-y-1 text-sm">
+              <div class="bg-card rounded-lg border p-4">
+                <h3 class="mb-2 font-semibold">Try these features:</h3>
+                <ol class="list-inside list-decimal space-y-1 text-sm">
                   <li>
                     Press Cmd+B (Mac) or Ctrl+B (Windows) to toggle the sidebar
                   </li>

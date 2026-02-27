@@ -34,7 +34,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h1 scHeading>Carousel</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
             &#64;semantic-components/carousel
           </code>
           package. Requires the ui library to be installed first.
@@ -45,7 +45,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>1. Install the package</h2>
         <p class="text-muted-foreground">
           Install the carousel library and its peer dependency
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
             embla-carousel
           </code>
           .
@@ -65,7 +65,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the carousel library as a Tailwind source in your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
         <div scCodeViewer>

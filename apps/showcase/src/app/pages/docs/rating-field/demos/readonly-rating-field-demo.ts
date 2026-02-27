@@ -31,7 +31,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
             }
           </div>
         </div>
-        <p class="text-sm text-muted-foreground">Average: 4.0 / 5</p>
+        <p class="text-muted-foreground text-sm">Average: 4.0 / 5</p>
       </div>
 
       <div class="flex flex-col gap-2">
@@ -50,7 +50,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
             }
           </div>
         </div>
-        <p class="text-sm text-muted-foreground">Average: 3.5 / 5</p>
+        <p class="text-muted-foreground text-sm">Average: 3.5 / 5</p>
       </div>
     </div>
   `,

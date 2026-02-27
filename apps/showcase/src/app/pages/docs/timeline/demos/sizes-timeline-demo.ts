@@ -31,9 +31,7 @@ import {
         <div scTimelineDot size="sm"></div>
         <div scTimelineContent>
           <h4 scTimelineTitle>Small Dot</h4>
-          <p scTimelineDescription>
-            Using size="sm" for a smaller indicator.
-          </p>
+          <p scTimelineDescription>Using size="sm" for a smaller indicator.</p>
         </div>
       </div>
 

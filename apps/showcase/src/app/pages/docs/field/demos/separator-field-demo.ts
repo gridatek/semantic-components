@@ -32,7 +32,7 @@ import {
       <div scFieldSeparator>
         <div scSeparator class="absolute inset-0 top-1/2"></div>
         <span
-          class="text-muted-foreground px-2 bg-background relative mx-auto block w-fit"
+          class="text-muted-foreground bg-background relative mx-auto block w-fit px-2"
         >
           or
         </span>

@@ -14,17 +14,17 @@ import { SC_VIDEO_PLAYER } from './video-player';
   template: `
     <!-- Buffered -->
     <div
-      class="absolute inset-y-0 left-0 bg-white/50 rounded-full pointer-events-none"
+      class="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-white/50"
       [style.width.%]="player.bufferedPercent()"
     ></div>
     <!-- Progress -->
     <div
-      class="absolute inset-y-0 left-0 bg-white rounded-full pointer-events-none"
+      class="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-white"
       [style.width.%]="player.progressPercent()"
     ></div>
     <!-- Thumb -->
     <div
-      class="absolute top-1/2 -translate-y-1/2 size-3 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+      class="pointer-events-none absolute top-1/2 size-3 -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity group-hover:opacity-100"
       [style.left.%]="player.progressPercent()"
       [style.transform]="'translate(-50%, -50%)'"
     ></div>

@@ -48,7 +48,7 @@ interface TargetRect {
         #container
       >
         <!-- SVG Overlay with spotlight cutout -->
-        <svg class="absolute inset-0 w-full h-full pointer-events-none">
+        <svg class="pointer-events-none absolute inset-0 h-full w-full">
           <defs>
             <mask id="spotlight-mask">
               <rect x="0" y="0" width="100%" height="100%" fill="white" />
@@ -79,7 +79,7 @@ interface TargetRect {
         <!-- Spotlight border/glow effect -->
         @if (targetRect()) {
           <div
-            class="absolute pointer-events-none transition-all"
+            class="pointer-events-none absolute transition-all"
             [class]="highlightClass()"
             [style.top.px]="targetRect()!.top - padding()"
             [style.left.px]="targetRect()!.left - padding()"
@@ -90,12 +90,12 @@ interface TargetRect {
           >
             <!-- Pulse animation ring -->
             <div
-              class="absolute inset-0 rounded-[inherit] animate-ping bg-primary/20"
+              class="bg-primary/20 absolute inset-0 animate-ping rounded-[inherit]"
               [style.animation-duration]="'1.5s'"
             ></div>
             <!-- Solid border -->
             <div
-              class="absolute inset-0 rounded-[inherit] border-2 border-primary"
+              class="border-primary absolute inset-0 rounded-[inherit] border-2"
             ></div>
           </div>
         }
@@ -105,7 +105,7 @@ interface TargetRect {
           <button
             type="button"
             (click)="close()"
-            class="absolute top-4 right-4 p-2 rounded-full bg-background/90 hover:bg-background text-foreground shadow-lg z-10"
+            class="bg-background/90 hover:bg-background text-foreground absolute top-4 right-4 z-10 rounded-full p-2 shadow-lg"
             aria-label="Close spotlight"
           >
             <svg

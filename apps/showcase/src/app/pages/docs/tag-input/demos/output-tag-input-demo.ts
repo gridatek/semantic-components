@@ -22,7 +22,7 @@ import {
         }
         <input scTagInputField />
       </div>
-      <div class="rounded-md border p-4 bg-muted/50">
+      <div class="bg-muted/50 rounded-md border p-4">
         <pre class="text-sm">{{ tags() | json }}</pre>
       </div>
     </div>

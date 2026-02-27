@@ -30,7 +30,7 @@ import type {
           (nodeExpand)="nodeExpand.emit($event)"
         />
       } @else {
-        <div class="text-muted-foreground text-sm p-4">
+        <div class="text-muted-foreground p-4 text-sm">
           No organization data available
         </div>
       }

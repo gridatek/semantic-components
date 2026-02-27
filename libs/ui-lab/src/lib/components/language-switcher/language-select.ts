@@ -31,7 +31,7 @@ import { ScLanguageService } from './language.service';
       id="language-select"
       [value]="currentLanguageCode()"
       (change)="onLanguageChange($event)"
-      class="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      class="border-input bg-background ring-offset-background focus-visible:ring-ring h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
     >
       @for (lang of languages(); track lang.code) {
         <option [value]="lang.code">

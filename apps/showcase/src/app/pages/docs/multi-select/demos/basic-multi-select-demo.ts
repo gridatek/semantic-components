@@ -18,7 +18,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
           placeholder="Select fruits..."
         />
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ value().join(', ') || 'None' }}
       </p>
     </div>

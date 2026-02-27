@@ -11,7 +11,7 @@ import { ScDatePicker } from '@semantic-components/ui';
   selector: 'app-constrained-date-picker-demo',
   imports: [ScDatePicker],
   template: `
-    <p class="text-xs text-muted-foreground mb-4">
+    <p class="text-muted-foreground mb-4 text-xs">
       Only dates within the next 30 days
     </p>
     <sc-date-picker

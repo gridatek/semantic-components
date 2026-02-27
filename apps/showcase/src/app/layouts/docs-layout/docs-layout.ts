@@ -101,7 +101,7 @@ import { ConfigService } from '../../services/config.service';
                   <span class="truncate font-semibold">
                     Semantic Components
                   </span>
-                  <span class="truncate text-xs text-sidebar-foreground/70">
+                  <span class="text-sidebar-foreground/70 truncate text-xs">
                     UI lib for Angular
                   </span>
                 </div>
@@ -271,14 +271,14 @@ import { ConfigService } from '../../services/config.service';
 
       <main scSidebarInset class="min-w-0 overflow-x-clip">
         <header
-          class="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b bg-background px-4"
+          class="bg-background sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b px-4"
         >
           <button scSidebarTrigger>
             <svg siPanelLeftIcon></svg>
             <span class="sr-only">Toggle Sidebar</span>
           </button>
           <div scSeparator orientation="vertical" class="h-4"></div>
-          <span class="text-sm font-medium text-muted-foreground">
+          <span class="text-muted-foreground text-sm font-medium">
             Documentation
           </span>
         </header>
@@ -288,7 +288,7 @@ import { ConfigService } from '../../services/config.service';
             <router-outlet />
           </div>
 
-          <aside class="hidden xl:block w-56 border-l shrink-0">
+          <aside class="hidden w-56 shrink-0 border-l xl:block">
             <div class="sticky top-14 p-6">
               <app-toc
                 [items]="tocService.items()"

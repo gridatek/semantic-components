@@ -17,7 +17,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
       @for (option of options(); track option.value) {
         <button
           type="button"
-          class="px-3 py-1 text-sm rounded-md border transition-colors"
+          class="rounded-md border px-3 py-1 text-sm transition-colors"
           [class]="
             isSelected(option.value)
               ? 'bg-primary text-primary-foreground'

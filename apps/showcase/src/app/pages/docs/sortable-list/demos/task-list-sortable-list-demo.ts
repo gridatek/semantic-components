@@ -41,14 +41,14 @@ interface Task {
             scSortableItem
             [index]="i"
             [item]="task"
-            class="flex items-center gap-3 rounded-md border bg-background p-3 hover:bg-muted/50"
+            class="bg-background hover:bg-muted/50 flex items-center gap-3 rounded-md border p-3"
           >
             <span scSortableHandle class="p-1"></span>
             <input
               type="checkbox"
               [checked]="task.completed"
               (change)="toggleTask(task.id)"
-              class="size-4 rounded border-primary"
+              class="border-primary size-4 rounded"
             />
             <span
               class="flex-1 text-sm"

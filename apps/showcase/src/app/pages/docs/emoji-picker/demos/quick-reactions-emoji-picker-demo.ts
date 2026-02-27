@@ -5,12 +5,12 @@ import { Component, signal, ViewEncapsulation } from '@angular/core';
   imports: [],
   template: `
     <div
-      class="inline-flex gap-1 rounded-full border bg-background p-1 shadow-sm"
+      class="bg-background inline-flex gap-1 rounded-full border p-1 shadow-sm"
     >
       @for (emoji of quickReactions; track emoji) {
         <button
           type="button"
-          class="rounded-full p-2 text-xl hover:bg-accent transition-colors"
+          class="hover:bg-accent rounded-full p-2 text-xl transition-colors"
           (click)="onQuickReaction(emoji)"
         >
           {{ emoji }}
@@ -18,7 +18,7 @@ import { Component, signal, ViewEncapsulation } from '@angular/core';
       }
     </div>
     @if (lastReaction()) {
-      <p class="text-sm text-muted-foreground mt-4">
+      <p class="text-muted-foreground mt-4 text-sm">
         You reacted with: {{ lastReaction() }}
       </p>
     }

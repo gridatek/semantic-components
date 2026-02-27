@@ -12,7 +12,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
   template: `
     <div class="flex flex-col gap-2">
       <div class="flex items-center gap-4">
-        <span class="text-sm text-muted-foreground">
+        <span class="text-muted-foreground text-sm">
           Click to copy "Hello, World!"
         </span>
         <button

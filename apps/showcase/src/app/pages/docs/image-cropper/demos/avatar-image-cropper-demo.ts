@@ -29,7 +29,7 @@ import {
     >
       <div
         scImageCropperContainer
-        class="rounded-lg overflow-hidden border"
+        class="overflow-hidden rounded-lg border"
       ></div>
 
       <div class="flex gap-8">
@@ -40,28 +40,28 @@ import {
         <div class="space-y-4">
           <p class="text-sm font-medium">Preview:</p>
           <div class="space-y-3">
-            <div class="text-xs text-muted-foreground">Large (100x100)</div>
+            <div class="text-muted-foreground text-xs">Large (100x100)</div>
             <div
               scImageCropperPreview
               [width]="100"
               [height]="100"
-              class="rounded-full overflow-hidden"
+              class="overflow-hidden rounded-full"
             ></div>
 
-            <div class="text-xs text-muted-foreground">Medium (64x64)</div>
+            <div class="text-muted-foreground text-xs">Medium (64x64)</div>
             <div
               scImageCropperPreview
               [width]="64"
               [height]="64"
-              class="rounded-full overflow-hidden"
+              class="overflow-hidden rounded-full"
             ></div>
 
-            <div class="text-xs text-muted-foreground">Small (40x40)</div>
+            <div class="text-muted-foreground text-xs">Small (40x40)</div>
             <div
               scImageCropperPreview
               [width]="40"
               [height]="40"
-              class="rounded-full overflow-hidden"
+              class="overflow-hidden rounded-full"
             ></div>
           </div>
         </div>

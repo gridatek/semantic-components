@@ -24,13 +24,7 @@ import {
   template: `
     <div class="flex items-center gap-4">
       <span class="text-sm font-medium">Quantity:</span>
-      <div
-        scNumberField
-        [(value)]="quantity"
-        [min]="1"
-        [max]="10"
-        class="w-28"
-      >
+      <div scNumberField [(value)]="quantity" [min]="1" [max]="10" class="w-28">
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement></button>
           <input scNumberFieldInput />

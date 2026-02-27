@@ -18,7 +18,7 @@ import {
     <div class="space-y-4">
       <div class="flex items-center gap-4">
         <label
-          class="px-4 py-2 border rounded-md hover:bg-accent cursor-pointer inline-flex items-center gap-2"
+          class="hover:bg-accent inline-flex cursor-pointer items-center gap-2 rounded-md border px-4 py-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ import {
           />
         </label>
         @if (uploadedImageSrc()) {
-          <span class="text-sm text-muted-foreground">Image uploaded</span>
+          <span class="text-muted-foreground text-sm">Image uploaded</span>
         }
       </div>
 
@@ -55,7 +55,7 @@ import {
           <div
             scImageCropperContainer
             #container
-            class="rounded-lg overflow-hidden border"
+            class="overflow-hidden rounded-lg border"
           ></div>
 
           <div class="flex items-center justify-between">
@@ -63,7 +63,7 @@ import {
             <div class="flex gap-2">
               <button
                 type="button"
-                class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+                class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-2"
                 (click)="cropImage(container)"
               >
                 Crop & Download

@@ -27,7 +27,7 @@ import {
     <div
       scImageCompare
       [(position)]="position"
-      class="w-full max-w-2xl aspect-[2/1]"
+      class="aspect-[2/1] w-full max-w-2xl"
     >
       <div scImageCompareContainer>
         <img
@@ -45,7 +45,7 @@ import {
         <div scImageCompareLabel class="top-2 right-2">After</div>
       </div>
     </div>
-    <p class="text-sm text-muted-foreground mt-4">
+    <p class="text-muted-foreground mt-4 text-sm">
       Current position: {{ position() }}%
     </p>
   `,

@@ -165,10 +165,10 @@ import {
 #### Full-Featured Player
 
 ```html
-<div scVideoPlayer class="relative bg-black rounded-lg overflow-hidden">
+<div scVideoPlayer class="relative overflow-hidden rounded-lg bg-black">
   <!-- Buffering Indicator -->
   <div scVideoPlayerBuffering>
-    <div class="size-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+    <div class="size-12 animate-spin rounded-full border-4 border-white/30 border-t-white"></div>
   </div>
 
   <!-- Video -->
@@ -177,7 +177,7 @@ import {
   <!-- Big Play Button -->
   @if (!player.isPlaying()) {
   <button scVideoPlayerBigPlay #player="scVideoPlayer">
-    <div class="size-20 rounded-full bg-white/90 flex items-center justify-center">
+    <div class="flex size-20 items-center justify-center rounded-full bg-white/90">
       <!-- Play icon -->
     </div>
   </button>

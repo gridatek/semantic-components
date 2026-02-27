@@ -47,7 +47,7 @@ import {
         <div class="flex items-center gap-1">
           <button
             type="button"
-            class="p-2 rounded-lg hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            class="hover:bg-muted rounded-lg p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
             [disabled]="currentPage() <= 1"
             (click)="prevPage.emit()"
             aria-label="Previous page"
@@ -63,12 +63,12 @@ import {
                 [value]="currentPage()"
                 (change)="onPageInput($event)"
                 (keydown.enter)="onPageInput($event)"
-                class="w-12 px-2 py-1 text-sm text-center border rounded bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                class="bg-background focus:ring-ring w-12 rounded border px-2 py-1 text-center text-sm focus:ring-2 focus:outline-none"
                 [attr.min]="1"
                 [attr.max]="totalPages()"
                 aria-label="Current page"
               />
-              <span class="text-sm text-muted-foreground">
+              <span class="text-muted-foreground text-sm">
                 / {{ totalPages() }}
               </span>
             </div>
@@ -76,7 +76,7 @@ import {
 
           <button
             type="button"
-            class="p-2 rounded-lg hover:bg-muted disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            class="hover:bg-muted rounded-lg p-2 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
             [disabled]="currentPage() >= totalPages()"
             (click)="nextPage.emit()"
             aria-label="Next page"
@@ -89,7 +89,7 @@ import {
 
       <!-- Separator -->
       @if (config().showNavigation && config().showZoom) {
-        <div class="w-px h-6 bg-border"></div>
+        <div class="bg-border h-6 w-px"></div>
       }
 
       <!-- Zoom -->
@@ -97,7 +97,7 @@ import {
         <div class="flex items-center gap-1">
           <button
             type="button"
-            class="p-2 rounded-lg hover:bg-muted disabled:opacity-50 transition-colors"
+            class="hover:bg-muted rounded-lg p-2 transition-colors disabled:opacity-50"
             (click)="zoomOut.emit()"
             aria-label="Zoom out"
             title="Zoom out"
@@ -106,7 +106,7 @@ import {
           </button>
 
           <select
-            class="px-2 py-1.5 text-sm border rounded bg-background focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer"
+            class="bg-background focus:ring-ring cursor-pointer rounded border px-2 py-1.5 text-sm focus:ring-2 focus:outline-none"
             [value]="zoomLevelValue()"
             (change)="onZoomSelect($event)"
             aria-label="Zoom level"
@@ -118,7 +118,7 @@ import {
 
           <button
             type="button"
-            class="p-2 rounded-lg hover:bg-muted disabled:opacity-50 transition-colors"
+            class="hover:bg-muted rounded-lg p-2 transition-colors disabled:opacity-50"
             (click)="zoomIn.emit()"
             aria-label="Zoom in"
             title="Zoom in"
@@ -135,7 +135,7 @@ import {
       @if (config().showRotate) {
         <button
           type="button"
-          class="p-2 rounded-lg hover:bg-muted transition-colors"
+          class="hover:bg-muted rounded-lg p-2 transition-colors"
           (click)="rotateLeft.emit()"
           aria-label="Rotate left"
           title="Rotate left"
@@ -145,7 +145,7 @@ import {
 
         <button
           type="button"
-          class="p-2 rounded-lg hover:bg-muted transition-colors"
+          class="hover:bg-muted rounded-lg p-2 transition-colors"
           (click)="rotateRight.emit()"
           aria-label="Rotate right"
           title="Rotate right"
@@ -159,14 +159,14 @@ import {
         config().showRotate &&
         (config().showDownload || config().showPrint || config().showFullscreen)
       ) {
-        <div class="w-px h-6 bg-border"></div>
+        <div class="bg-border h-6 w-px"></div>
       }
 
       <!-- Download -->
       @if (config().showDownload) {
         <button
           type="button"
-          class="p-2 rounded-lg hover:bg-muted transition-colors"
+          class="hover:bg-muted rounded-lg p-2 transition-colors"
           (click)="download.emit()"
           aria-label="Download"
           title="Download"
@@ -179,7 +179,7 @@ import {
       @if (config().showPrint) {
         <button
           type="button"
-          class="p-2 rounded-lg hover:bg-muted transition-colors"
+          class="hover:bg-muted rounded-lg p-2 transition-colors"
           (click)="print.emit()"
           aria-label="Print"
           title="Print"
@@ -192,7 +192,7 @@ import {
       @if (config().showFullscreen) {
         <button
           type="button"
-          class="p-2 rounded-lg hover:bg-muted transition-colors"
+          class="hover:bg-muted rounded-lg p-2 transition-colors"
           (click)="toggleFullscreen.emit()"
           [attr.aria-label]="
             isFullscreen() ? 'Exit fullscreen' : 'Enter fullscreen'

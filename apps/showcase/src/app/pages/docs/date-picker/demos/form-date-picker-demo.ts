@@ -11,7 +11,7 @@ import { ScDatePicker } from '@semantic-components/ui';
   selector: 'app-form-date-picker-demo',
   imports: [ScDatePicker],
   template: `
-    <div class="grid gap-4 max-w-sm">
+    <div class="grid max-w-sm gap-4">
       <div class="space-y-2">
         <label class="text-sm font-medium">Date of Birth</label>
         <sc-date-picker

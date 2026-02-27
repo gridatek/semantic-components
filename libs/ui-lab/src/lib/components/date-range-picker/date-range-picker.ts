@@ -34,12 +34,12 @@ export interface ScDateRangePreset {
         [attr.aria-expanded]="dropdownOpen()"
         [attr.aria-haspopup]="'dialog'"
       >
-        <svg siCalendarIcon class="size-4 mr-2"></svg>
+        <svg siCalendarIcon class="mr-2 size-4"></svg>
         <span class="flex-1 text-left">{{ displayValue() }}</span>
         @if (value().from && showClear()) {
           <button
             type="button"
-            class="ml-2 hover:text-foreground"
+            class="hover:text-foreground ml-2"
             (click)="clearSelection($event)"
             aria-label="Clear selection"
           >
@@ -54,7 +54,7 @@ export interface ScDateRangePreset {
           <div class="flex">
             <!-- Presets Sidebar -->
             @if (presets().length > 0) {
-              <div class="flex flex-col gap-1 border-r p-3 min-w-[140px]">
+              <div class="flex min-w-[140px] flex-col gap-1 border-r p-3">
                 @for (preset of presets(); track preset.label) {
                   <button
                     type="button"
@@ -97,8 +97,8 @@ export interface ScDateRangePreset {
               }
 
               <!-- Footer -->
-              <div class="flex items-center justify-between border-t pt-3 mt-3">
-                <div class="text-sm text-muted-foreground">
+              <div class="mt-3 flex items-center justify-between border-t pt-3">
+                <div class="text-muted-foreground text-sm">
                   @if (value().from && value().to) {
                     {{ formatDate(value().from!) }} -
                     {{ formatDate(value().to!) }}
@@ -111,14 +111,14 @@ export interface ScDateRangePreset {
                 <div class="flex gap-2">
                   <button
                     type="button"
-                    class="inline-flex h-8 items-center justify-center rounded-md px-3 text-sm font-medium border border-input hover:bg-accent"
+                    class="border-input hover:bg-accent inline-flex h-8 items-center justify-center rounded-md border px-3 text-sm font-medium"
                     (click)="closeDropdown()"
                   >
                     Cancel
                   </button>
                   <button
                     type="button"
-                    class="inline-flex h-8 items-center justify-center rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                    class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-8 items-center justify-center rounded-md px-3 text-sm font-medium"
                     [disabled]="!value().from || !value().to"
                     (click)="applySelection()"
                   >

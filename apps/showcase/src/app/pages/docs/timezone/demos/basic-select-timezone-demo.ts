@@ -17,7 +17,7 @@ import {
       <div class="max-w-xs">
         <sc-timezone-select></sc-timezone-select>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Current: {{ timezoneService.currentTimezone().label }} ({{
           timezoneService.currentTimezone().offset
         }})

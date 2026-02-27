@@ -9,7 +9,7 @@ import { ScPhoneInput, ScPhoneInputSimple } from '@semantic-components/ui-lab';
   selector: 'app-disabled-phone-input-demo',
   imports: [ScPhoneInput, ScPhoneInputSimple],
   template: `
-    <div class="flex flex-col gap-3 max-w-sm">
+    <div class="flex max-w-sm flex-col gap-3">
       <sc-phone-input [disabled]="true" />
       <sc-phone-input-simple [disabled]="true" />
     </div>

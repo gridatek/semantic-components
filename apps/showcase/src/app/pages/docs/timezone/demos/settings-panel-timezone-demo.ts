@@ -14,7 +14,7 @@ import { ScTimezoneSelect } from '@semantic-components/ui-lab';
         <div class="flex items-center justify-between">
           <div class="space-y-0.5">
             <label class="text-sm font-medium">Timezone</label>
-            <p class="text-sm text-muted-foreground">Select your timezone</p>
+            <p class="text-muted-foreground text-sm">Select your timezone</p>
           </div>
           <sc-timezone-select class="w-56"></sc-timezone-select>
         </div>

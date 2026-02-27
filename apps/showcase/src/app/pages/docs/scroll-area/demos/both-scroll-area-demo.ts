@@ -11,10 +11,10 @@ import { ScScrollArea } from '@semantic-components/ui';
   template: `
     <div scScrollArea class="h-72 w-72 rounded-md border">
       <div class="p-4" style="width: 500px;">
-        <h4 class="mb-4 text-sm font-medium leading-none">
+        <h4 class="mb-4 text-sm leading-none font-medium">
           Content with both scrollbars
         </h4>
-        <p class="text-sm text-muted-foreground leading-relaxed">
+        <p class="text-muted-foreground text-sm leading-relaxed">
           This content is wider and taller than the container, so both
           scrollbars are visible. You can scroll both horizontally and
           vertically to see all the content.

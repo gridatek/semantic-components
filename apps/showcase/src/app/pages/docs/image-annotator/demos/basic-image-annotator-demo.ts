@@ -17,7 +17,7 @@ import { ScImageAnnotator, type Annotation } from '@semantic-components/ui-lab';
       (annotationsChange)="onAnnotationsChange($event)"
       (save)="onSave($event)"
     />
-    <p class="mt-2 text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-2 text-sm">
       Annotations: {{ annotationCount() }}
     </p>
   `,

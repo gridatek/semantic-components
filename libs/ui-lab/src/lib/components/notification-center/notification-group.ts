@@ -7,7 +7,11 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiChevronDownIcon, SiCircleCheckIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import {
+  SiChevronDownIcon,
+  SiCircleCheckIcon,
+  SiTrash2Icon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { ScNotificationItem } from './notification-item';
 import type {
@@ -18,29 +22,41 @@ import type {
 
 @Component({
   selector: 'sc-notification-group',
-  imports: [ScNotificationItem, SiChevronDownIcon, SiCircleCheckIcon, SiTrash2Icon],
+  imports: [
+    ScNotificationItem,
+    SiChevronDownIcon,
+    SiCircleCheckIcon,
+    SiTrash2Icon,
+  ],
   template: `
     <div [class]="groupClass()">
       <!-- Group Header -->
       <button
         type="button"
-        class="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors"
+        class="text-muted-foreground hover:text-foreground hover:bg-muted/50 flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors"
         (click)="toggleCollapse()"
         [attr.aria-expanded]="!collapsed()"
         [attr.aria-controls]="'group-' + group().id"
       >
         <div class="flex items-center gap-2">
-          <svg siChevronDownIcon [class]="collapsed() ? '-rotate-90 transition-transform' : 'rotate-0 transition-transform'"></svg>
+          <svg
+            siChevronDownIcon
+            [class]="
+              collapsed()
+                ? '-rotate-90 transition-transform'
+                : 'rotate-0 transition-transform'
+            "
+          ></svg>
           @if (group().icon) {
             <span [innerHTML]="group().icon"></span>
           }
           <span>{{ group().title }}</span>
-          <span class="px-1.5 py-0.5 text-xs bg-muted rounded-full">
+          <span class="bg-muted rounded-full px-1.5 py-0.5 text-xs">
             {{ notifications().length }}
           </span>
           @if (unreadCount() > 0) {
             <span
-              class="px-1.5 py-0.5 text-xs bg-primary text-primary-foreground rounded-full"
+              class="bg-primary text-primary-foreground rounded-full px-1.5 py-0.5 text-xs"
             >
               {{ unreadCount() }} new
             </span>
@@ -51,7 +67,7 @@ import type {
           <div class="flex items-center gap-1">
             <button
               type="button"
-              class="p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              class="hover:bg-muted text-muted-foreground hover:text-foreground rounded p-1 transition-colors"
               (click)="onMarkAllRead($event)"
               [attr.aria-label]="'Mark all as read in ' + group().title"
             >
@@ -59,7 +75,7 @@ import type {
             </button>
             <button
               type="button"
-              class="p-1 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+              class="hover:bg-muted text-muted-foreground hover:text-foreground rounded p-1 transition-colors"
               (click)="onClearAll($event)"
               [attr.aria-label]="'Clear all in ' + group().title"
             >
@@ -89,7 +105,7 @@ import type {
           }
 
           @if (notifications().length === 0) {
-            <p class="px-3 py-4 text-sm text-muted-foreground text-center">
+            <p class="text-muted-foreground px-3 py-4 text-center text-sm">
               No notifications
             </p>
           }

@@ -62,7 +62,7 @@ import {
     <div
       scVideoPlayer
       #player="scVideoPlayer"
-      class="relative bg-black rounded-lg overflow-hidden max-w-2xl"
+      class="relative max-w-2xl overflow-hidden rounded-lg bg-black"
     >
       <!-- Buffering Indicator -->
       <div scVideoPlayerBuffering>
@@ -80,7 +80,7 @@ import {
       @if (!player.isPlaying() && !player.isBuffering()) {
         <button scVideoPlayerBigPlay>
           <div
-            class="size-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform"
+            class="flex size-20 items-center justify-center rounded-full bg-white/90 transition-transform group-hover:scale-110"
           >
             <svg siPlayIcon></svg>
           </div>

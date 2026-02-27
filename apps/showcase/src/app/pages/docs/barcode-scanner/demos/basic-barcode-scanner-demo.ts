@@ -12,12 +12,12 @@ import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
   template: `
     <sc-barcode-scanner (detected)="onDetected($event)" class="max-w-md" />
     @if (lastScanned()) {
-      <div class="p-4 bg-muted rounded-lg max-w-md mt-3">
-        <p class="text-sm text-muted-foreground mb-1">Last scanned:</p>
+      <div class="bg-muted mt-3 max-w-md rounded-lg p-4">
+        <p class="text-muted-foreground mb-1 text-sm">Last scanned:</p>
         <p class="font-mono text-sm break-all">
           {{ lastScanned()?.rawValue }}
         </p>
-        <p class="text-xs text-muted-foreground mt-1">
+        <p class="text-muted-foreground mt-1 text-xs">
           Format: {{ lastScanned()?.format }}
         </p>
       </div>

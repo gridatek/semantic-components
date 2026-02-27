@@ -42,25 +42,25 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 <li class="row-span-3">
                   <a
                     scNavigationMenuLink
-                    class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    class="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none select-none focus:shadow-md"
                     href="#"
                   >
                     <svg siSparklesIcon class="size-6"></svg>
-                    <div class="mb-2 mt-4 text-lg font-medium">
+                    <div class="mt-4 mb-2 text-lg font-medium">
                       SC Components
                     </div>
-                    <p class="text-sm leading-tight text-muted-foreground">
+                    <p class="text-muted-foreground text-sm leading-tight">
                       Beautiful Angular components built with Tailwind CSS.
                     </p>
                   </a>
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">
+                    <div class="text-sm leading-none font-medium">
                       Introduction
                     </div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       Re-usable components built using Angular and Tailwind CSS.
                     </p>
@@ -68,11 +68,11 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">
+                    <div class="text-sm leading-none font-medium">
                       Installation
                     </div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       How to install dependencies and structure your app.
                     </p>
@@ -80,11 +80,11 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">
+                    <div class="text-sm leading-none font-medium">
                       Typography
                     </div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       Styles for headings, paragraphs, lists, and more.
                     </p>
@@ -103,11 +103,11 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
               <ul scNavigationMenuGrid>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">
+                    <div class="text-sm leading-none font-medium">
                       Alert Dialog
                     </div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       A modal dialog that interrupts the user with important
                       content.
@@ -116,11 +116,11 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">
+                    <div class="text-sm leading-none font-medium">
                       Hover Card
                     </div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       For sighted users to preview content behind a link.
                     </p>
@@ -128,9 +128,9 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">Progress</div>
+                    <div class="text-sm leading-none font-medium">Progress</div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       Displays an indicator showing completion progress.
                     </p>
@@ -138,11 +138,11 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">
+                    <div class="text-sm leading-none font-medium">
                       Scroll Area
                     </div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       Visually or semantically separates content.
                     </p>
@@ -150,9 +150,9 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">Tabs</div>
+                    <div class="text-sm leading-none font-medium">Tabs</div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       A set of layered sections of content.
                     </p>
@@ -160,9 +160,9 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
                 </li>
                 <li>
                   <a scNavigationMenuLink href="#">
-                    <div class="text-sm font-medium leading-none">Tooltip</div>
+                    <div class="text-sm leading-none font-medium">Tooltip</div>
                     <p
-                      class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                      class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                     >
                       A popup that displays information on hover.
                     </p>

@@ -89,7 +89,7 @@ interface FormModel {
         </div>
       </div>
 
-      <div class="mt-6 rounded-md bg-muted p-4">
+      <div class="bg-muted mt-6 rounded-md p-4">
         <p class="text-sm font-medium">Form Values:</p>
         <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>

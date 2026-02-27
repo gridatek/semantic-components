@@ -17,9 +17,9 @@ import {
       @for (brand of brands; track brand) {
         <div
           scMarqueeItem
-          class="flex h-16 w-32 items-center justify-center rounded-lg border bg-background px-4"
+          class="bg-background flex h-16 w-32 items-center justify-center rounded-lg border px-4"
         >
-          <span class="text-lg font-semibold text-muted-foreground">
+          <span class="text-muted-foreground text-lg font-semibold">
             {{ brand }}
           </span>
         </div>
@@ -28,9 +28,9 @@ import {
         @for (brand of brands; track brand) {
           <div
             scMarqueeItem
-            class="flex h-16 w-32 items-center justify-center rounded-lg border bg-background px-4"
+            class="bg-background flex h-16 w-32 items-center justify-center rounded-lg border px-4"
           >
-            <span class="text-lg font-semibold text-muted-foreground">
+            <span class="text-muted-foreground text-lg font-semibold">
               {{ brand }}
             </span>
           </div>

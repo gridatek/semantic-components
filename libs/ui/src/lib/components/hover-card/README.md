@@ -32,10 +32,10 @@ ScHoverCardProvider (Root)
 
 | Component             | Selector                         | Description                                     |
 | --------------------- | -------------------------------- | ----------------------------------------------- |
-| `ScHoverCardProvider` | `div[scHoverCardProvider]`    | Root wrapper with state, configuration, overlay |
-| `ScHoverCardTrigger`  | `[scHoverCardTrigger]`        | Element that triggers hover card on hover/focus |
+| `ScHoverCardProvider` | `div[scHoverCardProvider]`       | Root wrapper with state, configuration, overlay |
+| `ScHoverCardTrigger`  | `[scHoverCardTrigger]`           | Element that triggers hover card on hover/focus |
 | `ScHoverCardPortal`   | `ng-template[scHoverCardPortal]` | Template directive for portal content           |
-| `ScHoverCard`         | `div[scHoverCard]`             | The card content displayed on hover             |
+| `ScHoverCard`         | `div[scHoverCard]`               | The card content displayed on hover             |
 
 ## Inputs
 
@@ -59,7 +59,7 @@ ScHoverCardProvider (Root)
         <img src="avatar.jpg" class="size-12 rounded-full" />
         <div>
           <h4 class="font-semibold">@username</h4>
-          <p class="text-sm text-muted-foreground">Software developer at Example Corp.</p>
+          <p class="text-muted-foreground text-sm">Software developer at Example Corp.</p>
         </div>
       </div>
     </div>

@@ -254,7 +254,7 @@ export class MyComponent {
       @for (i of items; track i) {
       <div scCarouselItem class="basis-1/2 pt-1">
         <div class="p-1">
-          <div class="flex items-center justify-center rounded-lg border bg-card p-6">
+          <div class="bg-card flex items-center justify-center rounded-lg border p-6">
             <span class="text-3xl font-semibold">{{ i }}</span>
           </div>
         </div>

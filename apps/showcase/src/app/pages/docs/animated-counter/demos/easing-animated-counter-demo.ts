@@ -13,7 +13,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
     <div class="space-y-3">
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
         <div class="text-center">
-          <p class="mb-2 text-xs text-muted-foreground">Linear</p>
+          <p class="text-muted-foreground mb-2 text-xs">Linear</p>
           <sc-animated-counter
             [value]="value()"
             easing="linear"
@@ -22,7 +22,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
           />
         </div>
         <div class="text-center">
-          <p class="mb-2 text-xs text-muted-foreground">Ease In</p>
+          <p class="text-muted-foreground mb-2 text-xs">Ease In</p>
           <sc-animated-counter
             [value]="value()"
             easing="easeIn"
@@ -31,7 +31,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
           />
         </div>
         <div class="text-center">
-          <p class="mb-2 text-xs text-muted-foreground">Ease Out</p>
+          <p class="text-muted-foreground mb-2 text-xs">Ease Out</p>
           <sc-animated-counter
             [value]="value()"
             easing="easeOut"
@@ -40,7 +40,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
           />
         </div>
         <div class="text-center">
-          <p class="mb-2 text-xs text-muted-foreground">Ease In/Out</p>
+          <p class="text-muted-foreground mb-2 text-xs">Ease In/Out</p>
           <sc-animated-counter
             [value]="value()"
             easing="easeInOut"
@@ -50,7 +50,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
         </div>
       </div>
       <button
-        class="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:bg-primary/90"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
         (click)="animate()"
       >
         Animate All

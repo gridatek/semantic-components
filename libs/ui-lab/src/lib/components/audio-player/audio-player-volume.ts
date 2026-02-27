@@ -6,7 +6,11 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiVolume1Icon, SiVolume2Icon, SiVolumeXIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiVolume1Icon,
+  SiVolume2Icon,
+  SiVolumeXIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
@@ -17,15 +21,15 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     <button
       type="button"
       (click)="player.toggleMute()"
-      class="size-8 rounded-full flex items-center justify-center hover:bg-accent transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+      class="hover:bg-accent focus:ring-ring flex size-8 items-center justify-center rounded-full transition-colors focus:ring-2 focus:outline-none"
       [attr.aria-label]="player.isMuted() ? 'Unmute' : 'Mute'"
     >
       @if (player.isMuted() || player.volume() === 0) {
-        <svg siVolumeXIcon class="size-4 pointer-events-none"></svg>
+        <svg siVolumeXIcon class="pointer-events-none size-4"></svg>
       } @else if (player.volume() < 0.5) {
-        <svg siVolume1Icon class="size-4 pointer-events-none"></svg>
+        <svg siVolume1Icon class="pointer-events-none size-4"></svg>
       } @else {
-        <svg siVolume2Icon class="size-4 pointer-events-none"></svg>
+        <svg siVolume2Icon class="pointer-events-none size-4"></svg>
       }
     </button>
     <input
@@ -35,7 +39,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       step="0.01"
       [value]="player.volume()"
       (input)="onVolumeChange($event)"
-      class="w-20 h-1 accent-primary cursor-pointer"
+      class="accent-primary h-1 w-20 cursor-pointer"
       aria-label="Volume"
     />
   `,

@@ -46,11 +46,11 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
 
       @if (previewSignature()) {
         <div>
-          <p class="text-sm font-medium mb-2">Preview:</p>
+          <p class="mb-2 text-sm font-medium">Preview:</p>
           <img
             [src]="previewSignature()"
             alt="Signature preview"
-            class="border rounded-lg max-w-[200px]"
+            class="max-w-[200px] rounded-lg border"
           />
         </div>
       }

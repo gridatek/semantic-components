@@ -44,7 +44,7 @@ import { ScLabel } from '@semantic-components/ui';
       </div>
     </div>
 
-    <p class="mt-4 text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-4 text-sm">
       Current price: {{ '$' + (price() ?? 0).toFixed(2) }}
     </p>
   `,

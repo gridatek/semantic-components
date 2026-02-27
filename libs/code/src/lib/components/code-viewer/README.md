@@ -22,9 +22,9 @@ ScCodeViewer (Root - div[scCodeViewer])
 
 ## Components
 
-| Component             | Selector                      | Description                      |
-| --------------------- | ----------------------------- | -------------------------------- |
-| `ScCodeViewer`        | `div[scCodeViewer]`         | Root container with border       |
+| Component             | Selector                   | Description                      |
+| --------------------- | -------------------------- | -------------------------------- |
+| `ScCodeViewer`        | `div[scCodeViewer]`        | Root container with border       |
 | `ScCodeViewerHeader`  | `div[scCodeViewerHeader]`  | Header bar with border           |
 | `ScCodeViewerLabel`   | `span[scCodeViewerLabel]`  | Label for filename or language   |
 | `ScCodeViewerContent` | `div[scCodeViewerContent]` | Content with syntax highlighting |
@@ -136,7 +136,7 @@ The content component with Shiki syntax highlighting.
     <div class="flex items-center gap-2">
       <svg class="size-4"><!-- icon --></svg>
       <span scCodeViewerLabel>{{ filename }}</span>
-      <span class="text-xs text-muted-foreground">({{ lines }} lines)</span>
+      <span class="text-muted-foreground text-xs">({{ lines }} lines)</span>
     </div>
     <div class="flex gap-2">
       <button>Download</button>

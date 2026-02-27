@@ -10,7 +10,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   selector: 'app-form-checkbox-demo',
   imports: [ScCheckboxField, ScCheckbox, ScLabel],
   template: `
-    <div class="rounded-lg border p-6 max-w-md">
+    <div class="max-w-md rounded-lg border p-6">
       <div class="space-y-4">
         <h4 class="font-semibold">Notification Preferences</h4>
         <div class="space-y-4">

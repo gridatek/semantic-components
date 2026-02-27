@@ -17,7 +17,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     <div class="flex items-center gap-2">
       <button
         type="button"
-        class="inline-flex size-8 items-center justify-center rounded-md border bg-background hover:bg-accent disabled:opacity-50"
+        class="bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
         [disabled]="cropper.zoom() <= 0.1"
         (click)="cropper.zoomOut()"
         aria-label="Zoom out"
@@ -25,7 +25,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
         <svg siZoomOutIcon class="size-4"></svg>
       </button>
 
-      <div class="flex items-center gap-2 min-w-[120px]">
+      <div class="flex min-w-[120px] items-center gap-2">
         <input
           type="range"
           min="0.1"
@@ -33,13 +33,13 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
           step="0.1"
           [value]="cropper.zoom()"
           (input)="onZoomChange($event)"
-          class="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
+          class="bg-muted h-2 w-full cursor-pointer appearance-none rounded-lg"
         />
       </div>
 
       <button
         type="button"
-        class="inline-flex size-8 items-center justify-center rounded-md border bg-background hover:bg-accent disabled:opacity-50"
+        class="bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"
         [disabled]="cropper.zoom() >= 3"
         (click)="cropper.zoomIn()"
         aria-label="Zoom in"
@@ -47,7 +47,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
         <svg siZoomInIcon class="size-4"></svg>
       </button>
 
-      <span class="text-sm text-muted-foreground min-w-[50px] text-center">
+      <span class="text-muted-foreground min-w-[50px] text-center text-sm">
         {{ (cropper.zoom() * 100).toFixed(0) }}%
       </span>
     </div>

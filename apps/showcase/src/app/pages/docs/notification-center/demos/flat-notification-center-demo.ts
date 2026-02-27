@@ -18,7 +18,7 @@ import {
       scNotificationCenter
       [(notifications)]="notifications"
       [showFilters]="true"
-      class="max-w-md h-[400px]"
+      class="h-[400px] max-w-md"
     >
       <div scNotificationCenterContainer class="h-full"></div>
     </div>

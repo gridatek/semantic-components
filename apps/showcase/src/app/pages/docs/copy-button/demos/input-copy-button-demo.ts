@@ -9,7 +9,7 @@ import { ScCopyInput } from '@semantic-components/ui-lab';
   selector: 'app-input-copy-button-demo',
   imports: [ScCopyInput],
   template: `
-    <div class="space-y-3 max-w-md">
+    <div class="max-w-md space-y-3">
       <div>
         <label class="text-sm font-medium">Share Link</label>
         <div

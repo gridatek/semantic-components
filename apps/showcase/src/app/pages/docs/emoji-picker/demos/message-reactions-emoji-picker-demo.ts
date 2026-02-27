@@ -13,18 +13,18 @@ import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
         @for (reaction of messageReactions(); track reaction.emoji) {
           <button
             type="button"
-            class="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-sm hover:bg-accent"
+            class="hover:bg-accent inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-sm"
             (click)="incrementReaction(reaction.emoji)"
           >
             <span>{{ reaction.emoji }}</span>
-            <span class="text-xs text-muted-foreground">
+            <span class="text-muted-foreground text-xs">
               {{ reaction.count }}
             </span>
           </button>
         }
         <button
           type="button"
-          class="rounded-full p-1 hover:bg-accent"
+          class="hover:bg-accent rounded-full p-1"
           (click)="showReactionPicker.set(!showReactionPicker())"
         >
           <svg
@@ -33,7 +33,7 @@ import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            class="size-4 text-muted-foreground"
+            class="text-muted-foreground size-4"
           >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" x2="12" y1="8" y2="16" />

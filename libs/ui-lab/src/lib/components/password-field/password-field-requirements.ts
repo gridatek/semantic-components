@@ -35,9 +35,17 @@ const DEFAULT_REQUIREMENTS: ScPasswordRequirement[] = [
         @for (req of requirements(); track req.label) {
           <li [class]="requirementClass(req.test(passwordField.value()))">
             @if (req.test(passwordField.value())) {
-              <svg siCheckIcon class="inline size-3 mr-1" aria-hidden="true"></svg>
+              <svg
+                siCheckIcon
+                class="mr-1 inline size-3"
+                aria-hidden="true"
+              ></svg>
             } @else {
-              <svg siCircleIcon class="inline size-3 mr-1" aria-hidden="true"></svg>
+              <svg
+                siCircleIcon
+                class="mr-1 inline size-3"
+                aria-hidden="true"
+              ></svg>
             }
             {{ req.label }}
           </li>

@@ -10,7 +10,7 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
   selector: 'app-constrained-date-range-picker-demo',
   imports: [ScDateRangePicker],
   template: `
-    <p class="text-sm text-muted-foreground mb-4">
+    <p class="text-muted-foreground mb-4 text-sm">
       Restrict selection to dates within the last 30 days.
     </p>
     <sc-date-range-picker

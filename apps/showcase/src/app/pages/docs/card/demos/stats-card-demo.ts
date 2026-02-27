@@ -22,7 +22,7 @@ import {
           <h3 scCardTitle class="text-2xl">$45,231.89</h3>
         </div>
         <div scCardBody>
-          <p class="text-xs text-muted-foreground">+20.1% from last month</p>
+          <p class="text-muted-foreground text-xs">+20.1% from last month</p>
         </div>
       </div>
       <div scCard>
@@ -31,7 +31,7 @@ import {
           <h3 scCardTitle class="text-2xl">+2,350</h3>
         </div>
         <div scCardBody>
-          <p class="text-xs text-muted-foreground">+180.1% from last month</p>
+          <p class="text-muted-foreground text-xs">+180.1% from last month</p>
         </div>
       </div>
       <div scCard>
@@ -40,7 +40,7 @@ import {
           <h3 scCardTitle class="text-2xl">+573</h3>
         </div>
         <div scCardBody>
-          <p class="text-xs text-muted-foreground">+201 since last hour</p>
+          <p class="text-muted-foreground text-xs">+201 since last hour</p>
         </div>
       </div>
     </div>

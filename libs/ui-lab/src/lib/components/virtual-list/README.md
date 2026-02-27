@@ -16,7 +16,7 @@ import type { VirtualListItem, VirtualListRange } from '@/ui/virtual-list';
 ```html
 <sc-virtual-list [items]="items" [itemHeight]="48" [height]="400">
   <ng-template let-item let-index="index">
-    <div class="p-3 border-b">{{ index }}: {{ item }}</div>
+    <div class="border-b p-3">{{ index }}: {{ item }}</div>
   </ng-template>
 </sc-virtual-list>
 ```
@@ -30,11 +30,11 @@ items = Array.from({ length: 10000 }, (_, i) => `Item ${i + 1}`);
 ```html
 <sc-virtual-list [items]="users" [itemHeight]="64">
   <ng-template let-user let-index="index">
-    <div class="flex items-center gap-3 p-3 border-b">
-      <img [src]="user.avatar" class="w-10 h-10 rounded-full" />
+    <div class="flex items-center gap-3 border-b p-3">
+      <img [src]="user.avatar" class="h-10 w-10 rounded-full" />
       <div>
         <div class="font-medium">{{ user.name }}</div>
-        <div class="text-sm text-muted-foreground">{{ user.email }}</div>
+        <div class="text-muted-foreground text-sm">{{ user.email }}</div>
       </div>
     </div>
   </ng-template>

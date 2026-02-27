@@ -25,7 +25,7 @@ import {
         id="spotlight-cta"
         type="button"
         (click)="showCTA()"
-        class="px-6 py-3 bg-gradient-to-r from-primary to-purple-600 text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+        class="from-primary text-primary-foreground rounded-lg bg-gradient-to-r to-purple-600 px-6 py-3 font-medium transition-opacity hover:opacity-90"
       >
         Try Premium Feature
       </button>
@@ -45,14 +45,14 @@ import {
           <button
             type="button"
             (click)="spotlight.close()"
-            class="px-3 py-1.5 text-sm border rounded-md hover:bg-accent"
+            class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
           >
             Not Now
           </button>
           <button
             type="button"
             (click)="spotlight.close()"
-            class="px-3 py-1.5 text-sm bg-gradient-to-r from-primary to-purple-600 text-primary-foreground rounded-md"
+            class="from-primary text-primary-foreground rounded-md bg-gradient-to-r to-purple-600 px-3 py-1.5 text-sm"
           >
             Upgrade Now
           </button>

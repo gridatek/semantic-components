@@ -13,16 +13,16 @@ import { Logo } from '../logo/logo';
   selector: 'app-footer',
   imports: [Logo, ScLink, SiGithubIcon, SiHeartIcon],
   template: `
-    <footer class="border-t py-8 px-4 md:px-6 lg:px-8">
+    <footer class="border-t px-4 py-8 md:px-6 lg:px-8">
       <div
-        class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4"
+        class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row"
       >
         <div class="flex items-center gap-2">
           <svg app-logo class="size-5"></svg>
           <span class="font-semibold">Semantic Components</span>
         </div>
         <div class="flex items-center gap-4">
-          <p class="text-sm text-muted-foreground">
+          <p class="text-muted-foreground text-sm">
             Built with
             <svg
               siHeartIcon

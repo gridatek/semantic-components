@@ -13,7 +13,7 @@ import {
   selector: 'app-basic-virtual-list-demo',
   imports: [ScVirtualList],
   template: `
-    <div class="border rounded-lg overflow-hidden">
+    <div class="overflow-hidden rounded-lg border">
       <sc-virtual-list
         [items]="items()"
         [itemHeight]="48"
@@ -22,9 +22,9 @@ import {
       >
         <ng-template let-item let-index="index">
           <div
-            class="flex items-center px-4 h-full border-b hover:bg-muted/50 transition-colors"
+            class="hover:bg-muted/50 flex h-full items-center border-b px-4 transition-colors"
           >
-            <span class="w-16 text-muted-foreground text-sm">
+            <span class="text-muted-foreground w-16 text-sm">
               {{ index + 1 }}
             </span>
             <span class="flex-1">{{ item }}</span>
@@ -32,7 +32,7 @@ import {
         </ng-template>
       </sc-virtual-list>
     </div>
-    <p class="mt-2 text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-2 text-sm">
       Rendering {{ items().length.toLocaleString() }} items. Visible range:
       {{ visibleRange().start }} - {{ visibleRange().end }}
     </p>

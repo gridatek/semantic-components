@@ -27,7 +27,7 @@ import {
       <div
         scImageCropperContainer
         #container
-        class="rounded-lg overflow-hidden border"
+        class="overflow-hidden rounded-lg border"
       ></div>
 
       <div scImageCropperControls></div>
@@ -35,14 +35,14 @@ import {
       <div class="flex gap-4">
         <button
           type="button"
-          class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-2"
           (click)="cropImage(container)"
         >
           Crop Image
         </button>
         <button
           type="button"
-          class="px-4 py-2 border rounded-md hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-4 py-2"
           (click)="container.resetCropArea()"
         >
           Reset

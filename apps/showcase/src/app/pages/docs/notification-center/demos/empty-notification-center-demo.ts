@@ -19,7 +19,7 @@ import {
       [(notifications)]="notifications"
       emptyTitle="All caught up!"
       emptyDescription="No new notifications to show."
-      class="max-w-md h-[300px]"
+      class="h-[300px] max-w-md"
     >
       <div scNotificationCenterContainer class="h-full"></div>
     </div>

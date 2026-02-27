@@ -157,16 +157,14 @@ const SAMPLE_DATA: User[] = [
               <th scDataTableHead class="w-[50px]">
                 <input
                   type="checkbox"
-                  class="size-4 rounded border-primary"
+                  class="border-primary size-4 rounded"
                   [checked]="isAllSelected()"
                   [indeterminate]="isSomeSelected()"
                   (change)="toggleAllSelection()"
                 />
               </th>
               <th scDataTableHead columnId="name" [sortable]="true">Name</th>
-              <th scDataTableHead columnId="email" [sortable]="true">
-                Email
-              </th>
+              <th scDataTableHead columnId="email" [sortable]="true">Email</th>
               <th scDataTableHead columnId="role" [sortable]="true">Role</th>
               <th scDataTableHead columnId="status" [sortable]="true">
                 Status
@@ -186,7 +184,7 @@ const SAMPLE_DATA: User[] = [
                 <td scDataTableCell>
                   <input
                     type="checkbox"
-                    class="size-4 rounded border-primary"
+                    class="border-primary size-4 rounded"
                     [checked]="rowSelection().has(getRowIndex(row))"
                     (change)="toggleRowSelection(getRowIndex(row))"
                   />
@@ -217,7 +215,7 @@ const SAMPLE_DATA: User[] = [
                 <td scDataTableCell>
                   <button
                     type="button"
-                    class="inline-flex size-8 items-center justify-center rounded-md hover:bg-muted"
+                    class="hover:bg-muted inline-flex size-8 items-center justify-center rounded-md"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -236,7 +234,7 @@ const SAMPLE_DATA: User[] = [
               </tr>
             } @empty {
               <tr>
-                <td colspan="7" class="h-24 text-center text-muted-foreground">
+                <td colspan="7" class="text-muted-foreground h-24 text-center">
                   No results found.
                 </td>
               </tr>

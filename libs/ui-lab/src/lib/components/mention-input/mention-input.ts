@@ -60,14 +60,14 @@ export interface MentionUser {
                 />
               } @else {
                 <div
-                  class="size-6 rounded-full bg-muted flex items-center justify-center text-xs font-medium"
+                  class="bg-muted flex size-6 items-center justify-center rounded-full text-xs font-medium"
                 >
                   {{ user.name.charAt(0).toUpperCase() }}
                 </div>
               }
               <div class="flex-1 text-left">
                 <div class="text-sm font-medium">{{ user.name }}</div>
-                <div class="text-xs text-muted-foreground">
+                <div class="text-muted-foreground text-xs">
                   &#64;{{ user.username }}
                 </div>
               </div>

@@ -26,15 +26,15 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
   template: `
     <div class="space-y-4">
       <div>
-        <label class="block text-sm font-medium mb-1">Full Name</label>
+        <label class="mb-1 block text-sm font-medium">Full Name</label>
         <input
           type="text"
-          class="w-full max-w-sm px-3 py-2 border rounded-md"
+          class="w-full max-w-sm rounded-md border px-3 py-2"
           placeholder="Enter your name"
         />
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1">Signature</label>
+        <label class="mb-1 block text-sm font-medium">Signature</label>
         <div scSignaturePad #pad="scSignaturePad" class="relative inline-block">
           <canvas scSignaturePadCanvas [width]="400" [height]="150"></canvas>
 
@@ -49,9 +49,9 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
         </div>
 
         @if (pad.isEmpty()) {
-          <p class="text-sm text-muted-foreground mt-1">Please sign above</p>
+          <p class="text-muted-foreground mt-1 text-sm">Please sign above</p>
         } @else {
-          <p class="text-sm text-green-600 mt-1">Signature captured</p>
+          <p class="mt-1 text-sm text-green-600">Signature captured</p>
         }
       </div>
     </div>

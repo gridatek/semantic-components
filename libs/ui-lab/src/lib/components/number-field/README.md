@@ -277,7 +277,7 @@ Button to decrease the value by the step amount.
       <button scNumberFieldIncrement></button>
     </div>
   </div>
-  <p class="text-sm text-muted-foreground">Your age in years</p>
+  <p class="text-muted-foreground text-sm">Your age in years</p>
 </div>
 ```
 

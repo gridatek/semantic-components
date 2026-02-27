@@ -16,7 +16,7 @@ import { ScSortableItem, ScSortableList } from '@semantic-components/ui-lab';
             scSortableItem
             [index]="i"
             [item]="item"
-            class="flex items-center gap-3 rounded-md border bg-muted/50 p-3 opacity-60"
+            class="bg-muted/50 flex items-center gap-3 rounded-md border p-3 opacity-60"
           >
             <span class="text-sm">{{ item }}</span>
           </div>

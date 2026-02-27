@@ -191,7 +191,7 @@ Button to toggle password visibility.
       <button scPasswordFieldToggle></button>
     </div>
   </div>
-  <p class="text-sm text-muted-foreground">Must be at least 8 characters</p>
+  <p class="text-muted-foreground text-sm">Must be at least 8 characters</p>
 </div>
 ```
 

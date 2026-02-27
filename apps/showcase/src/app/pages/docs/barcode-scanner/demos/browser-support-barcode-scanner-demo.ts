@@ -8,14 +8,14 @@ import {
   selector: 'app-browser-support-barcode-scanner-demo',
   template: `
     <div class="space-y-3">
-      <ul class="text-sm space-y-1 list-disc list-inside text-muted-foreground">
+      <ul class="text-muted-foreground list-inside list-disc space-y-1 text-sm">
         <li>Chrome 83+ (desktop and Android)</li>
         <li>Edge 83+</li>
         <li>Opera 69+</li>
         <li>Chrome for Android</li>
         <li>Samsung Internet</li>
       </ul>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Not supported in Firefox or Safari (as of 2024).
       </p>
     </div>

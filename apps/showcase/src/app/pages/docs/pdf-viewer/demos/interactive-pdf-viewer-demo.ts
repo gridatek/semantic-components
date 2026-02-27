@@ -58,18 +58,18 @@ import {
           type="url"
           [(ngModel)]="pdfUrl"
           placeholder="Enter PDF URL..."
-          class="flex-1 px-3 py-2 text-sm border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+          class="bg-background focus:ring-ring flex-1 rounded-lg border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
         />
         <button
           type="button"
-          class="px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
           (click)="loadPdf()"
         >
           Load PDF
         </button>
       </div>
 
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Enter a PDF URL or use one of the samples below
       </p>
 
@@ -77,7 +77,7 @@ import {
         @for (sample of samplePdfs; track sample.url) {
           <button
             type="button"
-            class="px-3 py-1.5 text-xs font-medium border rounded-lg hover:bg-muted transition-colors"
+            class="hover:bg-muted rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
             (click)="pdfUrl = sample.url; loadPdf()"
           >
             {{ sample.name }}
@@ -237,7 +237,7 @@ import {
       </div>
 
       <!-- Status display using template reference -->
-      <div class="flex gap-4 text-sm text-muted-foreground">
+      <div class="text-muted-foreground flex gap-4 text-sm">
         <span>Loading: {{ viewer.isLoading() }}</span>
         <span>
           Page: {{ viewer.currentPage() }} / {{ viewer.totalPages() }}

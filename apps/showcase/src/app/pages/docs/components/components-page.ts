@@ -45,7 +45,7 @@ import { ScHeading } from '@semantic-components/ui';
         <button
           scToggleGroupItem
           value="All"
-          class="data-[state=on]:border data-[state=on]:border-input"
+          class="data-[state=on]:border-input data-[state=on]:border"
         >
           All
         </button>
@@ -53,7 +53,7 @@ import { ScHeading } from '@semantic-components/ui';
           <button
             scToggleGroupItem
             [value]="category"
-            class="data-[state=on]:border data-[state=on]:border-input"
+            class="data-[state=on]:border-input data-[state=on]:border"
           >
             {{ category }}
           </button>
@@ -64,12 +64,12 @@ import { ScHeading } from '@semantic-components/ui';
         @for (item of filteredComponents(); track item.path) {
           <a
             [routerLink]="'/docs/components/' + item.path"
-            class="group relative rounded-lg border p-6 hover:bg-accent transition-colors"
+            class="group hover:bg-accent relative rounded-lg border p-6 transition-colors"
           >
-            <h3 class="font-semibold leading-none tracking-tight">
+            <h3 class="leading-none font-semibold tracking-tight">
               {{ item.name }}
             </h3>
-            <p class="text-sm text-muted-foreground mt-2">
+            <p class="text-muted-foreground mt-2 text-sm">
               {{ item.description }}
             </p>
             <div class="mt-3 flex flex-wrap items-center gap-2">

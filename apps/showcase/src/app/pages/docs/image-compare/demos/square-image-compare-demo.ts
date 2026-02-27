@@ -23,7 +23,7 @@ import {
     ScImageCompareLabel,
   ],
   template: `
-    <div scImageCompare class="w-full max-w-md aspect-square">
+    <div scImageCompare class="aspect-square w-full max-w-md">
       <div scImageCompareContainer>
         <img
           scImageCompareBefore

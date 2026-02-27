@@ -11,7 +11,7 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   template: `
     <label scSwitchField>
       <input type="checkbox" scSwitch />
-      <span class="text-sm font-medium leading-none">Airplane Mode</span>
+      <span class="text-sm leading-none font-medium">Airplane Mode</span>
     </label>
   `,
   encapsulation: ViewEncapsulation.None,

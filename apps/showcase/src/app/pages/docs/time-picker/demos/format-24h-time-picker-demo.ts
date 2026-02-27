@@ -29,7 +29,7 @@ import {
         <span scTimePickerSeparator>:</span>
         <input scTimePickerInput scTimePickerMinutesInput />
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ formatTime(time()) }}
       </p>
     </div>

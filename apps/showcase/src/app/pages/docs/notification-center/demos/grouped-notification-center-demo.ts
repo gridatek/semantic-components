@@ -22,7 +22,7 @@ import {
       (markRead)="onMarkRead($event)"
       (dismiss)="onDismiss($event)"
       (clearAll)="onClearAll()"
-      class="max-w-md h-[500px]"
+      class="h-[500px] max-w-md"
     >
       <div scNotificationCenterContainer class="h-full"></div>
     </div>

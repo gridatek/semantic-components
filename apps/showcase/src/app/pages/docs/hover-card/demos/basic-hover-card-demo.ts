@@ -39,12 +39,12 @@ import {
             </div>
             <div class="space-y-1">
               <h4 class="text-sm font-semibold">&#64;angular</h4>
-              <p class="text-sm text-muted-foreground">
+              <p class="text-muted-foreground text-sm">
                 The modern web developer's platform.
               </p>
               <div class="flex items-center pt-2">
                 <svg
-                  class="mr-2 size-4 text-muted-foreground"
+                  class="text-muted-foreground mr-2 size-4"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -61,7 +61,7 @@ import {
                   <line x1="8" x2="8" y1="2" y2="6" />
                   <line x1="3" x2="21" y1="10" y2="10" />
                 </svg>
-                <span class="text-xs text-muted-foreground">
+                <span class="text-muted-foreground text-xs">
                   Joined September 2014
                 </span>
               </div>

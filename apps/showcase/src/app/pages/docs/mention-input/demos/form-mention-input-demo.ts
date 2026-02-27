@@ -10,10 +10,10 @@ import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
   selector: 'app-form-mention-input-demo',
   imports: [ScMentionInput],
   template: `
-    <div class="max-w-lg rounded-lg border p-4 space-y-3">
+    <div class="max-w-lg space-y-3 rounded-lg border p-4">
       <div class="flex items-center gap-3">
         <div
-          class="size-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-sm font-medium"
+          class="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-full text-sm font-medium"
         >
           JD
         </div>
@@ -27,12 +27,12 @@ import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
       />
       <div class="flex justify-end gap-2">
         <button
-          class="inline-flex h-8 items-center justify-center rounded-md px-3 text-sm font-medium border border-input hover:bg-accent"
+          class="border-input hover:bg-accent inline-flex h-8 items-center justify-center rounded-md border px-3 text-sm font-medium"
         >
           Cancel
         </button>
         <button
-          class="inline-flex h-8 items-center justify-center rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-8 items-center justify-center rounded-md px-3 text-sm font-medium"
           [disabled]="!commentValue()"
         >
           Post Comment

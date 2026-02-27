@@ -21,7 +21,7 @@ import { SC_TAG_INPUT } from './tag-input';
     @if (!tagInput.disabled()) {
       <button
         type="button"
-        class="ml-1 rounded-full hover:bg-foreground/20 focus:outline-none focus:ring-1 focus:ring-ring"
+        class="hover:bg-foreground/20 focus:ring-ring ml-1 rounded-full focus:ring-1 focus:outline-none"
         (click)="remove($event)"
         [attr.aria-label]="'Remove ' + tag()"
       >

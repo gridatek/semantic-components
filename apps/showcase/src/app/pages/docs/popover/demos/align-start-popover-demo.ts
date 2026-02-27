@@ -28,9 +28,7 @@ import {
   ],
   template: `
     <div scPopoverProvider align="start">
-      <button scButton scPopoverTrigger variant="outline">
-        Align Start
-      </button>
+      <button scButton scPopoverTrigger variant="outline">Align Start</button>
       <ng-template scPopoverPortal>
         <div scPopover>
           <div scPopoverHeader>

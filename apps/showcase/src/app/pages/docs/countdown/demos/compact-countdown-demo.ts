@@ -9,7 +9,7 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   selector: 'app-compact-countdown-demo',
   imports: [ScCountdown],
   template: `
-    <div class="p-4 rounded-lg border inline-block">
+    <div class="inline-block rounded-lg border p-4">
       <sc-countdown [targetDate]="futureDate" variant="compact" />
     </div>
   `,

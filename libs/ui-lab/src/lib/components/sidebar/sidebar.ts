@@ -37,7 +37,7 @@ import { ScSidebarState } from './sidebar-state';
         <ng-template scSheetPortal>
           <div
             scSheet
-            class="bg-sidebar text-sidebar-foreground p-0 flex h-full flex-col"
+            class="bg-sidebar text-sidebar-foreground flex h-full flex-col p-0"
           >
             <button scSheetClose>
               <svg siXIcon></svg>
@@ -49,7 +49,7 @@ import { ScSidebarState } from './sidebar-state';
       </div>
     } @else {
       <div
-        class="group peer hidden md:block text-sidebar-foreground"
+        class="group peer text-sidebar-foreground hidden md:block"
         [attr.data-state]="state.state()"
         [attr.data-collapsible]="
           state.state() === 'collapsed' ? collapsible() : ''

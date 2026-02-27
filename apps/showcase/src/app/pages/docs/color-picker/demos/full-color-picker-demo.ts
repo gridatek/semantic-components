@@ -35,7 +35,7 @@ import {
           <input scColorPickerInput format="hex" class="flex-1" />
         </div>
       </div>
-      <p class="mt-2 text-sm text-muted-foreground">Selected: {{ color() }}</p>
+      <p class="text-muted-foreground mt-2 text-sm">Selected: {{ color() }}</p>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

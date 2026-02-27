@@ -38,7 +38,7 @@ import {
           <svg siTextAlignEndIcon></svg>
         </button>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ alignment() || 'none' }}
       </p>
     </div>

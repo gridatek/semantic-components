@@ -198,7 +198,7 @@ interface ScFileUploadFile {
   <div scFileUploadDropzone class="p-8">
     <div class="flex flex-col items-center gap-2">
       <p>Drag and drop files here</p>
-      <p class="text-sm text-muted-foreground">or click to browse</p>
+      <p class="text-muted-foreground text-sm">or click to browse</p>
     </div>
   </div>
 </div>

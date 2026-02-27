@@ -9,7 +9,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
   selector: 'app-whitespace-diff-viewer-demo',
   imports: [ScDiffViewer],
   template: `
-    <p class="text-sm text-muted-foreground mb-4">
+    <p class="text-muted-foreground mb-4 text-sm">
       The following texts differ only in whitespace but are shown as identical.
     </p>
     <sc-diff-viewer

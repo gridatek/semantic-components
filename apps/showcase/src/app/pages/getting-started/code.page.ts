@@ -34,7 +34,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h1 scHeading>Code</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
             &#64;semantic-components/code
           </code>
           package. Provides code viewer and code editor components powered by
@@ -46,7 +46,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>1. Install the package</h2>
         <p class="text-muted-foreground">
           Install the code library and its peer dependency
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">shiki</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">shiki</code>
           .
         </p>
         <div scCodeViewer>
@@ -64,7 +64,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>2. Configure styles</h2>
         <p class="text-muted-foreground">
           Import the code library styles in your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
         <div scCodeViewer>
@@ -82,7 +82,7 @@ import { ScHeading } from '@semantic-components/ui';
         <h2 scHeading toc>3. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source in your
-          <code class="rounded bg-muted px-1.5 py-0.5 text-sm">styles.css</code>
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           :
         </p>
         <div scCodeViewer>

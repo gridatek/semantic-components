@@ -16,21 +16,21 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
     @if (pdfViewer.showContent()) {
       <div
-        class="w-full h-full overflow-auto"
+        class="h-full w-full overflow-auto"
         [style.transform]="'rotate(' + pdfViewer.rotation() + 'deg)'"
         [style.transform-origin]="'center center'"
       >
         <object
           [data]="pdfViewer.safePdfUrl()"
           type="application/pdf"
-          class="w-full h-full"
+          class="h-full w-full"
           [style.min-height]="'100%'"
           (load)="pdfViewer.onLoad()"
           (error)="onError()"
         >
           <iframe
             [src]="pdfViewer.safePdfUrl()"
-            class="w-full h-full border-0"
+            class="h-full w-full border-0"
             [title]="pdfViewer.title() || 'PDF Document'"
             (load)="pdfViewer.onLoad()"
             (error)="onError()"

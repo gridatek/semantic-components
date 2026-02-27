@@ -24,7 +24,7 @@ import {
     <div scCodeEditor>
       <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
-          <span class="text-sm text-muted-foreground">query.sql</span>
+          <span class="text-muted-foreground text-sm">query.sql</span>
           <span scCodeEditorLabel>sql</span>
         </div>
         <button scCodeEditorCopyButton [code]="sqlCode"></button>

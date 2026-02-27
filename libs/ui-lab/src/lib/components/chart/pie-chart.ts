@@ -36,7 +36,7 @@ import { SC_CHART } from './chart-container';
             [attr.x]="slice.labelX"
             [attr.y]="slice.labelY"
             text-anchor="middle"
-            class="pointer-events-none fill-background text-xs font-medium"
+            class="fill-background pointer-events-none text-xs font-medium"
           >
             {{ slice.percentage }}%
           </text>
@@ -46,7 +46,7 @@ import { SC_CHART } from './chart-container';
 
     @if (hoveredSlice()) {
       <div
-        class="pointer-events-none absolute z-50 rounded-lg border bg-background px-3 py-1.5 text-sm shadow-md"
+        class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
         [style.left.px]="tooltipX()"
         [style.top.px]="tooltipY()"
         [style.transform]="'translate(-50%, -100%) translateY(-8px)'"

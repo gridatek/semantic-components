@@ -14,7 +14,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
       <input type="checkbox" scCheckbox [(checked)]="terms" id="terms" />
       <label scLabel for="terms">Accept terms and conditions</label>
     </div>
-    <p class="text-sm text-muted-foreground mt-2">Checked: {{ terms() }}</p>
+    <p class="text-muted-foreground mt-2 text-sm">Checked: {{ terms() }}</p>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

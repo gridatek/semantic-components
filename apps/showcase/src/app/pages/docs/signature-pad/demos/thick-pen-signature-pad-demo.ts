@@ -32,25 +32,25 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       <div scSignaturePadToolbar>
         <button scSignaturePadPenWidth [width]="2">
           <span
-            class="w-4 rounded-full bg-foreground transition-all"
+            class="bg-foreground w-4 rounded-full transition-all"
             style="height: 2px"
           ></span>
         </button>
         <button scSignaturePadPenWidth [width]="4">
           <span
-            class="w-4 rounded-full bg-foreground transition-all"
+            class="bg-foreground w-4 rounded-full transition-all"
             style="height: 4px"
           ></span>
         </button>
         <button scSignaturePadPenWidth [width]="6">
           <span
-            class="w-4 rounded-full bg-foreground transition-all"
+            class="bg-foreground w-4 rounded-full transition-all"
             style="height: 6px"
           ></span>
         </button>
         <button scSignaturePadPenWidth [width]="8">
           <span
-            class="w-4 rounded-full bg-foreground transition-all"
+            class="bg-foreground w-4 rounded-full transition-all"
             style="height: 8px"
           ></span>
         </button>

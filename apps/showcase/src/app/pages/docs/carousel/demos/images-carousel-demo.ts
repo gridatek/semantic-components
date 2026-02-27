@@ -37,9 +37,9 @@ import {
               <div scCarouselItem>
                 <div class="p-1">
                   <div
-                    class="flex aspect-video items-center justify-center rounded-lg border bg-muted"
+                    class="bg-muted flex aspect-video items-center justify-center rounded-lg border"
                   >
-                    <span class="text-sm text-muted-foreground">
+                    <span class="text-muted-foreground text-sm">
                       {{ image.alt }}
                     </span>
                   </div>

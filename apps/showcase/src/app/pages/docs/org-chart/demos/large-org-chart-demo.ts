@@ -10,7 +10,7 @@ import { ScOrgChart, type OrgChartNode } from '@semantic-components/ui-lab';
   selector: 'app-large-org-chart-demo',
   imports: [ScOrgChart],
   template: `
-    <div class="border rounded-lg overflow-auto max-h-[500px]">
+    <div class="max-h-[500px] overflow-auto rounded-lg border">
       <sc-org-chart [data]="orgData()" />
     </div>
   `,

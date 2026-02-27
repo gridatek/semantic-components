@@ -19,7 +19,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
             <svg siMoonIcon></svg>
           }
         </button>
-        <span class="text-xs text-muted-foreground">Default</span>
+        <span class="text-muted-foreground text-xs">Default</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button scThemeToggle variant="outline" #toggle2="scThemeToggle">
@@ -29,7 +29,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
             <svg siMoonIcon></svg>
           }
         </button>
-        <span class="text-xs text-muted-foreground">Outline</span>
+        <span class="text-muted-foreground text-xs">Outline</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button scThemeToggle variant="ghost" #toggle3="scThemeToggle">
@@ -39,7 +39,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
             <svg siMoonIcon></svg>
           }
         </button>
-        <span class="text-xs text-muted-foreground">Ghost</span>
+        <span class="text-muted-foreground text-xs">Ghost</span>
       </div>
     </div>
   `,

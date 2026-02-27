@@ -37,28 +37,28 @@ import type {
             <img
               [src]="node().avatar"
               [alt]="node().name"
-              class="w-12 h-12 rounded-full object-cover flex-shrink-0"
+              class="h-12 w-12 flex-shrink-0 rounded-full object-cover"
             />
           } @else {
             <div
-              class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0"
+              class="bg-primary/10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full"
             >
-              <span class="text-lg font-semibold text-primary">
+              <span class="text-primary text-lg font-semibold">
                 {{ getInitials(node().name) }}
               </span>
             </div>
           }
 
           <!-- Info -->
-          <div class="flex-1 min-w-0 text-left">
-            <p class="font-semibold text-sm truncate">{{ node().name }}</p>
+          <div class="min-w-0 flex-1 text-left">
+            <p class="truncate text-sm font-semibold">{{ node().name }}</p>
             @if (node().title) {
-              <p class="text-xs text-muted-foreground truncate">
+              <p class="text-muted-foreground truncate text-xs">
                 {{ node().title }}
               </p>
             }
             @if (node().department) {
-              <p class="text-xs text-muted-foreground/70 truncate">
+              <p class="text-muted-foreground/70 truncate text-xs">
                 {{ node().department }}
               </p>
             }
@@ -66,7 +66,7 @@ import type {
 
           <!-- Expand indicator -->
           @if (hasChildren()) {
-            <div class="flex-shrink-0 ml-2">
+            <div class="ml-2 flex-shrink-0">
               <svg siChevronDownIcon [class]="expandIconClass()"></svg>
             </div>
           }

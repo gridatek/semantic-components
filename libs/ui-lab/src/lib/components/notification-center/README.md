@@ -141,7 +141,7 @@ notifications = signal<Notification[]>([
 ### Custom Container Styling
 
 ```html
-<div scNotificationCenter [(notifications)]="notifications" class="max-w-md h-[500px]">
+<div scNotificationCenter [(notifications)]="notifications" class="h-[500px] max-w-md">
   <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```

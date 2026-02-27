@@ -25,6 +25,7 @@ The signal only corrects itself on the next `mouseleave` or `blur`, so there's a
 
 **4. No touch device support**
 `tooltip-trigger.ts:15-19` — The directive only handles `mouseenter`, `mouseleave`, `focus`, and `blur`. On touch devices:
+
 - Tapping a trigger may fire `mouseenter` synthetically, but there's no reliable `mouseleave` to dismiss — the tooltip lingers until the user taps elsewhere (which may not trigger `mouseleave` on the original element).
 - There's no `touchstart`/`pointerdown` handling to show-on-tap or tap-outside-to-dismiss.
 - Non-focusable trigger elements (e.g. a `<span>` with `scTooltipTrigger`) won't receive `focus` on tap at all.
@@ -61,17 +62,17 @@ Beyond just Escape, any external dismissal path has the same problem. If Trigger
 
 ### Summary
 
-| Severity | Issue | File |
-|----------|-------|------|
-| Bug | No animation fallback timeout — tooltip can get stuck | `tooltip-manager.ts` |
-| Bug | Escape leaves stale `aria-describedby` on trigger | `tooltip-trigger.ts`, `tooltip-manager.ts` |
-| A11y | `aria-live` may double-announce content | `tooltip.ts` |
-| A11y | No touch/mobile support | `tooltip-trigger.ts` |
-| Design | Private CDK API (`_IdGenerator`) | `tooltip-trigger.ts` |
-| Design | Content is a snapshot, not reactive | `tooltip-manager.ts` |
-| Design | External dismissal doesn't sync trigger state | `tooltip-trigger.ts`, `tooltip-manager.ts` |
-| Design | Unintentionally public `data` field | `tooltip.ts` |
-| Minor | No directional slide-out animation | `tooltip.ts` |
-| Minor | `ScTooltipConfig` not exported | `index.ts` |
+| Severity | Issue                                                 | File                                       |
+| -------- | ----------------------------------------------------- | ------------------------------------------ |
+| Bug      | No animation fallback timeout — tooltip can get stuck | `tooltip-manager.ts`                       |
+| Bug      | Escape leaves stale `aria-describedby` on trigger     | `tooltip-trigger.ts`, `tooltip-manager.ts` |
+| A11y     | `aria-live` may double-announce content               | `tooltip.ts`                               |
+| A11y     | No touch/mobile support                               | `tooltip-trigger.ts`                       |
+| Design   | Private CDK API (`_IdGenerator`)                      | `tooltip-trigger.ts`                       |
+| Design   | Content is a snapshot, not reactive                   | `tooltip-manager.ts`                       |
+| Design   | External dismissal doesn't sync trigger state         | `tooltip-trigger.ts`, `tooltip-manager.ts` |
+| Design   | Unintentionally public `data` field                   | `tooltip.ts`                               |
+| Minor    | No directional slide-out animation                    | `tooltip.ts`                               |
+| Minor    | `ScTooltipConfig` not exported                        | `index.ts`                                 |
 
 The highest priority fixes are the animation fallback (#1) and the stale `aria-describedby` (#2 / #7), as they affect reliability and accessibility respectively. The `aria-live` removal (#3) is a quick win, and touch support (#4) is important for mobile users.

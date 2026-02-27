@@ -11,24 +11,24 @@ import { cn } from '@semantic-components/ui';
   selector: 'app-hero-section',
   template: `
     <section
-      class="py-20 px-4 md:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30"
+      class="from-background to-muted/30 bg-gradient-to-b px-4 py-20 md:px-6 lg:px-8"
     >
-      <div class="max-w-4xl px-4 md:px-6 lg:px-8 mx-auto text-center space-y-6">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+      <div class="mx-auto max-w-4xl space-y-6 px-4 text-center md:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
           Build Something Amazing
         </h1>
-        <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+        <p class="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
           A complete design system with responsive components built for modern
           web applications. Start building beautiful interfaces today.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex flex-col justify-center gap-4 sm:flex-row">
           <button
-            class="h-11 px-8 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
+            class="bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8 text-sm font-medium"
           >
             Get Started Free
           </button>
           <button
-            class="h-11 px-8 text-sm font-medium rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground"
+            class="border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md border px-8 text-sm font-medium"
           >
             View Documentation
           </button>

@@ -31,16 +31,16 @@ import { ComponentsService } from '../../services/components.service';
     <div class="flex min-h-screen">
       <!-- Left Sidebar -->
       <aside
-        class="hidden md:block w-64 border-r bg-background p-6 overflow-y-auto shrink-0"
+        class="bg-background hidden w-64 shrink-0 overflow-y-auto border-r p-6 md:block"
       >
         <nav class="space-y-1">
-          <h4 class="font-semibold mb-4">Components</h4>
+          <h4 class="mb-4 font-semibold">Components</h4>
 
           @for (item of components(); track item.path) {
             <a
               [routerLink]="'/docs/components/' + item.path"
               routerLinkActive="bg-accent text-accent-foreground"
-              class="block rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors"
+              class="hover:bg-accent hover:text-accent-foreground block rounded-md px-3 py-2 text-sm transition-colors"
             >
               {{ item.name }}
             </a>
@@ -56,7 +56,7 @@ import { ComponentsService } from '../../services/components.service';
       </main>
 
       <!-- TOC (Right Sidebar) -->
-      <aside class="hidden xl:block w-56 border-l p-6 shrink-0 overflow-y-auto">
+      <aside class="hidden w-56 shrink-0 overflow-y-auto border-l p-6 xl:block">
         <div class="sticky top-6">
           <app-toc
             [items]="tocService.items()"

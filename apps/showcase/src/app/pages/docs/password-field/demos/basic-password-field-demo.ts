@@ -30,7 +30,7 @@ import { ScLabel } from '@semantic-components/ui';
       </div>
     </div>
 
-    <p class="mt-4 text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-4 text-sm">
       Value: {{ password() || '(empty)' }}
     </p>
   `,

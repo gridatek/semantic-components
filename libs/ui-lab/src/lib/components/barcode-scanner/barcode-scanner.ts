@@ -61,14 +61,14 @@ interface DetectedBarcode {
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            class="size-12 text-muted-foreground mb-4"
+            class="text-muted-foreground mb-4 size-12"
           >
             <circle cx="12" cy="12" r="10" />
             <line x1="12" x2="12" y1="8" y2="12" />
             <line x1="12" x2="12.01" y1="16" y2="16" />
           </svg>
-          <p class="text-lg font-medium mb-2">Barcode Scanner Not Supported</p>
-          <p class="text-sm text-muted-foreground">
+          <p class="mb-2 text-lg font-medium">Barcode Scanner Not Supported</p>
+          <p class="text-muted-foreground text-sm">
             Your browser doesn't support the Barcode Detection API. Try using
             Chrome, Edge, or Opera on desktop/Android.
           </p>
@@ -81,18 +81,18 @@ interface DetectedBarcode {
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            class="size-12 text-destructive mb-4"
+            class="text-destructive mb-4 size-12"
           >
             <circle cx="12" cy="12" r="10" />
             <line x1="15" x2="9" y1="9" y2="15" />
             <line x1="9" x2="15" y1="9" y2="15" />
           </svg>
-          <p class="text-lg font-medium mb-2">Camera Error</p>
-          <p class="text-sm text-muted-foreground mb-4">{{ error() }}</p>
+          <p class="mb-2 text-lg font-medium">Camera Error</p>
+          <p class="text-muted-foreground mb-4 text-sm">{{ error() }}</p>
           <button
             type="button"
             (click)="startScanning()"
-            class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+            class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-2"
           >
             Try Again
           </button>
@@ -110,28 +110,28 @@ interface DetectedBarcode {
 
           <!-- Scanning Overlay -->
           @if (isScanning()) {
-            <div class="absolute inset-0 pointer-events-none">
+            <div class="pointer-events-none absolute inset-0">
               <!-- Corner markers -->
               <div
-                class="absolute inset-8 border-2 border-primary/50 rounded-lg"
+                class="border-primary/50 absolute inset-8 rounded-lg border-2"
               >
                 <div
-                  class="absolute -top-0.5 -left-0.5 w-8 h-8 border-t-4 border-l-4 border-primary rounded-tl-lg"
+                  class="border-primary absolute -top-0.5 -left-0.5 h-8 w-8 rounded-tl-lg border-t-4 border-l-4"
                 ></div>
                 <div
-                  class="absolute -top-0.5 -right-0.5 w-8 h-8 border-t-4 border-r-4 border-primary rounded-tr-lg"
+                  class="border-primary absolute -top-0.5 -right-0.5 h-8 w-8 rounded-tr-lg border-t-4 border-r-4"
                 ></div>
                 <div
-                  class="absolute -bottom-0.5 -left-0.5 w-8 h-8 border-b-4 border-l-4 border-primary rounded-bl-lg"
+                  class="border-primary absolute -bottom-0.5 -left-0.5 h-8 w-8 rounded-bl-lg border-b-4 border-l-4"
                 ></div>
                 <div
-                  class="absolute -bottom-0.5 -right-0.5 w-8 h-8 border-b-4 border-r-4 border-primary rounded-br-lg"
+                  class="border-primary absolute -right-0.5 -bottom-0.5 h-8 w-8 rounded-br-lg border-r-4 border-b-4"
                 ></div>
               </div>
 
               <!-- Scanning line animation -->
               <div class="absolute inset-x-8 top-8 bottom-8 overflow-hidden">
-                <div class="h-0.5 bg-primary/80 animate-scan"></div>
+                <div class="bg-primary/80 animate-scan h-0.5"></div>
               </div>
             </div>
           }
@@ -139,9 +139,9 @@ interface DetectedBarcode {
           <!-- Last detected barcode overlay -->
           @if (lastResult() && showLastResult()) {
             <div
-              class="absolute bottom-4 left-4 right-4 bg-black/80 text-white p-3 rounded-lg"
+              class="absolute right-4 bottom-4 left-4 rounded-lg bg-black/80 p-3 text-white"
             >
-              <p class="text-xs text-white/70 mb-1">
+              <p class="mb-1 text-xs text-white/70">
                 {{ lastResult()?.format }}
               </p>
               <p class="font-mono text-sm break-all">
@@ -152,13 +152,13 @@ interface DetectedBarcode {
         </div>
 
         <!-- Controls -->
-        <div class="flex items-center justify-between p-4 border-t">
+        <div class="flex items-center justify-between border-t p-4">
           <div class="flex items-center gap-2">
             @if (!isScanning()) {
               <button
                 type="button"
                 (click)="startScanning()"
-                class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+                class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-md px-4 py-2"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +180,7 @@ interface DetectedBarcode {
               <button
                 type="button"
                 (click)="stopScanning()"
-                class="inline-flex items-center gap-2 px-4 py-2 border rounded-md hover:bg-accent"
+                class="hover:bg-accent inline-flex items-center gap-2 rounded-md border px-4 py-2"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +201,7 @@ interface DetectedBarcode {
               <button
                 type="button"
                 (click)="switchCamera()"
-                class="p-2 border rounded-md hover:bg-accent"
+                class="hover:bg-accent rounded-md border p-2"
                 aria-label="Switch camera"
               >
                 <svg
@@ -229,8 +229,8 @@ interface DetectedBarcode {
               (click)="toggleTorch()"
               [class]="
                 torchOn()
-                  ? 'p-2 bg-yellow-500 text-white rounded-md'
-                  : 'p-2 border rounded-md hover:bg-accent'
+                  ? 'rounded-md bg-yellow-500 p-2 text-white'
+                  : 'hover:bg-accent rounded-md border p-2'
               "
               aria-label="Toggle flashlight"
             >

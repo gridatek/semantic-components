@@ -231,7 +231,7 @@ Add the styles to your global stylesheet:
 
 ```css
 @import '@semantic-components/ui/styles';
-@source "../node_modules/@semantic-components/ui";
+@source '../node_modules/@semantic-components/ui';
 ```
 
 The `@import` brings in the CDK overlay styles and the shadcn-compatible CSS variables (colors, radius, spacing tokens). The `@source` tells Tailwind v4 to scan the library's files so its utility classes are included in your build.

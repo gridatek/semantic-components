@@ -24,7 +24,7 @@ import {
     <div scCodeEditor>
       <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
-          <span class="text-sm text-muted-foreground">readonly.ts</span>
+          <span class="text-muted-foreground text-sm">readonly.ts</span>
           <span scCodeEditorLabel>typescript</span>
         </div>
         <button scCodeEditorCopyButton [code]="readonlyCode"></button>

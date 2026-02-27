@@ -15,27 +15,15 @@ import {
   template: `
     <div class="flex items-end gap-4">
       <span scAvatar size="sm">
-        <img
-          scAvatarImage
-          src="https://github.com/shadcn.png"
-          alt="@shadcn"
-        />
+        <img scAvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
         <span scAvatarFallback>CN</span>
       </span>
       <span scAvatar>
-        <img
-          scAvatarImage
-          src="https://github.com/shadcn.png"
-          alt="@shadcn"
-        />
+        <img scAvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
         <span scAvatarFallback>CN</span>
       </span>
       <span scAvatar size="lg">
-        <img
-          scAvatarImage
-          src="https://github.com/shadcn.png"
-          alt="@shadcn"
-        />
+        <img scAvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
         <span scAvatarFallback>CN</span>
       </span>
     </div>

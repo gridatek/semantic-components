@@ -88,11 +88,11 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                     >
                       <li>
                         <a scNavigationMenuLink href="#">
-                          <div class="text-sm font-medium leading-none">
+                          <div class="text-sm leading-none font-medium">
                             Analytics
                           </div>
                           <p
-                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
                             Track your data and insights
                           </p>
@@ -100,11 +100,11 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       </li>
                       <li>
                         <a scNavigationMenuLink href="#">
-                          <div class="text-sm font-medium leading-none">
+                          <div class="text-sm leading-none font-medium">
                             Reports
                           </div>
                           <p
-                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
                             Generate detailed reports
                           </p>
@@ -112,11 +112,11 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       </li>
                       <li>
                         <a scNavigationMenuLink href="#">
-                          <div class="text-sm font-medium leading-none">
+                          <div class="text-sm leading-none font-medium">
                             Automation
                           </div>
                           <p
-                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
                             Automate your workflows
                           </p>
@@ -124,11 +124,11 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                       </li>
                       <li>
                         <a scNavigationMenuLink href="#">
-                          <div class="text-sm font-medium leading-none">
+                          <div class="text-sm leading-none font-medium">
                             Integration
                           </div>
                           <p
-                            class="line-clamp-2 text-sm leading-snug text-muted-foreground"
+                            class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
                             Connect with your tools
                           </p>
@@ -196,7 +196,7 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           >
             Dashboard
           </a>
-          <hr class="my-2 border-border" />
+          <hr class="border-border my-2" />
           <button scButton variant="ghost" class="w-full">Sign In</button>
           <button scButton class="w-full">Get Started</button>
         </div>

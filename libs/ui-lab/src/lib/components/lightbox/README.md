@@ -15,7 +15,7 @@ Full-screen image viewer with zoom, navigation, and keyboard support. Built usin
 <div scLightbox [images]="images">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
-    <button scLightboxTrigger [index]="i" class="w-32 h-32 rounded overflow-hidden">
+    <button scLightboxTrigger [index]="i" class="h-32 w-32 overflow-hidden rounded">
       <img [src]="image.src" [alt]="image.alt" class="size-full object-cover" />
     </button>
     }
@@ -145,7 +145,7 @@ Pre-built gallery grid with integrated lightbox.
 <div scLightbox [images]="images">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
-    <button scLightboxTrigger [index]="i" class="w-32 h-32 rounded-lg overflow-hidden">
+    <button scLightboxTrigger [index]="i" class="h-32 w-32 overflow-hidden rounded-lg">
       <img [src]="image.src" [alt]="image.alt" class="size-full object-cover" />
     </button>
     }
@@ -193,7 +193,7 @@ readonly images: LightboxImage[] = [
 ### Pre-built Gallery
 
 ```html
-<sc-lightbox-gallery [images]="images" class="grid-cols-4 gap-2 max-w-4xl" />
+<sc-lightbox-gallery [images]="images" class="max-w-4xl grid-cols-4 gap-2" />
 ```
 
 ### Controlled Lightbox

@@ -10,13 +10,13 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
   selector: 'app-custom-height-virtual-list-demo',
   imports: [ScVirtualList],
   template: `
-    <div class="border rounded-lg overflow-hidden">
+    <div class="overflow-hidden rounded-lg border">
       <sc-virtual-list [items]="items()" [itemHeight]="36" height="200px">
         <ng-template let-item let-index="index">
           <div
-            class="flex items-center px-4 h-full border-b text-sm hover:bg-muted/50 transition-colors"
+            class="hover:bg-muted/50 flex h-full items-center border-b px-4 text-sm transition-colors"
           >
-            <span class="w-12 text-muted-foreground">{{ index + 1 }}</span>
+            <span class="text-muted-foreground w-12">{{ index + 1 }}</span>
             <span class="flex-1">{{ item }}</span>
           </div>
         </ng-template>

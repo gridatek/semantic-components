@@ -94,7 +94,7 @@ All demos now:
       <svg><!-- arrow icon --></svg>
       <span>+20.1%</span>
     </span>
-    <span class="text-xs text-muted-foreground">from last month</span>
+    <span class="text-muted-foreground text-xs">from last month</span>
   </div>
 
   <p scStatCardDescription>Revenue increased</p>

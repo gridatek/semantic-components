@@ -21,7 +21,7 @@ import {
     ScImageCompareSlider,
   ],
   template: `
-    <div scImageCompare class="w-full max-w-2xl aspect-[2/1]">
+    <div scImageCompare class="aspect-[2/1] w-full max-w-2xl">
       <div scImageCompareContainer>
         <img
           scImageCompareBefore

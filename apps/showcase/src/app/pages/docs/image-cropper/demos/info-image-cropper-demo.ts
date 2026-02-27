@@ -23,11 +23,11 @@ import {
       >
         <div
           scImageCropperContainer
-          class="rounded-lg overflow-hidden border"
+          class="overflow-hidden rounded-lg border"
         ></div>
       </div>
 
-      <div class="rounded-md border p-4 bg-muted/50">
+      <div class="bg-muted/50 rounded-md border p-4">
         <div class="grid grid-cols-2 gap-4 text-sm">
           <div>
             <span class="text-muted-foreground">X:</span>

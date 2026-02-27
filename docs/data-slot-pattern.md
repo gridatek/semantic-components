@@ -111,7 +111,7 @@ Consumers can combine `:has()` with `data-slot` for conditional styling:
 For repeated overrides, wrap multiple fields:
 
 ```html
-<div class="*:*:data-[slot=label]:text-sm *:*:data-[slot=label]:text-muted-foreground space-y-4">
+<div class="*:*:data-[slot=label]:text-muted-foreground space-y-4 *:*:data-[slot=label]:text-sm">
   <div scCheckboxField>
     <input type="checkbox" scCheckbox id="a" />
     <label scLabel for="a">Option A</label>

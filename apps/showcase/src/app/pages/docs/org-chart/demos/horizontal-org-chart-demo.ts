@@ -10,7 +10,7 @@ import { ScOrgChart, type OrgChartNode } from '@semantic-components/ui-lab';
   selector: 'app-horizontal-org-chart-demo',
   imports: [ScOrgChart],
   template: `
-    <div class="border rounded-lg overflow-auto">
+    <div class="overflow-auto rounded-lg border">
       <sc-org-chart [data]="orgData()" direction="horizontal" />
     </div>
   `,

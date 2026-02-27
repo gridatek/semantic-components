@@ -37,7 +37,7 @@ import {
           <input scTagInputField />
           <span scTagInputCount class="ml-auto text-xs"></span>
         </div>
-        <p class="text-xs text-muted-foreground">Add up to 10 skills</p>
+        <p class="text-muted-foreground text-xs">Add up to 10 skills</p>
       </div>
 
       <div class="space-y-2">

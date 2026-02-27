@@ -14,11 +14,11 @@ import {
   selector: 'app-basic-org-chart-demo',
   imports: [ScOrgChart],
   template: `
-    <div class="border rounded-lg overflow-auto">
+    <div class="overflow-auto rounded-lg border">
       <sc-org-chart [data]="orgData()" (nodeClick)="onNodeClick($event)" />
     </div>
     @if (selectedNode()) {
-      <p class="mt-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mt-2 text-sm">
         Selected: {{ selectedNode()?.name }} - {{ selectedNode()?.title }}
       </p>
     }

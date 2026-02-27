@@ -14,7 +14,11 @@ import { ScCommand } from './command';
   selector: 'div[scCommandInput]',
   imports: [SiSearchIcon],
   template: `
-    <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+    <svg
+      siSearchIcon
+      class="mr-2 size-4 shrink-0 opacity-50"
+      aria-hidden="true"
+    ></svg>
     <input
       type="text"
       [class]="inputClass()"

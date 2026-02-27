@@ -39,8 +39,8 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
       </div>
 
       <!-- Overlay mask -->
-      <div class="absolute inset-0 pointer-events-none">
-        <svg class="w-full h-full">
+      <div class="pointer-events-none absolute inset-0">
+        <svg class="h-full w-full">
           <defs>
             <mask id="cropMask">
               <rect width="100%" height="100%" fill="white" />
@@ -64,7 +64,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 
       <!-- Crop area -->
       <div
-        class="absolute border-2 border-white cursor-move"
+        class="absolute cursor-move border-2 border-white"
         [style.left.px]="cropper.cropArea().x"
         [style.top.px]="cropper.cropArea().y"
         [style.width.px]="cropper.cropArea().width"
@@ -76,15 +76,15 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
       >
         <!-- Grid lines -->
         @if (cropper.showGrid()) {
-          <div class="absolute inset-0 pointer-events-none">
+          <div class="pointer-events-none absolute inset-0">
             <div
-              class="absolute left-1/3 top-0 bottom-0 w-px bg-white/30"
+              class="absolute top-0 bottom-0 left-1/3 w-px bg-white/30"
             ></div>
             <div
-              class="absolute left-2/3 top-0 bottom-0 w-px bg-white/30"
+              class="absolute top-0 bottom-0 left-2/3 w-px bg-white/30"
             ></div>
-            <div class="absolute top-1/3 left-0 right-0 h-px bg-white/30"></div>
-            <div class="absolute top-2/3 left-0 right-0 h-px bg-white/30"></div>
+            <div class="absolute top-1/3 right-0 left-0 h-px bg-white/30"></div>
+            <div class="absolute top-2/3 right-0 left-0 h-px bg-white/30"></div>
           </div>
         }
 
@@ -92,44 +92,44 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
         @if (!cropper.disabled()) {
           <!-- Corners -->
           <div
-            class="absolute -left-1.5 -top-1.5 size-3 bg-white border border-gray-400 cursor-nw-resize z-10"
+            class="absolute -top-1.5 -left-1.5 z-10 size-3 cursor-nw-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'nw')"
             (touchstart)="onHandleTouchStart($event, 'nw')"
           ></div>
           <div
-            class="absolute -right-1.5 -top-1.5 size-3 bg-white border border-gray-400 cursor-ne-resize z-10"
+            class="absolute -top-1.5 -right-1.5 z-10 size-3 cursor-ne-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'ne')"
             (touchstart)="onHandleTouchStart($event, 'ne')"
           ></div>
           <div
-            class="absolute -left-1.5 -bottom-1.5 size-3 bg-white border border-gray-400 cursor-sw-resize z-10"
+            class="absolute -bottom-1.5 -left-1.5 z-10 size-3 cursor-sw-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'sw')"
             (touchstart)="onHandleTouchStart($event, 'sw')"
           ></div>
           <div
-            class="absolute -right-1.5 -bottom-1.5 size-3 bg-white border border-gray-400 cursor-se-resize z-10"
+            class="absolute -right-1.5 -bottom-1.5 z-10 size-3 cursor-se-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'se')"
             (touchstart)="onHandleTouchStart($event, 'se')"
           ></div>
 
           <!-- Edges -->
           <div
-            class="absolute left-1/2 -translate-x-1/2 -top-1.5 w-6 h-3 bg-white border border-gray-400 cursor-n-resize z-10"
+            class="absolute -top-1.5 left-1/2 z-10 h-3 w-6 -translate-x-1/2 cursor-n-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'n')"
             (touchstart)="onHandleTouchStart($event, 'n')"
           ></div>
           <div
-            class="absolute left-1/2 -translate-x-1/2 -bottom-1.5 w-6 h-3 bg-white border border-gray-400 cursor-s-resize z-10"
+            class="absolute -bottom-1.5 left-1/2 z-10 h-3 w-6 -translate-x-1/2 cursor-s-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 's')"
             (touchstart)="onHandleTouchStart($event, 's')"
           ></div>
           <div
-            class="absolute top-1/2 -translate-y-1/2 -left-1.5 w-3 h-6 bg-white border border-gray-400 cursor-w-resize z-10"
+            class="absolute top-1/2 -left-1.5 z-10 h-6 w-3 -translate-y-1/2 cursor-w-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'w')"
             (touchstart)="onHandleTouchStart($event, 'w')"
           ></div>
           <div
-            class="absolute top-1/2 -translate-y-1/2 -right-1.5 w-3 h-6 bg-white border border-gray-400 cursor-e-resize z-10"
+            class="absolute top-1/2 -right-1.5 z-10 h-6 w-3 -translate-y-1/2 cursor-e-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'e')"
             (touchstart)="onHandleTouchStart($event, 'e')"
           ></div>

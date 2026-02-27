@@ -43,7 +43,7 @@ import {
           <svg siUnderlineIcon></svg>
         </button>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ formattingDisplay() }}
       </p>
     </div>

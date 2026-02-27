@@ -45,7 +45,7 @@ By default the separator is decorative (`role="none"`, `aria-hidden="true"`). Se
 ### Vertical separator in a toolbar
 
 ```html
-<div class="flex items-center gap-2 h-8">
+<div class="flex h-8 items-center gap-2">
   <button>Cut</button>
   <div scSeparator orientation="vertical"></div>
   <button>Copy</button>

@@ -24,7 +24,7 @@ import {
     <div scCodeEditor>
       <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
-          <span class="text-sm text-muted-foreground">example.js</span>
+          <span class="text-muted-foreground text-sm">example.js</span>
           <span scCodeEditorLabel>javascript</span>
         </div>
         <button scCodeEditorCopyButton [code]="javascriptCode"></button>

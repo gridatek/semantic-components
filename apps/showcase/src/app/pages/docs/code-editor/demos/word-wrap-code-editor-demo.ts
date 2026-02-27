@@ -24,7 +24,7 @@ import {
     <div scCodeEditor>
       <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
-          <span class="text-sm text-muted-foreground">README.md</span>
+          <span class="text-muted-foreground text-sm">README.md</span>
           <span scCodeEditorLabel>markdown</span>
         </div>
         <button scCodeEditorCopyButton [code]="longLineCode"></button>

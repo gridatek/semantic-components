@@ -24,7 +24,7 @@ import type {
   template: `
     <div [class]="containerClass()">
       <!-- Toolbar -->
-      <div class="flex items-center gap-2 p-2 border-b bg-muted/50">
+      <div class="bg-muted/50 flex items-center gap-2 border-b p-2">
         <!-- Tool Selection -->
         <div class="flex items-center gap-1 border-r pr-2">
           @for (tool of tools; track tool.id) {
@@ -46,7 +46,7 @@ import type {
           @for (color of colors; track color) {
             <button
               type="button"
-              class="w-6 h-6 rounded border-2 transition-transform hover:scale-110"
+              class="h-6 w-6 rounded border-2 transition-transform hover:scale-110"
               [class.ring-2]="currentColor() === color"
               [class.ring-offset-1]="currentColor() === color"
               [style.background-color]="color"
@@ -59,23 +59,23 @@ import type {
 
         <!-- Line Width -->
         <div class="flex items-center gap-2 border-r pr-2">
-          <span class="text-xs text-muted-foreground">Width:</span>
+          <span class="text-muted-foreground text-xs">Width:</span>
           <input
             type="range"
             min="1"
             max="20"
             [value]="lineWidth()"
-            class="w-20 h-1 accent-primary"
+            class="accent-primary h-1 w-20"
             (input)="onLineWidthChange($event)"
           />
-          <span class="text-xs w-4">{{ lineWidth() }}</span>
+          <span class="w-4 text-xs">{{ lineWidth() }}</span>
         </div>
 
         <!-- Actions -->
-        <div class="flex items-center gap-1 ml-auto">
+        <div class="ml-auto flex items-center gap-1">
           <button
             type="button"
-            class="p-2 rounded hover:bg-muted transition-colors"
+            class="hover:bg-muted rounded p-2 transition-colors"
             title="Undo"
             [disabled]="annotations().length === 0"
             (click)="undo()"
@@ -84,7 +84,7 @@ import type {
           </button>
           <button
             type="button"
-            class="p-2 rounded hover:bg-muted transition-colors"
+            class="hover:bg-muted rounded p-2 transition-colors"
             title="Clear All"
             [disabled]="annotations().length === 0"
             (click)="clearAll()"
@@ -93,7 +93,7 @@ import type {
           </button>
           <button
             type="button"
-            class="p-2 rounded hover:bg-muted transition-colors"
+            class="hover:bg-muted rounded p-2 transition-colors"
             title="Download"
             (click)="download()"
           >
@@ -122,7 +122,7 @@ import type {
         ></canvas>
         @if (!imageLoaded()) {
           <div
-            class="flex items-center justify-center bg-muted"
+            class="bg-muted flex items-center justify-center"
             [style.width.px]="canvasWidth()"
             [style.height.px]="canvasHeight()"
           >

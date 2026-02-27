@@ -197,7 +197,7 @@ import type { User } from './user.service';
                         <svg siChevronRightIcon></svg>
                       }
                       <span>{{ cell.getValue() }}</span>
-                      <span class="ml-1 text-muted-foreground">
+                      <span class="text-muted-foreground ml-1">
                         ({{ row.subRows.length }})
                       </span>
                     </button>
@@ -394,7 +394,7 @@ import type { User } from './user.service';
               <td
                 scTableCell
                 [attr.colSpan]="columns().length"
-                class="h-24 text-center text-muted-foreground"
+                class="text-muted-foreground h-24 text-center"
               >
                 No results.
               </td>

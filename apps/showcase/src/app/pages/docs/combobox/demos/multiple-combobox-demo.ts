@@ -67,11 +67,7 @@ interface ComboboxOption {
           }
           <div scComboboxList [multi]="true" [(values)]="selectedValues">
             @for (option of filteredOptions(); track option.value) {
-              <div
-                scComboboxItem
-                [value]="option.value"
-                [label]="option.label"
-              >
+              <div scComboboxItem [value]="option.value" [label]="option.label">
                 <span>{{ option.label }}</span>
                 <svg
                   scComboboxItemIndicator
@@ -91,7 +87,7 @@ interface ComboboxOption {
         </div>
       </div>
       @if (selectedValues().length > 0) {
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Selected: {{ selectedLabels() }}
         </p>
       }

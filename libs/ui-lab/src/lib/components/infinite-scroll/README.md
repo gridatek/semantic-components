@@ -11,10 +11,10 @@ Automatically load more content as the user scrolls to the bottom of a container
 ## Usage
 
 ```html
-<sc-infinite-scroll class="h-[400px] border rounded-lg" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
-  <div class="p-4 space-y-2">
+<sc-infinite-scroll class="h-[400px] rounded-lg border" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
+  <div class="space-y-2 p-4">
     @for (item of items(); track item.id) {
-    <div class="p-4 border rounded">{{ item.title }}</div>
+    <div class="rounded border p-4">{{ item.title }}</div>
     }
   </div>
 </sc-infinite-scroll>
@@ -45,9 +45,9 @@ Custom loading indicator. Place inside `ScInfiniteScroll`.
   <!-- content -->
 
   <div scInfiniteScrollLoader class="flex items-center gap-2 py-4">
-    <div class="size-2 bg-primary rounded-full animate-bounce"></div>
-    <div class="size-2 bg-primary rounded-full animate-bounce"></div>
-    <div class="size-2 bg-primary rounded-full animate-bounce"></div>
+    <div class="bg-primary size-2 animate-bounce rounded-full"></div>
+    <div class="bg-primary size-2 animate-bounce rounded-full"></div>
+    <div class="bg-primary size-2 animate-bounce rounded-full"></div>
   </div>
 </sc-infinite-scroll>
 ```
@@ -71,10 +71,10 @@ Custom end message. Place inside `ScInfiniteScroll`.
 ```typescript
 @Component({
   template: `
-    <sc-infinite-scroll class="h-[400px] border rounded-lg" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
-      <div class="p-4 space-y-2">
+    <sc-infinite-scroll class="h-[400px] rounded-lg border" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
+      <div class="space-y-2 p-4">
         @for (item of items(); track item.id) {
-          <div class="p-4 border rounded">{{ item.title }}</div>
+          <div class="rounded border p-4">{{ item.title }}</div>
         }
       </div>
     </sc-infinite-scroll>
@@ -121,7 +121,7 @@ Works with any content layout:
 <sc-infinite-scroll [loading]="loading()" (loadMore)="loadMore()">
   <div class="grid grid-cols-3 gap-4 p-4">
     @for (item of items(); track item.id) {
-    <div class="p-4 border rounded bg-muted/50">{{ item.title }}</div>
+    <div class="bg-muted/50 rounded border p-4">{{ item.title }}</div>
     }
   </div>
 </sc-infinite-scroll>

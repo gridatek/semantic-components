@@ -11,15 +11,11 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
   template: `
     <div class="flex items-center gap-4">
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted-foreground">Ghost:</span>
-        <button
-          scCopyButton
-          [value]="'Ghost variant'"
-          variant="ghost"
-        ></button>
+        <span class="text-muted-foreground text-sm">Ghost:</span>
+        <button scCopyButton [value]="'Ghost variant'" variant="ghost"></button>
       </div>
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted-foreground">Outline:</span>
+        <span class="text-muted-foreground text-sm">Outline:</span>
         <button
           scCopyButton
           [value]="'Outline variant'"
@@ -27,7 +23,7 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
         ></button>
       </div>
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted-foreground">Default:</span>
+        <span class="text-muted-foreground text-sm">Default:</span>
         <button
           scCopyButton
           [value]="'Default variant'"

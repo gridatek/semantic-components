@@ -30,7 +30,7 @@ import {
     <div scSheetProvider side="left">
       <button
         scSheetTrigger
-        class="inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        class="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 cursor-pointer items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-xs transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         Open Left Sheet
       </button>
@@ -62,25 +62,25 @@ import {
           <nav class="flex flex-col gap-2 py-4">
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Home
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Products
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               About
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Contact
             </a>

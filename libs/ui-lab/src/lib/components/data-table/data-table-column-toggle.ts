@@ -17,7 +17,7 @@ import { SC_DATA_TABLE } from './data-table';
   template: `
     <button
       type="button"
-      class="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+      class="border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center gap-2 rounded-md border px-3 py-2 text-sm font-medium"
       (click)="toggleOpen()"
     >
       <svg siSlidersVerticalIcon class="size-4"></svg>
@@ -26,16 +26,16 @@ import { SC_DATA_TABLE } from './data-table';
 
     @if (isOpen()) {
       <div
-        class="absolute right-0 top-full z-50 mt-2 min-w-[150px] rounded-md border bg-popover p-2 shadow-md"
+        class="bg-popover absolute top-full right-0 z-50 mt-2 min-w-[150px] rounded-md border p-2 shadow-md"
       >
         @for (column of table.columns(); track column.id) {
           @if (column.enableHiding !== false) {
             <label
-              class="flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent cursor-pointer"
+              class="hover:bg-accent flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-sm"
             >
               <input
                 type="checkbox"
-                class="size-4 rounded border-primary"
+                class="border-primary size-4 rounded"
                 [checked]="isColumnVisible(column.id)"
                 (change)="toggleColumn(column.id)"
               />

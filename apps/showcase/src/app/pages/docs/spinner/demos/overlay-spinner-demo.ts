@@ -11,11 +11,11 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   imports: [ScSpinner, SiLoaderCircleIcon],
   template: `
     <div
-      class="relative h-64 w-96 rounded-lg border bg-muted/50 flex items-center justify-center"
+      class="bg-muted/50 relative flex h-64 w-96 items-center justify-center rounded-lg border"
     >
       <div class="flex flex-col items-center">
-        <svg scSpinner siLoaderCircleIcon class="size-8 text-primary"></svg>
-        <p class="mt-2 text-sm text-muted-foreground">Loading content...</p>
+        <svg scSpinner siLoaderCircleIcon class="text-primary size-8"></svg>
+        <p class="text-muted-foreground mt-2 text-sm">Loading content...</p>
       </div>
     </div>
   `,

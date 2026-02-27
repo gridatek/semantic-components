@@ -40,7 +40,7 @@ import { ConfigService } from '../../services/config.service';
             <a
               [href]="demoUrl()"
               target="_blank"
-              class="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground hover:text-foreground"
+              class="text-muted-foreground hover:text-foreground inline-flex h-6 w-6 items-center justify-center rounded-md"
               title="Open in isolation"
             >
               <svg
@@ -69,7 +69,7 @@ import { ConfigService } from '../../services/config.service';
       }
 
       @if (description()) {
-        <p class="text-sm text-muted-foreground">{{ description() }}</p>
+        <p class="text-muted-foreground text-sm">{{ description() }}</p>
       }
 
       <div scTabs class="w-full">

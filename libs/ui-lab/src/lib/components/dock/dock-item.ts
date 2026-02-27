@@ -15,7 +15,7 @@ import type { DockItem } from './dock-types';
   selector: 'button[scDockItem]',
   template: `
     <span
-      class="inline-flex items-center justify-center [&>svg]:w-full [&>svg]:h-full"
+      class="inline-flex items-center justify-center [&>svg]:h-full [&>svg]:w-full"
       [innerHTML]="sanitizedIcon()"
     ></span>
     <ng-content />

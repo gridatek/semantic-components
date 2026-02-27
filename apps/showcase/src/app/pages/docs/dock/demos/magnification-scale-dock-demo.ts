@@ -10,7 +10,7 @@ import type { DockItem } from '@semantic-components/ui-lab';
   selector: 'app-magnification-scale-dock-demo',
   imports: [ScDock, ScDockItems, ScDockItem],
   template: `
-    <div class="flex justify-center rounded-lg border bg-muted/30 p-8">
+    <div class="bg-muted/30 flex justify-center rounded-lg border p-8">
       <nav scDock [magnificationScale]="2">
         <div scDockItems>
           @for (item of items; track item.id) {

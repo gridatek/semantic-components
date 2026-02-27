@@ -145,7 +145,7 @@ Code block with copy button.
 ### Inline with Text
 
 ```html
-<div class="flex items-center gap-2 border rounded-md px-3 py-2">
+<div class="flex items-center gap-2 rounded-md border px-3 py-2">
   <code class="flex-1">npm install package</code>
   <button scCopyButton [value]="'npm install package'" size="sm"></button>
 </div>
@@ -167,7 +167,7 @@ Code block with copy button.
 
 ```html
 <div class="flex items-center gap-2">
-  <input [value]="shareUrl" readonly class="flex-1 border rounded px-3 py-2" />
+  <input [value]="shareUrl" readonly class="flex-1 rounded border px-3 py-2" />
   <button scCopyButton [value]="shareUrl" variant="outline"></button>
 </div>
 ```

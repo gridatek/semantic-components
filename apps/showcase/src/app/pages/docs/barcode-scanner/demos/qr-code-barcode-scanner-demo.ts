@@ -16,8 +16,8 @@ import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
       class="max-w-md"
     />
     @if (lastQR()) {
-      <div class="p-4 bg-muted rounded-lg max-w-md mt-3">
-        <p class="text-sm text-muted-foreground mb-1">QR Code content:</p>
+      <div class="bg-muted mt-3 max-w-md rounded-lg p-4">
+        <p class="text-muted-foreground mb-1 text-sm">QR Code content:</p>
         <p class="font-mono text-sm break-all">{{ lastQR()?.rawValue }}</p>
       </div>
     }

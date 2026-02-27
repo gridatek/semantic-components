@@ -49,9 +49,9 @@ import {
             @for (file of files(); track file.id) {
               <div scFileUploadItem [file]="file">
                 <div scFileUploadItemPreview [file]="file">
-                  <svg siFileIcon class="size-5 text-muted-foreground"></svg>
+                  <svg siFileIcon class="text-muted-foreground size-5"></svg>
                 </div>
-                <div class="flex-1 min-w-0">
+                <div class="min-w-0 flex-1">
                   <div scFileUploadItemName>{{ file.file.name }}</div>
                   <div scFileUploadItemSize [file]="file"></div>
                 </div>

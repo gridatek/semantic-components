@@ -12,13 +12,13 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
     <div class="space-y-3">
       <label scSwitchField>
         <input type="checkbox" scSwitch disabled />
-        <span class="text-sm font-medium leading-none text-muted-foreground">
+        <span class="text-muted-foreground text-sm leading-none font-medium">
           Disabled (Off)
         </span>
       </label>
       <label scSwitchField>
         <input type="checkbox" scSwitch [checked]="true" disabled />
-        <span class="text-sm font-medium leading-none text-muted-foreground">
+        <span class="text-muted-foreground text-sm leading-none font-medium">
           Disabled (On)
         </span>
       </label>

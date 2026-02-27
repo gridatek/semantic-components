@@ -36,7 +36,7 @@ import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full">
-      <div scEditor class="border rounded-lg overflow-hidden">
+      <div scEditor class="overflow-hidden rounded-lg border">
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
             <button scEditorBold>

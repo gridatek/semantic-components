@@ -28,17 +28,17 @@ ScCommand (Root)
 
 ## Components
 
-| Component               | Selector                     | Description                    |
-| ----------------------- | ---------------------------- | ------------------------------ |
-| `ScCommand`             | `div[scCommand]`            | Root wrapper with search state |
-| `ScCommandInput`        | `div[scCommandInput]`      | Search input with icon         |
-| `ScCommandList`         | `div[scCommandList]`       | Scrollable results container   |
-| `ScCommandEmpty`        | `div[scCommandEmpty]`      | Shown when no results match    |
-| `ScCommandGroup`        | `div[scCommandGroup]`      | Group of related items         |
+| Component               | Selector                  | Description                    |
+| ----------------------- | ------------------------- | ------------------------------ |
+| `ScCommand`             | `div[scCommand]`          | Root wrapper with search state |
+| `ScCommandInput`        | `div[scCommandInput]`     | Search input with icon         |
+| `ScCommandList`         | `div[scCommandList]`      | Scrollable results container   |
+| `ScCommandEmpty`        | `div[scCommandEmpty]`     | Shown when no results match    |
+| `ScCommandGroup`        | `div[scCommandGroup]`     | Group of related items         |
 | `ScCommandGroupHeading` | `[scCommandGroupHeading]` | Group heading text             |
-| `ScCommandItem`         | `div[scCommandItem]`       | Individual command item        |
-| `ScCommandSeparator`    | `[scCommandSeparator]`     | Visual separator               |
-| `ScCommandShortcut`     | `[scCommandShortcut]`      | Keyboard shortcut display      |
+| `ScCommandItem`         | `div[scCommandItem]`      | Individual command item        |
+| `ScCommandSeparator`    | `[scCommandSeparator]`    | Visual separator               |
+| `ScCommandShortcut`     | `[scCommandShortcut]`     | Keyboard shortcut display      |
 
 ## Inputs
 

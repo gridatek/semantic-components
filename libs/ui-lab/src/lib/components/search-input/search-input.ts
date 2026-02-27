@@ -27,7 +27,7 @@ import { DEFAULT_SEARCH_OPTIONS } from './search-input-types';
     >
       <div [class]="inputWrapperClass()">
         <span
-          class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+          class="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2"
         >
           <svg siSearchIcon class="size-[18px]"></svg>
         </span>
@@ -47,7 +47,7 @@ import { DEFAULT_SEARCH_OPTIONS } from './search-input-types';
         @if (query() && !loading()) {
           <button
             type="button"
-            class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            class="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2"
             aria-label="Clear search"
             (click)="clear()"
           >
@@ -55,7 +55,7 @@ import { DEFAULT_SEARCH_OPTIONS } from './search-input-types';
           </button>
         }
         @if (loading()) {
-          <span class="absolute right-3 top-1/2 -translate-y-1/2">
+          <span class="absolute top-1/2 right-3 -translate-y-1/2">
             <span
               class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
             ></span>
@@ -84,20 +84,20 @@ import { DEFAULT_SEARCH_OPTIONS } from './search-input-types';
             >
               @if (suggestion.icon) {
                 <span
-                  class="inline-flex items-center justify-center [&>svg]:w-4 [&>svg]:h-4 text-muted-foreground"
+                  class="text-muted-foreground inline-flex items-center justify-center [&>svg]:h-4 [&>svg]:w-4"
                   [innerHTML]="suggestion.icon"
                 ></span>
               }
               <div class="flex-1 text-left">
                 <div class="font-medium">{{ suggestion.label }}</div>
                 @if (suggestion.description) {
-                  <div class="text-xs text-muted-foreground">
+                  <div class="text-muted-foreground text-xs">
                     {{ suggestion.description }}
                   </div>
                 }
               </div>
               @if (suggestion.category) {
-                <span class="text-xs text-muted-foreground">
+                <span class="text-muted-foreground text-xs">
                   {{ suggestion.category }}
                 </span>
               }
@@ -113,7 +113,7 @@ import { DEFAULT_SEARCH_OPTIONS } from './search-input-types';
         !loading()
       ) {
         <div [class]="suggestionsClass()">
-          <div class="px-3 py-6 text-center text-sm text-muted-foreground">
+          <div class="text-muted-foreground px-3 py-6 text-center text-sm">
             No results found
           </div>
         </div>

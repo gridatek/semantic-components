@@ -134,7 +134,7 @@ export class MyComponent {
 </div>
 
 <!-- External controls -->
-<div class="flex gap-2 mt-2">
+<div class="mt-2 flex gap-2">
   <button scSignaturePadUndo>Undo</button>
   <button scSignaturePadClear>Clear</button>
   <button (click)="save()">Save</button>
@@ -175,13 +175,13 @@ export class MyComponent {
 <div scSignaturePad class="space-y-3">
   <div scSignaturePadToolbar>
     <button scSignaturePadPenWidth [width]="2">
-      <span class="w-4 rounded-full bg-foreground" style="height: 2px"></span>
+      <span class="bg-foreground w-4 rounded-full" style="height: 2px"></span>
     </button>
     <button scSignaturePadPenWidth [width]="4">
-      <span class="w-4 rounded-full bg-foreground" style="height: 4px"></span>
+      <span class="bg-foreground w-4 rounded-full" style="height: 4px"></span>
     </button>
     <button scSignaturePadPenWidth [width]="6">
-      <span class="w-4 rounded-full bg-foreground" style="height: 6px"></span>
+      <span class="bg-foreground w-4 rounded-full" style="height: 6px"></span>
     </button>
   </div>
 
@@ -204,14 +204,14 @@ export class MyComponent {
   </button>
 
   <!-- Separator (optional) -->
-  <div class="w-px h-6 bg-border"></div>
+  <div class="bg-border h-6 w-px"></div>
 
   <!-- Widths -->
   <button scSignaturePadPenWidth [width]="2">
-    <span class="w-4 rounded-full bg-foreground" style="height: 2px"></span>
+    <span class="bg-foreground w-4 rounded-full" style="height: 2px"></span>
   </button>
   <button scSignaturePadPenWidth [width]="4">
-    <span class="w-4 rounded-full bg-foreground" style="height: 4px"></span>
+    <span class="bg-foreground w-4 rounded-full" style="height: 4px"></span>
   </button>
 </div>
 ```

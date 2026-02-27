@@ -53,7 +53,7 @@ import {
   ],
   template: `
     <div class="w-full">
-      <div scEditor class="border rounded-lg overflow-hidden">
+      <div scEditor class="overflow-hidden rounded-lg border">
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
             <button scEditorBold>
@@ -87,7 +87,7 @@ import {
         <div
           scEditorContent
           [(value)]="content"
-          class="min-h-[300px] max-h-[500px]"
+          class="max-h-[500px] min-h-[300px]"
           placeholder="This editor has a taller minimum height..."
         ></div>
 

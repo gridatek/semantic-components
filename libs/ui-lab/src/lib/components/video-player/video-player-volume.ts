@@ -27,7 +27,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
       step="0.01"
       [value]="player.volume()"
       (input)="onVolumeInput($event)"
-      class="w-0 group-hover:w-20 transition-all duration-200 h-1 accent-white cursor-pointer"
+      class="h-1 w-0 cursor-pointer accent-white transition-all duration-200 group-hover:w-20"
       aria-label="Volume"
     />
   `,

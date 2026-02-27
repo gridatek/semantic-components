@@ -23,15 +23,15 @@ ScDialogProvider (root wrapper - manages open state + overlay lifecycle)
 
 | Component             | Selector                      | Description                                       |
 | --------------------- | ----------------------------- | ------------------------------------------------- |
-| `ScDialogProvider`    | `div[scDialogProvider]`     | Root wrapper, manages open state + overlay        |
-| `ScDialogTrigger`     | `button[scDialogTrigger]`   | Button that opens the dialog                      |
+| `ScDialogProvider`    | `div[scDialogProvider]`       | Root wrapper, manages open state + overlay        |
+| `ScDialogTrigger`     | `button[scDialogTrigger]`     | Button that opens the dialog                      |
 | `ScDialogPortal`      | `ng-template[scDialogPortal]` | Directive marking lazy content for the overlay    |
-| `ScDialog`            | `div[scDialog]`              | Dialog panel with animations                      |
-| `ScDialogHeader`      | `div[scDialogHeader]`       | Header section container                          |
-| `ScDialogTitle`       | `h2[scDialogTitle]`         | Dialog title (aria-labelledby)                    |
-| `ScDialogDescription` | `p[scDialogDescription]`    | Dialog description (aria-describedby)             |
-| `ScDialogFooter`      | `div[scDialogFooter]`       | Footer section for actions                        |
-| `ScDialogClose`       | `button[scDialogClose]`     | Close button (sets `type="button"` automatically) |
+| `ScDialog`            | `div[scDialog]`               | Dialog panel with animations                      |
+| `ScDialogHeader`      | `div[scDialogHeader]`         | Header section container                          |
+| `ScDialogTitle`       | `h2[scDialogTitle]`           | Dialog title (aria-labelledby)                    |
+| `ScDialogDescription` | `p[scDialogDescription]`      | Dialog description (aria-describedby)             |
+| `ScDialogFooter`      | `div[scDialogFooter]`         | Footer section for actions                        |
+| `ScDialogClose`       | `button[scDialogClose]`       | Close button (sets `type="button"` automatically) |
 
 ## Usage
 

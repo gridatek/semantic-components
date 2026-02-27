@@ -15,25 +15,25 @@ import {
   imports: [ScLightbox, ScLightboxContainer, ScLightboxTrigger],
   template: `
     <div class="space-y-3">
-      <ul class="text-sm space-y-1 list-disc list-inside text-muted-foreground">
+      <ul class="text-muted-foreground list-inside list-disc space-y-1 text-sm">
         <li>
-          <kbd class="px-1 py-0.5 bg-muted rounded text-xs">←</kbd>
+          <kbd class="bg-muted rounded px-1 py-0.5 text-xs">←</kbd>
           /
-          <kbd class="px-1 py-0.5 bg-muted rounded text-xs">→</kbd>
+          <kbd class="bg-muted rounded px-1 py-0.5 text-xs">→</kbd>
           - Navigate images
         </li>
         <li>
-          <kbd class="px-1 py-0.5 bg-muted rounded text-xs">+</kbd>
+          <kbd class="bg-muted rounded px-1 py-0.5 text-xs">+</kbd>
           /
-          <kbd class="px-1 py-0.5 bg-muted rounded text-xs">-</kbd>
+          <kbd class="bg-muted rounded px-1 py-0.5 text-xs">-</kbd>
           - Zoom in/out
         </li>
         <li>
-          <kbd class="px-1 py-0.5 bg-muted rounded text-xs">0</kbd>
+          <kbd class="bg-muted rounded px-1 py-0.5 text-xs">0</kbd>
           - Reset zoom
         </li>
         <li>
-          <kbd class="px-1 py-0.5 bg-muted rounded text-xs">Esc</kbd>
+          <kbd class="bg-muted rounded px-1 py-0.5 text-xs">Esc</kbd>
           - Close lightbox
         </li>
       </ul>
@@ -41,7 +41,7 @@ import {
         <button
           scLightboxTrigger
           [index]="0"
-          class="inline-flex items-center gap-2 px-4 py-2 border rounded-md hover:bg-accent"
+          class="hover:bg-accent inline-flex items-center gap-2 rounded-md border px-4 py-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

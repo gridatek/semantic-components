@@ -10,9 +10,9 @@ import { ScCopyButton } from '@semantic-components/ui-lab';
   imports: [ScCopyButton],
   template: `
     <div
-      class="flex items-center gap-2 rounded-md border bg-muted/50 px-3 py-2 max-w-md"
+      class="bg-muted/50 flex max-w-md items-center gap-2 rounded-md border px-3 py-2"
     >
-      <code class="flex-1 text-sm font-mono">
+      <code class="flex-1 font-mono text-sm">
         npm install &#64;angular/core
       </code>
       <button

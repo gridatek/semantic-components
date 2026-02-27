@@ -21,14 +21,14 @@ ScPopoverProvider (root wrapper - manages open state, side, align, overlay)
 
 | Component              | Selector                       | Description                            |
 | ---------------------- | ------------------------------ | -------------------------------------- |
-| `ScPopoverProvider`    | `div[scPopoverProvider]`     | Root wrapper, manages state & overlay  |
-| `ScPopoverTrigger`     | `button[scPopoverTrigger]`   | Button that toggles the popover        |
+| `ScPopoverProvider`    | `div[scPopoverProvider]`       | Root wrapper, manages state & overlay  |
+| `ScPopoverTrigger`     | `button[scPopoverTrigger]`     | Button that toggles the popover        |
 | `ScPopoverPortal`      | `ng-template[scPopoverPortal]` | Template reference for overlay content |
-| `ScPopover`            | `div[scPopover]`              | Floating dialog panel                  |
-| `ScPopoverClose`       | `button[scPopoverClose]`     | Optional button to close the popover   |
-| `ScPopoverHeader`      | `div[scPopoverHeader]`       | Optional header container              |
-| `ScPopoverTitle`       | `[scPopoverTitle]`           | Popover title text                     |
-| `ScPopoverDescription` | `p[scPopoverDescription]`    | Popover description text               |
+| `ScPopover`            | `div[scPopover]`               | Floating dialog panel                  |
+| `ScPopoverClose`       | `button[scPopoverClose]`       | Optional button to close the popover   |
+| `ScPopoverHeader`      | `div[scPopoverHeader]`         | Optional header container              |
+| `ScPopoverTitle`       | `[scPopoverTitle]`             | Popover title text                     |
+| `ScPopoverDescription` | `p[scPopoverDescription]`      | Popover description text               |
 
 ## Usage
 

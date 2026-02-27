@@ -12,7 +12,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
   template: `
     <div class="grid grid-cols-2 gap-4">
       <!-- Up Direction -->
-      <div class="relative h-48 border rounded-lg bg-muted/20">
+      <div class="bg-muted/20 relative h-48 rounded-lg border">
         <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
@@ -20,13 +20,13 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
             ariaLabel="Up direction"
           />
         </div>
-        <span class="absolute top-2 left-2 text-xs text-muted-foreground">
+        <span class="text-muted-foreground absolute top-2 left-2 text-xs">
           Up (default)
         </span>
       </div>
 
       <!-- Down Direction -->
-      <div class="relative h-48 border rounded-lg bg-muted/20">
+      <div class="bg-muted/20 relative h-48 rounded-lg border">
         <div class="absolute top-4 left-1/2 -translate-x-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
@@ -34,13 +34,13 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
             ariaLabel="Down direction"
           />
         </div>
-        <span class="absolute top-2 left-2 text-xs text-muted-foreground">
+        <span class="text-muted-foreground absolute top-2 left-2 text-xs">
           Down
         </span>
       </div>
 
       <!-- Left Direction -->
-      <div class="relative h-48 border rounded-lg bg-muted/20">
+      <div class="bg-muted/20 relative h-48 rounded-lg border">
         <div class="absolute top-1/2 right-4 -translate-y-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
@@ -48,13 +48,13 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
             ariaLabel="Left direction"
           />
         </div>
-        <span class="absolute top-2 left-2 text-xs text-muted-foreground">
+        <span class="text-muted-foreground absolute top-2 left-2 text-xs">
           Left
         </span>
       </div>
 
       <!-- Right Direction -->
-      <div class="relative h-48 border rounded-lg bg-muted/20">
+      <div class="bg-muted/20 relative h-48 rounded-lg border">
         <div class="absolute top-1/2 left-4 -translate-y-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
@@ -62,7 +62,7 @@ import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
             ariaLabel="Right direction"
           />
         </div>
-        <span class="absolute top-2 left-2 text-xs text-muted-foreground">
+        <span class="text-muted-foreground absolute top-2 left-2 text-xs">
           Right
         </span>
       </div>

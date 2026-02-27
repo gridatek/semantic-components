@@ -21,7 +21,7 @@ interface DemoItem {
       @for (item of items(); track item.id) {
         <div scMasonryItem>
           <div
-            class="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            class="overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-md"
             [style.background-color]="item.color"
             [style.height.px]="item.height"
           >
