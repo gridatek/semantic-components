@@ -116,7 +116,7 @@ import {
 
       <!-- Controls -->
       <div scVideoPlayerControls>
-        <div scVideoPlayerProgress class="mb-2"></div>
+        <div scVideoPlayerProgress></div>
 
         <div class="flex items-center gap-2">
           <!-- Play/Pause -->

@@ -42,7 +42,7 @@ export class ScVideoPlayerProgress {
 
   protected readonly class = computed(() =>
     cn(
-      'relative h-1 bg-white/30 rounded-full cursor-pointer group',
+      'relative mb-2 h-1 bg-white/30 rounded-full cursor-pointer group',
       this.classInput(),
     ),
   );
