@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   input,
+  output,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -51,7 +51,6 @@ import { DataTableColumnPinning } from './data-table-column-pinning';
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';
 import type { User } from './user.service';
-import { UserService } from './user.service';
 
 @Component({
   selector: 'app-data-table',
@@ -431,17 +430,18 @@ export class DataTable {
   readonly columnPinning = signal<ColumnPinningState>({});
   readonly rowPinning = signal<RowPinningState>({ top: [], bottom: [] });
 
-  private readonly userService = inject(UserService);
-  readonly data = signal<User[]>(this.userService.getUsers());
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly columns = input.required<ColumnDef<any, any>[]>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly data = input.required<any[]>();
+
+  readonly editSave = output<{ row: User; columnId: string; value: string }>();
 
   readonly editingCell = signal<{
     rowId: string;
     columnId: string;
   } | null>(null);
   readonly editValue = signal<string>('');
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly columns = input.required<ColumnDef<any, any>[]>();
   readonly pageSizeOptions = [5, 10, 20, 30];
 
   readonly table = createAngularTable(() => ({
@@ -570,7 +570,7 @@ export class DataTable {
 
   saveEdit(row: User, columnId: string): void {
     const value = this.editValue();
-    this.data.set(this.userService.updateUser(row.id, { [columnId]: value }));
+    this.editSave.emit({ row, columnId, value });
     this.editingCell.set(null);
   }
 
