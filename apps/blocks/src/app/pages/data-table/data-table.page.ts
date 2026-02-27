@@ -6,6 +6,7 @@ import {
   signal,
 } from '@angular/core';
 
+import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
 import { ScButtonPattern } from '@semantic-components/ui-lab';
 import {
   type ColumnDef,
@@ -551,7 +552,7 @@ const columns: ColumnDef<User, any>[] = [
   selector: 'app-data-table-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ScButtonPattern],
+  imports: [ScCheckbox, ScCheckboxField, ScButtonPattern],
   host: { class: 'block' },
   template: `
     <div class="container mx-auto px-4 py-10">
@@ -573,12 +574,12 @@ const columns: ColumnDef<User, any>[] = [
           <span class="text-sm font-medium">Columns:</span>
           @for (column of table.getAllLeafColumns(); track column.id) {
             @if (column.id !== 'select' && column.id !== 'expand') {
-              <label class="flex items-center gap-1 text-sm">
+              <label scCheckboxField class="text-sm">
                 <input
                   type="checkbox"
+                  scCheckbox
                   [checked]="column.getIsVisible()"
                   (change)="column.toggleVisibility()"
-                  class="h-3.5 w-3.5 rounded border-border"
                 />
                 {{ column.id }}
               </label>
@@ -638,12 +639,14 @@ const columns: ColumnDef<User, any>[] = [
                   >
                     @if (!header.isPlaceholder) {
                       @if (header.column.id === 'select') {
-                        <input
-                          type="checkbox"
-                          [checked]="table.getIsAllPageRowsSelected()"
-                          (change)="table.toggleAllPageRowsSelected()"
-                          class="h-4 w-4 rounded border-border"
-                        />
+                        <label scCheckboxField>
+                          <input
+                            type="checkbox"
+                            scCheckbox
+                            [checked]="table.getIsAllPageRowsSelected()"
+                            (change)="table.toggleAllPageRowsSelected()"
+                          />
+                        </label>
                       } @else {
                         <div
                           class="flex items-center gap-1"
@@ -749,13 +752,15 @@ const columns: ColumnDef<User, any>[] = [
                       />
                     } @else {
                       @if (cell.column.id === 'select') {
-                        <input
-                          type="checkbox"
-                          [checked]="row.getIsSelected()"
-                          [disabled]="!row.getCanSelect()"
-                          (change)="row.toggleSelected()"
-                          class="h-4 w-4 rounded border-border"
-                        />
+                        <label scCheckboxField>
+                          <input
+                            type="checkbox"
+                            scCheckbox
+                            [checked]="row.getIsSelected()"
+                            [disabled]="!row.getCanSelect()"
+                            (change)="row.toggleSelected()"
+                          />
+                        </label>
                       } @else if (cell.column.id === 'expand') {
                         @if (row.getCanExpand()) {
                           <button
