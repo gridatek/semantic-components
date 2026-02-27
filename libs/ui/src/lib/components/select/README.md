@@ -18,7 +18,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 | -------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `ScSelect`           | `div[scSelect]`                             | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<unknown>` |
 | `ScSelectTrigger`    | `div[scSelectTrigger]`                      | Trigger button, internally renders hidden input and chevron icon                             |
-| `ScSelectLabel`      | `span[scSelectLabel]`, `div[scSelectLabel]` | Display selected value with styling                                                          |
+| `ScSelectLabel`      | `span[scSelectLabel]`, `div[scSelectLabel]` | Automatically displays the selected label text with truncation                               |
 | `ScSelectItemIcon`   | `svg[scSelectItemIcon]`                     | Icon styling for items and value display (sets `aria-hidden="true"` automatically)           |
 | `ScSelectPortal`     | `ng-template[scSelectPortal]`               | Marks lazy content template for the overlay                                                  |
 | `ScSelectPopup`      | `div[scSelectPopup]`                        | Popup container with styling, animation, and visibility                                      |
@@ -41,11 +41,9 @@ Displays a list of options for the user to pick from — mimics a native select.
 ### Template
 
 ```html
-<div scSelect #select="scSelect" placeholder="Select an option" aria-label="Select">
+<div scSelect placeholder="Select an option" aria-label="Select">
   <div scSelectTrigger>
-    <span scSelectLabel>
-      <span class="truncate">{{ select.label() }}</span>
-    </span>
+    <span scSelectLabel></span>
   </div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
@@ -61,9 +59,16 @@ Displays a list of options for the user to pick from — mimics a native select.
 
 ### With Icons
 
-Use `ScSelectItemIcon` for consistent icon styling in items and the value display. It automatically sets `aria-hidden="true"`.
+Use `ScSelectItemIcon` for consistent icon styling in items and the trigger. Place icons **outside** `scSelectLabel` in the trigger so truncation only applies to the text.
 
 ```html
+<!-- In the trigger: icon outside scSelectLabel -->
+<div scSelectTrigger>
+  <svg scSelectItemIcon siHomeIcon></svg>
+  <span scSelectLabel></span>
+</div>
+
+<!-- In items -->
 <div scSelectItem [value]="'home'" [label]="'Home'">
   <svg scSelectItemIcon siHomeIcon></svg>
   <span class="flex-1">Home</span>
@@ -75,11 +80,9 @@ Use `ScSelectItemIcon` for consistent icon styling in items and the value displa
 Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize options into labeled groups.
 
 ```html
-<div scSelect #select="scSelect" placeholder="Select a food" aria-label="Food dropdown">
+<div scSelect placeholder="Select a food" aria-label="Food dropdown">
   <div scSelectTrigger>
-    <span scSelectLabel>
-      <span class="truncate">{{ select.label() }}</span>
-    </span>
+    <span scSelectLabel></span>
   </div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
@@ -111,11 +114,9 @@ import { ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, 
   selector: 'app-example',
   imports: [ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectLabel],
   template: `
-    <div scSelect #select="scSelect" placeholder="Select an option" aria-label="Select">
+    <div scSelect placeholder="Select an option" aria-label="Select">
       <div scSelectTrigger>
-        <span scSelectLabel>
-          <span class="truncate">{{ select.label() }}</span>
-        </span>
+        <span scSelectLabel></span>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
@@ -143,12 +144,11 @@ export class ExampleComponent {
 
 ## Template Access via `exportAs`
 
-Use `#select="scSelect"` to access `ScSelect` directly in the template without `viewChild`:
+Use `#select="scSelect"` to access `ScSelect` directly in the template when you need the value (e.g., for conditional icon rendering):
 
 ```html
-<div scSelect #select="scSelect" placeholder="Pick a fruit">
+<div scSelect #select="scSelect" placeholder="Pick a fruit" aria-label="Fruit">
   ...
-  <span>{{ select.label() }}</span>
   <span>Current value: {{ select.value() }}</span>
 </div>
 ```
@@ -268,8 +268,8 @@ All components accept a `class` input for custom styling:
 ```
 ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, exportAs: 'scSelect')
 ├── ScSelectTrigger (trigger + overlay origin)
-│   ├── ScSelectLabel (display value) [projected content]
-│   │   └── ScSelectItemIcon (consumer icons) [projected content]
+│   ├── ScSelectItemIcon (consumer icons, outside label) [projected content]
+│   ├── ScSelectLabel (auto-displays selected label with truncation)
 │   ├── ScSelectInput (hidden combobox input) [internal]
 │   └── ScSelectTriggerIcon + SiChevronDownIcon [internal]
 └── ScSelectPortal (ng-template marking lazy overlay content)
