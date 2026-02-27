@@ -106,11 +106,7 @@ import {
       <!-- Big Play Button -->
       @if (!player.isPlaying() && !player.isBuffering()) {
         <button scVideoPlayerBigPlay>
-          <div
-            class="size-20 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform"
-          >
-            <svg siPlayIcon></svg>
-          </div>
+          <svg siPlayIcon></svg>
         </button>
       }
 

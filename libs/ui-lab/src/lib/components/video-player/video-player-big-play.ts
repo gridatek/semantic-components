@@ -11,7 +11,13 @@ import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
   selector: 'button[scVideoPlayerBigPlay]',
-  template: '<ng-content />',
+  template: `
+    <div
+      class="flex size-20 items-center justify-center rounded-full bg-white/90 transition-transform hover:scale-110"
+    >
+      <ng-content />
+    </div>
+  `,
   host: {
     type: 'button',
     '[class]': 'class()',
