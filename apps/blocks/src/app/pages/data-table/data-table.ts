@@ -172,7 +172,7 @@ import { UserService } from './user.service';
             <tr
               scTableRow
               [attr.data-state]="row.getIsSelected() ? 'selected' : null"
-              [class.bg-muted/30]="row.getIsGrouped()"
+              [class]="row.getIsGrouped() ? 'bg-muted/30' : ''"
             >
               @for (cell of row.getVisibleCells(); track cell.id) {
                 <td
