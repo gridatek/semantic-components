@@ -6,11 +6,12 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn, ScSlider } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
   selector: 'div[scVideoPlayerVolume]',
+  imports: [ScSlider],
   template: `
     <button
       type="button"
@@ -21,18 +22,22 @@ import { SC_VIDEO_PLAYER } from './video-player';
       <ng-content select="[volume-icon]" />
     </button>
     <input
-      type="range"
+      scSlider
+      class="h-1 w-0 cursor-pointer transition-all duration-200 group-hover/volume:w-20"
       min="0"
       max="1"
       step="0.01"
       [value]="player.volume()"
+      [style.--fill-percent]="player.volume() * 100 + '%'"
       (input)="onVolumeInput($event)"
-      class="h-1 w-0 cursor-pointer accent-white transition-all duration-200 group-hover:w-20"
       aria-label="Volume"
     />
   `,
   host: {
     '[class]': 'class()',
+    '[style.--primary]': '"oklch(1 0 0)"',
+    '[style.--muted]': '"oklch(1 0 0 / 0.3)"',
+    '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,14 +47,13 @@ export class ScVideoPlayerVolume {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex items-center gap-1 group', this.classInput()),
+    cn('group/volume flex items-center gap-1', this.classInput()),
   );
 
   protected readonly buttonClass = computed(() =>
     cn(
-      'size-8 rounded flex items-center justify-center',
-      'text-white hover:bg-white/20 transition-colors',
-      'focus:outline-none focus:ring-2 focus:ring-white/50',
+      buttonVariants({ variant: 'ghost', size: 'icon' }),
+      'text-foreground',
       '[&_svg]:size-5',
     ),
   );
