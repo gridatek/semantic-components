@@ -52,7 +52,7 @@ import {
       scAudioPlayer
       #player="scAudioPlayer"
       [tracks]="tracks"
-      class="bg-card flex max-w-md flex-col gap-3 rounded-lg border p-4"
+      class="bg-card flex w-full max-w-md flex-col gap-3 rounded-lg border p-4"
     >
       <!-- Cover -->
       <div scAudioPlayerCover class="mx-auto aspect-square w-full"></div>
