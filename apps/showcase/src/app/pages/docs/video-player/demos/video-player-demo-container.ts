@@ -89,7 +89,7 @@ import {
     <div
       scVideoPlayer
       #player="scVideoPlayer"
-      class="relative bg-black rounded-lg overflow-hidden max-w-2xl"
+
     >
       <!-- Buffering Indicator -->
       <div scVideoPlayerBuffering>

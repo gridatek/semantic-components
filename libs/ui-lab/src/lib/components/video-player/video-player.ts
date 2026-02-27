@@ -1,4 +1,11 @@
-import { computed, Directive, InjectionToken, signal } from '@angular/core';
+import {
+  computed,
+  Directive,
+  InjectionToken,
+  input,
+  signal,
+} from '@angular/core';
+import { cn } from '@semantic-components/ui';
 
 export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
   'SC_VIDEO_PLAYER',
@@ -10,7 +17,7 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
   providers: [{ provide: SC_VIDEO_PLAYER, useExisting: ScVideoPlayer }],
   host: {
     'data-slot': 'video-player',
-    class: 'group/video-player',
+    '[class]': 'class()',
     role: 'region',
     '[attr.aria-label]': '"Video player"',
     '[style.--foreground]': '"oklch(1 0 0)"',
@@ -19,6 +26,15 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
   },
 })
 export class ScVideoPlayer {
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() =>
+    cn(
+      'group/video-player relative max-w-2xl overflow-hidden rounded-lg bg-black',
+      this.classInput(),
+    ),
+  );
+
   // Video element reference
   readonly videoElement = signal<HTMLVideoElement | null>(null);
 

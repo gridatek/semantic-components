@@ -61,11 +61,7 @@ import {
     SiLoaderIcon,
   ],
   template: `
-    <div
-      scVideoPlayer
-      #player="scVideoPlayer"
-      class="relative max-w-2xl overflow-hidden rounded-lg bg-black"
-    >
+    <div scVideoPlayer #player="scVideoPlayer">
       <!-- Buffering Indicator -->
       <div scVideoPlayerBuffering>
         <svg siLoaderIcon></svg>

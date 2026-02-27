@@ -30,7 +30,7 @@ import {
     ScVideoPlayerFullscreen,
   ],
   template: `
-    <div scVideoPlayer class="relative bg-black rounded-lg overflow-hidden">
+    <div scVideoPlayer>
       <video
         scVideoPlayerVideo
         [src]="'video.mp4'"
@@ -137,7 +137,7 @@ import {
 #### Minimal Player
 
 ```html
-<div scVideoPlayer class="relative">
+<div scVideoPlayer>
   <video scVideoPlayerVideo [src]="video"></video>
 
   <div scVideoPlayerControls>
@@ -149,7 +149,7 @@ import {
 #### With Progress and Time
 
 ```html
-<div scVideoPlayer class="relative">
+<div scVideoPlayer>
   <video scVideoPlayerVideo [src]="video"></video>
 
   <div scVideoPlayerControls>
@@ -165,7 +165,7 @@ import {
 #### Full-Featured Player
 
 ```html
-<div scVideoPlayer class="relative overflow-hidden rounded-lg bg-black">
+<div scVideoPlayer>
   <!-- Buffering Indicator -->
   <div scVideoPlayerBuffering>
     <div class="size-12 animate-spin rounded-full border-4 border-white/30 border-t-white"></div>
@@ -177,9 +177,7 @@ import {
   <!-- Big Play Button -->
   @if (!player.isPlaying()) {
   <button scVideoPlayerBigPlay #player="scVideoPlayer">
-    <div class="flex size-20 items-center justify-center rounded-full bg-white/90">
-      <!-- Play icon -->
-    </div>
+    <!-- Play icon -->
   </button>
   }
 
