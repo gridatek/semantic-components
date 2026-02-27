@@ -6,32 +6,35 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, ScSlider } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
   selector: 'div[scVideoPlayerProgress]',
+  imports: [ScSlider],
   template: `
     <!-- Buffered -->
     <div
-      class="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-white/50"
+      class="pointer-events-none absolute top-1/2 left-0 h-1 -translate-y-1/2 rounded-full bg-white/50"
       [style.width.%]="player.bufferedPercent()"
     ></div>
-    <!-- Progress -->
-    <div
-      class="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-white"
-      [style.width.%]="player.progressPercent()"
-    ></div>
-    <!-- Thumb -->
-    <div
-      class="pointer-events-none absolute top-1/2 size-3 -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity group-hover:opacity-100"
-      [style.left.%]="player.progressPercent()"
-      [style.transform]="'translate(-50%, -50%)'"
-    ></div>
+    <!-- Seek slider -->
+    <input
+      scSlider
+      class="absolute inset-0 h-full"
+      min="0"
+      max="100"
+      step="0.1"
+      [value]="player.progressPercent()"
+      [style.--fill-percent]="player.progressPercent() + '%'"
+      (input)="onSeek($event)"
+    />
   `,
   host: {
     '[class]': 'class()',
-    '(click)': 'onClick($event)',
+    '[style.--primary]': '"oklch(1 0 0)"',
+    '[style.--muted]': '"oklch(1 0 0 / 0.3)"',
+    '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,16 +44,11 @@ export class ScVideoPlayerProgress {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'relative mb-2 h-1 bg-white/30 rounded-full cursor-pointer group',
-      this.classInput(),
-    ),
+    cn('relative mb-2 block h-3', this.classInput()),
   );
 
-  protected onClick(event: MouseEvent): void {
-    const target = event.currentTarget as HTMLElement;
-    const rect = target.getBoundingClientRect();
-    const percent = ((event.clientX - rect.left) / rect.width) * 100;
-    this.player.seek(percent);
+  protected onSeek(event: Event): void {
+    const value = +(event.target as HTMLInputElement).value;
+    this.player.seek(value);
   }
 }
