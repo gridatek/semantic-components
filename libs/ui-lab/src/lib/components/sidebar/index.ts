@@ -1,5 +1,8 @@
 export { ScSidebarProvider } from './sidebar-provider';
 export { ScSidebar } from './sidebar';
+export { ScSidebarContainer } from './sidebar-container';
+export { ScSidebarGap } from './sidebar-gap';
+export { ScSidebarInner } from './sidebar-inner';
 export { ScSidebarTrigger } from './sidebar-trigger';
 export { ScSidebarRail } from './sidebar-rail';
 export { ScSidebarInset } from './sidebar-inset';

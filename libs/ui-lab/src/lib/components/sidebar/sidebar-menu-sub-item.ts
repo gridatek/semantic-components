@@ -11,5 +11,7 @@ import { cn } from '@semantic-components/ui';
 export class ScSidebarMenuSubItem {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('group/menu-sub-item relative', this.classInput()),
+  );
 }

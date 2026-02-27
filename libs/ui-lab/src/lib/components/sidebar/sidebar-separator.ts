@@ -12,10 +12,6 @@ export class ScSidebarSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'mx-2 h-px w-auto bg-sidebar-border',
-      'group-data-[collapsible=icon]:mx-2',
-      this.classInput(),
-    ),
+    cn('mx-2 w-auto bg-sidebar-border', this.classInput()),
   );
 }

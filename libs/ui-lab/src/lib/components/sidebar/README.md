@@ -8,6 +8,9 @@ A comprehensive sidebar component system for Angular applications with collapsib
 
 - `ScSidebarProvider` - Root provider component with state management
 - `ScSidebar` - Main sidebar container
+- `ScSidebarGap` - Invisible spacer that pushes content (used internally by ScSidebar)
+- `ScSidebarContainer` - Fixed-position container for sidebar content (used internally by ScSidebar)
+- `ScSidebarInner` - Inner wrapper with background and variant styles (used internally by ScSidebar)
 - `ScSidebarTrigger` - Toggle button
 - `ScSidebarRail` - Resize handle for collapsing/expanding
 - `ScSidebarInset` - Main content wrapper
