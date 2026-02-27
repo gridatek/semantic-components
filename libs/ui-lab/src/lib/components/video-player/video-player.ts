@@ -10,6 +10,7 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
   providers: [{ provide: SC_VIDEO_PLAYER, useExisting: ScVideoPlayer }],
   host: {
     'data-slot': 'video-player',
+    class: 'group/video-player',
     role: 'region',
     '[attr.aria-label]': '"Video player"',
     '[style.--foreground]': '"oklch(1 0 0)"',
