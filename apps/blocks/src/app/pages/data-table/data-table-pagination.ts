@@ -1,73 +1,94 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import {
+  type ScPaginationChange,
+  ScPagination,
+  ScPaginationEllipsis,
+  ScPaginationFirst,
+  ScPaginationItem,
+  ScPaginationLast,
+  ScPaginationLink,
+  ScPaginationList,
+  ScPaginationNext,
+  ScPaginationPageSizeSelect,
+  ScPaginationPrevious,
+} from '@semantic-components/ui';
 import type { Table } from '@tanstack/angular-table';
 
 @Component({
   selector: 'app-data-table-pagination',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ScButton],
-  host: { class: 'flex items-center justify-between px-2 py-4' },
+  imports: [
+    ScPagination,
+    ScPaginationList,
+    ScPaginationItem,
+    ScPaginationLink,
+    ScPaginationPrevious,
+    ScPaginationNext,
+    ScPaginationFirst,
+    ScPaginationLast,
+    ScPaginationEllipsis,
+    ScPaginationPageSizeSelect,
+  ],
+  host: { class: 'block' },
   template: `
-    <div class="flex items-center gap-2 text-sm text-muted-foreground">
-      <span>Rows per page:</span>
-      <select
-        [value]="table().getState().pagination.pageSize"
-        (change)="table().setPageSize(+$any($event.target).value)"
-        class="h-8 rounded-md border border-input bg-transparent px-2 text-sm"
-      >
-        @for (size of pageSizeOptions(); track size) {
-          <option [value]="size">{{ size }}</option>
-        }
-      </select>
-    </div>
+    <div
+      scPagination
+      #pagination="scPagination"
+      [currentPage]="currentPage()"
+      [pageSize]="pageSize()"
+      [totalItems]="totalItems()"
+      [pageSizes]="pageSizeOptions()"
+      (change)="onPageChange($event)"
+      class="flex items-center justify-between py-4"
+    >
+      <div class="flex items-center gap-2 text-sm text-muted-foreground">
+        <span>Rows per page:</span>
+        <select scPaginationPageSizeSelect>
+          @for (size of pageSizeOptions(); track size) {
+            <option [value]="size">{{ size }}</option>
+          }
+        </select>
+      </div>
 
-    <div class="flex items-center gap-2 text-sm">
-      <span class="text-muted-foreground">
-        Page {{ table().getState().pagination.pageIndex + 1 }} of
-        {{ table().getPageCount() }}
-      </span>
-      <button
-        scButton
-        variant="outline"
-        size="icon-sm"
-        (click)="table().firstPage()"
-        [disabled]="!table().getCanPreviousPage()"
-      >
-        &laquo;
-      </button>
-      <button
-        scButton
-        variant="outline"
-        size="icon-sm"
-        (click)="table().previousPage()"
-        [disabled]="!table().getCanPreviousPage()"
-      >
-        &lsaquo;
-      </button>
-      <button
-        scButton
-        variant="outline"
-        size="icon-sm"
-        (click)="table().nextPage()"
-        [disabled]="!table().getCanNextPage()"
-      >
-        &rsaquo;
-      </button>
-      <button
-        scButton
-        variant="outline"
-        size="icon-sm"
-        (click)="table().lastPage()"
-        [disabled]="!table().getCanNextPage()"
-      >
-        &raquo;
-      </button>
+      <div class="flex items-center gap-2 text-sm">
+        <span class="text-muted-foreground">
+          Page {{ currentPage() }} of {{ table().getPageCount() }}
+        </span>
+        <ul scPaginationList>
+          <li scPaginationItem>
+            <button scPaginationFirst size="icon-sm">&laquo;</button>
+          </li>
+          <li scPaginationItem>
+            <button scPaginationPrevious size="icon-sm">&lsaquo;</button>
+          </li>
+
+          @for (page of pagination.pages(); track page.value) {
+            <li scPaginationItem>
+              @if (page.type === 'ellipsis') {
+                <span scPaginationEllipsis>...</span>
+              } @else {
+                <button scPaginationLink [page]="page.value" size="icon-sm">
+                  {{ page.value }}
+                </button>
+              }
+            </li>
+          }
+
+          <li scPaginationItem>
+            <button scPaginationNext size="icon-sm">&rsaquo;</button>
+          </li>
+          <li scPaginationItem>
+            <button scPaginationLast size="icon-sm">&raquo;</button>
+          </li>
+        </ul>
+      </div>
     </div>
   `,
 })
@@ -75,4 +96,19 @@ import type { Table } from '@tanstack/angular-table';
 export class DataTablePagination {
   readonly table = input.required<Table<any>>();
   readonly pageSizeOptions = input<number[]>([5, 10, 20, 30]);
+
+  readonly currentPage = computed(
+    () => this.table().getState().pagination.pageIndex + 1,
+  );
+  readonly pageSize = computed(
+    () => this.table().getState().pagination.pageSize,
+  );
+  readonly totalItems = computed(
+    () => this.table().getFilteredRowModel().rows.length,
+  );
+
+  onPageChange(event: ScPaginationChange): void {
+    this.table().setPageIndex(event.page - 1);
+    this.table().setPageSize(event.pageSize);
+  }
 }

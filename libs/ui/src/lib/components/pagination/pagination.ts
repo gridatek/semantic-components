@@ -17,7 +17,7 @@ export interface ScPaginationChange {
 }
 
 @Directive({
-  selector: 'nav[scPagination]',
+  selector: 'nav[scPagination], div[scPagination]',
   exportAs: 'scPagination',
   host: {
     'data-slot': 'pagination',
