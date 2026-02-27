@@ -3,7 +3,7 @@ export type { ScAudioTrack } from './audio-player';
 export { ScAudioPlayerCover } from './audio-player-cover';
 export { ScAudioPlayerInfo } from './audio-player-info';
 export { ScAudioPlayerProgress } from './audio-player-progress';
-export { ScAudioPlayerPlayButton } from './audio-player-play-button';
+export { ScAudioPlayerPlay } from './audio-player-play';
 export { ScAudioPlayerPrevious } from './audio-player-previous';
 export { ScAudioPlayerNext } from './audio-player-next';
 export { ScAudioPlayerShuffle } from './audio-player-shuffle';

@@ -11,7 +11,7 @@ import {
   SiVolume2Icon,
   SiVolumeXIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
@@ -21,7 +21,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     <button
       type="button"
       (click)="player.toggleMute()"
-      class="hover:bg-accent focus:ring-ring flex size-8 items-center justify-center rounded-full transition-colors focus:ring-2 focus:outline-none"
+      [class]="muteButtonClass"
       [attr.aria-label]="player.isMuted() ? 'Unmute' : 'Mute'"
     >
       @if (player.isMuted() || player.volume() === 0) {
@@ -53,6 +53,11 @@ import { SC_AUDIO_PLAYER } from './audio-player';
 export class ScAudioPlayerVolume {
   readonly player = inject(SC_AUDIO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly muteButtonClass = cn(
+    buttonVariants({ variant: 'ghost', size: 'icon' }),
+    'rounded-full',
+  );
 
   protected readonly class = computed(() =>
     cn('flex items-center gap-2', this.classInput()),

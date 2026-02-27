@@ -33,7 +33,7 @@ import {
   ScAudioPlayerCover,
   ScAudioPlayerInfo,
   ScAudioPlayerProgress,
-  ScAudioPlayerPlayButton,
+  ScAudioPlayerPlay,
   ScAudioPlayerPrevious,
   ScAudioPlayerNext,
   ScAudioPlayerShuffle,
@@ -58,7 +58,7 @@ import {
     ScAudioPlayerCover,
     ScAudioPlayerInfo,
     ScAudioPlayerProgress,
-    ScAudioPlayerPlayButton,
+    ScAudioPlayerPlay,
     ScAudioPlayerPrevious,
     ScAudioPlayerNext,
     ScAudioPlayerShuffle,
@@ -99,7 +99,7 @@ import {
         <button scAudioPlayerPrevious>
           <svg siSkipBackIcon></svg>
         </button>
-        <button scAudioPlayerPlayButton>
+        <button scAudioPlayerPlay>
           @if (player.isPlaying()) {
             <svg siPauseIcon></svg>
           } @else {

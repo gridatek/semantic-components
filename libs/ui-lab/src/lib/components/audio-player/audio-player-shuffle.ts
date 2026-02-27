@@ -6,7 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
@@ -29,10 +29,8 @@ export class ScAudioPlayerShuffle {
 
   protected readonly class = computed(() =>
     cn(
-      'size-8 rounded-full flex items-center justify-center',
-      'hover:bg-accent transition-colors',
-      'focus:outline-none focus:ring-2 focus:ring-ring',
-      '[&_svg]:size-4',
+      buttonVariants({ variant: 'ghost', size: 'icon' }),
+      'rounded-full',
       this.classInput(),
     ),
   );

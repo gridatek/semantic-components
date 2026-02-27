@@ -6,7 +6,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({
@@ -17,6 +17,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!player.canGoNext()',
+    '[attr.aria-disabled]': '!player.canGoNext() || null',
     '[attr.aria-label]': "'Next track'",
     '(click)': 'player.next()',
   },
@@ -29,11 +30,8 @@ export class ScAudioPlayerNext {
 
   protected readonly class = computed(() =>
     cn(
-      'size-8 rounded-full flex items-center justify-center',
-      'hover:bg-accent transition-colors',
-      'focus:outline-none focus:ring-2 focus:ring-ring',
-      'disabled:opacity-50 disabled:cursor-not-allowed',
-      '[&_svg]:size-5',
+      buttonVariants({ variant: 'ghost', size: 'icon' }),
+      'rounded-full',
       this.classInput(),
     ),
   );
