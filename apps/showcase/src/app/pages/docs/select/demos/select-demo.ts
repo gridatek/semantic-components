@@ -87,9 +87,9 @@ import {
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
-            @for (label of options; track label.value) {
-              <div scSelectItem [value]="label.value" [label]="label.label">
-                @switch (label.icon) {
+            @for (option of options; track option.value) {
+              <div scSelectItem [value]="option.value" [label]="option.label">
+                @switch (option.icon) {
                   @case ('tag') {
                     <svg scSelectItemIcon siTagIcon></svg>
                   }
@@ -115,7 +115,7 @@ import {
                     <svg scSelectItemIcon siPlaneIcon></svg>
                   }
                 }
-                <span class="flex-1">{{ label.label }}</span>
+                <span class="flex-1">{{ option.label }}</span>
               </div>
             }
           </div>
