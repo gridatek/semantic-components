@@ -1,4 +1,10 @@
-import { computed, Directive, inject, input, signal } from '@angular/core';
+import {
+  computed,
+  Directive,
+  inject,
+  input,
+  linkedSignal,
+} from '@angular/core';
 import { cn } from '../../utils';
 import { ScResizablePanelGroup } from './resizable-panel-group';
 
@@ -29,7 +35,7 @@ export class ScResizablePanel {
   readonly minSize = input<number>(10);
   readonly maxSize = input<number>(90);
 
-  readonly size = signal<number>(this.defaultSize());
+  readonly size = linkedSignal(() => this.defaultSize());
 
   protected readonly class = computed(() =>
     cn('overflow-hidden', this.classInput()),
@@ -37,10 +43,6 @@ export class ScResizablePanel {
 
   protected readonly minSizePx = computed(() => `${this.minSize()}%`);
   protected readonly maxSizePx = computed(() => `${this.maxSize()}%`);
-
-  constructor() {
-    this.size.set(this.defaultSize());
-  }
 
   setSize(newSize: number): void {
     const clamped = Math.max(this.minSize(), Math.min(this.maxSize(), newSize));
