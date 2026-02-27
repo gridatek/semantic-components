@@ -25,7 +25,7 @@ export class ScResizablePanelGroup {
 
   protected readonly class = computed(() =>
     cn(
-      'flex h-full w-full aria-[orientation=vertical]:flex-col',
+      'flex h-full w-full overflow-hidden aria-[orientation=vertical]:flex-col',
       this.classInput(),
     ),
   );
