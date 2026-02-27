@@ -35,6 +35,7 @@ import type { ScVideoSource, ScVideoTrack } from './video-player-types';
   `,
   host: {
     '[class]': 'class()',
+    '[style.aspect-ratio]': 'aspectRatio()',
     '[poster]': 'poster()',
     '[autoplay]': 'autoplay()',
     '[loop]': 'loop()',
@@ -73,11 +74,7 @@ export class ScVideoPlayerVideo {
   readonly timeUpdate = output<number>();
 
   protected readonly class = computed(() =>
-    cn(
-      'w-full h-full object-contain',
-      `aspect-[${this.aspectRatio()}]`,
-      this.classInput(),
-    ),
+    cn('w-full h-full object-contain', this.classInput()),
   );
 
   constructor() {
