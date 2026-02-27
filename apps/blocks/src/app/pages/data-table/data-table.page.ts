@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  computed,
   signal,
   inject,
 } from '@angular/core';
@@ -23,7 +22,6 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ScButtonPattern } from '@semantic-components/ui-lab';
 import {
-  type ColumnDef,
   type ColumnFiltersState,
   type ColumnPinningState,
   type ExpandedState,
@@ -34,7 +32,6 @@ import {
   type SortingState,
   type VisibilityState,
   createAngularTable,
-  createColumnHelper,
   getCoreRowModel,
   getExpandedRowModel,
   getFilteredRowModel,
@@ -43,90 +40,12 @@ import {
   getSortedRowModel,
 } from '@tanstack/angular-table';
 
+import { DataTableColumnPinning } from './data-table-column-pinning';
+import { columns } from './data-table-columns';
 import { DataTablePagination } from './data-table-pagination';
+import { DataTableToolbar } from './data-table-toolbar';
 import type { User } from './user.service';
 import { UserService } from './user.service';
-
-const columnHelper = createColumnHelper<User>();
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const columns: ColumnDef<User, any>[] = [
-  {
-    id: 'select',
-    header: 'Select',
-    enableSorting: false,
-    enableColumnFilter: false,
-  },
-  {
-    id: 'expand',
-    header: '',
-    enableSorting: false,
-    enableColumnFilter: false,
-  },
-  columnHelper.accessor('id', {
-    header: 'ID',
-    enableColumnFilter: false,
-  }),
-  columnHelper.accessor('username', {
-    header: 'Username',
-    enableSorting: true,
-    enableColumnFilter: true,
-  }),
-  columnHelper.accessor('firstName', {
-    header: 'First Name',
-    enableSorting: true,
-    enableColumnFilter: true,
-  }),
-  columnHelper.accessor('lastName', {
-    header: 'Last Name',
-    enableSorting: true,
-    enableColumnFilter: true,
-  }),
-  columnHelper.accessor('email', {
-    header: 'Email',
-    enableSorting: true,
-    enableColumnFilter: false,
-  }),
-  columnHelper.accessor('role', {
-    header: 'Role',
-    enableSorting: true,
-    enableColumnFilter: true,
-    enableGrouping: true,
-  }),
-  columnHelper.accessor('plan', {
-    header: 'Plan',
-    enableSorting: true,
-    enableColumnFilter: true,
-    enableGrouping: true,
-  }),
-  columnHelper.accessor('status', {
-    header: 'Status',
-    enableSorting: true,
-    enableColumnFilter: true,
-  }),
-  columnHelper.accessor('joinedAt', {
-    header: 'Joined',
-    enableSorting: true,
-    enableColumnFilter: false,
-  }),
-  columnHelper.accessor('lastLoginAt', {
-    header: 'Last Login',
-    enableSorting: true,
-    enableColumnFilter: false,
-  }),
-  columnHelper.accessor('storageUsed', {
-    header: 'Storage (MB)',
-    enableSorting: true,
-    enableColumnFilter: false,
-    aggregationFn: 'mean',
-  }),
-  columnHelper.accessor('apiCalls', {
-    header: 'API Calls',
-    enableSorting: true,
-    enableColumnFilter: false,
-    aggregationFn: 'sum',
-  }),
-];
 
 @Component({
   selector: 'app-data-table-page',
@@ -144,71 +63,22 @@ const columns: ColumnDef<User, any>[] = [
     SiChevronDownIcon,
     SiChevronRightIcon,
     ScButtonPattern,
+    DataTableToolbar,
     DataTablePagination,
+    DataTableColumnPinning,
   ],
   host: { class: 'block' },
   template: `
     <div class="container mx-auto px-4 py-10">
       <h1 class="mb-6 text-3xl font-bold">TanStack Table Demo</h1>
 
-      <!-- Toolbar -->
-      <div class="mb-4 flex flex-wrap items-center gap-4">
-        <!-- Global Filter -->
-        <input
-          scInput
-          type="text"
-          [value]="globalFilter()"
-          (input)="globalFilter.set($any($event.target).value)"
-          placeholder="Search all columns..."
-        />
-
-        <!-- Column Visibility -->
-        <div class="flex items-center gap-2">
-          <span class="text-sm font-medium">Columns:</span>
-          @for (column of table.getAllLeafColumns(); track column.id) {
-            @if (column.id !== 'select' && column.id !== 'expand') {
-              <label scCheckboxField class="text-sm">
-                <input
-                  type="checkbox"
-                  scCheckbox
-                  [checked]="column.getIsVisible()"
-                  (change)="column.toggleVisibility()"
-                />
-                {{ column.id }}
-              </label>
-            }
-          }
-        </div>
-
-        <!-- Grouping -->
-        <div class="flex items-center gap-2">
-          <span class="text-sm font-medium">Group by:</span>
-          <button
-            scButton
-            [variant]="isGroupedBy('role') ? 'default' : 'outline'"
-            size="sm"
-            (click)="toggleGrouping('role')"
-          >
-            Role
-          </button>
-          <button
-            scButton
-            [variant]="isGroupedBy('plan') ? 'default' : 'outline'"
-            size="sm"
-            (click)="toggleGrouping('plan')"
-          >
-            Plan
-          </button>
-        </div>
-
-        <!-- Selection Count -->
-        @if (selectedRowCount() > 0) {
-          <span class="text-sm text-muted-foreground">
-            {{ selectedRowCount() }} of
-            {{ table.getRowModel().rows.length }} row(s) selected
-          </span>
-        }
-      </div>
+      <app-data-table-toolbar
+        [table]="table"
+        [globalFilter]="globalFilter()"
+        (globalFilterChange)="globalFilter.set($event)"
+        [grouping]="grouping()"
+        (groupingChange)="grouping.set($event)"
+      />
 
       <!-- Table -->
       <div class="relative overflow-auto rounded-md border">
@@ -537,44 +407,15 @@ const columns: ColumnDef<User, any>[] = [
         </table>
       </div>
 
-      <!-- Pagination -->
       <app-data-table-pagination
         [table]="table"
         [pageSizeOptions]="pageSizeOptions"
       />
 
-      <!-- Pin Controls -->
-      <div class="mt-4 flex flex-wrap gap-4 rounded-md border p-4">
-        <h3 class="w-full text-sm font-medium">Column Pinning</h3>
-        <button
-          scButton
-          [variant]="
-            columnPinning().left?.includes('id') ? 'default' : 'outline'
-          "
-          size="sm"
-          (click)="toggleColumnPin('id', 'left')"
-        >
-          Pin ID Left
-        </button>
-        <button
-          scButton
-          [variant]="
-            columnPinning().right?.includes('apiCalls') ? 'default' : 'outline'
-          "
-          size="sm"
-          (click)="toggleColumnPin('apiCalls', 'right')"
-        >
-          Pin API Calls Right
-        </button>
-        <button
-          scButton
-          variant="outline"
-          size="sm"
-          (click)="resetColumnPinning()"
-        >
-          Reset Pinning
-        </button>
-      </div>
+      <app-data-table-column-pinning
+        [columnPinning]="columnPinning()"
+        (columnPinningChange)="columnPinning.set($event)"
+      />
     </div>
   `,
 })
@@ -684,10 +525,6 @@ export default class DataTablePage {
     getRowCanExpand: () => true,
   }));
 
-  readonly selectedRowCount = computed(
-    () => Object.keys(this.rowSelection()).length,
-  );
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getHeaderLabel(header: any): string {
     const headerDef = header.column.columnDef.header;
@@ -712,35 +549,6 @@ export default class DataTablePage {
   getColumnFilterValue(columnId: string): string {
     const filter = this.columnFilters().find((f) => f.id === columnId);
     return (filter?.value as string) ?? '';
-  }
-
-  toggleGrouping(columnId: string): void {
-    this.grouping.update((prev) =>
-      prev.includes(columnId)
-        ? prev.filter((id) => id !== columnId)
-        : [...prev, columnId],
-    );
-  }
-
-  isGroupedBy(columnId: string): boolean {
-    return this.grouping().includes(columnId);
-  }
-
-  toggleColumnPin(columnId: string, position: 'left' | 'right'): void {
-    this.columnPinning.update((prev) => {
-      const pinned = prev[position] ?? [];
-      if (pinned.includes(columnId)) {
-        return {
-          ...prev,
-          [position]: pinned.filter((id) => id !== columnId),
-        };
-      }
-      return { ...prev, [position]: [...pinned, columnId] };
-    });
-  }
-
-  resetColumnPinning(): void {
-    this.columnPinning.set({});
   }
 
   canEditColumn(columnId: string): boolean {
