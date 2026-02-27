@@ -37,6 +37,7 @@ import {
   getSortedRowModel,
 } from '@tanstack/angular-table';
 
+import { DataTablePagination } from './data-table-pagination';
 import type { User } from './user.service';
 import { UserService } from './user.service';
 
@@ -133,6 +134,7 @@ const columns: ColumnDef<User, any>[] = [
     ScInput,
     ScProgress,
     ScButtonPattern,
+    DataTablePagination,
   ],
   host: { class: 'block' },
   template: `
@@ -518,63 +520,10 @@ const columns: ColumnDef<User, any>[] = [
       </div>
 
       <!-- Pagination -->
-      <div class="flex items-center justify-between px-2 py-4">
-        <div class="flex items-center gap-2 text-sm text-muted-foreground">
-          <span>Rows per page:</span>
-          <select
-            [value]="pagination().pageSize"
-            (change)="table.setPageSize(+$any($event.target).value)"
-            class="h-8 rounded-md border border-input bg-transparent px-2 text-sm"
-          >
-            @for (size of pageSizeOptions; track size) {
-              <option [value]="size">{{ size }}</option>
-            }
-          </select>
-        </div>
-
-        <div class="flex items-center gap-2 text-sm">
-          <span class="text-muted-foreground">
-            Page {{ table.getState().pagination.pageIndex + 1 }} of
-            {{ table.getPageCount() }}
-          </span>
-          <button
-            scButton
-            variant="outline"
-            size="icon-sm"
-            (click)="table.firstPage()"
-            [disabled]="!table.getCanPreviousPage()"
-          >
-            &laquo;
-          </button>
-          <button
-            scButton
-            variant="outline"
-            size="icon-sm"
-            (click)="table.previousPage()"
-            [disabled]="!table.getCanPreviousPage()"
-          >
-            &lsaquo;
-          </button>
-          <button
-            scButton
-            variant="outline"
-            size="icon-sm"
-            (click)="table.nextPage()"
-            [disabled]="!table.getCanNextPage()"
-          >
-            &rsaquo;
-          </button>
-          <button
-            scButton
-            variant="outline"
-            size="icon-sm"
-            (click)="table.lastPage()"
-            [disabled]="!table.getCanNextPage()"
-          >
-            &raquo;
-          </button>
-        </div>
-      </div>
+      <app-data-table-pagination
+        [table]="table"
+        [pageSizeOptions]="pageSizeOptions"
+      />
 
       <!-- Pin Controls -->
       <div class="mt-4 flex flex-wrap gap-4 rounded-md border p-4">
