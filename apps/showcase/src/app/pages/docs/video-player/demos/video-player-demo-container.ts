@@ -43,6 +43,7 @@ import {
   ScVideoPlayerBigPlay,
   ScVideoPlayerBuffering,
   ScVideoPlayerSpacer,
+  ScVideoPlayerToolbar,
 } from '@semantic-components/ui-lab';
 import {
   SiPlayIcon,
@@ -74,6 +75,7 @@ import {
     ScVideoPlayerBigPlay,
     ScVideoPlayerBuffering,
     ScVideoPlayerSpacer,
+  ScVideoPlayerToolbar,
     SiPlayIcon,
     SiPauseIcon,
     SiVolumeXIcon,
@@ -114,7 +116,7 @@ import {
       <div scVideoPlayerControls>
         <div scVideoPlayerProgress></div>
 
-        <div class="flex items-center gap-2">
+        <div scVideoPlayerToolbar>
           <!-- Play/Pause -->
           <button scVideoPlayerPlayPause>
             @if (player.isPlaying()) {
