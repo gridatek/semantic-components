@@ -1,22 +1,21 @@
+import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { JsonPipe } from '@angular/common';
-import { form, FormField, FormRoot } from '@angular/forms/signals';
-import { required } from '@angular/forms/signals';
+import { form, FormRoot, required } from '@angular/forms/signals';
 import {
   ScField,
   ScLabel,
   ScSelect,
   ScSelectItem,
+  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
   ScSelectTrigger,
-  ScSelectLabel,
 } from '@semantic-components/ui';
 
 interface FormModel {
@@ -36,7 +35,7 @@ interface FormModel {
     ScSelectTrigger,
     ScSelectLabel,
     JsonPipe,
-    FormField,
+    // FormField,
     FormRoot,
   ],
   template: `
@@ -44,12 +43,35 @@ interface FormModel {
       <div class="space-y-4">
         <div scField>
           <label scLabel>Fruit</label>
-          <div
+          <!--div
             scSelect
             #select="scSelect"
             placeholder="Select a fruit"
             aria-label="Fruit dropdown"
             [formField]="fruitForm.fruit"
+          >
+            <div scSelectTrigger>
+              <span scSelectLabel>
+                <span class="truncate">{{ select.label() }}</span>
+              </span>
+            </div>
+            <ng-template scSelectPortal>
+              <div scSelectPopup>
+                <div scSelectList>
+                  @for (fruit of fruits; track fruit) {
+                    <div scSelectItem [value]="fruit" [label]="fruit">
+                      {{ fruit }}
+                    </div>
+                  }
+                </div>
+              </div>
+            </ng-template>
+          </div-->
+          <div
+            scSelect
+            #select="scSelect"
+            placeholder="Select a fruit"
+            aria-label="Fruit dropdown"
           >
             <div scSelectTrigger>
               <span scSelectLabel>
