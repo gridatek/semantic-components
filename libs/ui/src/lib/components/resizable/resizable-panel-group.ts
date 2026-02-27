@@ -17,8 +17,12 @@ export class ScResizablePanelGroup {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly direction = input<ResizableDirection>('horizontal');
 
-  private readonly panels = contentChildren(ScResizablePanel);
-  private readonly handles = contentChildren(ScResizableHandle);
+  private readonly panels = contentChildren(ScResizablePanel, {
+    descendants: true,
+  });
+  private readonly handles = contentChildren(ScResizableHandle, {
+    descendants: true,
+  });
 
   protected readonly class = computed(() =>
     cn(
