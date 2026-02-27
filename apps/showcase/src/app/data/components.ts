@@ -744,7 +744,7 @@ export const COMPONENTS: ComponentItem[] = [
     path: 'sidebar',
     description: 'A collapsible side navigation panel.',
     status: 'Experimental',
-    library: 'ui-lab',
+    library: 'ui',
     category: 'Navigation',
     hidden: true,
   },
