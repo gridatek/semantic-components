@@ -33,3 +33,33 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist/apps/showcase/browser --project-name=semantic-components
+
+  deploy-showcase-dev:
+    runs-on: ubuntu-latest
+    name: Deploy Showcase (Dev)
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Create dev config
+        run: echo '{"devMode":true}' > apps/showcase/public/config.json
+
+      - name: Build Angular app
+        run: npx nx build showcase
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist/apps/showcase/browser --project-name=semantic-components-dev
