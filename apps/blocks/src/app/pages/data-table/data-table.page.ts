@@ -5,7 +5,7 @@ import {
   computed,
   signal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+
 import { ScButtonPattern } from '@semantic-components/ui-lab';
 import {
   type ColumnDef,
@@ -551,7 +551,7 @@ const columns: ColumnDef<User, any>[] = [
   selector: 'app-data-table-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [FormsModule, ScButtonPattern],
+  imports: [ScButtonPattern],
   host: { class: 'block' },
   template: `
     <div class="container mx-auto px-4 py-10">
@@ -562,8 +562,8 @@ const columns: ColumnDef<User, any>[] = [
         <!-- Global Filter -->
         <input
           type="text"
-          [ngModel]="globalFilter()"
-          (ngModelChange)="globalFilter.set($event)"
+          [value]="globalFilter()"
+          (input)="globalFilter.set($any($event.target).value)"
           placeholder="Search all columns..."
           class="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         />
@@ -681,8 +681,10 @@ const columns: ColumnDef<User, any>[] = [
                   @if (header.column.getCanFilter()) {
                     <input
                       type="text"
-                      [ngModel]="getColumnFilterValue(header.column.id)"
-                      (ngModelChange)="header.column.setFilterValue($event)"
+                      [value]="getColumnFilterValue(header.column.id)"
+                      (input)="
+                        header.column.setFilterValue($any($event.target).value)
+                      "
                       placeholder="Filter..."
                       class="h-7 w-full rounded border border-input bg-transparent px-2 text-xs placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                     />
@@ -738,8 +740,8 @@ const columns: ColumnDef<User, any>[] = [
                     } @else if (isEditing(row.id, cell.column.id)) {
                       <input
                         type="text"
-                        [ngModel]="getEditValue()"
-                        (ngModelChange)="editValue.set($event)"
+                        [value]="getEditValue()"
+                        (input)="editValue.set($any($event.target).value)"
                         (blur)="saveEdit(row.original, cell.column.id)"
                         (keydown.enter)="saveEdit(row.original, cell.column.id)"
                         (keydown.escape)="cancelEdit()"
@@ -938,8 +940,8 @@ const columns: ColumnDef<User, any>[] = [
         <div class="flex items-center gap-2 text-sm text-muted-foreground">
           <span>Rows per page:</span>
           <select
-            [ngModel]="pagination().pageSize"
-            (ngModelChange)="table.setPageSize(+$event)"
+            [value]="pagination().pageSize"
+            (change)="table.setPageSize(+$any($event.target).value)"
             class="h-8 rounded-md border border-input bg-transparent px-2 text-sm"
           >
             @for (size of pageSizeOptions; track size) {
