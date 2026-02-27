@@ -54,6 +54,9 @@ export const SC_NOTIFICATION_CENTER = new InjectionToken<ScNotificationCenter>(
   ],
   host: {
     'data-slot': 'notification-center',
+    role: 'region',
+    'aria-live': 'polite',
+    '[attr.aria-label]': 'title()',
   },
 })
 export class ScNotificationCenterDirective implements ScNotificationCenter {

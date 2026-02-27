@@ -1,10 +1,11 @@
 import {
   afterNextRender,
+  DestroyRef,
   Directive,
+  inject,
   InjectionToken,
   input,
   model,
-  OnDestroy,
   output,
   signal,
 } from '@angular/core';
@@ -101,7 +102,7 @@ export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
     '[attr.data-disabled]': 'disabled() || null',
   },
 })
-export class ScImageCropperDirective implements ScImageCropper, OnDestroy {
+export class ScImageCropperDirective implements ScImageCropper {
   // Configuration inputs
   readonly src = input.required<string>();
   readonly aspectRatio = input<number | null>(null);
@@ -141,6 +142,8 @@ export class ScImageCropperDirective implements ScImageCropper, OnDestroy {
   startY = 0;
   startCropArea: CropArea = { x: 0, y: 0, width: 0, height: 0 };
 
+  private readonly destroyRef = inject(DestroyRef);
+
   private readonly boundMouseMove = this.onMouseMove.bind(this);
   private readonly boundMouseUp = this.onMouseUp.bind(this);
   private readonly boundTouchMove = this.onTouchMove.bind(this);
@@ -155,13 +158,13 @@ export class ScImageCropperDirective implements ScImageCropper, OnDestroy {
       });
       document.addEventListener('touchend', this.boundTouchEnd);
     });
-  }
 
-  ngOnDestroy(): void {
-    document.removeEventListener('mousemove', this.boundMouseMove);
-    document.removeEventListener('mouseup', this.boundMouseUp);
-    document.removeEventListener('touchmove', this.boundTouchMove);
-    document.removeEventListener('touchend', this.boundTouchEnd);
+    this.destroyRef.onDestroy(() => {
+      document.removeEventListener('mousemove', this.boundMouseMove);
+      document.removeEventListener('mouseup', this.boundMouseUp);
+      document.removeEventListener('touchmove', this.boundTouchMove);
+      document.removeEventListener('touchend', this.boundTouchEnd);
+    });
   }
 
   // Public methods for child components
