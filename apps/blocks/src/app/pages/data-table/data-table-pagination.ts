@@ -18,6 +18,13 @@ import {
   ScPaginationPageSizeSelect,
   ScPaginationPrevious,
 } from '@semantic-components/ui';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiChevronsLeftIcon,
+  SiChevronsRightIcon,
+  SiEllipsisIcon,
+} from '@semantic-icons/lucide-icons';
 import type { Table } from '@tanstack/angular-table';
 
 @Component({
@@ -35,6 +42,11 @@ import type { Table } from '@tanstack/angular-table';
     ScPaginationLast,
     ScPaginationEllipsis,
     ScPaginationPageSizeSelect,
+    SiChevronsLeftIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+    SiChevronsRightIcon,
+    SiEllipsisIcon,
   ],
   host: { class: 'block' },
   template: `
@@ -63,16 +75,22 @@ import type { Table } from '@tanstack/angular-table';
         </span>
         <ul scPaginationList>
           <li scPaginationItem>
-            <button scPaginationFirst size="icon-sm">&laquo;</button>
+            <button scPaginationFirst size="icon-sm">
+              <svg siChevronsLeftIcon class="size-4"></svg>
+            </button>
           </li>
           <li scPaginationItem>
-            <button scPaginationPrevious size="icon-sm">&lsaquo;</button>
+            <button scPaginationPrevious size="icon-sm">
+              <svg siChevronLeftIcon class="size-4"></svg>
+            </button>
           </li>
 
           @for (page of pagination.pages(); track page.value) {
             <li scPaginationItem>
               @if (page.type === 'ellipsis') {
-                <span scPaginationEllipsis>...</span>
+                <span scPaginationEllipsis>
+                  <svg siEllipsisIcon class="size-4"></svg>
+                </span>
               } @else {
                 <button scPaginationLink [page]="page.value" size="icon-sm">
                   {{ page.value }}
@@ -82,10 +100,14 @@ import type { Table } from '@tanstack/angular-table';
           }
 
           <li scPaginationItem>
-            <button scPaginationNext size="icon-sm">&rsaquo;</button>
+            <button scPaginationNext size="icon-sm">
+              <svg siChevronRightIcon class="size-4"></svg>
+            </button>
           </li>
           <li scPaginationItem>
-            <button scPaginationLast size="icon-sm">&raquo;</button>
+            <button scPaginationLast size="icon-sm">
+              <svg siChevronsRightIcon class="size-4"></svg>
+            </button>
           </li>
         </ul>
       </div>
