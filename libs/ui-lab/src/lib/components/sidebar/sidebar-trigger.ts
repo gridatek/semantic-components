@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSidebarState } from './sidebar-state.service';
+import { ScSidebarState } from './sidebar-state';
 import { buttonVariants, ScButtonVariants } from '@semantic-components/ui';
 
 @Directive({

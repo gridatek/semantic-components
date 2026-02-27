@@ -14,7 +14,7 @@ import {
   ScSheetPortal,
   ScSheetProvider,
 } from '@semantic-components/ui';
-import { ScSidebarState } from './sidebar-state.service';
+import { ScSidebarState } from './sidebar-state';
 
 @Component({
   selector: 'div[scSidebar]',

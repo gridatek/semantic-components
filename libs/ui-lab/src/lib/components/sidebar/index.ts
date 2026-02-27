@@ -21,4 +21,4 @@ export { ScSidebarMenuSkeleton } from './sidebar-menu-skeleton';
 export { ScSidebarMenuSub } from './sidebar-menu-sub';
 export { ScSidebarMenuSubItem } from './sidebar-menu-sub-item';
 export { ScSidebarMenuSubButton } from './sidebar-menu-sub-button';
-export { ScSidebarState } from './sidebar-state.service';
+export { ScSidebarState } from './sidebar-state';

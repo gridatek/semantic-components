@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScSidebarState } from './sidebar-state.service';
+import { ScSidebarState } from './sidebar-state';
 
 @Component({
   selector: 'button[scSidebarRail]',

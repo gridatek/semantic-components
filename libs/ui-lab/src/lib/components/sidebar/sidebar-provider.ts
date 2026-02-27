@@ -13,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { cn } from '@semantic-components/ui';
-import { ScSidebarState } from './sidebar-state.service';
+import { ScSidebarState } from './sidebar-state';
 
 const SIDEBAR_STORAGE_KEY = 'sc-sidebar-state';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
@@ -112,8 +112,9 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
   private saveToStorage(open: boolean): void {
     try {
       localStorage.setItem(SIDEBAR_STORAGE_KEY, String(open));
-    } catch {
+    } catch (error) {
       // localStorage unavailable
+      console.warn('Unable to save sidebar state to localStorage:', error);
     }
   }
 
@@ -121,7 +122,8 @@ export class ScSidebarProvider implements OnInit, OnDestroy {
     try {
       const value = localStorage.getItem(SIDEBAR_STORAGE_KEY);
       return value !== null ? value === 'true' : null;
-    } catch {
+    } catch (error) {
+      console.warn('Unable to load sidebar state from localStorage:', error);
       return null;
     }
   }
