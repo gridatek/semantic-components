@@ -13,6 +13,12 @@ import {
   ScCheckboxField,
   ScInput,
   ScProgress,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
 } from '@semantic-components/ui';
 import {
   SiArrowDownIcon,
@@ -58,6 +64,12 @@ import { UserService } from './user.service';
     ScCheckboxField,
     ScInput,
     ScProgress,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
     SiArrowUpIcon,
     SiArrowDownIcon,
     SiChevronDownIcon,
@@ -82,17 +94,17 @@ import { UserService } from './user.service';
 
       <!-- Table -->
       <div class="relative overflow-auto rounded-md border">
-        <table class="w-full caption-bottom text-sm">
+        <table scTable>
           <!-- Header -->
-          <thead class="[&_tr]:border-b">
+          <thead scTableHeader>
             @for (
               headerGroup of table.getHeaderGroups();
               track headerGroup.id
             ) {
-              <tr class="border-b transition-colors hover:bg-muted/50">
+              <tr scTableRow>
                 @for (header of headerGroup.headers; track header.id) {
                   <th
-                    class="h-10 px-2 text-left align-middle font-medium text-muted-foreground"
+                    scTableHeaderCell
                     [class.sticky]="header.column.getIsPinned()"
                     [class.left-0]="header.column.getIsPinned() === 'left'"
                     [class.right-0]="header.column.getIsPinned() === 'right'"
@@ -137,14 +149,14 @@ import { UserService } from './user.service';
               </tr>
             }
             <!-- Column Filters Row -->
-            <tr class="border-b">
+            <tr scTableRow>
               @for (
                 header of table.getHeaderGroups()[
                   table.getHeaderGroups().length - 1
                 ].headers;
                 track header.id
               ) {
-                <th class="px-2 py-1">
+                <th scTableHeaderCell class="px-2 py-1">
                   @if (header.column.getCanFilter()) {
                     <input
                       scInput
@@ -163,16 +175,16 @@ import { UserService } from './user.service';
           </thead>
 
           <!-- Body -->
-          <tbody class="[&_tr:last-child]:border-0">
+          <tbody scTableBody>
             @for (row of table.getRowModel().rows; track row.id) {
               <tr
-                class="border-b transition-colors hover:bg-muted/50"
-                [class.bg-muted/50]="row.getIsSelected()"
+                scTableRow
+                [attr.data-state]="row.getIsSelected() ? 'selected' : null"
                 [class.bg-muted/30]="row.getIsGrouped()"
               >
                 @for (cell of row.getVisibleCells(); track cell.id) {
                   <td
-                    class="p-2 align-middle"
+                    scTableCell
                     [class.sticky]="cell.column.getIsPinned()"
                     [class.left-0]="cell.column.getIsPinned() === 'left'"
                     [class.right-0]="cell.column.getIsPinned() === 'right'"
@@ -344,8 +356,8 @@ import { UserService } from './user.service';
               </tr>
               <!-- Expanded Row Detail -->
               @if (row.getIsExpanded() && !row.getIsGrouped()) {
-                <tr class="border-b bg-muted/20">
-                  <td [attr.colSpan]="row.getVisibleCells().length" class="p-4">
+                <tr scTableRow class="bg-muted/20">
+                  <td scTableCell [attr.colSpan]="row.getVisibleCells().length">
                     <div class="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
                       <div>
                         <span class="font-medium">Username:</span>
@@ -394,8 +406,9 @@ import { UserService } from './user.service';
               }
             }
             @if (table.getRowModel().rows.length === 0) {
-              <tr>
+              <tr scTableRow>
                 <td
+                  scTableCell
                   [attr.colSpan]="columns.length"
                   class="h-24 text-center text-muted-foreground"
                 >
