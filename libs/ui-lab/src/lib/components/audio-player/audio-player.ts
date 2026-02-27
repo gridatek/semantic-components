@@ -77,7 +77,6 @@ export class ScAudioPlayer {
   readonly currentTime = signal(0);
   readonly duration = signal(0);
   readonly buffered = signal(0);
-  private previousVolume = 1;
 
   readonly currentTrack = computed(() => {
     const tracks = this.tracks();
@@ -194,16 +193,9 @@ export class ScAudioPlayer {
   toggleMute(): void {
     const audio = this.audioElement();
     if (!audio) return;
-    if (this.isMuted()) {
-      audio.volume = this.previousVolume;
-      this.volume.set(this.previousVolume);
-      this.isMuted.set(false);
-    } else {
-      this.previousVolume = this.volume();
-      audio.volume = 0;
-      this.volume.set(0);
-      this.isMuted.set(true);
-    }
+    const muted = !this.isMuted();
+    audio.muted = muted;
+    this.isMuted.set(muted);
   }
 
   cycleRepeat(): void {
@@ -260,7 +252,6 @@ export class ScAudioPlayer {
     if (!audio) return;
     audio.volume = value;
     this.volume.set(value);
-    this.isMuted.set(value === 0);
   }
 
   formatTime(seconds: number): string {
