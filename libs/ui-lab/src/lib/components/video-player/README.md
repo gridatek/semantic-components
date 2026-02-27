@@ -16,7 +16,7 @@ import {
   ScVideoPlayerPlayButton,
   ScVideoPlayerProgress,
   ScVideoPlayerTime,
-  ScVideoPlayerFullscreenButton,
+  ScVideoPlayerFullscreen,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -27,7 +27,7 @@ import {
     ScVideoPlayerPlayButton,
     ScVideoPlayerProgress,
     ScVideoPlayerTime,
-    ScVideoPlayerFullscreenButton,
+    ScVideoPlayerFullscreen,
   ],
   template: `
     <div scVideoPlayer class="relative bg-black rounded-lg overflow-hidden">
@@ -111,7 +111,7 @@ import {
 - **Selector**: `div[scVideoPlayerSpeed]`
 - **Inputs**: `speeds` (default: `[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]`)
 
-**`ScVideoPlayerFullscreenButton` (Component)**
+**`ScVideoPlayerFullscreen` (Component)**
 
 - Fullscreen toggle
 - **Selector**: `button[scVideoPlayerFullscreen]`

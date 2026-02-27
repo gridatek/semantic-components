@@ -6,7 +6,7 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
@@ -22,15 +22,14 @@ import { SC_VIDEO_PLAYER } from './video-player';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScVideoPlayerFullscreenButton {
+export class ScVideoPlayerFullscreen {
   protected readonly player = inject(SC_VIDEO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
     cn(
-      'size-8 rounded flex items-center justify-center',
-      'text-white hover:bg-white/20 transition-colors',
-      'focus:outline-none focus:ring-2 focus:ring-white/50',
+      buttonVariants({ variant: 'ghost', size: 'icon' }),
+      'text-white hover:bg-white/20 focus-visible:ring-white/50',
       '[&_svg]:size-5',
       this.classInput(),
     ),

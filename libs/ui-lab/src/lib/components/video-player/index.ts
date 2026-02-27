@@ -5,7 +5,7 @@ export { ScVideoPlayerPlayButton } from './video-player-play-button';
 export { ScVideoPlayerProgress } from './video-player-progress';
 export { ScVideoPlayerVolume } from './video-player-volume';
 export { ScVideoPlayerTime } from './video-player-time';
-export { ScVideoPlayerFullscreenButton } from './video-player-fullscreen-button';
+export { ScVideoPlayerFullscreen } from './video-player-fullscreen';
 export { ScVideoPlayerSkipButton } from './video-player-skip-button';
 export { ScVideoPlayerSpeedButton } from './video-player-speed-button';
 export { ScVideoPlayerPipButton } from './video-player-pip-button';
