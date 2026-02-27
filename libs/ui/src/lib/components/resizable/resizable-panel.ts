@@ -31,8 +31,8 @@ export class ScResizablePanel {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly defaultSize = input<number>(50);
-  readonly minSize = input<number>(10);
-  readonly maxSize = input<number>(90);
+  readonly minSize = input<number>(0);
+  readonly maxSize = input<number>(100);
 
   readonly size = linkedSignal(() => this.defaultSize());
 
