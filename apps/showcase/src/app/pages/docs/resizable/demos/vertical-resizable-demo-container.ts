@@ -37,7 +37,7 @@ import {
     <div
       scResizablePanelGroup
       direction="vertical"
-      class="min-h-[300px] max-w-md rounded-lg border"
+      class="h-[300px] max-w-md rounded-lg border"
     >
       <div scResizablePanel [defaultSize]="30">
         <div class="flex h-full items-center justify-center p-6">
