@@ -21,7 +21,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScVideoPlayerBigPlayButton {
+export class ScVideoPlayerBigPlay {
   protected readonly player = inject(SC_VIDEO_PLAYER);
   readonly classInput = input<string>('', { alias: 'class' });
 

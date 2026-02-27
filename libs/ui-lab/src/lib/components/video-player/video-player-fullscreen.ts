@@ -29,7 +29,7 @@ export class ScVideoPlayerFullscreen {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: 'ghost', size: 'icon' }),
-      'text-white hover:bg-white/20 focus-visible:ring-white/50',
+      'text-foreground',
       '[&_svg]:size-5',
       this.classInput(),
     ),

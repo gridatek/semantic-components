@@ -7,7 +7,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({
@@ -43,7 +43,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScVideoPlayerSpeedButton {
+export class ScVideoPlayerSpeed {
   protected readonly player = inject(SC_VIDEO_PLAYER);
   readonly speeds = input<number[]>([0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]);
   readonly classInput = input<string>('', { alias: 'class' });
@@ -53,17 +53,13 @@ export class ScVideoPlayerSpeedButton {
   protected readonly class = computed(() => cn('relative', this.classInput()));
 
   protected readonly buttonClass = computed(() =>
-    cn(
-      'size-8 rounded flex items-center justify-center',
-      'text-white hover:bg-white/20 transition-colors',
-      'focus:outline-none focus:ring-2 focus:ring-white/50',
-    ),
+    cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'text-foreground'),
   );
 
   protected getSpeedItemClass(speed: number): string {
     return cn(
-      'w-full px-4 py-1 text-sm text-white hover:bg-white/20 text-left',
-      this.player.playbackRate() === speed && 'bg-white/10',
+      'w-full px-4 py-1 text-sm text-foreground hover:bg-muted text-left',
+      this.player.playbackRate() === speed && 'bg-muted/50',
     );
   }
 

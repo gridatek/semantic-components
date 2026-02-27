@@ -13,7 +13,7 @@ import {
   ScVideoPlayer,
   ScVideoPlayerVideo,
   ScVideoPlayerControls,
-  ScVideoPlayerPlayButton,
+  ScVideoPlayerPlay,
   ScVideoPlayerProgress,
   ScVideoPlayerTime,
   ScVideoPlayerFullscreen,
@@ -24,7 +24,7 @@ import {
     ScVideoPlayer,
     ScVideoPlayerVideo,
     ScVideoPlayerControls,
-    ScVideoPlayerPlayButton,
+    ScVideoPlayerPlay,
     ScVideoPlayerProgress,
     ScVideoPlayerTime,
     ScVideoPlayerFullscreen,
@@ -75,7 +75,7 @@ import {
 - **Selector**: `div[scVideoPlayerControls]`
 - **Default position**: Absolute bottom with gradient overlay
 
-**`ScVideoPlayerPlayButton` (Component)**
+**`ScVideoPlayerPlay` (Component)**
 
 - Play/pause toggle button
 - **Selector**: `button[scVideoPlayerPlay]`
@@ -99,13 +99,13 @@ import {
 - **Selector**: `span[scVideoPlayerTime]`
 - Automatically formats time
 
-**`ScVideoPlayerSkipButton` (Component)**
+**`ScVideoPlayerSkip` (Component)**
 
 - Skip forward/back button
 - **Selector**: `button[scVideoPlayerSkip]`
 - **Inputs**: `seconds` (required), `ariaLabel`
 
-**`ScVideoPlayerSpeedButton` (Component)**
+**`ScVideoPlayerSpeed` (Component)**
 
 - Playback speed menu
 - **Selector**: `div[scVideoPlayerSpeed]`
@@ -116,12 +116,12 @@ import {
 - Fullscreen toggle
 - **Selector**: `button[scVideoPlayerFullscreen]`
 
-**`ScVideoPlayerPipButton` (Component)**
+**`ScVideoPlayerPip` (Component)**
 
 - Picture-in-picture toggle
 - **Selector**: `button[scVideoPlayerPip]`
 
-**`ScVideoPlayerBigPlayButton` (Component)**
+**`ScVideoPlayerBigPlay` (Component)**
 
 - Large centered play button overlay
 - **Selector**: `button[scVideoPlayerBigPlay]`

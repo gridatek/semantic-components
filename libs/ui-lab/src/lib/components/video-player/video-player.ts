@@ -12,6 +12,9 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
     'data-slot': 'video-player',
     role: 'region',
     '[attr.aria-label]': '"Video player"',
+    '[style.--foreground]': '"oklch(1 0 0)"',
+    '[style.--muted]': '"oklch(1 0 0 / 0.2)"',
+    '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
   },
 })
 export class ScVideoPlayer {
