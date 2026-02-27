@@ -19,12 +19,14 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     <div class="group relative h-3 flex-1">
       <!-- Buffered -->
       <div
-        class="bg-muted-foreground/30 pointer-events-none absolute top-1/2 left-0 h-1 -translate-y-1/2 rounded-full transition-[height] group-hover:h-1.5"
+        class="bg-primary/30 pointer-events-none absolute top-1/2 left-0 h-1 -translate-y-1/2 rounded-full transition-[height] group-hover:h-1.5"
         [style.width.%]="player.bufferedPercent()"
       ></div>
+      <!-- Seek slider -->
       <input
         scSlider
         class="absolute inset-0 h-full [&::-moz-range-progress]:transition-[height] group-hover:[&::-moz-range-progress]:h-1.5 [&::-moz-range-track]:transition-[height] group-hover:[&::-moz-range-track]:h-1.5 [&::-webkit-slider-runnable-track]:transition-[height] group-hover:[&::-webkit-slider-runnable-track]:h-1.5"
+        style="--muted: oklch(0 0 0 / 0.1)"
         min="0"
         max="100"
         step="0.1"

@@ -15,6 +15,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     '[src]': 'player.currentTrack()?.src',
     '(timeupdate)': 'player.onTimeUpdate()',
     '(loadedmetadata)': 'player.onLoadedMetadata()',
+    '(progress)': 'player.onProgress()',
     '(ended)': 'player.onEnded()',
     '(play)': 'player.isPlaying.set(true)',
     '(pause)': 'player.isPlaying.set(false)',

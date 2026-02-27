@@ -210,7 +210,11 @@ export class ScAudioPlayer {
     const audio = this.audioElement();
     if (!audio) return;
     this.currentTime.set(audio.currentTime);
+  }
 
+  onProgress(): void {
+    const audio = this.audioElement();
+    if (!audio) return;
     if (audio.buffered.length > 0) {
       this.buffered.set(audio.buffered.end(audio.buffered.length - 1));
     }
