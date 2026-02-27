@@ -17,6 +17,7 @@ import {
   ScVideoPlayerPipButton,
   ScVideoPlayerBigPlayButton,
   ScVideoPlayerBuffering,
+  ScVideoPlayerSpacer,
 } from '@semantic-components/ui-lab';
 import {
   SiPlayIcon,
@@ -47,6 +48,7 @@ import {
     ScVideoPlayerPipButton,
     ScVideoPlayerBigPlayButton,
     ScVideoPlayerBuffering,
+    ScVideoPlayerSpacer,
     SiPlayIcon,
     SiPauseIcon,
     SiVolumeXIcon,
@@ -131,8 +133,7 @@ import {
           <!-- Time -->
           <span scVideoPlayerTime class="ml-2"></span>
 
-          <!-- Spacer -->
-          <div class="flex-1"></div>
+          <div scVideoPlayerSpacer></div>
 
           <!-- Playback Speed -->
           <div scVideoPlayerSpeed></div>

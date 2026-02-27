@@ -11,4 +11,5 @@ export { ScVideoPlayerSpeedButton } from './video-player-speed-button';
 export { ScVideoPlayerPipButton } from './video-player-pip-button';
 export { ScVideoPlayerBigPlayButton } from './video-player-big-play-button';
 export { ScVideoPlayerBuffering } from './video-player-buffering';
+export { ScVideoPlayerSpacer } from './video-player-spacer';
 export type { ScVideoSource, ScVideoTrack } from './video-player-types';
