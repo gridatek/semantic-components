@@ -76,7 +76,7 @@ import type { Table } from '@tanstack/angular-table';
         <ul scPaginationList>
           <li scPaginationItem>
             <button scPaginationFirst variant="outline" size="icon-sm">
-              <svg siChevronsLeftIcon class="size-4"></svg>
+              <svg siChevronsLeftIcon></svg>
             </button>
           </li>
           <li scPaginationItem>
@@ -86,7 +86,7 @@ import type { Table } from '@tanstack/angular-table';
               size="icon-sm"
               class="pl-0"
             >
-              <svg siChevronLeftIcon class="size-4"></svg>
+              <svg siChevronLeftIcon></svg>
             </button>
           </li>
 
@@ -94,7 +94,7 @@ import type { Table } from '@tanstack/angular-table';
             <li scPaginationItem>
               @if (page.type === 'ellipsis') {
                 <span scPaginationEllipsis>
-                  <svg siEllipsisIcon class="size-4"></svg>
+                  <svg siEllipsisIcon></svg>
                 </span>
               } @else {
                 <button scPaginationLink [page]="page.value" size="icon-sm">
@@ -111,12 +111,12 @@ import type { Table } from '@tanstack/angular-table';
               size="icon-sm"
               class="pr-0"
             >
-              <svg siChevronRightIcon class="size-4"></svg>
+              <svg siChevronRightIcon></svg>
             </button>
           </li>
           <li scPaginationItem>
             <button scPaginationLast variant="outline" size="icon-sm">
-              <svg siChevronsRightIcon class="size-4"></svg>
+              <svg siChevronsRightIcon></svg>
             </button>
           </li>
         </ul>
