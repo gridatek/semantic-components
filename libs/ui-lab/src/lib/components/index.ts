@@ -36,7 +36,6 @@ export * from './pdf-viewer';
 export * from './phone-input';
 export * from './qr-code';
 export * from './rating-field';
-export * from './resizable';
 export * from './search-input';
 export * from './signature-pad';
 export * from './sortable-list';

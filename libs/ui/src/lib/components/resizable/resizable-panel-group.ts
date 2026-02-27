@@ -1,5 +1,5 @@
 import { computed, Directive, input, contentChildren } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ResizableDirection } from './resizable.types';
 import { ScResizablePanel } from './resizable-panel';
 import { ScResizableHandle } from './resizable-handle';

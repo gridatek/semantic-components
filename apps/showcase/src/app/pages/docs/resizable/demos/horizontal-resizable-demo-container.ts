@@ -28,7 +28,7 @@ import {
   ScResizableHandle,
   ScResizablePanel,
   ScResizablePanelGroup,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-horizontal-resizable-demo',
