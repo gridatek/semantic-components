@@ -7,7 +7,14 @@ import {
   inject,
 } from '@angular/core';
 
-import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
+import {
+  ScBadge,
+  ScButton,
+  ScCheckbox,
+  ScCheckboxField,
+  ScInput,
+  ScProgress,
+} from '@semantic-components/ui';
 import { ScButtonPattern } from '@semantic-components/ui-lab';
 import {
   type ColumnDef,
@@ -118,7 +125,15 @@ const columns: ColumnDef<User, any>[] = [
   selector: 'app-data-table-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ScCheckbox, ScCheckboxField, ScButtonPattern],
+  imports: [
+    ScBadge,
+    ScButton,
+    ScCheckbox,
+    ScCheckboxField,
+    ScInput,
+    ScProgress,
+    ScButtonPattern,
+  ],
   host: { class: 'block' },
   template: `
     <div class="container mx-auto px-4 py-10">
@@ -128,11 +143,11 @@ const columns: ColumnDef<User, any>[] = [
       <div class="mb-4 flex flex-wrap items-center gap-4">
         <!-- Global Filter -->
         <input
+          scInput
           type="text"
           [value]="globalFilter()"
           (input)="globalFilter.set($any($event.target).value)"
           placeholder="Search all columns..."
-          class="h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         />
 
         <!-- Column Visibility -->
@@ -157,18 +172,18 @@ const columns: ColumnDef<User, any>[] = [
         <div class="flex items-center gap-2">
           <span class="text-sm font-medium">Group by:</span>
           <button
+            scButton
+            [variant]="isGroupedBy('role') ? 'default' : 'outline'"
+            size="sm"
             (click)="toggleGrouping('role')"
-            class="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-accent"
-            [class.bg-primary]="isGroupedBy('role')"
-            [class.text-primary-foreground]="isGroupedBy('role')"
           >
             Role
           </button>
           <button
+            scButton
+            [variant]="isGroupedBy('plan') ? 'default' : 'outline'"
+            size="sm"
             (click)="toggleGrouping('plan')"
-            class="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-accent"
-            [class.bg-primary]="isGroupedBy('plan')"
-            [class.text-primary-foreground]="isGroupedBy('plan')"
           >
             Plan
           </button>
@@ -250,13 +265,14 @@ const columns: ColumnDef<User, any>[] = [
                 <th class="px-2 py-1">
                   @if (header.column.getCanFilter()) {
                     <input
+                      scInput
                       type="text"
                       [value]="getColumnFilterValue(header.column.id)"
                       (input)="
                         header.column.setFilterValue($any($event.target).value)
                       "
                       placeholder="Filter..."
-                      class="h-7 w-full rounded border border-input bg-transparent px-2 text-xs placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                      class="h-7 text-xs"
                     />
                   }
                 </th>
@@ -283,8 +299,11 @@ const columns: ColumnDef<User, any>[] = [
                   >
                     @if (cell.getIsGrouped()) {
                       <button
+                        scButton
+                        variant="ghost"
+                        size="sm"
                         (click)="row.toggleExpanded()"
-                        class="flex cursor-pointer items-center gap-1 font-medium"
+                        class="gap-1 font-medium"
                       >
                         {{ row.getIsExpanded() ? '▼' : '▶' }}
                         <span>{{ cell.getValue() }}</span>
@@ -309,13 +328,14 @@ const columns: ColumnDef<User, any>[] = [
                       <!-- placeholder -->
                     } @else if (isEditing(row.id, cell.column.id)) {
                       <input
+                        scInput
                         type="text"
                         [value]="getEditValue()"
                         (input)="editValue.set($any($event.target).value)"
                         (blur)="saveEdit(row.original, cell.column.id)"
                         (keydown.enter)="saveEdit(row.original, cell.column.id)"
                         (keydown.escape)="cancelEdit()"
-                        class="h-7 w-full rounded border border-input bg-transparent px-2 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                        class="h-7"
                       />
                     } @else {
                       @if (cell.column.id === 'select') {
@@ -331,74 +351,64 @@ const columns: ColumnDef<User, any>[] = [
                       } @else if (cell.column.id === 'expand') {
                         @if (row.getCanExpand()) {
                           <button
+                            scButton
+                            variant="ghost"
+                            size="icon-xs"
                             (click)="row.toggleExpanded()"
-                            class="cursor-pointer p-1"
                           >
                             {{ row.getIsExpanded() ? '▼' : '▶' }}
                           </button>
                         }
                       } @else if (cell.column.id === 'role') {
                         <span
-                          class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
-                          [class.bg-purple-100]="cell.getValue() === 'admin'"
-                          [class.text-purple-800]="cell.getValue() === 'admin'"
-                          [class.bg-blue-100]="cell.getValue() === 'editor'"
-                          [class.text-blue-800]="cell.getValue() === 'editor'"
-                          [class.bg-gray-100]="cell.getValue() === 'viewer'"
-                          [class.text-gray-800]="cell.getValue() === 'viewer'"
+                          scBadge
+                          [variant]="
+                            cell.getValue() === 'admin'
+                              ? 'default'
+                              : cell.getValue() === 'editor'
+                                ? 'secondary'
+                                : 'outline'
+                          "
                         >
                           {{ cell.getValue() }}
                         </span>
                       } @else if (cell.column.id === 'plan') {
                         <span
-                          class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
-                          [class.bg-gray-100]="cell.getValue() === 'free'"
-                          [class.text-gray-700]="cell.getValue() === 'free'"
-                          [class.bg-blue-100]="cell.getValue() === 'pro'"
-                          [class.text-blue-700]="cell.getValue() === 'pro'"
-                          [class.bg-amber-100]="
+                          scBadge
+                          [variant]="
                             cell.getValue() === 'enterprise'
-                          "
-                          [class.text-amber-700]="
-                            cell.getValue() === 'enterprise'
+                              ? 'default'
+                              : cell.getValue() === 'pro'
+                                ? 'secondary'
+                                : 'outline'
                           "
                         >
                           {{ cell.getValue() }}
                         </span>
                       } @else if (cell.column.id === 'status') {
                         <span
-                          class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
-                          [class.bg-green-100]="cell.getValue() === 'active'"
-                          [class.text-green-800]="cell.getValue() === 'active'"
-                          [class.bg-red-100]="cell.getValue() === 'inactive'"
-                          [class.text-red-800]="cell.getValue() === 'inactive'"
-                          [class.bg-yellow-100]="
-                            cell.getValue() === 'suspended'
-                          "
-                          [class.text-yellow-800]="
-                            cell.getValue() === 'suspended'
+                          scBadge
+                          [variant]="
+                            cell.getValue() === 'active'
+                              ? 'default'
+                              : cell.getValue() === 'inactive'
+                                ? 'destructive'
+                                : 'secondary'
                           "
                         >
                           {{ cell.getValue() }}
                         </span>
                       } @else if (cell.column.id === 'storageUsed') {
                         <div class="flex items-center gap-2">
-                          <div class="h-2 w-16 rounded-full bg-muted">
+                          <div
+                            scProgress
+                            [value]="asNumber(cell.getValue())"
+                            [max]="10000"
+                            class="h-2 w-16"
+                          >
                             <div
-                              class="h-2 rounded-full"
-                              [class.bg-green-500]="
-                                asNumber(cell.getValue()) < 2000
-                              "
-                              [class.bg-yellow-500]="
-                                asNumber(cell.getValue()) >= 2000 &&
-                                asNumber(cell.getValue()) < 5000
-                              "
-                              [class.bg-red-500]="
-                                asNumber(cell.getValue()) >= 5000
-                              "
-                              [style.width.%]="
-                                storagePercent(asNumber(cell.getValue()))
-                              "
+                              scProgressIndicator
+                              [class]="storageColor(asNumber(cell.getValue()))"
                             ></div>
                           </div>
                           <span class="text-sm">
@@ -528,30 +538,38 @@ const columns: ColumnDef<User, any>[] = [
             {{ table.getPageCount() }}
           </span>
           <button
+            scButton
+            variant="outline"
+            size="icon-sm"
             (click)="table.firstPage()"
             [disabled]="!table.getCanPreviousPage()"
-            class="inline-flex h-8 w-8 items-center justify-center rounded-md border text-sm disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
           >
             &laquo;
           </button>
           <button
+            scButton
+            variant="outline"
+            size="icon-sm"
             (click)="table.previousPage()"
             [disabled]="!table.getCanPreviousPage()"
-            class="inline-flex h-8 w-8 items-center justify-center rounded-md border text-sm disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
           >
             &lsaquo;
           </button>
           <button
+            scButton
+            variant="outline"
+            size="icon-sm"
             (click)="table.nextPage()"
             [disabled]="!table.getCanNextPage()"
-            class="inline-flex h-8 w-8 items-center justify-center rounded-md border text-sm disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
           >
             &rsaquo;
           </button>
           <button
+            scButton
+            variant="outline"
+            size="icon-sm"
             (click)="table.lastPage()"
             [disabled]="!table.getCanNextPage()"
-            class="inline-flex h-8 w-8 items-center justify-center rounded-md border text-sm disabled:pointer-events-none disabled:opacity-50 hover:bg-accent"
           >
             &raquo;
           </button>
@@ -562,26 +580,30 @@ const columns: ColumnDef<User, any>[] = [
       <div class="mt-4 flex flex-wrap gap-4 rounded-md border p-4">
         <h3 class="w-full text-sm font-medium">Column Pinning</h3>
         <button
+          scButton
+          [variant]="
+            columnPinning().left?.includes('id') ? 'default' : 'outline'
+          "
+          size="sm"
           (click)="toggleColumnPin('id', 'left')"
-          class="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-accent"
-          [class.bg-primary]="columnPinning().left?.includes('id')"
-          [class.text-primary-foreground]="columnPinning().left?.includes('id')"
         >
           Pin ID Left
         </button>
         <button
-          (click)="toggleColumnPin('apiCalls', 'right')"
-          class="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-accent"
-          [class.bg-primary]="columnPinning().right?.includes('apiCalls')"
-          [class.text-primary-foreground]="
-            columnPinning().right?.includes('apiCalls')
+          scButton
+          [variant]="
+            columnPinning().right?.includes('apiCalls') ? 'default' : 'outline'
           "
+          size="sm"
+          (click)="toggleColumnPin('apiCalls', 'right')"
         >
           Pin API Calls Right
         </button>
         <button
+          scButton
+          variant="outline"
+          size="sm"
           (click)="resetColumnPinning()"
-          class="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors hover:bg-accent"
         >
           Reset Pinning
         </button>
@@ -714,8 +736,10 @@ export default class DataTablePage {
     return new Intl.NumberFormat('en-US').format(Math.round(value));
   }
 
-  storagePercent(value: number): number {
-    return Math.min((value / 10000) * 100, 100);
+  storageColor(value: number): string {
+    if (value >= 5000) return 'bg-red-500';
+    if (value >= 2000) return 'bg-yellow-500';
+    return 'bg-green-500';
   }
 
   getColumnFilterValue(columnId: string): string {
