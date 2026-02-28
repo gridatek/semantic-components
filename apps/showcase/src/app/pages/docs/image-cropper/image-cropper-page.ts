@@ -8,6 +8,9 @@ import { AspectRatioCropperDemoContainer } from './demos/aspect-ratio-cropper-de
 import { AvatarCropperDemoContainer } from './demos/avatar-cropper-demo-container';
 import { UploadCropperDemoContainer } from './demos/upload-cropper-demo-container';
 import { InfoCropperDemoContainer } from './demos/info-cropper-demo-container';
+import { RotateFlipCropperDemoContainer } from './demos/rotate-flip-cropper-demo-container';
+import { FileInputCropperDemoContainer } from './demos/file-input-cropper-demo-container';
+import { FullFeaturedCropperDemoContainer } from './demos/full-featured-cropper-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
@@ -21,6 +24,9 @@ import { ScHeading } from '@semantic-components/ui';
     AvatarCropperDemoContainer,
     UploadCropperDemoContainer,
     InfoCropperDemoContainer,
+    RotateFlipCropperDemoContainer,
+    FileInputCropperDemoContainer,
+    FullFeaturedCropperDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -43,6 +49,9 @@ import { ScHeading } from '@semantic-components/ui';
         <app-avatar-cropper-demo-container />
         <app-upload-cropper-demo-container />
         <app-info-cropper-demo-container />
+        <app-rotate-flip-cropper-demo-container />
+        <app-file-input-cropper-demo-container />
+        <app-full-featured-cropper-demo-container />
       </section>
     </div>
   `,

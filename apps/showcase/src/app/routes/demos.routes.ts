@@ -1637,6 +1637,27 @@ export const demosRoutes: Route[] = [
             (m) => m.InfoCropperDemo,
           ),
       },
+      {
+        path: 'rotate-flip-cropper-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper/demos/rotate-flip-cropper-demo').then(
+            (m) => m.RotateFlipCropperDemo,
+          ),
+      },
+      {
+        path: 'file-input-cropper-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper/demos/file-input-cropper-demo').then(
+            (m) => m.FileInputCropperDemo,
+          ),
+      },
+      {
+        path: 'full-featured-cropper-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper/demos/full-featured-cropper-demo').then(
+            (m) => m.FullFeaturedCropperDemo,
+          ),
+      },
     ],
   },
   {
