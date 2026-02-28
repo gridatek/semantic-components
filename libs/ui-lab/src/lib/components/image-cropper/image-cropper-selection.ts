@@ -39,6 +39,10 @@ export class ScImageCropperSelection {
 
     const step = 5;
     const crop = this.cropper.cropArea();
+    const bx = this.cropper.imageBoundsX();
+    const by = this.cropper.imageBoundsY();
+    const bw = this.cropper.imageBoundsW();
+    const bh = this.cropper.imageBoundsH();
 
     switch (event.key) {
       case 'ArrowLeft':
@@ -51,7 +55,7 @@ export class ScImageCropperSelection {
         } else {
           this.cropper.cropArea.set({
             ...crop,
-            x: Math.max(0, crop.x - step),
+            x: Math.max(bx, crop.x - step),
           });
         }
         this.cropper.cropChange.emit(this.cropper.cropArea());
@@ -61,15 +65,12 @@ export class ScImageCropperSelection {
         if (event.shiftKey) {
           this.cropper.cropArea.set({
             ...crop,
-            width: crop.width + step,
+            width: Math.min(crop.width + step, bx + bw - crop.x),
           });
         } else {
           this.cropper.cropArea.set({
             ...crop,
-            x: Math.min(
-              this.cropper.containerWidth() - crop.width,
-              crop.x + step,
-            ),
+            x: Math.min(bx + bw - crop.width, crop.x + step),
           });
         }
         this.cropper.cropChange.emit(this.cropper.cropArea());
@@ -84,7 +85,7 @@ export class ScImageCropperSelection {
         } else {
           this.cropper.cropArea.set({
             ...crop,
-            y: Math.max(0, crop.y - step),
+            y: Math.max(by, crop.y - step),
           });
         }
         this.cropper.cropChange.emit(this.cropper.cropArea());
@@ -94,15 +95,12 @@ export class ScImageCropperSelection {
         if (event.shiftKey) {
           this.cropper.cropArea.set({
             ...crop,
-            height: crop.height + step,
+            height: Math.min(crop.height + step, by + bh - crop.y),
           });
         } else {
           this.cropper.cropArea.set({
             ...crop,
-            y: Math.min(
-              this.cropper.containerHeight() - crop.height,
-              crop.y + step,
-            ),
+            y: Math.min(by + bh - crop.height, crop.y + step),
           });
         }
         this.cropper.cropChange.emit(this.cropper.cropArea());

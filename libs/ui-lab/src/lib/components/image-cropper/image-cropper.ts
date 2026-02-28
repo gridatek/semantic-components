@@ -84,6 +84,20 @@ export class ScImageCropper {
     () => this.imageNaturalHeight() * this.zoom(),
   );
 
+  // Image bounds within the container (image is flex-centered)
+  readonly imageBoundsX = computed(() =>
+    Math.max(0, (this.containerWidth() - this.scaledImageWidth()) / 2),
+  );
+  readonly imageBoundsY = computed(() =>
+    Math.max(0, (this.containerHeight() - this.scaledImageHeight()) / 2),
+  );
+  readonly imageBoundsW = computed(() =>
+    Math.min(this.scaledImageWidth(), this.containerWidth()),
+  );
+  readonly imageBoundsH = computed(() =>
+    Math.min(this.scaledImageHeight(), this.containerHeight()),
+  );
+
   readonly imageTransform = computed(() => {
     const rot = this.rotation();
     const fH = this.flipH();
@@ -122,21 +136,17 @@ export class ScImageCropper {
   }
 
   initializeCropArea(): void {
-    const cw = this.containerWidth();
-    const containerH = this.containerHeight();
-    const imgW = this.scaledImageWidth();
-    const imgH = this.scaledImageHeight();
-
-    // Visible portion of the image within the container
-    const displayedW = Math.min(imgW, cw);
-    const displayedH = Math.min(imgH, containerH);
+    const bx = this.imageBoundsX();
+    const by = this.imageBoundsY();
+    const bw = this.imageBoundsW();
+    const bh = this.imageBoundsH();
 
     const aspectRatio = this.aspectRatio();
-    let cropW = Math.min(displayedW * 0.8, displayedW);
-    let cropH = Math.min(displayedH * 0.8, displayedH);
+    let cropW = bw * 0.8;
+    let cropH = bh * 0.8;
 
     if (aspectRatio !== null) {
-      if (cropW / aspectRatio <= displayedH) {
+      if (cropW / aspectRatio <= bh) {
         cropH = cropW / aspectRatio;
       } else {
         cropW = cropH * aspectRatio;
@@ -149,12 +159,12 @@ export class ScImageCropper {
       cropH = size;
     }
 
-    const x = (cw - cropW) / 2;
-    const y = (containerH - cropH) / 2;
+    const x = bx + (bw - cropW) / 2;
+    const y = by + (bh - cropH) / 2;
 
     this.cropArea.set({
-      x: Math.max(0, x),
-      y: Math.max(0, y),
+      x,
+      y,
       width: cropW,
       height: cropH,
     });
@@ -181,15 +191,17 @@ export class ScImageCropper {
     const deltaX = clientX - this.startX;
     const deltaY = clientY - this.startY;
 
-    const cw = this.containerWidth();
-    const containerH = this.containerHeight();
+    const bx = this.imageBoundsX();
+    const by = this.imageBoundsY();
+    const bw = this.imageBoundsW();
+    const bh = this.imageBoundsH();
     const crop = this.startCropArea;
 
     let newX = crop.x + deltaX;
     let newY = crop.y + deltaY;
 
-    newX = Math.max(0, Math.min(newX, cw - crop.width));
-    newY = Math.max(0, Math.min(newY, containerH - crop.height));
+    newX = Math.max(bx, Math.min(newX, bx + bw - crop.width));
+    newY = Math.max(by, Math.min(newY, by + bh - crop.height));
 
     this.cropArea.set({
       ...this.cropArea(),
@@ -207,8 +219,10 @@ export class ScImageCropper {
     const aspectRatio = this.aspectRatio();
     const minW = this.minWidth();
     const minH = this.minHeight();
-    const cw = this.containerWidth();
-    const containerH = this.containerHeight();
+    const bx = this.imageBoundsX();
+    const by = this.imageBoundsY();
+    const bw = this.imageBoundsW();
+    const bh = this.imageBoundsH();
 
     let newX = crop.x;
     let newY = crop.y;
@@ -276,20 +290,20 @@ export class ScImageCropper {
         break;
     }
 
-    // Constrain to container
-    if (newX < 0) {
-      newW += newX;
-      newX = 0;
+    // Constrain to image bounds
+    if (newX < bx) {
+      newW += newX - bx;
+      newX = bx;
     }
-    if (newY < 0) {
-      newH += newY;
-      newY = 0;
+    if (newY < by) {
+      newH += newY - by;
+      newY = by;
     }
-    if (newX + newW > cw) {
-      newW = cw - newX;
+    if (newX + newW > bx + bw) {
+      newW = bx + bw - newX;
     }
-    if (newY + newH > containerH) {
-      newH = containerH - newY;
+    if (newY + newH > by + bh) {
+      newH = by + bh - newY;
     }
 
     // Maintain aspect ratio after constraints
@@ -428,8 +442,10 @@ export class ScImageCropper {
     if (ratio === null) return;
 
     const crop = this.cropArea();
-    const cw = this.containerWidth();
-    const ch = this.containerHeight();
+    const bx = this.imageBoundsX();
+    const by = this.imageBoundsY();
+    const bw = this.imageBoundsW();
+    const bh = this.imageBoundsH();
     const currentRatio = crop.width / crop.height;
 
     let newW = crop.width;
@@ -455,8 +471,8 @@ export class ScImageCropper {
     let newX = centerX - newW / 2;
     let newY = centerY - newH / 2;
 
-    newX = Math.max(0, Math.min(newX, cw - newW));
-    newY = Math.max(0, Math.min(newY, ch - newH));
+    newX = Math.max(bx, Math.min(newX, bx + bw - newW));
+    newY = Math.max(by, Math.min(newY, by + bh - newH));
 
     this.cropArea.set({ x: newX, y: newY, width: newW, height: newH });
     this.cropChange.emit(this.cropArea());
