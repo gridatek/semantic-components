@@ -13,7 +13,7 @@ import {
   ScImageCropperZoomIn,
   ScImageCropperZoomOut,
 } from '@semantic-components/ui-lab';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScSlider } from '@semantic-components/ui';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -25,6 +25,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     ScImageCropperZoomIn,
     ScImageCropperZoomOut,
     ScButton,
+    ScSlider,
     SiZoomInIcon,
     SiZoomOutIcon,
   ],
@@ -54,7 +55,14 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
           <svg siZoomOutIcon class="size-4"></svg>
         </button>
 
-        <div scImageCropperControls></div>
+        <input
+          scSlider
+          scImageCropperControls
+          #controls="scImageCropperControls"
+        />
+        <span class="text-muted-foreground min-w-[50px] text-center text-sm">
+          {{ controls.zoomPercentage() }}
+        </span>
 
         <button
           scButton

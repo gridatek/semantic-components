@@ -37,7 +37,7 @@ import {
   ScImageCropperZoomIn,
   ScImageCropperZoomOut,
 } from '@semantic-components/ui-lab';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScSlider } from '@semantic-components/ui';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -50,6 +50,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     ScImageCropperZoomOut,
     ScImageCropperAspectRatio,
     ScButton,
+    ScSlider,
     SiZoomInIcon,
     SiZoomOutIcon,
   ],
@@ -63,15 +64,20 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     >
       <div
         scImageCropperContainer
-        class="rounded-lg overflow-hidden border"
+        class="overflow-hidden rounded-lg border"
       ></div>
 
       <div class="flex items-center justify-between">
-        <div
-          scImageCropperAspectRatio
-          [options]="aspectRatioOptions"
-          (aspectRatioChange)="onAspectRatioChange($event)"
-        ></div>
+        <div class="flex items-center gap-1">
+          @for (option of aspectRatioOptions; track option.value) {
+            <button
+              [scImageCropperAspectRatio]="option.value"
+              (aspectRatioChange)="onAspectRatioChange(\$event)"
+            >
+              {{ option.label }}
+            </button>
+          }
+        </div>
         <div class="flex items-center gap-2">
           <button
             scButton
@@ -83,7 +89,10 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <svg siZoomOutIcon class="size-4"></svg>
           </button>
 
-          <div scImageCropperControls></div>
+          <input scSlider scImageCropperControls #controls="scImageCropperControls" />
+          <span class="text-muted-foreground min-w-[50px] text-center text-sm">
+            {{ controls.zoomPercentage() }}
+          </span>
 
           <button
             scButton

@@ -1,61 +1,41 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
-@Component({
+@Directive({
   selector: '[scImageCropperPreview]',
-  template: `
-    <div
-      class="bg-muted overflow-hidden"
-      [style.width.px]="width()"
-      [style.height.px]="height()"
-    >
-      <img
-        [src]="cropper.src()"
-        class="max-w-none"
-        [style.width.px]="imageWidth()"
-        [style.height.px]="imageHeight()"
-        [style.transform]="transform()"
-        alt="Crop preview"
-      />
-    </div>
-  `,
+  exportAs: 'scImageCropperPreview',
   host: {
     'data-slot': 'image-cropper-preview',
     '[class]': 'class()',
+    '[style.width.px]': 'width()',
+    '[style.height.px]': 'height()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCropperPreview {
-  readonly cropper = inject(SC_IMAGE_CROPPER);
+  private readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly width = input<number>(100);
   readonly height = input<number>(100);
 
   protected readonly class = computed(() =>
-    cn('inline-block rounded-md border', this.classInput()),
+    cn('inline-block overflow-hidden rounded-md border', this.classInput()),
   );
 
-  protected readonly imageWidth = computed(() => {
+  readonly src = computed(() => this.cropper.src());
+
+  readonly imageWidth = computed(() => {
     const crop = this.cropper.cropArea();
     return (this.width() / crop.width) * this.cropper.containerHeight() * 2;
   });
 
-  protected readonly imageHeight = computed(() => {
+  readonly imageHeight = computed(() => {
     const crop = this.cropper.cropArea();
     return (this.height() / crop.height) * this.cropper.containerHeight() * 2;
   });
 
-  protected readonly transform = computed(() => {
+  readonly imageTransform = computed(() => {
     const crop = this.cropper.cropArea();
     const scaleX = this.width() / crop.width;
     const scaleY = this.height() / crop.height;

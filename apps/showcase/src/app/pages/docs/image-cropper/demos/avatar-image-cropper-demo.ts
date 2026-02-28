@@ -12,7 +12,7 @@ import {
   ScImageCropperZoomIn,
   ScImageCropperZoomOut,
 } from '@semantic-components/ui-lab';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScSlider } from '@semantic-components/ui';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -25,6 +25,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     ScImageCropperZoomIn,
     ScImageCropperZoomOut,
     ScButton,
+    ScSlider,
     SiZoomInIcon,
     SiZoomOutIcon,
   ],
@@ -54,7 +55,16 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
               <svg siZoomOutIcon class="size-4"></svg>
             </button>
 
-            <div scImageCropperControls></div>
+            <input
+              scSlider
+              scImageCropperControls
+              #controls="scImageCropperControls"
+            />
+            <span
+              class="text-muted-foreground min-w-[50px] text-center text-sm"
+            >
+              {{ controls.zoomPercentage() }}
+            </span>
 
             <button
               scButton
@@ -74,26 +84,56 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <div class="text-muted-foreground text-xs">Large (100x100)</div>
             <div
               scImageCropperPreview
+              #previewLg="scImageCropperPreview"
               [width]="100"
               [height]="100"
-              class="overflow-hidden rounded-full"
-            ></div>
+              class="rounded-full"
+            >
+              <img
+                [src]="previewLg.src()"
+                class="max-w-none"
+                [style.width.px]="previewLg.imageWidth()"
+                [style.height.px]="previewLg.imageHeight()"
+                [style.transform]="previewLg.imageTransform()"
+                alt="Crop preview"
+              />
+            </div>
 
             <div class="text-muted-foreground text-xs">Medium (64x64)</div>
             <div
               scImageCropperPreview
+              #previewMd="scImageCropperPreview"
               [width]="64"
               [height]="64"
-              class="overflow-hidden rounded-full"
-            ></div>
+              class="rounded-full"
+            >
+              <img
+                [src]="previewMd.src()"
+                class="max-w-none"
+                [style.width.px]="previewMd.imageWidth()"
+                [style.height.px]="previewMd.imageHeight()"
+                [style.transform]="previewMd.imageTransform()"
+                alt="Crop preview"
+              />
+            </div>
 
             <div class="text-muted-foreground text-xs">Small (40x40)</div>
             <div
               scImageCropperPreview
+              #previewSm="scImageCropperPreview"
               [width]="40"
               [height]="40"
-              class="overflow-hidden rounded-full"
-            ></div>
+              class="rounded-full"
+            >
+              <img
+                [src]="previewSm.src()"
+                class="max-w-none"
+                [style.width.px]="previewSm.imageWidth()"
+                [style.height.px]="previewSm.imageHeight()"
+                [style.transform]="previewSm.imageTransform()"
+                alt="Crop preview"
+              />
+            </div>
           </div>
         </div>
       </div>

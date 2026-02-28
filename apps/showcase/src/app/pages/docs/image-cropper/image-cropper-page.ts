@@ -28,7 +28,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>ImageCropper</h1>
+        <h1 scHeading>Image Cropper</h1>
         <p class="text-muted-foreground">
           An interactive image cropping component with drag, resize, zoom, and
           aspect ratio controls.

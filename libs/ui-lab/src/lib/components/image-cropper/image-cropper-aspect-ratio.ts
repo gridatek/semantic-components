@@ -1,65 +1,47 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { computed, Directive, inject, input, output } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
-@Component({
-  selector: '[scImageCropperAspectRatio]',
-  template: `
-    <div class="flex items-center gap-1">
-      @for (option of options(); track option.value) {
-        <button
-          type="button"
-          class="rounded-md border px-3 py-1 text-sm transition-colors"
-          [class]="
-            isSelected(option.value)
-              ? 'bg-primary text-primary-foreground'
-              : 'bg-background hover:bg-accent'
-          "
-          (click)="selectAspectRatio(option.value)"
-        >
-          {{ option.label }}
-        </button>
-      }
-    </div>
-  `,
+@Directive({
+  selector: 'button[scImageCropperAspectRatio]',
   host: {
     'data-slot': 'image-cropper-aspect-ratio',
     '[class]': 'class()',
+    '[attr.data-selected]': 'selected() || null',
+    '[attr.aria-pressed]': 'selected()',
+    '(click)': 'selectAspectRatio()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCropperAspectRatio {
-  readonly cropper = inject(SC_IMAGE_CROPPER);
+  private readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly options = input<{ label: string; value: number | null }[]>([
-    { label: 'Free', value: null },
-    { label: '1:1', value: 1 },
-    { label: '4:3', value: 4 / 3 },
-    { label: '16:9', value: 16 / 9 },
-  ]);
+
+  protected readonly class = computed(() =>
+    cn(
+      'rounded-md border px-3 py-1 text-sm transition-colors',
+      this.selected()
+        ? 'bg-primary text-primary-foreground'
+        : 'bg-background hover:bg-accent',
+      this.classInput(),
+    ),
+  );
+
+  readonly value = input<number | null>(null, {
+    alias: 'scImageCropperAspectRatio',
+  });
 
   readonly aspectRatioChange = output<number | null>();
 
-  protected readonly class = computed(() => cn('', this.classInput()));
-
-  isSelected(value: number | null): boolean {
+  readonly selected = computed(() => {
     const current = this.cropper.aspectRatio();
+    const value = this.value();
     if (value === null && current === null) return true;
     if (value === null || current === null) return false;
     return Math.abs(current - value) < 0.001;
-  }
+  });
 
-  selectAspectRatio(value: number | null): void {
-    this.aspectRatioChange.emit(value);
+  selectAspectRatio(): void {
+    this.aspectRatioChange.emit(this.value());
   }
 }
