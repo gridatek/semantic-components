@@ -33,6 +33,7 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
     '[style.--foreground]': '"oklch(1 0 0)"',
     '[style.--muted]': '"oklch(1 0 0 / 0.2)"',
     '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
+    '(touchstart)': 'onTouch()',
     '(mousemove)': 'onMouseMove()',
     '(document:fullscreenchange)': 'onFullscreenChange()',
   },
@@ -42,6 +43,7 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
 export class ScVideoPlayer {
   private readonly el = inject(ElementRef<HTMLElement>);
   private cursorTimer: ReturnType<typeof setTimeout> | null = null;
+  private touchTimer: ReturnType<typeof setTimeout> | null = null;
 
   readonly src = input<string>('');
   readonly poster = input<string>('');
@@ -169,6 +171,20 @@ export class ScVideoPlayer {
     } else {
       video.requestPictureInPicture?.();
     }
+  }
+
+  onTouch(): void {
+    const host = this.el.nativeElement;
+    host.classList.add('touched');
+
+    if (this.touchTimer !== null) {
+      clearTimeout(this.touchTimer);
+    }
+
+    this.touchTimer = setTimeout(() => {
+      host.classList.remove('touched');
+      this.touchTimer = null;
+    }, 3000);
   }
 
   onFullscreenChange(): void {

@@ -21,7 +21,7 @@ export class ScVideoPlayerControls {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute inset-x-0 bottom-0 bg-linear-to-t from-black/80 to-transparent p-4 opacity-0 transition-opacity group-hover/video-player:opacity-100 group-[.cursor-idle]/video-player:!opacity-0',
+      'absolute inset-x-0 bottom-0 bg-linear-to-t from-black/80 to-transparent p-4 opacity-0 transition-opacity group-hover/video-player:opacity-100 group-[.touched]/video-player:opacity-100 group-[.cursor-idle]/video-player:!opacity-0',
       this.classInput(),
     ),
   );
