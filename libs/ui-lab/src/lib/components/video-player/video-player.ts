@@ -1,7 +1,11 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
+  ElementRef,
+  inject,
   InjectionToken,
   input,
   signal,
@@ -31,14 +35,41 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
     '[style.--foreground]': '"oklch(1 0 0)"',
     '[style.--muted]': '"oklch(1 0 0 / 0.2)"',
     '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
+    '(mousemove)': 'onMouseMove()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVideoPlayer {
+  private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly destroyRef = inject(DestroyRef);
+  private cursorTimer: ReturnType<typeof setTimeout> | null = null;
+
   readonly src = input<string>('');
   readonly poster = input<string>('');
   readonly classInput = input<string>('', { alias: 'class' });
+
+  constructor() {
+    afterNextRender(() => {
+      const onFullscreenChange = () => {
+        const host = this.el.nativeElement;
+        const isFs = !!document.fullscreenElement;
+        this.isFullscreen.set(isFs);
+
+        if (!isFs) {
+          this.clearCursorTimer();
+          host.classList.remove('cursor-none', 'cursor-idle');
+        }
+      };
+
+      document.addEventListener('fullscreenchange', onFullscreenChange);
+
+      this.destroyRef.onDestroy(() => {
+        document.removeEventListener('fullscreenchange', onFullscreenChange);
+        this.clearCursorTimer();
+      });
+    });
+  }
 
   protected readonly class = computed(() =>
     cn(
@@ -161,6 +192,25 @@ export class ScVideoPlayer {
       document.exitPictureInPicture?.();
     } else {
       video.requestPictureInPicture?.();
+    }
+  }
+
+  onMouseMove(): void {
+    const host = this.el.nativeElement;
+    host.classList.remove('cursor-none', 'cursor-idle');
+    this.clearCursorTimer();
+
+    if (this.isFullscreen()) {
+      this.cursorTimer = setTimeout(() => {
+        host.classList.add('cursor-none', 'cursor-idle');
+      }, 3000);
+    }
+  }
+
+  private clearCursorTimer(): void {
+    if (this.cursorTimer !== null) {
+      clearTimeout(this.cursorTimer);
+      this.cursorTimer = null;
     }
   }
 
