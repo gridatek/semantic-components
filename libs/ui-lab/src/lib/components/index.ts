@@ -19,6 +19,7 @@ export * from './emoji-picker';
 export * from './image-annotator';
 export * from './image-compare';
 export * from './image-cropper';
+export * from './image-cropper-x';
 export * from './infinite-scroll';
 export * from './opt-field';
 export * from './kanban-board';
