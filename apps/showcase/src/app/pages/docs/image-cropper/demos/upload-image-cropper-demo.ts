@@ -9,11 +9,24 @@ import {
   ScImageCropper,
   ScImageCropperContainer,
   ScImageCropperControls,
+  ScImageCropperZoomIn,
+  ScImageCropperZoomOut,
 } from '@semantic-components/ui-lab';
+import { ScButton } from '@semantic-components/ui';
+import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-upload-image-cropper-demo',
-  imports: [ScImageCropper, ScImageCropperContainer, ScImageCropperControls],
+  imports: [
+    ScImageCropper,
+    ScImageCropperContainer,
+    ScImageCropperControls,
+    ScImageCropperZoomIn,
+    ScImageCropperZoomOut,
+    ScButton,
+    SiZoomInIcon,
+    SiZoomOutIcon,
+  ],
   template: `
     <div class="space-y-4">
       <div class="flex items-center gap-4">
@@ -59,7 +72,29 @@ import {
           ></div>
 
           <div class="flex items-center justify-between">
-            <div scImageCropperControls></div>
+            <div class="flex items-center gap-2">
+              <button
+                scButton
+                scImageCropperZoomOut
+                variant="outline"
+                size="icon"
+                aria-label="Zoom out"
+              >
+                <svg siZoomOutIcon class="size-4"></svg>
+              </button>
+
+              <div scImageCropperControls></div>
+
+              <button
+                scButton
+                scImageCropperZoomIn
+                variant="outline"
+                size="icon"
+                aria-label="Zoom in"
+              >
+                <svg siZoomInIcon class="size-4"></svg>
+              </button>
+            </div>
             <div class="flex gap-2">
               <button
                 type="button"

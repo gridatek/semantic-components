@@ -9,7 +9,11 @@ import {
   ScImageCropperContainer,
   ScImageCropperAspectRatio,
   ScImageCropperControls,
+  ScImageCropperZoomIn,
+  ScImageCropperZoomOut,
 } from '@semantic-components/ui-lab';
+import { ScButton } from '@semantic-components/ui';
+import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-aspect-ratio-image-cropper-demo',
@@ -17,7 +21,12 @@ import {
     ScImageCropper,
     ScImageCropperContainer,
     ScImageCropperControls,
+    ScImageCropperZoomIn,
+    ScImageCropperZoomOut,
     ScImageCropperAspectRatio,
+    ScButton,
+    SiZoomInIcon,
+    SiZoomOutIcon,
   ],
   template: `
     <div
@@ -38,7 +47,29 @@ import {
           [options]="aspectRatioOptions"
           (aspectRatioChange)="onAspectRatioChange($event)"
         ></div>
-        <div scImageCropperControls></div>
+        <div class="flex items-center gap-2">
+          <button
+            scButton
+            scImageCropperZoomOut
+            variant="outline"
+            size="icon"
+            aria-label="Zoom out"
+          >
+            <svg siZoomOutIcon class="size-4"></svg>
+          </button>
+
+          <div scImageCropperControls></div>
+
+          <button
+            scButton
+            scImageCropperZoomIn
+            variant="outline"
+            size="icon"
+            aria-label="Zoom in"
+          >
+            <svg siZoomInIcon class="size-4"></svg>
+          </button>
+        </div>
       </div>
     </div>
   `,
