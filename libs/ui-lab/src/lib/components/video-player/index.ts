@@ -10,7 +10,7 @@ export { ScVideoPlayerSkip } from './video-player-skip';
 export { ScVideoPlayerSpeed } from './video-player-speed';
 export { ScVideoPlayerPip } from './video-player-pip';
 export { ScVideoPlayerBigPlay } from './video-player-big-play';
-export { ScVideoPlayerBuffering } from './video-player-buffering';
+export { ScVideoPlayerBufferingIndicator } from './video-player-buffering-indicator';
 export { ScVideoPlayerToolbar } from './video-player-toolbar';
 export { ScVideoPlayerSpacer } from './video-player-spacer';
 export type { ScVideoSource, ScVideoTrack } from './video-player-types';

@@ -41,7 +41,7 @@ import {
   ScVideoPlayerFullscreen,
   ScVideoPlayerPip,
   ScVideoPlayerBigPlay,
-  ScVideoPlayerBuffering,
+  ScVideoPlayerBufferingIndicator,
   ScVideoPlayerSpacer,
   ScVideoPlayerToolbar,
 } from '@semantic-components/ui-lab';
@@ -73,7 +73,7 @@ import {
     ScVideoPlayerFullscreen,
     ScVideoPlayerPip,
     ScVideoPlayerBigPlay,
-    ScVideoPlayerBuffering,
+    ScVideoPlayerBufferingIndicator,
     ScVideoPlayerSpacer,
     ScVideoPlayerToolbar,
     SiPlayIcon,
@@ -90,9 +90,7 @@ import {
   template: \`
     <div scVideoPlayer #player="scVideoPlayer">
       <!-- Buffering Indicator -->
-      <div scVideoPlayerBuffering>
-        <svg siLoaderIcon></svg>
-      </div>
+      <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
 
       <!-- Video -->
       <video
@@ -101,12 +99,9 @@ import {
         [poster]="samplePoster"
       ></video>
 
-      <!-- Big Play Button -->
-      @if (!player.isPlaying() && !player.isBuffering()) {
-        <button scVideoPlayerBigPlay>
-          <svg siPlayIcon></svg>
-        </button>
-      }
+      <button scVideoPlayerBigPlay>
+        <svg siPlayIcon></svg>
+      </button>
 
       <!-- Controls -->
       <div scVideoPlayerControls>

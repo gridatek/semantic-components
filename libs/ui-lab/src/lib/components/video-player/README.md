@@ -126,10 +126,10 @@ import {
 - Large centered play button overlay
 - **Selector**: `button[scVideoPlayerBigPlay]`
 
-**`ScVideoPlayerBuffering`**
+**`ScVideoPlayerBufferingIndicator`**
 
 - Buffering indicator (auto-shows when buffering)
-- **Selector**: `div[scVideoPlayerBuffering]`
+- **Selector**: `div[scVideoPlayerBufferingIndicator]`
 - Uses `<ng-content>` for custom spinner
 
 ### Flexible Examples
@@ -167,7 +167,7 @@ import {
 ```html
 <div scVideoPlayer>
   <!-- Buffering Indicator -->
-  <div scVideoPlayerBuffering>
+  <div scVideoPlayerBufferingIndicator>
     <div class="size-12 animate-spin rounded-full border-4 border-white/30 border-t-white"></div>
   </div>
 
