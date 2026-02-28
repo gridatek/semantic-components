@@ -28,7 +28,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>FileUpload</h1>
+        <h1 scHeading>File Upload</h1>
         <p class="text-muted-foreground">
           A drag and drop file upload zone with preview and progress support.
         </p>

@@ -24,7 +24,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>HoverCard</h1>
+        <h1 scHeading>Hover Card</h1>
         <p class="text-muted-foreground">
           For sighted users to preview content available behind a link.
         </p>
