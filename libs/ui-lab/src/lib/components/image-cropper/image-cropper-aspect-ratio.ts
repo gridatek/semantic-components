@@ -40,6 +40,6 @@ export class ScImageCropperAspectRatio {
   });
 
   selectAspectRatio(): void {
-    this.cropper.aspectRatio.set(this.value());
+    this.cropper.setAspectRatio(this.value());
   }
 }

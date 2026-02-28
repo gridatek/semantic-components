@@ -422,6 +422,46 @@ export class ScImageCropper {
     this.flipV.update((v) => !v);
   }
 
+  setAspectRatio(ratio: number | null): void {
+    this.aspectRatio.set(ratio);
+
+    if (ratio === null) return;
+
+    const crop = this.cropArea();
+    const cw = this.containerWidth();
+    const ch = this.containerHeight();
+    const currentRatio = crop.width / crop.height;
+
+    let newW = crop.width;
+    let newH = crop.height;
+
+    if (currentRatio > ratio) {
+      newW = crop.height * ratio;
+    } else {
+      newH = crop.width / ratio;
+    }
+
+    if (newW < this.minWidth()) {
+      newW = this.minWidth();
+      newH = newW / ratio;
+    }
+    if (newH < this.minHeight()) {
+      newH = this.minHeight();
+      newW = newH * ratio;
+    }
+
+    const centerX = crop.x + crop.width / 2;
+    const centerY = crop.y + crop.height / 2;
+    let newX = centerX - newW / 2;
+    let newY = centerY - newH / 2;
+
+    newX = Math.max(0, Math.min(newX, cw - newW));
+    newY = Math.max(0, Math.min(newY, ch - newH));
+
+    this.cropArea.set({ x: newX, y: newY, width: newW, height: newH });
+    this.cropChange.emit(this.cropArea());
+  }
+
   reset(): void {
     this.zoom.set(1);
     this.rotation.set(0);
