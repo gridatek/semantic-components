@@ -33,7 +33,7 @@ export class ScVideoPlayerBigPlay {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group',
+      'absolute inset-0 z-10 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors group',
       '[&_svg]:size-5',
       (this.player.isPlaying() || this.player.isBuffering()) && 'hidden',
       this.classInput(),
