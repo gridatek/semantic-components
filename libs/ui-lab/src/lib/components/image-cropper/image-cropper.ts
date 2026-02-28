@@ -3,7 +3,6 @@ import {
   computed,
   DestroyRef,
   Directive,
-  effect,
   inject,
   InjectionToken,
   input,
@@ -118,49 +117,6 @@ export class ScImageCropper {
   private readonly boundTouchEnd = this.onTouchEnd.bind(this);
 
   constructor() {
-    effect(() => {
-      const ratio = this.aspectRatio();
-      if (!this.imageLoaded$()) return;
-
-      const crop = this.cropArea();
-      if (ratio === null) return;
-
-      const cw = this.containerWidth();
-      const containerH = this.containerHeight();
-
-      // Adjust current crop area to match new aspect ratio
-      // Keep the center of the crop area, adjust width/height
-      const centerX = crop.x + crop.width / 2;
-      const centerY = crop.y + crop.height / 2;
-
-      let newW = crop.width;
-      let newH = newW / ratio;
-
-      if (newH > containerH) {
-        newH = containerH;
-        newW = newH * ratio;
-      }
-
-      if (newW > cw) {
-        newW = cw;
-        newH = newW / ratio;
-      }
-
-      let newX = centerX - newW / 2;
-      let newY = centerY - newH / 2;
-
-      // Constrain to container
-      newX = Math.max(0, Math.min(newX, cw - newW));
-      newY = Math.max(0, Math.min(newY, containerH - newH));
-
-      this.cropArea.set({
-        x: newX,
-        y: newY,
-        width: newW,
-        height: newH,
-      });
-    });
-
     afterNextRender(() => {
       document.addEventListener('mousemove', this.boundMouseMove);
       document.addEventListener('mouseup', this.boundMouseUp);
