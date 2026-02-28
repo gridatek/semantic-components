@@ -1,9 +1,6 @@
 import {
-  afterNextRender,
   computed,
-  DestroyRef,
   Directive,
-  inject,
   InjectionToken,
   input,
   model,
@@ -37,6 +34,10 @@ export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
     'data-slot': 'image-cropper',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-crop-shape]': 'cropShape()',
+    '(document:mousemove)': 'onMouseMove($event)',
+    '(document:mouseup)': 'onMouseUp()',
+    '(document:touchmove)': 'onTouchMove($event)',
+    '(document:touchend)': 'onTouchEnd()',
   },
 })
 export class ScImageCropper {
@@ -108,31 +109,6 @@ export class ScImageCropper {
   startX = 0;
   startY = 0;
   startCropArea: ScImageCropperArea = { x: 0, y: 0, width: 0, height: 0 };
-
-  private readonly destroyRef = inject(DestroyRef);
-
-  private readonly boundMouseMove = this.onMouseMove.bind(this);
-  private readonly boundMouseUp = this.onMouseUp.bind(this);
-  private readonly boundTouchMove = this.onTouchMove.bind(this);
-  private readonly boundTouchEnd = this.onTouchEnd.bind(this);
-
-  constructor() {
-    afterNextRender(() => {
-      document.addEventListener('mousemove', this.boundMouseMove);
-      document.addEventListener('mouseup', this.boundMouseUp);
-      document.addEventListener('touchmove', this.boundTouchMove, {
-        passive: false,
-      });
-      document.addEventListener('touchend', this.boundTouchEnd);
-    });
-
-    this.destroyRef.onDestroy(() => {
-      document.removeEventListener('mousemove', this.boundMouseMove);
-      document.removeEventListener('mouseup', this.boundMouseUp);
-      document.removeEventListener('touchmove', this.boundTouchMove);
-      document.removeEventListener('touchend', this.boundTouchEnd);
-    });
-  }
 
   onImageLoad(width: number, height: number): void {
     this.imageNaturalWidth.set(width);
@@ -454,7 +430,7 @@ export class ScImageCropper {
     this.initializeCropArea();
   }
 
-  private onMouseMove(event: MouseEvent): void {
+  protected onMouseMove(event: MouseEvent): void {
     if (this.isDragging) {
       this.handleDrag(event.clientX, event.clientY);
     } else if (this.isResizing) {
@@ -462,7 +438,7 @@ export class ScImageCropper {
     }
   }
 
-  private onTouchMove(event: TouchEvent): void {
+  protected onTouchMove(event: TouchEvent): void {
     if (this.isDragging || this.isResizing) {
       event.preventDefault();
       const touch = event.touches[0];
@@ -474,11 +450,11 @@ export class ScImageCropper {
     }
   }
 
-  private onMouseUp(): void {
+  protected onMouseUp(): void {
     this.stopInteraction();
   }
 
-  private onTouchEnd(): void {
+  protected onTouchEnd(): void {
     this.stopInteraction();
   }
 }
