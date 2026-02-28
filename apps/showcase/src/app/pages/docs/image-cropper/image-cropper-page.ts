@@ -3,11 +3,11 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicCropperXDemoContainer } from './demos/basic-cropper-demo-container';
-import { AspectRatioCropperXDemoContainer } from './demos/aspect-ratio-cropper-demo-container';
-import { AvatarCropperXDemoContainer } from './demos/avatar-cropper-demo-container';
-import { UploadCropperXDemoContainer } from './demos/upload-cropper-demo-container';
-import { InfoCropperXDemoContainer } from './demos/info-cropper-demo-container';
+import { BasicCropperDemoContainer } from './demos/basic-cropper-demo-container';
+import { AspectRatioCropperDemoContainer } from './demos/aspect-ratio-cropper-demo-container';
+import { AvatarCropperDemoContainer } from './demos/avatar-cropper-demo-container';
+import { UploadCropperDemoContainer } from './demos/upload-cropper-demo-container';
+import { InfoCropperDemoContainer } from './demos/info-cropper-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
@@ -16,11 +16,11 @@ import { ScHeading } from '@semantic-components/ui';
 @Component({
   selector: 'app-image-cropper-page',
   imports: [
-    BasicCropperXDemoContainer,
-    AspectRatioCropperXDemoContainer,
-    AvatarCropperXDemoContainer,
-    UploadCropperXDemoContainer,
-    InfoCropperXDemoContainer,
+    BasicCropperDemoContainer,
+    AspectRatioCropperDemoContainer,
+    AvatarCropperDemoContainer,
+    UploadCropperDemoContainer,
+    InfoCropperDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
