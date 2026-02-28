@@ -1603,77 +1603,37 @@ export const demosRoutes: Route[] = [
     path: 'demos/image-cropper',
     children: [
       {
-        path: 'basic-image-cropper-demo',
+        path: 'basic-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/basic-image-cropper-demo').then(
-            (m) => m.BasicImageCropperDemo,
-          ),
-      },
-      {
-        path: 'aspect-ratio-image-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/aspect-ratio-image-cropper-demo').then(
-            (m) => m.AspectRatioImageCropperDemo,
-          ),
-      },
-      {
-        path: 'avatar-image-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/avatar-image-cropper-demo').then(
-            (m) => m.AvatarImageCropperDemo,
-          ),
-      },
-      {
-        path: 'upload-image-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/upload-image-cropper-demo').then(
-            (m) => m.UploadImageCropperDemo,
-          ),
-      },
-      {
-        path: 'info-image-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/info-image-cropper-demo').then(
-            (m) => m.InfoImageCropperDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/image-cropper-x',
-    children: [
-      {
-        path: 'basic-cropper-x-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos-x/basic-cropper-x-demo').then(
+          import('../pages/docs/image-cropper/demos/basic-cropper-demo').then(
             (m) => m.BasicCropperXDemo,
           ),
       },
       {
-        path: 'aspect-ratio-cropper-x-demo',
+        path: 'aspect-ratio-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos-x/aspect-ratio-cropper-x-demo').then(
+          import('../pages/docs/image-cropper/demos/aspect-ratio-cropper-demo').then(
             (m) => m.AspectRatioCropperXDemo,
           ),
       },
       {
-        path: 'avatar-cropper-x-demo',
+        path: 'avatar-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos-x/avatar-cropper-x-demo').then(
+          import('../pages/docs/image-cropper/demos/avatar-cropper-demo').then(
             (m) => m.AvatarCropperXDemo,
           ),
       },
       {
-        path: 'upload-cropper-x-demo',
+        path: 'upload-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos-x/upload-cropper-x-demo').then(
+          import('../pages/docs/image-cropper/demos/upload-cropper-demo').then(
             (m) => m.UploadCropperXDemo,
           ),
       },
       {
-        path: 'info-cropper-x-demo',
+        path: 'info-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos-x/info-cropper-x-demo').then(
+          import('../pages/docs/image-cropper/demos/info-cropper-demo').then(
             (m) => m.InfoCropperXDemo,
           ),
       },

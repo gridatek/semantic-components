@@ -4,18 +4,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicCropperXDemo } from './basic-cropper-x-demo';
+import { BasicCropperXDemo } from './basic-cropper-demo';
 
 @Component({
-  selector: 'app-basic-cropper-x-demo-container',
+  selector: 'app-basic-cropper-demo-container',
   imports: [DemoContainer, BasicCropperXDemo],
   template: `
     <app-demo-container
       title="Basic (X)"
-      demoUrl="/demos/image-cropper-x/basic-cropper-x-demo"
+      demoUrl="/demos/image-cropper/basic-cropper-demo"
       [code]="code"
     >
-      <app-basic-cropper-x-demo />
+      <app-basic-cropper-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },

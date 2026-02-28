@@ -4,18 +4,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AvatarCropperXDemo } from './avatar-cropper-x-demo';
+import { AvatarCropperXDemo } from './avatar-cropper-demo';
 
 @Component({
-  selector: 'app-avatar-cropper-x-demo-container',
+  selector: 'app-avatar-cropper-demo-container',
   imports: [DemoContainer, AvatarCropperXDemo],
   template: `
     <app-demo-container
       title="Circle Crop / Avatar (X)"
-      demoUrl="/demos/image-cropper-x/avatar-cropper-x-demo"
+      demoUrl="/demos/image-cropper/avatar-cropper-demo"
       [code]="code"
     >
-      <app-avatar-cropper-x-demo />
+      <app-avatar-cropper-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },

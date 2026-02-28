@@ -22,7 +22,7 @@ import { ScButton } from '@semantic-components/ui';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-aspect-ratio-cropper-x-demo',
+  selector: 'app-aspect-ratio-cropper-demo',
   imports: [
     ScCropper,
     ScCropperCanvas,

@@ -4,18 +4,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { InfoCropperXDemo } from './info-cropper-x-demo';
+import { InfoCropperXDemo } from './info-cropper-demo';
 
 @Component({
-  selector: 'app-info-cropper-x-demo-container',
+  selector: 'app-info-cropper-demo-container',
   imports: [DemoContainer, InfoCropperXDemo],
   template: `
     <app-demo-container
       title="Crop Area Info (X)"
-      demoUrl="/demos/image-cropper-x/info-cropper-x-demo"
+      demoUrl="/demos/image-cropper/info-cropper-demo"
       [code]="code"
     >
-      <app-info-cropper-x-demo />
+      <app-info-cropper-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },

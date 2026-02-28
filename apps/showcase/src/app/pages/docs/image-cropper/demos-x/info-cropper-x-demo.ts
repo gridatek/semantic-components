@@ -17,7 +17,7 @@ import {
 } from '@semantic-components/ui-lab';
 
 @Component({
-  selector: 'app-info-cropper-x-demo',
+  selector: 'app-info-cropper-demo',
   imports: [
     ScCropper,
     ScCropperCanvas,
