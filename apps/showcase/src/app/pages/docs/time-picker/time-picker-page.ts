@@ -30,7 +30,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>TimePicker</h1>
+        <h1 scHeading>Time Picker</h1>
         <p class="text-muted-foreground">
           A component for selecting time values.
         </p>
