@@ -149,9 +149,9 @@ export class ScCropper {
     const imgW = this.scaledImageWidth();
     const imgH = this.scaledImageHeight();
 
-    const scale = Math.min(cw / imgW, containerH / imgH, 1);
-    const displayedW = imgW * scale;
-    const displayedH = imgH * scale;
+    // Visible portion of the image within the container
+    const displayedW = Math.min(imgW, cw);
+    const displayedH = Math.min(imgH, containerH);
 
     const aspectRatio = this.aspectRatio();
     let cropW = Math.min(displayedW * 0.8, displayedW);
@@ -346,14 +346,16 @@ export class ScCropper {
     const cw = this.containerWidth();
     const containerH = this.containerHeight();
 
+    // The image is rendered at scaledImageWidth/Height pixels,
+    // centered in the container via flex centering
     const displayedW = this.scaledImageWidth();
     const displayedH = this.scaledImageHeight();
-    const scale = Math.min(cw / displayedW, containerH / displayedH, 1);
 
-    const offsetX = (cw - displayedW * scale) / 2;
-    const offsetY = (containerH - displayedH * scale) / 2;
+    const offsetX = (cw - displayedW) / 2;
+    const offsetY = (containerH - displayedH) / 2;
 
-    const naturalScale = this.imageNaturalWidth() / (displayedW * scale);
+    // Convert from displayed pixels to natural image pixels
+    const naturalScale = this.imageNaturalWidth() / displayedW;
     const srcX = (crop.x - offsetX) * naturalScale;
     const srcY = (crop.y - offsetY) * naturalScale;
     const srcW = crop.width * naturalScale;
