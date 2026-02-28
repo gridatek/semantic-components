@@ -1,9 +1,7 @@
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
-  DestroyRef,
   ElementRef,
   inject,
   InjectionToken,
@@ -36,40 +34,18 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
     '[style.--muted]': '"oklch(1 0 0 / 0.2)"',
     '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
     '(mousemove)': 'onMouseMove()',
+    '(document:fullscreenchange)': 'onFullscreenChange()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVideoPlayer {
   private readonly el = inject(ElementRef<HTMLElement>);
-  private readonly destroyRef = inject(DestroyRef);
   private cursorTimer: ReturnType<typeof setTimeout> | null = null;
 
   readonly src = input<string>('');
   readonly poster = input<string>('');
   readonly classInput = input<string>('', { alias: 'class' });
-
-  constructor() {
-    afterNextRender(() => {
-      const onFullscreenChange = () => {
-        const host = this.el.nativeElement;
-        const isFs = !!document.fullscreenElement;
-        this.isFullscreen.set(isFs);
-
-        if (!isFs) {
-          this.clearCursorTimer();
-          host.classList.remove('cursor-none', 'cursor-idle');
-        }
-      };
-
-      document.addEventListener('fullscreenchange', onFullscreenChange);
-
-      this.destroyRef.onDestroy(() => {
-        document.removeEventListener('fullscreenchange', onFullscreenChange);
-        this.clearCursorTimer();
-      });
-    });
-  }
 
   protected readonly class = computed(() =>
     cn(
@@ -192,6 +168,16 @@ export class ScVideoPlayer {
       document.exitPictureInPicture?.();
     } else {
       video.requestPictureInPicture?.();
+    }
+  }
+
+  onFullscreenChange(): void {
+    const isFs = !!document.fullscreenElement;
+    this.isFullscreen.set(isFs);
+
+    if (!isFs) {
+      this.clearCursorTimer();
+      this.el.nativeElement.classList.remove('cursor-none', 'cursor-idle');
     }
   }
 
