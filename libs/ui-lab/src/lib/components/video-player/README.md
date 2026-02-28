@@ -11,7 +11,6 @@ The video player uses a **composable architecture** that gives you full control 
 ```typescript
 import {
   ScVideoPlayer,
-  ScVideoPlayerVideo,
   ScVideoPlayerControls,
   ScVideoPlayerPlayPause,
   ScVideoPlayerProgress,
@@ -22,7 +21,6 @@ import {
 @Component({
   imports: [
     ScVideoPlayer,
-    ScVideoPlayerVideo,
     ScVideoPlayerControls,
     ScVideoPlayerPlayPause,
     ScVideoPlayerProgress,
@@ -30,16 +28,10 @@ import {
     ScVideoPlayerFullscreen,
   ],
   template: `
-    <div scVideoPlayer>
-      <video
-        scVideoPlayerVideo
-        [src]="'video.mp4'"
-        [poster]="'poster.jpg'"
-      ></video>
-
+    <div scVideoPlayer [src]="'video.mp4'" [poster]="'poster.jpg'">
       <div scVideoPlayerControls>
         <div scVideoPlayerProgress></div>
-        <div class="flex items-center gap-2 mt-2">
+        <div scVideoPlayerToolbar>
           <button scVideoPlayerPlayPause>
             <!-- Play/pause icon -->
           </button>
@@ -58,22 +50,21 @@ import {
 
 **`ScVideoPlayer`**
 
-- Root directive that provides context
+- Root component that renders the video and provides context
 - **Selector**: `[scVideoPlayer]`
+- **Inputs**: `src`, `poster`
 - Manages playback state, volume, fullscreen, etc.
-
-**`ScVideoPlayerVideo`**
-
-- Video element for playback
-- **Selector**: `video[scVideoPlayerVideo]`
-- **Inputs**: `src`, `sources`, `tracks`, `poster`, `autoplay`, `loop`, `muted`, `playsInline`, `aspectRatio`
-- **Outputs**: `ended`, `timeUpdate`
 
 **`ScVideoPlayerControls`**
 
 - Container for control elements (uses `<ng-content>`)
 - **Selector**: `div[scVideoPlayerControls]`
 - **Default position**: Absolute bottom with gradient overlay
+
+**`ScVideoPlayerToolbar`**
+
+- Flex container for control buttons
+- **Selector**: `div[scVideoPlayerToolbar]`
 
 **`ScVideoPlayerPlayPause`**
 
@@ -125,21 +116,25 @@ import {
 
 - Large centered play button overlay
 - **Selector**: `button[scVideoPlayerBigPlay]`
+- Auto-hides when playing or buffering
 
 **`ScVideoPlayerBufferingIndicator`**
 
-- Buffering indicator (auto-shows when buffering)
-- **Selector**: `div[scVideoPlayerBufferingIndicator]`
-- Uses `<ng-content>` for custom spinner
+- Buffering indicator directive
+- **Selector**: `svg[scVideoPlayerBufferingIndicator]`
+- Auto-hides when not buffering
+
+**`ScVideoPlayerSpacer`**
+
+- Flexible spacer for toolbar layout
+- **Selector**: `div[scVideoPlayerSpacer]`
 
 ### Flexible Examples
 
 #### Minimal Player
 
 ```html
-<div scVideoPlayer>
-  <video scVideoPlayerVideo [src]="video"></video>
-
+<div scVideoPlayer [src]="video">
   <div scVideoPlayerControls>
     <button scVideoPlayerPlayPause>Play</button>
   </div>
@@ -149,12 +144,10 @@ import {
 #### With Progress and Time
 
 ```html
-<div scVideoPlayer>
-  <video scVideoPlayerVideo [src]="video"></video>
-
+<div scVideoPlayer [src]="video">
   <div scVideoPlayerControls>
-    <div scVideoPlayerProgress class="mb-2"></div>
-    <div class="flex items-center gap-2">
+    <div scVideoPlayerProgress></div>
+    <div scVideoPlayerToolbar>
       <button scVideoPlayerPlayPause>⏯</button>
       <span scVideoPlayerTime></span>
     </div>
@@ -165,27 +158,17 @@ import {
 #### Full-Featured Player
 
 ```html
-<div scVideoPlayer>
-  <!-- Buffering Indicator -->
-  <div scVideoPlayerBufferingIndicator>
-    <div class="size-12 animate-spin rounded-full border-4 border-white/30 border-t-white"></div>
-  </div>
+<div scVideoPlayer #player="scVideoPlayer" [src]="video" [poster]="poster">
+  <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
 
-  <!-- Video -->
-  <video scVideoPlayerVideo [src]="video" [poster]="poster"></video>
-
-  <!-- Big Play Button -->
-  @if (!player.isPlaying()) {
-  <button scVideoPlayerBigPlay #player="scVideoPlayer">
+  <button scVideoPlayerBigPlay>
     <!-- Play icon -->
   </button>
-  }
 
-  <!-- Controls -->
   <div scVideoPlayerControls>
-    <div scVideoPlayerProgress class="mb-2"></div>
+    <div scVideoPlayerProgress></div>
 
-    <div class="flex items-center gap-2">
+    <div scVideoPlayerToolbar>
       <button scVideoPlayerPlayPause>⏯</button>
       <button scVideoPlayerSkip [seconds]="-10">⏪</button>
       <button scVideoPlayerSkip [seconds]="10">⏩</button>
@@ -196,7 +179,7 @@ import {
 
       <span scVideoPlayerTime class="ml-2"></span>
 
-      <div class="flex-1"></div>
+      <div scVideoPlayerSpacer></div>
 
       <div scVideoPlayerSpeed></div>
       <button scVideoPlayerPip>PiP</button>
@@ -204,31 +187,6 @@ import {
     </div>
   </div>
 </div>
-```
-
-#### Multiple Video Sources
-
-```html
-<video
-  scVideoPlayerVideo
-  [sources]="[
-    { src: 'video.webm', type: 'video/webm' },
-    { src: 'video.mp4', type: 'video/mp4' }
-  ]"
-></video>
-```
-
-#### With Subtitles
-
-```html
-<video
-  scVideoPlayerVideo
-  [src]="video"
-  [tracks]="[
-    { src: 'en.vtt', kind: 'subtitles', srclang: 'en', label: 'English', default: true },
-    { src: 'es.vtt', kind: 'subtitles', srclang: 'es', label: 'Spanish' }
-  ]"
-></video>
 ```
 
 ## Types
@@ -251,18 +209,18 @@ interface ScVideoTrack {
 
 ## Features
 
-- ✅ Composable architecture for maximum flexibility
-- ✅ Progress bar with buffering indicator
-- ✅ Volume slider with mute toggle
-- ✅ Playback speed selection
-- ✅ Skip forward/back buttons
-- ✅ Picture-in-picture support
-- ✅ Fullscreen mode
-- ✅ Keyboard navigation
-- ✅ Multiple video sources
-- ✅ Subtitle/caption support
-- ✅ Buffering indicator
-- ✅ Customizable controls layout
+- Composable architecture for maximum flexibility
+- Progress bar with buffering indicator
+- Volume slider with mute toggle
+- Playback speed selection
+- Skip forward/back buttons
+- Picture-in-picture support
+- Fullscreen mode
+- Keyboard navigation
+- Multiple video sources
+- Subtitle/caption support
+- Buffering indicator
+- Customizable controls layout
 
 ## Accessibility
 
