@@ -18,7 +18,12 @@ import { SC_CROPPER, ScCropperResult } from './cropper';
   selector: '[scCropperCanvas]',
   exportAs: 'scCropperCanvas',
   template: `
+    <div class="absolute inset-0 flex items-center justify-center">
+      <ng-content select="img[scCropperImage]" />
+    </div>
+
     <ng-content />
+
     <canvas #canvasEl class="hidden"></canvas>
   `,
   host: {
