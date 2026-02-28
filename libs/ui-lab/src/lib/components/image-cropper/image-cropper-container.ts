@@ -35,6 +35,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
           [style.height.px]="scaledImageHeight()"
           (load)="onImageLoad()"
           draggable="false"
+          crossorigin="anonymous"
           alt="Image to crop"
         />
       </div>

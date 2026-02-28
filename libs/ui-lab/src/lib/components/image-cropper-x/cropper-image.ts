@@ -18,6 +18,7 @@ import { SC_CROPPER } from './cropper';
     '[style.height.px]': 'scaledHeight()',
     '[style.transform]': 'transform()',
     '[attr.draggable]': '"false"',
+    crossorigin: 'anonymous',
     '(load)': 'onLoad()',
   },
 })
