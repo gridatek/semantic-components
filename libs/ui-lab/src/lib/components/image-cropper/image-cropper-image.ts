@@ -4,6 +4,7 @@ import {
   Directive,
   ElementRef,
   inject,
+  input,
   Injector,
   runInInjectionContext,
 } from '@angular/core';
@@ -17,6 +18,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     '[style.width.px]': 'scaledWidth()',
     '[style.height.px]': 'scaledHeight()',
     '[style.transform]': 'transform()',
+    '[src]': 'src()',
     '[attr.draggable]': '"false"',
     crossorigin: 'anonymous',
     '(load)': 'onLoad()',
@@ -26,6 +28,12 @@ export class ScImageCropperImage {
   private readonly cropper = inject(SC_IMAGE_CROPPER);
   private readonly elementRef = inject(ElementRef<HTMLImageElement>);
   private readonly injector = inject(Injector);
+
+  readonly initialSrc = input<string>('', { alias: 'src' });
+
+  protected readonly src = computed(
+    () => this.cropper.imageSrc() || this.initialSrc(),
+  );
 
   protected readonly scaledWidth = computed(() =>
     this.cropper.scaledImageWidth(),
