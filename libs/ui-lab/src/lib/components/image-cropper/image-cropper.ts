@@ -77,11 +77,23 @@ export class ScImageCropper {
   readonly flipV = signal(false);
 
   // Computed
+  // Base scale fits the natural image within the container (contain mode)
+  readonly baseScale = computed(() => {
+    const nw = this.imageNaturalWidth();
+    const nh = this.imageNaturalHeight();
+    if (nw === 0 || nh === 0) return 1;
+    return Math.min(
+      this.containerWidth() / nw,
+      this.containerHeight() / nh,
+      1, // never upscale beyond natural size
+    );
+  });
+
   readonly scaledImageWidth = computed(
-    () => this.imageNaturalWidth() * this.zoom(),
+    () => this.imageNaturalWidth() * this.baseScale() * this.zoom(),
   );
   readonly scaledImageHeight = computed(
-    () => this.imageNaturalHeight() * this.zoom(),
+    () => this.imageNaturalHeight() * this.baseScale() * this.zoom(),
   );
 
   // Image bounds within the container (image is flex-centered)
