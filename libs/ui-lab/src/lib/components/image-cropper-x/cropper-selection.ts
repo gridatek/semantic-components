@@ -1,12 +1,12 @@
-import { computed, Directive, inject } from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import { SC_CROPPER } from './cropper';
 
 @Directive({
   selector: '[scCropperSelection]',
   host: {
     'data-slot': 'cropper-selection',
-    class: 'absolute border-2 border-white',
-    '[class.rounded-full]': 'isCircle()',
+    '[class]': 'class()',
     '[style.left.px]': 'cropper.cropArea().x',
     '[style.top.px]': 'cropper.cropArea().y',
     '[style.width.px]': 'cropper.cropArea().width',
@@ -19,6 +19,16 @@ import { SC_CROPPER } from './cropper';
 })
 export class ScCropperSelection {
   readonly cropper = inject(SC_CROPPER);
+
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() =>
+    cn(
+      'absolute border-2 border-white',
+      this.isCircle() && 'rounded-full',
+      this.classInput(),
+    ),
+  );
 
   protected readonly isCircle = computed(
     () => this.cropper.cropShape() === 'circle',
