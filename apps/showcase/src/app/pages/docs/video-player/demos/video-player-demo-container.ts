@@ -30,7 +30,6 @@ export class VideoPlayerDemoContainer {
 } from '@angular/core';
 import {
   ScVideoPlayer,
-  ScVideoPlayerVideo,
   ScVideoPlayerControls,
   ScVideoPlayerPlayPause,
   ScVideoPlayerProgress,
@@ -62,7 +61,6 @@ import {
   selector: 'app-video-player-demo',
   imports: [
     ScVideoPlayer,
-    ScVideoPlayerVideo,
     ScVideoPlayerControls,
     ScVideoPlayerPlayPause,
     ScVideoPlayerProgress,
@@ -88,16 +86,8 @@ import {
     SiLoaderIcon,
   ],
   template: \`
-    <div scVideoPlayer #player="scVideoPlayer">
-      <!-- Buffering Indicator -->
+    <div scVideoPlayer #player="scVideoPlayer" [src]="sampleVideo" [poster]="samplePoster">
       <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
-
-      <!-- Video -->
-      <video
-        scVideoPlayerVideo
-        [src]="sampleVideo"
-        [poster]="samplePoster"
-      ></video>
 
       <button scVideoPlayerBigPlay>
         <svg siPlayIcon></svg>

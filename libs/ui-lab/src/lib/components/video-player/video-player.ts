@@ -1,20 +1,28 @@
 import {
+  ChangeDetectionStrategy,
+  Component,
   computed,
-  Directive,
   InjectionToken,
   input,
   signal,
+  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { ScVideoPlayerVideo } from './video-player-video';
 
 export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
   'SC_VIDEO_PLAYER',
 );
 
-@Directive({
+@Component({
   selector: '[scVideoPlayer]',
   exportAs: 'scVideoPlayer',
+  imports: [ScVideoPlayerVideo],
   providers: [{ provide: SC_VIDEO_PLAYER, useExisting: ScVideoPlayer }],
+  template: `
+    <video scVideoPlayerVideo [src]="src()" [poster]="poster()"></video>
+    <ng-content />
+  `,
   host: {
     'data-slot': 'video-player',
     '[class]': 'class()',
@@ -24,8 +32,12 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
     '[style.--muted]': '"oklch(1 0 0 / 0.2)"',
     '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
   },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVideoPlayer {
+  readonly src = input<string>('');
+  readonly poster = input<string>('');
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
