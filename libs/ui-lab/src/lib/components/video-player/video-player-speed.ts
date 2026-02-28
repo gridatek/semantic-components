@@ -4,6 +4,7 @@ import {
   computed,
   input,
   inject,
+  viewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -62,6 +63,7 @@ import { SC_VIDEO_PLAYER } from './video-player';
 })
 export class ScVideoPlayerSpeed {
   protected readonly player = inject(SC_VIDEO_PLAYER);
+  private readonly popoverProvider = viewChild(ScPopoverProvider);
   readonly speeds = input<number[]>([0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -76,5 +78,6 @@ export class ScVideoPlayerSpeed {
 
   protected setSpeed(speed: number): void {
     this.player.setPlaybackRate(speed);
+    this.popoverProvider()?.close();
   }
 }
