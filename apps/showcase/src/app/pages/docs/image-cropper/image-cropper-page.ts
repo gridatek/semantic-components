@@ -3,13 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicCropperDemoContainer } from './demos/basic-cropper-demo-container';
-import { AspectRatioCropperDemoContainer } from './demos/aspect-ratio-cropper-demo-container';
 import { AvatarCropperDemoContainer } from './demos/avatar-cropper-demo-container';
-import { UploadCropperDemoContainer } from './demos/upload-cropper-demo-container';
-import { InfoCropperDemoContainer } from './demos/info-cropper-demo-container';
-import { RotateFlipCropperDemoContainer } from './demos/rotate-flip-cropper-demo-container';
-import { FileInputCropperDemoContainer } from './demos/file-input-cropper-demo-container';
 import { FullFeaturedCropperDemoContainer } from './demos/full-featured-cropper-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -19,13 +13,7 @@ import { ScHeading } from '@semantic-components/ui';
 @Component({
   selector: 'app-image-cropper-page',
   imports: [
-    BasicCropperDemoContainer,
-    AspectRatioCropperDemoContainer,
     AvatarCropperDemoContainer,
-    UploadCropperDemoContainer,
-    InfoCropperDemoContainer,
-    RotateFlipCropperDemoContainer,
-    FileInputCropperDemoContainer,
     FullFeaturedCropperDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -44,14 +32,8 @@ import { ScHeading } from '@semantic-components/ui';
 
       <section class="space-y-8">
         <h2 scHeading toc>Examples</h2>
-        <app-basic-cropper-demo-container />
-        <app-aspect-ratio-cropper-demo-container />
-        <app-avatar-cropper-demo-container />
-        <app-upload-cropper-demo-container />
-        <app-info-cropper-demo-container />
-        <app-rotate-flip-cropper-demo-container />
-        <app-file-input-cropper-demo-container />
         <app-full-featured-cropper-demo-container />
+        <app-avatar-cropper-demo-container />
       </section>
     </div>
   `,
