@@ -1603,17 +1603,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/image-cropper',
     children: [
       {
-        path: 'basic-cropper-demo',
+        path: 'full-featured-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/basic-cropper-demo').then(
-            (m) => m.BasicCropperDemo,
-          ),
-      },
-      {
-        path: 'aspect-ratio-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/aspect-ratio-cropper-demo').then(
-            (m) => m.AspectRatioCropperDemo,
+          import('../pages/docs/image-cropper/demos/full-featured-cropper-demo').then(
+            (m) => m.FullFeaturedCropperDemo,
           ),
       },
       {
@@ -1621,41 +1614,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/image-cropper/demos/avatar-cropper-demo').then(
             (m) => m.AvatarCropperDemo,
-          ),
-      },
-      {
-        path: 'upload-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/upload-cropper-demo').then(
-            (m) => m.UploadCropperDemo,
-          ),
-      },
-      {
-        path: 'info-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/info-cropper-demo').then(
-            (m) => m.InfoCropperDemo,
-          ),
-      },
-      {
-        path: 'rotate-flip-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/rotate-flip-cropper-demo').then(
-            (m) => m.RotateFlipCropperDemo,
-          ),
-      },
-      {
-        path: 'file-input-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/file-input-cropper-demo').then(
-            (m) => m.FileInputCropperDemo,
-          ),
-      },
-      {
-        path: 'full-featured-cropper-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/full-featured-cropper-demo').then(
-            (m) => m.FullFeaturedCropperDemo,
           ),
       },
     ],
