@@ -73,7 +73,6 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
-    hidden: true,
   },
   {
     name: 'Avatar',
@@ -1004,7 +1003,6 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
-    hidden: true,
   },
   {
     name: 'Virtual List',
