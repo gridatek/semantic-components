@@ -1640,6 +1640,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/image-cropper-x',
+    children: [
+      {
+        path: 'basic-cropper-x-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper/demos-x/basic-cropper-x-demo').then(
+            (m) => m.BasicCropperXDemo,
+          ),
+      },
+      {
+        path: 'aspect-ratio-cropper-x-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper/demos-x/aspect-ratio-cropper-x-demo').then(
+            (m) => m.AspectRatioCropperXDemo,
+          ),
+      },
+      {
+        path: 'avatar-cropper-x-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper/demos-x/avatar-cropper-x-demo').then(
+            (m) => m.AvatarCropperXDemo,
+          ),
+      },
+      {
+        path: 'upload-cropper-x-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper/demos-x/upload-cropper-x-demo').then(
+            (m) => m.UploadCropperXDemo,
+          ),
+      },
+      {
+        path: 'info-cropper-x-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper/demos-x/info-cropper-x-demo').then(
+            (m) => m.InfoCropperXDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/infinite-scroll',
     children: [
       {

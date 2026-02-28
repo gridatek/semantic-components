@@ -8,6 +8,11 @@ import { AspectRatioImageCropperDemoContainer } from './demos/aspect-ratio-image
 import { AvatarImageCropperDemoContainer } from './demos/avatar-image-cropper-demo-container';
 import { UploadImageCropperDemoContainer } from './demos/upload-image-cropper-demo-container';
 import { InfoImageCropperDemoContainer } from './demos/info-image-cropper-demo-container';
+import { BasicCropperXDemoContainer } from './demos-x/basic-cropper-x-demo-container';
+import { AspectRatioCropperXDemoContainer } from './demos-x/aspect-ratio-cropper-x-demo-container';
+import { AvatarCropperXDemoContainer } from './demos-x/avatar-cropper-x-demo-container';
+import { UploadCropperXDemoContainer } from './demos-x/upload-cropper-x-demo-container';
+import { InfoCropperXDemoContainer } from './demos-x/info-cropper-x-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
@@ -21,6 +26,11 @@ import { ScHeading } from '@semantic-components/ui';
     AvatarImageCropperDemoContainer,
     UploadImageCropperDemoContainer,
     InfoImageCropperDemoContainer,
+    BasicCropperXDemoContainer,
+    AspectRatioCropperXDemoContainer,
+    AvatarCropperXDemoContainer,
+    UploadCropperXDemoContainer,
+    InfoCropperXDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -43,6 +53,15 @@ import { ScHeading } from '@semantic-components/ui';
         <app-avatar-image-cropper-demo-container />
         <app-upload-image-cropper-demo-container />
         <app-info-image-cropper-demo-container />
+      </section>
+
+      <section class="space-y-8">
+        <h2 scHeading toc>Image Cropper X (Refactored)</h2>
+        <app-basic-cropper-x-demo-container />
+        <app-aspect-ratio-cropper-x-demo-container />
+        <app-avatar-cropper-x-demo-container />
+        <app-upload-cropper-x-demo-container />
+        <app-info-cropper-x-demo-container />
       </section>
     </div>
   `,
