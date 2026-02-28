@@ -78,7 +78,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <svg siZoomOutIcon class="size-4"></svg>
           </button>
 
-          <input scCropperZoomSlider />
+          <div scCropperZoomSlider></div>
 
           <button
             scButton
