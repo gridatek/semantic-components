@@ -89,10 +89,12 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <svg siZoomInIcon class="size-4"></svg>
           </button>
         </div>
+      </div>
 
-        <div class="space-y-4">
-          <p class="text-sm font-medium">Preview:</p>
-          <div class="space-y-3">
+      <div class="space-y-4">
+        <p class="text-sm font-medium">Preview:</p>
+        <div class="flex flex-wrap gap-4">
+          <div>
             <div class="text-muted-foreground text-xs">Large (100x100)</div>
             <div
               scImageCropperPreview
@@ -100,7 +102,8 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
               [height]="100"
               class="rounded-full"
             ></div>
-
+          </div>
+          <div>
             <div class="text-muted-foreground text-xs">Medium (64x64)</div>
             <div
               scImageCropperPreview
@@ -108,7 +111,8 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
               [height]="64"
               class="rounded-full"
             ></div>
-
+          </div>
+          <div>
             <div class="text-muted-foreground text-xs">Small (40x40)</div>
             <div
               scImageCropperPreview
