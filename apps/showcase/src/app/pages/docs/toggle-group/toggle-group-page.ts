@@ -28,7 +28,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>ToggleGroup</h1>
+        <h1 scHeading>Toggle Group</h1>
         <p class="text-muted-foreground">
           A set of two-state buttons that can be toggled on or off.
         </p>
