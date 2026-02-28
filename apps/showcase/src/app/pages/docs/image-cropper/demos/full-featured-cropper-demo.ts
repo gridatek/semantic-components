@@ -201,6 +201,13 @@ import {
                 class="max-w-xs rounded-md border"
                 alt="Cropped result"
               />
+              <a
+                [href]="croppedImage()"
+                download="cropped-image.png"
+                class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex rounded-md px-4 py-2 text-sm"
+              >
+                Download
+              </a>
             </div>
           }
         </div>
