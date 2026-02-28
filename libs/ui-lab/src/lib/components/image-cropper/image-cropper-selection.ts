@@ -1,11 +1,11 @@
 import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Directive({
-  selector: '[scCropperSelection]',
+  selector: '[scImageCropperSelection]',
   host: {
-    'data-slot': 'cropper-selection',
+    'data-slot': 'image-cropper-selection',
     '[class]': 'class()',
     '[style.left.px]': 'cropper.cropArea().x',
     '[style.top.px]': 'cropper.cropArea().y',
@@ -17,8 +17,8 @@ import { SC_CROPPER } from './cropper';
     '(keydown)': 'onKeyDown($event)',
   },
 })
-export class ScCropperSelection {
-  readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperSelection {
+  readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

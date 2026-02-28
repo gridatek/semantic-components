@@ -6,10 +6,10 @@ import {
   inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
-  selector: '[scCropperOverlay]',
+  selector: '[scImageCropperOverlay]',
   template: `
     <svg class="h-full w-full">
       <defs>
@@ -43,14 +43,14 @@ import { SC_CROPPER } from './cropper';
     </svg>
   `,
   host: {
-    'data-slot': 'cropper-overlay',
+    'data-slot': 'image-cropper-overlay',
     class: 'pointer-events-none absolute inset-0',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCropperOverlay {
-  protected readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperOverlay {
+  protected readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly maskId = inject(_IdGenerator).getId('sc-crop-mask-');
 

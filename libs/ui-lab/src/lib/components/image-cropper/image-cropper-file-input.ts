@@ -1,16 +1,16 @@
 import { Directive, inject } from '@angular/core';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Directive({
-  selector: 'input[scCropperFileInput]',
+  selector: 'input[scImageCropperFileInput]',
   host: {
-    'data-slot': 'cropper-file-input',
+    'data-slot': 'image-cropper-file-input',
     type: 'file',
     '(change)': 'onFileChange($event)',
   },
 })
-export class ScCropperFileInput {
-  private readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperFileInput {
+  private readonly cropper = inject(SC_IMAGE_CROPPER);
 
   protected onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;

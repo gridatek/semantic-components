@@ -11,33 +11,35 @@ import {
   signal,
 } from '@angular/core';
 
-export interface ScCropperArea {
+export interface ScImageCropperArea {
   x: number;
   y: number;
   width: number;
   height: number;
 }
 
-export interface ScCropperResult {
+export interface ScImageCropperResult {
   dataUrl: string;
   blob: Blob | null;
   width: number;
   height: number;
 }
 
-export const SC_CROPPER = new InjectionToken<ScCropper>('SC_CROPPER');
+export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
+  'SC_IMAGE_CROPPER',
+);
 
 @Directive({
-  selector: '[scCropper]',
-  exportAs: 'scCropper',
-  providers: [{ provide: SC_CROPPER, useExisting: ScCropper }],
+  selector: '[scImageCropper]',
+  exportAs: 'scImageCropper',
+  providers: [{ provide: SC_IMAGE_CROPPER, useExisting: ScImageCropper }],
   host: {
-    'data-slot': 'cropper',
+    'data-slot': 'image-cropper',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-crop-shape]': 'cropShape()',
   },
 })
-export class ScCropper {
+export class ScImageCropper {
   // Configuration inputs
   readonly aspectRatio = model<number | null>(null);
   readonly minWidth = input<number>(50);
@@ -51,7 +53,7 @@ export class ScCropper {
   readonly cropShape = input<'rect' | 'circle'>('rect');
 
   // Two-way models
-  readonly cropArea = model<ScCropperArea>({
+  readonly cropArea = model<ScImageCropperArea>({
     x: 50,
     y: 50,
     width: 200,
@@ -61,7 +63,7 @@ export class ScCropper {
   readonly rotation = model<number>(0);
 
   // Outputs
-  readonly cropChange = output<ScCropperArea>();
+  readonly cropChange = output<ScImageCropperArea>();
   readonly imageLoaded = output<{ width: number; height: number }>();
 
   // Internal state signals
@@ -105,7 +107,7 @@ export class ScCropper {
   resizeHandle = '';
   startX = 0;
   startY = 0;
-  startCropArea: ScCropperArea = { x: 0, y: 0, width: 0, height: 0 };
+  startCropArea: ScImageCropperArea = { x: 0, y: 0, width: 0, height: 0 };
 
   private readonly destroyRef = inject(DestroyRef);
 
@@ -341,7 +343,7 @@ export class ScCropper {
   async crop(
     imageElement: HTMLImageElement,
     canvasElement: HTMLCanvasElement,
-  ): Promise<ScCropperResult> {
+  ): Promise<ScImageCropperResult> {
     const crop = this.cropArea();
     const cw = this.containerWidth();
     const containerH = this.containerHeight();

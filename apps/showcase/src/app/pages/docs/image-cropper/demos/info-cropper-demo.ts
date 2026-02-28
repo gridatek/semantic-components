@@ -5,46 +5,46 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScCropperArea,
-  ScCropper,
-  ScCropperCanvas,
-  ScCropperImage,
-  ScCropperOverlay,
-  ScCropperSelection,
-  ScCropperDragRegion,
-  ScCropperHandle,
-  ScCropperGrid,
+  ScImageCropperArea,
+  ScImageCropper,
+  ScImageCropperCanvas,
+  ScImageCropperImage,
+  ScImageCropperOverlay,
+  ScImageCropperSelection,
+  ScImageCropperDragRegion,
+  ScImageCropperHandle,
+  ScImageCropperGrid,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-info-cropper-demo',
   imports: [
-    ScCropper,
-    ScCropperCanvas,
-    ScCropperImage,
-    ScCropperOverlay,
-    ScCropperSelection,
-    ScCropperDragRegion,
-    ScCropperHandle,
-    ScCropperGrid,
+    ScImageCropper,
+    ScImageCropperCanvas,
+    ScImageCropperImage,
+    ScImageCropperOverlay,
+    ScImageCropperSelection,
+    ScImageCropperDragRegion,
+    ScImageCropperHandle,
+    ScImageCropperGrid,
   ],
   template: `
     <div class="space-y-4">
-      <div scCropper [(cropArea)]="cropArea" [containerHeight]="300">
-        <div scCropperCanvas class="overflow-hidden rounded-lg border">
-          <img scCropperImage [src]="imageSrc()" alt="Image to crop" />
-          <div scCropperOverlay></div>
-          <div scCropperSelection>
-            <div scCropperDragRegion></div>
-            <div scCropperHandle position="top-left"></div>
-            <div scCropperHandle position="top-right"></div>
-            <div scCropperHandle position="bottom-left"></div>
-            <div scCropperHandle position="bottom-right"></div>
-            <div scCropperHandle position="top"></div>
-            <div scCropperHandle position="right"></div>
-            <div scCropperHandle position="bottom"></div>
-            <div scCropperHandle position="left"></div>
-            <div scCropperGrid [columns]="3" [rows]="3"></div>
+      <div scImageCropper [(cropArea)]="cropArea" [containerHeight]="300">
+        <div scImageCropperCanvas class="overflow-hidden rounded-lg border">
+          <img scImageCropperImage [src]="imageSrc()" alt="Image to crop" />
+          <div scImageCropperOverlay></div>
+          <div scImageCropperSelection>
+            <div scImageCropperDragRegion></div>
+            <div scImageCropperHandle position="top-left"></div>
+            <div scImageCropperHandle position="top-right"></div>
+            <div scImageCropperHandle position="bottom-left"></div>
+            <div scImageCropperHandle position="bottom-right"></div>
+            <div scImageCropperHandle position="top"></div>
+            <div scImageCropperHandle position="right"></div>
+            <div scImageCropperHandle position="bottom"></div>
+            <div scImageCropperHandle position="left"></div>
+            <div scImageCropperGrid [columns]="3" [rows]="3"></div>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ export class InfoCropperDemo {
     'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
   );
 
-  readonly cropArea = signal<ScCropperArea>({
+  readonly cropArea = signal<ScImageCropperArea>({
     x: 50,
     y: 50,
     width: 200,

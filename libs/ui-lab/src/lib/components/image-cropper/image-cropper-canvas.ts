@@ -12,14 +12,14 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_CROPPER, ScCropperResult } from './cropper';
+import { SC_IMAGE_CROPPER, ScImageCropperResult } from './image-cropper';
 
 @Component({
-  selector: '[scCropperCanvas]',
-  exportAs: 'scCropperCanvas',
+  selector: '[scImageCropperCanvas]',
+  exportAs: 'scImageCropperCanvas',
   template: `
     <div class="absolute inset-0 flex items-center justify-center">
-      <ng-content select="img[scCropperImage]" />
+      <ng-content select="img[scImageCropperImage]" />
     </div>
 
     <ng-content />
@@ -27,7 +27,7 @@ import { SC_CROPPER, ScCropperResult } from './cropper';
     <canvas #canvasEl class="hidden"></canvas>
   `,
   host: {
-    'data-slot': 'cropper-canvas',
+    'data-slot': 'image-cropper-canvas',
     '[class]': 'class()',
     '[style.height.px]': 'cropper.containerHeight()',
     '(wheel)': 'onWheel($event)',
@@ -35,8 +35,8 @@ import { SC_CROPPER, ScCropperResult } from './cropper';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCropperCanvas {
-  readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperCanvas {
+  readonly cropper = inject(SC_IMAGE_CROPPER);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -83,10 +83,10 @@ export class ScCropperCanvas {
     this.cropper.setZoom(this.cropper.zoom() + delta);
   }
 
-  async crop(): Promise<ScCropperResult> {
+  async crop(): Promise<ScImageCropperResult> {
     const canvas = this.canvasEl()?.nativeElement;
     const img = this.elementRef.nativeElement.querySelector(
-      'img[scCropperImage]',
+      'img[scImageCropperImage]',
     ) as HTMLImageElement | null;
 
     if (!img || !canvas) {

@@ -7,10 +7,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
-  selector: '[scCropperPreview]',
+  selector: '[scImageCropperPreview]',
   template: `
     @if (src()) {
       <img
@@ -24,7 +24,7 @@ import { SC_CROPPER } from './cropper';
     }
   `,
   host: {
-    'data-slot': 'cropper-preview',
+    'data-slot': 'image-cropper-preview',
     '[class]': 'class()',
     '[style.width.px]': 'width()',
     '[style.height.px]': 'height()',
@@ -32,8 +32,8 @@ import { SC_CROPPER } from './cropper';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCropperPreview {
-  private readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperPreview {
+  private readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly width = input<number>(150);

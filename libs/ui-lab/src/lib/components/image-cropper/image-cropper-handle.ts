@@ -1,5 +1,5 @@
 import { computed, Directive, inject, input } from '@angular/core';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 type HandlePosition =
   | 'top-left'
@@ -34,9 +34,9 @@ const POSITION_CLASSES: Record<HandlePosition, string> = {
 };
 
 @Directive({
-  selector: '[scCropperHandle]',
+  selector: '[scImageCropperHandle]',
   host: {
-    'data-slot': 'cropper-handle',
+    'data-slot': 'image-cropper-handle',
     '[class]': 'hostClass()',
     '[style.cursor]': 'cursor()',
     '[attr.data-position]': 'position()',
@@ -44,8 +44,8 @@ const POSITION_CLASSES: Record<HandlePosition, string> = {
     '(touchstart)': 'onTouchStart($event)',
   },
 })
-export class ScCropperHandle {
-  private readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperHandle {
+  private readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly position = input.required<HandlePosition>();
 

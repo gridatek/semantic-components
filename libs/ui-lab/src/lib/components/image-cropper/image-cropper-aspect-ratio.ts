@@ -1,19 +1,19 @@
 import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Directive({
-  selector: 'button[scCropperAspectRatio]',
+  selector: 'button[scImageCropperAspectRatio]',
   host: {
-    'data-slot': 'cropper-aspect-ratio',
+    'data-slot': 'image-cropper-aspect-ratio',
     '[class]': 'class()',
     '[attr.data-selected]': 'selected() || null',
     '[attr.aria-pressed]': 'selected()',
     '(click)': 'selectAspectRatio()',
   },
 })
-export class ScCropperAspectRatio {
-  private readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperAspectRatio {
+  private readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -28,7 +28,7 @@ export class ScCropperAspectRatio {
   );
 
   readonly value = input<number | null>(null, {
-    alias: 'scCropperAspectRatio',
+    alias: 'scImageCropperAspectRatio',
   });
 
   readonly selected = computed(() => {

@@ -7,12 +7,12 @@ import {
   Injector,
   runInInjectionContext,
 } from '@angular/core';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Directive({
-  selector: 'img[scCropperImage]',
+  selector: 'img[scImageCropperImage]',
   host: {
-    'data-slot': 'cropper-image',
+    'data-slot': 'image-cropper-image',
     class: 'max-w-none',
     '[style.width.px]': 'scaledWidth()',
     '[style.height.px]': 'scaledHeight()',
@@ -22,8 +22,8 @@ import { SC_CROPPER } from './cropper';
     '(load)': 'onLoad()',
   },
 })
-export class ScCropperImage {
-  private readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperImage {
+  private readonly cropper = inject(SC_IMAGE_CROPPER);
   private readonly elementRef = inject(ElementRef<HTMLImageElement>);
   private readonly injector = inject(Injector);
 

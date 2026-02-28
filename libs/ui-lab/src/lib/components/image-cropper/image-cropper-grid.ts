@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: '[scCropperGrid]',
+  selector: '[scImageCropperGrid]',
   template: `
     @for (col of verticalLines(); track col) {
       <div
@@ -23,13 +23,13 @@ import {
     }
   `,
   host: {
-    'data-slot': 'cropper-grid',
+    'data-slot': 'image-cropper-grid',
     class: 'pointer-events-none absolute inset-0',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCropperGrid {
+export class ScImageCropperGrid {
   readonly columns = input<number>(3);
   readonly rows = input<number>(3);
 

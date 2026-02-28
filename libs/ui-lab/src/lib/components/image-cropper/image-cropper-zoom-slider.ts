@@ -10,10 +10,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { cn, ScSlider } from '@semantic-components/ui';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
-  selector: '[scCropperZoomSlider]',
+  selector: '[scImageCropperZoomSlider]',
   imports: [ScSlider],
   template: `
     <input
@@ -30,14 +30,14 @@ import { SC_CROPPER } from './cropper';
     </span>
   `,
   host: {
-    'data-slot': 'cropper-zoom-slider',
+    'data-slot': 'image-cropper-zoom-slider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScCropperZoomSlider {
-  protected readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperZoomSlider {
+  protected readonly cropper = inject(SC_IMAGE_CROPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

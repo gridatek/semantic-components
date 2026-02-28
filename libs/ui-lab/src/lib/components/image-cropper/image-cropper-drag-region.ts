@@ -1,17 +1,17 @@
 import { Directive, inject } from '@angular/core';
-import { SC_CROPPER } from './cropper';
+import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Directive({
-  selector: '[scCropperDragRegion]',
+  selector: '[scImageCropperDragRegion]',
   host: {
-    'data-slot': 'cropper-drag-region',
+    'data-slot': 'image-cropper-drag-region',
     class: 'absolute inset-0 cursor-move',
     '(mousedown)': 'onMouseDown($event)',
     '(touchstart)': 'onTouchStart($event)',
   },
 })
-export class ScCropperDragRegion {
-  private readonly cropper = inject(SC_CROPPER);
+export class ScImageCropperDragRegion {
+  private readonly cropper = inject(SC_IMAGE_CROPPER);
 
   protected onMouseDown(event: MouseEvent): void {
     event.preventDefault();

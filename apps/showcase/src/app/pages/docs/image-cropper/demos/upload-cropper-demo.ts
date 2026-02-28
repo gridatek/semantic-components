@@ -5,18 +5,18 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScCropperResult,
-  ScCropper,
-  ScCropperCanvas,
-  ScCropperImage,
-  ScCropperOverlay,
-  ScCropperSelection,
-  ScCropperDragRegion,
-  ScCropperHandle,
-  ScCropperGrid,
-  ScCropperZoomIn,
-  ScCropperZoomOut,
-  ScCropperZoomSlider,
+  ScImageCropperResult,
+  ScImageCropper,
+  ScImageCropperCanvas,
+  ScImageCropperImage,
+  ScImageCropperOverlay,
+  ScImageCropperSelection,
+  ScImageCropperDragRegion,
+  ScImageCropperHandle,
+  ScImageCropperGrid,
+  ScImageCropperZoomIn,
+  ScImageCropperZoomOut,
+  ScImageCropperZoomSlider,
 } from '@semantic-components/ui-lab';
 import { ScButton } from '@semantic-components/ui';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
@@ -24,17 +24,17 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-upload-cropper-demo',
   imports: [
-    ScCropper,
-    ScCropperCanvas,
-    ScCropperImage,
-    ScCropperOverlay,
-    ScCropperSelection,
-    ScCropperDragRegion,
-    ScCropperHandle,
-    ScCropperGrid,
-    ScCropperZoomIn,
-    ScCropperZoomOut,
-    ScCropperZoomSlider,
+    ScImageCropper,
+    ScImageCropperCanvas,
+    ScImageCropperImage,
+    ScImageCropperOverlay,
+    ScImageCropperSelection,
+    ScImageCropperDragRegion,
+    ScImageCropperHandle,
+    ScImageCropperGrid,
+    ScImageCropperZoomIn,
+    ScImageCropperZoomOut,
+    ScImageCropperZoomSlider,
     ScButton,
     SiZoomInIcon,
     SiZoomOutIcon,
@@ -71,29 +71,29 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
       </div>
 
       @if (uploadedImageSrc()) {
-        <div scCropper [containerHeight]="350" class="space-y-4">
+        <div scImageCropper [containerHeight]="350" class="space-y-4">
           <div
-            scCropperCanvas
-            #canvas="scCropperCanvas"
+            scImageCropperCanvas
+            #canvas="scImageCropperCanvas"
             class="overflow-hidden rounded-lg border"
           >
             <img
-              scCropperImage
+              scImageCropperImage
               [src]="uploadedImageSrc()!"
               alt="Uploaded image to crop"
             />
-            <div scCropperOverlay></div>
-            <div scCropperSelection>
-              <div scCropperDragRegion></div>
-              <div scCropperHandle position="top-left"></div>
-              <div scCropperHandle position="top-right"></div>
-              <div scCropperHandle position="bottom-left"></div>
-              <div scCropperHandle position="bottom-right"></div>
-              <div scCropperHandle position="top"></div>
-              <div scCropperHandle position="right"></div>
-              <div scCropperHandle position="bottom"></div>
-              <div scCropperHandle position="left"></div>
-              <div scCropperGrid [columns]="3" [rows]="3"></div>
+            <div scImageCropperOverlay></div>
+            <div scImageCropperSelection>
+              <div scImageCropperDragRegion></div>
+              <div scImageCropperHandle position="top-left"></div>
+              <div scImageCropperHandle position="top-right"></div>
+              <div scImageCropperHandle position="bottom-left"></div>
+              <div scImageCropperHandle position="bottom-right"></div>
+              <div scImageCropperHandle position="top"></div>
+              <div scImageCropperHandle position="right"></div>
+              <div scImageCropperHandle position="bottom"></div>
+              <div scImageCropperHandle position="left"></div>
+              <div scImageCropperGrid [columns]="3" [rows]="3"></div>
             </div>
           </div>
 
@@ -101,7 +101,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <div class="flex items-center gap-2">
               <button
                 scButton
-                scCropperZoomOut
+                scImageCropperZoomOut
                 variant="outline"
                 size="icon"
                 aria-label="Zoom out"
@@ -109,11 +109,11 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
                 <svg siZoomOutIcon class="size-4"></svg>
               </button>
 
-              <div scCropperZoomSlider></div>
+              <div scImageCropperZoomSlider></div>
 
               <button
                 scButton
-                scCropperZoomIn
+                scImageCropperZoomIn
                 variant="outline"
                 size="icon"
                 aria-label="Zoom in"
@@ -141,9 +141,11 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 export class UploadCropperDemo {
   readonly uploadedImageSrc = signal<string | null>(null);
 
-  async cropImage(canvas: InstanceType<typeof ScCropperCanvas>): Promise<void> {
+  async cropImage(
+    canvas: InstanceType<typeof ScImageCropperCanvas>,
+  ): Promise<void> {
     try {
-      const result: ScCropperResult = await canvas.crop();
+      const result: ScImageCropperResult = await canvas.crop();
 
       const link = document.createElement('a');
       link.href = result.dataUrl;
