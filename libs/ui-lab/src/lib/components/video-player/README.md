@@ -56,77 +56,77 @@ import {
 
 ### Composable Components
 
-**`ScVideoPlayer` (Directive)**
+**`ScVideoPlayer`**
 
 - Root directive that provides context
 - **Selector**: `[scVideoPlayer]`
 - Manages playback state, volume, fullscreen, etc.
 
-**`ScVideoPlayerVideo` (Component)**
+**`ScVideoPlayerVideo`**
 
 - Video element for playback
 - **Selector**: `video[scVideoPlayerVideo]`
 - **Inputs**: `src`, `sources`, `tracks`, `poster`, `autoplay`, `loop`, `muted`, `playsInline`, `aspectRatio`
 - **Outputs**: `ended`, `timeUpdate`
 
-**`ScVideoPlayerControls` (Component)**
+**`ScVideoPlayerControls`**
 
 - Container for control elements (uses `<ng-content>`)
 - **Selector**: `div[scVideoPlayerControls]`
 - **Default position**: Absolute bottom with gradient overlay
 
-**`ScVideoPlayerPlayPause` (Component)**
+**`ScVideoPlayerPlayPause`**
 
 - Play/pause toggle button
 - **Selector**: `button[scVideoPlayerPlayPause]`
 - **Auto state**: Reflects playing/paused state
 
-**`ScVideoPlayerProgress` (Component)**
+**`ScVideoPlayerProgress`**
 
 - Seek bar with buffering indicator
 - **Selector**: `div[scVideoPlayerProgress]`
 - Shows buffered ranges and current progress
 
-**`ScVideoPlayerVolume` (Component)**
+**`ScVideoPlayerVolume`**
 
 - Volume control with mute button and slider
 - **Selector**: `div[scVideoPlayerVolume]`
 - Requires `[volume-icon]` selector for icon content
 
-**`ScVideoPlayerTime` (Component)**
+**`ScVideoPlayerTime`**
 
 - Current time / duration display
 - **Selector**: `span[scVideoPlayerTime]`
 - Automatically formats time
 
-**`ScVideoPlayerSkip` (Component)**
+**`ScVideoPlayerSkip`**
 
 - Skip forward/back button
 - **Selector**: `button[scVideoPlayerSkip]`
 - **Inputs**: `seconds` (required), `ariaLabel`
 
-**`ScVideoPlayerSpeed` (Component)**
+**`ScVideoPlayerSpeed`**
 
 - Playback speed menu
 - **Selector**: `div[scVideoPlayerSpeed]`
 - **Inputs**: `speeds` (default: `[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]`)
 
-**`ScVideoPlayerFullscreen` (Component)**
+**`ScVideoPlayerFullscreen`**
 
 - Fullscreen toggle
 - **Selector**: `button[scVideoPlayerFullscreen]`
 
-**`ScVideoPlayerPip` (Component)**
+**`ScVideoPlayerPip`**
 
 - Picture-in-picture toggle
 - **Selector**: `button[scVideoPlayerPip]`
 
-**`ScVideoPlayerBigPlay` (Component)**
+**`ScVideoPlayerBigPlay`**
 
 - Large centered play button overlay
 - **Selector**: `button[scVideoPlayerBigPlay]`
 
-**`ScVideoPlayerBuffering` (Component)**
+**`ScVideoPlayerBuffering`**
 
 - Buffering indicator (auto-shows when buffering)
 - **Selector**: `div[scVideoPlayerBuffering]`
