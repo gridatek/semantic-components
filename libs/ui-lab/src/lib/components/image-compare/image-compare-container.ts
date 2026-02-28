@@ -46,7 +46,7 @@ export class ScImageCompareContainer {
 
   protected readonly class = computed(() =>
     cn(
-      'relative select-none cursor-ew-resize overflow-hidden rounded-lg',
+      'relative block h-full select-none cursor-ew-resize overflow-hidden rounded-lg',
       'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
       this.imageCompare.orientation() === 'vertical' && 'cursor-ns-resize',
       this.classInput(),
