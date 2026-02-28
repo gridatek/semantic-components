@@ -1,7 +1,7 @@
 import { computed, Directive, inject, input } from '@angular/core';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
-type HandlePosition =
+export type ScImageCropperHandlePosition =
   | 'top-left'
   | 'top'
   | 'top-right'
@@ -11,7 +11,7 @@ type HandlePosition =
   | 'bottom-left'
   | 'left';
 
-const CURSOR_MAP: Record<HandlePosition, string> = {
+const CURSOR_MAP: Record<ScImageCropperHandlePosition, string> = {
   'top-left': 'nw-resize',
   top: 'n-resize',
   'top-right': 'ne-resize',
@@ -22,7 +22,7 @@ const CURSOR_MAP: Record<HandlePosition, string> = {
   left: 'w-resize',
 };
 
-const POSITION_CLASSES: Record<HandlePosition, string> = {
+const POSITION_CLASSES: Record<ScImageCropperHandlePosition, string> = {
   'top-left': 'absolute -top-1.5 -left-1.5 z-10 size-3',
   top: 'absolute -top-1.5 left-1/2 z-10 h-3 w-6 -translate-x-1/2',
   'top-right': 'absolute -top-1.5 -right-1.5 z-10 size-3',
@@ -47,7 +47,7 @@ const POSITION_CLASSES: Record<HandlePosition, string> = {
 export class ScImageCropperHandle {
   private readonly cropper = inject(SC_IMAGE_CROPPER);
 
-  readonly position = input.required<HandlePosition>();
+  readonly position = input.required<ScImageCropperHandlePosition>();
 
   protected readonly cursor = computed(() => CURSOR_MAP[this.position()]);
 

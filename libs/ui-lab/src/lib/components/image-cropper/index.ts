@@ -6,6 +6,7 @@ export { ScImageCropperOverlay } from './image-cropper-overlay';
 export { ScImageCropperSelection } from './image-cropper-selection';
 export { ScImageCropperDragRegion } from './image-cropper-drag-region';
 export { ScImageCropperHandle } from './image-cropper-handle';
+export type { ScImageCropperHandlePosition } from './image-cropper-handle';
 export { ScImageCropperGrid } from './image-cropper-grid';
 export { ScImageCropperZoomSlider } from './image-cropper-zoom-slider';
 export { ScImageCropperZoomIn } from './image-cropper-zoom-in';
