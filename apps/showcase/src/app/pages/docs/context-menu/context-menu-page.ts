@@ -15,7 +15,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>ContextMenu</h1>
+        <h1 scHeading>Context Menu</h1>
         <p class="text-muted-foreground">
           Displays a menu at the pointer position when triggered by a
           right-click.

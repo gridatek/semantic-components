@@ -30,7 +30,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>DatePicker</h1>
+        <h1 scHeading>Date Picker</h1>
         <p class="text-muted-foreground">
           A date picker component with calendar popup for selecting dates.
         </p>

@@ -15,7 +15,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>AudioPlayer</h1>
+        <h1 scHeading>Audio Player</h1>
         <p class="text-muted-foreground">
           Feature-rich audio player with playlist support, shuffle, and repeat.
         </p>

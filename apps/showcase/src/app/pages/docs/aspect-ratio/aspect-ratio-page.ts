@@ -34,7 +34,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>AspectRatio</h1>
+        <h1 scHeading>Aspect Ratio</h1>
         <p class="text-muted-foreground">
           Displays content within a desired ratio.
         </p>
