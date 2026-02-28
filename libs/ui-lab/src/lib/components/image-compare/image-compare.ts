@@ -1,20 +1,5 @@
 import { Directive, InjectionToken, input, model, signal } from '@angular/core';
 
-/**
- * Injection token for ScImageCompare
- */
-export interface ScImageCompare {
-  orientation: () => 'horizontal' | 'vertical';
-  position: ReturnType<typeof model<number>>;
-  isDragging: ReturnType<typeof signal<boolean>>;
-  startDragging: () => void;
-  stopDragging: () => void;
-  updatePosition: (clientX: number, clientY: number, rect: DOMRect) => void;
-  moveSlider: (direction: 'forward' | 'backward', step?: number) => void;
-  setPositionToStart: () => void;
-  setPositionToEnd: () => void;
-}
-
 export const SC_IMAGE_COMPARE = new InjectionToken<ScImageCompare>(
   'SC_IMAGE_COMPARE',
 );
@@ -22,15 +7,13 @@ export const SC_IMAGE_COMPARE = new InjectionToken<ScImageCompare>(
 @Directive({
   selector: '[scImageCompare]',
   exportAs: 'scImageCompare',
-  providers: [
-    { provide: SC_IMAGE_COMPARE, useExisting: ScImageCompareDirective },
-  ],
+  providers: [{ provide: SC_IMAGE_COMPARE, useExisting: ScImageCompare }],
   host: {
     'data-slot': 'image-compare',
     '[attr.data-orientation]': 'orientation()',
   },
 })
-export class ScImageCompareDirective implements ScImageCompare {
+export class ScImageCompare {
   // Configuration inputs
   readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
 

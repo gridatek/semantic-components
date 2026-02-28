@@ -6,7 +6,6 @@ import {
   inject,
   input,
   ViewEncapsulation,
-  viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_COMPARE } from './image-compare';
