@@ -381,7 +381,6 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Media',
-    hidden: true,
   },
   {
     name: 'Image Cropper',

@@ -34,7 +34,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>ImageCompare</h1>
+        <h1 scHeading>Image Compare</h1>
         <p class="text-muted-foreground">
           Before/after image comparison slider with keyboard support.
         </p>
