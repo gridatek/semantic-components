@@ -11,12 +11,12 @@ import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_COMPARE } from './image-compare';
 
 @Component({
-  selector: '[scImageCompareContainer]',
+  selector: '[scImageCompareArea]',
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'image-compare-container',
+    'data-slot': 'image-compare-area',
     '[class]': 'class()',
     tabindex: '0',
     role: 'slider',
@@ -36,7 +36,7 @@ import { SC_IMAGE_COMPARE } from './image-compare';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScImageCompareContainer {
+export class ScImageCompareArea {
   readonly imageCompare = inject(SC_IMAGE_COMPARE);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 

@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScImageCompare,
-  ScImageCompareContainer,
+  ScImageCompareArea,
   ScImageCompareBefore,
   ScImageCompareAfter,
   ScImageCompareSlider,
@@ -16,7 +16,7 @@ import {
   selector: 'app-vertical-image-compare-demo',
   imports: [
     ScImageCompare,
-    ScImageCompareContainer,
+    ScImageCompareArea,
     ScImageCompareBefore,
     ScImageCompareAfter,
     ScImageCompareSlider,
@@ -28,7 +28,7 @@ import {
       [orientation]="'vertical'"
       class="aspect-2/3 w-full max-w-sm"
     >
-      <div scImageCompareContainer>
+      <div scImageCompareArea>
         @let img = 'https://picsum.photos/seed/compare-vertical/400/600';
         <img scImageCompareBefore [src]="img + '?grayscale'" alt="Top" />
         <img scImageCompareAfter [src]="img" alt="Bottom" />

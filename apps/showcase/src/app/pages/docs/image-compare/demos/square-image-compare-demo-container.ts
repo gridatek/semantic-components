@@ -30,7 +30,7 @@ export class SquareImageCompareDemoContainer {
 } from '@angular/core';
 import {
   ScImageCompare,
-  ScImageCompareContainer,
+  ScImageCompareArea,
   ScImageCompareBefore,
   ScImageCompareAfter,
   ScImageCompareSlider,
@@ -41,7 +41,7 @@ import {
   selector: 'app-square-image-compare-demo',
   imports: [
     ScImageCompare,
-    ScImageCompareContainer,
+    ScImageCompareArea,
     ScImageCompareBefore,
     ScImageCompareAfter,
     ScImageCompareSlider,
@@ -49,7 +49,7 @@ import {
   ],
   template: \`
     <div scImageCompare class="w-full max-w-md aspect-square">
-      <div scImageCompareContainer>
+      <div scImageCompareArea>
         <img
           scImageCompareBefore
           src="https://picsum.photos/seed/compare-square/500/500?grayscale"

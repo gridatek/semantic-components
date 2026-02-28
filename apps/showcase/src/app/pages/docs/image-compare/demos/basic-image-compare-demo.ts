@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScImageCompare,
-  ScImageCompareContainer,
+  ScImageCompareArea,
   ScImageCompareBefore,
   ScImageCompareAfter,
   ScImageCompareSlider,
@@ -16,7 +16,7 @@ import {
   selector: 'app-basic-image-compare-demo',
   imports: [
     ScImageCompare,
-    ScImageCompareContainer,
+    ScImageCompareArea,
     ScImageCompareBefore,
     ScImageCompareAfter,
     ScImageCompareSlider,
@@ -25,7 +25,7 @@ import {
   template: `
     @let img = 'https://picsum.photos/seed/compare-basic/800/400';
     <div scImageCompare class="aspect-2/1 w-full max-w-2xl">
-      <div scImageCompareContainer>
+      <div scImageCompareArea>
         <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
         <img scImageCompareAfter [src]="img" alt="After" />
         <div scImageCompareSlider></div>

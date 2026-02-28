@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScImageCompare,
-  ScImageCompareContainer,
+  ScImageCompareArea,
   ScImageCompareBefore,
   ScImageCompareAfter,
   ScImageCompareSlider,
@@ -16,7 +16,7 @@ import {
   selector: 'app-keyboard-image-compare-demo',
   imports: [
     ScImageCompare,
-    ScImageCompareContainer,
+    ScImageCompareArea,
     ScImageCompareBefore,
     ScImageCompareAfter,
     ScImageCompareSlider,
@@ -50,7 +50,7 @@ import {
       </li>
     </ul>
     <div scImageCompare class="aspect-2/1 w-full max-w-2xl">
-      <div scImageCompareContainer>
+      <div scImageCompareArea>
         @let img = 'https://picsum.photos/seed/compare-keyboard/800/400';
         <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
         <img scImageCompareAfter [src]="img" alt="After" />

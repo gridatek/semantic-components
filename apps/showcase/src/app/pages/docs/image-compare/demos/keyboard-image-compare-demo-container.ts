@@ -30,7 +30,7 @@ export class KeyboardImageCompareDemoContainer {
 } from '@angular/core';
 import {
   ScImageCompare,
-  ScImageCompareContainer,
+  ScImageCompareArea,
   ScImageCompareBefore,
   ScImageCompareAfter,
   ScImageCompareSlider,
@@ -41,7 +41,7 @@ import {
   selector: 'app-keyboard-image-compare-demo',
   imports: [
     ScImageCompare,
-    ScImageCompareContainer,
+    ScImageCompareArea,
     ScImageCompareBefore,
     ScImageCompareAfter,
     ScImageCompareSlider,
@@ -75,7 +75,7 @@ import {
       </li>
     </ul>
     <div scImageCompare class="w-full max-w-2xl aspect-2/1">
-      <div scImageCompareContainer>
+      <div scImageCompareArea>
         <img
           scImageCompareBefore
           src="https://picsum.photos/seed/compare-keyboard/800/400?grayscale"

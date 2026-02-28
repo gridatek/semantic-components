@@ -31,7 +31,7 @@ export class ControlledImageCompareDemoContainer {
 } from '@angular/core';
 import {
   ScImageCompare,
-  ScImageCompareContainer,
+  ScImageCompareArea,
   ScImageCompareBefore,
   ScImageCompareAfter,
   ScImageCompareSlider,
@@ -42,7 +42,7 @@ import {
   selector: 'app-controlled-image-compare-demo',
   imports: [
     ScImageCompare,
-    ScImageCompareContainer,
+    ScImageCompareArea,
     ScImageCompareBefore,
     ScImageCompareAfter,
     ScImageCompareSlider,
@@ -54,7 +54,7 @@ import {
       [(position)]="position"
       class="w-full max-w-2xl aspect-2/1"
     >
-      <div scImageCompareContainer>
+      <div scImageCompareArea>
         <img
           scImageCompareBefore
           src="https://picsum.photos/seed/compare-controlled/800/400?grayscale"
