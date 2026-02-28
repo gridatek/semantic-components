@@ -52,12 +52,12 @@ import {
       <div scImageCompareContainer>
         <img
           scImageCompareBefore
-          src="https://picsum.photos/800/400?grayscale&random=1"
+          src="https://picsum.photos/seed/compare-basic/800/400?grayscale"
           alt="Before"
         />
         <img
           scImageCompareAfter
-          src="https://picsum.photos/800/400?random=1"
+          src="https://picsum.photos/seed/compare-basic/800/400"
           alt="After"
         />
         <div scImageCompareSlider></div>

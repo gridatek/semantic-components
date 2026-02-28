@@ -52,12 +52,12 @@ import {
       <div scImageCompareContainer>
         <img
           scImageCompareBefore
-          src="https://picsum.photos/800/400?blur=5&random=2"
+          src="https://picsum.photos/seed/compare-labels/800/400?blur=5"
           alt="Blurred"
         />
         <img
           scImageCompareAfter
-          src="https://picsum.photos/800/400?random=2"
+          src="https://picsum.photos/seed/compare-labels/800/400"
           alt="Sharp"
         />
         <div scImageCompareSlider></div>
