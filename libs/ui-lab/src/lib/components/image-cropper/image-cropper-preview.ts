@@ -26,8 +26,8 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
   host: {
     'data-slot': 'image-cropper-preview',
     '[class]': 'class()',
-    '[style.width.px]': 'width()',
-    '[style.height.px]': 'height()',
+    '[style.width.px]': 'previewWidth()',
+    '[style.height.px]': 'previewHeight()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,17 +45,27 @@ export class ScImageCropperPreview {
 
   protected readonly src = computed(() => this.cropper.imageSrc());
 
-  protected readonly imageWidth = computed(() => {
+  // Fit the crop area into the preview bounds while preserving aspect ratio
+  protected readonly scale = computed(() => {
     const crop = this.cropper.cropArea();
-    const scaleX = this.width() / crop.width;
-    return this.cropper.scaledImageWidth() * scaleX;
+    return Math.min(this.width() / crop.width, this.height() / crop.height);
   });
 
-  protected readonly imageHeight = computed(() => {
-    const crop = this.cropper.cropArea();
-    const scaleY = this.height() / crop.height;
-    return this.cropper.scaledImageHeight() * scaleY;
-  });
+  protected readonly previewWidth = computed(
+    () => this.cropper.cropArea().width * this.scale(),
+  );
+
+  protected readonly previewHeight = computed(
+    () => this.cropper.cropArea().height * this.scale(),
+  );
+
+  protected readonly imageWidth = computed(
+    () => this.cropper.scaledImageWidth() * this.scale(),
+  );
+
+  protected readonly imageHeight = computed(
+    () => this.cropper.scaledImageHeight() * this.scale(),
+  );
 
   protected readonly previewTransform = computed(() => {
     const crop = this.cropper.cropArea();
@@ -63,6 +73,7 @@ export class ScImageCropperPreview {
     const ch = this.cropper.containerHeight();
     const imgW = this.cropper.scaledImageWidth();
     const imgH = this.cropper.scaledImageHeight();
+    const scale = this.scale();
 
     // Image is centered in the container
     const offsetX = (cw - imgW) / 2;
@@ -72,10 +83,8 @@ export class ScImageCropperPreview {
     const cropImgX = crop.x - offsetX;
     const cropImgY = crop.y - offsetY;
 
-    const scaleX = this.width() / crop.width;
-    const scaleY = this.height() / crop.height;
-    const translateX = -cropImgX * scaleX;
-    const translateY = -cropImgY * scaleY;
+    const translateX = -cropImgX * scale;
+    const translateY = -cropImgY * scale;
 
     const parts: string[] = [`translate(${translateX}px, ${translateY}px)`];
 
