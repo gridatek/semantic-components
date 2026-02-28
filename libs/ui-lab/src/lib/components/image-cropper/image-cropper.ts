@@ -24,69 +24,6 @@ export interface CropResult {
   height: number;
 }
 
-/**
- * Injection token for ScImageCropper
- */
-export interface ScImageCropper {
-  // Inputs
-  src: () => string;
-  aspectRatio: () => number | null;
-  minWidth: () => number;
-  minHeight: () => number;
-  containerHeight: () => number;
-  showGrid: () => boolean;
-  disabled: () => boolean;
-  outputType: () => 'image/png' | 'image/jpeg' | 'image/webp';
-  outputQuality: () => number;
-
-  // Models
-  cropArea: ReturnType<typeof model<CropArea>>;
-  zoom: ReturnType<typeof model<number>>;
-
-  // Outputs
-  cropChange: ReturnType<typeof output<CropArea>>;
-  imageLoaded: ReturnType<typeof output<{ width: number; height: number }>>;
-
-  // State
-  imageNaturalWidth: ReturnType<typeof signal<number>>;
-  imageNaturalHeight: ReturnType<typeof signal<number>>;
-  imageLoaded$: ReturnType<typeof signal<boolean>>;
-  isDragging: boolean;
-  isResizing: boolean;
-  resizeHandle: string;
-  startX: number;
-  startY: number;
-  startCropArea: CropArea;
-
-  // Methods
-  onImageLoad: (width: number, height: number) => void;
-  initializeCropArea: (containerWidth: number) => void;
-  getScaledImageWidth: () => number;
-  getScaledImageHeight: () => number;
-  startDragging: (clientX: number, clientY: number) => void;
-  startResizing: (clientX: number, clientY: number, handle: string) => void;
-  handleDrag: (
-    clientX: number,
-    clientY: number,
-    containerWidth: number,
-  ) => void;
-  handleResize: (
-    clientX: number,
-    clientY: number,
-    containerWidth: number,
-  ) => void;
-  stopInteraction: () => void;
-  crop: (
-    imageElement: HTMLImageElement,
-    canvasElement: HTMLCanvasElement,
-    containerWidth: number,
-  ) => Promise<CropResult>;
-  resetCropArea: (containerWidth: number) => void;
-  setZoom: (value: number) => void;
-  zoomIn: () => void;
-  zoomOut: () => void;
-}
-
 export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
   'SC_IMAGE_CROPPER',
 );
@@ -94,15 +31,13 @@ export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
 @Directive({
   selector: '[scImageCropper]',
   exportAs: 'scImageCropper',
-  providers: [
-    { provide: SC_IMAGE_CROPPER, useExisting: ScImageCropperDirective },
-  ],
+  providers: [{ provide: SC_IMAGE_CROPPER, useExisting: ScImageCropper }],
   host: {
     'data-slot': 'image-cropper',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })
-export class ScImageCropperDirective implements ScImageCropper {
+export class ScImageCropper {
   // Configuration inputs
   readonly src = input.required<string>();
   readonly aspectRatio = input<number | null>(null);
