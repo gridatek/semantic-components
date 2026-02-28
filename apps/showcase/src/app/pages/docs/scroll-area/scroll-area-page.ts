@@ -24,7 +24,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>ScrollArea</h1>
+        <h1 scHeading>Scroll Area</h1>
         <p class="text-muted-foreground">
           A scrollable area with thin, styled scrollbars that appear on hover.
         </p>
