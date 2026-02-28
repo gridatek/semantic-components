@@ -11,7 +11,7 @@ import { BasicCropperDemo } from './basic-cropper-demo';
   imports: [DemoContainer, BasicCropperDemo],
   template: `
     <app-demo-container
-      title="Basic (X)"
+      title="Basic"
       demoUrl="/demos/image-cropper/basic-cropper-demo"
       [code]="code"
     >

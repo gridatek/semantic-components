@@ -11,7 +11,7 @@ import { AvatarCropperDemo } from './avatar-cropper-demo';
   imports: [DemoContainer, AvatarCropperDemo],
   template: `
     <app-demo-container
-      title="Circle Crop / Avatar (X)"
+      title="Circle Crop / Avatar"
       demoUrl="/demos/image-cropper/avatar-cropper-demo"
       [code]="code"
     >

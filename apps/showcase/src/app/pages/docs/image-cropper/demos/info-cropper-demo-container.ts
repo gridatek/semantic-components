@@ -11,7 +11,7 @@ import { InfoCropperDemo } from './info-cropper-demo';
   imports: [DemoContainer, InfoCropperDemo],
   template: `
     <app-demo-container
-      title="Crop Area Info (X)"
+      title="Crop Area Info"
       demoUrl="/demos/image-cropper/info-cropper-demo"
       [code]="code"
     >

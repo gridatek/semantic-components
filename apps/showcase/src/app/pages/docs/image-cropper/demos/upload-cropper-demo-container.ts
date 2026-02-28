@@ -11,7 +11,7 @@ import { UploadCropperDemo } from './upload-cropper-demo';
   imports: [DemoContainer, UploadCropperDemo],
   template: `
     <app-demo-container
-      title="Upload Your Own Image (X)"
+      title="Upload Your Own Image"
       demoUrl="/demos/image-cropper/upload-cropper-demo"
       [code]="code"
     >

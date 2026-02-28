@@ -11,7 +11,7 @@ import { AspectRatioCropperDemo } from './aspect-ratio-cropper-demo';
   imports: [DemoContainer, AspectRatioCropperDemo],
   template: `
     <app-demo-container
-      title="With Aspect Ratio Presets (X)"
+      title="With Aspect Ratio Presets"
       demoUrl="/demos/image-cropper/aspect-ratio-cropper-demo"
       [code]="code"
     >
