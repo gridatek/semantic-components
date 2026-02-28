@@ -10,14 +10,14 @@ import {
   signal,
 } from '@angular/core';
 
-export interface CropArea {
+export interface ScCropArea {
   x: number;
   y: number;
   width: number;
   height: number;
 }
 
-export interface CropResult {
+export interface ScCropResult {
   dataUrl: string;
   blob: Blob | null;
   width: number;
@@ -52,7 +52,7 @@ export class ScImageCropper {
   readonly outputQuality = input<number>(0.92);
 
   // Models for two-way binding
-  readonly cropArea = model<CropArea>({
+  readonly cropArea = model<ScCropArea>({
     x: 50,
     y: 50,
     width: 200,
@@ -61,7 +61,7 @@ export class ScImageCropper {
   readonly zoom = model<number>(1);
 
   // Outputs
-  readonly cropChange = output<CropArea>();
+  readonly cropChange = output<ScCropArea>();
   readonly imageLoaded = output<{ width: number; height: number }>();
 
   // Internal state signals
@@ -75,7 +75,7 @@ export class ScImageCropper {
   resizeHandle = '';
   startX = 0;
   startY = 0;
-  startCropArea: CropArea = { x: 0, y: 0, width: 0, height: 0 };
+  startScCropArea: ScCropArea = { x: 0, y: 0, width: 0, height: 0 };
 
   private readonly destroyRef = inject(DestroyRef);
 
@@ -119,7 +119,7 @@ export class ScImageCropper {
     this.imageLoaded.emit({ width, height });
   }
 
-  initializeCropArea(containerWidth: number): void {
+  initializeScCropArea(containerWidth: number): void {
     const containerH = this.containerHeight();
     const imgW = this.getScaledImageWidth();
     const imgH = this.getScaledImageHeight();
@@ -157,7 +157,7 @@ export class ScImageCropper {
     this.isDragging = true;
     this.startX = clientX;
     this.startY = clientY;
-    this.startCropArea = { ...this.cropArea() };
+    this.startScCropArea = { ...this.cropArea() };
   }
 
   startResizing(clientX: number, clientY: number, handle: string): void {
@@ -165,7 +165,7 @@ export class ScImageCropper {
     this.resizeHandle = handle;
     this.startX = clientX;
     this.startY = clientY;
-    this.startCropArea = { ...this.cropArea() };
+    this.startScCropArea = { ...this.cropArea() };
   }
 
   handleDrag(clientX: number, clientY: number, containerWidth: number): void {
@@ -173,7 +173,7 @@ export class ScImageCropper {
     const deltaY = clientY - this.startY;
 
     const containerH = this.containerHeight();
-    const crop = this.startCropArea;
+    const crop = this.startScCropArea;
 
     let newX = crop.x + deltaX;
     let newY = crop.y + deltaY;
@@ -194,7 +194,7 @@ export class ScImageCropper {
   handleResize(clientX: number, clientY: number, containerWidth: number): void {
     const deltaX = clientX - this.startX;
     const deltaY = clientY - this.startY;
-    const crop = this.startCropArea;
+    const crop = this.startScCropArea;
     const aspectRatio = this.aspectRatio();
     const minW = this.minWidth();
     const minH = this.minHeight();
@@ -322,7 +322,7 @@ export class ScImageCropper {
     imageElement: HTMLImageElement,
     canvasElement: HTMLCanvasElement,
     containerWidth: number,
-  ): Promise<CropResult> {
+  ): Promise<ScCropResult> {
     const crop = this.cropArea();
     const containerH = this.containerHeight();
 
@@ -379,8 +379,8 @@ export class ScImageCropper {
     });
   }
 
-  resetCropArea(containerWidth: number): void {
-    this.initializeCropArea(containerWidth);
+  resetScCropArea(containerWidth: number): void {
+    this.initializeScCropArea(containerWidth);
   }
 
   setZoom(value: number): void {

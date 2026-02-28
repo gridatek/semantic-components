@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  CropResult,
+  ScCropResult,
   ScImageCropper,
   ScImageCropperContainer,
   ScImageCropperControls,
@@ -84,7 +84,7 @@ export class UploadImageCropperDemo {
     container: InstanceType<typeof ScImageCropperContainer>,
   ): Promise<void> {
     try {
-      const result: CropResult = await container.crop();
+      const result: ScCropResult = await container.crop();
 
       // Download the cropped image
       const link = document.createElement('a');

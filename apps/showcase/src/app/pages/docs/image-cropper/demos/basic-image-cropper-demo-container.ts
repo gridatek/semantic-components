@@ -30,8 +30,8 @@ export class BasicImageCropperDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  CropArea,
-  CropResult,
+  ScCropArea,
+  ScCropResult,
   ScImageCropper,
   ScImageCropperContainer,
   ScImageCropperControls,
@@ -68,7 +68,7 @@ import {
         <button
           type="button"
           class="px-4 py-2 border rounded-md hover:bg-accent"
-          (click)="container.resetCropArea()"
+          (click)="container.resetScCropArea()"
         >
           Reset
         </button>
@@ -94,7 +94,7 @@ export class BasicImageCropperDemo {
     'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
   );
 
-  readonly cropArea = signal<CropArea>({
+  readonly cropArea = signal<ScCropArea>({
     x: 50,
     y: 50,
     width: 200,
@@ -106,7 +106,7 @@ export class BasicImageCropperDemo {
     container: InstanceType<typeof ScImageCropperContainer>,
   ): Promise<void> {
     try {
-      const result: CropResult = await container.crop();
+      const result: ScCropResult = await container.crop();
       this.croppedImage.set(result.dataUrl);
     } catch (error) {
       console.error('Failed to crop image:', error);

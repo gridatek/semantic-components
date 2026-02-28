@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  CropArea,
+  ScCropArea,
   ScImageCropper,
   ScImageCropperContainer,
 } from '@semantic-components/ui-lab';
@@ -61,7 +61,7 @@ export class InfoImageCropperDemo {
     'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
   );
 
-  readonly cropArea = signal<CropArea>({
+  readonly cropArea = signal<ScCropArea>({
     x: 50,
     y: 50,
     width: 200,
