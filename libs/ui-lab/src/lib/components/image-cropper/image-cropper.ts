@@ -75,7 +75,7 @@ export class ScImageCropper {
   resizeHandle = '';
   startX = 0;
   startY = 0;
-  startScCropArea: ScCropArea = { x: 0, y: 0, width: 0, height: 0 };
+  startCropArea: ScCropArea = { x: 0, y: 0, width: 0, height: 0 };
 
   private readonly destroyRef = inject(DestroyRef);
 
@@ -119,7 +119,7 @@ export class ScImageCropper {
     this.imageLoaded.emit({ width, height });
   }
 
-  initializeScCropArea(containerWidth: number): void {
+  initializeCropArea(containerWidth: number): void {
     const containerH = this.containerHeight();
     const imgW = this.getScaledImageWidth();
     const imgH = this.getScaledImageHeight();
@@ -157,7 +157,7 @@ export class ScImageCropper {
     this.isDragging = true;
     this.startX = clientX;
     this.startY = clientY;
-    this.startScCropArea = { ...this.cropArea() };
+    this.startCropArea = { ...this.cropArea() };
   }
 
   startResizing(clientX: number, clientY: number, handle: string): void {
@@ -165,7 +165,7 @@ export class ScImageCropper {
     this.resizeHandle = handle;
     this.startX = clientX;
     this.startY = clientY;
-    this.startScCropArea = { ...this.cropArea() };
+    this.startCropArea = { ...this.cropArea() };
   }
 
   handleDrag(clientX: number, clientY: number, containerWidth: number): void {
@@ -173,7 +173,7 @@ export class ScImageCropper {
     const deltaY = clientY - this.startY;
 
     const containerH = this.containerHeight();
-    const crop = this.startScCropArea;
+    const crop = this.startCropArea;
 
     let newX = crop.x + deltaX;
     let newY = crop.y + deltaY;
@@ -194,7 +194,7 @@ export class ScImageCropper {
   handleResize(clientX: number, clientY: number, containerWidth: number): void {
     const deltaX = clientX - this.startX;
     const deltaY = clientY - this.startY;
-    const crop = this.startScCropArea;
+    const crop = this.startCropArea;
     const aspectRatio = this.aspectRatio();
     const minW = this.minWidth();
     const minH = this.minHeight();
@@ -379,8 +379,8 @@ export class ScImageCropper {
     });
   }
 
-  resetScCropArea(containerWidth: number): void {
-    this.initializeScCropArea(containerWidth);
+  resetCropArea(containerWidth: number): void {
+    this.initializeCropArea(containerWidth);
   }
 
   setZoom(value: number): void {

@@ -68,7 +68,7 @@ import {
         <button
           type="button"
           class="px-4 py-2 border rounded-md hover:bg-accent"
-          (click)="container.resetScCropArea()"
+          (click)="container.resetCropArea()"
         >
           Reset
         </button>

@@ -7,12 +7,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
+import { cn, ScSlider } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
   selector: '[scImageCropperControls]',
-  imports: [SiZoomOutIcon, SiZoomInIcon],
+  imports: [SiZoomOutIcon, SiZoomInIcon, ScSlider],
   template: `
     <div class="flex items-center gap-2">
       <button
@@ -27,13 +27,12 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 
       <div class="flex min-w-[120px] items-center gap-2">
         <input
-          type="range"
+          scSlider
           min="0.1"
           max="3"
           step="0.1"
           [value]="cropper.zoom()"
           (input)="onZoomChange($event)"
-          class="bg-muted h-2 w-full cursor-pointer appearance-none rounded-lg"
         />
       </div>
 
