@@ -1,4 +1,4 @@
-import { computed, Directive, inject, input, output } from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
@@ -31,8 +31,6 @@ export class ScImageCropperAspectRatio {
     alias: 'scImageCropperAspectRatio',
   });
 
-  readonly aspectRatioChange = output<number | null>();
-
   readonly selected = computed(() => {
     const current = this.cropper.aspectRatio();
     const value = this.value();
@@ -42,6 +40,6 @@ export class ScImageCropperAspectRatio {
   });
 
   selectAspectRatio(): void {
-    this.aspectRatioChange.emit(this.value());
+    this.cropper.aspectRatio.set(this.value());
   }
 }

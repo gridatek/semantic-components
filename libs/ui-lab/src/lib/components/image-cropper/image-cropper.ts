@@ -40,7 +40,7 @@ export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
 export class ScImageCropper {
   // Configuration inputs
   readonly src = input.required<string>();
-  readonly aspectRatio = input<number | null>(null);
+  readonly aspectRatio = model<number | null>(null);
   readonly minWidth = input<number>(50);
   readonly minHeight = input<number>(50);
   readonly containerHeight = input<number>(400);

@@ -38,7 +38,7 @@ import {
   ScImageCropperZoomIn,
   ScImageCropperZoomOut,
 } from '@semantic-components/ui-lab';
-import { ScButton, ScSlider } from '@semantic-components/ui';
+import { ScButton } from '@semantic-components/ui';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -50,14 +50,12 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     ScImageCropperZoomIn,
     ScImageCropperZoomOut,
     ScButton,
-    ScSlider,
     SiZoomInIcon,
     SiZoomOutIcon,
   ],
   template: \`
     <div
       scImageCropper
-      #cropper="scImageCropper"
       [src]="imageSrc()"
       [(cropArea)]="cropArea"
       [containerHeight]="300"
@@ -65,8 +63,8 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     >
       <div
         scImageCropperContainer
-        #container
-        class="rounded-lg overflow-hidden border"
+        #container="scImageCropperContainer"
+        class="overflow-hidden rounded-lg border"
       ></div>
 
       <div class="flex items-center gap-2">
@@ -80,10 +78,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
           <svg siZoomOutIcon class="size-4"></svg>
         </button>
 
-        <input scSlider scImageCropperControls #controls="scImageCropperControls" />
-        <span class="text-muted-foreground min-w-[50px] text-center text-sm">
-          {{ controls.zoomPercentage() }}
-        </span>
+        <div scImageCropperControls></div>
 
         <button
           scButton
@@ -99,14 +94,14 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
       <div class="flex gap-4">
         <button
           type="button"
-          class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-2"
           (click)="cropImage(container)"
         >
           Crop Image
         </button>
         <button
           type="button"
-          class="px-4 py-2 border rounded-md hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-4 py-2"
           (click)="container.resetCropArea()"
         >
           Reset

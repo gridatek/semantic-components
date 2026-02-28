@@ -12,7 +12,7 @@ import {
   ScImageCropperZoomIn,
   ScImageCropperZoomOut,
 } from '@semantic-components/ui-lab';
-import { ScButton, ScSlider } from '@semantic-components/ui';
+import { ScButton } from '@semantic-components/ui';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -25,7 +25,6 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     ScImageCropperZoomOut,
     ScImageCropperAspectRatio,
     ScButton,
-    ScSlider,
     SiZoomInIcon,
     SiZoomOutIcon,
   ],
@@ -33,7 +32,6 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
     <div
       scImageCropper
       [src]="imageSrc()"
-      [aspectRatio]="selectedAspectRatio()"
       [containerHeight]="300"
       class="space-y-4"
     >
@@ -45,10 +43,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-1">
           @for (option of aspectRatioOptions; track option.value) {
-            <button
-              [scImageCropperAspectRatio]="option.value"
-              (aspectRatioChange)="onAspectRatioChange($event)"
-            >
+            <button [scImageCropperAspectRatio]="option.value">
               {{ option.label }}
             </button>
           }
@@ -64,14 +59,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
             <svg siZoomOutIcon class="size-4"></svg>
           </button>
 
-          <input
-            scSlider
-            scImageCropperControls
-            #controls="scImageCropperControls"
-          />
-          <span class="text-muted-foreground min-w-[50px] text-center text-sm">
-            {{ controls.zoomPercentage() }}
-          </span>
+          <div scImageCropperControls></div>
 
           <button
             scButton
@@ -94,8 +82,6 @@ export class AspectRatioImageCropperDemo {
     'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
   );
 
-  readonly selectedAspectRatio = signal<number | null>(null);
-
   readonly aspectRatioOptions = [
     { label: 'Free', value: null },
     { label: '1:1', value: 1 },
@@ -103,8 +89,4 @@ export class AspectRatioImageCropperDemo {
     { label: '16:9', value: 16 / 9 },
     { label: '3:2', value: 3 / 2 },
   ];
-
-  onAspectRatioChange(ratio: number | null): void {
-    this.selectedAspectRatio.set(ratio);
-  }
 }

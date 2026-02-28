@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -8,20 +9,20 @@ import {
   Injector,
   input,
   runInInjectionContext,
-  ViewEncapsulation,
   viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
   selector: '[scImageCropperContainer]',
+  exportAs: 'scImageCropperContainer',
   template: `
     <div
       class="relative overflow-hidden bg-black/90 select-none"
       [style.height.px]="cropper.containerHeight()"
     >
-      <!-- Image container -->
       <div
         class="absolute inset-0 flex items-center justify-center"
         [style.transform]="imageTransform()"
@@ -38,11 +39,10 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
         />
       </div>
 
-      <!-- Overlay mask -->
       <div class="pointer-events-none absolute inset-0">
         <svg class="h-full w-full">
           <defs>
-            <mask id="cropMask">
+            <mask [id]="maskId">
               <rect width="100%" height="100%" fill="white" />
               <rect
                 [attr.x]="cropper.cropArea().x"
@@ -57,12 +57,11 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
             width="100%"
             height="100%"
             fill="rgba(0,0,0,0.5)"
-            mask="url(#cropMask)"
+            [attr.mask]="'url(#' + maskId + ')'"
           />
         </svg>
       </div>
 
-      <!-- Crop area -->
       <div
         class="absolute cursor-move border-2 border-white"
         [style.left.px]="cropper.cropArea().x"
@@ -74,7 +73,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
         (mousemove)="onMouseMove($event)"
         (touchmove)="onTouchMove($event)"
       >
-        <!-- Grid lines -->
         @if (cropper.showGrid()) {
           <div class="pointer-events-none absolute inset-0">
             <div
@@ -88,9 +86,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
           </div>
         }
 
-        <!-- Resize handles -->
         @if (!cropper.disabled()) {
-          <!-- Corners -->
           <div
             class="absolute -top-1.5 -left-1.5 z-10 size-3 cursor-nw-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'nw')"
@@ -112,7 +108,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
             (touchstart)="onHandleTouchStart($event, 'se')"
           ></div>
 
-          <!-- Edges -->
           <div
             class="absolute -top-1.5 left-1/2 z-10 h-3 w-6 -translate-x-1/2 cursor-n-resize border border-gray-400 bg-white"
             (mousedown)="onHandleMouseDown($event, 'n')"
@@ -137,10 +132,8 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
       </div>
     </div>
 
-    <!-- Hidden canvas for cropping -->
     <canvas #canvasEl class="hidden"></canvas>
 
-    <!-- Content projection -->
     <ng-content />
   `,
   host: {
@@ -159,8 +152,11 @@ export class ScImageCropperContainer {
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
+  readonly maskId = inject(_IdGenerator).getId('sc-crop-mask-');
+
   private readonly imageEl = viewChild<ElementRef<HTMLImageElement>>('imageEl');
-  readonly canvasEl = viewChild<ElementRef<HTMLCanvasElement>>('canvasEl');
+  private readonly canvasEl =
+    viewChild<ElementRef<HTMLCanvasElement>>('canvasEl');
 
   protected readonly scaledImageWidth = computed(() =>
     this.cropper.getScaledImageWidth(),
@@ -169,9 +165,7 @@ export class ScImageCropperContainer {
     this.cropper.getScaledImageHeight(),
   );
 
-  protected readonly imageTransform = computed(() => {
-    return `scale(1)`;
-  });
+  protected readonly imageTransform = computed(() => `scale(1)`);
 
   constructor() {
     afterNextRender(() => {
@@ -192,7 +186,6 @@ export class ScImageCropperContainer {
 
     this.cropper.onImageLoad(img.naturalWidth, img.naturalHeight);
 
-    // Initialize crop area after image loads
     runInInjectionContext(this.injector, () => {
       afterNextRender(() => {
         this.cropper.initializeCropArea(this.getContainerWidth());
@@ -280,7 +273,6 @@ export class ScImageCropperContainer {
     }
   }
 
-  // Public method for cropping - can be called via template reference
   async crop(): Promise<ReturnType<typeof this.cropper.crop>> {
     const img = this.imageEl()?.nativeElement;
     const canvas = this.canvasEl()?.nativeElement;
@@ -292,7 +284,6 @@ export class ScImageCropperContainer {
     return this.cropper.crop(img, canvas, this.getContainerWidth());
   }
 
-  // Public method for resetting crop area
   resetCropArea(): void {
     this.cropper.resetCropArea(this.getContainerWidth());
   }
