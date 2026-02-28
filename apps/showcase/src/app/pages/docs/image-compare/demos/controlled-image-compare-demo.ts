@@ -30,16 +30,9 @@ import {
       class="aspect-2/1 w-full max-w-2xl"
     >
       <div scImageCompareContainer>
-        <img
-          scImageCompareBefore
-          src="https://picsum.photos/800/400?grayscale&random=6"
-          alt="Before"
-        />
-        <img
-          scImageCompareAfter
-          src="https://picsum.photos/800/400?random=6"
-          alt="After"
-        />
+        @let img = 'https://picsum.photos/seed/compare-controlled/800/400';
+        <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
+        <img scImageCompareAfter [src]="img" alt="After" />
         <div scImageCompareSlider></div>
         <div scImageCompareLabel class="top-2 left-2">Before</div>
         <div scImageCompareLabel class="top-2 right-2">After</div>
