@@ -4,24 +4,24 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { UploadCropperXDemo } from './upload-cropper-demo';
+import { BasicCropperDemo } from './basic-cropper-demo';
 
 @Component({
-  selector: 'app-upload-cropper-demo-container',
-  imports: [DemoContainer, UploadCropperXDemo],
+  selector: 'app-basic-cropper-demo-container',
+  imports: [DemoContainer, BasicCropperDemo],
   template: `
     <app-demo-container
-      title="Upload Your Own Image (X)"
-      demoUrl="/demos/image-cropper/upload-cropper-demo"
+      title="Basic (X)"
+      demoUrl="/demos/image-cropper/basic-cropper-demo"
       [code]="code"
     >
-      <app-upload-cropper-demo />
+      <app-basic-cropper-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UploadCropperXDemoContainer {
+export class BasicCropperDemoContainer {
   readonly code = `// See source for full implementation`;
 }

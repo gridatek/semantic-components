@@ -4,24 +4,24 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AvatarCropperXDemo } from './avatar-cropper-demo';
+import { AspectRatioCropperDemo } from './aspect-ratio-cropper-demo';
 
 @Component({
-  selector: 'app-avatar-cropper-demo-container',
-  imports: [DemoContainer, AvatarCropperXDemo],
+  selector: 'app-aspect-ratio-cropper-demo-container',
+  imports: [DemoContainer, AspectRatioCropperDemo],
   template: `
     <app-demo-container
-      title="Circle Crop / Avatar (X)"
-      demoUrl="/demos/image-cropper/avatar-cropper-demo"
+      title="With Aspect Ratio Presets (X)"
+      demoUrl="/demos/image-cropper/aspect-ratio-cropper-demo"
       [code]="code"
     >
-      <app-avatar-cropper-demo />
+      <app-aspect-ratio-cropper-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AvatarCropperXDemoContainer {
+export class AspectRatioCropperDemoContainer {
   readonly code = `// See source for full implementation`;
 }

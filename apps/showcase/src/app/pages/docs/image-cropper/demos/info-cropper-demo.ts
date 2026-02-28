@@ -78,7 +78,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfoCropperXDemo {
+export class InfoCropperDemo {
   readonly imageSrc = signal(
     'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
   );

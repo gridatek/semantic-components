@@ -138,7 +138,7 @@ import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UploadCropperXDemo {
+export class UploadCropperDemo {
   readonly uploadedImageSrc = signal<string | null>(null);
 
   async cropImage(canvas: InstanceType<typeof ScCropperCanvas>): Promise<void> {

@@ -4,24 +4,24 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AspectRatioCropperXDemo } from './aspect-ratio-cropper-demo';
+import { UploadCropperDemo } from './upload-cropper-demo';
 
 @Component({
-  selector: 'app-aspect-ratio-cropper-demo-container',
-  imports: [DemoContainer, AspectRatioCropperXDemo],
+  selector: 'app-upload-cropper-demo-container',
+  imports: [DemoContainer, UploadCropperDemo],
   template: `
     <app-demo-container
-      title="With Aspect Ratio Presets (X)"
-      demoUrl="/demos/image-cropper/aspect-ratio-cropper-demo"
+      title="Upload Your Own Image (X)"
+      demoUrl="/demos/image-cropper/upload-cropper-demo"
       [code]="code"
     >
-      <app-aspect-ratio-cropper-demo />
+      <app-upload-cropper-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AspectRatioCropperXDemoContainer {
+export class UploadCropperDemoContainer {
   readonly code = `// See source for full implementation`;
 }

@@ -4,24 +4,24 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { InfoCropperXDemo } from './info-cropper-demo';
+import { AvatarCropperDemo } from './avatar-cropper-demo';
 
 @Component({
-  selector: 'app-info-cropper-demo-container',
-  imports: [DemoContainer, InfoCropperXDemo],
+  selector: 'app-avatar-cropper-demo-container',
+  imports: [DemoContainer, AvatarCropperDemo],
   template: `
     <app-demo-container
-      title="Crop Area Info (X)"
-      demoUrl="/demos/image-cropper/info-cropper-demo"
+      title="Circle Crop / Avatar (X)"
+      demoUrl="/demos/image-cropper/avatar-cropper-demo"
       [code]="code"
     >
-      <app-info-cropper-demo />
+      <app-avatar-cropper-demo />
     </app-demo-container>
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfoCropperXDemoContainer {
+export class AvatarCropperDemoContainer {
   readonly code = `// See source for full implementation`;
 }
