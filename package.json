@@ -46,6 +46,7 @@
     "@angular/compiler-cli": "~21.2.0",
     "@angular/language-service": "~21.2.0",
     "@eslint/js": "^9.8.0",
+    "@modelcontextprotocol/sdk": "^1.27.1",
     "@nx/angular": "22.5.3",
     "@nx/devkit": "22.5.3",
     "@nx/eslint": "22.5.3",
@@ -79,10 +80,13 @@
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tslib": "^2.3.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0",
     "verdaccio": "^6.0.5",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.8",
+    "zod": "^4.3.6"
   },
   "nx": {
     "includedScripts": []
