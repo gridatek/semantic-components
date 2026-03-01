@@ -54,7 +54,11 @@ import { ScTimePickerClock } from '@semantic-components/ui-lab';
           <button scTimePickerPeriodPM>PM</button>
         </div>
       </div>
-      <div scTimePickerClock [mode]="clockMode()"></div>
+      <div
+        scTimePickerClock
+        [mode]="clockMode()"
+        (valueSelected)="onValueSelected()"
+      ></div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -63,4 +67,10 @@ import { ScTimePickerClock } from '@semantic-components/ui-lab';
 export class HoursTimePickerClockDemo {
   readonly time = signal<ScTimeValue | null>({ hours: 10, minutes: 0 });
   readonly clockMode = signal<'hours' | 'minutes'>('hours');
+
+  onValueSelected(): void {
+    if (this.clockMode() === 'hours') {
+      this.clockMode.set('minutes');
+    }
+  }
 }

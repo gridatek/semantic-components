@@ -5,6 +5,7 @@ import {
   ElementRef,
   inject,
   input,
+  output,
   signal,
   viewChild,
   ViewEncapsulation,
@@ -113,6 +114,7 @@ export class ScTimePickerClock {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly mode = input<'hours' | 'minutes'>('hours');
+  readonly valueSelected = output<number>();
 
   readonly hoveredValue = signal<number | null>(null);
   readonly isDragging = signal(false);
@@ -219,7 +221,10 @@ export class ScTimePickerClock {
   }
 
   protected onPointerUp(): void {
-    this.isDragging.set(false);
+    if (this.isDragging()) {
+      this.isDragging.set(false);
+      this.emitValueSelected();
+    }
   }
 
   protected onTouchStart(event: TouchEvent): void {
@@ -264,6 +269,13 @@ export class ScTimePickerClock {
       // Snap to nearest 5-minute mark (12 sectors of 30° each)
       const minute = (Math.round(angle / 30) % 12) * 5;
       this.selectValue(minute);
+    }
+  }
+
+  private emitValueSelected(): void {
+    const val = this.selectedValue();
+    if (val !== null) {
+      this.valueSelected.emit(val);
     }
   }
 }
