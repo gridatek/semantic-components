@@ -1,4 +1,11 @@
-import { computed, Directive, effect, inject, input } from '@angular/core';
+import {
+  computed,
+  DestroyRef,
+  Directive,
+  effect,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '../../utils';
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { SC_FIELD } from './field';
@@ -27,6 +34,11 @@ export class ScFieldDescription {
     effect(() => {
       const id = this.id();
       this.field?.descriptionIds.update((ids) => [...ids, id]);
+    });
+
+    inject(DestroyRef).onDestroy(() => {
+      const id = this.id();
+      this.field?.descriptionIds.update((ids) => ids.filter((i) => i !== id));
     });
   }
 
