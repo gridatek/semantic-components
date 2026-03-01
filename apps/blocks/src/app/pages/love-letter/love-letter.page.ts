@@ -5,13 +5,14 @@ import {
 } from '@angular/core';
 
 import { GameCard } from './game-card';
+import { GameLog } from './game-log';
 import { Card, CardType, Player } from './love-letter.types';
 import { PlayerGrid } from './player-grid';
 import { PlayerHand } from './player-hand';
 
 @Component({
   selector: 'app-love-letter',
-  imports: [PlayerGrid, PlayerHand, GameCard],
+  imports: [PlayerGrid, PlayerHand, GameCard, GameLog],
   template: `
     <div class="flex min-h-screen flex-col">
       <!-- Header -->
@@ -31,18 +32,11 @@ import { PlayerHand } from './player-hand';
       <!-- Game Area -->
       <div class="flex flex-1 flex-col justify-between p-4">
         <!-- Log / Message -->
-        <div class="mb-4 flex-1 overflow-y-auto">
-          <p class="mb-2 text-center font-semibold">
-            Player 1, choose a card to play
-          </p>
-          <div class="text-muted-foreground space-y-1 text-center text-xs">
-            <p>--- Round 1 ---</p>
-            <p>Player 3 played Guard</p>
-            <p>Player 3 guessed wrong for Player 2</p>
-            <p>Player 4 played Guard</p>
-            <p>Player 4 guessed Player 3's Baron correctly!</p>
-          </div>
-        </div>
+        <app-game-log
+          class="mb-4"
+          message="Player 1, choose a card to play"
+          [log]="gameLog"
+        />
 
         <!-- Card Reveal -->
         <div class="mb-4 flex justify-center gap-4">
@@ -152,6 +146,18 @@ export default class LoveLetterPage {
   readonly youPlayerId = 1;
   readonly activePlayerId = 1;
   readonly selectedIndex: number | null = 0;
+
+  readonly gameLog: string[] = [
+    '--- Round 1 ---',
+    'Player 1 played Priest',
+    "Player 1 looked at Player 4's hand",
+    'Player 2 played Handmaid',
+    'Player 2 is protected until next turn',
+    'Player 3 played Guard',
+    'Player 3 guessed wrong for Player 2',
+    'Player 4 played Guard',
+    "Player 4 guessed Player 3's Baron correctly!",
+  ];
 
   readonly handCards: Card[] = [
     {
