@@ -13,7 +13,6 @@ import { SC_FIELD } from './field';
 @Directive({
   selector: '[scFieldError]',
   host: {
-    role: 'alert',
     'data-slot': 'field-error',
     '[attr.id]': 'id()',
     '[class]': 'class()',
