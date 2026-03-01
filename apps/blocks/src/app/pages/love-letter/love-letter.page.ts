@@ -44,7 +44,7 @@ import { PlayerHand } from './player-hand';
         </div>
 
         <!-- Hand Cards -->
-        <app-player-hand [cards]="handCards" [selectedCard]="selectedCard" />
+        <app-player-hand [cards]="handCards" [selectedIndex]="selectedIndex" />
       </div>
     </div>
   `,
@@ -57,7 +57,7 @@ import { PlayerHand } from './player-hand';
 export default class LoveLetterPage {
   readonly youPlayerId = 1;
   readonly activePlayerId = 1;
-  readonly selectedCard: Card | null = null;
+  readonly selectedIndex: number | null = 0;
 
   readonly handCards: Card[] = [
     {

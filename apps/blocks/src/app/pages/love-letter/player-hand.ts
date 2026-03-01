@@ -19,11 +19,11 @@ import { Card } from './love-letter.types';
       @for (card of cards(); track $index) {
         <button
           [class]="
-            card === selectedCard()
+            $index === selectedIndex()
               ? 'border-primary flex h-36 w-24 scale-105 flex-col items-center justify-between rounded-lg border-2 p-2 shadow transition-transform'
               : 'border-border flex h-36 w-24 flex-col items-center justify-between rounded-lg border-2 p-2 transition-transform hover:scale-105 hover:shadow'
           "
-          (click)="select(card)"
+          (click)="select($index)"
         >
           <span class="text-xs font-semibold">{{ card.name }}</span>
           <span class="text-3xl font-bold">{{ card.value }}</span>
@@ -38,9 +38,13 @@ import { Card } from './love-letter.types';
       }
     </div>
 
-    @if (selectedCard()) {
-      <button scButton class="w-full" (click)="playCard.emit(selectedCard()!)">
-        Play {{ selectedCard()!.name }}
+    @if (selectedIndex() !== null) {
+      <button
+        scButton
+        class="w-full"
+        (click)="playCard.emit(cards()[selectedIndex()!])"
+      >
+        Play {{ cards()[selectedIndex()!].name }}
       </button>
     }
   `,
@@ -57,12 +61,12 @@ export class PlayerHand {
   );
 
   readonly cards = input.required<Card[]>();
-  readonly selectedCard = input<Card | null>(null);
+  readonly selectedIndex = input<number | null>(null);
 
-  readonly cardSelected = output<Card>();
+  readonly cardSelected = output<number>();
   readonly playCard = output<Card>();
 
-  protected select(card: Card) {
-    this.cardSelected.emit(card);
+  protected select(index: number) {
+    this.cardSelected.emit(index);
   }
 }
