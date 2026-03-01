@@ -65,11 +65,9 @@ const AI_DELAY = 800;
         </div>
 
         <!-- Center: Game Area -->
-        <div
-          class="flex flex-1 flex-col justify-between overflow-y-auto p-2 lg:p-4"
-        >
+        <div class="flex flex-1 flex-col gap-4 overflow-y-auto p-2 lg:p-4">
           <!-- Message -->
-          <div scCard size="sm" class="mb-4">
+          <div scCard size="sm">
             <div scCardBody>
               <p class="text-center font-semibold">
                 {{ service.message() }}
@@ -78,7 +76,7 @@ const AI_DELAY = 800;
           </div>
 
           <!-- Table -->
-          <div scCard class="mb-4">
+          <div scCard>
             <div scCardHeader>
               <h3 scCardTitle>Table</h3>
             </div>
