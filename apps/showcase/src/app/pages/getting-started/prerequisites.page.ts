@@ -184,7 +184,7 @@ export default class PrerequisitesPage {
 }`;
 
   readonly step4Code =
-    'npm install class-variance-authority clsx tailwind-merge tw-animate-css';
+    'npm install shadcn class-variance-authority clsx tailwind-merge tw-animate-css';
 
   readonly step5Code = 'npm install @semantic-icons/lucide-icons';
 
