@@ -4,13 +4,14 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
+import { GameCard } from './game-card';
 import { Card, CardType, Player } from './love-letter.types';
 import { PlayerGrid } from './player-grid';
 import { PlayerHand } from './player-hand';
 
 @Component({
   selector: 'app-love-letter',
-  imports: [PlayerGrid, PlayerHand],
+  imports: [PlayerGrid, PlayerHand, GameCard],
   template: `
     <div class="flex min-h-screen flex-col">
       <!-- Header -->
@@ -65,17 +66,12 @@ import { PlayerHand } from './player-hand';
           </button>
 
           <!-- Revealed card -->
-          <div
-            class="border-border flex h-36 w-24 flex-col items-center justify-between rounded-lg border-2 bg-white p-2 shadow-md"
-          >
-            <span class="text-primary text-2xl font-bold">4</span>
-            <span class="text-sm font-bold tracking-wide">HANDMAID</span>
-            <span
-              class="text-muted-foreground text-center text-[10px] leading-tight"
-            >
-              Protection until your next turn
-            </span>
-          </div>
+          <app-game-card
+            class="border-border shadow-md"
+            name="Handmaid"
+            [value]="4"
+            description="Protection until your next turn"
+          />
         </div>
 
         <!-- Hand Cards -->

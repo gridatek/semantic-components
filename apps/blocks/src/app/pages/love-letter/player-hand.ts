@@ -9,30 +9,26 @@ import {
 
 import { cn, ScButton } from '@semantic-components/ui';
 
+import { GameCard } from './game-card';
 import { Card } from './love-letter.types';
 
 @Component({
   selector: 'app-player-hand',
-  imports: [ScButton],
+  imports: [ScButton, GameCard],
   template: `
     <div class="mb-3 flex justify-center gap-3">
       @for (card of cards(); track $index) {
-        <button
+        <app-game-card
+          [name]="card.name"
+          [value]="card.value"
+          [description]="card.description"
           [class]="
             $index === selectedIndex()
-              ? 'border-primary flex h-36 w-24 scale-105 flex-col items-center justify-between rounded-lg border-2 p-2 shadow transition-transform'
-              : 'border-border flex h-36 w-24 flex-col items-center justify-between rounded-lg border-2 p-2 transition-transform hover:scale-105 hover:shadow'
+              ? 'border-primary scale-105 cursor-pointer shadow transition-transform'
+              : 'border-border cursor-pointer transition-transform hover:scale-105 hover:shadow'
           "
           (click)="select($index)"
-        >
-          <span class="text-xs font-semibold">{{ card.name }}</span>
-          <span class="text-3xl font-bold">{{ card.value }}</span>
-          <span
-            class="text-muted-foreground text-center text-[9px] leading-tight"
-          >
-            {{ card.description }}
-          </span>
-        </button>
+        />
       } @empty {
         <p class="text-muted-foreground text-sm">No cards in hand</p>
       }
