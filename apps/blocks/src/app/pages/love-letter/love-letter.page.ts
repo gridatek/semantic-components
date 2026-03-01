@@ -57,7 +57,14 @@ import { PlayerHand } from './player-hand';
           </p>
 
           <!-- Mobile-only log -->
-          <app-game-log class="mb-4 lg:hidden" [log]="gameLog" />
+          <div scCard class="mb-4 lg:hidden">
+            <div scCardHeader>
+              <h3 scCardTitle>Game Log</h3>
+            </div>
+            <div scCardBody>
+              <app-game-log [log]="gameLog" />
+            </div>
+          </div>
 
           <!-- Card Reveal -->
           <div scCard class="mb-4">
@@ -175,8 +182,14 @@ import { PlayerHand } from './player-hand';
 
         <!-- Right: Log (desktop only) -->
         <div class="hidden lg:block lg:w-64 lg:shrink-0 lg:border-l lg:p-3">
-          <h3 class="text-muted-foreground mb-1 text-xs font-medium">Log</h3>
-          <app-game-log [log]="gameLog" />
+          <div scCard>
+            <div scCardHeader>
+              <h3 scCardTitle>Game Log</h3>
+            </div>
+            <div scCardBody>
+              <app-game-log [log]="gameLog" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
