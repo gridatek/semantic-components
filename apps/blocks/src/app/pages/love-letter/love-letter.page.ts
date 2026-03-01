@@ -4,6 +4,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
+import {
+  ScCard,
+  ScCardBody,
+  ScCardHeader,
+  ScCardTitle,
+} from '@semantic-components/ui';
+
 import { GameCard } from './game-card';
 import { GameLog } from './game-log';
 import { Card, CardType, Player } from './love-letter.types';
@@ -12,7 +19,16 @@ import { PlayerHand } from './player-hand';
 
 @Component({
   selector: 'app-love-letter',
-  imports: [PlayerGrid, PlayerHand, GameCard, GameLog],
+  imports: [
+    PlayerGrid,
+    PlayerHand,
+    GameCard,
+    GameLog,
+    ScCard,
+    ScCardBody,
+    ScCardHeader,
+    ScCardTitle,
+  ],
   template: `
     <div class="flex min-h-screen flex-col">
       <!-- Header -->
@@ -74,70 +90,80 @@ import { PlayerHand } from './player-hand';
           </div>
 
           <!-- Hand Cards -->
-          <app-player-hand [cards]="handCards" [selectedIndex]="selectedIndex">
-            <!-- Select Target Player -->
-            <div class="mb-3">
-              <h3 class="text-muted-foreground mb-2 text-sm font-medium">
-                Select Target Player
-              </h3>
-              <div class="flex justify-center gap-3">
-                <button
-                  class="border-primary rounded-lg border-2 px-5 py-2.5 text-sm font-medium shadow transition-transform"
-                >
-                  Player 2
-                </button>
-                <button
-                  class="border-border rounded-lg border-2 px-5 py-2.5 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                >
-                  Player 4
-                </button>
-              </div>
+          <div scCard>
+            <div scCardHeader>
+              <h3 scCardTitle>Your Hand</h3>
             </div>
+            <div scCardBody>
+              <app-player-hand
+                [cards]="handCards"
+                [selectedIndex]="selectedIndex"
+              >
+                <!-- Select Target Player -->
+                <div class="mb-3">
+                  <h3 class="text-muted-foreground mb-2 text-sm font-medium">
+                    Select Target Player
+                  </h3>
+                  <div class="flex justify-center gap-3">
+                    <button
+                      class="border-primary rounded-lg border-2 px-5 py-2.5 text-sm font-medium shadow transition-transform"
+                    >
+                      Player 2
+                    </button>
+                    <button
+                      class="border-border rounded-lg border-2 px-5 py-2.5 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                    >
+                      Player 4
+                    </button>
+                  </div>
+                </div>
 
-            <!-- Guess Card (Guard only) -->
-            <div class="mb-3">
-              <h3 class="text-muted-foreground mb-2 text-sm font-medium">
-                Guess Card (Guard only)
-              </h3>
-              <div class="grid grid-cols-4 gap-3">
-                <button
-                  class="border-primary rounded-lg border-2 px-3 py-2 text-sm font-medium shadow transition-transform"
-                >
-                  Priest (2)
-                </button>
-                <button
-                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                >
-                  Baron (3)
-                </button>
-                <button
-                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                >
-                  Handmaid (4)
-                </button>
-                <button
-                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                >
-                  Prince (5)
-                </button>
-                <button
-                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                >
-                  King (6)
-                </button>
-                <button
-                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                >
-                  Countess (7)
-                </button>
-                <button
-                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                >
-                  Princess (8)
-                </button>
-              </div>
+                <!-- Guess Card (Guard only) -->
+                <div class="mb-3">
+                  <h3 class="text-muted-foreground mb-2 text-sm font-medium">
+                    Guess Card (Guard only)
+                  </h3>
+                  <div class="grid grid-cols-4 gap-3">
+                    <button
+                      class="border-primary rounded-lg border-2 px-3 py-2 text-sm font-medium shadow transition-transform"
+                    >
+                      Priest (2)
+                    </button>
+                    <button
+                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                    >
+                      Baron (3)
+                    </button>
+                    <button
+                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                    >
+                      Handmaid (4)
+                    </button>
+                    <button
+                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                    >
+                      Prince (5)
+                    </button>
+                    <button
+                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                    >
+                      King (6)
+                    </button>
+                    <button
+                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                    >
+                      Countess (7)
+                    </button>
+                    <button
+                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                    >
+                      Princess (8)
+                    </button>
+                  </div>
+                </div>
+              </app-player-hand>
             </div>
-          </app-player-hand>
+          </div>
         </div>
 
         <!-- Right: Log (desktop only) -->
