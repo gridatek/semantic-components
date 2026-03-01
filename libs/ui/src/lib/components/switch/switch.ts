@@ -22,7 +22,7 @@ export const SC_SWITCH = 'SC_SWITCH';
     'data-slot': 'switch',
     role: 'switch',
     '[id]': 'id()',
-    '[attr.aria-describedby]': 'field?.descriptionId() ?? null',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '[checked]': 'checked()',
     '(change)': 'onInputChange($event)',
@@ -37,11 +37,16 @@ export class ScSwitch implements FormCheckboxControl {
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly checked = model<boolean>(false);
   readonly disabledSignal = signal(false);
 
   readonly id = computed(
     () => this.idInput() || this.switchField?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () => this.ariaDescribedByInput() || this.field?.descriptionId() || null,
   );
 
   constructor() {

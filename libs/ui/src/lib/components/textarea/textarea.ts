@@ -16,7 +16,7 @@ import { SC_FIELD } from '../field';
     '[attr.data-slot]': 'dataSlot()',
     '[attr.id]': 'id()',
     '[attr.aria-invalid]': 'invalid() || null',
-    '[attr.aria-describedby]': 'field?.descriptionId() ?? null',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.disabled]': 'disabled() || null',
     '[class]': 'class()',
   },
@@ -29,6 +29,7 @@ export class ScTextarea {
   readonly variant = input<'default' | 'group'>('default');
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly disabledInput = input<boolean, unknown>(false, {
     alias: 'disabled',
     transform: booleanAttribute,
@@ -40,6 +41,10 @@ export class ScTextarea {
 
   readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () => this.ariaDescribedByInput() || this.field?.descriptionId() || null,
   );
 
   readonly invalid = computed(

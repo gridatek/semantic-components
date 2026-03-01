@@ -21,7 +21,7 @@ export const SC_CHECKBOX = 'SC_CHECKBOX';
   host: {
     'data-slot': 'checkbox',
     '[id]': 'id()',
-    '[attr.aria-describedby]': 'field?.descriptionId() ?? null',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '[checked]': 'checked()',
     '(change)': 'onInputChange($event)',
@@ -38,12 +38,17 @@ export class ScCheckbox implements FormCheckboxControl {
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly indeterminate = input<boolean>(false);
   readonly checked = model<boolean>(false);
 
   // Priority: explicit id > field's generated id > own fallback id
   readonly id = computed(
     () => this.idInput() || this.checkboxField?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () => this.ariaDescribedByInput() || this.field?.descriptionId() || null,
   );
 
   // Expose disabled state as a signal

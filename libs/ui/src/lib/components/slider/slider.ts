@@ -16,7 +16,7 @@ import { SC_FIELD } from '../field';
     type: 'range',
     'data-slot': 'slider',
     '[attr.id]': 'id()',
-    '[attr.aria-describedby]': 'field?.descriptionId() ?? null',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '(input)': 'onInput()',
   },
@@ -28,9 +28,14 @@ export class ScSlider {
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
 
   readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () => this.ariaDescribedByInput() || this.field?.descriptionId() || null,
   );
 
   protected readonly class = computed(() =>
