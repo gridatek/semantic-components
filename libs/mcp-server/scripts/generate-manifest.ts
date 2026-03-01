@@ -7,6 +7,16 @@ import {
 } from 'fs';
 import { join, resolve } from 'path';
 
+interface ComponentMeta {
+  name: string;
+  path: string;
+  description: string;
+  status: string;
+  library: string;
+  category: string;
+  hidden?: boolean;
+}
+
 interface ComponentEntry {
   name: string;
   readme: string | null;
@@ -82,7 +92,19 @@ function resolveExportsRecursively(dir: string): string[] {
   return allExports;
 }
 
-function scanLibrary(libDir: string, packageName: string): LibraryEntry {
+function loadVisibleComponentPaths(): Set<string> {
+  const jsonPath = join(ROOT, 'apps', 'showcase', 'public', 'components.json');
+  const allComponents: ComponentMeta[] = JSON.parse(
+    readFileSync(jsonPath, 'utf-8'),
+  );
+  return new Set(allComponents.filter((c) => !c.hidden).map((c) => c.path));
+}
+
+function scanLibrary(
+  libDir: string,
+  packageName: string,
+  visiblePaths: Set<string>,
+): LibraryEntry {
   const componentsDir = join(libDir, 'src', 'lib', 'components');
   const components: ComponentEntry[] = [];
 
@@ -94,6 +116,7 @@ function scanLibrary(libDir: string, packageName: string): LibraryEntry {
 
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
+    if (!visiblePaths.has(entry.name)) continue;
 
     const compDir = join(componentsDir, entry.name);
     const readmePath = join(compDir, 'README.md');
@@ -143,8 +166,10 @@ function main() {
     ['editor', '@semantic-components/editor'],
   ];
 
+  const visiblePaths = loadVisibleComponentPaths();
+
   const libraries = libs.map(([dir, pkg]) =>
-    scanLibrary(join(ROOT, 'libs', dir), pkg),
+    scanLibrary(join(ROOT, 'libs', dir), pkg, visiblePaths),
   );
 
   const guides = scanGuides();

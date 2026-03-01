@@ -2,17 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScBadge } from '@semantic-components/ui';
 import { ComponentStatusBadge } from '../component-status-badge/component-status-badge';
-import {
-  ComponentItem,
-  ComponentLibrary,
-  COMPONENTS,
-} from '../../data/components';
+import { ComponentItem, ComponentLibrary } from '../../data/components';
+import { ComponentsService } from '../../services/components.service';
 
 const libraryColors: Record<ComponentLibrary, { bg: string; text: string }> = {
   ui: {
@@ -73,6 +71,8 @@ const categoryColor = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentBadges {
+  private readonly componentsService = inject(ComponentsService);
+
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() =>
     cn('flex flex-wrap items-center gap-2', this.classInput()),
@@ -81,7 +81,8 @@ export class ComponentBadges {
   readonly path = input.required<string>();
 
   readonly componentItem = computed<ComponentItem>(
-    () => COMPONENTS.find((c) => c.path === this.path())!,
+    () =>
+      this.componentsService.components().find((c) => c.path === this.path())!,
   );
 
   protected readonly categoryColor = categoryColor;

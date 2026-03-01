@@ -1,6 +1,7 @@
+import { httpResource } from '@angular/common/http';
 import { computed, inject, Injectable } from '@angular/core';
 
-import { COMPONENTS } from '../data/components';
+import { ComponentItem } from '../data/components';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -9,9 +10,15 @@ import { ConfigService } from './config.service';
 export class ComponentsService {
   private readonly configService = inject(ConfigService);
 
+  private readonly componentsResource = httpResource<ComponentItem[]>(
+    () => 'components.json',
+  );
+
+  readonly components = computed(() => this.componentsResource.value() ?? []);
+
   readonly visibleComponents = computed(() =>
     this.configService.devMode()
-      ? COMPONENTS
-      : COMPONENTS.filter((c) => !c.hidden),
+      ? this.components()
+      : this.components().filter((c) => !c.hidden),
   );
 }
