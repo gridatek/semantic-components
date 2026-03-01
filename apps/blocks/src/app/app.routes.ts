@@ -15,6 +15,10 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./pages/data-table/data-table.page'),
   },
   {
+    path: 'love-letter',
+    loadComponent: () => import('./pages/love-letter/love-letter.page'),
+  },
+  {
     path: '',
     component: MainLayout,
     children: [
