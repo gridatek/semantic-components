@@ -56,20 +56,19 @@ import { ScInput } from '@semantic-components/ui';
 
       <div scFieldGroup>
         <div scField>
-          <label scLabel for="firstName">First Name</label>
-          <input scInput id="firstName" type="text" placeholder="John" />
+          <label scLabel>First Name</label>
+          <input scInput type="text" placeholder="John" />
         </div>
 
         <div scField>
-          <label scLabel for="lastName">Last Name</label>
-          <input scInput id="lastName" type="text" placeholder="Doe" />
+          <label scLabel>Last Name</label>
+          <input scInput type="text" placeholder="Doe" />
         </div>
 
         <div scField>
-          <label scLabel for="email">Email</label>
+          <label scLabel>Email</label>
           <input
             scInput
-            id="email"
             type="email"
             placeholder="john.doe@example.com"
           />

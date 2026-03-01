@@ -11,8 +11,8 @@ import { ScInput } from '@semantic-components/ui';
   imports: [ScField, ScLabel, ScInput],
   template: `
     <div scField [orientation]="'horizontal'">
-      <label scLabel for="username">Username</label>
-      <input scInput id="username" type="text" placeholder="Enter username" />
+      <label scLabel>Username</label>
+      <input scInput type="text" placeholder="Enter username" />
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
