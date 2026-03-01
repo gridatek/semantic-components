@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import {
+  cn,
   ScBadge,
   ScCard,
   ScCardBody,
@@ -48,12 +49,15 @@ import { Player } from './love-letter.types';
     </div>
   `,
   host: {
-    class: 'block',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerCard {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
   readonly player = input.required<Player>();
   readonly isActive = input(false);
 
