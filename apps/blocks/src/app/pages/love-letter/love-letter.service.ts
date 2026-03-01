@@ -5,6 +5,7 @@ import {
   CARDS,
   CardType,
   createDeck,
+  DiscardedCard,
   GamePhase,
   Player,
 } from './love-letter.types';
@@ -80,7 +81,7 @@ export class LoveLetterService {
       hand: [] as Card[],
       isEliminated: false,
       isProtected: false,
-      discardPile: [] as Card[],
+      discardPile: [] as DiscardedCard[],
     }));
 
     // Deal one card to each player
@@ -125,7 +126,7 @@ export class LoveLetterService {
     this.updatePlayer(player.id, (p) => ({
       ...p,
       hand: p.hand.filter((c) => c !== card),
-      discardPile: [...p.discardPile, card],
+      discardPile: [...p.discardPile, { ...card, reason: 'played' }],
     }));
 
     this.addLog(`${player.name} played ${card.name}`);
@@ -338,7 +339,7 @@ export class LoveLetterService {
       this.updatePlayer(target.id, (p) => ({
         ...p,
         hand: [newCard],
-        discardPile: [...p.discardPile, discardedCard],
+        discardPile: [...p.discardPile, { ...discardedCard, reason: 'forced' }],
       }));
     } else {
       // If deck is empty, draw the removed card
@@ -347,7 +348,10 @@ export class LoveLetterService {
         this.updatePlayer(target.id, (p) => ({
           ...p,
           hand: [removed],
-          discardPile: [...p.discardPile, discardedCard],
+          discardPile: [
+            ...p.discardPile,
+            { ...discardedCard, reason: 'forced' },
+          ],
         }));
         this.removedCard.set(null);
       }

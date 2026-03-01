@@ -24,6 +24,12 @@ export interface Card {
   description: string;
 }
 
+export type DiscardReason = 'played' | 'forced';
+
+export interface DiscardedCard extends Card {
+  reason: DiscardReason;
+}
+
 export interface Player {
   id: number;
   name: string;
@@ -31,7 +37,7 @@ export interface Player {
   isEliminated: boolean;
   isProtected: boolean;
   tokens: number;
-  discardPile: Card[];
+  discardPile: DiscardedCard[];
 }
 
 export type GamePhase =

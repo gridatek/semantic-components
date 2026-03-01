@@ -92,8 +92,20 @@ export default class LoveLetterPage {
       isProtected: false,
       tokens: 3,
       discardPile: [
-        { type: CardType.Guard, value: 1, name: 'Guard', description: '' },
-        { type: CardType.Priest, value: 2, name: 'Priest', description: '' },
+        {
+          type: CardType.Guard,
+          value: 1,
+          name: 'Guard',
+          description: '',
+          reason: 'played',
+        },
+        {
+          type: CardType.Priest,
+          value: 2,
+          name: 'Priest',
+          description: '',
+          reason: 'played',
+        },
       ],
     },
     {
@@ -109,6 +121,7 @@ export default class LoveLetterPage {
           value: 4,
           name: 'Handmaid',
           description: '',
+          reason: 'played',
         },
       ],
     },
@@ -120,7 +133,13 @@ export default class LoveLetterPage {
       isProtected: false,
       tokens: 1,
       discardPile: [
-        { type: CardType.Baron, value: 3, name: 'Baron', description: '' },
+        {
+          type: CardType.Baron,
+          value: 3,
+          name: 'Baron',
+          description: '',
+          reason: 'forced',
+        },
       ],
     },
     {
@@ -131,7 +150,13 @@ export default class LoveLetterPage {
       isProtected: false,
       tokens: 0,
       discardPile: [
-        { type: CardType.Guard, value: 1, name: 'Guard', description: '' },
+        {
+          type: CardType.Guard,
+          value: 1,
+          name: 'Guard',
+          description: '',
+          reason: 'played',
+        },
       ],
     },
   ];

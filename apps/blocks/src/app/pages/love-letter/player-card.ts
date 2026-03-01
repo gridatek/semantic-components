@@ -38,7 +38,11 @@ import { Player } from './love-letter.types';
           <div class="mt-1 flex flex-wrap gap-0.5">
             @for (card of player().discardPile; track $index) {
               <span
-                class="text-muted-foreground rounded bg-gray-100 px-1 text-[9px]"
+                [class]="
+                  card.reason === 'forced'
+                    ? 'rounded border border-dashed border-red-300 bg-red-50 px-1 text-[9px] text-red-400'
+                    : 'text-muted-foreground rounded bg-gray-100 px-1 text-[9px]'
+                "
               >
                 {{ card.name }}
               </span>
