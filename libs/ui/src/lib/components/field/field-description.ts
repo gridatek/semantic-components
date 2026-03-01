@@ -1,15 +1,26 @@
-import { computed, Directive, input } from '@angular/core';
+import { computed, Directive, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { _IdGenerator } from '@angular/cdk/a11y';
 
 @Directive({
   selector: '[scFieldDescription]',
   host: {
     'data-slot': 'field-description',
+    '[attr.id]': 'id()',
     '[class]': 'class()',
   },
 })
 export class ScFieldDescription {
   readonly classInput = input<string>('', { alias: 'class' });
+
+  private readonly fallbackId = inject(_IdGenerator).getId(
+    'sc-field-description-',
+  );
+
+  readonly idInput = input('', { alias: 'id' });
+
+  // Priority: explicit id  > own fallback id
+  readonly id = computed(() => this.idInput() || this.fallbackId);
 
   protected readonly class = computed(() =>
     cn(
