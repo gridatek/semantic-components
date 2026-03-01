@@ -18,6 +18,7 @@ import { PlayerCard } from './player-card';
     @for (player of players(); track player.id) {
       <app-player-card
         [player]="player"
+        [isYou]="player.id === youPlayerId()"
         [isActive]="player.id === activePlayerId()"
         [isLeader]="player.id === leaderId()"
         [isRoundWinner]="player.id === roundWinnerId()"
@@ -38,6 +39,7 @@ export class PlayerGrid {
   );
 
   readonly players = input.required<Player[]>();
+  readonly youPlayerId = input<number>();
   readonly activePlayerId = input<number>();
   readonly roundWinnerId = input<number>();
   readonly gameWinnerId = input<number>();

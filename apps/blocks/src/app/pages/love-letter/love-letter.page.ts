@@ -22,7 +22,11 @@ import { PlayerGrid } from './player-grid';
         </div>
       </div>
 
-      <app-player-grid [players]="players" [activePlayerId]="activePlayerId" />
+      <app-player-grid
+        [players]="players"
+        [youPlayerId]="youPlayerId"
+        [activePlayerId]="activePlayerId"
+      />
 
       <!-- Game Area -->
       <div class="flex flex-1 flex-col justify-between p-4">
@@ -81,6 +85,7 @@ import { PlayerGrid } from './player-grid';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LoveLetterPage {
+  readonly youPlayerId = 1;
   readonly activePlayerId = 1;
 
   readonly players: Player[] = [

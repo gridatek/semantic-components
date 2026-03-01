@@ -18,6 +18,7 @@ import {
 } from '@semantic-components/ui';
 import {
   SiAwardIcon,
+  SiCircleDotIcon,
   SiCircleXIcon,
   SiCrownIcon,
   SiHeartIcon,
@@ -45,6 +46,7 @@ import { Player } from './love-letter.types';
     SiSwordIcon,
     SiAwardIcon,
     SiTrophyIcon,
+    SiCircleDotIcon,
   ],
   template: `
     <div scCard size="sm" [class]="cardClass()">
@@ -56,13 +58,15 @@ import { Player } from './love-letter.types';
             </span>
           </span>
           <div class="min-w-0 flex-1">
+            <!-- Row 1: Name + game-level badges -->
             <div class="flex items-center gap-1.5">
               @if (isLeader()) {
                 <svg siCrownIcon class="size-4 text-yellow-500"></svg>
               }
               <span class="text-sm font-semibold">{{ player().name }}</span>
-
-              <!-- Game-level: Winner -->
+              @if (isYou()) {
+                <span scBadge variant="outline" class="text-[10px]">You</span>
+              }
               @if (isGameWinner()) {
                 <span scBadge variant="default" class="text-[10px]">
                   <svg siTrophyIcon class="mr-0.5 size-3"></svg>
@@ -70,8 +74,8 @@ import { Player } from './love-letter.types';
                 </span>
               }
             </div>
+            <!-- Row 2: Round-level state + card count -->
             <div class="flex items-center gap-1">
-              <!-- Round-level badges -->
               @if (player().isEliminated) {
                 <span scBadge variant="destructive" class="text-[10px]">
                   <svg siCircleXIcon class="mr-0.5 size-3"></svg>
@@ -92,8 +96,12 @@ import { Player } from './love-letter.types';
                   <svg siAwardIcon class="mr-0.5 size-3"></svg>
                   Round Winner
                 </span>
+              } @else {
+                <span scBadge variant="secondary" class="text-[10px]">
+                  <svg siCircleDotIcon class="mr-0.5 size-3"></svg>
+                  In Round
+                </span>
               }
-
               <span class="text-muted-foreground text-xs">
                 {{ player().hand.length }} card{{
                   player().hand.length !== 1 ? 's' : ''
@@ -142,6 +150,8 @@ export class PlayerCard {
 
   readonly player = input.required<Player>();
   readonly tokensToWin = input(4);
+
+  readonly isYou = input(false);
 
   // Round-level states
   readonly isActive = input(false);
