@@ -7,6 +7,7 @@ import {
   inject,
   InjectionToken,
   input,
+  signal,
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -34,6 +35,7 @@ export type ScFieldVariants = VariantProps<typeof fieldVariants>;
 
 export interface ScFieldContext {
   id: () => string;
+  descriptionId: ReturnType<typeof signal<string | undefined>>;
 }
 
 export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
@@ -60,6 +62,7 @@ export class ScField implements ScFieldContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-field-'));
+  readonly descriptionId = signal<string | undefined>(undefined);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScFieldVariants['orientation']>('vertical');
   readonly invalidInput = input<boolean>(false, { alias: 'invalid' });

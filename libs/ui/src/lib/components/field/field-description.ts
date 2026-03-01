@@ -1,6 +1,7 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { computed, Directive, effect, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { SC_FIELD } from './field';
 
 @Directive({
   selector: '[scFieldDescription]',
@@ -11,16 +12,22 @@ import { _IdGenerator } from '@angular/cdk/a11y';
   },
 })
 export class ScFieldDescription {
-  readonly classInput = input<string>('', { alias: 'class' });
-
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId(
     'sc-field-description-',
   );
 
+  readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
 
   // Priority: explicit id  > own fallback id
   readonly id = computed(() => this.idInput() || this.fallbackId);
+
+  constructor() {
+    effect(() => {
+      this.field?.descriptionId.set(this.id());
+    });
+  }
 
   protected readonly class = computed(() =>
     cn(
