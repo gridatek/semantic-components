@@ -45,9 +45,9 @@ import { PlayerHand } from './player-hand';
 
         <!-- Card Reveal -->
         <div class="mb-4 flex justify-center gap-4">
-          <!-- Deck (card back) -->
-          <div
-            class="flex h-36 w-24 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md"
+          <!-- Deck (click to draw) -->
+          <button
+            class="flex h-36 w-24 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md transition-transform hover:scale-105 hover:shadow-lg"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ import { PlayerHand } from './player-hand';
               />
             </svg>
             <span class="mt-2 text-lg font-bold text-white">9</span>
-          </div>
+          </button>
 
           <!-- Revealed card -->
           <div
