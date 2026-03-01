@@ -4,14 +4,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import { ScButton } from '@semantic-components/ui';
-
-import { CardType, Player } from './love-letter.types';
+import { Card, CardType, Player } from './love-letter.types';
 import { PlayerGrid } from './player-grid';
+import { PlayerHand } from './player-hand';
 
 @Component({
   selector: 'app-love-letter',
-  imports: [ScButton, PlayerGrid],
+  imports: [PlayerGrid, PlayerHand],
   template: `
     <div class="flex min-h-screen flex-col">
       <!-- Header -->
@@ -45,36 +44,7 @@ import { PlayerGrid } from './player-grid';
         </div>
 
         <!-- Hand Cards -->
-        <div class="mt-auto">
-          <div class="mb-3 flex justify-center gap-3">
-            <button
-              class="border-primary flex h-36 w-24 scale-105 flex-col items-center justify-between rounded-lg border-2 p-2 shadow transition-transform"
-            >
-              <span class="text-xs font-semibold">Guard</span>
-              <span class="text-3xl font-bold">1</span>
-              <span
-                class="text-muted-foreground text-center text-[9px] leading-tight"
-              >
-                Guess a player's card (not Guard). If correct, they are
-                eliminated.
-              </span>
-            </button>
-
-            <button
-              class="border-border flex h-36 w-24 flex-col items-center justify-between rounded-lg border-2 p-2 shadow transition-transform"
-            >
-              <span class="text-xs font-semibold">Prince</span>
-              <span class="text-3xl font-bold">5</span>
-              <span
-                class="text-muted-foreground text-center text-[9px] leading-tight"
-              >
-                Choose a player to discard and draw a new card.
-              </span>
-            </button>
-          </div>
-
-          <button scButton class="w-full">Play Guard</button>
-        </div>
+        <app-player-hand [cards]="handCards" [selectedCard]="selectedCard" />
       </div>
     </div>
   `,
@@ -87,6 +57,24 @@ import { PlayerGrid } from './player-grid';
 export default class LoveLetterPage {
   readonly youPlayerId = 1;
   readonly activePlayerId = 1;
+  readonly selectedCard: Card | null = null;
+
+  readonly handCards: Card[] = [
+    {
+      type: CardType.Guard,
+      value: 1,
+      name: 'Guard',
+      description:
+        "Guess a player's card (not Guard). If correct, they are eliminated.",
+    },
+    {
+      type: CardType.Prince,
+      value: 5,
+      name: 'Prince',
+      description:
+        'Choose a player (including yourself) to discard and draw a new card.',
+    },
+  ];
 
   readonly players: Player[] = [
     {
