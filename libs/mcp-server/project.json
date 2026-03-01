@@ -15,9 +15,9 @@
       "executor": "nx:run-commands",
       "dependsOn": ["generate-manifest"],
       "options": {
-        "command": "npx tsup --config libs/mcp-server/tsup.config.ts --outDir libs/mcp-server/dist"
+        "command": "npx tsup --config libs/mcp-server/tsup.config.ts --outDir dist/libs/mcp-server && cp libs/mcp-server/package.json dist/libs/mcp-server/package.json && cp libs/mcp-server/README.md dist/libs/mcp-server/README.md"
       },
-      "outputs": ["{projectRoot}/dist"]
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"]
     }
   }
 }
