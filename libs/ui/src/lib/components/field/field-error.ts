@@ -1,17 +1,22 @@
 import {
+  ChangeDetectionStrategy,
+  Component,
   computed,
   DestroyRef,
-  Directive,
   effect,
   inject,
   input,
+  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { SC_FIELD } from './field';
 
-@Directive({
+@Component({
   selector: '[scFieldError]',
+  template: '<ng-content />',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   host: {
     'data-slot': 'field-error',
     '[attr.id]': 'id()',
