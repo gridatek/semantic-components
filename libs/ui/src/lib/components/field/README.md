@@ -207,10 +207,12 @@ export class MyComponent {
 
 Automatically reads errors from the parent `ScField`'s `FormField`. No inputs required for error data.
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-| `id`    | `string` | `''`    | Override generated ID  |
+| Input         | Type     | Default    | Description              |
+| ------------- | -------- | ---------- | ------------------------ |
+| `class`       | `string` | `''`       | Additional CSS classes   |
+| `id`          | `string` | `''`       | Override generated ID    |
+| `aria-live`   | `string` | `'polite'` | Live region announcement |
+| `aria-atomic` | `string` | `'true'`   | Announce region as whole |
 
 ### Other Components
 

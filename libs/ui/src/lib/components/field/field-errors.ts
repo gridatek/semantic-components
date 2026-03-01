@@ -29,6 +29,8 @@ import { SC_FIELD } from './field';
   encapsulation: ViewEncapsulation.None,
   host: {
     role: 'alert',
+    '[attr.aria-live]': 'ariaLive()',
+    '[attr.aria-atomic]': 'ariaAtomic()',
     'data-slot': 'field-errors',
     '[attr.id]': 'id()',
     '[class]': 'class()',
@@ -41,6 +43,8 @@ export class ScFieldErrors {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
+  readonly ariaLive = input('polite', { alias: 'aria-live' });
+  readonly ariaAtomic = input('true', { alias: 'aria-atomic' });
 
   // Priority: explicit id > own fallback id
   readonly id = computed(() => this.idInput() || this.fallbackId);
