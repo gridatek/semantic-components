@@ -35,7 +35,10 @@ export class ScSlider {
   );
 
   readonly ariaDescribedBy = computed(
-    () => this.ariaDescribedByInput() || this.field?.descriptionId() || null,
+    () =>
+      this.ariaDescribedByInput() ||
+      this.field?.descriptionIds().join(' ') ||
+      null,
   );
 
   protected readonly class = computed(() =>

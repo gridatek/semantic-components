@@ -45,7 +45,7 @@ export class ScCheckboxField implements ScCheckboxContext {
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly id = input(inject(_IdGenerator).getId('sc-checkbox-field-'));
-  readonly descriptionId = signal<string | undefined>(undefined);
+  readonly descriptionIds = signal<string[]>([]);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;

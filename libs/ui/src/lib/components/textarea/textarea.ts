@@ -44,7 +44,10 @@ export class ScTextarea {
   );
 
   readonly ariaDescribedBy = computed(
-    () => this.ariaDescribedByInput() || this.field?.descriptionId() || null,
+    () =>
+      this.ariaDescribedByInput() ||
+      this.field?.descriptionIds().join(' ') ||
+      null,
   );
 
   readonly invalid = computed(

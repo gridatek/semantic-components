@@ -46,7 +46,10 @@ export class ScSwitch implements FormCheckboxControl {
   );
 
   readonly ariaDescribedBy = computed(
-    () => this.ariaDescribedByInput() || this.field?.descriptionId() || null,
+    () =>
+      this.ariaDescribedByInput() ||
+      this.field?.descriptionIds().join(' ') ||
+      null,
   );
 
   constructor() {

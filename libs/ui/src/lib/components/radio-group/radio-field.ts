@@ -31,7 +31,7 @@ export class ScRadioField {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-radio-field-'));
-  readonly descriptionId = signal<string | undefined>(undefined);
+  readonly descriptionIds = signal<string[]>([]);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly role = computed(() => {

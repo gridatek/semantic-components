@@ -25,7 +25,8 @@ export class ScFieldDescription {
 
   constructor() {
     effect(() => {
-      this.field?.descriptionId.set(this.id());
+      const id = this.id();
+      this.field?.descriptionIds.update((ids) => [...ids, id]);
     });
   }
 

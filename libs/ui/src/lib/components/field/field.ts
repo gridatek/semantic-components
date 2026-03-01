@@ -36,7 +36,7 @@ export type ScFieldVariants = VariantProps<typeof fieldVariants>;
 
 export interface ScFieldContext {
   id: () => string;
-  descriptionId: WritableSignal<string | undefined>;
+  descriptionIds: WritableSignal<string[]>;
 }
 
 export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
@@ -63,7 +63,7 @@ export class ScField implements ScFieldContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-field-'));
-  readonly descriptionId = signal<string | undefined>(undefined);
+  readonly descriptionIds = signal<string[]>([]);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScFieldVariants['orientation']>('vertical');
   readonly invalidInput = input<boolean>(false, { alias: 'invalid' });

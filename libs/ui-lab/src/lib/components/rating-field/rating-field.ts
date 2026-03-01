@@ -38,7 +38,7 @@ export class ScRatingField {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-rating-field-'));
-  readonly descriptionId = signal<string | undefined>(undefined);
+  readonly descriptionIds = signal<string[]>([]);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;
