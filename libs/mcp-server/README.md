@@ -58,11 +58,11 @@ Searches components by keyword across names, exports, and README content. Result
 
 Returns a full architectural guide by topic.
 
-**Input:** `topic` — e.g. `"composable-architecture"`, `"forms"`, `"data-slot-pattern"`
+**Input:** `topic` — e.g. `"datatable"`
 
 ## How It Works
 
-At build time, a manifest generator scans all component directories and `docs/` guides, collecting README content and export names into a single `manifest.json`. The MCP server bundles this manifest and serves it over stdio using JSON-RPC, which is the standard transport for Claude Code MCP servers.
+At build time, a manifest generator scans all component directories and `docs/guides/`, collecting README content and export names into a single `manifest.json`. The MCP server bundles this manifest and serves it over stdio using JSON-RPC, which is the standard transport for Claude Code MCP servers.
 
 ## Building
 

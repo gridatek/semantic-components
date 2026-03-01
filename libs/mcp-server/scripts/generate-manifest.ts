@@ -114,7 +114,7 @@ function scanLibrary(libDir: string, packageName: string): LibraryEntry {
 }
 
 function scanGuides(): GuideEntry[] {
-  const docsDir = join(ROOT, 'docs');
+  const docsDir = join(ROOT, 'docs', 'guides');
   if (!existsSync(docsDir)) return [];
 
   const guides: GuideEntry[] = [];
