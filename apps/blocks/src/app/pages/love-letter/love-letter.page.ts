@@ -188,7 +188,7 @@ import { PlayerHand } from './player-hand';
         <div
           class="hidden lg:block lg:w-64 lg:shrink-0 lg:overflow-y-auto lg:border-l lg:p-3"
         >
-          <div scCard>
+          <div scCard class="h-full">
             <div scCardHeader>
               <h3 scCardTitle>Game Log</h3>
             </div>
