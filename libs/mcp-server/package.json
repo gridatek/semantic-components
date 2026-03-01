@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/mcp-server",
-  "version": "0.70.0",
+  "version": "0.71.0",
   "private": false,
   "publishConfig": {
     "access": "public"
