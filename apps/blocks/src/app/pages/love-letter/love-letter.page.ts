@@ -81,14 +81,14 @@ import { PlayerHand } from './player-hand';
             <h3 class="text-muted-foreground mb-2 text-sm font-medium">
               Select Target Player
             </h3>
-            <div class="flex justify-center gap-2">
+            <div class="flex justify-center gap-3">
               <button
-                class="border-primary rounded-md border-2 px-4 py-1.5 text-sm shadow"
+                class="border-primary rounded-lg border-2 px-5 py-2.5 text-sm font-medium shadow transition-transform"
               >
                 Player 2
               </button>
               <button
-                class="border-border rounded-md border-2 px-4 py-1.5 text-sm"
+                class="border-border rounded-lg border-2 px-5 py-2.5 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
               >
                 Player 4
               </button>
@@ -100,39 +100,39 @@ import { PlayerHand } from './player-hand';
             <h3 class="text-muted-foreground mb-2 text-sm font-medium">
               Guess Card (Guard only)
             </h3>
-            <div class="grid grid-cols-4 gap-2">
+            <div class="grid grid-cols-4 gap-3">
               <button
-                class="border-primary rounded-md border-2 px-2 py-1.5 text-xs shadow"
+                class="border-primary rounded-lg border-2 px-3 py-2 text-sm font-medium shadow transition-transform"
               >
                 Priest (2)
               </button>
               <button
-                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
               >
                 Baron (3)
               </button>
               <button
-                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
               >
                 Handmaid (4)
               </button>
               <button
-                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
               >
                 Prince (5)
               </button>
               <button
-                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
               >
                 King (6)
               </button>
               <button
-                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
               >
                 Countess (7)
               </button>
               <button
-                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
               >
                 Princess (8)
               </button>
