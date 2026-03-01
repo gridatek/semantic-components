@@ -1,0 +1,23 @@
+{
+  "name": "mcp-server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/mcp-server/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "generate-manifest": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx tsx libs/mcp-server/scripts/generate-manifest.ts"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["generate-manifest"],
+      "options": {
+        "command": "npx tsup --config libs/mcp-server/tsup.config.ts --outDir libs/mcp-server/dist"
+      },
+      "outputs": ["{projectRoot}/dist"]
+    }
+  }
+}

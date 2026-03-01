@@ -1,0 +1,28 @@
+{
+  "name": "@semantic-components/mcp-server",
+  "version": "0.69.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gridatek/semantic-components",
+    "directory": "libs/mcp-server"
+  },
+  "type": "module",
+  "bin": {
+    "semantic-components-mcp": "./dist/index.mjs"
+  },
+  "main": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.24.4"
+  },
+  "sideEffects": false
+}
