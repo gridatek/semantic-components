@@ -31,6 +31,10 @@ export class HoursTimePickerClockDemoContainer {
 } from '@angular/core';
 import {
   ScTimePicker,
+  ScTimePickerInput,
+  ScTimePickerHoursInput,
+  ScTimePickerMinutesInput,
+  ScTimePickerSeparator,
   ScTimePickerPeriod,
   ScTimePickerPeriodAM,
   ScTimePickerPeriodPM,
@@ -43,28 +47,43 @@ import { ScTimePickerClock } from '@semantic-components/ui-lab';
   imports: [
     ScTimePicker,
     ScTimePickerClock,
+    ScTimePickerInput,
+    ScTimePickerHoursInput,
+    ScTimePickerMinutesInput,
+    ScTimePickerSeparator,
     ScTimePickerPeriod,
     ScTimePickerPeriodAM,
     ScTimePickerPeriodPM,
   ],
   template: \`
-    <div class="flex items-start gap-8">
-      <div scTimePicker format="12h" [(value)]="time">
-        <div scTimePickerClock mode="hours"></div>
-      </div>
-      <div class="space-y-2">
-        <p class="text-sm font-medium">Selected Hour</p>
-        <p class="text-2xl tabular-nums">
-          {{ (time()?.hours ?? 0) % 12 || 12 }}:00
-          {{ (time()?.hours ?? 0) >= 12 ? 'PM' : 'AM' }}
-        </p>
-        <div scTimePicker format="12h" [(value)]="time">
-          <div scTimePickerPeriod>
-            <button scTimePickerPeriodAM>AM</button>
-            <button scTimePickerPeriodPM>PM</button>
-          </div>
+    <div
+      scTimePicker
+      format="12h"
+      [(value)]="time"
+      class="flex flex-col items-center gap-4"
+    >
+      <div class="flex items-center gap-2">
+        <input
+          scTimePickerInput
+          scTimePickerHoursInput
+          (focus)="clockMode.set('hours')"
+        />
+        <span scTimePickerSeparator>:</span>
+        <input
+          scTimePickerInput
+          scTimePickerMinutesInput
+          (focus)="clockMode.set('minutes')"
+        />
+        <div scTimePickerPeriod>
+          <button scTimePickerPeriodAM>AM</button>
+          <button scTimePickerPeriodPM>PM</button>
         </div>
       </div>
+      <div
+        scTimePickerClock
+        [mode]="clockMode()"
+        (valueSelected)="onValueSelected()"
+      ></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
@@ -72,5 +91,12 @@ import { ScTimePickerClock } from '@semantic-components/ui-lab';
 })
 export class HoursTimePickerClockDemo {
   readonly time = signal<ScTimeValue | null>({ hours: 10, minutes: 0 });
+  readonly clockMode = signal<'hours' | 'minutes'>('hours');
+
+  onValueSelected(): void {
+    if (this.clockMode() === 'hours') {
+      setTimeout(() => this.clockMode.set('minutes'), 300);
+    }
+  }
 }`;
 }

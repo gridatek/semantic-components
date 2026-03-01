@@ -897,7 +897,6 @@ export const COMPONENTS: ComponentItem[] = [
     status: 'Experimental',
     library: 'ui-lab',
     category: 'Forms',
-    hidden: true,
   },
   {
     name: 'Timeline',
