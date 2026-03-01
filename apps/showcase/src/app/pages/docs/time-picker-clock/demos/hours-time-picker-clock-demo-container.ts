@@ -11,7 +11,7 @@ import { HoursTimePickerClockDemo } from './hours-time-picker-clock-demo';
   imports: [DemoContainer, HoursTimePickerClockDemo],
   template: `
     <app-demo-container
-      title="Hours"
+      title="Demo"
       demoUrl="/demos/time-picker-clock/hours-time-picker-clock-demo"
       [code]="code"
     >

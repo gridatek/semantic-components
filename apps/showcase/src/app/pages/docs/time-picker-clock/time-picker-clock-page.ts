@@ -20,7 +20,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>TimePickerClock</h1>
+        <h1 scHeading>Time Picker Clock</h1>
         <p class="text-muted-foreground">
           A visual clock interface for selecting hours or minutes.
         </p>
