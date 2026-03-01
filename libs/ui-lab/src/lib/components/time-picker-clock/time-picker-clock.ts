@@ -261,8 +261,8 @@ export class ScTimePickerClock {
           : sector;
       this.selectValue(value);
     } else {
-      // Snap to nearest minute (60 sectors of 6° each)
-      const minute = Math.round(angle / 6) % 60;
+      // Snap to nearest 5-minute mark (12 sectors of 30° each)
+      const minute = (Math.round(angle / 30) % 12) * 5;
       this.selectValue(minute);
     }
   }
