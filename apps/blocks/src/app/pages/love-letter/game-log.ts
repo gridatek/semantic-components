@@ -12,7 +12,7 @@ import { cn } from '@semantic-components/ui';
   selector: 'app-game-log',
   template: `
     <div
-      class="text-muted-foreground max-h-24 divide-y overflow-y-auto text-left text-xs lg:max-h-48"
+      class="text-muted-foreground max-h-24 divide-y overflow-y-auto text-left text-xs lg:max-h-none"
     >
       @for (entry of reversedLog(); track $index) {
         <p class="py-1" [class.text-center]="entry.startsWith('---')">
