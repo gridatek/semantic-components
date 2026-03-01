@@ -64,7 +64,15 @@ export class ScFieldErrors {
   constructor() {
     effect(() => {
       const id = this.id();
-      this.field?.descriptionIds.update((ids) => [...ids, id]);
+      const hasErrors = this.errors().length > 0;
+
+      if (hasErrors) {
+        this.field?.descriptionIds.update((ids) =>
+          ids.includes(id) ? ids : [...ids, id],
+        );
+      } else {
+        this.field?.descriptionIds.update((ids) => ids.filter((i) => i !== id));
+      }
     });
 
     inject(DestroyRef).onDestroy(() => {
