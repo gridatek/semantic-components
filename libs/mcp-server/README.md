@@ -6,7 +6,7 @@ When working in a project that consumes `@semantic-components/*`, Claude Code ca
 
 ## Setup
 
-Add the following to your project's `.claude/settings.json`:
+Add the following to your project's `.mcp.json` (at the project root):
 
 ```json
 {
