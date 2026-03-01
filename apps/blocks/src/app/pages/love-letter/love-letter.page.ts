@@ -23,116 +23,128 @@ import { PlayerHand } from './player-hand';
         </div>
       </div>
 
-      <app-player-grid
-        [players]="players"
-        [youPlayerId]="youPlayerId"
-        [activePlayerId]="activePlayerId"
-      />
-
-      <!-- Game Area -->
-      <div class="flex flex-1 flex-col justify-between p-4">
-        <!-- Log / Message -->
-        <app-game-log
-          class="mb-4"
-          message="Player 1, choose a card to play"
-          [log]="gameLog"
-        />
-
-        <!-- Card Reveal -->
-        <div class="mb-4 flex justify-center gap-4">
-          <!-- Deck (click to draw) -->
-          <button
-            class="flex h-36 w-24 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md transition-transform hover:scale-105 hover:shadow-lg"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              stroke-width="1.5"
-              class="size-12"
-            >
-              <path
-                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
-              />
-            </svg>
-            <span class="mt-2 text-lg font-bold text-white">9</span>
-          </button>
-
-          <!-- Revealed card -->
-          <app-game-card
-            class="border-border shadow-md"
-            name="Handmaid"
-            [value]="4"
-            description="Protection until your next turn"
+      <div class="flex flex-1 flex-col lg:flex-row">
+        <!-- Left: Players -->
+        <div class="lg:w-64 lg:shrink-0 lg:border-r">
+          <app-player-grid
+            [players]="players"
+            [youPlayerId]="youPlayerId"
+            [activePlayerId]="activePlayerId"
           />
         </div>
 
-        <!-- Hand Cards -->
-        <app-player-hand [cards]="handCards" [selectedIndex]="selectedIndex">
-          <!-- Select Target Player -->
-          <div class="mb-3">
-            <h3 class="text-muted-foreground mb-2 text-sm font-medium">
-              Select Target Player
-            </h3>
-            <div class="flex justify-center gap-3">
-              <button
-                class="border-primary rounded-lg border-2 px-5 py-2.5 text-sm font-medium shadow transition-transform"
+        <!-- Center: Game Area -->
+        <div class="flex flex-1 flex-col justify-between p-4">
+          <!-- Message -->
+          <p class="mb-4 text-left font-semibold">
+            Player 1, choose a card to play
+          </p>
+
+          <!-- Mobile-only log -->
+          <app-game-log class="mb-4 lg:hidden" [log]="gameLog" />
+
+          <!-- Card Reveal -->
+          <div class="mb-4 flex justify-center gap-4">
+            <!-- Deck (click to draw) -->
+            <button
+              class="flex h-36 w-24 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md transition-transform hover:scale-105 hover:shadow-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                stroke-width="1.5"
+                class="size-12"
               >
-                Player 2
-              </button>
-              <button
-                class="border-border rounded-lg border-2 px-5 py-2.5 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-              >
-                Player 4
-              </button>
-            </div>
+                <path
+                  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                />
+              </svg>
+              <span class="mt-2 text-lg font-bold text-white">9</span>
+            </button>
+
+            <!-- Revealed card -->
+            <app-game-card
+              class="border-border shadow-md"
+              name="Handmaid"
+              [value]="4"
+              description="Protection until your next turn"
+            />
           </div>
 
-          <!-- Guess Card (Guard only) -->
-          <div class="mb-3">
-            <h3 class="text-muted-foreground mb-2 text-sm font-medium">
-              Guess Card (Guard only)
-            </h3>
-            <div class="grid grid-cols-4 gap-3">
-              <button
-                class="border-primary rounded-lg border-2 px-3 py-2 text-sm font-medium shadow transition-transform"
-              >
-                Priest (2)
-              </button>
-              <button
-                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-              >
-                Baron (3)
-              </button>
-              <button
-                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-              >
-                Handmaid (4)
-              </button>
-              <button
-                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-              >
-                Prince (5)
-              </button>
-              <button
-                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-              >
-                King (6)
-              </button>
-              <button
-                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-              >
-                Countess (7)
-              </button>
-              <button
-                class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-              >
-                Princess (8)
-              </button>
+          <!-- Hand Cards -->
+          <app-player-hand [cards]="handCards" [selectedIndex]="selectedIndex">
+            <!-- Select Target Player -->
+            <div class="mb-3">
+              <h3 class="text-muted-foreground mb-2 text-sm font-medium">
+                Select Target Player
+              </h3>
+              <div class="flex justify-center gap-3">
+                <button
+                  class="border-primary rounded-lg border-2 px-5 py-2.5 text-sm font-medium shadow transition-transform"
+                >
+                  Player 2
+                </button>
+                <button
+                  class="border-border rounded-lg border-2 px-5 py-2.5 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                >
+                  Player 4
+                </button>
+              </div>
             </div>
-          </div>
-        </app-player-hand>
+
+            <!-- Guess Card (Guard only) -->
+            <div class="mb-3">
+              <h3 class="text-muted-foreground mb-2 text-sm font-medium">
+                Guess Card (Guard only)
+              </h3>
+              <div class="grid grid-cols-4 gap-3">
+                <button
+                  class="border-primary rounded-lg border-2 px-3 py-2 text-sm font-medium shadow transition-transform"
+                >
+                  Priest (2)
+                </button>
+                <button
+                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                >
+                  Baron (3)
+                </button>
+                <button
+                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                >
+                  Handmaid (4)
+                </button>
+                <button
+                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                >
+                  Prince (5)
+                </button>
+                <button
+                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                >
+                  King (6)
+                </button>
+                <button
+                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                >
+                  Countess (7)
+                </button>
+                <button
+                  class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
+                >
+                  Princess (8)
+                </button>
+              </div>
+            </div>
+          </app-player-hand>
+        </div>
+
+        <!-- Right: Log (desktop only) -->
+        <div class="hidden lg:block lg:w-64 lg:shrink-0 lg:border-l lg:p-3">
+          <h3 class="text-muted-foreground mb-1 text-xs font-medium">Log</h3>
+          <app-game-log [log]="gameLog" />
+        </div>
       </div>
     </div>
   `,

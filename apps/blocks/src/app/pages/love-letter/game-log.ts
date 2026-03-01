@@ -11,9 +11,8 @@ import { cn } from '@semantic-components/ui';
 @Component({
   selector: 'app-game-log',
   template: `
-    <p class="mb-2 text-left font-semibold">{{ message() }}</p>
     <div
-      class="text-muted-foreground max-h-24 space-y-1 overflow-y-auto text-left text-xs"
+      class="text-muted-foreground max-h-24 space-y-1 overflow-y-auto text-left text-xs lg:max-h-48"
     >
       @for (entry of reversedLog(); track $index) {
         <p>{{ entry }}</p>
@@ -32,7 +31,6 @@ export class GameLog {
     cn('block w-full text-left', this.classInput()),
   );
 
-  readonly message = input('');
   readonly log = input<string[]>([]);
 
   protected readonly reversedLog = computed(() => [...this.log()].reverse());

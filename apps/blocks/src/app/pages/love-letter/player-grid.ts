@@ -35,7 +35,10 @@ import { PlayerCard } from './player-card';
 export class PlayerGrid {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() =>
-    cn('grid grid-cols-2 gap-2 px-2 py-2', this.classInput()),
+    cn(
+      'grid grid-cols-2 gap-2 px-2 py-2 lg:grid-cols-1 lg:gap-1',
+      this.classInput(),
+    ),
   );
 
   readonly players = input.required<Player[]>();
