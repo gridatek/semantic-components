@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import { expectNoA11yViolations } from '../../a11y';
+import { expectNoA11yViolationsForDemo } from '../../a11y';
 
 test.describe('Separator Field Demo', () => {
   test.beforeEach(async ({ page }) => {
@@ -8,7 +8,7 @@ test.describe('Separator Field Demo', () => {
   });
 
   test('should have no accessibility violations', async ({ page }) => {
-    await expectNoA11yViolations(page);
+    await expectNoA11yViolationsForDemo(page);
   });
 
   test('should render email and phone fields', async ({ page }) => {
