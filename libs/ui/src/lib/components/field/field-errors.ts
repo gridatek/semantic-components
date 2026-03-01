@@ -13,7 +13,7 @@ import { cn } from '../../utils';
 import { SC_FIELD } from './field';
 
 @Component({
-  selector: '[scFieldError]',
+  selector: '[scFieldErrors]',
   template: `
     @if (errors().length === 1) {
       {{ errors()[0].message }}
@@ -29,15 +29,15 @@ import { SC_FIELD } from './field';
   encapsulation: ViewEncapsulation.None,
   host: {
     role: 'alert',
-    'data-slot': 'field-error',
+    'data-slot': 'field-errors',
     '[attr.id]': 'id()',
     '[class]': 'class()',
     '[hidden]': '!errors().length',
   },
 })
-export class ScFieldError {
+export class ScFieldErrors {
   private readonly field = inject(SC_FIELD, { optional: true });
-  private readonly fallbackId = inject(_IdGenerator).getId('sc-field-error-');
+  private readonly fallbackId = inject(_IdGenerator).getId('sc-field-errors-');
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });

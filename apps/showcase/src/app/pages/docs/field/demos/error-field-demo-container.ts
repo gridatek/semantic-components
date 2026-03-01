@@ -30,12 +30,12 @@ export class ErrorFieldDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
-import { ScField, ScFieldError, ScLabel } from '@semantic-components/ui';
+import { ScField, ScFieldErrors, ScLabel } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-error-field-demo',
-  imports: [FormField, ScField, ScFieldError, ScInput, ScLabel],
+  imports: [FormField, ScField, ScFieldErrors, ScInput, ScLabel],
   template: \`
     <div scField>
       <label scLabel>Password</label>
@@ -45,7 +45,7 @@ import { ScInput } from '@semantic-components/ui';
         [formField]="passwordForm.password"
         placeholder="Enter password"
       />
-      <div scFieldError></div>
+      <div scFieldErrors></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
