@@ -45,13 +45,7 @@ import { ScInput } from '@semantic-components/ui';
         [formField]="passwordForm.password"
         placeholder="Enter password"
       />
-      @if (
-        passwordForm.password().touched() && passwordForm.password().invalid()
-      ) {
-        @for (error of passwordForm.password().errors(); track error.kind) {
-          <p scFieldError>{{ error.message }}</p>
-        }
-      }
+      <div scFieldError></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

@@ -8,13 +8,21 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { cn } from '../../utils';
 import { SC_FIELD } from './field';
 
 @Component({
   selector: '[scFieldError]',
-  template: '<ng-content />',
+  template: `
+    @if (errors().length) {
+      <ul>
+        @for (error of errors(); track error.kind) {
+          <li>{{ error.message }}</li>
+        }
+      </ul>
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
@@ -32,6 +40,18 @@ export class ScFieldError {
 
   // Priority: explicit id > own fallback id
   readonly id = computed(() => this.idInput() || this.fallbackId);
+
+  protected readonly errors = computed(() => {
+    const formField = this.field?.formField();
+    if (!formField) return [];
+
+    const state = formField.state();
+    if (state.touched() && state.invalid()) {
+      return state.errors();
+    }
+
+    return [];
+  });
 
   constructor() {
     effect(() => {
