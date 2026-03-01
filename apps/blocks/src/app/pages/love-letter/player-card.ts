@@ -40,7 +40,7 @@ import { Player } from './love-letter.types';
               <span
                 class="text-muted-foreground rounded bg-gray-100 px-1 text-[9px]"
               >
-                {{ card.name.charAt(0) }}{{ card.value }}
+                {{ card.name }}
               </span>
             }
           </div>
