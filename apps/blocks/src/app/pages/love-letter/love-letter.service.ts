@@ -24,6 +24,10 @@ export class LoveLetterService {
   readonly message = signal('Welcome to Love Letter!');
   readonly selectedCard = signal<Card | null>(null);
   readonly revealedCard = signal<Card | null>(null);
+  readonly roundWinnerId = signal<number | null>(null);
+  readonly gameWinnerId = signal<number | null>(null);
+
+  readonly isHumanTurn = computed(() => this.currentPlayer()?.id === 0);
 
   readonly currentPlayer = computed(() => {
     const players = this.players();
@@ -95,6 +99,7 @@ export class LoveLetterService {
     this.currentPlayerIndex.set(0);
     this.selectedCard.set(null);
     this.revealedCard.set(null);
+    this.roundWinnerId.set(null);
     this.addLog(`--- Round ${this.roundNumber()} ---`);
     this.message.set(`Pass the device to ${players[0].name}`);
     this.phase.set('draw');
@@ -216,6 +221,8 @@ export class LoveLetterService {
     this.roundNumber.set(1);
     this.selectedCard.set(null);
     this.revealedCard.set(null);
+    this.roundWinnerId.set(null);
+    this.gameWinnerId.set(null);
   }
 
   private drawCard(): void {
@@ -479,7 +486,10 @@ export class LoveLetterService {
 
     const player = this.getPlayer(playerId);
 
+    this.roundWinnerId.set(playerId);
+
     if (player.tokens >= TOKENS_TO_WIN) {
+      this.gameWinnerId.set(playerId);
       this.addLog(`${player.name} wins the game with ${player.tokens} tokens!`);
       this.message.set(`${player.name} wins the game!`);
       this.phase.set('game-over');

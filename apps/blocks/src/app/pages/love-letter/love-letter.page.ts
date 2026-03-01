@@ -1,10 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  DestroyRef,
+  effect,
+  inject,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
 
 import {
+  ScButton,
   ScCard,
   ScCardBody,
   ScCardHeader,
@@ -13,9 +19,12 @@ import {
 
 import { GameCard } from './game-card';
 import { GameLog } from './game-log';
-import { Card, CardType, Player } from './love-letter.types';
+import { CardType } from './love-letter.types';
+import { LoveLetterService } from './love-letter.service';
 import { PlayerGrid } from './player-grid';
 import { PlayerHand } from './player-hand';
+
+const AI_DELAY = 800;
 
 @Component({
   selector: 'app-love-letter',
@@ -28,14 +37,18 @@ import { PlayerHand } from './player-hand';
     ScCardBody,
     ScCardHeader,
     ScCardTitle,
+    ScButton,
   ],
+  providers: [LoveLetterService],
   template: `
     <div class="flex min-h-screen flex-col lg:h-screen lg:overflow-hidden">
       <!-- Header -->
       <div class="border-b px-4 py-2">
         <div class="flex items-center justify-between">
           <h1 class="text-lg font-bold">Love Letter</h1>
-          <span class="text-muted-foreground text-sm">Round 1/5</span>
+          <span class="text-muted-foreground text-sm">
+            Round {{ service.roundNumber() }}
+          </span>
         </div>
       </div>
 
@@ -43,9 +56,11 @@ import { PlayerHand } from './player-hand';
         <!-- Left: Players -->
         <div class="lg:w-64 lg:shrink-0 lg:overflow-y-auto lg:border-r">
           <app-player-grid
-            [players]="players"
-            [youPlayerId]="youPlayerId"
-            [activePlayerId]="activePlayerId"
+            [players]="service.players()"
+            [youPlayerId]="0"
+            [activePlayerId]="service.currentPlayer()?.id"
+            [roundWinnerId]="service.roundWinnerId() ?? undefined"
+            [gameWinnerId]="service.gameWinnerId() ?? undefined"
           />
         </div>
 
@@ -57,21 +72,21 @@ import { PlayerHand } from './player-hand';
           <div scCard size="sm" class="mb-4">
             <div scCardBody>
               <p class="text-center font-semibold">
-                Player 1, choose a card to play
+                {{ service.message() }}
               </p>
             </div>
           </div>
 
-          <!-- Card Reveal -->
+          <!-- Table -->
           <div scCard class="mb-4">
             <div scCardHeader>
               <h3 scCardTitle>Table</h3>
             </div>
             <div scCardBody>
               <div class="flex justify-center gap-4">
-                <!-- Deck (click to draw) -->
-                <button
-                  class="flex h-24 w-18 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md transition-transform hover:scale-105 hover:shadow-lg lg:h-36 lg:w-24"
+                <!-- Deck -->
+                <div
+                  class="flex h-24 w-18 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md lg:h-36 lg:w-24"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -86,96 +101,141 @@ import { PlayerHand } from './player-hand';
                     />
                   </svg>
                   <span class="mt-2 text-base font-bold text-white lg:text-lg">
-                    9
+                    {{ service.deck().length }}
                   </span>
-                </button>
+                </div>
 
-                <!-- Revealed card -->
-                <app-game-card
-                  class="border-border shadow-md"
-                  name="Handmaid"
-                  [value]="4"
-                  description="Protection until your next turn"
-                />
+                <!-- Revealed card (Priest) -->
+                @if (service.revealedCard(); as card) {
+                  <app-game-card
+                    class="border-border shadow-md"
+                    [name]="card.name"
+                    [value]="card.value"
+                    [description]="card.description"
+                  />
+                }
               </div>
             </div>
           </div>
 
-          <!-- Hand Cards -->
-          <div scCard>
-            <div scCardHeader>
-              <h3 scCardTitle>Your Hand</h3>
-            </div>
-            <div scCardBody>
-              <app-player-hand
-                [cards]="handCards"
-                [selectedIndex]="selectedIndex"
-              >
-                <!-- Select Target Player -->
-                <div class="mb-3">
-                  <h3 class="text-muted-foreground mb-2 text-sm font-medium">
-                    Select Target Player
-                  </h3>
-                  <div class="flex justify-center gap-3">
-                    <button
-                      class="border-primary rounded-lg border-2 px-5 py-2.5 text-sm font-medium shadow transition-transform"
-                    >
-                      Player 2
-                    </button>
-                    <button
-                      class="border-border rounded-lg border-2 px-5 py-2.5 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                    >
-                      Player 4
-                    </button>
-                  </div>
-                </div>
+          <!-- Setup phase -->
+          @if (service.phase() === 'setup') {
+            <button scButton class="w-full" (click)="service.startGame()">
+              Start Game
+            </button>
+          }
 
-                <!-- Guess Card (Guard only) -->
-                <div class="mb-3">
-                  <h3 class="text-muted-foreground mb-2 text-sm font-medium">
-                    Guess Card (Guard only)
-                  </h3>
-                  <div class="grid grid-cols-4 gap-3">
-                    <button
-                      class="border-primary rounded-lg border-2 px-3 py-2 text-sm font-medium shadow transition-transform"
-                    >
-                      Priest (2)
-                    </button>
-                    <button
-                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                    >
-                      Baron (3)
-                    </button>
-                    <button
-                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                    >
-                      Handmaid (4)
-                    </button>
-                    <button
-                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                    >
-                      Prince (5)
-                    </button>
-                    <button
-                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                    >
-                      King (6)
-                    </button>
-                    <button
-                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                    >
-                      Countess (7)
-                    </button>
-                    <button
-                      class="border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow"
-                    >
-                      Princess (8)
-                    </button>
-                  </div>
-                </div>
-              </app-player-hand>
+          <!-- Draw phase (human only) -->
+          @if (service.phase() === 'draw' && service.isHumanTurn()) {
+            <button
+              scButton
+              class="w-full"
+              (click)="service.confirmTurnStart()"
+            >
+              Draw Card
+            </button>
+          }
+
+          <!-- Play/Target phase (human only) -->
+          @if (showHand()) {
+            <div scCard>
+              <div scCardHeader>
+                <h3 scCardTitle>Your Hand</h3>
+              </div>
+              <div scCardBody>
+                <app-player-hand
+                  [cards]="humanHand()"
+                  [selectedIndex]="selectedIndex()"
+                  (cardSelected)="onCardSelected($event)"
+                  (playCard)="onPlayCard()"
+                >
+                  <!-- Target selection -->
+                  @if (service.phase() === 'target') {
+                    <div class="mb-3">
+                      <h3
+                        class="text-muted-foreground mb-2 text-sm font-medium"
+                      >
+                        Select Target Player
+                      </h3>
+                      <div class="flex justify-center gap-3">
+                        @for (
+                          target of service.availableTargets();
+                          track target.id
+                        ) {
+                          <button
+                            [class]="
+                              target.id === selectedTargetId()
+                                ? 'border-primary rounded-lg border-2 px-5 py-2.5 text-sm font-medium shadow transition-transform'
+                                : 'border-border rounded-lg border-2 px-5 py-2.5 text-sm font-medium transition-transform hover:scale-105 hover:shadow'
+                            "
+                            (click)="selectedTargetId.set(target.id)"
+                          >
+                            {{ target.name }}
+                          </button>
+                        }
+                      </div>
+                    </div>
+
+                    <!-- Guard guess -->
+                    @if (isGuardPlayed()) {
+                      <div class="mb-3">
+                        <h3
+                          class="text-muted-foreground mb-2 text-sm font-medium"
+                        >
+                          Guess Card
+                        </h3>
+                        <div class="grid grid-cols-4 gap-3">
+                          @for (
+                            option of service.guardGuessOptions();
+                            track option.type
+                          ) {
+                            <button
+                              [class]="
+                                option.type === selectedGuess()
+                                  ? 'border-primary rounded-lg border-2 px-3 py-2 text-sm font-medium shadow transition-transform'
+                                  : 'border-border rounded-lg border-2 px-3 py-2 text-sm font-medium transition-transform hover:scale-105 hover:shadow'
+                              "
+                              (click)="selectedGuess.set(option.type)"
+                            >
+                              {{ option.name }} ({{ option.value }})
+                            </button>
+                          }
+                        </div>
+                      </div>
+                    }
+
+                    <!-- Confirm target -->
+                    @if (canConfirmTarget()) {
+                      <button scButton class="w-full" (click)="confirmTarget()">
+                        Confirm Target
+                      </button>
+                    }
+                  }
+                </app-player-hand>
+              </div>
             </div>
-          </div>
+          }
+
+          <!-- Resolve phase (Priest reveal, human only) -->
+          @if (service.phase() === 'resolve' && service.isHumanTurn()) {
+            <button scButton class="w-full" (click)="service.dismissReveal()">
+              Dismiss
+            </button>
+          }
+
+          <!-- Round over -->
+          @if (service.phase() === 'round-over') {
+            <button scButton class="w-full" (click)="service.startRound()">
+              Next Round
+            </button>
+          }
+
+          <!-- Game over -->
+          @if (service.phase() === 'game-over') {
+            <button scButton class="w-full" (click)="service.resetGame()">
+              New Game
+            </button>
+          }
         </div>
 
         <!-- Right: Log (desktop only) -->
@@ -187,7 +247,7 @@ import { PlayerHand } from './player-hand';
               <h3 scCardTitle>Game Log</h3>
             </div>
             <div scCardBody>
-              <app-game-log [log]="gameLog" />
+              <app-game-log [log]="service.gameLog()" />
             </div>
           </div>
         </div>
@@ -201,155 +261,171 @@ import { PlayerHand } from './player-hand';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LoveLetterPage {
-  readonly youPlayerId = 1;
-  readonly activePlayerId = 1;
-  readonly selectedIndex: number | null = 0;
+  protected readonly service = inject(LoveLetterService);
+  private readonly destroyRef = inject(DestroyRef);
 
-  readonly gameLog: string[] = [
-    '--- Round 1 ---',
-    'Player 1 played Priest',
-    "Player 1 looked at Player 4's hand",
-    'Player 2 played Handmaid',
-    'Player 2 is protected until next turn',
-    'Player 3 played Guard',
-    'Player 3 guessed wrong for Player 2',
-    'Player 4 played Guard',
-    "Player 4 guessed Player 3's Baron correctly!",
-  ];
+  readonly selectedIndex = signal<number | null>(null);
+  readonly selectedTargetId = signal<number | null>(null);
+  readonly selectedGuess = signal<CardType | null>(null);
 
-  readonly handCards: Card[] = [
-    {
-      type: CardType.Guard,
-      value: 1,
-      name: 'Guard',
-      description:
-        "Guess a player's card (not Guard). If correct, they are eliminated.",
-    },
-    {
-      type: CardType.Prince,
-      value: 5,
-      name: 'Prince',
-      description:
-        'Choose a player (including yourself) to discard and draw a new card.',
-    },
-  ];
+  private aiTimeoutId: ReturnType<typeof setTimeout> | null = null;
 
-  readonly players: Player[] = [
-    {
-      id: 1,
-      name: 'Player 1',
-      hand: [
-        {
-          type: CardType.Guard,
-          value: 1,
-          name: 'Guard',
-          description: '',
-        },
-        {
-          type: CardType.Prince,
-          value: 5,
-          name: 'Prince',
-          description: '',
-        },
-      ],
-      isEliminated: false,
-      isProtected: false,
-      tokens: 3,
-      discardPile: [
-        {
-          type: CardType.Guard,
-          value: 1,
-          name: 'Guard',
-          description: '',
-          reason: 'played',
-        },
-        {
-          type: CardType.Priest,
-          value: 2,
-          name: 'Priest',
-          description: '',
-          reason: 'played',
-        },
-        {
-          type: CardType.Baron,
-          value: 3,
-          name: 'Baron',
-          description: '',
-          reason: 'forced',
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Player 2',
-      hand: [
-        {
-          type: CardType.Handmaid,
-          value: 4,
-          name: 'Handmaid',
-          description: '',
-        },
-      ],
-      isEliminated: false,
-      isProtected: true,
-      tokens: 1,
-      discardPile: [
-        {
-          type: CardType.Handmaid,
-          value: 4,
-          name: 'Handmaid',
-          description: '',
-          reason: 'played',
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: 'Player 3',
-      hand: [],
-      isEliminated: true,
-      isProtected: false,
-      tokens: 1,
-      discardPile: [
-        {
-          type: CardType.Guard,
-          value: 1,
-          name: 'Guard',
-          description: '',
-          reason: 'played',
-        },
-        {
-          type: CardType.Princess,
-          value: 8,
-          name: 'Princess',
-          description: '',
-          reason: 'forced',
-        },
-      ],
-    },
-    {
-      id: 4,
-      name: 'Player 4',
-      hand: [
-        {
-          type: CardType.King,
-          value: 6,
-          name: 'King',
-          description: '',
-        },
-      ],
-      isEliminated: false,
-      isProtected: false,
-      tokens: 0,
-      discardPile: [
-        {
-          type: CardType.Guard,
-          value: 1,
-          name: 'Guard',
-          description: '',
-          reason: 'played',
-        },
-      ],
-    },
-  ];
+  readonly humanHand = computed(() => {
+    const player = this.service.currentPlayer();
+    if (!player || player.id !== 0) return [];
+    return player.hand;
+  });
+
+  readonly showHand = computed(() => {
+    const phase = this.service.phase();
+    const isHuman = this.service.isHumanTurn();
+    return isHuman && (phase === 'play' || phase === 'target');
+  });
+
+  readonly isGuardPlayed = computed(() => {
+    const player = this.service.currentPlayer();
+    if (!player) return false;
+    const lastPlayed = player.discardPile[player.discardPile.length - 1];
+    return lastPlayed?.type === CardType.Guard;
+  });
+
+  readonly canConfirmTarget = computed(() => {
+    const targetId = this.selectedTargetId();
+    if (targetId === null) return false;
+    if (this.isGuardPlayed()) {
+      return this.selectedGuess() !== null;
+    }
+    return true;
+  });
+
+  constructor() {
+    // AI orchestration effect
+    effect(() => {
+      const phase = this.service.phase();
+      const isHuman = this.service.isHumanTurn();
+
+      if (
+        isHuman ||
+        phase === 'setup' ||
+        phase === 'round-over' ||
+        phase === 'game-over'
+      ) {
+        return;
+      }
+
+      this.scheduleAi(phase);
+    });
+
+    this.destroyRef.onDestroy(() => this.clearAiTimeout());
+  }
+
+  onCardSelected(index: number): void {
+    if (this.service.phase() !== 'play') return;
+    this.selectedIndex.set(index);
+    const card = this.humanHand()[index];
+    if (card) {
+      this.service.selectCard(card);
+    }
+  }
+
+  onPlayCard(): void {
+    this.service.playSelectedCard();
+    this.selectedIndex.set(null);
+    this.selectedTargetId.set(null);
+    this.selectedGuess.set(null);
+  }
+
+  confirmTarget(): void {
+    const targetId = this.selectedTargetId();
+    if (targetId === null) return;
+
+    const target = this.service.players().find((p) => p.id === targetId);
+    if (!target) return;
+
+    const guess = this.isGuardPlayed()
+      ? (this.selectedGuess() ?? undefined)
+      : undefined;
+    this.service.selectTarget(target, guess);
+
+    this.selectedTargetId.set(null);
+    this.selectedGuess.set(null);
+  }
+
+  private scheduleAi(phase: string): void {
+    this.clearAiTimeout();
+    this.aiTimeoutId = setTimeout(() => {
+      switch (phase) {
+        case 'draw':
+          this.aiDraw();
+          break;
+        case 'play':
+          this.aiPlay();
+          break;
+        case 'target':
+          this.aiSelectTarget();
+          break;
+        case 'resolve':
+          this.aiDismiss();
+          break;
+      }
+    }, AI_DELAY);
+  }
+
+  private aiDraw(): void {
+    this.service.confirmTurnStart();
+  }
+
+  private aiPlay(): void {
+    const player = this.service.currentPlayer();
+    if (!player) return;
+
+    // Must play Countess rule
+    if (this.service.mustPlayCountess()) {
+      const countess = player.hand.find((c) => c.type === CardType.Countess);
+      if (countess) {
+        this.service.selectCard(countess);
+        this.service.playSelectedCard();
+        return;
+      }
+    }
+
+    // Play lowest value card (preserve high cards)
+    const sorted = [...player.hand].sort((a, b) => a.value - b.value);
+    const card = sorted[0];
+    if (card) {
+      this.service.selectCard(card);
+      this.service.playSelectedCard();
+    }
+  }
+
+  private aiSelectTarget(): void {
+    const targets = this.service.availableTargets();
+    if (targets.length === 0) return;
+
+    const target = targets[Math.floor(Math.random() * targets.length)];
+    const player = this.service.currentPlayer();
+    if (!player) return;
+
+    const lastPlayed = player.discardPile[player.discardPile.length - 1];
+
+    if (lastPlayed?.type === CardType.Guard) {
+      const guessOptions = this.service.guardGuessOptions();
+      const guess =
+        guessOptions[Math.floor(Math.random() * guessOptions.length)];
+      this.service.selectTarget(target, guess.type);
+    } else {
+      this.service.selectTarget(target);
+    }
+  }
+
+  private aiDismiss(): void {
+    this.service.dismissReveal();
+  }
+
+  private clearAiTimeout(): void {
+    if (this.aiTimeoutId !== null) {
+      clearTimeout(this.aiTimeoutId);
+      this.aiTimeoutId = null;
+    }
+  }
 }
