@@ -15,9 +15,11 @@ import { SC_FIELD } from './field';
 @Component({
   selector: '[scFieldError]',
   template: `
-    @if (errors().length) {
-      <ul>
-        @for (error of errors(); track error.kind) {
+    @if (errors().length === 1) {
+      {{ errors()[0].message }}
+    } @else if (errors().length > 1) {
+      <ul class="ml-4 flex list-disc flex-col gap-1">
+        @for (error of errors(); track error.message) {
           <li>{{ error.message }}</li>
         }
       </ul>
@@ -26,9 +28,11 @@ import { SC_FIELD } from './field';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
+    role: 'alert',
     'data-slot': 'field-error',
     '[attr.id]': 'id()',
     '[class]': 'class()',
+    '[hidden]': '!errors().length',
   },
 })
 export class ScFieldError {
