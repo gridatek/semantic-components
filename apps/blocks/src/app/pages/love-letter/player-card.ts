@@ -58,7 +58,7 @@ import { Player } from './love-letter.types';
             </span>
           </span>
           <div class="min-w-0 flex-1">
-            <!-- Row 1: Name + game-level badges -->
+            <!-- Name -->
             <div class="flex items-center gap-1.5">
               @if (isLeader()) {
                 <svg siCrownIcon class="size-4 text-yellow-500"></svg>
@@ -67,29 +67,26 @@ import { Player } from './love-letter.types';
               @if (isYou()) {
                 <span scBadge variant="outline" class="text-[10px]">You</span>
               }
+            </div>
+            <!-- All states as badges -->
+            <div class="flex flex-wrap items-center gap-1 pt-0.5">
+              <!-- Game-level states -->
               @if (isGameWinner()) {
                 <span scBadge variant="default" class="text-[10px]">
                   <svg siTrophyIcon class="mr-0.5 size-3"></svg>
-                  Winner
+                  Game Winner
+                </span>
+              } @else {
+                <span scBadge variant="secondary" class="text-[10px]">
+                  <svg siCircleDotIcon class="mr-0.5 size-3"></svg>
+                  In Game
                 </span>
               }
-            </div>
-            <!-- Row 2: Round-level state + card count -->
-            <div class="flex items-center gap-1">
+              <!-- Round-level states -->
               @if (player().isEliminated) {
                 <span scBadge variant="destructive" class="text-[10px]">
                   <svg siCircleXIcon class="mr-0.5 size-3"></svg>
-                  Out
-                </span>
-              } @else if (isActive()) {
-                <span scBadge variant="outline" class="text-[10px]">
-                  <svg siSwordIcon class="mr-0.5 size-3"></svg>
-                  Your Turn
-                </span>
-              } @else if (player().isProtected) {
-                <span scBadge variant="secondary" class="text-[10px]">
-                  <svg siShieldIcon class="mr-0.5 size-3"></svg>
-                  Protected
+                  Eliminated
                 </span>
               } @else if (isRoundWinner()) {
                 <span scBadge variant="default" class="text-[10px]">
@@ -102,13 +99,25 @@ import { Player } from './love-letter.types';
                   In Round
                 </span>
               }
-              <span class="text-muted-foreground text-xs">
-                {{ player().hand.length }} card{{
-                  player().hand.length !== 1 ? 's' : ''
-                }}
-                in hand
-              </span>
+              @if (isActive()) {
+                <span scBadge variant="outline" class="text-[10px]">
+                  <svg siSwordIcon class="mr-0.5 size-3"></svg>
+                  Your Turn
+                </span>
+              }
+              @if (player().isProtected) {
+                <span scBadge variant="secondary" class="text-[10px]">
+                  <svg siShieldIcon class="mr-0.5 size-3"></svg>
+                  Protected
+                </span>
+              }
             </div>
+            <span class="text-muted-foreground pt-0.5 text-xs">
+              {{ player().hand.length }} card{{
+                player().hand.length !== 1 ? 's' : ''
+              }}
+              in hand
+            </span>
           </div>
           <span class="flex items-center gap-1 text-sm">
             {{ player().tokens }}/{{ tokensToWin() }}
