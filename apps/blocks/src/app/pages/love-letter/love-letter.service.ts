@@ -24,6 +24,7 @@ export class LoveLetterService {
   readonly message = signal('Welcome to Love Letter!');
   readonly selectedCard = signal<Card | null>(null);
   readonly revealedCard = signal<Card | null>(null);
+  readonly lastPlayedCard = signal<Card | null>(null);
   readonly roundWinnerId = signal<number | null>(null);
   readonly gameWinnerId = signal<number | null>(null);
 
@@ -99,6 +100,7 @@ export class LoveLetterService {
     this.currentPlayerIndex.set(0);
     this.selectedCard.set(null);
     this.revealedCard.set(null);
+    this.lastPlayedCard.set(null);
     this.roundWinnerId.set(null);
     this.addLog(`--- Round ${this.roundNumber()} ---`);
     this.message.set(`Pass the device to ${players[0].name}`);
@@ -134,6 +136,7 @@ export class LoveLetterService {
       discardPile: [...p.discardPile, { ...card, reason: 'played' }],
     }));
 
+    this.lastPlayedCard.set(card);
     this.addLog(`${player.name} played ${card.name}`);
 
     // Handle card effects
@@ -221,6 +224,7 @@ export class LoveLetterService {
     this.roundNumber.set(1);
     this.selectedCard.set(null);
     this.revealedCard.set(null);
+    this.lastPlayedCard.set(null);
     this.roundWinnerId.set(null);
     this.gameWinnerId.set(null);
   }
