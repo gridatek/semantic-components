@@ -8,12 +8,13 @@ import { SC_FIELD } from '../field';
   host: {
     'data-slot': 'native-select',
     '[attr.id]': 'id()',
+    '[attr.aria-describedby]': 'field?.descriptionId() ?? null',
     '[attr.data-size]': 'size()',
     '[class]': 'class()',
   },
 })
 export class ScNativeSelect {
-  private readonly field = inject(SC_FIELD, { optional: true });
+  protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-native-select-');
 
   readonly idInput = input('', { alias: 'id' });

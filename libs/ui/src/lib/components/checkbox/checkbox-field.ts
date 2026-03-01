@@ -7,6 +7,7 @@ import {
   ElementRef,
   inject,
   input,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
@@ -44,6 +45,7 @@ export class ScCheckboxField implements ScCheckboxContext {
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly id = input(inject(_IdGenerator).getId('sc-checkbox-field-'));
+  readonly descriptionId = signal<string | undefined>(undefined);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;

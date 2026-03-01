@@ -7,6 +7,7 @@ import {
   ElementRef,
   inject,
   input,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
@@ -48,6 +49,7 @@ export class ScSwitchField implements ScSwitchContext {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-switch-field-'));
+  readonly descriptionId = signal<string | undefined>(undefined);
 
   readonly checked = computed(() => this.switchInput()?.checked() ?? false);
   readonly disabled = computed(

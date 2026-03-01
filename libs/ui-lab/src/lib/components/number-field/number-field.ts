@@ -8,6 +8,7 @@ import {
   input,
   model,
   output,
+  signal,
 } from '@angular/core';
 import { SC_FIELD } from '@semantic-components/ui';
 
@@ -33,6 +34,7 @@ export class ScNumberField {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-number-field-'));
+  readonly descriptionId = signal<string | undefined>(undefined);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;

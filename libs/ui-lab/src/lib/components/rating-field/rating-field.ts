@@ -8,6 +8,7 @@ import {
   InjectionToken,
   input,
   model,
+  signal,
 } from '@angular/core';
 import { cn, SC_FIELD } from '@semantic-components/ui';
 import { ScRatingFieldItem } from './rating-item';
@@ -37,6 +38,7 @@ export class ScRatingField {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-rating-field-'));
+  readonly descriptionId = signal<string | undefined>(undefined);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;

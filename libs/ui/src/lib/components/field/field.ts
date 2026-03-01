@@ -8,6 +8,7 @@ import {
   InjectionToken,
   input,
   signal,
+  WritableSignal,
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -35,7 +36,7 @@ export type ScFieldVariants = VariantProps<typeof fieldVariants>;
 
 export interface ScFieldContext {
   id: () => string;
-  descriptionId: ReturnType<typeof signal<string | undefined>>;
+  descriptionId: WritableSignal<string | undefined>;
 }
 
 export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');

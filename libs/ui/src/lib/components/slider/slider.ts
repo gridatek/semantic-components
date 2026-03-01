@@ -16,12 +16,13 @@ import { SC_FIELD } from '../field';
     type: 'range',
     'data-slot': 'slider',
     '[attr.id]': 'id()',
+    '[attr.aria-describedby]': 'field?.descriptionId() ?? null',
     '[class]': 'class()',
     '(input)': 'onInput()',
   },
 })
 export class ScSlider {
-  private readonly field = inject(SC_FIELD, { optional: true });
+  protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-slider-');
   private readonly el = inject<ElementRef<HTMLInputElement>>(ElementRef);
 

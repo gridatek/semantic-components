@@ -16,12 +16,13 @@ import { SC_FIELD } from '../field';
     '[attr.data-slot]': 'dataSlot()',
     '[attr.id]': 'id()',
     '[attr.aria-invalid]': 'invalid() || null',
+    '[attr.aria-describedby]': 'field?.descriptionId() ?? null',
     '[attr.disabled]': 'disabled() || null',
     '[class]': 'class()',
   },
 })
 export class ScInput {
-  private readonly field = inject(SC_FIELD, { optional: true });
+  protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly formField = inject(FormField, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-input-');
 
