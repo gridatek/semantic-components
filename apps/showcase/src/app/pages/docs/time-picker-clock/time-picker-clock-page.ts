@@ -4,7 +4,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { HoursTimePickerClockDemoContainer } from './demos/hours-time-picker-clock-demo-container';
-import { MinutesTimePickerClockDemoContainer } from './demos/minutes-time-picker-clock-demo-container';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
@@ -14,7 +13,6 @@ import { ScHeading } from '@semantic-components/ui';
   selector: 'app-time-picker-clock-page',
   imports: [
     HoursTimePickerClockDemoContainer,
-    MinutesTimePickerClockDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -22,7 +20,7 @@ import { ScHeading } from '@semantic-components/ui';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>TimePickerClock</h1>
+        <h1 scHeading>Time Picker Clock</h1>
         <p class="text-muted-foreground">
           A visual clock interface for selecting hours or minutes.
         </p>
@@ -32,7 +30,6 @@ import { ScHeading } from '@semantic-components/ui';
       <section class="space-y-8">
         <h2 scHeading toc>Examples</h2>
         <app-hours-time-picker-clock-demo-container />
-        <app-minutes-time-picker-clock-demo-container />
       </section>
     </div>
   `,

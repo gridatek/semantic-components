@@ -103,7 +103,12 @@ import type {
       </div>
 
       <!-- Canvas Container -->
-      <div class="relative overflow-hidden" [style.cursor]="getCursor()">
+      <div
+        class="relative overflow-hidden"
+        [style.width.px]="canvasWidth()"
+        [style.height.px]="canvasHeight()"
+        [style.cursor]="getCursor()"
+      >
         <canvas
           #imageCanvas
           class="absolute top-0 left-0"

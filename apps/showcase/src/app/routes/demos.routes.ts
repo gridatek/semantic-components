@@ -3809,13 +3809,6 @@ export const demosRoutes: Route[] = [
             (m) => m.HoursTimePickerClockDemo,
           ),
       },
-      {
-        path: 'minutes-time-picker-clock-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-clock/demos/minutes-time-picker-clock-demo').then(
-            (m) => m.MinutesTimePickerClockDemo,
-          ),
-      },
     ],
   },
   {

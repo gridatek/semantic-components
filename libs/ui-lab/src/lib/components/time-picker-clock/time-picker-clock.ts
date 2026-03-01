@@ -2,9 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
   inject,
   input,
+  output,
   signal,
+  viewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
@@ -14,7 +17,20 @@ import { SC_TIME_PICKER } from '@semantic-components/ui';
   selector: '[scTimePickerClock]',
   template: `
     <div class="relative">
-      <svg viewBox="0 0 200 200" class="size-48">
+      <svg
+        #clockSvg
+        viewBox="0 0 200 200"
+        class="size-48"
+        [class.cursor-grab]="!isDragging()"
+        [class.cursor-grabbing]="isDragging()"
+        (mousedown)="onPointerDown($event)"
+        (mousemove)="onPointerMove($event)"
+        (mouseup)="onPointerUp()"
+        (mouseleave)="onPointerUp()"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onPointerUp()"
+      >
         <!-- Clock face -->
         <circle
           cx="100"
@@ -98,8 +114,13 @@ export class ScTimePickerClock {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly mode = input<'hours' | 'minutes'>('hours');
+  readonly valueSelected = output<number>();
 
   readonly hoveredValue = signal<number | null>(null);
+  readonly isDragging = signal(false);
+
+  private readonly clockSvg =
+    viewChild.required<ElementRef<SVGSVGElement>>('clockSvg');
 
   protected readonly class = computed(() =>
     cn('inline-block', this.classInput()),
@@ -186,6 +207,75 @@ export class ScTimePickerClock {
       this.timePicker.setHours(hours);
     } else {
       this.timePicker.setMinutes(value);
+    }
+  }
+
+  protected onPointerDown(event: MouseEvent): void {
+    this.isDragging.set(true);
+    this.selectValueFromPosition(event.clientX, event.clientY);
+  }
+
+  protected onPointerMove(event: MouseEvent): void {
+    if (!this.isDragging()) return;
+    this.selectValueFromPosition(event.clientX, event.clientY);
+  }
+
+  protected onPointerUp(): void {
+    if (this.isDragging()) {
+      this.isDragging.set(false);
+      this.emitValueSelected();
+    }
+  }
+
+  protected onTouchStart(event: TouchEvent): void {
+    event.preventDefault();
+    this.isDragging.set(true);
+    const touch = event.touches[0];
+    this.selectValueFromPosition(touch.clientX, touch.clientY);
+  }
+
+  protected onTouchMove(event: TouchEvent): void {
+    if (!this.isDragging()) return;
+    event.preventDefault();
+    const touch = event.touches[0];
+    this.selectValueFromPosition(touch.clientX, touch.clientY);
+  }
+
+  private selectValueFromPosition(clientX: number, clientY: number): void {
+    const svg = this.clockSvg().nativeElement;
+    const rect = svg.getBoundingClientRect();
+
+    // Convert client coordinates to SVG viewBox coordinates (0-200)
+    const svgX = ((clientX - rect.left) / rect.width) * 200;
+    const svgY = ((clientY - rect.top) / rect.height) * 200;
+
+    // Calculate angle from center (100, 100), with 12 o'clock as 0°
+    const dx = svgX - 100;
+    const dy = svgY - 100;
+    let angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+    if (angle < 0) angle += 360;
+
+    if (this.mode() === 'hours') {
+      // 12 sectors of 30° each
+      let sector = Math.round(angle / 30) % 12;
+      const value =
+        this.timePicker.format() === '12h'
+          ? sector === 0
+            ? 12
+            : sector
+          : sector;
+      this.selectValue(value);
+    } else {
+      // Snap to nearest 5-minute mark (12 sectors of 30° each)
+      const minute = (Math.round(angle / 30) % 12) * 5;
+      this.selectValue(minute);
+    }
+  }
+
+  private emitValueSelected(): void {
+    const val = this.selectedValue();
+    if (val !== null) {
+      this.valueSelected.emit(val);
     }
   }
 }
