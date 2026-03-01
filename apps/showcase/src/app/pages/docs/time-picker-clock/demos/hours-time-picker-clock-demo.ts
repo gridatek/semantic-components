@@ -70,7 +70,7 @@ export class HoursTimePickerClockDemo {
 
   onValueSelected(): void {
     if (this.clockMode() === 'hours') {
-      this.clockMode.set('minutes');
+      setTimeout(() => this.clockMode.set('minutes'), 300);
     }
   }
 }
