@@ -52,9 +52,13 @@ import { PlayerHand } from './player-hand';
         <!-- Center: Game Area -->
         <div class="flex flex-1 flex-col justify-between p-4">
           <!-- Message -->
-          <p class="mb-4 text-left font-semibold">
-            Player 1, choose a card to play
-          </p>
+          <div scCard class="mb-4">
+            <div scCardBody>
+              <p class="text-center font-semibold">
+                Player 1, choose a card to play
+              </p>
+            </div>
+          </div>
 
           <!-- Mobile-only log -->
           <div scCard class="mb-4 lg:hidden">
