@@ -12,10 +12,10 @@ import { cn } from '@semantic-components/ui';
   selector: 'app-game-log',
   template: `
     <div
-      class="text-muted-foreground max-h-24 space-y-1 overflow-y-auto text-left text-xs lg:max-h-48"
+      class="text-muted-foreground max-h-24 divide-y overflow-y-auto text-left text-xs lg:max-h-48"
     >
       @for (entry of reversedLog(); track $index) {
-        <p>{{ entry }}</p>
+        <p class="py-1">{{ entry }}</p>
       }
     </div>
   `,
