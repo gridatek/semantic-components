@@ -38,6 +38,8 @@ import { Card } from './love-letter.types';
       }
     </div>
 
+    <ng-content />
+
     @if (selectedIndex() !== null) {
       <button
         scButton

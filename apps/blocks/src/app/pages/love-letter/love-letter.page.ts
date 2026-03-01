@@ -43,71 +43,71 @@ import { PlayerHand } from './player-hand';
           </div>
         </div>
 
-        <!-- Select Target Player -->
-        <div class="mb-4">
-          <h3 class="text-muted-foreground mb-2 text-sm font-medium">
-            Select Target Player
-          </h3>
-          <div class="flex justify-center gap-2">
-            <button
-              class="border-primary rounded-md border-2 px-4 py-1.5 text-sm shadow"
-            >
-              Player 2
-            </button>
-            <button
-              class="border-border rounded-md border-2 px-4 py-1.5 text-sm"
-            >
-              Player 4
-            </button>
-          </div>
-        </div>
-
-        <!-- Guess Card (Guard only) -->
-        <div class="mb-4">
-          <h3 class="text-muted-foreground mb-2 text-sm font-medium">
-            Guess Card (Guard only)
-          </h3>
-          <div class="grid grid-cols-4 gap-2">
-            <button
-              class="border-primary rounded-md border-2 px-2 py-1.5 text-xs shadow"
-            >
-              Priest (2)
-            </button>
-            <button
-              class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
-            >
-              Baron (3)
-            </button>
-            <button
-              class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
-            >
-              Handmaid (4)
-            </button>
-            <button
-              class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
-            >
-              Prince (5)
-            </button>
-            <button
-              class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
-            >
-              King (6)
-            </button>
-            <button
-              class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
-            >
-              Countess (7)
-            </button>
-            <button
-              class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
-            >
-              Princess (8)
-            </button>
-          </div>
-        </div>
-
         <!-- Hand Cards -->
-        <app-player-hand [cards]="handCards" [selectedIndex]="selectedIndex" />
+        <app-player-hand [cards]="handCards" [selectedIndex]="selectedIndex">
+          <!-- Select Target Player -->
+          <div class="mb-3">
+            <h3 class="text-muted-foreground mb-2 text-sm font-medium">
+              Select Target Player
+            </h3>
+            <div class="flex justify-center gap-2">
+              <button
+                class="border-primary rounded-md border-2 px-4 py-1.5 text-sm shadow"
+              >
+                Player 2
+              </button>
+              <button
+                class="border-border rounded-md border-2 px-4 py-1.5 text-sm"
+              >
+                Player 4
+              </button>
+            </div>
+          </div>
+
+          <!-- Guess Card (Guard only) -->
+          <div class="mb-3">
+            <h3 class="text-muted-foreground mb-2 text-sm font-medium">
+              Guess Card (Guard only)
+            </h3>
+            <div class="grid grid-cols-4 gap-2">
+              <button
+                class="border-primary rounded-md border-2 px-2 py-1.5 text-xs shadow"
+              >
+                Priest (2)
+              </button>
+              <button
+                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+              >
+                Baron (3)
+              </button>
+              <button
+                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+              >
+                Handmaid (4)
+              </button>
+              <button
+                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+              >
+                Prince (5)
+              </button>
+              <button
+                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+              >
+                King (6)
+              </button>
+              <button
+                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+              >
+                Countess (7)
+              </button>
+              <button
+                class="border-border rounded-md border-2 px-2 py-1.5 text-xs"
+              >
+                Princess (8)
+              </button>
+            </div>
+          </div>
+        </app-player-hand>
       </div>
     </div>
   `,
