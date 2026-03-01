@@ -60,33 +60,40 @@ import { PlayerHand } from './player-hand';
           <app-game-log class="mb-4 lg:hidden" [log]="gameLog" />
 
           <!-- Card Reveal -->
-          <div class="mb-4 flex justify-center gap-4">
-            <!-- Deck (click to draw) -->
-            <button
-              class="flex h-36 w-24 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md transition-transform hover:scale-105 hover:shadow-lg"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                stroke-width="1.5"
-                class="size-12"
-              >
-                <path
-                  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
-                />
-              </svg>
-              <span class="mt-2 text-lg font-bold text-white">9</span>
-            </button>
+          <div scCard class="mb-4">
+            <div scCardHeader>
+              <h3 scCardTitle>Table</h3>
+            </div>
+            <div scCardBody>
+              <div class="flex justify-center gap-4">
+                <!-- Deck (click to draw) -->
+                <button
+                  class="flex h-36 w-24 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md transition-transform hover:scale-105 hover:shadow-lg"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="1.5"
+                    class="size-12"
+                  >
+                    <path
+                      d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                    />
+                  </svg>
+                  <span class="mt-2 text-lg font-bold text-white">9</span>
+                </button>
 
-            <!-- Revealed card -->
-            <app-game-card
-              class="border-border shadow-md"
-              name="Handmaid"
-              [value]="4"
-              description="Protection until your next turn"
-            />
+                <!-- Revealed card -->
+                <app-game-card
+                  class="border-border shadow-md"
+                  name="Handmaid"
+                  [value]="4"
+                  description="Protection until your next turn"
+                />
+              </div>
+            </div>
           </div>
 
           <!-- Hand Cards -->
