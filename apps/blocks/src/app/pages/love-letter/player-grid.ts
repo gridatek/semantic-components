@@ -19,6 +19,7 @@ import { PlayerCard } from './player-card';
       <app-player-card
         [player]="player"
         [isActive]="player.id === activePlayerId()"
+        [isLeader]="player.id === leaderId()"
       />
     }
   `,
@@ -36,4 +37,21 @@ export class PlayerGrid {
 
   readonly players = input.required<Player[]>();
   readonly activePlayerId = input<number>();
+
+  protected readonly leaderId = computed(() => {
+    const players = this.players();
+    let maxTokens = 0;
+    let leaderId: number | undefined;
+
+    for (const player of players) {
+      if (player.tokens > maxTokens) {
+        maxTokens = player.tokens;
+        leaderId = player.id;
+      } else if (player.tokens === maxTokens) {
+        leaderId = undefined;
+      }
+    }
+
+    return leaderId;
+  });
 }
