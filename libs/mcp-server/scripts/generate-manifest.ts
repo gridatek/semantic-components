@@ -1,11 +1,11 @@
 import {
+  existsSync,
+  mkdirSync,
   readFileSync,
   readdirSync,
-  existsSync,
   writeFileSync,
-  statSync,
 } from 'fs';
-import { join, resolve, basename } from 'path';
+import { join, resolve } from 'path';
 
 interface ComponentEntry {
   name: string;
@@ -161,14 +161,10 @@ function main() {
     guides,
   };
 
-  const outPath = join(
-    ROOT,
-    'libs',
-    'mcp-server',
-    'src',
-    'data',
-    'manifest.json',
-  );
+  const outDir = join(ROOT, 'libs', 'mcp-server', 'src', 'data');
+  mkdirSync(outDir, { recursive: true });
+
+  const outPath = join(outDir, 'manifest.json');
   writeFileSync(outPath, JSON.stringify(manifest, null, 2));
 
   // Print summary
