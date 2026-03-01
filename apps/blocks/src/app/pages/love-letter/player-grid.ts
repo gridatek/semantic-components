@@ -20,6 +20,8 @@ import { PlayerCard } from './player-card';
         [player]="player"
         [isActive]="player.id === activePlayerId()"
         [isLeader]="player.id === leaderId()"
+        [isRoundWinner]="player.id === roundWinnerId()"
+        [isGameWinner]="player.id === gameWinnerId()"
       />
     }
   `,
@@ -37,6 +39,8 @@ export class PlayerGrid {
 
   readonly players = input.required<Player[]>();
   readonly activePlayerId = input<number>();
+  readonly roundWinnerId = input<number>();
+  readonly gameWinnerId = input<number>();
 
   protected readonly leaderId = computed(() => {
     const players = this.players();

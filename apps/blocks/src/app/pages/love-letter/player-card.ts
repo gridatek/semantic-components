@@ -17,10 +17,13 @@ import {
   ScSeparator,
 } from '@semantic-components/ui';
 import {
+  SiAwardIcon,
   SiCircleXIcon,
   SiCrownIcon,
   SiHeartIcon,
   SiShieldIcon,
+  SiSwordIcon,
+  SiTrophyIcon,
 } from '@semantic-icons/lucide-icons';
 
 import { Player } from './love-letter.types';
@@ -39,6 +42,9 @@ import { Player } from './love-letter.types';
     SiShieldIcon,
     SiCircleXIcon,
     SiCrownIcon,
+    SiSwordIcon,
+    SiAwardIcon,
+    SiTrophyIcon,
   ],
   template: `
     <div scCard size="sm" [class]="cardClass()">
@@ -55,24 +61,46 @@ import { Player } from './love-letter.types';
                 <svg siCrownIcon class="size-4 text-yellow-500"></svg>
               }
               <span class="text-sm font-semibold">{{ player().name }}</span>
+
+              <!-- Game-level: Winner -->
+              @if (isGameWinner()) {
+                <span scBadge variant="default" class="text-[10px]">
+                  <svg siTrophyIcon class="mr-0.5 size-3"></svg>
+                  Winner
+                </span>
+              }
+            </div>
+            <div class="flex items-center gap-1">
+              <!-- Round-level badges -->
               @if (player().isEliminated) {
                 <span scBadge variant="destructive" class="text-[10px]">
                   <svg siCircleXIcon class="mr-0.5 size-3"></svg>
                   Out
+                </span>
+              } @else if (isActive()) {
+                <span scBadge variant="outline" class="text-[10px]">
+                  <svg siSwordIcon class="mr-0.5 size-3"></svg>
+                  Your Turn
                 </span>
               } @else if (player().isProtected) {
                 <span scBadge variant="secondary" class="text-[10px]">
                   <svg siShieldIcon class="mr-0.5 size-3"></svg>
                   Protected
                 </span>
+              } @else if (isRoundWinner()) {
+                <span scBadge variant="default" class="text-[10px]">
+                  <svg siAwardIcon class="mr-0.5 size-3"></svg>
+                  Round Winner
+                </span>
               }
+
+              <span class="text-muted-foreground text-xs">
+                {{ player().hand.length }} card{{
+                  player().hand.length !== 1 ? 's' : ''
+                }}
+                in hand
+              </span>
             </div>
-            <span class="text-muted-foreground text-xs">
-              {{ player().hand.length }} card{{
-                player().hand.length !== 1 ? 's' : ''
-              }}
-              in hand
-            </span>
           </div>
           <span class="flex items-center gap-1 text-sm">
             {{ player().tokens }}/{{ tokensToWin() }}
@@ -113,9 +141,15 @@ export class PlayerCard {
   protected readonly class = computed(() => cn('block', this.classInput()));
 
   readonly player = input.required<Player>();
-  readonly isActive = input(false);
-  readonly isLeader = input(false);
   readonly tokensToWin = input(4);
+
+  // Round-level states
+  readonly isActive = input(false);
+  readonly isRoundWinner = input(false);
+
+  // Game-level states
+  readonly isLeader = input(false);
+  readonly isGameWinner = input(false);
 
   private readonly avatarColors = [
     'bg-purple-500 text-white',
@@ -125,8 +159,14 @@ export class PlayerCard {
   ];
 
   protected readonly cardClass = computed(() => {
+    if (this.isGameWinner()) {
+      return 'border-yellow-400 border-2 shadow-lg bg-yellow-50/50';
+    }
     if (this.player().isEliminated) {
       return 'opacity-40';
+    }
+    if (this.isRoundWinner()) {
+      return 'border-green-400 border-2 shadow';
     }
     if (this.isActive()) {
       return 'border-primary border-2 shadow';

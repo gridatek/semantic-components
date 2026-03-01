@@ -87,7 +87,20 @@ export default class LoveLetterPage {
     {
       id: 1,
       name: 'Player 1',
-      hand: [],
+      hand: [
+        {
+          type: CardType.Guard,
+          value: 1,
+          name: 'Guard',
+          description: '',
+        },
+        {
+          type: CardType.Prince,
+          value: 5,
+          name: 'Prince',
+          description: '',
+        },
+      ],
       isEliminated: false,
       isProtected: false,
       tokens: 3,
@@ -111,7 +124,14 @@ export default class LoveLetterPage {
     {
       id: 2,
       name: 'Player 2',
-      hand: [],
+      hand: [
+        {
+          type: CardType.Handmaid,
+          value: 4,
+          name: 'Handmaid',
+          description: '',
+        },
+      ],
       isEliminated: false,
       isProtected: true,
       tokens: 1,
@@ -145,7 +165,14 @@ export default class LoveLetterPage {
     {
       id: 4,
       name: 'Player 4',
-      hand: [],
+      hand: [
+        {
+          type: CardType.King,
+          value: 6,
+          name: 'King',
+          description: '',
+        },
+      ],
       isEliminated: false,
       isProtected: false,
       tokens: 0,
