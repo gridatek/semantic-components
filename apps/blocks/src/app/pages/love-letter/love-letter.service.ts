@@ -397,6 +397,10 @@ export class LoveLetterService {
       ...p,
       isEliminated: true,
       hand: [],
+      discardPile: [
+        ...p.discardPile,
+        ...p.hand.map((c) => ({ ...c, reason: 'forced' as const })),
+      ],
     }));
   }
 
