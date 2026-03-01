@@ -146,11 +146,12 @@ const AI_DELAY = 800;
                 <app-player-hand
                   [cards]="humanHand()"
                   [selectedIndex]="selectedIndex()"
+                  [canPlay]="canPlay()"
                   (cardSelected)="onCardSelected($event)"
                   (playCard)="onPlayCard()"
                 >
-                  <!-- Target selection -->
-                  @if (service.phase() === 'target') {
+                  <!-- Target + guard guess shown inline when a targeting card is selected -->
+                  @if (selectedCardNeedsTarget()) {
                     <div class="mb-3">
                       <h3
                         class="text-muted-foreground mb-2 text-sm font-medium"
@@ -158,10 +159,7 @@ const AI_DELAY = 800;
                         Select Target Player
                       </h3>
                       <div class="flex justify-center gap-3">
-                        @for (
-                          target of service.availableTargets();
-                          track target.id
-                        ) {
+                        @for (target of visibleTargets(); track target.id) {
                           <button
                             [class]="
                               target.id === selectedTargetId()
@@ -176,8 +174,7 @@ const AI_DELAY = 800;
                       </div>
                     </div>
 
-                    <!-- Guard guess -->
-                    @if (isGuardPlayed()) {
+                    @if (isGuardSelected()) {
                       <div class="mb-3">
                         <h3
                           class="text-muted-foreground mb-2 text-sm font-medium"
@@ -202,13 +199,6 @@ const AI_DELAY = 800;
                           }
                         </div>
                       </div>
-                    }
-
-                    <!-- Confirm target -->
-                    @if (canConfirmTarget()) {
-                      <button scButton class="w-full" (click)="confirmTarget()">
-                        Confirm Target
-                      </button>
                     }
                   }
                 </app-player-hand>
@@ -281,22 +271,52 @@ export default class LoveLetterPage {
   readonly showHand = computed(() => {
     const phase = this.service.phase();
     const isHuman = this.service.isHumanTurn();
-    return isHuman && (phase === 'play' || phase === 'target');
+    return isHuman && phase === 'play';
   });
 
-  readonly isGuardPlayed = computed(() => {
-    const player = this.service.currentPlayer();
-    if (!player) return false;
-    const lastPlayed = player.discardPile[player.discardPile.length - 1];
-    return lastPlayed?.type === CardType.Guard;
+  private readonly selectedCardType = computed(() => {
+    const idx = this.selectedIndex();
+    if (idx === null) return null;
+    return this.humanHand()[idx]?.type ?? null;
   });
 
-  readonly canConfirmTarget = computed(() => {
-    const targetId = this.selectedTargetId();
-    if (targetId === null) return false;
-    if (this.isGuardPlayed()) {
-      return this.selectedGuess() !== null;
+  readonly selectedCardNeedsTarget = computed(() => {
+    const type = this.selectedCardType();
+    if (!type) return false;
+    return [
+      CardType.Guard,
+      CardType.Priest,
+      CardType.Baron,
+      CardType.Prince,
+      CardType.King,
+    ].includes(type);
+  });
+
+  readonly isPrinceSelected = computed(
+    () => this.selectedCardType() === CardType.Prince,
+  );
+
+  readonly isGuardSelected = computed(
+    () => this.selectedCardType() === CardType.Guard,
+  );
+
+  readonly visibleTargets = computed(() => {
+    const targets = this.service.availableTargets();
+    if (this.isPrinceSelected()) {
+      const current = this.service.currentPlayer();
+      if (current) {
+        return [current, ...targets];
+      }
     }
+    return targets;
+  });
+
+  readonly canPlay = computed(() => {
+    if (this.selectedIndex() === null) return false;
+    if (!this.selectedCardNeedsTarget()) return true;
+    if (this.visibleTargets().length === 0) return true;
+    if (this.selectedTargetId() === null) return false;
+    if (this.isGuardSelected() && this.selectedGuess() === null) return false;
     return true;
   });
 
@@ -324,6 +344,8 @@ export default class LoveLetterPage {
   onCardSelected(index: number): void {
     if (this.service.phase() !== 'play') return;
     this.selectedIndex.set(index);
+    this.selectedTargetId.set(null);
+    this.selectedGuess.set(null);
     const card = this.humanHand()[index];
     if (card) {
       this.service.selectCard(card);
@@ -331,24 +353,32 @@ export default class LoveLetterPage {
   }
 
   onPlayCard(): void {
-    this.service.playSelectedCard();
+    const needsTarget = this.selectedCardNeedsTarget();
+    const targets = this.service.availableTargets();
+
+    // For targeting cards: require target selection (unless no targets available)
+    if (needsTarget && targets.length > 0) {
+      const targetId = this.selectedTargetId();
+      if (targetId === null) return;
+
+      if (this.isGuardSelected() && this.selectedGuess() === null) return;
+
+      // Play the card (moves to target phase internally)
+      this.service.playSelectedCard();
+
+      // Immediately submit the pre-selected target
+      const target = this.service.players().find((p) => p.id === targetId);
+      if (target) {
+        const guess = this.isGuardSelected()
+          ? (this.selectedGuess() ?? undefined)
+          : undefined;
+        this.service.selectTarget(target, guess);
+      }
+    } else {
+      this.service.playSelectedCard();
+    }
+
     this.selectedIndex.set(null);
-    this.selectedTargetId.set(null);
-    this.selectedGuess.set(null);
-  }
-
-  confirmTarget(): void {
-    const targetId = this.selectedTargetId();
-    if (targetId === null) return;
-
-    const target = this.service.players().find((p) => p.id === targetId);
-    if (!target) return;
-
-    const guess = this.isGuardPlayed()
-      ? (this.selectedGuess() ?? undefined)
-      : undefined;
-    this.service.selectTarget(target, guess);
-
     this.selectedTargetId.set(null);
     this.selectedGuess.set(null);
   }

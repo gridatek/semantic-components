@@ -40,6 +40,7 @@ import { Card } from './love-letter.types';
       <button
         scButton
         class="w-full"
+        [disabled]="!canPlay()"
         (click)="playCard.emit(cards()[selectedIndex()!])"
       >
         Play {{ cards()[selectedIndex()!].name }}
@@ -60,6 +61,7 @@ export class PlayerHand {
 
   readonly cards = input.required<Card[]>();
   readonly selectedIndex = input<number | null>(null);
+  readonly canPlay = input(true);
 
   readonly cardSelected = output<number>();
   readonly playCard = output<Card>();
