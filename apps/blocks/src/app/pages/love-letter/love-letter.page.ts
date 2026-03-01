@@ -33,7 +33,7 @@ import {
           <div scCardHeader class="p-2">
             <div class="flex items-center justify-between">
               <h3 scCardTitle class="text-primary text-sm">Player 1</h3>
-              <span class="text-sm">❤❤</span>
+              <span class="text-sm">3 ❤</span>
             </div>
           </div>
           <div scCardBody class="px-2 pb-2">
