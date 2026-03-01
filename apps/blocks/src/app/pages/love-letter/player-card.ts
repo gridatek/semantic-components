@@ -129,8 +129,8 @@ import { Player } from './love-letter.types';
           </span>
         </div>
       </div>
-      <div scSeparator class="mx-3"></div>
-      <div scCardBody class="px-3 pt-2 pb-3">
+      <div scSeparator class="mx-3 hidden lg:block"></div>
+      <div scCardBody class="hidden px-3 pt-2 pb-3 lg:block">
         <div class="flex flex-wrap gap-1">
           @for (card of player().discardPile; track $index) {
             <span

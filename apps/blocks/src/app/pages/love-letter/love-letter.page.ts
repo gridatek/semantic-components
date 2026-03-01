@@ -50,23 +50,15 @@ import { PlayerHand } from './player-hand';
         </div>
 
         <!-- Center: Game Area -->
-        <div class="flex flex-1 flex-col justify-between overflow-y-auto p-4">
+        <div
+          class="flex flex-1 flex-col justify-between overflow-y-auto p-2 lg:p-4"
+        >
           <!-- Message -->
-          <div scCard class="mb-4">
+          <div scCard size="sm" class="mb-4">
             <div scCardBody>
               <p class="text-center font-semibold">
                 Player 1, choose a card to play
               </p>
-            </div>
-          </div>
-
-          <!-- Mobile-only log -->
-          <div scCard class="mb-4 lg:hidden">
-            <div scCardHeader>
-              <h3 scCardTitle>Game Log</h3>
-            </div>
-            <div scCardBody>
-              <app-game-log [log]="gameLog" />
             </div>
           </div>
 
@@ -79,7 +71,7 @@ import { PlayerHand } from './player-hand';
               <div class="flex justify-center gap-4">
                 <!-- Deck (click to draw) -->
                 <button
-                  class="flex h-36 w-24 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md transition-transform hover:scale-105 hover:shadow-lg"
+                  class="flex h-24 w-18 flex-col items-center justify-center rounded-lg bg-rose-300 shadow-md transition-transform hover:scale-105 hover:shadow-lg lg:h-36 lg:w-24"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,13 +79,15 @@ import { PlayerHand } from './player-hand';
                     fill="none"
                     stroke="white"
                     stroke-width="1.5"
-                    class="size-12"
+                    class="size-8 lg:size-12"
                   >
                     <path
                       d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
                     />
                   </svg>
-                  <span class="mt-2 text-lg font-bold text-white">9</span>
+                  <span class="mt-2 text-base font-bold text-white lg:text-lg">
+                    9
+                  </span>
                 </button>
 
                 <!-- Revealed card -->

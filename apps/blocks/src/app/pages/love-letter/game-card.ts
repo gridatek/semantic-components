@@ -12,7 +12,9 @@ import { cn } from '@semantic-components/ui';
   selector: 'app-game-card',
   template: `
     <span class="text-xs font-semibold">{{ name() }}</span>
-    <span class="text-primary text-3xl font-bold">{{ value() }}</span>
+    <span class="text-primary text-2xl font-bold lg:text-3xl">
+      {{ value() }}
+    </span>
     <span class="text-muted-foreground text-center text-[9px] leading-tight">
       {{ description() }}
     </span>
@@ -27,7 +29,7 @@ export class GameCard {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() =>
     cn(
-      'flex h-36 w-24 flex-col items-center justify-between rounded-lg border-2 p-2',
+      'flex h-24 w-18 flex-col items-center justify-between rounded-lg border-2 p-1.5 lg:h-36 lg:w-24 lg:p-2',
       this.classInput(),
     ),
   );

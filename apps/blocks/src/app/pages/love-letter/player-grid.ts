@@ -36,7 +36,7 @@ export class PlayerGrid {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() =>
     cn(
-      'grid grid-cols-2 gap-2 px-2 py-2 lg:grid-cols-1 lg:gap-1',
+      'grid grid-cols-2 gap-1 px-1 py-1 lg:grid-cols-1 lg:gap-1 lg:px-2 lg:py-2',
       this.classInput(),
     ),
   );
