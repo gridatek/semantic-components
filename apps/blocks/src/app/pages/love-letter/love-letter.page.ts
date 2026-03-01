@@ -124,6 +124,13 @@ export default class LoveLetterPage {
           description: '',
           reason: 'played',
         },
+        {
+          type: CardType.Baron,
+          value: 3,
+          name: 'Baron',
+          description: '',
+          reason: 'forced',
+        },
       ],
     },
     {
@@ -159,9 +166,16 @@ export default class LoveLetterPage {
       tokens: 1,
       discardPile: [
         {
-          type: CardType.Baron,
-          value: 3,
-          name: 'Baron',
+          type: CardType.Guard,
+          value: 1,
+          name: 'Guard',
+          description: '',
+          reason: 'played',
+        },
+        {
+          type: CardType.Princess,
+          value: 8,
+          name: 'Princess',
           description: '',
           reason: 'forced',
         },
