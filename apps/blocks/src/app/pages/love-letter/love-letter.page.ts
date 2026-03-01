@@ -4,18 +4,14 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
-import {
-  ScBadge,
-  ScButton,
-  ScCard,
-  ScCardBody,
-  ScCardHeader,
-  ScCardTitle,
-} from '@semantic-components/ui';
+import { ScButton } from '@semantic-components/ui';
+
+import { CardType, Player } from './love-letter.types';
+import { PlayerCard } from './player-card';
 
 @Component({
   selector: 'app-love-letter',
-  imports: [ScButton, ScBadge, ScCard, ScCardBody, ScCardHeader, ScCardTitle],
+  imports: [ScButton, PlayerCard],
   template: `
     <div class="flex min-h-screen flex-col">
       <!-- Header -->
@@ -28,90 +24,12 @@ import {
 
       <!-- Player Row -->
       <div class="grid grid-cols-2 gap-2 px-2 py-2">
-        <!-- Player 1 - active, has tokens -->
-        <div scCard size="sm" class="border-primary">
-          <div scCardHeader class="p-2">
-            <div class="flex items-center justify-between">
-              <h3 scCardTitle class="text-primary text-sm">Player 1</h3>
-              <span class="text-sm">3 ❤</span>
-            </div>
-          </div>
-          <div scCardBody class="px-2 pb-2">
-            <div class="mt-1 flex flex-wrap gap-0.5">
-              <span
-                class="text-muted-foreground rounded bg-gray-100 px-1 text-[9px]"
-              >
-                G1
-              </span>
-              <span
-                class="text-muted-foreground rounded bg-gray-100 px-1 text-[9px]"
-              >
-                P2
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Player 2 - has token -->
-        <div scCard size="sm">
-          <div scCardHeader class="p-2">
-            <div class="flex items-center justify-between">
-              <h3 scCardTitle class="text-sm">Player 2</h3>
-              <span class="text-sm">❤</span>
-            </div>
-          </div>
-          <div scCardBody class="px-2 pb-2">
-            <span scBadge variant="secondary" class="text-[10px]">
-              Protected
-            </span>
-            <div class="mt-1 flex flex-wrap gap-0.5">
-              <span
-                class="text-muted-foreground rounded bg-gray-100 px-1 text-[9px]"
-              >
-                H4
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Player 3 - eliminated -->
-        <div scCard size="sm" class="opacity-40">
-          <div scCardHeader class="p-2">
-            <div class="flex items-center justify-between">
-              <h3 scCardTitle class="text-sm">Player 3</h3>
-              <span class="text-sm">❤</span>
-            </div>
-          </div>
-          <div scCardBody class="px-2 pb-2">
-            <span scBadge variant="destructive" class="text-[10px]">Out</span>
-            <div class="mt-1 flex flex-wrap gap-0.5">
-              <span
-                class="text-muted-foreground rounded bg-gray-100 px-1 text-[9px]"
-              >
-                B3
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Player 4 - no tokens -->
-        <div scCard size="sm">
-          <div scCardHeader class="p-2">
-            <div class="flex items-center justify-between">
-              <h3 scCardTitle class="text-sm">Player 4</h3>
-              <span class="text-sm">--</span>
-            </div>
-          </div>
-          <div scCardBody class="px-2 pb-2">
-            <div class="mt-1 flex flex-wrap gap-0.5">
-              <span
-                class="text-muted-foreground rounded bg-gray-100 px-1 text-[9px]"
-              >
-                G1
-              </span>
-            </div>
-          </div>
-        </div>
+        @for (player of players; track player.id) {
+          <app-player-card
+            [player]="player"
+            [isActive]="player.id === activePlayerId"
+          />
+        }
       </div>
 
       <!-- Game Area -->
@@ -170,4 +88,59 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class LoveLetterPage {}
+export default class LoveLetterPage {
+  readonly activePlayerId = 1;
+
+  readonly players: Player[] = [
+    {
+      id: 1,
+      name: 'Player 1',
+      hand: [],
+      isEliminated: false,
+      isProtected: false,
+      tokens: 3,
+      discardPile: [
+        { type: CardType.Guard, value: 1, name: 'Guard', description: '' },
+        { type: CardType.Priest, value: 2, name: 'Priest', description: '' },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Player 2',
+      hand: [],
+      isEliminated: false,
+      isProtected: true,
+      tokens: 1,
+      discardPile: [
+        {
+          type: CardType.Handmaid,
+          value: 4,
+          name: 'Handmaid',
+          description: '',
+        },
+      ],
+    },
+    {
+      id: 3,
+      name: 'Player 3',
+      hand: [],
+      isEliminated: true,
+      isProtected: false,
+      tokens: 1,
+      discardPile: [
+        { type: CardType.Baron, value: 3, name: 'Baron', description: '' },
+      ],
+    },
+    {
+      id: 4,
+      name: 'Player 4',
+      hand: [],
+      isEliminated: false,
+      isProtected: false,
+      tokens: 0,
+      discardPile: [
+        { type: CardType.Guard, value: 1, name: 'Guard', description: '' },
+      ],
+    },
+  ];
+}
