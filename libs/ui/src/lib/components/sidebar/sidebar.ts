@@ -79,6 +79,8 @@ import { ScSidebarState } from './sidebar-state';
     }
   `,
   host: {
+    role: 'navigation',
+    '[attr.aria-label]': 'ariaLabel()',
     'data-slot': 'sidebar',
     '[attr.data-state]': 'state.state()',
     '[attr.data-variant]': 'variant()',
@@ -89,6 +91,8 @@ import { ScSidebarState } from './sidebar-state';
 })
 export class ScSidebar {
   readonly state = inject(ScSidebarState);
+
+  readonly ariaLabel = input('Main sidebar', { alias: 'aria-label' });
 
   readonly side = input<'left' | 'right'>('left');
   readonly variant = input<'sidebar' | 'floating' | 'inset'>('sidebar');

@@ -16,12 +16,14 @@ import { ScSidebarState } from './sidebar-state';
     '[class]': 'class()',
     '(click)': 'state.toggle()',
     tabindex: '-1',
-    title: 'Toggle Sidebar',
+    '[attr.aria-label]': 'ariaLabel()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebarRail {
   readonly state = inject(ScSidebarState);
+
+  readonly ariaLabel = input('Toggle Sidebar', { alias: 'aria-label' });
 
   readonly classInput = input<string>('', { alias: 'class' });
 
