@@ -8,20 +8,29 @@ import { SC_FIELD } from '../field';
   host: {
     'data-slot': 'native-select',
     '[attr.id]': 'id()',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.data-size]': 'size()',
     '[class]': 'class()',
   },
 })
 export class ScNativeSelect {
-  private readonly field = inject(SC_FIELD, { optional: true });
+  protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-native-select-');
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly size = input<'default' | 'sm'>('default');
 
   readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () =>
+      this.ariaDescribedByInput() ||
+      this.field?.descriptionIds().join(' ') ||
+      null,
   );
 
   protected readonly class = computed(() =>

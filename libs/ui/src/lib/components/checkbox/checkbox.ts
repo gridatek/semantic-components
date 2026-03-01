@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
+import { SC_FIELD } from '../field';
 import { SC_CHECKBOX_FIELD } from './checkbox-types';
 
 export const SC_CHECKBOX = 'SC_CHECKBOX';
@@ -20,6 +21,7 @@ export const SC_CHECKBOX = 'SC_CHECKBOX';
   host: {
     'data-slot': 'checkbox',
     '[id]': 'id()',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '[checked]': 'checked()',
     '(change)': 'onInputChange($event)',
@@ -31,16 +33,25 @@ export class ScCheckbox implements FormCheckboxControl {
   private readonly checkboxField = inject(SC_CHECKBOX_FIELD, {
     optional: true,
   });
+  protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-checkbox-');
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly indeterminate = input<boolean>(false);
   readonly checked = model<boolean>(false);
 
   // Priority: explicit id > field's generated id > own fallback id
   readonly id = computed(
     () => this.idInput() || this.checkboxField?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () =>
+      this.ariaDescribedByInput() ||
+      this.field?.descriptionIds().join(' ') ||
+      null,
   );
 
   // Expose disabled state as a signal

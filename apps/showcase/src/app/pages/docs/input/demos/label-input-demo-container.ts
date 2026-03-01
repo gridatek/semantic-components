@@ -30,12 +30,12 @@ export class LabelInputDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
-import { ScField, ScFieldError, ScLabel } from '@semantic-components/ui';
+import { ScField, ScFieldErrors, ScLabel } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-label-input-demo',
-  imports: [FormField, ScField, ScFieldError, ScInput, ScLabel],
+  imports: [FormField, ScField, ScFieldErrors, ScInput, ScLabel],
   template: \`
     <div scField>
       <label scLabel>Email</label>
@@ -45,11 +45,7 @@ import { ScInput } from '@semantic-components/ui';
         [formField]="emailForm.email"
         placeholder="Email"
       />
-      @if (emailForm.email().touched() && emailForm.email().invalid()) {
-        @for (error of emailForm.email().errors(); track error.kind) {
-          <p scFieldError>{{ error.message }}</p>
-        }
-      }
+      <div scFieldErrors></div>
     </div>
     <pre class="mt-4 text-xs">
 invalid: {{ emailForm.email().invalid() }}

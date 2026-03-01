@@ -6,6 +6,7 @@ import {
   ElementRef,
   inject,
   input,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { SC_FIELD } from '../field/field';
@@ -30,6 +31,7 @@ export class ScRadioField {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-radio-field-'));
+  readonly descriptionIds = signal<string[]>([]);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly role = computed(() => {

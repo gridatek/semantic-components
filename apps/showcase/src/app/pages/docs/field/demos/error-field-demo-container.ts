@@ -29,13 +29,18 @@ export class ErrorFieldDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { form, FormField, required } from '@angular/forms/signals';
-import { ScField, ScFieldError, ScLabel } from '@semantic-components/ui';
+import { form, FormField, minLength, required } from '@angular/forms/signals';
+import {
+  ScField,
+  ScFieldDescription,
+  ScFieldErrors,
+  ScLabel,
+} from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-error-field-demo',
-  imports: [FormField, ScField, ScFieldError, ScInput, ScLabel],
+  imports: [FormField, ScField, ScFieldDescription, ScFieldErrors, ScInput, ScLabel],
   template: \`
     <div scField>
       <label scLabel>Password</label>
@@ -45,13 +50,8 @@ import { ScInput } from '@semantic-components/ui';
         [formField]="passwordForm.password"
         placeholder="Enter password"
       />
-      @if (
-        passwordForm.password().touched() && passwordForm.password().invalid()
-      ) {
-        @for (error of passwordForm.password().errors(); track error.kind) {
-          <p scFieldError>{{ error.message }}</p>
-        }
-      }
+      <p scFieldDescription>Must be at least 8 characters.</p>
+      <div scFieldErrors></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,
@@ -61,6 +61,7 @@ export class ErrorFieldDemo {
   readonly formModel = signal({ password: '' });
   readonly passwordForm = form(this.formModel, (s) => {
     required(s.password, { message: 'Password is required' });
+    minLength(s.password, 8, { message: 'Password must be at least 8 characters' });
   });
 }`;
 }

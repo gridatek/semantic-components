@@ -6,6 +6,7 @@ import {
   ElementRef,
   inject,
   input,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
@@ -29,6 +30,7 @@ export class ScThemeField {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-theme-field-'));
+  readonly descriptionIds = signal<string[]>([]);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly role = computed(() => {

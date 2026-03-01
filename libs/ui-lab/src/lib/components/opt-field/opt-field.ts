@@ -8,6 +8,7 @@ import {
   inject,
   input,
   model,
+  signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_FIELD } from '@semantic-components/ui';
@@ -27,6 +28,7 @@ export class ScOptField {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-opt-field-'));
+  readonly descriptionIds = signal<string[]>([]);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;

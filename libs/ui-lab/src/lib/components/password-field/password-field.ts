@@ -48,6 +48,7 @@ export class ScPasswordField implements ScPasswordFieldContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-password-field-'));
+  readonly descriptionIds = signal<string[]>([]);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;

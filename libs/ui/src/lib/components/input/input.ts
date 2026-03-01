@@ -16,18 +16,20 @@ import { SC_FIELD } from '../field';
     '[attr.data-slot]': 'dataSlot()',
     '[attr.id]': 'id()',
     '[attr.aria-invalid]': 'invalid() || null',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.disabled]': 'disabled() || null',
     '[class]': 'class()',
   },
 })
 export class ScInput {
-  private readonly field = inject(SC_FIELD, { optional: true });
+  protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly formField = inject(FormField, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-input-');
 
   readonly variant = input<'default' | 'group'>('default');
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly disabledInput = input<boolean, unknown>(false, {
     alias: 'disabled',
     transform: booleanAttribute,
@@ -39,6 +41,13 @@ export class ScInput {
 
   readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () =>
+      this.ariaDescribedByInput() ||
+      this.field?.descriptionIds().join(' ') ||
+      null,
   );
 
   readonly invalid = computed(

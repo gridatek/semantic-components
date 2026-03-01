@@ -50,8 +50,8 @@ import {
   template: \`
     <div scFieldGroup>
       <div scField>
-        <label scLabel for="email">Email</label>
-        <input scInput id="email" type="email" placeholder="Enter your email" />
+        <label scLabel>Email</label>
+        <input scInput type="email" placeholder="Enter your email" />
       </div>
 
       <div scFieldSeparator>
@@ -64,8 +64,8 @@ import {
       </div>
 
       <div scField>
-        <label scLabel for="phone">Phone</label>
-        <input scInput id="phone" type="tel" placeholder="Enter your phone" />
+        <label scLabel>Phone</label>
+        <input scInput type="tel" placeholder="Enter your phone" />
       </div>
     </div>
   \`,

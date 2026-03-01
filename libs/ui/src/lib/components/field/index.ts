@@ -7,4 +7,4 @@ export * from './field-body';
 export * from './field-title';
 export * from './field-description';
 export * from './field-separator';
-export * from './field-error';
+export * from './field-errors';

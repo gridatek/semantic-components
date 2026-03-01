@@ -7,7 +7,9 @@ import {
   inject,
   InjectionToken,
   input,
+  Signal,
   signal,
+  WritableSignal,
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -35,7 +37,8 @@ export type ScFieldVariants = VariantProps<typeof fieldVariants>;
 
 export interface ScFieldContext {
   id: () => string;
-  descriptionId: ReturnType<typeof signal<string | undefined>>;
+  descriptionIds: WritableSignal<string[]>;
+  formField: Signal<FormField<unknown> | undefined>;
 }
 
 export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
@@ -62,13 +65,13 @@ export class ScField implements ScFieldContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-field-'));
-  readonly descriptionId = signal<string | undefined>(undefined);
+  readonly descriptionIds = signal<string[]>([]);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScFieldVariants['orientation']>('vertical');
   readonly invalidInput = input<boolean>(false, { alias: 'invalid' });
   readonly disabledInput = input<boolean>(false, { alias: 'disabled' });
 
-  private readonly formField = contentChild(FormField);
+  readonly formField = contentChild(FormField);
 
   protected readonly role = computed(() => {
     // Only LABEL preserves native semantics, DIV gets role="group"
