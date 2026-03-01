@@ -13,7 +13,7 @@ A flexible field composition system for building accessible forms with labels, d
 - `ScFieldTitle` - Alternative title element (non-label)
 - `ScFieldDescription` - Description/help text
 - `ScFieldSeparator` - Visual separator with optional content
-- `ScFieldError` - Error message display with multi-error support
+- `ScFieldErrors` - Auto-renders validation errors from `FormField` state
 
 ## Features
 
@@ -75,72 +75,35 @@ import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/
 
 ### With Validation Errors
 
+`ScFieldErrors` automatically reads errors from the parent `ScField`'s `FormField` directive. It renders when the field is touched and invalid.
+
 ```typescript
 import { Component, signal } from '@angular/core';
-import { ScField, ScFieldLabel, ScFieldError, ScFieldErrorItem } from '@semantic-components/ui-lab';
+import { form, FormField, required } from '@angular/forms/signals';
+import { ScField, ScFieldErrors, ScLabel } from '@semantic-components/ui';
+import { ScInput } from '@semantic-components/ui';
 
 @Component({
+  imports: [FormField, ScField, ScFieldErrors, ScInput, ScLabel],
   template: `
-    <div scField [invalid]="errors().length > 0">
-      <label scFieldLabel for="password">Password</label>
-      <input id="password" type="password" />
-      <div scFieldError [errors]="errors()"></div>
+    <div scField>
+      <label scLabel>Password</label>
+      <input scInput type="password" [formField]="passwordForm.password" placeholder="Enter password" />
+      <div scFieldErrors></div>
     </div>
   `,
 })
 export class MyComponent {
-  readonly errors = signal<ScFieldErrorItem[]>([{ message: 'Password must be at least 8 characters' }, { message: 'Password must contain a number' }]);
+  readonly formModel = signal({ password: '' });
+  readonly passwordForm = form(this.formModel, (s) => {
+    required(s.password, { message: 'Password is required' });
+  });
 }
 ```
 
-### Single Error Display
-
-```typescript
-@Component({
-  template: `
-    <div scField [invalid]="error()">
-      <label scFieldLabel for="email">Email</label>
-      <input id="email" type="email" />
-      @if (error()) {
-        <div scFieldError [errors]="[{ message: error() }]"></div>
-      }
-    </div>
-  `,
-})
-export class MyComponent {
-  readonly error = signal<string>('');
-}
-```
-
-### Using ScFieldError with Template
-
-For custom error rendering, you can use the error directive with content projection:
-
-```typescript
-@Component({
-  template: `
-    <div scField [invalid]="errors().length > 0">
-      <label scFieldLabel for="email">Email</label>
-      <input id="email" type="email" />
-
-      @if (errors().length === 1) {
-        <div scFieldError>{{ errors()[0].message }}</div>
-      } @else if (errors().length > 1) {
-        <div scFieldError>
-          <ul class="ml-4 flex list-disc flex-col gap-1">
-            @for (error of errors(); track error.message) {
-              <li>{{ error.message }}</li>
-            }
-          </ul>
-        </div>
-      }
-    </div>
-  `,
-})
-export class MyComponent {
-  readonly errors = signal<ScFieldErrorItem[]>([]);
-}
-```
+- **Single error**: renders as plain text
+- **Multiple errors**: renders as a `<ul>` list with `list-disc` styling
+- **No errors**: hidden via `[hidden]`
 
 ### Field Groups
 
@@ -240,20 +203,14 @@ export class MyComponent {
 | `variant` | `'legend' \| 'label'` | `'legend'` | Visual variant         |
 | `class`   | `string`              | `''`       | Additional CSS classes |
 
-### ScFieldError
+### ScFieldErrors
 
-| Input    | Type                 | Default | Description            |
-| -------- | -------------------- | ------- | ---------------------- |
-| `errors` | `ScFieldErrorItem[]` | `[]`    | Array of error objects |
-| `class`  | `string`             | `''`    | Additional CSS classes |
+Automatically reads errors from the parent `ScField`'s `FormField`. No inputs required for error data.
 
-**ScFieldErrorItem interface:**
-
-```typescript
-interface ScFieldErrorItem {
-  message?: string;
-}
-```
+| Input   | Type     | Default | Description            |
+| ------- | -------- | ------- | ---------------------- |
+| `class` | `string` | `''`    | Additional CSS classes |
+| `id`    | `string` | `''`    | Override generated ID  |
 
 ### Other Components
 
@@ -291,13 +248,13 @@ Mobile:     Desktop:
 
 ## Error Display
 
-The `ScFieldError` component automatically handles:
+The `ScFieldErrors` component automatically handles:
 
 - **No errors**: Component is hidden
 - **Single error**: Displays the error message directly
-- **Multiple errors**: Can be displayed as a list using content projection
+- **Multiple errors**: Displays as a `<ul>` list with disc markers
 
-Use the `errors` input with an array of error objects, or use content projection for custom error rendering.
+Errors are automatically read from the parent `ScField`'s `FormField` directive when the field is touched and invalid.
 
 ## Accessibility
 
@@ -321,6 +278,6 @@ The component uses `data-slot` attributes for targeted styling:
 - `data-slot="field-title"` - Title element
 - `data-slot="field-description"` - Description text
 - `data-slot="field-separator"` - Separator element
-- `data-slot="field-error"` - Error message
+- `data-slot="field-errors"` - Error message
 
 Use these slots to customize styling or target specific elements in your CSS.

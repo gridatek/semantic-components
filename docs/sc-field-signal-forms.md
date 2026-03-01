@@ -87,9 +87,7 @@ The `|| null` ensures the attribute is removed entirely when `false` (not set to
 <div scField>
   <label scLabel>Email</label>
   <input scInput type="email" [formField]="myForm.email" placeholder="Email" />
-  @for (error of myForm.email().errors(); track error.kind) {
-  <p scFieldError>{{ error.message }}</p>
-  }
+  <div scFieldErrors></div>
 </div>
 ```
 
@@ -105,7 +103,7 @@ When the field is invalid:
 
 - The `<div scField>` gets `data-invalid="true"` → label turns red via `data-[invalid=true]:text-destructive`
 - The `<input>` gets `aria-invalid="true"` → red ring/border via `aria-invalid:ring-destructive/20`
-- Error messages render below the input via `sc-field-error` (`role="alert"`, red text)
+- Error messages render below the input via `ScFieldErrors` (`role="alert"`, red text)
 
 ### Validators with messages
 
@@ -120,12 +118,10 @@ readonly myForm = form(this.formModel, (s) => {
 });
 ```
 
-The template pattern is always the same — loop over `errors()` and display `error.message`:
+The template pattern is always the same — just add `<div scFieldErrors></div>` inside the field:
 
 ```html
-@for (error of myForm.name().errors(); track error.kind) {
-<p scFieldError>{{ error.message }}</p>
-}
+<div scFieldErrors></div>
 ```
 
 ### Disabled field
@@ -156,9 +152,7 @@ When disabled:
   <label scLabel>Bio</label>
   <textarea scTextarea [formField]="myForm.bio" placeholder="Tell us about yourself"></textarea>
   <p scFieldDescription>Max 500 characters.</p>
-  @for (error of myForm.bio().errors(); track error.kind) {
-  <p scFieldError>{{ error.message }}</p>
-  }
+  <div scFieldErrors></div>
 </div>
 ```
 
@@ -186,25 +180,19 @@ readonly contactForm = form(this.formModel, (s) => {
 <div scField>
   <label scLabel>Name</label>
   <input scInput type="text" [formField]="contactForm.name" placeholder="John Doe" />
-  @for (error of contactForm.name().errors(); track error.kind) {
-  <p scFieldError>{{ error.message }}</p>
-  }
+  <div scFieldErrors></div>
 </div>
 
 <div scField>
   <label scLabel>Email</label>
   <input scInput type="email" [formField]="contactForm.email" placeholder="john@example.com" />
-  @for (error of contactForm.email().errors(); track error.kind) {
-  <p scFieldError>{{ error.message }}</p>
-  }
+  <div scFieldErrors></div>
 </div>
 
 <div scField>
   <label scLabel>Message</label>
   <textarea scTextarea [formField]="contactForm.message" placeholder="Your message..."></textarea>
-  @for (error of contactForm.message().errors(); track error.kind) {
-  <p scFieldError>{{ error.message }}</p>
-  }
+  <div scFieldErrors></div>
 </div>
 ```
 
@@ -268,10 +256,5 @@ When refactoring other field components to follow this pattern:
 1. Wrap controls inside `<div scField>` with `<label scLabel>`
 2. Use `form()` + `FormField` binding: `[formField]="myForm.fieldName"`
 3. Use validators with messages: `required(s.field, { message: '...' })`
-4. Display errors in template:
-   ```html
-   @for (error of myForm.field().errors(); track error.kind) {
-   <p scFieldError>{{ error.message }}</p>
-   }
-   ```
+4. Display errors with `<div scFieldErrors></div>` (auto-renders from `FormField` state)
 5. Remove all manual `id`/`for` wiring
