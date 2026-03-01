@@ -29,9 +29,9 @@ test.describe('Basic Field Demo', () => {
     page,
   }) => {
     const input = page.getByRole('textbox', { name: 'Email' });
-    const describedby = await input.getAttribute('aria-describedby');
-    expect(describedby).toBeTruthy();
+    await expect(input).toHaveAttribute('aria-describedby', /.+/);
 
+    const describedby = await input.getAttribute('aria-describedby');
     const description = page.locator(`#${describedby}`);
     await expect(description).toBeVisible();
   });
