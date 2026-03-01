@@ -58,7 +58,7 @@ const AI_DELAY = 800;
           <app-player-grid
             [players]="service.players()"
             [youPlayerId]="0"
-            [activePlayerId]="service.currentPlayer()?.id"
+            [activePlayerId]="activePlayerId()"
             [roundWinnerId]="service.roundWinnerId() ?? undefined"
             [gameWinnerId]="service.gameWinnerId() ?? undefined"
           />
@@ -263,6 +263,8 @@ const AI_DELAY = 800;
 export default class LoveLetterPage {
   protected readonly service = inject(LoveLetterService);
   private readonly destroyRef = inject(DestroyRef);
+
+  readonly activePlayerId = computed(() => this.service.currentPlayer()?.id);
 
   readonly selectedIndex = signal<number | null>(null);
   readonly selectedTargetId = signal<number | null>(null);
