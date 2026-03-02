@@ -43,6 +43,7 @@ import {
     <div class="space-y-4">
       <nav
         scPagination
+        aria-label="Page size pagination"
         #pagination="scPagination"
         [currentPage]="currentPage()"
         [pageSize]="pageSize()"

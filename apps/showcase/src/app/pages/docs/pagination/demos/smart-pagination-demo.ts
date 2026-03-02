@@ -47,6 +47,7 @@ import {
 
       <nav
         scPagination
+        aria-label="Smart pagination"
         #pagination="scPagination"
         [currentPage]="currentPage()"
         [pageSize]="pageSize()"

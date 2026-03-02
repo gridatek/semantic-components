@@ -37,6 +37,7 @@ import {
   template: `
     <nav
       scPagination
+      aria-label="Ellipsis pagination"
       #pagination="scPagination"
       [currentPage]="currentPage()"
       [totalItems]="100"

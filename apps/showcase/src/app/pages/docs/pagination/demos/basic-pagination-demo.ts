@@ -37,6 +37,7 @@ import {
   template: `
     <nav
       scPagination
+      aria-label="Basic pagination"
       #pagination="scPagination"
       [currentPage]="currentPage()"
       [totalItems]="30"

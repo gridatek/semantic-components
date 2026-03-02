@@ -55,6 +55,7 @@ import {
 
       <nav
         scPagination
+        aria-label="First and last pagination"
         #pagination="scPagination"
         [currentPage]="currentPage()"
         [pageSize]="pageSize()"

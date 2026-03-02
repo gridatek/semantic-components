@@ -16,6 +16,7 @@ import { ScProgressIndicator } from './progress-indicator';
   host: {
     role: 'progressbar',
     'data-slot': 'progress',
+    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
     '[attr.aria-valuemin]': '0',
     '[attr.aria-valuemax]': 'max()',
@@ -30,6 +31,7 @@ import { ScProgressIndicator } from './progress-indicator';
 })
 export class ScProgress implements FormValueControl<number | null> {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaLabel = input('Progress', { alias: 'aria-label' });
   readonly value = model<number | null>(null);
   readonly max = input<number | undefined>(100);
 

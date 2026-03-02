@@ -9,7 +9,13 @@ import { ScProgress } from '@semantic-components/ui';
   selector: 'app-custom-max-progress-demo',
   imports: [ScProgress],
   template: `
-    <div scProgress [value]="50" [max]="200" class="w-[60%]"></div>
+    <div
+      scProgress
+      aria-label="Custom max progress"
+      [value]="50"
+      [max]="200"
+      class="w-[60%]"
+    ></div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -82,6 +82,7 @@ import {
 
       <nav
         scPagination
+        aria-label="Keyboard navigation pagination"
         #pagination="scPagination"
         [currentPage]="currentPage()"
         [pageSize]="pageSize()"

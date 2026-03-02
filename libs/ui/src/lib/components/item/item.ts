@@ -30,7 +30,6 @@ export type ScItemVariants = VariantProps<typeof itemVariants>;
   selector: 'div[scItem]',
   host: {
     'data-slot': 'item',
-    role: 'listitem',
     '[attr.data-variant]': 'variant()',
     '[attr.data-size]': 'size()',
     '[class]': 'class()',
