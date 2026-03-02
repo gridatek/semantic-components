@@ -3,11 +3,10 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { AudioPlayerDemoContainer } from './demos/audio-player-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { AudioPlayerDemoContainer } from './demos/audio-player-demo-container';
 
 @Component({
   selector: 'app-audio-player-page',

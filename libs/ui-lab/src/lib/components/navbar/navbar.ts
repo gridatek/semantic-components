@@ -1,14 +1,14 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'nav[scNavbar]',

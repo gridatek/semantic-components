@@ -1,5 +1,4 @@
 import { type ColumnDef, createColumnHelper } from '@tanstack/angular-table';
-
 import type { User } from './user.service';
 
 const columnHelper = createColumnHelper<User>();

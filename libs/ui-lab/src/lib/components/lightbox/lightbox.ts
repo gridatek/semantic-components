@@ -1,14 +1,14 @@
 import {
+  DestroyRef,
   Directive,
   InjectionToken,
+  afterNextRender,
+  computed,
+  inject,
   input,
   model,
   output,
   signal,
-  computed,
-  DestroyRef,
-  inject,
-  afterNextRender,
 } from '@angular/core';
 import { LightboxImage } from './lightbox.types';
 

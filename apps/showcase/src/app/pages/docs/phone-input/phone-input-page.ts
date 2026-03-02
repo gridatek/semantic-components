@@ -3,17 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { CountrySelectorPhoneInputDemoContainer } from './demos/country-selector-phone-input-demo-container';
 import { DefaultCountryPhoneInputDemoContainer } from './demos/default-country-phone-input-demo-container';
-import { UsFormatPhoneInputDemoContainer } from './demos/us-format-phone-input-demo-container';
-import { InternationalFormatPhoneInputDemoContainer } from './demos/international-format-phone-input-demo-container';
-import { WithoutIconPhoneInputDemoContainer } from './demos/without-icon-phone-input-demo-container';
 import { DisabledPhoneInputDemoContainer } from './demos/disabled-phone-input-demo-container';
 import { FormPhoneInputDemoContainer } from './demos/form-phone-input-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { InternationalFormatPhoneInputDemoContainer } from './demos/international-format-phone-input-demo-container';
+import { UsFormatPhoneInputDemoContainer } from './demos/us-format-phone-input-demo-container';
+import { WithoutIconPhoneInputDemoContainer } from './demos/without-icon-phone-input-demo-container';
 
 @Component({
   selector: 'app-phone-input-page',

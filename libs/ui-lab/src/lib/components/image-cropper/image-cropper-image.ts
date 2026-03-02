@@ -1,11 +1,11 @@
 import {
-  afterNextRender,
-  computed,
   Directive,
   ElementRef,
+  Injector,
+  afterNextRender,
+  computed,
   inject,
   input,
-  Injector,
   runInInjectionContext,
 } from '@angular/core';
 import { SC_IMAGE_CROPPER } from './image-cropper';

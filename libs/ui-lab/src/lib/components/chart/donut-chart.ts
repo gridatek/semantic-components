@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  input,
   ViewEncapsulation,
+  input,
 } from '@angular/core';
 import { ChartDataPoint } from './chart-types';
 import { ScPieChart } from './pie-chart';

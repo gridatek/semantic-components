@@ -3,18 +3,17 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicLightboxDemoContainer } from './demos/basic-lightbox-demo-container';
-import { InfoLightboxDemoContainer } from './demos/info-lightbox-demo-container';
 import { GalleryLightboxDemoContainer } from './demos/gallery-lightbox-demo-container';
+import { InfoLightboxDemoContainer } from './demos/info-lightbox-demo-container';
+import { KeyboardLightboxDemoContainer } from './demos/keyboard-lightbox-demo-container';
+import { NoLoopLightboxDemoContainer } from './demos/no-loop-lightbox-demo-container';
 import { NoThumbnailsLightboxDemoContainer } from './demos/no-thumbnails-lightbox-demo-container';
 import { NoZoomLightboxDemoContainer } from './demos/no-zoom-lightbox-demo-container';
-import { NoLoopLightboxDemoContainer } from './demos/no-loop-lightbox-demo-container';
 import { SingleLightboxDemoContainer } from './demos/single-lightbox-demo-container';
-import { KeyboardLightboxDemoContainer } from './demos/keyboard-lightbox-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-lightbox-page',

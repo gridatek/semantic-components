@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScCodeEditor,
   ScCodeEditorContent,
+  ScCodeEditorCopyButton,
   ScCodeEditorHeader,
   ScCodeEditorLabel,
-  ScCodeEditorCopyButton,
   ScCodeEditorLanguage,
 } from '@semantic-components/code';
 

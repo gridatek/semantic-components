@@ -1,11 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
@@ -18,12 +19,11 @@ import {
   SiZoomInIcon,
   SiZoomOutIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
 import {
   DEFAULT_TOOLBAR_CONFIG,
-  ZOOM_LEVELS,
   type PdfToolbarConfig,
   type PdfZoomLevel,
+  ZOOM_LEVELS,
 } from './pdf-viewer-types';
 
 @Component({

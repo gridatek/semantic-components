@@ -1,10 +1,10 @@
 import {
-  computed,
   DestroyRef,
   Directive,
   ElementRef,
-  inject,
   InjectionToken,
+  computed,
+  inject,
   input,
   output,
   signal,

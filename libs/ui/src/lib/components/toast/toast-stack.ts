@@ -1,12 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
-  ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
-import { ScToastPosition } from './toast.types';
 import {
   SiCircleCheckIcon,
   SiInfoIcon,
@@ -15,11 +13,13 @@ import {
   SiTriangleAlertIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { cn } from '../../utils';
 import { ScToast } from './toast';
 import { ScToastAction } from './toast-action';
 import { ScToastClose } from './toast-close';
 import { ScToastDescription } from './toast-description';
 import { ScToastTitle } from './toast-title';
+import { ScToastPosition } from './toast.types';
 import { ScToaster } from './toaster';
 
 @Component({

@@ -1,15 +1,15 @@
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
   inject,
   input,
   output,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
 import { cn } from '@semantic-components/ui';

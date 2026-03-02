@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BadgeNoIconTimezoneDemoContainer } from './demos/badge-no-icon-timezone-demo-container';
 import { BadgeTimezoneDemoContainer } from './demos/badge-timezone-demo-container';
 import { BasicSelectTimezoneDemoContainer } from './demos/basic-select-timezone-demo-container';
@@ -18,10 +21,6 @@ import { NoOffsetTimezoneDemoContainer } from './demos/no-offset-timezone-demo-c
 import { SettingsPanelTimezoneDemoContainer } from './demos/settings-panel-timezone-demo-container';
 import { SizesTimezoneDemoContainer } from './demos/sizes-timezone-demo-container';
 import { VariantsTimezoneDemoContainer } from './demos/variants-timezone-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-timezone-page',

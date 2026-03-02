@@ -1,33 +1,4 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-  signal,
-  ViewEncapsulation,
-} from '@angular/core';
-import {
-  ScBadge,
-  ScButton,
-  ScCheckbox,
-  ScCheckboxField,
-  ScInput,
-  ScProgress,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-} from '@semantic-components/ui';
-import {
-  SiArrowDownIcon,
-  SiArrowUpIcon,
-  SiChevronDownIcon,
-  SiChevronRightIcon,
-} from '@semantic-icons/lucide-icons';
-import { ScButtonPattern } from '@semantic-components/ui-lab';
-import {
   type ColumnDef,
   type ColumnFiltersState,
   type ColumnPinningState,
@@ -46,7 +17,35 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
 } from '@tanstack/angular-table';
-
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  input,
+  output,
+  signal,
+} from '@angular/core';
+import {
+  ScBadge,
+  ScButton,
+  ScCheckbox,
+  ScCheckboxField,
+  ScInput,
+  ScProgress,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+} from '@semantic-components/ui';
+import { ScButtonPattern } from '@semantic-components/ui-lab';
+import {
+  SiArrowDownIcon,
+  SiArrowUpIcon,
+  SiChevronDownIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 import { DataTableColumnPinning } from './data-table-column-pinning';
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';

@@ -162,7 +162,7 @@ Use **Angular Signal Forms** instead of Reactive Forms:
 
 ```typescript
 import { signal } from '@angular/core';
-import { form, FormField, required, email } from '@angular/forms/signals';
+import { FormField, email, form, required } from '@angular/forms/signals';
 
 @Component({
   imports: [FormField],

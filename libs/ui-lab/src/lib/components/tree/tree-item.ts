@@ -1,14 +1,14 @@
+import { TreeItem } from '@angular/aria/tree';
 import {
   ChangeDetectionStrategy,
   Component,
+  InjectionToken,
+  ViewEncapsulation,
   computed,
   contentChild,
   inject,
-  InjectionToken,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { TreeItem } from '@angular/aria/tree';
 import { cn } from '@semantic-components/ui';
 import { ScTreeItemGroup } from './tree-item-group';
 

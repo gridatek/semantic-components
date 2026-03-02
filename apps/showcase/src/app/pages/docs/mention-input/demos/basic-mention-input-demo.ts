@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
+import { MentionUser, ScMentionInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-mention-input-demo',

@@ -3,7 +3,6 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 import {
   ScButton,
   ScDrawer,
@@ -17,6 +16,7 @@ import {
   ScDrawerTitle,
   ScDrawerTrigger,
 } from '@semantic-components/ui';
+import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-drawer-demo',

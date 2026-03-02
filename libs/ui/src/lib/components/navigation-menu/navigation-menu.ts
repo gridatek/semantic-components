@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 

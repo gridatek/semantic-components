@@ -1,14 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
+  ViewEncapsulation,
+  computed,
   inject,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {
+  ScDialog,
+  ScDialogPortal,
+  ScDialogProvider,
+} from '@semantic-components/ui';
 import {
   ScCommand,
   ScCommandEmpty,
@@ -20,11 +25,6 @@ import {
   ScCommandSeparator,
   ScCommandShortcut,
 } from '@semantic-components/ui-lab';
-import {
-  ScDialogProvider,
-  ScDialogPortal,
-  ScDialog,
-} from '@semantic-components/ui';
 
 interface CommandItem {
   value: string;

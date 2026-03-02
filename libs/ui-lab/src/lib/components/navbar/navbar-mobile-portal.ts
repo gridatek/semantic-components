@@ -4,15 +4,15 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
-  effect,
-  inject,
-  input,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
+  computed,
+  effect,
+  inject,
+  input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScNavbarProvider } from './navbar-provider';

@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { buttonVariants, cn, ScButtonVariants } from '@semantic-components/ui';
+import { ScButtonVariants, buttonVariants, cn } from '@semantic-components/ui';
 import { ScCarousel } from './carousel';
 
 @Component({

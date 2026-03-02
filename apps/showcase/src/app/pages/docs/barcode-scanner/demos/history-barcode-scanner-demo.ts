@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
+import { BarcodeResult, ScBarcodeScanner } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-history-barcode-scanner-demo',

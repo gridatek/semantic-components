@@ -1,15 +1,15 @@
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
   inject,
   input,
   output,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import type {
   ConfettiOptions,

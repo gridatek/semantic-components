@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicMultiSelectDemoContainer } from './demos/basic-multi-select-demo-container';
 import { CountMultiSelectDemoContainer } from './demos/count-multi-select-demo-container';
 import { DisabledMultiSelectDemoContainer } from './demos/disabled-multi-select-demo-container';
@@ -10,10 +13,6 @@ import { DisabledOptionsMultiSelectDemoContainer } from './demos/disabled-option
 import { FormMultiSelectDemoContainer } from './demos/form-multi-select-demo-container';
 import { NosearchMultiSelectDemoContainer } from './demos/nosearch-multi-select-demo-container';
 import { SelectallMultiSelectDemoContainer } from './demos/selectall-multi-select-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-multi-select-page',

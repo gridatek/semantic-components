@@ -6,7 +6,7 @@ A search input with autocomplete suggestions, debounced search, and keyboard nav
 
 ```typescript
 import { ScSearchInput } from '@/ui/search-input';
-import type { SearchSuggestion, SearchInputOptions } from '@/ui/search-input';
+import type { SearchInputOptions, SearchSuggestion } from '@/ui/search-input';
 ```
 
 ## Usage

@@ -1,14 +1,14 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
+  ViewEncapsulation,
+  computed,
   effect,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { _IdGenerator } from '@angular/cdk/a11y';
 import { cn } from '../../utils';
 import { SC_FIELD } from './field';
 

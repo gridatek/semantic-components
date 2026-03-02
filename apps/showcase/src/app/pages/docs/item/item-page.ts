@@ -3,11 +3,10 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicItemDemoContainer } from './demos/basic-item-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BasicItemDemoContainer } from './demos/basic-item-demo-container';
 
 @Component({
   selector: 'app-item-page',

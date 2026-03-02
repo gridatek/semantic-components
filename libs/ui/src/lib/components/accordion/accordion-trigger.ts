@@ -1,11 +1,11 @@
+import { AccordionTrigger } from '@angular/aria/accordion';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { AccordionTrigger } from '@angular/aria/accordion';
 import {
   SiChevronDownIcon,
   SiChevronUpIcon,

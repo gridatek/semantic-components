@@ -1,14 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
-  cn,
   ScLink,
   ScNavigationMenu,
   ScNavigationMenuContent,
@@ -17,6 +16,7 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
+  cn,
 } from '@semantic-components/ui';
 import {
   ScNavbar,

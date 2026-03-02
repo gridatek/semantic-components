@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
-  inject,
-  input,
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
+  computed,
+  inject,
+  input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScContextMenu } from './context-menu';

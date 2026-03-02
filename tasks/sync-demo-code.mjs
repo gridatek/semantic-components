@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 // Syncs the `code` property in *-demo-container.ts files to match
 // the actual content of the corresponding *-demo.ts files.
-
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
-import { join, dirname, basename } from 'path';
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'fs';
+import { basename, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import type { KanbanCard } from './kanban-types';
 
 @Component({

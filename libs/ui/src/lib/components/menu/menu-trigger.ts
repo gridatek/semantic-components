@@ -1,6 +1,6 @@
-import { Directive, inject } from '@angular/core';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { MenuTrigger } from '@angular/aria/menu';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Directive, inject } from '@angular/core';
 
 @Directive({
   selector: '[scMenuTrigger]',

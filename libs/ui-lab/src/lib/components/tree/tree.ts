@@ -1,5 +1,5 @@
-import { computed, Directive, inject, input } from '@angular/core';
 import { Tree } from '@angular/aria/tree';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({

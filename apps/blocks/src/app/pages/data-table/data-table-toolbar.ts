@@ -1,10 +1,11 @@
+import type { Table } from '@tanstack/angular-table';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   ScButton,
@@ -12,7 +13,6 @@ import {
   ScCheckboxField,
   ScInput,
 } from '@semantic-components/ui';
-import type { Table } from '@tanstack/angular-table';
 
 @Component({
   selector: 'app-data-table-toolbar',

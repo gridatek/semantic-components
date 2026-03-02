@@ -3,8 +3,8 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScProgress } from '@semantic-components/ui';
 

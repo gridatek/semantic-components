@@ -7,7 +7,7 @@ A grouped notification management component with filtering, read states, and act
 Import the components from the notification-center module:
 
 ```typescript
-import { ScNotificationCenter, ScNotificationCenterContainer, type Notification, type NotificationGroup } from '@/ui/notification-center';
+import { type Notification, type NotificationGroup, ScNotificationCenter, ScNotificationCenterContainer } from '@/ui/notification-center';
 ```
 
 ## Components
@@ -28,8 +28,8 @@ import { ScNotificationCenter, ScNotificationCenterContainer, type Notification,
 ```
 
 ```typescript
-import { signal } from '@angular/core';
 import type { Notification } from '@/ui/notification-center';
+import { signal } from '@angular/core';
 
 notifications = signal<Notification[]>([
   {

@@ -1,13 +1,13 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  computed,
   DestroyRef,
   Directive,
+  computed,
   effect,
   inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { _IdGenerator } from '@angular/cdk/a11y';
 import { SC_FIELD } from './field';
 
 @Directive({

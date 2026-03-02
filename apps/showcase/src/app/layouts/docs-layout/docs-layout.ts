@@ -1,13 +1,13 @@
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
   inject,
   input,
-  ViewEncapsulation,
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -37,6 +37,7 @@ import {
   ScSidebarRail,
   ScSidebarTrigger,
 } from '@semantic-components/ui';
+import { ScSeparator, cn } from '@semantic-components/ui';
 import { ScThemeToggle } from '@semantic-components/ui-lab';
 import {
   SiBookOpenTextIcon,
@@ -46,9 +47,7 @@ import {
   SiPanelLeftIcon,
   SiSunIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn, ScSeparator } from '@semantic-components/ui';
 import { filter } from 'rxjs';
-
 import { Logo } from '../../components/logo/logo';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';

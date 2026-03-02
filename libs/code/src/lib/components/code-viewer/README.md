@@ -5,7 +5,7 @@ A read-only code display component with syntax highlighting powered by [Shiki](h
 ## Import
 
 ```typescript
-import { ScCodeViewer, ScCodeViewerHeader, ScCodeViewerLabel, ScCodeViewerContent, ScCodeViewerLanguage } from '@semantic-components/ui-lab';
+import { ScCodeViewer, ScCodeViewerContent, ScCodeViewerHeader, ScCodeViewerLabel, ScCodeViewerLanguage } from '@semantic-components/ui-lab';
 ```
 
 ## Architecture

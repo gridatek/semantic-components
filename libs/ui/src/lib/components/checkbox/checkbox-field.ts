@@ -2,18 +2,18 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  ViewEncapsulation,
   computed,
   contentChild,
-  ElementRef,
   inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
-import { SC_CHECKBOX_FIELD, type ScCheckboxContext } from './checkbox-types';
 import { ScCheckbox } from './checkbox';
+import { SC_CHECKBOX_FIELD, type ScCheckboxContext } from './checkbox-types';
 import { ScCheckboxVisual } from './checkbox-visual';
 
 @Component({

@@ -1,4 +1,4 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
 

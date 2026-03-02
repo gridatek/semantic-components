@@ -3,19 +3,18 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { TextMarqueeDemoContainer } from './demos/text-marquee-demo-container';
-import { ReversedMarqueeDemoContainer } from './demos/reversed-marquee-demo-container';
-import { LogoMarqueeDemoContainer } from './demos/logo-marquee-demo-container';
-import { TestimonialsMarqueeDemoContainer } from './demos/testimonials-marquee-demo-container';
-import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-container';
-import { SpeedMarqueeDemoContainer } from './demos/speed-marquee-demo-container';
-import { PauseOnHoverMarqueeDemoContainer } from './demos/pause-on-hover-marquee-demo-container';
-import { GalleryMarqueeDemoContainer } from './demos/gallery-marquee-demo-container';
-import { StackedMarqueeDemoContainer } from './demos/stacked-marquee-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { GalleryMarqueeDemoContainer } from './demos/gallery-marquee-demo-container';
+import { LogoMarqueeDemoContainer } from './demos/logo-marquee-demo-container';
+import { PauseOnHoverMarqueeDemoContainer } from './demos/pause-on-hover-marquee-demo-container';
+import { ReversedMarqueeDemoContainer } from './demos/reversed-marquee-demo-container';
+import { SpeedMarqueeDemoContainer } from './demos/speed-marquee-demo-container';
+import { StackedMarqueeDemoContainer } from './demos/stacked-marquee-demo-container';
+import { TestimonialsMarqueeDemoContainer } from './demos/testimonials-marquee-demo-container';
+import { TextMarqueeDemoContainer } from './demos/text-marquee-demo-container';
+import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-container';
 
 @Component({
   selector: 'app-marquee-page',

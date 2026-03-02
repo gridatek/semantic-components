@@ -5,9 +5,9 @@ import {
 } from '@angular/core';
 import {
   ScImageCompare,
+  ScImageCompareAfter,
   ScImageCompareArea,
   ScImageCompareBefore,
-  ScImageCompareAfter,
   ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
 

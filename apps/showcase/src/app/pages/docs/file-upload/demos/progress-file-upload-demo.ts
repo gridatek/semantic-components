@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScFileUpload,
   ScFileUploadDropzone,
-  ScFileUploadList,
-  ScFileUploadItem,
-  ScFileUploadItemPreview,
-  ScFileUploadItemName,
-  ScFileUploadItemSize,
-  ScFileUploadItemDelete,
-  ScFileUploadItemProgress,
   ScFileUploadFile,
+  ScFileUploadItem,
+  ScFileUploadItemDelete,
+  ScFileUploadItemName,
+  ScFileUploadItemPreview,
+  ScFileUploadItemProgress,
+  ScFileUploadItemSize,
+  ScFileUploadList,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,

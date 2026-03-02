@@ -9,12 +9,11 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { ScCopyButton } from '@semantic-components/ui-lab';
-import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ScCopyButton } from '@semantic-components/ui-lab';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-container';
 
 @Component({
   selector: 'app-code-viewer-page',

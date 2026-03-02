@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   model,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiPlusIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiPlusIcon } from '@semantic-icons/lucide-icons';
 import { ScKanbanColumn } from './kanban-column';
 import type {
   KanbanCard,

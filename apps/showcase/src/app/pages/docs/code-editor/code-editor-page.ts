@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCodeEditorDemoContainer } from './demos/basic-code-editor-demo-container';
 import { CssCodeEditorDemoContainer } from './demos/css-code-editor-demo-container';
 import { HtmlCodeEditorDemoContainer } from './demos/html-code-editor-demo-container';
@@ -15,10 +18,6 @@ import { ReadonlyCodeEditorDemoContainer } from './demos/readonly-code-editor-de
 import { SqlCodeEditorDemoContainer } from './demos/sql-code-editor-demo-container';
 import { TypescriptCodeEditorDemoContainer } from './demos/typescript-code-editor-demo-container';
 import { WordWrapCodeEditorDemoContainer } from './demos/word-wrap-code-editor-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-code-editor-page',

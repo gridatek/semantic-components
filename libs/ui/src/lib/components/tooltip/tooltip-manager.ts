@@ -3,13 +3,13 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import {
   ComponentRef,
   ElementRef,
-  inject,
   Injectable,
   Injector,
   OutputRefSubscription,
+  inject,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ScTooltip, SC_TOOLTIP_DATA } from './tooltip';
+import { SC_TOOLTIP_DATA, ScTooltip } from './tooltip';
 
 export type ScTooltipPosition = 'top' | 'right' | 'bottom' | 'left';
 

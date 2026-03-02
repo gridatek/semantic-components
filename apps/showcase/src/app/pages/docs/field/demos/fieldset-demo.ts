@@ -4,12 +4,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScFieldset,
-  ScLegend,
-  ScFieldGroup,
   ScField,
   ScFieldDescription,
+  ScFieldGroup,
+  ScFieldset,
   ScLabel,
+  ScLegend,
 } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 

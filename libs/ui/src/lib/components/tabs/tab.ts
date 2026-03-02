@@ -1,5 +1,5 @@
-import { computed, Directive, input } from '@angular/core';
 import { Tab } from '@angular/aria/tabs';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({

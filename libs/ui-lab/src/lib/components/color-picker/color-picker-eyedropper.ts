@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
 import { SC_COLOR_PICKER } from './color-picker';
 
 @Component({

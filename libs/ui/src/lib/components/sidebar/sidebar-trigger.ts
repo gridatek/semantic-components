@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
-import { buttonVariants, ScButtonVariants } from '../button';
+import { ScButtonVariants, buttonVariants } from '../button';
 import { ScSidebarState } from './sidebar-state';
 
 @Directive({

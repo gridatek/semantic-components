@@ -1,9 +1,9 @@
 import {
   Directive,
   InjectionToken,
+  computed,
   input,
   signal,
-  computed,
 } from '@angular/core';
 
 export interface ScSignaturePoint {

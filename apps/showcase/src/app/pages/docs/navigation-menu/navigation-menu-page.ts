@@ -3,11 +3,10 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScNavigationMenuDemoContainer } from './demos/navigation-menu-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { ScNavigationMenuDemoContainer } from './demos/navigation-menu-demo-container';
 
 @Component({
   selector: 'app-navigation-menu-page',

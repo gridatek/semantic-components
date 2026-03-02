@@ -1,4 +1,4 @@
-import { computed, Directive, ElementRef, inject, input } from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { SC_RATING_FIELD } from './rating-field';
 import { SC_RATING_ITEM_GROUP } from './rating-item-group';
 

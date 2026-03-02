@@ -1,15 +1,15 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
   inject,
   input,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER, ScImageCropperResult } from './image-cropper';

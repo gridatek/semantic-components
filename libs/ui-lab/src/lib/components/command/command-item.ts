@@ -1,9 +1,9 @@
 import { Option } from '@angular/aria/listbox';
 import {
-  computed,
   Directive,
-  effect,
   ElementRef,
+  computed,
+  effect,
   inject,
   input,
   output,

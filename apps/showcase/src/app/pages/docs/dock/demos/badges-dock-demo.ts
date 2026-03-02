@@ -5,9 +5,9 @@ import {
 } from '@angular/core';
 import {
   ScDock,
-  ScDockItems,
-  ScDockItem,
   ScDockBadge,
+  ScDockItem,
+  ScDockItems,
 } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';
 

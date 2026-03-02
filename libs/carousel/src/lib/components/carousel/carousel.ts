@@ -1,21 +1,21 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  ViewEncapsulation,
+  afterNextRender,
   computed,
   contentChild,
+  inject,
   input,
   signal,
-  ViewEncapsulation,
-  DestroyRef,
-  inject,
-  afterNextRender,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import EmblaCarousel, {
   type EmblaCarouselType,
   EmblaOptionsType,
   EmblaPluginType,
 } from 'embla-carousel';
-import { cn } from '@semantic-components/ui';
 import { ScCarouselViewport } from './carousel-viewport';
 
 export type ScCarouselOrientation = 'horizontal' | 'vertical';

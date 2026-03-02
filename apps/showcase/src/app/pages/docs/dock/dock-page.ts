@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BadgesDockDemoContainer } from './demos/badges-dock-demo-container';
 import { BasicDockDemoContainer } from './demos/basic-dock-demo-container';
 import { MagnificationScaleDockDemoContainer } from './demos/magnification-scale-dock-demo-container';
 import { NoMagnificationDockDemoContainer } from './demos/no-magnification-dock-demo-container';
 import { SizesDockDemoContainer } from './demos/sizes-dock-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-dock-page',

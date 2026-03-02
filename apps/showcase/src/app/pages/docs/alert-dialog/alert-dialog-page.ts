@@ -3,12 +3,11 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicAlertDialogDemoContainer } from './demos/basic-alert-dialog-demo-container';
 import { DestructiveAlertDialogDemoContainer } from './demos/destructive-alert-dialog-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-alert-dialog-page',

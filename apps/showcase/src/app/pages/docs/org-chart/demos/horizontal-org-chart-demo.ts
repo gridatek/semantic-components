@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScOrgChart, type OrgChartNode } from '@semantic-components/ui-lab';
+import { type OrgChartNode, ScOrgChart } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-horizontal-org-chart-demo',

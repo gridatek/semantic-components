@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { AreaChartDemoContainer } from './demos/area-chart-demo-container';
 import { BarChartDemoContainer } from './demos/bar-chart-demo-container';
 import { DonutChartDemoContainer } from './demos/donut-chart-demo-container';
@@ -10,10 +13,6 @@ import { LineChartDemoContainer } from './demos/line-chart-demo-container';
 import { MonthlyRevenueChartDemoContainer } from './demos/monthly-revenue-chart-demo-container';
 import { PieChartDemoContainer } from './demos/pie-chart-demo-container';
 import { UserGrowthChartDemoContainer } from './demos/user-growth-chart-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-chart-page',

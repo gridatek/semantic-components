@@ -1,4 +1,4 @@
-import { Injectable, signal, DestroyRef, inject } from '@angular/core';
+import { DestroyRef, Injectable, inject, signal } from '@angular/core';
 
 export interface TocItem {
   id: string;

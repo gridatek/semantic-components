@@ -1,14 +1,14 @@
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
   inject,
   input,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 

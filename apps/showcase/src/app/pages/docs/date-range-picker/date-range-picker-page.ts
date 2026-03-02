@@ -3,17 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { AnalyticsDateRangePickerDemoContainer } from './demos/analytics-date-range-picker-demo-container';
 import { BasicDateRangePickerDemoContainer } from './demos/basic-date-range-picker-demo-container';
-import { PresetsDateRangePickerDemoContainer } from './demos/presets-date-range-picker-demo-container';
 import { ConstrainedDateRangePickerDemoContainer } from './demos/constrained-date-range-picker-demo-container';
+import { DisabledDateRangePickerDemoContainer } from './demos/disabled-date-range-picker-demo-container';
 import { FormatsDateRangePickerDemoContainer } from './demos/formats-date-range-picker-demo-container';
 import { NoClearDateRangePickerDemoContainer } from './demos/no-clear-date-range-picker-demo-container';
-import { DisabledDateRangePickerDemoContainer } from './demos/disabled-date-range-picker-demo-container';
-import { AnalyticsDateRangePickerDemoContainer } from './demos/analytics-date-range-picker-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { PresetsDateRangePickerDemoContainer } from './demos/presets-date-range-picker-demo-container';
 
 @Component({
   selector: 'app-date-range-picker-page',

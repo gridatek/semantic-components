@@ -3,13 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicAnimatedCounterDemoContainer } from './demos/basic-animated-counter-demo-container';
 import { EasingAnimatedCounterDemoContainer } from './demos/easing-animated-counter-demo-container';
 import { PrefixAnimatedCounterDemoContainer } from './demos/prefix-animated-counter-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-animated-counter-page',

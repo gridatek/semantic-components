@@ -1,4 +1,4 @@
-import { computed, Directive, input, output } from '@angular/core';
+import { Directive, computed, input, output } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({

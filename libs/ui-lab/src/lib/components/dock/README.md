@@ -27,7 +27,7 @@ Child components inject `SC_DOCK` to access parent state and methods.
 ## Installation
 
 ```typescript
-import { ScDock, ScDockItems, ScDockItem, ScDockBadge } from '@/ui/dock';
+import { ScDock, ScDockBadge, ScDockItem, ScDockItems } from '@/ui/dock';
 import type { DockItem, DockPosition, DockSize } from '@/ui/dock';
 ```
 

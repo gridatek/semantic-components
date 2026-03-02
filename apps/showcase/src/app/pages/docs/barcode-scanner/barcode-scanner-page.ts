@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicBarcodeScannerDemoContainer } from './demos/basic-barcode-scanner-demo-container';
 import { BrowserSupportBarcodeScannerDemoContainer } from './demos/browser-support-barcode-scanner-demo-container';
 import { FormatsBarcodeScannerDemoContainer } from './demos/formats-barcode-scanner-demo-container';
@@ -10,10 +13,6 @@ import { HistoryBarcodeScannerDemoContainer } from './demos/history-barcode-scan
 import { ProductBarcodeScannerDemoContainer } from './demos/product-barcode-scanner-demo-container';
 import { QrCodeBarcodeScannerDemoContainer } from './demos/qr-code-barcode-scanner-demo-container';
 import { SingleScanBarcodeScannerDemoContainer } from './demos/single-scan-barcode-scanner-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-barcode-scanner-page',

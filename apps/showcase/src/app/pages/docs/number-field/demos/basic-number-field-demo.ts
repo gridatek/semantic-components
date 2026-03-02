@@ -1,18 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldInputGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
+  ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-number-field-demo',

@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
+  ViewEncapsulation,
+  computed,
   effect,
   inject,
   input,
   output,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 

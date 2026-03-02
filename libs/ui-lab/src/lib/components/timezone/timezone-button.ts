@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiChevronDownIcon, SiClockIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
-import { ScTimezoneService } from './timezone.service';
+import { SiChevronDownIcon, SiClockIcon } from '@semantic-icons/lucide-icons';
 import {
-  TimezoneVariant,
   TimezoneSize,
-  variantStyles,
+  TimezoneVariant,
   sizeStyles,
+  variantStyles,
 } from './timezone-display';
+import { ScTimezoneService } from './timezone.service';
 
 /**
  * Timezone button with label - shows timezone name with dropdown indicator.

@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicDrawerDemoContainer } from './demos/basic-drawer-demo-container';
-import { TopDrawerDemoContainer } from './demos/top-drawer-demo-container';
 import { LeftDrawerDemoContainer } from './demos/left-drawer-demo-container';
 import { RightDrawerDemoContainer } from './demos/right-drawer-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { TopDrawerDemoContainer } from './demos/top-drawer-demo-container';
 
 @Component({
   selector: 'app-drawer-page',

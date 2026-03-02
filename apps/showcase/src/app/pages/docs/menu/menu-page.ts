@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { MenuAvatarDemoContainer } from './demos/menu-avatar-demo-container';
 import { ScMenuDemoContainer } from './demos/menu-demo-container';
 import { MenuShortcutsDemoContainer } from './demos/menu-shortcuts-demo-container';
 import { MenuToolsDemoContainer } from './demos/menu-tools-demo-container';
-import { MenuAvatarDemoContainer } from './demos/menu-avatar-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-menu-page',

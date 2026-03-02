@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { CardsCarouselDemoContainer } from './demos/cards-carousel-demo-container';
 import { DefaultCarouselDemoContainer } from './demos/default-carousel-demo-container';
 import { HalfWidthCarouselDemoContainer } from './demos/half-width-carousel-demo-container';
 import { ImagesCarouselDemoContainer } from './demos/images-carousel-demo-container';
 import { ThirdWidthCarouselDemoContainer } from './demos/third-width-carousel-demo-container';
 import { VerticalCarouselDemoContainer } from './demos/vertical-carousel-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-carousel-page',

@@ -1,5 +1,5 @@
-import { Directive } from '@angular/core';
 import { AccordionContent } from '@angular/aria/accordion';
+import { Directive } from '@angular/core';
 
 @Directive({
   selector: 'ng-template[scAccordionContent]',

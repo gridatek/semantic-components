@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   input,
   model,
   signal,
-  ViewEncapsulation,
   viewChild,
 } from '@angular/core';
-import { SiPhoneIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiPhoneIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'sc-phone-input-simple',

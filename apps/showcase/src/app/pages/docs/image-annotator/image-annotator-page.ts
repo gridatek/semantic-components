@@ -3,12 +3,11 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicImageAnnotatorDemoContainer } from './demos/basic-image-annotator-demo-container';
 import { CustomSizeImageAnnotatorDemoContainer } from './demos/custom-size-image-annotator-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-image-annotator-page',

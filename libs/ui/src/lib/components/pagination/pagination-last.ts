@@ -1,14 +1,14 @@
 import {
-  booleanAttribute,
-  computed,
   Directive,
   ElementRef,
+  booleanAttribute,
+  computed,
   inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { ScButtonVariants, buttonVariants } from '../button/button';
 import { ScPagination } from './pagination';
-import { buttonVariants, ScButtonVariants } from '../button/button';
 
 @Directive({
   selector: 'a[scPaginationLast], button[scPaginationLast]',

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { readFileSync, existsSync, readdirSync } from 'fs';
-import { join, dirname, basename } from 'path';
+import { existsSync, readFileSync, readdirSync } from 'fs';
+import { basename, dirname, join } from 'path';
 
 const DOCS_DIR =
   '/home/user/semantic-components/apps/showcase/src/app/pages/docs';

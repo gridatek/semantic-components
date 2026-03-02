@@ -1,4 +1,4 @@
-import { Directive, computed, input, inject } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 

@@ -1,5 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 

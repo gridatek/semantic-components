@@ -1,4 +1,4 @@
-import { computed, Directive, input, signal } from '@angular/core';
+import { Directive, computed, input, signal } from '@angular/core';
 import { cn } from '../../utils';
 
 export type ScAvatarImageStatus = 'idle' | 'loading' | 'loaded' | 'error';

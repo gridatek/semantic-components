@@ -1,11 +1,11 @@
+import { Tabs } from '@angular/aria/tabs';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { Tabs } from '@angular/aria/tabs';
 import { cn } from '../../utils';
 
 @Component({

@@ -1,13 +1,13 @@
 import {
   Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
   computed,
   effect,
   inject,
   input,
   model,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';

@@ -2,10 +2,10 @@ import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormRoot, required } from '@angular/forms/signals';
+import { FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScField,
   ScLabel,

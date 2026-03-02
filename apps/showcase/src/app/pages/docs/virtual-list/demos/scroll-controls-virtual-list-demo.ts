@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { ScVirtualList } from '@semantic-components/ui-lab';
 

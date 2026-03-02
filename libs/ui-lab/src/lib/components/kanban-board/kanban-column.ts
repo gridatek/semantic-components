@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiChevronDownIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiChevronDownIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 import { ScKanbanCard } from './kanban-card';
 import type { KanbanCard, KanbanColumn, KanbanDragEvent } from './kanban-types';
 

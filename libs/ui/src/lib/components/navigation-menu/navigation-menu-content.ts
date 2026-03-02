@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScNavigationMenuItem } from './navigation-menu-item';

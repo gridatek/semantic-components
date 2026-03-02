@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
-import { SC_SORTABLE_LIST, ScSortableList } from './sortable-list';
+import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 import { SC_SORTABLE_ITEM, ScSortableItem } from './sortable-item';
+import { SC_SORTABLE_LIST, ScSortableList } from './sortable-list';
 
 @Component({
   selector: '[scSortableHandle]',

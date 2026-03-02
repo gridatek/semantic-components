@@ -1,13 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
-  cn,
   ScButton,
   ScNavigationMenu,
   ScNavigationMenuContent,
@@ -16,17 +15,18 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
+  cn,
 } from '@semantic-components/ui';
 import {
   ScNavbar,
-  ScNavbarProvider,
+  ScNavbarActions,
   ScNavbarBrand,
   ScNavbarGroup,
-  ScNavbarActions,
-  ScNavbarMobileTrigger,
-  ScNavbarMobilePortal,
-  ScNavbarMobileMenu,
   ScNavbarMobileLink,
+  ScNavbarMobileMenu,
+  ScNavbarMobilePortal,
+  ScNavbarMobileTrigger,
+  ScNavbarProvider,
 } from '@semantic-components/ui-lab';
 import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 

@@ -1,18 +1,18 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   contentChild,
   effect,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
-import { ScMenuTrigger } from './menu-trigger';
 import { ScMenuPortal } from './menu-portal';
+import { ScMenuTrigger } from './menu-trigger';
 
 @Component({
   selector: 'div[scMenuProvider]',

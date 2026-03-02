@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { SC_TAG_INPUT } from './tag-input';
 
 // ============================================================================

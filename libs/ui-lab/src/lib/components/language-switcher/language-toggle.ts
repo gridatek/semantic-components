@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
+import { sizeStyles, variantStyles } from '../timezone';
 import { ScLanguageService } from './language.service';
 import { LanguageSwitcherSize, LanguageSwitcherVariant } from './styles';
-import { sizeStyles, variantStyles } from '../timezone';
 
 /**
  * Language toggle button - ideal for switching between 2 languages.

@@ -1,18 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
-  inject,
+  DoCheck,
   Injectable,
+  ViewEncapsulation,
+  computed,
+  inject,
   input,
   output,
   signal,
-  DoCheck,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 export interface TourStep {
   target: string; // CSS selector for the target element

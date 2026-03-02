@@ -3,17 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicEditorDemoContainer } from './demos/basic-editor-demo-container';
-import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
-import { MinimalToolbarEditorDemoContainer } from './demos/minimal-toolbar-editor-demo-container';
-import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
-import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
 import { CustomHeightEditorDemoContainer } from './demos/custom-height-editor-demo-container';
 import { FullFeaturedEditorDemoContainer } from './demos/full-featured-editor-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { MinimalToolbarEditorDemoContainer } from './demos/minimal-toolbar-editor-demo-container';
+import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
+import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
+import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
 
 @Component({
   selector: 'app-editor-page',

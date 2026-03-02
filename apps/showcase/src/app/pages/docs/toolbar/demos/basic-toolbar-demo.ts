@@ -10,11 +10,11 @@ import {
   ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
-  SiTextAlignCenterIcon,
-  SiTextAlignStartIcon,
-  SiTextAlignEndIcon,
   SiBoldIcon,
   SiItalicIcon,
+  SiTextAlignCenterIcon,
+  SiTextAlignEndIcon,
+  SiTextAlignStartIcon,
   SiUnderlineIcon,
 } from '@semantic-icons/lucide-icons';
 

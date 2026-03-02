@@ -1,18 +1,18 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  computed,
   Directive,
-  effect,
   ElementRef,
-  inject,
   InjectionToken,
+  ModelSignal,
+  WritableSignal,
+  computed,
+  effect,
+  inject,
   input,
   model,
-  ModelSignal,
   output,
   signal,
   untracked,
-  WritableSignal,
 } from '@angular/core';
 import { SC_FIELD } from '@semantic-components/ui';
 

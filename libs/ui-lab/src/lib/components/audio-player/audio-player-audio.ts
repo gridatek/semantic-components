@@ -2,8 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { SC_AUDIO_PLAYER } from './audio-player';
 

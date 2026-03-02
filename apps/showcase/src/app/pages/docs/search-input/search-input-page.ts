@@ -3,13 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicSearchInputDemoContainer } from './demos/basic-search-input-demo-container';
-import { LoadingSearchInputDemoContainer } from './demos/loading-search-input-demo-container';
-import { CategoriesSearchInputDemoContainer } from './demos/categories-search-input-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BasicSearchInputDemoContainer } from './demos/basic-search-input-demo-container';
+import { CategoriesSearchInputDemoContainer } from './demos/categories-search-input-demo-container';
+import { LoadingSearchInputDemoContainer } from './demos/loading-search-input-demo-container';
 
 @Component({
   selector: 'app-search-input-page',

@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
-  ScOrgChart,
   type OrgChartNode,
   type OrgChartNodeClickEvent,
+  ScOrgChart,
 } from '@semantic-components/ui-lab';
 
 @Component({

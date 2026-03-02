@@ -2,10 +2,10 @@ import { AccordionTrigger } from '@angular/aria/accordion';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 

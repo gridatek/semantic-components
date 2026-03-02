@@ -1,4 +1,4 @@
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 export type ButtonGroupSeparatorOrientation = 'horizontal' | 'vertical';

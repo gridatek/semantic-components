@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { LightboxImage } from './lightbox.types';
 import { ScLightboxDirective } from './lightbox';
 import { ScLightboxContainer } from './lightbox-container';
+import { LightboxImage } from './lightbox.types';
 
 @Component({
   selector: 'sc-lightbox-gallery',

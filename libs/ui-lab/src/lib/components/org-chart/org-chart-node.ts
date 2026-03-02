@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import type {
   OrgChartDirection,
   OrgChartNode,

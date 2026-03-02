@@ -3,19 +3,18 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicQrCodeDemoContainer } from './demos/basic-qr-code-demo-container';
-import { InteractiveQrCodeDemoContainer } from './demos/interactive-qr-code-demo-container';
-import { SizesQrCodeDemoContainer } from './demos/sizes-qr-code-demo-container';
 import { ColorsQrCodeDemoContainer } from './demos/colors-qr-code-demo-container';
+import { DownloadQrCodeDemoContainer } from './demos/download-qr-code-demo-container';
 import { ErrorCorrectionQrCodeDemoContainer } from './demos/error-correction-qr-code-demo-container';
+import { InteractiveQrCodeDemoContainer } from './demos/interactive-qr-code-demo-container';
 import { LogoQrCodeDemoContainer } from './demos/logo-qr-code-demo-container';
 import { QuietZoneQrCodeDemoContainer } from './demos/quiet-zone-qr-code-demo-container';
-import { DownloadQrCodeDemoContainer } from './demos/download-qr-code-demo-container';
+import { SizesQrCodeDemoContainer } from './demos/sizes-qr-code-demo-container';
 import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-qr-code-page',

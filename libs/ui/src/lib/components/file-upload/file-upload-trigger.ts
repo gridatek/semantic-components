@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { buttonVariants } from '../button';
 import { cn } from '../../utils';
+import { buttonVariants } from '../button';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Component({

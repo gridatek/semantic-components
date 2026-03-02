@@ -1,17 +1,17 @@
+import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
   ScRatingField,
-  ScRatingItemGroup,
   ScRatingFieldItem,
+  ScRatingItemGroup,
 } from '@semantic-components/ui-lab';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
-import { JsonPipe } from '@angular/common';
 
 interface ReviewForm {
   rating: number;

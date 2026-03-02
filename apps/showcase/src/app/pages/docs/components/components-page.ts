@@ -1,19 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScBadge } from '@semantic-components/ui';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
+import { ScHeading } from '@semantic-components/ui';
 import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
 import { ComponentCategory, ComponentLibrary } from '../../../data/components';
 import { ComponentsService } from '../../../services/components.service';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-components-page',

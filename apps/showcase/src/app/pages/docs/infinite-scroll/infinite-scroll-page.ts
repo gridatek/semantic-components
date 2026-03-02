@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicInfiniteScrollDemoContainer } from './demos/basic-infinite-scroll-demo-container';
 import { CustomLoaderInfiniteScrollDemoContainer } from './demos/custom-loader-infinite-scroll-demo-container';
 import { EndMessageInfiniteScrollDemoContainer } from './demos/end-message-infinite-scroll-demo-container';
-import { ThresholdInfiniteScrollDemoContainer } from './demos/threshold-infinite-scroll-demo-container';
 import { GridInfiniteScrollDemoContainer } from './demos/grid-infinite-scroll-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { ThresholdInfiniteScrollDemoContainer } from './demos/threshold-infinite-scroll-demo-container';
 
 @Component({
   selector: 'app-infinite-scroll-page',

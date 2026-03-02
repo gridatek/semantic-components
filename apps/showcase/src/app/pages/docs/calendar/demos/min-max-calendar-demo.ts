@@ -1,10 +1,10 @@
+import { Temporal } from '@js-temporal/polyfill';
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendar } from '@semantic-components/ui';
 
 @Component({

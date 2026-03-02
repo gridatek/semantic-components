@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicDatePickerDemoContainer } from './demos/basic-date-picker-demo-container';
-import { PlaceholderDatePickerDemoContainer } from './demos/placeholder-date-picker-demo-container';
-import { RangeDatePickerDemoContainer } from './demos/range-date-picker-demo-container';
-import { MultipleDatePickerDemoContainer } from './demos/multiple-date-picker-demo-container';
 import { ConstrainedDatePickerDemoContainer } from './demos/constrained-date-picker-demo-container';
 import { FormDatePickerDemoContainer } from './demos/form-date-picker-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { MultipleDatePickerDemoContainer } from './demos/multiple-date-picker-demo-container';
+import { PlaceholderDatePickerDemoContainer } from './demos/placeholder-date-picker-demo-container';
+import { RangeDatePickerDemoContainer } from './demos/range-date-picker-demo-container';
 
 @Component({
   selector: 'app-date-picker-page',

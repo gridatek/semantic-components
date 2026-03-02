@@ -3,18 +3,17 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SixteenNineAspectRatioDemoContainer } from './demos/sixteen-nine-aspect-ratio-demo-container';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { FourThreeAspectRatioDemoContainer } from './demos/four-three-aspect-ratio-demo-container';
+import { MapAspectRatioDemoContainer } from './demos/map-aspect-ratio-demo-container';
+import { PlaceholderAspectRatioDemoContainer } from './demos/placeholder-aspect-ratio-demo-container';
+import { PortraitAspectRatioDemoContainer } from './demos/portrait-aspect-ratio-demo-container';
+import { SixteenNineAspectRatioDemoContainer } from './demos/sixteen-nine-aspect-ratio-demo-container';
 import { SquareAspectRatioDemoContainer } from './demos/square-aspect-ratio-demo-container';
 import { UltrawideAspectRatioDemoContainer } from './demos/ultrawide-aspect-ratio-demo-container';
-import { PortraitAspectRatioDemoContainer } from './demos/portrait-aspect-ratio-demo-container';
-import { PlaceholderAspectRatioDemoContainer } from './demos/placeholder-aspect-ratio-demo-container';
 import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-container';
-import { MapAspectRatioDemoContainer } from './demos/map-aspect-ratio-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-aspect-ratio-page',

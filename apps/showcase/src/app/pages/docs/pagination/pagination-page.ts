@@ -3,19 +3,18 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicPaginationDemoContainer } from './demos/basic-pagination-demo-container';
-import { EllipsisPaginationDemoContainer } from './demos/ellipsis-pagination-demo-container';
-import { ManyPagesPaginationDemoContainer } from './demos/many-pages-pagination-demo-container';
 import { ButtonsPaginationDemoContainer } from './demos/buttons-pagination-demo-container';
 import { DisabledLinkPaginationDemoContainer } from './demos/disabled-link-pagination-demo-container';
+import { EllipsisPaginationDemoContainer } from './demos/ellipsis-pagination-demo-container';
 import { FirstPagePaginationDemoContainer } from './demos/first-page-pagination-demo-container';
-import { LastPagePaginationDemoContainer } from './demos/last-page-pagination-demo-container';
-import { PageSizePaginationDemoContainer } from './demos/page-size-pagination-demo-container';
 import { KeyboardNavigationPaginationDemoContainer } from './demos/keyboard-navigation-pagination-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { LastPagePaginationDemoContainer } from './demos/last-page-pagination-demo-container';
+import { ManyPagesPaginationDemoContainer } from './demos/many-pages-pagination-demo-container';
+import { PageSizePaginationDemoContainer } from './demos/page-size-pagination-demo-container';
 
 @Component({
   selector: 'app-pagination-page',

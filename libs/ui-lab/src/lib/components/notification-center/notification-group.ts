@@ -1,18 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
   SiCircleCheckIcon,
   SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
 import { ScNotificationItem } from './notification-item';
 import type {
   Notification,

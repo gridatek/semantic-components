@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScEditor,
-  ScEditorContent,
-  ScEditorFooter,
-  ScEditorCount,
-  ScEditorWordCount,
   ScEditorCharCount,
+  ScEditorContent,
+  ScEditorCount,
+  ScEditorFooter,
+  ScEditorWordCount,
 } from '@semantic-components/editor';
 
 @Component({

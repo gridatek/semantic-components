@@ -2,10 +2,10 @@ import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';

@@ -1,4 +1,4 @@
-import { computed, Directive, input, model } from '@angular/core';
+import { Directive, computed, input, model } from '@angular/core';
 import { cn } from '../../utils';
 import { type ScToggleVariants } from '../toggle/toggle';
 

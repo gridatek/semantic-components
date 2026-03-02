@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicConfettiDemoContainer } from './demos/basic-confetti-demo-container';
 import { CornerBurstsConfettiDemoContainer } from './demos/corner-bursts-confetti-demo-container';
 import { CustomColorsConfettiDemoContainer } from './demos/custom-colors-confetti-demo-container';
 import { FromElementConfettiDemoContainer } from './demos/from-element-confetti-demo-container';
 import { MultipleBurstsConfettiDemoContainer } from './demos/multiple-bursts-confetti-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-confetti-page',

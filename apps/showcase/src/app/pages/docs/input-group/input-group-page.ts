@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicInputGroupDemoContainer } from './demos/basic-input-group-demo-container';
 import { ButtonInputGroupDemoContainer } from './demos/button-input-group-demo-container';
-import { TextInputGroupDemoContainer } from './demos/text-input-group-demo-container';
 import { KbdInputGroupDemoContainer } from './demos/kbd-input-group-demo-container';
 import { SpinnerInputGroupDemoContainer } from './demos/spinner-input-group-demo-container';
+import { TextInputGroupDemoContainer } from './demos/text-input-group-demo-container';
 import { TextareaInputGroupDemoContainer } from './demos/textarea-input-group-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-input-group-page',

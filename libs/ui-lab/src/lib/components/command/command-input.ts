@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 import { ScCommand } from './command';
 
 @Component({

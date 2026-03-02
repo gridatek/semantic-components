@@ -1,4 +1,4 @@
-import { computed, Directive, input, model } from '@angular/core';
+import { Directive, computed, input, model } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_STEPPER, StepperOrientation } from './stepper-types';
 

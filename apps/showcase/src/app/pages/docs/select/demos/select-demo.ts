@@ -1,10 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
+import {
+  ScSelect,
+  ScSelectItem,
+  ScSelectItemIcon,
+  ScSelectLabel,
+  ScSelectList,
+  ScSelectPopup,
+  ScSelectPortal,
+  ScSelectTrigger,
+} from '@semantic-components/ui';
 import {
   SiBookIcon,
   SiBriefcaseIcon,
@@ -15,16 +25,6 @@ import {
   SiTagIcon,
   SiUserIcon,
 } from '@semantic-icons/lucide-icons';
-import {
-  ScSelect,
-  ScSelectPopup,
-  ScSelectItemIcon,
-  ScSelectList,
-  ScSelectItem,
-  ScSelectPortal,
-  ScSelectTrigger,
-  ScSelectLabel,
-} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-demo',

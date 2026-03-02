@@ -4,10 +4,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ChartDataPoint,
   ScChartContainer,
   ScChartLegend,
   ScDonutChart,
-  ChartDataPoint,
 } from '@semantic-components/ui-lab';
 
 @Component({

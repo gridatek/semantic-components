@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicToggleLanguageSwitcherDemoContainer } from './demos/basic-toggle-language-switcher-demo-container';
 import { ButtonLanguageSwitcherDemoContainer } from './demos/button-language-switcher-demo-container';
 import { EnglishLabelsLanguageSwitcherDemoContainer } from './demos/english-labels-language-switcher-demo-container';
@@ -12,10 +15,6 @@ import { SelectLanguageSwitcherDemoContainer } from './demos/select-language-swi
 import { SettingsPanelLanguageSwitcherDemoContainer } from './demos/settings-panel-language-switcher-demo-container';
 import { SizesLanguageSwitcherDemoContainer } from './demos/sizes-language-switcher-demo-container';
 import { VariantsLanguageSwitcherDemoContainer } from './demos/variants-language-switcher-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-language-switcher-page',

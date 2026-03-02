@@ -1,9 +1,9 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { inject, Injectable, signal } from '@angular/core';
-import { _IdGenerator } from '@angular/cdk/a11y';
-import { ScToastConfig, ScToastData, ScToastPosition } from './toast.types';
+import { Injectable, inject, signal } from '@angular/core';
 import { ScToastStack } from './toast-stack';
+import { ScToastConfig, ScToastData, ScToastPosition } from './toast.types';
 
 @Injectable({
   providedIn: 'root',

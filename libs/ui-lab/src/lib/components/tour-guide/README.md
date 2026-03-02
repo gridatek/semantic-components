@@ -5,7 +5,7 @@ Step-by-step UI tour component for user onboarding and feature discovery.
 ## Usage
 
 ```typescript
-import { TourService, TourOptions, ScTourGuide } from './ui/tour-guide';
+import { ScTourGuide, TourOptions, TourService } from './ui/tour-guide';
 
 // Inject the service
 const tourService = inject(TourService);

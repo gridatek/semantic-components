@@ -2,11 +2,11 @@ import { Listbox } from '@angular/aria/listbox';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   contentChildren,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScSelectItem } from './select-item';

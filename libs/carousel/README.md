@@ -9,5 +9,5 @@ Carousel components built on top of Embla Carousel for the Semantic Components l
 ## Usage
 
 ```ts
-import { ScCarousel, ScCarouselViewport, ScCarouselTrack, ScCarouselItem, ScCarouselNext, ScCarouselPrevious } from '@semantic-components/carousel';
+import { ScCarousel, ScCarouselItem, ScCarouselNext, ScCarouselPrevious, ScCarouselTrack, ScCarouselViewport } from '@semantic-components/carousel';
 ```

@@ -1,22 +1,22 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   input,
   model,
   output,
   signal,
-  ViewEncapsulation,
   viewChild,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiChevronDownIcon,
   SiMinusIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
 
 export interface MultiSelectOption {
   value: string;

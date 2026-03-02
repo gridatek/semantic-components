@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { FormField, form, required, minLength } from '@angular/forms/signals';
+import { FormField, form, minLength, required } from '@angular/forms/signals';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScPasswordField,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldInput,
+  ScPasswordFieldInputGroup,
   ScPasswordFieldToggle,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-signal-forms-password-field-demo',

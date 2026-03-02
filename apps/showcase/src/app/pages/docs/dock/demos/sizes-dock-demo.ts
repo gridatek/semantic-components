@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScDock, ScDockItems, ScDockItem } from '@semantic-components/ui-lab';
+import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';
 
 @Component({

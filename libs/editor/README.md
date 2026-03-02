@@ -10,5 +10,5 @@ Rich text editor components built on top of Tiptap for the Semantic Components l
 ## Usage
 
 ```ts
-import { ScEditor, ScEditorContent, ScEditorToolbar, ScEditorBoldButton } from '@semantic-components/editor';
+import { ScEditor, ScEditorBoldButton, ScEditorContent, ScEditorToolbar } from '@semantic-components/editor';
 ```

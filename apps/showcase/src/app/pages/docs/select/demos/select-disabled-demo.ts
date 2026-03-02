@@ -6,11 +6,11 @@ import {
 import {
   ScSelect,
   ScSelectItem,
+  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
   ScSelectTrigger,
-  ScSelectLabel,
 } from '@semantic-components/ui';
 
 @Component({

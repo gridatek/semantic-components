@@ -8,8 +8,8 @@ import {
   ScTableBody,
   ScTableCell,
   ScTableFooter,
-  ScTableHeaderCell,
   ScTableHeader,
+  ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
 

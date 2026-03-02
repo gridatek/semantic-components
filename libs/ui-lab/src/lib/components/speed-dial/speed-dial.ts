@@ -1,18 +1,18 @@
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
   inject,
   input,
   model,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiPlusIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiPlusIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import { ScSpeedDialAction } from './speed-dial-action';
 import type {
   SpeedDialAction,

@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTagInputDemoContainer } from './demos/basic-tag-input-demo-container';
 import { BlurTagInputDemoContainer } from './demos/blur-tag-input-demo-container';
 import { ClearableTagInputDemoContainer } from './demos/clearable-tag-input-demo-container';
@@ -15,10 +18,6 @@ import { MaxTagsTagInputDemoContainer } from './demos/max-tags-tag-input-demo-co
 import { OutputTagInputDemoContainer } from './demos/output-tag-input-demo-container';
 import { ValidationTagInputDemoContainer } from './demos/validation-tag-input-demo-container';
 import { VariantsTagInputDemoContainer } from './demos/variants-tag-input-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-tag-input-page',

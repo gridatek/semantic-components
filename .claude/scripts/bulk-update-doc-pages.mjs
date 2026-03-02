@@ -14,8 +14,8 @@
  * Skips files that already contain the target import.
  */
 import fs from 'fs';
-import path from 'path';
 import { globSync } from 'glob';
+import path from 'path';
 
 // ── CONFIG ──────────────────────────────────────────────────────────────
 // Edit these values before running the script

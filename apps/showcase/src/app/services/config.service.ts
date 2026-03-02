@@ -1,5 +1,5 @@
 import { httpResource } from '@angular/common/http';
-import { computed, Injectable } from '@angular/core';
+import { Injectable, computed } from '@angular/core';
 
 interface AppConfig {
   devMode: boolean;

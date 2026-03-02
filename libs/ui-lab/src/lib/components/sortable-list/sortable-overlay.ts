@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { SC_SORTABLE_LIST, ScSortableList } from './sortable-list';
 

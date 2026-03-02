@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTabs, ScTabPanel, ScTabList, ScTab } from '@semantic-components/ui';
+import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-tabs-demo',

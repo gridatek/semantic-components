@@ -3,14 +3,14 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import {
   ChangeDetectionStrategy,
   Component,
+  TemplateRef,
+  ViewContainerRef,
+  ViewEncapsulation,
   computed,
   contentChild,
   inject,
   input,
   signal,
-  TemplateRef,
-  ViewContainerRef,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScContextMenuContent } from './context-menu-content';

@@ -1,27 +1,27 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScEditor,
+  ScEditorBoldButton,
+  ScEditorBulletListButton,
   ScEditorContent,
+  ScEditorItalicButton,
+  ScEditorNumberedListButton,
+  ScEditorSeparator,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-  ScEditorBoldButton,
-  ScEditorItalicButton,
   ScEditorUnderlineButton,
-  ScEditorSeparator,
-  ScEditorBulletListButton,
-  ScEditorNumberedListButton,
 } from '@semantic-components/editor';
 import {
   SiBoldIcon,
   SiItalicIcon,
-  SiUnderlineIcon,
   SiListIcon,
   SiListOrderedIcon,
+  SiUnderlineIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({

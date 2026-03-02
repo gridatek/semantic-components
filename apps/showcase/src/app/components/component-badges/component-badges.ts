@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScBadge } from '@semantic-components/ui';
-import { ComponentStatusBadge } from '../component-status-badge/component-status-badge';
 import { ComponentItem } from '../../data/components';
 import { ComponentsService } from '../../services/components.service';
+import { ComponentStatusBadge } from '../component-status-badge/component-status-badge';
 
 @Component({
   selector: 'app-component-badges',

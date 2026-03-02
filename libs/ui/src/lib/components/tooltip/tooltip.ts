@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
-  inject,
   InjectionToken,
+  ViewEncapsulation,
+  computed,
+  inject,
   output,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 

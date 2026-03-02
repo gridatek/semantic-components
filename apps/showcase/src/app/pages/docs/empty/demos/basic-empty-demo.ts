@@ -5,10 +5,10 @@ import {
 } from '@angular/core';
 import {
   ScEmpty,
+  ScEmptyDescription,
   ScEmptyHeader,
   ScEmptyMedia,
   ScEmptyTitle,
-  ScEmptyDescription,
 } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 

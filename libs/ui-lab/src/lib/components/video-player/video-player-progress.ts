@@ -1,12 +1,12 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  computed,
-  input,
-  inject,
+  Component,
   ViewEncapsulation,
+  computed,
+  inject,
+  input,
 } from '@angular/core';
-import { cn, ScSlider } from '@semantic-components/ui';
+import { ScSlider, cn } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 
 @Component({

@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { ScTheme, ScThemeToggle } from '@semantic-components/ui-lab';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';

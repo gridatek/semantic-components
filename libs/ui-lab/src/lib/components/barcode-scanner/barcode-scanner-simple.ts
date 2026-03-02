@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   input,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScBarcodeScanner,
   BarcodeFormat,
   BarcodeResult,
+  ScBarcodeScanner,
 } from './barcode-scanner';
 
 @Component({

@@ -61,7 +61,7 @@ This is an acceptable trade-off for the significant improvements in reliability,
 
 ```typescript
 import { Component, signal } from '@angular/core';
-import { ScEditor, ScEditorContent, ScEditorToolbar, ScEditorToolbarGroup, ScEditorBoldButton, ScEditorItalicButton, ScEditorUnderlineButton, ScEditorFooter, ScEditorCount, ScEditorWordCount, ScEditorCharCount } from '@semantic-components/ui-lab';
+import { ScEditor, ScEditorBoldButton, ScEditorCharCount, ScEditorContent, ScEditorCount, ScEditorFooter, ScEditorItalicButton, ScEditorToolbar, ScEditorToolbarGroup, ScEditorUnderlineButton, ScEditorWordCount } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-example',
@@ -202,7 +202,7 @@ All standard keyboard shortcuts are handled by Tiptap:
 For advanced use cases, you can access the underlying Tiptap editor:
 
 ```typescript
-import { inject, effect } from '@angular/core';
+import { effect, inject } from '@angular/core';
 import { SC_EDITOR } from '@semantic-components/ui-lab';
 
 export class MyComponent {

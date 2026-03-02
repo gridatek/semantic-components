@@ -2,13 +2,13 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  ViewEncapsulation,
   computed,
   effect,
-  ElementRef,
   inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScSheetProvider } from './sheet-provider';

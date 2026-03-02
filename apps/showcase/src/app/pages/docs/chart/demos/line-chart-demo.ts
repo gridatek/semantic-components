@@ -4,9 +4,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ChartDataPoint,
   ScChartContainer,
   ScLineChart,
-  ChartDataPoint,
 } from '@semantic-components/ui-lab';
 
 @Component({

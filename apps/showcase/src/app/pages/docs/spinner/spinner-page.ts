@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { DefaultSpinnerDemoContainer } from './demos/default-spinner-demo-container';
-import { ColorsSpinnerDemoContainer } from './demos/colors-spinner-demo-container';
-import { ButtonSpinnerDemoContainer } from './demos/button-spinner-demo-container';
-import { OverlaySpinnerDemoContainer } from './demos/overlay-spinner-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { ButtonSpinnerDemoContainer } from './demos/button-spinner-demo-container';
+import { ColorsSpinnerDemoContainer } from './demos/colors-spinner-demo-container';
+import { DefaultSpinnerDemoContainer } from './demos/default-spinner-demo-container';
+import { OverlaySpinnerDemoContainer } from './demos/overlay-spinner-demo-container';
 
 @Component({
   selector: 'app-spinner-page',

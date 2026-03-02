@@ -3,12 +3,12 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   contentChild,
   effect,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScHoverCardPortal } from './hover-card-portal';

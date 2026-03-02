@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FILE_UPLOAD } from './file-upload';

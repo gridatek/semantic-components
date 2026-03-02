@@ -1,5 +1,5 @@
-import { computed, Directive, inject, input } from '@angular/core';
 import { Menu } from '@angular/aria/menu';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScMenuPortal } from './menu-portal';
 

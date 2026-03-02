@@ -10,11 +10,9 @@ import {
   ScCodeViewerLabel,
 } from '@semantic-components/code';
 import { ScSeparator } from '@semantic-components/ui';
-import { ScCopyButton } from '@semantic-components/ui-lab';
-
-import { TocHeading } from '../../components/toc/toc-heading';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ScCopyButton } from '@semantic-components/ui-lab';
+import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
   selector: 'app-carousel-page',

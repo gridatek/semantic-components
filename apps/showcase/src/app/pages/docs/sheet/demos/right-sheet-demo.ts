@@ -3,23 +3,23 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
   ScButton,
-  ScSheetProvider,
-  ScSheetClose,
+  ScField,
+  ScFieldGroup,
+  ScLabel,
   ScSheet,
+  ScSheetClose,
   ScSheetDescription,
   ScSheetFooter,
   ScSheetHeader,
   ScSheetPortal,
+  ScSheetProvider,
   ScSheetTitle,
   ScSheetTrigger,
-  ScField,
-  ScFieldGroup,
-  ScLabel,
 } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-right-sheet-demo',

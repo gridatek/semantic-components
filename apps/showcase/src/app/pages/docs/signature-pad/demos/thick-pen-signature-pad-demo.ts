@@ -6,13 +6,13 @@ import {
 import {
   ScSignaturePad,
   ScSignaturePadCanvas,
-  ScSignaturePadControls,
-  ScSignaturePadUndoButton,
   ScSignaturePadClearButton,
+  ScSignaturePadControls,
   ScSignaturePadToolbar,
+  ScSignaturePadUndoButton,
   ScSignaturePadWidthButton,
 } from '@semantic-components/ui-lab';
-import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-thick-pen-signature-pad-demo',

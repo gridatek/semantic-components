@@ -1,8 +1,8 @@
-import { Directive, InjectionToken, input, signal } from '@angular/core';
 import { Editor } from '@tiptap/core';
 import Placeholder from '@tiptap/extension-placeholder';
 import TextAlign from '@tiptap/extension-text-align';
 import StarterKit from '@tiptap/starter-kit';
+import { Directive, InjectionToken, input, signal } from '@angular/core';
 
 export type ScEditorAlignment = 'left' | 'center' | 'right' | 'justify';
 export type ScEditorHeading = 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

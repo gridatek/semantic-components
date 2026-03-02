@@ -3,17 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSortableListDemoContainer } from './demos/basic-sortable-list-demo-container';
+import { DisabledSortableListDemoContainer } from './demos/disabled-sortable-list-demo-container';
 import { HandleSortableListDemoContainer } from './demos/handle-sortable-list-demo-container';
-import { TaskListSortableListDemoContainer } from './demos/task-list-sortable-list-demo-container';
-import { PlaylistSortableListDemoContainer } from './demos/playlist-sortable-list-demo-container';
 import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable-list-demo-container';
 import { KanbanSortableListDemoContainer } from './demos/kanban-sortable-list-demo-container';
-import { DisabledSortableListDemoContainer } from './demos/disabled-sortable-list-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { PlaylistSortableListDemoContainer } from './demos/playlist-sortable-list-demo-container';
+import { TaskListSortableListDemoContainer } from './demos/task-list-sortable-list-demo-container';
 
 @Component({
   selector: 'app-sortable-list-page',

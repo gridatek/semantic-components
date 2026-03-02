@@ -4,14 +4,14 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
-  ScMenuSeparator,
   ScMenuProvider,
+  ScMenuSeparator,
   ScMenuTrigger,
-  ScButton,
 } from '@semantic-components/ui';
 import {
   SiArchiveIcon,

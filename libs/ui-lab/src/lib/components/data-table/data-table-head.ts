@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
   SiChevronUpIcon,
   SiChevronsUpDownIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
 import { SC_DATA_TABLE, SortDirection } from './data-table';
 
 @Component({

@@ -4,17 +4,17 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScPdfViewerRoot,
   ScPdfViewerContainer,
-  ScPdfViewerToolbar,
+  ScPdfViewerContent,
+  ScPdfViewerEmpty,
+  ScPdfViewerError,
+  ScPdfViewerLoading,
   ScPdfViewerNav,
-  ScPdfViewerPrevPage,
   ScPdfViewerNextPage,
   ScPdfViewerPageInfo,
-  ScPdfViewerContent,
-  ScPdfViewerLoading,
-  ScPdfViewerError,
-  ScPdfViewerEmpty,
+  ScPdfViewerPrevPage,
+  ScPdfViewerRoot,
+  ScPdfViewerToolbar,
 } from '@semantic-components/ui-lab';
 
 @Component({

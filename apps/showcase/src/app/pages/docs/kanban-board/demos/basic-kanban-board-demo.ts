@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
-  ScKanbanBoard,
   type KanbanCard,
   type KanbanColumn,
   type KanbanDragEvent,
+  ScKanbanBoard,
 } from '@semantic-components/ui-lab';
 
 @Component({

@@ -4,10 +4,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScInput,
   ScInputGroup,
   ScInputGroupAddon,
   ScInputGroupButton,
-  ScInput,
   ScInputGroupText,
 } from '@semantic-components/ui';
 import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';

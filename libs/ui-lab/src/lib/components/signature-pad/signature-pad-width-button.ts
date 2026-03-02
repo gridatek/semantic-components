@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SC_SIGNATURE_PAD } from './signature-pad';
 import { cn } from '@semantic-components/ui';
+import { SC_SIGNATURE_PAD } from './signature-pad';
 
 @Component({
   selector: 'button[scSignaturePadPenWidth]',

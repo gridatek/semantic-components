@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScPagination,
   ScPaginationChange,
-  ScPaginationList,
   ScPaginationEllipsis,
   ScPaginationItem,
   ScPaginationLink,
+  ScPaginationList,
   ScPaginationNext,
   ScPaginationPrevious,
 } from '@semantic-components/ui';

@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { CompactColorPickerDemoContainer } from './demos/compact-color-picker-demo-container';
 import { EyedropperColorPickerDemoContainer } from './demos/eyedropper-color-picker-demo-container';
 import { FullColorPickerDemoContainer } from './demos/full-color-picker-demo-container';
@@ -11,10 +14,6 @@ import { PreviewColorPickerDemoContainer } from './demos/preview-color-picker-de
 import { RgbColorPickerDemoContainer } from './demos/rgb-color-picker-demo-container';
 import { SimpleColorPickerDemoContainer } from './demos/simple-color-picker-demo-container';
 import { SwatchesColorPickerDemoContainer } from './demos/swatches-color-picker-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-color-picker-page',

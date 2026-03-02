@@ -1,11 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  computed,
-  inject,
   Injectable,
   InjectionToken,
+  computed,
+  inject,
   signal,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 
 export interface Language {
   code: string;

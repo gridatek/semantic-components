@@ -40,7 +40,7 @@ npx nx run showcase-e2e:e2e-ci
 Tests live in `apps/showcase-e2e/src/demos/<component>/`. Follow existing patterns:
 
 ```ts
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('My Component Demo', () => {
   test.beforeEach(async ({ page }) => {

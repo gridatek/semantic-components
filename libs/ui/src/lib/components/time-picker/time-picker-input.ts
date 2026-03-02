@@ -1,4 +1,4 @@
-import { computed, Directive, inject, input, signal } from '@angular/core';
+import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_TIME_PICKER } from './time-picker';
 

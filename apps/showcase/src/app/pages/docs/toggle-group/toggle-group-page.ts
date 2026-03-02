@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { DisabledToggleGroupDemoContainer } from './demos/disabled-toggle-group-demo-container';
 import { MultipleToggleGroupDemoContainer } from './demos/multiple-toggle-group-demo-container';
 import { OutlineToggleGroupDemoContainer } from './demos/outline-toggle-group-demo-container';
 import { SingleToggleGroupDemoContainer } from './demos/single-toggle-group-demo-container';
 import { SizesToggleGroupDemoContainer } from './demos/sizes-toggle-group-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-toggle-group-page',

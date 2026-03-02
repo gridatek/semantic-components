@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   effect,
   inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { codeToHtml } from 'shiki';
 import { cn } from '@semantic-components/ui';
+import { codeToHtml } from 'shiki';
 
 export type ScCodeViewerLanguage =
   | 'angular-ts'

@@ -1,6 +1,5 @@
 import { httpResource } from '@angular/common/http';
-import { computed, inject, Injectable } from '@angular/core';
-
+import { Injectable, computed, inject } from '@angular/core';
 import { ComponentItem } from '../data/components';
 import { ConfigService } from './config.service';
 

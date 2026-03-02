@@ -3,13 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { VerticalScrollAreaDemoContainer } from './demos/vertical-scroll-area-demo-container';
-import { HorizontalScrollAreaDemoContainer } from './demos/horizontal-scroll-area-demo-container';
-import { BothScrollAreaDemoContainer } from './demos/both-scroll-area-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BothScrollAreaDemoContainer } from './demos/both-scroll-area-demo-container';
+import { HorizontalScrollAreaDemoContainer } from './demos/horizontal-scroll-area-demo-container';
+import { VerticalScrollAreaDemoContainer } from './demos/vertical-scroll-area-demo-container';
 
 @Component({
   selector: 'app-scroll-area-page',

@@ -1,10 +1,10 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  computed,
   Directive,
   ElementRef,
-  inject,
   InjectionToken,
+  computed,
+  inject,
   input,
   model,
   output,

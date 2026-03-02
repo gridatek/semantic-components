@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicBreadcrumbDemoContainer } from './demos/basic-breadcrumb-demo-container';
 import { CustomSeparatorBreadcrumbDemoContainer } from './demos/custom-separator-breadcrumb-demo-container';
 import { EllipsisBreadcrumbDemoContainer } from './demos/ellipsis-breadcrumb-demo-container';
 import { LongerPathBreadcrumbDemoContainer } from './demos/longer-path-breadcrumb-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-breadcrumb-page',

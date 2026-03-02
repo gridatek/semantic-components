@@ -1,18 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScButton,
-  ScDialogProvider,
-  ScDialogClose,
   ScDialog,
+  ScDialogClose,
   ScDialogDescription,
   ScDialogFooter,
   ScDialogHeader,
   ScDialogPortal,
+  ScDialogProvider,
   ScDialogTitle,
   ScDialogTrigger,
   ScField,

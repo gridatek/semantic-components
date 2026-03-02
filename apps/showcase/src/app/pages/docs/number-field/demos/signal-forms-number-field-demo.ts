@@ -1,19 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { FormField, form, required, min, max } from '@angular/forms/signals';
+import { FormField, form, max, min, required } from '@angular/forms/signals';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldInputGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
+  ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-signal-forms-number-field-demo',

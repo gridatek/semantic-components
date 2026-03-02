@@ -3,7 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScLightboxGallery, LightboxImage } from '@semantic-components/ui-lab';
+import { LightboxImage, ScLightboxGallery } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-gallery-lightbox-demo',

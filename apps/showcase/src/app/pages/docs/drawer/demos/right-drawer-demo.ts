@@ -3,7 +3,6 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
   ScButton,
   ScDrawer,
@@ -15,6 +14,7 @@ import {
   ScDrawerTitle,
   ScDrawerTrigger,
 } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-right-drawer-demo',

@@ -1,19 +1,19 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  computed,
-  input,
-  inject,
-  viewChild,
+  Component,
   ViewEncapsulation,
+  computed,
+  inject,
+  input,
+  viewChild,
 } from '@angular/core';
 import {
-  cn,
   ScButton,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
   ScPopoverTrigger,
+  cn,
 } from '@semantic-components/ui';
 import { SC_VIDEO_PLAYER } from './video-player';
 

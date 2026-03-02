@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiCheckIcon, SiCircleIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiCheckIcon, SiCircleIcon } from '@semantic-icons/lucide-icons';
 import { SC_PASSWORD_FIELD } from './password-field';
 
 export interface ScPasswordRequirement {

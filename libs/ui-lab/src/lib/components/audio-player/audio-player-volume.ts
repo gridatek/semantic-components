@@ -1,18 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
+import { ScSlider, buttonVariants, cn } from '@semantic-components/ui';
 import {
   SiVolume1Icon,
   SiVolume2Icon,
   SiVolumeOffIcon,
   SiVolumeXIcon,
 } from '@semantic-icons/lucide-icons';
-import { buttonVariants, cn, ScSlider } from '@semantic-components/ui';
 import { SC_AUDIO_PLAYER } from './audio-player';
 
 @Component({

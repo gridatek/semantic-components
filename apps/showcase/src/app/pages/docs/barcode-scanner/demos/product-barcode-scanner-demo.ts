@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
-  ScBarcodeScanner,
-  BarcodeResult,
   BarcodeFormat,
+  BarcodeResult,
+  ScBarcodeScanner,
 } from '@semantic-components/ui-lab';
 
 @Component({

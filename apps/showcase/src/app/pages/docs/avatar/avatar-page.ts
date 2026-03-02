@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BadgeAvatarDemoContainer } from './demos/badge-avatar-demo-container';
 import { BasicAvatarDemoContainer } from './demos/basic-avatar-demo-container';
 import { FallbackAvatarDemoContainer } from './demos/fallback-avatar-demo-container';
-import { SizesAvatarDemoContainer } from './demos/sizes-avatar-demo-container';
-import { BadgeAvatarDemoContainer } from './demos/badge-avatar-demo-container';
 import { GroupAvatarDemoContainer } from './demos/group-avatar-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { SizesAvatarDemoContainer } from './demos/sizes-avatar-demo-container';
 
 @Component({
   selector: 'app-avatar-page',

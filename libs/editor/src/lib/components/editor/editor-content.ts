@@ -1,10 +1,10 @@
 import {
-  afterNextRender,
-  computed,
   DestroyRef,
   Directive,
-  effect,
   ElementRef,
+  afterNextRender,
+  computed,
+  effect,
   inject,
   input,
   model,

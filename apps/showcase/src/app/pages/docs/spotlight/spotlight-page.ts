@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSpotlightDemoContainer } from './demos/basic-spotlight-demo-container';
 import { CustomOverlaySpotlightDemoContainer } from './demos/custom-overlay-spotlight-demo-container';
-import { PlacementSpotlightDemoContainer } from './demos/placement-spotlight-demo-container';
 import { InteractiveSpotlightDemoContainer } from './demos/interactive-spotlight-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { PlacementSpotlightDemoContainer } from './demos/placement-spotlight-demo-container';
 
 @Component({
   selector: 'app-spotlight-page',

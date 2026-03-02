@@ -4,9 +4,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScHoverCardProvider,
-  ScHoverCardPortal,
   ScHoverCard,
+  ScHoverCardPortal,
+  ScHoverCardProvider,
   ScHoverCardTrigger,
 } from '@semantic-components/ui';
 

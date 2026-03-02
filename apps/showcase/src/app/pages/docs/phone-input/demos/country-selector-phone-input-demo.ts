@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScPhoneInput, Country } from '@semantic-components/ui-lab';
+import { Country, ScPhoneInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-country-selector-phone-input-demo',

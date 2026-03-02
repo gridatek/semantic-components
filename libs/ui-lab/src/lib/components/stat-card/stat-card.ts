@@ -1,4 +1,4 @@
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import type { StatCardSize, StatCardVariant } from './stat-card-types';
 

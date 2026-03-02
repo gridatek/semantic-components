@@ -1,8 +1,8 @@
 import {
-  computed,
   Directive,
-  inject,
   InjectionToken,
+  computed,
+  inject,
   signal,
 } from '@angular/core';
 import { SC_RATING_FIELD } from './rating-field';

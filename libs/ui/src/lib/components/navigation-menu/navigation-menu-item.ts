@@ -1,17 +1,17 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import { NgTemplateOutlet } from '@angular/common';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  OnInit,
+  ViewEncapsulation,
   computed,
   contentChild,
-  DestroyRef,
   inject,
   input,
-  OnInit,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationStart, Router } from '@angular/router';

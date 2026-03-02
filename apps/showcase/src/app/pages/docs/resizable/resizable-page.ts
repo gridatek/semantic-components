@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { HorizontalResizableDemoContainer } from './demos/horizontal-resizable-demo-container';
+import { IdeLayoutResizableDemoContainer } from './demos/ide-layout-resizable-demo-container';
+import { NestedResizableDemoContainer } from './demos/nested-resizable-demo-container';
+import { ThreePanelsResizableDemoContainer } from './demos/three-panels-resizable-demo-container';
 import { VerticalResizableDemoContainer } from './demos/vertical-resizable-demo-container';
 import { WithHandleResizableDemoContainer } from './demos/with-handle-resizable-demo-container';
-import { ThreePanelsResizableDemoContainer } from './demos/three-panels-resizable-demo-container';
-import { NestedResizableDemoContainer } from './demos/nested-resizable-demo-container';
-import { IdeLayoutResizableDemoContainer } from './demos/ide-layout-resizable-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-resizable-page',

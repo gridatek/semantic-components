@@ -1,18 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   inject,
   input,
   output,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import type { SearchSuggestion } from './search-input-types';
 import { DEFAULT_SEARCH_OPTIONS } from './search-input-types';
 

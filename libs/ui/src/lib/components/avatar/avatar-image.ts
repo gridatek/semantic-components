@@ -1,4 +1,4 @@
-import { computed, Directive, inject, input, OnInit } from '@angular/core';
+import { Directive, OnInit, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScAvatar } from './avatar';
 

@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSwitchDemoContainer } from './demos/basic-switch-demo-container';
 import { DescriptionSwitchDemoContainer } from './demos/description-switch-demo-container';
 import { DisabledSwitchDemoContainer } from './demos/disabled-switch-demo-container';
 import { FormSwitchDemoContainer } from './demos/form-switch-demo-container';
 import { SignalFormsSwitchDemoContainer } from './demos/signal-forms-switch-demo-container';
 import { StateSwitchDemoContainer } from './demos/state-switch-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-switch-page',

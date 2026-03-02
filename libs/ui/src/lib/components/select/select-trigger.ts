@@ -1,16 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   forwardRef,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
-
+// Lazy import to avoid circular dependency
+import { ScSelect } from './select';
 import { ScSelectInput } from './select-input';
 import { ScSelectTriggerIcon } from './select-trigger-icon';
 
@@ -48,6 +49,3 @@ export class ScSelectTrigger {
     ),
   );
 }
-
-// Lazy import to avoid circular dependency
-import { ScSelect } from './select';

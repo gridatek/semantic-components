@@ -105,9 +105,9 @@ Following the pattern from `libs/ui/src/lib/components/card/`:
 ### 1. `stat-card.ts` - Main Container
 
 ```typescript
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
-import type { StatCardVariant, StatCardSize } from './stat-card-types';
+import type { StatCardSize, StatCardVariant } from './stat-card-types';
 
 @Directive({
   selector: '[scStatCard]',
@@ -144,7 +144,7 @@ export class ScStatCard {
 ### 2. `stat-card-label.ts`
 
 ```typescript
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 import type { StatCardSize } from './stat-card-types';
 
@@ -170,7 +170,7 @@ export class ScStatCardLabel {
 ### 3. `stat-card-value.ts`
 
 ```typescript
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 import type { StatCardSize } from './stat-card-types';
 
@@ -196,7 +196,7 @@ export class ScStatCardValue {
 ### 4. `stat-card-icon.ts`
 
 ```typescript
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 import type { StatCardSize } from './stat-card-types';
 
@@ -222,7 +222,7 @@ export class ScStatCardIcon {
 ### 5. `stat-card-change.ts`
 
 ```typescript
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 import type { StatCardTrend } from './stat-card-types';
 
@@ -248,7 +248,7 @@ export class ScStatCardChange {
 ### 6. `stat-card-description.ts`
 
 ```typescript
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({

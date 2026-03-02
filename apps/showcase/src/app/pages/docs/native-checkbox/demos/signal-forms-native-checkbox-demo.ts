@@ -1,13 +1,13 @@
+import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
 import { ScNativeCheckbox } from '@semantic-components/ui-lab';
-import { JsonPipe } from '@angular/common';
 
 interface CheckboxFormModel {
   newsletter: boolean;

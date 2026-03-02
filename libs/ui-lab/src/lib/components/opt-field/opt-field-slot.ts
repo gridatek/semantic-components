@@ -1,18 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScOptField } from './opt-field';
-import { ScOptFieldSlotInput } from './opt-field-slot-input';
 import { ScOptFieldSlotCaret } from './opt-field-slot-caret';
 import { ScOptFieldSlotChar } from './opt-field-slot-char';
+import { ScOptFieldSlotInput } from './opt-field-slot-input';
 
 @Component({
   selector: 'div[scOptFieldSlot]',

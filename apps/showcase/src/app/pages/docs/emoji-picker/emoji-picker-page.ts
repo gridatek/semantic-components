@@ -3,19 +3,18 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicEmojiPickerDemoContainer } from './demos/basic-emoji-picker-demo-container';
-import { NoSearchEmojiPickerDemoContainer } from './demos/no-search-emoji-picker-demo-container';
-import { NoCategoriesEmojiPickerDemoContainer } from './demos/no-categories-emoji-picker-demo-container';
-import { NoRecentEmojiPickerDemoContainer } from './demos/no-recent-emoji-picker-demo-container';
 import { CompactEmojiPickerDemoContainer } from './demos/compact-emoji-picker-demo-container';
 import { InputEmojiPickerDemoContainer } from './demos/input-emoji-picker-demo-container';
-import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-demo-container';
-import { QuickReactionsEmojiPickerDemoContainer } from './demos/quick-reactions-emoji-picker-demo-container';
 import { MessageReactionsEmojiPickerDemoContainer } from './demos/message-reactions-emoji-picker-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { NoCategoriesEmojiPickerDemoContainer } from './demos/no-categories-emoji-picker-demo-container';
+import { NoRecentEmojiPickerDemoContainer } from './demos/no-recent-emoji-picker-demo-container';
+import { NoSearchEmojiPickerDemoContainer } from './demos/no-search-emoji-picker-demo-container';
+import { QuickReactionsEmojiPickerDemoContainer } from './demos/quick-reactions-emoji-picker-demo-container';
+import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-demo-container';
 
 @Component({
   selector: 'app-emoji-picker-page',

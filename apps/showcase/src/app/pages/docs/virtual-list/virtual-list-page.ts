@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicVirtualListDemoContainer } from './demos/basic-virtual-list-demo-container';
 import { ComplexVirtualListDemoContainer } from './demos/complex-virtual-list-demo-container';
-import { ScrollControlsVirtualListDemoContainer } from './demos/scroll-controls-virtual-list-demo-container';
 import { CustomHeightVirtualListDemoContainer } from './demos/custom-height-virtual-list-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { ScrollControlsVirtualListDemoContainer } from './demos/scroll-controls-virtual-list-demo-container';
 
 @Component({
   selector: 'app-virtual-list-page',

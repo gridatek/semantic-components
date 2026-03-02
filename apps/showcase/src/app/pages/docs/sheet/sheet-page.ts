@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { RightSheetDemoContainer } from './demos/right-sheet-demo-container';
-import { LeftSheetDemoContainer } from './demos/left-sheet-demo-container';
-import { TopSheetDemoContainer } from './demos/top-sheet-demo-container';
-import { BottomSheetDemoContainer } from './demos/bottom-sheet-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BottomSheetDemoContainer } from './demos/bottom-sheet-demo-container';
+import { LeftSheetDemoContainer } from './demos/left-sheet-demo-container';
+import { RightSheetDemoContainer } from './demos/right-sheet-demo-container';
+import { TopSheetDemoContainer } from './demos/top-sheet-demo-container';
 
 @Component({
   selector: 'app-sheet-page',

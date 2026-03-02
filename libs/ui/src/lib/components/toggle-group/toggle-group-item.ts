@@ -1,6 +1,6 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
-import { toggleVariants, type ScToggleVariants } from '../toggle/toggle';
+import { type ScToggleVariants, toggleVariants } from '../toggle/toggle';
 import { ScToggleGroup } from './toggle-group';
 
 @Directive({

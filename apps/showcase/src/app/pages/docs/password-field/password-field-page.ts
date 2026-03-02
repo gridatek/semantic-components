@@ -9,18 +9,17 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { ScCopyButton } from '@semantic-components/ui-lab';
-import BasicPasswordFieldDemoContainer from './demos/basic-password-field-demo-container';
-import ShowDefaultPasswordFieldDemoContainer from './demos/show-default-password-field-demo-container';
-import DisabledPasswordFieldDemoContainer from './demos/disabled-password-field-demo-container';
-import NewPasswordFieldDemoContainer from './demos/new-password-field-demo-container';
-import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-demo-container';
-import RequirementsPasswordFieldDemoContainer from './demos/requirements-password-field-demo-container';
-import FullPasswordFieldDemoContainer from './demos/full-password-field-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ScCopyButton } from '@semantic-components/ui-lab';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import BasicPasswordFieldDemoContainer from './demos/basic-password-field-demo-container';
+import DisabledPasswordFieldDemoContainer from './demos/disabled-password-field-demo-container';
+import FullPasswordFieldDemoContainer from './demos/full-password-field-demo-container';
+import NewPasswordFieldDemoContainer from './demos/new-password-field-demo-container';
+import RequirementsPasswordFieldDemoContainer from './demos/requirements-password-field-demo-container';
+import ShowDefaultPasswordFieldDemoContainer from './demos/show-default-password-field-demo-container';
+import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-demo-container';
 
 @Component({
   selector: 'app-password-field-page',

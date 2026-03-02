@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicFieldDemoContainer } from './demos/basic-field-demo-container';
-import { HorizontalFieldDemoContainer } from './demos/horizontal-field-demo-container';
 import { ErrorFieldDemoContainer } from './demos/error-field-demo-container';
 import { FieldsetDemoContainer } from './demos/fieldset-demo-container';
+import { HorizontalFieldDemoContainer } from './demos/horizontal-field-demo-container';
 import { SeparatorFieldDemoContainer } from './demos/separator-field-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-field-page',

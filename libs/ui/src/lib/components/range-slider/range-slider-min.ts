@@ -1,6 +1,5 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
-
 import { ScRangeSlider } from './range-slider';
 import { MIN_THUMB_CLASSES } from './range-slider-thumb-base';
 

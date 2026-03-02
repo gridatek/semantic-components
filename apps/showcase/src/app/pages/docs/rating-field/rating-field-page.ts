@@ -3,17 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicRatingFieldDemoContainer } from './demos/basic-rating-field-demo-container';
-import { HalfRatingFieldDemoContainer } from './demos/half-rating-field-demo-container';
-import { ReadonlyRatingFieldDemoContainer } from './demos/readonly-rating-field-demo-container';
-import { DisabledRatingFieldDemoContainer } from './demos/disabled-rating-field-demo-container';
-import { CustomIconsRatingFieldDemoContainer } from './demos/custom-icons-rating-field-demo-container';
-import { MaxRatingFieldDemoContainer } from './demos/max-rating-field-demo-container';
-import { FormRatingFieldDemoContainer } from './demos/form-rating-field-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BasicRatingFieldDemoContainer } from './demos/basic-rating-field-demo-container';
+import { CustomIconsRatingFieldDemoContainer } from './demos/custom-icons-rating-field-demo-container';
+import { DisabledRatingFieldDemoContainer } from './demos/disabled-rating-field-demo-container';
+import { FormRatingFieldDemoContainer } from './demos/form-rating-field-demo-container';
+import { HalfRatingFieldDemoContainer } from './demos/half-rating-field-demo-container';
+import { MaxRatingFieldDemoContainer } from './demos/max-rating-field-demo-container';
+import { ReadonlyRatingFieldDemoContainer } from './demos/readonly-rating-field-demo-container';
 
 @Component({
   selector: 'app-rating-field-page',

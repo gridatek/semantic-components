@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import {
   ScTourGuide,
-  TourService,
   TourOptions,
+  TourService,
 } from '@semantic-components/ui-lab';
 
 @Component({

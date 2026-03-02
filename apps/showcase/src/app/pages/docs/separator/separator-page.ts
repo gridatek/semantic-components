@@ -3,13 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSeparatorDemoContainer } from './demos/basic-separator-demo-container';
 import { CardSeparatorDemoContainer } from './demos/card-separator-demo-container';
 import { VerticalSeparatorDemoContainer } from './demos/vertical-separator-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-separator-page',

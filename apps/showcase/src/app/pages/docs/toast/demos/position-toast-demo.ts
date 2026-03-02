@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
-import { ScButton, ScToaster, ScToastPosition } from '@semantic-components/ui';
+import { ScButton, ScToastPosition, ScToaster } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-position-toast-demo',

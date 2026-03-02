@@ -1,5 +1,5 @@
-import { computed, Directive, input, signal } from '@angular/core';
 import { MenuBar } from '@angular/aria/menu';
+import { Directive, computed, input, signal } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({

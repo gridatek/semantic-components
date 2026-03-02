@@ -1,5 +1,5 @@
-import { Component, signal, ViewEncapsulation } from '@angular/core';
-import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-emoji-picker-demo',

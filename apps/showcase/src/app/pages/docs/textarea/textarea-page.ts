@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTextareaDemoContainer } from './demos/basic-textarea-demo-container';
 import { DisabledTextareaDemoContainer } from './demos/disabled-textarea-demo-container';
 import { FormTextareaDemoContainer } from './demos/form-textarea-demo-container';
@@ -10,10 +13,6 @@ import { HelperTextTextareaDemoContainer } from './demos/helper-text-textarea-de
 import { LabelTextareaDemoContainer } from './demos/label-textarea-demo-container';
 import { MaxlengthTextareaDemoContainer } from './demos/maxlength-textarea-demo-container';
 import { RowsTextareaDemoContainer } from './demos/rows-textarea-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-textarea-page',

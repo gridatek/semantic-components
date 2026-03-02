@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicPdfViewerDemoContainer } from './demos/basic-pdf-viewer-demo-container';
-import { MinimalPdfViewerDemoContainer } from './demos/minimal-pdf-viewer-demo-container';
 import { CustomToolbarPdfViewerDemoContainer } from './demos/custom-toolbar-pdf-viewer-demo-container';
 import { InteractivePdfViewerDemoContainer } from './demos/interactive-pdf-viewer-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { MinimalPdfViewerDemoContainer } from './demos/minimal-pdf-viewer-demo-container';
 
 @Component({
   selector: 'app-pdf-viewer-page',

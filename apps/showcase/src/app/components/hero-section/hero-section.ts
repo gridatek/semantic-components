@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { cn, ScLink } from '@semantic-components/ui';
+import { ScLink, cn } from '@semantic-components/ui';
 import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

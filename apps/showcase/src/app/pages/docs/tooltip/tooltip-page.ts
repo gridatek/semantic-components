@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicTooltipDemoContainer } from './demos/basic-tooltip-demo-container';
-import { PositionsTooltipDemoContainer } from './demos/positions-tooltip-demo-container';
-import { IconButtonTooltipDemoContainer } from './demos/icon-button-tooltip-demo-container';
-import { DelayTooltipDemoContainer } from './demos/delay-tooltip-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BasicTooltipDemoContainer } from './demos/basic-tooltip-demo-container';
+import { DelayTooltipDemoContainer } from './demos/delay-tooltip-demo-container';
+import { IconButtonTooltipDemoContainer } from './demos/icon-button-tooltip-demo-container';
+import { PositionsTooltipDemoContainer } from './demos/positions-tooltip-demo-container';
 
 @Component({
   selector: 'app-tooltip-page',

@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScImageAnnotator } from '@semantic-components/ui-lab';
 

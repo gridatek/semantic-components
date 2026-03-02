@@ -1,20 +1,20 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  computed,
-  contentChild,
   DestroyRef,
   ElementRef,
+  TemplateRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
+  contentChild,
   inject,
   input,
   output,
   signal,
-  TemplateRef,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
 import { cn } from '@semantic-components/ui';
 import type { VirtualListItem, VirtualListRange } from './virtual-list-types';
 

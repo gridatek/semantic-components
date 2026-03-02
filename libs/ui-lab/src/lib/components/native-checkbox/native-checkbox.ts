@@ -1,15 +1,15 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
+  Directive,
+  ElementRef,
+  PLATFORM_ID,
   afterNextRender,
   computed,
-  Directive,
   effect,
-  ElementRef,
   inject,
   input,
-  PLATFORM_ID,
   signal,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { cn } from '@semantic-components/ui';
 
 const checkSvgLight = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")`;

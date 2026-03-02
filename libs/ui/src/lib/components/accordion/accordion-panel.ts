@@ -1,11 +1,11 @@
+import { AccordionPanel } from '@angular/aria/accordion';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { AccordionPanel } from '@angular/aria/accordion';
 import { cn } from '../../utils';
 
 @Component({

@@ -2,16 +2,15 @@ import { Option } from '@angular/aria/listbox';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  ViewEncapsulation,
   computed,
   effect,
-  ElementRef,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
-
 import { ScSelectItemIndicator } from './select-item-indicator';
 
 @Component({

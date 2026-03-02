@@ -1,4 +1,4 @@
-import { Directive, inject, input, computed } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_TREE_ITEM } from './tree-item';
 

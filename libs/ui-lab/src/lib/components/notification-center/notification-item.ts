@@ -1,11 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiCircleXIcon,
@@ -14,7 +15,6 @@ import {
   SiTriangleAlertIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
 import type { Notification, NotificationAction } from './notification-types';
 
 @Component({

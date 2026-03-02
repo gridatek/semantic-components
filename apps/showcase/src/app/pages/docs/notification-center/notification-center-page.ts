@@ -3,13 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { GroupedNotificationCenterDemoContainer } from './demos/grouped-notification-center-demo-container';
-import { FlatNotificationCenterDemoContainer } from './demos/flat-notification-center-demo-container';
-import { EmptyNotificationCenterDemoContainer } from './demos/empty-notification-center-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { EmptyNotificationCenterDemoContainer } from './demos/empty-notification-center-demo-container';
+import { FlatNotificationCenterDemoContainer } from './demos/flat-notification-center-demo-container';
+import { GroupedNotificationCenterDemoContainer } from './demos/grouped-notification-center-demo-container';
 
 @Component({
   selector: 'app-notification-center-page',

@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { CHART_COLORS, ChartDataPoint } from './chart-types';
 import { SC_CHART } from './chart-container';
+import { CHART_COLORS, ChartDataPoint } from './chart-types';
 
 @Component({
   selector: '[scLineChart]',

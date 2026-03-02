@@ -1,8 +1,8 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
+  Directive,
   booleanAttribute,
   computed,
-  Directive,
   inject,
   input,
 } from '@angular/core';

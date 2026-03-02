@@ -1,10 +1,10 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
+  Directive,
+  ElementRef,
   computed,
   contentChildren,
-  Directive,
   effect,
-  ElementRef,
   inject,
   input,
   model,

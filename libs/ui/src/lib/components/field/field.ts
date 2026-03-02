@@ -1,18 +1,18 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  computed,
-  contentChild,
   Directive,
   ElementRef,
-  inject,
   InjectionToken,
-  input,
   Signal,
-  signal,
   WritableSignal,
+  computed,
+  contentChild,
+  inject,
+  input,
+  signal,
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../../utils';
 
 const fieldVariants = cva(

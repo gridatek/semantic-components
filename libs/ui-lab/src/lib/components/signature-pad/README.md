@@ -9,8 +9,8 @@ The signature pad uses a **composable architecture** that gives you full control
 ### Basic Usage
 
 ```typescript
-import { ScSignaturePad, ScSignaturePadCanvas, ScSignaturePadControls, ScSignaturePadUndoButton, ScSignaturePadClearButton } from '@semantic-components/ui-lab';
-import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { ScSignaturePad, ScSignaturePadCanvas, ScSignaturePadClearButton, ScSignaturePadControls, ScSignaturePadUndoButton } from '@semantic-components/ui-lab';
+import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   imports: [ScSignaturePad, ScSignaturePadCanvas, ScSignaturePadControls, ScSignaturePadUndoButton, ScSignaturePadClearButton, SiUndoIcon, SiTrash2Icon],

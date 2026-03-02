@@ -3,18 +3,17 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSignaturePadDemoContainer } from './demos/basic-signature-pad-demo-container';
 import { ColorsSignaturePadDemoContainer } from './demos/colors-signature-pad-demo-container';
-import { ThickPenSignaturePadDemoContainer } from './demos/thick-pen-signature-pad-demo-container';
-import { NoControlsSignaturePadDemoContainer } from './demos/no-controls-signature-pad-demo-container';
 import { DisabledSignaturePadDemoContainer } from './demos/disabled-signature-pad-demo-container';
-import { SmallSignaturePadDemoContainer } from './demos/small-signature-pad-demo-container';
-import { PreviewSignaturePadDemoContainer } from './demos/preview-signature-pad-demo-container';
 import { FormSignaturePadDemoContainer } from './demos/form-signature-pad-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { NoControlsSignaturePadDemoContainer } from './demos/no-controls-signature-pad-demo-container';
+import { PreviewSignaturePadDemoContainer } from './demos/preview-signature-pad-demo-container';
+import { SmallSignaturePadDemoContainer } from './demos/small-signature-pad-demo-container';
+import { ThickPenSignaturePadDemoContainer } from './demos/thick-pen-signature-pad-demo-container';
 
 @Component({
   selector: 'app-signature-pad-page',

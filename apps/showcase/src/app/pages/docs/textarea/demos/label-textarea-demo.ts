@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField, required } from '@angular/forms/signals';
+import { FormField, form, required } from '@angular/forms/signals';
 import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
 
 @Component({

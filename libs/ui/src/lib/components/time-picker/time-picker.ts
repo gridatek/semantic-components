@@ -1,7 +1,7 @@
 import {
-  computed,
   Directive,
   InjectionToken,
+  computed,
   input,
   model,
 } from '@angular/core';

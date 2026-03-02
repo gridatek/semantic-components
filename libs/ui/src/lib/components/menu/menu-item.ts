@@ -1,19 +1,19 @@
+import { Menu, MenuItem } from '@angular/aria/menu';
+import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   contentChild,
   effect,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
-import { Menu, MenuItem } from '@angular/aria/menu';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { ScMenuPortal } from './menu-portal';
 import { cn } from '../../utils';
+import { ScMenuPortal } from './menu-portal';
 
 @Component({
   selector: '[scMenuItem]',

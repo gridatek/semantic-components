@@ -1,16 +1,16 @@
+import { Temporal } from '@js-temporal/polyfill';
+import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
-  viewChildren,
   signal,
-  ViewEncapsulation,
+  viewChildren,
 } from '@angular/core';
-import { Grid, GridRow, GridCell, GridCellWidget } from '@angular/aria/grid';
 import { cn } from '../../utils';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendarValue, ScDateRange } from './calendar';
 
 interface DayInfo {

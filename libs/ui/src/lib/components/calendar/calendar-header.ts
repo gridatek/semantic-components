@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   input,
   output,
-  ViewEncapsulation,
 } from '@angular/core';
-import { ScButton } from '../button';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
+import { ScButton } from '../button';
 
 @Component({
   selector: '[scCalendarHeader]',

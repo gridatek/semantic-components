@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { ButtonFileUploadDemoContainer } from './demos/button-file-upload-demo-container';
 import { DropzoneFileUploadDemoContainer } from './demos/dropzone-file-upload-demo-container';
 import { ImageFileUploadDemoContainer } from './demos/image-file-upload-demo-container';
 import { ProgressFileUploadDemoContainer } from './demos/progress-file-upload-demo-container';
 import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-file-upload-page',

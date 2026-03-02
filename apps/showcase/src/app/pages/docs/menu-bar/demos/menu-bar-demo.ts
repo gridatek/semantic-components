@@ -33,6 +33,7 @@ import {
   SiMinusIcon,
   SiPencilIcon,
   SiPrinterIcon,
+  SiRedo2Icon,
   SiScissorsIcon,
   SiSearchIcon,
   SiStrikethroughIcon,
@@ -44,7 +45,6 @@ import {
   SiTrash2Icon,
   SiUnderlineIcon,
   SiUndo2Icon,
-  SiRedo2Icon,
   SiUploadIcon,
   SiUserPlusIcon,
 } from '@semantic-icons/lucide-icons';

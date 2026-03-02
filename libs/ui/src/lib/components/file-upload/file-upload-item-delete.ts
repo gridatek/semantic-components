@@ -1,6 +1,6 @@
-import { computed, Directive, inject, input } from '@angular/core';
-import { buttonVariants } from '../button';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { buttonVariants } from '../button';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Directive({

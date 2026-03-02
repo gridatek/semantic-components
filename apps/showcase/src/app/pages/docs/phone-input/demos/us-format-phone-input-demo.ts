@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScPhoneInputSimple } from '@semantic-components/ui-lab';
 

@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { DisabledButtonDemoContainer } from './demos/disabled-button-demo-container';
 import { LoadingButtonDemoContainer } from './demos/loading-button-demo-container';
 import { SizesButtonDemoContainer } from './demos/sizes-button-demo-container';
 import { VariantsButtonDemoContainer } from './demos/variants-button-demo-container';
 import { WithIconsButtonDemoContainer } from './demos/with-icons-button-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-button-page',

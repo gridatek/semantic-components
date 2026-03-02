@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicTimelineDemoContainer } from './demos/basic-timeline-demo-container';
-import { StatusTimelineDemoContainer } from './demos/status-timeline-demo-container';
-import { SizesTimelineDemoContainer } from './demos/sizes-timeline-demo-container';
-import { ActivityTimelineDemoContainer } from './demos/activity-timeline-demo-container';
-import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { ActivityTimelineDemoContainer } from './demos/activity-timeline-demo-container';
+import { BasicTimelineDemoContainer } from './demos/basic-timeline-demo-container';
+import { SizesTimelineDemoContainer } from './demos/sizes-timeline-demo-container';
+import { StatusTimelineDemoContainer } from './demos/status-timeline-demo-container';
+import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-container';
 
 @Component({
   selector: 'app-timeline-page',

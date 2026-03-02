@@ -1,11 +1,11 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { cn, ScLink } from '@semantic-components/ui';
+import { ScLink, cn } from '@semantic-components/ui';
 import { SiGithubIcon, SiHeartIcon } from '@semantic-icons/lucide-icons';
 import { Logo } from '../logo/logo';
 

@@ -3,12 +3,11 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicEmptyDemoContainer } from './demos/basic-empty-demo-container';
-import { ActionsEmptyDemoContainer } from './demos/actions-empty-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { ActionsEmptyDemoContainer } from './demos/actions-empty-demo-container';
+import { BasicEmptyDemoContainer } from './demos/basic-empty-demo-container';
 
 @Component({
   selector: 'app-empty-page',

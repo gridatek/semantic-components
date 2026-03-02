@@ -1,23 +1,23 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   SiBellIcon,
   SiCircleCheckIcon,
   SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
+import {
+  type NotificationFilter,
+  SC_NOTIFICATION_CENTER,
+} from './notification-center';
 import { ScNotificationGroup } from './notification-group';
 import { ScNotificationItem } from './notification-item';
-import {
-  SC_NOTIFICATION_CENTER,
-  type NotificationFilter,
-} from './notification-center';
 
 @Component({
   selector: '[scNotificationCenterContainer]',

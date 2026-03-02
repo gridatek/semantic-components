@@ -9,15 +9,14 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
+import { ScHeading } from '@semantic-components/ui';
 import { ScCopyButton } from '@semantic-components/ui-lab';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicTableDemoContainer from './demos/basic-table-demo-container';
 import CaptionTableDemoContainer from './demos/caption-table-demo-container';
 import FooterTableDemoContainer from './demos/footer-table-demo-container';
 import UsersTableDemoContainer from './demos/users-table-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-table-page',

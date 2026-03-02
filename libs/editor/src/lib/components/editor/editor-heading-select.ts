@@ -1,8 +1,8 @@
 import {
-  afterNextRender,
-  computed,
   Directive,
   ElementRef,
+  afterNextRender,
+  computed,
   inject,
   input,
 } from '@angular/core';

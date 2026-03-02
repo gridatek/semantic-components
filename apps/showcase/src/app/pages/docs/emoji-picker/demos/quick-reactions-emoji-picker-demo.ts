@@ -1,4 +1,4 @@
-import { Component, signal, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 
 @Component({
   selector: 'app-quick-reactions-emoji-picker-demo',

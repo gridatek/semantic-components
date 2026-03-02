@@ -2,9 +2,9 @@ import { ToolbarWidgetGroup } from '@angular/aria/toolbar';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 

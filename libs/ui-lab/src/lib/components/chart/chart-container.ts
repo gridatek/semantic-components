@@ -1,4 +1,4 @@
-import { computed, Directive, InjectionToken, input } from '@angular/core';
+import { Directive, InjectionToken, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { CHART_COLORS, ChartConfig } from './chart-types';
 

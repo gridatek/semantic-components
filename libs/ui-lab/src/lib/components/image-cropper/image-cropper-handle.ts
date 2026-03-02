@@ -1,4 +1,4 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 export type ScImageCropperHandlePosition =

@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { ArticleSkeletonDemoContainer } from './demos/article-skeleton-demo-container';
 import { BasicSkeletonDemoContainer } from './demos/basic-skeleton-demo-container';
 import { CardSkeletonDemoContainer } from './demos/card-skeleton-demo-container';
-import { ArticleSkeletonDemoContainer } from './demos/article-skeleton-demo-container';
 import { ListSkeletonDemoContainer } from './demos/list-skeleton-demo-container';
 import { TableSkeletonDemoContainer } from './demos/table-skeleton-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-skeleton-page',

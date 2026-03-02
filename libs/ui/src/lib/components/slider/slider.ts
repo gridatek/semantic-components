@@ -1,9 +1,9 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  afterNextRender,
-  computed,
   Directive,
   ElementRef,
+  afterNextRender,
+  computed,
   inject,
   input,
 } from '@angular/core';

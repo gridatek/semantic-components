@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  ViewEncapsulation,
   computed,
   effect,
-  ElementRef,
   inject,
   input,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
-import { cn, ScSlider } from '@semantic-components/ui';
+import { ScSlider, cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({

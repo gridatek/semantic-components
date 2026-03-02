@@ -3,20 +3,19 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCountdownDemoContainer } from './demos/basic-countdown-demo-container';
-import { CompactCountdownDemoContainer } from './demos/compact-countdown-demo-container';
 import { CardsCountdownDemoContainer } from './demos/cards-countdown-demo-container';
-import { SeparatorCountdownDemoContainer } from './demos/separator-countdown-demo-container';
+import { CompactCountdownDemoContainer } from './demos/compact-countdown-demo-container';
+import { CompletedCountdownDemoContainer } from './demos/completed-countdown-demo-container';
+import { EventCountdownDemoContainer } from './demos/event-countdown-demo-container';
 import { LabelsCountdownDemoContainer } from './demos/labels-countdown-demo-container';
 import { NodaysCountdownDemoContainer } from './demos/nodays-countdown-demo-container';
-import { SimpleCountdownDemoContainer } from './demos/simple-countdown-demo-container';
-import { EventCountdownDemoContainer } from './demos/event-countdown-demo-container';
 import { SaleCountdownDemoContainer } from './demos/sale-countdown-demo-container';
-import { CompletedCountdownDemoContainer } from './demos/completed-countdown-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { SeparatorCountdownDemoContainer } from './demos/separator-countdown-demo-container';
+import { SimpleCountdownDemoContainer } from './demos/simple-countdown-demo-container';
 
 @Component({
   selector: 'app-countdown-page',

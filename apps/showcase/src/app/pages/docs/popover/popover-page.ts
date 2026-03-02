@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicPopoverDemoContainer } from './demos/basic-popover-demo-container';
-import { TopPopoverDemoContainer } from './demos/top-popover-demo-container';
-import { RightPopoverDemoContainer } from './demos/right-popover-demo-container';
-import { LeftPopoverDemoContainer } from './demos/left-popover-demo-container';
-import { AlignStartPopoverDemoContainer } from './demos/align-start-popover-demo-container';
-import { AlignEndPopoverDemoContainer } from './demos/align-end-popover-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { AlignEndPopoverDemoContainer } from './demos/align-end-popover-demo-container';
+import { AlignStartPopoverDemoContainer } from './demos/align-start-popover-demo-container';
+import { BasicPopoverDemoContainer } from './demos/basic-popover-demo-container';
+import { LeftPopoverDemoContainer } from './demos/left-popover-demo-container';
+import { RightPopoverDemoContainer } from './demos/right-popover-demo-container';
+import { TopPopoverDemoContainer } from './demos/top-popover-demo-container';
 
 @Component({
   selector: 'app-popover-page',

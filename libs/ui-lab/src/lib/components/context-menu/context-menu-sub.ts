@@ -1,12 +1,12 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { cn } from '@semantic-components/ui';
 
 @Component({

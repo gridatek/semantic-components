@@ -1,19 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  ViewEncapsulation,
   computed,
   effect,
-  ElementRef,
   input,
   model,
   output,
   signal,
-  ViewEncapsulation,
   viewChild,
 } from '@angular/core';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
-import { Country, COUNTRIES, getCountryByCode } from './countries';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+import { COUNTRIES, Country, getCountryByCode } from './countries';
 
 @Component({
   selector: 'sc-phone-input',

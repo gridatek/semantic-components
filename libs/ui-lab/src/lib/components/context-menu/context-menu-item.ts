@@ -1,4 +1,4 @@
-import { computed, Directive, inject, input, output } from '@angular/core';
+import { Directive, computed, inject, input, output } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScContextMenu } from './context-menu';
 

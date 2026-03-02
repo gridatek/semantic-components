@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
-  inject,
   InjectionToken,
-  input,
   ViewEncapsulation,
+  computed,
+  inject,
+  input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_SORTABLE_LIST, ScSortableList } from './sortable-list';

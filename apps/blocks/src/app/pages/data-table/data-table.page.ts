@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   inject,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-
 import { DataTable } from './data-table';
 import { columns } from './data-table-columns';
 import type { User } from './user.service';

@@ -1,7 +1,7 @@
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { ScButtonVariants, buttonVariants } from '../button';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
-import { buttonVariants, ScButtonVariants } from '../button';
 
 @Directive({
   selector: 'button[scAlertDialogAction]',

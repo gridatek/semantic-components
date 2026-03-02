@@ -8,12 +8,12 @@ import {
   ScSelectGroup,
   ScSelectGroupLabel,
   ScSelectItem,
+  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectTrigger,
   ScSelectSeparator,
-  ScSelectLabel,
+  ScSelectTrigger,
 } from '@semantic-components/ui';
 
 @Component({

@@ -7,9 +7,9 @@ import {
   ScAvatar,
   ScAvatarFallback,
   ScAvatarImage,
-  ScHoverCardProvider,
-  ScHoverCardPortal,
   ScHoverCard,
+  ScHoverCardPortal,
+  ScHoverCardProvider,
   ScHoverCardTrigger,
 } from '@semantic-components/ui';
 import { SiCalendarIcon } from '@semantic-icons/lucide-icons';

@@ -1,16 +1,16 @@
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  computed,
-  contentChildren,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
+  contentChildren,
   inject,
   input,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScMasonryItem } from './masonry-item';

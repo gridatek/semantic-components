@@ -3,13 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicAccordionDemoContainer } from './demos/basic-accordion-demo-container';
 import { DisabledAccordionDemoContainer } from './demos/disabled-accordion-demo-container';
 import { MultipleAccordionDemoContainer } from './demos/multiple-accordion-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-accordion-page',

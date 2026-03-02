@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScTimePicker,
-  ScTimePickerInput,
   ScTimePickerHoursInput,
+  ScTimePickerInput,
   ScTimePickerMinutesInput,
   ScTimePickerSeparator,
   ScTimeValue,

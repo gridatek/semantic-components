@@ -3,8 +3,8 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiMapPinIcon } from '@semantic-icons/lucide-icons';
 import { ScAspectRatio } from '@semantic-components/ui';
+import { SiMapPinIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-map-aspect-ratio-demo',

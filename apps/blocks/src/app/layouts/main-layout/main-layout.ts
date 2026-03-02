@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { StackedLayout } from '../../components/stacked-layout/stacked-layout';
-import { Navbar } from '../../components/navbar/navbar';
 import { Footer } from '../../components/footer/footer';
+import { Navbar } from '../../components/navbar/navbar';
+import { StackedLayout } from '../../components/stacked-layout/stacked-layout';
 
 @Component({
   selector: 'app-main-layout',

@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScDateRange, ScDatePicker } from '@semantic-components/ui';
+import { ScDatePicker, ScDateRange } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-range-date-picker-demo',

@@ -1,10 +1,13 @@
-import { NgTemplateOutlet } from '@angular/common';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  TemplateRef,
+  ViewContainerRef,
+  ViewEncapsulation,
   computed,
   contentChild,
   effect,
@@ -12,10 +15,7 @@ import {
   input,
   model,
   signal,
-  TemplateRef,
   viewChild,
-  ViewContainerRef,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';

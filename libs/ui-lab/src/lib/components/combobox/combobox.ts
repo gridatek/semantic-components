@@ -2,11 +2,11 @@ import { Combobox } from '@angular/aria/combobox';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   effect,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '@semantic-components/ui';

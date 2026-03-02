@@ -5,26 +5,26 @@ import {
 } from '@angular/core';
 import {
   ScAudioPlayer,
-  ScAudioPlayerCover,
-  ScAudioPlayerTrackInfo,
-  ScAudioPlayerProgress,
   ScAudioPlayerControls,
+  ScAudioPlayerCover,
+  ScAudioPlayerNext,
   ScAudioPlayerPlay,
   ScAudioPlayerPrevious,
-  ScAudioPlayerNext,
-  ScAudioPlayerShuffle,
+  ScAudioPlayerProgress,
   ScAudioPlayerRepeat,
+  ScAudioPlayerShuffle,
+  ScAudioPlayerTrackInfo,
   ScAudioPlayerVolume,
   ScAudioTrack,
 } from '@semantic-components/ui-lab';
 import {
-  SiPlayIcon,
   SiPauseIcon,
+  SiPlayIcon,
+  SiRepeat1Icon,
+  SiRepeatIcon,
+  SiShuffleIcon,
   SiSkipBackIcon,
   SiSkipForwardIcon,
-  SiRepeatIcon,
-  SiRepeat1Icon,
-  SiShuffleIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({

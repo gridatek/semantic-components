@@ -79,7 +79,7 @@ import { ScField, ScFieldLabel, ScFieldDescription } from '@semantic-components/
 
 ```typescript
 import { Component, signal } from '@angular/core';
-import { form, FormField, required } from '@angular/forms/signals';
+import { FormField, form, required } from '@angular/forms/signals';
 import { ScField, ScFieldErrors, ScLabel } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 

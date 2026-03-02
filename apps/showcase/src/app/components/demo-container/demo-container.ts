@@ -1,11 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { TocHeading } from '../toc/toc-heading';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -16,6 +15,7 @@ import {
 import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
 import { ScCopyButton } from '@semantic-components/ui-lab';
 import { ConfigService } from '../../services/config.service';
+import { TocHeading } from '../toc/toc-heading';
 
 @Component({
   selector: 'app-demo-container',

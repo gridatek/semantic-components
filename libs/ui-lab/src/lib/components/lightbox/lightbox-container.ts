@@ -1,11 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
@@ -15,7 +16,6 @@ import {
   SiZoomInIcon,
   SiZoomOutIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
 import { SC_LIGHTBOX } from './lightbox';
 
 @Component({

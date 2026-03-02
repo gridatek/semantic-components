@@ -1,13 +1,13 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   DestroyRef,
   Directive,
-  effect,
   ElementRef,
+  effect,
   inject,
   input,
   signal,
 } from '@angular/core';
-import { _IdGenerator } from '@angular/cdk/a11y';
 import { ScTooltipManager, ScTooltipPosition } from './tooltip-manager';
 
 @Directive({

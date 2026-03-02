@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicOptFieldDemoContainer } from './demos/basic-opt-field-demo-container';
-import { SeparatorOptFieldDemoContainer } from './demos/separator-opt-field-demo-container';
-import { PinOptFieldDemoContainer } from './demos/pin-opt-field-demo-container';
-import { DotSeparatorOptFieldDemoContainer } from './demos/dot-separator-opt-field-demo-container';
-import { DisabledOptFieldDemoContainer } from './demos/disabled-opt-field-demo-container';
-import { VerificationOptFieldDemoContainer } from './demos/verification-opt-field-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BasicOptFieldDemoContainer } from './demos/basic-opt-field-demo-container';
+import { DisabledOptFieldDemoContainer } from './demos/disabled-opt-field-demo-container';
+import { DotSeparatorOptFieldDemoContainer } from './demos/dot-separator-opt-field-demo-container';
+import { PinOptFieldDemoContainer } from './demos/pin-opt-field-demo-container';
+import { SeparatorOptFieldDemoContainer } from './demos/separator-opt-field-demo-container';
+import { VerificationOptFieldDemoContainer } from './demos/verification-opt-field-demo-container';
 
 @Component({
   selector: 'app-opt-field-page',

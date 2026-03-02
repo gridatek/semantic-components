@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScColorPicker,
   ScColorPickerArea,
   ScColorPickerHue,
-  ScColorPickerPreview,
   ScColorPickerInput,
+  ScColorPickerPreview,
   ScColorPickerSwatches,
 } from '@semantic-components/ui-lab';
 

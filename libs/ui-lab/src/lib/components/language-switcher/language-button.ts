@@ -1,19 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { ScLanguageService } from './language.service';
 import {
-  LanguageSwitcherVariant,
   LanguageSwitcherSize,
-  variantStyles,
+  LanguageSwitcherVariant,
   sizeStyles,
+  variantStyles,
 } from './styles';
 
 /**

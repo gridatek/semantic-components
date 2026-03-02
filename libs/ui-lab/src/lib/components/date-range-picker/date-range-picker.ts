@@ -1,18 +1,18 @@
+import { Temporal } from '@js-temporal/polyfill';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   input,
   model,
   output,
   signal,
-  ViewEncapsulation,
   viewChild,
 } from '@angular/core';
+import { ScCalendar, ScDateRange, cn } from '@semantic-components/ui';
 import { SiCalendarIcon, SiXIcon } from '@semantic-icons/lucide-icons';
-import { cn, ScCalendar, ScDateRange } from '@semantic-components/ui';
-import { Temporal } from '@js-temporal/polyfill';
 
 export interface ScDateRangePreset {
   label: string;

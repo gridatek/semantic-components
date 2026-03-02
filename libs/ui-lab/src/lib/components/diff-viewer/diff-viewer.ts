@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
-  computeDiff,
-  computeWordDiff,
   DiffLine,
   DiffResult,
+  computeDiff,
+  computeWordDiff,
 } from './diff-algorithm';
 
 export type DiffViewMode = 'split' | 'unified';

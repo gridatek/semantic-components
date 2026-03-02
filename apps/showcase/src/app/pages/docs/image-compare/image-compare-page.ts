@@ -3,18 +3,17 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicImageCompareDemoContainer } from './demos/basic-image-compare-demo-container';
+import { ControlledImageCompareDemoContainer } from './demos/controlled-image-compare-demo-container';
+import { KeyboardImageCompareDemoContainer } from './demos/keyboard-image-compare-demo-container';
 import { LabelsImageCompareDemoContainer } from './demos/labels-image-compare-demo-container';
 import { NoLabelsImageCompareDemoContainer } from './demos/no-labels-image-compare-demo-container';
-import { VerticalImageCompareDemoContainer } from './demos/vertical-image-compare-demo-container';
 import { PositionImageCompareDemoContainer } from './demos/position-image-compare-demo-container';
-import { ControlledImageCompareDemoContainer } from './demos/controlled-image-compare-demo-container';
 import { SquareImageCompareDemoContainer } from './demos/square-image-compare-demo-container';
-import { KeyboardImageCompareDemoContainer } from './demos/keyboard-image-compare-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { VerticalImageCompareDemoContainer } from './demos/vertical-image-compare-demo-container';
 
 @Component({
   selector: 'app-image-compare-page',

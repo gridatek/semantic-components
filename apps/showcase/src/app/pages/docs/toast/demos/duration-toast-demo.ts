@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScToaster } from '@semantic-components/ui';

@@ -10,5 +10,5 @@ Experimental and extended UI components and layouts for the Semantic Components 
 ## Usage
 
 ```ts
-import { ScAlert, ScTable, ScSidebar } from '@semantic-components/ui-lab';
+import { ScAlert, ScSidebar, ScTable } from '@semantic-components/ui-lab';
 ```

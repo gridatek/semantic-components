@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiCircleXIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiCircleXIcon } from '@semantic-icons/lucide-icons';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Component({

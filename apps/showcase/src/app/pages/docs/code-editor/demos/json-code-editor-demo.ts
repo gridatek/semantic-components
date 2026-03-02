@@ -6,9 +6,9 @@ import {
 import {
   ScCodeEditor,
   ScCodeEditorContent,
+  ScCodeEditorCopyButton,
   ScCodeEditorHeader,
   ScCodeEditorLabel,
-  ScCodeEditorCopyButton,
 } from '@semantic-components/code';
 
 @Component({

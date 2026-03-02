@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicComboboxDemoContainer } from './demos/basic-combobox-demo-container';
 import { CountriesComboboxDemoContainer } from './demos/countries-combobox-demo-container';
 import { DisabledComboboxDemoContainer } from './demos/disabled-combobox-demo-container';
 import { FormComboboxDemoContainer } from './demos/form-combobox-demo-container';
 import { MultipleComboboxDemoContainer } from './demos/multiple-combobox-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-combobox-page',

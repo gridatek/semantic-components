@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { DisabledDatesCalendarDemoContainer } from './demos/disabled-dates-calendar-demo-container';
 import { MinMaxCalendarDemoContainer } from './demos/min-max-calendar-demo-container';
 import { MultipleDateCalendarDemoContainer } from './demos/multiple-date-calendar-demo-container';
 import { RangeCalendarDemoContainer } from './demos/range-calendar-demo-container';
 import { SingleDateCalendarDemoContainer } from './demos/single-date-calendar-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-calendar-page',

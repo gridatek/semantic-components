@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';

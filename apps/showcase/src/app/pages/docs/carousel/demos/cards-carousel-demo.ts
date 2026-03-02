@@ -5,11 +5,11 @@ import {
 } from '@angular/core';
 import {
   ScCarousel,
-  ScCarouselViewport,
-  ScCarouselTrack,
   ScCarouselItem,
   ScCarouselNext,
   ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/carousel';
 import {
   SiChevronLeftIcon,

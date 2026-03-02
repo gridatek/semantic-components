@@ -2,9 +2,9 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
-  ViewEncapsulation,
 } from '@angular/core';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 

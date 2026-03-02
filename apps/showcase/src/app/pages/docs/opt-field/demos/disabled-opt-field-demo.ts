@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 import {
   ScOptField,
-  ScOptFieldSlotGroup,
   ScOptFieldSlot,
+  ScOptFieldSlotGroup,
 } from '@semantic-components/ui-lab';
 
 @Component({

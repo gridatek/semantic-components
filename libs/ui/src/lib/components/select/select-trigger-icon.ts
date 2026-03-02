@@ -1,5 +1,5 @@
 import { Combobox } from '@angular/aria/combobox';
-import { computed, Directive, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({

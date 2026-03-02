@@ -188,7 +188,7 @@ Include screen reader text where appropriate:
 ## Component Structure Template
 
 ```typescript
-import { booleanAttribute, computed, Component, input } from '@angular/core';
+import { Component, booleanAttribute, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Component({

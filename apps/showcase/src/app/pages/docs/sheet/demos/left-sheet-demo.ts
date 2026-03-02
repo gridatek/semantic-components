@@ -3,18 +3,18 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
-  ScSheetProvider,
-  ScSheetClose,
+  ScButton,
   ScSheet,
+  ScSheetClose,
   ScSheetDescription,
   ScSheetHeader,
   ScSheetPortal,
+  ScSheetProvider,
   ScSheetTitle,
   ScSheetTrigger,
-  ScButton,
 } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-left-sheet-demo',

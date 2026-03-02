@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
-  ScNotificationCenter,
-  ScNotificationCenterContainer,
   type Notification,
   type NotificationGroup,
+  ScNotificationCenter,
+  ScNotificationCenterContainer,
 } from '@semantic-components/ui-lab';
 
 @Component({

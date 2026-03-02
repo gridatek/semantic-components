@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { ArrowKeysKbdDemoContainer } from './demos/arrow-keys-kbd-demo-container';
 import { BasicKbdDemoContainer } from './demos/basic-kbd-demo-container';
 import { ComplexShortcutsKbdDemoContainer } from './demos/complex-shortcuts-kbd-demo-container';
@@ -10,10 +13,6 @@ import { FunctionKeysKbdDemoContainer } from './demos/function-keys-kbd-demo-con
 import { InlineKbdDemoContainer } from './demos/inline-kbd-demo-container';
 import { ShortcutsKbdDemoContainer } from './demos/shortcuts-kbd-demo-container';
 import { VariantsKbdDemoContainer } from './demos/variants-kbd-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-kbd-page',

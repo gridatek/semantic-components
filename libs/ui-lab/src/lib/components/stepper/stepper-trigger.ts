@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
 
 @Component({

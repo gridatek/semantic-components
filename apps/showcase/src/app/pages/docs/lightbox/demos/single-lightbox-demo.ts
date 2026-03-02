@@ -4,10 +4,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  LightboxImage,
   ScLightbox,
   ScLightboxContainer,
   ScLightboxTrigger,
-  LightboxImage,
 } from '@semantic-components/ui-lab';
 
 @Component({

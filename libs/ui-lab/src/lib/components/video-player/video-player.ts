@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
-  inject,
   InjectionToken,
+  ViewEncapsulation,
+  computed,
+  inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScVideoPlayerVideo } from './video-player-video';

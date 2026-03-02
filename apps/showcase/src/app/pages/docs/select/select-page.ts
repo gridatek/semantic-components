@@ -3,13 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { SelectDemoContainer } from './demos/select-demo-container';
 import { SelectDisabledDemoContainer } from './demos/select-disabled-demo-container';
 import { SelectGroupDemoContainer } from './demos/select-group-demo-container';
 import { SelectSignalFormsDemoContainer } from './demos/select-signal-forms-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-select-page',

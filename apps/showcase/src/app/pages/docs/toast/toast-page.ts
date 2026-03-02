@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { ActionToastDemoContainer } from './demos/action-toast-demo-container';
 import { BasicToastDemoContainer } from './demos/basic-toast-demo-container';
 import { DestructiveToastDemoContainer } from './demos/destructive-toast-demo-container';
@@ -10,10 +13,6 @@ import { DurationToastDemoContainer } from './demos/duration-toast-demo-containe
 import { PositionToastDemoContainer } from './demos/position-toast-demo-container';
 import { TitleToastDemoContainer } from './demos/title-toast-demo-container';
 import { VariantsToastDemoContainer } from './demos/variants-toast-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-toast-page',

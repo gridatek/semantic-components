@@ -5,19 +5,19 @@ import {
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
 import {
-  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  afterRenderEffect,
+  computed,
   inject,
   input,
   model,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'div[scComboboxPortal]',

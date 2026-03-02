@@ -3,13 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicHoverCardDemoContainer } from './demos/basic-hover-card-demo-container';
 import { RightHoverCardDemoContainer } from './demos/right-hover-card-demo-container';
 import { TopHoverCardDemoContainer } from './demos/top-hover-card-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-hover-card-page',

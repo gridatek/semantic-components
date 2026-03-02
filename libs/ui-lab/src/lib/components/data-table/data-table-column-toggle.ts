@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiSlidersVerticalIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
+import { SiSlidersVerticalIcon } from '@semantic-icons/lucide-icons';
 import { SC_DATA_TABLE } from './data-table';
 
 @Component({

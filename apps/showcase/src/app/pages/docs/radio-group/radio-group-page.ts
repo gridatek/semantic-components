@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicRadioGroupDemoContainer } from './demos/basic-radio-group-demo-container';
+import { CustomThemeRadioGroupDemoContainer } from './demos/custom-theme-radio-group-demo-container';
 import { DescriptionsRadioGroupDemoContainer } from './demos/descriptions-radio-group-demo-container';
 import { DisabledRadioGroupDemoContainer } from './demos/disabled-radio-group-demo-container';
-import { HorizontalRadioGroupDemoContainer } from './demos/horizontal-radio-group-demo-container';
 import { FormRadioGroupDemoContainer } from './demos/form-radio-group-demo-container';
-import { CustomThemeRadioGroupDemoContainer } from './demos/custom-theme-radio-group-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { HorizontalRadioGroupDemoContainer } from './demos/horizontal-radio-group-demo-container';
 
 @Component({
   selector: 'app-radio-group-page',

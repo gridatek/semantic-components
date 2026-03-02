@@ -2,18 +2,18 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  ViewEncapsulation,
   computed,
   contentChild,
-  ElementRef,
   inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
-import { type ScSwitchContext, SC_SWITCH_FIELD } from './switch-types';
 import { ScSwitch } from './switch';
+import { SC_SWITCH_FIELD, type ScSwitchContext } from './switch-types';
 import { ScSwitchVisual } from './switch-visual';
 
 @Component({

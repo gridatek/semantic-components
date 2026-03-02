@@ -1,5 +1,5 @@
-import { Directive, inject, signal, TemplateRef } from '@angular/core';
 import type { Menu } from '@angular/aria/menu';
+import { Directive, TemplateRef, inject, signal } from '@angular/core';
 
 @Directive({
   selector: '[scMenuPortal]',

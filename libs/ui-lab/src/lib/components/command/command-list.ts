@@ -1,5 +1,5 @@
 import { Listbox } from '@angular/aria/listbox';
-import { computed, Directive, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({

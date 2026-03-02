@@ -1,15 +1,15 @@
+import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
-import { required, minLength } from '@angular/forms/signals';
+import { FormField, form } from '@angular/forms/signals';
+import { minLength, required } from '@angular/forms/signals';
 import { ScProgress } from '@semantic-components/ui';
 import { ScLabel } from '@semantic-components/ui';
-import { JsonPipe } from '@angular/common';
 
 interface UserFormModel {
   name: string;

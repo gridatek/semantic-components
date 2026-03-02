@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 import {
   ScRatingField,
-  ScRatingItemGroup,
   ScRatingFieldItem,
+  ScRatingItemGroup,
 } from '@semantic-components/ui-lab';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 

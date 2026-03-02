@@ -1,24 +1,24 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScImageCropper,
   ScImageCropperCanvas,
+  ScImageCropperDragRegion,
+  ScImageCropperGrid,
+  ScImageCropperHandle,
   ScImageCropperImage,
   ScImageCropperOverlay,
+  ScImageCropperPreview,
   ScImageCropperSelection,
-  ScImageCropperDragRegion,
-  ScImageCropperHandle,
-  ScImageCropperGrid,
   ScImageCropperZoomIn,
   ScImageCropperZoomOut,
   ScImageCropperZoomSlider,
-  ScImageCropperPreview,
 } from '@semantic-components/ui-lab';
-import { ScButton } from '@semantic-components/ui';
 import { SiZoomInIcon, SiZoomOutIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

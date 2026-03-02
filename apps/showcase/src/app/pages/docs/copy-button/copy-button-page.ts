@@ -3,20 +3,19 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicCopyButtonDemoContainer } from './demos/basic-copy-button-demo-container';
-import { VariantsCopyButtonDemoContainer } from './demos/variants-copy-button-demo-container';
-import { SizesCopyButtonDemoContainer } from './demos/sizes-copy-button-demo-container';
-import { WithtextCopyButtonDemoContainer } from './demos/withtext-copy-button-demo-container';
-import { InputCopyButtonDemoContainer } from './demos/input-copy-button-demo-container';
-import { CodeCopyButtonDemoContainer } from './demos/code-copy-button-demo-container';
-import { InlineCopyButtonDemoContainer } from './demos/inline-copy-button-demo-container';
-import { TimeoutCopyButtonDemoContainer } from './demos/timeout-copy-button-demo-container';
-import { DisabledCopyButtonDemoContainer } from './demos/disabled-copy-button-demo-container';
-import { UsecasesCopyButtonDemoContainer } from './demos/usecases-copy-button-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BasicCopyButtonDemoContainer } from './demos/basic-copy-button-demo-container';
+import { CodeCopyButtonDemoContainer } from './demos/code-copy-button-demo-container';
+import { DisabledCopyButtonDemoContainer } from './demos/disabled-copy-button-demo-container';
+import { InlineCopyButtonDemoContainer } from './demos/inline-copy-button-demo-container';
+import { InputCopyButtonDemoContainer } from './demos/input-copy-button-demo-container';
+import { SizesCopyButtonDemoContainer } from './demos/sizes-copy-button-demo-container';
+import { TimeoutCopyButtonDemoContainer } from './demos/timeout-copy-button-demo-container';
+import { UsecasesCopyButtonDemoContainer } from './demos/usecases-copy-button-demo-container';
+import { VariantsCopyButtonDemoContainer } from './demos/variants-copy-button-demo-container';
+import { WithtextCopyButtonDemoContainer } from './demos/withtext-copy-button-demo-container';
 
 @Component({
   selector: 'app-copy-button-page',

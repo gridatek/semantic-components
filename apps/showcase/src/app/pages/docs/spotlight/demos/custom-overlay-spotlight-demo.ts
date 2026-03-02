@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  viewChild,
   ViewEncapsulation,
+  viewChild,
 } from '@angular/core';
 import {
   ScSpotlight,

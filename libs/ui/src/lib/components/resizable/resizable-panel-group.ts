@@ -1,8 +1,8 @@
-import { computed, Directive, input, contentChildren } from '@angular/core';
+import { Directive, computed, contentChildren, input } from '@angular/core';
 import { cn } from '../../utils';
-import { ScResizableDirection } from './resizable.types';
-import { ScResizablePanel } from './resizable-panel';
 import { ScResizableHandle } from './resizable-handle';
+import { ScResizablePanel } from './resizable-panel';
+import { ScResizableDirection } from './resizable.types';
 
 @Directive({
   selector: '[scResizablePanelGroup]',

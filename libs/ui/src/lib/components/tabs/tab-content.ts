@@ -1,5 +1,5 @@
-import { Directive } from '@angular/core';
 import { TabContent } from '@angular/aria/tabs';
+import { Directive } from '@angular/core';
 
 @Directive({
   selector: 'ng-template[scTabContent]',

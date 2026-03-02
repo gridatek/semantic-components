@@ -1,19 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   ScCombobox,
-  ScComboboxPortal,
   ScComboboxEmpty,
   ScComboboxIcon,
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
+  ScComboboxPortal,
   ScComboboxTrigger,
 } from '@semantic-components/ui-lab';
 

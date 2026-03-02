@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
+  computed,
+  contentChild,
   inject,
   input,
   output,
-  ViewEncapsulation,
-  contentChild,
-  afterNextRender,
 } from '@angular/core';
-import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '@semantic-components/ui';
-import { ScInfiniteScrollLoader } from './infinite-scroll-loader';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 import { ScInfiniteScrollEnd } from './infinite-scroll-end';
+import { ScInfiniteScrollLoader } from './infinite-scroll-loader';
 
 @Component({
   selector: 'sc-infinite-scroll',

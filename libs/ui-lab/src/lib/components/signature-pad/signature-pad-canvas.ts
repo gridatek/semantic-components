@@ -1,16 +1,16 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  computed,
-  input,
-  model,
-  output,
-  inject,
+  Component,
+  DestroyRef,
   ElementRef,
   ViewEncapsulation,
   afterNextRender,
-  DestroyRef,
+  computed,
   effect,
+  inject,
+  input,
+  model,
+  output,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';

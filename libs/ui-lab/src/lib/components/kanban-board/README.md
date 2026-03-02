@@ -7,7 +7,7 @@ A drag-and-drop task board component for project management and workflow visuali
 Import the components from the kanban-board module:
 
 ```typescript
-import { ScKanbanBoard, ScKanbanColumn, ScKanbanCard } from '@/ui/kanban-board';
+import { ScKanbanBoard, ScKanbanCard, ScKanbanColumn } from '@/ui/kanban-board';
 ```
 
 ## Usage
@@ -19,8 +19,8 @@ import { ScKanbanBoard, ScKanbanColumn, ScKanbanCard } from '@/ui/kanban-board';
 ```
 
 ```typescript
+import type { KanbanCard, KanbanColumn } from '@/ui/kanban-board';
 import { signal } from '@angular/core';
-import type { KanbanColumn, KanbanCard } from '@/ui/kanban-board';
 
 columns = signal<KanbanColumn[]>([
   { id: 'todo', title: 'To Do', order: 0 },

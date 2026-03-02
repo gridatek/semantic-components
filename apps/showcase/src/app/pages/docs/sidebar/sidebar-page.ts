@@ -3,10 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 
 @Component({
   selector: 'app-sidebar-page',

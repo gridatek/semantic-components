@@ -1,11 +1,11 @@
+import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { JsonPipe } from '@angular/common';
-import { form, FormField } from '@angular/forms/signals';
+import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
 import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 

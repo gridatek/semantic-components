@@ -1,18 +1,18 @@
+import { Temporal } from '@js-temporal/polyfill';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   model,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendarDayView } from './calendar-day-view';
+import { ScCalendarHeader } from './calendar-header';
 import { ScCalendarMonthView } from './calendar-month-view';
 import { ScCalendarYearView } from './calendar-year-view';
-import { ScCalendarHeader } from './calendar-header';
 
 export type ScCalendarMode = 'single' | 'multiple' | 'range';
 export type ScCalendarViewMode = 'day' | 'month' | 'year';

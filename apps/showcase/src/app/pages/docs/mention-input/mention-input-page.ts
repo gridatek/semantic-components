@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicMentionInputDemoContainer } from './demos/basic-mention-input-demo-container';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { AvatarsMentionInputDemoContainer } from './demos/avatars-mention-input-demo-container';
+import { BasicMentionInputDemoContainer } from './demos/basic-mention-input-demo-container';
 import { CustomTriggerMentionInputDemoContainer } from './demos/custom-trigger-mention-input-demo-container';
 import { DisabledMentionInputDemoContainer } from './demos/disabled-mention-input-demo-container';
 import { FormMentionInputDemoContainer } from './demos/form-mention-input-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-mention-input-page',

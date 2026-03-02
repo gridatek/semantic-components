@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScSignaturePad,
   ScSignaturePadCanvas,
+  ScSignaturePadClearButton,
   ScSignaturePadControls,
   ScSignaturePadUndoButton,
-  ScSignaturePadClearButton,
 } from '@semantic-components/ui-lab';
-import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-composable-signature-pad-demo',

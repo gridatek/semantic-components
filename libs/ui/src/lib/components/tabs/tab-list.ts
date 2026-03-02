@@ -1,11 +1,11 @@
+import { TabList } from '@angular/aria/tabs';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { TabList } from '@angular/aria/tabs';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../../utils';
 

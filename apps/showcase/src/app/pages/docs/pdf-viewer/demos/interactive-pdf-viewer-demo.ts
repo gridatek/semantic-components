@@ -1,30 +1,30 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  ScPdfViewerRoot,
   ScPdfViewerContainer,
-  ScPdfViewerToolbar,
+  ScPdfViewerContent,
+  ScPdfViewerDownload,
+  ScPdfViewerEmpty,
+  ScPdfViewerError,
+  ScPdfViewerFullscreen,
+  ScPdfViewerLoading,
   ScPdfViewerNav,
-  ScPdfViewerPrevPage,
   ScPdfViewerNextPage,
   ScPdfViewerPageInfo,
+  ScPdfViewerPrevPage,
+  ScPdfViewerRoot,
+  ScPdfViewerSeparator,
+  ScPdfViewerSpacer,
+  ScPdfViewerToolbar,
   ScPdfViewerZoom,
   ScPdfViewerZoomIn,
   ScPdfViewerZoomOut,
   ScPdfViewerZoomSelect,
-  ScPdfViewerDownload,
-  ScPdfViewerFullscreen,
-  ScPdfViewerSeparator,
-  ScPdfViewerSpacer,
-  ScPdfViewerContent,
-  ScPdfViewerLoading,
-  ScPdfViewerError,
-  ScPdfViewerEmpty,
 } from '@semantic-components/ui-lab';
 
 @Component({

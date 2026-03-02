@@ -3,17 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSplitButtonDemoContainer } from './demos/basic-split-button-demo-container';
-import { VariantsSplitButtonDemoContainer } from './demos/variants-split-button-demo-container';
-import { SizesSplitButtonDemoContainer } from './demos/sizes-split-button-demo-container';
-import { IconsSplitButtonDemoContainer } from './demos/icons-split-button-demo-container';
 import { DestructiveSplitButtonDemoContainer } from './demos/destructive-split-button-demo-container';
 import { DisabledSplitButtonDemoContainer } from './demos/disabled-split-button-demo-container';
 import { FormSplitButtonDemoContainer } from './demos/form-split-button-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
+import { IconsSplitButtonDemoContainer } from './demos/icons-split-button-demo-container';
+import { SizesSplitButtonDemoContainer } from './demos/sizes-split-button-demo-container';
+import { VariantsSplitButtonDemoContainer } from './demos/variants-split-button-demo-container';
 
 @Component({
   selector: 'app-split-button-page',

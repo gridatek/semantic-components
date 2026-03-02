@@ -14,7 +14,7 @@ A composable set of directives for displaying statistics and metrics with option
 ## Installation
 
 ```typescript
-import { ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, ScStatCardChange, ScStatCardDescription } from '@semantic-components/ui-lab';
+import { ScStatCard, ScStatCardChange, ScStatCardDescription, ScStatCardIcon, ScStatCardLabel, ScStatCardValue } from '@semantic-components/ui-lab';
 ```
 
 ## Usage

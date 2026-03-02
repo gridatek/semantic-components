@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScStepper,
-  ScStepperList,
-  ScStepperItem,
-  ScStepperTrigger,
-  ScStepperSeparator,
   ScStepperContent,
-  ScStepperTitle,
   ScStepperDescription,
-  ScStepperPrevious,
+  ScStepperItem,
+  ScStepperList,
   ScStepperNext,
+  ScStepperPrevious,
+  ScStepperSeparator,
+  ScStepperTitle,
+  ScStepperTrigger,
 } from '@semantic-components/ui-lab';
 
 @Component({

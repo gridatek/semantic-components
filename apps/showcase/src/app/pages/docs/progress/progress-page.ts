@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicProgressDemoContainer } from './demos/basic-progress-demo-container';
 import { CustomMaxProgressDemoContainer } from './demos/custom-max-progress-demo-container';
 import { CustomStylingProgressDemoContainer } from './demos/custom-styling-progress-demo-container';
 import { SignalFormsProgressDemoContainer } from './demos/signal-forms-progress-demo-container';
 import { ValuesProgressDemoContainer } from './demos/values-progress-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-progress-page',

@@ -1,15 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   inject,
   input,
   output,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { cn } from '@semantic-components/ui';
@@ -20,8 +20,8 @@ import {
   type PdfLoadEvent,
   type PdfPageChangeEvent,
   type PdfToolbarConfig,
-  type PdfZoomLevel,
   type PdfZoomChangeEvent,
+  type PdfZoomLevel,
 } from './pdf-viewer-types';
 
 @Component({

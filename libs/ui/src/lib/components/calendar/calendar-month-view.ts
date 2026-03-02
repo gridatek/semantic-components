@@ -1,16 +1,16 @@
+import { Temporal } from '@js-temporal/polyfill';
+import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   output,
   signal,
   viewChildren,
-  ViewEncapsulation,
 } from '@angular/core';
-import { Grid, GridRow, GridCell, GridCellWidget } from '@angular/aria/grid';
 import { cn } from '../../utils';
-import { Temporal } from '@js-temporal/polyfill';
 
 interface MonthInfo {
   label: string;

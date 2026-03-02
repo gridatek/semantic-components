@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SiSmileIcon } from '@semantic-icons/lucide-icons';
 import { buttonVariants, cn } from '@semantic-components/ui';
+import { SiSmileIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'button[scEmojiPickerTrigger]',

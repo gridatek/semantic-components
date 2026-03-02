@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   SiTextAlignCenterIcon,
-  SiTextAlignStartIcon,
   SiTextAlignEndIcon,
+  SiTextAlignStartIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({

@@ -1,4 +1,4 @@
-import { booleanAttribute, Directive, input } from '@angular/core';
+import { Directive, booleanAttribute, input } from '@angular/core';
 
 @Directive({
   selector: '[scButtonPattern]',

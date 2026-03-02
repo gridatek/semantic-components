@@ -1,28 +1,28 @@
+import { Temporal } from '@js-temporal/polyfill';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   model,
-  ViewEncapsulation,
 } from '@angular/core';
-import { cn } from '../../utils';
-import {
-  ScPopoverProvider,
-  ScPopoverPortal,
-  ScPopover,
-  ScPopoverTrigger,
-  ScPopoverAlign,
-  ScPopoverSide,
-} from '../popover';
 import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
-import { Temporal } from '@js-temporal/polyfill';
+import { cn } from '../../utils';
 import {
   ScCalendar,
   ScCalendarMode,
   ScCalendarValue,
   ScDateRange,
 } from '../calendar';
+import {
+  ScPopover,
+  ScPopoverAlign,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverSide,
+  ScPopoverTrigger,
+} from '../popover';
 
 @Component({
   selector: 'sc-date-picker',

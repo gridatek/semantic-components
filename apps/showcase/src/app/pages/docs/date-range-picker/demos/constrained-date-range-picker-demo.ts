@@ -1,9 +1,9 @@
+import { Temporal } from '@js-temporal/polyfill';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScDateRangePicker } from '@semantic-components/ui-lab';
 
 @Component({

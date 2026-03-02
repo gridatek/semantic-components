@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
   model,
   output,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
   SiChevronsLeftIcon,
   SiChevronsRightIcon,
 } from '@semantic-icons/lucide-icons';
-import { cn } from '@semantic-components/ui';
 import type { TransferListItem } from './transfer-list-types';
 
 @Component({

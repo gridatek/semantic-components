@@ -1,15 +1,15 @@
 import {
-  computed,
-  DestroyRef,
+  ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  InjectionToken,
+  ViewEncapsulation,
+  computed,
   inject,
   input,
-  InjectionToken,
   model,
   output,
   signal,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScAudioPlayerAudio } from './audio-player-audio';

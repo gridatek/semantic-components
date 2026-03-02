@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScImageCompare,
+  ScImageCompareAfter,
   ScImageCompareArea,
   ScImageCompareBefore,
-  ScImageCompareAfter,
-  ScImageCompareSlider,
   ScImageCompareLabel,
+  ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
 
 @Component({

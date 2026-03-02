@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicOrgChartDemoContainer } from './demos/basic-org-chart-demo-container';
-import { HorizontalOrgChartDemoContainer } from './demos/horizontal-org-chart-demo-container';
-import { AvatarsOrgChartDemoContainer } from './demos/avatars-org-chart-demo-container';
-import { CompactOrgChartDemoContainer } from './demos/compact-org-chart-demo-container';
-import { NonCollapsibleOrgChartDemoContainer } from './demos/non-collapsible-org-chart-demo-container';
-import { LargeOrgChartDemoContainer } from './demos/large-org-chart-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { AvatarsOrgChartDemoContainer } from './demos/avatars-org-chart-demo-container';
+import { BasicOrgChartDemoContainer } from './demos/basic-org-chart-demo-container';
+import { CompactOrgChartDemoContainer } from './demos/compact-org-chart-demo-container';
+import { HorizontalOrgChartDemoContainer } from './demos/horizontal-org-chart-demo-container';
+import { LargeOrgChartDemoContainer } from './demos/large-org-chart-demo-container';
+import { NonCollapsibleOrgChartDemoContainer } from './demos/non-collapsible-org-chart-demo-container';
 
 @Component({
   selector: 'app-org-chart-page',

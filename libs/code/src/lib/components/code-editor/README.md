@@ -5,7 +5,7 @@ An interactive code editor component with syntax highlighting powered by [Shiki]
 ## Import
 
 ```typescript
-import { ScCodeEditor, ScCodeEditorHeader, ScCodeEditorLabel, ScCodeEditorFooter, ScCodeEditorContent, ScCodeEditorCopyButton, ScCodeEditorLanguage, detectLanguage } from '@semantic-components/ui-lab';
+import { ScCodeEditor, ScCodeEditorContent, ScCodeEditorCopyButton, ScCodeEditorFooter, ScCodeEditorHeader, ScCodeEditorLabel, ScCodeEditorLanguage, detectLanguage } from '@semantic-components/ui-lab';
 ```
 
 ## Architecture

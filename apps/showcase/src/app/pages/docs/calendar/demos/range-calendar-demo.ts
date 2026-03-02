@@ -1,12 +1,12 @@
+import { Temporal } from '@js-temporal/polyfill';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
-import { ScDateRange, ScCalendar } from '@semantic-components/ui';
+import { ScCalendar, ScDateRange } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-range-calendar-demo',

@@ -1,14 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
-
+import { ScHeading } from '@semantic-components/ui';
 import { TocHeading } from '../../components/toc/toc-heading';
 import { ConfigService } from '../../services/config.service';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-introduction-page',

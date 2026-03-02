@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   contentChild,
   effect,
@@ -8,12 +9,11 @@ import {
   input,
   model,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
 import { cn } from '@semantic-components/ui';
+import { filter } from 'rxjs';
 import { ScNavbar } from './navbar';
 
 @Component({

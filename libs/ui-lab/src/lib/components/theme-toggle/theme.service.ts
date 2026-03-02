@@ -1,4 +1,4 @@
-import { computed, effect, Injectable, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
 
 export type Theme = 'light' | 'dark' | 'system';
 

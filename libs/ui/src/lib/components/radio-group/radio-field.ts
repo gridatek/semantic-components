@@ -2,15 +2,15 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   ElementRef,
+  ViewEncapsulation,
+  computed,
   inject,
   input,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-import { SC_FIELD } from '../field/field';
 import { cn } from '../../utils';
+import { SC_FIELD } from '../field/field';
 
 @Component({
   selector: 'div[scRadioField], label[scRadioField]',

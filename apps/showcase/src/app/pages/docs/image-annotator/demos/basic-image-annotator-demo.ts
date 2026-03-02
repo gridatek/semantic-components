@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScImageAnnotator, type Annotation } from '@semantic-components/ui-lab';
+import { type Annotation, ScImageAnnotator } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-image-annotator-demo',

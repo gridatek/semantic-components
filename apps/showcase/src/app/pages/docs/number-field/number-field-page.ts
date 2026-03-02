@@ -9,16 +9,15 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { ScCopyButton } from '@semantic-components/ui-lab';
-import BasicNumberFieldDemoContainer from './demos/basic-number-field-demo-container';
-import ScrubbingNumberFieldDemoContainer from './demos/scrubbing-number-field-demo-container';
-import PriceNumberFieldDemoContainer from './demos/price-number-field-demo-container';
-import DisabledNumberFieldDemoContainer from './demos/disabled-number-field-demo-container';
-import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-field-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ScCopyButton } from '@semantic-components/ui-lab';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import BasicNumberFieldDemoContainer from './demos/basic-number-field-demo-container';
+import DisabledNumberFieldDemoContainer from './demos/disabled-number-field-demo-container';
+import PriceNumberFieldDemoContainer from './demos/price-number-field-demo-container';
+import ScrubbingNumberFieldDemoContainer from './demos/scrubbing-number-field-demo-container';
+import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-field-demo-container';
 
 @Component({
   selector: 'app-number-field-page',

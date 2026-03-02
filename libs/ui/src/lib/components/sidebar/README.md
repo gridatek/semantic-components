@@ -133,7 +133,7 @@ This architecture ensures smooth transitions and proper content flow without Jav
 ## Basic Usage
 
 ```typescript
-import { ScSidebarProvider, ScSidebar, ScSidebarTrigger, ScSidebarHeader, ScSidebarBody, ScSidebarFooter, ScSidebarMenu, ScSidebarMenuItem, ScSidebarMenuButton, ScSidebarInset } from '@semantic-components/ui';
+import { ScSidebar, ScSidebarBody, ScSidebarFooter, ScSidebarHeader, ScSidebarInset, ScSidebarMenu, ScSidebarMenuButton, ScSidebarMenuItem, ScSidebarProvider, ScSidebarTrigger } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-layout',

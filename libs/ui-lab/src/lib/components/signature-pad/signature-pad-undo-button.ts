@@ -1,10 +1,10 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  computed,
-  input,
-  inject,
+  Component,
   ViewEncapsulation,
+  computed,
+  inject,
+  input,
 } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD } from './signature-pad';

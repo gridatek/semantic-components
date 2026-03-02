@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { DisabledTimePickerDemoContainer } from './demos/disabled-time-picker-demo-container';
 import { Format12hTimePickerDemoContainer } from './demos/format-12h-time-picker-demo-container';
 import { Format24hTimePickerDemoContainer } from './demos/format-24h-time-picker-demo-container';
 import { PopoverTimePickerDemoContainer } from './demos/popover-time-picker-demo-container';
 import { PresetsTimePickerDemoContainer } from './demos/presets-time-picker-demo-container';
 import { SecondsTimePickerDemoContainer } from './demos/seconds-time-picker-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-time-picker-page',

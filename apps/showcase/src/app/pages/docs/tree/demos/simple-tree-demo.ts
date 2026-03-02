@@ -6,9 +6,9 @@ import {
 import {
   ScTree,
   ScTreeItem,
+  ScTreeItemGroup,
   ScTreeItemTrigger,
   ScTreeItemTriggerIcon,
-  ScTreeItemGroup,
 } from '@semantic-components/ui-lab';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 

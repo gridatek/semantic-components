@@ -1,6 +1,6 @@
-import { booleanAttribute, computed, Directive, input } from '@angular/core';
+import { Directive, booleanAttribute, computed, input } from '@angular/core';
 import { cn } from '../../utils';
-import { buttonVariants, type ScButtonVariants } from '../button';
+import { type ScButtonVariants, buttonVariants } from '../button';
 
 @Directive({
   selector: 'a[scLink]',

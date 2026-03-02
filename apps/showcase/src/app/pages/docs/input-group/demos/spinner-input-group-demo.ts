@@ -4,9 +4,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInput,
   ScSpinner,
 } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';

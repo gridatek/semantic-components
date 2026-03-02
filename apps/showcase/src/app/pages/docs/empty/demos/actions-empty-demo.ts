@@ -6,11 +6,11 @@ import {
 import {
   ScButton,
   ScEmpty,
+  ScEmptyBody,
+  ScEmptyDescription,
   ScEmptyHeader,
   ScEmptyMedia,
   ScEmptyTitle,
-  ScEmptyDescription,
-  ScEmptyBody,
 } from '@semantic-components/ui';
 import { SiFolderIcon } from '@semantic-icons/lucide-icons';
 

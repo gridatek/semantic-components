@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_STEPPER } from './stepper-types';

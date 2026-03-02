@@ -1,13 +1,14 @@
+import type { Table } from '@tanstack/angular-table';
 import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   input,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
-  type ScPaginationChange,
   ScPagination,
+  type ScPaginationChange,
   ScPaginationEllipsis,
   ScPaginationFirst,
   ScPaginationItem,
@@ -25,7 +26,6 @@ import {
   SiChevronsRightIcon,
   SiEllipsisIcon,
 } from '@semantic-icons/lucide-icons';
-import type { Table } from '@tanstack/angular-table';
 
 @Component({
   selector: 'app-data-table-pagination',

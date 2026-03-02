@@ -1,4 +1,4 @@
-import { computed, Directive, inject } from '@angular/core';
+import { Directive, computed, inject } from '@angular/core';
 import { cn } from '../../utils';
 import { ScTimePickerPeriod } from './time-picker-period';
 

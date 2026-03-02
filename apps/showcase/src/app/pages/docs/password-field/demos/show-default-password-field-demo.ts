@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScPasswordField,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldInput,
+  ScPasswordFieldInputGroup,
   ScPasswordFieldToggle,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-show-default-password-field-demo',

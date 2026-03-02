@@ -6,15 +6,15 @@ import {
 import {
   ScTree,
   ScTreeItem,
-  ScTreeItemTrigger,
-  ScTreeItemTriggerIcon,
   ScTreeItemGroup,
   ScTreeItemIcon,
+  ScTreeItemTrigger,
+  ScTreeItemTriggerIcon,
 } from '@semantic-components/ui-lab';
 import {
+  SiBookOpenIcon,
   SiChevronRightIcon,
   SiHouseIcon,
-  SiBookOpenIcon,
   SiSettingsIcon,
 } from '@semantic-icons/lucide-icons';
 

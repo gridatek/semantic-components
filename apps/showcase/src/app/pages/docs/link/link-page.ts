@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { VariantsLinkDemoContainer } from './demos/variants-link-demo-container';
-import { SizesLinkDemoContainer } from './demos/sizes-link-demo-container';
-import { DisabledLinkDemoContainer } from './demos/disabled-link-demo-container';
-import { WithIconsLinkDemoContainer } from './demos/with-icons-link-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { DisabledLinkDemoContainer } from './demos/disabled-link-demo-container';
+import { SizesLinkDemoContainer } from './demos/sizes-link-demo-container';
+import { VariantsLinkDemoContainer } from './demos/variants-link-demo-container';
+import { WithIconsLinkDemoContainer } from './demos/with-icons-link-demo-container';
 
 @Component({
   selector: 'app-link-page',

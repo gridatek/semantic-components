@@ -3,16 +3,15 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSpeedDialDemoContainer } from './demos/basic-speed-dial-demo-container';
-import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-demo-container';
 import { CustomIconsSpeedDialDemoContainer } from './demos/custom-icons-speed-dial-demo-container';
+import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-demo-container';
+import { DisabledActionsSpeedDialDemoContainer } from './demos/disabled-actions-speed-dial-demo-container';
 import { SizesSpeedDialDemoContainer } from './demos/sizes-speed-dial-demo-container';
 import { WithoutLabelsSpeedDialDemoContainer } from './demos/without-labels-speed-dial-demo-container';
-import { DisabledActionsSpeedDialDemoContainer } from './demos/disabled-actions-speed-dial-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-speed-dial-page',

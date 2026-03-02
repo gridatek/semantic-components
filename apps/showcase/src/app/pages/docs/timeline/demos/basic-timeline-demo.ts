@@ -5,13 +5,13 @@ import {
 } from '@angular/core';
 import {
   ScTimeline,
-  ScTimelineItem,
   ScTimelineConnector,
-  ScTimelineDot,
   ScTimelineContent,
-  ScTimelineTitle,
   ScTimelineDescription,
+  ScTimelineDot,
+  ScTimelineItem,
   ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui-lab';
 
 @Component({

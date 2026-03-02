@@ -4,9 +4,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInput,
   ScInputGroupText,
   ScKbd,
 } from '@semantic-components/ui';

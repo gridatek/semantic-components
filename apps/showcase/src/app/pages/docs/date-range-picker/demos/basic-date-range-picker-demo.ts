@@ -1,8 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScDateRange } from '@semantic-components/ui';
 import { ScDateRangePicker } from '@semantic-components/ui-lab';

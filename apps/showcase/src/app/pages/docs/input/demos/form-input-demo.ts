@@ -1,10 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { email, form, FormField, required } from '@angular/forms/signals';
+import { FormField, email, form, required } from '@angular/forms/signals';
 import {
   ScCard,
   ScCardBody,

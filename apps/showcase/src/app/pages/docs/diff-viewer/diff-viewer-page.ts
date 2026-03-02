@@ -3,17 +3,16 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { BasicDiffViewerDemoContainer } from './demos/basic-diff-viewer-demo-container';
-import { UnifiedDiffViewerDemoContainer } from './demos/unified-diff-viewer-demo-container';
-import { JsonDiffViewerDemoContainer } from './demos/json-diff-viewer-demo-container';
-import { MinimalDiffViewerDemoContainer } from './demos/minimal-diff-viewer-demo-container';
-import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewer-demo-container';
-import { LargeDiffViewerDemoContainer } from './demos/large-diff-viewer-demo-container';
-import { IdenticalDiffViewerDemoContainer } from './demos/identical-diff-viewer-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
 import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
+import { BasicDiffViewerDemoContainer } from './demos/basic-diff-viewer-demo-container';
+import { IdenticalDiffViewerDemoContainer } from './demos/identical-diff-viewer-demo-container';
+import { JsonDiffViewerDemoContainer } from './demos/json-diff-viewer-demo-container';
+import { LargeDiffViewerDemoContainer } from './demos/large-diff-viewer-demo-container';
+import { MinimalDiffViewerDemoContainer } from './demos/minimal-diff-viewer-demo-container';
+import { UnifiedDiffViewerDemoContainer } from './demos/unified-diff-viewer-demo-container';
+import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewer-demo-container';
 
 @Component({
   selector: 'app-diff-viewer-page',

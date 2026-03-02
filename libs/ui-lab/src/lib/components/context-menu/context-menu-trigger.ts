@@ -1,10 +1,10 @@
 import {
+  Directive,
+  TemplateRef,
   computed,
   contentChild,
-  Directive,
   inject,
   input,
-  TemplateRef,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScContextMenu } from './context-menu';

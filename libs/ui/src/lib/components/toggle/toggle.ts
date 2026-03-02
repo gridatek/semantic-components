@@ -1,5 +1,5 @@
-import { computed, Directive, input, model } from '@angular/core';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { Directive, computed, input, model } from '@angular/core';
+import { type VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../../utils';
 
 export const toggleVariants = cva(

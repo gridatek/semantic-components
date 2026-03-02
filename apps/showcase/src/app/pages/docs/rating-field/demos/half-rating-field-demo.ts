@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScRatingField,
-  ScRatingItemGroup,
   ScRatingFieldItem,
+  ScRatingItemGroup,
 } from '@semantic-components/ui-lab';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 

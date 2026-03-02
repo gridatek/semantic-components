@@ -3,14 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicStatCardDemoContainer } from './demos/basic-stat-card-demo-container';
+import { DescriptionStatCardDemoContainer } from './demos/description-stat-card-demo-container';
 import { SizesStatCardDemoContainer } from './demos/sizes-stat-card-demo-container';
 import { VariantsStatCardDemoContainer } from './demos/variants-stat-card-demo-container';
-import { DescriptionStatCardDemoContainer } from './demos/description-stat-card-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-stat-card-page',

@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScEditor,
+  ScEditorBoldButton,
+  ScEditorCharCount,
   ScEditorContent,
+  ScEditorCount,
+  ScEditorFooter,
+  ScEditorItalicButton,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-  ScEditorBoldButton,
-  ScEditorItalicButton,
-  ScEditorFooter,
-  ScEditorCount,
   ScEditorWordCount,
-  ScEditorCharCount,
 } from '@semantic-components/editor';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 

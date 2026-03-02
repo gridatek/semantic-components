@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('With Icons Button Demo', () => {
   test.beforeEach(async ({ page }) => {

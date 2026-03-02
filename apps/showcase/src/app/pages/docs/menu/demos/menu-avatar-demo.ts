@@ -9,14 +9,14 @@ import {
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
-  ScMenuSeparator,
   ScMenuProvider,
+  ScMenuSeparator,
   ScMenuTrigger,
 } from '@semantic-components/ui';
 import {
+  SiCirclePlusIcon,
   SiCreditCardIcon,
   SiLogOutIcon,
-  SiCirclePlusIcon,
   SiSettingsIcon,
   SiUserIcon,
   SiUsersIcon,

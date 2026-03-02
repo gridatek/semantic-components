@@ -3,6 +3,9 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScHeading } from '@semantic-components/ui';
+import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCheckboxDemoContainer } from './demos/basic-checkbox-demo-container';
 import { CustomThemeCheckboxDemoContainer } from './demos/custom-theme-checkbox-demo-container';
 import { DisabledCheckboxDemoContainer } from './demos/disabled-checkbox-demo-container';
@@ -11,10 +14,6 @@ import { IndeterminateCheckboxDemoContainer } from './demos/indeterminate-checkb
 import { LabelCheckboxDemoContainer } from './demos/label-checkbox-demo-container';
 import { SignalFormsCheckboxDemoContainer } from './demos/signal-forms-checkbox-demo-container';
 import { WithDescriptionCheckboxDemoContainer } from './demos/with-description-checkbox-demo-container';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
-
-import { ScHeading } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-checkbox-page',

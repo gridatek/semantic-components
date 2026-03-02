@@ -1,5 +1,4 @@
 import { test } from '@playwright/test';
-
 import { expectNoA11yViolations } from '../axe';
 
 test.describe('Field Page', () => {
