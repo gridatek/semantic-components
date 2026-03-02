@@ -25,6 +25,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
       <!-- Seek slider -->
       <input
         scSlider
+        aria-label="Seek"
         class="absolute inset-0 h-full [&::-moz-range-progress]:transition-[height] group-hover:[&::-moz-range-progress]:h-1.5 [&::-moz-range-track]:transition-[height] group-hover:[&::-moz-range-track]:h-1.5 [&::-webkit-slider-runnable-track]:transition-[height] group-hover:[&::-webkit-slider-runnable-track]:h-1.5"
         style="--muted: oklch(0 0 0 / 0.1)"
         min="0"

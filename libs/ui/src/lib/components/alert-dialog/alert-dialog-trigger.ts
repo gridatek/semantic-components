@@ -8,7 +8,7 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
     'data-slot': 'alert-dialog-trigger',
     type: 'button',
     '[class]': 'class()',
-    '[attr.aria-haspopup]': '"alertdialog"',
+    '[attr.aria-haspopup]': '"dialog"',
     '[attr.aria-expanded]': 'alertDialogProvider.open()',
     '(click)': 'openDialog()',
   },
