@@ -11,11 +11,7 @@ export default [
       'playwright/expect-expect': [
         'error',
         {
-          assertFunctionNames: [
-            'expect',
-            'expectNoA11yViolations',
-            'expectNoA11yViolationsForDemo',
-          ],
+          assertFunctionNames: ['expect', 'expectNoA11yViolations'],
         },
       ],
       'playwright/no-skipped-test': 'off',

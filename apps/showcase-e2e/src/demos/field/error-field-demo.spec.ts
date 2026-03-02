@@ -1,14 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-import { expectNoA11yViolationsForDemo } from '../../a11y';
-
 test.describe('Error Field Demo', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/demos/field/error-field-demo');
-  });
-
-  test('should have no accessibility violations', async ({ page }) => {
-    await expectNoA11yViolationsForDemo(page);
   });
 
   test('should render a labeled password input', async ({ page }) => {

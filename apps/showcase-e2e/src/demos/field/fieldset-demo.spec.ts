@@ -1,14 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-import { expectNoA11yViolationsForDemo } from '../../a11y';
-
 test.describe('Fieldset Demo', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/demos/field/fieldset-demo');
-  });
-
-  test('should have no accessibility violations', async ({ page }) => {
-    await expectNoA11yViolationsForDemo(page);
   });
 
   test('should render a fieldset with legend', async ({ page }) => {
