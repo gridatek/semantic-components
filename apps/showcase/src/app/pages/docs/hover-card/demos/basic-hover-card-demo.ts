@@ -4,6 +4,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScAvatarImage,
   ScHoverCardProvider,
   ScHoverCardPortal,
   ScHoverCard,
@@ -13,6 +16,9 @@ import {
 @Component({
   selector: 'app-basic-hover-card-demo',
   imports: [
+    ScAvatar,
+    ScAvatarFallback,
+    ScAvatarImage,
     ScHoverCardProvider,
     ScHoverCardPortal,
     ScHoverCard,
@@ -32,11 +38,14 @@ import {
       <ng-template scHoverCardPortal>
         <div scHoverCard>
           <div class="flex justify-between gap-4">
-            <div
-              class="flex size-12 items-center justify-center rounded-full bg-linear-to-br from-red-500 to-red-700 text-xl font-bold text-white"
-            >
-              A
-            </div>
+            <span scAvatar class="size-12">
+              <img
+                scAvatarImage
+                src="https://github.com/angular.png"
+                alt="angular"
+              />
+              <span scAvatarFallback>A</span>
+            </span>
             <div class="space-y-1">
               <h4 class="text-sm font-semibold">&#64;angular</h4>
               <p class="text-muted-foreground text-sm">
