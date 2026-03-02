@@ -9,7 +9,6 @@ export * from './combobox';
 export * from './command';
 export * from './confetti';
 export * from './context-menu';
-export * from './copy-button';
 export * from './countdown';
 export * from './data-table';
 export * from './date-range-picker';

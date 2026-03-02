@@ -1,3 +1,4 @@
+import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +12,7 @@ import {
 } from '@semantic-components/code';
 import { ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { ScCopyButton } from '@semantic-components/ui-lab';
+import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
@@ -22,7 +23,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeViewerContent,
     ScCodeViewerHeader,
     ScCodeViewerLabel,
-    ScCopyButton,
+    CdkCopyToClipboard,
+    SiCopyIcon,
     ScSeparator,
     ScHeading,
   ],
@@ -45,7 +47,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>terminal</span>
-            <button scCopyButton [value]="installCode"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="installCode"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div scCodeViewerContent [code]="installCode" language="bash"></div>
         </div>
@@ -63,7 +72,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>css</span>
-            <button scCopyButton [value]="sourceCode"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="sourceCode"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div scCodeViewerContent [code]="sourceCode" language="css"></div>
         </div>
@@ -79,7 +95,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
-            <button scCopyButton [value]="usageCode"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="usageCode"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div
             scCodeViewerContent

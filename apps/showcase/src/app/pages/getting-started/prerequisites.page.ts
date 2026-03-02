@@ -1,3 +1,4 @@
+import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +12,7 @@ import {
 } from '@semantic-components/code';
 import { ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { ScCopyButton } from '@semantic-components/ui-lab';
+import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
@@ -22,7 +23,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeViewerContent,
     ScCodeViewerHeader,
     ScCodeViewerLabel,
-    ScCopyButton,
+    CdkCopyToClipboard,
+    SiCopyIcon,
     ScSeparator,
     ScHeading,
   ],
@@ -43,7 +45,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>terminal</span>
-            <button scCopyButton [value]="step1Code"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="step1Code"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div scCodeViewerContent [code]="step1Code" language="bash"></div>
         </div>
@@ -71,7 +80,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <div scCodeViewer>
               <div scCodeViewerHeader>
                 <span scCodeViewerLabel>terminal</span>
-                <button scCopyButton [value]="step2Code"></button>
+                <button
+                  type="button"
+                  [cdkCopyToClipboard]="step2Code"
+                  class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+                  aria-label="Copy to clipboard"
+                >
+                  <svg siCopyIcon class="size-4"></svg>
+                </button>
               </div>
               <div scCodeViewerContent [code]="step2Code" language="bash"></div>
             </div>
@@ -95,7 +111,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <div scCodeViewer>
               <div scCodeViewerHeader>
                 <span scCodeViewerLabel>.postcssrc.json</span>
-                <button scCopyButton [value]="step3aCode"></button>
+                <button
+                  type="button"
+                  [cdkCopyToClipboard]="step3aCode"
+                  class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+                  aria-label="Copy to clipboard"
+                >
+                  <svg siCopyIcon class="size-4"></svg>
+                </button>
               </div>
               <div
                 scCodeViewerContent
@@ -118,7 +141,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>terminal</span>
-            <button scCopyButton [value]="step4Code"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="step4Code"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div scCodeViewerContent [code]="step4Code" language="bash"></div>
         </div>
@@ -134,7 +164,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>terminal</span>
-            <button scCopyButton [value]="step5Code"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="step5Code"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div scCodeViewerContent [code]="step5Code" language="bash"></div>
         </div>
@@ -160,7 +197,14 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>terminal</span>
-            <button scCopyButton [value]="step6Code"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="step6Code"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div scCodeViewerContent [code]="step6Code" language="bash"></div>
         </div>

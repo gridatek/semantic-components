@@ -1,3 +1,4 @@
+import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +11,7 @@ import {
   ScCodeViewerLabel,
 } from '@semantic-components/code';
 import { ScHeading } from '@semantic-components/ui';
-import { ScCopyButton } from '@semantic-components/ui-lab';
+import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-container';
@@ -22,7 +23,8 @@ import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-contain
     ScCodeViewerHeader,
     ScCodeViewerLabel,
     ScCodeViewerContent,
-    ScCopyButton,
+    CdkCopyToClipboard,
+    SiCopyIcon,
     BasicCodeViewerDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -43,7 +45,14 @@ import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-contain
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
-            <button scCopyButton [value]="usageCode"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="usageCode"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div
             scCodeViewerContent
@@ -63,13 +72,14 @@ import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-contain
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CodeViewerPage {
-  readonly usageCode = `import {
+  readonly usageCode = `import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
+import {
   ScCodeViewer,
+  ScCodeViewerContent,
   ScCodeViewerHeader,
   ScCodeViewerLabel,
-  ScCodeViewerContent,
-  ScCopyButton,
 } from '@semantic-components/code';
+import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   imports: [
@@ -77,14 +87,21 @@ export default class CodeViewerPage {
     ScCodeViewerHeader,
     ScCodeViewerLabel,
     ScCodeViewerContent,
-    ScCopyButton,
-    TocHeading,
+    CdkCopyToClipboard,
+    SiCopyIcon,
   ],
   template: \`
     <div scCodeViewer>
       <div scCodeViewerHeader>
         <span scCodeViewerLabel>app.component.ts</span>
-        <button scCopyButton [value]="code"></button>
+        <button
+          type="button"
+          [cdkCopyToClipboard]="code"
+          class="inline-flex items-center justify-center size-9 rounded-md hover:bg-accent hover:text-accent-foreground"
+          aria-label="Copy to clipboard"
+        >
+          <svg siCopyIcon class="size-4"></svg>
+        </button>
       </div>
       <div
         scCodeViewerContent

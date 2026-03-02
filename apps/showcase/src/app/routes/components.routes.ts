@@ -154,12 +154,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/context-menu/context-menu-page'),
       },
       {
-        path: 'copy-button',
-        title: 'Copy Button - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/copy-button/copy-button-page'),
-      },
-      {
         path: 'countdown',
         title: 'Countdown - Semantic Components',
         loadComponent: () => import('../pages/docs/countdown/countdown-page'),

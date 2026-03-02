@@ -1,3 +1,4 @@
+import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,7 +11,7 @@ import {
   ScCodeViewerLabel,
 } from '@semantic-components/code';
 import { ScHeading } from '@semantic-components/ui';
-import { ScCopyButton } from '@semantic-components/ui-lab';
+import { SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicTableDemoContainer from './demos/basic-table-demo-container';
@@ -25,7 +26,8 @@ import UsersTableDemoContainer from './demos/users-table-demo-container';
     ScCodeViewerHeader,
     ScCodeViewerLabel,
     ScCodeViewerContent,
-    ScCopyButton,
+    CdkCopyToClipboard,
+    SiCopyIcon,
     BasicTableDemoContainer,
     CaptionTableDemoContainer,
     FooterTableDemoContainer,
@@ -47,7 +49,14 @@ import UsersTableDemoContainer from './demos/users-table-demo-container';
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
-            <button scCopyButton [value]="usageCode"></button>
+            <button
+              type="button"
+              [cdkCopyToClipboard]="usageCode"
+              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
+              aria-label="Copy to clipboard"
+            >
+              <svg siCopyIcon class="size-4"></svg>
+            </button>
           </div>
           <div
             scCodeViewerContent
