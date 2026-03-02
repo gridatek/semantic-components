@@ -12,6 +12,7 @@ import {
   ScHoverCard,
   ScHoverCardTrigger,
 } from '@semantic-components/ui';
+import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-hover-card-demo',
@@ -23,6 +24,7 @@ import {
     ScHoverCardPortal,
     ScHoverCard,
     ScHoverCardTrigger,
+    SiCalendarIcon,
   ],
   template: `
     <div scHoverCardProvider>
@@ -53,23 +55,9 @@ import {
               </p>
               <div class="flex items-center pt-2">
                 <svg
+                  siCalendarIcon
                   class="text-muted-foreground mr-2 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                  <line x1="16" x2="16" y1="2" y2="6" />
-                  <line x1="8" x2="8" y1="2" y2="6" />
-                  <line x1="3" x2="21" y1="10" y2="10" />
-                </svg>
+                ></svg>
                 <span class="text-muted-foreground text-xs">
                   Joined September 2014
                 </span>
