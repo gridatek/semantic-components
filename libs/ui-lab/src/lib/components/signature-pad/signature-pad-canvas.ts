@@ -24,6 +24,7 @@ import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
     '[width]': 'width()',
     '[height]': 'height()',
     role: 'img',
+    '[attr.aria-label]': 'ariaLabel()',
     '(mousedown)': 'onPointerDown($event)',
     '(mousemove)': 'onPointerMove($event)',
     '(mouseup)': 'onPointerUp()',
@@ -44,6 +45,7 @@ export class ScSignaturePadCanvas {
   // CSS/Tailwind only sets display size, which causes stretching and poor drawing quality.
   readonly width = input<number>(400);
   readonly height = input<number>(200);
+  readonly ariaLabel = input<string>('Signature pad', { alias: 'aria-label' });
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Two-way binding
