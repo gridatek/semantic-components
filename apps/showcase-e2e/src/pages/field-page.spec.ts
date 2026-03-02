@@ -1,17 +1,10 @@
-import { test, expect } from '../axe-fixture';
+import { test } from '@playwright/test';
 
-test.describe('Field Page Accessibility', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/components/field');
-  });
+import { expectNoA11yViolations } from '../a11y';
 
-  test('should have no accessibility violations', async ({
-    makeAxeBuilder,
-  }) => {
-    const results = await makeAxeBuilder()
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze();
-
-    expect(results.violations).toEqual([]);
+test.describe('Field Page', () => {
+  test('should have no accessibility violations', async ({ page }) => {
+    await page.goto('/docs/components/field');
+    await expectNoA11yViolations(page);
   });
 });
