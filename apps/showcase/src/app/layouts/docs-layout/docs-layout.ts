@@ -179,20 +179,17 @@ import { ConfigService } from '../../services/config.service';
                         <span>UI</span>
                       </a>
                     </li>
-                    @if (devMode()) {
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/ui-lab"
-                          routerLinkActive
-                          #uiLabRla="routerLinkActive"
-                          [isActive]="uiLabRla.isActive"
-                        >
-                          <span>UI Lab</span>
-                        </a>
-                      </li>
-                    }
-
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/ui-lab"
+                        routerLinkActive
+                        #uiLabRla="routerLinkActive"
+                        [isActive]="uiLabRla.isActive"
+                      >
+                        <span>UI Lab</span>
+                      </a>
+                    </li>
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
@@ -229,6 +226,7 @@ import { ConfigService } from '../../services/config.service';
                         </a>
                       </li>
                     }
+
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
