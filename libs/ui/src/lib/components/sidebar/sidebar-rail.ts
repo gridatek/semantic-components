@@ -15,6 +15,7 @@ import { ScSidebarState } from './sidebar-state';
     'data-slot': 'sidebar-rail',
     '[class]': 'class()',
     '(click)': 'state.toggle()',
+    'aria-label': 'Toggle Sidebar',
     tabindex: '-1',
     title: 'Toggle Sidebar',
   },
