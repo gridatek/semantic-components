@@ -21,7 +21,7 @@ import { DestructiveAlertDialogDemoContainer } from './demos/destructive-alert-d
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>AlertDialog</h1>
+        <h1 scHeading>Alert Dialog</h1>
         <p class="text-muted-foreground">
           A modal dialog that interrupts the user with important content and
           expects a response.
