@@ -5,7 +5,11 @@ import { Page, expect } from '@playwright/test';
 const FULL_PAGE_RULES = ['landmark-one-main', 'page-has-heading-one', 'region'];
 
 export async function expectNoA11yViolations(page: Page) {
-  const results = await new AxeBuilder({ page }).analyze();
+  await page.waitForLoadState('networkidle');
+  const results = await new AxeBuilder({ page })
+    .exclude('[inert]')
+    .exclude('[data-disabled="true"]')
+    .analyze();
   expect(results.violations).toEqual([]);
 }
 

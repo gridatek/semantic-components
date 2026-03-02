@@ -9,58 +9,18 @@ import {
 import { cn } from '@semantic-components/ui';
 import { ScBadge } from '@semantic-components/ui';
 import { ComponentStatusBadge } from '../component-status-badge/component-status-badge';
-import { ComponentItem, ComponentLibrary } from '../../data/components';
+import { ComponentItem } from '../../data/components';
 import { ComponentsService } from '../../services/components.service';
-
-const libraryColors: Record<ComponentLibrary, { bg: string; text: string }> = {
-  ui: {
-    bg: 'color-mix(in oklch, var(--chart-1) 15%, transparent)',
-    text: 'var(--chart-1)',
-  },
-  'ui-lab': {
-    bg: 'color-mix(in oklch, var(--chart-2) 15%, transparent)',
-    text: 'var(--chart-2)',
-  },
-  carousel: {
-    bg: 'color-mix(in oklch, var(--chart-3) 15%, transparent)',
-    text: 'var(--chart-3)',
-  },
-  code: {
-    bg: 'color-mix(in oklch, var(--chart-4) 15%, transparent)',
-    text: 'var(--chart-4)',
-  },
-  editor: {
-    bg: 'color-mix(in oklch, var(--chart-5) 15%, transparent)',
-    text: 'var(--chart-5)',
-  },
-};
-
-const categoryColor = {
-  bg: 'color-mix(in oklch, var(--primary) 15%, transparent)',
-  text: 'var(--primary)',
-};
 
 @Component({
   selector: 'app-component-badges',
   imports: [ComponentStatusBadge, ScBadge],
   template: `
     <app-component-status-badge [status]="componentItem().status" />
-    <span
-      scBadge
-      variant="outline"
-      [style.background-color]="categoryColor.bg"
-      [style.color]="categoryColor.text"
-      [style.border-color]="categoryColor.text"
-    >
+    <span scBadge variant="outline">
       {{ componentItem().category }}
     </span>
-    <span
-      scBadge
-      variant="outline"
-      [style.background-color]="libColor().bg"
-      [style.color]="libColor().text"
-      [style.border-color]="libColor().text"
-    >
+    <span scBadge variant="secondary">
       {{ componentItem().library }}
     </span>
   `,
@@ -83,11 +43,5 @@ export class ComponentBadges {
   readonly componentItem = computed<ComponentItem>(
     () =>
       this.componentsService.components().find((c) => c.path === this.path())!,
-  );
-
-  protected readonly categoryColor = categoryColor;
-
-  protected readonly libColor = computed(
-    () => libraryColors[this.componentItem().library],
   );
 }
