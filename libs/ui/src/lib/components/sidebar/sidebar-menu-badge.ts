@@ -13,7 +13,7 @@ export class ScSidebarMenuBadge {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums text-sidebar-foreground select-none pointer-events-none',
+      'pointer-events-none absolute end-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium text-sidebar-foreground tabular-nums select-none',
       'peer-hover/menu-button:text-sidebar-accent-foreground peer-data-active/menu-button:text-sidebar-accent-foreground',
       'peer-data-[size=sm]/menu-button:top-1',
       'peer-data-[size=default]/menu-button:top-1.5',

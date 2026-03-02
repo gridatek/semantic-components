@@ -13,7 +13,7 @@ export class ScSidebarMenuSub {
 
   protected readonly class = computed(() =>
     cn(
-      'mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-sidebar-border px-2.5 py-0.5',
+      'mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-s border-sidebar-border px-2.5 py-0.5 rtl:-translate-x-px',
       'group-data-[collapsible=icon]:hidden',
       this.classInput(),
     ),
