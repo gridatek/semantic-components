@@ -1,5 +1,5 @@
-import { computed, Directive, input } from '@angular/core';
-import { cva, VariantProps } from 'class-variance-authority';
+import { Directive, computed, input } from '@angular/core';
+import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../../utils';
 
 const badgeVariants = cva(
