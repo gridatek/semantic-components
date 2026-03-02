@@ -27,8 +27,12 @@ export class ScSignaturePadColorButton {
   protected readonly signaturePad = inject(SC_SIGNATURE_PAD);
 
   readonly color = input.required<string>();
-  readonly ariaLabel = input<string>('');
+  readonly ariaLabelInput = input<string>('', { alias: 'aria-label' });
   readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly ariaLabel = computed(
+    () => this.ariaLabelInput() || `Pen color ${this.color()}`,
+  );
 
   protected readonly isActive = computed(
     () => this.signaturePad.penColor() === this.color(),

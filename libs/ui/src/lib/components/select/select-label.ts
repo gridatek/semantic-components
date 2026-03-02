@@ -27,6 +27,6 @@ export class ScSelectLabel {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('truncate pointer-events-none', this.classInput()),
+    cn('truncate pointer-events-none text-foreground', this.classInput()),
   );
 }
