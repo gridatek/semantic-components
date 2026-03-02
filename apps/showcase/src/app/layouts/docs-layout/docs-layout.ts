@@ -204,19 +204,19 @@ import { ConfigService } from '../../services/config.service';
                         <span>Carousel</span>
                       </a>
                     </li>
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/editor"
+                        routerLinkActive
+                        #editorRla="routerLinkActive"
+                        [isActive]="editorRla.isActive"
+                      >
+                        <span>Editor</span>
+                      </a>
+                    </li>
 
                     @if (devMode()) {
-                      <li scSidebarMenuSubItem>
-                        <a
-                          scSidebarMenuSubButton
-                          routerLink="/docs/getting-started/editor"
-                          routerLinkActive
-                          #editorRla="routerLinkActive"
-                          [isActive]="editorRla.isActive"
-                        >
-                          <span>Editor</span>
-                        </a>
-                      </li>
                       <li scSidebarMenuSubItem>
                         <a
                           scSidebarMenuSubButton
@@ -229,6 +229,17 @@ import { ConfigService } from '../../services/config.service';
                         </a>
                       </li>
                     }
+                    <li scSidebarMenuSubItem>
+                      <a
+                        scSidebarMenuSubButton
+                        routerLink="/docs/getting-started/mcp-server"
+                        routerLinkActive
+                        #mcpServerRla="routerLinkActive"
+                        [isActive]="mcpServerRla.isActive"
+                      >
+                        <span>MCP Server</span>
+                      </a>
+                    </li>
                   </ul>
                 </li>
                 <li scSidebarMenuItem>
