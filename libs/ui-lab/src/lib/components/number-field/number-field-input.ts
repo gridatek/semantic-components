@@ -16,6 +16,7 @@ import { SC_NUMBER_FIELD } from './number-field';
     'data-slot': 'number-field-input',
     type: 'text',
     inputmode: 'decimal',
+    role: 'spinbutton',
     '[class]': 'class()',
     '[value]': 'displayValue()',
     '[disabled]': 'numberField.disabled()',

@@ -5,7 +5,7 @@ import { cn } from '../../utils';
   selector: 'div[scItemSeparator]',
   host: {
     'data-slot': 'item-separator',
-    role: 'separator',
+    role: 'none',
     '[class]': 'class()',
   },
 })
