@@ -97,6 +97,10 @@ import { ConfigService } from '../../services/config.service';
             <strong>&#64;semantic-components/editor</strong>
             — Rich text editor powered by Tiptap
           </li>
+          <li>
+            <strong>&#64;semantic-components/mcp-server</strong>
+            — MCP server for AI coding assistants
+          </li>
 
           @if (devMode()) {
             <li>
