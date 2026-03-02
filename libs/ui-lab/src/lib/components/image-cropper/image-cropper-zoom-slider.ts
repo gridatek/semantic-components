@@ -19,6 +19,7 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     <input
       #sliderEl
       scSlider
+      aria-label="Zoom level"
       [min]="0.1"
       [max]="3"
       [step]="0.1"

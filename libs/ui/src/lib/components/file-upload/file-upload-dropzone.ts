@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
   inject,
@@ -14,17 +13,6 @@ import { SC_FILE_UPLOAD } from './file-upload';
 @Component({
   selector: '[scFileUploadDropzone]',
   template: `
-    <input
-      #fileInput
-      type="file"
-      class="sr-only"
-      aria-hidden="true"
-      tabindex="-1"
-      [multiple]="fileUpload.multiple()"
-      [accept]="fileUpload.accept()"
-      [disabled]="fileUpload.disabled()"
-      (change)="onFileSelect($event)"
-    />
     <ng-content />
   `,
   host: {
@@ -42,7 +30,6 @@ import { SC_FILE_UPLOAD } from './file-upload';
 })
 export class ScFileUploadDropzone {
   readonly fileUpload = inject(SC_FILE_UPLOAD);
-  private readonly elementRef = inject(ElementRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly isDragging = signal(false);
@@ -59,18 +46,17 @@ export class ScFileUploadDropzone {
 
   openFilePicker(): void {
     if (this.fileUpload.disabled()) return;
-    const input = this.elementRef.nativeElement.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement;
-    input?.click();
-  }
 
-  onFileSelect(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.fileUpload.addFiles(input.files);
-      input.value = '';
-    }
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = this.fileUpload.multiple();
+    input.accept = this.fileUpload.accept();
+    input.addEventListener('change', () => {
+      if (input.files && input.files.length > 0) {
+        this.fileUpload.addFiles(input.files);
+      }
+    });
+    input.click();
   }
 
   onDragOver(event: DragEvent): void {

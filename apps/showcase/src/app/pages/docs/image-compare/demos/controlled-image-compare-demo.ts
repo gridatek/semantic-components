@@ -45,6 +45,7 @@ import {
         max="100"
         [value]="position()"
         (input)="position.set(+$any($event.target).value)"
+        aria-label="Comparison position"
         class="flex-1"
       />
       <span class="w-12 text-right text-sm">{{ position() }}%</span>

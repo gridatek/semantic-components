@@ -12,8 +12,9 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     '[style.width.px]': 'cropper.cropArea().width',
     '[style.height.px]': 'cropper.cropArea().height',
     tabindex: '0',
-    role: 'slider',
+    role: 'group',
     'aria-label': 'Crop selection',
+    'aria-roledescription': 'crop region',
     '(keydown)': 'onKeyDown($event)',
   },
 })
