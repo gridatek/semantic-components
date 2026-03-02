@@ -21,7 +21,8 @@ export class ScSeparator {
 
   protected readonly class = computed(() =>
     cn(
-      'shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px',
+      'shrink-0 bg-border',
+      this.orientation() === 'horizontal' ? 'h-px w-full' : 'self-stretch w-px',
       this.classInput(),
     ),
   );
