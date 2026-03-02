@@ -49,6 +49,7 @@ import { ScSelectTrigger } from './select-trigger';
   host: {
     'data-slot': 'select',
     '[class]': 'class()',
+    '[attr.aria-disabled]': 'combobox.disabled() || null',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
