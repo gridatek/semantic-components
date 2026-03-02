@@ -25,7 +25,7 @@ import {
     ScBreadcrumbSeparator,
   ],
   template: `
-    <nav scBreadcrumb>
+    <nav scBreadcrumb aria-label="Ellipsis breadcrumb">
       <ol scBreadcrumbList>
         <li scBreadcrumbItem>
           <a scBreadcrumbLink href="#">Home</a>

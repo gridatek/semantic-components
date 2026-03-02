@@ -32,6 +32,7 @@ export type ScCarouselPlugin = EmblaPluginType;
     'data-slot': 'carousel',
     role: 'region',
     'aria-roledescription': 'carousel',
+    '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
     '(keydown)': 'onKeyDown($event)',
   },
@@ -42,6 +43,7 @@ export class ScCarousel {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaLabel = input('carousel', { alias: 'aria-label' });
   readonly orientation = input<ScCarouselOrientation>('horizontal');
   readonly options = input<ScCarouselOptions>({});
   readonly plugins = input<ScCarouselPlugin[]>([]);

@@ -32,6 +32,7 @@ import {
     <div class="mx-auto flex h-[350px] w-full max-w-xs items-center">
       <div
         scCarousel
+        aria-label="Vertical carousel"
         orientation="vertical"
         [options]="{ align: 'start' }"
         class="w-full"

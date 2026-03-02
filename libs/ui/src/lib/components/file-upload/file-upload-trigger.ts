@@ -18,6 +18,8 @@ import { SC_FILE_UPLOAD } from './file-upload';
       #fileInput
       type="file"
       class="sr-only"
+      aria-label="Upload file"
+      tabindex="-1"
       [multiple]="fileUpload.multiple()"
       [accept]="fileUpload.accept()"
       [disabled]="fileUpload.disabled()"

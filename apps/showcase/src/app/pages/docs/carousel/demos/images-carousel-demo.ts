@@ -30,7 +30,7 @@ import {
   ],
   template: `
     <div class="mx-auto w-full max-w-md">
-      <div scCarousel class="w-full">
+      <div scCarousel aria-label="Images carousel" class="w-full">
         <div scCarouselViewport>
           <div scCarouselTrack>
             @for (image of images; track image.alt) {

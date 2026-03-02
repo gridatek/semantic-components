@@ -30,7 +30,7 @@ import {
   ],
   template: `
     <div class="mx-auto w-full max-w-xs">
-      <div scCarousel class="w-full">
+      <div scCarousel aria-label="Default carousel" class="w-full">
         <div scCarouselViewport>
           <div scCarouselTrack>
             @for (index of items; track index) {
