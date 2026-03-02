@@ -4,24 +4,16 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScAspectRatio } from '@semantic-components/ui';
+import { SiPlayIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-video-aspect-ratio-demo',
-  imports: [ScAspectRatio],
+  imports: [ScAspectRatio, SiPlayIcon],
   template: `
     <div class="w-[450px] overflow-hidden rounded-md border">
       <div scAspectRatio [ratio]="16 / 9" class="bg-black">
         <div class="flex size-full items-center justify-center text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="size-16"
-          >
-            <polygon points="5 3 19 12 5 21 5 3" />
-          </svg>
+          <svg siPlayIcon class="size-16 fill-current"></svg>
         </div>
       </div>
     </div>
