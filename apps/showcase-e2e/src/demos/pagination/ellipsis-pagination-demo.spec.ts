@@ -9,7 +9,7 @@ test.describe('Ellipsis Pagination Demo', () => {
     const nav = page.locator('nav[scPagination]');
     await expect(nav).toBeVisible();
     await expect(nav).toHaveAttribute('role', 'navigation');
-    await expect(nav).toHaveAttribute('aria-label', 'pagination');
+    await expect(nav).toHaveAttribute('aria-label', 'Ellipsis pagination');
   });
 
   test('should render exactly 7 page items when on first page', async ({
