@@ -16,6 +16,7 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
   imports: [ScResizableHandleIndicator],
   host: {
     'data-slot': 'resizable-handle',
+    role: 'separator',
     '[class]': 'class()',
     '[attr.aria-orientation]':
       'group.direction() === "horizontal" ? "vertical" : "horizontal"',

@@ -13,7 +13,7 @@ import { ScButton } from '@semantic-components/ui';
       <button scButton size="lg">Large</button>
       <button scButton size="default">Default</button>
       <button scButton size="sm">Small</button>
-      <button scButton size="icon">
+      <button scButton size="icon" aria-label="Go forward">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"

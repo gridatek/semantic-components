@@ -27,6 +27,7 @@ interface UserFormModel {
           <label scLabel>Form Completion</label>
           <div
             scProgress
+            aria-label="Form completion"
             [value]="formCompletionPercentage()"
             class="w-full"
           ></div>

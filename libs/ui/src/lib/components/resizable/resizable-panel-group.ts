@@ -9,7 +9,7 @@ import { ScResizableDirection } from './resizable.types';
   host: {
     'data-slot': 'resizable-panel-group',
     '[class]': 'class()',
-    '[attr.aria-orientation]': 'direction()',
+    '[attr.data-orientation]': 'direction()',
   },
 })
 export class ScResizablePanelGroup {
@@ -32,7 +32,7 @@ export class ScResizablePanelGroup {
 
   protected readonly class = computed(() =>
     cn(
-      'flex h-full w-full overflow-hidden aria-[orientation=vertical]:flex-col',
+      'flex h-full w-full overflow-hidden data-[orientation=vertical]:flex-col',
       this.classInput(),
     ),
   );

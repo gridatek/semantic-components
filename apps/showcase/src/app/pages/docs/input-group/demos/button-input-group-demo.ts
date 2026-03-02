@@ -32,7 +32,7 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
       </div>
       <input scInput variant="group" placeholder="Search..." />
       <div scInputGroupAddon align="inline-end">
-        <button scInputGroupButton size="icon-xs">
+        <button scInputGroupButton size="icon-xs" aria-label="Clear">
           <svg siXIcon></svg>
         </button>
       </div>

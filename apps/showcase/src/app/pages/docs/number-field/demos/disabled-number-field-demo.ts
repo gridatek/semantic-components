@@ -32,7 +32,7 @@ import {
 
       <div scNumberFieldGroup>
         <button scNumberFieldDecrement></button>
-        <input scNumberFieldInput />
+        <input scNumberFieldInput aria-label="Locked Value" />
         <button scNumberFieldIncrement></button>
       </div>
     </div>

@@ -5,7 +5,6 @@ import { cn } from '../../utils';
   selector: 'div[scItemGroup]',
   host: {
     'data-slot': 'item-group',
-    role: 'list',
     '[class]': 'class()',
   },
 })

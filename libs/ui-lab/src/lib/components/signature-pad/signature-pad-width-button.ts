@@ -27,8 +27,12 @@ export class ScSignaturePadWidthButton {
   protected readonly signaturePad = inject(SC_SIGNATURE_PAD);
 
   readonly width = input.required<number>();
-  readonly ariaLabel = input<string>('');
+  readonly ariaLabelInput = input<string>('', { alias: 'aria-label' });
   readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly ariaLabel = computed(
+    () => this.ariaLabelInput() || `Pen width ${this.width()}`,
+  );
 
   protected readonly isActive = computed(
     () => this.signaturePad.penWidth() === this.width(),

@@ -13,7 +13,7 @@ import { ScProgress } from '@semantic-components/ui';
   imports: [ScProgress],
   template: `
     <div class="space-y-2">
-      <div scProgress [value]="progress()"></div>
+      <div scProgress aria-label="Loading progress" [value]="progress()"></div>
       <p class="text-muted-foreground text-sm">{{ progress() }}% complete</p>
     </div>
   `,

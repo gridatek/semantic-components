@@ -12,23 +12,48 @@ import { ScProgress } from '@semantic-components/ui';
     <div class="space-y-3">
       <div class="flex items-center gap-4">
         <span class="text-muted-foreground w-12 text-sm">0%</span>
-        <div scProgress [value]="0" class="flex-1"></div>
+        <div
+          scProgress
+          aria-label="0% progress"
+          [value]="0"
+          class="flex-1"
+        ></div>
       </div>
       <div class="flex items-center gap-4">
         <span class="text-muted-foreground w-12 text-sm">25%</span>
-        <div scProgress [value]="25" class="flex-1"></div>
+        <div
+          scProgress
+          aria-label="25% progress"
+          [value]="25"
+          class="flex-1"
+        ></div>
       </div>
       <div class="flex items-center gap-4">
         <span class="text-muted-foreground w-12 text-sm">50%</span>
-        <div scProgress [value]="50" class="flex-1"></div>
+        <div
+          scProgress
+          aria-label="50% progress"
+          [value]="50"
+          class="flex-1"
+        ></div>
       </div>
       <div class="flex items-center gap-4">
         <span class="text-muted-foreground w-12 text-sm">75%</span>
-        <div scProgress [value]="75" class="flex-1"></div>
+        <div
+          scProgress
+          aria-label="75% progress"
+          [value]="75"
+          class="flex-1"
+        ></div>
       </div>
       <div class="flex items-center gap-4">
         <span class="text-muted-foreground w-12 text-sm">100%</span>
-        <div scProgress [value]="100" class="flex-1"></div>
+        <div
+          scProgress
+          aria-label="100% progress"
+          [value]="100"
+          class="flex-1"
+        ></div>
       </div>
     </div>
   `,

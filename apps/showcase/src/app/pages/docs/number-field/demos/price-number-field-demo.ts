@@ -39,7 +39,7 @@ import {
 
       <div scNumberFieldGroup>
         <button scNumberFieldDecrement></button>
-        <input scNumberFieldInput />
+        <input scNumberFieldInput aria-label="Price" />
         <button scNumberFieldIncrement></button>
       </div>
     </div>

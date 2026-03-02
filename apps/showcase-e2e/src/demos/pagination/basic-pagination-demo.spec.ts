@@ -9,7 +9,7 @@ test.describe('Basic Pagination Demo', () => {
     const nav = page.locator('nav[scPagination]');
     await expect(nav).toBeVisible();
     await expect(nav).toHaveAttribute('role', 'navigation');
-    await expect(nav).toHaveAttribute('aria-label', 'pagination');
+    await expect(nav).toHaveAttribute('aria-label', 'Basic pagination');
     await expect(nav).toHaveAttribute('data-slot', 'pagination');
   });
 

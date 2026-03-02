@@ -40,7 +40,7 @@ import {
 
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement></button>
-          <input scNumberFieldInput />
+          <input scNumberFieldInput aria-label="Opacity" />
           <button scNumberFieldIncrement></button>
         </div>
       </div>
@@ -52,7 +52,7 @@ import {
 
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement></button>
-          <input scNumberFieldInput />
+          <input scNumberFieldInput aria-label="Rotation" />
           <button scNumberFieldIncrement></button>
         </div>
       </div>

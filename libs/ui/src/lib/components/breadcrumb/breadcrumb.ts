@@ -1,10 +1,12 @@
-import { Directive } from '@angular/core';
+import { Directive, input } from '@angular/core';
 
 @Directive({
   selector: 'nav[scBreadcrumb]',
   host: {
     'data-slot': 'breadcrumb',
-    'aria-label': 'breadcrumb',
+    '[attr.aria-label]': 'ariaLabel()',
   },
 })
-export class ScBreadcrumb {}
+export class ScBreadcrumb {
+  readonly ariaLabel = input('breadcrumb', { alias: 'aria-label' });
+}

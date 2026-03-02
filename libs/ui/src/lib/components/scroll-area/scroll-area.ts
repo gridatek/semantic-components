@@ -11,6 +11,7 @@ import { cn } from '../../utils';
   selector: 'div[scScrollArea]',
   host: {
     'data-slot': 'scroll-area',
+    tabindex: '0',
     '[class]': 'class()',
   },
   template: `

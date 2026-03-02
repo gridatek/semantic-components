@@ -13,7 +13,7 @@ import { ScLink } from '@semantic-components/ui';
       <a scLink size="sm" href="#">Small</a>
       <a scLink size="default" href="#">Default</a>
       <a scLink size="lg" href="#">Large</a>
-      <a scLink size="icon" href="#">
+      <a scLink size="icon" href="#" aria-label="Link">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
