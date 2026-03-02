@@ -16,7 +16,7 @@ pre.shiki span {
 
 /* Override low-contrast Shiki token colors for WCAG AA compliance */
 pre.shiki span[style*='--shiki-light:#E36209'] {
-  --shiki-light: #b45309;
+  --shiki-light: #b45309 !important;
 }
 
 .dark pre.shiki,

@@ -27,7 +27,7 @@ import {
       <div scNumberField [(value)]="quantity" [min]="1" [max]="10" class="w-28">
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement></button>
-          <input scNumberFieldInput />
+          <input scNumberFieldInput aria-label="Quantity" />
           <button scNumberFieldIncrement></button>
         </div>
       </div>

@@ -46,6 +46,7 @@ import {
           <button scNumberFieldDecrement></button>
           <input
             scNumberFieldInput
+            aria-label="Quantity"
             [formField]="quantityForm.quantity"
             [class.border-destructive]="
               quantityForm.quantity().invalid() &&
