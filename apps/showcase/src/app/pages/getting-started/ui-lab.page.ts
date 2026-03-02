@@ -35,7 +35,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
             &#64;semantic-components/ui-lab
           </code>
-          package. This contains experimental and advanced components. Requires
+          package. This contains extended and experimental components. Requires
           the ui library to be installed first.
         </p>
       </div>

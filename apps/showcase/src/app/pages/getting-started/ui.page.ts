@@ -32,7 +32,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div class="space-y-2">
         <h1 scHeading>UI</h1>
         <p class="text-muted-foreground">
-          Install and configure the core
+          Install and configure the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
             &#64;semantic-components/ui
           </code>

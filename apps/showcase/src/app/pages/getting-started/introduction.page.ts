@@ -83,26 +83,22 @@ import { ConfigService } from '../../services/config.service';
         <ul class="text-muted-foreground list-disc space-y-2 pl-6">
           <li>
             <strong>&#64;semantic-components/ui</strong>
-            — Core components like Button and Link
+            — UI components
           </li>
-
-          @if (devMode()) {
-            <li>
-              <strong>&#64;semantic-components/ui-lab</strong>
-              — Extended component library with 90+ components
-            </li>
-          }
-
+          <li>
+            <strong>&#64;semantic-components/ui-lab</strong>
+            — Extended and experimental components
+          </li>
           <li>
             <strong>&#64;semantic-components/carousel</strong>
             — Carousel powered by Embla Carousel
           </li>
+          <li>
+            <strong>&#64;semantic-components/editor</strong>
+            — Rich text editor powered by Tiptap
+          </li>
 
           @if (devMode()) {
-            <li>
-              <strong>&#64;semantic-components/editor</strong>
-              — Rich text editor powered by Tiptap
-            </li>
             <li>
               <strong>&#64;semantic-components/code</strong>
               — Code viewer and editor powered by Shiki
