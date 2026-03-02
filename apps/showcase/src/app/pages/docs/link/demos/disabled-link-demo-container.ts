@@ -35,9 +35,9 @@ import { ScLink } from '@semantic-components/ui';
   imports: [ScLink],
   template: \`
     <div class="flex flex-wrap items-center gap-4">
-      <a scLink disabled href="#">Disabled Default</a>
-      <a scLink variant="secondary" disabled href="#">Disabled Secondary</a>
-      <a scLink variant="outline" disabled href="#">Disabled Outline</a>
+      <a scLink disabled>Disabled Default</a>
+      <a scLink variant="secondary" disabled>Disabled Secondary</a>
+      <a scLink variant="outline" disabled>Disabled Outline</a>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

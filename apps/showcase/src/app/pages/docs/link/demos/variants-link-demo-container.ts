@@ -35,12 +35,12 @@ import { ScLink } from '@semantic-components/ui';
   imports: [ScLink],
   template: \`
     <div class="flex flex-wrap items-center gap-4">
-      <a scLink href="#">Default</a>
-      <a scLink variant="secondary" href="#">Secondary</a>
-      <a scLink variant="destructive" href="#">Destructive</a>
-      <a scLink variant="outline" href="#">Outline</a>
-      <a scLink variant="ghost" href="#">Ghost</a>
-      <a scLink variant="link" href="#">Link</a>
+      <a scLink>Default</a>
+      <a scLink variant="secondary">Secondary</a>
+      <a scLink variant="destructive">Destructive</a>
+      <a scLink variant="outline">Outline</a>
+      <a scLink variant="ghost">Ghost</a>
+      <a scLink variant="link">Link</a>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

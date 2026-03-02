@@ -35,10 +35,10 @@ import { ScLink } from '@semantic-components/ui';
   imports: [ScLink],
   template: \`
     <div class="flex flex-wrap items-center gap-4">
-      <a scLink size="sm" href="#">Small</a>
-      <a scLink size="default" href="#">Default</a>
-      <a scLink size="lg" href="#">Large</a>
-      <a scLink size="icon" href="#">
+      <a scLink size="sm">Small</a>
+      <a scLink size="default">Default</a>
+      <a scLink size="lg">Large</a>
+      <a scLink size="icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
