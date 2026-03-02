@@ -73,7 +73,7 @@ import { Logo } from '../logo/logo';
   ],
   template: `
     <div scNavbarProvider>
-      <nav scNavbar>
+      <nav scNavbar aria-label="Main">
         <div scNavbarGroup>
           <!-- Brand -->
           <a scNavbarBrand href="#">
@@ -82,7 +82,7 @@ import { Logo } from '../logo/logo';
           </a>
 
           <!-- Desktop Navigation -->
-          <nav scNavigationMenu class="hidden md:flex">
+          <nav scNavigationMenu aria-label="Desktop" class="hidden md:flex">
             <ul scNavigationMenuList>
               <li scNavigationMenuItem>
                 <button scNavigationMenuTrigger>Components</button>

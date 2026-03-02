@@ -91,7 +91,13 @@ import { ConfigService } from '../../services/config.service';
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
-      <div scSidebar side="left" variant="sidebar" collapsible="icon">
+      <div
+        scSidebar
+        side="left"
+        variant="sidebar"
+        collapsible="icon"
+        aria-label="Sidebar"
+      >
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>

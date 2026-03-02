@@ -33,7 +33,7 @@ import { ComponentsService } from '../../services/components.service';
       <aside
         class="bg-background hidden w-64 shrink-0 overflow-y-auto border-r p-6 md:block"
       >
-        <nav class="space-y-1">
+        <nav aria-label="Components" class="space-y-1">
           <h4 class="mb-4 font-semibold">Components</h4>
 
           @for (item of components(); track item.path) {
