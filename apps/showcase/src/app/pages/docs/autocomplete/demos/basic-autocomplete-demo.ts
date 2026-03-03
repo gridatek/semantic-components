@@ -38,7 +38,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: `
-    <div scAutocomplete filterMode="auto-select" class="flex justify-center">
+    <div scAutocomplete filterMode="auto-select">
       <div scAutocompleteGroup>
         <svg siSearchIcon scAutocompleteIcon></svg>
         <input
