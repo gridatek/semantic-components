@@ -10,10 +10,11 @@ import { ScCopyToClipboard } from '@semantic-components/ui';
 
 ## API
 
-| Property            | Type              | Description                                               |
-| ------------------- | ----------------- | --------------------------------------------------------- |
-| `scCopyToClipboard` | `input (string)`  | The text to copy to clipboard                             |
-| `copied()`          | `Signal<boolean>` | `true` for 2 seconds after a successful copy, then resets |
+| Property            | Type              | Default | Description                                                  |
+| ------------------- | ----------------- | ------- | ------------------------------------------------------------ |
+| `scCopyToClipboard` | `input (string)`  |         | The text to copy to clipboard                                |
+| `duration`          | `input (number)`  | `2000`  | Duration in milliseconds before `copied()` resets to `false` |
+| `copied()`          | `Signal<boolean>` |         | `true` after a successful copy, resets after `duration()` ms |
 
 - **Selector**: `[scCopyToClipboard]`
 - **Export As**: `scCopyToClipboard`
@@ -31,11 +32,11 @@ Use `#ref="scCopyToClipboard"` to access the directive instance and its `copied(
 ### With Icons
 
 ```html
-<button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+<button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
   @if (copy.copied()) {
-  <svg siCheckIcon class="size-4"></svg>
+  <svg siCheckIcon></svg>
   } @else {
-  <svg siCopyIcon class="size-4"></svg>
+  <svg siCopyIcon></svg>
   }
 </button>
 ```
@@ -47,9 +48,9 @@ The directive is fully composable — the consumer controls the button styling, 
 ```html
 <button scButton variant="outline" [scCopyToClipboard]="url" #copy="scCopyToClipboard">
   @if (copy.copied()) {
-  <svg siCheckIcon class="size-4"></svg>
+  <svg siCheckIcon></svg>
   Link copied } @else {
-  <svg siCopyIcon class="size-4"></svg>
+  <svg siCopyIcon></svg>
   Copy link }
 </button>
 ```
