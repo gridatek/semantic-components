@@ -45,7 +45,7 @@
     "path": "autocomplete",
     "description": "An input with autocomplete suggestions.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {

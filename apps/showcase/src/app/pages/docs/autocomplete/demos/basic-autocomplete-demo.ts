@@ -16,6 +16,7 @@ import {
   ScAutocompleteGroup,
   ScAutocompleteIcon,
   ScAutocompleteInput,
+  ScAutocompleteList,
   ScAutocompletePopup,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
@@ -25,13 +26,13 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   imports: [
     Combobox,
     ComboboxPopupContainer,
-    Listbox,
     Option,
     OverlayModule,
     FormsModule,
     ScAutocompleteGroup,
     ScAutocompleteIcon,
     ScAutocompleteInput,
+    ScAutocompleteList,
     ScAutocompletePopup,
     SiSearchIcon,
     SiCheckIcon,
@@ -63,7 +64,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                 No results found
               </div>
             }
-            <div ngListbox class="flex flex-col gap-0.5">
+            <div scAutocompleteList>
               @for (country of countries(); track country) {
                 <div
                   ngOption

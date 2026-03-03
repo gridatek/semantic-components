@@ -1,20 +1,19 @@
+import { Listbox } from '@angular/aria/listbox';
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[scAutocompletePopup]',
+  selector: 'div[scAutocompleteList]',
+  hostDirectives: [Listbox],
   host: {
-    'data-slot': 'autocomplete-popup',
+    'data-slot': 'autocomplete-list',
     '[class]': 'class()',
   },
 })
-export class ScAutocompletePopup {
+export class ScAutocompleteList {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn(
-      'bg-popover text-popover-foreground mt-2 max-h-44 w-full overflow-auto rounded-lg border p-1 shadow-md',
-      this.classInput(),
-    ),
+    cn('flex flex-col gap-0.5', this.classInput()),
   );
 }
