@@ -6,7 +6,7 @@ A read-only code display component with syntax highlighting powered by [Shiki](h
 
 ```typescript
 import { ScCodeViewer, ScCodeViewerContent, ScCodeViewerHeader, ScCodeViewerLabel, ScCodeViewerLanguage } from '@semantic-components/code';
-import { ScCopyToClipboard } from '@semantic-components/ui';
+import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 ```
 
@@ -80,11 +80,11 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>TypeScript</span>
-    <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
       @if (copy.copied()) {
-      <svg siCheckIcon class="size-4"></svg>
+      <svg siCheckIcon></svg>
       } @else {
-      <svg siCopyIcon class="size-4"></svg>
+      <svg siCopyIcon></svg>
       }
     </button>
   </div>
@@ -98,11 +98,11 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>app.component.ts</span>
-    <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
       @if (copy.copied()) {
-      <svg siCheckIcon class="size-4"></svg>
+      <svg siCheckIcon></svg>
       } @else {
-      <svg siCopyIcon class="size-4"></svg>
+      <svg siCopyIcon></svg>
       }
     </button>
   </div>
@@ -116,11 +116,11 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>{{ filename }}</span>
-    <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
       @if (copy.copied()) {
-      <svg siCheckIcon class="size-4"></svg>
+      <svg siCheckIcon></svg>
       } @else {
-      <svg siCopyIcon class="size-4"></svg>
+      <svg siCopyIcon></svg>
       }
     </button>
   </div>
@@ -142,11 +142,11 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>{{ language }}</span>
-    <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+    <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
       @if (copy.copied()) {
-      <svg siCheckIcon class="size-4"></svg>
+      <svg siCheckIcon></svg>
       } @else {
-      <svg siCopyIcon class="size-4"></svg>
+      <svg siCopyIcon></svg>
       }
     </button>
   </div>
@@ -166,11 +166,11 @@ The content component with Shiki syntax highlighting.
     </div>
     <div class="flex gap-2">
       <button>Download</button>
-      <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+      <button scButton variant="ghost" size="icon" [scCopyToClipboard]="code" #copy="scCopyToClipboard" aria-label="Copy to clipboard">
         @if (copy.copied()) {
-        <svg siCheckIcon class="size-4"></svg>
+        <svg siCheckIcon></svg>
         } @else {
-        <svg siCopyIcon class="size-4"></svg>
+        <svg siCopyIcon></svg>
         }
       </button>
     </div>
