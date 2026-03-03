@@ -1,0 +1,47 @@
+name: Sync Demo Code
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Sync demo code
+        run: npx nx sync-demo-code
+
+      - name: Validate demo code
+        run: npx nx validate-demo-code
+
+      - name: Create PR if changes exist
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to sync."
+            exit 0
+          fi
+          BRANCH="chore/sync-demo-code-$(date +%Y%m%d)"
+          git checkout -b "$BRANCH"
+          git commit -m "chore: sync demo code"
+          git push --set-upstream origin "$BRANCH"
+          gh pr create --title "chore: sync demo code" --body "Automated sync of demo code." --base main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

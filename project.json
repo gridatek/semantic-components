@@ -2,6 +2,18 @@
   "name": "@semantic-components/source",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "targets": {
+    "sync-demo-code": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node scripts/sync-demo-code.mjs"
+      }
+    },
+    "validate-demo-code": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node scripts/validate-demo-code.mjs"
+      }
+    },
     "local-registry": {
       "executor": "@nx/js:verdaccio",
       "options": {
