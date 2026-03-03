@@ -57,7 +57,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           [cdkConnectedOverlayOpen]="combobox()?.expanded() ?? false"
         >
           <div
-            class="bg-popover text-popover-foreground mt-2 max-h-44 overflow-auto rounded-lg border p-1 shadow-md [&:has([aria-expanded='false'])]:hidden"
+            class="bg-popover text-popover-foreground mt-2 max-h-44 w-full overflow-auto rounded-lg border p-1 shadow-md"
           >
             @if (countries().length === 0) {
               <div class="text-muted-foreground px-3 py-4 text-center text-sm">
