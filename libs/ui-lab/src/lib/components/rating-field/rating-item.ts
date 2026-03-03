@@ -1,5 +1,15 @@
-import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  computed,
+  contentChildren,
+  effect,
+  inject,
+  input,
+} from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import { SC_RATING_FIELD } from './rating-field';
+import { ScRatingIcon } from './rating-icon';
 import { SC_RATING_ITEM_GROUP } from './rating-item-group';
 
 @Directive({
@@ -8,6 +18,7 @@ import { SC_RATING_ITEM_GROUP } from './rating-item-group';
   host: {
     'data-slot': 'rating-item',
     role: 'radio',
+    '[class]': 'hostClass()',
     '[attr.aria-checked]': 'isSelected()',
     '[attr.aria-label]': '"Rate " + value()',
     '[attr.data-state]': 'state()',
@@ -25,6 +36,9 @@ export class ScRatingFieldItem {
   private readonly elementRef = inject(ElementRef);
 
   readonly value = input.required<number>();
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  private readonly icons = contentChildren(ScRatingIcon);
 
   readonly state = computed(() => {
     const displayValue = this.group.displayValue();
@@ -59,6 +73,45 @@ export class ScRatingFieldItem {
 
     return -1;
   });
+
+  protected readonly hostClass = computed(() => {
+    const base = this.classInput();
+    const disabled = this.field.disabled();
+    const readonly = this.field.readonly();
+    const hasMultipleIcons = this.icons().length >= 2;
+
+    const classes: string[] = [];
+
+    if (disabled) {
+      classes.push('opacity-50 cursor-not-allowed');
+    } else if (!readonly) {
+      classes.push('cursor-pointer transition-transform hover:scale-110');
+    }
+
+    if (hasMultipleIcons) {
+      classes.push('relative');
+    }
+
+    return cn(classes.join(' '), base);
+  });
+
+  constructor() {
+    // Resolve icon roles and propagate state
+    effect(() => {
+      const allIcons = this.icons();
+      const state = this.state();
+
+      if (allIcons.length === 1) {
+        allIcons[0].role.set('single');
+        allIcons[0].state.set(state);
+      } else if (allIcons.length >= 2) {
+        allIcons[0].role.set('background');
+        allIcons[0].state.set(state);
+        allIcons[1].role.set('foreground');
+        allIcons[1].state.set(state);
+      }
+    });
+  }
 
   protected onClick(event: MouseEvent): void {
     if (this.field.readonly() || this.field.disabled()) return;
