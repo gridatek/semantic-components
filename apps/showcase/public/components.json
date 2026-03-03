@@ -554,8 +554,7 @@
     "description": "An input for entering one-time passwords.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Org Chart",
@@ -648,8 +647,7 @@
     "description": "A composable rating field for feedback and reviews.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Resizable",
