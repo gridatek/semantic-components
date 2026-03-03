@@ -292,8 +292,7 @@
     "description": "Composable WYSIWYG editor with customizable toolbar.",
     "status": "Experimental",
     "library": "editor",
-    "category": "Editor",
-    "hidden": true
+    "category": "Editor"
   },
   {
     "name": "Emoji Picker",
