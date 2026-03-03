@@ -13,6 +13,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 export interface SpotlightOptions {
   target: string | Element;
@@ -36,6 +37,7 @@ interface TargetRect {
 
 @Component({
   selector: 'sc-spotlight',
+  imports: [SiXIcon],
   template: `
     @if (isActive()) {
       <div
@@ -108,17 +110,7 @@ interface TargetRect {
             class="bg-background/90 hover:bg-background text-foreground absolute top-4 right-4 z-10 rounded-full p-2 shadow-lg"
             aria-label="Close spotlight"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-5"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+            <svg siXIcon class="size-5"></svg>
           </button>
         }
 
