@@ -1,14 +1,9 @@
-import { Combobox } from '@angular/aria/combobox';
-import { Listbox, Option } from '@angular/aria/listbox';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  afterRenderEffect,
   computed,
   signal,
-  viewChild,
-  viewChildren,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -75,31 +70,12 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicAutocompleteDemo {
-  listbox = viewChild<Listbox<string>>(Listbox);
-  options = viewChildren<Option<string>>(Option);
-  combobox = viewChild<Combobox<string>>(Combobox);
   query = signal('');
   countries = computed(() =>
     ALL_COUNTRIES.filter((country) =>
       country.toLowerCase().startsWith(this.query().toLowerCase()),
     ),
   );
-
-  constructor() {
-    afterRenderEffect(() => {
-      const option = this.options().find((opt) => opt.active());
-      setTimeout(
-        () => option?.element.scrollIntoView({ block: 'nearest' }),
-        50,
-      );
-    });
-
-    afterRenderEffect(() => {
-      if (!this.combobox()?.expanded()) {
-        setTimeout(() => this.listbox()?.element.scrollTo(0, 0), 150);
-      }
-    });
-  }
 }
 
 const ALL_COUNTRIES = [

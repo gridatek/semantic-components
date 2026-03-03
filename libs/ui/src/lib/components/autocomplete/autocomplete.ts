@@ -1,12 +1,15 @@
 import { Combobox, ComboboxPopupContainer } from '@angular/aria/combobox';
+import { Listbox, Option } from '@angular/aria/listbox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  afterRenderEffect,
   computed,
   contentChild,
+  contentChildren,
   inject,
   input,
 } from '@angular/core';
@@ -51,6 +54,8 @@ export class ScAutocomplete {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly group = contentChild(ScAutocompleteGroup);
+  private readonly listbox = contentChild(Listbox, { descendants: true });
+  private readonly options = contentChildren(Option, { descendants: true });
   protected readonly autocompletePortal =
     contentChild.required(ScAutocompletePortal);
 
@@ -58,4 +63,20 @@ export class ScAutocomplete {
   protected readonly combobox = inject(Combobox);
 
   protected readonly class = computed(() => cn('relative', this.classInput()));
+
+  constructor() {
+    afterRenderEffect(() => {
+      const option = this.options().find((opt) => opt.active());
+      setTimeout(
+        () => option?.element.scrollIntoView({ block: 'nearest' }),
+        50,
+      );
+    });
+
+    afterRenderEffect(() => {
+      if (!this.combobox.expanded()) {
+        setTimeout(() => this.listbox()?.element.scrollTo(0, 0), 150);
+      }
+    });
+  }
 }
