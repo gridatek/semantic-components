@@ -23,16 +23,16 @@ import { SignalFormsCheckboxDemo } from './signal-forms-checkbox-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsCheckboxDemoContainer {
-  readonly code = `import {
+  readonly code = `import { JsonPipe } from '@angular/common';
+import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
 import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
-import { JsonPipe } from '@angular/common';
 
 interface CheckboxFormModel {
   newsletter: boolean;
@@ -53,9 +53,7 @@ interface CheckboxFormModel {
             id="newsletter-custom"
             [formField]="checkboxForm.newsletter"
           />
-          <label scLabel for="newsletter-custom">
-            Subscribe to newsletter
-          </label>
+          <label scLabel for="newsletter-custom">Subscribe to newsletter</label>
         </div>
 
         <div scCheckboxField>
@@ -65,9 +63,7 @@ interface CheckboxFormModel {
             id="marketing-custom"
             [formField]="checkboxForm.marketing"
           />
-          <label scLabel for="marketing-custom">
-            Receive marketing emails
-          </label>
+          <label scLabel for="marketing-custom">Receive marketing emails</label>
         </div>
 
         <div scCheckboxField>
@@ -81,9 +77,9 @@ interface CheckboxFormModel {
         </div>
       </div>
 
-      <div class="mt-4 p-4 bg-muted rounded-md">
+      <div class="bg-muted mt-4 rounded-md p-4">
         <p class="text-sm font-medium">Form Values:</p>
-        <pre class="text-xs mt-2">{{ formModel() | json }}</pre>
+        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>
     </form>
   \`,

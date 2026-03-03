@@ -22,8 +22,8 @@ export class BasicMasonryGridDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
 
@@ -40,9 +40,9 @@ interface DemoItem {
   template: \`
     <div scMasonryGrid [columns]="4" [gap]="16">
       @for (item of items(); track item.id) {
-        <sc-masonry-item>
+        <div scMasonryItem>
           <div
-            class="rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            class="overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-md"
             [style.background-color]="item.color"
             [style.height.px]="item.height"
           >
@@ -51,9 +51,9 @@ interface DemoItem {
               <p class="text-sm opacity-75">{{ item.height }}px tall</p>
             </div>
           </div>
-        </sc-masonry-item>
+        </div>
       }
-    </div scMasonryGrid>
+    </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

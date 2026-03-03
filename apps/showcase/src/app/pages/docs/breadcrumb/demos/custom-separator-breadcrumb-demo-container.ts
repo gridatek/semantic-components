@@ -48,7 +48,7 @@ import {
     ScBreadcrumbSeparator,
   ],
   template: \`
-    <nav scBreadcrumb>
+    <nav scBreadcrumb aria-label="Custom separator breadcrumb">
       <ol scBreadcrumbList>
         <li scBreadcrumbItem>
           <a scBreadcrumbLink href="#">Home</a>

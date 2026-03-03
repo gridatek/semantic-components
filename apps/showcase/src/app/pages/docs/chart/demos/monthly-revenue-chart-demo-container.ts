@@ -29,9 +29,9 @@ export class MonthlyRevenueChartDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScChartContainer,
-  ScBarChart,
   ChartDataPoint,
+  ScBarChart,
+  ScChartContainer,
 } from '@semantic-components/ui-lab';
 
 @Component({

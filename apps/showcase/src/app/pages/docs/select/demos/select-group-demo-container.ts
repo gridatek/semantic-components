@@ -33,12 +33,12 @@ import {
   ScSelectGroup,
   ScSelectGroupLabel,
   ScSelectItem,
+  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectTrigger,
   ScSelectSeparator,
-  ScSelectLabel,
+  ScSelectTrigger,
 } from '@semantic-components/ui';
 
 @Component({
@@ -84,5 +84,5 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectGroupDemo {}`;
+export class SelectGroupDemo {}`;
 }

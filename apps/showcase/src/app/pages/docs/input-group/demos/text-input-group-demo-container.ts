@@ -29,9 +29,9 @@ export class TextInputGroupDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInput,
   ScInputGroupText,
 } from '@semantic-components/ui';
 

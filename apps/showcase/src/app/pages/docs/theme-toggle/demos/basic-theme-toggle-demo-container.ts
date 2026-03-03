@@ -26,8 +26,8 @@ export class BasicThemeToggleDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { ScTheme, ScThemeToggle } from '@semantic-components/ui-lab';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
@@ -44,7 +44,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
           <svg siMoonIcon></svg>
         }
       </button>
-      <span class="text-sm text-muted-foreground">
+      <span class="text-muted-foreground text-sm">
         Current: {{ themeService.resolvedTheme() }}
       </span>
     </div>

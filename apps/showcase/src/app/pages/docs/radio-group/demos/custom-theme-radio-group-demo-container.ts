@@ -26,11 +26,11 @@ export class CustomThemeRadioGroupDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
-import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui';
+import { FormField, form } from '@angular/forms/signals';
+import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-custom-theme-radio-group-demo',

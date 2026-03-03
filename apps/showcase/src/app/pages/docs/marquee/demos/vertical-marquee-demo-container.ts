@@ -39,13 +39,13 @@ import {
         @for (notification of notifications; track notification.id) {
           <div
             scMarqueeItem
-            class="mx-2 rounded-lg border bg-background p-3 shadow-sm"
+            class="bg-background mx-2 rounded-lg border p-3 shadow-sm"
           >
             <div class="flex items-start gap-2">
               <span class="text-lg">{{ notification.icon }}</span>
               <div>
                 <p class="text-sm font-medium">{{ notification.title }}</p>
-                <p class="text-xs text-muted-foreground">
+                <p class="text-muted-foreground text-xs">
                   {{ notification.time }}
                 </p>
               </div>
@@ -56,7 +56,7 @@ import {
           @for (notification of notifications; track notification.id) {
             <div
               scMarqueeItem
-              class="mx-2 rounded-lg border bg-background p-3 shadow-sm"
+              class="bg-background mx-2 rounded-lg border p-3 shadow-sm"
             >
               <div class="flex items-start gap-2">
                 <span class="text-lg">{{ notification.icon }}</span>
@@ -64,7 +64,7 @@ import {
                   <p class="text-sm font-medium">
                     {{ notification.title }}
                   </p>
-                  <p class="text-xs text-muted-foreground">
+                  <p class="text-muted-foreground text-xs">
                     {{ notification.time }}
                   </p>
                 </div>

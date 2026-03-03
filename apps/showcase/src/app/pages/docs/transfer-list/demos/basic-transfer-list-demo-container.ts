@@ -26,8 +26,8 @@ export class BasicTransferListDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScTransferList } from '@semantic-components/ui-lab';
 import type { TransferListItem } from '@semantic-components/ui-lab';
@@ -46,21 +46,21 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
       />
 
       <div class="grid grid-cols-2 gap-4">
-        <div class="rounded-lg border bg-card p-4">
-          <p class="text-sm font-medium mb-2">
+        <div class="bg-card rounded-lg border p-4">
+          <p class="mb-2 text-sm font-medium">
             Source ({{ sourceItems().length }})
           </p>
-          <ul class="text-xs text-muted-foreground space-y-1">
+          <ul class="text-muted-foreground space-y-1 text-xs">
             @for (item of sourceItems(); track item.id) {
               <li>{{ item.label }}</li>
             }
           </ul>
         </div>
-        <div class="rounded-lg border bg-card p-4">
-          <p class="text-sm font-medium mb-2">
+        <div class="bg-card rounded-lg border p-4">
+          <p class="mb-2 text-sm font-medium">
             Target ({{ targetItems().length }})
           </p>
-          <ul class="text-xs text-muted-foreground space-y-1">
+          <ul class="text-muted-foreground space-y-1 text-xs">
             @for (item of targetItems(); track item.id) {
               <li>{{ item.label }}</li>
             }

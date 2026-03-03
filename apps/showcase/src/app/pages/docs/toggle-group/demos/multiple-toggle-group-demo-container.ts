@@ -22,9 +22,9 @@ export class MultipleToggleGroupDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
@@ -64,7 +64,7 @@ import {
           <svg siUnderlineIcon></svg>
         </button>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ formattingDisplay() }}
       </p>
     </div>

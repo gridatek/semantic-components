@@ -22,13 +22,13 @@ export class FullTourGuideDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import {
   ScTourGuide,
-  TourService,
   TourOptions,
+  TourService,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -38,51 +38,51 @@ import {
     <div class="space-y-8">
       <!-- Demo UI elements -->
       <div class="grid gap-6 md:grid-cols-3">
-        <div id="tour-full-card-1" class="p-6 border rounded-lg bg-card">
-          <h3 class="font-semibold mb-2">Dashboard</h3>
-          <p class="text-sm text-muted-foreground">
+        <div id="tour-full-card-1" class="bg-card rounded-lg border p-6">
+          <h3 class="mb-2 font-semibold">Dashboard</h3>
+          <p class="text-muted-foreground text-sm">
             View your analytics and key metrics at a glance.
           </p>
         </div>
 
-        <div id="tour-full-card-2" class="p-6 border rounded-lg bg-card">
-          <h3 class="font-semibold mb-2">Settings</h3>
-          <p class="text-sm text-muted-foreground">
+        <div id="tour-full-card-2" class="bg-card rounded-lg border p-6">
+          <h3 class="mb-2 font-semibold">Settings</h3>
+          <p class="text-muted-foreground text-sm">
             Configure your preferences and account details.
           </p>
         </div>
 
-        <div id="tour-full-card-3" class="p-6 border rounded-lg bg-card">
-          <h3 class="font-semibold mb-2">Reports</h3>
-          <p class="text-sm text-muted-foreground">
+        <div id="tour-full-card-3" class="bg-card rounded-lg border p-6">
+          <h3 class="mb-2 font-semibold">Reports</h3>
+          <p class="text-muted-foreground text-sm">
             Generate and export detailed reports.
           </p>
         </div>
       </div>
 
       <!-- Sample form -->
-      <div id="tour-full-form" class="max-w-md p-6 border rounded-lg bg-card">
-        <h3 class="font-semibold mb-4">Quick Action Form</h3>
+      <div id="tour-full-form" class="bg-card max-w-md rounded-lg border p-6">
+        <h3 class="mb-4 font-semibold">Quick Action Form</h3>
         <div class="space-y-4">
           <div>
-            <label class="block text-sm font-medium mb-1">Name</label>
+            <label class="mb-1 block text-sm font-medium">Name</label>
             <input
               type="text"
-              class="w-full px-3 py-2 border rounded-md bg-background"
+              class="bg-background w-full rounded-md border px-3 py-2"
               placeholder="Enter your name"
             />
           </div>
           <div>
-            <label class="block text-sm font-medium mb-1">Email</label>
+            <label class="mb-1 block text-sm font-medium">Email</label>
             <input
               type="email"
-              class="w-full px-3 py-2 border rounded-md bg-background"
+              class="bg-background w-full rounded-md border px-3 py-2"
               placeholder="Enter your email"
             />
           </div>
           <button
             type="button"
-            class="w-full px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+            class="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md px-4 py-2"
           >
             Submit
           </button>
@@ -95,7 +95,7 @@ import {
           id="tour-full-button"
           type="button"
           (click)="startTour()"
-          class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-2"
         >
           Start Tour
         </button>

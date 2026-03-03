@@ -43,7 +43,7 @@ import { ScThemeField, ScThemeSelect } from '@semantic-components/ui-lab';
           <option value="system">System</option>
         </select>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Select includes system preference option
       </p>
     </div>

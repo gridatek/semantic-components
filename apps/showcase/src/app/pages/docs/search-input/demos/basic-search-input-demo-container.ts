@@ -22,8 +22,8 @@ export class BasicSearchInputDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScSearchInput } from '@semantic-components/ui-lab';
 import type { SearchSuggestion } from '@semantic-components/ui-lab';
@@ -40,13 +40,13 @@ import type { SearchSuggestion } from '@semantic-components/ui-lab';
         class="max-w-md"
       />
       @if (selectedItem()) {
-        <div class="rounded-lg border bg-card p-4 max-w-md">
+        <div class="bg-card max-w-md rounded-lg border p-4">
           <p class="text-sm">
             Selected:
             <span class="font-medium">{{ selectedItem()?.label }}</span>
           </p>
           @if (selectedItem()?.description) {
-            <p class="text-xs text-muted-foreground">
+            <p class="text-muted-foreground text-xs">
               {{ selectedItem()?.description }}
             </p>
           }

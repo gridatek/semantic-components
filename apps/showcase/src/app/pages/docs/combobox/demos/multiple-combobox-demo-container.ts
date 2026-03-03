@@ -22,19 +22,19 @@ export class MultipleComboboxDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   ScCombobox,
-  ScComboboxPortal,
   ScComboboxEmpty,
   ScComboboxIcon,
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
+  ScComboboxPortal,
   ScComboboxTrigger,
 } from '@semantic-components/ui-lab';
 
@@ -88,11 +88,7 @@ interface ComboboxOption {
           }
           <div scComboboxList [multi]="true" [(values)]="selectedValues">
             @for (option of filteredOptions(); track option.value) {
-              <div
-                scComboboxItem
-                [value]="option.value"
-                [label]="option.label"
-              >
+              <div scComboboxItem [value]="option.value" [label]="option.label">
                 <span>{{ option.label }}</span>
                 <svg
                   scComboboxItemIndicator
@@ -112,7 +108,7 @@ interface ComboboxOption {
         </div>
       </div>
       @if (selectedValues().length > 0) {
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Selected: {{ selectedLabels() }}
         </p>
       }

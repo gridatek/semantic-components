@@ -26,14 +26,14 @@ export class VerificationOptFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScOptField,
-  ScOptFieldSlotGroup,
   ScOptFieldSeparator,
   ScOptFieldSlot,
+  ScOptFieldSlotGroup,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -45,11 +45,11 @@ import {
     ScOptFieldSlot,
   ],
   template: \`
-    <div class="rounded-lg border p-6 max-w-sm">
+    <div class="max-w-sm rounded-lg border p-6">
       <div class="space-y-4">
         <div class="space-y-2 text-center">
           <h4 class="font-semibold">Enter verification code</h4>
-          <p class="text-sm text-muted-foreground">
+          <p class="text-muted-foreground text-sm">
             We sent a code to your email address
           </p>
         </div>
@@ -83,7 +83,7 @@ import {
             </div>
           </div>
         </div>
-        <p class="text-center text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-center text-sm">
           @if (code().length === 6) {
             Code entered: {{ code() }}
           } @else {

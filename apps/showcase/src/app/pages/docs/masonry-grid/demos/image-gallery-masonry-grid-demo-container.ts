@@ -22,8 +22,8 @@ export class ImageGalleryMasonryGridDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
 
@@ -31,18 +31,18 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
   selector: 'app-image-gallery-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryItem],
   template: \`
-    <sc-masonry-grid [columns]="3" [gap]="12">
+    <div scMasonryGrid [columns]="3" [gap]="12">
       @for (image of images(); track image.id) {
-        <sc-masonry-item>
-          <div class="group relative rounded-lg overflow-hidden bg-muted">
+        <div scMasonryItem>
+          <div class="group bg-muted relative overflow-hidden rounded-lg">
             <img
               [src]="image.url"
               [alt]="image.title"
-              class="w-full h-auto object-cover"
+              class="h-auto w-full object-cover"
               loading="lazy"
             />
             <div
-              class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-end"
+              class="absolute inset-0 flex items-end bg-black/60 opacity-0 transition-opacity group-hover:opacity-100"
             >
               <div class="p-4 text-white">
                 <p class="font-medium">{{ image.title }}</p>
@@ -50,9 +50,9 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
               </div>
             </div>
           </div>
-        </sc-masonry-item>
+        </div>
       }
-    </sc-masonry-grid>
+    </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

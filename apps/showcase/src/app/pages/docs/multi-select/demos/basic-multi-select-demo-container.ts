@@ -22,10 +22,10 @@ export class BasicMultiSelectDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
+import { MultiSelectOption, ScMultiSelect } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-multi-select-demo',
@@ -39,7 +39,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
           placeholder="Select fruits..."
         />
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ value().join(', ') || 'None' }}
       </p>
     </div>

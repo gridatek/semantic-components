@@ -22,18 +22,18 @@ export class Format12hTimePickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScTimePicker,
-  ScTimePickerInput,
   ScTimePickerHoursInput,
+  ScTimePickerInput,
   ScTimePickerMinutesInput,
-  ScTimePickerSeparator,
   ScTimePickerPeriod,
   ScTimePickerPeriodAM,
   ScTimePickerPeriodPM,
+  ScTimePickerSeparator,
   ScTimeValue,
 } from '@semantic-components/ui';
 
@@ -60,7 +60,7 @@ import {
           <button scTimePickerPeriodPM>PM</button>
         </div>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ formatTime(time()) }}
       </p>
     </div>

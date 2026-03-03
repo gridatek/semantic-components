@@ -22,8 +22,8 @@ export class CustomIconsRatingFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScRatingField,
@@ -35,7 +35,13 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-custom-icons-rating-field-demo',
-  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, ScRatingIcon, SiHeartIcon],
+  imports: [
+    ScRatingField,
+    ScRatingItemGroup,
+    ScRatingFieldItem,
+    ScRatingIcon,
+    SiHeartIcon,
+  ],
   template: \`
     <div class="flex flex-col gap-2">
       <div

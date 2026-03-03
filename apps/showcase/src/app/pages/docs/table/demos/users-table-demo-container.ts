@@ -32,8 +32,8 @@ import {
   ScTable,
   ScTableBody,
   ScTableCell,
-  ScTableHeaderCell,
   ScTableHeader,
+  ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
 
@@ -62,7 +62,7 @@ import {
           <tr scTableRow>
             <td scTableCell>
               <div class="font-medium">John Doe</div>
-              <div class="text-sm text-muted-foreground">Engineer</div>
+              <div class="text-muted-foreground text-sm">Engineer</div>
             </td>
             <td scTableCell>john&#64;example.com</td>
             <td scTableCell>
@@ -74,7 +74,7 @@ import {
             </td>
             <td scTableCell class="text-right">
               <button
-                class="text-sm text-muted-foreground hover:text-foreground"
+                class="text-muted-foreground hover:text-foreground text-sm"
               >
                 Edit
               </button>
@@ -83,7 +83,7 @@ import {
           <tr scTableRow>
             <td scTableCell>
               <div class="font-medium">Jane Smith</div>
-              <div class="text-sm text-muted-foreground">Designer</div>
+              <div class="text-muted-foreground text-sm">Designer</div>
             </td>
             <td scTableCell>jane&#64;example.com</td>
             <td scTableCell>
@@ -95,7 +95,7 @@ import {
             </td>
             <td scTableCell class="text-right">
               <button
-                class="text-sm text-muted-foreground hover:text-foreground"
+                class="text-muted-foreground hover:text-foreground text-sm"
               >
                 Edit
               </button>
@@ -104,7 +104,7 @@ import {
           <tr scTableRow>
             <td scTableCell>
               <div class="font-medium">Bob Johnson</div>
-              <div class="text-sm text-muted-foreground">Manager</div>
+              <div class="text-muted-foreground text-sm">Manager</div>
             </td>
             <td scTableCell>bob&#64;example.com</td>
             <td scTableCell>
@@ -116,7 +116,7 @@ import {
             </td>
             <td scTableCell class="text-right">
               <button
-                class="text-sm text-muted-foreground hover:text-foreground"
+                class="text-muted-foreground hover:text-foreground text-sm"
               >
                 Edit
               </button>

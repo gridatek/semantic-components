@@ -30,11 +30,11 @@ export class VerticalImageCompareDemoContainer {
 } from '@angular/core';
 import {
   ScImageCompare,
+  ScImageCompareAfter,
   ScImageCompareArea,
   ScImageCompareBefore,
-  ScImageCompareAfter,
-  ScImageCompareSlider,
   ScImageCompareLabel,
+  ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -51,19 +51,12 @@ import {
     <div
       scImageCompare
       [orientation]="'vertical'"
-      class="w-full max-w-sm aspect-2/3"
+      class="aspect-2/3 w-full max-w-sm"
     >
       <div scImageCompareArea>
-        <img
-          scImageCompareBefore
-          src="https://picsum.photos/seed/compare-vertical/400/600?grayscale"
-          alt="Top"
-        />
-        <img
-          scImageCompareAfter
-          src="https://picsum.photos/seed/compare-vertical/400/600"
-          alt="Bottom"
-        />
+        @let img = 'https://picsum.photos/seed/compare-vertical/400/600';
+        <img scImageCompareBefore [src]="img + '?grayscale'" alt="Top" />
+        <img scImageCompareAfter [src]="img" alt="Bottom" />
         <div scImageCompareSlider></div>
         <div scImageCompareLabel class="top-2 left-2">Top</div>
         <div scImageCompareLabel class="bottom-2 left-2">Bottom</div>

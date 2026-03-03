@@ -26,8 +26,8 @@ export class BasicDateRangePickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScDateRange } from '@semantic-components/ui';
 import { ScDateRangePicker } from '@semantic-components/ui-lab';
@@ -41,7 +41,7 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
       placeholder="Select date range"
       (apply)="onRangeApply($event)"
     />
-    <p class="text-sm text-muted-foreground mt-4">
+    <p class="text-muted-foreground mt-4 text-sm">
       @if (range().from && range().to) {
         Selected: {{ range().from?.toLocaleString() }} -
         {{ range().to?.toLocaleString() }}

@@ -39,7 +39,7 @@ import {
   selector: 'app-variants-stat-card-demo',
   imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardChange],
   template: \`
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div scStatCard variant="default">
         <div class="flex items-start justify-between">
           <div class="space-y-1">

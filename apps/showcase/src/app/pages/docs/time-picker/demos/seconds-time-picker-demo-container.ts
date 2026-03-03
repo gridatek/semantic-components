@@ -22,13 +22,13 @@ export class SecondsTimePickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScTimePicker,
-  ScTimePickerInput,
   ScTimePickerHoursInput,
+  ScTimePickerInput,
   ScTimePickerMinutesInput,
   ScTimePickerSecondsInput,
   ScTimePickerSeparator,
@@ -54,7 +54,7 @@ import {
         <span scTimePickerSeparator>:</span>
         <input scTimePickerInput scTimePickerSecondsInput />
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ formatTime(time()) }}
       </p>
     </div>

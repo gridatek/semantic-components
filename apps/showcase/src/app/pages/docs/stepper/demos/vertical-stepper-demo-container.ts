@@ -22,19 +22,19 @@ export class VerticalStepperDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScStepper,
-  ScStepperList,
+  ScStepperDescription,
   ScStepperItem,
-  ScStepperTrigger,
+  ScStepperList,
+  ScStepperNext,
+  ScStepperPrevious,
   ScStepperSeparator,
   ScStepperTitle,
-  ScStepperDescription,
-  ScStepperPrevious,
-  ScStepperNext,
+  ScStepperTrigger,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -60,7 +60,7 @@ import {
               <span scStepperTitle>Step 1</span>
               <span scStepperDescription>First step description</span>
               @if (activeStep() === 0) {
-                <div class="mt-4 rounded-lg bg-muted p-4">
+                <div class="bg-muted mt-4 rounded-lg p-4">
                   <p class="text-sm">Content for step 1</p>
                 </div>
               }
@@ -73,7 +73,7 @@ import {
               <span scStepperTitle>Step 2</span>
               <span scStepperDescription>Second step description</span>
               @if (activeStep() === 1) {
-                <div class="mt-4 rounded-lg bg-muted p-4">
+                <div class="bg-muted mt-4 rounded-lg p-4">
                   <p class="text-sm">Content for step 2</p>
                 </div>
               }
@@ -86,7 +86,7 @@ import {
               <span scStepperTitle>Step 3</span>
               <span scStepperDescription>Final step description</span>
               @if (activeStep() === 2) {
-                <div class="mt-4 rounded-lg bg-muted p-4">
+                <div class="bg-muted mt-4 rounded-lg p-4">
                   <p class="text-sm">Content for step 3</p>
                 </div>
               }

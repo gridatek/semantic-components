@@ -48,27 +48,15 @@ import {
   template: \`
     <div scAvatarGroup>
       <span scAvatar>
-        <img
-          scAvatarImage
-          src="https://github.com/shadcn.png"
-          alt="@shadcn"
-        />
+        <img scAvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
         <span scAvatarFallback>CN</span>
       </span>
       <span scAvatar>
-        <img
-          scAvatarImage
-          src="https://github.com/vercel.png"
-          alt="@vercel"
-        />
+        <img scAvatarImage src="https://github.com/vercel.png" alt="@vercel" />
         <span scAvatarFallback>VC</span>
       </span>
       <span scAvatar>
-        <img
-          scAvatarImage
-          src="https://github.com/nextjs.png"
-          alt="@nextjs"
-        />
+        <img scAvatarImage src="https://github.com/nextjs.png" alt="@nextjs" />
         <span scAvatarFallback>NX</span>
       </span>
       <span scAvatar>

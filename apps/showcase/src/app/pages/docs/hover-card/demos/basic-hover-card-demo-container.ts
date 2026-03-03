@@ -32,9 +32,9 @@ import {
   ScAvatar,
   ScAvatarFallback,
   ScAvatarImage,
-  ScHoverCardProvider,
-  ScHoverCardPortal,
   ScHoverCard,
+  ScHoverCardPortal,
+  ScHoverCardProvider,
   ScHoverCardTrigger,
 } from '@semantic-components/ui';
 import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
@@ -75,12 +75,15 @@ import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
             </span>
             <div class="space-y-1">
               <h4 class="text-sm font-semibold">&#64;angular</h4>
-              <p class="text-sm text-muted-foreground">
+              <p class="text-muted-foreground text-sm">
                 The modern web developer's platform.
               </p>
               <div class="flex items-center pt-2">
-                <svg siCalendarIcon class="mr-2 size-4 text-muted-foreground"></svg>
-                <span class="text-xs text-muted-foreground">
+                <svg
+                  siCalendarIcon
+                  class="text-muted-foreground mr-2 size-4"
+                ></svg>
+                <span class="text-muted-foreground text-xs">
                   Joined September 2014
                 </span>
               </div>

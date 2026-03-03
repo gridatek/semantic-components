@@ -26,13 +26,13 @@ export class FlatNotificationCenterDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
+  type Notification,
   ScNotificationCenter,
   ScNotificationCenterContainer,
-  type Notification,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -43,7 +43,7 @@ import {
       scNotificationCenter
       [(notifications)]="notifications"
       [showFilters]="true"
-      class="max-w-md h-[400px]"
+      class="h-[400px] max-w-md"
     >
       <div scNotificationCenterContainer class="h-full"></div>
     </div>

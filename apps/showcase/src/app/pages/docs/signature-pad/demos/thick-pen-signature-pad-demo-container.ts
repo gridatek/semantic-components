@@ -27,13 +27,13 @@ export class ThickPenSignaturePadDemoContainer {
 import {
   ScSignaturePad,
   ScSignaturePadCanvas,
-  ScSignaturePadControls,
-  ScSignaturePadUndoButton,
   ScSignaturePadClearButton,
+  ScSignaturePadControls,
   ScSignaturePadToolbar,
+  ScSignaturePadUndoButton,
   ScSignaturePadWidthButton,
 } from '@semantic-components/ui-lab';
-import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-thick-pen-signature-pad-demo',
@@ -53,25 +53,25 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       <div scSignaturePadToolbar>
         <button scSignaturePadPenWidth [width]="2">
           <span
-            class="w-4 rounded-full bg-foreground transition-all"
+            class="bg-foreground w-4 rounded-full transition-all"
             style="height: 2px"
           ></span>
         </button>
         <button scSignaturePadPenWidth [width]="4">
           <span
-            class="w-4 rounded-full bg-foreground transition-all"
+            class="bg-foreground w-4 rounded-full transition-all"
             style="height: 4px"
           ></span>
         </button>
         <button scSignaturePadPenWidth [width]="6">
           <span
-            class="w-4 rounded-full bg-foreground transition-all"
+            class="bg-foreground w-4 rounded-full transition-all"
             style="height: 6px"
           ></span>
         </button>
         <button scSignaturePadPenWidth [width]="8">
           <span
-            class="w-4 rounded-full bg-foreground transition-all"
+            class="bg-foreground w-4 rounded-full transition-all"
             style="height: 8px"
           ></span>
         </button>

@@ -27,10 +27,10 @@ export class SelectSignalFormsDemoContainer {
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormRoot, required } from '@angular/forms/signals';
+import { FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScField,
   ScLabel,
@@ -60,6 +60,7 @@ interface FormModel {
     ScSelectTrigger,
     ScSelectLabel,
     JsonPipe,
+    // FormField,
     FormRoot,
   ],
   template: \`
@@ -67,8 +68,31 @@ interface FormModel {
       <div class="space-y-4">
         <div scField>
           <label scLabel>Fruit</label>
+          <!--div
+            scSelect
+            #select="scSelect"
+            placeholder="Select a fruit"
+            aria-label="Fruit dropdown"
+            [formField]="fruitForm.fruit"
+          >
+            <div scSelectTrigger>
+              <span scSelectLabel></span>
+            </div>
+            <ng-template scSelectPortal>
+              <div scSelectPopup>
+                <div scSelectList>
+                  @for (fruit of fruits; track fruit) {
+                    <div scSelectItem [value]="fruit" [label]="fruit">
+                      {{ fruit }}
+                    </div>
+                  }
+                </div>
+              </div>
+            </ng-template>
+          </div-->
           <div
             scSelect
+            #select="scSelect"
             placeholder="Select a fruit"
             aria-label="Fruit dropdown"
           >
@@ -90,7 +114,7 @@ interface FormModel {
         </div>
       </div>
 
-      <div class="mt-6 rounded-md bg-muted p-4">
+      <div class="bg-muted mt-6 rounded-md p-4">
         <p class="text-sm font-medium">Form Values:</p>
         <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>

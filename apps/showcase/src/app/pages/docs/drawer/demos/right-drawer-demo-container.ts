@@ -28,7 +28,6 @@ export class RightDrawerDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
   ScButton,
   ScDrawer,
@@ -40,6 +39,7 @@ import {
   ScDrawerTitle,
   ScDrawerTrigger,
 } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-right-drawer-demo',
@@ -67,7 +67,7 @@ import {
             variant="ghost"
             size="icon"
             scDrawerClose
-            class="absolute right-4 top-4"
+            class="absolute top-4 right-4"
             aria-label="Close"
           >
             <svg siXIcon></svg>

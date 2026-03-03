@@ -30,11 +30,11 @@ export class LabelsImageCompareDemoContainer {
 } from '@angular/core';
 import {
   ScImageCompare,
+  ScImageCompareAfter,
   ScImageCompareArea,
   ScImageCompareBefore,
-  ScImageCompareAfter,
-  ScImageCompareSlider,
   ScImageCompareLabel,
+  ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -48,18 +48,11 @@ import {
     ScImageCompareLabel,
   ],
   template: \`
-    <div scImageCompare class="w-full max-w-2xl aspect-2/1">
+    @let img = 'https://picsum.photos/seed/compare-labels/800/400';
+    <div scImageCompare class="aspect-2/1 w-full max-w-2xl">
       <div scImageCompareArea>
-        <img
-          scImageCompareBefore
-          src="https://picsum.photos/seed/compare-labels/800/400?blur=5"
-          alt="Blurred"
-        />
-        <img
-          scImageCompareAfter
-          src="https://picsum.photos/seed/compare-labels/800/400"
-          alt="Sharp"
-        />
+        <img scImageCompareBefore [src]="img + '?blur=5'" alt="Blurred" />
+        <img scImageCompareAfter [src]="img" alt="Sharp" />
         <div scImageCompareSlider></div>
         <div scImageCompareLabel class="top-2 left-2">Blurred</div>
         <div scImageCompareLabel class="top-2 right-2">Sharp</div>

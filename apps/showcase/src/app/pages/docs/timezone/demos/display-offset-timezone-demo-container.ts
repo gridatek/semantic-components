@@ -32,7 +32,7 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
   template: \`
     <div class="flex items-center gap-4">
       <button scTimezoneDisplay [showOffset]="true"></button>
-      <span class="text-sm text-muted-foreground">
+      <span class="text-muted-foreground text-sm">
         Shows abbreviation and UTC offset
       </span>
     </div>

@@ -24,7 +24,7 @@ export class NosearchMultiSelectDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
+import { MultiSelectOption, ScMultiSelect } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-nosearch-multi-select-demo',

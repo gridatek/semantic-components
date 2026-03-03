@@ -22,10 +22,10 @@ export class CountrySelectorPhoneInputDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScPhoneInput, Country } from '@semantic-components/ui-lab';
+import { Country, ScPhoneInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-country-selector-phone-input-demo',
@@ -38,7 +38,7 @@ import { ScPhoneInput, Country } from '@semantic-components/ui-lab';
         (countryChange)="onCountryChange($event)"
       />
     </div>
-    <p class="text-sm text-muted-foreground mt-2">
+    <p class="text-muted-foreground mt-2 text-sm">
       Value: {{ phoneWithCountry() || 'Empty' }}
     </p>
   \`,

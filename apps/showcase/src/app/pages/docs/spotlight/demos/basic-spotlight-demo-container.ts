@@ -22,8 +22,8 @@ export class BasicSpotlightDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  viewChild,
   ViewEncapsulation,
+  viewChild,
 } from '@angular/core';
 import {
   ScSpotlight,
@@ -44,10 +44,10 @@ import {
     <div class="space-y-6">
       <div
         id="spotlight-feature"
-        class="p-6 border rounded-lg bg-card hover:shadow-md transition-shadow"
+        class="bg-card rounded-lg border p-6 transition-shadow hover:shadow-md"
       >
         <div
-          class="size-12 rounded-full bg-primary/10 flex items-center justify-center mb-4"
+          class="bg-primary/10 mb-4 flex size-12 items-center justify-center rounded-full"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,15 +55,15 @@ import {
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            class="size-6 text-primary"
+            class="text-primary size-6"
           >
             <path
               d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
             />
           </svg>
         </div>
-        <h3 class="font-semibold mb-2">New Feature</h3>
-        <p class="text-sm text-muted-foreground">
+        <h3 class="mb-2 font-semibold">New Feature</h3>
+        <p class="text-muted-foreground text-sm">
           Discover our latest feature that helps you work more efficiently.
         </p>
       </div>
@@ -71,7 +71,7 @@ import {
       <button
         type="button"
         (click)="showFeature()"
-        class="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-2"
       >
         Highlight Feature
       </button>
@@ -86,14 +86,14 @@ import {
           <button
             type="button"
             (click)="spotlight.close()"
-            class="px-3 py-1.5 text-sm border rounded-md hover:bg-accent"
+            class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
           >
             Maybe Later
           </button>
           <button
             type="button"
             (click)="spotlight.close()"
-            class="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+            class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
           >
             Learn More
           </button>

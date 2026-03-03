@@ -30,11 +30,11 @@ export class ImagesCarouselDemoContainer {
 } from '@angular/core';
 import {
   ScCarousel,
-  ScCarouselViewport,
-  ScCarouselTrack,
   ScCarouselItem,
   ScCarouselNext,
   ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/carousel';
 import {
   SiChevronLeftIcon,
@@ -55,16 +55,16 @@ import {
   ],
   template: \`
     <div class="mx-auto w-full max-w-md">
-      <div scCarousel class="w-full">
+      <div scCarousel aria-label="Images carousel" class="w-full">
         <div scCarouselViewport>
           <div scCarouselTrack>
             @for (image of images; track image.alt) {
               <div scCarouselItem>
                 <div class="p-1">
                   <div
-                    class="flex aspect-video items-center justify-center rounded-lg border bg-muted"
+                    class="bg-muted flex aspect-video items-center justify-center rounded-lg border"
                   >
-                    <span class="text-sm text-muted-foreground">
+                    <span class="text-muted-foreground text-sm">
                       {{ image.alt }}
                     </span>
                   </div>

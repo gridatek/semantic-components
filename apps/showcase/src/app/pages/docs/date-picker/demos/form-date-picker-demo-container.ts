@@ -23,20 +23,20 @@ import { FormDatePickerDemo } from './form-date-picker-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormDatePickerDemoContainer {
-  readonly code = `import {
+  readonly code = `import { Temporal } from '@js-temporal/polyfill';
+import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScDatePicker } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-form-date-picker-demo',
   imports: [ScDatePicker],
   template: \`
-    <div class="grid gap-4 max-w-sm">
+    <div class="grid max-w-sm gap-4">
       <div class="space-y-2">
         <label class="text-sm font-medium">Date of Birth</label>
         <sc-date-picker

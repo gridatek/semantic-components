@@ -41,13 +41,13 @@ import {
       <div class="flex gap-2">
         <button
           (click)="pad.undo()"
-          class="px-3 py-1.5 text-sm border rounded-md hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
         >
           Undo
         </button>
         <button
           (click)="pad.clear()"
-          class="px-3 py-1.5 text-sm border rounded-md hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
         >
           Clear
         </button>

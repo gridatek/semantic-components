@@ -23,8 +23,8 @@ import { BasicEmojiPickerDemo } from './basic-emoji-picker-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicEmojiPickerDemoContainer {
-  readonly code = `import { Component, signal, ViewEncapsulation } from '@angular/core';
-import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-emoji-picker-demo',
@@ -32,7 +32,7 @@ import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
   template: \`
     <sc-emoji-picker (emojiSelect)="onEmojiSelect($event)" />
     @if (selectedEmoji()) {
-      <p class="text-sm text-muted-foreground mt-4">
+      <p class="text-muted-foreground mt-4 text-sm">
         Selected: {{ selectedEmoji()?.emoji }} ({{ selectedEmoji()?.name },
         encapsulation: ViewEncapsulation.None})
       </p>

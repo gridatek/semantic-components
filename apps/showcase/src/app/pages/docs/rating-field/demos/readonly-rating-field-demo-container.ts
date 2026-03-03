@@ -34,7 +34,13 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-readonly-rating-field-demo',
-  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, ScRatingIcon, SiStarIcon],
+  imports: [
+    ScRatingField,
+    ScRatingItemGroup,
+    ScRatingFieldItem,
+    ScRatingIcon,
+    SiStarIcon,
+  ],
   template: \`
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-2">

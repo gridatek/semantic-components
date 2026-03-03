@@ -26,18 +26,18 @@ export default class ScrubbingNumberFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldInputGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
+  ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-scrubbing-number-field-demo',
@@ -65,7 +65,7 @@ import { ScLabel } from '@semantic-components/ui';
 
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement></button>
-          <input scNumberFieldInput />
+          <input scNumberFieldInput aria-label="Opacity" />
           <button scNumberFieldIncrement></button>
         </div>
       </div>
@@ -77,13 +77,13 @@ import { ScLabel } from '@semantic-components/ui';
 
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement></button>
-          <input scNumberFieldInput />
+          <input scNumberFieldInput aria-label="Rotation" />
           <button scNumberFieldIncrement></button>
         </div>
       </div>
     </div>
 
-    <p class="mt-4 text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-4 text-sm">
       💡 Tip: Click and drag on the label to scrub values
     </p>
   \`,

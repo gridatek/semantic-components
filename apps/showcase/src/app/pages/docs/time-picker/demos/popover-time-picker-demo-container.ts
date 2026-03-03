@@ -22,8 +22,8 @@ export class PopoverTimePickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScButton,
@@ -32,13 +32,13 @@ import {
   ScPopoverProvider,
   ScPopoverTrigger,
   ScTimePicker,
-  ScTimePickerInput,
   ScTimePickerHoursInput,
+  ScTimePickerInput,
   ScTimePickerMinutesInput,
-  ScTimePickerSeparator,
   ScTimePickerPeriod,
   ScTimePickerPeriodAM,
   ScTimePickerPeriodPM,
+  ScTimePickerSeparator,
   ScTimeValue,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';

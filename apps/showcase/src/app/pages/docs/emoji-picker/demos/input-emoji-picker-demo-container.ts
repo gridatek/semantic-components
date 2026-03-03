@@ -23,8 +23,8 @@ import { InputEmojiPickerDemo } from './input-emoji-picker-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputEmojiPickerDemoContainer {
-  readonly code = `import { Component, signal, ViewEncapsulation } from '@angular/core';
-import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-input-emoji-picker-demo',
@@ -38,11 +38,11 @@ import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
             [value]="inputValue()"
             (input)="onInputChange($event)"
             placeholder="Type a message..."
-            class="w-full rounded-md border border-input bg-transparent px-3 py-2 pr-10 text-sm shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring"
+            class="border-input placeholder:text-muted-foreground focus:ring-ring w-full rounded-md border bg-transparent px-3 py-2 pr-10 text-sm shadow-sm focus:ring-1 focus:outline-none"
           />
           <button
             type="button"
-            class="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-accent rounded"
+            class="hover:bg-accent absolute top-1/2 right-2 -translate-y-1/2 rounded p-1"
             (click)="togglePicker()"
           >
             <svg
@@ -51,7 +51,7 @@ import { ScEmojiPicker, Emoji } from '@semantic-components/ui-lab';
               fill="none"
               stroke="currentColor"
               stroke-width="2"
-              class="size-4 text-muted-foreground"
+              class="text-muted-foreground size-4"
             >
               <circle cx="12" cy="12" r="10" />
               <path d="M8 14s1.5 2 4 2 4-2 4-2" />

@@ -22,15 +22,15 @@ export class PreviewColorPickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScColorPicker,
   ScColorPickerArea,
   ScColorPickerHue,
-  ScColorPickerPreview,
   ScColorPickerInput,
+  ScColorPickerPreview,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -43,7 +43,7 @@ import {
     ScColorPickerInput,
   ],
   template: \`
-    <div class="flex flex-col md:flex-row gap-6">
+    <div class="flex flex-col gap-6 md:flex-row">
       <div class="max-w-xs">
         <div
           scColorPicker
@@ -73,7 +73,7 @@ import {
             ></div>
             <span class="font-mono text-sm">{{ color() }}</span>
           </div>
-          <p class="text-sm text-muted-foreground">
+          <p class="text-muted-foreground text-sm">
             Use the picker to change this color
           </p>
         </div>

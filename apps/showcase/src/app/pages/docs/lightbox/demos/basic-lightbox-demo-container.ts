@@ -25,10 +25,10 @@ export class BasicLightboxDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  LightboxImage,
   ScLightbox,
   ScLightboxContainer,
   ScLightboxTrigger,
-  LightboxImage,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -42,7 +42,7 @@ import {
             <button
               scLightboxTrigger
               [index]="i"
-              class="w-32 h-32 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring"
+              class="focus:ring-ring h-32 w-32 overflow-hidden rounded-lg focus:ring-2 focus:outline-none"
             >
               <img
                 [src]="image.thumbnail || image.src"
@@ -54,7 +54,7 @@ import {
         </div>
         <div scLightboxContainer></div>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Click an image to open the lightbox. Use arrow keys or buttons to
         navigate.
       </p>

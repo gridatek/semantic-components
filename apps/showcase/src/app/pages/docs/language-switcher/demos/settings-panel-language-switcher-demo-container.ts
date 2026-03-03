@@ -35,7 +35,7 @@ import { ScLanguageSelect } from '@semantic-components/ui-lab';
         <div class="flex items-center justify-between">
           <div class="space-y-0.5">
             <label class="text-sm font-medium">Language</label>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-muted-foreground text-sm">
               Select your preferred language
             </p>
           </div>

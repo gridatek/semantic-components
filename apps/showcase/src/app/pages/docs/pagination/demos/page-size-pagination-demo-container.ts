@@ -26,8 +26,8 @@ export class PageSizePaginationDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import {
@@ -68,6 +68,7 @@ import {
     <div class="space-y-4">
       <nav
         scPagination
+        aria-label="Page size pagination"
         #pagination="scPagination"
         [currentPage]="currentPage()"
         [pageSize]="pageSize()"
@@ -77,7 +78,7 @@ import {
       >
         <div class="flex items-center justify-between">
           <div scField orientation="horizontal" class="w-auto">
-            <label scLabel class="text-sm text-muted-foreground">
+            <label scLabel class="text-muted-foreground text-sm">
               Items per page:
             </label>
             <select scPaginationPageSizeSelect>
@@ -87,7 +88,7 @@ import {
             </select>
           </div>
 
-          <p class="text-sm text-muted-foreground">
+          <p class="text-muted-foreground text-sm">
             Page {{ currentPage() }} of {{ pagination.totalPages() }} ({{
               totalItems()
             }}

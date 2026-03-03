@@ -22,8 +22,8 @@ export class VariantsTagInputDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScTagInput,
@@ -35,9 +35,9 @@ import {
   selector: 'app-variants-tag-input-demo',
   imports: [ScTagInput, ScTagInputField, ScTagInputTag],
   template: \`
-    <div class="space-y-3 max-w-md">
+    <div class="max-w-md space-y-3">
       <div class="space-y-1">
-        <label class="text-xs text-muted-foreground">Default</label>
+        <label class="text-muted-foreground text-xs">Default</label>
         <div scTagInput [(tags)]="variantDefault">
           @for (tag of variantDefault(); track tag) {
             <span scTagInputTag [tag]="tag" variant="default"></span>
@@ -46,7 +46,7 @@ import {
         </div>
       </div>
       <div class="space-y-1">
-        <label class="text-xs text-muted-foreground">Secondary</label>
+        <label class="text-muted-foreground text-xs">Secondary</label>
         <div scTagInput [(tags)]="variantSecondary">
           @for (tag of variantSecondary(); track tag) {
             <span scTagInputTag [tag]="tag" variant="secondary"></span>
@@ -55,7 +55,7 @@ import {
         </div>
       </div>
       <div class="space-y-1">
-        <label class="text-xs text-muted-foreground">Outline</label>
+        <label class="text-muted-foreground text-xs">Outline</label>
         <div scTagInput [(tags)]="variantOutline">
           @for (tag of variantOutline(); track tag) {
             <span scTagInputTag [tag]="tag" variant="outline"></span>

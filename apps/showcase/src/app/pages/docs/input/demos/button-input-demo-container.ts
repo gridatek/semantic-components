@@ -26,10 +26,10 @@ export class ButtonInputDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScField, ScLabel } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 

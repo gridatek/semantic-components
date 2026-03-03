@@ -22,19 +22,19 @@ export class DropzoneFileUploadDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScFileUpload,
   ScFileUploadDropzone,
-  ScFileUploadList,
-  ScFileUploadItem,
-  ScFileUploadItemPreview,
-  ScFileUploadItemName,
-  ScFileUploadItemSize,
-  ScFileUploadItemDelete,
   ScFileUploadFile,
+  ScFileUploadItem,
+  ScFileUploadItemDelete,
+  ScFileUploadItemName,
+  ScFileUploadItemPreview,
+  ScFileUploadItemSize,
+  ScFileUploadList,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,
@@ -62,10 +62,10 @@ import {
       <div scFileUpload [multiple]="true" [(files)]="files">
         <div scFileUploadDropzone class="p-8">
           <div class="flex flex-col items-center gap-2 text-center">
-            <svg siUploadIcon class="size-10 text-muted-foreground"></svg>
+            <svg siUploadIcon class="text-muted-foreground size-10"></svg>
             <div class="space-y-1">
               <p class="text-sm font-medium">Drag and drop files here</p>
-              <p class="text-xs text-muted-foreground">or click to browse</p>
+              <p class="text-muted-foreground text-xs">or click to browse</p>
             </div>
           </div>
         </div>
@@ -75,9 +75,9 @@ import {
             @for (file of files(); track file.id) {
               <div scFileUploadItem [file]="file">
                 <div scFileUploadItemPreview [file]="file">
-                  <svg siFileIcon class="size-5 text-muted-foreground"></svg>
+                  <svg siFileIcon class="text-muted-foreground size-5"></svg>
                 </div>
-                <div class="flex-1 min-w-0">
+                <div class="min-w-0 flex-1">
                   <div scFileUploadItemName>{{ file.file.name }}</div>
                   <div scFileUploadItemSize [file]="file"></div>
                 </div>

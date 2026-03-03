@@ -32,7 +32,7 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
   template: \`
     <div class="flex items-center gap-4">
       <button scTimezoneDisplay></button>
-      <span class="text-sm text-muted-foreground">
+      <span class="text-muted-foreground text-sm">
         Shows current timezone abbreviation
       </span>
     </div>

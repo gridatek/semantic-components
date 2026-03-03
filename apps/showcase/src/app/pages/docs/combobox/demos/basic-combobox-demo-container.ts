@@ -20,24 +20,28 @@ import { BasicComboboxDemo } from './basic-combobox-demo';
 })
 export class BasicComboboxDemoContainer {
   readonly code = `import {
-  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
+  afterRenderEffect,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   ScCombobox,
-  ScComboboxPortal,
   ScComboboxEmpty,
   ScComboboxIcon,
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
+  ScComboboxPortal,
   ScComboboxTrigger,
 } from '@semantic-components/ui-lab';
+import {
+  SiCheckIcon,
+  SiChevronsUpDownIcon,
+} from '@semantic-icons/lucide-icons';
 
 interface ComboboxOption {
   value: string;
@@ -56,6 +60,8 @@ interface ComboboxOption {
     ScComboboxItem,
     ScComboboxItemIndicator,
     ScComboboxEmpty,
+    SiChevronsUpDownIcon,
+    SiCheckIcon,
   ],
   template: \`
     <div class="space-y-4">
@@ -65,19 +71,7 @@ interface ComboboxOption {
             {{ displayValue() }}
           </span>
           <input scComboboxInput />
-          <svg
-            scComboboxIcon
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="m7 15 5 5 5-5" />
-            <path d="m7 9 5-5 5 5" />
-          </svg>
+          <svg siChevronsUpDownIcon scComboboxIcon></svg>
         </div>
         <div
           scComboboxPortal
@@ -89,31 +83,16 @@ interface ComboboxOption {
           }
           <div scComboboxList [(values)]="selectedValues">
             @for (option of filteredOptions(); track option.value) {
-              <div
-                scComboboxItem
-                [value]="option.value"
-                [label]="option.label"
-              >
+              <div scComboboxItem [value]="option.value" [label]="option.label">
                 <span>{{ option.label }}</span>
-                <svg
-                  scComboboxItemIndicator
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
+                <svg siCheckIcon scComboboxItemIndicator></svg>
               </div>
             }
           </div>
         </div>
       </div>
       @if (selectedValues().length > 0) {
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Selected: {{ selectedValues()[0] }}
         </p>
       }

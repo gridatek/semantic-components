@@ -26,31 +26,31 @@ export class CustomHeightEditorDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScEditor,
+  ScEditorBoldButton,
+  ScEditorBulletListButton,
+  ScEditorCharCount,
   ScEditorContent,
+  ScEditorCount,
+  ScEditorFooter,
+  ScEditorItalicButton,
+  ScEditorNumberedListButton,
+  ScEditorSeparator,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-  ScEditorBoldButton,
-  ScEditorItalicButton,
   ScEditorUnderlineButton,
-  ScEditorSeparator,
-  ScEditorBulletListButton,
-  ScEditorNumberedListButton,
-  ScEditorFooter,
-  ScEditorCount,
   ScEditorWordCount,
-  ScEditorCharCount,
 } from '@semantic-components/editor';
 import {
   SiBoldIcon,
   SiItalicIcon,
-  SiUnderlineIcon,
   SiListIcon,
   SiListOrderedIcon,
+  SiUnderlineIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -77,52 +77,59 @@ import {
     SiListOrderedIcon,
   ],
   template: \`
-    <div scEditor class="border rounded-lg overflow-hidden">
-      <div scEditorToolbar>
-        <div scEditorToolbarGroup>
-          <button scEditorBold>
-            <svg siBoldIcon class="size-4"></svg>
-            <span class="sr-only">Bold</span>
-          </button>
-          <button scEditorItalic>
-            <svg siItalicIcon class="size-4"></svg>
-            <span class="sr-only">Italic</span>
-          </button>
-          <button scEditorUnderline>
-            <svg siUnderlineIcon class="size-4"></svg>
-            <span class="sr-only">Underline</span>
-          </button>
+    <div class="w-full">
+      <div scEditor class="overflow-hidden rounded-lg border">
+        <div scEditorToolbar>
+          <div scEditorToolbarGroup>
+            <button scEditorBold>
+              <svg siBoldIcon class="size-4"></svg>
+              <span class="sr-only">Bold</span>
+            </button>
+            <button scEditorItalic>
+              <svg siItalicIcon class="size-4"></svg>
+              <span class="sr-only">Italic</span>
+            </button>
+            <button scEditorUnderline>
+              <svg siUnderlineIcon class="size-4"></svg>
+              <span class="sr-only">Underline</span>
+            </button>
+          </div>
+
+          <div scEditorSeparator></div>
+
+          <div scEditorToolbarGroup>
+            <button scEditorBulletList>
+              <svg siListIcon class="size-4"></svg>
+              <span class="sr-only">Bullet list</span>
+            </button>
+            <button scEditorNumberedList>
+              <svg siListOrderedIcon class="size-4"></svg>
+              <span class="sr-only">Numbered list</span>
+            </button>
+          </div>
         </div>
 
-        <div scEditorSeparator></div>
+        <div
+          scEditorContent
+          [(value)]="content"
+          class="max-h-[500px] min-h-[300px]"
+          placeholder="This editor has a taller minimum height..."
+        ></div>
 
-        <div scEditorToolbarGroup>
-          <button scEditorBulletList>
-            <svg siListIcon class="size-4"></svg>
-            <span class="sr-only">Bullet list</span>
-          </button>
-          <button scEditorNumberedList>
-            <svg siListOrderedIcon class="size-4"></svg>
-            <span class="sr-only">Numbered list</span>
-          </button>
-        </div>
-      </div>
-
-      <div
-        scEditorContent
-        [(value)]="content"
-        class="min-h-[300px] max-h-[500px]"
-        placeholder="This editor has a taller minimum height..."
-      ></div>
-
-      <div scEditorFooter>
-        <div scEditorCount>
-          <span scEditorWordCount #wc="scEditorWordCount">{{ wc.wordCount() }} words</span>
-          <span scEditorCharCount #cc="scEditorCharCount">{{ cc.charCount() }} characters</span>
+        <div scEditorFooter>
+          <div scEditorCount>
+            <span scEditorWordCount #wc="scEditorWordCount">
+              {{ wc.wordCount() }} words
+            </span>
+            <span scEditorCharCount #cc="scEditorCharCount">
+              {{ cc.charCount() }} characters
+            </span>
+          </div>
         </div>
       </div>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -34,14 +34,14 @@ import {
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
-  ScMenuSeparator,
   ScMenuProvider,
+  ScMenuSeparator,
   ScMenuTrigger,
 } from '@semantic-components/ui';
 import {
+  SiCirclePlusIcon,
   SiCreditCardIcon,
   SiLogOutIcon,
-  SiCirclePlusIcon,
   SiSettingsIcon,
   SiUserIcon,
   SiUsersIcon,
@@ -93,7 +93,7 @@ import {
               />
               <div class="flex flex-col">
                 <span class="text-sm font-semibold">shadcn</span>
-                <span class="text-xs text-muted-foreground">
+                <span class="text-muted-foreground text-xs">
                   m&#64;example.com
                 </span>
               </div>
@@ -107,7 +107,7 @@ import {
               ></svg>
               <span class="flex-1">Profile</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⇧⌘P
               </span>
@@ -120,7 +120,7 @@ import {
               ></svg>
               <span class="flex-1">Billing</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘B
               </span>
@@ -133,7 +133,7 @@ import {
               ></svg>
               <span class="flex-1">Settings</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘S
               </span>
@@ -155,7 +155,7 @@ import {
               ></svg>
               <span class="flex-1">New Team</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘+T
               </span>
@@ -169,7 +169,7 @@ import {
               <svg siLogOutIcon class="size-4" aria-hidden="true"></svg>
               <span class="flex-1">Log out</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⇧⌘Q
               </span>

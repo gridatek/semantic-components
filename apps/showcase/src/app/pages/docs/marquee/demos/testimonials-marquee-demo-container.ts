@@ -38,20 +38,20 @@ import {
       @for (testimonial of testimonials; track testimonial.name) {
         <div
           scMarqueeItem
-          class="w-80 rounded-lg border bg-background p-4 shadow-sm"
+          class="bg-background w-80 rounded-lg border p-4 shadow-sm"
         >
-          <p class="text-sm text-muted-foreground mb-3">
+          <p class="text-muted-foreground mb-3 text-sm">
             "{{ testimonial.quote }}"
           </p>
           <div class="flex items-center gap-2">
             <div
-              class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium"
+              class="bg-primary/10 flex size-8 items-center justify-center rounded-full text-sm font-medium"
             >
               {{ testimonial.name.charAt(0) }}
             </div>
             <div>
               <p class="text-sm font-medium">{{ testimonial.name }}</p>
-              <p class="text-xs text-muted-foreground">
+              <p class="text-muted-foreground text-xs">
                 {{ testimonial.role }}
               </p>
             </div>
@@ -62,20 +62,20 @@ import {
         @for (testimonial of testimonials; track testimonial.name) {
           <div
             scMarqueeItem
-            class="w-80 rounded-lg border bg-background p-4 shadow-sm"
+            class="bg-background w-80 rounded-lg border p-4 shadow-sm"
           >
-            <p class="text-sm text-muted-foreground mb-3">
+            <p class="text-muted-foreground mb-3 text-sm">
               "{{ testimonial.quote }}"
             </p>
             <div class="flex items-center gap-2">
               <div
-                class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium"
+                class="bg-primary/10 flex size-8 items-center justify-center rounded-full text-sm font-medium"
               >
                 {{ testimonial.name.charAt(0) }}
               </div>
               <div>
                 <p class="text-sm font-medium">{{ testimonial.name }}</p>
-                <p class="text-xs text-muted-foreground">
+                <p class="text-muted-foreground text-xs">
                   {{ testimonial.role }}
                 </p>
               </div>

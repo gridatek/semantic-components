@@ -26,16 +26,16 @@ export class EllipsisPaginationDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScPagination,
   ScPaginationChange,
-  ScPaginationList,
   ScPaginationEllipsis,
   ScPaginationItem,
   ScPaginationLink,
+  ScPaginationList,
   ScPaginationNext,
   ScPaginationPrevious,
 } from '@semantic-components/ui';
@@ -62,6 +62,7 @@ import {
   template: \`
     <nav
       scPagination
+      aria-label="Ellipsis pagination"
       #pagination="scPagination"
       [currentPage]="currentPage()"
       [totalItems]="100"

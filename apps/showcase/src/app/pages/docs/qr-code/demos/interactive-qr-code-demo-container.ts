@@ -39,7 +39,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
       type="text"
       [(ngModel)]="inputValue"
       placeholder="Enter text or URL..."
-      class="w-full max-w-sm px-3 py-2 border rounded-md"
+      class="w-full max-w-sm rounded-md border px-3 py-2"
     />
     @if (inputValue) {
       <sc-qr-code [value]="inputValue" [size]="200" />

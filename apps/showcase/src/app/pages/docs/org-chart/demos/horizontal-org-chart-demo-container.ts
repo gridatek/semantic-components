@@ -22,16 +22,16 @@ export class HorizontalOrgChartDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScOrgChart, type OrgChartNode } from '@semantic-components/ui-lab';
+import { type OrgChartNode, ScOrgChart } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-horizontal-org-chart-demo',
   imports: [ScOrgChart],
   template: \`
-    <div class="border rounded-lg overflow-auto">
+    <div class="overflow-auto rounded-lg border">
       <sc-org-chart [data]="orgData()" direction="horizontal" />
     </div>
   \`,

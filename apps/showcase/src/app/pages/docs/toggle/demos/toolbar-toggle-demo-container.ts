@@ -26,8 +26,8 @@ export class ToolbarToggleDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import {

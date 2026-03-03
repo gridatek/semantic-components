@@ -22,8 +22,8 @@ export class BasicToggleLanguageSwitcherDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import {
   ScLanguageService,
@@ -36,7 +36,7 @@ import {
   template: \`
     <div class="flex items-center gap-4">
       <button scLanguageToggle></button>
-      <span class="text-sm text-muted-foreground">
+      <span class="text-muted-foreground text-sm">
         Current: {{ languageService.currentLanguage().label }}
       </span>
     </div>

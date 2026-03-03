@@ -26,21 +26,21 @@ export class BasicKanbanBoardDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
-  ScKanbanBoard,
   type KanbanCard,
   type KanbanColumn,
   type KanbanDragEvent,
+  ScKanbanBoard,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-kanban-board-demo',
   imports: [ScKanbanBoard],
   template: \`
-    <div class="h-[600px] border rounded-lg bg-muted/10">
+    <div class="bg-muted/10 h-[600px] rounded-lg border">
       <sc-kanban-board
         [(columns)]="columns"
         [(cards)]="cards"

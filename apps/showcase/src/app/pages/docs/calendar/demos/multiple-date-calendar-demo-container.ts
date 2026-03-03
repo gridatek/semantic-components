@@ -23,13 +23,13 @@ import { MultipleDateCalendarDemo } from './multiple-date-calendar-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultipleDateCalendarDemoContainer {
-  readonly code = `import {
+  readonly code = `import { Temporal } from '@js-temporal/polyfill';
+import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScCalendar } from '@semantic-components/ui';
 
 @Component({
@@ -43,14 +43,14 @@ import { ScCalendar } from '@semantic-components/ui';
 
       <div class="space-y-2">
         @if (selectedDates().length > 0) {
-          <div class="p-4 rounded-md border bg-muted/50">
-            <div class="flex items-center justify-between mb-3">
+          <div class="bg-muted/50 rounded-md border p-4">
+            <div class="mb-3 flex items-center justify-between">
               <p class="text-sm font-medium">
                 Selected Dates ({{ selectedDates().length }})
               </p>
               <button
                 type="button"
-                class="px-3 py-1 text-sm rounded-md border hover:bg-accent"
+                class="hover:bg-accent rounded-md border px-3 py-1 text-sm"
                 (click)="clearSelection()"
               >
                 Clear All
@@ -59,7 +59,7 @@ import { ScCalendar } from '@semantic-components/ui';
             <div class="flex flex-wrap gap-2">
               @for (date of selectedDates(); track date.toString()) {
                 <span
-                  class="inline-flex items-center gap-2 px-3 py-1 text-sm rounded-md border bg-background"
+                  class="bg-background inline-flex items-center gap-2 rounded-md border px-3 py-1 text-sm"
                 >
                   {{ date.toLocaleString() }}
                   <button
@@ -75,7 +75,7 @@ import { ScCalendar } from '@semantic-components/ui';
           </div>
         } @else {
           <p
-            class="text-sm text-muted-foreground p-4 text-center border rounded-md"
+            class="text-muted-foreground rounded-md border p-4 text-center text-sm"
           >
             No dates selected. Click multiple dates to select them.
           </p>

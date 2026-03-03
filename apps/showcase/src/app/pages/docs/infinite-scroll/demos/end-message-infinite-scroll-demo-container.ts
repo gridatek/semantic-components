@@ -26,8 +26,8 @@ export class EndMessageInfiniteScrollDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScInfiniteScroll } from '@semantic-components/ui-lab';
 
@@ -42,15 +42,15 @@ interface Item {
   imports: [ScInfiniteScroll],
   template: \`
     <sc-infinite-scroll
-      class="h-[300px] border rounded-lg"
+      class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
       endMessage="You've reached the end! 🎉"
       (loadMore)="loadMore()"
     >
-      <div class="p-4 space-y-2">
+      <div class="space-y-2 p-4">
         @for (item of items(); track item.id) {
-          <div class="p-3 border rounded">
+          <div class="rounded border p-3">
             {{ item.title }}
           </div>
         }

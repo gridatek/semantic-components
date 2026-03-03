@@ -33,22 +33,22 @@ import { ScSeparator } from '@semantic-components/ui';
     <div class="w-[350px] rounded-lg border p-4">
       <div class="flex items-center justify-between">
         <span class="text-sm font-medium">Account Settings</span>
-        <span class="text-xs text-muted-foreground">v1.0.0</span>
+        <span class="text-muted-foreground text-xs">v1.0.0</span>
       </div>
       <div scSeparator class="my-4"></div>
       <div class="space-y-3">
         <div class="flex items-center justify-between">
           <span class="text-sm">Email notifications</span>
-          <span class="text-sm text-muted-foreground">On</span>
+          <span class="text-muted-foreground text-sm">On</span>
         </div>
         <div class="flex items-center justify-between">
           <span class="text-sm">Push notifications</span>
-          <span class="text-sm text-muted-foreground">Off</span>
+          <span class="text-muted-foreground text-sm">Off</span>
         </div>
       </div>
       <div scSeparator class="my-4"></div>
       <div class="flex items-center justify-between">
-        <span class="text-sm text-muted-foreground">
+        <span class="text-muted-foreground text-sm">
           Last updated: 2 hours ago
         </span>
       </div>

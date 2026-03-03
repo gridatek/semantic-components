@@ -22,8 +22,8 @@ export class SingleFileUploadDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScFileUpload,
@@ -40,8 +40,8 @@ import { SiFileUpIcon } from '@semantic-icons/lucide-icons';
       <div scFileUpload [(files)]="file">
         <div scFileUploadDropzone class="p-6">
           <div class="flex flex-col items-center gap-2 text-center">
-            <svg siFileUpIcon class="size-8 text-muted-foreground"></svg>
-            <p class="text-sm text-muted-foreground">
+            <svg siFileUpIcon class="text-muted-foreground size-8"></svg>
+            <p class="text-muted-foreground text-sm">
               {{
                 file().length > 0
                   ? file()[0].file.name

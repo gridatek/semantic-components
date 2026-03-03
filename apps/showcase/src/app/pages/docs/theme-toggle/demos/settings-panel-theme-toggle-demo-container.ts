@@ -41,7 +41,7 @@ import { ScThemeSelect } from '@semantic-components/ui-lab';
             <label for="settings-theme" class="text-sm font-medium">
               Theme
             </label>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-muted-foreground text-sm">
               Select your preferred theme
             </p>
           </div>

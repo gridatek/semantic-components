@@ -26,8 +26,8 @@ export class IndeterminateNativeCheckboxDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScNativeCheckbox } from '@semantic-components/ui-lab';
 
@@ -47,7 +47,7 @@ import { ScNativeCheckbox } from '@semantic-components/ui-lab';
         />
         <label
           for="select-all-native"
-          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
           Select all
         </label>

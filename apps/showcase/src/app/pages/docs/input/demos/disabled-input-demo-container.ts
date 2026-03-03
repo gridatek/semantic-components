@@ -26,10 +26,10 @@ export class DisabledInputDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { disabled, form, FormField } from '@angular/forms/signals';
+import { FormField, disabled, form } from '@angular/forms/signals';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 

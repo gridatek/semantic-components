@@ -26,20 +26,20 @@ export class MinimalKanbanBoardDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
-  ScKanbanBoard,
   type KanbanCard,
   type KanbanColumn,
+  ScKanbanBoard,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-minimal-kanban-board-demo',
   imports: [ScKanbanBoard],
   template: \`
-    <div class="h-[400px] border rounded-lg bg-muted/10">
+    <div class="bg-muted/10 h-[400px] rounded-lg border">
       <sc-kanban-board
         [(columns)]="columns"
         [(cards)]="cards"

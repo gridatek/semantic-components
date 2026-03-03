@@ -23,13 +23,13 @@ import { MultipleDatePickerDemo } from './multiple-date-picker-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultipleDatePickerDemoContainer {
-  readonly code = `import {
+  readonly code = `import { Temporal } from '@js-temporal/polyfill';
+import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScDatePicker } from '@semantic-components/ui';
 
 @Component({
@@ -42,7 +42,7 @@ import { ScDatePicker } from '@semantic-components/ui';
       placeholder="Select dates"
     />
     @if (selectedDates().length > 0) {
-      <p class="text-sm text-muted-foreground mt-4">
+      <p class="text-muted-foreground mt-4 text-sm">
         {{ selectedDates().length }} date(s) selected
       </p>
     }

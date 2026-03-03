@@ -26,19 +26,19 @@ export default class SignalFormsNumberFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { FormField, form, required, min, max } from '@angular/forms/signals';
+import { FormField, form, max, min, required } from '@angular/forms/signals';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldInputGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
+  ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-signal-forms-number-field-demo',
@@ -71,6 +71,7 @@ import { ScLabel } from '@semantic-components/ui';
           <button scNumberFieldDecrement></button>
           <input
             scNumberFieldInput
+            aria-label="Quantity"
             [formField]="quantityForm.quantity"
             [class.border-destructive]="
               quantityForm.quantity().invalid() &&
@@ -82,7 +83,7 @@ import { ScLabel } from '@semantic-components/ui';
         @if (
           quantityForm.quantity().invalid() && quantityForm.quantity().touched()
         ) {
-          <p class="text-sm font-medium text-destructive" role="alert">
+          <p class="text-destructive text-sm font-medium" role="alert">
             @if (hasError(quantityForm.quantity, 'required')) {
               Quantity is required
             } @else if (hasError(quantityForm.quantity, 'min')) {
@@ -94,9 +95,9 @@ import { ScLabel } from '@semantic-components/ui';
         }
       </div>
 
-      <div class="rounded-lg border bg-muted/50 p-4">
+      <div class="bg-muted/50 rounded-lg border p-4">
         <p class="text-sm font-medium">Form State:</p>
-        <pre class="mt-2 text-xs text-muted-foreground">{{ formState() }}</pre>
+        <pre class="text-muted-foreground mt-2 text-xs">{{ formState() }}</pre>
       </div>
     </div>
   \`,

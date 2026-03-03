@@ -31,9 +31,9 @@ export class PythonCodeEditorDemoContainer {
 import {
   ScCodeEditor,
   ScCodeEditorContent,
+  ScCodeEditorCopyButton,
   ScCodeEditorHeader,
   ScCodeEditorLabel,
-  ScCodeEditorCopyButton,
 } from '@semantic-components/code';
 
 @Component({
@@ -49,7 +49,7 @@ import {
     <div scCodeEditor>
       <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
-          <span class="text-sm text-muted-foreground">script.py</span>
+          <span class="text-muted-foreground text-sm">script.py</span>
           <span scCodeEditorLabel>python</span>
         </div>
         <button scCodeEditorCopyButton [code]="pythonCode"></button>

@@ -22,8 +22,8 @@ export class MultipleBurstsConfettiDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  viewChild,
   ViewEncapsulation,
+  viewChild,
 } from '@angular/core';
 import { ScConfetti } from '@semantic-components/ui-lab';
 

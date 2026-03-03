@@ -32,12 +32,12 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   template: \`
     <label
       scSwitchField
-      class="flex-row-reverse justify-between rounded-lg border p-4 w-full"
+      class="w-full flex-row-reverse justify-between rounded-lg border p-4"
     >
       <input type="checkbox" scSwitch />
       <div class="space-y-0.5">
         <p class="text-base font-medium">Dark Mode</p>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Enable dark mode for a better viewing experience in low light.
         </p>
       </div>

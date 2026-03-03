@@ -22,19 +22,19 @@ export class ImageFileUploadDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScFileUpload,
   ScFileUploadDropzone,
-  ScFileUploadList,
-  ScFileUploadItem,
-  ScFileUploadItemPreview,
-  ScFileUploadItemName,
-  ScFileUploadItemSize,
-  ScFileUploadItemDelete,
   ScFileUploadFile,
+  ScFileUploadItem,
+  ScFileUploadItemDelete,
+  ScFileUploadItemName,
+  ScFileUploadItemPreview,
+  ScFileUploadItemSize,
+  ScFileUploadList,
 } from '@semantic-components/ui';
 import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -64,10 +64,10 @@ import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
       >
         <div scFileUploadDropzone class="p-8">
           <div class="flex flex-col items-center gap-2 text-center">
-            <svg siImageIcon class="size-10 text-muted-foreground"></svg>
+            <svg siImageIcon class="text-muted-foreground size-10"></svg>
             <div class="space-y-1">
               <p class="text-sm font-medium">Upload images</p>
-              <p class="text-xs text-muted-foreground">PNG, JPG up to 5MB</p>
+              <p class="text-muted-foreground text-xs">PNG, JPG up to 5MB</p>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
                   [file]="file"
                   class="size-12 rounded-md"
                 ></div>
-                <div class="flex-1 min-w-0">
+                <div class="min-w-0 flex-1">
                   <div scFileUploadItemName>{{ file.file.name }}</div>
                   <div scFileUploadItemSize [file]="file"></div>
                 </div>
@@ -95,7 +95,7 @@ import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
         }
       </div>
       @if (errorMessage()) {
-        <div class="mt-2 text-sm text-destructive">{{ errorMessage() }}</div>
+        <div class="text-destructive mt-2 text-sm">{{ errorMessage() }}</div>
       }
     </div>
   \`,

@@ -24,7 +24,7 @@ export class SizesDockDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScDock, ScDockItems, ScDockItem } from '@semantic-components/ui-lab';
+import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';
 
 @Component({
@@ -32,10 +32,10 @@ import type { DockItem } from '@semantic-components/ui-lab';
   imports: [ScDock, ScDockItems, ScDockItem],
   template: \`
     <div
-      class="flex flex-col items-center gap-6 rounded-lg border bg-muted/30 p-8"
+      class="bg-muted/30 flex flex-col items-center gap-6 rounded-lg border p-8"
     >
       <div class="text-center">
-        <p class="mb-2 text-xs text-muted-foreground">Small</p>
+        <p class="text-muted-foreground mb-2 text-xs">Small</p>
         <nav scDock size="sm">
           <div scDockItems>
             @for (item of items; track item.id) {
@@ -45,7 +45,7 @@ import type { DockItem } from '@semantic-components/ui-lab';
         </nav>
       </div>
       <div class="text-center">
-        <p class="mb-2 text-xs text-muted-foreground">Medium (Default)</p>
+        <p class="text-muted-foreground mb-2 text-xs">Medium (Default)</p>
         <nav scDock size="md">
           <div scDockItems>
             @for (item of items; track item.id) {
@@ -55,7 +55,7 @@ import type { DockItem } from '@semantic-components/ui-lab';
         </nav>
       </div>
       <div class="text-center">
-        <p class="mb-2 text-xs text-muted-foreground">Large</p>
+        <p class="text-muted-foreground mb-2 text-xs">Large</p>
         <nav scDock size="lg">
           <div scDockItems>
             @for (item of items; track item.id) {

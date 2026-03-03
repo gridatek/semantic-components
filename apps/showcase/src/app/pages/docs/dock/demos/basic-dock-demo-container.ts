@@ -22,17 +22,17 @@ export class BasicDockDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScDock, ScDockItems, ScDockItem } from '@semantic-components/ui-lab';
+import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-dock-demo',
   imports: [ScDock, ScDockItems, ScDockItem],
   template: \`
-    <div class="flex justify-center rounded-lg border bg-muted/30 p-8">
+    <div class="bg-muted/30 flex justify-center rounded-lg border p-8">
       <nav scDock (itemClick)="onItemClick($event)">
         <div scDockItems>
           @for (item of items; track item.id) {
@@ -42,7 +42,7 @@ import type { DockItem } from '@semantic-components/ui-lab';
       </nav>
     </div>
     @if (clickedItem()) {
-      <p class="mt-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mt-2 text-sm">
         Clicked:
         <span class="font-medium">{{ clickedItem() }}</span>
       </p>

@@ -23,15 +23,15 @@ import { RangeCalendarDemo } from './range-calendar-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RangeCalendarDemoContainer {
-  readonly code = `import {
+  readonly code = `import { Temporal } from '@js-temporal/polyfill';
+import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
-import { ScDateRange, ScCalendar } from '@semantic-components/ui';
+import { ScCalendar, ScDateRange } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-range-calendar-demo',
@@ -44,12 +44,12 @@ import { ScDateRange, ScCalendar } from '@semantic-components/ui';
 
       <div class="space-y-2">
         @if (selectedRange().from) {
-          <div class="p-4 rounded-md border bg-muted/50">
-            <div class="flex items-center justify-between mb-3">
+          <div class="bg-muted/50 rounded-md border p-4">
+            <div class="mb-3 flex items-center justify-between">
               <p class="text-sm font-medium">Selected Range</p>
               <button
                 type="button"
-                class="px-3 py-1 text-sm rounded-md border hover:bg-accent"
+                class="hover:bg-accent rounded-md border px-3 py-1 text-sm"
                 (click)="clearSelection()"
               >
                 Clear
@@ -57,13 +57,13 @@ import { ScDateRange, ScCalendar } from '@semantic-components/ui';
             </div>
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <p class="text-xs text-muted-foreground mb-1">From</p>
+                <p class="text-muted-foreground mb-1 text-xs">From</p>
                 <p class="text-sm">
                   {{ selectedRange().from?.toLocaleString() }}
                 </p>
               </div>
               <div>
-                <p class="text-xs text-muted-foreground mb-1">To</p>
+                <p class="text-muted-foreground mb-1 text-xs">To</p>
                 <p class="text-sm">
                   @if (selectedRange().to) {
                     {{ selectedRange().to?.toLocaleString() }}
@@ -74,7 +74,7 @@ import { ScDateRange, ScCalendar } from '@semantic-components/ui';
               </div>
             </div>
             @if (dayCount() !== null) {
-              <p class="text-xs text-muted-foreground mt-2">
+              <p class="text-muted-foreground mt-2 text-xs">
                 {{ dayCount() }}
                 {{ dayCount() === 1 ? 'day' : 'days' }} selected
               </p>
@@ -82,7 +82,7 @@ import { ScDateRange, ScCalendar } from '@semantic-components/ui';
           </div>
         } @else {
           <p
-            class="text-sm text-muted-foreground p-4 text-center border rounded-md"
+            class="text-muted-foreground rounded-md border p-4 text-center text-sm"
           >
             No range selected. Click a start date, then click an end date.
           </p>

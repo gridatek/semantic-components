@@ -26,13 +26,13 @@ export class TrackingTimelineDemoContainer {
 } from '@angular/core';
 import {
   ScTimeline,
-  ScTimelineItem,
   ScTimelineConnector,
-  ScTimelineDot,
   ScTimelineContent,
-  ScTimelineTitle,
   ScTimelineDescription,
+  ScTimelineDot,
+  ScTimelineItem,
   ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -115,9 +115,7 @@ import {
           </div>
           <div scTimelineContent>
             <h4 scTimelineTitle>Out for Delivery</h4>
-            <p scTimelineDescription>
-              Your package is out for delivery today.
-            </p>
+            <p scTimelineDescription>Your package is out for delivery today.</p>
             <span scTimelineTime>Jan 18, 2024 at 8:00 AM</span>
           </div>
         </div>

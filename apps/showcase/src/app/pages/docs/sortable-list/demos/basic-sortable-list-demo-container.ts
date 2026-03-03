@@ -19,13 +19,13 @@ import { BasicSortableListDemo } from './basic-sortable-list-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicSortableListDemoContainer {
-  readonly code = `import {
+  readonly code = `import { JsonPipe } from '@angular/common';
+import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { JsonPipe } from '@angular/common';
 import {
   ScSortableItem,
   ScSortableList,
@@ -45,17 +45,17 @@ import {
               scSortableItem
               [index]="i"
               [item]="item"
-              class="flex items-center gap-3 rounded-md border bg-background p-3"
+              class="bg-background flex items-center gap-3 rounded-md border p-3"
             >
               <span class="text-sm">{{ item }}</span>
             </div>
           }
         </div>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Drag items to reorder. Use Arrow keys when focused.
         </p>
       </div>
-      <div class="rounded-md border p-4 bg-muted/50 max-w-md">
+      <div class="bg-muted/50 max-w-md rounded-md border p-4">
         <pre class="text-sm">{{ items() | json }}</pre>
       </div>
     </div>

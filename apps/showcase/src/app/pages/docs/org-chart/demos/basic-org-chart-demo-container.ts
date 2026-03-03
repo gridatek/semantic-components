@@ -22,24 +22,24 @@ export class BasicOrgChartDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
-  ScOrgChart,
   type OrgChartNode,
   type OrgChartNodeClickEvent,
+  ScOrgChart,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-org-chart-demo',
   imports: [ScOrgChart],
   template: \`
-    <div class="border rounded-lg overflow-auto">
+    <div class="overflow-auto rounded-lg border">
       <sc-org-chart [data]="orgData()" (nodeClick)="onNodeClick($event)" />
     </div>
     @if (selectedNode()) {
-      <p class="mt-2 text-sm text-muted-foreground">
+      <p class="text-muted-foreground mt-2 text-sm">
         Selected: {{ selectedNode()?.name }} - {{ selectedNode()?.title }}
       </p>
     }
