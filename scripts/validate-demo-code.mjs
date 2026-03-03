@@ -1,9 +1,19 @@
 #!/usr/bin/env node
 import { existsSync, readFileSync, readdirSync } from 'fs';
 import { basename, dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
-const DOCS_DIR =
-  '/home/user/semantic-components/apps/showcase/src/app/pages/docs';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DOCS_DIR = join(
+  __dirname,
+  '..',
+  'apps',
+  'showcase',
+  'src',
+  'app',
+  'pages',
+  'docs',
+);
 
 function findFiles(dir, pattern) {
   const results = [];
