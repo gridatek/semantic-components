@@ -27,39 +27,28 @@ export class HalfRatingFieldDemoContainer {
 } from '@angular/core';
 import {
   ScRatingField,
-  ScRatingItemGroup,
   ScRatingFieldItem,
+  ScRatingIcon,
+  ScRatingItemGroup,
 } from '@semantic-components/ui-lab';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-half-rating-field-demo',
-  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, SiStarIcon],
+  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, ScRatingIcon, SiStarIcon],
   template: \`
     <div class="flex flex-col gap-2">
       <div scRatingField [(value)]="rating" [allowHalf]="true">
-        <div scRatingItemGroup class="flex gap-0.5">
+        <div scRatingItemGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {
-            <span
-              scRatingItem
-              [value]="i"
-              #item="scRatingItem"
-              class="relative cursor-pointer transition-transform hover:scale-110"
-            >
-              <svg siStarIcon class="size-6 text-gray-300"></svg>
-              <svg
-                siStarIcon
-                class="absolute inset-0 size-6 fill-yellow-400 text-yellow-400 transition-colors"
-                [class.hidden]="item.state() === 'empty'"
-                [style.clip-path]="
-                  item.state() === 'half' ? 'inset(0 50% 0 0)' : 'none'
-                "
-              ></svg>
+            <span scRatingItem [value]="i">
+              <svg siStarIcon scRatingIcon></svg>
+              <svg siStarIcon scRatingIcon></svg>
             </span>
           }
         </div>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Rating: {{ rating() }} / 5 (click left/right half of stars)
       </p>
     </div>
