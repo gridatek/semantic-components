@@ -758,15 +758,6 @@
     "category": "Feedback"
   },
   {
-    "name": "Split Button",
-    "path": "split-button",
-    "description": "Button with dropdown actions.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Buttons & Actions",
-    "hidden": true
-  },
-  {
     "name": "Spotlight",
     "path": "spotlight",
     "description": "A spotlight search interface.",
