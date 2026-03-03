@@ -38,13 +38,15 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
         <div scRatingField [value]="3.5" [readonly]="true" [allowHalf]="true">
           <div scRatingItemGroup class="flex gap-0.5">
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span scRatingItem [value]="i">
+              <span scRatingItem [value]="i" #item="scRatingItem" class="relative">
+                <svg siStarIcon class="size-6 text-gray-300"></svg>
                 <svg
                   siStarIcon
-                  class="size-6"
-                  [class.fill-yellow-400]="i <= 3.5"
-                  [class.text-yellow-400]="i <= 3.5"
-                  [class.text-gray-300]="i > 3.5"
+                  class="absolute inset-0 size-6 fill-yellow-400 text-yellow-400"
+                  [class.hidden]="item.state() === 'empty'"
+                  [style.clip-path]="
+                    item.state() === 'half' ? 'inset(0 50% 0 0)' : 'none'
+                  "
                 ></svg>
               </span>
             }

@@ -4,6 +4,7 @@ import { SC_RATING_ITEM_GROUP } from './rating-item-group';
 
 @Directive({
   selector: '[scRatingItem]',
+  exportAs: 'scRatingItem',
   host: {
     'data-slot': 'rating-item',
     role: 'radio',
@@ -13,6 +14,7 @@ import { SC_RATING_ITEM_GROUP } from './rating-item-group';
     '[tabindex]': 'tabIndex()',
     '(click)': 'onClick($event)',
     '(mouseenter)': 'onMouseEnter()',
+    '(mousemove)': 'onMouseMove($event)',
     '(keydown.space)': 'onSpace($event)',
     '(keydown.enter)': 'onEnter($event)',
   },
@@ -37,7 +39,13 @@ export class ScRatingFieldItem {
   });
 
   readonly isSelected = computed(() => {
-    return this.field.value() >= this.value();
+    const value = this.field.value();
+    const itemValue = this.value();
+
+    if (value >= itemValue) return true;
+    if (this.field.allowHalf() && value >= itemValue - 0.5) return true;
+
+    return false;
   });
 
   readonly tabIndex = computed(() => {
@@ -67,6 +75,15 @@ export class ScRatingFieldItem {
 
   protected onMouseEnter(): void {
     this.group.setHoveredValue(this.value());
+  }
+
+  protected onMouseMove(event: MouseEvent): void {
+    if (!this.field.allowHalf()) return;
+
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const isLeftHalf = x < rect.width / 2;
+    this.group.setHoveredValue(isLeftHalf ? this.value() - 0.5 : this.value());
   }
 
   protected onSpace(event: Event): void {

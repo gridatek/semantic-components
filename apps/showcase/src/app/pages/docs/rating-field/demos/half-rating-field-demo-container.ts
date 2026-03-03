@@ -43,14 +43,17 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
             <span
               scRatingItem
               [value]="i"
+              #item="scRatingItem"
               class="relative cursor-pointer transition-transform hover:scale-110"
             >
+              <svg siStarIcon class="size-6 text-gray-300"></svg>
               <svg
                 siStarIcon
-                class="size-6 transition-colors"
-                [class.fill-yellow-400]="i <= rating()"
-                [class.text-yellow-400]="i <= rating()"
-                [class.text-gray-300]="i > rating()"
+                class="absolute inset-0 size-6 fill-yellow-400 text-yellow-400 transition-colors"
+                [class.hidden]="item.state() === 'empty'"
+                [style.clip-path]="
+                  item.state() === 'half' ? 'inset(0 50% 0 0)' : 'none'
+                "
               ></svg>
             </span>
           }
