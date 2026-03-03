@@ -26,7 +26,7 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
       <div
         scRatingField
         [(value)]="rating"
-        [style.--sc-rating-color]="'var(--color-red-500)'"
+        [style.--sc-rating-active-color]="'var(--color-red-500)'"
       >
         <div scRatingItemGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {

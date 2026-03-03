@@ -32,7 +32,8 @@ export const SC_RATING_FIELD = new InjectionToken<ScRatingField>(
     '[attr.aria-labelledby]': 'ariaLabelledby() || null',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-readonly]': 'readonly() || null',
-    style: '--sc-rating-color: var(--color-yellow-400)',
+    style:
+      '--sc-rating-active-color: var(--color-yellow-400); --sc-rating-inactive-color: var(--color-gray-300)',
   },
 })
 export class ScRatingField {

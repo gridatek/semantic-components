@@ -4,8 +4,9 @@ import { SC_RATING_ITEM_GROUP } from './rating-item-group';
 
 export type ScRatingIconRole = 'single' | 'background' | 'foreground';
 
-const ACTIVE_CLASSES = 'fill-(--sc-rating-color) text-(--sc-rating-color)';
-const INACTIVE_CLASSES = 'text-gray-300';
+const ACTIVE_CLASSES =
+  'fill-(--sc-rating-active-color) text-(--sc-rating-active-color)';
+const INACTIVE_CLASSES = 'text-(--sc-rating-inactive-color)';
 
 @Directive({
   selector: 'svg[scRatingIcon]',
