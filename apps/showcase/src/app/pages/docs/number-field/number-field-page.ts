@@ -1,4 +1,3 @@
-import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,8 +9,9 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
+import { ScCopyToClipboard } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicNumberFieldDemoContainer from './demos/basic-number-field-demo-container';
@@ -27,7 +27,8 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
     ScCodeViewerHeader,
     ScCodeViewerLabel,
     ScCodeViewerContent,
-    CdkCopyToClipboard,
+    ScCopyToClipboard,
+    SiCheckIcon,
     SiCopyIcon,
     BasicNumberFieldDemoContainer,
     ScrubbingNumberFieldDemoContainer,
@@ -56,11 +57,16 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
             <span scCodeViewerLabel>angular-ts</span>
             <button
               type="button"
-              [cdkCopyToClipboard]="usageCode"
+              [scCopyToClipboard]="usageCode"
+              #copy="scCopyToClipboard"
               class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
-              <svg siCopyIcon class="size-4"></svg>
+              @if (copy.copied()) {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <svg siCopyIcon class="size-4"></svg>
+              }
             </button>
           </div>
           <div

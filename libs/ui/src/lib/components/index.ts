@@ -12,6 +12,7 @@ export * from './calendar';
 export * from './card';
 export * from './checkbox';
 export * from './collapsible';
+export * from './copy-to-clipboard';
 export * from './date-picker';
 export * from './dialog';
 export * from './drawer';

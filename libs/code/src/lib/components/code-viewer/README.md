@@ -6,6 +6,8 @@ A read-only code display component with syntax highlighting powered by [Shiki](h
 
 ```typescript
 import { ScCodeViewer, ScCodeViewerContent, ScCodeViewerHeader, ScCodeViewerLabel, ScCodeViewerLanguage } from '@semantic-components/code';
+import { ScCopyToClipboard } from '@semantic-components/ui';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 ```
 
 ## Architecture
@@ -16,7 +18,7 @@ The component uses Shiki's dual-theme feature (`github-light` + `github-dark`) w
 ScCodeViewer (Root - div[scCodeViewer])
 ├── ScCodeViewerHeader (Header - div[scCodeViewerHeader])
 │   ├── ScCodeViewerLabel (Label - span[scCodeViewerLabel])
-│   └── Copy button (cdkCopyToClipboard)
+│   └── Copy button (ScCopyToClipboard)
 └── ScCodeViewerContent (Content - div[scCodeViewerContent])
 ```
 
@@ -78,7 +80,13 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>TypeScript</span>
-    <button type="button" [cdkCopyToClipboard]="code" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard"><svg siCopyIcon class="size-4"></svg></button>
+    <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+      @if (copy.copied()) {
+      <svg siCheckIcon class="size-4"></svg>
+      } @else {
+      <svg siCopyIcon class="size-4"></svg>
+      }
+    </button>
   </div>
   <div scCodeViewerContent [code]="code" language="typescript"></div>
 </div>
@@ -90,7 +98,13 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>app.component.ts</span>
-    <button type="button" [cdkCopyToClipboard]="code" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard"><svg siCopyIcon class="size-4"></svg></button>
+    <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+      @if (copy.copied()) {
+      <svg siCheckIcon class="size-4"></svg>
+      } @else {
+      <svg siCopyIcon class="size-4"></svg>
+      }
+    </button>
   </div>
   <div scCodeViewerContent [code]="code" language="angular-ts"></div>
 </div>
@@ -102,7 +116,13 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>{{ filename }}</span>
-    <button type="button" [cdkCopyToClipboard]="code" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard"><svg siCopyIcon class="size-4"></svg></button>
+    <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+      @if (copy.copied()) {
+      <svg siCheckIcon class="size-4"></svg>
+      } @else {
+      <svg siCopyIcon class="size-4"></svg>
+      }
+    </button>
   </div>
   <div scCodeViewerContent [code]="code" language="typescript" [showLineNumbers]="true"></div>
 </div>
@@ -122,7 +142,13 @@ The content component with Shiki syntax highlighting.
 <div scCodeViewer>
   <div scCodeViewerHeader>
     <span scCodeViewerLabel>{{ language }}</span>
-    <button type="button" [cdkCopyToClipboard]="code" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard"><svg siCopyIcon class="size-4"></svg></button>
+    <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+      @if (copy.copied()) {
+      <svg siCheckIcon class="size-4"></svg>
+      } @else {
+      <svg siCopyIcon class="size-4"></svg>
+      }
+    </button>
   </div>
   <div scCodeViewerContent [code]="longCode" language="typescript" maxHeight="300px"></div>
 </div>
@@ -140,7 +166,13 @@ The content component with Shiki syntax highlighting.
     </div>
     <div class="flex gap-2">
       <button>Download</button>
-      <button type="button" [cdkCopyToClipboard]="code" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard"><svg siCopyIcon class="size-4"></svg></button>
+      <button type="button" [scCopyToClipboard]="code" #copy="scCopyToClipboard" class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md" aria-label="Copy to clipboard">
+        @if (copy.copied()) {
+        <svg siCheckIcon class="size-4"></svg>
+        } @else {
+        <svg siCopyIcon class="size-4"></svg>
+        }
+      </button>
     </div>
   </div>
   <div scCodeViewerContent [code]="code" [language]="language"></div>
@@ -162,7 +194,7 @@ No manual theme configuration is needed. The component renders both theme colors
 - **Syntax Highlighting**: Powered by Shiki with 30+ languages supported
 - **Automatic Theming**: Follows app's light/dark mode automatically
 - **Line Numbers**: Optional line number display
-- **Copy Button**: Built-in copy-to-clipboard functionality with `cdkCopyToClipboard`
+- **Copy Button**: Built-in copy-to-clipboard functionality with `ScCopyToClipboard`
 - **Customizable**: All components accept custom classes
 - **Accessible**: Proper semantic HTML and ARIA attributes
 

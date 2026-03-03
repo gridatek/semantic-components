@@ -25,14 +25,14 @@ export default class BasicCodeViewerDemoContainer {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { ScCopyToClipboard } from '@semantic-components/ui';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-code-viewer-demo',
@@ -41,7 +41,8 @@ import { SiCopyIcon } from '@semantic-icons/lucide-icons';
     ScCodeViewerHeader,
     ScCodeViewerLabel,
     ScCodeViewerContent,
-    CdkCopyToClipboard,
+    ScCopyToClipboard,
+    SiCheckIcon,
     SiCopyIcon,
   ],
   template: \`
@@ -50,11 +51,16 @@ import { SiCopyIcon } from '@semantic-icons/lucide-icons';
         <span scCodeViewerLabel>app.ts</span>
         <button
           type="button"
-          [cdkCopyToClipboard]="sampleCode()"
+          [scCopyToClipboard]="sampleCode()"
+          #copy="scCopyToClipboard"
           class="inline-flex items-center justify-center size-9 rounded-md hover:bg-accent hover:text-accent-foreground"
           aria-label="Copy to clipboard"
         >
-          <svg siCopyIcon class="size-4"></svg>
+          @if (copy.copied()) {
+            <svg siCheckIcon class="size-4"></svg>
+          } @else {
+            <svg siCopyIcon class="size-4"></svg>
+          }
         </button>
       </div>
       <div

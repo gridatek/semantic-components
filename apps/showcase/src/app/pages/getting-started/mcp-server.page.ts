@@ -1,4 +1,3 @@
-import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,9 +9,10 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
+import { ScCopyToClipboard } from '@semantic-components/ui';
 import { ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
@@ -23,7 +23,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeViewerContent,
     ScCodeViewerHeader,
     ScCodeViewerLabel,
-    CdkCopyToClipboard,
+    ScCopyToClipboard,
+    SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
     ScHeading,
@@ -54,11 +55,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <span scCodeViewerLabel>.mcp.json</span>
             <button
               type="button"
-              [cdkCopyToClipboard]="setupCode"
+              [scCopyToClipboard]="setupCode"
+              #copy="scCopyToClipboard"
               class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
-              <svg siCopyIcon class="size-4"></svg>
+              @if (copy.copied()) {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <svg siCopyIcon class="size-4"></svg>
+              }
             </button>
           </div>
           <div scCodeViewerContent [code]="setupCode" language="json"></div>

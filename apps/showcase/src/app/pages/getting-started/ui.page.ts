@@ -1,4 +1,3 @@
-import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,9 +9,10 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
+import { ScCopyToClipboard } from '@semantic-components/ui';
 import { ScLink, ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
@@ -23,7 +23,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeViewerContent,
     ScCodeViewerHeader,
     ScCodeViewerLabel,
-    CdkCopyToClipboard,
+    ScCopyToClipboard,
+    SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
     ScLink,
@@ -49,11 +50,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <span scCodeViewerLabel>terminal</span>
             <button
               type="button"
-              [cdkCopyToClipboard]="installCode"
+              [scCopyToClipboard]="installCode"
+              #copy="scCopyToClipboard"
               class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
-              <svg siCopyIcon class="size-4"></svg>
+              @if (copy.copied()) {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <svg siCopyIcon class="size-4"></svg>
+              }
             </button>
           </div>
           <div scCodeViewerContent [code]="installCode" language="bash"></div>
@@ -80,11 +86,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <span scCodeViewerLabel>css</span>
             <button
               type="button"
-              [cdkCopyToClipboard]="stylesDefaultCode"
+              [scCopyToClipboard]="stylesDefaultCode"
+              #copy2="scCopyToClipboard"
               class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
-              <svg siCopyIcon class="size-4"></svg>
+              @if (copy2.copied()) {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <svg siCopyIcon class="size-4"></svg>
+              }
             </button>
           </div>
           <div
@@ -119,11 +130,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <span scCodeViewerLabel>css</span>
             <button
               type="button"
-              [cdkCopyToClipboard]="stylesCustomCdkCode"
+              [scCopyToClipboard]="stylesCustomCdkCode"
+              #copy3="scCopyToClipboard"
               class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
-              <svg siCopyIcon class="size-4"></svg>
+              @if (copy3.copied()) {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <svg siCopyIcon class="size-4"></svg>
+              }
             </button>
           </div>
           <div
@@ -149,11 +165,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <span scCodeViewerLabel>css</span>
             <button
               type="button"
-              [cdkCopyToClipboard]="sourceCode"
+              [scCopyToClipboard]="sourceCode"
+              #copy4="scCopyToClipboard"
               class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
-              <svg siCopyIcon class="size-4"></svg>
+              @if (copy4.copied()) {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <svg siCopyIcon class="size-4"></svg>
+              }
             </button>
           </div>
           <div scCodeViewerContent [code]="sourceCode" language="css"></div>
@@ -172,11 +193,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <span scCodeViewerLabel>angular-ts</span>
             <button
               type="button"
-              [cdkCopyToClipboard]="usageCode"
+              [scCopyToClipboard]="usageCode"
+              #copy5="scCopyToClipboard"
               class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
-              <svg siCopyIcon class="size-4"></svg>
+              @if (copy5.copied()) {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <svg siCopyIcon class="size-4"></svg>
+              }
             </button>
           </div>
           <div
