@@ -16,6 +16,7 @@ import {
   ScAutocompleteGroup,
   ScAutocompleteIcon,
   ScAutocompleteInput,
+  ScAutocompleteItem,
   ScAutocompleteList,
   ScAutocompletePopup,
 } from '@semantic-components/ui';
@@ -26,12 +27,12 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   imports: [
     Combobox,
     ComboboxPopupContainer,
-    Option,
     OverlayModule,
     FormsModule,
     ScAutocompleteGroup,
     ScAutocompleteIcon,
     ScAutocompleteInput,
+    ScAutocompleteItem,
     ScAutocompleteList,
     ScAutocompletePopup,
     SiSearchIcon,
@@ -66,12 +67,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
             }
             <div scAutocompleteList>
               @for (country of countries(); track country) {
-                <div
-                  ngOption
-                  [value]="country"
-                  [label]="country"
-                  class="hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-accent-foreground aria-selected:bg-accent flex cursor-pointer items-center rounded-md px-2 py-1.5 text-sm outline-none select-none aria-selected:font-medium"
-                >
+                <div scAutocompleteItem [value]="country" [label]="country">
                   <span class="flex-1">{{ country }}</span>
                   <svg
                     siCheckIcon
