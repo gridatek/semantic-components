@@ -54,7 +54,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
             usePopover: 'inline',
             matchWidth: true,
           }"
-          [cdkConnectedOverlayOpen]="true"
+          [cdkConnectedOverlayOpen]="combobox()?.expanded() ?? false"
         >
           <div
             class="bg-popover text-popover-foreground mt-2 max-h-44 overflow-auto rounded-lg border p-1 shadow-md [&:has([aria-expanded='false'])]:hidden"
