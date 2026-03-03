@@ -210,13 +210,12 @@
     "hidden": true
   },
   {
-    "name": "Copy Button",
-    "path": "copy-button",
-    "description": "A button that copies text to clipboard.",
+    "name": "Copy to Clipboard",
+    "path": "copy-to-clipboard",
+    "description": "A composable directive for copying text to the clipboard with visual feedback.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Buttons & Actions",
-    "hidden": true
+    "library": "ui",
+    "category": "Buttons & Actions"
   },
   {
     "name": "Countdown",
