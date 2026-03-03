@@ -45,7 +45,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           aria-label="Select a country"
           placeholder="Select a country"
           [(ngModel)]="query"
-          class="w-52 ps-9"
+          class="w-52"
         />
       </div>
       <ng-template ngComboboxPopupContainer>
