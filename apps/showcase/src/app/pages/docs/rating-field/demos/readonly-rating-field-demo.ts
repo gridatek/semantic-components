@@ -27,7 +27,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
           <div scRatingItemGroup>
             @for (i of [1, 2, 3, 4, 5]; track i) {
               <span scRatingItem [value]="i">
-                <svg siStarIcon scRatingIcon class="size-6"></svg>
+                <svg siStarIcon scRatingIcon></svg>
               </span>
             }
           </div>
@@ -40,8 +40,8 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
           <div scRatingItemGroup>
             @for (i of [1, 2, 3, 4, 5]; track i) {
               <span scRatingItem [value]="i">
-                <svg siStarIcon scRatingIcon class="size-6"></svg>
-                <svg siStarIcon scRatingIcon class="size-6"></svg>
+                <svg siStarIcon scRatingIcon></svg>
+                <svg siStarIcon scRatingIcon></svg>
               </span>
             }
           </div>

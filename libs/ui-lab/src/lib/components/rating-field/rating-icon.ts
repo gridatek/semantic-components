@@ -32,16 +32,20 @@ export class ScRatingIcon {
     const base = this.classInput();
 
     if (role === 'single') {
-      return cn(base, state === 'empty' ? INACTIVE_CLASSES : ACTIVE_CLASSES);
+      return cn(
+        'size-6',
+        base,
+        state === 'empty' ? INACTIVE_CLASSES : ACTIVE_CLASSES,
+      );
     }
 
     if (role === 'background') {
-      return cn(base, INACTIVE_CLASSES);
+      return cn('size-6', base, INACTIVE_CLASSES);
     }
 
     // foreground
     return cn(
-      'absolute inset-0',
+      'absolute inset-0 size-6',
       base,
       state === 'empty' ? 'hidden' : ACTIVE_CLASSES,
     );

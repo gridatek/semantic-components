@@ -31,7 +31,7 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
         <div scRatingItemGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {
             <span scRatingItem [value]="i">
-              <svg siHeartIcon scRatingIcon class="size-6"></svg>
+              <svg siHeartIcon scRatingIcon></svg>
             </span>
           }
         </div>
