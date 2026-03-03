@@ -1,6 +1,5 @@
-import { Combobox, ComboboxPopupContainer } from '@angular/aria/combobox';
+import { Combobox } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
-import { OverlayModule } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,6 +12,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  ScAutocomplete,
   ScAutocompleteGroup,
   ScAutocompleteIcon,
   ScAutocompleteInput,
@@ -20,16 +20,15 @@ import {
   ScAutocompleteItemIndicator,
   ScAutocompleteList,
   ScAutocompletePopup,
+  ScAutocompletePortal,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-autocomplete-demo',
   imports: [
-    Combobox,
-    ComboboxPopupContainer,
-    OverlayModule,
     FormsModule,
+    ScAutocomplete,
     ScAutocompleteGroup,
     ScAutocompleteIcon,
     ScAutocompleteInput,
@@ -37,12 +36,13 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScAutocompleteItemIndicator,
     ScAutocompleteList,
     ScAutocompletePopup,
+    ScAutocompletePortal,
     SiSearchIcon,
     SiCheckIcon,
   ],
   template: `
-    <div ngCombobox filterMode="auto-select" class="flex justify-center">
-      <div #origin scAutocompleteGroup>
+    <div scAutocomplete filterMode="auto-select" class="flex justify-center">
+      <div scAutocompleteGroup>
         <svg siSearchIcon scAutocompleteIcon></svg>
         <input
           scAutocompleteInput
@@ -52,31 +52,22 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           class="w-52"
         />
       </div>
-      <ng-template ngComboboxPopupContainer>
-        <ng-template
-          [cdkConnectedOverlay]="{
-            origin: origin.elementRef,
-            usePopover: 'inline',
-            matchWidth: true,
-          }"
-          [cdkConnectedOverlayOpen]="combobox()?.expanded() ?? false"
-        >
-          <div scAutocompletePopup>
-            @if (countries().length === 0) {
-              <div class="text-muted-foreground px-3 py-4 text-center text-sm">
-                No results found
+      <ng-template scAutocompletePortal>
+        <div scAutocompletePopup>
+          @if (countries().length === 0) {
+            <div class="text-muted-foreground px-3 py-4 text-center text-sm">
+              No results found
+            </div>
+          }
+          <div scAutocompleteList>
+            @for (country of countries(); track country) {
+              <div scAutocompleteItem [value]="country" [label]="country">
+                <span class="flex-1">{{ country }}</span>
+                <svg siCheckIcon scAutocompleteItemIndicator></svg>
               </div>
             }
-            <div scAutocompleteList>
-              @for (country of countries(); track country) {
-                <div scAutocompleteItem [value]="country" [label]="country">
-                  <span class="flex-1">{{ country }}</span>
-                  <svg siCheckIcon scAutocompleteItemIndicator></svg>
-                </div>
-              }
-            </div>
           </div>
-        </ng-template>
+        </div>
       </ng-template>
     </div>
   `,

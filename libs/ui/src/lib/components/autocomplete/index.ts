@@ -6,3 +6,4 @@ export { ScAutocompleteItem } from './autocomplete-item';
 export { ScAutocompleteItemIndicator } from './autocomplete-item-indicator';
 export { ScAutocompleteList } from './autocomplete-list';
 export { ScAutocompletePopup } from './autocomplete-popup';
+export { ScAutocompletePortal } from './autocomplete-portal';
