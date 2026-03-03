@@ -505,7 +505,7 @@ const DEFAULT_CATEGORIES: EmojiCategory[] = [
           <!-- Search results -->
           @if (filteredEmojis().length > 0) {
             <div class="p-2">
-              <div [class]="gridClass()">
+              <div [class]="gridClass()" [style.grid-template-columns]="gridColumns()">
                 @for (emoji of filteredEmojis(); track emoji.emoji) {
                   <button
                     type="button"
@@ -528,7 +528,7 @@ const DEFAULT_CATEGORIES: EmojiCategory[] = [
           @for (category of categories(); track category.id) {
             @if (category.id === activeCategory()) {
               <div class="p-2">
-                <div [class]="gridClass()">
+                <div [class]="gridClass()" [style.grid-template-columns]="gridColumns()">
                   @for (emoji of category.emojis; track emoji.emoji) {
                     <button
                       type="button"
@@ -624,8 +624,10 @@ export class ScEmojiPicker {
     cn('h-64 overflow-y-auto'),
   );
 
-  protected readonly gridClass = computed(() =>
-    cn('grid gap-1', `grid-cols-${this.columns()}`),
+  protected readonly gridClass = computed(() => cn('grid gap-1'));
+
+  protected readonly gridColumns = computed(
+    () => `repeat(${this.columns()}, minmax(0, 1fr))`,
   );
 
   protected categoryTabClass(isActive: boolean): string {
