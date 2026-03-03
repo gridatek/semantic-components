@@ -16,13 +16,15 @@ import { ComponentStatusBadge } from '../component-status-badge/component-status
   selector: 'app-component-badges',
   imports: [ComponentStatusBadge, ScBadge],
   template: `
-    <app-component-status-badge [status]="componentItem().status" />
-    <span scBadge variant="outline">
-      {{ componentItem().category }}
-    </span>
-    <span scBadge variant="outline">
-      {{ componentItem().library }}
-    </span>
+    @if (componentItem(); as item) {
+      <app-component-status-badge [status]="item.status" />
+      <span scBadge variant="outline">
+        {{ item.category }}
+      </span>
+      <span scBadge variant="outline">
+        {{ item.library }}
+      </span>
+    }
   `,
   host: {
     '[class]': 'class()',
@@ -40,8 +42,7 @@ export class ComponentBadges {
 
   readonly path = input.required<string>();
 
-  readonly componentItem = computed<ComponentItem>(
-    () =>
-      this.componentsService.components().find((c) => c.path === this.path())!,
+  readonly componentItem = computed(() =>
+    this.componentsService.components().find((c) => c.path === this.path()),
   );
 }
