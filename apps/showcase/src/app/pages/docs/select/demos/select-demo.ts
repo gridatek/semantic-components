@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -45,6 +46,7 @@ import {
     SiStarIcon,
     SiTagIcon,
     SiUserIcon,
+    NgTemplateOutlet,
   ],
   template: `
     <div
@@ -55,32 +57,7 @@ import {
     >
       <div scSelectTrigger>
         @if (displayIcon(); as icon) {
-          @switch (icon) {
-            @case ('tag') {
-              <svg scSelectItemIcon siTagIcon></svg>
-            }
-            @case ('star') {
-              <svg scSelectItemIcon siStarIcon></svg>
-            }
-            @case ('briefcase') {
-              <svg scSelectItemIcon siBriefcaseIcon></svg>
-            }
-            @case ('user') {
-              <svg scSelectItemIcon siUserIcon></svg>
-            }
-            @case ('square-check') {
-              <svg scSelectItemIcon siSquareCheckIcon></svg>
-            }
-            @case ('clock') {
-              <svg scSelectItemIcon siClockIcon></svg>
-            }
-            @case ('book') {
-              <svg scSelectItemIcon siBookIcon></svg>
-            }
-            @case ('plane') {
-              <svg scSelectItemIcon siPlaneIcon></svg>
-            }
-          }
+          <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
         }
         <span scSelectLabel></span>
       </div>
@@ -89,32 +66,7 @@ import {
           <div scSelectList>
             @for (option of options; track option.value) {
               <div scSelectItem [value]="option.value" [label]="option.label">
-                @switch (option.icon) {
-                  @case ('tag') {
-                    <svg scSelectItemIcon siTagIcon></svg>
-                  }
-                  @case ('star') {
-                    <svg scSelectItemIcon siStarIcon></svg>
-                  }
-                  @case ('briefcase') {
-                    <svg scSelectItemIcon siBriefcaseIcon></svg>
-                  }
-                  @case ('user') {
-                    <svg scSelectItemIcon siUserIcon></svg>
-                  }
-                  @case ('square-check') {
-                    <svg scSelectItemIcon siSquareCheckIcon></svg>
-                  }
-                  @case ('clock') {
-                    <svg scSelectItemIcon siClockIcon></svg>
-                  }
-                  @case ('book') {
-                    <svg scSelectItemIcon siBookIcon></svg>
-                  }
-                  @case ('plane') {
-                    <svg scSelectItemIcon siPlaneIcon></svg>
-                  }
-                }
+                <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"></ng-container>
                 <span class="flex-1">{{ option.label }}</span>
               </div>
             }
@@ -122,6 +74,35 @@ import {
         </div>
       </ng-template>
     </div>
+
+    <ng-template #iconTmpl let-icon="icon">
+      @switch (icon) {
+        @case ('tag') {
+          <svg scSelectItemIcon siTagIcon></svg>
+        }
+        @case ('star') {
+          <svg scSelectItemIcon siStarIcon></svg>
+        }
+        @case ('briefcase') {
+          <svg scSelectItemIcon siBriefcaseIcon></svg>
+        }
+        @case ('user') {
+          <svg scSelectItemIcon siUserIcon></svg>
+        }
+        @case ('square-check') {
+          <svg scSelectItemIcon siSquareCheckIcon></svg>
+        }
+        @case ('clock') {
+          <svg scSelectItemIcon siClockIcon></svg>
+        }
+        @case ('book') {
+          <svg scSelectItemIcon siBookIcon></svg>
+        }
+        @case ('plane') {
+          <svg scSelectItemIcon siPlaneIcon></svg>
+        }
+      }
+    </ng-template>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
