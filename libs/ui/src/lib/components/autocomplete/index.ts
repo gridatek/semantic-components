@@ -1,4 +1,5 @@
 export { ScAutocomplete } from './autocomplete';
+export { ScAutocompleteEmpty } from './autocomplete-empty';
 export { ScAutocompleteGroup } from './autocomplete-group';
 export { ScAutocompleteIcon } from './autocomplete-icon';
 export { ScAutocompleteInput } from './autocomplete-input';

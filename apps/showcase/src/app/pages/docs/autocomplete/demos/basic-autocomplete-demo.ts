@@ -8,6 +8,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import {
   ScAutocomplete,
+  ScAutocompleteEmpty,
   ScAutocompleteGroup,
   ScAutocompleteIcon,
   ScAutocompleteInput,
@@ -24,6 +25,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   imports: [
     FormsModule,
     ScAutocomplete,
+    ScAutocompleteEmpty,
     ScAutocompleteGroup,
     ScAutocompleteIcon,
     ScAutocompleteInput,
@@ -50,9 +52,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
       <ng-template scAutocompletePortal>
         <div scAutocompletePopup>
           @if (countries().length === 0) {
-            <div class="text-muted-foreground px-3 py-4 text-center text-sm">
-              No results found
-            </div>
+            <div scAutocompleteEmpty>No results found</div>
           }
           <div scAutocompleteList>
             @for (country of countries(); track country) {
