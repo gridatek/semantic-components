@@ -12,7 +12,6 @@ const INACTIVE_CLASSES = 'text-gray-300';
   host: {
     '[class]': 'class()',
     '[style.clip-path]': 'clipPath()',
-    style: '--sc-rating-color: var(--color-yellow-400)',
   },
 })
 export class ScRatingIcon {
