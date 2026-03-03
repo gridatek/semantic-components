@@ -3,8 +3,10 @@ import {
   InjectionToken,
   computed,
   inject,
+  input,
   signal,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import { SC_RATING_FIELD } from './rating-field';
 
 // Token for rating item group context
@@ -20,6 +22,7 @@ export const SC_RATING_ITEM_GROUP = new InjectionToken<ScRatingItemGroup>(
   host: {
     'data-slot': 'rating-item-group',
     role: 'radiogroup',
+    '[class]': 'class()',
     '[attr.aria-valuenow]': 'field.value()',
     '[attr.aria-valuemin]': '0',
     '[attr.aria-valuemax]': 'field.max()',
@@ -30,12 +33,18 @@ export const SC_RATING_ITEM_GROUP = new InjectionToken<ScRatingItemGroup>(
 export class ScRatingItemGroup {
   protected readonly field = inject(SC_RATING_FIELD);
 
+  readonly classInput = input<string>('', { alias: 'class' });
+
   readonly hoveredValue = signal<number | null>(null);
 
   readonly displayValue = computed(() => {
     const hovered = this.hoveredValue();
     return hovered !== null ? hovered : this.field.value();
   });
+
+  protected readonly class = computed(() =>
+    cn('flex gap-0.5', this.classInput()),
+  );
 
   setHoveredValue(value: number | null): void {
     if (!this.field.readonly() && !this.field.disabled()) {

@@ -27,36 +27,31 @@ export class CustomIconsRatingFieldDemoContainer {
 } from '@angular/core';
 import {
   ScRatingField,
-  ScRatingItemGroup,
   ScRatingFieldItem,
+  ScRatingIcon,
+  ScRatingItemGroup,
 } from '@semantic-components/ui-lab';
 import { SiHeartIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-custom-icons-rating-field-demo',
-  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, SiHeartIcon],
+  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, ScRatingIcon, SiHeartIcon],
   template: \`
     <div class="flex flex-col gap-2">
-      <div scRatingField [(value)]="rating">
-        <div scRatingItemGroup class="flex gap-0.5">
+      <div
+        scRatingField
+        [(value)]="rating"
+        [style.--sc-rating-active-color]="'var(--color-red-500)'"
+      >
+        <div scRatingItemGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {
-            <span
-              scRatingItem
-              [value]="i"
-              class="cursor-pointer transition-transform hover:scale-110"
-            >
-              <svg
-                siHeartIcon
-                class="size-6 transition-colors"
-                [class.fill-red-500]="i <= rating()"
-                [class.text-red-500]="i <= rating()"
-                [class.text-gray-300]="i > rating()"
-              ></svg>
+            <span scRatingItem [value]="i">
+              <svg siHeartIcon scRatingIcon></svg>
             </span>
           }
         </div>
       </div>
-      <p class="text-sm text-muted-foreground">Hearts: {{ rating() }} / 5</p>
+      <p class="text-muted-foreground text-sm">Hearts: {{ rating() }} / 5</p>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

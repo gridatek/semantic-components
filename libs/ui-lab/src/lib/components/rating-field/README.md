@@ -4,11 +4,12 @@ A composable rating field component for Angular applications, built with a three
 
 ## Architecture
 
-The component consists of three directives:
+The component consists of four directives:
 
 1. **ScRatingField** - Parent directive managing value state and configuration
 2. **ScRatingItemGroup** - Container directive managing hover state and keyboard navigation
 3. **ScRatingItem** - Individual rating item directive
+4. **ScRatingIcon** - Icon directive that handles active/inactive styling automatically
 
 ## Basic Usage
 
@@ -17,7 +18,7 @@ The component consists of three directives:
   <div scRatingItemGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
     <span scRatingItem [value]="i">
-      <svg si-star-icon class="size-5"></svg>
+      <svg siStarIcon scRatingIcon></svg>
     </span>
     }
   </div>
@@ -30,6 +31,7 @@ The component consists of three directives:
 - **Hover preview** - Visual feedback shows rating before selection
 - **Half-star support** - Enable `[allowHalf]="true"` for 0.5 increments
 - **Custom icons** - Use any icon (stars, hearts, etc.)
+- **Custom colors** - Override `--sc-rating-active-color` and `--sc-rating-inactive-color` CSS variables
 - **Keyboard navigation** - Full arrow key, Home, End support
 - **Accessibility** - WCAG AA compliant with proper ARIA attributes
 - **Readonly/Disabled states** - Control interactivity
@@ -51,6 +53,13 @@ The component consists of three directives:
 
 **Note:** The `max` value is automatically calculated from the highest `value` among all rating items.
 
+### CSS Variables
+
+| Variable                     | Default                   | Description            |
+| ---------------------------- | ------------------------- | ---------------------- |
+| `--sc-rating-active-color`   | `var(--color-yellow-400)` | Color for filled icons |
+| `--sc-rating-inactive-color` | `var(--color-gray-300)`   | Color for empty icons  |
+
 ### ScRatingItemGroup
 
 Container directive that manages hover state and keyboard navigation. No inputs required.
@@ -61,6 +70,10 @@ Container directive that manages hover state and keyboard navigation. No inputs 
 | ------- | -------- | -------- | ------------------------------------- |
 | `value` | `number` | Yes      | The rating value this item represents |
 
+### ScRatingIcon
+
+Icon directive applied to SVGs inside `scRatingItem`. Automatically handles active/inactive styling based on the item's state. Default size is `size-6`, overridable via the `class` input.
+
 ## Examples
 
 ### Half-Star Rating
@@ -70,21 +83,36 @@ Container directive that manages hover state and keyboard navigation. No inputs 
   <div scRatingItemGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
     <span scRatingItem [value]="i">
-      <svg si-star-icon class="size-6"></svg>
+      <svg siStarIcon scRatingIcon></svg>
+      <svg siStarIcon scRatingIcon></svg>
     </span>
     }
   </div>
 </div>
 ```
 
-### Custom Icons (Hearts)
+### Custom Icons with Custom Color (Hearts)
+
+```html
+<div scRatingField [(value)]="rating" [style.--sc-rating-active-color]="'var(--color-red-500)'">
+  <div scRatingItemGroup>
+    @for (i of [1, 2, 3, 4, 5]; track i) {
+    <span scRatingItem [value]="i">
+      <svg siHeartIcon scRatingIcon></svg>
+    </span>
+    }
+  </div>
+</div>
+```
+
+### Custom Size
 
 ```html
 <div scRatingField [(value)]="rating">
   <div scRatingItemGroup>
-    @for (i of [1, 2, 3, 4, 5]; track i) {
+    @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
     <span scRatingItem [value]="i">
-      <svg si-heart-icon class="size-5"></svg>
+      <svg siStarIcon scRatingIcon class="size-5"></svg>
     </span>
     }
   </div>
@@ -98,7 +126,7 @@ Container directive that manages hover state and keyboard navigation. No inputs 
   <div scRatingItemGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
     <span scRatingItem [value]="i">
-      <svg si-star-icon class="size-5"></svg>
+      <svg siStarIcon scRatingIcon></svg>
     </span>
     }
   </div>
@@ -130,21 +158,3 @@ Items expose a `data-state` attribute with values:
 - `full` - Item is fully selected
 - `half` - Item is half selected (when `allowHalf` is enabled)
 - `empty` - Item is not selected
-
-Use CSS to style based on state:
-
-```css
-[scRatingItem][data-state='full'] svg {
-  fill: gold;
-  color: gold;
-}
-
-[scRatingItem][data-state='half'] svg {
-  fill: url(#half-gradient);
-}
-
-[scRatingItem][data-state='empty'] svg {
-  fill: none;
-  color: gray;
-}
-```

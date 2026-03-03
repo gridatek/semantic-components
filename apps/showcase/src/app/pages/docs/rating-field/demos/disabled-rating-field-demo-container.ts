@@ -27,32 +27,27 @@ export class DisabledRatingFieldDemoContainer {
 } from '@angular/core';
 import {
   ScRatingField,
-  ScRatingItemGroup,
   ScRatingFieldItem,
+  ScRatingIcon,
+  ScRatingItemGroup,
 } from '@semantic-components/ui-lab';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-disabled-rating-field-demo',
-  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, SiStarIcon],
+  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, ScRatingIcon, SiStarIcon],
   template: \`
     <div class="flex flex-col gap-2">
       <div scRatingField [(value)]="rating" [disabled]="true">
-        <div scRatingItemGroup class="flex gap-0.5">
+        <div scRatingItemGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {
-            <span scRatingItem [value]="i" class="opacity-50">
-              <svg
-                siStarIcon
-                class="size-6"
-                [class.fill-yellow-400]="i <= rating()"
-                [class.text-yellow-400]="i <= rating()"
-                [class.text-gray-300]="i > rating()"
-              ></svg>
+            <span scRatingItem [value]="i">
+              <svg siStarIcon scRatingIcon></svg>
             </span>
           }
         </div>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Rating: {{ rating() }} / 5 (disabled)
       </p>
     </div>
