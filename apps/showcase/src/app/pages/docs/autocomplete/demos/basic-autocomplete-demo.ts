@@ -1,8 +1,4 @@
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopupContainer,
-} from '@angular/aria/combobox';
+import { Combobox, ComboboxPopupContainer } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {
@@ -16,41 +12,46 @@ import {
   viewChildren,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+  ScAutocompleteGroup,
+  ScAutocompleteInput,
+} from '@semantic-components/ui';
 import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-autocomplete-demo',
   imports: [
     Combobox,
-    ComboboxInput,
     ComboboxPopupContainer,
     Listbox,
     Option,
     OverlayModule,
     FormsModule,
+    ScAutocompleteGroup,
+    ScAutocompleteInput,
     SiSearchIcon,
     SiCheckIcon,
   ],
   template: `
     <div ngCombobox filterMode="auto-select" class="flex justify-center">
-      <div #origin class="relative flex items-center">
+      <div #origin scAutocompleteGroup>
         <svg
           siSearchIcon
           class="text-muted-foreground pointer-events-none absolute left-3 size-4"
           aria-hidden="true"
         ></svg>
         <input
-          ngComboboxInput
+          scAutocompleteInput
           aria-label="Select a country"
           placeholder="Select a country"
           [(ngModel)]="query"
-          class="border-input bg-background text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 h-9 w-52 rounded-md border px-3 ps-9 text-sm outline-none focus-visible:ring-3"
+          class="w-52 ps-9"
         />
       </div>
       <ng-template ngComboboxPopupContainer>
         <ng-template
           [cdkConnectedOverlay]="{
-            origin,
+            origin: origin.elementRef,
             usePopover: 'inline',
             matchWidth: true,
           }"
