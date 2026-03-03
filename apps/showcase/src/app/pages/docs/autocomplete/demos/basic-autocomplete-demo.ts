@@ -38,7 +38,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: `
-    <div scAutocomplete filterMode="auto-select">
+    <div scAutocomplete filterMode="auto-select" class="w-52">
       <div scAutocompleteGroup>
         <svg siSearchIcon scAutocompleteIcon></svg>
         <input
@@ -46,7 +46,6 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           aria-label="Select a country"
           placeholder="Select a country"
           [(ngModel)]="query"
-          class="w-52"
         />
       </div>
       <ng-template scAutocompletePortal>
