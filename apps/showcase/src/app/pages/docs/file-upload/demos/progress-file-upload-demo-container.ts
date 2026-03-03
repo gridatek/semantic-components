@@ -22,20 +22,20 @@ export class ProgressFileUploadDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScFileUpload,
   ScFileUploadDropzone,
-  ScFileUploadList,
-  ScFileUploadItem,
-  ScFileUploadItemPreview,
-  ScFileUploadItemName,
-  ScFileUploadItemSize,
-  ScFileUploadItemDelete,
-  ScFileUploadItemProgress,
   ScFileUploadFile,
+  ScFileUploadItem,
+  ScFileUploadItemDelete,
+  ScFileUploadItemName,
+  ScFileUploadItemPreview,
+  ScFileUploadItemProgress,
+  ScFileUploadItemSize,
+  ScFileUploadList,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,
@@ -69,10 +69,10 @@ import {
       >
         <div scFileUploadDropzone class="p-8">
           <div class="flex flex-col items-center gap-2 text-center">
-            <svg siUploadIcon class="size-10 text-muted-foreground"></svg>
+            <svg siUploadIcon class="text-muted-foreground size-10"></svg>
             <div class="space-y-1">
               <p class="text-sm font-medium">Upload with progress</p>
-              <p class="text-xs text-muted-foreground">
+              <p class="text-muted-foreground text-xs">
                 Files will show upload progress
               </p>
             </div>
@@ -84,9 +84,9 @@ import {
             @for (file of files(); track file.id) {
               <div scFileUploadItem [file]="file">
                 <div scFileUploadItemPreview [file]="file">
-                  <svg siFileIcon class="size-5 text-muted-foreground"></svg>
+                  <svg siFileIcon class="text-muted-foreground size-5"></svg>
                 </div>
-                <div class="flex-1 min-w-0 space-y-1">
+                <div class="min-w-0 flex-1 space-y-1">
                   <div class="flex items-center justify-between">
                     <div scFileUploadItemName>{{ file.file.name }}</div>
                     <div scFileUploadItemSize [file]="file"></div>

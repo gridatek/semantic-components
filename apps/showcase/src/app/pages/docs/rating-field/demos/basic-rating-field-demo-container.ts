@@ -22,8 +22,8 @@ export class BasicRatingFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScRatingField,
@@ -35,7 +35,13 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-rating-field-demo',
-  imports: [ScRatingField, ScRatingItemGroup, ScRatingFieldItem, ScRatingIcon, SiStarIcon],
+  imports: [
+    ScRatingField,
+    ScRatingItemGroup,
+    ScRatingFieldItem,
+    ScRatingIcon,
+    SiStarIcon,
+  ],
   template: \`
     <div class="flex flex-col gap-2">
       <div scRatingField [(value)]="rating">

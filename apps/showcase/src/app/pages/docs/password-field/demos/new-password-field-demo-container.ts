@@ -26,16 +26,16 @@ export default class NewPasswordFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScPasswordField,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldInput,
+  ScPasswordFieldInputGroup,
   ScPasswordFieldToggle,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-new-password-field-demo',
@@ -58,7 +58,7 @@ import { ScLabel } from '@semantic-components/ui';
           />
           <button scPasswordFieldToggle></button>
         </div>
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           Must be at least 8 characters
         </p>
       </div>

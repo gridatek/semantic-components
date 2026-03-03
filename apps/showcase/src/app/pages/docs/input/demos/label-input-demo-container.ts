@@ -26,10 +26,10 @@ export class LabelInputDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField, required } from '@angular/forms/signals';
+import { FormField, form, required } from '@angular/forms/signals';
 import { ScField, ScFieldErrors, ScLabel } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 

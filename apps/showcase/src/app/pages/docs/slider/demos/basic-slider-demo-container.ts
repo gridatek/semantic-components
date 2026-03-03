@@ -26,8 +26,8 @@ export class BasicSliderDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
 

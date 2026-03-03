@@ -22,8 +22,8 @@ export class CategoriesSearchInputDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScSearchInput } from '@semantic-components/ui-lab';
 import type { SearchSuggestion } from '@semantic-components/ui-lab';

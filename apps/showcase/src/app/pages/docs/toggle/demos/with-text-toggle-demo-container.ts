@@ -26,8 +26,8 @@ export class WithTextToggleDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import { SiUnderlineIcon } from '@semantic-icons/lucide-icons';

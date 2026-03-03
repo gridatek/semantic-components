@@ -28,18 +28,18 @@ export class LeftSheetDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
-  ScSheetProvider,
-  ScSheetClose,
+  ScButton,
   ScSheet,
+  ScSheetClose,
   ScSheetDescription,
   ScSheetHeader,
   ScSheetPortal,
+  ScSheetProvider,
   ScSheetTitle,
   ScSheetTrigger,
-  ScButton,
 } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-left-sheet-demo',
@@ -71,25 +71,25 @@ import {
           <nav class="flex flex-col gap-2 py-4">
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Home
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Products
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               About
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Contact
             </a>

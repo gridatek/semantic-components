@@ -26,15 +26,15 @@ export class InteractiveCodeEditorDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScCodeEditor,
   ScCodeEditorContent,
+  ScCodeEditorCopyButton,
   ScCodeEditorHeader,
   ScCodeEditorLabel,
-  ScCodeEditorCopyButton,
   ScCodeEditorLanguage,
 } from '@semantic-components/code';
 
@@ -48,13 +48,13 @@ import {
     ScCodeEditorCopyButton,
   ],
   template: \`
-    <div class="flex flex-wrap gap-4 mb-4">
+    <div class="mb-4 flex flex-wrap gap-4">
       <div>
-        <label class="block text-sm font-medium mb-1">Language</label>
+        <label class="mb-1 block text-sm font-medium">Language</label>
         <select
           [value]="selectedLanguage()"
           (change)="selectedLanguage.set($any($event.target).value)"
-          class="px-3 py-1.5 border rounded-md bg-background"
+          class="bg-background rounded-md border px-3 py-1.5"
         >
           <option value="javascript">JavaScript</option>
           <option value="typescript">TypeScript</option>
@@ -91,7 +91,7 @@ import {
     <div scCodeEditor>
       <div scCodeEditorHeader>
         <div class="flex items-center gap-2">
-          <span class="text-sm text-muted-foreground">
+          <span class="text-muted-foreground text-sm">
             interactive.{{ getExtension(selectedLanguage()) }}
           </span>
           <span scCodeEditorLabel>{{ selectedLanguage() }}</span>

@@ -65,25 +65,25 @@ import {
           <nav class="flex flex-col gap-2 p-4">
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Home
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Products
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               About
             </a>
             <a
               href="#"
-              class="rounded-md px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
+              class="hover:bg-accent hover:text-accent-foreground rounded-md px-3 py-2 text-sm"
             >
               Contact
             </a>

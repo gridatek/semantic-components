@@ -22,8 +22,8 @@ export class BasicConfettiDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  viewChild,
   ViewEncapsulation,
+  viewChild,
 } from '@angular/core';
 import { ScConfetti } from '@semantic-components/ui-lab';
 
@@ -33,7 +33,7 @@ import { ScConfetti } from '@semantic-components/ui-lab';
   template: \`
     <sc-confetti #confetti />
     <button
-      class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+      class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium"
       (click)="fire()"
     >
       Fire Confetti!

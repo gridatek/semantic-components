@@ -29,12 +29,12 @@ export class FieldsetDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScFieldset,
-  ScLegend,
-  ScFieldGroup,
   ScField,
   ScFieldDescription,
+  ScFieldGroup,
+  ScFieldset,
   ScLabel,
+  ScLegend,
 } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
 
@@ -67,11 +67,7 @@ import { ScInput } from '@semantic-components/ui';
 
         <div scField>
           <label scLabel>Email</label>
-          <input
-            scInput
-            type="email"
-            placeholder="john.doe@example.com"
-          />
+          <input scInput type="email" placeholder="john.doe@example.com" />
         </div>
       </div>
     </fieldset>

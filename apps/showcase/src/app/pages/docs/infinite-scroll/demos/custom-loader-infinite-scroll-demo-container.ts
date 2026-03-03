@@ -26,8 +26,8 @@ export class CustomLoaderInfiniteScrollDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScInfiniteScroll,
@@ -45,14 +45,14 @@ interface Item {
   imports: [ScInfiniteScroll, ScInfiniteScrollLoader],
   template: \`
     <sc-infinite-scroll
-      class="h-[300px] border rounded-lg"
+      class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
       (loadMore)="loadMore()"
     >
-      <div class="p-4 space-y-2">
+      <div class="space-y-2 p-4">
         @for (item of items(); track item.id) {
-          <div class="p-3 border rounded">
+          <div class="rounded border p-3">
             {{ item.title }}
           </div>
         }
@@ -60,18 +60,18 @@ interface Item {
 
       <div
         scInfiniteScrollLoader
-        class="flex items-center justify-center py-4 gap-2"
+        class="flex items-center justify-center gap-2 py-4"
       >
         <div
-          class="size-2 bg-primary rounded-full animate-bounce"
+          class="bg-primary size-2 animate-bounce rounded-full"
           style="animation-delay: 0ms"
         ></div>
         <div
-          class="size-2 bg-primary rounded-full animate-bounce"
+          class="bg-primary size-2 animate-bounce rounded-full"
           style="animation-delay: 150ms"
         ></div>
         <div
-          class="size-2 bg-primary rounded-full animate-bounce"
+          class="bg-primary size-2 animate-bounce rounded-full"
           style="animation-delay: 300ms"
         ></div>
       </div>

@@ -37,13 +37,13 @@ interface Tag {
   template: \`
     <div scScrollArea class="h-72 w-48 rounded-md border">
       <div class="p-4">
-        <h4 class="mb-4 text-sm font-medium leading-none">Tags</h4>
+        <h4 class="mb-4 text-sm leading-none font-medium">Tags</h4>
         @for (tag of tags; track tag.id) {
           <div class="text-sm">
             {{ tag.name }}
           </div>
           @if (!$last) {
-            <div class="my-2 h-px bg-border"></div>
+            <div class="bg-border my-2 h-px"></div>
           }
         }
       </div>

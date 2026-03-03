@@ -26,8 +26,8 @@ export class OutlineToggleDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import { SiItalicIcon } from '@semantic-icons/lucide-icons';

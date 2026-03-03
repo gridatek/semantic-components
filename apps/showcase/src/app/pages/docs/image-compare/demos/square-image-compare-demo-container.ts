@@ -30,11 +30,11 @@ export class SquareImageCompareDemoContainer {
 } from '@angular/core';
 import {
   ScImageCompare,
+  ScImageCompareAfter,
   ScImageCompareArea,
   ScImageCompareBefore,
-  ScImageCompareAfter,
-  ScImageCompareSlider,
   ScImageCompareLabel,
+  ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -48,18 +48,11 @@ import {
     ScImageCompareLabel,
   ],
   template: \`
-    <div scImageCompare class="w-full max-w-md aspect-square">
+    <div scImageCompare class="aspect-square w-full max-w-md">
       <div scImageCompareArea>
-        <img
-          scImageCompareBefore
-          src="https://picsum.photos/seed/compare-square/500/500?grayscale"
-          alt="Before"
-        />
-        <img
-          scImageCompareAfter
-          src="https://picsum.photos/seed/compare-square/500/500"
-          alt="After"
-        />
+        @let img = 'https://picsum.photos/seed/compare-square/500/500';
+        <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
+        <img scImageCompareAfter [src]="img" alt="After" />
         <div scImageCompareSlider></div>
         <div scImageCompareLabel class="top-2 left-2">Before</div>
         <div scImageCompareLabel class="top-2 right-2">After</div>

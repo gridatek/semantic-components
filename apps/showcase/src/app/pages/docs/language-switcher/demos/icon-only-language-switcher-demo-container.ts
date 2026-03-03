@@ -32,7 +32,7 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
   template: \`
     <div class="flex items-center gap-4">
       <button scLanguageToggle [iconOnly]="true" size="icon"></button>
-      <span class="text-sm text-muted-foreground">Globe icon only</span>
+      <span class="text-muted-foreground text-sm">Globe icon only</span>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

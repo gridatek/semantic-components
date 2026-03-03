@@ -28,13 +28,13 @@ export default class DisabledPasswordFieldDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScPasswordField,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldInput,
+  ScPasswordFieldInputGroup,
   ScPasswordFieldToggle,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-password-field-demo',

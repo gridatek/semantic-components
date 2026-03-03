@@ -28,15 +28,15 @@ export default class DisabledNumberFieldDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldInputGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
+  ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-number-field-demo',
@@ -57,7 +57,7 @@ import { ScLabel } from '@semantic-components/ui';
 
       <div scNumberFieldGroup>
         <button scNumberFieldDecrement></button>
-        <input scNumberFieldInput />
+        <input scNumberFieldInput aria-label="Locked Value" />
         <button scNumberFieldIncrement></button>
       </div>
     </div>

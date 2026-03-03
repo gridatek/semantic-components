@@ -22,21 +22,21 @@ export class FormMultiSelectDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
+import { MultiSelectOption, ScMultiSelect } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-form-multi-select-demo',
   imports: [ScMultiSelect],
   template: \`
-    <div class="max-w-md rounded-lg border p-4 space-y-4">
+    <div class="max-w-md space-y-4 rounded-lg border p-4">
       <div class="space-y-2">
         <label class="text-sm font-medium">Name</label>
         <input
           type="text"
-          class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          class="border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-sm focus-visible:ring-1 focus-visible:outline-none"
           placeholder="Your name"
         />
       </div>
@@ -58,7 +58,7 @@ import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
         />
       </div>
       <button
-        class="inline-flex h-9 w-full items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 w-full items-center justify-center rounded-md text-sm font-medium"
       >
         Save Preferences
       </button>

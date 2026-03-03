@@ -32,7 +32,7 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
   template: \`
     <div class="flex items-center gap-4">
       <button scTimezoneDisplay [iconOnly]="true" size="icon"></button>
-      <span class="text-sm text-muted-foreground">Clock icon only</span>
+      <span class="text-muted-foreground text-sm">Clock icon only</span>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

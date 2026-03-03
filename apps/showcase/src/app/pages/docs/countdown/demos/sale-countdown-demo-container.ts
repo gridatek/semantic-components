@@ -31,7 +31,7 @@ import { ScCountdownSimple } from '@semantic-components/ui-lab';
   imports: [ScCountdownSimple],
   template: \`
     <div
-      class="max-w-sm rounded-lg bg-destructive/10 border border-destructive/20 p-4 flex items-center gap-4"
+      class="bg-destructive/10 border-destructive/20 flex max-w-sm items-center gap-4 rounded-lg border p-4"
     >
       <div class="text-destructive">
         <svg
@@ -47,11 +47,11 @@ import { ScCountdownSimple } from '@semantic-components/ui-lab';
         </svg>
       </div>
       <div class="flex-1">
-        <div class="font-semibold text-destructive">Flash Sale Ends In</div>
+        <div class="text-destructive font-semibold">Flash Sale Ends In</div>
         <sc-countdown-simple
           [targetDate]="shortFuture"
           format="hh:mm:ss"
-          class="text-xl font-bold text-destructive"
+          class="text-destructive text-xl font-bold"
         />
       </div>
     </div>

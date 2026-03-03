@@ -26,8 +26,8 @@ export class PresetsDateRangePickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScDateRange } from '@semantic-components/ui';
 import {

@@ -26,8 +26,8 @@ export class BasicNativeCheckboxDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScNativeCheckbox } from '@semantic-components/ui-lab';
 
@@ -43,12 +43,12 @@ import { ScNativeCheckbox } from '@semantic-components/ui-lab';
       />
       <label
         for="terms-native"
-        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
       >
         Accept terms and conditions
       </label>
     </div>
-    <p class="text-sm text-muted-foreground mt-2">Checked: {{ terms() }}</p>
+    <p class="text-muted-foreground mt-2 text-sm">Checked: {{ terms() }}</p>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

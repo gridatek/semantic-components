@@ -27,10 +27,10 @@ export class HistoryBarcodeScannerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
+import { BarcodeResult, ScBarcodeScanner } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-history-barcode-scanner-demo',
@@ -42,23 +42,23 @@ import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
       class="max-w-md"
     />
     @if (scanHistory().length > 0) {
-      <div class="max-w-md mt-3">
-        <div class="flex items-center justify-between mb-2">
+      <div class="mt-3 max-w-md">
+        <div class="mb-2 flex items-center justify-between">
           <p class="text-sm font-medium">
             Scanned ({{ scanHistory().length }})
           </p>
           <button
             (click)="clearHistory()"
-            class="text-sm text-muted-foreground hover:text-foreground"
+            class="text-muted-foreground hover:text-foreground text-sm"
           >
             Clear
           </button>
         </div>
-        <div class="space-y-2 max-h-48 overflow-y-auto">
+        <div class="max-h-48 space-y-2 overflow-y-auto">
           @for (item of scanHistory(); track $index) {
-            <div class="p-2 bg-muted rounded text-sm">
+            <div class="bg-muted rounded p-2 text-sm">
               <p class="font-mono break-all">{{ item.rawValue }}</p>
-              <p class="text-xs text-muted-foreground">{{ item.format }}</p>
+              <p class="text-muted-foreground text-xs">{{ item.format }}</p>
             </div>
           }
         </div>

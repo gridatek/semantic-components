@@ -23,8 +23,8 @@ export class FormRatingFieldDemoContainer {
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {

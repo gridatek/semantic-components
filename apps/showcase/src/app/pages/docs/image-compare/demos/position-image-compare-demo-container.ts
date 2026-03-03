@@ -26,16 +26,16 @@ export class PositionImageCompareDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScImageCompare,
+  ScImageCompareAfter,
   ScImageCompareArea,
   ScImageCompareBefore,
-  ScImageCompareAfter,
-  ScImageCompareSlider,
   ScImageCompareLabel,
+  ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -52,25 +52,18 @@ import {
     <div
       scImageCompare
       [(position)]="position"
-      class="w-full max-w-2xl aspect-2/1"
+      class="aspect-2/1 w-full max-w-2xl"
     >
       <div scImageCompareArea>
-        <img
-          scImageCompareBefore
-          src="https://picsum.photos/seed/compare-position/800/400?grayscale"
-          alt="Before"
-        />
-        <img
-          scImageCompareAfter
-          src="https://picsum.photos/seed/compare-position/800/400"
-          alt="After"
-        />
+        @let img = 'https://picsum.photos/seed/compare-position/800/400';
+        <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
+        <img scImageCompareAfter [src]="img" alt="After" />
         <div scImageCompareSlider></div>
         <div scImageCompareLabel class="top-2 left-2">Before</div>
         <div scImageCompareLabel class="top-2 right-2">After</div>
       </div>
     </div>
-    <p class="text-sm text-muted-foreground mt-4">
+    <p class="text-muted-foreground mt-4 text-sm">
       Current position: {{ position() }}%
     </p>
   \`,

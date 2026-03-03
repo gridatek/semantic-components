@@ -22,11 +22,11 @@ export class DisabledRadioGroupDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
-import { ScRadioGroup, ScRadioField, ScRadio } from '@semantic-components/ui';
+import { FormField, form } from '@angular/forms/signals';
+import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 
 interface DisabledFormModel {
   individual: string;
@@ -38,7 +38,7 @@ interface DisabledFormModel {
   template: \`
     <div class="flex flex-col gap-4">
       <div>
-        <p class="text-xs text-muted-foreground mb-2">
+        <p class="text-muted-foreground mb-2 text-xs">
           Individual item disabled:
         </p>
         <div scRadioGroup>
@@ -69,7 +69,7 @@ interface DisabledFormModel {
         </div>
       </div>
       <div>
-        <p class="text-xs text-muted-foreground mb-2">Entire group disabled:</p>
+        <p class="text-muted-foreground mb-2 text-xs">Entire group disabled:</p>
         <div scRadioGroup>
           <label scRadioField class="flex items-center space-x-2">
             <input type="radio" scRadio value="option1" disabled id="g1" />

@@ -22,8 +22,8 @@ export class FormSwitchDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
 
@@ -33,29 +33,29 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   template: \`
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
-        <label scSwitchField class="flex-row-reverse justify-between w-full">
+        <label scSwitchField class="w-full flex-row-reverse justify-between">
           <input type="checkbox" scSwitch [(checked)]="marketing" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Marketing emails</p>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-muted-foreground text-sm">
               Receive emails about new products and features.
             </p>
           </div>
         </label>
-        <label scSwitchField class="flex-row-reverse justify-between w-full">
+        <label scSwitchField class="w-full flex-row-reverse justify-between">
           <input type="checkbox" scSwitch [(checked)]="security" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Security emails</p>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-muted-foreground text-sm">
               Receive emails about your account security.
             </p>
           </div>
         </label>
-        <label scSwitchField class="flex-row-reverse justify-between w-full">
+        <label scSwitchField class="w-full flex-row-reverse justify-between">
           <input type="checkbox" scSwitch [(checked)]="updates" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Product updates</p>
-            <p class="text-sm text-muted-foreground">
+            <p class="text-muted-foreground text-sm">
               Receive emails about product updates and tips.
             </p>
           </div>

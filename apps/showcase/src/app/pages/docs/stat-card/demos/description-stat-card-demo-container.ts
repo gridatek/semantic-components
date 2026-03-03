@@ -88,7 +88,7 @@ import {
             </svg>
             <span>+2.4%</span>
           </span>
-          <span class="text-xs text-muted-foreground">vs last week</span>
+          <span class="text-muted-foreground text-xs">vs last week</span>
         </div>
         <p scStatCardDescription>
           Percentage of visitors who completed a purchase

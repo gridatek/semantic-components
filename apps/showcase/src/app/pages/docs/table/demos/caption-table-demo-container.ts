@@ -33,8 +33,8 @@ import {
   ScTableBody,
   ScTableCaption,
   ScTableCell,
-  ScTableHeaderCell,
   ScTableHeader,
+  ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
 

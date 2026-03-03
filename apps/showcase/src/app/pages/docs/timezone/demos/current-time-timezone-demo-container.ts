@@ -22,8 +22,8 @@ export class CurrentTimeTimezoneDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import {
   ScTimezoneBadge,
@@ -36,7 +36,7 @@ import {
   template: \`
     <div class="flex items-center gap-4 rounded-lg border p-4">
       <span scTimezoneBadge></span>
-      <span class="text-lg font-mono">
+      <span class="font-mono text-lg">
         {{ timezoneService.currentTimeFormatted() }}
       </span>
     </div>

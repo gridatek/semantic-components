@@ -26,12 +26,12 @@ export class StatusTimelineDemoContainer {
 } from '@angular/core';
 import {
   ScTimeline,
-  ScTimelineItem,
   ScTimelineConnector,
-  ScTimelineDot,
   ScTimelineContent,
-  ScTimelineTitle,
   ScTimelineDescription,
+  ScTimelineDot,
+  ScTimelineItem,
+  ScTimelineTitle,
 } from '@semantic-components/ui-lab';
 
 @Component({

@@ -30,31 +30,31 @@ export class VideoPlayerDemoContainer {
 } from '@angular/core';
 import {
   ScVideoPlayer,
-  ScVideoPlayerControls,
-  ScVideoPlayerPlayPause,
-  ScVideoPlayerProgress,
-  ScVideoPlayerVolume,
-  ScVideoPlayerTime,
-  ScVideoPlayerSkip,
-  ScVideoPlayerSpeed,
-  ScVideoPlayerFullscreen,
-  ScVideoPlayerPip,
   ScVideoPlayerBigPlay,
   ScVideoPlayerBufferingIndicator,
+  ScVideoPlayerControls,
+  ScVideoPlayerFullscreen,
+  ScVideoPlayerPip,
+  ScVideoPlayerPlayPause,
+  ScVideoPlayerProgress,
+  ScVideoPlayerSkip,
   ScVideoPlayerSpacer,
+  ScVideoPlayerSpeed,
+  ScVideoPlayerTime,
   ScVideoPlayerToolbar,
+  ScVideoPlayerVolume,
 } from '@semantic-components/ui-lab';
 import {
-  SiPlayIcon,
-  SiPauseIcon,
-  SiVolumeXIcon,
-  SiVolume2Icon,
+  SiLoaderIcon,
   SiMaximizeIcon,
   SiMinimizeIcon,
+  SiPauseIcon,
+  SiPictureInPicture2Icon,
+  SiPlayIcon,
   SiRotateCcwIcon,
   SiRotateCwIcon,
-  SiPictureInPicture2Icon,
-  SiLoaderIcon,
+  SiVolume2Icon,
+  SiVolumeXIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -86,7 +86,12 @@ import {
     SiLoaderIcon,
   ],
   template: \`
-    <div scVideoPlayer #player="scVideoPlayer" [src]="sampleVideo" [poster]="samplePoster">
+    <div
+      scVideoPlayer
+      #player="scVideoPlayer"
+      [src]="sampleVideo"
+      [poster]="samplePoster"
+    >
       <svg scVideoPlayerBufferingIndicator siLoaderIcon></svg>
 
       <button scVideoPlayerBigPlay>

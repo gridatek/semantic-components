@@ -30,25 +30,26 @@ export class AudioPlayerDemoContainer {
 } from '@angular/core';
 import {
   ScAudioPlayer,
+  ScAudioPlayerControls,
   ScAudioPlayerCover,
-  ScAudioPlayerTrackInfo,
-  ScAudioPlayerProgress,
+  ScAudioPlayerNext,
   ScAudioPlayerPlay,
   ScAudioPlayerPrevious,
-  ScAudioPlayerNext,
-  ScAudioPlayerShuffle,
+  ScAudioPlayerProgress,
   ScAudioPlayerRepeat,
+  ScAudioPlayerShuffle,
+  ScAudioPlayerTrackInfo,
   ScAudioPlayerVolume,
   ScAudioTrack,
 } from '@semantic-components/ui-lab';
 import {
-  SiPlayIcon,
   SiPauseIcon,
+  SiPlayIcon,
+  SiRepeat1Icon,
+  SiRepeatIcon,
+  SiShuffleIcon,
   SiSkipBackIcon,
   SiSkipForwardIcon,
-  SiRepeatIcon,
-  SiRepeat1Icon,
-  SiShuffleIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -58,6 +59,7 @@ import {
     ScAudioPlayerCover,
     ScAudioPlayerTrackInfo,
     ScAudioPlayerProgress,
+    ScAudioPlayerControls,
     ScAudioPlayerPlay,
     ScAudioPlayerPrevious,
     ScAudioPlayerNext,
@@ -73,26 +75,18 @@ import {
     SiShuffleIcon,
   ],
   template: \`
-    <div
-      scAudioPlayer
-      #player="scAudioPlayer"
-      [tracks]="tracks"
-      class="flex flex-col gap-3 p-4 bg-card border rounded-lg max-w-md"
-    >
+    <div scAudioPlayer #player="scAudioPlayer" [tracks]="tracks">
       <!-- Cover -->
-      <div
-        scAudioPlayerCover
-        class="w-full aspect-square max-w-[200px] mx-auto"
-      ></div>
+      <div scAudioPlayerCover></div>
 
       <!-- Track Info -->
-      <div scAudioPlayerTrackInfo class="text-center"></div>
+      <div scAudioPlayerTrackInfo></div>
 
       <!-- Progress -->
       <div scAudioPlayerProgress></div>
 
       <!-- Controls -->
-      <div class="flex items-center justify-center gap-2">
+      <div scAudioPlayerControls>
         <button scAudioPlayerShuffle>
           <svg siShuffleIcon></svg>
         </button>
@@ -119,7 +113,7 @@ import {
       </div>
 
       <!-- Volume -->
-      <div scAudioPlayerVolume class="justify-center"></div>
+      <div scAudioPlayerVolume></div>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

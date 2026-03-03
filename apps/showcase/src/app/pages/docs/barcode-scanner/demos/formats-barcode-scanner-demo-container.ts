@@ -34,9 +34,9 @@ import { BarcodeFormat } from '@semantic-components/ui-lab';
 @Component({
   selector: 'app-formats-barcode-scanner-demo',
   template: \`
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-2xl">
+    <div class="grid max-w-2xl grid-cols-2 gap-2 md:grid-cols-4">
       @for (format of allFormats; track format) {
-        <div class="px-3 py-2 bg-muted rounded text-sm font-mono">
+        <div class="bg-muted rounded px-3 py-2 font-mono text-sm">
           {{ format }}
         </div>
       }

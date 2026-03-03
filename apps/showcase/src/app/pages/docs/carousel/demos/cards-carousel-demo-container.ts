@@ -30,11 +30,11 @@ export class CardsCarouselDemoContainer {
 } from '@angular/core';
 import {
   ScCarousel,
-  ScCarouselViewport,
-  ScCarouselTrack,
   ScCarouselItem,
   ScCarouselNext,
   ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/carousel';
 import {
   SiChevronLeftIcon,
@@ -55,15 +55,15 @@ import {
   ],
   template: \`
     <div class="mx-auto w-full max-w-sm">
-      <div scCarousel class="w-full">
+      <div scCarousel aria-label="Cards carousel" class="w-full">
         <div scCarouselViewport>
           <div scCarouselTrack>
             @for (card of cards; track card.title) {
               <div scCarouselItem>
                 <div class="p-1">
-                  <div class="rounded-lg border bg-card p-6">
+                  <div class="bg-card rounded-lg border p-6">
                     <h4 class="font-semibold">{{ card.title }}</h4>
-                    <p class="mt-2 text-sm text-muted-foreground">
+                    <p class="text-muted-foreground mt-2 text-sm">
                       {{ card.description }}
                     </p>
                   </div>

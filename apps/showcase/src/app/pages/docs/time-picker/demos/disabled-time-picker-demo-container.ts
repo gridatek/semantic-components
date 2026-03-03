@@ -22,18 +22,18 @@ export class DisabledTimePickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScTimePicker,
-  ScTimePickerInput,
   ScTimePickerHoursInput,
+  ScTimePickerInput,
   ScTimePickerMinutesInput,
-  ScTimePickerSeparator,
   ScTimePickerPeriod,
   ScTimePickerPeriodAM,
   ScTimePickerPeriodPM,
+  ScTimePickerSeparator,
   ScTimeValue,
 } from '@semantic-components/ui';
 

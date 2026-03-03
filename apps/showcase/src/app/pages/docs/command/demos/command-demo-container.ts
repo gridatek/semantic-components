@@ -26,10 +26,10 @@ export class ScCommandDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   computed,
   inject,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {

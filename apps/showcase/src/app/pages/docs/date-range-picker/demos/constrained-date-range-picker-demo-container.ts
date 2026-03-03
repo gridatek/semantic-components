@@ -23,19 +23,19 @@ import { ConstrainedDateRangePickerDemo } from './constrained-date-range-picker-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConstrainedDateRangePickerDemoContainer {
-  readonly code = `import {
+  readonly code = `import { Temporal } from '@js-temporal/polyfill';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScDateRangePicker } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-constrained-date-range-picker-demo',
   imports: [ScDateRangePicker],
   template: \`
-    <p class="text-sm text-muted-foreground mb-4">
+    <p class="text-muted-foreground mb-4 text-sm">
       Restrict selection to dates within the last 30 days.
     </p>
     <sc-date-range-picker

@@ -32,8 +32,8 @@ import {
   ScTable,
   ScTableBody,
   ScTableCell,
-  ScTableHeaderCell,
   ScTableHeader,
+  ScTableHeaderCell,
   ScTableRow,
 } from '@semantic-components/ui';
 

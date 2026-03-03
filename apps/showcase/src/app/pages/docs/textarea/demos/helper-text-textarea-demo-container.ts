@@ -26,10 +26,10 @@ export class HelperTextTextareaDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldDescription,
@@ -48,9 +48,7 @@ import {
         [formField]="bioForm.bio"
         placeholder="Tell us about yourself"
       ></textarea>
-      <p scFieldDescription>
-        Your bio will be visible on your public profile.
-      </p>
+      <p scFieldDescription>Your bio will be visible on your public profile.</p>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

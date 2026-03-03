@@ -26,9 +26,9 @@ export class BadgesDockDemoContainer {
 } from '@angular/core';
 import {
   ScDock,
-  ScDockItems,
-  ScDockItem,
   ScDockBadge,
+  ScDockItem,
+  ScDockItems,
 } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';
 
@@ -36,7 +36,7 @@ import type { DockItem } from '@semantic-components/ui-lab';
   selector: 'app-badges-dock-demo',
   imports: [ScDock, ScDockItems, ScDockItem, ScDockBadge],
   template: \`
-    <div class="flex justify-center rounded-lg border bg-muted/30 p-8">
+    <div class="bg-muted/30 flex justify-center rounded-lg border p-8">
       <nav scDock>
         <div scDockItems>
           @for (item of items; track item.id) {

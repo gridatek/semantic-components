@@ -24,7 +24,7 @@ export class AvatarsMentionInputDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
+import { MentionUser, ScMentionInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-avatars-mention-input-demo',

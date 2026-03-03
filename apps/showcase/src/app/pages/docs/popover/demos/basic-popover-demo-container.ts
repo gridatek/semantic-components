@@ -61,9 +61,7 @@ import {
   ],
   template: \`
     <div scPopoverProvider>
-      <button scButton scPopoverTrigger variant="outline">
-        Open Popover
-      </button>
+      <button scButton scPopoverTrigger variant="outline">Open Popover</button>
       <ng-template scPopoverPortal>
         <div scPopover class="w-80">
           <div scPopoverHeader>

@@ -24,8 +24,8 @@ export class BasicProgressDemoContainer {
   Component,
   OnDestroy,
   OnInit,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScProgress } from '@semantic-components/ui';
 
@@ -34,8 +34,8 @@ import { ScProgress } from '@semantic-components/ui';
   imports: [ScProgress],
   template: \`
     <div class="space-y-2">
-      <div scProgress [value]="progress()"></div>
-      <p class="text-sm text-muted-foreground">{{ progress() }}% complete</p>
+      <div scProgress aria-label="Loading progress" [value]="progress()"></div>
+      <p class="text-muted-foreground text-sm">{{ progress() }}% complete</p>
     </div>
   \`,
   host: { class: 'block w-full' },

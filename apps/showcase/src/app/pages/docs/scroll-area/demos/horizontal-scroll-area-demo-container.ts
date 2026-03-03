@@ -30,20 +30,20 @@ import { ScScrollArea } from '@semantic-components/ui';
   selector: 'app-horizontal-scroll-area-demo',
   imports: [ScScrollArea],
   template: \`
-    <div scScrollArea class="w-96 whitespace-nowrap rounded-md border">
+    <div scScrollArea class="w-96 rounded-md border whitespace-nowrap">
       <div class="flex w-max space-x-4 p-4">
         @for (artwork of artworks; track artwork.artist) {
           <figure class="shrink-0">
             <div class="overflow-hidden rounded-md">
               <div
-                class="h-[150px] w-[150px] bg-muted flex items-center justify-center text-muted-foreground text-xs"
+                class="bg-muted text-muted-foreground flex h-[150px] w-[150px] items-center justify-center text-xs"
               >
                 {{ artwork.art }}
               </div>
             </div>
-            <figcaption class="pt-2 text-xs text-muted-foreground">
+            <figcaption class="text-muted-foreground pt-2 text-xs">
               Photo by
-              <span class="font-semibold text-foreground">
+              <span class="text-foreground font-semibold">
                 {{ artwork.artist }}
               </span>
             </figcaption>

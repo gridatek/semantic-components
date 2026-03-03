@@ -26,18 +26,18 @@ export default class BasicNumberFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
+import { ScLabel } from '@semantic-components/ui';
 import {
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldInputGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
+  ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
-import { ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-number-field-demo',
@@ -58,12 +58,12 @@ import { ScLabel } from '@semantic-components/ui';
 
       <div scNumberFieldGroup>
         <button scNumberFieldDecrement></button>
-        <input scNumberFieldInput />
+        <input scNumberFieldInput aria-label="Count" />
         <button scNumberFieldIncrement></button>
       </div>
     </div>
 
-    <p class="mt-4 text-sm text-muted-foreground">
+    <p class="text-muted-foreground mt-4 text-sm">
       Current value: {{ count() ?? 'null' }}
     </p>
   \`,

@@ -25,10 +25,10 @@ export class InfoLightboxDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  LightboxImage,
   ScLightbox,
   ScLightboxContainer,
   ScLightboxTrigger,
-  LightboxImage,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -41,15 +41,15 @@ import {
           <button
             scLightboxTrigger
             [index]="i"
-            class="w-40 rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring"
+            class="focus:ring-ring w-40 overflow-hidden rounded-lg focus:ring-2 focus:outline-none"
           >
             <img
               [src]="image.thumbnail || image.src"
               [alt]="image.alt"
-              class="w-full aspect-video object-cover"
+              class="aspect-video w-full object-cover"
             />
             <div class="p-2 text-left">
-              <p class="text-sm font-medium truncate">{{ image.title }}</p>
+              <p class="truncate text-sm font-medium">{{ image.title }}</p>
             </div>
           </button>
         }

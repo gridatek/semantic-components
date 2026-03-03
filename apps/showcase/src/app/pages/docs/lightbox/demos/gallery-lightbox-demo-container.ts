@@ -24,13 +24,13 @@ export class GalleryLightboxDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScLightboxGallery, LightboxImage } from '@semantic-components/ui-lab';
+import { LightboxImage, ScLightboxGallery } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-gallery-lightbox-demo',
   imports: [ScLightboxGallery],
   template: \`
-    <sc-lightbox-gallery [images]="images" class="grid-cols-4 gap-2 max-w-xl" />
+    <sc-lightbox-gallery [images]="images" class="max-w-xl grid-cols-4 gap-2" />
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

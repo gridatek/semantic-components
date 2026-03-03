@@ -26,8 +26,8 @@ export class GridInfiniteScrollDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScInfiniteScroll } from '@semantic-components/ui-lab';
 
@@ -42,17 +42,17 @@ interface Item {
   imports: [ScInfiniteScroll],
   template: \`
     <sc-infinite-scroll
-      class="h-[400px] border rounded-lg"
+      class="h-[400px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
       (loadMore)="loadMore()"
     >
-      <div class="p-4 grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-2 gap-4 p-4">
         @for (item of items(); track item.id) {
-          <div class="p-4 border rounded-lg bg-muted/50">
-            <div class="aspect-video bg-muted rounded mb-2"></div>
-            <h4 class="font-medium text-sm">{{ item.title }}</h4>
-            <p class="text-xs text-muted-foreground">
+          <div class="bg-muted/50 rounded-lg border p-4">
+            <div class="bg-muted mb-2 aspect-video rounded"></div>
+            <h4 class="text-sm font-medium">{{ item.title }}</h4>
+            <p class="text-muted-foreground text-xs">
               {{ item.description }}
             </p>
           </div>

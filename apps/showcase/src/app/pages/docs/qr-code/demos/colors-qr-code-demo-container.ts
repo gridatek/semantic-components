@@ -34,7 +34,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-colors-qr-code-demo',
   imports: [ScQrCode],
   template: \`
-    <div class="flex gap-4 flex-wrap">
+    <div class="flex flex-wrap gap-4">
       <sc-qr-code
         [value]="'Blue QR'"
         [size]="150"

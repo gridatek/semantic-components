@@ -34,8 +34,8 @@ import {
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
-  ScMenuSeparator,
   ScMenuProvider,
+  ScMenuSeparator,
   ScMenuTrigger,
 } from '@semantic-components/ui';
 import {
@@ -77,7 +77,7 @@ import {
               ></svg>
               <span class="flex-1">Back</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘[
               </span>
@@ -90,7 +90,7 @@ import {
               ></svg>
               <span class="flex-1">Forward</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘]
               </span>
@@ -103,7 +103,7 @@ import {
               ></svg>
               <span class="flex-1">Reload</span>
               <span
-                class="ml-auto text-xs tracking-widest text-muted-foreground"
+                class="text-muted-foreground ml-auto text-xs tracking-widest"
               >
                 ⌘R
               </span>
@@ -127,7 +127,7 @@ import {
                     <div scMenuItem value="Save Page As...">
                       <span class="flex-1">Save Page As...</span>
                       <span
-                        class="ml-auto text-xs tracking-widest text-muted-foreground"
+                        class="text-muted-foreground ml-auto text-xs tracking-widest"
                       >
                         ⌘S
                       </span>
@@ -142,7 +142,7 @@ import {
                     <div scMenuItem value="Developer Tools">
                       <span class="flex-1">Developer Tools</span>
                       <span
-                        class="ml-auto text-xs tracking-widest text-muted-foreground"
+                        class="text-muted-foreground ml-auto text-xs tracking-widest"
                       >
                         ⌘⌥I
                       </span>

@@ -30,10 +30,10 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
   selector: 'app-pause-on-hover-marquee-demo',
   imports: [ScMarqueeText],
   template: \`
-    <p class="text-sm text-muted-foreground mb-3">
+    <p class="text-muted-foreground mb-3 text-sm">
       Hover over the marquee to pause animation
     </p>
-    <div class="rounded-lg border bg-primary/5 py-3">
+    <div class="bg-primary/5 rounded-lg border py-3">
       <sc-marquee-text
         text="Hover over me to pause the animation!"
         [duration]="15"

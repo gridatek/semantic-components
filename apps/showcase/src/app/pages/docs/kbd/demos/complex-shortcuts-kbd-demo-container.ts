@@ -36,7 +36,7 @@ import { ScKbd } from '@semantic-components/ui';
   template: \`
     <div class="space-y-3">
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted-foreground w-32">Screenshot</span>
+        <span class="text-muted-foreground w-32 text-sm">Screenshot</span>
         <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
         <kbd scKbd>Shift</kbd>
@@ -44,7 +44,7 @@ import { ScKbd } from '@semantic-components/ui';
         <kbd scKbd>4</kbd>
       </div>
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted-foreground w-32">Force Quit</span>
+        <span class="text-muted-foreground w-32 text-sm">Force Quit</span>
         <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
         <kbd scKbd>Option</kbd>
@@ -52,7 +52,7 @@ import { ScKbd } from '@semantic-components/ui';
         <kbd scKbd>Esc</kbd>
       </div>
       <div class="flex items-center gap-2">
-        <span class="text-sm text-muted-foreground w-32">Dev Tools</span>
+        <span class="text-muted-foreground w-32 text-sm">Dev Tools</span>
         <kbd scKbd>⌘</kbd>
         <span class="text-muted-foreground">+</span>
         <kbd scKbd>Option</kbd>

@@ -26,13 +26,13 @@ export class EmptyNotificationCenterDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
+  type Notification,
   ScNotificationCenter,
   ScNotificationCenterContainer,
-  type Notification,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -44,7 +44,7 @@ import {
       [(notifications)]="notifications"
       emptyTitle="All caught up!"
       emptyDescription="No new notifications to show."
-      class="max-w-md h-[300px]"
+      class="h-[300px] max-w-md"
     >
       <div scNotificationCenterContainer class="h-full"></div>
     </div>

@@ -22,10 +22,10 @@ export class CountMultiSelectDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScMultiSelect, MultiSelectOption } from '@semantic-components/ui-lab';
+import { MultiSelectOption, ScMultiSelect } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-count-multi-select-demo',

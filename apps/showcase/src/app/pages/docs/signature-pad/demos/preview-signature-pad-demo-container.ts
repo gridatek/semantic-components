@@ -22,17 +22,17 @@ export class PreviewSignaturePadDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScSignaturePad,
   ScSignaturePadCanvas,
+  ScSignaturePadClearButton,
   ScSignaturePadControls,
   ScSignaturePadUndoButton,
-  ScSignaturePadClearButton,
 } from '@semantic-components/ui-lab';
-import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-preview-signature-pad-demo',
@@ -67,11 +67,11 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
 
       @if (previewSignature()) {
         <div>
-          <p class="text-sm font-medium mb-2">Preview:</p>
+          <p class="mb-2 text-sm font-medium">Preview:</p>
           <img
             [src]="previewSignature()"
             alt="Signature preview"
-            class="border rounded-lg max-w-[200px]"
+            class="max-w-[200px] rounded-lg border"
           />
         </div>
       }

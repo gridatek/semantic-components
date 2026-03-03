@@ -26,15 +26,15 @@ export default class WithoutLabelNumberFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldInputGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
+  ScNumberFieldInputGroup,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -49,16 +49,10 @@ import {
   template: \`
     <div class="flex items-center gap-4">
       <span class="text-sm font-medium">Quantity:</span>
-      <div
-        scNumberField
-        [(value)]="quantity"
-        [min]="1"
-        [max]="10"
-        class="w-28"
-      >
+      <div scNumberField [(value)]="quantity" [min]="1" [max]="10" class="w-28">
         <div scNumberFieldGroup>
           <button scNumberFieldDecrement></button>
-          <input scNumberFieldInput />
+          <input scNumberFieldInput aria-label="Quantity" />
           <button scNumberFieldIncrement></button>
         </div>
       </div>

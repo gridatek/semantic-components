@@ -28,19 +28,19 @@ export class BottomSheetDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import {
-  ScSheetProvider,
-  ScSheetClose,
+  ScButton,
   ScSheet,
+  ScSheetClose,
   ScSheetDescription,
   ScSheetFooter,
   ScSheetHeader,
   ScSheetPortal,
+  ScSheetProvider,
   ScSheetTitle,
   ScSheetTrigger,
-  ScButton,
 } from '@semantic-components/ui';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-bottom-sheet-demo',
@@ -59,7 +59,9 @@ import {
   ],
   template: \`
     <div scSheetProvider side="bottom">
-      <button scButton scSheetTrigger variant="outline">Open Bottom Sheet</button>
+      <button scButton scSheetTrigger variant="outline">
+        Open Bottom Sheet
+      </button>
       <ng-template scSheetPortal>
         <div scSheet>
           <button scSheetClose>

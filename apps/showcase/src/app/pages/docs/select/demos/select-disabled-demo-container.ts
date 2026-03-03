@@ -31,11 +31,11 @@ export class SelectDisabledDemoContainer {
 import {
   ScSelect,
   ScSelectItem,
+  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
   ScSelectTrigger,
-  ScSelectLabel,
 } from '@semantic-components/ui';
 
 @Component({
@@ -73,5 +73,5 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectDisabledDemo {}`;
+export class SelectDisabledDemo {}`;
 }

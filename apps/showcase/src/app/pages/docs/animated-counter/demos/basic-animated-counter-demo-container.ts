@@ -22,8 +22,8 @@ export class BasicAnimatedCounterDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScAnimatedCounter } from '@semantic-components/ui-lab';
 
@@ -34,13 +34,13 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
     <div class="flex items-center gap-4">
       <sc-animated-counter [value]="value()" class="text-4xl font-bold" />
       <button
-        class="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:bg-primary/90"
+        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
         (click)="increment()"
       >
         +100
       </button>
       <button
-        class="rounded-md bg-secondary px-3 py-1.5 text-sm text-secondary-foreground hover:bg-secondary/90"
+        class="bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-md px-3 py-1.5 text-sm"
         (click)="reset()"
       >
         Reset

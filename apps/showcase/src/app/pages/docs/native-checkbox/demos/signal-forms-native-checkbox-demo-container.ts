@@ -23,16 +23,16 @@ import { SignalFormsNativeCheckboxDemo } from './signal-forms-native-checkbox-de
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsNativeCheckboxDemoContainer {
-  readonly code = `import {
+  readonly code = `import { JsonPipe } from '@angular/common';
+import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
 import { ScNativeCheckbox } from '@semantic-components/ui-lab';
-import { JsonPipe } from '@angular/common';
 
 interface CheckboxFormModel {
   newsletter: boolean;
@@ -55,7 +55,7 @@ interface CheckboxFormModel {
           />
           <label
             for="newsletter"
-            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
             Subscribe to newsletter
           </label>
@@ -70,7 +70,7 @@ interface CheckboxFormModel {
           />
           <label
             for="marketing"
-            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
             Receive marketing emails
           </label>
@@ -85,16 +85,16 @@ interface CheckboxFormModel {
           />
           <label
             for="terms-signal"
-            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
             Accept terms and conditions
           </label>
         </div>
       </div>
 
-      <div class="mt-4 p-4 bg-muted rounded-md">
+      <div class="bg-muted mt-4 rounded-md p-4">
         <p class="text-sm font-medium">Form Values:</p>
-        <pre class="text-xs mt-2">{{ formModel() | json }}</pre>
+        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>
     </form>
   \`,

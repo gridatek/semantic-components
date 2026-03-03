@@ -24,14 +24,14 @@ export class NoMagnificationDockDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScDock, ScDockItems, ScDockItem } from '@semantic-components/ui-lab';
+import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-no-magnification-dock-demo',
   imports: [ScDock, ScDockItems, ScDockItem],
   template: \`
-    <div class="flex justify-center rounded-lg border bg-muted/30 p-8">
+    <div class="bg-muted/30 flex justify-center rounded-lg border p-8">
       <nav scDock [magnification]="false">
         <div scDockItems>
           @for (item of items; track item.id) {

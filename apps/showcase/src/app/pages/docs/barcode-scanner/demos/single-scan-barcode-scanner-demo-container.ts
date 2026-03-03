@@ -27,10 +27,10 @@ export class SingleScanBarcodeScannerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
+import { BarcodeResult, ScBarcodeScanner } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-single-scan-barcode-scanner-demo',
@@ -43,9 +43,9 @@ import { ScBarcodeScanner, BarcodeResult } from '@semantic-components/ui-lab';
     />
     @if (singleResult()) {
       <div
-        class="p-4 bg-green-50 border border-green-200 rounded-lg max-w-md mt-3"
+        class="mt-3 max-w-md rounded-lg border border-green-200 bg-green-50 p-4"
       >
-        <p class="text-sm text-green-800 mb-1">Scan complete!</p>
+        <p class="mb-1 text-sm text-green-800">Scan complete!</p>
         <p class="font-mono text-sm break-all text-green-900">
           {{ singleResult()?.rawValue }}
         </p>

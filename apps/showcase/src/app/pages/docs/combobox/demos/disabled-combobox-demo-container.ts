@@ -20,22 +20,22 @@ import { DisabledComboboxDemo } from './disabled-combobox-demo';
 })
 export class DisabledComboboxDemoContainer {
   readonly code = `import {
-  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
+  afterRenderEffect,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   ScCombobox,
-  ScComboboxPortal,
   ScComboboxEmpty,
   ScComboboxIcon,
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
+  ScComboboxPortal,
   ScComboboxTrigger,
 } from '@semantic-components/ui-lab';
 

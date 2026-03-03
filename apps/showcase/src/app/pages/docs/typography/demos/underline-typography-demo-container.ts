@@ -44,5 +44,5 @@ import { ScHeading } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UnderlineTypographyDemo {};`;
+export class UnderlineTypographyDemo {}`;
 }

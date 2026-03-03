@@ -35,7 +35,7 @@ import { ScKbd } from '@semantic-components/ui';
   imports: [ScKbd],
   template: \`
     <div class="space-y-2">
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Press
         <kbd scKbd>⌘</kbd>
         <kbd scKbd>K</kbd>
@@ -43,7 +43,7 @@ import { ScKbd } from '@semantic-components/ui';
         <kbd scKbd>Esc</kbd>
         to close it.
       </p>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Use
         <kbd scKbd>Tab</kbd>
         to navigate between fields and

@@ -26,10 +26,10 @@ export class ActivityTimelineDemoContainer {
 } from '@angular/core';
 import {
   ScTimeline,
-  ScTimelineItem,
   ScTimelineConnector,
-  ScTimelineDot,
   ScTimelineContent,
+  ScTimelineDot,
+  ScTimelineItem,
   ScTimelineTime,
 } from '@semantic-components/ui-lab';
 

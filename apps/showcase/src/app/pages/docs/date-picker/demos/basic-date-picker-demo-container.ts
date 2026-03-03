@@ -23,13 +23,13 @@ import { BasicDatePickerDemo } from './basic-date-picker-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicDatePickerDemoContainer {
-  readonly code = `import {
+  readonly code = `import { Temporal } from '@js-temporal/polyfill';
+import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { Temporal } from '@js-temporal/polyfill';
 import { ScDatePicker } from '@semantic-components/ui';
 
 @Component({
@@ -38,7 +38,7 @@ import { ScDatePicker } from '@semantic-components/ui';
   template: \`
     <sc-date-picker [(value)]="selectedDate" />
     @if (selectedDate()) {
-      <p class="text-sm text-muted-foreground mt-4">
+      <p class="text-muted-foreground mt-4 text-sm">
         Selected: {{ selectedDate()?.toLocaleString() }}
       </p>
     }

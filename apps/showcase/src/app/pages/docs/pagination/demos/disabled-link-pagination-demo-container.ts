@@ -26,16 +26,16 @@ export class DisabledLinkPaginationDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScPagination,
   ScPaginationChange,
   ScPaginationEllipsis,
-  ScPaginationList,
   ScPaginationItem,
   ScPaginationLink,
+  ScPaginationList,
   ScPaginationNext,
   ScPaginationPrevious,
 } from '@semantic-components/ui';
@@ -62,6 +62,7 @@ import {
   template: \`
     <nav
       scPagination
+      aria-label="Disabled link pagination"
       #pagination="scPagination"
       [currentPage]="currentPage()"
       [totalItems]="30"

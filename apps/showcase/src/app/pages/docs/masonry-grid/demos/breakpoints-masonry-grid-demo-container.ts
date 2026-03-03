@@ -22,8 +22,8 @@ export class BreakpointsMasonryGridDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
 
@@ -38,7 +38,8 @@ interface DemoItem {
   selector: 'app-breakpoints-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryItem],
   template: \`
-    <sc-masonry-grid
+    <div
+      scMasonryGrid
       [columns]="3"
       [gap]="20"
       [breakpoints]="[
@@ -48,20 +49,20 @@ interface DemoItem {
       ]"
     >
       @for (item of items().slice(0, 9); track item.id) {
-        <sc-masonry-item>
+        <div scMasonryItem>
           <div
-            class="rounded-lg border bg-card p-4"
+            class="bg-card rounded-lg border p-4"
             [style.min-height.px]="item.height"
           >
             <h4 class="font-medium">Card {{ item.id }}</h4>
-            <p class="text-sm text-muted-foreground mt-2">
+            <p class="text-muted-foreground mt-2 text-sm">
               This card has a minimum height of {{ item.height }}px. The masonry
               layout automatically arranges cards in columns.
             </p>
           </div>
-        </sc-masonry-item>
+        </div>
       }
-    </sc-masonry-grid>
+    </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -20,22 +20,22 @@ import { FormComboboxDemo } from './form-combobox-demo';
 })
 export class FormComboboxDemoContainer {
   readonly code = `import {
-  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
+  afterRenderEffect,
   computed,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import {
   ScCombobox,
-  ScComboboxPortal,
   ScComboboxEmpty,
   ScComboboxIcon,
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
+  ScComboboxPortal,
   ScComboboxTrigger,
 } from '@semantic-components/ui-lab';
 
@@ -58,7 +58,7 @@ interface ComboboxOption {
     ScComboboxEmpty,
   ],
   template: \`
-    <div class="grid gap-4 max-w-sm">
+    <div class="grid max-w-sm gap-4">
       <div class="space-y-2">
         <label class="text-sm font-medium">Timezone</label>
         <div scCombobox>

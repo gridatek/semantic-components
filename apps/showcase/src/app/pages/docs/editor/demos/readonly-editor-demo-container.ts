@@ -26,33 +26,47 @@ export class ReadonlyEditorDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScEditor,
-  ScEditorContent,
-  ScEditorFooter,
-  ScEditorCount,
-  ScEditorWordCount,
   ScEditorCharCount,
+  ScEditorContent,
+  ScEditorCount,
+  ScEditorFooter,
+  ScEditorWordCount,
 } from '@semantic-components/editor';
 
 @Component({
   selector: 'app-readonly-editor-demo',
-  imports: [ScEditor, ScEditorContent, ScEditorFooter, ScEditorCount],
+  imports: [
+    ScEditor,
+    ScEditorContent,
+    ScEditorFooter,
+    ScEditorCount,
+    ScEditorWordCount,
+    ScEditorCharCount,
+  ],
   template: \`
-    <div scEditor [readonly]="true" class="border rounded-lg overflow-hidden">
-      <div scEditorContent [(value)]="content"></div>
+    <div class="w-full">
+      <div scEditor [readonly]="true" class="overflow-hidden rounded-lg border">
+        <div scEditorContent [(value)]="content"></div>
 
-      <div scEditorFooter>
-        <div scEditorCount>
-          <span scEditorWordCount #wc="scEditorWordCount">{{ wc.wordCount() }} words</span>
-          <span scEditorCharCount #cc="scEditorCharCount">{{ cc.charCount() }} characters</span>
+        <div scEditorFooter>
+          <div scEditorCount>
+            <span scEditorWordCount #wc="scEditorWordCount">
+              {{ wc.wordCount() }} words
+            </span>
+            <span scEditorCharCount #cc="scEditorCharCount">
+              {{ cc.charCount() }} characters
+            </span>
+          </div>
         </div>
       </div>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

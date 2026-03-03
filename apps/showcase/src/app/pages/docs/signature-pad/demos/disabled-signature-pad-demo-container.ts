@@ -27,11 +27,11 @@ export class DisabledSignaturePadDemoContainer {
 import {
   ScSignaturePad,
   ScSignaturePadCanvas,
+  ScSignaturePadClearButton,
   ScSignaturePadControls,
   ScSignaturePadUndoButton,
-  ScSignaturePadClearButton,
 } from '@semantic-components/ui-lab';
-import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-disabled-signature-pad-demo',

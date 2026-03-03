@@ -26,16 +26,16 @@ export class ControlledImageCompareDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScImageCompare,
+  ScImageCompareAfter,
   ScImageCompareArea,
   ScImageCompareBefore,
-  ScImageCompareAfter,
-  ScImageCompareSlider,
   ScImageCompareLabel,
+  ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -52,34 +52,28 @@ import {
     <div
       scImageCompare
       [(position)]="position"
-      class="w-full max-w-2xl aspect-2/1"
+      class="aspect-2/1 w-full max-w-2xl"
     >
       <div scImageCompareArea>
-        <img
-          scImageCompareBefore
-          src="https://picsum.photos/seed/compare-controlled/800/400?grayscale"
-          alt="Before"
-        />
-        <img
-          scImageCompareAfter
-          src="https://picsum.photos/seed/compare-controlled/800/400"
-          alt="After"
-        />
+        @let img = 'https://picsum.photos/seed/compare-controlled/800/400';
+        <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
+        <img scImageCompareAfter [src]="img" alt="After" />
         <div scImageCompareSlider></div>
         <div scImageCompareLabel class="top-2 left-2">Before</div>
         <div scImageCompareLabel class="top-2 right-2">After</div>
       </div>
     </div>
-    <div class="flex items-center gap-4 max-w-2xl mt-4">
+    <div class="mt-4 flex max-w-2xl items-center gap-4">
       <input
         type="range"
         min="0"
         max="100"
         [value]="position()"
         (input)="position.set(+$any($event.target).value)"
+        aria-label="Comparison position"
         class="flex-1"
       />
-      <span class="text-sm w-12 text-right">{{ position() }}%</span>
+      <span class="w-12 text-right text-sm">{{ position() }}%</span>
     </div>
   \`,
   encapsulation: ViewEncapsulation.None,

@@ -26,8 +26,8 @@ export class NoSearchTransferListDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScTransferList } from '@semantic-components/ui-lab';
 import type { TransferListItem } from '@semantic-components/ui-lab';

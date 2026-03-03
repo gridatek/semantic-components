@@ -30,14 +30,14 @@ export class DestructiveAlertDialogDemoContainer {
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
-  ScAlertDialogProvider,
+  ScAlertDialog,
   ScAlertDialogAction,
   ScAlertDialogCancel,
-  ScAlertDialog,
   ScAlertDialogDescription,
   ScAlertDialogFooter,
   ScAlertDialogHeader,
   ScAlertDialogPortal,
+  ScAlertDialogProvider,
   ScAlertDialogTitle,
   ScAlertDialogTrigger,
 } from '@semantic-components/ui';

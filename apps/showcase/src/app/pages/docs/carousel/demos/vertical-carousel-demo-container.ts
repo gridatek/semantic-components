@@ -30,11 +30,11 @@ export class VerticalCarouselDemoContainer {
 } from '@angular/core';
 import {
   ScCarousel,
-  ScCarouselViewport,
-  ScCarouselTrack,
   ScCarouselItem,
   ScCarouselNext,
   ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/carousel';
 import {
   SiChevronLeftIcon,
@@ -57,6 +57,7 @@ import {
     <div class="mx-auto flex h-[350px] w-full max-w-xs items-center">
       <div
         scCarousel
+        aria-label="Vertical carousel"
         orientation="vertical"
         [options]="{ align: 'start' }"
         class="w-full"
@@ -67,7 +68,7 @@ import {
               <div scCarouselItem class="basis-1/2 pt-1">
                 <div class="p-1">
                   <div
-                    class="flex items-center justify-center rounded-lg border bg-card p-6"
+                    class="bg-card flex items-center justify-center rounded-lg border p-6"
                   >
                     <span class="text-3xl font-semibold">{{ index }}</span>
                   </div>

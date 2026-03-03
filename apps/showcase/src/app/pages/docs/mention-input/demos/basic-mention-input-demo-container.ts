@@ -22,10 +22,10 @@ export class BasicMentionInputDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
+import { MentionUser, ScMentionInput } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-mention-input-demo',
@@ -40,7 +40,7 @@ import { ScMentionInput, MentionUser } from '@semantic-components/ui-lab';
         (mentionSelect)="onMentionSelect($event)"
       />
     </div>
-    <div class="text-sm text-muted-foreground space-y-1 mt-3">
+    <div class="text-muted-foreground mt-3 space-y-1 text-sm">
       <p>Value: {{ value() || 'Empty' }}</p>
       <p>Mentions: {{ mentions().length }} user(s)</p>
     </div>

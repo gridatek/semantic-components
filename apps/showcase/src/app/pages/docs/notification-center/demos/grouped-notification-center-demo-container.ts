@@ -26,14 +26,14 @@ export class GroupedNotificationCenterDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
-  ScNotificationCenter,
-  ScNotificationCenterContainer,
   type Notification,
   type NotificationGroup,
+  ScNotificationCenter,
+  ScNotificationCenterContainer,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -47,7 +47,7 @@ import {
       (markRead)="onMarkRead($event)"
       (dismiss)="onDismiss($event)"
       (clearAll)="onClearAll()"
-      class="max-w-md h-[500px]"
+      class="h-[500px] max-w-md"
     >
       <div scNotificationCenterContainer class="h-full"></div>
     </div>

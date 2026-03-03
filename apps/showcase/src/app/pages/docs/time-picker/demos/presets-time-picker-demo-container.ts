@@ -22,18 +22,18 @@ export class PresetsTimePickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScTimePicker,
-  ScTimePickerInput,
   ScTimePickerHoursInput,
+  ScTimePickerInput,
   ScTimePickerMinutesInput,
-  ScTimePickerSeparator,
   ScTimePickerPeriod,
   ScTimePickerPeriodAM,
   ScTimePickerPeriodPM,
+  ScTimePickerSeparator,
   ScTimeValue,
 } from '@semantic-components/ui';
 
@@ -54,28 +54,28 @@ import {
       <div class="flex flex-wrap gap-2">
         <button
           type="button"
-          class="rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
           (click)="setPreset(9, 0, 'AM')"
         >
           9:00 AM
         </button>
         <button
           type="button"
-          class="rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
           (click)="setPreset(12, 0, 'PM')"
         >
           12:00 PM
         </button>
         <button
           type="button"
-          class="rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
           (click)="setPreset(3, 30, 'PM')"
         >
           3:30 PM
         </button>
         <button
           type="button"
-          class="rounded-md border px-3 py-1.5 text-sm hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
           (click)="setPreset(6, 0, 'PM')"
         >
           6:00 PM

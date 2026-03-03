@@ -30,9 +30,9 @@ export class NoLabelsImageCompareDemoContainer {
 } from '@angular/core';
 import {
   ScImageCompare,
+  ScImageCompareAfter,
   ScImageCompareArea,
   ScImageCompareBefore,
-  ScImageCompareAfter,
   ScImageCompareSlider,
 } from '@semantic-components/ui-lab';
 
@@ -46,18 +46,11 @@ import {
     ScImageCompareSlider,
   ],
   template: \`
-    <div scImageCompare class="w-full max-w-2xl aspect-2/1">
+    @let img = 'https://picsum.photos/seed/compare-nolabels/800/400';
+    <div scImageCompare class="aspect-2/1 w-full max-w-2xl">
       <div scImageCompareArea>
-        <img
-          scImageCompareBefore
-          src="https://picsum.photos/seed/compare-nolabels/800/400?grayscale"
-          alt="Before"
-        />
-        <img
-          scImageCompareAfter
-          src="https://picsum.photos/seed/compare-nolabels/800/400"
-          alt="After"
-        />
+        <img scImageCompareBefore [src]="img + '?grayscale'" alt="Before" />
+        <img scImageCompareAfter [src]="img" alt="After" />
         <div scImageCompareSlider></div>
       </div>
     </div>

@@ -26,14 +26,19 @@ export class ScCommandDialogDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   DestroyRef,
+  ViewEncapsulation,
+  computed,
   inject,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {
+  ScDialog,
+  ScDialogPortal,
+  ScDialogProvider,
+} from '@semantic-components/ui';
 import {
   ScCommand,
   ScCommandEmpty,
@@ -45,11 +50,6 @@ import {
   ScCommandSeparator,
   ScCommandShortcut,
 } from '@semantic-components/ui-lab';
-import {
-  ScDialogProvider,
-  ScDialogPortal,
-  ScDialog,
-} from '@semantic-components/ui';
 
 interface CommandItem {
   value: string;
@@ -90,10 +90,7 @@ interface CommandItem {
       <ng-template scDialogPortal>
         <div scDialog class="w-lg gap-0 p-0">
           <div scCommand class="**:data-[slot=command-input]:h-12">
-            <div
-              scCommandInput
-              placeholder="Type a command or search..."
-            ></div>
+            <div scCommandInput placeholder="Type a command or search..."></div>
             <div scCommandList>
               @if (
                 filteredSuggestions().length === 0 &&

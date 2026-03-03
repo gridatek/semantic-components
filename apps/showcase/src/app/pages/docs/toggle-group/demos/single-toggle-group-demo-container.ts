@@ -22,14 +22,14 @@ export class SingleToggleGroupDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   SiTextAlignCenterIcon,
-  SiTextAlignStartIcon,
   SiTextAlignEndIcon,
+  SiTextAlignStartIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -59,7 +59,7 @@ import {
           <svg siTextAlignEndIcon></svg>
         </button>
       </div>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-muted-foreground text-sm">
         Selected: {{ alignment() || 'none' }}
       </p>
     </div>

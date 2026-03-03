@@ -26,8 +26,8 @@ export class ComplexVirtualListDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScVirtualList } from '@semantic-components/ui-lab';
 
@@ -42,7 +42,7 @@ interface User {
   selector: 'app-complex-virtual-list-demo',
   imports: [ScVirtualList],
   template: \`
-    <div class="border rounded-lg overflow-hidden">
+    <div class="overflow-hidden rounded-lg border">
       <sc-virtual-list
         [items]="users()"
         [itemHeight]="72"
@@ -51,22 +51,22 @@ interface User {
       >
         <ng-template let-user let-index="index">
           <div
-            class="flex items-center gap-4 px-4 h-full border-b hover:bg-muted/50 transition-colors"
+            class="hover:bg-muted/50 flex h-full items-center gap-4 border-b px-4 transition-colors"
           >
             <div
-              class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+              class="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
             >
-              <span class="text-sm font-medium text-primary">
+              <span class="text-primary text-sm font-medium">
                 {{ getInitials(user.name) }}
               </span>
             </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-medium truncate">{{ user.name }}</p>
-              <p class="text-sm text-muted-foreground truncate">
+            <div class="min-w-0 flex-1">
+              <p class="truncate font-medium">{{ user.name }}</p>
+              <p class="text-muted-foreground truncate text-sm">
                 {{ user.email }}
               </p>
             </div>
-            <span class="px-2 py-1 text-xs rounded-full bg-muted">
+            <span class="bg-muted rounded-full px-2 py-1 text-xs">
               {{ user.role }}
             </span>
           </div>

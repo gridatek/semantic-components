@@ -30,12 +30,12 @@ import { ScEmojiPickerTrigger } from '@semantic-components/ui-lab';
   selector: 'app-trigger-emoji-picker-demo',
   imports: [ScEmojiPickerTrigger],
   template: \`
-    <p class="text-sm text-muted-foreground mb-2">
+    <p class="text-muted-foreground mb-2 text-sm">
       Use with a popover for dropdown behavior:
     </p>
     <div class="flex items-center gap-2">
       <button scEmojiPickerTrigger></button>
-      <span class="text-sm text-muted-foreground">
+      <span class="text-muted-foreground text-sm">
         ← Click to open (requires popover)
       </span>
     </div>

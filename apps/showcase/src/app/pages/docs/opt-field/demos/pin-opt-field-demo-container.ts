@@ -26,13 +26,13 @@ export class PinOptFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScOptField,
-  ScOptFieldSlotGroup,
   ScOptFieldSlot,
+  ScOptFieldSlotGroup,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -47,7 +47,7 @@ import {
         <div scOptFieldSlot></div>
       </div>
     </div>
-    <p class="text-sm text-muted-foreground mt-4">
+    <p class="text-muted-foreground mt-4 text-sm">
       Value: {{ otp() || 'empty' }}
     </p>
   \`,

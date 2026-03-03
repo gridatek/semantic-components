@@ -22,16 +22,16 @@ export class EyedropperColorPickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScColorPicker,
   ScColorPickerArea,
-  ScColorPickerHue,
-  ScColorPickerPreview,
-  ScColorPickerInput,
   ScColorPickerEyeDropper,
+  ScColorPickerHue,
+  ScColorPickerInput,
+  ScColorPickerPreview,
 } from '@semantic-components/ui-lab';
 
 @Component({

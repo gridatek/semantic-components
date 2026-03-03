@@ -30,11 +30,11 @@ export class DefaultCarouselDemoContainer {
 } from '@angular/core';
 import {
   ScCarousel,
-  ScCarouselViewport,
-  ScCarouselTrack,
   ScCarouselItem,
   ScCarouselNext,
   ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/carousel';
 import {
   SiChevronLeftIcon,
@@ -55,14 +55,14 @@ import {
   ],
   template: \`
     <div class="mx-auto w-full max-w-xs">
-      <div scCarousel class="w-full">
+      <div scCarousel aria-label="Default carousel" class="w-full">
         <div scCarouselViewport>
           <div scCarouselTrack>
             @for (index of items; track index) {
               <div scCarouselItem>
                 <div class="p-1">
                   <div
-                    class="flex aspect-square items-center justify-center rounded-lg border bg-card p-6"
+                    class="bg-card flex aspect-square items-center justify-center rounded-lg border p-6"
                   >
                     <span class="text-4xl font-semibold">{{ index }}</span>
                   </div>

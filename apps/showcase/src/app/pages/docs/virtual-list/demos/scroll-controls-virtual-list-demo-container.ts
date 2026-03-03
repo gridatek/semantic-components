@@ -26,9 +26,9 @@ export class ScrollControlsVirtualListDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
+  ViewEncapsulation,
   signal,
   viewChild,
-  ViewEncapsulation,
 } from '@angular/core';
 import { ScVirtualList } from '@semantic-components/ui-lab';
 
@@ -36,21 +36,21 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
   selector: 'app-scroll-controls-virtual-list-demo',
   imports: [ScVirtualList],
   template: \`
-    <div class="flex gap-2 mb-4">
+    <div class="mb-4 flex gap-2">
       <button
-        class="px-3 py-1.5 text-sm border rounded-md hover:bg-muted transition-colors"
+        class="hover:bg-muted rounded-md border px-3 py-1.5 text-sm transition-colors"
         (click)="scrollToTop()"
       >
         Scroll to Top
       </button>
       <button
-        class="px-3 py-1.5 text-sm border rounded-md hover:bg-muted transition-colors"
+        class="hover:bg-muted rounded-md border px-3 py-1.5 text-sm transition-colors"
         (click)="scrollToMiddle()"
       >
         Scroll to Middle
       </button>
       <button
-        class="px-3 py-1.5 text-sm border rounded-md hover:bg-muted transition-colors"
+        class="hover:bg-muted rounded-md border px-3 py-1.5 text-sm transition-colors"
         (click)="scrollToBottom()"
       >
         Scroll to Bottom
@@ -58,17 +58,17 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
       <input
         type="number"
         placeholder="Index"
-        class="w-24 px-3 py-1.5 text-sm border rounded-md"
+        class="w-24 rounded-md border px-3 py-1.5 text-sm"
         #indexInput
       />
       <button
-        class="px-3 py-1.5 text-sm border rounded-md hover:bg-muted transition-colors"
+        class="hover:bg-muted rounded-md border px-3 py-1.5 text-sm transition-colors"
         (click)="scrollToIndex(indexInput.value)"
       >
         Go
       </button>
     </div>
-    <div class="border rounded-lg overflow-hidden">
+    <div class="overflow-hidden rounded-lg border">
       <sc-virtual-list
         #controlledList
         [items]="items()"
@@ -77,9 +77,9 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
       >
         <ng-template let-item let-index="index">
           <div
-            class="flex items-center px-4 h-full border-b hover:bg-muted/50 transition-colors"
+            class="hover:bg-muted/50 flex h-full items-center border-b px-4 transition-colors"
           >
-            <span class="w-20 text-muted-foreground text-sm font-mono">
+            <span class="text-muted-foreground w-20 font-mono text-sm">
               #{{ (index + 1).toString().padStart(5, '0') }}
             </span>
             <span class="flex-1">{{ item }}</span>

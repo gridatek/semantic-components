@@ -33,15 +33,15 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
     <div class="flex items-center gap-4">
       <div class="flex flex-col items-center gap-2">
         <button scTimezoneDisplay variant="outline" size="sm"></button>
-        <span class="text-xs text-muted-foreground">Small</span>
+        <span class="text-muted-foreground text-xs">Small</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button scTimezoneDisplay variant="outline" size="default"></button>
-        <span class="text-xs text-muted-foreground">Default</span>
+        <span class="text-muted-foreground text-xs">Default</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button scTimezoneDisplay variant="outline" size="lg"></button>
-        <span class="text-xs text-muted-foreground">Large</span>
+        <span class="text-muted-foreground text-xs">Large</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
@@ -50,7 +50,7 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
           size="icon"
           [iconOnly]="true"
         ></button>
-        <span class="text-xs text-muted-foreground">Icon</span>
+        <span class="text-muted-foreground text-xs">Icon</span>
       </div>
     </div>
   \`,

@@ -27,14 +27,14 @@ export class ColorsSignaturePadDemoContainer {
 import {
   ScSignaturePad,
   ScSignaturePadCanvas,
-  ScSignaturePadControls,
-  ScSignaturePadUndoButton,
   ScSignaturePadClearButton,
-  ScSignaturePadToolbar,
   ScSignaturePadColorButton,
+  ScSignaturePadControls,
+  ScSignaturePadToolbar,
+  ScSignaturePadUndoButton,
   ScSignaturePadWidthButton,
 } from '@semantic-components/ui-lab';
-import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-colors-signature-pad-demo',
@@ -54,26 +54,26 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       <div scSignaturePadToolbar>
         <button scSignaturePadPenColor [color]="'#000000'">
           <span
-            class="size-4 rounded-full border border-border transition-transform data-active:scale-110"
+            class="border-border size-4 rounded-full border transition-transform data-active:scale-110"
             [attr.data-active]="'#000000'"
             style="background-color: #000000"
           ></span>
         </button>
         <button scSignaturePadPenColor [color]="'#1d4ed8'">
           <span
-            class="size-4 rounded-full border border-border transition-transform"
+            class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #1d4ed8"
           ></span>
         </button>
         <button scSignaturePadPenColor [color]="'#dc2626'">
           <span
-            class="size-4 rounded-full border border-border transition-transform"
+            class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #dc2626"
           ></span>
         </button>
         <button scSignaturePadPenColor [color]="'#16a34a'">
           <span
-            class="size-4 rounded-full border border-border transition-transform"
+            class="border-border size-4 rounded-full border transition-transform"
             style="background-color: #16a34a"
           ></span>
         </button>

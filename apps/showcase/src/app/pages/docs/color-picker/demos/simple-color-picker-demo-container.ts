@@ -22,13 +22,13 @@ export class SimpleColorPickerDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScColorPicker,
-  ScColorPickerPreview,
   ScColorPickerInput,
+  ScColorPickerPreview,
   ScColorPickerSwatches,
 } from '@semantic-components/ui-lab';
 

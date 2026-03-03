@@ -26,17 +26,17 @@ export default class FullPasswordFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import { ScLabel } from '@semantic-components/ui';
 import {
   ScPasswordField,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldInput,
-  ScPasswordFieldToggle,
-  ScPasswordFieldStrength,
+  ScPasswordFieldInputGroup,
   ScPasswordFieldRequirements,
+  ScPasswordFieldStrength,
+  ScPasswordFieldToggle,
 } from '@semantic-components/ui-lab';
 
 @Component({

@@ -22,17 +22,17 @@ export class BasicSignaturePadDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScSignaturePad,
   ScSignaturePadCanvas,
+  ScSignaturePadClearButton,
   ScSignaturePadControls,
   ScSignaturePadUndoButton,
-  ScSignaturePadClearButton,
 } from '@semantic-components/ui-lab';
-import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
+import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-signature-pad-demo',
@@ -69,7 +69,7 @@ import { SiUndoIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
       <div class="flex gap-2">
         <button
           (click)="exportSignature(pad)"
-          class="px-4 py-2 text-sm border rounded-md hover:bg-accent"
+          class="hover:bg-accent rounded-md border px-4 py-2 text-sm"
         >
           Export as PNG
         </button>

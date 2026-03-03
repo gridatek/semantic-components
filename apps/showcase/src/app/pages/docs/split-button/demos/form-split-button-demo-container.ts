@@ -22,8 +22,8 @@ export class FormSplitButtonDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScSplitButton,
@@ -34,7 +34,7 @@ import {
   selector: 'app-form-split-button-demo',
   imports: [ScSplitButton],
   template: \`
-    <div class="p-4 border rounded-lg bg-card">
+    <div class="bg-card rounded-lg border p-4">
       <div class="flex justify-end">
         <sc-split-button
           label="Send"

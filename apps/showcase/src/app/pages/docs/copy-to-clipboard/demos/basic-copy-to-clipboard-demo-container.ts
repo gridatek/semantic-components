@@ -37,7 +37,9 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   imports: [ScCopyToClipboard, SiCheckIcon, SiCopyIcon, ScButton],
   template: \`
     <div class="flex items-center gap-4">
-      <code class="bg-muted rounded px-3 py-2 text-sm">npm install @semantic-components/ui</code>
+      <code class="bg-muted rounded px-3 py-2 text-sm">
+        npm install &#64;semantic-components/ui
+      </code>
       <button
         scButton
         variant="outline"
