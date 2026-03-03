@@ -4,18 +4,20 @@ import { SC_RATING_ITEM_GROUP } from './rating-item-group';
 
 export type ScRatingIconRole = 'single' | 'background' | 'foreground';
 
+const ACTIVE_CLASSES = 'fill-(--sc-rating-color) text-(--sc-rating-color)';
+const INACTIVE_CLASSES = 'text-gray-300';
+
 @Directive({
   selector: 'svg[scRatingIcon]',
   host: {
     '[class]': 'class()',
     '[style.clip-path]': 'clipPath()',
+    style: '--sc-rating-color: var(--color-yellow-400)',
   },
 })
 export class ScRatingIcon {
   private readonly group = inject(SC_RATING_ITEM_GROUP);
 
-  readonly activeClass = input('fill-yellow-400 text-yellow-400');
-  readonly inactiveClass = input('text-gray-300');
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Set by the parent ScRatingFieldItem via contentChildren resolution */
@@ -27,20 +29,22 @@ export class ScRatingIcon {
   protected readonly class = computed(() => {
     const role = this.role();
     const state = this.state();
-    const active = this.activeClass();
-    const inactive = this.inactiveClass();
     const base = this.classInput();
 
     if (role === 'single') {
-      return cn(base, state === 'empty' ? inactive : active);
+      return cn(base, state === 'empty' ? INACTIVE_CLASSES : ACTIVE_CLASSES);
     }
 
     if (role === 'background') {
-      return cn(base, inactive);
+      return cn(base, INACTIVE_CLASSES);
     }
 
     // foreground
-    return cn('absolute inset-0', base, state === 'empty' ? 'hidden' : active);
+    return cn(
+      'absolute inset-0',
+      base,
+      state === 'empty' ? 'hidden' : ACTIVE_CLASSES,
+    );
   });
 
   protected readonly clipPath = computed(() => {

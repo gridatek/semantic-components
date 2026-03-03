@@ -23,16 +23,15 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="flex flex-col gap-2">
-      <div scRatingField [(value)]="rating">
+      <div
+        scRatingField
+        [(value)]="rating"
+        [style.--sc-rating-color]="'var(--color-red-500)'"
+      >
         <div scRatingItemGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {
             <span scRatingItem [value]="i">
-              <svg
-                siHeartIcon
-                scRatingIcon
-                activeClass="fill-red-500 text-red-500"
-                class="size-6"
-              ></svg>
+              <svg siHeartIcon scRatingIcon class="size-6"></svg>
             </span>
           }
         </div>
