@@ -498,12 +498,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/spinner/spinner-page'),
       },
       {
-        path: 'split-button',
-        title: 'Split Button - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/split-button/split-button-page'),
-      },
-      {
         path: 'spotlight',
         title: 'Spotlight - Semantic Components',
         loadComponent: () => import('../pages/docs/spotlight/spotlight-page'),

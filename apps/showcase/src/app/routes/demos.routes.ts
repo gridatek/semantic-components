@@ -3269,60 +3269,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/split-button',
-    children: [
-      {
-        path: 'basic-split-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/split-button/demos/basic-split-button-demo').then(
-            (m) => m.BasicSplitButtonDemo,
-          ),
-      },
-      {
-        path: 'variants-split-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/split-button/demos/variants-split-button-demo').then(
-            (m) => m.VariantsSplitButtonDemo,
-          ),
-      },
-      {
-        path: 'sizes-split-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/split-button/demos/sizes-split-button-demo').then(
-            (m) => m.SizesSplitButtonDemo,
-          ),
-      },
-      {
-        path: 'icons-split-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/split-button/demos/icons-split-button-demo').then(
-            (m) => m.IconsSplitButtonDemo,
-          ),
-      },
-      {
-        path: 'destructive-split-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/split-button/demos/destructive-split-button-demo').then(
-            (m) => m.DestructiveSplitButtonDemo,
-          ),
-      },
-      {
-        path: 'disabled-split-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/split-button/demos/disabled-split-button-demo').then(
-            (m) => m.DisabledSplitButtonDemo,
-          ),
-      },
-      {
-        path: 'form-split-button-demo',
-        loadComponent: () =>
-          import('../pages/docs/split-button/demos/form-split-button-demo').then(
-            (m) => m.FormSplitButtonDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/spotlight',
     children: [
       {

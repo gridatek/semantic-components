@@ -52,5 +52,4 @@ export * from './transfer-list';
 export * from './tree';
 export * from './video-player';
 export * from './virtual-list';
-export * from './split-button';
 export * from './language-switcher';
