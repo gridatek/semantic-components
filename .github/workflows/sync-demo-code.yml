@@ -25,6 +25,9 @@ jobs:
       - name: Sync demo code
         run: npx nx sync-demo-code
 
+      - name: Validate demo code
+        run: npx nx validate-demo-code
+
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
