@@ -10,6 +10,7 @@ import {
   model,
   signal,
 } from '@angular/core';
+import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '@semantic-components/ui';
 import { SC_FIELD } from '@semantic-components/ui';
 import { ScOptFieldSlot } from './opt-field-slot';
@@ -24,7 +25,7 @@ import { ScOptFieldSlot } from './opt-field-slot';
     '(paste)': 'onPaste($event)',
   },
 })
-export class ScOptField {
+export class ScOptField implements FormValueControl<string> {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly id = input(inject(_IdGenerator).getId('sc-opt-field-'));
@@ -42,7 +43,7 @@ export class ScOptField {
     descendants: true,
   });
 
-  readonly maxLength = computed(() => this.slots().length);
+  readonly slotCount = computed(() => this.slots().length);
 
   protected readonly class = computed(() =>
     cn('flex items-center gap-2 has-disabled:opacity-50', this.classInput()),
@@ -50,7 +51,7 @@ export class ScOptField {
 
   readonly chars = computed(() => {
     const val = this.value();
-    const max = this.maxLength();
+    const max = this.slotCount();
     const result: string[] = [];
     for (let i = 0; i < max; i++) {
       result.push(val[i] || '');
@@ -83,7 +84,7 @@ export class ScOptField {
     const after = current.slice(index + 1);
 
     if (char) {
-      this.value.set((before + char + after).slice(0, this.maxLength()));
+      this.value.set((before + char + after).slice(0, this.slotCount()));
     } else {
       this.value.set(before + after);
     }
@@ -102,12 +103,12 @@ export class ScOptField {
 
     event.preventDefault();
     const pastedData = event.clipboardData?.getData('text') || '';
-    const cleanData = pastedData.replace(/\s/g, '').slice(0, this.maxLength());
+    const cleanData = pastedData.replace(/\s/g, '').slice(0, this.slotCount());
 
     if (cleanData) {
       this.value.set(cleanData);
       // Focus the slot after the last pasted character or the last slot
-      const focusIndex = Math.min(cleanData.length, this.maxLength() - 1);
+      const focusIndex = Math.min(cleanData.length, this.slotCount() - 1);
       this.focusSlot(focusIndex);
     }
   }

@@ -11,6 +11,7 @@ import { DisabledOptFieldDemoContainer } from './demos/disabled-opt-field-demo-c
 import { DotSeparatorOptFieldDemoContainer } from './demos/dot-separator-opt-field-demo-container';
 import { PinOptFieldDemoContainer } from './demos/pin-opt-field-demo-container';
 import { SeparatorOptFieldDemoContainer } from './demos/separator-opt-field-demo-container';
+import { SignalFormsOptFieldDemoContainer } from './demos/signal-forms-opt-field-demo-container';
 import { VerificationOptFieldDemoContainer } from './demos/verification-opt-field-demo-container';
 
 @Component({
@@ -22,6 +23,7 @@ import { VerificationOptFieldDemoContainer } from './demos/verification-opt-fiel
     DotSeparatorOptFieldDemoContainer,
     DisabledOptFieldDemoContainer,
     VerificationOptFieldDemoContainer,
+    SignalFormsOptFieldDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -44,6 +46,7 @@ import { VerificationOptFieldDemoContainer } from './demos/verification-opt-fiel
         <app-dot-separator-opt-field-demo-container />
         <app-disabled-opt-field-demo-container />
         <app-verification-opt-field-demo-container />
+        <app-signal-forms-opt-field-demo-container />
       </section>
     </div>
   `,

@@ -53,7 +53,7 @@ export class ScOptFieldSlot {
 
   readonly char = computed(() => this.optField.getChar(this.index()));
   readonly ariaLabel = computed(
-    () => `Digit ${this.index() + 1} of ${this.optField.maxLength()}`,
+    () => `Digit ${this.index() + 1} of ${this.optField.slotCount()}`,
   );
   readonly isActive = computed(
     () => this.focused() && !this.optField.disabled(),
