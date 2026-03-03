@@ -7,7 +7,7 @@ export type ScRatingIconRole = 'single' | 'background' | 'foreground';
 @Directive({
   selector: 'svg[scRatingIcon]',
   host: {
-    '[class]': 'hostClass()',
+    '[class]': 'class()',
     '[style.clip-path]': 'clipPath()',
   },
 })
@@ -24,7 +24,7 @@ export class ScRatingIcon {
   /** Set by the parent ScRatingFieldItem so the icon can read state */
   readonly state = signal<'full' | 'half' | 'empty'>('empty');
 
-  protected readonly hostClass = computed(() => {
+  protected readonly class = computed(() => {
     const role = this.role();
     const state = this.state();
     const active = this.activeClass();

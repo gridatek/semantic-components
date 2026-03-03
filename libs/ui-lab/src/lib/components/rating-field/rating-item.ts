@@ -18,7 +18,7 @@ import { SC_RATING_ITEM_GROUP } from './rating-item-group';
   host: {
     'data-slot': 'rating-item',
     role: 'radio',
-    '[class]': 'hostClass()',
+    '[class]': 'class()',
     '[attr.aria-checked]': 'isSelected()',
     '[attr.aria-label]': '"Rate " + value()',
     '[attr.data-state]': 'state()',
@@ -74,7 +74,7 @@ export class ScRatingFieldItem {
     return -1;
   });
 
-  protected readonly hostClass = computed(() => {
+  protected readonly class = computed(() => {
     const base = this.classInput();
     const disabled = this.field.disabled();
     const readonly = this.field.readonly();

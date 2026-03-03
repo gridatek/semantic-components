@@ -22,7 +22,7 @@ export const SC_RATING_ITEM_GROUP = new InjectionToken<ScRatingItemGroup>(
   host: {
     'data-slot': 'rating-item-group',
     role: 'radiogroup',
-    '[class]': 'hostClass()',
+    '[class]': 'class()',
     '[attr.aria-valuenow]': 'field.value()',
     '[attr.aria-valuemin]': '0',
     '[attr.aria-valuemax]': 'field.max()',
@@ -42,7 +42,7 @@ export class ScRatingItemGroup {
     return hovered !== null ? hovered : this.field.value();
   });
 
-  protected readonly hostClass = computed(() =>
+  protected readonly class = computed(() =>
     cn('flex gap-0.5', this.classInput()),
   );
 
