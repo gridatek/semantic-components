@@ -871,6 +871,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/copy-to-clipboard',
+    children: [
+      {
+        path: 'basic-copy-to-clipboard-demo',
+        loadComponent: () =>
+          import('../pages/docs/copy-to-clipboard/demos/basic-copy-to-clipboard-demo').then(
+            (m) => m.BasicCopyToClipboardDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/countdown',
     children: [
       {
