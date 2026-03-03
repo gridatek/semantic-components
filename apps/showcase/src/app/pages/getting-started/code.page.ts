@@ -9,7 +9,7 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { ScCopyToClipboard } from '@semantic-components/ui';
+import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
@@ -23,6 +23,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeViewerContent,
     ScCodeViewerHeader,
     ScCodeViewerLabel,
+    ScButton,
     ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
@@ -54,16 +55,17 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>terminal</span>
             <button
-              type="button"
+              scButton
+              variant="ghost"
+              size="icon"
               [scCopyToClipboard]="installCode"
               #copy="scCopyToClipboard"
-              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
               @if (copy.copied()) {
-                <svg siCheckIcon class="size-4"></svg>
+                <svg siCheckIcon></svg>
               } @else {
-                <svg siCopyIcon class="size-4"></svg>
+                <svg siCopyIcon></svg>
               }
             </button>
           </div>
@@ -84,16 +86,17 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>css</span>
             <button
-              type="button"
+              scButton
+              variant="ghost"
+              size="icon"
               [scCopyToClipboard]="stylesCode"
               #copy2="scCopyToClipboard"
-              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
               @if (copy2.copied()) {
-                <svg siCheckIcon class="size-4"></svg>
+                <svg siCheckIcon></svg>
               } @else {
-                <svg siCopyIcon class="size-4"></svg>
+                <svg siCopyIcon></svg>
               }
             </button>
           </div>
@@ -114,16 +117,17 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>css</span>
             <button
-              type="button"
+              scButton
+              variant="ghost"
+              size="icon"
               [scCopyToClipboard]="sourceCode"
               #copy3="scCopyToClipboard"
-              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
               @if (copy3.copied()) {
-                <svg siCheckIcon class="size-4"></svg>
+                <svg siCheckIcon></svg>
               } @else {
-                <svg siCopyIcon class="size-4"></svg>
+                <svg siCopyIcon></svg>
               }
             </button>
           </div>
@@ -142,16 +146,17 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
             <button
-              type="button"
+              scButton
+              variant="ghost"
+              size="icon"
               [scCopyToClipboard]="usageCode"
               #copy4="scCopyToClipboard"
-              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
               @if (copy4.copied()) {
-                <svg siCheckIcon class="size-4"></svg>
+                <svg siCheckIcon></svg>
               } @else {
-                <svg siCopyIcon class="size-4"></svg>
+                <svg siCopyIcon></svg>
               }
             </button>
           </div>

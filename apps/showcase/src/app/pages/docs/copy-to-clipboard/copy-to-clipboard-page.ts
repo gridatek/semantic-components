@@ -9,7 +9,7 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { ScCopyToClipboard } from '@semantic-components/ui';
+import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -23,6 +23,7 @@ import { BasicCopyToClipboardDemoContainer } from './demos/basic-copy-to-clipboa
     ScCodeViewerHeader,
     ScCodeViewerLabel,
     ScCodeViewerContent,
+    ScButton,
     ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
@@ -48,16 +49,17 @@ import { BasicCopyToClipboardDemoContainer } from './demos/basic-copy-to-clipboa
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
             <button
-              type="button"
+              scButton
+              variant="ghost"
+              size="icon"
               [scCopyToClipboard]="usageCode"
               #copy="scCopyToClipboard"
-              class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
               aria-label="Copy to clipboard"
             >
               @if (copy.copied()) {
-                <svg siCheckIcon class="size-4"></svg>
+                <svg siCheckIcon></svg>
               } @else {
-                <svg siCopyIcon class="size-4"></svg>
+                <svg siCopyIcon></svg>
               }
             </button>
           </div>
@@ -79,7 +81,7 @@ import { BasicCopyToClipboardDemoContainer } from './demos/basic-copy-to-clipboa
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CopyToClipboardPage {
-  readonly usageCode = `import { ScCopyToClipboard } from '@semantic-components/ui';
+  readonly usageCode = `import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -90,10 +92,10 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
       #copy="scCopyToClipboard"
     >
       @if (copy.copied()) {
-        <svg siCheckIcon class="size-4"></svg>
+        <svg siCheckIcon></svg>
         Copied
       } @else {
-        <svg siCopyIcon class="size-4"></svg>
+        <svg siCopyIcon></svg>
         Copy
       }
     </button>

@@ -12,8 +12,14 @@ import {
   ScCodeViewerLabel,
   ScCodeViewerLanguage,
 } from '@semantic-components/code';
-import { ScCopyToClipboard } from '@semantic-components/ui';
-import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScCopyToClipboard,
+  ScTab,
+  ScTabList,
+  ScTabPanel,
+  ScTabs,
+} from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ConfigService } from '../../services/config.service';
 import { TocHeading } from '../toc/toc-heading';
@@ -29,6 +35,7 @@ import { TocHeading } from '../toc/toc-heading';
     ScCodeViewerHeader,
     ScCodeViewerLabel,
     ScCodeViewerContent,
+    ScButton,
     ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
@@ -94,16 +101,17 @@ import { TocHeading } from '../toc/toc-heading';
             <div scCodeViewerHeader>
               <span scCodeViewerLabel>{{ language() }}</span>
               <button
-                type="button"
+                scButton
+                variant="ghost"
+                size="icon"
                 [scCopyToClipboard]="code()"
                 #copy="scCopyToClipboard"
-                class="hover:bg-accent hover:text-accent-foreground inline-flex size-9 items-center justify-center rounded-md"
                 aria-label="Copy to clipboard"
               >
                 @if (copy.copied()) {
-                  <svg siCheckIcon class="size-4"></svg>
+                  <svg siCheckIcon></svg>
                 } @else {
-                  <svg siCopyIcon class="size-4"></svg>
+                  <svg siCopyIcon></svg>
                 }
               </button>
             </div>

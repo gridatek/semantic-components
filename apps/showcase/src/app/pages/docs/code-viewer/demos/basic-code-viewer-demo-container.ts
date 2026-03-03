@@ -31,7 +31,7 @@ import {
   ScCodeViewerHeader,
   ScCodeViewerLabel,
 } from '@semantic-components/code';
-import { ScCopyToClipboard } from '@semantic-components/ui';
+import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -41,6 +41,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
     ScCodeViewerHeader,
     ScCodeViewerLabel,
     ScCodeViewerContent,
+    ScButton,
     ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
@@ -50,16 +51,17 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
       <div scCodeViewerHeader>
         <span scCodeViewerLabel>app.ts</span>
         <button
-          type="button"
+          scButton
+          variant="ghost"
+          size="icon"
           [scCopyToClipboard]="sampleCode()"
           #copy="scCopyToClipboard"
-          class="inline-flex items-center justify-center size-9 rounded-md hover:bg-accent hover:text-accent-foreground"
           aria-label="Copy to clipboard"
         >
           @if (copy.copied()) {
-            <svg siCheckIcon class="size-4"></svg>
+            <svg siCheckIcon></svg>
           } @else {
-            <svg siCopyIcon class="size-4"></svg>
+            <svg siCopyIcon></svg>
           }
         </button>
       </div>

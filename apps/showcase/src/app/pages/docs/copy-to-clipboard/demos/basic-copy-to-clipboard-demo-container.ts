@@ -46,10 +46,10 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
         #copy="scCopyToClipboard"
       >
         @if (copy.copied()) {
-          <svg siCheckIcon class="size-4"></svg>
+          <svg siCheckIcon></svg>
           Copied
         } @else {
-          <svg siCopyIcon class="size-4"></svg>
+          <svg siCopyIcon></svg>
           Copy
         }
       </button>
