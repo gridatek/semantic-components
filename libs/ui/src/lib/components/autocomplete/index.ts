@@ -3,5 +3,6 @@ export { ScAutocompleteGroup } from './autocomplete-group';
 export { ScAutocompleteIcon } from './autocomplete-icon';
 export { ScAutocompleteInput } from './autocomplete-input';
 export { ScAutocompleteItem } from './autocomplete-item';
+export { ScAutocompleteItemIndicator } from './autocomplete-item-indicator';
 export { ScAutocompleteList } from './autocomplete-list';
 export { ScAutocompletePopup } from './autocomplete-popup';

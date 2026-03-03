@@ -17,6 +17,7 @@ import {
   ScAutocompleteIcon,
   ScAutocompleteInput,
   ScAutocompleteItem,
+  ScAutocompleteItemIndicator,
   ScAutocompleteList,
   ScAutocompletePopup,
 } from '@semantic-components/ui';
@@ -33,6 +34,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScAutocompleteIcon,
     ScAutocompleteInput,
     ScAutocompleteItem,
+    ScAutocompleteItemIndicator,
     ScAutocompleteList,
     ScAutocompletePopup,
     SiSearchIcon,
@@ -69,12 +71,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
               @for (country of countries(); track country) {
                 <div scAutocompleteItem [value]="country" [label]="country">
                   <span class="flex-1">{{ country }}</span>
-                  <svg
-                    siCheckIcon
-                    class="size-4 shrink-0 opacity-0 aria-selected:opacity-100"
-                    [class.opacity-100]="false"
-                    aria-hidden="true"
-                  ></svg>
+                  <svg siCheckIcon scAutocompleteItemIndicator></svg>
                 </div>
               }
             </div>
