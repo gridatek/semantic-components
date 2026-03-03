@@ -153,6 +153,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/autocomplete',
+    children: [
+      {
+        path: 'basic-autocomplete-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete/demos/basic-autocomplete-demo').then(
+            (m) => m.BasicAutocompleteDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/audio-player',
     children: [
       {

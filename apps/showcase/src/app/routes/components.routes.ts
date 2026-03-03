@@ -40,6 +40,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/aspect-ratio/aspect-ratio-page'),
       },
       {
+        path: 'autocomplete',
+        title: 'Autocomplete - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete/autocomplete-page'),
+      },
+      {
         path: 'audio-player',
         title: 'Audio Player - Semantic Components',
         loadComponent: () =>

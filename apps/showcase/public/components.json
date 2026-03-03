@@ -41,6 +41,14 @@
     "category": "Layout"
   },
   {
+    "name": "Autocomplete",
+    "path": "autocomplete",
+    "description": "An input with autocomplete suggestions.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Forms"
+  },
+  {
     "name": "Audio Player",
     "path": "audio-player",
     "description": "A custom audio player with controls.",
