@@ -14,6 +14,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import {
   ScAutocompleteGroup,
+  ScAutocompleteIcon,
   ScAutocompleteInput,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
@@ -28,6 +29,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     OverlayModule,
     FormsModule,
     ScAutocompleteGroup,
+    ScAutocompleteIcon,
     ScAutocompleteInput,
     SiSearchIcon,
     SiCheckIcon,
@@ -35,11 +37,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div ngCombobox filterMode="auto-select" class="flex justify-center">
       <div #origin scAutocompleteGroup>
-        <svg
-          siSearchIcon
-          class="text-muted-foreground pointer-events-none absolute left-3 size-4"
-          aria-hidden="true"
-        ></svg>
+        <svg siSearchIcon scAutocompleteIcon></svg>
         <input
           scAutocompleteInput
           aria-label="Select a country"
