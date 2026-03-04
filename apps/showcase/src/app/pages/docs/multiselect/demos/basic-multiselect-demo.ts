@@ -117,14 +117,14 @@ import {
               multi
               class="flex max-h-44 flex-col gap-0.5 overflow-auto"
             >
-              @for (label of labels; track label.value) {
+              @for (option of options; track option.value) {
                 <div
                   ngOption
-                  [value]="label.value"
-                  [label]="label.value"
+                  [value]="option.value"
+                  [label]="option.value"
                   class="hover:bg-accent data-[active=true]:bg-accent aria-selected:bg-primary/10 aria-selected:text-primary flex cursor-pointer items-center rounded-md px-2 py-1.5 text-sm outline-none"
                 >
-                  @switch (label.icon) {
+                  @switch (option.icon) {
                     @case ('tag') {
                       <svg siTagIcon class="me-2 size-4"></svg>
                     }
@@ -150,7 +150,7 @@ import {
                       <svg siPlaneIcon class="me-2 size-4"></svg>
                     }
                   }
-                  <span class="flex-1">{{ label.value }}</span>
+                  <span class="flex-1">{{ option.value }}</span>
                   <svg
                     siCheckIcon
                     class="ms-2 size-4 [[ngOption]:not([aria-selected='true'])_&]:hidden"
@@ -170,15 +170,15 @@ export class BasicMultiselectDemo {
   /** The combobox listbox popup. */
   listbox = viewChild<Listbox<string>>(Listbox);
   /** The options available in the listbox. */
-  options = viewChildren<Option<string>>(Option);
+  optionElements = viewChildren<Option<string>>(Option);
   /** A reference to the ng aria combobox. */
   combobox = viewChild<Combobox<string>>(Combobox);
 
   /** The icon that is displayed in the combobox. */
   displayIcon = computed(() => {
     const values = this.listbox()?.values() || [];
-    const label = this.labels.find((label) => label.value === values[0]);
-    return label ? label.icon : '';
+    const option = this.options.find((option) => option.value === values[0]);
+    return option ? option.icon : '';
   });
 
   /** The string that is displayed in the combobox. */
@@ -193,25 +193,25 @@ export class BasicMultiselectDemo {
     return `${values[0]} + ${values.length - 1} more`;
   });
 
-  /** The labels that are available for selection. */
-  labels = [
-    { value: 'Important', icon: 'tag' },
-    { value: 'Starred', icon: 'star' },
-    { value: 'Work', icon: 'briefcase' },
-    { value: 'Personal', icon: 'user' },
-    { value: 'To Do', icon: 'list-checks' },
-    { value: 'Later', icon: 'clock' },
-    { value: 'Read', icon: 'book-open' },
-    { value: 'Travel', icon: 'plane' },
+  /** The options that are available for selection. */
+  options = [
+    { value: 'important', label: 'Important', icon: 'tag' },
+    { value: 'starred', label: 'Starred', icon: 'star' },
+    { value: 'work', label: 'Work', icon: 'briefcase' },
+    { value: 'personal', label: 'Personal', icon: 'user' },
+    { value: 'todo', label: 'To Do', icon: 'list-checks' },
+    { value: 'later', label: 'Later', icon: 'clock' },
+    { value: 'read', label: 'Read', icon: 'book-open' },
+    { value: 'travel', label: 'Travel', icon: 'plane' },
   ];
 
   constructor() {
     // Scrolls to the active item when the active option changes.
     // The slight delay here is to ensure animations are done before scrolling.
     afterRenderEffect(() => {
-      const option = this.options().find((opt) => opt.active());
+      const active = this.optionElements().find((opt) => opt.active());
       setTimeout(
-        () => option?.element.scrollIntoView({ block: 'nearest' }),
+        () => active?.element.scrollIntoView({ block: 'nearest' }),
         50,
       );
     });
