@@ -5,6 +5,7 @@ export { ScAutocompleteIcon } from './autocomplete-icon';
 export { ScAutocompleteInput } from './autocomplete-input';
 export { ScAutocompleteItem } from './autocomplete-item';
 export { ScAutocompleteItemIndicator } from './autocomplete-item-indicator';
+export { ScAutocompleteItemLabel } from './autocomplete-item-label';
 export { ScAutocompleteList } from './autocomplete-list';
 export { ScAutocompletePopup } from './autocomplete-popup';
 export { ScAutocompletePortal } from './autocomplete-portal';

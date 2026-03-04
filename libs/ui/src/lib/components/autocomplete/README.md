@@ -23,6 +23,7 @@ A combobox-style autocomplete input with filtering, keyboard navigation, and ove
 | `ScAutocompletePopup`         | `div[scAutocompletePopup]`          | Directive | Popup container with styling                                    |
 | `ScAutocompleteList`          | `div[scAutocompleteList]`           | Directive | Listbox container, wraps `Listbox` from `@angular/aria`         |
 | `ScAutocompleteItem`          | `div[scAutocompleteItem]`           | Component | Option item, wraps `Option` from `@angular/aria`                |
+| `ScAutocompleteItemLabel`     | `span[scAutocompleteItemLabel]`     | Directive | Label text inside an item (applies `flex-1`)                    |
 | `ScAutocompleteItemIndicator` | `svg[scAutocompleteItemIndicator]`  | Directive | Check icon for selected state (sets `aria-hidden="true"`)       |
 | `ScAutocompleteEmpty`         | `div[scAutocompleteEmpty]`          | Directive | Empty state message when no results match                       |
 
@@ -44,7 +45,7 @@ A combobox-style autocomplete input with filtering, keyboard navigation, and ove
       <div scAutocompleteList>
         @for (country of countries(); track country) {
         <div scAutocompleteItem [value]="country" [label]="country">
-          <span class="flex-1">{{ country }}</span>
+          <span scAutocompleteItemLabel>{{ country }}</span>
           <svg siCheckIcon scAutocompleteItemIndicator></svg>
         </div>
         }
@@ -59,12 +60,12 @@ A combobox-style autocomplete input with filtering, keyboard navigation, and ove
 ```typescript
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal } from '@semantic-components/ui';
+import { ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteItemLabel, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal } from '@semantic-components/ui';
 import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-example',
-  imports: [FormsModule, ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal, SiSearchIcon, SiCheckIcon],
+  imports: [FormsModule, ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteItemLabel, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal, SiSearchIcon, SiCheckIcon],
   template: `
     <div scAutocomplete filterMode="auto-select" class="w-52">
       <div scAutocompleteGroup>
@@ -79,7 +80,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           <div scAutocompleteList>
             @for (item of items(); track item) {
               <div scAutocompleteItem [value]="item" [label]="item">
-                <span class="flex-1">{{ item }}</span>
+                <span scAutocompleteItemLabel>{{ item }}</span>
                 <svg siCheckIcon scAutocompleteItemIndicator></svg>
               </div>
             }
@@ -170,7 +171,7 @@ ScAutocomplete (root, wraps Combobox, owns overlay + scroll logic)
         ├── ScAutocompleteEmpty (empty state message)
         └── ScAutocompleteList (wraps Listbox)
             └── ScAutocompleteItem (wraps Option)
-                ├── [projected content]
+                ├── ScAutocompleteItemLabel (label text, flex-1)
                 └── ScAutocompleteItemIndicator (check icon, aria-hidden)
 ```
 
