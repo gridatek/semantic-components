@@ -21,6 +21,7 @@ Unlike `ScDialog` (which uses CDK Overlay), `ScNativeDialog` leverages the brows
 - `ScNativeDialogContent` - Directive on `ng-template` for lazy content rendering
 - `ScNativeDialogClose` - Button directive that closes the dialog
 - `ScNativeDialogHeader` - Layout directive for the header section
+- `ScNativeDialogBody` - Layout directive for the body/content section
 - `ScNativeDialogTitle` - Title directive with aria-labelledby binding
 - `ScNativeDialogDescription` - Description directive with aria-describedby binding
 - `ScNativeDialogFooter` - Layout directive for the footer section
@@ -41,7 +42,9 @@ Unlike `ScDialog` (which uses CDK Overlay), `ScNativeDialog` leverages the brows
         <h2 scNativeDialogTitle>Edit profile</h2>
         <p scNativeDialogDescription>Make changes to your profile here.</p>
       </div>
-      <!-- content -->
+      <div scNativeDialogBody>
+        <!-- content -->
+      </div>
       <div scNativeDialogFooter>
         <button scButton variant="outline" (click)="isOpen.set(false)">Cancel</button>
         <button scButton (click)="isOpen.set(false)">Save changes</button>

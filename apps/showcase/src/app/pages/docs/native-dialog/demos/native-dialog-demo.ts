@@ -7,6 +7,7 @@ import {
 import { ScButton } from '@semantic-components/ui';
 import {
   ScNativeDialog,
+  ScNativeDialogBody,
   ScNativeDialogClose,
   ScNativeDialogContent,
   ScNativeDialogDescription,
@@ -23,6 +24,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScButton,
     ScNativeDialog,
+    ScNativeDialogBody,
     ScNativeDialogClose,
     ScNativeDialogContent,
     ScNativeDialogDescription,
@@ -51,7 +53,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               Make changes to your profile here. Click save when you're done.
             </p>
           </div>
-          <div class="grid gap-4 py-4">
+          <div scNativeDialogBody class="grid gap-4">
             <div class="grid grid-cols-4 items-center gap-4">
               <label class="text-right text-sm font-medium" for="name">
                 Name

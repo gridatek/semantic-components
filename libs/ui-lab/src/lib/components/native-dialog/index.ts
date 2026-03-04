@@ -4,6 +4,7 @@ export { ScNativeDialog } from './native-dialog';
 export { ScNativeDialogContent } from './native-dialog-content';
 export { ScNativeDialogClose } from './native-dialog-close';
 export { ScNativeDialogHeader } from './native-dialog-header';
+export { ScNativeDialogBody } from './native-dialog-body';
 export { ScNativeDialogTitle } from './native-dialog-title';
 export { ScNativeDialogDescription } from './native-dialog-description';
 export { ScNativeDialogFooter } from './native-dialog-footer';
