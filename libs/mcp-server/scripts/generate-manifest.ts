@@ -100,25 +100,20 @@ function loadVisibleComponentPaths(): Set<string> {
   return new Set(allComponents.filter((c) => !c.hidden).map((c) => c.path));
 }
 
-function scanLibrary(
-  libDir: string,
-  packageName: string,
+function scanDirectory(
+  dir: string,
   visiblePaths: Set<string>,
-): LibraryEntry {
-  const componentsDir = join(libDir, 'src', 'lib', 'components');
-  const components: ComponentEntry[] = [];
+): ComponentEntry[] {
+  if (!existsSync(dir)) return [];
 
-  if (!existsSync(componentsDir)) {
-    return { name: packageName, components };
-  }
-
-  const entries = readdirSync(componentsDir, { withFileTypes: true });
+  const entries = readdirSync(dir, { withFileTypes: true });
+  const results: ComponentEntry[] = [];
 
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
     if (!visiblePaths.has(entry.name)) continue;
 
-    const compDir = join(componentsDir, entry.name);
+    const compDir = join(dir, entry.name);
     const readmePath = join(compDir, 'README.md');
     const readme = existsSync(readmePath)
       ? readFileSync(readmePath, 'utf-8')
@@ -126,12 +121,26 @@ function scanLibrary(
 
     const exports = resolveExportsRecursively(compDir);
 
-    components.push({
+    results.push({
       name: entry.name,
       readme,
       exports,
     });
   }
+
+  return results;
+}
+
+function scanLibrary(
+  libDir: string,
+  packageName: string,
+  visiblePaths: Set<string>,
+): LibraryEntry {
+  const srcLib = join(libDir, 'src', 'lib');
+  const components = [
+    ...scanDirectory(join(srcLib, 'components'), visiblePaths),
+    ...scanDirectory(join(srcLib, 'utilities'), visiblePaths),
+  ];
 
   return { name: packageName, components };
 }

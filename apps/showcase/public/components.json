@@ -41,6 +41,14 @@
     "category": "Layout"
   },
   {
+    "name": "Auto Select",
+    "path": "auto-select",
+    "description": "A directive that automatically selects input text on programmatic focus.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Utilities"
+  },
+  {
     "name": "Autocomplete",
     "path": "autocomplete",
     "description": "An input with autocomplete suggestions.",
@@ -104,6 +112,14 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Buttons & Actions"
+  },
+  {
+    "name": "Button Pattern",
+    "path": "button-pattern",
+    "description": "A directive that adds button behavior to non-button elements.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Utilities"
   },
   {
     "name": "Calendar",
@@ -223,7 +239,7 @@
     "description": "A composable directive for copying text to the clipboard with visual feedback.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Buttons & Actions"
+    "category": "Utilities"
   },
   {
     "name": "Countdown",
