@@ -18,7 +18,7 @@ import {
   ScSheetTitle,
   ScSheetTrigger,
 } from '@semantic-components/ui';
-import { ScInput } from '@semantic-components/ui';
+import { ScInput, ScSelectOnFocus } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -39,6 +39,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScFieldGroup,
     ScInput,
     ScLabel,
+    ScSelectOnFocus,
   ],
   template: `
     <div scSheetProvider>
@@ -60,7 +61,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           <div scFieldGroup>
             <div scField orientation="horizontal">
               <label scLabel>Name</label>
-              <input cdkFocusInitial scInput value="Pedro Duarte" />
+              <input cdkFocusInitial scSelectOnFocus scInput value="Pedro Duarte" />
             </div>
             <div scField orientation="horizontal">
               <label scLabel>Username</label>
