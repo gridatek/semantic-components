@@ -1,3 +1,4 @@
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
@@ -18,14 +19,20 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScBackdrop } from '../backdrop';
-import { ScTrapFocus } from '../focus-trap';
+import { ScFocusTrapCaretFix } from '../focus-trap';
 import { ScDrawerPortal } from './drawer-portal';
 
 export type ScDrawerDirection = 'top' | 'right' | 'bottom' | 'left';
 
 @Component({
   selector: 'div[scDrawerProvider]',
-  imports: [OverlayModule, ScBackdrop, ScTrapFocus, NgTemplateOutlet],
+  imports: [
+    OverlayModule,
+    ScBackdrop,
+    CdkTrapFocus,
+    ScFocusTrapCaretFix,
+    NgTemplateOutlet,
+  ],
   template: `
     <ng-content />
     <ng-template #overlayTemplate>
@@ -34,7 +41,7 @@ export type ScDrawerDirection = 'top' | 'right' | 'bottom' | 'left';
         [open]="open()"
         (animationComplete)="onBackdropAnimationComplete()"
       ></div>
-      <div scTrapFocus [cdkTrapFocusAutoCapture]="true">
+      <div cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
         <ng-container [ngTemplateOutlet]="drawerPortal().templateRef" />
       </div>
     </ng-template>

@@ -1,13 +1,16 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { Directive } from '@angular/core';
+import { Directive, inject } from '@angular/core';
 
 @Directive({
-  selector: '[scTrapFocus]',
-  exportAs: 'scTrapFocus',
+  selector: '[cdkTrapFocus]',
 })
-export class ScTrapFocus extends CdkTrapFocus {
-  override ngAfterContentInit(): void {
-    super.ngAfterContentInit();
+export class ScFocusTrapCaretFix {
+  private readonly focusTrap = inject(CdkTrapFocus);
+
+  ngAfterContentInit(): void {
+    if (!this.focusTrap.autoCapture) {
+      return;
+    }
 
     // On mobile, programmatic .focus() selects all text in inputs.
     // After CDK auto-capture focuses the first tabbable element,
