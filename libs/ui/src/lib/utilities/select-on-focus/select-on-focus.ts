@@ -3,9 +3,9 @@ import { DestroyRef, Directive, ElementRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
-  selector: 'input[scSelectOnProgrammaticFocus]',
+  selector: 'input[scSelectOnFocus]',
 })
-export class ScSelectOnProgrammaticFocus {
+export class ScSelectOnFocus {
   private readonly focusMonitor = inject(FocusMonitor);
   private readonly elementRef = inject(ElementRef<HTMLInputElement>);
 

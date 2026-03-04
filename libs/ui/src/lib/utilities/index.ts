@@ -1,2 +1,2 @@
-export * from './select-on-programmatic-focus';
+export * from './select-on-focus';
 export * from './copy-to-clipboard';

@@ -19,7 +19,7 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
-  ScSelectOnProgrammaticFocus,
+  ScSelectOnFocus,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -41,7 +41,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScInput,
     ScLabel,
     SiXIcon,
-    ScSelectOnProgrammaticFocus,
+    ScSelectOnFocus,
   ],
   template: `
     <div scDialogProvider [(open)]="isOpen">
@@ -64,7 +64,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                 <label scLabel>Name</label>
                 <input
                   cdkFocusInitial
-                  scSelectOnProgrammaticFocus
+                  scSelectOnFocus
                   scInput
                   value="Pedro Duarte"
                 />

@@ -8,17 +8,17 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 
 @Component({
-  selector: 'app-select-on-programmatic-focus-page',
+  selector: 'app-select-on-focus-page',
   imports: [TocHeading, ComponentBadges, ScHeading],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Select On Programmatic Focus</h1>
+        <h1 scHeading>Select On Focus</h1>
         <p class="text-muted-foreground">
           A directive that automatically selects input text on programmatic
           focus.
         </p>
-        <app-component-badges path="select-on-programmatic-focus" />
+        <app-component-badges path="select-on-focus" />
       </div>
 
       <section class="space-y-4">
@@ -54,13 +54,13 @@ import { TocHeading } from '../../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SelectOnProgrammaticFocusPage {
-  readonly usageCode = `import { ScSelectOnProgrammaticFocus } from '@semantic-components/ui';
+export default class SelectOnFocusPage {
+  readonly usageCode = `import { ScSelectOnFocus } from '@semantic-components/ui';
 
 @Component({
-  imports: [ScSelectOnProgrammaticFocus],
+  imports: [ScSelectOnFocus],
   template: \`
-    <input scSelectOnProgrammaticFocus value="Text to select" />
+    <input scSelectOnFocus value="Text to select" />
   \`,
 })
 export class MyComponent {}`;

@@ -8,7 +8,7 @@ import {
   ScField,
   ScFieldGroup,
   ScLabel,
-  ScSelectOnProgrammaticFocus,
+  ScSelectOnFocus,
   ScSheet,
   ScSheetClose,
   ScSheetDescription,
@@ -40,7 +40,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScFieldGroup,
     ScInput,
     ScLabel,
-    ScSelectOnProgrammaticFocus,
+    ScSelectOnFocus,
   ],
   template: `
     <div scSheetProvider>
@@ -64,7 +64,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               <label scLabel>Name</label>
               <input
                 cdkFocusInitial
-                scSelectOnProgrammaticFocus
+                scSelectOnFocus
                 scInput
                 value="Pedro Duarte"
               />
