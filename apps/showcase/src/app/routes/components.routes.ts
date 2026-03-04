@@ -363,6 +363,11 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/multi-select/multi-select-page'),
       },
       {
+        path: 'navbar',
+        title: 'Navbar - Semantic Components',
+        loadComponent: () => import('../pages/docs/navbar/navbar-page'),
+      },
+      {
         path: 'native-dialog',
         title: 'Native Dialog - Semantic Components',
         loadComponent: () =>
