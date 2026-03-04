@@ -10,12 +10,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type ScFocusOrigin = NonNullable<FocusOrigin>;
 
+const ALL_ORIGINS: ScFocusOrigin[] = ['program', 'keyboard', 'mouse', 'touch'];
+
 @Directive({
   selector: 'input[scSelectOnFocus]',
 })
 export class ScSelectOnFocus {
-  readonly origins = input<ScFocusOrigin[]>(['program'], {
+  readonly origins = input(ALL_ORIGINS, {
     alias: 'scSelectOnFocus',
+    transform: (value: ScFocusOrigin[] | '') =>
+      value === '' ? ALL_ORIGINS : value,
   });
 
   private readonly focusMonitor = inject(FocusMonitor);
