@@ -15,6 +15,18 @@ import {
   viewChild,
   viewChildren,
 } from '@angular/core';
+import {
+  SiBookOpenIcon,
+  SiBriefcaseIcon,
+  SiCheckIcon,
+  SiChevronDownIcon,
+  SiClockIcon,
+  SiListChecksIcon,
+  SiPlaneIcon,
+  SiStarIcon,
+  SiTagIcon,
+  SiUserIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-multiselect-demo',
@@ -26,32 +38,64 @@ import {
     Listbox,
     Option,
     OverlayModule,
+    SiBookOpenIcon,
+    SiBriefcaseIcon,
+    SiCheckIcon,
+    SiChevronDownIcon,
+    SiClockIcon,
+    SiListChecksIcon,
+    SiPlaneIcon,
+    SiStarIcon,
+    SiTagIcon,
+    SiUserIcon,
   ],
   template: `
-    <div ngCombobox readonly>
-      <div #origin class="select">
-        <span class="combobox-label">
-          <span
-            class="selected-label-icon material-symbols-outlined"
-            translate="no"
-            aria-hidden="true"
-          >
-            {{ displayIcon() }}
-          </span>
-          <span class="selected-label-text">{{ displayValue() }}</span>
+    <div ngCombobox readonly class="flex justify-center">
+      <div
+        #origin
+        class="bg-background text-foreground hover:bg-accent relative flex items-center rounded-lg border transition-colors"
+      >
+        <span
+          class="pointer-events-none absolute start-3 flex items-center gap-2"
+        >
+          @switch (displayIcon()) {
+            @case ('tag') {
+              <svg siTagIcon class="size-4"></svg>
+            }
+            @case ('star') {
+              <svg siStarIcon class="size-4"></svg>
+            }
+            @case ('briefcase') {
+              <svg siBriefcaseIcon class="size-4"></svg>
+            }
+            @case ('user') {
+              <svg siUserIcon class="size-4"></svg>
+            }
+            @case ('list-checks') {
+              <svg siListChecksIcon class="size-4"></svg>
+            }
+            @case ('clock') {
+              <svg siClockIcon class="size-4"></svg>
+            }
+            @case ('book-open') {
+              <svg siBookOpenIcon class="size-4"></svg>
+            }
+            @case ('plane') {
+              <svg siPlaneIcon class="size-4"></svg>
+            }
+          }
+          <span class="text-sm">{{ displayValue() }}</span>
         </span>
         <input
           aria-label="Label dropdown"
           placeholder="Select a label"
           ngComboboxInput
+          class="h-10 cursor-pointer border-none bg-transparent px-14 opacity-0 focus:outline-none"
         />
-        <span
-          class="example-arrow material-symbols-outlined"
-          translate="no"
-          aria-hidden="true"
-        >
-          arrow_drop_down
-        </span>
+        <svg
+          siChevronDownIcon
+          class="text-muted-foreground pointer-events-none absolute end-3 size-4 transition-transform duration-150"
+        ></svg>
       </div>
       <ng-template ngComboboxPopupContainer>
         <ng-template
@@ -62,25 +106,55 @@ import {
           }"
           [cdkConnectedOverlayOpen]="true"
         >
-          <div class="example-popup-container">
-            <div ngListbox multi>
+          <div
+            [class.invisible]="!combobox()?.expanded()"
+            [class.max-h-0]="!combobox()?.expanded()"
+            [class.overflow-hidden]="!combobox()?.expanded()"
+            class="bg-popover text-popover-foreground mt-2 w-full rounded-lg border p-1 shadow-md transition-all duration-150"
+          >
+            <div
+              ngListbox
+              multi
+              class="flex max-h-44 flex-col gap-0.5 overflow-auto"
+            >
               @for (label of labels; track label.value) {
-                <div ngOption [value]="label.value" [label]="label.value">
-                  <span
-                    class="example-option-icon material-symbols-outlined"
-                    translate="no"
-                    aria-hidden="true"
-                  >
-                    {{ label.icon }}
-                  </span>
-                  <span class="example-option-text">{{ label.value }}</span>
-                  <span
-                    class="example-option-check material-symbols-outlined"
-                    translate="no"
-                    aria-hidden="true"
-                  >
-                    check
-                  </span>
+                <div
+                  ngOption
+                  [value]="label.value"
+                  [label]="label.value"
+                  class="hover:bg-accent data-[active=true]:bg-accent aria-selected:bg-primary/10 aria-selected:text-primary flex cursor-pointer items-center rounded-md px-2 py-1.5 text-sm outline-none"
+                >
+                  @switch (label.icon) {
+                    @case ('tag') {
+                      <svg siTagIcon class="me-2 size-4"></svg>
+                    }
+                    @case ('star') {
+                      <svg siStarIcon class="me-2 size-4"></svg>
+                    }
+                    @case ('briefcase') {
+                      <svg siBriefcaseIcon class="me-2 size-4"></svg>
+                    }
+                    @case ('user') {
+                      <svg siUserIcon class="me-2 size-4"></svg>
+                    }
+                    @case ('list-checks') {
+                      <svg siListChecksIcon class="me-2 size-4"></svg>
+                    }
+                    @case ('clock') {
+                      <svg siClockIcon class="me-2 size-4"></svg>
+                    }
+                    @case ('book-open') {
+                      <svg siBookOpenIcon class="me-2 size-4"></svg>
+                    }
+                    @case ('plane') {
+                      <svg siPlaneIcon class="me-2 size-4"></svg>
+                    }
+                  }
+                  <span class="flex-1">{{ label.value }}</span>
+                  <svg
+                    siCheckIcon
+                    class="ms-2 size-4 [[ngOption]:not([aria-selected='true'])_&]:hidden"
+                  ></svg>
                 </div>
               }
             </div>
@@ -91,133 +165,6 @@ import {
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: `
-    @import url('https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined');
-    :host {
-      display: flex;
-      justify-content: center;
-      font-family: var(--inter-font);
-    }
-    .select {
-      display: flex;
-      position: relative;
-      align-items: center;
-      color: color-mix(in srgb, var(--hot-pink) 90%, var(--primary-contrast));
-      background-color: color-mix(in srgb, var(--hot-pink) 5%, transparent);
-      border-radius: 0.5rem;
-      border: 1px solid color-mix(in srgb, var(--hot-pink) 80%, transparent);
-    }
-    .select:hover {
-      background-color: color-mix(in srgb, var(--hot-pink) 15%, transparent);
-    }
-    .select:has([ngComboboxInput][aria-disabled='true']) {
-      opacity: 0.6;
-      cursor: default;
-    }
-    .selected-label-icon {
-      font-size: 1.25rem;
-    }
-    [ngComboboxInput] {
-      opacity: 0;
-      cursor: pointer;
-      padding: 0 3.5rem;
-      height: 2.5rem;
-      border: none;
-    }
-    [ngCombobox]:focus-within .select {
-      outline: 2px solid color-mix(in srgb, var(--hot-pink) 50%, transparent);
-    }
-    .combobox-label {
-      gap: 1rem;
-      left: 1rem;
-      display: flex;
-      position: absolute;
-      align-items: center;
-      pointer-events: none;
-    }
-    .example-arrow {
-      right: 1rem;
-      position: absolute;
-      pointer-events: none;
-      transition: transform 150ms ease-in-out;
-    }
-    [ngComboboxInput][aria-expanded='true'] ~ .example-arrow {
-      transform: rotate(180deg);
-    }
-    .example-popup-container {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 8px;
-      border-radius: 0.5rem;
-      background-color: var(--septenary-contrast);
-      font-size: 0.9rem;
-      max-height: 11rem;
-      opacity: 1;
-      visibility: visible;
-      transition:
-        max-height 150ms ease-out,
-        visibility 0s,
-        opacity 25ms ease-out;
-    }
-    [ngListbox] {
-      gap: 2px;
-      height: 100%;
-      display: flex;
-      overflow: auto;
-      flex-direction: column;
-    }
-    [ngCombobox]:has([ngComboboxInput][aria-expanded='false'])
-      .example-popup-container {
-      max-height: 0;
-      opacity: 0;
-      visibility: hidden;
-      transition:
-        max-height 150ms ease-in,
-        visibility 0s 150ms,
-        opacity 150ms ease-in;
-    }
-    [ngCombobox]:has([ngComboboxInput][aria-expanded='true']) [ngListbox] {
-      display: flex;
-    }
-    [ngOption] {
-      display: flex;
-      cursor: pointer;
-      align-items: center;
-      margin: 1px;
-      padding: 0 1rem;
-      min-height: 2.25rem;
-      border-radius: 0.5rem;
-    }
-    [ngOption]:hover {
-      background-color: color-mix(
-        in srgb,
-        var(--primary-contrast) 5%,
-        transparent
-      );
-    }
-    [ngOption][data-active='true'] {
-      outline-offset: -2px;
-      outline: 2px solid color-mix(in srgb, var(--hot-pink) 50%, transparent);
-    }
-    [ngOption][aria-selected='true'] {
-      color: var(--hot-pink);
-      background-color: color-mix(in srgb, var(--hot-pink) 5%, transparent);
-    }
-    .example-option-icon {
-      font-size: 1.25rem;
-      padding-right: 1rem;
-    }
-    [ngOption]:not([aria-selected='true']) .example-option-check {
-      display: none;
-    }
-    .example-option-icon,
-    .example-option-check {
-      font-size: 0.9rem;
-    }
-    .example-option-text {
-      flex: 1;
-    }
-  `,
 })
 export class BasicMultiselectDemo {
   /** The combobox listbox popup. */
@@ -226,12 +173,14 @@ export class BasicMultiselectDemo {
   options = viewChildren<Option<string>>(Option);
   /** A reference to the ng aria combobox. */
   combobox = viewChild<Combobox<string>>(Combobox);
+
   /** The icon that is displayed in the combobox. */
   displayIcon = computed(() => {
     const values = this.listbox()?.values() || [];
     const label = this.labels.find((label) => label.value === values[0]);
     return label ? label.icon : '';
   });
+
   /** The string that is displayed in the combobox. */
   displayValue = computed(() => {
     const values = this.listbox()?.values() || [];
@@ -243,17 +192,19 @@ export class BasicMultiselectDemo {
     }
     return `${values[0]} + ${values.length - 1} more`;
   });
+
   /** The labels that are available for selection. */
   labels = [
-    { value: 'Important', icon: 'label' },
+    { value: 'Important', icon: 'tag' },
     { value: 'Starred', icon: 'star' },
-    { value: 'Work', icon: 'work' },
-    { value: 'Personal', icon: 'person' },
-    { value: 'To Do', icon: 'checklist' },
-    { value: 'Later', icon: 'schedule' },
-    { value: 'Read', icon: 'menu_book' },
-    { value: 'Travel', icon: 'flight' },
+    { value: 'Work', icon: 'briefcase' },
+    { value: 'Personal', icon: 'user' },
+    { value: 'To Do', icon: 'list-checks' },
+    { value: 'Later', icon: 'clock' },
+    { value: 'Read', icon: 'book-open' },
+    { value: 'Travel', icon: 'plane' },
   ];
+
   constructor() {
     // Scrolls to the active item when the active option changes.
     // The slight delay here is to ensure animations are done before scrolling.
