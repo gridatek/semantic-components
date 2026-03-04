@@ -40,7 +40,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
 - Set `encapsulation: ViewEncapsulation.None` in `@Component` decorator
 - Prefer inline templates for small components
-- Prefer Reactive forms instead of Template-driven ones
+- Prefer Signal forms (`@angular/forms/signals`) over Reactive forms and Template-driven forms
 - Do NOT use `ngClass`, use `class` bindings instead
 - Do NOT use `ngStyle`, use `style` bindings instead
 - When using external templates/styles, use paths relative to the component TS file.
