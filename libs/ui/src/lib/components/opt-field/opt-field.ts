@@ -11,8 +11,8 @@ import {
   signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from '@semantic-components/ui';
-import { SC_FIELD } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { SC_FIELD } from '../field';
 import { ScOptFieldSlot } from './opt-field-slot';
 
 @Directive({

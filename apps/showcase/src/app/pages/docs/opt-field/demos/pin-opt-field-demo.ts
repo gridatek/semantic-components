@@ -8,7 +8,7 @@ import {
   ScOptField,
   ScOptFieldSlot,
   ScOptFieldSlotGroup,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-pin-opt-field-demo',

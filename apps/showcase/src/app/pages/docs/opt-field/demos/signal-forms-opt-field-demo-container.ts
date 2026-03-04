@@ -35,7 +35,7 @@ import {
   ScOptFieldSeparator,
   ScOptFieldSlot,
   ScOptFieldSlotGroup,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 interface OtpFormModel {
   otp: string;

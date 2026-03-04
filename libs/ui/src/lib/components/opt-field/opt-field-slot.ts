@@ -8,7 +8,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScOptField } from './opt-field';
 import { ScOptFieldSlotCaret } from './opt-field-slot-caret';
 import { ScOptFieldSlotChar } from './opt-field-slot-char';

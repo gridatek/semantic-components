@@ -586,7 +586,7 @@
     "path": "opt-field",
     "description": "An input for entering one-time passwords.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {
