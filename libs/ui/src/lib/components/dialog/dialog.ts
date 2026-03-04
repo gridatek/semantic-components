@@ -50,7 +50,7 @@ export class ScDialog {
 
   protected readonly class = computed(() =>
     cn(
-      'relative bg-background ring-foreground/10 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-xl p-4 text-sm ring-1 duration-100 outline-none sm:max-w-sm',
+      'relative bg-background ring-foreground/10 grid w-full max-w-[calc(100vw-2rem)] gap-4 rounded-xl p-4 text-sm ring-1 duration-100 outline-none sm:max-w-sm',
       'data-idle:opacity-0',
       'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
       'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
