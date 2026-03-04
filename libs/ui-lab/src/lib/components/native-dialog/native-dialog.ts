@@ -48,7 +48,7 @@ export class ScNativeDialog {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-background text-foreground relative w-full max-w-sm rounded-xl border p-4 shadow-lg backdrop:bg-black/50',
+      'bg-background text-foreground fixed inset-0 m-auto w-full max-w-sm rounded-xl border p-4 shadow-lg backdrop:bg-black/50',
       'focus:outline-none',
       this.classInput(),
     ),
