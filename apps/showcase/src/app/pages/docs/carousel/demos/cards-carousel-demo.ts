@@ -11,6 +11,7 @@ import {
   ScCarouselTrack,
   ScCarouselViewport,
 } from '@semantic-components/carousel';
+import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
@@ -25,22 +26,26 @@ import {
     ScCarouselItem,
     ScCarouselPrevious,
     ScCarouselNext,
+    ScCard,
+    ScCardBody,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: `
-    <div class="mx-auto w-full max-w-sm">
+    <div class="mx-auto w-full max-w-[12rem] sm:max-w-xs">
       <div scCarousel aria-label="Cards carousel" class="w-full">
         <div scCarouselViewport>
           <div scCarouselTrack>
             @for (card of cards; track card.title) {
               <div scCarouselItem>
                 <div class="p-1">
-                  <div class="bg-card rounded-lg border p-6">
-                    <h4 class="font-semibold">{{ card.title }}</h4>
-                    <p class="text-muted-foreground mt-2 text-sm">
-                      {{ card.description }}
-                    </p>
+                  <div scCard>
+                    <div scCardBody class="p-6">
+                      <h4 class="font-semibold">{{ card.title }}</h4>
+                      <p class="text-muted-foreground mt-2 text-sm">
+                        {{ card.description }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

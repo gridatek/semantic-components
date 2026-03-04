@@ -39,8 +39,8 @@ export class ScCarouselPrevious {
       buttonVariants({ variant: this.variant(), size: this.size() }),
       'rounded-full absolute touch-manipulation',
       isHorizontal
-        ? 'top-1/2 -left-12 -translate-y-1/2'
-        : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+        ? '-start-12 top-1/2 -translate-y-1/2'
+        : 'start-1/2 -top-12 -translate-x-1/2 rotate-90 rtl:translate-x-1/2',
       this.classInput(),
     );
   });

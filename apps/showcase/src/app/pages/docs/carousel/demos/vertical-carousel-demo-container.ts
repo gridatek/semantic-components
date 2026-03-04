@@ -36,6 +36,7 @@ import {
   ScCarouselTrack,
   ScCarouselViewport,
 } from '@semantic-components/carousel';
+import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
@@ -50,11 +51,13 @@ import {
     ScCarouselItem,
     ScCarouselPrevious,
     ScCarouselNext,
+    ScCard,
+    ScCardBody,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: \`
-    <div class="mx-auto flex h-[350px] w-full max-w-xs items-center">
+    <div class="mx-auto w-full max-w-xs">
       <div
         scCarousel
         aria-label="Vertical carousel"
@@ -67,10 +70,10 @@ import {
             @for (index of items; track index) {
               <div scCarouselItem class="basis-1/2 pt-1">
                 <div class="p-1">
-                  <div
-                    class="bg-card flex items-center justify-center rounded-lg border p-6"
-                  >
-                    <span class="text-3xl font-semibold">{{ index }}</span>
+                  <div scCard>
+                    <div scCardBody class="flex items-center justify-center p-6">
+                      <span class="text-3xl font-semibold">{{ index }}</span>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -18,7 +18,7 @@ export class ScCarouselTrack {
     const isHorizontal = this.carousel.orientation() === 'horizontal';
     return cn(
       'flex',
-      isHorizontal ? '-ml-4' : '-mt-4 flex-col',
+      isHorizontal ? '-ms-4' : '-mt-4 flex-col',
       this.classInput(),
     );
   });
