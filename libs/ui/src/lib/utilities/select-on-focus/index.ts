@@ -1,1 +1,1 @@
-export { ScSelectOnFocus } from './select-on-focus';
+export { ScSelectOnFocus, type ScFocusOrigin } from './select-on-focus';
