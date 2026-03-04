@@ -33,6 +33,7 @@ import { ScButton } from '@semantic-components/ui';
 import {
   ScNativeDialog,
   ScNativeDialogClose,
+  ScNativeDialogContent,
   ScNativeDialogDescription,
   ScNativeDialogFooter,
   ScNativeDialogHeader,
@@ -48,6 +49,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScButton,
     ScNativeDialog,
     ScNativeDialogClose,
+    ScNativeDialogContent,
     ScNativeDialogDescription,
     ScNativeDialogFooter,
     ScNativeDialogHeader,
@@ -63,44 +65,46 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       </button>
 
       <dialog scNativeDialog class="sm:max-w-sm">
-        <button scNativeDialogClose>
-          <svg siXIcon class="size-4"></svg>
-          <span class="sr-only">Close</span>
-        </button>
-        <div scNativeDialogHeader>
-          <h2 scNativeDialogTitle>Edit profile</h2>
-          <p scNativeDialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </p>
-        </div>
-        <div class="grid gap-4 py-4">
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label class="text-right text-sm font-medium" for="name">
-              Name
-            </label>
-            <input
-              class="border-input bg-background col-span-3 rounded-md border px-3 py-2 text-sm"
-              id="name"
-              value="Pedro Duarte"
-            />
-          </div>
-          <div class="grid grid-cols-4 items-center gap-4">
-            <label class="text-right text-sm font-medium" for="username">
-              Username
-            </label>
-            <input
-              class="border-input bg-background col-span-3 rounded-md border px-3 py-2 text-sm"
-              id="username"
-              value="@peduarte"
-            />
-          </div>
-        </div>
-        <div scNativeDialogFooter>
-          <button scButton variant="outline" (click)="isOpen.set(false)">
-            Cancel
+        <ng-template scNativeDialogContent>
+          <button scNativeDialogClose>
+            <svg siXIcon class="size-4"></svg>
+            <span class="sr-only">Close</span>
           </button>
-          <button scButton (click)="isOpen.set(false)">Save changes</button>
-        </div>
+          <div scNativeDialogHeader>
+            <h2 scNativeDialogTitle>Edit profile</h2>
+            <p scNativeDialogDescription>
+              Make changes to your profile here. Click save when you're done.
+            </p>
+          </div>
+          <div class="grid gap-4 py-4">
+            <div class="grid grid-cols-4 items-center gap-4">
+              <label class="text-right text-sm font-medium" for="name">
+                Name
+              </label>
+              <input
+                class="border-input bg-background col-span-3 rounded-md border px-3 py-2 text-sm"
+                id="name"
+                value="Pedro Duarte"
+              />
+            </div>
+            <div class="grid grid-cols-4 items-center gap-4">
+              <label class="text-right text-sm font-medium" for="username">
+                Username
+              </label>
+              <input
+                class="border-input bg-background col-span-3 rounded-md border px-3 py-2 text-sm"
+                id="username"
+                value="@peduarte"
+              />
+            </div>
+          </div>
+          <div scNativeDialogFooter>
+            <button scButton variant="outline" (click)="isOpen.set(false)">
+              Cancel
+            </button>
+            <button scButton (click)="isOpen.set(false)">Save changes</button>
+          </div>
+        </ng-template>
       </dialog>
     </div>
   \`,
