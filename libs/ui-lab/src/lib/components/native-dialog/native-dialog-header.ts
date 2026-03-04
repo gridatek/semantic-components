@@ -12,6 +12,6 @@ export class ScNativeDialogHeader {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex flex-col gap-2', this.classInput()),
+    cn('gap-2 flex flex-col', this.classInput()),
   );
 }

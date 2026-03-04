@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
@@ -5,26 +6,30 @@ import {
   effect,
   inject,
   input,
-  model,
-  output,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { ScNativeDialogProvider } from './native-dialog-provider';
 
 @Directive({
   selector: 'dialog[scNativeDialog]',
   host: {
     'data-slot': 'native-dialog',
     '[class]': 'class()',
+    '[attr.aria-labelledby]': 'titleId',
+    '[attr.aria-describedby]': 'descriptionId',
     '(close)': 'onClose()',
     '(click)': 'onBackdropClick($event)',
   },
 })
 export class ScNativeDialog {
   private readonly elementRef = inject(ElementRef<HTMLDialogElement>);
+  readonly dialogProvider = inject(ScNativeDialogProvider);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly open = model<boolean>(false);
-  readonly closed = output<void>();
+
+  readonly dialogId = inject(_IdGenerator).getId('sc-native-dialog-');
+  readonly titleId = `${this.dialogId}-title`;
+  readonly descriptionId = `${this.dialogId}-description`;
 
   protected readonly class = computed(() =>
     cn(
@@ -37,7 +42,7 @@ export class ScNativeDialog {
   constructor() {
     effect(() => {
       const dialogEl = this.elementRef.nativeElement;
-      if (this.open()) {
+      if (this.dialogProvider.open()) {
         if (!dialogEl.open) {
           dialogEl.showModal();
         }
@@ -50,8 +55,7 @@ export class ScNativeDialog {
   }
 
   protected onClose(): void {
-    this.open.set(false);
-    this.closed.emit();
+    this.dialogProvider.open.set(false);
   }
 
   protected onBackdropClick(event: MouseEvent): void {
