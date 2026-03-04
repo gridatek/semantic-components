@@ -40,6 +40,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/aspect-ratio/aspect-ratio-page'),
       },
       {
+        path: 'auto-select',
+        title: 'Auto Select - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/auto-select/auto-select-page'),
+      },
+      {
         path: 'autocomplete',
         title: 'Autocomplete - Semantic Components',
         loadComponent: () =>
@@ -82,6 +88,12 @@ export const componentsRoutes: Route[] = [
         title: 'Button Group - Semantic Components',
         loadComponent: () =>
           import('../pages/docs/button-group/button-group-page'),
+      },
+      {
+        path: 'button-pattern',
+        title: 'Button Pattern - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/button-pattern/button-pattern-page'),
       },
       {
         path: 'calendar',
