@@ -2227,6 +2227,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/multiselect',
+    children: [
+      {
+        path: 'basic-multiselect-demo',
+        loadComponent: () =>
+          import('../pages/docs/multiselect/demos/basic-multiselect-demo').then(
+            (m) => m.BasicMultiselectDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/native-select',
     children: [
       {
