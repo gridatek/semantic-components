@@ -5,29 +5,10 @@ import {
 } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
-import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicMultiSelectDemoContainer } from './demos/basic-multi-select-demo-container';
-import { CountMultiSelectDemoContainer } from './demos/count-multi-select-demo-container';
-import { DisabledMultiSelectDemoContainer } from './demos/disabled-multi-select-demo-container';
-import { DisabledOptionsMultiSelectDemoContainer } from './demos/disabled-options-multi-select-demo-container';
-import { FormMultiSelectDemoContainer } from './demos/form-multi-select-demo-container';
-import { NosearchMultiSelectDemoContainer } from './demos/nosearch-multi-select-demo-container';
-import { SelectallMultiSelectDemoContainer } from './demos/selectall-multi-select-demo-container';
 
 @Component({
   selector: 'app-multi-select-page',
-  imports: [
-    BasicMultiSelectDemoContainer,
-    SelectallMultiSelectDemoContainer,
-    CountMultiSelectDemoContainer,
-    DisabledOptionsMultiSelectDemoContainer,
-    NosearchMultiSelectDemoContainer,
-    DisabledMultiSelectDemoContainer,
-    FormMultiSelectDemoContainer,
-    TocHeading,
-    ComponentBadges,
-    ScHeading,
-  ],
+  imports: [ComponentBadges, ScHeading],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -38,17 +19,6 @@ import { SelectallMultiSelectDemoContainer } from './demos/selectall-multi-selec
         </p>
         <app-component-badges path="multi-select" />
       </div>
-
-      <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
-        <app-basic-multi-select-demo-container />
-        <app-selectall-multi-select-demo-container />
-        <app-count-multi-select-demo-container />
-        <app-disabled-options-multi-select-demo-container />
-        <app-nosearch-multi-select-demo-container />
-        <app-disabled-multi-select-demo-container />
-        <app-form-multi-select-demo-container />
-      </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

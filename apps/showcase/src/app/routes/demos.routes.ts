@@ -2227,60 +2227,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/multi-select',
-    children: [
-      {
-        path: 'basic-multi-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/multi-select/demos/basic-multi-select-demo').then(
-            (m) => m.BasicMultiSelectDemo,
-          ),
-      },
-      {
-        path: 'selectall-multi-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/multi-select/demos/selectall-multi-select-demo').then(
-            (m) => m.SelectallMultiSelectDemo,
-          ),
-      },
-      {
-        path: 'count-multi-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/multi-select/demos/count-multi-select-demo').then(
-            (m) => m.CountMultiSelectDemo,
-          ),
-      },
-      {
-        path: 'disabled-options-multi-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/multi-select/demos/disabled-options-multi-select-demo').then(
-            (m) => m.DisabledOptionsMultiSelectDemo,
-          ),
-      },
-      {
-        path: 'nosearch-multi-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/multi-select/demos/nosearch-multi-select-demo').then(
-            (m) => m.NosearchMultiSelectDemo,
-          ),
-      },
-      {
-        path: 'disabled-multi-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/multi-select/demos/disabled-multi-select-demo').then(
-            (m) => m.DisabledMultiSelectDemo,
-          ),
-      },
-      {
-        path: 'form-multi-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/multi-select/demos/form-multi-select-demo').then(
-            (m) => m.FormMultiSelectDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/native-select',
     children: [
       {
