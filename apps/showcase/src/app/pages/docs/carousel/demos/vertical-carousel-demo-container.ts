@@ -89,6 +89,7 @@ import {
         <span class="sr-only">Next slide</span>
       </button>
     </div>
+    </div>
   \`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
