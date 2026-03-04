@@ -1,16 +1,16 @@
-# Auto Select
+# Select On Programmatic Focus
 
 A directive that automatically selects the text content of an input when it receives programmatic focus, using Angular CDK's `FocusMonitor`.
 
 ## Import
 
 ```typescript
-import { ScAutoSelect } from '@semantic-components/ui';
+import { ScSelectOnProgrammaticFocus } from '@semantic-components/ui';
 ```
 
 ## API
 
-- **Selector**: `input[scAutoSelect]`
+- **Selector**: `input[scSelectOnProgrammaticFocus]`
 
 The directive has no inputs or outputs. It monitors the host input for programmatic focus and selects its text if the value is non-empty.
 
@@ -19,7 +19,7 @@ The directive has no inputs or outputs. It monitors the host input for programma
 ### Basic
 
 ```html
-<input scAutoSelect value="Select me on focus" />
+<input scSelectOnProgrammaticFocus value="Select me on focus" />
 ```
 
 ### With cdkFocusInitial
@@ -29,7 +29,7 @@ Commonly used with `cdkFocusInitial` inside dialogs so the input text is automat
 ```html
 <dialog scNativeDialog>
   <ng-template scNativeDialogContent>
-    <input cdkFocusInitial scAutoSelect value="Pedro Duarte" />
+    <input cdkFocusInitial scSelectOnProgrammaticFocus value="Pedro Duarte" />
   </ng-template>
 </dialog>
 ```

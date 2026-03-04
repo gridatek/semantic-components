@@ -41,8 +41,8 @@
     "category": "Layout"
   },
   {
-    "name": "Auto Select",
-    "path": "auto-select",
+    "name": "Select On Programmatic Focus",
+    "path": "select-on-programmatic-focus",
     "description": "A directive that automatically selects input text on programmatic focus.",
     "status": "Experimental",
     "library": "ui",

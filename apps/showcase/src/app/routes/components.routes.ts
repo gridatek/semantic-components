@@ -40,10 +40,10 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/aspect-ratio/aspect-ratio-page'),
       },
       {
-        path: 'auto-select',
-        title: 'Auto Select - Semantic Components',
+        path: 'select-on-programmatic-focus',
+        title: 'Select On Programmatic Focus - Semantic Components',
         loadComponent: () =>
-          import('../pages/docs/auto-select/auto-select-page'),
+          import('../pages/docs/select-on-programmatic-focus/select-on-programmatic-focus-page'),
       },
       {
         path: 'autocomplete',
