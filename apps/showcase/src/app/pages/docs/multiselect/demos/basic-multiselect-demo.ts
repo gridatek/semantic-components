@@ -1,6 +1,5 @@
 import {
   Combobox,
-  ComboboxInput,
   ComboboxPopup,
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
@@ -16,11 +15,11 @@ import {
   viewChild,
   viewChildren,
 } from '@angular/core';
+import { ScMultiselectTrigger } from '@semantic-components/ui-lab';
 import {
   SiBookOpenIcon,
   SiBriefcaseIcon,
   SiCheckIcon,
-  SiChevronDownIcon,
   SiClockIcon,
   SiListChecksIcon,
   SiPlaneIcon,
@@ -33,16 +32,15 @@ import {
   selector: 'app-basic-multiselect-demo',
   imports: [
     Combobox,
-    ComboboxInput,
     ComboboxPopup,
     ComboboxPopupContainer,
     Listbox,
     Option,
     OverlayModule,
+    ScMultiselectTrigger,
     SiBookOpenIcon,
     SiBriefcaseIcon,
     SiCheckIcon,
-    SiChevronDownIcon,
     SiClockIcon,
     SiListChecksIcon,
     SiPlaneIcon,
@@ -53,10 +51,7 @@ import {
   ],
   template: `
     <div ngCombobox readonly class="flex justify-center">
-      <div
-        #origin
-        class="bg-background text-foreground hover:bg-accent relative flex items-center rounded-lg border transition-colors"
-      >
+      <div scMultiselectTrigger #trigger="scMultiselectTrigger">
         <span
           class="pointer-events-none absolute start-3 flex items-center gap-2 [&_svg]:size-4"
         >
@@ -67,21 +62,11 @@ import {
           }
           <span class="text-sm">{{ displayValue() }}</span>
         </span>
-        <input
-          aria-label="Label dropdown"
-          placeholder="Select a label"
-          ngComboboxInput
-          class="h-10 cursor-pointer border-none bg-transparent px-14 opacity-0 focus:outline-none"
-        />
-        <svg
-          siChevronDownIcon
-          class="text-muted-foreground pointer-events-none absolute end-3 size-4 transition-transform duration-150"
-        ></svg>
       </div>
       <ng-template ngComboboxPopupContainer>
         <ng-template
           [cdkConnectedOverlay]="{
-            origin,
+            origin: trigger.elementRef,
             usePopover: 'inline',
             matchWidth: true,
           }"
