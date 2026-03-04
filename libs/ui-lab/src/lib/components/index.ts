@@ -4,6 +4,7 @@ export * from './barcode-scanner';
 export * from './button-pattern';
 export * from './chart';
 export * from './native-checkbox';
+export * from './native-dialog';
 export * from './color-picker';
 export * from './combobox';
 export * from './command';

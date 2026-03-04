@@ -1,0 +1,17 @@
+import { Directive, computed, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
+
+@Directive({
+  selector: 'div[scNativeDialogHeader]',
+  host: {
+    'data-slot': 'native-dialog-header',
+    '[class]': 'class()',
+  },
+})
+export class ScNativeDialogHeader {
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly class = computed(() =>
+    cn('gap-2 flex flex-col', this.classInput()),
+  );
+}

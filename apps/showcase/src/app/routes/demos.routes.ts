@@ -1095,6 +1095,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/native-dialog',
+    children: [
+      {
+        path: 'native-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-dialog/demos/native-dialog-demo').then(
+            (m) => m.NativeDialogDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/diff-viewer',
     children: [
       {
