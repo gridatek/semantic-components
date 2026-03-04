@@ -6,6 +6,7 @@ import {
 } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -48,6 +49,7 @@ import {
     SiStarIcon,
     SiTagIcon,
     SiUserIcon,
+    NgTemplateOutlet,
   ],
   template: `
     <div ngCombobox readonly class="flex justify-center">
@@ -56,33 +58,12 @@ import {
         class="bg-background text-foreground hover:bg-accent relative flex items-center rounded-lg border transition-colors"
       >
         <span
-          class="pointer-events-none absolute start-3 flex items-center gap-2"
+          class="pointer-events-none absolute start-3 flex items-center gap-2 [&_svg]:size-4"
         >
-          @switch (displayIcon()) {
-            @case ('tag') {
-              <svg siTagIcon class="size-4"></svg>
-            }
-            @case ('star') {
-              <svg siStarIcon class="size-4"></svg>
-            }
-            @case ('briefcase') {
-              <svg siBriefcaseIcon class="size-4"></svg>
-            }
-            @case ('user') {
-              <svg siUserIcon class="size-4"></svg>
-            }
-            @case ('list-checks') {
-              <svg siListChecksIcon class="size-4"></svg>
-            }
-            @case ('clock') {
-              <svg siClockIcon class="size-4"></svg>
-            }
-            @case ('book-open') {
-              <svg siBookOpenIcon class="size-4"></svg>
-            }
-            @case ('plane') {
-              <svg siPlaneIcon class="size-4"></svg>
-            }
+          @if (displayIcon(); as icon) {
+            <ng-container
+              *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+            ></ng-container>
           }
           <span class="text-sm">{{ displayValue() }}</span>
         </span>
@@ -122,38 +103,15 @@ import {
                   ngOption
                   [value]="option.value"
                   [label]="option.value"
-                  class="hover:bg-accent data-[active=true]:bg-accent aria-selected:bg-primary/10 aria-selected:text-primary flex cursor-pointer items-center rounded-md px-2 py-1.5 text-sm outline-none"
+                  class="hover:bg-accent data-[active=true]:bg-accent aria-selected:bg-primary/10 aria-selected:text-primary flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none [&_svg]:size-4"
                 >
-                  @switch (option.icon) {
-                    @case ('tag') {
-                      <svg siTagIcon class="me-2 size-4"></svg>
-                    }
-                    @case ('star') {
-                      <svg siStarIcon class="me-2 size-4"></svg>
-                    }
-                    @case ('briefcase') {
-                      <svg siBriefcaseIcon class="me-2 size-4"></svg>
-                    }
-                    @case ('user') {
-                      <svg siUserIcon class="me-2 size-4"></svg>
-                    }
-                    @case ('list-checks') {
-                      <svg siListChecksIcon class="me-2 size-4"></svg>
-                    }
-                    @case ('clock') {
-                      <svg siClockIcon class="me-2 size-4"></svg>
-                    }
-                    @case ('book-open') {
-                      <svg siBookOpenIcon class="me-2 size-4"></svg>
-                    }
-                    @case ('plane') {
-                      <svg siPlaneIcon class="me-2 size-4"></svg>
-                    }
-                  }
+                  <ng-container
+                    *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+                  ></ng-container>
                   <span class="flex-1">{{ option.value }}</span>
                   <svg
                     siCheckIcon
-                    class="ms-2 size-4 [[ngOption]:not([aria-selected='true'])_&]:hidden"
+                    class="[[ngOption]:not([aria-selected='true'])_&]:hidden"
                   ></svg>
                 </div>
               }
@@ -162,6 +120,35 @@ import {
         </ng-template>
       </ng-template>
     </div>
+
+    <ng-template #iconTmpl let-icon="icon">
+      @switch (icon) {
+        @case ('tag') {
+          <svg siTagIcon></svg>
+        }
+        @case ('star') {
+          <svg siStarIcon></svg>
+        }
+        @case ('briefcase') {
+          <svg siBriefcaseIcon></svg>
+        }
+        @case ('user') {
+          <svg siUserIcon></svg>
+        }
+        @case ('list-checks') {
+          <svg siListChecksIcon></svg>
+        }
+        @case ('clock') {
+          <svg siClockIcon></svg>
+        }
+        @case ('book-open') {
+          <svg siBookOpenIcon></svg>
+        }
+        @case ('plane') {
+          <svg siPlaneIcon></svg>
+        }
+      }
+    </ng-template>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
