@@ -18,8 +18,11 @@ const ALL_ORIGINS: ScFocusOrigin[] = ['program', 'keyboard', 'mouse', 'touch'];
 export class ScSelectOnFocus {
   readonly origins = input(ALL_ORIGINS, {
     alias: 'scSelectOnFocus',
-    transform: (value: ScFocusOrigin[] | '') =>
-      value === '' ? ALL_ORIGINS : value,
+    transform: (value: ScFocusOrigin[] | ScFocusOrigin | '') => {
+      if (value === '') return ALL_ORIGINS;
+      if (Array.isArray(value)) return value;
+      return [value];
+    },
   });
 
   private readonly focusMonitor = inject(FocusMonitor);

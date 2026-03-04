@@ -84,7 +84,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                 <label scLabel>Name</label>
                 <input
                   cdkFocusInitial
-                  [scSelectOnFocus]="['program']"
+                  scSelectOnFocus="program"
                   scInput
                   value="Pedro Duarte"
                 />
