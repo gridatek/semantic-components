@@ -13,22 +13,18 @@ test.describe('Native Dialog Demo', () => {
     const dialog = page.locator('dialog[open]');
     await expect(dialog).toBeVisible();
 
-    const dialogBox = (await dialog.boundingBox()) as {
-      x: number;
-      y: number;
-      width: number;
-      height: number;
-    };
-    const viewport = page.viewportSize() as { width: number; height: number };
-
-    const dialogCenterX = dialogBox.x + dialogBox.width / 2;
-    const dialogCenterY = dialogBox.y + dialogBox.height / 2;
-
-    const viewportCenterX = viewport.width / 2;
-    const viewportCenterY = viewport.height / 2;
+    const offset = await dialog.evaluate((el) => {
+      const rect = el.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      return {
+        dx: Math.abs(centerX - window.innerWidth / 2),
+        dy: Math.abs(centerY - window.innerHeight / 2),
+      };
+    });
 
     // Allow a small tolerance (2px) for rounding
-    expect(Math.abs(dialogCenterX - viewportCenterX)).toBeLessThanOrEqual(2);
-    expect(Math.abs(dialogCenterY - viewportCenterY)).toBeLessThanOrEqual(2);
+    expect(offset.dx).toBeLessThanOrEqual(2);
+    expect(offset.dy).toBeLessThanOrEqual(2);
   });
 });
