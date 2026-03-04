@@ -57,14 +57,15 @@ import {
     SiChevronRightIcon,
   ],
   template: \`
-    <div
-      scCarousel
-      aria-label="Vertical carousel"
-      orientation="vertical"
-      [options]="{ align: 'start' }"
-      class="w-full max-w-xs"
-    >
-      <div scCarouselViewport>
+    <div class="py-12">
+      <div
+        scCarousel
+        aria-label="Vertical carousel"
+        orientation="vertical"
+        [options]="{ align: 'start' }"
+        class="w-full max-w-xs"
+      >
+        <div scCarouselViewport>
         <div scCarouselTrack class="-mt-1 h-[270px]">
           @for (index of items; track index) {
             <div scCarouselItem class="basis-1/2 pt-1">
