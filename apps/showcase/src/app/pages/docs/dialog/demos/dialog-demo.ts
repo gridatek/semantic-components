@@ -5,7 +5,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScAutoSelect,
   ScButton,
   ScDialog,
   ScDialogClose,
@@ -20,6 +19,7 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
+  ScSelectOnProgrammaticFocus,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -41,7 +41,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScInput,
     ScLabel,
     SiXIcon,
-    ScAutoSelect,
+    ScSelectOnProgrammaticFocus,
   ],
   template: `
     <div scDialogProvider [(open)]="isOpen">
@@ -64,7 +64,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                 <label scLabel>Name</label>
                 <input
                   cdkFocusInitial
-                  scAutoSelect
+                  scSelectOnProgrammaticFocus
                   scInput
                   value="Pedro Duarte"
                 />
