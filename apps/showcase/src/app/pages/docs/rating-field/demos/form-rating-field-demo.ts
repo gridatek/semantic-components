@@ -5,13 +5,13 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
 import {
+  ScButton,
   ScRatingField,
   ScRatingFieldItem,
   ScRatingIcon,
   ScRatingItemGroup,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 interface ReviewForm {

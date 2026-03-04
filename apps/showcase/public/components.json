@@ -679,7 +679,7 @@
     "path": "rating-field",
     "description": "A composable rating field for feedback and reviews.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms"
   },
   {

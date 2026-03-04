@@ -35,6 +35,7 @@ export * from './popover';
 export * from './progress';
 export * from './radio-group';
 export * from './range-slider';
+export * from './rating-field';
 export * from './resizable';
 export * from './scroll-area';
 export * from './select';

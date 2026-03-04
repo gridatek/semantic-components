@@ -30,7 +30,7 @@ import {
   ScRatingFieldItem,
   ScRatingIcon,
   ScRatingItemGroup,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiHeartIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

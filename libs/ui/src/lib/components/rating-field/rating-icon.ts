@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input, signal } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { SC_RATING_ITEM_GROUP } from './rating-item-group';
 
 export type ScRatingIconRole = 'single' | 'background' | 'foreground';

@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { SC_RATING_FIELD } from './rating-field';
 import { ScRatingIcon } from './rating-icon';
 import { SC_RATING_ITEM_GROUP } from './rating-item-group';

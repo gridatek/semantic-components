@@ -6,7 +6,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { SC_RATING_FIELD } from './rating-field';
 
 // Token for rating item group context
