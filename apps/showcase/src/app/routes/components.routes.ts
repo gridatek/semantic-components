@@ -351,6 +351,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/multi-select/multi-select-page'),
       },
       {
+        path: 'native-dialog',
+        title: 'Native Dialog - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/native-dialog/native-dialog-page'),
+      },
+      {
         path: 'native-select',
         title: 'Native Select - Semantic Components',
         loadComponent: () =>

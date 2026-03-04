@@ -531,6 +531,15 @@
     "hidden": true
   },
   {
+    "name": "Native Dialog",
+    "path": "native-dialog",
+    "description": "A modal dialog built on the native HTML dialog element.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Feedback",
+    "hidden": true
+  },
+  {
     "name": "Native Select",
     "path": "native-select",
     "description": "A styled native select element with a custom chevron icon.",
