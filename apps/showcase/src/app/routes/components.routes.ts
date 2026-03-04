@@ -357,10 +357,10 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/menu-bar/menu-bar-page'),
       },
       {
-        path: 'multi-select',
-        title: 'Multi-Select - Semantic Components',
+        path: 'multiselect',
+        title: 'Multiselect - Semantic Components',
         loadComponent: () =>
-          import('../pages/docs/multi-select/multi-select-page'),
+          import('../pages/docs/multiselect/multiselect-page'),
       },
       {
         path: 'navbar',

@@ -512,8 +512,8 @@
     "category": "Navigation"
   },
   {
-    "name": "Multi-Select",
-    "path": "multi-select",
+    "name": "Multiselect",
+    "path": "multiselect",
     "description": "A select component for multiple selections.",
     "status": "Experimental",
     "library": "ui-lab",

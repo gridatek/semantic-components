@@ -7,17 +7,17 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 
 @Component({
-  selector: 'app-multi-select-page',
+  selector: 'app-multiselect-page',
   imports: [ComponentBadges, ScHeading],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>MultiSelect</h1>
+        <h1 scHeading>Multiselect</h1>
         <p class="text-muted-foreground">
           Select multiple options from a dropdown with chips, search, and
           select-all functionality.
         </p>
-        <app-component-badges path="multi-select" />
+        <app-component-badges path="multiselect" />
       </div>
     </div>
   `,
