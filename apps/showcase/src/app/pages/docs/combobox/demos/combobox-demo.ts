@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxInputGroup,
   ScComboboxInputIcon,
@@ -35,6 +36,7 @@ import {
     ComboboxDialog,
     Combobox,
     ComboboxPopupContainer,
+    ScComboboxEmpty,
     ScComboboxInputIcon,
     ScComboboxInput,
     ScComboboxInputGroup,
@@ -86,9 +88,7 @@ import {
             </div>
             <ng-template ngComboboxPopupContainer>
               @if (options().length === 0) {
-                <div class="text-muted-foreground p-4 text-center text-sm">
-                  No results found
-                </div>
+                <div scComboboxEmpty>No results found</div>
               }
               <div
                 ngListbox
