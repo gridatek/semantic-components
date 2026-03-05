@@ -1,5 +1,11 @@
 import { Listbox } from '@angular/aria/listbox';
-import { Directive, computed, input } from '@angular/core';
+import {
+  Directive,
+  afterRenderEffect,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
@@ -22,4 +28,10 @@ export class ScComboboxList {
   protected readonly class = computed(() =>
     cn('flex max-h-52 flex-col gap-0.5 overflow-auto p-1', this.classInput()),
   );
+
+  private readonly listbox = inject(Listbox);
+
+  constructor() {
+    afterRenderEffect(() => this.listbox.scrollActiveItemIntoView());
+  }
 }

@@ -24,35 +24,28 @@ import { ComboboxDemo } from './combobox-demo';
 })
 export class ComboboxDemoContainer {
   readonly code = `import {
-  Combobox,
-  ComboboxDialog,
-} from '@angular/aria/combobox';
-import { Listbox } from '@angular/aria/listbox';
-import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  afterRenderEffect,
   computed,
+  effect,
   signal,
-  untracked,
-  viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   ScCombobox,
   ScComboboxDialog,
   ScComboboxEmpty,
-  ScComboboxListContainer,
+  ScComboboxInput,
+  ScComboboxInputGroup,
   ScComboboxInputIcon,
-  ScComboboxSearchPanel,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
   ScComboboxList,
+  ScComboboxListContainer,
   ScComboboxPopupContainer,
-  ScComboboxInput,
-  ScComboboxInputGroup,
+  ScComboboxSearchPanel,
   ScComboboxTrigger,
   ScComboboxTriggerIcon,
   ScComboboxTriggerInput,
@@ -135,44 +128,23 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComboboxDemo {
-  dialog = viewChild(ComboboxDialog);
-  listbox = viewChild<Listbox<string>>(Listbox);
-  combobox = viewChild<Combobox<string>>(Combobox);
   value = signal('');
   searchString = signal('');
+  selectedCountries = signal<string[]>([]);
   options = computed(() =>
     ALL_COUNTRIES.filter((country) =>
       country.toLowerCase().startsWith(this.searchString().toLowerCase()),
     ),
   );
-  selectedCountries = signal<string[]>([]);
+
   constructor() {
-    afterRenderEffect(() => {
-      if (this.dialog() && this.combobox()?.expanded()) {
-        untracked(() => this.listbox()?.gotoFirst());
-        this.positionDialog();
-      }
-    });
-    afterRenderEffect(() => {
-      if (this.selectedCountries().length > 0) {
-        untracked(() => this.dialog()?.close());
-        this.value.set(this.selectedCountries()[0]);
+    effect(() => {
+      const selected = this.selectedCountries();
+      if (selected.length > 0) {
+        this.value.set(selected[0]);
         this.searchString.set('');
       }
     });
-    afterRenderEffect(() => this.listbox()?.scrollActiveItemIntoView());
-  }
-  // TODO(wagnermaciel): Switch to using the CDK for positioning.
-  positionDialog() {
-    const dialog = this.dialog()!;
-    const combobox = this.combobox()!;
-    const comboboxRect = combobox.inputElement()?.getBoundingClientRect();
-    const scrollY = window.scrollY;
-    if (comboboxRect) {
-      dialog.element.style.width = \`\${comboboxRect.width}px\`;
-      dialog.element.style.top = \`\${comboboxRect.bottom + scrollY + 4}px\`;
-      dialog.element.style.left = \`\${comboboxRect.left - 1}px\`;
-    }
   }
 }`;
 }
