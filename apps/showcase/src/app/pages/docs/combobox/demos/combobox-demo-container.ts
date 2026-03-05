@@ -43,6 +43,7 @@ import { FormsModule } from '@angular/forms';
 import {
   ScComboboxInput,
   ScComboboxTrigger,
+  ScComboboxTriggerIcon,
   ScComboboxTriggerInput,
 } from '@semantic-components/ui';
 import {
@@ -59,6 +60,7 @@ import {
     ComboboxPopupContainer,
     ScComboboxInput,
     ScComboboxTrigger,
+    ScComboboxTriggerIcon,
     ScComboboxTriggerInput,
     Listbox,
     Option,
@@ -81,10 +83,7 @@ import {
           placeholder="Select a country..."
           [value]="value()"
         />
-        <svg
-          siChevronsUpDownIcon
-          class="pointer-events-none absolute right-2 size-4 shrink-0 opacity-50"
-        ></svg>
+        <svg siChevronsUpDownIcon scComboboxTriggerIcon></svg>
       </div>
       <ng-template ngComboboxPopupContainer>
         <dialog
