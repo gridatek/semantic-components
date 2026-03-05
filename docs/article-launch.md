@@ -83,7 +83,7 @@ Each component is a set of small, focused pieces that you assemble yourself. The
 The Select is a good example of how far this goes:
 
 ```html
-<div scSelect #select="scSelect">
+<div scSelect>
   <div scSelectInputGroup>
     @if (displayIcon(); as icon) {
     <svg scSelectItemIcon siTagIcon></svg>

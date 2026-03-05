@@ -141,7 +141,7 @@ export class ExampleComponent {
 Use `#select="scSelect"` to access `ScSelect` directly in the template when you need the value (e.g., for conditional icon rendering):
 
 ```html
-<div scSelect #select="scSelect">
+<div scSelect>
   ...
   <span>Current value: {{ select.value() }}</span>
 </div>
