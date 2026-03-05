@@ -17,6 +17,7 @@ import {
 } from '@angular/core';
 import {
   ScMultiselectIcon,
+  ScMultiselectLabel,
   ScMultiselectTrigger,
   ScMultiselectValue,
 } from '@semantic-components/ui-lab';
@@ -43,6 +44,7 @@ import {
     Option,
     OverlayModule,
     ScMultiselectIcon,
+    ScMultiselectLabel,
     ScMultiselectTrigger,
     ScMultiselectValue,
     SiBookOpenIcon,
@@ -66,7 +68,7 @@ import {
               *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
             ></ng-container>
           }
-          <span class="text-sm">{{ displayValue() }}</span>
+          <span scMultiselectLabel>{{ displayValue() }}</span>
         </span>
         <svg scMultiselectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
