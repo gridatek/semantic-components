@@ -20,7 +20,7 @@ export class ScComboboxItem {
 
   protected readonly class = computed(() =>
     cn(
-      'data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none',
+      'group data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none',
       this.classInput(),
     ),
   );

@@ -114,10 +114,11 @@ import {
     </div>
   `,
   styles: `
-    [ngOption][aria-selected='true'] [data-slot='combobox-item-indicator'] {
+    [data-slot='combobox-item'][aria-selected='true']
+      [data-slot='combobox-item-indicator'] {
       display: block;
     }
-    [ngOption]:not([aria-selected='true'])
+    [data-slot='combobox-item']:not([aria-selected='true'])
       [data-slot='combobox-item-indicator'] {
       display: none;
     }
