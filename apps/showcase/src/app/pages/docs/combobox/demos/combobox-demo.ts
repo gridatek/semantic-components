@@ -1,6 +1,7 @@
 import {
   Combobox,
   ComboboxDialog,
+  ComboboxInput,
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
@@ -27,6 +28,7 @@ import {
   imports: [
     ComboboxDialog,
     Combobox,
+    ComboboxInput,
     ComboboxPopupContainer,
     ScComboboxInput,
     Listbox,
