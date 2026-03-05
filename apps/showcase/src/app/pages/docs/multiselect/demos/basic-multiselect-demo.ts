@@ -18,6 +18,7 @@ import {
 import {
   ScMultiselectIcon,
   ScMultiselectTrigger,
+  ScMultiselectValue,
 } from '@semantic-components/ui-lab';
 import {
   SiBookOpenIcon,
@@ -43,6 +44,7 @@ import {
     OverlayModule,
     ScMultiselectIcon,
     ScMultiselectTrigger,
+    ScMultiselectValue,
     SiBookOpenIcon,
     SiBriefcaseIcon,
     SiCheckIcon,
@@ -58,9 +60,7 @@ import {
   template: `
     <div ngCombobox readonly class="flex justify-center">
       <div scMultiselectTrigger #trigger="scMultiselectTrigger">
-        <span
-          class="pointer-events-none absolute start-3 flex items-center gap-2 [&_svg]:size-4"
-        >
+        <span scMultiselectValue>
           @if (displayIcon(); as icon) {
             <ng-container
               *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
