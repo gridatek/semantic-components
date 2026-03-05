@@ -49,9 +49,15 @@ export class ScEditor {
     element: HTMLElement,
     initialContent: string,
     placeholder = 'Start typing...',
+    ariaLabel = 'Rich text editor',
   ): void {
     const editor = new Editor({
       element,
+      editorProps: {
+        attributes: {
+          'aria-label': ariaLabel,
+        },
+      },
       extensions: [
         StarterKit.configure({
           link: {

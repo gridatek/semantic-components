@@ -19,7 +19,6 @@ import { SC_EDITOR } from './editor';
   host: {
     'data-slot': 'editor-content',
     '[class]': 'class()',
-    '[attr.aria-label]': 'ariaLabel()',
   },
 })
 export class ScEditorContent {
@@ -65,7 +64,12 @@ export class ScEditorContent {
       const element = this.elementRef.nativeElement;
 
       // Initialize Tiptap editor through parent directive
-      this.editor.initializeEditor(element, this.value(), this.placeholder());
+      this.editor.initializeEditor(
+        element,
+        this.value(),
+        this.placeholder(),
+        this.ariaLabel(),
+      );
 
       // Watch for editor content changes
       const editorInstance = this.editor.editorInstance();
