@@ -13,7 +13,7 @@ import {
   input,
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { ScMultiselectList } from './multiselect-list';
 import { ScMultiselectPortal } from './multiselect-portal';
 import { ScMultiselectTrigger } from './multiselect-trigger';
