@@ -2,6 +2,7 @@ export { ScCombobox } from './combobox';
 export { ScComboboxDialog } from './combobox-dialog';
 export { ScComboboxEmpty } from './combobox-empty';
 export { ScComboboxInputIcon } from './combobox-input-icon';
+export { ScComboboxPopupContainer } from './combobox-popup-container';
 export { ScComboboxItem } from './combobox-item';
 export { ScComboboxList } from './combobox-list';
 export { ScComboboxItemIndicator } from './combobox-item-indicator';

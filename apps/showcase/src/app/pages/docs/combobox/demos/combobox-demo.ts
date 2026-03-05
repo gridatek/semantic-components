@@ -26,6 +26,7 @@ import {
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
   ScComboboxList,
+  ScComboboxPopupContainer,
   ScComboboxTrigger,
   ScComboboxTriggerIcon,
   ScComboboxTriggerInput,
@@ -53,6 +54,7 @@ import {
     ScComboboxTrigger,
     ScComboboxTriggerIcon,
     ScComboboxList,
+    ScComboboxPopupContainer,
     ScComboboxTriggerInput,
     FormsModule,
     SiCheckIcon,
@@ -70,7 +72,7 @@ import {
         />
         <svg siChevronsUpDownIcon scComboboxTriggerIcon></svg>
       </div>
-      <ng-template ngComboboxPopupContainer>
+      <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
           <div
             ngCombobox
