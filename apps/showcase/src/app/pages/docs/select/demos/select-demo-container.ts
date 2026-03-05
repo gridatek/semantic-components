@@ -36,14 +36,18 @@ import {
   ScSelectItem,
   ScSelectItemIcon,
   ScSelectInput,
+  ScSelectItemIndicator,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
   ScSelectTrigger,
+  ScSelectTriggerIcon,
 } from '@semantic-components/ui';
 import {
   SiBookIcon,
   SiBriefcaseIcon,
+  SiCheckIcon,
+  SiChevronDownIcon,
   SiClockIcon,
   SiPlaneIcon,
   SiSquareCheckIcon,
@@ -63,6 +67,8 @@ import {
     ScSelectPortal,
     ScSelectTrigger,
     ScSelectInput,
+    ScSelectTriggerIcon,
+    ScSelectItemIndicator,
     SiBookIcon,
     SiBriefcaseIcon,
     SiClockIcon,
@@ -72,6 +78,8 @@ import {
     SiTagIcon,
     SiUserIcon,
     NgTemplateOutlet,
+    SiChevronDownIcon,
+    SiCheckIcon,
   ],
   template: \`
     <div scSelect #select="scSelect">
@@ -80,6 +88,7 @@ import {
           <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
         }
         <input scSelectInput placeholder="Select a label" aria-label="Label dropdown" />
+        <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
@@ -88,6 +97,7 @@ import {
               <div scSelectItem [value]="option.value" [label]="option.label">
                 <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"></ng-container>
                 <span class="flex-1">{{ option.label }}</span>
+                <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
               </div>
             }
           </div>

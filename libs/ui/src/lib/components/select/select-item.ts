@@ -9,16 +9,13 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
-import { ScSelectItemIndicator } from './select-item-indicator';
 
 @Component({
   selector: 'div[scSelectItem]',
-  imports: [ScSelectItemIndicator, SiCheckIcon],
+  imports: [],
   template: `
     <ng-content />
-    <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
   `,
   hostDirectives: [
     {

@@ -9,3 +9,5 @@ export { ScSelectItem } from './select-item';
 export { ScSelectGroup } from './select-group';
 export { ScSelectGroupLabel } from './select-group-label';
 export { ScSelectSeparator } from './select-separator';
+export { ScSelectTriggerIcon } from './select-trigger-icon';
+export { ScSelectItemIndicator } from './select-item-indicator';

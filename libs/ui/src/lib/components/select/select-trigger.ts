@@ -7,16 +7,13 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
-import { ScSelectTriggerIcon } from './select-trigger-icon';
 
 @Component({
   selector: 'div[scSelectTrigger]',
-  imports: [ScSelectTriggerIcon, SiChevronDownIcon],
+  imports: [],
   template: `
     <ng-content />
-    <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
   `,
   host: {
     'data-slot': 'select-trigger',

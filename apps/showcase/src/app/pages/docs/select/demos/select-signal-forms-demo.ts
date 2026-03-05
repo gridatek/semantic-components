@@ -12,11 +12,14 @@ import {
   ScSelect,
   ScSelectInput,
   ScSelectItem,
+  ScSelectItemIndicator,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
   ScSelectTrigger,
+  ScSelectTriggerIcon,
 } from '@semantic-components/ui';
+import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 interface FormModel {
   fruit: string;
@@ -34,6 +37,10 @@ interface FormModel {
     ScSelectPortal,
     ScSelectTrigger,
     ScSelectInput,
+    ScSelectTriggerIcon,
+    ScSelectItemIndicator,
+    SiChevronDownIcon,
+    SiCheckIcon,
     JsonPipe,
     // FormField,
     FormRoot,
@@ -50,6 +57,7 @@ interface FormModel {
           >
             <div scSelectTrigger>
               <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />
+              <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -57,6 +65,7 @@ interface FormModel {
                   @for (fruit of fruits; track fruit) {
                     <div scSelectItem [value]="fruit" [label]="fruit">
                       {{ fruit }}
+                      <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
                     </div>
                   }
                 </div>
@@ -70,6 +79,11 @@ interface FormModel {
                 placeholder="Select a fruit"
                 aria-label="Fruit dropdown"
               />
+              <svg
+                scSelectTriggerIcon
+                siChevronDownIcon
+                aria-hidden="true"
+              ></svg>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -77,6 +91,11 @@ interface FormModel {
                   @for (fruit of fruits; track fruit) {
                     <div scSelectItem [value]="fruit" [label]="fruit">
                       {{ fruit }}
+                      <svg
+                        scSelectItemIndicator
+                        siCheckIcon
+                        aria-hidden="true"
+                      ></svg>
                     </div>
                   }
                 </div>
