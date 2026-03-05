@@ -44,6 +44,7 @@ import {
   ScComboboxEmpty,
   ScComboboxInputIcon,
   ScComboboxItemIndicator,
+  ScComboboxItemLabel,
   ScComboboxInput,
   ScComboboxInputGroup,
   ScComboboxTrigger,
@@ -65,6 +66,7 @@ import {
     ScComboboxEmpty,
     ScComboboxInputIcon,
     ScComboboxItemIndicator,
+    ScComboboxItemLabel,
     ScComboboxInput,
     ScComboboxInputGroup,
     ScComboboxTrigger,
@@ -129,7 +131,7 @@ import {
                     [label]="option"
                     class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none"
                   >
-                    <span class="flex-1">{{ option }}</span>
+                    <span scComboboxItemLabel>{{ option }}</span>
                     <svg siCheckIcon scComboboxItemIndicator></svg>
                   </div>
                 }
