@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import {
   ScSelect,
+  ScSelectInput,
   ScSelectItem,
   ScSelectItemIcon,
   ScSelectList,

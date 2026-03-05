@@ -41,9 +41,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 
 ```html
 <div scSelect placeholder="Select an option" aria-label="Select">
-  <div scSelectTrigger>
-    <span scSelectLabel></span>
-  </div>
+  <div scSelectTrigger></div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
       <div scSelectList>
@@ -58,13 +56,12 @@ Displays a list of options for the user to pick from — mimics a native select.
 
 ### With Icons
 
-Use `ScSelectItemIcon` for consistent icon styling in items and the trigger. Place icons **outside** `scSelectLabel` in the trigger so truncation only applies to the text.
+Use `ScSelectItemIcon` for consistent icon styling in items and the trigger.
 
 ```html
-<!-- In the trigger: icon outside scSelectLabel -->
+<!-- In the trigger: icon before the input -->
 <div scSelectTrigger>
   <svg scSelectItemIcon siHomeIcon></svg>
-  <span scSelectLabel></span>
 </div>
 
 <!-- In items -->
@@ -80,9 +77,7 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 
 ```html
 <div scSelect placeholder="Select a food" aria-label="Food dropdown">
-  <div scSelectTrigger>
-    <span scSelectLabel></span>
-  </div>
+  <div scSelectTrigger></div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
       <div scSelectList>
@@ -107,16 +102,14 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ScSelect, ScSelectItem, ScSelectItemIcon, ScSelectLabel, ScSelectList, ScSelectPopup, ScSelectPortal, ScSelectTrigger } from '@semantic-components/ui';
+import { ScSelect, ScSelectItem, ScSelectItemIcon, ScSelectList, ScSelectPopup, ScSelectPortal, ScSelectTrigger } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-example',
-  imports: [ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger, ScSelectLabel],
+  imports: [ScSelect, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger],
   template: `
     <div scSelect placeholder="Select an option" aria-label="Select">
-      <div scSelectTrigger>
-        <span scSelectLabel></span>
-      </div>
+      <div scSelectTrigger></div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
@@ -267,9 +260,8 @@ All components accept a `class` input for custom styling:
 ```
 ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, exportAs: 'scSelect')
 ├── ScSelectTrigger (trigger + overlay origin)
-│   ├── ScSelectItemIcon (consumer icons, outside label) [projected content]
-│   ├── ScSelectLabel (auto-displays selected label with truncation)
-│   ├── ScSelectInput (hidden combobox input) [internal]
+│   ├── ScSelectItemIcon (consumer icons) [projected content]
+│   ├── ScSelectInput (visible input displaying selected value) [internal]
 │   └── ScSelectTriggerIcon + SiChevronDownIcon [internal]
 └── ScSelectPortal (ng-template marking lazy overlay content)
     └── ScSelectPopup (popup container with styling and animation)

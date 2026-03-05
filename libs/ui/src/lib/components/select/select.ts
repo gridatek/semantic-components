@@ -56,8 +56,6 @@ import { ScSelectTrigger } from './select-trigger';
 })
 export class ScSelect implements FormValueControl<unknown> {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly placeholder = input.required<string>();
-  readonly ariaLabel = input.required<string>({ alias: 'aria-label' });
   readonly value = model<unknown>(undefined);
 
   private readonly trigger = contentChild(ScSelectTrigger);
@@ -70,7 +68,7 @@ export class ScSelect implements FormValueControl<unknown> {
   readonly values = computed(() => this.content()?.values() ?? []);
   readonly label = computed(() => {
     const value = this.value();
-    if (value == null) return this.placeholder();
+    if (value == null) return '';
     const list = this.content();
     if (list) {
       return list.labelForValue(value);

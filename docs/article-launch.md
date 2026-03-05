@@ -34,7 +34,7 @@ In Semantic Components, it's scTooltipTrigger:
 <button scTooltipTrigger="Save changes">Save</button>
 ```
 
-`scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectLabel`, `ScSelectTrigger`, `ScSidebarBody` — you know exactly what each piece does before reading a single line of docs.
+`scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectTrigger`, `ScSidebarBody` — you know exactly what each piece does before reading a single line of docs.
 
 This principle extends to the **HTML elements themselves**. When possible, components/directives are applied to the right native element rather than a generic `<div>`.
 
@@ -85,12 +85,9 @@ The Select is a good example of how far this goes:
 ```html
 <div scSelect #select="scSelect" placeholder="Select a label" aria-label="Label dropdown">
   <div scSelectTrigger>
-    <span scSelectLabel>
-      @if (displayIcon(); as icon) {
-      <svg scSelectItemIcon siTagIcon></svg>
-      }
-      <span class="truncate">{{ select.label() }}</span>
-    </span>
+    @if (displayIcon(); as icon) {
+    <svg scSelectItemIcon siTagIcon></svg>
+    }
   </div>
   <ng-template scSelectPortal>
     <div scSelectPopup>

@@ -4,28 +4,18 @@ import {
   ElementRef,
   ViewEncapsulation,
   computed,
-  forwardRef,
   inject,
   input,
 } from '@angular/core';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
-// Lazy import to avoid circular dependency
-import { ScSelect } from './select';
-import { ScSelectInput } from './select-input';
 import { ScSelectTriggerIcon } from './select-trigger-icon';
 
 @Component({
   selector: 'div[scSelectTrigger]',
-  imports: [ScSelectInput, ScSelectTriggerIcon, SiChevronDownIcon],
+  imports: [ScSelectTriggerIcon, SiChevronDownIcon],
   template: `
     <ng-content />
-    <input
-      scSelectInput
-      [attr.aria-label]="ariaLabel()"
-      [placeholder]="placeholder()"
-      [value]="displayValue()"
-    />
     <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
   `,
   host: {
@@ -38,13 +28,6 @@ import { ScSelectTriggerIcon } from './select-trigger-icon';
 export class ScSelectTrigger {
   readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly classInput = input<string>('', { alias: 'class' });
-
-  private readonly select = inject(forwardRef(() => ScSelect));
-  readonly ariaLabel = computed(() => this.select.ariaLabel());
-  readonly placeholder = computed(() => this.select.placeholder());
-  readonly displayValue = computed(() =>
-    this.select.value() != null ? this.select.label() : '',
-  );
 
   protected readonly class = computed(() =>
     cn(
