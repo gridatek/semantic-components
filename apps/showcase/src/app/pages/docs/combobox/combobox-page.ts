@@ -5,10 +5,11 @@ import {
 } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { ComboboxDemoContainer } from './demos/combobox-demo-container';
 
 @Component({
   selector: 'app-combobox-page',
-  imports: [ComponentBadges, ScHeading],
+  imports: [ComponentBadges, ScHeading, ComboboxDemoContainer],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -18,6 +19,10 @@ import { ComponentBadges } from '../../../components/component-badges/component-
         </p>
         <app-component-badges path="combobox" />
       </div>
+
+      <section class="space-y-8">
+        <app-combobox-demo-container />
+      </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

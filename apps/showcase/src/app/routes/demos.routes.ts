@@ -772,6 +772,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/combobox',
+    children: [
+      {
+        path: 'combobox-demo',
+        loadComponent: () =>
+          import('../pages/docs/combobox/demos/combobox-demo').then(
+            (m) => m.ComboboxDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/command',
     children: [
       {
