@@ -41,6 +41,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  ScCombobox,
   ScComboboxDialog,
   ScComboboxEmpty,
   ScComboboxInputIcon,
@@ -65,6 +66,7 @@ import {
   imports: [
     Combobox,
     ComboboxPopupContainer,
+    ScCombobox,
     ScComboboxDialog,
     ScComboboxEmpty,
     ScComboboxInputIcon,
@@ -84,12 +86,7 @@ import {
   ],
   host: { class: 'block' },
   template: \`
-    <div
-      ngCombobox
-      #combobox="ngCombobox"
-      [readonly]="true"
-      class="border-border relative flex w-60 flex-col rounded-md border"
-    >
+    <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxTrigger>
         <input
           scComboboxTriggerInput

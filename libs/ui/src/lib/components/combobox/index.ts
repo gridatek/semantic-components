@@ -1,3 +1,4 @@
+export { ScCombobox } from './combobox';
 export { ScComboboxDialog } from './combobox-dialog';
 export { ScComboboxEmpty } from './combobox-empty';
 export { ScComboboxInputIcon } from './combobox-input-icon';
