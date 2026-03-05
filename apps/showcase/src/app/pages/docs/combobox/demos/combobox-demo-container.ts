@@ -46,6 +46,7 @@ import {
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
+  ScComboboxList,
   ScComboboxInput,
   ScComboboxInputGroup,
   ScComboboxTrigger,
@@ -69,12 +70,12 @@ import {
     ScComboboxItem,
     ScComboboxItemIndicator,
     ScComboboxItemLabel,
+    ScComboboxList,
     ScComboboxInput,
     ScComboboxInputGroup,
     ScComboboxTrigger,
     ScComboboxTriggerIcon,
     ScComboboxTriggerInput,
-    Listbox,
     FormsModule,
     SiCheckIcon,
     SiChevronsUpDownIcon,
@@ -120,11 +121,7 @@ import {
               @if (options().length === 0) {
                 <div scComboboxEmpty>No results found</div>
               }
-              <div
-                ngListbox
-                [(values)]="selectedCountries"
-                class="flex max-h-52 flex-col gap-0.5 overflow-auto p-1"
-              >
+              <div scComboboxList [(values)]="selectedCountries">
                 @for (option of options(); track option) {
                   <div
                     scComboboxItem
