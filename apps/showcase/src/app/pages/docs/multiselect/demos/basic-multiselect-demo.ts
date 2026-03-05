@@ -20,6 +20,7 @@ import {
   SiBookOpenIcon,
   SiBriefcaseIcon,
   SiCheckIcon,
+  SiChevronDownIcon,
   SiClockIcon,
   SiListChecksIcon,
   SiPlaneIcon,
@@ -41,6 +42,7 @@ import {
     SiBookOpenIcon,
     SiBriefcaseIcon,
     SiCheckIcon,
+    SiChevronDownIcon,
     SiClockIcon,
     SiListChecksIcon,
     SiPlaneIcon,
@@ -62,6 +64,10 @@ import {
           }
           <span class="text-sm">{{ displayValue() }}</span>
         </span>
+        <svg
+          siChevronDownIcon
+          class="text-muted-foreground pointer-events-none absolute end-3 size-4 transition-transform duration-150"
+        ></svg>
       </div>
       <ng-template ngComboboxPopupContainer>
         <ng-template

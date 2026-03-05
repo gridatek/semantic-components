@@ -9,12 +9,11 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'div[scMultiselectTrigger]',
   exportAs: 'scMultiselectTrigger',
-  imports: [ComboboxInput, SiChevronDownIcon],
+  imports: [ComboboxInput],
   template: `
     <ng-content />
     <input
@@ -23,10 +22,6 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       placeholder="Select a label"
       class="absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent opacity-0 outline-none"
     />
-    <svg
-      siChevronDownIcon
-      class="text-muted-foreground pointer-events-none absolute end-3 size-4 shrink-0 transition-transform duration-150 [[aria-expanded=true]_&]:rotate-180"
-    ></svg>
   `,
   host: {
     'data-slot': 'multiselect-trigger',
