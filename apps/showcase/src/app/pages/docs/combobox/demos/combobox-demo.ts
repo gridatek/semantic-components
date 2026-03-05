@@ -113,16 +113,6 @@ import {
       </ng-template>
     </div>
   `,
-  styles: `
-    [data-slot='combobox-item'][aria-selected='true']
-      [data-slot='combobox-item-indicator'] {
-      display: block;
-    }
-    [data-slot='combobox-item']:not([aria-selected='true'])
-      [data-slot='combobox-item-indicator'] {
-      display: none;
-    }
-  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
