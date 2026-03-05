@@ -15,7 +15,10 @@ import {
   viewChild,
   viewChildren,
 } from '@angular/core';
-import { ScMultiselectTrigger } from '@semantic-components/ui-lab';
+import {
+  ScMultiselectIcon,
+  ScMultiselectTrigger,
+} from '@semantic-components/ui-lab';
 import {
   SiBookOpenIcon,
   SiBriefcaseIcon,
@@ -38,6 +41,7 @@ import {
     Listbox,
     Option,
     OverlayModule,
+    ScMultiselectIcon,
     ScMultiselectTrigger,
     SiBookOpenIcon,
     SiBriefcaseIcon,
@@ -64,10 +68,7 @@ import {
           }
           <span class="text-sm">{{ displayValue() }}</span>
         </span>
-        <svg
-          siChevronDownIcon
-          class="text-muted-foreground pointer-events-none absolute end-3 size-4 transition-transform duration-150"
-        ></svg>
+        <svg scMultiselectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
       <ng-template ngComboboxPopupContainer>
         <ng-template
