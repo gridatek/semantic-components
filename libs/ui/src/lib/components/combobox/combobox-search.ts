@@ -1,8 +1,14 @@
 import { Combobox } from '@angular/aria/combobox';
-import { Directive, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 import { cn } from '../../utils';
 
-@Directive({
+@Component({
   selector: 'div[scComboboxSearch]',
   exportAs: 'scComboboxSearch',
   hostDirectives: [
@@ -17,10 +23,15 @@ import { cn } from '../../utils';
       ],
     },
   ],
+  template: `
+    <ng-content />
+  `,
   host: {
     'data-slot': 'combobox-search',
     '[class]': 'class()',
   },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComboboxSearch {
   readonly classInput = input<string>('', { alias: 'class' });
