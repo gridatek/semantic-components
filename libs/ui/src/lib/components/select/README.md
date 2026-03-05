@@ -17,7 +17,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 | Component               | Selector                      | Responsibility                                                                               |
 | ----------------------- | ----------------------------- | -------------------------------------------------------------------------------------------- |
 | `ScSelect`              | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<unknown>` |
-| `ScSelectTrigger`       | `div[scSelectTrigger]`        | Trigger button, renders chevron icon, projects consumer content                              |
+| `ScSelectInputGroup`    | `div[scSelectInputGroup]`     | Trigger button, renders chevron icon, projects consumer content                              |
 | `ScSelectInput`         | `input[scSelectInput]`        | Visible input displaying selected value, wraps `ComboboxInput` from `@angular/aria`          |
 | `ScSelectItemIcon`      | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)           |
 | `ScSelectPortal`        | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                  |
@@ -36,7 +36,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 
 ```html
 <div scSelect>
-  <div scSelectTrigger>
+  <div scSelectInputGroup>
     <input scSelectInput placeholder="Select an option" aria-label="Select" />
   </div>
   <ng-template scSelectPortal>
@@ -57,7 +57,7 @@ Use `ScSelectItemIcon` for consistent icon styling in items and the trigger.
 
 ```html
 <!-- In the trigger: icon before the input -->
-<div scSelectTrigger>
+<div scSelectInputGroup>
   <svg scSelectItemIcon siHomeIcon></svg>
   <input scSelectInput placeholder="Select..." aria-label="Select" />
 </div>
@@ -75,7 +75,7 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 
 ```html
 <div scSelect>
-  <div scSelectTrigger>
+  <div scSelectInputGroup>
     <input scSelectInput placeholder="Select a food" aria-label="Food dropdown" />
   </div>
   <ng-template scSelectPortal>
@@ -102,14 +102,14 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ScSelect, ScSelectInput, ScSelectItem, ScSelectItemIcon, ScSelectList, ScSelectPopup, ScSelectPortal, ScSelectTrigger } from '@semantic-components/ui';
+import { ScSelect, ScSelectInput, ScSelectInputGroup, ScSelectItem, ScSelectItemIcon, ScSelectList, ScSelectPopup, ScSelectPortal } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-example',
-  imports: [ScSelect, ScSelectInput, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectTrigger],
+  imports: [ScSelect, ScSelectInput, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectInputGroup],
   template: `
     <div scSelect>
-      <div scSelectTrigger>
+      <div scSelectInputGroup>
         <input scSelectInput placeholder="Select an option" aria-label="Select" />
       </div>
       <ng-template scSelectPortal>
@@ -205,7 +205,7 @@ The select components are built with accessibility in mind:
 | `label()`  | `Signal<string>` | Returns the label for the selected value, or `''`      |
 | `exportAs` | `'scSelect'`     | Template reference for direct access                   |
 
-### ScSelectTrigger
+### ScSelectInputGroup
 
 | Property | Type     | Description            |
 | -------- | -------- | ---------------------- |
@@ -259,7 +259,7 @@ All components accept a `class` input for custom styling:
 
 ```html
 <div scSelect class="w-64">
-  <div scSelectTrigger class="bg-slate-100">
+  <div scSelectInputGroup class="bg-slate-100">
     <input scSelectInput placeholder="Choose..." aria-label="Choose" />
   </div>
 </div>
@@ -269,7 +269,7 @@ All components accept a `class` input for custom styling:
 
 ```
 ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, exportAs: 'scSelect')
-├── ScSelectTrigger (trigger + overlay origin)
+├── ScSelectInputGroup (trigger + overlay origin)
 │   ├── ScSelectItemIcon (consumer icons) [projected content]
 │   ├── ScSelectInput (visible input displaying selected value, placeholder, aria-label) [projected content]
 │   └── ScSelectTriggerIcon + SiChevronDownIcon [internal]

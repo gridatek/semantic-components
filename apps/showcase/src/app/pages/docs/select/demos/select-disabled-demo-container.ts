@@ -36,7 +36,7 @@ import {
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectTrigger,
+  ScSelectInputGroup,
   ScSelectTriggerIcon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
@@ -49,7 +49,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectTrigger,
+    ScSelectInputGroup,
     ScSelectInput,
     ScSelectTriggerIcon,
     ScSelectItemIndicator,
@@ -58,7 +58,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scSelect disabled>
-      <div scSelectTrigger>
+      <div scSelectInputGroup>
         <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />
         <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>

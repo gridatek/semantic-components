@@ -10,19 +10,19 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[scSelectTrigger]',
+  selector: 'div[scSelectInputGroup]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'select-trigger',
+    'data-slot': 'select-input-group',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScSelectTrigger {
+export class ScSelectInputGroup {
   readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly classInput = input<string>('', { alias: 'class' });
 

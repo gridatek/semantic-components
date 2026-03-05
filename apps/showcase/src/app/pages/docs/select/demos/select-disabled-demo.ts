@@ -6,12 +6,12 @@ import {
 import {
   ScSelect,
   ScSelectInput,
+  ScSelectInputGroup,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectTrigger,
   ScSelectTriggerIcon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
@@ -24,7 +24,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectTrigger,
+    ScSelectInputGroup,
     ScSelectTriggerIcon,
     ScSelectInput,
     ScSelectItemIndicator,
@@ -33,7 +33,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scSelect disabled>
-      <div scSelectTrigger>
+      <div scSelectInputGroup>
         <input
           scSelectInput
           placeholder="Select a fruit"

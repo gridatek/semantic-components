@@ -15,9 +15,9 @@ import {
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
+import { ScSelectInputGroup } from './select-input-group';
 import { ScSelectList } from './select-list';
 import { ScSelectPortal } from './select-portal';
-import { ScSelectTrigger } from './select-trigger';
 
 @Component({
   selector: 'div[scSelect]',
@@ -58,7 +58,7 @@ export class ScSelect implements FormValueControl<unknown> {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = model<unknown>(undefined);
 
-  private readonly trigger = contentChild(ScSelectTrigger);
+  private readonly trigger = contentChild(ScSelectInputGroup);
   private readonly content = contentChild(ScSelectList, {
     descendants: true,
   });

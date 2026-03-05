@@ -9,13 +9,13 @@ import {
 import {
   ScSelect,
   ScSelectInput,
+  ScSelectInputGroup,
   ScSelectItem,
   ScSelectItemIcon,
   ScSelectItemIndicator,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectTrigger,
   ScSelectTriggerIcon,
 } from '@semantic-components/ui';
 import {
@@ -40,7 +40,7 @@ import {
     ScSelectList,
     ScSelectItem,
     ScSelectPortal,
-    ScSelectTrigger,
+    ScSelectInputGroup,
     ScSelectInput,
     SiBookIcon,
     SiBriefcaseIcon,
@@ -58,7 +58,7 @@ import {
   ],
   template: `
     <div scSelect #select="scSelect">
-      <div scSelectTrigger>
+      <div scSelectInputGroup>
         @if (displayIcon(); as icon) {
           <ng-container
             *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
