@@ -150,10 +150,12 @@ export class BasicMultiselectDemo {
     if (values.length === 0) {
       return 'Select a label';
     }
+    const firstLabel =
+      this.options.find((o) => o.value === values[0])?.label ?? values[0];
     if (values.length === 1) {
-      return values[0];
+      return firstLabel;
     }
-    return `${values[0]} + ${values.length - 1} more`;
+    return `${firstLabel} + ${values.length - 1} more`;
   });
 
   /** The options that are available for selection. */
