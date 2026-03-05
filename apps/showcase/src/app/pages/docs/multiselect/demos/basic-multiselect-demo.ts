@@ -3,7 +3,7 @@ import {
   ComboboxPopup,
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
-import { Listbox, Option } from '@angular/aria/listbox';
+import { Listbox } from '@angular/aria/listbox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -13,10 +13,10 @@ import {
   afterRenderEffect,
   computed,
   viewChild,
-  viewChildren,
 } from '@angular/core';
 import {
   ScMultiselectIcon,
+  ScMultiselectItem,
   ScMultiselectItemIndicator,
   ScMultiselectLabel,
   ScMultiselectTrigger,
@@ -42,9 +42,9 @@ import {
     ComboboxPopup,
     ComboboxPopupContainer,
     Listbox,
-    Option,
     OverlayModule,
     ScMultiselectIcon,
+    ScMultiselectItem,
     ScMultiselectItemIndicator,
     ScMultiselectLabel,
     ScMultiselectTrigger,
@@ -96,15 +96,14 @@ import {
             >
               @for (option of options; track option.value) {
                 <div
-                  ngOption
+                  scMultiselectItem
                   [value]="option.value"
-                  [label]="option.value"
-                  class="hover:bg-accent data-[active=true]:bg-accent aria-selected:bg-primary/10 aria-selected:text-primary flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none [&_svg]:size-4"
+                  [label]="option.label"
                 >
                   <ng-container
                     *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
                   ></ng-container>
-                  <span class="flex-1">{{ option.value }}</span>
+                  <span class="flex-1">{{ option.label }}</span>
                   <svg
                     scMultiselectItemIndicator
                     siCheckIcon
@@ -153,8 +152,6 @@ import {
 export class BasicMultiselectDemo {
   /** The combobox listbox popup. */
   listbox = viewChild<Listbox<string>>(Listbox);
-  /** The options available in the listbox. */
-  optionElements = viewChildren<Option<string>>(Option);
   /** A reference to the ng aria combobox. */
   combobox = viewChild<Combobox<string>>(Combobox);
 
@@ -190,15 +187,6 @@ export class BasicMultiselectDemo {
   ];
 
   constructor() {
-    // Scrolls to the active item when the active option changes.
-    // The slight delay here is to ensure animations are done before scrolling.
-    afterRenderEffect(() => {
-      const active = this.optionElements().find((opt) => opt.active());
-      setTimeout(
-        () => active?.element.scrollIntoView({ block: 'nearest' }),
-        50,
-      );
-    });
     // Resets the listbox scroll position when the combobox is closed.
     afterRenderEffect(() => {
       if (!this.combobox()?.expanded()) {
