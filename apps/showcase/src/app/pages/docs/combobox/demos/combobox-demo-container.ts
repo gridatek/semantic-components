@@ -26,7 +26,6 @@ export class ComboboxDemoContainer {
   readonly code = `import {
   Combobox,
   ComboboxDialog,
-  ComboboxInput,
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
@@ -41,6 +40,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ScComboboxInput } from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiChevronsUpDownIcon,
@@ -52,8 +52,8 @@ import {
   imports: [
     ComboboxDialog,
     Combobox,
-    ComboboxInput,
     ComboboxPopupContainer,
+    ScComboboxInput,
     Listbox,
     Option,
     FormsModule,
@@ -63,45 +63,64 @@ import {
   ],
   host: { class: 'block' },
   template: \`
-    <div ngCombobox #combobox="ngCombobox" [readonly]="true" class="relative flex w-60 flex-col rounded-md border border-border">
+    <div
+      ngCombobox
+      #combobox="ngCombobox"
+      [readonly]="true"
+      class="border-border relative flex w-60 flex-col rounded-md border"
+    >
       <div class="relative flex items-center rounded-md">
         <input
           ngComboboxInput
-          class="w-full cursor-pointer rounded-md border-none bg-popover px-3 py-2.5 text-sm text-popover-foreground outline-none"
+          class="bg-popover text-popover-foreground w-full cursor-pointer rounded-md border-none px-3 py-2.5 text-sm outline-none"
           placeholder="Select a country..."
           [value]="value()"
         />
-        <svg siChevronsUpDownIcon class="pointer-events-none absolute right-2 size-4 shrink-0 opacity-50"></svg>
+        <svg
+          siChevronsUpDownIcon
+          class="pointer-events-none absolute right-2 size-4 shrink-0 opacity-50"
+        ></svg>
       </div>
       <ng-template ngComboboxPopupContainer>
-        <dialog ngComboboxDialog class="absolute border border-border rounded-md bg-popover p-0 text-popover-foreground shadow-md backdrop:bg-transparent">
+        <dialog
+          ngComboboxDialog
+          class="border-border bg-popover text-popover-foreground absolute rounded-md border p-0 shadow-md backdrop:bg-transparent"
+        >
           <div
             ngCombobox
             #combobox="ngCombobox"
             filterMode="manual"
             [alwaysExpanded]="true"
-            class="relative flex w-full flex-col border-none rounded-md"
+            class="relative flex w-full flex-col rounded-md border-none"
           >
-            <div class="relative flex items-center border-b border-border">
-              <svg siSearchIcon class="pointer-events-none absolute left-2.5 size-4 shrink-0 opacity-50"></svg>
+            <div class="border-border relative flex items-center border-b">
+              <svg
+                siSearchIcon
+                class="pointer-events-none absolute left-2.5 size-4 shrink-0 opacity-50"
+              ></svg>
               <input
-                ngComboboxInput
-                class="combobox-input w-full rounded-t-md rounded-b-none border-none bg-popover py-2.5 pl-9 pr-3 text-sm text-popover-foreground outline-none placeholder:text-muted-foreground"
+                scComboboxInput
                 placeholder="Search..."
                 [(value)]="searchString"
               />
             </div>
             <ng-template ngComboboxPopupContainer>
               @if (options().length === 0) {
-                <div class="p-4 text-center text-sm text-muted-foreground">No results found</div>
+                <div class="text-muted-foreground p-4 text-center text-sm">
+                  No results found
+                </div>
               }
-              <div ngListbox [(values)]="selectedCountries" class="flex max-h-52 flex-col gap-0.5 overflow-auto p-1">
+              <div
+                ngListbox
+                [(values)]="selectedCountries"
+                class="flex max-h-52 flex-col gap-0.5 overflow-auto p-1"
+              >
                 @for (option of options(); track option) {
                   <div
                     ngOption
                     [value]="option"
                     [label]="option"
-                    class="flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary"
+                    class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none"
                   >
                     <span class="flex-1">{{ option }}</span>
                     <svg siCheckIcon class="size-4 shrink-0"></svg>

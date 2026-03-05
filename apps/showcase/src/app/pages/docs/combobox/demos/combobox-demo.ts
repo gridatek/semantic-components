@@ -1,7 +1,6 @@
 import {
   Combobox,
   ComboboxDialog,
-  ComboboxInput,
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
@@ -16,6 +15,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ScComboboxInput } from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiChevronsUpDownIcon,
@@ -27,8 +27,8 @@ import {
   imports: [
     ComboboxDialog,
     Combobox,
-    ComboboxInput,
     ComboboxPopupContainer,
+    ScComboboxInput,
     Listbox,
     Option,
     FormsModule,
@@ -74,8 +74,7 @@ import {
                 class="pointer-events-none absolute left-2.5 size-4 shrink-0 opacity-50"
               ></svg>
               <input
-                ngComboboxInput
-                class="combobox-input bg-popover text-popover-foreground placeholder:text-muted-foreground w-full rounded-t-md rounded-b-none border-none py-2.5 pr-3 pl-9 text-sm outline-none"
+                scComboboxInput
                 placeholder="Search..."
                 [(value)]="searchString"
               />
