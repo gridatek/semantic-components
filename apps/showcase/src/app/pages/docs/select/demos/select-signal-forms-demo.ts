@@ -52,8 +52,7 @@ interface FormModel {
           <label scLabel>Fruit</label>
           <!--div
             scSelect
-            #select="scSelect"
-            [formField]="fruitForm.fruit"
+                       [formField]="fruitForm.fruit"
           >
             <div scSelectInputGroup>
               <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />

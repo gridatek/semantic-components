@@ -57,7 +57,7 @@ import {
     SiCheckIcon,
   ],
   template: `
-    <div scSelect #select="scSelect">
+    <div scSelect>
       <div scSelectInputGroup>
         @if (displayIcon(); as icon) {
           <ng-container
