@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScSelect,
+  ScSelectIcon,
   ScSelectInput,
   ScSelectInputGroup,
   ScSelectItem,
@@ -12,7 +13,6 @@ import {
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectTriggerIcon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -25,7 +25,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectPopup,
     ScSelectPortal,
     ScSelectInputGroup,
-    ScSelectTriggerIcon,
+    ScSelectIcon,
     ScSelectInput,
     ScSelectItemIndicator,
     SiChevronDownIcon,
@@ -39,7 +39,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           placeholder="Select a fruit"
           aria-label="Fruit dropdown"
         />
-        <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
+        <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>

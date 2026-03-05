@@ -27,7 +27,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 | `ScSelectGroup`         | `div[scSelectGroup]`          | Groups related options together with vertical layout                                         |
 | `ScSelectGroupLabel`    | `div[scSelectGroupLabel]`     | Label for a group of options                                                                 |
 | `ScSelectSeparator`     | `[scSelectSeparator]`         | Visual separator between groups or items                                                     |
-| `ScSelectTriggerIcon`   | `svg[scSelectTriggerIcon]`    | Chevron icon styling in trigger                                                              |
+| `ScSelectIcon`          | `svg[scSelectIcon]`           | Chevron icon styling in trigger                                                              |
 | `ScSelectItemIndicator` | `svg[scSelectItemIndicator]`  | Checkmark icon for selected state                                                            |
 
 ## Basic Usage
@@ -272,7 +272,7 @@ ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, expor
 ├── ScSelectInputGroup (trigger + overlay origin)
 │   ├── ScSelectItemIcon (consumer icons) [projected content]
 │   ├── ScSelectInput (visible input displaying selected value, placeholder, aria-label) [projected content]
-│   └── ScSelectTriggerIcon + SiChevronDownIcon [internal]
+│   └── ScSelectIcon + SiChevronDownIcon [internal]
 └── ScSelectPortal (ng-template marking lazy overlay content)
     └── ScSelectPopup (popup container with styling and animation)
         └── ScSelectList (wraps Listbox)

@@ -41,7 +41,7 @@ import {
   ScSelectPopup,
   ScSelectPortal,
   ScSelectInputGroup,
-  ScSelectTriggerIcon,
+  ScSelectIcon,
 } from '@semantic-components/ui';
 import {
   SiBookIcon,
@@ -67,7 +67,7 @@ import {
     ScSelectPortal,
     ScSelectInputGroup,
     ScSelectInput,
-    ScSelectTriggerIcon,
+    ScSelectIcon,
     ScSelectItemIndicator,
     SiBookIcon,
     SiBriefcaseIcon,
@@ -88,7 +88,7 @@ import {
           <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
         }
         <input scSelectInput placeholder="Select a label" aria-label="Label dropdown" />
-        <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
+        <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>

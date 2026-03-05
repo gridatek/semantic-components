@@ -3,13 +3,13 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'svg[scSelectTriggerIcon]',
+  selector: 'svg[scSelectIcon]',
   host: {
-    'data-slot': 'select-trigger-icon',
+    'data-slot': 'select-icon',
     '[class]': 'class()',
   },
 })
-export class ScSelectTriggerIcon {
+export class ScSelectIcon {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly combobox = inject(Combobox);

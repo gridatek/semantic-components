@@ -42,7 +42,7 @@ import {
   ScSelectPopup,
   ScSelectPortal,
   ScSelectInputGroup,
-  ScSelectTriggerIcon,
+  ScSelectIcon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -62,7 +62,7 @@ interface FormModel {
     ScSelectPortal,
     ScSelectInputGroup,
     ScSelectInput,
-    ScSelectTriggerIcon,
+    ScSelectIcon,
     ScSelectItemIndicator,
     SiChevronDownIcon,
     SiCheckIcon,
@@ -82,7 +82,7 @@ interface FormModel {
           >
             <div scSelectInputGroup>
               <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />
-              <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
+              <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -100,7 +100,7 @@ interface FormModel {
           <div scSelect #select="scSelect">
             <div scSelectInputGroup>
               <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />
-              <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
+              <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
