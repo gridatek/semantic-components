@@ -141,10 +141,10 @@ import {
     </div>
   \`,
   styles: \`
-    [ngOption][aria-selected='true'] svg[siCheckIcon] {
+    [ngOption][aria-selected='true'] [data-slot='combobox-item-indicator'] {
       display: block;
     }
-    [ngOption]:not([aria-selected='true']) svg[siCheckIcon] {
+    [ngOption]:not([aria-selected='true']) [data-slot='combobox-item-indicator'] {
       display: none;
     }
   \`,
