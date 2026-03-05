@@ -65,7 +65,10 @@ import {
               <div scCarouselItem class="md:basis-1/2 lg:basis-1/3">
                 <div class="p-1">
                   <div scCard>
-                    <div scCardBody class="flex aspect-square items-center justify-center p-6">
+                    <div
+                      scCardBody
+                      class="flex aspect-square items-center justify-center p-6"
+                    >
                       <span class="text-2xl font-semibold">{{ index }}</span>
                     </div>
                   </div>
