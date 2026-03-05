@@ -134,7 +134,7 @@ export class SelectDemo {
     { value: 'starred', label: 'Starred', icon: 'star' },
     { value: 'work', label: 'Work', icon: 'briefcase' },
     { value: 'personal', label: 'Personal', icon: 'user' },
-    { value: 'to-do', label: 'To Do', icon: 'square-check' },
+    { value: 'todo', label: 'To Do', icon: 'square-check' },
     { value: 'later', label: 'Later', icon: 'clock' },
     { value: 'read', label: 'Read', icon: 'book' },
     { value: 'travel', label: 'Travel', icon: 'plane' },
