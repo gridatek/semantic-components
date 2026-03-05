@@ -18,6 +18,7 @@ import {
   ScMultiselectIcon,
   ScMultiselectItem,
   ScMultiselectItemIndicator,
+  ScMultiselectItemLabel,
   ScMultiselectLabel,
   ScMultiselectTrigger,
   ScMultiselectValue,
@@ -46,6 +47,7 @@ import {
     ScMultiselectIcon,
     ScMultiselectItem,
     ScMultiselectItemIndicator,
+    ScMultiselectItemLabel,
     ScMultiselectLabel,
     ScMultiselectTrigger,
     ScMultiselectValue,
@@ -103,7 +105,7 @@ import {
                   <ng-container
                     *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
                   ></ng-container>
-                  <span class="flex-1">{{ option.label }}</span>
+                  <span scMultiselectItemLabel>{{ option.label }}</span>
                   <svg
                     scMultiselectItemIndicator
                     siCheckIcon
