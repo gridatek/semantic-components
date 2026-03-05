@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  ScComboboxDialog,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxInputGroup,
@@ -37,9 +38,9 @@ import {
 @Component({
   selector: 'app-combobox-demo',
   imports: [
-    ComboboxDialog,
     Combobox,
     ComboboxPopupContainer,
+    ScComboboxDialog,
     ScComboboxEmpty,
     ScComboboxInputIcon,
     ScComboboxItem,
@@ -73,10 +74,7 @@ import {
         <svg siChevronsUpDownIcon scComboboxTriggerIcon></svg>
       </div>
       <ng-template ngComboboxPopupContainer>
-        <dialog
-          ngComboboxDialog
-          class="border-border bg-popover text-popover-foreground absolute rounded-md border p-0 shadow-md backdrop:bg-transparent"
-        >
+        <dialog scComboboxDialog>
           <div
             ngCombobox
             #combobox="ngCombobox"
