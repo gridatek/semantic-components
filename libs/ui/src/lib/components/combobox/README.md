@@ -1,0 +1,76 @@
+# Combobox
+
+A set of semantic directives that wrap `@angular/aria/combobox` and `@angular/aria/listbox` primitives with Tailwind CSS and shadcn design tokens.
+
+## Directives
+
+| Directive                  | Selector                                | Wraps                    | Description                                     |
+| -------------------------- | --------------------------------------- | ------------------------ | ----------------------------------------------- |
+| `ScCombobox`               | `div[scCombobox]`                       | `Combobox`               | Outer combobox container with border styling    |
+| `ScComboboxSearch`         | `div[scComboboxSearch]`                 | `Combobox`               | Inner combobox for search panel (borderless)    |
+| `ScComboboxTrigger`        | `div[scComboboxTrigger]`                | -                        | Trigger button container                        |
+| `ScComboboxTriggerInput`   | `input[scComboboxTriggerInput]`         | `ComboboxInput`          | Read-only input displaying selected value       |
+| `ScComboboxTriggerIcon`    | `svg[scComboboxTriggerIcon]`            | -                        | Chevron icon in the trigger                     |
+| `ScComboboxPopupContainer` | `ng-template[scComboboxPopupContainer]` | `ComboboxPopupContainer` | Outer popup container template                  |
+| `ScComboboxDialog`         | `dialog[scComboboxDialog]`              | `ComboboxDialog`         | Dialog overlay for dropdown                     |
+| `ScComboboxInputGroup`     | `div[scComboboxInputGroup]`             | -                        | Search input group with icon                    |
+| `ScComboboxInputIcon`      | `svg[scComboboxInputIcon]`              | -                        | Search icon in the input group                  |
+| `ScComboboxInput`          | `input[scComboboxInput]`                | `ComboboxInput`          | Search input with two-way `value` binding       |
+| `ScComboboxListContainer`  | `ng-template[scComboboxListContainer]`  | `ComboboxPopupContainer` | Inner popup container for the list area         |
+| `ScComboboxList`           | `div[scComboboxList]`                   | `Listbox`                | Scrollable list with two-way `values` binding   |
+| `ScComboboxItem`           | `div[scComboboxItem]`                   | `Option`                 | Selectable item with `value` and `label` inputs |
+| `ScComboboxItemLabel`      | `span[scComboboxItemLabel]`             | -                        | Label text inside an item                       |
+| `ScComboboxItemIndicator`  | `svg[scComboboxItemIndicator]`          | -                        | Check icon, visible when item is selected       |
+| `ScComboboxEmpty`          | `div[scComboboxEmpty]`                  | -                        | Empty state message                             |
+
+## Structure
+
+```html
+<div scCombobox [readonly]="true">
+  <div scComboboxTrigger>
+    <input scComboboxTriggerInput [value]="value()" />
+    <svg siChevronsUpDownIcon scComboboxTriggerIcon></svg>
+  </div>
+  <ng-template scComboboxPopupContainer>
+    <dialog scComboboxDialog>
+      <div scComboboxSearch filterMode="manual" [alwaysExpanded]="true">
+        <div scComboboxInputGroup>
+          <svg siSearchIcon scComboboxInputIcon></svg>
+          <input scComboboxInput [(value)]="searchString" />
+        </div>
+        <ng-template scComboboxListContainer>
+          @if (options().length === 0) {
+          <div scComboboxEmpty>No results found</div>
+          }
+          <div scComboboxList [(values)]="selectedValues">
+            @for (option of options(); track option) {
+            <div scComboboxItem [value]="option" [label]="option">
+              <span scComboboxItemLabel>{{ option }}</span>
+              <svg siCheckIcon scComboboxItemIndicator></svg>
+            </div>
+            }
+          </div>
+        </ng-template>
+      </div>
+    </dialog>
+  </ng-template>
+</div>
+```
+
+## Design Tokens
+
+All directives use shadcn design tokens:
+
+- `bg-popover` / `text-popover-foreground` - Popover background and text
+- `border-border` - Border color
+- `bg-accent` / `text-accent-foreground` - Active item highlight
+- `text-muted-foreground` - Placeholder and empty state text
+- `text-primary` - Selected item text
+
+## Class Merging
+
+Directives that accept a `class` input use the `cn()` utility for Tailwind class merging, allowing consumers to override default styles:
+
+```html
+<div scCombobox class="w-60">...</div>
+```
