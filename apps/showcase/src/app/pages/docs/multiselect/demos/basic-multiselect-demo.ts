@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import {
   ScMultiselect,
+  ScMultiselectDisplayValue,
   ScMultiselectIcon,
   ScMultiselectInput,
   ScMultiselectInputGroup,
@@ -35,6 +36,7 @@ import {
   selector: 'app-basic-multiselect-demo',
   imports: [
     ScMultiselect,
+    ScMultiselectDisplayValue,
     ScMultiselectIcon,
     ScMultiselectInput,
     ScMultiselectInputGroup,
@@ -59,14 +61,16 @@ import {
   template: `
     <div scMultiselect class="w-52">
       <div scMultiselectInputGroup>
-        @if (displayIcon(); as icon) {
-          <ng-container
-            *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-          ></ng-container>
-        }
+        <span scMultiselectDisplayValue>
+          @if (displayIcon(); as icon) {
+            <ng-container
+              *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+            ></ng-container>
+          }
+          <span>{{ displayValue() }}</span>
+        </span>
         <input
           scMultiselectInput
-          [value]="displayValue()"
           placeholder="Select a label"
           aria-label="Label dropdown"
         />
@@ -141,7 +145,7 @@ export class BasicMultiselectDemo {
   displayValue = computed(() => {
     const values = this.multiselect().values();
     if (values.length === 0) {
-      return '';
+      return 'Select a label';
     }
     const firstLabel =
       this.options.find((o) => o.value === values[0])?.label ?? values[0];
