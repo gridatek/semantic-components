@@ -17,6 +17,7 @@ import {
 } from '@angular/core';
 import {
   ScMultiselectIcon,
+  ScMultiselectItemIndicator,
   ScMultiselectLabel,
   ScMultiselectTrigger,
   ScMultiselectValue,
@@ -44,6 +45,7 @@ import {
     Option,
     OverlayModule,
     ScMultiselectIcon,
+    ScMultiselectItemIndicator,
     ScMultiselectLabel,
     ScMultiselectTrigger,
     ScMultiselectValue,
@@ -104,8 +106,9 @@ import {
                   ></ng-container>
                   <span class="flex-1">{{ option.value }}</span>
                   <svg
+                    scMultiselectItemIndicator
                     siCheckIcon
-                    class="[[ngOption]:not([aria-selected='true'])_&]:hidden"
+                    aria-hidden="true"
                   ></svg>
                 </div>
               }
