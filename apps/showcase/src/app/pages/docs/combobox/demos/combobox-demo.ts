@@ -72,12 +72,7 @@ import {
       </div>
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
-          <div
-            scComboboxSearch
-            #combobox="ngCombobox"
-            filterMode="manual"
-            [alwaysExpanded]="true"
-          >
+          <div scComboboxSearch>
             <div scComboboxInputGroup>
               <svg siSearchIcon scComboboxInputIcon></svg>
               <input

@@ -11,20 +11,11 @@ import { cn } from '../../utils';
 @Component({
   selector: 'div[scComboboxSearch]',
   exportAs: 'scComboboxSearch',
-  hostDirectives: [
-    {
-      directive: Combobox,
-      inputs: [
-        'filterMode',
-        'disabled',
-        'readonly',
-        'firstMatch',
-        'alwaysExpanded',
-      ],
-    },
-  ],
+  imports: [Combobox],
   template: `
-    <ng-content />
+    <div ngCombobox filterMode="manual" [alwaysExpanded]="true">
+      <ng-content />
+    </div>
   `,
   host: {
     'data-slot': 'combobox-search',
