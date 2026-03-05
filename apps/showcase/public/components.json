@@ -517,8 +517,7 @@
     "description": "A select component for multiple selections.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Navbar",

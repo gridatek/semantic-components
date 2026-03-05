@@ -22,10 +22,8 @@ export const SC_RATING_ITEM_GROUP = new InjectionToken<ScRatingItemGroup>(
   host: {
     'data-slot': 'rating-item-group',
     role: 'radiogroup',
+    'aria-label': 'Rating',
     '[class]': 'class()',
-    '[attr.aria-valuenow]': 'field.value()',
-    '[attr.aria-valuemin]': '0',
-    '[attr.aria-valuemax]': 'field.max()',
     '(mouseleave)': 'onMouseLeave()',
     '(keydown)': 'onKeydown($event)',
   },
