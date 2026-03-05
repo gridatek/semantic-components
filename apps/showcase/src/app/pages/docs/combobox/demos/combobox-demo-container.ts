@@ -26,7 +26,6 @@ export class ComboboxDemoContainer {
   readonly code = `import {
   Combobox,
   ComboboxDialog,
-  ComboboxInput,
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
@@ -41,7 +40,11 @@ import {
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ScComboboxInput } from '@semantic-components/ui';
+import {
+  ScComboboxInput,
+  ScComboboxTrigger,
+  ScComboboxTriggerInput,
+} from '@semantic-components/ui';
 import {
   SiCheckIcon,
   SiChevronsUpDownIcon,
@@ -53,9 +56,10 @@ import {
   imports: [
     ComboboxDialog,
     Combobox,
-    ComboboxInput,
     ComboboxPopupContainer,
     ScComboboxInput,
+    ScComboboxTrigger,
+    ScComboboxTriggerInput,
     Listbox,
     Option,
     FormsModule,
@@ -71,10 +75,9 @@ import {
       [readonly]="true"
       class="border-border relative flex w-60 flex-col rounded-md border"
     >
-      <div class="relative flex items-center rounded-md">
+      <div scComboboxTrigger>
         <input
-          ngComboboxInput
-          class="bg-popover text-popover-foreground w-full cursor-pointer rounded-md border-none px-3 py-2.5 text-sm outline-none"
+          scComboboxTriggerInput
           placeholder="Select a country..."
           [value]="value()"
         />
