@@ -65,7 +65,10 @@ import {
               <div scCarouselItem>
                 <div class="p-1">
                   <div scCard>
-                    <div scCardBody class="flex aspect-video items-center justify-center p-6">
+                    <div
+                      scCardBody
+                      class="flex aspect-video items-center justify-center p-6"
+                    >
                       <span class="text-muted-foreground text-sm">
                         {{ image.alt }}
                       </span>

@@ -25,7 +25,6 @@ export class ScDialogDemoContainer {
   signal,
 } from '@angular/core';
 import {
-  ScSelectOnFocus,
   ScButton,
   ScDialog,
   ScDialogClose,
@@ -40,6 +39,7 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
+  ScSelectOnFocus,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
