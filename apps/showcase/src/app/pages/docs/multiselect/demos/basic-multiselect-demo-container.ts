@@ -23,15 +23,19 @@ import { BasicMultiselectDemo } from './basic-multiselect-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicMultiselectDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  readonly code = `import { JsonPipe, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
+  signal,
   viewChild,
 } from '@angular/core';
+import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
+  ScField,
+  ScLabel,
   ScMultiselect,
   ScMultiselectDisplayValue,
   ScMultiselectIcon,
@@ -57,9 +61,15 @@ import {
   SiUserIcon,
 } from '@semantic-icons/lucide-icons';
 
+interface FormModel {
+  labels: string;
+}
+
 @Component({
   selector: 'app-basic-multiselect-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScMultiselect,
     ScMultiselectDisplayValue,
     ScMultiselectIcon,
@@ -82,49 +92,68 @@ import {
     SiTagIcon,
     SiUserIcon,
     NgTemplateOutlet,
+    JsonPipe,
+    FormField,
+    FormRoot,
   ],
   template: \`
-    <div scMultiselect class="w-52">
-      <div scMultiselectInputGroup>
-        <span scMultiselectDisplayValue>
-          @if (displayIcon(); as icon) {
-            <ng-container
-              *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-            ></ng-container>
-          }
-          <span>{{ displayValue() }}</span>
-        </span>
-        <input
-          scMultiselectInput
-          placeholder="Select a label"
-          aria-label="Label dropdown"
-        />
-        <svg scMultiselectIcon siChevronDownIcon aria-hidden="true"></svg>
-      </div>
-      <ng-template scMultiselectPortal>
-        <div scMultiselectPopup>
-          <div scMultiselectList multi>
-            @for (option of options; track option.value) {
-              <div
-                scMultiselectItem
-                [value]="option.value"
-                [label]="option.label"
-              >
-                <ng-container
-                  *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
-                ></ng-container>
-                <span scMultiselectItemLabel>{{ option.label }}</span>
-                <svg
-                  scMultiselectItemIndicator
-                  siCheckIcon
-                  aria-hidden="true"
-                ></svg>
+    <form [formRoot]="labelsForm">
+      <div class="space-y-4">
+        <div scField>
+          <label scLabel>Labels</label>
+          <div scMultiselect class="w-52">
+            <div scMultiselectInputGroup>
+              <span scMultiselectDisplayValue>
+                @if (displayIcon(); as icon) {
+                  <ng-container
+                    *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+                  ></ng-container>
+                }
+                <span>{{ displayValue() }}</span>
+              </span>
+              <input
+                scMultiselectInput
+                [formField]="labelsForm.labels"
+                placeholder="Select a label"
+                aria-label="Label dropdown"
+              />
+              <svg scMultiselectIcon siChevronDownIcon aria-hidden="true"></svg>
+            </div>
+            <ng-template scMultiselectPortal>
+              <div scMultiselectPopup>
+                <div scMultiselectList multi>
+                  @for (option of options; track option.value) {
+                    <div
+                      scMultiselectItem
+                      [value]="option.value"
+                      [label]="option.label"
+                    >
+                      <ng-container
+                        *ngTemplateOutlet="
+                          iconTmpl;
+                          context: { icon: option.icon }
+                        "
+                      ></ng-container>
+                      <span scMultiselectItemLabel>{{ option.label }}</span>
+                      <svg
+                        scMultiselectItemIndicator
+                        siCheckIcon
+                        aria-hidden="true"
+                      ></svg>
+                    </div>
+                  }
+                </div>
               </div>
-            }
+            </ng-template>
           </div>
         </div>
-      </ng-template>
-    </div>
+      </div>
+
+      <div class="bg-muted mt-6 rounded-md p-4">
+        <p class="text-sm font-medium">Form Values:</p>
+        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
+      </div>
+    </form>
 
     <ng-template #iconTmpl let-icon="icon">
       @switch (icon) {
@@ -179,6 +208,12 @@ export class BasicMultiselectDemo {
     }
     return \`\${firstLabel} + \${values.length - 1} more\`;
   });
+
+  readonly formModel = signal<FormModel>({
+    labels: '',
+  });
+
+  readonly labelsForm = form(this.formModel);
 
   options = [
     { value: 'important', label: 'Important', icon: 'tag' },
