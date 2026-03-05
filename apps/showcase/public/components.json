@@ -516,7 +516,7 @@
     "path": "multiselect",
     "description": "A select component for multiple selections.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms",
     "hidden": true
   },
