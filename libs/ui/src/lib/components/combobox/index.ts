@@ -1,6 +1,6 @@
 export { ScCombobox } from './combobox';
 export { ScComboboxListContainer } from './combobox-list-container';
-export { ScComboboxSearch } from './combobox-search';
+export { ScComboboxSearchPanel } from './combobox-search';
 export { ScComboboxDialog } from './combobox-dialog';
 export { ScComboboxEmpty } from './combobox-empty';
 export { ScComboboxInputIcon } from './combobox-input-icon';

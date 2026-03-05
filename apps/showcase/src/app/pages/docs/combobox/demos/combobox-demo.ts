@@ -24,7 +24,7 @@ import {
   ScComboboxList,
   ScComboboxListContainer,
   ScComboboxPopupContainer,
-  ScComboboxSearch,
+  ScComboboxSearchPanel,
   ScComboboxTrigger,
   ScComboboxTriggerIcon,
   ScComboboxTriggerInput,
@@ -39,7 +39,7 @@ import {
   selector: 'app-combobox-demo',
   imports: [
     ScCombobox,
-    ScComboboxSearch,
+    ScComboboxSearchPanel,
     ScComboboxListContainer,
     ScComboboxDialog,
     ScComboboxEmpty,
@@ -72,7 +72,7 @@ import {
       </div>
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
-          <div scComboboxSearch>
+          <div scComboboxSearchPanel>
             <div scComboboxInputGroup>
               <svg siSearchIcon scComboboxInputIcon></svg>
               <input
