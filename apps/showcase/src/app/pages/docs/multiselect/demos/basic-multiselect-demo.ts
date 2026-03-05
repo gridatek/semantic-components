@@ -1,10 +1,5 @@
-import {
-  Combobox,
-  ComboboxPopup,
-  ComboboxPopupContainer,
-} from '@angular/aria/combobox';
+import { Combobox } from '@angular/aria/combobox';
 import { Listbox } from '@angular/aria/listbox';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -15,6 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import {
+  ScMultiselect,
   ScMultiselectIcon,
   ScMultiselectItem,
   ScMultiselectItemIndicator,
@@ -22,6 +18,7 @@ import {
   ScMultiselectLabel,
   ScMultiselectList,
   ScMultiselectPopup,
+  ScMultiselectPortal,
   ScMultiselectTrigger,
   ScMultiselectValue,
 } from '@semantic-components/ui-lab';
@@ -41,10 +38,7 @@ import {
 @Component({
   selector: 'app-basic-multiselect-demo',
   imports: [
-    Combobox,
-    ComboboxPopup,
-    ComboboxPopupContainer,
-    OverlayModule,
+    ScMultiselect,
     ScMultiselectIcon,
     ScMultiselectItem,
     ScMultiselectItemIndicator,
@@ -52,6 +46,7 @@ import {
     ScMultiselectLabel,
     ScMultiselectList,
     ScMultiselectPopup,
+    ScMultiselectPortal,
     ScMultiselectTrigger,
     ScMultiselectValue,
     SiBookOpenIcon,
@@ -67,8 +62,8 @@ import {
     NgTemplateOutlet,
   ],
   template: `
-    <div ngCombobox readonly class="flex justify-center">
-      <div scMultiselectTrigger #trigger="scMultiselectTrigger">
+    <div scMultiselect class="flex justify-center">
+      <div scMultiselectTrigger>
         <span scMultiselectValue>
           @if (displayIcon(); as icon) {
             <ng-container
@@ -79,37 +74,28 @@ import {
         </span>
         <svg scMultiselectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
-      <ng-template ngComboboxPopupContainer>
-        <ng-template
-          [cdkConnectedOverlay]="{
-            origin: trigger.elementRef,
-            usePopover: 'inline',
-            matchWidth: true,
-          }"
-          [cdkConnectedOverlayOpen]="true"
-        >
-          <div scMultiselectPopup>
-            <div scMultiselectList multi>
-              @for (option of options; track option.value) {
-                <div
-                  scMultiselectItem
-                  [value]="option.value"
-                  [label]="option.label"
-                >
-                  <ng-container
-                    *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
-                  ></ng-container>
-                  <span scMultiselectItemLabel>{{ option.label }}</span>
-                  <svg
-                    scMultiselectItemIndicator
-                    siCheckIcon
-                    aria-hidden="true"
-                  ></svg>
-                </div>
-              }
-            </div>
+      <ng-template scMultiselectPortal>
+        <div scMultiselectPopup>
+          <div scMultiselectList multi>
+            @for (option of options; track option.value) {
+              <div
+                scMultiselectItem
+                [value]="option.value"
+                [label]="option.label"
+              >
+                <ng-container
+                  *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+                ></ng-container>
+                <span scMultiselectItemLabel>{{ option.label }}</span>
+                <svg
+                  scMultiselectItemIndicator
+                  siCheckIcon
+                  aria-hidden="true"
+                ></svg>
+              </div>
+            }
           </div>
-        </ng-template>
+        </div>
       </ng-template>
     </div>
 
