@@ -13,7 +13,7 @@ import { TocItem } from './toc.service';
   template: `
     @if (items().length > 0) {
       <nav aria-label="Table of contents">
-        <h4 class="mb-4 text-sm font-semibold">On This Page</h4>
+        <p class="mb-4 text-sm font-semibold">On This Page</p>
         <ul class="space-y-2 text-sm">
           @for (item of items(); track item.id) {
             <li>

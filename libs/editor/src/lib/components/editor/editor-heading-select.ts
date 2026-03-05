@@ -23,6 +23,7 @@ const HEADING_OPTIONS: { value: string; label: string }[] = [
   selector: 'select[scEditorHeading]',
   host: {
     'data-slot': 'editor-heading',
+    'aria-label': 'Text style',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[value]': 'editor.currentHeading()',
