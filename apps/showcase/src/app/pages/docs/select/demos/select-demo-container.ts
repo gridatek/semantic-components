@@ -82,7 +82,7 @@ import {
     SiCheckIcon,
   ],
   template: \`
-    <div scSelect>
+    <div scSelect class="w-48">
       <div scSelectInputGroup>
         @if (displayIcon(); as icon) {
           <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
