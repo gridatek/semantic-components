@@ -42,6 +42,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import {
   ScComboboxInput,
+  ScComboboxInputGroup,
   ScComboboxTrigger,
   ScComboboxTriggerIcon,
   ScComboboxTriggerInput,
@@ -59,6 +60,7 @@ import {
     Combobox,
     ComboboxPopupContainer,
     ScComboboxInput,
+    ScComboboxInputGroup,
     ScComboboxTrigger,
     ScComboboxTriggerIcon,
     ScComboboxTriggerInput,
@@ -97,7 +99,7 @@ import {
             [alwaysExpanded]="true"
             class="relative flex w-full flex-col rounded-md border-none"
           >
-            <div class="border-border relative flex items-center border-b">
+            <div scComboboxInputGroup>
               <svg
                 siSearchIcon
                 class="pointer-events-none absolute left-2.5 size-4 shrink-0 opacity-50"
