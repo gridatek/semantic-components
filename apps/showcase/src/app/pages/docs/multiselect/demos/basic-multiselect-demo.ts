@@ -18,7 +18,7 @@ import {
   ScMultiselectPortal,
   ScMultiselectTrigger,
   ScMultiselectValue,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiBookOpenIcon,
   SiBriefcaseIcon,
