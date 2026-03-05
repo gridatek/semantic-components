@@ -35,6 +35,7 @@ import {
   ScSelect,
   ScSelectItem,
   ScSelectItemIcon,
+  ScSelectInput,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -61,6 +62,7 @@ import {
     ScSelectItem,
     ScSelectPortal,
     ScSelectTrigger,
+    ScSelectInput,
     SiBookIcon,
     SiBriefcaseIcon,
     SiClockIcon,
@@ -72,16 +74,12 @@ import {
     NgTemplateOutlet,
   ],
   template: \`
-    <div
-      scSelect
-      #select="scSelect"
-      placeholder="Select a label"
-      aria-label="Label dropdown"
-    >
+    <div scSelect #select="scSelect">
       <div scSelectTrigger>
         @if (displayIcon(); as icon) {
           <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
         }
+        <input scSelectInput placeholder="Select a label" aria-label="Label dropdown" />
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>

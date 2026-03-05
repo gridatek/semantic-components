@@ -33,6 +33,7 @@ import {
   ScSelectGroup,
   ScSelectGroupLabel,
   ScSelectItem,
+  ScSelectInput,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -52,10 +53,13 @@ import {
     ScSelectPortal,
     ScSelectTrigger,
     ScSelectSeparator,
+    ScSelectInput,
   ],
   template: \`
-    <div scSelect placeholder="Select a food" aria-label="Food dropdown">
-      <div scSelectTrigger></div>
+    <div scSelect>
+      <div scSelectTrigger>
+        <input scSelectInput placeholder="Select a food" aria-label="Food dropdown" />
+      </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
