@@ -21,6 +21,7 @@ import {
   ScMultiselectItemLabel,
   ScMultiselectLabel,
   ScMultiselectList,
+  ScMultiselectPopup,
   ScMultiselectTrigger,
   ScMultiselectValue,
 } from '@semantic-components/ui-lab';
@@ -50,6 +51,7 @@ import {
     ScMultiselectItemLabel,
     ScMultiselectLabel,
     ScMultiselectList,
+    ScMultiselectPopup,
     ScMultiselectTrigger,
     ScMultiselectValue,
     SiBookOpenIcon,
@@ -86,12 +88,7 @@ import {
           }"
           [cdkConnectedOverlayOpen]="true"
         >
-          <div
-            [class.invisible]="!combobox()?.expanded()"
-            [class.max-h-0]="!combobox()?.expanded()"
-            [class.overflow-hidden]="!combobox()?.expanded()"
-            class="bg-popover text-popover-foreground mt-2 w-full rounded-lg border p-1 shadow-md transition-all duration-150"
-          >
+          <div scMultiselectPopup>
             <div scMultiselectList multi>
               @for (option of options; track option.value) {
                 <div
