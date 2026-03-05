@@ -4,7 +4,13 @@ import { cn } from '../../utils';
 
 @Directive({
   selector: 'input[scComboboxTriggerInput]',
-  hostDirectives: [ComboboxInput],
+  hostDirectives: [
+    {
+      directive: ComboboxInput,
+      inputs: ['value'],
+      outputs: ['valueChange'],
+    },
+  ],
   host: {
     'data-slot': 'combobox-trigger-input',
     '[class]': 'class()',
