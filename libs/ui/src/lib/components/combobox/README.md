@@ -4,24 +4,24 @@ A set of semantic directives that wrap `@angular/aria/combobox` and `@angular/ar
 
 ## Directives
 
-| Directive                  | Selector                                | Wraps                    | Description                                     |
-| -------------------------- | --------------------------------------- | ------------------------ | ----------------------------------------------- |
-| `ScCombobox`               | `div[scCombobox]`                       | `Combobox`               | Outer combobox container with border styling    |
-| `ScComboboxSearch`         | `div[scComboboxSearch]`                 | `Combobox`               | Inner combobox for search panel (borderless)    |
-| `ScComboboxTrigger`        | `div[scComboboxTrigger]`                | -                        | Trigger button container                        |
-| `ScComboboxTriggerInput`   | `input[scComboboxTriggerInput]`         | `ComboboxInput`          | Read-only input displaying selected value       |
-| `ScComboboxTriggerIcon`    | `svg[scComboboxTriggerIcon]`            | -                        | Chevron icon in the trigger                     |
-| `ScComboboxPopupContainer` | `ng-template[scComboboxPopupContainer]` | `ComboboxPopupContainer` | Outer popup container template                  |
-| `ScComboboxDialog`         | `dialog[scComboboxDialog]`              | `ComboboxDialog`         | Dialog overlay for dropdown                     |
-| `ScComboboxInputGroup`     | `div[scComboboxInputGroup]`             | -                        | Search input group with icon                    |
-| `ScComboboxInputIcon`      | `svg[scComboboxInputIcon]`              | -                        | Search icon in the input group                  |
-| `ScComboboxInput`          | `input[scComboboxInput]`                | `ComboboxInput`          | Search input with two-way `value` binding       |
-| `ScComboboxListContainer`  | `ng-template[scComboboxListContainer]`  | `ComboboxPopupContainer` | Inner popup container for the list area         |
-| `ScComboboxList`           | `div[scComboboxList]`                   | `Listbox`                | Scrollable list with two-way `values` binding   |
-| `ScComboboxItem`           | `div[scComboboxItem]`                   | `Option`                 | Selectable item with `value` and `label` inputs |
-| `ScComboboxItemLabel`      | `span[scComboboxItemLabel]`             | -                        | Label text inside an item                       |
-| `ScComboboxItemIndicator`  | `svg[scComboboxItemIndicator]`          | -                        | Check icon, visible when item is selected       |
-| `ScComboboxEmpty`          | `div[scComboboxEmpty]`                  | -                        | Empty state message                             |
+| Directive                  | Selector                                | Wraps                    | Description                                                                  |
+| -------------------------- | --------------------------------------- | ------------------------ | ---------------------------------------------------------------------------- |
+| `ScCombobox`               | `div[scCombobox]`                       | `Combobox`               | Outer combobox container with border styling                                 |
+| `ScComboboxSearchPanel`    | `div[scComboboxSearchPanel]`            | `Combobox`               | Inner combobox for search panel (borderless)                                 |
+| `ScComboboxTrigger`        | `div[scComboboxTrigger]`                | -                        | Trigger button container                                                     |
+| `ScComboboxTriggerInput`   | `input[scComboboxTriggerInput]`         | `ComboboxInput`          | Read-only input displaying selected value                                    |
+| `ScComboboxTriggerIcon`    | `svg[scComboboxTriggerIcon]`            | -                        | Chevron icon in the trigger                                                  |
+| `ScComboboxPopupContainer` | `ng-template[scComboboxPopupContainer]` | `ComboboxPopupContainer` | Outer popup container template                                               |
+| `ScComboboxDialog`         | `dialog[scComboboxDialog]`              | `ComboboxDialog`         | Dialog overlay with auto-positioning, gotoFirst on open, and close-on-select |
+| `ScComboboxInputGroup`     | `div[scComboboxInputGroup]`             | -                        | Search input group with icon                                                 |
+| `ScComboboxInputIcon`      | `svg[scComboboxInputIcon]`              | -                        | Search icon in the input group                                               |
+| `ScComboboxInput`          | `input[scComboboxInput]`                | `ComboboxInput`          | Search input with two-way `value` binding                                    |
+| `ScComboboxListContainer`  | `ng-template[scComboboxListContainer]`  | `ComboboxPopupContainer` | Inner popup container for the list area                                      |
+| `ScComboboxList`           | `div[scComboboxList]`                   | `Listbox`                | Scrollable list with two-way `values` binding and auto-scroll to active item |
+| `ScComboboxItem`           | `div[scComboboxItem]`                   | `Option`                 | Selectable item with `value` and `label` inputs                              |
+| `ScComboboxItemLabel`      | `span[scComboboxItemLabel]`             | -                        | Label text inside an item                                                    |
+| `ScComboboxItemIndicator`  | `svg[scComboboxItemIndicator]`          | -                        | Check icon, visible when item is selected                                    |
+| `ScComboboxEmpty`          | `div[scComboboxEmpty]`                  | -                        | Empty state message                                                          |
 
 ## Structure
 
@@ -33,7 +33,7 @@ A set of semantic directives that wrap `@angular/aria/combobox` and `@angular/ar
   </div>
   <ng-template scComboboxPopupContainer>
     <dialog scComboboxDialog>
-      <div scComboboxSearch filterMode="manual" [alwaysExpanded]="true">
+      <div scComboboxSearchPanel>
         <div scComboboxInputGroup>
           <svg siSearchIcon scComboboxInputIcon></svg>
           <input scComboboxInput [(value)]="searchString" />
