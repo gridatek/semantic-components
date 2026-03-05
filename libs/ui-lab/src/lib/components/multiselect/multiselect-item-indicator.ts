@@ -12,6 +12,6 @@ export class ScMultiselectItemIndicator {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('[[ngOption]:not([aria-selected=true])_&]:hidden', this.classInput()),
+    cn('hidden [[aria-selected=true]>&]:block', this.classInput()),
   );
 }
