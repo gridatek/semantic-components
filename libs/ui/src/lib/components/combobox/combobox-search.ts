@@ -4,25 +4,17 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  effect,
+  inject,
   input,
 } from '@angular/core';
+import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
 
 @Component({
   selector: 'div[scComboboxSearch]',
   exportAs: 'scComboboxSearch',
-  hostDirectives: [
-    {
-      directive: Combobox,
-      inputs: [
-        'filterMode',
-        'disabled',
-        'readonly',
-        'firstMatch',
-        'alwaysExpanded',
-      ],
-    },
-  ],
+  hostDirectives: [Combobox],
   template: `
     <ng-content />
   `,
@@ -34,6 +26,7 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComboboxSearch {
+  private readonly combobox = inject(Combobox);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
@@ -42,4 +35,9 @@ export class ScComboboxSearch {
       this.classInput(),
     ),
   );
+
+  constructor() {
+    effect(() => signalSetFn(this.combobox.filterMode[SIGNAL], 'manual'));
+    effect(() => signalSetFn(this.combobox.alwaysExpanded[SIGNAL], true));
+  }
 }
