@@ -1,9 +1,0 @@
-export { ScCombobox } from './combobox';
-export { ScComboboxTrigger } from './combobox-trigger';
-export { ScComboboxInput } from './combobox-input';
-export { ScComboboxIcon } from './combobox-icon';
-export { ScComboboxPortal } from './combobox-portal';
-export { ScComboboxList } from './combobox-list';
-export { ScComboboxItem } from './combobox-item';
-export { ScComboboxItemIndicator } from './combobox-item-indicator';
-export { ScComboboxEmpty } from './combobox-empty';

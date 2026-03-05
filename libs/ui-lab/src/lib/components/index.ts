@@ -5,7 +5,6 @@ export * from './chart';
 export * from './native-checkbox';
 export * from './native-dialog';
 export * from './color-picker';
-export * from './combobox';
 export * from './command';
 export * from './confetti';
 export * from './context-menu';

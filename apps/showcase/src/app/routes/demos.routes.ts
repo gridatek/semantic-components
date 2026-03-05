@@ -772,46 +772,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/combobox',
-    children: [
-      {
-        path: 'basic-combobox-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox/demos/basic-combobox-demo').then(
-            (m) => m.BasicComboboxDemo,
-          ),
-      },
-      {
-        path: 'disabled-combobox-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox/demos/disabled-combobox-demo').then(
-            (m) => m.DisabledComboboxDemo,
-          ),
-      },
-      {
-        path: 'multiple-combobox-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox/demos/multiple-combobox-demo').then(
-            (m) => m.MultipleComboboxDemo,
-          ),
-      },
-      {
-        path: 'countries-combobox-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox/demos/countries-combobox-demo').then(
-            (m) => m.CountriesComboboxDemo,
-          ),
-      },
-      {
-        path: 'form-combobox-demo',
-        loadComponent: () =>
-          import('../pages/docs/combobox/demos/form-combobox-demo').then(
-            (m) => m.FormComboboxDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/command',
     children: [
       {
