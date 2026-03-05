@@ -14,27 +14,26 @@ Displays a list of options for the user to pick from — mimics a native select.
 
 ## Components
 
-| Component            | Selector                                    | Responsibility                                                                               |
-| -------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ScSelect`           | `div[scSelect]`                             | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<unknown>` |
-| `ScSelectTrigger`    | `div[scSelectTrigger]`                      | Trigger button, internally renders hidden input and chevron icon                             |
-| `ScSelectLabel`      | `span[scSelectLabel]`, `div[scSelectLabel]` | Automatically displays the selected label text with truncation                               |
-| `ScSelectItemIcon`   | `svg[scSelectItemIcon]`                     | Icon styling for items and value display (sets `aria-hidden="true"` automatically)           |
-| `ScSelectPortal`     | `ng-template[scSelectPortal]`               | Marks lazy content template for the overlay                                                  |
-| `ScSelectPopup`      | `div[scSelectPopup]`                        | Popup container with styling, animation, and visibility                                      |
-| `ScSelectList`       | `div[scSelectList]`                         | Listbox container, wraps `Listbox` from `@angular/aria`                                      |
-| `ScSelectItem`       | `div[scSelectItem]`                         | Option item, wraps `Option`, internally renders check indicator                              |
-| `ScSelectGroup`      | `div[scSelectGroup]`                        | Groups related options together with vertical layout                                         |
-| `ScSelectGroupLabel` | `div[scSelectGroupLabel]`                   | Label for a group of options                                                                 |
-| `ScSelectSeparator`  | `[scSelectSeparator]`                       | Visual separator between groups or items                                                     |
+| Component            | Selector                      | Responsibility                                                                               |
+| -------------------- | ----------------------------- | -------------------------------------------------------------------------------------------- |
+| `ScSelect`           | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic, implements `FormValueControl<unknown>` |
+| `ScSelectTrigger`    | `div[scSelectTrigger]`        | Trigger button, internally renders hidden input and chevron icon                             |
+| `ScSelectItemIcon`   | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)           |
+| `ScSelectPortal`     | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                                  |
+| `ScSelectPopup`      | `div[scSelectPopup]`          | Popup container with styling, animation, and visibility                                      |
+| `ScSelectList`       | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                                      |
+| `ScSelectItem`       | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                              |
+| `ScSelectGroup`      | `div[scSelectGroup]`          | Groups related options together with vertical layout                                         |
+| `ScSelectGroupLabel` | `div[scSelectGroupLabel]`     | Label for a group of options                                                                 |
+| `ScSelectSeparator`  | `[scSelectSeparator]`         | Visual separator between groups or items                                                     |
 
 ### Internal Components (not exported)
 
-| Component               | Selector                     | Responsibility                                           |
-| ----------------------- | ---------------------------- | -------------------------------------------------------- |
-| `ScSelectInput`         | `input[scSelectInput]`       | Hidden input, wraps `ComboboxInput` from `@angular/aria` |
-| `ScSelectTriggerIcon`   | `svg[scSelectTriggerIcon]`   | Chevron icon styling in trigger                          |
-| `ScSelectItemIndicator` | `svg[scSelectItemIndicator]` | Checkmark icon for selected state                        |
+| Component               | Selector                     | Responsibility                                                                      |
+| ----------------------- | ---------------------------- | ----------------------------------------------------------------------------------- |
+| `ScSelectInput`         | `input[scSelectInput]`       | Visible input displaying selected value, wraps `ComboboxInput` from `@angular/aria` |
+| `ScSelectTriggerIcon`   | `svg[scSelectTriggerIcon]`   | Chevron icon styling in trigger                                                     |
+| `ScSelectItemIndicator` | `svg[scSelectItemIndicator]` | Checkmark icon for selected state                                                   |
 
 ## Basic Usage
 

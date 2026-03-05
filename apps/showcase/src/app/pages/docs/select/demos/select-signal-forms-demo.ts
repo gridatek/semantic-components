@@ -11,7 +11,6 @@ import {
   ScLabel,
   ScSelect,
   ScSelectItem,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -33,7 +32,6 @@ interface FormModel {
     ScSelectPopup,
     ScSelectPortal,
     ScSelectTrigger,
-    ScSelectLabel,
     JsonPipe,
     // FormField,
     FormRoot,
@@ -50,9 +48,7 @@ interface FormModel {
             aria-label="Fruit dropdown"
             [formField]="fruitForm.fruit"
           >
-            <div scSelectTrigger>
-              <span scSelectLabel></span>
-            </div>
+            <div scSelectTrigger></div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
                 <div scSelectList>
@@ -71,9 +67,7 @@ interface FormModel {
             placeholder="Select a fruit"
             aria-label="Fruit dropdown"
           >
-            <div scSelectTrigger>
-              <span scSelectLabel></span>
-            </div>
+            <div scSelectTrigger></div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
                 <div scSelectList>

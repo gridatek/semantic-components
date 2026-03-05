@@ -12,7 +12,7 @@ import { cn } from '../../utils';
   selector: 'input[scSelectInput]',
   imports: [],
   template: ``,
-  hostDirectives: [ComboboxInput],
+  hostDirectives: [{ directive: ComboboxInput, inputs: ['value'] }],
   host: {
     'data-slot': 'select-input',
     '[class]': 'class()',
@@ -25,7 +25,7 @@ export class ScSelectInput {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent opacity-0 outline-none',
+      'h-full flex-1 min-w-0 cursor-pointer border-none bg-transparent truncate outline-none',
       this.classInput(),
     ),
   );

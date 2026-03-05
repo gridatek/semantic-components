@@ -35,7 +35,6 @@ import {
   ScSelect,
   ScSelectItem,
   ScSelectItemIcon,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -62,7 +61,6 @@ import {
     ScSelectItem,
     ScSelectPortal,
     ScSelectTrigger,
-    ScSelectLabel,
     SiBookIcon,
     SiBriefcaseIcon,
     SiClockIcon,
@@ -84,7 +82,6 @@ import {
         @if (displayIcon(); as icon) {
           <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
         }
-        <span scSelectLabel></span>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>

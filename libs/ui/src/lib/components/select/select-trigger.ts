@@ -24,6 +24,7 @@ import { ScSelectTriggerIcon } from './select-trigger-icon';
       scSelectInput
       [attr.aria-label]="ariaLabel()"
       [placeholder]="placeholder()"
+      [value]="displayValue()"
     />
     <svg scSelectTriggerIcon siChevronDownIcon aria-hidden="true"></svg>
   `,
@@ -41,6 +42,9 @@ export class ScSelectTrigger {
   private readonly select = inject(forwardRef(() => ScSelect));
   readonly ariaLabel = computed(() => this.select.ariaLabel());
   readonly placeholder = computed(() => this.select.placeholder());
+  readonly displayValue = computed(() =>
+    this.select.value() != null ? this.select.label() : '',
+  );
 
   protected readonly class = computed(() =>
     cn(

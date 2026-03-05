@@ -10,7 +10,6 @@ import {
   ScSelect,
   ScSelectItem,
   ScSelectItemIcon,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -37,7 +36,6 @@ import {
     ScSelectItem,
     ScSelectPortal,
     ScSelectTrigger,
-    ScSelectLabel,
     SiBookIcon,
     SiBriefcaseIcon,
     SiClockIcon,
@@ -57,16 +55,19 @@ import {
     >
       <div scSelectTrigger>
         @if (displayIcon(); as icon) {
-          <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
+          <ng-container
+            *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+          ></ng-container>
         }
-        <span scSelectLabel></span>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
             @for (option of options; track option.value) {
               <div scSelectItem [value]="option.value" [label]="option.label">
-                <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"></ng-container>
+                <ng-container
+                  *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+                ></ng-container>
                 <span class="flex-1">{{ option.label }}</span>
               </div>
             }

@@ -31,7 +31,6 @@ export class SelectDisabledDemoContainer {
 import {
   ScSelect,
   ScSelectItem,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -47,7 +46,6 @@ import {
     ScSelectPopup,
     ScSelectPortal,
     ScSelectTrigger,
-    ScSelectLabel,
   ],
   template: \`
     <div
@@ -56,9 +54,7 @@ import {
       aria-label="Fruit dropdown"
       disabled
     >
-      <div scSelectTrigger>
-        <span scSelectLabel></span>
-      </div>
+      <div scSelectTrigger></div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
