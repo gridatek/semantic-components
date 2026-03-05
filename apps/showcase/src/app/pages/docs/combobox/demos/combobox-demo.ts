@@ -1,8 +1,4 @@
-import {
-  Combobox,
-  ComboboxDialog,
-  ComboboxPopupContainer,
-} from '@angular/aria/combobox';
+import { Combobox, ComboboxDialog } from '@angular/aria/combobox';
 import { Listbox } from '@angular/aria/listbox';
 import {
   ChangeDetectionStrategy,
@@ -26,6 +22,7 @@ import {
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
   ScComboboxList,
+  ScComboboxListContainer,
   ScComboboxPopupContainer,
   ScComboboxTrigger,
   ScComboboxTriggerIcon,
@@ -41,8 +38,8 @@ import {
   selector: 'app-combobox-demo',
   imports: [
     Combobox,
-    ComboboxPopupContainer,
     ScCombobox,
+    ScComboboxListContainer,
     ScComboboxDialog,
     ScComboboxEmpty,
     ScComboboxInputIcon,
@@ -89,7 +86,7 @@ import {
                 [(value)]="searchString"
               />
             </div>
-            <ng-template ngComboboxPopupContainer>
+            <ng-template scComboboxListContainer>
               @if (options().length === 0) {
                 <div scComboboxEmpty>No results found</div>
               }
