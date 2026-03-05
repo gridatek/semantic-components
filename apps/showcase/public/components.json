@@ -202,9 +202,8 @@
     "path": "combobox",
     "description": "An autocomplete input with filtering.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "library": "ui",
+    "category": "Forms"
   },
   {
     "name": "Command",

@@ -1,5 +1,6 @@
 export { ScComboboxEmpty } from './combobox-empty';
 export { ScComboboxInputIcon } from './combobox-input-icon';
+export { ScComboboxItem } from './combobox-item';
 export { ScComboboxItemIndicator } from './combobox-item-indicator';
 export { ScComboboxItemLabel } from './combobox-item-label';
 export { ScComboboxInput } from './combobox-input';

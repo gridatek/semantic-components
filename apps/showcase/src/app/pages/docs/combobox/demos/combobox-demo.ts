@@ -3,7 +3,7 @@ import {
   ComboboxDialog,
   ComboboxPopupContainer,
 } from '@angular/aria/combobox';
-import { Listbox, Option } from '@angular/aria/listbox';
+import { Listbox } from '@angular/aria/listbox';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,6 +20,7 @@ import {
   ScComboboxInput,
   ScComboboxInputGroup,
   ScComboboxInputIcon,
+  ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
   ScComboboxTrigger,
@@ -40,6 +41,7 @@ import {
     ComboboxPopupContainer,
     ScComboboxEmpty,
     ScComboboxInputIcon,
+    ScComboboxItem,
     ScComboboxItemIndicator,
     ScComboboxItemLabel,
     ScComboboxInput,
@@ -48,7 +50,6 @@ import {
     ScComboboxTriggerIcon,
     ScComboboxTriggerInput,
     Listbox,
-    Option,
     FormsModule,
     SiCheckIcon,
     SiChevronsUpDownIcon,
@@ -100,12 +101,7 @@ import {
                 class="flex max-h-52 flex-col gap-0.5 overflow-auto p-1"
               >
                 @for (option of options(); track option) {
-                  <div
-                    ngOption
-                    [value]="option"
-                    [label]="option"
-                    class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none"
-                  >
+                  <div scComboboxItem [value]="option" [label]="option">
                     <span scComboboxItemLabel>{{ option }}</span>
                     <svg siCheckIcon scComboboxItemIndicator></svg>
                   </div>
