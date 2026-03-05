@@ -1,11 +1,8 @@
-import { Combobox } from '@angular/aria/combobox';
-import { Listbox } from '@angular/aria/listbox';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  afterRenderEffect,
   computed,
   viewChild,
 } from '@angular/core';
@@ -132,21 +129,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicMultiselectDemo {
-  /** The combobox listbox popup. */
-  listbox = viewChild<Listbox<string>>(Listbox);
-  /** A reference to the ng aria combobox. */
-  combobox = viewChild<Combobox<string>>(Combobox);
+  private readonly multiselect = viewChild.required(ScMultiselect);
 
-  /** The icon that is displayed in the combobox. */
   displayIcon = computed(() => {
-    const values = this.listbox()?.values() || [];
-    const option = this.options.find((option) => option.value === values[0]);
+    const values = this.multiselect().values();
+    const option = this.options.find((o) => o.value === values[0]);
     return option ? option.icon : '';
   });
 
-  /** The string that is displayed in the combobox. */
   displayValue = computed(() => {
-    const values = this.listbox()?.values() || [];
+    const values = this.multiselect().values();
     if (values.length === 0) {
       return 'Select a label';
     }
@@ -158,7 +150,6 @@ export class BasicMultiselectDemo {
     return `${firstLabel} + ${values.length - 1} more`;
   });
 
-  /** The options that are available for selection. */
   options = [
     { value: 'important', label: 'Important', icon: 'tag' },
     { value: 'starred', label: 'Starred', icon: 'star' },
@@ -169,13 +160,4 @@ export class BasicMultiselectDemo {
     { value: 'read', label: 'Read', icon: 'book-open' },
     { value: 'travel', label: 'Travel', icon: 'plane' },
   ];
-
-  constructor() {
-    // Resets the listbox scroll position when the combobox is closed.
-    afterRenderEffect(() => {
-      if (!this.combobox()?.expanded()) {
-        setTimeout(() => this.listbox()?.element.scrollTo(0, 0), 150);
-      }
-    });
-  }
 }

@@ -5,6 +5,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  afterRenderEffect,
   computed,
   contentChild,
   effect,
@@ -13,6 +14,7 @@ import {
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '@semantic-components/ui';
+import { ScMultiselectList } from './multiselect-list';
 import { ScMultiselectPortal } from './multiselect-portal';
 import { ScMultiselectTrigger } from './multiselect-trigger';
 
@@ -54,14 +56,24 @@ export class ScMultiselect {
   protected readonly class = computed(() => cn('relative', this.classInput()));
 
   private readonly trigger = contentChild(ScMultiselectTrigger);
+  private readonly list = contentChild(ScMultiselectList, {
+    descendants: true,
+  });
   protected readonly multiselectPortal =
     contentChild.required(ScMultiselectPortal);
 
   readonly origin = computed(() => this.trigger()?.elementRef);
+  readonly values = computed(() => this.list()?.values() ?? []);
 
   private readonly combobox = inject(Combobox);
 
   constructor() {
     effect(() => signalSetFn(this.combobox.readonly[SIGNAL], true));
+
+    afterRenderEffect(() => {
+      if (!this.combobox.expanded()) {
+        setTimeout(() => this.list()?.resetScroll(), 150);
+      }
+    });
   }
 }
