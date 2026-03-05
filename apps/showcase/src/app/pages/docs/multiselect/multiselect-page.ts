@@ -15,8 +15,7 @@ import { BasicMultiselectDemoContainer } from './demos/basic-multiselect-demo-co
       <div class="space-y-2">
         <h1 scHeading>Multiselect</h1>
         <p class="text-muted-foreground">
-          Select multiple options from a dropdown with chips, search, and
-          select-all functionality.
+          Select multiple options from a dropdown.
         </p>
         <app-component-badges path="multiselect" />
       </div>
