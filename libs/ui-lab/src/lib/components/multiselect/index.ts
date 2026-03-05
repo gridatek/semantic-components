@@ -3,5 +3,6 @@ export { ScMultiselectItem } from './multiselect-item';
 export { ScMultiselectItemIndicator } from './multiselect-item-indicator';
 export { ScMultiselectItemLabel } from './multiselect-item-label';
 export { ScMultiselectLabel } from './multiselect-label';
+export { ScMultiselectList } from './multiselect-list';
 export { ScMultiselectTrigger } from './multiselect-trigger';
 export { ScMultiselectValue } from './multiselect-value';

@@ -20,6 +20,7 @@ import {
   ScMultiselectItemIndicator,
   ScMultiselectItemLabel,
   ScMultiselectLabel,
+  ScMultiselectList,
   ScMultiselectTrigger,
   ScMultiselectValue,
 } from '@semantic-components/ui-lab';
@@ -42,13 +43,13 @@ import {
     Combobox,
     ComboboxPopup,
     ComboboxPopupContainer,
-    Listbox,
     OverlayModule,
     ScMultiselectIcon,
     ScMultiselectItem,
     ScMultiselectItemIndicator,
     ScMultiselectItemLabel,
     ScMultiselectLabel,
+    ScMultiselectList,
     ScMultiselectTrigger,
     ScMultiselectValue,
     SiBookOpenIcon,
@@ -91,11 +92,7 @@ import {
             [class.overflow-hidden]="!combobox()?.expanded()"
             class="bg-popover text-popover-foreground mt-2 w-full rounded-lg border p-1 shadow-md transition-all duration-150"
           >
-            <div
-              ngListbox
-              multi
-              class="flex max-h-44 flex-col gap-0.5 overflow-auto"
-            >
+            <div scMultiselectList multi>
               @for (option of options; track option.value) {
                 <div
                   scMultiselectItem
