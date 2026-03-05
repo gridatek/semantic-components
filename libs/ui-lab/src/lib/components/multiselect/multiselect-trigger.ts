@@ -37,7 +37,7 @@ export class ScMultiselectTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-background text-foreground hover:bg-accent relative flex items-center rounded-lg border transition-colors',
+      'bg-background text-foreground hover:bg-accent relative flex h-10 items-center rounded-lg border ps-3 pe-8 transition-colors',
       this.classInput(),
     ),
   );

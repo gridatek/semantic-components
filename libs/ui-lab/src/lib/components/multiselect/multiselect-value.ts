@@ -13,7 +13,7 @@ export class ScMultiselectValue {
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none absolute start-3 flex items-center gap-2 [&_svg]:size-4',
+      'pointer-events-none flex items-center gap-2 [&_svg]:size-4',
       this.classInput(),
     ),
   );
