@@ -34,15 +34,14 @@ import {
 import {
   ScMultiselect,
   ScMultiselectIcon,
+  ScMultiselectInput,
+  ScMultiselectInputGroup,
   ScMultiselectItem,
   ScMultiselectItemIndicator,
   ScMultiselectItemLabel,
-  ScMultiselectLabel,
   ScMultiselectList,
   ScMultiselectPopup,
   ScMultiselectPortal,
-  ScMultiselectTrigger,
-  ScMultiselectValue,
 } from '@semantic-components/ui';
 import {
   SiBookOpenIcon,
@@ -62,15 +61,14 @@ import {
   imports: [
     ScMultiselect,
     ScMultiselectIcon,
+    ScMultiselectInput,
+    ScMultiselectInputGroup,
     ScMultiselectItem,
     ScMultiselectItemIndicator,
     ScMultiselectItemLabel,
-    ScMultiselectLabel,
     ScMultiselectList,
     ScMultiselectPopup,
     ScMultiselectPortal,
-    ScMultiselectTrigger,
-    ScMultiselectValue,
     SiBookOpenIcon,
     SiBriefcaseIcon,
     SiCheckIcon,
@@ -84,16 +82,19 @@ import {
     NgTemplateOutlet,
   ],
   template: \`
-    <div scMultiselect class="flex justify-center">
-      <div scMultiselectTrigger>
-        <span scMultiselectValue>
-          @if (displayIcon(); as icon) {
-            <ng-container
-              *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-            ></ng-container>
-          }
-          <span scMultiselectLabel>{{ displayValue() }}</span>
-        </span>
+    <div scMultiselect class="w-52">
+      <div scMultiselectInputGroup>
+        @if (displayIcon(); as icon) {
+          <ng-container
+            *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+          ></ng-container>
+        }
+        <input
+          scMultiselectInput
+          [value]="displayValue()"
+          placeholder="Select a label"
+          aria-label="Label dropdown"
+        />
         <svg scMultiselectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
       <ng-template scMultiselectPortal>
@@ -165,7 +166,7 @@ export class BasicMultiselectDemo {
   displayValue = computed(() => {
     const values = this.multiselect().values();
     if (values.length === 0) {
-      return 'Select a label';
+      return '';
     }
     const firstLabel =
       this.options.find((o) => o.value === values[0])?.label ?? values[0];

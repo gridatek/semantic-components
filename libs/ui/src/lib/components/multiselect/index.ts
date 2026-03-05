@@ -1,11 +1,10 @@
 export { ScMultiselect } from './multiselect';
 export { ScMultiselectIcon } from './multiselect-icon';
+export { ScMultiselectInput } from './multiselect-input';
+export { ScMultiselectInputGroup } from './multiselect-input-group';
 export { ScMultiselectItem } from './multiselect-item';
 export { ScMultiselectItemIndicator } from './multiselect-item-indicator';
 export { ScMultiselectItemLabel } from './multiselect-item-label';
-export { ScMultiselectLabel } from './multiselect-label';
 export { ScMultiselectList } from './multiselect-list';
 export { ScMultiselectPopup } from './multiselect-popup';
 export { ScMultiselectPortal } from './multiselect-portal';
-export { ScMultiselectTrigger } from './multiselect-trigger';
-export { ScMultiselectValue } from './multiselect-value';

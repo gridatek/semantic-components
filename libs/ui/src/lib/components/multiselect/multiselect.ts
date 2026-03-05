@@ -14,9 +14,9 @@ import {
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
+import { ScMultiselectInputGroup } from './multiselect-input-group';
 import { ScMultiselectList } from './multiselect-list';
 import { ScMultiselectPortal } from './multiselect-portal';
-import { ScMultiselectTrigger } from './multiselect-trigger';
 
 @Component({
   selector: 'div[scMultiselect]',
@@ -55,7 +55,7 @@ export class ScMultiselect {
 
   protected readonly class = computed(() => cn('relative', this.classInput()));
 
-  private readonly trigger = contentChild(ScMultiselectTrigger);
+  private readonly trigger = contentChild(ScMultiselectInputGroup);
   private readonly list = contentChild(ScMultiselectList, {
     descendants: true,
   });
