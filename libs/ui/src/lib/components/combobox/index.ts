@@ -1,3 +1,4 @@
+export { ScComboboxInputIcon } from './combobox-input-icon';
 export { ScComboboxInput } from './combobox-input';
 export { ScComboboxInputGroup } from './combobox-input-group';
 export { ScComboboxTrigger } from './combobox-trigger';
