@@ -269,10 +269,10 @@ All components accept a `class` input for custom styling:
 
 ```
 ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, exportAs: 'scSelect')
-├── ScSelectInputGroup (trigger + overlay origin)
+├── ScSelectInputGroup (styled container, overlay origin)
 │   ├── ScSelectItemIcon (consumer icons) [projected content]
-│   ├── ScSelectInput (visible input displaying selected value, placeholder, aria-label) [projected content]
-│   └── ScSelectIcon + SiChevronDownIcon [internal]
+│   ├── ScSelectInput (wraps ComboboxInput, displays selected value, placeholder, aria-label) [projected content]
+│   └── ScSelectIcon (chevron icon with expand/collapse rotation) [projected content]
 └── ScSelectPortal (ng-template marking lazy overlay content)
     └── ScSelectPopup (popup container with styling and animation)
         └── ScSelectList (wraps Listbox)
@@ -281,7 +281,7 @@ ScSelect (root, wraps Combobox, owns overlay, implements FormValueControl, expor
             │   └── ScSelectItem (wraps Option)
             │       ├── ScSelectItemIcon (consumer icons) [projected content]
             │       ├── [projected content]
-            │       └── ScSelectItemIndicator + SiCheckIcon [internal]
+            │       └── ScSelectItemIndicator (checkmark for selected state) [projected content]
             ├── ScSelectSeparator (visual divider between groups)
             └── ScSelectItem (ungrouped option)
 ```
