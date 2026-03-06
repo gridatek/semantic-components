@@ -28,8 +28,8 @@ export class CustomIconsRatingFieldDemoContainer {
 import {
   ScRatingField,
   ScRatingFieldItem,
-  ScRatingIcon,
-  ScRatingItemGroup,
+  ScRatingFieldIcon,
+  ScRatingFieldGroup,
 } from '@semantic-components/ui';
 import { SiHeartIcon } from '@semantic-icons/lucide-icons';
 
@@ -37,9 +37,9 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-custom-icons-rating-field-demo',
   imports: [
     ScRatingField,
-    ScRatingItemGroup,
+    ScRatingFieldGroup,
     ScRatingFieldItem,
-    ScRatingIcon,
+    ScRatingFieldIcon,
     SiHeartIcon,
   ],
   template: \`
@@ -49,10 +49,10 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
         [(value)]="rating"
         [style.--sc-rating-active-color]="'var(--color-red-500)'"
       >
-        <div scRatingItemGroup>
+        <div scRatingFieldGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {
-            <span scRatingItem [value]="i">
-              <svg siHeartIcon scRatingIcon></svg>
+            <span scRatingFieldItem [value]="i">
+              <svg siHeartIcon scRatingFieldIcon></svg>
             </span>
           }
         </div>

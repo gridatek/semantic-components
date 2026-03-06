@@ -9,14 +9,14 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_RATING_FIELD } from './rating-field';
-import { ScRatingIcon } from './rating-icon';
-import { SC_RATING_ITEM_GROUP } from './rating-item-group';
+import { SC_RATING_FIELD_GROUP } from './rating-field-group';
+import { ScRatingFieldIcon } from './rating-field-icon';
 
 @Directive({
-  selector: '[scRatingItem]',
-  exportAs: 'scRatingItem',
+  selector: '[scRatingFieldItem]',
+  exportAs: 'scRatingFieldItem',
   host: {
-    'data-slot': 'rating-item',
+    'data-slot': 'rating-field-item',
     role: 'radio',
     '[class]': 'class()',
     '[attr.aria-checked]': 'isSelected()',
@@ -32,13 +32,13 @@ import { SC_RATING_ITEM_GROUP } from './rating-item-group';
 })
 export class ScRatingFieldItem {
   protected readonly field = inject(SC_RATING_FIELD);
-  protected readonly group = inject(SC_RATING_ITEM_GROUP);
+  protected readonly group = inject(SC_RATING_FIELD_GROUP);
   private readonly elementRef = inject(ElementRef);
 
   readonly value = input.required<number>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly icons = contentChildren(ScRatingIcon);
+  private readonly icons = contentChildren(ScRatingFieldIcon);
 
   readonly state = computed(() => {
     const displayValue = this.group.displayValue();

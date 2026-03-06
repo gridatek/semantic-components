@@ -1,27 +1,27 @@
 import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from '../../utils';
-import { SC_RATING_ITEM_GROUP } from './rating-item-group';
+import { SC_RATING_FIELD_GROUP } from './rating-field-group';
 
-export type ScRatingIconRole = 'single' | 'background' | 'foreground';
+export type ScRatingFieldIconRole = 'single' | 'background' | 'foreground';
 
 const ACTIVE_CLASSES =
   'fill-(--sc-rating-active-color) text-(--sc-rating-active-color)';
 const INACTIVE_CLASSES = 'text-(--sc-rating-inactive-color)';
 
 @Directive({
-  selector: 'svg[scRatingIcon]',
+  selector: 'svg[scRatingFieldIcon]',
   host: {
     '[class]': 'class()',
     '[style.clip-path]': 'clipPath()',
   },
 })
-export class ScRatingIcon {
-  private readonly group = inject(SC_RATING_ITEM_GROUP);
+export class ScRatingFieldIcon {
+  private readonly group = inject(SC_RATING_FIELD_GROUP);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Set by the parent ScRatingFieldItem via contentChildren resolution */
-  readonly role = signal<ScRatingIconRole>('single');
+  readonly role = signal<ScRatingFieldIconRole>('single');
 
   /** Set by the parent ScRatingFieldItem so the icon can read state */
   readonly state = signal<'full' | 'half' | 'empty'>('empty');

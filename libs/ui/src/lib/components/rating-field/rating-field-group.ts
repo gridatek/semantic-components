@@ -10,17 +10,17 @@ import { cn } from '../../utils';
 import { SC_RATING_FIELD } from './rating-field';
 
 // Token for rating item group context
-export const SC_RATING_ITEM_GROUP = new InjectionToken<ScRatingItemGroup>(
-  'SC_RATING_ITEM_GROUP',
+export const SC_RATING_FIELD_GROUP = new InjectionToken<ScRatingFieldGroup>(
+  'SC_RATING_FIELD_GROUP',
 );
 
 @Directive({
-  selector: '[scRatingItemGroup]',
+  selector: '[scRatingFieldGroup]',
   providers: [
-    { provide: SC_RATING_ITEM_GROUP, useExisting: ScRatingItemGroup },
+    { provide: SC_RATING_FIELD_GROUP, useExisting: ScRatingFieldGroup },
   ],
   host: {
-    'data-slot': 'rating-item-group',
+    'data-slot': 'rating-field-group',
     role: 'radiogroup',
     'aria-label': 'Rating',
     '[class]': 'class()',
@@ -28,7 +28,7 @@ export const SC_RATING_ITEM_GROUP = new InjectionToken<ScRatingItemGroup>(
     '(keydown)': 'onKeydown($event)',
   },
 })
-export class ScRatingItemGroup {
+export class ScRatingFieldGroup {
   protected readonly field = inject(SC_RATING_FIELD);
 
   readonly classInput = input<string>('', { alias: 'class' });

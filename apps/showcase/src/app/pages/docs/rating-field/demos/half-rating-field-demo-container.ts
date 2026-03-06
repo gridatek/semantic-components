@@ -28,8 +28,8 @@ export class HalfRatingFieldDemoContainer {
 import {
   ScRatingField,
   ScRatingFieldItem,
-  ScRatingIcon,
-  ScRatingItemGroup,
+  ScRatingFieldIcon,
+  ScRatingFieldGroup,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
@@ -37,19 +37,19 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-half-rating-field-demo',
   imports: [
     ScRatingField,
-    ScRatingItemGroup,
+    ScRatingFieldGroup,
     ScRatingFieldItem,
-    ScRatingIcon,
+    ScRatingFieldIcon,
     SiStarIcon,
   ],
   template: \`
     <div class="flex flex-col gap-2">
       <div scRatingField [(value)]="rating" [allowHalf]="true">
-        <div scRatingItemGroup>
+        <div scRatingFieldGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {
-            <span scRatingItem [value]="i">
-              <svg siStarIcon scRatingIcon></svg>
-              <svg siStarIcon scRatingIcon></svg>
+            <span scRatingFieldItem [value]="i">
+              <svg siStarIcon scRatingFieldIcon></svg>
+              <svg siStarIcon scRatingFieldIcon></svg>
             </span>
           }
         </div>

@@ -31,8 +31,8 @@ import {
   ScLabel,
   ScRatingField,
   ScRatingFieldItem,
-  ScRatingIcon,
-  ScRatingItemGroup,
+  ScRatingFieldIcon,
+  ScRatingFieldGroup,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
@@ -45,9 +45,9 @@ interface ReviewForm {
   selector: 'app-form-rating-field-demo',
   imports: [
     ScRatingField,
-    ScRatingItemGroup,
+    ScRatingFieldGroup,
     ScRatingFieldItem,
-    ScRatingIcon,
+    ScRatingFieldIcon,
     ScButton,
     ScLabel,
     SiStarIcon,
@@ -58,10 +58,10 @@ interface ReviewForm {
       <div class="flex flex-col gap-2">
         <label scLabel>Product Rating</label>
         <div scRatingField [(value)]="formModel().rating">
-          <div scRatingItemGroup>
+          <div scRatingFieldGroup>
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span scRatingItem [value]="i">
-                <svg siStarIcon scRatingIcon></svg>
+              <span scRatingFieldItem [value]="i">
+                <svg siStarIcon scRatingFieldIcon></svg>
               </span>
             }
           </div>

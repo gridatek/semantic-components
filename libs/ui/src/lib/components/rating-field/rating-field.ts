@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
-import { ScRatingFieldItem } from './rating-item';
+import { ScRatingFieldItem } from './rating-field-item';
 
 // Token for rating field context
 export const SC_RATING_FIELD = new InjectionToken<ScRatingField>(
@@ -64,7 +64,7 @@ export class ScRatingField {
     const allItems = this.items();
     if (allItems.length === 0) {
       throw new Error(
-        'ScRatingField: No rating items found. Add at least one [scRatingItem] element.',
+        'ScRatingField: No rating items found. Add at least one [scRatingFieldItem] element.',
       );
     }
     return Math.max(...allItems.map((item) => item.value()));

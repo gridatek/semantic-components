@@ -6,9 +6,9 @@ import {
 } from '@angular/core';
 import {
   ScRatingField,
+  ScRatingFieldGroup,
+  ScRatingFieldIcon,
   ScRatingFieldItem,
-  ScRatingIcon,
-  ScRatingItemGroup,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
@@ -16,18 +16,18 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-max-rating-field-demo',
   imports: [
     ScRatingField,
-    ScRatingItemGroup,
+    ScRatingFieldGroup,
     ScRatingFieldItem,
-    ScRatingIcon,
+    ScRatingFieldIcon,
     SiStarIcon,
   ],
   template: `
     <div class="flex flex-col gap-2">
       <div scRatingField [(value)]="rating">
-        <div scRatingItemGroup>
+        <div scRatingFieldGroup>
           @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
-            <span scRatingItem [value]="i">
-              <svg siStarIcon scRatingIcon class="size-5"></svg>
+            <span scRatingFieldItem [value]="i">
+              <svg siStarIcon scRatingFieldIcon class="size-5"></svg>
             </span>
           }
         </div>
