@@ -11,6 +11,6 @@ export { ScComboboxItemIndicator } from './combobox-item-indicator';
 export { ScComboboxItemLabel } from './combobox-item-label';
 export { ScComboboxSearchInput } from './combobox-search-input';
 export { ScComboboxSearchInputGroup } from './combobox-search-input-group';
-export { ScComboboxTrigger } from './combobox-trigger';
-export { ScComboboxTriggerIcon } from './combobox-trigger-icon';
+export { ScComboboxInputGroup } from './combobox-input-group';
+export { ScComboboxIcon } from './combobox-icon';
 export { ScComboboxInput } from './combobox-input';

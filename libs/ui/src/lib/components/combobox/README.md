@@ -8,9 +8,9 @@ A set of semantic directives that wrap `@angular/aria/combobox` and `@angular/ar
 | ---------------------------- | --------------------------------------- | ------------------------ | ---------------------------------------------------------------------------- |
 | `ScCombobox`                 | `div[scCombobox]`                       | `Combobox`               | Outer combobox container with border styling                                 |
 | `ScComboboxSearchPanel`      | `div[scComboboxSearchPanel]`            | `Combobox`               | Inner combobox for search panel (borderless)                                 |
-| `ScComboboxTrigger`          | `div[scComboboxTrigger]`                | -                        | Trigger button container                                                     |
+| `ScComboboxInputGroup`       | `div[scComboboxInputGroup]`             | -                        | Trigger button container                                                     |
 | `ScComboboxInput`            | `input[scComboboxInput]`                | `ComboboxInput`          | Read-only input displaying selected value                                    |
-| `ScComboboxTriggerIcon`      | `svg[scComboboxTriggerIcon]`            | -                        | Chevron icon in the trigger                                                  |
+| `ScComboboxIcon`             | `svg[scComboboxIcon]`                   | -                        | Chevron icon in the trigger                                                  |
 | `ScComboboxPopupContainer`   | `ng-template[scComboboxPopupContainer]` | `ComboboxPopupContainer` | Outer popup container template                                               |
 | `ScComboboxDialog`           | `dialog[scComboboxDialog]`              | `ComboboxDialog`         | Dialog overlay with auto-positioning, gotoFirst on open, and close-on-select |
 | `ScComboboxSearchInputGroup` | `div[scComboboxSearchInputGroup]`       | -                        | Search input group with icon                                                 |
@@ -27,9 +27,9 @@ A set of semantic directives that wrap `@angular/aria/combobox` and `@angular/ar
 
 ```html
 <div scCombobox [readonly]="true">
-  <div scComboboxTrigger>
+  <div scComboboxInputGroup>
     <input scComboboxInput [value]="value()" />
-    <svg siChevronsUpDownIcon scComboboxTriggerIcon></svg>
+    <svg siChevronsUpDownIcon scComboboxIcon></svg>
   </div>
   <ng-template scComboboxPopupContainer>
     <dialog scComboboxDialog>

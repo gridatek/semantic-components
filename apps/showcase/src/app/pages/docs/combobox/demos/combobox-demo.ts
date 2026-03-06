@@ -11,7 +11,9 @@ import {
   ScCombobox,
   ScComboboxDialog,
   ScComboboxEmpty,
+  ScComboboxIcon,
   ScComboboxInput,
+  ScComboboxInputGroup,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
@@ -22,8 +24,6 @@ import {
   ScComboboxSearchInputGroup,
   ScComboboxSearchInputIcon,
   ScComboboxSearchPanel,
-  ScComboboxTrigger,
-  ScComboboxTriggerIcon,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -45,8 +45,8 @@ import {
     ScComboboxItemLabel,
     ScComboboxSearchInput,
     ScComboboxSearchInputGroup,
-    ScComboboxTrigger,
-    ScComboboxTriggerIcon,
+    ScComboboxInputGroup,
+    ScComboboxIcon,
     ScComboboxList,
     ScComboboxPopupContainer,
     ScComboboxInput,
@@ -58,13 +58,13 @@ import {
   host: { class: 'block w-full' },
   template: `
     <div scCombobox [readonly]="true" class="w-60">
-      <div scComboboxTrigger>
+      <div scComboboxInputGroup>
         <input
           scComboboxInput
           placeholder="Select a country..."
           [value]="value()"
         />
-        <svg siChevronsUpDownIcon scComboboxTriggerIcon></svg>
+        <svg siChevronsUpDownIcon scComboboxIcon></svg>
       </div>
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
