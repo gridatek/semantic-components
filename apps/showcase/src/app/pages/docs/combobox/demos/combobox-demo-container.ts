@@ -96,7 +96,7 @@ import {
           [value]="value()"
         />
         <button scComboboxClear (click)="selectedCountries.set([]); value.set('')">
-          <svg siXIcon class="size-3"></svg>
+          <svg siXIcon></svg>
         </button>
         <svg siChevronsUpDownIcon scComboboxIcon></svg>
       </div>

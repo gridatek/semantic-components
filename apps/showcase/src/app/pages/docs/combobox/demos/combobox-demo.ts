@@ -71,7 +71,7 @@ import {
           [value]="value()"
         />
         <button scComboboxClear>
-          <svg siXIcon class="size-3"></svg>
+          <svg siXIcon></svg>
         </button>
         <svg siChevronsUpDownIcon scComboboxIcon></svg>
       </div>

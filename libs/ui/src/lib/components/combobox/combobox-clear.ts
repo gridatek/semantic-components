@@ -21,7 +21,7 @@ export class ScComboboxClear {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute right-7 flex size-4 items-center justify-center rounded-full opacity-50 hover:opacity-100',
+      'absolute right-7 flex size-4 items-center justify-center rounded-full opacity-50 hover:opacity-100 [&_svg]:size-3',
       this.classInput(),
     ),
   );
