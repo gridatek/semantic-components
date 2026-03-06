@@ -15,31 +15,16 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
         <h4 class="font-semibold">Notification Preferences</h4>
         <div class="space-y-4">
           <div scCheckboxField>
-            <input
-              type="checkbox"
-              scCheckbox
-              [(checked)]="emailNotif"
-              id="email-notif"
-            />
-            <label scLabel for="email-notif">Email notifications</label>
+            <input type="checkbox" scCheckbox [(checked)]="emailNotif" />
+            <label scLabel>Email notifications</label>
           </div>
           <div scCheckboxField>
-            <input
-              type="checkbox"
-              scCheckbox
-              [(checked)]="smsNotif"
-              id="sms-notif"
-            />
-            <label scLabel for="sms-notif">SMS notifications</label>
+            <input type="checkbox" scCheckbox [(checked)]="smsNotif" />
+            <label scLabel>SMS notifications</label>
           </div>
           <div scCheckboxField>
-            <input
-              type="checkbox"
-              scCheckbox
-              [(checked)]="pushNotif"
-              id="push-notif"
-            />
-            <label scLabel for="push-notif">Push notifications</label>
+            <input type="checkbox" scCheckbox [(checked)]="pushNotif" />
+            <label scLabel>Push notifications</label>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScLabel,
   ScRangeSlider,
   ScRangeSliderMax,
   ScRangeSliderMin,
@@ -11,10 +12,10 @@ import {
 
 @Component({
   selector: 'app-basic-range-slider-demo',
-  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax],
+  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax, ScLabel],
   template: `
     <div class="w-[280px] space-y-4">
-      <label class="text-sm font-medium">
+      <label scLabel>
         Price range: {{ '$' + minValue }} &ndash; {{ '$' + maxValue }}
       </label>
       <div

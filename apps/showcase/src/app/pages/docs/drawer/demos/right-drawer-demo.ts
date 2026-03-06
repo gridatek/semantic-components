@@ -13,6 +13,9 @@ import {
   ScDrawerProvider,
   ScDrawerTitle,
   ScDrawerTrigger,
+  ScLabel,
+  ScSwitch,
+  ScSwitchField,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
@@ -28,6 +31,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScDrawerProvider,
     ScDrawerTitle,
     ScDrawerTrigger,
+    ScLabel,
+    ScSwitch,
+    ScSwitchField,
     SiXIcon,
   ],
   template: `
@@ -52,29 +58,18 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             <p scDrawerDescription>Configure your preferences.</p>
           </div>
           <div class="space-y-4 p-4">
-            <div class="flex items-center justify-between">
-              <label for="dark-mode" class="text-sm font-medium">
-                Dark Mode
-              </label>
-              <input id="dark-mode" type="checkbox" class="size-4" />
-            </div>
-            <div class="flex items-center justify-between">
-              <label for="notifications" class="text-sm font-medium">
-                Notifications
-              </label>
-              <input
-                id="notifications"
-                type="checkbox"
-                class="size-4"
-                checked
-              />
-            </div>
-            <div class="flex items-center justify-between">
-              <label for="compact" class="text-sm font-medium">
-                Compact Mode
-              </label>
-              <input id="compact" type="checkbox" class="size-4" />
-            </div>
+            <label scSwitchField>
+              <input type="checkbox" scSwitch />
+              <label scLabel>Dark Mode</label>
+            </label>
+            <label scSwitchField>
+              <input type="checkbox" scSwitch checked />
+              <label scLabel>Notifications</label>
+            </label>
+            <label scSwitchField>
+              <input type="checkbox" scSwitch />
+              <label scLabel>Compact Mode</label>
+            </label>
           </div>
         </div>
       </ng-template>

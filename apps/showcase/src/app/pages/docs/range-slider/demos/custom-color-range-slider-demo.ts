@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScLabel,
   ScRangeSlider,
   ScRangeSliderMax,
   ScRangeSliderMin,
@@ -11,10 +12,10 @@ import {
 
 @Component({
   selector: 'app-custom-color-range-slider-demo',
-  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax],
+  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax, ScLabel],
   template: `
     <div class="w-[280px] space-y-4">
-      <label class="text-sm font-medium">
+      <label scLabel>
         Temperature: {{ minValue }}&deg;C &ndash; {{ maxValue }}&deg;C
       </label>
       <div
