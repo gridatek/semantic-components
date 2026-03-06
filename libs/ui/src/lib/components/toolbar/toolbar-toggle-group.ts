@@ -9,7 +9,7 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[scToolbarWidgetGroup]',
+  selector: 'div[scToolbarToggleGroup]',
   hostDirectives: [
     {
       directive: ToolbarWidgetGroup,
@@ -20,13 +20,13 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'toolbar-widget-group',
+    'data-slot': 'toolbar-toggle-group',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScToolbarWidgetGroup {
+export class ScToolbarToggleGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

@@ -19,7 +19,7 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'accordion-content',
+    'data-slot': 'accordion-panel',
     '[class]': 'class()',
   },
   template: `

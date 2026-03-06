@@ -11,7 +11,7 @@ import { cn } from '../../utils';
 import { toggleVariants } from '../toggle/toggle';
 
 @Component({
-  selector: 'button[scToolbarWidget]',
+  selector: 'button[scToolbarToggle]',
   hostDirectives: [
     {
       directive: ToolbarWidget,
@@ -22,7 +22,7 @@ import { toggleVariants } from '../toggle/toggle';
     <ng-content />
   `,
   host: {
-    'data-slot': 'toolbar-widget',
+    'data-slot': 'toolbar-toggle',
     type: 'button',
     '[attr.data-state]': 'widget.selected() ? "on" : "off"',
     '[class]': 'class()',
@@ -30,7 +30,7 @@ import { toggleVariants } from '../toggle/toggle';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScToolbarWidget {
+export class ScToolbarToggle {
   protected readonly widget = inject(ToolbarWidget);
 
   readonly classInput = input<string>('', { alias: 'class' });
