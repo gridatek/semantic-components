@@ -29,7 +29,6 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  input,
   signal,
 } from '@angular/core';
 import {
@@ -109,8 +108,8 @@ interface CommandItem {
         class="text-muted-foreground relative w-full text-sm sm:w-64"
       >
         <span>Click or press</span>
-        <kbd scKbd scHotkey="mod+j" (scHotkeyPressed)="open.update(v => !v)">
-          {{ shortcut() }}
+        <kbd scKbd scHotkey="mod+j" #hk="scHotkey" (scHotkeyPressed)="open.update(v => !v)">
+          {{ hk.displayKey() }}
         </kbd>
       </button>
       <ng-template scDialogPortal>
@@ -215,7 +214,6 @@ interface CommandItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandDialogDemo {
-  readonly shortcut = input('⌘J');
   readonly open = signal(false);
   readonly searchString = signal('');
 

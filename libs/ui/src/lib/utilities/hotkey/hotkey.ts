@@ -1,12 +1,33 @@
-import { DestroyRef, Directive, inject, input, output } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  computed,
+  inject,
+  input,
+  output,
+} from '@angular/core';
+
+const MODIFIER_SYMBOLS: Record<string, string> = {
+  mod: '⌘',
+  meta: '⌘',
+  ctrl: '⌃',
+  alt: '⌥',
+  shift: '⇧',
+};
 
 @Directive({
   selector: '[scHotkey]',
+  exportAs: 'scHotkey',
 })
 export class ScHotkey {
   /** Key combo string, e.g. 'ctrl+j', 'meta+k', 'mod+j' (mod = meta or ctrl) */
   readonly key = input.required<string>({ alias: 'scHotkey' });
   readonly scHotkeyPressed = output();
+
+  readonly displayKey = computed(() => {
+    const parts = this.key().toLowerCase().split('+');
+    return parts.map((p) => MODIFIER_SYMBOLS[p] ?? p.toUpperCase()).join('');
+  });
 
   constructor() {
     const destroyRef = inject(DestroyRef);
