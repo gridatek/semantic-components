@@ -70,10 +70,7 @@ import {
           placeholder="Select a country..."
           [value]="value()"
         />
-        <button
-          scComboboxClear
-          (click)="selectedCountries.set([]); value.set('')"
-        >
+        <button scComboboxClear>
           <svg siXIcon class="size-3"></svg>
         </button>
         <svg siChevronsUpDownIcon scComboboxIcon></svg>
