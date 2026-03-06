@@ -9,11 +9,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScDialog,
-  ScDialogPortal,
-  ScDialogProvider,
-} from '@semantic-components/ui';
-import {
   ScCommand,
   ScCommandEmpty,
   ScCommandGroup,
@@ -25,7 +20,10 @@ import {
   ScCommandListContainer,
   ScCommandSeparator,
   ScCommandShortcut,
-} from '@semantic-components/ui-lab';
+  ScDialog,
+  ScDialogPortal,
+  ScDialogProvider,
+} from '@semantic-components/ui';
 import {
   SiCalculatorIcon,
   SiCalendarIcon,

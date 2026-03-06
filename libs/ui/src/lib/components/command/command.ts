@@ -1,7 +1,7 @@
 import { Combobox } from '@angular/aria/combobox';
 import { Directive, computed, effect, inject, input } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 
 @Directive({
   selector: 'div[scCommand]',
