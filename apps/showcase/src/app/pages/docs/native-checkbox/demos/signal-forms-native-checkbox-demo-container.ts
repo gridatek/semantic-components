@@ -52,7 +52,9 @@ interface CheckboxFormModel {
             type="checkbox"
             [formField]="checkboxForm.newsletter"
           />
-          <span class="text-sm leading-none font-medium">Subscribe to newsletter</span>
+          <span class="text-sm leading-none font-medium">
+            Subscribe to newsletter
+          </span>
         </label>
 
         <label class="flex items-center space-x-2">
@@ -61,7 +63,9 @@ interface CheckboxFormModel {
             type="checkbox"
             [formField]="checkboxForm.marketing"
           />
-          <span class="text-sm leading-none font-medium">Receive marketing emails</span>
+          <span class="text-sm leading-none font-medium">
+            Receive marketing emails
+          </span>
         </label>
 
         <label class="flex items-center space-x-2">
@@ -70,7 +74,9 @@ interface CheckboxFormModel {
             type="checkbox"
             [formField]="checkboxForm.acceptTerms"
           />
-          <span class="text-sm leading-none font-medium">Accept terms and conditions</span>
+          <span class="text-sm leading-none font-medium">
+            Accept terms and conditions
+          </span>
         </label>
       </div>
 
