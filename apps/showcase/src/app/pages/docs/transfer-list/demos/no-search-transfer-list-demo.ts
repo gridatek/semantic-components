@@ -19,6 +19,7 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
       targetTitle="Chosen"
     />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -20,6 +20,7 @@ import { SiItalicIcon } from '@semantic-icons/lucide-icons';
       <svg siItalicIcon></svg>
     </button>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

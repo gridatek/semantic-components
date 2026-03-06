@@ -21,6 +21,7 @@ import { ScDatePicker } from '@semantic-components/ui';
       placeholder="Pick a date (next 30 days)"
     />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

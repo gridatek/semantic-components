@@ -13,6 +13,7 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
       Hover me
     </button>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

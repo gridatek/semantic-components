@@ -20,6 +20,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
       <sc-qr-code [value]="inputValue" [size]="200" />
     }
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

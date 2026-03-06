@@ -18,6 +18,7 @@ import { ScLink } from '@semantic-components/ui';
       <a scLink variant="link">Link</a>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

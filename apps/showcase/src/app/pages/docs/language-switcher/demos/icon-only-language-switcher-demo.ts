@@ -14,6 +14,7 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
       <span class="text-muted-foreground text-sm">Globe icon only</span>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

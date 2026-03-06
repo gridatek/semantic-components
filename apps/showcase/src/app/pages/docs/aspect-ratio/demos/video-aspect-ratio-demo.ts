@@ -18,6 +18,7 @@ import { SiPlayIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -13,6 +13,7 @@ import { ScPhoneInput } from '@semantic-components/ui-lab';
       <sc-phone-input defaultCountry="GB" />
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

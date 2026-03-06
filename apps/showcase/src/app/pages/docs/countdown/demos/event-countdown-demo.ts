@@ -29,6 +29,7 @@ import { ScCountdown } from '@semantic-components/ui-lab';
       </button>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

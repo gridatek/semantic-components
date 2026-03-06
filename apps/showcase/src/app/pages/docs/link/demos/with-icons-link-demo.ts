@@ -21,6 +21,7 @@ import { SiExternalLinkIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
       </a>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

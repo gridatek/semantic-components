@@ -21,6 +21,7 @@ import { type Annotation, ScImageAnnotator } from '@semantic-components/ui-lab';
       Annotations: {{ annotationCount() }}
     </p>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

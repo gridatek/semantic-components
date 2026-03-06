@@ -21,6 +21,7 @@ import {
       placeholder="Select date range"
     />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

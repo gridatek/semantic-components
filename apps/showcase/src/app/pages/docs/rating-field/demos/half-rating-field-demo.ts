@@ -38,6 +38,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
       </p>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,6 +14,7 @@ import { ScSkeleton } from '@semantic-components/ui';
       <div scSkeleton class="h-4 w-[200px]"></div>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

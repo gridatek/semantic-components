@@ -32,6 +32,7 @@ import {
     ScAlertDialogTrigger,
     ScButton,
   ],
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   template: `
     <div scAlertDialogProvider>

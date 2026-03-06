@@ -47,6 +47,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       </ng-template>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

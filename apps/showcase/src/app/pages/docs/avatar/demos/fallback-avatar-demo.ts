@@ -18,6 +18,7 @@ import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui';
       </span>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

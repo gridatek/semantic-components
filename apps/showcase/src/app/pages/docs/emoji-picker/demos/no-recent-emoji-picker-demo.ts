@@ -7,6 +7,7 @@ import { ScEmojiPicker } from '@semantic-components/ui-lab';
   template: `
     <sc-emoji-picker [showRecent]="false" />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class NoRecentEmojiPickerDemo {}

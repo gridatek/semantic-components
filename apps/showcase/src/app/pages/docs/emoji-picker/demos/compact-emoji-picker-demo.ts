@@ -7,6 +7,7 @@ import { ScEmojiPicker } from '@semantic-components/ui-lab';
   template: `
     <sc-emoji-picker [columns]="6" class="w-56" />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class CompactEmojiPickerDemo {}

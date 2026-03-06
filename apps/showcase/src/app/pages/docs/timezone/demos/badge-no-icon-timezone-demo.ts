@@ -14,6 +14,7 @@ import { ScTimezoneBadge } from '@semantic-components/ui-lab';
       <span scTimezoneBadge [showIcon]="false" [showLabel]="true"></span>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

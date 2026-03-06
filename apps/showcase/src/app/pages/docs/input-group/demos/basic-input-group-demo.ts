@@ -30,6 +30,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
       <input scInput variant="group" placeholder="Email address" />
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

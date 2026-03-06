@@ -13,6 +13,7 @@ import { ScLanguageSelect } from '@semantic-components/ui-lab';
       <sc-language-select></sc-language-select>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

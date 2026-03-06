@@ -19,6 +19,7 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
       placeholder="Select within last 30 days"
     />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

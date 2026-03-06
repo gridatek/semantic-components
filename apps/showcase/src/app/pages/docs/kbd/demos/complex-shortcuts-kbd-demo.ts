@@ -36,6 +36,7 @@ import { ScKbd } from '@semantic-components/ui';
       </div>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

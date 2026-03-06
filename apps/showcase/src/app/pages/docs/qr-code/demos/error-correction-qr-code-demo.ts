@@ -44,6 +44,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
       </div>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -34,6 +34,7 @@ import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
       {{ option3() ? 'Three' : '' }}
     </p>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

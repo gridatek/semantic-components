@@ -16,6 +16,7 @@ import { ScButton } from '@semantic-components/ui';
       <button scButton variant="outline" disabled>Outline</button>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

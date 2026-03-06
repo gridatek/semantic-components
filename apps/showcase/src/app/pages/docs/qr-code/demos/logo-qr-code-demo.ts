@@ -17,6 +17,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
       [logoSize]="0.25"
     />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

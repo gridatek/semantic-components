@@ -75,6 +75,7 @@ interface UserFormModel {
       </div>
     </form>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -13,6 +13,7 @@ import { ScTimezoneSelect } from '@semantic-components/ui-lab';
       <sc-timezone-select [showAbbr]="false"></sc-timezone-select>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

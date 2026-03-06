@@ -27,6 +27,7 @@ import {
       <div scNotificationCenterContainer class="h-full"></div>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

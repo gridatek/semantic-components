@@ -32,6 +32,7 @@ interface Item {
       </div>
     </sc-infinite-scroll>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

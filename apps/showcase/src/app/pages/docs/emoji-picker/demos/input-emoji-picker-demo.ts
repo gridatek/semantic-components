@@ -46,6 +46,7 @@ import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
       </div>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class InputEmojiPickerDemo {

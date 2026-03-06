@@ -12,6 +12,7 @@ import { ScImageAnnotator } from '@semantic-components/ui-lab';
   template: `
     <sc-image-annotator [src]="imageSrc()" [width]="400" [height]="300" />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

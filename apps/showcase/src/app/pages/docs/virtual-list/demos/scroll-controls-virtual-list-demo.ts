@@ -63,6 +63,7 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
       </sc-virtual-list>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

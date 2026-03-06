@@ -13,6 +13,7 @@ import { MentionUser, ScMentionInput } from '@semantic-components/ui-lab';
       <sc-mention-input [users]="sampleUsers" [disabled]="true" />
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

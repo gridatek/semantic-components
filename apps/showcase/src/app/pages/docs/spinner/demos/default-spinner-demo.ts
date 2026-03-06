@@ -12,6 +12,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   template: `
     <svg scSpinner siLoaderCircleIcon></svg>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

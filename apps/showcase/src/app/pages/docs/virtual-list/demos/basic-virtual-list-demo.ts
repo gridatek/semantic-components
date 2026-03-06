@@ -37,6 +37,7 @@ import {
       {{ visibleRange().start }} - {{ visibleRange().end }}
     </p>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

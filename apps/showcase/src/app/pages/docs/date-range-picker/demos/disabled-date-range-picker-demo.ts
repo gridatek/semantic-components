@@ -11,6 +11,7 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
   template: `
     <sc-date-range-picker [disabled]="true" placeholder="Disabled" />
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

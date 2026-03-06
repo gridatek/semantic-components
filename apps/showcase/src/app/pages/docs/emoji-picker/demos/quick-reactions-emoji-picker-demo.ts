@@ -23,6 +23,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
       </p>
     }
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class QuickReactionsEmojiPickerDemo {

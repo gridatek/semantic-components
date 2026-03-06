@@ -35,6 +35,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
       <p class="text-muted-foreground text-sm">Rating: {{ rating() }} / 10</p>
     </div>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
