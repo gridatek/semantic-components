@@ -228,7 +228,7 @@
     "path": "context-menu",
     "description": "A menu displayed on right-click.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Overlay",
     "hidden": true
   },
