@@ -9,7 +9,6 @@ import { ScCombobox } from './combobox';
     '[class]': 'class()',
     '[hidden]': '!hasValue()',
     type: 'button',
-    'aria-label': 'Clear selection',
   },
 })
 export class ScComboboxClear {
