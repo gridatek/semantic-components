@@ -210,9 +210,8 @@
     "path": "command",
     "description": "A command palette for quick actions and search.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Overlay",
-    "hidden": true
+    "library": "ui",
+    "category": "Overlay"
   },
   {
     "name": "Confetti",
