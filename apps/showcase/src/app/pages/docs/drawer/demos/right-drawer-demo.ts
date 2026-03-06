@@ -63,7 +63,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               <label scLabel>Dark Mode</label>
             </label>
             <label scSwitchField>
-              <input type="checkbox" scSwitch checked />
+              <input type="checkbox" scSwitch [checked]="true" />
               <label scLabel>Notifications</label>
             </label>
             <label scSwitchField>
