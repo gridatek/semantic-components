@@ -31,7 +31,6 @@ export class ScCommandDialogDemoContainer {
   computed,
   inject,
   signal,
-  viewChild,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
@@ -45,11 +44,14 @@ import {
   ScCommandGroup,
   ScCommandGroupHeading,
   ScCommandInput,
+  ScCommandInputGroup,
   ScCommandItem,
   ScCommandList,
+  ScCommandListContainer,
   ScCommandSeparator,
   ScCommandShortcut,
 } from '@semantic-components/ui-lab';
+import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 interface CommandItem {
   value: string;
@@ -67,10 +69,13 @@ interface CommandItem {
     ScCommandGroup,
     ScCommandGroupHeading,
     ScCommandInput,
+    ScCommandInputGroup,
     ScCommandItem,
     ScCommandList,
+    ScCommandListContainer,
     ScCommandSeparator,
     ScCommandShortcut,
+    SiSearchIcon,
     ScDialogProvider,
     ScDialogPortal,
     ScDialog,
@@ -89,8 +94,12 @@ interface CommandItem {
     <div scDialogProvider [(open)]="open">
       <ng-template scDialogPortal>
         <div scDialog class="w-lg gap-0 p-0">
-          <div scCommand class="**:data-[slot=command-input]:h-12">
-            <div scCommandInput placeholder="Type a command or search..."></div>
+          <div scCommand class="**:data-[slot=command-input-group]:h-12">
+            <div scCommandInputGroup>
+              <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+              <input scCommandInput placeholder="Type a command or search..." [(value)]="searchString" />
+            </div>
+            <ng-template scCommandListContainer>
             <div scCommandList>
               @if (
                 filteredSuggestions().length === 0 &&
@@ -146,6 +155,7 @@ interface CommandItem {
                 </div>
               }
             </div>
+            </ng-template>
           </div>
         </div>
       </ng-template>
@@ -156,8 +166,8 @@ interface CommandItem {
 })
 export class ScCommandDialogDemo {
   readonly open = signal(false);
+  readonly searchString = signal('');
 
-  private readonly command = viewChild(ScCommand);
   private readonly destroyRef = inject(DestroyRef);
   private readonly sanitizer = inject(DomSanitizer);
 
@@ -232,12 +242,12 @@ export class ScCommandDialogDemo {
   }
 
   readonly filteredSuggestions = computed(() => {
-    const search = this.command()?.value().toLowerCase() ?? '';
+    const search = this.searchString().toLowerCase();
     return this.filterItems(this.suggestions, search);
   });
 
   readonly filteredSettings = computed(() => {
-    const search = this.command()?.value().toLowerCase() ?? '';
+    const search = this.searchString().toLowerCase();
     return this.filterItems(this.settings, search);
   });
 

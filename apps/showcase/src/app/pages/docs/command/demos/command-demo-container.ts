@@ -29,7 +29,7 @@ export class ScCommandDemoContainer {
   ViewEncapsulation,
   computed,
   inject,
-  viewChild,
+  signal,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
@@ -38,11 +38,14 @@ import {
   ScCommandGroup,
   ScCommandGroupHeading,
   ScCommandInput,
+  ScCommandInputGroup,
   ScCommandItem,
   ScCommandList,
+  ScCommandListContainer,
   ScCommandSeparator,
   ScCommandShortcut,
 } from '@semantic-components/ui-lab';
+import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 interface CommandItem {
   value: string;
@@ -60,16 +63,23 @@ interface CommandItem {
     ScCommandGroup,
     ScCommandGroupHeading,
     ScCommandInput,
+    ScCommandInputGroup,
     ScCommandItem,
     ScCommandList,
+    ScCommandListContainer,
     ScCommandSeparator,
     ScCommandShortcut,
+    SiSearchIcon,
   ],
   template: \`
     <div class="flex flex-col gap-8">
       <div class="w-full max-w-md">
         <div scCommand class="rounded-lg border shadow-md">
-          <div scCommandInput placeholder="Type a command or search..."></div>
+          <div scCommandInputGroup>
+            <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+            <input scCommandInput placeholder="Type a command or search..." [(value)]="searchString" />
+          </div>
+          <ng-template scCommandListContainer>
           <div scCommandList>
             @if (
               filteredSuggestions().length === 0 &&
@@ -124,6 +134,7 @@ interface CommandItem {
               </div>
             }
           </div>
+          </ng-template>
         </div>
       </div>
     </div>
@@ -132,7 +143,7 @@ interface CommandItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommandDemo {
-  private readonly command = viewChild.required(ScCommand);
+  readonly searchString = signal('');
   private readonly sanitizer = inject(DomSanitizer);
 
   private svg(content: string): SafeHtml {
@@ -206,12 +217,12 @@ export class ScCommandDemo {
   }
 
   readonly filteredSuggestions = computed(() => {
-    const search = this.command().value().toLowerCase();
+    const search = this.searchString().toLowerCase();
     return this.filterItems(this.suggestions, search);
   });
 
   readonly filteredSettings = computed(() => {
-    const search = this.command().value().toLowerCase();
+    const search = this.searchString().toLowerCase();
     return this.filterItems(this.settings, search);
   });
 

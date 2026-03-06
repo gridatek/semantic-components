@@ -1,30 +1,28 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-  model,
-} from '@angular/core';
+import { Combobox } from '@angular/aria/combobox';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
+@Directive({
   selector: 'div[scCommand]',
-  template: `
-    <ng-content />
-  `,
+  hostDirectives: [
+    {
+      directive: Combobox,
+      inputs: [
+        'filterMode',
+        'disabled',
+        'readonly',
+        'firstMatch',
+        'alwaysExpanded',
+      ],
+    },
+  ],
   host: {
     'data-slot': 'command',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCommand {
   readonly classInput = input<string>('', { alias: 'class' });
-
-  /** Current search/filter value */
-  readonly value = model<string>('');
 
   protected readonly class = computed(() =>
     cn(

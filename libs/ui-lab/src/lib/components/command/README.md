@@ -8,7 +8,9 @@ A command palette for fast, keyboard-driven navigation and actions.
 ScCommand (Root)
     ├── value: model<string> (search query)
     │
-    ├── ScCommandInput (search input with icon)
+    ├── ScCommandInputGroup (input wrapper with border)
+    │     ├── Search Icon
+    │     └── ScCommandInput (search input)
     │
     └── ScCommandList (scrollable results)
           │
@@ -28,17 +30,18 @@ ScCommand (Root)
 
 ## Components
 
-| Component               | Selector                  | Description                    |
-| ----------------------- | ------------------------- | ------------------------------ |
-| `ScCommand`             | `div[scCommand]`          | Root wrapper with search state |
-| `ScCommandInput`        | `div[scCommandInput]`     | Search input with icon         |
-| `ScCommandList`         | `div[scCommandList]`      | Scrollable results container   |
-| `ScCommandEmpty`        | `div[scCommandEmpty]`     | Shown when no results match    |
-| `ScCommandGroup`        | `div[scCommandGroup]`     | Group of related items         |
-| `ScCommandGroupHeading` | `[scCommandGroupHeading]` | Group heading text             |
-| `ScCommandItem`         | `div[scCommandItem]`      | Individual command item        |
-| `ScCommandSeparator`    | `[scCommandSeparator]`    | Visual separator               |
-| `ScCommandShortcut`     | `[scCommandShortcut]`     | Keyboard shortcut display      |
+| Component               | Selector                   | Description                    |
+| ----------------------- | -------------------------- | ------------------------------ |
+| `ScCommand`             | `div[scCommand]`           | Root wrapper with search state |
+| `ScCommandInputGroup`   | `div[scCommandInputGroup]` | Input wrapper with border      |
+| `ScCommandInput`        | `input[scCommandInput]`    | Search input                   |
+| `ScCommandList`         | `div[scCommandList]`       | Scrollable results container   |
+| `ScCommandEmpty`        | `div[scCommandEmpty]`      | Shown when no results match    |
+| `ScCommandGroup`        | `div[scCommandGroup]`      | Group of related items         |
+| `ScCommandGroupHeading` | `[scCommandGroupHeading]`  | Group heading text             |
+| `ScCommandItem`         | `div[scCommandItem]`       | Individual command item        |
+| `ScCommandSeparator`    | `[scCommandSeparator]`     | Visual separator               |
+| `ScCommandShortcut`     | `[scCommandShortcut]`      | Keyboard shortcut display      |
 
 ## Inputs
 
@@ -71,7 +74,10 @@ ScCommand (Root)
 
 ```html
 <div scCommand class="rounded-lg border shadow-md">
-  <div scCommandInput placeholder="Type a command..." />
+  <div scCommandInputGroup>
+    <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+    <input scCommandInput placeholder="Type a command..." />
+  </div>
   <div scCommandList>
     <div scCommandEmpty>No results found.</div>
     <div scCommandGroup>
@@ -124,7 +130,10 @@ Items will match if the search query matches either the `value` or any of the `k
   <ng-template scDialogPortal>
     <div scDialog class="p-0">
       <div scCommand>
-        <div scCommandInput />
+        <div scCommandInputGroup>
+          <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
+          <input scCommandInput />
+        </div>
         <div scCommandList>
           <!-- items -->
         </div>
@@ -156,6 +165,7 @@ Items will match if the search query matches either the `value` or any of the `k
 The components use Tailwind CSS with shadcn/ui design tokens:
 
 - Container: `bg-popover text-popover-foreground rounded-md`
-- Input: `border-b` separator with search icon
+- Input group: `border-b` separator with search icon
+- Input: transparent background with placeholder styling
 - Items: `hover:bg-accent` on hover, icons sized to `size-4`
 - Shortcuts: `text-muted-foreground text-xs`
