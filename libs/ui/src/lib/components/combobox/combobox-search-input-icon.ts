@@ -2,14 +2,14 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'svg[scComboboxInputIcon]',
+  selector: 'svg[scComboboxSearchInputIcon]',
   host: {
-    'data-slot': 'combobox-input-icon',
+    'data-slot': 'combobox-search-input-icon',
     '[class]': 'class()',
     'aria-hidden': 'true',
   },
 })
-export class ScComboboxInputIcon {
+export class ScComboboxSearchInputIcon {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

@@ -11,15 +11,15 @@ import {
   ScCombobox,
   ScComboboxDialog,
   ScComboboxEmpty,
-  ScComboboxInput,
-  ScComboboxInputGroup,
-  ScComboboxInputIcon,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
   ScComboboxList,
   ScComboboxListContainer,
   ScComboboxPopupContainer,
+  ScComboboxSearchInput,
+  ScComboboxSearchInputGroup,
+  ScComboboxSearchInputIcon,
   ScComboboxSearchPanel,
   ScComboboxTrigger,
   ScComboboxTriggerIcon,
@@ -39,12 +39,12 @@ import {
     ScComboboxListContainer,
     ScComboboxDialog,
     ScComboboxEmpty,
-    ScComboboxInputIcon,
+    ScComboboxSearchInputIcon,
     ScComboboxItem,
     ScComboboxItemIndicator,
     ScComboboxItemLabel,
-    ScComboboxInput,
-    ScComboboxInputGroup,
+    ScComboboxSearchInput,
+    ScComboboxSearchInputGroup,
     ScComboboxTrigger,
     ScComboboxTriggerIcon,
     ScComboboxList,
@@ -69,10 +69,10 @@ import {
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
           <div scComboboxSearchPanel>
-            <div scComboboxInputGroup>
-              <svg siSearchIcon scComboboxInputIcon></svg>
+            <div scComboboxSearchInputGroup>
+              <svg siSearchIcon scComboboxSearchInputIcon></svg>
               <input
-                scComboboxInput
+                scComboboxSearchInput
                 placeholder="Search..."
                 [(value)]="searchString"
               />

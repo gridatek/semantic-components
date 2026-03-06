@@ -2,13 +2,13 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'div[scComboboxInputGroup]',
+  selector: 'div[scComboboxSearchInputGroup]',
   host: {
-    'data-slot': 'combobox-input-group',
+    'data-slot': 'combobox-search-input-group',
     '[class]': 'class()',
   },
 })
-export class ScComboboxInputGroup {
+export class ScComboboxSearchInputGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
