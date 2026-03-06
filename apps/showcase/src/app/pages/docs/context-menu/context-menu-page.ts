@@ -6,11 +6,18 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { ContextMenuAriaDemoContainer } from './demos/context-menu-aria-demo-container';
 import { ScContextMenuDemoContainer } from './demos/context-menu-demo-container';
 
 @Component({
   selector: 'app-context-menu-page',
-  imports: [ScContextMenuDemoContainer, TocHeading, ComponentBadges, ScHeading],
+  imports: [
+    ScContextMenuDemoContainer,
+    ContextMenuAriaDemoContainer,
+    TocHeading,
+    ComponentBadges,
+    ScHeading,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -24,6 +31,7 @@ import { ScContextMenuDemoContainer } from './demos/context-menu-demo-container'
 
       <section class="space-y-8">
         <h2 scHeading toc>Examples</h2>
+        <app-context-menu-aria-demo-container />
         <app-context-menu-demo-container />
       </section>
     </div>

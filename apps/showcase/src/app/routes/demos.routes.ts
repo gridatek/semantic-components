@@ -852,6 +852,13 @@ export const demosRoutes: Route[] = [
             (m) => m.ScContextMenuDemo,
           ),
       },
+      {
+        path: 'context-menu-aria-demo',
+        loadComponent: () =>
+          import('../pages/docs/context-menu/demos/context-menu-aria-demo').then(
+            (m) => m.ContextMenuAriaDemo,
+          ),
+      },
     ],
   },
   {
