@@ -26,9 +26,9 @@ export class ReadonlyRatingFieldDemoContainer {
 } from '@angular/core';
 import {
   ScRatingField,
-  ScRatingFieldItem,
-  ScRatingFieldIcon,
   ScRatingFieldGroup,
+  ScRatingFieldIcon,
+  ScRatingFieldItem,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
