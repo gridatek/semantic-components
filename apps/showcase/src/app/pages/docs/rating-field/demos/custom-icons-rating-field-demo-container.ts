@@ -27,9 +27,9 @@ export class CustomIconsRatingFieldDemoContainer {
 } from '@angular/core';
 import {
   ScRatingField,
-  ScRatingFieldItem,
-  ScRatingFieldIcon,
   ScRatingFieldGroup,
+  ScRatingFieldIcon,
+  ScRatingFieldItem,
 } from '@semantic-components/ui';
 import { SiHeartIcon } from '@semantic-icons/lucide-icons';
 

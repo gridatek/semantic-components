@@ -30,9 +30,9 @@ import {
   ScButton,
   ScLabel,
   ScRatingField,
-  ScRatingFieldItem,
-  ScRatingFieldIcon,
   ScRatingFieldGroup,
+  ScRatingFieldIcon,
+  ScRatingFieldItem,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
