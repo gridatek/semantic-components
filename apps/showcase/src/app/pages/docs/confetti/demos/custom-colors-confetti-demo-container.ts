@@ -39,6 +39,7 @@ import { ScConfetti } from '@semantic-components/ui-lab';
       Purple Party
     </button>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

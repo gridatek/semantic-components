@@ -201,6 +201,7 @@ import { SiSparklesIcon } from '@semantic-icons/lucide-icons';
       </ul>
     </nav>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

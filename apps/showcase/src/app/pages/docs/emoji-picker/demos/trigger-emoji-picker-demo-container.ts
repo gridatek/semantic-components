@@ -40,6 +40,7 @@ import { ScEmojiPickerTrigger } from '@semantic-components/ui-lab';
       </span>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class TriggerEmojiPickerDemo {}`;

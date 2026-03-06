@@ -30,23 +30,28 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScDatePicker } from '@semantic-components/ui';
+import {
+  ScDatePicker,
+  ScField,
+  ScFieldGroup,
+  ScLabel,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-form-date-picker-demo',
-  imports: [ScDatePicker],
+  imports: [ScDatePicker, ScField, ScFieldGroup, ScLabel],
   template: \`
-    <div class="grid max-w-sm gap-4">
-      <div class="space-y-2">
-        <label class="text-sm font-medium">Date of Birth</label>
+    <div scFieldGroup class="max-w-sm">
+      <div scField>
+        <label scLabel>Date of Birth</label>
         <sc-date-picker
           [(value)]="dob"
           placeholder="Select date of birth"
           [maxDate]="today"
         />
       </div>
-      <div class="space-y-2">
-        <label class="text-sm font-medium">Appointment Date</label>
+      <div scField>
+        <label scLabel>Appointment Date</label>
         <sc-date-picker
           [(value)]="appointment"
           placeholder="Select appointment"
@@ -55,6 +60,7 @@ import { ScDatePicker } from '@semantic-components/ui';
       </div>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

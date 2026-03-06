@@ -87,6 +87,7 @@ import {
       💡 Tip: Click and drag on the label to scrub values
     </p>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

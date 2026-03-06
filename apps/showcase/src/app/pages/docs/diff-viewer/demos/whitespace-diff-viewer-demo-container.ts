@@ -44,6 +44,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
       [showFooter]="false"
     />
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

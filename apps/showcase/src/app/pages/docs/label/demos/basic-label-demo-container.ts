@@ -40,6 +40,7 @@ import { ScInput } from '@semantic-components/ui';
       <input scInput type="email" placeholder="Enter your email" />
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

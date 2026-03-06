@@ -40,6 +40,7 @@ import { ScLink } from '@semantic-components/ui';
       <a scLink variant="outline" disabled>Disabled Outline</a>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

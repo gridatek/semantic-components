@@ -43,6 +43,7 @@ const y = 2;'"
       [newTitle]="'file.ts'"
     />
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

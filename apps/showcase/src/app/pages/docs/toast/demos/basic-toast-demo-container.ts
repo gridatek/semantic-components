@@ -34,6 +34,7 @@ import { ScToaster } from '@semantic-components/ui';
   template: \`
     <button scButton variant="outline" (click)="showToast()">Show Toast</button>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

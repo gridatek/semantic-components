@@ -41,6 +41,7 @@ import { ScHeading } from '@semantic-components/ui';
       <h4 scHeading>This is an H4 Heading</h4>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

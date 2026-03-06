@@ -28,6 +28,7 @@ import {
 } from '@angular/core';
 import {
   ScButton,
+  ScLabel,
   ScRatingField,
   ScRatingFieldItem,
   ScRatingIcon,
@@ -48,13 +49,14 @@ interface ReviewForm {
     ScRatingFieldItem,
     ScRatingIcon,
     ScButton,
+    ScLabel,
     SiStarIcon,
     JsonPipe,
   ],
   template: \`
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-2">
-        <label class="text-sm font-medium">Product Rating</label>
+        <label scLabel>Product Rating</label>
         <div scRatingField [(value)]="formModel().rating">
           <div scRatingItemGroup>
             @for (i of [1, 2, 3, 4, 5]; track i) {
@@ -76,6 +78,7 @@ interface ReviewForm {
       }
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

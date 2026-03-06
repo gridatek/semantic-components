@@ -62,6 +62,7 @@ interface Item {
       Loaded {{ items().length }} items
     </p>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

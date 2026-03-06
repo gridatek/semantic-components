@@ -40,6 +40,7 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
       <button scTimezoneDisplay variant="outline"></button>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

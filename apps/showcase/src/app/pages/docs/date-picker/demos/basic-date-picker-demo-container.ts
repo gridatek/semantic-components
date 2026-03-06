@@ -43,6 +43,7 @@ import { ScDatePicker } from '@semantic-components/ui';
       </p>
     }
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

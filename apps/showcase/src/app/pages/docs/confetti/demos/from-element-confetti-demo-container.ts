@@ -40,6 +40,7 @@ import { ScConfetti } from '@semantic-components/ui-lab';
       Celebrate!
     </button>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

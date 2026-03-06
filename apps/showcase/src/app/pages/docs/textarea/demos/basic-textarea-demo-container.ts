@@ -45,6 +45,7 @@ import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
       ></textarea>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

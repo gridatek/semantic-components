@@ -50,6 +50,7 @@ import { SiSettingsIcon, SiUploadIcon } from '@semantic-icons/lucide-icons';
       </button>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

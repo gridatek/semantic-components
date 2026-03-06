@@ -35,6 +35,7 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
       <span class="text-sm leading-none font-medium">Airplane Mode</span>
     </label>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

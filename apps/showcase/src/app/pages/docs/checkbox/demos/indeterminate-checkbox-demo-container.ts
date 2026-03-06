@@ -44,26 +44,26 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
           [checked]="allSelected()"
           [indeterminate]="someSelected()"
           (change)="toggleAll($event)"
-          id="select-all"
         />
-        <label scLabel for="select-all">Select all</label>
+        <label scLabel>Select all</label>
       </div>
       <div class="ml-6 flex flex-col gap-2">
         <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="item1" id="item1" />
-          <label scLabel for="item1">Item 1</label>
+          <input type="checkbox" scCheckbox [(checked)]="item1" />
+          <label scLabel>Item 1</label>
         </div>
         <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="item2" id="item2" />
-          <label scLabel for="item2">Item 2</label>
+          <input type="checkbox" scCheckbox [(checked)]="item2" />
+          <label scLabel>Item 2</label>
         </div>
         <div scCheckboxField>
-          <input type="checkbox" scCheckbox [(checked)]="item3" id="item3" />
-          <label scLabel for="item3">Item 3</label>
+          <input type="checkbox" scCheckbox [(checked)]="item3" />
+          <label scLabel>Item 3</label>
         </div>
       </div>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

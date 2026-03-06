@@ -36,26 +36,16 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   template: \`
     <div class="flex flex-col gap-4">
       <div scCheckboxField>
-        <input
-          type="checkbox"
-          scCheckbox
-          [disabled]="true"
-          id="disabled-unchecked"
-        />
-        <label scLabel for="disabled-unchecked">Disabled unchecked</label>
+        <input type="checkbox" scCheckbox [disabled]="true" />
+        <label scLabel>Disabled unchecked</label>
       </div>
       <div scCheckboxField>
-        <input
-          type="checkbox"
-          scCheckbox
-          [checked]="true"
-          [disabled]="true"
-          id="disabled-checked"
-        />
-        <label scLabel for="disabled-checked">Disabled checked</label>
+        <input type="checkbox" scCheckbox [checked]="true" [disabled]="true" />
+        <label scLabel>Disabled checked</label>
       </div>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

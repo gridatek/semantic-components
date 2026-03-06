@@ -41,6 +41,7 @@ import { ScBadge } from '@semantic-components/ui';
       <div scBadge variant="outline">Outline</div>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -52,6 +52,7 @@ import { ScButton, ScToastPosition, ScToaster } from '@semantic-components/ui';
       </button>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

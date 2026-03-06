@@ -60,6 +60,7 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
       <p class="text-muted-foreground text-sm">Hearts: {{ rating() }} / 5</p>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

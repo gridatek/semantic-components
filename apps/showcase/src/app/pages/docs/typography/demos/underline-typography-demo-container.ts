@@ -41,6 +41,7 @@ import { ScHeading } from '@semantic-components/ui';
       <h4 scHeading [underline]="true">H4 with Underline</h4>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

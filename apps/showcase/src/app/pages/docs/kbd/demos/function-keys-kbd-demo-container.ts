@@ -49,6 +49,7 @@ import { ScKbd } from '@semantic-components/ui';
       <kbd scKbd>F12</kbd>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

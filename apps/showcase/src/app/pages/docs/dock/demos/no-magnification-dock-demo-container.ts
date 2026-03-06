@@ -41,6 +41,7 @@ import type { DockItem } from '@semantic-components/ui-lab';
       </nav>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

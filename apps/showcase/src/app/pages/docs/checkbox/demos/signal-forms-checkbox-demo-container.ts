@@ -39,7 +39,6 @@ interface CheckboxFormModel {
   marketing: boolean;
   acceptTerms: boolean;
 }
-
 @Component({
   selector: 'app-signal-forms-checkbox-demo',
   imports: [ScCheckboxField, ScCheckbox, ScLabel, JsonPipe, FormField],
@@ -50,39 +49,34 @@ interface CheckboxFormModel {
           <input
             type="checkbox"
             scCheckbox
-            id="newsletter-custom"
             [formField]="checkboxForm.newsletter"
           />
-          <label scLabel for="newsletter-custom">Subscribe to newsletter</label>
+          <label scLabel>Subscribe to newsletter</label>
         </div>
-
         <div scCheckboxField>
           <input
             type="checkbox"
             scCheckbox
-            id="marketing-custom"
             [formField]="checkboxForm.marketing"
           />
-          <label scLabel for="marketing-custom">Receive marketing emails</label>
+          <label scLabel>Receive marketing emails</label>
         </div>
-
         <div scCheckboxField>
           <input
             type="checkbox"
             scCheckbox
-            id="terms-custom"
             [formField]="checkboxForm.acceptTerms"
           />
-          <label scLabel for="terms-custom">Accept terms and conditions</label>
+          <label scLabel>Accept terms and conditions</label>
         </div>
       </div>
-
       <div class="bg-muted mt-4 rounded-md p-4">
         <p class="text-sm font-medium">Form Values:</p>
         <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>
     </form>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -92,7 +86,6 @@ export class SignalFormsCheckboxDemo {
     marketing: false,
     acceptTerms: false,
   });
-
   readonly checkboxForm = form(this.formModel, (schemaPath) => {
     required(schemaPath.newsletter);
     required(schemaPath.acceptTerms);

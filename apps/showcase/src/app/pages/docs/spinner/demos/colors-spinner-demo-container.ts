@@ -44,6 +44,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       <svg scSpinner siLoaderCircleIcon class="text-purple-500"></svg>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

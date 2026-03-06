@@ -35,6 +35,7 @@ import { type OrgChartNode, ScOrgChart } from '@semantic-components/ui-lab';
       <sc-org-chart [data]="orgData()" />
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

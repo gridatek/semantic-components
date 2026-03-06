@@ -40,6 +40,7 @@ import { SiBoldIcon } from '@semantic-icons/lucide-icons';
       <svg siBoldIcon></svg>
     </button>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
