@@ -14,6 +14,7 @@ export * from './card';
 export * from './checkbox';
 export * from './collapsible';
 export * from './combobox';
+export * from './context-menu';
 export * from './date-picker';
 export * from './dialog';
 export * from './drawer';
