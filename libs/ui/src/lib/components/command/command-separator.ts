@@ -5,7 +5,7 @@ import { cn } from '../../utils';
   selector: '[scCommandSeparator]',
   host: {
     'data-slot': 'command-separator',
-    role: 'separator',
+    role: 'none',
     '[class]': 'class()',
   },
 })

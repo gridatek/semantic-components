@@ -11,7 +11,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   template: `
     <div scCheckboxField>
       <input type="checkbox" scCheckbox />
-      <label scLabel [for]="'terms-label'">Accept terms and conditions</label>
+      <label scLabel>Accept terms and conditions</label>
     </div>
   `,
   host: { class: 'block w-full' },
