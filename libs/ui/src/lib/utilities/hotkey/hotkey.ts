@@ -1,15 +1,19 @@
+import { DOCUMENT } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   DestroyRef,
   Directive,
+  PLATFORM_ID,
   computed,
   inject,
   input,
   output,
 } from '@angular/core';
 
-const isMac =
-  typeof navigator !== 'undefined' &&
-  /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+function detectMac(platformId: object): boolean {
+  if (!isPlatformBrowser(platformId)) return false;
+  return /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+}
 
 const MAC_SYMBOLS: Record<string, string> = {
   mod: '⌘',
@@ -27,8 +31,6 @@ const OTHER_SYMBOLS: Record<string, string> = {
   shift: 'Shift',
 };
 
-const MODIFIER_SYMBOLS = isMac ? MAC_SYMBOLS : OTHER_SYMBOLS;
-
 @Directive({
   selector: '[scHotkey]',
   exportAs: 'scHotkey',
@@ -38,14 +40,19 @@ export class ScHotkey {
   readonly key = input.required<string>({ alias: 'scHotkey' });
   readonly scHotkeyPressed = output();
 
+  private readonly isMac = detectMac(inject(PLATFORM_ID));
+  private readonly modifierSymbols = this.isMac ? MAC_SYMBOLS : OTHER_SYMBOLS;
+
   readonly displayKey = computed(() => {
     const parts = this.key().toLowerCase().split('+');
-    const mapped = parts.map((p) => MODIFIER_SYMBOLS[p] ?? p.toUpperCase());
-    return mapped.join(isMac ? '' : '+');
+    const mapped = parts.map((p) => this.modifierSymbols[p] ?? p.toUpperCase());
+    return mapped.join(this.isMac ? '' : '+');
   });
 
   constructor() {
     const destroyRef = inject(DestroyRef);
+    const doc = inject(DOCUMENT);
+    const isMac = this.isMac;
 
     const handler = (e: KeyboardEvent) => {
       const parts = this.key().toLowerCase().split('+');
@@ -69,9 +76,7 @@ export class ScHotkey {
       }
     };
 
-    document.addEventListener('keydown', handler);
-    destroyRef.onDestroy(() =>
-      document.removeEventListener('keydown', handler),
-    );
+    doc.addEventListener('keydown', handler);
+    destroyRef.onDestroy(() => doc.removeEventListener('keydown', handler));
   }
 }
