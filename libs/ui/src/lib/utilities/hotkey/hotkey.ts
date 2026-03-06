@@ -7,13 +7,27 @@ import {
   output,
 } from '@angular/core';
 
-const MODIFIER_SYMBOLS: Record<string, string> = {
+const isMac =
+  typeof navigator !== 'undefined' &&
+  /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+
+const MAC_SYMBOLS: Record<string, string> = {
   mod: '⌘',
   meta: '⌘',
   ctrl: '⌃',
   alt: '⌥',
   shift: '⇧',
 };
+
+const OTHER_SYMBOLS: Record<string, string> = {
+  mod: 'Ctrl',
+  meta: 'Ctrl',
+  ctrl: 'Ctrl',
+  alt: 'Alt',
+  shift: 'Shift',
+};
+
+const MODIFIER_SYMBOLS = isMac ? MAC_SYMBOLS : OTHER_SYMBOLS;
 
 @Directive({
   selector: '[scHotkey]',
@@ -26,7 +40,8 @@ export class ScHotkey {
 
   readonly displayKey = computed(() => {
     const parts = this.key().toLowerCase().split('+');
-    return parts.map((p) => MODIFIER_SYMBOLS[p] ?? p.toUpperCase()).join('');
+    const mapped = parts.map((p) => MODIFIER_SYMBOLS[p] ?? p.toUpperCase());
+    return mapped.join(isMac ? '' : '+');
   });
 
   constructor() {
@@ -37,18 +52,15 @@ export class ScHotkey {
       const targetKey = parts.pop();
 
       const hasMod = parts.includes('mod');
-      const needsCtrl = parts.includes('ctrl') || hasMod;
-      const needsMeta = parts.includes('meta') || hasMod;
+      const needsCtrl = parts.includes('ctrl') || (hasMod && !isMac);
+      const needsMeta = parts.includes('meta') || (hasMod && isMac);
       const needsAlt = parts.includes('alt');
       const needsShift = parts.includes('shift');
 
-      const ctrlOrMetaMatch = hasMod
-        ? e.ctrlKey || e.metaKey
-        : e.ctrlKey === needsCtrl && e.metaKey === needsMeta;
-
       if (
         e.key.toLowerCase() === targetKey &&
-        ctrlOrMetaMatch &&
+        e.ctrlKey === needsCtrl &&
+        e.metaKey === needsMeta &&
         e.altKey === needsAlt &&
         e.shiftKey === needsShift
       ) {
