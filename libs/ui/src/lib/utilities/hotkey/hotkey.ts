@@ -13,7 +13,7 @@ export class ScHotkey {
 
     const handler = (e: KeyboardEvent) => {
       const parts = this.key().toLowerCase().split('+');
-      const targetKey = parts.pop()!;
+      const targetKey = parts.pop();
 
       const hasMod = parts.includes('mod');
       const needsCtrl = parts.includes('ctrl') || hasMod;
