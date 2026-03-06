@@ -91,7 +91,7 @@ import {
           }
         <span scSelectDisplayValue></span>
         <input scSelectInput placeholder="Select a label" aria-label="Label dropdown" />
-        <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
+        <svg scSelectIcon siChevronDownIcon></svg>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
@@ -100,7 +100,7 @@ import {
               <div scSelectItem [value]="option.value" [label]="option.label">
                 <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"></ng-container>
                 <span class="flex-1">{{ option.label }}</span>
-                <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
+                <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
             }
           </div>

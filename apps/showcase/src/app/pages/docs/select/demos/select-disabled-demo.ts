@@ -42,22 +42,22 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           placeholder="Select a fruit"
           aria-label="Fruit dropdown"
         />
-        <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
+        <svg scSelectIcon siChevronDownIcon></svg>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
             <div scSelectItem value="Apple" label="Apple">
               Apple
-              <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
+              <svg scSelectItemIndicator siCheckIcon></svg>
             </div>
             <div scSelectItem value="Banana" label="Banana">
               Banana
-              <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
+              <svg scSelectItemIndicator siCheckIcon></svg>
             </div>
             <div scSelectItem value="Orange" label="Orange">
               Orange
-              <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
+              <svg scSelectItemIndicator siCheckIcon></svg>
             </div>
           </div>
         </div>

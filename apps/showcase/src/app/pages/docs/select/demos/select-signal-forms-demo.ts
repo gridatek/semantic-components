@@ -61,7 +61,7 @@ interface FormModel {
                 placeholder="Select a fruit"
                 aria-label="Fruit dropdown"
               />
-              <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
+              <svg scSelectIcon siChevronDownIcon></svg>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -69,11 +69,7 @@ interface FormModel {
                   @for (fruit of fruits; track fruit) {
                     <div scSelectItem [value]="fruit" [label]="fruit">
                       {{ fruit }}
-                      <svg
-                        scSelectItemIndicator
-                        siCheckIcon
-                        aria-hidden="true"
-                      ></svg>
+                      <svg scSelectItemIndicator siCheckIcon></svg>
                     </div>
                   }
                 </div>
