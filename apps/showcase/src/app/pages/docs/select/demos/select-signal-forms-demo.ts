@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { FormRoot, form, required } from '@angular/forms/signals';
+import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScField,
   ScLabel,
@@ -44,6 +44,7 @@ interface FormModel {
     SiChevronDownIcon,
     SiCheckIcon,
     JsonPipe,
+    FormField,
     FormRoot,
   ],
   template: `
@@ -56,6 +57,7 @@ interface FormModel {
               <span scSelectDisplayValue></span>
               <input
                 scSelectInput
+                [formField]="fruitForm.fruit"
                 placeholder="Select a fruit"
                 aria-label="Fruit dropdown"
               />
