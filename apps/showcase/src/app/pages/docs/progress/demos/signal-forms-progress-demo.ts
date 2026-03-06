@@ -8,8 +8,14 @@ import {
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { minLength, required } from '@angular/forms/signals';
-import { ScProgress } from '@semantic-components/ui';
-import { ScLabel } from '@semantic-components/ui';
+import {
+  ScField,
+  ScFieldDescription,
+  ScInput,
+  ScLabel,
+  ScProgress,
+  ScTextarea,
+} from '@semantic-components/ui';
 
 interface UserFormModel {
   name: string;
@@ -19,51 +25,54 @@ interface UserFormModel {
 
 @Component({
   selector: 'app-signal-forms-progress-demo',
-  imports: [ScProgress, ScLabel, JsonPipe, FormField],
+  imports: [
+    ScField,
+    ScFieldDescription,
+    ScProgress,
+    ScLabel,
+    ScInput,
+    ScTextarea,
+    JsonPipe,
+    FormField,
+  ],
   template: `
     <form>
       <div class="space-y-4">
-        <div class="space-y-2">
+        <div scField>
           <label scLabel>Form Completion</label>
           <div
             scProgress
             aria-label="Form completion"
             [value]="formCompletionPercentage()"
-            class="w-full"
           ></div>
-          <p class="text-muted-foreground text-xs">
-            {{ formCompletionPercentage() }}% complete
-          </p>
+          <p scFieldDescription>{{ formCompletionPercentage() }}% complete</p>
         </div>
 
-        <div class="space-y-2">
-          <label scLabel for="name">Name</label>
+        <div scField>
+          <label scLabel>Name</label>
           <input
+            scInput
             type="text"
-            id="name"
             [formField]="userForm.name"
-            class="border-input focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none"
             placeholder="Enter your name"
           />
         </div>
 
-        <div class="space-y-2">
-          <label scLabel for="email">Email</label>
+        <div scField>
+          <label scLabel>Email</label>
           <input
+            scInput
             type="email"
-            id="email"
             [formField]="userForm.email"
-            class="border-input focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none"
             placeholder="Enter your email"
           />
         </div>
 
-        <div class="space-y-2">
-          <label scLabel for="bio">Bio</label>
+        <div scField>
+          <label scLabel>Bio</label>
           <textarea
-            id="bio"
+            scTextarea
             [formField]="userForm.bio"
-            class="border-input focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm transition-colors focus-visible:ring-1 focus-visible:outline-none"
             placeholder="Tell us about yourself"
           ></textarea>
         </div>
