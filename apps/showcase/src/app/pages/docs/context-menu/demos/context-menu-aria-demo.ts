@@ -23,15 +23,10 @@ import {
     ScMenuSeparator,
   ],
   template: `
-    <div scContextMenu>
-      <div
-        scContextMenuTrigger
-        class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
-      >
-        Right click here
-      </div>
+    <div scContextMenu class="h-[150px] w-[300px]">
+      <div scContextMenuTrigger>Right click here</div>
 
-      <div scMenu class="invisible fixed">
+      <div scMenu>
         <ng-template scMenuContent>
           <div scMenuItem value="Back">
             <span class="flex-1">Back</span>

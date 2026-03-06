@@ -17,6 +17,12 @@ import { ScContextMenuTrigger } from './context-menu-trigger';
   template: `
     <ng-content />
   `,
+  styles: `
+    [data-slot='context-menu'] > [data-slot='menu'] {
+      visibility: hidden;
+      position: fixed;
+    }
+  `,
   host: {
     'data-slot': 'context-menu',
     '[class]': 'class()',
