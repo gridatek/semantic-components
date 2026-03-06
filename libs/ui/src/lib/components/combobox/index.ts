@@ -1,4 +1,5 @@
 export { ScCombobox } from './combobox';
+export { ScComboboxClear } from './combobox-clear';
 export { ScComboboxDisplayValue } from './combobox-display-value';
 export { ScComboboxListContainer } from './combobox-list-container';
 export { ScComboboxSearchPanel } from './combobox-search-panel';

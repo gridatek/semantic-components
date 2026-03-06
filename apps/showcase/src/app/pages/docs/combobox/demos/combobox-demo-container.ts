@@ -33,6 +33,7 @@ export class ComboboxDemoContainer {
 import { FormsModule } from '@angular/forms';
 import {
   ScCombobox,
+  ScComboboxClear,
   ScComboboxDialog,
   ScComboboxDisplayValue,
   ScComboboxEmpty,
@@ -54,12 +55,14 @@ import {
   SiCheckIcon,
   SiChevronsUpDownIcon,
   SiSearchIcon,
+  SiXIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-combobox-demo',
   imports: [
     ScCombobox,
+    ScComboboxClear,
     ScComboboxSearchPanel,
     ScComboboxListContainer,
     ScComboboxDialog,
@@ -80,6 +83,7 @@ import {
     SiCheckIcon,
     SiChevronsUpDownIcon,
     SiSearchIcon,
+    SiXIcon,
   ],
   host: { class: 'block w-full' },
   template: \`
@@ -91,6 +95,9 @@ import {
           placeholder="Select a country..."
           [value]="value()"
         />
+        <button scComboboxClear (click)="selectedCountries.set([]); value.set('')">
+          <svg siXIcon class="size-3"></svg>
+        </button>
         <svg siChevronsUpDownIcon scComboboxIcon></svg>
       </div>
       <ng-template scComboboxPopupContainer>
@@ -110,7 +117,11 @@ import {
               }
               <div scComboboxList [(values)]="selectedCountries">
                 @for (option of options(); track option.value) {
-                  <div scComboboxItem [value]="option.value" [label]="option.label">
+                  <div
+                    scComboboxItem
+                    [value]="option.value"
+                    [label]="option.label"
+                  >
                     <span scComboboxItemLabel>{{ option.label }}</span>
                     <svg siCheckIcon scComboboxItemIndicator></svg>
                   </div>
