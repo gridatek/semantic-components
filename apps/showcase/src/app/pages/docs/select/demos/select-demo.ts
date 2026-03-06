@@ -66,7 +66,7 @@ import {
             *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
           ></ng-container>
         }
-        <span scSelectDisplayValue placeholder="Select a label"></span>
+        <span scSelectDisplayValue></span>
         <input
           scSelectInput
           placeholder="Select a label"

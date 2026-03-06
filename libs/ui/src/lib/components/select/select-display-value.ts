@@ -25,12 +25,11 @@ import { ScSelect } from './select';
 })
 export class ScSelectDisplayValue {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly placeholder = input('');
 
   private readonly select = inject(forwardRef(() => ScSelect));
 
   readonly displayValue = computed(() =>
-    this.select.value() != null ? this.select.label() : this.placeholder(),
+    this.select.value() != null ? this.select.label() : '',
   );
 
   protected readonly class = computed(() =>

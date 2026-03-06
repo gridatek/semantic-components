@@ -53,7 +53,7 @@ interface FormModel {
           <label scLabel>Fruit</label>
           <div scSelect>
             <div scSelectInputGroup>
-              <span scSelectDisplayValue placeholder="Select a fruit"></span>
+              <span scSelectDisplayValue></span>
               <input
                 scSelectInput
                 placeholder="Select a fruit"

@@ -36,7 +36,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scSelect disabled>
       <div scSelectInputGroup>
-        <span scSelectDisplayValue placeholder="Select a fruit"></span>
+        <span scSelectDisplayValue></span>
         <input
           scSelectInput
           placeholder="Select a fruit"

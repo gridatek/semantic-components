@@ -89,7 +89,7 @@ import {
         @if (displayIcon(); as icon) {
             <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
           }
-        <span scSelectDisplayValue placeholder="Select a label"></span>
+        <span scSelectDisplayValue></span>
         <input scSelectInput placeholder="Select a label" aria-label="Label dropdown" />
         <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>
