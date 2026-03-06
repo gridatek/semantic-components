@@ -5,97 +5,89 @@ import {
 } from '@angular/core';
 import {
   ScContextMenu,
-  ScContextMenuContent,
-  ScContextMenuItem,
-  ScContextMenuLabel,
-  ScContextMenuSeparator,
-  ScContextMenuShortcut,
-  ScContextMenuSub,
-  ScContextMenuSubContent,
-  ScContextMenuSubTrigger,
   ScContextMenuTrigger,
-} from '@semantic-components/ui-lab';
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuSeparator,
+} from '@semantic-components/ui';
+import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-context-menu-demo',
   imports: [
     ScContextMenu,
-    ScContextMenuContent,
-    ScContextMenuItem,
-    ScContextMenuLabel,
-    ScContextMenuSeparator,
-    ScContextMenuShortcut,
-    ScContextMenuSub,
-    ScContextMenuSubContent,
-    ScContextMenuSubTrigger,
     ScContextMenuTrigger,
+    ScMenu,
+    ScMenuContent,
+    ScMenuItem,
+    ScMenuPortal,
+    ScMenuSeparator,
+    SiChevronRightIcon,
   ],
   template: `
-    <div scContextMenu>
-      <div
-        scContextMenuTrigger
-        class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
-      >
-        Right click here
-      </div>
+    <div scContextMenu class="h-[150px] w-[300px]">
+      <div scContextMenuTrigger>Right click here</div>
 
-      <sc-context-menu-content>
-        <span scContextMenuLabel>My Account</span>
-        <div scContextMenuSeparator></div>
-
-        <div scContextMenuItem (select)="onSelect('Back')">
-          Back
-          <span scContextMenuShortcut>⌘[</span>
-        </div>
-        <div scContextMenuItem [disabled]="true">
-          Forward
-          <span scContextMenuShortcut>⌘]</span>
-        </div>
-        <div scContextMenuItem (select)="onSelect('Reload')">
-          Reload
-          <span scContextMenuShortcut>⌘R</span>
-        </div>
-
-        <div scContextMenuSeparator></div>
-
-        <!-- Submenu -->
-        <div scContextMenuSub>
-          <div scContextMenuSubTrigger>More Tools</div>
-          <div scContextMenuSubContent>
-            <div scContextMenuItem (select)="onSelect('Save Page As')">
-              Save Page As...
-              <span scContextMenuShortcut>⇧⌘S</span>
-            </div>
-            <div scContextMenuItem (select)="onSelect('Create Shortcut')">
-              Create Shortcut...
-            </div>
-            <div scContextMenuItem (select)="onSelect('Name Window')">
-              Name Window...
-            </div>
-            <div scContextMenuSeparator></div>
-            <div scContextMenuItem (select)="onSelect('Developer Tools')">
-              Developer Tools
-            </div>
+      <div scMenu>
+        <ng-template scMenuContent>
+          <div scMenuItem value="Back">
+            <span class="flex-1">Back</span>
+            <span class="text-muted-foreground ml-auto text-xs">⌘[</span>
           </div>
-        </div>
+          <div scMenuItem value="Forward" [disabled]="true">
+            <span class="flex-1">Forward</span>
+            <span class="text-muted-foreground ml-auto text-xs">⌘]</span>
+          </div>
+          <div scMenuItem value="Reload">
+            <span class="flex-1">Reload</span>
+            <span class="text-muted-foreground ml-auto text-xs">⌘R</span>
+          </div>
 
-        <div scContextMenuSeparator></div>
+          <div scMenuSeparator></div>
 
-        <div scContextMenuItem (select)="onSelect('Show Bookmarks Bar')">
-          Show Bookmarks Bar
-          <span scContextMenuShortcut>⇧⌘B</span>
-        </div>
-        <div scContextMenuItem (select)="onSelect('Show Full URLs')">
-          Show Full URLs
-        </div>
-      </sc-context-menu-content>
+          <div scMenuItem value="More Tools">
+            <span class="flex-1">More Tools</span>
+            <svg siChevronRightIcon class="ml-auto size-4"></svg>
+            <ng-template scMenuPortal>
+              <div scMenu>
+                <ng-template scMenuContent>
+                  <div scMenuItem value="Save Page As">
+                    <span class="flex-1">Save Page As...</span>
+                    <span class="text-muted-foreground ml-auto text-xs">
+                      ⇧⌘S
+                    </span>
+                  </div>
+                  <div scMenuItem value="Create Shortcut">
+                    <span class="flex-1">Create Shortcut...</span>
+                  </div>
+                  <div scMenuItem value="Name Window">
+                    <span class="flex-1">Name Window...</span>
+                  </div>
+                  <div scMenuSeparator></div>
+                  <div scMenuItem value="Developer Tools">
+                    <span class="flex-1">Developer Tools</span>
+                  </div>
+                </ng-template>
+              </div>
+            </ng-template>
+          </div>
+
+          <div scMenuSeparator></div>
+
+          <div scMenuItem value="Show Bookmarks Bar">
+            <span class="flex-1">Show Bookmarks Bar</span>
+            <span class="text-muted-foreground ml-auto text-xs">⇧⌘B</span>
+          </div>
+          <div scMenuItem value="Show Full URLs">
+            <span class="flex-1">Show Full URLs</span>
+          </div>
+        </ng-template>
+      </div>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScContextMenuDemo {
-  onSelect(item: string): void {
-    console.log('Selected:', item);
-  }
-}
+export class ScContextMenuDemo {}

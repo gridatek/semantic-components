@@ -7,7 +7,6 @@ export * from './native-dialog';
 export * from './color-picker';
 export * from './command';
 export * from './confetti';
-export * from './context-menu';
 export * from './countdown';
 export * from './data-table';
 export * from './date-range-picker';
