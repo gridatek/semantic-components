@@ -31,7 +31,6 @@ export * from './password-field';
 export * from './pdf-viewer';
 export * from './phone-input';
 export * from './qr-code';
-export * from './search-input';
 export * from './signature-pad';
 export * from './sortable-list';
 export * from './speed-dial';

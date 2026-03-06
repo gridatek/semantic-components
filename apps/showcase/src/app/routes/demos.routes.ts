@@ -2870,32 +2870,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/search-input',
-    children: [
-      {
-        path: 'basic-search-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/search-input/demos/basic-search-input-demo').then(
-            (m) => m.BasicSearchInputDemo,
-          ),
-      },
-      {
-        path: 'loading-search-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/search-input/demos/loading-search-input-demo').then(
-            (m) => m.LoadingSearchInputDemo,
-          ),
-      },
-      {
-        path: 'categories-search-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/search-input/demos/categories-search-input-demo').then(
-            (m) => m.CategoriesSearchInputDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/select',
     children: [
       {

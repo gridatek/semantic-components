@@ -474,12 +474,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/scroll-area/scroll-area-page'),
       },
       {
-        path: 'search-input',
-        title: 'Search Input - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/search-input/search-input-page'),
-      },
-      {
         path: 'select',
         title: 'Select - Semantic Components',
         loadComponent: () => import('../pages/docs/select/select-page'),
