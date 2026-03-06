@@ -41,6 +41,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
       [newTitle]="'config.json (after)'"
     />
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -73,6 +73,7 @@ import {
       Current price: {{ '$' + (price() ?? 0).toFixed(2) }}
     </p>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

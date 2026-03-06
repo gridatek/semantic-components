@@ -40,6 +40,7 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
       <button scLanguageToggle variant="outline"></button>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

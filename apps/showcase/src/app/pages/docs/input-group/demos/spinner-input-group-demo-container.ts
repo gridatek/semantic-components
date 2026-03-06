@@ -53,6 +53,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       <input scInput variant="group" placeholder="Loading..." disabled />
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

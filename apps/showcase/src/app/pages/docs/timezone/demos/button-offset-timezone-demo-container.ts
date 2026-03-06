@@ -32,6 +32,7 @@ import { ScTimezoneButton } from '@semantic-components/ui-lab';
   template: \`
     <button scTimezoneButton variant="outline" [showOffset]="true"></button>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

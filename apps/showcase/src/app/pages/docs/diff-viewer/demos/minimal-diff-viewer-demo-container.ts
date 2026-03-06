@@ -43,6 +43,7 @@ import { ScDiffViewer } from '@semantic-components/ui-lab';
       [maxHeight]="'200px'"
     />
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

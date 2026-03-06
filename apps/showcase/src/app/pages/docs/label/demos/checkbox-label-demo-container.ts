@@ -35,10 +35,11 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   imports: [ScLabel, ScCheckboxField, ScCheckbox],
   template: \`
     <div scCheckboxField>
-      <input type="checkbox" scCheckbox id="terms-label" />
+      <input type="checkbox" scCheckbox />
       <label scLabel [for]="'terms-label'">Accept terms and conditions</label>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

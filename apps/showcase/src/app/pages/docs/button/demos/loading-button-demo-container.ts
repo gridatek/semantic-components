@@ -41,6 +41,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       Please wait
     </button>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

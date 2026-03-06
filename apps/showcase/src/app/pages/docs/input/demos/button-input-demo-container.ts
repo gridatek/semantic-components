@@ -50,6 +50,7 @@ import { ScInput } from '@semantic-components/ui';
       <button scButton>Subscribe</button>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

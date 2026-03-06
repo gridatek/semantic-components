@@ -38,6 +38,7 @@ import {
 @Component({
   selector: 'app-button-group-demo',
   imports: [ScButton, ScButtonGroup, ScButtonGroupSeparator, ScButtonGroupText],
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   template: \`
     <div class="flex flex-col gap-4">

@@ -50,6 +50,7 @@ import { ScDateRangePicker } from '@semantic-components/ui-lab';
       }
     </p>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

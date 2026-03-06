@@ -72,6 +72,7 @@ import { ScInput } from '@semantic-components/ui';
       </div>
     </fieldset>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

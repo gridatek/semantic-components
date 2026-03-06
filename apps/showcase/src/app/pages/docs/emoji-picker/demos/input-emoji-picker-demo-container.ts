@@ -24,21 +24,23 @@ import { InputEmojiPickerDemo } from './input-emoji-picker-demo';
 })
 export class InputEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScInput } from '@semantic-components/ui';
 import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-input-emoji-picker-demo',
-  imports: [ScEmojiPicker],
+  imports: [ScEmojiPicker, ScInput],
   template: \`
     <div class="flex items-start gap-2">
       <div class="flex-1">
         <div class="relative">
           <input
+            scInput
             type="text"
             [value]="inputValue()"
             (input)="onInputChange($event)"
             placeholder="Type a message..."
-            class="border-input placeholder:text-muted-foreground focus:ring-ring w-full rounded-md border bg-transparent px-3 py-2 pr-10 text-sm shadow-sm focus:ring-1 focus:outline-none"
+            class="pr-10"
           />
           <button
             type="button"
@@ -71,6 +73,7 @@ import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
       </div>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
 export class InputEmojiPickerDemo {

@@ -41,18 +41,14 @@ import {
   imports: [ScCheckboxField, ScCheckbox, ScLabel, ScFieldDescription],
   template: \`
     <div scCheckboxField>
-      <input
-        type="checkbox"
-        scCheckbox
-        [(checked)]="marketing"
-        id="marketing"
-      />
-      <label scLabel for="marketing">Marketing emails</label>
+      <input type="checkbox" scCheckbox [(checked)]="marketing" />
+      <label scLabel>Marketing emails</label>
       <p scFieldDescription>
         Receive emails about new products, features, and more.
       </p>
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

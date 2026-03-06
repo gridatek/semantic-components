@@ -33,11 +33,12 @@ import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
     <sc-emoji-picker (emojiSelect)="onEmojiSelect($event)" />
     @if (selectedEmoji()) {
       <p class="text-muted-foreground mt-4 text-sm">
-        Selected: {{ selectedEmoji()?.emoji }} ({{ selectedEmoji()?.name },
-        encapsulation: ViewEncapsulation.None})
+        Selected: {{ selectedEmoji()?.emoji }} ({{ selectedEmoji()?.name }})
       </p>
     }
   \`,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
 })
 export class BasicEmojiPickerDemo {
   readonly selectedEmoji = signal<Emoji | null>(null);

@@ -34,6 +34,7 @@ import { ScCountdown } from '@semantic-components/ui-lab';
       <sc-countdown [targetDate]="futureDate" [showSeparator]="false" />
     </div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

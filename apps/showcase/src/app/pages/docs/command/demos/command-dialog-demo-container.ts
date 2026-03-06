@@ -105,10 +105,15 @@ interface CommandItem {
         scDialogTrigger
         scButton
         variant="outline"
-        class="text-muted-foreground relative w-full text-sm sm:w-64"
+        class="text-muted-foreground relative w-full text-sm"
       >
         <span>Click or press</span>
-        <kbd scKbd scHotkey="mod+j" #hk="scHotkey" (scHotkeyPressed)="open.update(v => !v)">
+        <kbd
+          scKbd
+          scHotkey="mod+k"
+          #hk="scHotkey"
+          (scHotkeyPressed)="open.update(v => !v)"
+        >
           {{ hk.displayKey() }}
         </kbd>
       </button>
@@ -146,7 +151,10 @@ interface CommandItem {
                         (select)="onSelect(item.label)"
                       >
                         <ng-container
-                          *ngTemplateOutlet="iconTmpl; context: { icon: item.icon }"
+                          *ngTemplateOutlet="
+                            iconTmpl;
+                            context: { icon: item.icon }
+                          "
                         ></ng-container>
                         <span>{{ item.label }}</span>
                       </div>
@@ -170,7 +178,10 @@ interface CommandItem {
                         (select)="onSelect(item.label)"
                       >
                         <ng-container
-                          *ngTemplateOutlet="iconTmpl; context: { icon: item.icon }"
+                          *ngTemplateOutlet="
+                            iconTmpl;
+                            context: { icon: item.icon }
+                          "
                         ></ng-container>
                         <span>{{ item.label }}</span>
                         @if (item.shortcut) {
@@ -196,13 +207,21 @@ interface CommandItem {
           <svg siSmileIcon class="size-4 shrink-0" aria-hidden="true"></svg>
         }
         @case ('calculator') {
-          <svg siCalculatorIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg
+            siCalculatorIcon
+            class="size-4 shrink-0"
+            aria-hidden="true"
+          ></svg>
         }
         @case ('user') {
           <svg siUserIcon class="size-4 shrink-0" aria-hidden="true"></svg>
         }
         @case ('credit-card') {
-          <svg siCreditCardIcon class="size-4 shrink-0" aria-hidden="true"></svg>
+          <svg
+            siCreditCardIcon
+            class="size-4 shrink-0"
+            aria-hidden="true"
+          ></svg>
         }
         @case ('settings') {
           <svg siSettingsIcon class="size-4 shrink-0" aria-hidden="true"></svg>
@@ -210,6 +229,7 @@ interface CommandItem {
       }
     </ng-template>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

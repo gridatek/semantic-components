@@ -37,6 +37,7 @@ import { ScProgress } from '@semantic-components/ui';
       class="h-4 w-[60%]"
     ></div>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -50,6 +50,7 @@ import { ScNativeCheckbox } from '@semantic-components/ui-lab';
     </div>
     <p class="text-muted-foreground mt-2 text-sm">Checked: {{ terms() }}</p>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

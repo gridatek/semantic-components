@@ -41,6 +41,7 @@ import { ScQrCodeDownload } from '@semantic-components/ui-lab';
       [downloadLabel]="'Save QR Code'"
     />
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -67,6 +67,7 @@ import {
       Current position: {{ position() }}%
     </p>
   \`,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
