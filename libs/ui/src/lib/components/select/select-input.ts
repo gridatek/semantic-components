@@ -32,7 +32,7 @@ export class ScSelectInput {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent outline-none placeholder:text-muted-foreground',
+      'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent pl-2.5 outline-none placeholder:text-muted-foreground',
       this.hasValue() && 'opacity-0',
       this.classInput(),
     ),
