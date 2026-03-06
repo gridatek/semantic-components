@@ -29,11 +29,16 @@ export class ContextMenuAriaDemoContainer {
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
-import { Menu, MenuContent, MenuItem } from '@angular/aria/menu';
+import {
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuSeparator,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-context-menu-aria-demo',
-  imports: [Menu, MenuContent, MenuItem],
+  imports: [ScMenu, ScMenuContent, ScMenuItem, ScMenuSeparator],
   template: \`
     <div
       class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
@@ -42,19 +47,20 @@ import { Menu, MenuContent, MenuItem } from '@angular/aria/menu';
       Right click here
     </div>
 
-    <div
-      ng-menu
-      class="bg-popover text-popover-foreground fixed z-50 min-w-32 w-60 rounded-lg p-1 shadow-md ring-1 ring-foreground/10 invisible"
-      (focusout)="close($event)"
-    >
-      <ng-template ngMenuContent>
-        <div ng-menu-item value="Back" class="...">
+    <div scMenu class="invisible fixed" (focusout)="close($event)">
+      <ng-template scMenuContent>
+        <div scMenuItem value="Back">
           <span class="flex-1">Back</span>
-          <span class="ml-auto text-xs text-muted-foreground">⌘[</span>
+          <span class="text-muted-foreground ml-auto text-xs">⌘[</span>
         </div>
-        <div ng-menu-item value="Reload" class="...">
+        <div scMenuItem value="Reload">
           <span class="flex-1">Reload</span>
-          <span class="ml-auto text-xs text-muted-foreground">⌘R</span>
+          <span class="text-muted-foreground ml-auto text-xs">⌘R</span>
+        </div>
+        <div scMenuSeparator></div>
+        <div scMenuItem value="Show Bookmarks Bar">
+          <span class="flex-1">Show Bookmarks Bar</span>
+          <span class="text-muted-foreground ml-auto text-xs">⇧⌘B</span>
         </div>
         ...
       </ng-template>
@@ -64,11 +70,11 @@ import { Menu, MenuContent, MenuItem } from '@angular/aria/menu';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuAriaDemo {
-  private readonly menu = viewChild.required(Menu);
+  private readonly scMenu = viewChild.required(ScMenu);
 
   open(event: MouseEvent) {
     event.preventDefault();
-    const menu = this.menu();
+    const menu = this.scMenu().menu;
     menu._pattern.closeAll();
     menu.element.style.visibility = 'visible';
     menu.element.style.top = \\\`\\\${event.clientY}px\\\`;
@@ -77,7 +83,7 @@ export class ContextMenuAriaDemo {
   }
 
   close(event: FocusEvent) {
-    const menu = this.menu();
+    const menu = this.scMenu().menu;
     const relatedTarget = event.relatedTarget as HTMLElement | null;
     if (!menu.element.contains(relatedTarget)) {
       menu.close();

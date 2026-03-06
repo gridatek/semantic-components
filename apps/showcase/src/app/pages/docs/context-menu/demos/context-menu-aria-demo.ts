@@ -1,14 +1,19 @@
-import { Menu, MenuContent, MenuItem } from '@angular/aria/menu';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   viewChild,
 } from '@angular/core';
+import {
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuSeparator,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-context-menu-aria-demo',
-  imports: [Menu, MenuContent, MenuItem],
+  imports: [ScMenu, ScMenuContent, ScMenuItem, ScMenuSeparator],
   template: `
     <div
       class="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm"
@@ -17,86 +22,41 @@ import {
       Right click here
     </div>
 
-    <div
-      ngMenu
-      class="bg-popover text-popover-foreground ring-foreground/10 invisible fixed z-50 w-60 min-w-32 rounded-lg p-1 shadow-md ring-1"
-      (focusout)="close($event)"
-    >
-      <ng-template ngMenuContent>
-        <div
-          ngMenuItem
-          value="Back"
-          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none"
-        >
+    <div scMenu class="invisible fixed" (focusout)="close($event)">
+      <ng-template scMenuContent>
+        <div scMenuItem value="Back">
           <span class="flex-1">Back</span>
           <span class="text-muted-foreground ml-auto text-xs">⌘[</span>
         </div>
-        <div
-          ngMenuItem
-          value="Forward"
-          [disabled]="true"
-          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm opacity-50 outline-hidden select-none"
-        >
+        <div scMenuItem value="Forward" [disabled]="true">
           <span class="flex-1">Forward</span>
           <span class="text-muted-foreground ml-auto text-xs">⌘]</span>
         </div>
-        <div
-          ngMenuItem
-          value="Reload"
-          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none"
-        >
+        <div scMenuItem value="Reload">
           <span class="flex-1">Reload</span>
           <span class="text-muted-foreground ml-auto text-xs">⌘R</span>
         </div>
 
-        <div
-          role="separator"
-          aria-orientation="horizontal"
-          class="bg-border -mx-1 my-1 h-px"
-        ></div>
+        <div scMenuSeparator></div>
 
-        <div
-          ngMenuItem
-          value="Save Page As"
-          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none"
-        >
+        <div scMenuItem value="Save Page As">
           <span class="flex-1">Save Page As...</span>
           <span class="text-muted-foreground ml-auto text-xs">⇧⌘S</span>
         </div>
-        <div
-          ngMenuItem
-          value="Create Shortcut"
-          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none"
-        >
+        <div scMenuItem value="Create Shortcut">
           <span class="flex-1">Create Shortcut...</span>
         </div>
-        <div
-          ngMenuItem
-          value="Name Window"
-          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none"
-        >
+        <div scMenuItem value="Name Window">
           <span class="flex-1">Name Window...</span>
         </div>
 
-        <div
-          role="separator"
-          aria-orientation="horizontal"
-          class="bg-border -mx-1 my-1 h-px"
-        ></div>
+        <div scMenuSeparator></div>
 
-        <div
-          ngMenuItem
-          value="Show Bookmarks Bar"
-          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none"
-        >
+        <div scMenuItem value="Show Bookmarks Bar">
           <span class="flex-1">Show Bookmarks Bar</span>
           <span class="text-muted-foreground ml-auto text-xs">⇧⌘B</span>
         </div>
-        <div
-          ngMenuItem
-          value="Show Full URLs"
-          class="data-[active=true]:bg-accent data-[active=true]:text-accent-foreground relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none"
-        >
+        <div scMenuItem value="Show Full URLs">
           <span class="flex-1">Show Full URLs</span>
         </div>
       </ng-template>
@@ -106,11 +66,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContextMenuAriaDemo {
-  private readonly menu = viewChild.required(Menu);
+  private readonly scMenu = viewChild.required(ScMenu);
 
   open(event: MouseEvent) {
     event.preventDefault();
-    const menu = this.menu();
+    const menu = this.scMenu().menu;
     menu._pattern.closeAll();
     menu.element.style.visibility = 'visible';
     menu.element.style.top = `${event.clientY}px`;
@@ -119,7 +79,7 @@ export class ContextMenuAriaDemo {
   }
 
   close(event: FocusEvent) {
-    const menu = this.menu();
+    const menu = this.scMenu().menu;
     const relatedTarget = event.relatedTarget as HTMLElement | null;
     if (!menu.element.contains(relatedTarget)) {
       menu.close();
