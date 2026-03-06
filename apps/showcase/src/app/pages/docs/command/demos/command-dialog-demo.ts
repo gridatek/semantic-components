@@ -2,10 +2,8 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   ViewEncapsulation,
   computed,
-  inject,
   input,
   signal,
 } from '@angular/core';
@@ -26,6 +24,7 @@ import {
   ScDialogPortal,
   ScDialogProvider,
   ScDialogTrigger,
+  ScHotkey,
   ScKbd,
 } from '@semantic-components/ui';
 import {
@@ -65,6 +64,7 @@ interface CommandItem {
     ScDialogTrigger,
     ScDialogPortal,
     ScDialog,
+    ScHotkey,
     ScKbd,
     NgTemplateOutlet,
     SiCalculatorIcon,
@@ -76,7 +76,12 @@ interface CommandItem {
     SiUserIcon,
   ],
   template: `
-    <div scDialogProvider [(open)]="open">
+    <div
+      scDialogProvider
+      [(open)]="open"
+      scHotkey="mod+j"
+      (scHotkeyPressed)="open.update(v => !v)"
+    >
       <button
         scDialogTrigger
         scButton
@@ -206,8 +211,6 @@ export class ScCommandDialogDemo {
   readonly open = signal(false);
   readonly searchString = signal('');
 
-  private readonly destroyRef = inject(DestroyRef);
-
   private readonly suggestions: CommandItem[] = [
     { value: 'calendar', label: 'Calendar', icon: 'calendar' },
     { value: 'search emoji', label: 'Search Emoji', icon: 'smile' },
@@ -257,20 +260,6 @@ export class ScCommandDialogDemo {
     const search = this.searchString().toLowerCase();
     return this.filterItems(this.settings, search);
   });
-
-  constructor() {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'j' && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        this.open.update((v) => !v);
-      }
-    };
-
-    document.addEventListener('keydown', handler);
-    this.destroyRef.onDestroy(() =>
-      document.removeEventListener('keydown', handler),
-    );
-  }
 
   onSelect(item: string): void {
     console.log('Selected:', item);
