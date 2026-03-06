@@ -13,4 +13,4 @@ export { ScComboboxSearchInput } from './combobox-search-input';
 export { ScComboboxSearchInputGroup } from './combobox-search-input-group';
 export { ScComboboxTrigger } from './combobox-trigger';
 export { ScComboboxTriggerIcon } from './combobox-trigger-icon';
-export { ScComboboxTriggerInput } from './combobox-trigger-input';
+export { ScComboboxInput } from './combobox-input';

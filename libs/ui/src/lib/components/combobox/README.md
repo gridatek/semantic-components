@@ -9,7 +9,7 @@ A set of semantic directives that wrap `@angular/aria/combobox` and `@angular/ar
 | `ScCombobox`                 | `div[scCombobox]`                       | `Combobox`               | Outer combobox container with border styling                                 |
 | `ScComboboxSearchPanel`      | `div[scComboboxSearchPanel]`            | `Combobox`               | Inner combobox for search panel (borderless)                                 |
 | `ScComboboxTrigger`          | `div[scComboboxTrigger]`                | -                        | Trigger button container                                                     |
-| `ScComboboxTriggerInput`     | `input[scComboboxTriggerInput]`         | `ComboboxInput`          | Read-only input displaying selected value                                    |
+| `ScComboboxInput`            | `input[scComboboxInput]`                | `ComboboxInput`          | Read-only input displaying selected value                                    |
 | `ScComboboxTriggerIcon`      | `svg[scComboboxTriggerIcon]`            | -                        | Chevron icon in the trigger                                                  |
 | `ScComboboxPopupContainer`   | `ng-template[scComboboxPopupContainer]` | `ComboboxPopupContainer` | Outer popup container template                                               |
 | `ScComboboxDialog`           | `dialog[scComboboxDialog]`              | `ComboboxDialog`         | Dialog overlay with auto-positioning, gotoFirst on open, and close-on-select |
@@ -28,7 +28,7 @@ A set of semantic directives that wrap `@angular/aria/combobox` and `@angular/ar
 ```html
 <div scCombobox [readonly]="true">
   <div scComboboxTrigger>
-    <input scComboboxTriggerInput [value]="value()" />
+    <input scComboboxInput [value]="value()" />
     <svg siChevronsUpDownIcon scComboboxTriggerIcon></svg>
   </div>
   <ng-template scComboboxPopupContainer>

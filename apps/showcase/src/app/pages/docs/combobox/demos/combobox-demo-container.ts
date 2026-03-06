@@ -48,7 +48,7 @@ import {
   ScComboboxSearchPanel,
   ScComboboxTrigger,
   ScComboboxTriggerIcon,
-  ScComboboxTriggerInput,
+  ScComboboxInput,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -74,7 +74,7 @@ import {
     ScComboboxTriggerIcon,
     ScComboboxList,
     ScComboboxPopupContainer,
-    ScComboboxTriggerInput,
+    ScComboboxInput,
     FormsModule,
     SiCheckIcon,
     SiChevronsUpDownIcon,
@@ -85,7 +85,7 @@ import {
     <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxTrigger>
         <input
-          scComboboxTriggerInput
+          scComboboxInput
           placeholder="Select a country..."
           [value]="value()"
         />

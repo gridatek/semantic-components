@@ -3,7 +3,7 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'input[scComboboxTriggerInput]',
+  selector: 'input[scComboboxInput]',
   hostDirectives: [
     {
       directive: ComboboxInput,
@@ -12,11 +12,11 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'combobox-trigger-input',
+    'data-slot': 'combobox-input',
     '[class]': 'class()',
   },
 })
-export class ScComboboxTriggerInput {
+export class ScComboboxInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
