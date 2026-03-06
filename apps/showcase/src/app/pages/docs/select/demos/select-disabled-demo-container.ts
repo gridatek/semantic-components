@@ -31,14 +31,14 @@ export class SelectDisabledDemoContainer {
 import {
   ScSelect,
   ScSelectDisplayValue,
-  ScSelectItem,
+  ScSelectIcon,
   ScSelectInput,
+  ScSelectInputGroup,
+  ScSelectItem,
   ScSelectItemIndicator,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectInputGroup,
-  ScSelectIcon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -52,8 +52,8 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectPopup,
     ScSelectPortal,
     ScSelectInputGroup,
-    ScSelectInput,
     ScSelectIcon,
+    ScSelectInput,
     ScSelectItemIndicator,
     SiChevronDownIcon,
     SiCheckIcon,
@@ -62,15 +62,28 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     <div scSelect disabled>
       <div scSelectInputGroup>
         <span scSelectDisplayValue></span>
-        <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />
+        <input
+          scSelectInput
+          placeholder="Select a fruit"
+          aria-label="Fruit dropdown"
+        />
         <svg scSelectIcon siChevronDownIcon></svg>
       </div>
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>
-            <div scSelectItem value="Apple" label="Apple">Apple<svg scSelectItemIndicator siCheckIcon></svg></div>
-            <div scSelectItem value="Banana" label="Banana">Banana<svg scSelectItemIndicator siCheckIcon></svg></div>
-            <div scSelectItem value="Orange" label="Orange">Orange<svg scSelectItemIndicator siCheckIcon></svg></div>
+            <div scSelectItem value="Apple" label="Apple">
+              Apple
+              <svg scSelectItemIndicator siCheckIcon></svg>
+            </div>
+            <div scSelectItem value="Banana" label="Banana">
+              Banana
+              <svg scSelectItemIndicator siCheckIcon></svg>
+            </div>
+            <div scSelectItem value="Orange" label="Orange">
+              Orange
+              <svg scSelectItemIndicator siCheckIcon></svg>
+            </div>
           </div>
         </div>
       </ng-template>

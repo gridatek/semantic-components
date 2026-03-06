@@ -34,15 +34,15 @@ import {
 import {
   ScSelect,
   ScSelectDisplayValue,
+  ScSelectIcon,
+  ScSelectInput,
+  ScSelectInputGroup,
   ScSelectItem,
   ScSelectItemIcon,
-  ScSelectInput,
   ScSelectItemIndicator,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectInputGroup,
-  ScSelectIcon,
 } from '@semantic-components/ui';
 import {
   SiBookIcon,
@@ -69,8 +69,6 @@ import {
     ScSelectPortal,
     ScSelectInputGroup,
     ScSelectInput,
-    ScSelectIcon,
-    ScSelectItemIndicator,
     SiBookIcon,
     SiBriefcaseIcon,
     SiClockIcon,
@@ -80,6 +78,8 @@ import {
     SiTagIcon,
     SiUserIcon,
     NgTemplateOutlet,
+    ScSelectIcon,
+    ScSelectItemIndicator,
     SiChevronDownIcon,
     SiCheckIcon,
   ],
@@ -87,10 +87,16 @@ import {
     <div scSelect class="w-48">
       <div scSelectInputGroup>
         @if (displayIcon(); as icon) {
-            <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
-          }
+          <ng-container
+            *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+          ></ng-container>
+        }
         <span scSelectDisplayValue></span>
-        <input scSelectInput placeholder="Select a label" aria-label="Label dropdown" />
+        <input
+          scSelectInput
+          placeholder="Select a label"
+          aria-label="Label dropdown"
+        />
         <svg scSelectIcon siChevronDownIcon></svg>
       </div>
       <ng-template scSelectPortal>
@@ -98,7 +104,9 @@ import {
           <div scSelectList>
             @for (option of options; track option.value) {
               <div scSelectItem [value]="option.value" [label]="option.label">
-                <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"></ng-container>
+                <ng-container
+                  *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+                ></ng-container>
                 <span class="flex-1">{{ option.label }}</span>
                 <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
@@ -154,7 +162,7 @@ export class SelectDemo {
     { value: 'starred', label: 'Starred', icon: 'star' },
     { value: 'work', label: 'Work', icon: 'briefcase' },
     { value: 'personal', label: 'Personal', icon: 'user' },
-    { value: 'to-do', label: 'To Do', icon: 'square-check' },
+    { value: 'todo', label: 'To Do', icon: 'square-check' },
     { value: 'later', label: 'Later', icon: 'clock' },
     { value: 'read', label: 'Read', icon: 'book' },
     { value: 'travel', label: 'Travel', icon: 'plane' },

@@ -30,20 +30,20 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { FormRoot, form, required } from '@angular/forms/signals';
+import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScField,
   ScLabel,
   ScSelect,
   ScSelectDisplayValue,
-  ScSelectItem,
+  ScSelectIcon,
   ScSelectInput,
+  ScSelectInputGroup,
+  ScSelectItem,
   ScSelectItemIndicator,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
-  ScSelectInputGroup,
-  ScSelectIcon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -69,6 +69,7 @@ interface FormModel {
     SiChevronDownIcon,
     SiCheckIcon,
     JsonPipe,
+    FormField,
     FormRoot,
   ],
   template: \`
@@ -79,7 +80,12 @@ interface FormModel {
           <div scSelect>
             <div scSelectInputGroup>
               <span scSelectDisplayValue></span>
-              <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />
+              <input
+                scSelectInput
+                [formField]="fruitForm.fruit"
+                placeholder="Select a fruit"
+                aria-label="Fruit dropdown"
+              />
               <svg scSelectIcon siChevronDownIcon></svg>
             </div>
             <ng-template scSelectPortal>
