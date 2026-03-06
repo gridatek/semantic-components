@@ -10,7 +10,7 @@ import {
   ScCommand,
   ScCommandEmpty,
   ScCommandGroup,
-  ScCommandGroupHeading,
+  ScCommandGroupLabel,
   ScCommandInput,
   ScCommandInputGroup,
   ScCommandItem,
@@ -43,7 +43,7 @@ interface CommandItem {
     ScCommand,
     ScCommandEmpty,
     ScCommandGroup,
-    ScCommandGroupHeading,
+    ScCommandGroupLabel,
     ScCommandInput,
     ScCommandInputGroup,
     ScCommandItem,
@@ -86,7 +86,7 @@ interface CommandItem {
               }
               @if (filteredSuggestions().length > 0) {
                 <div scCommandGroup>
-                  <span scCommandGroupHeading>Suggestions</span>
+                  <span scCommandGroupLabel>Suggestions</span>
                   @for (item of filteredSuggestions(); track item.value) {
                     <div
                       scCommandItem
@@ -113,7 +113,7 @@ interface CommandItem {
               }
               @if (filteredSettings().length > 0) {
                 <div scCommandGroup>
-                  <span scCommandGroupHeading>Settings</span>
+                  <span scCommandGroupLabel>Settings</span>
                   @for (item of filteredSettings(); track item.value) {
                     <div
                       scCommandItem

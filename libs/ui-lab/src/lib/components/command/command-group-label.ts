@@ -2,13 +2,13 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[scCommandGroupHeading]',
+  selector: '[scCommandGroupLabel]',
   host: {
-    'data-slot': 'command-group-heading',
+    'data-slot': 'command-group-label',
     '[class]': 'class()',
   },
 })
-export class ScCommandGroupHeading {
+export class ScCommandGroupLabel {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

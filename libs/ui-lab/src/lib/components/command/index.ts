@@ -1,7 +1,7 @@
 export { ScCommand } from './command';
 export { ScCommandEmpty } from './command-empty';
 export { ScCommandGroup } from './command-group';
-export { ScCommandGroupHeading } from './command-group-heading';
+export { ScCommandGroupLabel } from './command-group-label';
 export { ScCommandInput } from './command-input';
 export { ScCommandInputGroup } from './command-input-group';
 export { ScCommandItem } from './command-item';
