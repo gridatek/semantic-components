@@ -36,11 +36,10 @@ import { ScNativeCheckbox } from '@semantic-components/ui-lab';
   imports: [ScNativeCheckbox],
   template: \`
     <label class="flex items-center space-x-2">
-      <input
-        scNativeCheckbox
-        (change)="onTermsChange($event)"
-      />
-      <span class="text-sm leading-none font-medium">Accept terms and conditions</span>
+      <input scNativeCheckbox (change)="onTermsChange($event)" />
+      <span class="text-sm leading-none font-medium">
+        Accept terms and conditions
+      </span>
     </label>
     <p class="text-muted-foreground mt-2 text-sm">Checked: {{ terms() }}</p>
   \`,
