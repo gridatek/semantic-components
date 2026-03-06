@@ -18,7 +18,7 @@ import { IndeterminateCheckboxDemo } from './indeterminate-checkbox-demo';
       <app-indeterminate-checkbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

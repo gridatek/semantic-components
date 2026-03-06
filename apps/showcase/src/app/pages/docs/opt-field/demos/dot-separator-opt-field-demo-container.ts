@@ -18,7 +18,7 @@ import { DotSeparatorOptFieldDemo } from './dot-separator-opt-field-demo';
       <app-dot-separator-opt-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

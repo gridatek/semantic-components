@@ -18,7 +18,7 @@ import { MaxlengthTextareaDemo } from './maxlength-textarea-demo';
       <app-maxlength-textarea-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { LabelTextareaDemo } from './label-textarea-demo';
       <app-label-textarea-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

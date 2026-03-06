@@ -19,7 +19,7 @@ import { ButtonGroupDemo } from './button-group-demo';
       <app-button-group-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupDemoContainer {

@@ -18,7 +18,7 @@ import { TopHoverCardDemo } from './top-hover-card-demo';
       <app-top-hover-card-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { SignalFormsCheckboxDemo } from './signal-forms-checkbox-demo';
       <app-signal-forms-checkbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

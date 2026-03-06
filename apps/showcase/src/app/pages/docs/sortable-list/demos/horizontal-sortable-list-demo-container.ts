@@ -14,7 +14,7 @@ import { HorizontalSortableListDemo } from './horizontal-sortable-list-demo';
       <app-horizontal-sortable-list-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

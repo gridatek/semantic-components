@@ -14,7 +14,7 @@ import { SecondsTimePickerDemo } from './seconds-time-picker-demo';
       <app-seconds-time-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

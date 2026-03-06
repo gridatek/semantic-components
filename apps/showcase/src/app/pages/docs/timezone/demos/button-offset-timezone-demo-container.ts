@@ -14,7 +14,7 @@ import { ButtonOffsetTimezoneDemo } from './button-offset-timezone-demo';
       <app-button-offset-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

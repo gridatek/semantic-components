@@ -18,7 +18,7 @@ import { TypesInputDemo } from './types-input-demo';
       <app-types-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

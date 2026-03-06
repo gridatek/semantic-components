@@ -18,7 +18,7 @@ import { BasicPasswordFieldDemo } from './basic-password-field-demo';
       <app-basic-password-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

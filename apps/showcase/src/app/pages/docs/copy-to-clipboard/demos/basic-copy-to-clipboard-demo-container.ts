@@ -18,7 +18,7 @@ import { BasicCopyToClipboardDemo } from './basic-copy-to-clipboard-demo';
       <app-basic-copy-to-clipboard-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

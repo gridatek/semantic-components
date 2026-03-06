@@ -18,7 +18,7 @@ import { CustomThemeCheckboxDemo } from './custom-theme-checkbox-demo';
       <app-custom-theme-checkbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

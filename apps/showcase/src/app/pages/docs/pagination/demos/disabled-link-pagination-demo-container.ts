@@ -18,7 +18,7 @@ import { DisabledLinkPaginationDemo } from './disabled-link-pagination-demo';
       <app-disabled-link-pagination-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

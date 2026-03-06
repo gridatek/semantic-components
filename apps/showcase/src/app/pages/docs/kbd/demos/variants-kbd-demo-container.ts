@@ -18,7 +18,7 @@ import { VariantsKbdDemo } from './variants-kbd-demo';
       <app-variants-kbd-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

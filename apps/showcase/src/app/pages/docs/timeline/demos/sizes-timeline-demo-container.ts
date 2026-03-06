@@ -14,7 +14,7 @@ import { SizesTimelineDemo } from './sizes-timeline-demo';
       <app-sizes-timeline-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { BasicSpeedDialDemo } from './basic-speed-dial-demo';
       <app-basic-speed-dial-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { ActivityTimelineDemo } from './activity-timeline-demo';
       <app-activity-timeline-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

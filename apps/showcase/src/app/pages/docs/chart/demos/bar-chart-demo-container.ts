@@ -18,7 +18,7 @@ import { BarChartDemo } from './bar-chart-demo';
       <app-bar-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

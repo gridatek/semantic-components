@@ -14,7 +14,7 @@ import { SpeedMarqueeDemo } from './speed-marquee-demo';
       <app-speed-marquee-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

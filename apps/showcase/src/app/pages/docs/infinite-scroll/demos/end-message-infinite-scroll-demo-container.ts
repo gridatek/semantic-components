@@ -18,7 +18,7 @@ import { EndMessageInfiniteScrollDemo } from './end-message-infinite-scroll-demo
       <app-end-message-infinite-scroll-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

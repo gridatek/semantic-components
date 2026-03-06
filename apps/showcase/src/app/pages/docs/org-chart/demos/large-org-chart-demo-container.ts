@@ -14,7 +14,7 @@ import { LargeOrgChartDemo } from './large-org-chart-demo';
       <app-large-org-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

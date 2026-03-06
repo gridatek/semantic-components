@@ -14,7 +14,7 @@ import { CustomSizeImageAnnotatorDemo } from './custom-size-image-annotator-demo
       <app-custom-size-image-annotator-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

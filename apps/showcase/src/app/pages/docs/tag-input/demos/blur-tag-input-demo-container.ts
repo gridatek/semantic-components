@@ -14,7 +14,7 @@ import { BlurTagInputDemo } from './blur-tag-input-demo';
       <app-blur-tag-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

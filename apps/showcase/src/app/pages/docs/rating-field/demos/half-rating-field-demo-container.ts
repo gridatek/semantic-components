@@ -14,7 +14,7 @@ import { HalfRatingFieldDemo } from './half-rating-field-demo';
       <app-half-rating-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

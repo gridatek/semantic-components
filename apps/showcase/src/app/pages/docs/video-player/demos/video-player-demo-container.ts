@@ -18,7 +18,7 @@ import { VideoPlayerDemo } from './video-player-demo';
       <app-video-player-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { NavigationTimezoneDemo } from './navigation-timezone-demo';
       <app-navigation-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

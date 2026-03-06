@@ -14,7 +14,7 @@ import { WithoutLabelsSpeedDialDemo } from './without-labels-speed-dial-demo';
       <app-without-labels-speed-dial-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

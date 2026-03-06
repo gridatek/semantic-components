@@ -14,7 +14,7 @@ import { CustomTriggerMentionInputDemo } from './custom-trigger-mention-input-de
       <app-custom-trigger-mention-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { BasicSortableListDemo } from './basic-sortable-list-demo';
       <app-basic-sortable-list-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

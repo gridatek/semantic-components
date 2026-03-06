@@ -18,7 +18,7 @@ import { BasicAvatarDemo } from './basic-avatar-demo';
       <app-basic-avatar-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

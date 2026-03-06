@@ -18,7 +18,7 @@ import { QuickReactionsEmojiPickerDemo } from './quick-reactions-emoji-picker-de
       <app-quick-reactions-emoji-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

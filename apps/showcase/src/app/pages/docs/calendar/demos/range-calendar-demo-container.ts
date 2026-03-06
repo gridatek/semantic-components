@@ -18,7 +18,7 @@ import { RangeCalendarDemo } from './range-calendar-demo';
       <app-range-calendar-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

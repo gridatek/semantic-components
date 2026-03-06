@@ -18,7 +18,7 @@ import { ReadonlyEditorDemo } from './readonly-editor-demo';
       <app-readonly-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

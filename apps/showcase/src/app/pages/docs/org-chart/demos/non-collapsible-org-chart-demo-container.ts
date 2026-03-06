@@ -14,7 +14,7 @@ import { NonCollapsibleOrgChartDemo } from './non-collapsible-org-chart-demo';
       <app-non-collapsible-org-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

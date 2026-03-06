@@ -14,7 +14,7 @@ import { AvatarsOrgChartDemo } from './avatars-org-chart-demo';
       <app-avatars-org-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

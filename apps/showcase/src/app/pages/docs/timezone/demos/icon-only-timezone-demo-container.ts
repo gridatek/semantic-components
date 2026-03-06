@@ -14,7 +14,7 @@ import { IconOnlyTimezoneDemo } from './icon-only-timezone-demo';
       <app-icon-only-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

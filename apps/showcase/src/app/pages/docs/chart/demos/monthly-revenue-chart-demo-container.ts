@@ -18,7 +18,7 @@ import { MonthlyRevenueChartDemo } from './monthly-revenue-chart-demo';
       <app-monthly-revenue-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { NavigationTreeDemo } from './navigation-tree-demo';
       <app-navigation-tree-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

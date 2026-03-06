@@ -14,7 +14,7 @@ import { HslColorPickerDemo } from './hsl-color-picker-demo';
       <app-hsl-color-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

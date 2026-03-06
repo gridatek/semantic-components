@@ -18,7 +18,7 @@ import { HeadingsTypographyDemo } from './headings-typography-demo';
       <app-headings-typography-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

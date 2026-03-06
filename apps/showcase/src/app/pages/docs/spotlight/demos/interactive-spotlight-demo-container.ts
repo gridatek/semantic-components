@@ -14,7 +14,7 @@ import { InteractiveSpotlightDemo } from './interactive-spotlight-demo';
       <app-interactive-spotlight-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

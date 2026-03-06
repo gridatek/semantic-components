@@ -18,7 +18,7 @@ import { BasicNumberFieldDemo } from './basic-number-field-demo';
       <app-basic-number-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

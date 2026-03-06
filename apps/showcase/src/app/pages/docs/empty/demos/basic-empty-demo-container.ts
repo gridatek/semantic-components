@@ -14,7 +14,7 @@ import { BasicEmptyDemo } from './basic-empty-demo';
       <app-basic-empty-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

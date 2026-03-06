@@ -18,7 +18,7 @@ import { PrefilledEditorDemo } from './prefilled-editor-demo';
       <app-prefilled-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

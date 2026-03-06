@@ -14,7 +14,7 @@ import { BasicTimelineDemo } from './basic-timeline-demo';
       <app-basic-timeline-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

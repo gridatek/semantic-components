@@ -18,7 +18,7 @@ import { AudioPlayerDemo } from './audio-player-demo';
       <app-audio-player-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { SizesQrCodeDemo } from './sizes-qr-code-demo';
       <app-sizes-qr-code-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

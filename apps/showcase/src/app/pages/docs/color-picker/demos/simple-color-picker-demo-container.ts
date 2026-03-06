@@ -14,7 +14,7 @@ import { SimpleColorPickerDemo } from './simple-color-picker-demo';
       <app-simple-color-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

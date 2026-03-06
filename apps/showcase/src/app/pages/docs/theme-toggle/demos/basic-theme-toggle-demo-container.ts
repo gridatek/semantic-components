@@ -18,7 +18,7 @@ import { BasicThemeToggleDemo } from './basic-theme-toggle-demo';
       <app-basic-theme-toggle-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

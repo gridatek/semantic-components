@@ -14,7 +14,7 @@ import { DisabledSignaturePadDemo } from './disabled-signature-pad-demo';
       <app-disabled-signature-pad-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

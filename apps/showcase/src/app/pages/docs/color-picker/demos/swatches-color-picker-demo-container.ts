@@ -14,7 +14,7 @@ import { SwatchesColorPickerDemo } from './swatches-color-picker-demo';
       <app-swatches-color-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

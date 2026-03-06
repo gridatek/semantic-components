@@ -18,7 +18,7 @@ import { ArrowKeysKbdDemo } from './arrow-keys-kbd-demo';
       <app-arrow-keys-kbd-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

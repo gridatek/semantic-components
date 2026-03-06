@@ -14,7 +14,7 @@ import { PopoverTimePickerDemo } from './popover-time-picker-demo';
       <app-popover-time-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

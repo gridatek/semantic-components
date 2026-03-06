@@ -14,7 +14,7 @@ import { CompactOrgChartDemo } from './compact-org-chart-demo';
       <app-compact-org-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

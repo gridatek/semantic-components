@@ -14,7 +14,7 @@ import { SizesDockDemo } from './sizes-dock-demo';
       <app-sizes-dock-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { ScCommandDialogDemo } from './command-dialog-demo';
       <app-command-dialog-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

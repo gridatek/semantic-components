@@ -18,7 +18,7 @@ import { BasicEmojiPickerDemo } from './basic-emoji-picker-demo';
       <app-basic-emoji-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

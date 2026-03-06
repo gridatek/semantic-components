@@ -14,7 +14,7 @@ import { CustomIconsSpeedDialDemo } from './custom-icons-speed-dial-demo';
       <app-custom-icons-speed-dial-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

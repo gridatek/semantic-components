@@ -18,7 +18,7 @@ import { ComboboxDemo } from './combobox-demo';
       <app-combobox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -80,7 +80,7 @@ import {
     SiChevronsUpDownIcon,
     SiSearchIcon,
   ],
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   template: \`
     <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxTrigger>

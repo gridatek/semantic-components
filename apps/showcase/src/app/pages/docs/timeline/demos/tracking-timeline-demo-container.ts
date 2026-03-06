@@ -14,7 +14,7 @@ import { TrackingTimelineDemo } from './tracking-timeline-demo';
       <app-tracking-timeline-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

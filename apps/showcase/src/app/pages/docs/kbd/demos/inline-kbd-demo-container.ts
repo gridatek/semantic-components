@@ -18,7 +18,7 @@ import { InlineKbdDemo } from './inline-kbd-demo';
       <app-inline-kbd-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -19,7 +19,7 @@ import { ProductBarcodeScannerDemo } from './product-barcode-scanner-demo';
       <app-product-barcode-scanner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

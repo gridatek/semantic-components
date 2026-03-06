@@ -18,7 +18,7 @@ import { TopSheetDemo } from './top-sheet-demo';
       <app-top-sheet-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

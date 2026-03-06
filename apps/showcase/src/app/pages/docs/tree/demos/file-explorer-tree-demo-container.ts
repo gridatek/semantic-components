@@ -18,7 +18,7 @@ import { FileExplorerTreeDemo } from './file-explorer-tree-demo';
       <app-file-explorer-tree-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

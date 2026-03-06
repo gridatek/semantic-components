@@ -14,7 +14,7 @@ import { HandleSortableListDemo } from './handle-sortable-list-demo';
       <app-handle-sortable-list-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

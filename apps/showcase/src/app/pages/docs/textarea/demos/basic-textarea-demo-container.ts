@@ -18,7 +18,7 @@ import { BasicTextareaDemo } from './basic-textarea-demo';
       <app-basic-textarea-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { BasicKbdDemo } from './basic-kbd-demo';
       <app-basic-kbd-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

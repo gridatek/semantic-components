@@ -18,7 +18,7 @@ import { SizesStatCardDemo } from './sizes-stat-card-demo';
       <app-sizes-stat-card-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

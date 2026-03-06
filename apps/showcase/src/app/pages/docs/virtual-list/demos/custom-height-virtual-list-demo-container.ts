@@ -18,7 +18,7 @@ import { CustomHeightVirtualListDemo } from './custom-height-virtual-list-demo';
       <app-custom-height-virtual-list-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

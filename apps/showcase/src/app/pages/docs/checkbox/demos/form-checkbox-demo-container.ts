@@ -18,7 +18,7 @@ import { FormCheckboxDemo } from './form-checkbox-demo';
       <app-form-checkbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { InteractiveQrCodeDemo } from './interactive-qr-code-demo';
       <app-interactive-qr-code-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

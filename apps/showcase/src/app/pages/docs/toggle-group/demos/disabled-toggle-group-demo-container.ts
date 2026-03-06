@@ -14,7 +14,7 @@ import { DisabledToggleGroupDemo } from './disabled-toggle-group-demo';
       <app-disabled-toggle-group-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

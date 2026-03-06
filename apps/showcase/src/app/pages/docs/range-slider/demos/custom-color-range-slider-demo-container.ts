@@ -18,7 +18,7 @@ import { CustomColorRangeSliderDemo } from './custom-color-range-slider-demo';
       <app-custom-color-range-slider-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { PreviewSignaturePadDemo } from './preview-signature-pad-demo';
       <app-preview-signature-pad-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

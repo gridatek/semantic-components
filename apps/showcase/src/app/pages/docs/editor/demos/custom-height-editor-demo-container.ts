@@ -18,7 +18,7 @@ import { CustomHeightEditorDemo } from './custom-height-editor-demo';
       <app-custom-height-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

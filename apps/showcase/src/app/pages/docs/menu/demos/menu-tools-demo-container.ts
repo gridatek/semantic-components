@@ -18,7 +18,7 @@ import { MenuToolsDemo } from './menu-tools-demo';
       <app-menu-tools-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

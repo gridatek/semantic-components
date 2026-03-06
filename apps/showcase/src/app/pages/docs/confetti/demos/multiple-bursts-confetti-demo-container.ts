@@ -14,7 +14,7 @@ import { MultipleBurstsConfettiDemo } from './multiple-bursts-confetti-demo';
       <app-multiple-bursts-confetti-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { CurrentTimeTimezoneDemo } from './current-time-timezone-demo';
       <app-current-time-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

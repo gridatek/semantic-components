@@ -14,7 +14,7 @@ import { DisabledSwitchDemo } from './disabled-switch-demo';
       <app-disabled-switch-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

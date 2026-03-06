@@ -18,7 +18,7 @@ import { MapAspectRatioDemo } from './map-aspect-ratio-demo';
       <app-map-aspect-ratio-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

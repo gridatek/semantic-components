@@ -14,7 +14,7 @@ import { SimpleStepperDemo } from './simple-stepper-demo';
       <app-simple-stepper-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

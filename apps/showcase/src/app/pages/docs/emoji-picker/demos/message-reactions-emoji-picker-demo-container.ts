@@ -18,7 +18,7 @@ import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picke
       <app-message-reactions-emoji-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

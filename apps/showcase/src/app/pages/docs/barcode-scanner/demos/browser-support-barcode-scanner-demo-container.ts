@@ -19,7 +19,7 @@ import { BrowserSupportBarcodeScannerDemo } from './browser-support-barcode-scan
       <app-browser-support-barcode-scanner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

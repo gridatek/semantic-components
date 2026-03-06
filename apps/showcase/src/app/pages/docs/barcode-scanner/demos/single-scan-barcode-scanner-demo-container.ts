@@ -19,7 +19,7 @@ import { SingleScanBarcodeScannerDemo } from './single-scan-barcode-scanner-demo
       <app-single-scan-barcode-scanner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

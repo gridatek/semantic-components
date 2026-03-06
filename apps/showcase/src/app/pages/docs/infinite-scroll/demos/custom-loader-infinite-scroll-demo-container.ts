@@ -18,7 +18,7 @@ import { CustomLoaderInfiniteScrollDemo } from './custom-loader-infinite-scroll-
       <app-custom-loader-infinite-scroll-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { StrengthPasswordFieldDemo } from './strength-password-field-demo';
       <app-strength-password-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

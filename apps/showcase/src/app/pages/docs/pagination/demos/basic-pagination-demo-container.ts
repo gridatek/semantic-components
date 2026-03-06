@@ -18,7 +18,7 @@ import { BasicPaginationDemo } from './basic-pagination-demo';
       <app-basic-pagination-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { SingleFileUploadDemo } from './single-file-upload-demo';
       <app-single-file-upload-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

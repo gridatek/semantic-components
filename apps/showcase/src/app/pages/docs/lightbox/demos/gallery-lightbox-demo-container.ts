@@ -14,7 +14,7 @@ import { GalleryLightboxDemo } from './gallery-lightbox-demo';
       <app-gallery-lightbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

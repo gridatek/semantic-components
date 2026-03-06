@@ -18,7 +18,7 @@ import { BasicInputDemo } from './basic-input-demo';
       <app-basic-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

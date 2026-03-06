@@ -18,7 +18,7 @@ import { ColorsSpinnerDemo } from './colors-spinner-demo';
       <app-colors-spinner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

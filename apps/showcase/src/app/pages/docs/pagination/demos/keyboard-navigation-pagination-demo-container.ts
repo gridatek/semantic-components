@@ -18,7 +18,7 @@ import { KeyboardNavigationPaginationDemo } from './keyboard-navigation-paginati
       <app-keyboard-navigation-pagination-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

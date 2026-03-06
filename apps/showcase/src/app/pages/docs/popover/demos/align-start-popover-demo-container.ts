@@ -18,7 +18,7 @@ import { AlignStartPopoverDemo } from './align-start-popover-demo';
       <app-align-start-popover-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

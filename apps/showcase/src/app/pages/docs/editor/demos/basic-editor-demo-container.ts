@@ -18,7 +18,7 @@ import { BasicEditorDemo } from './basic-editor-demo';
       <app-basic-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

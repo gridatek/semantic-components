@@ -55,7 +55,7 @@ import {
     SiChevronsUpDownIcon,
     SiSearchIcon,
   ],
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   template: `
     <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxTrigger>

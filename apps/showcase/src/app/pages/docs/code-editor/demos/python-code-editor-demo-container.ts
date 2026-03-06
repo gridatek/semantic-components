@@ -18,7 +18,7 @@ import { PythonCodeEditorDemo } from './python-code-editor-demo';
       <app-python-code-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

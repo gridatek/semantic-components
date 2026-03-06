@@ -18,7 +18,7 @@ import { SignalFormsPasswordFieldDemo } from './signal-forms-password-field-demo
       <app-signal-forms-password-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

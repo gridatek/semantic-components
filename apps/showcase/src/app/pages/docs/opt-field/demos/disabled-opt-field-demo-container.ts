@@ -18,7 +18,7 @@ import { DisabledOptFieldDemo } from './disabled-opt-field-demo';
       <app-disabled-opt-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

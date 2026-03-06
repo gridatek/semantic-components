@@ -18,7 +18,7 @@ import { LightThemeCodeEditorDemo } from './light-theme-code-editor-demo';
       <app-light-theme-code-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { DisabledButtonDemo } from './disabled-button-demo';
       <app-disabled-button-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

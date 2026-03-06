@@ -18,7 +18,7 @@ import { AvatarCropperDemo } from './avatar-cropper-demo';
       <app-avatar-cropper-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

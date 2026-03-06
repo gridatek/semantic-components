@@ -18,7 +18,7 @@ import { WithoutLabelNumberFieldDemo } from './without-label-number-field-demo';
       <app-without-label-number-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

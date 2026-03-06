@@ -14,7 +14,7 @@ import { DescriptionsRadioGroupDemo } from './descriptions-radio-group-demo';
       <app-descriptions-radio-group-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

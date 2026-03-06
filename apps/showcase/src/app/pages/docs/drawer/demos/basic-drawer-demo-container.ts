@@ -18,7 +18,7 @@ import { BasicDrawerDemo } from './basic-drawer-demo';
       <app-basic-drawer-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

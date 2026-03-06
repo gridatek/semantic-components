@@ -14,7 +14,7 @@ import { TextMarqueeDemo } from './text-marquee-demo';
       <app-text-marquee-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

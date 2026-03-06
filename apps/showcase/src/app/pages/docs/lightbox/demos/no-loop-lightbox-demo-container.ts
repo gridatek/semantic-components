@@ -14,7 +14,7 @@ import { NoLoopLightboxDemo } from './no-loop-lightbox-demo';
       <app-no-loop-lightbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

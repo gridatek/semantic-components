@@ -14,7 +14,7 @@ import { SimpleCountdownDemo } from './simple-countdown-demo';
       <app-simple-countdown-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

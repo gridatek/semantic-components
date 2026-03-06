@@ -14,7 +14,7 @@ import { DescriptionSwitchDemo } from './description-switch-demo';
       <app-description-switch-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { SizesToggleDemo } from './sizes-toggle-demo';
       <app-sizes-toggle-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

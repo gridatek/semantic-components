@@ -18,7 +18,7 @@ import { BasicFieldDemo } from './basic-field-demo';
       <app-basic-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

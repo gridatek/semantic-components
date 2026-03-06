@@ -14,7 +14,7 @@ import { BasicSelectTimezoneDemo } from './basic-select-timezone-demo';
       <app-basic-select-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

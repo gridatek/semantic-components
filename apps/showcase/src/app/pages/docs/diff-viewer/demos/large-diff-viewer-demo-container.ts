@@ -18,7 +18,7 @@ import { LargeDiffViewerDemo } from './large-diff-viewer-demo';
       <app-large-diff-viewer-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

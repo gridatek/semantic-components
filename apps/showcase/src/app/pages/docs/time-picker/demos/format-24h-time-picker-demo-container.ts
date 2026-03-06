@@ -14,7 +14,7 @@ import { Format24hTimePickerDemo } from './format-24h-time-picker-demo';
       <app-format-24h-time-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

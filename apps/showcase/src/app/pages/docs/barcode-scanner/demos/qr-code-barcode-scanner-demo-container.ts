@@ -19,7 +19,7 @@ import { QrCodeBarcodeScannerDemo } from './qr-code-barcode-scanner-demo';
       <app-qr-code-barcode-scanner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

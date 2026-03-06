@@ -14,7 +14,7 @@ import { NoOffsetTimezoneDemo } from './no-offset-timezone-demo';
       <app-no-offset-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

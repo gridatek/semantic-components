@@ -14,7 +14,7 @@ import { VerticalStepperDemo } from './vertical-stepper-demo';
       <app-vertical-stepper-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

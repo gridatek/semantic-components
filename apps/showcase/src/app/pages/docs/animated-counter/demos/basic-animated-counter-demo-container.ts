@@ -14,7 +14,7 @@ import { BasicAnimatedCounterDemo } from './basic-animated-counter-demo';
       <app-basic-animated-counter-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

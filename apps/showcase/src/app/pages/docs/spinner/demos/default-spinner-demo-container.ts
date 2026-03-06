@@ -18,7 +18,7 @@ import { DefaultSpinnerDemo } from './default-spinner-demo';
       <app-default-spinner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { PlacementSpotlightDemo } from './placement-spotlight-demo';
       <app-placement-spotlight-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

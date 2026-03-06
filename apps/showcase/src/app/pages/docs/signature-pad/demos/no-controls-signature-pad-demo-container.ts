@@ -14,7 +14,7 @@ import { NoControlsSignaturePadDemo } from './no-controls-signature-pad-demo';
       <app-no-controls-signature-pad-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { FullFeaturedCropperDemo } from './full-featured-cropper-demo';
       <app-full-featured-cropper-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

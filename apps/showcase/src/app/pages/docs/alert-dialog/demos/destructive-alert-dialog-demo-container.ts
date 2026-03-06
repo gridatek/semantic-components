@@ -19,7 +19,7 @@ import { DestructiveAlertDialogDemo } from './destructive-alert-dialog-demo';
       <app-destructive-alert-dialog-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DestructiveAlertDialogDemoContainer {

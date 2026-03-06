@@ -14,7 +14,7 @@ import { TaskListSortableListDemo } from './task-list-sortable-list-demo';
       <app-task-list-sortable-list-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

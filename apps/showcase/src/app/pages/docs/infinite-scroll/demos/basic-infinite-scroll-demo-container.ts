@@ -18,7 +18,7 @@ import { BasicInfiniteScrollDemo } from './basic-infinite-scroll-demo';
       <app-basic-infinite-scroll-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

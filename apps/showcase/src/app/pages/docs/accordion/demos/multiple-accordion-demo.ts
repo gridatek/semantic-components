@@ -24,7 +24,7 @@ import {
     ScAccordionContent,
     ScAccordionBody,
   ],
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   template: `
     <div scAccordionGroup [multiExpandable]="true" class="w-full max-w-lg">
       <div scAccordionItem>

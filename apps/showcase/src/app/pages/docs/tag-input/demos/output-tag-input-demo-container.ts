@@ -14,7 +14,7 @@ import { OutputTagInputDemo } from './output-tag-input-demo';
       <app-output-tag-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

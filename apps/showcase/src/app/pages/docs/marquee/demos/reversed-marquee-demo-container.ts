@@ -14,7 +14,7 @@ import { ReversedMarqueeDemo } from './reversed-marquee-demo';
       <app-reversed-marquee-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

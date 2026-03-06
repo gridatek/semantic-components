@@ -14,7 +14,7 @@ import { ButtonTimezoneDemo } from './button-timezone-demo';
       <app-button-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

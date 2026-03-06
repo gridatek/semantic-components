@@ -14,7 +14,7 @@ import { ThreePanelsResizableDemo } from './three-panels-resizable-demo';
       <app-three-panels-resizable-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

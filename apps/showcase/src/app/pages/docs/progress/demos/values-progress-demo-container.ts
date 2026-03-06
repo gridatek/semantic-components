@@ -14,7 +14,7 @@ import { ValuesProgressDemo } from './values-progress-demo';
       <app-values-progress-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

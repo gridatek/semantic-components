@@ -18,7 +18,7 @@ import { MinimalCodeEditorDemo } from './minimal-code-editor-demo';
       <app-minimal-code-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

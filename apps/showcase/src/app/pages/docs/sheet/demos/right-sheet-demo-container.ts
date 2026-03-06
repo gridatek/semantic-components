@@ -18,7 +18,7 @@ import { RightSheetDemo } from './right-sheet-demo';
       <app-right-sheet-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

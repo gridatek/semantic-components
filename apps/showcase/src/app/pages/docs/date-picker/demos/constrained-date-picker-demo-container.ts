@@ -18,7 +18,7 @@ import { ConstrainedDatePickerDemo } from './constrained-date-picker-demo';
       <app-constrained-date-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

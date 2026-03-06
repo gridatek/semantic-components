@@ -18,7 +18,7 @@ import { KeyboardImageCompareDemo } from './keyboard-image-compare-demo';
       <app-keyboard-image-compare-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

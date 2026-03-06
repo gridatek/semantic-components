@@ -14,7 +14,7 @@ import { FormRadioGroupDemo } from './form-radio-group-demo';
       <app-form-radio-group-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

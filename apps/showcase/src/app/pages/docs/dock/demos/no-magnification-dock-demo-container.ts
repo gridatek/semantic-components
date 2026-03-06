@@ -14,7 +14,7 @@ import { NoMagnificationDockDemo } from './no-magnification-dock-demo';
       <app-no-magnification-dock-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

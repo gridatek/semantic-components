@@ -14,7 +14,7 @@ import { DestructiveAlertDemo } from './destructive-alert-demo';
       <app-destructive-alert-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DestructiveAlertDemoContainer {

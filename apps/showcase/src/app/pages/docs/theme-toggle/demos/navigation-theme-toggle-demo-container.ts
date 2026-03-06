@@ -18,7 +18,7 @@ import { NavigationThemeToggleDemo } from './navigation-theme-toggle-demo';
       <app-navigation-theme-toggle-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

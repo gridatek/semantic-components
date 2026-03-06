@@ -14,7 +14,7 @@ import { BasicOrgChartDemo } from './basic-org-chart-demo';
       <app-basic-org-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

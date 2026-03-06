@@ -14,7 +14,7 @@ import { SettingsPanelTimezoneDemo } from './settings-panel-timezone-demo';
       <app-settings-panel-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

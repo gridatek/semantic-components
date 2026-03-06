@@ -18,7 +18,7 @@ import { MinimalToolbarEditorDemo } from './minimal-toolbar-editor-demo';
       <app-minimal-toolbar-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

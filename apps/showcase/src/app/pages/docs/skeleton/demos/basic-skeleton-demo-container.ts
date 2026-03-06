@@ -14,7 +14,7 @@ import { BasicSkeletonDemo } from './basic-skeleton-demo';
       <app-basic-skeleton-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

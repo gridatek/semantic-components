@@ -18,7 +18,7 @@ import { HoursTimePickerClockDemo } from './hours-time-picker-clock-demo';
       <app-hours-time-picker-clock-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

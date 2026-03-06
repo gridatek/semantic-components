@@ -14,7 +14,7 @@ import { DropzoneFileUploadDemo } from './dropzone-file-upload-demo';
       <app-dropzone-file-upload-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

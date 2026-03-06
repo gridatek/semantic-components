@@ -18,7 +18,7 @@ import { PositionImageCompareDemo } from './position-image-compare-demo';
       <app-position-image-compare-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

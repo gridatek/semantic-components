@@ -14,7 +14,7 @@ import { DisplayTimezoneDemo } from './display-timezone-demo';
       <app-display-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

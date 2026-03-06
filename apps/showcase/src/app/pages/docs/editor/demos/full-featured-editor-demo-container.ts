@@ -18,7 +18,7 @@ import { FullFeaturedEditorDemo } from './full-featured-editor-demo';
       <app-full-featured-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

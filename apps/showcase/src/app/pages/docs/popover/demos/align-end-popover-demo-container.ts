@@ -18,7 +18,7 @@ import { AlignEndPopoverDemo } from './align-end-popover-demo';
       <app-align-end-popover-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

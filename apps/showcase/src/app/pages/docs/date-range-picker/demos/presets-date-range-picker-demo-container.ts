@@ -18,7 +18,7 @@ import { PresetsDateRangePickerDemo } from './presets-date-range-picker-demo';
       <app-presets-date-range-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

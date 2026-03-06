@@ -18,7 +18,7 @@ import { PriceNumberFieldDemo } from './price-number-field-demo';
       <app-price-number-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

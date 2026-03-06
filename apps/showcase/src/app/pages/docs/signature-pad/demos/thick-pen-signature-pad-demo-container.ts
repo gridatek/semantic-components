@@ -14,7 +14,7 @@ import { ThickPenSignaturePadDemo } from './thick-pen-signature-pad-demo';
       <app-thick-pen-signature-pad-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

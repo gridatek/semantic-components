@@ -18,7 +18,7 @@ import { FooterTableDemo } from './footer-table-demo';
       <app-footer-table-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

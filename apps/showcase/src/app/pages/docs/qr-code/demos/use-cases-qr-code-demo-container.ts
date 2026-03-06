@@ -18,7 +18,7 @@ import { UseCasesQrCodeDemo } from './use-cases-qr-code-demo';
       <app-use-cases-qr-code-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

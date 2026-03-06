@@ -18,7 +18,7 @@ import { HelperTextTextareaDemo } from './helper-text-textarea-demo';
       <app-helper-text-textarea-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

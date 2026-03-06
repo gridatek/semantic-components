@@ -18,7 +18,7 @@ import { SelectDisabledDemo } from './select-disabled-demo';
       <app-select-disabled-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { StatusTimelineDemo } from './status-timeline-demo';
       <app-status-timeline-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

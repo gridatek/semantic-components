@@ -18,7 +18,7 @@ import { SignalFormsNumberFieldDemo } from './signal-forms-number-field-demo';
       <app-signal-forms-number-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

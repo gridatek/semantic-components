@@ -18,7 +18,7 @@ import { OverlaySpinnerDemo } from './overlay-spinner-demo';
       <app-overlay-spinner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

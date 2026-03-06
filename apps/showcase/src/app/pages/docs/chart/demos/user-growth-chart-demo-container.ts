@@ -18,7 +18,7 @@ import { UserGrowthChartDemo } from './user-growth-chart-demo';
       <app-user-growth-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

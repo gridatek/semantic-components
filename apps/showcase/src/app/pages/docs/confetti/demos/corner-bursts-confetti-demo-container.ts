@@ -14,7 +14,7 @@ import { CornerBurstsConfettiDemo } from './corner-bursts-confetti-demo';
       <app-corner-bursts-confetti-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

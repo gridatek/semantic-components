@@ -14,7 +14,7 @@ import { DefaultAlertDemo } from './default-alert-demo';
       <app-default-alert-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultAlertDemoContainer {

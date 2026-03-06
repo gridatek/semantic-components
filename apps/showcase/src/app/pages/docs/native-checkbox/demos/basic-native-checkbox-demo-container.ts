@@ -18,7 +18,7 @@ import { BasicNativeCheckboxDemo } from './basic-native-checkbox-demo';
       <app-basic-native-checkbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

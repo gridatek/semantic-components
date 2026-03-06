@@ -14,7 +14,7 @@ import { BasicConfettiDemo } from './basic-confetti-demo';
       <app-basic-confetti-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

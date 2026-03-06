@@ -18,7 +18,7 @@ import { ConstrainedDateRangePickerDemo } from './constrained-date-range-picker-
       <app-constrained-date-range-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { BasicDateRangePickerDemo } from './basic-date-range-picker-demo';
       <app-basic-date-range-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

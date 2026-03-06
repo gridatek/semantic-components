@@ -14,7 +14,7 @@ import { KanbanSortableListDemo } from './kanban-sortable-list-demo';
       <app-kanban-sortable-list-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

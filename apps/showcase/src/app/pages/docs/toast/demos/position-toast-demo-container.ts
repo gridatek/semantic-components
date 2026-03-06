@@ -14,7 +14,7 @@ import { PositionToastDemo } from './position-toast-demo';
       <app-position-toast-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

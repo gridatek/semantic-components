@@ -19,7 +19,7 @@ import { BasicAlertDialogDemo } from './basic-alert-dialog-demo';
       <app-basic-alert-dialog-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicAlertDialogDemoContainer {

@@ -18,7 +18,7 @@ import { SqlCodeEditorDemo } from './sql-code-editor-demo';
       <app-sql-code-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

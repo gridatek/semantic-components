@@ -19,7 +19,7 @@ import { BasicBarcodeScannerDemo } from './basic-barcode-scanner-demo';
       <app-basic-barcode-scanner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

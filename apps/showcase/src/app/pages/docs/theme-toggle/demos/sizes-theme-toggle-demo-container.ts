@@ -18,7 +18,7 @@ import { SizesThemeToggleDemo } from './sizes-theme-toggle-demo';
       <app-sizes-theme-toggle-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

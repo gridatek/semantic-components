@@ -14,7 +14,7 @@ import { VerticalMarqueeDemo } from './vertical-marquee-demo';
       <app-vertical-marquee-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

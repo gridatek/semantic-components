@@ -18,7 +18,7 @@ import { HtmlCodeEditorDemo } from './html-code-editor-demo';
       <app-html-code-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

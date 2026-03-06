@@ -18,7 +18,7 @@ import { FieldLabelDemo } from './field-label-demo';
       <app-field-label-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

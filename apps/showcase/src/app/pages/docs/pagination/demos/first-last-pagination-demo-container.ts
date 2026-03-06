@@ -18,7 +18,7 @@ import { FirstLastPaginationDemo } from './first-last-pagination-demo';
       <app-first-last-pagination-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

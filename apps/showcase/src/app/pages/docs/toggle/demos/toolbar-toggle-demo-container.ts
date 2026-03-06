@@ -18,7 +18,7 @@ import { ToolbarToggleDemo } from './toolbar-toggle-demo';
       <app-toolbar-toggle-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

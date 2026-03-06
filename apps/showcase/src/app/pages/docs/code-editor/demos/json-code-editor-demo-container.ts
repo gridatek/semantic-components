@@ -18,7 +18,7 @@ import { JsonCodeEditorDemo } from './json-code-editor-demo';
       <app-json-code-editor-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

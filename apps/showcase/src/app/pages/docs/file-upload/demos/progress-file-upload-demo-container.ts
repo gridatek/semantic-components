@@ -14,7 +14,7 @@ import { ProgressFileUploadDemo } from './progress-file-upload-demo';
       <app-progress-file-upload-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

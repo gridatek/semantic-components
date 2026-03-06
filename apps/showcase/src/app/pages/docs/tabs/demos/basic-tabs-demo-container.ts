@@ -18,7 +18,7 @@ import { BasicTabsDemo } from './basic-tabs-demo';
       <app-basic-tabs-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

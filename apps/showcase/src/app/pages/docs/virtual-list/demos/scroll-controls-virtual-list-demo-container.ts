@@ -18,7 +18,7 @@ import { ScrollControlsVirtualListDemo } from './scroll-controls-virtual-list-de
       <app-scroll-controls-virtual-list-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

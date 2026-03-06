@@ -18,7 +18,7 @@ import { TextareaInputGroupDemo } from './textarea-input-group-demo';
       <app-textarea-input-group-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

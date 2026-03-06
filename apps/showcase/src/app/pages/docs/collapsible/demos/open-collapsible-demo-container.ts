@@ -14,7 +14,7 @@ import { OpenCollapsibleDemo } from './open-collapsible-demo';
       <app-open-collapsible-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

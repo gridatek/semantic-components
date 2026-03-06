@@ -14,7 +14,7 @@ import { BasicToastDemo } from './basic-toast-demo';
       <app-basic-toast-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

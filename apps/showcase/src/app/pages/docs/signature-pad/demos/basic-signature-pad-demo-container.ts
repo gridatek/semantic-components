@@ -14,7 +14,7 @@ import { BasicSignaturePadDemo } from './basic-signature-pad-demo';
       <app-basic-signature-pad-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

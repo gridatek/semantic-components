@@ -18,7 +18,7 @@ import { SignalFormsOptFieldDemo } from './signal-forms-opt-field-demo';
       <app-signal-forms-opt-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

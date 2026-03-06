@@ -19,7 +19,7 @@ import { MinMaxCalendarDemo } from './min-max-calendar-demo';
       <app-min-max-calendar-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

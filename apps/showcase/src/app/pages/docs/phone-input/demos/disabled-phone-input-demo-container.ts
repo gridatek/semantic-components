@@ -14,7 +14,7 @@ import { DisabledPhoneInputDemo } from './disabled-phone-input-demo';
       <app-disabled-phone-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

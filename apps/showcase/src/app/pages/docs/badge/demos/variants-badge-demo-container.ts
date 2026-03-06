@@ -18,7 +18,7 @@ import { VariantsBadgeDemo } from './variants-badge-demo';
       <app-variants-badge-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

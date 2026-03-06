@@ -18,7 +18,7 @@ import { LongerPathBreadcrumbDemo } from './longer-path-breadcrumb-demo';
       <app-longer-path-breadcrumb-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

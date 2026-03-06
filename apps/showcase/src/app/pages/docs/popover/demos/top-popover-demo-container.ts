@@ -18,7 +18,7 @@ import { TopPopoverDemo } from './top-popover-demo';
       <app-top-popover-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

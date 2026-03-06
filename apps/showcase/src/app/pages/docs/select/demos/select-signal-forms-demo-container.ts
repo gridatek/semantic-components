@@ -18,7 +18,7 @@ import { SelectSignalFormsDemo } from './select-signal-forms-demo';
       <app-select-signal-forms-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { EasingAnimatedCounterDemo } from './easing-animated-counter-demo';
       <app-easing-animated-counter-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

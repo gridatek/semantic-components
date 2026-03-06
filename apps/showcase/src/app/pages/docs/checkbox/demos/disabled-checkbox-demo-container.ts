@@ -18,7 +18,7 @@ import { DisabledCheckboxDemo } from './disabled-checkbox-demo';
       <app-disabled-checkbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { PageSizePaginationDemo } from './page-size-pagination-demo';
       <app-page-size-pagination-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

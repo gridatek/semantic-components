@@ -14,7 +14,7 @@ import { BasicSwitchDemo } from './basic-switch-demo';
       <app-basic-switch-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

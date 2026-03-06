@@ -18,7 +18,7 @@ import { BasicKanbanBoardDemo } from './basic-kanban-board-demo';
       <app-basic-kanban-board-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

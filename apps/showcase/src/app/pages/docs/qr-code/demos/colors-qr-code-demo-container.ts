@@ -18,7 +18,7 @@ import { ColorsQrCodeDemo } from './colors-qr-code-demo';
       <app-colors-qr-code-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

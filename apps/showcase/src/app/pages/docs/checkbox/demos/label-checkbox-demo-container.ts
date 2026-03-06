@@ -18,7 +18,7 @@ import { LabelCheckboxDemo } from './label-checkbox-demo';
       <app-label-checkbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

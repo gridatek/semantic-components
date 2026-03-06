@@ -14,7 +14,7 @@ import { FormSignaturePadDemo } from './form-signature-pad-demo';
       <app-form-signature-pad-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

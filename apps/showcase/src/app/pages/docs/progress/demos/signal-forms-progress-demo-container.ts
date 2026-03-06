@@ -18,7 +18,7 @@ import { SignalFormsProgressDemo } from './signal-forms-progress-demo';
       <app-signal-forms-progress-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

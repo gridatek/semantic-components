@@ -14,7 +14,7 @@ import { SizesLanguageSwitcherDemo } from './sizes-language-switcher-demo';
       <app-sizes-language-switcher-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

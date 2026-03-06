@@ -18,7 +18,7 @@ import { ThemeSelectDemo } from './theme-select-demo';
       <app-theme-select-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

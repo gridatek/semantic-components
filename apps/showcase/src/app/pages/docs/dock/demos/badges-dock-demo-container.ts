@@ -14,7 +14,7 @@ import { BadgesDockDemo } from './badges-dock-demo';
       <app-badges-dock-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

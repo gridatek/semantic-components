@@ -18,7 +18,7 @@ import { LogoQrCodeDemo } from './logo-qr-code-demo';
       <app-logo-qr-code-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

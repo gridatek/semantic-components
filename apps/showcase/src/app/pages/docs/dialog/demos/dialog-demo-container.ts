@@ -14,7 +14,7 @@ import { ScDialogDemo } from './dialog-demo';
       <app-dialog-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDialogDemoContainer {

@@ -18,7 +18,7 @@ import { SpinnerInputGroupDemo } from './spinner-input-group-demo';
       <app-spinner-input-group-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

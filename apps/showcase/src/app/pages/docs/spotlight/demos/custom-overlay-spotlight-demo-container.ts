@@ -14,7 +14,7 @@ import { CustomOverlaySpotlightDemo } from './custom-overlay-spotlight-demo';
       <app-custom-overlay-spotlight-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

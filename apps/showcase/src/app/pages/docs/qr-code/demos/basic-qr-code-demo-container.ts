@@ -18,7 +18,7 @@ import { BasicQrCodeDemo } from './basic-qr-code-demo';
       <app-basic-qr-code-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

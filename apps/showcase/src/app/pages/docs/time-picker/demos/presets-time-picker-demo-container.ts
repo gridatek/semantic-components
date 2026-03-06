@@ -14,7 +14,7 @@ import { PresetsTimePickerDemo } from './presets-time-picker-demo';
       <app-presets-time-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

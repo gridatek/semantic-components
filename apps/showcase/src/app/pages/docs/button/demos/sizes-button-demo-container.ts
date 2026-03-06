@@ -18,7 +18,7 @@ import { SizesButtonDemo } from './sizes-button-demo';
       <app-sizes-button-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

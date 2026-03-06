@@ -18,7 +18,7 @@ import { CaptionTableDemo } from './caption-table-demo';
       <app-caption-table-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

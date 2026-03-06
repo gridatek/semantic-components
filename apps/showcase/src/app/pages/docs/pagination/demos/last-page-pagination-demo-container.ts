@@ -18,7 +18,7 @@ import { LastPagePaginationDemo } from './last-page-pagination-demo';
       <app-last-page-pagination-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

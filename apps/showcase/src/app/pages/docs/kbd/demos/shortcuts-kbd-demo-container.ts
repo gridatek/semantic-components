@@ -18,7 +18,7 @@ import { ShortcutsKbdDemo } from './shortcuts-kbd-demo';
       <app-shortcuts-kbd-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

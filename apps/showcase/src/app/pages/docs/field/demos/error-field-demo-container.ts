@@ -18,7 +18,7 @@ import { ErrorFieldDemo } from './error-field-demo';
       <app-error-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

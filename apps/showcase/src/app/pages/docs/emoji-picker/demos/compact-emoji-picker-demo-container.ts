@@ -18,7 +18,7 @@ import { CompactEmojiPickerDemo } from './compact-emoji-picker-demo';
       <app-compact-emoji-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

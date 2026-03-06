@@ -18,7 +18,7 @@ import { UltrawideAspectRatioDemo } from './ultrawide-aspect-ratio-demo';
       <app-ultrawide-aspect-ratio-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

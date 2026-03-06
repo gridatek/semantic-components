@@ -18,7 +18,7 @@ import { ContextMenuAriaDemo } from './context-menu-aria-demo';
       <app-context-menu-aria-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

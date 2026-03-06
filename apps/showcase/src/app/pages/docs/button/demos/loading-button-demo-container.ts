@@ -18,7 +18,7 @@ import { LoadingButtonDemo } from './loading-button-demo';
       <app-loading-button-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

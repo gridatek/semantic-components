@@ -18,7 +18,7 @@ import { FormCardDemo } from './form-card-demo';
       <app-form-card-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

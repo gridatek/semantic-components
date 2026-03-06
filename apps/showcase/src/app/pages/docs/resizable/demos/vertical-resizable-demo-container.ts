@@ -14,7 +14,7 @@ import { VerticalResizableDemo } from './vertical-resizable-demo';
       <app-vertical-resizable-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

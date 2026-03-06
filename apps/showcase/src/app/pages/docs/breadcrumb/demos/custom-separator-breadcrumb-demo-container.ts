@@ -18,7 +18,7 @@ import { CustomSeparatorBreadcrumbDemo } from './custom-separator-breadcrumb-dem
       <app-custom-separator-breadcrumb-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

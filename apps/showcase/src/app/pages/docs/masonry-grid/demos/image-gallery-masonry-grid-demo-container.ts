@@ -14,7 +14,7 @@ import { ImageGalleryMasonryGridDemo } from './image-gallery-masonry-grid-demo';
       <app-image-gallery-masonry-grid-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

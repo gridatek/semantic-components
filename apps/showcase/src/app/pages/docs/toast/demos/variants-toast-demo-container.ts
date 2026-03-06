@@ -14,7 +14,7 @@ import { VariantsToastDemo } from './variants-toast-demo';
       <app-variants-toast-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

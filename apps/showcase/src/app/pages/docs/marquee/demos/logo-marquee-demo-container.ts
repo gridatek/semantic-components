@@ -14,7 +14,7 @@ import { LogoMarqueeDemo } from './logo-marquee-demo';
       <app-logo-marquee-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

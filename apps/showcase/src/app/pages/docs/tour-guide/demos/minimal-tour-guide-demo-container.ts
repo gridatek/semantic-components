@@ -14,7 +14,7 @@ import { MinimalTourGuideDemo } from './minimal-tour-guide-demo';
       <app-minimal-tour-guide-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

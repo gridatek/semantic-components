@@ -14,7 +14,7 @@ import { KeyboardLightboxDemo } from './keyboard-lightbox-demo';
       <app-keyboard-lightbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

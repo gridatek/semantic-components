@@ -14,7 +14,7 @@ import { HorizontalOrgChartDemo } from './horizontal-org-chart-demo';
       <app-horizontal-org-chart-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { CardsMasonryGridDemo } from './cards-masonry-grid-demo';
       <app-cards-masonry-grid-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

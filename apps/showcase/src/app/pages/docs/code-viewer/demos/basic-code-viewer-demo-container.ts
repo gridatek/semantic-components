@@ -14,7 +14,7 @@ import { BasicCodeViewerDemo } from './basic-code-viewer-demo';
       <app-basic-code-viewer-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

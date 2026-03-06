@@ -14,7 +14,7 @@ import { CustomColorsConfettiDemo } from './custom-colors-confetti-demo';
       <app-custom-colors-confetti-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

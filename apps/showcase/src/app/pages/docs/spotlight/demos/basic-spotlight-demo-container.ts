@@ -14,7 +14,7 @@ import { BasicSpotlightDemo } from './basic-spotlight-demo';
       <app-basic-spotlight-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

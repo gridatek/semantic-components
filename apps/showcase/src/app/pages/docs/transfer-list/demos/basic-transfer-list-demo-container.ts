@@ -18,7 +18,7 @@ import { BasicTransferListDemo } from './basic-transfer-list-demo';
       <app-basic-transfer-list-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

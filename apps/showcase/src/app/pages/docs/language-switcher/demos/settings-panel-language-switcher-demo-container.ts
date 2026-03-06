@@ -14,7 +14,7 @@ import { SettingsPanelLanguageSwitcherDemo } from './settings-panel-language-swi
       <app-settings-panel-language-switcher-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

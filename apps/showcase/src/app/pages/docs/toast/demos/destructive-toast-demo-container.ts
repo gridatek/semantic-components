@@ -14,7 +14,7 @@ import { DestructiveToastDemo } from './destructive-toast-demo';
       <app-destructive-toast-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

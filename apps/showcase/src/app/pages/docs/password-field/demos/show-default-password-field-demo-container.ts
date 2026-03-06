@@ -18,7 +18,7 @@ import { ShowDefaultPasswordFieldDemo } from './show-default-password-field-demo
       <app-show-default-password-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

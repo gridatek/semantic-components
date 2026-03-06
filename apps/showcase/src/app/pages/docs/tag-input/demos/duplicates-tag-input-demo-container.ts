@@ -14,7 +14,7 @@ import { DuplicatesTagInputDemo } from './duplicates-tag-input-demo';
       <app-duplicates-tag-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

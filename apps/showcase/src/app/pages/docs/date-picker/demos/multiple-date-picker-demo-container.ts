@@ -18,7 +18,7 @@ import { MultipleDatePickerDemo } from './multiple-date-picker-demo';
       <app-multiple-date-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

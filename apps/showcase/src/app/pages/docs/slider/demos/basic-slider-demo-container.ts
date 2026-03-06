@@ -18,7 +18,7 @@ import { BasicSliderDemo } from './basic-slider-demo';
       <app-basic-slider-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

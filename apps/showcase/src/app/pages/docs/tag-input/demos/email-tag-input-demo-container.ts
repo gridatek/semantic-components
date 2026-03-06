@@ -14,7 +14,7 @@ import { EmailTagInputDemo } from './email-tag-input-demo';
       <app-email-tag-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

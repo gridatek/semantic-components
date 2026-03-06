@@ -18,7 +18,7 @@ import { VerticalCarouselDemo } from './vertical-carousel-demo';
       <app-vertical-carousel-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

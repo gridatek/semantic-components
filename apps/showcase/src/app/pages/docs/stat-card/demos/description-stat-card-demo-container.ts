@@ -18,7 +18,7 @@ import { DescriptionStatCardDemo } from './description-stat-card-demo';
       <app-description-stat-card-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

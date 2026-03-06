@@ -19,7 +19,7 @@ import { FormatsBarcodeScannerDemo } from './formats-barcode-scanner-demo';
       <app-formats-barcode-scanner-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

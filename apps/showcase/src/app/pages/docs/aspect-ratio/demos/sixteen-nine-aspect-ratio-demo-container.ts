@@ -18,7 +18,7 @@ import { SixteenNineAspectRatioDemo } from './sixteen-nine-aspect-ratio-demo';
       <app-sixteen-nine-aspect-ratio-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

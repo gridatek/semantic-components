@@ -18,7 +18,7 @@ import { EllipsisBreadcrumbDemo } from './ellipsis-breadcrumb-demo';
       <app-ellipsis-breadcrumb-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

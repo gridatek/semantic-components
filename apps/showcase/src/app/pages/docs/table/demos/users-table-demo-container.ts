@@ -18,7 +18,7 @@ import { UsersTableDemo } from './users-table-demo';
       <app-users-table-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

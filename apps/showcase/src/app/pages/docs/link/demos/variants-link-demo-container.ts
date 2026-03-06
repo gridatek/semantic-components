@@ -18,7 +18,7 @@ import { VariantsLinkDemo } from './variants-link-demo';
       <app-variants-link-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

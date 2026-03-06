@@ -18,7 +18,7 @@ import { AnalyticsDateRangePickerDemo } from './analytics-date-range-picker-demo
       <app-analytics-date-range-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

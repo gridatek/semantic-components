@@ -14,7 +14,7 @@ import { TableSkeletonDemo } from './table-skeleton-demo';
       <app-table-skeleton-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

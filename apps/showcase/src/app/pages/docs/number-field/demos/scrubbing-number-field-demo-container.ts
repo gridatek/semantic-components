@@ -18,7 +18,7 @@ import { ScrubbingNumberFieldDemo } from './scrubbing-number-field-demo';
       <app-scrubbing-number-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

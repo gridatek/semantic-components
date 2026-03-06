@@ -18,7 +18,7 @@ import { PlaceholderDatePickerDemo } from './placeholder-date-picker-demo';
       <app-placeholder-date-picker-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

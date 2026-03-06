@@ -18,7 +18,7 @@ import { RightHoverCardDemo } from './right-hover-card-demo';
       <app-right-hover-card-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

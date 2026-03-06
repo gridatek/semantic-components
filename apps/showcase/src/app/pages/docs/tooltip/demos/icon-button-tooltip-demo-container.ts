@@ -18,7 +18,7 @@ import { IconButtonTooltipDemo } from './icon-button-tooltip-demo';
       <app-icon-button-tooltip-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

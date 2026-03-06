@@ -14,7 +14,7 @@ import { BasicMentionInputDemo } from './basic-mention-input-demo';
       <app-basic-mention-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

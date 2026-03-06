@@ -18,7 +18,7 @@ import { CustomThemeRadioGroupDemo } from './custom-theme-radio-group-demo';
       <app-custom-theme-radio-group-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

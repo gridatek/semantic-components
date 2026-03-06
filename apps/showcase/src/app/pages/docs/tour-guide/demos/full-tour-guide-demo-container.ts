@@ -14,7 +14,7 @@ import { FullTourGuideDemo } from './full-tour-guide-demo';
       <app-full-tour-guide-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

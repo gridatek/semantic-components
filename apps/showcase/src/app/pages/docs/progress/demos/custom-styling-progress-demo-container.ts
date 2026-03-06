@@ -14,7 +14,7 @@ import { CustomStylingProgressDemo } from './custom-styling-progress-demo';
       <app-custom-styling-progress-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

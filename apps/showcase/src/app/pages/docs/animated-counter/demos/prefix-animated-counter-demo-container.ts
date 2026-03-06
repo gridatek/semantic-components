@@ -14,7 +14,7 @@ import { PrefixAnimatedCounterDemo } from './prefix-animated-counter-demo';
       <app-prefix-animated-counter-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { VideoAspectRatioDemo } from './video-aspect-ratio-demo';
       <app-video-aspect-ratio-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

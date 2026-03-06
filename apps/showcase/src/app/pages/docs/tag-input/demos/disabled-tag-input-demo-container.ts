@@ -14,7 +14,7 @@ import { DisabledTagInputDemo } from './disabled-tag-input-demo';
       <app-disabled-tag-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { BasicMasonryGridDemo } from './basic-masonry-grid-demo';
       <app-basic-masonry-grid-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

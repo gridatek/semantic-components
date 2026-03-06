@@ -18,7 +18,7 @@ import { IdenticalDiffViewerDemo } from './identical-diff-viewer-demo';
       <app-identical-diff-viewer-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

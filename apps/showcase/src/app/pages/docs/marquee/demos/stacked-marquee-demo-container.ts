@@ -14,7 +14,7 @@ import { StackedMarqueeDemo } from './stacked-marquee-demo';
       <app-stacked-marquee-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

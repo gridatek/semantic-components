@@ -18,7 +18,7 @@ import { DisabledPasswordFieldDemo } from './disabled-password-field-demo';
       <app-disabled-password-field-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

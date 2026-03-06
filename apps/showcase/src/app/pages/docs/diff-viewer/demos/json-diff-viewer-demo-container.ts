@@ -18,7 +18,7 @@ import { JsonDiffViewerDemo } from './json-diff-viewer-demo';
       <app-json-diff-viewer-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -18,7 +18,7 @@ import { ThresholdInfiniteScrollDemo } from './threshold-infinite-scroll-demo';
       <app-threshold-infinite-scroll-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

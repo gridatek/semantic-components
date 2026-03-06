@@ -14,7 +14,7 @@ import { NoZoomLightboxDemo } from './no-zoom-lightbox-demo';
       <app-no-zoom-lightbox-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

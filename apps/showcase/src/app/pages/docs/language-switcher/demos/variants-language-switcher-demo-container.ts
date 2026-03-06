@@ -14,7 +14,7 @@ import { VariantsLanguageSwitcherDemo } from './variants-language-switcher-demo'
       <app-variants-language-switcher-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

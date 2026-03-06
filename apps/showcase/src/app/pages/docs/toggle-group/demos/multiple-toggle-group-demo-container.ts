@@ -14,7 +14,7 @@ import { MultipleToggleGroupDemo } from './multiple-toggle-group-demo';
       <app-multiple-toggle-group-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

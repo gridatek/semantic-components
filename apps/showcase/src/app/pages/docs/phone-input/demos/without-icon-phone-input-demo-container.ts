@@ -14,7 +14,7 @@ import { WithoutIconPhoneInputDemo } from './without-icon-phone-input-demo';
       <app-without-icon-phone-input-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

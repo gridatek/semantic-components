@@ -18,7 +18,7 @@ import { BasicAccordionDemo } from './basic-accordion-demo';
       <app-basic-accordion-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -49,7 +49,7 @@ import {
     ScAccordionContent,
     ScAccordionBody,
   ],
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   template: \`
     <div scAccordionGroup [multiExpandable]="false" class="max-w-lg">
       <div scAccordionItem>

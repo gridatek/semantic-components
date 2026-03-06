@@ -18,7 +18,7 @@ import { FourThreeAspectRatioDemo } from './four-three-aspect-ratio-demo';
       <app-four-three-aspect-ratio-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -14,7 +14,7 @@ import { BadgeNoIconTimezoneDemo } from './badge-no-icon-timezone-demo';
       <app-badge-no-icon-timezone-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

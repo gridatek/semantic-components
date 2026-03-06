@@ -18,7 +18,7 @@ import { BasicTableDemo } from './basic-table-demo';
       <app-basic-table-demo />
     </app-demo-container>
   `,
-  host: { class: 'block' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
