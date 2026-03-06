@@ -34,6 +34,12 @@ import {
   ScTimelineTime,
   ScTimelineTitle,
 } from '@semantic-components/ui-lab';
+import {
+  SiCheckIcon,
+  SiHomeIcon,
+  SiPackageIcon,
+  SiTruckIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-tracking-timeline-demo',
@@ -46,6 +52,10 @@ import {
     ScTimelineTitle,
     ScTimelineDescription,
     ScTimelineTime,
+    SiCheckIcon,
+    SiPackageIcon,
+    SiTruckIcon,
+    SiHomeIcon,
   ],
   template: \`
     <div class="rounded-lg border p-4">
@@ -53,16 +63,7 @@ import {
         <div scTimelineItem>
           <div scTimelineConnector></div>
           <div scTimelineDot variant="success" size="lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
+            <svg siCheckIcon class="size-4"></svg>
           </div>
           <div scTimelineContent>
             <h4 scTimelineTitle>Order Placed</h4>
@@ -74,20 +75,7 @@ import {
         <div scTimelineItem>
           <div scTimelineConnector></div>
           <div scTimelineDot variant="success" size="lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path
-                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-              />
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-              <line x1="12" y1="22.08" x2="12" y2="12" />
-            </svg>
+            <svg siPackageIcon class="size-4"></svg>
           </div>
           <div scTimelineContent>
             <h4 scTimelineTitle>Shipped</h4>
@@ -99,19 +87,7 @@ import {
         <div scTimelineItem>
           <div scTimelineConnector></div>
           <div scTimelineDot variant="warning" size="lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <rect x="1" y="3" width="15" height="13" />
-              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-              <circle cx="5.5" cy="18.5" r="2.5" />
-              <circle cx="18.5" cy="18.5" r="2.5" />
-            </svg>
+            <svg siTruckIcon class="size-4"></svg>
           </div>
           <div scTimelineContent>
             <h4 scTimelineTitle>Out for Delivery</h4>
@@ -122,17 +98,7 @@ import {
 
         <div scTimelineItem>
           <div scTimelineDot variant="outline" size="lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              class="size-4"
-            >
-              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
+            <svg siHomeIcon class="size-4"></svg>
           </div>
           <div scTimelineContent>
             <h4 scTimelineTitle class="text-muted-foreground">Delivered</h4>

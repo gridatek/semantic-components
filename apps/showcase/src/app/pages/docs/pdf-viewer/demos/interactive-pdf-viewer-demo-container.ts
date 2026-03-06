@@ -46,6 +46,15 @@ import {
   ScPdfViewerZoomOut,
   ScPdfViewerZoomSelect,
 } from '@semantic-components/ui-lab';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiDownloadIcon,
+  SiMaximizeIcon,
+  SiMinimizeIcon,
+  SiZoomInIcon,
+  SiZoomOutIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-interactive-pdf-viewer-demo',
@@ -70,6 +79,13 @@ import {
     ScPdfViewerLoading,
     ScPdfViewerError,
     ScPdfViewerEmpty,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+    SiZoomOutIcon,
+    SiZoomInIcon,
+    SiDownloadIcon,
+    SiMaximizeIcon,
+    SiMinimizeIcon,
   ],
   template: \`
     <div class="space-y-4">
@@ -116,35 +132,11 @@ import {
             <div scPdfViewerToolbar>
               <div scPdfViewerNav>
                 <button scPdfViewerPrevPage>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m15 18-6-6 6-6" />
-                  </svg>
+                  <svg siChevronLeftIcon class="size-4"></svg>
                 </button>
                 <div scPdfViewerPageInfo></div>
                 <button scPdfViewerNextPage>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m9 18 6-6-6-6" />
-                  </svg>
+                  <svg siChevronRightIcon class="size-4"></svg>
                 </button>
               </div>
 
@@ -152,97 +144,24 @@ import {
 
               <div scPdfViewerZoom>
                 <button scPdfViewerZoomOut>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3" />
-                    <path d="M8 11h6" />
-                  </svg>
+                  <svg siZoomOutIcon class="size-4"></svg>
                 </button>
                 <select scPdfViewerZoomSelect></select>
                 <button scPdfViewerZoomIn>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3" />
-                    <path d="M11 8v6" />
-                    <path d="M8 11h6" />
-                  </svg>
+                  <svg siZoomInIcon class="size-4"></svg>
                 </button>
               </div>
 
               <div scPdfViewerSpacer></div>
 
               <button scPdfViewerDownload>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" x2="12" y1="15" y2="3" />
-                </svg>
+                <svg siDownloadIcon class="size-4"></svg>
               </button>
               <button scPdfViewerFullscreen>
                 @if (viewer.isFullscreen()) {
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M8 3v3a2 2 0 0 1-2 2H3" />
-                    <path d="M21 8h-3a2 2 0 0 1-2-2V3" />
-                    <path d="M3 16h3a2 2 0 0 1 2 2v3" />
-                    <path d="M16 21v-3a2 2 0 0 1 2-2h3" />
-                  </svg>
+                  <svg siMinimizeIcon class="size-4"></svg>
                 } @else {
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M8 3H5a2 2 0 0 0-2 2v3" />
-                    <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
-                    <path d="M3 16v3a2 2 0 0 0 2 2h3" />
-                    <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
-                  </svg>
+                  <svg siMaximizeIcon class="size-4"></svg>
                 }
               </button>
             </div>

@@ -34,10 +34,11 @@ import {
   ScStatCardLabel,
   ScStatCardValue,
 } from '@semantic-components/ui-lab';
+import { SiBarChart3Icon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sizes-stat-card-demo',
-  imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon],
+  imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, SiBarChart3Icon],
   template: \`
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div scStatCard size="sm">
@@ -47,21 +48,7 @@ import {
             <p scStatCardValue size="sm">1,234</p>
           </div>
           <div scStatCardIcon size="sm">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="12" x2="12" y1="20" y2="10" />
-              <line x1="18" x2="18" y1="20" y2="4" />
-              <line x1="6" x2="6" y1="20" y2="16" />
-            </svg>
+            <svg siBarChart3Icon></svg>
           </div>
         </div>
       </div>
@@ -73,21 +60,7 @@ import {
             <p scStatCardValue size="md">5,678</p>
           </div>
           <div scStatCardIcon size="md">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="12" x2="12" y1="20" y2="10" />
-              <line x1="18" x2="18" y1="20" y2="4" />
-              <line x1="6" x2="6" y1="20" y2="16" />
-            </svg>
+            <svg siBarChart3Icon></svg>
           </div>
         </div>
       </div>
@@ -99,21 +72,7 @@ import {
             <p scStatCardValue size="lg">9,012</p>
           </div>
           <div scStatCardIcon size="lg">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="12" x2="12" y1="20" y2="10" />
-              <line x1="18" x2="18" y1="20" y2="4" />
-              <line x1="6" x2="6" y1="20" y2="16" />
-            </svg>
+            <svg siBarChart3Icon></svg>
           </div>
         </div>
       </div>

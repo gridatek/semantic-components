@@ -30,10 +30,11 @@ import {
   ScLightboxContainer,
   ScLightboxTrigger,
 } from '@semantic-components/ui-lab';
+import { SiImageIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-keyboard-lightbox-demo',
-  imports: [ScLightbox, ScLightboxContainer, ScLightboxTrigger],
+  imports: [ScLightbox, ScLightboxContainer, ScLightboxTrigger, SiImageIcon],
   template: \`
     <div class="space-y-3">
       <ul class="text-muted-foreground list-inside list-disc space-y-1 text-sm">
@@ -64,18 +65,7 @@ import {
           [index]="0"
           class="hover:bg-accent inline-flex items-center gap-2 rounded-md border px-4 py-2"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-4"
-          >
-            <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-            <circle cx="9" cy="9" r="2" />
-            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-          </svg>
+          <svg siImageIcon class="size-4"></svg>
           Open Gallery
         </button>
         <div scLightboxContainer></div>

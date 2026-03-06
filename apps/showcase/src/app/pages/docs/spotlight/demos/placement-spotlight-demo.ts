@@ -10,6 +10,7 @@ import {
   ScSpotlightDescription,
   ScSpotlightTitle,
 } from '@semantic-components/ui-lab';
+import { SiInfoIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-placement-spotlight-demo',
@@ -18,6 +19,7 @@ import {
     ScSpotlightTitle,
     ScSpotlightDescription,
     ScSpotlightActions,
+    SiInfoIcon,
   ],
   template: `
     <div class="space-y-6">
@@ -28,17 +30,7 @@ import {
         <div
           class="mb-4 flex size-12 items-center justify-center rounded-full bg-blue-500/10"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-6 text-blue-500"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4M12 8h.01" />
-          </svg>
+          <svg siInfoIcon class="size-6 text-blue-500"></svg>
         </div>
         <h3 class="mb-2 font-semibold">Help Center</h3>
         <p class="text-muted-foreground text-sm">

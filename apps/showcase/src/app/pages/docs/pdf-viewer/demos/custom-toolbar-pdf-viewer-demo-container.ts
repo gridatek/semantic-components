@@ -36,6 +36,10 @@ import {
   ScPdfViewerRoot,
   ScPdfViewerToolbar,
 } from '@semantic-components/ui-lab';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-custom-toolbar-pdf-viewer-demo',
@@ -51,6 +55,8 @@ import {
     ScPdfViewerLoading,
     ScPdfViewerError,
     ScPdfViewerEmpty,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
   ],
   template: \`
     <div class="h-[400px]">
@@ -63,35 +69,11 @@ import {
           <div scPdfViewerToolbar>
             <div scPdfViewerNav>
               <button scPdfViewerPrevPage>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
+                <svg siChevronLeftIcon class="size-4"></svg>
               </button>
               <div scPdfViewerPageInfo></div>
               <button scPdfViewerNextPage>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
+                <svg siChevronRightIcon class="size-4"></svg>
               </button>
             </div>
           </div>

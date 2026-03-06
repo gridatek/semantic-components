@@ -25,26 +25,17 @@ export class SaleCountdownDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScCountdownSimple } from '@semantic-components/ui-lab';
+import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sale-countdown-demo',
-  imports: [ScCountdownSimple],
+  imports: [ScCountdownSimple, SiClockIcon],
   template: \`
     <div
       class="bg-destructive/10 border-destructive/20 flex max-w-sm items-center gap-4 rounded-lg border p-4"
     >
       <div class="text-destructive">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          class="size-8"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <polyline points="12 6 12 12 16 14" />
-        </svg>
+        <svg siClockIcon class="size-8"></svg>
       </div>
       <div class="flex-1">
         <div class="text-destructive font-semibold">Flash Sale Ends In</div>

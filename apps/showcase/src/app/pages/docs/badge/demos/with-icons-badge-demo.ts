@@ -4,64 +4,27 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
+import {
+  SiCheckIcon,
+  SiCircleXIcon,
+  SiClockIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-with-icons-badge-demo',
-  imports: [ScBadge],
+  imports: [ScBadge, SiCheckIcon, SiClockIcon, SiCircleXIcon],
   template: `
     <div class="flex flex-wrap items-center gap-2">
       <div scBadge class="gap-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-3"
-        >
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
+        <svg siCheckIcon class="size-3"></svg>
         Completed
       </div>
       <div scBadge variant="secondary" class="gap-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-3"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <polyline points="12 6 12 12 16 14" />
-        </svg>
+        <svg siClockIcon class="size-3"></svg>
         Pending
       </div>
       <div scBadge variant="destructive" class="gap-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="size-3"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <line x1="15" x2="9" y1="9" y2="15" />
-          <line x1="9" x2="15" y1="9" y2="15" />
-        </svg>
+        <svg siCircleXIcon class="size-3"></svg>
         Error
       </div>
     </div>

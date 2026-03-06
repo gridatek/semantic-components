@@ -12,6 +12,11 @@ import {
   ScTimelineItem,
   ScTimelineTitle,
 } from '@semantic-components/ui-lab';
+import {
+  SiCheckIcon,
+  SiCircleAlertIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-status-timeline-demo',
@@ -23,22 +28,16 @@ import {
     ScTimelineContent,
     ScTimelineTitle,
     ScTimelineDescription,
+    SiCheckIcon,
+    SiCircleAlertIcon,
+    SiXIcon,
   ],
   template: `
     <div scTimeline class="ml-4">
       <div scTimelineItem>
         <div scTimelineConnector></div>
         <div scTimelineDot variant="success">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-3"
-          >
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
+          <svg siCheckIcon class="size-3"></svg>
         </div>
         <div scTimelineContent>
           <h4 scTimelineTitle>Completed</h4>
@@ -51,18 +50,7 @@ import {
       <div scTimelineItem>
         <div scTimelineConnector></div>
         <div scTimelineDot variant="warning">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-3"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" x2="12" y1="8" y2="12" />
-            <line x1="12" x2="12.01" y1="16" y2="16" />
-          </svg>
+          <svg siCircleAlertIcon class="size-3"></svg>
         </div>
         <div scTimelineContent>
           <h4 scTimelineTitle>In Progress</h4>
@@ -73,17 +61,7 @@ import {
       <div scTimelineItem>
         <div scTimelineConnector></div>
         <div scTimelineDot variant="error">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-3"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
+          <svg siXIcon class="size-3"></svg>
         </div>
         <div scTimelineContent>
           <h4 scTimelineTitle>Failed</h4>

@@ -35,6 +35,13 @@ import {
   ScStatCardLabel,
   ScStatCardValue,
 } from '@semantic-components/ui-lab';
+import {
+  SiActivityIcon,
+  SiChevronDownIcon,
+  SiChevronUpIcon,
+  SiDollarSignIcon,
+  SiUsersIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-stat-card-demo',
@@ -44,6 +51,11 @@ import {
     ScStatCardValue,
     ScStatCardIcon,
     ScStatCardChange,
+    SiDollarSignIcon,
+    SiUsersIcon,
+    SiActivityIcon,
+    SiChevronUpIcon,
+    SiChevronDownIcon,
   ],
   template: \`
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -54,35 +66,12 @@ import {
             <p scStatCardValue>$45,231.89</p>
           </div>
           <div scStatCardIcon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="12" x2="12" y1="2" y2="22" />
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-            </svg>
+            <svg siDollarSignIcon></svg>
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
           <span scStatCardChange trend="up">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="m18 15-6-6-6 6" />
-            </svg>
+            <svg siChevronUpIcon class="size-3.5"></svg>
             <span>+20.1%</span>
           </span>
           <span class="text-muted-foreground text-xs">from last month</span>
@@ -96,37 +85,12 @@ import {
             <p scStatCardValue>2,350</p>
           </div>
           <div scStatCardIcon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
+            <svg siUsersIcon></svg>
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
           <span scStatCardChange trend="down">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
+            <svg siChevronDownIcon class="size-3.5"></svg>
             <span>-10.1%</span>
           </span>
           <span class="text-muted-foreground text-xs">from last month</span>
@@ -140,19 +104,7 @@ import {
             <p scStatCardValue>573</p>
           </div>
           <div scStatCardIcon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-            </svg>
+            <svg siActivityIcon></svg>
           </div>
         </div>
         <div class="mt-3">

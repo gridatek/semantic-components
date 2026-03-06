@@ -9,10 +9,21 @@ import {
   ScStatCardLabel,
   ScStatCardValue,
 } from '@semantic-components/ui-lab';
+import {
+  SiChevronDownIcon,
+  SiChevronUpIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-variants-stat-card-demo',
-  imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardChange],
+  imports: [
+    ScStatCard,
+    ScStatCardLabel,
+    ScStatCardValue,
+    ScStatCardChange,
+    SiChevronUpIcon,
+    SiChevronDownIcon,
+  ],
   template: `
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div scStatCard variant="default">
@@ -24,17 +35,7 @@ import {
         </div>
         <div class="mt-3 flex items-center gap-2">
           <span scStatCardChange trend="up">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="m18 15-6-6-6 6" />
-            </svg>
+            <svg siChevronUpIcon class="size-3.5"></svg>
             <span>+12%</span>
           </span>
         </div>
@@ -49,17 +50,7 @@ import {
         </div>
         <div class="mt-3 flex items-center gap-2">
           <span scStatCardChange trend="down">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
+            <svg siChevronDownIcon class="size-3.5"></svg>
             <span>-5%</span>
           </span>
         </div>
@@ -74,17 +65,7 @@ import {
         </div>
         <div class="mt-3 flex items-center gap-2">
           <span scStatCardChange trend="up">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="m18 15-6-6-6 6" />
-            </svg>
+            <svg siChevronUpIcon class="size-3.5"></svg>
             <span>+8%</span>
           </span>
         </div>

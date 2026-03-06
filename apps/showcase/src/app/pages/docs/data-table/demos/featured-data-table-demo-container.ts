@@ -38,6 +38,7 @@ import {
   ScDataTablePagination,
   ScDataTableRow,
 } from '@semantic-components/ui-lab';
+import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 interface User {
   id: number;
@@ -159,6 +160,7 @@ const SAMPLE_DATA: User[] = [
     ScDataTableFilter,
     ScDataTableColumnToggle,
     ScDataTablePagination,
+    SiEllipsisIcon,
   ],
   template: \`
     <div scDataTable [data]="data" [columns]="columns">
@@ -238,18 +240,7 @@ const SAMPLE_DATA: User[] = [
                     type="button"
                     class="hover:bg-muted inline-flex size-8 items-center justify-center rounded-md"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      class="size-4"
-                    >
-                      <circle cx="12" cy="12" r="1" />
-                      <circle cx="19" cy="12" r="1" />
-                      <circle cx="5" cy="12" r="1" />
-                    </svg>
+                    <svg siEllipsisIcon class="size-4"></svg>
                   </button>
                 </td>
               </tr>

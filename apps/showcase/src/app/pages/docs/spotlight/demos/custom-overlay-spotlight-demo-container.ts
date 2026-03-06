@@ -31,6 +31,7 @@ import {
   ScSpotlightDescription,
   ScSpotlightTitle,
 } from '@semantic-components/ui-lab';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-custom-overlay-spotlight-demo',
@@ -39,6 +40,7 @@ import {
     ScSpotlightTitle,
     ScSpotlightDescription,
     ScSpotlightActions,
+    SiCheckIcon,
   ],
   template: \`
     <div class="space-y-6">
@@ -49,16 +51,7 @@ import {
         <div
           class="mb-4 flex size-12 items-center justify-center rounded-full bg-green-500/10"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="size-6 text-green-500"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
+          <svg siCheckIcon class="size-6 text-green-500"></svg>
         </div>
         <h3 class="mb-2 font-semibold">Quick Actions</h3>
         <p class="text-muted-foreground text-sm">

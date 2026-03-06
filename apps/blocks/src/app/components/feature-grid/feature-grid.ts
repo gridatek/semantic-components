@@ -6,9 +6,15 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import {
+  SiCircleChevronDownIcon,
+  SiLayoutDashboardIcon,
+  SiMoonIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-feature-grid',
+  imports: [SiLayoutDashboardIcon, SiCircleChevronDownIcon, SiMoonIcon],
   template: `
     <section class="px-4 py-16 md:px-6 lg:px-8">
       <div class="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
@@ -21,22 +27,10 @@ import { cn } from '@semantic-components/ui';
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                siLayoutDashboardIcon
                 class="text-primary"
                 aria-hidden="true"
-              >
-                <rect width="18" height="18" x="3" y="3" rx="2" />
-                <path d="M3 9h18" />
-                <path d="M9 21V9" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="mb-2 text-lg font-semibold">Responsive Design</h3>
             <p class="text-muted-foreground">
@@ -49,21 +43,10 @@ import { cn } from '@semantic-components/ui';
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                siCircleChevronDownIcon
                 class="text-primary"
                 aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="m16 10-4 4-4-4" />
-              </svg>
+              ></svg>
             </div>
             <h3 class="mb-2 text-lg font-semibold">Accessible</h3>
             <p class="text-muted-foreground">
@@ -75,21 +58,7 @@ import { cn } from '@semantic-components/ui';
             <div
               class="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-lg"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-primary"
-                aria-hidden="true"
-              >
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-              </svg>
+              <svg siMoonIcon class="text-primary" aria-hidden="true"></svg>
             </div>
             <h3 class="mb-2 text-lg font-semibold">Dark Mode Ready</h3>
             <p class="text-muted-foreground">

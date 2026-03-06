@@ -28,7 +28,11 @@ import {
   ScNavbarMobileTrigger,
   ScNavbarProvider,
 } from '@semantic-components/ui-lab';
-import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiMenuIcon,
+  SiMountainIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -54,26 +58,14 @@ import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     ScNavigationMenuTrigger,
     SiMenuIcon,
     SiXIcon,
+    SiMountainIcon,
   ],
   template: `
     <div scNavbarProvider>
       <nav scNavbar>
         <div scNavbarGroup>
           <a scNavbarBrand routerLink="/">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-            </svg>
+            <svg siMountainIcon aria-hidden="true"></svg>
             <span>Brand</span>
           </a>
 

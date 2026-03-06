@@ -12,6 +12,14 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import {
+  SiCircleAlertIcon,
+  SiCircleXIcon,
+  SiFlashlightIcon,
+  SiScanBarcodeIcon,
+  SiSquareIcon,
+  SiSwitchCameraIcon,
+} from '@semantic-icons/lucide-icons';
 
 export type BarcodeFormat =
   | 'aztec'
@@ -51,22 +59,22 @@ interface DetectedBarcode {
 
 @Component({
   selector: 'sc-barcode-scanner',
+  imports: [
+    SiCircleAlertIcon,
+    SiCircleXIcon,
+    SiScanBarcodeIcon,
+    SiSquareIcon,
+    SiSwitchCameraIcon,
+    SiFlashlightIcon,
+  ],
   template: `
     <div [class]="containerClass()">
       @if (!isSupported()) {
         <div class="flex flex-col items-center justify-center p-8 text-center">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
+            siCircleAlertIcon
             class="text-muted-foreground mb-4 size-12"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <line x1="12" x2="12" y1="8" y2="12" />
-            <line x1="12" x2="12.01" y1="16" y2="16" />
-          </svg>
+          ></svg>
           <p class="mb-2 text-lg font-medium">Barcode Scanner Not Supported</p>
           <p class="text-muted-foreground text-sm">
             Your browser doesn't support the Barcode Detection API. Try using
@@ -75,18 +83,7 @@ interface DetectedBarcode {
         </div>
       } @else if (error()) {
         <div class="flex flex-col items-center justify-center p-8 text-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="text-destructive mb-4 size-12"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <line x1="15" x2="9" y1="9" y2="15" />
-            <line x1="9" x2="15" y1="9" y2="15" />
-          </svg>
+          <svg siCircleXIcon class="text-destructive mb-4 size-12"></svg>
           <p class="mb-2 text-lg font-medium">Camera Error</p>
           <p class="text-muted-foreground mb-4 text-sm">{{ error() }}</p>
           <button
@@ -160,20 +157,7 @@ interface DetectedBarcode {
                 (click)="startScanning()"
                 class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center gap-2 rounded-md px-4 py-2"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  class="size-4"
-                >
-                  <path d="M3 7V5a2 2 0 0 1 2-2h2" />
-                  <path d="M17 3h2a2 2 0 0 1 2 2v2" />
-                  <path d="M21 17v2a2 2 0 0 1-2 2h-2" />
-                  <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
-                  <rect width="10" height="8" x="7" y="8" rx="1" />
-                </svg>
+                <svg siScanBarcodeIcon class="size-4"></svg>
                 Start Scanning
               </button>
             } @else {
@@ -182,16 +166,7 @@ interface DetectedBarcode {
                 (click)="stopScanning()"
                 class="hover:bg-accent inline-flex items-center gap-2 rounded-md border px-4 py-2"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  class="size-4"
-                >
-                  <rect x="6" y="6" width="12" height="12" rx="2" />
-                </svg>
+                <svg siSquareIcon class="size-4"></svg>
                 Stop
               </button>
             }
@@ -204,20 +179,7 @@ interface DetectedBarcode {
                 class="hover:bg-accent rounded-md border p-2"
                 aria-label="Switch camera"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  class="size-5"
-                >
-                  <path d="M11 19H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5" />
-                  <path d="M13 5h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-5" />
-                  <circle cx="12" cy="12" r="3" />
-                  <path d="m18 22-3-3 3-3" />
-                  <path d="m6 2 3 3-3 3" />
-                </svg>
+                <svg siSwitchCameraIcon class="size-5"></svg>
               </button>
             }
           </div>
@@ -234,20 +196,7 @@ interface DetectedBarcode {
               "
               aria-label="Toggle flashlight"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                class="size-5"
-              >
-                <path
-                  d="M18 6c0 2-2 2-2 4v10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V10c0-2-2-2-2-4V2h12z"
-                />
-                <line x1="6" x2="18" y1="6" y2="6" />
-                <line x1="12" x2="12" y1="12" y2="12" />
-              </svg>
+              <svg siFlashlightIcon class="size-5"></svg>
             </button>
           }
         </div>

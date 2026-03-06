@@ -10,6 +10,7 @@ import {
   ScSpotlightDescription,
   ScSpotlightTitle,
 } from '@semantic-components/ui-lab';
+import { SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-spotlight-demo',
@@ -18,6 +19,7 @@ import {
     ScSpotlightTitle,
     ScSpotlightDescription,
     ScSpotlightActions,
+    SiSunIcon,
   ],
   template: `
     <div class="space-y-6">
@@ -28,18 +30,7 @@ import {
         <div
           class="bg-primary/10 mb-4 flex size-12 items-center justify-center rounded-full"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="text-primary size-6"
-          >
-            <path
-              d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-            />
-          </svg>
+          <svg siSunIcon class="text-primary size-6"></svg>
         </div>
         <h3 class="mb-2 font-semibold">New Feature</h3>
         <p class="text-muted-foreground text-sm">

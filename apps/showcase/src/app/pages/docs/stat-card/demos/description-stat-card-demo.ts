@@ -11,6 +11,7 @@ import {
   ScStatCardLabel,
   ScStatCardValue,
 } from '@semantic-components/ui-lab';
+import { SiChevronUpIcon, SiPercentIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-description-stat-card-demo',
@@ -21,6 +22,8 @@ import {
     ScStatCardIcon,
     ScStatCardChange,
     ScStatCardDescription,
+    SiPercentIcon,
+    SiChevronUpIcon,
   ],
   template: `
     <div class="max-w-sm">
@@ -31,36 +34,12 @@ import {
             <p scStatCardValue>3.24%</p>
           </div>
           <div scStatCardIcon>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="19" x2="5" y1="5" y2="19" />
-              <circle cx="6.5" cy="6.5" r="2.5" />
-              <circle cx="17.5" cy="17.5" r="2.5" />
-            </svg>
+            <svg siPercentIcon></svg>
           </div>
         </div>
         <div class="mt-3 flex items-center gap-2">
           <span scStatCardChange trend="up">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="m18 15-6-6-6 6" />
-            </svg>
+            <svg siChevronUpIcon class="size-3.5"></svg>
             <span>+2.4%</span>
           </span>
           <span class="text-muted-foreground text-xs">vs last week</span>
