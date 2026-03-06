@@ -229,8 +229,7 @@
     "description": "A menu displayed on right-click.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Overlay",
-    "hidden": true
+    "category": "Overlay"
   },
   {
     "name": "Copy to Clipboard",
