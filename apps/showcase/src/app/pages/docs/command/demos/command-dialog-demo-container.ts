@@ -101,7 +101,7 @@ interface CommandItem {
     SiUserIcon,
   ],
   template: \`
-    <div scDialogProvider [(open)]="open" scHotkey="mod+j" (scHotkeyPressed)="open.update(v => !v)">
+    <div scDialogProvider [(open)]="open">
       <button
         scDialogTrigger
         scButton
@@ -109,7 +109,9 @@ interface CommandItem {
         class="text-muted-foreground relative w-full text-sm sm:w-64"
       >
         <span>Click or press</span>
-        <kbd scKbd>{{ shortcut() }}</kbd>
+        <kbd scKbd scHotkey="mod+j" (scHotkeyPressed)="open.update(v => !v)">
+          {{ shortcut() }}
+        </kbd>
       </button>
       <ng-template scDialogPortal>
         <div scDialog class="w-lg gap-0 p-0">
