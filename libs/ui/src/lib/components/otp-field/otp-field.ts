@@ -13,22 +13,22 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
-import { ScOptFieldSlot } from './opt-field-slot';
+import { ScOtpFieldSlot } from './otp-field-slot';
 
 @Directive({
-  selector: 'div[scOptField], label[scOptField]',
-  providers: [{ provide: SC_FIELD, useExisting: ScOptField }],
+  selector: 'div[scOtpField], label[scOtpField]',
+  providers: [{ provide: SC_FIELD, useExisting: ScOtpField }],
   host: {
     '[attr.role]': 'role()',
-    'data-slot': 'opt-field',
+    'data-slot': 'otp-field',
     '[class]': 'class()',
     '(paste)': 'onPaste($event)',
   },
 })
-export class ScOptField implements FormValueControl<string> {
+export class ScOtpField implements FormValueControl<string> {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
-  readonly id = input(inject(_IdGenerator).getId('sc-opt-field-'));
+  readonly id = input(inject(_IdGenerator).getId('sc-otp-field-'));
   readonly descriptionIds = signal<string[]>([]);
 
   protected readonly role = computed(() => {
@@ -39,7 +39,7 @@ export class ScOptField implements FormValueControl<string> {
   readonly value = model<string>('');
   readonly disabled = input<boolean>(false);
 
-  private readonly slots = contentChildren(ScOptFieldSlot, {
+  private readonly slots = contentChildren(ScOtpFieldSlot, {
     descendants: true,
   });
 

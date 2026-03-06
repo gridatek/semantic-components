@@ -8,9 +8,9 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[scOptFieldSlotCaret]',
+  selector: 'div[scOtpFieldSlotCaret]',
   host: {
-    'data-slot': 'opt-field-slot-caret',
+    'data-slot': 'otp-field-slot-caret',
     '[class]': 'class()',
   },
   template: `
@@ -19,7 +19,7 @@ import { cn } from '../../utils';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScOptFieldSlotCaret {
+export class ScOtpFieldSlotCaret {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

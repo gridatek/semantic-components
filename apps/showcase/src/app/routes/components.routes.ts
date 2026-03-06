@@ -293,9 +293,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/input-group/input-group-page'),
       },
       {
-        path: 'opt-field',
-        title: 'Opt Field - Semantic Components',
-        loadComponent: () => import('../pages/docs/opt-field/opt-field-page'),
+        path: 'otp-field',
+        title: 'OTP Field - Semantic Components',
+        loadComponent: () => import('../pages/docs/otp-field/otp-field-page'),
       },
       {
         path: 'kanban-board',

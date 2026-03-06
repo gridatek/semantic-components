@@ -5,27 +5,27 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScOptField,
-  ScOptFieldSeparator,
-  ScOptFieldSlot,
-  ScOptFieldSlotGroup,
+  ScOtpField,
+  ScOtpFieldSeparator,
+  ScOtpFieldSlot,
+  ScOtpFieldSlotGroup,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-dot-separator-opt-field-demo',
+  selector: 'app-dot-separator-otp-field-demo',
   imports: [
-    ScOptField,
-    ScOptFieldSlotGroup,
-    ScOptFieldSeparator,
-    ScOptFieldSlot,
+    ScOtpField,
+    ScOtpFieldSlotGroup,
+    ScOtpFieldSeparator,
+    ScOtpFieldSlot,
   ],
   template: `
-    <div scOptField [(value)]="otp">
-      <div scOptFieldSlotGroup>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
+    <div scOtpField [(value)]="otp">
+      <div scOtpFieldSlotGroup>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
       </div>
-      <div scOptFieldSeparator>
+      <div scOtpFieldSeparator>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -41,11 +41,11 @@ import {
           <circle cx="12" cy="12" r="1" />
         </svg>
       </div>
-      <div scOptFieldSlotGroup>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
+      <div scOtpFieldSlotGroup>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
       </div>
-      <div scOptFieldSeparator>
+      <div scOtpFieldSeparator>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -61,9 +61,9 @@ import {
           <circle cx="12" cy="12" r="1" />
         </svg>
       </div>
-      <div scOptFieldSlotGroup>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
+      <div scOtpFieldSlotGroup>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
       </div>
     </div>
     <p class="text-muted-foreground mt-4 text-sm">
@@ -74,6 +74,6 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DotSeparatorOptFieldDemo {
+export class DotSeparatorOtpFieldDemo {
   readonly otp = signal('');
 }

@@ -5,21 +5,21 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScOptField,
-  ScOptFieldSlot,
-  ScOptFieldSlotGroup,
+  ScOtpField,
+  ScOtpFieldSlot,
+  ScOtpFieldSlotGroup,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-pin-opt-field-demo',
-  imports: [ScOptField, ScOptFieldSlotGroup, ScOptFieldSlot],
+  selector: 'app-pin-otp-field-demo',
+  imports: [ScOtpField, ScOtpFieldSlotGroup, ScOtpFieldSlot],
   template: `
-    <div scOptField [(value)]="otp">
-      <div scOptFieldSlotGroup>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
+    <div scOtpField [(value)]="otp">
+      <div scOtpFieldSlotGroup>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
       </div>
     </div>
     <p class="text-muted-foreground mt-4 text-sm">
@@ -30,6 +30,6 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PinOptFieldDemo {
+export class PinOtpFieldDemo {
   readonly otp = signal('');
 }

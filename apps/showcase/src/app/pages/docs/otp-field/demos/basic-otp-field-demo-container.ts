@@ -4,25 +4,25 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { PinOptFieldDemo } from './pin-opt-field-demo';
+import { BasicOtpFieldDemo } from './basic-otp-field-demo';
 
 @Component({
-  selector: 'app-pin-opt-field-demo-container',
-  imports: [DemoContainer, PinOptFieldDemo],
+  selector: 'app-basic-otp-field-demo-container',
+  imports: [DemoContainer, BasicOtpFieldDemo],
   template: `
     <app-demo-container
-      title="PIN (4 digits)"
-      demoUrl="/demos/opt-field/pin-opt-field-demo"
+      title="Basic"
+      demoUrl="/demos/otp-field/basic-otp-field-demo"
       [code]="code"
     >
-      <app-pin-opt-field-demo />
+      <app-basic-otp-field-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PinOptFieldDemoContainer {
+export class BasicOtpFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
@@ -30,21 +30,23 @@ export class PinOptFieldDemoContainer {
   signal,
 } from '@angular/core';
 import {
-  ScOptField,
-  ScOptFieldSlot,
-  ScOptFieldSlotGroup,
+  ScOtpField,
+  ScOtpFieldSlot,
+  ScOtpFieldSlotGroup,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-pin-opt-field-demo',
-  imports: [ScOptField, ScOptFieldSlotGroup, ScOptFieldSlot],
+  selector: 'app-basic-otp-field-demo',
+  imports: [ScOtpField, ScOtpFieldSlotGroup, ScOtpFieldSlot],
   template: \`
-    <div scOptField [(value)]="otp">
-      <div scOptFieldSlotGroup>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
+    <div scOtpField [(value)]="otp">
+      <div scOtpFieldSlotGroup>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
       </div>
     </div>
     <p class="text-muted-foreground mt-4 text-sm">
@@ -55,7 +57,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PinOptFieldDemo {
+export class BasicOtpFieldDemo {
   readonly otp = signal('');
 }`;
 }

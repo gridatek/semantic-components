@@ -4,25 +4,25 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { VerificationOptFieldDemo } from './verification-opt-field-demo';
+import { VerificationOtpFieldDemo } from './verification-otp-field-demo';
 
 @Component({
-  selector: 'app-verification-opt-field-demo-container',
-  imports: [DemoContainer, VerificationOptFieldDemo],
+  selector: 'app-verification-otp-field-demo-container',
+  imports: [DemoContainer, VerificationOtpFieldDemo],
   template: `
     <app-demo-container
       title="Verification Code Example"
-      demoUrl="/demos/opt-field/verification-opt-field-demo"
+      demoUrl="/demos/otp-field/verification-otp-field-demo"
       [code]="code"
     >
-      <app-verification-opt-field-demo />
+      <app-verification-otp-field-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VerificationOptFieldDemoContainer {
+export class VerificationOtpFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
@@ -30,19 +30,19 @@ export class VerificationOptFieldDemoContainer {
   signal,
 } from '@angular/core';
 import {
-  ScOptField,
-  ScOptFieldSeparator,
-  ScOptFieldSlot,
-  ScOptFieldSlotGroup,
+  ScOtpField,
+  ScOtpFieldSeparator,
+  ScOtpFieldSlot,
+  ScOtpFieldSlotGroup,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-verification-opt-field-demo',
+  selector: 'app-verification-otp-field-demo',
   imports: [
-    ScOptField,
-    ScOptFieldSlotGroup,
-    ScOptFieldSeparator,
-    ScOptFieldSlot,
+    ScOtpField,
+    ScOtpFieldSlotGroup,
+    ScOtpFieldSeparator,
+    ScOtpFieldSlot,
   ],
   template: \`
     <div class="max-w-sm rounded-lg border p-6">
@@ -54,13 +54,13 @@ import {
           </p>
         </div>
         <div class="flex justify-center">
-          <div scOptField [(value)]="code">
-            <div scOptFieldSlotGroup>
-              <div scOptFieldSlot></div>
-              <div scOptFieldSlot></div>
-              <div scOptFieldSlot></div>
+          <div scOtpField [(value)]="code">
+            <div scOtpFieldSlotGroup>
+              <div scOtpFieldSlot></div>
+              <div scOtpFieldSlot></div>
+              <div scOtpFieldSlot></div>
             </div>
-            <div scOptFieldSeparator>
+            <div scOtpFieldSeparator>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -76,10 +76,10 @@ import {
                 <line x1="5" x2="19" y1="12" y2="12" />
               </svg>
             </div>
-            <div scOptFieldSlotGroup>
-              <div scOptFieldSlot></div>
-              <div scOptFieldSlot></div>
-              <div scOptFieldSlot></div>
+            <div scOtpFieldSlotGroup>
+              <div scOtpFieldSlot></div>
+              <div scOtpFieldSlot></div>
+              <div scOtpFieldSlot></div>
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VerificationOptFieldDemo {
+export class VerificationOtpFieldDemo {
   readonly code = signal('');
 }`;
 }

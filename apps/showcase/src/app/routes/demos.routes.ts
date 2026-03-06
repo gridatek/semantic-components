@@ -1712,48 +1712,48 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/opt-field',
+    path: 'demos/otp-field',
     children: [
       {
-        path: 'basic-opt-field-demo',
+        path: 'basic-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/opt-field/demos/basic-opt-field-demo').then(
-            (m) => m.BasicOptFieldDemo,
+          import('../pages/docs/otp-field/demos/basic-otp-field-demo').then(
+            (m) => m.BasicOtpFieldDemo,
           ),
       },
       {
-        path: 'separator-opt-field-demo',
+        path: 'separator-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/opt-field/demos/separator-opt-field-demo').then(
-            (m) => m.SeparatorOptFieldDemo,
+          import('../pages/docs/otp-field/demos/separator-otp-field-demo').then(
+            (m) => m.SeparatorOtpFieldDemo,
           ),
       },
       {
-        path: 'pin-opt-field-demo',
+        path: 'pin-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/opt-field/demos/pin-opt-field-demo').then(
-            (m) => m.PinOptFieldDemo,
+          import('../pages/docs/otp-field/demos/pin-otp-field-demo').then(
+            (m) => m.PinOtpFieldDemo,
           ),
       },
       {
-        path: 'dot-separator-opt-field-demo',
+        path: 'dot-separator-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/opt-field/demos/dot-separator-opt-field-demo').then(
-            (m) => m.DotSeparatorOptFieldDemo,
+          import('../pages/docs/otp-field/demos/dot-separator-otp-field-demo').then(
+            (m) => m.DotSeparatorOtpFieldDemo,
           ),
       },
       {
-        path: 'disabled-opt-field-demo',
+        path: 'disabled-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/opt-field/demos/disabled-opt-field-demo').then(
-            (m) => m.DisabledOptFieldDemo,
+          import('../pages/docs/otp-field/demos/disabled-otp-field-demo').then(
+            (m) => m.DisabledOtpFieldDemo,
           ),
       },
       {
-        path: 'verification-opt-field-demo',
+        path: 'verification-otp-field-demo',
         loadComponent: () =>
-          import('../pages/docs/opt-field/demos/verification-opt-field-demo').then(
-            (m) => m.VerificationOptFieldDemo,
+          import('../pages/docs/otp-field/demos/verification-otp-field-demo').then(
+            (m) => m.VerificationOtpFieldDemo,
           ),
       },
     ],

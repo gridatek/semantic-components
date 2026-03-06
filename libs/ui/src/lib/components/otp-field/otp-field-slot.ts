@@ -9,16 +9,16 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScOptField } from './opt-field';
-import { ScOptFieldSlotCaret } from './opt-field-slot-caret';
-import { ScOptFieldSlotChar } from './opt-field-slot-char';
-import { ScOptFieldSlotInput } from './opt-field-slot-input';
+import { ScOtpField } from './otp-field';
+import { ScOtpFieldSlotCaret } from './otp-field-slot-caret';
+import { ScOtpFieldSlotChar } from './otp-field-slot-char';
+import { ScOtpFieldSlotInput } from './otp-field-slot-input';
 
 @Component({
-  selector: 'div[scOptFieldSlot]',
-  imports: [ScOptFieldSlotInput, ScOptFieldSlotCaret, ScOptFieldSlotChar],
+  selector: 'div[scOtpFieldSlot]',
+  imports: [ScOtpFieldSlotInput, ScOtpFieldSlotCaret, ScOtpFieldSlotChar],
   host: {
-    'data-slot': 'opt-field-slot',
+    'data-slot': 'otp-field-slot',
     '[class]': 'class()',
     '[attr.data-active]': 'isActive() ? "" : null',
     '[attr.data-filled]': 'isFilled() ? "" : null',
@@ -26,37 +26,37 @@ import { ScOptFieldSlotInput } from './opt-field-slot-input';
   template: `
     <input
       #input
-      scOptFieldSlotInput
+      scOtpFieldSlotInput
       [value]="char()"
-      [disabled]="optField.disabled()"
+      [disabled]="otpField.disabled()"
       [ariaLabel]="ariaLabel()"
       (inputChange)="onInputChange($event)"
       (keydownEvent)="onKeydown($event)"
       (focused)="onFocusChange($event)"
     />
     @if (isActive() && !isFilled()) {
-      <div scOptFieldSlotCaret></div>
+      <div scOtpFieldSlotCaret></div>
     }
-    <span scOptFieldSlotChar [char]="char()"></span>
+    <span scOtpFieldSlotChar [char]="char()"></span>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScOptFieldSlot {
-  readonly optField = inject(ScOptField);
-  private readonly inputComponent = viewChild.required(ScOptFieldSlotInput);
+export class ScOtpFieldSlot {
+  readonly otpField = inject(ScOtpField);
+  private readonly inputComponent = viewChild.required(ScOtpFieldSlotInput);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly index = signal<number>(0);
   private readonly focused = signal<boolean>(false);
 
-  readonly char = computed(() => this.optField.getChar(this.index()));
+  readonly char = computed(() => this.otpField.getChar(this.index()));
   readonly ariaLabel = computed(
-    () => `Digit ${this.index() + 1} of ${this.optField.slotCount()}`,
+    () => `Digit ${this.index() + 1} of ${this.otpField.slotCount()}`,
   );
   readonly isActive = computed(
-    () => this.focused() && !this.optField.disabled(),
+    () => this.focused() && !this.otpField.disabled(),
   );
   readonly isFilled = computed(() => this.char() !== '');
 
@@ -79,9 +79,9 @@ export class ScOptFieldSlot {
   protected onFocusChange(isFocused: boolean): void {
     if (isFocused) {
       // Redirect focus to the first empty slot to enforce sequential input
-      const firstEmptyIndex = this.optField.firstEmptyIndex();
+      const firstEmptyIndex = this.otpField.firstEmptyIndex();
       if (firstEmptyIndex !== -1 && this.index() > firstEmptyIndex) {
-        this.optField.focusSlot(firstEmptyIndex);
+        this.otpField.focusSlot(firstEmptyIndex);
         return;
       }
     }
@@ -89,34 +89,34 @@ export class ScOptFieldSlot {
   }
 
   protected onInputChange(char: string): void {
-    if (this.optField.disabled()) return;
+    if (this.otpField.disabled()) return;
 
-    this.optField.setChar(this.index(), char);
+    this.otpField.setChar(this.index(), char);
     // Move to next slot
-    this.optField.focusSlot(this.index() + 1);
+    this.otpField.focusSlot(this.index() + 1);
   }
 
   protected onKeydown(event: KeyboardEvent): void {
-    if (this.optField.disabled()) return;
+    if (this.otpField.disabled()) return;
 
     if (event.key === 'Backspace') {
       if (this.char() === '') {
         // Move to previous slot and clear it
         const prevIndex = this.index() - 1;
         if (prevIndex >= 0) {
-          this.optField.setChar(prevIndex, '');
-          this.optField.focusSlot(prevIndex);
+          this.otpField.setChar(prevIndex, '');
+          this.otpField.focusSlot(prevIndex);
         }
       } else {
         // Clear current slot
-        this.optField.setChar(this.index(), '');
+        this.otpField.setChar(this.index(), '');
       }
       event.preventDefault();
     } else if (event.key === 'ArrowLeft') {
-      this.optField.focusSlot(this.index() - 1);
+      this.otpField.focusSlot(this.index() - 1);
       event.preventDefault();
     } else if (event.key === 'ArrowRight') {
-      this.optField.focusSlot(this.index() + 1);
+      this.otpField.focusSlot(this.index() + 1);
       event.preventDefault();
     }
   }

@@ -4,25 +4,25 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DotSeparatorOptFieldDemo } from './dot-separator-opt-field-demo';
+import { DotSeparatorOtpFieldDemo } from './dot-separator-otp-field-demo';
 
 @Component({
-  selector: 'app-dot-separator-opt-field-demo-container',
-  imports: [DemoContainer, DotSeparatorOptFieldDemo],
+  selector: 'app-dot-separator-otp-field-demo-container',
+  imports: [DemoContainer, DotSeparatorOtpFieldDemo],
   template: `
     <app-demo-container
       title="With Dot Separator"
-      demoUrl="/demos/opt-field/dot-separator-opt-field-demo"
+      demoUrl="/demos/otp-field/dot-separator-otp-field-demo"
       [code]="code"
     >
-      <app-dot-separator-opt-field-demo />
+      <app-dot-separator-otp-field-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DotSeparatorOptFieldDemoContainer {
+export class DotSeparatorOtpFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
@@ -30,27 +30,27 @@ export class DotSeparatorOptFieldDemoContainer {
   signal,
 } from '@angular/core';
 import {
-  ScOptField,
-  ScOptFieldSeparator,
-  ScOptFieldSlot,
-  ScOptFieldSlotGroup,
+  ScOtpField,
+  ScOtpFieldSeparator,
+  ScOtpFieldSlot,
+  ScOtpFieldSlotGroup,
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-dot-separator-opt-field-demo',
+  selector: 'app-dot-separator-otp-field-demo',
   imports: [
-    ScOptField,
-    ScOptFieldSlotGroup,
-    ScOptFieldSeparator,
-    ScOptFieldSlot,
+    ScOtpField,
+    ScOtpFieldSlotGroup,
+    ScOtpFieldSeparator,
+    ScOtpFieldSlot,
   ],
   template: \`
-    <div scOptField [(value)]="otp">
-      <div scOptFieldSlotGroup>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
+    <div scOtpField [(value)]="otp">
+      <div scOtpFieldSlotGroup>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
       </div>
-      <div scOptFieldSeparator>
+      <div scOtpFieldSeparator>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -66,11 +66,11 @@ import {
           <circle cx="12" cy="12" r="1" />
         </svg>
       </div>
-      <div scOptFieldSlotGroup>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
+      <div scOtpFieldSlotGroup>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
       </div>
-      <div scOptFieldSeparator>
+      <div scOtpFieldSeparator>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -86,9 +86,9 @@ import {
           <circle cx="12" cy="12" r="1" />
         </svg>
       </div>
-      <div scOptFieldSlotGroup>
-        <div scOptFieldSlot></div>
-        <div scOptFieldSlot></div>
+      <div scOtpFieldSlotGroup>
+        <div scOtpFieldSlot></div>
+        <div scOtpFieldSlot></div>
       </div>
     </div>
     <p class="text-muted-foreground mt-4 text-sm">
@@ -99,7 +99,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DotSeparatorOptFieldDemo {
+export class DotSeparatorOtpFieldDemo {
   readonly otp = signal('');
 }`;
 }

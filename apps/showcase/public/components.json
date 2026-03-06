@@ -578,8 +578,8 @@
     "hidden": true
   },
   {
-    "name": "Opt Field",
-    "path": "opt-field",
+    "name": "OTP Field",
+    "path": "otp-field",
     "description": "An input for entering one-time passwords.",
     "status": "Experimental",
     "library": "ui",

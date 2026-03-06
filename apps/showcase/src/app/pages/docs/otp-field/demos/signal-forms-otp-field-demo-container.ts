@@ -4,25 +4,25 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { SignalFormsOptFieldDemo } from './signal-forms-opt-field-demo';
+import { SignalFormsOtpFieldDemo } from './signal-forms-otp-field-demo';
 
 @Component({
-  selector: 'app-signal-forms-opt-field-demo-container',
-  imports: [DemoContainer, SignalFormsOptFieldDemo],
+  selector: 'app-signal-forms-otp-field-demo-container',
+  imports: [DemoContainer, SignalFormsOtpFieldDemo],
   template: `
     <app-demo-container
       title="Signal Forms"
-      demoUrl="/demos/opt-field/signal-forms-opt-field-demo"
+      demoUrl="/demos/otp-field/signal-forms-otp-field-demo"
       [code]="code"
     >
-      <app-signal-forms-opt-field-demo />
+      <app-signal-forms-otp-field-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignalFormsOptFieldDemoContainer {
+export class SignalFormsOtpFieldDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
@@ -31,10 +31,10 @@ export class SignalFormsOptFieldDemoContainer {
 } from '@angular/core';
 import { FormField, form, minLength, required } from '@angular/forms/signals';
 import {
-  ScOptField,
-  ScOptFieldSeparator,
-  ScOptFieldSlot,
-  ScOptFieldSlotGroup,
+  ScOtpField,
+  ScOtpFieldSeparator,
+  ScOtpFieldSlot,
+  ScOtpFieldSlotGroup,
 } from '@semantic-components/ui';
 
 interface OtpFormModel {
@@ -42,29 +42,29 @@ interface OtpFormModel {
 }
 
 @Component({
-  selector: 'app-signal-forms-opt-field-demo',
+  selector: 'app-signal-forms-otp-field-demo',
   imports: [
-    ScOptField,
-    ScOptFieldSlotGroup,
-    ScOptFieldSeparator,
-    ScOptFieldSlot,
+    ScOtpField,
+    ScOtpFieldSlotGroup,
+    ScOtpFieldSeparator,
+    ScOtpFieldSlot,
     FormField,
   ],
   template: \`
     <div class="space-y-4">
       <div
-        scOptField
+        scOtpField
         [formField]="otpForm.otp"
         [class.border-destructive]="
           otpForm.otp().invalid() && otpForm.otp().touched()
         "
       >
-        <div scOptFieldSlotGroup>
-          <div scOptFieldSlot></div>
-          <div scOptFieldSlot></div>
-          <div scOptFieldSlot></div>
+        <div scOtpFieldSlotGroup>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
         </div>
-        <div scOptFieldSeparator>
+        <div scOtpFieldSeparator>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -80,10 +80,10 @@ interface OtpFormModel {
             <line x1="5" x2="19" y1="12" y2="12" />
           </svg>
         </div>
-        <div scOptFieldSlotGroup>
-          <div scOptFieldSlot></div>
-          <div scOptFieldSlot></div>
-          <div scOptFieldSlot></div>
+        <div scOtpFieldSlotGroup>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
         </div>
       </div>
       @if (otpForm.otp().invalid() && otpForm.otp().touched()) {
@@ -102,7 +102,7 @@ interface OtpFormModel {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignalFormsOptFieldDemo {
+export class SignalFormsOtpFieldDemo {
   private readonly formModel = signal<OtpFormModel>({
     otp: '',
   });

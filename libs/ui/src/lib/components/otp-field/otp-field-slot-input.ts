@@ -9,9 +9,9 @@ import {
 import { cn } from '../../utils';
 
 @Directive({
-  selector: 'input[scOptFieldSlotInput]',
+  selector: 'input[scOtpFieldSlotInput]',
   host: {
-    'data-slot': 'opt-field-slot-input',
+    'data-slot': 'otp-field-slot-input',
     type: 'text',
     inputmode: 'numeric',
     autocomplete: 'one-time-code',
@@ -26,7 +26,7 @@ import { cn } from '../../utils';
     '(blur)': 'focused.emit(false)',
   },
 })
-export class ScOptFieldSlotInput {
+export class ScOtpFieldSlotInput {
   private readonly elementRef = inject(ElementRef<HTMLInputElement>);
 
   readonly classInput = input<string>('', { alias: 'class' });
