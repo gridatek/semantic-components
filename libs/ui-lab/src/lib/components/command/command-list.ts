@@ -26,7 +26,10 @@ export class ScCommandList {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('max-h-[300px] overflow-y-auto overflow-x-hidden', this.classInput()),
+    cn(
+      'no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none',
+      this.classInput(),
+    ),
   );
 
   private readonly listbox = inject(Listbox);

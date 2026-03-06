@@ -16,7 +16,7 @@ export class ScCommandGroup {
   protected readonly class = computed(() =>
     cn(
       'overflow-hidden p-1 text-foreground',
-      '**:data-[slot=command-group-heading]:px-2 **:data-[slot=command-group-heading]:py-1.5 **:data-[slot=command-group-heading]:text-xs **:data-[slot=command-group-heading]:font-medium **:data-[slot=command-group-heading]:text-muted-foreground',
+      '**:data-[slot=command-group-label]:px-2 **:data-[slot=command-group-label]:py-1.5 **:data-[slot=command-group-label]:text-xs **:data-[slot=command-group-label]:font-medium **:data-[slot=command-group-label]:text-muted-foreground',
       this.classInput(),
     ),
   );

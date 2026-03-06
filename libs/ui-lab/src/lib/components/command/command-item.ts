@@ -44,11 +44,10 @@ export class ScCommandItem {
 
   protected readonly class = computed(() =>
     cn(
-      'relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none',
-      'data-disabled:pointer-events-none data-disabled:opacity-50',
-      'data-[active=true]:bg-accent data-[active=true]:text-accent-foreground',
-      'hover:bg-accent hover:text-accent-foreground',
-      '[&>svg]:size-4 [&>svg]:shrink-0',
+      'relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
+      'data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50',
+      'data-selected:bg-muted data-selected:text-foreground',
+      '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4',
       this.classInput(),
     ),
   );

@@ -21,9 +21,7 @@ export class ScCommandInput {
 
   protected readonly class = computed(() =>
     cn(
-      'flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none',
-      'placeholder:text-muted-foreground',
-      'disabled:cursor-not-allowed disabled:opacity-50',
+      'w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
       this.classInput(),
     ),
   );

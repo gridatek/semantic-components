@@ -13,7 +13,7 @@ export class ScCommandShortcut {
 
   protected readonly class = computed(() =>
     cn(
-      'ml-auto text-xs tracking-widest text-muted-foreground',
+      'ms-auto text-xs tracking-widest text-muted-foreground group-data-selected/command-item:text-foreground',
       this.classInput(),
     ),
   );
