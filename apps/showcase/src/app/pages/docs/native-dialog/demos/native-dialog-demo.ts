@@ -4,7 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScInput, ScLabel } from '@semantic-components/ui';
 import {
   ScNativeDialog,
   ScNativeDialogBody,
@@ -23,6 +23,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-native-dialog-demo',
   imports: [
     ScButton,
+    ScInput,
+    ScLabel,
     ScNativeDialog,
     ScNativeDialogBody,
     ScNativeDialogClose,
@@ -55,24 +57,12 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           </div>
           <div scNativeDialogBody class="grid gap-4">
             <div class="grid grid-cols-4 items-center gap-4">
-              <label class="text-right text-sm font-medium" for="name">
-                Name
-              </label>
-              <input
-                class="border-input bg-background col-span-3 rounded-md border px-3 py-2 text-sm"
-                id="name"
-                value="Pedro Duarte"
-              />
+              <label scLabel class="text-right">Name</label>
+              <input scInput class="col-span-3" value="Pedro Duarte" />
             </div>
             <div class="grid grid-cols-4 items-center gap-4">
-              <label class="text-right text-sm font-medium" for="username">
-                Username
-              </label>
-              <input
-                class="border-input bg-background col-span-3 rounded-md border px-3 py-2 text-sm"
-                id="username"
-                value="@peduarte"
-              />
+              <label scLabel class="text-right">Username</label>
+              <input scInput class="col-span-3" value="@peduarte" />
             </div>
           </div>
           <div scNativeDialogFooter>

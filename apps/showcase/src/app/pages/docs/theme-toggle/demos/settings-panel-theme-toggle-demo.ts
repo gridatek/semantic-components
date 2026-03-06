@@ -11,21 +11,19 @@ import { ScThemeSelect } from '@semantic-components/ui-lab';
   template: `
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
-        <div class="flex items-center justify-between">
+        <label class="flex items-center justify-between">
           <div class="space-y-0.5">
-            <label for="settings-theme" class="text-sm font-medium">
-              Theme
-            </label>
+            <span class="text-sm font-medium">Theme</span>
             <p class="text-muted-foreground text-sm">
               Select your preferred theme
             </p>
           </div>
-          <select scThemeSelect id="settings-theme" class="w-32">
+          <select scThemeSelect class="w-32">
             <option value="light">Light</option>
             <option value="dark">Dark</option>
             <option value="system">System</option>
           </select>
-        </div>
+        </label>
       </div>
     </div>
   `,

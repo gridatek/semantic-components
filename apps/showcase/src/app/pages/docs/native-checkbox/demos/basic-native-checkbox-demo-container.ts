@@ -35,19 +35,13 @@ import { ScNativeCheckbox } from '@semantic-components/ui-lab';
   selector: 'app-basic-native-checkbox-demo',
   imports: [ScNativeCheckbox],
   template: \`
-    <div class="flex items-center space-x-2">
+    <label class="flex items-center space-x-2">
       <input
         scNativeCheckbox
-        id="terms-native"
         (change)="onTermsChange($event)"
       />
-      <label
-        for="terms-native"
-        class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-      >
-        Accept terms and conditions
-      </label>
-    </div>
+      <span class="text-sm leading-none font-medium">Accept terms and conditions</span>
+    </label>
     <p class="text-muted-foreground mt-2 text-sm">Checked: {{ terms() }}</p>
   \`,
   host: { class: 'block w-full' },

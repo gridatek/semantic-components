@@ -46,50 +46,32 @@ interface CheckboxFormModel {
   template: \`
     <form>
       <div class="space-y-4">
-        <div class="flex items-center space-x-2">
+        <label class="flex items-center space-x-2">
           <input
             scNativeCheckbox
-            id="newsletter"
             type="checkbox"
             [formField]="checkboxForm.newsletter"
           />
-          <label
-            for="newsletter"
-            class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-            Subscribe to newsletter
-          </label>
-        </div>
+          <span class="text-sm leading-none font-medium">Subscribe to newsletter</span>
+        </label>
 
-        <div class="flex items-center space-x-2">
+        <label class="flex items-center space-x-2">
           <input
             scNativeCheckbox
-            id="marketing"
             type="checkbox"
             [formField]="checkboxForm.marketing"
           />
-          <label
-            for="marketing"
-            class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-            Receive marketing emails
-          </label>
-        </div>
+          <span class="text-sm leading-none font-medium">Receive marketing emails</span>
+        </label>
 
-        <div class="flex items-center space-x-2">
+        <label class="flex items-center space-x-2">
           <input
             scNativeCheckbox
-            id="terms-signal"
             type="checkbox"
             [formField]="checkboxForm.acceptTerms"
           />
-          <label
-            for="terms-signal"
-            class="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-            Accept terms and conditions
-          </label>
-        </div>
+          <span class="text-sm leading-none font-medium">Accept terms and conditions</span>
+        </label>
       </div>
 
       <div class="bg-muted mt-4 rounded-md p-4">
