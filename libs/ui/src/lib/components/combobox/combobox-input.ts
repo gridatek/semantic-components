@@ -1,6 +1,7 @@
 import { ComboboxInput } from '@angular/aria/combobox';
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, forwardRef, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { ScCombobox } from './combobox';
 
 @Directive({
   selector: 'input[scComboboxInput]',
@@ -19,9 +20,15 @@ import { cn } from '../../utils';
 export class ScComboboxInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
+  private readonly combobox = inject(forwardRef(() => ScCombobox));
+  private readonly hasValue = computed(
+    () => this.combobox.selectedLabel() !== '',
+  );
+
   protected readonly class = computed(() =>
     cn(
-      'bg-popover text-popover-foreground w-full cursor-pointer rounded-md border-none px-3 py-2.5 text-sm outline-none',
+      'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent pl-2.5 outline-none placeholder:text-muted-foreground',
+      this.hasValue() && 'opacity-0',
       this.classInput(),
     ),
   );

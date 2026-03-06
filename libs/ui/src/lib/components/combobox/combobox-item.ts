@@ -1,5 +1,5 @@
 import { Option } from '@angular/aria/listbox';
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
@@ -17,6 +17,10 @@ import { cn } from '../../utils';
 })
 export class ScComboboxItem {
   readonly classInput = input<string>('', { alias: 'class' });
+
+  private readonly option = inject(Option);
+  readonly itemValue = computed(() => this.option.value());
+  readonly itemLabel = computed(() => this.option.label() || '');
 
   protected readonly class = computed(() =>
     cn(
