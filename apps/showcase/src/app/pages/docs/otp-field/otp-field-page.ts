@@ -31,7 +31,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>OtpField</h1>
+        <h1 scHeading>OTP Field</h1>
         <p class="text-muted-foreground">
           Accessible one-time password component with copy paste functionality.
         </p>
