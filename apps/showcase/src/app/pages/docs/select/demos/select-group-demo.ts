@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScSelect,
+  ScSelectDisplayValue,
   ScSelectGroup,
   ScSelectGroupLabel,
   ScSelectIcon,
@@ -23,6 +24,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-select-group-demo',
   imports: [
     ScSelect,
+    ScSelectDisplayValue,
     ScSelectGroup,
     ScSelectGroupLabel,
     ScSelectItem,
@@ -40,6 +42,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scSelect>
       <div scSelectInputGroup>
+        <span scSelectDisplayValue placeholder="Select a food"></span>
         <input
           scSelectInput
           placeholder="Select a food"

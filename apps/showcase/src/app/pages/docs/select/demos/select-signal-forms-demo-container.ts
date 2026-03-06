@@ -35,6 +35,7 @@ import {
   ScField,
   ScLabel,
   ScSelect,
+  ScSelectDisplayValue,
   ScSelectItem,
   ScSelectInput,
   ScSelectItemIndicator,
@@ -56,6 +57,7 @@ interface FormModel {
     ScField,
     ScLabel,
     ScSelect,
+    ScSelectDisplayValue,
     ScSelectItem,
     ScSelectList,
     ScSelectPopup,
@@ -67,7 +69,6 @@ interface FormModel {
     SiChevronDownIcon,
     SiCheckIcon,
     JsonPipe,
-    // FormField,
     FormRoot,
   ],
   template: \`
@@ -75,29 +76,9 @@ interface FormModel {
       <div class="space-y-4">
         <div scField>
           <label scLabel>Fruit</label>
-          <!--div
-            scSelect
-                       [formField]="fruitForm.fruit"
-          >
+          <div scSelect>
             <div scSelectInputGroup>
-              <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />
-              <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
-            </div>
-            <ng-template scSelectPortal>
-              <div scSelectPopup>
-                <div scSelectList>
-                  @for (fruit of fruits; track fruit) {
-                    <div scSelectItem [value]="fruit" [label]="fruit">
-                      {{ fruit }}
-                      <svg scSelectItemIndicator siCheckIcon aria-hidden="true"></svg>
-                    </div>
-                  }
-                </div>
-              </div>
-            </ng-template>
-          </div-->
-          <div scSelect #select="scSelect">
-            <div scSelectInputGroup>
+              <span scSelectDisplayValue placeholder="Select a fruit"></span>
               <input scSelectInput placeholder="Select a fruit" aria-label="Fruit dropdown" />
               <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
             </div>

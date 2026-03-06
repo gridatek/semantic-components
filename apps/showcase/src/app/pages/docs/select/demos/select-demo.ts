@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import {
   ScSelect,
+  ScSelectDisplayValue,
   ScSelectIcon,
   ScSelectInput,
   ScSelectInputGroup,
@@ -35,6 +36,7 @@ import {
   selector: 'app-select-demo',
   imports: [
     ScSelect,
+    ScSelectDisplayValue,
     ScSelectPopup,
     ScSelectItemIcon,
     ScSelectList,
@@ -64,6 +66,7 @@ import {
             *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
           ></ng-container>
         }
+        <span scSelectDisplayValue placeholder="Select a label"></span>
         <input
           scSelectInput
           placeholder="Select a label"

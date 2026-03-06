@@ -33,6 +33,7 @@ import {
 } from '@angular/core';
 import {
   ScSelect,
+  ScSelectDisplayValue,
   ScSelectItem,
   ScSelectItemIcon,
   ScSelectInput,
@@ -60,6 +61,7 @@ import {
   selector: 'app-select-demo',
   imports: [
     ScSelect,
+    ScSelectDisplayValue,
     ScSelectPopup,
     ScSelectItemIcon,
     ScSelectList,
@@ -85,8 +87,9 @@ import {
     <div scSelect class="w-48">
       <div scSelectInputGroup>
         @if (displayIcon(); as icon) {
-          <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
-        }
+            <ng-container *ngTemplateOutlet="iconTmpl; context: { icon: icon }"></ng-container>
+          }
+        <span scSelectDisplayValue placeholder="Select a label"></span>
         <input scSelectInput placeholder="Select a label" aria-label="Label dropdown" />
         <svg scSelectIcon siChevronDownIcon aria-hidden="true"></svg>
       </div>

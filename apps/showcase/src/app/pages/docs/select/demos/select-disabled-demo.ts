@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {
   ScSelect,
+  ScSelectDisplayValue,
   ScSelectIcon,
   ScSelectInput,
   ScSelectInputGroup,
@@ -20,6 +21,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-select-disabled-demo',
   imports: [
     ScSelect,
+    ScSelectDisplayValue,
     ScSelectItem,
     ScSelectList,
     ScSelectPopup,
@@ -34,6 +36,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scSelect disabled>
       <div scSelectInputGroup>
+        <span scSelectDisplayValue placeholder="Select a fruit"></span>
         <input
           scSelectInput
           placeholder="Select a fruit"

@@ -1,4 +1,5 @@
 export { ScSelect } from './select';
+export { ScSelectDisplayValue } from './select-display-value';
 export { ScSelectItemIcon } from './select-item-icon';
 export { ScSelectInputGroup } from './select-input-group';
 export { ScSelectInput } from './select-input';
