@@ -4,9 +4,12 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  forwardRef,
+  inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { ScSelect } from './select';
 
 @Component({
   selector: 'input[scSelectInput]',
@@ -23,9 +26,14 @@ import { cn } from '../../utils';
 export class ScSelectInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
+  private readonly select = inject(forwardRef(() => ScSelect));
+
+  private readonly hasValue = computed(() => this.select.value() != null);
+
   protected readonly class = computed(() =>
     cn(
       'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent outline-none placeholder:text-muted-foreground',
+      this.hasValue() && 'opacity-0',
       this.classInput(),
     ),
   );
