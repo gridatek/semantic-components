@@ -1,5 +1,6 @@
 import { Combobox } from '@angular/aria/combobox';
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, effect, inject, input } from '@angular/core';
+import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
@@ -7,13 +8,7 @@ import { cn } from '@semantic-components/ui';
   hostDirectives: [
     {
       directive: Combobox,
-      inputs: [
-        'filterMode',
-        'disabled',
-        'readonly',
-        'firstMatch',
-        'alwaysExpanded',
-      ],
+      inputs: ['disabled'],
     },
   ],
   host: {
@@ -22,6 +17,7 @@ import { cn } from '@semantic-components/ui';
   },
 })
 export class ScCommand {
+  private readonly combobox = inject(Combobox);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
@@ -30,4 +26,9 @@ export class ScCommand {
       this.classInput(),
     ),
   );
+
+  constructor() {
+    effect(() => signalSetFn(this.combobox.filterMode[SIGNAL], 'manual'));
+    effect(() => signalSetFn(this.combobox.alwaysExpanded[SIGNAL], true));
+  }
 }
