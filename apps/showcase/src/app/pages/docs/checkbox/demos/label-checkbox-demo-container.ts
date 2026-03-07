@@ -59,7 +59,7 @@ import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
       {{ option3() ? 'Three' : '' }}
     </p>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

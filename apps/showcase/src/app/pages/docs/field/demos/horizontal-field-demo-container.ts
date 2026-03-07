@@ -35,12 +35,12 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-horizontal-field-demo',
   imports: [ScField, ScLabel, ScInput],
   template: \`
-    <div scField [orientation]="'horizontal'">
+    <div scField [orientation]="'horizontal'" class="w-full max-w-sm">
       <label scLabel>Username</label>
       <input scInput type="text" placeholder="Enter username" />
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

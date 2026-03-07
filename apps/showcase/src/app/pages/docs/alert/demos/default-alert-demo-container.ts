@@ -34,7 +34,7 @@ import { SiCircleAlertIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-default-alert-demo',
   imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiCircleAlertIcon],
   template: \`
-    <div scAlert>
+    <div scAlert class="w-full max-w-lg">
       <svg siCircleAlertIcon></svg>
       <div scAlertTitle>Heads up!</div>
       <div scAlertDescription>
@@ -42,7 +42,7 @@ import { SiCircleAlertIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

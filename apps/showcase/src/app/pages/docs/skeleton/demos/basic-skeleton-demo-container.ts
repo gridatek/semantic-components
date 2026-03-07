@@ -35,7 +35,7 @@ import { ScSkeleton } from '@semantic-components/ui';
       <div scSkeleton class="h-4 w-[200px]"></div>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

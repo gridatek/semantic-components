@@ -43,7 +43,7 @@ import { ScLink } from '@semantic-components/ui';
       <a scLink variant="link">Link</a>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

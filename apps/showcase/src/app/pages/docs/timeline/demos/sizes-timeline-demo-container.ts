@@ -48,7 +48,7 @@ import { SiDollarSignIcon } from '@semantic-icons/lucide-icons';
     SiDollarSignIcon,
   ],
   template: \`
-    <div scTimeline class="ml-4">
+    <div scTimeline class="ml-4 w-full max-w-2xl">
       <div scTimelineItem>
         <div scTimelineConnector></div>
         <div scTimelineDot size="sm"></div>
@@ -80,7 +80,7 @@ import { SiDollarSignIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

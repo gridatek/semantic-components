@@ -44,7 +44,7 @@ import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
       <input scSlider [value]="value()" (input)="onInput($event)" />
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

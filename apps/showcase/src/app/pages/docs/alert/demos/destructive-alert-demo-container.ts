@@ -34,7 +34,7 @@ import { SiTriangleAlertIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-destructive-alert-demo',
   imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiTriangleAlertIcon],
   template: \`
-    <div scAlert variant="destructive">
+    <div scAlert variant="destructive" class="w-full max-w-lg">
       <svg siTriangleAlertIcon></svg>
       <div scAlertTitle>Error</div>
       <div scAlertDescription>
@@ -42,7 +42,7 @@ import { SiTriangleAlertIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

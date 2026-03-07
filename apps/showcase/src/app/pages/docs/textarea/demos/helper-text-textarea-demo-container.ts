@@ -41,7 +41,7 @@ import {
   selector: 'app-helper-text-textarea-demo',
   imports: [FormField, ScField, ScFieldDescription, ScLabel, ScTextarea],
   template: \`
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Bio</label>
       <textarea
         scTextarea
@@ -51,7 +51,7 @@ import {
       <p scFieldDescription>Your bio will be visible on your public profile.</p>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

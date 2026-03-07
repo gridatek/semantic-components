@@ -43,7 +43,7 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
       </div>
     </label>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

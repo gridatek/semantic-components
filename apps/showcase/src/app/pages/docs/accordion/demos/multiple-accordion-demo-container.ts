@@ -49,7 +49,7 @@ import {
     ScAccordionContent,
     ScAccordionBody,
   ],
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   template: \`
     <div scAccordionGroup [multiExpandable]="true" class="w-full max-w-lg">
       <div scAccordionItem>

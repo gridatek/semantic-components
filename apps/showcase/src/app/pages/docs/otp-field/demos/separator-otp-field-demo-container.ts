@@ -66,7 +66,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
       Value: {{ otp() || 'empty' }}
     </p>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -45,7 +45,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
       <sc-qr-code [value]="inputValue" [size]="200" />
     }
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
