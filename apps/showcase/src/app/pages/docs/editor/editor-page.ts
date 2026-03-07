@@ -6,10 +6,7 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicEditorDemoContainer } from './demos/basic-editor-demo-container';
-import { CustomHeightEditorDemoContainer } from './demos/custom-height-editor-demo-container';
 import { FullFeaturedEditorDemoContainer } from './demos/full-featured-editor-demo-container';
-import { MinimalToolbarEditorDemoContainer } from './demos/minimal-toolbar-editor-demo-container';
 import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
 import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
 import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
@@ -17,12 +14,9 @@ import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-contai
 @Component({
   selector: 'app-editor-page',
   imports: [
-    BasicEditorDemoContainer,
     PrefilledEditorDemoContainer,
-    MinimalToolbarEditorDemoContainer,
     NoCountEditorDemoContainer,
     ReadonlyEditorDemoContainer,
-    CustomHeightEditorDemoContainer,
     FullFeaturedEditorDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -41,12 +35,9 @@ import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-contai
 
       <section class="space-y-8">
         <h2 scHeading toc>Examples</h2>
-        <app-basic-editor-demo-container />
         <app-prefilled-editor-demo-container />
-        <app-minimal-toolbar-editor-demo-container />
         <app-no-count-editor-demo-container />
         <app-readonly-editor-demo-container />
-        <app-custom-height-editor-demo-container />
         <app-full-featured-editor-demo-container />
       </section>
     </div>
