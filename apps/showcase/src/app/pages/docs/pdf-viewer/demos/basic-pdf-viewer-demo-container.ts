@@ -24,17 +24,6 @@ export class BasicPdfViewerDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  SiChevronLeftIcon,
-  SiChevronRightIcon,
-  SiDownloadIcon,
-  SiMaximizeIcon,
-  SiPrinterIcon,
-  SiRotateCcwIcon,
-  SiRotateCwIcon,
-  SiZoomInIcon,
-  SiZoomOutIcon,
-} from '@semantic-icons/lucide-icons';
-import {
   ScPdfViewerContainer,
   ScPdfViewerContent,
   ScPdfViewerDownload,
@@ -58,6 +47,17 @@ import {
   ScPdfViewerZoomOut,
   ScPdfViewerZoomSelect,
 } from '@semantic-components/ui-lab';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiDownloadIcon,
+  SiMaximizeIcon,
+  SiPrinterIcon,
+  SiRotateCcwIcon,
+  SiRotateCwIcon,
+  SiZoomInIcon,
+  SiZoomOutIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-pdf-viewer-demo',
