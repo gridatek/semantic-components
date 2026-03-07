@@ -23,13 +23,16 @@ import { ScInput } from '@semantic-components/ui';
         />
         <div scFieldErrors></div>
       </div>
-      <pre class="mt-4 text-xs">
+      <div class="bg-muted mt-4 rounded-md p-4">
+        <p class="text-sm font-medium">Form State:</p>
+        <pre class="mt-2 text-xs">
 invalid: {{ emailForm.email().invalid() }}
 disabled: {{ emailForm.email().disabled() }}
 dirty: {{ emailForm.email().dirty() }}
 value: "{{ emailForm.email().value() }}"
-      </pre
-      >
+        </pre
+        >
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
