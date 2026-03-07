@@ -36,7 +36,7 @@ import {
 } from '@semantic-components/ui-lab';
 import {
   SiCheckIcon,
-  SiHomeIcon,
+  SiHouseIcon,
   SiPackageIcon,
   SiTruckIcon,
 } from '@semantic-icons/lucide-icons';
@@ -55,7 +55,7 @@ import {
     SiCheckIcon,
     SiPackageIcon,
     SiTruckIcon,
-    SiHomeIcon,
+    SiHouseIcon,
   ],
   template: \`
     <div class="rounded-lg border p-4">
@@ -98,7 +98,7 @@ import {
 
         <div scTimelineItem>
           <div scTimelineDot variant="outline" size="lg">
-            <svg siHomeIcon class="size-4"></svg>
+            <svg siHouseIcon class="size-4"></svg>
           </div>
           <div scTimelineContent>
             <h4 scTimelineTitle class="text-muted-foreground">Delivered</h4>

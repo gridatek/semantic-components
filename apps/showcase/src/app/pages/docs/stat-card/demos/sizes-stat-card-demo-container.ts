@@ -34,11 +34,11 @@ import {
   ScStatCardLabel,
   ScStatCardValue,
 } from '@semantic-components/ui-lab';
-import { SiBarChart3Icon } from '@semantic-icons/lucide-icons';
+import { SiChartBarBigIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sizes-stat-card-demo',
-  imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, SiBarChart3Icon],
+  imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, SiChartBarBigIcon],
   template: \`
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div scStatCard size="sm">
@@ -48,7 +48,7 @@ import { SiBarChart3Icon } from '@semantic-icons/lucide-icons';
             <p scStatCardValue size="sm">1,234</p>
           </div>
           <div scStatCardIcon size="sm">
-            <svg siBarChart3Icon></svg>
+            <svg siChartBarBigIcon></svg>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ import { SiBarChart3Icon } from '@semantic-icons/lucide-icons';
             <p scStatCardValue size="md">5,678</p>
           </div>
           <div scStatCardIcon size="md">
-            <svg siBarChart3Icon></svg>
+            <svg siChartBarBigIcon></svg>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@ import { SiBarChart3Icon } from '@semantic-icons/lucide-icons';
             <p scStatCardValue size="lg">9,012</p>
           </div>
           <div scStatCardIcon size="lg">
-            <svg siBarChart3Icon></svg>
+            <svg siChartBarBigIcon></svg>
           </div>
         </div>
       </div>

@@ -13,8 +13,8 @@ import { ScSelect } from './select';
 @Component({
   selector: '[scSelectDisplayValue]',
   template: `
-    {{ displayValue() }}
     <ng-content />
+    {{ displayValue() }}
   `,
   host: {
     'data-slot': 'select-display-value',
