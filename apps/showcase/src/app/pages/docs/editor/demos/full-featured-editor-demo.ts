@@ -113,11 +113,11 @@ import {
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
             <button scEditorUndo>
-              <svg siUndoIcon class="size-4"></svg>
+              <svg siUndoIcon></svg>
               <span class="sr-only">Undo</span>
             </button>
             <button scEditorRedo>
-              <svg siRedoIcon class="size-4"></svg>
+              <svg siRedoIcon></svg>
               <span class="sr-only">Redo</span>
             </button>
           </div>
@@ -132,19 +132,19 @@ import {
 
           <div scEditorToolbarGroup>
             <button scEditorBoldToggle>
-              <svg siBoldIcon class="size-4"></svg>
+              <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
             <button scEditorItalicToggle>
-              <svg siItalicIcon class="size-4"></svg>
+              <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
             <button scEditorUnderlineToggle>
-              <svg siUnderlineIcon class="size-4"></svg>
+              <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
             <button scEditorStrikethroughToggle>
-              <svg siStrikethroughIcon class="size-4"></svg>
+              <svg siStrikethroughIcon></svg>
               <span class="sr-only">Strikethrough</span>
             </button>
           </div>
@@ -153,19 +153,19 @@ import {
 
           <div scEditorToolbarGroup>
             <button scEditorAlignLeftToggle>
-              <svg siTextAlignStartIcon class="size-4"></svg>
+              <svg siTextAlignStartIcon></svg>
               <span class="sr-only">Align left</span>
             </button>
             <button scEditorAlignCenterToggle>
-              <svg siTextAlignCenterIcon class="size-4"></svg>
+              <svg siTextAlignCenterIcon></svg>
               <span class="sr-only">Align center</span>
             </button>
             <button scEditorAlignRightToggle>
-              <svg siTextAlignEndIcon class="size-4"></svg>
+              <svg siTextAlignEndIcon></svg>
               <span class="sr-only">Align right</span>
             </button>
             <button scEditorAlignJustifyToggle>
-              <svg siTextAlignJustifyIcon class="size-4"></svg>
+              <svg siTextAlignJustifyIcon></svg>
               <span class="sr-only">Align justify</span>
             </button>
           </div>
@@ -174,11 +174,11 @@ import {
 
           <div scEditorToolbarGroup>
             <button scEditorBulletListToggle>
-              <svg siListIcon class="size-4"></svg>
+              <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
             <button scEditorNumberedListToggle>
-              <svg siListOrderedIcon class="size-4"></svg>
+              <svg siListOrderedIcon></svg>
               <span class="sr-only">Numbered list</span>
             </button>
           </div>
@@ -187,19 +187,19 @@ import {
 
           <div scEditorToolbarGroup>
             <button scEditorLink>
-              <svg siLinkIcon class="size-4"></svg>
+              <svg siLinkIcon></svg>
               <span class="sr-only">Insert link</span>
             </button>
             <button scEditorBlockquoteToggle>
-              <svg siQuoteIcon class="size-4"></svg>
+              <svg siQuoteIcon></svg>
               <span class="sr-only">Blockquote</span>
             </button>
             <button scEditorCode>
-              <svg siCodeIcon class="size-4"></svg>
+              <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>
             <button scEditorHorizontalRule>
-              <svg siMinusIcon class="size-4"></svg>
+              <svg siMinusIcon></svg>
               <span class="sr-only">Horizontal rule</span>
             </button>
           </div>
@@ -208,7 +208,7 @@ import {
 
           <div scEditorToolbarGroup>
             <button scEditorClearFormatting>
-              <svg siRemoveFormattingIcon class="size-4"></svg>
+              <svg siRemoveFormattingIcon></svg>
               <span class="sr-only">Clear formatting</span>
             </button>
           </div>
