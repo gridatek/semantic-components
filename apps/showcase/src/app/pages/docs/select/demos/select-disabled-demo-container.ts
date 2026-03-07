@@ -33,10 +33,11 @@ import {
   ScSelectDisplayValue,
   ScSelectIcon,
   ScSelectInput,
-  ScSelectOrigin,
   ScSelectItem,
   ScSelectItemIndicator,
+  ScSelectItemLabel,
   ScSelectList,
+  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
 } from '@semantic-components/ui';
@@ -55,6 +56,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectIcon,
     ScSelectInput,
     ScSelectItemIndicator,
+    ScSelectItemLabel,
     SiChevronDownIcon,
     SiCheckIcon,
   ],
@@ -73,15 +75,15 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         <div scSelectPopup>
           <div scSelectList>
             <div scSelectItem value="Apple" label="Apple">
-              Apple
+              <span scSelectItemLabel>Apple</span>
               <svg scSelectItemIndicator siCheckIcon></svg>
             </div>
             <div scSelectItem value="Banana" label="Banana">
-              Banana
+              <span scSelectItemLabel>Banana</span>
               <svg scSelectItemIndicator siCheckIcon></svg>
             </div>
             <div scSelectItem value="Orange" label="Orange">
-              Orange
+              <span scSelectItemLabel>Orange</span>
               <svg scSelectItemIndicator siCheckIcon></svg>
             </div>
           </div>
