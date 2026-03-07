@@ -47,6 +47,9 @@ import { ScToaster } from './toaster';
         (animationend)="onAnimationEnd($event, toast.id)"
         (pointerEnter)="toastService.pause(toast.id)"
         (pointerLeave)="toastService.resume(toast.id)"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd($event, toast.id)"
       >
         @switch (toast.variant) {
           @case ('success') {
@@ -106,6 +109,8 @@ import { ScToaster } from './toaster';
 export class ScToastStack {
   protected readonly toastService = inject(ScToaster);
 
+  private readonly swipeThreshold = 100;
+
   private readonly positionClasses: Record<ScToastPosition, string> = {
     'top-left': 'fixed top-0 left-0 flex-col-reverse',
     'top-center': 'fixed top-0 left-1/2 -translate-x-1/2 flex-col-reverse',
@@ -137,6 +142,38 @@ export class ScToastStack {
     const toast = this.toastService.toasts().find((t) => t.id === id);
     if (toast?.state === 'closed') {
       this.toastService.remove(id);
+    }
+  }
+
+  protected onTouchStart(event: TouchEvent): void {
+    const el = event.currentTarget as HTMLElement;
+    el.dataset['swipeStartX'] = String(event.touches[0].clientX);
+    el.style.transition = 'none';
+  }
+
+  protected onTouchMove(event: TouchEvent): void {
+    const el = event.currentTarget as HTMLElement;
+    const startX = Number(el.dataset['swipeStartX'] ?? 0);
+    const deltaX = event.touches[0].clientX - startX;
+
+    el.style.transform = `translateX(${deltaX}px)`;
+    el.style.opacity = String(
+      Math.max(0, 1 - Math.abs(deltaX) / this.swipeThreshold),
+    );
+  }
+
+  protected onTouchEnd(event: TouchEvent, id: string): void {
+    const el = event.currentTarget as HTMLElement;
+    const startX = Number(el.dataset['swipeStartX'] ?? 0);
+    const deltaX = event.changedTouches[0].clientX - startX;
+
+    if (Math.abs(deltaX) >= this.swipeThreshold) {
+      this.toastService.dismiss(id);
+    } else {
+      // Snap back
+      el.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+      el.style.transform = '';
+      el.style.opacity = '';
     }
   }
 }
