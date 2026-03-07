@@ -14,7 +14,7 @@ import {
   selector: 'app-textarea-input-group-demo',
   imports: [ScInputGroup, ScInputGroupAddon, ScInputGroupText, ScTextarea],
   template: `
-    <div scInputGroup>
+    <div scInputGroup class="w-full max-w-sm">
       <textarea
         scTextarea
         variant="group"

@@ -10,7 +10,7 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-file-input-demo',
   imports: [ScField, ScInput, ScLabel],
   template: `
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Upload file</label>
       <input scInput type="file" />
     </div>

@@ -24,7 +24,7 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div scInputGroup>
+    <div scInputGroup class="w-full max-w-sm">
       <div scInputGroupAddon>
         <span scInputGroupText>
           <svg siSearchIcon></svg>

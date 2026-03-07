@@ -21,7 +21,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
     SiMailIcon,
   ],
   template: `
-    <div scInputGroup>
+    <div scInputGroup class="w-full max-w-sm">
       <div scInputGroupAddon>
         <span scInputGroupText>
           <svg siMailIcon></svg>

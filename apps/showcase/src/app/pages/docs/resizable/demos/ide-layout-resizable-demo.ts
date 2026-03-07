@@ -16,7 +16,7 @@ import {
     <div
       scResizablePanelGroup
       direction="horizontal"
-      class="min-h-[400px] rounded-lg border"
+      class="min-h-[400px] w-full max-w-4xl rounded-lg border"
     >
       <div scResizablePanel [defaultSize]="20" [minSize]="15" [maxSize]="30">
         <div class="bg-muted/30 flex h-full flex-col">

@@ -9,7 +9,7 @@ import { ScSkeleton } from '@semantic-components/ui';
   selector: 'app-table-skeleton-demo',
   imports: [ScSkeleton],
   template: `
-    <div class="rounded-md border">
+    <div class="w-full max-w-2xl rounded-md border">
       <div class="border-b p-4">
         <div class="flex items-center space-x-4">
           <div scSkeleton class="h-4 w-[100px]"></div>
