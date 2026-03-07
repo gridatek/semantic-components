@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorAlignRight]',
+  selector: 'button[scEditorBulletListToggle]',
   host: {
-    'data-slot': 'editor-align-right',
+    'data-slot': 'editor-bullet-list',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.alignment() === "right"',
-    '[attr.title]': '"Align right"',
+    '[attr.aria-pressed]': 'editor.isUnorderedList()',
+    '[attr.title]': '"Bullet list"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorAlignRightButton {
+export class ScEditorBulletListToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorAlignRightButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('justifyRight');
+    this.editor.execCommand('insertUnorderedList');
   }
 }

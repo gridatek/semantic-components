@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorAlignCenter]',
+  selector: 'button[scEditorNumberedListToggle]',
   host: {
-    'data-slot': 'editor-align-center',
+    'data-slot': 'editor-numbered-list',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.alignment() === "center"',
-    '[attr.title]': '"Align center"',
+    '[attr.aria-pressed]': 'editor.isOrderedList()',
+    '[attr.title]': '"Numbered list"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorAlignCenterButton {
+export class ScEditorNumberedListToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorAlignCenterButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('justifyCenter');
+    this.editor.execCommand('insertOrderedList');
   }
 }

@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorStrikethrough]',
+  selector: 'button[scEditorBoldToggle]',
   host: {
-    'data-slot': 'editor-strikethrough',
+    'data-slot': 'editor-bold',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.isStrikethrough()',
-    '[attr.title]': '"Strikethrough"',
+    '[attr.aria-pressed]': 'editor.isBold()',
+    '[attr.title]': '"Bold (Ctrl+B)"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorStrikethroughButton {
+export class ScEditorBoldToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorStrikethroughButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('strikethrough');
+    this.editor.execCommand('bold');
   }
 }

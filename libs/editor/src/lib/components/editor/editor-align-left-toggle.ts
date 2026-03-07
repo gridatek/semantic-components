@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorBlockquote]',
+  selector: 'button[scEditorAlignLeftToggle]',
   host: {
-    'data-slot': 'editor-blockquote',
+    'data-slot': 'editor-align-left',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.isBlockquote()',
-    '[attr.title]': '"Blockquote"',
+    '[attr.aria-pressed]': 'editor.alignment() === "left"',
+    '[attr.title]': '"Align left"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorBlockquoteButton {
+export class ScEditorAlignLeftToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorBlockquoteButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('formatBlock', 'blockquote');
+    this.editor.execCommand('justifyLeft');
   }
 }

@@ -183,8 +183,8 @@ export default class EditorInstallPage {
   ScEditor,
   ScEditorContent,
   ScEditorToolbar,
-  ScEditorBoldButton,
-  ScEditorItalicButton,
+  ScEditorBoldToggle,
+  ScEditorItalicToggle,
 } from '@semantic-components/editor';
 
 @Component({
@@ -193,8 +193,8 @@ export default class EditorInstallPage {
     ScEditor,
     ScEditorContent,
     ScEditorToolbar,
-    ScEditorBoldButton,
-    ScEditorItalicButton,
+    ScEditorBoldToggle,
+    ScEditorItalicToggle,
   ],
   template: \`
     <div scEditor>

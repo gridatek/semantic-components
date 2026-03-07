@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorBold]',
+  selector: 'button[scEditorBlockquoteToggle]',
   host: {
-    'data-slot': 'editor-bold',
+    'data-slot': 'editor-blockquote',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.isBold()',
-    '[attr.title]': '"Bold (Ctrl+B)"',
+    '[attr.aria-pressed]': 'editor.isBlockquote()',
+    '[attr.title]': '"Blockquote"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorBoldButton {
+export class ScEditorBlockquoteToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorBoldButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('bold');
+    this.editor.execCommand('formatBlock', 'blockquote');
   }
 }

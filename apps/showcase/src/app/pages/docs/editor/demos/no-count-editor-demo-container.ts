@@ -31,15 +31,15 @@ export class NoCountEditorDemoContainer {
 } from '@angular/core';
 import {
   ScEditor,
-  ScEditorBoldButton,
-  ScEditorBulletListButton,
+  ScEditorBoldToggle,
+  ScEditorBulletListToggle,
   ScEditorContent,
-  ScEditorItalicButton,
-  ScEditorNumberedListButton,
+  ScEditorItalicToggle,
+  ScEditorNumberedListToggle,
   ScEditorSeparator,
   ScEditorToolbar,
   ScEditorToolbarGroup,
-  ScEditorUnderlineButton,
+  ScEditorUnderlineToggle,
 } from '@semantic-components/editor';
 import {
   SiBoldIcon,
@@ -56,12 +56,12 @@ import {
     ScEditorContent,
     ScEditorToolbar,
     ScEditorToolbarGroup,
-    ScEditorBoldButton,
-    ScEditorItalicButton,
-    ScEditorUnderlineButton,
+    ScEditorBoldToggle,
+    ScEditorItalicToggle,
+    ScEditorUnderlineToggle,
     ScEditorSeparator,
-    ScEditorBulletListButton,
-    ScEditorNumberedListButton,
+    ScEditorBulletListToggle,
+    ScEditorNumberedListToggle,
     SiBoldIcon,
     SiItalicIcon,
     SiUnderlineIcon,
@@ -73,15 +73,15 @@ import {
       <div scEditor class="overflow-hidden rounded-lg border">
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
-            <button scEditorBold>
+            <button scEditorBoldToggle>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic>
+            <button scEditorItalicToggle>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorUnderline>
+            <button scEditorUnderlineToggle>
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
@@ -90,11 +90,11 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorBulletList>
+            <button scEditorBulletListToggle>
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scEditorNumberedList>
+            <button scEditorNumberedListToggle>
               <svg siListOrderedIcon></svg>
               <span class="sr-only">Numbered list</span>
             </button>

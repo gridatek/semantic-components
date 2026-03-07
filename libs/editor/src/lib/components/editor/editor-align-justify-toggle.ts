@@ -3,7 +3,7 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorAlignJustify]',
+  selector: 'button[scEditorAlignJustifyToggle]',
   host: {
     'data-slot': 'editor-align-justify',
     type: 'button',
@@ -15,7 +15,7 @@ import { SC_EDITOR } from './editor';
     '(click)': 'onClick()',
   },
 })
-export class ScEditorAlignJustifyButton {
+export class ScEditorAlignJustifyToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 

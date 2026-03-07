@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorAlignLeft]',
+  selector: 'button[scEditorStrikethroughToggle]',
   host: {
-    'data-slot': 'editor-align-left',
+    'data-slot': 'editor-strikethrough',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.alignment() === "left"',
-    '[attr.title]': '"Align left"',
+    '[attr.aria-pressed]': 'editor.isStrikethrough()',
+    '[attr.title]': '"Strikethrough"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorAlignLeftButton {
+export class ScEditorStrikethroughToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorAlignLeftButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('justifyLeft');
+    this.editor.execCommand('strikethrough');
   }
 }

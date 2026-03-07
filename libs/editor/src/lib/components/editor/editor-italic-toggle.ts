@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorNumberedList]',
+  selector: 'button[scEditorItalicToggle]',
   host: {
-    'data-slot': 'editor-numbered-list',
+    'data-slot': 'editor-italic',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.isOrderedList()',
-    '[attr.title]': '"Numbered list"',
+    '[attr.aria-pressed]': 'editor.isItalic()',
+    '[attr.title]': '"Italic (Ctrl+I)"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorNumberedListButton {
+export class ScEditorItalicToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorNumberedListButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('insertOrderedList');
+    this.editor.execCommand('italic');
   }
 }

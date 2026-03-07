@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorUnderline]',
+  selector: 'button[scEditorAlignCenterToggle]',
   host: {
-    'data-slot': 'editor-underline',
+    'data-slot': 'editor-align-center',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.isUnderline()',
-    '[attr.title]': '"Underline (Ctrl+U)"',
+    '[attr.aria-pressed]': 'editor.alignment() === "center"',
+    '[attr.title]': '"Align center"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorUnderlineButton {
+export class ScEditorAlignCenterToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorUnderlineButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('underline');
+    this.editor.execCommand('justifyCenter');
   }
 }

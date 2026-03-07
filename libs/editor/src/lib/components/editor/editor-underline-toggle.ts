@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorBulletList]',
+  selector: 'button[scEditorUnderlineToggle]',
   host: {
-    'data-slot': 'editor-bullet-list',
+    'data-slot': 'editor-underline',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.isUnorderedList()',
-    '[attr.title]': '"Bullet list"',
+    '[attr.aria-pressed]': 'editor.isUnderline()',
+    '[attr.title]': '"Underline (Ctrl+U)"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorBulletListButton {
+export class ScEditorUnderlineToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorBulletListButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('insertUnorderedList');
+    this.editor.execCommand('underline');
   }
 }

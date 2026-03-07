@@ -11,29 +11,29 @@ export * from './editor-header';
 export * from './editor-footer';
 export * from './editor-separator';
 
-// Formatting buttons
-export * from './editor-bold-button';
-export * from './editor-italic-button';
-export * from './editor-underline-button';
-export * from './editor-strikethrough-button';
+// Formatting toggles
+export * from './editor-bold-toggle';
+export * from './editor-italic-toggle';
+export * from './editor-underline-toggle';
+export * from './editor-strikethrough-toggle';
 
-// History buttons
+// Alignment toggles
+export * from './editor-align-left-toggle';
+export * from './editor-align-center-toggle';
+export * from './editor-align-right-toggle';
+export * from './editor-align-justify-toggle';
+
+// List toggles
+export * from './editor-bullet-list-toggle';
+export * from './editor-numbered-list-toggle';
+
+// Block toggles
+export * from './editor-blockquote-toggle';
+
+// Action buttons
 export * from './editor-undo-button';
 export * from './editor-redo-button';
-
-// Alignment buttons
-export * from './editor-align-left-button';
-export * from './editor-align-center-button';
-export * from './editor-align-right-button';
-export * from './editor-align-justify-button';
-
-// List buttons
-export * from './editor-bullet-list-button';
-export * from './editor-numbered-list-button';
-
-// Content buttons
 export * from './editor-link-button';
-export * from './editor-blockquote-button';
 export * from './editor-code-button';
 export * from './editor-horizontal-rule-button';
 export * from './editor-clear-formatting-button';

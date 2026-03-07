@@ -3,19 +3,19 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorItalic]',
+  selector: 'button[scEditorAlignRightToggle]',
   host: {
-    'data-slot': 'editor-italic',
+    'data-slot': 'editor-align-right',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'editor.disabled()',
     '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.aria-pressed]': 'editor.isItalic()',
-    '[attr.title]': '"Italic (Ctrl+I)"',
+    '[attr.aria-pressed]': 'editor.alignment() === "right"',
+    '[attr.title]': '"Align right"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorItalicButton {
+export class ScEditorAlignRightToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,6 +27,6 @@ export class ScEditorItalicButton {
   );
 
   onClick(): void {
-    this.editor.execCommand('italic');
+    this.editor.execCommand('justifyRight');
   }
 }
