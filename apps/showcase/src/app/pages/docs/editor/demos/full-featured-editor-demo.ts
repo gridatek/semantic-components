@@ -214,7 +214,12 @@ import {
           </div>
         </div>
 
-        <div scEditorContent [(value)]="content" minHeight="250px"></div>
+        <div
+          scEditorContent
+          [(value)]="content"
+          class="max-h-[500px] min-h-[300px]"
+          placeholder="Start writing your content..."
+        ></div>
 
         <div scEditorFooter>
           <div scEditorCount>
