@@ -22,13 +22,16 @@ import { ScInput } from '@semantic-components/ui';
           placeholder="Disabled input"
         />
       </div>
-      <pre class="mt-4 text-xs">
+      <div class="bg-muted mt-4 rounded-md p-4">
+        <p class="text-sm font-medium">Form State:</p>
+        <pre class="mt-2 text-xs">
 invalid: {{ disabledForm.text().invalid() }}
 disabled: {{ disabledForm.text().disabled() }}
 dirty: {{ disabledForm.text().dirty() }}
 value: "{{ disabledForm.text().value() }}"
-      </pre
-      >
+        </pre
+        >
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
