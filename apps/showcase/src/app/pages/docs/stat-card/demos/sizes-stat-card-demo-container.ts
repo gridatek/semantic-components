@@ -38,7 +38,13 @@ import { SiChartBarBigIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sizes-stat-card-demo',
-  imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardIcon, SiChartBarBigIcon],
+  imports: [
+    ScStatCard,
+    ScStatCardLabel,
+    ScStatCardValue,
+    ScStatCardIcon,
+    SiChartBarBigIcon,
+  ],
   template: \`
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div scStatCard size="sm">

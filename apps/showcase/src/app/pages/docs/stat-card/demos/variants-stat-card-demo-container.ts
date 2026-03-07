@@ -41,7 +41,14 @@ import {
 
 @Component({
   selector: 'app-variants-stat-card-demo',
-  imports: [ScStatCard, ScStatCardLabel, ScStatCardValue, ScStatCardChange, SiChevronUpIcon, SiChevronDownIcon],
+  imports: [
+    ScStatCard,
+    ScStatCardLabel,
+    ScStatCardValue,
+    ScStatCardChange,
+    SiChevronUpIcon,
+    SiChevronDownIcon,
+  ],
   template: \`
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       <div scStatCard variant="default">
