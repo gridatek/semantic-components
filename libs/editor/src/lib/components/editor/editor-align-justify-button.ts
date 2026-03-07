@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
@@ -21,9 +21,7 @@ export class ScEditorAlignJustifyButton {
 
   protected readonly class = computed(() =>
     cn(
-      buttonVariants({ variant: 'ghost', size: 'icon' }),
-      this.editor.alignment() === 'justify' &&
-        'bg-accent text-accent-foreground',
+      toggleVariants({ variant: 'default', size: 'default' }),
       this.classInput(),
     ),
   );
