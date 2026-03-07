@@ -235,6 +235,13 @@ import {
           Insert Sample Content
         </button>
       </div>
+
+      <div class="mt-4">
+        <h4 class="mb-2 text-sm font-medium">HTML Output:</h4>
+        <pre class="bg-muted max-h-32 overflow-x-auto rounded-lg p-3 text-xs">{{
+          content()
+        }}</pre>
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
