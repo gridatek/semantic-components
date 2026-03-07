@@ -23,9 +23,8 @@ const HEADING_OPTIONS: { value: string; label: string }[] = [
   selector: 'select[scEditorHeading]',
   host: {
     'data-slot': 'editor-heading',
-    'aria-label': 'Text style',
     '[class]': 'class()',
-    '[disabled]': 'editor.disabled()',
+    '[disabled]': 'disabled()',
     '[value]': 'editor.currentHeading()',
     '(change)': 'onChange($event)',
   },
@@ -34,12 +33,17 @@ export class ScEditorHeadingSelect {
   readonly editor = inject(SC_EDITOR);
   private readonly elementRef = inject(ElementRef<HTMLSelectElement>);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly disabledInput = input(false, { alias: 'disabled' });
 
   protected readonly class = computed(() =>
     cn(
       'appearance-none pl-2 pr-6 py-1 text-sm rounded border-0 bg-transparent hover:bg-accent cursor-pointer',
       this.classInput(),
     ),
+  );
+
+  protected readonly disabled = computed(
+    () => this.disabledInput() || this.editor.disabled(),
   );
 
   constructor() {

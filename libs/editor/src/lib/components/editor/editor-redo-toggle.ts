@@ -3,17 +3,16 @@ import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorAlignLeftToggle]',
+  selector: 'button[scEditorRedoToggle]',
   host: {
     'data-slot': 'editor-toggle',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': 'editor.alignment() === "left"',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorAlignLeftToggle {
+export class ScEditorRedoToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
@@ -26,10 +25,11 @@ export class ScEditorAlignLeftToggle {
   );
 
   protected readonly disabled = computed(
-    () => this.disabledInput() || this.editor.disabled(),
+    () =>
+      this.disabledInput() || this.editor.disabled() || !this.editor.canRedo(),
   );
 
   onClick(): void {
-    this.editor.execCommand('justifyLeft');
+    this.editor.execCommand('redo');
   }
 }
