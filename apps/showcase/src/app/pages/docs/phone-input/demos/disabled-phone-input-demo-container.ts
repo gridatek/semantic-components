@@ -35,7 +35,7 @@ import { ScPhoneInput, ScPhoneInputSimple } from '@semantic-components/ui-lab';
       <sc-phone-input-simple [disabled]="true" />
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -36,7 +36,7 @@ import { ScToaster } from '@semantic-components/ui';
       Show Toast
     </button>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -48,7 +48,7 @@ import {
     ScInput,
   ],
   template: \`
-    <div scFieldGroup>
+    <div scFieldGroup class="w-full max-w-sm">
       <div scField>
         <label scLabel>Email</label>
         <input scInput type="email" placeholder="Enter your email" />
@@ -69,7 +69,7 @@ import {
       </div>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

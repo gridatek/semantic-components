@@ -63,7 +63,7 @@ interface UserFormModel {
     FormField,
   ],
   template: \`
-    <form>
+    <form class="w-[60%]">
       <div scFieldGroup>
         <div scField>
           <label scLabel>Form Completion</label>
@@ -111,7 +111,7 @@ interface UserFormModel {
       </div>
     </form>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -35,7 +35,7 @@ import { ScTimezoneDisplay } from '@semantic-components/ui-lab';
       <span class="text-muted-foreground text-sm">Clock icon only</span>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

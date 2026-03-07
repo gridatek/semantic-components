@@ -37,24 +37,26 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-disabled-input-demo',
   imports: [FormField, ScField, ScInput, ScLabel],
   template: \`
-    <div scField>
-      <label scLabel>Disabled</label>
-      <input
-        scInput
-        type="text"
-        [formField]="disabledForm.text"
-        placeholder="Disabled input"
-      />
-    </div>
-    <pre class="mt-4 text-xs">
+    <div class="w-full max-w-sm">
+      <div scField>
+        <label scLabel>Disabled</label>
+        <input
+          scInput
+          type="text"
+          [formField]="disabledForm.text"
+          placeholder="Disabled input"
+        />
+      </div>
+      <pre class="mt-4 text-xs">
 invalid: {{ disabledForm.text().invalid() }}
 disabled: {{ disabledForm.text().disabled() }}
 dirty: {{ disabledForm.text().dirty() }}
 value: "{{ disabledForm.text().value() }}"
-    </pre
-    >
+      </pre
+      >
+    </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

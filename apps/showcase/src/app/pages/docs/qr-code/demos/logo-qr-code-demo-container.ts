@@ -42,7 +42,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
       [logoSize]="0.25"
     />
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

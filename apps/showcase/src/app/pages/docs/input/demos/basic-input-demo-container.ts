@@ -37,7 +37,7 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-basic-input-demo',
   imports: [FormField, ScField, ScInput, ScLabel],
   template: \`
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Text</label>
       <input
         scInput
@@ -47,7 +47,7 @@ import { ScInput } from '@semantic-components/ui';
       />
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

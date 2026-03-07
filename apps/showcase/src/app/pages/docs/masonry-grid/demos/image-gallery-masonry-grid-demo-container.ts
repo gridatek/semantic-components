@@ -54,7 +54,7 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
       }
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

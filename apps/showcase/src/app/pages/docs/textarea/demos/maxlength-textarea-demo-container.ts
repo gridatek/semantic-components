@@ -41,7 +41,7 @@ import {
   selector: 'app-maxlength-textarea-demo',
   imports: [FormField, ScField, ScFieldDescription, ScLabel, ScTextarea],
   template: \`
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Description</label>
       <textarea
         scTextarea
@@ -51,7 +51,7 @@ import {
       <p scFieldDescription>Max 200 characters.</p>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

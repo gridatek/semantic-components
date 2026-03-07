@@ -92,7 +92,7 @@ import { SiInfoIcon } from '@semantic-icons/lucide-icons';
       </sc-spotlight>
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
