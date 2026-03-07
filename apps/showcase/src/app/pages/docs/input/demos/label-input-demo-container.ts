@@ -37,23 +37,28 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-label-input-demo',
   imports: [FormField, ScField, ScFieldErrors, ScInput, ScLabel],
   template: \`
-    <div scField>
-      <label scLabel>Email</label>
-      <input
-        scInput
-        type="email"
-        [formField]="emailForm.email"
-        placeholder="Email"
-      />
-      <div scFieldErrors></div>
-    </div>
-    <pre class="mt-4 text-xs">
+    <div class="w-full max-w-sm">
+      <div scField>
+        <label scLabel>Email</label>
+        <input
+          scInput
+          type="email"
+          [formField]="emailForm.email"
+          placeholder="Email"
+        />
+        <div scFieldErrors></div>
+      </div>
+      <div class="bg-muted mt-4 rounded-md p-4">
+        <p class="text-sm font-medium">Form State:</p>
+        <pre class="mt-2 text-xs">
 invalid: {{ emailForm.email().invalid() }}
 disabled: {{ emailForm.email().disabled() }}
 dirty: {{ emailForm.email().dirty() }}
 value: "{{ emailForm.email().value() }}"
-    </pre
-    >
+        </pre
+        >
+      </div>
+    </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

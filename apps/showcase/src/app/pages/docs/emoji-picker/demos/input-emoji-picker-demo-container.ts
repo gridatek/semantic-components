@@ -32,7 +32,7 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-input-emoji-picker-demo',
   imports: [ScEmojiPicker, ScInput, SiSmileIcon],
   template: \`
-    <div class="flex items-start gap-2">
+    <div class="flex w-full max-w-sm items-start gap-2">
       <div class="flex-1">
         <div class="relative">
           <input

@@ -239,7 +239,12 @@ import {
           </div>
         </div>
 
-        <div scEditorContent [(value)]="content" minHeight="250px"></div>
+        <div
+          scEditorContent
+          [(value)]="content"
+          class="max-h-[500px] min-h-[300px]"
+          placeholder="Start writing your content..."
+        ></div>
 
         <div scEditorFooter>
           <div scEditorCount>
@@ -259,6 +264,13 @@ import {
         <button scButton (click)="insertSampleContent()">
           Insert Sample Content
         </button>
+      </div>
+
+      <div class="mt-4">
+        <h4 class="mb-2 text-sm font-medium">HTML Output:</h4>
+        <pre class="bg-muted max-h-32 overflow-x-auto rounded-lg p-3 text-xs">{{
+          content()
+        }}</pre>
       </div>
     </div>
   \`,

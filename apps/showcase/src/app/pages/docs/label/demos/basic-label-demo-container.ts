@@ -35,7 +35,7 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-basic-label-demo',
   imports: [ScField, ScInput, ScLabel],
   template: \`
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Email</label>
       <input scInput type="email" placeholder="Enter your email" />
     </div>

@@ -30,7 +30,7 @@ import { ScSkeleton } from '@semantic-components/ui';
   selector: 'app-list-skeleton-demo',
   imports: [ScSkeleton],
   template: \`
-    <div class="space-y-3">
+    <div class="w-full max-w-sm space-y-3">
       @for (i of [1, 2, 3, 4]; track i) {
         <div class="flex items-center space-x-4">
           <div scSkeleton class="size-10 rounded-full"></div>

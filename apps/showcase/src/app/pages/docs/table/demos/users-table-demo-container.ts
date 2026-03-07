@@ -48,7 +48,7 @@ import {
     ScTableRow,
   ],
   template: \`
-    <div class="rounded-md border">
+    <div class="w-full max-w-2xl rounded-md border">
       <table scTable>
         <thead scTableHeader>
           <tr scTableRow>
