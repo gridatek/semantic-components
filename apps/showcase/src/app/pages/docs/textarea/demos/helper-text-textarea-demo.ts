@@ -16,7 +16,7 @@ import {
   selector: 'app-helper-text-textarea-demo',
   imports: [FormField, ScField, ScFieldDescription, ScLabel, ScTextarea],
   template: `
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Bio</label>
       <textarea
         scTextarea

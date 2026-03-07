@@ -27,7 +27,7 @@ import {
     ScTimelineTime,
   ],
   template: `
-    <div scTimeline class="ml-4">
+    <div scTimeline class="ml-4 w-full max-w-2xl">
       <div scTimelineItem>
         <div scTimelineConnector></div>
         <div scTimelineDot></div>

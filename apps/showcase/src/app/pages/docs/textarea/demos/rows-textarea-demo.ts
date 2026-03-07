@@ -11,7 +11,7 @@ import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
   selector: 'app-rows-textarea-demo',
   imports: [FormField, ScField, ScLabel, ScTextarea],
   template: `
-    <div class="grid w-full gap-4">
+    <div class="grid w-full max-w-sm gap-4">
       <div scField>
         <label scLabel>Small (2 rows)</label>
         <textarea

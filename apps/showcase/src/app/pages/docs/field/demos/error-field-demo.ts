@@ -24,7 +24,7 @@ import { ScInput } from '@semantic-components/ui';
     ScLabel,
   ],
   template: `
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Password</label>
       <input
         scInput

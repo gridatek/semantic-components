@@ -11,7 +11,7 @@ import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
   selector: 'app-basic-textarea-demo',
   imports: [FormField, ScField, ScLabel, ScTextarea],
   template: `
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Your message</label>
       <textarea
         scTextarea

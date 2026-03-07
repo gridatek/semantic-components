@@ -23,7 +23,7 @@ import {
     ScTimelineTime,
   ],
   template: `
-    <div class="rounded-lg border p-4">
+    <div class="w-full max-w-2xl rounded-lg border p-4">
       <h4 class="mb-4 font-semibold">Recent Activity</h4>
       <div scTimeline class="ml-2">
         <div scTimelineItem class="pb-4">

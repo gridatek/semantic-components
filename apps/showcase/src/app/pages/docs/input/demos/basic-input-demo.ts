@@ -12,7 +12,7 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-basic-input-demo',
   imports: [FormField, ScField, ScInput, ScLabel],
   template: `
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Text</label>
       <input
         scInput

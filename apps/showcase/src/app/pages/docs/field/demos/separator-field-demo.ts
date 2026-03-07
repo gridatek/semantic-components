@@ -23,7 +23,7 @@ import {
     ScInput,
   ],
   template: `
-    <div scFieldGroup>
+    <div scFieldGroup class="w-full max-w-sm">
       <div scField>
         <label scLabel>Email</label>
         <input scInput type="email" placeholder="Enter your email" />

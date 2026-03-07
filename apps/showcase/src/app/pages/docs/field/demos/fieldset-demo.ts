@@ -25,7 +25,7 @@ import { ScInput } from '@semantic-components/ui';
     ScInput,
   ],
   template: `
-    <fieldset scFieldset>
+    <fieldset scFieldset class="w-full max-w-2xl">
       <legend scLegend>Personal Information</legend>
       <p scFieldDescription>Please provide your personal details below.</p>
 

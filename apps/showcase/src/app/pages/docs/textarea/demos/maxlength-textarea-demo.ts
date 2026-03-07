@@ -16,7 +16,7 @@ import {
   selector: 'app-maxlength-textarea-demo',
   imports: [FormField, ScField, ScFieldDescription, ScLabel, ScTextarea],
   template: `
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Description</label>
       <textarea
         scTextarea

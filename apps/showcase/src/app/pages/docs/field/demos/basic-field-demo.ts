@@ -10,7 +10,7 @@ import { ScInput } from '@semantic-components/ui';
   selector: 'app-basic-field-demo',
   imports: [ScField, ScLabel, ScFieldDescription, ScInput],
   template: `
-    <div scField>
+    <div scField class="w-full max-w-sm">
       <label scLabel>Email</label>
       <input scInput type="email" placeholder="Enter your email" />
       <p scFieldDescription>We'll never share your email with anyone else.</p>
