@@ -6,7 +6,6 @@ import { cn } from '@semantic-components/ui';
   host: {
     'data-slot': 'editor-toolbar',
     role: 'toolbar',
-    '[attr.aria-label]': '"Text formatting"',
     '[class]': 'class()',
   },
 })

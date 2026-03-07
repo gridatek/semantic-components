@@ -5,25 +5,28 @@ import { SC_EDITOR } from './editor';
 @Directive({
   selector: 'button[scEditorStrikethroughToggle]',
   host: {
-    'data-slot': 'editor-strikethrough',
+    'data-slot': 'editor-toggle',
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'editor.disabled()',
-    '[attr.aria-disabled]': 'editor.disabled() || null',
+    '[disabled]': 'disabled()',
     '[attr.aria-pressed]': 'editor.isStrikethrough()',
-    '[attr.title]': '"Strikethrough"',
     '(click)': 'onClick()',
   },
 })
 export class ScEditorStrikethroughToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly disabledInput = input(false, { alias: 'disabled' });
 
   protected readonly class = computed(() =>
     cn(
       toggleVariants({ variant: 'default', size: 'default' }),
       this.classInput(),
     ),
+  );
+
+  protected readonly disabled = computed(
+    () => this.disabledInput() || this.editor.disabled(),
   );
 
   onClick(): void {

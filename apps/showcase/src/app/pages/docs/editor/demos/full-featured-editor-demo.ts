@@ -14,23 +14,23 @@ import {
   ScEditorBoldToggle,
   ScEditorBulletListToggle,
   ScEditorCharCount,
-  ScEditorClearFormattingButton,
-  ScEditorCodeButton,
+  ScEditorClearFormattingToggle,
+  ScEditorCodeToggle,
   ScEditorContent,
   ScEditorCount,
   ScEditorFooter,
   ScEditorHeadingSelect,
-  ScEditorHorizontalRuleButton,
+  ScEditorHorizontalRuleToggle,
   ScEditorItalicToggle,
-  ScEditorLinkButton,
+  ScEditorLinkToggle,
   ScEditorNumberedListToggle,
-  ScEditorRedoButton,
+  ScEditorRedoToggle,
   ScEditorSeparator,
   ScEditorStrikethroughToggle,
   ScEditorToolbar,
   ScEditorToolbarGroup,
   ScEditorUnderlineToggle,
-  ScEditorUndoButton,
+  ScEditorUndoToggle,
   ScEditorWordCount,
 } from '@semantic-components/editor';
 import { ScButton } from '@semantic-components/ui';
@@ -67,19 +67,19 @@ import {
     ScEditorStrikethroughToggle,
     ScEditorSeparator,
     ScEditorHeadingSelect,
-    ScEditorUndoButton,
-    ScEditorRedoButton,
+    ScEditorUndoToggle,
+    ScEditorRedoToggle,
     ScEditorAlignLeftToggle,
     ScEditorAlignCenterToggle,
     ScEditorAlignRightToggle,
     ScEditorAlignJustifyToggle,
     ScEditorBulletListToggle,
     ScEditorNumberedListToggle,
-    ScEditorLinkButton,
+    ScEditorLinkToggle,
     ScEditorBlockquoteToggle,
-    ScEditorCodeButton,
-    ScEditorHorizontalRuleButton,
-    ScEditorClearFormattingButton,
+    ScEditorCodeToggle,
+    ScEditorHorizontalRuleToggle,
+    ScEditorClearFormattingToggle,
     ScEditorFooter,
     ScEditorCount,
     ScEditorWordCount,
@@ -110,13 +110,13 @@ import {
         blockquotes, and more.
       </p>
       <div scEditor class="overflow-hidden rounded-lg border">
-        <div scEditorToolbar>
+        <div scEditorToolbar aria-label="Text formatting">
           <div scEditorToolbarGroup>
-            <button scEditorUndo>
+            <button scEditorUndoToggle>
               <svg siUndoIcon></svg>
               <span class="sr-only">Undo</span>
             </button>
-            <button scEditorRedo>
+            <button scEditorRedoToggle>
               <svg siRedoIcon></svg>
               <span class="sr-only">Redo</span>
             </button>
@@ -125,7 +125,7 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <select scEditorHeading></select>
+            <select scEditorHeading aria-label="Text style"></select>
           </div>
 
           <div scEditorSeparator></div>
@@ -186,7 +186,7 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorLink>
+            <button scEditorLinkToggle>
               <svg siLinkIcon></svg>
               <span class="sr-only">Insert link</span>
             </button>
@@ -194,11 +194,11 @@ import {
               <svg siQuoteIcon></svg>
               <span class="sr-only">Blockquote</span>
             </button>
-            <button scEditorCode>
+            <button scEditorCodeToggle>
               <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>
-            <button scEditorHorizontalRule>
+            <button scEditorHorizontalRuleToggle>
               <svg siMinusIcon></svg>
               <span class="sr-only">Horizontal rule</span>
             </button>
@@ -207,7 +207,7 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorClearFormatting>
+            <button scEditorClearFormattingToggle>
               <svg siRemoveFormattingIcon></svg>
               <span class="sr-only">Clear formatting</span>
             </button>

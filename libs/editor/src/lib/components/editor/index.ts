@@ -30,13 +30,13 @@ export * from './editor-numbered-list-toggle';
 // Block toggles
 export * from './editor-blockquote-toggle';
 
-// Action buttons
-export * from './editor-undo-button';
-export * from './editor-redo-button';
-export * from './editor-link-button';
-export * from './editor-code-button';
-export * from './editor-horizontal-rule-button';
-export * from './editor-clear-formatting-button';
+// Action toggles
+export * from './editor-undo-toggle';
+export * from './editor-redo-toggle';
+export * from './editor-link-toggle';
+export * from './editor-code-toggle';
+export * from './editor-horizontal-rule-toggle';
+export * from './editor-clear-formatting-toggle';
 
 // Utility components
 export * from './editor-heading-select';

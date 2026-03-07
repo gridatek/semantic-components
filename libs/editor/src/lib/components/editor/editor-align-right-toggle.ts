@@ -5,25 +5,28 @@ import { SC_EDITOR } from './editor';
 @Directive({
   selector: 'button[scEditorAlignRightToggle]',
   host: {
-    'data-slot': 'editor-align-right',
+    'data-slot': 'editor-toggle',
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'editor.disabled()',
-    '[attr.aria-disabled]': 'editor.disabled() || null',
+    '[disabled]': 'disabled()',
     '[attr.aria-pressed]': 'editor.alignment() === "right"',
-    '[attr.title]': '"Align right"',
     '(click)': 'onClick()',
   },
 })
 export class ScEditorAlignRightToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly disabledInput = input(false, { alias: 'disabled' });
 
   protected readonly class = computed(() =>
     cn(
       toggleVariants({ variant: 'default', size: 'default' }),
       this.classInput(),
     ),
+  );
+
+  protected readonly disabled = computed(
+    () => this.disabledInput() || this.editor.disabled(),
   );
 
   onClick(): void {

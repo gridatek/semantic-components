@@ -5,6 +5,8 @@ import { cn } from '@semantic-components/ui';
   selector: 'div[scEditorSeparator]',
   host: {
     'data-slot': 'editor-separator',
+    role: 'separator',
+    'aria-orientation': 'vertical',
     '[class]': 'class()',
   },
 })

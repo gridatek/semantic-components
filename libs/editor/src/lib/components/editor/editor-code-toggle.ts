@@ -1,25 +1,31 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
-  selector: 'button[scEditorCode]',
+  selector: 'button[scEditorCodeToggle]',
   host: {
-    'data-slot': 'editor-code',
+    'data-slot': 'editor-toggle',
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'editor.disabled()',
-    '[attr.aria-disabled]': 'editor.disabled() || null',
-    '[attr.title]': '"Inline code"',
+    '[disabled]': 'disabled()',
     '(click)': 'onClick()',
   },
 })
-export class ScEditorCodeButton {
+export class ScEditorCodeToggle {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly disabledInput = input(false, { alias: 'disabled' });
 
   protected readonly class = computed(() =>
-    cn(buttonVariants({ variant: 'ghost', size: 'icon' }), this.classInput()),
+    cn(
+      toggleVariants({ variant: 'default', size: 'default' }),
+      this.classInput(),
+    ),
+  );
+
+  protected readonly disabled = computed(
+    () => this.disabledInput() || this.editor.disabled(),
   );
 
   onClick(): void {
