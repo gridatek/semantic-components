@@ -53,7 +53,7 @@ import {
     ScStepperNext,
   ],
   template: \`
-    <div class="rounded-lg border p-6">
+    <div class="w-full max-w-2xl rounded-lg border p-6">
       <div scStepper [(activeStep)]="activeStep">
         <div scStepperList>
           <div scStepperItem [step]="0">

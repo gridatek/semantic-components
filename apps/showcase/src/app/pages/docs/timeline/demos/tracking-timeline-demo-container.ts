@@ -58,7 +58,7 @@ import {
     SiHouseIcon,
   ],
   template: \`
-    <div class="rounded-lg border p-4">
+    <div class="w-full max-w-2xl rounded-lg border p-4">
       <div scTimeline class="ml-4">
         <div scTimelineItem>
           <div scTimelineConnector></div>

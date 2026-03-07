@@ -48,7 +48,7 @@ import {
     ScTableRow,
   ],
   template: \`
-    <table scTable>
+    <table scTable class="w-full max-w-2xl">
       <thead scTableHeader>
         <tr scTableRow>
           <th scTableHeaderCell class="w-[100px]">Invoice</th>

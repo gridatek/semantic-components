@@ -40,7 +40,7 @@ import {
   selector: 'app-stats-card-demo',
   imports: [ScCard, ScCardBody, ScCardDescription, ScCardHeader, ScCardTitle],
   template: \`
-    <div class="grid gap-4 md:grid-cols-3">
+    <div class="grid w-full max-w-2xl gap-4 md:grid-cols-3">
       <div scCard>
         <div scCardHeader class="pb-2">
           <p scCardDescription>Total Revenue</p>

@@ -46,7 +46,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
     SiLoaderCircleIcon,
   ],
   template: \`
-    <div scInputGroup>
+    <div scInputGroup class="w-full max-w-sm">
       <div scInputGroupAddon>
         <svg scSpinner siLoaderCircleIcon class="size-4"></svg>
       </div>

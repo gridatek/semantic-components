@@ -163,7 +163,7 @@ const SAMPLE_DATA: User[] = [
     SiEllipsisIcon,
   ],
   template: \`
-    <div scDataTable [data]="data" [columns]="columns">
+    <div scDataTable [data]="data" [columns]="columns" class="w-full max-w-4xl">
       <div class="flex items-center justify-between py-4">
         <input
           scDataTableFilter
