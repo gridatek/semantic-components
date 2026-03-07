@@ -36,7 +36,7 @@ import {
   ScSelectDisplayValue,
   ScSelectIcon,
   ScSelectInput,
-  ScSelectInputGroup,
+  ScSelectOrigin,
   ScSelectItem,
   ScSelectItemIcon,
   ScSelectItemIndicator,
@@ -67,7 +67,7 @@ import {
     ScSelectList,
     ScSelectItem,
     ScSelectPortal,
-    ScSelectInputGroup,
+    ScSelectOrigin,
     ScSelectInput,
     SiBookIcon,
     SiBriefcaseIcon,
@@ -85,7 +85,7 @@ import {
   ],
   template: \`
     <div scSelect class="w-48">
-      <div scSelectInputGroup>
+      <div scSelectOrigin>
         @if (displayIcon(); as icon) {
           <ng-container
             *ngTemplateOutlet="iconTmpl; context: { icon: icon }"

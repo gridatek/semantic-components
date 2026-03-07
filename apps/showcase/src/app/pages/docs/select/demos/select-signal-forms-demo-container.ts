@@ -38,7 +38,7 @@ import {
   ScSelectDisplayValue,
   ScSelectIcon,
   ScSelectInput,
-  ScSelectInputGroup,
+  ScSelectOrigin,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectList,
@@ -62,7 +62,7 @@ interface FormModel {
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectInputGroup,
+    ScSelectOrigin,
     ScSelectInput,
     ScSelectIcon,
     ScSelectItemIndicator,
@@ -78,7 +78,7 @@ interface FormModel {
         <div scField>
           <label scLabel>Fruit</label>
           <div scSelect>
-            <div scSelectInputGroup>
+            <div scSelectOrigin>
               <span scSelectDisplayValue></span>
               <input
                 scSelectInput

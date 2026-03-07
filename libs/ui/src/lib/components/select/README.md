@@ -17,7 +17,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 | Component               | Selector                      | Responsibility                                                                      |
 | ----------------------- | ----------------------------- | ----------------------------------------------------------------------------------- |
 | `ScSelect`              | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic                                |
-| `ScSelectInputGroup`    | `div[scSelectInputGroup]`     | Trigger button, renders chevron icon, projects consumer content                     |
+| `ScSelectOrigin`        | `div[scSelectOrigin]`         | Trigger button, renders chevron icon, projects consumer content                     |
 | `ScSelectInput`         | `input[scSelectInput]`        | Visible input displaying selected value, wraps `ComboboxInput` from `@angular/aria` |
 | `ScSelectItemIcon`      | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)  |
 | `ScSelectPortal`        | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                         |
@@ -29,6 +29,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 | `ScSelectSeparator`     | `[scSelectSeparator]`         | Visual separator between groups or items                                            |
 | `ScSelectIcon`          | `svg[scSelectIcon]`           | Chevron icon styling in trigger                                                     |
 | `ScSelectItemIndicator` | `svg[scSelectItemIndicator]`  | Checkmark icon for selected state                                                   |
+| `ScSelectItemLabel`     | `[scSelectItemLabel]`         | Label text inside an item, applies `flex-1` for proper layout                       |
 
 ## Basic Usage
 
@@ -36,14 +37,16 @@ Displays a list of options for the user to pick from — mimics a native select.
 
 ```html
 <div scSelect>
-  <div scSelectInputGroup>
+  <div scSelectOrigin>
     <input scSelectInput placeholder="Select an option" aria-label="Select" />
   </div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
       <div scSelectList>
         @for (option of options; track option.value) {
-        <div scSelectItem [value]="option.value" [label]="option.label">{{ option.label }}</div>
+        <div scSelectItem [value]="option.value" [label]="option.label">
+          <span scSelectItemLabel>{{ option.label }}</span>
+        </div>
         }
       </div>
     </div>
@@ -57,7 +60,7 @@ Use `ScSelectItemIcon` for consistent icon styling in items and the trigger.
 
 ```html
 <!-- In the trigger: icon before the input -->
-<div scSelectInputGroup>
+<div scSelectOrigin>
   <svg scSelectItemIcon siHomeIcon></svg>
   <input scSelectInput placeholder="Select..." aria-label="Select" />
 </div>
@@ -65,7 +68,7 @@ Use `ScSelectItemIcon` for consistent icon styling in items and the trigger.
 <!-- In items -->
 <div scSelectItem [value]="'home'" [label]="'Home'">
   <svg scSelectItemIcon siHomeIcon></svg>
-  <span class="flex-1">Home</span>
+  <span scSelectItemLabel>Home</span>
 </div>
 ```
 
@@ -75,7 +78,7 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 
 ```html
 <div scSelect>
-  <div scSelectInputGroup>
+  <div scSelectOrigin>
     <input scSelectInput placeholder="Select a food" aria-label="Food dropdown" />
   </div>
   <ng-template scSelectPortal>
@@ -83,14 +86,14 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
       <div scSelectList>
         <div scSelectGroup>
           <div scSelectGroupLabel>Fruits</div>
-          <div scSelectItem value="Apple" label="Apple">Apple</div>
-          <div scSelectItem value="Banana" label="Banana">Banana</div>
+          <div scSelectItem value="Apple" label="Apple"><span scSelectItemLabel>Apple</span></div>
+          <div scSelectItem value="Banana" label="Banana"><span scSelectItemLabel>Banana</span></div>
         </div>
         <div scSelectSeparator></div>
         <div scSelectGroup>
           <div scSelectGroupLabel>Vegetables</div>
-          <div scSelectItem value="Carrot" label="Carrot">Carrot</div>
-          <div scSelectItem value="Spinach" label="Spinach">Spinach</div>
+          <div scSelectItem value="Carrot" label="Carrot"><span scSelectItemLabel>Carrot</span></div>
+          <div scSelectItem value="Spinach" label="Spinach"><span scSelectItemLabel>Spinach</span></div>
         </div>
       </div>
     </div>
@@ -102,14 +105,14 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ScSelect, ScSelectInput, ScSelectInputGroup, ScSelectItem, ScSelectItemIcon, ScSelectList, ScSelectPopup, ScSelectPortal } from '@semantic-components/ui';
+import { ScSelect, ScSelectInput, ScSelectItem, ScSelectItemIcon, ScSelectItemLabel, ScSelectList, ScSelectOrigin, ScSelectPopup, ScSelectPortal } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-example',
-  imports: [ScSelect, ScSelectInput, ScSelectPopup, ScSelectItemIcon, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectInputGroup],
+  imports: [ScSelect, ScSelectInput, ScSelectPopup, ScSelectItemIcon, ScSelectItemLabel, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectOrigin],
   template: `
     <div scSelect>
-      <div scSelectInputGroup>
+      <div scSelectOrigin>
         <input scSelectInput placeholder="Select an option" aria-label="Select" />
       </div>
       <ng-template scSelectPortal>
@@ -117,7 +120,7 @@ import { ScSelect, ScSelectInput, ScSelectInputGroup, ScSelectItem, ScSelectItem
           <div scSelectList>
             @for (option of options; track option.value) {
               <div scSelectItem [value]="option.value" [label]="option.label">
-                {{ option.label }}
+                <span scSelectItemLabel>{{ option.label }}</span>
               </div>
             }
           </div>
@@ -201,7 +204,7 @@ The select components are built with accessibility in mind:
 | `label()`  | `Signal<string>`  | Returns the label for the selected value, or `''`      |
 | `exportAs` | `'scSelect'`      | Template reference for direct access                   |
 
-### ScSelectInputGroup
+### ScSelectOrigin
 
 | Property | Type     | Description            |
 | -------- | -------- | ---------------------- |
@@ -231,6 +234,12 @@ Sets `aria-hidden="true"` automatically.
 | `label`  | `string` | The label displayed for the option |
 | `class`  | `string` | Additional CSS classes             |
 
+### ScSelectItemLabel
+
+| Property | Type     | Description                             |
+| -------- | -------- | --------------------------------------- |
+| `class`  | `string` | Additional CSS classes (base: `flex-1`) |
+
 ### ScSelectGroup
 
 | Property | Type     | Description            |
@@ -255,7 +264,7 @@ All components accept a `class` input for custom styling:
 
 ```html
 <div scSelect class="w-64">
-  <div scSelectInputGroup class="bg-slate-100">
+  <div scSelectOrigin class="bg-slate-100">
     <input scSelectInput placeholder="Choose..." aria-label="Choose" />
   </div>
 </div>
@@ -265,7 +274,7 @@ All components accept a `class` input for custom styling:
 
 ```
 ScSelect (root, wraps Combobox, owns overlay, exportAs: 'scSelect')
-├── ScSelectInputGroup (styled container, overlay origin)
+├── ScSelectOrigin (styled container, overlay origin)
 │   ├── ScSelectItemIcon (consumer icons) [projected content]
 │   ├── ScSelectInput (wraps ComboboxInput, displays selected value, placeholder, aria-label) [projected content]
 │   └── ScSelectIcon (chevron icon with expand/collapse rotation) [projected content]
@@ -276,7 +285,7 @@ ScSelect (root, wraps Combobox, owns overlay, exportAs: 'scSelect')
             │   ├── ScSelectGroupLabel (label for the group)
             │   └── ScSelectItem (wraps Option)
             │       ├── ScSelectItemIcon (consumer icons) [projected content]
-            │       ├── [projected content]
+            │       ├── ScSelectItemLabel (label text, flex-1) [projected content]
             │       └── ScSelectItemIndicator (checkmark for selected state) [projected content]
             ├── ScSelectSeparator (visual divider between groups)
             └── ScSelectItem (ungrouped option)

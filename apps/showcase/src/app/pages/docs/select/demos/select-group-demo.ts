@@ -10,10 +10,11 @@ import {
   ScSelectGroupLabel,
   ScSelectIcon,
   ScSelectInput,
-  ScSelectInputGroup,
   ScSelectItem,
   ScSelectItemIndicator,
+  ScSelectItemLabel,
   ScSelectList,
+  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
   ScSelectSeparator,
@@ -31,17 +32,18 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectInputGroup,
+    ScSelectOrigin,
     ScSelectSeparator,
     ScSelectIcon,
     ScSelectInput,
     ScSelectItemIndicator,
+    ScSelectItemLabel,
     SiChevronDownIcon,
     SiCheckIcon,
   ],
   template: `
     <div scSelect>
-      <div scSelectInputGroup>
+      <div scSelectOrigin>
         <span scSelectDisplayValue></span>
         <input
           scSelectInput
@@ -56,15 +58,15 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             <div scSelectGroup>
               <div scSelectGroupLabel>Fruits</div>
               <div scSelectItem value="Apple" label="Apple">
-                Apple
+                <span scSelectItemLabel>Apple</span>
                 <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
               <div scSelectItem value="Banana" label="Banana">
-                Banana
+                <span scSelectItemLabel>Banana</span>
                 <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
               <div scSelectItem value="Orange" label="Orange">
-                Orange
+                <span scSelectItemLabel>Orange</span>
                 <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
             </div>
@@ -72,15 +74,15 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             <div scSelectGroup>
               <div scSelectGroupLabel>Vegetables</div>
               <div scSelectItem value="Carrot" label="Carrot">
-                Carrot
+                <span scSelectItemLabel>Carrot</span>
                 <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
               <div scSelectItem value="Broccoli" label="Broccoli">
-                Broccoli
+                <span scSelectItemLabel>Broccoli</span>
                 <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
               <div scSelectItem value="Spinach" label="Spinach">
-                Spinach
+                <span scSelectItemLabel>Spinach</span>
                 <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
             </div>

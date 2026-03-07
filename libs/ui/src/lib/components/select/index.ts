@@ -1,7 +1,7 @@
 export { ScSelect } from './select';
 export { ScSelectDisplayValue } from './select-display-value';
 export { ScSelectItemIcon } from './select-item-icon';
-export { ScSelectInputGroup } from './select-input-group';
+export { ScSelectOrigin } from './select-origin';
 export { ScSelectInput } from './select-input';
 export { ScSelectPortal } from './select-portal';
 export { ScSelectPopup } from './select-popup';
@@ -12,3 +12,4 @@ export { ScSelectGroupLabel } from './select-group-label';
 export { ScSelectSeparator } from './select-separator';
 export { ScSelectIcon } from './select-icon';
 export { ScSelectItemIndicator } from './select-item-indicator';
+export { ScSelectItemLabel } from './select-item-label';

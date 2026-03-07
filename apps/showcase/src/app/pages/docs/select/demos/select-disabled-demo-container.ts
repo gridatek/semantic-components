@@ -33,7 +33,7 @@ import {
   ScSelectDisplayValue,
   ScSelectIcon,
   ScSelectInput,
-  ScSelectInputGroup,
+  ScSelectOrigin,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectList,
@@ -51,7 +51,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectInputGroup,
+    ScSelectOrigin,
     ScSelectIcon,
     ScSelectInput,
     ScSelectItemIndicator,
@@ -60,7 +60,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scSelect disabled>
-      <div scSelectInputGroup>
+      <div scSelectOrigin>
         <span scSelectDisplayValue></span>
         <input
           scSelectInput

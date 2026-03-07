@@ -13,10 +13,11 @@ import {
   ScSelectDisplayValue,
   ScSelectIcon,
   ScSelectInput,
-  ScSelectInputGroup,
   ScSelectItem,
   ScSelectItemIndicator,
+  ScSelectItemLabel,
   ScSelectList,
+  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
 } from '@semantic-components/ui';
@@ -37,10 +38,11 @@ interface FormModel {
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectInputGroup,
+    ScSelectOrigin,
     ScSelectInput,
     ScSelectIcon,
     ScSelectItemIndicator,
+    ScSelectItemLabel,
     SiChevronDownIcon,
     SiCheckIcon,
     JsonPipe,
@@ -53,7 +55,7 @@ interface FormModel {
         <div scField>
           <label scLabel>Fruit</label>
           <div scSelect>
-            <div scSelectInputGroup>
+            <div scSelectOrigin>
               <span scSelectDisplayValue></span>
               <input
                 scSelectInput
@@ -68,7 +70,7 @@ interface FormModel {
                 <div scSelectList>
                   @for (fruit of fruits; track fruit) {
                     <div scSelectItem [value]="fruit" [label]="fruit">
-                      {{ fruit }}
+                      <span scSelectItemLabel>{{ fruit }}</span>
                       <svg scSelectItemIndicator siCheckIcon></svg>
                     </div>
                   }

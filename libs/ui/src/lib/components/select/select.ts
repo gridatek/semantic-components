@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
-import { ScSelectInputGroup } from './select-input-group';
 import { ScSelectList } from './select-list';
+import { ScSelectOrigin } from './select-origin';
 import { ScSelectPortal } from './select-portal';
 
 @Component({
@@ -55,7 +55,7 @@ import { ScSelectPortal } from './select-portal';
 export class ScSelect {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly trigger = contentChild(ScSelectInputGroup);
+  private readonly trigger = contentChild(ScSelectOrigin);
   private readonly content = contentChild(ScSelectList, {
     descendants: true,
   });
