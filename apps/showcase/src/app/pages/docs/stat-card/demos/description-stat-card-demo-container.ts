@@ -36,10 +36,7 @@ import {
   ScStatCardLabel,
   ScStatCardValue,
 } from '@semantic-components/ui-lab';
-import {
-  SiChevronUpIcon,
-  SiPercentIcon,
-} from '@semantic-icons/lucide-icons';
+import { SiChevronUpIcon, SiPercentIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-description-stat-card-demo',

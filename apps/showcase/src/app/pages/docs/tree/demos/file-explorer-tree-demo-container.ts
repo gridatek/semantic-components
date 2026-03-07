@@ -148,11 +148,7 @@ import {
             <li scTreeItem [parent]="tree.tree" value="main.ts">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
-                <svg
-                  scTreeItemIcon
-                  siFileIcon
-                  class="text-green-500"
-                ></svg>
+                <svg scTreeItemIcon siFileIcon class="text-green-500"></svg>
                 <span>main.ts</span>
               </button>
             </li>
