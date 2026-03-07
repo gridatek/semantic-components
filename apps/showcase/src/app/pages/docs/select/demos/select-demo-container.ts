@@ -36,11 +36,12 @@ import {
   ScSelectDisplayValue,
   ScSelectIcon,
   ScSelectInput,
-  ScSelectOrigin,
   ScSelectItem,
   ScSelectItemIcon,
   ScSelectItemIndicator,
+  ScSelectItemLabel,
   ScSelectList,
+  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
 } from '@semantic-components/ui';
@@ -80,6 +81,7 @@ import {
     NgTemplateOutlet,
     ScSelectIcon,
     ScSelectItemIndicator,
+    ScSelectItemLabel,
     SiChevronDownIcon,
     SiCheckIcon,
   ],
@@ -107,7 +109,7 @@ import {
                 <ng-container
                   *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
                 ></ng-container>
-                <span class="flex-1">{{ option.label }}</span>
+                <span scSelectItemLabel>{{ option.label }}</span>
                 <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
             }
