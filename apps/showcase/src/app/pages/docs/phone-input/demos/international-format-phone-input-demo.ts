@@ -21,7 +21,7 @@ import { ScPhoneInputSimple } from '@semantic-components/ui-lab';
       Value: {{ phone() || 'Empty' }}
     </p>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

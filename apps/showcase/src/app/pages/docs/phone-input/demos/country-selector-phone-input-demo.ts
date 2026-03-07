@@ -21,7 +21,7 @@ import { Country, ScPhoneInput } from '@semantic-components/ui-lab';
       Value: {{ phoneWithCountry() || 'Empty' }}
     </p>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

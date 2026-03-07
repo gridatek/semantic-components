@@ -11,7 +11,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   template: `
     <sc-qr-code [value]="'https://angular.io'" [size]="200" />
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

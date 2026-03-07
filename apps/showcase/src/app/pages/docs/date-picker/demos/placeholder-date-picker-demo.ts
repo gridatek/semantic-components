@@ -16,7 +16,7 @@ import { ScDatePicker } from '@semantic-components/ui';
       placeholder="Select your birthday"
     />
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

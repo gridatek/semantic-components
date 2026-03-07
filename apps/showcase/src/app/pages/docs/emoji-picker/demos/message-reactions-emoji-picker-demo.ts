@@ -44,7 +44,7 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
       }
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageReactionsEmojiPickerDemo {

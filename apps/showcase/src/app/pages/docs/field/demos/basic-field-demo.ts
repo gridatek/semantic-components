@@ -16,7 +16,7 @@ import { ScInput } from '@semantic-components/ui';
       <p scFieldDescription>We'll never share your email with anyone else.</p>
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

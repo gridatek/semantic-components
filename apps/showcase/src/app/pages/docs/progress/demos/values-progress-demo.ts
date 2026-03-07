@@ -9,7 +9,7 @@ import { ScProgress } from '@semantic-components/ui';
   selector: 'app-values-progress-demo',
   imports: [ScProgress],
   template: `
-    <div class="space-y-3">
+    <div class="w-[60%] space-y-3">
       <div class="flex items-center gap-4">
         <span class="text-muted-foreground w-12 text-sm">0%</span>
         <div
@@ -57,7 +57,7 @@ import { ScProgress } from '@semantic-components/ui';
       </div>
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

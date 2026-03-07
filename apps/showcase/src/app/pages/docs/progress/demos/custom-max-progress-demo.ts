@@ -14,10 +14,10 @@ import { ScProgress } from '@semantic-components/ui';
       aria-label="Custom max progress"
       [value]="50"
       [max]="200"
-      class="w-[60%]"
+      class="w-80"
     ></div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

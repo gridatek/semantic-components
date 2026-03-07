@@ -13,10 +13,10 @@ import { ScProgress } from '@semantic-components/ui';
       scProgress
       aria-label="Custom styled progress"
       [value]="66"
-      class="h-4 w-[60%]"
+      class="h-4 w-80"
     ></div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

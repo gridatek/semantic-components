@@ -28,7 +28,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
       <input scInput variant="group" placeholder="Loading..." disabled />
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

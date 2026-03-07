@@ -11,7 +11,7 @@ import { LightboxImage, ScLightboxGallery } from '@semantic-components/ui-lab';
   template: `
     <sc-lightbox-gallery [images]="images" class="max-w-xl grid-cols-4 gap-2" />
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

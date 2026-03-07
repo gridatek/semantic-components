@@ -12,12 +12,12 @@ import { ScProgress } from '@semantic-components/ui';
   selector: 'app-basic-progress-demo',
   imports: [ScProgress],
   template: `
-    <div class="space-y-2">
+    <div class="w-[60%] space-y-2">
       <div scProgress aria-label="Loading progress" [value]="progress()"></div>
       <p class="text-muted-foreground text-sm">{{ progress() }}% complete</p>
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

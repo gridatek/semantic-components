@@ -60,7 +60,7 @@ import {
     SiSearchIcon,
     SiXIcon,
   ],
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   template: `
     <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxInputGroup>

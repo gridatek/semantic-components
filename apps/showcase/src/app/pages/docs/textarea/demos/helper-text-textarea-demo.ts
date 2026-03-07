@@ -26,7 +26,7 @@ import {
       <p scFieldDescription>Your bio will be visible on your public profile.</p>
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -19,7 +19,7 @@ import { ScConfetti } from '@semantic-components/ui-lab';
       Celebrate!
     </button>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

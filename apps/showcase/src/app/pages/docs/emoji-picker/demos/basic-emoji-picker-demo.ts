@@ -12,7 +12,7 @@ import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
       </p>
     }
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicEmojiPickerDemo {

@@ -26,7 +26,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
       </button>
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

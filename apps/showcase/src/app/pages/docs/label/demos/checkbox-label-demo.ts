@@ -14,7 +14,7 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
       <label scLabel>Accept terms and conditions</label>
     </div>
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
