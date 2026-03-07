@@ -107,7 +107,7 @@ import { ConfigService } from '../../services/config.service';
                     Semantic Components
                   </span>
                   <span class="text-sidebar-foreground/70 truncate text-xs">
-                    UI lib for Angular
+                    UI libs for Angular
                   </span>
                 </div>
               </a>
