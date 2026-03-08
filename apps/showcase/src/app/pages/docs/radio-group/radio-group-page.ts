@@ -29,7 +29,7 @@ import { HorizontalRadioGroupDemoContainer } from './demos/horizontal-radio-grou
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>RadioGroup</h1>
+        <h1 scHeading>Radio Group</h1>
         <p class="text-muted-foreground">
           A set of checkable buttons where only one button can be checked at a
           time.
