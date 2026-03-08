@@ -41,7 +41,7 @@ import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
       style="--primary: oklch(0.6 0.25 30); --muted: oklch(0.9 0.05 30); --ring: oklch(0.6 0.25 30)"
     >
       <label scLabel>Temperature — {{ value() }}</label>
-      <input scSlider [value]="value()" (input)="onInput($event)" />
+      <input scSlider [(value)]="value" />
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
@@ -50,9 +50,5 @@ import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
 })
 export class CustomColorSliderDemo {
   readonly value = signal(50);
-
-  onInput(event: Event): void {
-    this.value.set(+(event.target as HTMLInputElement).value);
-  }
 }`;
 }

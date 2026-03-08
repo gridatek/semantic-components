@@ -12,7 +12,7 @@ import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
   template: `
     <div scField class="w-[280px]">
       <label scLabel>Volume — {{ value() }}</label>
-      <input scSlider [value]="value()" (input)="onInput($event)" />
+      <input scSlider [(value)]="value" />
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
@@ -21,8 +21,4 @@ import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
 })
 export class BasicSliderDemo {
   readonly value = signal(50);
-
-  onInput(event: Event): void {
-    this.value.set(+(event.target as HTMLInputElement).value);
-  }
 }

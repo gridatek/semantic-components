@@ -6,6 +6,7 @@ import {
   computed,
   inject,
   input,
+  model,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
@@ -18,7 +19,8 @@ import { SC_FIELD } from '../field';
     '[attr.id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
-    '(input)': 'onInput()',
+    '[value]': 'value()',
+    '(input)': 'onInput($event)',
   },
 })
 export class ScSlider {
@@ -26,6 +28,7 @@ export class ScSlider {
   private readonly fallbackId = inject(_IdGenerator).getId('sc-slider-');
   private readonly el = inject<ElementRef<HTMLInputElement>>(ElementRef);
 
+  readonly value = model(0);
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
@@ -63,7 +66,9 @@ export class ScSlider {
     });
   }
 
-  protected onInput() {
+  protected onInput(event: Event) {
+    const val = +(event.target as HTMLInputElement).value;
+    this.value.set(val);
     this.updateFillPercent();
   }
 
