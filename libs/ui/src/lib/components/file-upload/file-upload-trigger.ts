@@ -1,18 +1,23 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   inject,
   input,
+  viewChild,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { buttonVariants } from '../button';
 import { SC_FILE_UPLOAD } from './file-upload';
+import { ScFileUploadInput } from './file-upload-input';
 
 @Component({
   selector: 'button[scFileUploadTrigger]',
+  imports: [ScFileUploadInput],
   template: `
+    <input scFileUploadInput #fileInput />
     <ng-content />
   `,
   host: {
@@ -29,6 +34,9 @@ import { SC_FILE_UPLOAD } from './file-upload';
 export class ScFileUploadTrigger {
   readonly fileUpload = inject(SC_FILE_UPLOAD);
 
+  private readonly fileInputRef =
+    viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
@@ -38,15 +46,6 @@ export class ScFileUploadTrigger {
   openFilePicker(): void {
     if (this.fileUpload.disabled()) return;
 
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.multiple = this.fileUpload.multiple();
-    input.accept = this.fileUpload.accept();
-    input.addEventListener('change', () => {
-      if (input.files && input.files.length > 0) {
-        this.fileUpload.addFiles(input.files);
-      }
-    });
-    input.click();
+    this.fileInputRef().nativeElement.click();
   }
 }

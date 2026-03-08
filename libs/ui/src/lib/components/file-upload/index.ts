@@ -1,6 +1,7 @@
 export { SC_FILE_UPLOAD, ScFileUpload } from './file-upload';
 export type { ScFileUploadFile } from './file-upload';
 export { ScFileUploadDropzone } from './file-upload-dropzone';
+export { ScFileUploadInput } from './file-upload-input';
 export { ScFileUploadTrigger } from './file-upload-trigger';
 export { ScFileUploadList } from './file-upload-list';
 export { ScFileUploadItem } from './file-upload-item';

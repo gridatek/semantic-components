@@ -1,18 +1,23 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
   inject,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FILE_UPLOAD } from './file-upload';
+import { ScFileUploadInput } from './file-upload-input';
 
 @Component({
   selector: '[scFileUploadDropzone]',
+  imports: [ScFileUploadInput],
   template: `
+    <input scFileUploadInput #fileInput />
     <ng-content />
   `,
   host: {
@@ -20,7 +25,7 @@ import { SC_FILE_UPLOAD } from './file-upload';
     '[class]': 'class()',
     '[attr.data-dragging]': 'isDragging()',
     '[attr.data-disabled]': 'fileUpload.disabled() || null',
-    '(click)': 'openFilePicker()',
+    '(click)': 'openFilePicker($event)',
     '(dragover)': 'onDragOver($event)',
     '(dragleave)': 'onDragLeave($event)',
     '(drop)': 'onDrop($event)',
@@ -30,6 +35,9 @@ import { SC_FILE_UPLOAD } from './file-upload';
 })
 export class ScFileUploadDropzone {
   readonly fileUpload = inject(SC_FILE_UPLOAD);
+
+  private readonly fileInputRef =
+    viewChild.required<ElementRef<HTMLInputElement>>('fileInput');
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly isDragging = signal(false);
@@ -44,19 +52,13 @@ export class ScFileUploadDropzone {
     ),
   );
 
-  openFilePicker(): void {
+  openFilePicker(event: MouseEvent): void {
     if (this.fileUpload.disabled()) return;
 
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.multiple = this.fileUpload.multiple();
-    input.accept = this.fileUpload.accept();
-    input.addEventListener('change', () => {
-      if (input.files && input.files.length > 0) {
-        this.fileUpload.addFiles(input.files);
-      }
-    });
-    input.click();
+    // Avoid triggering when clicking the input itself
+    if (event.target === this.fileInputRef().nativeElement) return;
+
+    this.fileInputRef().nativeElement.click();
   }
 
   onDragOver(event: DragEvent): void {
