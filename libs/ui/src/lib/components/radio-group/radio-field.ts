@@ -41,7 +41,7 @@ export class ScRadioField {
 
   protected readonly class = computed(() =>
     cn(
-      'grid grid-cols-[1rem_1fr] items-center gap-x-2 gap-y-1',
+      'grid grid-cols-[1rem_1fr] items-center gap-x-2 gap-y-1 text-sm font-medium',
       '*:data-[slot=radio]:col-start-1 *:data-[slot=radio]:row-start-1',
       '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1',
       '*:data-[slot=field-description]:col-start-2 *:data-[slot=field-description]:row-start-2',
