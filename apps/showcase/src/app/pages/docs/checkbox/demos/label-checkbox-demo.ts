@@ -14,12 +14,12 @@ import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
       <div class="space-y-4">
         <label scCheckboxField class="cursor-pointer">
           <input type="checkbox" scCheckbox [(checked)]="option1" />
-          One
+          Short label checkbox
         </label>
 
         <label scCheckboxField class="cursor-pointer">
           <input type="checkbox" scCheckbox [(checked)]="option2" />
-          Two
+          A medium length label for the checkbox
         </label>
 
         <label scCheckboxField class="cursor-pointer">
