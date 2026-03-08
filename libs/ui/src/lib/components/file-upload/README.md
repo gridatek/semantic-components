@@ -7,6 +7,7 @@ A drag and drop file upload zone with preview and progress support.
 ```html
 <div scFileUpload [multiple]="true" [(files)]="files">
   <div scFileUploadDropzone>
+    <input scFileUploadInput aria-label="Upload files" />
     <p>Drag and drop files here or click to browse</p>
   </div>
 
@@ -82,9 +83,17 @@ Drag and drop zone that also responds to clicks.
 | `data-dragging` | `true` \| `false` |
 | `data-disabled` | `true` \| `null`  |
 
+### ScFileUploadInput
+
+Native file input overlay. Place inside a dropzone or trigger to handle file selection. Absolutely positioned with `opacity: 0` to cover the parent area. Consumers can add accessibility attributes directly (e.g. `aria-label`, `aria-describedby`).
+
+**Selector:** `input[scFileUploadInput]`
+
+Auto-syncs `multiple`, `accept`, and `disabled` from the parent `ScFileUpload` context. Resets after selection so the same file can be re-selected.
+
 ### ScFileUploadTrigger
 
-Button that opens the file picker.
+Button that opens the file picker. Place an `<input scFileUploadInput>` inside for file selection.
 
 **Selector:** `button[scFileUploadTrigger]`
 
@@ -196,6 +205,7 @@ interface ScFileUploadFile {
 ```html
 <div scFileUpload [multiple]="true" [(files)]="files">
   <div scFileUploadDropzone class="p-8">
+    <input scFileUploadInput aria-label="Upload files" />
     <div class="flex flex-col items-center gap-2">
       <p>Drag and drop files here</p>
       <p class="text-muted-foreground text-sm">or click to browse</p>
@@ -209,6 +219,7 @@ interface ScFileUploadFile {
 ```html
 <div scFileUpload [multiple]="true" accept="image/*" [maxSize]="5242880" [(files)]="images">
   <div scFileUploadDropzone>
+    <input scFileUploadInput aria-label="Upload images" />
     <p>Upload images (PNG, JPG up to 5MB)</p>
   </div>
 
@@ -231,7 +242,10 @@ interface ScFileUploadFile {
 
 ```html
 <div scFileUpload [(files)]="files">
-  <button scFileUploadTrigger>Upload Files</button>
+  <button scFileUploadTrigger>
+    <input scFileUploadInput aria-label="Upload files" />
+    Upload Files
+  </button>
 </div>
 ```
 
@@ -239,7 +253,10 @@ interface ScFileUploadFile {
 
 ```html
 <div scFileUpload [(files)]="files" (filesSelected)="handleUpload($event)">
-  <div scFileUploadDropzone>Upload files</div>
+  <div scFileUploadDropzone>
+    <input scFileUploadInput aria-label="Upload files" />
+    Upload files
+  </div>
 
   <div scFileUploadList>
     @for (file of files(); track file.id) {
@@ -266,7 +283,7 @@ interface ScFileUploadFile {
 
 ## Accessibility
 
-- Hidden file input is properly labeled
+- `ScFileUploadInput` is a native `<input type="file">` overlay — consumers add `aria-label` or `aria-describedby` directly
 - Visual feedback for drag state
-- Keyboard accessible trigger button
+- Keyboard accessible file input and trigger button
 - Delete button supports custom icon and screen reader text via content projection

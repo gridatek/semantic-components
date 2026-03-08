@@ -8,6 +8,7 @@ import {
   ScFileUpload,
   ScFileUploadDropzone,
   ScFileUploadFile,
+  ScFileUploadInput,
   ScFileUploadItem,
   ScFileUploadItemDelete,
   ScFileUploadItemName,
@@ -28,6 +29,7 @@ import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     ScFileUploadItemName,
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
+    ScFileUploadInput,
     SiImageIcon,
     SiXIcon,
   ],
@@ -42,6 +44,7 @@ import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
         (error)="onError($event)"
       >
         <div scFileUploadDropzone class="p-8">
+          <input scFileUploadInput aria-label="Upload images" />
           <div class="flex flex-col items-center gap-2 text-center">
             <svg siImageIcon class="text-muted-foreground size-10"></svg>
             <div class="space-y-1">

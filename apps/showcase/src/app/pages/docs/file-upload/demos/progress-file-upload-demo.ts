@@ -8,6 +8,7 @@ import {
   ScFileUpload,
   ScFileUploadDropzone,
   ScFileUploadFile,
+  ScFileUploadInput,
   ScFileUploadItem,
   ScFileUploadItemDelete,
   ScFileUploadItemName,
@@ -33,6 +34,7 @@ import {
     ScFileUploadItemName,
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
+    ScFileUploadInput,
     ScFileUploadItemProgress,
     SiFileIcon,
     SiUploadIcon,
@@ -47,6 +49,7 @@ import {
         (filesSelected)="simulateUpload($event)"
       >
         <div scFileUploadDropzone class="p-8">
+          <input scFileUploadInput aria-label="Upload files" />
           <div class="flex flex-col items-center gap-2 text-center">
             <svg siUploadIcon class="text-muted-foreground size-10"></svg>
             <div class="space-y-1">

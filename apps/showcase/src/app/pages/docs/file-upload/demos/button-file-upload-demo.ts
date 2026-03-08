@@ -7,6 +7,7 @@ import {
 import {
   ScFileUpload,
   ScFileUploadFile,
+  ScFileUploadInput,
   ScFileUploadItem,
   ScFileUploadItemDelete,
   ScFileUploadItemName,
@@ -32,6 +33,7 @@ import {
     ScFileUploadItemName,
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
+    ScFileUploadInput,
     SiFileIcon,
     SiUploadIcon,
     SiXIcon,
@@ -40,6 +42,7 @@ import {
     <div class="max-w-lg">
       <div scFileUpload [multiple]="true" [(files)]="files">
         <button scFileUploadTrigger>
+          <input scFileUploadInput aria-label="Upload files" />
           <svg siUploadIcon class="size-4"></svg>
           Upload Files
         </button>

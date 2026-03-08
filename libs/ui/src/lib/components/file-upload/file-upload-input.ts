@@ -1,17 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FILE_UPLOAD } from './file-upload';
 
-@Component({
+@Directive({
   selector: 'input[scFileUploadInput]',
-  template: '',
   host: {
     'data-slot': 'file-upload-input',
     type: 'file',
@@ -20,18 +12,20 @@ import { SC_FILE_UPLOAD } from './file-upload';
     '[accept]': 'fileUpload.accept() || null',
     '[disabled]': 'fileUpload.disabled()',
     '[attr.aria-disabled]': 'fileUpload.disabled() || null',
-    tabindex: '-1',
     '(change)': 'onChange($event)',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploadInput {
   readonly fileUpload = inject(SC_FILE_UPLOAD);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('sr-only', this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      'absolute inset-0 h-full w-full cursor-pointer opacity-0',
+      this.classInput(),
+    ),
+  );
 
   onChange(event: Event): void {
     const input = event.target as HTMLInputElement;
