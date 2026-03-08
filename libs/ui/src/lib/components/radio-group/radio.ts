@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   booleanAttribute,
@@ -6,6 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { SC_FIELD } from '../field';
 import { ScRadioGroup } from './radio-group';
 
 export const SC_RADIO = 'SC_RADIO';
@@ -14,14 +16,17 @@ export const SC_RADIO = 'SC_RADIO';
   selector: 'input[type="radio"][scRadio]',
   host: {
     'data-slot': 'radio',
+    '[attr.id]': 'id()',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
   },
-  exportAs: SC_RADIO,
 })
 export class ScRadio {
   private readonly radioGroup = inject(ScRadioGroup, { optional: true });
+  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly fallbackId = inject(_IdGenerator).getId('sc-radio-');
 
+  readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', {
     alias: 'class',
   });
@@ -29,6 +34,10 @@ export class ScRadio {
     alias: 'disabled',
     transform: booleanAttribute,
   });
+
+  readonly id = computed(
+    () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
 
   readonly disabled = computed(
     () => this.disabledInput() || (this.radioGroup?.disabled() ?? false),
