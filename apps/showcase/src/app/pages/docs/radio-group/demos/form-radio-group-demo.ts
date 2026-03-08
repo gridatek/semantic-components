@@ -5,12 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import {
-  ScLabel,
-  ScRadio,
-  ScRadioField,
-  ScRadioGroup,
-} from '@semantic-components/ui';
+import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 
 interface NotificationFormModel {
   notify: string;
@@ -18,7 +13,7 @@ interface NotificationFormModel {
 
 @Component({
   selector: 'app-form-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioField, ScRadio, ScLabel, FormField],
+  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
     <div class="max-w-md rounded-lg border p-6">
       <div class="space-y-4">
@@ -31,7 +26,7 @@ interface NotificationFormModel {
               value="all"
               [formField]="notificationForm.notify"
             />
-            <label scLabel>All new messages</label>
+            All new messages
           </label>
           <label scRadioField>
             <input
@@ -40,7 +35,7 @@ interface NotificationFormModel {
               value="mentions"
               [formField]="notificationForm.notify"
             />
-            <label scLabel>Direct messages and mentions</label>
+            Direct messages and mentions
           </label>
           <label scRadioField>
             <input
@@ -49,7 +44,7 @@ interface NotificationFormModel {
               value="none"
               [formField]="notificationForm.notify"
             />
-            <label scLabel>Nothing</label>
+            Nothing
           </label>
         </div>
       </div>

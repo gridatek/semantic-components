@@ -5,12 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import {
-  ScLabel,
-  ScRadio,
-  ScRadioField,
-  ScRadioGroup,
-} from '@semantic-components/ui';
+import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 
 interface DisabledFormModel {
   individual: string;
@@ -18,7 +13,7 @@ interface DisabledFormModel {
 
 @Component({
   selector: 'app-disabled-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioField, ScRadio, ScLabel, FormField],
+  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
     <div class="flex flex-col gap-4">
       <div>
@@ -33,11 +28,11 @@ interface DisabledFormModel {
               value="option1"
               [formField]="disabledForm.individual"
             />
-            <label scLabel>Option 1</label>
+            Option 1
           </label>
           <label scRadioField>
             <input type="radio" scRadio value="option2" disabled />
-            <label scLabel>Option 2 (disabled)</label>
+            Option 2 (disabled)
           </label>
           <label scRadioField>
             <input
@@ -46,7 +41,7 @@ interface DisabledFormModel {
               value="option3"
               [formField]="disabledForm.individual"
             />
-            <label scLabel>Option 3</label>
+            Option 3
           </label>
         </div>
       </div>
@@ -55,11 +50,11 @@ interface DisabledFormModel {
         <div scRadioGroup>
           <label scRadioField>
             <input type="radio" scRadio value="option1" disabled />
-            <label scLabel>Option 1</label>
+            Option 1
           </label>
           <label scRadioField>
             <input type="radio" scRadio value="option2" disabled />
-            <label scLabel>Option 2</label>
+            Option 2
           </label>
         </div>
       </div>

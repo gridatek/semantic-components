@@ -5,12 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import {
-  ScLabel,
-  ScRadio,
-  ScRadioField,
-  ScRadioGroup,
-} from '@semantic-components/ui';
+import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 
 interface FilterFormModel {
   filter: string;
@@ -18,7 +13,7 @@ interface FilterFormModel {
 
 @Component({
   selector: 'app-horizontal-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioField, ScRadio, ScLabel, FormField],
+  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
     <div scRadioGroup class="flex flex-row gap-4">
       <label scRadioField>
@@ -28,7 +23,7 @@ interface FilterFormModel {
           value="all"
           [formField]="filterForm.filter"
         />
-        <label scLabel>All</label>
+        All
       </label>
       <label scRadioField>
         <input
@@ -37,7 +32,7 @@ interface FilterFormModel {
           value="unread"
           [formField]="filterForm.filter"
         />
-        <label scLabel>Unread</label>
+        Unread
       </label>
       <label scRadioField>
         <input
@@ -46,7 +41,7 @@ interface FilterFormModel {
           value="archived"
           [formField]="filterForm.filter"
         />
-        <label scLabel>Archived</label>
+        Archived
       </label>
     </div>
   `,
