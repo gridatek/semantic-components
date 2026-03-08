@@ -100,13 +100,23 @@ export class ScFileUpload {
 
   removeFile(fileId: string): void {
     const file = this.files().find((f) => f.id === fileId);
-    if (file) {
-      this.files.update((files) => files.filter((f) => f.id !== fileId));
-      this.fileRemoved.emit(file);
+    if (!file) {
+      console.warn(
+        `ScFileUpload: removeFile called with unknown fileId "${fileId}"`,
+      );
+      return;
     }
+    this.files.update((files) => files.filter((f) => f.id !== fileId));
+    this.fileRemoved.emit(file);
   }
 
   updateFileProgress(fileId: string, progress: number): void {
+    if (!this.files().some((f) => f.id === fileId)) {
+      console.warn(
+        `ScFileUpload: updateFileProgress called with unknown fileId "${fileId}"`,
+      );
+      return;
+    }
     this.files.update((files) =>
       files.map((f) =>
         f.id === fileId ? { ...f, progress, status: 'uploading' as const } : f,
@@ -119,6 +129,12 @@ export class ScFileUpload {
     status: ScFileUploadFile['status'],
     error?: string,
   ): void {
+    if (!this.files().some((f) => f.id === fileId)) {
+      console.warn(
+        `ScFileUpload: updateFileStatus called with unknown fileId "${fileId}"`,
+      );
+      return;
+    }
     this.files.update((files) =>
       files.map((f) => (f.id === fileId ? { ...f, status, error } : f)),
     );
