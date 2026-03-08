@@ -1,5 +1,11 @@
 {
   "permissions": {
-    "allow": ["Bash(npx nx:*)", "Bash(gh api:*)", "Bash(gh run:*)"]
+    "allow": [
+      "Bash(npx nx:*)",
+      "Bash(gh api:*)",
+      "Bash(gh run:*)",
+      "WebSearch",
+      "WebFetch(domain:ark-ui.com)"
+    ]
   }
 }
