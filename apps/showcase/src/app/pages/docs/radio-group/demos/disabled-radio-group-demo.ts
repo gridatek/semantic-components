@@ -47,13 +47,13 @@ interface DisabledFormModel {
       </div>
       <div>
         <p class="text-muted-foreground mb-2 text-xs">Entire group disabled:</p>
-        <div scRadioGroup>
+        <div scRadioGroup disabled>
           <label scRadioField>
-            <input type="radio" scRadio value="option1" disabled />
+            <input type="radio" scRadio value="option1" />
             Option 1
           </label>
           <label scRadioField>
-            <input type="radio" scRadio value="option2" disabled />
+            <input type="radio" scRadio value="option2" />
             Option 2
           </label>
         </div>
