@@ -44,59 +44,57 @@ export type ScCalendarValue =
     '[attr.aria-label]': '"Calendar"',
   },
   template: `
-    <div class="flex flex-col gap-4">
-      <!-- Header with navigation -->
-      <div
-        scCalendarHeader
-        [label]="monthYearLabel()"
-        [previousLabel]="previousAriaLabel()"
-        [nextLabel]="nextAriaLabel()"
-        [headerLabel]="headerAriaLabel()"
-        [expanded]="viewMode() !== 'day'"
-        (previous)="handlePrevious()"
-        (next)="handleNext()"
-        (headerClick)="handleHeaderClick()"
-      ></div>
+    <!-- Header with navigation -->
+    <div
+      scCalendarHeader
+      [label]="monthYearLabel()"
+      [previousLabel]="previousAriaLabel()"
+      [nextLabel]="nextAriaLabel()"
+      [headerLabel]="headerAriaLabel()"
+      [expanded]="viewMode() !== 'day'"
+      (previous)="handlePrevious()"
+      (next)="handleNext()"
+      (headerClick)="handleHeaderClick()"
+    ></div>
 
-      <!-- View content -->
-      @switch (viewMode()) {
-        @case ('day') {
-          <div
-            scCalendarDayView
-            [viewDate]="viewDate()"
-            [mode]="mode()"
-            [value]="value()"
-            [disabled]="disabled()"
-            [minDate]="minDate()"
-            [maxDate]="maxDate()"
-            [weekDays]="weekDays"
-            (dateSelected)="selectDate($event)"
-            (monthScrollUp)="previousMonth()"
-            (monthScrollDown)="nextMonth()"
-          ></div>
-        }
-        @case ('month') {
-          <div
-            scCalendarMonthView
-            [year]="viewDate().year"
-            [selectedMonth]="viewDate().month"
-            (monthSelected)="selectMonth($event)"
-            (yearScrollUp)="previousYear()"
-            (yearScrollDown)="nextYear()"
-          ></div>
-        }
-        @case ('year') {
-          <div
-            scCalendarYearView
-            [decadeStart]="decadeStart()"
-            [selectedYear]="viewDate().year"
-            (yearSelected)="selectYear($event)"
-            (decadeScrollUp)="previousDecade()"
-            (decadeScrollDown)="nextDecade()"
-          ></div>
-        }
+    <!-- View content -->
+    @switch (viewMode()) {
+      @case ('day') {
+        <div
+          scCalendarDayView
+          [viewDate]="viewDate()"
+          [mode]="mode()"
+          [value]="value()"
+          [disabled]="disabled()"
+          [minDate]="minDate()"
+          [maxDate]="maxDate()"
+          [weekDays]="weekDays"
+          (dateSelected)="selectDate($event)"
+          (monthScrollUp)="previousMonth()"
+          (monthScrollDown)="nextMonth()"
+        ></div>
       }
-    </div>
+      @case ('month') {
+        <div
+          scCalendarMonthView
+          [year]="viewDate().year"
+          [selectedMonth]="viewDate().month"
+          (monthSelected)="selectMonth($event)"
+          (yearScrollUp)="previousYear()"
+          (yearScrollDown)="nextYear()"
+        ></div>
+      }
+      @case ('year') {
+        <div
+          scCalendarYearView
+          [decadeStart]="decadeStart()"
+          [selectedYear]="viewDate().year"
+          (yearSelected)="selectYear($event)"
+          (decadeScrollUp)="previousDecade()"
+          (decadeScrollDown)="nextDecade()"
+        ></div>
+      }
+    }
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -124,7 +122,7 @@ export class ScCalendar {
   );
 
   protected readonly class = computed(() =>
-    cn('block p-3 w-[276px]', this.classInput()),
+    cn('flex flex-col gap-4 p-3 w-[276px]', this.classInput()),
   );
 
   protected readonly monthYearLabel = computed(() => {
