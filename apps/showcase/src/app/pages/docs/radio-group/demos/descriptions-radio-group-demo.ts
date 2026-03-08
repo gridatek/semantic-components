@@ -5,7 +5,13 @@ import {
   signal,
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
+import {
+  ScFieldDescription,
+  ScLabel,
+  ScRadio,
+  ScRadioField,
+  ScRadioGroup,
+} from '@semantic-components/ui';
 
 interface PlanFormModel {
   plan: string;
@@ -13,56 +19,35 @@ interface PlanFormModel {
 
 @Component({
   selector: 'app-descriptions-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
+  imports: [
+    ScRadioGroup,
+    ScRadioField,
+    ScRadio,
+    ScLabel,
+    ScFieldDescription,
+    FormField,
+  ],
   template: `
-    <div scRadioGroup class="gap-4">
-      <label scRadioField class="flex items-start space-x-3">
-        <input
-          type="radio"
-          scRadio
-          value="free"
-          [formField]="planForm.plan"
-          id="plan-free"
-          class="mt-1"
-        />
-        <div class="grid gap-1">
-          <span class="text-sm leading-none font-medium">Free</span>
-          <p class="text-muted-foreground text-sm">
-            Get started with basic features
-          </p>
-        </div>
+    <div scRadioGroup>
+      <label scRadioField>
+        <input type="radio" scRadio value="free" [formField]="planForm.plan" />
+        <label scLabel>Free</label>
+        <p scFieldDescription>Get started with basic features</p>
       </label>
-      <label scRadioField class="flex items-start space-x-3">
-        <input
-          type="radio"
-          scRadio
-          value="pro"
-          [formField]="planForm.plan"
-          id="plan-pro"
-          class="mt-1"
-        />
-        <div class="grid gap-1">
-          <span class="text-sm leading-none font-medium">Pro</span>
-          <p class="text-muted-foreground text-sm">
-            Advanced features for professionals
-          </p>
-        </div>
+      <label scRadioField>
+        <input type="radio" scRadio value="pro" [formField]="planForm.plan" />
+        <label scLabel>Pro</label>
+        <p scFieldDescription>Advanced features for professionals</p>
       </label>
-      <label scRadioField class="flex items-start space-x-3">
+      <label scRadioField>
         <input
           type="radio"
           scRadio
           value="enterprise"
           [formField]="planForm.plan"
-          id="plan-enterprise"
-          class="mt-1"
         />
-        <div class="grid gap-1">
-          <span class="text-sm leading-none font-medium">Enterprise</span>
-          <p class="text-muted-foreground text-sm">
-            Custom solutions for large teams
-          </p>
-        </div>
+        <label scLabel>Enterprise</label>
+        <p scFieldDescription>Custom solutions for large teams</p>
       </label>
     </div>
   `,
