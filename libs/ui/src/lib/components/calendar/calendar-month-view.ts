@@ -71,25 +71,26 @@ export class ScCalendarMonthView {
 
   readonly year = input.required<number>();
   readonly selectedMonth = input.required<number>();
+  readonly monthLabels = input([
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]);
   readonly monthSelected = output<number>();
   readonly yearScrollUp = output<void>();
   readonly yearScrollDown = output<void>();
 
   protected readonly months = computed((): MonthInfo[] => {
-    const monthNames = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
+    const monthNames = this.monthLabels();
     const currentMonth = this.selectedMonth();
     const year = this.year();
     const today = Temporal.Now.plainDateISO();

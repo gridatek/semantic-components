@@ -52,7 +52,7 @@ export type ScCalendarValue =
           [disabled]="disabled()"
           [minDate]="minDate()"
           [maxDate]="maxDate()"
-          [weekDays]="weekDays"
+          [weekDays]="weekDays()"
           (dateSelected)="selectDate($event)"
           (monthScrollUp)="previousMonth()"
           (monthScrollDown)="nextMonth()"
@@ -63,6 +63,7 @@ export type ScCalendarValue =
           scCalendarMonthView
           [year]="viewDate().year"
           [selectedMonth]="viewDate().month"
+          [monthLabels]="monthLabels()"
           (monthSelected)="selectMonth($event)"
           (yearScrollUp)="previousYear()"
           (yearScrollDown)="nextYear()"
@@ -94,7 +95,21 @@ export class ScCalendar {
 
   readonly value = model<ScCalendarValue>(undefined);
 
-  readonly weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  readonly weekDays = input(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
+  readonly monthLabels = input([
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]);
 
   readonly viewDate = signal(Temporal.Now.plainDateISO());
   readonly viewModeInput = input<ScCalendarViewMode>('day', {
