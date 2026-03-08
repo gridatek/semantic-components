@@ -60,6 +60,10 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Do not assume globals like (`new Date()`) are available.
 - Do not write arrow functions in templates (they are not supported).
 
+## Development Workflow
+
+- Do NOT run builds (`nx build`). The user runs the project in dev mode — changes are reflected live.
+
 ## Services
 
 - Design services around a single responsibility
