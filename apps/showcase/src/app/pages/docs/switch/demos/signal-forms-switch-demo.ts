@@ -33,28 +33,28 @@ interface SwitchFormModel {
   template: `
     <form>
       <div class="space-y-4">
-        <label scSwitchField reversed>
+        <label scSwitchField>
+          <p scInlineLabel>Enable Notifications</p>
+          <p scFieldDescription>
+            Receive notifications about your account activity
+          </p>
           <input
             type="checkbox"
             scSwitch
             [formField]="switchForm.notifications"
           />
-          <p scInlineLabel>Enable Notifications</p>
-          <p scFieldDescription>
-            Receive notifications about your account activity
-          </p>
         </label>
 
-        <label scSwitchField reversed>
-          <input type="checkbox" scSwitch [formField]="switchForm.darkMode" />
+        <label scSwitchField>
           <p scInlineLabel>Dark Mode</p>
           <p scFieldDescription>Switch to dark theme</p>
+          <input type="checkbox" scSwitch [formField]="switchForm.darkMode" />
         </label>
 
-        <label scSwitchField reversed>
-          <input type="checkbox" scSwitch [formField]="switchForm.autoSave" />
+        <label scSwitchField>
           <p scInlineLabel>Auto Save</p>
           <p scFieldDescription>Automatically save your work</p>
+          <input type="checkbox" scSwitch [formField]="switchForm.autoSave" />
         </label>
       </div>
 

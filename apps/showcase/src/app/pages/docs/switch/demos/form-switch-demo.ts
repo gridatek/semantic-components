@@ -17,24 +17,24 @@ import {
   template: `
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
-        <label scSwitchField reversed>
-          <input type="checkbox" scSwitch [(checked)]="marketing" />
+        <label scSwitchField>
           <p scInlineLabel>Marketing emails</p>
           <p scFieldDescription>
             Receive emails about new products and features.
           </p>
+          <input type="checkbox" scSwitch [(checked)]="marketing" />
         </label>
-        <label scSwitchField reversed>
-          <input type="checkbox" scSwitch [(checked)]="security" />
+        <label scSwitchField>
           <p scInlineLabel>Security emails</p>
           <p scFieldDescription>Receive emails about your account security.</p>
+          <input type="checkbox" scSwitch [(checked)]="security" />
         </label>
-        <label scSwitchField reversed>
-          <input type="checkbox" scSwitch [(checked)]="updates" />
+        <label scSwitchField>
           <p scInlineLabel>Product updates</p>
           <p scFieldDescription>
             Receive emails about product updates and tips.
           </p>
+          <input type="checkbox" scSwitch [(checked)]="updates" />
         </label>
       </div>
     </div>
