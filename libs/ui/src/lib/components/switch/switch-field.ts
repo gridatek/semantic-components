@@ -61,7 +61,7 @@ export class ScSwitchField implements ScSwitchContext {
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex cursor-pointer items-center gap-2 text-sm leading-none font-medium has-disabled:cursor-not-allowed',
+      'inline-flex cursor-pointer items-center gap-2 text-sm leading-none font-medium has-disabled:cursor-not-allowed has-disabled:text-muted-foreground',
       this.classInput(),
     ),
   );

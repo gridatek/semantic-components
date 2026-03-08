@@ -9,18 +9,14 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   selector: 'app-disabled-switch-demo',
   imports: [ScSwitch, ScSwitchField],
   template: `
-    <div class="space-y-3">
+    <div class="grid gap-3">
       <label scSwitchField>
         <input type="checkbox" scSwitch disabled />
-        <span class="text-muted-foreground text-sm leading-none font-medium">
-          Disabled (Off)
-        </span>
+        Disabled (Off)
       </label>
       <label scSwitchField>
         <input type="checkbox" scSwitch [checked]="true" disabled />
-        <span class="text-muted-foreground text-sm leading-none font-medium">
-          Disabled (On)
-        </span>
+        Disabled (On)
       </label>
     </div>
   `,
