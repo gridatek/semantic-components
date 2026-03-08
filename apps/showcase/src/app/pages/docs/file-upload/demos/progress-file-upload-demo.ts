@@ -16,6 +16,7 @@ import {
   ScFileUploadItemProgress,
   ScFileUploadItemSize,
   ScFileUploadList,
+  ScProgress,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,
@@ -36,6 +37,7 @@ import {
     ScFileUploadItemDelete,
     ScFileUploadInput,
     ScFileUploadItemProgress,
+    ScProgress,
     SiFileIcon,
     SiUploadIcon,
     SiXIcon,
@@ -74,7 +76,13 @@ import {
                     <div scFileUploadItemSize [file]="file"></div>
                   </div>
                   @if (file.status === 'uploading') {
-                    <div scFileUploadItemProgress [file]="file"></div>
+                    <div scFileUploadItemProgress [file]="file">
+                      <div
+                        scProgress
+                        [value]="file.progress ?? 0"
+                        aria-label="Upload progress"
+                      ></div>
+                    </div>
                   }
                   @if (file.status === 'complete') {
                     <p class="text-xs text-green-600">Upload complete</p>
