@@ -11,7 +11,7 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
   template: `
     <label scSwitchField>
       <input type="checkbox" scSwitch />
-      <span class="text-sm leading-none font-medium">Airplane Mode</span>
+      Airplane Mode
     </label>
   `,
   host: { class: 'flex w-full justify-center' },
