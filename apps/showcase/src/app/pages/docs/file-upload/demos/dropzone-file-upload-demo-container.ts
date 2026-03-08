@@ -10,7 +10,11 @@ import { DropzoneFileUploadDemo } from './dropzone-file-upload-demo';
   selector: 'app-dropzone-file-upload-demo-container',
   imports: [DemoContainer, DropzoneFileUploadDemo],
   template: `
-    <app-demo-container title="Dropzone" [code]="code">
+    <app-demo-container
+      title="Dropzone"
+      demoUrl="/demos/file-upload/dropzone-file-upload-demo"
+      [code]="code"
+    >
       <app-dropzone-file-upload-demo />
     </app-demo-container>
   `,
@@ -29,6 +33,7 @@ import {
   ScFileUpload,
   ScFileUploadDropzone,
   ScFileUploadFile,
+  ScFileUploadInput,
   ScFileUploadItem,
   ScFileUploadItemDelete,
   ScFileUploadItemName,
@@ -53,6 +58,7 @@ import {
     ScFileUploadItemName,
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
+    ScFileUploadInput,
     SiFileIcon,
     SiUploadIcon,
     SiXIcon,
@@ -61,6 +67,7 @@ import {
     <div class="max-w-lg">
       <div scFileUpload [multiple]="true" [(files)]="files">
         <div scFileUploadDropzone class="p-8">
+          <input scFileUploadInput aria-label="Upload files" />
           <div class="flex flex-col items-center gap-2 text-center">
             <svg siUploadIcon class="text-muted-foreground size-10"></svg>
             <div class="space-y-1">

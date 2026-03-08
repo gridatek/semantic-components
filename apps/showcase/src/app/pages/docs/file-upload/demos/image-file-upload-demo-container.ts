@@ -10,7 +10,11 @@ import { ImageFileUploadDemo } from './image-file-upload-demo';
   selector: 'app-image-file-upload-demo-container',
   imports: [DemoContainer, ImageFileUploadDemo],
   template: `
-    <app-demo-container title="Image Upload" [code]="code">
+    <app-demo-container
+      title="Image Upload"
+      demoUrl="/demos/file-upload/image-file-upload-demo"
+      [code]="code"
+    >
       <app-image-file-upload-demo />
     </app-demo-container>
   `,
@@ -29,6 +33,7 @@ import {
   ScFileUpload,
   ScFileUploadDropzone,
   ScFileUploadFile,
+  ScFileUploadInput,
   ScFileUploadItem,
   ScFileUploadItemDelete,
   ScFileUploadItemName,
@@ -49,6 +54,7 @@ import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     ScFileUploadItemName,
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
+    ScFileUploadInput,
     SiImageIcon,
     SiXIcon,
   ],
@@ -63,6 +69,7 @@ import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
         (error)="onError($event)"
       >
         <div scFileUploadDropzone class="p-8">
+          <input scFileUploadInput aria-label="Upload images" />
           <div class="flex flex-col items-center gap-2 text-center">
             <svg siImageIcon class="text-muted-foreground size-10"></svg>
             <div class="space-y-1">

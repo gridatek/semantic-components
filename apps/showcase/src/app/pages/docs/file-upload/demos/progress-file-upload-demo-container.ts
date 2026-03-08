@@ -10,7 +10,11 @@ import { ProgressFileUploadDemo } from './progress-file-upload-demo';
   selector: 'app-progress-file-upload-demo-container',
   imports: [DemoContainer, ProgressFileUploadDemo],
   template: `
-    <app-demo-container title="With Progress" [code]="code">
+    <app-demo-container
+      title="With Progress"
+      demoUrl="/demos/file-upload/progress-file-upload-demo"
+      [code]="code"
+    >
       <app-progress-file-upload-demo />
     </app-demo-container>
   `,
@@ -29,6 +33,7 @@ import {
   ScFileUpload,
   ScFileUploadDropzone,
   ScFileUploadFile,
+  ScFileUploadInput,
   ScFileUploadItem,
   ScFileUploadItemDelete,
   ScFileUploadItemName,
@@ -36,6 +41,7 @@ import {
   ScFileUploadItemProgress,
   ScFileUploadItemSize,
   ScFileUploadList,
+  ScProgress,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,
@@ -54,7 +60,9 @@ import {
     ScFileUploadItemName,
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
+    ScFileUploadInput,
     ScFileUploadItemProgress,
+    ScProgress,
     SiFileIcon,
     SiUploadIcon,
     SiXIcon,
@@ -68,6 +76,7 @@ import {
         (filesSelected)="simulateUpload($event)"
       >
         <div scFileUploadDropzone class="p-8">
+          <input scFileUploadInput aria-label="Upload files" />
           <div class="flex flex-col items-center gap-2 text-center">
             <svg siUploadIcon class="text-muted-foreground size-10"></svg>
             <div class="space-y-1">
@@ -92,7 +101,13 @@ import {
                     <div scFileUploadItemSize [file]="file"></div>
                   </div>
                   @if (file.status === 'uploading') {
-                    <div scFileUploadItemProgress [file]="file"></div>
+                    <div scFileUploadItemProgress [file]="file">
+                      <div
+                        scProgress
+                        [value]="file.progress ?? 0"
+                        aria-label="Upload progress"
+                      ></div>
+                    </div>
                   }
                   @if (file.status === 'complete') {
                     <p class="text-xs text-green-600">Upload complete</p>

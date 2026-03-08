@@ -10,7 +10,11 @@ import { ButtonFileUploadDemo } from './button-file-upload-demo';
   selector: 'app-button-file-upload-demo-container',
   imports: [DemoContainer, ButtonFileUploadDemo],
   template: `
-    <app-demo-container title="Button Trigger" [code]="code">
+    <app-demo-container
+      title="Button Trigger"
+      demoUrl="/demos/file-upload/button-file-upload-demo"
+      [code]="code"
+    >
       <app-button-file-upload-demo />
     </app-demo-container>
   `,
@@ -28,6 +32,7 @@ export class ButtonFileUploadDemoContainer {
 import {
   ScFileUpload,
   ScFileUploadFile,
+  ScFileUploadInput,
   ScFileUploadItem,
   ScFileUploadItemDelete,
   ScFileUploadItemName,
@@ -53,6 +58,7 @@ import {
     ScFileUploadItemName,
     ScFileUploadItemSize,
     ScFileUploadItemDelete,
+    ScFileUploadInput,
     SiFileIcon,
     SiUploadIcon,
     SiXIcon,
@@ -61,6 +67,7 @@ import {
     <div class="max-w-lg">
       <div scFileUpload [multiple]="true" [(files)]="files">
         <button scFileUploadTrigger>
+          <input scFileUploadInput aria-label="Upload files" />
           <svg siUploadIcon class="size-4"></svg>
           Upload Files
         </button>
