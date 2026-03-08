@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScSlider } from '@semantic-components/ui';
 import {
   ScImageCompare,
   ScImageCompareAfter,
@@ -22,6 +23,7 @@ import {
     ScImageCompareAfter,
     ScImageCompareSlider,
     ScImageCompareLabel,
+    ScSlider,
   ],
   template: `
     <div class="w-full max-w-2xl space-y-4">
@@ -38,10 +40,8 @@ import {
       <div class="flex items-center gap-4">
         <input
           type="range"
-          min="0"
-          max="100"
-          [value]="position()"
-          (input)="position.set(+$any($event.target).value)"
+          scSlider
+          [(value)]="position"
           aria-label="Comparison position"
           class="flex-1"
         />
