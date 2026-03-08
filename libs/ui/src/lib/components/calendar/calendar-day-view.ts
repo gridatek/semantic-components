@@ -115,6 +115,7 @@ export class ScCalendarDayView {
   readonly monthScrollDown = output<void>();
 
   readonly weekDays = input(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
+  readonly startOfWeek = input(0);
 
   protected readonly weeks = computed(() => {
     const date = this.viewDate();
@@ -124,7 +125,8 @@ export class ScCalendarDayView {
     const firstDay = new Temporal.PlainDate(year, month, 1);
     const daysInMonth = firstDay.daysInMonth;
     // dayOfWeek: 1=Mon..7=Sun; %7 gives 0=Sun like JS Date.getDay()
-    const firstDayOfWeek = firstDay.dayOfWeek % 7;
+    const dayOfWeek = firstDay.dayOfWeek % 7;
+    const firstDayOfWeek = (dayOfWeek - this.startOfWeek() + 7) % 7;
 
     const days: (DayInfo | null)[][] = [];
     let currentWeek: (DayInfo | null)[] = [];

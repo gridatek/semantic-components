@@ -53,6 +53,7 @@ export type ScCalendarValue =
           [minDate]="minDate()"
           [maxDate]="maxDate()"
           [weekDays]="weekDays()"
+          [startOfWeek]="startOfWeek()"
           (dateSelected)="selectDate($event)"
           (monthScrollUp)="previousMonth()"
           (monthScrollDown)="nextMonth()"
@@ -95,6 +96,7 @@ export class ScCalendar {
 
   readonly value = model<ScCalendarValue>(undefined);
 
+  readonly startOfWeek = input(0);
   readonly weekDays = input(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
   readonly monthLabels = input([
     'Jan',
