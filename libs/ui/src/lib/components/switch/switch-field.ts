@@ -63,7 +63,6 @@ export class ScSwitchField implements ScSwitchContext {
       'grid cursor-pointer items-center gap-x-3 gap-y-0.5 text-sm leading-none font-medium',
       'has-disabled:cursor-not-allowed has-disabled:text-muted-foreground',
       'has-[>[data-slot=field-description]]:*:data-[slot=inline-label]:font-medium',
-      'has-[>[data-slot=field-description]]:*:data-[slot=switch-visual]:row-span-2 has-[>[data-slot=field-description]]:*:data-[slot=switch-visual]:self-center',
       // Switch first: input is the first child → switch col-1, content col-2
       'has-[>:first-child[data-slot=switch]]:grid-cols-[2.75rem_1fr]',
       'has-[>:first-child[data-slot=switch]]:*:data-[slot=switch-visual]:col-start-1 has-[>:first-child[data-slot=switch]]:*:data-[slot=switch-visual]:row-start-1',
