@@ -17,9 +17,11 @@ export const SC_RADIO = 'SC_RADIO';
   host: {
     'data-slot': 'radio',
     '[attr.id]': 'id()',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '[disabled]': 'disabled()',
   },
+  exportAs: SC_RADIO,
 })
 export class ScRadio {
   private readonly radioGroup = inject(ScRadioGroup, { optional: true });
@@ -30,6 +32,7 @@ export class ScRadio {
   readonly classInput = input<string>('', {
     alias: 'class',
   });
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly disabledInput = input(false, {
     alias: 'disabled',
     transform: booleanAttribute,
@@ -37,6 +40,13 @@ export class ScRadio {
 
   readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () =>
+      this.ariaDescribedByInput() ||
+      this.field?.descriptionIds().join(' ') ||
+      null,
   );
 
   readonly disabled = computed(
