@@ -24,23 +24,23 @@ export class DescriptionSwitchDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import {
+  ScFieldDescription,
+  ScInlineLabel,
+  ScSwitch,
+  ScSwitchField,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-description-switch-demo',
-  imports: [ScSwitch, ScSwitchField],
+  imports: [ScSwitch, ScSwitchField, ScInlineLabel, ScFieldDescription],
   template: \`
-    <label
-      scSwitchField
-      class="w-full flex-row-reverse justify-between rounded-lg border p-4"
-    >
+    <label scSwitchField class="rounded-lg border p-4">
+      <p scInlineLabel>Dark Mode</p>
+      <p scFieldDescription>
+        Enable dark mode for a better viewing experience in low light.
+      </p>
       <input type="checkbox" scSwitch />
-      <div class="space-y-0.5">
-        <p class="text-base font-medium">Dark Mode</p>
-        <p class="text-muted-foreground text-sm">
-          Enable dark mode for a better viewing experience in low light.
-        </p>
-      </div>
     </label>
   \`,
   host: { class: 'flex w-full justify-center' },
