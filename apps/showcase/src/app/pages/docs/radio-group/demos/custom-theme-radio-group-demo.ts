@@ -5,34 +5,39 @@ import {
   signal,
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
+import {
+  ScLabel,
+  ScRadio,
+  ScRadioField,
+  ScRadioGroup,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-custom-theme-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
+  imports: [ScRadioGroup, ScRadioField, ScRadio, ScLabel, FormField],
   template: `
     <div
       class="space-y-3"
       style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);"
     >
       <div scRadioGroup>
-        <label scRadioField class="flex items-center space-x-2">
+        <label scRadioField>
           <input
             type="radio"
             scRadio
             value="option1"
             [formField]="themeForm.selected"
           />
-          <span class="text-sm">Option 1</span>
+          <label scLabel>Option 1</label>
         </label>
-        <label scRadioField class="flex items-center space-x-2">
+        <label scRadioField>
           <input
             type="radio"
             scRadio
             value="option2"
             [formField]="themeForm.selected"
           />
-          <span class="text-sm">Option 2</span>
+          <label scLabel>Option 2</label>
         </label>
       </div>
     </div>

@@ -5,7 +5,12 @@ import {
   signal,
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
+import {
+  ScLabel,
+  ScRadio,
+  ScRadioField,
+  ScRadioGroup,
+} from '@semantic-components/ui';
 
 interface NotificationFormModel {
   notify: string;
@@ -13,45 +18,38 @@ interface NotificationFormModel {
 
 @Component({
   selector: 'app-form-radio-group-demo',
-  imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
+  imports: [ScRadioGroup, ScRadioField, ScRadio, ScLabel, FormField],
   template: `
     <div class="max-w-md rounded-lg border p-6">
       <div class="space-y-4">
-        <h4 id="notify-heading" class="font-semibold">
-          Notification Preferences
-        </h4>
-        <div scRadioGroup class="gap-3">
-          <label scRadioField class="flex items-center space-x-2">
+        <h4 class="font-semibold">Notification Preferences</h4>
+        <div scRadioGroup>
+          <label scRadioField>
             <input
               type="radio"
               scRadio
               value="all"
               [formField]="notificationForm.notify"
-              id="notify-all"
             />
-            <span class="text-sm font-medium">All new messages</span>
+            <label scLabel>All new messages</label>
           </label>
-          <label scRadioField class="flex items-center space-x-2">
+          <label scRadioField>
             <input
               type="radio"
               scRadio
               value="mentions"
               [formField]="notificationForm.notify"
-              id="notify-mentions"
             />
-            <span class="text-sm font-medium">
-              Direct messages and mentions
-            </span>
+            <label scLabel>Direct messages and mentions</label>
           </label>
-          <label scRadioField class="flex items-center space-x-2">
+          <label scRadioField>
             <input
               type="radio"
               scRadio
               value="none"
               [formField]="notificationForm.notify"
-              id="notify-none"
             />
-            <span class="text-sm font-medium">Nothing</span>
+            <label scLabel>Nothing</label>
           </label>
         </div>
       </div>
