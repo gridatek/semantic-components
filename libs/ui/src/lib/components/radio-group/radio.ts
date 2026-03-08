@@ -10,8 +10,6 @@ import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 import { ScRadioGroup } from './radio-group';
 
-export const SC_RADIO = 'SC_RADIO';
-
 @Directive({
   selector: 'input[type="radio"][scRadio]',
   host: {
@@ -21,7 +19,6 @@ export const SC_RADIO = 'SC_RADIO';
     '[class]': 'class()',
     '[disabled]': 'disabled()',
   },
-  exportAs: SC_RADIO,
 })
 export class ScRadio {
   private readonly radioGroup = inject(ScRadioGroup, { optional: true });
