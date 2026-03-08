@@ -3306,10 +3306,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'form-switch-demo',
+        path: 'input-first-switch-demo',
         loadComponent: () =>
-          import('../pages/docs/switch/demos/form-switch-demo').then(
-            (m) => m.FormSwitchDemo,
+          import('../pages/docs/switch/demos/input-first-switch-demo').then(
+            (m) => m.InputFirstSwitchDemo,
+          ),
+      },
+      {
+        path: 'input-last-switch-demo',
+        loadComponent: () =>
+          import('../pages/docs/switch/demos/input-last-switch-demo').then(
+            (m) => m.InputLastSwitchDemo,
           ),
       },
       {

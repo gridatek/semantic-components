@@ -12,7 +12,7 @@ import {
 } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-form-switch-demo',
+  selector: 'app-input-last-switch-demo',
   imports: [ScSwitch, ScSwitchField, ScFieldDescription, ScInlineLabel],
   template: `
     <div class="w-[400px] rounded-lg border p-4">
@@ -43,7 +43,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormSwitchDemo {
+export class InputLastSwitchDemo {
   readonly marketing = signal(false);
   readonly security = signal(true);
   readonly updates = signal(false);

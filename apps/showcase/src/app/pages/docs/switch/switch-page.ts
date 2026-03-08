@@ -9,7 +9,8 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSwitchDemoContainer } from './demos/basic-switch-demo-container';
 import { DescriptionSwitchDemoContainer } from './demos/description-switch-demo-container';
 import { DisabledSwitchDemoContainer } from './demos/disabled-switch-demo-container';
-import { FormSwitchDemoContainer } from './demos/form-switch-demo-container';
+import { InputFirstSwitchDemoContainer } from './demos/input-first-switch-demo-container';
+import { InputLastSwitchDemoContainer } from './demos/input-last-switch-demo-container';
 import { SignalFormsSwitchDemoContainer } from './demos/signal-forms-switch-demo-container';
 import { StateSwitchDemoContainer } from './demos/state-switch-demo-container';
 
@@ -19,7 +20,8 @@ import { StateSwitchDemoContainer } from './demos/state-switch-demo-container';
     BasicSwitchDemoContainer,
     StateSwitchDemoContainer,
     DisabledSwitchDemoContainer,
-    FormSwitchDemoContainer,
+    InputFirstSwitchDemoContainer,
+    InputLastSwitchDemoContainer,
     DescriptionSwitchDemoContainer,
     SignalFormsSwitchDemoContainer,
     TocHeading,
@@ -42,7 +44,8 @@ import { StateSwitchDemoContainer } from './demos/state-switch-demo-container';
         <app-basic-switch-demo-container />
         <app-state-switch-demo-container />
         <app-disabled-switch-demo-container />
-        <app-form-switch-demo-container />
+        <app-input-first-switch-demo-container />
+        <app-input-last-switch-demo-container />
         <app-description-switch-demo-container />
         <app-signal-forms-switch-demo-container />
       </section>
