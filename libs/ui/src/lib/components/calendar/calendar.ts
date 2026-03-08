@@ -56,6 +56,7 @@ export type ScCalendarValue =
           [maxDate]="maxDate()"
           [weekDays]="weekDays()"
           [startOfWeek]="startOfWeek()"
+          [ariaLabel]="dayViewLabel()"
           (dateSelected)="selectDate($event)"
           (monthScrollUp)="previousMonth()"
           (monthScrollDown)="nextMonth()"
@@ -103,6 +104,7 @@ export class ScCalendar {
   readonly value = model<ScCalendarValue>(undefined);
 
   readonly ariaLabel = input('Calendar');
+  readonly dayViewLabel = input('Select date');
   readonly monthViewLabel = input('Select month');
   readonly yearViewLabel = input('Select year');
   readonly startOfWeek = input(0);
