@@ -31,7 +31,8 @@ import {
   template: `
     <div class="space-y-4">
       <div class="w-fit rounded-md border">
-        <sc-calendar
+        <div
+          scCalendar
           [(value)]="selectedDate"
           viewMode="year"
           [maxDate]="today"
@@ -72,7 +73,7 @@ import {
               </span>
             </button>
           </div>
-        </sc-calendar>
+        </div>
       </div>
 
       @if (selectedDate(); as date) {

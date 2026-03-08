@@ -29,7 +29,7 @@ export type ScCalendarValue =
   | undefined;
 
 @Component({
-  selector: 'sc-calendar',
+  selector: 'div[scCalendar]',
   exportAs: 'scCalendar',
   imports: [ScCalendarDayView, ScCalendarMonthView, ScCalendarYearView],
   host: {

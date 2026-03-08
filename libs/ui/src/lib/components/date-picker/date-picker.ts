@@ -7,11 +7,19 @@ import {
   input,
   model,
 } from '@angular/core';
-import { SiCalendarIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiCalendarIcon,
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
 import {
   ScCalendar,
+  ScCalendarHeader,
+  ScCalendarHeading,
   ScCalendarMode,
+  ScCalendarNext,
+  ScCalendarPrevious,
   ScCalendarValue,
   ScDateRange,
 } from '../calendar';
@@ -32,7 +40,13 @@ import {
     ScPopoverPortal,
     ScPopover,
     ScCalendar,
+    ScCalendarHeader,
+    ScCalendarHeading,
+    ScCalendarNext,
+    ScCalendarPrevious,
     SiCalendarIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
   ],
   template: `
     <div scPopoverProvider [(open)]="open" [side]="side()" [align]="align()">
@@ -44,14 +58,52 @@ import {
       </button>
       <ng-template scPopoverPortal>
         <div scPopover class="w-auto p-0">
-          <sc-calendar
+          <div
+            scCalendar
             [mode]="mode()"
             [(value)]="value"
             [disabled]="disabled()"
             [minDate]="minDate()"
             [maxDate]="maxDate()"
             (valueChange)="onValueChange()"
-          />
+            #cal="scCalendar"
+          >
+            <div scCalendarHeader>
+              <button scCalendarPrevious>
+                <svg siChevronLeftIcon class="size-4"></svg>
+                <span class="sr-only">
+                  @switch (cal.viewMode()) {
+                    @case ('day') {
+                      Go to previous month
+                    }
+                    @case ('month') {
+                      Go to previous year
+                    }
+                    @case ('year') {
+                      Go to previous decade
+                    }
+                  }
+                </span>
+              </button>
+              <button scCalendarHeading>{{ cal.heading() }}</button>
+              <button scCalendarNext>
+                <svg siChevronRightIcon class="size-4"></svg>
+                <span class="sr-only">
+                  @switch (cal.viewMode()) {
+                    @case ('day') {
+                      Go to next month
+                    }
+                    @case ('month') {
+                      Go to next year
+                    }
+                    @case ('year') {
+                      Go to next decade
+                    }
+                  }
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
       </ng-template>
     </div>

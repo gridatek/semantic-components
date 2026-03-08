@@ -31,7 +31,7 @@ import {
   template: `
     <div class="space-y-4">
       <div class="w-fit rounded-md border">
-        <sc-calendar [(value)]="selectedDate" #cal="scCalendar">
+        <div scCalendar [(value)]="selectedDate" #cal="scCalendar">
           <div scCalendarHeader>
             <button scCalendarPrevious>
               <svg siChevronLeftIcon class="size-4"></svg>
@@ -67,7 +67,7 @@ import {
               </span>
             </button>
           </div>
-        </sc-calendar>
+        </div>
       </div>
 
       <div class="space-y-2">

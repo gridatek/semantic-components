@@ -11,8 +11,21 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { ScCalendar, ScDateRange, cn } from '@semantic-components/ui';
-import { SiCalendarIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+import {
+  ScCalendar,
+  ScCalendarHeader,
+  ScCalendarHeading,
+  ScCalendarNext,
+  ScCalendarPrevious,
+  ScDateRange,
+  cn,
+} from '@semantic-components/ui';
+import {
+  SiCalendarIcon,
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
 export interface ScDateRangePreset {
   label: string;
@@ -71,29 +84,143 @@ export interface ScDateRangePreset {
             <div class="p-3">
               @if (showTwoMonths()) {
                 <div class="flex gap-4">
-                  <sc-calendar
+                  <div
+                    scCalendar
                     mode="range"
                     [(value)]="value"
                     [minDate]="minDate()"
                     [maxDate]="maxDate()"
                     [disabled]="disabledDates()"
-                  />
-                  <sc-calendar
+                    #cal1="scCalendar"
+                  >
+                    <div scCalendarHeader>
+                      <button scCalendarPrevious>
+                        <svg siChevronLeftIcon class="size-4"></svg>
+                        <span class="sr-only">
+                          @switch (cal1.viewMode()) {
+                            @case ('day') {
+                              Go to previous month
+                            }
+                            @case ('month') {
+                              Go to previous year
+                            }
+                            @case ('year') {
+                              Go to previous decade
+                            }
+                          }
+                        </span>
+                      </button>
+                      <button scCalendarHeading>{{ cal1.heading() }}</button>
+                      <button scCalendarNext>
+                        <svg siChevronRightIcon class="size-4"></svg>
+                        <span class="sr-only">
+                          @switch (cal1.viewMode()) {
+                            @case ('day') {
+                              Go to next month
+                            }
+                            @case ('month') {
+                              Go to next year
+                            }
+                            @case ('year') {
+                              Go to next decade
+                            }
+                          }
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    scCalendar
                     mode="range"
                     [(value)]="value"
                     [minDate]="minDate()"
                     [maxDate]="maxDate()"
                     [disabled]="disabledDates()"
-                  />
+                    #cal2="scCalendar"
+                  >
+                    <div scCalendarHeader>
+                      <button scCalendarPrevious>
+                        <svg siChevronLeftIcon class="size-4"></svg>
+                        <span class="sr-only">
+                          @switch (cal2.viewMode()) {
+                            @case ('day') {
+                              Go to previous month
+                            }
+                            @case ('month') {
+                              Go to previous year
+                            }
+                            @case ('year') {
+                              Go to previous decade
+                            }
+                          }
+                        </span>
+                      </button>
+                      <button scCalendarHeading>{{ cal2.heading() }}</button>
+                      <button scCalendarNext>
+                        <svg siChevronRightIcon class="size-4"></svg>
+                        <span class="sr-only">
+                          @switch (cal2.viewMode()) {
+                            @case ('day') {
+                              Go to next month
+                            }
+                            @case ('month') {
+                              Go to next year
+                            }
+                            @case ('year') {
+                              Go to next decade
+                            }
+                          }
+                        </span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               } @else {
-                <sc-calendar
+                <div
+                  scCalendar
                   mode="range"
                   [(value)]="value"
                   [minDate]="minDate()"
                   [maxDate]="maxDate()"
                   [disabled]="disabledDates()"
-                />
+                  #cal="scCalendar"
+                >
+                  <div scCalendarHeader>
+                    <button scCalendarPrevious>
+                      <svg siChevronLeftIcon class="size-4"></svg>
+                      <span class="sr-only">
+                        @switch (cal.viewMode()) {
+                          @case ('day') {
+                            Go to previous month
+                          }
+                          @case ('month') {
+                            Go to previous year
+                          }
+                          @case ('year') {
+                            Go to previous decade
+                          }
+                        }
+                      </span>
+                    </button>
+                    <button scCalendarHeading>{{ cal.heading() }}</button>
+                    <button scCalendarNext>
+                      <svg siChevronRightIcon class="size-4"></svg>
+                      <span class="sr-only">
+                        @switch (cal.viewMode()) {
+                          @case ('day') {
+                            Go to next month
+                          }
+                          @case ('month') {
+                            Go to next year
+                          }
+                          @case ('year') {
+                            Go to next decade
+                          }
+                        }
+                      </span>
+                    </button>
+                  </div>
+                </div>
               }
 
               <!-- Footer -->
@@ -139,7 +266,17 @@ export interface ScDateRangePreset {
   host: {
     'data-slot': 'date-range-picker',
   },
-  imports: [ScCalendar, SiCalendarIcon, SiXIcon],
+  imports: [
+    ScCalendar,
+    ScCalendarHeader,
+    ScCalendarHeading,
+    ScCalendarNext,
+    ScCalendarPrevious,
+    SiCalendarIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+    SiXIcon,
+  ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
