@@ -15,7 +15,7 @@ interface FilterFormModel {
   selector: 'app-horizontal-radio-group-demo',
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
-    <div scRadioGroup class="flex flex-row gap-4">
+    <div scRadioGroup orientation="horizontal">
       <label scRadioField>
         <input
           type="radio"

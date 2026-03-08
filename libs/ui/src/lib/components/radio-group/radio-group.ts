@@ -12,11 +12,17 @@ import { cn } from '../../utils';
 })
 export class ScRadioGroup {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly orientation = input<'vertical' | 'horizontal'>('vertical');
   readonly disabled = input(false, {
     transform: booleanAttribute,
   });
 
   protected readonly class = computed(() =>
-    cn('grid gap-2', this.classInput()),
+    cn(
+      this.orientation() === 'horizontal'
+        ? 'flex flex-row gap-4'
+        : 'grid gap-2',
+      this.classInput(),
+    ),
   );
 }

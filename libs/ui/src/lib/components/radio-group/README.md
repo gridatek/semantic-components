@@ -23,17 +23,17 @@ interface FormModel {
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: `
     <div scRadioGroup>
-      <label scRadioField class="flex items-center space-x-2">
+      <label scRadioField>
         <input type="radio" scRadio value="option1" [formField]="optionForm.option" />
-        <span>Option 1</span>
+        Option 1
       </label>
-      <label scRadioField class="flex items-center space-x-2">
+      <label scRadioField>
         <input type="radio" scRadio value="option2" [formField]="optionForm.option" />
-        <span>Option 2</span>
+        Option 2
       </label>
-      <label scRadioField class="flex items-center space-x-2">
+      <label scRadioField>
         <input type="radio" scRadio value="option3" [formField]="optionForm.option" />
-        <span>Option 3</span>
+        Option 3
       </label>
     </div>
     <p>Selected: {{ formModel().option }}</p>
@@ -48,14 +48,14 @@ export class MyComponent {
 ## Horizontal Layout
 
 ```html
-<div scRadioGroup class="flex flex-row gap-4">
-  <label scRadioField class="flex items-center space-x-2">
+<div scRadioGroup orientation="horizontal">
+  <label scRadioField>
     <input type="radio" scRadio value="all" [formField]="filterForm.filter" />
-    <span>All</span>
+    All
   </label>
-  <label scRadioField class="flex items-center space-x-2">
+  <label scRadioField>
     <input type="radio" scRadio value="unread" [formField]="filterForm.filter" />
-    <span>Unread</span>
+    Unread
   </label>
 </div>
 ```
@@ -66,26 +66,26 @@ export class MyComponent {
 <!-- Disable entire group using fieldset -->
 <fieldset disabled>
   <div scRadioGroup>
-    <label scRadioField class="flex items-center space-x-2">
+    <label scRadioField>
       <input type="radio" scRadio value="option1" [formField]="optionForm.option" />
-      <span>Option 1</span>
+      Option 1
     </label>
-    <label scRadioField class="flex items-center space-x-2">
+    <label scRadioField>
       <input type="radio" scRadio value="option2" [formField]="optionForm.option" />
-      <span>Option 2</span>
+      Option 2
     </label>
   </div>
 </fieldset>
 
 <!-- Disable individual items (without formField) -->
 <div scRadioGroup>
-  <label scRadioField class="flex items-center space-x-2">
+  <label scRadioField>
     <input type="radio" scRadio value="option1" [formField]="optionForm.option" />
-    <span>Option 1</span>
+    Option 1
   </label>
-  <label scRadioField class="flex items-center space-x-2">
+  <label scRadioField>
     <input type="radio" scRadio value="option2" disabled />
-    <span>Option 2 (disabled)</span>
+    Option 2 (disabled)
   </label>
 </div>
 ```
@@ -97,13 +97,13 @@ export class MyComponent {
 ```html
 <!-- Using aria-label -->
 <div scRadioGroup aria-label="Choose your theme">
-  <label scRadioField class="flex items-center space-x-2">
+  <label scRadioField>
     <input type="radio" scRadio value="light" [formField]="themeForm.theme" />
-    <span>Light</span>
+    Light
   </label>
-  <label scRadioField class="flex items-center space-x-2">
+  <label scRadioField>
     <input type="radio" scRadio value="dark" [formField]="themeForm.theme" />
-    <span>Dark</span>
+    Dark
   </label>
 </div>
 
@@ -111,13 +111,13 @@ export class MyComponent {
 <div>
   <h3 id="theme-heading">Choose your theme</h3>
   <div scRadioGroup aria-labelledby="theme-heading">
-    <label scRadioField class="flex items-center space-x-2">
+    <label scRadioField>
       <input type="radio" scRadio value="light" [formField]="themeForm.theme" />
-      <span>Light</span>
+      Light
     </label>
-    <label scRadioField class="flex items-center space-x-2">
+    <label scRadioField>
       <input type="radio" scRadio value="dark" [formField]="themeForm.theme" />
-      <span>Dark</span>
+      Dark
     </label>
   </div>
 </div>
@@ -133,9 +133,10 @@ Container directive for radio buttons that provides radiogroup semantics.
 
 **Inputs:**
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+| Input         | Type                         | Default      | Description                         |
+| ------------- | ---------------------------- | ------------ | ----------------------------------- |
+| `class`       | `string`                     | `''`         | Additional CSS classes              |
+| `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction of the radio group |
 
 **Host Attributes:**
 
@@ -182,7 +183,7 @@ The `ScRadio` directive styles the native radio input using CSS. You can customi
 <div scRadioGroup>
   <label scRadioField>
     <input type="radio" scRadio class="h-6 w-6 border-2" name="custom" value="option1" [(ngModel)]="selected" />
-    <span>Custom sized radio</span>
+    Custom sized radio
   </label>
 </div>
 ```
@@ -193,7 +194,7 @@ For complete custom styling, you can omit the `sc-radio` directive and style the
 <div scRadioGroup>
   <label scRadioField>
     <input type="radio" class="your-custom-classes" name="custom" value="option1" [(ngModel)]="selected" />
-    <span>Fully custom radio</span>
+    Fully custom radio
   </label>
 </div>
 ```
@@ -206,9 +207,9 @@ You can customize the radio button colors by setting CSS custom properties (vari
 <!-- Purple theme -->
 <div style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);">
   <div scRadioGroup>
-    <label scRadioField class="flex items-center space-x-2">
+    <label scRadioField>
       <input type="radio" scRadio name="theme" value="option1" [(ngModel)]="selected" />
-      <span>Option 1</span>
+      Option 1
     </label>
   </div>
 </div>
@@ -216,9 +217,9 @@ You can customize the radio button colors by setting CSS custom properties (vari
 <!-- Green theme -->
 <div style="--primary: oklch(0.5 0.18 145); --primary-foreground: oklch(0.985 0 0);">
   <div scRadioGroup>
-    <label scRadioField class="flex items-center space-x-2">
+    <label scRadioField>
       <input type="radio" scRadio name="theme" value="option1" [(ngModel)]="selected" />
-      <span>Option 1</span>
+      Option 1
     </label>
   </div>
 </div>
