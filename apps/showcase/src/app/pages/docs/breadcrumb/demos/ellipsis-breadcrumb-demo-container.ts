@@ -37,7 +37,10 @@ import {
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
 } from '@semantic-components/ui';
-import { SiChevronRightIcon, SiEllipsisIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiChevronRightIcon,
+  SiEllipsisIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-ellipsis-breadcrumb-demo',
