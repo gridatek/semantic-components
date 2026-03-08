@@ -162,9 +162,11 @@ Directive for styling native radio inputs. Apply to `input[type="radio"]` elemen
 
 **Inputs:**
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+| Input              | Type     | Default | Description                          |
+| ------------------ | -------- | ------- | ------------------------------------ |
+| `id`               | `string` | `''`    | Element ID (auto-generated if empty) |
+| `class`            | `string` | `''`    | Additional CSS classes               |
+| `aria-describedby` | `string` | `''`    | IDs of describing elements           |
 
 **State Management:**
 
