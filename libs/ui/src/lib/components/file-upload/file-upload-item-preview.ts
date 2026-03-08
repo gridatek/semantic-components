@@ -7,7 +7,7 @@ import {
   effect,
   inject,
   input,
-  signal,
+  untracked,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
@@ -42,27 +42,23 @@ export class ScFileUploadItemPreview {
     this.item.file().file.type.startsWith('image/'),
   );
 
-  protected readonly previewUrl = signal('');
+  protected readonly previewUrl = computed(() => {
+    const file = this.item.file();
+    if (file.file.type.startsWith('image/')) {
+      return URL.createObjectURL(file.file);
+    }
+    return '';
+  });
 
   constructor() {
-    effect(() => {
-      const prev = this.previewUrl();
-      if (prev) {
-        URL.revokeObjectURL(prev);
-      }
-
-      if (this.isImage()) {
-        this.previewUrl.set(URL.createObjectURL(this.item.file().file));
-      } else {
-        this.previewUrl.set('');
-      }
-    });
-
-    this.destroyRef.onDestroy(() => {
+    // Revoke previous object URL when file changes
+    effect((onCleanup) => {
       const url = this.previewUrl();
-      if (url) {
-        URL.revokeObjectURL(url);
-      }
+      onCleanup(() => {
+        if (url) {
+          URL.revokeObjectURL(url);
+        }
+      });
     });
   }
 
