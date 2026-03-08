@@ -7,10 +7,13 @@ import {
 } from '@angular/core';
 import {
   ScCalendar,
+  ScCalendarClear,
+  ScCalendarFooter,
   ScCalendarHeader,
   ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
+  ScCalendarToday,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -21,10 +24,13 @@ import {
   selector: 'app-single-date-calendar-demo',
   imports: [
     ScCalendar,
+    ScCalendarClear,
+    ScCalendarFooter,
     ScCalendarHeader,
     ScCalendarHeading,
     ScCalendarNext,
     ScCalendarPrevious,
+    ScCalendarToday,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
@@ -66,6 +72,10 @@ import {
                 }
               </span>
             </button>
+          </div>
+          <div scCalendarFooter class="flex gap-2">
+            <button scCalendarClear>Clear</button>
+            <button scCalendarToday>Today</button>
           </div>
         </div>
       </div>

@@ -79,6 +79,8 @@ export type ScCalendarValue =
         ></div>
       }
     }
+
+    <ng-content select="[scCalendarFooter]" />
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -154,6 +156,17 @@ export class ScCalendar {
         }
       }
     }
+  }
+
+  clear(): void {
+    this.value.set(undefined);
+  }
+
+  goToToday(): void {
+    const today = Temporal.Now.plainDateISO();
+    this.viewDate.set(today);
+    this.viewMode.set('day');
+    this.selectDate(today);
   }
 
   handleHeaderClick(): void {
