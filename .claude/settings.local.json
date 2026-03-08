@@ -1,5 +1,5 @@
 {
   "permissions": {
-    "allow": ["Bash(npx nx:*)", "Bash(gh api:*)"]
+    "allow": ["Bash(npx nx:*)", "Bash(gh api:*)", "Bash(gh run:*)"]
   }
 }
