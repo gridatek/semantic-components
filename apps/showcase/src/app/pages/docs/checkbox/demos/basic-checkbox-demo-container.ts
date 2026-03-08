@@ -35,11 +35,16 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   selector: 'app-basic-checkbox-demo',
   imports: [ScCheckboxField, ScCheckbox, ScLabel],
   template: \`
-    <div scCheckboxField>
-      <input type="checkbox" scCheckbox [(checked)]="terms" />
-      <label scLabel>Accept terms and conditions</label>
+    <div>
+      <div scCheckboxField>
+        <input type="checkbox" scCheckbox [(checked)]="terms" />
+        <label scLabel>Accept terms and conditions</label>
+      </div>
+      <div class="bg-muted mt-4 rounded-md p-4">
+        <p class="text-sm font-medium">State:</p>
+        <pre class="mt-2 text-xs">checked: {{ terms() }}</pre>
+      </div>
     </div>
-    <p class="text-muted-foreground mt-2 text-sm">Checked: {{ terms() }}</p>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
