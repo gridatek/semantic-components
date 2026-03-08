@@ -81,14 +81,14 @@ import {
           <div scFileUploadList>
             @for (file of files(); track file.id) {
               <div scFileUploadItem [file]="file">
-                <div scFileUploadItemPreview [file]="file">
+                <div scFileUploadItemPreview>
                   <svg siFileIcon class="text-muted-foreground size-5"></svg>
                 </div>
                 <div class="min-w-0 flex-1">
                   <div scFileUploadItemName>{{ file.file.name }}</div>
-                  <div scFileUploadItemSize [file]="file"></div>
+                  <div scFileUploadItemSize></div>
                 </div>
-                <button scFileUploadItemDelete [fileId]="file.id">
+                <button scFileUploadItemDelete>
                   <svg siXIcon></svg>
                   <span class="sr-only">Remove file</span>
                 </button>

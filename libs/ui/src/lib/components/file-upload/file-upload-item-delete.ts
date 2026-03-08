@@ -2,6 +2,7 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { buttonVariants } from '../button';
 import { SC_FILE_UPLOAD } from './file-upload';
+import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
 
 @Directive({
   selector: 'button[scFileUploadItemDelete]',
@@ -14,9 +15,9 @@ import { SC_FILE_UPLOAD } from './file-upload';
 })
 export class ScFileUploadItemDelete {
   private readonly fileUpload = inject(SC_FILE_UPLOAD);
+  private readonly item = inject(SC_FILE_UPLOAD_ITEM);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly fileId = input.required<string>();
 
   protected readonly class = computed(() =>
     cn(
@@ -27,6 +28,6 @@ export class ScFileUploadItemDelete {
   );
 
   onClick(): void {
-    this.fileUpload.removeFile(this.fileId());
+    this.fileUpload.removeFile(this.item.file().id);
   }
 }

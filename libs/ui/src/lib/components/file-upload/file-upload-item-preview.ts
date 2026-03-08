@@ -10,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScFileUploadFile } from './file-upload';
+import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
 
 @Component({
   selector: '[scFileUploadItemPreview]',
@@ -18,7 +18,7 @@ import { ScFileUploadFile } from './file-upload';
     @if (isImage()) {
       <img
         [src]="previewUrl()"
-        [alt]="file().file.name"
+        [alt]="item.file().file.name"
         class="size-full object-cover"
       />
     } @else {
@@ -34,12 +34,12 @@ import { ScFileUploadFile } from './file-upload';
 })
 export class ScFileUploadItemPreview {
   private readonly destroyRef = inject(DestroyRef);
+  readonly item = inject(SC_FILE_UPLOAD_ITEM);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly file = input.required<ScFileUploadFile>();
 
   protected readonly isImage = computed(() =>
-    this.file().file.type.startsWith('image/'),
+    this.item.file().file.type.startsWith('image/'),
   );
 
   protected readonly previewUrl = signal('');
@@ -52,7 +52,7 @@ export class ScFileUploadItemPreview {
       }
 
       if (this.isImage()) {
-        this.previewUrl.set(URL.createObjectURL(this.file().file));
+        this.previewUrl.set(URL.createObjectURL(this.item.file().file));
       } else {
         this.previewUrl.set('');
       }

@@ -30,46 +30,15 @@ Converted to a `Directive` — no template needed, just host bindings.
 
 ---
 
-## 6. Duplicated `file` input across child components
+## ~~6. Duplicated `file` input across child components~~ ✅ RESOLVED
 
-`ScFileUploadItemPreview`, `ScFileUploadItemSize`, `ScFileUploadItemProgress` all require `[file]="file"` to be passed individually. The parent `ScFileUploadItem` already has the `file` — children could inject it instead of requiring their own input.
-
-```typescript
-// In ScFileUploadItem, provide self:
-providers: [{ provide: SC_FILE_UPLOAD_ITEM, useExisting: ScFileUploadItem }]
-
-// In children:
-private readonly item = inject(SC_FILE_UPLOAD_ITEM);
-protected readonly file = computed(() => this.item.file());
-```
-
-This simplifies the consumer template from:
-
-```html
-<div scFileUploadItem [file]="file">
-  <div scFileUploadItemPreview [file]="file"></div>
-  <div scFileUploadItemSize [file]="file"></div>
-</div>
-```
-
-To:
-
-```html
-<div scFileUploadItem [file]="file">
-  <div scFileUploadItemPreview></div>
-  <div scFileUploadItemSize></div>
-</div>
-```
-
-**Files:** `file-upload-item-preview.ts`, `file-upload-item-size.ts`, `file-upload-item-progress.ts`
+Children now inject `SC_FILE_UPLOAD_ITEM` from the parent `ScFileUploadItem` instead of requiring their own `[file]` input.
 
 ---
 
-## 7. `ScFileUploadItemDelete` takes `fileId` instead of injecting from parent
+## ~~7. `ScFileUploadItemDelete` takes `fileId` instead of injecting from parent~~ ✅ RESOLVED
 
-Same issue as #6. The delete button requires `[fileId]="file.id"` but could get the file ID from the parent `ScFileUploadItem` via injection.
-
-**File:** `file-upload-item-delete.ts`
+Delete button now injects `SC_FILE_UPLOAD_ITEM` to get the file ID from the parent.
 
 ---
 
@@ -116,8 +85,8 @@ Replaced `Math.random().toString(36)` with `crypto.randomUUID()` for guaranteed 
 | 3   | DOM query in dropzone                | Medium   | Low    | Resolved |
 | 4   | DOM query in trigger                 | Medium   | Low    | Resolved |
 | 5   | Item should be directive             | Low      | Low    | Resolved |
-| 6   | Duplicated file input in children    | Medium   | Medium | Open     |
-| 7   | Delete takes fileId, should inject   | Medium   | Low    | Open     |
+| 6   | Duplicated file input in children    | Medium   | Medium | Resolved |
+| 7   | Delete takes fileId, should inject   | Medium   | Low    | Resolved |
 | 8   | No FormValueControl support          | Medium   | Medium | Open     |
 | 9   | Silent failure on invalid IDs        | Low      | Low    | Open     |
 | 10  | Missing aria-label on file inputs    | High     | Low    | Resolved |

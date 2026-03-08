@@ -1,6 +1,6 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
-import { ScFileUploadFile } from './file-upload';
+import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
 
 @Directive({
   selector: '[scFileUploadItemProgress]',
@@ -10,8 +10,9 @@ import { ScFileUploadFile } from './file-upload';
   },
 })
 export class ScFileUploadItemProgress {
+  readonly item = inject(SC_FILE_UPLOAD_ITEM);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly file = input.required<ScFileUploadFile>();
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 }

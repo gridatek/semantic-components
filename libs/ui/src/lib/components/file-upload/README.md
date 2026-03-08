@@ -14,10 +14,10 @@ A drag and drop file upload zone with preview and progress support.
   <div scFileUploadList>
     @for (file of files(); track file.id) {
     <div scFileUploadItem [file]="file">
-      <div scFileUploadItemPreview [file]="file"></div>
+      <div scFileUploadItemPreview></div>
       <div scFileUploadItemName>{{ file.file.name }}</div>
-      <div scFileUploadItemSize [file]="file"></div>
-      <button scFileUploadItemDelete [fileId]="file.id">
+      <div scFileUploadItemSize></div>
+      <button scFileUploadItemDelete>
         <svg siXIcon></svg>
         <span class="sr-only">Remove file</span>
       </button>
@@ -140,15 +140,9 @@ Individual file item container.
 
 ### ScFileUploadItemPreview
 
-File preview (shows image thumbnail for images).
+File preview (shows image thumbnail for images). Injects file from parent `ScFileUploadItem`.
 
 **Selector:** `[scFileUploadItemPreview]`
-
-**Inputs:**
-
-| Input  | Type               | Required | Description     |
-| ------ | ------------------ | -------- | --------------- |
-| `file` | `ScFileUploadFile` | Yes      | The file object |
 
 ### ScFileUploadItemName
 
@@ -158,33 +152,20 @@ File name display.
 
 ### ScFileUploadItemSize
 
-Formatted file size display.
+Formatted file size display. Injects file from parent `ScFileUploadItem`.
 
 **Selector:** `[scFileUploadItemSize]`
 
-**Inputs:**
-
-| Input  | Type               | Required | Description     |
-| ------ | ------------------ | -------- | --------------- |
-| `file` | `ScFileUploadFile` | Yes      | The file object |
-
 ### ScFileUploadItemDelete
 
-Directive for a delete button that removes a file. Consumers provide their own icon and accessible label as projected content.
+Directive for a delete button that removes a file. Injects file ID from parent `ScFileUploadItem`. Consumers provide their own icon and accessible label as projected content.
 
 **Selector:** `button[scFileUploadItemDelete]`
-
-**Inputs:**
-
-| Input    | Type     | Required | Description    |
-| -------- | -------- | -------- | -------------- |
-| `fileId` | `string` | Yes      | File ID        |
-| `class`  | `string` | No       | Additional CSS |
 
 **Example:**
 
 ```html
-<button scFileUploadItemDelete [fileId]="file.id">
+<button scFileUploadItemDelete>
   <svg siXIcon></svg>
   <span class="sr-only">Remove file</span>
 </button>
@@ -192,20 +173,14 @@ Directive for a delete button that removes a file. Consumers provide their own i
 
 ### ScFileUploadItemProgress
 
-Container directive for upload progress. Place a `<div scProgress>` inside to display the progress bar.
+Container directive for upload progress. Injects file from parent `ScFileUploadItem`. Place a `<div scProgress>` inside to display the progress bar.
 
 **Selector:** `[scFileUploadItemProgress]`
-
-**Inputs:**
-
-| Input  | Type               | Required | Description     |
-| ------ | ------------------ | -------- | --------------- |
-| `file` | `ScFileUploadFile` | Yes      | The file object |
 
 **Example:**
 
 ```html
-<div scFileUploadItemProgress [file]="file">
+<div scFileUploadItemProgress>
   <div scProgress [value]="file.progress ?? 0"></div>
 </div>
 ```
@@ -250,9 +225,9 @@ interface ScFileUploadFile {
   <div scFileUploadList>
     @for (file of images(); track file.id) {
     <div scFileUploadItem [file]="file">
-      <div scFileUploadItemPreview [file]="file"></div>
+      <div scFileUploadItemPreview></div>
       <div scFileUploadItemName>{{ file.file.name }}</div>
-      <button scFileUploadItemDelete [fileId]="file.id">
+      <button scFileUploadItemDelete>
         <svg siXIcon></svg>
         <span class="sr-only">Remove file</span>
       </button>
@@ -287,7 +262,7 @@ interface ScFileUploadFile {
     <div scFileUploadItem [file]="file">
       <div scFileUploadItemName>{{ file.file.name }}</div>
       @if (file.status === 'uploading') {
-      <div scFileUploadItemProgress [file]="file">
+      <div scFileUploadItemProgress>
         <div scProgress [value]="file.progress ?? 0"></div>
       </div>
       }

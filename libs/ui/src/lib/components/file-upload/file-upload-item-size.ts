@@ -3,10 +3,11 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScFileUploadFile } from './file-upload';
+import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
 
 @Component({
   selector: '[scFileUploadItemSize]',
@@ -21,11 +22,12 @@ import { ScFileUploadFile } from './file-upload';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploadItemSize {
+  private readonly item = inject(SC_FILE_UPLOAD_ITEM);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly file = input.required<ScFileUploadFile>();
 
   protected readonly formattedSize = computed(() => {
-    const bytes = this.file().file.size;
+    const bytes = this.item.file().file.size;
     if (bytes === 0) return '0 B';
     const k = 1024;
     const sizes = ['B', 'KB', 'MB', 'GB'];

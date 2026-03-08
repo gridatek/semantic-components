@@ -85,14 +85,13 @@ import { SiImageIcon, SiXIcon } from '@semantic-icons/lucide-icons';
               <div scFileUploadItem [file]="file">
                 <div
                   scFileUploadItemPreview
-                  [file]="file"
                   class="size-12 rounded-md"
                 ></div>
                 <div class="min-w-0 flex-1">
                   <div scFileUploadItemName>{{ file.file.name }}</div>
-                  <div scFileUploadItemSize [file]="file"></div>
+                  <div scFileUploadItemSize></div>
                 </div>
-                <button scFileUploadItemDelete [fileId]="file.id">
+                <button scFileUploadItemDelete>
                   <svg siXIcon></svg>
                   <span class="sr-only">Remove file</span>
                 </button>

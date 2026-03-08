@@ -1,9 +1,14 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, InjectionToken, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScFileUploadFile } from './file-upload';
 
+export const SC_FILE_UPLOAD_ITEM = new InjectionToken<ScFileUploadItem>(
+  'SC_FILE_UPLOAD_ITEM',
+);
+
 @Directive({
   selector: '[scFileUploadItem]',
+  providers: [{ provide: SC_FILE_UPLOAD_ITEM, useExisting: ScFileUploadItem }],
   host: {
     'data-slot': 'file-upload-item',
     '[class]': 'class()',
