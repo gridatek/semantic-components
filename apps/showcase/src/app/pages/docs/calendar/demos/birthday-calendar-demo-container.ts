@@ -40,7 +40,7 @@ import { ScCalendar } from '@semantic-components/ui';
       <div class="w-fit rounded-md border">
         <sc-calendar
           [(value)]="selectedDate"
-          initialView="year"
+          viewMode="year"
           [maxDate]="today"
         />
       </div>

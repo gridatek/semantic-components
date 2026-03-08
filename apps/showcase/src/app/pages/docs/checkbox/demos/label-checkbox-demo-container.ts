@@ -35,29 +35,34 @@ import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
   selector: 'app-label-checkbox-demo',
   imports: [ScCheckboxField, ScCheckbox],
   template: \`
-    <div class="space-y-4">
-      <label scCheckboxField class="cursor-pointer">
-        <input type="checkbox" scCheckbox [(checked)]="option1" />
-        One
-      </label>
+    <div class="max-w-xs">
+      <div class="space-y-4">
+        <label scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="option1" />
+          Short label checkbox
+        </label>
 
-      <label scCheckboxField class="cursor-pointer">
-        <input type="checkbox" scCheckbox [(checked)]="option2" />
-        Two
-      </label>
+        <label scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="option2" />
+          A medium length label for the checkbox field component
+        </label>
 
-      <label scCheckboxField class="cursor-pointer">
-        <input type="checkbox" scCheckbox [(checked)]="option3" />
-        Three with a much longer label that spans multiple lines to demonstrate
-        how the checkbox aligns with the first line of text
-      </label>
+        <label scCheckboxField>
+          <input type="checkbox" scCheckbox [(checked)]="option3" />
+          Three with a much longer label that spans multiple lines to
+          demonstrate how the checkbox aligns with the first line of text
+        </label>
+      </div>
+
+      <div class="bg-muted mt-4 rounded-md p-4">
+        <p class="text-sm font-medium">State:</p>
+        <pre class="mt-2 text-xs">
+option1: {{ option1() }}
+option2: {{ option2() }}
+option3: {{ option3() }}</pre
+        >
+      </div>
     </div>
-
-    <p class="text-muted-foreground mt-4 text-sm">
-      Selected: {{ option1() ? 'One' : '' }}
-      {{ option2() ? 'Two' : '' }}
-      {{ option3() ? 'Three' : '' }}
-    </p>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
