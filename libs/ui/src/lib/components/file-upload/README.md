@@ -72,7 +72,7 @@ Root container that manages file state.
 
 ### ScFileUploadDropzone
 
-Drag and drop zone that also responds to clicks.
+Drag and drop zone directive. Place an `<input scFileUploadInput>` inside for click-to-browse support.
 
 **Selector:** `[scFileUploadDropzone]`
 
@@ -93,9 +93,25 @@ Auto-syncs `multiple`, `accept`, and `disabled` from the parent `ScFileUpload` c
 
 ### ScFileUploadTrigger
 
-Button that opens the file picker. Place an `<input scFileUploadInput>` inside for file selection.
+Label that visually acts as a button to open the file picker. Uses `<label>` to avoid nested-interactive a11y violations when wrapping an `<input scFileUploadInput>`.
 
-**Selector:** `button[scFileUploadTrigger]`
+**Selector:** `label[scFileUploadTrigger]`
+
+**Data Attributes:**
+
+| Attribute       | Values           |
+| --------------- | ---------------- |
+| `data-disabled` | `true` \| `null` |
+
+**Example:**
+
+```html
+<label scFileUploadTrigger>
+  <input scFileUploadInput aria-label="Upload files" />
+  <svg siUploadIcon class="size-4"></svg>
+  Upload Files
+</label>
+```
 
 ### ScFileUploadList
 
@@ -176,7 +192,7 @@ Directive for a delete button that removes a file. Consumers provide their own i
 
 ### ScFileUploadItemProgress
 
-Progress bar for upload status.
+Container directive for upload progress. Place a `<div scProgress>` inside to display the progress bar.
 
 **Selector:** `[scFileUploadItemProgress]`
 
@@ -185,6 +201,14 @@ Progress bar for upload status.
 | Input  | Type               | Required | Description     |
 | ------ | ------------------ | -------- | --------------- |
 | `file` | `ScFileUploadFile` | Yes      | The file object |
+
+**Example:**
+
+```html
+<div scFileUploadItemProgress [file]="file">
+  <div scProgress [value]="file.progress ?? 0"></div>
+</div>
+```
 
 ## Types
 
@@ -242,10 +266,10 @@ interface ScFileUploadFile {
 
 ```html
 <div scFileUpload [(files)]="files">
-  <button scFileUploadTrigger>
+  <label scFileUploadTrigger>
     <input scFileUploadInput aria-label="Upload files" />
     Upload Files
-  </button>
+  </label>
 </div>
 ```
 
@@ -263,7 +287,9 @@ interface ScFileUploadFile {
     <div scFileUploadItem [file]="file">
       <div scFileUploadItemName>{{ file.file.name }}</div>
       @if (file.status === 'uploading') {
-      <div scFileUploadItemProgress [file]="file"></div>
+      <div scFileUploadItemProgress [file]="file">
+        <div scProgress [value]="file.progress ?? 0"></div>
+      </div>
       }
     </div>
     }
@@ -274,7 +300,7 @@ interface ScFileUploadFile {
 ## Features
 
 - **Drag and Drop**: Drop files directly onto the dropzone
-- **Click to Browse**: Click dropzone or trigger button to open file picker
+- **Click to Browse**: Click dropzone or trigger label to open file picker
 - **File Validation**: Accept types, max size, max file count
 - **Image Preview**: Automatic thumbnail for image files
 - **Progress Tracking**: Built-in progress bar component
@@ -284,6 +310,8 @@ interface ScFileUploadFile {
 ## Accessibility
 
 - `ScFileUploadInput` is a native `<input type="file">` overlay — consumers add `aria-label` or `aria-describedby` directly
-- Visual feedback for drag state
-- Keyboard accessible file input and trigger button
+- `ScFileUploadTrigger` uses `<label>` instead of `<button>` to avoid nested-interactive violations with the file input
+- Visual feedback for drag state via `data-dragging` attribute
+- Keyboard accessible file input
 - Delete button supports custom icon and screen reader text via content projection
+- Disabled state uses `data-disabled` on non-interactive elements (labels, dropzone) since `aria-disabled` is not valid on them
