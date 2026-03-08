@@ -9,7 +9,7 @@ import { SC_FILE_UPLOAD } from './file-upload';
     type: 'file',
     '[class]': 'class()',
     '[multiple]': 'fileUpload.multiple()',
-    '[accept]': 'fileUpload.accept() || null',
+    '[attr.accept]': 'fileUpload.accept() || null',
     '[disabled]': 'fileUpload.disabled()',
     '[attr.aria-disabled]': 'fileUpload.disabled() || null',
     '(change)': 'onChange($event)',

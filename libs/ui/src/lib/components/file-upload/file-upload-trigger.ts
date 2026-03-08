@@ -4,13 +4,11 @@ import { buttonVariants } from '../button';
 import { SC_FILE_UPLOAD } from './file-upload';
 
 @Directive({
-  selector: 'button[scFileUploadTrigger]',
+  selector: 'label[scFileUploadTrigger]',
   host: {
     'data-slot': 'file-upload-trigger',
-    type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'fileUpload.disabled()',
-    '[attr.aria-disabled]': 'fileUpload.disabled() || null',
+    '[attr.data-disabled]': 'fileUpload.disabled() || null',
   },
 })
 export class ScFileUploadTrigger {
@@ -20,8 +18,11 @@ export class ScFileUploadTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      'relative',
+      // <label> is not interactive, so we add cursor-pointer manually
+      'cursor-pointer',
       buttonVariants({ variant: 'default', size: 'lg' }),
+      // aria-disabled is not valid on <label>, use data-disabled for styling
+      'data-disabled:pointer-events-none data-disabled:opacity-50',
       this.classInput(),
     ),
   );

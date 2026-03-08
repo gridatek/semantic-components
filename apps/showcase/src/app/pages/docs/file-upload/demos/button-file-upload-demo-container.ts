@@ -66,11 +66,11 @@ import {
   template: \`
     <div class="max-w-lg">
       <div scFileUpload [multiple]="true" [(files)]="files">
-        <button scFileUploadTrigger>
+        <label scFileUploadTrigger>
           <input scFileUploadInput aria-label="Upload files" />
           <svg siUploadIcon class="size-4"></svg>
           Upload Files
-        </button>
+        </label>
 
         @if (files().length > 0) {
           <div scFileUploadList>
