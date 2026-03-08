@@ -1,5 +1,12 @@
-import { Directive, computed, input } from '@angular/core';
+import {
+  Directive,
+  booleanAttribute,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '../../utils';
+import { ScRadioGroup } from './radio-group';
 
 export const SC_RADIO = 'SC_RADIO';
 
@@ -8,13 +15,24 @@ export const SC_RADIO = 'SC_RADIO';
   host: {
     'data-slot': 'radio',
     '[class]': 'class()',
+    '[disabled]': 'disabled()',
   },
   exportAs: SC_RADIO,
 })
 export class ScRadio {
+  private readonly radioGroup = inject(ScRadioGroup, { optional: true });
+
   readonly classInput = input<string>('', {
     alias: 'class',
   });
+  readonly disabledInput = input(false, {
+    alias: 'disabled',
+    transform: booleanAttribute,
+  });
+
+  readonly disabled = computed(
+    () => this.disabledInput() || (this.radioGroup?.disabled() ?? false),
+  );
 
   protected readonly class = computed(() =>
     cn(
