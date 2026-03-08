@@ -27,7 +27,7 @@ interface MonthInfo {
     <table
       ngGrid
       tabindex="0"
-      aria-label="Select month"
+      [attr.aria-label]="ariaLabel()"
       class="w-full border-collapse"
       colWrap="continuous"
       rowWrap="continuous"
@@ -69,6 +69,7 @@ interface MonthInfo {
 export class ScCalendarMonthView {
   private readonly _monthButtons = viewChildren(GridCellWidget);
 
+  readonly ariaLabel = input('Select month');
   readonly year = input.required<number>();
   readonly selectedMonth = input.required<number>();
   readonly monthLabels = input([

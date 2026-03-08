@@ -67,6 +67,7 @@ export type ScCalendarValue =
           [year]="viewDate().year"
           [selectedMonth]="viewDate().month"
           [monthLabels]="monthLabels()"
+          [ariaLabel]="monthViewLabel()"
           (monthSelected)="selectMonth($event)"
           (yearScrollUp)="previousYear()"
           (yearScrollDown)="nextYear()"
@@ -77,6 +78,7 @@ export type ScCalendarValue =
           scCalendarYearView
           [decadeStart]="decadeStart()"
           [selectedYear]="viewDate().year"
+          [ariaLabel]="yearViewLabel()"
           (yearSelected)="selectYear($event)"
           (decadeScrollUp)="previousDecade()"
           (decadeScrollDown)="nextDecade()"
@@ -101,6 +103,8 @@ export class ScCalendar {
   readonly value = model<ScCalendarValue>(undefined);
 
   readonly ariaLabel = input('Calendar');
+  readonly monthViewLabel = input('Select month');
+  readonly yearViewLabel = input('Select year');
   readonly startOfWeek = input(0);
   readonly weekDays = input(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
   readonly monthLabels = input([
