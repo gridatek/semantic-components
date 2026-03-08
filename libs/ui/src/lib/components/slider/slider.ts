@@ -1,13 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import {
-  Directive,
-  ElementRef,
-  afterNextRender,
-  computed,
-  inject,
-  input,
-  model,
-} from '@angular/core';
+import { Directive, computed, inject, input, model } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 
@@ -17,18 +9,24 @@ import { SC_FIELD } from '../field';
     type: 'range',
     'data-slot': 'slider',
     '[attr.id]': 'id()',
+    '[attr.min]': 'min()',
+    '[attr.max]': 'max()',
+    '[attr.step]': 'step()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '[value]': 'value()',
+    '[style.--fill-percent]': 'fillPercent()',
     '(input)': 'onInput($event)',
   },
 })
 export class ScSlider {
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-slider-');
-  private readonly el = inject<ElementRef<HTMLInputElement>>(ElementRef);
 
   readonly value = model(0);
+  readonly min = input(0);
+  readonly max = input(100);
+  readonly step = input(1);
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
@@ -43,6 +41,13 @@ export class ScSlider {
       this.field?.descriptionIds().join(' ') ||
       null,
   );
+
+  protected readonly fillPercent = computed(() => {
+    const range = this.max() - this.min();
+    if (range === 0) return '0%';
+    const percent = ((this.value() - this.min()) / range) * 100;
+    return `${percent}%`;
+  });
 
   protected readonly class = computed(() =>
     cn(
@@ -60,25 +65,7 @@ export class ScSlider {
     ),
   );
 
-  constructor() {
-    afterNextRender(() => {
-      this.updateFillPercent();
-    });
-  }
-
   protected onInput(event: Event) {
-    const val = +(event.target as HTMLInputElement).value;
-    this.value.set(val);
-    this.updateFillPercent();
-  }
-
-  private updateFillPercent() {
-    const el = this.el.nativeElement;
-    const min = parseFloat(el.min) || 0;
-    const max = parseFloat(el.max) || 100;
-    const value = parseFloat(el.value) || 0;
-    const percent = ((value - min) / (max - min)) * 100;
-
-    el.style.setProperty('--fill-percent', `${percent}%`);
+    this.value.set(+(event.target as HTMLInputElement).value);
   }
 }

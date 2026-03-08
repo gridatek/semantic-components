@@ -45,14 +45,12 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     <input
       scSlider
       class="w-24"
-      min="0"
-      max="1"
-      step="0.01"
+      [max]="1"
+      [step]="0.01"
       aria-label="Volume"
       [disabled]="player.isMuted()"
       [value]="player.volume()"
-      [style.--fill-percent]="player.volume() * 100 + '%'"
-      (input)="onVolumeChange($event)"
+      (valueChange)="player.setVolume($event)"
     />
 
     <button
@@ -83,11 +81,6 @@ export class ScAudioPlayerVolume {
   protected readonly class = computed(() =>
     cn('flex items-center justify-center gap-2', this.classInput()),
   );
-
-  protected onVolumeChange(event: Event): void {
-    const value = +(event.target as HTMLInputElement).value;
-    this.player.setVolume(value);
-  }
 
   protected onMaxVolume(): void {
     this.player.setVolume(1);

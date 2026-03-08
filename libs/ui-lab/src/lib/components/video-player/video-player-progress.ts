@@ -23,12 +23,10 @@ import { SC_VIDEO_PLAYER } from './video-player';
       scSlider
       class="absolute inset-0 h-full [&::-moz-range-progress]:transition-[height] group-hover:[&::-moz-range-progress]:h-1.5 [&::-moz-range-track]:transition-[height] group-hover:[&::-moz-range-track]:h-1.5 [&::-webkit-slider-runnable-track]:transition-[height] group-hover:[&::-webkit-slider-runnable-track]:h-1.5"
       aria-label="Video progress"
-      min="0"
-      max="100"
-      step="0.1"
+      [max]="100"
+      [step]="0.1"
       [value]="player.progressPercent()"
-      [style.--fill-percent]="player.progressPercent() + '%'"
-      (input)="onSeek($event)"
+      (valueChange)="player.seek($event)"
     />
   `,
   host: {
@@ -47,9 +45,4 @@ export class ScVideoPlayerProgress {
   protected readonly class = computed(() =>
     cn('group relative mb-2 block h-3', this.classInput()),
   );
-
-  protected onSeek(event: Event): void {
-    const value = +(event.target as HTMLInputElement).value;
-    this.player.seek(value);
-  }
 }

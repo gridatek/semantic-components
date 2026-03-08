@@ -297,7 +297,7 @@ import {
             <div scSeparator></div>
             <div class="max-w-sm space-y-2">
               <label scLabel for="volume">Volume</label>
-              <input scSlider id="volume" type="range" min="0" max="100" />
+              <input scSlider id="volume" />
             </div>
           </section>
 

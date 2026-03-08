@@ -24,12 +24,10 @@ import { SC_VIDEO_PLAYER } from './video-player';
     <input
       scSlider
       class="h-1 w-0 cursor-pointer opacity-0 transition-all duration-200 group-hover/volume:w-20 group-hover/volume:opacity-100"
-      min="0"
-      max="1"
-      step="0.01"
+      [max]="1"
+      [step]="0.01"
       [value]="player.volume()"
-      [style.--fill-percent]="player.volume() * 100 + '%'"
-      (input)="onVolumeInput($event)"
+      (valueChange)="player.setVolume($event)"
       aria-label="Volume"
     />
   `,
@@ -57,9 +55,4 @@ export class ScVideoPlayerVolume {
       '[&_svg]:size-5',
     ),
   );
-
-  protected onVolumeInput(event: Event): void {
-    const value = +(event.target as HTMLInputElement).value;
-    this.player.setVolume(value);
-  }
 }

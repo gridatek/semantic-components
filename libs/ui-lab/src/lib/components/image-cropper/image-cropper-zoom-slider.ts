@@ -1,13 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
-  viewChild,
 } from '@angular/core';
 import { ScSlider, cn } from '@semantic-components/ui';
 import { SC_IMAGE_CROPPER } from './image-cropper';
@@ -17,14 +14,13 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
   imports: [ScSlider],
   template: `
     <input
-      #sliderEl
       scSlider
       aria-label="Zoom level"
       [min]="0.1"
       [max]="3"
       [step]="0.1"
       [value]="cropper.zoom()"
-      (input)="onInput($event)"
+      (valueChange)="cropper.setZoom($event)"
     />
     <span class="text-muted-foreground min-w-[50px] text-center text-sm">
       {{ zoomPercentage() }}
@@ -49,26 +45,4 @@ export class ScImageCropperZoomSlider {
   protected readonly zoomPercentage = computed(
     () => `${(this.cropper.zoom() * 100).toFixed(0)}%`,
   );
-
-  private readonly sliderEl =
-    viewChild<ElementRef<HTMLInputElement>>('sliderEl');
-
-  constructor() {
-    effect(() => {
-      const zoom = this.cropper.zoom();
-      const el = this.sliderEl()?.nativeElement;
-      if (!el) return;
-
-      el.value = String(zoom);
-      const min = parseFloat(el.min) || 0;
-      const max = parseFloat(el.max) || 100;
-      const percent = ((zoom - min) / (max - min)) * 100;
-      el.style.setProperty('--fill-percent', `${percent}%`);
-    });
-  }
-
-  protected onInput(event: Event): void {
-    const value = parseFloat((event.target as HTMLInputElement).value);
-    this.cropper.setZoom(value);
-  }
 }

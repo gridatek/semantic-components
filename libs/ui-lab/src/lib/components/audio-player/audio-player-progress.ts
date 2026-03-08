@@ -28,12 +28,10 @@ import { SC_AUDIO_PLAYER } from './audio-player';
         aria-label="Seek"
         class="absolute inset-0 h-full [&::-moz-range-progress]:transition-[height] group-hover:[&::-moz-range-progress]:h-1.5 [&::-moz-range-track]:transition-[height] group-hover:[&::-moz-range-track]:h-1.5 [&::-webkit-slider-runnable-track]:transition-[height] group-hover:[&::-webkit-slider-runnable-track]:h-1.5"
         style="--muted: oklch(0 0 0 / 0.1)"
-        min="0"
-        max="100"
-        step="0.1"
+        [max]="100"
+        [step]="0.1"
         [value]="player.progressPercent()"
-        [style.--fill-percent]="player.progressPercent() + '%'"
-        (input)="onSeek($event)"
+        (valueChange)="onSeek($event)"
       />
     </div>
     <span class="text-muted-foreground w-10 text-xs">
@@ -55,8 +53,7 @@ export class ScAudioPlayerProgress {
     cn('flex items-center gap-2', this.classInput()),
   );
 
-  protected onSeek(event: Event): void {
-    const percent = +(event.target as HTMLInputElement).value;
+  protected onSeek(percent: number): void {
     this.player.seek((percent / 100) * this.player.duration());
   }
 }
