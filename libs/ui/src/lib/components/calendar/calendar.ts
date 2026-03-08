@@ -36,7 +36,7 @@ export type ScCalendarValue =
     'data-slot': 'calendar',
     '[class]': 'class()',
     role: 'application',
-    '[attr.aria-label]': '"Calendar"',
+    '[attr.aria-label]': 'ariaLabel()',
   },
   template: `
     <ng-content select="[scCalendarHeader]" />
@@ -96,6 +96,7 @@ export class ScCalendar {
 
   readonly value = model<ScCalendarValue>(undefined);
 
+  readonly ariaLabel = input('Calendar');
   readonly startOfWeek = input(0);
   readonly weekDays = input(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
   readonly monthLabels = input([
