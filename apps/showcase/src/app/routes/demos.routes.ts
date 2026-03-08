@@ -2780,6 +2780,13 @@ export const demosRoutes: Route[] = [
             (m) => m.FormRadioGroupDemo,
           ),
       },
+      {
+        path: 'custom-theme-radio-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/radio-group/demos/custom-theme-radio-group-demo').then(
+            (m) => m.CustomThemeRadioGroupDemo,
+          ),
+      },
     ],
   },
   {
