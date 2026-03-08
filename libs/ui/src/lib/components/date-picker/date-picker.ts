@@ -77,7 +77,7 @@ export class ScDatePicker {
 
   readonly open = model<boolean>(false);
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
   protected readonly triggerClass = computed(() =>
     cn(
