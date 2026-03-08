@@ -1,25 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScFileUploadFile } from './file-upload';
 
-@Component({
+@Directive({
   selector: '[scFileUploadItem]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'file-upload-item',
     '[class]': 'class()',
     '[attr.data-status]': 'file().status',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploadItem {
   readonly classInput = input<string>('', { alias: 'class' });
