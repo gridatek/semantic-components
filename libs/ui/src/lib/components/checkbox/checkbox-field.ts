@@ -69,8 +69,8 @@ export class ScCheckboxField implements ScCheckboxContext {
   protected readonly class = computed(() =>
     cn(
       'grid grid-cols-[1rem_1fr] items-start gap-x-2 gap-y-1',
-      '*:data-[slot=checkbox]:col-start-1 *:data-[slot=checkbox]:row-start-1',
-      '*:data-[slot=checkbox-visual]:col-start-1 *:data-[slot=checkbox-visual]:row-start-1',
+      '*:data-[slot=checkbox]:col-start-1 *:data-[slot=checkbox]:row-start-1 *:data-[slot=checkbox]:mt-0.5',
+      '*:data-[slot=checkbox-visual]:col-start-1 *:data-[slot=checkbox-visual]:row-start-1 *:data-[slot=checkbox-visual]:mt-0.5',
       '*:data-[slot=label]:col-start-2 *:data-[slot=label]:row-start-1',
       '*:data-[slot=field-description]:col-start-2 *:data-[slot=field-description]:row-start-2',
       'has-[>[data-slot=field-description]]:*:data-[slot=label]:font-medium',
