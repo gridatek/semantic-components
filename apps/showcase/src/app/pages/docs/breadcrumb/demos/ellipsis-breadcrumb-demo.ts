@@ -12,6 +12,10 @@ import {
   ScBreadcrumbPage,
   ScBreadcrumbSeparator,
 } from '@semantic-components/ui';
+import {
+  SiChevronRightIcon,
+  SiEllipsisIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-ellipsis-breadcrumb-demo',
@@ -23,6 +27,8 @@ import {
     ScBreadcrumbList,
     ScBreadcrumbPage,
     ScBreadcrumbSeparator,
+    SiChevronRightIcon,
+    SiEllipsisIcon,
   ],
   template: `
     <nav scBreadcrumb aria-label="Ellipsis breadcrumb">
@@ -30,15 +36,18 @@ import {
         <li scBreadcrumbItem>
           <a scBreadcrumbLink href="#">Home</a>
         </li>
-        <li scBreadcrumbSeparator></li>
+        <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
-          <span scBreadcrumbEllipsis></span>
+          <span scBreadcrumbEllipsis>
+            <svg siEllipsisIcon></svg>
+            <span class="sr-only">More</span>
+          </span>
         </li>
-        <li scBreadcrumbSeparator></li>
+        <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
           <a scBreadcrumbLink href="#">Components</a>
         </li>
-        <li scBreadcrumbSeparator></li>
+        <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
           <span scBreadcrumbPage>Breadcrumb</span>
         </li>
