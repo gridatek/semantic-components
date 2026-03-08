@@ -18,6 +18,7 @@ export class ScFileUploadTrigger {
 
   protected readonly class = computed(() =>
     cn(
+      'relative',
       // <label> is not interactive, so we add cursor-pointer manually
       'cursor-pointer',
       buttonVariants({ variant: 'default', size: 'lg' }),
