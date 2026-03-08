@@ -10,14 +10,12 @@ import { BasicDatePickerDemoContainer } from './demos/basic-date-picker-demo-con
 import { ConstrainedDatePickerDemoContainer } from './demos/constrained-date-picker-demo-container';
 import { FormDatePickerDemoContainer } from './demos/form-date-picker-demo-container';
 import { MultipleDatePickerDemoContainer } from './demos/multiple-date-picker-demo-container';
-import { PlaceholderDatePickerDemoContainer } from './demos/placeholder-date-picker-demo-container';
 import { RangeDatePickerDemoContainer } from './demos/range-date-picker-demo-container';
 
 @Component({
   selector: 'app-date-picker-page',
   imports: [
     BasicDatePickerDemoContainer,
-    PlaceholderDatePickerDemoContainer,
     RangeDatePickerDemoContainer,
     MultipleDatePickerDemoContainer,
     ConstrainedDatePickerDemoContainer,
@@ -39,7 +37,6 @@ import { RangeDatePickerDemoContainer } from './demos/range-date-picker-demo-con
       <section class="space-y-8">
         <h2 scHeading toc>Examples</h2>
         <app-basic-date-picker-demo-container />
-        <app-placeholder-date-picker-demo-container />
         <app-range-date-picker-demo-container />
         <app-multiple-date-picker-demo-container />
         <app-constrained-date-picker-demo-container />

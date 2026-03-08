@@ -412,6 +412,13 @@ export const demosRoutes: Route[] = [
             (m) => m.MinMaxCalendarDemo,
           ),
       },
+      {
+        path: 'birthday-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/birthday-calendar-demo').then(
+            (m) => m.BirthdayCalendarDemo,
+          ),
+      },
     ],
   },
   {
@@ -968,13 +975,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/date-picker/demos/basic-date-picker-demo').then(
             (m) => m.BasicDatePickerDemo,
-          ),
-      },
-      {
-        path: 'placeholder-date-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker/demos/placeholder-date-picker-demo').then(
-            (m) => m.PlaceholderDatePickerDemo,
           ),
       },
       {

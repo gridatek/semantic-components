@@ -5,6 +5,7 @@ import {
   ViewEncapsulation,
   computed,
   input,
+  linkedSignal,
   model,
   signal,
 } from '@angular/core';
@@ -112,7 +113,12 @@ export class ScCalendar {
   readonly weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
   protected readonly viewDate = signal(Temporal.Now.plainDateISO());
-  protected readonly viewMode = signal<ScCalendarViewMode>('day');
+  readonly viewModeInput = input<ScCalendarViewMode>('day', {
+    alias: 'viewMode',
+  });
+
+  protected readonly viewMode = linkedSignal(() => this.viewModeInput());
+
   protected readonly decadeStart = signal<number>(
     Math.floor(Temporal.Now.plainDateISO().year / 12) * 12,
   );
