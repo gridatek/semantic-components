@@ -77,7 +77,7 @@ export class ScCheckbox implements FormCheckboxControl {
 
   protected readonly class = computed(() =>
     cn(
-      'peer size-4 cursor-pointer opacity-0',
+      'peer size-4 opacity-0',
       'disabled:cursor-not-allowed',
       this.classInput(),
     ),

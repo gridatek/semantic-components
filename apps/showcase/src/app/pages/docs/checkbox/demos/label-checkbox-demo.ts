@@ -12,17 +12,17 @@ import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
   template: `
     <div class="max-w-xs">
       <div class="space-y-4">
-        <label scCheckboxField class="cursor-pointer">
+        <label scCheckboxField>
           <input type="checkbox" scCheckbox [(checked)]="option1" />
           Short label checkbox
         </label>
 
-        <label scCheckboxField class="cursor-pointer">
+        <label scCheckboxField>
           <input type="checkbox" scCheckbox [(checked)]="option2" />
           A medium length label for the checkbox field component
         </label>
 
-        <label scCheckboxField class="cursor-pointer">
+        <label scCheckboxField>
           <input type="checkbox" scCheckbox [(checked)]="option3" />
           Three with a much longer label that spans multiple lines to
           demonstrate how the checkbox aligns with the first line of text
