@@ -22,24 +22,24 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     SiMinusIcon,
   ],
   template: `
-    <div scOtpField [(value)]="otp">
-      <div scOtpFieldSlotGroup>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
+    <div class="space-y-4">
+      <div scOtpField [(value)]="otp">
+        <div scOtpFieldSlotGroup>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+        </div>
+        <div scOtpFieldSeparator>
+          <svg siMinusIcon class="size-4"></svg>
+        </div>
+        <div scOtpFieldSlotGroup>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+        </div>
       </div>
-      <div scOtpFieldSeparator>
-        <svg siMinusIcon class="size-4"></svg>
-      </div>
-      <div scOtpFieldSlotGroup>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
-      </div>
+      <p class="text-muted-foreground text-sm">Value: {{ otp() || 'empty' }}</p>
     </div>
-    <p class="text-muted-foreground mt-4 text-sm">
-      Value: {{ otp() || 'empty' }}
-    </p>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

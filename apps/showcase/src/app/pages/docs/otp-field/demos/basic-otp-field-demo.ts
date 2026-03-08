@@ -14,19 +14,19 @@ import {
   selector: 'app-basic-otp-field-demo',
   imports: [ScOtpField, ScOtpFieldSlotGroup, ScOtpFieldSlot],
   template: `
-    <div scOtpField [(value)]="otp">
-      <div scOtpFieldSlotGroup>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
-        <div scOtpFieldSlot></div>
+    <div class="space-y-4">
+      <div scOtpField [(value)]="otp">
+        <div scOtpFieldSlotGroup>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot></div>
+        </div>
       </div>
+      <p class="text-muted-foreground text-sm">Value: {{ otp() || 'empty' }}</p>
     </div>
-    <p class="text-muted-foreground mt-4 text-sm">
-      Value: {{ otp() || 'empty' }}
-    </p>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
