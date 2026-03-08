@@ -1,11 +1,11 @@
 # Calendar
 
-A fully accessible date picker component with **Angular ARIA Grid** integration, supporting single, multiple, and range selection. Features three view modes (day/month/year) with complete keyboard navigation and focus management.
+A fully accessible date picker component with **Angular ARIA Grid** integration, supporting single, multiple, and range selection. Features three view modes (day/month/year) with complete keyboard navigation, focus management, and i18n support.
 
 ## Usage
 
 ```html
-<sc-calendar [(selected)]="date" />
+<div scCalendar [(value)]="date"></div>
 ```
 
 ## Component
@@ -14,75 +14,111 @@ A fully accessible date picker component with **Angular ARIA Grid** integration,
 
 Date picker component with month navigation and date selection.
 
-**Selector:** `sc-calendar`
+**Selector:** `div[scCalendar]`
 
 **Inputs:**
 
-| Input      | Type                               | Default     | Description               |
-| ---------- | ---------------------------------- | ----------- | ------------------------- |
-| `mode`     | `'single' \| 'multiple'\| 'range'` | `'single'`  | Selection mode            |
-| `disabled` | `Date[]`                           | `[]`        | Array of dates to disable |
-| `minDate`  | `Date \| undefined`                | `undefined` | Minimum selectable date   |
-| `maxDate`  | `Date \| undefined`                | `undefined` | Maximum selectable date   |
-| `class`    | `string`                           | `''`        | Additional CSS classes    |
+| Input            | Type                                | Default               | Description                                  |
+| ---------------- | ----------------------------------- | --------------------- | -------------------------------------------- |
+| `mode`           | `'single' \| 'multiple' \| 'range'` | `'single'`            | Selection mode                               |
+| `disabled`       | `Temporal.PlainDate[]`              | `[]`                  | Array of dates to disable                    |
+| `minDate`        | `Temporal.PlainDate \| undefined`   | `undefined`           | Minimum selectable date                      |
+| `maxDate`        | `Temporal.PlainDate \| undefined`   | `undefined`           | Maximum selectable date                      |
+| `class`          | `string`                            | `''`                  | Additional CSS classes                       |
+| `viewMode`       | `'day' \| 'month' \| 'year'`        | `'day'`               | Initial view mode                            |
+| `ariaLabel`      | `string`                            | `'Calendar'`          | `aria-label` for the calendar container      |
+| `dayViewLabel`   | `string`                            | `'Select date'`       | `aria-label` for the day grid                |
+| `monthViewLabel` | `string`                            | `'Select month'`      | `aria-label` for the month grid              |
+| `yearViewLabel`  | `string`                            | `'Select year'`       | `aria-label` for the year grid               |
+| `startOfWeek`    | `number`                            | `0`                   | First day of week (0=Sun, 1=Mon, ..., 6=Sat) |
+| `weekDays`       | `string[]`                          | `['Su', 'Mo', ...]`   | Week day header labels                       |
+| `monthLabels`    | `string[]`                          | `['Jan', 'Feb', ...]` | Month labels for month view                  |
 
 **Two-way Bindings:**
 
-| Binding         | Type                | Description                    |
-| --------------- | ------------------- | ------------------------------ |
-| `selected`      | `Date \| undefined` | Selected date (single mode)    |
-| `selectedDates` | `Date[]`            | Selected dates (multiple mode) |
-| `selectedRange` | `DateRange`         | Selected range (range mode)    |
+| Binding | Type              | Description                                                |
+| ------- | ----------------- | ---------------------------------------------------------- |
+| `value` | `ScCalendarValue` | Selected value (single date, date array, or range by mode) |
 
-**DateRange Interface:**
+**ScCalendarValue Type:**
 
 ```typescript
-interface DateRange {
-  from: Date | undefined;
-  to: Date | undefined;
+type ScCalendarValue = Temporal.PlainDate | Temporal.PlainDate[] | ScDateRange | undefined;
+
+interface ScDateRange {
+  from: Temporal.PlainDate | undefined;
+  to: Temporal.PlainDate | undefined;
 }
 ```
+
+**Public Methods:**
+
+| Method                | Description                    |
+| --------------------- | ------------------------------ |
+| `handleHeaderClick()` | Cycle view: day → month → year |
+| `handlePrevious()`    | Navigate to previous period    |
+| `handleNext()`        | Navigate to next period        |
+| `goToToday()`         | Jump to today and select it    |
+| `clear()`             | Clear the selection            |
+
+**Public Signals:**
+
+| Signal     | Type                 | Description                             |
+| ---------- | -------------------- | --------------------------------------- |
+| `heading`  | `string`             | Computed heading label for current view |
+| `viewDate` | `Temporal.PlainDate` | Current view date                       |
+| `viewMode` | `ScCalendarViewMode` | Current view mode                       |
 
 ## Examples
 
 ### Single Date Selection
 
 ```html
-<sc-calendar [(selected)]="selectedDate" />
+<div scCalendar [(value)]="selectedDate" #cal="scCalendar"></div>
 ```
 
 ### Multiple Date Selection
 
 ```html
-<sc-calendar mode="multiple" [(selectedDates)]="selectedDates" />
+<div scCalendar mode="multiple" [(value)]="selectedDates"></div>
 ```
 
 ### Date Range Selection
 
 ```html
-<sc-calendar mode="range" [(selectedRange)]="selectedRange" />
+<div scCalendar mode="range" [(value)]="selectedRange"></div>
 ```
 
 ### With Disabled Dates
 
 ```typescript
-disabledDates = [new Date(2024, 0, 1), new Date(2024, 0, 15)];
+disabledDates = [Temporal.PlainDate.from('2026-01-01'), Temporal.PlainDate.from('2026-01-15')];
 ```
 
 ```html
-<sc-calendar [(selected)]="date" [disabled]="disabledDates" />
+<div scCalendar [(value)]="date" [disabled]="disabledDates"></div>
 ```
 
 ### With Min/Max Date
 
 ```typescript
-minDate = new Date(); // Today
-maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
+minDate = Temporal.Now.plainDateISO();
+maxDate = Temporal.Now.plainDateISO().add({ days: 30 });
 ```
 
 ```html
-<sc-calendar [(selected)]="date" [minDate]="minDate" [maxDate]="maxDate" />
+<div scCalendar [(value)]="date" [minDate]="minDate" [maxDate]="maxDate"></div>
 ```
+
+### i18n / Localization
+
+The calendar heading and day `aria-label`s use Angular's `LOCALE_ID` automatically. For custom labels:
+
+```html
+<div scCalendar [startOfWeek]="1" [weekDays]="['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di']" [monthLabels]="['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc']" [ariaLabel]="'Calendrier'" [dayViewLabel]="'Sélectionner la date'" [monthViewLabel]="'Sélectionner le mois'" [yearViewLabel]="'Sélectionner l\'année'"></div>
+```
+
+> **Note:** `weekDays` and `startOfWeek` are independent — ensure the label order matches the start day.
 
 ## Features
 
@@ -106,6 +142,8 @@ maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
 - **Keyboard Navigation**: Complete arrow key support with auto-scrolling
 - **Screen Reader Support**: Proper ARIA roles, labels, and announcements
 - **Focus Management**: Programmatic focus control when navigating
+- **Locale-aware**: Heading and day `aria-label`s respect `LOCALE_ID`
+- **Customizable ARIA labels**: All grid labels are configurable inputs
 
 ### Additional Features
 
@@ -114,7 +152,7 @@ maxDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
 - **Today Highlight**: Current date is visually highlighted
 - **Outside Days**: Shows days from adjacent months (dimmed)
 - **Auto-scroll**: Automatically navigate to adjacent months/years/decades at edges
-- **Icon Support**: Uses Lucide icons for navigation buttons
+- **Start of Week**: Configurable first day of week
 
 ## Keyboard Navigation
 
@@ -170,28 +208,12 @@ Automatically managed:
 - `aria-selected="true/false"` on selected cells
 - `aria-disabled="true"` on disabled cells
 - `aria-current="date"` on today's date/current month/current year
-- `aria-label` on all interactive elements
-- `aria-expanded` on header button
-
-### Screen Reader Support
-
-- Grid navigation announcements
-- Selection state announcements
-- Current date/month/year identification
-- Descriptive labels for all cells
-
-### Focus Management
-
-- Visible focus ring on focused elements
-- Programmatic focus control with `viewChildren(GridCellWidget)`
-- Focus retention when navigating between views
-- Focus moves to appropriate cell when scrolling time periods
+- `aria-label` on all interactive elements (locale-aware for dates)
 
 ### Standards Compliance
 
-- ✅ **WCAG AA** compliant
-- ✅ **ARIA 1.2** patterns
-- ✅ Tested with screen readers (NVDA/JAWS)
+- WCAG AA compliant
+- ARIA 1.2 patterns
 
 ## Component Architecture
 
@@ -201,24 +223,21 @@ The calendar is composed of focused, reusable components:
   - Manages view mode switching (day/month/year)
   - Handles navigation between views
   - Coordinates date selection
-
-- **`calendar-header.ts`** - Navigation header
-  - Clickable month/year label for view switching
-  - Previous/Next buttons with Lucide icons
-  - Context-aware ARIA labels
+  - Passes i18n inputs to child views
 
 - **`calendar-day-view.ts`** - Day grid component
-  - 7×5-6 table with Angular ARIA Grid
+  - 7-column table with Angular ARIA Grid
   - Date selection logic (single/multiple/range)
   - Auto-scroll to prev/next month at edges
+  - Locale-aware day `aria-label`s via `LOCALE_ID`
 
 - **`calendar-month-view.ts`** - Month grid component
-  - 3×4 table with Angular ARIA Grid
+  - 3x4 table with Angular ARIA Grid
   - Month selection returns to day view
   - Auto-scroll to prev/next year at edges
 
 - **`calendar-year-view.ts`** - Year grid component
-  - 3×4 table with Angular ARIA Grid (12 years)
+  - 3x4 table with Angular ARIA Grid (12 years)
   - Year selection goes to month view
   - Auto-scroll to prev/next decade at edges
 
