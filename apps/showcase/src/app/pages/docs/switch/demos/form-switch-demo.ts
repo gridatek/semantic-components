@@ -4,11 +4,15 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import {
+  ScFieldDescription,
+  ScSwitch,
+  ScSwitchField,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-form-switch-demo',
-  imports: [ScSwitch, ScSwitchField],
+  imports: [ScSwitch, ScSwitchField, ScFieldDescription],
   template: `
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
@@ -16,7 +20,7 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
           <input type="checkbox" scSwitch [(checked)]="marketing" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Marketing emails</p>
-            <p class="text-muted-foreground text-sm">
+            <p scFieldDescription>
               Receive emails about new products and features.
             </p>
           </div>
@@ -25,7 +29,7 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
           <input type="checkbox" scSwitch [(checked)]="security" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Security emails</p>
-            <p class="text-muted-foreground text-sm">
+            <p scFieldDescription>
               Receive emails about your account security.
             </p>
           </div>
@@ -34,7 +38,7 @@ import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
           <input type="checkbox" scSwitch [(checked)]="updates" />
           <div class="space-y-0.5">
             <p class="text-sm font-medium">Product updates</p>
-            <p class="text-muted-foreground text-sm">
+            <p scFieldDescription>
               Receive emails about product updates and tips.
             </p>
           </div>
