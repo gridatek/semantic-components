@@ -1,13 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   ViewEncapsulation,
   computed,
   effect,
   inject,
   input,
-  untracked,
+  signal,
 } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
@@ -33,7 +32,6 @@ import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploadItemPreview {
-  private readonly destroyRef = inject(DestroyRef);
   readonly item = inject(SC_FILE_UPLOAD_ITEM);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -42,18 +40,18 @@ export class ScFileUploadItemPreview {
     this.item.file().file.type.startsWith('image/'),
   );
 
-  protected readonly previewUrl = computed(() => {
-    const file = this.item.file();
-    if (file.file.type.startsWith('image/')) {
-      return URL.createObjectURL(file.file);
-    }
-    return '';
-  });
+  protected readonly previewUrl = signal('');
 
   constructor() {
-    // Revoke previous object URL when file changes
+    // effect owns the full lifecycle: create URL on file change, revoke on cleanup/destroy
     effect((onCleanup) => {
-      const url = this.previewUrl();
+      const file = this.item.file();
+      let url = '';
+      if (file.file.type.startsWith('image/')) {
+        url = URL.createObjectURL(file.file);
+      }
+      this.previewUrl.set(url);
+
       onCleanup(() => {
         if (url) {
           URL.revokeObjectURL(url);
