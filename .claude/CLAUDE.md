@@ -63,6 +63,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 ## Development Workflow
 
 - Do NOT run builds (`nx build`). The user runs the project in dev mode — changes are reflected live.
+- Do NOT update demo container files (`*-container.ts`). The user has a script to regenerate them.
 
 ## Services
 

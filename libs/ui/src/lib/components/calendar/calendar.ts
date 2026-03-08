@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScCalendarDayView } from './calendar-day-view';
-import { ScCalendarHeader } from './calendar-header';
 import { ScCalendarMonthView } from './calendar-month-view';
 import { ScCalendarYearView } from './calendar-year-view';
 
@@ -31,12 +30,8 @@ export type ScCalendarValue =
 
 @Component({
   selector: 'sc-calendar',
-  imports: [
-    ScCalendarDayView,
-    ScCalendarMonthView,
-    ScCalendarYearView,
-    ScCalendarHeader,
-  ],
+  exportAs: 'scCalendar',
+  imports: [ScCalendarDayView, ScCalendarMonthView, ScCalendarYearView],
   host: {
     'data-slot': 'calendar',
     '[class]': 'class()',
@@ -44,18 +39,7 @@ export type ScCalendarValue =
     '[attr.aria-label]': '"Calendar"',
   },
   template: `
-    <!-- Header with navigation -->
-    <div
-      scCalendarHeader
-      [label]="monthYearLabel()"
-      [previousLabel]="previousAriaLabel()"
-      [nextLabel]="nextAriaLabel()"
-      [headerLabel]="headerAriaLabel()"
-      [expanded]="viewMode() !== 'day'"
-      (previous)="handlePrevious()"
-      (next)="handleNext()"
-      (headerClick)="handleHeaderClick()"
-    ></div>
+    <ng-content select="[scCalendarHeader]" />
 
     <!-- View content -->
     @switch (viewMode()) {
@@ -110,14 +94,14 @@ export class ScCalendar {
 
   readonly weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
-  protected readonly viewDate = signal(Temporal.Now.plainDateISO());
+  readonly viewDate = signal(Temporal.Now.plainDateISO());
   readonly viewModeInput = input<ScCalendarViewMode>('day', {
     alias: 'viewMode',
   });
 
-  protected readonly viewMode = linkedSignal(() => this.viewModeInput());
+  readonly viewMode = linkedSignal(() => this.viewModeInput());
 
-  protected readonly decadeStart = signal<number>(
+  readonly decadeStart = signal<number>(
     Math.floor(Temporal.Now.plainDateISO().year / 12) * 12,
   );
 
@@ -125,7 +109,8 @@ export class ScCalendar {
     cn('flex flex-col gap-4 p-3 w-[276px]', this.classInput()),
   );
 
-  protected readonly monthYearLabel = computed(() => {
+  /** The computed heading label (month/year, year, or decade range) */
+  readonly heading = computed(() => {
     const date = this.viewDate();
     const mode = this.viewMode();
 
@@ -140,33 +125,6 @@ export class ScCalendar {
 
     return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
   });
-
-  protected previousAriaLabel(): string {
-    const mode = this.viewMode();
-    return mode === 'day'
-      ? 'Go to previous month'
-      : mode === 'month'
-        ? 'Go to previous year'
-        : 'Go to previous decade';
-  }
-
-  protected nextAriaLabel(): string {
-    const mode = this.viewMode();
-    return mode === 'day'
-      ? 'Go to next month'
-      : mode === 'month'
-        ? 'Go to next year'
-        : 'Go to next decade';
-  }
-
-  protected headerAriaLabel(): string {
-    const mode = this.viewMode();
-    return mode === 'day'
-      ? 'Switch to month view'
-      : mode === 'month'
-        ? 'Switch to year view'
-        : 'Year view - select a year';
-  }
 
   protected selectDate(date: Temporal.PlainDate): void {
     const mode = this.mode();
@@ -198,8 +156,7 @@ export class ScCalendar {
     }
   }
 
-  // Header click - drill down through views
-  protected handleHeaderClick(): void {
+  handleHeaderClick(): void {
     const current = this.viewMode();
     if (current === 'day') {
       this.viewMode.set('month');
@@ -210,15 +167,14 @@ export class ScCalendar {
     }
   }
 
-  // Context-aware previous/next
-  protected handlePrevious(): void {
+  handlePrevious(): void {
     const mode = this.viewMode();
     if (mode === 'day') this.previousMonth();
     else if (mode === 'month') this.previousYear();
     else this.previousDecade();
   }
 
-  protected handleNext(): void {
+  handleNext(): void {
     const mode = this.viewMode();
     if (mode === 'day') this.nextMonth();
     else if (mode === 'month') this.nextYear();
@@ -249,7 +205,6 @@ export class ScCalendar {
     this.decadeStart.update((start) => start + 12);
   }
 
-  // Selection handlers - return to previous view
   protected selectMonth(month: number): void {
     const current = this.viewDate();
     this.viewDate.set(new Temporal.PlainDate(current.year, month, 1));

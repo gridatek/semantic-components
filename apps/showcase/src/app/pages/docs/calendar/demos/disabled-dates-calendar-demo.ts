@@ -5,15 +5,73 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScCalendar } from '@semantic-components/ui';
+import {
+  ScCalendar,
+  ScCalendarHeader,
+  ScCalendarHeading,
+  ScCalendarNext,
+  ScCalendarPrevious,
+} from '@semantic-components/ui';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-disabled-dates-calendar-demo',
-  imports: [ScCalendar],
+  imports: [
+    ScCalendar,
+    ScCalendarHeader,
+    ScCalendarHeading,
+    ScCalendarNext,
+    ScCalendarPrevious,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+  ],
   template: `
     <div class="space-y-4">
       <div class="w-fit rounded-md border">
-        <sc-calendar [(value)]="selectedDate" [disabled]="disabledDates()" />
+        <sc-calendar
+          [(value)]="selectedDate"
+          [disabled]="disabledDates()"
+          #cal="scCalendar"
+        >
+          <div scCalendarHeader>
+            <button scCalendarPrevious>
+              <svg siChevronLeftIcon class="size-4"></svg>
+              <span class="sr-only">
+                @switch (cal.viewMode()) {
+                  @case ('day') {
+                    Go to previous month
+                  }
+                  @case ('month') {
+                    Go to previous year
+                  }
+                  @case ('year') {
+                    Go to previous decade
+                  }
+                }
+              </span>
+            </button>
+            <button scCalendarHeading>{{ cal.heading() }}</button>
+            <button scCalendarNext>
+              <svg siChevronRightIcon class="size-4"></svg>
+              <span class="sr-only">
+                @switch (cal.viewMode()) {
+                  @case ('day') {
+                    Go to next month
+                  }
+                  @case ('month') {
+                    Go to next year
+                  }
+                  @case ('year') {
+                    Go to next decade
+                  }
+                }
+              </span>
+            </button>
+          </div>
+        </sc-calendar>
       </div>
 
       <div class="space-y-2">
