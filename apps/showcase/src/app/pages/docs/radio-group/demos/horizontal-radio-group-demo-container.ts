@@ -10,7 +10,11 @@ import { HorizontalRadioGroupDemo } from './horizontal-radio-group-demo';
   selector: 'app-horizontal-radio-group-demo-container',
   imports: [DemoContainer, HorizontalRadioGroupDemo],
   template: `
-    <app-demo-container title="Horizontal" [code]="code">
+    <app-demo-container
+      title="Horizontal"
+      demoUrl="/demos/radio-group/horizontal-radio-group-demo"
+      [code]="code"
+    >
       <app-horizontal-radio-group-demo />
     </app-demo-container>
   `,

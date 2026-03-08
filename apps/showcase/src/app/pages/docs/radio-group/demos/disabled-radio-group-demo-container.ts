@@ -10,7 +10,11 @@ import { DisabledRadioGroupDemo } from './disabled-radio-group-demo';
   selector: 'app-disabled-radio-group-demo-container',
   imports: [DemoContainer, DisabledRadioGroupDemo],
   template: `
-    <app-demo-container title="Disabled" [code]="code">
+    <app-demo-container
+      title="Disabled"
+      demoUrl="/demos/radio-group/disabled-radio-group-demo"
+      [code]="code"
+    >
       <app-disabled-radio-group-demo />
     </app-demo-container>
   `,

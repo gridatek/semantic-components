@@ -10,7 +10,11 @@ import { DescriptionsRadioGroupDemo } from './descriptions-radio-group-demo';
   selector: 'app-descriptions-radio-group-demo-container',
   imports: [DemoContainer, DescriptionsRadioGroupDemo],
   template: `
-    <app-demo-container title="With Descriptions" [code]="code">
+    <app-demo-container
+      title="With Descriptions"
+      demoUrl="/demos/radio-group/descriptions-radio-group-demo"
+      [code]="code"
+    >
       <app-descriptions-radio-group-demo />
     </app-demo-container>
   `,

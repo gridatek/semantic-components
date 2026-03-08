@@ -10,7 +10,11 @@ import { FormRadioGroupDemo } from './form-radio-group-demo';
   selector: 'app-form-radio-group-demo-container',
   imports: [DemoContainer, FormRadioGroupDemo],
   template: `
-    <app-demo-container title="Form" [code]="code">
+    <app-demo-container
+      title="Form"
+      demoUrl="/demos/radio-group/form-radio-group-demo"
+      [code]="code"
+    >
       <app-form-radio-group-demo />
     </app-demo-container>
   `,

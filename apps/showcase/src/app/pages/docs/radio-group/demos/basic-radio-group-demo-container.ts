@@ -10,7 +10,11 @@ import { BasicRadioGroupDemo } from './basic-radio-group-demo';
   selector: 'app-basic-radio-group-demo-container',
   imports: [DemoContainer, BasicRadioGroupDemo],
   template: `
-    <app-demo-container title="Basic" [code]="code">
+    <app-demo-container
+      title="Basic"
+      demoUrl="/demos/radio-group/basic-radio-group-demo"
+      [code]="code"
+    >
       <app-basic-radio-group-demo />
     </app-demo-container>
   `,
