@@ -19,7 +19,7 @@ import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
 
         <label scCheckboxField class="cursor-pointer">
           <input type="checkbox" scCheckbox [(checked)]="option2" />
-          A medium length label for the checkbox
+          A medium length label for the checkbox field component
         </label>
 
         <label scCheckboxField class="cursor-pointer">
