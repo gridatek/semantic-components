@@ -3,8 +3,10 @@ import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import {
   ChangeDetectionStrategy,
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   output,
   signal,
@@ -63,7 +65,7 @@ interface DayInfo {
                     type="button"
                     [class]="getDayClass(day)"
                     [attr.aria-label]="
-                      day.date.toLocaleString('en-US', {
+                      day.date.toLocaleString(locale, {
                         month: 'long',
                         day: 'numeric',
                         year: 'numeric',
@@ -101,6 +103,7 @@ interface DayInfo {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCalendarDayView {
+  protected readonly locale = inject(LOCALE_ID);
   private readonly _dayButtons = viewChildren(GridCellWidget);
 
   readonly viewDate = input.required<Temporal.PlainDate>();

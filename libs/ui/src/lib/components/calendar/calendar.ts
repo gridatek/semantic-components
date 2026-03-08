@@ -2,8 +2,10 @@ import { Temporal } from '@js-temporal/polyfill';
 import {
   ChangeDetectionStrategy,
   Component,
+  LOCALE_ID,
   ViewEncapsulation,
   computed,
+  inject,
   input,
   linkedSignal,
   model,
@@ -88,6 +90,8 @@ export type ScCalendarValue =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCalendar {
+  private readonly locale = inject(LOCALE_ID);
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly mode = input<ScCalendarMode>('single');
   readonly disabled = input<Temporal.PlainDate[]>([]);
@@ -143,7 +147,7 @@ export class ScCalendar {
       return date.year.toString();
     }
 
-    return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+    return date.toLocaleString(this.locale, { month: 'long', year: 'numeric' });
   });
 
   protected selectDate(date: Temporal.PlainDate): void {
