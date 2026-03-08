@@ -29,17 +29,17 @@ interface PlanFormModel {
   ],
   template: `
     <div scRadioGroup>
-      <label scRadioField>
+      <div scRadioField>
         <input type="radio" scRadio value="free" [formField]="planForm.plan" />
         <label scLabel>Free</label>
         <p scFieldDescription>Get started with basic features</p>
-      </label>
-      <label scRadioField>
+      </div>
+      <div scRadioField>
         <input type="radio" scRadio value="pro" [formField]="planForm.plan" />
         <label scLabel>Pro</label>
         <p scFieldDescription>Advanced features for professionals</p>
-      </label>
-      <label scRadioField>
+      </div>
+      <div scRadioField>
         <input
           type="radio"
           scRadio
@@ -48,7 +48,7 @@ interface PlanFormModel {
         />
         <label scLabel>Enterprise</label>
         <p scFieldDescription>Custom solutions for large teams</p>
-      </label>
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
