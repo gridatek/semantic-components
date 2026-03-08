@@ -64,12 +64,12 @@ export class ScSwitchField implements ScSwitchContext {
       'has-disabled:cursor-not-allowed has-disabled:text-muted-foreground',
       'has-[>[data-slot=field-description]]:*:data-[slot=inline-label]:font-medium',
       // Switch first: input is the first child → switch col-1, content col-2
-      'has-[>:first-child[data-slot=switch]]:grid-cols-[2.75rem_1fr]',
+      'has-[>:first-child[data-slot=switch]]:grid-cols-[2rem_1fr]',
       'has-[>:first-child[data-slot=switch]]:*:data-[slot=switch-visual]:col-start-1 has-[>:first-child[data-slot=switch]]:*:data-[slot=switch-visual]:row-start-1',
       'has-[>:first-child[data-slot=switch]]:*:data-[slot=inline-label]:col-start-2 has-[>:first-child[data-slot=switch]]:*:data-[slot=inline-label]:row-start-1',
       'has-[>:first-child[data-slot=switch]]:*:data-[slot=field-description]:col-start-2 has-[>:first-child[data-slot=switch]]:*:data-[slot=field-description]:row-start-2',
       // Switch last: input is not the first child → content col-1, switch col-2
-      'has-[>:not(:first-child)[data-slot=switch]]:w-full has-[>:not(:first-child)[data-slot=switch]]:grid-cols-[1fr_2.75rem]',
+      'has-[>:not(:first-child)[data-slot=switch]]:w-full has-[>:not(:first-child)[data-slot=switch]]:grid-cols-[1fr_2rem]',
       'has-[>:not(:first-child)[data-slot=switch]]:*:data-[slot=switch-visual]:col-start-2 has-[>:not(:first-child)[data-slot=switch]]:*:data-[slot=switch-visual]:row-start-1',
       'has-[>:not(:first-child)[data-slot=switch]]:*:data-[slot=inline-label]:col-start-1 has-[>:not(:first-child)[data-slot=switch]]:*:data-[slot=inline-label]:row-start-1',
       'has-[>:not(:first-child)[data-slot=switch]]:*:data-[slot=field-description]:col-start-1 has-[>:not(:first-child)[data-slot=switch]]:*:data-[slot=field-description]:row-start-2',

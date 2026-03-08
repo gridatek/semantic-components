@@ -29,9 +29,9 @@ export class ScSwitchVisual {
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none inline-flex h-6 w-11 shrink-0 items-center rounded-full border-2 border-transparent transition-colors',
-      'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
-      'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background',
+      'pointer-events-none inline-flex h-[18.4px] w-[32px] shrink-0 items-center rounded-full border border-transparent transition-all',
+      'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input/80',
+      'peer-focus-visible:border-ring peer-focus-visible:ring-3 peer-focus-visible:ring-ring/50',
       'peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
       this.classInput(),
     ),
@@ -39,10 +39,13 @@ export class ScSwitchVisual {
 
   protected readonly thumbClass = computed(() =>
     cn(
-      'pointer-events-none block size-5 rounded-full bg-background shadow-lg ring-0 transition-transform',
+      'pointer-events-none block size-4 rounded-full bg-background ring-0 transition-transform',
       this.switchField.dataState() === 'checked'
-        ? 'translate-x-5'
+        ? 'translate-x-[calc(100%-2px)]'
         : 'translate-x-0',
+      this.switchField.dataState() === 'checked'
+        ? 'dark:bg-primary-foreground'
+        : 'dark:bg-foreground',
     ),
   );
 }
