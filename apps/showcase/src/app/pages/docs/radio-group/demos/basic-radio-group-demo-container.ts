@@ -40,42 +40,40 @@ interface SpacingFormModel {
   selector: 'app-basic-radio-group-demo',
   imports: [ScRadioGroup, ScRadioField, ScRadio, FormField],
   template: \`
-    <div class="flex flex-col gap-4">
+    <div class="w-64 space-y-4">
       <div scRadioGroup>
-        <label scRadioField class="items-center">
+        <label scRadioField>
           <input
             type="radio"
             scRadio
             value="default"
             [formField]="spacingForm.spacing"
-            id="r1"
           />
-          <span class="text-sm leading-none font-medium">Default</span>
+          Default
         </label>
-        <label scRadioField class="items-center">
+        <label scRadioField>
           <input
             type="radio"
             scRadio
             value="comfortable"
             [formField]="spacingForm.spacing"
-            id="r2"
           />
-          <span class="text-sm leading-none font-medium">Comfortable</span>
+          Comfortable
         </label>
-        <label scRadioField class="items-center">
+        <label scRadioField>
           <input
             type="radio"
             scRadio
             value="compact"
             [formField]="spacingForm.spacing"
-            id="r3"
           />
-          <span class="text-sm leading-none font-medium">Compact</span>
+          Compact
         </label>
       </div>
-      <p class="text-muted-foreground text-sm">
-        Selected: {{ formModel().spacing || 'none' }}
-      </p>
+      <div class="bg-muted w-full rounded-md p-4">
+        <p class="text-sm font-medium">Selected:</p>
+        <pre class="mt-2 text-xs">{{ formModel().spacing || 'none' }}</pre>
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
