@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  booleanAttribute,
   computed,
   contentChild,
   inject,
@@ -48,6 +49,7 @@ export class ScSwitchField implements ScSwitchContext {
   });
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly reversed = input(false, { transform: booleanAttribute });
   readonly id = input(inject(_IdGenerator).getId('sc-switch-field-'));
   readonly descriptionIds = signal<string[]>([]);
 
@@ -61,7 +63,23 @@ export class ScSwitchField implements ScSwitchContext {
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex cursor-pointer items-center gap-2 text-sm leading-none font-medium has-disabled:cursor-not-allowed has-disabled:text-muted-foreground',
+      'grid cursor-pointer items-center gap-x-3 gap-y-0.5 text-sm leading-none font-medium',
+      'has-disabled:cursor-not-allowed has-disabled:text-muted-foreground',
+      'has-[>[data-slot=field-description]]:*:data-[slot=inline-label]:font-medium',
+      'has-[>[data-slot=field-description]]:*:data-[slot=switch-visual]:row-span-2 has-[>[data-slot=field-description]]:*:data-[slot=switch-visual]:self-center',
+      this.reversed()
+        ? [
+            'w-full grid-cols-[1fr_2.75rem]',
+            '*:data-[slot=switch-visual]:col-start-2 *:data-[slot=switch-visual]:row-start-1',
+            '*:data-[slot=inline-label]:col-start-1 *:data-[slot=inline-label]:row-start-1',
+            '*:data-[slot=field-description]:col-start-1 *:data-[slot=field-description]:row-start-2',
+          ]
+        : [
+            'grid-cols-[2.75rem_1fr]',
+            '*:data-[slot=switch-visual]:col-start-1 *:data-[slot=switch-visual]:row-start-1',
+            '*:data-[slot=inline-label]:col-start-2 *:data-[slot=inline-label]:row-start-1',
+            '*:data-[slot=field-description]:col-start-2 *:data-[slot=field-description]:row-start-2',
+          ],
       this.classInput(),
     ),
   );
