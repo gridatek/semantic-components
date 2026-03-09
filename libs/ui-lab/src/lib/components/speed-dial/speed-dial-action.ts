@@ -1,6 +1,8 @@
+import { NgComponentOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  Type,
   ViewEncapsulation,
   computed,
   input,
@@ -10,6 +12,7 @@ import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: 'sc-speed-dial-action',
+  imports: [NgComponentOutlet],
   template: `
     <button
       type="button"
@@ -19,7 +22,9 @@ import { cn } from '@semantic-components/ui';
       [title]="label()"
       (click)="actionClick.emit()"
     >
-      <span [class]="iconClass()" [innerHTML]="icon()"></span>
+      <span [class]="iconClass()">
+        <ng-container *ngComponentOutlet="icon()" />
+      </span>
       @if (showLabel()) {
         <span class="sr-only">{{ label() }}</span>
       }
@@ -52,7 +57,7 @@ import { cn } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSpeedDialAction {
-  readonly icon = input.required<string>();
+  readonly icon = input.required<Type<unknown>>();
   readonly label = input.required<string>();
   readonly disabled = input(false);
   readonly ariaLabel = input<string>();

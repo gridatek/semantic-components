@@ -1,8 +1,10 @@
+import { NgComponentOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
+  Type,
   ViewEncapsulation,
   afterNextRender,
   computed,
@@ -22,7 +24,7 @@ import type {
 
 @Component({
   selector: 'sc-speed-dial',
-  imports: [ScSpeedDialAction, SiPlusIcon, SiXIcon],
+  imports: [ScSpeedDialAction, SiPlusIcon, SiXIcon, NgComponentOutlet],
   template: `
     <div [class]="containerClass()" role="menu" [attr.aria-expanded]="open()">
       <!-- Actions -->
@@ -67,13 +69,13 @@ import type {
         <span [class]="fabIconClass()">
           @if (open()) {
             @if (closeIcon()) {
-              <span [innerHTML]="closeIcon()"></span>
+              <ng-container *ngComponentOutlet="closeIcon()" />
             } @else {
               <svg siXIcon class="size-6"></svg>
             }
           } @else {
             @if (icon()) {
-              <span [innerHTML]="icon()"></span>
+              <ng-container *ngComponentOutlet="icon()" />
             } @else {
               <svg siPlusIcon class="size-6"></svg>
             }
@@ -103,8 +105,8 @@ export class ScSpeedDial {
 
   readonly actions = input<SpeedDialAction[]>([]);
   readonly direction = input<SpeedDialDirection>('up');
-  readonly icon = input<string>('');
-  readonly closeIcon = input<string>('');
+  readonly icon = input<Type<unknown> | null>(null);
+  readonly closeIcon = input<Type<unknown> | null>(null);
   readonly label = input<string>('Open actions');
   readonly ariaLabel = input<string>('Speed dial');
   readonly showLabels = input(true);

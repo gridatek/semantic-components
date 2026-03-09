@@ -1,7 +1,9 @@
+import type { Type } from '@angular/core';
+
 export interface DockItem {
   id: string;
   label: string;
-  icon: string;
+  icon: Type<unknown>;
   href?: string;
   badge?: number | string;
   disabled?: boolean;

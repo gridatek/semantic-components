@@ -1,3 +1,4 @@
+import { NgComponentOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,18 +7,19 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { cn } from '@semantic-components/ui';
 import { SC_DOCK } from './dock';
 import type { DockItem } from './dock-types';
 
 @Component({
   selector: 'button[scDockItem]',
+  imports: [NgComponentOutlet],
   template: `
     <span
       class="inline-flex items-center justify-center [&>svg]:h-full [&>svg]:w-full"
-      [innerHTML]="sanitizedIcon()"
-    ></span>
+    >
+      <ng-container *ngComponentOutlet="item().icon" />
+    </span>
     <ng-content />
   `,
   host: {
@@ -36,15 +38,10 @@ import type { DockItem } from './dock-types';
 })
 export class ScDockItem {
   readonly dock = inject(SC_DOCK);
-  private readonly sanitizer = inject(DomSanitizer);
   readonly item = input.required<DockItem>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly itemIndex = this.dock.registerItem();
-
-  protected readonly sanitizedIcon = computed<SafeHtml>(() =>
-    this.sanitizer.bypassSecurityTrustHtml(this.item().icon),
-  );
 
   protected readonly class = computed(() => {
     const size = this.dock.size();
