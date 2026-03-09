@@ -1,15 +1,23 @@
 import {
+  CdkFixedSizeVirtualScroll,
+  CdkVirtualForOf,
+  CdkVirtualScrollViewport,
+} from '@angular/cdk/scrolling';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
   viewChild,
 } from '@angular/core';
-import { ScVirtualList } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-scroll-controls-virtual-list-demo',
-  imports: [ScVirtualList],
+  imports: [
+    CdkVirtualScrollViewport,
+    CdkFixedSizeVirtualScroll,
+    CdkVirtualForOf,
+  ],
   template: `
     <div class="mb-4 flex gap-2">
       <button
@@ -43,40 +51,27 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
         Go
       </button>
     </div>
-    <div
-      scVirtualList
-      #controlledList="scVirtualList"
-      class="h-[250px] overflow-auto rounded-lg border"
-      [items]="items()"
-      [itemHeight]="40"
-      height="250px"
+    <cdk-virtual-scroll-viewport
+      itemSize="40"
+      class="h-[250px] rounded-lg border"
     >
-      <div [style.height.px]="controlledList.totalHeight()" class="relative">
-        <div
-          [style.transform]="'translateY(' + controlledList.offsetY() + 'px)'"
-          class="absolute inset-x-0 top-0"
-        >
-          @for (item of controlledList.visibleItems(); track item.index) {
-            <div
-              [style.height.px]="40"
-              class="hover:bg-muted/50 flex items-center border-b px-4 transition-colors"
-            >
-              <span class="text-muted-foreground w-20 font-mono text-sm">
-                #{{ (item.index + 1).toString().padStart(5, '0') }}
-              </span>
-              <span class="flex-1">{{ item.data }}</span>
-            </div>
-          }
-        </div>
+      <div
+        *cdkVirtualFor="let item of items(); let i = index"
+        class="hover:bg-muted/50 flex h-10 items-center border-b px-4 transition-colors"
+      >
+        <span class="text-muted-foreground w-20 font-mono text-sm">
+          #{{ (i + 1).toString().padStart(5, '0') }}
+        </span>
+        <span class="flex-1">{{ item }}</span>
       </div>
-    </div>
+    </cdk-virtual-scroll-viewport>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollControlsVirtualListDemo {
-  readonly controlledList = viewChild<ScVirtualList<string>>('controlledList');
+  readonly viewport = viewChild(CdkVirtualScrollViewport);
 
   readonly items = signal<string[]>(
     Array.from(
@@ -86,22 +81,23 @@ export class ScrollControlsVirtualListDemo {
   );
 
   scrollToTop(): void {
-    this.controlledList()?.scrollToTop('smooth');
+    this.viewport()?.scrollToIndex(0, 'smooth');
   }
 
   scrollToMiddle(): void {
     const middleIndex = Math.floor(this.items().length / 2);
-    this.controlledList()?.scrollToIndex(middleIndex, 'smooth');
+    this.viewport()?.scrollToIndex(middleIndex, 'smooth');
   }
 
   scrollToBottom(): void {
-    this.controlledList()?.scrollToBottom('smooth');
+    const lastIndex = Math.max(0, this.items().length - 1);
+    this.viewport()?.scrollToIndex(lastIndex, 'smooth');
   }
 
   scrollToIndex(value: string): void {
     const index = parseInt(value, 10);
     if (!isNaN(index) && index >= 0) {
-      this.controlledList()?.scrollToIndex(index, 'smooth');
+      this.viewport()?.scrollToIndex(index, 'smooth');
     }
   }
 }

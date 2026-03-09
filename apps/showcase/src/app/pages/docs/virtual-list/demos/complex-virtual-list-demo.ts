@@ -1,10 +1,14 @@
 import {
+  CdkFixedSizeVirtualScroll,
+  CdkVirtualForOf,
+  CdkVirtualScrollViewport,
+} from '@angular/cdk/scrolling';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScVirtualList } from '@semantic-components/ui-lab';
 
 interface User {
   id: number;
@@ -15,47 +19,38 @@ interface User {
 
 @Component({
   selector: 'app-complex-virtual-list-demo',
-  imports: [ScVirtualList],
+  imports: [
+    CdkVirtualScrollViewport,
+    CdkFixedSizeVirtualScroll,
+    CdkVirtualForOf,
+  ],
   template: `
-    <div
-      scVirtualList
-      #vl="scVirtualList"
-      class="h-[360px] overflow-auto rounded-lg border"
-      [items]="users()"
-      [itemHeight]="72"
-      height="360px"
+    <cdk-virtual-scroll-viewport
+      itemSize="72"
+      class="h-[360px] rounded-lg border"
     >
-      <div [style.height.px]="vl.totalHeight()" class="relative">
+      <div
+        *cdkVirtualFor="let user of users(); trackBy: trackById"
+        class="hover:bg-muted/50 flex h-[72px] items-center gap-4 border-b px-4 transition-colors"
+      >
         <div
-          [style.transform]="'translateY(' + vl.offsetY() + 'px)'"
-          class="absolute inset-x-0 top-0"
+          class="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
         >
-          @for (item of vl.visibleItems(); track item.data.id) {
-            <div
-              [style.height.px]="72"
-              class="hover:bg-muted/50 flex items-center gap-4 border-b px-4 transition-colors"
-            >
-              <div
-                class="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
-              >
-                <span class="text-primary text-sm font-medium">
-                  {{ getInitials(item.data.name) }}
-                </span>
-              </div>
-              <div class="min-w-0 flex-1">
-                <p class="truncate font-medium">{{ item.data.name }}</p>
-                <p class="text-muted-foreground truncate text-sm">
-                  {{ item.data.email }}
-                </p>
-              </div>
-              <span class="bg-muted rounded-full px-2 py-1 text-xs">
-                {{ item.data.role }}
-              </span>
-            </div>
-          }
+          <span class="text-primary text-sm font-medium">
+            {{ getInitials(user.name) }}
+          </span>
         </div>
+        <div class="min-w-0 flex-1">
+          <p class="truncate font-medium">{{ user.name }}</p>
+          <p class="text-muted-foreground truncate text-sm">
+            {{ user.email }}
+          </p>
+        </div>
+        <span class="bg-muted rounded-full px-2 py-1 text-xs">
+          {{ user.role }}
+        </span>
       </div>
-    </div>
+    </cdk-virtual-scroll-viewport>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
@@ -70,6 +65,10 @@ export class ComplexVirtualListDemo {
       role: ['Admin', 'Editor', 'Viewer', 'Guest'][i % 4],
     })),
   );
+
+  trackById(_index: number, item: User): number {
+    return item.id;
+  }
 
   getInitials(name: string): string {
     return name
