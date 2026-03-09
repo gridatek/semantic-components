@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import {
   ScInfiniteScroll,
+  ScInfiniteScrollEnd,
   ScInfiniteScrollLoader,
 } from '@semantic-components/ui-lab';
 
@@ -17,10 +18,11 @@ interface Item {
 
 @Component({
   selector: 'app-custom-loader-infinite-scroll-demo',
-  imports: [ScInfiniteScroll, ScInfiniteScrollLoader],
+  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd],
   template: `
-    <sc-infinite-scroll
-      class="h-[300px] rounded-lg border"
+    <div
+      scInfiniteScroll
+      class="h-[300px] overflow-auto rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
       (loadMore)="loadMore()"
@@ -33,24 +35,25 @@ interface Item {
         }
       </div>
 
-      <div
-        scInfiniteScrollLoader
-        class="flex items-center justify-center gap-2 py-4"
-      >
-        <div
-          class="bg-primary size-2 animate-bounce rounded-full"
-          style="animation-delay: 0ms"
-        ></div>
-        <div
-          class="bg-primary size-2 animate-bounce rounded-full"
-          style="animation-delay: 150ms"
-        ></div>
-        <div
-          class="bg-primary size-2 animate-bounce rounded-full"
-          style="animation-delay: 300ms"
-        ></div>
+      <div scInfiniteScrollLoader>
+        <div class="flex items-center justify-center gap-2 py-4">
+          <div
+            class="bg-primary size-2 animate-bounce rounded-full"
+            style="animation-delay: 0ms"
+          ></div>
+          <div
+            class="bg-primary size-2 animate-bounce rounded-full"
+            style="animation-delay: 150ms"
+          ></div>
+          <div
+            class="bg-primary size-2 animate-bounce rounded-full"
+            style="animation-delay: 300ms"
+          ></div>
+        </div>
       </div>
-    </sc-infinite-scroll>
+
+      <div scInfiniteScrollEnd></div>
+    </div>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,

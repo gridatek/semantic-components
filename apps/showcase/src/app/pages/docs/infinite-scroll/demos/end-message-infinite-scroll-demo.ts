@@ -4,7 +4,11 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScInfiniteScroll } from '@semantic-components/ui-lab';
+import {
+  ScInfiniteScroll,
+  ScInfiniteScrollEnd,
+  ScInfiniteScrollLoader,
+} from '@semantic-components/ui-lab';
 
 interface Item {
   id: number;
@@ -14,13 +18,13 @@ interface Item {
 
 @Component({
   selector: 'app-end-message-infinite-scroll-demo',
-  imports: [ScInfiniteScroll],
+  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd],
   template: `
-    <sc-infinite-scroll
-      class="h-[300px] rounded-lg border"
+    <div
+      scInfiniteScroll
+      class="h-[300px] overflow-auto rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
-      endMessage="You've reached the end! 🎉"
       (loadMore)="loadMore()"
     >
       <div class="space-y-2 p-4">
@@ -30,7 +34,10 @@ interface Item {
           </div>
         }
       </div>
-    </sc-infinite-scroll>
+
+      <div scInfiniteScrollLoader></div>
+      <div scInfiniteScrollEnd message="You've reached the end! 🎉"></div>
+    </div>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,

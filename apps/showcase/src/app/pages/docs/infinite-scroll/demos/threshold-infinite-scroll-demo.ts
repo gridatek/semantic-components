@@ -4,7 +4,11 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScInfiniteScroll } from '@semantic-components/ui-lab';
+import {
+  ScInfiniteScroll,
+  ScInfiniteScrollEnd,
+  ScInfiniteScrollLoader,
+} from '@semantic-components/ui-lab';
 
 interface Item {
   id: number;
@@ -14,13 +18,14 @@ interface Item {
 
 @Component({
   selector: 'app-threshold-infinite-scroll-demo',
-  imports: [ScInfiniteScroll],
+  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd],
   template: `
     <p class="text-muted-foreground mb-4 text-sm">
       Load more items when within 200px of the bottom (loads earlier).
     </p>
-    <sc-infinite-scroll
-      class="h-[300px] rounded-lg border"
+    <div
+      scInfiniteScroll
+      class="h-[300px] overflow-auto rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
       [threshold]="200"
@@ -33,7 +38,10 @@ interface Item {
           </div>
         }
       </div>
-    </sc-infinite-scroll>
+
+      <div scInfiniteScrollLoader></div>
+      <div scInfiniteScrollEnd></div>
+    </div>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,

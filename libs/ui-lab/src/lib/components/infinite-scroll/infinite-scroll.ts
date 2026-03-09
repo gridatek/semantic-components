@@ -1,95 +1,42 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
+  Directive,
   ElementRef,
-  ViewEncapsulation,
+  InjectionToken,
   afterNextRender,
-  computed,
-  contentChild,
   inject,
   input,
   output,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
-import { ScInfiniteScrollEnd } from './infinite-scroll-end';
-import { ScInfiniteScrollLoader } from './infinite-scroll-loader';
 
-@Component({
-  selector: 'sc-infinite-scroll',
+export const SC_INFINITE_SCROLL = new InjectionToken<ScInfiniteScroll>(
+  'SC_INFINITE_SCROLL',
+);
+
+@Directive({
+  selector: 'div[scInfiniteScroll]',
   exportAs: 'scInfiniteScroll',
-  imports: [SiLoaderCircleIcon],
-  template: `
-    <div #container [class]="containerClass()" (scroll)="onScroll($event)">
-      <ng-content />
-
-      @if (loading()) {
-        <div [class]="loaderContainerClass()">
-          <ng-content select="[scInfiniteScrollLoader]" />
-          @if (!hasCustomLoader()) {
-            <div class="flex items-center justify-center gap-2 py-4">
-              <svg
-                siLoaderCircleIcon
-                class="text-muted-foreground size-5 animate-spin"
-              ></svg>
-              <span class="text-muted-foreground text-sm">Loading more...</span>
-            </div>
-          }
-        </div>
-      }
-
-      @if (hasReachedEnd() && !loading()) {
-        <div [class]="endContainerClass()">
-          <ng-content select="[scInfiniteScrollEnd]" />
-          @if (!hasCustomEnd()) {
-            <div class="text-muted-foreground py-4 text-center text-sm">
-              {{ endMessage() }}
-            </div>
-          }
-        </div>
-      }
-    </div>
-  `,
+  providers: [{ provide: SC_INFINITE_SCROLL, useExisting: ScInfiniteScroll }],
   host: {
     'data-slot': 'infinite-scroll',
-    '[class]': 'hostClass()',
+    '[attr.data-disabled]': 'disabled() || null',
+    '[attr.data-loading]': 'loading() || null',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScInfiniteScroll {
   private readonly destroyRef = inject(DestroyRef);
-  private readonly elementRef = inject(ElementRef);
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
 
-  readonly classInput = input<string>('', { alias: 'class' });
   readonly threshold = input<number>(100);
   readonly disabled = input<boolean>(false);
   readonly loading = input<boolean>(false);
   readonly hasReachedEnd = input<boolean>(false);
-  readonly endMessage = input<string>('No more items to load');
   readonly direction = input<'down' | 'up'>('down');
 
   readonly loadMore = output<void>();
 
-  private readonly customLoader = contentChild(ScInfiniteScrollLoader);
-  private readonly customEnd = contentChild(ScInfiniteScrollEnd);
-
-  protected readonly hasCustomLoader = computed(() => !!this.customLoader());
-  protected readonly hasCustomEnd = computed(() => !!this.customEnd());
-
   private observer: IntersectionObserver | null = null;
   private sentinelEl: HTMLElement | null = null;
-
-  protected readonly hostClass = computed(() => cn('block', this.classInput()));
-
-  protected readonly containerClass = computed(() =>
-    cn('overflow-auto h-full'),
-  );
-
-  protected readonly loaderContainerClass = computed(() => cn(''));
-
-  protected readonly endContainerClass = computed(() => cn(''));
 
   constructor() {
     afterNextRender(() => {
@@ -102,21 +49,17 @@ export class ScInfiniteScroll {
   }
 
   private setupIntersectionObserver(): void {
-    // Create sentinel element
+    const host = this.elementRef.nativeElement;
+
     this.sentinelEl = document.createElement('div');
     this.sentinelEl.style.height = '1px';
     this.sentinelEl.style.width = '100%';
     this.sentinelEl.setAttribute('data-sentinel', 'true');
 
-    const container =
-      this.elementRef.nativeElement.querySelector(
-        '[data-slot="infinite-scroll"] > div',
-      ) || this.elementRef.nativeElement;
-
     if (this.direction() === 'down') {
-      container.appendChild(this.sentinelEl);
+      host.appendChild(this.sentinelEl);
     } else {
-      container.prepend(this.sentinelEl);
+      host.prepend(this.sentinelEl);
     }
 
     this.observer = new IntersectionObserver(
@@ -132,7 +75,7 @@ export class ScInfiniteScroll {
         }
       },
       {
-        root: container,
+        root: host,
         rootMargin: `${this.threshold()}px`,
         threshold: 0,
       },
@@ -152,37 +95,12 @@ export class ScInfiniteScroll {
     }
   }
 
-  onScroll(event: Event): void {
-    // Fallback scroll-based detection
-    const target = event.target as HTMLElement;
-    const threshold = this.threshold();
-
-    if (this.disabled() || this.loading() || this.hasReachedEnd()) return;
-
-    if (this.direction() === 'down') {
-      const scrollBottom =
-        target.scrollHeight - target.scrollTop - target.clientHeight;
-      if (scrollBottom <= threshold) {
-        this.loadMore.emit();
-      }
-    } else {
-      if (target.scrollTop <= threshold) {
-        this.loadMore.emit();
-      }
-    }
-  }
-
   scrollToTop(): void {
-    const container = this.elementRef.nativeElement.querySelector('div');
-    if (container) {
-      container.scrollTop = 0;
-    }
+    this.elementRef.nativeElement.scrollTop = 0;
   }
 
   scrollToBottom(): void {
-    const container = this.elementRef.nativeElement.querySelector('div');
-    if (container) {
-      container.scrollTop = container.scrollHeight;
-    }
+    const host = this.elementRef.nativeElement;
+    host.scrollTop = host.scrollHeight;
   }
 }
