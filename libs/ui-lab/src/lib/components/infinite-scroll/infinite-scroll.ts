@@ -7,10 +7,10 @@ import {
   ViewEncapsulation,
   afterNextRender,
   computed,
-  contentChild,
   inject,
   input,
   output,
+  viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScInfiniteScrollSentinel } from './infinite-scroll-sentinel';
@@ -40,7 +40,7 @@ export const SC_INFINITE_SCROLL = new InjectionToken<ScInfiniteScroll>(
 export class ScInfiniteScroll {
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly sentinel = contentChild.required(ScInfiniteScrollSentinel);
+  private readonly sentinel = viewChild.required(ScInfiniteScrollSentinel);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly threshold = input<number>(100);
