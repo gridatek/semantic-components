@@ -112,7 +112,7 @@ interface CommandItem {
           scKbd
           scHotkey="mod+k"
           #hk="scHotkey"
-          (scHotkeyPressed)="open.update(v => !v)"
+          (scHotkeyPressed)="toggleOpen()"
         >
           {{ hk.displayKey() }}
         </kbd>
@@ -286,6 +286,10 @@ export class ScCommandDialogDemo {
     const search = this.searchString().toLowerCase();
     return this.filterItems(this.settings, search);
   });
+
+  toggleOpen(): void {
+    this.open.update((v) => !v);
+  }
 
   onSelect(item: string): void {
     console.log('Selected:', item);
