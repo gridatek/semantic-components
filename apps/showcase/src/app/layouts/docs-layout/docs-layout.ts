@@ -190,17 +190,19 @@ import { ConfigService } from '../../services/config.service';
                         <span>UI Lab</span>
                       </a>
                     </li>
-                    <li scSidebarMenuSubItem>
-                      <a
-                        scSidebarMenuSubButton
-                        routerLink="/docs/getting-started/charts"
-                        routerLinkActive
-                        #chartsRla="routerLinkActive"
-                        [isActive]="chartsRla.isActive"
-                      >
-                        <span>Charts</span>
-                      </a>
-                    </li>
+                    @if (devMode()) {
+                      <li scSidebarMenuSubItem>
+                        <a
+                          scSidebarMenuSubButton
+                          routerLink="/docs/getting-started/charts"
+                          routerLinkActive
+                          #chartsRla="routerLinkActive"
+                          [isActive]="chartsRla.isActive"
+                        >
+                          <span>Charts</span>
+                        </a>
+                      </li>
+                    }
                     <li scSidebarMenuSubItem>
                       <a
                         scSidebarMenuSubButton
