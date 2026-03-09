@@ -9,6 +9,7 @@ import {
   ScInfiniteScrollEnd,
   ScInfiniteScrollLoader,
 } from '@semantic-components/ui-lab';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {
   id: number;
@@ -18,7 +19,12 @@ interface Item {
 
 @Component({
   selector: 'app-basic-infinite-scroll-demo',
-  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd],
+  imports: [
+    ScInfiniteScroll,
+    ScInfiniteScrollLoader,
+    ScInfiniteScrollEnd,
+    SiLoaderCircleIcon,
+  ],
   template: `
     <div
       scInfiniteScroll
@@ -38,8 +44,27 @@ interface Item {
         }
       </div>
 
-      <div scInfiniteScrollLoader></div>
-      <div scInfiniteScrollEnd></div>
+      @if (loading()) {
+        <div
+          scInfiniteScrollLoader
+          class="flex items-center justify-center gap-2 py-4"
+        >
+          <svg
+            siLoaderCircleIcon
+            class="text-muted-foreground size-5 animate-spin"
+          ></svg>
+          <span class="text-muted-foreground text-sm">Loading more...</span>
+        </div>
+      }
+
+      @if (reachedEnd() && !loading()) {
+        <div
+          scInfiniteScrollEnd
+          class="text-muted-foreground py-4 text-center text-sm"
+        >
+          No more items to load
+        </div>
+      }
     </div>
     <p class="text-muted-foreground mt-4 text-sm">
       Loaded {{ items().length }} items

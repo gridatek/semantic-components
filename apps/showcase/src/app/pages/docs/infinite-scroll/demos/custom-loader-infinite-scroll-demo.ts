@@ -35,8 +35,11 @@ interface Item {
         }
       </div>
 
-      <div scInfiniteScrollLoader>
-        <div class="flex items-center justify-center gap-2 py-4">
+      @if (loading()) {
+        <div
+          scInfiniteScrollLoader
+          class="flex items-center justify-center gap-2 py-4"
+        >
           <div
             class="bg-primary size-2 animate-bounce rounded-full"
             style="animation-delay: 0ms"
@@ -50,9 +53,16 @@ interface Item {
             style="animation-delay: 300ms"
           ></div>
         </div>
-      </div>
+      }
 
-      <div scInfiniteScrollEnd></div>
+      @if (reachedEnd() && !loading()) {
+        <div
+          scInfiniteScrollEnd
+          class="text-muted-foreground py-4 text-center text-sm"
+        >
+          No more items to load
+        </div>
+      }
     </div>
   `,
   host: { class: 'block w-full' },

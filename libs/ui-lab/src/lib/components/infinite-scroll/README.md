@@ -5,8 +5,8 @@ Automatically load more content as the user scrolls to the bottom of a container
 ## Components
 
 - `ScInfiniteScroll` - Root directive with scroll detection (via IntersectionObserver)
-- `ScInfiniteScrollLoader` - Loading indicator (default or custom content)
-- `ScInfiniteScrollEnd` - End message (default or custom content)
+- `ScInfiniteScrollLoader` - Marker directive for loading indicator
+- `ScInfiniteScrollEnd` - Marker directive for end message
 
 ## Usage
 
@@ -18,8 +18,14 @@ Automatically load more content as the user scrolls to the bottom of a container
     }
   </div>
 
-  <div scInfiniteScrollLoader></div>
-  <div scInfiniteScrollEnd></div>
+  @if (loading()) {
+  <div scInfiniteScrollLoader class="flex items-center justify-center gap-2 py-4">
+    <svg siLoaderCircleIcon class="text-muted-foreground size-5 animate-spin"></svg>
+    <span class="text-muted-foreground text-sm">Loading more...</span>
+  </div>
+  } @if (reachedEnd() && !loading()) {
+  <div scInfiniteScrollEnd class="text-muted-foreground py-4 text-center text-sm">No more items to load</div>
+  }
 </div>
 ```
 
@@ -27,13 +33,13 @@ Automatically load more content as the user scrolls to the bottom of a container
 
 ### ScInfiniteScroll (Root Directive)
 
-| Input           | Type      | Default | Description                               |
-| --------------- | --------- | ------- | ----------------------------------------- | -------------------------- |
-| `threshold`     | `number`  | `100`   | Distance from bottom (px) to trigger load |
-| `loading`       | `boolean` | `false` | Whether currently loading                 |
-| `hasReachedEnd` | `boolean` | `false` | Whether all content is loaded             |
-| `disabled`      | `boolean` | `false` | Disable scroll detection                  |
-| `direction`     | `'down'   | 'up'`   | `'down'`                                  | Scroll direction to detect |
+| Input           | Type             | Default  | Description                               |
+| --------------- | ---------------- | -------- | ----------------------------------------- |
+| `threshold`     | `number`         | `100`    | Distance from bottom (px) to trigger load |
+| `loading`       | `boolean`        | `false`  | Whether currently loading                 |
+| `hasReachedEnd` | `boolean`        | `false`  | Whether all content is loaded             |
+| `disabled`      | `boolean`        | `false`  | Disable scroll detection                  |
+| `direction`     | `'down' \| 'up'` | `'down'` | Scroll direction to detect                |
 
 | Output     | Type   | Description                           |
 | ---------- | ------ | ------------------------------------- |
@@ -46,41 +52,24 @@ Automatically load more content as the user scrolls to the bottom of a container
 
 ### ScInfiniteScrollLoader
 
-Shows loading indicator when `loading()` is true. Uses default spinner or custom projected content.
+Marker directive for loading indicator. Consumer controls visibility with `@if`.
 
 ```html
-<!-- Default loader -->
-<div scInfiniteScrollLoader></div>
-
-<!-- Custom loader -->
-<div scInfiniteScrollLoader>
-  <div class="flex items-center gap-2 py-4">
-    <div class="bg-primary size-2 animate-bounce rounded-full"></div>
-    <div class="bg-primary size-2 animate-bounce rounded-full"></div>
-    <div class="bg-primary size-2 animate-bounce rounded-full"></div>
-  </div>
+@if (loading()) {
+<div scInfiniteScrollLoader class="flex items-center justify-center gap-2 py-4">
+  <!-- your loader content -->
 </div>
+}
 ```
 
 ### ScInfiniteScrollEnd
 
-Shows end message when `hasReachedEnd()` is true and `loading()` is false.
-
-| Input     | Type     | Default                   | Description         |
-| --------- | -------- | ------------------------- | ------------------- |
-| `message` | `string` | `"No more items to load"` | Default end message |
+Marker directive for end-of-list message. Consumer controls visibility with `@if`.
 
 ```html
-<!-- Default message -->
-<div scInfiniteScrollEnd></div>
-
-<!-- Custom message -->
-<div scInfiniteScrollEnd message="You've reached the end!"></div>
-
-<!-- Fully custom content -->
-<div scInfiniteScrollEnd>
-  <p class="py-4 text-center">All items loaded</p>
-</div>
+@if (reachedEnd() && !loading()) {
+<div scInfiniteScrollEnd class="text-muted-foreground py-4 text-center text-sm">No more items to load</div>
+}
 ```
 
 ## Examples
@@ -89,7 +78,7 @@ Shows end message when `hasReachedEnd()` is true and `loading()` is false.
 
 ```typescript
 @Component({
-  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd],
+  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd, SiLoaderCircleIcon],
   template: `
     <div scInfiniteScroll class="h-[400px] overflow-auto rounded-lg border" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
       <div class="space-y-2 p-4">
@@ -98,8 +87,16 @@ Shows end message when `hasReachedEnd()` is true and `loading()` is false.
         }
       </div>
 
-      <div scInfiniteScrollLoader></div>
-      <div scInfiniteScrollEnd></div>
+      @if (loading()) {
+        <div scInfiniteScrollLoader class="flex items-center justify-center gap-2 py-4">
+          <svg siLoaderCircleIcon class="text-muted-foreground size-5 animate-spin"></svg>
+          <span class="text-muted-foreground text-sm">Loading more...</span>
+        </div>
+      }
+
+      @if (reachedEnd() && !loading()) {
+        <div scInfiniteScrollEnd class="text-muted-foreground py-4 text-center text-sm">No more items to load</div>
+      }
     </div>
   `,
 })
@@ -125,6 +122,18 @@ export class MyComponent {
 }
 ```
 
+### Custom Loader
+
+```html
+@if (loading()) {
+<div scInfiniteScrollLoader class="flex items-center justify-center gap-2 py-4">
+  <div class="bg-primary size-2 animate-bounce rounded-full" style="animation-delay: 0ms"></div>
+  <div class="bg-primary size-2 animate-bounce rounded-full" style="animation-delay: 150ms"></div>
+  <div class="bg-primary size-2 animate-bounce rounded-full" style="animation-delay: 300ms"></div>
+</div>
+}
+```
+
 ### Custom Threshold
 
 Load content earlier by increasing the threshold:
@@ -132,7 +141,10 @@ Load content earlier by increasing the threshold:
 ```html
 <div scInfiniteScroll class="h-[300px] overflow-auto" [threshold]="200" [loading]="loading()" (loadMore)="loadMore()">
   <!-- content -->
-  <div scInfiniteScrollLoader></div>
+
+  @if (loading()) {
+  <div scInfiniteScrollLoader>...</div>
+  }
 </div>
 ```
 
@@ -148,8 +160,11 @@ Works with any content layout:
     }
   </div>
 
-  <div scInfiniteScrollLoader></div>
-  <div scInfiniteScrollEnd></div>
+  @if (loading()) {
+  <div scInfiniteScrollLoader>...</div>
+  } @if (reachedEnd() && !loading()) {
+  <div scInfiniteScrollEnd>...</div>
+  }
 </div>
 ```
 
