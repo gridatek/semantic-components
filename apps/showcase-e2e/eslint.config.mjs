@@ -13,6 +13,7 @@ export default [
         { assertFunctionNames: ['expect', 'expectNoA11yViolations'] },
       ],
       'playwright/no-skipped-test': 'off',
+      'playwright/no-networkidle': 'off',
     },
   },
 ];
