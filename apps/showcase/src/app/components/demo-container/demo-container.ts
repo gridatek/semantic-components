@@ -50,7 +50,7 @@ import { TocHeading } from '../toc/toc-heading';
     <div class="space-y-4">
       @if (title()) {
         <div class="flex items-center gap-2">
-          <h3 toc class="text-sm font-medium">{{ title() }}</h3>
+          <h3 appToc class="text-sm font-medium">{{ title() }}</h3>
           @if (demoUrl() && devMode()) {
             <a
               [href]="demoUrl()"
