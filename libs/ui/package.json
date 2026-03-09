@@ -23,7 +23,8 @@
     "@angular/cdk": ">=21.1.5",
     "@js-temporal/polyfill": ">=0.5.1",
     "@angular/forms": ">=21.1.5",
-    "rxjs": ">=7.8.2"
+    "rxjs": ">=7.8.2",
+    "@angular/router": ">=21.2.1"
   },
   "exports": {
     "./styles": {
