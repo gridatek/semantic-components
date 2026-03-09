@@ -62,7 +62,7 @@ interface Item {
       Loaded {{ items().length }} items
     </p>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

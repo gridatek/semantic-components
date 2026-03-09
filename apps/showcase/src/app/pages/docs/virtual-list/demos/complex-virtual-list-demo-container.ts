@@ -74,7 +74,7 @@ interface User {
       </sc-virtual-list>
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
