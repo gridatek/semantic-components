@@ -26,8 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      # - name: Lint
-      #   run: npx nx run-many -t lint
+      - name: Lint
+        run: npx nx run-many -t lint
 
       - name: Build
         run: npx nx run-many -t build
