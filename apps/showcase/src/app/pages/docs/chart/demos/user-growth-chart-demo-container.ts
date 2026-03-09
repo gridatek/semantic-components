@@ -32,7 +32,7 @@ import {
   ChartDataPoint,
   ScChartContainer,
   ScLineChart,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/charts';
 
 @Component({
   selector: 'app-user-growth-chart-demo',

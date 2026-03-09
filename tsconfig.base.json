@@ -20,6 +20,7 @@
       "@semantic-components/code": ["libs/code/src/index.ts"],
       "@semantic-components/carousel": ["libs/carousel/src/index.ts"],
       "@semantic-components/editor": ["libs/editor/src/index.ts"],
+      "@semantic-components/charts": ["libs/charts/src/index.ts"],
       "@semantic-components/mcp-server": ["libs/mcp-server/src/index.ts"]
     }
   },

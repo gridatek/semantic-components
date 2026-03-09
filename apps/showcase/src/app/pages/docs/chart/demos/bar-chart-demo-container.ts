@@ -33,7 +33,7 @@ import {
   ScBarChart,
   ScChartContainer,
   ScChartLegend,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/charts';
 
 @Component({
   selector: 'app-bar-chart-demo',

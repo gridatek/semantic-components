@@ -7,7 +7,7 @@ import {
   ChartDataPoint,
   ScChartContainer,
   ScLineChart,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/charts';
 
 @Component({
   selector: 'app-line-chart-demo',

@@ -7,7 +7,7 @@ import {
   ChartDataPoint,
   ScBarChart,
   ScChartContainer,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/charts';
 
 @Component({
   selector: 'app-monthly-revenue-chart-demo',

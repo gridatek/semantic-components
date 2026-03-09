@@ -1,0 +1,23 @@
+{
+  "name": "@semantic-components/charts",
+  "version": "0.76.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Khalil LAGRIDA",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gridatek/semantic-components",
+    "directory": "libs/charts"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=21.1.0",
+    "@semantic-components/ui": "0.76.0",
+    "d3-array": ">=3.0.0",
+    "d3-scale": ">=4.0.0",
+    "d3-shape": ">=3.0.0"
+  },
+  "sideEffects": false
+}

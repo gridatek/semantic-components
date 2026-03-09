@@ -8,7 +8,7 @@ import {
   ScChartContainer,
   ScChartLegend,
   ScDonutChart,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/charts';
 
 @Component({
   selector: 'app-donut-chart-demo',
