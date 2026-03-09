@@ -97,11 +97,11 @@ interface FormModel {
     FormRoot,
   ],
   template: \`
-    <form [formRoot]="labelsForm">
+    <form [formRoot]="labelsForm" class="w-full max-w-sm space-y-6">
       <div class="space-y-4">
         <div scField>
           <label scLabel>Labels</label>
-          <div scMultiselect class="w-52">
+          <div scMultiselect class="w-full">
             <div scMultiselectInputGroup>
               <span scMultiselectDisplayValue>
                 @if (displayIcon(); as icon) {
@@ -149,7 +149,7 @@ interface FormModel {
         </div>
       </div>
 
-      <div class="bg-muted mt-6 rounded-md p-4">
+      <div class="bg-muted rounded-md p-4">
         <p class="text-sm font-medium">Form Values:</p>
         <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>

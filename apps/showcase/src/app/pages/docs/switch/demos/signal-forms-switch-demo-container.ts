@@ -32,7 +32,12 @@ import {
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
-import { ScSwitch, ScSwitchField } from '@semantic-components/ui';
+import {
+  ScFieldDescription,
+  ScInlineLabel,
+  ScSwitch,
+  ScSwitchField,
+} from '@semantic-components/ui';
 
 interface SwitchFormModel {
   notifications: boolean;
@@ -42,40 +47,39 @@ interface SwitchFormModel {
 
 @Component({
   selector: 'app-signal-forms-switch-demo',
-  imports: [ScSwitch, ScSwitchField, JsonPipe, FormField],
+  imports: [
+    ScSwitch,
+    ScSwitchField,
+    ScInlineLabel,
+    ScFieldDescription,
+    JsonPipe,
+    FormField,
+  ],
   template: \`
     <form>
       <div class="space-y-4">
-        <label scSwitchField class="w-full flex-row-reverse justify-between">
+        <label scSwitchField>
+          <p scInlineLabel>Enable Notifications</p>
+          <p scFieldDescription>
+            Receive notifications about your account activity
+          </p>
           <input
             type="checkbox"
             scSwitch
             [formField]="switchForm.notifications"
           />
-          <div class="space-y-0.5">
-            <p class="text-sm leading-none font-medium">Enable Notifications</p>
-            <p class="text-muted-foreground text-sm">
-              Receive notifications about your account activity
-            </p>
-          </div>
         </label>
 
-        <label scSwitchField class="w-full flex-row-reverse justify-between">
+        <label scSwitchField>
+          <p scInlineLabel>Dark Mode</p>
+          <p scFieldDescription>Switch to dark theme</p>
           <input type="checkbox" scSwitch [formField]="switchForm.darkMode" />
-          <div class="space-y-0.5">
-            <p class="text-sm leading-none font-medium">Dark Mode</p>
-            <p class="text-muted-foreground text-sm">Switch to dark theme</p>
-          </div>
         </label>
 
-        <label scSwitchField class="w-full flex-row-reverse justify-between">
+        <label scSwitchField>
+          <p scInlineLabel>Auto Save</p>
+          <p scFieldDescription>Automatically save your work</p>
           <input type="checkbox" scSwitch [formField]="switchForm.autoSave" />
-          <div class="space-y-0.5">
-            <p class="text-sm leading-none font-medium">Auto Save</p>
-            <p class="text-muted-foreground text-sm">
-              Automatically save your work
-            </p>
-          </div>
         </label>
       </div>
 
