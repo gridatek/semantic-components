@@ -37,7 +37,7 @@ import {
       {{ visibleRange().start }} - {{ visibleRange().end }}
     </p>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
