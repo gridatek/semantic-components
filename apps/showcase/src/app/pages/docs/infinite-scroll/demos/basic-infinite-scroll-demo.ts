@@ -8,6 +8,7 @@ import {
   ScInfiniteScroll,
   ScInfiniteScrollEnd,
   ScInfiniteScrollLoader,
+  ScInfiniteScrollSentinel,
 } from '@semantic-components/ui-lab';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
@@ -21,6 +22,7 @@ interface Item {
   selector: 'app-basic-infinite-scroll-demo',
   imports: [
     ScInfiniteScroll,
+    ScInfiniteScrollSentinel,
     ScInfiniteScrollLoader,
     ScInfiniteScrollEnd,
     SiLoaderCircleIcon,
@@ -65,6 +67,8 @@ interface Item {
           No more items to load
         </div>
       }
+
+      <div scInfiniteScrollSentinel></div>
     </div>
     <p class="text-muted-foreground mt-4 text-sm">
       Loaded {{ items().length }} items

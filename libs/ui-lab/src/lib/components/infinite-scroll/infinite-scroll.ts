@@ -4,10 +4,12 @@ import {
   ElementRef,
   InjectionToken,
   afterNextRender,
+  contentChild,
   inject,
   input,
   output,
 } from '@angular/core';
+import { ScInfiniteScrollSentinel } from './infinite-scroll-sentinel';
 
 export const SC_INFINITE_SCROLL = new InjectionToken<ScInfiniteScroll>(
   'SC_INFINITE_SCROLL',
@@ -26,73 +28,47 @@ export const SC_INFINITE_SCROLL = new InjectionToken<ScInfiniteScroll>(
 export class ScInfiniteScroll {
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly sentinel = contentChild.required(ScInfiniteScrollSentinel);
 
   readonly threshold = input<number>(100);
   readonly disabled = input<boolean>(false);
   readonly loading = input<boolean>(false);
   readonly hasReachedEnd = input<boolean>(false);
-  readonly direction = input<'down' | 'up'>('down');
 
   readonly loadMore = output<void>();
 
   private observer: IntersectionObserver | null = null;
-  private sentinelEl: HTMLElement | null = null;
 
   constructor() {
     afterNextRender(() => {
-      this.setupIntersectionObserver();
+      const host = this.elementRef.nativeElement;
+      const sentinelEl = this.sentinel().elementRef.nativeElement;
+
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          if (
+            entry.isIntersecting &&
+            !this.disabled() &&
+            !this.loading() &&
+            !this.hasReachedEnd()
+          ) {
+            this.loadMore.emit();
+          }
+        },
+        {
+          root: host,
+          rootMargin: `${this.threshold()}px`,
+          threshold: 0,
+        },
+      );
+
+      this.observer.observe(sentinelEl);
 
       this.destroyRef.onDestroy(() => {
-        this.cleanup();
+        this.observer?.disconnect();
       });
     });
-  }
-
-  private setupIntersectionObserver(): void {
-    const host = this.elementRef.nativeElement;
-
-    this.sentinelEl = document.createElement('div');
-    this.sentinelEl.style.height = '1px';
-    this.sentinelEl.style.width = '100%';
-    this.sentinelEl.setAttribute('data-sentinel', 'true');
-
-    if (this.direction() === 'down') {
-      host.appendChild(this.sentinelEl);
-    } else {
-      host.prepend(this.sentinelEl);
-    }
-
-    this.observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (
-          entry.isIntersecting &&
-          !this.disabled() &&
-          !this.loading() &&
-          !this.hasReachedEnd()
-        ) {
-          this.loadMore.emit();
-        }
-      },
-      {
-        root: host,
-        rootMargin: `${this.threshold()}px`,
-        threshold: 0,
-      },
-    );
-
-    this.observer.observe(this.sentinelEl);
-  }
-
-  private cleanup(): void {
-    if (this.observer) {
-      this.observer.disconnect();
-      this.observer = null;
-    }
-    if (this.sentinelEl) {
-      this.sentinelEl.remove();
-      this.sentinelEl = null;
-    }
   }
 
   scrollToTop(): void {

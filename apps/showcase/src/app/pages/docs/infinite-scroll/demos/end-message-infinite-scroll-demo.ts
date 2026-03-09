@@ -8,6 +8,7 @@ import {
   ScInfiniteScroll,
   ScInfiniteScrollEnd,
   ScInfiniteScrollLoader,
+  ScInfiniteScrollSentinel,
 } from '@semantic-components/ui-lab';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
@@ -21,6 +22,7 @@ interface Item {
   selector: 'app-end-message-infinite-scroll-demo',
   imports: [
     ScInfiniteScroll,
+    ScInfiniteScrollSentinel,
     ScInfiniteScrollLoader,
     ScInfiniteScrollEnd,
     SiLoaderCircleIcon,
@@ -62,6 +64,8 @@ interface Item {
           You've reached the end! 🎉
         </div>
       }
+
+      <div scInfiniteScrollSentinel></div>
     </div>
   `,
   host: { class: 'block w-full' },

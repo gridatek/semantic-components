@@ -5,6 +5,7 @@ Automatically load more content as the user scrolls to the bottom of a container
 ## Components
 
 - `ScInfiniteScroll` - Root directive with scroll detection (via IntersectionObserver)
+- `ScInfiniteScrollSentinel` - Sentinel directive that triggers load detection
 - `ScInfiniteScrollLoader` - Marker directive for loading indicator
 - `ScInfiniteScrollEnd` - Marker directive for end message
 
@@ -26,6 +27,8 @@ Automatically load more content as the user scrolls to the bottom of a container
   } @if (reachedEnd() && !loading()) {
   <div scInfiniteScrollEnd class="text-muted-foreground py-4 text-center text-sm">No more items to load</div>
   }
+
+  <div scInfiniteScrollSentinel></div>
 </div>
 ```
 
@@ -33,13 +36,12 @@ Automatically load more content as the user scrolls to the bottom of a container
 
 ### ScInfiniteScroll (Root Directive)
 
-| Input           | Type             | Default  | Description                               |
-| --------------- | ---------------- | -------- | ----------------------------------------- |
-| `threshold`     | `number`         | `100`    | Distance from bottom (px) to trigger load |
-| `loading`       | `boolean`        | `false`  | Whether currently loading                 |
-| `hasReachedEnd` | `boolean`        | `false`  | Whether all content is loaded             |
-| `disabled`      | `boolean`        | `false`  | Disable scroll detection                  |
-| `direction`     | `'down' \| 'up'` | `'down'` | Scroll direction to detect                |
+| Input           | Type      | Default | Description                               |
+| --------------- | --------- | ------- | ----------------------------------------- |
+| `threshold`     | `number`  | `100`   | Distance from bottom (px) to trigger load |
+| `loading`       | `boolean` | `false` | Whether currently loading                 |
+| `hasReachedEnd` | `boolean` | `false` | Whether all content is loaded             |
+| `disabled`      | `boolean` | `false` | Disable scroll detection                  |
 
 | Output     | Type   | Description                           |
 | ---------- | ------ | ------------------------------------- |
@@ -49,6 +51,14 @@ Automatically load more content as the user scrolls to the bottom of a container
 | ------------------ | -------------------------- |
 | `scrollToTop()`    | Scroll container to top    |
 | `scrollToBottom()` | Scroll container to bottom |
+
+### ScInfiniteScrollSentinel
+
+Sentinel element observed by `IntersectionObserver`. Place at the bottom of the scroll container for downward scrolling, or at the top for upward scrolling. Must always be present (not conditional).
+
+```html
+<div scInfiniteScrollSentinel></div>
+```
 
 ### ScInfiniteScrollLoader
 
@@ -78,7 +88,7 @@ Marker directive for end-of-list message. Consumer controls visibility with `@if
 
 ```typescript
 @Component({
-  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd, SiLoaderCircleIcon],
+  imports: [ScInfiniteScroll, ScInfiniteScrollSentinel, ScInfiniteScrollLoader, ScInfiniteScrollEnd, SiLoaderCircleIcon],
   template: `
     <div scInfiniteScroll class="h-[400px] overflow-auto rounded-lg border" [loading]="loading()" [hasReachedEnd]="reachedEnd()" (loadMore)="loadMore()">
       <div class="space-y-2 p-4">
@@ -97,6 +107,8 @@ Marker directive for end-of-list message. Consumer controls visibility with `@if
       @if (reachedEnd() && !loading()) {
         <div scInfiniteScrollEnd class="text-muted-foreground py-4 text-center text-sm">No more items to load</div>
       }
+
+      <div scInfiniteScrollSentinel></div>
     </div>
   `,
 })
@@ -145,6 +157,8 @@ Load content earlier by increasing the threshold:
   @if (loading()) {
   <div scInfiniteScrollLoader>...</div>
   }
+
+  <div scInfiniteScrollSentinel></div>
 </div>
 ```
 
@@ -165,6 +179,8 @@ Works with any content layout:
   } @if (reachedEnd() && !loading()) {
   <div scInfiniteScrollEnd>...</div>
   }
+
+  <div scInfiniteScrollSentinel></div>
 </div>
 ```
 

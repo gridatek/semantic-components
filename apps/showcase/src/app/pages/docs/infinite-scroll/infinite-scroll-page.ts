@@ -27,7 +27,7 @@ import { ThresholdInfiniteScrollDemoContainer } from './demos/threshold-infinite
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>InfiniteScroll</h1>
+        <h1 scHeading>Infinite Scroll</h1>
         <p class="text-muted-foreground">
           Automatically load more content as the user scrolls to the bottom.
         </p>
