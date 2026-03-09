@@ -52,7 +52,7 @@ interface Item {
       </div>
     </sc-infinite-scroll>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
