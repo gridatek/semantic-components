@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { scaleBand, scaleLinear } from 'd3-scale';
 import { SC_CHART } from './chart-container';
 import { CHART_COLORS, ChartDataPoint } from './chart-types';
 
@@ -121,37 +122,42 @@ export class ScBarChart {
 
   protected readonly class = computed(() => cn('', this.classInput()));
 
-  protected readonly maxValue = computed(() => {
-    const values = this.data().map((d) => d.value);
-    return Math.max(...values, 0) * 1.1; // Add 10% padding
+  private readonly xScale = computed(() => {
+    const data = this.data();
+    const gap = this.barGap();
+    const barCount = data.length;
+    const paddingInner =
+      barCount > 1 ? (gap * barCount) / (this.chartWidth() + gap) : 0;
+
+    return scaleBand()
+      .domain(data.map((d) => d.label))
+      .range([this.padding().left, this.padding().left + this.chartWidth()])
+      .paddingInner(paddingInner)
+      .paddingOuter(0);
+  });
+
+  private readonly yScale = computed(() => {
+    const max = Math.max(...this.data().map((d) => d.value), 0) * 1.1;
+    return scaleLinear()
+      .domain([0, max])
+      .range([this.padding().top + this.chartHeight(), this.padding().top]);
   });
 
   protected readonly gridLines = computed(() => {
-    const max = this.maxValue();
-    const lines: { y: number; label: string }[] = [];
-    const steps = 5;
-
-    for (let i = 0; i <= steps; i++) {
-      const value = (max / steps) * i;
-      const y =
-        this.padding().top +
-        this.chartHeight() -
-        (value / max) * this.chartHeight();
-      lines.push({ y, label: Math.round(value).toString() });
-    }
-
-    return lines;
+    const y = this.yScale();
+    return y.ticks(5).map((v) => ({
+      y: y(v)!,
+      label: Math.round(v).toString(),
+    }));
   });
 
   protected readonly bars = computed(() => {
-    const data = this.data();
-    const barCount = data.length;
-    const totalGaps = (barCount - 1) * this.barGap();
-    const barWidth = (this.chartWidth() - totalGaps) / barCount;
-    const max = this.maxValue();
+    const x = this.xScale();
+    const y = this.yScale();
+    const bandwidth = x.bandwidth();
+    const baseline = y(0)!;
 
-    return data.map((d, i) => {
-      const barHeight = (d.value / max) * this.chartHeight();
+    return this.data().map((d, i) => {
       const color =
         d.color ||
         this.container?.getColor(d.label, i) ||
@@ -159,10 +165,10 @@ export class ScBarChart {
 
       return {
         ...d,
-        x: this.padding().left + i * (barWidth + this.barGap()),
-        y: this.padding().top + this.chartHeight() - barHeight,
-        width: barWidth,
-        height: barHeight,
+        x: x(d.label)!,
+        y: y(d.value)!,
+        width: bandwidth,
+        height: baseline - y(d.value)!,
         color,
       };
     });

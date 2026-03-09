@@ -8,6 +8,8 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { scaleLinear, scalePoint } from 'd3-scale';
+import { area, line } from 'd3-shape';
 import { SC_CHART } from './chart-container';
 import { CHART_COLORS, ChartDataPoint } from './chart-types';
 
@@ -146,40 +148,35 @@ export class ScLineChart {
   );
   protected readonly areaColor = computed(() => this.lineColor());
 
-  protected readonly maxValue = computed(() => {
-    const values = this.data().map((d) => d.value);
-    return Math.max(...values, 0) * 1.1;
+  private readonly xScale = computed(() =>
+    scalePoint()
+      .domain(this.data().map((d) => d.label))
+      .range([this.padding().left, this.padding().left + this.chartWidth()]),
+  );
+
+  private readonly yScale = computed(() => {
+    const max = Math.max(...this.data().map((d) => d.value), 0) * 1.1;
+    return scaleLinear()
+      .domain([0, max])
+      .range([this.padding().top + this.chartHeight(), this.padding().top]);
   });
 
   protected readonly gridLines = computed(() => {
-    const max = this.maxValue();
-    const lines: { y: number; label: string }[] = [];
-    const steps = 5;
-
-    for (let i = 0; i <= steps; i++) {
-      const value = (max / steps) * i;
-      const y =
-        this.padding().top +
-        this.chartHeight() -
-        (value / max) * this.chartHeight();
-      lines.push({ y, label: Math.round(value).toString() });
-    }
-
-    return lines;
+    const y = this.yScale();
+    return y.ticks(5).map((v) => ({
+      y: y(v)!,
+      label: Math.round(v).toString(),
+    }));
   });
 
   protected readonly points = computed(() => {
-    const data = this.data();
-    const max = this.maxValue();
-    const stepX = this.chartWidth() / Math.max(data.length - 1, 1);
+    const x = this.xScale();
+    const y = this.yScale();
 
-    return data.map((d, i) => ({
+    return this.data().map((d) => ({
       ...d,
-      x: this.padding().left + i * stepX,
-      y:
-        this.padding().top +
-        this.chartHeight() -
-        (d.value / max) * this.chartHeight(),
+      x: x(d.label)!,
+      y: y(d.value)!,
     }));
   });
 
@@ -187,7 +184,9 @@ export class ScLineChart {
     const pts = this.points();
     if (pts.length === 0) return '';
 
-    return pts.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
+    return line<(typeof pts)[0]>()
+      .x((d) => d.x)
+      .y((d) => d.y)(pts);
   });
 
   protected readonly areaPath = computed(() => {
@@ -195,11 +194,10 @@ export class ScLineChart {
     if (pts.length === 0) return '';
 
     const baseline = this.padding().top + this.chartHeight();
-    const linePart = pts
-      .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`)
-      .join(' ');
-
-    return `${linePart} L ${pts[pts.length - 1].x} ${baseline} L ${pts[0].x} ${baseline} Z`;
+    return area<(typeof pts)[0]>()
+      .x((d) => d.x)
+      .y0(baseline)
+      .y1((d) => d.y)(pts);
   });
 
   onPointHover(event: MouseEvent, point: ChartDataPoint): void {
