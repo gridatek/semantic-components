@@ -26,6 +26,8 @@ export default [
       '@angular-eslint/component-selector': 'off',
       '@angular-eslint/no-input-rename': 'off',
       '@angular-eslint/no-output-native': 'off',
+      '@angular-eslint/template/click-events-have-key-events': 'off',
+      '@angular-eslint/template/interactive-supports-focus': 'off',
       '@angular-eslint/template/label-has-associated-control': 'off',
     },
   },
@@ -33,6 +35,8 @@ export default [
     files: ['**/*.html'],
     // Override or add rules here
     rules: {
+      '@angular-eslint/template/click-events-have-key-events': 'off',
+      '@angular-eslint/template/interactive-supports-focus': 'off',
       '@angular-eslint/template/label-has-associated-control': 'off',
     },
   },

@@ -257,7 +257,7 @@ export class ScTimePickerClock {
 
     if (this.mode() === 'hours') {
       // 12 sectors of 30° each
-      let sector = Math.round(angle / 30) % 12;
+      const sector = Math.round(angle / 30) % 12;
       const value =
         this.timePicker.format() === '12h'
           ? sector === 0
