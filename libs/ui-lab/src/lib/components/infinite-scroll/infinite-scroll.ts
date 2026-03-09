@@ -53,6 +53,7 @@ import { ScInfiniteScrollLoader } from './infinite-scroll-loader';
   `,
   host: {
     'data-slot': 'infinite-scroll',
+    '[class]': 'hostClass()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -80,8 +81,10 @@ export class ScInfiniteScroll {
   private observer: IntersectionObserver | null = null;
   private sentinelEl: HTMLElement | null = null;
 
+  protected readonly hostClass = computed(() => cn('block', this.classInput()));
+
   protected readonly containerClass = computed(() =>
-    cn('overflow-auto', this.classInput()),
+    cn('overflow-auto h-full'),
   );
 
   protected readonly loaderContainerClass = computed(() => cn(''));
