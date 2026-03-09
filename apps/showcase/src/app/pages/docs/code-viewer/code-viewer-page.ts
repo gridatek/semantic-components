@@ -43,7 +43,7 @@ import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-contain
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>Usage</h2>
+        <h2 scHeading appToc>Usage</h2>
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
@@ -71,7 +71,7 @@ import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-contain
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-code-viewer-demo-container />
       </section>
     </div>

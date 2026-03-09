@@ -47,7 +47,7 @@ import UsersTableDemoContainer from './demos/users-table-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>Usage</h2>
+        <h2 scHeading appToc>Usage</h2>
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
@@ -75,7 +75,7 @@ import UsersTableDemoContainer from './demos/users-table-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-table-demo-container />
         <app-caption-table-demo-container />
         <app-footer-table-demo-container />

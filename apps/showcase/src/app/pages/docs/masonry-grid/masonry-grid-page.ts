@@ -34,7 +34,7 @@ import { ImageGalleryMasonryGridDemoContainer } from './demos/image-gallery-maso
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-masonry-grid-demo-container />
         <app-image-gallery-masonry-grid-demo-container />
         <app-breakpoints-masonry-grid-demo-container />

@@ -35,7 +35,7 @@ import { TableSkeletonDemoContainer } from './demos/table-skeleton-demo-containe
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-skeleton-demo-container />
         <app-card-skeleton-demo-container />
         <app-article-skeleton-demo-container />

@@ -33,7 +33,7 @@ import { SizesDockDemoContainer } from './demos/sizes-dock-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-dock-demo-container />
         <app-no-magnification-dock-demo-container />
         <app-badges-dock-demo-container />

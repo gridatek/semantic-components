@@ -39,7 +39,7 @@ import { TaskListSortableListDemoContainer } from './demos/task-list-sortable-li
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-sortable-list-demo-container />
         <app-handle-sortable-list-demo-container />
         <app-task-list-sortable-list-demo-container />

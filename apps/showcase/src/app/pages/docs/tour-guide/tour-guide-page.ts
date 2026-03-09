@@ -30,7 +30,7 @@ import { MinimalTourGuideDemoContainer } from './demos/minimal-tour-guide-demo-c
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-full-tour-guide-demo-container />
         <app-minimal-tour-guide-demo-container />
       </section>

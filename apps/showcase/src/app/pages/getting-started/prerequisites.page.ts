@@ -40,7 +40,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>1. Install Angular Aria and CDK</h2>
+        <h2 scHeading appToc>1. Install Angular Aria and CDK</h2>
         <p class="text-muted-foreground">
           Semantic Components depends on Angular Aria and Angular CDK.
         </p>
@@ -69,7 +69,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>2. Set up Tailwind CSS</h2>
+        <h2 scHeading appToc>2. Set up Tailwind CSS</h2>
         <p class="text-muted-foreground">
           Tailwind CSS v4 is required. Follow these steps if not already
           installed:
@@ -153,7 +153,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>3. Install utilities</h2>
+        <h2 scHeading appToc>3. Install utilities</h2>
         <p class="text-muted-foreground">
           Install the required utility libraries for class management and
           animations.
@@ -183,7 +183,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>4. Install icons</h2>
+        <h2 scHeading appToc>4. Install icons</h2>
         <p class="text-muted-foreground">
           Install the icon library used by Semantic Components.
         </p>
@@ -212,7 +212,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>5. Install Temporal polyfill</h2>
+        <h2 scHeading appToc>5. Install Temporal polyfill</h2>
         <p class="text-muted-foreground">
           Some components rely on the
           <a

@@ -30,7 +30,7 @@ import { FullFeaturedCropperDemoContainer } from './demos/full-featured-cropper-
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-full-featured-cropper-demo-container />
         <app-avatar-cropper-demo-container />
       </section>

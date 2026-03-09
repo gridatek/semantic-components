@@ -30,7 +30,7 @@ import { DisabledTabsDemoContainer } from './demos/disabled-tabs-demo-container'
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-tabs-demo-container />
         <app-disabled-tabs-demo-container />
       </section>

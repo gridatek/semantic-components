@@ -39,7 +39,7 @@ import { WithoutIconPhoneInputDemoContainer } from './demos/without-icon-phone-i
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-country-selector-phone-input-demo-container />
         <app-default-country-phone-input-demo-container />
         <app-us-format-phone-input-demo-container />

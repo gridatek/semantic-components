@@ -42,7 +42,7 @@ import { PageSizePaginationDemoContainer } from './demos/page-size-pagination-de
         <app-component-badges path="pagination" />
       </div>
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-pagination-demo-container />
         <app-ellipsis-pagination-demo-container />
         <app-many-pages-pagination-demo-container />

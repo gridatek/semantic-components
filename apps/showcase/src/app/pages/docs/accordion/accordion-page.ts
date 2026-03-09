@@ -32,7 +32,7 @@ import { MultipleAccordionDemoContainer } from './demos/multiple-accordion-demo-
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-accordion-demo-container />
         <app-disabled-accordion-demo-container />
         <app-multiple-accordion-demo-container />

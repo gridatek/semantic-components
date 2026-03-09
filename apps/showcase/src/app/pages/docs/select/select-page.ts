@@ -34,7 +34,7 @@ import { SelectSignalFormsDemoContainer } from './demos/select-signal-forms-demo
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-select-demo-container />
         <app-select-group-demo-container />
         <app-select-disabled-demo-container />

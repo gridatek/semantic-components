@@ -37,7 +37,7 @@ import { VerticalCarouselDemoContainer } from './demos/vertical-carousel-demo-co
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-default-carousel-demo-container />
         <app-cards-carousel-demo-container />
         <app-third-width-carousel-demo-container />

@@ -37,7 +37,7 @@ import { SecondsTimePickerDemoContainer } from './demos/seconds-time-picker-demo
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-format-12h-time-picker-demo-container />
         <app-format-24h-time-picker-demo-container />
         <app-seconds-time-picker-demo-container />

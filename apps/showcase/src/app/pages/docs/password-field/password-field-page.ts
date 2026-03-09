@@ -55,7 +55,7 @@ import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>Usage</h2>
+        <h2 scHeading appToc>Usage</h2>
         <div scCodeViewer>
           <div scCodeViewerHeader>
             <span scCodeViewerLabel>angular-ts</span>
@@ -83,7 +83,7 @@ import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-password-field-demo-container />
         <app-show-default-password-field-demo-container />
         <app-disabled-password-field-demo-container />

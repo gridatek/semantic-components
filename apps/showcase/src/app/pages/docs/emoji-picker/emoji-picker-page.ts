@@ -43,7 +43,7 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-emoji-picker-demo-container />
         <app-no-search-emoji-picker-demo-container />
         <app-no-categories-emoji-picker-demo-container />

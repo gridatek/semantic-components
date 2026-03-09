@@ -35,7 +35,7 @@ import { SizesToggleGroupDemoContainer } from './demos/sizes-toggle-group-demo-c
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-single-toggle-group-demo-container />
         <app-multiple-toggle-group-demo-container />
         <app-outline-toggle-group-demo-container />

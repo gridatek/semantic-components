@@ -31,7 +31,7 @@ import { FieldLabelDemoContainer } from './demos/field-label-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-label-demo-container />
         <app-checkbox-label-demo-container />
         <app-field-label-demo-container />

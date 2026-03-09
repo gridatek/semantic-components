@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'svg[app-logo]',
   template: `
     <svg:rect x="2" y="2" width="20" height="20" rx="4" />

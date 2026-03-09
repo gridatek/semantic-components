@@ -30,7 +30,7 @@ import { MinimalKanbanBoardDemoContainer } from './demos/minimal-kanban-board-de
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-kanban-board-demo-container />
         <app-minimal-kanban-board-demo-container />
       </section>

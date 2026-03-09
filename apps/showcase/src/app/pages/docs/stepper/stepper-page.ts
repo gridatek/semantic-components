@@ -31,7 +31,7 @@ import { VerticalStepperDemoContainer } from './demos/vertical-stepper-demo-cont
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-horizontal-stepper-demo-container />
         <app-vertical-stepper-demo-container />
         <app-simple-stepper-demo-container />

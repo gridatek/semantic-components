@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[toc]',
+  selector: '[appToc]',
   host: {
     'data-toc': '',
     class: 'scroll-mt-16',

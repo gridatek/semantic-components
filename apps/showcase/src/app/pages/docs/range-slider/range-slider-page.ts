@@ -30,7 +30,7 @@ import { CustomColorRangeSliderDemoContainer } from './demos/custom-color-range-
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-range-slider-demo-container />
         <app-custom-color-range-slider-demo-container />
       </section>

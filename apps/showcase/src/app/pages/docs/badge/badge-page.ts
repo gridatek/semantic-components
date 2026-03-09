@@ -29,7 +29,7 @@ import { WithIconsBadgeDemoContainer } from './demos/with-icons-badge-demo-conta
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-variants-badge-demo-container />
         <app-with-icons-badge-demo-container />
       </section>

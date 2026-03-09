@@ -27,7 +27,7 @@ import { BasicAutocompleteDemoContainer } from './demos/basic-autocomplete-demo-
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-autocomplete-demo-container />
       </section>
     </div>

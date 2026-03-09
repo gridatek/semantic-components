@@ -35,7 +35,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-timeline-demo-container />
         <app-status-timeline-demo-container />
         <app-sizes-timeline-demo-container />

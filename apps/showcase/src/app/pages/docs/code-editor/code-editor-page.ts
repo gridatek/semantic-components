@@ -50,7 +50,7 @@ import { WordWrapCodeEditorDemoContainer } from './demos/word-wrap-code-editor-d
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-code-editor-demo-container />
         <app-typescript-code-editor-demo-container />
         <app-html-code-editor-demo-container />

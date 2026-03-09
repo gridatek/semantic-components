@@ -35,7 +35,7 @@ import { WithIconsButtonDemoContainer } from './demos/with-icons-button-demo-con
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-variants-button-demo-container />
         <app-sizes-button-demo-container />
         <app-with-icons-button-demo-container />

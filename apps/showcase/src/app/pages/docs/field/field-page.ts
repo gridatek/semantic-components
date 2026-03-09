@@ -35,7 +35,7 @@ import { SeparatorFieldDemoContainer } from './demos/separator-field-demo-contai
         <app-component-badges path="field" />
       </div>
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-field-demo-container />
         <app-horizontal-field-demo-container />
         <app-error-field-demo-container />

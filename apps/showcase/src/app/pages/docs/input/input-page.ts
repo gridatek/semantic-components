@@ -40,7 +40,7 @@ import { TypesInputDemoContainer } from './demos/types-input-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-input-demo-container />
         <app-label-input-demo-container />
         <app-types-input-demo-container />

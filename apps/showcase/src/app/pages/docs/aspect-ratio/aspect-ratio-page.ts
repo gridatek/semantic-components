@@ -41,7 +41,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-sixteen-nine-aspect-ratio-demo-container />
         <app-four-three-aspect-ratio-demo-container />
         <app-square-aspect-ratio-demo-container />

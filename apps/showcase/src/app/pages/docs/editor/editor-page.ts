@@ -34,7 +34,7 @@ import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-contai
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-prefilled-editor-demo-container />
         <app-no-count-editor-demo-container />
         <app-readonly-editor-demo-container />

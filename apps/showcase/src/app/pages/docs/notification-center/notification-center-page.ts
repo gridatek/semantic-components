@@ -32,7 +32,7 @@ import { GroupedNotificationCenterDemoContainer } from './demos/grouped-notifica
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-grouped-notification-center-demo-container />
         <app-flat-notification-center-demo-container />
         <app-empty-notification-center-demo-container />

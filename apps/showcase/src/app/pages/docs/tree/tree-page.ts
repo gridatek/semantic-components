@@ -31,7 +31,7 @@ import { SimpleTreeDemoContainer } from './demos/simple-tree-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-file-explorer-tree-demo-container />
         <app-navigation-tree-demo-container />
         <app-simple-tree-demo-container />

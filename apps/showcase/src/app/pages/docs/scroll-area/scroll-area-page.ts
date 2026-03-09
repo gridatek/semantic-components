@@ -31,7 +31,7 @@ import { VerticalScrollAreaDemoContainer } from './demos/vertical-scroll-area-de
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-vertical-scroll-area-demo-container />
         <app-horizontal-scroll-area-demo-container />
         <app-both-scroll-area-demo-container />

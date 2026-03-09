@@ -23,7 +23,7 @@ import { ConfigService } from '../../services/config.service';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>What is Semantic Components?</h2>
+        <h2 scHeading appToc>What is Semantic Components?</h2>
         <p class="text-muted-foreground">
           Semantic Components is an open-source UI library for Angular. It
           provides a set of semantic, declarative, and composable components
@@ -33,7 +33,7 @@ import { ConfigService } from '../../services/config.service';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading toc>Features</h2>
+        <h2 scHeading appToc>Features</h2>
         <ul class="text-muted-foreground list-disc space-y-2 pl-6">
           <li>
             <strong>Semantic</strong>
@@ -79,7 +79,7 @@ import { ConfigService } from '../../services/config.service';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading toc>Packages</h2>
+        <h2 scHeading appToc>Packages</h2>
         <ul class="text-muted-foreground list-disc space-y-2 pl-6">
           <li>
             <strong>&#64;semantic-components/ui</strong>

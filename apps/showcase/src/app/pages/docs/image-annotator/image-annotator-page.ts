@@ -29,7 +29,7 @@ import { CustomSizeImageAnnotatorDemoContainer } from './demos/custom-size-image
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-image-annotator-demo-container />
         <app-custom-size-image-annotator-demo-container />
       </section>

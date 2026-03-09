@@ -34,7 +34,7 @@ import { MenuToolsDemoContainer } from './demos/menu-tools-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-menu-demo-container />
         <app-menu-shortcuts-demo-container />
         <app-menu-tools-demo-container />

@@ -40,7 +40,7 @@ import { PresetsDateRangePickerDemoContainer } from './demos/presets-date-range-
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-date-range-picker-demo-container />
         <app-presets-date-range-picker-demo-container />
         <app-constrained-date-range-picker-demo-container />

@@ -44,7 +44,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>1. Install the package</h2>
+        <h2 scHeading appToc>1. Install the package</h2>
         <p class="text-muted-foreground">
           Install the charts library and its peer dependencies
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">d3-scale</code>
@@ -79,7 +79,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>2. Configure Tailwind source</h2>
+        <h2 scHeading appToc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the charts library as a Tailwind source in your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
@@ -110,7 +110,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>Usage</h2>
+        <h2 scHeading appToc>Usage</h2>
         <p class="text-muted-foreground">
           Import and use chart components in your Angular templates:
         </p>

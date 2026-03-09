@@ -38,7 +38,7 @@ import { SingleDateCalendarDemoContainer } from './demos/single-date-calendar-de
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-single-date-calendar-demo-container />
         <app-multiple-date-calendar-demo-container />
         <app-range-calendar-demo-container />

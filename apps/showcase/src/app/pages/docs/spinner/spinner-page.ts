@@ -33,7 +33,7 @@ import { OverlaySpinnerDemoContainer } from './demos/overlay-spinner-demo-contai
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-default-spinner-demo-container />
         <app-colors-spinner-demo-container />
         <app-button-spinner-demo-container />

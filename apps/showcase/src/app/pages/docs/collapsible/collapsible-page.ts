@@ -31,7 +31,7 @@ import { OpenCollapsibleDemoContainer } from './demos/open-collapsible-demo-cont
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-collapsible-demo-container />
         <app-open-collapsible-demo-container />
         <app-disabled-collapsible-demo-container />

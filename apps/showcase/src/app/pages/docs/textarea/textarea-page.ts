@@ -39,7 +39,7 @@ import { RowsTextareaDemoContainer } from './demos/rows-textarea-demo-container'
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-textarea-demo-container />
         <app-label-textarea-demo-container />
         <app-helper-text-textarea-demo-container />

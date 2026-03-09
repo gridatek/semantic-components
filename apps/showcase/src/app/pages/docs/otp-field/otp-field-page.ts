@@ -39,7 +39,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-otp-field-demo-container />
         <app-separator-otp-field-demo-container />
         <app-pin-otp-field-demo-container />

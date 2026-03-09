@@ -30,7 +30,7 @@ import { DestructiveAlertDialogDemoContainer } from './demos/destructive-alert-d
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-alert-dialog-demo-container />
         <app-destructive-alert-dialog-demo-container />
       </section>

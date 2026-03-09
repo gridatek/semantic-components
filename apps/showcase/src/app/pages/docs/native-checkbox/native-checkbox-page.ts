@@ -32,7 +32,7 @@ import { SignalFormsNativeCheckboxDemoContainer } from './demos/signal-forms-nat
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-native-checkbox-demo-container />
         <app-indeterminate-native-checkbox-demo-container />
         <app-signal-forms-native-checkbox-demo-container />

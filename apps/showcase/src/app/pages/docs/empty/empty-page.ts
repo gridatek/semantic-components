@@ -29,7 +29,7 @@ import { BasicEmptyDemoContainer } from './demos/basic-empty-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-empty-demo-container />
         <app-actions-empty-demo-container />
       </section>

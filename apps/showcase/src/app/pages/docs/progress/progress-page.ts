@@ -36,7 +36,7 @@ import { ValuesProgressDemoContainer } from './demos/values-progress-demo-contai
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-progress-demo-container />
         <app-values-progress-demo-container />
         <app-custom-max-progress-demo-container />

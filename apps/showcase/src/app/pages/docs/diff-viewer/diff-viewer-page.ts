@@ -39,7 +39,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-diff-viewer-demo-container />
         <app-unified-diff-viewer-demo-container />
         <app-json-diff-viewer-demo-container />

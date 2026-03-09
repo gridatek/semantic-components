@@ -27,7 +27,7 @@ import { HoursTimePickerClockDemoContainer } from './demos/hours-time-picker-clo
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-hours-time-picker-clock-demo-container />
       </section>
     </div>

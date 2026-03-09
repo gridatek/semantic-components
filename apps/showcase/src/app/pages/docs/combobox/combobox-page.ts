@@ -22,7 +22,7 @@ import { ComboboxDemoContainer } from './demos/combobox-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-combobox-demo-container />
       </section>
     </div>

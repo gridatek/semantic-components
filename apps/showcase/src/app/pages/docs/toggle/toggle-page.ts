@@ -37,7 +37,7 @@ import { WithTextToggleDemoContainer } from './demos/with-text-toggle-demo-conta
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-toggle-demo-container />
         <app-outline-toggle-demo-container />
         <app-with-text-toggle-demo-container />

@@ -37,7 +37,7 @@ import { WithHandleResizableDemoContainer } from './demos/with-handle-resizable-
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-horizontal-resizable-demo-container />
         <app-vertical-resizable-demo-container />
         <app-with-handle-resizable-demo-container />

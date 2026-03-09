@@ -28,7 +28,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-featured-data-table-demo-container />
       </section>
     </div>

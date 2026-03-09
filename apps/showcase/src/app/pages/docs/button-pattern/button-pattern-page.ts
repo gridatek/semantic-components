@@ -21,14 +21,14 @@ import { TocHeading } from '../../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading toc>Usage</h2>
+        <h2 scHeading appToc>Usage</h2>
         <pre
           class="bg-muted rounded-md p-4 text-sm"
         ><code>{{ usageCode }}</code></pre>
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading toc>What It Does</h2>
+        <h2 scHeading appToc>What It Does</h2>
         <ul class="text-muted-foreground list-inside list-disc space-y-1">
           <li>
             Adds

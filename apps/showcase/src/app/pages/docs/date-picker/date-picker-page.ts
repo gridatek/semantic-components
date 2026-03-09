@@ -35,7 +35,7 @@ import { RangeDatePickerDemoContainer } from './demos/range-date-picker-demo-con
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-date-picker-demo-container />
         <app-range-date-picker-demo-container />
         <app-multiple-date-picker-demo-container />

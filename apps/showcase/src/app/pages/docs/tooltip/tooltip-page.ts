@@ -35,7 +35,7 @@ import { PositionsTooltipDemoContainer } from './demos/positions-tooltip-demo-co
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-tooltip-demo-container />
         <app-positions-tooltip-demo-container />
         <app-icon-button-tooltip-demo-container />

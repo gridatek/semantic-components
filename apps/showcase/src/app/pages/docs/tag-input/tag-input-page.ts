@@ -49,7 +49,7 @@ import { VariantsTagInputDemoContainer } from './demos/variants-tag-input-demo-c
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-basic-tag-input-demo-container />
         <app-clearable-tag-input-demo-container />
         <app-max-tags-tag-input-demo-container />

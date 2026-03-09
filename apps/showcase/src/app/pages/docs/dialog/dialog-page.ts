@@ -23,7 +23,7 @@ import { ScDialogDemoContainer } from './demos/dialog-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading toc>Examples</h2>
+        <h2 scHeading appToc>Examples</h2>
         <app-dialog-demo-container />
       </section>
     </div>

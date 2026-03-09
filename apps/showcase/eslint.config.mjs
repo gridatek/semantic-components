@@ -37,6 +37,7 @@ export default [
       '@angular-eslint/template/label-has-associated-control': 'off',
       '@angular-eslint/template/click-events-have-key-events': 'off',
       '@angular-eslint/template/interactive-supports-focus': 'off',
+      '@angular-eslint/template/elements-content': 'off',
     },
   },
 ];
