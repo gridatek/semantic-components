@@ -5,11 +5,11 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { ScVirtualList } from '@semantic-components/ui-lab';
+import { ScVirtualList, ScVirtualListItem } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-scroll-controls-virtual-list-demo',
-  imports: [ScVirtualList],
+  imports: [ScVirtualList, ScVirtualListItem],
   template: `
     <div class="mb-4 flex gap-2">
       <button
@@ -43,24 +43,24 @@ import { ScVirtualList } from '@semantic-components/ui-lab';
         Go
       </button>
     </div>
-    <div class="overflow-hidden rounded-lg border">
-      <sc-virtual-list
-        #controlledList
-        [items]="items()"
-        [itemHeight]="40"
-        height="250px"
-      >
-        <ng-template let-item let-index="index">
-          <div
-            class="hover:bg-muted/50 flex h-full items-center border-b px-4 transition-colors"
-          >
-            <span class="text-muted-foreground w-20 font-mono text-sm">
-              #{{ (index + 1).toString().padStart(5, '0') }}
-            </span>
-            <span class="flex-1">{{ item }}</span>
-          </div>
-        </ng-template>
-      </sc-virtual-list>
+    <div
+      scVirtualList
+      #controlledList="scVirtualList"
+      class="overflow-hidden rounded-lg border"
+      [items]="items()"
+      [itemHeight]="40"
+      height="250px"
+    >
+      <ng-template scVirtualListItem let-item let-index="index">
+        <div
+          class="hover:bg-muted/50 flex h-full items-center border-b px-4 transition-colors"
+        >
+          <span class="text-muted-foreground w-20 font-mono text-sm">
+            #{{ (index + 1).toString().padStart(5, '0') }}
+          </span>
+          <span class="flex-1">{{ item }}</span>
+        </div>
+      </ng-template>
     </div>
   `,
   host: { class: 'block w-full' },

@@ -4,7 +4,7 @@ import {
   Component,
   DestroyRef,
   ElementRef,
-  TemplateRef,
+  InjectionToken,
   ViewEncapsulation,
   afterNextRender,
   computed,
@@ -13,73 +13,75 @@ import {
   input,
   output,
   signal,
-  viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { ScVirtualListItem } from './virtual-list-item';
 import type { VirtualListItem, VirtualListRange } from './virtual-list-types';
 
+export const SC_VIRTUAL_LIST = new InjectionToken<ScVirtualList<unknown>>(
+  'SC_VIRTUAL_LIST',
+);
+
 @Component({
-  selector: 'sc-virtual-list',
+  selector: 'div[scVirtualList]',
   imports: [NgTemplateOutlet],
+  exportAs: 'scVirtualList',
+  providers: [{ provide: SC_VIRTUAL_LIST, useExisting: ScVirtualList }],
   template: `
-    <div
-      #container
-      [class]="containerClass()"
-      [style.height]="containerHeight()"
-      (scroll)="onScroll()"
-    >
-      <!-- Spacer for total content height -->
-      <div [style.height.px]="totalHeight()" class="relative">
-        <!-- Rendered items -->
-        <div
-          [style.transform]="'translateY(' + offsetY() + 'px)'"
-          class="absolute top-0 right-0 left-0"
-        >
-          @for (
-            item of visibleItems();
-            track trackByFn()(item.index, item.data)
-          ) {
-            <div [style.height.px]="itemHeight()">
-              <ng-container
-                [ngTemplateOutlet]="itemTemplate()"
-                [ngTemplateOutletContext]="{
-                  $implicit: item.data,
-                  index: item.index,
-                }"
-              />
-            </div>
-          }
-        </div>
+    <div [style.height.px]="totalHeight()" class="relative">
+      <div
+        [style.transform]="'translateY(' + offsetY() + 'px)'"
+        class="absolute inset-x-0 top-0"
+      >
+        @for (
+          item of visibleItems();
+          track trackByFn()(item.index, item.data)
+        ) {
+          <div [style.height.px]="itemHeight()">
+            <ng-container
+              [ngTemplateOutlet]="itemTemplateRef()"
+              [ngTemplateOutletContext]="{
+                $implicit: item.data,
+                index: item.index,
+              }"
+            />
+          </div>
+        }
       </div>
     </div>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
+  host: {
+    'data-slot': 'virtual-list',
+    '[class]': 'class()',
+    '[style.height]': 'containerHeight()',
+    '(scroll)': 'onScroll()',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVirtualList<T> {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly itemTemplate = contentChild.required(ScVirtualListItem);
 
-  readonly containerRef = viewChild<ElementRef<HTMLDivElement>>('container');
-  readonly itemTemplate =
-    contentChild.required<TemplateRef<{ $implicit: T; index: number }>>(
-      TemplateRef,
-    );
-
+  readonly classInput = input<string>('', { alias: 'class' });
   readonly items = input<T[]>([]);
   readonly itemHeight = input(48);
   readonly overscan = input(3);
   readonly height = input<string | number>('400px');
-  readonly class = input<string>('');
   readonly trackByFn = input<(index: number, item: T) => unknown>(
     (index) => index,
   );
 
   readonly rangeChange = output<VirtualListRange>();
+
+  protected readonly class = computed(() =>
+    cn('overflow-auto', this.classInput()),
+  );
+
+  protected readonly itemTemplateRef = computed(
+    () => this.itemTemplate().templateRef,
+  );
 
   protected readonly scrollTop = signal(0);
 
@@ -129,23 +131,15 @@ export class ScVirtualList<T> {
     return result;
   });
 
-  protected readonly containerClass = computed(() =>
-    cn('overflow-auto', this.class()),
-  );
-
   constructor() {
     afterNextRender(() => {
-      // Initial range emit
       this.emitRange();
     });
   }
 
   onScroll(): void {
-    const container = this.containerRef()?.nativeElement;
-    if (container) {
-      this.scrollTop.set(container.scrollTop);
-      this.emitRange();
-    }
+    this.scrollTop.set(this.elementRef.nativeElement.scrollTop);
+    this.emitRange();
   }
 
   private emitRange(): void {
@@ -156,11 +150,8 @@ export class ScVirtualList<T> {
   }
 
   scrollToIndex(index: number, behavior: ScrollBehavior = 'auto'): void {
-    const container = this.containerRef()?.nativeElement;
-    if (container) {
-      const top = index * this.itemHeight();
-      container.scrollTo({ top, behavior });
-    }
+    const top = index * this.itemHeight();
+    this.elementRef.nativeElement.scrollTo({ top, behavior });
   }
 
   scrollToTop(behavior: ScrollBehavior = 'auto'): void {

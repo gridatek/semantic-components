@@ -6,31 +6,32 @@ import {
 } from '@angular/core';
 import {
   ScVirtualList,
+  ScVirtualListItem,
   type VirtualListRange,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-virtual-list-demo',
-  imports: [ScVirtualList],
+  imports: [ScVirtualList, ScVirtualListItem],
   template: `
-    <div class="overflow-hidden rounded-lg border">
-      <sc-virtual-list
-        [items]="items()"
-        [itemHeight]="48"
-        height="300px"
-        (rangeChange)="onRangeChange($event)"
-      >
-        <ng-template let-item let-index="index">
-          <div
-            class="hover:bg-muted/50 flex h-full items-center border-b px-4 transition-colors"
-          >
-            <span class="text-muted-foreground w-16 text-sm">
-              {{ index + 1 }}
-            </span>
-            <span class="flex-1">{{ item }}</span>
-          </div>
-        </ng-template>
-      </sc-virtual-list>
+    <div
+      scVirtualList
+      class="overflow-hidden rounded-lg border"
+      [items]="items()"
+      [itemHeight]="48"
+      height="300px"
+      (rangeChange)="onRangeChange($event)"
+    >
+      <ng-template scVirtualListItem let-item let-index="index">
+        <div
+          class="hover:bg-muted/50 flex h-full items-center border-b px-4 transition-colors"
+        >
+          <span class="text-muted-foreground w-16 text-sm">
+            {{ index + 1 }}
+          </span>
+          <span class="flex-1">{{ item }}</span>
+        </div>
+      </ng-template>
     </div>
     <p class="text-muted-foreground mt-2 text-sm">
       Rendering {{ items().length.toLocaleString() }} items. Visible range:

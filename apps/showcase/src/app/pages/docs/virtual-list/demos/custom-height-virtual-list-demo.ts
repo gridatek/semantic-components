@@ -4,23 +4,27 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScVirtualList } from '@semantic-components/ui-lab';
+import { ScVirtualList, ScVirtualListItem } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-custom-height-virtual-list-demo',
-  imports: [ScVirtualList],
+  imports: [ScVirtualList, ScVirtualListItem],
   template: `
-    <div class="overflow-hidden rounded-lg border">
-      <sc-virtual-list [items]="items()" [itemHeight]="36" height="200px">
-        <ng-template let-item let-index="index">
-          <div
-            class="hover:bg-muted/50 flex h-full items-center border-b px-4 text-sm transition-colors"
-          >
-            <span class="text-muted-foreground w-12">{{ index + 1 }}</span>
-            <span class="flex-1">{{ item }}</span>
-          </div>
-        </ng-template>
-      </sc-virtual-list>
+    <div
+      scVirtualList
+      class="overflow-hidden rounded-lg border"
+      [items]="items()"
+      [itemHeight]="36"
+      height="200px"
+    >
+      <ng-template scVirtualListItem let-item let-index="index">
+        <div
+          class="hover:bg-muted/50 flex h-full items-center border-b px-4 text-sm transition-colors"
+        >
+          <span class="text-muted-foreground w-12">{{ index + 1 }}</span>
+          <span class="flex-1">{{ item }}</span>
+        </div>
+      </ng-template>
     </div>
   `,
   host: { class: 'block w-full' },
