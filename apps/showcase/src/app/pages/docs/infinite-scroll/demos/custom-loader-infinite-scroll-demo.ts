@@ -8,7 +8,6 @@ import {
   ScInfiniteScroll,
   ScInfiniteScrollEnd,
   ScInfiniteScrollLoader,
-  ScInfiniteScrollSentinel,
 } from '@semantic-components/ui-lab';
 
 interface Item {
@@ -19,16 +18,11 @@ interface Item {
 
 @Component({
   selector: 'app-custom-loader-infinite-scroll-demo',
-  imports: [
-    ScInfiniteScroll,
-    ScInfiniteScrollSentinel,
-    ScInfiniteScrollLoader,
-    ScInfiniteScrollEnd,
-  ],
+  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd],
   template: `
     <div
       scInfiniteScroll
-      class="h-[300px] overflow-auto rounded-lg border"
+      class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
       (loadMore)="loadMore()"
@@ -69,8 +63,6 @@ interface Item {
           No more items to load
         </div>
       }
-
-      <div scInfiniteScrollSentinel></div>
     </div>
   `,
   host: { class: 'block w-full' },
