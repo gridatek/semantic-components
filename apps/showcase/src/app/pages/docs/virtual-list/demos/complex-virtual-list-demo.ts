@@ -4,7 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScVirtualList, ScVirtualListItem } from '@semantic-components/ui-lab';
+import { ScVirtualList } from '@semantic-components/ui-lab';
 
 interface User {
   id: number;
@@ -15,38 +15,46 @@ interface User {
 
 @Component({
   selector: 'app-complex-virtual-list-demo',
-  imports: [ScVirtualList, ScVirtualListItem],
+  imports: [ScVirtualList],
   template: `
     <div
       scVirtualList
-      class="overflow-hidden rounded-lg border"
+      #vl="scVirtualList"
+      class="h-[360px] overflow-auto rounded-lg border"
       [items]="users()"
       [itemHeight]="72"
       height="360px"
-      [trackByFn]="trackById"
     >
-      <ng-template scVirtualListItem let-user let-index="index">
+      <div [style.height.px]="vl.totalHeight()" class="relative">
         <div
-          class="hover:bg-muted/50 flex h-full items-center gap-4 border-b px-4 transition-colors"
+          [style.transform]="'translateY(' + vl.offsetY() + 'px)'"
+          class="absolute inset-x-0 top-0"
         >
-          <div
-            class="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
-          >
-            <span class="text-primary text-sm font-medium">
-              {{ getInitials(user.name) }}
-            </span>
-          </div>
-          <div class="min-w-0 flex-1">
-            <p class="truncate font-medium">{{ user.name }}</p>
-            <p class="text-muted-foreground truncate text-sm">
-              {{ user.email }}
-            </p>
-          </div>
-          <span class="bg-muted rounded-full px-2 py-1 text-xs">
-            {{ user.role }}
-          </span>
+          @for (item of vl.visibleItems(); track item.data.id) {
+            <div
+              [style.height.px]="72"
+              class="hover:bg-muted/50 flex items-center gap-4 border-b px-4 transition-colors"
+            >
+              <div
+                class="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+              >
+                <span class="text-primary text-sm font-medium">
+                  {{ getInitials(item.data.name) }}
+                </span>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="truncate font-medium">{{ item.data.name }}</p>
+                <p class="text-muted-foreground truncate text-sm">
+                  {{ item.data.email }}
+                </p>
+              </div>
+              <span class="bg-muted rounded-full px-2 py-1 text-xs">
+                {{ item.data.role }}
+              </span>
+            </div>
+          }
         </div>
-      </ng-template>
+      </div>
     </div>
   `,
   host: { class: 'block w-full' },
@@ -62,8 +70,6 @@ export class ComplexVirtualListDemo {
       role: ['Admin', 'Editor', 'Viewer', 'Guest'][i % 4],
     })),
   );
-
-  readonly trackById = (index: number, item: User) => item.id;
 
   getInitials(name: string): string {
     return name
