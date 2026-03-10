@@ -34,7 +34,7 @@ import { ScSelectPortal } from './select-portal';
         <ng-template
           [cdkConnectedOverlay]="{
             origin,
-            usePopover: 'inline',
+            usePopover: false,
             matchWidth: true,
           }"
           [cdkConnectedOverlayOpen]="true"
