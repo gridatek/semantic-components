@@ -29,7 +29,12 @@ export class EndMessageInfiniteScrollDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScInfiniteScroll } from '@semantic-components/ui-lab';
+import {
+  ScInfiniteScroll,
+  ScInfiniteScrollEnd,
+  ScInfiniteScrollLoader,
+} from '@semantic-components/ui-lab';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {
   id: number;
@@ -39,13 +44,18 @@ interface Item {
 
 @Component({
   selector: 'app-end-message-infinite-scroll-demo',
-  imports: [ScInfiniteScroll],
+  imports: [
+    ScInfiniteScroll,
+    ScInfiniteScrollLoader,
+    ScInfiniteScrollEnd,
+    SiLoaderCircleIcon,
+  ],
   template: \`
-    <sc-infinite-scroll
+    <div
+      scInfiniteScroll
       class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
-      endMessage="You've reached the end! 🎉"
       (loadMore)="loadMore()"
     >
       <div class="space-y-2 p-4">
@@ -55,7 +65,29 @@ interface Item {
           </div>
         }
       </div>
-    </sc-infinite-scroll>
+
+      @if (loading()) {
+        <div
+          scInfiniteScrollLoader
+          class="flex items-center justify-center gap-2 py-4"
+        >
+          <svg
+            siLoaderCircleIcon
+            class="text-muted-foreground size-5 animate-spin"
+          ></svg>
+          <span class="text-muted-foreground text-sm">Loading more...</span>
+        </div>
+      }
+
+      @if (reachedEnd() && !loading()) {
+        <div
+          scInfiniteScrollEnd
+          class="text-muted-foreground py-4 text-center text-sm"
+        >
+          You've reached the end! 🎉
+        </div>
+      }
+    </div>
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,

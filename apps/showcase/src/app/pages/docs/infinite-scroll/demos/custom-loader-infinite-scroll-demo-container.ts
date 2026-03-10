@@ -31,6 +31,7 @@ export class CustomLoaderInfiniteScrollDemoContainer {
 } from '@angular/core';
 import {
   ScInfiniteScroll,
+  ScInfiniteScrollEnd,
   ScInfiniteScrollLoader,
 } from '@semantic-components/ui-lab';
 
@@ -42,9 +43,10 @@ interface Item {
 
 @Component({
   selector: 'app-custom-loader-infinite-scroll-demo',
-  imports: [ScInfiniteScroll, ScInfiniteScrollLoader],
+  imports: [ScInfiniteScroll, ScInfiniteScrollLoader, ScInfiniteScrollEnd],
   template: \`
-    <sc-infinite-scroll
+    <div
+      scInfiniteScroll
       class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
@@ -58,24 +60,35 @@ interface Item {
         }
       </div>
 
-      <div
-        scInfiniteScrollLoader
-        class="flex items-center justify-center gap-2 py-4"
-      >
+      @if (loading()) {
         <div
-          class="bg-primary size-2 animate-bounce rounded-full"
-          style="animation-delay: 0ms"
-        ></div>
+          scInfiniteScrollLoader
+          class="flex items-center justify-center gap-2 py-4"
+        >
+          <div
+            class="bg-primary size-2 animate-bounce rounded-full"
+            style="animation-delay: 0ms"
+          ></div>
+          <div
+            class="bg-primary size-2 animate-bounce rounded-full"
+            style="animation-delay: 150ms"
+          ></div>
+          <div
+            class="bg-primary size-2 animate-bounce rounded-full"
+            style="animation-delay: 300ms"
+          ></div>
+        </div>
+      }
+
+      @if (reachedEnd() && !loading()) {
         <div
-          class="bg-primary size-2 animate-bounce rounded-full"
-          style="animation-delay: 150ms"
-        ></div>
-        <div
-          class="bg-primary size-2 animate-bounce rounded-full"
-          style="animation-delay: 300ms"
-        ></div>
-      </div>
-    </sc-infinite-scroll>
+          scInfiniteScrollEnd
+          class="text-muted-foreground py-4 text-center text-sm"
+        >
+          No more items to load
+        </div>
+      }
+    </div>
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,

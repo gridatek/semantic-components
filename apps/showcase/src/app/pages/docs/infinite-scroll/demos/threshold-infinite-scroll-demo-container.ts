@@ -29,7 +29,12 @@ export class ThresholdInfiniteScrollDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScInfiniteScroll } from '@semantic-components/ui-lab';
+import {
+  ScInfiniteScroll,
+  ScInfiniteScrollEnd,
+  ScInfiniteScrollLoader,
+} from '@semantic-components/ui-lab';
+import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {
   id: number;
@@ -39,12 +44,18 @@ interface Item {
 
 @Component({
   selector: 'app-threshold-infinite-scroll-demo',
-  imports: [ScInfiniteScroll],
+  imports: [
+    ScInfiniteScroll,
+    ScInfiniteScrollLoader,
+    ScInfiniteScrollEnd,
+    SiLoaderCircleIcon,
+  ],
   template: \`
     <p class="text-muted-foreground mb-4 text-sm">
       Load more items when within 200px of the bottom (loads earlier).
     </p>
-    <sc-infinite-scroll
+    <div
+      scInfiniteScroll
       class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"
@@ -58,7 +69,29 @@ interface Item {
           </div>
         }
       </div>
-    </sc-infinite-scroll>
+
+      @if (loading()) {
+        <div
+          scInfiniteScrollLoader
+          class="flex items-center justify-center gap-2 py-4"
+        >
+          <svg
+            siLoaderCircleIcon
+            class="text-muted-foreground size-5 animate-spin"
+          ></svg>
+          <span class="text-muted-foreground text-sm">Loading more...</span>
+        </div>
+      }
+
+      @if (reachedEnd() && !loading()) {
+        <div
+          scInfiniteScrollEnd
+          class="text-muted-foreground py-4 text-center text-sm"
+        >
+          No more items to load
+        </div>
+      }
+    </div>
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
