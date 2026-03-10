@@ -1,6 +1,7 @@
 export * from './lightbox.types';
 export * from './lightbox-trigger';
 export * from './lightbox-gallery';
+export * from './lightbox-gallery-item';
 export {
   SC_LIGHTBOX,
   ScLightboxDirective,

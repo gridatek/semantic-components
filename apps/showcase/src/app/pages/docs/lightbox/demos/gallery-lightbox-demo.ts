@@ -8,7 +8,7 @@ import {
   ScLightbox,
   ScLightboxContainer,
   ScLightboxGallery,
-  ScLightboxTrigger,
+  ScLightboxGalleryItem,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -17,19 +17,13 @@ import {
     ScLightbox,
     ScLightboxContainer,
     ScLightboxGallery,
-    ScLightboxTrigger,
+    ScLightboxGalleryItem,
   ],
   template: `
     <div scLightbox [images]="images" class="max-w-xl">
       <div scLightboxGallery class="grid-cols-4 gap-2">
         @for (image of images; track image.src; let i = $index) {
-          <button
-            type="button"
-            scLightboxTrigger
-            [index]="i"
-            class="focus-visible:ring-ring aspect-square cursor-pointer overflow-hidden rounded-lg transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:outline-none"
-            [attr.aria-label]="'Open image ' + (i + 1)"
-          >
+          <button type="button" scLightboxGalleryItem [index]="i">
             <img
               [src]="image.src"
               [alt]="image.alt || 'Gallery image ' + (i + 1)"
