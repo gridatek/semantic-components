@@ -19,10 +19,6 @@ export interface ScLightbox {
   // Inputs
   images: () => LightboxImage[];
   loop: () => boolean;
-  showCounter: () => boolean;
-  showInfo: () => boolean;
-  showZoom: () => boolean;
-  showThumbnails: () => boolean;
   closeOnOverlayClick: () => boolean;
   closeOnEscape: () => boolean;
 
@@ -54,7 +50,6 @@ export interface ScLightbox {
   onImageLoad: () => void;
   onOverlayClick: (event: MouseEvent) => void;
   onKeydown: (event: KeyboardEvent) => void;
-  getCurrentImage: () => LightboxImage | undefined;
 }
 
 export const SC_LIGHTBOX = new InjectionToken<ScLightbox>('SC_LIGHTBOX');
@@ -73,10 +68,6 @@ export class ScLightboxDirective implements ScLightbox {
   // Configuration inputs
   readonly images = input<LightboxImage[]>([]);
   readonly loop = input<boolean>(true);
-  readonly showCounter = input<boolean>(true);
-  readonly showInfo = input<boolean>(true);
-  readonly showZoom = input<boolean>(true);
-  readonly showThumbnails = input<boolean>(true);
   readonly closeOnOverlayClick = input<boolean>(true);
   readonly closeOnEscape = input<boolean>(true);
 
@@ -202,9 +193,5 @@ export class ScLightboxDirective implements ScLightbox {
         this.resetZoom();
         break;
     }
-  }
-
-  getCurrentImage(): LightboxImage | undefined {
-    return this.currentImage();
   }
 }
