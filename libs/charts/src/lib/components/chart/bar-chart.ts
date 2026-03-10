@@ -43,10 +43,10 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
       }
 
       <!-- Bars -->
-      @for (bar of bars(); track bar.label; let i = $index) {
+      @for (bar of bars(); track bar.label) {
         <g
           class="cursor-pointer transition-opacity hover:opacity-80"
-          (mouseenter)="onBarHover($event, bar, i)"
+          (mouseenter)="onBarHover($event, bar)"
           (mouseleave)="onBarLeave()"
         >
           <rect
@@ -174,7 +174,7 @@ export class ScBarChart {
     });
   });
 
-  onBarHover(event: MouseEvent, bar: ChartDataPoint, _index: number): void {
+  onBarHover(event: MouseEvent, bar: ChartDataPoint): void {
     const rect = (event.target as SVGElement).getBoundingClientRect();
     const parentRect = (event.target as SVGElement)
       .closest('[scBarChart]')
