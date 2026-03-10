@@ -20,6 +20,8 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
       class="w-full"
       [style.height.px]="height()"
       preserveAspectRatio="xMidYMid meet"
+      role="img"
+      [attr.aria-label]="ariaLabel()"
     >
       <!-- Grid lines -->
       @for (line of gridLines(); track line) {
@@ -31,23 +33,31 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
           stroke="currentColor"
           class="text-border"
           stroke-dasharray="4 4"
+          aria-hidden="true"
         />
         <text
           [attr.x]="padding().left - 8"
           [attr.y]="line.y + 4"
           text-anchor="end"
           class="fill-muted-foreground text-xs"
+          aria-hidden="true"
         >
           {{ line.label }}
         </text>
       }
 
       <!-- Bars -->
-      @for (bar of bars(); track bar.label) {
+      @for (bar of bars(); track bar.label; let i = $index) {
         <g
-          class="cursor-pointer transition-opacity hover:opacity-80"
+          class="cursor-pointer transition-opacity outline-none hover:opacity-80 focus-visible:opacity-80"
+          tabindex="0"
+          role="graphics-symbol"
+          [attr.aria-label]="bar.label + ': ' + bar.value"
           (mouseenter)="onBarHover($event, bar)"
           (mouseleave)="onBarLeave()"
+          (focus)="onBarFocus($event, bar)"
+          (blur)="onBarLeave()"
+          (keydown)="onBarKeydown($event, i)"
         >
           <rect
             [attr.x]="bar.x"
@@ -67,23 +77,27 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
           [attr.y]="chartHeight() + padding().top + 16"
           text-anchor="middle"
           class="fill-muted-foreground text-xs"
+          aria-hidden="true"
         >
           {{ bar.label }}
         </text>
       }
     </svg>
 
-    @if (hoveredBar()) {
-      <div
-        class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
-        [style.left.px]="tooltipX()"
-        [style.top.px]="tooltipY()"
-        [style.transform]="'translate(-50%, -100%) translateY(-8px)'"
-      >
-        <div class="font-medium">{{ hoveredBar()!.label }}</div>
-        <div class="text-muted-foreground">{{ hoveredBar()!.value }}</div>
-      </div>
-    }
+    <div
+      class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
+      [class.invisible]="!hoveredBar()"
+      [style.left.px]="tooltipX()"
+      [style.top.px]="tooltipY()"
+      [style.transform]="'translate(-50%, -100%) translateY(-8px)'"
+      role="tooltip"
+      aria-live="polite"
+    >
+      @if (hoveredBar(); as bar) {
+        <div class="font-medium">{{ bar.label }}</div>
+        <div class="text-muted-foreground">{{ bar.value }}</div>
+      }
+    </div>
   `,
   host: {
     'data-slot': 'bar-chart',
@@ -101,6 +115,7 @@ export class ScBarChart {
   readonly height = input<number>(300);
   readonly barRadius = input<number>(4);
   readonly barGap = input<number>(8);
+  readonly ariaLabel = input<string>('Bar chart');
 
   readonly hoveredBar = signal<ChartDataPoint | null>(null);
   readonly tooltipX = signal(0);
@@ -186,7 +201,39 @@ export class ScBarChart {
     this.hoveredBar.set(bar);
   }
 
+  onBarFocus(event: FocusEvent, bar: ChartDataPoint): void {
+    const el = (event.target as SVGElement).querySelector('rect');
+    const parentRect = (event.target as SVGElement)
+      .closest('[scBarChart]')
+      ?.getBoundingClientRect();
+    if (el && parentRect) {
+      const rect = el.getBoundingClientRect();
+      this.tooltipX.set(rect.left - parentRect.left + rect.width / 2);
+      this.tooltipY.set(rect.top - parentRect.top);
+    }
+    this.hoveredBar.set(bar);
+  }
+
   onBarLeave(): void {
     this.hoveredBar.set(null);
+  }
+
+  onBarKeydown(event: KeyboardEvent, index: number): void {
+    const bars = this.bars();
+    let nextIndex = index;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      nextIndex = (index + 1) % bars.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      nextIndex = (index - 1 + bars.length) % bars.length;
+    } else {
+      return;
+    }
+
+    const parent = (event.target as SVGElement).parentElement;
+    const siblings = parent?.querySelectorAll<SVGElement>('g[tabindex]');
+    siblings?.[nextIndex]?.focus();
   }
 }
