@@ -727,6 +727,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/code-viewer',
+    children: [
+      {
+        path: 'package-manager-code-viewer-demo',
+        loadComponent: () =>
+          import(
+            '../pages/docs/code-viewer/demos/package-manager-code-viewer-demo'
+          ).then((m) => m.PackageManagerCodeViewerDemo),
+      },
+    ],
+  },
+  {
     path: 'demos/collapsible',
     children: [
       {
