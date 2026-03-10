@@ -1,40 +1,39 @@
 import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import {
-  ScSortableItem,
-  ScSortableList,
-  ScSortableOverlay,
-} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-horizontal-sortable-list-demo',
-  imports: [ScSortableList, ScSortableItem, ScSortableOverlay],
+  imports: [CdkDropList, CdkDrag],
   template: `
     <div class="max-w-lg">
       <div
-        scSortableList
-        [(items)]="items"
-        orientation="horizontal"
-        class="flex-wrap gap-3"
+        cdkDropList
+        [cdkDropListData]="items()"
+        [cdkDropListOrientation]="'horizontal'"
+        (cdkDropListDropped)="drop($event)"
+        class="flex flex-wrap gap-3"
       >
-        <div scSortableOverlay></div>
-        @for (item of items(); track item; let i = $index) {
+        @for (item of items(); track item) {
           <div
-            scSortableItem
-            [index]="i"
-            [item]="item"
-            class="bg-background flex size-16 items-center justify-center rounded-md border text-sm font-medium"
+            cdkDrag
+            class="bg-background flex size-16 cursor-move items-center justify-center rounded-md border text-sm font-medium"
           >
             {{ item }}
           </div>
         }
       </div>
       <p class="text-muted-foreground mt-2 text-sm">
-        Use Left/Right arrow keys to reorder.
+        Drag items horizontally to reorder.
       </p>
     </div>
   `,
@@ -44,4 +43,12 @@ import {
 })
 export class HorizontalSortableListDemo {
   readonly items = signal(['A', 'B', 'C', 'D', 'E', 'F']);
+
+  drop(event: CdkDragDrop<string[]>): void {
+    this.items.update((items) => {
+      const updated = [...items];
+      moveItemInArray(updated, event.previousIndex, event.currentIndex);
+      return updated;
+    });
+  }
 }

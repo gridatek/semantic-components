@@ -1,15 +1,16 @@
 import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import {
-  ScSortableHandle,
-  ScSortableItem,
-  ScSortableList,
-  ScSortableOverlay,
-} from '@semantic-components/ui-lab';
 
 interface KanbanCard {
   id: number;
@@ -20,25 +21,38 @@ interface KanbanCard {
 
 @Component({
   selector: 'app-kanban-sortable-list-demo',
-  imports: [
-    ScSortableList,
-    ScSortableItem,
-    ScSortableHandle,
-    ScSortableOverlay,
-  ],
+  imports: [CdkDropList, CdkDrag, CdkDragHandle],
   template: `
     <div class="max-w-md">
-      <div scSortableList [(items)]="cards" [handleOnly]="true" class="gap-3">
-        <div scSortableOverlay></div>
-        @for (card of cards(); track card.id; let i = $index) {
-          <div
-            scSortableItem
-            [index]="i"
-            [item]="card"
-            class="bg-card rounded-lg border p-4 shadow-sm"
-          >
+      <div
+        cdkDropList
+        [cdkDropListData]="cards()"
+        (cdkDropListDropped)="drop($event)"
+        class="space-y-3"
+      >
+        @for (card of cards(); track card.id) {
+          <div cdkDrag class="bg-card rounded-lg border p-4 shadow-sm">
             <div class="flex items-start gap-3">
-              <span scSortableHandle class="mt-1 p-1"></span>
+              <svg
+                cdkDragHandle
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-muted-foreground mt-1 shrink-0 cursor-grab"
+              >
+                <circle cx="9" cy="5" r="1" />
+                <circle cx="9" cy="12" r="1" />
+                <circle cx="9" cy="19" r="1" />
+                <circle cx="15" cy="5" r="1" />
+                <circle cx="15" cy="12" r="1" />
+                <circle cx="15" cy="19" r="1" />
+              </svg>
               <div class="flex-1 space-y-2">
                 <h4 class="font-medium">{{ card.title }}</h4>
                 <p class="text-muted-foreground text-sm">
@@ -84,6 +98,14 @@ export class KanbanSortableListDemo {
       priority: 'low',
     },
   ]);
+
+  drop(event: CdkDragDrop<KanbanCard[]>): void {
+    this.cards.update((cards) => {
+      const updated = [...cards];
+      moveItemInArray(updated, event.previousIndex, event.currentIndex);
+      return updated;
+    });
+  }
 
   getPriorityClass(priority: string): string {
     switch (priority) {

@@ -1,16 +1,16 @@
 import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import {
-  ScSortableHandle,
-  ScSortableItem,
-  ScSortableList,
-  ScSortableOverlay,
-  SortableEvent,
-} from '@semantic-components/ui-lab';
 
 interface Task {
   id: number;
@@ -20,30 +20,40 @@ interface Task {
 
 @Component({
   selector: 'app-task-list-sortable-list-demo',
-  imports: [
-    ScSortableList,
-    ScSortableItem,
-    ScSortableHandle,
-    ScSortableOverlay,
-  ],
+  imports: [CdkDropList, CdkDrag, CdkDragHandle],
   template: `
     <div class="max-w-md">
       <div
-        scSortableList
-        [(items)]="tasks"
-        [handleOnly]="true"
-        (sortChange)="onTaskReorder($event)"
-        class="gap-1"
+        cdkDropList
+        [cdkDropListData]="tasks()"
+        (cdkDropListDropped)="drop($event)"
+        class="space-y-1"
       >
-        <div scSortableOverlay></div>
-        @for (task of tasks(); track task.id; let i = $index) {
+        @for (task of tasks(); track task.id) {
           <div
-            scSortableItem
-            [index]="i"
-            [item]="task"
+            cdkDrag
             class="bg-background hover:bg-muted/50 flex items-center gap-3 rounded-md border p-3"
           >
-            <span scSortableHandle class="p-1"></span>
+            <svg
+              cdkDragHandle
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-muted-foreground shrink-0 cursor-grab"
+            >
+              <circle cx="9" cy="5" r="1" />
+              <circle cx="9" cy="12" r="1" />
+              <circle cx="9" cy="19" r="1" />
+              <circle cx="15" cy="5" r="1" />
+              <circle cx="15" cy="12" r="1" />
+              <circle cx="15" cy="19" r="1" />
+            </svg>
             <input
               type="checkbox"
               [checked]="task.completed"
@@ -83,7 +93,11 @@ export class TaskListSortableListDemo {
     );
   }
 
-  onTaskReorder(event: SortableEvent<Task>): void {
-    console.log('Task reordered:', event);
+  drop(event: CdkDragDrop<Task[]>): void {
+    this.tasks.update((tasks) => {
+      const updated = [...tasks];
+      moveItemInArray(updated, event.previousIndex, event.currentIndex);
+      return updated;
+    });
   }
 }

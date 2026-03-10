@@ -29,7 +29,6 @@ export * from './pdf-viewer';
 export * from './phone-input';
 export * from './qr-code';
 export * from './signature-pad';
-export * from './sortable-list';
 export * from './speed-dial';
 export * from './spotlight';
 export * from './stat-card';

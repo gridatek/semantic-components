@@ -1,15 +1,16 @@
 import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import {
-  ScSortableHandle,
-  ScSortableItem,
-  ScSortableList,
-  ScSortableOverlay,
-} from '@semantic-components/ui-lab';
 
 interface PlaylistItem {
   id: number;
@@ -20,12 +21,7 @@ interface PlaylistItem {
 
 @Component({
   selector: 'app-playlist-sortable-list-demo',
-  imports: [
-    ScSortableList,
-    ScSortableItem,
-    ScSortableHandle,
-    ScSortableOverlay,
-  ],
+  imports: [CdkDropList, CdkDrag, CdkDragHandle],
   template: `
     <div class="max-w-lg">
       <div class="rounded-lg border">
@@ -33,20 +29,36 @@ interface PlaylistItem {
           <h4 class="font-medium">My Playlist</h4>
         </div>
         <div
-          scSortableList
-          [(items)]="playlist"
-          [handleOnly]="true"
+          cdkDropList
+          [cdkDropListData]="playlist()"
+          (cdkDropListDropped)="drop($event)"
           class="divide-y"
         >
-          <div scSortableOverlay></div>
           @for (song of playlist(); track song.id; let i = $index) {
             <div
-              scSortableItem
-              [index]="i"
-              [item]="song"
+              cdkDrag
               class="hover:bg-muted/50 flex items-center gap-4 px-4 py-3"
             >
-              <span scSortableHandle class="p-1"></span>
+              <svg
+                cdkDragHandle
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-muted-foreground shrink-0 cursor-grab"
+              >
+                <circle cx="9" cy="5" r="1" />
+                <circle cx="9" cy="12" r="1" />
+                <circle cx="9" cy="19" r="1" />
+                <circle cx="15" cy="5" r="1" />
+                <circle cx="15" cy="12" r="1" />
+                <circle cx="15" cy="19" r="1" />
+              </svg>
               <span class="text-muted-foreground w-6 text-sm">
                 {{ i + 1 }}
               </span>
@@ -92,4 +104,12 @@ export class PlaylistSortableListDemo {
       duration: '6:24',
     },
   ]);
+
+  drop(event: CdkDragDrop<PlaylistItem[]>): void {
+    this.playlist.update((playlist) => {
+      const updated = [...playlist];
+      moveItemInArray(updated, event.previousIndex, event.currentIndex);
+      return updated;
+    });
+  }
 }
