@@ -24,29 +24,37 @@ import { CustomHeightVirtualListDemo } from './custom-height-virtual-list-demo';
 })
 export class CustomHeightVirtualListDemoContainer {
   readonly code = `import {
+  CdkFixedSizeVirtualScroll,
+  CdkVirtualForOf,
+  CdkVirtualScrollViewport,
+} from '@angular/cdk/scrolling';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScVirtualList } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-custom-height-virtual-list-demo',
-  imports: [ScVirtualList],
+  imports: [
+    CdkVirtualScrollViewport,
+    CdkFixedSizeVirtualScroll,
+    CdkVirtualForOf,
+  ],
   template: \`
-    <div class="overflow-hidden rounded-lg border">
-      <sc-virtual-list [items]="items()" [itemHeight]="36" height="200px">
-        <ng-template let-item let-index="index">
-          <div
-            class="hover:bg-muted/50 flex h-full items-center border-b px-4 text-sm transition-colors"
-          >
-            <span class="text-muted-foreground w-12">{{ index + 1 }}</span>
-            <span class="flex-1">{{ item }}</span>
-          </div>
-        </ng-template>
-      </sc-virtual-list>
-    </div>
+    <cdk-virtual-scroll-viewport
+      itemSize="36"
+      class="h-[200px] rounded-lg border"
+    >
+      <div
+        *cdkVirtualFor="let item of items(); let i = index"
+        class="hover:bg-muted/50 flex h-9 items-center border-b px-4 text-sm transition-colors"
+      >
+        <span class="text-muted-foreground w-12">{{ i + 1 }}</span>
+        <span class="flex-1">{{ item }}</span>
+      </div>
+    </cdk-virtual-scroll-viewport>
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
