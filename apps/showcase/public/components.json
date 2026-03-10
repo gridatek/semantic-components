@@ -534,15 +534,6 @@
     "category": "Navigation"
   },
   {
-    "name": "Native Checkbox",
-    "path": "native-checkbox",
-    "description": "A directive for native checkbox inputs with custom styling.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
     "name": "Native Dialog",
     "path": "native-dialog",
     "description": "A modal dialog built on the native HTML dialog element.",
