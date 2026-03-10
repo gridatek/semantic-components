@@ -3,13 +3,43 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { LightboxImage, ScLightboxGallery } from '@semantic-components/ui-lab';
+import {
+  LightboxImage,
+  ScLightbox,
+  ScLightboxContainer,
+  ScLightboxGallery,
+  ScLightboxTrigger,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-gallery-lightbox-demo',
-  imports: [ScLightboxGallery],
+  imports: [
+    ScLightbox,
+    ScLightboxContainer,
+    ScLightboxGallery,
+    ScLightboxTrigger,
+  ],
   template: `
-    <sc-lightbox-gallery [images]="images" class="max-w-xl grid-cols-4 gap-2" />
+    <div scLightbox [images]="images" class="max-w-xl">
+      <div scLightboxGallery class="grid-cols-4 gap-2">
+        @for (image of images; track image.src; let i = $index) {
+          <button
+            type="button"
+            scLightboxTrigger
+            [index]="i"
+            class="focus-visible:ring-ring aspect-square cursor-pointer overflow-hidden rounded-lg transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:outline-none"
+            [attr.aria-label]="'Open image ' + (i + 1)"
+          >
+            <img
+              [src]="image.src"
+              [alt]="image.alt || 'Gallery image ' + (i + 1)"
+              class="size-full object-cover"
+            />
+          </button>
+        }
+      </div>
+      <div scLightboxContainer></div>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
