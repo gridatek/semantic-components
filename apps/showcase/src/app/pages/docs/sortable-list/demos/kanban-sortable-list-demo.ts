@@ -11,6 +11,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 interface KanbanCard {
   id: number;
@@ -21,7 +22,7 @@ interface KanbanCard {
 
 @Component({
   selector: 'app-kanban-sortable-list-demo',
-  imports: [CdkDropList, CdkDrag, CdkDragHandle],
+  imports: [CdkDropList, CdkDrag, CdkDragHandle, SiGripVerticalIcon],
   template: `
     <div class="max-w-md">
       <div
@@ -35,24 +36,9 @@ interface KanbanCard {
             <div class="flex items-start gap-3">
               <svg
                 cdkDragHandle
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-muted-foreground mt-1 shrink-0 cursor-grab"
-              >
-                <circle cx="9" cy="5" r="1" />
-                <circle cx="9" cy="12" r="1" />
-                <circle cx="9" cy="19" r="1" />
-                <circle cx="15" cy="5" r="1" />
-                <circle cx="15" cy="12" r="1" />
-                <circle cx="15" cy="19" r="1" />
-              </svg>
+                siGripVerticalIcon
+                class="text-muted-foreground mt-1 size-4 shrink-0 cursor-grab"
+              ></svg>
               <div class="flex-1 space-y-2">
                 <h4 class="font-medium">{{ card.title }}</h4>
                 <p class="text-muted-foreground text-sm">

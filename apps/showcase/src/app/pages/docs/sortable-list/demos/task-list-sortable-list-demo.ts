@@ -11,6 +11,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 interface Task {
   id: number;
@@ -20,7 +21,7 @@ interface Task {
 
 @Component({
   selector: 'app-task-list-sortable-list-demo',
-  imports: [CdkDropList, CdkDrag, CdkDragHandle],
+  imports: [CdkDropList, CdkDrag, CdkDragHandle, SiGripVerticalIcon],
   template: `
     <div class="max-w-md">
       <div
@@ -36,24 +37,9 @@ interface Task {
           >
             <svg
               cdkDragHandle
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="text-muted-foreground shrink-0 cursor-grab"
-            >
-              <circle cx="9" cy="5" r="1" />
-              <circle cx="9" cy="12" r="1" />
-              <circle cx="9" cy="19" r="1" />
-              <circle cx="15" cy="5" r="1" />
-              <circle cx="15" cy="12" r="1" />
-              <circle cx="15" cy="19" r="1" />
-            </svg>
+              siGripVerticalIcon
+              class="text-muted-foreground size-4 shrink-0 cursor-grab"
+            ></svg>
             <input
               type="checkbox"
               [checked]="task.completed"
