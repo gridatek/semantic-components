@@ -54,8 +54,6 @@ import { LightboxImage } from './lightbox.types';
 export class ScLightboxGallery {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly images = input<LightboxImage[]>([]);
-  readonly columns = input<number>(3);
-  readonly gap = input<number>(4);
   readonly loop = input<boolean>(true);
   readonly showCounter = input<boolean>(true);
   readonly showInfo = input<boolean>(true);
@@ -63,12 +61,7 @@ export class ScLightboxGallery {
   readonly showThumbnails = input<boolean>(true);
 
   protected readonly galleryClass = computed(() =>
-    cn(
-      'grid',
-      `grid-cols-${this.columns()}`,
-      `gap-${this.gap()}`,
-      this.classInput(),
-    ),
+    cn('grid grid-cols-3 gap-4', this.classInput()),
   );
 
   protected readonly itemClass = computed(() =>
