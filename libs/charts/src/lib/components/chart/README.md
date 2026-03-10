@@ -34,13 +34,14 @@ Bar chart visualization.
 
 **Inputs:**
 
-| Input       | Type               | Default | Description            |
-| ----------- | ------------------ | ------- | ---------------------- |
-| `data`      | `ChartDataPoint[]` | `[]`    | Chart data             |
-| `height`    | `number`           | `300`   | Chart height in pixels |
-| `barRadius` | `number`           | `4`     | Bar corner radius      |
-| `barGap`    | `number`           | `8`     | Gap between bars       |
-| `class`     | `string`           | `''`    | Additional CSS classes |
+| Input       | Type               | Default       | Description              |
+| ----------- | ------------------ | ------------- | ------------------------ |
+| `data`      | `ChartDataPoint[]` | `[]`          | Chart data               |
+| `height`    | `number`           | `300`         | Chart height in pixels   |
+| `barRadius` | `number`           | `4`           | Bar corner radius        |
+| `barGap`    | `number`           | `8`           | Gap between bars         |
+| `ariaLabel` | `string`           | `'Bar chart'` | Accessible label for SVG |
+| `class`     | `string`           | `''`          | Additional CSS classes   |
 
 ### ScLineChart
 
@@ -50,15 +51,16 @@ Line chart visualization with optional area fill.
 
 **Inputs:**
 
-| Input        | Type               | Default | Description            |
-| ------------ | ------------------ | ------- | ---------------------- |
-| `data`       | `ChartDataPoint[]` | `[]`    | Chart data             |
-| `height`     | `number`           | `300`   | Chart height in pixels |
-| `showArea`   | `boolean`          | `false` | Show area fill         |
-| `showPoints` | `boolean`          | `true`  | Show data points       |
-| `color`      | `string`           | `''`    | Line color             |
-| `labelStep`  | `number`           | `1`     | X-axis label interval  |
-| `class`      | `string`           | `''`    | Additional CSS classes |
+| Input        | Type               | Default        | Description              |
+| ------------ | ------------------ | -------------- | ------------------------ |
+| `data`       | `ChartDataPoint[]` | `[]`           | Chart data               |
+| `height`     | `number`           | `300`          | Chart height in pixels   |
+| `showArea`   | `boolean`          | `false`        | Show area fill           |
+| `showPoints` | `boolean`          | `true`         | Show data points         |
+| `color`      | `string`           | `''`           | Line color               |
+| `labelStep`  | `number`           | `1`            | X-axis label interval    |
+| `ariaLabel`  | `string`           | `'Line chart'` | Accessible label for SVG |
+| `class`      | `string`           | `''`           | Additional CSS classes   |
 
 ### ScPieChart
 
@@ -68,13 +70,14 @@ Pie chart visualization.
 
 **Inputs:**
 
-| Input         | Type               | Default | Description            |
-| ------------- | ------------------ | ------- | ---------------------- |
-| `data`        | `ChartDataPoint[]` | `[]`    | Chart data             |
-| `size`        | `number`           | `300`   | Chart size in pixels   |
-| `innerRadius` | `number`           | `0`     | Inner radius (0 = pie) |
-| `showLabels`  | `boolean`          | `true`  | Show percentage labels |
-| `class`       | `string`           | `''`    | Additional CSS classes |
+| Input         | Type               | Default       | Description              |
+| ------------- | ------------------ | ------------- | ------------------------ |
+| `data`        | `ChartDataPoint[]` | `[]`          | Chart data               |
+| `size`        | `number`           | `300`         | Chart size in pixels     |
+| `innerRadius` | `number`           | `0`           | Inner radius (0 = pie)   |
+| `showLabels`  | `boolean`          | `true`        | Show percentage labels   |
+| `ariaLabel`   | `string`           | `'Pie chart'` | Accessible label for SVG |
+| `class`       | `string`           | `''`          | Additional CSS classes   |
 
 ### ScDonutChart
 
@@ -84,13 +87,14 @@ Donut chart (pie chart with hole).
 
 **Inputs:**
 
-| Input         | Type               | Default | Description            |
-| ------------- | ------------------ | ------- | ---------------------- |
-| `data`        | `ChartDataPoint[]` | `[]`    | Chart data             |
-| `size`        | `number`           | `300`   | Chart size in pixels   |
-| `innerRadius` | `number`           | `60`    | Inner radius           |
-| `showLabels`  | `boolean`          | `false` | Show percentage labels |
-| `class`       | `string`           | `''`    | Additional CSS classes |
+| Input         | Type               | Default         | Description              |
+| ------------- | ------------------ | --------------- | ------------------------ |
+| `data`        | `ChartDataPoint[]` | `[]`            | Chart data               |
+| `size`        | `number`           | `300`           | Chart size in pixels     |
+| `innerRadius` | `number`           | `60`            | Inner radius             |
+| `showLabels`  | `boolean`          | `false`         | Show percentage labels   |
+| `ariaLabel`   | `string`           | `'Donut chart'` | Accessible label for SVG |
+| `class`       | `string`           | `''`            | Additional CSS classes   |
 
 ### ScChartLegend
 
@@ -215,6 +219,12 @@ These integrate with the shadcn theming system.
 
 ## Accessibility
 
-- SVG elements include appropriate ARIA attributes
-- High contrast colors for readability
-- Interactive elements have hover states
+- `role="img"` and customizable `aria-label` on all chart SVGs
+- `role="graphics-symbol"` with data labels on bars, points, and slices
+- Full keyboard navigation with arrow keys between data elements
+- `aria-live="polite"` tooltips announced to screen readers
+- Decorative elements hidden from assistive technology
+- Visible focus indicators on all interactive elements
+- Semantic list markup on the legend component
+
+See [ACCESSIBILITY.md](./ACCESSIBILITY.md) for full details and usage guidance.
