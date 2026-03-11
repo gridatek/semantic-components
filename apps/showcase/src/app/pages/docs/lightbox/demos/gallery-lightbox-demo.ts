@@ -11,7 +11,7 @@ import {
 } from '@semantic-components/carousel';
 import {
   LightboxImage,
-  ScLightboxContainer,
+  ScLightbox,
   ScLightboxGallery,
   ScLightboxGalleryItem,
   ScLightboxPortal,
@@ -31,7 +31,7 @@ import {
   selector: 'app-gallery-lightbox-demo',
   imports: [
     ScLightboxProvider,
-    ScLightboxContainer,
+    ScLightbox,
     ScLightboxGallery,
     ScLightboxGalleryItem,
     ScLightboxPortal,
@@ -67,7 +67,7 @@ import {
       </div>
 
       <ng-template scLightboxPortal>
-        <div scLightboxContainer>
+        <div scLightbox>
           <button
             type="button"
             class="absolute top-4 right-4 z-10 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"

@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {
   LightboxImage,
-  ScLightboxContainer,
+  ScLightbox,
   ScLightboxPortal,
   ScLightboxProvider,
   ScLightboxTrigger,
@@ -16,7 +16,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-single-lightbox-demo',
   imports: [
     ScLightboxProvider,
-    ScLightboxContainer,
+    ScLightbox,
     ScLightboxTrigger,
     ScLightboxPortal,
     SiXIcon,
@@ -36,7 +36,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       </button>
 
       <ng-template scLightboxPortal>
-        <div scLightboxContainer>
+        <div scLightbox>
           <button
             type="button"
             class="absolute top-4 right-4 z-10 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"

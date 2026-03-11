@@ -3,9 +3,10 @@ import { cn } from '@semantic-components/ui';
 import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
-  selector: '[scLightboxContainer]',
+  selector: '[scLightbox]',
+  exportAs: 'scLightbox',
   host: {
-    'data-slot': 'lightbox-container',
+    'data-slot': 'lightbox',
     '[class]': 'class()',
     role: 'dialog',
     'aria-modal': 'true',
@@ -13,7 +14,7 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
       "'Image gallery, showing image ' + (provider.currentIndex() + 1) + ' of ' + provider.images().length",
   },
 })
-export class ScLightboxContainer {
+export class ScLightbox {
   readonly provider = inject(SC_LIGHTBOX_PROVIDER);
 
   readonly classInput = input<string>('', { alias: 'class' });

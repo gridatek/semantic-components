@@ -10,7 +10,7 @@ ScLightboxProvider (div[scLightboxProvider])  ← State + CDK Overlay + backdrop
 ├── ScLightboxGallery                  ← Grid layout for thumbnails
 │   └── ScLightboxGalleryItem          ← Individual grid item (click to open)
 └── ScLightboxPortal (ng-template)     ← Content projected into the overlay
-    ├── ScLightboxContainer            ← Dialog wrapper (role="dialog", aria-modal)
+    ├── ScLightbox            ← Dialog wrapper (role="dialog", aria-modal)
     ├── ScLightboxImage                ← Displays current image with zoom transform
     └── ScLightboxThumbnail            ← Thumbnail strip item with active ring
 ```
@@ -63,11 +63,11 @@ Marks an `ng-template` whose content gets projected into the overlay.
 
 **Selector:** `ng-template[scLightboxPortal]`
 
-### ScLightboxContainer
+### ScLightbox
 
 Dialog wrapper with `role="dialog"` and dynamic `aria-label`.
 
-**Selector:** `[scLightboxContainer]`
+**Selector:** `[scLightbox]`
 
 ### ScLightboxTrigger
 
@@ -128,7 +128,7 @@ interface LightboxImage {
   </div>
 
   <ng-template scLightboxPortal>
-    <div scLightboxContainer>
+    <div scLightbox>
       <!-- your lightbox UI here: image, controls, thumbnails -->
     </div>
   </ng-template>
