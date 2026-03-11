@@ -1,4 +1,4 @@
-export interface LightboxImage {
+export interface ScLightboxImageData {
   src: string;
   alt?: string;
   title?: string;

@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { ScBackdrop } from '@semantic-components/ui';
 import { ScLightboxPortal } from './lightbox-portal';
-import { LightboxImage } from './lightbox.types';
+import { ScLightboxImageData } from './lightbox.types';
 
 export const SC_LIGHTBOX_PROVIDER = new InjectionToken<ScLightboxProvider>(
   'SC_LIGHTBOX_PROVIDER',
@@ -60,7 +60,7 @@ export class ScLightboxProvider {
   private readonly viewContainerRef = inject(ViewContainerRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly images = input<LightboxImage[]>([]);
+  readonly images = input<ScLightboxImageData[]>([]);
   readonly loop = input<boolean>(true);
   readonly closeOnEscape = input<boolean>(true);
 

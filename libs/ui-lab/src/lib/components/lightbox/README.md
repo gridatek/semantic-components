@@ -11,7 +11,7 @@ ScLightboxProvider (div[scLightboxProvider])  ← State + CDK Overlay + backdrop
 │   └── ScLightboxGalleryItem          ← Individual grid item (click to open)
 └── ScLightboxPortal (ng-template)     ← Content projected into the overlay
     ├── ScLightbox            ← Dialog wrapper (role="dialog", aria-modal)
-    ├── ScLightboxImage                ← Displays current image with zoom transform
+    ├── ScScLightboxImageData                ← Displays current image with zoom transform
     └── ScLightboxThumbnail            ← Thumbnail strip item with active ring
 ```
 
@@ -25,11 +25,11 @@ Root component that owns all state and manages the CDK Overlay lifecycle (create
 
 **Selector:** `div[scLightboxProvider]` | **Export:** `scLightbox`
 
-| Inputs          | Type              | Default | Description                |
-| --------------- | ----------------- | ------- | -------------------------- |
-| `images`        | `LightboxImage[]` | `[]`    | Array of images to display |
-| `loop`          | `boolean`         | `true`  | Loop navigation at ends    |
-| `closeOnEscape` | `boolean`         | `true`  | Close on Escape key        |
+| Inputs          | Type                    | Default | Description                |
+| --------------- | ----------------------- | ------- | -------------------------- |
+| `images`        | `ScLightboxImageData[]` | `[]`    | Array of images to display |
+| `loop`          | `boolean`               | `true`  | Loop navigation at ends    |
+| `closeOnEscape` | `boolean`               | `true`  | Close on Escape key        |
 
 | Models         | Type      | Default | Description              |
 | -------------- | --------- | ------- | ------------------------ |
@@ -51,11 +51,11 @@ Root component that owns all state and manages the CDK Overlay lifecycle (create
 | `resetZoom()`   | Reset zoom to 1        |
 | `onImageLoad()` | Mark image as loaded   |
 
-| Signals        | Type       | Description           |
-| -------------- | ---------- | --------------------- |
-| `zoomLevel`    | `number`   | Current zoom (0.5-3)  |
-| `imageLoading` | `boolean`  | Image loading state   |
-| `currentImage` | `computed` | Current LightboxImage |
+| Signals        | Type       | Description                 |
+| -------------- | ---------- | --------------------------- |
+| `zoomLevel`    | `number`   | Current zoom (0.5-3)        |
+| `imageLoading` | `boolean`  | Image loading state         |
+| `currentImage` | `computed` | Current ScLightboxImageData |
 
 ### ScLightboxPortal
 
@@ -79,11 +79,11 @@ Opens the lightbox on click.
 | ------- | -------- | ------- | ------------- |
 | `index` | `number` | `0`     | Image to open |
 
-### ScLightboxImage
+### ScScLightboxImageData
 
 Displays the current image with zoom transform. Binds `src`, `alt`, `transform: scale()`, and emits `onImageLoad()`.
 
-**Selector:** `img[scLightboxImage]`
+**Selector:** `img[scScLightboxImageData]`
 
 ### ScLightboxThumbnail
 
@@ -101,10 +101,10 @@ Grid layout directives for building thumbnail galleries.
 
 **Selectors:** `[scLightboxGallery]`, `[scLightboxGalleryItem]`
 
-## LightboxImage
+## ScLightboxImageData
 
 ```typescript
-interface LightboxImage {
+interface ScLightboxImageData {
   src: string;
   alt?: string;
   title?: string;

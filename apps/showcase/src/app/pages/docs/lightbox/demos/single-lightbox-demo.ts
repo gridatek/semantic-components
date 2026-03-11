@@ -4,8 +4,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  LightboxImage,
   ScLightbox,
+  ScLightboxImageData,
   ScLightboxPortal,
   ScLightboxProvider,
   ScLightboxTrigger,
@@ -80,7 +80,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleLightboxDemo {
-  readonly image: LightboxImage = {
+  readonly image: ScLightboxImageData = {
     src: 'https://picsum.photos/800/600?random=30',
     alt: 'Single image',
     title: 'Featured Photo',

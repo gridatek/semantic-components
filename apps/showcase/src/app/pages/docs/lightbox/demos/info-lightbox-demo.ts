@@ -10,8 +10,8 @@ import {
   ScCarouselViewport,
 } from '@semantic-components/carousel';
 import {
-  LightboxImage,
   ScLightbox,
+  ScLightboxImageData,
   ScLightboxPortal,
   ScLightboxProvider,
   ScLightboxThumbnail,
@@ -209,7 +209,7 @@ import {
 export class InfoLightboxDemo {
   protected readonly Math = Math;
 
-  readonly images: LightboxImage[] = [
+  readonly images: ScLightboxImageData[] = [
     {
       src: 'https://picsum.photos/800/600?random=10',
       alt: 'Mountain landscape',
