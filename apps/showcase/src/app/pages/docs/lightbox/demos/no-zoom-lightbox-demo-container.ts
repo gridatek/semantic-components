@@ -28,14 +28,30 @@ import {
   LightboxImage,
   ScLightbox,
   ScLightboxContainer,
+  ScLightboxImage,
+  ScLightboxThumbnail,
   ScLightboxTrigger,
 } from '@semantic-components/ui-lab';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-no-zoom-lightbox-demo',
-  imports: [ScLightbox, ScLightboxContainer, ScLightboxTrigger],
+  imports: [
+    ScLightbox,
+    ScLightboxContainer,
+    ScLightboxImage,
+    ScLightboxThumbnail,
+    ScLightboxTrigger,
+    SiXIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+  ],
   template: \`
-    <div scLightbox [images]="images" [showZoom]="false">
+    <div scLightbox [images]="images" #lightbox="scLightbox">
       <div class="flex gap-4">
         @for (image of images; track image.src; let i = $index) {
           <button
@@ -51,7 +67,68 @@ import {
           </button>
         }
       </div>
-      <div scLightboxContainer></div>
+
+      @if (lightbox.isOpen()) {
+        <div scLightboxContainer>
+          <button
+            type="button"
+            class="absolute top-4 right-4 z-10 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            (click)="lightbox.close()"
+            aria-label="Close lightbox"
+          >
+            <svg siXIcon class="size-6"></svg>
+          </button>
+
+          @if (lightbox.images().length > 1) {
+            <button
+              type="button"
+              class="absolute top-1/2 left-4 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              (click)="lightbox.previous()"
+              aria-label="Previous image"
+            >
+              <svg siChevronLeftIcon class="size-8"></svg>
+            </button>
+          }
+
+          <div
+            class="relative flex flex-1 items-center justify-center overflow-hidden"
+          >
+            <img scLightboxImage />
+          </div>
+
+          @if (lightbox.images().length > 1) {
+            <button
+              type="button"
+              class="absolute top-1/2 right-4 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              (click)="lightbox.next()"
+              aria-label="Next image"
+            >
+              <svg siChevronRightIcon class="size-8"></svg>
+            </button>
+          }
+
+          <div class="flex items-center justify-center bg-black/50 px-4 py-3">
+            <span class="text-sm text-white/80">
+              {{ lightbox.currentIndex() + 1 }} /
+              {{ lightbox.images().length }}
+            </span>
+          </div>
+
+          <div
+            class="flex items-center justify-center gap-2 overflow-x-auto bg-black/50 px-4 py-3"
+          >
+            @for (image of lightbox.images(); track image.src; let i = $index) {
+              <button type="button" scLightboxThumbnail [index]="i">
+                <img
+                  [src]="image.thumbnail || image.src"
+                  [alt]="image.alt || 'Thumbnail ' + (i + 1)"
+                  class="size-full object-cover"
+                />
+              </button>
+            }
+          </div>
+        </div>
+      }
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
