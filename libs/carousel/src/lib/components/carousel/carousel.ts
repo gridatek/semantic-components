@@ -53,11 +53,11 @@ export class ScCarousel {
 
   private readonly viewport = contentChild(ScCarouselViewport);
 
+  readonly activeIndex = model(0);
   readonly canScrollPrev = signal(false);
   readonly canScrollNext = signal(false);
-  readonly activeIndex = model(0);
 
-  private api: ScCarouselApi | null = null;
+  private readonly api = signal<ScCarouselApi | null>(null);
 
   protected readonly class = computed(() => cn('relative', this.classInput()));
 
@@ -66,48 +66,48 @@ export class ScCarousel {
       const viewportEl = this.viewport()?.viewportElement();
       if (!viewportEl) return;
 
-      const opts = {
-        ...this.options(),
-        startIndex: this.activeIndex(),
-        axis: (this.orientation() === 'horizontal' ? 'x' : 'y') as 'x' | 'y',
-      };
+      const embla = EmblaCarousel(
+        viewportEl,
+        {
+          ...this.options(),
+          startIndex: this.activeIndex(),
+          axis: this.orientation() === 'horizontal' ? 'x' : 'y',
+        },
+        this.plugins(),
+      );
 
-      this.api = EmblaCarousel(viewportEl, opts, this.plugins());
+      this.api.set(embla);
+      this.syncFromEmbla(embla);
 
-      this.updateScrollState();
+      embla.on('select', () => this.syncFromEmbla(embla));
+      embla.on('reInit', () => this.syncFromEmbla(embla));
 
-      this.api.on('select', () => this.updateScrollState());
-      this.api.on('reInit', () => this.updateScrollState());
-
-      this.destroyRef.onDestroy(() => {
-        this.api?.destroy();
-      });
+      this.destroyRef.onDestroy(() => embla.destroy());
     });
 
+    // Sync activeIndex model → embla
     effect(() => {
       const index = this.activeIndex();
-      this.api?.scrollTo(index);
+      const embla = this.api();
+      if (embla && embla.selectedScrollSnap() !== index) {
+        embla.scrollTo(index);
+      }
     });
   }
 
   scrollPrev(): void {
-    this.api?.scrollPrev();
+    this.api()?.scrollPrev();
   }
 
   scrollNext(): void {
-    this.api?.scrollNext();
+    this.api()?.scrollNext();
   }
 
-  scrollTo(index: number): void {
-    this.api?.scrollTo(index);
-  }
+  private syncFromEmbla(embla: EmblaCarouselType): void {
+    this.canScrollPrev.set(embla.canScrollPrev());
+    this.canScrollNext.set(embla.canScrollNext());
 
-  private updateScrollState(): void {
-    if (!this.api) return;
-    this.canScrollPrev.set(this.api.canScrollPrev());
-    this.canScrollNext.set(this.api.canScrollNext());
-
-    const newIndex = this.api.selectedScrollSnap();
+    const newIndex = embla.selectedScrollSnap();
     if (this.activeIndex() !== newIndex) {
       this.activeIndex.set(newIndex);
     }

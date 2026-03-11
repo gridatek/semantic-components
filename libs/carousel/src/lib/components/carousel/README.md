@@ -273,6 +273,37 @@ export class MyComponent {
 </div>
 ```
 
+## State Management
+
+`activeIndex` is the single source of truth for the current slide. All state flows through it:
+
+```
+                    activeIndex (model)
+                   /                   \
+                  /                     \
+    Parent sets index              Embla fires 'select'
+          |                              |
+          v                              v
+    effect() guards &              syncFromEmbla() updates
+    calls embla.scrollTo()         activeIndex + canScroll*
+```
+
+### Data flow
+
+1. **Parent → Carousel**: Parent binds `[activeIndex]`. The `effect()` detects the change, checks if embla is already at that index (guards against no-op), and calls `embla.scrollTo()`.
+2. **Carousel → Parent**: User swipes or clicks prev/next. Embla fires the `select` event, `syncFromEmbla()` reads `selectedScrollSnap()` and updates `activeIndex`, which emits via `activeIndexChange`.
+3. **Internal navigation**: `scrollPrev()`/`scrollNext()` call embla directly. Embla fires `select`, which syncs back to `activeIndex` — same path as (2).
+
+### Why the guard matters
+
+The `effect()` checks `embla.selectedScrollSnap() !== index` before calling `scrollTo()`. Without this, path (2) would trigger a redundant `scrollTo()` call on every user interaction:
+
+```
+swipe → select event → set activeIndex → effect fires → scrollTo (redundant)
+```
+
+The guard breaks this cycle by recognizing embla is already at the correct index.
+
 ## Features
 
 - **Embla Carousel**: Powered by Embla for smooth, physics-based animations
