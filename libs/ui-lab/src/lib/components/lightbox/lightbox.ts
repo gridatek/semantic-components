@@ -9,33 +9,9 @@ import {
 } from '@angular/core';
 import { LightboxImage } from './lightbox.types';
 
-export interface ScLightbox {
-  images: () => LightboxImage[];
-  loop: () => boolean;
-  closeOnEscape: () => boolean;
-
-  isOpen: ReturnType<typeof model<boolean>>;
-  currentIndex: ReturnType<typeof model<number>>;
-
-  opened: ReturnType<typeof output<number>>;
-  closed: ReturnType<typeof output<void>>;
-  indexChange: ReturnType<typeof output<number>>;
-
-  zoomLevel: ReturnType<typeof signal<number>>;
-  imageLoading: ReturnType<typeof signal<boolean>>;
-
-  currentImage: () => LightboxImage;
-
-  open: (index?: number) => void;
-  close: () => void;
-  goTo: (index: number) => void;
-  zoomIn: () => void;
-  zoomOut: () => void;
-  resetZoom: () => void;
-  onImageLoad: () => void;
-}
-
-export const SC_LIGHTBOX = new InjectionToken<ScLightbox>('SC_LIGHTBOX');
+export const SC_LIGHTBOX = new InjectionToken<ScLightboxDirective>(
+  'SC_LIGHTBOX',
+);
 
 @Directive({
   selector: '[scLightbox]',
@@ -45,7 +21,7 @@ export const SC_LIGHTBOX = new InjectionToken<ScLightbox>('SC_LIGHTBOX');
     'data-slot': 'lightbox',
   },
 })
-export class ScLightboxDirective implements ScLightbox {
+export class ScLightboxDirective {
   readonly images = input<LightboxImage[]>([]);
   readonly loop = input<boolean>(true);
   readonly closeOnEscape = input<boolean>(true);
@@ -55,7 +31,6 @@ export class ScLightboxDirective implements ScLightbox {
 
   readonly opened = output<number>();
   readonly closed = output<void>();
-  readonly indexChange = output<number>();
 
   readonly zoomLevel = signal(1);
   readonly imageLoading = signal(false);
@@ -83,7 +58,6 @@ export class ScLightboxDirective implements ScLightbox {
     this.currentIndex.set(index);
     this.zoomLevel.set(1);
     this.imageLoading.set(true);
-    this.indexChange.emit(index);
   }
 
   zoomIn(): void {
