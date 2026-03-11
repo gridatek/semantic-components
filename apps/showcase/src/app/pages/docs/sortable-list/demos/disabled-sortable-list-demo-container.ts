@@ -19,24 +19,27 @@ import { DisabledSortableListDemo } from './disabled-sortable-list-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledSortableListDemoContainer {
-  readonly code = `import {
+  readonly code = `import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScSortableItem, ScSortableList } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-disabled-sortable-list-demo',
-  imports: [ScSortableList, ScSortableItem],
+  imports: [CdkDropList, CdkDrag],
   template: \`
     <div class="max-w-md">
-      <div scSortableList [items]="items" [disabled]="true" class="gap-2">
-        @for (item of items; track item; let i = $index) {
+      <div
+        cdkDropList
+        [cdkDropListData]="items"
+        [cdkDropListDisabled]="true"
+        class="space-y-2"
+      >
+        @for (item of items; track item) {
           <div
-            scSortableItem
-            [index]="i"
-            [item]="item"
+            cdkDrag
             class="bg-muted/50 flex items-center gap-3 rounded-md border p-3 opacity-60"
           >
             <span class="text-sm">{{ item }}</span>
