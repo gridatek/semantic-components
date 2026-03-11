@@ -20,17 +20,19 @@ import { KanbanSortableListDemo } from './kanban-sortable-list-demo';
 })
 export class KanbanSortableListDemoContainer {
   readonly code = `import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import {
-  ScSortableHandle,
-  ScSortableItem,
-  ScSortableList,
-  ScSortableOverlay,
-} from '@semantic-components/ui-lab';
+import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 interface KanbanCard {
   id: number;
@@ -41,25 +43,23 @@ interface KanbanCard {
 
 @Component({
   selector: 'app-kanban-sortable-list-demo',
-  imports: [
-    ScSortableList,
-    ScSortableItem,
-    ScSortableHandle,
-    ScSortableOverlay,
-  ],
+  imports: [CdkDropList, CdkDrag, CdkDragHandle, SiGripVerticalIcon],
   template: \`
     <div class="max-w-md">
-      <div scSortableList [(items)]="cards" [handleOnly]="true" class="gap-3">
-        <div scSortableOverlay></div>
-        @for (card of cards(); track card.id; let i = $index) {
-          <div
-            scSortableItem
-            [index]="i"
-            [item]="card"
-            class="bg-card rounded-lg border p-4 shadow-sm"
-          >
+      <div
+        cdkDropList
+        [cdkDropListData]="cards()"
+        (cdkDropListDropped)="drop($event)"
+        class="space-y-3"
+      >
+        @for (card of cards(); track card.id) {
+          <div cdkDrag class="bg-card rounded-lg border p-4 shadow-sm">
             <div class="flex items-start gap-3">
-              <span scSortableHandle class="mt-1 p-1"></span>
+              <svg
+                cdkDragHandle
+                siGripVerticalIcon
+                class="text-muted-foreground mt-1 size-4 shrink-0 cursor-grab"
+              ></svg>
               <div class="flex-1 space-y-2">
                 <h4 class="font-medium">{{ card.title }}</h4>
                 <p class="text-muted-foreground text-sm">
@@ -105,6 +105,14 @@ export class KanbanSortableListDemo {
       priority: 'low',
     },
   ]);
+
+  drop(event: CdkDragDrop<KanbanCard[]>): void {
+    this.cards.update((cards) => {
+      const updated = [...cards];
+      moveItemInArray(updated, event.previousIndex, event.currentIndex);
+      return updated;
+    });
+  }
 
   getPriorityClass(priority: string): string {
     switch (priority) {

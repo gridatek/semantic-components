@@ -20,17 +20,19 @@ import { PlaylistSortableListDemo } from './playlist-sortable-list-demo';
 })
 export class PlaylistSortableListDemoContainer {
   readonly code = `import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDragHandle,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import {
-  ScSortableHandle,
-  ScSortableItem,
-  ScSortableList,
-  ScSortableOverlay,
-} from '@semantic-components/ui-lab';
+import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 interface PlaylistItem {
   id: number;
@@ -41,12 +43,7 @@ interface PlaylistItem {
 
 @Component({
   selector: 'app-playlist-sortable-list-demo',
-  imports: [
-    ScSortableList,
-    ScSortableItem,
-    ScSortableHandle,
-    ScSortableOverlay,
-  ],
+  imports: [CdkDropList, CdkDrag, CdkDragHandle, SiGripVerticalIcon],
   template: \`
     <div class="max-w-lg">
       <div class="rounded-lg border">
@@ -54,20 +51,21 @@ interface PlaylistItem {
           <h4 class="font-medium">My Playlist</h4>
         </div>
         <div
-          scSortableList
-          [(items)]="playlist"
-          [handleOnly]="true"
+          cdkDropList
+          [cdkDropListData]="playlist()"
+          (cdkDropListDropped)="drop($event)"
           class="divide-y"
         >
-          <div scSortableOverlay></div>
           @for (song of playlist(); track song.id; let i = $index) {
             <div
-              scSortableItem
-              [index]="i"
-              [item]="song"
+              cdkDrag
               class="hover:bg-muted/50 flex items-center gap-4 px-4 py-3"
             >
-              <span scSortableHandle class="p-1"></span>
+              <svg
+                cdkDragHandle
+                siGripVerticalIcon
+                class="text-muted-foreground size-4 shrink-0 cursor-grab"
+              ></svg>
               <span class="text-muted-foreground w-6 text-sm">
                 {{ i + 1 }}
               </span>
@@ -113,5 +111,13 @@ export class PlaylistSortableListDemo {
       duration: '6:24',
     },
   ]);
+
+  drop(event: CdkDragDrop<PlaylistItem[]>): void {
+    this.playlist.update((playlist) => {
+      const updated = [...playlist];
+      moveItemInArray(updated, event.previousIndex, event.currentIndex);
+      return updated;
+    });
+  }
 }`;
 }
