@@ -454,8 +454,7 @@
     "description": "A full-screen image viewer.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Link",
