@@ -37,7 +37,7 @@ import {
   ScSidebarRail,
   ScSidebarTrigger,
 } from '@semantic-components/ui';
-import { ScSeparator, cn } from '@semantic-components/ui';
+import { ScButton, ScKbd, ScSeparator, cn } from '@semantic-components/ui';
 import { ScThemeToggle } from '@semantic-components/ui-lab';
 import {
   SiBookOpenTextIcon,
@@ -45,9 +45,11 @@ import {
   SiDownloadIcon,
   SiMoonIcon,
   SiPanelLeftIcon,
+  SiSearchIcon,
   SiSunIcon,
 } from '@semantic-icons/lucide-icons';
 import { filter } from 'rxjs';
+import { CommandSearchService } from '../../components/command-search/command-search.service';
 import { Logo } from '../../components/logo/logo';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
@@ -85,6 +87,9 @@ import { ConfigService } from '../../services/config.service';
     SiBoxIcon,
     SiDownloadIcon,
     SiPanelLeftIcon,
+    SiSearchIcon,
+    ScButton,
+    ScKbd,
     Logo,
     Toc,
   ],
@@ -308,6 +313,28 @@ import { ConfigService } from '../../services/config.service';
           <span class="text-muted-foreground text-sm font-medium">
             Documentation
           </span>
+          <button
+            scButton
+            variant="outline"
+            (click)="openSearch()"
+            class="text-muted-foreground relative ml-auto hidden h-8 w-64 justify-start rounded-md text-sm sm:flex"
+          >
+            <svg siSearchIcon class="mr-2 size-4"></svg>
+            <span>Search docs...</span>
+            <kbd scKbd class="pointer-events-none absolute top-1.5 right-1.5">
+              ⌘K
+            </kbd>
+          </button>
+          <button
+            scButton
+            variant="ghost"
+            size="icon"
+            (click)="openSearch()"
+            aria-label="Search"
+            class="ml-auto sm:hidden"
+          >
+            <svg siSearchIcon></svg>
+          </button>
         </header>
 
         <div class="flex flex-1">
@@ -342,12 +369,17 @@ export class DocsLayout {
   protected readonly tocService = inject(TocService);
   private readonly componentsService = inject(ComponentsService);
   private readonly config = inject(ConfigService);
+  private readonly commandSearch = inject(CommandSearchService);
 
   private readonly contentArea =
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
   readonly components = this.componentsService.visibleComponents;
   protected readonly devMode = this.config.devMode;
+
+  openSearch(): void {
+    this.commandSearch.open();
+  }
 
   constructor() {
     afterNextRender(() => {

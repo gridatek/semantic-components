@@ -7,12 +7,14 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { cn } from '@semantic-components/ui';
+import { CommandSearch } from './components/command-search/command-search';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommandSearch],
   template: `
     <router-outlet />
+    <app-command-search />
   `,
   host: {
     '[class]': 'class()',

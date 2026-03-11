@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
+  ScButton,
+  ScKbd,
   ScLink,
   ScNavigationMenu,
   ScNavigationMenuContent,
@@ -34,11 +36,13 @@ import {
   SiGithubIcon,
   SiMenuIcon,
   SiMoonIcon,
+  SiSearchIcon,
   SiSunIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { ComponentsService } from '../../services/components.service';
 import { GithubService } from '../../services/github.service';
+import { CommandSearchService } from '../command-search/command-search.service';
 import { Logo } from '../logo/logo';
 
 @Component({
@@ -64,7 +68,10 @@ import { Logo } from '../logo/logo';
     ScNavigationMenuList,
     ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
+    ScButton,
+    ScKbd,
     SiGithubIcon,
+    SiSearchIcon,
     SiSunIcon,
     SiMoonIcon,
     SiMenuIcon,
@@ -139,6 +146,28 @@ import { Logo } from '../logo/logo';
 
         <!-- Actions -->
         <div scNavbarActions>
+          <button
+            scButton
+            variant="outline"
+            (click)="openSearch()"
+            class="text-muted-foreground relative hidden h-8 w-64 justify-start rounded-md text-sm md:flex"
+          >
+            <svg siSearchIcon class="mr-2 size-4"></svg>
+            <span>Search docs...</span>
+            <kbd scKbd class="pointer-events-none absolute top-1.5 right-1.5">
+              ⌘K
+            </kbd>
+          </button>
+          <button
+            scButton
+            variant="ghost"
+            size="icon"
+            (click)="openSearch()"
+            aria-label="Search"
+            class="md:hidden"
+          >
+            <svg siSearchIcon></svg>
+          </button>
           <a
             scLink
             variant="ghost"
@@ -236,4 +265,10 @@ export default class Navbar {
 
   private readonly github = inject(GithubService);
   protected readonly starCount = this.github.starCount;
+
+  private readonly commandSearch = inject(CommandSearchService);
+
+  openSearch(): void {
+    this.commandSearch.open();
+  }
 }
