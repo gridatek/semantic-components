@@ -5,10 +5,5 @@ export * from './lightbox-gallery-item';
 export * from './lightbox-image';
 export * from './lightbox-thumbnail';
 export * from './lightbox-portal';
-export * from './lightbox-provider';
-export {
-  SC_LIGHTBOX,
-  ScLightboxDirective,
-  ScLightboxDirective as ScLightbox,
-} from './lightbox';
+export { SC_LIGHTBOX_PROVIDER, ScLightboxProvider } from './lightbox-provider';
 export { ScLightboxContainer } from './lightbox-container';

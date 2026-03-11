@@ -1,5 +1,5 @@
 import { Directive, inject, input } from '@angular/core';
-import { SC_LIGHTBOX } from './lightbox';
+import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
   selector: '[scLightboxTrigger]',
@@ -10,10 +10,10 @@ import { SC_LIGHTBOX } from './lightbox';
   },
 })
 export class ScLightboxTrigger {
-  private readonly lightbox = inject(SC_LIGHTBOX);
+  private readonly provider = inject(SC_LIGHTBOX_PROVIDER);
   readonly index = input<number>(0);
 
   onClick(): void {
-    this.lightbox.open(this.index());
+    this.provider.open(this.index());
   }
 }

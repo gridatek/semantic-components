@@ -5,7 +5,6 @@ import {
 } from '@angular/core';
 import {
   LightboxImage,
-  ScLightbox,
   ScLightboxContainer,
   ScLightboxPortal,
   ScLightboxProvider,
@@ -16,15 +15,14 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-single-lightbox-demo',
   imports: [
-    ScLightbox,
+    ScLightboxProvider,
     ScLightboxContainer,
     ScLightboxTrigger,
-    ScLightboxProvider,
     ScLightboxPortal,
     SiXIcon,
   ],
   template: `
-    <div scLightbox [images]="[image]" #lightbox="scLightbox">
+    <div scLightboxProvider [images]="[image]" #lightbox="scLightboxProvider">
       <button
         scLightboxTrigger
         [index]="0"
@@ -37,46 +35,44 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         />
       </button>
 
-      <div scLightboxProvider>
-        <ng-template scLightboxPortal>
-          <div scLightboxContainer>
-            <button
-              type="button"
-              class="absolute top-4 right-4 z-10 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-              (click)="lightbox.close()"
-              aria-label="Close lightbox"
-            >
-              <svg siXIcon class="size-6"></svg>
-            </button>
+      <ng-template scLightboxPortal>
+        <div scLightboxContainer>
+          <button
+            type="button"
+            class="absolute top-4 right-4 z-10 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+            (click)="lightbox.close()"
+            aria-label="Close lightbox"
+          >
+            <svg siXIcon class="size-6"></svg>
+          </button>
 
-            <div
-              class="relative flex flex-1 items-center justify-center overflow-hidden"
-            >
-              <img
-                [src]="image.src"
-                [alt]="image.alt || 'Image'"
-                class="max-h-[calc(100vh-200px)] max-w-[calc(100vw-100px)] object-contain"
-                draggable="false"
-              />
-            </div>
-
-            @if (image.title || image.description) {
-              <div class="bg-black/50 px-4 py-3 text-white">
-                @if (image.title) {
-                  <h3 class="font-semibold">
-                    {{ image.title }}
-                  </h3>
-                }
-                @if (image.description) {
-                  <p class="text-sm text-white/80">
-                    {{ image.description }}
-                  </p>
-                }
-              </div>
-            }
+          <div
+            class="relative flex flex-1 items-center justify-center overflow-hidden"
+          >
+            <img
+              [src]="image.src"
+              [alt]="image.alt || 'Image'"
+              class="max-h-[calc(100vh-200px)] max-w-[calc(100vw-100px)] object-contain"
+              draggable="false"
+            />
           </div>
-        </ng-template>
-      </div>
+
+          @if (image.title || image.description) {
+            <div class="bg-black/50 px-4 py-3 text-white">
+              @if (image.title) {
+                <h3 class="font-semibold">
+                  {{ image.title }}
+                </h3>
+              }
+              @if (image.description) {
+                <p class="text-sm text-white/80">
+                  {{ image.description }}
+                </p>
+              }
+            </div>
+          }
+        </div>
+      </ng-template>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

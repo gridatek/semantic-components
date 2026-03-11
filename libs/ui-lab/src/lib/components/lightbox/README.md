@@ -5,26 +5,25 @@ Full-screen image viewer with zoom, navigation, and keyboard support. Built with
 ## Architecture
 
 ```
-ScLightboxDirective ([scLightbox])     ← State: images, currentIndex, isOpen, zoom
+ScLightboxProvider (div[scLightboxProvider])  ← State + CDK Overlay + backdrop + focus trap + keyboard
 ├── ScLightboxTrigger                  ← Opens lightbox at a given index
 ├── ScLightboxGallery                  ← Grid layout for thumbnails
 │   └── ScLightboxGalleryItem          ← Individual grid item (click to open)
-└── ScLightboxProvider                 ← CDK Overlay lifecycle, backdrop, focus trap
-    └── ScLightboxPortal (ng-template) ← Content projected into the overlay
-        ├── ScLightboxContainer        ← Dialog wrapper (role="dialog", aria-modal)
-        ├── ScLightboxImage            ← Displays current image with zoom transform
-        └── ScLightboxThumbnail        ← Thumbnail strip item with active ring
+└── ScLightboxPortal (ng-template)     ← Content projected into the overlay
+    ├── ScLightboxContainer            ← Dialog wrapper (role="dialog", aria-modal)
+    ├── ScLightboxImage                ← Displays current image with zoom transform
+    └── ScLightboxThumbnail            ← Thumbnail strip item with active ring
 ```
 
 State flows through the `SC_LIGHTBOX` injection token. Child directives inject it to read/write shared state (e.g., `lightbox.currentIndex()`, `lightbox.close()`).
 
 ## Components
 
-### ScLightboxDirective
+### ScLightboxProvider
 
-Root directive that owns all state.
+Root component that owns all state and manages the CDK Overlay lifecycle (create/attach/detach), backdrop animation, focus trapping, and keyboard shortcuts (+, -, 0, Esc).
 
-**Selector:** `[scLightbox]` | **Export:** `scLightbox`
+**Selector:** `div[scLightboxProvider]` | **Export:** `scLightbox`
 
 | Inputs          | Type              | Default | Description                |
 | --------------- | ----------------- | ------- | -------------------------- |
@@ -57,12 +56,6 @@ Root directive that owns all state.
 | `zoomLevel`    | `number`   | Current zoom (0.5-3)  |
 | `imageLoading` | `boolean`  | Image loading state   |
 | `currentImage` | `computed` | Current LightboxImage |
-
-### ScLightboxProvider
-
-Manages CDK Overlay lifecycle: creates/attaches/detaches the overlay, renders the backdrop with animation, traps focus, and handles keyboard shortcuts (+, -, 0, Esc).
-
-**Selector:** `div[scLightboxProvider]`
 
 ### ScLightboxPortal
 
@@ -125,7 +118,7 @@ interface LightboxImage {
 ### Basic
 
 ```html
-<div scLightbox [images]="images">
+<div scLightboxProvider [images]="images">
   <div class="flex gap-4">
     @for (image of images; track image.src; let i = $index) {
     <button scLightboxTrigger [index]="i" class="h-32 w-32 overflow-hidden rounded">
@@ -134,26 +127,24 @@ interface LightboxImage {
     }
   </div>
 
-  <div scLightboxProvider>
-    <ng-template scLightboxPortal>
-      <div scLightboxContainer>
-        <!-- your lightbox UI here: image, controls, thumbnails -->
-      </div>
-    </ng-template>
-  </div>
+  <ng-template scLightboxPortal>
+    <div scLightboxContainer>
+      <!-- your lightbox UI here: image, controls, thumbnails -->
+    </div>
+  </ng-template>
 </div>
 ```
 
 ### Controlled
 
 ```html
-<div scLightbox [images]="images" [(isOpen)]="isOpen" [(currentIndex)]="currentIndex">...</div>
+<div scLightboxProvider [images]="images" [(isOpen)]="isOpen" [(currentIndex)]="currentIndex">...</div>
 ```
 
 ### Programmatic
 
 ```html
-<div scLightbox #lightbox="scLightbox" [images]="images">
+<div scLightboxProvider #lightbox="scLightboxProvider" [images]="images">
   <button (click)="lightbox.open(2)">Open at Image 3</button>
   ...
 </div>
@@ -171,6 +162,10 @@ interface LightboxImage {
 | `0`     | Reset zoom     |
 
 Arrow keys are handled by the Carousel inside the container template. Esc/zoom keys are handled by the CDK Overlay keydown events in `ScLightboxProvider`.
+
+## Notes
+
+- `ScLightboxProvider` was created by merging the former `ScLightboxDirective` (state) and `ScLightboxProvider` (overlay) into a single component, eliminating the extra `<div scLightboxProvider>` wrapper in templates.
 
 ## Accessibility
 

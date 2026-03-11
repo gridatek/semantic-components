@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_LIGHTBOX } from './lightbox';
+import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
   selector: '[scLightboxContainer]',
@@ -10,11 +10,11 @@ import { SC_LIGHTBOX } from './lightbox';
     role: 'dialog',
     'aria-modal': 'true',
     '[attr.aria-label]':
-      "'Image gallery, showing image ' + (lightbox.currentIndex() + 1) + ' of ' + lightbox.images().length",
+      "'Image gallery, showing image ' + (provider.currentIndex() + 1) + ' of ' + provider.images().length",
   },
 })
 export class ScLightboxContainer {
-  readonly lightbox = inject(SC_LIGHTBOX);
+  readonly provider = inject(SC_LIGHTBOX_PROVIDER);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

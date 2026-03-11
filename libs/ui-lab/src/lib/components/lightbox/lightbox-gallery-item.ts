@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_LIGHTBOX } from './lightbox';
+import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
   selector: '[scLightboxGalleryItem]',
@@ -11,7 +11,7 @@ import { SC_LIGHTBOX } from './lightbox';
   },
 })
 export class ScLightboxGalleryItem {
-  private readonly lightbox = inject(SC_LIGHTBOX);
+  private readonly provider = inject(SC_LIGHTBOX_PROVIDER);
 
   readonly index = input<number>(0);
   readonly classInput = input<string>('', { alias: 'class' });
@@ -24,6 +24,6 @@ export class ScLightboxGalleryItem {
   );
 
   onClick(): void {
-    this.lightbox.open(this.index());
+    this.provider.open(this.index());
   }
 }
