@@ -6,8 +6,10 @@ import {
   afterNextRender,
   computed,
   contentChild,
+  effect,
   inject,
   input,
+  model,
   signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
@@ -25,6 +27,7 @@ export type ScCarouselPlugin = EmblaPluginType;
 
 @Component({
   selector: 'div[scCarousel]',
+  exportAs: 'scCarousel',
   template: `
     <ng-content />
   `,
@@ -52,6 +55,7 @@ export class ScCarousel {
 
   readonly canScrollPrev = signal(false);
   readonly canScrollNext = signal(false);
+  readonly activeIndex = model(0);
 
   private api: ScCarouselApi | null = null;
 
@@ -64,6 +68,7 @@ export class ScCarousel {
 
       const opts = {
         ...this.options(),
+        startIndex: this.activeIndex(),
         axis: (this.orientation() === 'horizontal' ? 'x' : 'y') as 'x' | 'y',
       };
 
@@ -78,6 +83,11 @@ export class ScCarousel {
         this.api?.destroy();
       });
     });
+
+    effect(() => {
+      const index = this.activeIndex();
+      this.api?.scrollTo(index);
+    });
   }
 
   scrollPrev(): void {
@@ -88,10 +98,19 @@ export class ScCarousel {
     this.api?.scrollNext();
   }
 
+  scrollTo(index: number): void {
+    this.api?.scrollTo(index);
+  }
+
   private updateScrollState(): void {
     if (!this.api) return;
     this.canScrollPrev.set(this.api.canScrollPrev());
     this.canScrollNext.set(this.api.canScrollNext());
+
+    const newIndex = this.api.selectedScrollSnap();
+    if (this.activeIndex() !== newIndex) {
+      this.activeIndex.set(newIndex);
+    }
   }
 
   protected onKeyDown(event: KeyboardEvent): void {

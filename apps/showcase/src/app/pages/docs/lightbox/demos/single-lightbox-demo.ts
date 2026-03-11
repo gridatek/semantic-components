@@ -7,7 +7,8 @@ import {
   LightboxImage,
   ScLightbox,
   ScLightboxContainer,
-  ScLightboxImage,
+  ScLightboxPortal,
+  ScLightboxProvider,
   ScLightboxTrigger,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
@@ -17,8 +18,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScLightbox,
     ScLightboxContainer,
-    ScLightboxImage,
     ScLightboxTrigger,
+    ScLightboxProvider,
+    ScLightboxPortal,
     SiXIcon,
   ],
   template: `
@@ -35,41 +37,46 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         />
       </button>
 
-      @if (lightbox.isOpen()) {
-        <div scLightboxContainer>
-          <button
-            type="button"
-            class="absolute top-4 right-4 z-10 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-            (click)="lightbox.close()"
-            aria-label="Close lightbox"
-          >
-            <svg siXIcon class="size-6"></svg>
-          </button>
+      <div scLightboxProvider>
+        <ng-template scLightboxPortal>
+          <div scLightboxContainer>
+            <button
+              type="button"
+              class="absolute top-4 right-4 z-10 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              (click)="lightbox.close()"
+              aria-label="Close lightbox"
+            >
+              <svg siXIcon class="size-6"></svg>
+            </button>
 
-          <div
-            class="relative flex flex-1 items-center justify-center overflow-hidden"
-          >
-            <img scLightboxImage />
-          </div>
-
-          @if (
-            lightbox.currentImage().title || lightbox.currentImage().description
-          ) {
-            <div class="bg-black/50 px-4 py-3 text-white">
-              @if (lightbox.currentImage().title) {
-                <h3 class="font-semibold">
-                  {{ lightbox.currentImage().title }}
-                </h3>
-              }
-              @if (lightbox.currentImage().description) {
-                <p class="text-sm text-white/80">
-                  {{ lightbox.currentImage().description }}
-                </p>
-              }
+            <div
+              class="relative flex flex-1 items-center justify-center overflow-hidden"
+            >
+              <img
+                [src]="image.src"
+                [alt]="image.alt || 'Image'"
+                class="max-h-[calc(100vh-200px)] max-w-[calc(100vw-100px)] object-contain"
+                draggable="false"
+              />
             </div>
-          }
-        </div>
-      }
+
+            @if (image.title || image.description) {
+              <div class="bg-black/50 px-4 py-3 text-white">
+                @if (image.title) {
+                  <h3 class="font-semibold">
+                    {{ image.title }}
+                  </h3>
+                }
+                @if (image.description) {
+                  <p class="text-sm text-white/80">
+                    {{ image.description }}
+                  </p>
+                }
+              </div>
+            }
+          </div>
+        </ng-template>
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
