@@ -63,6 +63,7 @@ export class ScThemeManager {
   });
 
   readonly isDark = computed(() => this.resolvedMode() === 'dark');
+  readonly isLight = computed(() => this.resolvedMode() === 'light');
 
   constructor() {
     effect(() => {

@@ -28,6 +28,7 @@ export class ScThemeModeToggle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly isDark = this.themeManager.isDark;
+  readonly isLight = this.themeManager.isLight;
 
   protected toggle(): void {
     this.themeManager.toggleMode();
