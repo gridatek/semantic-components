@@ -1,5 +1,6 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, computed, inject, input, model } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 
@@ -10,7 +11,7 @@ import { SC_FIELD } from '../field';
     'data-slot': 'slider',
     '[attr.id]': 'id()',
     '[attr.min]': 'min()',
-    '[attr.max]': 'max()',
+    '[attr.max]': 'maxComputed()',
     '[attr.step]': 'step()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
@@ -19,13 +20,14 @@ import { SC_FIELD } from '../field';
     '(input)': 'onInput($event)',
   },
 })
-export class ScSlider {
+export class ScSlider implements FormValueControl<number> {
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-slider-');
 
   readonly value = model(0);
-  readonly min = input(0);
-  readonly max = input(100);
+
+  readonly minInput = input<number | undefined>(0);
+  readonly maxInput = input<number | undefined>(100);
   readonly step = input(1);
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
@@ -35,6 +37,9 @@ export class ScSlider {
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
+  readonly min = computed(() => this.minInput() ?? 0);
+  readonly maxComputed = computed(() => this.maxInput() ?? 100);
+
   readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
@@ -43,7 +48,7 @@ export class ScSlider {
   );
 
   protected readonly fillPercent = computed(() => {
-    const range = this.max() - this.min();
+    const range = this.maxComputed() - this.min();
     if (range === 0) return '0%';
     const percent = ((this.value() - this.min()) / range) * 100;
     return `${percent}%`;
