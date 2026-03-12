@@ -4,15 +4,22 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import { ScTheme, ScThemeToggle } from '@semantic-components/ui-lab';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-theme-toggle-demo',
-  imports: [ScThemeToggle, SiSunIcon, SiMoonIcon],
+  imports: [ScButton, ScThemeToggle, SiSunIcon, SiMoonIcon],
   template: `
     <div class="flex items-center gap-4">
-      <button scThemeToggle #toggle="scThemeToggle">
+      <button
+        scButton
+        scThemeToggle
+        variant="outline"
+        size="icon"
+        #toggle="scThemeToggle"
+      >
         @if (toggle.isDark()) {
           <svg siSunIcon></svg>
         } @else {

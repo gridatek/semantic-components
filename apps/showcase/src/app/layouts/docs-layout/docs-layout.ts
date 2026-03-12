@@ -307,7 +307,11 @@ import { ConfigService } from '../../services/config.service';
         <div scSidebarFooter>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
-              <button scThemeToggle #themeToggle="scThemeToggle" class="w-full">
+              <button
+                scSidebarMenuButton
+                scThemeToggle
+                #themeToggle="scThemeToggle"
+              >
                 @if (themeToggle.isDark()) {
                   <svg siSunIcon></svg>
                 } @else {

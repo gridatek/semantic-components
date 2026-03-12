@@ -3,12 +3,13 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import { ScThemeToggle } from '@semantic-components/ui-lab';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-navigation-theme-toggle-demo',
-  imports: [ScThemeToggle, SiSunIcon, SiMoonIcon],
+  imports: [ScButton, ScThemeToggle, SiSunIcon, SiMoonIcon],
   template: `
     <div class="flex items-center justify-between rounded-lg border p-4">
       <div class="space-y-0.5">
@@ -17,7 +18,13 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
           Customize how the app looks on your device
         </p>
       </div>
-      <button scThemeToggle variant="outline" #toggle="scThemeToggle">
+      <button
+        scButton
+        scThemeToggle
+        variant="outline"
+        size="icon"
+        #toggle="scThemeToggle"
+      >
         @if (toggle.isDark()) {
           <svg siSunIcon></svg>
         } @else {

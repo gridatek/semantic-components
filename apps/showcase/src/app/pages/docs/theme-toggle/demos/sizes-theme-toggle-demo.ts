@@ -3,16 +3,18 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import { ScThemeToggle } from '@semantic-components/ui-lab';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sizes-theme-toggle-demo',
-  imports: [ScThemeToggle, SiSunIcon, SiMoonIcon],
+  imports: [ScButton, ScThemeToggle, SiSunIcon, SiMoonIcon],
   template: `
     <div class="flex items-center gap-4">
       <div class="flex flex-col items-center gap-2">
         <button
+          scButton
           scThemeToggle
           variant="outline"
           size="sm"
@@ -28,9 +30,9 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
+          scButton
           scThemeToggle
           variant="outline"
-          size="default"
           #toggle2="scThemeToggle"
         >
           @if (toggle2.isDark()) {
@@ -43,6 +45,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
+          scButton
           scThemeToggle
           variant="outline"
           size="lg"
@@ -58,6 +61,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div class="flex flex-col items-center gap-2">
         <button
+          scButton
           scThemeToggle
           variant="outline"
           size="icon"

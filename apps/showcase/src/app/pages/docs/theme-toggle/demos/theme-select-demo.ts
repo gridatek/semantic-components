@@ -2,17 +2,24 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
-import { ScThemeField, ScThemeSelect } from '@semantic-components/ui-lab';
+import { ScLabel, ScNativeSelect } from '@semantic-components/ui';
+import { ScTheme, Theme } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-theme-select-demo',
-  imports: [ScThemeField, ScThemeSelect],
+  imports: [ScLabel, ScNativeSelect],
   template: `
     <div class="space-y-4">
-      <div scThemeField class="max-w-xs">
-        <label class="text-sm font-medium">Theme</label>
-        <select scThemeSelect>
+      <div class="max-w-xs space-y-2">
+        <label scLabel for="theme-select">Theme</label>
+        <select
+          scNativeSelect
+          id="theme-select"
+          [value]="theme.theme()"
+          (change)="onThemeChange($event)"
+        >
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="system">System</option>
@@ -27,4 +34,11 @@ import { ScThemeField, ScThemeSelect } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeSelectDemo {}
+export class ThemeSelectDemo {
+  protected readonly theme = inject(ScTheme);
+
+  protected onThemeChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    this.theme.setTheme(target.value as Theme);
+  }
+}
