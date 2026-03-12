@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
-  ScButton,
+  ScLink,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -48,7 +48,7 @@ import {
     ScNavbarMobilePortal,
     ScNavbarMobileMenu,
     ScNavbarMobileLink,
-    ScButton,
+    ScLink,
     ScNavigationMenu,
     ScNavigationMenuContent,
     ScNavigationMenuItem,
@@ -72,57 +72,57 @@ import {
           <nav scNavigationMenu class="hidden md:flex">
             <ul scNavigationMenuList>
               <li scNavigationMenuItem>
-                <button scNavigationMenuTrigger>Features</button>
+                <button scNavigationMenuTrigger>Pages</button>
                 <ng-template scNavigationMenuPortal>
                   <div scNavigationMenuContent>
                     <ul
                       class="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2"
                     >
                       <li>
-                        <a scNavigationMenuLink href="#">
+                        <a scNavigationMenuLink routerLink="/dashboard">
                           <div class="text-sm leading-none font-medium">
-                            Analytics
+                            Dashboard
                           </div>
                           <p
                             class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
-                            Track your data and insights
+                            Sidebar layout with navigation
                           </p>
                         </a>
                       </li>
                       <li>
-                        <a scNavigationMenuLink href="#">
+                        <a scNavigationMenuLink routerLink="/settings">
                           <div class="text-sm leading-none font-medium">
-                            Reports
+                            Settings
                           </div>
                           <p
                             class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
-                            Generate detailed reports
+                            Account and profile management
                           </p>
                         </a>
                       </li>
                       <li>
-                        <a scNavigationMenuLink href="#">
+                        <a scNavigationMenuLink routerLink="/gallery">
                           <div class="text-sm leading-none font-medium">
-                            Automation
+                            Gallery
                           </div>
                           <p
                             class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
-                            Automate your workflows
+                            Component showcase reference
                           </p>
                         </a>
                       </li>
                       <li>
-                        <a scNavigationMenuLink href="#">
+                        <a scNavigationMenuLink routerLink="/data-table">
                           <div class="text-sm leading-none font-medium">
-                            Integration
+                            Data Table
                           </div>
                           <p
                             class="text-muted-foreground line-clamp-2 text-sm leading-snug"
                           >
-                            Connect with your tools
+                            Advanced table with sorting and filtering
                           </p>
                         </a>
                       </li>
@@ -132,25 +132,32 @@ import {
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/">Pricing</a>
+                <a scNavigationMenuLink routerLink="/pricing">Pricing</a>
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink href="#">About</a>
+                <a scNavigationMenuLink routerLink="/blog">Blog</a>
               </li>
 
               <li scNavigationMenuItem>
-                <a scNavigationMenuLink routerLink="/dashboard">Dashboard</a>
+                <a scNavigationMenuLink routerLink="/contact">Contact</a>
               </li>
             </ul>
           </nav>
         </div>
 
         <div scNavbarActions>
-          <button scButton variant="ghost" class="hidden md:inline-flex">
+          <a
+            scLink
+            variant="ghost"
+            routerLink="/login"
+            class="hidden md:inline-flex"
+          >
             Sign In
-          </button>
-          <button scButton class="hidden md:inline-flex">Get Started</button>
+          </a>
+          <a scLink routerLink="/signup" class="hidden md:inline-flex">
+            Get Started
+          </a>
           <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
             @if (trigger.isMobileMenuOpen()) {
               <svg siXIcon></svg>
@@ -176,9 +183,34 @@ import {
           >
             Home
           </a>
-          <a scNavbarMobileLink href="#" [active]="false">Features</a>
-          <a scNavbarMobileLink href="#" [active]="false">Pricing</a>
-          <a scNavbarMobileLink href="#" [active]="false">About</a>
+          <a
+            scNavbarMobileLink
+            routerLink="/pricing"
+            routerLinkActive="active"
+            #mobilePricingRla="routerLinkActive"
+            [active]="mobilePricingRla.isActive"
+          >
+            Pricing
+          </a>
+          <a
+            scNavbarMobileLink
+            routerLink="/blog"
+            routerLinkActive="active"
+            #mobileBlogRla="routerLinkActive"
+            [active]="mobileBlogRla.isActive"
+          >
+            Blog
+          </a>
+          <a
+            scNavbarMobileLink
+            routerLink="/contact"
+            routerLinkActive="active"
+            #mobileContactRla="routerLinkActive"
+            [active]="mobileContactRla.isActive"
+          >
+            Contact
+          </a>
+          <hr class="border-border my-2" />
           <a
             scNavbarMobileLink
             routerLink="/dashboard"
@@ -188,9 +220,38 @@ import {
           >
             Dashboard
           </a>
+          <a
+            scNavbarMobileLink
+            routerLink="/settings"
+            routerLinkActive="active"
+            #mobileSettingsRla="routerLinkActive"
+            [active]="mobileSettingsRla.isActive"
+          >
+            Settings
+          </a>
+          <a
+            scNavbarMobileLink
+            routerLink="/gallery"
+            routerLinkActive="active"
+            #mobileGalleryRla="routerLinkActive"
+            [active]="mobileGalleryRla.isActive"
+          >
+            Gallery
+          </a>
+          <a
+            scNavbarMobileLink
+            routerLink="/data-table"
+            routerLinkActive="active"
+            #mobileDataTableRla="routerLinkActive"
+            [active]="mobileDataTableRla.isActive"
+          >
+            Data Table
+          </a>
           <hr class="border-border my-2" />
-          <button scButton variant="ghost" class="w-full">Sign In</button>
-          <button scButton class="w-full">Get Started</button>
+          <a scLink variant="ghost" routerLink="/login" class="w-full">
+            Sign In
+          </a>
+          <a scLink routerLink="/signup" class="w-full">Get Started</a>
         </div>
       </div>
     </div>
