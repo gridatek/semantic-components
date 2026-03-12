@@ -21,14 +21,20 @@ import {
       <div
         scRangeSlider
         style="--primary: oklch(0.6 0.25 30); --muted: oklch(0.9 0.05 30); --ring: oklch(0.6 0.25 30)"
-        [(minValue)]="minValue"
-        [(maxValue)]="maxValue"
         [min]="0"
         [max]="50"
         [step]="1"
       >
-        <input scRangeSliderMin aria-label="Minimum temperature" />
-        <input scRangeSliderMax aria-label="Maximum temperature" />
+        <input
+          scRangeSliderMin
+          [(value)]="minValue"
+          aria-label="Minimum temperature"
+        />
+        <input
+          scRangeSliderMax
+          [(value)]="maxValue"
+          aria-label="Maximum temperature"
+        />
       </div>
     </div>
   `,
