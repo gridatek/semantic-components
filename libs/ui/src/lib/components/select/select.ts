@@ -1,5 +1,5 @@
 import { Combobox, ComboboxPopupContainer } from '@angular/aria/combobox';
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -10,30 +10,12 @@ import {
   effect,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
 import { ScSelectList } from './select-list';
 import { ScSelectOrigin } from './select-origin';
 import { ScSelectPortal } from './select-portal';
-
-const positions: ConnectedPosition[] = [
-  {
-    originX: 'start',
-    originY: 'bottom',
-    overlayX: 'start',
-    overlayY: 'top',
-    offsetY: 4,
-  },
-  {
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'bottom',
-    offsetY: -4,
-  },
-];
 
 @Component({
   selector: 'div[scSelect]',
@@ -50,14 +32,12 @@ const positions: ConnectedPosition[] = [
     <ng-template ngComboboxPopupContainer>
       @if (origin(); as origin) {
         <ng-template
-          cdkConnectedOverlay
-          [cdkConnectedOverlayOrigin]="origin"
-          [cdkConnectedOverlayOpen]="overlayOpen()"
-          [cdkConnectedOverlayPositions]="positions"
-          [cdkConnectedOverlayWidth]="origin.nativeElement.offsetWidth"
-          [cdkConnectedOverlayFlexibleDimensions]="true"
-          [cdkConnectedOverlayGrowAfterOpen]="true"
-          [cdkConnectedOverlayPush]="true"
+          [cdkConnectedOverlay]="{
+            origin,
+            usePopover: 'inline',
+            matchWidth: true,
+          }"
+          [cdkConnectedOverlayOpen]="true"
         >
           <ng-container [ngTemplateOutlet]="selectPortal().templateRef" />
         </ng-template>
@@ -73,9 +53,7 @@ const positions: ConnectedPosition[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelect {
-  protected readonly positions = positions;
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly overlayOpen = signal(false);
 
   private readonly trigger = contentChild(ScSelectOrigin);
   private readonly content = contentChild(ScSelectList, {
@@ -107,16 +85,5 @@ export class ScSelect {
 
   constructor() {
     effect(() => signalSetFn(this.combobox.readonly[SIGNAL], true));
-
-    // Open overlay immediately when expanded, but keep it open during exit animation
-    effect(() => {
-      if (this.combobox.expanded()) {
-        this.overlayOpen.set(true);
-      }
-    });
-  }
-
-  closeOverlay(): void {
-    this.overlayOpen.set(false);
   }
 }
