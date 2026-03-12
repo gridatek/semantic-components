@@ -35,6 +35,13 @@ export class ScSelectList {
     this.listbox.values.set(values as never);
   }
 
+  scrollToSelected() {
+    const value = this.listbox.values()?.[0];
+    if (value == null) return;
+    const item = this.items().find((i) => i.itemValue() === value);
+    item?.scrollIntoView();
+  }
+
   labelForValue(value: unknown): string {
     const item = this.items().find((i) => i.itemValue() === value);
     return item?.itemLabel() ?? '';

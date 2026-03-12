@@ -39,6 +39,10 @@ export class ScSelectItem {
   readonly itemValue = computed(() => this.option.value());
   readonly itemLabel = computed(() => this.option.label() || '');
 
+  scrollIntoView() {
+    this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
+  }
+
   constructor() {
     effect(() => {
       if (this.option.active()) {

@@ -127,13 +127,14 @@ export class ScSelect {
       }
     });
 
-    // Restore values when Listbox is recreated (overlay reopen)
+    // Restore values and scroll to selected when Listbox is recreated (overlay reopen)
     effect(() => {
       const content = this.content();
       if (content) {
         const stored = untracked(() => this._storedValues());
         if (stored.length > 0) {
           content.setValues(stored);
+          requestAnimationFrame(() => content.scrollToSelected());
         }
       }
     });
