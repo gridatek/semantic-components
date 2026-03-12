@@ -17,7 +17,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 | Component               | Selector                      | Responsibility                                                                      |
 | ----------------------- | ----------------------------- | ----------------------------------------------------------------------------------- |
 | `ScSelect`              | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic                                |
-| `ScSelectOrigin`        | `div[scSelectOrigin]`         | Trigger button, renders chevron icon, projects consumer content                     |
+| `ScSelectOrigin`        | `div[scSelectOrigin]`         | Styled container, serves as overlay positioning origin, projects consumer content   |
 | `ScSelectInput`         | `input[scSelectInput]`        | Visible input displaying selected value, wraps `ComboboxInput` from `@angular/aria` |
 | `ScSelectItemIcon`      | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)  |
 | `ScSelectPortal`        | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                         |
