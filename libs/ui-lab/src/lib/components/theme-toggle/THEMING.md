@@ -1,33 +1,27 @@
 # Theming Architecture
 
-## Current: Light / Dark Mode
-
-A single axis — **mode** — toggled via a `dark` class on `<html>`. CSS variables defined in `:root` (light) and `.dark` (dark) provide all color tokens.
-
-## Future: Multi-Color Themes
-
-### Two Independent Axes
+## Two Independent Axes
 
 | Axis      | Controls      | Mechanism              | Example values            |
 | --------- | ------------- | ---------------------- | ------------------------- |
 | **Mode**  | Brightness    | `.dark` class          | `light`, `dark`, `system` |
-| **Color** | Hue / palette | `data-theme` attribute | `blue`, `green`, `rose`   |
+| **Color** | Hue / palette | `data-theme` attribute | `default`, `blue`, `rose` |
 
 These compose independently:
 
 ```
-<html data-theme="blue">            → blue + light
-<html data-theme="blue" class="dark"> → blue + dark
-<html data-theme="rose">            → rose + light
-<html data-theme="rose" class="dark"> → rose + dark
+<html>                                 → default + light
+<html class="dark">                    → default + dark
+<html data-theme="rose">               → rose + light
+<html data-theme="rose" class="dark">  → rose + dark
 ```
 
-### CSS Variable Layers
+## CSS Variable Layers
 
 Each color scheme overrides the same set of CSS variables. The `dark` class provides the dark variant.
 
 ```css
-/* Default (blue) */
+/* Default — no data-theme attribute needed */
 :root {
   --primary: oklch(0.55 0.2 250);
   --accent: oklch(0.75 0.1 250);
@@ -50,18 +44,24 @@ Each color scheme overrides the same set of CSS variables. The `dark` class prov
 
 All components consume the same variable names (`--primary`, `--accent`, etc.) so they adapt automatically.
 
-### State Management
+## State Management
 
-`ScThemeManager` would manage two signals:
+`ScThemeManager` manages two signals:
 
-- `mode` — `'light' | 'dark' | 'system'` (existing)
-- `colorScheme` — `'blue' | 'green' | 'rose' | ...` (new)
+- `mode` — `ScThemeMode` (`'light' | 'dark' | 'system'`)
+- `colorScheme` — `string` (e.g., `'default'`, `'blue'`, `'rose'`)
 
-Both persisted independently to `localStorage`.
+Both are persisted independently to `localStorage`. The `mode` controls the `.dark` class on `<html>`, while `colorScheme` controls the `data-theme` attribute.
 
-### Key Principles
+## Adding a New Color Scheme
+
+1. Define the CSS variables for both light and dark variants
+2. Call `themeManager.setColorScheme('your-scheme')` — no component changes needed
+
+## Key Principles
 
 1. **Same variable names everywhere** — components never reference a specific color scheme, only tokens like `--primary`.
 2. **Mode and color are orthogonal** — changing one doesn't affect the other.
 3. **CSS-only switching** — no JS needed to restyle; just swap the `data-theme` attribute and/or `dark` class.
 4. **Extensible** — adding a new color scheme means adding one CSS block with light/dark variants. No component changes needed.
+5. **Configurable** — defaults and storage keys can be overridden via `SC_THEME_CONFIG` injection token.

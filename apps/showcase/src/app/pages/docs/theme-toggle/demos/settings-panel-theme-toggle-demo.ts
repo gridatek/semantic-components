@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { ScNativeSelect } from '@semantic-components/ui';
-import { ScTheme, ScThemeManager } from '@semantic-components/ui-lab';
+import { ScThemeManager, ScThemeMode } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-settings-panel-theme-toggle-demo',
@@ -23,7 +23,7 @@ import { ScTheme, ScThemeManager } from '@semantic-components/ui-lab';
           <select
             scNativeSelect
             class="w-32"
-            [value]="theme.theme()"
+            [value]="themeManager.mode()"
             (change)="onThemeChange($event)"
           >
             <option value="light">Light</option>
@@ -39,10 +39,10 @@ import { ScTheme, ScThemeManager } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsPanelThemeToggleDemo {
-  protected readonly theme = inject(ScThemeManager);
+  protected readonly themeManager = inject(ScThemeManager);
 
   protected onThemeChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    this.theme.setTheme(target.value as ScTheme);
+    this.themeManager.setMode(target.value as ScThemeMode);
   }
 }

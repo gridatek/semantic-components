@@ -27,7 +27,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         }
       </button>
       <span class="text-muted-foreground text-sm">
-        Current: {{ themeService.resolvedTheme() }}
+        Current: {{ themeManager.resolvedMode() }}
       </span>
     </div>
   `,
@@ -36,5 +36,5 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicThemeToggleDemo {
-  protected readonly themeService = inject(ScThemeManager);
+  protected readonly themeManager = inject(ScThemeManager);
 }

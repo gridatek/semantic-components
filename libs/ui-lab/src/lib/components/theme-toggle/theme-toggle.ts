@@ -37,6 +37,6 @@ export class ScThemeToggle {
   );
 
   protected toggle(): void {
-    this.themeManager.toggleTheme();
+    this.themeManager.toggleMode();
   }
 }

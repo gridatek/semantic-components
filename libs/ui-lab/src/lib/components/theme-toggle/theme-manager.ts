@@ -1,81 +1,150 @@
-import { Injectable, computed, effect, signal } from '@angular/core';
+import {
+  Injectable,
+  InjectionToken,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 
-export type ScTheme = 'light' | 'dark' | 'system';
+export type ScThemeMode = 'light' | 'dark' | 'system';
+
+export interface ScThemeConfig {
+  defaultMode: ScThemeMode;
+  defaultColorScheme: string;
+  modeStorageKey: string;
+  colorSchemeStorageKey: string;
+}
+
+const defaultConfig: ScThemeConfig = {
+  defaultMode: 'system',
+  defaultColorScheme: 'default',
+  modeStorageKey: 'sc-theme-mode',
+  colorSchemeStorageKey: 'sc-theme-color',
+};
+
+export const SC_THEME_CONFIG = new InjectionToken<Partial<ScThemeConfig>>(
+  'SC_THEME_CONFIG',
+);
 
 @Injectable({ providedIn: 'root' })
 export class ScThemeManager {
-  private readonly storageKey = 'sc-theme';
+  private readonly config = {
+    ...defaultConfig,
+    ...inject(SC_THEME_CONFIG, { optional: true }),
+  };
+
   private readonly darkMediaQuery =
     typeof window !== 'undefined'
       ? window.matchMedia('(prefers-color-scheme: dark)')
       : null;
 
-  readonly theme = signal<ScTheme>(this.getStoredTheme());
+  readonly mode = signal<ScThemeMode>(
+    this.getStored(
+      this.config.modeStorageKey,
+      this.config.defaultMode,
+      this.isValidMode,
+    ),
+  );
 
-  readonly resolvedTheme = computed(() => {
-    const theme = this.theme();
-    if (theme === 'system') {
-      return this.getSystemTheme();
+  readonly colorScheme = signal<string>(
+    this.getStored(
+      this.config.colorSchemeStorageKey,
+      this.config.defaultColorScheme,
+    ),
+  );
+
+  readonly resolvedMode = computed(() => {
+    const mode = this.mode();
+    if (mode === 'system') {
+      return this.getSystemMode();
     }
-    return theme;
+    return mode;
   });
 
-  readonly isDark = computed(() => this.resolvedTheme() === 'dark');
+  readonly isDark = computed(() => this.resolvedMode() === 'dark');
 
   constructor() {
     effect(() => {
-      const resolved = this.resolvedTheme();
-      this.applyTheme(resolved);
+      this.applyMode(this.resolvedMode());
+    });
+
+    effect(() => {
+      this.applyColorScheme(this.colorScheme());
     });
 
     this.darkMediaQuery?.addEventListener('change', () => {
-      if (this.theme() === 'system') {
-        this.applyTheme(this.getSystemTheme());
+      if (this.mode() === 'system') {
+        this.applyMode(this.getSystemMode());
       }
     });
   }
 
-  setTheme(theme: ScTheme): void {
-    this.theme.set(theme);
-    this.storeTheme(theme);
+  setMode(mode: ScThemeMode): void {
+    this.mode.set(mode);
+    this.store(this.config.modeStorageKey, mode);
   }
 
-  toggleTheme(): void {
-    const current = this.resolvedTheme();
-    const next = current === 'dark' ? 'light' : 'dark';
-    this.setTheme(next);
+  toggleMode(): void {
+    const current = this.resolvedMode();
+    this.setMode(current === 'dark' ? 'light' : 'dark');
   }
 
-  private getStoredTheme(): ScTheme {
+  setColorScheme(colorScheme: string): void {
+    this.colorScheme.set(colorScheme);
+    this.store(this.config.colorSchemeStorageKey, colorScheme);
+  }
+
+  private isValidMode(value: string): value is ScThemeMode {
+    return value === 'light' || value === 'dark' || value === 'system';
+  }
+
+  private getStored<T extends string>(
+    key: string,
+    fallback: T,
+    validate?: (value: string) => value is T,
+  ): T {
     if (typeof localStorage === 'undefined') {
-      return 'system';
+      return fallback;
     }
-    const stored = localStorage.getItem(this.storageKey);
-    if (stored === 'light' || stored === 'dark' || stored === 'system') {
-      return stored;
+    const stored = localStorage.getItem(key);
+    if (stored && (!validate || validate(stored))) {
+      return stored as T;
     }
-    return 'system';
+    return fallback;
   }
 
-  private storeTheme(theme: ScTheme): void {
+  private store(key: string, value: string): void {
     if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(this.storageKey, theme);
+      localStorage.setItem(key, value);
     }
   }
 
-  private getSystemTheme(): 'light' | 'dark' {
+  private getSystemMode(): 'light' | 'dark' {
     return this.darkMediaQuery?.matches ? 'dark' : 'light';
   }
 
-  private applyTheme(theme: 'light' | 'dark'): void {
+  private applyMode(mode: 'light' | 'dark'): void {
     if (typeof document === 'undefined') {
       return;
     }
     const root = document.documentElement;
-    if (theme === 'dark') {
+    if (mode === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
+    }
+  }
+
+  private applyColorScheme(colorScheme: string): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+    const root = document.documentElement;
+    if (colorScheme === 'default') {
+      root.removeAttribute('data-theme');
+    } else {
+      root.setAttribute('data-theme', colorScheme);
     }
   }
 }
