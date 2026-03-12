@@ -26,6 +26,11 @@ export class ScRangeSliderMin {
     const maxVal =
       this.rangeSlider.maxThumb()?.value() ?? this.rangeSlider.max();
     const midpoint = (this.rangeSlider.min() + this.rangeSlider.max()) / 2;
+
+    // When both thumbs overlap, drop the min thumb's z-index so the max
+    // thumb (higher in DOM order) becomes grabbable — this lets the user
+    // drag the range open. When overlapping in the upper half, keep min
+    // on top so it can be dragged left instead.
     const stepBack = this.value() === maxVal && this.value() <= midpoint;
 
     return cn(...MIN_THUMB_CLASSES, stepBack && 'z-0', this.classInput());

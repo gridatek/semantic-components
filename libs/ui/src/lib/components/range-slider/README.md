@@ -44,6 +44,13 @@ Directive for the maximum value range input.
 
 Automatically clamps its value so it cannot go below `minValue`.
 
+## Overlap handling
+
+When both thumbs are dragged to the same position the slider automatically keeps them usable:
+
+- **Track click**: when equidistant from both thumbs, the max thumb is preferred so the range can expand outward. The min thumb is only chosen when the click is at or below the current collapsed value.
+- **z-index swap**: the min thumb normally stacks above the max thumb (`z-10`). When both thumbs overlap in the lower half of the range, the min thumb drops to `z-0` so the max thumb becomes grabbable. In the upper half the min thumb stays on top so it can be dragged left.
+
 ## Accessibility
 
 - Thumb inputs are native `<input type="range">` elements — provide `aria-label` attributes to describe each input.

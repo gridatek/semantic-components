@@ -72,6 +72,10 @@ export class ScRangeSlider {
     const distToMin = Math.abs(stepped - minVal);
     const distToMax = Math.abs(stepped - maxVal);
 
+    // When equidistant (e.g. both thumbs at same position), prefer the max
+    // thumb so the range can expand outward. Only pick the min thumb when
+    // the click is at or below the current min value (both thumbs collapsed
+    // at the upper end).
     if (
       distToMin < distToMax ||
       (distToMin === distToMax && stepped <= minVal)
