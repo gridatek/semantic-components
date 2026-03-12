@@ -1,11 +1,11 @@
-# Theme Toggle
+# Theme
 
-A behavior-only directive for toggling themes, paired with a configurable service for theme state management. Consumers provide their own styles.
+Configurable theme management with mode switching (light/dark/system) and color scheme support. Consumers provide their own styles.
 
 ## Architecture
 
 - **`ScThemeManager`** — Singleton service managing two independent axes: mode (light/dark/system) and color scheme. Handles persistence and system preference detection.
-- **`ScThemeToggle`** — A directive that adds toggle behavior and ARIA attributes to a `<button>`. No styles — consumers compose it with their own styling (e.g., `ScButton`, `ScSidebarMenuButton`, or plain Tailwind classes).
+- **`ScThemeModeToggle`** — A behavior-only directive that toggles mode on click. No styles — consumers compose it with their own styling (e.g., `ScButton`, `ScSidebarMenuButton`, or plain Tailwind classes).
 - **`SC_THEME_CONFIG`** — Injection token for customizing defaults and storage keys.
 
 ## Usage
@@ -13,11 +13,13 @@ A behavior-only directive for toggling themes, paired with a configurable servic
 ### With ScButton
 
 ```html
-<button scButton scThemeToggle variant="outline" size="icon" #toggle="scThemeToggle">
+<button scButton scThemeModeToggle variant="outline" size="icon" #toggle="scThemeModeToggle">
   @if (toggle.isDark()) {
   <svg siSunIcon></svg>
+  <span class="sr-only">Switch to light theme</span>
   } @else {
   <svg siMoonIcon></svg>
+  <span class="sr-only">Switch to dark theme</span>
   }
 </button>
 ```
@@ -25,11 +27,13 @@ A behavior-only directive for toggling themes, paired with a configurable servic
 ### With custom classes
 
 ```html
-<button scThemeToggle #toggle="scThemeToggle" class="hover:bg-accent rounded-full p-2">
+<button scThemeModeToggle #toggle="scThemeModeToggle" class="hover:bg-accent rounded-full p-2">
   @if (toggle.isDark()) {
   <svg siSunIcon></svg>
+  <span class="sr-only">Switch to light theme</span>
   } @else {
   <svg siMoonIcon></svg>
+  <span class="sr-only">Switch to dark theme</span>
   }
 </button>
 ```
@@ -37,7 +41,7 @@ A behavior-only directive for toggling themes, paired with a configurable servic
 ### Using ScThemeManager directly
 
 ```typescript
-import { ScThemeManager } from '@semantic-components/ui-lab';
+import { ScThemeManager } from '@semantic-components/ui';
 
 export class MyComponent {
   private themeManager = inject(ScThemeManager);
@@ -45,6 +49,7 @@ export class MyComponent {
   mode = this.themeManager.mode; // Signal<ScThemeMode>
   resolvedMode = this.themeManager.resolvedMode; // Signal<'light' | 'dark'>
   isDark = this.themeManager.isDark; // Signal<boolean>
+  isLight = this.themeManager.isLight; // Signal<boolean>
   colorScheme = this.themeManager.colorScheme; // Signal<string>
 
   setDark() {
@@ -64,7 +69,7 @@ export class MyComponent {
 ### Custom configuration
 
 ```typescript
-import { SC_THEME_CONFIG } from '@semantic-components/ui-lab';
+import { SC_THEME_CONFIG } from '@semantic-components/ui';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -81,20 +86,19 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-## ScThemeToggle
+## ScThemeModeToggle
 
-Behavior-only directive. Toggles mode on click, manages ARIA attributes.
+Behavior-only directive. Toggles mode on click. Consumers handle accessibility via `sr-only` spans or `aria-label`.
 
-**Selector:** `button[scThemeToggle]` | **Export:** `scThemeToggle`
+**Selector:** `button[scThemeModeToggle]` | **Export:** `scThemeModeToggle`
 
-| Public Property | Type              | Description                 |
-| --------------- | ----------------- | --------------------------- |
-| `isDark`        | `Signal<boolean>` | Whether dark mode is active |
+| Public Property | Type              | Description                  |
+| --------------- | ----------------- | ---------------------------- |
+| `isDark`        | `Signal<boolean>` | Whether dark mode is active  |
+| `isLight`       | `Signal<boolean>` | Whether light mode is active |
 
 **Host bindings:**
 
-- `aria-label` — "Switch to light/dark theme"
-- `aria-pressed` — reflects `isDark()`
 - `(click)` — calls `toggleMode()`
 
 ## ScThemeManager
@@ -106,6 +110,7 @@ Singleton service for theme state.
 | `mode`         | `Signal<ScThemeMode>`       | Current mode ('light', 'dark', 'system') |
 | `resolvedMode` | `Signal<'light' \| 'dark'>` | Actual applied mode (resolves 'system')  |
 | `isDark`       | `Signal<boolean>`           | Whether dark mode is currently active    |
+| `isLight`      | `Signal<boolean>`           | Whether light mode is currently active   |
 | `colorScheme`  | `Signal<string>`            | Current color scheme                     |
 
 | Method           | Parameters            | Description                   |
@@ -131,6 +136,4 @@ Mode and color scheme are persisted independently to `localStorage` and restored
 
 ## Accessibility
 
-- `aria-label` describes the toggle action
-- `aria-pressed` indicates current state
-- Full keyboard navigation support
+Consumers are responsible for providing accessible labels, either via `sr-only` spans inside the button or `aria-label` on the button element.
