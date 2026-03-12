@@ -15,9 +15,17 @@ export class ComponentsService {
 
   readonly components = computed(() => this.componentsResource.value() ?? []);
 
-  readonly visibleComponents = computed(() =>
-    this.configService.devMode()
+  readonly visibleComponents = computed(() => {
+    const all = this.configService.devMode()
       ? this.components()
-      : this.components().filter((c) => !c.hidden),
-  );
+      : this.components().filter((c) => !c.hidden);
+    return all.filter((c) => c.category !== 'Utilities');
+  });
+
+  readonly visibleUtilities = computed(() => {
+    const all = this.configService.devMode()
+      ? this.components()
+      : this.components().filter((c) => !c.hidden);
+    return all.filter((c) => c.category === 'Utilities');
+  });
 }

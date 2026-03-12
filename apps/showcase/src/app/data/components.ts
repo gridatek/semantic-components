@@ -12,7 +12,8 @@ export type ComponentCategory =
   | 'Overlay'
   | 'Media'
   | 'Editor'
-  | 'Advanced';
+  | 'Advanced'
+  | 'Utilities';
 
 export interface ComponentItem {
   name: string;
