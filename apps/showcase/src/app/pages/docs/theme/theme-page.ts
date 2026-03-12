@@ -14,7 +14,7 @@ import { ThemeSelectDemoContainer } from './demos/theme-select-demo-container';
 import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-demo-container';
 
 @Component({
-  selector: 'app-theme-toggle-page',
+  selector: 'app-theme-page',
   imports: [
     BasicThemeToggleDemoContainer,
     VariantsThemeToggleDemoContainer,
@@ -34,7 +34,7 @@ import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-
           A component for switching between light and dark themes with system
           preference support.
         </p>
-        <app-component-badges path="theme-toggle" />
+        <app-component-badges path="theme" />
       </div>
 
       <section class="space-y-8">
@@ -51,4 +51,4 @@ import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ThemeTogglePage {}
+export default class ThemePage {}

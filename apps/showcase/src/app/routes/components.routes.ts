@@ -550,10 +550,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/textarea/textarea-page'),
       },
       {
-        path: 'theme-toggle',
-        title: 'Theme Toggle - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/theme-toggle/theme-toggle-page'),
+        path: 'theme',
+        title: 'Theme - Semantic Components',
+        loadComponent: () => import('../pages/docs/theme/theme-page'),
       },
       {
         path: 'time-picker',

@@ -845,12 +845,12 @@
     "category": "Forms"
   },
   {
-    "name": "Theme Toggle",
-    "path": "theme-toggle",
-    "description": "Switch between light and dark themes.",
+    "name": "Theme",
+    "path": "theme",
+    "description": "Theme management with mode switching and color scheme support.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Buttons & Actions",
+    "category": "Utilities",
     "hidden": true
   },
   {
