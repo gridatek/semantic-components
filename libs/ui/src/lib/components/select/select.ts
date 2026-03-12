@@ -10,12 +10,31 @@ import {
   effect,
   inject,
   input,
+  signal,
+  untracked,
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
 import { ScSelectList } from './select-list';
 import { ScSelectOrigin } from './select-origin';
 import { ScSelectPortal } from './select-portal';
+
+const positions = [
+  {
+    originX: 'start' as const,
+    originY: 'bottom' as const,
+    overlayX: 'start' as const,
+    overlayY: 'top' as const,
+    offsetY: 4,
+  },
+  {
+    originX: 'start' as const,
+    originY: 'top' as const,
+    overlayX: 'start' as const,
+    overlayY: 'bottom' as const,
+    offsetY: -4,
+  },
+];
 
 @Component({
   selector: 'div[scSelect]',
@@ -37,7 +56,8 @@ import { ScSelectPortal } from './select-portal';
             usePopover: 'inline',
             matchWidth: true,
           }"
-          [cdkConnectedOverlayOpen]="true"
+          [cdkConnectedOverlayOpen]="combobox.expanded()"
+          [cdkConnectedOverlayPositions]="positions"
         >
           <ng-container [ngTemplateOutlet]="selectPortal().templateRef" />
         </ng-template>
@@ -54,6 +74,7 @@ import { ScSelectPortal } from './select-portal';
 })
 export class ScSelect {
   readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly positions = positions;
 
   private readonly trigger = contentChild(ScSelectOrigin);
   private readonly content = contentChild(ScSelectList, {
@@ -62,8 +83,14 @@ export class ScSelect {
   protected readonly selectPortal = contentChild.required(ScSelectPortal);
 
   readonly origin = computed(() => this.trigger()?.elementRef);
-  readonly values = computed(() => this.content()?.values() ?? []);
-  // TODO: may remove — will use value from input instead
+
+  // Persist selected values across overlay destroy/create cycles
+  private readonly _storedValues = signal<unknown[]>([]);
+  private readonly _storedLabel = signal('');
+
+  readonly values = computed(
+    () => this.content()?.values() ?? this._storedValues(),
+  );
   readonly value = computed(() => {
     const vals = this.values();
     return vals.length > 0 ? vals[0] : undefined;
@@ -75,7 +102,7 @@ export class ScSelect {
     if (list) {
       return list.labelForValue(value);
     }
-    return String(value);
+    return this._storedLabel();
   });
   protected readonly class = computed(() =>
     cn('relative min-w-36 w-fit', this.classInput()),
@@ -85,5 +112,31 @@ export class ScSelect {
 
   constructor() {
     effect(() => signalSetFn(this.combobox.readonly[SIGNAL], true));
+
+    // Store values and label when selection changes
+    effect(() => {
+      const content = this.content();
+      if (!content) return;
+      const vals = content.values();
+      if (vals.length > 0) {
+        const label = content.labelForValue(vals[0]);
+        untracked(() => {
+          this._storedValues.set([...vals]);
+          this._storedLabel.set(label);
+        });
+      }
+    });
+
+    // Restore values and scroll to selected when Listbox is recreated (overlay reopen)
+    effect(() => {
+      const content = this.content();
+      if (content) {
+        const stored = untracked(() => this._storedValues());
+        if (stored.length > 0) {
+          content.setValues(stored);
+          requestAnimationFrame(() => content.scrollToSelected());
+        }
+      }
+    });
   }
 }
