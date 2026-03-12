@@ -37,8 +37,7 @@ import {
   ScSidebarRail,
   ScSidebarTrigger,
 } from '@semantic-components/ui';
-import { ScSeparator, cn } from '@semantic-components/ui';
-import { ScThemeModeToggle } from '@semantic-components/ui-lab';
+import { ScSeparator, ScThemeModeToggle, cn } from '@semantic-components/ui';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,

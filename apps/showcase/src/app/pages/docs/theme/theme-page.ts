@@ -29,7 +29,7 @@ import { VariantsThemeToggleDemoContainer } from './demos/variants-theme-toggle-
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>ThemeToggle</h1>
+        <h1 scHeading>Theme</h1>
         <p class="text-muted-foreground">
           A component for switching between light and dark themes with system
           preference support.

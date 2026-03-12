@@ -33,7 +33,6 @@ export * from './spotlight';
 export * from './stat-card';
 export * from './stepper';
 export * from './tag-input';
-export * from './theme';
 export * from './time-picker-clock';
 export * from './timeline';
 export * from './timezone';

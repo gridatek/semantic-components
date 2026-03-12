@@ -4,8 +4,11 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
-import { ScThemeManager, ScThemeModeToggle } from '@semantic-components/ui-lab';
+import {
+  ScButton,
+  ScThemeManager,
+  ScThemeModeToggle,
+} from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

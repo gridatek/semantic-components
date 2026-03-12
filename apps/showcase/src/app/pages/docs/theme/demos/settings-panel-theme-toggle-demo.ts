@@ -4,8 +4,11 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { ScNativeSelect } from '@semantic-components/ui';
-import { ScThemeManager, ScThemeMode } from '@semantic-components/ui-lab';
+import {
+  ScNativeSelect,
+  ScThemeManager,
+  ScThemeMode,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-settings-panel-theme-toggle-demo',

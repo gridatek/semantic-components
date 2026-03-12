@@ -16,6 +16,7 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
+  ScThemeModeToggle,
   cn,
 } from '@semantic-components/ui';
 import {
@@ -28,7 +29,6 @@ import {
   ScNavbarMobilePortal,
   ScNavbarMobileTrigger,
   ScNavbarProvider,
-  ScThemeModeToggle,
 } from '@semantic-components/ui-lab';
 import {
   SiGithubIcon,

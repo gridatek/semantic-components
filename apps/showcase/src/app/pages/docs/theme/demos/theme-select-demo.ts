@@ -4,8 +4,12 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { ScLabel, ScNativeSelect } from '@semantic-components/ui';
-import { ScThemeManager, ScThemeMode } from '@semantic-components/ui-lab';
+import {
+  ScLabel,
+  ScNativeSelect,
+  ScThemeManager,
+  ScThemeMode,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-theme-select-demo',

@@ -849,9 +849,8 @@
     "path": "theme",
     "description": "Theme management with mode switching and color scheme support.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Utilities",
-    "hidden": true
+    "library": "ui",
+    "category": "Utilities"
   },
   {
     "name": "Time Picker",
