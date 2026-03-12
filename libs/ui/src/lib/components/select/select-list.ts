@@ -31,6 +31,10 @@ export class ScSelectList {
   readonly values = computed(() => this.listbox.values());
   readonly classInput = input<string>('', { alias: 'class' });
 
+  setValues(values: unknown[]) {
+    this.listbox.values.set(values as never);
+  }
+
   labelForValue(value: unknown): string {
     const item = this.items().find((i) => i.itemValue() === value);
     return item?.itemLabel() ?? '';
