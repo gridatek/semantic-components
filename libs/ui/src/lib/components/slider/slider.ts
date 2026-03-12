@@ -10,8 +10,8 @@ import { SC_FIELD } from '../field';
     type: 'range',
     'data-slot': 'slider',
     '[attr.id]': 'id()',
-    '[attr.min]': 'min()',
-    '[attr.max]': 'maxComputed()',
+    '[attr.min]': 'resolvedMin()',
+    '[attr.max]': 'resolvedMax()',
     '[attr.step]': 'step()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
@@ -23,11 +23,10 @@ import { SC_FIELD } from '../field';
 export class ScSlider implements FormValueControl<number> {
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-slider-');
-
   readonly value = model(0);
 
-  readonly minInput = input<number | undefined>(0);
-  readonly maxInput = input<number | undefined>(100);
+  readonly min = input<number | undefined>(undefined);
+  readonly max = input<number | undefined>(undefined);
   readonly step = input(1);
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
@@ -37,8 +36,8 @@ export class ScSlider implements FormValueControl<number> {
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  readonly min = computed(() => this.minInput() ?? 0);
-  readonly maxComputed = computed(() => this.maxInput() ?? 100);
+  readonly resolvedMin = computed(() => this.min() ?? 0);
+  readonly resolvedMax = computed(() => this.max() ?? 100);
 
   readonly ariaDescribedBy = computed(
     () =>
@@ -48,9 +47,9 @@ export class ScSlider implements FormValueControl<number> {
   );
 
   protected readonly fillPercent = computed(() => {
-    const range = this.maxComputed() - this.min();
+    const range = this.resolvedMax() - this.resolvedMin();
     if (range === 0) return '0%';
-    const percent = ((this.value() - this.min()) / range) * 100;
+    const percent = ((this.value() - this.resolvedMin()) / range) * 100;
     return `${percent}%`;
   });
 
