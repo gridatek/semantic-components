@@ -85,7 +85,7 @@ interface CommandItem {
         <span>Click or press</span>
         <kbd
           scKbd
-          scHotkey="mod+k"
+          scHotkey="mod+j"
           #hk="scHotkey"
           (scHotkeyPressed)="toggleOpen()"
         >
