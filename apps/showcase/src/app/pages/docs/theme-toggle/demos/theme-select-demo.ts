@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { ScLabel, ScNativeSelect } from '@semantic-components/ui';
-import { ScTheme, Theme } from '@semantic-components/ui-lab';
+import { ScTheme, ScThemeManager } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-theme-select-demo',
@@ -35,10 +35,10 @@ import { ScTheme, Theme } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSelectDemo {
-  protected readonly theme = inject(ScTheme);
+  protected readonly theme = inject(ScThemeManager);
 
   protected onThemeChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    this.theme.setTheme(target.value as Theme);
+    this.theme.setTheme(target.value as ScTheme);
   }
 }

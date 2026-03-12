@@ -1,16 +1,16 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
 
-export type Theme = 'light' | 'dark' | 'system';
+export type ScTheme = 'light' | 'dark' | 'system';
 
 @Injectable({ providedIn: 'root' })
-export class ScTheme {
+export class ScThemeManager {
   private readonly storageKey = 'sc-theme';
   private readonly darkMediaQuery =
     typeof window !== 'undefined'
       ? window.matchMedia('(prefers-color-scheme: dark)')
       : null;
 
-  readonly theme = signal<Theme>(this.getStoredTheme());
+  readonly theme = signal<ScTheme>(this.getStoredTheme());
 
   readonly resolvedTheme = computed(() => {
     const theme = this.theme();
@@ -35,7 +35,7 @@ export class ScTheme {
     });
   }
 
-  setTheme(theme: Theme): void {
+  setTheme(theme: ScTheme): void {
     this.theme.set(theme);
     this.storeTheme(theme);
   }
@@ -46,7 +46,7 @@ export class ScTheme {
     this.setTheme(next);
   }
 
-  private getStoredTheme(): Theme {
+  private getStoredTheme(): ScTheme {
     if (typeof localStorage === 'undefined') {
       return 'system';
     }
@@ -57,7 +57,7 @@ export class ScTheme {
     return 'system';
   }
 
-  private storeTheme(theme: Theme): void {
+  private storeTheme(theme: ScTheme): void {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(this.storageKey, theme);
     }

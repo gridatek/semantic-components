@@ -1,2 +1,2 @@
 export * from './theme-toggle';
-export * from './theme.service';
+export * from './theme-manager';

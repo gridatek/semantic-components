@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScTheme, ScThemeToggle } from '@semantic-components/ui-lab';
+import { ScThemeManager, ScThemeToggle } from '@semantic-components/ui-lab';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -36,5 +36,5 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicThemeToggleDemo {
-  protected readonly themeService = inject(ScTheme);
+  protected readonly themeService = inject(ScThemeManager);
 }

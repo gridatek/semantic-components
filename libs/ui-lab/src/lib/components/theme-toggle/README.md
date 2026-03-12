@@ -4,7 +4,7 @@ A behavior-only directive for toggling themes, paired with a service for theme s
 
 ## Architecture
 
-- **`ScTheme`** — Singleton service that owns theme state, persistence, and system preference detection.
+- **`ScThemeManager`** — Singleton service that owns theme state, persistence, and system preference detection.
 - **`ScThemeToggle`** — A directive that adds toggle behavior and ARIA attributes to a `<button>`. No styles — consumers compose it with their own styling (e.g., `ScButton`, `ScSidebarMenuButton`, or plain Tailwind classes).
 
 ## Usage
@@ -33,24 +33,24 @@ A behavior-only directive for toggling themes, paired with a service for theme s
 </button>
 ```
 
-### Using ScTheme service directly
+### Using ScThemeManager directly
 
 ```typescript
-import { ScTheme } from '@semantic-components/ui-lab';
+import { ScThemeManager } from '@semantic-components/ui-lab';
 
 export class MyComponent {
-  private theme = inject(ScTheme);
+  private themeManager = inject(ScThemeManager);
 
-  currentTheme = this.theme.theme; // Signal<'light' | 'dark' | 'system'>
-  resolvedTheme = this.theme.resolvedTheme; // Signal<'light' | 'dark'>
-  isDark = this.theme.isDark; // Signal<boolean>
+  currentTheme = this.themeManager.theme; // Signal<ScTheme>
+  resolvedTheme = this.themeManager.resolvedTheme; // Signal<'light' | 'dark'>
+  isDark = this.themeManager.isDark; // Signal<boolean>
 
   setDark() {
-    this.theme.setTheme('dark');
+    this.themeManager.setTheme('dark');
   }
 
   toggle() {
-    this.theme.toggleTheme();
+    this.themeManager.toggleTheme();
   }
 }
 ```
@@ -71,20 +71,20 @@ Behavior-only directive. Toggles theme on click, manages ARIA attributes.
 - `aria-pressed` — reflects `isDark()`
 - `(click)` — calls `toggleTheme()`
 
-## ScTheme
+## ScThemeManager
 
 Singleton service for theme state.
 
 | Property        | Type                        | Description                                 |
 | --------------- | --------------------------- | ------------------------------------------- |
-| `theme`         | `Signal<Theme>`             | Current setting ('light', 'dark', 'system') |
+| `theme`         | `Signal<ScTheme>`           | Current setting ('light', 'dark', 'system') |
 | `resolvedTheme` | `Signal<'light' \| 'dark'>` | Actual applied theme (resolves 'system')    |
 | `isDark`        | `Signal<boolean>`           | Whether dark theme is currently active      |
 
-| Method        | Parameters     | Description                   |
-| ------------- | -------------- | ----------------------------- |
-| `setTheme`    | `theme: Theme` | Set the theme explicitly      |
-| `toggleTheme` | none           | Toggle between light and dark |
+| Method        | Parameters       | Description                   |
+| ------------- | ---------------- | ----------------------------- |
+| `setTheme`    | `theme: ScTheme` | Set the theme explicitly      |
+| `toggleTheme` | none             | Toggle between light and dark |
 
 ## Persistence
 

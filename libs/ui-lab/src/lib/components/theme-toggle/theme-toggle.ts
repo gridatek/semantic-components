@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { ScTheme } from './theme.service';
+import { ScThemeManager } from './theme-manager';
 
 @Component({
   selector: 'button[scThemeToggle]',
@@ -26,17 +26,17 @@ import { ScTheme } from './theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScThemeToggle {
-  private readonly themeService = inject(ScTheme);
+  private readonly themeManager = inject(ScThemeManager);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly isDark = this.themeService.isDark;
+  readonly isDark = this.themeManager.isDark;
 
   protected readonly ariaLabel = computed(() =>
     this.isDark() ? 'Switch to light theme' : 'Switch to dark theme',
   );
 
   protected toggle(): void {
-    this.themeService.toggleTheme();
+    this.themeManager.toggleTheme();
   }
 }
