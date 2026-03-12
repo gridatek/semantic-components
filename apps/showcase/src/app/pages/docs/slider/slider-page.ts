@@ -8,12 +8,14 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSliderDemoContainer } from './demos/basic-slider-demo-container';
 import { CustomColorSliderDemoContainer } from './demos/custom-color-slider-demo-container';
+import { FormSliderDemoContainer } from './demos/form-slider-demo-container';
 
 @Component({
   selector: 'app-slider-page',
   imports: [
     BasicSliderDemoContainer,
     CustomColorSliderDemoContainer,
+    FormSliderDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -33,6 +35,7 @@ import { CustomColorSliderDemoContainer } from './demos/custom-color-slider-demo
         <h2 scHeading appToc>Examples</h2>
         <app-basic-slider-demo-container />
         <app-custom-color-slider-demo-container />
+        <app-form-slider-demo-container />
       </section>
     </div>
   `,

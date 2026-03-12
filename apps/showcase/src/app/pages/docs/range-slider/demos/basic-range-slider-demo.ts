@@ -18,16 +18,17 @@ import {
       <label scLabel>
         Price range: {{ '$' + minValue }} &ndash; {{ '$' + maxValue }}
       </label>
-      <div
-        scRangeSlider
-        [(minValue)]="minValue"
-        [(maxValue)]="maxValue"
-        [min]="0"
-        [max]="1000"
-        [step]="10"
-      >
-        <input scRangeSliderMin aria-label="Minimum price" />
-        <input scRangeSliderMax aria-label="Maximum price" />
+      <div scRangeSlider [min]="0" [max]="1000" [step]="10">
+        <input
+          scRangeSliderMin
+          [(value)]="minValue"
+          aria-label="Minimum price"
+        />
+        <input
+          scRangeSliderMax
+          [(value)]="maxValue"
+          aria-label="Maximum price"
+        />
       </div>
     </div>
   `,

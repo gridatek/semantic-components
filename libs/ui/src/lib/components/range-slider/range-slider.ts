@@ -2,11 +2,16 @@ import {
   Directive,
   ElementRef,
   computed,
+  contentChild,
+  forwardRef,
   inject,
   input,
-  model,
 } from '@angular/core';
 import { cn } from '../../utils';
+// Imported here (below the class) to avoid circular dependency at class-definition time.
+// The forwardRef(() => ...) above defers resolution until runtime.
+import { ScRangeSliderMax } from './range-slider-max';
+import { ScRangeSliderMin } from './range-slider-min';
 
 @Directive({
   selector: 'div[scRangeSlider]',
@@ -22,13 +27,13 @@ export class ScRangeSlider {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly minValue = model<number>(0);
-  readonly maxValue = model<number>(100);
-
   readonly min = input<number>(0);
   readonly max = input<number>(100);
   readonly step = input<number>(1);
   readonly disabled = input<boolean>(false);
+
+  readonly minThumb = contentChild(forwardRef(() => ScRangeSliderMin));
+  readonly maxThumb = contentChild(forwardRef(() => ScRangeSliderMax));
 
   protected readonly class = computed(() =>
     cn('relative flex h-3 w-full items-center', this.classInput()),
@@ -36,12 +41,14 @@ export class ScRangeSlider {
 
   readonly minPercent = computed(() => {
     const range = this.max() - this.min();
-    return range === 0 ? 0 : ((this.minValue() - this.min()) / range) * 100;
+    const minVal = this.minThumb()?.value() ?? this.min();
+    return range === 0 ? 0 : ((minVal - this.min()) / range) * 100;
   });
 
   readonly maxPercent = computed(() => {
     const range = this.max() - this.min();
-    return range === 0 ? 0 : ((this.maxValue() - this.min()) / range) * 100;
+    const maxVal = this.maxThumb()?.value() ?? this.max();
+    return range === 0 ? 0 : ((maxVal - this.min()) / range) * 100;
   });
 
   protected readonly minPercentCss = computed(() => `${this.minPercent()}%`);
@@ -57,21 +64,18 @@ export class ScRangeSlider {
     const value = this.min() + (percent / 100) * (this.max() - this.min());
     const stepped = Math.round(value / this.step()) * this.step();
 
-    const distToMin = Math.abs(stepped - this.minValue());
-    const distToMax = Math.abs(stepped - this.maxValue());
+    const minThumb = this.minThumb();
+    const maxThumb = this.maxThumb();
+    const minVal = minThumb?.value() ?? this.min();
+    const maxVal = maxThumb?.value() ?? this.max();
+
+    const distToMin = Math.abs(stepped - minVal);
+    const distToMax = Math.abs(stepped - maxVal);
 
     if (distToMin <= distToMax) {
-      this.minValue.set(this.clampMin(stepped));
+      minThumb?.value.set(Math.min(stepped, maxVal));
     } else {
-      this.maxValue.set(this.clampMax(stepped));
+      maxThumb?.value.set(Math.max(stepped, minVal));
     }
-  }
-
-  clampMin(val: number): number {
-    return Math.min(val, this.maxValue());
-  }
-
-  clampMax(val: number): number {
-    return Math.max(val, this.minValue());
   }
 }

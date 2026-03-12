@@ -1,4 +1,4 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, computed, inject, input, model } from '@angular/core';
 import { cn } from '../../utils';
 import { ScRangeSlider } from './range-slider';
 import { MAX_THUMB_CLASSES } from './range-slider-thumb-base';
@@ -11,7 +11,7 @@ import { MAX_THUMB_CLASSES } from './range-slider-thumb-base';
     '[max]': 'rangeSlider.max()',
     '[step]': 'rangeSlider.step()',
     '[disabled]': 'rangeSlider.disabled()',
-    '[value]': 'rangeSlider.maxValue()',
+    '[value]': 'value()',
     '[class]': 'class()',
     '(input)': 'onInput($event)',
   },
@@ -20,6 +20,7 @@ export class ScRangeSliderMax {
   protected readonly rangeSlider = inject(ScRangeSlider);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly value = model<number>(this.rangeSlider.max());
 
   protected readonly class = computed(() =>
     cn(...MAX_THUMB_CLASSES, this.classInput()),
@@ -28,8 +29,10 @@ export class ScRangeSliderMax {
   protected onInput(event: Event) {
     const el = event.target as HTMLInputElement;
     const val = +el.value;
-    const clamped = this.rangeSlider.clampMax(val);
-    this.rangeSlider.maxValue.set(clamped);
+    const minVal =
+      this.rangeSlider.minThumb()?.value() ?? this.rangeSlider.min();
+    const clamped = Math.max(val, minVal);
+    this.value.set(clamped);
 
     if (val !== clamped) {
       el.value = String(clamped);
