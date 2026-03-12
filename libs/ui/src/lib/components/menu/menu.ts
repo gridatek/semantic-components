@@ -16,6 +16,8 @@ import { ScMenuPortal } from './menu-portal';
   host: {
     'data-slot': 'menu',
     '[class]': 'class()',
+    'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',
+    'animate.leave': 'animate-out fade-out-0 zoom-out-95 duration-150',
   },
 })
 export class ScMenu<V = string> {
