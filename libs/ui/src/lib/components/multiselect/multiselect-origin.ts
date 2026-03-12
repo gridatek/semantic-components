@@ -10,19 +10,19 @@ import {
 import { cn } from '../../utils';
 
 @Component({
-  selector: 'div[scMultiselectInputGroup]',
+  selector: 'div[scMultiselectOrigin]',
   imports: [],
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'multiselect-input-group',
+    'data-slot': 'multiselect-origin',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScMultiselectInputGroup {
+export class ScMultiselectOrigin {
   readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly classInput = input<string>('', { alias: 'class' });
 

@@ -1,10 +1,8 @@
-import { Combobox } from '@angular/aria/combobox';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
-  inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
@@ -18,6 +16,8 @@ import { cn } from '../../utils';
   host: {
     'data-slot': 'multiselect-popup',
     '[class]': 'class()',
+    'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',
+    'animate.leave': 'animate-out fade-out-0 zoom-out-95 duration-150',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,12 +25,9 @@ import { cn } from '../../utils';
 export class ScMultiselectPopup {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly combobox = inject(Combobox);
-
   protected readonly class = computed(() =>
     cn(
-      'bg-popover text-popover-foreground mt-2 w-full rounded-lg border p-1 shadow-md transition-all duration-150',
-      this.combobox.expanded() ? '' : 'invisible max-h-0 overflow-hidden',
+      'bg-popover text-popover-foreground w-full overflow-hidden rounded-lg border p-1 shadow-md',
       this.classInput(),
     ),
   );

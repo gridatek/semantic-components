@@ -7,7 +7,9 @@ Displays a list of options for the user to pick from — mimics a native select.
 - Full keyboard navigation support
 - ARIA-compliant accessibility
 - Automatic scroll-to-active on keyboard navigation
-- Overlay positioning with CDK
+- Overlay positioning with CDK (`usePopover: 'inline'`) with fallback (opens above when insufficient space below)
+- Value persistence across overlay open/close cycles
+- Enter/leave animations on popup
 - Customizable styling via `class` input
 - Signal forms support via `formField` on the input
 - `exportAs: 'scSelect'` for direct template access
@@ -21,7 +23,7 @@ Displays a list of options for the user to pick from — mimics a native select.
 | `ScSelectInput`         | `input[scSelectInput]`        | Visible input displaying selected value, wraps `ComboboxInput` from `@angular/aria` |
 | `ScSelectItemIcon`      | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)  |
 | `ScSelectPortal`        | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                         |
-| `ScSelectPopup`         | `div[scSelectPopup]`          | Popup container with styling, animation, and visibility                             |
+| `ScSelectPopup`         | `div[scSelectPopup]`          | Popup container with styling and enter/leave animations                             |
 | `ScSelectList`          | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                             |
 | `ScSelectItem`          | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                     |
 | `ScSelectGroup`         | `div[scSelectGroup]`          | Groups related options together with vertical layout                                |
