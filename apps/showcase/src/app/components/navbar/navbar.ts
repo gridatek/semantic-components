@@ -177,8 +177,10 @@ import { Logo } from '../logo/logo';
           <button scThemeModeToggle #themeToggle="scThemeModeToggle">
             @if (themeToggle.isDark()) {
               <svg siSunIcon></svg>
+              <span class="sr-only">Switch to light theme</span>
             } @else {
               <svg siMoonIcon></svg>
+              <span class="sr-only">Switch to dark theme</span>
             }
           </button>
           <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">

@@ -22,8 +22,10 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         >
           @if (toggle1.isDark()) {
             <svg siSunIcon></svg>
+            <span class="sr-only">Switch to light theme</span>
           } @else {
             <svg siMoonIcon></svg>
+            <span class="sr-only">Switch to dark theme</span>
           }
         </button>
         <span class="text-muted-foreground text-xs">Small</span>
@@ -37,8 +39,10 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         >
           @if (toggle2.isDark()) {
             <svg siSunIcon></svg>
+            <span class="sr-only">Switch to light theme</span>
           } @else {
             <svg siMoonIcon></svg>
+            <span class="sr-only">Switch to dark theme</span>
           }
         </button>
         <span class="text-muted-foreground text-xs">Default</span>
@@ -53,8 +57,10 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         >
           @if (toggle3.isDark()) {
             <svg siSunIcon></svg>
+            <span class="sr-only">Switch to light theme</span>
           } @else {
             <svg siMoonIcon></svg>
+            <span class="sr-only">Switch to dark theme</span>
           }
         </button>
         <span class="text-muted-foreground text-xs">Large</span>
@@ -69,8 +75,10 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         >
           @if (toggle4.isDark()) {
             <svg siSunIcon></svg>
+            <span class="sr-only">Switch to light theme</span>
           } @else {
             <svg siMoonIcon></svg>
+            <span class="sr-only">Switch to dark theme</span>
           }
         </button>
         <span class="text-muted-foreground text-xs">Icon</span>

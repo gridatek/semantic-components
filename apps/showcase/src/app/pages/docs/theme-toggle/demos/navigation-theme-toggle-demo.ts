@@ -27,8 +27,10 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
       >
         @if (toggle.isDark()) {
           <svg siSunIcon></svg>
+          <span class="sr-only">Switch to light theme</span>
         } @else {
           <svg siMoonIcon></svg>
+          <span class="sr-only">Switch to dark theme</span>
         }
       </button>
     </div>
