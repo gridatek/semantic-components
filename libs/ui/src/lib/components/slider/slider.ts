@@ -25,7 +25,9 @@ export class ScSlider implements FormValueControl<number> {
   private readonly fallbackId = inject(_IdGenerator).getId('sc-slider-');
   readonly value = model(0);
 
+  // Don't use input<number>(0) — type must be input<number | undefined> to match FormUiControl
   readonly min = input<number | undefined>(undefined);
+  // Don't use input<number>(100) — type must be input<number | undefined> to match FormUiControl
   readonly max = input<number | undefined>(undefined);
   readonly step = input(1);
   readonly idInput = input('', { alias: 'id' });
@@ -36,6 +38,7 @@ export class ScSlider implements FormValueControl<number> {
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
+  // Can't name these "min"/"max" — those names are taken by the inputs above
   readonly resolvedMin = computed(() => this.min() ?? 0);
   readonly resolvedMax = computed(() => this.max() ?? 100);
 
