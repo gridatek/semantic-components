@@ -46,6 +46,7 @@ import {
   SiMoonIcon,
   SiPanelLeftIcon,
   SiSunIcon,
+  SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
 import { filter } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
@@ -85,6 +86,7 @@ import { ConfigService } from '../../services/config.service';
     SiBoxIcon,
     SiDownloadIcon,
     SiPanelLeftIcon,
+    SiWrenchIcon,
     Logo,
     Toc,
   ],
@@ -274,6 +276,29 @@ import { ConfigService } from '../../services/config.service';
                     }
                   </ul>
                 </li>
+                @if (utilities().length > 0) {
+                  <li scSidebarMenuItem>
+                    <a scSidebarMenuButton>
+                      <svg siWrenchIcon></svg>
+                      <span>Utilities</span>
+                    </a>
+                    <ul scSidebarMenuSub>
+                      @for (item of utilities(); track item.path) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            [routerLink]="'/docs/components/' + item.path"
+                            routerLinkActive
+                            #utilRla="routerLinkActive"
+                            [isActive]="utilRla.isActive"
+                          >
+                            <span>{{ item.name }}</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </li>
+                }
               </ul>
             </div>
           </div>
@@ -347,6 +372,7 @@ export class DocsLayout {
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
   readonly components = this.componentsService.visibleComponents;
+  readonly utilities = this.componentsService.visibleUtilities;
   protected readonly devMode = this.config.devMode;
 
   constructor() {
