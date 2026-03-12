@@ -27,12 +27,14 @@ export class SettingsPanelThemeToggleDemoContainer {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
-import { ScThemeSelect } from '@semantic-components/ui-lab';
+import { ScNativeSelect } from '@semantic-components/ui';
+import { ScTheme, ScThemeManager } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-settings-panel-theme-toggle-demo',
-  imports: [ScThemeSelect],
+  imports: [ScNativeSelect],
   template: \`
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
@@ -43,7 +45,12 @@ import { ScThemeSelect } from '@semantic-components/ui-lab';
               Select your preferred theme
             </p>
           </div>
-          <select scThemeSelect class="w-32">
+          <select
+            scNativeSelect
+            class="w-32"
+            [value]="theme.theme()"
+            (change)="onThemeChange($event)"
+          >
             <option value="light">Light</option>
             <option value="dark">Dark</option>
             <option value="system">System</option>
@@ -56,5 +63,12 @@ import { ScThemeSelect } from '@semantic-components/ui-lab';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsPanelThemeToggleDemo {}`;
+export class SettingsPanelThemeToggleDemo {
+  protected readonly theme = inject(ScThemeManager);
+
+  protected onThemeChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    this.theme.setTheme(target.value as ScTheme);
+  }
+}`;
 }
