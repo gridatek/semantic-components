@@ -61,7 +61,7 @@ import {
         <div scSeparator class="my-6"></div>
 
         <div scTabs class="w-full">
-          <div scTabList>
+          <div scTabList [selectedTab]="'profile'">
             <button scTab value="profile">Profile</button>
             <button scTab value="account">Account</button>
             <button scTab value="notifications">Notifications</button>
