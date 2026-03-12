@@ -16,8 +16,8 @@ import {
 } from '@semantic-components/ui';
 
 interface PriceRangeFormModel {
-  minPrice: string;
-  maxPrice: string;
+  minPrice: number;
+  maxPrice: number;
 }
 
 @Component({
@@ -66,8 +66,8 @@ interface PriceRangeFormModel {
 })
 export class FormRangeSliderDemo {
   readonly formModel = signal<PriceRangeFormModel>({
-    minPrice: '100',
-    maxPrice: '750',
+    minPrice: 100,
+    maxPrice: 750,
   });
 
   readonly priceForm = form(this.formModel);
