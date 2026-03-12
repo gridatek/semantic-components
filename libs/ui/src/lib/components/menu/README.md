@@ -1,6 +1,6 @@
 # Menu
 
-A dropdown menu component built on top of `@angular/aria/menu` and `@angular/cdk/overlay`. Supports keyboard navigation, submenus, lazy content, and full accessibility.
+A dropdown menu component built on top of `@angular/aria/menu` and `@angular/cdk/overlay`. Supports keyboard navigation, submenus, lazy content, animations, and full accessibility.
 
 ## Components
 
@@ -96,6 +96,19 @@ All components accept a `class` input for style overrides via `cn()` (Tailwind m
 </div>
 ```
 
+## Animations
+
+`ScMenu` uses Angular's `animate.enter` and `animate.leave` host bindings with `tw-animate-css` classes for open/close transitions (fade + zoom, 150ms).
+
+### Submenu overlay lifecycle
+
+The submenu overlay is controlled by `ScMenuItem.submenuOpen`, which uses a two-phase approach:
+
+1. **Bootstrap phase**: When the parent menu opens and `menuItem.expanded()` is `null` (submenu not yet connected), the overlay opens briefly so `ScMenu` can register itself with `ScMenuPortal`, which connects `menuItem.submenu`.
+2. **Normal phase**: Once connected, `expanded()` returns `false` (closed) or `true` (open). The overlay opens/closes based on `menuItem.expanded() !== false`, enabling `animate.enter`/`animate.leave` to fire on actual submenu expansion.
+
+This avoids a deadlock: the `Menu` instance only exists when the overlay is open, but `menuItem.expanded` requires the submenu to be connected first.
+
 ## Auto-wiring
 
 The menu components use a push-based registration pattern to minimize boilerplate:
@@ -121,9 +134,9 @@ This means no manual `[menu]`, `[submenu]`, `[open]`, `[config]`, or `[positions
 
 ### ScMenu outputs
 
-| Output     | Type           | Description                           |
-| ---------- | -------------- | ------------------------------------- |
-| `onSelect` | `EventEmitter` | Emitted when a menu item is selected. |
+| Output         | Type           | Description                           |
+| -------------- | -------------- | ------------------------------------- |
+| `itemSelected` | `EventEmitter` | Emitted when a menu item is selected. |
 
 ### ScMenuItem
 
