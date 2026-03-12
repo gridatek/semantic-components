@@ -22,9 +22,14 @@ export class ScRangeSliderMin {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = model<number>(this.rangeSlider.min());
 
-  protected readonly class = computed(() =>
-    cn(...MIN_THUMB_CLASSES, this.classInput()),
-  );
+  protected readonly class = computed(() => {
+    const maxVal =
+      this.rangeSlider.maxThumb()?.value() ?? this.rangeSlider.max();
+    const midpoint = (this.rangeSlider.min() + this.rangeSlider.max()) / 2;
+    const stepBack = this.value() === maxVal && this.value() <= midpoint;
+
+    return cn(...MIN_THUMB_CLASSES, stepBack && 'z-0', this.classInput());
+  });
 
   protected onInput(event: Event) {
     const el = event.target as HTMLInputElement;

@@ -72,7 +72,10 @@ export class ScRangeSlider {
     const distToMin = Math.abs(stepped - minVal);
     const distToMax = Math.abs(stepped - maxVal);
 
-    if (distToMin <= distToMax) {
+    if (
+      distToMin < distToMax ||
+      (distToMin === distToMax && stepped <= minVal)
+    ) {
       minThumb?.value.set(Math.min(stepped, maxVal));
     } else {
       maxThumb?.value.set(Math.max(stepped, minVal));
