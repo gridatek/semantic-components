@@ -9,10 +9,10 @@ import {
 import { ScThemeManager } from './theme-manager';
 
 @Component({
-  selector: 'button[scThemeToggle]',
-  exportAs: 'scThemeToggle',
+  selector: 'button[scThemeModeToggle]',
+  exportAs: 'scThemeModeToggle',
   host: {
-    'data-slot': 'theme-toggle',
+    'data-slot': 'theme-mode-toggle',
     type: 'button',
     '[class]': 'classInput()',
     '[attr.aria-label]': 'ariaLabel()',
@@ -25,7 +25,7 @@ import { ScThemeManager } from './theme-manager';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScThemeToggle {
+export class ScThemeModeToggle {
   private readonly themeManager = inject(ScThemeManager);
 
   readonly classInput = input<string>('', { alias: 'class' });

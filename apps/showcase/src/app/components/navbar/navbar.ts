@@ -28,7 +28,7 @@ import {
   ScNavbarMobilePortal,
   ScNavbarMobileTrigger,
   ScNavbarProvider,
-  ScThemeToggle,
+  ScThemeModeToggle,
 } from '@semantic-components/ui-lab';
 import {
   SiGithubIcon,
@@ -56,7 +56,7 @@ import { Logo } from '../logo/logo';
     ScNavbarMobileLink,
     ScNavbarMobileTrigger,
     ScLink,
-    ScThemeToggle,
+    ScThemeModeToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
     ScNavigationMenuItem,
@@ -174,7 +174,7 @@ import { Logo } from '../logo/logo';
           >
             Get Started
           </a>
-          <button scThemeToggle #themeToggle="scThemeToggle">
+          <button scThemeModeToggle #themeToggle="scThemeModeToggle">
             @if (themeToggle.isDark()) {
               <svg siSunIcon></svg>
             } @else {

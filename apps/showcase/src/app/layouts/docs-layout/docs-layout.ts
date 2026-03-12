@@ -38,7 +38,7 @@ import {
   ScSidebarTrigger,
 } from '@semantic-components/ui';
 import { ScSeparator, cn } from '@semantic-components/ui';
-import { ScThemeToggle } from '@semantic-components/ui-lab';
+import { ScThemeModeToggle } from '@semantic-components/ui-lab';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,
@@ -79,7 +79,7 @@ import { ConfigService } from '../../services/config.service';
     ScSidebarTrigger,
     ScSidebarRail,
     ScSeparator,
-    ScThemeToggle,
+    ScThemeModeToggle,
     SiSunIcon,
     SiMoonIcon,
     SiBookOpenTextIcon,
@@ -309,8 +309,8 @@ import { ConfigService } from '../../services/config.service';
             <li scSidebarMenuItem>
               <button
                 scSidebarMenuButton
-                scThemeToggle
-                #themeToggle="scThemeToggle"
+                scThemeModeToggle
+                #themeToggle="scThemeModeToggle"
               >
                 @if (themeToggle.isDark()) {
                   <svg siSunIcon></svg>

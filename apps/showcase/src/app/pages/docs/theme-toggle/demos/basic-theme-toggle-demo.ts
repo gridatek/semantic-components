@@ -5,20 +5,20 @@ import {
   inject,
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScThemeManager, ScThemeToggle } from '@semantic-components/ui-lab';
+import { ScThemeManager, ScThemeModeToggle } from '@semantic-components/ui-lab';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-theme-toggle-demo',
-  imports: [ScButton, ScThemeToggle, SiSunIcon, SiMoonIcon],
+  imports: [ScButton, ScThemeModeToggle, SiSunIcon, SiMoonIcon],
   template: `
     <div class="flex items-center gap-4">
       <button
         scButton
-        scThemeToggle
+        scThemeModeToggle
         variant="outline"
         size="icon"
-        #toggle="scThemeToggle"
+        #toggle="scThemeModeToggle"
       >
         @if (toggle.isDark()) {
           <svg siSunIcon></svg>
