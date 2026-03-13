@@ -26,19 +26,18 @@ export class MyComponent {}
 
 **Selector:** `input[scInput]`
 
-| Input              | Type                   | Default     | Description                                       |
-| ------------------ | ---------------------- | ----------- | ------------------------------------------------- |
-| `variant`          | `'default' \| 'group'` | `'default'` | Visual variant. Use `'group'` inside input groups |
-| `id`               | `string`               | auto        | Element id. Falls back to field id or generated   |
-| `class`            | `string`               | `''`        | Additional CSS classes merged with base styles    |
-| `disabled`         | `boolean`              | `false`     | Disables the input                                |
-| `aria-describedby` | `string`               | `''`        | Linked description element ids                    |
+| Input              | Type      | Default | Description                                     |
+| ------------------ | --------- | ------- | ----------------------------------------------- |
+| `id`               | `string`  | auto    | Element id. Falls back to field id or generated |
+| `class`            | `string`  | `''`    | Additional CSS classes merged with base styles  |
+| `disabled`         | `boolean` | `false` | Disables the input                              |
+| `aria-describedby` | `string`  | `''`    | Linked description element ids                  |
 
 **Data attributes:**
 
-| Attribute   | Value                                                            |
-| ----------- | ---------------------------------------------------------------- |
-| `data-slot` | `'input'` or `'input-group-control'` (when variant is `'group'`) |
+| Attribute   | Value       |
+| ----------- | ----------- |
+| `data-slot` | `'control'` |
 
 **Automatic behavior:**
 
@@ -46,6 +45,7 @@ export class MyComponent {}
 - Sets `aria-describedby` from a parent `SC_FIELD` provider when available.
 - Resolves `id` from the parent field context or generates a unique fallback.
 - Reads `disabled` state from `FormField` signal state when present.
+- Automatically adapts styling when inside an input group (`data-slot=input-group`) — no variant prop needed.
 
 ## Examples
 
@@ -77,10 +77,12 @@ export class MyComponent {}
 <input scInput disabled placeholder="Cannot edit" />
 ```
 
-### Group variant
+### Inside an input group
 
 ```html
-<input scInput variant="group" placeholder="Search..." />
+<div scInputGroup>
+  <input scInput placeholder="Search..." />
+</div>
 ```
 
 ## Accessibility
