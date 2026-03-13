@@ -123,10 +123,7 @@ function getCountryByCode(code: string): Country | undefined {
     <div class="max-w-sm">
       <div scCombobox [readonly]="true" class="w-full">
         <div scComboboxOrigin>
-          <div
-            scComboboxInputGroup
-            class="pr-0 [&>[data-slot=combobox-icon]]:hidden"
-          >
+          <div scComboboxInputGroup>
             <span scComboboxDisplayValue></span>
             <input
               scComboboxInput
@@ -137,17 +134,16 @@ function getCountryByCode(code: string): Country | undefined {
               siChevronsUpDownIcon
               class="text-muted-foreground pointer-events-none mx-1 size-4 shrink-0 opacity-50"
             ></svg>
-            <div class="bg-border w-px shrink-0 self-stretch"></div>
-            <input
-              class="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none disabled:cursor-not-allowed"
-              type="tel"
-              inputmode="tel"
-              placeholder="Phone number"
-              [value]="phoneNumber()"
-              (input)="onPhoneInput($event)"
-              (click)="$event.stopPropagation()"
-            />
           </div>
+          <input
+            class="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none disabled:cursor-not-allowed"
+            type="tel"
+            inputmode="tel"
+            placeholder="Phone number"
+            [value]="phoneNumber()"
+            (input)="onPhoneInput($event)"
+            (click)="$event.stopPropagation()"
+          />
         </div>
         <ng-template scComboboxPopupContainer>
           <dialog scComboboxDialog class="min-w-72">
