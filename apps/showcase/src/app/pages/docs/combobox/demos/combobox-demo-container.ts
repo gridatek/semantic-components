@@ -45,6 +45,7 @@ import {
   ScComboboxItemLabel,
   ScComboboxList,
   ScComboboxListContainer,
+  ScComboboxOrigin,
   ScComboboxPopupContainer,
   ScComboboxSearchInput,
   ScComboboxSearchInputGroup,
@@ -75,6 +76,7 @@ import {
     ScComboboxSearchInput,
     ScComboboxSearchInputGroup,
     ScComboboxInputGroup,
+    ScComboboxOrigin,
     ScComboboxIcon,
     ScComboboxList,
     ScComboboxPopupContainer,
@@ -88,17 +90,22 @@ import {
   host: { class: 'flex w-full justify-center' },
   template: \`
     <div scCombobox [readonly]="true" class="w-60">
-      <div scComboboxInputGroup>
-        <span scComboboxDisplayValue></span>
-        <input
-          scComboboxInput
-          placeholder="Select a country..."
-          [value]="value()"
-        />
-        <button scComboboxClear aria-label="Clear selection">
-          <svg siXIcon></svg>
-        </button>
-        <svg siChevronsUpDownIcon scComboboxIcon></svg>
+      <div scComboboxOrigin>
+        <div scComboboxInputGroup>
+          <span
+            scComboboxDisplayValue
+            [displayValueFn]="countryDisplayFn"
+          ></span>
+          <input
+            scComboboxInput
+            placeholder="Select a country..."
+            [value]="value()"
+          />
+          <button scComboboxClear aria-label="Clear selection">
+            <svg siXIcon></svg>
+          </button>
+          <svg siChevronsUpDownIcon scComboboxIcon></svg>
+        </div>
       </div>
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
@@ -117,11 +124,7 @@ import {
               }
               <div scComboboxList [(values)]="selectedCountries">
                 @for (option of options(); track option.value) {
-                  <div
-                    scComboboxItem
-                    [value]="option.value"
-                    [label]="option.label"
-                  >
+                  <div scComboboxItem [value]="option" [label]="option.label">
                     <span scComboboxItemLabel>{{ option.label }}</span>
                     <svg siCheckIcon scComboboxItemIndicator></svg>
                   </div>
@@ -139,12 +142,16 @@ import {
 export class ComboboxDemo {
   value = signal('');
   searchString = signal('');
-  selectedCountries = signal<string[]>([]);
+  selectedCountries = signal<unknown[]>([]);
   options = computed(() =>
     ALL_COUNTRIES.filter((country) =>
       country.label.toLowerCase().startsWith(this.searchString().toLowerCase()),
     ),
   );
+
+  protected readonly countryDisplayFn = (value: unknown): string => {
+    return (value as { label: string }).label;
+  };
 }
 
 const ALL_COUNTRIES = [
