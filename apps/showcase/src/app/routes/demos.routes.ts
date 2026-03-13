@@ -2224,6 +2224,13 @@ export const demosRoutes: Route[] = [
             (m) => m.MenuAvatarDemo,
           ),
       },
+      {
+        path: 'menu-align-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu/demos/menu-align-demo').then(
+            (m) => m.ScMenuAlignDemo,
+          ),
+      },
     ],
   },
   {

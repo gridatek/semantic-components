@@ -6,6 +6,7 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { MenuAlignDemoContainer } from './demos/menu-align-demo-container';
 import { MenuAvatarDemoContainer } from './demos/menu-avatar-demo-container';
 import { ScMenuDemoContainer } from './demos/menu-demo-container';
 import { MenuShortcutsDemoContainer } from './demos/menu-shortcuts-demo-container';
@@ -15,6 +16,7 @@ import { MenuToolsDemoContainer } from './demos/menu-tools-demo-container';
   selector: 'app-menu-page',
   imports: [
     ScMenuDemoContainer,
+    MenuAlignDemoContainer,
     MenuShortcutsDemoContainer,
     MenuToolsDemoContainer,
     MenuAvatarDemoContainer,
@@ -36,6 +38,7 @@ import { MenuToolsDemoContainer } from './demos/menu-tools-demo-container';
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
         <app-menu-demo-container />
+        <app-menu-align-demo-container />
         <app-menu-shortcuts-demo-container />
         <app-menu-tools-demo-container />
         <app-menu-avatar-demo-container />

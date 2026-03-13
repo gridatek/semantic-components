@@ -18,7 +18,7 @@ import { cn } from '../../utils';
 import { ScMenuPortal } from './menu-portal';
 import { ScMenuTrigger } from './menu-trigger';
 
-export type ScMenuAlign = 'start' | 'end';
+export type ScMenuAlign = 'start' | 'center' | 'end';
 
 @Component({
   selector: 'div[scMenuProvider]',
@@ -62,7 +62,7 @@ export class ScMenuProvider {
   readonly menu = computed(() => this.menuPortal()?.menu());
 
   protected readonly positions = computed(() => {
-    const x = this.align() === 'end' ? 'end' : 'start';
+    const x = this.align();
     const gap = this.offset();
     return [
       {

@@ -146,12 +146,12 @@ This means no manual `[menu]`, `[submenu]`, `[open]`, `[config]`, or `[positions
 
 ### ScMenuProvider
 
-| Input    | Type               | Default   | Description                                                             |
-| -------- | ------------------ | --------- | ----------------------------------------------------------------------- |
-| `align`  | `'start' \| 'end'` | `'start'` | Horizontal alignment of the dropdown relative to the origin.            |
-| `offset` | `number`           | `4`       | Vertical gap (in pixels) between the trigger and the dropdown.          |
-| `origin` | `CdkOverlayOrigin` | trigger   | Custom overlay origin. Defaults to the trigger element if not provided. |
-| `class`  | `string`           | `''`      | Custom CSS classes.                                                     |
+| Input    | Type                           | Default   | Description                                                             |
+| -------- | ------------------------------ | --------- | ----------------------------------------------------------------------- |
+| `align`  | `'start' \| 'center' \| 'end'` | `'start'` | Horizontal alignment of the dropdown relative to the origin.            |
+| `offset` | `number`                       | `4`       | Vertical gap (in pixels) between the trigger and the dropdown.          |
+| `origin` | `CdkOverlayOrigin`             | trigger   | Custom overlay origin. Defaults to the trigger element if not provided. |
+| `class`  | `string`                       | `''`      | Custom CSS classes.                                                     |
 
 ### ScMenu
 
