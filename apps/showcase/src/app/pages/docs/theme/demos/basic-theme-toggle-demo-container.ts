@@ -29,30 +29,35 @@ export class BasicThemeToggleDemoContainer {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
-import { ScThemeManager, ScThemeToggle } from '@semantic-components/ui-lab';
+import {
+  ScButton,
+  ScThemeManager,
+  ScThemeModeToggle,
+} from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-theme-toggle-demo',
-  imports: [ScButton, ScThemeToggle, SiSunIcon, SiMoonIcon],
+  imports: [ScButton, ScThemeModeToggle, SiSunIcon, SiMoonIcon],
   template: \`
     <div class="flex items-center gap-4">
       <button
         scButton
-        scThemeToggle
+        scThemeModeToggle
         variant="outline"
         size="icon"
-        #toggle="scThemeToggle"
+        #toggle="scThemeModeToggle"
       >
         @if (toggle.isDark()) {
           <svg siSunIcon></svg>
+          <span class="sr-only">Switch to light theme</span>
         } @else {
           <svg siMoonIcon></svg>
+          <span class="sr-only">Switch to dark theme</span>
         }
       </button>
       <span class="text-muted-foreground text-sm">
-        Current: {{ themeService.resolvedTheme() }}
+        Current: {{ themeManager.resolvedMode() }}
       </span>
     </div>
   \`,
@@ -61,6 +66,6 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicThemeToggleDemo {
-  protected readonly themeService = inject(ScThemeManager);
+  protected readonly themeManager = inject(ScThemeManager);
 }`;
 }
