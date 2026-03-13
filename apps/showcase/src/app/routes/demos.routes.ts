@@ -2564,48 +2564,6 @@ export const demosRoutes: Route[] = [
             (m) => m.CountrySelectorPhoneInputDemo,
           ),
       },
-      {
-        path: 'default-country-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/default-country-phone-input-demo').then(
-            (m) => m.DefaultCountryPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'us-format-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/us-format-phone-input-demo').then(
-            (m) => m.UsFormatPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'international-format-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/international-format-phone-input-demo').then(
-            (m) => m.InternationalFormatPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'without-icon-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/without-icon-phone-input-demo').then(
-            (m) => m.WithoutIconPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'disabled-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/disabled-phone-input-demo').then(
-            (m) => m.DisabledPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'form-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/form-phone-input-demo').then(
-            (m) => m.FormPhoneInputDemo,
-          ),
-      },
     ],
   },
   {

@@ -35,6 +35,7 @@
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "express": "^5.1.0",
+    "libphonenumber-js": "^1.12.40",
     "rxjs": "^7.8.2",
     "shadcn": "^4.0.0",
     "shiki": "^3.21.0",

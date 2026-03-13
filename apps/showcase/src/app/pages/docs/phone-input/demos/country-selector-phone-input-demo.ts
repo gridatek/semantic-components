@@ -2,34 +2,58 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   signal,
 } from '@angular/core';
-import { Country, ScPhoneInput } from '@semantic-components/ui-lab';
+import {
+  ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
+} from '@semantic-components/ui';
+import {
+  ScCountryCodeSelect,
+  getCountryByCode,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-country-selector-phone-input-demo',
-  imports: [ScPhoneInput],
+  imports: [ScCountryCodeSelect, ScInput, ScInputGroup, ScInputGroupAddon],
   template: `
     <div class="max-w-sm">
-      <sc-phone-input
-        [(value)]="phoneWithCountry"
-        [(countryCode)]="selectedCountry"
-        (countryChange)="onCountryChange($event)"
-      />
+      <div scInputGroup>
+        <div scInputGroupAddon>
+          <div scCountryCodeSelect [(value)]="countryCode"></div>
+        </div>
+        <input
+          scInput
+          variant="group"
+          type="tel"
+          inputmode="tel"
+          placeholder="Phone number"
+          [value]="phone()"
+          (input)="onPhoneInput($event)"
+        />
+      </div>
+      <p class="text-muted-foreground mt-2 text-sm">
+        Value: {{ fullNumber() || 'Empty' }}
+      </p>
     </div>
-    <p class="text-muted-foreground mt-2 text-sm">
-      Value: {{ phoneWithCountry() || 'Empty' }}
-    </p>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountrySelectorPhoneInputDemo {
-  readonly phoneWithCountry = signal('');
-  readonly selectedCountry = signal('US');
+  readonly countryCode = signal('US');
+  readonly phone = signal('');
 
-  onCountryChange(country: Country): void {
-    console.log('Country changed:', country);
+  protected readonly fullNumber = computed(() => {
+    const country = getCountryByCode(this.countryCode());
+    const phone = this.phone();
+    return country && phone ? `${country.dialCode} ${phone}` : '';
+  });
+
+  onPhoneInput(event: Event): void {
+    this.phone.set((event.target as HTMLInputElement).value);
   }
 }
