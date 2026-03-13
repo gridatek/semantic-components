@@ -17,10 +17,10 @@ import {
     <div class="space-y-4">
       <div scOtpField [(value)]="otp">
         <div scOtpFieldSlotGroup>
-          <div scOtpFieldSlot></div>
-          <div scOtpFieldSlot></div>
-          <div scOtpFieldSlot></div>
-          <div scOtpFieldSlot></div>
+          <div scOtpFieldSlot aria-label="Digit 1 of 4"></div>
+          <div scOtpFieldSlot aria-label="Digit 2 of 4"></div>
+          <div scOtpFieldSlot aria-label="Digit 3 of 4"></div>
+          <div scOtpFieldSlot aria-label="Digit 4 of 4"></div>
         </div>
       </div>
       <p class="text-muted-foreground text-sm">Value: {{ otp() || 'empty' }}</p>

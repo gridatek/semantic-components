@@ -54,11 +54,7 @@ export class ScOtpFieldSlot {
   private readonly focused = signal<boolean>(false);
 
   readonly char = computed(() => this.otpField.getChar(this.index()));
-  readonly ariaLabel = computed(() => {
-    const label =
-      this.otpField.inputMode() === 'numeric' ? 'Digit' : 'Character';
-    return `${label} ${this.index() + 1} of ${this.otpField.slotCount()}`;
-  });
+  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
   readonly ariaDescribedBy = computed(() => {
     const ids = this.otpField.descriptionIds();
     return ids.length ? ids.join(' ') : null;
