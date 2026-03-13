@@ -41,7 +41,7 @@ import {
       <div scInputGroup>
         <input scInput placeholder="Enter file name" />
         <div scInputGroupAddon align="inline-end">
-          <div scMenuProvider>
+          <div scMenuProvider align="end">
             <button
               scButton
               scMenuTrigger
@@ -66,7 +66,7 @@ import {
       <div scInputGroup>
         <input scInput placeholder="Enter search query" />
         <div scInputGroupAddon align="inline-end">
-          <div scMenuProvider>
+          <div scMenuProvider align="end">
             <button
               scButton
               scMenuTrigger

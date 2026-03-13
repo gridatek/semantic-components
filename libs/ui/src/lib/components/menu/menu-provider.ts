@@ -1,4 +1,4 @@
-import { OverlayModule } from '@angular/cdk/overlay';
+import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,6 +14,43 @@ import { cn } from '../../utils';
 import { ScMenuPortal } from './menu-portal';
 import { ScMenuTrigger } from './menu-trigger';
 
+export type ScMenuAlign = 'start' | 'end';
+
+const alignPositions: Record<ScMenuAlign, ConnectedPosition[]> = {
+  start: [
+    {
+      originX: 'start',
+      originY: 'bottom',
+      overlayX: 'start',
+      overlayY: 'top',
+      offsetY: 8,
+    },
+    {
+      originX: 'start',
+      originY: 'top',
+      overlayX: 'start',
+      overlayY: 'bottom',
+      offsetY: -8,
+    },
+  ],
+  end: [
+    {
+      originX: 'end',
+      originY: 'bottom',
+      overlayX: 'end',
+      overlayY: 'top',
+      offsetY: 8,
+    },
+    {
+      originX: 'end',
+      originY: 'top',
+      overlayX: 'end',
+      overlayY: 'bottom',
+      offsetY: -8,
+    },
+  ],
+};
+
 @Component({
   selector: 'div[scMenuProvider]',
   imports: [OverlayModule, NgTemplateOutlet],
@@ -24,22 +61,7 @@ import { ScMenuTrigger } from './menu-trigger';
       <ng-template
         [cdkConnectedOverlayOpen]="expanded()"
         [cdkConnectedOverlay]="{ origin, usePopover: 'inline' }"
-        [cdkConnectedOverlayPositions]="[
-          {
-            originX: 'start',
-            originY: 'bottom',
-            overlayX: 'start',
-            overlayY: 'top',
-            offsetY: 4,
-          },
-          {
-            originX: 'start',
-            originY: 'top',
-            overlayX: 'start',
-            overlayY: 'bottom',
-            offsetY: -4,
-          },
-        ]"
+        [cdkConnectedOverlayPositions]="positions()"
         cdkAttachPopoverAsChild
       >
         <ng-container [ngTemplateOutlet]="menuPortal().templateRef" />
@@ -55,6 +77,7 @@ import { ScMenuTrigger } from './menu-trigger';
 })
 export class ScMenuProvider {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly align = input<ScMenuAlign>('start');
 
   private readonly triggerChild = contentChild(ScMenuTrigger);
   protected readonly menuPortal = contentChild.required(ScMenuPortal);
@@ -62,6 +85,8 @@ export class ScMenuProvider {
   readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
   readonly trigger = computed(() => this.triggerChild()?.trigger);
   readonly menu = computed(() => this.menuPortal()?.menu());
+
+  protected readonly positions = computed(() => alignPositions[this.align()]);
 
   protected readonly expanded = computed(
     () => this.triggerChild()?.trigger?.expanded() ?? false,
