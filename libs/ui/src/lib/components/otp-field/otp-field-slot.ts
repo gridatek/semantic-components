@@ -30,6 +30,7 @@ import { ScOtpFieldSlotInput } from './otp-field-slot-input';
       [value]="char()"
       [disabled]="otpField.disabled()"
       [ariaLabel]="ariaLabel()"
+      [ariaDescribedBy]="ariaDescribedBy()"
       (inputChange)="onInputChange($event)"
       (keydownEvent)="onKeydown($event)"
       (focused)="onFocusChange($event)"
@@ -55,6 +56,10 @@ export class ScOtpFieldSlot {
   readonly ariaLabel = computed(
     () => `Digit ${this.index() + 1} of ${this.otpField.slotCount()}`,
   );
+  readonly ariaDescribedBy = computed(() => {
+    const ids = this.otpField.descriptionIds();
+    return ids.length ? ids.join(' ') : null;
+  });
   readonly isActive = computed(
     () => this.focused() && !this.otpField.disabled(),
   );

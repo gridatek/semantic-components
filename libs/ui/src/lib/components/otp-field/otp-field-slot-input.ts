@@ -19,6 +19,7 @@ import { cn } from '../../utils';
     '[value]': 'value()',
     '[disabled]': 'disabled()',
     '[attr.aria-label]': 'ariaLabel()',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '(input)': 'onInput($event)',
     '(keydown)': 'keydownEvent.emit($event)',
@@ -33,6 +34,7 @@ export class ScOtpFieldSlotInput {
   readonly value = input<string>('');
   readonly disabled = input<boolean>(false);
   readonly ariaLabel = input<string>('');
+  readonly ariaDescribedBy = input<string | null>(null);
 
   readonly inputChange = output<string>();
   readonly keydownEvent = output<KeyboardEvent>();
