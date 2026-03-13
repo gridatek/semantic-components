@@ -1,8 +1,4 @@
-import {
-  CdkOverlayOrigin,
-  ConnectedPosition,
-  OverlayModule,
-} from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,47 +10,17 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import {
+  type OverlayAlign,
+  type OverlaySide,
+  buildOverlayPositionsWithFallback,
+  cn,
+} from '../../utils';
 import { ScHoverCardPortal } from './hover-card-portal';
 import { ScHoverCardTrigger } from './hover-card-trigger';
 
-export type ScHoverCardSide = 'top' | 'right' | 'bottom' | 'left';
-export type ScHoverCardAlign = 'start' | 'center' | 'end';
-
-const oppositeSide: Record<ScHoverCardSide, ScHoverCardSide> = {
-  top: 'bottom',
-  bottom: 'top',
-  left: 'right',
-  right: 'left',
-};
-
-function buildPosition(
-  side: ScHoverCardSide,
-  align: ScHoverCardAlign,
-  gap: number,
-): ConnectedPosition {
-  const isVertical = side === 'top' || side === 'bottom';
-
-  if (isVertical) {
-    return {
-      originX: align,
-      originY: side,
-      overlayX: align,
-      overlayY: side === 'bottom' ? 'top' : 'bottom',
-      offsetY: side === 'bottom' ? gap : -gap,
-    };
-  }
-
-  const alignY =
-    align === 'start' ? 'top' : align === 'end' ? 'bottom' : 'center';
-  return {
-    originX: side === 'right' ? 'end' : 'start',
-    originY: alignY,
-    overlayX: side === 'right' ? 'start' : 'end',
-    overlayY: alignY,
-    offsetX: side === 'right' ? gap : -gap,
-  };
-}
+export type ScHoverCardSide = OverlaySide;
+export type ScHoverCardAlign = OverlayAlign;
 
 @Component({
   selector: 'div[scHoverCardProvider]',
@@ -116,17 +82,9 @@ export class ScHoverCardProvider {
     () => this.originInput() ?? this.triggerChild()?.overlayOrigin,
   );
 
-  protected readonly positions = computed(() => {
-    const side = this.side();
-    const align = this.align();
-    const gap = this.offset();
-    return [
-      // Preferred position
-      buildPosition(side, align, gap),
-      // Fallback: opposite side
-      buildPosition(oppositeSide[side], align, gap),
-    ];
-  });
+  protected readonly positions = computed(() =>
+    buildOverlayPositionsWithFallback(this.side(), this.align(), this.offset()),
+  );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 

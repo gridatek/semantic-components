@@ -1,8 +1,4 @@
-import {
-  CdkOverlayOrigin,
-  ConnectedPosition,
-  OverlayModule,
-} from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -14,11 +10,15 @@ import {
   input,
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '../../utils';
+import {
+  type OverlayAlign,
+  buildOverlayPositionsWithFallback,
+  cn,
+} from '../../utils';
 import { ScMenuPortal } from './menu-portal';
 import { ScMenuTrigger } from './menu-trigger';
 
-export type ScMenuAlign = 'start' | 'center' | 'end';
+export type ScMenuAlign = OverlayAlign;
 export type ScMenuSide = 'top' | 'bottom';
 
 @Component({
@@ -63,29 +63,9 @@ export class ScMenuProvider {
   readonly trigger = computed(() => this.triggerChild()?.trigger);
   readonly menu = computed(() => this.menuPortal()?.menu());
 
-  protected readonly positions = computed(() => {
-    const x = this.align();
-    const gap = this.offset();
-    const isBottom = this.side() === 'bottom';
-    return [
-      // Preferred position
-      {
-        originX: x,
-        originY: isBottom ? 'bottom' : 'top',
-        overlayX: x,
-        overlayY: isBottom ? 'top' : 'bottom',
-        offsetY: isBottom ? gap : -gap,
-      },
-      // Fallback: opposite side
-      {
-        originX: x,
-        originY: isBottom ? 'top' : 'bottom',
-        overlayX: x,
-        overlayY: isBottom ? 'bottom' : 'top',
-        offsetY: isBottom ? -gap : gap,
-      },
-    ] as ConnectedPosition[];
-  });
+  protected readonly positions = computed(() =>
+    buildOverlayPositionsWithFallback(this.side(), this.align(), this.offset()),
+  );
 
   protected readonly expanded = computed(
     () => this.triggerChild()?.trigger?.expanded() ?? false,

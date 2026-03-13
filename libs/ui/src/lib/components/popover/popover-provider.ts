@@ -1,9 +1,5 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
-import {
-  CdkOverlayOrigin,
-  ConnectedPosition,
-  OverlayModule,
-} from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -16,47 +12,17 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import {
+  type OverlayAlign,
+  type OverlaySide,
+  buildOverlayPositionsWithFallback,
+  cn,
+} from '../../utils';
 import { ScPopoverPortal } from './popover-portal';
 import { ScPopoverTrigger } from './popover-trigger';
 
-export type ScPopoverSide = 'top' | 'right' | 'bottom' | 'left';
-export type ScPopoverAlign = 'start' | 'center' | 'end';
-
-const oppositeSide: Record<ScPopoverSide, ScPopoverSide> = {
-  top: 'bottom',
-  bottom: 'top',
-  left: 'right',
-  right: 'left',
-};
-
-function buildPosition(
-  side: ScPopoverSide,
-  align: ScPopoverAlign,
-  gap: number,
-): ConnectedPosition {
-  const isVertical = side === 'top' || side === 'bottom';
-
-  if (isVertical) {
-    return {
-      originX: align,
-      originY: side,
-      overlayX: align,
-      overlayY: side === 'bottom' ? 'top' : 'bottom',
-      offsetY: side === 'bottom' ? gap : -gap,
-    };
-  }
-
-  const alignY =
-    align === 'start' ? 'top' : align === 'end' ? 'bottom' : 'center';
-  return {
-    originX: side === 'right' ? 'end' : 'start',
-    originY: alignY,
-    overlayX: side === 'right' ? 'start' : 'end',
-    overlayY: alignY,
-    offsetX: side === 'right' ? gap : -gap,
-  };
-}
+export type ScPopoverSide = OverlaySide;
+export type ScPopoverAlign = OverlayAlign;
 
 @Component({
   selector: 'div[scPopoverProvider]',
@@ -125,17 +91,9 @@ export class ScPopoverProvider {
     () => this.originInput() ?? this.triggerChild()?.overlayOrigin,
   );
 
-  protected readonly positions = computed(() => {
-    const side = this.side();
-    const align = this.align();
-    const gap = this.offset();
-    return [
-      // Preferred position
-      buildPosition(side, align, gap),
-      // Fallback: opposite side
-      buildPosition(oppositeSide[side], align, gap),
-    ];
-  });
+  protected readonly positions = computed(() =>
+    buildOverlayPositionsWithFallback(this.side(), this.align(), this.offset()),
+  );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 

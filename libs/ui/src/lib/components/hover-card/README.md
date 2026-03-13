@@ -41,12 +41,14 @@ ScHoverCardProvider (Root)
 
 ### ScHoverCardProvider
 
-| Input        | Type                                     | Default    | Description                 |
-| ------------ | ---------------------------------------- | ---------- | --------------------------- |
-| `side`       | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Which side to show the card |
-| `align`      | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment along the side    |
-| `openDelay`  | `number`                                 | `700`      | Delay before showing (ms)   |
-| `closeDelay` | `number`                                 | `300`      | Delay before hiding (ms)    |
+| Input        | Type                                     | Default    | Description                                                             |
+| ------------ | ---------------------------------------- | ---------- | ----------------------------------------------------------------------- |
+| `side`       | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Which side to show the card. Falls back to the opposite side.           |
+| `align`      | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment along the side.                                               |
+| `offset`     | `number`                                 | `4`        | Gap (in pixels) between the trigger and the hover card.                 |
+| `origin`     | `CdkOverlayOrigin`                       | trigger    | Custom overlay origin. Defaults to the trigger element if not provided. |
+| `openDelay`  | `number`                                 | `700`      | Delay before showing (ms).                                              |
+| `closeDelay` | `number`                                 | `300`      | Delay before hiding (ms).                                               |
 
 ## Usage
 
