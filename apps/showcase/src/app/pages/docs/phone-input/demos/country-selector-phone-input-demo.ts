@@ -3,8 +3,6 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  effect,
-  linkedSignal,
   model,
   signal,
 } from '@angular/core';
@@ -128,11 +126,7 @@ const COUNTRIES: Country[] = [
               scComboboxDisplayValue
               [displayValueFn]="countryDisplayFn"
             ></span>
-            <input
-              scComboboxInput
-              [placeholder]="displayLabel()"
-              [value]="displayLabel()"
-            />
+            <input scComboboxInput />
             <svg siChevronDownIcon scComboboxIcon></svg>
           </div>
           <div class="bg-border h-full w-px shrink-0"></div>
@@ -142,9 +136,6 @@ const COUNTRIES: Country[] = [
             type="tel"
             inputmode="tel"
             placeholder="Phone number"
-            [value]="phoneNumber()"
-            (input)="onPhoneInput($event)"
-            (click)="$event.stopPropagation()"
           />
         </div>
         <ng-template scComboboxPopupContainer>
@@ -162,7 +153,7 @@ const COUNTRIES: Country[] = [
                 @if (filteredCountries().length === 0) {
                   <div scComboboxEmpty>No countries found</div>
                 }
-                <div scComboboxList [(values)]="selectedValues">
+                <div scComboboxList>
                   @for (country of filteredCountries(); track country.code) {
                     <div scComboboxItem [value]="country">
                       <span scComboboxItemLabel class="flex items-center gap-2">
@@ -190,31 +181,13 @@ const COUNTRIES: Country[] = [
 })
 export class CountrySelectorPhoneInputDemo {
   protected readonly searchString = signal('');
-  protected readonly value = model<Country>(COUNTRIES[0]);
+  protected readonly phoneCode = model<Country>(COUNTRIES[0]);
   protected readonly phoneNumber = model<string>('');
-
-  protected readonly selectedValues = linkedSignal(() => [this.value()]);
-
-  constructor() {
-    effect(() => {
-      const values = this.selectedValues();
-      if (values.length > 0) {
-        const last = values[values.length - 1];
-        if (last !== this.value()) {
-          this.value.set(last);
-        }
-      }
-    });
-  }
 
   protected readonly countryDisplayFn = (value: unknown): string => {
     const country = value as Country;
     return `${country.code} ${country.dialCode}`;
   };
-
-  protected readonly displayLabel = computed(() =>
-    this.countryDisplayFn(this.value()),
-  );
 
   protected readonly filteredCountries = computed(() => {
     const query = this.searchString().toLowerCase();
@@ -227,8 +200,4 @@ export class CountrySelectorPhoneInputDemo {
         c.code.toLowerCase().includes(query),
     );
   });
-
-  protected onPhoneInput(event: Event): void {
-    this.phoneNumber.set((event.target as HTMLInputElement).value);
-  }
 }
