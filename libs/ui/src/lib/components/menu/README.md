@@ -6,7 +6,7 @@ A dropdown menu component built on top of `@angular/aria/menu` and `@angular/cdk
 
 | Component         | Type      | Selector                     | Description                                                                                                       |
 | ----------------- | --------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `ScMenuProvider`  | Component | `div[scMenuProvider]`        | Root wrapper that auto-connects the trigger, portal, and menu.                                                    |
+| `ScMenuProvider`  | Component | `div[scMenuProvider]`        | Root wrapper that auto-connects the trigger, portal, and menu. Supports `align` and `origin` inputs.              |
 | `ScMenuTrigger`   | Directive | `[scMenuTrigger]`            | Button or element that opens the menu on click.                                                                   |
 | `ScMenuPortal`    | Directive | `[scMenuPortal]`             | Applied to `<ng-template>`. Holds the menu template for overlay rendering. Used for both root menus and submenus. |
 | `ScMenu`          | Directive | `[scMenu]`                   | The menu container. Auto-registers with its parent `ScMenuPortal`.                                                |
@@ -79,6 +79,29 @@ Nest another `<ng-template scMenuPortal>` inside an `ScMenuItem` to create a sub
 </div>
 ```
 
+### End-aligned with custom origin
+
+Use `align="end"` to right-align the dropdown. Pass a `CdkOverlayOrigin` to `[origin]` to position the menu relative to a different element (e.g. an input group container):
+
+```html
+<div scInputGroup cdkOverlayOrigin #group="cdkOverlayOrigin">
+  <input scInput placeholder="Enter file name" />
+  <div scInputGroupAddon align="inline-end">
+    <div scMenuProvider align="end" [origin]="group">
+      <button scButton scMenuTrigger variant="ghost" size="icon-xs" aria-label="More">...</button>
+      <ng-template scMenuPortal>
+        <div scMenu>
+          <ng-template scMenuContent>
+            <div scMenuItem value="settings">Settings</div>
+            <div scMenuItem value="copy-path">Copy path</div>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+```
+
 ### Custom classes
 
 All components accept a `class` input for style overrides via `cn()` (Tailwind merge):
@@ -120,6 +143,14 @@ The menu components use a push-based registration pattern to minimize boilerplat
 This means no manual `[menu]`, `[submenu]`, `[open]`, `[config]`, or `[positions]` bindings are needed in templates.
 
 ## Inputs
+
+### ScMenuProvider
+
+| Input    | Type               | Default   | Description                                                             |
+| -------- | ------------------ | --------- | ----------------------------------------------------------------------- |
+| `align`  | `'start' \| 'end'` | `'start'` | Horizontal alignment of the dropdown relative to the origin.            |
+| `origin` | `CdkOverlayOrigin` | trigger   | Custom overlay origin. Defaults to the trigger element if not provided. |
+| `class`  | `string`           | `''`      | Custom CSS classes.                                                     |
 
 ### ScMenu
 
