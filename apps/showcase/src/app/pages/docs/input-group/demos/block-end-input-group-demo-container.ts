@@ -29,10 +29,10 @@ export class BlockEndInputGroupDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupButton,
   ScInputGroupText,
   ScTextarea,
 } from '@semantic-components/ui';
@@ -43,34 +43,23 @@ import {
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupButton,
+    ScButton,
     ScInputGroupText,
     ScTextarea,
   ],
   template: \`
     <div class="grid w-full max-w-sm gap-6">
       <div scInputGroup class="h-auto">
-        <input scInput variant="group" placeholder="Enter amount" />
+        <input scInput placeholder="Enter amount" />
         <div scInputGroupAddon align="block-end">
           <span scInputGroupText>USD</span>
         </div>
       </div>
       <div scInputGroup>
-        <textarea
-          scTextarea
-          variant="group"
-          placeholder="Write a comment..."
-        ></textarea>
+        <textarea scTextarea placeholder="Write a comment..."></textarea>
         <div scInputGroupAddon align="block-end" class="border-t">
           <span scInputGroupText>0/280</span>
-          <button
-            scInputGroupButton
-            variant="default"
-            size="sm"
-            class="ml-auto"
-          >
-            Post
-          </button>
+          <button scButton class="ml-auto">Post</button>
         </div>
       </div>
     </div>
