@@ -6,7 +6,7 @@ A dropdown menu component built on top of `@angular/aria/menu` and `@angular/cdk
 
 | Component         | Type      | Selector                     | Description                                                                                                       |
 | ----------------- | --------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `ScMenuProvider`  | Component | `div[scMenuProvider]`        | Root wrapper that auto-connects the trigger, portal, and menu. Supports `align` and `origin` inputs.              |
+| `ScMenuProvider`  | Component | `div[scMenuProvider]`        | Root wrapper that auto-connects the trigger, portal, and menu. Supports `side`, `align`, and `origin` inputs.     |
 | `ScMenuTrigger`   | Directive | `[scMenuTrigger]`            | Button or element that opens the menu on click.                                                                   |
 | `ScMenuPortal`    | Directive | `[scMenuPortal]`             | Applied to `<ng-template>`. Holds the menu template for overlay rendering. Used for both root menus and submenus. |
 | `ScMenu`          | Directive | `[scMenu]`                   | The menu container. Auto-registers with its parent `ScMenuPortal`.                                                |
@@ -146,12 +146,13 @@ This means no manual `[menu]`, `[submenu]`, `[open]`, `[config]`, or `[positions
 
 ### ScMenuProvider
 
-| Input    | Type                           | Default   | Description                                                             |
-| -------- | ------------------------------ | --------- | ----------------------------------------------------------------------- |
-| `align`  | `'start' \| 'center' \| 'end'` | `'start'` | Horizontal alignment of the dropdown relative to the origin.            |
-| `offset` | `number`                       | `4`       | Vertical gap (in pixels) between the trigger and the dropdown.          |
-| `origin` | `CdkOverlayOrigin`             | trigger   | Custom overlay origin. Defaults to the trigger element if not provided. |
-| `class`  | `string`                       | `''`      | Custom CSS classes.                                                     |
+| Input    | Type                           | Default    | Description                                                             |
+| -------- | ------------------------------ | ---------- | ----------------------------------------------------------------------- |
+| `side`   | `'top' \| 'bottom'`            | `'bottom'` | Preferred side to open the dropdown. Falls back to the opposite side.   |
+| `align`  | `'start' \| 'center' \| 'end'` | `'start'`  | Horizontal alignment of the dropdown relative to the origin.            |
+| `offset` | `number`                       | `4`        | Vertical gap (in pixels) between the trigger and the dropdown.          |
+| `origin` | `CdkOverlayOrigin`             | trigger    | Custom overlay origin. Defaults to the trigger element if not provided. |
+| `class`  | `string`                       | `''`       | Custom CSS classes.                                                     |
 
 ### ScMenu
 

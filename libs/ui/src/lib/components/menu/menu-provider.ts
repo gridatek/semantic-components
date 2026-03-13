@@ -19,6 +19,7 @@ import { ScMenuPortal } from './menu-portal';
 import { ScMenuTrigger } from './menu-trigger';
 
 export type ScMenuAlign = 'start' | 'center' | 'end';
+export type ScMenuSide = 'top' | 'bottom';
 
 @Component({
   selector: 'div[scMenuProvider]',
@@ -46,6 +47,7 @@ export type ScMenuAlign = 'start' | 'center' | 'end';
 })
 export class ScMenuProvider {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly side = input<ScMenuSide>('bottom');
   readonly align = input<ScMenuAlign>('start');
   readonly offset = input(4);
   readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
@@ -64,20 +66,23 @@ export class ScMenuProvider {
   protected readonly positions = computed(() => {
     const x = this.align();
     const gap = this.offset();
+    const isBottom = this.side() === 'bottom';
     return [
+      // Preferred position
       {
         originX: x,
-        originY: 'bottom',
+        originY: isBottom ? 'bottom' : 'top',
         overlayX: x,
-        overlayY: 'top',
-        offsetY: gap,
+        overlayY: isBottom ? 'top' : 'bottom',
+        offsetY: isBottom ? gap : -gap,
       },
+      // Fallback: opposite side
       {
         originX: x,
-        originY: 'top',
+        originY: isBottom ? 'top' : 'bottom',
         overlayX: x,
-        overlayY: 'bottom',
-        offsetY: -gap,
+        overlayY: isBottom ? 'bottom' : 'top',
+        offsetY: isBottom ? -gap : gap,
       },
     ] as ConnectedPosition[];
   });
