@@ -22,12 +22,10 @@ export class ScComboboxInput {
 
   private readonly combobox = inject(forwardRef(() => ScCombobox));
 
-  readonly hasValue = computed(() => this.combobox.hasValue());
-
   protected readonly class = computed(() =>
     cn(
       'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent pl-2.5 outline-none placeholder:text-muted-foreground',
-      this.hasValue() && 'opacity-0',
+      this.combobox.hasValue() && 'opacity-0',
       this.classInput(),
     ),
   );
