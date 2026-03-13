@@ -155,7 +155,7 @@ const COUNTRIES: Country[] = [
                 }
                 <div scComboboxList [(values)]="selectedCountries">
                   @for (country of filteredCountries(); track country.code) {
-                    <div scComboboxItem [value]="country">
+                    <div scComboboxItem [value]="country.code">
                       <span scComboboxItemLabel class="flex items-center gap-2">
                         <span class="text-muted-foreground w-7 text-xs">
                           {{ country.code }}
@@ -181,12 +181,12 @@ const COUNTRIES: Country[] = [
 })
 export class CountrySelectorPhoneInputDemo {
   protected readonly searchString = signal('');
-  protected readonly selectedCountries = signal<Country[]>([COUNTRIES[0]]);
+  protected readonly selectedCountries = signal<string[]>([COUNTRIES[0].code]);
   protected readonly phoneNumber = model<string>('');
 
   protected readonly countryDisplayFn = (value: unknown): string => {
-    const country = value as Country;
-    return `${country.code} ${country.dialCode}`;
+    const country = COUNTRIES.find((c) => c.code === value);
+    return country ? `${country.code} ${country.dialCode}` : '';
   };
 
   protected readonly filteredCountries = computed(() => {
