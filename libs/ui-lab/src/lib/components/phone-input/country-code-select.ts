@@ -14,7 +14,6 @@ import {
   ScComboboxDialog,
   ScComboboxDisplayValue,
   ScComboboxEmpty,
-  ScComboboxIcon,
   ScComboboxInput,
   ScComboboxInputGroup,
   ScComboboxItem,
@@ -40,7 +39,6 @@ import { COUNTRIES, Country, getCountryByCode } from './countries';
     ScCombobox,
     ScComboboxDialog,
     ScComboboxDisplayValue,
-    ScComboboxIcon,
     ScComboboxInput,
     ScComboboxInputGroup,
     ScComboboxItem,
@@ -60,7 +58,7 @@ import { COUNTRIES, Country, getCountryByCode } from './countries';
     <div scCombobox [readonly]="true" class="w-full">
       <div
         scComboboxInputGroup
-        class="min-w-28 rounded-none border-0 shadow-none ring-0 focus-visible:ring-0"
+        class="pr-0 [&>[data-slot=combobox-icon]]:hidden"
       >
         <span scComboboxDisplayValue></span>
         <input
@@ -69,7 +67,21 @@ import { COUNTRIES, Country, getCountryByCode } from './countries';
           [value]="displayLabel()"
           [disabled]="disabled()"
         />
-        <svg siChevronsUpDownIcon scComboboxIcon></svg>
+        <svg
+          siChevronsUpDownIcon
+          class="text-muted-foreground pointer-events-none mx-1 size-4 shrink-0 opacity-50"
+        ></svg>
+        <div class="bg-border w-px shrink-0 self-stretch"></div>
+        <input
+          class="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none disabled:cursor-not-allowed"
+          type="tel"
+          inputmode="tel"
+          [placeholder]="phonePlaceholder()"
+          [disabled]="disabled()"
+          [value]="phoneNumber()"
+          (input)="onPhoneInput($event)"
+          (click)="$event.stopPropagation()"
+        />
       </div>
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog class="min-w-72">
@@ -121,7 +133,9 @@ export class ScCountryCodeSelect {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly countries = input<Country[]>(COUNTRIES);
   readonly disabled = input<boolean>(false);
+  readonly phonePlaceholder = input<string>('Phone number');
   readonly value = model<string>('US');
+  readonly phoneNumber = model<string>('', { alias: 'phone' });
 
   protected readonly searchString = signal('');
 
@@ -155,6 +169,10 @@ export class ScCountryCodeSelect {
         c.code.toLowerCase().includes(query),
     );
   });
+
+  protected onPhoneInput(event: Event): void {
+    this.phoneNumber.set((event.target as HTMLInputElement).value);
+  }
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 }
