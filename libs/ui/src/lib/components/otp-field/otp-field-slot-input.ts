@@ -13,7 +13,7 @@ import { cn } from '../../utils';
   host: {
     'data-slot': 'otp-field-slot-input',
     type: 'text',
-    inputmode: 'numeric',
+    '[attr.inputmode]': 'inputMode()',
     autocomplete: 'one-time-code',
     maxlength: '1',
     '[value]': 'value()',
@@ -35,6 +35,7 @@ export class ScOtpFieldSlotInput {
   readonly disabled = input<boolean>(false);
   readonly ariaLabel = input<string>('');
   readonly ariaDescribedBy = input<string | null>(null);
+  readonly inputMode = input<'numeric' | 'text'>('numeric');
 
   readonly inputChange = output<string>();
   readonly keydownEvent = output<KeyboardEvent>();
@@ -57,6 +58,10 @@ export class ScOtpFieldSlotInput {
 
     if (value.length > 0) {
       const char = value.slice(-1);
+      if (this.inputMode() === 'numeric' && !/^\d$/.test(char)) {
+        input.value = '';
+        return;
+      }
       input.value = char;
       this.inputChange.emit(char);
     }

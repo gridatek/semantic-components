@@ -38,6 +38,7 @@ export class ScOtpField implements FormValueControl<string> {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = model<string>('');
   readonly disabled = input<boolean>(false);
+  readonly inputMode = input<'numeric' | 'text'>('numeric');
 
   private readonly slots = contentChildren(ScOtpFieldSlot, {
     descendants: true,
@@ -104,11 +105,13 @@ export class ScOtpField implements FormValueControl<string> {
     event.preventDefault();
     const pastedData = event.clipboardData?.getData('text') || '';
     const cleanData = pastedData.replace(/\s/g, '').slice(0, this.slotCount());
+    const filteredData =
+      this.inputMode() === 'numeric' ? cleanData.replace(/\D/g, '') : cleanData;
 
-    if (cleanData) {
-      this.value.set(cleanData);
+    if (filteredData) {
+      this.value.set(filteredData);
       // Focus the slot after the last pasted character or the last slot
-      const focusIndex = Math.min(cleanData.length, this.slotCount() - 1);
+      const focusIndex = Math.min(filteredData.length, this.slotCount() - 1);
       this.focusSlot(focusIndex);
     }
   }
