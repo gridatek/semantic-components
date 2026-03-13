@@ -123,7 +123,7 @@ function getCountryByCode(code: string): Country | undefined {
   template: `
     <div class="max-w-sm">
       <div scCombobox [readonly]="true" class="w-full">
-        <div scComboboxOrigin>
+        <div scComboboxOrigin class="flex items-center">
           <div scComboboxInputGroup>
             <span scComboboxDisplayValue></span>
             <input
