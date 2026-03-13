@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SiGlobeIcon } from '@semantic-icons/lucide-icons';
-import { sizeStyles, variantStyles } from '../timezone';
 import { ScLanguageService } from './language.service';
+import { sizeStyles, variantStyles } from './styles';
 import { LanguageSwitcherSize, LanguageSwitcherVariant } from './styles';
 
 /**

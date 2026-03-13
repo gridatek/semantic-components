@@ -878,15 +878,6 @@
     "hidden": true
   },
   {
-    "name": "Timezone",
-    "path": "timezone",
-    "description": "A component for selecting and displaying timezones.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
     "name": "Toast",
     "path": "toast",
     "description": "A brief notification that appears temporarily.",

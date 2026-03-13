@@ -572,11 +572,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/timeline/timeline-page'),
       },
       {
-        path: 'timezone',
-        title: 'Timezone - Semantic Components',
-        loadComponent: () => import('../pages/docs/timezone/timezone-page'),
-      },
-      {
         path: 'toast',
         title: 'Toast - Semantic Components',
         loadComponent: () => import('../pages/docs/toast/toast-page'),
