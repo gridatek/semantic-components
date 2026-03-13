@@ -64,7 +64,7 @@ export class ScTextarea {
   protected readonly class = computed(() =>
     cn(
       this.variant() === 'group'
-        ? 'rounded-none border-0 bg-transparent py-2 shadow-none ring-0 focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0 dark:bg-transparent dark:disabled:bg-transparent flex-1 resize-none px-2.5 text-base md:text-sm outline-none placeholder:text-muted-foreground field-sizing-content min-h-16 min-w-0 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+        ? 'flex-1 resize-none rounded-none border-0 bg-transparent py-2 shadow-none ring-0 focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0 dark:bg-transparent dark:disabled:bg-transparent w-full px-2.5 text-base md:text-sm outline-none placeholder:text-muted-foreground field-sizing-content min-h-16 min-w-0 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
         : 'border-input dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 disabled:bg-input/50 dark:disabled:bg-input/80 rounded-lg border bg-transparent px-2.5 py-2 text-base transition-colors focus-visible:ring-3 aria-invalid:ring-3 md:text-sm placeholder:text-muted-foreground flex field-sizing-content min-h-16 w-full outline-none disabled:cursor-not-allowed disabled:opacity-50',
       this.classInput(),
     ),
