@@ -121,10 +121,10 @@ function getCountryByCode(code: string): Country | undefined {
     SiSearchIcon,
   ],
   template: `
-    <div class="max-w-sm">
+    <div class="max-w-lg">
       <div scCombobox [readonly]="true" class="w-full">
         <div scComboboxOrigin class="flex items-center">
-          <div scComboboxInputGroup>
+          <div scComboboxInputGroup class="w-auto shrink-0">
             <span scComboboxDisplayValue></span>
             <input
               scComboboxInput
