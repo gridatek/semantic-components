@@ -39,7 +39,7 @@ import {
   template: `
     <div class="grid w-full max-w-sm gap-4">
       <div scInputGroup>
-        <input scInput variant="group" placeholder="Enter file name" />
+        <input scInput placeholder="Enter file name" />
         <div scInputGroupAddon align="inline-end">
           <div scMenuProvider>
             <button
@@ -64,7 +64,7 @@ import {
         </div>
       </div>
       <div scInputGroup>
-        <input scInput variant="group" placeholder="Enter search query" />
+        <input scInput placeholder="Enter search query" />
         <div scInputGroupAddon align="inline-end">
           <div scMenuProvider>
             <button

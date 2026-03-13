@@ -19,18 +19,13 @@ import {
         <div scInputGroupAddon>
           <label scLabel for="email">&#64;</label>
         </div>
-        <input scInput variant="group" id="email" placeholder="shadcn" />
+        <input scInput id="email" placeholder="shadcn" />
       </div>
       <div scInputGroup>
         <div scInputGroupAddon align="block-start">
           <label scLabel for="email-2" class="text-foreground">Email</label>
         </div>
-        <input
-          scInput
-          variant="group"
-          id="email-2"
-          placeholder="shadcn&#64;vercel.com"
-        />
+        <input scInput id="email-2" placeholder="shadcn&#64;vercel.com" />
       </div>
     </div>
   `,

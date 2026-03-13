@@ -25,22 +25,16 @@ import {
   template: `
     <div class="grid w-full max-w-sm gap-6">
       <div scInputGroup class="h-auto">
-        <input scInput variant="group" placeholder="Enter amount" />
+        <input scInput placeholder="Enter amount" />
         <div scInputGroupAddon align="block-end">
           <span scInputGroupText>USD</span>
         </div>
       </div>
       <div scInputGroup>
-        <textarea
-          scTextarea
-          variant="group"
-          placeholder="Write a comment..."
-        ></textarea>
+        <textarea scTextarea placeholder="Write a comment..."></textarea>
         <div scInputGroupAddon align="block-end" class="border-t">
           <span scInputGroupText>0/280</span>
-          <button scButton variant="default" size="default" class="ml-auto">
-            Post
-          </button>
+          <button scButton class="ml-auto">Post</button>
         </div>
       </div>
     </div>

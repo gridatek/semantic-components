@@ -40,7 +40,7 @@ import {
             <svg siSearchIcon></svg>
           </span>
         </div>
-        <input scInput variant="group" placeholder="Search..." />
+        <input scInput placeholder="Search..." />
       </div>
       <div scInputGroup>
         <div scInputGroupAddon>
@@ -48,12 +48,7 @@ import {
             <svg siMailIcon></svg>
           </span>
         </div>
-        <input
-          scInput
-          variant="group"
-          type="email"
-          placeholder="Enter your email"
-        />
+        <input scInput type="email" placeholder="Enter your email" />
       </div>
       <div scInputGroup>
         <div scInputGroupAddon>
@@ -61,7 +56,7 @@ import {
             <svg siCreditCardIcon></svg>
           </span>
         </div>
-        <input scInput variant="group" placeholder="Card number" />
+        <input scInput placeholder="Card number" />
         <div scInputGroupAddon align="inline-end">
           <span scInputGroupText>
             <svg siCheckIcon></svg>
@@ -69,7 +64,7 @@ import {
         </div>
       </div>
       <div scInputGroup>
-        <input scInput variant="group" placeholder="Card number" />
+        <input scInput placeholder="Card number" />
         <div scInputGroupAddon align="inline-end">
           <span scInputGroupText>
             <svg siStarIcon></svg>

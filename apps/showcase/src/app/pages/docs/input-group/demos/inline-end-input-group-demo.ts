@@ -22,12 +22,7 @@ import { SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scInputGroup class="w-full max-w-sm">
-      <input
-        scInput
-        variant="group"
-        type="password"
-        placeholder="Enter password"
-      />
+      <input scInput type="password" placeholder="Enter password" />
       <div scInputGroupAddon align="inline-end">
         <span scInputGroupText>
           <svg siEyeOffIcon></svg>
