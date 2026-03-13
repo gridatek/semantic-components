@@ -67,7 +67,7 @@ import {
     <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxOrigin>
         <div scComboboxInputGroup>
-          <span scComboboxDisplayValue></span>
+          <span scComboboxDisplayValue [displayFn]="countryDisplayFn"></span>
           <input
             scComboboxInput
             placeholder="Select a country..."
@@ -96,11 +96,7 @@ import {
               }
               <div scComboboxList [(values)]="selectedCountries">
                 @for (option of options(); track option.value) {
-                  <div
-                    scComboboxItem
-                    [value]="option.value"
-                    [label]="option.label"
-                  >
+                  <div scComboboxItem [value]="option" [label]="option.label">
                     <span scComboboxItemLabel>{{ option.label }}</span>
                     <svg siCheckIcon scComboboxItemIndicator></svg>
                   </div>
@@ -124,6 +120,10 @@ export class ComboboxDemo {
       country.label.toLowerCase().startsWith(this.searchString().toLowerCase()),
     ),
   );
+
+  protected readonly countryDisplayFn = (value: unknown): string => {
+    return (value as { label: string }).label;
+  };
 }
 
 const ALL_COUNTRIES = [
