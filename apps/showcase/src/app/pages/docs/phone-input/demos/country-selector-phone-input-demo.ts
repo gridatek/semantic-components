@@ -26,6 +26,7 @@ import {
   ScComboboxSearchInputGroup,
   ScComboboxSearchInputIcon,
   ScComboboxSearchPanel,
+  ScInput,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
@@ -115,6 +116,7 @@ function getCountryByCode(code: string): Country | undefined {
     ScComboboxEmpty,
     ScComboboxIcon,
     ScComboboxOrigin,
+    ScInput,
     SiChevronDownIcon,
     SiSearchIcon,
   ],
@@ -132,7 +134,7 @@ function getCountryByCode(code: string): Country | undefined {
             <svg siChevronDownIcon scComboboxIcon></svg>
           </div>
           <input
-            class="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none disabled:cursor-not-allowed"
+            scInput
             type="tel"
             inputmode="tel"
             placeholder="Phone number"
