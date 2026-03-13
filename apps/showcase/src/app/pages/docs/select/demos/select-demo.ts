@@ -4,8 +4,9 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  viewChild,
+  signal,
 } from '@angular/core';
+import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScSelect,
   ScSelectDisplayValue,
@@ -33,6 +34,10 @@ import {
   SiUserIcon,
 } from '@semantic-icons/lucide-icons';
 
+interface FormModel {
+  label: string;
+}
+
 @Component({
   selector: 'app-select-demo',
   imports: [
@@ -59,39 +64,44 @@ import {
     ScSelectItemLabel,
     SiChevronDownIcon,
     SiCheckIcon,
+    FormField,
+    FormRoot,
   ],
   template: `
-    <div scSelect class="w-48">
-      <div scSelectOrigin>
-        @if (displayIcon(); as icon) {
-          <ng-container
-            *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-          ></ng-container>
-        }
-        <span scSelectDisplayValue>{{ displayValue() }}</span>
-        <input
-          scSelectInput
-          placeholder="Select a label"
-          aria-label="Label dropdown"
-        />
-        <svg scSelectIcon siChevronDownIcon></svg>
-      </div>
-      <ng-template scSelectPortal>
-        <div scSelectPopup>
-          <div scSelectList>
-            @for (option of options; track option.value) {
-              <div scSelectItem [value]="option.value" [label]="option.label">
-                <ng-container
-                  *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
-                ></ng-container>
-                <span scSelectItemLabel>{{ option.label }}</span>
-                <svg scSelectItemIndicator siCheckIcon></svg>
-              </div>
-            }
-          </div>
+    <form [formRoot]="labelForm">
+      <div scSelect class="w-48">
+        <div scSelectOrigin>
+          @if (displayIcon(); as icon) {
+            <ng-container
+              *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+            ></ng-container>
+          }
+          <span scSelectDisplayValue>{{ displayValue() }}</span>
+          <input
+            scSelectInput
+            [formField]="labelForm.label"
+            placeholder="Select a label"
+            aria-label="Label dropdown"
+          />
+          <svg scSelectIcon siChevronDownIcon></svg>
         </div>
-      </ng-template>
-    </div>
+        <ng-template scSelectPortal>
+          <div scSelectPopup>
+            <div scSelectList>
+              @for (option of options; track option.value) {
+                <div scSelectItem [value]="option.value" [label]="option.label">
+                  <ng-container
+                    *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+                  ></ng-container>
+                  <span scSelectItemLabel>{{ option.label }}</span>
+                  <svg scSelectItemIndicator siCheckIcon></svg>
+                </div>
+              }
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </form>
 
     <ng-template #iconTmpl let-icon="icon">
       @switch (icon) {
@@ -123,7 +133,7 @@ import {
     </ng-template>
 
     <div class="bg-muted mt-4 w-48 rounded-md p-4">
-      <p class="text-sm">Selected value: {{ select().value() ?? '' }}</p>
+      <p class="text-sm">Selected value: {{ labelForm.label().value() }}</p>
       <p class="text-sm">Display value: {{ displayValue() }}</p>
     </div>
   `,
@@ -132,15 +142,14 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDemo {
-  protected readonly select = viewChild.required(ScSelect);
+  readonly formModel = signal<FormModel>({ label: '' });
+  readonly labelForm = form(this.formModel);
 
-  displayValue = computed(() =>
-    this.select().value() != null ? this.select().label() : '',
-  );
+  displayValue = computed(() => this.labelForm.label().value());
 
   displayIcon = computed(() => {
-    const value = this.select().value();
-    const option = this.options.find((o) => o.value === value);
+    const label = this.labelForm.label().value();
+    const option = this.options.find((o) => o.label === label);
     return option ? option.icon : '';
   });
 

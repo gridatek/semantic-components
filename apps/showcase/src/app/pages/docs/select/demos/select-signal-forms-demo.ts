@@ -5,7 +5,6 @@ import {
   ViewEncapsulation,
   computed,
   signal,
-  viewChild,
 } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
@@ -94,11 +93,7 @@ interface FormModel {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectSignalFormsDemo {
-  private readonly select = viewChild.required(ScSelect);
-
-  displayValue = computed(() =>
-    this.select().value() != null ? this.select().label() : '',
-  );
+  displayValue = computed(() => this.fruitForm.fruit().value());
 
   readonly fruits = ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple'];
 

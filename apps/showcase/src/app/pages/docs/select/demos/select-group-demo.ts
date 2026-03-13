@@ -3,8 +3,9 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  viewChild,
+  signal,
 } from '@angular/core';
+import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScSelect,
   ScSelectDisplayValue,
@@ -22,6 +23,10 @@ import {
   ScSelectSeparator,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+
+interface FormModel {
+  food: string;
+}
 
 @Component({
   selector: 'app-select-group-demo',
@@ -42,65 +47,69 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectItemLabel,
     SiChevronDownIcon,
     SiCheckIcon,
+    FormField,
+    FormRoot,
   ],
   template: `
-    <div scSelect>
-      <div scSelectOrigin>
-        <span scSelectDisplayValue>{{ displayValue() }}</span>
-        <input
-          scSelectInput
-          placeholder="Select a food"
-          aria-label="Food dropdown"
-        />
-        <svg scSelectIcon siChevronDownIcon></svg>
-      </div>
-      <ng-template scSelectPortal>
-        <div scSelectPopup>
-          <div scSelectList>
-            <div scSelectGroup>
-              <div scSelectGroupLabel>Fruits</div>
-              <div scSelectItem value="Apple" label="Apple">
-                <span scSelectItemLabel>Apple</span>
-                <svg scSelectItemIndicator siCheckIcon></svg>
+    <form [formRoot]="foodForm">
+      <div scSelect>
+        <div scSelectOrigin>
+          <span scSelectDisplayValue>{{ displayValue() }}</span>
+          <input
+            scSelectInput
+            [formField]="foodForm.food"
+            placeholder="Select a food"
+            aria-label="Food dropdown"
+          />
+          <svg scSelectIcon siChevronDownIcon></svg>
+        </div>
+        <ng-template scSelectPortal>
+          <div scSelectPopup>
+            <div scSelectList>
+              <div scSelectGroup>
+                <div scSelectGroupLabel>Fruits</div>
+                <div scSelectItem value="Apple" label="Apple">
+                  <span scSelectItemLabel>Apple</span>
+                  <svg scSelectItemIndicator siCheckIcon></svg>
+                </div>
+                <div scSelectItem value="Banana" label="Banana">
+                  <span scSelectItemLabel>Banana</span>
+                  <svg scSelectItemIndicator siCheckIcon></svg>
+                </div>
+                <div scSelectItem value="Orange" label="Orange">
+                  <span scSelectItemLabel>Orange</span>
+                  <svg scSelectItemIndicator siCheckIcon></svg>
+                </div>
               </div>
-              <div scSelectItem value="Banana" label="Banana">
-                <span scSelectItemLabel>Banana</span>
-                <svg scSelectItemIndicator siCheckIcon></svg>
-              </div>
-              <div scSelectItem value="Orange" label="Orange">
-                <span scSelectItemLabel>Orange</span>
-                <svg scSelectItemIndicator siCheckIcon></svg>
-              </div>
-            </div>
-            <div scSelectSeparator></div>
-            <div scSelectGroup>
-              <div scSelectGroupLabel>Vegetables</div>
-              <div scSelectItem value="Carrot" label="Carrot">
-                <span scSelectItemLabel>Carrot</span>
-                <svg scSelectItemIndicator siCheckIcon></svg>
-              </div>
-              <div scSelectItem value="Broccoli" label="Broccoli">
-                <span scSelectItemLabel>Broccoli</span>
-                <svg scSelectItemIndicator siCheckIcon></svg>
-              </div>
-              <div scSelectItem value="Spinach" label="Spinach">
-                <span scSelectItemLabel>Spinach</span>
-                <svg scSelectItemIndicator siCheckIcon></svg>
+              <div scSelectSeparator></div>
+              <div scSelectGroup>
+                <div scSelectGroupLabel>Vegetables</div>
+                <div scSelectItem value="Carrot" label="Carrot">
+                  <span scSelectItemLabel>Carrot</span>
+                  <svg scSelectItemIndicator siCheckIcon></svg>
+                </div>
+                <div scSelectItem value="Broccoli" label="Broccoli">
+                  <span scSelectItemLabel>Broccoli</span>
+                  <svg scSelectItemIndicator siCheckIcon></svg>
+                </div>
+                <div scSelectItem value="Spinach" label="Spinach">
+                  <span scSelectItemLabel>Spinach</span>
+                  <svg scSelectItemIndicator siCheckIcon></svg>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </ng-template>
-    </div>
+        </ng-template>
+      </div>
+    </form>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectGroupDemo {
-  private readonly select = viewChild.required(ScSelect);
+  readonly formModel = signal<FormModel>({ food: '' });
+  readonly foodForm = form(this.formModel);
 
-  displayValue = computed(() =>
-    this.select().value() != null ? this.select().label() : '',
-  );
+  displayValue = computed(() => this.foodForm.food().value());
 }
