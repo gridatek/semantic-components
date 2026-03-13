@@ -4,10 +4,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupButton,
   ScInputGroupText,
   ScTextarea,
 } from '@semantic-components/ui';
@@ -19,7 +19,7 @@ import { SiCopyIcon, SiFileCodeIcon } from '@semantic-icons/lucide-icons';
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupButton,
+    ScButton,
     ScInputGroupText,
     ScTextarea,
     SiFileCodeIcon,
@@ -40,7 +40,8 @@ import { SiCopyIcon, SiFileCodeIcon } from '@semantic-icons/lucide-icons';
           </span>
           <span scInputGroupText class="font-mono">script.js</span>
           <button
-            scInputGroupButton
+            scButton
+            variant="ghost"
             size="icon-xs"
             class="ml-auto"
             aria-label="Copy"

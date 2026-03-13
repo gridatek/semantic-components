@@ -4,10 +4,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupButton,
   ScInputGroupText,
   ScTextarea,
 } from '@semantic-components/ui';
@@ -18,7 +18,7 @@ import {
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupButton,
+    ScButton,
     ScInputGroupText,
     ScTextarea,
   ],
@@ -38,12 +38,7 @@ import {
         ></textarea>
         <div scInputGroupAddon align="block-end" class="border-t">
           <span scInputGroupText>0/280</span>
-          <button
-            scInputGroupButton
-            variant="default"
-            size="sm"
-            class="ml-auto"
-          >
+          <button scButton variant="default" size="default" class="ml-auto">
             Post
           </button>
         </div>

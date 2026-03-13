@@ -4,10 +4,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupButton,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -26,7 +26,7 @@ import {
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupButton,
+    ScButton,
     ScMenuProvider,
     ScMenuTrigger,
     ScMenuPortal,
@@ -43,7 +43,7 @@ import {
         <div scInputGroupAddon align="inline-end">
           <div scMenuProvider>
             <button
-              scInputGroupButton
+              scButton
               scMenuTrigger
               variant="ghost"
               size="icon-xs"
@@ -68,9 +68,10 @@ import {
         <div scInputGroupAddon align="inline-end">
           <div scMenuProvider>
             <button
-              scInputGroupButton
+              scButton
               scMenuTrigger
               variant="ghost"
+              size="xs"
               class="pr-1.5! text-xs"
             >
               Search In...
