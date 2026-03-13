@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 import { ScComboboxList } from './combobox-list';
+import { ScComboboxOrigin } from './combobox-origin';
 
 @Directive({
   selector: 'div[scCombobox]',
@@ -35,6 +36,7 @@ export class ScCombobox {
   readonly selectedLabel = signal('');
 
   private readonly list = contentChild(ScComboboxList, { descendants: true });
+  readonly origin = contentChild.required(ScComboboxOrigin);
 
   constructor() {
     effect(() => {

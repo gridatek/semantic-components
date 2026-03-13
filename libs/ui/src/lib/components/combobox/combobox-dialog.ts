@@ -10,6 +10,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { ScCombobox } from './combobox';
 
 @Directive({
   selector: 'dialog[scComboboxDialog]',
@@ -31,6 +32,7 @@ export class ScComboboxDialog {
 
   private readonly comboboxDialog = inject(ComboboxDialog);
   private readonly listbox = contentChild(Listbox, { descendants: true });
+  private readonly scCombobox = inject(ScCombobox);
 
   constructor() {
     afterRenderEffect(() => {
@@ -49,9 +51,9 @@ export class ScComboboxDialog {
 
   // TODO(wagnermaciel): Switch to using the CDK for positioning.
   private positionDialog() {
-    const comboboxRect = this.comboboxDialog.combobox
-      .inputElement()
-      ?.getBoundingClientRect();
+    const comboboxRect = this.scCombobox
+      .origin()
+      .elementRef.nativeElement.getBoundingClientRect();
     const scrollY = window.scrollY;
     if (comboboxRect) {
       this.comboboxDialog.element.style.width = `${comboboxRect.width}px`;

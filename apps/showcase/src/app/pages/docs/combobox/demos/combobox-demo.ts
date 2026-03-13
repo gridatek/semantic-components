@@ -20,6 +20,7 @@ import {
   ScComboboxItemLabel,
   ScComboboxList,
   ScComboboxListContainer,
+  ScComboboxOrigin,
   ScComboboxPopupContainer,
   ScComboboxSearchInput,
   ScComboboxSearchInputGroup,
@@ -50,6 +51,7 @@ import {
     ScComboboxSearchInput,
     ScComboboxSearchInputGroup,
     ScComboboxInputGroup,
+    ScComboboxOrigin,
     ScComboboxIcon,
     ScComboboxList,
     ScComboboxPopupContainer,
@@ -63,17 +65,19 @@ import {
   host: { class: 'flex w-full justify-center' },
   template: `
     <div scCombobox [readonly]="true" class="w-60">
-      <div scComboboxInputGroup>
-        <span scComboboxDisplayValue></span>
-        <input
-          scComboboxInput
-          placeholder="Select a country..."
-          [value]="value()"
-        />
-        <button scComboboxClear aria-label="Clear selection">
-          <svg siXIcon></svg>
-        </button>
-        <svg siChevronsUpDownIcon scComboboxIcon></svg>
+      <div scComboboxOrigin>
+        <div scComboboxInputGroup>
+          <span scComboboxDisplayValue></span>
+          <input
+            scComboboxInput
+            placeholder="Select a country..."
+            [value]="value()"
+          />
+          <button scComboboxClear aria-label="Clear selection">
+            <svg siXIcon></svg>
+          </button>
+          <svg siChevronsUpDownIcon scComboboxIcon></svg>
+        </div>
       </div>
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
