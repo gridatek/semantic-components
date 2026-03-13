@@ -123,8 +123,11 @@ function getCountryByCode(code: string): Country | undefined {
   template: `
     <div class="max-w-lg">
       <div scCombobox [readonly]="true" class="w-full">
-        <div scComboboxOrigin class="flex items-center">
-          <div scComboboxInputGroup class="w-auto shrink-0">
+        <div
+          scComboboxOrigin
+          class="border-input flex h-8 items-center rounded-lg border"
+        >
+          <div scComboboxInputGroup class="w-auto shrink-0 border-0">
             <span scComboboxDisplayValue></span>
             <input
               scComboboxInput
@@ -133,8 +136,10 @@ function getCountryByCode(code: string): Country | undefined {
             />
             <svg siChevronDownIcon scComboboxIcon></svg>
           </div>
+          <div class="bg-border h-full w-px shrink-0"></div>
           <input
             scInput
+            class="rounded-l-none border-0"
             type="tel"
             inputmode="tel"
             placeholder="Phone number"
