@@ -35,7 +35,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 interface FormModel {
-  label: string;
+  category: string;
 }
 
 @Component({
@@ -68,7 +68,7 @@ interface FormModel {
     FormRoot,
   ],
   template: `
-    <form [formRoot]="labelForm">
+    <form [formRoot]="selectForm">
       <div scSelect class="w-48">
         <div scSelectOrigin>
           @if (displayIcon(); as icon) {
@@ -79,9 +79,9 @@ interface FormModel {
           <span scSelectDisplayValue>{{ displayValue() }}</span>
           <input
             scSelectInput
-            [formField]="labelForm.label"
-            placeholder="Select a label"
-            aria-label="Label dropdown"
+            [formField]="selectForm.category"
+            placeholder="Select a category"
+            aria-label="Category dropdown"
           />
           <svg scSelectIcon siChevronDownIcon></svg>
         </div>
@@ -133,7 +133,7 @@ interface FormModel {
     </ng-template>
 
     <div class="bg-muted mt-4 w-48 rounded-md p-4">
-      <p class="text-sm">Selected value: {{ labelForm.label().value() }}</p>
+      <p class="text-sm">Selected value: {{ selectForm.category().value() }}</p>
       <p class="text-sm">Display value: {{ displayValue() }}</p>
     </div>
   `,
@@ -142,13 +142,13 @@ interface FormModel {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDemo {
-  readonly formModel = signal<FormModel>({ label: '' });
-  readonly labelForm = form(this.formModel);
+  readonly formModel = signal<FormModel>({ category: '' });
+  readonly selectForm = form(this.formModel);
 
-  displayValue = computed(() => this.labelForm.label().value());
+  displayValue = computed(() => this.selectForm.category().value());
 
   displayIcon = computed(() => {
-    const label = this.labelForm.label().value();
+    const label = this.selectForm.category().value();
     const option = this.options.find((o) => o.label === label);
     return option ? option.icon : '';
   });
