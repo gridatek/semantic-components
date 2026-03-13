@@ -31,6 +31,11 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./pages/settings/settings.page'),
   },
   {
+    path: 'settings-profile',
+    loadComponent: () =>
+      import('./pages/settings-profile/settings-profile.page'),
+  },
+  {
     path: 'contact',
     loadComponent: () => import('./pages/contact/contact.page'),
   },
