@@ -34,6 +34,7 @@ import { ScComboboxOrigin } from './combobox-origin';
 export class ScCombobox {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly selectedLabel = signal('');
+  readonly selectedValue = signal<unknown>(undefined);
 
   private readonly list = contentChild(ScComboboxList, { descendants: true });
   readonly origin = contentChild.required(ScComboboxOrigin);
@@ -44,8 +45,10 @@ export class ScCombobox {
       if (!list) return;
       const values = list.values();
       if (values.length > 0) {
+        this.selectedValue.set(values[0]);
         this.selectedLabel.set(list.labelForValue(values[0]));
       } else {
+        this.selectedValue.set(undefined);
         this.selectedLabel.set('');
       }
     });

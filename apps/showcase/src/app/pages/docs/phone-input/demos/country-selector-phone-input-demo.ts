@@ -92,10 +92,6 @@ const COUNTRIES: Country[] = [
   { code: 'NZ', name: 'New Zealand', dialCode: '+64', flag: '🇳🇿' },
 ];
 
-function getCountryByCode(code: string): Country | undefined {
-  return COUNTRIES.find((c) => c.code === code);
-}
-
 @Component({
   selector: 'app-country-selector-phone-input-demo',
   imports: [
@@ -128,7 +124,11 @@ function getCountryByCode(code: string): Country | undefined {
           class="border-input flex h-8 items-center rounded-lg border"
         >
           <div scComboboxInputGroup class="w-auto shrink-0 border-0 pr-7">
-            <span scComboboxDisplayValue></span>
+            <span
+              scComboboxDisplayValue
+              [displayFn]="countryDisplayFn"
+              [value]="value()"
+            ></span>
             <input
               scComboboxInput
               [placeholder]="displayLabel()"
@@ -165,11 +165,7 @@ function getCountryByCode(code: string): Country | undefined {
                 }
                 <div scComboboxList [(values)]="selectedValues">
                   @for (country of filteredCountries(); track country.code) {
-                    <div
-                      scComboboxItem
-                      [value]="country.code"
-                      [label]="country.code + ' ' + country.dialCode"
-                    >
+                    <div scComboboxItem [value]="country">
                       <span scComboboxItemLabel class="flex items-center gap-2">
                         <span class="text-muted-foreground w-7 text-xs">
                           {{ country.code }}
@@ -195,7 +191,7 @@ function getCountryByCode(code: string): Country | undefined {
 })
 export class CountrySelectorPhoneInputDemo {
   protected readonly searchString = signal('');
-  protected readonly value = model<string>('US');
+  protected readonly value = model<Country>(COUNTRIES[0]);
   protected readonly phoneNumber = model<string>('');
 
   protected readonly selectedValues = linkedSignal(() => [this.value()]);
@@ -212,10 +208,14 @@ export class CountrySelectorPhoneInputDemo {
     });
   }
 
-  protected readonly displayLabel = computed(() => {
-    const country = getCountryByCode(this.value());
-    return country ? `${country.code} ${country.dialCode}` : 'Select...';
-  });
+  protected readonly countryDisplayFn = (value: unknown): string => {
+    const country = value as Country;
+    return `${country.code} ${country.dialCode}`;
+  };
+
+  protected readonly displayLabel = computed(() =>
+    this.countryDisplayFn(this.value()),
+  );
 
   protected readonly filteredCountries = computed(() => {
     const query = this.searchString().toLowerCase();

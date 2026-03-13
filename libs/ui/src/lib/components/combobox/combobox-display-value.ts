@@ -25,10 +25,21 @@ import { ScCombobox } from './combobox';
 })
 export class ScComboboxDisplayValue {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly displayFn = input<((value: unknown) => string) | undefined>(
+    undefined,
+  );
+  readonly value = input<unknown>(undefined);
 
   private readonly combobox = inject(forwardRef(() => ScCombobox));
 
-  readonly displayValue = computed(() => this.combobox.selectedLabel());
+  readonly displayValue = computed(() => {
+    const fn = this.displayFn();
+    if (fn) {
+      const value = this.value() ?? this.combobox.selectedValue();
+      return value !== undefined ? fn(value) : '';
+    }
+    return this.combobox.selectedLabel();
+  });
 
   protected readonly class = computed(() =>
     cn(
