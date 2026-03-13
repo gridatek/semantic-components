@@ -23,16 +23,17 @@ import { DropdownInputGroupDemo } from './dropdown-input-group-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownInputGroupDemoContainer {
-  readonly code = `import {
+  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupButton,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -51,7 +52,7 @@ import {
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupButton,
+    ScButton,
     ScMenuProvider,
     ScMenuTrigger,
     ScMenuPortal,
@@ -60,15 +61,16 @@ import {
     ScMenuItem,
     SiEllipsisIcon,
     SiChevronDownIcon,
+    CdkOverlayOrigin,
   ],
   template: \`
     <div class="grid w-full max-w-sm gap-4">
-      <div scInputGroup>
-        <input scInput variant="group" placeholder="Enter file name" />
+      <div scInputGroup cdkOverlayOrigin #group1="cdkOverlayOrigin">
+        <input scInput placeholder="Enter file name" />
         <div scInputGroupAddon align="inline-end">
-          <div scMenuProvider>
+          <div scMenuProvider align="end" [origin]="group1">
             <button
-              scInputGroupButton
+              scButton
               scMenuTrigger
               variant="ghost"
               size="icon-xs"
@@ -88,14 +90,15 @@ import {
           </div>
         </div>
       </div>
-      <div scInputGroup>
-        <input scInput variant="group" placeholder="Enter search query" />
+      <div scInputGroup cdkOverlayOrigin #group2="cdkOverlayOrigin">
+        <input scInput placeholder="Enter search query" />
         <div scInputGroupAddon align="inline-end">
-          <div scMenuProvider>
+          <div scMenuProvider align="end" [origin]="group2">
             <button
-              scInputGroupButton
+              scButton
               scMenuTrigger
               variant="ghost"
+              size="xs"
               class="pr-1.5! text-xs"
             >
               Search In...
