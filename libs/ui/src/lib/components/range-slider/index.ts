@@ -1,3 +1,3 @@
 export { ScRangeSlider } from './range-slider';
-export { ScRangeSliderMax } from './range-slider-max';
-export { ScRangeSliderMin } from './range-slider-min';
+export { ScRangeSliderEndThumb } from './range-slider-end-thumb';
+export { ScRangeSliderStartThumb } from './range-slider-start-thumb';

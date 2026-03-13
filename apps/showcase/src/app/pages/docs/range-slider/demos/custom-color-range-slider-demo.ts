@@ -6,13 +6,18 @@ import {
 import {
   ScLabel,
   ScRangeSlider,
-  ScRangeSliderMax,
-  ScRangeSliderMin,
+  ScRangeSliderEndThumb,
+  ScRangeSliderStartThumb,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-custom-color-range-slider-demo',
-  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax, ScLabel],
+  imports: [
+    ScRangeSlider,
+    ScRangeSliderStartThumb,
+    ScRangeSliderEndThumb,
+    ScLabel,
+  ],
   template: `
     <div class="w-[280px] space-y-4">
       <label scLabel>
@@ -24,14 +29,14 @@ import {
         [step]="1"
       >
         <input
-          scRangeSliderMin
+          scRangeSliderStartThumb
           [min]="0"
           [max]="50"
           [(value)]="minValue"
           aria-label="Minimum temperature"
         />
         <input
-          scRangeSliderMax
+          scRangeSliderEndThumb
           [min]="0"
           [max]="50"
           [(value)]="maxValue"

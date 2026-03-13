@@ -11,8 +11,8 @@ import {
   ScFieldErrors,
   ScLabel,
   ScRangeSlider,
-  ScRangeSliderMax,
-  ScRangeSliderMin,
+  ScRangeSliderEndThumb,
+  ScRangeSliderStartThumb,
 } from '@semantic-components/ui';
 
 interface PriceRangeFormModel {
@@ -24,8 +24,8 @@ interface PriceRangeFormModel {
   selector: 'app-form-range-slider-demo',
   imports: [
     ScRangeSlider,
-    ScRangeSliderMin,
-    ScRangeSliderMax,
+    ScRangeSliderStartThumb,
+    ScRangeSliderEndThumb,
     ScField,
     ScFieldErrors,
     ScLabel,
@@ -41,12 +41,12 @@ interface PriceRangeFormModel {
         </label>
         <div scRangeSlider [step]="50">
           <input
-            scRangeSliderMin
+            scRangeSliderStartThumb
             [formField]="priceForm.minPrice"
             aria-label="Minimum price"
           />
           <input
-            scRangeSliderMax
+            scRangeSliderEndThumb
             [formField]="priceForm.maxPrice"
             aria-label="Maximum price"
           />

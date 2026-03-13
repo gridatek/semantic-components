@@ -10,15 +10,15 @@ import {
 import { cn } from '../../utils';
 // Imported here (below the class) to avoid circular dependency at class-definition time.
 // The forwardRef(() => ...) above defers resolution until runtime.
-import { ScRangeSliderMax } from './range-slider-max';
-import { ScRangeSliderMin } from './range-slider-min';
+import { ScRangeSliderEndThumb } from './range-slider-end-thumb';
+import { ScRangeSliderStartThumb } from './range-slider-start-thumb';
 
 @Directive({
   selector: 'div[scRangeSlider]',
   host: {
     '[class]': 'class()',
-    '[style.--min-percent]': 'minPercentCss()',
-    '[style.--max-percent]': 'maxPercentCss()',
+    '[style.--min-percent]': 'startPercentCss()',
+    '[style.--max-percent]': 'endPercentCss()',
     '(pointerdown)': 'onPointerDown($event)',
   },
 })
@@ -30,30 +30,32 @@ export class ScRangeSlider {
   readonly step = input<number>(1);
   readonly disabled = input<boolean>(false);
 
-  readonly minThumb = contentChild(forwardRef(() => ScRangeSliderMin));
-  readonly maxThumb = contentChild(forwardRef(() => ScRangeSliderMax));
+  readonly startThumb = contentChild(forwardRef(() => ScRangeSliderStartThumb));
+  readonly endThumb = contentChild(forwardRef(() => ScRangeSliderEndThumb));
 
-  readonly min = computed(() => this.minThumb()?.resolvedMin() ?? 0);
-  readonly max = computed(() => this.maxThumb()?.resolvedMax() ?? 100);
+  readonly min = computed(() => this.startThumb()?.resolvedMin() ?? 0);
+  readonly max = computed(() => this.endThumb()?.resolvedMax() ?? 100);
 
   protected readonly class = computed(() =>
     cn('relative flex h-3 w-full items-center', this.classInput()),
   );
 
-  readonly minPercent = computed(() => {
+  readonly startPercent = computed(() => {
     const range = this.max() - this.min();
-    const minVal = this.minThumb()?.value() ?? this.min();
-    return range === 0 ? 0 : ((minVal - this.min()) / range) * 100;
+    const startVal = this.startThumb()?.value() ?? this.min();
+    return range === 0 ? 0 : ((startVal - this.min()) / range) * 100;
   });
 
-  readonly maxPercent = computed(() => {
+  readonly endPercent = computed(() => {
     const range = this.max() - this.min();
-    const maxVal = this.maxThumb()?.value() ?? this.max();
-    return range === 0 ? 0 : ((maxVal - this.min()) / range) * 100;
+    const endVal = this.endThumb()?.value() ?? this.max();
+    return range === 0 ? 0 : ((endVal - this.min()) / range) * 100;
   });
 
-  protected readonly minPercentCss = computed(() => `${this.minPercent()}%`);
-  protected readonly maxPercentCss = computed(() => `${this.maxPercent()}%`);
+  protected readonly startPercentCss = computed(
+    () => `${this.startPercent()}%`,
+  );
+  protected readonly endPercentCss = computed(() => `${this.endPercent()}%`);
 
   protected onPointerDown(event: PointerEvent) {
     if (this.disabled()) {
@@ -65,25 +67,25 @@ export class ScRangeSlider {
     const value = this.min() + (percent / 100) * (this.max() - this.min());
     const stepped = Math.round(value / this.step()) * this.step();
 
-    const minThumb = this.minThumb();
-    const maxThumb = this.maxThumb();
-    const minVal = minThumb?.value() ?? this.min();
-    const maxVal = maxThumb?.value() ?? this.max();
+    const startThumb = this.startThumb();
+    const endThumb = this.endThumb();
+    const startVal = startThumb?.value() ?? this.min();
+    const endVal = endThumb?.value() ?? this.max();
 
-    const distToMin = Math.abs(stepped - minVal);
-    const distToMax = Math.abs(stepped - maxVal);
+    const distToStart = Math.abs(stepped - startVal);
+    const distToEnd = Math.abs(stepped - endVal);
 
-    // When equidistant (e.g. both thumbs at same position), prefer the max
-    // thumb so the range can expand outward. Only pick the min thumb when
-    // the click is at or below the current min value (both thumbs collapsed
+    // When equidistant (e.g. both thumbs at same position), prefer the end
+    // thumb so the range can expand outward. Only pick the start thumb when
+    // the click is at or below the current start value (both thumbs collapsed
     // at the upper end).
     if (
-      distToMin < distToMax ||
-      (distToMin === distToMax && stepped <= minVal)
+      distToStart < distToEnd ||
+      (distToStart === distToEnd && stepped <= startVal)
     ) {
-      minThumb?.value.set(Math.min(stepped, maxVal));
+      startThumb?.value.set(Math.min(stepped, endVal));
     } else {
-      maxThumb?.value.set(Math.max(stepped, minVal));
+      endThumb?.value.set(Math.max(stepped, startVal));
     }
   }
 }

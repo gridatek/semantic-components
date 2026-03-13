@@ -6,13 +6,18 @@ import {
 import {
   ScLabel,
   ScRangeSlider,
-  ScRangeSliderMax,
-  ScRangeSliderMin,
+  ScRangeSliderEndThumb,
+  ScRangeSliderStartThumb,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-range-slider-demo',
-  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax, ScLabel],
+  imports: [
+    ScRangeSlider,
+    ScRangeSliderStartThumb,
+    ScRangeSliderEndThumb,
+    ScLabel,
+  ],
   template: `
     <div class="w-[280px] space-y-4">
       <label scLabel>
@@ -20,14 +25,14 @@ import {
       </label>
       <div scRangeSlider [step]="10">
         <input
-          scRangeSliderMin
+          scRangeSliderStartThumb
           [min]="0"
           [max]="1000"
           [(value)]="minValue"
           aria-label="Minimum price"
         />
         <input
-          scRangeSliderMax
+          scRangeSliderEndThumb
           [min]="0"
           [max]="1000"
           [(value)]="maxValue"

@@ -2,10 +2,10 @@ import { Directive, computed, inject, input, model } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { ScRangeSlider } from './range-slider';
-import { MAX_THUMB_CLASSES } from './range-slider-thumb-base';
+import { END_THUMB_CLASSES } from './range-slider-thumb-base';
 
 @Directive({
-  selector: 'input[scRangeSliderMax]',
+  selector: 'input[scRangeSliderEndThumb]',
   host: {
     type: 'range',
     '[min]': 'resolvedMin()',
@@ -17,7 +17,7 @@ import { MAX_THUMB_CLASSES } from './range-slider-thumb-base';
     '(input)': 'onInput($event)',
   },
 })
-export class ScRangeSliderMax implements FormValueControl<number> {
+export class ScRangeSliderEndThumb implements FormValueControl<number> {
   protected readonly rangeSlider = inject(ScRangeSlider);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -32,14 +32,15 @@ export class ScRangeSliderMax implements FormValueControl<number> {
   readonly resolvedMax = computed(() => this.max() ?? 100);
 
   protected readonly class = computed(() =>
-    cn(...MAX_THUMB_CLASSES, this.classInput()),
+    cn(...END_THUMB_CLASSES, this.classInput()),
   );
 
   protected onInput(event: Event) {
     const el = event.target as HTMLInputElement;
     const val = +el.value;
-    const minVal = this.rangeSlider.minThumb()?.value() ?? this.resolvedMin();
-    const clamped = Math.max(val, minVal);
+    const startVal =
+      this.rangeSlider.startThumb()?.value() ?? this.resolvedMin();
+    const clamped = Math.max(val, startVal);
     this.value.set(clamped);
 
     if (val !== clamped) {
