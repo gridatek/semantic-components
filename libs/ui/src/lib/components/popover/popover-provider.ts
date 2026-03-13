@@ -23,6 +23,13 @@ import { ScPopoverTrigger } from './popover-trigger';
 export type ScPopoverSide = 'top' | 'right' | 'bottom' | 'left';
 export type ScPopoverAlign = 'start' | 'center' | 'end';
 
+const oppositeSide: Record<ScPopoverSide, ScPopoverSide> = {
+  top: 'bottom',
+  bottom: 'top',
+  left: 'right',
+  right: 'left',
+};
+
 function buildPosition(
   side: ScPopoverSide,
   align: ScPopoverAlign,
@@ -62,7 +69,7 @@ function buildPosition(
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="overlayOpen()"
-        [cdkConnectedOverlayPositions]="[position()]"
+        [cdkConnectedOverlayPositions]="positions()"
         (overlayOutsideClick)="close()"
         (overlayKeydown)="onKeydown($event)"
       >
@@ -118,9 +125,17 @@ export class ScPopoverProvider {
     () => this.originInput() ?? this.triggerChild()?.overlayOrigin,
   );
 
-  protected readonly position = computed(() =>
-    buildPosition(this.side(), this.align(), this.offset()),
-  );
+  protected readonly positions = computed(() => {
+    const side = this.side();
+    const align = this.align();
+    const gap = this.offset();
+    return [
+      // Preferred position
+      buildPosition(side, align, gap),
+      // Fallback: opposite side
+      buildPosition(oppositeSide[side], align, gap),
+    ];
+  });
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
