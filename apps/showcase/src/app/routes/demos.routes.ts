@@ -1688,6 +1688,48 @@ export const demosRoutes: Route[] = [
             (m) => m.TextareaInputGroupDemo,
           ),
       },
+      {
+        path: 'icon-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/icon-input-group-demo').then(
+            (m) => m.IconInputGroupDemo,
+          ),
+      },
+      {
+        path: 'inline-end-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/inline-end-input-group-demo').then(
+            (m) => m.InlineEndInputGroupDemo,
+          ),
+      },
+      {
+        path: 'block-start-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/block-start-input-group-demo').then(
+            (m) => m.BlockStartInputGroupDemo,
+          ),
+      },
+      {
+        path: 'block-end-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/block-end-input-group-demo').then(
+            (m) => m.BlockEndInputGroupDemo,
+          ),
+      },
+      {
+        path: 'dropdown-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/dropdown-input-group-demo').then(
+            (m) => m.DropdownInputGroupDemo,
+          ),
+      },
+      {
+        path: 'label-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/label-input-group-demo').then(
+            (m) => m.LabelInputGroupDemo,
+          ),
+      },
     ],
   },
   {
