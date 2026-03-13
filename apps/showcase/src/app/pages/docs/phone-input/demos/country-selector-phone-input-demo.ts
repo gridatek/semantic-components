@@ -4,7 +4,6 @@ import {
   ViewEncapsulation,
   computed,
   effect,
-  input,
   linkedSignal,
   model,
   signal,
@@ -25,7 +24,6 @@ import {
   ScComboboxSearchInputGroup,
   ScComboboxSearchInputIcon,
   ScComboboxSearchPanel,
-  cn,
 } from '@semantic-components/ui';
 import {
   SiChevronsUpDownIcon,
@@ -99,7 +97,7 @@ function getCountryByCode(code: string): Country | undefined {
 }
 
 @Component({
-  selector: 'sc-country-code-select',
+  selector: 'app-country-selector-phone-input-demo',
   imports: [
     ScCombobox,
     ScComboboxDialog,
@@ -120,89 +118,82 @@ function getCountryByCode(code: string): Country | undefined {
     SiSearchIcon,
   ],
   template: `
-    <div scCombobox [readonly]="true" class="w-full">
-      <div
-        scComboboxInputGroup
-        class="pr-0 [&>[data-slot=combobox-icon]]:hidden"
-      >
-        <span scComboboxDisplayValue></span>
-        <input
-          scComboboxInput
-          [placeholder]="displayLabel()"
-          [value]="displayLabel()"
-          [disabled]="disabled()"
-        />
-        <svg
-          siChevronsUpDownIcon
-          class="text-muted-foreground pointer-events-none mx-1 size-4 shrink-0 opacity-50"
-        ></svg>
-        <div class="bg-border w-px shrink-0 self-stretch"></div>
-        <input
-          class="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none disabled:cursor-not-allowed"
-          type="tel"
-          inputmode="tel"
-          [placeholder]="phonePlaceholder()"
-          [disabled]="disabled()"
-          [value]="phoneNumber()"
-          (input)="onPhoneInput($event)"
-          (click)="$event.stopPropagation()"
-        />
-      </div>
-      <ng-template scComboboxPopupContainer>
-        <dialog scComboboxDialog class="min-w-72">
-          <div scComboboxSearchPanel>
-            <div scComboboxSearchInputGroup>
-              <svg siSearchIcon scComboboxSearchInputIcon></svg>
-              <input
-                scComboboxSearchInput
-                placeholder="Search countries..."
-                [(value)]="searchString"
-              />
-            </div>
-            <ng-template scComboboxListContainer>
-              @if (filteredCountries().length === 0) {
-                <div scComboboxEmpty>No countries found</div>
-              }
-              <div scComboboxList [(values)]="selectedValues">
-                @for (country of filteredCountries(); track country.code) {
-                  <div
-                    scComboboxItem
-                    [value]="country.code"
-                    [label]="country.code + ' ' + country.dialCode"
-                  >
-                    <span scComboboxItemLabel class="flex items-center gap-2">
-                      <span class="text-muted-foreground w-7 text-xs">
-                        {{ country.code }}
-                      </span>
-                      <span class="flex-1 truncate">{{ country.name }}</span>
-                      <span class="text-muted-foreground text-xs">
-                        {{ country.dialCode }}
-                      </span>
-                    </span>
-                  </div>
-                }
+    <div class="max-w-sm">
+      <div scCombobox [readonly]="true" class="w-full">
+        <div
+          scComboboxInputGroup
+          class="pr-0 [&>[data-slot=combobox-icon]]:hidden"
+        >
+          <span scComboboxDisplayValue></span>
+          <input
+            scComboboxInput
+            [placeholder]="displayLabel()"
+            [value]="displayLabel()"
+          />
+          <svg
+            siChevronsUpDownIcon
+            class="text-muted-foreground pointer-events-none mx-1 size-4 shrink-0 opacity-50"
+          ></svg>
+          <div class="bg-border w-px shrink-0 self-stretch"></div>
+          <input
+            class="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none disabled:cursor-not-allowed"
+            type="tel"
+            inputmode="tel"
+            placeholder="Phone number"
+            [value]="phoneNumber()"
+            (input)="onPhoneInput($event)"
+            (click)="$event.stopPropagation()"
+          />
+        </div>
+        <ng-template scComboboxPopupContainer>
+          <dialog scComboboxDialog class="min-w-72">
+            <div scComboboxSearchPanel>
+              <div scComboboxSearchInputGroup>
+                <svg siSearchIcon scComboboxSearchInputIcon></svg>
+                <input
+                  scComboboxSearchInput
+                  placeholder="Search countries..."
+                  [(value)]="searchString"
+                />
               </div>
-            </ng-template>
-          </div>
-        </dialog>
-      </ng-template>
+              <ng-template scComboboxListContainer>
+                @if (filteredCountries().length === 0) {
+                  <div scComboboxEmpty>No countries found</div>
+                }
+                <div scComboboxList [(values)]="selectedValues">
+                  @for (country of filteredCountries(); track country.code) {
+                    <div
+                      scComboboxItem
+                      [value]="country.code"
+                      [label]="country.code + ' ' + country.dialCode"
+                    >
+                      <span scComboboxItemLabel class="flex items-center gap-2">
+                        <span class="text-muted-foreground w-7 text-xs">
+                          {{ country.code }}
+                        </span>
+                        <span class="flex-1 truncate">{{ country.name }}</span>
+                        <span class="text-muted-foreground text-xs">
+                          {{ country.dialCode }}
+                        </span>
+                      </span>
+                    </div>
+                  }
+                </div>
+              </ng-template>
+            </div>
+          </dialog>
+        </ng-template>
+      </div>
     </div>
   `,
-  host: {
-    '[class]': 'class()',
-  },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class CountryCodeSelect {
-  readonly classInput = input<string>('', { alias: 'class' });
-  readonly countries = input<Country[]>(COUNTRIES);
-  readonly disabled = input<boolean>(false);
-  readonly phonePlaceholder = input<string>('Phone number');
-  readonly value = model<string>('US');
-  readonly phoneNumber = model<string>('', { alias: 'phone' });
-
+export class CountrySelectorPhoneInputDemo {
   protected readonly searchString = signal('');
+  protected readonly value = model<string>('US');
+  protected readonly phoneNumber = model<string>('');
 
   protected readonly selectedValues = linkedSignal(() => [this.value()]);
 
@@ -225,9 +216,9 @@ class CountryCodeSelect {
 
   protected readonly filteredCountries = computed(() => {
     const query = this.searchString().toLowerCase();
-    if (!query) return this.countries();
+    if (!query) return COUNTRIES;
 
-    return this.countries().filter(
+    return COUNTRIES.filter(
       (c) =>
         c.name.toLowerCase().includes(query) ||
         c.dialCode.includes(query) ||
@@ -238,20 +229,4 @@ class CountryCodeSelect {
   protected onPhoneInput(event: Event): void {
     this.phoneNumber.set((event.target as HTMLInputElement).value);
   }
-
-  protected readonly class = computed(() => cn('block', this.classInput()));
 }
-
-@Component({
-  selector: 'app-country-selector-phone-input-demo',
-  imports: [CountryCodeSelect],
-  template: `
-    <div class="max-w-sm">
-      <sc-country-code-select />
-    </div>
-  `,
-  host: { class: 'flex w-full justify-center' },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class CountrySelectorPhoneInputDemo {}
