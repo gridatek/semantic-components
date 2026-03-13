@@ -1,4 +1,8 @@
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import {
+  CdkOverlayOrigin,
+  ConnectedPosition,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -17,94 +21,40 @@ import { ScHoverCardTrigger } from './hover-card-trigger';
 export type ScHoverCardSide = 'top' | 'right' | 'bottom' | 'left';
 export type ScHoverCardAlign = 'start' | 'center' | 'end';
 
-type PositionKey = `${ScHoverCardSide}-${ScHoverCardAlign}`;
-
-const positionMap: Record<PositionKey, ConnectedPosition> = {
-  'top-start': {
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'bottom',
-    offsetY: -4,
-  },
-  'top-center': {
-    originX: 'center',
-    originY: 'top',
-    overlayX: 'center',
-    overlayY: 'bottom',
-    offsetY: -4,
-  },
-  'top-end': {
-    originX: 'end',
-    originY: 'top',
-    overlayX: 'end',
-    overlayY: 'bottom',
-    offsetY: -4,
-  },
-  'bottom-start': {
-    originX: 'start',
-    originY: 'bottom',
-    overlayX: 'start',
-    overlayY: 'top',
-    offsetY: 4,
-  },
-  'bottom-center': {
-    originX: 'center',
-    originY: 'bottom',
-    overlayX: 'center',
-    overlayY: 'top',
-    offsetY: 4,
-  },
-  'bottom-end': {
-    originX: 'end',
-    originY: 'bottom',
-    overlayX: 'end',
-    overlayY: 'top',
-    offsetY: 4,
-  },
-  'left-start': {
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'end',
-    overlayY: 'top',
-    offsetX: -4,
-  },
-  'left-center': {
-    originX: 'start',
-    originY: 'center',
-    overlayX: 'end',
-    overlayY: 'center',
-    offsetX: -4,
-  },
-  'left-end': {
-    originX: 'start',
-    originY: 'bottom',
-    overlayX: 'end',
-    overlayY: 'bottom',
-    offsetX: -4,
-  },
-  'right-start': {
-    originX: 'end',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'top',
-    offsetX: 4,
-  },
-  'right-center': {
-    originX: 'end',
-    originY: 'center',
-    overlayX: 'start',
-    overlayY: 'center',
-    offsetX: 4,
-  },
-  'right-end': {
-    originX: 'end',
-    originY: 'bottom',
-    overlayX: 'start',
-    overlayY: 'bottom',
-    offsetX: 4,
-  },
+const oppositeSide: Record<ScHoverCardSide, ScHoverCardSide> = {
+  top: 'bottom',
+  bottom: 'top',
+  left: 'right',
+  right: 'left',
 };
+
+function buildPosition(
+  side: ScHoverCardSide,
+  align: ScHoverCardAlign,
+  gap: number,
+): ConnectedPosition {
+  const isVertical = side === 'top' || side === 'bottom';
+
+  if (isVertical) {
+    return {
+      originX: align,
+      originY: side,
+      overlayX: align,
+      overlayY: side === 'bottom' ? 'top' : 'bottom',
+      offsetY: side === 'bottom' ? gap : -gap,
+    };
+  }
+
+  const alignY =
+    align === 'start' ? 'top' : align === 'end' ? 'bottom' : 'center';
+  return {
+    originX: side === 'right' ? 'end' : 'start',
+    originY: alignY,
+    overlayX: side === 'right' ? 'start' : 'end',
+    overlayY: alignY,
+    offsetX: side === 'right' ? gap : -gap,
+  };
+}
 
 @Component({
   selector: 'div[scHoverCardProvider]',
@@ -117,7 +67,7 @@ const positionMap: Record<PositionKey, ConnectedPosition> = {
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="overlayOpen()"
-        [cdkConnectedOverlayPositions]="[position()]"
+        [cdkConnectedOverlayPositions]="positions()"
       >
         <ng-container [ngTemplateOutlet]="hoverCardPortal().templateRef" />
       </ng-template>
@@ -139,6 +89,14 @@ export class ScHoverCardProvider {
   /** Alignment along the side */
   readonly align = input<ScHoverCardAlign>('center');
 
+  /** Gap (in pixels) between the trigger and the hover card */
+  readonly offset = input(4);
+
+  /** Custom overlay origin. Defaults to the trigger element if not provided. */
+  readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
+    alias: 'origin',
+  });
+
   /** Delay before showing hover card (ms) */
   readonly openDelay = input<number>(700);
 
@@ -154,13 +112,20 @@ export class ScHoverCardProvider {
   private readonly triggerChild = contentChild(ScHoverCardTrigger);
   protected readonly hoverCardPortal = contentChild.required(ScHoverCardPortal);
 
-  readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
+  readonly origin = computed(
+    () => this.originInput() ?? this.triggerChild()?.overlayOrigin,
+  );
 
-  protected readonly position = computed(() => {
+  protected readonly positions = computed(() => {
     const side = this.side();
     const align = this.align();
-    const key: PositionKey = `${side}-${align}`;
-    return positionMap[key];
+    const gap = this.offset();
+    return [
+      // Preferred position
+      buildPosition(side, align, gap),
+      // Fallback: opposite side
+      buildPosition(oppositeSide[side], align, gap),
+    ];
   });
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
