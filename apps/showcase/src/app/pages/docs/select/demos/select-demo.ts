@@ -68,7 +68,7 @@ import {
             *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
           ></ng-container>
         }
-        <span scSelectDisplayValue></span>
+        <span scSelectDisplayValue>{{ displayValue() }}</span>
         <input
           scSelectInput
           placeholder="Select a label"
@@ -121,13 +121,22 @@ import {
         }
       }
     </ng-template>
+
+    <div class="bg-muted mt-4 w-48 rounded-md p-4">
+      <p class="text-sm">Selected value: {{ select().value() ?? '' }}</p>
+      <p class="text-sm">Display value: {{ displayValue() }}</p>
+    </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDemo {
-  private readonly select = viewChild.required(ScSelect);
+  protected readonly select = viewChild.required(ScSelect);
+
+  displayValue = computed(() =>
+    this.select().value() != null ? this.select().label() : '',
+  );
 
   displayIcon = computed(() => {
     const value = this.select().value();

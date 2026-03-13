@@ -2,6 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
+  viewChild,
 } from '@angular/core';
 import {
   ScSelect,
@@ -44,7 +46,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scSelect>
       <div scSelectOrigin>
-        <span scSelectDisplayValue></span>
+        <span scSelectDisplayValue>{{ displayValue() }}</span>
         <input
           scSelectInput
           placeholder="Select a food"
@@ -95,4 +97,10 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectGroupDemo {}
+export class SelectGroupDemo {
+  private readonly select = viewChild.required(ScSelect);
+
+  displayValue = computed(() =>
+    this.select().value() != null ? this.select().label() : '',
+  );
+}

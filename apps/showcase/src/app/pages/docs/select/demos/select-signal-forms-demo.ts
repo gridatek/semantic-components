@@ -3,7 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   signal,
+  viewChild,
 } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
@@ -56,7 +58,7 @@ interface FormModel {
           <label scLabel>Fruit</label>
           <div scSelect class="w-full">
             <div scSelectOrigin>
-              <span scSelectDisplayValue></span>
+              <span scSelectDisplayValue>{{ displayValue() }}</span>
               <input
                 scSelectInput
                 [formField]="fruitForm.fruit"
@@ -92,6 +94,12 @@ interface FormModel {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectSignalFormsDemo {
+  private readonly select = viewChild.required(ScSelect);
+
+  displayValue = computed(() =>
+    this.select().value() != null ? this.select().label() : '',
+  );
+
   readonly fruits = ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple'];
 
   readonly formModel = signal<FormModel>({
