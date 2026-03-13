@@ -27,10 +27,7 @@ import {
   ScComboboxSearchInputIcon,
   ScComboboxSearchPanel,
 } from '@semantic-components/ui';
-import {
-  SiChevronsUpDownIcon,
-  SiSearchIcon,
-} from '@semantic-icons/lucide-icons';
+import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 interface Country {
   code: string;
@@ -118,7 +115,7 @@ function getCountryByCode(code: string): Country | undefined {
     ScComboboxEmpty,
     ScComboboxIcon,
     ScComboboxOrigin,
-    SiChevronsUpDownIcon,
+    SiChevronDownIcon,
     SiSearchIcon,
   ],
   template: `
@@ -132,7 +129,7 @@ function getCountryByCode(code: string): Country | undefined {
               [placeholder]="displayLabel()"
               [value]="displayLabel()"
             />
-            <svg siChevronsUpDownIcon scComboboxIcon></svg>
+            <svg siChevronDownIcon scComboboxIcon></svg>
           </div>
           <input
             class="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none disabled:cursor-not-allowed"
