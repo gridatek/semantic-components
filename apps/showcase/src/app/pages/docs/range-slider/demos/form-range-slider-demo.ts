@@ -5,7 +5,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { FormField, form } from '@angular/forms/signals';
+import { FormField, form, max, min } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldErrors,
@@ -39,7 +39,7 @@ interface PriceRangeFormModel {
           Price range: {{ '$' + formModel().minPrice }} &ndash;
           {{ '$' + formModel().maxPrice }}
         </label>
-        <div scRangeSlider [min]="0" [max]="1000" [step]="50">
+        <div scRangeSlider [step]="50">
           <input
             scRangeSliderMin
             [formField]="priceForm.minPrice"
@@ -70,5 +70,10 @@ export class FormRangeSliderDemo {
     maxPrice: 750,
   });
 
-  readonly priceForm = form(this.formModel);
+  readonly priceForm = form(this.formModel, (path) => {
+    min(path.minPrice, 0);
+    max(path.minPrice, 1000);
+    min(path.maxPrice, 0);
+    max(path.maxPrice, 1000);
+  });
 }

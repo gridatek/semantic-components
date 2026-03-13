@@ -27,13 +27,14 @@ export class ScRangeSlider {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly min = input<number>(0);
-  readonly max = input<number>(100);
   readonly step = input<number>(1);
   readonly disabled = input<boolean>(false);
 
   readonly minThumb = contentChild(forwardRef(() => ScRangeSliderMin));
   readonly maxThumb = contentChild(forwardRef(() => ScRangeSliderMax));
+
+  readonly min = computed(() => this.minThumb()?.resolvedMin() ?? 0);
+  readonly max = computed(() => this.maxThumb()?.resolvedMax() ?? 100);
 
   protected readonly class = computed(() =>
     cn('relative flex h-3 w-full items-center', this.classInput()),

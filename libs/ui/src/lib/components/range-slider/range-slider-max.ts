@@ -1,4 +1,5 @@
 import { Directive, computed, inject, input, model } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { ScRangeSlider } from './range-slider';
 import { MAX_THUMB_CLASSES } from './range-slider-thumb-base';
@@ -7,8 +8,8 @@ import { MAX_THUMB_CLASSES } from './range-slider-thumb-base';
   selector: 'input[scRangeSliderMax]',
   host: {
     type: 'range',
-    '[min]': 'rangeSlider.min()',
-    '[max]': 'rangeSlider.max()',
+    '[min]': 'resolvedMin()',
+    '[max]': 'resolvedMax()',
     '[step]': 'rangeSlider.step()',
     '[disabled]': 'rangeSlider.disabled()',
     '[value]': 'value()',
@@ -16,11 +17,19 @@ import { MAX_THUMB_CLASSES } from './range-slider-thumb-base';
     '(input)': 'onInput($event)',
   },
 })
-export class ScRangeSliderMax {
+export class ScRangeSliderMax implements FormValueControl<number> {
   protected readonly rangeSlider = inject(ScRangeSlider);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly value = model<number>(this.rangeSlider.max());
+  readonly value = model<number>(100);
+
+  // Don't use input<number>(0) — type must be input<number | undefined> to match FormUiControl
+  readonly min = input<number | undefined>(undefined);
+  // Don't use input<number>(100) — type must be input<number | undefined> to match FormUiControl
+  readonly max = input<number | undefined>(undefined);
+
+  readonly resolvedMin = computed(() => this.min() ?? 0);
+  readonly resolvedMax = computed(() => this.max() ?? 100);
 
   protected readonly class = computed(() =>
     cn(...MAX_THUMB_CLASSES, this.classInput()),
@@ -29,8 +38,7 @@ export class ScRangeSliderMax {
   protected onInput(event: Event) {
     const el = event.target as HTMLInputElement;
     const val = +el.value;
-    const minVal =
-      this.rangeSlider.minThumb()?.value() ?? this.rangeSlider.min();
+    const minVal = this.rangeSlider.minThumb()?.value() ?? this.resolvedMin();
     const clamped = Math.max(val, minVal);
     this.value.set(clamped);
 
