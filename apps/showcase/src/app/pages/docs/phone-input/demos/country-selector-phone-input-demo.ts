@@ -13,6 +13,7 @@ import {
   ScComboboxDialog,
   ScComboboxDisplayValue,
   ScComboboxEmpty,
+  ScComboboxIcon,
   ScComboboxInput,
   ScComboboxInputGroup,
   ScComboboxItem,
@@ -115,6 +116,7 @@ function getCountryByCode(code: string): Country | undefined {
     ScComboboxSearchInputIcon,
     ScComboboxSearchPanel,
     ScComboboxEmpty,
+    ScComboboxIcon,
     ScComboboxOrigin,
     SiChevronsUpDownIcon,
     SiSearchIcon,
@@ -130,10 +132,7 @@ function getCountryByCode(code: string): Country | undefined {
               [placeholder]="displayLabel()"
               [value]="displayLabel()"
             />
-            <svg
-              siChevronsUpDownIcon
-              class="text-muted-foreground pointer-events-none mx-1 size-4 shrink-0 opacity-50"
-            ></svg>
+            <svg siChevronsUpDownIcon scComboboxIcon></svg>
           </div>
           <input
             class="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent px-2.5 text-sm outline-none disabled:cursor-not-allowed"
