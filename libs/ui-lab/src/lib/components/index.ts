@@ -25,7 +25,6 @@ export * from './number-field';
 export * from './org-chart';
 export * from './password-field';
 export * from './pdf-viewer';
-export * from './phone-input';
 export * from './qr-code';
 export * from './signature-pad';
 export * from './speed-dial';
