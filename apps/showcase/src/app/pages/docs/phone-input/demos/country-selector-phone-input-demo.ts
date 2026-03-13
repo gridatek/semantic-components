@@ -124,11 +124,7 @@ const COUNTRIES: Country[] = [
           class="border-input flex h-8 items-center rounded-lg border"
         >
           <div scComboboxInputGroup class="w-auto shrink-0 border-0 pr-7">
-            <span
-              scComboboxDisplayValue
-              [displayFn]="countryDisplayFn"
-              [value]="value()"
-            ></span>
+            <span scComboboxDisplayValue [displayFn]="countryDisplayFn"></span>
             <input
               scComboboxInput
               [placeholder]="displayLabel()"

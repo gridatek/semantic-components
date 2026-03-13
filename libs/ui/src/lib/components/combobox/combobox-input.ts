@@ -21,9 +21,8 @@ export class ScComboboxInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly combobox = inject(forwardRef(() => ScCombobox));
-  private readonly hasValue = computed(
-    () => this.combobox.selectedLabel() !== '',
-  );
+
+  readonly hasValue = computed(() => this.combobox.hasValue());
 
   protected readonly class = computed(() =>
     cn(

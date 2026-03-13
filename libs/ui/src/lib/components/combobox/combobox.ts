@@ -1,12 +1,5 @@
 import { Combobox } from '@angular/aria/combobox';
-import {
-  Directive,
-  computed,
-  contentChild,
-  effect,
-  input,
-  signal,
-} from '@angular/core';
+import { Directive, computed, contentChild, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScComboboxList } from './combobox-list';
 import { ScComboboxOrigin } from './combobox-origin';
@@ -33,26 +26,13 @@ import { ScComboboxOrigin } from './combobox-origin';
 })
 export class ScCombobox {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly selectedLabel = signal('');
-  readonly selectedValue = signal<unknown>(undefined);
+
+  readonly selectedValue = computed(() => this.list()?.values()[0]);
+
+  readonly hasValue = computed(() => this.selectedValue() !== undefined);
 
   private readonly list = contentChild(ScComboboxList, { descendants: true });
   readonly origin = contentChild.required(ScComboboxOrigin);
-
-  constructor() {
-    effect(() => {
-      const list = this.list();
-      if (!list) return;
-      const values = list.values();
-      if (values.length > 0) {
-        this.selectedValue.set(values[0]);
-        this.selectedLabel.set(list.labelForValue(values[0]));
-      } else {
-        this.selectedValue.set(undefined);
-        this.selectedLabel.set('');
-      }
-    });
-  }
 
   protected readonly class = computed(() =>
     cn('relative flex w-full flex-col', this.classInput()),
