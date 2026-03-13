@@ -127,7 +127,7 @@ function getCountryByCode(code: string): Country | undefined {
           scComboboxOrigin
           class="border-input flex h-8 items-center rounded-lg border"
         >
-          <div scComboboxInputGroup class="w-auto shrink-0 border-0">
+          <div scComboboxInputGroup class="w-auto shrink-0 border-0 pr-7">
             <span scComboboxDisplayValue></span>
             <input
               scComboboxInput
