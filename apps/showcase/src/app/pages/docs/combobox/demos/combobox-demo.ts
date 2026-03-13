@@ -67,7 +67,10 @@ import {
     <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxOrigin>
         <div scComboboxInputGroup>
-          <span scComboboxDisplayValue [displayFn]="countryDisplayFn"></span>
+          <span
+            scComboboxDisplayValue
+            [displayValueFn]="countryDisplayFn"
+          ></span>
           <input
             scComboboxInput
             placeholder="Select a country..."
