@@ -97,7 +97,7 @@ import {
               @if (options().length === 0) {
                 <div scComboboxEmpty>No results found</div>
               }
-              <div scComboboxList>
+              <div scComboboxList [(values)]="selectedCountries">
                 @for (option of options(); track option.value) {
                   <div scComboboxItem [value]="option" [label]="option.label">
                     <span scComboboxItemLabel>{{ option.label }}</span>
@@ -117,6 +117,7 @@ import {
 export class ComboboxDemo {
   value = signal('');
   searchString = signal('');
+  selectedCountries = signal<unknown[]>([]);
   options = computed(() =>
     ALL_COUNTRIES.filter((country) =>
       country.label.toLowerCase().startsWith(this.searchString().toLowerCase()),
