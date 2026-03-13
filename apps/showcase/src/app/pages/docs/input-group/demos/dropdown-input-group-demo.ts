@@ -1,3 +1,4 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -35,13 +36,14 @@ import {
     ScMenuItem,
     SiEllipsisIcon,
     SiChevronDownIcon,
+    CdkOverlayOrigin,
   ],
   template: `
     <div class="grid w-full max-w-sm gap-4">
-      <div scInputGroup>
+      <div scInputGroup cdkOverlayOrigin #group1="cdkOverlayOrigin">
         <input scInput placeholder="Enter file name" />
         <div scInputGroupAddon align="inline-end">
-          <div scMenuProvider align="end">
+          <div scMenuProvider align="end" [origin]="group1">
             <button
               scButton
               scMenuTrigger
@@ -63,10 +65,10 @@ import {
           </div>
         </div>
       </div>
-      <div scInputGroup>
+      <div scInputGroup cdkOverlayOrigin #group2="cdkOverlayOrigin">
         <input scInput placeholder="Enter search query" />
         <div scInputGroupAddon align="inline-end">
-          <div scMenuProvider align="end">
+          <div scMenuProvider align="end" [origin]="group2">
             <button
               scButton
               scMenuTrigger

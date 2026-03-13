@@ -1,4 +1,8 @@
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import {
+  CdkOverlayOrigin,
+  ConnectedPosition,
+  OverlayModule,
+} from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -78,11 +82,16 @@ const alignPositions: Record<ScMenuAlign, ConnectedPosition[]> = {
 export class ScMenuProvider {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly align = input<ScMenuAlign>('start');
+  readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
+    alias: 'origin',
+  });
 
   private readonly triggerChild = contentChild(ScMenuTrigger);
   protected readonly menuPortal = contentChild.required(ScMenuPortal);
 
-  readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
+  readonly origin = computed(
+    () => this.originInput() ?? this.triggerChild()?.overlayOrigin,
+  );
   readonly trigger = computed(() => this.triggerChild()?.trigger);
   readonly menu = computed(() => this.menuPortal()?.menu());
 
