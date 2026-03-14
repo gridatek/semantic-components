@@ -2914,6 +2914,13 @@ export const demosRoutes: Route[] = [
             (m) => m.SelectSignalFormsDemo,
           ),
       },
+      {
+        path: 'select-currency-demo',
+        loadComponent: () =>
+          import('../pages/docs/select/demos/select-currency-demo').then(
+            (m) => m.SelectCurrencyDemo,
+          ),
+      },
     ],
   },
   {

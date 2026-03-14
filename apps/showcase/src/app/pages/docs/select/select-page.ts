@@ -6,6 +6,7 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { SelectCurrencyDemoContainer } from './demos/select-currency-demo-container';
 import { SelectDemoContainer } from './demos/select-demo-container';
 import { SelectDisabledDemoContainer } from './demos/select-disabled-demo-container';
 import { SelectGroupDemoContainer } from './demos/select-group-demo-container';
@@ -14,6 +15,7 @@ import { SelectSignalFormsDemoContainer } from './demos/select-signal-forms-demo
 @Component({
   selector: 'app-select-page',
   imports: [
+    SelectCurrencyDemoContainer,
     SelectDemoContainer,
     SelectDisabledDemoContainer,
     SelectGroupDemoContainer,
@@ -39,6 +41,7 @@ import { SelectSignalFormsDemoContainer } from './demos/select-signal-forms-demo
         <app-select-group-demo-container />
         <app-select-disabled-demo-container />
         <app-select-signal-forms-demo-container />
+        <app-select-currency-demo-container />
       </section>
     </div>
   `,
