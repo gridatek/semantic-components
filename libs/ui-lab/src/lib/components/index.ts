@@ -21,7 +21,6 @@ export * from './masonry-grid';
 export * from './mention-input';
 export * from './navbar';
 export * from './notification-center';
-export * from './number-field';
 export * from './org-chart';
 export * from './password-field';
 export * from './pdf-viewer';

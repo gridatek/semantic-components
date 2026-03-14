@@ -10,7 +10,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { SC_FIELD } from '@semantic-components/ui';
+import { SC_FIELD } from '../field';
 
 // Token for number field context
 export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>(

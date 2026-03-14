@@ -7,9 +7,9 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { cn } from '@semantic-components/ui';
 import { fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { cn } from '../../utils';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Directive({

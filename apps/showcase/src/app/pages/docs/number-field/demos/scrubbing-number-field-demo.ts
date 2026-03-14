@@ -4,15 +4,15 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScLabel } from '@semantic-components/ui';
 import {
+  ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
   ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import {
   SiLightbulbIcon,
   SiMinusIcon,

@@ -10,7 +10,7 @@ import {
   ScNumberFieldIncrement,
   ScNumberFieldInput,
   ScNumberFieldInputGroup,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

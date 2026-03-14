@@ -1,19 +1,20 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { buttonVariants } from '../button';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Directive({
-  selector: 'button[scNumberFieldDecrement]',
+  selector: 'button[scNumberFieldIncrement]',
   host: {
-    'data-slot': 'number-field-decrement',
+    'data-slot': 'number-field-increment',
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': '!numberField.canDecrement()',
-    '[attr.aria-label]': '"Decrease value"',
+    '[disabled]': '!numberField.canIncrement()',
+    '[attr.aria-label]': '"Increase value"',
     '(click)': 'onClick()',
   },
 })
-export class ScNumberFieldDecrement {
+export class ScNumberFieldIncrement {
   readonly numberField = inject(SC_NUMBER_FIELD);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -22,6 +23,6 @@ export class ScNumberFieldDecrement {
   );
 
   onClick(): void {
-    this.numberField.decrement();
+    this.numberField.increment();
   }
 }

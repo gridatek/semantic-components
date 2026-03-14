@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { buttonGroupVariants, cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { buttonGroupVariants } from '../button-group';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Directive({

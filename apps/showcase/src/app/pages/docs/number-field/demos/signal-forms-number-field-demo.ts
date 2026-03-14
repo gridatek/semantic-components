@@ -5,15 +5,15 @@ import {
   signal,
 } from '@angular/core';
 import { FormField, form, max, min, required } from '@angular/forms/signals';
-import { ScLabel } from '@semantic-components/ui';
 import {
+  ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
   ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

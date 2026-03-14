@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, inputStyles } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { inputStyles } from '../input';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Directive({

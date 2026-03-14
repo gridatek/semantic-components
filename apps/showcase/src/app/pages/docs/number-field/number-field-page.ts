@@ -101,7 +101,7 @@ export default class NumberFieldPage {
   ScNumberFieldInput,
   ScNumberFieldIncrement,
   ScLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   imports: [

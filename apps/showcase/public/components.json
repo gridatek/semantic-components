@@ -563,9 +563,8 @@
     "path": "number-field",
     "description": "A composable numeric input with scrubbing support.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "library": "ui",
+    "category": "Forms"
   },
   {
     "name": "OTP Field",
