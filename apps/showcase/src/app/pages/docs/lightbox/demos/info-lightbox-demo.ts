@@ -69,11 +69,7 @@ import {
     <div scLightboxProvider [images]="images" #lightbox="scLightboxProvider">
       <div class="flex gap-4">
         @for (image of images; track image.src; let i = $index) {
-          <button
-            scLightboxTrigger
-            [index]="i"
-            class="focus:ring-ring w-40 overflow-hidden rounded-lg focus:ring-2 focus:outline-none"
-          >
+          <button scLightboxTrigger [index]="i" class="w-40">
             <img
               [src]="image.thumbnail || image.src"
               [alt]="image.alt"

@@ -25,11 +25,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scLightboxProvider [images]="[image]" #lightbox="scLightboxProvider">
-      <button
-        scLightboxTrigger
-        [index]="0"
-        class="focus:ring-ring w-48 overflow-hidden rounded-lg focus:ring-2 focus:outline-none"
-      >
+      <button scLightboxTrigger [index]="0" class="w-48">
         <img
           [src]="image.src"
           [alt]="image.alt"

@@ -74,11 +74,7 @@ import {
     >
       <div class="flex gap-4">
         @for (image of images; track image.src; let i = $index) {
-          <button
-            scLightboxTrigger
-            [index]="i"
-            class="focus:ring-ring h-24 w-24 overflow-hidden rounded focus:ring-2 focus:outline-none"
-          >
+          <button scLightboxTrigger [index]="i" class="h-24 w-24 rounded">
             <img
               [src]="image.src"
               [alt]="image.alt"

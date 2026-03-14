@@ -95,7 +95,7 @@ import {
         <button
           scLightboxTrigger
           [index]="0"
-          class="hover:bg-accent inline-flex items-center gap-2 rounded-md border px-4 py-2"
+          class="hover:bg-accent inline-flex items-center gap-2 overflow-visible rounded-md border px-4 py-2"
         >
           <svg siImageIcon class="size-4"></svg>
           Open Gallery
