@@ -3,31 +3,17 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
-} from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCopyToClipboardDemoContainer } from './demos/basic-copy-to-clipboard-demo-container';
+import { CopyToClipboardUsageDemoContainer } from './demos/copy-to-clipboard-usage-demo-container';
 
 @Component({
   selector: 'app-copy-to-clipboard-page',
   imports: [
-    ScCodeViewer,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScCodeViewerContent,
-    ScButton,
-    ScCopyToClipboard,
-    SiCheckIcon,
-    SiCopyIcon,
     BasicCopyToClipboardDemoContainer,
+    CopyToClipboardUsageDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -45,30 +31,7 @@ import { BasicCopyToClipboardDemoContainer } from './demos/basic-copy-to-clipboa
 
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-copy-to-clipboard-usage-demo-container />
       </section>
 
       <section class="space-y-8">
@@ -80,28 +43,4 @@ import { BasicCopyToClipboardDemoContainer } from './demos/basic-copy-to-clipboa
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class CopyToClipboardPage {
-  readonly usageCode = `import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
-
-@Component({
-  imports: [ScCopyToClipboard, SiCheckIcon, SiCopyIcon],
-  template: \`
-    <button
-      [scCopyToClipboard]="text"
-      #copy="scCopyToClipboard"
-    >
-      @if (copy.copied()) {
-        <svg siCheckIcon></svg>
-        Copied
-      } @else {
-        <svg siCopyIcon></svg>
-        Copy
-      }
-    </button>
-  \`,
-})
-export class MyComponent {
-  text = 'Hello, world!';
-}`;
-}
+export default class CopyToClipboardPage {}

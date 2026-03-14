@@ -6,10 +6,16 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-demo-container';
 
 @Component({
   selector: 'app-select-on-focus-page',
-  imports: [TocHeading, ComponentBadges, ScHeading],
+  imports: [
+    TocHeading,
+    ComponentBadges,
+    ScHeading,
+    SelectOnFocusUsageDemoContainer,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -23,16 +29,7 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
-        <pre
-          class="bg-muted rounded-md p-4 text-sm"
-        ><code>{{ usageCode }}</code></pre>
-      </section>
-
-      <section class="space-y-4">
-        <h2 scHeading appToc>Custom Origins</h2>
-        <pre
-          class="bg-muted rounded-md p-4 text-sm"
-        ><code>{{ customOriginsCode }}</code></pre>
+        <app-select-on-focus-usage-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -67,20 +64,4 @@ import { TocHeading } from '../../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SelectOnFocusPage {
-  readonly usageCode = `import { ScSelectOnFocus } from '@semantic-components/ui';
-
-@Component({
-  imports: [ScSelectOnFocus],
-  template: \`
-    <input scSelectOnFocus value="Text to select" />
-  \`,
-})
-export class MyComponent {}`;
-
-  readonly customOriginsCode = `<!-- Select only on programmatic focus -->
-<input [scSelectOnFocus]="['program']" value="Select me" />
-
-<!-- Select on keyboard and programmatic focus -->
-<input [scSelectOnFocus]="['program', 'keyboard']" value="Select me" />`;
-}
+export default class SelectOnFocusPage {}

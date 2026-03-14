@@ -13,10 +13,10 @@ import {
 import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ConfigService } from '../../../../services/config.service';
-import { TabsUsageDemo } from './tabs-usage-demo';
+import { NumberFieldUsageDemo } from './number-field-usage-demo';
 
 @Component({
-  selector: 'app-tabs-usage-demo-container',
+  selector: 'app-number-field-usage-demo-container',
   imports: [
     ScCodeViewer,
     ScCodeViewerHeader,
@@ -26,7 +26,7 @@ import { TabsUsageDemo } from './tabs-usage-demo';
     ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
-    TabsUsageDemo,
+    NumberFieldUsageDemo,
   ],
   template: `
     <div scCodeViewer>
@@ -54,7 +54,7 @@ import { TabsUsageDemo } from './tabs-usage-demo';
       <div
         class="mt-4 flex min-h-40 items-center justify-center rounded-md border p-6"
       >
-        <app-tabs-usage-demo />
+        <app-number-field-usage-demo />
       </div>
     }
   `,
@@ -62,7 +62,7 @@ import { TabsUsageDemo } from './tabs-usage-demo';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsUsageDemoContainer {
+export class NumberFieldUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
@@ -71,27 +71,39 @@ export class TabsUsageDemoContainer {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
-import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
+import {
+  ScLabel,
+  ScNumberField,
+  ScNumberFieldDecrement,
+  ScNumberFieldGroup,
+  ScNumberFieldIncrement,
+  ScNumberFieldInput,
+  ScNumberFieldScrubArea,
+} from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-tabs-usage-demo',
-  imports: [ScTabs, ScTabPanel, ScTabList, ScTab],
+  selector: 'app-number-field-usage-demo',
+  imports: [
+    ScNumberField,
+    ScNumberFieldScrubArea,
+    ScNumberFieldGroup,
+    ScNumberFieldDecrement,
+    ScNumberFieldInput,
+    ScNumberFieldIncrement,
+    ScLabel,
+  ],
   template: \`
-    <div scTabs class="w-[400px]">
-      <div scTabList [selectedTab]="'account'" class="grid w-full grid-cols-2">
-        <button scTab value="account">Account</button>
-        <button scTab value="password">Password</button>
+    <div scNumberField [(value)]="quantity" [min]="1" [max]="10">
+      <div scNumberFieldScrubArea>
+        <label scLabel>Quantity</label>
       </div>
-      <div scTabPanel value="account">
-        <p class="text-muted-foreground p-4 text-sm">
-          Make changes to your account here.
-        </p>
-      </div>
-      <div scTabPanel value="password">
-        <p class="text-muted-foreground p-4 text-sm">
-          Change your password here.
-        </p>
+
+      <div scNumberFieldGroup>
+        <button scNumberFieldDecrement></button>
+        <input scNumberFieldInput />
+        <button scNumberFieldIncrement></button>
       </div>
     </div>
   \`,
@@ -99,5 +111,7 @@ import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsUsageDemo {}`;
+export class NumberFieldUsageDemo {
+  readonly quantity = signal<number | null>(5);
+}`;
 }

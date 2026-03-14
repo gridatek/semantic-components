@@ -3,19 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
-} from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicNumberFieldDemoContainer from './demos/basic-number-field-demo-container';
 import DisabledNumberFieldDemoContainer from './demos/disabled-number-field-demo-container';
+import { NumberFieldUsageDemoContainer } from './demos/number-field-usage-demo-container';
 import PriceNumberFieldDemoContainer from './demos/price-number-field-demo-container';
 import ScrubbingNumberFieldDemoContainer from './demos/scrubbing-number-field-demo-container';
 import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-field-demo-container';
@@ -23,19 +16,12 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
 @Component({
   selector: 'app-number-field-page',
   imports: [
-    ScCodeViewer,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScCodeViewerContent,
-    ScButton,
-    ScCopyToClipboard,
-    SiCheckIcon,
-    SiCopyIcon,
     BasicNumberFieldDemoContainer,
     ScrubbingNumberFieldDemoContainer,
     PriceNumberFieldDemoContainer,
     DisabledNumberFieldDemoContainer,
     WithoutLabelNumberFieldDemoContainer,
+    NumberFieldUsageDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -53,30 +39,7 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
 
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-number-field-usage-demo-container />
       </section>
 
       <section class="space-y-8">
@@ -92,43 +55,4 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class NumberFieldPage {
-  readonly usageCode = `import {
-  ScNumberField,
-  ScNumberFieldScrubArea,
-  ScNumberFieldInputGroup,
-  ScNumberFieldDecrement,
-  ScNumberFieldInput,
-  ScNumberFieldIncrement,
-  ScLabel,
-} from '@semantic-components/ui';
-
-@Component({
-  imports: [
-    ScNumberField,
-    ScNumberFieldScrubArea,
-    ScNumberFieldInputGroup,
-    ScNumberFieldDecrement,
-    ScNumberFieldInput,
-    ScNumberFieldIncrement,
-    ScLabel,
-    TocHeading,
-  ],
-  template: \`
-    <div scNumberField [(value)]="quantity" [min]="1" [max]="10">
-      <div scNumberFieldScrubArea>
-        <label scLabel>Quantity</label>
-      </div>
-
-      <div scNumberFieldGroup>
-        <button scNumberFieldDecrement></button>
-        <input scNumberFieldInput />
-        <button scNumberFieldIncrement></button>
-      </div>
-    </div>
-  \`,
-})
-export class MyComponent {
-  readonly quantity = signal<number | null>(5);
-}`;
-}
+export default class NumberFieldPage {}

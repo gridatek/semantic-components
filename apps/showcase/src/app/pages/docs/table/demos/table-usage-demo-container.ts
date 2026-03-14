@@ -13,10 +13,10 @@ import {
 import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ConfigService } from '../../../../services/config.service';
-import { TabsUsageDemo } from './tabs-usage-demo';
+import { TableUsageDemo } from './table-usage-demo';
 
 @Component({
-  selector: 'app-tabs-usage-demo-container',
+  selector: 'app-table-usage-demo-container',
   imports: [
     ScCodeViewer,
     ScCodeViewerHeader,
@@ -26,7 +26,7 @@ import { TabsUsageDemo } from './tabs-usage-demo';
     ScCopyToClipboard,
     SiCheckIcon,
     SiCopyIcon,
-    TabsUsageDemo,
+    TableUsageDemo,
   ],
   template: `
     <div scCodeViewer>
@@ -54,7 +54,7 @@ import { TabsUsageDemo } from './tabs-usage-demo';
       <div
         class="mt-4 flex min-h-40 items-center justify-center rounded-md border p-6"
       >
-        <app-tabs-usage-demo />
+        <app-table-usage-demo />
       </div>
     }
   `,
@@ -62,7 +62,7 @@ import { TabsUsageDemo } from './tabs-usage-demo';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsUsageDemoContainer {
+export class TableUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
@@ -72,32 +72,59 @@ export class TabsUsageDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
+import {
+  ScTable,
+  ScTableBody,
+  ScTableCaption,
+  ScTableCell,
+  ScTableFooter,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+} from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-tabs-usage-demo',
-  imports: [ScTabs, ScTabPanel, ScTabList, ScTab],
+  selector: 'app-table-usage-demo',
+  imports: [
+    ScTable,
+    ScTableBody,
+    ScTableCaption,
+    ScTableCell,
+    ScTableFooter,
+    ScTableHeaderCell,
+    ScTableHeader,
+    ScTableRow,
+  ],
   template: \`
-    <div scTabs class="w-[400px]">
-      <div scTabList [selectedTab]="'account'" class="grid w-full grid-cols-2">
-        <button scTab value="account">Account</button>
-        <button scTab value="password">Password</button>
-      </div>
-      <div scTabPanel value="account">
-        <p class="text-muted-foreground p-4 text-sm">
-          Make changes to your account here.
-        </p>
-      </div>
-      <div scTabPanel value="password">
-        <p class="text-muted-foreground p-4 text-sm">
-          Change your password here.
-        </p>
-      </div>
-    </div>
+    <table scTable>
+      <caption scTableCaption>
+        A list of your recent invoices.
+      </caption>
+      <thead scTableHeader>
+        <tr scTableRow>
+          <th scTableHeaderCell>Invoice</th>
+          <th scTableHeaderCell>Status</th>
+          <th scTableHeaderCell class="text-right">Amount</th>
+        </tr>
+      </thead>
+      <tbody scTableBody>
+        <tr scTableRow>
+          <td scTableCell>INV001</td>
+          <td scTableCell>Paid</td>
+          <td scTableCell class="text-right">$250.00</td>
+        </tr>
+      </tbody>
+      <tfoot scTableFooter>
+        <tr scTableRow>
+          <td scTableCell colspan="2">Total</td>
+          <td scTableCell class="text-right">$250.00</td>
+        </tr>
+      </tfoot>
+    </table>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsUsageDemo {}`;
+export class TableUsageDemo {}`;
 }
