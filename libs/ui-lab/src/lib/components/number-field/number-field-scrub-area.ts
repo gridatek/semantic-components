@@ -1,5 +1,15 @@
-import { Directive, computed, inject, input, signal } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { cn } from '@semantic-components/ui';
+import { fromEvent } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SC_NUMBER_FIELD } from './number-field';
 
 @Directive({
@@ -13,6 +23,7 @@ import { SC_NUMBER_FIELD } from './number-field';
   },
 })
 export class ScNumberFieldScrubArea {
+  private readonly destroyRef = inject(DestroyRef);
   readonly numberField = inject(SC_NUMBER_FIELD);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -23,10 +34,9 @@ export class ScNumberFieldScrubArea {
   protected readonly class = computed(() =>
     cn(
       'inline-flex items-center gap-2 mb-2',
-      'select-none',
+      'select-none cursor-ew-resize [&_*]:cursor-ew-resize',
       'data-scrubbing:cursor-ew-resize',
-      'data-disabled:opacity-50 data-disabled:cursor-not-allowed',
-      !this.numberField.disabled() && 'cursor-ew-resize',
+      'data-disabled:opacity-50 data-disabled:cursor-not-allowed data-disabled:[&_*]:cursor-not-allowed',
       this.classInput(),
     ),
   );
@@ -39,23 +49,22 @@ export class ScNumberFieldScrubArea {
     this.startX = event.clientX;
     this.startValue = this.numberField.value() ?? 0;
 
-    const onMouseMove = (e: MouseEvent) => {
-      const deltaX = e.clientX - this.startX;
-      const step = this.numberField.step();
-      const speed = this.numberField.scrubSpeed();
-      const delta = deltaX * step * speed * 0.1; // 0.1 for smoother scrubbing
-      const newValue = this.startValue + delta;
+    const mouseUp$ = fromEvent<MouseEvent>(document, 'mouseup');
 
-      this.numberField.setValue(newValue);
-    };
+    fromEvent<MouseEvent>(document, 'mousemove')
+      .pipe(takeUntil(mouseUp$), takeUntilDestroyed(this.destroyRef))
+      .subscribe((e) => {
+        const deltaX = e.clientX - this.startX;
+        const step = this.numberField.step();
+        const speed = this.numberField.scrubSpeed();
+        const delta = deltaX * step * speed * 0.1;
+        const newValue = this.startValue + delta;
 
-    const onMouseUp = () => {
-      this.isScrubbing.set(false);
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-    };
+        this.numberField.setValue(newValue);
+      });
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    mouseUp$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.isScrubbing.set(false));
   }
 }
