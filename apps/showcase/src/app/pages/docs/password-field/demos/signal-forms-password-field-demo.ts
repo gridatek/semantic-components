@@ -5,27 +5,34 @@ import {
   signal,
 } from '@angular/core';
 import { FormField, form, minLength, required } from '@angular/forms/signals';
-import { ScLabel } from '@semantic-components/ui';
+import {
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScLabel,
+} from '@semantic-components/ui';
 import {
   ScPasswordField,
   ScPasswordFieldInput,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldToggle,
 } from '@semantic-components/ui-lab';
+import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-signal-forms-password-field-demo',
   imports: [
     FormField,
     ScPasswordField,
-    ScPasswordFieldInputGroup,
     ScPasswordFieldInput,
     ScPasswordFieldToggle,
+    ScInputGroup,
+    ScInputGroupAddon,
     ScLabel,
+    SiEyeIcon,
+    SiEyeOffIcon,
   ],
   template: `
     <div class="max-w-sm space-y-4">
-      <div scPasswordField class="space-y-2">
+      <div scPasswordField #passwordField="scPasswordField" class="space-y-2">
         <label
           scLabel
           [class.text-destructive]="
@@ -34,7 +41,7 @@ import {
         >
           Password
         </label>
-        <div scPasswordFieldInputGroup>
+        <div scInputGroup class="w-full max-w-sm">
           <input
             scPasswordFieldInput
             [formField]="loginForm.password"
@@ -43,7 +50,16 @@ import {
               loginForm.password().invalid() && loginForm.password().touched()
             "
           />
-          <button scPasswordFieldToggle></button>
+          <div scInputGroupAddon align="inline-end">
+            <button scPasswordFieldToggle>
+              @if (passwordField.visible()) {
+                <svg siEyeOffIcon></svg>
+              } @else {
+                <svg siEyeIcon></svg>
+              }
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
+          </div>
         </div>
         @if (loginForm.password().invalid() && loginForm.password().touched()) {
           <p class="text-destructive text-sm font-medium" role="alert">

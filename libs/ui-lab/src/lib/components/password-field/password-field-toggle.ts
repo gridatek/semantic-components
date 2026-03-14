@@ -1,27 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
+import { Directive, computed, inject, input } from '@angular/core';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
-@Component({
+@Directive({
   selector: 'button[scPasswordFieldToggle]',
-  imports: [SiEyeIcon, SiEyeOffIcon],
-  template: `
-    <ng-content>
-      @if (passwordField.visible()) {
-        <svg siEyeOffIcon class="size-4"></svg>
-      } @else {
-        <svg siEyeIcon class="size-4"></svg>
-      }
-    </ng-content>
-  `,
   host: {
     'data-slot': 'password-field-toggle',
     type: 'button',
@@ -32,8 +14,6 @@ import { SC_PASSWORD_FIELD } from './password-field';
     '[attr.aria-pressed]': 'passwordField.visible()',
     '(click)': 'onClick()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPasswordFieldToggle {
   readonly passwordField = inject(SC_PASSWORD_FIELD);
@@ -41,11 +21,7 @@ export class ScPasswordFieldToggle {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute right-0 top-0 h-full px-3 py-2',
-      'text-muted-foreground hover:text-foreground',
-      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1',
-      'disabled:pointer-events-none disabled:opacity-50',
-      'transition-colors',
+      buttonVariants({ variant: 'ghost', size: 'icon-sm' }),
       this.classInput(),
     ),
   );

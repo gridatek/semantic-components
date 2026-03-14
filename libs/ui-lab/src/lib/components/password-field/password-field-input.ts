@@ -1,18 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn, inputStyles } from '@semantic-components/ui';
 import { SC_FIELD } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
-@Component({
+@Directive({
   selector: 'input[scPasswordFieldInput]',
-  template: ``,
   host: {
     'data-slot': 'password-field-input',
     '[id]': 'field.id()',
@@ -27,8 +19,6 @@ import { SC_PASSWORD_FIELD } from './password-field';
     '[autocomplete]': 'autocomplete()',
     '(input)': 'onInput($event)',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPasswordFieldInput {
   readonly field = inject(SC_FIELD);
@@ -46,16 +36,7 @@ export class ScPasswordFieldInput {
       null,
   );
 
-  protected readonly class = computed(() =>
-    cn(
-      'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 pr-10 text-sm shadow-sm transition-colors',
-      'file:border-0 file:bg-transparent file:text-sm file:font-medium',
-      'placeholder:text-muted-foreground',
-      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(inputStyles, this.classInput()));
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;

@@ -1,26 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_PASSWORD_FIELD } from './password-field';
 
-@Component({
+@Directive({
   selector: '[scPasswordFieldInputGroup]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'password-field-input-group',
     '[class]': 'class()',
     '[attr.data-disabled]': 'passwordField.disabled() || null',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPasswordFieldInputGroup {
   readonly passwordField = inject(SC_PASSWORD_FIELD);

@@ -4,34 +4,51 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScLabel } from '@semantic-components/ui';
+import {
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScLabel,
+} from '@semantic-components/ui';
 import {
   ScPasswordField,
   ScPasswordFieldInput,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldToggle,
 } from '@semantic-components/ui-lab';
+import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-show-default-password-field-demo',
   imports: [
     ScPasswordField,
-    ScPasswordFieldInputGroup,
     ScPasswordFieldInput,
     ScPasswordFieldToggle,
+    ScInputGroup,
+    ScInputGroupAddon,
     ScLabel,
+    SiEyeIcon,
+    SiEyeOffIcon,
   ],
   template: `
     <div
       scPasswordField
+      #passwordField="scPasswordField"
       [(value)]="apiKey"
       [showByDefault]="true"
       class="space-y-2"
     >
       <label scLabel>API Key</label>
-      <div scPasswordFieldInputGroup>
+      <div scInputGroup class="w-full max-w-sm">
         <input scPasswordFieldInput placeholder="sk-..." />
-        <button scPasswordFieldToggle></button>
+        <div scInputGroupAddon align="inline-end">
+          <button scPasswordFieldToggle>
+            @if (passwordField.visible()) {
+              <svg siEyeOffIcon></svg>
+            } @else {
+              <svg siEyeIcon></svg>
+            }
+            <span class="sr-only">Toggle password visibility</span>
+          </button>
+        </div>
       </div>
     </div>
   `,
