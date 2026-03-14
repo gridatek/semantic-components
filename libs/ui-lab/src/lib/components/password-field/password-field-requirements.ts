@@ -30,28 +30,26 @@ const DEFAULT_REQUIREMENTS: ScPasswordRequirement[] = [
   selector: '[scPasswordFieldRequirements]',
   imports: [SiCheckIcon, SiCircleIcon],
   template: `
-    @if (passwordField.value()) {
-      <ul class="mt-2 space-y-1 text-xs">
-        @for (req of requirements(); track req.label) {
-          <li [class]="requirementClass(req.test(passwordField.value()))">
-            @if (req.test(passwordField.value())) {
-              <svg
-                siCheckIcon
-                class="mr-1 inline size-3"
-                aria-hidden="true"
-              ></svg>
-            } @else {
-              <svg
-                siCircleIcon
-                class="mr-1 inline size-3"
-                aria-hidden="true"
-              ></svg>
-            }
-            {{ req.label }}
-          </li>
-        }
-      </ul>
-    }
+    <ul class="mt-2 space-y-1 text-xs">
+      @for (req of requirements(); track req.label) {
+        <li [class]="requirementClass(req.test(passwordField.value()))">
+          @if (req.test(passwordField.value())) {
+            <svg
+              siCheckIcon
+              class="mr-1 inline size-3"
+              aria-hidden="true"
+            ></svg>
+          } @else {
+            <svg
+              siCircleIcon
+              class="mr-1 inline size-3"
+              aria-hidden="true"
+            ></svg>
+          }
+          {{ req.label }}
+        </li>
+      }
+    </ul>
   `,
   host: {
     'data-slot': 'password-field-requirements',
