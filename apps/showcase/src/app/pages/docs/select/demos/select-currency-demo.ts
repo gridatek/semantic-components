@@ -94,7 +94,7 @@ interface FormModel {
               </ng-template>
             </div>
           </div>
-          <div scInputGroupSeparator></div>
+          <div scInputGroupSeparator class="mx-2"></div>
           <input
             class="w-full border-none outline-none"
             type="text"
