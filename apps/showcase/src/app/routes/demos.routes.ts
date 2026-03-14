@@ -3409,6 +3409,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'line-tabs-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs/demos/line-tabs-demo').then(
+            (m) => m.LineTabsDemo,
+          ),
+      },
+      {
         path: 'vertical-tabs-demo',
         loadComponent: () =>
           import('../pages/docs/tabs/demos/vertical-tabs-demo').then(
