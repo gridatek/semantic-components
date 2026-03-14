@@ -62,10 +62,10 @@ interface FormModel {
     <form [formRoot]="currencyForm">
       <div class="flex items-center gap-2">
         <div scInputGroup class="w-80">
-          <div scInputGroupAddon align="inline-start">
+          <div scInputGroupAddon align="inline-start" class="ps-0">
             <div scSelect class="w-10 min-w-10">
               <div scSelectOrigin>
-                <div scInputGroup class="border-none">
+                <div scInputGroup class="border-none ps-1">
                   <span scSelectDisplayValue>{{ displayCurrency() }}</span>
                   <input
                     scSelectInput
