@@ -29,21 +29,29 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     SiPlusIcon,
   ],
   template: `
-    <div scNumberField [(value)]="count" [min]="0" [max]="100">
-      <div scNumberFieldScrubArea>
-        <label scLabel>Count</label>
+    <div class="space-y-4">
+      <div scNumberField [(value)]="count" [min]="0" [max]="100">
+        <div scNumberFieldScrubArea>
+          <label scLabel>Count</label>
+        </div>
+
+        <div scNumberFieldGroup>
+          <button scNumberFieldDecrement>
+            <svg siMinusIcon></svg>
+            <span class="sr-only">Decrease</span>
+          </button>
+          <input scNumberFieldInput aria-label="Count" />
+          <button scNumberFieldIncrement>
+            <svg siPlusIcon></svg>
+            <span class="sr-only">Increase</span>
+          </button>
+        </div>
       </div>
 
-      <div scNumberFieldGroup>
-        <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
-        <input scNumberFieldInput aria-label="Count" />
-        <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
-      </div>
+      <p class="text-muted-foreground text-sm">
+        Current value: {{ count() ?? 'null' }}
+      </p>
     </div>
-
-    <p class="text-muted-foreground mt-4 text-sm">
-      Current value: {{ count() ?? 'null' }}
-    </p>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

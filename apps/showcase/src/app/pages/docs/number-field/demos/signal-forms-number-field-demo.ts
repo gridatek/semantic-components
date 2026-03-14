@@ -46,7 +46,10 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div scNumberFieldGroup>
-          <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
+          <button scNumberFieldDecrement>
+            <svg siMinusIcon></svg>
+            <span class="sr-only">Decrease</span>
+          </button>
           <input
             scNumberFieldInput
             aria-label="Quantity"
@@ -56,7 +59,10 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
               quantityForm.quantity().touched()
             "
           />
-          <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
+          <button scNumberFieldIncrement>
+            <svg siPlusIcon></svg>
+            <span class="sr-only">Increase</span>
+          </button>
         </div>
         @if (
           quantityForm.quantity().invalid() && quantityForm.quantity().touched()

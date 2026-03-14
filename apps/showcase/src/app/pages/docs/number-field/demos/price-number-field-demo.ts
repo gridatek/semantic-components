@@ -29,27 +29,35 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     SiPlusIcon,
   ],
   template: `
-    <div
-      scNumberField
-      [(value)]="price"
-      [step]="0.01"
-      [min]="0"
-      [formatOptions]="formatOptions"
-    >
-      <div scNumberFieldScrubArea>
-        <label scLabel>Price ($)</label>
+    <div class="space-y-4">
+      <div
+        scNumberField
+        [(value)]="price"
+        [step]="0.01"
+        [min]="0"
+        [formatOptions]="formatOptions"
+      >
+        <div scNumberFieldScrubArea>
+          <label scLabel>Price ($)</label>
+        </div>
+
+        <div scNumberFieldGroup>
+          <button scNumberFieldDecrement>
+            <svg siMinusIcon></svg>
+            <span class="sr-only">Decrease</span>
+          </button>
+          <input scNumberFieldInput aria-label="Price" />
+          <button scNumberFieldIncrement>
+            <svg siPlusIcon></svg>
+            <span class="sr-only">Increase</span>
+          </button>
+        </div>
       </div>
 
-      <div scNumberFieldGroup>
-        <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
-        <input scNumberFieldInput aria-label="Price" />
-        <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
-      </div>
+      <p class="text-muted-foreground text-sm">
+        Current price: {{ '$' + (price() ?? 0).toFixed(2) }}
+      </p>
     </div>
-
-    <p class="text-muted-foreground mt-4 text-sm">
-      Current price: {{ '$' + (price() ?? 0).toFixed(2) }}
-    </p>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

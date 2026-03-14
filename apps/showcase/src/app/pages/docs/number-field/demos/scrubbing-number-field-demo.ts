@@ -13,7 +13,11 @@ import {
   ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
-import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiLightbulbIcon,
+  SiMinusIcon,
+  SiPlusIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-scrubbing-number-field-demo',
@@ -25,6 +29,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     ScNumberFieldInput,
     ScNumberFieldIncrement,
     ScLabel,
+    SiLightbulbIcon,
     SiMinusIcon,
     SiPlusIcon,
   ],
@@ -42,9 +47,15 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div scNumberFieldGroup>
-          <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
+          <button scNumberFieldDecrement>
+            <svg siMinusIcon></svg>
+            <span class="sr-only">Decrease</span>
+          </button>
           <input scNumberFieldInput aria-label="Opacity" />
-          <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
+          <button scNumberFieldIncrement>
+            <svg siPlusIcon></svg>
+            <span class="sr-only">Increase</span>
+          </button>
         </div>
       </div>
 
@@ -54,16 +65,23 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div scNumberFieldGroup>
-          <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
+          <button scNumberFieldDecrement>
+            <svg siMinusIcon></svg>
+            <span class="sr-only">Decrease</span>
+          </button>
           <input scNumberFieldInput aria-label="Rotation" />
-          <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
+          <button scNumberFieldIncrement>
+            <svg siPlusIcon></svg>
+            <span class="sr-only">Increase</span>
+          </button>
         </div>
       </div>
-    </div>
 
-    <p class="text-muted-foreground mt-4 text-sm">
-      💡 Tip: Click and drag on the label to scrub values
-    </p>
+      <p class="text-muted-foreground flex items-center gap-1 text-sm">
+        <svg siLightbulbIcon class="size-4"></svg>
+        Tip: Click and drag on the label to scrub values
+      </p>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
