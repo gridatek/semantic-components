@@ -1,6 +1,12 @@
 export type ComponentStatus = 'Experimental' | 'Developer Preview' | 'Stable';
 
-export type ComponentLibrary = 'ui' | 'ui-lab' | 'carousel' | 'code' | 'editor';
+export type ComponentLibrary =
+  | 'ui'
+  | 'ui-lab'
+  | 'carousel'
+  | 'code'
+  | 'editor'
+  | 'charts';
 
 export type ComponentCategory =
   | 'Forms'

@@ -145,6 +145,10 @@ export default class ComponentsPage {
       bg: 'color-mix(in oklch, var(--chart-5) 15%, transparent)',
       text: 'var(--chart-5)',
     },
+    charts: {
+      bg: 'color-mix(in oklch, var(--chart-3) 15%, transparent)',
+      text: 'var(--chart-3)',
+    },
   };
 
   readonly filterCategory = signal<string | null>('All');
