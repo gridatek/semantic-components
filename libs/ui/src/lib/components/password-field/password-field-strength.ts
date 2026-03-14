@@ -78,11 +78,11 @@ export class ScPasswordFieldStrength {
   protected readonly strengthTextClass = computed(() => {
     const strength = this.strength();
     const colors = [
-      'text-red-500',
-      'text-orange-500',
-      'text-yellow-500',
-      'text-lime-500',
-      'text-green-500',
+      'text-red-700',
+      'text-orange-700',
+      'text-yellow-700',
+      'text-lime-700',
+      'text-green-700',
     ];
     return cn('text-xs', colors[strength]);
   });
