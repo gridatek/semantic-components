@@ -13,7 +13,9 @@ import {
   ScLightbox,
   ScLightboxClose,
   ScLightboxImageData,
+  ScLightboxNext,
   ScLightboxPortal,
+  ScLightboxPrev,
   ScLightboxProvider,
   ScLightboxTrigger,
 } from '@semantic-components/ui-lab';
@@ -32,6 +34,8 @@ import {
     ScLightboxProvider,
     ScLightbox,
     ScLightboxClose,
+    ScLightboxNext,
+    ScLightboxPrev,
     ScLightboxTrigger,
     ScLightboxPortal,
     ScCarousel,
@@ -102,21 +106,13 @@ import {
             </div>
 
             @if (images.length > 1) {
-              <button
-                type="button"
-                class="absolute top-1/2 left-4 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                (click)="carousel.scrollPrev()"
-                aria-label="Previous image"
-              >
-                <svg siChevronLeftIcon class="size-8"></svg>
+              <button scLightboxPrev>
+                <svg siChevronLeftIcon></svg>
+                <span class="sr-only">Previous image</span>
               </button>
-              <button
-                type="button"
-                class="absolute top-1/2 right-4 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                (click)="carousel.scrollNext()"
-                aria-label="Next image"
-              >
-                <svg siChevronRightIcon class="size-8"></svg>
+              <button scLightboxNext>
+                <svg siChevronRightIcon></svg>
+                <span class="sr-only">Next image</span>
               </button>
             }
           </div>

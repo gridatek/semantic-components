@@ -8,3 +8,5 @@ export * from './lightbox-portal';
 export { SC_LIGHTBOX_PROVIDER, ScLightboxProvider } from './lightbox-provider';
 export { ScLightbox } from './lightbox';
 export { ScLightboxClose } from './lightbox-close';
+export { ScLightboxNext } from './lightbox-next';
+export { ScLightboxPrev } from './lightbox-prev';
