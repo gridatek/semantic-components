@@ -1,3 +1,4 @@
+import { ToolbarWidget } from '@angular/aria/toolbar';
 import {
   Directive,
   ElementRef,
@@ -21,6 +22,7 @@ const HEADING_OPTIONS: { value: string; label: string }[] = [
 
 @Directive({
   selector: 'select[scEditorHeading]',
+  hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
   host: {
     'data-slot': 'editor-heading',
     '[class]': 'class()',
