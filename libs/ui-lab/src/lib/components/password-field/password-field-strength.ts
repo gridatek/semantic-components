@@ -12,16 +12,14 @@ import { SC_PASSWORD_FIELD } from './password-field';
 @Component({
   selector: '[scPasswordFieldStrength]',
   template: `
-    @if (passwordField.value()) {
-      <div class="mt-2 space-y-1">
-        <div class="flex gap-1">
-          @for (i of [0, 1, 2, 3]; track i) {
-            <div [class]="strengthBarClass(i)"></div>
-          }
-        </div>
-        <p [class]="strengthTextClass()">{{ strengthLabel() }}</p>
+    <div class="mt-2 space-y-1">
+      <div class="flex gap-1">
+        @for (i of [0, 1, 2, 3]; track i) {
+          <div [class]="strengthBarClass(i)"></div>
+        }
       </div>
-    }
+      <p [class]="strengthTextClass()">{{ strengthLabel() }}</p>
+    </div>
   `,
   host: {
     'data-slot': 'password-field-strength',
