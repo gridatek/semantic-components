@@ -62,14 +62,16 @@ interface FormModel {
         <div scInputGroupAddon align="inline-start">
           <div scSelect>
             <div scSelectOrigin>
-              <span scSelectDisplayValue>{{ displayCurrency() }}</span>
-              <input
-                scSelectInput
-                [formField]="currencyForm.currency"
-                placeholder=""
-                aria-label="Currency dropdown"
-              />
-              <svg scSelectIcon siChevronDownIcon></svg>
+              <div scInputGroup class="border-none">
+                <span scSelectDisplayValue>{{ displayCurrency() }}</span>
+                <input
+                  scSelectInput
+                  [formField]="currencyForm.currency"
+                  placeholder=""
+                  aria-label="Currency dropdown"
+                />
+                <svg scSelectIcon siChevronDownIcon></svg>
+              </div>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
