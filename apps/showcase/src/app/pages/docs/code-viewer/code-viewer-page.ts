@@ -8,12 +8,14 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicCodeViewerDemoContainer from './demos/basic-code-viewer-demo-container';
 import { CodeViewerUsageDemoContainer } from './demos/code-viewer-usage-demo-container';
+import { PackageManagerCodeViewerDemoContainer } from './demos/package-manager-code-viewer-demo-container';
 
 @Component({
   selector: 'app-code-viewer-page',
   imports: [
     BasicCodeViewerDemoContainer,
     CodeViewerUsageDemoContainer,
+    PackageManagerCodeViewerDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
