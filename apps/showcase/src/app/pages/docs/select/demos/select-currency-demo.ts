@@ -96,6 +96,7 @@ interface FormModel {
           </div>
           <div scInputGroupSeparator></div>
           <input
+            class="w-full border-none outline-none"
             type="text"
             [formField]="currencyForm.amount"
             placeholder="0.00"
