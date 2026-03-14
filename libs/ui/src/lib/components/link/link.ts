@@ -24,6 +24,7 @@ export class ScLink {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
+      'aria-disabled:pointer-events-none aria-disabled:opacity-50',
       this.classInput(),
     ),
   );
