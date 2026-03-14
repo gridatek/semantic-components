@@ -10,6 +10,7 @@ import {
   ScButton,
   ScInputGroup,
   ScInputGroupAddon,
+  ScInputGroupSeparator,
   ScSelect,
   ScSelectDisplayValue,
   ScSelectIcon,
@@ -39,6 +40,7 @@ interface FormModel {
     ScButton,
     ScInputGroup,
     ScInputGroupAddon,
+    ScInputGroupSeparator,
     ScSelect,
     ScSelectDisplayValue,
     ScSelectItem,
@@ -91,6 +93,7 @@ interface FormModel {
             </ng-template>
           </div>
         </div>
+        <div scInputGroupSeparator></div>
         <input
           type="text"
           [formField]="currencyForm.amount"
@@ -98,7 +101,7 @@ interface FormModel {
           aria-label="Amount"
         />
         <div scInputGroupAddon align="inline-end">
-          <button scButton variant="ghost" size="icon">
+          <button scButton variant="ghost" size="icon" variant="outline">
             <svg siArrowRightIcon></svg>
           </button>
         </div>
