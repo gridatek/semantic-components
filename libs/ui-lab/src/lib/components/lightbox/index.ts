@@ -7,3 +7,4 @@ export * from './lightbox-thumbnail';
 export * from './lightbox-portal';
 export { SC_LIGHTBOX_PROVIDER, ScLightboxProvider } from './lightbox-provider';
 export { ScLightbox } from './lightbox';
+export { ScLightboxClose } from './lightbox-close';
