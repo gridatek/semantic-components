@@ -153,16 +153,16 @@ import {
             <div class="flex items-center gap-2">
               <span scLightboxCounter></span>
               <div scLightboxZoomControls>
-                <button scLightboxZoomOut>
+                <button scLightboxZoomOut value="zoom-out">
                   <svg siZoomOutIcon></svg>
                 </button>
                 <span class="min-w-12 text-center text-sm text-white/80">
                   {{ Math.round(lightbox.zoomLevel() * 100) }}%
                 </span>
-                <button scLightboxZoomIn>
+                <button scLightboxZoomIn value="zoom-in">
                   <svg siZoomInIcon></svg>
                 </button>
-                <button scLightboxZoomReset>
+                <button scLightboxZoomReset value="zoom-reset">
                   <svg siMinimize2Icon></svg>
                 </button>
               </div>
@@ -171,7 +171,7 @@ import {
 
           <div scLightboxThumbnailBar>
             @for (image of lightbox.images(); track image.src; let i = $index) {
-              <button type="button" scLightboxThumbnail [index]="i">
+              <button type="button" scLightboxThumbnail [index]="i" [value]="i">
                 <img
                   [src]="image.thumbnail || image.src"
                   [alt]="image.alt || 'Thumbnail ' + (i + 1)"

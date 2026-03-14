@@ -116,7 +116,7 @@ import {
 
           <div scLightboxThumbnailBar>
             @for (image of lightbox.images(); track image.src; let i = $index) {
-              <button type="button" scLightboxThumbnail [index]="i">
+              <button type="button" scLightboxThumbnail [index]="i" [value]="i">
                 <img
                   [src]="image.thumbnail || image.src"
                   [alt]="image.alt || 'Thumbnail ' + (i + 1)"

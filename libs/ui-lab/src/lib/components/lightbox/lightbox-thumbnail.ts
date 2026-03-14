@@ -1,13 +1,19 @@
+import { Option } from '@angular/aria/listbox';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
   selector: '[scLightboxThumbnail]',
+  hostDirectives: [
+    {
+      directive: Option,
+      inputs: ['value'],
+    },
+  ],
   host: {
     'data-slot': 'lightbox-thumbnail',
     '[class]': 'class()',
-    '(click)': 'onClick()',
     '[attr.aria-label]': "'Go to image ' + (index() + 1)",
   },
 })
@@ -26,8 +32,4 @@ export class ScLightboxThumbnail {
       this.classInput(),
     ),
   );
-
-  onClick(): void {
-    this.provider.goTo(this.index());
-  }
 }
