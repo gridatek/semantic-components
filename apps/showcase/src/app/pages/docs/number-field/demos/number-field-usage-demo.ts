@@ -31,7 +31,7 @@ import {
         <label scLabel>Quantity</label>
       </div>
 
-      <div scNumberFieldInputGroup>
+      <div scNumberFieldGroup>
         <button scNumberFieldDecrement></button>
         <input scNumberFieldInput />
         <button scNumberFieldIncrement></button>
