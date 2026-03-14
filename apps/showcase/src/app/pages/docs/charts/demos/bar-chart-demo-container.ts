@@ -12,7 +12,7 @@ import { BarChartDemo } from './bar-chart-demo';
   template: `
     <app-demo-container
       title="Bar Chart"
-      demoUrl="/demos/chart/bar-chart-demo"
+      demoUrl="/demos/charts/bar-chart-demo"
       [code]="code"
     >
       <app-bar-chart-demo />

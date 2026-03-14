@@ -12,7 +12,7 @@ import { DonutChartDemo } from './donut-chart-demo';
   template: `
     <app-demo-container
       title="Donut Chart"
-      demoUrl="/demos/chart/donut-chart-demo"
+      demoUrl="/demos/charts/donut-chart-demo"
       [code]="code"
     >
       <app-donut-chart-demo />

@@ -111,8 +111,8 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/carousel/carousel-page'),
       },
       {
-        path: 'chart',
-        title: 'Chart - Semantic Components',
+        path: 'charts',
+        title: 'Charts - Semantic Components',
         loadComponent: () => import('../pages/docs/charts/charts-page'),
       },
       {

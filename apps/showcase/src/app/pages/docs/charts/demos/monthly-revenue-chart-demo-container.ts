@@ -12,7 +12,7 @@ import { MonthlyRevenueChartDemo } from './monthly-revenue-chart-demo';
   template: `
     <app-demo-container
       title="Monthly Revenue"
-      demoUrl="/demos/chart/monthly-revenue-chart-demo"
+      demoUrl="/demos/charts/monthly-revenue-chart-demo"
       [code]="code"
     >
       <app-monthly-revenue-chart-demo />

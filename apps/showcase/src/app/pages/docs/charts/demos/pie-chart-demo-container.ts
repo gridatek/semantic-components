@@ -12,7 +12,7 @@ import { PieChartDemo } from './pie-chart-demo';
   template: `
     <app-demo-container
       title="Pie Chart"
-      demoUrl="/demos/chart/pie-chart-demo"
+      demoUrl="/demos/charts/pie-chart-demo"
       [code]="code"
     >
       <app-pie-chart-demo />

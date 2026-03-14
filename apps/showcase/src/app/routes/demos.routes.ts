@@ -537,7 +537,7 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/chart',
+    path: 'demos/charts',
     children: [
       {
         path: 'bar-chart-demo',

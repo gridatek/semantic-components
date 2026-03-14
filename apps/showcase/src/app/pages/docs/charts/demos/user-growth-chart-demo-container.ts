@@ -12,7 +12,7 @@ import { UserGrowthChartDemo } from './user-growth-chart-demo';
   template: `
     <app-demo-container
       title="User Growth"
-      demoUrl="/demos/chart/user-growth-chart-demo"
+      demoUrl="/demos/charts/user-growth-chart-demo"
       [code]="code"
     >
       <app-user-growth-chart-demo />

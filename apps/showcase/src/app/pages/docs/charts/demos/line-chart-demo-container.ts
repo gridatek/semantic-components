@@ -12,7 +12,7 @@ import { LineChartDemo } from './line-chart-demo';
   template: `
     <app-demo-container
       title="Line Chart"
-      demoUrl="/demos/chart/line-chart-demo"
+      demoUrl="/demos/charts/line-chart-demo"
       [code]="code"
     >
       <app-line-chart-demo />

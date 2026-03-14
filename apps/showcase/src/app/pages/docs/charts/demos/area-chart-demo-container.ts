@@ -12,7 +12,7 @@ import { AreaChartDemo } from './area-chart-demo';
   template: `
     <app-demo-container
       title="Area Chart"
-      demoUrl="/demos/chart/area-chart-demo"
+      demoUrl="/demos/charts/area-chart-demo"
       [code]="code"
     >
       <app-area-chart-demo />
