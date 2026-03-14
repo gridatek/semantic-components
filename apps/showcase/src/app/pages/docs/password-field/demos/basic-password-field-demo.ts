@@ -29,31 +29,33 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     SiEyeOffIcon,
   ],
   template: `
-    <div
-      scPasswordField
-      #passwordField="scPasswordField"
-      [(value)]="password"
-      class="space-y-2"
-    >
-      <label scLabel>Password</label>
-      <div scInputGroup class="w-full max-w-sm">
-        <input scPasswordFieldInput placeholder="Enter password" />
-        <div scInputGroupAddon align="inline-end">
-          <button scPasswordFieldToggle>
-            @if (passwordField.visible()) {
-              <svg siEyeOffIcon></svg>
-            } @else {
-              <svg siEyeIcon></svg>
-            }
-            <span class="sr-only">Toggle password visibility</span>
-          </button>
+    <div class="w-full max-w-sm space-y-4">
+      <div
+        scPasswordField
+        #passwordField="scPasswordField"
+        [(value)]="password"
+        class="space-y-2"
+      >
+        <label scLabel>Password</label>
+        <div scInputGroup>
+          <input scPasswordFieldInput placeholder="Enter password" />
+          <div scInputGroupAddon align="inline-end">
+            <button scPasswordFieldToggle>
+              @if (passwordField.visible()) {
+                <svg siEyeOffIcon></svg>
+              } @else {
+                <svg siEyeIcon></svg>
+              }
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <p class="text-muted-foreground mt-4 text-sm">
-      Value: {{ password() || '(empty)' }}
-    </p>
+      <p class="text-muted-foreground text-sm">
+        Value: {{ password() || '(empty)' }}
+      </p>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

@@ -29,7 +29,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     SiEyeOffIcon,
   ],
   template: `
-    <div class="space-y-4">
+    <div class="w-full max-w-sm space-y-4">
       <div
         scPasswordField
         #newPasswordField="scPasswordField"
@@ -37,7 +37,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         class="space-y-2"
       >
         <label scLabel>New Password</label>
-        <div scInputGroup class="w-full max-w-sm">
+        <div scInputGroup>
           <input
             scPasswordFieldInput
             placeholder="Enter new password"
@@ -66,7 +66,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         class="space-y-2"
       >
         <label scLabel>Confirm Password</label>
-        <div scInputGroup class="w-full max-w-sm">
+        <div scInputGroup>
           <input
             scPasswordFieldInput
             placeholder="Confirm new password"
