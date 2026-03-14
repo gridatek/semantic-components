@@ -8,9 +8,9 @@ import {
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
+  ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui';
 
@@ -19,7 +19,7 @@ import {
   imports: [
     ScNumberField,
     ScNumberFieldScrubArea,
-    ScNumberFieldGroup,
+    ScNumberFieldInputGroup,
     ScNumberFieldDecrement,
     ScNumberFieldInput,
     ScNumberFieldIncrement,
@@ -31,7 +31,7 @@ import {
         <label scLabel>Quantity</label>
       </div>
 
-      <div scNumberFieldGroup>
+      <div scNumberFieldInputGroup>
         <button scNumberFieldDecrement></button>
         <input scNumberFieldInput />
         <button scNumberFieldIncrement></button>

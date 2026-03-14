@@ -57,7 +57,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
         <div scPasswordFieldStrength></div>
-        <ul scPasswordFieldRequirements></ul>
+        <div scPasswordFieldRequirements></div>
       </div>
     </div>
   `,

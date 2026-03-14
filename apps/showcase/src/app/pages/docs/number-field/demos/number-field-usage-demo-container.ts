@@ -77,7 +77,7 @@ import {
   ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
-  ScNumberFieldGroup,
+  ScNumberFieldInputGroup,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
   ScNumberFieldScrubArea,
@@ -88,7 +88,7 @@ import {
   imports: [
     ScNumberField,
     ScNumberFieldScrubArea,
-    ScNumberFieldGroup,
+    ScNumberFieldInputGroup,
     ScNumberFieldDecrement,
     ScNumberFieldInput,
     ScNumberFieldIncrement,
@@ -100,7 +100,7 @@ import {
         <label scLabel>Quantity</label>
       </div>
 
-      <div scNumberFieldGroup>
+      <div scNumberFieldInputGroup>
         <button scNumberFieldDecrement></button>
         <input scNumberFieldInput />
         <button scNumberFieldIncrement></button>
