@@ -12,12 +12,15 @@ import {
 import {
   ScLightbox,
   ScLightboxClose,
+  ScLightboxCounter,
   ScLightboxImageData,
   ScLightboxNext,
   ScLightboxPortal,
   ScLightboxPrev,
   ScLightboxProvider,
   ScLightboxThumbnail,
+  ScLightboxThumbnailBar,
+  ScLightboxToolbar,
   ScLightboxTrigger,
 } from '@semantic-components/ui-lab';
 import {
@@ -32,11 +35,14 @@ import {
     ScLightboxProvider,
     ScLightbox,
     ScLightboxClose,
+    ScLightboxCounter,
     ScLightboxNext,
     ScLightboxPrev,
     ScLightboxTrigger,
     ScLightboxPortal,
     ScLightboxThumbnail,
+    ScLightboxThumbnailBar,
+    ScLightboxToolbar,
     ScCarousel,
     ScCarouselViewport,
     ScCarouselTrack,
@@ -108,16 +114,11 @@ import {
             }
           </div>
 
-          <div class="flex items-center justify-center bg-black/50 px-4 py-3">
-            <span class="text-sm text-white/80">
-              {{ lightbox.currentIndex() + 1 }} /
-              {{ lightbox.images().length }}
-            </span>
+          <div scLightboxToolbar>
+            <span scLightboxCounter></span>
           </div>
 
-          <div
-            class="flex items-center justify-center gap-2 overflow-x-auto bg-black/50 px-4 py-3"
-          >
+          <div scLightboxThumbnailBar>
             @for (image of lightbox.images(); track image.src; let i = $index) {
               <button type="button" scLightboxThumbnail [index]="i">
                 <img

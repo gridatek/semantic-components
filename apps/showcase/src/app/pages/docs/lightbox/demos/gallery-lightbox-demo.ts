@@ -12,6 +12,7 @@ import {
 import {
   ScLightbox,
   ScLightboxClose,
+  ScLightboxCounter,
   ScLightboxGallery,
   ScLightboxGalleryItem,
   ScLightboxImageData,
@@ -20,6 +21,12 @@ import {
   ScLightboxPrev,
   ScLightboxProvider,
   ScLightboxThumbnail,
+  ScLightboxThumbnailBar,
+  ScLightboxToolbar,
+  ScLightboxZoomControls,
+  ScLightboxZoomIn,
+  ScLightboxZoomOut,
+  ScLightboxZoomReset,
 } from '@semantic-components/ui-lab';
 import {
   SiChevronLeftIcon,
@@ -36,12 +43,19 @@ import {
     ScLightboxProvider,
     ScLightbox,
     ScLightboxClose,
+    ScLightboxCounter,
     ScLightboxGallery,
     ScLightboxGalleryItem,
     ScLightboxNext,
     ScLightboxPortal,
     ScLightboxPrev,
     ScLightboxThumbnail,
+    ScLightboxThumbnailBar,
+    ScLightboxToolbar,
+    ScLightboxZoomControls,
+    ScLightboxZoomIn,
+    ScLightboxZoomOut,
+    ScLightboxZoomReset,
     ScCarousel,
     ScCarouselViewport,
     ScCarouselTrack,
@@ -122,49 +136,25 @@ import {
             }
           </div>
 
-          <div
-            class="flex items-center justify-center gap-2 bg-black/50 px-4 py-3"
-          >
-            <span class="text-sm text-white/80">
-              {{ lightbox.currentIndex() + 1 }} /
-              {{ lightbox.images().length }}
-            </span>
-            <div class="ml-4 flex items-center gap-1">
-              <button
-                type="button"
-                class="p-2 text-white/80 transition-colors hover:text-white"
-                (click)="lightbox.zoomOut()"
-                [disabled]="lightbox.zoomLevel() <= 0.5"
-                aria-label="Zoom out"
-              >
-                <svg siZoomOutIcon class="size-5"></svg>
+          <div scLightboxToolbar>
+            <span scLightboxCounter></span>
+            <div scLightboxZoomControls>
+              <button scLightboxZoomOut>
+                <svg siZoomOutIcon></svg>
               </button>
               <span class="min-w-12 text-center text-sm text-white/80">
                 {{ Math.round(lightbox.zoomLevel() * 100) }}%
               </span>
-              <button
-                type="button"
-                class="p-2 text-white/80 transition-colors hover:text-white"
-                (click)="lightbox.zoomIn()"
-                [disabled]="lightbox.zoomLevel() >= 3"
-                aria-label="Zoom in"
-              >
-                <svg siZoomInIcon class="size-5"></svg>
+              <button scLightboxZoomIn>
+                <svg siZoomInIcon></svg>
               </button>
-              <button
-                type="button"
-                class="p-2 text-white/80 transition-colors hover:text-white"
-                (click)="lightbox.resetZoom()"
-                aria-label="Reset zoom"
-              >
-                <svg siMinimize2Icon class="size-5"></svg>
+              <button scLightboxZoomReset>
+                <svg siMinimize2Icon></svg>
               </button>
             </div>
           </div>
 
-          <div
-            class="flex items-center justify-center gap-2 overflow-x-auto bg-black/50 px-4 py-3"
-          >
+          <div scLightboxThumbnailBar>
             @for (image of lightbox.images(); track image.src; let i = $index) {
               <button type="button" scLightboxThumbnail [index]="i">
                 <img
