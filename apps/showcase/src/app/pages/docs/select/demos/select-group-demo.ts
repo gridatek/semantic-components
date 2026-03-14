@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
+  ScInputGroup,
+  ScInputGroupAddon,
   ScSelect,
   ScSelectDisplayValue,
   ScSelectGroup,
@@ -31,6 +33,8 @@ interface FormModel {
 @Component({
   selector: 'app-select-group-demo',
   imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
     ScSelect,
     ScSelectDisplayValue,
     ScSelectGroup,
@@ -54,14 +58,18 @@ interface FormModel {
     <form [formRoot]="foodForm">
       <div scSelect>
         <div scSelectOrigin>
-          <span scSelectDisplayValue>{{ displayValue() }}</span>
-          <input
-            scSelectInput
-            [formField]="foodForm.food"
-            placeholder="Select a food"
-            aria-label="Food dropdown"
-          />
-          <svg scSelectIcon siChevronDownIcon></svg>
+          <div scInputGroup>
+            <span scSelectDisplayValue>{{ displayValue() }}</span>
+            <input
+              scSelectInput
+              [formField]="foodForm.food"
+              placeholder="Select a food"
+              aria-label="Food dropdown"
+            />
+            <div scInputGroupAddon align="inline-end">
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
+          </div>
         </div>
         <ng-template scSelectPortal>
           <div scSelectPopup>

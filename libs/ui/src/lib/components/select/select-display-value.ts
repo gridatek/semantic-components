@@ -24,7 +24,7 @@ export class ScSelectDisplayValue {
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none flex flex-1 items-center gap-1.5 truncate [&_svg:not([class*=size-])]:size-4',
+      'pointer-events-none flex flex-1 items-center gap-1.5 truncate ps-1.5 [&_svg:not([class*=size-])]:size-4',
       this.classInput(),
     ),
   );

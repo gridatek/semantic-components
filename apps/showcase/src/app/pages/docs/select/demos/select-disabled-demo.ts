@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
+  ScInputGroup,
+  ScInputGroupAddon,
   ScSelect,
   ScSelectDisplayValue,
   ScSelectIcon,
@@ -28,6 +30,8 @@ interface FormModel {
 @Component({
   selector: 'app-select-disabled-demo',
   imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
     ScSelect,
     ScSelectDisplayValue,
     ScSelectItem,
@@ -48,14 +52,18 @@ interface FormModel {
     <form [formRoot]="fruitForm">
       <div scSelect disabled>
         <div scSelectOrigin>
-          <span scSelectDisplayValue>{{ displayValue() }}</span>
-          <input
-            scSelectInput
-            [formField]="fruitForm.fruit"
-            placeholder="Select a fruit"
-            aria-label="Fruit dropdown"
-          />
-          <svg scSelectIcon siChevronDownIcon></svg>
+          <div scInputGroup>
+            <span scSelectDisplayValue>{{ displayValue() }}</span>
+            <input
+              scSelectInput
+              [formField]="fruitForm.fruit"
+              placeholder="Select a fruit"
+              aria-label="Fruit dropdown"
+            />
+            <div scInputGroupAddon align="inline-end">
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
+          </div>
         </div>
         <ng-template scSelectPortal>
           <div scSelectPopup>

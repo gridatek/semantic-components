@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
+  ScInputGroup,
+  ScInputGroupAddon,
   ScSelect,
   ScSelectDisplayValue,
   ScSelectIcon,
@@ -41,6 +43,8 @@ interface FormModel {
 @Component({
   selector: 'app-select-demo',
   imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
     ScSelect,
     ScSelectDisplayValue,
     ScSelectPopup,
@@ -71,19 +75,25 @@ interface FormModel {
     <form [formRoot]="selectForm">
       <div scSelect class="w-48">
         <div scSelectOrigin>
-          @if (displayIcon(); as icon) {
-            <ng-container
-              *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-            ></ng-container>
-          }
-          <span scSelectDisplayValue>{{ displayValue() }}</span>
-          <input
-            scSelectInput
-            [formField]="selectForm.category"
-            placeholder="Select a category"
-            aria-label="Category dropdown"
-          />
-          <svg scSelectIcon siChevronDownIcon></svg>
+          <div scInputGroup>
+            @if (displayIcon(); as icon) {
+              <div scInputGroupAddon align="inline-start">
+                <ng-container
+                  *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+                ></ng-container>
+              </div>
+            }
+            <span scSelectDisplayValue>{{ displayValue() }}</span>
+            <input
+              scSelectInput
+              [formField]="selectForm.category"
+              placeholder="Select a category"
+              aria-label="Category dropdown"
+            />
+            <div scInputGroupAddon align="inline-end">
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
+          </div>
         </div>
         <ng-template scSelectPortal>
           <div scSelectPopup>
