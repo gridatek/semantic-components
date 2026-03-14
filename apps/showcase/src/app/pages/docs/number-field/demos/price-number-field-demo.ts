@@ -13,6 +13,7 @@ import {
   ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
+import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-price-number-field-demo',
@@ -24,6 +25,8 @@ import {
     ScNumberFieldInput,
     ScNumberFieldIncrement,
     ScLabel,
+    SiMinusIcon,
+    SiPlusIcon,
   ],
   template: `
     <div
@@ -38,9 +41,9 @@ import {
       </div>
 
       <div scNumberFieldGroup>
-        <button scNumberFieldDecrement></button>
+        <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
         <input scNumberFieldInput aria-label="Price" />
-        <button scNumberFieldIncrement></button>
+        <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
       </div>
     </div>
 

@@ -13,6 +13,7 @@ import {
   ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
+import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-scrubbing-number-field-demo',
@@ -24,6 +25,8 @@ import {
     ScNumberFieldInput,
     ScNumberFieldIncrement,
     ScLabel,
+    SiMinusIcon,
+    SiPlusIcon,
   ],
   template: `
     <div class="space-y-6">
@@ -39,9 +42,9 @@ import {
         </div>
 
         <div scNumberFieldGroup>
-          <button scNumberFieldDecrement></button>
+          <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
           <input scNumberFieldInput aria-label="Opacity" />
-          <button scNumberFieldIncrement></button>
+          <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
         </div>
       </div>
 
@@ -51,9 +54,9 @@ import {
         </div>
 
         <div scNumberFieldGroup>
-          <button scNumberFieldDecrement></button>
+          <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
           <input scNumberFieldInput aria-label="Rotation" />
-          <button scNumberFieldIncrement></button>
+          <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
         </div>
       </div>
     </div>

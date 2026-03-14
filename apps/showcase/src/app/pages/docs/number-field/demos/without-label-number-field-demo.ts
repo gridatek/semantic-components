@@ -11,6 +11,7 @@ import {
   ScNumberFieldInput,
   ScNumberFieldInputGroup,
 } from '@semantic-components/ui-lab';
+import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-without-label-number-field-demo',
@@ -20,15 +21,17 @@ import {
     ScNumberFieldDecrement,
     ScNumberFieldInput,
     ScNumberFieldIncrement,
+    SiMinusIcon,
+    SiPlusIcon,
   ],
   template: `
     <div class="flex items-center gap-4">
       <span class="text-sm font-medium">Quantity:</span>
       <div scNumberField [(value)]="quantity" [min]="1" [max]="10" class="w-28">
         <div scNumberFieldGroup>
-          <button scNumberFieldDecrement></button>
+          <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
           <input scNumberFieldInput aria-label="Quantity" />
-          <button scNumberFieldIncrement></button>
+          <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
         </div>
       </div>
     </div>

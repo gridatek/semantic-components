@@ -14,6 +14,7 @@ import {
   ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
 } from '@semantic-components/ui-lab';
+import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-signal-forms-number-field-demo',
@@ -26,6 +27,8 @@ import {
     ScNumberFieldInput,
     ScNumberFieldIncrement,
     ScLabel,
+    SiMinusIcon,
+    SiPlusIcon,
   ],
   template: `
     <div class="max-w-sm space-y-4">
@@ -43,7 +46,7 @@ import {
         </div>
 
         <div scNumberFieldGroup>
-          <button scNumberFieldDecrement></button>
+          <button scNumberFieldDecrement><svg siMinusIcon></svg></button>
           <input
             scNumberFieldInput
             aria-label="Quantity"
@@ -53,7 +56,7 @@ import {
               quantityForm.quantity().touched()
             "
           />
-          <button scNumberFieldIncrement></button>
+          <button scNumberFieldIncrement><svg siPlusIcon></svg></button>
         </div>
         @if (
           quantityForm.quantity().invalid() && quantityForm.quantity().touched()

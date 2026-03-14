@@ -1,20 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_NUMBER_FIELD } from './number-field';
 
-@Component({
+@Directive({
   selector: '[scNumberFieldScrubArea]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'number-field-scrub-area',
     '[class]': 'class()',
@@ -22,8 +11,6 @@ import { SC_NUMBER_FIELD } from './number-field';
     '[attr.data-disabled]': 'numberField.disabled() || null',
     '(mousedown)': 'onMouseDown($event)',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNumberFieldScrubArea {
   readonly numberField = inject(SC_NUMBER_FIELD);

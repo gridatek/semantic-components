@@ -1,17 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn, inputStyles } from '@semantic-components/ui';
 import { SC_NUMBER_FIELD } from './number-field';
 
-@Component({
+@Directive({
   selector: 'input[scNumberFieldInput]',
-  template: ``,
   host: {
     'data-slot': 'number-field-input',
     type: 'text',
@@ -27,8 +19,6 @@ import { SC_NUMBER_FIELD } from './number-field';
     '(blur)': 'onBlur()',
     '(keydown)': 'onKeydown($event)',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNumberFieldInput {
   readonly numberField = inject(SC_NUMBER_FIELD);
@@ -36,10 +26,8 @@ export class ScNumberFieldInput {
 
   protected readonly class = computed(() =>
     cn(
-      'h-9 w-full bg-transparent px-3 py-1 text-sm text-center',
-      'focus:outline-none',
-      'disabled:cursor-not-allowed',
-      '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
+      inputStyles,
+      'text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none',
       this.classInput(),
     ),
   );
