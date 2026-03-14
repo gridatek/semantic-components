@@ -605,7 +605,7 @@
     "path": "password-field",
     "description": "A composable password input with visibility toggle.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Forms",
     "hidden": true
   },

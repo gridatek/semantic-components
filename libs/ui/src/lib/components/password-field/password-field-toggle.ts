@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { buttonVariants } from '../button/button';
 import { SC_PASSWORD_FIELD } from './password-field';
 
 @Directive({

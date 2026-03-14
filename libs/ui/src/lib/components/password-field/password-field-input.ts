@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, inputStyles } from '@semantic-components/ui';
-import { SC_FIELD } from '@semantic-components/ui';
+import { cn } from '../../utils';
+import { SC_FIELD } from '../field/field';
+import { inputStyles } from '../input/input';
 import { SC_PASSWORD_FIELD } from './password-field';
 
 @Directive({

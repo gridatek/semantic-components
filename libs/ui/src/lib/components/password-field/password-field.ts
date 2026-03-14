@@ -14,7 +14,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { SC_FIELD } from '@semantic-components/ui';
+import { SC_FIELD } from '../field/field';
 
 // Token for password field context - interface to avoid circular dependency
 export interface ScPasswordFieldContext {

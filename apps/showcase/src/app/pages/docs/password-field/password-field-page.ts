@@ -104,7 +104,7 @@ export default class PasswordFieldPage {
   ScPasswordFieldInput,
   ScPasswordFieldToggle,
   ScLabel,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 
 @Component({
   imports: [

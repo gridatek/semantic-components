@@ -22,7 +22,6 @@ export * from './mention-input';
 export * from './navbar';
 export * from './notification-center';
 export * from './org-chart';
-export * from './password-field';
 export * from './pdf-viewer';
 export * from './qr-code';
 export * from './signature-pad';

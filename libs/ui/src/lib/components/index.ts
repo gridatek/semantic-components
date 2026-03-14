@@ -63,3 +63,4 @@ export * from './toggle-group';
 export * from './toolbar';
 export * from './tooltip';
 export * from './typography';
+export * from './password-field';

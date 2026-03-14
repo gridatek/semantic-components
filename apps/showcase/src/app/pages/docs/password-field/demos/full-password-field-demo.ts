@@ -8,14 +8,12 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
-} from '@semantic-components/ui';
-import {
   ScPasswordField,
   ScPasswordFieldInput,
   ScPasswordFieldRequirements,
   ScPasswordFieldStrength,
   ScPasswordFieldToggle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
