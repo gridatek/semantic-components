@@ -31,7 +31,7 @@ import { UserGrowthChartDemoContainer } from './demos/user-growth-chart-demo-con
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Chart</h1>
+        <h1 scHeading>Charts</h1>
         <p class="text-muted-foreground">
           SVG-based chart components for data visualization.
         </p>
