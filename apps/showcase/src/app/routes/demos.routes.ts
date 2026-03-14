@@ -3408,6 +3408,13 @@ export const demosRoutes: Route[] = [
             (m) => m.DisabledTabsDemo,
           ),
       },
+      {
+        path: 'vertical-tabs-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs/demos/vertical-tabs-demo').then(
+            (m) => m.VerticalTabsDemo,
+          ),
+      },
     ],
   },
   {

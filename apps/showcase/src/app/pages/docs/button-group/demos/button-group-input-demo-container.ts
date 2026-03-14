@@ -28,12 +28,12 @@ export class ButtonGroupInputDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScButton, ScButtonGroup } from '@semantic-components/ui';
+import { ScButton, ScButtonGroup, ScInput } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-button-group-input-demo',
-  imports: [ScButton, ScButtonGroup, SiMinusIcon, SiPlusIcon],
+  imports: [ScButton, ScButtonGroup, ScInput, SiMinusIcon, SiPlusIcon],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   template: \`
@@ -42,7 +42,8 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         <svg siMinusIcon></svg>
       </button>
       <input
-        class="h-8 w-16 border border-l-0 border-r-0 border-input bg-background text-center text-sm outline-none"
+        scInput
+        class="w-16 text-center"
         type="text"
         value="5"
         aria-label="Quantity"

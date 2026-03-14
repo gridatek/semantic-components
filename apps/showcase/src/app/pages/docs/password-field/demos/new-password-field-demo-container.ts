@@ -29,49 +29,82 @@ export default class NewPasswordFieldDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScLabel } from '@semantic-components/ui';
 import {
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScLabel,
   ScPasswordField,
   ScPasswordFieldInput,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldToggle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-new-password-field-demo',
   imports: [
     ScPasswordField,
-    ScPasswordFieldInputGroup,
     ScPasswordFieldInput,
     ScPasswordFieldToggle,
+    ScInputGroup,
+    ScInputGroupAddon,
     ScLabel,
+    SiEyeIcon,
+    SiEyeOffIcon,
   ],
   template: \`
-    <div class="space-y-4">
-      <div scPasswordField [(value)]="newPassword" class="space-y-2">
+    <div class="w-full max-w-sm space-y-4">
+      <div
+        scPasswordField
+        #newPasswordField="scPasswordField"
+        [(value)]="newPassword"
+        class="space-y-2"
+      >
         <label scLabel>New Password</label>
-        <div scPasswordFieldInputGroup>
+        <div scInputGroup>
           <input
             scPasswordFieldInput
             placeholder="Enter new password"
             autocomplete="new-password"
           />
-          <button scPasswordFieldToggle></button>
+          <div scInputGroupAddon align="inline-end">
+            <button scPasswordFieldToggle>
+              @if (newPasswordField.visible()) {
+                <svg siEyeOffIcon></svg>
+              } @else {
+                <svg siEyeIcon></svg>
+              }
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
+          </div>
         </div>
         <p class="text-muted-foreground text-sm">
           Must be at least 8 characters
         </p>
       </div>
 
-      <div scPasswordField [(value)]="confirmPassword" class="space-y-2">
+      <div
+        scPasswordField
+        #confirmPasswordField="scPasswordField"
+        [(value)]="confirmPassword"
+        class="space-y-2"
+      >
         <label scLabel>Confirm Password</label>
-        <div scPasswordFieldInputGroup>
+        <div scInputGroup>
           <input
             scPasswordFieldInput
             placeholder="Confirm new password"
             autocomplete="new-password"
           />
-          <button scPasswordFieldToggle></button>
+          <div scInputGroupAddon align="inline-end">
+            <button scPasswordFieldToggle>
+              @if (confirmPasswordField.visible()) {
+                <svg siEyeOffIcon></svg>
+              } @else {
+                <svg siEyeIcon></svg>
+              }
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

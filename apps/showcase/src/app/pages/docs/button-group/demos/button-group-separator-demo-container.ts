@@ -33,7 +33,10 @@ import {
   ScButtonGroup,
   ScButtonGroupSeparator,
 } from '@semantic-components/ui';
-import { SiClipboardIcon, SiClipboardPasteIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiClipboardIcon,
+  SiClipboardPasteIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-button-group-separator-demo',

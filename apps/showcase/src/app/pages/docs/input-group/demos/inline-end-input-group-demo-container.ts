@@ -29,29 +29,28 @@ export class InlineEndInputGroupDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupText,
 } from '@semantic-components/ui';
 import { SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-inline-end-input-group-demo',
-  imports: [
-    ScInput,
-    ScInputGroup,
-    ScInputGroupAddon,
-    ScInputGroupText,
-    SiEyeOffIcon,
-  ],
+  imports: [ScButton, ScInput, ScInputGroup, ScInputGroupAddon, SiEyeOffIcon],
   template: \`
     <div scInputGroup class="w-full max-w-sm">
       <input scInput type="password" placeholder="Enter password" />
       <div scInputGroupAddon align="inline-end">
-        <span scInputGroupText>
+        <button
+          scButton
+          variant="ghost"
+          size="icon-sm"
+          aria-label="Toggle password visibility"
+        >
           <svg siEyeOffIcon></svg>
-        </span>
+        </button>
       </div>
     </div>
   \`,

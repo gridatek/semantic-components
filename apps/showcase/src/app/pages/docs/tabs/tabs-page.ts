@@ -8,12 +8,14 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTabsDemoContainer } from './demos/basic-tabs-demo-container';
 import { DisabledTabsDemoContainer } from './demos/disabled-tabs-demo-container';
+import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container';
 
 @Component({
   selector: 'app-tabs-page',
   imports: [
     BasicTabsDemoContainer,
     DisabledTabsDemoContainer,
+    VerticalTabsDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -33,6 +35,7 @@ import { DisabledTabsDemoContainer } from './demos/disabled-tabs-demo-container'
         <h2 scHeading appToc>Examples</h2>
         <app-basic-tabs-demo-container />
         <app-disabled-tabs-demo-container />
+        <app-vertical-tabs-demo-container />
       </section>
     </div>
   `,
