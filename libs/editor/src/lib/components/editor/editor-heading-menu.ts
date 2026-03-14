@@ -14,7 +14,7 @@ const HEADING_OPTIONS: { value: ScEditorHeading; label: string }[] = [
 ];
 
 @Directive({
-  selector: 'div[scEditorHeadingMenu]',
+  selector: '[scEditorHeadingMenu]',
   exportAs: 'scEditorHeadingMenu',
   hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
   host: {
