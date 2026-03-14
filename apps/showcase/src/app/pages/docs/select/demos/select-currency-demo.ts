@@ -101,8 +101,9 @@ interface FormModel {
             aria-label="Amount"
           />
         </div>
-        <button scButton variant="outline" size="icon" aria-label="Convert">
+        <button scButton variant="outline" size="icon">
           <svg siArrowRightIcon></svg>
+          <span class="sr-only">Convert</span>
         </button>
       </div>
     </form>
