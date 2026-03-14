@@ -188,5 +188,5 @@ export default class EditorInstallPage {
     </div>
   \`,
 })
-export class ExampleComponent {}`;
+export class Example {}`;
 }

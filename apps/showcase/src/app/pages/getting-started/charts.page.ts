@@ -150,7 +150,7 @@ export default class ChartsInstallPage {
     </div>
   \`,
 })
-export class ExampleComponent {
+export class Example {
   data: ChartDataPoint[] = [
     { label: 'Jan', value: 120 },
     { label: 'Feb', value: 180 },

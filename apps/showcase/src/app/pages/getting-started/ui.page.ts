@@ -223,5 +223,5 @@ export default class UiPage {
     <button scButton>Click me</button>
   \`,
 })
-export class ExampleComponent {}`;
+export class Example {}`;
 }

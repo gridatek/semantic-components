@@ -134,5 +134,5 @@ export default class UiLabPage {
     </div>
   \`,
 })
-export class ExampleComponent {}`;
+export class Example {}`;
 }

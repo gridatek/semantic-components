@@ -181,7 +181,7 @@ export default class CodeInstallPage {
     </div>
   \`,
 })
-export class ExampleComponent {
+export class Example {
   code = 'const greeting = "Hello, world!";';
 }`;
 }

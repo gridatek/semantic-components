@@ -164,5 +164,5 @@ export default class CarouselInstallPage {
     </div>
   \`,
 })
-export class ExampleComponent {}`;
+export class Example {}`;
 }
