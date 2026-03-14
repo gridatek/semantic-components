@@ -22,7 +22,8 @@
     "@angular/platform-browser": ">=21.1.1",
     "@semantic-icons/lucide-icons": ">=0.56.0",
     "@semantic-components/ui": "0.78.0",
-    "@js-temporal/polyfill": "^0.5.1"
+    "@js-temporal/polyfill": "^0.5.1",
+    "@semantic-components/carousel": "0.78.0"
   },
   "sideEffects": false
 }
