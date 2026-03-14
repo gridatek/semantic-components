@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
+  ScButton,
   ScInputGroup,
   ScInputGroupAddon,
   ScSelect,
@@ -21,7 +22,11 @@ import {
   ScSelectPopup,
   ScSelectPortal,
 } from '@semantic-components/ui';
-import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiArrowRightIcon,
+  SiCheckIcon,
+  SiChevronDownIcon,
+} from '@semantic-icons/lucide-icons';
 
 interface FormModel {
   currency: string;
@@ -31,6 +36,7 @@ interface FormModel {
 @Component({
   selector: 'app-select-currency-demo',
   imports: [
+    ScButton,
     ScInputGroup,
     ScInputGroupAddon,
     ScSelect,
@@ -44,6 +50,7 @@ interface FormModel {
     ScSelectIcon,
     ScSelectItemIndicator,
     ScSelectItemLabel,
+    SiArrowRightIcon,
     SiCheckIcon,
     SiChevronDownIcon,
     FormField,
@@ -51,42 +58,47 @@ interface FormModel {
   ],
   template: `
     <form [formRoot]="currencyForm">
-      <div scSelect>
-        <div scSelectOrigin>
-          <div scInputGroup class="w-80">
-            <div scInputGroupAddon align="inline-start">
+      <div scInputGroup class="w-80">
+        <div scInputGroupAddon align="inline-start">
+          <div scSelect>
+            <div scSelectOrigin>
               <span scSelectDisplayValue>{{ displayCurrency() }}</span>
               <input
                 scSelectInput
                 [formField]="currencyForm.currency"
-                placeholder="$"
+                placeholder=""
                 aria-label="Currency dropdown"
               />
               <svg scSelectIcon siChevronDownIcon></svg>
-              <input
-                type="text"
-                [formField]="currencyForm.amount"
-                placeholder="0.00"
-                aria-label="Amount"
-              />
             </div>
-          </div>
-          <ng-template scSelectPortal>
-            <div scSelectPopup>
-              <div scSelectList>
-                @for (currency of currencies; track currency.value) {
-                  <div
-                    scSelectItem
-                    [value]="currency.value"
-                    [label]="currency.label"
-                  >
-                    <span scSelectItemLabel>{{ currency.label }}</span>
-                    <svg scSelectItemIndicator siCheckIcon></svg>
-                  </div>
-                }
+            <ng-template scSelectPortal>
+              <div scSelectPopup>
+                <div scSelectList>
+                  @for (currency of currencies; track currency.value) {
+                    <div
+                      scSelectItem
+                      [value]="currency.value"
+                      [label]="currency.label"
+                    >
+                      <span scSelectItemLabel>{{ currency.label }}</span>
+                      <svg scSelectItemIndicator siCheckIcon></svg>
+                    </div>
+                  }
+                </div>
               </div>
-            </div>
-          </ng-template>
+            </ng-template>
+          </div>
+        </div>
+        <input
+          type="text"
+          [formField]="currencyForm.amount"
+          placeholder="0.00"
+          aria-label="Amount"
+        />
+        <div scInputGroupAddon align="inline-end">
+          <button scButton variant="ghost" size="icon">
+            <svg siArrowRightIcon></svg>
+          </button>
         </div>
       </div>
     </form>
