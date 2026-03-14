@@ -19,7 +19,7 @@ import {
   ScEditorContent,
   ScEditorCount,
   ScEditorFooter,
-  ScEditorHeadingSelect,
+  ScEditorHeadingMenu,
   ScEditorHorizontalRuleToggle,
   ScEditorItalicToggle,
   ScEditorLinkToggle,
@@ -33,9 +33,18 @@ import {
   ScEditorUndoToggle,
   ScEditorWordCount,
 } from '@semantic-components/editor';
-import { ScButton } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuTrigger,
+} from '@semantic-components/ui';
 import {
   SiBoldIcon,
+  SiChevronDownIcon,
   SiCodeIcon,
   SiItalicIcon,
   SiLinkIcon,
@@ -66,7 +75,7 @@ import {
     ScEditorUnderlineToggle,
     ScEditorStrikethroughToggle,
     ScEditorSeparator,
-    ScEditorHeadingSelect,
+    ScEditorHeadingMenu,
     ScEditorUndoToggle,
     ScEditorRedoToggle,
     ScEditorAlignLeftToggle,
@@ -84,7 +93,14 @@ import {
     ScEditorCount,
     ScEditorWordCount,
     ScEditorCharCount,
+    ScMenu,
+    ScMenuContent,
+    ScMenuItem,
+    ScMenuPortal,
+    ScMenuProvider,
+    ScMenuTrigger,
     SiBoldIcon,
+    SiChevronDownIcon,
     SiItalicIcon,
     SiUnderlineIcon,
     SiStrikethroughIcon,
@@ -124,12 +140,34 @@ import {
 
           <div scEditorSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <select
-              scEditorHeading
-              value="heading"
-              aria-label="Text style"
-            ></select>
+          <div
+            scEditorHeadingMenu
+            value="heading"
+            #headingMenu="scEditorHeadingMenu"
+          >
+            <div scMenuProvider>
+              <button
+                scMenuTrigger
+                class="hover:bg-accent flex items-center gap-1 rounded px-2 py-1 text-sm"
+              >
+                {{ headingMenu.currentHeadingLabel() }}
+                <svg siChevronDownIcon class="size-4"></svg>
+              </button>
+              <ng-template scMenuPortal>
+                <div scMenu (itemSelected)="headingMenu.onItemSelected($event)">
+                  <ng-template scMenuContent>
+                    @for (
+                      option of headingMenu.headingOptions;
+                      track option.value
+                    ) {
+                      <div scMenuItem [value]="option.value">
+                        {{ option.label }}
+                      </div>
+                    }
+                  </ng-template>
+                </div>
+              </ng-template>
+            </div>
           </div>
 
           <div scEditorSeparator></div>
