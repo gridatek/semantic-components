@@ -9,7 +9,6 @@ import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScInputGroup,
-  ScInputGroupAddon,
   ScInputGroupSeparator,
   ScSelect,
   ScSelectDisplayValue,
@@ -39,7 +38,6 @@ interface FormModel {
   imports: [
     ScButton,
     ScInputGroup,
-    ScInputGroupAddon,
     ScInputGroupSeparator,
     ScSelect,
     ScSelectDisplayValue,

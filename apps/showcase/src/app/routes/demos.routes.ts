@@ -372,6 +372,41 @@ export const demosRoutes: Route[] = [
             (m) => m.ButtonGroupDemo,
           ),
       },
+      {
+        path: 'button-group-orientation-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-orientation-demo').then(
+            (m) => m.ButtonGroupOrientationDemo,
+          ),
+      },
+      {
+        path: 'button-group-size-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-size-demo').then(
+            (m) => m.ButtonGroupSizeDemo,
+          ),
+      },
+      {
+        path: 'button-group-separator-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-separator-demo').then(
+            (m) => m.ButtonGroupSeparatorDemo,
+          ),
+      },
+      {
+        path: 'button-group-split-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-split-demo').then(
+            (m) => m.ButtonGroupSplitDemo,
+          ),
+      },
+      {
+        path: 'button-group-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-input-demo').then(
+            (m) => m.ButtonGroupInputDemo,
+          ),
+      },
     ],
   },
   {
