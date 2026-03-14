@@ -146,13 +146,12 @@
     "category": "Media"
   },
   {
-    "name": "Chart",
-    "path": "chart",
+    "name": "Charts",
+    "path": "charts",
     "description": "Beautiful charts for data visualization.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "library": "charts",
+    "category": "Data Display"
   },
   {
     "name": "Checkbox",

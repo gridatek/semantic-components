@@ -15,7 +15,7 @@ import { PieChartDemoContainer } from './demos/pie-chart-demo-container';
 import { UserGrowthChartDemoContainer } from './demos/user-growth-chart-demo-container';
 
 @Component({
-  selector: 'app-chart-page',
+  selector: 'app-charts-page',
   imports: [
     BarChartDemoContainer,
     LineChartDemoContainer,
