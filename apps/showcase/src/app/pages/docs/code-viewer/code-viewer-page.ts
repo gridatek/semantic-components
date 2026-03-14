@@ -36,14 +36,7 @@ import { CodeViewerUsageDemoContainer } from './demos/code-viewer-usage-demo-con
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
         <app-basic-code-viewer-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scHeading appToc>Package Manager</h2>
-        <p class="text-muted-foreground text-sm">
-          Code viewer combined with tabs for package manager install commands.
-        </p>
-        <app-package-manager-code-viewer-demo />
+        <app-package-manager-code-viewer-demo-container />
       </section>
     </div>
   `,
