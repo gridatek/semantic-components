@@ -31,31 +31,33 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     SiEyeOffIcon,
   ],
   template: `
-    <div
-      scPasswordField
-      #passwordField="scPasswordField"
-      [(value)]="password"
-      class="space-y-2"
-    >
-      <label scLabel>Password</label>
-      <div scInputGroup class="w-full max-w-sm">
-        <input
-          scPasswordFieldInput
-          placeholder="Enter password"
-          autocomplete="new-password"
-        />
-        <div scInputGroupAddon align="inline-end">
-          <button scPasswordFieldToggle>
-            @if (passwordField.visible()) {
-              <svg siEyeOffIcon></svg>
-            } @else {
-              <svg siEyeIcon></svg>
-            }
-            <span class="sr-only">Toggle password visibility</span>
-          </button>
+    <div class="w-full max-w-sm">
+      <div
+        scPasswordField
+        #passwordField="scPasswordField"
+        [(value)]="password"
+        class="space-y-2"
+      >
+        <label scLabel>Password</label>
+        <div scInputGroup>
+          <input
+            scPasswordFieldInput
+            placeholder="Enter password"
+            autocomplete="new-password"
+          />
+          <div scInputGroupAddon align="inline-end">
+            <button scPasswordFieldToggle>
+              @if (passwordField.visible()) {
+                <svg siEyeOffIcon></svg>
+              } @else {
+                <svg siEyeIcon></svg>
+              }
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
+          </div>
         </div>
+        <div scPasswordFieldStrength></div>
       </div>
-      <div scPasswordFieldStrength></div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

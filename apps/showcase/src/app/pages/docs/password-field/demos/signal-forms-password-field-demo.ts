@@ -31,7 +31,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     SiEyeOffIcon,
   ],
   template: `
-    <div class="max-w-sm space-y-4">
+    <div class="w-full max-w-sm space-y-4">
       <div scPasswordField #passwordField="scPasswordField" class="space-y-2">
         <label
           scLabel
@@ -41,7 +41,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         >
           Password
         </label>
-        <div scInputGroup class="w-full max-w-sm">
+        <div scInputGroup>
           <input
             scPasswordFieldInput
             [formField]="loginForm.password"
