@@ -2,14 +2,16 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
-  selector: '[scMarqueeClone]',
+  selector: '[scMarqueeContent]',
   host: {
-    'data-slot': 'marquee-clone',
+    'data-slot': 'marquee-content',
     '[class]': 'class()',
   },
 })
-export class ScMarqueeClone {
+export class ScMarqueeContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('shrink-0', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('flex shrink-0 items-center justify-around', this.classInput()),
+  );
 }

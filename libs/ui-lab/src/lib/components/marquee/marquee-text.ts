@@ -8,7 +8,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'sc-marquee-text',
+  selector: 'div[scMarqueeText]',
   template: `
     <div [class]="trackClass()">
       <span [class]="textClass()">{{ text() }}</span>
@@ -28,35 +28,6 @@ import { cn } from '@semantic-components/ui';
     '[attr.data-pause-on-hover]': 'pauseOnHover() || null',
     '[attr.data-reverse]': 'reverse() || null',
   },
-  styles: `
-    [data-slot='marquee-text'] {
-      --text-duration: 20s;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    [data-slot='marquee-text'] > div {
-      display: inline-block;
-      animation: marquee-text-scroll var(--text-duration) linear infinite;
-    }
-
-    [data-slot='marquee-text'][data-reverse] > div {
-      animation-direction: reverse;
-    }
-
-    [data-slot='marquee-text'][data-pause-on-hover]:hover > div {
-      animation-play-state: paused;
-    }
-
-    @keyframes marquee-text-scroll {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
-    }
-  `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

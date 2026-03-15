@@ -1,26 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
-  selector: 'sc-marquee-fade',
-  template: `
-    <div [class]="fadeLeftClass()"></div>
-    <ng-content />
-    <div [class]="fadeRightClass()"></div>
-  `,
+@Directive({
+  selector: '[scMarqueeFade]',
   host: {
     'data-slot': 'marquee-fade',
     '[class]': 'class()',
     '[attr.data-direction]': 'direction()',
+    '[style.mask-image]': 'maskImage()',
+    '[style.-webkit-mask-image]': 'maskImage()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMarqueeFade {
   readonly classInput = input<string>('', { alias: 'class' });
@@ -31,23 +20,14 @@ export class ScMarqueeFade {
     cn('relative overflow-hidden', this.classInput()),
   );
 
-  protected readonly fadeLeftClass = computed(() => {
+  protected readonly maskImage = computed(() => {
+    const size = this.fadeSize();
     const isVertical = this.direction() === 'vertical';
-    return cn(
-      'pointer-events-none absolute z-10 from-background to-transparent',
-      isVertical
-        ? `top-0 left-0 right-0 h-[${this.fadeSize()}] bg-linear-to-b`
-        : `left-0 top-0 bottom-0 w-[${this.fadeSize()}] bg-linear-to-r`,
-    );
-  });
 
-  protected readonly fadeRightClass = computed(() => {
-    const isVertical = this.direction() === 'vertical';
-    return cn(
-      'pointer-events-none absolute z-10 from-background to-transparent',
-      isVertical
-        ? `bottom-0 left-0 right-0 h-[${this.fadeSize()}] bg-linear-to-t`
-        : `right-0 top-0 bottom-0 w-[${this.fadeSize()}] bg-linear-to-l`,
-    );
+    if (isVertical) {
+      return `linear-gradient(to bottom, transparent, black ${size}, black calc(100% - ${size}), transparent)`;
+    }
+
+    return `linear-gradient(to right, transparent, black ${size}, black calc(100% - ${size}), transparent)`;
   });
 }

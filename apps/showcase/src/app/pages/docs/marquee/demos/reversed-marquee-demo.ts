@@ -10,12 +10,13 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
   imports: [ScMarqueeText],
   template: `
     <div class="bg-muted/30 rounded-lg border py-2">
-      <sc-marquee-text
+      <div
+        scMarqueeText
         text="This text scrolls in the opposite direction"
         [duration]="12"
         [reverse]="true"
         separator="★"
-      />
+      ></div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

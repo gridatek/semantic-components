@@ -1,11 +1,25 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScEmojiPicker } from '@semantic-components/ui-lab';
+import {
+  ScEmojiPicker,
+  ScEmojiPickerCategoryTabs,
+  ScEmojiPickerGrid,
+  ScEmojiPickerRecent,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-no-search-emoji-picker-demo',
-  imports: [ScEmojiPicker],
+  imports: [
+    ScEmojiPicker,
+    ScEmojiPickerCategoryTabs,
+    ScEmojiPickerGrid,
+    ScEmojiPickerRecent,
+  ],
   template: `
-    <sc-emoji-picker [showSearch]="false" />
+    <div scEmojiPicker>
+      <div scEmojiPickerCategoryTabs></div>
+      <div scEmojiPickerGrid></div>
+      <div scEmojiPickerRecent></div>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

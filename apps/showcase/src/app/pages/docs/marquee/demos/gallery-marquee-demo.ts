@@ -5,24 +5,16 @@ import {
 } from '@angular/core';
 import {
   ScMarquee,
-  ScMarqueeClone,
+  ScMarqueeContent,
   ScMarqueeItem,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-gallery-marquee-demo',
-  imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
+  imports: [ScMarquee, ScMarqueeContent, ScMarqueeItem],
   template: `
-    <sc-marquee [duration]="35" [gap]="16">
-      @for (i of images; track i) {
-        <div
-          scMarqueeItem
-          class="from-primary/20 to-primary/5 flex h-32 w-48 items-center justify-center rounded-lg bg-linear-to-br"
-        >
-          <span class="text-4xl opacity-50">📷</span>
-        </div>
-      }
-      <ng-container scMarqueeClone>
+    <div scMarquee [duration]="35" [gap]="16">
+      <div scMarqueeContent>
         @for (i of images; track i) {
           <div
             scMarqueeItem
@@ -31,8 +23,18 @@ import {
             <span class="text-4xl opacity-50">📷</span>
           </div>
         }
-      </ng-container>
-    </sc-marquee>
+      </div>
+      <div scMarqueeContent aria-hidden="true">
+        @for (i of images; track i) {
+          <div
+            scMarqueeItem
+            class="from-primary/20 to-primary/5 flex h-32 w-48 items-center justify-center rounded-lg bg-linear-to-br"
+          >
+            <span class="text-4xl opacity-50">📷</span>
+          </div>
+        }
+      </div>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

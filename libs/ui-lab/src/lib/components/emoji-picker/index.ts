@@ -1,3 +1,11 @@
 export { ScEmojiPicker } from './emoji-picker';
+export { ScEmojiPickerCategoryTabs } from './emoji-picker-category-tabs';
+export { DEFAULT_CATEGORIES } from './emoji-picker-data';
+export { ScEmojiPickerEmpty } from './emoji-picker-empty';
+export { ScEmojiPickerGrid } from './emoji-picker-grid';
+export { ScEmojiPickerItem } from './emoji-picker-item';
+export { ScEmojiPickerRecent } from './emoji-picker-recent';
+export { ScEmojiPickerSearch } from './emoji-picker-search';
+export { ScEmojiPickerState } from './emoji-picker-state';
+export type { Emoji, EmojiCategory } from './emoji-picker-state';
 export { ScEmojiPickerTrigger } from './emoji-picker-trigger';
-export type { Emoji, EmojiCategory } from './emoji-picker';
