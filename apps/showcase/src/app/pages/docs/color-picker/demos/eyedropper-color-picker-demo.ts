@@ -12,6 +12,7 @@ import {
   ScColorPickerInput,
   ScColorPickerPreview,
 } from '@semantic-components/ui-lab';
+import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-eyedropper-color-picker-demo',
@@ -22,6 +23,7 @@ import {
     ScColorPickerPreview,
     ScColorPickerInput,
     ScColorPickerEyeDropper,
+    SiPipetteIcon,
   ],
   template: `
     <div class="max-w-xs">
@@ -35,7 +37,10 @@ import {
         <div class="flex items-center gap-3">
           <div scColorPickerPreview></div>
           <input scColorPickerInput format="hex" class="flex-1" />
-          <button scColorPickerEyedropper></button>
+          <button scColorPickerEyedropper>
+            <svg siPipetteIcon class="size-4"></svg>
+            <span class="sr-only">Pick color from screen</span>
+          </button>
         </div>
       </div>
     </div>

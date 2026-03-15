@@ -1,19 +1,101 @@
 # Barcode Scanner
 
-Scan barcodes and QR codes using your device's camera with the Barcode Detection API.
+Directive-based barcode/QR code scanner using the Barcode Detection API. Directives provide camera and detection logic — consumers own the templates.
 
-## Components
+## Directives
 
-- `ScBarcodeScanner` - Full-featured scanner with controls
-- `ScBarcodeScannerSimple` - Simplified scanner wrapper
+- `ScBarcodeScanner` — root directive (`[scBarcodeScanner]`) managing camera, detection, and state
+- `ScBarcodeVideo` — video directive (`video[scBarcodeVideo]`) that registers the video element with the scanner
 
 ## Usage
 
+### Basic Usage
+
 ```html
-<sc-barcode-scanner (detected)="onDetected($event)" />
+<div scBarcodeScanner #scanner="scBarcodeScanner" (detected)="onDetected($event)">
+  @if (!scanner.isSupported()) {
+  <p>Barcode Scanner Not Supported</p>
+  } @else {
+  <video scBarcodeVideo class="aspect-video w-full object-cover"></video>
+
+  <div>
+    @if (!scanner.isScanning()) {
+    <button (click)="scanner.startScanning()">Start Scanning</button>
+    } @else {
+    <button (click)="scanner.stopScanning()">Stop</button>
+    }
+  </div>
+  }
+</div>
+```
+
+### QR Code Only
+
+```html
+<div scBarcodeScanner #scanner="scBarcodeScanner" [formats]="['qr_code']" (detected)="onQRDetected($event)">
+  <!-- template -->
+</div>
+```
+
+### Single Scan Mode
+
+```html
+<div scBarcodeScanner #scanner="scBarcodeScanner" [continuous]="false" (detected)="onSingleScan($event)">
+  <!-- stops scanning after first detection -->
+</div>
+```
+
+### With Camera Controls
+
+```html
+@if (scanner.hasMultipleCameras() && scanner.isScanning()) {
+<button (click)="scanner.switchCamera()" aria-label="Switch camera">Switch</button>
+} @if (scanner.hasTorch() && scanner.isScanning()) {
+<button (click)="scanner.toggleTorch()" aria-label="Toggle flashlight">Torch</button>
+}
 ```
 
 ## API
+
+### ScBarcodeScanner (`[scBarcodeScanner]`)
+
+#### Inputs
+
+| Input          | Type              | Default                      | Description                   |
+| -------------- | ----------------- | ---------------------------- | ----------------------------- |
+| `formats`      | `BarcodeFormat[]` | `['qr_code', 'ean_13', ...]` | Formats to detect             |
+| `continuous`   | `boolean`         | `true`                       | Keep scanning after detection |
+| `scanInterval` | `number`          | `100`                        | Detection interval (ms)       |
+| `class`        | `string`          | `''`                         | Additional CSS classes        |
+
+#### Outputs
+
+| Output      | Type            | Description                 |
+| ----------- | --------------- | --------------------------- |
+| `detected`  | `BarcodeResult` | Emits when barcode detected |
+| `scanError` | `string`        | Emits on error              |
+
+#### Public API
+
+| Property/Method        | Type                            | Description                        |
+| ---------------------- | ------------------------------- | ---------------------------------- |
+| `isSupported()`        | `Signal<boolean>`               | Whether Barcode API is available   |
+| `isScanning()`         | `Signal<boolean>`               | Whether actively scanning          |
+| `error()`              | `Signal<string \| null>`        | Current error message              |
+| `lastResult()`         | `Signal<BarcodeResult \| null>` | Last detected barcode              |
+| `hasMultipleCameras()` | `Signal<boolean>`               | Whether multiple cameras available |
+| `hasTorch()`           | `Signal<boolean>`               | Whether torch/flashlight available |
+| `torchOn()`            | `Signal<boolean>`               | Whether torch is on                |
+| `startScanning()`      | `Promise<void>`                 | Start camera and detection         |
+| `stopScanning()`       | `void`                          | Stop camera and detection          |
+| `switchCamera()`       | `Promise<void>`                 | Toggle front/back camera           |
+| `toggleTorch()`        | `Promise<void>`                 | Toggle flashlight                  |
+
+### ScBarcodeVideo (`video[scBarcodeVideo]`)
+
+Apply to a `<video>` element inside a `[scBarcodeScanner]` host. Automatically registers the video element with the scanner and sets `autoplay`, `playsinline`, `muted` attributes.
+
+## Type Definitions
 
 ### BarcodeFormat
 
@@ -32,76 +114,7 @@ interface BarcodeResult {
 }
 ```
 
-### ScBarcodeScanner
-
-| Input            | Type              | Default                      | Description                   |
-| ---------------- | ----------------- | ---------------------------- | ----------------------------- |
-| `formats`        | `BarcodeFormat[]` | `['qr_code', 'ean_13', ...]` | Formats to detect             |
-| `showLastResult` | `boolean`         | `true`                       | Show last scanned code        |
-| `continuous`     | `boolean`         | `true`                       | Keep scanning after detection |
-| `scanInterval`   | `number`          | `100`                        | Detection interval (ms)       |
-| `class`          | `string`          | -                            | Additional CSS classes        |
-
-| Output     | Type            | Description                 |
-| ---------- | --------------- | --------------------------- |
-| `detected` | `BarcodeResult` | Emits when barcode detected |
-| `error$`   | `string`        | Emits on error              |
-
-## Examples
-
-### Basic Usage
-
-```html
-<sc-barcode-scanner (detected)="onDetected($event)" />
-```
-
-```typescript
-onDetected(result: BarcodeResult): void {
-  console.log('Scanned:', result.rawValue);
-  console.log('Format:', result.format);
-}
-```
-
-### QR Code Only
-
-```html
-<sc-barcode-scanner [formats]="['qr_code']" (detected)="onQRDetected($event)" />
-```
-
-### Product Barcodes
-
-```html
-<sc-barcode-scanner [formats]="['ean_13', 'ean_8', 'upc_a', 'upc_e']" (detected)="onProductDetected($event)" />
-```
-
-### Single Scan Mode
-
-Stop scanning after first detection:
-
-```html
-<sc-barcode-scanner [continuous]="false" (detected)="onSingleScan($event)" />
-```
-
-### Without Result Overlay
-
-```html
-<sc-barcode-scanner [showLastResult]="false" (detected)="handleResult($event)" />
-```
-
-## Features
-
-- Real-time barcode detection
-- Multiple barcode format support
-- Front/back camera switching
-- Flashlight/torch control (where supported)
-- Scanning area indicator
-- Last result overlay
-- Start/stop controls
-- Graceful fallback for unsupported browsers
-
 ## Browser Support
-
-The Barcode Detection API is supported in:
 
 | Browser          | Support           |
 | ---------------- | ----------------- |
@@ -112,33 +125,10 @@ The Barcode Detection API is supported in:
 | Firefox          | Not supported     |
 | Safari           | Not supported     |
 
-For unsupported browsers, the component displays a helpful message.
-
-## Permissions
-
-The scanner requires camera access. Users will be prompted to grant permission when scanning starts.
-
-## Supported Barcode Formats
-
-| Format        | Description                         |
-| ------------- | ----------------------------------- |
-| `qr_code`     | QR Code                             |
-| `ean_13`      | European Article Number (13 digits) |
-| `ean_8`       | European Article Number (8 digits)  |
-| `upc_a`       | Universal Product Code A            |
-| `upc_e`       | Universal Product Code E            |
-| `code_128`    | Code 128                            |
-| `code_39`     | Code 39                             |
-| `code_93`     | Code 93                             |
-| `codabar`     | Codabar                             |
-| `itf`         | Interleaved 2 of 5                  |
-| `pdf417`      | PDF417                              |
-| `aztec`       | Aztec Code                          |
-| `data_matrix` | Data Matrix                         |
+For unsupported browsers, `scanner.isSupported()` returns `false` — consumers render their own fallback UI.
 
 ## Accessibility
 
-- Keyboard accessible controls
-- ARIA labels on buttons
-- Focus indicators
-- Status messages for screen readers
+- Keyboard accessible controls (consumer-provided)
+- All interactive elements should have `aria-label` attributes
+- `isSupported()` and `error()` signals enable accessible error states
