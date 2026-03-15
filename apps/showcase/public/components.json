@@ -26,11 +26,10 @@
   {
     "name": "Animated Counter",
     "path": "animated-counter",
-    "description": "Numbers that animate up/down.",
+    "description": "Numbers that animate up/down using the motion library.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "library": "third-party",
+    "category": "Recipes"
   },
   {
     "name": "Aspect Ratio",

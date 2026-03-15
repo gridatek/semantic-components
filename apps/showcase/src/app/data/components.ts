@@ -6,7 +6,8 @@ export type ComponentLibrary =
   | 'carousel'
   | 'code'
   | 'editor'
-  | 'charts';
+  | 'charts'
+  | 'third-party';
 
 export type ComponentCategory =
   | 'Forms'
@@ -19,7 +20,8 @@ export type ComponentCategory =
   | 'Media'
   | 'Editor'
   | 'Advanced'
-  | 'Utilities';
+  | 'Utilities'
+  | 'Recipes';
 
 export interface ComponentItem {
   name: string;

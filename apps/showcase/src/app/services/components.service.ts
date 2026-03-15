@@ -19,7 +19,9 @@ export class ComponentsService {
     const all = this.configService.devMode()
       ? this.components()
       : this.components().filter((c) => !c.hidden);
-    return all.filter((c) => c.category !== 'Utilities');
+    return all.filter(
+      (c) => c.category !== 'Utilities' && c.category !== 'Recipes',
+    );
   });
 
   readonly visibleUtilities = computed(() => {
@@ -27,5 +29,12 @@ export class ComponentsService {
       ? this.components()
       : this.components().filter((c) => !c.hidden);
     return all.filter((c) => c.category === 'Utilities');
+  });
+
+  readonly visibleRecipes = computed(() => {
+    const all = this.configService.devMode()
+      ? this.components()
+      : this.components().filter((c) => !c.hidden);
+    return all.filter((c) => c.category === 'Recipes');
   });
 }

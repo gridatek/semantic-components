@@ -47,6 +47,7 @@ import {
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,
+  SiCookingPotIcon,
   SiDownloadIcon,
   SiMoonIcon,
   SiPanelLeftIcon,
@@ -93,6 +94,7 @@ import { ConfigService } from '../../services/config.service';
     SiMoonIcon,
     SiBookOpenTextIcon,
     SiBoxIcon,
+    SiCookingPotIcon,
     SiDownloadIcon,
     SiPanelLeftIcon,
     SiSearchIcon,
@@ -325,6 +327,29 @@ import { ConfigService } from '../../services/config.service';
                     </ul>
                   </li>
                 }
+                @if (recipes().length > 0) {
+                  <li scSidebarMenuItem>
+                    <a scSidebarMenuButton>
+                      <svg siCookingPotIcon></svg>
+                      <span>Recipes</span>
+                    </a>
+                    <ul scSidebarMenuSub>
+                      @for (item of recipes(); track item.path) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            [routerLink]="'/docs/components/' + item.path"
+                            routerLinkActive
+                            #recipeRla="routerLinkActive"
+                            [isActive]="recipeRla.isActive"
+                          >
+                            <span>{{ item.name }}</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </li>
+                }
               </ul>
             </div>
           </div>
@@ -408,6 +433,7 @@ export class DocsLayout {
 
   readonly components = this.componentsService.visibleComponents;
   readonly utilities = this.componentsService.visibleUtilities;
+  readonly recipes = this.componentsService.visibleRecipes;
   protected readonly devMode = this.config.devMode;
 
   constructor() {
