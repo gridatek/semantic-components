@@ -12,6 +12,7 @@ import {
   ScCodeEditorLabel,
   ScCodeEditorLanguage,
 } from '@semantic-components/code';
+import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-interactive-code-editor-demo',
@@ -21,6 +22,9 @@ import {
     ScCodeEditorLabel,
     ScCodeEditorContent,
     ScCodeEditorCopyButton,
+    ScCheckboxField,
+    ScCheckbox,
+    ScLabel,
   ],
   template: `
     <div class="mb-4 flex flex-wrap gap-4">
@@ -43,23 +47,23 @@ import {
         </select>
       </div>
       <div class="flex items-end gap-4">
-        <label class="flex items-center gap-2">
+        <label scCheckboxField>
           <input
             type="checkbox"
+            scCheckbox
             [checked]="showLineNumbers()"
-            (change)="showLineNumbers.set($any($event.target).checked)"
-            class="rounded"
+            (checkedChange)="showLineNumbers.set($event)"
           />
-          <span class="text-sm">Line Numbers</span>
+          <label scLabel>Line Numbers</label>
         </label>
-        <label class="flex items-center gap-2">
+        <label scCheckboxField>
           <input
             type="checkbox"
+            scCheckbox
             [checked]="wordWrapEnabled()"
-            (change)="wordWrapEnabled.set($any($event.target).checked)"
-            class="rounded"
+            (checkedChange)="wordWrapEnabled.set($event)"
           />
-          <span class="text-sm">Word Wrap</span>
+          <label scLabel>Word Wrap</label>
         </label>
       </div>
     </div>

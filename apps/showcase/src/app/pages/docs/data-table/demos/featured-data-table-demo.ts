@@ -5,6 +5,7 @@ import {
   computed,
   signal,
 } from '@angular/core';
+import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
 import {
   ColumnDef,
   ScDataTable,
@@ -130,6 +131,8 @@ const SAMPLE_DATA: User[] = [
 @Component({
   selector: 'app-featured-data-table-demo',
   imports: [
+    ScCheckboxField,
+    ScCheckbox,
     ScDataTable,
     ScDataTableHeader,
     ScDataTableBody,
@@ -157,13 +160,15 @@ const SAMPLE_DATA: User[] = [
           <thead scDataTableHeader>
             <tr>
               <th scDataTableHead class="w-[50px]">
-                <input
-                  type="checkbox"
-                  class="border-primary size-4 rounded"
-                  [checked]="isAllSelected()"
-                  [indeterminate]="isSomeSelected()"
-                  (change)="toggleAllSelection()"
-                />
+                <label scCheckboxField>
+                  <input
+                    type="checkbox"
+                    scCheckbox
+                    [checked]="isAllSelected()"
+                    [indeterminate]="isSomeSelected()"
+                    (checkedChange)="toggleAllSelection()"
+                  />
+                </label>
               </th>
               <th scDataTableHead columnId="name" [sortable]="true">Name</th>
               <th scDataTableHead columnId="email" [sortable]="true">Email</th>
@@ -184,12 +189,14 @@ const SAMPLE_DATA: User[] = [
                 [selected]="rowSelection().has(getRowIndex(row))"
               >
                 <td scDataTableCell>
-                  <input
-                    type="checkbox"
-                    class="border-primary size-4 rounded"
-                    [checked]="rowSelection().has(getRowIndex(row))"
-                    (change)="toggleRowSelection(getRowIndex(row))"
-                  />
+                  <label scCheckboxField>
+                    <input
+                      type="checkbox"
+                      scCheckbox
+                      [checked]="rowSelection().has(getRowIndex(row))"
+                      (checkedChange)="toggleRowSelection(getRowIndex(row))"
+                    />
+                  </label>
                 </td>
                 <td scDataTableCell class="font-medium">{{ row.name }}</td>
                 <td scDataTableCell>{{ row.email }}</td>
