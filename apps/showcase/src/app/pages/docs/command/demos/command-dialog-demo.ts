@@ -7,7 +7,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScButton,
   ScCommand,
   ScCommandEmpty,
   ScCommandGroup,
@@ -47,7 +46,6 @@ interface CommandItem {
 @Component({
   selector: 'app-command-dialog-demo',
   imports: [
-    ScButton,
     ScCommand,
     ScCommandEmpty,
     ScCommandGroup,
@@ -78,14 +76,13 @@ interface CommandItem {
     <div scDialogProvider [(open)]="open">
       <button
         scDialogTrigger
-        scButton
-        variant="outline"
-        class="text-muted-foreground relative w-full text-sm"
+        class="border-input text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-8 w-full max-w-sm items-center gap-2 rounded-lg border bg-transparent px-2 text-sm transition-colors"
       >
-        <span>Click or press</span>
+        <svg siSearchIcon class="size-4 shrink-0"></svg>
+        <span class="flex-1 text-start">Search...</span>
         <kbd
           scKbd
-          scHotkey="mod+k"
+          scHotkey="mod+j"
           #hk="scHotkey"
           (scHotkeyPressed)="toggleOpen()"
         >
