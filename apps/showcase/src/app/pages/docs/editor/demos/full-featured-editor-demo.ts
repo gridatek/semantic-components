@@ -19,7 +19,7 @@ import {
   ScEditorContent,
   ScEditorCount,
   ScEditorFooter,
-  ScEditorHeadingMenu,
+  ScEditorHeading,
   ScEditorHorizontalRuleToggle,
   ScEditorItalicToggle,
   ScEditorLinkToggle,
@@ -75,7 +75,7 @@ import {
     ScEditorUnderlineToggle,
     ScEditorStrikethroughToggle,
     ScEditorSeparator,
-    ScEditorHeadingMenu,
+    ScEditorHeading,
     ScEditorUndoToggle,
     ScEditorRedoToggle,
     ScEditorAlignLeftToggle,
@@ -143,21 +143,18 @@ import {
           <div scMenuProvider>
             <button
               scMenuTrigger
-              scEditorHeadingMenu
+              scEditorHeading
               value="heading"
-              #headingMenu="scEditorHeadingMenu"
+              #heading="scEditorHeading"
               class="hover:bg-accent flex items-center gap-1 rounded px-2 py-1 text-sm"
             >
-              {{ headingMenu.currentHeadingLabel() }}
+              {{ heading.currentHeadingLabel() }}
               <svg siChevronDownIcon class="size-4"></svg>
             </button>
             <ng-template scMenuPortal>
-              <div scMenu (itemSelected)="headingMenu.onItemSelected($event)">
+              <div scMenu (itemSelected)="heading.onItemSelected($event)">
                 <ng-template scMenuContent>
-                  @for (
-                    option of headingMenu.headingOptions;
-                    track option.value
-                  ) {
+                  @for (option of heading.headingOptions; track option.value) {
                     <div scMenuItem [value]="option.value">
                       {{ option.label }}
                     </div>

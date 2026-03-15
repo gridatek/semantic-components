@@ -1,9 +1,9 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_EDITOR, type ScEditorHeading } from './editor';
+import { SC_EDITOR, type ScEditorHeadingLevel } from './editor';
 
-const HEADING_OPTIONS: { value: ScEditorHeading; label: string }[] = [
+const HEADING_OPTIONS: { value: ScEditorHeadingLevel; label: string }[] = [
   { value: 'p', label: 'Paragraph' },
   { value: 'h1', label: 'Heading 1' },
   { value: 'h2', label: 'Heading 2' },
@@ -14,15 +14,15 @@ const HEADING_OPTIONS: { value: ScEditorHeading; label: string }[] = [
 ];
 
 @Directive({
-  selector: '[scEditorHeadingMenu]',
-  exportAs: 'scEditorHeadingMenu',
+  selector: '[scEditorHeading]',
+  exportAs: 'scEditorHeading',
   hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
   host: {
-    'data-slot': 'editor-heading-menu',
+    'data-slot': 'editor-heading',
     '[class]': 'class()',
   },
 })
-export class ScEditorHeadingMenu {
+export class ScEditorHeading {
   readonly editor = inject(SC_EDITOR);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -39,6 +39,6 @@ export class ScEditorHeadingMenu {
   });
 
   onItemSelected(value: string): void {
-    this.editor.execCommand('formatBlock', value as ScEditorHeading);
+    this.editor.execCommand('formatBlock', value as ScEditorHeadingLevel);
   }
 }

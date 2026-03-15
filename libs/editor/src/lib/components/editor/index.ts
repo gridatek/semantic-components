@@ -39,8 +39,7 @@ export * from './editor-horizontal-rule-toggle';
 export * from './editor-clear-formatting-toggle';
 
 // Utility components
-export * from './editor-heading-select';
-export * from './editor-heading-menu';
+export * from './editor-heading';
 export * from './editor-count';
 export * from './editor-word-count';
 export * from './editor-char-count';
