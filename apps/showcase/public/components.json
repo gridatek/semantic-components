@@ -397,6 +397,14 @@
     "category": "Forms"
   },
   {
+    "name": "Input Button",
+    "path": "input-button",
+    "description": "A button styled to look like an input field, useful as a trigger for search dialogs or command palettes.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Buttons & Actions"
+  },
+  {
     "name": "Input Group",
     "path": "input-group",
     "description": "A composable input group for combining inputs with addons, buttons, and text.",

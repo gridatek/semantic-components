@@ -281,6 +281,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/input/input-page'),
       },
       {
+        path: 'input-button',
+        title: 'Input Button - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/input-button/input-button-page'),
+      },
+      {
         path: 'input-group',
         title: 'Input Group - Semantic Components',
         loadComponent: () =>

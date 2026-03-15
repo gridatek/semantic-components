@@ -1691,6 +1691,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/input-button',
+    children: [
+      {
+        path: 'basic-input-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-button/demos/basic-input-button-demo').then(
+            (m) => m.BasicInputButtonDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/input-group',
     children: [
       {
