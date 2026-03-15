@@ -23,6 +23,7 @@ import {
   ScDialogProvider,
   ScDialogTrigger,
   ScHotkey,
+  ScInputButton,
   ScKbd,
 } from '@semantic-components/ui';
 import {
@@ -61,6 +62,7 @@ interface CommandItem {
     ScDialogTrigger,
     ScDialogPortal,
     ScDialog,
+    ScInputButton,
     ScHotkey,
     ScKbd,
     NgTemplateOutlet,
@@ -74,10 +76,7 @@ interface CommandItem {
   ],
   template: `
     <div scDialogProvider [(open)]="open">
-      <button
-        scDialogTrigger
-        class="border-input text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-8 w-full max-w-sm items-center gap-2 rounded-lg border bg-transparent px-2 text-sm transition-colors"
-      >
+      <button scDialogTrigger scInputButton class="max-w-sm">
         <svg siSearchIcon class="size-4 shrink-0"></svg>
         <span class="flex-1 text-start">Search...</span>
         <kbd
