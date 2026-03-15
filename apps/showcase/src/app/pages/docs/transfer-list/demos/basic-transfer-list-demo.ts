@@ -7,13 +7,31 @@ import {
 import {
   ScTransferList,
   ScTransferListActions,
-  ScTransferListPanel,
+  ScTransferListCount,
+  ScTransferListHeader,
+  ScTransferListItem,
+  ScTransferListItems,
+  ScTransferListSearch,
+  ScTransferListSelectAll,
+  ScTransferListSource,
+  ScTransferListTarget,
 } from '@semantic-components/ui-lab';
 import type { TransferListItem } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-transfer-list-demo',
-  imports: [ScTransferList, ScTransferListPanel, ScTransferListActions],
+  imports: [
+    ScTransferList,
+    ScTransferListSource,
+    ScTransferListTarget,
+    ScTransferListHeader,
+    ScTransferListSelectAll,
+    ScTransferListCount,
+    ScTransferListSearch,
+    ScTransferListItems,
+    ScTransferListItem,
+    ScTransferListActions,
+  ],
   template: `
     <div class="flex flex-col gap-6">
       <div
@@ -22,9 +40,65 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
         [(targetItems)]="targetItems"
         (transferChange)="onChange($event)"
       >
-        <div scTransferListPanel side="source" title="Available"></div>
+        <div scTransferListSource #source="scTransferListSource">
+          <div scTransferListHeader>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" scTransferListSelectAll />
+              <span class="font-medium">Available</span>
+            </label>
+            <span scTransferListCount></span>
+          </div>
+          <div class="border-b p-2">
+            <input scTransferListSearch placeholder="Search..." />
+          </div>
+          <div scTransferListItems>
+            @for (item of source.filteredItems(); track item.id) {
+              <label scTransferListItem [item]="item">
+                <div class="truncate">{{ item.label }}</div>
+                @if (item.description) {
+                  <div class="text-muted-foreground truncate text-xs">
+                    {{ item.description }}
+                  </div>
+                }
+              </label>
+            } @empty {
+              <div class="text-muted-foreground p-4 text-center text-sm">
+                No items
+              </div>
+            }
+          </div>
+        </div>
+
         <div scTransferListActions></div>
-        <div scTransferListPanel side="target" title="Selected"></div>
+
+        <div scTransferListTarget #target="scTransferListTarget">
+          <div scTransferListHeader>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" scTransferListSelectAll />
+              <span class="font-medium">Selected</span>
+            </label>
+            <span scTransferListCount></span>
+          </div>
+          <div class="border-b p-2">
+            <input scTransferListSearch placeholder="Search..." />
+          </div>
+          <div scTransferListItems>
+            @for (item of target.filteredItems(); track item.id) {
+              <label scTransferListItem [item]="item">
+                <div class="truncate">{{ item.label }}</div>
+                @if (item.description) {
+                  <div class="text-muted-foreground truncate text-xs">
+                    {{ item.description }}
+                  </div>
+                }
+              </label>
+            } @empty {
+              <div class="text-muted-foreground p-4 text-center text-sm">
+                No items
+              </div>
+            }
+          </div>
+        </div>
       </div>
 
       <div class="grid grid-cols-2 gap-4">
