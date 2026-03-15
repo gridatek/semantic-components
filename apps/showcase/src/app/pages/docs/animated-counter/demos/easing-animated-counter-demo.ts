@@ -4,11 +4,12 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import { ScAnimatedCounter } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-easing-animated-counter-demo',
-  imports: [ScAnimatedCounter],
+  imports: [ScAnimatedCounter, ScButton],
   template: `
     <div class="space-y-3">
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -53,12 +54,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
           ></span>
         </div>
       </div>
-      <button
-        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
-        (click)="animate()"
-      >
-        Animate All
-      </button>
+      <button scButton (click)="animate()">Animate All</button>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
