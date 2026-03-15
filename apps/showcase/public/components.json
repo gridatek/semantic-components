@@ -689,15 +689,6 @@
     "category": "Layout"
   },
   {
-    "name": "Search Input",
-    "path": "search-input",
-    "description": "Search with autocomplete suggestions.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
     "name": "Select",
     "path": "select",
     "description": "Displays a list of options for the user to pick from — mimics a native select.",
