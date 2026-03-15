@@ -3,8 +3,8 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
-  signal,
 } from '@angular/core';
 import {
   ScCodeViewer,
@@ -24,6 +24,7 @@ import {
   SiCopyIcon,
   SiTerminalIcon,
 } from '@semantic-icons/lucide-icons';
+import { PackageManagerService } from './package-manager.service';
 
 @Component({
   selector: 'app-package-manager-install',
@@ -47,7 +48,7 @@ import {
           <svg siTerminalIcon class="text-muted-foreground size-4"></svg>
           <div
             scTabList
-            [selectedTab]="'pnpm'"
+            [selectedTab]="selected()"
             (selectedTabChange)="$event && selected.set($event)"
             variant="line"
             class="h-auto"
@@ -84,11 +85,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PackageManagerInstall {
+  private readonly packageManagerService = inject(PackageManagerService);
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly packages = input.required<string>();
 
   protected readonly class = computed(() => cn('block', this.classInput()));
-  protected readonly selected = signal('pnpm');
+  protected readonly selected = this.packageManagerService.selected;
 
   protected readonly command = computed(() => {
     const pkg = this.packages();
