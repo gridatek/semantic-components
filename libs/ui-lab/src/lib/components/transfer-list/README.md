@@ -1,12 +1,12 @@
 # Transfer List
 
-A dual-list component for moving items between source and target lists with selection and search support.
+A composable dual-list component for moving items between source and target lists with selection and search support.
 
 ## Installation
 
 ```typescript
-import { ScTransferList } from '@/ui/transfer-list';
-import type { TransferListItem, TransferListState } from '@/ui/transfer-list';
+import { ScTransferList, ScTransferListActions, ScTransferListCount, ScTransferListHeader, ScTransferListItem, ScTransferListItems, ScTransferListSearch, ScTransferListSelectAll, ScTransferListSource, ScTransferListTarget } from '@semantic-components/ui-lab';
+import type { TransferListItem, TransferListState } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
@@ -14,7 +14,59 @@ import type { TransferListItem, TransferListState } from '@/ui/transfer-list';
 ### Basic Usage
 
 ```html
-<sc-transfer-list [(sourceItems)]="sourceItems" [(targetItems)]="targetItems" (change)="onChange($event)" />
+<div scTransferList [(sourceItems)]="sourceItems" [(targetItems)]="targetItems" (transferChange)="onChange($event)">
+  <div scTransferListSource #source="scTransferListSource">
+    <div scTransferListHeader>
+      <label class="flex items-center gap-2">
+        <input type="checkbox" scTransferListSelectAll />
+        <span class="font-medium">Available</span>
+      </label>
+      <span scTransferListCount></span>
+    </div>
+    <div class="border-b p-2">
+      <input scTransferListSearch placeholder="Search..." />
+    </div>
+    <div scTransferListItems>
+      @for (item of source.filteredItems(); track item.id) {
+      <label scTransferListItem [item]="item">
+        <div class="truncate">{{ item.label }}</div>
+        @if (item.description) {
+        <div class="text-muted-foreground truncate text-xs">{{ item.description }}</div>
+        }
+      </label>
+      } @empty {
+      <div class="text-muted-foreground p-4 text-center text-sm">No items</div>
+      }
+    </div>
+  </div>
+
+  <div scTransferListActions></div>
+
+  <div scTransferListTarget #target="scTransferListTarget">
+    <div scTransferListHeader>
+      <label class="flex items-center gap-2">
+        <input type="checkbox" scTransferListSelectAll />
+        <span class="font-medium">Selected</span>
+      </label>
+      <span scTransferListCount></span>
+    </div>
+    <div class="border-b p-2">
+      <input scTransferListSearch placeholder="Search..." />
+    </div>
+    <div scTransferListItems>
+      @for (item of target.filteredItems(); track item.id) {
+      <label scTransferListItem [item]="item">
+        <div class="truncate">{{ item.label }}</div>
+        @if (item.description) {
+        <div class="text-muted-foreground truncate text-xs">{{ item.description }}</div>
+        }
+      </label>
+      } @empty {
+      <div class="text-muted-foreground p-4 text-center text-sm">No items</div>
+      }
+    </div>
+  </div>
+</div>
 ```
 
 ```typescript
@@ -27,16 +79,27 @@ sourceItems = signal<TransferListItem[]>([
 targetItems = signal<TransferListItem[]>([]);
 ```
 
-### With Custom Titles
-
-```html
-<sc-transfer-list [(sourceItems)]="available" [(targetItems)]="selected" sourceTitle="Available Options" targetTitle="Selected Options" />
-```
-
 ### Without Search
 
+Omit the `scTransferListSearch` element from the panel to disable search:
+
 ```html
-<sc-transfer-list [(sourceItems)]="source" [(targetItems)]="target" [searchable]="false" />
+<div scTransferListSource #source="scTransferListSource">
+  <div scTransferListHeader>
+    <label class="flex items-center gap-2">
+      <input type="checkbox" scTransferListSelectAll />
+      <span class="font-medium">Options</span>
+    </label>
+    <span scTransferListCount></span>
+  </div>
+  <div scTransferListItems>
+    @for (item of source.filteredItems(); track item.id) {
+    <label scTransferListItem [item]="item">
+      <div class="truncate">{{ item.label }}</div>
+    </label>
+    }
+  </div>
+</div>
 ```
 
 ### With Disabled Items
@@ -50,23 +113,65 @@ sourceItems = signal<TransferListItem[]>([
 
 ## API Reference
 
-### Inputs
+### ScTransferList
 
-| Input         | Type                 | Default       | Description                 |
-| ------------- | -------------------- | ------------- | --------------------------- |
-| `sourceItems` | `TransferListItem[]` | `[]`          | Source list items (two-way) |
-| `targetItems` | `TransferListItem[]` | `[]`          | Target list items (two-way) |
-| `sourceTitle` | `string`             | `'Available'` | Source list title           |
-| `targetTitle` | `string`             | `'Selected'`  | Target list title           |
-| `searchable`  | `boolean`            | `true`        | Enable search in lists      |
-| `height`      | `string`             | `'300px'`     | List max height             |
-| `class`       | `string`             | `''`          | Additional CSS classes      |
+Root directive. Provides shared state to all children.
 
-### Outputs
+| Input         | Type                 | Default | Description                 |
+| ------------- | -------------------- | ------- | --------------------------- |
+| `sourceItems` | `TransferListItem[]` | `[]`    | Source list items (two-way) |
+| `targetItems` | `TransferListItem[]` | `[]`    | Target list items (two-way) |
+| `class`       | `string`             | `''`    | Additional CSS classes      |
 
-| Output   | Type                                                         | Description               |
-| -------- | ------------------------------------------------------------ | ------------------------- |
-| `change` | `{ source: TransferListItem[]; target: TransferListItem[] }` | Emitted when lists change |
+| Output           | Type                | Description               |
+| ---------------- | ------------------- | ------------------------- |
+| `transferChange` | `TransferListState` | Emitted when lists change |
+
+### ScTransferListSource / ScTransferListTarget
+
+Panel container directives. Expose `filteredItems()`, `selectedIds()`, `allSelected()`, `someSelected()`, `selectedCount()`, `totalCount()`, and `searchValue()` via `exportAs`.
+
+| Input   | Type     | Default | Description            |
+| ------- | -------- | ------- | ---------------------- |
+| `class` | `string` | `''`    | Additional CSS classes |
+
+### ScTransferListHeader
+
+Styled header directive for the top of each panel.
+
+### ScTransferListSelectAll
+
+Directive on `input[type="checkbox"]`. Auto-binds `checked`, `indeterminate`, and `change` based on the parent panel's selection state.
+
+### ScTransferListCount
+
+Directive on any element. Renders `selected/total` count text via `textContent`.
+
+### ScTransferListSearch
+
+Directive on `input`. Auto-binds `value` and `input` events for filtering items.
+
+### ScTransferListItems
+
+Scrollable container directive for the item list.
+
+| Input    | Type     | Default | Description            |
+| -------- | -------- | ------- | ---------------------- |
+| `height` | `string` | `300px` | Max height of list     |
+| `class`  | `string` | `''`    | Additional CSS classes |
+
+### ScTransferListItem
+
+Component on `label`. Renders a checkbox and projects content. Handles selection toggle on click.
+
+| Input   | Type               | Description            |
+| ------- | ------------------ | ---------------------- |
+| `item`  | `TransferListItem` | Required               |
+| `class` | `string`           | Additional CSS classes |
+
+### ScTransferListActions
+
+Component rendering the four transfer action buttons (move selected, move all, in both directions).
 
 ## Type Definitions
 
@@ -86,13 +191,13 @@ interface TransferListState {
 
 ## Features
 
+- Fully composable directive-based architecture
 - Two-way binding for both lists
 - Move selected items between lists
 - Move all items at once
 - Select/deselect all in each list
 - Search filtering in both lists
 - Disabled items support
-- Item descriptions
-- Checkbox selection
-- Indeterminate checkbox state
+- Item descriptions with content projection
+- Checkbox selection with indeterminate state
 - Keyboard accessible
