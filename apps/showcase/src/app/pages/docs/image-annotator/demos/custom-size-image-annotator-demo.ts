@@ -4,13 +4,20 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScImageAnnotator } from '@semantic-components/ui-lab';
+import {
+  ScImageAnnotator,
+  ScImageAnnotatorCanvas,
+  ScImageAnnotatorToolbar,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-custom-size-image-annotator-demo',
-  imports: [ScImageAnnotator],
+  imports: [ScImageAnnotator, ScImageAnnotatorToolbar, ScImageAnnotatorCanvas],
   template: `
-    <sc-image-annotator [src]="imageSrc()" [width]="400" [height]="300" />
+    <div scImageAnnotator [src]="imageSrc()" [width]="400" [height]="300">
+      <div scImageAnnotatorToolbar></div>
+      <div scImageAnnotatorCanvas></div>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
