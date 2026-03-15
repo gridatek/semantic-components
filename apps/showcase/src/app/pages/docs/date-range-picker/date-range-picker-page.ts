@@ -31,7 +31,7 @@ import { PresetsDateRangePickerDemoContainer } from './demos/presets-date-range-
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>DateRangePicker</h1>
+        <h1 scHeading>Date Range Picker</h1>
         <p class="text-muted-foreground">
           Select a range of dates with presets, min/max constraints, and various
           display formats.
