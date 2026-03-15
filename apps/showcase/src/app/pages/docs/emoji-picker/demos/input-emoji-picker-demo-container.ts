@@ -25,12 +25,27 @@ import { InputEmojiPickerDemo } from './input-emoji-picker-demo';
 export class InputEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScInput } from '@semantic-components/ui';
-import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
+import {
+  Emoji,
+  ScEmojiPicker,
+  ScEmojiPickerCategoryTabs,
+  ScEmojiPickerGrid,
+  ScEmojiPickerRecent,
+  ScEmojiPickerSearch,
+} from '@semantic-components/ui-lab';
 import { SiSmileIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-input-emoji-picker-demo',
-  imports: [ScEmojiPicker, ScInput, SiSmileIcon],
+  imports: [
+    ScInput,
+    SiSmileIcon,
+    ScEmojiPicker,
+    ScEmojiPickerSearch,
+    ScEmojiPickerCategoryTabs,
+    ScEmojiPickerGrid,
+    ScEmojiPickerRecent,
+  ],
   template: \`
     <div class="flex w-full max-w-sm items-start gap-2">
       <div class="flex-1">
@@ -53,10 +68,18 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
         </div>
         @if (showInputPicker()) {
           <div class="mt-2">
-            <sc-emoji-picker
+            <div
+              scEmojiPicker
               (emojiSelect)="insertEmoji($event)"
               [maxRecent]="6"
-            />
+            >
+              <div class="p-2">
+                <input scEmojiPickerSearch />
+              </div>
+              <div scEmojiPickerCategoryTabs></div>
+              <div scEmojiPickerGrid></div>
+              <div scEmojiPickerRecent></div>
+            </div>
           </div>
         }
       </div>

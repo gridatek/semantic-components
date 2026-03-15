@@ -24,13 +24,29 @@ import { NoRecentEmojiPickerDemo } from './no-recent-emoji-picker-demo';
 })
 export class NoRecentEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScEmojiPicker } from '@semantic-components/ui-lab';
+import {
+  ScEmojiPicker,
+  ScEmojiPickerCategoryTabs,
+  ScEmojiPickerGrid,
+  ScEmojiPickerSearch,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-no-recent-emoji-picker-demo',
-  imports: [ScEmojiPicker],
+  imports: [
+    ScEmojiPicker,
+    ScEmojiPickerSearch,
+    ScEmojiPickerCategoryTabs,
+    ScEmojiPickerGrid,
+  ],
   template: \`
-    <sc-emoji-picker [showRecent]="false" />
+    <div scEmojiPicker>
+      <div class="p-2">
+        <input scEmojiPickerSearch />
+      </div>
+      <div scEmojiPickerCategoryTabs></div>
+      <div scEmojiPickerGrid></div>
+    </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
