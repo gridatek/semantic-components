@@ -125,9 +125,7 @@ import { ConfigService } from '../../services/config.service';
               </a>
             </li>
           </ul>
-        </div>
 
-        <div class="px-2 py-2">
           <button
             scInputButton
             class="w-full group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0"
