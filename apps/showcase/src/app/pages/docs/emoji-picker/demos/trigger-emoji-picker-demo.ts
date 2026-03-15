@@ -15,7 +15,7 @@ import { ScEmojiPickerTrigger } from '@semantic-components/ui-lab';
       </span>
     </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class TriggerEmojiPickerDemo {}
