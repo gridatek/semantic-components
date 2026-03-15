@@ -10,7 +10,11 @@ import { CustomIconsSpeedDialDemo } from './custom-icons-speed-dial-demo';
   selector: 'app-custom-icons-speed-dial-demo-container',
   imports: [DemoContainer, CustomIconsSpeedDialDemo],
   template: `
-    <app-demo-container title="Custom Icons" [code]="code">
+    <app-demo-container
+      title="Custom Icons"
+      [code]="code"
+      demoUrl="/demos/speed-dial/custom-icons-speed-dial-demo"
+    >
       <app-custom-icons-speed-dial-demo />
     </app-demo-container>
   `,

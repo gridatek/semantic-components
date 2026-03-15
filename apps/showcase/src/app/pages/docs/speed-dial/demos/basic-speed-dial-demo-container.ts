@@ -10,7 +10,11 @@ import { BasicSpeedDialDemo } from './basic-speed-dial-demo';
   selector: 'app-basic-speed-dial-demo-container',
   imports: [DemoContainer, BasicSpeedDialDemo],
   template: `
-    <app-demo-container title="Basic" [code]="code">
+    <app-demo-container
+      title="Basic"
+      [code]="code"
+      demoUrl="/demos/speed-dial/basic-speed-dial-demo"
+    >
       <app-basic-speed-dial-demo />
     </app-demo-container>
   `,

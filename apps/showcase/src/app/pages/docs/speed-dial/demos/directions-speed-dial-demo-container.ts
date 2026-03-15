@@ -10,7 +10,11 @@ import { DirectionsSpeedDialDemo } from './directions-speed-dial-demo';
   selector: 'app-directions-speed-dial-demo-container',
   imports: [DemoContainer, DirectionsSpeedDialDemo],
   template: `
-    <app-demo-container title="Directions" [code]="code">
+    <app-demo-container
+      title="Directions"
+      [code]="code"
+      demoUrl="/demos/speed-dial/directions-speed-dial-demo"
+    >
       <app-directions-speed-dial-demo />
     </app-demo-container>
   `,

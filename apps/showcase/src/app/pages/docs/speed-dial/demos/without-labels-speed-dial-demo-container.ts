@@ -10,7 +10,11 @@ import { WithoutLabelsSpeedDialDemo } from './without-labels-speed-dial-demo';
   selector: 'app-without-labels-speed-dial-demo-container',
   imports: [DemoContainer, WithoutLabelsSpeedDialDemo],
   template: `
-    <app-demo-container title="Without Labels" [code]="code">
+    <app-demo-container
+      title="Without Labels"
+      [code]="code"
+      demoUrl="/demos/speed-dial/without-labels-speed-dial-demo"
+    >
       <app-without-labels-speed-dial-demo />
     </app-demo-container>
   `,

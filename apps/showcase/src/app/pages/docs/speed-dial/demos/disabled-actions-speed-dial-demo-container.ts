@@ -10,7 +10,11 @@ import { DisabledActionsSpeedDialDemo } from './disabled-actions-speed-dial-demo
   selector: 'app-disabled-actions-speed-dial-demo-container',
   imports: [DemoContainer, DisabledActionsSpeedDialDemo],
   template: `
-    <app-demo-container title="Disabled Actions" [code]="code">
+    <app-demo-container
+      title="Disabled Actions"
+      [code]="code"
+      demoUrl="/demos/speed-dial/disabled-actions-speed-dial-demo"
+    >
       <app-disabled-actions-speed-dial-demo />
     </app-demo-container>
   `,
