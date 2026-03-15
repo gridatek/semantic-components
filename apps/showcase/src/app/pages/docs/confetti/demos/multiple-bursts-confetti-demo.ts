@@ -3,15 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-multiple-bursts-confetti-demo',
+  imports: [ScButton],
   template: `
-    <button
-      class="inline-flex items-center justify-center rounded-md bg-orange-600 px-4 py-2 text-sm font-medium text-white hover:bg-orange-700"
-      (click)="fire()"
-    >
+    <button scButton variant="secondary" (click)="fire()">
       Big Celebration
     </button>
   `,

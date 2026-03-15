@@ -3,17 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-custom-colors-confetti-demo',
+  imports: [ScButton],
   template: `
-    <button
-      class="inline-flex items-center justify-center rounded-md bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700"
-      (click)="fire()"
-    >
-      Purple Party
-    </button>
+    <button scButton variant="secondary" (click)="fire()">Purple Party</button>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
