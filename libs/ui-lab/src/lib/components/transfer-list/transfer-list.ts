@@ -1,395 +1,48 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
+  Directive,
   computed,
+  inject,
   input,
   model,
   output,
-  signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import {
-  SiChevronLeftIcon,
-  SiChevronRightIcon,
-  SiChevronsLeftIcon,
-  SiChevronsRightIcon,
-} from '@semantic-icons/lucide-icons';
-import type { TransferListItem } from './transfer-list-types';
+import { ScTransferListState } from './transfer-list-state';
+import type {
+  TransferListItem,
+  TransferListState,
+} from './transfer-list-types';
 
-@Component({
-  selector: 'sc-transfer-list',
-  imports: [
-    SiChevronRightIcon,
-    SiChevronLeftIcon,
-    SiChevronsRightIcon,
-    SiChevronsLeftIcon,
-  ],
-  template: `
-    <div [class]="containerClass()">
-      <!-- Source List -->
-      <div [class]="listContainerClass()">
-        <div [class]="listHeaderClass()">
-          <label class="flex items-center gap-2">
-            <input
-              type="checkbox"
-              class="h-4 w-4 rounded border-gray-300"
-              [checked]="allSourceSelected()"
-              [indeterminate]="someSourceSelected()"
-              (change)="toggleAllSource()"
-            />
-            <span class="font-medium">{{ sourceTitle() }}</span>
-          </label>
-          <span class="text-muted-foreground text-xs">
-            {{ selectedSourceIds().size }}/{{ sourceItems().length }}
-          </span>
-        </div>
-
-        @if (searchable()) {
-          <div class="border-b p-2">
-            <input
-              type="text"
-              class="bg-background h-8 w-full rounded-md border px-2 text-sm"
-              placeholder="Search..."
-              [value]="sourceSearch()"
-              (input)="sourceSearch.set($any($event.target).value)"
-            />
-          </div>
-        }
-
-        <div [class]="listClass()">
-          @for (item of filteredSourceItems(); track item.id) {
-            <label [class]="itemClass(item, selectedSourceIds().has(item.id))">
-              <input
-                type="checkbox"
-                class="h-4 w-4 rounded border-gray-300"
-                [checked]="selectedSourceIds().has(item.id)"
-                [disabled]="item.disabled"
-                (change)="toggleSourceItem(item)"
-              />
-              <div class="min-w-0 flex-1">
-                <div class="truncate">{{ item.label }}</div>
-                @if (item.description) {
-                  <div class="text-muted-foreground truncate text-xs">
-                    {{ item.description }}
-                  </div>
-                }
-              </div>
-            </label>
-          }
-          @if (filteredSourceItems().length === 0) {
-            <div class="text-muted-foreground p-4 text-center text-sm">
-              No items
-            </div>
-          }
-        </div>
-      </div>
-
-      <!-- Transfer Buttons -->
-      <div class="flex flex-col items-center justify-center gap-2">
-        <button
-          type="button"
-          [class]="buttonClass()"
-          [disabled]="selectedSourceIds().size === 0"
-          (click)="moveToTarget()"
-          aria-label="Move selected to right"
-        >
-          <svg siChevronRightIcon class="size-[18px]"></svg>
-        </button>
-        <button
-          type="button"
-          [class]="buttonClass()"
-          [disabled]="selectedTargetIds().size === 0"
-          (click)="moveToSource()"
-          aria-label="Move selected to left"
-        >
-          <svg siChevronLeftIcon class="size-[18px]"></svg>
-        </button>
-        <button
-          type="button"
-          [class]="buttonClass()"
-          [disabled]="sourceItems().length === 0"
-          (click)="moveAllToTarget()"
-          aria-label="Move all to right"
-        >
-          <svg siChevronsRightIcon class="size-[18px]"></svg>
-        </button>
-        <button
-          type="button"
-          [class]="buttonClass()"
-          [disabled]="targetItems().length === 0"
-          (click)="moveAllToSource()"
-          aria-label="Move all to left"
-        >
-          <svg siChevronsLeftIcon class="size-[18px]"></svg>
-        </button>
-      </div>
-
-      <!-- Target List -->
-      <div [class]="listContainerClass()">
-        <div [class]="listHeaderClass()">
-          <label class="flex items-center gap-2">
-            <input
-              type="checkbox"
-              class="h-4 w-4 rounded border-gray-300"
-              [checked]="allTargetSelected()"
-              [indeterminate]="someTargetSelected()"
-              (change)="toggleAllTarget()"
-            />
-            <span class="font-medium">{{ targetTitle() }}</span>
-          </label>
-          <span class="text-muted-foreground text-xs">
-            {{ selectedTargetIds().size }}/{{ targetItems().length }}
-          </span>
-        </div>
-
-        @if (searchable()) {
-          <div class="border-b p-2">
-            <input
-              type="text"
-              class="bg-background h-8 w-full rounded-md border px-2 text-sm"
-              placeholder="Search..."
-              [value]="targetSearch()"
-              (input)="targetSearch.set($any($event.target).value)"
-            />
-          </div>
-        }
-
-        <div [class]="listClass()">
-          @for (item of filteredTargetItems(); track item.id) {
-            <label [class]="itemClass(item, selectedTargetIds().has(item.id))">
-              <input
-                type="checkbox"
-                class="h-4 w-4 rounded border-gray-300"
-                [checked]="selectedTargetIds().has(item.id)"
-                [disabled]="item.disabled"
-                (change)="toggleTargetItem(item)"
-              />
-              <div class="min-w-0 flex-1">
-                <div class="truncate">{{ item.label }}</div>
-                @if (item.description) {
-                  <div class="text-muted-foreground truncate text-xs">
-                    {{ item.description }}
-                  </div>
-                }
-              </div>
-            </label>
-          }
-          @if (filteredTargetItems().length === 0) {
-            <div class="text-muted-foreground p-4 text-center text-sm">
-              No items
-            </div>
-          }
-        </div>
-      </div>
-    </div>
-  `,
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: 'div[scTransferList]',
+  providers: [ScTransferListState],
+  host: {
+    'data-slot': 'transfer-list',
+    '[class]': 'class()',
+  },
 })
 export class ScTransferList {
+  readonly classInput = input<string>('', { alias: 'class' });
+
   readonly sourceItems = model<TransferListItem[]>([]);
   readonly targetItems = model<TransferListItem[]>([]);
-  readonly sourceTitle = input('Available');
-  readonly targetTitle = input('Selected');
-  readonly searchable = input(true);
-  readonly height = input<string>('300px');
-  readonly class = input<string>('');
 
-  readonly change = output<{
-    source: TransferListItem[];
-    target: TransferListItem[];
-  }>();
+  readonly transferChange = output<TransferListState>();
 
-  protected readonly selectedSourceIds = signal<Set<string>>(new Set());
-  protected readonly selectedTargetIds = signal<Set<string>>(new Set());
-  protected readonly sourceSearch = signal('');
-  protected readonly targetSearch = signal('');
+  private readonly state = inject(ScTransferListState);
 
-  protected readonly filteredSourceItems = computed(() => {
-    const search = this.sourceSearch().toLowerCase();
-    if (!search) return this.sourceItems();
-    return this.sourceItems().filter(
-      (item) =>
-        item.label.toLowerCase().includes(search) ||
-        item.description?.toLowerCase().includes(search),
-    );
-  });
-
-  protected readonly filteredTargetItems = computed(() => {
-    const search = this.targetSearch().toLowerCase();
-    if (!search) return this.targetItems();
-    return this.targetItems().filter(
-      (item) =>
-        item.label.toLowerCase().includes(search) ||
-        item.description?.toLowerCase().includes(search),
-    );
-  });
-
-  protected readonly allSourceSelected = computed(() => {
-    const items = this.sourceItems().filter((i) => !i.disabled);
-    return (
-      items.length > 0 && items.every((i) => this.selectedSourceIds().has(i.id))
-    );
-  });
-
-  protected readonly someSourceSelected = computed(() => {
-    const items = this.sourceItems().filter((i) => !i.disabled);
-    const selected = items.filter((i) => this.selectedSourceIds().has(i.id));
-    return selected.length > 0 && selected.length < items.length;
-  });
-
-  protected readonly allTargetSelected = computed(() => {
-    const items = this.targetItems().filter((i) => !i.disabled);
-    return (
-      items.length > 0 && items.every((i) => this.selectedTargetIds().has(i.id))
-    );
-  });
-
-  protected readonly someTargetSelected = computed(() => {
-    const items = this.targetItems().filter((i) => !i.disabled);
-    const selected = items.filter((i) => this.selectedTargetIds().has(i.id));
-    return selected.length > 0 && selected.length < items.length;
-  });
-
-  protected readonly containerClass = computed(() =>
-    cn('grid grid-cols-[1fr_auto_1fr] gap-4', this.class()),
+  protected readonly class = computed(() =>
+    cn('grid grid-cols-[1fr_auto_1fr] gap-4', this.classInput()),
   );
 
-  protected readonly listContainerClass = computed(() =>
-    cn('flex flex-col border rounded-lg overflow-hidden bg-card'),
-  );
-
-  protected readonly listHeaderClass = computed(() =>
-    cn('flex items-center justify-between px-3 py-2 border-b bg-muted/50'),
-  );
-
-  protected readonly listClass = computed(() =>
-    cn('flex-1 overflow-auto', `max-h-[${this.height()}]`),
-  );
-
-  protected itemClass(item: TransferListItem, selected: boolean): string {
-    return cn(
-      'flex items-center gap-3 px-3 py-2 cursor-pointer transition-colors',
-      'hover:bg-accent',
-      selected && 'bg-accent/50',
-      item.disabled && 'opacity-50 cursor-not-allowed',
-    );
-  }
-
-  protected readonly buttonClass = computed(() =>
-    cn(
-      'inline-flex items-center justify-center w-9 h-9',
-      'rounded-md border bg-background text-foreground',
-      'hover:bg-accent hover:text-accent-foreground',
-      'disabled:opacity-50 disabled:cursor-not-allowed',
-      'transition-colors',
-    ),
-  );
-
-  toggleSourceItem(item: TransferListItem): void {
-    if (item.disabled) return;
-    this.selectedSourceIds.update((ids) => {
-      const newIds = new Set(ids);
-      if (newIds.has(item.id)) {
-        newIds.delete(item.id);
-      } else {
-        newIds.add(item.id);
-      }
-      return newIds;
-    });
-  }
-
-  toggleTargetItem(item: TransferListItem): void {
-    if (item.disabled) return;
-    this.selectedTargetIds.update((ids) => {
-      const newIds = new Set(ids);
-      if (newIds.has(item.id)) {
-        newIds.delete(item.id);
-      } else {
-        newIds.add(item.id);
-      }
-      return newIds;
-    });
-  }
-
-  toggleAllSource(): void {
-    const items = this.sourceItems().filter((i) => !i.disabled);
-    if (this.allSourceSelected()) {
-      this.selectedSourceIds.set(new Set());
-    } else {
-      this.selectedSourceIds.set(new Set(items.map((i) => i.id)));
-    }
-  }
-
-  toggleAllTarget(): void {
-    const items = this.targetItems().filter((i) => !i.disabled);
-    if (this.allTargetSelected()) {
-      this.selectedTargetIds.set(new Set());
-    } else {
-      this.selectedTargetIds.set(new Set(items.map((i) => i.id)));
-    }
-  }
-
-  moveToTarget(): void {
-    const selectedIds = this.selectedSourceIds();
-    const toMove = this.sourceItems().filter(
-      (i) => selectedIds.has(i.id) && !i.disabled,
-    );
-    const remaining = this.sourceItems().filter(
-      (i) => !selectedIds.has(i.id) || i.disabled,
-    );
-
-    this.sourceItems.set(remaining);
-    this.targetItems.update((items) => [...items, ...toMove]);
-    this.selectedSourceIds.set(new Set());
-    this.emitChange();
-  }
-
-  moveToSource(): void {
-    const selectedIds = this.selectedTargetIds();
-    const toMove = this.targetItems().filter(
-      (i) => selectedIds.has(i.id) && !i.disabled,
-    );
-    const remaining = this.targetItems().filter(
-      (i) => !selectedIds.has(i.id) || i.disabled,
-    );
-
-    this.targetItems.set(remaining);
-    this.sourceItems.update((items) => [...items, ...toMove]);
-    this.selectedTargetIds.set(new Set());
-    this.emitChange();
-  }
-
-  moveAllToTarget(): void {
-    const toMove = this.sourceItems().filter((i) => !i.disabled);
-    const remaining = this.sourceItems().filter((i) => i.disabled);
-
-    this.sourceItems.set(remaining);
-    this.targetItems.update((items) => [...items, ...toMove]);
-    this.selectedSourceIds.set(new Set());
-    this.emitChange();
-  }
-
-  moveAllToSource(): void {
-    const toMove = this.targetItems().filter((i) => !i.disabled);
-    const remaining = this.targetItems().filter((i) => i.disabled);
-
-    this.targetItems.set(remaining);
-    this.sourceItems.update((items) => [...items, ...toMove]);
-    this.selectedTargetIds.set(new Set());
-    this.emitChange();
-  }
-
-  private emitChange(): void {
-    this.change.emit({
-      source: this.sourceItems(),
-      target: this.targetItems(),
-    });
+  constructor() {
+    this.state.sourceItems = this.sourceItems;
+    this.state.targetItems = this.targetItems;
+    this.state.onTransfer = () => {
+      this.transferChange.emit({
+        source: this.sourceItems(),
+        target: this.targetItems(),
+      });
+    };
   }
 }

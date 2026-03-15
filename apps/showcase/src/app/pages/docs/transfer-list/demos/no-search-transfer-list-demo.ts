@@ -4,20 +4,36 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScTransferList } from '@semantic-components/ui-lab';
+import {
+  ScTransferList,
+  ScTransferListActions,
+  ScTransferListPanel,
+} from '@semantic-components/ui-lab';
 import type { TransferListItem } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-no-search-transfer-list-demo',
-  imports: [ScTransferList],
+  imports: [ScTransferList, ScTransferListPanel, ScTransferListActions],
   template: `
-    <sc-transfer-list
+    <div
+      scTransferList
       [(sourceItems)]="sourceItems"
       [(targetItems)]="targetItems"
-      [searchable]="false"
-      sourceTitle="Options"
-      targetTitle="Chosen"
-    />
+    >
+      <div
+        scTransferListPanel
+        side="source"
+        title="Options"
+        [searchable]="false"
+      ></div>
+      <div scTransferListActions></div>
+      <div
+        scTransferListPanel
+        side="target"
+        title="Chosen"
+        [searchable]="false"
+      ></div>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

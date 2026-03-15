@@ -4,21 +4,28 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScTransferList } from '@semantic-components/ui-lab';
+import {
+  ScTransferList,
+  ScTransferListActions,
+  ScTransferListPanel,
+} from '@semantic-components/ui-lab';
 import type { TransferListItem } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-transfer-list-demo',
-  imports: [ScTransferList],
+  imports: [ScTransferList, ScTransferListPanel, ScTransferListActions],
   template: `
     <div class="flex flex-col gap-6">
-      <sc-transfer-list
+      <div
+        scTransferList
         [(sourceItems)]="sourceItems"
         [(targetItems)]="targetItems"
-        sourceTitle="Available"
-        targetTitle="Selected"
-        (change)="onChange($event)"
-      />
+        (transferChange)="onChange($event)"
+      >
+        <div scTransferListPanel side="source" title="Available"></div>
+        <div scTransferListActions></div>
+        <div scTransferListPanel side="target" title="Selected"></div>
+      </div>
 
       <div class="grid grid-cols-2 gap-4">
         <div class="bg-card rounded-lg border p-4">
