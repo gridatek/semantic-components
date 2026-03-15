@@ -81,15 +81,15 @@ import {
       <div scEditor class="overflow-hidden rounded-lg border">
         <div scEditorToolbar>
           <div scEditorToolbarGroup>
-            <button scEditorBoldToggle>
+            <button scEditorBoldToggle value="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalicToggle>
+            <button scEditorItalicToggle value="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorUnderlineToggle>
+            <button scEditorUnderlineToggle value="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
@@ -98,11 +98,11 @@ import {
           <div scEditorSeparator></div>
 
           <div scEditorToolbarGroup>
-            <button scEditorBulletListToggle>
+            <button scEditorBulletListToggle value="bullet-list">
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scEditorNumberedListToggle>
+            <button scEditorNumberedListToggle value="numbered-list">
               <svg siListOrderedIcon></svg>
               <span class="sr-only">Numbered list</span>
             </button>
