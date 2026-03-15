@@ -22,33 +22,28 @@ export class BasicAnimatedCounterDemoContainer {
   readonly code = `import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   signal,
+  viewChild,
 } from '@angular/core';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab';
+import { ScButton } from '@semantic-components/ui';
+import { animate } from 'motion';
 
 @Component({
   selector: 'app-basic-animated-counter-demo',
-  imports: [ScAnimatedCounter],
+  imports: [ScButton],
   template: \`
-    <div class="flex items-center gap-4">
-      <span
-        scAnimatedCounter
-        [value]="value()"
-        class="text-4xl font-bold"
-      ></span>
-      <button
-        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
-        (click)="increment()"
+    <div class="flex flex-col items-center gap-6">
+      <div
+        class="bg-muted/30 flex h-32 w-64 items-center justify-center rounded-xl border"
       >
-        +100
-      </button>
-      <button
-        class="bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-md px-3 py-1.5 text-sm"
-        (click)="reset()"
-      >
-        Reset
-      </button>
+        <span #counter class="text-5xl font-bold tabular-nums">0</span>
+      </div>
+      <div class="flex gap-2">
+        <button scButton (click)="increment()">+100</button>
+        <button scButton variant="secondary" (click)="reset()">Reset</button>
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
@@ -56,14 +51,37 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicAnimatedCounterDemo {
-  readonly value = signal(0);
+  private readonly counterEl =
+    viewChild.required<ElementRef<HTMLElement>>('counter');
+  private readonly current = signal(0);
 
   increment(): void {
-    this.value.update((v) => v + 100);
+    const from = this.current();
+    const to = from + 100;
+    this.current.set(to);
+
+    animate(from, to, {
+      duration: 1,
+      ease: 'easeOut',
+      onUpdate: (value: number) => {
+        this.counterEl().nativeElement.textContent =
+          Math.round(value).toLocaleString();
+      },
+    });
   }
 
   reset(): void {
-    this.value.set(0);
+    const from = this.current();
+    this.current.set(0);
+
+    animate(from, 0, {
+      duration: 0.5,
+      ease: 'easeOut',
+      onUpdate: (value: number) => {
+        this.counterEl().nativeElement.textContent =
+          Math.round(value).toLocaleString();
+      },
+    });
   }
 }`;
 }

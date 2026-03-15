@@ -115,7 +115,7 @@ interface CommandItem {
       </button>
       <ng-template scDialogPortal>
         <div scDialog class="w-lg gap-0 p-0">
-          <div scCommand class="**:data-[slot=command-input-group]:h-12">
+          <div scCommand>
             <div scCommandInputGroup>
               <svg
                 siSearchIcon
