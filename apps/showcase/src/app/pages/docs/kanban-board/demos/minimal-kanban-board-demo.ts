@@ -16,7 +16,7 @@ import {
   selector: 'app-minimal-kanban-board-demo',
   imports: [ScKanbanBoard, ScKanbanColumn, ScKanbanCard],
   template: `
-    <div class="bg-muted/10 h-[400px] rounded-lg border">
+    <div class="bg-muted/10 h-[400px] overflow-hidden rounded-lg border">
       <div
         scKanbanBoard
         #board="scKanbanBoard"

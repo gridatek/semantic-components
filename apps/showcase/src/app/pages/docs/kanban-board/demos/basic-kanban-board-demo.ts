@@ -29,7 +29,7 @@ import {
     SiXIcon,
   ],
   template: `
-    <div class="bg-muted/10 h-[600px] rounded-lg border">
+    <div class="bg-muted/10 h-[600px] overflow-hidden rounded-lg border">
       <div
         scKanbanBoard
         #board="scKanbanBoard"

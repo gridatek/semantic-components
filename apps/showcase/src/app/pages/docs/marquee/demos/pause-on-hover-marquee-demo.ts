@@ -21,7 +21,7 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
       ></div>
     </div>
   `,
-  host: { class: 'flex w-full flex-col items-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

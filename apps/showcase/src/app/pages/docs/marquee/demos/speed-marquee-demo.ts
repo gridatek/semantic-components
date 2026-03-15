@@ -9,7 +9,7 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
   selector: 'app-speed-marquee-demo',
   imports: [ScMarqueeText],
   template: `
-    <div class="space-y-4">
+    <div class="w-full space-y-4">
       <div>
         <p class="text-muted-foreground mb-1 text-sm">Fast (10s)</p>
         <div
@@ -39,7 +39,7 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
       </div>
     </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
