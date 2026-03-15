@@ -46,7 +46,7 @@ import {
 
       <!-- Left Direction -->
       <div class="bg-muted/20 relative h-72 rounded-lg border">
-        <div class="absolute top-1/2 right-4 -translate-y-1/2">
+        <div class="absolute top-1/2 left-4 -translate-y-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
             direction="left"
@@ -60,7 +60,7 @@ import {
 
       <!-- Right Direction -->
       <div class="bg-muted/20 relative h-72 rounded-lg border">
-        <div class="absolute top-1/2 left-4 -translate-y-1/2">
+        <div class="absolute top-1/2 right-4 -translate-y-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
             direction="right"
