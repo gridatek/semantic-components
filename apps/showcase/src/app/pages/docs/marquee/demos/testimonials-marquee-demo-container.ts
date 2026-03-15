@@ -26,39 +26,16 @@ export class TestimonialsMarqueeDemoContainer {
 } from '@angular/core';
 import {
   ScMarquee,
-  ScMarqueeClone,
+  ScMarqueeContent,
   ScMarqueeItem,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-testimonials-marquee-demo',
-  imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
+  imports: [ScMarquee, ScMarqueeContent, ScMarqueeItem],
   template: \`
-    <sc-marquee [duration]="40" [gap]="24">
-      @for (testimonial of testimonials; track testimonial.name) {
-        <div
-          scMarqueeItem
-          class="bg-background w-80 rounded-lg border p-4 shadow-sm"
-        >
-          <p class="text-muted-foreground mb-3 text-sm">
-            "{{ testimonial.quote }}"
-          </p>
-          <div class="flex items-center gap-2">
-            <div
-              class="bg-primary/10 flex size-8 items-center justify-center rounded-full text-sm font-medium"
-            >
-              {{ testimonial.name.charAt(0) }}
-            </div>
-            <div>
-              <p class="text-sm font-medium">{{ testimonial.name }}</p>
-              <p class="text-muted-foreground text-xs">
-                {{ testimonial.role }}
-              </p>
-            </div>
-          </div>
-        </div>
-      }
-      <ng-container scMarqueeClone>
+    <div scMarquee [duration]="40" [gap]="24">
+      <div scMarqueeContent>
         @for (testimonial of testimonials; track testimonial.name) {
           <div
             scMarqueeItem
@@ -82,10 +59,35 @@ import {
             </div>
           </div>
         }
-      </ng-container>
-    </sc-marquee>
+      </div>
+      <div scMarqueeContent aria-hidden="true">
+        @for (testimonial of testimonials; track testimonial.name) {
+          <div
+            scMarqueeItem
+            class="bg-background w-80 rounded-lg border p-4 shadow-sm"
+          >
+            <p class="text-muted-foreground mb-3 text-sm">
+              "{{ testimonial.quote }}"
+            </p>
+            <div class="flex items-center gap-2">
+              <div
+                class="bg-primary/10 flex size-8 items-center justify-center rounded-full text-sm font-medium"
+              >
+                {{ testimonial.name.charAt(0) }}
+              </div>
+              <div>
+                <p class="text-sm font-medium">{{ testimonial.name }}</p>
+                <p class="text-muted-foreground text-xs">
+                  {{ testimonial.role }}
+                </p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

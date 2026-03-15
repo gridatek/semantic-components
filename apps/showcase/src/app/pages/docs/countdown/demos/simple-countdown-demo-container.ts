@@ -24,36 +24,54 @@ export class SimpleCountdownDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScCountdownSimple } from '@semantic-components/ui-lab';
+import { ScCountdown } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-simple-countdown-demo',
-  imports: [ScCountdownSimple],
+  imports: [ScCountdown],
   template: \`
     <div class="space-y-2">
       <div class="flex items-center gap-2">
         <span class="text-muted-foreground">Time remaining:</span>
-        <sc-countdown-simple
+        <span
+          scCountdown
+          #cd1="scCountdown"
           [targetDate]="futureDate"
-          format="full"
-          class="text-lg font-semibold"
-        />
+          class="font-mono text-lg font-semibold tabular-nums"
+        >
+          @if (cd1.time().days > 0) {
+            {{ cd1.time().days }}d
+          }
+          {{ cd1.padNumber(cd1.time().hours) }}:{{
+            cd1.padNumber(cd1.time().minutes)
+          }}:{{ cd1.padNumber(cd1.time().seconds) }}
+        </span>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-muted-foreground">HH:MM:SS:</span>
-        <sc-countdown-simple
+        <span
+          scCountdown
+          #cd2="scCountdown"
           [targetDate]="shortFuture"
-          format="hh:mm:ss"
-          class="text-lg"
-        />
+          class="font-mono text-lg tabular-nums"
+        >
+          {{ cd2.padNumber(cd2.time().hours) }}:{{
+            cd2.padNumber(cd2.time().minutes)
+          }}:{{ cd2.padNumber(cd2.time().seconds) }}
+        </span>
       </div>
       <div class="flex items-center gap-2">
         <span class="text-muted-foreground">MM:SS:</span>
-        <sc-countdown-simple
+        <span
+          scCountdown
+          #cd3="scCountdown"
           [targetDate]="veryShortFuture"
-          format="mm:ss"
-          class="text-lg"
-        />
+          class="font-mono text-lg tabular-nums"
+        >
+          {{ cd3.padNumber(cd3.time().minutes) }}:{{
+            cd3.padNumber(cd3.time().seconds)
+          }}
+        </span>
       </div>
     </div>
   \`,

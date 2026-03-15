@@ -26,48 +26,54 @@ export class StackedMarqueeDemoContainer {
 } from '@angular/core';
 import {
   ScMarquee,
-  ScMarqueeClone,
+  ScMarqueeContent,
   ScMarqueeItem,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-stacked-marquee-demo',
-  imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
+  imports: [ScMarquee, ScMarqueeContent, ScMarqueeItem],
   template: \`
     <div class="space-y-2">
-      <sc-marquee [duration]="30" [gap]="24">
-        @for (emoji of row1Emojis; track emoji) {
-          <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
-        }
-        <ng-container scMarqueeClone>
+      <div scMarquee [duration]="30" [gap]="24">
+        <div scMarqueeContent>
           @for (emoji of row1Emojis; track emoji) {
             <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
           }
-        </ng-container>
-      </sc-marquee>
-      <sc-marquee [duration]="25" [reverse]="true" [gap]="24">
-        @for (emoji of row2Emojis; track emoji) {
-          <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
-        }
-        <ng-container scMarqueeClone>
+        </div>
+        <div scMarqueeContent aria-hidden="true">
+          @for (emoji of row1Emojis; track emoji) {
+            <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
+          }
+        </div>
+      </div>
+      <div scMarquee [duration]="25" [reverse]="true" [gap]="24">
+        <div scMarqueeContent>
           @for (emoji of row2Emojis; track emoji) {
             <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
           }
-        </ng-container>
-      </sc-marquee>
-      <sc-marquee [duration]="35" [gap]="24">
-        @for (emoji of row3Emojis; track emoji) {
-          <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
-        }
-        <ng-container scMarqueeClone>
+        </div>
+        <div scMarqueeContent aria-hidden="true">
+          @for (emoji of row2Emojis; track emoji) {
+            <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
+          }
+        </div>
+      </div>
+      <div scMarquee [duration]="35" [gap]="24">
+        <div scMarqueeContent>
           @for (emoji of row3Emojis; track emoji) {
             <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
           }
-        </ng-container>
-      </sc-marquee>
+        </div>
+        <div scMarqueeContent aria-hidden="true">
+          @for (emoji of row3Emojis; track emoji) {
+            <span scMarqueeItem class="text-3xl">{{ emoji }}</span>
+          }
+        </div>
+      </div>
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
