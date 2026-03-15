@@ -41,7 +41,7 @@ import { WordWrapCodeEditorDemoContainer } from './demos/word-wrap-code-editor-d
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>CodeEditor</h1>
+        <h1 scHeading>Code Editor</h1>
         <p class="text-muted-foreground">
           Syntax-highlighted code editor with line numbers, auto-indent, and
           multiple language support.

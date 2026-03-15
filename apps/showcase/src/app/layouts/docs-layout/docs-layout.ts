@@ -37,13 +37,20 @@ import {
   ScSidebarRail,
   ScSidebarTrigger,
 } from '@semantic-components/ui';
-import { ScSeparator, ScThemeModeToggle, cn } from '@semantic-components/ui';
+import {
+  ScInputButton,
+  ScKbd,
+  ScSeparator,
+  ScThemeModeToggle,
+  cn,
+} from '@semantic-components/ui';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,
   SiDownloadIcon,
   SiMoonIcon,
   SiPanelLeftIcon,
+  SiSearchIcon,
   SiSunIcon,
   SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
@@ -51,6 +58,7 @@ import { filter } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
+import { CommandPaletteService } from '../../services/command-palette.service';
 import { ComponentsService } from '../../services/components.service';
 import { ConfigService } from '../../services/config.service';
 
@@ -77,6 +85,8 @@ import { ConfigService } from '../../services/config.service';
     ScSidebarInset,
     ScSidebarTrigger,
     ScSidebarRail,
+    ScInputButton,
+    ScKbd,
     ScSeparator,
     ScThemeModeToggle,
     SiSunIcon,
@@ -85,6 +95,7 @@ import { ConfigService } from '../../services/config.service';
     SiBoxIcon,
     SiDownloadIcon,
     SiPanelLeftIcon,
+    SiSearchIcon,
     SiWrenchIcon,
     Logo,
     Toc,
@@ -114,6 +125,24 @@ import { ConfigService } from '../../services/config.service';
               </a>
             </li>
           </ul>
+        </div>
+
+        <div class="px-2 py-2">
+          <button
+            scInputButton
+            class="w-full group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0"
+            (click)="openCommandPalette()"
+          >
+            <svg siSearchIcon class="size-4 shrink-0"></svg>
+            <span
+              class="flex-1 text-start group-data-[collapsible=icon]:hidden"
+            >
+              Search...
+            </span>
+            <kbd scKbd class="group-data-[collapsible=icon]:hidden">
+              &#8984;K
+            </kbd>
+          </button>
         </div>
 
         <div scSidebarBody>
@@ -371,6 +400,7 @@ export class DocsLayout {
   private readonly destroyRef = inject(DestroyRef);
   protected readonly tocService = inject(TocService);
   private readonly componentsService = inject(ComponentsService);
+  private readonly commandPalette = inject(CommandPaletteService);
   private readonly config = inject(ConfigService);
 
   private readonly contentArea =
@@ -393,6 +423,10 @@ export class DocsLayout {
           setTimeout(() => this.extractTocHeadings(), 100);
         });
     });
+  }
+
+  openCommandPalette(): void {
+    this.commandPalette.open.set(true);
   }
 
   private extractTocHeadings(): void {
