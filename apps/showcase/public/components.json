@@ -214,10 +214,10 @@
   {
     "name": "Confetti",
     "path": "confetti",
-    "description": "Celebration animation effects powered by canvas-confetti.",
+    "description": "Celebration animation effects using canvas-confetti.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Feedback"
+    "library": "third-party",
+    "category": "Recipes"
   },
   {
     "name": "Context Menu",
@@ -747,11 +747,10 @@
   {
     "name": "Sortable List",
     "path": "sortable-list",
-    "description": "A drag-and-drop sortable list.",
+    "description": "A drag-and-drop sortable list using Angular CDK.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "library": "third-party",
+    "category": "Recipes"
   },
   {
     "name": "Speed Dial",
@@ -957,10 +956,9 @@
   {
     "name": "Virtual List",
     "path": "virtual-list",
-    "description": "Virtualized scrolling for large lists.",
+    "description": "Virtualized scrolling for large lists using Angular CDK.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "library": "third-party",
+    "category": "Recipes"
   }
 ]

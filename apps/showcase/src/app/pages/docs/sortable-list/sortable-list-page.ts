@@ -31,7 +31,7 @@ import { TaskListSortableListDemoContainer } from './demos/task-list-sortable-li
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>SortableList</h1>
+        <h1 scHeading>Sortable List</h1>
         <p class="text-muted-foreground">
           A drag and drop list component for reordering items.
         </p>
