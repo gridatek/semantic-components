@@ -34,14 +34,15 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
       Hover over the marquee to pause animation
     </p>
     <div class="bg-primary/5 rounded-lg border py-3">
-      <sc-marquee-text
+      <div
+        scMarqueeText
         text="Hover over me to pause the animation!"
         [duration]="15"
         [pauseOnHover]="true"
-      />
+      ></div>
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

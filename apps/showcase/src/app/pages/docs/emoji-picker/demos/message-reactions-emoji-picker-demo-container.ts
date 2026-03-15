@@ -24,12 +24,22 @@ import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picke
 })
 export class MessageReactionsEmojiPickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
+import {
+  Emoji,
+  ScEmojiPicker,
+  ScEmojiPickerCategoryTabs,
+  ScEmojiPickerGrid,
+} from '@semantic-components/ui-lab';
 import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-message-reactions-emoji-picker-demo',
-  imports: [ScEmojiPicker, SiCirclePlusIcon],
+  imports: [
+    SiCirclePlusIcon,
+    ScEmojiPicker,
+    ScEmojiPickerCategoryTabs,
+    ScEmojiPickerGrid,
+  ],
   template: \`
     <div class="max-w-md rounded-lg border p-4">
       <p class="text-sm">
@@ -58,13 +68,15 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
       </div>
       @if (showReactionPicker()) {
         <div class="mt-2">
-          <sc-emoji-picker
-            [showSearch]="false"
-            [showRecent]="false"
+          <div
+            scEmojiPicker
             class="w-64"
             [columns]="6"
             (emojiSelect)="addReaction($event)"
-          />
+          >
+            <div scEmojiPickerCategoryTabs></div>
+            <div scEmojiPickerGrid></div>
+          </div>
         </div>
       }
     </div>
