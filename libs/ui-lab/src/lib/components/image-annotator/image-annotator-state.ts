@@ -1,9 +1,5 @@
 import { Injectable, type Signal, computed, signal } from '@angular/core';
-import type {
-  Annotation,
-  AnnotationPoint,
-  AnnotationTool,
-} from './image-annotator-types';
+import type { Annotation, AnnotationTool } from './image-annotator-types';
 
 @Injectable()
 export class ScImageAnnotatorState {
