@@ -9,4 +9,3 @@ export { ScCommandList } from './command-list';
 export { ScCommandListContainer } from './command-list-container';
 export { ScCommandSeparator } from './command-separator';
 export { ScCommandShortcut } from './command-shortcut';
-export { ScInputButton } from './input-button';

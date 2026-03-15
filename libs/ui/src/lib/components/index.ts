@@ -24,6 +24,7 @@ export * from './field';
 export * from './file-upload';
 export * from './hover-card';
 export * from './input';
+export * from './input-button';
 export * from './input-group';
 export * from './item';
 export * from './kbd';
