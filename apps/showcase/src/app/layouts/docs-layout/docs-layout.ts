@@ -335,6 +335,8 @@ import { ConfigService } from '../../services/config.service';
             <li scSidebarMenuItem>
               <button
                 scSidebarMenuButton
+                variant="outline"
+                class="justify-center"
                 scThemeModeToggle
                 #themeToggle="scThemeModeToggle"
               >
