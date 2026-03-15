@@ -20,15 +20,25 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
       class="w-full"
       [style.height.px]="size()"
       preserveAspectRatio="xMidYMid meet"
+      role="img"
+      [attr.aria-label]="ariaLabel()"
     >
       <g [attr.transform]="centerTransform()">
         @for (slice of slices(); track slice.label; let i = $index) {
           <path
             [attr.d]="slice.path"
             [attr.fill]="slice.color"
-            class="cursor-pointer transition-opacity hover:opacity-80"
+            class="cursor-pointer transition-opacity outline-none hover:opacity-80 focus-visible:opacity-80"
+            tabindex="0"
+            role="graphics-symbol"
+            [attr.aria-label]="
+              slice.label + ': ' + slice.value + ' (' + slice.percentage + '%)'
+            "
             (mouseenter)="onSliceHover($event, slice)"
             (mouseleave)="onSliceLeave()"
+            (focus)="onSliceFocus($event, slice)"
+            (blur)="onSliceLeave()"
+            (keydown)="onSliceKeydown($event, i)"
           />
         }
 
@@ -39,6 +49,7 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
               [attr.y]="slice.labelY"
               text-anchor="middle"
               class="fill-background pointer-events-none text-xs font-medium"
+              aria-hidden="true"
             >
               {{ slice.percentage }}%
             </text>
@@ -47,25 +58,28 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
       </g>
     </svg>
 
-    @if (hoveredSlice()) {
-      <div
-        class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
-        [style.left.px]="tooltipX()"
-        [style.top.px]="tooltipY()"
-        [style.transform]="'translate(-50%, -100%) translateY(-8px)'"
-      >
+    <div
+      class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
+      [class.invisible]="!hoveredSlice()"
+      [style.left.px]="tooltipX()"
+      [style.top.px]="tooltipY()"
+      [style.transform]="'translate(-50%, -100%) translateY(-8px)'"
+      role="tooltip"
+      aria-live="polite"
+    >
+      @if (hoveredSlice(); as slice) {
         <div class="flex items-center gap-2">
           <div
             class="size-3 rounded-sm"
-            [style.background-color]="hoveredSlice()!.color"
+            [style.background-color]="slice.color"
           ></div>
-          <span class="font-medium">{{ hoveredSlice()!.label }}</span>
+          <span class="font-medium">{{ slice.label }}</span>
         </div>
         <div class="text-muted-foreground">
-          {{ hoveredSlice()!.value }} ({{ hoveredSlice()!.percentage }}%)
+          {{ slice.value }} ({{ slice.percentage }}%)
         </div>
-      </div>
-    }
+      }
+    </div>
   `,
   host: {
     'data-slot': 'pie-chart',
@@ -83,6 +97,7 @@ export class ScPieChart {
   readonly size = input<number>(300);
   readonly innerRadius = input<number>(0); // 0 for pie, >0 for donut
   readonly showLabels = input<boolean>(true);
+  readonly ariaLabel = input<string>('Pie chart');
 
   readonly hoveredSlice = signal<
     (ChartDataPoint & { percentage: number; color: string }) | null
@@ -163,7 +178,40 @@ export class ScPieChart {
     this.hoveredSlice.set(slice);
   }
 
+  onSliceFocus(
+    event: FocusEvent,
+    slice: { label: string; value: number; percentage: number; color: string },
+  ): void {
+    const path = event.target as SVGElement;
+    const parentRect = path.closest('[scPieChart]')?.getBoundingClientRect();
+    if (parentRect) {
+      const pathRect = path.getBoundingClientRect();
+      this.tooltipX.set(pathRect.left - parentRect.left + pathRect.width / 2);
+      this.tooltipY.set(pathRect.top - parentRect.top);
+    }
+    this.hoveredSlice.set(slice);
+  }
+
   onSliceLeave(): void {
     this.hoveredSlice.set(null);
+  }
+
+  onSliceKeydown(event: KeyboardEvent, index: number): void {
+    const slices = this.slices();
+    let nextIndex = index;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      nextIndex = (index + 1) % slices.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      nextIndex = (index - 1 + slices.length) % slices.length;
+    } else {
+      return;
+    }
+
+    const g = (event.target as SVGElement).parentElement;
+    const paths = g?.querySelectorAll<SVGElement>('path[tabindex]');
+    paths?.[nextIndex]?.focus();
   }
 }

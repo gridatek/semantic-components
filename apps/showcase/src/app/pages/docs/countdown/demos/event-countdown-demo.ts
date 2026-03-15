@@ -14,14 +14,60 @@ import { ScCountdown } from '@semantic-components/ui-lab';
     >
       <h4 class="mb-2 text-lg font-semibold">Product Launch</h4>
       <p class="text-muted-foreground mb-6">Get ready for something amazing!</p>
-      <sc-countdown
+      <div
+        scCountdown
+        #cd="scCountdown"
         [targetDate]="futureDate"
-        variant="cards"
-        daysLabel="DAYS"
-        hoursLabel="HRS"
-        minutesLabel="MIN"
-        secondsLabel="SEC"
-      />
+        class="justify-center gap-3"
+      >
+        @if (cd.time().days > 0) {
+          <div
+            class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3"
+          >
+            <span class="font-mono text-3xl font-bold tabular-nums">
+              {{ cd.padNumber(cd.time().days) }}
+            </span>
+            <span
+              class="text-muted-foreground text-xs tracking-wider uppercase"
+            >
+              DAYS
+            </span>
+          </div>
+          <span class="text-muted-foreground -mt-5 text-3xl font-bold">:</span>
+        }
+        <div
+          class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3"
+        >
+          <span class="font-mono text-3xl font-bold tabular-nums">
+            {{ cd.padNumber(cd.time().hours) }}
+          </span>
+          <span class="text-muted-foreground text-xs tracking-wider uppercase">
+            HRS
+          </span>
+        </div>
+        <span class="text-muted-foreground -mt-5 text-3xl font-bold">:</span>
+        <div
+          class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3"
+        >
+          <span class="font-mono text-3xl font-bold tabular-nums">
+            {{ cd.padNumber(cd.time().minutes) }}
+          </span>
+          <span class="text-muted-foreground text-xs tracking-wider uppercase">
+            MIN
+          </span>
+        </div>
+        <span class="text-muted-foreground -mt-5 text-3xl font-bold">:</span>
+        <div
+          class="bg-muted flex min-w-[70px] flex-col items-center rounded-lg p-3"
+        >
+          <span class="font-mono text-3xl font-bold tabular-nums">
+            {{ cd.padNumber(cd.time().seconds) }}
+          </span>
+          <span class="text-muted-foreground text-xs tracking-wider uppercase">
+            SEC
+          </span>
+        </div>
+      </div>
       <button
         class="bg-primary text-primary-foreground hover:bg-primary/90 mt-6 inline-flex h-10 items-center justify-center rounded-md px-6 text-sm font-medium"
       >

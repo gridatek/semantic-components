@@ -1,8 +1,7 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
-  ViewEncapsulation,
+  Directive,
+  InjectionToken,
   computed,
   effect,
   inject,
@@ -20,82 +19,34 @@ export interface CountdownTime {
   total: number;
 }
 
-@Component({
-  selector: 'sc-countdown',
+export const SC_COUNTDOWN = new InjectionToken<ScCountdown>('SC_COUNTDOWN');
+
+@Directive({
+  selector: '[scCountdown]',
   exportAs: 'scCountdown',
-  template: `
-    <div
-      [class]="containerClass()"
-      role="timer"
-      [attr.aria-label]="ariaLabel()"
-    >
-      @if (showDays() && (time().days > 0 || alwaysShowDays())) {
-        <div [class]="unitClass()">
-          <span [class]="valueClass()">{{ padNumber(time().days) }}</span>
-          <span [class]="labelClass()">{{ daysLabel() }}</span>
-        </div>
-        @if (showSeparator()) {
-          <span [class]="separatorClass()">{{ separator() }}</span>
-        }
-      }
-
-      @if (showHours()) {
-        <div [class]="unitClass()">
-          <span [class]="valueClass()">{{ padNumber(time().hours) }}</span>
-          <span [class]="labelClass()">{{ hoursLabel() }}</span>
-        </div>
-        @if (showSeparator() && showMinutes()) {
-          <span [class]="separatorClass()">{{ separator() }}</span>
-        }
-      }
-
-      @if (showMinutes()) {
-        <div [class]="unitClass()">
-          <span [class]="valueClass()">{{ padNumber(time().minutes) }}</span>
-          <span [class]="labelClass()">{{ minutesLabel() }}</span>
-        </div>
-        @if (showSeparator() && showSeconds()) {
-          <span [class]="separatorClass()">{{ separator() }}</span>
-        }
-      }
-
-      @if (showSeconds()) {
-        <div [class]="unitClass()">
-          <span [class]="valueClass()">{{ padNumber(time().seconds) }}</span>
-          <span [class]="labelClass()">{{ secondsLabel() }}</span>
-        </div>
-      }
-    </div>
-  `,
+  providers: [{ provide: SC_COUNTDOWN, useExisting: ScCountdown }],
   host: {
     'data-slot': 'countdown',
+    '[class]': 'class()',
+    role: 'timer',
+    '[attr.aria-label]': 'ariaLabel()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCountdown {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() =>
+    cn('inline-flex items-center', this.classInput()),
+  );
+
   readonly targetDate = input.required<Date>();
   readonly autoStart = input<boolean>(true);
-  readonly showDays = input<boolean>(true);
-  readonly showHours = input<boolean>(true);
-  readonly showMinutes = input<boolean>(true);
-  readonly showSeconds = input<boolean>(true);
-  readonly alwaysShowDays = input<boolean>(false);
-  readonly showSeparator = input<boolean>(true);
-  readonly separator = input<string>(':');
-  readonly daysLabel = input<string>('Days');
-  readonly hoursLabel = input<string>('Hours');
-  readonly minutesLabel = input<string>('Minutes');
-  readonly secondsLabel = input<string>('Seconds');
-  readonly variant = input<'default' | 'compact' | 'cards'>('default');
 
   readonly tick = output<CountdownTime>();
   readonly complete = output<void>();
 
-  protected readonly time = signal<CountdownTime>({
+  readonly time = signal<CountdownTime>({
     days: 0,
     hours: 0,
     minutes: 0,
@@ -104,7 +55,7 @@ export class ScCountdown {
   });
 
   private intervalId: ReturnType<typeof setInterval> | null = null;
-  private isComplete = false;
+  private isCompleteState = false;
 
   constructor() {
     effect(() => {
@@ -118,7 +69,7 @@ export class ScCountdown {
     });
   }
 
-  protected readonly ariaLabel = computed(() => {
+  readonly ariaLabel = computed(() => {
     const t = this.time();
     const parts: string[] = [];
     if (t.days > 0) parts.push(`${t.days} days`);
@@ -128,57 +79,35 @@ export class ScCountdown {
     return `Time remaining: ${parts.join(', ')}`;
   });
 
-  protected readonly containerClass = computed(() => {
-    const variant = this.variant();
-    return cn(
-      'inline-flex items-center',
-      variant === 'default' && 'gap-4',
-      variant === 'compact' && 'gap-1',
-      variant === 'cards' && 'gap-3',
-      this.classInput(),
-    );
-  });
-
-  protected readonly unitClass = computed(() => {
-    const variant = this.variant();
-    return cn(
-      'flex flex-col items-center',
-      variant === 'cards' && 'bg-muted rounded-lg p-3 min-w-[70px]',
-    );
-  });
-
-  protected readonly valueClass = computed(() => {
-    const variant = this.variant();
-    return cn(
-      'font-mono font-bold tabular-nums',
-      variant === 'default' && 'text-4xl',
-      variant === 'compact' && 'text-2xl',
-      variant === 'cards' && 'text-3xl',
-    );
-  });
-
-  protected readonly labelClass = computed(() => {
-    const variant = this.variant();
-    return cn(
-      'text-muted-foreground',
-      variant === 'default' && 'text-sm',
-      variant === 'compact' && 'text-xs',
-      variant === 'cards' && 'text-xs uppercase tracking-wider',
-    );
-  });
-
-  protected readonly separatorClass = computed(() => {
-    const variant = this.variant();
-    return cn(
-      'font-bold text-muted-foreground',
-      variant === 'default' && 'text-4xl -mt-5',
-      variant === 'compact' && 'text-2xl -mt-3',
-      variant === 'cards' && 'text-3xl -mt-5',
-    );
-  });
-
   padNumber(n: number): string {
     return n.toString().padStart(2, '0');
+  }
+
+  start(): void {
+    this.stop();
+    this.isCompleteState = false;
+    this.updateTime();
+    this.intervalId = setInterval(() => this.updateTime(), 1000);
+  }
+
+  stop(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+
+  reset(): void {
+    this.isCompleteState = false;
+    this.updateTime();
+  }
+
+  getTime(): CountdownTime {
+    return this.time();
+  }
+
+  isRunning(): boolean {
+    return this.intervalId !== null;
   }
 
   private calculateTime(): CountdownTime {
@@ -199,37 +128,10 @@ export class ScCountdown {
     this.time.set(newTime);
     this.tick.emit(newTime);
 
-    if (newTime.total <= 0 && !this.isComplete) {
-      this.isComplete = true;
+    if (newTime.total <= 0 && !this.isCompleteState) {
+      this.isCompleteState = true;
       this.complete.emit();
       this.stop();
     }
-  }
-
-  start(): void {
-    this.stop();
-    this.isComplete = false;
-    this.updateTime();
-    this.intervalId = setInterval(() => this.updateTime(), 1000);
-  }
-
-  stop(): void {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
-  }
-
-  reset(): void {
-    this.isComplete = false;
-    this.updateTime();
-  }
-
-  getTime(): CountdownTime {
-    return this.time();
-  }
-
-  isRunning(): boolean {
-    return this.intervalId !== null;
   }
 }

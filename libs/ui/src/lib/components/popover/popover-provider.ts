@@ -1,5 +1,5 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -12,101 +12,17 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { cn } from '../../utils';
+import {
+  type OverlayAlign,
+  type OverlaySide,
+  buildOverlayPositionsWithFallback,
+  cn,
+} from '../../utils';
 import { ScPopoverPortal } from './popover-portal';
 import { ScPopoverTrigger } from './popover-trigger';
 
-export type ScPopoverSide = 'top' | 'right' | 'bottom' | 'left';
-export type ScPopoverAlign = 'start' | 'center' | 'end';
-
-type PositionKey = `${ScPopoverSide}-${ScPopoverAlign}`;
-
-const positionMap: Record<PositionKey, ConnectedPosition> = {
-  'top-start': {
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'bottom',
-    offsetY: -4,
-  },
-  'top-center': {
-    originX: 'center',
-    originY: 'top',
-    overlayX: 'center',
-    overlayY: 'bottom',
-    offsetY: -4,
-  },
-  'top-end': {
-    originX: 'end',
-    originY: 'top',
-    overlayX: 'end',
-    overlayY: 'bottom',
-    offsetY: -4,
-  },
-  'bottom-start': {
-    originX: 'start',
-    originY: 'bottom',
-    overlayX: 'start',
-    overlayY: 'top',
-    offsetY: 4,
-  },
-  'bottom-center': {
-    originX: 'center',
-    originY: 'bottom',
-    overlayX: 'center',
-    overlayY: 'top',
-    offsetY: 4,
-  },
-  'bottom-end': {
-    originX: 'end',
-    originY: 'bottom',
-    overlayX: 'end',
-    overlayY: 'top',
-    offsetY: 4,
-  },
-  'left-start': {
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'end',
-    overlayY: 'top',
-    offsetX: -4,
-  },
-  'left-center': {
-    originX: 'start',
-    originY: 'center',
-    overlayX: 'end',
-    overlayY: 'center',
-    offsetX: -4,
-  },
-  'left-end': {
-    originX: 'start',
-    originY: 'bottom',
-    overlayX: 'end',
-    overlayY: 'bottom',
-    offsetX: -4,
-  },
-  'right-start': {
-    originX: 'end',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'top',
-    offsetX: 4,
-  },
-  'right-center': {
-    originX: 'end',
-    originY: 'center',
-    overlayX: 'start',
-    overlayY: 'center',
-    offsetX: 4,
-  },
-  'right-end': {
-    originX: 'end',
-    originY: 'bottom',
-    overlayX: 'start',
-    overlayY: 'bottom',
-    offsetX: 4,
-  },
-};
+export type ScPopoverSide = OverlaySide;
+export type ScPopoverAlign = OverlayAlign;
 
 @Component({
   selector: 'div[scPopoverProvider]',
@@ -119,7 +35,7 @@ const positionMap: Record<PositionKey, ConnectedPosition> = {
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="overlayOpen()"
-        [cdkConnectedOverlayPositions]="[position()]"
+        [cdkConnectedOverlayPositions]="positions()"
         (overlayOutsideClick)="close()"
         (overlayKeydown)="onKeydown($event)"
       >
@@ -145,6 +61,14 @@ export class ScPopoverProvider {
   /** Alignment along the side */
   readonly align = input<ScPopoverAlign>('center');
 
+  /** Vertical/horizontal gap (in pixels) between the trigger and the popover */
+  readonly offset = input(4);
+
+  /** Custom overlay origin. Defaults to the trigger element if not provided. */
+  readonly originInput = input<CdkOverlayOrigin | undefined>(undefined, {
+    alias: 'origin',
+  });
+
   /**
    * Logical state: Controls animation state (open/closed)
    * - When true: Triggers entry animation
@@ -163,14 +87,13 @@ export class ScPopoverProvider {
   private readonly triggerChild = contentChild(ScPopoverTrigger);
   protected readonly popoverPortal = contentChild.required(ScPopoverPortal);
 
-  readonly origin = computed(() => this.triggerChild()?.overlayOrigin);
+  readonly origin = computed(
+    () => this.originInput() ?? this.triggerChild()?.overlayOrigin,
+  );
 
-  protected readonly position = computed(() => {
-    const side = this.side();
-    const align = this.align();
-    const key: PositionKey = `${side}-${align}`;
-    return positionMap[key];
-  });
+  protected readonly positions = computed(() =>
+    buildOverlayPositionsWithFallback(this.side(), this.align(), this.offset()),
+  );
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 

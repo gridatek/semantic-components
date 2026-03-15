@@ -1,58 +1,134 @@
 # Emoji Picker
 
-A searchable emoji picker with categories, search functionality, and recently used emojis.
+A composable, searchable emoji picker built from directive primitives.
 
-## Components
+## Components & Directives
 
-- `ScEmojiPicker` - Main emoji picker panel
+- `ScEmojiPicker` - Root provider (manages state, provides `ScEmojiPickerState`)
+- `ScEmojiPickerSearch` - Search input directive
+- `ScEmojiPickerCategoryTabs` - Category tab bar
+- `ScEmojiPickerGrid` - Emoji grid (shows search results or active category)
+- `ScEmojiPickerItem` - Individual emoji button directive
+- `ScEmojiPickerRecent` - Recently used section
+- `ScEmojiPickerEmpty` - Custom empty state directive
 - `ScEmojiPickerTrigger` - Button trigger for use with popover
 
 ## Usage
 
+### Full Picker
+
 ```html
-<!-- Basic usage -->
-<sc-emoji-picker (emojiSelect)="onEmojiSelect($event)" />
+<div scEmojiPicker (emojiSelect)="onEmojiSelect($event)">
+  <div class="border-b p-2">
+    <input scEmojiPickerSearch />
+  </div>
+  <div scEmojiPickerCategoryTabs></div>
+  <div scEmojiPickerGrid></div>
+  <div scEmojiPickerRecent></div>
+</div>
+```
 
-<!-- Without search -->
-<sc-emoji-picker [showSearch]="false" />
+### Without Search
 
-<!-- Without category tabs -->
-<sc-emoji-picker [showCategories]="false" />
+```html
+<div scEmojiPicker (emojiSelect)="onEmojiSelect($event)">
+  <div scEmojiPickerCategoryTabs></div>
+  <div scEmojiPickerGrid></div>
+</div>
+```
 
-<!-- Without recently used -->
-<sc-emoji-picker [showRecent]="false" />
+### Without Category Tabs
 
-<!-- Custom columns -->
-<sc-emoji-picker [columns]="6" class="w-56" />
+```html
+<div scEmojiPicker (emojiSelect)="onEmojiSelect($event)">
+  <div class="border-b p-2">
+    <input scEmojiPickerSearch />
+  </div>
+  <div scEmojiPickerGrid></div>
+</div>
+```
 
-<!-- Two-way binding -->
-<sc-emoji-picker [(value)]="selectedEmoji" />
+### Custom Empty State
+
+```html
+<div scEmojiPicker>
+  <div class="border-b p-2">
+    <input scEmojiPickerSearch />
+  </div>
+  <div scEmojiPickerGrid>
+    <div scEmojiPickerEmpty>No results. Try a different search term.</div>
+  </div>
+</div>
+```
+
+### With Popover
+
+```html
+<div scPopoverProvider>
+  <button scPopoverTrigger scEmojiPickerTrigger></button>
+  <div scPopoverPortal>
+    <div scPopover>
+      <div scEmojiPicker (emojiSelect)="insertEmoji($event)">
+        <div class="border-b p-2">
+          <input scEmojiPickerSearch />
+        </div>
+        <div scEmojiPickerCategoryTabs></div>
+        <div scEmojiPickerGrid></div>
+        <div scEmojiPickerRecent></div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### Two-Way Binding
+
+```html
+<div scEmojiPicker [(value)]="selectedEmoji">
+  <div scEmojiPickerCategoryTabs></div>
+  <div scEmojiPickerGrid></div>
+</div>
 ```
 
 ## API
 
 ### ScEmojiPicker
 
-| Input            | Type              | Default            | Description                      |
-| ---------------- | ----------------- | ------------------ | -------------------------------- |
-| `class`          | `string`          | `''`               | Additional CSS classes           |
-| `categories`     | `EmojiCategory[]` | Default categories | Custom emoji categories          |
-| `showSearch`     | `boolean`         | `true`             | Show search input                |
-| `showCategories` | `boolean`         | `true`             | Show category tabs               |
-| `showRecent`     | `boolean`         | `true`             | Show recently used section       |
-| `maxRecent`      | `number`          | `8`                | Max recently used emojis to show |
-| `columns`        | `number`          | `8`                | Number of columns in grid        |
-| `value`          | `string`          | `''`               | Selected emoji (two-way)         |
+| Input        | Type              | Default            | Description                      |
+| ------------ | ----------------- | ------------------ | -------------------------------- |
+| `class`      | `string`          | `''`               | Additional CSS classes           |
+| `categories` | `EmojiCategory[]` | Default categories | Custom emoji categories          |
+| `maxRecent`  | `number`          | `8`                | Max recently used emojis to show |
+| `columns`    | `number`          | `8`                | Number of columns in grid        |
+| `value`      | `string`          | `''`               | Selected emoji (two-way)         |
 
 | Output        | Type    | Description                    |
 | ------------- | ------- | ------------------------------ |
 | `emojiSelect` | `Emoji` | Emitted when emoji is selected |
 
-### ScEmojiPickerTrigger
+### ScEmojiPickerSearch
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+Attribute directive for `<input>` elements. Automatically binds to the picker's search state.
+
+### ScEmojiPickerCategoryTabs
+
+Renders category tab buttons from the picker's categories.
+
+### ScEmojiPickerGrid
+
+Displays the emoji grid. Shows search results when searching, otherwise shows the active category.
+
+### ScEmojiPickerItem
+
+Attribute directive for emoji buttons. Requires an `emoji` input.
+
+### ScEmojiPickerRecent
+
+Displays recently used emojis. Auto-hides when empty or when searching.
+
+### ScEmojiPickerEmpty
+
+Attribute directive for custom empty state content inside `ScEmojiPickerGrid`.
 
 ## Types
 
@@ -70,82 +146,3 @@ interface EmojiCategory {
   emojis: Emoji[];
 }
 ```
-
-## Default Categories
-
-The picker includes these default categories:
-
-- Smileys & Emotion (😀)
-- People & Body (👋)
-- Animals & Nature (🐶)
-- Food & Drink (🍔)
-- Activities (⚽)
-- Objects (💡)
-- Symbols (❤️)
-- Flags (🏁)
-
-## Examples
-
-### With Popover
-
-```html
-<div scPopoverProvider>
-  <button scPopoverTrigger scEmojiPickerTrigger></button>
-  <div scPopoverPortal>
-    <div scPopover>
-      <sc-emoji-picker (emojiSelect)="insertEmoji($event)" />
-    </div>
-  </div>
-</div>
-```
-
-### In Chat Input
-
-```html
-<div class="relative">
-  <input type="text" [(ngModel)]="message" />
-  <button (click)="showPicker = !showPicker">😀</button>
-</div>
-@if (showPicker) {
-<sc-emoji-picker (emojiSelect)="message = message + $event.emoji; showPicker = false" />
-}
-```
-
-### Quick Reactions
-
-```html
-<div class="flex gap-1">
-  @for (emoji of ['👍', '❤️', '😂', '😮', '😢']; track emoji) {
-  <button (click)="addReaction(emoji)">{{ emoji }}</button>
-  }
-</div>
-```
-
-### Custom Categories
-
-```typescript
-const customCategories: EmojiCategory[] = [
-  {
-    id: 'favorites',
-    name: 'Favorites',
-    icon: '⭐',
-    emojis: [
-      { emoji: '👍', name: 'thumbs up' },
-      { emoji: '❤️', name: 'red heart' },
-      { emoji: '🎉', name: 'party popper' },
-    ],
-  },
-];
-```
-
-```html
-<sc-emoji-picker [categories]="customCategories" />
-```
-
-## Features
-
-- **Search**: Type to filter emojis by name or keywords
-- **Categories**: Navigate between emoji categories with tabs
-- **Recently Used**: Automatically tracks recently selected emojis
-- **Keyboard Navigation**: Navigate with arrow keys
-- **Accessible**: Proper ARIA labels for screen readers

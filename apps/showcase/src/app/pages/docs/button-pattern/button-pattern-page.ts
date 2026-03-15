@@ -6,10 +6,16 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { ButtonPatternUsageDemoContainer } from './demos/button-pattern-usage-demo-container';
 
 @Component({
   selector: 'app-button-pattern-page',
-  imports: [TocHeading, ComponentBadges, ScHeading],
+  imports: [
+    TocHeading,
+    ComponentBadges,
+    ScHeading,
+    ButtonPatternUsageDemoContainer,
+  ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -22,9 +28,7 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
-        <pre
-          class="bg-muted rounded-md p-4 text-sm"
-        ><code>{{ usageCode }}</code></pre>
+        <app-button-pattern-usage-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -54,16 +58,4 @@ import { TocHeading } from '../../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ButtonPatternPage {
-  readonly usageCode = `import { ScButtonPattern } from '@semantic-components/ui-lab';
-
-@Component({
-  imports: [ScButtonPattern],
-  template: \`
-    <div scButtonPattern (click)="doSomething()">Click me</div>
-  \`,
-})
-export class MyComponent {
-  doSomething() {}
-}`;
-}
+export default class ButtonPatternPage {}

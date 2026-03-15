@@ -5,33 +5,35 @@ import {
 } from '@angular/core';
 import {
   ScMarquee,
-  ScMarqueeClone,
+  ScMarqueeContent,
   ScMarqueeItem,
 } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-vertical-marquee-demo',
-  imports: [ScMarquee, ScMarqueeClone, ScMarqueeItem],
+  imports: [ScMarquee, ScMarqueeContent, ScMarqueeItem],
   template: `
     <div class="h-48 overflow-hidden rounded-lg border">
-      <sc-marquee direction="vertical" [duration]="20" [gap]="12">
-        @for (notification of notifications; track notification.id) {
-          <div
-            scMarqueeItem
-            class="bg-background mx-2 rounded-lg border p-3 shadow-sm"
-          >
-            <div class="flex items-start gap-2">
-              <span class="text-lg">{{ notification.icon }}</span>
-              <div>
-                <p class="text-sm font-medium">{{ notification.title }}</p>
-                <p class="text-muted-foreground text-xs">
-                  {{ notification.time }}
-                </p>
+      <div scMarquee direction="vertical" [duration]="20" [gap]="12">
+        <div scMarqueeContent>
+          @for (notification of notifications; track notification.id) {
+            <div
+              scMarqueeItem
+              class="bg-background mx-2 rounded-lg border p-3 shadow-sm"
+            >
+              <div class="flex items-start gap-2">
+                <span class="text-lg">{{ notification.icon }}</span>
+                <div>
+                  <p class="text-sm font-medium">{{ notification.title }}</p>
+                  <p class="text-muted-foreground text-xs">
+                    {{ notification.time }}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        }
-        <ng-container scMarqueeClone>
+          }
+        </div>
+        <div scMarqueeContent aria-hidden="true">
           @for (notification of notifications; track notification.id) {
             <div
               scMarqueeItem
@@ -50,11 +52,11 @@ import {
               </div>
             </div>
           }
-        </ng-container>
-      </sc-marquee>
+        </div>
+      </div>
     </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

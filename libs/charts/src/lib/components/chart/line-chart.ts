@@ -21,6 +21,8 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
       class="w-full"
       [style.height.px]="height()"
       preserveAspectRatio="xMidYMid meet"
+      role="img"
+      [attr.aria-label]="ariaLabel()"
     >
       <!-- Grid lines -->
       @for (line of gridLines(); track line) {
@@ -32,12 +34,14 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
           stroke="currentColor"
           class="text-border"
           stroke-dasharray="4 4"
+          aria-hidden="true"
         />
         <text
           [attr.x]="padding().left - 8"
           [attr.y]="line.y + 4"
           text-anchor="end"
           class="fill-muted-foreground text-xs"
+          aria-hidden="true"
         >
           {{ line.label }}
         </text>
@@ -49,6 +53,7 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
           [attr.d]="areaPath()"
           [attr.fill]="areaColor()"
           class="opacity-20"
+          aria-hidden="true"
         />
       }
 
@@ -59,6 +64,7 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
         [attr.stroke]="lineColor()"
         stroke-width="2"
         stroke-linecap="round"
+        aria-hidden="true"
       />
 
       <!-- Points -->
@@ -69,9 +75,15 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
             [attr.cy]="point.y"
             r="4"
             [attr.fill]="lineColor()"
-            class="hover:r-6 cursor-pointer transition-all"
+            class="hover:r-6 focus-visible:r-6 cursor-pointer transition-all outline-none"
+            tabindex="0"
+            role="graphics-symbol"
+            [attr.aria-label]="point.label + ': ' + point.value"
             (mouseenter)="onPointHover($event, point)"
             (mouseleave)="onPointLeave()"
+            (focus)="onPointFocus($event, point)"
+            (blur)="onPointLeave()"
+            (keydown)="onPointKeydown($event, i)"
           />
         }
       }
@@ -84,6 +96,7 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
             [attr.y]="chartHeight() + padding().top + 16"
             text-anchor="middle"
             class="fill-muted-foreground text-xs"
+            aria-hidden="true"
           >
             {{ point.label }}
           </text>
@@ -91,17 +104,20 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
       }
     </svg>
 
-    @if (hoveredPoint()) {
-      <div
-        class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
-        [style.left.px]="tooltipX()"
-        [style.top.px]="tooltipY()"
-        [style.transform]="'translate(-50%, -100%) translateY(-8px)'"
-      >
-        <div class="font-medium">{{ hoveredPoint()!.label }}</div>
-        <div class="text-muted-foreground">{{ hoveredPoint()!.value }}</div>
-      </div>
-    }
+    <div
+      class="bg-background pointer-events-none absolute z-50 rounded-lg border px-3 py-1.5 text-sm shadow-md"
+      [class.invisible]="!hoveredPoint()"
+      [style.left.px]="tooltipX()"
+      [style.top.px]="tooltipY()"
+      [style.transform]="'translate(-50%, -100%) translateY(-8px)'"
+      role="tooltip"
+      aria-live="polite"
+    >
+      @if (hoveredPoint(); as point) {
+        <div class="font-medium">{{ point.label }}</div>
+        <div class="text-muted-foreground">{{ point.value }}</div>
+      }
+    </div>
   `,
   host: {
     'data-slot': 'line-chart',
@@ -121,6 +137,7 @@ export class ScLineChart {
   readonly showPoints = input<boolean>(true);
   readonly color = input<string>('');
   readonly labelStep = input<number>(1);
+  readonly ariaLabel = input<string>('Line chart');
 
   readonly hoveredPoint = signal<ChartDataPoint | null>(null);
   readonly tooltipX = signal(0);
@@ -213,7 +230,39 @@ export class ScLineChart {
     this.hoveredPoint.set(point);
   }
 
+  onPointFocus(event: FocusEvent, point: ChartDataPoint): void {
+    const circle = event.target as SVGElement;
+    const parentRect = circle.closest('[scLineChart]')?.getBoundingClientRect();
+    const circleRect = circle.getBoundingClientRect();
+    if (parentRect) {
+      this.tooltipX.set(
+        circleRect.left - parentRect.left + circleRect.width / 2,
+      );
+      this.tooltipY.set(circleRect.top - parentRect.top);
+    }
+    this.hoveredPoint.set(point);
+  }
+
   onPointLeave(): void {
     this.hoveredPoint.set(null);
+  }
+
+  onPointKeydown(event: KeyboardEvent, index: number): void {
+    const points = this.points();
+    let nextIndex = index;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      nextIndex = (index + 1) % points.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      nextIndex = (index - 1 + points.length) % points.length;
+    } else {
+      return;
+    }
+
+    const svg = (event.target as SVGElement).closest('svg');
+    const circles = svg?.querySelectorAll<SVGElement>('circle[tabindex]');
+    circles?.[nextIndex]?.focus();
   }
 }

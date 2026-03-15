@@ -4,9 +4,12 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  viewChild,
+  signal,
 } from '@angular/core';
+import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
+  ScInputGroup,
+  ScInputGroupAddon,
   ScSelect,
   ScSelectDisplayValue,
   ScSelectIcon,
@@ -33,9 +36,15 @@ import {
   SiUserIcon,
 } from '@semantic-icons/lucide-icons';
 
+interface FormModel {
+  category: string;
+}
+
 @Component({
   selector: 'app-select-demo',
   imports: [
+    ScInputGroup,
+    ScInputGroupAddon,
     ScSelect,
     ScSelectDisplayValue,
     ScSelectPopup,
@@ -59,39 +68,50 @@ import {
     ScSelectItemLabel,
     SiChevronDownIcon,
     SiCheckIcon,
+    FormField,
+    FormRoot,
   ],
   template: `
-    <div scSelect class="w-48">
-      <div scSelectOrigin>
-        @if (displayIcon(); as icon) {
-          <ng-container
-            *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-          ></ng-container>
-        }
-        <span scSelectDisplayValue></span>
-        <input
-          scSelectInput
-          placeholder="Select a label"
-          aria-label="Label dropdown"
-        />
-        <svg scSelectIcon siChevronDownIcon></svg>
-      </div>
-      <ng-template scSelectPortal>
-        <div scSelectPopup>
-          <div scSelectList>
-            @for (option of options; track option.value) {
-              <div scSelectItem [value]="option.value" [label]="option.label">
+    <form [formRoot]="selectForm">
+      <div scSelect class="w-48">
+        <div scSelectOrigin>
+          <div scInputGroup>
+            @if (displayIcon(); as icon) {
+              <div scInputGroupAddon align="inline-start">
                 <ng-container
-                  *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+                  *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
                 ></ng-container>
-                <span scSelectItemLabel>{{ option.label }}</span>
-                <svg scSelectItemIndicator siCheckIcon></svg>
               </div>
             }
+            <span scSelectDisplayValue>{{ displayValue() }}</span>
+            <input
+              scSelectInput
+              [formField]="selectForm.category"
+              placeholder="Select a category"
+              aria-label="Category dropdown"
+            />
+            <div scInputGroupAddon align="inline-end">
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
           </div>
         </div>
-      </ng-template>
-    </div>
+        <ng-template scSelectPortal>
+          <div scSelectPopup>
+            <div scSelectList>
+              @for (option of options; track option.value) {
+                <div scSelectItem [value]="option.value" [label]="option.label">
+                  <ng-container
+                    *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+                  ></ng-container>
+                  <span scSelectItemLabel>{{ option.label }}</span>
+                  <svg scSelectItemIndicator siCheckIcon></svg>
+                </div>
+              }
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </form>
 
     <ng-template #iconTmpl let-icon="icon">
       @switch (icon) {
@@ -121,17 +141,25 @@ import {
         }
       }
     </ng-template>
+
+    <div class="bg-muted mt-4 w-48 rounded-md p-4">
+      <p class="text-sm">Selected value: {{ selectForm.category().value() }}</p>
+      <p class="text-sm">Display value: {{ displayValue() }}</p>
+    </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDemo {
-  private readonly select = viewChild.required(ScSelect);
+  readonly formModel = signal<FormModel>({ category: '' });
+  readonly selectForm = form(this.formModel);
+
+  displayValue = computed(() => this.selectForm.category().value());
 
   displayIcon = computed(() => {
-    const value = this.select().value();
-    const option = this.options.find((o) => o.value === value);
+    const label = this.selectForm.category().value();
+    const option = this.options.find((o) => o.label === label);
     return option ? option.icon : '';
   });
 

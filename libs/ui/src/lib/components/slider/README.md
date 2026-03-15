@@ -11,7 +11,7 @@ A directive that styles native `<input type="range">` elements with a filled tra
 ### Basic
 
 ```html
-<input scSlider [value]="volume()" (input)="onInput($event)" />
+<input scSlider [value]="volume()" />
 ```
 
 ### With Label (ScField)
@@ -19,14 +19,14 @@ A directive that styles native `<input type="range">` elements with a filled tra
 ```html
 <div scField class="w-[280px]">
   <label scLabel>Volume — {{ value() }}</label>
-  <input scSlider [value]="value()" (input)="onInput($event)" />
+  <input scSlider [value]="value()" />
 </div>
 ```
 
 ### Custom Min/Max
 
 ```html
-<input scSlider min="0" max="200" [value]="brightness()" (input)="onInput($event)" />
+<input scSlider min="0" max="200" [value]="brightness()" />
 ```
 
 ### Custom Color
@@ -35,7 +35,7 @@ Override `--primary`, `--muted`, and `--ring` CSS variables on a parent element 
 
 ```html
 <div style="--primary: oklch(0.6 0.25 30); --muted: oklch(0.9 0.05 30); --ring: oklch(0.6 0.25 30)">
-  <input scSlider [value]="temperature()" (input)="onInput($event)" />
+  <input scSlider [value]="temperature()" />
 </div>
 ```
 

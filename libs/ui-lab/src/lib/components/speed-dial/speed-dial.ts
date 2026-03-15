@@ -1,127 +1,45 @@
-import { NgComponentOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
+  Directive,
   ElementRef,
-  Type,
-  ViewEncapsulation,
   afterNextRender,
   computed,
+  contentChildren,
   inject,
   input,
   model,
-  output,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SiPlusIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 import { ScSpeedDialAction } from './speed-dial-action';
-import type {
-  SpeedDialAction,
-  SpeedDialActionClickEvent,
+import {
+  SC_SPEED_DIAL,
   SpeedDialDirection,
+  SpeedDialSize,
 } from './speed-dial-types';
 
-@Component({
-  selector: 'sc-speed-dial',
-  imports: [ScSpeedDialAction, SiPlusIcon, SiXIcon, NgComponentOutlet],
-  template: `
-    <div [class]="containerClass()" role="menu" [attr.aria-expanded]="open()">
-      <!-- Actions -->
-      <div [class]="actionsContainerClass()" [attr.aria-hidden]="!open()">
-        @for (action of actions(); track action.id; let i = $index) {
-          <div
-            [class]="actionWrapperClass(i)"
-            [style.transition-delay]="
-              open() ? i * 50 + 'ms' : (actions().length - 1 - i) * 30 + 'ms'
-            "
-          >
-            <sc-speed-dial-action
-              [icon]="action.icon"
-              [label]="action.label"
-              [disabled]="action.disabled ?? false"
-              [ariaLabel]="action.ariaLabel"
-              [showLabel]="showLabels()"
-              [labelVisible]="open()"
-              [size]="actionSize()"
-              [class]="
-                direction() === 'left'
-                  ? 'direction-left'
-                  : direction() === 'right'
-                    ? 'direction-right'
-                    : ''
-              "
-              (actionClick)="onActionClick(action, i)"
-            />
-          </div>
-        }
-      </div>
-
-      <!-- Main FAB button -->
-      <button
-        type="button"
-        [class]="fabClass()"
-        [attr.aria-label]="ariaLabel()"
-        [attr.aria-expanded]="open()"
-        [attr.aria-haspopup]="true"
-        (click)="toggle()"
-      >
-        <span [class]="fabIconClass()">
-          @if (open()) {
-            @if (closeIcon()) {
-              <ng-container *ngComponentOutlet="closeIcon()" />
-            } @else {
-              <svg siXIcon class="size-6"></svg>
-            }
-          } @else {
-            @if (icon()) {
-              <ng-container *ngComponentOutlet="icon()" />
-            } @else {
-              <svg siPlusIcon class="size-6"></svg>
-            }
-          }
-        </span>
-        @if (label() && !open()) {
-          <span class="sr-only">{{ label() }}</span>
-        }
-      </button>
-    </div>
-  `,
-  styles: `
-    :host {
-      display: inline-block;
-      position: relative;
-    }
-  `,
+@Directive({
+  selector: '[scSpeedDial]',
+  exportAs: 'scSpeedDial',
+  providers: [{ provide: SC_SPEED_DIAL, useExisting: ScSpeedDial }],
   host: {
+    'data-slot': 'speed-dial',
+    '[class]': 'class()',
     '(document:keydown.escape)': 'onEscape()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSpeedDial {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
 
-  readonly actions = input<SpeedDialAction[]>([]);
+  readonly classInput = input<string>('', { alias: 'class' });
   readonly direction = input<SpeedDialDirection>('up');
-  readonly icon = input<Type<unknown> | null>(null);
-  readonly closeIcon = input<Type<unknown> | null>(null);
-  readonly label = input<string>('Open actions');
-  readonly ariaLabel = input<string>('Speed dial');
-  readonly showLabels = input(true);
-  readonly closeOnActionClick = input(true);
-  readonly closeOnOutsideClick = input(true);
-  readonly size = input<'sm' | 'md' | 'lg'>('md');
-  readonly actionSize = input<'sm' | 'md' | 'lg'>('md');
-  readonly class = input<string>('');
+  readonly size = input<SpeedDialSize>('md');
 
   readonly open = model(false);
 
-  readonly actionClick = output<SpeedDialActionClickEvent>();
-  readonly openChange = output<boolean>();
+  readonly actions = contentChildren(ScSpeedDialAction);
 
-  protected readonly containerClass = computed(() => {
+  protected readonly class = computed(() => {
     const dir = this.direction();
     return cn(
       'relative inline-flex',
@@ -129,62 +47,9 @@ export class ScSpeedDial {
       dir === 'down' && 'flex-col items-center',
       dir === 'left' && 'flex-row-reverse items-center',
       dir === 'right' && 'flex-row items-center',
-      this.class(),
+      this.classInput(),
     );
   });
-
-  protected readonly actionsContainerClass = computed(() => {
-    const dir = this.direction();
-    return cn(
-      'flex',
-      dir === 'up' && 'flex-col-reverse items-center gap-3 mb-3',
-      dir === 'down' && 'flex-col items-center gap-3 mt-3',
-      dir === 'left' && 'flex-row-reverse items-center gap-3 mr-3',
-      dir === 'right' && 'flex-row items-center gap-3 ml-3',
-    );
-  });
-
-  protected readonly fabClass = computed(() =>
-    cn(
-      'inline-flex items-center justify-center rounded-full',
-      'bg-primary text-primary-foreground',
-      'shadow-lg hover:shadow-xl',
-      'transition-all duration-300',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      this.open() && 'rotate-0',
-      this.fabSizeClasses(),
-    ),
-  );
-
-  protected readonly fabIconClass = computed(() =>
-    cn(
-      'inline-flex items-center justify-center',
-      'transition-transform duration-300',
-      '[&>svg]:w-6 [&>svg]:h-6',
-    ),
-  );
-
-  protected actionWrapperClass(index: number): string {
-    return cn(
-      'transition-all duration-200 ease-out',
-      this.open()
-        ? 'opacity-100 scale-100 translate-y-0 translate-x-0'
-        : 'opacity-0 scale-75 pointer-events-none',
-      !this.open() && this.direction() === 'up' && 'translate-y-4',
-      !this.open() && this.direction() === 'down' && '-translate-y-4',
-      !this.open() && this.direction() === 'left' && 'translate-x-4',
-      !this.open() && this.direction() === 'right' && '-translate-x-4',
-    );
-  }
-
-  private fabSizeClasses(): string {
-    const sizes = {
-      sm: 'h-12 w-12',
-      md: 'h-14 w-14',
-      lg: 'h-16 w-16',
-    };
-    return sizes[this.size()];
-  }
 
   constructor() {
     afterNextRender(() => {
@@ -194,20 +59,11 @@ export class ScSpeedDial {
 
   toggle(): void {
     this.open.update((v) => !v);
-    this.openChange.emit(this.open());
   }
 
   close(): void {
     if (this.open()) {
       this.open.set(false);
-      this.openChange.emit(false);
-    }
-  }
-
-  onActionClick(action: SpeedDialAction, index: number): void {
-    this.actionClick.emit({ action, index });
-    if (this.closeOnActionClick()) {
-      this.close();
     }
   }
 
@@ -217,7 +73,7 @@ export class ScSpeedDial {
 
   private setupOutsideClickHandler(): void {
     const handler = (event: MouseEvent) => {
-      if (!this.closeOnOutsideClick() || !this.open()) return;
+      if (!this.open()) return;
 
       const target = event.target as HTMLElement;
       if (!this.elementRef.nativeElement.contains(target)) {

@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
-  ScButton,
+  ScInputButton,
   ScKbd,
   ScLink,
   ScNavigationMenu,
@@ -18,6 +18,7 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuPortal,
   ScNavigationMenuTrigger,
+  ScThemeModeToggle,
   cn,
 } from '@semantic-components/ui';
 import {
@@ -30,7 +31,6 @@ import {
   ScNavbarMobilePortal,
   ScNavbarMobileTrigger,
   ScNavbarProvider,
-  ScThemeToggle,
 } from '@semantic-components/ui-lab';
 import {
   SiGithubIcon,
@@ -40,9 +40,9 @@ import {
   SiSunIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { CommandPaletteService } from '../../services/command-palette.service';
 import { ComponentsService } from '../../services/components.service';
 import { GithubService } from '../../services/github.service';
-import { CommandSearchService } from '../command-search/command-search.service';
 import { Logo } from '../logo/logo';
 
 @Component({
@@ -59,8 +59,10 @@ import { Logo } from '../logo/logo';
     ScNavbarMobileMenu,
     ScNavbarMobileLink,
     ScNavbarMobileTrigger,
+    ScInputButton,
+    ScKbd,
     ScLink,
-    ScThemeToggle,
+    ScThemeModeToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
     ScNavigationMenuItem,
@@ -68,8 +70,6 @@ import { Logo } from '../logo/logo';
     ScNavigationMenuList,
     ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
-    ScButton,
-    ScKbd,
     SiGithubIcon,
     SiSearchIcon,
     SiSunIcon,
@@ -147,26 +147,13 @@ import { Logo } from '../logo/logo';
         <!-- Actions -->
         <div scNavbarActions>
           <button
-            scButton
-            variant="outline"
-            (click)="openSearch()"
-            class="text-muted-foreground relative hidden h-8 w-64 justify-start rounded-md text-sm md:flex"
+            scInputButton
+            class="hidden w-48 md:flex lg:w-64"
+            (click)="openCommandPalette()"
           >
-            <svg siSearchIcon class="mr-2 size-4"></svg>
-            <span>Search docs...</span>
-            <kbd scKbd class="pointer-events-none absolute top-1.5 right-1.5">
-              ⌘K
-            </kbd>
-          </button>
-          <button
-            scButton
-            variant="ghost"
-            size="icon"
-            (click)="openSearch()"
-            aria-label="Search"
-            class="md:hidden"
-          >
-            <svg siSearchIcon></svg>
+            <svg siSearchIcon class="size-4 shrink-0"></svg>
+            <span class="flex-1 text-start">Search...</span>
+            <kbd scKbd>&#8984;K</kbd>
           </button>
           <a
             scLink
@@ -203,11 +190,13 @@ import { Logo } from '../logo/logo';
           >
             Get Started
           </a>
-          <button scThemeToggle #themeToggle="scThemeToggle">
+          <button scThemeModeToggle #themeToggle="scThemeModeToggle">
             @if (themeToggle.isDark()) {
               <svg siSunIcon></svg>
+              <span class="sr-only">Switch to light theme</span>
             } @else {
               <svg siMoonIcon></svg>
+              <span class="sr-only">Switch to dark theme</span>
             }
           </button>
           <button scNavbarMobileTrigger #trigger="scNavbarMobileTrigger">
@@ -266,9 +255,9 @@ export default class Navbar {
   private readonly github = inject(GithubService);
   protected readonly starCount = this.github.starCount;
 
-  private readonly commandSearch = inject(CommandSearchService);
+  private readonly commandPalette = inject(CommandPaletteService);
 
-  openSearch(): void {
-    this.commandSearch.open();
+  openCommandPalette(): void {
+    this.commandPalette.open.set(true);
   }
 }

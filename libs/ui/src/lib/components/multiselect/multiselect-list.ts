@@ -38,6 +38,10 @@ export class ScMultiselectList {
 
   readonly values = computed(() => this.listbox.values());
 
+  setValues(values: unknown[]) {
+    this.listbox.values.set(values as never);
+  }
+
   resetScroll(): void {
     this.elementRef.nativeElement.scrollTo(0, 0);
   }

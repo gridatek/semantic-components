@@ -13,6 +13,7 @@ import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScLink, ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
@@ -30,6 +31,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScSeparator,
     ScLink,
     ScHeading,
+    PackageManagerInstall,
   ],
   template: `
     <div class="space-y-8">
@@ -46,26 +48,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scHeading appToc>1. Install the package</h2>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>terminal</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="installCode"
-              #copy="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div scCodeViewerContent [code]="installCode" language="bash"></div>
-        </div>
+        <app-package-manager-install packages="@semantic-components/ui" />
       </section>
 
       <div scSeparator></div>
@@ -224,8 +207,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UiPage {
-  readonly installCode = 'npm install @semantic-components/ui';
-
   readonly stylesDefaultCode = '@import "@semantic-components/ui/styles";';
 
   readonly stylesCustomCdkCode =
@@ -242,5 +223,5 @@ export default class UiPage {
     <button scButton>Click me</button>
   \`,
 })
-export class ExampleComponent {}`;
+export class Example {}`;
 }

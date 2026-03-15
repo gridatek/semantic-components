@@ -5,7 +5,14 @@ import StarterKit from '@tiptap/starter-kit';
 import { Directive, InjectionToken, input, signal } from '@angular/core';
 
 export type ScEditorAlignment = 'left' | 'center' | 'right' | 'justify';
-export type ScEditorHeading = 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export type ScEditorHeadingLevel =
+  | 'p'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6';
 
 export const SC_EDITOR = new InjectionToken<ScEditor>('SC_EDITOR');
 
@@ -31,7 +38,7 @@ export class ScEditor {
   readonly isUnorderedList = signal(false);
   readonly isBlockquote = signal(false);
   readonly alignment = signal<ScEditorAlignment>('left');
-  readonly currentHeading = signal<ScEditorHeading>('p');
+  readonly currentHeading = signal<ScEditorHeadingLevel>('p');
   readonly canUndo = signal(false);
   readonly canRedo = signal(false);
 
@@ -206,7 +213,7 @@ export class ScEditor {
     // Check heading level
     for (let level = 1; level <= 6; level++) {
       if (editor.isActive('heading', { level })) {
-        this.currentHeading.set(`h${level}` as ScEditorHeading);
+        this.currentHeading.set(`h${level}` as ScEditorHeadingLevel);
         this.canUndo.set(editor.can().undo());
         this.canRedo.set(editor.can().redo());
         return;

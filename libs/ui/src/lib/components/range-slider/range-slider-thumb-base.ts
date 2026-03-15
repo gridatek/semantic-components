@@ -9,7 +9,7 @@ const SHARED_THUMB_CLASSES = [
   '[&:focus-visible::-moz-range-thumb]:shadow-[0_0_0_3px_oklch(from_var(--ring)_l_c_h/0.5)]',
 ] as const;
 
-export const MIN_THUMB_CLASSES = [
+export const START_THUMB_CLASSES = [
   ...SHARED_THUMB_CLASSES,
   'z-10',
   '[&::-webkit-slider-thumb]:-mt-1.5',
@@ -17,7 +17,7 @@ export const MIN_THUMB_CLASSES = [
   '[&::-moz-range-track]:h-0 [&::-moz-range-track]:bg-transparent',
 ] as const;
 
-export const MAX_THUMB_CLASSES = [
+export const END_THUMB_CLASSES = [
   ...SHARED_THUMB_CLASSES,
   '[&::-webkit-slider-thumb]:-mt-1',
   '[&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--muted)_var(--min-percent),var(--primary)_var(--min-percent)_var(--max-percent),var(--muted)_var(--max-percent))]',

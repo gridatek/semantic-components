@@ -11,12 +11,17 @@ import { CHART_COLORS } from './chart-types';
 @Component({
   selector: '[scChartLegend]',
   template: `
-    <div class="flex flex-wrap items-center justify-center gap-4">
+    <div
+      class="flex flex-wrap items-center justify-center gap-4"
+      role="list"
+      aria-label="Chart legend"
+    >
       @for (item of items(); track item.label; let i = $index) {
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2" role="listitem">
           <div
             class="size-3 rounded-sm"
             [style.background-color]="item.color || getColor(i)"
+            aria-hidden="true"
           ></div>
           <span class="text-muted-foreground text-sm">{{ item.label }}</span>
         </div>

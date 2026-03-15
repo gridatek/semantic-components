@@ -23,8 +23,12 @@ import { PrefixAnimatedCounterDemoContainer } from './demos/prefix-animated-coun
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>AnimatedCounter</h1>
-        <p class="text-muted-foreground">A animated counter component.</p>
+        <h1 scHeading>Animated Counter</h1>
+        <p class="text-muted-foreground">
+          Animated number counting using the
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">motion</code>
+          library.
+        </p>
         <app-component-badges path="animated-counter" />
       </div>
 

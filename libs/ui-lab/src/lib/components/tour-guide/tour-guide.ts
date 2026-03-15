@@ -7,7 +7,6 @@ import {
   ViewEncapsulation,
   computed,
   inject,
-  input,
   output,
   signal,
 } from '@angular/core';

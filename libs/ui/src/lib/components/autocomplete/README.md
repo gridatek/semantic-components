@@ -91,7 +91,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExampleComponent {
+export class Example {
   query = signal('');
   allItems = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
   items = computed(() => this.allItems.filter((item) => item.toLowerCase().startsWith(this.query().toLowerCase())));

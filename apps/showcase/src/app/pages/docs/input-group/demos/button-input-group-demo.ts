@@ -4,10 +4,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScButton,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
-  ScInputGroupButton,
   ScInputGroupText,
 } from '@semantic-components/ui';
 import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
@@ -17,7 +17,7 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
   imports: [
     ScInputGroup,
     ScInputGroupAddon,
-    ScInputGroupButton,
+    ScButton,
     ScInput,
     ScInputGroupText,
     SiSearchIcon,
@@ -30,9 +30,9 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
           <svg siSearchIcon></svg>
         </span>
       </div>
-      <input scInput variant="group" placeholder="Search..." />
+      <input scInput placeholder="Search..." />
       <div scInputGroupAddon align="inline-end">
-        <button scInputGroupButton size="icon-xs" aria-label="Clear">
+        <button scButton variant="ghost" size="icon-xs" aria-label="Clear">
           <svg siXIcon></svg>
         </button>
       </div>

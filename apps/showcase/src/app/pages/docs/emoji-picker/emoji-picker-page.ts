@@ -35,7 +35,7 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>EmojiPicker</h1>
+        <h1 scHeading>Emoji Picker</h1>
         <p class="text-muted-foreground">
           A searchable emoji picker with categories and recently used emojis.
         </p>

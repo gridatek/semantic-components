@@ -3,21 +3,14 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
-} from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicPasswordFieldDemoContainer from './demos/basic-password-field-demo-container';
 import DisabledPasswordFieldDemoContainer from './demos/disabled-password-field-demo-container';
 import FullPasswordFieldDemoContainer from './demos/full-password-field-demo-container';
 import NewPasswordFieldDemoContainer from './demos/new-password-field-demo-container';
+import { PasswordFieldUsageDemoContainer } from './demos/password-field-usage-demo-container';
 import RequirementsPasswordFieldDemoContainer from './demos/requirements-password-field-demo-container';
 import ShowDefaultPasswordFieldDemoContainer from './demos/show-default-password-field-demo-container';
 import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-demo-container';
@@ -25,14 +18,6 @@ import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-
 @Component({
   selector: 'app-password-field-page',
   imports: [
-    ScCodeViewer,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScCodeViewerContent,
-    ScButton,
-    ScCopyToClipboard,
-    SiCheckIcon,
-    SiCopyIcon,
     BasicPasswordFieldDemoContainer,
     ShowDefaultPasswordFieldDemoContainer,
     DisabledPasswordFieldDemoContainer,
@@ -40,6 +25,7 @@ import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-
     StrengthPasswordFieldDemoContainer,
     RequirementsPasswordFieldDemoContainer,
     FullPasswordFieldDemoContainer,
+    PasswordFieldUsageDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -56,30 +42,7 @@ import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-
 
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-password-field-usage-demo-container />
       </section>
 
       <section class="space-y-8">
@@ -97,41 +60,4 @@ import StrengthPasswordFieldDemoContainer from './demos/strength-password-field-
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class PasswordFieldPage {
-  readonly usageCode = `import {
-  ScPasswordField,
-  ScPasswordFieldInputGroup,
-  ScPasswordFieldInput,
-  ScPasswordFieldToggle,
-  ScLabel,
-} from '@semantic-components/ui-lab';
-
-@Component({
-  imports: [
-    ScPasswordField,
-    ScPasswordFieldInputGroup,
-    ScPasswordFieldInput,
-    ScPasswordFieldToggle,
-    ScLabel,
-    TocHeading,
-  ],
-  template: \`
-    <div class="space-y-2">
-      <label scLabel for="password">Password</label>
-      <div scPasswordField [(value)]="password">
-        <div scPasswordFieldInputGroup>
-          <input
-            scPasswordFieldInput
-            id="password"
-            placeholder="Enter password"
-          />
-          <button scPasswordFieldToggle></button>
-        </div>
-      </div>
-    </div>
-  \`,
-})
-export class MyComponent {
-  readonly password = signal<string>('');
-}`;
-}
+export default class PasswordFieldPage {}

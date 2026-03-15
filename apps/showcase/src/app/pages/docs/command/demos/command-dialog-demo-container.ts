@@ -32,7 +32,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScButton,
   ScCommand,
   ScCommandEmpty,
   ScCommandGroup,
@@ -49,6 +48,7 @@ import {
   ScDialogProvider,
   ScDialogTrigger,
   ScHotkey,
+  ScInputButton,
   ScKbd,
 } from '@semantic-components/ui';
 import {
@@ -72,7 +72,6 @@ interface CommandItem {
 @Component({
   selector: 'app-command-dialog-demo',
   imports: [
-    ScButton,
     ScCommand,
     ScCommandEmpty,
     ScCommandGroup,
@@ -88,6 +87,7 @@ interface CommandItem {
     ScDialogTrigger,
     ScDialogPortal,
     ScDialog,
+    ScInputButton,
     ScHotkey,
     ScKbd,
     NgTemplateOutlet,
@@ -101,16 +101,12 @@ interface CommandItem {
   ],
   template: \`
     <div scDialogProvider [(open)]="open">
-      <button
-        scDialogTrigger
-        scButton
-        variant="outline"
-        class="text-muted-foreground relative w-full text-sm"
-      >
-        <span>Click or press</span>
+      <button scDialogTrigger scInputButton class="max-w-sm">
+        <svg siSearchIcon class="size-4 shrink-0"></svg>
+        <span class="flex-1 text-start">Search...</span>
         <kbd
           scKbd
-          scHotkey="mod+k"
+          scHotkey="mod+j"
           #hk="scHotkey"
           (scHotkeyPressed)="toggleOpen()"
         >
@@ -119,7 +115,7 @@ interface CommandItem {
       </button>
       <ng-template scDialogPortal>
         <div scDialog class="w-lg gap-0 p-0">
-          <div scCommand class="**:data-[slot=command-input-group]:h-12">
+          <div scCommand>
             <div scCommandInputGroup>
               <svg
                 siSearchIcon

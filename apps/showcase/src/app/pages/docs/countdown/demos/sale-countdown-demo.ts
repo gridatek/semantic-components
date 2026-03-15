@@ -3,12 +3,12 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScCountdownSimple } from '@semantic-components/ui-lab';
+import { ScCountdown } from '@semantic-components/ui-lab';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sale-countdown-demo',
-  imports: [ScCountdownSimple, SiClockIcon],
+  imports: [ScCountdown, SiClockIcon],
   template: `
     <div
       class="bg-destructive/10 border-destructive/20 flex max-w-sm items-center gap-4 rounded-lg border p-4"
@@ -18,11 +18,16 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div class="flex-1">
         <div class="text-destructive font-semibold">Flash Sale Ends In</div>
-        <sc-countdown-simple
+        <span
+          scCountdown
+          #cd="scCountdown"
           [targetDate]="shortFuture"
-          format="hh:mm:ss"
-          class="text-destructive text-xl font-bold"
-        />
+          class="text-destructive font-mono text-xl font-bold tabular-nums"
+        >
+          {{ cd.padNumber(cd.time().hours) }}:{{
+            cd.padNumber(cd.time().minutes)
+          }}:{{ cd.padNumber(cd.time().seconds) }}
+        </span>
       </div>
     </div>
   `,

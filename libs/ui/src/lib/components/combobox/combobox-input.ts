@@ -21,14 +21,11 @@ export class ScComboboxInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly combobox = inject(forwardRef(() => ScCombobox));
-  private readonly hasValue = computed(
-    () => this.combobox.selectedLabel() !== '',
-  );
 
   protected readonly class = computed(() =>
     cn(
       'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent pl-2.5 outline-none placeholder:text-muted-foreground',
-      this.hasValue() && 'opacity-0',
+      this.combobox.hasValue() && 'opacity-0',
       this.classInput(),
     ),
   );

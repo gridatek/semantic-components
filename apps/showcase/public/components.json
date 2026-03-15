@@ -26,11 +26,10 @@
   {
     "name": "Animated Counter",
     "path": "animated-counter",
-    "description": "Numbers that animate up/down.",
+    "description": "Numbers that animate up/down using the motion library.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "library": "third-party",
+    "category": "Recipes"
   },
   {
     "name": "Aspect Ratio",
@@ -146,13 +145,12 @@
     "category": "Media"
   },
   {
-    "name": "Chart",
-    "path": "chart",
+    "name": "Charts",
+    "path": "charts",
     "description": "Beautiful charts for data visualization.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "library": "charts",
+    "category": "Data Display"
   },
   {
     "name": "Checkbox",
@@ -216,11 +214,10 @@
   {
     "name": "Confetti",
     "path": "confetti",
-    "description": "Celebration animation effect.",
+    "description": "Celebration animation effects using canvas-confetti.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Feedback",
-    "hidden": true
+    "library": "third-party",
+    "category": "Recipes"
   },
   {
     "name": "Context Menu",
@@ -399,6 +396,14 @@
     "category": "Forms"
   },
   {
+    "name": "Input Button",
+    "path": "input-button",
+    "description": "A button styled to look like an input field, useful as a trigger for search dialogs or command palettes.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Buttons & Actions"
+  },
+  {
     "name": "Input Group",
     "path": "input-group",
     "description": "A composable input group for combining inputs with addons, buttons, and text.",
@@ -563,9 +568,8 @@
     "path": "number-field",
     "description": "A composable numeric input with scrubbing support.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "library": "ui",
+    "category": "Forms"
   },
   {
     "name": "OTP Field",
@@ -606,9 +610,8 @@
     "path": "password-field",
     "description": "A composable password input with visibility toggle.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "library": "ui",
+    "category": "Forms"
   },
   {
     "name": "Phone Input",
@@ -685,15 +688,6 @@
     "category": "Layout"
   },
   {
-    "name": "Search Input",
-    "path": "search-input",
-    "description": "Search with autocomplete suggestions.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
     "name": "Select",
     "path": "select",
     "description": "Displays a list of options for the user to pick from — mimics a native select.",
@@ -753,11 +747,10 @@
   {
     "name": "Sortable List",
     "path": "sortable-list",
-    "description": "A drag-and-drop sortable list.",
+    "description": "A drag-and-drop sortable list using Angular CDK.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "library": "third-party",
+    "category": "Recipes"
   },
   {
     "name": "Speed Dial",
@@ -845,13 +838,12 @@
     "category": "Forms"
   },
   {
-    "name": "Theme Toggle",
-    "path": "theme-toggle",
-    "description": "Switch between light and dark themes.",
+    "name": "Theme",
+    "path": "theme",
+    "description": "Theme management with mode switching and color scheme support.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Buttons & Actions",
-    "hidden": true
+    "library": "ui",
+    "category": "Utilities"
   },
   {
     "name": "Time Picker",
@@ -876,15 +868,6 @@
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Data Display",
-    "hidden": true
-  },
-  {
-    "name": "Timezone",
-    "path": "timezone",
-    "description": "A component for selecting and displaying timezones.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Forms",
     "hidden": true
   },
   {
@@ -973,10 +956,9 @@
   {
     "name": "Virtual List",
     "path": "virtual-list",
-    "description": "Virtualized scrolling for large lists.",
+    "description": "Virtualized scrolling for large lists using Angular CDK.",
     "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "library": "third-party",
+    "category": "Recipes"
   }
 ]

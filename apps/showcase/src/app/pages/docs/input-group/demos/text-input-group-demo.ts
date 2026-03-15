@@ -19,7 +19,7 @@ import {
         <div scInputGroupAddon>
           <span scInputGroupText>$</span>
         </div>
-        <input scInput variant="group" placeholder="Amount" />
+        <input scInput placeholder="Amount" />
         <div scInputGroupAddon align="inline-end">
           <span scInputGroupText>USD</span>
         </div>
@@ -28,10 +28,10 @@ import {
         <div scInputGroupAddon>
           <span scInputGroupText>https://</span>
         </div>
-        <input scInput variant="group" placeholder="example.com" />
+        <input scInput placeholder="example.com" />
       </div>
       <div scInputGroup>
-        <input scInput variant="group" placeholder="Email" />
+        <input scInput placeholder="Email" />
         <div scInputGroupAddon align="inline-end">
           <span scInputGroupText>&#64;company.com</span>
         </div>

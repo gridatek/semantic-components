@@ -28,34 +28,51 @@ export default class DisabledPasswordFieldDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScLabel } from '@semantic-components/ui';
 import {
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScLabel,
   ScPasswordField,
   ScPasswordFieldInput,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldToggle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-disabled-password-field-demo',
   imports: [
     ScPasswordField,
-    ScPasswordFieldInputGroup,
     ScPasswordFieldInput,
     ScPasswordFieldToggle,
+    ScInputGroup,
+    ScInputGroupAddon,
     ScLabel,
+    SiEyeIcon,
+    SiEyeOffIcon,
   ],
   template: \`
-    <div
-      scPasswordField
-      [value]="'********'"
-      [disabled]="true"
-      class="space-y-2"
-    >
-      <label scLabel>Password (Disabled)</label>
-      <div scPasswordFieldInputGroup>
-        <input scPasswordFieldInput />
-        <button scPasswordFieldToggle></button>
+    <div class="w-full max-w-sm">
+      <div
+        scPasswordField
+        #passwordField="scPasswordField"
+        [value]="'********'"
+        [disabled]="true"
+        class="space-y-2"
+      >
+        <label scLabel>Password (Disabled)</label>
+        <div scInputGroup>
+          <input scPasswordFieldInput />
+          <div scInputGroupAddon align="inline-end">
+            <button scPasswordFieldToggle>
+              @if (passwordField.visible()) {
+                <svg siEyeOffIcon></svg>
+              } @else {
+                <svg siEyeIcon></svg>
+              }
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   \`,

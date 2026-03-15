@@ -1,60 +1,61 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
-  signal,
+  viewChildren,
 } from '@angular/core';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab';
+import { ScButton } from '@semantic-components/ui';
+import { animate } from 'motion';
 
 @Component({
   selector: 'app-easing-animated-counter-demo',
-  imports: [ScAnimatedCounter],
+  imports: [ScButton],
   template: `
-    <div class="space-y-3">
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <div class="text-center">
-          <p class="text-muted-foreground mb-2 text-xs">Linear</p>
-          <sc-animated-counter
-            [value]="value()"
-            easing="linear"
-            [duration]="2000"
-            class="text-2xl font-bold"
-          />
+    <div class="flex w-full flex-col items-center gap-6">
+      <div class="grid w-full grid-cols-2 gap-4 md:grid-cols-4">
+        <div
+          class="bg-muted/30 flex flex-col items-center justify-center gap-2 rounded-xl border p-6"
+        >
+          <p
+            class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
+          >
+            Linear
+          </p>
+          <span #counter class="text-3xl font-bold tabular-nums">0</span>
         </div>
-        <div class="text-center">
-          <p class="text-muted-foreground mb-2 text-xs">Ease In</p>
-          <sc-animated-counter
-            [value]="value()"
-            easing="easeIn"
-            [duration]="2000"
-            class="text-2xl font-bold"
-          />
+        <div
+          class="bg-muted/30 flex flex-col items-center justify-center gap-2 rounded-xl border p-6"
+        >
+          <p
+            class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
+          >
+            Ease In
+          </p>
+          <span #counter class="text-3xl font-bold tabular-nums">0</span>
         </div>
-        <div class="text-center">
-          <p class="text-muted-foreground mb-2 text-xs">Ease Out</p>
-          <sc-animated-counter
-            [value]="value()"
-            easing="easeOut"
-            [duration]="2000"
-            class="text-2xl font-bold"
-          />
+        <div
+          class="bg-muted/30 flex flex-col items-center justify-center gap-2 rounded-xl border p-6"
+        >
+          <p
+            class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
+          >
+            Ease Out
+          </p>
+          <span #counter class="text-3xl font-bold tabular-nums">0</span>
         </div>
-        <div class="text-center">
-          <p class="text-muted-foreground mb-2 text-xs">Ease In/Out</p>
-          <sc-animated-counter
-            [value]="value()"
-            easing="easeInOut"
-            [duration]="2000"
-            class="text-2xl font-bold"
-          />
+        <div
+          class="bg-muted/30 flex flex-col items-center justify-center gap-2 rounded-xl border p-6"
+        >
+          <p
+            class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
+          >
+            Ease In/Out
+          </p>
+          <span #counter class="text-3xl font-bold tabular-nums">0</span>
         </div>
       </div>
-      <button
-        class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
-        (click)="animate()"
-      >
-        Animate All
-      </button>
+      <button scButton (click)="animateAll()">Animate All</button>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
@@ -62,10 +63,25 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EasingAnimatedCounterDemo {
-  readonly value = signal(0);
+  private readonly counters = viewChildren<ElementRef<HTMLElement>>('counter');
 
-  animate(): void {
-    this.value.set(0);
-    setTimeout(() => this.value.set(1000), 50);
+  private readonly easings: Array<
+    'linear' | 'easeIn' | 'easeOut' | 'easeInOut'
+  > = ['linear', 'easeIn', 'easeOut', 'easeInOut'];
+
+  animateAll(): void {
+    const els = this.counters();
+
+    els.forEach((el, i) => {
+      el.nativeElement.textContent = '0';
+
+      animate(0, 1000, {
+        duration: 2,
+        ease: this.easings[i],
+        onUpdate: (value: number) => {
+          el.nativeElement.textContent = Math.round(value).toLocaleString();
+        },
+      });
+    });
   }
 }

@@ -1,6 +1,13 @@
 export type ComponentStatus = 'Experimental' | 'Developer Preview' | 'Stable';
 
-export type ComponentLibrary = 'ui' | 'ui-lab' | 'carousel' | 'code' | 'editor';
+export type ComponentLibrary =
+  | 'ui'
+  | 'ui-lab'
+  | 'carousel'
+  | 'code'
+  | 'editor'
+  | 'charts'
+  | 'third-party';
 
 export type ComponentCategory =
   | 'Forms'
@@ -12,7 +19,9 @@ export type ComponentCategory =
   | 'Overlay'
   | 'Media'
   | 'Editor'
-  | 'Advanced';
+  | 'Advanced'
+  | 'Utilities'
+  | 'Recipes';
 
 export interface ComponentItem {
   name: string;

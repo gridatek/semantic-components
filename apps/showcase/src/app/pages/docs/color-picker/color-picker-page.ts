@@ -33,7 +33,7 @@ import { SwatchesColorPickerDemoContainer } from './demos/swatches-color-picker-
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>ColorPicker</h1>
+        <h1 scHeading>Color Picker</h1>
         <p class="text-muted-foreground">
           A component for selecting colors with various formats.
         </p>

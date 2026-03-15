@@ -111,9 +111,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/carousel/carousel-page'),
       },
       {
-        path: 'chart',
-        title: 'Chart - Semantic Components',
-        loadComponent: () => import('../pages/docs/chart/chart-page'),
+        path: 'charts',
+        title: 'Charts - Semantic Components',
+        loadComponent: () => import('../pages/docs/charts/charts-page'),
       },
       {
         path: 'checkbox',
@@ -279,6 +279,12 @@ export const componentsRoutes: Route[] = [
         path: 'input',
         title: 'Input - Semantic Components',
         loadComponent: () => import('../pages/docs/input/input-page'),
+      },
+      {
+        path: 'input-button',
+        title: 'Input Button - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/input-button/input-button-page'),
       },
       {
         path: 'input-group',
@@ -550,10 +556,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/textarea/textarea-page'),
       },
       {
-        path: 'theme-toggle',
-        title: 'Theme Toggle - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/theme-toggle/theme-toggle-page'),
+        path: 'theme',
+        title: 'Theme - Semantic Components',
+        loadComponent: () => import('../pages/docs/theme/theme-page'),
       },
       {
         path: 'time-picker',
@@ -571,11 +576,6 @@ export const componentsRoutes: Route[] = [
         path: 'timeline',
         title: 'Timeline - Semantic Components',
         loadComponent: () => import('../pages/docs/timeline/timeline-page'),
-      },
-      {
-        path: 'timezone',
-        title: 'Timezone - Semantic Components',
-        loadComponent: () => import('../pages/docs/timezone/timezone-page'),
       },
       {
         path: 'toast',

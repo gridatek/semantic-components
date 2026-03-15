@@ -37,22 +37,29 @@ import {
   ScSidebarRail,
   ScSidebarTrigger,
 } from '@semantic-components/ui';
-import { ScButton, ScKbd, ScSeparator, cn } from '@semantic-components/ui';
-import { ScThemeToggle } from '@semantic-components/ui-lab';
+import {
+  ScInputButton,
+  ScKbd,
+  ScSeparator,
+  ScThemeModeToggle,
+  cn,
+} from '@semantic-components/ui';
 import {
   SiBookOpenTextIcon,
   SiBoxIcon,
+  SiCookingPotIcon,
   SiDownloadIcon,
   SiMoonIcon,
   SiPanelLeftIcon,
   SiSearchIcon,
   SiSunIcon,
+  SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
 import { filter } from 'rxjs';
-import { CommandSearchService } from '../../components/command-search/command-search.service';
 import { Logo } from '../../components/logo/logo';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc.service';
+import { CommandPaletteService } from '../../services/command-palette.service';
 import { ComponentsService } from '../../services/components.service';
 import { ConfigService } from '../../services/config.service';
 
@@ -79,17 +86,19 @@ import { ConfigService } from '../../services/config.service';
     ScSidebarInset,
     ScSidebarTrigger,
     ScSidebarRail,
+    ScInputButton,
+    ScKbd,
     ScSeparator,
-    ScThemeToggle,
+    ScThemeModeToggle,
     SiSunIcon,
     SiMoonIcon,
     SiBookOpenTextIcon,
     SiBoxIcon,
+    SiCookingPotIcon,
     SiDownloadIcon,
     SiPanelLeftIcon,
     SiSearchIcon,
-    ScButton,
-    ScKbd,
+    SiWrenchIcon,
     Logo,
     Toc,
   ],
@@ -118,6 +127,22 @@ import { ConfigService } from '../../services/config.service';
               </a>
             </li>
           </ul>
+
+          <button
+            scInputButton
+            class="w-full group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0"
+            (click)="openCommandPalette()"
+          >
+            <svg siSearchIcon class="size-4 shrink-0"></svg>
+            <span
+              class="flex-1 text-start group-data-[collapsible=icon]:hidden"
+            >
+              Search...
+            </span>
+            <kbd scKbd class="group-data-[collapsible=icon]:hidden">
+              &#8984;K
+            </kbd>
+          </button>
         </div>
 
         <div scSidebarBody>
@@ -279,6 +304,52 @@ import { ConfigService } from '../../services/config.service';
                     }
                   </ul>
                 </li>
+                @if (utilities().length > 0) {
+                  <li scSidebarMenuItem>
+                    <a scSidebarMenuButton>
+                      <svg siWrenchIcon></svg>
+                      <span>Utilities</span>
+                    </a>
+                    <ul scSidebarMenuSub>
+                      @for (item of utilities(); track item.path) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            [routerLink]="'/docs/components/' + item.path"
+                            routerLinkActive
+                            #utilRla="routerLinkActive"
+                            [isActive]="utilRla.isActive"
+                          >
+                            <span>{{ item.name }}</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </li>
+                }
+                @if (recipes().length > 0) {
+                  <li scSidebarMenuItem>
+                    <a scSidebarMenuButton>
+                      <svg siCookingPotIcon></svg>
+                      <span>Recipes</span>
+                    </a>
+                    <ul scSidebarMenuSub>
+                      @for (item of recipes(); track item.path) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            [routerLink]="'/docs/components/' + item.path"
+                            routerLinkActive
+                            #recipeRla="routerLinkActive"
+                            [isActive]="recipeRla.isActive"
+                          >
+                            <span>{{ item.name }}</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </li>
+                }
               </ul>
             </div>
           </div>
@@ -287,11 +358,19 @@ import { ConfigService } from '../../services/config.service';
         <div scSidebarFooter>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
-              <button scThemeToggle #themeToggle="scThemeToggle" class="w-full">
+              <button
+                scSidebarMenuButton
+                variant="outline"
+                class="justify-center"
+                scThemeModeToggle
+                #themeToggle="scThemeModeToggle"
+              >
                 @if (themeToggle.isDark()) {
                   <svg siSunIcon></svg>
+                  <span class="sr-only">Switch to light theme</span>
                 } @else {
                   <svg siMoonIcon></svg>
+                  <span class="sr-only">Switch to dark theme</span>
                 }
               </button>
             </li>
@@ -313,28 +392,6 @@ import { ConfigService } from '../../services/config.service';
           <span class="text-muted-foreground text-sm font-medium">
             Documentation
           </span>
-          <button
-            scButton
-            variant="outline"
-            (click)="openSearch()"
-            class="text-muted-foreground relative ml-auto hidden h-8 w-64 justify-start rounded-md text-sm sm:flex"
-          >
-            <svg siSearchIcon class="mr-2 size-4"></svg>
-            <span>Search docs...</span>
-            <kbd scKbd class="pointer-events-none absolute top-1.5 right-1.5">
-              ⌘K
-            </kbd>
-          </button>
-          <button
-            scButton
-            variant="ghost"
-            size="icon"
-            (click)="openSearch()"
-            aria-label="Search"
-            class="ml-auto sm:hidden"
-          >
-            <svg siSearchIcon></svg>
-          </button>
         </header>
 
         <div class="flex flex-1">
@@ -368,18 +425,16 @@ export class DocsLayout {
   private readonly destroyRef = inject(DestroyRef);
   protected readonly tocService = inject(TocService);
   private readonly componentsService = inject(ComponentsService);
+  private readonly commandPalette = inject(CommandPaletteService);
   private readonly config = inject(ConfigService);
-  private readonly commandSearch = inject(CommandSearchService);
 
   private readonly contentArea =
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
   readonly components = this.componentsService.visibleComponents;
+  readonly utilities = this.componentsService.visibleUtilities;
+  readonly recipes = this.componentsService.visibleRecipes;
   protected readonly devMode = this.config.devMode;
-
-  openSearch(): void {
-    this.commandSearch.open();
-  }
 
   constructor() {
     afterNextRender(() => {
@@ -394,6 +449,10 @@ export class DocsLayout {
           setTimeout(() => this.extractTocHeadings(), 100);
         });
     });
+  }
+
+  openCommandPalette(): void {
+    this.commandPalette.open.set(true);
   }
 
   private extractTocHeadings(): void {

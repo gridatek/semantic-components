@@ -16,6 +16,7 @@ import { ScPieChart } from './pie-chart';
       [size]="size()"
       [innerRadius]="innerRadius()"
       [showLabels]="showLabels()"
+      [ariaLabel]="ariaLabel()"
       [class]="classInput()"
     ></div>
   `,
@@ -32,4 +33,5 @@ export class ScDonutChart {
   readonly size = input<number>(300);
   readonly innerRadius = input<number>(60);
   readonly showLabels = input<boolean>(false);
+  readonly ariaLabel = input<string>('Donut chart');
 }

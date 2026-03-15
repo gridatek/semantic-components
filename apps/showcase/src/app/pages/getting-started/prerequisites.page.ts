@@ -13,6 +13,7 @@ import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
@@ -29,6 +30,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     SiCopyIcon,
     ScSeparator,
     ScHeading,
+    PackageManagerInstall,
   ],
   template: `
     <div class="space-y-8">
@@ -44,26 +46,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Semantic Components depends on Angular Aria and Angular CDK.
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>terminal</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="step1Code"
-              #copy="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div scCodeViewerContent [code]="step1Code" language="bash"></div>
-        </div>
+        <app-package-manager-install packages="@angular/aria @angular/cdk" />
       </section>
 
       <div scSeparator></div>
@@ -85,26 +68,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
               run the following command to install Tailwind CSS and its peer
               dependencies:
             </p>
-            <div scCodeViewer>
-              <div scCodeViewerHeader>
-                <span scCodeViewerLabel>terminal</span>
-                <button
-                  scButton
-                  variant="ghost"
-                  size="icon"
-                  [scCopyToClipboard]="step2Code"
-                  #copy2="scCopyToClipboard"
-                  aria-label="Copy to clipboard"
-                >
-                  @if (copy2.copied()) {
-                    <svg siCheckIcon></svg>
-                  } @else {
-                    <svg siCopyIcon></svg>
-                  }
-                </button>
-              </div>
-              <div scCodeViewerContent [code]="step2Code" language="bash"></div>
-            </div>
+            <app-package-manager-install
+              packages="tailwindcss @tailwindcss/postcss postcss"
+            />
           </div>
 
           <div class="space-y-3">
@@ -158,26 +124,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
           Install the required utility libraries for class management and
           animations.
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>terminal</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="step4Code"
-              #copy4="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy4.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div scCodeViewerContent [code]="step4Code" language="bash"></div>
-        </div>
+        <app-package-manager-install
+          packages="shadcn class-variance-authority clsx tailwind-merge tw-animate-css"
+        />
       </section>
 
       <div scSeparator></div>
@@ -187,26 +136,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Install the icon library used by Semantic Components.
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>terminal</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="step5Code"
-              #copy5="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy5.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div scCodeViewerContent [code]="step5Code" language="bash"></div>
-        </div>
+        <app-package-manager-install packages="@semantic-icons/lucide-icons" />
       </section>
 
       <div scSeparator></div>
@@ -226,26 +156,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           for date and time handling. Until browsers fully support it natively,
           install the polyfill as a temporary solution.
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>terminal</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="step6Code"
-              #copy6="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy6.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div scCodeViewerContent [code]="step6Code" language="bash"></div>
-        </div>
+        <app-package-manager-install packages="@js-temporal/polyfill" />
       </section>
     </div>
   `,
@@ -253,20 +164,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class PrerequisitesPage {
-  readonly step1Code = 'npm install @angular/aria @angular/cdk';
-
-  readonly step2Code = 'npm install tailwindcss @tailwindcss/postcss postcss';
-
   readonly step3aCode = `{
   "plugins": {
     "@tailwindcss/postcss": {}
   }
 }`;
-
-  readonly step4Code =
-    'npm install shadcn class-variance-authority clsx tailwind-merge tw-animate-css';
-
-  readonly step5Code = 'npm install @semantic-icons/lucide-icons';
-
-  readonly step6Code = 'npm install @js-temporal/polyfill';
 }

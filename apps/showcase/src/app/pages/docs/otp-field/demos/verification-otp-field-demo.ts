@@ -33,17 +33,17 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
         <div class="flex justify-center">
           <div scOtpField [(value)]="code">
             <div scOtpFieldSlotGroup>
-              <div scOtpFieldSlot></div>
-              <div scOtpFieldSlot></div>
-              <div scOtpFieldSlot></div>
+              <div scOtpFieldSlot aria-label="Digit 1 of 6"></div>
+              <div scOtpFieldSlot aria-label="Digit 2 of 6"></div>
+              <div scOtpFieldSlot aria-label="Digit 3 of 6"></div>
             </div>
             <div scOtpFieldSeparator>
               <svg siMinusIcon class="size-4"></svg>
             </div>
             <div scOtpFieldSlotGroup>
-              <div scOtpFieldSlot></div>
-              <div scOtpFieldSlot></div>
-              <div scOtpFieldSlot></div>
+              <div scOtpFieldSlot aria-label="Digit 4 of 6"></div>
+              <div scOtpFieldSlot aria-label="Digit 5 of 6"></div>
+              <div scOtpFieldSlot aria-label="Digit 6 of 6"></div>
             </div>
           </div>
         </div>

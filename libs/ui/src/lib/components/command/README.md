@@ -76,7 +76,7 @@ ScCommand (Root - Combobox host directive)
 <div scDialogProvider [(open)]="open">
   <ng-template scDialogPortal>
     <div scDialog class="w-lg gap-0 p-0">
-      <div scCommand class="**:data-[slot=command-input-group]:h-12">
+      <div scCommand>
         <div scCommandInputGroup>
           <svg siSearchIcon class="mr-2 size-4 shrink-0 opacity-50" aria-hidden="true"></svg>
           <input scCommandInput placeholder="Type a command or search..." [(value)]="searchString" />

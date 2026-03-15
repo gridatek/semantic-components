@@ -1,22 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
 import { SC_COLOR_PICKER } from './color-picker';
 
-@Component({
+@Directive({
   selector: 'button[scColorPickerEyedropper]',
-  imports: [SiPipetteIcon],
-  template: `
-    <svg siPipetteIcon class="size-4"></svg>
-    <span class="sr-only">Pick color from screen</span>
-  `,
   host: {
     'data-slot': 'color-picker-eyedropper',
     type: 'button',
@@ -24,8 +11,6 @@ import { SC_COLOR_PICKER } from './color-picker';
     '[disabled]': 'colorPicker.disabled() || !isSupported()',
     '(click)': 'pickColor()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScColorPickerEyeDropper {
   readonly colorPicker = inject(SC_COLOR_PICKER);

@@ -15,11 +15,11 @@ import {
   ScMultiselectDisplayValue,
   ScMultiselectIcon,
   ScMultiselectInput,
-  ScMultiselectInputGroup,
   ScMultiselectItem,
   ScMultiselectItemIndicator,
   ScMultiselectItemLabel,
   ScMultiselectList,
+  ScMultiselectOrigin,
   ScMultiselectPopup,
   ScMultiselectPortal,
 } from '@semantic-components/ui';
@@ -49,7 +49,7 @@ interface FormModel {
     ScMultiselectDisplayValue,
     ScMultiselectIcon,
     ScMultiselectInput,
-    ScMultiselectInputGroup,
+    ScMultiselectOrigin,
     ScMultiselectItem,
     ScMultiselectItemIndicator,
     ScMultiselectItemLabel,
@@ -77,7 +77,7 @@ interface FormModel {
         <div scField>
           <label scLabel>Labels</label>
           <div scMultiselect class="w-full">
-            <div scMultiselectInputGroup>
+            <div scMultiselectOrigin>
               <span scMultiselectDisplayValue>
                 @if (displayIcon(); as icon) {
                   <ng-container

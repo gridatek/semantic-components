@@ -23,7 +23,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
       </p>
     }
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class QuickReactionsEmojiPickerDemo {

@@ -30,15 +30,16 @@ export default class SignalFormsNumberFieldDemoContainer {
   signal,
 } from '@angular/core';
 import { FormField, form, max, min, required } from '@angular/forms/signals';
-import { ScLabel } from '@semantic-components/ui';
 import {
+  ScLabel,
   ScNumberField,
   ScNumberFieldDecrement,
   ScNumberFieldIncrement,
   ScNumberFieldInput,
   ScNumberFieldInputGroup,
   ScNumberFieldScrubArea,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-signal-forms-number-field-demo',
@@ -51,6 +52,8 @@ import {
     ScNumberFieldInput,
     ScNumberFieldIncrement,
     ScLabel,
+    SiMinusIcon,
+    SiPlusIcon,
   ],
   template: \`
     <div class="max-w-sm space-y-4">
@@ -68,7 +71,10 @@ import {
         </div>
 
         <div scNumberFieldGroup>
-          <button scNumberFieldDecrement></button>
+          <button scNumberFieldDecrement>
+            <svg siMinusIcon></svg>
+            <span class="sr-only">Decrease</span>
+          </button>
           <input
             scNumberFieldInput
             aria-label="Quantity"
@@ -78,7 +84,10 @@ import {
               quantityForm.quantity().touched()
             "
           />
-          <button scNumberFieldIncrement></button>
+          <button scNumberFieldIncrement>
+            <svg siPlusIcon></svg>
+            <span class="sr-only">Increase</span>
+          </button>
         </div>
         @if (
           quantityForm.quantity().invalid() && quantityForm.quantity().touched()

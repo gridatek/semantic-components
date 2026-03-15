@@ -372,6 +372,41 @@ export const demosRoutes: Route[] = [
             (m) => m.ButtonGroupDemo,
           ),
       },
+      {
+        path: 'button-group-orientation-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-orientation-demo').then(
+            (m) => m.ButtonGroupOrientationDemo,
+          ),
+      },
+      {
+        path: 'button-group-size-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-size-demo').then(
+            (m) => m.ButtonGroupSizeDemo,
+          ),
+      },
+      {
+        path: 'button-group-separator-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-separator-demo').then(
+            (m) => m.ButtonGroupSeparatorDemo,
+          ),
+      },
+      {
+        path: 'button-group-split-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-split-demo').then(
+            (m) => m.ButtonGroupSplitDemo,
+          ),
+      },
+      {
+        path: 'button-group-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/button-group/demos/button-group-input-demo').then(
+            (m) => m.ButtonGroupInputDemo,
+          ),
+      },
     ],
   },
   {
@@ -502,54 +537,54 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/chart',
+    path: 'demos/charts',
     children: [
       {
         path: 'bar-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart/demos/bar-chart-demo').then(
+          import('../pages/docs/charts/demos/bar-chart-demo').then(
             (m) => m.BarChartDemo,
           ),
       },
       {
         path: 'line-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart/demos/line-chart-demo').then(
+          import('../pages/docs/charts/demos/line-chart-demo').then(
             (m) => m.LineChartDemo,
           ),
       },
       {
         path: 'area-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart/demos/area-chart-demo').then(
+          import('../pages/docs/charts/demos/area-chart-demo').then(
             (m) => m.AreaChartDemo,
           ),
       },
       {
         path: 'pie-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart/demos/pie-chart-demo').then(
+          import('../pages/docs/charts/demos/pie-chart-demo').then(
             (m) => m.PieChartDemo,
           ),
       },
       {
         path: 'donut-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart/demos/donut-chart-demo').then(
+          import('../pages/docs/charts/demos/donut-chart-demo').then(
             (m) => m.DonutChartDemo,
           ),
       },
       {
         path: 'monthly-revenue-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart/demos/monthly-revenue-chart-demo').then(
+          import('../pages/docs/charts/demos/monthly-revenue-chart-demo').then(
             (m) => m.MonthlyRevenueChartDemo,
           ),
       },
       {
         path: 'user-growth-chart-demo',
         loadComponent: () =>
-          import('../pages/docs/chart/demos/user-growth-chart-demo').then(
+          import('../pages/docs/charts/demos/user-growth-chart-demo').then(
             (m) => m.UserGrowthChartDemo,
           ),
       },
@@ -687,6 +722,18 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/code-editor/demos/interactive-code-editor-demo').then(
             (m) => m.InteractiveCodeEditorDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/code-viewer',
+    children: [
+      {
+        path: 'package-manager-code-viewer-demo',
+        loadComponent: () =>
+          import('../pages/docs/code-viewer/demos/package-manager-code-viewer-demo').then(
+            (m) => m.PackageManagerCodeViewerDemo,
           ),
       },
     ],
@@ -1644,6 +1691,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/input-button',
+    children: [
+      {
+        path: 'basic-input-button-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-button/demos/basic-input-button-demo').then(
+            (m) => m.BasicInputButtonDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/input-group',
     children: [
       {
@@ -1686,6 +1745,48 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/input-group/demos/textarea-input-group-demo').then(
             (m) => m.TextareaInputGroupDemo,
+          ),
+      },
+      {
+        path: 'icon-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/icon-input-group-demo').then(
+            (m) => m.IconInputGroupDemo,
+          ),
+      },
+      {
+        path: 'inline-end-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/inline-end-input-group-demo').then(
+            (m) => m.InlineEndInputGroupDemo,
+          ),
+      },
+      {
+        path: 'block-start-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/block-start-input-group-demo').then(
+            (m) => m.BlockStartInputGroupDemo,
+          ),
+      },
+      {
+        path: 'block-end-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/block-end-input-group-demo').then(
+            (m) => m.BlockEndInputGroupDemo,
+          ),
+      },
+      {
+        path: 'dropdown-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/dropdown-input-group-demo').then(
+            (m) => m.DropdownInputGroupDemo,
+          ),
+      },
+      {
+        path: 'label-input-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/input-group/demos/label-input-group-demo').then(
+            (m) => m.LabelInputGroupDemo,
           ),
       },
     ],
@@ -2182,6 +2283,13 @@ export const demosRoutes: Route[] = [
             (m) => m.MenuAvatarDemo,
           ),
       },
+      {
+        path: 'menu-align-demo',
+        loadComponent: () =>
+          import('../pages/docs/menu/demos/menu-align-demo').then(
+            (m) => m.ScMenuAlignDemo,
+          ),
+      },
     ],
   },
   {
@@ -2225,6 +2333,13 @@ export const demosRoutes: Route[] = [
             (m) => m.CustomColorSliderDemo,
           ),
       },
+      {
+        path: 'form-slider-demo',
+        loadComponent: () =>
+          import('../pages/docs/slider/demos/form-slider-demo').then(
+            (m) => m.FormSliderDemo,
+          ),
+      },
     ],
   },
   {
@@ -2242,6 +2357,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/range-slider/demos/custom-color-range-slider-demo').then(
             (m) => m.CustomColorRangeSliderDemo,
+          ),
+      },
+      {
+        path: 'form-range-slider-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider/demos/form-range-slider-demo').then(
+            (m) => m.FormRangeSliderDemo,
           ),
       },
     ],
@@ -2550,48 +2672,6 @@ export const demosRoutes: Route[] = [
             (m) => m.CountrySelectorPhoneInputDemo,
           ),
       },
-      {
-        path: 'default-country-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/default-country-phone-input-demo').then(
-            (m) => m.DefaultCountryPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'us-format-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/us-format-phone-input-demo').then(
-            (m) => m.UsFormatPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'international-format-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/international-format-phone-input-demo').then(
-            (m) => m.InternationalFormatPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'without-icon-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/without-icon-phone-input-demo').then(
-            (m) => m.WithoutIconPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'disabled-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/disabled-phone-input-demo').then(
-            (m) => m.DisabledPhoneInputDemo,
-          ),
-      },
-      {
-        path: 'form-phone-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input/demos/form-phone-input-demo').then(
-            (m) => m.FormPhoneInputDemo,
-          ),
-      },
     ],
   },
   {
@@ -2891,6 +2971,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/select/demos/select-signal-forms-demo').then(
             (m) => m.SelectSignalFormsDemo,
+          ),
+      },
+      {
+        path: 'select-currency-demo',
+        loadComponent: () =>
+          import('../pages/docs/select/demos/select-currency-demo').then(
+            (m) => m.SelectCurrencyDemo,
           ),
       },
     ],
@@ -3345,6 +3432,20 @@ export const demosRoutes: Route[] = [
             (m) => m.DisabledTabsDemo,
           ),
       },
+      {
+        path: 'line-tabs-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs/demos/line-tabs-demo').then(
+            (m) => m.LineTabsDemo,
+          ),
+      },
+      {
+        path: 'vertical-tabs-demo',
+        loadComponent: () =>
+          import('../pages/docs/tabs/demos/vertical-tabs-demo').then(
+            (m) => m.VerticalTabsDemo,
+          ),
+      },
     ],
   },
   {
@@ -3524,47 +3625,47 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/theme-toggle',
+    path: 'demos/theme',
     children: [
       {
         path: 'basic-theme-toggle-demo',
         loadComponent: () =>
-          import('../pages/docs/theme-toggle/demos/basic-theme-toggle-demo').then(
+          import('../pages/docs/theme/demos/basic-theme-toggle-demo').then(
             (m) => m.BasicThemeToggleDemo,
           ),
       },
       {
         path: 'variants-theme-toggle-demo',
         loadComponent: () =>
-          import('../pages/docs/theme-toggle/demos/variants-theme-toggle-demo').then(
+          import('../pages/docs/theme/demos/variants-theme-toggle-demo').then(
             (m) => m.VariantsThemeToggleDemo,
           ),
       },
       {
         path: 'sizes-theme-toggle-demo',
         loadComponent: () =>
-          import('../pages/docs/theme-toggle/demos/sizes-theme-toggle-demo').then(
+          import('../pages/docs/theme/demos/sizes-theme-toggle-demo').then(
             (m) => m.SizesThemeToggleDemo,
           ),
       },
       {
         path: 'theme-select-demo',
         loadComponent: () =>
-          import('../pages/docs/theme-toggle/demos/theme-select-demo').then(
+          import('../pages/docs/theme/demos/theme-select-demo').then(
             (m) => m.ThemeSelectDemo,
           ),
       },
       {
         path: 'navigation-theme-toggle-demo',
         loadComponent: () =>
-          import('../pages/docs/theme-toggle/demos/navigation-theme-toggle-demo').then(
+          import('../pages/docs/theme/demos/navigation-theme-toggle-demo').then(
             (m) => m.NavigationThemeToggleDemo,
           ),
       },
       {
         path: 'settings-panel-theme-toggle-demo',
         loadComponent: () =>
-          import('../pages/docs/theme-toggle/demos/settings-panel-theme-toggle-demo').then(
+          import('../pages/docs/theme/demos/settings-panel-theme-toggle-demo').then(
             (m) => m.SettingsPanelThemeToggleDemo,
           ),
       },
@@ -3658,116 +3759,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/timeline/demos/tracking-timeline-demo').then(
             (m) => m.TrackingTimelineDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/timezone',
-    children: [
-      {
-        path: 'basic-select-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/basic-select-timezone-demo').then(
-            (m) => m.BasicSelectTimezoneDemo,
-          ),
-      },
-      {
-        path: 'no-abbr-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/no-abbr-timezone-demo').then(
-            (m) => m.NoAbbrTimezoneDemo,
-          ),
-      },
-      {
-        path: 'no-offset-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/no-offset-timezone-demo').then(
-            (m) => m.NoOffsetTimezoneDemo,
-          ),
-      },
-      {
-        path: 'display-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/display-timezone-demo').then(
-            (m) => m.DisplayTimezoneDemo,
-          ),
-      },
-      {
-        path: 'display-offset-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/display-offset-timezone-demo').then(
-            (m) => m.DisplayOffsetTimezoneDemo,
-          ),
-      },
-      {
-        path: 'icon-only-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/icon-only-timezone-demo').then(
-            (m) => m.IconOnlyTimezoneDemo,
-          ),
-      },
-      {
-        path: 'variants-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/variants-timezone-demo').then(
-            (m) => m.VariantsTimezoneDemo,
-          ),
-      },
-      {
-        path: 'sizes-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/sizes-timezone-demo').then(
-            (m) => m.SizesTimezoneDemo,
-          ),
-      },
-      {
-        path: 'button-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/button-timezone-demo').then(
-            (m) => m.ButtonTimezoneDemo,
-          ),
-      },
-      {
-        path: 'button-offset-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/button-offset-timezone-demo').then(
-            (m) => m.ButtonOffsetTimezoneDemo,
-          ),
-      },
-      {
-        path: 'badge-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/badge-timezone-demo').then(
-            (m) => m.BadgeTimezoneDemo,
-          ),
-      },
-      {
-        path: 'badge-no-icon-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/badge-no-icon-timezone-demo').then(
-            (m) => m.BadgeNoIconTimezoneDemo,
-          ),
-      },
-      {
-        path: 'navigation-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/navigation-timezone-demo').then(
-            (m) => m.NavigationTimezoneDemo,
-          ),
-      },
-      {
-        path: 'settings-panel-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/settings-panel-timezone-demo').then(
-            (m) => m.SettingsPanelTimezoneDemo,
-          ),
-      },
-      {
-        path: 'current-time-timezone-demo',
-        loadComponent: () =>
-          import('../pages/docs/timezone/demos/current-time-timezone-demo').then(
-            (m) => m.CurrentTimeTimezoneDemo,
           ),
       },
     ],

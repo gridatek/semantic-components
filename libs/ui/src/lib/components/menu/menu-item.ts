@@ -40,7 +40,7 @@ import { ScMenuPortal } from './menu-portal';
             originY: 'top',
             overlayY: 'top',
             overlayX: 'start',
-            offsetX: 6,
+            offsetX: 8,
           },
         ]"
         cdkAttachPopoverAsChild
@@ -61,7 +61,9 @@ export class ScMenuItem {
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   private readonly menuItem = inject(MenuItem);
   private readonly parentMenu = inject(Menu);
-  protected readonly submenuOpen = computed(() => this.parentMenu.visible());
+  protected readonly submenuOpen = computed(
+    () => this.parentMenu.visible() && this.menuItem.expanded() !== false,
+  );
   protected readonly submenuPortal = contentChild(ScMenuPortal);
 
   protected readonly class = computed(() =>

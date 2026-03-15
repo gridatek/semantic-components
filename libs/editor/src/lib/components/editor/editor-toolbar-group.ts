@@ -1,11 +1,12 @@
+import { ToolbarWidgetGroup } from '@angular/aria/toolbar';
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Directive({
   selector: 'div[scEditorToolbarGroup]',
+  hostDirectives: [ToolbarWidgetGroup],
   host: {
     'data-slot': 'editor-toolbar-group',
-    role: 'group',
     '[class]': 'class()',
   },
 })

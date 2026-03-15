@@ -7,7 +7,9 @@ Displays a list of options for the user to pick from — mimics a native select.
 - Full keyboard navigation support
 - ARIA-compliant accessibility
 - Automatic scroll-to-active on keyboard navigation
-- Overlay positioning with CDK
+- Overlay positioning with CDK (`usePopover: 'inline'`) with fallback (opens above when insufficient space below)
+- Value persistence across overlay open/close cycles
+- Enter/leave animations on popup
 - Customizable styling via `class` input
 - Signal forms support via `formField` on the input
 - `exportAs: 'scSelect'` for direct template access
@@ -17,11 +19,11 @@ Displays a list of options for the user to pick from — mimics a native select.
 | Component               | Selector                      | Responsibility                                                                      |
 | ----------------------- | ----------------------------- | ----------------------------------------------------------------------------------- |
 | `ScSelect`              | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic                                |
-| `ScSelectOrigin`        | `div[scSelectOrigin]`         | Trigger button, renders chevron icon, projects consumer content                     |
+| `ScSelectOrigin`        | `div[scSelectOrigin]`         | Styled container, serves as overlay positioning origin, projects consumer content   |
 | `ScSelectInput`         | `input[scSelectInput]`        | Visible input displaying selected value, wraps `ComboboxInput` from `@angular/aria` |
 | `ScSelectItemIcon`      | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)  |
 | `ScSelectPortal`        | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                         |
-| `ScSelectPopup`         | `div[scSelectPopup]`          | Popup container with styling, animation, and visibility                             |
+| `ScSelectPopup`         | `div[scSelectPopup]`          | Popup container with styling and enter/leave animations                             |
 | `ScSelectList`          | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                             |
 | `ScSelectItem`          | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                     |
 | `ScSelectGroup`         | `div[scSelectGroup]`          | Groups related options together with vertical layout                                |
@@ -130,7 +132,7 @@ import { ScSelect, ScSelectInput, ScSelectItem, ScSelectItemIcon, ScSelectItemLa
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExampleComponent {
+export class Example {
   options = [
     { value: 'option1', label: 'Option 1' },
     { value: 'option2', label: 'Option 2' },

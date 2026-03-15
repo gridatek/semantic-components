@@ -14,7 +14,6 @@ import { ScCombobox } from './combobox';
   selector: '[scComboboxDisplayValue]',
   template: `
     {{ displayValue() }}
-    <ng-content />
   `,
   host: {
     'data-slot': 'combobox-display-value',
@@ -26,9 +25,20 @@ import { ScCombobox } from './combobox';
 export class ScComboboxDisplayValue {
   readonly classInput = input<string>('', { alias: 'class' });
 
+  readonly displayValueFn = input<((value: unknown) => string) | undefined>(
+    undefined,
+  );
+
   private readonly combobox = inject(forwardRef(() => ScCombobox));
 
-  readonly displayValue = computed(() => this.combobox.selectedLabel());
+  readonly displayValue = computed(() => {
+    const fn = this.displayValueFn();
+    if (fn) {
+      const value = this.combobox.selectedValue();
+      return value !== undefined ? fn(value) : '';
+    }
+    return this.combobox.selectedValue();
+  });
 
   protected readonly class = computed(() =>
     cn(

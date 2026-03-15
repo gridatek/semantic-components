@@ -2,7 +2,7 @@ export { ScMultiselect } from './multiselect';
 export { ScMultiselectDisplayValue } from './multiselect-display-value';
 export { ScMultiselectIcon } from './multiselect-icon';
 export { ScMultiselectInput } from './multiselect-input';
-export { ScMultiselectInputGroup } from './multiselect-input-group';
+export { ScMultiselectOrigin } from './multiselect-origin';
 export { ScMultiselectItem } from './multiselect-item';
 export { ScMultiselectItemIndicator } from './multiselect-item-indicator';
 export { ScMultiselectItemLabel } from './multiselect-item-label';

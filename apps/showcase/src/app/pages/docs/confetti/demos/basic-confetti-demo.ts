@@ -2,30 +2,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  viewChild,
 } from '@angular/core';
-import { ScConfetti } from '@semantic-components/ui-lab';
+import { ScButton } from '@semantic-components/ui';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-basic-confetti-demo',
-  imports: [ScConfetti],
+  imports: [ScButton],
   template: `
-    <sc-confetti #confetti />
-    <button
-      class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium"
-      (click)="fire()"
-    >
-      Fire Confetti!
-    </button>
+    <button scButton (click)="fire()">Fire Confetti!</button>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicConfettiDemo {
-  readonly confetti = viewChild.required<ScConfetti>('confetti');
-
   fire(): void {
-    this.confetti().fire();
+    confetti();
   }
 }

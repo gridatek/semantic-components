@@ -21,7 +21,7 @@ import { MinimalKanbanBoardDemoContainer } from './demos/minimal-kanban-board-de
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>KanbanBoard</h1>
+        <h1 scHeading>Kanban Board</h1>
         <p class="text-muted-foreground">
           Drag-and-drop task board for project management and workflow
           visualization.

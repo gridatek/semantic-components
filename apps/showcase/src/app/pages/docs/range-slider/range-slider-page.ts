@@ -8,12 +8,14 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicRangeSliderDemoContainer } from './demos/basic-range-slider-demo-container';
 import { CustomColorRangeSliderDemoContainer } from './demos/custom-color-range-slider-demo-container';
+import { FormRangeSliderDemoContainer } from './demos/form-range-slider-demo-container';
 
 @Component({
   selector: 'app-range-slider-page',
   imports: [
     BasicRangeSliderDemoContainer,
     CustomColorRangeSliderDemoContainer,
+    FormRangeSliderDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -33,6 +35,7 @@ import { CustomColorRangeSliderDemoContainer } from './demos/custom-color-range-
         <h2 scHeading appToc>Examples</h2>
         <app-basic-range-slider-demo-container />
         <app-custom-color-range-slider-demo-container />
+        <app-form-range-slider-demo-container />
       </section>
     </div>
   `,

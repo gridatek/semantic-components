@@ -1,18 +1,38 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { Emoji, ScEmojiPicker } from '@semantic-components/ui-lab';
+import {
+  Emoji,
+  ScEmojiPicker,
+  ScEmojiPickerCategoryTabs,
+  ScEmojiPickerGrid,
+  ScEmojiPickerRecent,
+  ScEmojiPickerSearch,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-emoji-picker-demo',
-  imports: [ScEmojiPicker],
+  imports: [
+    ScEmojiPicker,
+    ScEmojiPickerSearch,
+    ScEmojiPickerCategoryTabs,
+    ScEmojiPickerGrid,
+    ScEmojiPickerRecent,
+  ],
   template: `
-    <sc-emoji-picker (emojiSelect)="onEmojiSelect($event)" />
+    <div scEmojiPicker (emojiSelect)="onEmojiSelect($event)">
+      <div class="p-2">
+        <input scEmojiPickerSearch />
+      </div>
+      <div scEmojiPickerCategoryTabs></div>
+      <div scEmojiPickerGrid></div>
+      <div scEmojiPickerRecent></div>
+    </div>
     @if (selectedEmoji()) {
       <p class="text-muted-foreground mt-4 text-sm">
         Selected: {{ selectedEmoji()?.emoji }} ({{ selectedEmoji()?.name }})
       </p>
     }
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full flex-col items-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicEmojiPickerDemo {

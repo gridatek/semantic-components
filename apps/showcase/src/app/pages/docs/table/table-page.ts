@@ -3,37 +3,23 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
-} from '@semantic-components/code';
-import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
-import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicTableDemoContainer from './demos/basic-table-demo-container';
 import CaptionTableDemoContainer from './demos/caption-table-demo-container';
 import FooterTableDemoContainer from './demos/footer-table-demo-container';
+import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
 import UsersTableDemoContainer from './demos/users-table-demo-container';
 
 @Component({
   selector: 'app-table-page',
   imports: [
-    ScCodeViewer,
-    ScCodeViewerHeader,
-    ScCodeViewerLabel,
-    ScCodeViewerContent,
-    ScButton,
-    ScCopyToClipboard,
-    SiCheckIcon,
-    SiCopyIcon,
     BasicTableDemoContainer,
     CaptionTableDemoContainer,
     FooterTableDemoContainer,
     UsersTableDemoContainer,
+    TableUsageDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -48,30 +34,7 @@ import UsersTableDemoContainer from './demos/users-table-demo-container';
 
       <section class="space-y-4">
         <h2 scHeading appToc>Usage</h2>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-table-usage-demo-container />
       </section>
 
       <section class="space-y-8">
@@ -86,55 +49,4 @@ import UsersTableDemoContainer from './demos/users-table-demo-container';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TablePage {
-  readonly usageCode = `import {
-  ScTable,
-  ScTableBody,
-  ScTableCaption,
-  ScTableCell,
-  ScTableFooter,
-  ScTableHeaderCell,
-  ScTableHeader,
-  ScTableRow,
-} from '@semantic-components/ui';
-
-@Component({
-  imports: [
-    ScTable,
-    ScTableBody,
-    ScTableCaption,
-    ScTableCell,
-    ScTableFooter,
-    ScTableHeaderCell,
-    ScTableHeader,
-    ScTableRow,
-    TocHeading,
-  ],
-  template: \`
-    <table scTable>
-      <caption scTableCaption>A list of your recent invoices.</caption>
-      <thead scTableHeader>
-        <tr scTableRow>
-          <th scTableHeaderCell>Invoice</th>
-          <th scTableHeaderCell>Status</th>
-          <th scTableHeaderCell class="text-right">Amount</th>
-        </tr>
-      </thead>
-      <tbody scTableBody>
-        <tr scTableRow>
-          <td scTableCell>INV001</td>
-          <td scTableCell>Paid</td>
-          <td scTableCell class="text-right">$250.00</td>
-        </tr>
-      </tbody>
-      <tfoot scTableFooter>
-        <tr scTableRow>
-          <td scTableCell colspan="2">Total</td>
-          <td scTableCell class="text-right">$250.00</td>
-        </tr>
-      </tfoot>
-    </table>
-  \`,
-})
-export class MyComponent {}`;
-}
+export default class TablePage {}

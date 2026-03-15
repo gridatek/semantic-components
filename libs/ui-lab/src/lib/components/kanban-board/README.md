@@ -1,104 +1,103 @@
 # Kanban Board
 
-A drag-and-drop task board component for project management and workflow visualization.
+Directive-based drag-and-drop task board. Directives provide behavior and styling — consumers own the templates.
 
-## Installation
+## Directives
 
-Import the components from the kanban-board module:
-
-```typescript
-import { ScKanbanBoard, ScKanbanCard, ScKanbanColumn } from '@/ui/kanban-board';
-```
+- `ScKanbanBoard` — root directive (`[scKanbanBoard]`) managing columns and cards state
+- `ScKanbanColumn` — column directive (`[scKanbanColumn]`) with drag-and-drop zones
+- `ScKanbanCard` — card directive (`[scKanbanCard]`) with drag behavior and keyboard support
 
 ## Usage
 
 ### Basic Usage
 
 ```html
-<sc-kanban-board [(columns)]="columns" [(cards)]="cards" (cardMoved)="onCardMoved($event)" (cardAdded)="onCardAdded($event)" />
+<div scKanbanBoard #board="scKanbanBoard" [(columns)]="columns" [(cards)]="cards">
+  @for (column of board.sortedColumns(); track column.id) {
+  <div scKanbanColumn #col="scKanbanColumn" [column]="column">
+    <h3>{{ column.title }} ({{ col.columnCards().length }})</h3>
+
+    <div role="list">
+      @for (card of col.columnCards(); track card.id) {
+      <div scKanbanCard [card]="card">
+        <h4>{{ card.title }}</h4>
+      </div>
+      }
+    </div>
+  </div>
+  }
+</div>
 ```
 
-```typescript
-import type { KanbanCard, KanbanColumn } from '@/ui/kanban-board';
-import { signal } from '@angular/core';
-
-columns = signal<KanbanColumn[]>([
-  { id: 'todo', title: 'To Do', order: 0 },
-  { id: 'in-progress', title: 'In Progress', order: 1 },
-  { id: 'done', title: 'Done', order: 2 },
-]);
-
-cards = signal<KanbanCard[]>([
-  { id: '1', title: 'Task 1', columnId: 'todo', order: 0 },
-  { id: '2', title: 'Task 2', columnId: 'in-progress', order: 0 },
-]);
-```
-
-### With Column Colors and WIP Limits
-
-```typescript
-columns = signal<KanbanColumn[]>([
-  { id: 'backlog', title: 'Backlog', order: 0, color: '#6b7280' },
-  { id: 'todo', title: 'To Do', order: 1, color: '#3b82f6' },
-  { id: 'in-progress', title: 'In Progress', order: 2, color: '#f59e0b', limit: 3 },
-  { id: 'done', title: 'Done', order: 3, color: '#22c55e' },
-]);
-```
-
-### Cards with Full Details
-
-```typescript
-cards = signal<KanbanCard[]>([
-  {
-    id: '1',
-    title: 'Implement authentication',
-    description: 'Add login, registration, and password reset',
-    columnId: 'in-progress',
-    order: 0,
-    labels: [
-      { id: 'l1', text: 'Feature', color: '#8b5cf6' },
-      { id: 'l2', text: 'Security', color: '#ef4444' },
-    ],
-    assignee: {
-      id: 'u1',
-      name: 'Alice Johnson',
-      initials: 'AJ',
-    },
-    priority: 'high',
-    dueDate: new Date('2024-12-31'),
-  },
-]);
-```
-
-### Read-Only Board
+### With Full Card Details
 
 ```html
-<sc-kanban-board [(columns)]="columns" [(cards)]="cards" [showAddCard]="false" [showDeleteCard]="false" [showAddColumn]="false" />
+<div scKanbanCard #c="scKanbanCard" [card]="card">
+  @if (card.labels?.length) {
+  <div class="flex gap-1">
+    @for (label of card.labels; track label.id) {
+    <span [style.color]="label.color">{{ label.text }}</span>
+    }
+  </div>
+  }
+
+  <h4>{{ card.title }}</h4>
+
+  @if (card.priority) {
+  <span [class]="c.priorityClass()">{{ c.priorityIcon() }}</span>
+  } @if (card.dueDate) {
+  <span [class]="c.dueDateClass()">{{ c.formatDate(card.dueDate) }}</span>
+  }
+</div>
+```
+
+### Column Collapse
+
+```html
+<div scKanbanColumn #col="scKanbanColumn" [column]="column">
+  <button (click)="col.toggleCollapse()" [attr.aria-expanded]="!col.collapsed()">Toggle</button>
+
+  @if (!col.collapsed()) {
+  <!-- cards -->
+  }
+</div>
+```
+
+### Adding/Deleting Cards
+
+```html
+<!-- Consumer manages add-card UI state -->
+<button (click)="board.addCard(column.id, 'New Card')">Add</button>
+<button (click)="board.deleteCard(column.id, card)">Delete</button>
+```
+
+### Adding Columns
+
+```html
+<button (click)="board.addColumn('New Column')">Add Column</button>
 ```
 
 ### Disabled Board
 
 ```html
-<sc-kanban-board [(columns)]="columns" [(cards)]="cards" [disabled]="true" />
+<div scKanbanBoard [(columns)]="columns" [(cards)]="cards" [disabled]="true">
+  <!-- dragging is blocked -->
+</div>
 ```
 
 ## API Reference
 
-### ScKanbanBoard
-
-The main container component that manages columns and cards.
+### ScKanbanBoard (`[scKanbanBoard]`)
 
 #### Inputs
 
-| Input            | Type             | Default | Description                                       |
-| ---------------- | ---------------- | ------- | ------------------------------------------------- |
-| `columns`        | `KanbanColumn[]` | `[]`    | Array of columns (two-way binding with `model()`) |
-| `cards`          | `KanbanCard[]`   | `[]`    | Array of cards (two-way binding with `model()`)   |
-| `disabled`       | `boolean`        | `false` | Disable all drag and drop interactions            |
-| `showAddCard`    | `boolean`        | `true`  | Show add card buttons in columns                  |
-| `showDeleteCard` | `boolean`        | `true`  | Show delete button on cards                       |
-| `showAddColumn`  | `boolean`        | `true`  | Show add column button                            |
-| `class`          | `string`         | `''`    | Additional CSS classes                            |
+| Input      | Type             | Default | Description                                       |
+| ---------- | ---------------- | ------- | ------------------------------------------------- |
+| `columns`  | `KanbanColumn[]` | `[]`    | Array of columns (two-way binding with `model()`) |
+| `cards`    | `KanbanCard[]`   | `[]`    | Array of cards (two-way binding with `model()`)   |
+| `disabled` | `boolean`        | `false` | Disable all drag and drop interactions            |
+| `class`    | `string`         | `''`    | Additional CSS classes                            |
 
 #### Outputs
 
@@ -111,13 +110,63 @@ The main container component that manages columns and cards.
 | `columnAdded`     | `string`                                   | Emitted when a column is added (title)      |
 | `columnCollapsed` | `{ columnId: string; collapsed: boolean }` | Emitted when a column is collapsed/expanded |
 
-### ScKanbanColumn
+#### Public API
 
-Individual column component (used internally by ScKanbanBoard).
+| Property/Method                       | Returns          | Description                    |
+| ------------------------------------- | ---------------- | ------------------------------ |
+| `sortedColumns()`                     | `KanbanColumn[]` | Columns sorted by order        |
+| `getCardsForColumn(columnId)`         | `KanbanCard[]`   | Cards for a column, sorted     |
+| `moveCard(event)`                     | `void`           | Move a card (called by column) |
+| `addCard(columnId, title)`            | `void`           | Add a new card                 |
+| `deleteCard(columnId, card)`          | `void`           | Delete a card                  |
+| `addColumn(title)`                    | `void`           | Add a new column               |
+| `collapseColumn(columnId, collapsed)` | `void`           | Collapse/expand a column       |
 
-### ScKanbanCard
+### ScKanbanColumn (`[scKanbanColumn]`)
 
-Individual card component (used internally by ScKanbanColumn).
+#### Inputs
+
+| Input    | Type           | Default | Description            |
+| -------- | -------------- | ------- | ---------------------- |
+| `column` | `KanbanColumn` | -       | **Required.** Column   |
+| `class`  | `string`       | `''`    | Additional CSS classes |
+
+#### Public API
+
+| Property/Method    | Returns          | Description                          |
+| ------------------ | ---------------- | ------------------------------------ |
+| `board`            | `ScKanbanBoard`  | Reference to parent board            |
+| `columnCards()`    | `KanbanCard[]`   | Cards in this column                 |
+| `collapsed()`      | `boolean`        | Whether column is collapsed          |
+| `isDragOver()`     | `boolean`        | Whether a card is being dragged over |
+| `dropIndex()`      | `number \| null` | Current drop position index          |
+| `isOverLimit()`    | `boolean`        | Whether WIP limit is exceeded        |
+| `toggleCollapse()` | `void`           | Toggle collapsed state               |
+
+### ScKanbanCard (`[scKanbanCard]`)
+
+#### Inputs
+
+| Input   | Type         | Default | Description            |
+| ------- | ------------ | ------- | ---------------------- |
+| `card`  | `KanbanCard` | -       | **Required.** Card     |
+| `class` | `string`     | `''`    | Additional CSS classes |
+
+#### Outputs
+
+| Output      | Type         | Description                |
+| ----------- | ------------ | -------------------------- |
+| `cardClick` | `KanbanCard` | Emitted on Enter/Space key |
+
+#### Public API
+
+| Property/Method    | Returns         | Description                    |
+| ------------------ | --------------- | ------------------------------ |
+| `board`            | `ScKanbanBoard` | Reference to parent board      |
+| `priorityClass()`  | `string`        | CSS class for priority display |
+| `dueDateClass()`   | `string`        | CSS class for due date display |
+| `priorityIcon()`   | `string`        | Text icon for priority         |
+| `formatDate(date)` | `string`        | Format date as "Mon DD"        |
 
 ## Type Definitions
 
@@ -128,9 +177,9 @@ interface KanbanColumn {
   id: string;
   title: string;
   order: number;
-  color?: string; // Header accent color (hex)
-  limit?: number; // WIP limit - shows warning when exceeded
-  collapsed?: boolean; // Collapsed state
+  color?: string;
+  limit?: number;
+  collapsed?: boolean;
 }
 ```
 
@@ -157,7 +206,7 @@ interface KanbanCard {
 interface KanbanLabel {
   id: string;
   text: string;
-  color: string; // Hex color for label
+  color: string;
 }
 ```
 
@@ -167,8 +216,8 @@ interface KanbanLabel {
 interface KanbanAssignee {
   id: string;
   name: string;
-  avatar?: string; // URL to avatar image
-  initials?: string; // Fallback if no avatar
+  avatar?: string;
+  initials?: string;
 }
 ```
 
@@ -184,55 +233,21 @@ interface KanbanDragEvent {
 }
 ```
 
-### KanbanCardAddEvent
-
-```typescript
-interface KanbanCardAddEvent {
-  columnId: string;
-  title: string;
-}
-```
-
-### KanbanCardDeleteEvent
-
-```typescript
-interface KanbanCardDeleteEvent {
-  card: KanbanCard;
-  columnId: string;
-}
-```
-
 ## Features
 
-- **Drag and Drop**: Move cards between columns and reorder within columns using native HTML5 drag and drop
-- **Visual Feedback**: Drop zones highlight during drag, cards show insertion indicators
-- **Column Management**: Add new columns, collapse/expand columns
-- **Card Management**: Add and delete cards with inline forms
-- **Labels**: Color-coded labels for categorization
-- **Priority Indicators**: Visual priority markers (low, medium, high, urgent)
-- **Due Dates**: Date display with overdue highlighting (red for past, orange for soon)
-- **Assignees**: Avatar or initials display with tooltip
-- **WIP Limits**: Column card limits with warning when exceeded
-- **Keyboard Accessible**: Cards are focusable and can be activated with Enter/Space
-- **Two-Way Binding**: Use `[(columns)]` and `[(cards)]` for automatic state sync
+- **Drag and Drop**: Native HTML5 drag and drop between columns
+- **Visual Feedback**: Drop zones highlight, insertion indicators shown
+- **Column Management**: Add columns, collapse/expand via `toggleCollapse()`
+- **Card Management**: Add/delete cards via board methods
+- **Priority & Due Dates**: Computed CSS classes via card directive
+- **WIP Limits**: `isOverLimit()` computed on column directive
+- **Keyboard Accessible**: Cards focusable, activated with Enter/Space
+- **Two-Way Binding**: `[(columns)]` and `[(cards)]` for state sync
+- **Consumer-Owned Templates**: Full control over rendering
 
 ## Accessibility
 
-- Cards have `role="listitem"` and are keyboard focusable
-- Columns have `role="list"` with descriptive labels
-- Collapse/expand buttons have proper ARIA attributes
-- Delete and add buttons have descriptive `aria-label` attributes
-- Focus indicators are visible for keyboard navigation
-
-## Styling
-
-The component uses Tailwind CSS classes and supports theming through CSS variables:
-
-- `--background` / `--foreground`: Base colors
-- `--card`: Card background
-- `--muted` / `--muted-foreground`: Secondary colors
-- `--primary` / `--primary-foreground`: Accent colors
-- `--destructive`: Delete action color
-- `--ring`: Focus ring color
-
-Custom styling can be applied via the `class` input on the board component.
+- Board has `role="region"` with `aria-label="Kanban board"`
+- Cards have `role="listitem"`, are keyboard focusable (`tabindex="0"`)
+- Collapse buttons should use `aria-expanded` (consumer binds via `col.collapsed()`)
+- All interactive elements should have descriptive `aria-label` attributes

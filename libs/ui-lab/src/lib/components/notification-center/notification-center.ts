@@ -6,6 +6,7 @@ import {
   model,
   output,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import type {
   Notification,
   NotificationAction,
@@ -14,7 +15,7 @@ import type {
 
 export type NotificationFilter = 'all' | 'unread' | 'read';
 
-export interface ScNotificationCenter {
+export interface ScNotificationCenterApi {
   readonly notifications: ReturnType<typeof model<Notification[]>>;
   readonly groups: () => NotificationGroup[];
   readonly title: () => string;
@@ -39,9 +40,8 @@ export interface ScNotificationCenter {
   onActionClick(notification: Notification, action: NotificationAction): void;
 }
 
-export const SC_NOTIFICATION_CENTER = new InjectionToken<ScNotificationCenter>(
-  'SC_NOTIFICATION_CENTER',
-);
+export const SC_NOTIFICATION_CENTER =
+  new InjectionToken<ScNotificationCenterApi>('SC_NOTIFICATION_CENTER');
 
 @Directive({
   selector: '[scNotificationCenter]',
@@ -49,17 +49,19 @@ export const SC_NOTIFICATION_CENTER = new InjectionToken<ScNotificationCenter>(
   providers: [
     {
       provide: SC_NOTIFICATION_CENTER,
-      useExisting: ScNotificationCenterDirective,
+      useExisting: ScNotificationCenter,
     },
   ],
   host: {
     'data-slot': 'notification-center',
     role: 'region',
     'aria-live': 'polite',
+    '[class]': 'class()',
     '[attr.aria-label]': 'title()',
   },
 })
-export class ScNotificationCenterDirective implements ScNotificationCenter {
+export class ScNotificationCenter implements ScNotificationCenterApi {
+  readonly classInput = input<string>('', { alias: 'class' });
   readonly notifications = model<Notification[]>([]);
   readonly groups = input<NotificationGroup[]>([]);
   readonly title = input('Notifications');
@@ -68,7 +70,6 @@ export class ScNotificationCenterDirective implements ScNotificationCenter {
   readonly showDismiss = input(true);
   readonly emptyTitle = input('No notifications');
   readonly emptyDescription = input("You're all caught up!");
-  readonly class = input<string>('');
 
   readonly markRead = output<{ notification: Notification; read: boolean }>();
   readonly markAllRead = output<void>();
@@ -82,6 +83,8 @@ export class ScNotificationCenterDirective implements ScNotificationCenter {
   readonly filterChange = output<NotificationFilter>();
 
   readonly filter = model<NotificationFilter>('all');
+
+  protected readonly class = computed(() => cn(this.classInput()));
 
   readonly totalUnread = computed(
     () => this.notifications().filter((n) => !n.read).length,

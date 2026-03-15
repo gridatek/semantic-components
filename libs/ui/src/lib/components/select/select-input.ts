@@ -4,12 +4,10 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  forwardRef,
   inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScSelect } from './select';
 
 @Component({
   selector: 'input[scSelectInput]',
@@ -26,9 +24,9 @@ import { ScSelect } from './select';
 export class ScSelectInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly select = inject(forwardRef(() => ScSelect));
+  private readonly comboboxInput = inject(ComboboxInput);
 
-  private readonly hasValue = computed(() => this.select.value() != null);
+  private readonly hasValue = computed(() => this.comboboxInput.value() !== '');
 
   protected readonly class = computed(() =>
     cn(

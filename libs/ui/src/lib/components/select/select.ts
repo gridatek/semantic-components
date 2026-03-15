@@ -13,9 +13,25 @@ import {
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
-import { ScSelectList } from './select-list';
 import { ScSelectOrigin } from './select-origin';
 import { ScSelectPortal } from './select-portal';
+
+const positions = [
+  {
+    originX: 'start' as const,
+    originY: 'bottom' as const,
+    overlayX: 'start' as const,
+    overlayY: 'top' as const,
+    offsetY: 4,
+  },
+  {
+    originX: 'start' as const,
+    originY: 'top' as const,
+    overlayX: 'start' as const,
+    overlayY: 'bottom' as const,
+    offsetY: -4,
+  },
+];
 
 @Component({
   selector: 'div[scSelect]',
@@ -37,7 +53,8 @@ import { ScSelectPortal } from './select-portal';
             usePopover: 'inline',
             matchWidth: true,
           }"
-          [cdkConnectedOverlayOpen]="true"
+          [cdkConnectedOverlayOpen]="combobox.expanded()"
+          [cdkConnectedOverlayPositions]="positions"
         >
           <ng-container [ngTemplateOutlet]="selectPortal().templateRef" />
         </ng-template>
@@ -54,29 +71,12 @@ import { ScSelectPortal } from './select-portal';
 })
 export class ScSelect {
   readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly positions = positions;
 
   private readonly trigger = contentChild(ScSelectOrigin);
-  private readonly content = contentChild(ScSelectList, {
-    descendants: true,
-  });
   protected readonly selectPortal = contentChild.required(ScSelectPortal);
-
   readonly origin = computed(() => this.trigger()?.elementRef);
-  readonly values = computed(() => this.content()?.values() ?? []);
-  // TODO: may remove — will use value from input instead
-  readonly value = computed(() => {
-    const vals = this.values();
-    return vals.length > 0 ? vals[0] : undefined;
-  });
-  readonly label = computed(() => {
-    const value = this.value();
-    if (value == null) return '';
-    const list = this.content();
-    if (list) {
-      return list.labelForValue(value);
-    }
-    return String(value);
-  });
+
   protected readonly class = computed(() =>
     cn('relative min-w-36 w-fit', this.classInput()),
   );

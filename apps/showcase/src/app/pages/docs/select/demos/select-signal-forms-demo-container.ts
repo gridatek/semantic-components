@@ -28,11 +28,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   signal,
 } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScField,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScLabel,
   ScSelect,
   ScSelectDisplayValue,
@@ -56,6 +59,8 @@ interface FormModel {
   selector: 'app-select-signal-forms-demo',
   imports: [
     ScField,
+    ScInputGroup,
+    ScInputGroupAddon,
     ScLabel,
     ScSelect,
     ScSelectDisplayValue,
@@ -81,14 +86,18 @@ interface FormModel {
           <label scLabel>Fruit</label>
           <div scSelect class="w-full">
             <div scSelectOrigin>
-              <span scSelectDisplayValue></span>
-              <input
-                scSelectInput
-                [formField]="fruitForm.fruit"
-                placeholder="Select a fruit"
-                aria-label="Fruit dropdown"
-              />
-              <svg scSelectIcon siChevronDownIcon></svg>
+              <div scInputGroup>
+                <span scSelectDisplayValue>{{ displayValue() }}</span>
+                <input
+                  scSelectInput
+                  [formField]="fruitForm.fruit"
+                  placeholder="Select a fruit"
+                  aria-label="Fruit dropdown"
+                />
+                <div scInputGroupAddon align="inline-end">
+                  <svg scSelectIcon siChevronDownIcon></svg>
+                </div>
+              </div>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -117,6 +126,8 @@ interface FormModel {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectSignalFormsDemo {
+  displayValue = computed(() => this.fruitForm.fruit().value());
+
   readonly fruits = ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple'];
 
   readonly formModel = signal<FormModel>({

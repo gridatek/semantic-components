@@ -28,7 +28,9 @@ import { MultipleBurstsConfettiDemoContainer } from './demos/multiple-bursts-con
     <div class="space-y-8">
       <div class="space-y-2">
         <h1 scHeading>Confetti</h1>
-        <p class="text-muted-foreground">A confetti component.</p>
+        <p class="text-muted-foreground">
+          Celebration animation effects powered by canvas-confetti.
+        </p>
         <app-component-badges path="confetti" />
       </div>
 

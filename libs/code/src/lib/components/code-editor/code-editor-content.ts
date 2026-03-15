@@ -240,7 +240,6 @@ export class ScCodeEditorContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Outputs
-  readonly valueChange = output<string>();
   readonly languageDetected = output<ScCodeEditorLanguage>();
   readonly cursorChange = output<{ line: number; column: number }>();
 
@@ -249,8 +248,6 @@ export class ScCodeEditorContent {
   readonly activeColumn = signal(1);
   readonly isFocused = signal(false);
   protected readonly highlightedHtml = signal<SafeHtml | null>(null);
-  private scrollTop = 0;
-  private scrollLeft = 0;
 
   private readonly sanitizer = inject(DomSanitizer);
   private readonly textarea =
@@ -307,9 +304,10 @@ export class ScCodeEditorContent {
 
     // Effect for language detection notification
     effect(() => {
-      if (this.autoDetectLanguage() && this.value()) {
-        const detected = detectLanguage(this.value(), this.filename());
-        this.languageDetected.emit(detected);
+      const lang = this.effectiveLanguage();
+
+      if (this.autoDetectLanguage()) {
+        this.languageDetected.emit(lang);
       }
     });
   }
@@ -342,7 +340,6 @@ export class ScCodeEditorContent {
   protected onInput(event: Event): void {
     const target = event.target as HTMLTextAreaElement;
     this.value.set(target.value);
-    this.valueChange.emit(target.value);
     this.updateCursorPosition(target);
   }
 
@@ -373,7 +370,6 @@ export class ScCodeEditorContent {
             value.slice(0, lineStart) + value.slice(lineStart + removeLength);
 
           this.value.set(newValue);
-          this.valueChange.emit(newValue);
 
           // Restore cursor position
           setTimeout(() => {
@@ -384,7 +380,6 @@ export class ScCodeEditorContent {
         // Indent
         const newValue = value.slice(0, start) + indent + value.slice(end);
         this.value.set(newValue);
-        this.valueChange.emit(newValue);
 
         // Move cursor after indent
         setTimeout(() => {
@@ -422,7 +417,6 @@ export class ScCodeEditorContent {
         value.slice(start);
 
       this.value.set(newValue);
-      this.valueChange.emit(newValue);
 
       setTimeout(() => {
         const newPos = start + 1 + currentIndent.length + extraIndent.length;
@@ -454,7 +448,6 @@ export class ScCodeEditorContent {
           value.slice(start);
 
         this.value.set(newValue);
-        this.valueChange.emit(newValue);
 
         setTimeout(() => {
           target.selectionStart = target.selectionEnd =
@@ -466,14 +459,12 @@ export class ScCodeEditorContent {
 
   protected onScroll(event: Event): void {
     const target = event.target as HTMLTextAreaElement;
-    this.scrollTop = target.scrollTop;
-    this.scrollLeft = target.scrollLeft;
 
     // Sync scroll with the display layer
     const displayLayer = target.previousElementSibling as HTMLElement;
     if (displayLayer) {
-      displayLayer.scrollTop = this.scrollTop;
-      displayLayer.scrollLeft = this.scrollLeft;
+      displayLayer.scrollTop = target.scrollTop;
+      displayLayer.scrollLeft = target.scrollLeft;
     }
   }
 

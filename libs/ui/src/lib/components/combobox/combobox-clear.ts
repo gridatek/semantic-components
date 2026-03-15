@@ -16,7 +16,7 @@ export class ScComboboxClear {
 
   private readonly combobox = inject(forwardRef(() => ScCombobox));
 
-  readonly hasValue = computed(() => this.combobox.selectedLabel() !== '');
+  readonly hasValue = computed(() => this.combobox.hasValue());
 
   protected readonly class = computed(() =>
     cn(

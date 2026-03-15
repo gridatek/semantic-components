@@ -215,6 +215,19 @@ The provider uses `display: contents` to be invisible in layout, letting the tri
 | `start`  | Aligned to start edge of trigger |
 | `end`    | Aligned to end edge of trigger   |
 
+## Inputs
+
+### ScPopoverProvider
+
+| Input    | Type                                     | Default    | Description                                                             |
+| -------- | ---------------------------------------- | ---------- | ----------------------------------------------------------------------- |
+| `side`   | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Which side the popover appears on.                                      |
+| `align`  | `'start' \| 'center' \| 'end'`           | `'center'` | Alignment along the side.                                               |
+| `offset` | `number`                                 | `4`        | Gap (in pixels) between the trigger and the popover.                    |
+| `origin` | `CdkOverlayOrigin`                       | trigger    | Custom overlay origin. Defaults to the trigger element if not provided. |
+| `open`   | `boolean`                                | `false`    | Two-way bindable open state.                                            |
+| `class`  | `string`                                 | `''`       | Custom CSS classes.                                                     |
+
 ## Accessibility
 
 - `role="dialog"` on `ScPopover`

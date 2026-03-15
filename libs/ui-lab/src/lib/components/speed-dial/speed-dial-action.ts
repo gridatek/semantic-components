@@ -1,104 +1,45 @@
-import { NgComponentOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Type,
-  ViewEncapsulation,
-  computed,
-  input,
-  output,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { SC_SPEED_DIAL } from './speed-dial-types';
 
-@Component({
-  selector: 'sc-speed-dial-action',
-  imports: [NgComponentOutlet],
-  template: `
-    <button
-      type="button"
-      [class]="buttonClass()"
-      [disabled]="disabled()"
-      [attr.aria-label]="ariaLabel() || label()"
-      [title]="label()"
-      (click)="actionClick.emit()"
-    >
-      <span [class]="iconClass()">
-        <ng-container *ngComponentOutlet="icon()" />
-      </span>
-      @if (showLabel()) {
-        <span class="sr-only">{{ label() }}</span>
-      }
-    </button>
-    @if (showLabel() && labelVisible()) {
-      <span [class]="labelClass()">{{ label() }}</span>
-    }
-  `,
-  styles: `
-    :host {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    :host(.direction-up),
-    :host(.direction-down) {
-      flex-direction: row;
-    }
-
-    :host(.direction-left) {
-      flex-direction: row-reverse;
-    }
-
-    :host(.direction-right) {
-      flex-direction: row;
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: '[scSpeedDialAction]',
+  host: {
+    'data-slot': 'speed-dial-action',
+    role: 'menuitem',
+    '[class]': 'class()',
+    '[style.transition-delay]': 'transitionDelay()',
+  },
 })
 export class ScSpeedDialAction {
-  readonly icon = input.required<Type<unknown>>();
-  readonly label = input.required<string>();
-  readonly disabled = input(false);
-  readonly ariaLabel = input<string>();
-  readonly showLabel = input(true);
-  readonly labelVisible = input(true);
-  readonly size = input<'sm' | 'md' | 'lg'>('md');
-  readonly class = input<string>('');
+  readonly speedDial = inject(SC_SPEED_DIAL);
 
-  readonly actionClick = output<void>();
+  readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly buttonClass = computed(() =>
-    cn(
-      'inline-flex items-center justify-center rounded-full',
-      'bg-secondary text-secondary-foreground',
-      'shadow-md hover:shadow-lg',
-      'transition-all duration-200',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md',
-      this.sizeClasses(),
-      this.class(),
-    ),
+  protected readonly index = computed(() =>
+    this.speedDial.actions().indexOf(this),
   );
 
-  protected readonly iconClass = computed(() =>
-    cn('inline-flex items-center justify-center', '[&>svg]:w-5 [&>svg]:h-5'),
-  );
+  protected readonly transitionDelay = computed(() => {
+    const i = this.index();
+    const total = this.speedDial.actions().length;
+    return this.speedDial.open() ? `${i * 50}ms` : `${(total - 1 - i) * 30}ms`;
+  });
 
-  protected readonly labelClass = computed(() =>
-    cn(
-      'text-sm font-medium whitespace-nowrap',
-      'bg-popover text-popover-foreground',
-      'px-2 py-1 rounded shadow-sm',
-    ),
-  );
-
-  private sizeClasses(): string {
-    const sizes = {
-      sm: 'h-10 w-10',
-      md: 'h-12 w-12',
-      lg: 'h-14 w-14',
-    };
-    return sizes[this.size()];
-  }
+  protected readonly class = computed(() => {
+    const isOpen = this.speedDial.open();
+    const dir = this.speedDial.direction();
+    return cn(
+      'flex items-center gap-3 transition-all duration-200 ease-out',
+      dir === 'left' ? 'flex-row-reverse' : 'flex-row',
+      isOpen
+        ? 'opacity-100 scale-100 translate-y-0 translate-x-0'
+        : 'opacity-0 scale-75 pointer-events-none',
+      !isOpen && dir === 'up' && 'translate-y-4',
+      !isOpen && dir === 'down' && '-translate-y-4',
+      !isOpen && dir === 'left' && 'translate-x-4',
+      !isOpen && dir === 'right' && '-translate-x-4',
+      this.classInput(),
+    );
+  });
 }

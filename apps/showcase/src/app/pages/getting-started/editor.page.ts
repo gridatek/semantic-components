@@ -13,6 +13,7 @@ import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { ScSeparator } from '@semantic-components/ui';
 import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
@@ -29,6 +30,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     SiCopyIcon,
     ScSeparator,
     ScHeading,
+    PackageManagerInstall,
   ],
   template: `
     <div class="space-y-8">
@@ -49,26 +51,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Install the editor library and its Tiptap peer dependencies.
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>terminal</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="installCode"
-              #copy="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div scCodeViewerContent [code]="installCode" language="bash"></div>
-        </div>
+        <app-package-manager-install
+          packages="@semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extension-placeholder @tiptap/extension-text-align"
+        />
       </section>
 
       <div scSeparator></div>
@@ -171,9 +156,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class EditorInstallPage {
-  readonly installCode =
-    'npm install @semantic-components/editor @tiptap/core @tiptap/starter-kit @tiptap/extension-placeholder @tiptap/extension-text-align';
-
   readonly stylesCode = '@import "@semantic-components/editor/styles";';
 
   readonly sourceCode =
@@ -206,5 +188,5 @@ export default class EditorInstallPage {
     </div>
   \`,
 })
-export class ExampleComponent {}`;
+export class Example {}`;
 }

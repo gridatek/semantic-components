@@ -52,7 +52,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
           <svg siMailIcon></svg>
         </span>
       </div>
-      <input scInput variant="group" placeholder="Email address" />
+      <input scInput placeholder="Email address" />
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

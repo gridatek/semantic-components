@@ -87,7 +87,7 @@ import { ScEditor, ScEditorBoldButton, ScEditorCharCount, ScEditorContent, ScEdi
     </div>
   `,
 })
-export class ExampleComponent {
+export class Example {
   readonly content = signal('');
 }
 ```

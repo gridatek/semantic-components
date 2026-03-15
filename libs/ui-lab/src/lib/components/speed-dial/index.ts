@@ -1,7 +1,7 @@
 export { ScSpeedDial } from './speed-dial';
 export { ScSpeedDialAction } from './speed-dial-action';
-export type {
-  SpeedDialAction,
-  SpeedDialActionClickEvent,
-  SpeedDialDirection,
-} from './speed-dial-types';
+export { ScSpeedDialActionButton } from './speed-dial-action-button';
+export { ScSpeedDialActionLabel } from './speed-dial-action-label';
+export { ScSpeedDialActionList } from './speed-dial-action-list';
+export { ScSpeedDialTrigger } from './speed-dial-trigger';
+export type { SpeedDialDirection, SpeedDialSize } from './speed-dial-types';

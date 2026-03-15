@@ -31,28 +31,38 @@ export class BasicRangeSliderDemoContainer {
 import {
   ScLabel,
   ScRangeSlider,
-  ScRangeSliderMax,
-  ScRangeSliderMin,
+  ScRangeSliderEndThumb,
+  ScRangeSliderStartThumb,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-range-slider-demo',
-  imports: [ScRangeSlider, ScRangeSliderMin, ScRangeSliderMax, ScLabel],
+  imports: [
+    ScRangeSlider,
+    ScRangeSliderStartThumb,
+    ScRangeSliderEndThumb,
+    ScLabel,
+  ],
   template: \`
     <div class="w-[280px] space-y-4">
       <label scLabel>
         Price range: {{ '$' + minValue }} &ndash; {{ '$' + maxValue }}
       </label>
-      <div
-        scRangeSlider
-        [(minValue)]="minValue"
-        [(maxValue)]="maxValue"
-        [min]="0"
-        [max]="1000"
-        [step]="10"
-      >
-        <input scRangeSliderMin aria-label="Minimum price" />
-        <input scRangeSliderMax aria-label="Maximum price" />
+      <div scRangeSlider [step]="10">
+        <input
+          scRangeSliderStartThumb
+          [min]="0"
+          [max]="1000"
+          [(value)]="minValue"
+          aria-label="Minimum price"
+        />
+        <input
+          scRangeSliderEndThumb
+          [min]="0"
+          [max]="1000"
+          [(value)]="maxValue"
+          aria-label="Maximum price"
+        />
       </div>
     </div>
   \`,

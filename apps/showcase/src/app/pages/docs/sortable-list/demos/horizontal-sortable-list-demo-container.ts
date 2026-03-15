@@ -58,6 +58,31 @@ import {
       </p>
     </div>
   \`,
+  styles: \`
+    .cdk-drag-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 0.375rem;
+      border: 1px solid var(--border);
+      background: var(--background);
+      font-size: 0.875rem;
+      font-weight: 500;
+      box-shadow:
+        0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    .cdk-drag-placeholder {
+      border-radius: 0.375rem;
+      border: 1px dashed var(--border);
+      opacity: 0.5;
+    }
+    .cdk-drag-animating {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

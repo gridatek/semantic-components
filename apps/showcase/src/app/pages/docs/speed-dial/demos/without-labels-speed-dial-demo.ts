@@ -2,27 +2,72 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  signal,
 } from '@angular/core';
-import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
+import {
+  ScSpeedDial,
+  ScSpeedDialAction,
+  ScSpeedDialActionButton,
+  ScSpeedDialActionList,
+  ScSpeedDialTrigger,
+} from '@semantic-components/ui-lab';
 import {
   SiCopyIcon,
   SiPencilIcon,
+  SiPlusIcon,
   SiShare2Icon,
   SiTrash2Icon,
+  SiXIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-without-labels-speed-dial-demo',
-  imports: [ScSpeedDial],
+  imports: [
+    ScSpeedDial,
+    ScSpeedDialAction,
+    ScSpeedDialActionButton,
+    ScSpeedDialActionList,
+    ScSpeedDialTrigger,
+    SiPencilIcon,
+    SiCopyIcon,
+    SiShare2Icon,
+    SiTrash2Icon,
+    SiPlusIcon,
+    SiXIcon,
+  ],
   template: `
-    <div class="bg-muted/20 relative h-64 rounded-lg border">
+    <div class="bg-muted/20 relative h-96 w-full rounded-lg border">
       <div class="absolute right-4 bottom-4">
-        <sc-speed-dial
-          [actions]="basicActions()"
-          [showLabels]="false"
-          ariaLabel="Actions without labels"
-        />
+        <div scSpeedDial #dial="scSpeedDial" direction="up">
+          <div scSpeedDialActionList>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Edit">
+                <svg siPencilIcon class="size-5" />
+              </button>
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Copy">
+                <svg siCopyIcon class="size-5" />
+              </button>
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Share">
+                <svg siShare2Icon class="size-5" />
+              </button>
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Delete">
+                <svg siTrash2Icon class="size-5" />
+              </button>
+            </div>
+          </div>
+          <button scSpeedDialTrigger aria-label="Actions without labels">
+            @if (dial.open()) {
+              <svg siXIcon class="size-6" />
+            } @else {
+              <svg siPlusIcon class="size-6" />
+            }
+          </button>
+        </div>
       </div>
     </div>
   `,
@@ -30,27 +75,4 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WithoutLabelsSpeedDialDemo {
-  readonly basicActions = signal<SpeedDialAction[]>([
-    {
-      id: 'edit',
-      icon: SiPencilIcon,
-      label: 'Edit',
-    },
-    {
-      id: 'copy',
-      icon: SiCopyIcon,
-      label: 'Copy',
-    },
-    {
-      id: 'share',
-      icon: SiShare2Icon,
-      label: 'Share',
-    },
-    {
-      id: 'delete',
-      icon: SiTrash2Icon,
-      label: 'Delete',
-    },
-  ]);
-}
+export class WithoutLabelsSpeedDialDemo {}

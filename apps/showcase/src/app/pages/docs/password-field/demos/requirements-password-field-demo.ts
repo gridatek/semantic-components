@@ -4,37 +4,58 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScLabel } from '@semantic-components/ui';
 import {
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScLabel,
   ScPasswordField,
   ScPasswordFieldInput,
-  ScPasswordFieldInputGroup,
   ScPasswordFieldRequirements,
   ScPasswordFieldToggle,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
+import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-requirements-password-field-demo',
   imports: [
     ScPasswordField,
-    ScPasswordFieldInputGroup,
     ScPasswordFieldInput,
     ScPasswordFieldToggle,
     ScPasswordFieldRequirements,
+    ScInputGroup,
+    ScInputGroupAddon,
     ScLabel,
+    SiEyeIcon,
+    SiEyeOffIcon,
   ],
   template: `
-    <div scPasswordField [(value)]="password" class="space-y-2">
-      <label scLabel>Password</label>
-      <div scPasswordFieldInputGroup>
-        <input
-          scPasswordFieldInput
-          placeholder="Enter password"
-          autocomplete="new-password"
-        />
-        <button scPasswordFieldToggle></button>
+    <div class="w-full max-w-sm">
+      <div
+        scPasswordField
+        #passwordField="scPasswordField"
+        [(value)]="password"
+        class="space-y-2"
+      >
+        <label scLabel>Password</label>
+        <div scInputGroup>
+          <input
+            scPasswordFieldInput
+            placeholder="Enter password"
+            autocomplete="new-password"
+          />
+          <div scInputGroupAddon align="inline-end">
+            <button scPasswordFieldToggle>
+              @if (passwordField.visible()) {
+                <svg siEyeOffIcon></svg>
+              } @else {
+                <svg siEyeIcon></svg>
+              }
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
+          </div>
+        </div>
+        <div scPasswordFieldRequirements></div>
       </div>
-      <ul scPasswordFieldRequirements></ul>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

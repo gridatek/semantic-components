@@ -2,46 +2,152 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  signal,
 } from '@angular/core';
-import { ScSpeedDial, type SpeedDialAction } from '@semantic-components/ui-lab';
+import {
+  ScSpeedDial,
+  ScSpeedDialAction,
+  ScSpeedDialActionButton,
+  ScSpeedDialActionLabel,
+  ScSpeedDialActionList,
+  ScSpeedDialTrigger,
+} from '@semantic-components/ui-lab';
 import {
   SiCopyIcon,
   SiPencilIcon,
+  SiPlusIcon,
   SiShare2Icon,
-  SiTrash2Icon,
+  SiXIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-sizes-speed-dial-demo',
-  imports: [ScSpeedDial],
+  imports: [
+    ScSpeedDial,
+    ScSpeedDialAction,
+    ScSpeedDialActionButton,
+    ScSpeedDialActionLabel,
+    ScSpeedDialActionList,
+    ScSpeedDialTrigger,
+    SiPencilIcon,
+    SiCopyIcon,
+    SiShare2Icon,
+    SiPlusIcon,
+    SiXIcon,
+  ],
   template: `
     <div class="flex items-end gap-8 p-4">
       <div class="text-center">
-        <sc-speed-dial
-          [actions]="basicActions().slice(0, 3)"
-          size="sm"
-          actionSize="sm"
-          ariaLabel="Small speed dial"
-        />
+        <div scSpeedDial #dialSm="scSpeedDial" size="sm" direction="up">
+          <div scSpeedDialActionList>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Edit">
+                <svg siPencilIcon class="size-4" />
+              </button>
+              @if (dialSm.open()) {
+                <span scSpeedDialActionLabel>Edit</span>
+              }
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Copy">
+                <svg siCopyIcon class="size-4" />
+              </button>
+              @if (dialSm.open()) {
+                <span scSpeedDialActionLabel>Copy</span>
+              }
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Share">
+                <svg siShare2Icon class="size-4" />
+              </button>
+              @if (dialSm.open()) {
+                <span scSpeedDialActionLabel>Share</span>
+              }
+            </div>
+          </div>
+          <button scSpeedDialTrigger aria-label="Small speed dial">
+            @if (dialSm.open()) {
+              <svg siXIcon class="size-5" />
+            } @else {
+              <svg siPlusIcon class="size-5" />
+            }
+          </button>
+        </div>
         <p class="text-muted-foreground mt-2 text-xs">Small</p>
       </div>
       <div class="text-center">
-        <sc-speed-dial
-          [actions]="basicActions().slice(0, 3)"
-          size="md"
-          actionSize="md"
-          ariaLabel="Medium speed dial"
-        />
+        <div scSpeedDial #dialMd="scSpeedDial" size="md" direction="up">
+          <div scSpeedDialActionList>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Edit">
+                <svg siPencilIcon class="size-5" />
+              </button>
+              @if (dialMd.open()) {
+                <span scSpeedDialActionLabel>Edit</span>
+              }
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Copy">
+                <svg siCopyIcon class="size-5" />
+              </button>
+              @if (dialMd.open()) {
+                <span scSpeedDialActionLabel>Copy</span>
+              }
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Share">
+                <svg siShare2Icon class="size-5" />
+              </button>
+              @if (dialMd.open()) {
+                <span scSpeedDialActionLabel>Share</span>
+              }
+            </div>
+          </div>
+          <button scSpeedDialTrigger aria-label="Medium speed dial">
+            @if (dialMd.open()) {
+              <svg siXIcon class="size-6" />
+            } @else {
+              <svg siPlusIcon class="size-6" />
+            }
+          </button>
+        </div>
         <p class="text-muted-foreground mt-2 text-xs">Medium</p>
       </div>
       <div class="text-center">
-        <sc-speed-dial
-          [actions]="basicActions().slice(0, 3)"
-          size="lg"
-          actionSize="lg"
-          ariaLabel="Large speed dial"
-        />
+        <div scSpeedDial #dialLg="scSpeedDial" size="lg" direction="up">
+          <div scSpeedDialActionList>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Edit">
+                <svg siPencilIcon class="size-6" />
+              </button>
+              @if (dialLg.open()) {
+                <span scSpeedDialActionLabel>Edit</span>
+              }
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Copy">
+                <svg siCopyIcon class="size-6" />
+              </button>
+              @if (dialLg.open()) {
+                <span scSpeedDialActionLabel>Copy</span>
+              }
+            </div>
+            <div scSpeedDialAction>
+              <button scSpeedDialActionButton aria-label="Share">
+                <svg siShare2Icon class="size-6" />
+              </button>
+              @if (dialLg.open()) {
+                <span scSpeedDialActionLabel>Share</span>
+              }
+            </div>
+          </div>
+          <button scSpeedDialTrigger aria-label="Large speed dial">
+            @if (dialLg.open()) {
+              <svg siXIcon class="size-7" />
+            } @else {
+              <svg siPlusIcon class="size-7" />
+            }
+          </button>
+        </div>
         <p class="text-muted-foreground mt-2 text-xs">Large</p>
       </div>
     </div>
@@ -50,27 +156,4 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SizesSpeedDialDemo {
-  readonly basicActions = signal<SpeedDialAction[]>([
-    {
-      id: 'edit',
-      icon: SiPencilIcon,
-      label: 'Edit',
-    },
-    {
-      id: 'copy',
-      icon: SiCopyIcon,
-      label: 'Copy',
-    },
-    {
-      id: 'share',
-      icon: SiShare2Icon,
-      label: 'Share',
-    },
-    {
-      id: 'delete',
-      icon: SiTrash2Icon,
-      label: 'Delete',
-    },
-  ]);
-}
+export class SizesSpeedDialDemo {}

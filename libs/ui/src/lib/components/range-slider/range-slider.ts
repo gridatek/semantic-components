@@ -2,18 +2,23 @@ import {
   Directive,
   ElementRef,
   computed,
+  contentChild,
+  forwardRef,
   inject,
   input,
-  model,
 } from '@angular/core';
 import { cn } from '../../utils';
+// Imported here (below the class) to avoid circular dependency at class-definition time.
+// The forwardRef(() => ...) above defers resolution until runtime.
+import { ScRangeSliderEndThumb } from './range-slider-end-thumb';
+import { ScRangeSliderStartThumb } from './range-slider-start-thumb';
 
 @Directive({
   selector: 'div[scRangeSlider]',
   host: {
     '[class]': 'class()',
-    '[style.--min-percent]': 'minPercentCss()',
-    '[style.--max-percent]': 'maxPercentCss()',
+    '[style.--min-percent]': 'startPercentCss()',
+    '[style.--max-percent]': 'endPercentCss()',
     '(pointerdown)': 'onPointerDown($event)',
   },
 })
@@ -22,30 +27,35 @@ export class ScRangeSlider {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly minValue = model<number>(0);
-  readonly maxValue = model<number>(100);
-
-  readonly min = input<number>(0);
-  readonly max = input<number>(100);
   readonly step = input<number>(1);
   readonly disabled = input<boolean>(false);
+
+  readonly startThumb = contentChild(forwardRef(() => ScRangeSliderStartThumb));
+  readonly endThumb = contentChild(forwardRef(() => ScRangeSliderEndThumb));
+
+  readonly min = computed(() => this.startThumb()?.resolvedMin() ?? 0);
+  readonly max = computed(() => this.endThumb()?.resolvedMax() ?? 100);
 
   protected readonly class = computed(() =>
     cn('relative flex h-3 w-full items-center', this.classInput()),
   );
 
-  readonly minPercent = computed(() => {
+  readonly startPercent = computed(() => {
     const range = this.max() - this.min();
-    return range === 0 ? 0 : ((this.minValue() - this.min()) / range) * 100;
+    const startVal = this.startThumb()?.value() ?? this.min();
+    return range === 0 ? 0 : ((startVal - this.min()) / range) * 100;
   });
 
-  readonly maxPercent = computed(() => {
+  readonly endPercent = computed(() => {
     const range = this.max() - this.min();
-    return range === 0 ? 0 : ((this.maxValue() - this.min()) / range) * 100;
+    const endVal = this.endThumb()?.value() ?? this.max();
+    return range === 0 ? 0 : ((endVal - this.min()) / range) * 100;
   });
 
-  protected readonly minPercentCss = computed(() => `${this.minPercent()}%`);
-  protected readonly maxPercentCss = computed(() => `${this.maxPercent()}%`);
+  protected readonly startPercentCss = computed(
+    () => `${this.startPercent()}%`,
+  );
+  protected readonly endPercentCss = computed(() => `${this.endPercent()}%`);
 
   protected onPointerDown(event: PointerEvent) {
     if (this.disabled()) {
@@ -57,21 +67,25 @@ export class ScRangeSlider {
     const value = this.min() + (percent / 100) * (this.max() - this.min());
     const stepped = Math.round(value / this.step()) * this.step();
 
-    const distToMin = Math.abs(stepped - this.minValue());
-    const distToMax = Math.abs(stepped - this.maxValue());
+    const startThumb = this.startThumb();
+    const endThumb = this.endThumb();
+    const startVal = startThumb?.value() ?? this.min();
+    const endVal = endThumb?.value() ?? this.max();
 
-    if (distToMin <= distToMax) {
-      this.minValue.set(this.clampMin(stepped));
+    const distToStart = Math.abs(stepped - startVal);
+    const distToEnd = Math.abs(stepped - endVal);
+
+    // When equidistant (e.g. both thumbs at same position), prefer the end
+    // thumb so the range can expand outward. Only pick the start thumb when
+    // the click is at or below the current start value (both thumbs collapsed
+    // at the upper end).
+    if (
+      distToStart < distToEnd ||
+      (distToStart === distToEnd && stepped <= startVal)
+    ) {
+      startThumb?.value.set(Math.min(stepped, endVal));
     } else {
-      this.maxValue.set(this.clampMax(stepped));
+      endThumb?.value.set(Math.max(stepped, startVal));
     }
-  }
-
-  clampMin(val: number): number {
-    return Math.min(val, this.maxValue());
-  }
-
-  clampMax(val: number): number {
-    return Math.max(val, this.minValue());
   }
 }

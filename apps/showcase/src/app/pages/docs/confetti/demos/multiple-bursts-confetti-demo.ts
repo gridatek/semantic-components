@@ -2,19 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
-  viewChild,
 } from '@angular/core';
-import { ScConfetti } from '@semantic-components/ui-lab';
+import { ScButton } from '@semantic-components/ui';
+import confetti from 'canvas-confetti';
 
 @Component({
   selector: 'app-multiple-bursts-confetti-demo',
-  imports: [ScConfetti],
+  imports: [ScButton],
   template: `
-    <sc-confetti #confetti />
-    <button
-      class="inline-flex items-center justify-center rounded-md bg-orange-600 px-4 py-2 text-sm font-medium text-white hover:bg-orange-700"
-      (click)="fire()"
-    >
+    <button scButton variant="secondary" (click)="fire()">
       Big Celebration
     </button>
   `,
@@ -23,15 +19,13 @@ import { ScConfetti } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultipleBurstsConfettiDemo {
-  readonly confetti = viewChild.required<ScConfetti>('confetti');
-
   fire(): void {
-    this.confetti().fire({ origin: { x: 0.3, y: 0.6 }, particleCount: 50 });
+    confetti({ origin: { x: 0.3, y: 0.6 }, particleCount: 50 });
     setTimeout(() => {
-      this.confetti().fire({ origin: { x: 0.7, y: 0.6 }, particleCount: 50 });
+      confetti({ origin: { x: 0.7, y: 0.6 }, particleCount: 50 });
     }, 200);
     setTimeout(() => {
-      this.confetti().fire({ origin: { x: 0.5, y: 0.4 }, particleCount: 80 });
+      confetti({ origin: { x: 0.5, y: 0.4 }, particleCount: 80 });
     }, 400);
   }
 }

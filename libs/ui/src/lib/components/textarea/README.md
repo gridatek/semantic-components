@@ -22,24 +22,27 @@ import { ScTextarea } from '@semantic-components/ui';
 
 #### Inputs
 
-| Input              | Type                   | Default     | Description                                                                         |
-| ------------------ | ---------------------- | ----------- | ----------------------------------------------------------------------------------- |
-| `variant`          | `'default' \| 'group'` | `'default'` | Visual variant. Use `'group'` inside input groups.                                  |
-| `id`               | `string`               | auto        | Element id. Falls back to the parent field id or an auto-generated id.              |
-| `class`            | `string`               | `''`        | Additional CSS classes merged with the base styles.                                 |
-| `aria-describedby` | `string`               | `''`        | Explicit `aria-describedby`. Falls back to description ids from a parent `ScField`. |
-| `disabled`         | `boolean`              | `false`     | Disables the textarea. Also reacts to the disabled state of a parent `FormField`.   |
+| Input              | Type      | Default | Description                                                                         |
+| ------------------ | --------- | ------- | ----------------------------------------------------------------------------------- |
+| `id`               | `string`  | auto    | Element id. Falls back to the parent field id or an auto-generated id.              |
+| `class`            | `string`  | `''`    | Additional CSS classes merged with the base styles.                                 |
+| `aria-describedby` | `string`  | `''`    | Explicit `aria-describedby`. Falls back to description ids from a parent `ScField`. |
+| `disabled`         | `boolean` | `false` | Disables the textarea. Also reacts to the disabled state of a parent `FormField`.   |
 
 #### Data attributes
 
-| Attribute   | Value                                                             |
-| ----------- | ----------------------------------------------------------------- |
-| `data-slot` | `"textarea"` (default) or `"input-group-control"` (group variant) |
+| Attribute   | Value       |
+| ----------- | ----------- |
+| `data-slot` | `"control"` |
 
 #### Host bindings
 
 - `aria-invalid` is set automatically when the parent `FormField` is touched and invalid.
 - `disabled` is set from the input or the parent `FormField` disabled state.
+
+**Automatic behavior:**
+
+- Automatically adapts styling when inside an input group (`data-slot=input-group`) — no variant prop needed.
 
 ## Examples
 
@@ -68,7 +71,9 @@ import { ScTextarea } from '@semantic-components/ui';
 ### Inside an input group
 
 ```html
-<textarea scTextarea variant="group"></textarea>
+<div scInputGroup>
+  <textarea scTextarea placeholder="Type your message..."></textarea>
+</div>
 ```
 
 ## Accessibility

@@ -1,22 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
-  selector: 'sc-marquee',
-  template: `
-    <div [class]="innerClass()">
-      <ng-content />
-    </div>
-    <div [class]="innerClass()" aria-hidden="true">
-      <ng-content select="[scMarqueeClone]" />
-    </div>
-  `,
+@Directive({
+  selector: '[scMarquee]',
   host: {
     'data-slot': 'marquee',
     '[class]': 'class()',
@@ -26,59 +12,6 @@ import { cn } from '@semantic-components/ui';
     '[attr.data-pause-on-hover]': 'pauseOnHover() || null',
     '[attr.data-reverse]': 'reverse() || null',
   },
-  styles: `
-    [data-slot='marquee'] {
-      --duration: 40s;
-      --gap: 16px;
-      display: flex;
-      overflow: hidden;
-      gap: var(--gap);
-    }
-
-    [data-slot='marquee'] > div {
-      display: flex;
-      shrink: 0;
-      gap: var(--gap);
-      animation: marquee var(--duration) linear infinite;
-    }
-
-    [data-slot='marquee'][data-direction='vertical'] {
-      flex-direction: column;
-    }
-
-    [data-slot='marquee'][data-direction='vertical'] > div {
-      flex-direction: column;
-      animation-name: marquee-vertical;
-    }
-
-    [data-slot='marquee'][data-reverse] > div {
-      animation-direction: reverse;
-    }
-
-    [data-slot='marquee'][data-pause-on-hover]:hover > div {
-      animation-play-state: paused;
-    }
-
-    @keyframes marquee {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(calc(-100% - var(--gap)));
-      }
-    }
-
-    @keyframes marquee-vertical {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(calc(-100% - var(--gap)));
-      }
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMarquee {
   readonly classInput = input<string>('', { alias: 'class' });
@@ -89,8 +22,4 @@ export class ScMarquee {
   readonly reverse = input<boolean>(false);
 
   protected readonly class = computed(() => cn(this.classInput()));
-
-  protected readonly innerClass = computed(() =>
-    cn('flex shrink-0 items-center justify-around'),
-  );
 }

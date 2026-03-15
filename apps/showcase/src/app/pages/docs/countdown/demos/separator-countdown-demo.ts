@@ -10,7 +10,39 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   imports: [ScCountdown],
   template: `
     <div class="inline-block rounded-lg border p-6">
-      <sc-countdown [targetDate]="futureDate" [showSeparator]="false" />
+      <div
+        scCountdown
+        #cd="scCountdown"
+        [targetDate]="futureDate"
+        class="gap-4"
+      >
+        @if (cd.time().days > 0) {
+          <div class="flex flex-col items-center">
+            <span class="font-mono text-4xl font-bold tabular-nums">
+              {{ cd.padNumber(cd.time().days) }}
+            </span>
+            <span class="text-muted-foreground text-sm">Days</span>
+          </div>
+        }
+        <div class="flex flex-col items-center">
+          <span class="font-mono text-4xl font-bold tabular-nums">
+            {{ cd.padNumber(cd.time().hours) }}
+          </span>
+          <span class="text-muted-foreground text-sm">Hours</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="font-mono text-4xl font-bold tabular-nums">
+            {{ cd.padNumber(cd.time().minutes) }}
+          </span>
+          <span class="text-muted-foreground text-sm">Minutes</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="font-mono text-4xl font-bold tabular-nums">
+            {{ cd.padNumber(cd.time().seconds) }}
+          </span>
+          <span class="text-muted-foreground text-sm">Seconds</span>
+        </div>
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

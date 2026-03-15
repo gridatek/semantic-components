@@ -29,7 +29,7 @@ import { WithoutLabelsSpeedDialDemoContainer } from './demos/without-labels-spee
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>SpeedDial</h1>
+        <h1 scHeading>Speed Dial</h1>
         <p class="text-muted-foreground">
           A floating action button that expands to reveal a set of related
           actions.
