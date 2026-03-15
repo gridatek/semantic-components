@@ -84,6 +84,26 @@ interface PlaylistItem {
       </div>
     </div>
   \`,
+  styles: \`
+    .cdk-drag-preview {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--background);
+      border-bottom: 1px solid var(--border);
+      box-shadow:
+        0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    .cdk-drag-placeholder {
+      border-bottom: 1px dashed var(--border);
+      opacity: 0.5;
+    }
+    .cdk-drag-animating {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
