@@ -1,2 +1,14 @@
-export { ScTourGuide, TourService } from './tour-guide';
-export type { TourStep, TourOptions } from './tour-guide';
+export { ScTourGuide } from './tour-guide';
+export { ScTourGuideMask } from './tour-guide-mask';
+export { ScTourGuideHighlight } from './tour-guide-highlight';
+export { ScTourGuideTooltip } from './tour-guide-tooltip';
+export { ScTourGuideClose } from './tour-guide-close';
+export { ScTourGuideStepNumber } from './tour-guide-step-number';
+export { ScTourGuideTitle } from './tour-guide-title';
+export { ScTourGuideDescription } from './tour-guide-description';
+export { ScTourGuideProgress } from './tour-guide-progress';
+export { ScTourGuideNavigation } from './tour-guide-navigation';
+export { ScTourGuideCounter } from './tour-guide-counter';
+export { ScTourGuideAction } from './tour-guide-action';
+export { TourService } from './tour-service';
+export type { TourStep, TourOptions, TargetRect } from './tour-guide-types';

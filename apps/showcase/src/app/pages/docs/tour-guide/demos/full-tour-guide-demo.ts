@@ -6,13 +6,39 @@ import {
 } from '@angular/core';
 import {
   ScTourGuide,
-  TourOptions,
+  ScTourGuideAction,
+  ScTourGuideClose,
+  ScTourGuideCounter,
+  ScTourGuideDescription,
+  ScTourGuideHighlight,
+  ScTourGuideMask,
+  ScTourGuideNavigation,
+  ScTourGuideProgress,
+  ScTourGuideStepNumber,
+  ScTourGuideTitle,
+  ScTourGuideTooltip,
   TourService,
 } from '@semantic-components/ui-lab';
+import type { TourOptions } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-full-tour-guide-demo',
-  imports: [ScTourGuide],
+  imports: [
+    ScTourGuide,
+    ScTourGuideMask,
+    ScTourGuideHighlight,
+    ScTourGuideTooltip,
+    ScTourGuideClose,
+    ScTourGuideStepNumber,
+    ScTourGuideTitle,
+    ScTourGuideDescription,
+    ScTourGuideProgress,
+    ScTourGuideNavigation,
+    ScTourGuideCounter,
+    ScTourGuideAction,
+    SiXIcon,
+  ],
   template: `
     <div class="space-y-8">
       <!-- Demo UI elements -->
@@ -80,12 +106,61 @@ import {
         </button>
       </div>
 
-      <!-- Tour Guide Component -->
-      <sc-tour-guide
-        (stepChange)="onStepChange($event)"
-        (tourComplete)="onTourComplete()"
-        (tourClosed)="onTourClosed()"
-      />
+      <!-- Tour Guide -->
+      @if (tourService.isActive()) {
+        <div
+          scTourGuide
+          (stepChange)="onStepChange($event)"
+          (tourComplete)="onTourComplete()"
+          (tourClosed)="onTourClosed()"
+          #guide="scTourGuide"
+        >
+          <svg scTourGuideMask></svg>
+
+          @if (guide.targetRect()) {
+            <div scTourGuideHighlight></div>
+          }
+
+          @if (guide.currentStep()) {
+            <div scTourGuideTooltip>
+              @if (guide.allowClose()) {
+                <button scTourGuideClose aria-label="Close tour">
+                  <svg siXIcon class="size-4"></svg>
+                </button>
+              }
+
+              @if (guide.showStepNumbers()) {
+                <span scTourGuideStepNumber></span>
+              }
+
+              <div class="pr-6">
+                <h3 scTourGuideTitle></h3>
+                <p scTourGuideDescription></p>
+              </div>
+
+              @if (guide.showProgress()) {
+                <div scTourGuideProgress></div>
+              }
+
+              <div scTourGuideNavigation>
+                <span scTourGuideCounter></span>
+                <div class="flex gap-2">
+                  @if (!guide.isFirstStep()) {
+                    <button scTourGuideAction action="previous">
+                      Previous
+                    </button>
+                  }
+                  @if (guide.isLastStep()) {
+                    <button scTourGuideAction action="finish">Finish</button>
+                  } @else {
+                    <button scTourGuideAction action="next">Next</button>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
@@ -93,7 +168,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FullTourGuideDemo {
-  private readonly tourService = inject(TourService);
+  protected readonly tourService = inject(TourService);
 
   startTour(): void {
     const options: TourOptions = {
