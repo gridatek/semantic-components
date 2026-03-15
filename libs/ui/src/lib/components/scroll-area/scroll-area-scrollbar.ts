@@ -198,9 +198,6 @@ export class ScScrollBar {
   );
 
   protected readonly thumbClass = computed(() =>
-    cn(
-      'rounded-full bg-border',
-      this.isVertical() ? 'w-full' : 'h-full',
-    ),
+    cn('rounded-full bg-border', this.isVertical() ? 'w-full' : 'h-full'),
   );
 }
