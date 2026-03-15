@@ -11,6 +11,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 interface Task {
@@ -21,7 +22,14 @@ interface Task {
 
 @Component({
   selector: 'app-task-list-sortable-list-demo',
-  imports: [CdkDropList, CdkDrag, CdkDragHandle, SiGripVerticalIcon],
+  imports: [
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle,
+    ScCheckboxField,
+    ScCheckbox,
+    SiGripVerticalIcon,
+  ],
   template: `
     <div class="max-w-md">
       <div
@@ -40,12 +48,14 @@ interface Task {
               siGripVerticalIcon
               class="text-muted-foreground size-4 shrink-0 cursor-grab"
             ></svg>
-            <input
-              type="checkbox"
-              [checked]="task.completed"
-              (change)="toggleTask(task.id)"
-              class="border-primary size-4 rounded"
-            />
+            <label scCheckboxField>
+              <input
+                type="checkbox"
+                scCheckbox
+                [checked]="task.completed"
+                (checkedChange)="toggleTask(task.id)"
+              />
+            </label>
             <span
               class="flex-1 text-sm"
               [class.line-through]="task.completed"
