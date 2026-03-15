@@ -59,6 +59,25 @@ interface KanbanCard {
       </div>
     </div>
   `,
+  styles: `
+    .cdk-drag-preview {
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      background: var(--card);
+      box-shadow:
+        0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+    .cdk-drag-placeholder {
+      border-radius: 0.5rem;
+      border: 1px dashed var(--border);
+      opacity: 0.5;
+    }
+    .cdk-drag-animating {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
