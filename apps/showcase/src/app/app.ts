@@ -7,12 +7,14 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { cn } from '@semantic-components/ui';
+import { CommandPalette } from './components/command-palette/command-palette';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommandPalette],
   template: `
     <router-outlet />
+    <app-command-palette />
   `,
   host: {
     '[class]': 'class()',

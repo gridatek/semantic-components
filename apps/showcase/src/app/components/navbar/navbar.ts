@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
+  ScInputButton,
+  ScKbd,
   ScLink,
   ScNavigationMenu,
   ScNavigationMenuContent,
@@ -34,9 +36,11 @@ import {
   SiGithubIcon,
   SiMenuIcon,
   SiMoonIcon,
+  SiSearchIcon,
   SiSunIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { CommandPaletteService } from '../../services/command-palette.service';
 import { ComponentsService } from '../../services/components.service';
 import { GithubService } from '../../services/github.service';
 import { Logo } from '../logo/logo';
@@ -55,6 +59,8 @@ import { Logo } from '../logo/logo';
     ScNavbarMobileMenu,
     ScNavbarMobileLink,
     ScNavbarMobileTrigger,
+    ScInputButton,
+    ScKbd,
     ScLink,
     ScThemeModeToggle,
     ScNavigationMenu,
@@ -65,6 +71,7 @@ import { Logo } from '../logo/logo';
     ScNavigationMenuPortal,
     ScNavigationMenuTrigger,
     SiGithubIcon,
+    SiSearchIcon,
     SiSunIcon,
     SiMoonIcon,
     SiMenuIcon,
@@ -139,6 +146,15 @@ import { Logo } from '../logo/logo';
 
         <!-- Actions -->
         <div scNavbarActions>
+          <button
+            scInputButton
+            class="hidden w-48 md:flex lg:w-64"
+            (click)="openCommandPalette()"
+          >
+            <svg siSearchIcon class="size-4 shrink-0"></svg>
+            <span class="flex-1 text-start">Search...</span>
+            <kbd scKbd>&#8984;K</kbd>
+          </button>
           <a
             scLink
             variant="ghost"
@@ -238,4 +254,10 @@ export default class Navbar {
 
   private readonly github = inject(GithubService);
   protected readonly starCount = this.github.starCount;
+
+  private readonly commandPalette = inject(CommandPaletteService);
+
+  openCommandPalette(): void {
+    this.commandPalette.open.set(true);
+  }
 }
