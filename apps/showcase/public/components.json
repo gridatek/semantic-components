@@ -215,7 +215,7 @@
   {
     "name": "Confetti",
     "path": "confetti",
-    "description": "Celebration animation effect.",
+    "description": "Celebration animation effects powered by canvas-confetti.",
     "status": "Experimental",
     "library": "ui-lab",
     "category": "Feedback"

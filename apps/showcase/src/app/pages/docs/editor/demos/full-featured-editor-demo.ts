@@ -146,7 +146,7 @@ import {
               scEditorHeading
               value="heading"
               #heading="scEditorHeading"
-              class="hover:bg-accent flex items-center gap-1 rounded px-2 py-1 text-sm"
+              class="w-auto gap-1"
             >
               {{ heading.currentHeadingLabel() }}
               <svg siChevronDownIcon class="size-4"></svg>

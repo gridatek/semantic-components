@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR, type ScEditorHeadingLevel } from './editor';
 
 const HEADING_OPTIONS: { value: ScEditorHeadingLevel; label: string }[] = [
@@ -14,20 +14,32 @@ const HEADING_OPTIONS: { value: ScEditorHeadingLevel; label: string }[] = [
 ];
 
 @Directive({
-  selector: '[scEditorHeading]',
+  selector: 'button[scEditorHeading]',
   exportAs: 'scEditorHeading',
   hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
   host: {
     'data-slot': 'editor-heading',
+    type: 'button',
     '[class]': 'class()',
+    '[disabled]': 'disabled()',
   },
 })
 export class ScEditorHeading {
   readonly editor = inject(SC_EDITOR);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly disabledInput = input(false, { alias: 'disabled' });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  protected readonly class = computed(() =>
+    cn(
+      toggleVariants({ variant: 'default', size: 'default' }),
+      this.classInput(),
+    ),
+  );
+
+  protected readonly disabled = computed(
+    () => this.disabledInput() || this.editor.disabled(),
+  );
 
   readonly headingOptions = HEADING_OPTIONS;
 
