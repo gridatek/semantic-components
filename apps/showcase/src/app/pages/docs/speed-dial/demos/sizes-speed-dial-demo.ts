@@ -18,30 +18,33 @@ import {
   template: `
     <div class="flex items-end gap-8 p-4">
       <div class="text-center">
-        <sc-speed-dial
+        <div
+          scSpeedDial
           [actions]="basicActions().slice(0, 3)"
           size="sm"
           actionSize="sm"
           ariaLabel="Small speed dial"
-        />
+        ></div>
         <p class="text-muted-foreground mt-2 text-xs">Small</p>
       </div>
       <div class="text-center">
-        <sc-speed-dial
+        <div
+          scSpeedDial
           [actions]="basicActions().slice(0, 3)"
           size="md"
           actionSize="md"
           ariaLabel="Medium speed dial"
-        />
+        ></div>
         <p class="text-muted-foreground mt-2 text-xs">Medium</p>
       </div>
       <div class="text-center">
-        <sc-speed-dial
+        <div
+          scSpeedDial
           [actions]="basicActions().slice(0, 3)"
           size="lg"
           actionSize="lg"
           ariaLabel="Large speed dial"
-        />
+        ></div>
         <p class="text-muted-foreground mt-2 text-xs">Large</p>
       </div>
     </div>

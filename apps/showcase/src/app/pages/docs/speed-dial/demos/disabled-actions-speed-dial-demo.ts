@@ -18,10 +18,11 @@ import {
   template: `
     <div class="bg-muted/20 relative h-96 w-full rounded-lg border">
       <div class="absolute right-4 bottom-4">
-        <sc-speed-dial
+        <div
+          scSpeedDial
           [actions]="actionsWithDisabled()"
           ariaLabel="Actions with disabled items"
-        />
+        ></div>
       </div>
     </div>
   `,

@@ -22,10 +22,11 @@ import {
   template: `
     <div class="bg-muted/20 relative h-96 w-full rounded-lg border">
       <div class="absolute right-4 bottom-4">
-        <sc-speed-dial
+        <div
+          scSpeedDial
           [actions]="basicActions()"
           (actionClick)="onActionClick($event)"
-        />
+        ></div>
       </div>
     </div>
     @if (lastAction()) {

@@ -23,66 +23,67 @@ import type {
 } from './speed-dial-types';
 
 @Component({
-  selector: 'sc-speed-dial',
+  selector: '[scSpeedDial]',
   imports: [ScSpeedDialAction, SiPlusIcon, SiXIcon, NgComponentOutlet],
   template: `
-    <div [class]="containerClass()" role="menu" [attr.aria-expanded]="open()">
-      <!-- Actions -->
-      <div [class]="actionsContainerClass()" [attr.aria-hidden]="!open()">
-        @for (action of actions(); track action.id; let i = $index) {
+    <!-- Actions -->
+    <div [class]="actionsContainerClass()" [attr.aria-hidden]="!open()">
+      @for (action of actions(); track action.id; let i = $index) {
+        <div
+          [class]="actionWrapperClass(i)"
+          [style.transition-delay]="
+            open() ? i * 50 + 'ms' : (actions().length - 1 - i) * 30 + 'ms'
+          "
+        >
           <div
-            [class]="actionWrapperClass(i)"
-            [style.transition-delay]="
-              open() ? i * 50 + 'ms' : (actions().length - 1 - i) * 30 + 'ms'
-            "
-          >
-            <sc-speed-dial-action
-              [icon]="action.icon"
-              [label]="action.label"
-              [disabled]="action.disabled ?? false"
-              [ariaLabel]="action.ariaLabel"
-              [showLabel]="showLabels()"
-              [labelVisible]="open()"
-              [size]="actionSize()"
-              [direction]="direction()"
-              (actionClick)="onActionClick(action, i)"
-            />
-          </div>
-        }
-      </div>
-
-      <!-- Main FAB button -->
-      <button
-        type="button"
-        [class]="fabClass()"
-        [attr.aria-label]="ariaLabel()"
-        [attr.aria-expanded]="open()"
-        [attr.aria-haspopup]="true"
-        (click)="toggle()"
-      >
-        <span [class]="fabIconClass()">
-          @if (open()) {
-            @if (closeIcon()) {
-              <ng-container *ngComponentOutlet="closeIcon()" />
-            } @else {
-              <svg siXIcon class="size-6"></svg>
-            }
-          } @else {
-            @if (icon()) {
-              <ng-container *ngComponentOutlet="icon()" />
-            } @else {
-              <svg siPlusIcon class="size-6"></svg>
-            }
-          }
-        </span>
-        @if (label() && !open()) {
-          <span class="sr-only">{{ label() }}</span>
-        }
-      </button>
+            scSpeedDialAction
+            [icon]="action.icon"
+            [label]="action.label"
+            [disabled]="action.disabled ?? false"
+            [ariaLabel]="action.ariaLabel"
+            [showLabel]="showLabels()"
+            [labelVisible]="open()"
+            [size]="actionSize()"
+            [direction]="direction()"
+            (actionClick)="onActionClick(action, i)"
+          ></div>
+        </div>
+      }
     </div>
+
+    <!-- Main FAB button -->
+    <button
+      type="button"
+      [class]="fabClass()"
+      [attr.aria-label]="ariaLabel()"
+      [attr.aria-expanded]="open()"
+      [attr.aria-haspopup]="true"
+      (click)="toggle()"
+    >
+      <span [class]="fabIconClass()">
+        @if (open()) {
+          @if (closeIcon()) {
+            <ng-container *ngComponentOutlet="closeIcon()" />
+          } @else {
+            <svg siXIcon class="size-6"></svg>
+          }
+        } @else {
+          @if (icon()) {
+            <ng-container *ngComponentOutlet="icon()" />
+          } @else {
+            <svg siPlusIcon class="size-6"></svg>
+          }
+        }
+      </span>
+      @if (label() && !open()) {
+        <span class="sr-only">{{ label() }}</span>
+      }
+    </button>
   `,
   host: {
-    class: 'relative inline-block',
+    '[class]': 'hostClass()',
+    '[attr.role]': '"menu"',
+    '[attr.aria-expanded]': 'open()',
     '(document:keydown.escape)': 'onEscape()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -91,6 +92,8 @@ import type {
 export class ScSpeedDial {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
+
+  readonly classInput = input<string>('', { alias: 'class' });
 
   readonly actions = input<SpeedDialAction[]>([]);
   readonly direction = input<SpeedDialDirection>('up');
@@ -103,14 +106,13 @@ export class ScSpeedDial {
   readonly closeOnOutsideClick = input(true);
   readonly size = input<'sm' | 'md' | 'lg'>('md');
   readonly actionSize = input<'sm' | 'md' | 'lg'>('md');
-  readonly class = input<string>('');
 
   readonly open = model(false);
 
   readonly actionClick = output<SpeedDialActionClickEvent>();
   readonly openChange = output<boolean>();
 
-  protected readonly containerClass = computed(() => {
+  protected readonly hostClass = computed(() => {
     const dir = this.direction();
     return cn(
       'relative inline-flex',
@@ -118,7 +120,7 @@ export class ScSpeedDial {
       dir === 'down' && 'flex-col items-center',
       dir === 'left' && 'flex-row-reverse items-center',
       dir === 'right' && 'flex-row items-center',
-      this.class(),
+      this.classInput(),
     );
   });
 

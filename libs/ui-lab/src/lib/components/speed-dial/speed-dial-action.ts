@@ -11,7 +11,7 @@ import {
 import { cn } from '@semantic-components/ui';
 
 @Component({
-  selector: 'sc-speed-dial-action',
+  selector: '[scSpeedDialAction]',
   imports: [NgComponentOutlet],
   template: `
     <button
@@ -40,6 +40,8 @@ import { cn } from '@semantic-components/ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSpeedDialAction {
+  readonly classInput = input<string>('', { alias: 'class' });
+
   readonly icon = input.required<Type<unknown>>();
   readonly label = input.required<string>();
   readonly disabled = input(false);
@@ -55,6 +57,7 @@ export class ScSpeedDialAction {
     cn(
       'flex items-center gap-3',
       this.direction() === 'left' ? 'flex-row-reverse' : 'flex-row',
+      this.classInput(),
     ),
   );
 

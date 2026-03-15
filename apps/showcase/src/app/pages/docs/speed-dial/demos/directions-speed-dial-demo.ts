@@ -19,11 +19,12 @@ import {
       <!-- Up Direction -->
       <div class="bg-muted/20 relative h-72 rounded-lg border">
         <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
-          <sc-speed-dial
+          <div
+            scSpeedDial
             [actions]="directionActions()"
             direction="up"
             ariaLabel="Up direction"
-          />
+          ></div>
         </div>
         <span class="text-muted-foreground absolute top-2 left-2 text-xs">
           Up (default)
@@ -33,11 +34,12 @@ import {
       <!-- Down Direction -->
       <div class="bg-muted/20 relative h-72 rounded-lg border">
         <div class="absolute top-4 left-1/2 -translate-x-1/2">
-          <sc-speed-dial
+          <div
+            scSpeedDial
             [actions]="directionActions()"
             direction="down"
             ariaLabel="Down direction"
-          />
+          ></div>
         </div>
         <span class="text-muted-foreground absolute top-2 left-2 text-xs">
           Down
@@ -47,11 +49,12 @@ import {
       <!-- Left Direction -->
       <div class="bg-muted/20 relative h-72 rounded-lg border">
         <div class="absolute top-1/2 left-4 -translate-y-1/2">
-          <sc-speed-dial
+          <div
+            scSpeedDial
             [actions]="directionActions()"
             direction="left"
             ariaLabel="Left direction"
-          />
+          ></div>
         </div>
         <span class="text-muted-foreground absolute top-2 left-2 text-xs">
           Left
@@ -61,11 +64,12 @@ import {
       <!-- Right Direction -->
       <div class="bg-muted/20 relative h-72 rounded-lg border">
         <div class="absolute top-1/2 right-4 -translate-y-1/2">
-          <sc-speed-dial
+          <div
+            scSpeedDial
             [actions]="directionActions()"
             direction="right"
             ariaLabel="Right direction"
-          />
+          ></div>
         </div>
         <span class="text-muted-foreground absolute top-2 left-2 text-xs">
           Right
