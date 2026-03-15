@@ -15,7 +15,7 @@ import {
   selector: 'app-directions-speed-dial-demo',
   imports: [ScSpeedDial],
   template: `
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid w-full grid-cols-2 gap-4">
       <!-- Up Direction -->
       <div class="bg-muted/20 relative h-48 rounded-lg border">
         <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
