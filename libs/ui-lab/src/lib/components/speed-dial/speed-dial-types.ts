@@ -1,16 +1,7 @@
-import type { Type } from '@angular/core';
+import { InjectionToken } from '@angular/core';
+import type { ScSpeedDial } from './speed-dial';
 
 export type SpeedDialDirection = 'up' | 'down' | 'left' | 'right';
+export type SpeedDialSize = 'sm' | 'md' | 'lg';
 
-export interface SpeedDialAction {
-  id: string;
-  icon: Type<unknown>;
-  label: string;
-  disabled?: boolean;
-  ariaLabel?: string;
-}
-
-export interface SpeedDialActionClickEvent {
-  action: SpeedDialAction;
-  index: number;
-}
+export const SC_SPEED_DIAL = new InjectionToken<ScSpeedDial>('SC_SPEED_DIAL');
