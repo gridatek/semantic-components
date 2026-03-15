@@ -27,7 +27,7 @@ export class ScEditorHeadingMenu {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  protected readonly class = computed(() => cn('', this.classInput()));
 
   readonly headingOptions = HEADING_OPTIONS;
 
