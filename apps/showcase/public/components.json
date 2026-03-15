@@ -218,8 +218,7 @@
     "description": "Celebration animation effect.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Feedback",
-    "hidden": true
+    "category": "Feedback"
   },
   {
     "name": "Context Menu",
