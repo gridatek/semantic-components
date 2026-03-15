@@ -32,12 +32,22 @@ import {
 } from '@semantic-components/carousel';
 import {
   ScLightbox,
+  ScLightboxClose,
+  ScLightboxCounter,
   ScLightboxGallery,
   ScLightboxGalleryItem,
   ScLightboxImageData,
+  ScLightboxNext,
   ScLightboxPortal,
+  ScLightboxPrev,
   ScLightboxProvider,
   ScLightboxThumbnail,
+  ScLightboxThumbnailBar,
+  ScLightboxToolbar,
+  ScLightboxZoomControls,
+  ScLightboxZoomIn,
+  ScLightboxZoomOut,
+  ScLightboxZoomReset,
 } from '@semantic-components/ui-lab';
 import {
   SiChevronLeftIcon,
@@ -53,10 +63,20 @@ import {
   imports: [
     ScLightboxProvider,
     ScLightbox,
+    ScLightboxClose,
+    ScLightboxCounter,
     ScLightboxGallery,
     ScLightboxGalleryItem,
+    ScLightboxNext,
     ScLightboxPortal,
+    ScLightboxPrev,
     ScLightboxThumbnail,
+    ScLightboxThumbnailBar,
+    ScLightboxToolbar,
+    ScLightboxZoomControls,
+    ScLightboxZoomIn,
+    ScLightboxZoomOut,
+    ScLightboxZoomReset,
     ScCarousel,
     ScCarouselViewport,
     ScCarouselTrack,
@@ -89,13 +109,9 @@ import {
 
       <ng-template scLightboxPortal>
         <div scLightbox>
-          <button
-            type="button"
-            class="absolute top-4 right-4 z-10 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-            (click)="lightbox.close()"
-            aria-label="Close lightbox"
-          >
-            <svg siXIcon class="size-6"></svg>
+          <button scLightboxClose>
+            <svg siXIcon></svg>
+            <span class="sr-only">Close lightbox</span>
           </button>
 
           <div
@@ -130,70 +146,38 @@ import {
             </div>
 
             @if (images.length > 1) {
-              <button
-                type="button"
-                class="absolute top-1/2 left-4 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                (click)="carousel.scrollPrev()"
-                aria-label="Previous image"
-              >
-                <svg siChevronLeftIcon class="size-8"></svg>
+              <button scLightboxPrev>
+                <svg siChevronLeftIcon></svg>
+                <span class="sr-only">Previous image</span>
               </button>
-              <button
-                type="button"
-                class="absolute top-1/2 right-4 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white"
-                (click)="carousel.scrollNext()"
-                aria-label="Next image"
-              >
-                <svg siChevronRightIcon class="size-8"></svg>
+              <button scLightboxNext>
+                <svg siChevronRightIcon></svg>
+                <span class="sr-only">Next image</span>
               </button>
             }
           </div>
 
-          <div
-            class="flex items-center justify-center gap-2 bg-black/50 px-4 py-3"
-          >
-            <span class="text-sm text-white/80">
-              {{ lightbox.currentIndex() + 1 }} /
-              {{ lightbox.images().length }}
-            </span>
-            <div class="ml-4 flex items-center gap-1">
-              <button
-                type="button"
-                class="p-2 text-white/80 transition-colors hover:text-white"
-                (click)="lightbox.zoomOut()"
-                [disabled]="lightbox.zoomLevel() <= 0.5"
-                aria-label="Zoom out"
-              >
-                <svg siZoomOutIcon class="size-5"></svg>
+          <div scLightboxToolbar>
+            <span scLightboxCounter></span>
+            <div scLightboxZoomControls>
+              <button scLightboxZoomOut value="zoom-out">
+                <svg siZoomOutIcon></svg>
               </button>
               <span class="min-w-12 text-center text-sm text-white/80">
                 {{ Math.round(lightbox.zoomLevel() * 100) }}%
               </span>
-              <button
-                type="button"
-                class="p-2 text-white/80 transition-colors hover:text-white"
-                (click)="lightbox.zoomIn()"
-                [disabled]="lightbox.zoomLevel() >= 3"
-                aria-label="Zoom in"
-              >
-                <svg siZoomInIcon class="size-5"></svg>
+              <button scLightboxZoomIn value="zoom-in">
+                <svg siZoomInIcon></svg>
               </button>
-              <button
-                type="button"
-                class="p-2 text-white/80 transition-colors hover:text-white"
-                (click)="lightbox.resetZoom()"
-                aria-label="Reset zoom"
-              >
-                <svg siMinimize2Icon class="size-5"></svg>
+              <button scLightboxZoomReset value="zoom-reset">
+                <svg siMinimize2Icon></svg>
               </button>
             </div>
           </div>
 
-          <div
-            class="flex items-center justify-center gap-2 overflow-x-auto bg-black/50 px-4 py-3"
-          >
+          <div scLightboxThumbnailBar>
             @for (image of lightbox.images(); track image.src; let i = $index) {
-              <button type="button" scLightboxThumbnail [index]="i">
+              <button type="button" scLightboxThumbnail [index]="i" [value]="i">
                 <img
                   [src]="image.thumbnail || image.src"
                   [alt]="image.alt || 'Thumbnail ' + (i + 1)"
