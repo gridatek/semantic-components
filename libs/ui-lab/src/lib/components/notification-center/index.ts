@@ -1,9 +1,8 @@
 export {
-  ScNotificationCenterDirective,
-  ScNotificationCenterDirective as ScNotificationCenter,
+  ScNotificationCenter,
   SC_NOTIFICATION_CENTER,
   type NotificationFilter,
-  type ScNotificationCenter as ScNotificationCenterType,
+  type ScNotificationCenterApi,
 } from './notification-center';
 export { ScNotificationCenterContainer } from './notification-center-container';
 export { ScNotificationGroup } from './notification-group';

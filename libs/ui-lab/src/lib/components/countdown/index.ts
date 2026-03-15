@@ -1,3 +1,2 @@
-export { ScCountdown } from './countdown';
-export { ScCountdownSimple } from './countdown-simple';
+export { ScCountdown, SC_COUNTDOWN } from './countdown';
 export type { CountdownTime } from './countdown';

@@ -18,7 +18,7 @@ import {
 import type { Notification, NotificationAction } from './notification-types';
 
 @Component({
-  selector: 'sc-notification-item',
+  selector: 'div[scNotificationItem]',
   imports: [
     SiXIcon,
     SiCheckIcon,
@@ -28,123 +28,123 @@ import type { Notification, NotificationAction } from './notification-types';
     SiInfoIcon,
   ],
   template: `
-    <div
-      [class]="itemClass()"
-      role="article"
-      [attr.aria-label]="notification().title"
-      tabindex="0"
-      (click)="onItemClick()"
-      (keydown.enter)="onItemClick()"
-      (keydown.space)="onItemClick(); $event.preventDefault()"
-    >
-      <!-- Unread indicator -->
-      @if (!notification().read) {
-        <div
-          class="bg-primary absolute top-1/2 left-2 h-2 w-2 -translate-y-1/2 rounded-full"
-          aria-label="Unread"
-        ></div>
-      }
+    <!-- Unread indicator -->
+    @if (!notification().read) {
+      <div
+        class="bg-primary absolute top-1/2 left-2 h-2 w-2 -translate-y-1/2 rounded-full"
+        aria-label="Unread"
+      ></div>
+    }
 
-      <!-- Icon or Avatar -->
-      <div class="ml-4 shrink-0">
-        @if (notification().avatar) {
-          <img
-            [src]="notification().avatar"
-            [alt]="notification().title"
-            class="h-10 w-10 rounded-full object-cover"
-          />
-        } @else {
-          <div [class]="iconContainerClass()">
-            @if (notification().icon) {
-              <span [innerHTML]="notification().icon"></span>
-            } @else {
-              @switch (notification().type) {
-                @case ('success') {
-                  <svg siCheckIcon class="size-5"></svg>
-                }
-                @case ('warning') {
-                  <svg siTriangleAlertIcon class="size-5"></svg>
-                }
-                @case ('error') {
-                  <svg siCircleXIcon class="size-5"></svg>
-                }
-                @case ('message') {
-                  <svg siMessageSquareIcon class="size-5"></svg>
-                }
-                @default {
-                  <svg siInfoIcon class="size-5"></svg>
-                }
+    <!-- Icon or Avatar -->
+    <div class="ml-4 shrink-0">
+      @if (notification().avatar) {
+        <img
+          [src]="notification().avatar"
+          [alt]="notification().title"
+          class="h-10 w-10 rounded-full object-cover"
+        />
+      } @else {
+        <div [class]="iconContainerClass()">
+          @if (notification().icon) {
+            <span [innerHTML]="notification().icon"></span>
+          } @else {
+            @switch (notification().type) {
+              @case ('success') {
+                <svg siCheckIcon class="size-5"></svg>
+              }
+              @case ('warning') {
+                <svg siTriangleAlertIcon class="size-5"></svg>
+              }
+              @case ('error') {
+                <svg siCircleXIcon class="size-5"></svg>
+              }
+              @case ('message') {
+                <svg siMessageSquareIcon class="size-5"></svg>
+              }
+              @default {
+                <svg siInfoIcon class="size-5"></svg>
               }
             }
-          </div>
-        }
-      </div>
-
-      <!-- Content -->
-      <div class="ml-3 min-w-0 flex-1">
-        <div class="flex items-start justify-between gap-2">
-          <p
-            class="text-foreground truncate text-sm font-medium"
-            [class.font-semibold]="!notification().read"
-          >
-            {{ notification().title }}
-          </p>
-          <span class="text-muted-foreground text-xs whitespace-nowrap">
-            {{ formatTime(notification().timestamp) }}
-          </span>
+          }
         </div>
+      }
+    </div>
 
-        @if (notification().description) {
-          <p class="text-muted-foreground mt-0.5 line-clamp-2 text-sm">
-            {{ notification().description }}
-          </p>
-        }
-
-        <!-- Action button -->
-        @if (notification().action) {
-          <button
-            type="button"
-            class="text-primary hover:text-primary/80 mt-2 text-xs font-medium transition-colors"
-            (click)="onActionClick($event, notification().action!)"
-          >
-            {{ notification().action!.label }}
-          </button>
-        }
+    <!-- Content -->
+    <div class="ml-3 min-w-0 flex-1">
+      <div class="flex items-start justify-between gap-2">
+        <p
+          class="text-foreground truncate text-sm font-medium"
+          [class.font-semibold]="!notification().read"
+        >
+          {{ notification().title }}
+        </p>
+        <span class="text-muted-foreground text-xs whitespace-nowrap">
+          {{ formatTime(notification().timestamp) }}
+        </span>
       </div>
 
-      <!-- Dismiss button -->
-      @if (showDismiss()) {
+      @if (notification().description) {
+        <p class="text-muted-foreground mt-0.5 line-clamp-2 text-sm">
+          {{ notification().description }}
+        </p>
+      }
+
+      <!-- Action button -->
+      @if (notification().action) {
         <button
           type="button"
-          class="hover:bg-muted text-muted-foreground hover:text-foreground ml-2 shrink-0 rounded-full p-1 opacity-0 transition-all group-hover:opacity-100"
-          (click)="onDismiss($event)"
-          aria-label="Dismiss notification"
+          class="text-primary hover:text-primary/80 mt-2 text-xs font-medium transition-colors"
+          (click)="onActionClick($event, notification().action!)"
         >
-          <svg siXIcon class="size-4"></svg>
+          {{ notification().action!.label }}
         </button>
       }
     </div>
+
+    <!-- Dismiss button -->
+    @if (showDismiss()) {
+      <button
+        type="button"
+        class="hover:bg-muted text-muted-foreground hover:text-foreground ml-2 shrink-0 rounded-full p-1 opacity-0 transition-all group-hover:opacity-100"
+        (click)="onDismiss($event)"
+        aria-label="Dismiss notification"
+      >
+        <svg siXIcon class="size-4"></svg>
+      </button>
+    }
   `,
+  host: {
+    'data-slot': 'notification-item',
+    '[class]': 'class()',
+    role: 'article',
+    '[attr.aria-label]': 'notification().title',
+    tabindex: '0',
+    '(click)': 'onItemClick()',
+    '(keydown.enter)': 'onItemClick()',
+    '(keydown.space)': 'onItemClick(); $event.preventDefault()',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNotificationItem {
+  readonly classInput = input<string>('', { alias: 'class' });
   readonly notification = input.required<Notification>();
   readonly showDismiss = input(true);
-  readonly class = input<string>('');
 
   readonly markRead = output<boolean>();
   readonly dismiss = output<void>();
   readonly actionClick = output<NotificationAction>();
   readonly itemClick = output<void>();
 
-  protected readonly itemClass = computed(() =>
+  protected readonly class = computed(() =>
     cn(
       'group relative flex items-start p-3 pr-2 rounded-lg cursor-pointer',
       'hover:bg-muted/50 transition-colors',
       'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
       !this.notification().read && 'bg-primary/5',
-      this.class(),
+      this.classInput(),
     ),
   );
 
