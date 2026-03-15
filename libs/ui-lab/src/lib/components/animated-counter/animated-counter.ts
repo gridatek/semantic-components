@@ -15,23 +15,23 @@ import type { AnimatedCounterEasing } from './animated-counter-types';
 import { DEFAULT_COUNTER_OPTIONS } from './animated-counter-types';
 
 @Component({
-  selector: 'sc-animated-counter',
+  selector: 'span[scAnimatedCounter]',
   template: `
-    <span [class]="containerClass()" [attr.aria-label]="ariaLabel()">
-      <span aria-hidden="true">{{ displayValue() }}</span>
-    </span>
+    {{ displayValue() }}
   `,
-  styles: `
-    :host {
-      display: inline-block;
-    }
-  `,
+  host: {
+    'data-slot': 'animated-counter',
+    '[class]': 'class()',
+    '[attr.aria-label]': 'ariaLabel()',
+    'aria-hidden': 'true',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAnimatedCounter {
   private readonly destroyRef = inject(DestroyRef);
 
+  readonly classInput = input<string>('', { alias: 'class' });
   readonly value = input.required<number>();
   readonly duration = input(DEFAULT_COUNTER_OPTIONS.duration);
   readonly easing = input<AnimatedCounterEasing>(
@@ -41,7 +41,6 @@ export class ScAnimatedCounter {
   readonly separator = input(DEFAULT_COUNTER_OPTIONS.separator);
   readonly prefix = input(DEFAULT_COUNTER_OPTIONS.prefix);
   readonly suffix = input(DEFAULT_COUNTER_OPTIONS.suffix);
-  readonly class = input<string>('');
 
   readonly animationComplete = output<number>();
 
@@ -59,8 +58,8 @@ export class ScAnimatedCounter {
     return `${this.prefix()}${this.value()}${this.suffix()}`;
   });
 
-  protected readonly containerClass = computed(() =>
-    cn('tabular-nums font-medium', this.class()),
+  protected readonly class = computed(() =>
+    cn('tabular-nums font-medium', this.classInput()),
   );
 
   constructor() {

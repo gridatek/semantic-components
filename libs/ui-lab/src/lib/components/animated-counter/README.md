@@ -5,8 +5,8 @@ A component that animates numbers smoothly between values with customizable easi
 ## Installation
 
 ```typescript
-import { ScAnimatedCounter } from '@/ui/animated-counter';
-import type { AnimatedCounterEasing, AnimatedCounterOptions } from '@/ui/animated-counter';
+import { ScAnimatedCounter } from '@semantic-components/ui-lab';
+import type { AnimatedCounterEasing, AnimatedCounterOptions } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ import type { AnimatedCounterEasing, AnimatedCounterOptions } from '@/ui/animate
 ### Basic Usage
 
 ```html
-<sc-animated-counter [value]="count" class="text-4xl font-bold" />
+<span scAnimatedCounter [value]="count" class="text-4xl font-bold"></span>
 ```
 
 ```typescript
@@ -28,27 +28,31 @@ increment(): void {
 ### With Prefix and Suffix
 
 ```html
-<sc-animated-counter [value]="money" prefix="$" [decimalPlaces]="2" class="text-3xl font-bold text-green-600" />
+<span scAnimatedCounter [value]="money" prefix="$" [decimalPlaces]="2" class="text-3xl font-bold text-green-600" />
 
-<sc-animated-counter [value]="percent" suffix="%" [decimalPlaces]="1" class="text-3xl font-bold" />
+<span scAnimatedCounter [value]="percent" suffix="%" [decimalPlaces]="1" class="text-3xl font-bold"></span>
 ```
 
 ### Custom Easing
 
 ```html
-<sc-animated-counter [value]="value" easing="linear" [duration]="2000" />
-<sc-animated-counter [value]="value" easing="easeIn" [duration]="2000" />
-<sc-animated-counter [value]="value" easing="easeOut" [duration]="2000" />
-<sc-animated-counter [value]="value" easing="easeInOut" [duration]="2000" />
+<span scAnimatedCounter [value]="value" easing="linear" [duration]="2000"></span>
+<span scAnimatedCounter [value]="value" easing="easeIn" [duration]="2000"></span>
+<span scAnimatedCounter [value]="value" easing="easeOut" [duration]="2000"></span>
+<span scAnimatedCounter [value]="value" easing="easeInOut" [duration]="2000"></span>
 ```
 
 ### Large Numbers with Separators
 
 ```html
-<sc-animated-counter [value]="largeNumber" separator="," class="text-3xl font-bold" />
+<span scAnimatedCounter [value]="largeNumber" separator="," class="text-3xl font-bold"></span>
 ```
 
 ## API Reference
+
+### Selector
+
+`span[scAnimatedCounter]`
 
 ### Inputs
 

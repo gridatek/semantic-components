@@ -11,7 +11,11 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
   imports: [ScAnimatedCounter],
   template: `
     <div class="flex items-center gap-4">
-      <sc-animated-counter [value]="value()" class="text-4xl font-bold" />
+      <span
+        scAnimatedCounter
+        [value]="value()"
+        class="text-4xl font-bold"
+      ></span>
       <button
         class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
         (click)="increment()"

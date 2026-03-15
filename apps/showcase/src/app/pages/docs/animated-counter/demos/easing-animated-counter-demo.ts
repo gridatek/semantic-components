@@ -14,39 +14,43 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
         <div class="text-center">
           <p class="text-muted-foreground mb-2 text-xs">Linear</p>
-          <sc-animated-counter
+          <span
+            scAnimatedCounter
             [value]="value()"
             easing="linear"
             [duration]="2000"
             class="text-2xl font-bold"
-          />
+          ></span>
         </div>
         <div class="text-center">
           <p class="text-muted-foreground mb-2 text-xs">Ease In</p>
-          <sc-animated-counter
+          <span
+            scAnimatedCounter
             [value]="value()"
             easing="easeIn"
             [duration]="2000"
             class="text-2xl font-bold"
-          />
+          ></span>
         </div>
         <div class="text-center">
           <p class="text-muted-foreground mb-2 text-xs">Ease Out</p>
-          <sc-animated-counter
+          <span
+            scAnimatedCounter
             [value]="value()"
             easing="easeOut"
             [duration]="2000"
             class="text-2xl font-bold"
-          />
+          ></span>
         </div>
         <div class="text-center">
           <p class="text-muted-foreground mb-2 text-xs">Ease In/Out</p>
-          <sc-animated-counter
+          <span
+            scAnimatedCounter
             [value]="value()"
             easing="easeInOut"
             [duration]="2000"
             class="text-2xl font-bold"
-          />
+          ></span>
         </div>
       </div>
       <button
