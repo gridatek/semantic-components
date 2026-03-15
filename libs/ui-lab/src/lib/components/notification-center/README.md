@@ -7,12 +7,12 @@ A grouped notification management component with filtering, read states, and act
 Import the components from the notification-center module:
 
 ```typescript
-import { type Notification, type NotificationGroup, ScNotificationCenter, ScNotificationCenterContainer } from '@/ui/notification-center';
+import { type Notification, type NotificationGroup, ScNotificationCenter, ScNotificationCenterContainer } from '@semantic-components/ui-lab';
 ```
 
 ## Components
 
-- **ScNotificationCenter (Directive)**: State management and business logic
+- **ScNotificationCenter** (Directive): State management and business logic
 - **ScNotificationCenterContainer**: UI rendering with header, filters, and notification list
 - **ScNotificationGroup**: Grouped notification section (used internally)
 - **ScNotificationItem**: Individual notification item (used internally)
@@ -23,13 +23,13 @@ import { type Notification, type NotificationGroup, ScNotificationCenter, ScNoti
 
 ```html
 <div scNotificationCenter [(notifications)]="notifications" (markRead)="onMarkRead($event)" (dismiss)="onDismiss($event)">
-  <div scNotificationCenterContainer></div>
+  <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
 
 ```typescript
-import type { Notification } from '@/ui/notification-center';
 import { signal } from '@angular/core';
+import type { Notification } from '@semantic-components/ui-lab';
 
 notifications = signal<Notification[]>([
   {
@@ -54,12 +54,12 @@ notifications = signal<Notification[]>([
 
 ```html
 <div scNotificationCenter [(notifications)]="notifications" [groups]="groups()">
-  <div scNotificationCenterContainer></div>
+  <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
 
 ```typescript
-import type { Notification, NotificationGroup } from '@/ui/notification-center';
+import type { Notification, NotificationGroup } from '@semantic-components/ui-lab';
 
 groups = signal<NotificationGroup[]>([
   { id: 'messages', title: 'Messages' },
@@ -126,7 +126,7 @@ notifications = signal<Notification[]>([
 
 ```html
 <div scNotificationCenter [(notifications)]="notifications" emptyTitle="All caught up!" emptyDescription="No new notifications to show.">
-  <div scNotificationCenterContainer></div>
+  <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
 
@@ -134,7 +134,7 @@ notifications = signal<Notification[]>([
 
 ```html
 <div scNotificationCenter [(notifications)]="notifications" [showFilters]="false">
-  <div scNotificationCenterContainer></div>
+  <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
 
@@ -160,6 +160,7 @@ The root directive that manages notification state and business logic.
 
 | Input              | Type                  | Default                   | Description                      |
 | ------------------ | --------------------- | ------------------------- | -------------------------------- |
+| `class`            | `string`              | `''`                      | Additional CSS classes           |
 | `notifications`    | `Notification[]`      | `[]`                      | Array of notifications (two-way) |
 | `groups`           | `NotificationGroup[]` | `[]`                      | Groups for categorizing          |
 | `title`            | `string`              | `'Notifications'`         | Header title                     |
@@ -197,7 +198,7 @@ The container component that renders the notification center UI.
 
 #### Selector
 
-`[scNotificationCenterContainer]`
+`div[scNotificationCenterContainer]`
 
 #### Inputs
 
@@ -207,11 +208,19 @@ The container component that renders the notification center UI.
 
 ### ScNotificationGroup
 
-Individual group component (used internally by container).
+Grouped notification section component.
+
+#### Selector
+
+`div[scNotificationGroup]`
 
 ### ScNotificationItem
 
-Individual notification item component (used internally by container).
+Individual notification item component.
+
+#### Selector
+
+`div[scNotificationItem]`
 
 ## Composable Architecture
 
@@ -219,8 +228,8 @@ The notification center follows a composable architecture pattern that separates
 
 ### Pattern Overview
 
-1. **Root Directive** (`sc-notification-center`): Manages all state, computed values, and business logic
-2. **Container Component** (`sc-notification-center-container`): Renders the UI and delegates actions to the directive
+1. **Root Directive** (`[scNotificationCenter]`): Manages all state, computed values, and business logic
+2. **Container Component** (`div[scNotificationCenterContainer]`): Renders the UI and delegates actions to the directive
 3. **Dependency Injection**: The container accesses the directive's state via the `SC_NOTIFICATION_CENTER` injection token
 
 ### Benefits
@@ -239,7 +248,7 @@ The notification center follows a composable architecture pattern that separates
   <p>Filtered: {{ center.filteredNotifications().length }}</p>
 
   <!-- Use the standard container -->
-  <div scNotificationCenterContainer></div>
+  <div scNotificationCenterContainer class="h-full"></div>
 </div>
 ```
 
