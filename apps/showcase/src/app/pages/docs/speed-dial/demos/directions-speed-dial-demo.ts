@@ -17,7 +17,7 @@ import {
   template: `
     <div class="grid w-full grid-cols-2 gap-4">
       <!-- Up Direction -->
-      <div class="bg-muted/20 relative h-48 rounded-lg border">
+      <div class="bg-muted/20 relative h-72 rounded-lg border">
         <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
@@ -31,7 +31,7 @@ import {
       </div>
 
       <!-- Down Direction -->
-      <div class="bg-muted/20 relative h-48 rounded-lg border">
+      <div class="bg-muted/20 relative h-72 rounded-lg border">
         <div class="absolute top-4 left-1/2 -translate-x-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
@@ -45,7 +45,7 @@ import {
       </div>
 
       <!-- Left Direction -->
-      <div class="bg-muted/20 relative h-48 rounded-lg border">
+      <div class="bg-muted/20 relative h-72 rounded-lg border">
         <div class="absolute top-1/2 right-4 -translate-y-1/2">
           <sc-speed-dial
             [actions]="directionActions()"
@@ -59,7 +59,7 @@ import {
       </div>
 
       <!-- Right Direction -->
-      <div class="bg-muted/20 relative h-48 rounded-lg border">
+      <div class="bg-muted/20 relative h-72 rounded-lg border">
         <div class="absolute top-1/2 left-4 -translate-y-1/2">
           <sc-speed-dial
             [actions]="directionActions()"

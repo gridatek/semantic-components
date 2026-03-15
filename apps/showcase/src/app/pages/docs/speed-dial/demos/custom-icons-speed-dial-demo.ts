@@ -17,7 +17,7 @@ import {
   selector: 'app-custom-icons-speed-dial-demo',
   imports: [ScSpeedDial],
   template: `
-    <div class="bg-muted/20 relative h-64 w-full rounded-lg border">
+    <div class="bg-muted/20 relative h-96 w-full rounded-lg border">
       <div class="absolute right-4 bottom-4">
         <sc-speed-dial
           [actions]="socialActions()"
