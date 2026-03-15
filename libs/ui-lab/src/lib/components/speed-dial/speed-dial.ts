@@ -44,13 +44,7 @@ import type {
               [showLabel]="showLabels()"
               [labelVisible]="open()"
               [size]="actionSize()"
-              [class]="
-                direction() === 'left'
-                  ? 'direction-left'
-                  : direction() === 'right'
-                    ? 'direction-right'
-                    : ''
-              "
+              [direction]="direction()"
               (actionClick)="onActionClick(action, i)"
             />
           </div>
@@ -87,13 +81,8 @@ import type {
       </button>
     </div>
   `,
-  styles: `
-    :host {
-      display: inline-block;
-      position: relative;
-    }
-  `,
   host: {
+    class: 'relative inline-block',
     '(document:keydown.escape)': 'onEscape()',
   },
   encapsulation: ViewEncapsulation.None,

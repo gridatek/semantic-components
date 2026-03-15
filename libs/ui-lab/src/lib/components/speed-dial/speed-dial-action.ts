@@ -33,26 +33,9 @@ import { cn } from '@semantic-components/ui';
       <span [class]="labelClass()">{{ label() }}</span>
     }
   `,
-  styles: `
-    :host {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    :host(.direction-up),
-    :host(.direction-down) {
-      flex-direction: row;
-    }
-
-    :host(.direction-left) {
-      flex-direction: row-reverse;
-    }
-
-    :host(.direction-right) {
-      flex-direction: row;
-    }
-  `,
+  host: {
+    '[class]': 'hostClass()',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -64,9 +47,16 @@ export class ScSpeedDialAction {
   readonly showLabel = input(true);
   readonly labelVisible = input(true);
   readonly size = input<'sm' | 'md' | 'lg'>('md');
-  readonly class = input<string>('');
+  readonly direction = input<'up' | 'down' | 'left' | 'right'>('up');
 
   readonly actionClick = output<void>();
+
+  protected readonly hostClass = computed(() =>
+    cn(
+      'flex items-center gap-3',
+      this.direction() === 'left' ? 'flex-row-reverse' : 'flex-row',
+    ),
+  );
 
   protected readonly buttonClass = computed(() =>
     cn(
@@ -77,7 +67,6 @@ export class ScSpeedDialAction {
       'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-md',
       this.sizeClasses(),
-      this.class(),
     ),
   );
 
