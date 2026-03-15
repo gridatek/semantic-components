@@ -12,23 +12,47 @@ import { animate } from 'motion';
   selector: 'app-easing-animated-counter-demo',
   imports: [ScButton],
   template: `
-    <div class="space-y-3">
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <div class="text-center">
-          <p class="text-muted-foreground mb-2 text-xs">Linear</p>
-          <span #counter class="text-2xl font-bold tabular-nums">0</span>
+    <div class="flex w-full flex-col items-center gap-6">
+      <div class="grid w-full grid-cols-2 gap-4 md:grid-cols-4">
+        <div
+          class="bg-muted/30 flex flex-col items-center justify-center gap-2 rounded-xl border p-6"
+        >
+          <p
+            class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
+          >
+            Linear
+          </p>
+          <span #counter class="text-3xl font-bold tabular-nums">0</span>
         </div>
-        <div class="text-center">
-          <p class="text-muted-foreground mb-2 text-xs">Ease In</p>
-          <span #counter class="text-2xl font-bold tabular-nums">0</span>
+        <div
+          class="bg-muted/30 flex flex-col items-center justify-center gap-2 rounded-xl border p-6"
+        >
+          <p
+            class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
+          >
+            Ease In
+          </p>
+          <span #counter class="text-3xl font-bold tabular-nums">0</span>
         </div>
-        <div class="text-center">
-          <p class="text-muted-foreground mb-2 text-xs">Ease Out</p>
-          <span #counter class="text-2xl font-bold tabular-nums">0</span>
+        <div
+          class="bg-muted/30 flex flex-col items-center justify-center gap-2 rounded-xl border p-6"
+        >
+          <p
+            class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
+          >
+            Ease Out
+          </p>
+          <span #counter class="text-3xl font-bold tabular-nums">0</span>
         </div>
-        <div class="text-center">
-          <p class="text-muted-foreground mb-2 text-xs">Ease In/Out</p>
-          <span #counter class="text-2xl font-bold tabular-nums">0</span>
+        <div
+          class="bg-muted/30 flex flex-col items-center justify-center gap-2 rounded-xl border p-6"
+        >
+          <p
+            class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
+          >
+            Ease In/Out
+          </p>
+          <span #counter class="text-3xl font-bold tabular-nums">0</span>
         </div>
       </div>
       <button scButton (click)="animateAll()">Animate All</button>

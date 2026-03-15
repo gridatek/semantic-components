@@ -13,10 +13,16 @@ import { animate } from 'motion';
   selector: 'app-basic-animated-counter-demo',
   imports: [ScButton],
   template: `
-    <div class="flex items-center gap-4">
-      <span #counter class="text-4xl font-bold tabular-nums">0</span>
-      <button scButton (click)="increment()">+100</button>
-      <button scButton variant="secondary" (click)="reset()">Reset</button>
+    <div class="flex flex-col items-center gap-6">
+      <div
+        class="bg-muted/30 flex h-32 w-64 items-center justify-center rounded-xl border"
+      >
+        <span #counter class="text-5xl font-bold tabular-nums">0</span>
+      </div>
+      <div class="flex gap-2">
+        <button scButton (click)="increment()">+100</button>
+        <button scButton variant="secondary" (click)="reset()">Reset</button>
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

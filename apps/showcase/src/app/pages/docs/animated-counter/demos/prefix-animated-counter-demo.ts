@@ -13,10 +13,17 @@ import { animate } from 'motion';
   selector: 'app-prefix-animated-counter-demo',
   imports: [ScButton],
   template: `
-    <div class="flex items-center gap-4">
-      <span #counter class="text-3xl font-bold text-green-600 tabular-nums">
-        $0.00
-      </span>
+    <div class="flex flex-col items-center gap-6">
+      <div
+        class="flex h-32 w-64 items-center justify-center rounded-xl border border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/30"
+      >
+        <span
+          #counter
+          class="text-4xl font-bold text-green-600 tabular-nums dark:text-green-400"
+        >
+          $0.00
+        </span>
+      </div>
       <button scButton (click)="add()">+$50</button>
     </div>
   `,
