@@ -1,22 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   signal,
+  viewChild,
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab';
+import { animate } from 'motion';
 
 @Component({
   selector: 'app-basic-animated-counter-demo',
-  imports: [ScAnimatedCounter, ScButton],
+  imports: [ScButton],
   template: `
     <div class="flex items-center gap-4">
-      <span
-        scAnimatedCounter
-        [value]="value()"
-        class="text-4xl font-bold"
-      ></span>
+      <span #counter class="text-4xl font-bold tabular-nums">0</span>
       <button scButton (click)="increment()">+100</button>
       <button scButton variant="secondary" (click)="reset()">Reset</button>
     </div>
@@ -26,13 +24,36 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicAnimatedCounterDemo {
-  readonly value = signal(0);
+  private readonly counterEl =
+    viewChild.required<ElementRef<HTMLElement>>('counter');
+  private readonly current = signal(0);
 
   increment(): void {
-    this.value.update((v) => v + 100);
+    const from = this.current();
+    const to = from + 100;
+    this.current.set(to);
+
+    animate(from, to, {
+      duration: 1,
+      ease: 'easeOut',
+      onUpdate: (value: number) => {
+        this.counterEl().nativeElement.textContent =
+          Math.round(value).toLocaleString();
+      },
+    });
   }
 
   reset(): void {
-    this.value.set(0);
+    const from = this.current();
+    this.current.set(0);
+
+    animate(from, 0, {
+      duration: 0.5,
+      ease: 'easeOut',
+      onUpdate: (value: number) => {
+        this.counterEl().nativeElement.textContent =
+          Math.round(value).toLocaleString();
+      },
+    });
   }
 }

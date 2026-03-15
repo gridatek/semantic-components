@@ -1,24 +1,22 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   signal,
+  viewChild,
 } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScAnimatedCounter } from '@semantic-components/ui-lab';
+import { animate } from 'motion';
 
 @Component({
   selector: 'app-prefix-animated-counter-demo',
-  imports: [ScAnimatedCounter, ScButton],
+  imports: [ScButton],
   template: `
     <div class="flex items-center gap-4">
-      <span
-        scAnimatedCounter
-        [value]="value()"
-        prefix="$"
-        [decimalPlaces]="2"
-        class="text-3xl font-bold text-green-600"
-      ></span>
+      <span #counter class="text-3xl font-bold text-green-600 tabular-nums">
+        $0.00
+      </span>
       <button scButton (click)="add()">+$50</button>
     </div>
   `,
@@ -27,9 +25,21 @@ import { ScAnimatedCounter } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrefixAnimatedCounterDemo {
-  readonly value = signal(0);
+  private readonly counterEl =
+    viewChild.required<ElementRef<HTMLElement>>('counter');
+  private readonly current = signal(0);
 
   add(): void {
-    this.value.update((v) => v + 50);
+    const from = this.current();
+    const to = from + 50;
+    this.current.set(to);
+
+    animate(from, to, {
+      duration: 1,
+      ease: 'easeOut',
+      onUpdate: (value: number) => {
+        this.counterEl().nativeElement.textContent = `$${value.toFixed(2)}`;
+      },
+    });
   }
 }

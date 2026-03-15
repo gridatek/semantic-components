@@ -1,4 +1,3 @@
-export * from './animated-counter';
 export * from './audio-player';
 export * from './barcode-scanner';
 export * from './native-dialog';
