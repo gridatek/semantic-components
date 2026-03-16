@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { generateQRCode } from './qr-generator';
+import { encode } from 'uqr';
 
 export type QRErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
 
@@ -36,7 +36,7 @@ export class ScQrCode {
   readonly errorCorrectionLevel = input<QRErrorCorrectionLevel>('M');
   readonly foregroundColor = input<string>('#000000');
   readonly backgroundColor = input<string>('#ffffff');
-  readonly quietZone = input<number>(2);
+  readonly border = input<number>(2);
   readonly logo = input<string>('');
   readonly logoSize = input<number>(0.2);
   readonly ariaLabel = input<string>('QR Code');
@@ -44,34 +44,34 @@ export class ScQrCode {
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  readonly qrMatrix = computed(() => {
+  protected readonly qrResult = computed(() => {
     const value = this.value();
-    if (!value) return [];
-    return generateQRCode(value, this.errorCorrectionLevel());
-  });
-
-  readonly moduleCount = computed(() => {
-    const matrix = this.qrMatrix();
-    return matrix.length || 21;
+    if (!value) return null;
+    return encode(value, {
+      ecc: this.errorCorrectionLevel(),
+      border: this.border(),
+    });
   });
 
   protected readonly viewBox = computed(() => {
-    const count = this.moduleCount();
-    const zone = this.quietZone();
-    const totalSize = count + zone * 2;
-    return `0 0 ${totalSize} ${totalSize}`;
+    const result = this.qrResult();
+    if (!result) return '0 0 0 0';
+    return `0 0 ${result.size} ${result.size}`;
   });
 
-  readonly logoPosition = computed(() => {
-    const count = this.moduleCount();
-    const zone = this.quietZone();
+  protected readonly logoPosition = computed(() => {
+    const result = this.qrResult();
+    if (!result) return { x: 0, y: 0, size: 0, padding: 0 };
+
+    const border = this.border();
+    const moduleCount = result.size - border * 2;
     const logoSizePercent = this.logoSize();
-    const logoModules = Math.floor(count * logoSizePercent);
+    const logoModules = Math.floor(moduleCount * logoSizePercent);
     const padding = 0.5;
 
     return {
-      x: zone + (count - logoModules) / 2,
-      y: zone + (count - logoModules) / 2,
+      x: border + (moduleCount - logoModules) / 2,
+      y: border + (moduleCount - logoModules) / 2,
       size: logoModules,
       padding,
     };
@@ -79,18 +79,16 @@ export class ScQrCode {
 
   constructor() {
     effect(() => {
-      const matrix = this.qrMatrix();
-      const zone = this.quietZone();
-      const count = this.moduleCount();
+      const result = this.qrResult();
       const fg = this.foregroundColor();
       const bg = this.backgroundColor();
       const logo = this.logo();
       const logoPos = this.logoPosition();
 
       const svg = this.elementRef.nativeElement;
-
-      // Clear previous content
       svg.innerHTML = '';
+
+      if (!result) return;
 
       const ns = 'http://www.w3.org/2000/svg';
 
@@ -98,24 +96,26 @@ export class ScQrCode {
       const bgRect = document.createElementNS(ns, 'rect');
       bgRect.setAttribute('x', '0');
       bgRect.setAttribute('y', '0');
-      bgRect.setAttribute('width', String(count + zone * 2));
-      bgRect.setAttribute('height', String(count + zone * 2));
+      bgRect.setAttribute('width', String(result.size));
+      bgRect.setAttribute('height', String(result.size));
       bgRect.setAttribute('fill', bg);
       svg.appendChild(bgRect);
 
-      // QR modules
-      for (let rowIdx = 0; rowIdx < matrix.length; rowIdx++) {
-        for (let colIdx = 0; colIdx < matrix[rowIdx].length; colIdx++) {
-          if (matrix[rowIdx][colIdx]) {
-            const rect = document.createElementNS(ns, 'rect');
-            rect.setAttribute('x', String(colIdx + zone));
-            rect.setAttribute('y', String(rowIdx + zone));
-            rect.setAttribute('width', '1');
-            rect.setAttribute('height', '1');
-            rect.setAttribute('fill', fg);
-            svg.appendChild(rect);
+      // QR modules as a single path
+      let pathData = '';
+      for (let y = 0; y < result.size; y++) {
+        for (let x = 0; x < result.size; x++) {
+          if (result.data[y][x]) {
+            pathData += `M${x},${y}h1v1h-1z`;
           }
         }
+      }
+
+      if (pathData) {
+        const path = document.createElementNS(ns, 'path');
+        path.setAttribute('d', pathData);
+        path.setAttribute('fill', fg);
+        svg.appendChild(path);
       }
 
       // Logo overlay

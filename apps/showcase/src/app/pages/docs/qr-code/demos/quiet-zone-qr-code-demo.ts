@@ -15,18 +15,13 @@ import { ScQrCode } from '@semantic-components/ui-lab';
           scQrCode
           [value]="'No border'"
           [size]="150"
-          [quietZone]="0"
+          [border]="0"
           class="border"
         ></svg>
         <p class="text-muted-foreground mt-1 text-xs">No quiet zone</p>
       </div>
       <div class="text-center">
-        <svg
-          scQrCode
-          [value]="'Small border'"
-          [size]="150"
-          [quietZone]="1"
-        ></svg>
+        <svg scQrCode [value]="'Small border'" [size]="150" [border]="1"></svg>
         <p class="text-muted-foreground mt-1 text-xs">1 module</p>
       </div>
       <div class="text-center">
@@ -34,7 +29,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
           scQrCode
           [value]="'Standard border'"
           [size]="150"
-          [quietZone]="4"
+          [border]="4"
         ></svg>
         <p class="text-muted-foreground mt-1 text-xs">4 modules (standard)</p>
       </div>
