@@ -15,6 +15,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
+import { CodeViewerUsageDemoContainer } from '../docs/code-viewer/demos/code-viewer-usage-demo-container';
 
 @Component({
   selector: 'app-code-page',
@@ -31,6 +32,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScSeparator,
     ScHeading,
     PackageManagerInstall,
+    CodeViewerUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
@@ -127,30 +129,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Import and use the code viewer in your Angular templates:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy4="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy4.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-code-viewer-usage-demo-container />
       </section>
     </div>
   `,
@@ -161,27 +140,4 @@ export default class CodeInstallPage {
   readonly stylesCode = '@import "@semantic-components/code/styles";';
 
   readonly sourceCode = '@source "../node_modules/@semantic-components/code";';
-
-  readonly usageCode = `import {
-  ScCodeViewer,
-  ScCodeViewerContent,
-  ScCodeViewerHeader,
-  ScCodeViewerLabel,
-} from '@semantic-components/code';
-
-@Component({
-  selector: 'app-example',
-  imports: [ScCodeViewer, ScCodeViewerContent, ScCodeViewerHeader, ScCodeViewerLabel],
-  template: \`
-    <div scCodeViewer>
-      <div scCodeViewerHeader>
-        <span scCodeViewerLabel>typescript</span>
-      </div>
-      <div scCodeViewerContent [code]="code" language="typescript"></div>
-    </div>
-  \`,
-})
-export class Example {
-  code = 'const greeting = "Hello, world!";';
-}`;
 }

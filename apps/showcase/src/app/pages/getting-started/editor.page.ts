@@ -15,6 +15,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
+import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo-container';
 
 @Component({
   selector: 'app-editor-page',
@@ -31,6 +32,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScSeparator,
     ScHeading,
     PackageManagerInstall,
+    EditorUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
@@ -125,30 +127,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Import and use the editor in your Angular templates:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy4="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy4.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-editor-usage-demo-container />
       </section>
     </div>
   `,
@@ -160,33 +139,4 @@ export default class EditorInstallPage {
 
   readonly sourceCode =
     '@source "../node_modules/@semantic-components/editor";';
-
-  readonly usageCode = `import {
-  ScEditor,
-  ScEditorContent,
-  ScEditorToolbar,
-  ScEditorBoldToggle,
-  ScEditorItalicToggle,
-} from '@semantic-components/editor';
-
-@Component({
-  selector: 'app-example',
-  imports: [
-    ScEditor,
-    ScEditorContent,
-    ScEditorToolbar,
-    ScEditorBoldToggle,
-    ScEditorItalicToggle,
-  ],
-  template: \`
-    <div scEditor>
-      <div scEditorToolbar>
-        <button scEditorBoldButton></button>
-        <button scEditorItalicButton></button>
-      </div>
-      <div scEditorContent></div>
-    </div>
-  \`,
-})
-export class Example {}`;
 }

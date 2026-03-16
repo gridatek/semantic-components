@@ -15,6 +15,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
+import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usage-demo-container';
 
 @Component({
   selector: 'app-carousel-page',
@@ -31,6 +32,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScSeparator,
     ScHeading,
     PackageManagerInstall,
+    CarouselUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
@@ -97,30 +99,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Import and use the carousel in your Angular templates:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy3="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy3.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-carousel-usage-demo-container />
       </section>
     </div>
   `,
@@ -130,39 +109,4 @@ import { TocHeading } from '../../components/toc/toc-heading';
 export default class CarouselInstallPage {
   readonly sourceCode =
     '@source "../node_modules/@semantic-components/carousel";';
-
-  readonly usageCode = `import {
-  ScCarousel,
-  ScCarouselViewport,
-  ScCarouselTrack,
-  ScCarouselItem,
-  ScCarouselPrevious,
-  ScCarouselNext,
-} from '@semantic-components/carousel';
-
-@Component({
-  selector: 'app-example',
-  imports: [
-    ScCarousel,
-    ScCarouselViewport,
-    ScCarouselTrack,
-    ScCarouselItem,
-    ScCarouselPrevious,
-    ScCarouselNext,
-  ],
-  template: \`
-    <div scCarousel>
-      <div scCarouselViewport>
-        <div scCarouselTrack>
-          <div scCarouselItem>Slide 1</div>
-          <div scCarouselItem>Slide 2</div>
-          <div scCarouselItem>Slide 3</div>
-        </div>
-      </div>
-      <button scCarouselPrevious></button>
-      <button scCarouselNext></button>
-    </div>
-  \`,
-})
-export class Example {}`;
 }

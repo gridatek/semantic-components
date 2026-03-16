@@ -15,6 +15,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
+import { ButtonPatternUsageDemoContainer } from '../docs/button-pattern/demos/button-pattern-usage-demo-container';
 
 @Component({
   selector: 'app-ui-lab-page',
@@ -31,6 +32,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScSeparator,
     ScHeading,
     PackageManagerInstall,
+    ButtonPatternUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
@@ -89,30 +91,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Import and use components in your Angular templates:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy3="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy3.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-button-pattern-usage-demo-container />
       </section>
     </div>
   `,
@@ -122,17 +101,4 @@ import { TocHeading } from '../../components/toc/toc-heading';
 export default class UiLabPage {
   readonly sourceCode =
     '@source "../node_modules/@semantic-components/ui-lab";';
-
-  readonly usageCode = `import { ScAlert } from '@semantic-components/ui-lab';
-
-@Component({
-  selector: 'app-example',
-  imports: [ScAlert],
-  template: \`
-    <div scAlert variant="info">
-      <p>This is an informational alert message.</p>
-    </div>
-  \`,
-})
-export class Example {}`;
 }

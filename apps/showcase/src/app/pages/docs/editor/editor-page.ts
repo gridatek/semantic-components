@@ -6,6 +6,7 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { EditorUsageDemoContainer } from './demos/editor-usage-demo-container';
 import { FullFeaturedEditorDemoContainer } from './demos/full-featured-editor-demo-container';
 import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
 import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
@@ -14,6 +15,7 @@ import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-contai
 @Component({
   selector: 'app-editor-page',
   imports: [
+    EditorUsageDemoContainer,
     PrefilledEditorDemoContainer,
     NoCountEditorDemoContainer,
     ReadonlyEditorDemoContainer,
@@ -32,6 +34,11 @@ import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-contai
         </p>
         <app-component-badges path="editor" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Usage</h2>
+        <app-editor-usage-demo-container />
+      </section>
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>

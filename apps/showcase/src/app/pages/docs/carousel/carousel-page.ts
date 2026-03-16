@@ -7,6 +7,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CardsCarouselDemoContainer } from './demos/cards-carousel-demo-container';
+import { CarouselUsageDemoContainer } from './demos/carousel-usage-demo-container';
 import { DefaultCarouselDemoContainer } from './demos/default-carousel-demo-container';
 import { HalfWidthCarouselDemoContainer } from './demos/half-width-carousel-demo-container';
 import { ImagesCarouselDemoContainer } from './demos/images-carousel-demo-container';
@@ -16,6 +17,7 @@ import { VerticalCarouselDemoContainer } from './demos/vertical-carousel-demo-co
 @Component({
   selector: 'app-carousel-page',
   imports: [
+    CarouselUsageDemoContainer,
     DefaultCarouselDemoContainer,
     CardsCarouselDemoContainer,
     ThirdWidthCarouselDemoContainer,
@@ -35,6 +37,11 @@ import { VerticalCarouselDemoContainer } from './demos/vertical-carousel-demo-co
         </p>
         <app-component-badges path="carousel" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Usage</h2>
+        <app-carousel-usage-demo-container />
+      </section>
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>

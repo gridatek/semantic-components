@@ -8,6 +8,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AreaChartDemoContainer } from './demos/area-chart-demo-container';
 import { BarChartDemoContainer } from './demos/bar-chart-demo-container';
+import { ChartsUsageDemoContainer } from './demos/charts-usage-demo-container';
 import { DonutChartDemoContainer } from './demos/donut-chart-demo-container';
 import { LineChartDemoContainer } from './demos/line-chart-demo-container';
 import { MonthlyRevenueChartDemoContainer } from './demos/monthly-revenue-chart-demo-container';
@@ -17,6 +18,7 @@ import { UserGrowthChartDemoContainer } from './demos/user-growth-chart-demo-con
 @Component({
   selector: 'app-charts-page',
   imports: [
+    ChartsUsageDemoContainer,
     BarChartDemoContainer,
     LineChartDemoContainer,
     AreaChartDemoContainer,
@@ -37,6 +39,11 @@ import { UserGrowthChartDemoContainer } from './demos/user-growth-chart-demo-con
         </p>
         <app-component-badges path="chart" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Usage</h2>
+        <app-charts-usage-demo-container />
+      </section>
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
