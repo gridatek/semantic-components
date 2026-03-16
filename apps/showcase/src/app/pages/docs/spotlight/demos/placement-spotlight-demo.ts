@@ -7,19 +7,28 @@ import {
 import {
   ScSpotlight,
   ScSpotlightActions,
+  ScSpotlightClose,
   ScSpotlightDescription,
+  ScSpotlightHighlight,
+  ScSpotlightMask,
   ScSpotlightTitle,
+  ScSpotlightTooltip,
 } from '@semantic-components/ui-lab';
-import { SiInfoIcon } from '@semantic-icons/lucide-icons';
+import { SiInfoIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-placement-spotlight-demo',
   imports: [
     ScSpotlight,
+    ScSpotlightMask,
+    ScSpotlightHighlight,
+    ScSpotlightClose,
+    ScSpotlightTooltip,
     ScSpotlightTitle,
     ScSpotlightDescription,
     ScSpotlightActions,
     SiInfoIcon,
+    SiXIcon,
   ],
   template: `
     <div class="space-y-6">
@@ -46,29 +55,45 @@ import { SiInfoIcon } from '@semantic-icons/lucide-icons';
         Highlight Help
       </button>
 
-      <sc-spotlight #spotlight [contentPlacement]="'bottom'">
-        <sc-spotlight-title>Need Help?</sc-spotlight-title>
-        <sc-spotlight-description>
-          Our help center has guides, tutorials, and FAQs to help you get the
-          most out of the application.
-        </sc-spotlight-description>
-        <sc-spotlight-actions>
-          <button
-            type="button"
-            (click)="spotlight.close()"
-            class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
-          >
-            Close
+      <div scSpotlight #spotlight="scSpotlight" [contentPlacement]="'bottom'">
+        <svg scSpotlightMask></svg>
+
+        @if (spotlight.targetRect()) {
+          <div scSpotlightHighlight></div>
+        }
+
+        @if (spotlight.showClose()) {
+          <button scSpotlightClose aria-label="Close spotlight">
+            <svg siXIcon class="size-5"></svg>
           </button>
-          <button
-            type="button"
-            (click)="spotlight.close()"
-            class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
-          >
-            Open Help
-          </button>
-        </sc-spotlight-actions>
-      </sc-spotlight>
+        }
+
+        @if (spotlight.targetRect()) {
+          <div scSpotlightTooltip>
+            <h3 scSpotlightTitle>Need Help?</h3>
+            <p scSpotlightDescription>
+              Our help center has guides, tutorials, and FAQs to help you get
+              the most out of the application.
+            </p>
+            <div scSpotlightActions>
+              <button
+                type="button"
+                (click)="spotlight.close()"
+                class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                (click)="spotlight.close()"
+                class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
+              >
+                Open Help
+              </button>
+            </div>
+          </div>
+        }
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

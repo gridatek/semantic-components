@@ -1,24 +1,16 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
-  selector: 'sc-spotlight-title',
-  template: `
-    <h3 [class]="computedClass()"><ng-content></ng-content></h3>
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: '[scSpotlightTitle]',
+  host: {
+    '[class]': 'class()',
+  },
 })
 export class ScSpotlightTitle {
-  readonly class = input<string>('');
+  readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly computedClass = computed(() =>
-    cn('font-semibold text-lg mb-2', this.class()),
+  protected readonly class = computed(() =>
+    cn('font-semibold text-lg mb-2', this.classInput()),
   );
 }

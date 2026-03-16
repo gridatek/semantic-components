@@ -7,19 +7,28 @@ import {
 import {
   ScSpotlight,
   ScSpotlightActions,
+  ScSpotlightClose,
   ScSpotlightDescription,
+  ScSpotlightHighlight,
+  ScSpotlightMask,
   ScSpotlightTitle,
+  ScSpotlightTooltip,
 } from '@semantic-components/ui-lab';
-import { SiSunIcon } from '@semantic-icons/lucide-icons';
+import { SiSunIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-spotlight-demo',
   imports: [
     ScSpotlight,
+    ScSpotlightMask,
+    ScSpotlightHighlight,
+    ScSpotlightClose,
+    ScSpotlightTooltip,
     ScSpotlightTitle,
     ScSpotlightDescription,
     ScSpotlightActions,
     SiSunIcon,
+    SiXIcon,
   ],
   template: `
     <div class="space-y-6">
@@ -46,29 +55,50 @@ import { SiSunIcon } from '@semantic-icons/lucide-icons';
         Highlight Feature
       </button>
 
-      <sc-spotlight #spotlight [padding]="12" [borderRadius]="12">
-        <sc-spotlight-title>New Feature Available!</sc-spotlight-title>
-        <sc-spotlight-description>
-          This exciting new feature helps you work more efficiently. Click to
-          learn more about how it works.
-        </sc-spotlight-description>
-        <sc-spotlight-actions>
-          <button
-            type="button"
-            (click)="spotlight.close()"
-            class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
-          >
-            Maybe Later
+      <div
+        scSpotlight
+        #spotlight="scSpotlight"
+        [padding]="12"
+        [borderRadius]="12"
+      >
+        <svg scSpotlightMask></svg>
+
+        @if (spotlight.targetRect()) {
+          <div scSpotlightHighlight></div>
+        }
+
+        @if (spotlight.showClose()) {
+          <button scSpotlightClose aria-label="Close spotlight">
+            <svg siXIcon class="size-5"></svg>
           </button>
-          <button
-            type="button"
-            (click)="spotlight.close()"
-            class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
-          >
-            Learn More
-          </button>
-        </sc-spotlight-actions>
-      </sc-spotlight>
+        }
+
+        @if (spotlight.targetRect()) {
+          <div scSpotlightTooltip>
+            <h3 scSpotlightTitle>New Feature Available!</h3>
+            <p scSpotlightDescription>
+              This exciting new feature helps you work more efficiently. Click
+              to learn more about how it works.
+            </p>
+            <div scSpotlightActions>
+              <button
+                type="button"
+                (click)="spotlight.close()"
+                class="hover:bg-accent rounded-md border px-3 py-1.5 text-sm"
+              >
+                Maybe Later
+              </button>
+              <button
+                type="button"
+                (click)="spotlight.close()"
+                class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-3 py-1.5 text-sm"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+        }
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
