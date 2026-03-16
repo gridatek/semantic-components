@@ -28,27 +28,30 @@ export class DownloadQrCodeDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import { ScQrCode, ScQrCodeDownload } from '@semantic-components/ui-lab';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-download-qr-code-demo',
-  imports: [ScQrCode, ScQrCodeDownload, SiDownloadIcon],
+  imports: [ScQrCode, ScQrCodeDownload, ScButton, SiDownloadIcon],
   template: \`
-    <div class="inline-flex flex-col items-center gap-3">
-      <div
+    <div class="flex flex-col items-center gap-4">
+      <svg
         scQrCode
         #qr="scQrCode"
-        [value]="'https://example.com/download'"
-      ></div>
+        [value]="'https://angular.dev'"
+        aria-label="QR Code for angular.dev"
+      ></svg>
       <button
+        scButton
         scQrCodeDownload
         [for]="qr"
-        [filename]="'my-qr-code'"
-        class="hover:bg-accent focus:ring-ring inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm transition-colors focus:ring-2 focus:outline-none"
+        [filename]="'angular-qr'"
+        variant="outline"
       >
         <svg siDownloadIcon class="size-4"></svg>
-        Save QR Code
+        Download PNG
       </button>
     </div>
   \`,
