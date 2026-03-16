@@ -131,10 +131,19 @@ export class ScSpotlightState {
     this.setupResizeObserver();
 
     if (this.scrollIntoView()) {
-      element.scrollIntoView({
-        behavior: this.scrollBehavior(),
-        block: 'center',
-      });
+      const rect = element.getBoundingClientRect();
+      const scrollPadding = 100;
+      const viewportHeight = window.innerHeight;
+
+      if (
+        rect.top < scrollPadding ||
+        rect.bottom > viewportHeight - scrollPadding
+      ) {
+        element.scrollIntoView({
+          behavior: this.scrollBehavior(),
+          block: 'center',
+        });
+      }
     }
 
     this.onOpened?.();
