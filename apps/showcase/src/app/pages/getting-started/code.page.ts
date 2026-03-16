@@ -120,6 +120,13 @@ import { CodeViewerUsageDemoContainer } from '../docs/code-viewer/demos/code-vie
           </div>
           <div scCodeViewerContent [code]="sourceCode" language="css"></div>
         </div>
+        <p class="text-muted-foreground text-sm">
+          Adjust the path to
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+            node_modules
+          </code>
+          based on your project structure.
+        </p>
       </section>
 
       <div scSeparator></div>
