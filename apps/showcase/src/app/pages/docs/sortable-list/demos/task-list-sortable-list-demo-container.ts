@@ -69,21 +69,21 @@ interface Task {
               siGripVerticalIcon
               class="text-muted-foreground size-4 shrink-0 cursor-grab"
             ></svg>
-            <label scCheckboxField>
+            <label scCheckboxField class="flex-1">
               <input
                 type="checkbox"
                 scCheckbox
                 [checked]="task.completed"
                 (checkedChange)="toggleTask(task.id)"
               />
+              <span
+                class="text-sm"
+                [class.line-through]="task.completed"
+                [class.text-muted-foreground]="task.completed"
+              >
+                {{ task.title }}
+              </span>
             </label>
-            <span
-              class="flex-1 text-sm"
-              [class.line-through]="task.completed"
-              [class.text-muted-foreground]="task.completed"
-            >
-              {{ task.title }}
-            </span>
           </div>
         }
       </div>
