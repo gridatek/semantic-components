@@ -9,6 +9,7 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicLabelDemoContainer } from './demos/basic-label-demo-container';
 import { CheckboxLabelDemoContainer } from './demos/checkbox-label-demo-container';
 import { FieldLabelDemoContainer } from './demos/field-label-demo-container';
+import { LabelTextLabelDemoContainer } from './demos/label-text-label-demo-container';
 
 @Component({
   selector: 'app-label-page',
@@ -16,6 +17,7 @@ import { FieldLabelDemoContainer } from './demos/field-label-demo-container';
     BasicLabelDemoContainer,
     CheckboxLabelDemoContainer,
     FieldLabelDemoContainer,
+    LabelTextLabelDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -35,6 +37,7 @@ import { FieldLabelDemoContainer } from './demos/field-label-demo-container';
         <app-basic-label-demo-container />
         <app-checkbox-label-demo-container />
         <app-field-label-demo-container />
+        <app-label-text-label-demo-container />
       </section>
     </div>
   `,

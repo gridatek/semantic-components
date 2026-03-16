@@ -1935,6 +1935,13 @@ export const demosRoutes: Route[] = [
             (m) => m.FieldLabelDemo,
           ),
       },
+      {
+        path: 'label-text-label-demo',
+        loadComponent: () =>
+          import('../pages/docs/label/demos/label-text-label-demo').then(
+            (m) => m.LabelTextLabelDemo,
+          ),
+      },
     ],
   },
   {
