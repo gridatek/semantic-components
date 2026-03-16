@@ -17,11 +17,7 @@ export class ScStepper {
   readonly activeStep = model<number>(0);
 
   protected readonly class = computed(() =>
-    cn(
-      'flex gap-4',
-      this.orientation() === 'vertical' ? 'flex-col' : 'flex-row',
-      this.classInput(),
-    ),
+    cn('flex flex-col gap-4', this.classInput()),
   );
 
   goToStep(step: number): void {
