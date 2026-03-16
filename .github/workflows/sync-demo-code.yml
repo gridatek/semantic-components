@@ -38,7 +38,7 @@ jobs:
             echo "No changes to sync."
             exit 0
           fi
-          BRANCH="chore/sync-demo-code-$(date +%Y%m%d)"
+          BRANCH="chore/sync-demo-code-$(date +%Y%m%d%H%M%S)"
           git checkout -b "$BRANCH"
           git commit -m "chore: sync demo code"
           git push --set-upstream origin "$BRANCH"
