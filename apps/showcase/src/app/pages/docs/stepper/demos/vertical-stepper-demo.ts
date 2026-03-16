@@ -45,7 +45,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 <span>1</span>
               }
             </button>
-            <div class="flex flex-col pb-4">
+            <div class="flex flex-col">
               <span scStepperTitle>Step 1</span>
               <span scStepperDescription>First step description</span>
               @if (activeStep() === 0) {
@@ -65,7 +65,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 <span>2</span>
               }
             </button>
-            <div class="flex flex-col pb-4">
+            <div class="flex flex-col">
               <span scStepperTitle>Step 2</span>
               <span scStepperDescription>Second step description</span>
               @if (activeStep() === 1) {
