@@ -1,147 +1,31 @@
 import { Temporal } from '@js-temporal/polyfill';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-  model,
-} from '@angular/core';
-import {
-  SiCalendarIcon,
-  SiChevronLeftIcon,
-  SiChevronRightIcon,
-} from '@semantic-icons/lucide-icons';
+import { Directive, computed, contentChild, input, model } from '@angular/core';
 import { cn } from '../../utils';
-import {
-  ScCalendar,
-  ScCalendarHeader,
-  ScCalendarHeading,
-  ScCalendarMode,
-  ScCalendarNext,
-  ScCalendarPrevious,
-  ScCalendarValue,
-  ScDateRange,
-} from '../calendar';
-import {
-  ScPopover,
-  ScPopoverAlign,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverSide,
-  ScPopoverTrigger,
-} from '../popover';
+import { ScCalendarMode, ScCalendarValue, ScDateRange } from '../calendar';
+import { ScPopoverProvider } from '../popover';
 
-@Component({
-  selector: 'sc-date-picker',
-  imports: [
-    ScPopoverProvider,
-    ScPopoverTrigger,
-    ScPopoverPortal,
-    ScPopover,
-    ScCalendar,
-    ScCalendarHeader,
-    ScCalendarHeading,
-    ScCalendarNext,
-    ScCalendarPrevious,
-    SiCalendarIcon,
-    SiChevronLeftIcon,
-    SiChevronRightIcon,
-  ],
-  template: `
-    <div scPopoverProvider [(open)]="open" [side]="side()" [align]="align()">
-      <button scPopoverTrigger type="button" [class]="triggerClass()">
-        <svg siCalendarIcon class="mr-2 size-4"></svg>
-        <span [class]="displayText() ? '' : 'text-muted-foreground'">
-          {{ displayText() || placeholder() }}
-        </span>
-      </button>
-      <ng-template scPopoverPortal>
-        <div scPopover class="w-auto p-0">
-          <div
-            scCalendar
-            [mode]="mode()"
-            [(value)]="value"
-            [disabled]="disabled()"
-            [minDate]="minDate()"
-            [maxDate]="maxDate()"
-            (valueChange)="onValueChange()"
-            #cal="scCalendar"
-          >
-            <div scCalendarHeader>
-              <button scCalendarPrevious>
-                <svg siChevronLeftIcon class="size-4"></svg>
-                <span class="sr-only">
-                  @switch (cal.viewMode()) {
-                    @case ('day') {
-                      Go to previous month
-                    }
-                    @case ('month') {
-                      Go to previous year
-                    }
-                    @case ('year') {
-                      Go to previous decade
-                    }
-                  }
-                </span>
-              </button>
-              <button scCalendarHeading>{{ cal.heading() }}</button>
-              <button scCalendarNext>
-                <svg siChevronRightIcon class="size-4"></svg>
-                <span class="sr-only">
-                  @switch (cal.viewMode()) {
-                    @case ('day') {
-                      Go to next month
-                    }
-                    @case ('month') {
-                      Go to next year
-                    }
-                    @case ('year') {
-                      Go to next decade
-                    }
-                  }
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </div>
-  `,
+@Directive({
+  selector: 'div[scDatePicker]',
+  exportAs: 'scDatePicker',
   host: {
     'data-slot': 'date-picker',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDatePicker {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly mode = input<ScCalendarMode>('single');
   readonly placeholder = input<string>('Pick a date');
-  readonly disabled = input<Temporal.PlainDate[]>([]);
-  readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
-  readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
-  readonly side = input<ScPopoverSide>('bottom');
-  readonly align = input<ScPopoverAlign>('start');
 
   readonly value = model<ScCalendarValue>(undefined);
 
-  readonly open = model<boolean>(false);
+  private readonly popoverProvider = contentChild(ScPopoverProvider, {
+    descendants: true,
+  });
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  protected readonly triggerClass = computed(() =>
-    cn(
-      'flex h-10 w-[280px] items-center justify-start rounded-md border border-input bg-background px-3 py-2 text-sm',
-      'ring-offset-background placeholder:text-muted-foreground',
-      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      '[&>span]:line-clamp-1',
-    ),
-  );
-
-  protected readonly displayText = computed(() => {
+  readonly displayText = computed(() => {
     const mode = this.mode();
     const val = this.value();
 
@@ -178,18 +62,19 @@ export class ScDatePicker {
     });
   }
 
-  protected onValueChange(): void {
-    const mode = this.mode();
-    const val = this.value();
+  onValueChange(newValue: ScCalendarValue): void {
+    this.value.set(newValue);
 
-    if (mode === 'single' && val) {
-      this.open.set(false);
+    const mode = this.mode();
+
+    if (mode === 'single' && newValue) {
+      this.popoverProvider()?.open.set(false);
     }
 
     if (mode === 'range') {
-      const range = val as ScDateRange | undefined;
+      const range = newValue as ScDateRange | undefined;
       if (range?.from && range?.to) {
-        this.open.set(false);
+        this.popoverProvider()?.open.set(false);
       }
     }
   }
