@@ -1,10 +1,11 @@
-export { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
+export { SC_STEPPER, SC_STEPPER_ITEM, SC_STEPPER_PANEL } from './stepper-types';
 export type { ScStepperOrientation } from './stepper-types';
 export { ScStepper } from './stepper';
 export { ScStepperList } from './stepper-list';
 export { ScStepperItem } from './stepper-item';
 export { ScStepperTrigger } from './stepper-trigger';
 export { ScStepperSeparator } from './stepper-separator';
+export { ScStepperPanel } from './stepper-panel';
 export { ScStepperContent } from './stepper-content';
 export { ScStepperTitle } from './stepper-title';
 export { ScStepperDescription } from './stepper-description';

@@ -1,25 +1,25 @@
-import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SC_STEPPER } from './stepper-types';
+import {
+  Directive,
+  TemplateRef,
+  ViewContainerRef,
+  effect,
+  inject,
+} from '@angular/core';
+import { SC_STEPPER_PANEL } from './stepper-types';
 
 @Directive({
-  selector: '[scStepperContent]',
-  host: {
-    'data-slot': 'stepper-content',
-    role: 'tabpanel',
-    '[class]': 'class()',
-    '[hidden]': '!isActive()',
-  },
+  selector: 'ng-template[scStepperContent]',
 })
 export class ScStepperContent {
-  private readonly stepper = inject(SC_STEPPER);
+  private readonly panel = inject(SC_STEPPER_PANEL);
+  private readonly templateRef = inject(TemplateRef);
+  private readonly viewContainerRef = inject(ViewContainerRef);
 
-  readonly classInput = input<string>('', { alias: 'class' });
-  readonly step = input.required<number>();
-
-  protected readonly isActive = computed(() =>
-    this.stepper.isStepActive(this.step()),
-  );
-
-  protected readonly class = computed(() => cn('mt-4', this.classInput()));
+  constructor() {
+    effect(() => {
+      if (this.panel.isActive() && this.viewContainerRef.length === 0) {
+        this.viewContainerRef.createEmbeddedView(this.templateRef);
+      }
+    });
+  }
 }

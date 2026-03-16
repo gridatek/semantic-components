@@ -19,6 +19,7 @@ import {
   ScStepperItem,
   ScStepperList,
   ScStepperNext,
+  ScStepperPanel,
   ScStepperPrevious,
   ScStepperSeparator,
   ScStepperTitle,
@@ -35,6 +36,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScStepperTrigger,
     ScStepperSeparator,
     ScStepperContent,
+    ScStepperPanel,
     ScStepperTitle,
     ScStepperDescription,
     ScStepperPrevious,
@@ -94,7 +96,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
 
-        <div scStepperContent [step]="0">
+        <div scStepperPanel [step]="0">
           <div scFieldGroup>
             <div scField>
               <label scLabel>Email</label>
@@ -107,7 +109,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
 
-        <div scStepperContent [step]="1">
+        <div scStepperPanel [step]="1">
           <div scFieldGroup>
             <div scField>
               <label scLabel>Full Name</label>
@@ -124,15 +126,18 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
 
-        <div scStepperContent [step]="2">
-          <div scFieldGroup>
-            <p class="text-muted-foreground text-sm">
-              Review your information and click submit to complete registration.
-            </p>
-            <div class="bg-muted rounded-lg p-4">
-              <p class="text-sm">All steps completed! Ready to submit.</p>
+        <div scStepperPanel [step]="2">
+          <ng-template scStepperContent>
+            <div scFieldGroup>
+              <p class="text-muted-foreground text-sm">
+                Review your information and click submit to complete
+                registration.
+              </p>
+              <div class="bg-muted rounded-lg p-4">
+                <p class="text-sm">All steps completed! Ready to submit.</p>
+              </div>
             </div>
-          </div>
+          </ng-template>
         </div>
 
         <div class="mt-6 flex justify-between">
