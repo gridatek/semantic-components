@@ -2,7 +2,6 @@ import {
   Directive,
   InjectionToken,
   computed,
-  inject,
   input,
   output,
   signal,

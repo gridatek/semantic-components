@@ -1,23 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
+@Directive({
   selector: 'span[scDockBadge]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'dock-badge',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDockBadge {
   readonly classInput = input<string>('', { alias: 'class' });

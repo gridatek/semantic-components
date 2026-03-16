@@ -1,9 +1,7 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
+  Directive,
   ElementRef,
-  ViewEncapsulation,
   afterNextRender,
   computed,
   inject,
@@ -11,22 +9,23 @@ import {
   output,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { SC_MASONRY_GRID, SC_MASONRY_ITEM } from './masonry-types';
 
-@Component({
+@Directive({
   selector: '[scMasonryItem]',
+  providers: [{ provide: SC_MASONRY_ITEM, useExisting: ScMasonryItem }],
   host: {
+    'data-slot': 'masonry-item',
     '[class]': 'class()',
+    '[style.margin-bottom.px]': 'masonryGrid.gap()',
   },
-  template: `
-    <ng-content />
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMasonryItem {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
   private resizeObserver: ResizeObserver | null = null;
+
+  protected readonly masonryGrid = inject(SC_MASONRY_GRID);
 
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() =>

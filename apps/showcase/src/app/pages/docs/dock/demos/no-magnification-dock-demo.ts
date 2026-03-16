@@ -1,3 +1,4 @@
+import { NgComponentOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -16,13 +17,19 @@ import {
 
 @Component({
   selector: 'app-no-magnification-dock-demo',
-  imports: [ScDock, ScDockItems, ScDockItem],
+  imports: [NgComponentOutlet, ScDock, ScDockItems, ScDockItem],
   template: `
     <div class="bg-muted/30 flex justify-center rounded-lg border p-8">
       <nav scDock [magnification]="false">
         <div scDockItems>
           @for (item of items; track item.id) {
-            <button scDockItem [item]="item"></button>
+            <button scDockItem [item]="item">
+              <span
+                class="inline-flex items-center justify-center [&>svg]:h-full [&>svg]:w-full"
+              >
+                <ng-container *ngComponentOutlet="item.icon" />
+              </span>
+            </button>
           }
         </div>
       </nav>

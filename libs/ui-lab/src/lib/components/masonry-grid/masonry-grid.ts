@@ -1,51 +1,44 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
+  Directive,
   ElementRef,
-  ViewEncapsulation,
   afterNextRender,
   computed,
   contentChildren,
   inject,
   input,
   signal,
-  viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScMasonryItem } from './masonry-item';
-import { DEFAULT_BREAKPOINTS, type MasonryBreakpoint } from './masonry-types';
+import {
+  DEFAULT_BREAKPOINTS,
+  type MasonryBreakpoint,
+  type MasonryLayoutMode,
+  SC_MASONRY_GRID,
+  SC_MASONRY_ITEM,
+} from './masonry-types';
 
-export type MasonryLayoutMode = 'columns' | 'absolute';
-
-@Component({
+@Directive({
   selector: '[scMasonryGrid]',
+  exportAs: 'scMasonryGrid',
+  providers: [{ provide: SC_MASONRY_GRID, useExisting: ScMasonryGrid }],
   host: {
+    'data-slot': 'masonry-grid',
     '[class]': 'class()',
+    '[style.column-count]':
+      "layoutMode() === 'columns' ? currentColumns() : null",
+    '[style.column-gap.px]': "layoutMode() === 'columns' ? gap() : null",
+    '[style.position]': "layoutMode() === 'absolute' ? 'relative' : null",
+    '[style.height.px]':
+      "layoutMode() === 'absolute' ? containerHeight() : null",
   },
-  template: `
-    <div
-      #container
-      [class]="containerClass()"
-      [style.column-count]="
-        layoutMode() === 'columns' ? currentColumns() : null
-      "
-      [style.column-gap.px]="layoutMode() === 'columns' ? gap() : null"
-      [style.position]="layoutMode() === 'absolute' ? 'relative' : null"
-      [style.height.px]="layoutMode() === 'absolute' ? containerHeight() : null"
-    >
-      <ng-content />
-    </div>
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMasonryGrid {
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
   private resizeObserver: ResizeObserver | null = null;
 
-  readonly containerRef = viewChild<ElementRef<HTMLDivElement>>('container');
-  readonly items = contentChildren(ScMasonryItem);
+  readonly items = contentChildren(SC_MASONRY_ITEM);
 
   readonly columns = input(4);
   readonly gap = input(16);
@@ -53,12 +46,14 @@ export class ScMasonryGrid {
   readonly layoutMode = input<MasonryLayoutMode>('columns');
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('block w-full', this.classInput()),
+  );
 
   protected readonly containerWidth = signal(0);
   protected readonly containerHeight = signal(0);
 
-  protected readonly currentColumns = computed(() => {
+  readonly currentColumns = computed(() => {
     const width = this.containerWidth();
     const bps = [...this.breakpoints()].sort((a, b) => b.minWidth - a.minWidth);
 
@@ -71,15 +66,10 @@ export class ScMasonryGrid {
     return this.columns();
   });
 
-  protected readonly containerClass = computed(() =>
-    cn('w-full', this.classInput()),
-  );
-
   constructor() {
     afterNextRender(() => {
       this.observeResize();
       this.updateContainerWidth();
-      this.applyItemGap();
 
       if (this.layoutMode() === 'absolute') {
         this.calculateLayout();
@@ -92,16 +82,12 @@ export class ScMasonryGrid {
 
     this.resizeObserver = new ResizeObserver(() => {
       this.updateContainerWidth();
-      this.applyItemGap();
       if (this.layoutMode() === 'absolute') {
         this.calculateLayout();
       }
     });
 
-    const container = this.containerRef()?.nativeElement;
-    if (container) {
-      this.resizeObserver.observe(container);
-    }
+    this.resizeObserver.observe(this.elementRef.nativeElement);
 
     this.destroyRef.onDestroy(() => {
       this.resizeObserver?.disconnect();
@@ -109,62 +95,43 @@ export class ScMasonryGrid {
   }
 
   private updateContainerWidth(): void {
-    const container = this.containerRef()?.nativeElement;
-    if (container) {
-      this.containerWidth.set(container.offsetWidth);
-    }
-  }
-
-  private applyItemGap(): void {
-    const gapSize = this.gap();
-    this.items().forEach((item) => {
-      item.getElement().style.marginBottom = `${gapSize}px`;
-    });
+    this.containerWidth.set(this.elementRef.nativeElement.offsetWidth);
   }
 
   private calculateLayout(): void {
-    const container = this.containerRef()?.nativeElement;
     const itemsList = this.items();
 
-    if (!container || itemsList.length === 0) return;
+    if (itemsList.length === 0) return;
 
     const cols = this.currentColumns();
     const gapSize = this.gap();
     const containerW = this.containerWidth();
     const columnWidth = (containerW - (cols - 1) * gapSize) / cols;
 
-    // Track height of each column
     const columnHeights = new Array(cols).fill(0);
 
     itemsList.forEach((item) => {
       const element = item.getElement();
 
-      // Find the shortest column
       const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights));
-
-      // Calculate position
       const left = shortestColumn * (columnWidth + gapSize);
       const top = columnHeights[shortestColumn];
 
-      // Apply styles
       element.style.position = 'absolute';
       element.style.left = `${left}px`;
       element.style.top = `${top}px`;
       element.style.width = `${columnWidth}px`;
 
-      // Update column height
       const itemHeight = element.offsetHeight;
       columnHeights[shortestColumn] += itemHeight + gapSize;
     });
 
-    // Set container height
     this.containerHeight.set(Math.max(...columnHeights) - gapSize);
   }
 
   /** Recalculate the layout manually */
   relayout(): void {
     this.updateContainerWidth();
-    this.applyItemGap();
     if (this.layoutMode() === 'absolute') {
       this.calculateLayout();
     }

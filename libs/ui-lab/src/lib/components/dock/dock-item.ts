@@ -1,27 +1,10 @@
-import { NgComponentOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_DOCK } from './dock';
 import type { DockItem } from './dock-types';
 
-@Component({
+@Directive({
   selector: 'button[scDockItem]',
-  imports: [NgComponentOutlet],
-  template: `
-    <span
-      class="inline-flex items-center justify-center [&>svg]:h-full [&>svg]:w-full"
-    >
-      <ng-container *ngComponentOutlet="item().icon" />
-    </span>
-    <ng-content />
-  `,
   host: {
     'data-slot': 'dock-item',
     type: 'button',
@@ -33,8 +16,6 @@ import type { DockItem } from './dock-types';
     '(click)': 'onClick()',
     '(mouseenter)': 'onMouseEnter()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDockItem {
   readonly dock = inject(SC_DOCK);
