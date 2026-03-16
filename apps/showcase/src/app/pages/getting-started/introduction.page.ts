@@ -90,6 +90,10 @@ import { ConfigService } from '../../services/config.service';
             — Extended and experimental components
           </li>
           <li>
+            <strong>&#64;semantic-components/charts</strong>
+            — Charts powered by SVG
+          </li>
+          <li>
             <strong>&#64;semantic-components/carousel</strong>
             — Carousel powered by Embla Carousel
           </li>
@@ -98,16 +102,13 @@ import { ConfigService } from '../../services/config.service';
             — Rich text editor powered by Tiptap
           </li>
           <li>
+            <strong>&#64;semantic-components/code</strong>
+            — Code viewer and editor powered by Shiki
+          </li>
+          <li>
             <strong>&#64;semantic-components/mcp-server</strong>
             — MCP server for AI coding assistants
           </li>
-
-          @if (devMode()) {
-            <li>
-              <strong>&#64;semantic-components/code</strong>
-              — Code viewer and editor powered by Shiki
-            </li>
-          }
         </ul>
       </section>
     </div>
