@@ -28,15 +28,50 @@ A composable set of directives for comparing text and code changes in split or u
     <div scDiffViewerSplit>
       <div scDiffViewerPane side="old">
         <div scDiffViewerPaneHeader variant="old">Original</div>
-        <sc-diff-viewer-lines side="old" />
+        <div class="font-mono text-sm">
+          @for (line of diff.diffResult().lines; track $index) { @if (line.type !== 'added') {
+          <div scDiffViewerLine [type]="line.type">
+            <span scDiffViewerLineNumber>{{ line.oldLineNumber || '' }}</span>
+            <span scDiffViewerLineSign>{{ line.type === 'removed' ? '-' : '' }}</span>
+            <span scDiffViewerLineContent [innerHTML]="diff.highlightLine(line, 'old')"></span>
+          </div>
+          } @else {
+          <div scDiffViewerLinePlaceholder></div>
+          } }
+        </div>
       </div>
       <div scDiffViewerPane side="new">
         <div scDiffViewerPaneHeader variant="new">Modified</div>
-        <sc-diff-viewer-lines side="new" />
+        <div class="font-mono text-sm">
+          @for (line of diff.diffResult().lines; track $index) { @if (line.type !== 'removed') {
+          <div scDiffViewerLine [type]="line.type">
+            <span scDiffViewerLineNumber>{{ line.newLineNumber || '' }}</span>
+            <span scDiffViewerLineSign>{{ line.type === 'added' ? '+' : '' }}</span>
+            <span scDiffViewerLineContent [innerHTML]="diff.highlightLine(line, 'new')"></span>
+          </div>
+          } @else {
+          <div scDiffViewerLinePlaceholder></div>
+          } }
+        </div>
       </div>
     </div>
     } @else {
-    <sc-diff-viewer-lines side="unified" />
+    <div class="font-mono text-sm">
+      @for (line of diff.diffResult().lines; track $index) {
+      <div scDiffViewerLine [type]="line.type">
+        <span scDiffViewerLineNumber>{{ line.oldLineNumber || '' }}</span>
+        <span scDiffViewerLineNumber>{{ line.newLineNumber || '' }}</span>
+        <span scDiffViewerLineSign class="font-bold">
+          @switch (line.type) { @case ('added') {
+          <span class="text-green-600 dark:text-green-400">+</span>
+          } @case ('removed') {
+          <span class="text-red-600 dark:text-red-400">-</span>
+          } @default {} }
+        </span>
+        <span scDiffViewerLineContent [innerHTML]="diff.highlightLine(line, line.type === 'removed' ? 'old' : 'new')"></span>
+      </div>
+      }
+    </div>
     } @if (diff.diffResult().lines.length === 0) {
     <div scDiffViewerEmpty>No differences found</div>
     }
@@ -80,6 +115,13 @@ Root directive that manages diff state. Provides `SC_DIFF_VIEWER` injection toke
 | `oldTitle`   | `InputSignal<string>`          | Original title                 |
 | `newTitle`   | `InputSignal<string>`          | Modified title                 |
 
+**Methods:**
+
+| Method                      | Description                              |
+| --------------------------- | ---------------------------------------- |
+| `getLineClass(type)`        | Returns CSS class string for a line type |
+| `highlightLine(line, side)` | Returns HTML string with word-diff       |
+
 ### ScDiffViewerHeader
 
 Header bar container with flex layout.
@@ -94,7 +136,7 @@ Container for view mode toggle buttons.
 
 ### ScDiffViewerToggleButton
 
-Individual toggle button for switching between split/unified views.
+Toggle button for switching between split/unified views.
 
 **Selector:** `button[scDiffViewerToggleButton]`
 
@@ -146,17 +188,41 @@ Label header for a split view pane.
 | --------- | ---------------- | ------- | ------------------------------------- |
 | `variant` | `'old' \| 'new'` | `'old'` | Background tint (red-ish / green-ish) |
 
-### ScDiffViewerLines
+### ScDiffViewerLine
 
-Line renderer component. Handles line iteration, line numbers, signs, and word-level highlighting.
+Line row component. Applies background color based on line type.
 
-**Selector:** `sc-diff-viewer-lines`
+**Selector:** `div[scDiffViewerLine]`
 
 **Inputs:**
 
-| Input  | Type                          | Description                   |
-| ------ | ----------------------------- | ----------------------------- |
-| `side` | `'old' \| 'new' \| 'unified'` | **(required)** Rendering mode |
+| Input  | Type     | Description                 |
+| ------ | -------- | --------------------------- |
+| `type` | `string` | **(required)** DiffLineType |
+
+### ScDiffViewerLineNumber
+
+Line number gutter.
+
+**Selector:** `span[scDiffViewerLineNumber]`
+
+### ScDiffViewerLineSign
+
+Sign indicator (+/-) column.
+
+**Selector:** `span[scDiffViewerLineSign]`
+
+### ScDiffViewerLineContent
+
+Content area for line text. Consumer sets `[innerHTML]` for word-diff highlighting.
+
+**Selector:** `span[scDiffViewerLineContent]`
+
+### ScDiffViewerLinePlaceholder
+
+Empty alignment row for split view (when opposite side has an added/removed line).
+
+**Selector:** `div[scDiffViewerLinePlaceholder]`
 
 ### ScDiffViewerFooter
 
@@ -195,14 +261,34 @@ interface DiffLine {
 ### Minimal (no header, no footer)
 
 ```html
-<div scDiffViewer [oldText]="oldText" [newText]="newText">
+<div scDiffViewer [oldText]="oldText" [newText]="newText" #diff="scDiffViewer">
   <div scDiffViewerContent maxHeight="200px">
     <div scDiffViewerSplit>
       <div scDiffViewerPane side="old">
-        <sc-diff-viewer-lines side="old" />
+        <div class="font-mono text-sm">
+          @for (line of diff.diffResult().lines; track $index) { @if (line.type !== 'added') {
+          <div scDiffViewerLine [type]="line.type">
+            <span scDiffViewerLineNumber>{{ line.oldLineNumber || '' }}</span>
+            <span scDiffViewerLineSign>{{ line.type === 'removed' ? '-' : '' }}</span>
+            <span scDiffViewerLineContent [innerHTML]="diff.highlightLine(line, 'old')"></span>
+          </div>
+          } @else {
+          <div scDiffViewerLinePlaceholder></div>
+          } }
+        </div>
       </div>
       <div scDiffViewerPane side="new">
-        <sc-diff-viewer-lines side="new" />
+        <div class="font-mono text-sm">
+          @for (line of diff.diffResult().lines; track $index) { @if (line.type !== 'removed') {
+          <div scDiffViewerLine [type]="line.type">
+            <span scDiffViewerLineNumber>{{ line.newLineNumber || '' }}</span>
+            <span scDiffViewerLineSign>{{ line.type === 'added' ? '+' : '' }}</span>
+            <span scDiffViewerLineContent [innerHTML]="diff.highlightLine(line, 'new')"></span>
+          </div>
+          } @else {
+          <div scDiffViewerLinePlaceholder></div>
+          } }
+        </div>
       </div>
     </div>
   </div>
@@ -212,9 +298,24 @@ interface DiffLine {
 ### Unified View Only
 
 ```html
-<div scDiffViewer [oldText]="oldText" [newText]="newText">
+<div scDiffViewer [oldText]="oldText" [newText]="newText" #diff="scDiffViewer">
   <div scDiffViewerContent>
-    <sc-diff-viewer-lines side="unified" />
+    <div class="font-mono text-sm">
+      @for (line of diff.diffResult().lines; track $index) {
+      <div scDiffViewerLine [type]="line.type">
+        <span scDiffViewerLineNumber>{{ line.oldLineNumber || '' }}</span>
+        <span scDiffViewerLineNumber>{{ line.newLineNumber || '' }}</span>
+        <span scDiffViewerLineSign class="font-bold">
+          @switch (line.type) { @case ('added') {
+          <span class="text-green-600 dark:text-green-400">+</span>
+          } @case ('removed') {
+          <span class="text-red-600 dark:text-red-400">-</span>
+          } @default {} }
+        </span>
+        <span scDiffViewerLineContent [innerHTML]="diff.highlightLine(line, line.type === 'removed' ? 'old' : 'new')"></span>
+      </div>
+      }
+    </div>
   </div>
 </div>
 ```
