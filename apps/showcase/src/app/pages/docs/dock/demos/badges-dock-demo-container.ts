@@ -19,7 +19,8 @@ import { BadgesDockDemo } from './badges-dock-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgesDockDemoContainer {
-  readonly code = `import {
+  readonly code = `import { NgComponentOutlet } from '@angular/common';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
@@ -42,13 +43,18 @@ import {
 
 @Component({
   selector: 'app-badges-dock-demo',
-  imports: [ScDock, ScDockItems, ScDockItem, ScDockBadge],
+  imports: [NgComponentOutlet, ScDock, ScDockItems, ScDockItem, ScDockBadge],
   template: \`
     <div class="bg-muted/30 flex justify-center rounded-lg border p-8">
       <nav scDock>
         <div scDockItems>
           @for (item of items; track item.id) {
             <button scDockItem [item]="item">
+              <span
+                class="inline-flex items-center justify-center [&>svg]:h-full [&>svg]:w-full"
+              >
+                <ng-container *ngComponentOutlet="item.icon" />
+              </span>
               @if (item.badge !== undefined) {
                 <span scDockBadge>{{ item.badge }}</span>
               }

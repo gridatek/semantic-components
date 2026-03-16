@@ -41,6 +41,7 @@ import {
   ScPopoverProvider,
   ScPopoverTitle,
   ScPopoverTrigger,
+  ScSelectOnFocus,
 } from '@semantic-components/ui';
 
 @Component({
@@ -58,6 +59,7 @@ import {
     ScPopoverProvider,
     ScPopoverTitle,
     ScPopoverTrigger,
+    ScSelectOnFocus,
   ],
   template: \`
     <div scPopoverProvider>
@@ -71,7 +73,12 @@ import {
           <div scFieldGroup class="gap-2">
             <div scField class="grid grid-cols-3 gap-4">
               <label scLabel>Width</label>
-              <input scInput value="100%" class="col-span-2" />
+              <input
+                scInput
+                value="100%"
+                class="col-span-2"
+                scSelectOnFocus="program"
+              />
             </div>
             <div scField class="grid grid-cols-3 gap-4">
               <label scLabel>Max. width</label>

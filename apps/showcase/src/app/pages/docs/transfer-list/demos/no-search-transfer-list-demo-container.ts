@@ -63,8 +63,7 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
     >
       <div scTransferListSource #source="scTransferListSource">
         <div scTransferListHeader>
-          <label class="flex items-center gap-2">
-            <input type="checkbox" scTransferListSelectAll />
+          <label scTransferListSelectAll>
             <span class="font-medium">Options</span>
           </label>
           <span scTransferListCount></span>
@@ -86,8 +85,7 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
 
       <div scTransferListTarget #target="scTransferListTarget">
         <div scTransferListHeader>
-          <label class="flex items-center gap-2">
-            <input type="checkbox" scTransferListSelectAll />
+          <label scTransferListSelectAll>
             <span class="font-medium">Chosen</span>
           </label>
           <span scTransferListCount></span>

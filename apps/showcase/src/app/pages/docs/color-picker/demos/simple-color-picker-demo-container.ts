@@ -29,6 +29,7 @@ import {
   ScColorPicker,
   ScColorPickerInput,
   ScColorPickerPreview,
+  ScColorPickerSwatch,
   ScColorPickerSwatches,
 } from '@semantic-components/ui-lab';
 
@@ -39,6 +40,7 @@ import {
     ScColorPickerPreview,
     ScColorPickerInput,
     ScColorPickerSwatches,
+    ScColorPickerSwatch,
   ],
   template: \`
     <div class="max-w-xs">
@@ -47,7 +49,13 @@ import {
         [(value)]="color"
         class="space-y-4 rounded-lg border p-4"
       >
-        <div scColorPickerSwatches [colors]="swatches"></div>
+        <div scColorPickerSwatches [colors]="swatches">
+          @for (c of swatches; track c) {
+            <button scColorPickerSwatch [color]="c">
+              <span class="sr-only">Select color {{ c }}</span>
+            </button>
+          }
+        </div>
         <div class="flex items-center gap-3">
           <div scColorPickerPreview></div>
           <input scColorPickerInput format="hex" class="flex-1" />
