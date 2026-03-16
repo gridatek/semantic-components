@@ -14,7 +14,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
         <div
           scQrCode
           [value]="'Error Correction Test'"
-          [errorCorrectionLevel]="'L'"
+          [ecc]="'L'"
           class="size-36"
         ></div>
         <p class="text-muted-foreground mt-1 text-xs">Low (7%)</p>
@@ -23,7 +23,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
         <div
           scQrCode
           [value]="'Error Correction Test'"
-          [errorCorrectionLevel]="'M'"
+          [ecc]="'M'"
           class="size-36"
         ></div>
         <p class="text-muted-foreground mt-1 text-xs">Medium (15%)</p>
@@ -32,7 +32,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
         <div
           scQrCode
           [value]="'Error Correction Test'"
-          [errorCorrectionLevel]="'Q'"
+          [ecc]="'Q'"
           class="size-36"
         ></div>
         <p class="text-muted-foreground mt-1 text-xs">Quartile (25%)</p>
@@ -41,7 +41,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
         <div
           scQrCode
           [value]="'Error Correction Test'"
-          [errorCorrectionLevel]="'H'"
+          [ecc]="'H'"
           class="size-36"
         ></div>
         <p class="text-muted-foreground mt-1 text-xs">High (30%)</p>

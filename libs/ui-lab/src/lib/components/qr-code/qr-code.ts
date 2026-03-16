@@ -10,7 +10,7 @@ import {
 import { cn } from '@semantic-components/ui';
 import { encode } from 'uqr';
 
-export type QRErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
+export type ScQrCodeEcc = 'L' | 'M' | 'Q' | 'H';
 
 @Component({
   selector: '[scQrCode]',
@@ -48,7 +48,7 @@ export class ScQrCode {
   readonly nativeElement = inject(ElementRef<HTMLElement>).nativeElement;
 
   readonly value = input.required<string>();
-  readonly errorCorrectionLevel = input<QRErrorCorrectionLevel>('M');
+  readonly ecc = input<ScQrCodeEcc>('M');
   readonly border = input<number>(2);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -61,7 +61,7 @@ export class ScQrCode {
     if (!value) return { data: [] as boolean[][], size: 0 };
 
     return encode(value, {
-      ecc: this.errorCorrectionLevel(),
+      ecc: this.ecc(),
       border: this.border(),
     });
   });
