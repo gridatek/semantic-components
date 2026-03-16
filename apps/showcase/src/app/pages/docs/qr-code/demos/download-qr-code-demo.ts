@@ -17,7 +17,12 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
         [value]="'https://example.com/download'"
         [size]="200"
       ></div>
-      <button scQrCodeDownload [for]="qr" [filename]="'my-qr-code'">
+      <button
+        scQrCodeDownload
+        [for]="qr"
+        [filename]="'my-qr-code'"
+        class="hover:bg-accent focus:ring-ring inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm transition-colors focus:ring-2 focus:outline-none"
+      >
         <svg siDownloadIcon class="size-4"></svg>
         Save QR Code
       </button>

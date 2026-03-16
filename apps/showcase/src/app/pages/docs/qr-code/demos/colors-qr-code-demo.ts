@@ -14,22 +14,19 @@ import { ScQrCode } from '@semantic-components/ui-lab';
         scQrCode
         [value]="'Blue QR'"
         [size]="150"
-        [foregroundColor]="'#1d4ed8'"
-        [backgroundColor]="'#dbeafe'"
+        class="rounded-md bg-blue-100 text-blue-700"
       ></div>
       <div
         scQrCode
         [value]="'Green QR'"
         [size]="150"
-        [foregroundColor]="'#166534'"
-        [backgroundColor]="'#dcfce7'"
+        class="rounded-md bg-green-100 text-green-800"
       ></div>
       <div
         scQrCode
         [value]="'Purple QR'"
         [size]="150"
-        [foregroundColor]="'#7c3aed'"
-        [backgroundColor]="'#f3e8ff'"
+        class="rounded-md bg-purple-100 text-purple-700"
       ></div>
     </div>
   `,

@@ -11,7 +11,6 @@ import { ColorsQrCodeDemoContainer } from './demos/colors-qr-code-demo-container
 import { DownloadQrCodeDemoContainer } from './demos/download-qr-code-demo-container';
 import { ErrorCorrectionQrCodeDemoContainer } from './demos/error-correction-qr-code-demo-container';
 import { InteractiveQrCodeDemoContainer } from './demos/interactive-qr-code-demo-container';
-import { LogoQrCodeDemoContainer } from './demos/logo-qr-code-demo-container';
 import { QuietZoneQrCodeDemoContainer } from './demos/quiet-zone-qr-code-demo-container';
 import { SizesQrCodeDemoContainer } from './demos/sizes-qr-code-demo-container';
 import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-container';
@@ -24,7 +23,6 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
     SizesQrCodeDemoContainer,
     ColorsQrCodeDemoContainer,
     ErrorCorrectionQrCodeDemoContainer,
-    LogoQrCodeDemoContainer,
     QuietZoneQrCodeDemoContainer,
     DownloadQrCodeDemoContainer,
     UseCasesQrCodeDemoContainer,
@@ -37,8 +35,7 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
       <div class="space-y-2">
         <h1 scHeading>QR Code</h1>
         <p class="text-muted-foreground">
-          Generate QR codes from text or URLs with customizable colors and logo
-          support.
+          Generate QR codes from text or URLs with customizable styles.
         </p>
         <app-component-badges path="qr-code" />
       </div>
@@ -50,7 +47,6 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
         <app-sizes-qr-code-demo-container />
         <app-colors-qr-code-demo-container />
         <app-error-correction-qr-code-demo-container />
-        <app-logo-qr-code-demo-container />
         <app-quiet-zone-qr-code-demo-container />
         <app-download-qr-code-demo-container />
         <app-use-cases-qr-code-demo-container />

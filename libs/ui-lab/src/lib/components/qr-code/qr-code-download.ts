@@ -16,14 +16,7 @@ export class ScQrCodeDownload {
   readonly filename = input<string>('qrcode');
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      'inline-flex items-center gap-2 px-4 py-2 text-sm',
-      'border rounded-md hover:bg-accent transition-colors',
-      'focus:outline-none focus:ring-2 focus:ring-ring',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
   protected download(): void {
     const svgEl = this.for().svgElement;

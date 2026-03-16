@@ -18,7 +18,7 @@ export type QRErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
     'data-slot': 'qr-code',
     '[class]': 'class()',
     role: 'img',
-    '[attr.aria-label]': 'ariaLabel()',
+    '[attr.aria-label]': `'QR Code'`,
   },
 })
 export class ScQrCode {
@@ -31,12 +31,7 @@ export class ScQrCode {
   readonly value = input.required<string>();
   readonly size = input<number>(200);
   readonly errorCorrectionLevel = input<QRErrorCorrectionLevel>('M');
-  readonly foregroundColor = input<string>('#000000');
-  readonly backgroundColor = input<string>('#ffffff');
   readonly border = input<number>(2);
-  readonly logo = input<string>('');
-  readonly logoSize = input<number>(0.2);
-  readonly ariaLabel = input<string>('QR Code');
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
@@ -50,33 +45,10 @@ export class ScQrCode {
     let svg = renderSVG(value, {
       ecc: this.errorCorrectionLevel(),
       border: this.border(),
-      pixelSize: 0,
-      whiteColor: this.backgroundColor(),
-      blackColor: this.foregroundColor(),
+      blackColor: 'currentColor',
+      whiteColor: 'transparent',
     });
 
-    const logo = this.logo();
-    if (logo) {
-      const sizeMatch = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
-      if (sizeMatch) {
-        const totalSize = Number(sizeMatch[1]);
-        const border = this.border();
-        const moduleCount = totalSize - border * 2;
-        const logoModules = Math.floor(moduleCount * this.logoSize());
-        const pad = 0.5;
-        const lx = border + (moduleCount - logoModules) / 2;
-        const ly = border + (moduleCount - logoModules) / 2;
-
-        const bg = this.backgroundColor();
-        const logoSvg =
-          `<rect x="${lx - pad}" y="${ly - pad}" width="${logoModules + pad * 2}" height="${logoModules + pad * 2}" fill="${bg}" rx="${pad}"/>` +
-          `<image href="${logo}" x="${lx}" y="${ly}" width="${logoModules}" height="${logoModules}" preserveAspectRatio="xMidYMid slice"/>`;
-
-        svg = svg.replace('</svg>', `${logoSvg}</svg>`);
-      }
-    }
-
-    // Set width/height
     svg = svg.replace(
       '<svg ',
       `<svg width="${this.size()}" height="${this.size()}" `,

@@ -2800,13 +2800,6 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'logo-qr-code-demo',
-        loadComponent: () =>
-          import('../pages/docs/qr-code/demos/logo-qr-code-demo').then(
-            (m) => m.LogoQrCodeDemo,
-          ),
-      },
-      {
         path: 'quiet-zone-qr-code-demo',
         loadComponent: () =>
           import('../pages/docs/qr-code/demos/quiet-zone-qr-code-demo').then(
