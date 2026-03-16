@@ -11,15 +11,15 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   template: `
     <div class="flex flex-wrap items-end gap-4">
       <div class="text-center">
-        <svg scQrCode [value]="'Small'" [size]="100"></svg>
+        <div scQrCode [value]="'Small'" [size]="100"></div>
         <p class="text-muted-foreground mt-1 text-xs">100px</p>
       </div>
       <div class="text-center">
-        <svg scQrCode [value]="'Medium'" [size]="150"></svg>
+        <div scQrCode [value]="'Medium'" [size]="150"></div>
         <p class="text-muted-foreground mt-1 text-xs">150px</p>
       </div>
       <div class="text-center">
-        <svg scQrCode [value]="'Large'" [size]="200"></svg>
+        <div scQrCode [value]="'Large'" [size]="200"></div>
         <p class="text-muted-foreground mt-1 text-xs">200px</p>
       </div>
     </div>

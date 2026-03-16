@@ -11,12 +11,12 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
   imports: [ScQrCode, ScQrCodeDownload, SiDownloadIcon],
   template: `
     <div class="inline-flex flex-col items-center gap-3">
-      <svg
+      <div
         scQrCode
         #qr="scQrCode"
         [value]="'https://example.com/download'"
         [size]="200"
-      ></svg>
+      ></div>
       <button scQrCodeDownload [for]="qr" [filename]="'my-qr-code'">
         <svg siDownloadIcon class="size-4"></svg>
         Save QR Code

@@ -7,28 +7,25 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { encode } from 'uqr';
+import { renderSVG } from 'uqr';
 
 export type QRErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
 
 @Directive({
-  selector: 'svg[scQrCode]',
+  selector: '[scQrCode]',
   exportAs: 'scQrCode',
   host: {
     'data-slot': 'qr-code',
     '[class]': 'class()',
     role: 'img',
     '[attr.aria-label]': 'ariaLabel()',
-    '[attr.viewBox]': 'viewBox()',
-    '[attr.width]': 'size()',
-    '[attr.height]': 'size()',
   },
 })
 export class ScQrCode {
-  private readonly elementRef = inject(ElementRef<SVGElement>);
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
 
-  get svgElement(): SVGElement {
-    return this.elementRef.nativeElement;
+  get svgElement(): SVGSVGElement | null {
+    return this.elementRef.nativeElement.querySelector('svg');
   }
 
   readonly value = input.required<string>();
@@ -42,57 +39,48 @@ export class ScQrCode {
   readonly ariaLabel = input<string>('QR Code');
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
-
-  protected readonly qrResult = computed(() => {
-    const value = this.value();
-    if (!value) return null;
-    return encode(value, {
-      ecc: this.errorCorrectionLevel(),
-      border: this.border(),
-    });
-  });
-
-  protected readonly viewBox = computed(() => {
-    const result = this.qrResult();
-    if (!result) return '0 0 0 0';
-    return `0 0 ${result.size} ${result.size}`;
-  });
+  protected readonly class = computed(() =>
+    cn('inline-block', this.classInput()),
+  );
 
   private readonly svgContent = computed(() => {
-    const result = this.qrResult();
-    if (!result) return '';
+    const value = this.value();
+    if (!value) return '';
 
-    const { size, data } = result;
-    const fg = this.foregroundColor();
-    const bg = this.backgroundColor();
-
-    let svg = `<rect width="${size}" height="${size}" fill="${bg}"/>`;
-
-    let d = '';
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        if (data[y][x]) {
-          d += `M${x},${y}h1v1h-1z`;
-        }
-      }
-    }
-    if (d) {
-      svg += `<path d="${d}" fill="${fg}"/>`;
-    }
+    let svg = renderSVG(value, {
+      ecc: this.errorCorrectionLevel(),
+      border: this.border(),
+      pixelSize: 0,
+      whiteColor: this.backgroundColor(),
+      blackColor: this.foregroundColor(),
+    });
 
     const logo = this.logo();
     if (logo) {
-      const border = this.border();
-      const moduleCount = size - border * 2;
-      const logoModules = Math.floor(moduleCount * this.logoSize());
-      const pad = 0.5;
-      const lx = border + (moduleCount - logoModules) / 2;
-      const ly = border + (moduleCount - logoModules) / 2;
+      const sizeMatch = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
+      if (sizeMatch) {
+        const totalSize = Number(sizeMatch[1]);
+        const border = this.border();
+        const moduleCount = totalSize - border * 2;
+        const logoModules = Math.floor(moduleCount * this.logoSize());
+        const pad = 0.5;
+        const lx = border + (moduleCount - logoModules) / 2;
+        const ly = border + (moduleCount - logoModules) / 2;
 
-      svg += `<rect x="${lx - pad}" y="${ly - pad}" width="${logoModules + pad * 2}" height="${logoModules + pad * 2}" fill="${bg}" rx="${pad}"/>`;
-      svg += `<image href="${logo}" x="${lx}" y="${ly}" width="${logoModules}" height="${logoModules}" preserveAspectRatio="xMidYMid slice"/>`;
+        const bg = this.backgroundColor();
+        const logoSvg =
+          `<rect x="${lx - pad}" y="${ly - pad}" width="${logoModules + pad * 2}" height="${logoModules + pad * 2}" fill="${bg}" rx="${pad}"/>` +
+          `<image href="${logo}" x="${lx}" y="${ly}" width="${logoModules}" height="${logoModules}" preserveAspectRatio="xMidYMid slice"/>`;
+
+        svg = svg.replace('</svg>', `${logoSvg}</svg>`);
+      }
     }
+
+    // Set width/height
+    svg = svg.replace(
+      '<svg ',
+      `<svg width="${this.size()}" height="${this.size()}" `,
+    );
 
     return svg;
   });
