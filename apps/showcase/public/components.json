@@ -643,8 +643,7 @@
     "description": "Generate and display QR codes.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Radio Group",
