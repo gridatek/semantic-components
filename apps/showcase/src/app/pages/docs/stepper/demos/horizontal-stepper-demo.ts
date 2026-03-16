@@ -5,6 +5,14 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScButton,
+  ScField,
+  ScFieldGroup,
+  ScInput,
+  ScLabel,
+  ScTextarea,
+} from '@semantic-components/ui';
+import {
   ScStepper,
   ScStepperContent,
   ScStepperDescription,
@@ -32,6 +40,12 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScStepperPrevious,
     ScStepperNext,
     SiCheckIcon,
+    ScButton,
+    ScField,
+    ScFieldGroup,
+    ScInput,
+    ScLabel,
+    ScTextarea,
   ],
   template: `
     <div class="w-full max-w-2xl rounded-lg border p-6">
@@ -81,49 +95,37 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div scStepperContent [step]="0">
-          <div class="space-y-4">
-            <div class="space-y-2">
-              <label class="text-sm font-medium">Email</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                class="border-input bg-background flex h-10 w-full rounded-md border px-3 py-2 text-sm"
-              />
+          <div scFieldGroup>
+            <div scField>
+              <label scLabel>Email</label>
+              <input scInput type="email" placeholder="Enter your email" />
             </div>
-            <div class="space-y-2">
-              <label class="text-sm font-medium">Password</label>
-              <input
-                type="password"
-                placeholder="Create a password"
-                class="border-input bg-background flex h-10 w-full rounded-md border px-3 py-2 text-sm"
-              />
+            <div scField>
+              <label scLabel>Password</label>
+              <input scInput type="password" placeholder="Create a password" />
             </div>
           </div>
         </div>
 
         <div scStepperContent [step]="1">
-          <div class="space-y-4">
-            <div class="space-y-2">
-              <label class="text-sm font-medium">Full Name</label>
-              <input
-                type="text"
-                placeholder="Enter your name"
-                class="border-input bg-background flex h-10 w-full rounded-md border px-3 py-2 text-sm"
-              />
+          <div scFieldGroup>
+            <div scField>
+              <label scLabel>Full Name</label>
+              <input scInput type="text" placeholder="Enter your name" />
             </div>
-            <div class="space-y-2">
-              <label class="text-sm font-medium">Bio</label>
+            <div scField>
+              <label scLabel>Bio</label>
               <textarea
+                scTextarea
                 placeholder="Tell us about yourself"
                 rows="3"
-                class="border-input bg-background flex w-full rounded-md border px-3 py-2 text-sm"
               ></textarea>
             </div>
           </div>
         </div>
 
         <div scStepperContent [step]="2">
-          <div class="space-y-4">
+          <div scFieldGroup>
             <p class="text-muted-foreground text-sm">
               Review your information and click submit to complete registration.
             </p>
@@ -134,8 +136,10 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div class="mt-6 flex justify-between">
-          <button scStepperPrevious>Previous</button>
-          <button scStepperNext>
+          <button scButton scStepperPrevious variant="outline" size="lg">
+            Previous
+          </button>
+          <button scButton scStepperNext size="lg">
             {{ activeStep() === 2 ? 'Submit' : 'Next' }}
           </button>
         </div>
