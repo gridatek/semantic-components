@@ -1,17 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD } from './signature-pad';
 
-@Component({
+@Directive({
   selector: 'button[scSignaturePadUndo]',
-  template: '<ng-content />',
   host: {
     'data-slot': 'signature-pad-undo',
     type: 'button',
@@ -21,8 +13,6 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
     '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'onClick()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSignaturePadUndoButton {
   readonly signaturePad = inject(SC_SIGNATURE_PAD);

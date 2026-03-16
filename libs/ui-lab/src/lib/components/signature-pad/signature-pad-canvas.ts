@@ -1,9 +1,7 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
   DestroyRef,
+  Directive,
   ElementRef,
-  ViewEncapsulation,
   afterNextRender,
   computed,
   effect,
@@ -15,9 +13,8 @@ import {
 import { cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
 
-@Component({
+@Directive({
   selector: 'canvas[scSignaturePadCanvas]',
-  template: '',
   host: {
     'data-slot': 'signature-pad-canvas',
     '[class]': 'class()',
@@ -33,8 +30,6 @@ import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
     '(touchmove)': 'onTouchMove($event)',
     '(touchend)': 'onPointerUp()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSignaturePadCanvas {
   readonly signaturePad = inject(SC_SIGNATURE_PAD);

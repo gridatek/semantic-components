@@ -1,17 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD } from './signature-pad';
 
-@Component({
+@Directive({
   selector: 'button[scSignaturePadPenWidth]',
-  template: '<ng-content />',
   host: {
     type: 'button',
     '[class]': 'class()',
@@ -20,8 +12,6 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
     '[disabled]': 'signaturePad.disabled() || null',
     '(click)': 'onClick()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSignaturePadWidthButton {
   protected readonly signaturePad = inject(SC_SIGNATURE_PAD);

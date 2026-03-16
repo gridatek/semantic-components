@@ -1,17 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_SIGNATURE_PAD } from './signature-pad';
 
-@Component({
+@Directive({
   selector: 'button[scSignaturePadClear]',
-  template: '<ng-content />',
   host: {
     'data-slot': 'signature-pad-clear',
     type: 'button',
@@ -21,8 +13,6 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
     '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'onClick()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSignaturePadClearButton {
   readonly signaturePad = inject(SC_SIGNATURE_PAD);
