@@ -5,11 +5,12 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ScButton, ScInput } from '@semantic-components/ui';
 import { ScQrCode } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-interactive-qr-code-demo',
-  imports: [ScQrCode, FormsModule],
+  imports: [ScQrCode, ScInput, ScButton, FormsModule],
   template: `
     <div class="flex flex-col items-center gap-6">
       @if (value()) {
@@ -18,31 +19,34 @@ import { ScQrCode } from '@semantic-components/ui-lab';
 
       <div class="flex w-full max-w-sm flex-col gap-3">
         <input
+          scInput
           type="text"
           [ngModel]="value()"
           (ngModelChange)="value.set($event)"
           placeholder="Enter text or URL..."
-          class="border-input bg-background rounded-md border px-3 py-2 text-sm"
         />
 
         <div class="flex gap-2">
           <button
-            type="button"
-            class="bg-primary text-primary-foreground rounded-md px-3 py-1.5 text-xs"
+            scButton
+            variant="secondary"
+            size="sm"
             (click)="value.set('https://angular.dev')"
           >
             URL
           </button>
           <button
-            type="button"
-            class="bg-primary text-primary-foreground rounded-md px-3 py-1.5 text-xs"
+            scButton
+            variant="secondary"
+            size="sm"
             (click)="value.set('mailto:hello@example.com')"
           >
             Email
           </button>
           <button
-            type="button"
-            class="bg-primary text-primary-foreground rounded-md px-3 py-1.5 text-xs"
+            scButton
+            variant="secondary"
+            size="sm"
             (click)="value.set('WIFI:T:WPA;S:MyNetwork;P:pass123;;')"
           >
             WiFi
