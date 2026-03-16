@@ -1,36 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_DIFF_VIEWER } from './diff-viewer';
 
-@Component({
+@Directive({
   selector: 'div[scDiffViewerLine]',
-  template: `
-    <ng-content />
-  `,
-  styles: `
-    .word-added {
-      background-color: rgba(34, 197, 94, 0.3);
-      border-radius: 2px;
-    }
-
-    .word-removed {
-      background-color: rgba(239, 68, 68, 0.3);
-      border-radius: 2px;
-    }
-  `,
   host: {
     'data-slot': 'diff-viewer-line',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDiffViewerLine {
   private readonly diffViewer = inject(SC_DIFF_VIEWER);

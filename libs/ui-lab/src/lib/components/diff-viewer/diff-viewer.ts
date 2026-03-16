@@ -114,8 +114,11 @@ export class ScDiffViewer {
         .map((part) => {
           const escaped = this.escapeHtml(part.text);
           if (part.changed) {
-            const className = side === 'old' ? 'word-removed' : 'word-added';
-            return `<span class="${className}">${escaped}</span>`;
+            const cls =
+              side === 'old'
+                ? 'bg-red-500/30 rounded-sm'
+                : 'bg-green-500/30 rounded-sm';
+            return `<span class="${cls}">${escaped}</span>`;
           }
           return escaped;
         })
