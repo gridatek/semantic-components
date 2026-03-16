@@ -25,6 +25,7 @@ export class VerticalStepperDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
 import {
   ScStepper,
   ScStepperDescription,
@@ -36,6 +37,7 @@ import {
   ScStepperTitle,
   ScStepperTrigger,
 } from '@semantic-components/ui-lab';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-vertical-stepper-demo',
@@ -49,13 +51,21 @@ import {
     ScStepperDescription,
     ScStepperPrevious,
     ScStepperNext,
+    SiCheckIcon,
+    ScButton,
   ],
   template: \`
     <div class="max-w-md rounded-lg border p-6">
       <div scStepper orientation="vertical" [(activeStep)]="activeStep">
         <div scStepperList>
-          <div scStepperItem [step]="0">
-            <button scStepperTrigger></button>
+          <div scStepperItem [step]="0" #item0="scStepperItem">
+            <button scStepperTrigger>
+              @if (item0.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>1</span>
+              }
+            </button>
             <div class="flex flex-col pb-4">
               <span scStepperTitle>Step 1</span>
               <span scStepperDescription>First step description</span>
@@ -65,10 +75,17 @@ import {
                 </div>
               }
             </div>
-            <div scStepperSeparator></div>
           </div>
-          <div scStepperItem [step]="1">
-            <button scStepperTrigger></button>
+          <div scStepperSeparator [step]="0"></div>
+
+          <div scStepperItem [step]="1" #item1="scStepperItem">
+            <button scStepperTrigger>
+              @if (item1.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>2</span>
+              }
+            </button>
             <div class="flex flex-col pb-4">
               <span scStepperTitle>Step 2</span>
               <span scStepperDescription>Second step description</span>
@@ -78,10 +95,16 @@ import {
                 </div>
               }
             </div>
-            <div scStepperSeparator></div>
           </div>
-          <div scStepperItem [step]="2">
-            <button scStepperTrigger></button>
+          <div scStepperSeparator [step]="1"></div>
+          <div scStepperItem [step]="2" #item2="scStepperItem">
+            <button scStepperTrigger>
+              @if (item2.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>3</span>
+              }
+            </button>
             <div class="flex flex-col">
               <span scStepperTitle>Step 3</span>
               <span scStepperDescription>Final step description</span>
@@ -95,8 +118,10 @@ import {
         </div>
 
         <div class="mt-6 flex justify-between">
-          <button scStepperPrevious>Previous</button>
-          <button scStepperNext>Next</button>
+          <button scButton scStepperPrevious variant="outline" size="lg">
+            Previous
+          </button>
+          <button scButton scStepperNext size="lg">Next</button>
         </div>
       </div>
     </div>
