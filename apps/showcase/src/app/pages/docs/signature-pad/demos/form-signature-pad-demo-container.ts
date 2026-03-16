@@ -45,7 +45,7 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
     SiTrash2Icon,
   ],
   template: \`
-    <div class="space-y-4">
+    <div class="w-full space-y-4">
       <div>
         <label class="mb-1 block text-sm font-medium">Full Name</label>
         <input
@@ -56,8 +56,8 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div>
         <label class="mb-1 block text-sm font-medium">Signature</label>
-        <div scSignaturePad #pad="scSignaturePad" class="relative inline-block">
-          <canvas scSignaturePadCanvas [width]="400" [height]="150"></canvas>
+        <div scSignaturePad #pad="scSignaturePad" class="relative">
+          <canvas scSignaturePadCanvas class="h-[150px]"></canvas>
 
           <div scSignaturePadControls>
             <button scSignaturePadUndo>

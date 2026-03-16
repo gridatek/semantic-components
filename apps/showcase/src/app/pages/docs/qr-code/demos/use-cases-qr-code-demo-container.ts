@@ -36,22 +36,27 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   template: \`
     <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
       <div class="text-center">
-        <sc-qr-code [value]="'https://example.com'" [size]="120" />
+        <div scQrCode [value]="'https://example.com'" class="size-28"></div>
         <p class="text-muted-foreground mt-1 text-xs">Website URL</p>
       </div>
       <div class="text-center">
-        <sc-qr-code [value]="'tel:+1234567890'" [size]="120" />
+        <div scQrCode [value]="'tel:+1234567890'" class="size-28"></div>
         <p class="text-muted-foreground mt-1 text-xs">Phone Number</p>
       </div>
       <div class="text-center">
-        <sc-qr-code [value]="'mailto:hello@example.com'" [size]="120" />
+        <div
+          scQrCode
+          [value]="'mailto:hello@example.com'"
+          class="size-28"
+        ></div>
         <p class="text-muted-foreground mt-1 text-xs">Email</p>
       </div>
       <div class="text-center">
-        <sc-qr-code
+        <div
+          scQrCode
           [value]="'WIFI:T:WPA;S:MyNetwork;P:password123;;'"
-          [size]="120"
-        />
+          class="size-28"
+        ></div>
         <p class="text-muted-foreground mt-1 text-xs">WiFi</p>
       </div>
     </div>

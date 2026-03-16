@@ -50,7 +50,7 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
     SiTrash2Icon,
   ],
   template: \`
-    <div scSignaturePad class="space-y-3">
+    <div scSignaturePad class="w-full space-y-3">
       <div scSignaturePadToolbar>
         <button scSignaturePadPenColor [color]="'#000000'">
           <span
@@ -79,8 +79,8 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
         </button>
       </div>
 
-      <div class="relative inline-block">
-        <canvas scSignaturePadCanvas [width]="400" [height]="200"></canvas>
+      <div class="relative">
+        <canvas scSignaturePadCanvas class="h-[200px]"></canvas>
 
         <div scSignaturePadControls>
           <button scSignaturePadUndo>
