@@ -9,26 +9,28 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-colors-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <div class="flex flex-wrap gap-4">
-      <div
-        scQrCode
-        [value]="'Blue QR'"
-        class="size-36 rounded-md bg-blue-100 text-blue-700"
-      ></div>
-      <div
-        scQrCode
-        [value]="'Green QR'"
-        class="size-36 rounded-md bg-green-100 text-green-800"
-      ></div>
-      <div
-        scQrCode
-        [value]="'Purple QR'"
-        class="size-36 rounded-md bg-purple-100 text-purple-700"
-      ></div>
+    <div class="flex flex-wrap gap-6">
+      @for (item of colors; track item.label) {
+        <div class="flex flex-col items-center gap-1">
+          <div
+            scQrCode
+            [value]="item.label"
+            [class]="'size-36 rounded-md ' + item.class"
+          ></div>
+          <p class="text-muted-foreground text-xs">{{ item.label }}</p>
+        </div>
+      }
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ColorsQrCodeDemo {}
+export class ColorsQrCodeDemo {
+  readonly colors = [
+    { class: 'bg-blue-100 text-blue-700', label: 'Blue' },
+    { class: 'bg-green-100 text-green-800', label: 'Green' },
+    { class: 'bg-purple-100 text-purple-700', label: 'Purple' },
+    { class: 'bg-rose-100 text-rose-700', label: 'Rose' },
+  ];
+}

@@ -9,23 +9,24 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-sizes-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <div class="flex flex-wrap items-end gap-4">
-      <div class="text-center">
-        <div scQrCode [value]="'Small'" class="size-24"></div>
-        <p class="text-muted-foreground mt-1 text-xs">96px</p>
-      </div>
-      <div class="text-center">
-        <div scQrCode [value]="'Medium'" class="size-36"></div>
-        <p class="text-muted-foreground mt-1 text-xs">144px</p>
-      </div>
-      <div class="text-center">
-        <div scQrCode [value]="'Large'" class="size-52"></div>
-        <p class="text-muted-foreground mt-1 text-xs">208px</p>
-      </div>
+    <div class="flex flex-wrap items-end gap-6">
+      @for (item of sizes; track item.label) {
+        <div class="flex flex-col items-center gap-1">
+          <div scQrCode [value]="'Size demo'" [class]="item.class"></div>
+          <p class="text-muted-foreground text-xs">{{ item.label }}</p>
+        </div>
+      }
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SizesQrCodeDemo {}
+export class SizesQrCodeDemo {
+  readonly sizes = [
+    { class: 'size-20', label: '80px' },
+    { class: 'size-32', label: '128px' },
+    { class: 'size-52', label: '208px (default)' },
+    { class: 'size-72', label: '288px' },
+  ];
+}

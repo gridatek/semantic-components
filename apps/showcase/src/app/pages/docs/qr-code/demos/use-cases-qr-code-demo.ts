@@ -9,35 +9,24 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-use-cases-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-      <div class="text-center">
-        <div scQrCode [value]="'https://example.com'" class="size-28"></div>
-        <p class="text-muted-foreground mt-1 text-xs">Website URL</p>
-      </div>
-      <div class="text-center">
-        <div scQrCode [value]="'tel:+1234567890'" class="size-28"></div>
-        <p class="text-muted-foreground mt-1 text-xs">Phone Number</p>
-      </div>
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'mailto:hello@example.com'"
-          class="size-28"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">Email</p>
-      </div>
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'WIFI:T:WPA;S:MyNetwork;P:password123;;'"
-          class="size-28"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">WiFi</p>
-      </div>
+    <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+      @for (item of useCases; track item.label) {
+        <div class="flex flex-col items-center gap-1">
+          <div scQrCode [value]="item.value" class="size-28"></div>
+          <p class="text-muted-foreground text-xs">{{ item.label }}</p>
+        </div>
+      }
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UseCasesQrCodeDemo {}
+export class UseCasesQrCodeDemo {
+  readonly useCases = [
+    { value: 'https://angular.dev', label: 'Website URL' },
+    { value: 'tel:+1234567890', label: 'Phone Number' },
+    { value: 'mailto:hello@example.com', label: 'Email' },
+    { value: 'WIFI:T:WPA;S:MyNetwork;P:password123;;', label: 'WiFi' },
+  ];
+}

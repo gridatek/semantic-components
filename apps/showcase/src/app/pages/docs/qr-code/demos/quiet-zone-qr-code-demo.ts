@@ -9,38 +9,29 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-quiet-zone-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <div class="flex flex-wrap items-end gap-4">
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'No border'"
-          [border]="0"
-          class="size-36 border"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">No quiet zone</p>
-      </div>
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'Small border'"
-          [border]="1"
-          class="size-36"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">1 module</p>
-      </div>
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'Standard border'"
-          [border]="4"
-          class="size-36"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">4 modules (standard)</p>
-      </div>
+    <div class="flex flex-wrap items-end gap-6">
+      @for (item of borders; track item.border) {
+        <div class="flex flex-col items-center gap-1">
+          <div
+            scQrCode
+            [value]="'Border demo'"
+            [border]="item.border"
+            [class]="'size-36' + (item.border === 0 ? ' border' : '')"
+          ></div>
+          <p class="text-muted-foreground text-xs">{{ item.label }}</p>
+        </div>
+      }
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuietZoneQrCodeDemo {}
+export class QuietZoneQrCodeDemo {
+  readonly borders = [
+    { border: 0, label: 'No quiet zone' },
+    { border: 1, label: '1 module' },
+    { border: 2, label: '2 modules (default)' },
+    { border: 4, label: '4 modules (standard)' },
+  ];
+}

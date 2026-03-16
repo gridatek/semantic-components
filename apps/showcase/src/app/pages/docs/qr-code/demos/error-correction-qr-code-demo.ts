@@ -3,53 +3,35 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScQrCode } from '@semantic-components/ui-lab';
+import { ScQrCode, ScQrCodeEcc } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-error-correction-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <div class="flex flex-wrap gap-4">
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'Error Correction Test'"
-          [ecc]="'L'"
-          class="size-36"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">Low (7%)</p>
-      </div>
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'Error Correction Test'"
-          [ecc]="'M'"
-          class="size-36"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">Medium (15%)</p>
-      </div>
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'Error Correction Test'"
-          [ecc]="'Q'"
-          class="size-36"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">Quartile (25%)</p>
-      </div>
-      <div class="text-center">
-        <div
-          scQrCode
-          [value]="'Error Correction Test'"
-          [ecc]="'H'"
-          class="size-36"
-        ></div>
-        <p class="text-muted-foreground mt-1 text-xs">High (30%)</p>
-      </div>
+    <div class="flex flex-wrap gap-6">
+      @for (item of levels; track item.ecc) {
+        <div class="flex flex-col items-center gap-1">
+          <div
+            scQrCode
+            [value]="'Error Correction'"
+            [ecc]="item.ecc"
+            class="size-36"
+          ></div>
+          <p class="text-muted-foreground text-xs">{{ item.label }}</p>
+        </div>
+      }
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ErrorCorrectionQrCodeDemo {}
+export class ErrorCorrectionQrCodeDemo {
+  readonly levels: { ecc: ScQrCodeEcc; label: string }[] = [
+    { ecc: 'L', label: 'Low (7%)' },
+    { ecc: 'M', label: 'Medium (15%)' },
+    { ecc: 'Q', label: 'Quartile (25%)' },
+    { ecc: 'H', label: 'High (30%)' },
+  ];
+}
