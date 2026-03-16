@@ -1,8 +1,13 @@
 export { SC_COLOR_PICKER, ScColorPicker } from './color-picker';
 export type { HSV, RGB, HSL } from './color-picker';
 export { ScColorPickerArea } from './color-picker-area';
+export { ScColorPickerAreaSaturation } from './color-picker-area-saturation';
+export { ScColorPickerAreaBrightness } from './color-picker-area-brightness';
+export { ScColorPickerAreaCursor } from './color-picker-area-cursor';
 export { ScColorPickerHue } from './color-picker-hue';
+export { ScColorPickerHueCursor } from './color-picker-hue-cursor';
 export { ScColorPickerPreview } from './color-picker-preview';
 export { ScColorPickerInput } from './color-picker-input';
 export { ScColorPickerSwatches } from './color-picker-swatches';
+export { ScColorPickerSwatch } from './color-picker-swatch';
 export { ScColorPickerEyeDropper } from './color-picker-eyedropper';

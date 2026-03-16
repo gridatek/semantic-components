@@ -1,46 +1,29 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
-@Component({
-  selector: '[scColorPickerHue]',
-  template: `
-    <div
-      class="relative h-full w-full cursor-pointer rounded-md"
-      style="background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)"
-      (mousedown)="onMouseDown($event)"
-      (touchstart)="onTouchStart($event)"
-    >
-      <div
-        class="absolute top-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-md"
-        [style.left.%]="(colorPicker.hsv().h / 360) * 100"
-        [style.background]="'hsl(' + colorPicker.hsv().h + ', 100%, 50%)'"
-      ></div>
-    </div>
-  `,
+@Directive({
+  selector: 'div[scColorPickerHue]',
   host: {
     'data-slot': 'color-picker-hue',
     '[class]': 'class()',
+    style:
+      'background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%)',
+    '(mousedown)': 'onMouseDown($event)',
+    '(touchstart)': 'onTouchStart($event)',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScColorPickerHue {
-  readonly colorPicker = inject(SC_COLOR_PICKER);
+  protected readonly colorPicker = inject(SC_COLOR_PICKER);
   private readonly elementRef = inject(ElementRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('block h-3 w-full', this.classInput()),
+    cn(
+      'relative block h-3 w-full cursor-pointer rounded-md',
+      this.classInput(),
+    ),
   );
 
   onMouseDown(event: MouseEvent): void {

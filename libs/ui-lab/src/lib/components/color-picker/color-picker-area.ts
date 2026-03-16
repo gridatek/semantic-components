@@ -1,53 +1,28 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
-@Component({
-  selector: '[scColorPickerArea]',
-  template: `
-    <div
-      class="relative size-full cursor-crosshair rounded-md"
-      [style.background]="'hsl(' + colorPicker.hsv().h + ', 100%, 50%)'"
-      (mousedown)="onMouseDown($event)"
-      (touchstart)="onTouchStart($event)"
-    >
-      <div
-        class="absolute inset-0 rounded-md bg-linear-to-r from-white to-transparent"
-      ></div>
-      <div
-        class="absolute inset-0 rounded-md bg-linear-to-t from-black to-transparent"
-      ></div>
-      <div
-        class="absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-md"
-        [style.left.%]="colorPicker.hsv().s"
-        [style.top.%]="100 - colorPicker.hsv().v"
-        [style.background-color]="colorPicker.hex()"
-      ></div>
-    </div>
-  `,
+@Directive({
+  selector: 'div[scColorPickerArea]',
   host: {
     'data-slot': 'color-picker-area',
     '[class]': 'class()',
+    '[style.background]': '"hsl(" + colorPicker.hsv().h + ", 100%, 50%)"',
+    '(mousedown)': 'onMouseDown($event)',
+    '(touchstart)': 'onTouchStart($event)',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScColorPickerArea {
-  readonly colorPicker = inject(SC_COLOR_PICKER);
+  protected readonly colorPicker = inject(SC_COLOR_PICKER);
   private readonly elementRef = inject(ElementRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('block h-40 w-full', this.classInput()),
+    cn(
+      'relative block h-40 w-full cursor-crosshair rounded-md',
+      this.classInput(),
+    ),
   );
 
   onMouseDown(event: MouseEvent): void {

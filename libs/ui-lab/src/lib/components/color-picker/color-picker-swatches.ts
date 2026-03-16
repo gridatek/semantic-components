@@ -1,37 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_COLOR_PICKER } from './color-picker';
 
-@Component({
+@Directive({
   selector: '[scColorPickerSwatches]',
-  template: `
-    @for (color of colors(); track color) {
-      <button
-        type="button"
-        class="focus:ring-ring size-6 rounded-md border shadow-sm transition-transform hover:scale-110 focus:ring-2 focus:outline-none"
-        [style.background-color]="color"
-        [attr.aria-label]="'Select color ' + color"
-        (click)="selectColor(color)"
-      ></button>
-    }
-  `,
+  exportAs: 'scColorPickerSwatches',
   host: {
     'data-slot': 'color-picker-swatches',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScColorPickerSwatches {
-  readonly colorPicker = inject(SC_COLOR_PICKER);
-
   readonly classInput = input<string>('', { alias: 'class' });
   readonly colors = input<string[]>([
     '#ef4444',
@@ -51,10 +29,4 @@ export class ScColorPickerSwatches {
   protected readonly class = computed(() =>
     cn('flex flex-wrap gap-2', this.classInput()),
   );
-
-  selectColor(color: string): void {
-    if (!this.colorPicker.disabled()) {
-      this.colorPicker.setHex(color);
-    }
-  }
 }

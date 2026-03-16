@@ -1,17 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
 
-@Component({
+@Directive({
   selector: 'input[scColorPickerInput]',
-  template: ``,
   host: {
     'data-slot': 'color-picker-input',
     type: 'text',
@@ -21,8 +13,6 @@ import { SC_COLOR_PICKER } from './color-picker';
     '(input)': 'onInput($event)',
     '(blur)': 'onBlur()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScColorPickerInput {
   readonly colorPicker = inject(SC_COLOR_PICKER);
