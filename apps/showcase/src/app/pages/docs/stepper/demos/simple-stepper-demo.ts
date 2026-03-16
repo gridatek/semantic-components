@@ -42,7 +42,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
               }
             </button>
           </div>
-          <div scStepperSeparator></div>
+          <div scStepperSeparator [step]="0"></div>
           <div scStepperItem [step]="1" #item1="scStepperItem">
             <button scStepperTrigger>
               @if (item1.state() === 'complete') {
@@ -52,7 +52,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
               }
             </button>
           </div>
-          <div scStepperSeparator></div>
+          <div scStepperSeparator [step]="1"></div>
           <div scStepperItem [step]="2" #item2="scStepperItem">
             <button scStepperTrigger>
               @if (item2.state() === 'complete') {
@@ -62,7 +62,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
               }
             </button>
           </div>
-          <div scStepperSeparator></div>
+          <div scStepperSeparator [step]="2"></div>
           <div scStepperItem [step]="3" #item3="scStepperItem">
             <button scStepperTrigger>
               @if (item3.state() === 'complete') {

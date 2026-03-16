@@ -15,12 +15,12 @@ export class ScStepperSeparator {
   private readonly stepperItem = inject(SC_STEPPER_ITEM, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly step = input<number | undefined>(undefined);
 
   protected readonly state = computed(() => {
-    if (!this.stepperItem) return 'inactive';
-    return this.stepper.isStepComplete(this.stepperItem.step())
-      ? 'complete'
-      : 'inactive';
+    const stepNum = this.step() ?? this.stepperItem?.step();
+    if (stepNum === undefined) return 'inactive';
+    return this.stepper.isStepComplete(stepNum) ? 'complete' : 'inactive';
   });
 
   protected readonly class = computed(() => {
