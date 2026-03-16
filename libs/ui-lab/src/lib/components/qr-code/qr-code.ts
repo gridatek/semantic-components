@@ -1,25 +1,48 @@
 import {
-  Directive,
+  ChangeDetectionStrategy,
+  Component,
   ElementRef,
+  ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { renderSVG } from 'uqr';
+import { encode } from 'uqr';
 
 export type QRErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
 
-@Directive({
+@Component({
   selector: '[scQrCode]',
   exportAs: 'scQrCode',
+  template: `
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      [attr.viewBox]="'0 0 ' + qrData().size + ' ' + qrData().size"
+    >
+      @for (row of qrData().data; track $index; let y = $index) {
+        @for (cell of row; track $index; let x = $index) {
+          @if (cell) {
+            <rect
+              [attr.x]="x"
+              [attr.y]="y"
+              width="1"
+              height="1"
+              fill="currentColor"
+            />
+          }
+        }
+      }
+    </svg>
+  `,
   host: {
     'data-slot': 'qr-code',
     '[class]': 'class()',
     role: 'img',
     '[attr.aria-label]': `'QR Code'`,
   },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScQrCode {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
@@ -37,21 +60,13 @@ export class ScQrCode {
     cn('inline-block size-52', this.classInput()),
   );
 
-  private readonly svgContent = computed(() => {
+  protected readonly qrData = computed(() => {
     const value = this.value();
-    if (!value) return '';
+    if (!value) return { data: [] as boolean[][], size: 0 };
 
-    return renderSVG(value, {
+    return encode(value, {
       ecc: this.errorCorrectionLevel(),
       border: this.border(),
-      blackColor: 'currentColor',
-      whiteColor: 'transparent',
     });
   });
-
-  constructor() {
-    effect(() => {
-      this.elementRef.nativeElement.innerHTML = this.svgContent();
-    });
-  }
 }
