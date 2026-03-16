@@ -51,14 +51,10 @@ import { CodeViewerUsageDemo } from './code-viewer-usage-demo';
     </div>
 
     @if (devMode()) {
-      <div
-        class="mt-4 flex min-h-40 items-center justify-center rounded-md border p-6"
-      >
-        <app-code-viewer-usage-demo />
-      </div>
+      <app-code-viewer-usage-demo />
     }
   `,
-  host: { class: 'block w-full' },
+  host: { class: 'block w-full space-y-4' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
