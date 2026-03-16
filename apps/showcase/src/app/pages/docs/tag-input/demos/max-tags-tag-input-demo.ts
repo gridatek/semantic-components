@@ -5,9 +5,9 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScTagInput,
   ScTagInputCount,
   ScTagInputField,
+  ScTagInputInput,
   ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
@@ -16,8 +16,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-max-tags-tag-input-demo',
   imports: [
-    ScTagInput,
     ScTagInputField,
+    ScTagInputInput,
     ScTagInputTag,
     ScTagInputRemove,
     ScTagInputCount,
@@ -25,7 +25,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="max-w-md space-y-2">
-      <div scTagInput [(tags)]="tags" [maxTags]="5">
+      <div scTagInputField [(tags)]="tags" [maxTags]="5">
         @for (tag of tags(); track tag) {
           <span scTagInputTag [tag]="tag">
             {{ tag }}
@@ -34,7 +34,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             </button>
           </span>
         }
-        <input scTagInputField />
+        <input scTagInputInput />
         <span scTagInputCount class="ml-auto text-xs"></span>
       </div>
     </div>

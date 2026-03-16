@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_TAG_INPUT } from './tag-input';
+import { SC_TAG_INPUT_FIELD } from './tag-input-field';
 import { SC_TAG_INPUT_TAG } from './tag-input-tag';
 
 @Directive({
@@ -17,7 +17,7 @@ import { SC_TAG_INPUT_TAG } from './tag-input-tag';
 export class ScTagInputRemove {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly tagInput = inject(SC_TAG_INPUT);
+  private readonly tagInput = inject(SC_TAG_INPUT_FIELD);
   private readonly tagRef = inject(SC_TAG_INPUT_TAG);
 
   protected readonly isDisabled = this.tagInput.disabled;

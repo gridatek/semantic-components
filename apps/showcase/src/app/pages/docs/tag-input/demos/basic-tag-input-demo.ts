@@ -5,8 +5,8 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScTagInput,
   ScTagInputField,
+  ScTagInputInput,
   ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
@@ -15,15 +15,15 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-tag-input-demo',
   imports: [
-    ScTagInput,
     ScTagInputField,
+    ScTagInputInput,
     ScTagInputTag,
     ScTagInputRemove,
     SiXIcon,
   ],
   template: `
     <div class="max-w-md">
-      <div scTagInput [(tags)]="tags">
+      <div scTagInputField [(tags)]="tags">
         @for (tag of tags(); track tag) {
           <span scTagInputTag [tag]="tag">
             {{ tag }}
@@ -32,7 +32,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             </button>
           </span>
         }
-        <input scTagInputField />
+        <input scTagInputInput />
       </div>
     </div>
   `,

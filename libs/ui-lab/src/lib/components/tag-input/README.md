@@ -6,8 +6,8 @@ A composable multi-tag input with chips for adding and removing tags.
 
 | Part               | Selector                   | Type      | Description                        |
 | ------------------ | -------------------------- | --------- | ---------------------------------- |
-| `ScTagInput`       | `[scTagInput]`             | Directive | Root container — manages tag state |
-| `ScTagInputField`  | `input[scTagInputField]`   | Directive | Input field for typing new tags    |
+| `ScTagInputField`  | `[scTagInputField]`        | Directive | Root container — manages tag state |
+| `ScTagInputInput`  | `input[scTagInputInput]`   | Directive | Input for typing new tags          |
 | `ScTagInputTag`    | `[scTagInputTag]`          | Directive | Individual tag chip styling        |
 | `ScTagInputRemove` | `button[scTagInputRemove]` | Directive | Remove button inside a tag         |
 | `ScTagInputClear`  | `button[scTagInputClear]`  | Directive | Clear all tags button              |
@@ -16,13 +16,13 @@ A composable multi-tag input with chips for adding and removing tags.
 ## Usage
 
 ```typescript
-import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInputRemove, ScTagInputTag } from '@semantic-components/ui-lab';
+import { ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInputInput, ScTagInputRemove, ScTagInputTag } from '@semantic-components/ui-lab';
 ```
 
 ### Basic
 
 ```html
-<div scTagInput [(tags)]="tags">
+<div scTagInputField [(tags)]="tags">
   @for (tag of tags(); track tag) {
   <span scTagInputTag [tag]="tag">
     {{ tag }}
@@ -31,14 +31,14 @@ import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInp
     </button>
   </span>
   }
-  <input scTagInputField />
+  <input scTagInputInput />
 </div>
 ```
 
 ### With Clear Button
 
 ```html
-<div scTagInput [(tags)]="tags">
+<div scTagInputField [(tags)]="tags">
   @for (tag of tags(); track tag) {
   <span scTagInputTag [tag]="tag">
     {{ tag }}
@@ -47,7 +47,7 @@ import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInp
     </button>
   </span>
   }
-  <input scTagInputField />
+  <input scTagInputInput />
   <button scTagInputClear>
     <svg siXIcon class="size-4"></svg>
   </button>
@@ -57,7 +57,7 @@ import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInp
 ### With Max Tags & Count
 
 ```html
-<div scTagInput [(tags)]="tags" [maxTags]="5">
+<div scTagInputField [(tags)]="tags" [maxTags]="5">
   @for (tag of tags(); track tag) {
   <span scTagInputTag [tag]="tag">
     {{ tag }}
@@ -66,7 +66,7 @@ import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInp
     </button>
   </span>
   }
-  <input scTagInputField />
+  <input scTagInputInput />
   <span scTagInputCount class="ml-auto text-xs"></span>
 </div>
 ```
@@ -86,7 +86,7 @@ import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInp
 
 ## API
 
-### ScTagInput (root)
+### ScTagInputField (root)
 
 | Input             | Type             | Default          | Description            |
 | ----------------- | ---------------- | ---------------- | ---------------------- |
@@ -104,7 +104,7 @@ import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInp
 | `tagAdd`    | `string` | Tag was added   |
 | `tagRemove` | `string` | Tag was removed |
 
-### ScTagInputField
+### ScTagInputInput
 
 | Input       | Type      | Default | Description               |
 | ----------- | --------- | ------- | ------------------------- |
@@ -119,7 +119,7 @@ import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInp
 
 ### ScTagInputRemove
 
-Placed inside `ScTagInputTag`. Automatically reads the parent tag value and sets `aria-label`. Auto-disables when the root `ScTagInput` is disabled.
+Placed inside `ScTagInputTag`. Automatically reads the parent tag value and sets `aria-label`. Auto-disables when the root `ScTagInputField` is disabled.
 
 ### ScTagInputClear
 

@@ -5,8 +5,8 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScTagInput,
   ScTagInputField,
+  ScTagInputInput,
   ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
@@ -15,8 +15,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-variants-tag-input-demo',
   imports: [
-    ScTagInput,
     ScTagInputField,
+    ScTagInputInput,
     ScTagInputTag,
     ScTagInputRemove,
     SiXIcon,
@@ -25,7 +25,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     <div class="max-w-md space-y-3">
       <div class="space-y-1">
         <label class="text-muted-foreground text-xs">Default</label>
-        <div scTagInput [(tags)]="variantDefault">
+        <div scTagInputField [(tags)]="variantDefault">
           @for (tag of variantDefault(); track tag) {
             <span scTagInputTag [tag]="tag" variant="default">
               {{ tag }}
@@ -34,12 +34,12 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               </button>
             </span>
           }
-          <input scTagInputField />
+          <input scTagInputInput />
         </div>
       </div>
       <div class="space-y-1">
         <label class="text-muted-foreground text-xs">Secondary</label>
-        <div scTagInput [(tags)]="variantSecondary">
+        <div scTagInputField [(tags)]="variantSecondary">
           @for (tag of variantSecondary(); track tag) {
             <span scTagInputTag [tag]="tag" variant="secondary">
               {{ tag }}
@@ -48,12 +48,12 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               </button>
             </span>
           }
-          <input scTagInputField />
+          <input scTagInputInput />
         </div>
       </div>
       <div class="space-y-1">
         <label class="text-muted-foreground text-xs">Outline</label>
-        <div scTagInput [(tags)]="variantOutline">
+        <div scTagInputField [(tags)]="variantOutline">
           @for (tag of variantOutline(); track tag) {
             <span scTagInputTag [tag]="tag" variant="outline">
               {{ tag }}
@@ -62,7 +62,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               </button>
             </span>
           }
-          <input scTagInputField />
+          <input scTagInputInput />
         </div>
       </div>
     </div>

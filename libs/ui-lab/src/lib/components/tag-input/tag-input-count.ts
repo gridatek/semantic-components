@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_TAG_INPUT } from './tag-input';
+import { SC_TAG_INPUT_FIELD } from './tag-input-field';
 
 @Directive({
   selector: '[scTagInputCount]',
@@ -11,7 +11,7 @@ import { SC_TAG_INPUT } from './tag-input';
   },
 })
 export class ScTagInputCount {
-  readonly tagInput = inject(SC_TAG_INPUT);
+  readonly tagInput = inject(SC_TAG_INPUT_FIELD);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly showMax = input<boolean>(true);

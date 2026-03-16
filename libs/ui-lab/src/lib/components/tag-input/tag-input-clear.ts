@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
-import { SC_TAG_INPUT } from './tag-input';
+import { SC_TAG_INPUT_FIELD } from './tag-input-field';
 
 @Directive({
   selector: 'button[scTagInputClear]',
@@ -16,7 +16,7 @@ import { SC_TAG_INPUT } from './tag-input';
   },
 })
 export class ScTagInputClear {
-  readonly tagInput = inject(SC_TAG_INPUT);
+  readonly tagInput = inject(SC_TAG_INPUT_FIELD);
 
   readonly classInput = input<string>('', { alias: 'class' });
 

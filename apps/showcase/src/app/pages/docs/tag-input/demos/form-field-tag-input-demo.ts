@@ -5,10 +5,10 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScTagInput,
   ScTagInputClear,
   ScTagInputCount,
   ScTagInputField,
+  ScTagInputInput,
   ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
@@ -17,8 +17,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-form-field-tag-input-demo',
   imports: [
-    ScTagInput,
     ScTagInputField,
+    ScTagInputInput,
     ScTagInputTag,
     ScTagInputRemove,
     ScTagInputClear,
@@ -30,7 +30,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <div class="space-y-2">
         <label class="text-sm font-medium">Skills</label>
         <div
-          scTagInput
+          scTagInputField
           [(tags)]="skillTags"
           [maxTags]="10"
           placeholder="Add a skill..."
@@ -43,7 +43,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               </button>
             </span>
           }
-          <input scTagInputField />
+          <input scTagInputInput />
           <span scTagInputCount class="ml-auto text-xs"></span>
         </div>
         <p class="text-muted-foreground text-xs">Add up to 10 skills</p>
@@ -52,7 +52,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <div class="space-y-2">
         <label class="text-sm font-medium">Categories</label>
         <div
-          scTagInput
+          scTagInputField
           [(tags)]="categoryTags"
           [maxTags]="3"
           placeholder="Select categories..."
@@ -65,7 +65,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               </button>
             </span>
           }
-          <input scTagInputField />
+          <input scTagInputInput />
           <button scTagInputClear>
             <svg siXIcon class="size-4"></svg>
           </button>
