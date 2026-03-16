@@ -41,7 +41,3 @@ export type {
   PdfZoomChangeEvent,
   PdfErrorEvent,
 } from './pdf-viewer-types';
-
-// Legacy exports for backward compatibility
-export { ScPdfViewer } from './pdf-viewer';
-export { ScPdfViewerToolbar as ScPdfViewerToolbarLegacy } from './pdf-viewer-toolbar';
