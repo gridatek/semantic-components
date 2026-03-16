@@ -11,7 +11,12 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
   imports: [ScQrCode, ScQrCodeDownload, SiDownloadIcon],
   template: `
     <div class="flex flex-col items-center gap-4">
-      <div scQrCode #qr="scQrCode" [value]="'https://angular.dev'"></div>
+      <svg
+        scQrCode
+        #qr="scQrCode"
+        [value]="'https://angular.dev'"
+        aria-label="QR Code for angular.dev"
+      ></svg>
       <button
         scQrCodeDownload
         [for]="qr"

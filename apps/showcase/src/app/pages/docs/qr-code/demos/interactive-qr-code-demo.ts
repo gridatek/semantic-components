@@ -13,7 +13,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   template: `
     <div class="flex flex-col items-center gap-6">
       @if (value()) {
-        <div scQrCode [value]="value()"></div>
+        <svg scQrCode [value]="value()" aria-label="QR Code"></svg>
       }
 
       <div class="flex w-full max-w-sm flex-col gap-3">

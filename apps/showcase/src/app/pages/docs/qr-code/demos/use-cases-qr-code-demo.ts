@@ -12,7 +12,12 @@ import { ScQrCode } from '@semantic-components/ui-lab';
     <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
       @for (item of useCases; track item.label) {
         <div class="flex flex-col items-center gap-1">
-          <div scQrCode [value]="item.value" class="size-28"></div>
+          <svg
+            scQrCode
+            [value]="item.value"
+            class="size-28"
+            [attr.aria-label]="item.label"
+          ></svg>
           <p class="text-muted-foreground text-xs">{{ item.label }}</p>
         </div>
       }

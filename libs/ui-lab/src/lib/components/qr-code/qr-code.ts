@@ -13,39 +13,35 @@ import { encode } from 'uqr';
 export type ScQrCodeEcc = 'L' | 'M' | 'Q' | 'H';
 
 @Component({
-  selector: '[scQrCode]',
+  selector: 'svg[scQrCode]',
   exportAs: 'scQrCode',
   template: `
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      [attr.viewBox]="'0 0 ' + qrData().size + ' ' + qrData().size"
-    >
-      @for (row of qrData().data; track $index; let y = $index) {
-        @for (cell of row; track $index; let x = $index) {
-          @if (cell) {
-            <rect
-              [attr.x]="x"
-              [attr.y]="y"
-              width="1"
-              height="1"
-              fill="currentColor"
-            />
-          }
+    @for (row of qrData().data; track $index; let y = $index) {
+      @for (cell of row; track $index; let x = $index) {
+        @if (cell) {
+          <svg:rect
+            [attr.x]="x"
+            [attr.y]="y"
+            width="1"
+            height="1"
+            fill="currentColor"
+          />
         }
       }
-    </svg>
+    }
   `,
   host: {
     'data-slot': 'qr-code',
     '[class]': 'class()',
     role: 'img',
-    '[attr.aria-label]': `'QR Code'`,
+    xmlns: 'http://www.w3.org/2000/svg',
+    '[attr.viewBox]': 'viewBox()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScQrCode {
-  readonly nativeElement = inject(ElementRef<HTMLElement>).nativeElement;
+  readonly nativeElement = inject(ElementRef<SVGSVGElement>).nativeElement;
 
   readonly value = input.required<string>();
   readonly ecc = input<ScQrCodeEcc>('M');
@@ -55,6 +51,11 @@ export class ScQrCode {
   protected readonly class = computed(() =>
     cn('inline-block size-52', this.classInput()),
   );
+
+  protected readonly viewBox = computed(() => {
+    const size = this.qrData().size;
+    return `0 0 ${size} ${size}`;
+  });
 
   protected readonly qrData = computed(() => {
     const value = this.value();

@@ -12,11 +12,12 @@ import { ScQrCode } from '@semantic-components/ui-lab';
     <div class="flex flex-wrap gap-6">
       @for (item of colors; track item.label) {
         <div class="flex flex-col items-center gap-1">
-          <div
+          <svg
             scQrCode
             [value]="item.label"
             [class]="'size-36 rounded-md ' + item.class"
-          ></div>
+            [attr.aria-label]="item.label + ' QR Code'"
+          ></svg>
           <p class="text-muted-foreground text-xs">{{ item.label }}</p>
         </div>
       }

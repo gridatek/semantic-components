@@ -10,7 +10,11 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   imports: [ScQrCode],
   template: `
     <div class="flex flex-col items-center gap-2">
-      <div scQrCode [value]="'https://angular.dev'"></div>
+      <svg
+        scQrCode
+        [value]="'https://angular.dev'"
+        aria-label="QR Code for angular.dev"
+      ></svg>
       <p class="text-muted-foreground text-sm">Scan to visit angular.dev</p>
     </div>
   `,

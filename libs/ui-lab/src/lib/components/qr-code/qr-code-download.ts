@@ -19,8 +19,7 @@ export class ScQrCodeDownload {
   protected readonly class = computed(() => cn(this.classInput()));
 
   protected download(): void {
-    const svgEl = this.for().nativeElement.querySelector('svg');
-    if (!svgEl) return;
+    const svgEl = this.for().nativeElement;
 
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
