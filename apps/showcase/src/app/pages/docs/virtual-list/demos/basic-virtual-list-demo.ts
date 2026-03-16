@@ -21,6 +21,7 @@ import {
     <cdk-virtual-scroll-viewport
       itemSize="48"
       class="h-[300px] rounded-lg border"
+      tabindex="0"
     >
       <div
         *cdkVirtualFor="let item of items(); let i = index"
