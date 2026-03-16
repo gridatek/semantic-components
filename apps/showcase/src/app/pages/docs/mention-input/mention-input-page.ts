@@ -27,7 +27,7 @@ import { FormMentionInputDemoContainer } from './demos/form-mention-input-demo-c
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>MentionInput</h1>
+        <h1 scHeading>Mention Input</h1>
         <p class="text-muted-foreground">
           Text input with &#64;mention support for users, channels, or custom
           entities.

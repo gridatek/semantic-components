@@ -29,7 +29,7 @@ import { NonCollapsibleOrgChartDemoContainer } from './demos/non-collapsible-org
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>OrgChart</h1>
+        <h1 scHeading>Org Chart</h1>
         <p class="text-muted-foreground">
           A hierarchical organization chart for visualizing company structures.
         </p>

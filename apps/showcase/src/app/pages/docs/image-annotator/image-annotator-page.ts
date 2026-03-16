@@ -21,7 +21,7 @@ import { CustomSizeImageAnnotatorDemoContainer } from './demos/custom-size-image
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>ImageAnnotator</h1>
+        <h1 scHeading>Image Annotator</h1>
         <p class="text-muted-foreground">
           Draw, mark up, and annotate images with various tools.
         </p>

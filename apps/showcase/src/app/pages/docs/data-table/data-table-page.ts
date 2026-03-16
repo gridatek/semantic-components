@@ -19,7 +19,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>DataTable</h1>
+        <h1 scHeading>Data Table</h1>
         <p class="text-muted-foreground">
           Advanced table component with sorting, filtering, column visibility,
           row selection, and pagination.

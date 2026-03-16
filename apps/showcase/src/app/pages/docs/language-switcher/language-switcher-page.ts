@@ -35,7 +35,7 @@ import { VariantsLanguageSwitcherDemoContainer } from './demos/variants-language
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>LanguageSwitcher</h1>
+        <h1 scHeading>Language Switcher</h1>
         <p class="text-muted-foreground">
           A component for switching between languages with support for Angular
           localize. Changing the language will refresh the page to load the

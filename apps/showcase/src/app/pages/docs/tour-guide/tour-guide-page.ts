@@ -21,7 +21,7 @@ import { MinimalTourGuideDemoContainer } from './demos/minimal-tour-guide-demo-c
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>TourGuide</h1>
+        <h1 scHeading>Tour Guide</h1>
         <p class="text-muted-foreground">
           Step-by-step UI tour component for onboarding users and highlighting
           features.

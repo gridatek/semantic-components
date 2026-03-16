@@ -33,7 +33,7 @@ import { ThickPenSignaturePadDemoContainer } from './demos/thick-pen-signature-p
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>SignaturePad</h1>
+        <h1 scHeading>Signature Pad</h1>
         <p class="text-muted-foreground">
           Canvas-based signature capture with touch and mouse support.
         </p>

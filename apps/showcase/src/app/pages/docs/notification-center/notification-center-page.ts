@@ -23,7 +23,7 @@ import { GroupedNotificationCenterDemoContainer } from './demos/grouped-notifica
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>NotificationCenter</h1>
+        <h1 scHeading>Notification Center</h1>
         <p class="text-muted-foreground">
           A grouped notification management component with filtering, read
           states, and actions.

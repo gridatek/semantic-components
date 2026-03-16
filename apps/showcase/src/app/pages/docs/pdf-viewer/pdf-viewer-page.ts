@@ -25,7 +25,7 @@ import { MinimalPdfViewerDemoContainer } from './demos/minimal-pdf-viewer-demo-c
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>PdfViewer</h1>
+        <h1 scHeading>Pdf Viewer</h1>
         <p class="text-muted-foreground">
           A document viewer component for displaying PDF files with navigation,
           zoom, and toolbar controls.

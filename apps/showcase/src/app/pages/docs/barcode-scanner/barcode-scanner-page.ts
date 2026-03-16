@@ -31,7 +31,7 @@ import { SingleScanBarcodeScannerDemoContainer } from './demos/single-scan-barco
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>BarcodeScanner</h1>
+        <h1 scHeading>Barcode Scanner</h1>
         <p class="text-muted-foreground">
           Scan barcodes and QR codes using your device's camera with the Barcode
           Detection API.
