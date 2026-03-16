@@ -1,34 +1,176 @@
 # Diff Viewer
 
-Side-by-side or unified view for comparing text and code changes.
+A composable set of directives for comparing text and code changes in split or unified view.
 
 ## Usage
 
 ```html
-<sc-diff-viewer [oldText]="originalCode" [newText]="modifiedCode" [oldTitle]="'file.ts (original)'" [newTitle]="'file.ts (modified)'" />
+<div scDiffViewer [oldText]="oldCode" [newText]="newCode" #diff="scDiffViewer">
+  <div scDiffViewerHeader>
+    <div class="flex items-center gap-2 text-sm">
+      <span class="text-muted-foreground">file.ts (original)</span>
+      <span class="text-muted-foreground">→</span>
+      <span class="text-muted-foreground">file.ts (modified)</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-3 text-sm">
+        <span class="text-green-600 dark:text-green-400">+{{ diff.diffResult().additions }}</span>
+        <span class="text-red-600 dark:text-red-400">-{{ diff.diffResult().deletions }}</span>
+      </div>
+      <div scDiffViewerToggle>
+        <button scDiffViewerToggleButton mode="split">Split</button>
+        <button scDiffViewerToggleButton mode="unified">Unified</button>
+      </div>
+    </div>
+  </div>
+  <div scDiffViewerContent>
+    @if (diff.viewMode() === 'split') {
+    <div scDiffViewerSplit>
+      <div scDiffViewerPane side="old">
+        <div scDiffViewerPaneHeader variant="old">Original</div>
+        <sc-diff-viewer-lines side="old" />
+      </div>
+      <div scDiffViewerPane side="new">
+        <div scDiffViewerPaneHeader variant="new">Modified</div>
+        <sc-diff-viewer-lines side="new" />
+      </div>
+    </div>
+    } @else {
+    <sc-diff-viewer-lines side="unified" />
+    } @if (diff.diffResult().lines.length === 0) {
+    <div scDiffViewerEmpty>No differences found</div>
+    }
+  </div>
+  <div scDiffViewerFooter>
+    <span>{{ diff.diffResult().lines.length }} lines</span>
+    <span>{{ diff.diffResult().additions }} additions, {{ diff.diffResult().deletions }} deletions, {{ diff.diffResult().unchanged }} unchanged</span>
+  </div>
+</div>
 ```
 
-## API
+## Directives
 
 ### ScDiffViewer
 
-| Input                | Type                   | Default   | Description                  |
-| -------------------- | ---------------------- | --------- | ---------------------------- |
-| `oldText`            | `string`               | `''`      | Original text content        |
-| `newText`            | `string`               | `''`      | Modified text content        |
-| `oldTitle`           | `string`               | `''`      | Title for original version   |
-| `newTitle`           | `string`               | `''`      | Title for modified version   |
-| `defaultViewMode`    | `'split' \| 'unified'` | `'split'` | Initial view mode            |
-| `showHeader`         | `boolean`              | `true`    | Show header with stats       |
-| `showFooter`         | `boolean`              | `true`    | Show footer with counts      |
-| `showViewModeToggle` | `boolean`              | `true`    | Show view mode toggle        |
-| `showSideHeaders`    | `boolean`              | `true`    | Show side-by-side headers    |
-| `showWordDiff`       | `boolean`              | `true`    | Highlight word-level changes |
-| `ignoreWhitespace`   | `boolean`              | `false`   | Ignore whitespace diffs      |
-| `ignoreCase`         | `boolean`              | `false`   | Ignore case diffs            |
-| `maxHeight`          | `string`               | `'600px'` | Maximum viewer height        |
+Root directive that manages diff state. Provides `SC_DIFF_VIEWER` injection token.
 
-### DiffResult
+**Selector:** `[scDiffViewer]`
+**Export As:** `scDiffViewer`
+
+**Inputs:**
+
+| Input              | Type                   | Default   | Description                  |
+| ------------------ | ---------------------- | --------- | ---------------------------- |
+| `oldText`          | `string`               | `''`      | Original text content        |
+| `newText`          | `string`               | `''`      | Modified text content        |
+| `oldTitle`         | `string`               | `''`      | Title for original version   |
+| `newTitle`         | `string`               | `''`      | Title for modified version   |
+| `defaultViewMode`  | `'split' \| 'unified'` | `'split'` | Initial view mode            |
+| `showWordDiff`     | `boolean`              | `true`    | Highlight word-level changes |
+| `ignoreWhitespace` | `boolean`              | `false`   | Ignore whitespace diffs      |
+| `ignoreCase`       | `boolean`              | `false`   | Ignore case diffs            |
+| `class`            | `string`               | `''`      | Additional CSS classes       |
+
+**Exposed via `exportAs`:**
+
+| Property     | Type                           | Description                    |
+| ------------ | ------------------------------ | ------------------------------ |
+| `diffResult` | `Signal<DiffResult>`           | Computed diff result           |
+| `viewMode`   | `WritableSignal<DiffViewMode>` | Current view mode (toggleable) |
+| `oldTitle`   | `InputSignal<string>`          | Original title                 |
+| `newTitle`   | `InputSignal<string>`          | Modified title                 |
+
+### ScDiffViewerHeader
+
+Header bar container with flex layout.
+
+**Selector:** `div[scDiffViewerHeader]`
+
+### ScDiffViewerToggle
+
+Container for view mode toggle buttons.
+
+**Selector:** `div[scDiffViewerToggle]`
+
+### ScDiffViewerToggleButton
+
+Individual toggle button for switching between split/unified views.
+
+**Selector:** `button[scDiffViewerToggleButton]`
+
+**Inputs:**
+
+| Input  | Type                   | Description                |
+| ------ | ---------------------- | -------------------------- |
+| `mode` | `'split' \| 'unified'` | **(required)** Target mode |
+
+### ScDiffViewerContent
+
+Scrollable content area.
+
+**Selector:** `div[scDiffViewerContent]`
+
+**Inputs:**
+
+| Input       | Type     | Default   | Description            |
+| ----------- | -------- | --------- | ---------------------- |
+| `maxHeight` | `string` | `'600px'` | Maximum content height |
+
+### ScDiffViewerSplit
+
+Flex container for split (side-by-side) view.
+
+**Selector:** `div[scDiffViewerSplit]`
+
+### ScDiffViewerPane
+
+One side of a split view.
+
+**Selector:** `div[scDiffViewerPane]`
+
+**Inputs:**
+
+| Input  | Type             | Description                         |
+| ------ | ---------------- | ----------------------------------- |
+| `side` | `'old' \| 'new'` | **(required)** Which side to render |
+
+### ScDiffViewerPaneHeader
+
+Label header for a split view pane.
+
+**Selector:** `div[scDiffViewerPaneHeader]`
+
+**Inputs:**
+
+| Input     | Type             | Default | Description                           |
+| --------- | ---------------- | ------- | ------------------------------------- |
+| `variant` | `'old' \| 'new'` | `'old'` | Background tint (red-ish / green-ish) |
+
+### ScDiffViewerLines
+
+Line renderer component. Handles line iteration, line numbers, signs, and word-level highlighting.
+
+**Selector:** `sc-diff-viewer-lines`
+
+**Inputs:**
+
+| Input  | Type                          | Description                   |
+| ------ | ----------------------------- | ----------------------------- |
+| `side` | `'old' \| 'new' \| 'unified'` | **(required)** Rendering mode |
+
+### ScDiffViewerFooter
+
+Footer bar container.
+
+**Selector:** `div[scDiffViewerFooter]`
+
+### ScDiffViewerEmpty
+
+Empty state container.
+
+**Selector:** `div[scDiffViewerEmpty]`
+
+## Types
 
 ```typescript
 interface DiffResult {
@@ -50,119 +192,74 @@ interface DiffLine {
 
 ## Examples
 
-### Basic Comparison
+### Minimal (no header, no footer)
 
 ```html
-<sc-diff-viewer [oldText]="oldCode" [newText]="newCode" />
+<div scDiffViewer [oldText]="oldText" [newText]="newText">
+  <div scDiffViewerContent maxHeight="200px">
+    <div scDiffViewerSplit>
+      <div scDiffViewerPane side="old">
+        <sc-diff-viewer-lines side="old" />
+      </div>
+      <div scDiffViewerPane side="new">
+        <sc-diff-viewer-lines side="new" />
+      </div>
+    </div>
+  </div>
+</div>
 ```
 
-### With Titles
+### Unified View Only
 
 ```html
-<sc-diff-viewer [oldText]="oldCode" [newText]="newCode" [oldTitle]="'config.json (before)'" [newTitle]="'config.json (after)'" />
-```
-
-### Unified View
-
-```html
-<sc-diff-viewer [oldText]="oldText" [newText]="newText" [defaultViewMode]="'unified'" />
-```
-
-### Ignore Whitespace
-
-```html
-<sc-diff-viewer [oldText]="oldText" [newText]="newText" [ignoreWhitespace]="true" />
-```
-
-### Minimal View
-
-```html
-<sc-diff-viewer [oldText]="oldText" [newText]="newText" [showHeader]="false" [showFooter]="false" [showViewModeToggle]="false" />
+<div scDiffViewer [oldText]="oldText" [newText]="newText">
+  <div scDiffViewerContent>
+    <sc-diff-viewer-lines side="unified" />
+  </div>
+</div>
 ```
 
 ## Utility Functions
 
 ### computeDiff
 
-Compute the diff between two strings:
-
 ```typescript
-import { computeDiff } from './ui/diff-viewer';
+import { computeDiff } from '@semantic-components/ui-lab';
 
 const result = computeDiff(oldText, newText, {
   ignoreWhitespace: true,
   ignoreCase: false,
 });
-
-console.log(result.additions); // Number of added lines
-console.log(result.deletions); // Number of removed lines
-console.log(result.lines); // Array of DiffLine objects
 ```
 
 ### createUnifiedDiff
 
-Create unified diff format (like git diff):
-
 ```typescript
-import { createUnifiedDiff } from './ui/diff-viewer';
+import { createUnifiedDiff } from '@semantic-components/ui-lab';
 
 const unifiedDiff = createUnifiedDiff(oldText, newText, {
   oldHeader: 'a/file.ts',
   newHeader: 'b/file.ts',
   contextLines: 3,
 });
-
-// Output:
-// --- a/file.ts
-// +++ b/file.ts
-// @@ -1,4 +1,5 @@
-//  unchanged line
-// -removed line
-// +added line
-//  unchanged line
 ```
 
 ### computeWordDiff
 
-Compute word-level diff for inline highlighting:
-
 ```typescript
-import { computeWordDiff } from './ui/diff-viewer';
+import { computeWordDiff } from '@semantic-components/ui-lab';
 
 const { oldParts, newParts } = computeWordDiff('the quick brown fox', 'the fast brown dog');
-
-// oldParts: [{ text: 'the', changed: false }, { text: 'quick', changed: true }, ...]
-// newParts: [{ text: 'the', changed: false }, { text: 'fast', changed: true }, ...]
 ```
-
-## View Modes
-
-### Split View
-
-- Shows old and new versions side-by-side
-- Empty rows for alignment
-- Best for detailed line-by-line comparison
-
-### Unified View
-
-- Single column with + and - markers
-- Similar to `git diff` output
-- More compact for large files
 
 ## Features
 
 - LCS-based diff algorithm
-- Line-by-line comparison
 - Word-level diff highlighting
-- Split (side-by-side) view
-- Unified (single column) view
-- Line numbers for both versions
-- Change statistics
-- View mode toggle
-- Ignore whitespace option
-- Ignore case option
-- Scrollable with max height
-- Responsive design
+- Split (side-by-side) and unified views
+- Fully composable — include only the sections you need
+- Scrollable with configurable max height
+- Ignore whitespace / case options
 
 ## Color Coding
 

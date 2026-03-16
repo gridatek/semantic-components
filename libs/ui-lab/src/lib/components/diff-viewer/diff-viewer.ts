@@ -1,7 +1,6 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
+  Directive,
+  InjectionToken,
   computed,
   input,
   signal,
@@ -18,249 +17,42 @@ export type DiffViewMode = 'split' | 'unified';
 
 export type { DiffLine, DiffResult } from './diff-algorithm';
 
-@Component({
-  selector: 'sc-diff-viewer',
-  template: `
-    <div [class]="containerClass()">
-      <!-- Header -->
-      @if (showHeader()) {
-        <div
-          class="bg-muted/30 flex items-center justify-between border-b px-4 py-2"
-        >
-          <div class="flex items-center gap-4">
-            @if (oldTitle() || newTitle()) {
-              <div class="flex items-center gap-2 text-sm">
-                @if (oldTitle()) {
-                  <span class="text-muted-foreground">{{ oldTitle() }}</span>
-                }
-                @if (oldTitle() && newTitle()) {
-                  <span class="text-muted-foreground">→</span>
-                }
-                @if (newTitle()) {
-                  <span class="text-muted-foreground">{{ newTitle() }}</span>
-                }
-              </div>
-            }
-          </div>
-          <div class="flex items-center gap-4">
-            <!-- Stats -->
-            <div class="flex items-center gap-3 text-sm">
-              <span class="text-green-600 dark:text-green-400">
-                +{{ diffResult().additions }}
-              </span>
-              <span class="text-red-600 dark:text-red-400">
-                -{{ diffResult().deletions }}
-              </span>
-            </div>
-            <!-- View mode toggle -->
-            @if (showViewModeToggle()) {
-              <div class="flex items-center overflow-hidden rounded-md border">
-                <button
-                  type="button"
-                  (click)="viewMode.set('split')"
-                  [class]="viewModeButtonClass(viewMode() === 'split')"
-                >
-                  Split
-                </button>
-                <button
-                  type="button"
-                  (click)="viewMode.set('unified')"
-                  [class]="viewModeButtonClass(viewMode() === 'unified')"
-                >
-                  Unified
-                </button>
-              </div>
-            }
-          </div>
-        </div>
-      }
+export const SC_DIFF_VIEWER = new InjectionToken<ScDiffViewer>('ScDiffViewer');
 
-      <!-- Diff content -->
-      <div class="overflow-auto" [style.max-height]="maxHeight()">
-        @if (viewMode() === 'split') {
-          <!-- Split view -->
-          <div class="flex">
-            <!-- Old (left) side -->
-            <div class="min-w-0 flex-1 border-r">
-              @if (showSideHeaders()) {
-                <div
-                  class="text-muted-foreground border-b bg-red-500/5 px-3 py-1.5 text-xs font-medium"
-                >
-                  {{ oldTitle() || 'Original' }}
-                </div>
-              }
-              <div class="font-mono text-sm">
-                @for (line of diffResult().lines; track $index) {
-                  @if (line.type !== 'added') {
-                    <div [class]="getLineClass(line.type, 'old')">
-                      <span
-                        class="text-muted-foreground inline-block w-12 border-r px-2 text-right select-none"
-                      >
-                        {{ line.oldLineNumber || '' }}
-                      </span>
-                      <span class="inline-block w-6 text-center select-none">
-                        {{ line.type === 'removed' ? '-' : '' }}
-                      </span>
-                      <span
-                        class="px-2"
-                        [innerHTML]="highlightLine(line, 'old')"
-                      ></span>
-                    </div>
-                  } @else {
-                    <div class="bg-muted/30 h-6"></div>
-                  }
-                }
-              </div>
-            </div>
-            <!-- New (right) side -->
-            <div class="min-w-0 flex-1">
-              @if (showSideHeaders()) {
-                <div
-                  class="text-muted-foreground border-b bg-green-500/5 px-3 py-1.5 text-xs font-medium"
-                >
-                  {{ newTitle() || 'Modified' }}
-                </div>
-              }
-              <div class="font-mono text-sm">
-                @for (line of diffResult().lines; track $index) {
-                  @if (line.type !== 'removed') {
-                    <div [class]="getLineClass(line.type, 'new')">
-                      <span
-                        class="text-muted-foreground inline-block w-12 border-r px-2 text-right select-none"
-                      >
-                        {{ line.newLineNumber || '' }}
-                      </span>
-                      <span class="inline-block w-6 text-center select-none">
-                        {{ line.type === 'added' ? '+' : '' }}
-                      </span>
-                      <span
-                        class="px-2"
-                        [innerHTML]="highlightLine(line, 'new')"
-                      ></span>
-                    </div>
-                  } @else {
-                    <div class="bg-muted/30 h-6"></div>
-                  }
-                }
-              </div>
-            </div>
-          </div>
-        } @else {
-          <!-- Unified view -->
-          <div class="font-mono text-sm">
-            @for (line of diffResult().lines; track $index) {
-              <div [class]="getLineClass(line.type, 'unified')">
-                <span
-                  class="text-muted-foreground inline-block w-12 border-r px-2 text-right select-none"
-                >
-                  {{ line.oldLineNumber || '' }}
-                </span>
-                <span
-                  class="text-muted-foreground inline-block w-12 border-r px-2 text-right select-none"
-                >
-                  {{ line.newLineNumber || '' }}
-                </span>
-                <span
-                  class="inline-block w-6 text-center font-bold select-none"
-                >
-                  @switch (line.type) {
-                    @case ('added') {
-                      <span class="text-green-600 dark:text-green-400">+</span>
-                    }
-                    @case ('removed') {
-                      <span class="text-red-600 dark:text-red-400">-</span>
-                    }
-                    @default {}
-                  }
-                </span>
-                <span
-                  class="px-2"
-                  [innerHTML]="
-                    highlightLine(line, line.type === 'removed' ? 'old' : 'new')
-                  "
-                ></span>
-              </div>
-            }
-          </div>
-        }
-
-        <!-- Empty state -->
-        @if (diffResult().lines.length === 0) {
-          <div
-            class="text-muted-foreground flex items-center justify-center py-12"
-          >
-            No differences found
-          </div>
-        }
-
-        @if (!oldText() && !newText()) {
-          <div
-            class="text-muted-foreground flex items-center justify-center py-12"
-          >
-            No content to compare
-          </div>
-        }
-      </div>
-
-      <!-- Footer stats -->
-      @if (showFooter()) {
-        <div
-          class="text-muted-foreground bg-muted/30 flex items-center justify-between border-t px-4 py-2 text-xs"
-        >
-          <span>{{ diffResult().lines.length }} lines</span>
-          <span>
-            {{ diffResult().additions }} additions,
-            {{ diffResult().deletions }} deletions,
-            {{ diffResult().unchanged }} unchanged
-          </span>
-        </div>
-      }
-    </div>
-  `,
-  styles: `
-    :host {
-      display: block;
-    }
-
-    .word-added {
-      background-color: rgba(34, 197, 94, 0.3);
-      border-radius: 2px;
-    }
-
-    .word-removed {
-      background-color: rgba(239, 68, 68, 0.3);
-      border-radius: 2px;
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: '[scDiffViewer]',
+  exportAs: 'scDiffViewer',
+  providers: [{ provide: SC_DIFF_VIEWER, useExisting: ScDiffViewer }],
+  host: {
+    'data-slot': 'diff-viewer',
+    '[class]': 'class()',
+  },
 })
 export class ScDiffViewer {
-  // Inputs
+  readonly classInput = input<string>('', { alias: 'class' });
   readonly oldText = input<string>('');
   readonly newText = input<string>('');
   readonly oldTitle = input<string>('');
   readonly newTitle = input<string>('');
   readonly defaultViewMode = input<DiffViewMode>('split');
-  readonly showHeader = input(true);
-  readonly showFooter = input(true);
-  readonly showViewModeToggle = input(true);
-  readonly showSideHeaders = input(true);
   readonly showWordDiff = input(true);
   readonly ignoreWhitespace = input(false);
   readonly ignoreCase = input(false);
-  readonly maxHeight = input<string>('600px');
-  readonly class = input<string>('');
 
-  // Internal state
   readonly viewMode = signal<DiffViewMode>('split');
 
   constructor() {
-    // Set initial view mode from input
     this.viewMode.set(this.defaultViewMode());
   }
 
-  protected readonly diffResult = computed((): DiffResult => {
+  protected readonly class = computed(() =>
+    cn(
+      'block overflow-hidden rounded-lg border bg-background',
+      this.classInput(),
+    ),
+  );
+
+  readonly diffResult = computed((): DiffResult => {
     const oldText = this.oldText();
     const newText = this.newText();
 
@@ -274,23 +66,7 @@ export class ScDiffViewer {
     });
   });
 
-  protected readonly containerClass = computed(() =>
-    cn('border rounded-lg overflow-hidden bg-background', this.class()),
-  );
-
-  protected viewModeButtonClass(active: boolean): string {
-    return cn(
-      'px-3 py-1 text-xs transition-colors',
-      active
-        ? 'bg-primary text-primary-foreground'
-        : 'bg-background hover:bg-muted',
-    );
-  }
-
-  protected getLineClass(
-    type: string,
-    side: 'old' | 'new' | 'unified',
-  ): string {
+  getLineClass(type: string): string {
     const baseClass = 'flex items-start leading-6 min-h-6';
 
     switch (type) {
@@ -308,7 +84,7 @@ export class ScDiffViewer {
     }
   }
 
-  protected highlightLine(line: DiffLine, side: 'old' | 'new'): string {
+  highlightLine(line: DiffLine, side: 'old' | 'new'): string {
     if (!this.showWordDiff()) {
       const content =
         side === 'old'
@@ -317,19 +93,16 @@ export class ScDiffViewer {
       return this.escapeHtml(content);
     }
 
-    // For unchanged lines, just return the content
     if (line.type === 'unchanged') {
       return this.escapeHtml(line.content ?? '');
     }
 
-    // For added/removed lines, try to find a matching line for word diff
     if (line.type === 'added' || line.type === 'removed') {
       const content =
         side === 'old' ? (line.oldContent ?? '') : (line.newContent ?? '');
       return this.escapeHtml(content);
     }
 
-    // For modified lines, compute word diff
     if (line.oldContent !== undefined && line.newContent !== undefined) {
       const { oldParts, newParts } = computeWordDiff(
         line.oldContent,

@@ -3,20 +3,36 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScDiffViewer } from '@semantic-components/ui-lab';
+import {
+  ScDiffViewer,
+  ScDiffViewerContent,
+  ScDiffViewerLines,
+  ScDiffViewerPane,
+  ScDiffViewerSplit,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-minimal-diff-viewer-demo',
-  imports: [ScDiffViewer],
+  imports: [
+    ScDiffViewer,
+    ScDiffViewerContent,
+    ScDiffViewerSplit,
+    ScDiffViewerPane,
+    ScDiffViewerLines,
+  ],
   template: `
-    <sc-diff-viewer
-      [oldText]="oldText"
-      [newText]="newText"
-      [showHeader]="false"
-      [showFooter]="false"
-      [showSideHeaders]="false"
-      [maxHeight]="'200px'"
-    />
+    <div scDiffViewer [oldText]="oldText" [newText]="newText">
+      <div scDiffViewerContent maxHeight="200px">
+        <div scDiffViewerSplit>
+          <div scDiffViewerPane side="old">
+            <sc-diff-viewer-lines side="old" />
+          </div>
+          <div scDiffViewerPane side="new">
+            <sc-diff-viewer-lines side="new" />
+          </div>
+        </div>
+      </div>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
