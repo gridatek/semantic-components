@@ -23,7 +23,8 @@
     "@semantic-icons/lucide-icons": ">=0.56.0",
     "@semantic-components/ui": "0.80.0",
     "@js-temporal/polyfill": "^0.5.1",
-    "@semantic-components/carousel": "0.80.0"
+    "@semantic-components/carousel": "0.80.0",
+    "uqr": ">=0.1.2"
   },
   "sideEffects": false
 }
