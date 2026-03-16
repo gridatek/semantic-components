@@ -791,8 +791,7 @@
     "description": "Guides users through a multi-step process.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Navigation",
-    "hidden": true
+    "category": "Navigation"
   },
   {
     "name": "Switch",
