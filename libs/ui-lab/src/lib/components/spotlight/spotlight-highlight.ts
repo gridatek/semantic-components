@@ -40,21 +40,25 @@ export class ScSpotlightHighlight {
 
   protected readonly state = inject(ScSpotlightState);
 
-  protected readonly top = computed(
-    () => this.state.targetRect()!.top - this.state.padding(),
-  );
+  protected readonly top = computed(() => {
+    const rect = this.state.targetRect();
+    return rect ? rect.top - this.state.padding() : 0;
+  });
 
-  protected readonly left = computed(
-    () => this.state.targetRect()!.left - this.state.padding(),
-  );
+  protected readonly left = computed(() => {
+    const rect = this.state.targetRect();
+    return rect ? rect.left - this.state.padding() : 0;
+  });
 
-  protected readonly width = computed(
-    () => this.state.targetRect()!.width + this.state.padding() * 2,
-  );
+  protected readonly width = computed(() => {
+    const rect = this.state.targetRect();
+    return rect ? rect.width + this.state.padding() * 2 : 0;
+  });
 
-  protected readonly height = computed(
-    () => this.state.targetRect()!.height + this.state.padding() * 2,
-  );
+  protected readonly height = computed(() => {
+    const rect = this.state.targetRect();
+    return rect ? rect.height + this.state.padding() * 2 : 0;
+  });
 
   protected readonly class = computed(() =>
     cn(
