@@ -175,8 +175,7 @@
     "description": "Display syntax-highlighted code with copy functionality.",
     "status": "Experimental",
     "library": "code",
-    "category": "Editor",
-    "hidden": true
+    "category": "Editor"
   },
   {
     "name": "Collapsible",
