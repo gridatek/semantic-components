@@ -45,11 +45,7 @@ export type QRErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScQrCode {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
-  get svgElement(): SVGSVGElement | null {
-    return this.elementRef.nativeElement.querySelector('svg');
-  }
+  readonly nativeElement = inject(ElementRef<HTMLElement>).nativeElement;
 
   readonly value = input.required<string>();
   readonly errorCorrectionLevel = input<QRErrorCorrectionLevel>('M');
