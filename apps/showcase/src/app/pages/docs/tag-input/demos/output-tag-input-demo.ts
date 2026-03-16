@@ -8,17 +8,31 @@ import {
 import {
   ScTagInput,
   ScTagInputField,
+  ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-output-tag-input-demo',
-  imports: [JsonPipe, ScTagInput, ScTagInputField, ScTagInputTag],
+  imports: [
+    JsonPipe,
+    ScTagInput,
+    ScTagInputField,
+    ScTagInputTag,
+    ScTagInputRemove,
+    SiXIcon,
+  ],
   template: `
     <div class="max-w-md space-y-4">
       <div scTagInput [(tags)]="tags">
         @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag"></span>
+          <span scTagInputTag [tag]="tag">
+            {{ tag }}
+            <button scTagInputRemove>
+              <svg siXIcon class="size-3"></svg>
+            </button>
+          </span>
         }
         <input scTagInputField />
       </div>

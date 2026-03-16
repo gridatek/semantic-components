@@ -1,21 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_TAG_INPUT } from './tag-input';
 
-// ============================================================================
-// TagInputField
-// ============================================================================
-@Component({
+@Directive({
   selector: 'input[scTagInputField]',
-  template: ``,
   host: {
     'data-slot': 'tag-input-field',
     type: 'text',
@@ -29,8 +17,6 @@ import { SC_TAG_INPUT } from './tag-input';
     '(blur)': 'onBlur()',
     '(paste)': 'onPaste($event)',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTagInputField {
   readonly tagInput = inject(SC_TAG_INPUT);
@@ -60,7 +46,6 @@ export class ScTagInputField {
     const value = this.tagInput.inputValue();
     const delimiters = this.tagInput.delimiters();
 
-    // Check if key is a delimiter
     if (delimiters.includes(event.key)) {
       event.preventDefault();
       if (value.trim()) {
@@ -71,7 +56,6 @@ export class ScTagInputField {
       return;
     }
 
-    // Handle backspace to remove last tag
     if (event.key === 'Backspace' && !value) {
       event.preventDefault();
       this.tagInput.removeLastTag();
@@ -95,20 +79,17 @@ export class ScTagInputField {
     const delimiters = this.tagInput.delimiters();
     const pastedText = event.clipboardData?.getData('text') ?? '';
 
-    // Check if pasted text contains delimiters (excluding Enter)
     const textDelimiters = delimiters.filter((d) => d !== 'Enter');
     const hasDelimiters = textDelimiters.some((d) => pastedText.includes(d));
 
     if (hasDelimiters) {
       event.preventDefault();
 
-      // Split by all text delimiters
       let tags = [pastedText];
       textDelimiters.forEach((delimiter) => {
         tags = tags.flatMap((t) => t.split(delimiter));
       });
 
-      // Add each tag
       tags.forEach((tag) => {
         if (tag.trim()) {
           this.tagInput.addTag(tag);

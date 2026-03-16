@@ -7,19 +7,32 @@ import {
 import {
   ScTagInput,
   ScTagInputField,
+  ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-variants-tag-input-demo',
-  imports: [ScTagInput, ScTagInputField, ScTagInputTag],
+  imports: [
+    ScTagInput,
+    ScTagInputField,
+    ScTagInputTag,
+    ScTagInputRemove,
+    SiXIcon,
+  ],
   template: `
     <div class="max-w-md space-y-3">
       <div class="space-y-1">
         <label class="text-muted-foreground text-xs">Default</label>
         <div scTagInput [(tags)]="variantDefault">
           @for (tag of variantDefault(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="default"></span>
+            <span scTagInputTag [tag]="tag" variant="default">
+              {{ tag }}
+              <button scTagInputRemove>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
           }
           <input scTagInputField />
         </div>
@@ -28,7 +41,12 @@ import {
         <label class="text-muted-foreground text-xs">Secondary</label>
         <div scTagInput [(tags)]="variantSecondary">
           @for (tag of variantSecondary(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="secondary"></span>
+            <span scTagInputTag [tag]="tag" variant="secondary">
+              {{ tag }}
+              <button scTagInputRemove>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
           }
           <input scTagInputField />
         </div>
@@ -37,7 +55,12 @@ import {
         <label class="text-muted-foreground text-xs">Outline</label>
         <div scTagInput [(tags)]="variantOutline">
           @for (tag of variantOutline(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="outline"></span>
+            <span scTagInputTag [tag]="tag" variant="outline">
+              {{ tag }}
+              <button scTagInputRemove>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
           }
           <input scTagInputField />
         </div>

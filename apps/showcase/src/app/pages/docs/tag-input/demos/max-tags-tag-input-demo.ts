@@ -8,17 +8,31 @@ import {
   ScTagInput,
   ScTagInputCount,
   ScTagInputField,
+  ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-max-tags-tag-input-demo',
-  imports: [ScTagInput, ScTagInputField, ScTagInputTag, ScTagInputCount],
+  imports: [
+    ScTagInput,
+    ScTagInputField,
+    ScTagInputTag,
+    ScTagInputRemove,
+    ScTagInputCount,
+    SiXIcon,
+  ],
   template: `
     <div class="max-w-md space-y-2">
       <div scTagInput [(tags)]="tags" [maxTags]="5">
         @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag"></span>
+          <span scTagInputTag [tag]="tag">
+            {{ tag }}
+            <button scTagInputRemove>
+              <svg siXIcon class="size-3"></svg>
+            </button>
+          </span>
         }
         <input scTagInputField />
         <span scTagInputCount class="ml-auto text-xs"></span>

@@ -7,12 +7,20 @@ import {
 import {
   ScTagInput,
   ScTagInputField,
+  ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-email-tag-input-demo',
-  imports: [ScTagInput, ScTagInputField, ScTagInputTag],
+  imports: [
+    ScTagInput,
+    ScTagInputField,
+    ScTagInputTag,
+    ScTagInputRemove,
+    SiXIcon,
+  ],
   template: `
     <div class="max-w-lg space-y-2">
       <label class="text-sm font-medium">To:</label>
@@ -23,7 +31,12 @@ import {
             [tag]="tag"
             variant="outline"
             class="rounded-full"
-          ></span>
+          >
+            {{ tag }}
+            <button scTagInputRemove>
+              <svg siXIcon class="size-3"></svg>
+            </button>
+          </span>
         }
         <input scTagInputField [addOnBlur]="true" />
       </div>

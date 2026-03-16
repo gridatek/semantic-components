@@ -1,117 +1,35 @@
 # Tag Input
 
-A multi-tag input component with chips for adding and removing tags.
+A composable multi-tag input with chips for adding and removing tags.
+
+## Parts
+
+| Part               | Selector                   | Type      | Description                        |
+| ------------------ | -------------------------- | --------- | ---------------------------------- |
+| `ScTagInput`       | `[scTagInput]`             | Directive | Root container — manages tag state |
+| `ScTagInputField`  | `input[scTagInputField]`   | Directive | Input field for typing new tags    |
+| `ScTagInputTag`    | `[scTagInputTag]`          | Directive | Individual tag chip styling        |
+| `ScTagInputRemove` | `button[scTagInputRemove]` | Directive | Remove button inside a tag         |
+| `ScTagInputClear`  | `button[scTagInputClear]`  | Directive | Clear all tags button              |
+| `ScTagInputCount`  | `[scTagInputCount]`        | Directive | Tag count display (e.g. "3 / 10")  |
 
 ## Usage
 
-```html
-<div scTagInput [(tags)]="tags">
-  @for (tag of tags(); track tag) {
-  <span scTagInputTag [tag]="tag"></span>
-  }
-  <input scTagInputField />
-</div>
+```typescript
+import { ScTagInput, ScTagInputClear, ScTagInputCount, ScTagInputField, ScTagInputRemove, ScTagInputTag } from '@semantic-components/ui-lab';
 ```
-
-## Components
-
-### ScTagInput
-
-Root container that manages tag state.
-
-**Selector:** `[scTagInput]`
-
-**Inputs:**
-
-| Input             | Type             | Default          | Description            |
-| ----------------- | ---------------- | ---------------- | ---------------------- |
-| `placeholder`     | `string`         | `'Add tag...'`   | Input placeholder      |
-| `disabled`        | `boolean`        | `false`          | Disabled state         |
-| `maxTags`         | `number \| null` | `null`           | Maximum number of tags |
-| `allowDuplicates` | `boolean`        | `false`          | Allow duplicate tags   |
-| `delimiters`      | `string[]`       | `['Enter', ',']` | Keys that add tags     |
-| `minLength`       | `number`         | `1`              | Minimum tag length     |
-| `maxLength`       | `number \| null` | `null`           | Maximum tag length     |
-| `class`           | `string`         | `''`             | Additional CSS         |
-
-**Two-way Bindings:**
-
-| Binding | Type       | Default | Description   |
-| ------- | ---------- | ------- | ------------- |
-| `tags`  | `string[]` | `[]`    | Array of tags |
-
-**Outputs:**
-
-| Output      | Type     | Description     |
-| ----------- | -------- | --------------- |
-| `tagAdd`    | `string` | Tag was added   |
-| `tagRemove` | `string` | Tag was removed |
-
-**Methods:**
-
-| Method                    | Description                |
-| ------------------------- | -------------------------- |
-| `addTag(value)`           | Add a tag programmatically |
-| `removeTag(tag)`          | Remove a specific tag      |
-| `removeTagAtIndex(index)` | Remove tag by index        |
-| `removeLastTag()`         | Remove the last tag        |
-| `clearAll()`              | Remove all tags            |
-| `focusInput()`            | Focus the input field      |
-
-### ScTagInputField
-
-The input field for typing new tags.
-
-**Selector:** `input[scTagInputField]`
-
-**Inputs:**
-
-| Input       | Type      | Default | Description               |
-| ----------- | --------- | ------- | ------------------------- |
-| `addOnBlur` | `boolean` | `false` | Add tag when losing focus |
-| `class`     | `string`  | `''`    | Additional CSS            |
-
-### ScTagInputTag
-
-Individual tag chip.
-
-**Selector:** `[scTagInputTag]`
-
-**Inputs:**
-
-| Input     | Type                                    | Default     | Description    |
-| --------- | --------------------------------------- | ----------- | -------------- |
-| `tag`     | `string`                                | Required    | Tag text       |
-| `variant` | `'default' \| 'secondary' \| 'outline'` | `'default'` | Visual style   |
-| `class`   | `string`                                | `''`        | Additional CSS |
-
-### ScTagInputClear
-
-Button to clear all tags.
-
-**Selector:** `button[scTagInputClear]`
-
-### ScTagInputCount
-
-Display tag count with optional max.
-
-**Selector:** `[scTagInputCount]`
-
-**Inputs:**
-
-| Input     | Type      | Default | Description         |
-| --------- | --------- | ------- | ------------------- |
-| `showMax` | `boolean` | `true`  | Show max in "x / y" |
-| `class`   | `string`  | `''`    | Additional CSS      |
-
-## Examples
 
 ### Basic
 
 ```html
 <div scTagInput [(tags)]="tags">
   @for (tag of tags(); track tag) {
-  <span scTagInputTag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag">
+    {{ tag }}
+    <button scTagInputRemove>
+      <svg siXIcon class="size-3"></svg>
+    </button>
+  </span>
   }
   <input scTagInputField />
 </div>
@@ -122,122 +40,96 @@ Display tag count with optional max.
 ```html
 <div scTagInput [(tags)]="tags">
   @for (tag of tags(); track tag) {
-  <span scTagInputTag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag">
+    {{ tag }}
+    <button scTagInputRemove>
+      <svg siXIcon class="size-3"></svg>
+    </button>
+  </span>
   }
   <input scTagInputField />
-  <button scTagInputClear></button>
+  <button scTagInputClear>
+    <svg siXIcon class="size-4"></svg>
+  </button>
 </div>
 ```
 
-### With Max Tags
+### With Max Tags & Count
 
 ```html
 <div scTagInput [(tags)]="tags" [maxTags]="5">
   @for (tag of tags(); track tag) {
-  <span scTagInputTag [tag]="tag"></span>
+  <span scTagInputTag [tag]="tag">
+    {{ tag }}
+    <button scTagInputRemove>
+      <svg siXIcon class="size-3"></svg>
+    </button>
+  </span>
   }
   <input scTagInputField />
+  <span scTagInputCount class="ml-auto text-xs"></span>
 </div>
-<span scTagInputCount></span>
 ```
 
-### Different Variants
+### Variants
 
 ```html
 <!-- Default (Primary) -->
-<span scTagInputTag [tag]="tag" variant="default"></span>
+<span scTagInputTag [tag]="tag" variant="default">{{ tag }}...</span>
 
 <!-- Secondary -->
-<span scTagInputTag [tag]="tag" variant="secondary"></span>
+<span scTagInputTag [tag]="tag" variant="secondary">{{ tag }}...</span>
 
 <!-- Outline -->
-<span scTagInputTag [tag]="tag" variant="outline"></span>
+<span scTagInputTag [tag]="tag" variant="outline">{{ tag }}...</span>
 ```
 
-### Custom Delimiters
+## API
 
-```html
-<!-- Add tags with Space or Tab -->
-<div scTagInput [(tags)]="tags" [delimiters]="['Enter', ' ', 'Tab']">
-  @for (tag of tags(); track tag) {
-  <span scTagInputTag [tag]="tag"></span>
-  }
-  <input scTagInputField />
-</div>
-```
+### ScTagInput (root)
 
-### Allow Duplicates
+| Input             | Type             | Default          | Description            |
+| ----------------- | ---------------- | ---------------- | ---------------------- |
+| `tags`            | `string[]`       | `[]`             | Two-way tag array      |
+| `placeholder`     | `string`         | `'Add tag...'`   | Input placeholder      |
+| `disabled`        | `boolean`        | `false`          | Disabled state         |
+| `maxTags`         | `number \| null` | `null`           | Maximum number of tags |
+| `allowDuplicates` | `boolean`        | `false`          | Allow duplicate tags   |
+| `delimiters`      | `string[]`       | `['Enter', ',']` | Keys that add tags     |
+| `minLength`       | `number`         | `1`              | Minimum tag length     |
+| `maxLength`       | `number \| null` | `null`           | Maximum tag length     |
 
-```html
-<div scTagInput [(tags)]="tags" [allowDuplicates]="true">
-  @for (tag of tags(); track $index) {
-  <span scTagInputTag [tag]="tag"></span>
-  }
-  <input scTagInputField />
-</div>
-```
+| Output      | Type     | Description     |
+| ----------- | -------- | --------------- |
+| `tagAdd`    | `string` | Tag was added   |
+| `tagRemove` | `string` | Tag was removed |
 
-### Add on Blur
+### ScTagInputField
 
-```html
-<div scTagInput [(tags)]="tags">
-  @for (tag of tags(); track tag) {
-  <span scTagInputTag [tag]="tag"></span>
-  }
-  <input scTagInputField [addOnBlur]="true" />
-</div>
-```
+| Input       | Type      | Default | Description               |
+| ----------- | --------- | ------- | ------------------------- |
+| `addOnBlur` | `boolean` | `false` | Add tag when losing focus |
 
-### With Validation
+### ScTagInputTag
 
-```html
-<div scTagInput [(tags)]="tags" [minLength]="2" [maxLength]="20">
-  @for (tag of tags(); track tag) {
-  <span scTagInputTag [tag]="tag"></span>
-  }
-  <input scTagInputField />
-</div>
-```
+| Input     | Type                                    | Default     | Description  |
+| --------- | --------------------------------------- | ----------- | ------------ |
+| `tag`     | `string`                                | Required    | Tag text     |
+| `variant` | `'default' \| 'secondary' \| 'outline'` | `'default'` | Visual style |
 
-### Disabled
+### ScTagInputRemove
 
-```html
-<div scTagInput [tags]="['Fixed', 'Tags']" [disabled]="true">
-  @for (tag of ['Fixed', 'Tags']; track tag) {
-  <span scTagInputTag [tag]="tag"></span>
-  }
-  <input scTagInputField />
-</div>
-```
+Placed inside `ScTagInputTag`. Automatically reads the parent tag value and sets `aria-label`. Auto-disables when the root `ScTagInput` is disabled.
 
-### Form Field
+### ScTagInputClear
 
-```html
-<div class="space-y-2">
-  <label class="text-sm font-medium">Skills</label>
-  <div scTagInput [(tags)]="skills" [maxTags]="10" placeholder="Add a skill...">
-    @for (tag of skills(); track tag) {
-    <span scTagInputTag [tag]="tag" variant="secondary"></span>
-    }
-    <input scTagInputField />
-  </div>
-  <div class="text-muted-foreground flex justify-between text-xs">
-    <span>Add up to 10 skills</span>
-    <span scTagInputCount></span>
-  </div>
-</div>
-```
+Consumer provides the icon via content projection.
 
-### Email Recipients
+### ScTagInputCount
 
-```html
-<div scTagInput [(tags)]="emails" placeholder="Add recipient...">
-  @for (email of emails(); track email) {
-  <span scTagInputTag [tag]="email" variant="outline" class="rounded-full"></span>
-  }
-  <input scTagInputField [addOnBlur]="true" />
-</div>
-```
+| Input     | Type      | Default | Description         |
+| --------- | --------- | ------- | ------------------- |
+| `showMax` | `boolean` | `true`  | Show max in "x / y" |
 
 ## Keyboard Navigation
 
@@ -250,22 +142,20 @@ Display tag count with optional max.
 
 ## Features
 
-- **Flexible Delimiters**: Configure any keys to trigger tag addition
-- **Duplicate Prevention**: Optional duplicate checking
-- **Max Tags Limit**: Enforce maximum number of tags
-- **Validation**: Min/max length constraints
-- **Add on Blur**: Optionally add tag when input loses focus
-- **Paste Support**: Paste comma-separated values
-- **Keyboard Support**: Full keyboard navigation
-- **Clear All**: Remove all tags at once
-- **Count Display**: Show current/max tag count
-- **Multiple Variants**: Default, secondary, outline styles
-- **Two-way Binding**: Sync with `[(tags)]`
+- Composable — pick only the parts you need
+- Flexible delimiters for tag addition
+- Duplicate prevention (optional)
+- Max tags limit with count display
+- Min/max length validation
+- Add on blur support
+- Paste support (splits by delimiters)
+- Multiple visual variants
+- Two-way binding with `[(tags)]`
 
 ## Accessibility
 
+- Auto-generated `aria-label` on remove buttons
 - Click container to focus input
-- ARIA labels on remove buttons
 - Keyboard navigation support
 - Focus indicators
-- Disabled state support
+- Disabled state propagation

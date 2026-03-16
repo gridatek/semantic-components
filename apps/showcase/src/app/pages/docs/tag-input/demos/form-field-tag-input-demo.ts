@@ -9,8 +9,10 @@ import {
   ScTagInputClear,
   ScTagInputCount,
   ScTagInputField,
+  ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-form-field-tag-input-demo',
@@ -18,8 +20,10 @@ import {
     ScTagInput,
     ScTagInputField,
     ScTagInputTag,
+    ScTagInputRemove,
     ScTagInputClear,
     ScTagInputCount,
+    SiXIcon,
   ],
   template: `
     <div class="max-w-md space-y-4">
@@ -32,7 +36,12 @@ import {
           placeholder="Add a skill..."
         >
           @for (tag of skillTags(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="secondary"></span>
+            <span scTagInputTag [tag]="tag" variant="secondary">
+              {{ tag }}
+              <button scTagInputRemove>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
           }
           <input scTagInputField />
           <span scTagInputCount class="ml-auto text-xs"></span>
@@ -49,10 +58,17 @@ import {
           placeholder="Select categories..."
         >
           @for (tag of categoryTags(); track tag) {
-            <span scTagInputTag [tag]="tag"></span>
+            <span scTagInputTag [tag]="tag">
+              {{ tag }}
+              <button scTagInputRemove>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
           }
           <input scTagInputField />
-          <button scTagInputClear></button>
+          <button scTagInputClear>
+            <svg siXIcon class="size-4"></svg>
+          </button>
         </div>
       </div>
     </div>

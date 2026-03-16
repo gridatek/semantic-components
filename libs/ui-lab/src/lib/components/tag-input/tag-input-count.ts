@@ -1,28 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_TAG_INPUT } from './tag-input';
 
-// ============================================================================
-// TagInputCount
-// ============================================================================
-@Component({
+@Directive({
   selector: '[scTagInputCount]',
-  template: `
-    {{ tagInput.tags().length }}{{ maxText() }}
-  `,
   host: {
     'data-slot': 'tag-input-count',
     '[class]': 'class()',
+    '[textContent]': 'countText()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTagInputCount {
   readonly tagInput = inject(SC_TAG_INPUT);
@@ -34,9 +20,10 @@ export class ScTagInputCount {
     cn('text-xs text-muted-foreground', this.classInput()),
   );
 
-  protected readonly maxText = computed(() => {
-    if (!this.showMax()) return '';
+  protected readonly countText = computed(() => {
+    const count = this.tagInput.tags().length;
+    if (!this.showMax()) return `${count}`;
     const max = this.tagInput.maxTags();
-    return max !== null ? ` / ${max}` : '';
+    return max !== null ? `${count} / ${max}` : `${count}`;
   });
 }

@@ -1,24 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
 import { SC_TAG_INPUT } from './tag-input';
 
-// ============================================================================
-// TagInputClear
-// ============================================================================
-@Component({
+@Directive({
   selector: 'button[scTagInputClear]',
-  imports: [SiXIcon],
-  template: `
-    <svg siXIcon class="size-4"></svg>
-  `,
   host: {
     'data-slot': 'tag-input-clear',
     type: 'button',
@@ -29,8 +14,6 @@ import { SC_TAG_INPUT } from './tag-input';
     '(click)': 'onClick($event)',
     '[attr.aria-label]': '"Clear all tags"',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTagInputClear {
   readonly tagInput = inject(SC_TAG_INPUT);
