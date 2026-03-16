@@ -9,7 +9,11 @@ import {
   ScDiffViewerEmpty,
   ScDiffViewerFooter,
   ScDiffViewerHeader,
-  ScDiffViewerLines,
+  ScDiffViewerLine,
+  ScDiffViewerLineContent,
+  ScDiffViewerLineNumber,
+  ScDiffViewerLinePlaceholder,
+  ScDiffViewerLineSign,
   ScDiffViewerPane,
   ScDiffViewerPaneHeader,
   ScDiffViewerSplit,
@@ -28,7 +32,11 @@ import {
     ScDiffViewerSplit,
     ScDiffViewerPane,
     ScDiffViewerPaneHeader,
-    ScDiffViewerLines,
+    ScDiffViewerLine,
+    ScDiffViewerLineNumber,
+    ScDiffViewerLineSign,
+    ScDiffViewerLineContent,
+    ScDiffViewerLinePlaceholder,
     ScDiffViewerFooter,
     ScDiffViewerEmpty,
   ],
@@ -67,17 +75,86 @@ import {
               <div scDiffViewerPaneHeader variant="old">
                 config.json (before)
               </div>
-              <sc-diff-viewer-lines side="old" />
+              <div class="font-mono text-sm">
+                @for (line of diff.diffResult().lines; track $index) {
+                  @if (line.type !== 'added') {
+                    <div scDiffViewerLine [type]="line.type">
+                      <span scDiffViewerLineNumber>
+                        {{ line.oldLineNumber || '' }}
+                      </span>
+                      <span scDiffViewerLineSign>
+                        {{ line.type === 'removed' ? '-' : '' }}
+                      </span>
+                      <span
+                        scDiffViewerLineContent
+                        [innerHTML]="diff.highlightLine(line, 'old')"
+                      ></span>
+                    </div>
+                  } @else {
+                    <div scDiffViewerLinePlaceholder></div>
+                  }
+                }
+              </div>
             </div>
             <div scDiffViewerPane side="new">
               <div scDiffViewerPaneHeader variant="new">
                 config.json (after)
               </div>
-              <sc-diff-viewer-lines side="new" />
+              <div class="font-mono text-sm">
+                @for (line of diff.diffResult().lines; track $index) {
+                  @if (line.type !== 'removed') {
+                    <div scDiffViewerLine [type]="line.type">
+                      <span scDiffViewerLineNumber>
+                        {{ line.newLineNumber || '' }}
+                      </span>
+                      <span scDiffViewerLineSign>
+                        {{ line.type === 'added' ? '+' : '' }}
+                      </span>
+                      <span
+                        scDiffViewerLineContent
+                        [innerHTML]="diff.highlightLine(line, 'new')"
+                      ></span>
+                    </div>
+                  } @else {
+                    <div scDiffViewerLinePlaceholder></div>
+                  }
+                }
+              </div>
             </div>
           </div>
         } @else {
-          <sc-diff-viewer-lines side="unified" />
+          <div class="font-mono text-sm">
+            @for (line of diff.diffResult().lines; track $index) {
+              <div scDiffViewerLine [type]="line.type">
+                <span scDiffViewerLineNumber>
+                  {{ line.oldLineNumber || '' }}
+                </span>
+                <span scDiffViewerLineNumber>
+                  {{ line.newLineNumber || '' }}
+                </span>
+                <span scDiffViewerLineSign class="font-bold">
+                  @switch (line.type) {
+                    @case ('added') {
+                      <span class="text-green-600 dark:text-green-400">+</span>
+                    }
+                    @case ('removed') {
+                      <span class="text-red-600 dark:text-red-400">-</span>
+                    }
+                    @default {}
+                  }
+                </span>
+                <span
+                  scDiffViewerLineContent
+                  [innerHTML]="
+                    diff.highlightLine(
+                      line,
+                      line.type === 'removed' ? 'old' : 'new'
+                    )
+                  "
+                ></span>
+              </div>
+            }
+          </div>
         }
         @if (diff.diffResult().lines.length === 0) {
           <div scDiffViewerEmpty>No differences found</div>

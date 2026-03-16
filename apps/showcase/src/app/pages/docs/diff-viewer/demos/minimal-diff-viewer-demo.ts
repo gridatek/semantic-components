@@ -6,7 +6,11 @@ import {
 import {
   ScDiffViewer,
   ScDiffViewerContent,
-  ScDiffViewerLines,
+  ScDiffViewerLine,
+  ScDiffViewerLineContent,
+  ScDiffViewerLineNumber,
+  ScDiffViewerLinePlaceholder,
+  ScDiffViewerLineSign,
   ScDiffViewerPane,
   ScDiffViewerSplit,
 } from '@semantic-components/ui-lab';
@@ -18,17 +22,64 @@ import {
     ScDiffViewerContent,
     ScDiffViewerSplit,
     ScDiffViewerPane,
-    ScDiffViewerLines,
+    ScDiffViewerLine,
+    ScDiffViewerLineNumber,
+    ScDiffViewerLineSign,
+    ScDiffViewerLineContent,
+    ScDiffViewerLinePlaceholder,
   ],
   template: `
-    <div scDiffViewer [oldText]="oldText" [newText]="newText">
+    <div
+      scDiffViewer
+      [oldText]="oldText"
+      [newText]="newText"
+      #diff="scDiffViewer"
+    >
       <div scDiffViewerContent maxHeight="200px">
         <div scDiffViewerSplit>
           <div scDiffViewerPane side="old">
-            <sc-diff-viewer-lines side="old" />
+            <div class="font-mono text-sm">
+              @for (line of diff.diffResult().lines; track $index) {
+                @if (line.type !== 'added') {
+                  <div scDiffViewerLine [type]="line.type">
+                    <span scDiffViewerLineNumber>
+                      {{ line.oldLineNumber || '' }}
+                    </span>
+                    <span scDiffViewerLineSign>
+                      {{ line.type === 'removed' ? '-' : '' }}
+                    </span>
+                    <span
+                      scDiffViewerLineContent
+                      [innerHTML]="diff.highlightLine(line, 'old')"
+                    ></span>
+                  </div>
+                } @else {
+                  <div scDiffViewerLinePlaceholder></div>
+                }
+              }
+            </div>
           </div>
           <div scDiffViewerPane side="new">
-            <sc-diff-viewer-lines side="new" />
+            <div class="font-mono text-sm">
+              @for (line of diff.diffResult().lines; track $index) {
+                @if (line.type !== 'removed') {
+                  <div scDiffViewerLine [type]="line.type">
+                    <span scDiffViewerLineNumber>
+                      {{ line.newLineNumber || '' }}
+                    </span>
+                    <span scDiffViewerLineSign>
+                      {{ line.type === 'added' ? '+' : '' }}
+                    </span>
+                    <span
+                      scDiffViewerLineContent
+                      [innerHTML]="diff.highlightLine(line, 'new')"
+                    ></span>
+                  </div>
+                } @else {
+                  <div scDiffViewerLinePlaceholder></div>
+                }
+              }
+            </div>
           </div>
         </div>
       </div>

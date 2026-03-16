@@ -6,20 +6,23 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxField, cn } from '@semantic-components/ui';
 import { SC_TRANSFER_LIST_PANEL } from './transfer-list-panel-ref';
 import type { TransferListItem } from './transfer-list-types';
 
 @Component({
   selector: 'label[scTransferListItem]',
+  imports: [ScCheckboxField, ScCheckbox],
   template: `
-    <input
-      type="checkbox"
-      class="h-4 w-4 rounded border-gray-300"
-      [checked]="isSelected()"
-      [disabled]="item().disabled"
-      (change)="toggle()"
-    />
+    <div scCheckboxField class="shrink-0">
+      <input
+        type="checkbox"
+        scCheckbox
+        [checked]="isSelected()"
+        [disabled]="item().disabled"
+        (checkedChange)="toggle()"
+      />
+    </div>
     <div class="min-w-0 flex-1">
       <ng-content />
     </div>
