@@ -9,9 +9,9 @@ import {
   ScAvatarFallback,
   ScButton,
   ScFieldDescription,
-  ScInlineLabel,
   ScInput,
   ScLabel,
+  ScLabelText,
   ScSeparator,
   ScSwitch,
   ScSwitchField,
@@ -35,7 +35,7 @@ import {
     ScAvatarFallback,
     ScButton,
     ScFieldDescription,
-    ScInlineLabel,
+    ScLabelText,
     ScInput,
     ScLabel,
     ScSeparator,
@@ -238,7 +238,7 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
                 class="flex items-center justify-between rounded-lg border p-4"
               >
                 <div>
-                  <p scInlineLabel>Email Notifications</p>
+                  <p scLabelText>Email Notifications</p>
                   <p scFieldDescription>
                     Receive email updates about your account activity and
                     important changes.
@@ -252,7 +252,7 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
                 class="flex items-center justify-between rounded-lg border p-4"
               >
                 <div>
-                  <p scInlineLabel>Push Notifications</p>
+                  <p scLabelText>Push Notifications</p>
                   <p scFieldDescription>
                     Get real-time push notifications on your desktop or mobile
                     device.
@@ -266,7 +266,7 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
                 class="flex items-center justify-between rounded-lg border p-4"
               >
                 <div>
-                  <p scInlineLabel>Weekly Digest</p>
+                  <p scLabelText>Weekly Digest</p>
                   <p scFieldDescription>
                     Receive a weekly summary of your team's activity and key
                     metrics.

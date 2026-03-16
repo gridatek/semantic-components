@@ -31,31 +31,31 @@ export class InputLastSwitchDemoContainer {
 } from '@angular/core';
 import {
   ScFieldDescription,
-  ScInlineLabel,
+  ScLabelText,
   ScSwitch,
   ScSwitchField,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-input-last-switch-demo',
-  imports: [ScSwitch, ScSwitchField, ScFieldDescription, ScInlineLabel],
+  imports: [ScSwitch, ScSwitchField, ScFieldDescription, ScLabelText],
   template: \`
     <div class="w-[400px] rounded-lg border p-4">
       <div class="space-y-4">
         <label scSwitchField>
-          <p scInlineLabel>Marketing emails</p>
+          <p scLabelText>Marketing emails</p>
           <p scFieldDescription>
             Receive emails about new products and features.
           </p>
           <input type="checkbox" scSwitch [(checked)]="marketing" />
         </label>
         <label scSwitchField>
-          <p scInlineLabel>Security emails</p>
+          <p scLabelText>Security emails</p>
           <p scFieldDescription>Receive emails about your account security.</p>
           <input type="checkbox" scSwitch [(checked)]="security" />
         </label>
         <label scSwitchField>
-          <p scInlineLabel>Product updates</p>
+          <p scLabelText>Product updates</p>
           <p scFieldDescription>
             Receive emails about product updates and tips.
           </p>

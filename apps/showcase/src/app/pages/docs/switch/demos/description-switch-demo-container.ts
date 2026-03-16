@@ -26,17 +26,17 @@ export class DescriptionSwitchDemoContainer {
 } from '@angular/core';
 import {
   ScFieldDescription,
-  ScInlineLabel,
+  ScLabelText,
   ScSwitch,
   ScSwitchField,
 } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-description-switch-demo',
-  imports: [ScSwitch, ScSwitchField, ScInlineLabel, ScFieldDescription],
+  imports: [ScSwitch, ScSwitchField, ScLabelText, ScFieldDescription],
   template: \`
     <label scSwitchField class="rounded-lg border p-4">
-      <p scInlineLabel>Dark Mode</p>
+      <p scLabelText>Dark Mode</p>
       <p scFieldDescription>
         Enable dark mode for a better viewing experience in low light.
       </p>

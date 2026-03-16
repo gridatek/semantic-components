@@ -1,2 +1,2 @@
 export * from './label';
-export * from './inline-label';
+export * from './label-text';

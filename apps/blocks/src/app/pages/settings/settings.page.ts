@@ -12,9 +12,9 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScFieldDescription,
-  ScInlineLabel,
   ScInput,
   ScLabel,
+  ScLabelText,
   ScSeparator,
   ScSwitch,
   ScSwitchField,
@@ -36,7 +36,7 @@ import {
     ScCardHeader,
     ScCardTitle,
     ScFieldDescription,
-    ScInlineLabel,
+    ScLabelText,
     ScInput,
     ScLabel,
     ScSeparator,
@@ -214,7 +214,7 @@ import {
                       class="flex items-center justify-between rounded-lg border p-4"
                     >
                       <div>
-                        <p scInlineLabel>Email Notifications</p>
+                        <p scLabelText>Email Notifications</p>
                         <p scFieldDescription>
                           Receive notifications via email.
                         </p>
@@ -227,7 +227,7 @@ import {
                       class="flex items-center justify-between rounded-lg border p-4"
                     >
                       <div>
-                        <p scInlineLabel>Push Notifications</p>
+                        <p scLabelText>Push Notifications</p>
                         <p scFieldDescription>
                           Receive push notifications on your device.
                         </p>
@@ -240,7 +240,7 @@ import {
                       class="flex items-center justify-between rounded-lg border p-4"
                     >
                       <div>
-                        <p scInlineLabel>Marketing Emails</p>
+                        <p scLabelText>Marketing Emails</p>
                         <p scFieldDescription>
                           Receive emails about new features and updates.
                         </p>
@@ -253,7 +253,7 @@ import {
                       class="flex items-center justify-between rounded-lg border p-4"
                     >
                       <div>
-                        <p scInlineLabel>Security Alerts</p>
+                        <p scLabelText>Security Alerts</p>
                         <p scFieldDescription>
                           Get notified about security events on your account.
                         </p>

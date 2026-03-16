@@ -30,6 +30,24 @@ A directive applied to native `<label>` elements.
 | ----------- | --------- | --------------------------------------- |
 | `data-slot` | `"label"` | Identifies the element as a label slot. |
 
+### ScLabelText
+
+**Selector:** `[scLabelText]`
+
+A directive for label-like text that lives inside another `<label>` element, avoiding invalid nested `<label>` HTML. Commonly used with `ScSwitchField` or `ScCheckboxField`.
+
+#### Inputs
+
+| Input   | Type     | Default | Description                                            |
+| ------- | -------- | ------- | ------------------------------------------------------ |
+| `class` | `string` | `''`    | Additional CSS classes merged with the default styles. |
+
+#### Data Attributes
+
+| Attribute   | Value          | Description                                  |
+| ----------- | -------------- | -------------------------------------------- |
+| `data-slot` | `"label-text"` | Identifies the element as a label-text slot. |
+
 ## Examples
 
 ### Basic label
@@ -54,6 +72,17 @@ When used inside an `ScField`, the `for` attribute is automatically resolved fro
 
 ```html
 <label scLabel class="text-sm font-medium" for="username">Username</label>
+```
+
+### Inside a switch field
+
+Use `ScLabelText` instead of a nested `<label>` to avoid invalid HTML:
+
+```html
+<label scSwitchField>
+  <input type="checkbox" scSwitch />
+  <p scLabelText>Airplane Mode</p>
+</label>
 ```
 
 ## Accessibility

@@ -9,7 +9,7 @@ import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
 import {
   ScFieldDescription,
-  ScInlineLabel,
+  ScLabelText,
   ScSwitch,
   ScSwitchField,
 } from '@semantic-components/ui';
@@ -25,7 +25,7 @@ interface SwitchFormModel {
   imports: [
     ScSwitch,
     ScSwitchField,
-    ScInlineLabel,
+    ScLabelText,
     ScFieldDescription,
     JsonPipe,
     FormField,
@@ -34,7 +34,7 @@ interface SwitchFormModel {
     <form>
       <div class="space-y-4">
         <label scSwitchField>
-          <p scInlineLabel>Enable Notifications</p>
+          <p scLabelText>Enable Notifications</p>
           <p scFieldDescription>
             Receive notifications about your account activity
           </p>
@@ -46,13 +46,13 @@ interface SwitchFormModel {
         </label>
 
         <label scSwitchField>
-          <p scInlineLabel>Dark Mode</p>
+          <p scLabelText>Dark Mode</p>
           <p scFieldDescription>Switch to dark theme</p>
           <input type="checkbox" scSwitch [formField]="switchForm.darkMode" />
         </label>
 
         <label scSwitchField>
-          <p scInlineLabel>Auto Save</p>
+          <p scLabelText>Auto Save</p>
           <p scFieldDescription>Automatically save your work</p>
           <input type="checkbox" scSwitch [formField]="switchForm.autoSave" />
         </label>
