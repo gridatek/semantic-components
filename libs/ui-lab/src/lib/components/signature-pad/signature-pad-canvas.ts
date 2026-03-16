@@ -18,8 +18,6 @@ import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
   host: {
     'data-slot': 'signature-pad-canvas',
     '[class]': 'class()',
-    '[width]': 'width()',
-    '[height]': 'height()',
     role: 'img',
     '[attr.aria-label]': 'ariaLabel()',
     '(mousedown)': 'onPointerDown($event)',
@@ -36,10 +34,6 @@ export class ScSignaturePadCanvas {
   private readonly elementRef = inject(ElementRef<HTMLCanvasElement>);
   private readonly destroyRef = inject(DestroyRef);
 
-  // Canvas requires width/height as attributes (not CSS) to set the internal drawing buffer resolution.
-  // CSS/Tailwind only sets display size, which causes stretching and poor drawing quality.
-  readonly width = input<number>(400);
-  readonly height = input<number>(200);
   readonly ariaLabel = input<string>('Signature pad', { alias: 'aria-label' });
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -52,17 +46,26 @@ export class ScSignaturePadCanvas {
 
   protected readonly class = computed(() =>
     cn(
-      'border rounded-lg cursor-crosshair touch-none',
+      'w-full border rounded-lg cursor-crosshair touch-none',
       this.signaturePad.disabled() && 'opacity-50 cursor-not-allowed',
       this.classInput(),
     ),
   );
 
+  private resizeObserver: ResizeObserver | null = null;
+
   constructor() {
-    // Register canvas with parent directive
     afterNextRender(() => {
       const canvas = this.elementRef.nativeElement;
       this.signaturePad.canvasElement.set(canvas);
+
+      this.resizeObserver = new ResizeObserver(() => {
+        this.syncCanvasSize();
+        this.redraw();
+      });
+      this.resizeObserver.observe(canvas);
+
+      this.syncCanvasSize();
       this.redraw();
     });
 
@@ -71,17 +74,34 @@ export class ScSignaturePadCanvas {
       this.signaturePad.lines();
       this.redraw();
     });
+
+    this.destroyRef.onDestroy(() => {
+      this.resizeObserver?.disconnect();
+    });
+  }
+
+  private syncCanvasSize(): void {
+    const canvas = this.elementRef.nativeElement;
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.scale(dpr, dpr);
+    }
   }
 
   private getCanvasPoint(clientX: number, clientY: number): ScSignaturePoint {
     const canvas = this.elementRef.nativeElement;
     const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
 
     return {
-      x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY,
+      x: clientX - rect.left,
+      y: clientY - rect.top,
     };
   }
 
@@ -204,12 +224,15 @@ export class ScSignaturePadCanvas {
   }
 
   private redraw(): void {
+    const canvas = this.elementRef.nativeElement;
     const ctx = this.signaturePad.getContext();
     if (!ctx) return;
 
+    const rect = canvas.getBoundingClientRect();
+
     // Clear and fill background
     ctx.fillStyle = this.signaturePad.backgroundColor();
-    ctx.fillRect(0, 0, this.width(), this.height());
+    ctx.fillRect(0, 0, rect.width, rect.height);
 
     // Redraw all lines
     for (const line of this.signaturePad.lines()) {

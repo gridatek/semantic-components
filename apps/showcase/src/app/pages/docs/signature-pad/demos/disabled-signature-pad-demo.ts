@@ -24,8 +24,8 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
     SiTrash2Icon,
   ],
   template: `
-    <div scSignaturePad [disabled]="true" class="relative inline-block">
-      <canvas scSignaturePadCanvas [width]="400" [height]="150"></canvas>
+    <div scSignaturePad [disabled]="true" class="relative w-full">
+      <canvas scSignaturePadCanvas class="h-[150px]"></canvas>
 
       <div scSignaturePadControls>
         <button scSignaturePadUndo>
