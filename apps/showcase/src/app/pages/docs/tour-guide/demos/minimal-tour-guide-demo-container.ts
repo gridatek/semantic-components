@@ -27,13 +27,31 @@ export class MinimalTourGuideDemoContainer {
 } from '@angular/core';
 import {
   ScTourGuide,
-  TourOptions,
+  ScTourGuideAction,
+  ScTourGuideCounter,
+  ScTourGuideDescription,
+  ScTourGuideHighlight,
+  ScTourGuideMask,
+  ScTourGuideNavigation,
+  ScTourGuideTitle,
+  ScTourGuideTooltip,
   TourService,
 } from '@semantic-components/ui-lab';
+import type { TourOptions } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-minimal-tour-guide-demo',
-  imports: [ScTourGuide],
+  imports: [
+    ScTourGuide,
+    ScTourGuideMask,
+    ScTourGuideHighlight,
+    ScTourGuideTooltip,
+    ScTourGuideTitle,
+    ScTourGuideDescription,
+    ScTourGuideNavigation,
+    ScTourGuideCounter,
+    ScTourGuideAction,
+  ],
   template: \`
     <div class="space-y-8">
       <!-- Demo UI elements -->
@@ -65,8 +83,39 @@ import {
         </button>
       </div>
 
-      <!-- Tour Guide Component -->
-      <sc-tour-guide />
+      <!-- Tour Guide (no close, no step numbers, no progress) -->
+      @if (tourService.isActive()) {
+        <div scTourGuide #guide="scTourGuide">
+          <svg scTourGuideMask></svg>
+
+          @if (guide.targetRect()) {
+            <div scTourGuideHighlight></div>
+          }
+
+          @if (guide.currentStep()) {
+            <div scTourGuideTooltip>
+              <h3 scTourGuideTitle></h3>
+              <p scTourGuideDescription></p>
+
+              <div scTourGuideNavigation>
+                <span scTourGuideCounter></span>
+                <div class="flex gap-2">
+                  @if (!guide.isFirstStep()) {
+                    <button scTourGuideAction action="previous">
+                      Previous
+                    </button>
+                  }
+                  @if (guide.isLastStep()) {
+                    <button scTourGuideAction action="finish">Finish</button>
+                  } @else {
+                    <button scTourGuideAction action="next">Next</button>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
@@ -74,7 +123,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinimalTourGuideDemo {
-  private readonly tourService = inject(TourService);
+  protected readonly tourService = inject(TourService);
 
   startTour(): void {
     const options: TourOptions = {

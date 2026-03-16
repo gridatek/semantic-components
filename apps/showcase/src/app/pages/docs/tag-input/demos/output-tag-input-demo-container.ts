@@ -27,21 +27,35 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScTagInput,
   ScTagInputField,
+  ScTagInputInput,
+  ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-output-tag-input-demo',
-  imports: [JsonPipe, ScTagInput, ScTagInputField, ScTagInputTag],
+  imports: [
+    JsonPipe,
+    ScTagInputField,
+    ScTagInputInput,
+    ScTagInputTag,
+    ScTagInputRemove,
+    SiXIcon,
+  ],
   template: \`
     <div class="max-w-md space-y-4">
-      <div scTagInput [(tags)]="tags">
+      <div scTagInputField [(tags)]="tags">
         @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag"></span>
+          <span scTagInputTag [tag]="tag">
+            {{ tag }}
+            <button scTagInputRemove>
+              <svg siXIcon class="size-3"></svg>
+            </button>
+          </span>
         }
-        <input scTagInputField />
+        <input scTagInputInput />
       </div>
       <div class="bg-muted/50 rounded-md border p-4">
         <pre class="text-sm">{{ tags() | json }}</pre>
