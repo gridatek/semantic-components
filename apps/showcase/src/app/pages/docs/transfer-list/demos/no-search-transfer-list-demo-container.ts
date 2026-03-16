@@ -29,20 +29,82 @@ export class NoSearchTransferListDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScTransferList } from '@semantic-components/ui-lab';
+import {
+  ScTransferList,
+  ScTransferListActions,
+  ScTransferListCount,
+  ScTransferListHeader,
+  ScTransferListItem,
+  ScTransferListItems,
+  ScTransferListSelectAll,
+  ScTransferListSource,
+  ScTransferListTarget,
+} from '@semantic-components/ui-lab';
 import type { TransferListItem } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-no-search-transfer-list-demo',
-  imports: [ScTransferList],
+  imports: [
+    ScTransferList,
+    ScTransferListSource,
+    ScTransferListTarget,
+    ScTransferListHeader,
+    ScTransferListSelectAll,
+    ScTransferListCount,
+    ScTransferListItems,
+    ScTransferListItem,
+    ScTransferListActions,
+  ],
   template: \`
-    <sc-transfer-list
+    <div
+      scTransferList
       [(sourceItems)]="sourceItems"
       [(targetItems)]="targetItems"
-      [searchable]="false"
-      sourceTitle="Options"
-      targetTitle="Chosen"
-    />
+    >
+      <div scTransferListSource #source="scTransferListSource">
+        <div scTransferListHeader>
+          <label class="flex items-center gap-2">
+            <input type="checkbox" scTransferListSelectAll />
+            <span class="font-medium">Options</span>
+          </label>
+          <span scTransferListCount></span>
+        </div>
+        <div scTransferListItems>
+          @for (item of source.filteredItems(); track item.id) {
+            <label scTransferListItem [item]="item">
+              <div class="truncate">{{ item.label }}</div>
+            </label>
+          } @empty {
+            <div class="text-muted-foreground p-4 text-center text-sm">
+              No items
+            </div>
+          }
+        </div>
+      </div>
+
+      <div scTransferListActions></div>
+
+      <div scTransferListTarget #target="scTransferListTarget">
+        <div scTransferListHeader>
+          <label class="flex items-center gap-2">
+            <input type="checkbox" scTransferListSelectAll />
+            <span class="font-medium">Chosen</span>
+          </label>
+          <span scTransferListCount></span>
+        </div>
+        <div scTransferListItems>
+          @for (item of target.filteredItems(); track item.id) {
+            <label scTransferListItem [item]="item">
+              <div class="truncate">{{ item.label }}</div>
+            </label>
+          } @empty {
+            <div class="text-muted-foreground p-4 text-center text-sm">
+              No items
+            </div>
+          }
+        </div>
+      </div>
+    </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

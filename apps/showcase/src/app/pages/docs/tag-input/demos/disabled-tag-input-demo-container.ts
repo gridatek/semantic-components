@@ -25,21 +25,38 @@ export class DisabledTagInputDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScTagInput,
   ScTagInputField,
+  ScTagInputInput,
+  ScTagInputRemove,
   ScTagInputTag,
 } from '@semantic-components/ui-lab';
+import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-disabled-tag-input-demo',
-  imports: [ScTagInput, ScTagInputField, ScTagInputTag],
+  imports: [
+    ScTagInputField,
+    ScTagInputInput,
+    ScTagInputTag,
+    ScTagInputRemove,
+    SiXIcon,
+  ],
   template: \`
     <div class="max-w-md">
-      <div scTagInput [tags]="['Angular', 'React', 'Vue']" [disabled]="true">
+      <div
+        scTagInputField
+        [tags]="['Angular', 'React', 'Vue']"
+        [disabled]="true"
+      >
         @for (tag of ['Angular', 'React', 'Vue']; track tag) {
-          <span scTagInputTag [tag]="tag"></span>
+          <span scTagInputTag [tag]="tag">
+            {{ tag }}
+            <button scTagInputRemove>
+              <svg siXIcon class="size-3"></svg>
+            </button>
+          </span>
         }
-        <input scTagInputField />
+        <input scTagInputInput />
       </div>
     </div>
   \`,
