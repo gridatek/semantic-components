@@ -1,5 +1,5 @@
 export { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
-export type { StepperOrientation } from './stepper-types';
+export type { ScStepperOrientation } from './stepper-types';
 export { ScStepper } from './stepper';
 export { ScStepperList } from './stepper-list';
 export { ScStepperItem } from './stepper-item';

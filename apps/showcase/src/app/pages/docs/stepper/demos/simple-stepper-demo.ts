@@ -13,6 +13,7 @@ import {
   ScStepperSeparator,
   ScStepperTrigger,
 } from '@semantic-components/ui-lab';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-simple-stepper-demo',
@@ -24,25 +25,50 @@ import {
     ScStepperSeparator,
     ScStepperPrevious,
     ScStepperNext,
+    SiCheckIcon,
   ],
   template: `
     <div class="w-full max-w-2xl rounded-lg border p-6">
       <div scStepper [(activeStep)]="activeStep">
         <div scStepperList>
           <div scStepperItem [step]="0">
-            <button scStepperTrigger></button>
+            <button scStepperTrigger #t0="scStepperTrigger">
+              @if (t0.stepperItem.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>{{ t0.stepperItem.step() + 1 }}</span>
+              }
+            </button>
           </div>
           <div scStepperSeparator></div>
           <div scStepperItem [step]="1">
-            <button scStepperTrigger></button>
+            <button scStepperTrigger #t1="scStepperTrigger">
+              @if (t1.stepperItem.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>{{ t1.stepperItem.step() + 1 }}</span>
+              }
+            </button>
           </div>
           <div scStepperSeparator></div>
           <div scStepperItem [step]="2">
-            <button scStepperTrigger></button>
+            <button scStepperTrigger #t2="scStepperTrigger">
+              @if (t2.stepperItem.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>{{ t2.stepperItem.step() + 1 }}</span>
+              }
+            </button>
           </div>
           <div scStepperSeparator></div>
           <div scStepperItem [step]="3">
-            <button scStepperTrigger></button>
+            <button scStepperTrigger #t3="scStepperTrigger">
+              @if (t3.stepperItem.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>{{ t3.stepperItem.step() + 1 }}</span>
+              }
+            </button>
           </div>
         </div>
 

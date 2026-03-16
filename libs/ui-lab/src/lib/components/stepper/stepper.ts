@@ -1,6 +1,6 @@
 import { Directive, computed, input, model } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_STEPPER, StepperOrientation } from './stepper-types';
+import { SC_STEPPER, ScStepperOrientation } from './stepper-types';
 
 @Directive({
   selector: '[scStepper]',
@@ -13,7 +13,7 @@ import { SC_STEPPER, StepperOrientation } from './stepper-types';
 })
 export class ScStepper {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly orientation = input<StepperOrientation>('horizontal');
+  readonly orientation = input<ScStepperOrientation>('horizontal');
   readonly activeStep = model<number>(0);
 
   protected readonly class = computed(() =>

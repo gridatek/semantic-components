@@ -1,25 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
 
-@Component({
+@Directive({
   selector: 'button[scStepperTrigger]',
-  imports: [SiCheckIcon],
-  template: `
-    @if (stepperItem.state() === 'complete') {
-      <svg siCheckIcon class="size-4"></svg>
-    } @else {
-      <span>{{ stepperItem.step() + 1 }}</span>
-    }
-  `,
+  exportAs: 'scStepperTrigger',
   host: {
     'data-slot': 'stepper-trigger',
     type: 'button',
@@ -29,8 +14,6 @@ import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
     '[attr.data-state]': 'stepperItem.state()',
     '(click)': 'onClick()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScStepperTrigger {
   private readonly stepper = inject(SC_STEPPER);

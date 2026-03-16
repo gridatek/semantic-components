@@ -1,27 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_STEPPER } from './stepper-types';
 
-@Component({
+@Directive({
   selector: 'button[scStepperNext]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'stepper-next',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'stepper.nextStep()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScStepperNext {
   readonly stepper = inject(SC_STEPPER);

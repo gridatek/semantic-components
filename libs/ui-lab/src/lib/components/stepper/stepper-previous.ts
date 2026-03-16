@@ -1,19 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
 import { SC_STEPPER } from './stepper-types';
 
-@Component({
+@Directive({
   selector: 'button[scStepperPrevious]',
-  template: `
-    <ng-content />
-  `,
   host: {
     'data-slot': 'stepper-previous',
     type: 'button',
@@ -22,8 +12,6 @@ import { SC_STEPPER } from './stepper-types';
     '[attr.aria-disabled]': 'stepper.activeStep() === 0 || null',
     '(click)': 'stepper.prevStep()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScStepperPrevious {
   readonly stepper = inject(SC_STEPPER);

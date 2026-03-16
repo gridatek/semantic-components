@@ -15,6 +15,7 @@ import {
   ScStepperTitle,
   ScStepperTrigger,
 } from '@semantic-components/ui-lab';
+import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-vertical-stepper-demo',
@@ -28,13 +29,20 @@ import {
     ScStepperDescription,
     ScStepperPrevious,
     ScStepperNext,
+    SiCheckIcon,
   ],
   template: `
     <div class="max-w-md rounded-lg border p-6">
       <div scStepper orientation="vertical" [(activeStep)]="activeStep">
         <div scStepperList>
           <div scStepperItem [step]="0">
-            <button scStepperTrigger></button>
+            <button scStepperTrigger #t0="scStepperTrigger">
+              @if (t0.stepperItem.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>{{ t0.stepperItem.step() + 1 }}</span>
+              }
+            </button>
             <div class="flex flex-col pb-4">
               <span scStepperTitle>Step 1</span>
               <span scStepperDescription>First step description</span>
@@ -47,7 +55,13 @@ import {
             <div scStepperSeparator></div>
           </div>
           <div scStepperItem [step]="1">
-            <button scStepperTrigger></button>
+            <button scStepperTrigger #t1="scStepperTrigger">
+              @if (t1.stepperItem.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>{{ t1.stepperItem.step() + 1 }}</span>
+              }
+            </button>
             <div class="flex flex-col pb-4">
               <span scStepperTitle>Step 2</span>
               <span scStepperDescription>Second step description</span>
@@ -60,7 +74,13 @@ import {
             <div scStepperSeparator></div>
           </div>
           <div scStepperItem [step]="2">
-            <button scStepperTrigger></button>
+            <button scStepperTrigger #t2="scStepperTrigger">
+              @if (t2.stepperItem.state() === 'complete') {
+                <svg siCheckIcon class="size-4"></svg>
+              } @else {
+                <span>{{ t2.stepperItem.step() + 1 }}</span>
+              }
+            </button>
             <div class="flex flex-col">
               <span scStepperTitle>Step 3</span>
               <span scStepperDescription>Final step description</span>
