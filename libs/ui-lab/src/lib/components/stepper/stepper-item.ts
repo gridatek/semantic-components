@@ -29,7 +29,7 @@ export class ScStepperItem {
     const isVertical = this.stepper.orientation() === 'vertical';
     return cn(
       'flex gap-2',
-      isVertical ? 'flex-row' : 'flex-col items-center',
+      isVertical ? 'flex-row' : 'flex-col items-center text-center',
       this.classInput(),
     );
   });

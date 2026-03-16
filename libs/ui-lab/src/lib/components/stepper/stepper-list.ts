@@ -18,8 +18,8 @@ export class ScStepperList {
   protected readonly class = computed(() => {
     const isVertical = this.stepper.orientation() === 'vertical';
     return cn(
-      'flex gap-2',
-      isVertical ? 'flex-col' : 'flex-row items-start',
+      'flex',
+      isVertical ? 'flex-col gap-2' : 'flex-row items-start',
       this.classInput(),
     );
   });
