@@ -9,13 +9,14 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-logo-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <sc-qr-code
-      [value]="'https://angular.io'"
+    <svg
+      scQrCode
+      [value]="'https://angular.dev'"
       [size]="200"
       [errorCorrectionLevel]="'H'"
-      [logo]="'https://angular.io/assets/images/logos/angular/angular.svg'"
+      [logo]="'https://github.com/angular.png'"
       [logoSize]="0.25"
-    />
+    ></svg>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

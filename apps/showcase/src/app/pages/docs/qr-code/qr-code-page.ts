@@ -35,7 +35,7 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Qr Code</h1>
+        <h1 scHeading>QR Code</h1>
         <p class="text-muted-foreground">
           Generate QR codes from text or URLs with customizable colors and logo
           support.

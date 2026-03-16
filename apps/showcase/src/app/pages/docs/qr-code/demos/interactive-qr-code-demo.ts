@@ -17,7 +17,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
       class="w-full max-w-sm rounded-md border px-3 py-2"
     />
     @if (inputValue) {
-      <sc-qr-code [value]="inputValue" [size]="200" />
+      <svg scQrCode [value]="inputValue" [size]="200"></svg>
     }
   `,
   host: { class: 'flex w-full justify-center' },

@@ -9,7 +9,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   selector: 'app-basic-qr-code-demo',
   imports: [ScQrCode],
   template: `
-    <sc-qr-code [value]="'https://angular.io'" [size]="200" />
+    <svg scQrCode [value]="'https://angular.io'" [size]="200"></svg>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

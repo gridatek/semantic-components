@@ -3,18 +3,25 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScQrCodeDownload } from '@semantic-components/ui-lab';
+import { ScQrCode, ScQrCodeDownload } from '@semantic-components/ui-lab';
+import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-download-qr-code-demo',
-  imports: [ScQrCodeDownload],
+  imports: [ScQrCode, ScQrCodeDownload, SiDownloadIcon],
   template: `
-    <sc-qr-code-download
-      [value]="'https://example.com/download'"
-      [size]="200"
-      [filename]="'my-qr-code'"
-      [downloadLabel]="'Save QR Code'"
-    />
+    <div class="inline-flex flex-col items-center gap-3">
+      <svg
+        scQrCode
+        #qr="scQrCode"
+        [value]="'https://example.com/download'"
+        [size]="200"
+      ></svg>
+      <button scQrCodeDownload [for]="qr" [filename]="'my-qr-code'">
+        <svg siDownloadIcon class="size-4"></svg>
+        Save QR Code
+      </button>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,

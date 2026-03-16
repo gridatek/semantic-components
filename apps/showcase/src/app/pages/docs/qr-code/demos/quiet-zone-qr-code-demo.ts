@@ -11,20 +11,31 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   template: `
     <div class="flex flex-wrap items-end gap-4">
       <div class="text-center">
-        <sc-qr-code
+        <svg
+          scQrCode
           [value]="'No border'"
           [size]="150"
           [quietZone]="0"
           class="border"
-        />
+        ></svg>
         <p class="text-muted-foreground mt-1 text-xs">No quiet zone</p>
       </div>
       <div class="text-center">
-        <sc-qr-code [value]="'Small border'" [size]="150" [quietZone]="1" />
+        <svg
+          scQrCode
+          [value]="'Small border'"
+          [size]="150"
+          [quietZone]="1"
+        ></svg>
         <p class="text-muted-foreground mt-1 text-xs">1 module</p>
       </div>
       <div class="text-center">
-        <sc-qr-code [value]="'Standard border'" [size]="150" [quietZone]="4" />
+        <svg
+          scQrCode
+          [value]="'Standard border'"
+          [size]="150"
+          [quietZone]="4"
+        ></svg>
         <p class="text-muted-foreground mt-1 text-xs">4 modules (standard)</p>
       </div>
     </div>

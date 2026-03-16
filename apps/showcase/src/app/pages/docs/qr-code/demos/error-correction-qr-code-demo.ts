@@ -11,35 +11,39 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   template: `
     <div class="flex flex-wrap gap-4">
       <div class="text-center">
-        <sc-qr-code
+        <svg
+          scQrCode
           [value]="'Error Correction Test'"
           [size]="150"
           [errorCorrectionLevel]="'L'"
-        />
+        ></svg>
         <p class="text-muted-foreground mt-1 text-xs">Low (7%)</p>
       </div>
       <div class="text-center">
-        <sc-qr-code
+        <svg
+          scQrCode
           [value]="'Error Correction Test'"
           [size]="150"
           [errorCorrectionLevel]="'M'"
-        />
+        ></svg>
         <p class="text-muted-foreground mt-1 text-xs">Medium (15%)</p>
       </div>
       <div class="text-center">
-        <sc-qr-code
+        <svg
+          scQrCode
           [value]="'Error Correction Test'"
           [size]="150"
           [errorCorrectionLevel]="'Q'"
-        />
+        ></svg>
         <p class="text-muted-foreground mt-1 text-xs">Quartile (25%)</p>
       </div>
       <div class="text-center">
-        <sc-qr-code
+        <svg
+          scQrCode
           [value]="'Error Correction Test'"
           [size]="150"
           [errorCorrectionLevel]="'H'"
-        />
+        ></svg>
         <p class="text-muted-foreground mt-1 text-xs">High (30%)</p>
       </div>
     </div>

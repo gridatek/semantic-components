@@ -10,24 +10,27 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   imports: [ScQrCode],
   template: `
     <div class="flex flex-wrap gap-4">
-      <sc-qr-code
+      <svg
+        scQrCode
         [value]="'Blue QR'"
         [size]="150"
         [foregroundColor]="'#1d4ed8'"
         [backgroundColor]="'#dbeafe'"
-      />
-      <sc-qr-code
+      ></svg>
+      <svg
+        scQrCode
         [value]="'Green QR'"
         [size]="150"
         [foregroundColor]="'#166534'"
         [backgroundColor]="'#dcfce7'"
-      />
-      <sc-qr-code
+      ></svg>
+      <svg
+        scQrCode
         [value]="'Purple QR'"
         [size]="150"
         [foregroundColor]="'#7c3aed'"
         [backgroundColor]="'#f3e8ff'"
-      />
+      ></svg>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
