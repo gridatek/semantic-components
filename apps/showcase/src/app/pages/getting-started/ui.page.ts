@@ -15,6 +15,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
+import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo-container';
 
 @Component({
   selector: 'app-ui-page',
@@ -32,6 +33,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScLink,
     ScHeading,
     PackageManagerInstall,
+    ButtonUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
@@ -176,30 +178,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Import and use components in your Angular templates:
         </p>
-        <div scCodeViewer>
-          <div scCodeViewerHeader>
-            <span scCodeViewerLabel>angular-ts</span>
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [scCopyToClipboard]="usageCode"
-              #copy5="scCopyToClipboard"
-              aria-label="Copy to clipboard"
-            >
-              @if (copy5.copied()) {
-                <svg siCheckIcon></svg>
-              } @else {
-                <svg siCopyIcon></svg>
-              }
-            </button>
-          </div>
-          <div
-            scCodeViewerContent
-            [code]="usageCode"
-            language="angular-ts"
-          ></div>
-        </div>
+        <app-button-usage-demo-container />
       </section>
     </div>
   `,
@@ -213,15 +192,4 @@ export default class UiPage {
     "@import url('@angular/cdk/overlay-prebuilt.css');";
 
   readonly sourceCode = '@source "../node_modules/@semantic-components/ui";';
-
-  readonly usageCode = `import { ScButton } from '@semantic-components/ui';
-
-@Component({
-  selector: 'app-example',
-  imports: [ScButton],
-  template: \`
-    <button scButton>Click me</button>
-  \`,
-})
-export class Example {}`;
 }

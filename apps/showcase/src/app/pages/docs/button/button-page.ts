@@ -6,6 +6,7 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { ButtonUsageDemoContainer } from './demos/button-usage-demo-container';
 import { DisabledButtonDemoContainer } from './demos/disabled-button-demo-container';
 import { LoadingButtonDemoContainer } from './demos/loading-button-demo-container';
 import { SizesButtonDemoContainer } from './demos/sizes-button-demo-container';
@@ -15,6 +16,7 @@ import { WithIconsButtonDemoContainer } from './demos/with-icons-button-demo-con
 @Component({
   selector: 'app-button-page',
   imports: [
+    ButtonUsageDemoContainer,
     VariantsButtonDemoContainer,
     SizesButtonDemoContainer,
     WithIconsButtonDemoContainer,
@@ -33,6 +35,11 @@ import { WithIconsButtonDemoContainer } from './demos/with-icons-button-demo-con
         </p>
         <app-component-badges path="button" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scHeading appToc>Usage</h2>
+        <app-button-usage-demo-container />
+      </section>
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
