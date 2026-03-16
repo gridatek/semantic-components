@@ -29,32 +29,24 @@ export class ScQrCode {
   }
 
   readonly value = input.required<string>();
-  readonly size = input<number>(200);
   readonly errorCorrectionLevel = input<QRErrorCorrectionLevel>('M');
   readonly border = input<number>(2);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('inline-block', this.classInput()),
+    cn('inline-block size-52', this.classInput()),
   );
 
   private readonly svgContent = computed(() => {
     const value = this.value();
     if (!value) return '';
 
-    let svg = renderSVG(value, {
+    return renderSVG(value, {
       ecc: this.errorCorrectionLevel(),
       border: this.border(),
       blackColor: 'currentColor',
       whiteColor: 'transparent',
     });
-
-    svg = svg.replace(
-      '<svg ',
-      `<svg width="${this.size()}" height="${this.size()}" `,
-    );
-
-    return svg;
   });
 
   constructor() {

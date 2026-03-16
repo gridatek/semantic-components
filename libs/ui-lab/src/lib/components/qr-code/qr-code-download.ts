@@ -26,7 +26,7 @@ export class ScQrCodeDownload {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const size = this.for().size();
+    const size = svgEl.clientWidth || 200;
     canvas.width = size;
     canvas.height = size;
 

@@ -15,7 +15,6 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
         scQrCode
         #qr="scQrCode"
         [value]="'https://example.com/download'"
-        [size]="200"
       ></div>
       <button
         scQrCodeDownload
