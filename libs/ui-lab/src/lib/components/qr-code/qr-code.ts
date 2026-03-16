@@ -59,91 +59,47 @@ export class ScQrCode {
     return `0 0 ${result.size} ${result.size}`;
   });
 
-  protected readonly logoPosition = computed(() => {
+  private readonly svgContent = computed(() => {
     const result = this.qrResult();
-    if (!result) return { x: 0, y: 0, size: 0, padding: 0 };
+    if (!result) return '';
 
-    const border = this.border();
-    const moduleCount = result.size - border * 2;
-    const logoSizePercent = this.logoSize();
-    const logoModules = Math.floor(moduleCount * logoSizePercent);
-    const padding = 0.5;
+    const { size, data } = result;
+    const fg = this.foregroundColor();
+    const bg = this.backgroundColor();
 
-    return {
-      x: border + (moduleCount - logoModules) / 2,
-      y: border + (moduleCount - logoModules) / 2,
-      size: logoModules,
-      padding,
-    };
+    let svg = `<rect width="${size}" height="${size}" fill="${bg}"/>`;
+
+    let d = '';
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        if (data[y][x]) {
+          d += `M${x},${y}h1v1h-1z`;
+        }
+      }
+    }
+    if (d) {
+      svg += `<path d="${d}" fill="${fg}"/>`;
+    }
+
+    const logo = this.logo();
+    if (logo) {
+      const border = this.border();
+      const moduleCount = size - border * 2;
+      const logoModules = Math.floor(moduleCount * this.logoSize());
+      const pad = 0.5;
+      const lx = border + (moduleCount - logoModules) / 2;
+      const ly = border + (moduleCount - logoModules) / 2;
+
+      svg += `<rect x="${lx - pad}" y="${ly - pad}" width="${logoModules + pad * 2}" height="${logoModules + pad * 2}" fill="${bg}" rx="${pad}"/>`;
+      svg += `<image href="${logo}" x="${lx}" y="${ly}" width="${logoModules}" height="${logoModules}" preserveAspectRatio="xMidYMid slice"/>`;
+    }
+
+    return svg;
   });
 
   constructor() {
     effect(() => {
-      const result = this.qrResult();
-      const fg = this.foregroundColor();
-      const bg = this.backgroundColor();
-      const logo = this.logo();
-      const logoPos = this.logoPosition();
-
-      const svg = this.elementRef.nativeElement;
-      svg.innerHTML = '';
-
-      if (!result) return;
-
-      const ns = 'http://www.w3.org/2000/svg';
-
-      // Background
-      const bgRect = document.createElementNS(ns, 'rect');
-      bgRect.setAttribute('x', '0');
-      bgRect.setAttribute('y', '0');
-      bgRect.setAttribute('width', String(result.size));
-      bgRect.setAttribute('height', String(result.size));
-      bgRect.setAttribute('fill', bg);
-      svg.appendChild(bgRect);
-
-      // QR modules as a single path
-      let pathData = '';
-      for (let y = 0; y < result.size; y++) {
-        for (let x = 0; x < result.size; x++) {
-          if (result.data[y][x]) {
-            pathData += `M${x},${y}h1v1h-1z`;
-          }
-        }
-      }
-
-      if (pathData) {
-        const path = document.createElementNS(ns, 'path');
-        path.setAttribute('d', pathData);
-        path.setAttribute('fill', fg);
-        svg.appendChild(path);
-      }
-
-      // Logo overlay
-      if (logo) {
-        const logoBgRect = document.createElementNS(ns, 'rect');
-        logoBgRect.setAttribute('x', String(logoPos.x - logoPos.padding));
-        logoBgRect.setAttribute('y', String(logoPos.y - logoPos.padding));
-        logoBgRect.setAttribute(
-          'width',
-          String(logoPos.size + logoPos.padding * 2),
-        );
-        logoBgRect.setAttribute(
-          'height',
-          String(logoPos.size + logoPos.padding * 2),
-        );
-        logoBgRect.setAttribute('fill', bg);
-        logoBgRect.setAttribute('rx', String(logoPos.padding));
-        svg.appendChild(logoBgRect);
-
-        const image = document.createElementNS(ns, 'image');
-        image.setAttribute('href', logo);
-        image.setAttribute('x', String(logoPos.x));
-        image.setAttribute('y', String(logoPos.y));
-        image.setAttribute('width', String(logoPos.size));
-        image.setAttribute('height', String(logoPos.size));
-        image.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-        svg.appendChild(image);
-      }
+      this.elementRef.nativeElement.innerHTML = this.svgContent();
     });
   }
 }
