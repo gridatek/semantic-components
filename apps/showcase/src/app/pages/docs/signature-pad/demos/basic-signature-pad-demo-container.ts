@@ -46,13 +46,12 @@ import { SiTrash2Icon, SiUndoIcon } from '@semantic-icons/lucide-icons';
     SiTrash2Icon,
   ],
   template: \`
-    <div class="space-y-3">
-      <div scSignaturePad #pad="scSignaturePad" class="relative inline-block">
+    <div class="w-full space-y-3">
+      <div scSignaturePad #pad="scSignaturePad" class="relative">
         <canvas
           scSignaturePadCanvas
+          class="h-[200px]"
           [(value)]="signature"
-          [width]="400"
-          [height]="200"
           (signatureChange)="onSignatureChange($event)"
         ></canvas>
 

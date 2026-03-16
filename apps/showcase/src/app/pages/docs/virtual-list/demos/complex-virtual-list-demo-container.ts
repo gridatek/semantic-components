@@ -53,6 +53,7 @@ interface User {
     <cdk-virtual-scroll-viewport
       itemSize="72"
       class="h-[360px] rounded-lg border"
+      tabindex="0"
     >
       <div
         *cdkVirtualFor="let user of users(); trackBy: trackById"

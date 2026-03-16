@@ -33,9 +33,9 @@ import {
   selector: 'app-no-controls-signature-pad-demo',
   imports: [ScSignaturePad, ScSignaturePadCanvas],
   template: \`
-    <div class="space-y-3">
-      <div scSignaturePad #pad="scSignaturePad" class="relative inline-block">
-        <canvas scSignaturePadCanvas [width]="400" [height]="150"></canvas>
+    <div class="w-full space-y-3">
+      <div scSignaturePad #pad="scSignaturePad" class="relative">
+        <canvas scSignaturePadCanvas class="h-[150px]"></canvas>
       </div>
 
       <div class="flex gap-2">
