@@ -1,67 +1,47 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
+  Directive,
   computed,
+  contentChild,
   input,
   output,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScOrgChartNode } from './org-chart-node';
+import { ScOrgChartNodeDef } from './org-chart-node-def';
 import type {
-  OrgChartDirection,
-  OrgChartNode,
-  OrgChartNodeClickEvent,
-  OrgChartNodeExpandEvent,
+  ScOrgChartDirection,
+  ScOrgChartNodeExpandEvent,
 } from './org-chart-types';
+import { SC_ORG_CHART } from './org-chart-types';
 
-@Component({
-  selector: 'sc-org-chart',
-  imports: [ScOrgChartNode],
-  template: `
-    <div [class]="containerClass()" role="tree" [attr.aria-label]="ariaLabel()">
-      @if (data()) {
-        <sc-org-chart-node
-          [node]="data()!"
-          [direction]="direction()"
-          [collapsible]="collapsible()"
-          [compact]="compact()"
-          (nodeClick)="nodeClick.emit($event)"
-          (nodeExpand)="nodeExpand.emit($event)"
-        />
-      } @else {
-        <div class="text-muted-foreground p-4 text-sm">
-          No organization data available
-        </div>
-      }
-    </div>
-  `,
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+@Directive({
+  selector: 'div[scOrgChart]',
+  providers: [{ provide: SC_ORG_CHART, useExisting: ScOrgChart }],
+  host: {
+    role: 'tree',
+    'data-slot': 'org-chart',
+    '[attr.aria-label]': 'ariaLabel()',
+    '[class]': 'class()',
+  },
 })
 export class ScOrgChart {
-  readonly data = input<OrgChartNode | null>(null);
-  readonly direction = input<OrgChartDirection>('vertical');
+  readonly direction = input<ScOrgChartDirection>('vertical');
   readonly collapsible = input(true);
   readonly compact = input(false);
   readonly ariaLabel = input<string>('Organization chart');
-  readonly class = input<string>('');
 
-  readonly nodeClick = output<OrgChartNodeClickEvent>();
-  readonly nodeExpand = output<OrgChartNodeExpandEvent>();
+  readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly containerClass = computed(() =>
+  readonly nodeExpand = output<ScOrgChartNodeExpandEvent>();
+
+  readonly nodeDef = contentChild.required(ScOrgChartNodeDef);
+
+  protected readonly class = computed(() =>
     cn(
       'inline-flex overflow-auto p-4',
       this.direction() === 'vertical'
         ? 'flex-col items-center'
         : 'flex-row items-start',
-      this.class(),
+      this.classInput(),
     ),
   );
 }

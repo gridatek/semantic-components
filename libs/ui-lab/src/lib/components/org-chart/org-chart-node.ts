@@ -1,76 +1,28 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
-  output,
   signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
-import type {
-  OrgChartDirection,
-  OrgChartNode,
-  OrgChartNodeClickEvent,
-  OrgChartNodeExpandEvent,
-} from './org-chart-types';
+import type { OrgChartNode, ScOrgChartNodeDefContext } from './org-chart-types';
+import { SC_ORG_CHART } from './org-chart-types';
 
 @Component({
   selector: 'sc-org-chart-node',
-  imports: [SiChevronDownIcon],
+  imports: [NgTemplateOutlet],
   template: `
     <div [class]="containerClass()">
       <!-- Node Card -->
-      <div [class]="nodeCardClass()">
-        <button
-          type="button"
-          [class]="cardButtonClass()"
-          [attr.aria-expanded]="hasChildren() ? isExpanded() : null"
-          [attr.aria-label]="
-            node().name + (node().title ? ', ' + node().title : '')
-          "
-          (click)="onNodeClick($event)"
-        >
-          <!-- Avatar -->
-          @if (node().avatar) {
-            <img
-              [src]="node().avatar"
-              [alt]="node().name"
-              class="h-12 w-12 shrink-0 rounded-full object-cover"
-            />
-          } @else {
-            <div
-              class="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
-            >
-              <span class="text-primary text-lg font-semibold">
-                {{ getInitials(node().name) }}
-              </span>
-            </div>
-          }
-
-          <!-- Info -->
-          <div class="min-w-0 flex-1 text-left">
-            <p class="truncate text-sm font-semibold">{{ node().name }}</p>
-            @if (node().title) {
-              <p class="text-muted-foreground truncate text-xs">
-                {{ node().title }}
-              </p>
-            }
-            @if (node().department) {
-              <p class="text-muted-foreground/70 truncate text-xs">
-                {{ node().department }}
-              </p>
-            }
-          </div>
-
-          <!-- Expand indicator -->
-          @if (hasChildren()) {
-            <div class="ml-2 shrink-0">
-              <svg siChevronDownIcon [class]="expandIconClass()"></svg>
-            </div>
-          }
-        </button>
+      <div class="relative z-10">
+        <ng-container
+          [ngTemplateOutlet]="orgChart.nodeDef().templateRef"
+          [ngTemplateOutletContext]="templateContext()"
+        />
       </div>
 
       <!-- Connector Lines & Children -->
@@ -92,14 +44,7 @@ import type {
                 <div [class]="horizontalConnectorClass(isFirst, isLast)"></div>
 
                 <!-- Recursive child node -->
-                <sc-org-chart-node
-                  [node]="child"
-                  [direction]="direction()"
-                  [collapsible]="collapsible()"
-                  [compact]="compact()"
-                  (nodeClick)="nodeClick.emit($event)"
-                  (nodeExpand)="nodeExpand.emit($event)"
-                />
+                <sc-org-chart-node [node]="child" />
               </div>
             }
           </div>
@@ -107,28 +52,27 @@ import type {
       }
     </div>
   `,
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
+  host: {
+    'data-slot': 'org-chart-node',
+    '[class]': 'hostClass()',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOrgChartNode {
-  readonly node = input.required<OrgChartNode>();
-  readonly direction = input<OrgChartDirection>('vertical');
-  readonly collapsible = input(true);
-  readonly compact = input(false);
+  readonly orgChart = inject(SC_ORG_CHART);
 
-  readonly nodeClick = output<OrgChartNodeClickEvent>();
-  readonly nodeExpand = output<OrgChartNodeExpandEvent>();
+  readonly node = input.required<OrgChartNode>();
+
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  protected readonly hostClass = computed(() => cn('block', this.classInput()));
 
   protected readonly expanded = signal<boolean | null>(null);
 
   protected readonly hasChildren = computed(() => {
     const children = this.node().children;
-    return children && children.length > 0;
+    return children !== undefined && children.length > 0;
   });
 
   protected readonly isExpanded = computed(() => {
@@ -137,60 +81,55 @@ export class ScOrgChartNode {
     return this.node().expanded !== false;
   });
 
+  readonly toggleFn = () => this.onToggle();
+
+  protected readonly templateContext = computed<ScOrgChartNodeDefContext>(
+    () => ({
+      $implicit: this.node(),
+      expanded: this.isExpanded(),
+      hasChildren: this.hasChildren(),
+      toggle: this.toggleFn,
+    }),
+  );
+
   protected readonly containerClass = computed(() =>
     cn(
       'flex',
-      this.direction() === 'vertical'
+      this.orgChart.direction() === 'vertical'
         ? 'flex-col items-center'
         : 'flex-row items-start',
-    ),
-  );
-
-  protected readonly nodeCardClass = computed(() => cn('relative z-10'));
-
-  protected readonly cardButtonClass = computed(() =>
-    cn(
-      'flex items-center gap-3 p-3 rounded-lg border bg-card text-card-foreground',
-      'shadow-sm hover:shadow-md transition-shadow',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      this.compact() ? 'min-w-[160px]' : 'min-w-[200px]',
-    ),
-  );
-
-  protected readonly expandIconClass = computed(() =>
-    cn(
-      'inline-flex items-center justify-center transition-transform duration-200',
-      'text-muted-foreground',
-      this.isExpanded() ? 'rotate-180' : 'rotate-0',
-      this.direction() === 'horizontal' &&
-        (this.isExpanded() ? '-rotate-90' : 'rotate-90'),
     ),
   );
 
   protected readonly childrenContainerClass = computed(() =>
     cn(
       'flex',
-      this.direction() === 'vertical'
+      this.orgChart.direction() === 'vertical'
         ? 'flex-col items-center'
         : 'flex-row items-start',
     ),
   );
 
   protected readonly connectorClass = computed(() =>
-    cn('bg-border', this.direction() === 'vertical' ? 'w-px h-6' : 'h-px w-6'),
+    cn(
+      'bg-border',
+      this.orgChart.direction() === 'vertical' ? 'w-px h-6' : 'h-px w-6',
+    ),
   );
 
   protected readonly childrenWrapperClass = computed(() =>
     cn(
       'flex relative',
-      this.direction() === 'vertical' ? 'flex-row gap-4' : 'flex-col gap-4',
+      this.orgChart.direction() === 'vertical'
+        ? 'flex-row gap-4'
+        : 'flex-col gap-4',
     ),
   );
 
   protected childNodeClass(isFirst: boolean, isLast: boolean): string {
     return cn(
       'flex relative',
-      this.direction() === 'vertical'
+      this.orgChart.direction() === 'vertical'
         ? 'flex-col items-center'
         : 'flex-row items-start',
     );
@@ -200,11 +139,10 @@ export class ScOrgChartNode {
     isFirst: boolean,
     isLast: boolean,
   ): string {
-    if (this.direction() === 'vertical') {
+    if (this.orgChart.direction() === 'vertical') {
       return cn(
         'absolute top-0 h-6 bg-border',
         'w-px',
-        // Horizontal line connecting siblings
         !isFirst &&
           !isLast &&
           'before:absolute before:top-0 before:left-1/2 before:w-full before:h-px before:bg-border before:-translate-x-1/2',
@@ -232,22 +170,14 @@ export class ScOrgChartNode {
     }
   }
 
-  getInitials(name: string): string {
-    return name
-      .split(' ')
-      .map((part) => part[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  }
-
-  onNodeClick(event: MouseEvent): void {
-    this.nodeClick.emit({ node: this.node(), event });
-
-    if (this.collapsible() && this.hasChildren()) {
+  onToggle(): void {
+    if (this.orgChart.collapsible() && this.hasChildren()) {
       const newExpanded = !this.isExpanded();
       this.expanded.set(newExpanded);
-      this.nodeExpand.emit({ node: this.node(), expanded: newExpanded });
+      this.orgChart.nodeExpand.emit({
+        node: this.node(),
+        expanded: newExpanded,
+      });
     }
   }
 }

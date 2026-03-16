@@ -1,14 +1,12 @@
 # Org Chart
 
-A hierarchical organization chart component for visualizing company structures and reporting relationships.
+A hierarchical organization chart built from composable directives. The consumer controls card content via `ng-template`.
 
 ## Installation
 
-Import the components from the org-chart module:
-
 ```typescript
-import { ScOrgChart } from '@/ui/org-chart';
-import type { OrgChartNode, OrgChartNodeClickEvent } from '@/ui/org-chart';
+import { ScOrgChart, ScOrgChartCard, ScOrgChartNode, ScOrgChartNodeDef } from '@semantic-components/ui-lab';
+import type { OrgChartNode, ScOrgChartNodeExpandEvent } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
@@ -16,141 +14,111 @@ import type { OrgChartNode, OrgChartNodeClickEvent } from '@/ui/org-chart';
 ### Basic Usage
 
 ```html
-<sc-org-chart [data]="orgData" (nodeClick)="onNodeClick($event)" />
-```
+<div scOrgChart [collapsible]="true" (nodeExpand)="onNodeExpand($event)">
+  <sc-org-chart-node [node]="orgData()" />
 
-```typescript
-orgData: OrgChartNode = {
-  id: '1',
-  name: 'John Smith',
-  title: 'CEO',
-  children: [
-    {
-      id: '2',
-      name: 'Jane Doe',
-      title: 'CTO',
-      children: [
-        { id: '3', name: 'Bob Wilson', title: 'Developer' },
-        { id: '4', name: 'Alice Brown', title: 'Designer' },
-      ],
-    },
-    {
-      id: '5',
-      name: 'Mike Johnson',
-      title: 'CFO',
-    },
-  ],
-};
-
-onNodeClick(event: OrgChartNodeClickEvent): void {
-  console.log('Clicked:', event.node.name);
-}
+  <ng-template scOrgChartNodeDef let-node let-expanded="expanded" let-hasChildren="hasChildren" let-toggle="toggle">
+    <button scOrgChartCard [attr.aria-expanded]="hasChildren ? expanded : null" [attr.aria-label]="node.name + (node.title ? ', ' + node.title : '')" (click)="toggle()">
+      <div class="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
+        <span class="text-primary text-lg font-semibold">{{ getInitials(node.name) }}</span>
+      </div>
+      <div class="min-w-0 flex-1 text-left">
+        <p class="truncate text-sm font-semibold">{{ node.name }}</p>
+        @if (node.title) {
+        <p class="text-muted-foreground truncate text-xs">{{ node.title }}</p>
+        }
+      </div>
+      @if (hasChildren) {
+      <svg
+        siChevronDownIcon
+        [class]="expanded ? 'rotate-180 text-muted-foreground transition-transform duration-200'
+            : 'text-muted-foreground transition-transform duration-200'"
+      ></svg>
+      }
+    </button>
+  </ng-template>
+</div>
 ```
 
 ### Horizontal Layout
 
 ```html
-<sc-org-chart [data]="orgData" direction="horizontal" />
-```
-
-### With Avatars
-
-```typescript
-orgData: OrgChartNode = {
-  id: '1',
-  name: 'Sarah Johnson',
-  title: 'CEO',
-  avatar: 'https://example.com/sarah.jpg',
-  children: [
-    {
-      id: '2',
-      name: 'Michael Chen',
-      title: 'CTO',
-      avatar: 'https://example.com/michael.jpg',
-    },
-  ],
-};
-```
-
-### With Departments
-
-```typescript
-orgData: OrgChartNode = {
-  id: '1',
-  name: 'John Smith',
-  title: 'CEO',
-  department: 'Executive',
-  children: [
-    {
-      id: '2',
-      name: 'Jane Doe',
-      title: 'Engineering Manager',
-      department: 'Engineering',
-    },
-  ],
-};
+<div scOrgChart direction="horizontal">
+  <sc-org-chart-node [node]="orgData()" />
+  <ng-template scOrgChartNodeDef let-node let-toggle="toggle">
+    <!-- card template -->
+  </ng-template>
+</div>
 ```
 
 ### Compact Mode
 
 ```html
-<sc-org-chart [data]="orgData" [compact]="true" />
+<div scOrgChart [compact]="true">
+  <sc-org-chart-node [node]="orgData()" />
+  <ng-template scOrgChartNodeDef let-node let-toggle="toggle">
+    <!-- card template -->
+  </ng-template>
+</div>
 ```
 
 ### Non-collapsible
 
 ```html
-<sc-org-chart [data]="orgData" [collapsible]="false" />
-```
-
-### Initial Expanded State
-
-```typescript
-orgData: OrgChartNode = {
-  id: '1',
-  name: 'John Smith',
-  title: 'CEO',
-  expanded: false, // Start collapsed
-  children: [...],
-};
+<div scOrgChart [collapsible]="false">
+  <sc-org-chart-node [node]="orgData()" />
+  <ng-template scOrgChartNodeDef let-node>
+    <!-- card template (no toggle needed) -->
+  </ng-template>
+</div>
 ```
 
 ## API Reference
 
-### ScOrgChart
+### ScOrgChart (`div[scOrgChart]`)
 
-The main organization chart component.
+Root directive. Provides configuration to all child nodes via `SC_ORG_CHART` injection token.
 
 #### Inputs
 
-| Input         | Type                         | Default                | Description                   |
-| ------------- | ---------------------------- | ---------------------- | ----------------------------- |
-| `data`        | `OrgChartNode \| null`       | `null`                 | Root node of the organization |
-| `direction`   | `'vertical' \| 'horizontal'` | `'vertical'`           | Layout direction              |
-| `collapsible` | `boolean`                    | `true`                 | Allow nodes to be collapsed   |
-| `compact`     | `boolean`                    | `false`                | Use smaller node cards        |
-| `ariaLabel`   | `string`                     | `'Organization chart'` | Accessible label              |
-| `class`       | `string`                     | `''`                   | Additional CSS classes        |
+| Input         | Type                         | Default                | Description                 |
+| ------------- | ---------------------------- | ---------------------- | --------------------------- |
+| `direction`   | `'vertical' \| 'horizontal'` | `'vertical'`           | Layout direction            |
+| `collapsible` | `boolean`                    | `true`                 | Allow nodes to be collapsed |
+| `compact`     | `boolean`                    | `false`                | Use smaller node cards      |
+| `ariaLabel`   | `string`                     | `'Organization chart'` | Accessible label            |
+| `class`       | `string`                     | `''`                   | Additional CSS classes      |
 
 #### Outputs
 
-| Output       | Type                      | Description                               |
-| ------------ | ------------------------- | ----------------------------------------- |
-| `nodeClick`  | `OrgChartNodeClickEvent`  | Emitted when a node is clicked            |
-| `nodeExpand` | `OrgChartNodeExpandEvent` | Emitted when a node is expanded/collapsed |
+| Output       | Type                        | Description                               |
+| ------------ | --------------------------- | ----------------------------------------- |
+| `nodeExpand` | `ScOrgChartNodeExpandEvent` | Emitted when a node is expanded/collapsed |
 
-### ScOrgChartNode
+### ScOrgChartNodeDef (`ng-template[scOrgChartNodeDef]`)
 
-Individual node component (used internally, can also be used directly for custom layouts).
+Captures the card template. Template context provides:
+
+| Variable      | Type           | Description                        |
+| ------------- | -------------- | ---------------------------------- |
+| `$implicit`   | `OrgChartNode` | The node data (use `let-node`)     |
+| `expanded`    | `boolean`      | Whether the node is expanded       |
+| `hasChildren` | `boolean`      | Whether the node has children      |
+| `toggle`      | `() => void`   | Function to toggle expand/collapse |
+
+### ScOrgChartNode (`sc-org-chart-node`)
+
+Handles recursion and connector lines. Reads config from the root `ScOrgChart` directive.
 
 #### Inputs
 
-| Input         | Type                | Default      | Description           |
-| ------------- | ------------------- | ------------ | --------------------- |
-| `node`        | `OrgChartNode`      | (required)   | Node data to display  |
-| `direction`   | `OrgChartDirection` | `'vertical'` | Layout direction      |
-| `collapsible` | `boolean`           | `true`       | Allow collapse        |
-| `compact`     | `boolean`           | `false`      | Use compact card size |
+| Input  | Type           | Description          |
+| ------ | -------------- | -------------------- |
+| `node` | `OrgChartNode` | Node data (required) |
+
+### ScOrgChartCard (`button[scOrgChartCard]`)
+
+Card button styling directive. Reads `compact` from root to toggle min-width.
 
 ## Type Definitions
 
@@ -169,50 +137,37 @@ interface OrgChartNode {
 }
 ```
 
-### OrgChartNodeClickEvent
+### ScOrgChartNodeExpandEvent
 
 ```typescript
-interface OrgChartNodeClickEvent {
-  node: OrgChartNode;
-  event: MouseEvent;
-}
-```
-
-### OrgChartNodeExpandEvent
-
-```typescript
-interface OrgChartNodeExpandEvent {
+interface ScOrgChartNodeExpandEvent {
   node: OrgChartNode;
   expanded: boolean;
 }
 ```
 
-### OrgChartDirection
+### ScOrgChartNodeDefContext
 
 ```typescript
-type OrgChartDirection = 'vertical' | 'horizontal';
+interface ScOrgChartNodeDefContext {
+  $implicit: OrgChartNode;
+  expanded: boolean;
+  hasChildren: boolean;
+  toggle: () => void;
+}
 ```
 
-## Node Properties
+### ScOrgChartDirection
 
-| Property     | Type                      | Required | Description                      |
-| ------------ | ------------------------- | -------- | -------------------------------- |
-| `id`         | `string`                  | Yes      | Unique identifier for the node   |
-| `name`       | `string`                  | Yes      | Person's full name               |
-| `title`      | `string`                  | No       | Job title or position            |
-| `avatar`     | `string`                  | No       | URL to profile image             |
-| `department` | `string`                  | No       | Department or team name          |
-| `children`   | `OrgChartNode[]`          | No       | Direct reports (child nodes)     |
-| `expanded`   | `boolean`                 | No       | Initial expanded state           |
-| `data`       | `Record<string, unknown>` | No       | Custom data attached to the node |
+```typescript
+type ScOrgChartDirection = 'vertical' | 'horizontal';
+```
 
 ## Accessibility
 
-The Org Chart component follows accessibility best practices:
-
 - Container has `role="tree"` for screen readers
-- Nodes have `aria-expanded` attribute when collapsible
-- Each node has accessible label combining name and title
+- Nodes support `aria-expanded` attribute when collapsible
+- Card buttons support accessible labels via `aria-label`
 - Focus indicators for keyboard navigation
 - Avatar images include proper alt text
 - Initials fallback for nodes without avatars
@@ -224,42 +179,3 @@ The Org Chart component follows accessibility best practices:
 | Tab   | Move focus between nodes              |
 | Enter | Toggle expand/collapse, trigger click |
 | Space | Toggle expand/collapse, trigger click |
-
-## Styling
-
-The component uses Tailwind CSS classes and supports theming:
-
-- Node cards use `bg-card` and `border` colors
-- Connectors use `bg-border` color
-- Avatar fallback uses `bg-primary/10` with `text-primary`
-- Hover states include shadow transitions
-
-### Custom Styling
-
-```html
-<sc-org-chart [data]="orgData" class="[&_button]:shadow-lg" />
-```
-
-## Features
-
-- Hierarchical tree structure visualization
-- Vertical and horizontal layout options
-- Collapsible nodes with smooth expand/collapse
-- Avatar support with initials fallback
-- Department and title display
-- Compact mode for dense hierarchies
-- Connector lines between nodes
-- Click and expand event handlers
-- Custom data attachment
-- Recursive rendering
-- Full keyboard and screen reader support
-
-## Use Cases
-
-- Company organization charts
-- Team hierarchy visualization
-- Management reporting structures
-- Department org charts
-- Project team structures
-- Family trees
-- Any hierarchical relationship visualization
