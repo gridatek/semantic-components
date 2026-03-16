@@ -1,7 +1,6 @@
 import {
   DestroyRef,
   Directive,
-  ElementRef,
   InjectionToken,
   computed,
   inject,

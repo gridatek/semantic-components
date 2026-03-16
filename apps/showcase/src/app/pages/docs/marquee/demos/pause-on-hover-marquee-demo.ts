@@ -3,26 +3,42 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScMarqueeText } from '@semantic-components/ui-lab';
+import {
+  ScMarqueeText,
+  ScMarqueeTextSegment,
+  ScMarqueeTextSeparator,
+  ScMarqueeTextTrack,
+} from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-pause-on-hover-marquee-demo',
-  imports: [ScMarqueeText],
+  imports: [
+    ScMarqueeText,
+    ScMarqueeTextTrack,
+    ScMarqueeTextSegment,
+    ScMarqueeTextSeparator,
+  ],
   template: `
     <p class="text-muted-foreground mb-3 text-sm">
       Hover over the marquee to pause animation
     </p>
     <div class="bg-primary/5 rounded-lg border py-3">
-      <div
-        scMarqueeText
-        text="Hover over me to pause the animation!"
-        [duration]="15"
-        [pauseOnHover]="true"
-      ></div>
+      <div scMarqueeText [duration]="15" [pauseOnHover]="true">
+        <div scMarqueeTextTrack>
+          @for (_ of repeats; track $index) {
+            <span scMarqueeTextSegment>
+              Hover over me to pause the animation!
+            </span>
+            <span scMarqueeTextSeparator>•</span>
+          }
+        </div>
+      </div>
     </div>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PauseOnHoverMarqueeDemo {}
+export class PauseOnHoverMarqueeDemo {
+  readonly repeats = [1, 2, 3, 4];
+}
