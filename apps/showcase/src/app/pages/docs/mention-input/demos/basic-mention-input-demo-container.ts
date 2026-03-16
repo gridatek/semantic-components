@@ -25,20 +25,53 @@ export class BasicMentionInputDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { MentionUser, ScMentionInput } from '@semantic-components/ui-lab';
+import {
+  ScMentionInput,
+  ScMentionInputSuggestionItem,
+  ScMentionInputSuggestions,
+  ScMentionInputTextarea,
+} from '@semantic-components/ui-lab';
+import type { MentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-mention-input-demo',
-  imports: [ScMentionInput],
+  imports: [
+    ScMentionInput,
+    ScMentionInputTextarea,
+    ScMentionInputSuggestions,
+    ScMentionInputSuggestionItem,
+  ],
   template: \`
     <div class="max-w-lg">
-      <sc-mention-input
+      <div
+        scMentionInput
+        [users]="sampleUsers"
         [(value)]="value"
         [(mentions)]="mentions"
-        [users]="sampleUsers"
-        placeholder="Type @ to mention someone..."
         (mentionSelect)="onMentionSelect($event)"
-      />
+        #mention="scMentionInput"
+      >
+        <textarea
+          scMentionInputTextarea
+          placeholder="Type @ to mention someone..."
+        ></textarea>
+
+        @if (mention.showSuggestions() && mention.filteredUsers().length > 0) {
+          <div scMentionInputSuggestions>
+            @for (
+              user of mention.filteredUsers();
+              track user.id;
+              let i = $index
+            ) {
+              <button
+                scMentionInputSuggestionItem
+                [user]="user"
+                [index]="i"
+              ></button>
+            }
+          </div>
+        }
+      </div>
     </div>
     <div class="text-muted-foreground mt-3 space-y-1 text-sm">
       <p>Value: {{ value() || 'Empty' }}</p>

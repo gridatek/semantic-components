@@ -25,11 +25,22 @@ export class FormMentionInputDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { MentionUser, ScMentionInput } from '@semantic-components/ui-lab';
+import {
+  ScMentionInput,
+  ScMentionInputSuggestionItem,
+  ScMentionInputSuggestions,
+  ScMentionInputTextarea,
+} from '@semantic-components/ui-lab';
+import type { MentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-form-mention-input-demo',
-  imports: [ScMentionInput],
+  imports: [
+    ScMentionInput,
+    ScMentionInputTextarea,
+    ScMentionInputSuggestions,
+    ScMentionInputSuggestionItem,
+  ],
   template: \`
     <div class="max-w-lg space-y-3 rounded-lg border p-4">
       <div class="flex items-center gap-3">
@@ -40,12 +51,34 @@ import { MentionUser, ScMentionInput } from '@semantic-components/ui-lab';
         </div>
         <span class="font-medium">John Doe</span>
       </div>
-      <sc-mention-input
+      <div
+        scMentionInput
         [(value)]="commentValue"
         [users]="sampleUsers"
-        placeholder="Write a comment... Use @ to mention someone"
-        [rows]="3"
-      />
+        #mention="scMentionInput"
+      >
+        <textarea
+          scMentionInputTextarea
+          placeholder="Write a comment... Use @ to mention someone"
+          [rows]="3"
+        ></textarea>
+
+        @if (mention.showSuggestions() && mention.filteredUsers().length > 0) {
+          <div scMentionInputSuggestions>
+            @for (
+              user of mention.filteredUsers();
+              track user.id;
+              let i = $index
+            ) {
+              <button
+                scMentionInputSuggestionItem
+                [user]="user"
+                [index]="i"
+              ></button>
+            }
+          </div>
+        }
+      </div>
       <div class="flex justify-end gap-2">
         <button
           class="border-input hover:bg-accent inline-flex h-8 items-center justify-center rounded-md border px-3 text-sm font-medium"

@@ -28,7 +28,11 @@ export class CompactColorPickerDemoContainer {
 import {
   ScColorPicker,
   ScColorPickerArea,
+  ScColorPickerAreaBrightness,
+  ScColorPickerAreaCursor,
+  ScColorPickerAreaSaturation,
   ScColorPickerHue,
+  ScColorPickerHueCursor,
   ScColorPickerInput,
 } from '@semantic-components/ui-lab';
 
@@ -37,7 +41,11 @@ import {
   imports: [
     ScColorPicker,
     ScColorPickerArea,
+    ScColorPickerAreaSaturation,
+    ScColorPickerAreaBrightness,
+    ScColorPickerAreaCursor,
     ScColorPickerHue,
+    ScColorPickerHueCursor,
     ScColorPickerInput,
   ],
   template: \`
@@ -47,8 +55,14 @@ import {
         [(value)]="color"
         class="space-y-3 rounded-lg border p-3"
       >
-        <div scColorPickerArea class="h-32"></div>
-        <div scColorPickerHue></div>
+        <div scColorPickerArea class="h-32">
+          <div scColorPickerAreaSaturation></div>
+          <div scColorPickerAreaBrightness></div>
+          <div scColorPickerAreaCursor></div>
+        </div>
+        <div scColorPickerHue>
+          <div scColorPickerHueCursor></div>
+        </div>
         <input scColorPickerInput format="hex" />
       </div>
     </div>
