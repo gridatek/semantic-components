@@ -11,16 +11,16 @@ import {
   signal,
 } from '@angular/core';
 import {
-  type OverlayAlign,
-  type OverlaySide,
+  type ScOverlayAlign,
+  type ScOverlaySide,
   buildOverlayPositionsWithFallback,
   cn,
 } from '../../utils';
 import { ScHoverCardPortal } from './hover-card-portal';
 import { ScHoverCardTrigger } from './hover-card-trigger';
 
-export type ScHoverCardSide = OverlaySide;
-export type ScHoverCardAlign = OverlayAlign;
+export type ScHoverCardSide = ScOverlaySide;
+export type ScHoverCardAlign = ScOverlayAlign;
 
 @Component({
   selector: 'div[scHoverCardProvider]',

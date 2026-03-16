@@ -13,16 +13,16 @@ import {
   signal,
 } from '@angular/core';
 import {
-  type OverlayAlign,
-  type OverlaySide,
+  type ScOverlayAlign,
+  type ScOverlaySide,
   buildOverlayPositionsWithFallback,
   cn,
 } from '../../utils';
 import { ScPopoverPortal } from './popover-portal';
 import { ScPopoverTrigger } from './popover-trigger';
 
-export type ScPopoverSide = OverlaySide;
-export type ScPopoverAlign = OverlayAlign;
+export type ScPopoverSide = ScOverlaySide;
+export type ScPopoverAlign = ScOverlayAlign;
 
 @Component({
   selector: 'div[scPopoverProvider]',

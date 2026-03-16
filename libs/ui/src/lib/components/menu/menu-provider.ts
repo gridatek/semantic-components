@@ -11,14 +11,14 @@ import {
 } from '@angular/core';
 import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import {
-  type OverlayAlign,
+  type ScOverlayAlign,
   buildOverlayPositionsWithFallback,
   cn,
 } from '../../utils';
 import { ScMenuPortal } from './menu-portal';
 import { ScMenuTrigger } from './menu-trigger';
 
-export type ScMenuAlign = OverlayAlign;
+export type ScMenuAlign = ScOverlayAlign;
 export type ScMenuSide = 'top' | 'bottom';
 
 @Component({
