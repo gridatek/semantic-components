@@ -6,6 +6,7 @@ import {
   inject,
   input,
   output,
+  untracked,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScSpotlightState } from './spotlight-state';
@@ -92,11 +93,13 @@ export class ScSpotlight {
 
     effect(() => {
       const targetInput = this.target();
-      if (targetInput) {
-        this.state.show(targetInput);
-      } else if (this.state.isActive()) {
-        this.state.hide();
-      }
+      untracked(() => {
+        if (targetInput) {
+          this.state.show(targetInput);
+        } else if (this.state.isActive()) {
+          this.state.hide();
+        }
+      });
     });
 
     this.state.onOpened = () => {
