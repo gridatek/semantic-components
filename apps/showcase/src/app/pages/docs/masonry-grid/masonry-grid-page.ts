@@ -25,7 +25,7 @@ import { ImageGalleryMasonryGridDemoContainer } from './demos/image-gallery-maso
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>MasonryGrid</h1>
+        <h1 scHeading>Masonry Grid</h1>
         <p class="text-muted-foreground">
           A Pinterest-style layout that arranges items in columns with varying
           heights.

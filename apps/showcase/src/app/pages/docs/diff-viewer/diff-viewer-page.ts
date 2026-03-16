@@ -31,7 +31,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>DiffViewer</h1>
+        <h1 scHeading>Diff Viewer</h1>
         <p class="text-muted-foreground">
           Side-by-side or unified view for comparing text and code changes.
         </p>
