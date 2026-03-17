@@ -25,14 +25,80 @@ export class AvatarsOrgChartDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { type OrgChartNode, ScOrgChart } from '@semantic-components/ui-lab';
+import {
+  type OrgChartNode,
+  ScOrgChart,
+  ScOrgChartCard,
+  ScOrgChartNode,
+  ScOrgChartNodeDef,
+} from '@semantic-components/ui-lab';
+import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-avatars-org-chart-demo',
-  imports: [ScOrgChart],
+  imports: [
+    ScOrgChart,
+    ScOrgChartCard,
+    ScOrgChartNode,
+    ScOrgChartNodeDef,
+    SiChevronDownIcon,
+  ],
   template: \`
     <div class="overflow-auto rounded-lg border">
-      <sc-org-chart [data]="orgData()" />
+      <div scOrgChart>
+        <sc-org-chart-node [node]="orgData()" />
+
+        <ng-template
+          scOrgChartNodeDef
+          let-node
+          let-expanded="expanded"
+          let-hasChildren="hasChildren"
+          let-toggle="toggle"
+        >
+          <button
+            scOrgChartCard
+            [attr.aria-expanded]="hasChildren ? expanded : null"
+            [attr.aria-label]="
+              node.name + (node.title ? ', ' + node.title : '')
+            "
+            (click)="toggle()"
+          >
+            @if (node.avatar) {
+              <img
+                [src]="node.avatar"
+                [alt]="node.name"
+                class="h-12 w-12 shrink-0 rounded-full object-cover"
+              />
+            } @else {
+              <div
+                class="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
+              >
+                <span class="text-primary text-lg font-semibold">
+                  {{ getInitials(node.name) }}
+                </span>
+              </div>
+            }
+            <div class="min-w-0 flex-1 text-left">
+              <p class="truncate text-sm font-semibold">{{ node.name }}</p>
+              @if (node.title) {
+                <p class="text-muted-foreground truncate text-xs">
+                  {{ node.title }}
+                </p>
+              }
+            </div>
+            @if (hasChildren) {
+              <svg
+                siChevronDownIcon
+                [class]="
+                  expanded
+                    ? 'text-muted-foreground rotate-180 transition-transform duration-200'
+                    : 'text-muted-foreground transition-transform duration-200'
+                "
+              ></svg>
+            }
+          </button>
+        </ng-template>
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
@@ -80,5 +146,14 @@ export class AvatarsOrgChartDemo {
       },
     ],
   });
+
+  getInitials(name: string): string {
+    return name
+      .split(' ')
+      .map((part) => part[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  }
 }`;
 }
