@@ -215,12 +215,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/drawer/drawer-page'),
       },
       {
-        path: 'emoji-picker',
-        title: 'Emoji Picker - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/emoji-picker/emoji-picker-page'),
-      },
-      {
         path: 'editor',
         title: 'Editor - Semantic Components',
         loadComponent: () => import('../pages/docs/editor/editor-page'),

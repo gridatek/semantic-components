@@ -7,7 +7,6 @@ export * from './data-table';
 export * from './date-range-picker';
 export * from './diff-viewer';
 export * from './dock';
-export * from './emoji-picker';
 export * from './image-annotator';
 export * from './image-compare';
 export * from './image-cropper';

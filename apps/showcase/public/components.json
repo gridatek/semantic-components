@@ -312,15 +312,6 @@
     "category": "Editor"
   },
   {
-    "name": "Emoji Picker",
-    "path": "emoji-picker",
-    "description": "A picker for selecting emojis.",
-    "status": "Experimental",
-    "library": "ui-lab",
-    "category": "Media",
-    "hidden": true
-  },
-  {
     "name": "Empty",
     "path": "empty",
     "description": "Placeholder for empty content.",
