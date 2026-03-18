@@ -6,6 +6,7 @@ import { SC_COLOR_PICKER } from './color-picker';
   selector: '[scColorPickerPreview]',
   host: {
     'data-slot': 'color-picker-preview',
+    'aria-hidden': 'true',
     '[class]': 'class()',
     '[style.background-color]': 'colorPicker.hex()',
   },

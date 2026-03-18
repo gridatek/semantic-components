@@ -8,7 +8,7 @@ import { SC_COLOR_PICKER } from './color-picker';
     'data-slot': 'color-picker-eyedropper',
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'colorPicker.disabled() || !isSupported()',
+    '[disabled]': 'colorPicker.disabled() || !isSupported',
     '(click)': 'pickColor()',
   },
 })
@@ -21,18 +21,16 @@ export class ScColorPickerEyeDropper {
     cn(
       'inline-flex size-9 items-center justify-center rounded-md border border-input bg-background',
       'hover:bg-accent hover:text-accent-foreground',
-      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
       'disabled:pointer-events-none disabled:opacity-50',
       this.classInput(),
     ),
   );
 
-  isSupported(): boolean {
-    return 'EyeDropper' in window;
-  }
+  readonly isSupported = 'EyeDropper' in globalThis;
 
   async pickColor(): Promise<void> {
-    if (!this.isSupported() || this.colorPicker.disabled()) return;
+    if (!this.isSupported || this.colorPicker.disabled()) return;
 
     try {
       // @ts-expect-error EyeDropper API not yet in TypeScript types

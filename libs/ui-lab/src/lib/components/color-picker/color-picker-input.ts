@@ -1,6 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, inputStyles } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
+import { hslToRgb, parseHsl, parseRgb } from './color-utils';
 
 @Directive({
   selector: 'input[scColorPickerInput]',
@@ -11,7 +12,7 @@ import { SC_COLOR_PICKER } from './color-picker';
     '[value]': 'displayValue()',
     '[disabled]': 'colorPicker.disabled()',
     '(input)': 'onInput($event)',
-    '(blur)': 'onBlur()',
+    '(blur)': 'onBlur($event)',
   },
 })
 export class ScColorPickerInput {
@@ -21,12 +22,7 @@ export class ScColorPickerInput {
   readonly format = input<'hex' | 'rgb' | 'hsl'>('hex');
 
   protected readonly class = computed(() =>
-    cn(
-      'flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm font-mono',
-      'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      this.classInput(),
-    ),
+    cn(inputStyles, 'font-mono', this.classInput()),
   );
 
   protected readonly displayValue = computed(() => {
@@ -43,18 +39,35 @@ export class ScColorPickerInput {
   });
 
   onInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const value = input.value.trim();
+    const value = (event.target as HTMLInputElement).value.trim();
 
-    if (this.format() === 'hex') {
-      const hex = value.startsWith('#') ? value : `#${value}`;
-      if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
-        this.colorPicker.setHex(hex);
+    switch (this.format()) {
+      case 'hex': {
+        const hex = value.startsWith('#') ? value : `#${value}`;
+        if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+          this.colorPicker.setHex(hex);
+        }
+        break;
+      }
+      case 'rgb': {
+        const rgb = parseRgb(value);
+        if (rgb) {
+          this.colorPicker.setRgb(rgb);
+        }
+        break;
+      }
+      case 'hsl': {
+        const hsl = parseHsl(value);
+        if (hsl) {
+          const rgb = hslToRgb(hsl.h, hsl.s, hsl.l);
+          this.colorPicker.setRgb(rgb);
+        }
+        break;
       }
     }
   }
 
-  onBlur(): void {
-    // Reset to valid value on blur
+  onBlur(event: Event): void {
+    (event.target as HTMLInputElement).value = this.displayValue();
   }
 }

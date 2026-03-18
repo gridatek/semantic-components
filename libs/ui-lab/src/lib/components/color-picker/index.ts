@@ -1,5 +1,5 @@
 export { SC_COLOR_PICKER, ScColorPicker } from './color-picker';
-export type { HSV, RGB, HSL } from './color-picker';
+export type { HSV, RGB, HSL } from './color-utils';
 export { ScColorPickerArea } from './color-picker-area';
 export { ScColorPickerAreaSaturation } from './color-picker-area-saturation';
 export { ScColorPickerAreaBrightness } from './color-picker-area-brightness';
