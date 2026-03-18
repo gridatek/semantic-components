@@ -22,8 +22,8 @@ export class ScEmojiPickerItem {
 
   protected readonly class = computed(() =>
     cn(
-      'flex items-center justify-center rounded p-1 text-xl hover:bg-accent transition-colors',
-      'focus:outline-none focus:ring-1 focus:ring-ring',
+      'flex size-8 items-center justify-center rounded-md text-xl transition-colors hover:bg-accent',
+      'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
       this.classInput(),
     ),
   );

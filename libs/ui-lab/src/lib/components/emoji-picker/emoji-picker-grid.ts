@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import type { Emoji } from './emoji-picker-state';
 import { ScEmojiPickerState } from './emoji-picker-state';
 
 @Directive({
@@ -7,9 +8,7 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   exportAs: 'scEmojiPickerGrid',
   host: {
     'data-slot': 'emoji-picker-grid',
-    role: 'grid',
     '[class]': 'class()',
-    '[style.grid-template-columns]': 'state.gridColumns()',
   },
 })
 export class ScEmojiPickerGrid {
@@ -18,7 +17,7 @@ export class ScEmojiPickerGrid {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('grid content-start gap-1 overflow-y-auto p-2 h-64', this.classInput()),
+    cn('block h-64 overflow-y-auto p-2', this.classInput()),
   );
 
   readonly emojis = computed(() =>
@@ -32,4 +31,14 @@ export class ScEmojiPickerGrid {
       this.state.searchQuery() !== '' &&
       this.state.filteredEmojis().length === 0,
   );
+
+  readonly rows = computed(() => {
+    const items = this.emojis();
+    const cols = this.state.columns();
+    const result: Emoji[][] = [];
+    for (let i = 0; i < items.length; i += cols) {
+      result.push(items.slice(i, i + cols));
+    }
+    return result;
+  });
 }

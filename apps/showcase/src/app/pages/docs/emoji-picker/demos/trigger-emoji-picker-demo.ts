@@ -1,3 +1,4 @@
+import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScPopover,
@@ -21,6 +22,10 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-trigger-emoji-picker-demo',
   imports: [
+    Grid,
+    GridRow,
+    GridCell,
+    GridCellWidget,
     ScPopoverProvider,
     ScPopoverTrigger,
     ScPopoverPortal,
@@ -55,17 +60,36 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
             </div>
             <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
               @if (grid.isEmpty()) {
-                <p
-                  class="text-muted-foreground col-span-full p-2 text-center text-sm"
-                >
+                <div class="text-muted-foreground p-4 text-center text-sm">
                   No emoji found
-                </p>
+                </div>
               } @else {
-                @for (emoji of grid.emojis(); track emoji.emoji) {
-                  <button scEmojiPickerItem [emoji]="emoji">
-                    {{ emoji.emoji }}
-                  </button>
-                }
+                <table
+                  ngGrid
+                  tabindex="0"
+                  aria-label="Emoji grid"
+                  class="w-full table-fixed border-collapse"
+                  colWrap="continuous"
+                  rowWrap="continuous"
+                >
+                  <tbody>
+                    @for (row of grid.rows(); track $index) {
+                      <tr ngGridRow>
+                        @for (emoji of row; track emoji.emoji) {
+                          <td ngGridCell class="p-0 text-center">
+                            <button
+                              ngGridCellWidget
+                              scEmojiPickerItem
+                              [emoji]="emoji"
+                            >
+                              {{ emoji.emoji }}
+                            </button>
+                          </td>
+                        }
+                      </tr>
+                    }
+                  </tbody>
+                </table>
               }
             </div>
             <div scEmojiPickerRecent #recent="scEmojiPickerRecent">
