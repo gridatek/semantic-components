@@ -35,6 +35,8 @@
     "d3-shape": "^3.2.0",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
+    "emojibase": "^17.0.0",
+    "emojibase-data": "^17.0.0",
     "express": "^5.1.0",
     "libphonenumber-js": "^1.12.40",
     "motion": "^12.36.0",

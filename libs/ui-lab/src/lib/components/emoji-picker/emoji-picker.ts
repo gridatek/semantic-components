@@ -37,7 +37,7 @@ export class ScEmojiPicker {
 
   protected readonly class = computed(() =>
     cn(
-      'block w-72 rounded-lg border bg-popover text-popover-foreground shadow-md',
+      'block w-72 overflow-hidden rounded-lg border bg-popover text-popover-foreground shadow-md',
       this.classInput(),
     ),
   );
