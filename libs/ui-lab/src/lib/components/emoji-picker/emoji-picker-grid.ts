@@ -18,7 +18,7 @@ export class ScEmojiPickerGrid {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('grid gap-1 overflow-y-auto p-2 h-64', this.classInput()),
+    cn('grid content-start gap-1 overflow-y-auto p-2 h-64', this.classInput()),
   );
 
   readonly emojis = computed(() =>
