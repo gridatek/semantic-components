@@ -11,6 +11,7 @@ import {
   ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
   ScEmojiPickerGrid,
+  ScEmojiPickerItem,
 } from '@semantic-components/ui-lab';
 import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
 
@@ -26,6 +27,7 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
     ScEmojiPickerCategoryTabs,
     ScEmojiPickerCategoryTab,
     ScEmojiPickerGrid,
+    ScEmojiPickerItem,
   ],
   template: `
     <div class="max-w-md rounded-lg border p-4">
@@ -67,7 +69,21 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
                   </button>
                 }
               </div>
-              <div scEmojiPickerGrid></div>
+              <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+                @if (grid.isEmpty()) {
+                  <p
+                    class="text-muted-foreground col-span-full p-2 text-center text-sm"
+                  >
+                    No emoji found
+                  </p>
+                } @else {
+                  @for (emoji of grid.emojis(); track emoji.emoji) {
+                    <button scEmojiPickerItem [emoji]="emoji">
+                      {{ emoji.emoji }}
+                    </button>
+                  }
+                }
+              </div>
             </div>
           </div>
         </ng-template>

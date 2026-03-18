@@ -4,6 +4,7 @@ import {
   ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
   ScEmojiPickerGrid,
+  ScEmojiPickerItem,
   ScEmojiPickerSearch,
 } from '@semantic-components/ui-lab';
 
@@ -15,6 +16,7 @@ import {
     ScEmojiPickerCategoryTabs,
     ScEmojiPickerCategoryTab,
     ScEmojiPickerGrid,
+    ScEmojiPickerItem,
   ],
   template: `
     <div scEmojiPicker>
@@ -28,7 +30,19 @@ import {
           </button>
         }
       </div>
-      <div scEmojiPickerGrid></div>
+      <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+        @if (grid.isEmpty()) {
+          <p
+            class="text-muted-foreground col-span-full p-2 text-center text-sm"
+          >
+            No emoji found
+          </p>
+        } @else {
+          @for (emoji of grid.emojis(); track emoji.emoji) {
+            <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+          }
+        }
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

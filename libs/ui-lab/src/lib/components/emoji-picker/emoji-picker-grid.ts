@@ -1,62 +1,16 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScEmojiPickerItem } from './emoji-picker-item';
 import { ScEmojiPickerState } from './emoji-picker-state';
 
-@Component({
+@Directive({
   selector: 'div[scEmojiPickerGrid]',
-  imports: [ScEmojiPickerItem],
-  template: `
-    @if (state.searchQuery()) {
-      @if (state.filteredEmojis().length > 0) {
-        <div class="p-2">
-          <div
-            class="grid gap-1"
-            [style.grid-template-columns]="state.gridColumns()"
-          >
-            @for (emoji of state.filteredEmojis(); track emoji.emoji) {
-              <button scEmojiPickerItem [emoji]="emoji">
-                {{ emoji.emoji }}
-              </button>
-            }
-          </div>
-        </div>
-      } @else {
-        <ng-content select="[scEmojiPickerEmpty]">
-          <div class="text-muted-foreground p-4 text-center text-sm">
-            No emoji found
-          </div>
-        </ng-content>
-      }
-    } @else {
-      <div class="p-2">
-        <div
-          class="grid gap-1"
-          [style.grid-template-columns]="state.gridColumns()"
-        >
-          @for (emoji of state.activeCategoryEmojis(); track emoji.emoji) {
-            <button scEmojiPickerItem [emoji]="emoji">
-              {{ emoji.emoji }}
-            </button>
-          }
-        </div>
-      </div>
-    }
-  `,
+  exportAs: 'scEmojiPickerGrid',
   host: {
     'data-slot': 'emoji-picker-grid',
     role: 'grid',
     '[class]': 'class()',
+    '[style.grid-template-columns]': 'state.gridColumns()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEmojiPickerGrid {
   readonly state = inject(ScEmojiPickerState);
@@ -64,6 +18,18 @@ export class ScEmojiPickerGrid {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('block h-64 overflow-y-auto', this.classInput()),
+    cn('grid gap-1 overflow-y-auto p-2 h-64', this.classInput()),
+  );
+
+  readonly emojis = computed(() =>
+    this.state.searchQuery()
+      ? this.state.filteredEmojis()
+      : this.state.activeCategoryEmojis(),
+  );
+
+  readonly isEmpty = computed(
+    () =>
+      this.state.searchQuery() !== '' &&
+      this.state.filteredEmojis().length === 0,
   );
 }

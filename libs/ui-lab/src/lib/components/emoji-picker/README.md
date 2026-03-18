@@ -6,11 +6,11 @@ A composable, searchable emoji picker built from directive primitives.
 
 - `ScEmojiPicker` - Root provider (manages state, provides `ScEmojiPickerState`)
 - `ScEmojiPickerSearch` - Search input directive
-- `ScEmojiPickerCategoryTabs` - Category tab bar
-- `ScEmojiPickerGrid` - Emoji grid (shows search results or active category)
+- `ScEmojiPickerCategoryTabs` - Category tab bar (`exportAs: 'scEmojiPickerCategoryTabs'`)
+- `ScEmojiPickerCategoryTab` - Individual category tab button directive
+- `ScEmojiPickerGrid` - Emoji grid directive (`exportAs: 'scEmojiPickerGrid'`), exposes `emojis()` and `isEmpty()`
 - `ScEmojiPickerItem` - Individual emoji button directive
-- `ScEmojiPickerRecent` - Recently used section
-- `ScEmojiPickerEmpty` - Custom empty state directive
+- `ScEmojiPickerRecent` - Recently used section directive (`exportAs: 'scEmojiPickerRecent'`), exposes `visible()`
 - `ScEmojiPickerTrigger` - Button trigger for use with popover
 
 ## Usage
@@ -19,12 +19,26 @@ A composable, searchable emoji picker built from directive primitives.
 
 ```html
 <div scEmojiPicker (emojiSelect)="onEmojiSelect($event)">
-  <div class="border-b p-2">
+  <div class="p-2">
     <input scEmojiPickerSearch />
   </div>
-  <div scEmojiPickerCategoryTabs></div>
-  <div scEmojiPickerGrid></div>
-  <div scEmojiPickerRecent></div>
+  <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+    @for (category of tabs.state.categories(); track category.id) {
+    <button scEmojiPickerCategoryTab [category]="category">{{ category.icon }}</button>
+    }
+  </div>
+  <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+    @if (grid.isEmpty()) {
+    <p class="text-muted-foreground col-span-full p-2 text-center text-sm">No emoji found</p>
+    } @else { @for (emoji of grid.emojis(); track emoji.emoji) {
+    <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+    } }
+  </div>
+  <div scEmojiPickerRecent #recent="scEmojiPickerRecent">
+    @for (emoji of recent.state.recentEmojis(); track emoji.emoji) {
+    <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+    }
+  </div>
 </div>
 ```
 
@@ -32,8 +46,16 @@ A composable, searchable emoji picker built from directive primitives.
 
 ```html
 <div scEmojiPicker (emojiSelect)="onEmojiSelect($event)">
-  <div scEmojiPickerCategoryTabs></div>
-  <div scEmojiPickerGrid></div>
+  <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+    @for (category of tabs.state.categories(); track category.id) {
+    <button scEmojiPickerCategoryTab [category]="category">{{ category.icon }}</button>
+    }
+  </div>
+  <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+    @for (emoji of grid.emojis(); track emoji.emoji) {
+    <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+    }
+  </div>
 </div>
 ```
 
@@ -41,10 +63,16 @@ A composable, searchable emoji picker built from directive primitives.
 
 ```html
 <div scEmojiPicker (emojiSelect)="onEmojiSelect($event)">
-  <div class="border-b p-2">
+  <div class="p-2">
     <input scEmojiPickerSearch />
   </div>
-  <div scEmojiPickerGrid></div>
+  <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+    @if (grid.isEmpty()) {
+    <p class="text-muted-foreground col-span-full p-2 text-center text-sm">No emoji found</p>
+    } @else { @for (emoji of grid.emojis(); track emoji.emoji) {
+    <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+    } }
+  </div>
 </div>
 ```
 
@@ -52,11 +80,15 @@ A composable, searchable emoji picker built from directive primitives.
 
 ```html
 <div scEmojiPicker>
-  <div class="border-b p-2">
+  <div class="p-2">
     <input scEmojiPickerSearch />
   </div>
-  <div scEmojiPickerGrid>
-    <div scEmojiPickerEmpty>No results. Try a different search term.</div>
+  <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+    @if (grid.isEmpty()) {
+    <div class="p-4 text-center">No results. Try a different search term.</div>
+    } @else { @for (emoji of grid.emojis(); track emoji.emoji) {
+    <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+    } }
   </div>
 </div>
 ```
@@ -66,18 +98,32 @@ A composable, searchable emoji picker built from directive primitives.
 ```html
 <div scPopoverProvider>
   <button scPopoverTrigger scEmojiPickerTrigger></button>
-  <div scPopoverPortal>
+  <ng-template scPopoverPortal>
     <div scPopover>
       <div scEmojiPicker (emojiSelect)="insertEmoji($event)">
-        <div class="border-b p-2">
+        <div class="p-2">
           <input scEmojiPickerSearch />
         </div>
-        <div scEmojiPickerCategoryTabs></div>
-        <div scEmojiPickerGrid></div>
-        <div scEmojiPickerRecent></div>
+        <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+          @for (category of tabs.state.categories(); track category.id) {
+          <button scEmojiPickerCategoryTab [category]="category">{{ category.icon }}</button>
+          }
+        </div>
+        <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+          @if (grid.isEmpty()) {
+          <p class="text-muted-foreground col-span-full p-2 text-center text-sm">No emoji found</p>
+          } @else { @for (emoji of grid.emojis(); track emoji.emoji) {
+          <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+          } }
+        </div>
+        <div scEmojiPickerRecent #recent="scEmojiPickerRecent">
+          @for (emoji of recent.state.recentEmojis(); track emoji.emoji) {
+          <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+          }
+        </div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>
 ```
 
@@ -85,8 +131,16 @@ A composable, searchable emoji picker built from directive primitives.
 
 ```html
 <div scEmojiPicker [(value)]="selectedEmoji">
-  <div scEmojiPickerCategoryTabs></div>
-  <div scEmojiPickerGrid></div>
+  <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+    @for (category of tabs.state.categories(); track category.id) {
+    <button scEmojiPickerCategoryTab [category]="category">{{ category.icon }}</button>
+    }
+  </div>
+  <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+    @for (emoji of grid.emojis(); track emoji.emoji) {
+    <button scEmojiPickerItem [emoji]="emoji">{{ emoji.emoji }}</button>
+    }
+  </div>
 </div>
 ```
 
@@ -112,11 +166,21 @@ Attribute directive for `<input>` elements. Automatically binds to the picker's 
 
 ### ScEmojiPickerCategoryTabs
 
-Renders category tab buttons from the picker's categories.
+Directive with `exportAs: 'scEmojiPickerCategoryTabs'`. Exposes `state` for accessing `categories()`. Consumers write the `@for` loop.
+
+### ScEmojiPickerCategoryTab
+
+Attribute directive for category tab buttons. Requires a `category` input.
 
 ### ScEmojiPickerGrid
 
-Displays the emoji grid. Shows search results when searching, otherwise shows the active category.
+Directive with `exportAs: 'scEmojiPickerGrid'`. Exposes:
+
+- `emojis()` — returns filtered emojis when searching, active category emojis otherwise
+- `isEmpty()` — `true` when search is active and no results found
+- `state` — the underlying `ScEmojiPickerState`
+
+Consumers write the `@for` loop and empty state `@if` check.
 
 ### ScEmojiPickerItem
 
@@ -124,11 +188,12 @@ Attribute directive for emoji buttons. Requires an `emoji` input.
 
 ### ScEmojiPickerRecent
 
-Displays recently used emojis. Auto-hides when empty or when searching.
+Directive with `exportAs: 'scEmojiPickerRecent'`. Exposes:
 
-### ScEmojiPickerEmpty
+- `visible()` — `true` when there are recent emojis and not searching
+- `state` — the underlying `ScEmojiPickerState`
 
-Attribute directive for custom empty state content inside `ScEmojiPickerGrid`.
+Auto-hides via `[hidden]` when not visible. Consumers write the `@for` loop.
 
 ## Types
 
