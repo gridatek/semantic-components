@@ -59,7 +59,7 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
         <ng-template scPopoverPortal>
-          <div scPopover>
+          <div scPopover class="w-auto p-0 ring-0">
             <div
               scEmojiPicker
               (emojiSelect)="insertEmoji($event)"
