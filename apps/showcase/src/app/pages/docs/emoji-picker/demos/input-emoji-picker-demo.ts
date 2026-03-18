@@ -42,43 +42,45 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
     ScEmojiPickerTrigger,
   ],
   template: `
-    <div scPopoverProvider [origin]="origin" align="start">
-      <div scInputGroup cdkOverlayOrigin #origin="cdkOverlayOrigin">
-        <input
-          scInput
-          type="text"
-          [value]="inputValue()"
-          (input)="onInputChange($event)"
-          placeholder="Type a message..."
-        />
-        <div scInputGroupAddon align="inline-end">
-          <button scEmojiPickerTrigger scPopoverTrigger>
-            <svg siSmileIcon class="size-4"></svg>
-          </button>
-        </div>
-      </div>
-      <ng-template scPopoverPortal>
-        <div scPopover>
-          <div
-            scEmojiPicker
-            (emojiSelect)="insertEmoji($event)"
-            [maxRecent]="6"
-          >
-            <div class="p-2">
-              <input scEmojiPickerSearch />
-            </div>
-            <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
-              @for (category of tabs.state.categories(); track category.id) {
-                <button scEmojiPickerCategoryTab [category]="category">
-                  {{ category.icon }}
-                </button>
-              }
-            </div>
-            <div scEmojiPickerGrid></div>
-            <div scEmojiPickerRecent></div>
+    <div class="w-full max-w-sm">
+      <div scPopoverProvider [origin]="origin" align="start">
+        <div scInputGroup cdkOverlayOrigin #origin="cdkOverlayOrigin">
+          <input
+            scInput
+            type="text"
+            [value]="inputValue()"
+            (input)="onInputChange($event)"
+            placeholder="Type a message..."
+          />
+          <div scInputGroupAddon align="inline-end">
+            <button scEmojiPickerTrigger scPopoverTrigger>
+              <svg siSmileIcon class="size-4"></svg>
+            </button>
           </div>
         </div>
-      </ng-template>
+        <ng-template scPopoverPortal>
+          <div scPopover>
+            <div
+              scEmojiPicker
+              (emojiSelect)="insertEmoji($event)"
+              [maxRecent]="6"
+            >
+              <div class="p-2">
+                <input scEmojiPickerSearch />
+              </div>
+              <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+                @for (category of tabs.state.categories(); track category.id) {
+                  <button scEmojiPickerCategoryTab [category]="category">
+                    {{ category.icon }}
+                  </button>
+                }
+              </div>
+              <div scEmojiPickerGrid></div>
+              <div scEmojiPickerRecent></div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
