@@ -10,6 +10,7 @@ import { CompactColorPickerDemoContainer } from './demos/compact-color-picker-de
 import { EyedropperColorPickerDemoContainer } from './demos/eyedropper-color-picker-demo-container';
 import { FullColorPickerDemoContainer } from './demos/full-color-picker-demo-container';
 import { HslColorPickerDemoContainer } from './demos/hsl-color-picker-demo-container';
+import { OklchColorPickerDemoContainer } from './demos/oklch-color-picker-demo-container';
 import { PreviewColorPickerDemoContainer } from './demos/preview-color-picker-demo-container';
 import { RgbColorPickerDemoContainer } from './demos/rgb-color-picker-demo-container';
 import { SimpleColorPickerDemoContainer } from './demos/simple-color-picker-demo-container';
@@ -25,6 +26,7 @@ import { SwatchesColorPickerDemoContainer } from './demos/swatches-color-picker-
     CompactColorPickerDemoContainer,
     RgbColorPickerDemoContainer,
     HslColorPickerDemoContainer,
+    OklchColorPickerDemoContainer,
     PreviewColorPickerDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -49,6 +51,7 @@ import { SwatchesColorPickerDemoContainer } from './demos/swatches-color-picker-
         <app-compact-color-picker-demo-container />
         <app-rgb-color-picker-demo-container />
         <app-hsl-color-picker-demo-container />
+        <app-oklch-color-picker-demo-container />
         <app-preview-color-picker-demo-container />
       </section>
     </div>

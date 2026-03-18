@@ -11,15 +11,18 @@ import { cn } from '@semantic-components/ui';
 import {
   type HSL,
   type HSV,
+  type OKLCH,
   type RGB,
   hexToRgb,
   hsvToRgb,
+  oklchToRgb,
   rgbToHex,
   rgbToHsl,
   rgbToHsv,
+  rgbToOklch,
 } from './color-utils';
 
-export { type HSV, type RGB, type HSL } from './color-utils';
+export { type HSV, type RGB, type HSL, type OKLCH } from './color-utils';
 
 export const SC_COLOR_PICKER = new InjectionToken<ScColorPicker>(
   'SC_COLOR_PICKER',
@@ -58,6 +61,10 @@ export class ScColorPicker {
   readonly hex = computed(() => {
     const { r, g, b } = this.rgb();
     return rgbToHex(r, g, b);
+  });
+  readonly oklch = computed(() => {
+    const { r, g, b } = this.rgb();
+    return rgbToOklch(r, g, b);
   });
 
   constructor() {
@@ -101,6 +108,12 @@ export class ScColorPicker {
       const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
       this.setHsv(hsv);
     }
+  }
+
+  setOklch(oklch: OKLCH): void {
+    const rgb = oklchToRgb(oklch.l, oklch.c, oklch.h);
+    const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+    this.setHsv(hsv);
   }
 
   setHue(h: number): void {

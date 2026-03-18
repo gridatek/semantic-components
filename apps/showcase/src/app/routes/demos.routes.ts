@@ -817,6 +817,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'oklch-color-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker/demos/oklch-color-picker-demo').then(
+            (m) => m.default,
+          ),
+      },
+      {
         path: 'preview-color-picker-demo',
         loadComponent: () =>
           import('../pages/docs/color-picker/demos/preview-color-picker-demo').then(

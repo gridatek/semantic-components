@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn, inputStyles } from '@semantic-components/ui';
 import { SC_COLOR_PICKER } from './color-picker';
-import { hslToRgb, parseHsl, parseRgb } from './color-utils';
+import { hslToRgb, parseHsl, parseOklch, parseRgb } from './color-utils';
 
 @Directive({
   selector: 'input[scColorPickerInput]',
@@ -19,22 +19,28 @@ export class ScColorPickerInput {
   readonly colorPicker = inject(SC_COLOR_PICKER);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly format = input<'hex' | 'rgb' | 'hsl'>('hex');
+  readonly format = input<'hex' | 'rgb' | 'hsl' | 'oklch'>('hex');
 
   protected readonly class = computed(() =>
     cn(inputStyles, 'font-mono', this.classInput()),
   );
 
   protected readonly displayValue = computed(() => {
-    const fmt = this.format();
-    if (fmt === 'hex') {
-      return this.colorPicker.hex().toUpperCase();
-    } else if (fmt === 'rgb') {
-      const { r, g, b } = this.colorPicker.rgb();
-      return `rgb(${r}, ${g}, ${b})`;
-    } else {
-      const { h, s, l } = this.colorPicker.hsl();
-      return `hsl(${h}, ${s}%, ${l}%)`;
+    switch (this.format()) {
+      case 'hex':
+        return this.colorPicker.hex().toUpperCase();
+      case 'rgb': {
+        const { r, g, b } = this.colorPicker.rgb();
+        return `rgb(${r}, ${g}, ${b})`;
+      }
+      case 'hsl': {
+        const { h, s, l } = this.colorPicker.hsl();
+        return `hsl(${h}, ${s}%, ${l}%)`;
+      }
+      case 'oklch': {
+        const { l, c, h } = this.colorPicker.oklch();
+        return `oklch(${l} ${c} ${h})`;
+      }
     }
   });
 
@@ -61,6 +67,13 @@ export class ScColorPickerInput {
         if (hsl) {
           const rgb = hslToRgb(hsl.h, hsl.s, hsl.l);
           this.colorPicker.setRgb(rgb);
+        }
+        break;
+      }
+      case 'oklch': {
+        const oklch = parseOklch(value);
+        if (oklch) {
+          this.colorPicker.setOklch(oklch);
         }
         break;
       }
