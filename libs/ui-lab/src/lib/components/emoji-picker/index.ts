@@ -1,4 +1,5 @@
 export { ScEmojiPicker } from './emoji-picker';
+export { ScEmojiPickerCategoryTab } from './emoji-picker-category-tab';
 export { ScEmojiPickerCategoryTabs } from './emoji-picker-category-tabs';
 export { DEFAULT_CATEGORIES } from './emoji-picker-data';
 export { ScEmojiPickerEmpty } from './emoji-picker-empty';

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScEmojiPicker,
+  ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
   ScEmojiPickerGrid,
   ScEmojiPickerSearch,
@@ -12,6 +13,7 @@ import {
     ScEmojiPicker,
     ScEmojiPickerSearch,
     ScEmojiPickerCategoryTabs,
+    ScEmojiPickerCategoryTab,
     ScEmojiPickerGrid,
   ],
   template: `
@@ -19,7 +21,13 @@ import {
       <div class="p-2">
         <input scEmojiPickerSearch />
       </div>
-      <div scEmojiPickerCategoryTabs></div>
+      <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+        @for (category of tabs.state.categories(); track category.id) {
+          <button scEmojiPickerCategoryTab [category]="category">
+            {{ category.icon }}
+          </button>
+        }
+      </div>
       <div scEmojiPickerGrid></div>
     </div>
   `,

@@ -3,6 +3,7 @@ import { ScInput } from '@semantic-components/ui';
 import {
   Emoji,
   ScEmojiPicker,
+  ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
   ScEmojiPickerGrid,
   ScEmojiPickerRecent,
@@ -18,6 +19,7 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
     ScEmojiPicker,
     ScEmojiPickerSearch,
     ScEmojiPickerCategoryTabs,
+    ScEmojiPickerCategoryTab,
     ScEmojiPickerGrid,
     ScEmojiPickerRecent,
   ],
@@ -51,7 +53,13 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
               <div class="p-2">
                 <input scEmojiPickerSearch />
               </div>
-              <div scEmojiPickerCategoryTabs></div>
+              <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+                @for (category of tabs.state.categories(); track category.id) {
+                  <button scEmojiPickerCategoryTab [category]="category">
+                    {{ category.icon }}
+                  </button>
+                }
+              </div>
               <div scEmojiPickerGrid></div>
               <div scEmojiPickerRecent></div>
             </div>

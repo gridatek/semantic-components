@@ -1,28 +1,13 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
-import { SiSmileIcon } from '@semantic-icons/lucide-icons';
 
-@Component({
+@Directive({
   selector: 'button[scEmojiPickerTrigger]',
-  imports: [SiSmileIcon],
-  template: `
-    <ng-content>
-      <svg siSmileIcon class="size-4"></svg>
-    </ng-content>
-  `,
   host: {
     'data-slot': 'emoji-picker-trigger',
     type: 'button',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScEmojiPickerTrigger {
   readonly classInput = input<string>('', { alias: 'class' });

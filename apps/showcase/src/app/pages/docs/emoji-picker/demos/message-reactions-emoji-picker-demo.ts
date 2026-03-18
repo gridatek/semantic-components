@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   Emoji,
   ScEmojiPicker,
+  ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
   ScEmojiPickerGrid,
 } from '@semantic-components/ui-lab';
@@ -13,6 +14,7 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
     SiCirclePlusIcon,
     ScEmojiPicker,
     ScEmojiPickerCategoryTabs,
+    ScEmojiPickerCategoryTab,
     ScEmojiPickerGrid,
   ],
   template: `
@@ -49,7 +51,13 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
             [columns]="6"
             (emojiSelect)="addReaction($event)"
           >
-            <div scEmojiPickerCategoryTabs></div>
+            <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+              @for (category of tabs.state.categories(); track category.id) {
+                <button scEmojiPickerCategoryTab [category]="category">
+                  {{ category.icon }}
+                </button>
+              }
+            </div>
             <div scEmojiPickerGrid></div>
           </div>
         </div>
