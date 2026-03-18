@@ -1,3 +1,4 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
   ScInput,
@@ -23,6 +24,7 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-input-emoji-picker-demo',
   imports: [
+    CdkOverlayOrigin,
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
@@ -40,8 +42,8 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
     ScEmojiPickerTrigger,
   ],
   template: `
-    <div scPopoverProvider>
-      <div scInputGroup>
+    <div scPopoverProvider [origin]="origin">
+      <div scInputGroup cdkOverlayOrigin #origin="cdkOverlayOrigin">
         <input
           scInput
           type="text"
