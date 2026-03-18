@@ -191,8 +191,7 @@
     "description": "A component for selecting colors.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Combobox",
