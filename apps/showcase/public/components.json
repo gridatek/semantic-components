@@ -317,8 +317,7 @@
     "description": "A picker for selecting emojis.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Empty",
