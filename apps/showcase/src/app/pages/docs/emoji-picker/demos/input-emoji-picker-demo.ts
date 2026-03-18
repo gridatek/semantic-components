@@ -1,5 +1,13 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScInput } from '@semantic-components/ui';
+import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
+import {
+  ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+} from '@semantic-components/ui';
 import {
   Emoji,
   ScEmojiPicker,
@@ -8,6 +16,7 @@ import {
   ScEmojiPickerGrid,
   ScEmojiPickerRecent,
   ScEmojiPickerSearch,
+  ScEmojiPickerTrigger,
 } from '@semantic-components/ui-lab';
 import { SiSmileIcon } from '@semantic-icons/lucide-icons';
 
@@ -15,6 +24,12 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-input-emoji-picker-demo',
   imports: [
     ScInput,
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScPopoverProvider,
+    ScPopoverTrigger,
+    ScPopoverPortal,
+    ScPopover,
     SiSmileIcon,
     ScEmojiPicker,
     ScEmojiPickerSearch,
@@ -22,29 +37,27 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
     ScEmojiPickerCategoryTab,
     ScEmojiPickerGrid,
     ScEmojiPickerRecent,
+    ScEmojiPickerTrigger,
   ],
   template: `
     <div class="flex w-full max-w-sm items-start gap-2">
-      <div class="flex-1">
-        <div class="relative">
+      <div class="flex-1" scPopoverProvider>
+        <div scInputGroup>
           <input
             scInput
             type="text"
             [value]="inputValue()"
             (input)="onInputChange($event)"
             placeholder="Type a message..."
-            class="pr-10"
           />
-          <button
-            type="button"
-            class="hover:bg-accent absolute top-1/2 right-2 -translate-y-1/2 rounded p-1"
-            (click)="togglePicker()"
-          >
-            <svg siSmileIcon class="text-muted-foreground size-4"></svg>
-          </button>
+          <div scInputGroupAddon align="inline-end">
+            <button scEmojiPickerTrigger scPopoverTrigger>
+              <svg siSmileIcon class="size-4"></svg>
+            </button>
+          </div>
         </div>
-        @if (showInputPicker()) {
-          <div class="mt-2">
+        <ng-template scPopoverPortal>
+          <div scPopover>
             <div
               scEmojiPicker
               (emojiSelect)="insertEmoji($event)"
@@ -64,7 +77,7 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
               <div scEmojiPickerRecent></div>
             </div>
           </div>
-        }
+        </ng-template>
       </div>
     </div>
   `,
@@ -72,20 +85,17 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputEmojiPickerDemo {
+  private readonly popoverProvider = viewChild.required(ScPopoverProvider);
+
   readonly inputValue = signal('');
-  readonly showInputPicker = signal(false);
 
   onInputChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.inputValue.set(input.value);
   }
 
-  togglePicker(): void {
-    this.showInputPicker.set(!this.showInputPicker());
-  }
-
   insertEmoji(emoji: Emoji): void {
     this.inputValue.update((v) => v + emoji.emoji);
-    this.showInputPicker.set(false);
+    this.popoverProvider().close();
   }
 }
