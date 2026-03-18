@@ -42,7 +42,7 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
     ScEmojiPickerTrigger,
   ],
   template: `
-    <div scPopoverProvider [origin]="origin">
+    <div scPopoverProvider [origin]="origin" align="start">
       <div scInputGroup cdkOverlayOrigin #origin="cdkOverlayOrigin">
         <input
           scInput
