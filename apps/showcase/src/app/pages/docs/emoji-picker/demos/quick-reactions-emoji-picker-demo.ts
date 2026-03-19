@@ -11,6 +11,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
         <button
           type="button"
           class="hover:bg-accent rounded-full p-2 text-xl transition-colors"
+          [attr.aria-label]="'React with ' + emoji"
           (click)="onQuickReaction(emoji)"
         >
           {{ emoji }}
