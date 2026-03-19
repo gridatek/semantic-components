@@ -485,11 +485,10 @@
   {
     "name": "Mention Input",
     "path": "mention-input",
-    "description": "An input with mention suggestions.",
+    "description": "A textarea with inline mention suggestions triggered by a configurable character.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Menu",
