@@ -79,28 +79,27 @@ export class ScPdfViewerRoot {
   readonly hasSource = computed(() => !!this.src());
   readonly showContent = computed(() => this.hasSource() && !this.error());
 
+  private workerReady = false;
+
   constructor() {
     this.currentPage.set(this.initialPage());
     this.zoom.set(this.initialZoom());
 
+    // Initialize worker and load initial document after first render
     afterNextRender(() => {
       this.initWorker();
+      this.workerReady = true;
 
-      // Load initial document after worker is ready
       const source = this.src();
       if (source) {
         this.loadDocument(source);
       }
     });
 
-    // Watch for src changes after initial load
-    let initialized = false;
+    // Watch src for subsequent changes (after worker is ready)
     effect(() => {
       const source = this.src();
-      if (!initialized) {
-        initialized = true;
-        return;
-      }
+      if (!this.workerReady) return;
       if (source) {
         this.loadDocument(source);
       }
