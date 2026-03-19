@@ -920,8 +920,7 @@
     "description": "Move items between two lists.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Tree",
