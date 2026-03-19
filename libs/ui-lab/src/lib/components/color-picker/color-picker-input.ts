@@ -11,6 +11,7 @@ import { hslToRgb, parseHsl, parseOklch, parseRgb } from './color-utils';
     '[class]': 'class()',
     '[value]': 'displayValue()',
     '[disabled]': 'colorPicker.disabled()',
+    '[attr.aria-label]': 'ariaLabel()',
     '(input)': 'onInput($event)',
     '(blur)': 'onBlur($event)',
   },
@@ -19,7 +20,14 @@ export class ScColorPickerInput {
   readonly colorPicker = inject(SC_COLOR_PICKER);
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly ariaLabelInput = input('', { alias: 'aria-label' });
   readonly format = input<'hex' | 'rgb' | 'hsl' | 'oklch'>('hex');
+
+  protected readonly ariaLabel = computed(
+    () =>
+      this.ariaLabelInput() ||
+      `Color value in ${this.format().toUpperCase()} format`,
+  );
 
   protected readonly class = computed(() =>
     cn(inputStyles, 'font-mono', this.classInput()),
