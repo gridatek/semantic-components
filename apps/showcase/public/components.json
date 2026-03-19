@@ -481,8 +481,7 @@
     "description": "Pinterest-style layout with varying item heights.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Layout",
-    "hidden": true
+    "category": "Layout"
   },
   {
     "name": "Mention Input",
