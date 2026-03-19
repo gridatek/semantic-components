@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScCalendar,
@@ -10,6 +11,7 @@ import {
   ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
+  ScDateRange,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -46,10 +48,11 @@ import {
   template: `
     <div class="space-y-4">
       <p class="text-muted-foreground text-sm">
-        Restrict selection to dates within the last 30 days.
+        Only dates within the last 30 days can be selected.
       </p>
       <div
         scDateRangePicker
+        [(value)]="range"
         placeholder="Select within last 30 days"
         #drp="scDateRangePicker"
       >
@@ -121,6 +124,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConstrainedDateRangePickerDemo {
+  readonly range = signal<ScDateRange>({ from: undefined, to: undefined });
   readonly minDate = Temporal.Now.plainDateISO().subtract({ days: 30 });
   readonly maxDate = Temporal.Now.plainDateISO();
 }
