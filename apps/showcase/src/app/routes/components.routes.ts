@@ -446,6 +446,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/progress/progress-page'),
       },
       {
+        path: 'query-param-state',
+        title: 'Query Param State - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/query-param-state/query-param-state-page'),
+      },
+      {
         path: 'qr-code',
         title: 'QR Code - Semantic Components',
         loadComponent: () => import('../pages/docs/qr-code/qr-code-page'),

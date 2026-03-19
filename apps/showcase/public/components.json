@@ -641,6 +641,14 @@
     "category": "Media"
   },
   {
+    "name": "Query Param State",
+    "path": "query-param-state",
+    "description": "Type-safe, signal-based URL query parameter state management inspired by nuqs.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Utilities"
+  },
+  {
     "name": "Radio Group",
     "path": "radio-group",
     "description": "A group of radio buttons for single selection.",
