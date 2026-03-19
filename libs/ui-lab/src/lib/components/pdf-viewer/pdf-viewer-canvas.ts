@@ -82,6 +82,7 @@ export class ScPdfViewerCanvas {
   private renderedPages = new Set<number>();
   private observer: IntersectionObserver | null = null;
   private renderTimeout: ReturnType<typeof setTimeout> | null = null;
+  private scrollHandler: (() => void) | null = null;
 
   readonly scaledValue = computed(() => {
     const z = this.zoom();
@@ -158,6 +159,10 @@ export class ScPdfViewerCanvas {
       if (this.renderTimeout) {
         clearTimeout(this.renderTimeout);
       }
+      const scrollEl = this.scrollContainer()?.nativeElement;
+      if (scrollEl && this.scrollHandler) {
+        scrollEl.removeEventListener('scroll', this.scrollHandler);
+      }
     });
   }
 
@@ -215,9 +220,10 @@ export class ScPdfViewerCanvas {
       },
     );
 
-    container.addEventListener('scroll', () => {
+    this.scrollHandler = () => {
       this.updateCurrentPageFromScroll(container);
-    });
+    };
+    container.addEventListener('scroll', this.scrollHandler);
   }
 
   private renderVisiblePages(): void {

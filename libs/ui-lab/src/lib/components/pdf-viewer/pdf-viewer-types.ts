@@ -1,15 +1,5 @@
 export type PdfZoomLevel = 'auto' | 'page-fit' | 'page-width' | number;
 
-export interface PdfToolbarConfig {
-  showNavigation?: boolean;
-  showZoom?: boolean;
-  showDownload?: boolean;
-  showPrint?: boolean;
-  showFullscreen?: boolean;
-  showPageInfo?: boolean;
-  showRotate?: boolean;
-}
-
 export interface PdfLoadEvent {
   totalPages: number;
 }
@@ -28,22 +18,6 @@ export interface PdfErrorEvent {
   error: Error;
   message: string;
 }
-
-export interface PdfPageRenderState {
-  pageNumber: number;
-  width: number;
-  height: number;
-}
-
-export const DEFAULT_TOOLBAR_CONFIG: PdfToolbarConfig = {
-  showNavigation: true,
-  showZoom: true,
-  showDownload: true,
-  showPrint: true,
-  showFullscreen: true,
-  showPageInfo: true,
-  showRotate: true,
-};
 
 export const ZOOM_LEVELS: { label: string; value: PdfZoomLevel }[] = [
   { label: 'Auto', value: 'auto' },

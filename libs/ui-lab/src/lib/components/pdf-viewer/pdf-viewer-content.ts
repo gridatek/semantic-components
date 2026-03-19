@@ -1,6 +1,5 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Directive({
   selector: '[scPdfViewerContent]',
@@ -11,7 +10,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
   },
 })
 export class ScPdfViewerContent {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

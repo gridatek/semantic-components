@@ -1,21 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
+@Directive({
   selector: '[scPdfViewerSpacer]',
-  template: ``,
   host: {
     'data-slot': 'pdf-viewer-spacer',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerSpacer {
   readonly classInput = input<string>('', { alias: 'class' });

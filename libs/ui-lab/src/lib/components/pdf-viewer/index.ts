@@ -35,13 +35,11 @@ export { ScPdfViewerEmpty } from './pdf-viewer-empty';
 export { ScPdfViewerRetry } from './pdf-viewer-retry';
 
 // Types
-export { DEFAULT_TOOLBAR_CONFIG, ZOOM_LEVELS } from './pdf-viewer-types';
+export { ZOOM_LEVELS } from './pdf-viewer-types';
 export type {
   PdfZoomLevel,
-  PdfToolbarConfig,
   PdfLoadEvent,
   PdfPageChangeEvent,
   PdfZoomChangeEvent,
   PdfErrorEvent,
-  PdfPageRenderState,
 } from './pdf-viewer-types';

@@ -1,23 +1,14 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
-@Component({
+@Directive({
   selector: '[scPdfViewerSeparator]',
-  template: ``,
   host: {
     'data-slot': 'pdf-viewer-separator',
     role: 'separator',
     '[attr.aria-orientation]': '"vertical"',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerSeparator {
   readonly classInput = input<string>('', { alias: 'class' });

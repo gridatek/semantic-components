@@ -15,7 +15,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
   imports: [SiFileTextIcon],
   template: `
     @if (!pdfViewer.hasSource()) {
-      <div [class]="overlayClass()">
+      <div [class]="overlayClass">
         <ng-content>
           <div class="flex flex-col items-center gap-3 px-4 text-center">
             <div
@@ -31,6 +31,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
   `,
   host: {
     'data-slot': 'pdf-viewer-empty',
+    '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,7 +40,9 @@ export class ScPdfViewerEmpty {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly overlayClass = computed(() =>
-    cn('absolute inset-0 flex items-center justify-center', this.classInput()),
+  protected readonly class = computed(() => cn('block', this.classInput()));
+
+  protected readonly overlayClass = cn(
+    'absolute inset-0 flex items-center justify-center',
   );
 }

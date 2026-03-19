@@ -11,6 +11,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
 import type {
@@ -31,6 +32,7 @@ export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
   providers: [{ provide: SC_PDF_VIEWER, useExisting: ScPdfViewerRoot }],
   host: {
     'data-slot': 'pdf-viewer',
+    '[class]': 'class()',
     '[attr.data-loading]': 'isLoading() || null',
     '[attr.data-error]': 'error() ? true : null',
     '[attr.data-fullscreen]': 'isFullscreen() || null',
@@ -38,6 +40,9 @@ export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
 })
 export class ScPdfViewerRoot {
   private readonly destroyRef = inject(DestroyRef);
+
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() => cn('block', this.classInput()));
 
   // Inputs
   readonly src = input<string>('');
@@ -63,9 +68,6 @@ export class ScPdfViewerRoot {
 
   // PDF.js document
   readonly pdfDocument = signal<PDFDocumentProxy | null>(null);
-
-  // Resolved numeric scale for canvas rendering
-  readonly scale = computed(() => this.resolveScale(this.zoom()));
 
   // Navigation trigger — incremented to signal canvas to scroll to currentPage
   readonly navigateTrigger = signal(0);
@@ -144,15 +146,6 @@ export class ScPdfViewerRoot {
         err instanceof Error ? err.message : 'Unable to load the PDF document.';
       this.onError(message);
     }
-  }
-
-  private resolveScale(level: PdfZoomLevel): number {
-    if (typeof level === 'number') {
-      return level;
-    }
-    // Named zoom levels get resolved by the canvas component
-    // based on container/page dimensions. Return 1 as default.
-    return 1;
   }
 
   // Methods for child components to call
@@ -241,7 +234,7 @@ export class ScPdfViewerRoot {
   }
 
   rotateLeft(): void {
-    this.rotation.update((r) => (r - 90) % 360);
+    this.rotation.update((r) => (((r - 90) % 360) + 360) % 360);
   }
 
   rotateRight(): void {
