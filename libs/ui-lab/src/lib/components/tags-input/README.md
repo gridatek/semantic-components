@@ -4,7 +4,7 @@ A composable multi-tag input component for adding, removing, and navigating tags
 
 ## Components
 
-- `ScTagsInput` - Root container directive (provides `SC_FIELD` integration)
+- `ScTagsInput` - Root container directive (use inside `ScField` for label association)
 - `ScTagsInputItem` - Individual tag chip with keyboard navigation
 - `ScTagsInputItemDelete` - Remove button inside a tag
 - `ScTagsInputControl` - Text input for typing new tags
@@ -16,36 +16,42 @@ A composable multi-tag input component for adding, removing, and navigating tags
 ### Basic Usage
 
 ```html
-<div scTagsInput [(tags)]="tags">
-  @for (tag of tags(); track $index) {
-  <span scTagsInputItem [tag]="tag" [index]="$index">
-    {{ tag }}
-    <button scTagsInputItemDelete>
-      <svg siXIcon class="size-3"></svg>
-    </button>
-  </span>
-  }
-  <input scTagsInputControl />
+<div scField>
+  <label scLabel>Tags</label>
+  <div scTagsInput [(tags)]="tags">
+    @for (tag of tags(); track $index) {
+    <span scTagsInputItem [tag]="tag" [index]="$index">
+      {{ tag }}
+      <button scTagsInputItemDelete>
+        <svg siXIcon class="size-3"></svg>
+      </button>
+    </span>
+    }
+    <input scTagsInputControl />
+  </div>
 </div>
 ```
 
 ### With Clear Button and Count
 
 ```html
-<div scTagsInput [(tags)]="tags" [maxTags]="5">
-  @for (tag of tags(); track $index) {
-  <span scTagsInputItem [tag]="tag" [index]="$index">
-    {{ tag }}
-    <button scTagsInputItemDelete>
-      <svg siXIcon class="size-3"></svg>
+<div scField>
+  <label scLabel>Skills</label>
+  <div scTagsInput [(tags)]="tags" [maxTags]="5">
+    @for (tag of tags(); track $index) {
+    <span scTagsInputItem [tag]="tag" [index]="$index">
+      {{ tag }}
+      <button scTagsInputItemDelete>
+        <svg siXIcon class="size-3"></svg>
+      </button>
+    </span>
+    }
+    <input scTagsInputControl />
+    <span scTagsInputCount class="ml-auto text-xs"></span>
+    <button scTagsInputClear>
+      <svg siXIcon class="size-4"></svg>
     </button>
-  </span>
-  }
-  <input scTagsInputControl />
-  <span scTagsInputCount class="ml-auto text-xs"></span>
-  <button scTagsInputClear>
-    <svg siXIcon class="size-4"></svg>
-  </button>
+  </div>
 </div>
 ```
 
@@ -56,8 +62,6 @@ A composable multi-tag input component for adding, removing, and navigating tags
 | Input             | Type             | Default          | Description                    |
 | ----------------- | ---------------- | ---------------- | ------------------------------ |
 | `class`           | `string`         | `''`             | Additional CSS classes         |
-| `id`              | `string`         | auto-generated   | ID for label association       |
-| `aria-label`      | `string`         | `''`             | Accessible label               |
 | `tags`            | `string[]`       | `[]`             | Two-way binding for tag list   |
 | `placeholder`     | `string`         | `'Add tag...'`   | Input placeholder text         |
 | `disabled`        | `boolean`        | `false`          | Disable the entire component   |
@@ -109,8 +113,7 @@ A composable multi-tag input component for adding, removing, and navigating tags
 
 ## Accessibility
 
-- Root has `role="group"` on `<div>` (omitted on `<label>` for native semantics)
-- Provides `SC_FIELD` for label/description association
+- Use inside `<div scField>` with `<label scLabel>` for label association
 - Roving `tabindex` on tags for keyboard navigation
 - Count element has `role="status"` with `aria-live="polite"` for screen reader announcements
 - Remove buttons have computed `aria-label` (e.g. "Remove Angular")

@@ -1,43 +1,31 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
   InjectionToken,
   computed,
-  inject,
   input,
   model,
   output,
   signal,
 } from '@angular/core';
-import { SC_FIELD, cn } from '@semantic-components/ui';
+import { cn } from '@semantic-components/ui';
 
 export const SC_TAGS_INPUT = new InjectionToken<ScTagsInput>('ScTagsInput');
 
 @Directive({
-  selector: 'div[scTagsInput], label[scTagsInput]',
+  selector: '[scTagsInput]',
   exportAs: 'scTagsInput',
-  providers: [
-    { provide: SC_TAGS_INPUT, useExisting: ScTagsInput },
-    { provide: SC_FIELD, useExisting: ScTagsInput },
-  ],
+  providers: [{ provide: SC_TAGS_INPUT, useExisting: ScTagsInput }],
   host: {
     'data-slot': 'tags-input',
     '[class]': 'class()',
-    '[attr.role]': 'role()',
-    '[attr.aria-label]': 'ariaLabel() || null',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-focused]': 'isFocused() || null',
     '(click)': 'focusInput()',
   },
 })
 export class ScTagsInput {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly id = input(inject(_IdGenerator).getId('sc-tags-input-'));
-  readonly descriptionIds = signal<string[]>([]);
-  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
   readonly tags = model<string[]>([]);
   readonly placeholder = input<string>('Add tag...');
   readonly disabled = input<boolean>(false);
@@ -55,11 +43,6 @@ export class ScTagsInput {
   readonly focusedTagIndex = signal(-1);
 
   private readonly inputRef = signal<ElementRef<HTMLInputElement> | null>(null);
-
-  protected readonly role = computed(() => {
-    const tagName = this.elementRef.nativeElement.tagName;
-    return tagName === 'LABEL' ? null : 'group';
-  });
 
   protected readonly class = computed(() =>
     cn(

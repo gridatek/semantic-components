@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScTagsInput,
   ScTagsInputClear,
@@ -16,6 +17,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-clearable-tags-input-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScTagsInput,
     ScTagsInputControl,
     ScTagsInputItem,
@@ -25,19 +28,22 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-md">
-      <div scTagsInput [(tags)]="tags">
-        @for (tag of tags(); track $index) {
-          <span scTagsInputItem [tag]="tag" [index]="$index">
-            {{ tag }}
-            <button scTagsInputItemDelete>
-              <svg siXIcon class="size-3"></svg>
-            </button>
-          </span>
-        }
-        <input scTagsInputControl />
-        <button scTagsInputClear>
-          <svg siXIcon class="size-4"></svg>
-        </button>
+      <div scField>
+        <label scLabel>Tags</label>
+        <div scTagsInput [(tags)]="tags">
+          @for (tag of tags(); track $index) {
+            <span scTagsInputItem [tag]="tag" [index]="$index">
+              {{ tag }}
+              <button scTagsInputItemDelete>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
+          }
+          <input scTagsInputControl />
+          <button scTagsInputClear>
+            <svg siXIcon class="size-4"></svg>
+          </button>
+        </div>
       </div>
     </div>
   `,

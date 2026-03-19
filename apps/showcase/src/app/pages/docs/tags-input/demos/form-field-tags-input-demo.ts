@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScTagsInput,
   ScTagsInputClear,
@@ -17,6 +18,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-form-field-tags-input-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScTagsInput,
     ScTagsInputControl,
     ScTagsInputItem,
@@ -27,8 +30,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-md space-y-4">
-      <div class="space-y-2">
-        <label class="text-sm font-medium">Skills</label>
+      <div scField>
+        <label scLabel>Skills</label>
         <div
           scTagsInput
           [(tags)]="skillTags"
@@ -54,8 +57,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         <p class="text-muted-foreground text-xs">Add up to 10 skills</p>
       </div>
 
-      <div class="space-y-2">
-        <label class="text-sm font-medium">Categories</label>
+      <div scField>
+        <label scLabel>Categories</label>
         <div
           scTagsInput
           [(tags)]="categoryTags"

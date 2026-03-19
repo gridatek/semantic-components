@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScTagsInput,
   ScTagsInputControl,
@@ -15,6 +16,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-email-tags-input-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScTagsInput,
     ScTagsInputControl,
     ScTagsInputItem,
@@ -22,24 +25,26 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="w-full max-w-lg space-y-2">
-      <label class="text-sm font-medium">To:</label>
-      <div scTagsInput [(tags)]="tags" placeholder="Add recipient...">
-        @for (tag of tags(); track $index) {
-          <span
-            scTagsInputItem
-            [tag]="tag"
-            [index]="$index"
-            variant="outline"
-            class="rounded-full"
-          >
-            {{ tag }}
-            <button scTagsInputItemDelete>
-              <svg siXIcon class="size-3"></svg>
-            </button>
-          </span>
-        }
-        <input scTagsInputControl [addOnBlur]="true" />
+    <div class="w-full max-w-lg">
+      <div scField>
+        <label scLabel>To:</label>
+        <div scTagsInput [(tags)]="tags" placeholder="Add recipient...">
+          @for (tag of tags(); track $index) {
+            <span
+              scTagsInputItem
+              [tag]="tag"
+              [index]="$index"
+              variant="outline"
+              class="rounded-full"
+            >
+              {{ tag }}
+              <button scTagsInputItemDelete>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
+          }
+          <input scTagsInputControl [addOnBlur]="true" />
+        </div>
       </div>
     </div>
   `,

@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScTagsInput,
   ScTagsInputControl,
@@ -15,6 +16,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-variants-tags-input-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScTagsInput,
     ScTagsInputControl,
     ScTagsInputItem,
@@ -23,8 +26,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-md space-y-3">
-      <div class="space-y-1">
-        <label class="text-muted-foreground text-xs">Default</label>
+      <div scField>
+        <label scLabel>Default</label>
         <div scTagsInput [(tags)]="variantDefault">
           @for (tag of variantDefault(); track $index) {
             <span
@@ -42,8 +45,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           <input scTagsInputControl />
         </div>
       </div>
-      <div class="space-y-1">
-        <label class="text-muted-foreground text-xs">Secondary</label>
+      <div scField>
+        <label scLabel>Secondary</label>
         <div scTagsInput [(tags)]="variantSecondary">
           @for (tag of variantSecondary(); track $index) {
             <span
@@ -61,8 +64,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           <input scTagsInputControl />
         </div>
       </div>
-      <div class="space-y-1">
-        <label class="text-muted-foreground text-xs">Outline</label>
+      <div scField>
+        <label scLabel>Outline</label>
         <div scTagsInput [(tags)]="variantOutline">
           @for (tag of variantOutline(); track $index) {
             <span

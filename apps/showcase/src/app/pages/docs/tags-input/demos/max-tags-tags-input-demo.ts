@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScTagsInput,
   ScTagsInputControl,
@@ -16,6 +17,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-max-tags-tags-input-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScTagsInput,
     ScTagsInputControl,
     ScTagsInputItem,
@@ -24,18 +27,21 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="w-full max-w-md space-y-2">
-      <div scTagsInput [(tags)]="tags" [maxTags]="5">
-        @for (tag of tags(); track $index) {
-          <span scTagsInputItem [tag]="tag" [index]="$index">
-            {{ tag }}
-            <button scTagsInputItemDelete>
-              <svg siXIcon class="size-3"></svg>
-            </button>
-          </span>
-        }
-        <input scTagsInputControl />
-        <span scTagsInputCount class="ml-auto text-xs"></span>
+    <div class="w-full max-w-md">
+      <div scField>
+        <label scLabel>Tags</label>
+        <div scTagsInput [(tags)]="tags" [maxTags]="5">
+          @for (tag of tags(); track $index) {
+            <span scTagsInputItem [tag]="tag" [index]="$index">
+              {{ tag }}
+              <button scTagsInputItemDelete>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
+          }
+          <input scTagsInputControl />
+          <span scTagsInputCount class="ml-auto text-xs"></span>
+        </div>
       </div>
     </div>
   `,
