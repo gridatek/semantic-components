@@ -31,5 +31,6 @@ export class ScTagInputClear {
   onClick(event: Event): void {
     event.stopPropagation();
     this.tagInput.clearAll();
+    this.tagInput.focusInput();
   }
 }

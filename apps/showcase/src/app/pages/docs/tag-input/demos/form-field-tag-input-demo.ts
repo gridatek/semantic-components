@@ -35,8 +35,13 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           [maxTags]="10"
           placeholder="Add a skill..."
         >
-          @for (tag of skillTags(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="secondary">
+          @for (tag of skillTags(); track $index) {
+            <span
+              scTagInputTag
+              [tag]="tag"
+              [index]="$index"
+              variant="secondary"
+            >
               {{ tag }}
               <button scTagInputRemove>
                 <svg siXIcon class="size-3"></svg>
@@ -57,8 +62,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           [maxTags]="3"
           placeholder="Select categories..."
         >
-          @for (tag of categoryTags(); track tag) {
-            <span scTagInputTag [tag]="tag">
+          @for (tag of categoryTags(); track $index) {
+            <span scTagInputTag [tag]="tag" [index]="$index">
               {{ tag }}
               <button scTagInputRemove>
                 <svg siXIcon class="size-3"></svg>

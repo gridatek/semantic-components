@@ -6,6 +6,9 @@ import { SC_TAG_INPUT_FIELD } from './tag-input-field';
   selector: '[scTagInputCount]',
   host: {
     'data-slot': 'tag-input-count',
+    role: 'status',
+    'aria-live': 'polite',
+    'aria-atomic': 'true',
     '[class]': 'class()',
     '[textContent]': 'countText()',
   },

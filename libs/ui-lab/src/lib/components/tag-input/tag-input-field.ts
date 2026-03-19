@@ -1,33 +1,45 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
   InjectionToken,
   computed,
+  inject,
   input,
   model,
   output,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { SC_FIELD, cn } from '@semantic-components/ui';
 
 export const SC_TAG_INPUT_FIELD = new InjectionToken<ScTagInputField>(
   'ScTagInputField',
 );
 
 @Directive({
-  selector: '[scTagInputField]',
+  selector: 'div[scTagInputField], label[scTagInputField]',
   exportAs: 'scTagInputField',
-  providers: [{ provide: SC_TAG_INPUT_FIELD, useExisting: ScTagInputField }],
+  providers: [
+    { provide: SC_TAG_INPUT_FIELD, useExisting: ScTagInputField },
+    { provide: SC_FIELD, useExisting: ScTagInputField },
+  ],
   host: {
     'data-slot': 'tag-input-field',
     '[class]': 'class()',
+    '[attr.role]': 'role()',
+    '[attr.aria-label]': 'ariaLabel() || null',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-focused]': 'isFocused() || null',
     '(click)': 'focusInput()',
   },
 })
 export class ScTagInputField {
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
+
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly id = input(inject(_IdGenerator).getId('sc-tag-input-'));
+  readonly descriptionIds = signal<string[]>([]);
+  readonly ariaLabel = input<string>('', { alias: 'aria-label' });
   readonly tags = model<string[]>([]);
   readonly placeholder = input<string>('Add tag...');
   readonly disabled = input<boolean>(false);
@@ -42,8 +54,14 @@ export class ScTagInputField {
 
   readonly isFocused = signal(false);
   readonly inputValue = signal('');
+  readonly focusedTagIndex = signal(-1);
 
-  private inputRef: ElementRef<HTMLInputElement> | null = null;
+  private readonly inputRef = signal<ElementRef<HTMLInputElement> | null>(null);
+
+  protected readonly role = computed(() => {
+    const tagName = this.elementRef.nativeElement.tagName;
+    return tagName === 'LABEL' ? null : 'group';
+  });
 
   protected readonly class = computed(() =>
     cn(
@@ -61,12 +79,20 @@ export class ScTagInputField {
   });
 
   setInputRef(ref: ElementRef<HTMLInputElement>): void {
-    this.inputRef = ref;
+    this.inputRef.set(ref);
   }
 
   focusInput(): void {
     if (!this.disabled()) {
-      this.inputRef?.nativeElement.focus();
+      this.inputRef()?.nativeElement.focus();
+    }
+  }
+
+  focusTag(index: number): void {
+    if (this.disabled()) return;
+    const tags = this.tags();
+    if (index >= 0 && index < tags.length) {
+      this.focusedTagIndex.set(index);
     }
   }
 
@@ -86,16 +112,26 @@ export class ScTagInputField {
 
   removeTag(tag: string): void {
     if (this.disabled()) return;
-    this.tags.update((tags) => tags.filter((t) => t !== tag));
-    this.tagRemove.emit(tag);
+    const index = this.tags().indexOf(tag);
+    if (index !== -1) {
+      this.removeTagAtIndex(index);
+    }
   }
 
   removeTagAtIndex(index: number): void {
     if (this.disabled()) return;
     const tag = this.tags()[index];
-    if (tag) {
+    if (tag !== undefined) {
       this.tags.update((tags) => tags.filter((_, i) => i !== index));
       this.tagRemove.emit(tag);
+
+      const remaining = this.tags().length;
+      if (remaining === 0) {
+        this.focusedTagIndex.set(-1);
+        this.focusInput();
+      } else if (this.focusedTagIndex() >= remaining) {
+        this.focusedTagIndex.set(remaining - 1);
+      }
     }
   }
 
@@ -110,6 +146,7 @@ export class ScTagInputField {
     if (this.disabled()) return;
     const removed = [...this.tags()];
     this.tags.set([]);
+    this.focusedTagIndex.set(-1);
     removed.forEach((tag) => this.tagRemove.emit(tag));
   }
 }

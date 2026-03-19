@@ -26,8 +26,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <div class="space-y-1">
         <label class="text-muted-foreground text-xs">Default</label>
         <div scTagInputField [(tags)]="variantDefault">
-          @for (tag of variantDefault(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="default">
+          @for (tag of variantDefault(); track $index) {
+            <span scTagInputTag [tag]="tag" [index]="$index" variant="default">
               {{ tag }}
               <button scTagInputRemove>
                 <svg siXIcon class="size-3"></svg>
@@ -40,8 +40,13 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <div class="space-y-1">
         <label class="text-muted-foreground text-xs">Secondary</label>
         <div scTagInputField [(tags)]="variantSecondary">
-          @for (tag of variantSecondary(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="secondary">
+          @for (tag of variantSecondary(); track $index) {
+            <span
+              scTagInputTag
+              [tag]="tag"
+              [index]="$index"
+              variant="secondary"
+            >
               {{ tag }}
               <button scTagInputRemove>
                 <svg siXIcon class="size-3"></svg>
@@ -54,8 +59,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       <div class="space-y-1">
         <label class="text-muted-foreground text-xs">Outline</label>
         <div scTagInputField [(tags)]="variantOutline">
-          @for (tag of variantOutline(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="outline">
+          @for (tag of variantOutline(); track $index) {
+            <span scTagInputTag [tag]="tag" [index]="$index" variant="outline">
               {{ tag }}
               <button scTagInputRemove>
                 <svg siXIcon class="size-3"></svg>

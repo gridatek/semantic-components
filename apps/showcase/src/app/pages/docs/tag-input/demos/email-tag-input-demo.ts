@@ -25,10 +25,11 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     <div class="max-w-lg space-y-2">
       <label class="text-sm font-medium">To:</label>
       <div scTagInputField [(tags)]="tags" placeholder="Add recipient...">
-        @for (tag of tags(); track tag) {
+        @for (tag of tags(); track $index) {
           <span
             scTagInputTag
             [tag]="tag"
+            [index]="$index"
             variant="outline"
             class="rounded-full"
           >

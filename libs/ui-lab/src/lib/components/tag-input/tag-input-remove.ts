@@ -34,6 +34,6 @@ export class ScTagInputRemove {
 
   protected onClick(event: Event): void {
     event.stopPropagation();
-    this.tagInput.removeTag(this.tagRef.tag());
+    this.tagInput.removeTagAtIndex(this.tagRef.index());
   }
 }

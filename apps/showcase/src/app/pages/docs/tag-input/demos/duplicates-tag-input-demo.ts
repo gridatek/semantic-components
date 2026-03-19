@@ -25,7 +25,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     <div class="max-w-md">
       <div scTagInputField [(tags)]="tags" [allowDuplicates]="true">
         @for (tag of tags(); track $index) {
-          <span scTagInputTag [tag]="tag" variant="secondary">
+          <span scTagInputTag [tag]="tag" [index]="$index" variant="secondary">
             {{ tag }}
             <button scTagInputRemove>
               <svg siXIcon class="size-3"></svg>

@@ -10,10 +10,10 @@ import { SC_TAG_INPUT_FIELD } from './tag-input-field';
     '[class]': 'class()',
     '[placeholder]': 'tagInput.canAddMore() ? tagInput.placeholder() : ""',
     '[disabled]': 'tagInput.disabled() || !tagInput.canAddMore()',
-    '[value]': 'tagInput.inputValue()',
+    '[value]': 'displayValue()',
     '(input)': 'onInput($event)',
     '(keydown)': 'onKeydown($event)',
-    '(focus)': 'tagInput.isFocused.set(true)',
+    '(focus)': 'onFocus()',
     '(blur)': 'onBlur()',
     '(paste)': 'onPaste($event)',
   },
@@ -24,6 +24,8 @@ export class ScTagInputInput {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly addOnBlur = input<boolean>(false);
+
+  protected readonly displayValue = computed(() => this.tagInput.inputValue());
 
   protected readonly class = computed(() =>
     cn(
@@ -42,6 +44,11 @@ export class ScTagInputInput {
     this.tagInput.inputValue.set(value);
   }
 
+  onFocus(): void {
+    this.tagInput.isFocused.set(true);
+    this.tagInput.focusedTagIndex.set(-1);
+  }
+
   onKeydown(event: KeyboardEvent): void {
     const value = this.tagInput.inputValue();
     const delimiters = this.tagInput.delimiters();
@@ -52,6 +59,15 @@ export class ScTagInputInput {
         if (this.tagInput.addTag(value)) {
           this.tagInput.inputValue.set('');
         }
+      }
+      return;
+    }
+
+    if (event.key === 'ArrowLeft' && !value) {
+      const tags = this.tagInput.tags();
+      if (tags.length > 0) {
+        event.preventDefault();
+        this.tagInput.focusTag(tags.length - 1);
       }
       return;
     }

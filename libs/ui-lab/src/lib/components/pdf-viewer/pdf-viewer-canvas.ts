@@ -81,26 +81,31 @@ export class ScPdfViewerCanvas {
   private activeRenderTasks = new Map<number, RenderTask>();
   private renderedPages = new Set<number>();
   private observer: IntersectionObserver | null = null;
+  private resizeObserver: ResizeObserver | null = null;
   private renderTimeout: ReturnType<typeof setTimeout> | null = null;
   private scrollHandler: (() => void) | null = null;
+
+  // Reactive container dimensions — updated by ResizeObserver so that
+  // scaledValue re-evaluates when the container is laid out.
+  private readonly containerSize = signal({ width: 0, height: 0 });
 
   readonly scaledValue = computed(() => {
     const z = this.zoom();
     if (typeof z === 'number') {
       return z;
     }
-    const container = this.scrollContainer()?.nativeElement;
+    const size = this.containerSize();
     const layouts = this.pageLayouts();
-    if (!container || layouts.length === 0) {
+    if (size.width === 0 || layouts.length === 0) {
       return 1;
     }
-    const containerWidth = container.clientWidth - 32;
+    const containerWidth = size.width - 32;
     const firstPage = layouts[0];
     if (z === 'page-width') {
       return containerWidth / firstPage.width;
     }
     if (z === 'page-fit') {
-      const containerHeight = container.clientHeight - 16;
+      const containerHeight = size.height - 16;
       const scaleW = containerWidth / firstPage.width;
       const scaleH = containerHeight / firstPage.height;
       return Math.min(scaleW, scaleH);
@@ -112,6 +117,7 @@ export class ScPdfViewerCanvas {
 
   constructor() {
     afterNextRender(() => {
+      this.setupResizeObserver();
       this.setupIntersectionObserver();
     });
 
@@ -155,6 +161,7 @@ export class ScPdfViewerCanvas {
 
     this.destroyRef.onDestroy(() => {
       this.observer?.disconnect();
+      this.resizeObserver?.disconnect();
       this.cancelAllRenderTasks();
       if (this.renderTimeout) {
         clearTimeout(this.renderTimeout);
@@ -194,6 +201,25 @@ export class ScPdfViewerCanvas {
       });
     }
     this.pageLayouts.set(layouts);
+  }
+
+  private setupResizeObserver(): void {
+    const container = this.scrollContainer()?.nativeElement;
+    if (!container) return;
+
+    this.containerSize.set({
+      width: container.clientWidth,
+      height: container.clientHeight,
+    });
+
+    this.resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        this.containerSize.set({ width, height });
+      }
+    });
+
+    this.resizeObserver.observe(container);
   }
 
   private setupIntersectionObserver(): void {

@@ -27,8 +27,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
         [tags]="['Angular', 'React', 'Vue']"
         [disabled]="true"
       >
-        @for (tag of ['Angular', 'React', 'Vue']; track tag) {
-          <span scTagInputTag [tag]="tag">
+        @for (tag of ['Angular', 'React', 'Vue']; track $index) {
+          <span scTagInputTag [tag]="tag" [index]="$index">
             {{ tag }}
             <button scTagInputRemove>
               <svg siXIcon class="size-3"></svg>

@@ -24,8 +24,8 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div class="max-w-md">
       <div scTagInputField [(tags)]="tags" [delimiters]="['Enter', ' ', 'Tab']">
-        @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag">
+        @for (tag of tags(); track $index) {
+          <span scTagInputTag [tag]="tag" [index]="$index">
             {{ tag }}
             <button scTagInputRemove>
               <svg siXIcon class="size-3"></svg>
