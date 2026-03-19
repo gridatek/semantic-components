@@ -41,7 +41,7 @@ import { VariantsTagsInputDemoContainer } from './demos/variants-tags-input-demo
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Tag Input</h1>
+        <h1 scHeading>Tags Input</h1>
         <p class="text-muted-foreground">
           A multi-tag input component with chips for adding and removing tags.
         </p>

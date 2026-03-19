@@ -821,13 +821,12 @@
     "category": "Navigation"
   },
   {
-    "name": "Tag Input",
-    "path": "tag-input",
-    "description": "An input for adding and managing tags.",
+    "name": "Tags Input",
+    "path": "tags-input",
+    "description": "A multi-tag input component with chips for adding and removing tags.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Textarea",
