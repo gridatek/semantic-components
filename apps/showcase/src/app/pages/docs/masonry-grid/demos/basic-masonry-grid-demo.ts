@@ -9,7 +9,6 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
 interface DemoItem {
   id: number;
   height: number;
-  color: string;
   title: string;
 }
 
@@ -21,13 +20,14 @@ interface DemoItem {
       @for (item of items(); track item.id) {
         <div scMasonryItem>
           <div
-            class="overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-md"
-            [style.background-color]="item.color"
+            class="bg-muted overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-md"
             [style.height.px]="item.height"
           >
-            <div class="p-4 text-white">
-              <p class="font-medium">{{ item.title }}</p>
-              <p class="text-sm opacity-75">{{ item.height }}px tall</p>
+            <div class="p-4">
+              <p class="text-foreground font-medium">{{ item.title }}</p>
+              <p class="text-muted-foreground text-sm">
+                {{ item.height }}px tall
+              </p>
             </div>
           </div>
         </div>
@@ -39,31 +39,10 @@ interface DemoItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicMasonryGridDemo {
-  readonly colors = [
-    '#ef4444',
-    '#f97316',
-    '#f59e0b',
-    '#eab308',
-    '#84cc16',
-    '#22c55e',
-    '#10b981',
-    '#14b8a6',
-    '#06b6d4',
-    '#0ea5e9',
-    '#3b82f6',
-    '#6366f1',
-    '#8b5cf6',
-    '#a855f7',
-    '#d946ef',
-    '#ec4899',
-    '#f43f5e',
-  ];
-
   readonly items = signal<DemoItem[]>(
     Array.from({ length: 15 }, (_, i) => ({
       id: i + 1,
       height: Math.floor(Math.random() * 150) + 100,
-      color: this.colors[i % this.colors.length],
       title: `Item ${i + 1}`,
     })),
   );
