@@ -19,7 +19,7 @@ export class ScMentionInputSuggestions {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute z-50 w-64 rounded-md border bg-popover p-1 shadow-md',
+      'bg-popover text-popover-foreground absolute z-50 w-64 rounded-lg ring-1 ring-foreground/10 p-1 text-sm shadow-md outline-hidden',
       'animate-in fade-in-0 zoom-in-95',
       this.classInput(),
     ),

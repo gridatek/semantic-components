@@ -58,10 +58,8 @@ export class ScMentionInputSuggestionItem {
 
   protected readonly class = computed(() =>
     cn(
-      'flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm',
-      'hover:bg-accent hover:text-accent-foreground',
-      'focus-visible:outline-none',
-      this.isSelected() && 'bg-accent text-accent-foreground',
+      'relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
+      this.isSelected() && 'bg-muted text-foreground',
       this.classInput(),
     ),
   );
