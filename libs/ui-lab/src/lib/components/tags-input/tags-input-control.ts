@@ -1,12 +1,15 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { SC_FIELD, cn } from '@semantic-components/ui';
 import { SC_TAGS_INPUT } from './tags-input';
 
 @Directive({
   selector: 'input[scTagsInputControl]',
   host: {
-    'data-slot': 'tags-input-control',
+    'data-slot': 'control',
     type: 'text',
+    '[attr.id]': 'id()',
+    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
     '[placeholder]': 'tagsInput.canAddMore() ? tagsInput.placeholder() : ""',
     '[disabled]': 'tagsInput.disabled() || !tagsInput.canAddMore()',
@@ -20,10 +23,21 @@ import { SC_TAGS_INPUT } from './tags-input';
 })
 export class ScTagsInputControl {
   readonly tagsInput = inject(SC_TAGS_INPUT);
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly elementRef = inject(ElementRef<HTMLInputElement>);
+  private readonly fallbackId = inject(_IdGenerator).getId('sc-tags-input-');
 
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly idInput = input('', { alias: 'id' });
   readonly addOnBlur = input<boolean>(false);
+
+  readonly id = computed(
+    () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
+
+  readonly ariaDescribedBy = computed(
+    () => this.field?.descriptionIds().join(' ') || null,
+  );
 
   protected readonly displayValue = computed(() => this.tagsInput.inputValue());
 
