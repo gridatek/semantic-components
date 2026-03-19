@@ -46,9 +46,11 @@ export class ScTagsInput {
 
   protected readonly class = computed(() =>
     cn(
-      'flex flex-wrap items-center gap-1.5 min-h-10 w-full rounded-md border border-input bg-background px-3 py-2',
-      'focus-within:ring-1 focus-within:ring-ring focus-within:border-ring',
-      'data-disabled:cursor-not-allowed data-disabled:opacity-50',
+      'flex flex-wrap items-center gap-1.5 min-h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 transition-colors',
+      'dark:bg-input/30',
+      'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-3',
+      'data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-50',
+      'disabled:bg-input/50 dark:disabled:bg-input/80',
       this.classInput(),
     ),
   );
