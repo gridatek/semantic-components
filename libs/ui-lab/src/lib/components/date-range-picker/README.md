@@ -1,148 +1,134 @@
 # Date Range Picker
 
-Select a range of dates with presets, min/max constraints, and various display formats.
+A composable date range picker built from directive primitives. Uses `ScPopoverProvider` for dropdown behavior (focus trap, keyboard, animations, overlay positioning).
 
 ## Components
 
-- `ScDateRangePicker` - Date range picker with calendar dropdown
+- `ScDateRangePicker` — Orchestrator directive (`div[scDateRangePicker]`)
+- `ScDateRangePickerTrigger` — Trigger button (`button[scDateRangePickerTrigger]`)
+- `ScDateRangePickerFooter` — Footer with Cancel/Apply buttons (`div[scDateRangePickerFooter]`)
+- `ScDateRangePickerPresets` — Presets sidebar container (`div[scDateRangePickerPresets]`)
+- `ScDateRangePickerPreset` — Individual preset button (`button[scDateRangePickerPreset]`)
 
 ## Usage
 
-### Basic Usage
+### Basic
 
 ```html
-<sc-date-range-picker [(value)]="dateRange" placeholder="Select date range" />
+<div scDateRangePicker [(value)]="range" #drp="scDateRangePicker">
+  <div scPopoverProvider [origin]="trigger.overlayOrigin" align="start">
+    <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
+      <svg siCalendarIcon class="mr-2 size-4"></svg>
+      <span [class]="drp.displayText() ? '' : 'text-muted-foreground'">{{ drp.displayText() || drp.placeholder() }}</span>
+    </button>
+    <ng-template scPopoverPortal>
+      <div scPopover class="w-auto p-0">
+        <div class="p-3">
+          <div scCalendar mode="range" [numberOfMonths]="2" [value]="drp.value()" (valueChange)="drp.onValueChange($event)" #cal="scCalendar">
+            <div scCalendarHeader>
+              <button scCalendarPrevious>...</button>
+              <button scCalendarHeading>{{ cal.heading() }}</button>
+              <button scCalendarNext>...</button>
+            </div>
+          </div>
+          <div scDateRangePickerFooter></div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
 ```
 
 ### With Presets
 
 ```html
-<sc-date-range-picker [(value)]="dateRange" [presets]="presets" placeholder="Select date range" />
+<div scPopover class="w-auto p-0">
+  <div class="flex">
+    <div scDateRangePickerPresets>
+      @for (preset of presets; track preset.label) {
+      <button scDateRangePickerPreset [value]="preset.value">{{ preset.label }}</button>
+      }
+    </div>
+    <div class="p-3">
+      <div scCalendar mode="range" [numberOfMonths]="2" ...>...</div>
+      <div scDateRangePickerFooter></div>
+    </div>
+  </div>
+</div>
 ```
 
 ```typescript
-import { createDateRangePresets } from './date-range-picker';
+import { createScDateRangePresets } from '@semantic-components/ui-lab';
 
-presets = createDateRangePresets();
-```
-
-### With Min/Max Dates
-
-```html
-<sc-date-range-picker [minDate]="minDate" [maxDate]="maxDate" placeholder="Select date range" />
+presets = createScDateRangePresets();
 ```
 
 ## API
 
 ### ScDateRangePicker
 
-| Input           | Type                | Default               | Description             |
-| --------------- | ------------------- | --------------------- | ----------------------- |
-| `class`         | `string`            | `''`                  | Additional CSS classes  |
-| `placeholder`   | `string`            | `'Select date range'` | Placeholder text        |
-| `disabled`      | `boolean`           | `false`               | Disable the picker      |
-| `minDate`       | `Date \| undefined` | `undefined`           | Minimum selectable date |
-| `maxDate`       | `Date \| undefined` | `undefined`           | Maximum selectable date |
-| `disabledDates` | `Date[]`            | `[]`                  | Specific disabled dates |
-| `presets`       | `DateRangePreset[]` | `[]`                  | Quick selection presets |
-| `showTwoMonths` | `boolean`           | `false`               | Show two calendars      |
-| `showClear`     | `boolean`           | `true`                | Show clear button       |
-| `dateFormat`    | `string`            | `'short'`             | Date display format     |
+| Input         | Type     | Default               | Description            |
+| ------------- | -------- | --------------------- | ---------------------- |
+| `class`       | `string` | `''`                  | Additional CSS classes |
+| `placeholder` | `string` | `'Select date range'` | Placeholder text       |
+| `dateFormat`  | `string` | `'short'`             | Date display format    |
 
-| Output        | Type        | Description                 |
-| ------------- | ----------- | --------------------------- |
-| `value`       | `DateRange` | Two-way binding for range   |
-| `valueChange` | `DateRange` | Emits when range changes    |
-| `apply`       | `DateRange` | Emits when Apply is clicked |
+| Signal/Output | Type          | Description                 |
+| ------------- | ------------- | --------------------------- |
+| `value`       | `ScDateRange` | Two-way model binding       |
+| `apply`       | `ScDateRange` | Emits when Apply is clicked |
 
-| Method       | Returns     | Description       |
-| ------------ | ----------- | ----------------- |
-| `focus()`    | `void`      | Focus the trigger |
-| `getRange()` | `DateRange` | Get current range |
+| Property        | Type                  | Description                     |
+| --------------- | --------------------- | ------------------------------- |
+| `displayText()` | `Signal<string>`      | Formatted range for the trigger |
+| `placeholder()` | `InputSignal<string>` | Placeholder input value         |
 
-## DateRange Interface
+| Method                 | Description                |
+| ---------------------- | -------------------------- |
+| `onValueChange(value)` | Update value from calendar |
+| `onCancel()`           | Restore pending, close     |
+| `onApply()`            | Commit value, close        |
+| `formatDate(date)`     | Format a single date       |
 
-```typescript
-interface DateRange {
-  from: Date | undefined;
-  to: Date | undefined;
-}
+### ScDateRangePickerTrigger
+
+| Input   | Type     | Default | Description            |
+| ------- | -------- | ------- | ---------------------- |
+| `class` | `string` | `''`    | Additional CSS classes |
+
+Exposes `overlayOrigin` for popover positioning. Host directive: `CdkOverlayOrigin`.
+
+### ScDateRangePickerPreset
+
+| Input   | Type          | Required | Description            |
+| ------- | ------------- | -------- | ---------------------- |
+| `value` | `ScDateRange` | Yes      | Preset range value     |
+| `class` | `string`      | No       | Additional CSS classes |
+
+Auto-highlights when active (matches current picker value).
+
+## Multi-Month Calendar
+
+Use `[numberOfMonths]="2"` on `ScCalendar` to render two month grids side by side:
+
+```html
+<div scCalendar mode="range" [numberOfMonths]="2" ...></div>
 ```
 
-## DateRangePreset Interface
-
-```typescript
-interface DateRangePreset {
-  label: string;
-  value: DateRange;
-}
-```
+The calendar header controls the first month; the second month automatically follows.
 
 ## Date Formats
 
-| Format  | Example Output     | Description       |
-| ------- | ------------------ | ----------------- |
-| `short` | `Jan 15, 2024`     | Abbreviated month |
-| `long`  | `January 15, 2024` | Full month name   |
-| `iso`   | `2024-01-15`       | ISO 8601 format   |
-
-## Helper Function
-
-```typescript
-import { createDateRangePresets } from './date-range-picker';
-
-// Creates common presets:
-// - Today
-// - Yesterday
-// - Last 7 days
-// - Last 14 days
-// - Last 30 days
-// - This month
-// - Last month
-const presets = createDateRangePresets();
-```
-
-## Examples
-
-### Analytics Dashboard
-
-```html
-<div class="flex justify-between">
-  <h2>Analytics</h2>
-  <sc-date-range-picker [(value)]="dateRange" [presets]="presets" (apply)="fetchData()" />
-</div>
-```
-
-### Custom Presets
-
-```typescript
-const customPresets: DateRangePreset[] = [
-  {
-    label: 'This Week',
-    value: {
-      from: getStartOfWeek(),
-      to: new Date(),
-    },
-  },
-  {
-    label: 'This Quarter',
-    value: {
-      from: getStartOfQuarter(),
-      to: new Date(),
-    },
-  },
-];
-```
-
-### Booking System
-
-```html
-<sc-date-range-picker [(value)]="bookingDates" [minDate]="today" [disabledDates]="bookedDates" placeholder="Select check-in and check-out" />
-```
+| Format  | Example            |
+| ------- | ------------------ |
+| `short` | `Jan 15, 2024`     |
+| `long`  | `January 15, 2024` |
+| `iso`   | `2024-01-15`       |
 
 ## Accessibility
 
-- Trigger has `aria-expanded` and `aria-haspopup="dialog"`
-- Dropdown has `role="dialog"` and `aria-modal="true"`
-- Calendar is keyboard navigable
-- Clear button has descriptive `aria-label`
+- Trigger: `aria-expanded`, `aria-haspopup="dialog"`
+- Popover: `role="dialog"`, focus trap via `cdkTrapFocus`
+- Escape key closes the popover
+- Focus restored to trigger on close
+- Calendar: full keyboard navigation via Angular ARIA Grid
