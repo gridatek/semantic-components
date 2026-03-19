@@ -25,7 +25,12 @@ interface PageLayout {
 @Component({
   selector: 'sc-pdf-viewer-canvas',
   template: `
-    <div #scrollContainer class="h-full w-full overflow-auto" role="document">
+    <div
+      #scrollContainer
+      class="h-full w-full overflow-auto"
+      role="document"
+      tabindex="0"
+    >
       @for (page of pageLayouts(); track page.pageNumber) {
         <div
           class="bg-background mx-auto mb-2 shadow-sm"
@@ -76,7 +81,7 @@ export class ScPdfViewerCanvas {
   private activeRenderTasks = new Map<number, RenderTask>();
   private renderedPages = new Set<number>();
   private observer: IntersectionObserver | null = null;
-  private domReady = false;
+  private renderTimeout: ReturnType<typeof setTimeout> | null = null;
 
   readonly scaledValue = computed(() => {
     const z = this.zoom();
@@ -106,12 +111,7 @@ export class ScPdfViewerCanvas {
 
   constructor() {
     afterNextRender(() => {
-      this.domReady = true;
       this.setupIntersectionObserver();
-      // If layouts already computed before DOM was ready, render now
-      if (this.pageLayouts().length > 0) {
-        this.renderVisiblePages();
-      }
     });
 
     // When PDF document loads, compute page layouts
@@ -122,16 +122,16 @@ export class ScPdfViewerCanvas {
       }
     });
 
-    // Re-render visible pages when zoom or rotation changes
+    // Re-render when zoom or rotation changes
     effect(() => {
       this.scaledValue();
       this.rotation();
       const layouts = this.pageLayouts();
 
-      if (layouts.length > 0 && this.domReady) {
+      if (layouts.length > 0) {
         this.renderedPages.clear();
         this.cancelAllRenderTasks();
-        setTimeout(() => this.renderVisiblePages());
+        this.scheduleRender();
       }
     });
 
@@ -139,10 +139,10 @@ export class ScPdfViewerCanvas {
     effect(() => {
       this.navigateTrigger();
       const page = this.pdfViewer.currentPage();
-      const container = this.scrollContainer()?.nativeElement;
-      if (!container) return;
 
       setTimeout(() => {
+        const container = this.scrollContainer()?.nativeElement;
+        if (!container) return;
         const pageEl = container.querySelector(
           `[data-page="${page}"]`,
         ) as HTMLElement;
@@ -155,7 +155,23 @@ export class ScPdfViewerCanvas {
     this.destroyRef.onDestroy(() => {
       this.observer?.disconnect();
       this.cancelAllRenderTasks();
+      if (this.renderTimeout) {
+        clearTimeout(this.renderTimeout);
+      }
     });
+  }
+
+  private scheduleRender(): void {
+    if (this.renderTimeout) {
+      clearTimeout(this.renderTimeout);
+    }
+    // Use requestAnimationFrame + setTimeout to ensure Angular has
+    // finished its render cycle and DOM elements exist
+    this.renderTimeout = setTimeout(() => {
+      requestAnimationFrame(() => {
+        this.renderVisiblePages();
+      });
+    }, 0);
   }
 
   private async computePageLayouts(numPages: number): Promise<void> {
