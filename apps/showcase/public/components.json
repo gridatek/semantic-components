@@ -589,8 +589,7 @@
     "description": "Document viewer with navigation and zoom controls.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Pagination",

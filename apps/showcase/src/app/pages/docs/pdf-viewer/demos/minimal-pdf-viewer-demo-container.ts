@@ -14,6 +14,7 @@ import { MinimalPdfViewerDemo } from './minimal-pdf-viewer-demo';
       <app-minimal-pdf-viewer-demo />
     </app-demo-container>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

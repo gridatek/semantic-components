@@ -29,6 +29,12 @@ export interface PdfErrorEvent {
   message: string;
 }
 
+export interface PdfPageRenderState {
+  pageNumber: number;
+  width: number;
+  height: number;
+}
+
 export const DEFAULT_TOOLBAR_CONFIG: PdfToolbarConfig = {
   showNavigation: true,
   showZoom: true,

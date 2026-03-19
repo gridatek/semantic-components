@@ -15,6 +15,9 @@ export class ScPdfViewerContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex-1 relative overflow-hidden bg-muted/30', this.classInput()),
+    cn(
+      'flex-1 relative min-h-0 overflow-hidden bg-muted/30',
+      this.classInput(),
+    ),
   );
 }

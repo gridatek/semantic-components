@@ -14,6 +14,7 @@ import { InteractivePdfViewerDemo } from './interactive-pdf-viewer-demo';
       <app-interactive-pdf-viewer-demo />
     </app-demo-container>
   `,
+  host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -3,19 +3,22 @@ import {
   Directive,
   ElementRef,
   InjectionToken,
+  afterNextRender,
   computed,
+  effect,
   inject,
   input,
   output,
   signal,
 } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import {
-  type PdfErrorEvent,
-  type PdfLoadEvent,
-  type PdfPageChangeEvent,
-  type PdfZoomChangeEvent,
-  type PdfZoomLevel,
+import type { PDFDocumentProxy } from 'pdfjs-dist';
+import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
+import type {
+  PdfErrorEvent,
+  PdfLoadEvent,
+  PdfPageChangeEvent,
+  PdfZoomChangeEvent,
+  PdfZoomLevel,
 } from './pdf-viewer-types';
 
 export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
@@ -35,13 +38,13 @@ export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
 })
 export class ScPdfViewerRoot {
   private readonly destroyRef = inject(DestroyRef);
-  private readonly sanitizer = inject(DomSanitizer);
 
   // Inputs
   readonly src = input<string>('');
   readonly title = input<string>('');
   readonly initialPage = input(1);
   readonly initialZoom = input<PdfZoomLevel>('auto');
+  readonly workerSrc = input<string>('');
 
   // Outputs
   readonly loaded = output<PdfLoadEvent>();
@@ -58,6 +61,15 @@ export class ScPdfViewerRoot {
   readonly rotation = signal(0);
   readonly isFullscreen = signal(false);
 
+  // PDF.js document
+  readonly pdfDocument = signal<PDFDocumentProxy | null>(null);
+
+  // Resolved numeric scale for canvas rendering
+  readonly scale = computed(() => this.resolveScale(this.zoom()));
+
+  // Navigation trigger — incremented to signal canvas to scroll to currentPage
+  readonly navigateTrigger = signal(0);
+
   // Container element ref for fullscreen
   private containerElement: ElementRef<HTMLElement> | null = null;
 
@@ -67,36 +79,32 @@ export class ScPdfViewerRoot {
   readonly hasSource = computed(() => !!this.src());
   readonly showContent = computed(() => this.hasSource() && !this.error());
 
-  readonly safePdfUrl = computed<SafeResourceUrl | ''>(() => {
-    const source = this.src();
-    if (!source) return '';
-
-    const params = new URLSearchParams();
-    const page = this.currentPage();
-    const z = this.zoom();
-
-    if (page > 1) {
-      params.set('page', page.toString());
-    }
-
-    if (typeof z === 'number') {
-      params.set('zoom', (z * 100).toString());
-    } else if (z === 'page-fit') {
-      params.set('view', 'Fit');
-    } else if (z === 'page-width') {
-      params.set('view', 'FitH');
-    }
-
-    const paramString = params.toString();
-    const separator = source.includes('?') ? '&' : '#';
-
-    const url = paramString ? `${source}${separator}${paramString}` : source;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-  });
-
   constructor() {
     this.currentPage.set(this.initialPage());
     this.zoom.set(this.initialZoom());
+
+    afterNextRender(() => {
+      this.initWorker();
+
+      // Load initial document after worker is ready
+      const source = this.src();
+      if (source) {
+        this.loadDocument(source);
+      }
+    });
+
+    // Watch for src changes after initial load
+    let initialized = false;
+    effect(() => {
+      const source = this.src();
+      if (!initialized) {
+        initialized = true;
+        return;
+      }
+      if (source) {
+        this.loadDocument(source);
+      }
+    });
 
     const handleFullscreenChange = () => {
       this.isFullscreen.set(!!document.fullscreenElement);
@@ -106,7 +114,46 @@ export class ScPdfViewerRoot {
 
     this.destroyRef.onDestroy(() => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      this.pdfDocument()?.destroy();
     });
+  }
+
+  private initWorker(): void {
+    const customSrc = this.workerSrc();
+    if (customSrc) {
+      GlobalWorkerOptions.workerSrc = customSrc;
+    } else {
+      GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+    }
+  }
+
+  private async loadDocument(url: string): Promise<void> {
+    this.isLoading.set(true);
+    this.error.set(null);
+
+    try {
+      // Destroy previous document if any
+      this.pdfDocument()?.destroy();
+
+      const doc = await getDocument(url).promise;
+      this.pdfDocument.set(doc);
+      this.totalPages.set(doc.numPages);
+      this.isLoading.set(false);
+      this.loaded.emit({ totalPages: doc.numPages });
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : 'Unable to load the PDF document.';
+      this.onError(message);
+    }
+  }
+
+  private resolveScale(level: PdfZoomLevel): number {
+    if (typeof level === 'number') {
+      return level;
+    }
+    // Named zoom levels get resolved by the canvas component
+    // based on container/page dimensions. Return 1 as default.
+    return 1;
   }
 
   // Methods for child components to call
@@ -131,7 +178,10 @@ export class ScPdfViewerRoot {
 
   retry(): void {
     this.error.set(null);
-    this.isLoading.set(true);
+    const source = this.src();
+    if (source) {
+      this.loadDocument(source);
+    }
   }
 
   goToPrevPage(): void {
@@ -149,6 +199,7 @@ export class ScPdfViewerRoot {
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages()) {
       this.currentPage.set(page);
+      this.navigateTrigger.update((v) => v + 1);
       this.pageChange.emit({
         currentPage: page,
         totalPages: this.totalPages(),

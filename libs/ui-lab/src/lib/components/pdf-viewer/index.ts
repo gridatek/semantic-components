@@ -25,6 +25,9 @@ export { ScPdfViewerSpacer } from './pdf-viewer-spacer';
 // Content
 export { ScPdfViewerContent } from './pdf-viewer-content';
 
+// Canvas renderer
+export { ScPdfViewerCanvas } from './pdf-viewer-canvas';
+
 // State components
 export { ScPdfViewerLoading } from './pdf-viewer-loading';
 export { ScPdfViewerError } from './pdf-viewer-error';
@@ -40,4 +43,5 @@ export type {
   PdfPageChangeEvent,
   PdfZoomChangeEvent,
   PdfErrorEvent,
+  PdfPageRenderState,
 } from './pdf-viewer-types';
