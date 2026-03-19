@@ -29,8 +29,9 @@ export class ScTagsInputControl {
 
   protected readonly class = computed(() =>
     cn(
-      'flex-1 min-w-[120px] bg-transparent text-sm outline-none placeholder:text-muted-foreground',
-      'disabled:cursor-not-allowed',
+      'flex-1 min-w-[120px] bg-transparent text-base outline-none placeholder:text-muted-foreground md:text-sm',
+      'file:text-foreground file:border-0 file:bg-transparent file:text-sm file:font-medium',
+      'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
       this.classInput(),
     ),
   );
