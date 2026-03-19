@@ -546,9 +546,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tabs/tabs-page'),
       },
       {
-        path: 'tag-input',
-        title: 'Tag Input - Semantic Components',
-        loadComponent: () => import('../pages/docs/tag-input/tag-input-page'),
+        path: 'tags-input',
+        title: 'Tags Input - Semantic Components',
+        loadComponent: () => import('../pages/docs/tags-input/tags-input-page'),
       },
       {
         path: 'textarea',

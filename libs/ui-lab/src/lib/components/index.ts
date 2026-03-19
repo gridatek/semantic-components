@@ -27,7 +27,7 @@ export * from './speed-dial';
 export * from './spotlight';
 export * from './stat-card';
 export * from './stepper';
-export * from './tag-input';
+export * from './tags-input';
 export * from './time-picker-clock';
 export * from './timeline';
 export * from './tour-guide';
