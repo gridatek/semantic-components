@@ -25,35 +25,41 @@ export class ValidationTagsInputDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
-  ScTagInputField,
-  ScTagInputInput,
-  ScTagInputRemove,
-  ScTagInputTag,
+  ScTagsInput,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemDelete,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-validation-tag-input-demo',
+  selector: 'app-validation-tags-input-demo',
   imports: [
-    ScTagInputField,
-    ScTagInputInput,
-    ScTagInputTag,
-    ScTagInputRemove,
+    ScField,
+    ScLabel,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemDelete,
     SiXIcon,
   ],
   template: \`
-    <div class="max-w-md">
-      <div scTagInputField [(tags)]="tags" [minLength]="2" [maxLength]="15">
-        @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag">
-            {{ tag }}
-            <button scTagInputRemove>
-              <svg siXIcon class="size-3"></svg>
-            </button>
-          </span>
-        }
-        <input scTagInputInput />
+    <div class="w-full max-w-md">
+      <div scField>
+        <label scLabel>Tags</label>
+        <div scTagsInput [(tags)]="tags" [minLength]="2" [maxLength]="15">
+          @for (tag of tags(); track $index) {
+            <span scTagsInputItem [tag]="tag" [index]="$index">
+              {{ tag }}
+              <button scTagsInputItemDelete>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
+          }
+          <input scTagsInputControl />
+        </div>
       </div>
     </div>
   \`,
@@ -61,7 +67,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ValidationTagInputDemo {
+export class ValidationTagsInputDemo {
   readonly tags = signal<string[]>(['valid']);
 }`;
 }

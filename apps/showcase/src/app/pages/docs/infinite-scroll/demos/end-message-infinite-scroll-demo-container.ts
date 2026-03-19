@@ -53,6 +53,7 @@ interface Item {
   template: \`
     <div
       scInfiniteScroll
+      aria-label="End message infinite scroll demo"
       class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"

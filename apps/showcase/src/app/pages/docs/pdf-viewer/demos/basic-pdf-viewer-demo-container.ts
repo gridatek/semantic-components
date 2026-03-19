@@ -29,6 +29,7 @@ export class BasicPdfViewerDemoContainer {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScPdfViewerCanvas,
   ScPdfViewerContainer,
   ScPdfViewerContent,
   ScPdfViewerDownload,
@@ -89,6 +90,7 @@ import {
     ScPdfViewerLoading,
     ScPdfViewerError,
     ScPdfViewerEmpty,
+    ScPdfViewerCanvas,
     SiChevronLeftIcon,
     SiChevronRightIcon,
     SiDownloadIcon,
@@ -103,7 +105,7 @@ import {
     <div class="h-[600px]">
       <div
         scPdfViewer
-        #viewer="scPdfViewer"
+        class="h-full"
         src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf"
         title="Sample PDF"
       >
@@ -164,30 +166,7 @@ import {
             <div scPdfViewerError></div>
             <div scPdfViewerEmpty></div>
 
-            @if (viewer.showContent()) {
-              <div
-                class="h-full w-full overflow-auto"
-                [style.transform]="'rotate(' + viewer.rotation() + 'deg)'"
-                [style.transform-origin]="'center center'"
-              >
-                <object
-                  [data]="viewer.safePdfUrl()"
-                  type="application/pdf"
-                  class="h-full w-full"
-                  [style.min-height]="'100%'"
-                  (load)="viewer.onLoad()"
-                  (error)="viewer.onError()"
-                >
-                  <iframe
-                    [src]="viewer.safePdfUrl()"
-                    class="h-full w-full border-0"
-                    [title]="viewer.title() || 'PDF Document'"
-                    (load)="viewer.onLoad()"
-                    (error)="viewer.onError()"
-                  ></iframe>
-                </object>
-              </div>
-            }
+            <sc-pdf-viewer-canvas />
           </div>
         </div>
       </div>

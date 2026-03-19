@@ -25,65 +25,83 @@ export class VariantsTagsInputDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
-  ScTagInputField,
-  ScTagInputInput,
-  ScTagInputRemove,
-  ScTagInputTag,
+  ScTagsInput,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemDelete,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-variants-tag-input-demo',
+  selector: 'app-variants-tags-input-demo',
   imports: [
-    ScTagInputField,
-    ScTagInputInput,
-    ScTagInputTag,
-    ScTagInputRemove,
+    ScField,
+    ScLabel,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemDelete,
     SiXIcon,
   ],
   template: \`
-    <div class="max-w-md space-y-3">
-      <div class="space-y-1">
-        <label class="text-muted-foreground text-xs">Default</label>
-        <div scTagInputField [(tags)]="variantDefault">
-          @for (tag of variantDefault(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="default">
+    <div class="w-full max-w-md space-y-3">
+      <div scField>
+        <label scLabel>Default</label>
+        <div scTagsInput [(tags)]="variantDefault">
+          @for (tag of variantDefault(); track $index) {
+            <span
+              scTagsInputItem
+              [tag]="tag"
+              [index]="$index"
+              variant="default"
+            >
               {{ tag }}
-              <button scTagInputRemove>
+              <button scTagsInputItemDelete>
                 <svg siXIcon class="size-3"></svg>
               </button>
             </span>
           }
-          <input scTagInputInput />
+          <input scTagsInputControl />
         </div>
       </div>
-      <div class="space-y-1">
-        <label class="text-muted-foreground text-xs">Secondary</label>
-        <div scTagInputField [(tags)]="variantSecondary">
-          @for (tag of variantSecondary(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="secondary">
+      <div scField>
+        <label scLabel>Secondary</label>
+        <div scTagsInput [(tags)]="variantSecondary">
+          @for (tag of variantSecondary(); track $index) {
+            <span
+              scTagsInputItem
+              [tag]="tag"
+              [index]="$index"
+              variant="secondary"
+            >
               {{ tag }}
-              <button scTagInputRemove>
+              <button scTagsInputItemDelete>
                 <svg siXIcon class="size-3"></svg>
               </button>
             </span>
           }
-          <input scTagInputInput />
+          <input scTagsInputControl />
         </div>
       </div>
-      <div class="space-y-1">
-        <label class="text-muted-foreground text-xs">Outline</label>
-        <div scTagInputField [(tags)]="variantOutline">
-          @for (tag of variantOutline(); track tag) {
-            <span scTagInputTag [tag]="tag" variant="outline">
+      <div scField>
+        <label scLabel>Outline</label>
+        <div scTagsInput [(tags)]="variantOutline">
+          @for (tag of variantOutline(); track $index) {
+            <span
+              scTagsInputItem
+              [tag]="tag"
+              [index]="$index"
+              variant="outline"
+            >
               {{ tag }}
-              <button scTagInputRemove>
+              <button scTagsInputItemDelete>
                 <svg siXIcon class="size-3"></svg>
               </button>
             </span>
           }
-          <input scTagInputInput />
+          <input scTagsInputControl />
         </div>
       </div>
     </div>
@@ -92,7 +110,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VariantsTagInputDemo {
+export class VariantsTagsInputDemo {
   readonly variantDefault = signal<string[]>(['Primary', 'Tags']);
   readonly variantSecondary = signal<string[]>(['Secondary', 'Style']);
   readonly variantOutline = signal<string[]>(['Outline', 'Variant']);

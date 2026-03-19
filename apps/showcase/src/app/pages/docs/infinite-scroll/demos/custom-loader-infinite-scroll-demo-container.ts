@@ -47,6 +47,7 @@ interface Item {
   template: \`
     <div
       scInfiniteScroll
+      aria-label="Custom loader infinite scroll demo"
       class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"

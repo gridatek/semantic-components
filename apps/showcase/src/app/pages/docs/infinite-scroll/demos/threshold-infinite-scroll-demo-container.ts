@@ -56,6 +56,7 @@ interface Item {
     </p>
     <div
       scInfiniteScroll
+      aria-label="Threshold infinite scroll demo"
       class="h-[300px] rounded-lg border"
       [loading]="loading()"
       [hasReachedEnd]="reachedEnd()"

@@ -26,36 +26,42 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
-  ScTagInputField,
-  ScTagInputInput,
-  ScTagInputRemove,
-  ScTagInputTag,
+  ScTagsInput,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemDelete,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-output-tag-input-demo',
+  selector: 'app-output-tags-input-demo',
   imports: [
     JsonPipe,
-    ScTagInputField,
-    ScTagInputInput,
-    ScTagInputTag,
-    ScTagInputRemove,
+    ScField,
+    ScLabel,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemDelete,
     SiXIcon,
   ],
   template: \`
-    <div class="max-w-md space-y-4">
-      <div scTagInputField [(tags)]="tags">
-        @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag">
-            {{ tag }}
-            <button scTagInputRemove>
-              <svg siXIcon class="size-3"></svg>
-            </button>
-          </span>
-        }
-        <input scTagInputInput />
+    <div class="w-full max-w-md space-y-4">
+      <div scField>
+        <label scLabel>Tags</label>
+        <div scTagsInput [(tags)]="tags">
+          @for (tag of tags(); track $index) {
+            <span scTagsInputItem [tag]="tag" [index]="$index">
+              {{ tag }}
+              <button scTagsInputItemDelete>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
+          }
+          <input scTagsInputControl />
+        </div>
       </div>
       <div class="bg-muted/50 rounded-md border p-4">
         <pre class="text-sm">{{ tags() | json }}</pre>
@@ -66,7 +72,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OutputTagInputDemo {
+export class OutputTagsInputDemo {
   readonly tags = signal<string[]>(['Angular', 'TypeScript']);
 }`;
 }
