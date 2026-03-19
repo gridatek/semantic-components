@@ -1,4 +1,9 @@
-import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
+import {
+  ConnectedPosition,
+  OverlayModule,
+  ScrollStrategy,
+  ScrollStrategyOptions,
+} from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,23 +15,6 @@ import {
 import { cn } from '@semantic-components/ui';
 import { ScMentionInputState } from './mention-input-state';
 
-const positions: ConnectedPosition[] = [
-  {
-    originX: 'start',
-    originY: 'bottom',
-    overlayX: 'start',
-    overlayY: 'top',
-    offsetY: 4,
-  },
-  {
-    originX: 'start',
-    originY: 'top',
-    overlayX: 'start',
-    overlayY: 'bottom',
-    offsetY: -4,
-  },
-];
-
 @Component({
   selector: 'div[scMentionInputSuggestions]',
   imports: [OverlayModule],
@@ -36,7 +24,8 @@ const positions: ConnectedPosition[] = [
         cdkConnectedOverlay
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="true"
-        [cdkConnectedOverlayPositions]="positions"
+        [cdkConnectedOverlayPositions]="positions()"
+        [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
       >
         <div role="listbox" [class]="listClass()">
           <ng-content />
@@ -55,7 +44,31 @@ export class ScMentionInputSuggestions {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly state = inject(ScMentionInputState);
-  protected readonly positions = positions;
+  protected readonly scrollStrategy: ScrollStrategy = inject(
+    ScrollStrategyOptions,
+  ).reposition();
+
+  protected readonly positions = computed((): ConnectedPosition[] => {
+    const offset = this.state.caretOffset();
+    return [
+      {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'top',
+        offsetX: offset.x,
+        offsetY: offset.y,
+      },
+      {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'bottom',
+        offsetX: offset.x,
+        offsetY: offset.y - 20,
+      },
+    ];
+  });
 
   protected readonly listClass = computed(() =>
     cn(

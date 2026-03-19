@@ -7,6 +7,7 @@ import {
   computed,
   signal,
 } from '@angular/core';
+import { getCaretOffset } from './mention-input-caret';
 import type { MentionUser } from './mention-input-types';
 
 @Injectable()
@@ -24,6 +25,7 @@ export class ScMentionInputState {
   readonly showSuggestions = signal(false);
   readonly searchQuery = signal('');
   readonly selectedIndex = signal(0);
+  readonly caretOffset = signal<{ x: number; y: number }>({ x: 0, y: 0 });
 
   private mentionStartIndex = -1;
 
@@ -65,6 +67,7 @@ export class ScMentionInputState {
         this.mentionStartIndex = triggerIndex;
         this.searchQuery.set(textAfterTrigger);
         this.selectedIndex.set(0);
+        this.caretOffset.set(getCaretOffset(textarea, triggerIndex));
         this.showSuggestions.set(true);
         return;
       }
