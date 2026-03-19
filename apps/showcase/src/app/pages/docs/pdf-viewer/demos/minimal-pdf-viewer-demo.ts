@@ -25,7 +25,7 @@ import {
     ScPdfViewerCanvas,
   ],
   template: `
-    <div class="h-[400px]">
+    <div class="h-[400px] w-full">
       <div
         scPdfViewer
         class="h-full"
