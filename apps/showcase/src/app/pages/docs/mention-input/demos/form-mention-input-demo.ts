@@ -4,7 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { ScField, ScLabel } from '@semantic-components/ui';
+import { ScButton, ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScMentionInput,
   ScMentionInputControl,
@@ -16,6 +16,7 @@ import type { MentionUser } from '@semantic-components/ui-lab';
 @Component({
   selector: 'app-form-mention-input-demo',
   imports: [
+    ScButton,
     ScField,
     ScLabel,
     ScMentionInput,
@@ -66,17 +67,8 @@ import type { MentionUser } from '@semantic-components/ui-lab';
         </div>
       </div>
       <div class="flex justify-end gap-2">
-        <button
-          class="border-input hover:bg-accent inline-flex h-8 items-center justify-center rounded-md border px-3 text-sm font-medium"
-        >
-          Cancel
-        </button>
-        <button
-          class="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-8 items-center justify-center rounded-md px-3 text-sm font-medium"
-          [disabled]="!commentValue()"
-        >
-          Post Comment
-        </button>
+        <button scButton variant="outline">Cancel</button>
+        <button scButton [disabled]="!commentValue()">Post Comment</button>
       </div>
     </div>
   `,
