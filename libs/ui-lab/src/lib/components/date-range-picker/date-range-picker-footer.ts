@@ -17,9 +17,7 @@ import { ScDateRangePicker } from './date-range-picker';
         {{ picker.formatDate(picker.value().from!) }} -
         {{ picker.formatDate(picker.value().to!) }}
       } @else if (picker.value().from) {
-        {{ picker.formatDate(picker.value().from!) }} - Select end date
-      } @else {
-        Select a date range
+        {{ picker.formatDate(picker.value().from!) }} - ...
       }
     </div>
     <div class="flex gap-2">
