@@ -381,8 +381,7 @@
     "description": "Load more content as the user scrolls.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Input",
