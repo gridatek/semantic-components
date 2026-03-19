@@ -74,11 +74,10 @@ import {
       </div>
       <div class="flex gap-4">
         <div
-          class="flex h-24 w-32 items-center justify-center rounded-lg text-white shadow-lg"
+          class="h-24 w-32 rounded-lg shadow-lg"
           [style.background-color]="color()"
-        >
-          <span class="text-sm font-medium drop-shadow">Preview</span>
-        </div>
+          aria-hidden="true"
+        ></div>
         <div class="space-y-2">
           <div class="flex items-center gap-2">
             <div
