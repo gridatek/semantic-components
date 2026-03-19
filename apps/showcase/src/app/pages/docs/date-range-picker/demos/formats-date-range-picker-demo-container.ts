@@ -28,24 +28,207 @@ export class FormatsDateRangePickerDemoContainer {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { ScDateRangePicker } from '@semantic-components/ui-lab';
+import {
+  ScCalendar,
+  ScCalendarHeader,
+  ScCalendarHeading,
+  ScCalendarNext,
+  ScCalendarPrevious,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+} from '@semantic-components/ui';
+import {
+  ScDateRangePicker,
+  ScDateRangePickerFooter,
+  ScDateRangePickerTrigger,
+} from '@semantic-components/ui-lab';
+import {
+  SiCalendarIcon,
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-formats-date-range-picker-demo',
-  imports: [ScDateRangePicker],
+  imports: [
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
+    ScDateRangePickerFooter,
+    ScPopoverProvider,
+    ScPopoverPortal,
+    ScPopover,
+    ScCalendar,
+    ScCalendarHeader,
+    ScCalendarHeading,
+    ScCalendarPrevious,
+    ScCalendarNext,
+    SiCalendarIcon,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
+  ],
   template: \`
     <div class="flex flex-col gap-3">
       <div>
         <span class="text-muted-foreground mr-2 text-sm">Short:</span>
-        <sc-date-range-picker dateFormat="short" placeholder="Short format" />
+        <div
+          scDateRangePicker
+          dateFormat="short"
+          placeholder="Short format"
+          #drpShort="scDateRangePicker"
+        >
+          <div
+            scPopoverProvider
+            [origin]="triggerShort.overlayOrigin"
+            align="start"
+          >
+            <button
+              scDateRangePickerTrigger
+              #triggerShort="scDateRangePickerTrigger"
+            >
+              <svg siCalendarIcon class="mr-2 size-4"></svg>
+              <span
+                [class]="drpShort.displayText() ? '' : 'text-muted-foreground'"
+              >
+                {{ drpShort.displayText() || drpShort.placeholder() }}
+              </span>
+            </button>
+            <ng-template scPopoverPortal>
+              <div scPopover class="w-auto p-0">
+                <div class="p-3">
+                  <div
+                    scCalendar
+                    mode="range"
+                    [value]="drpShort.value()"
+                    (valueChange)="drpShort.onValueChange($event)"
+                    #calShort="scCalendar"
+                  >
+                    <div scCalendarHeader>
+                      <button scCalendarPrevious>
+                        <svg siChevronLeftIcon class="size-4"></svg>
+                        <span class="sr-only">Go to previous</span>
+                      </button>
+                      <button scCalendarHeading>
+                        {{ calShort.heading() }}
+                      </button>
+                      <button scCalendarNext>
+                        <svg siChevronRightIcon class="size-4"></svg>
+                        <span class="sr-only">Go to next</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div scDateRangePickerFooter></div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
       </div>
       <div>
         <span class="text-muted-foreground mr-2 text-sm">Long:</span>
-        <sc-date-range-picker dateFormat="long" placeholder="Long format" />
+        <div
+          scDateRangePicker
+          dateFormat="long"
+          placeholder="Long format"
+          #drpLong="scDateRangePicker"
+        >
+          <div
+            scPopoverProvider
+            [origin]="triggerLong.overlayOrigin"
+            align="start"
+          >
+            <button
+              scDateRangePickerTrigger
+              #triggerLong="scDateRangePickerTrigger"
+            >
+              <svg siCalendarIcon class="mr-2 size-4"></svg>
+              <span
+                [class]="drpLong.displayText() ? '' : 'text-muted-foreground'"
+              >
+                {{ drpLong.displayText() || drpLong.placeholder() }}
+              </span>
+            </button>
+            <ng-template scPopoverPortal>
+              <div scPopover class="w-auto p-0">
+                <div class="p-3">
+                  <div
+                    scCalendar
+                    mode="range"
+                    [value]="drpLong.value()"
+                    (valueChange)="drpLong.onValueChange($event)"
+                    #calLong="scCalendar"
+                  >
+                    <div scCalendarHeader>
+                      <button scCalendarPrevious>
+                        <svg siChevronLeftIcon class="size-4"></svg>
+                        <span class="sr-only">Go to previous</span>
+                      </button>
+                      <button scCalendarHeading>{{ calLong.heading() }}</button>
+                      <button scCalendarNext>
+                        <svg siChevronRightIcon class="size-4"></svg>
+                        <span class="sr-only">Go to next</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div scDateRangePickerFooter></div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
       </div>
       <div>
         <span class="text-muted-foreground mr-2 text-sm">ISO:</span>
-        <sc-date-range-picker dateFormat="iso" placeholder="ISO format" />
+        <div
+          scDateRangePicker
+          dateFormat="iso"
+          placeholder="ISO format"
+          #drpIso="scDateRangePicker"
+        >
+          <div
+            scPopoverProvider
+            [origin]="triggerIso.overlayOrigin"
+            align="start"
+          >
+            <button
+              scDateRangePickerTrigger
+              #triggerIso="scDateRangePickerTrigger"
+            >
+              <svg siCalendarIcon class="mr-2 size-4"></svg>
+              <span
+                [class]="drpIso.displayText() ? '' : 'text-muted-foreground'"
+              >
+                {{ drpIso.displayText() || drpIso.placeholder() }}
+              </span>
+            </button>
+            <ng-template scPopoverPortal>
+              <div scPopover class="w-auto p-0">
+                <div class="p-3">
+                  <div
+                    scCalendar
+                    mode="range"
+                    [value]="drpIso.value()"
+                    (valueChange)="drpIso.onValueChange($event)"
+                    #calIso="scCalendar"
+                  >
+                    <div scCalendarHeader>
+                      <button scCalendarPrevious>
+                        <svg siChevronLeftIcon class="size-4"></svg>
+                        <span class="sr-only">Go to previous</span>
+                      </button>
+                      <button scCalendarHeading>{{ calIso.heading() }}</button>
+                      <button scCalendarNext>
+                        <svg siChevronRightIcon class="size-4"></svg>
+                        <span class="sr-only">Go to next</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div scDateRangePickerFooter></div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
       </div>
     </div>
   \`,
