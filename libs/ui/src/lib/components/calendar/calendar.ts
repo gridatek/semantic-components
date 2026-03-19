@@ -46,21 +46,32 @@ export type ScCalendarValue =
     <!-- View content -->
     @switch (viewMode()) {
       @case ('day') {
-        <div
-          scCalendarDayView
-          [viewDate]="viewDate()"
-          [mode]="mode()"
-          [value]="value()"
-          [disabled]="disabled()"
-          [minDate]="minDate()"
-          [maxDate]="maxDate()"
-          [weekDays]="weekDays()"
-          [startOfWeek]="startOfWeek()"
-          [ariaLabel]="dayViewLabel()"
-          (dateSelected)="selectDate($event)"
-          (monthScrollUp)="previousMonth()"
-          (monthScrollDown)="nextMonth()"
-        ></div>
+        <div [class]="monthsContainerClass()">
+          @for (vd of viewDates(); track $index) {
+            <div class="flex flex-col gap-4">
+              @if (numberOfMonths() > 1) {
+                <div class="text-center text-sm font-medium">
+                  {{ headings()[$index] }}
+                </div>
+              }
+              <div
+                scCalendarDayView
+                [viewDate]="vd"
+                [mode]="mode()"
+                [value]="value()"
+                [disabled]="disabled()"
+                [minDate]="minDate()"
+                [maxDate]="maxDate()"
+                [weekDays]="weekDays()"
+                [startOfWeek]="startOfWeek()"
+                [ariaLabel]="dayViewLabel()"
+                (dateSelected)="selectDate($event)"
+                (monthScrollUp)="previousMonth()"
+                (monthScrollDown)="nextMonth()"
+              ></div>
+            </div>
+          }
+        </div>
       }
       @case ('month') {
         <div
@@ -100,6 +111,7 @@ export class ScCalendar {
   readonly disabled = input<Temporal.PlainDate[]>([]);
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
+  readonly numberOfMonths = input(1);
 
   readonly value = model<ScCalendarValue>(undefined);
 
@@ -136,7 +148,29 @@ export class ScCalendar {
   );
 
   protected readonly class = computed(() =>
-    cn('flex flex-col gap-4 p-3 w-[276px]', this.classInput()),
+    cn(
+      'flex flex-col gap-4 p-3',
+      this.numberOfMonths() > 1 ? 'w-auto' : 'w-[276px]',
+      this.classInput(),
+    ),
+  );
+
+  readonly viewDates = computed(() =>
+    Array.from({ length: this.numberOfMonths() }, (_, i) =>
+      i === 0
+        ? this.viewDate()
+        : this.viewDate().add({ months: i }).with({ day: 1 }),
+    ),
+  );
+
+  readonly headings = computed(() =>
+    this.viewDates().map((date) =>
+      date.toLocaleString(this.locale, { month: 'long', year: 'numeric' }),
+    ),
+  );
+
+  protected readonly monthsContainerClass = computed(() =>
+    cn(this.numberOfMonths() > 1 && 'flex gap-4'),
   );
 
   /** The computed heading label (month/year, year, or decade range) */
