@@ -1,3 +1,4 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ElementRef,
   Injectable,
@@ -18,11 +19,11 @@ export class ScMentionInputState {
   onMentionSelect: ((user: MentionUser) => void) | undefined;
 
   textareaEl: ElementRef<HTMLTextAreaElement> | undefined;
+  overlayOrigin: CdkOverlayOrigin | undefined;
 
   readonly showSuggestions = signal(false);
   readonly searchQuery = signal('');
   readonly selectedIndex = signal(0);
-  readonly suggestionsPosition = signal({ top: 0, left: 0 });
 
   private mentionStartIndex = -1;
 
@@ -65,7 +66,6 @@ export class ScMentionInputState {
         this.searchQuery.set(textAfterTrigger);
         this.selectedIndex.set(0);
         this.showSuggestions.set(true);
-        this.updateSuggestionsPosition();
         return;
       }
     }
@@ -144,15 +144,5 @@ export class ScMentionInputState {
     this.showSuggestions.set(false);
     this.searchQuery.set('');
     this.mentionStartIndex = -1;
-  }
-
-  private updateSuggestionsPosition(): void {
-    const textarea = this.textareaEl?.nativeElement;
-    if (!textarea) return;
-
-    this.suggestionsPosition.set({
-      top: textarea.offsetHeight + 4,
-      left: 0,
-    });
   }
 }

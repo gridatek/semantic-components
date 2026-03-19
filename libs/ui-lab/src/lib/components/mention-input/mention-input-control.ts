@@ -1,10 +1,12 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { SC_FIELD, cn } from '@semantic-components/ui';
 import { ScMentionInputState } from './mention-input-state';
 
 @Directive({
   selector: 'textarea[scMentionInputControl]',
+  hostDirectives: [CdkOverlayOrigin],
   host: {
     'data-slot': 'control',
     '[attr.id]': 'id()',
@@ -24,6 +26,7 @@ export class ScMentionInputControl {
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly elementRef = inject(ElementRef<HTMLTextAreaElement>);
   private readonly fallbackId = inject(_IdGenerator).getId('sc-mention-input-');
+  readonly overlayOrigin = inject(CdkOverlayOrigin);
 
   readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
@@ -42,5 +45,6 @@ export class ScMentionInputControl {
 
   constructor() {
     this.state.textareaEl = this.elementRef;
+    this.state.overlayOrigin = this.overlayOrigin;
   }
 }
