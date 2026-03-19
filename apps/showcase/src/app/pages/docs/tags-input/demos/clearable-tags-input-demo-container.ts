@@ -25,40 +25,46 @@ export class ClearableTagsInputDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
-  ScTagInputClear,
-  ScTagInputField,
-  ScTagInputInput,
-  ScTagInputRemove,
-  ScTagInputTag,
+  ScTagsInput,
+  ScTagsInputClear,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemDelete,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-clearable-tag-input-demo',
+  selector: 'app-clearable-tags-input-demo',
   imports: [
-    ScTagInputField,
-    ScTagInputInput,
-    ScTagInputTag,
-    ScTagInputRemove,
-    ScTagInputClear,
+    ScField,
+    ScLabel,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemDelete,
+    ScTagsInputClear,
     SiXIcon,
   ],
   template: \`
-    <div class="max-w-md">
-      <div scTagInputField [(tags)]="tags">
-        @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag">
-            {{ tag }}
-            <button scTagInputRemove>
-              <svg siXIcon class="size-3"></svg>
-            </button>
-          </span>
-        }
-        <input scTagInputInput />
-        <button scTagInputClear>
-          <svg siXIcon class="size-4"></svg>
-        </button>
+    <div class="w-full max-w-md">
+      <div scField>
+        <label scLabel>Tags</label>
+        <div scTagsInput [(tags)]="tags">
+          @for (tag of tags(); track $index) {
+            <span scTagsInputItem [tag]="tag" [index]="$index">
+              {{ tag }}
+              <button scTagsInputItemDelete>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
+          }
+          <input scTagsInputControl />
+          <button scTagsInputClear>
+            <svg siXIcon class="size-4"></svg>
+          </button>
+        </div>
       </div>
     </div>
   \`,
@@ -66,7 +72,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClearableTagInputDemo {
+export class ClearableTagsInputDemo {
   readonly tags = signal<string[]>(['React', 'Vue', 'Svelte']);
 }`;
 }

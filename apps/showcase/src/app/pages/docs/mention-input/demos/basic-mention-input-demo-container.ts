@@ -25,57 +25,65 @@ export class BasicMentionInputDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScMentionInput,
+  ScMentionInputControl,
   ScMentionInputSuggestionItem,
   ScMentionInputSuggestions,
-  ScMentionInputTextarea,
 } from '@semantic-components/ui-lab';
 import type { MentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-basic-mention-input-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScMentionInput,
-    ScMentionInputTextarea,
+    ScMentionInputControl,
     ScMentionInputSuggestions,
     ScMentionInputSuggestionItem,
   ],
   template: \`
-    <div class="max-w-lg">
-      <div
-        scMentionInput
-        [users]="sampleUsers"
-        [(value)]="value"
-        [(mentions)]="mentions"
-        (mentionSelect)="onMentionSelect($event)"
-        #mention="scMentionInput"
-      >
-        <textarea
-          scMentionInputTextarea
-          placeholder="Type @ to mention someone..."
-        ></textarea>
+    <div class="w-full max-w-lg">
+      <div scField>
+        <label scLabel>Message</label>
+        <div
+          scMentionInput
+          [users]="sampleUsers"
+          [(value)]="value"
+          [(mentions)]="mentions"
+          (mentionSelect)="onMentionSelect($event)"
+          #mention="scMentionInput"
+        >
+          <textarea
+            scMentionInputControl
+            placeholder="Type @ to mention someone..."
+          ></textarea>
 
-        @if (mention.showSuggestions() && mention.filteredUsers().length > 0) {
-          <div scMentionInputSuggestions>
-            @for (
-              user of mention.filteredUsers();
-              track user.id;
-              let i = $index
-            ) {
-              <button
-                scMentionInputSuggestionItem
-                [user]="user"
-                [index]="i"
-              ></button>
-            }
-          </div>
-        }
+          @if (
+            mention.showSuggestions() && mention.filteredUsers().length > 0
+          ) {
+            <div scMentionInputSuggestions>
+              @for (
+                user of mention.filteredUsers();
+                track user.id;
+                let i = $index
+              ) {
+                <button
+                  scMentionInputSuggestionItem
+                  [user]="user"
+                  [index]="i"
+                ></button>
+              }
+            </div>
+          }
+        </div>
       </div>
-    </div>
-    <div class="text-muted-foreground mt-3 space-y-1 text-sm">
-      <p>Value: {{ value() || 'Empty' }}</p>
-      <p>Mentions: {{ mentions().length }} user(s)</p>
+      <div class="text-muted-foreground mt-3 space-y-1 text-sm">
+        <p>Value: {{ value() || 'Empty' }}</p>
+        <p>Mentions: {{ mentions().length }} user(s)</p>
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

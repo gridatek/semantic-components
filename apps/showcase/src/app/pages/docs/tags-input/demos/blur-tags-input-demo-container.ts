@@ -25,35 +25,41 @@ export class BlurTagsInputDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
-  ScTagInputField,
-  ScTagInputInput,
-  ScTagInputRemove,
-  ScTagInputTag,
+  ScTagsInput,
+  ScTagsInputControl,
+  ScTagsInputItem,
+  ScTagsInputItemDelete,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-blur-tag-input-demo',
+  selector: 'app-blur-tags-input-demo',
   imports: [
-    ScTagInputField,
-    ScTagInputInput,
-    ScTagInputTag,
-    ScTagInputRemove,
+    ScField,
+    ScLabel,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemDelete,
     SiXIcon,
   ],
   template: \`
-    <div class="max-w-md">
-      <div scTagInputField [(tags)]="tags">
-        @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag">
-            {{ tag }}
-            <button scTagInputRemove>
-              <svg siXIcon class="size-3"></svg>
-            </button>
-          </span>
-        }
-        <input scTagInputInput [addOnBlur]="true" />
+    <div class="w-full max-w-md">
+      <div scField>
+        <label scLabel>Tags</label>
+        <div scTagsInput [(tags)]="tags">
+          @for (tag of tags(); track $index) {
+            <span scTagsInputItem [tag]="tag" [index]="$index">
+              {{ tag }}
+              <button scTagsInputItemDelete>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
+          }
+          <input scTagsInputControl [addOnBlur]="true" />
+        </div>
       </div>
     </div>
   \`,
@@ -61,7 +67,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BlurTagInputDemo {
+export class BlurTagsInputDemo {
   readonly tags = signal<string[]>(['blur', 'to', 'add']);
 }`;
 }

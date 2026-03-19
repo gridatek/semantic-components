@@ -31,6 +31,7 @@ export class InteractivePdfViewerDemoContainer {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  ScPdfViewerCanvas,
   ScPdfViewerContainer,
   ScPdfViewerContent,
   ScPdfViewerDownload,
@@ -84,6 +85,7 @@ import {
     ScPdfViewerLoading,
     ScPdfViewerError,
     ScPdfViewerEmpty,
+    ScPdfViewerCanvas,
     SiChevronLeftIcon,
     SiChevronRightIcon,
     SiZoomOutIcon,
@@ -115,7 +117,7 @@ import {
       </p>
 
       <div class="flex flex-wrap gap-2">
-        @for (sample of samplePdfs; track sample.url) {
+        @for (sample of samplePdfs; track sample.name) {
           <button
             type="button"
             class="hover:bg-muted rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors"
@@ -129,6 +131,7 @@ import {
       <div class="h-[600px]">
         <div
           scPdfViewer
+          class="h-full"
           [src]="currentPdf()"
           title="Sample PDF"
           #viewer="scPdfViewer"
@@ -176,30 +179,7 @@ import {
               <div scPdfViewerError></div>
               <div scPdfViewerEmpty></div>
 
-              @if (viewer.showContent()) {
-                <div
-                  class="h-full w-full overflow-auto"
-                  [style.transform]="'rotate(' + viewer.rotation() + 'deg)'"
-                  [style.transform-origin]="'center center'"
-                >
-                  <object
-                    [data]="viewer.safePdfUrl()"
-                    type="application/pdf"
-                    class="h-full w-full"
-                    [style.min-height]="'100%'"
-                    (load)="viewer.onLoad()"
-                    (error)="viewer.onError()"
-                  >
-                    <iframe
-                      [src]="viewer.safePdfUrl()"
-                      class="h-full w-full border-0"
-                      [title]="viewer.title() || 'PDF Document'"
-                      (load)="viewer.onLoad()"
-                      (error)="viewer.onError()"
-                    ></iframe>
-                  </object>
-                </div>
-              }
+              <sc-pdf-viewer-canvas />
             </div>
           </div>
         </div>

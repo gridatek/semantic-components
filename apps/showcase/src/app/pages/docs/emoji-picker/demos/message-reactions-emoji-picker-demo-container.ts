@@ -69,6 +69,7 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
           <button
             type="button"
             class="hover:bg-accent inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-sm"
+            [attr.aria-label]="reaction.emoji + ' reaction, ' + reaction.count"
             (click)="incrementReaction(reaction.emoji)"
           >
             <span>{{ reaction.emoji }}</span>
@@ -80,6 +81,7 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
         <button
           type="button"
           class="hover:bg-accent rounded-full p-1"
+          aria-label="Add reaction"
           scPopoverTrigger
         >
           <svg siCirclePlusIcon class="text-muted-foreground size-4"></svg>

@@ -25,38 +25,44 @@ export class MaxTagsTagsInputDemoContainer {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
-  ScTagInputCount,
-  ScTagInputField,
-  ScTagInputInput,
-  ScTagInputRemove,
-  ScTagInputTag,
+  ScTagsInput,
+  ScTagsInputControl,
+  ScTagsInputCount,
+  ScTagsInputItem,
+  ScTagsInputItemDelete,
 } from '@semantic-components/ui-lab';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-max-tags-tag-input-demo',
+  selector: 'app-max-tags-tags-input-demo',
   imports: [
-    ScTagInputField,
-    ScTagInputInput,
-    ScTagInputTag,
-    ScTagInputRemove,
-    ScTagInputCount,
+    ScField,
+    ScLabel,
+    ScTagsInput,
+    ScTagsInputControl,
+    ScTagsInputItem,
+    ScTagsInputItemDelete,
+    ScTagsInputCount,
     SiXIcon,
   ],
   template: \`
-    <div class="max-w-md space-y-2">
-      <div scTagInputField [(tags)]="tags" [maxTags]="5">
-        @for (tag of tags(); track tag) {
-          <span scTagInputTag [tag]="tag">
-            {{ tag }}
-            <button scTagInputRemove>
-              <svg siXIcon class="size-3"></svg>
-            </button>
-          </span>
-        }
-        <input scTagInputInput />
-        <span scTagInputCount class="ml-auto text-xs"></span>
+    <div class="w-full max-w-md">
+      <div scField>
+        <label scLabel>Tags</label>
+        <div scTagsInput [(tags)]="tags" [maxTags]="5">
+          @for (tag of tags(); track $index) {
+            <span scTagsInputItem [tag]="tag" [index]="$index">
+              {{ tag }}
+              <button scTagsInputItemDelete>
+                <svg siXIcon class="size-3"></svg>
+              </button>
+            </span>
+          }
+          <input scTagsInputControl />
+          <span scTagsInputCount class="ml-auto text-xs"></span>
+        </div>
       </div>
     </div>
   \`,
@@ -64,7 +70,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MaxTagsTagInputDemo {
+export class MaxTagsTagsInputDemo {
   readonly tags = signal<string[]>(['One', 'Two', 'Three']);
 }`;
 }
