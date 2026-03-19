@@ -8,9 +8,10 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   host: {
     'data-slot': 'emoji-picker-category-tab',
     type: 'button',
+    role: 'tab',
     '[class]': 'class()',
     '[attr.aria-label]': 'category().name',
-    '[attr.aria-pressed]': 'isActive()',
+    '[attr.aria-selected]': 'isActive()',
     '(click)': 'state.activeCategory.set(category().id)',
   },
 })
