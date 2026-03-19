@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { badgeVariants, cn } from '@semantic-components/ui';
 import { SC_TAGS_INPUT } from './tags-input';
 
 export const SC_TAGS_INPUT_ITEM = new InjectionToken<ScTagsInputItem>(
@@ -44,13 +44,8 @@ export class ScTagsInputItem {
 
   protected readonly class = computed(() =>
     cn(
-      'inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium transition-colors',
+      badgeVariants({ variant: this.variant() }),
       'max-w-[150px]',
-      'focus:outline-none focus:ring-1 focus:ring-ring',
-      this.variant() === 'default' && 'bg-primary text-primary-foreground',
-      this.variant() === 'secondary' &&
-        'bg-secondary text-secondary-foreground',
-      this.variant() === 'outline' && 'border bg-background',
       this.classInput(),
     ),
   );
