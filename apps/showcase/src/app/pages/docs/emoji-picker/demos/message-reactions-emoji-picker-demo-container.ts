@@ -23,29 +23,48 @@ import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picke
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageReactionsEmojiPickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
+import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
+import {
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+} from '@semantic-components/ui';
 import {
   Emoji,
   ScEmojiPicker,
+  ScEmojiPickerCategoryTab,
   ScEmojiPickerCategoryTabs,
   ScEmojiPickerGrid,
+  ScEmojiPickerItem,
 } from '@semantic-components/ui-lab';
 import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-message-reactions-emoji-picker-demo',
   imports: [
+    Grid,
+    GridRow,
+    GridCell,
+    GridCellWidget,
+    ScPopoverProvider,
+    ScPopoverTrigger,
+    ScPopoverPortal,
+    ScPopover,
     SiCirclePlusIcon,
     ScEmojiPicker,
     ScEmojiPickerCategoryTabs,
+    ScEmojiPickerCategoryTab,
     ScEmojiPickerGrid,
+    ScEmojiPickerItem,
   ],
   template: \`
     <div class="max-w-md rounded-lg border p-4">
       <p class="text-sm">
         This is a sample message that can have emoji reactions.
       </p>
-      <div class="mt-2 flex items-center gap-1">
+      <div class="mt-2 flex items-center gap-1" scPopoverProvider>
         @for (reaction of messageReactions(); track reaction.emoji) {
           <button
             type="button"
@@ -61,31 +80,71 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
         <button
           type="button"
           class="hover:bg-accent rounded-full p-1"
-          (click)="showReactionPicker.set(!showReactionPicker())"
+          scPopoverTrigger
         >
           <svg siCirclePlusIcon class="text-muted-foreground size-4"></svg>
         </button>
-      </div>
-      @if (showReactionPicker()) {
-        <div class="mt-2">
-          <div
-            scEmojiPicker
-            class="w-64"
-            [columns]="6"
-            (emojiSelect)="addReaction($event)"
-          >
-            <div scEmojiPickerCategoryTabs></div>
-            <div scEmojiPickerGrid></div>
+        <ng-template scPopoverPortal>
+          <div scPopover class="w-auto p-0 ring-0">
+            <div
+              scEmojiPicker
+              class="w-64"
+              [columns]="6"
+              (emojiSelect)="addReaction($event)"
+            >
+              <div scEmojiPickerCategoryTabs #tabs="scEmojiPickerCategoryTabs">
+                @for (category of tabs.state.categories(); track category.id) {
+                  <button scEmojiPickerCategoryTab [category]="category">
+                    {{ category.icon }}
+                  </button>
+                }
+              </div>
+              <div scEmojiPickerGrid #grid="scEmojiPickerGrid">
+                @if (grid.isEmpty()) {
+                  <div class="text-muted-foreground p-4 text-center text-sm">
+                    No emoji found
+                  </div>
+                } @else {
+                  <table
+                    ngGrid
+                    tabindex="0"
+                    aria-label="Emoji grid"
+                    class="w-full table-fixed border-collapse"
+                    colWrap="continuous"
+                    rowWrap="continuous"
+                  >
+                    <tbody>
+                      @for (row of grid.rows(); track $index) {
+                        <tr ngGridRow>
+                          @for (emoji of row; track emoji.emoji) {
+                            <td ngGridCell class="p-0 text-center">
+                              <button
+                                ngGridCellWidget
+                                scEmojiPickerItem
+                                [emoji]="emoji"
+                              >
+                                {{ emoji.emoji }}
+                              </button>
+                            </td>
+                          }
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                }
+              </div>
+            </div>
           </div>
-        </div>
-      }
+        </ng-template>
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageReactionsEmojiPickerDemo {
-  readonly showReactionPicker = signal(false);
+  private readonly popoverProvider = viewChild.required(ScPopoverProvider);
+
   readonly messageReactions = signal<{ emoji: string; count: number }[]>([
     { emoji: '👍', count: 3 },
     { emoji: '❤️', count: 1 },
@@ -106,7 +165,7 @@ export class MessageReactionsEmojiPickerDemo {
         { emoji: emoji.emoji, count: 1 },
       ]);
     }
-    this.showReactionPicker.set(false);
+    this.popoverProvider().close();
   }
 
   incrementReaction(emoji: string): void {
