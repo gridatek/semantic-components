@@ -1,5 +1,6 @@
 import {
   Directive,
+  InjectionToken,
   computed,
   inject,
   input,
@@ -10,10 +11,17 @@ import { cn } from '@semantic-components/ui';
 import { ScMentionInputState } from './mention-input-state';
 import type { MentionUser } from './mention-input-types';
 
+export const SC_MENTION_INPUT = new InjectionToken<ScMentionInput>(
+  'ScMentionInput',
+);
+
 @Directive({
-  selector: 'div[scMentionInput]',
+  selector: '[scMentionInput]',
   exportAs: 'scMentionInput',
-  providers: [ScMentionInputState],
+  providers: [
+    ScMentionInputState,
+    { provide: SC_MENTION_INPUT, useExisting: ScMentionInput },
+  ],
   host: {
     'data-slot': 'mention-input',
     '[class]': 'class()',

@@ -5,7 +5,7 @@ import { ScMentionInputState } from './mention-input-state';
 @Directive({
   selector: 'div[scMentionInputSuggestions]',
   host: {
-    'data-slot': 'mention-input-suggestions',
+    'data-slot': 'mention-input-suggestion-list',
     role: 'listbox',
     '[class]': 'class()',
     '[style.top.px]': 'state.suggestionsPosition().top',

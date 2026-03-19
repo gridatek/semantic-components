@@ -3,46 +3,54 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScMentionInput,
+  ScMentionInputControl,
   ScMentionInputSuggestionItem,
   ScMentionInputSuggestions,
-  ScMentionInputTextarea,
 } from '@semantic-components/ui-lab';
 import type { MentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-disabled-mention-input-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScMentionInput,
-    ScMentionInputTextarea,
+    ScMentionInputControl,
     ScMentionInputSuggestions,
     ScMentionInputSuggestionItem,
   ],
   template: `
-    <div class="max-w-lg">
-      <div scMentionInput [users]="sampleUsers" #mention="scMentionInput">
-        <textarea
-          scMentionInputTextarea
-          [disabled]="true"
-          placeholder="Type @ to mention someone..."
-        ></textarea>
+    <div class="w-full max-w-lg">
+      <div scField>
+        <label scLabel>Message</label>
+        <div scMentionInput [users]="sampleUsers" #mention="scMentionInput">
+          <textarea
+            scMentionInputControl
+            [disabled]="true"
+            placeholder="Type @ to mention someone..."
+          ></textarea>
 
-        @if (mention.showSuggestions() && mention.filteredUsers().length > 0) {
-          <div scMentionInputSuggestions>
-            @for (
-              user of mention.filteredUsers();
-              track user.id;
-              let i = $index
-            ) {
-              <button
-                scMentionInputSuggestionItem
-                [user]="user"
-                [index]="i"
-              ></button>
-            }
-          </div>
-        }
+          @if (
+            mention.showSuggestions() && mention.filteredUsers().length > 0
+          ) {
+            <div scMentionInputSuggestions>
+              @for (
+                user of mention.filteredUsers();
+                track user.id;
+                let i = $index
+              ) {
+                <button
+                  scMentionInputSuggestionItem
+                  [user]="user"
+                  [index]="i"
+                ></button>
+              }
+            </div>
+          }
+        </div>
       </div>
     </div>
   `,

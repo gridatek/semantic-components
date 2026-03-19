@@ -4,24 +4,27 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScMentionInput,
+  ScMentionInputControl,
   ScMentionInputSuggestionItem,
   ScMentionInputSuggestions,
-  ScMentionInputTextarea,
 } from '@semantic-components/ui-lab';
 import type { MentionUser } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-form-mention-input-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScMentionInput,
-    ScMentionInputTextarea,
+    ScMentionInputControl,
     ScMentionInputSuggestions,
     ScMentionInputSuggestionItem,
   ],
   template: `
-    <div class="max-w-lg space-y-3 rounded-lg border p-4">
+    <div class="w-full max-w-lg space-y-3 rounded-lg border p-4">
       <div class="flex items-center gap-3">
         <div
           class="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-full text-sm font-medium"
@@ -30,33 +33,37 @@ import type { MentionUser } from '@semantic-components/ui-lab';
         </div>
         <span class="font-medium">John Doe</span>
       </div>
-      <div
-        scMentionInput
-        [(value)]="commentValue"
-        [users]="sampleUsers"
-        #mention="scMentionInput"
-      >
-        <textarea
-          scMentionInputTextarea
-          placeholder="Write a comment... Use @ to mention someone"
-          [rows]="3"
-        ></textarea>
+      <div scField>
+        <label scLabel>Comment</label>
+        <div
+          scMentionInput
+          [(value)]="commentValue"
+          [users]="sampleUsers"
+          #mention="scMentionInput"
+        >
+          <textarea
+            scMentionInputControl
+            placeholder="Write a comment... Use @ to mention someone"
+          ></textarea>
 
-        @if (mention.showSuggestions() && mention.filteredUsers().length > 0) {
-          <div scMentionInputSuggestions>
-            @for (
-              user of mention.filteredUsers();
-              track user.id;
-              let i = $index
-            ) {
-              <button
-                scMentionInputSuggestionItem
-                [user]="user"
-                [index]="i"
-              ></button>
-            }
-          </div>
-        }
+          @if (
+            mention.showSuggestions() && mention.filteredUsers().length > 0
+          ) {
+            <div scMentionInputSuggestions>
+              @for (
+                user of mention.filteredUsers();
+                track user.id;
+                let i = $index
+              ) {
+                <button
+                  scMentionInputSuggestionItem
+                  [user]="user"
+                  [index]="i"
+                ></button>
+              }
+            </div>
+          }
+        </div>
       </div>
       <div class="flex justify-end gap-2">
         <button
