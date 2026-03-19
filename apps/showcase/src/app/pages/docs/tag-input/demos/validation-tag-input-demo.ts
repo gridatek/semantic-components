@@ -22,7 +22,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="max-w-md">
+    <div class="w-full max-w-md">
       <div scTagInputField [(tags)]="tags" [minLength]="2" [maxLength]="15">
         @for (tag of tags(); track $index) {
           <span scTagInputTag [tag]="tag" [index]="$index">

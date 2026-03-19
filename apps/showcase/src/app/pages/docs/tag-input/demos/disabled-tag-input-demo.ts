@@ -21,7 +21,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="max-w-md">
+    <div class="w-full max-w-md">
       <div
         scTagInputField
         [tags]="['Angular', 'React', 'Vue']"

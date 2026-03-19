@@ -24,7 +24,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="max-w-md space-y-4">
+    <div class="w-full max-w-md space-y-4">
       <div scTagInputField [(tags)]="tags">
         @for (tag of tags(); track $index) {
           <span scTagInputTag [tag]="tag" [index]="$index">

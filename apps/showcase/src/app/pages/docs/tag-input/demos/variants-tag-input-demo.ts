@@ -22,7 +22,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="max-w-md space-y-3">
+    <div class="w-full max-w-md space-y-3">
       <div class="space-y-1">
         <label class="text-muted-foreground text-xs">Default</label>
         <div scTagInputField [(tags)]="variantDefault">

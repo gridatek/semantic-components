@@ -26,7 +26,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="max-w-md space-y-4">
+    <div class="w-full max-w-md space-y-4">
       <div class="space-y-2">
         <label class="text-sm font-medium">Skills</label>
         <div
