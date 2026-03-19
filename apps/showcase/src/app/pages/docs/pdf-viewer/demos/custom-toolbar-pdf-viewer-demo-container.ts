@@ -10,7 +10,11 @@ import { CustomToolbarPdfViewerDemo } from './custom-toolbar-pdf-viewer-demo';
   selector: 'app-custom-toolbar-pdf-viewer-demo-container',
   imports: [DemoContainer, CustomToolbarPdfViewerDemo],
   template: `
-    <app-demo-container title="Custom Toolbar (Navigation Only)" [code]="code">
+    <app-demo-container
+      title="Custom Toolbar (Navigation Only)"
+      demoUrl="/demos/pdf-viewer/custom-toolbar-pdf-viewer-demo"
+      [code]="code"
+    >
       <app-custom-toolbar-pdf-viewer-demo />
     </app-demo-container>
   `,

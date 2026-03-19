@@ -10,7 +10,11 @@ import { InteractivePdfViewerDemo } from './interactive-pdf-viewer-demo';
   selector: 'app-interactive-pdf-viewer-demo-container',
   imports: [DemoContainer, InteractivePdfViewerDemo],
   template: `
-    <app-demo-container title="Interactive PDF Viewer" [code]="code">
+    <app-demo-container
+      title="Interactive PDF Viewer"
+      demoUrl="/demos/pdf-viewer/interactive-pdf-viewer-demo"
+      [code]="code"
+    >
       <app-interactive-pdf-viewer-demo />
     </app-demo-container>
   `,

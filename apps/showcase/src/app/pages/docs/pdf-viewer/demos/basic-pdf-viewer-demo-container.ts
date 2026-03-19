@@ -10,7 +10,11 @@ import { BasicPdfViewerDemo } from './basic-pdf-viewer-demo';
   selector: 'app-basic-pdf-viewer-demo-container',
   imports: [DemoContainer, BasicPdfViewerDemo],
   template: `
-    <app-demo-container title="Basic PDF Viewer" [code]="code">
+    <app-demo-container
+      title="Basic PDF Viewer"
+      demoUrl="/demos/pdf-viewer/basic-pdf-viewer-demo"
+      [code]="code"
+    >
       <app-basic-pdf-viewer-demo />
     </app-demo-container>
   `,

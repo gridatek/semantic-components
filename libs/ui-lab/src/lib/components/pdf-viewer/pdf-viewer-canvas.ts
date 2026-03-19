@@ -76,6 +76,7 @@ export class ScPdfViewerCanvas {
   private activeRenderTasks = new Map<number, RenderTask>();
   private renderedPages = new Set<number>();
   private observer: IntersectionObserver | null = null;
+  private domReady = false;
 
   readonly scaledValue = computed(() => {
     const z = this.zoom();
@@ -105,7 +106,12 @@ export class ScPdfViewerCanvas {
 
   constructor() {
     afterNextRender(() => {
+      this.domReady = true;
       this.setupIntersectionObserver();
+      // If layouts already computed before DOM was ready, render now
+      if (this.pageLayouts().length > 0) {
+        this.renderVisiblePages();
+      }
     });
 
     // When PDF document loads, compute page layouts
@@ -122,10 +128,10 @@ export class ScPdfViewerCanvas {
       this.rotation();
       const layouts = this.pageLayouts();
 
-      if (layouts.length > 0) {
+      if (layouts.length > 0 && this.domReady) {
         this.renderedPages.clear();
         this.cancelAllRenderTasks();
-        setTimeout(() => this.reobservePages());
+        setTimeout(() => this.renderVisiblePages());
       }
     });
 
@@ -196,17 +202,36 @@ export class ScPdfViewerCanvas {
     container.addEventListener('scroll', () => {
       this.updateCurrentPageFromScroll(container);
     });
-
-    setTimeout(() => this.reobservePages());
   }
 
-  private reobservePages(): void {
+  private renderVisiblePages(): void {
     const container = this.scrollContainer()?.nativeElement;
-    if (!container || !this.observer) return;
+    if (!container) return;
 
-    this.observer.disconnect();
+    // Re-observe for future scroll-based rendering
+    if (this.observer) {
+      this.observer.disconnect();
+      const pageElements = container.querySelectorAll(':scope > [data-page]');
+      pageElements.forEach((el) => this.observer!.observe(el));
+    }
+
+    // Directly render pages that are currently visible
+    const containerRect = container.getBoundingClientRect();
     const pageElements = container.querySelectorAll(':scope > [data-page]');
-    pageElements.forEach((el) => this.observer!.observe(el));
+
+    pageElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const isVisible =
+        rect.bottom > containerRect.top - 100 &&
+        rect.top < containerRect.bottom + 100;
+
+      if (isVisible) {
+        const pageNum = parseInt(el.getAttribute('data-page') || '0', 10);
+        if (pageNum > 0) {
+          this.renderPage(pageNum);
+        }
+      }
+    });
   }
 
   private updateCurrentPageFromScroll(container: HTMLElement): void {

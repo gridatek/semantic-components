@@ -10,7 +10,11 @@ import { MinimalPdfViewerDemo } from './minimal-pdf-viewer-demo';
   selector: 'app-minimal-pdf-viewer-demo-container',
   imports: [DemoContainer, MinimalPdfViewerDemo],
   template: `
-    <app-demo-container title="Minimal (No Toolbar)" [code]="code">
+    <app-demo-container
+      title="Minimal (No Toolbar)"
+      demoUrl="/demos/pdf-viewer/minimal-pdf-viewer-demo"
+      [code]="code"
+    >
       <app-minimal-pdf-viewer-demo />
     </app-demo-container>
   `,
