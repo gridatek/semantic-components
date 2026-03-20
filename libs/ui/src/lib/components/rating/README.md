@@ -1,24 +1,24 @@
-# Rating Field Component
+# Rating Component
 
-A composable rating field component for Angular applications, built with a three-tier directive architecture for maximum flexibility and accessibility.
+A composable rating component for Angular applications, built with a three-tier directive architecture for maximum flexibility and accessibility.
 
 ## Architecture
 
 The component consists of four directives:
 
-1. **ScRatingField** - Parent directive managing value state and configuration
-2. **ScRatingFieldGroup** - Container directive managing hover state and keyboard navigation
-3. **ScRatingFieldItem** - Individual rating item directive
-4. **ScRatingFieldIcon** - Icon directive that handles active/inactive styling automatically
+1. **ScRating** - Parent directive managing value state and configuration
+2. **ScRatingGroup** - Container directive managing hover state and keyboard navigation
+3. **ScRatingItem** - Individual rating item directive
+4. **ScRatingIcon** - Icon directive that handles active/inactive styling automatically
 
 ## Basic Usage
 
 ```html
-<div scRatingField [(value)]="rating">
-  <div scRatingFieldGroup>
+<div scRating [(value)]="rating">
+  <div scRatingGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingFieldItem [value]="i">
-      <svg siStarIcon scRatingFieldIcon></svg>
+    <span scRatingItem [value]="i">
+      <svg siStarIcon scRatingIcon></svg>
     </span>
     }
   </div>
@@ -39,7 +39,7 @@ The component consists of four directives:
 
 ## API
 
-### ScRatingField
+### ScRating
 
 | Input            | Type      | Default | Description                                 |
 | ---------------- | --------- | ------- | ------------------------------------------- |
@@ -60,31 +60,31 @@ The component consists of four directives:
 | `--sc-rating-active-color`   | `var(--color-yellow-400)` | Color for filled icons |
 | `--sc-rating-inactive-color` | `var(--color-gray-300)`   | Color for empty icons  |
 
-### ScRatingFieldGroup
+### ScRatingGroup
 
 Container directive that manages hover state and keyboard navigation. No inputs required.
 
-### ScRatingFieldItem
+### ScRatingItem
 
 | Input   | Type     | Required | Description                           |
 | ------- | -------- | -------- | ------------------------------------- |
 | `value` | `number` | Yes      | The rating value this item represents |
 
-### ScRatingFieldIcon
+### ScRatingIcon
 
-Icon directive applied to SVGs inside `scRatingFieldItem`. Automatically handles active/inactive styling based on the item's state. Default size is `size-6`, overridable via the `class` input.
+Icon directive applied to SVGs inside `scRatingItem`. Automatically handles active/inactive styling based on the item's state. Default size is `size-6`, overridable via the `class` input.
 
 ## Examples
 
 ### Half-Star Rating
 
 ```html
-<div scRatingField [(value)]="rating" [allowHalf]="true">
-  <div scRatingFieldGroup>
+<div scRating [(value)]="rating" [allowHalf]="true">
+  <div scRatingGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingFieldItem [value]="i">
-      <svg siStarIcon scRatingFieldIcon></svg>
-      <svg siStarIcon scRatingFieldIcon></svg>
+    <span scRatingItem [value]="i">
+      <svg siStarIcon scRatingIcon></svg>
+      <svg siStarIcon scRatingIcon></svg>
     </span>
     }
   </div>
@@ -94,11 +94,11 @@ Icon directive applied to SVGs inside `scRatingFieldItem`. Automatically handles
 ### Custom Icons with Custom Color (Hearts)
 
 ```html
-<div scRatingField [(value)]="rating" [style.--sc-rating-active-color]="'var(--color-red-500)'">
-  <div scRatingFieldGroup>
+<div scRating [(value)]="rating" [style.--sc-rating-active-color]="'var(--color-red-500)'">
+  <div scRatingGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingFieldItem [value]="i">
-      <svg siHeartIcon scRatingFieldIcon></svg>
+    <span scRatingItem [value]="i">
+      <svg siHeartIcon scRatingIcon></svg>
     </span>
     }
   </div>
@@ -108,11 +108,11 @@ Icon directive applied to SVGs inside `scRatingFieldItem`. Automatically handles
 ### Custom Size
 
 ```html
-<div scRatingField [(value)]="rating">
-  <div scRatingFieldGroup>
+<div scRating [(value)]="rating">
+  <div scRatingGroup>
     @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
-    <span scRatingFieldItem [value]="i">
-      <svg siStarIcon scRatingFieldIcon class="size-5"></svg>
+    <span scRatingItem [value]="i">
+      <svg siStarIcon scRatingIcon class="size-5"></svg>
     </span>
     }
   </div>
@@ -122,11 +122,11 @@ Icon directive applied to SVGs inside `scRatingFieldItem`. Automatically handles
 ### Readonly Display
 
 ```html
-<div scRatingField [value]="4.5" [readonly]="true">
-  <div scRatingFieldGroup>
+<div scRating [value]="4.5" [readonly]="true">
+  <div scRatingGroup>
     @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingFieldItem [value]="i">
-      <svg siStarIcon scRatingFieldIcon></svg>
+    <span scRatingItem [value]="i">
+      <svg siStarIcon scRatingIcon></svg>
     </span>
     }
   </div>

@@ -19,5 +19,82 @@ import { FormRatingDemo } from './form-rating-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormRatingDemoContainer {
-  readonly code = '';
+  readonly code = `import { JsonPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  signal,
+} from '@angular/core';
+import {
+  ScButton,
+  ScField,
+  ScLabel,
+  ScRating,
+  ScRatingGroup,
+  ScRatingIcon,
+  ScRatingItem,
+} from '@semantic-components/ui';
+import { SiStarIcon } from '@semantic-icons/lucide-icons';
+
+interface ReviewForm {
+  rating: number;
+  comment: string;
+}
+
+@Component({
+  selector: 'app-form-rating-demo',
+  imports: [
+    ScRating,
+    ScRatingGroup,
+    ScRatingItem,
+    ScRatingIcon,
+    ScButton,
+    ScField,
+    ScLabel,
+    SiStarIcon,
+    JsonPipe,
+  ],
+  template: \`
+    <div class="flex flex-col gap-4">
+      <div scField>
+        <label scLabel>Product Rating</label>
+        <div scRating [(value)]="formModel().rating">
+          <div scRatingGroup>
+            @for (i of [1, 2, 3, 4, 5]; track i) {
+              <span scRatingItem [value]="i">
+                <svg siStarIcon scRatingIcon></svg>
+              </span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <button scButton (click)="onSubmit()" class="w-fit">Submit Rating</button>
+
+      @if (submitted) {
+        <div class="bg-muted rounded-md p-4">
+          <p class="text-sm font-medium">Form Value:</p>
+          <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
+        </div>
+      }
+    </div>
+  \`,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class FormRatingDemo {
+  readonly formModel = signal<ReviewForm>({
+    rating: 0,
+    comment: '',
+  });
+
+  submitted = false;
+
+  onSubmit(): void {
+    this.submitted = true;
+    console.log('Form submitted:', this.formModel());
+  }
+}`;
 }

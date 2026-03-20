@@ -23,10 +23,12 @@ import { FormatsDateRangePickerDemo } from './formats-date-range-picker-demo';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormatsDateRangePickerDemoContainer {
-  readonly code = `import {
+  readonly code = `import { Temporal } from '@js-temporal/polyfill';
+import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
 import {
   ScCalendar,
@@ -34,6 +36,7 @@ import {
   ScCalendarHeading,
   ScCalendarNext,
   ScCalendarPrevious,
+  ScDateRange,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -68,13 +71,14 @@ import {
     SiChevronRightIcon,
   ],
   template: \`
-    <div class="flex flex-col gap-3">
-      <div>
-        <span class="text-muted-foreground mr-2 text-sm">Short:</span>
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-4">
+        <span class="text-muted-foreground w-12 text-sm">Short:</span>
         <div
           scDateRangePicker
           dateFormat="short"
           placeholder="Short format"
+          [(value)]="shortRange"
           #drpShort="scDateRangePicker"
         >
           <div
@@ -124,12 +128,13 @@ import {
           </div>
         </div>
       </div>
-      <div>
-        <span class="text-muted-foreground mr-2 text-sm">Long:</span>
+      <div class="flex items-center gap-4">
+        <span class="text-muted-foreground w-12 text-sm">Long:</span>
         <div
           scDateRangePicker
           dateFormat="long"
           placeholder="Long format"
+          [(value)]="longRange"
           #drpLong="scDateRangePicker"
         >
           <div
@@ -163,7 +168,9 @@ import {
                         <svg siChevronLeftIcon class="size-4"></svg>
                         <span class="sr-only">Go to previous</span>
                       </button>
-                      <button scCalendarHeading>{{ calLong.heading() }}</button>
+                      <button scCalendarHeading>
+                        {{ calLong.heading() }}
+                      </button>
                       <button scCalendarNext>
                         <svg siChevronRightIcon class="size-4"></svg>
                         <span class="sr-only">Go to next</span>
@@ -177,12 +184,13 @@ import {
           </div>
         </div>
       </div>
-      <div>
-        <span class="text-muted-foreground mr-2 text-sm">ISO:</span>
+      <div class="flex items-center gap-4">
+        <span class="text-muted-foreground w-12 text-sm">ISO:</span>
         <div
           scDateRangePicker
           dateFormat="iso"
           placeholder="ISO format"
+          [(value)]="isoRange"
           #drpIso="scDateRangePicker"
         >
           <div
@@ -216,7 +224,9 @@ import {
                         <svg siChevronLeftIcon class="size-4"></svg>
                         <span class="sr-only">Go to previous</span>
                       </button>
-                      <button scCalendarHeading>{{ calIso.heading() }}</button>
+                      <button scCalendarHeading>
+                        {{ calIso.heading() }}
+                      </button>
                       <button scCalendarNext>
                         <svg siChevronRightIcon class="size-4"></svg>
                         <span class="sr-only">Go to next</span>
@@ -236,5 +246,21 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormatsDateRangePickerDemo {}`;
+export class FormatsDateRangePickerDemo {
+  private readonly today = Temporal.Now.plainDateISO();
+  private readonly weekAgo = this.today.subtract({ days: 6 });
+
+  readonly shortRange = signal<ScDateRange>({
+    from: this.weekAgo,
+    to: this.today,
+  });
+  readonly longRange = signal<ScDateRange>({
+    from: this.weekAgo,
+    to: this.today,
+  });
+  readonly isoRange = signal<ScDateRange>({
+    from: this.weekAgo,
+    to: this.today,
+  });
+}`;
 }

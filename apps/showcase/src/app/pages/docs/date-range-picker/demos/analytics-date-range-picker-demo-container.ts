@@ -104,6 +104,7 @@ import {
                     <div
                       scCalendar
                       mode="range"
+                      [numberOfMonths]="2"
                       [value]="drp.value()"
                       (valueChange)="drp.onValueChange($event)"
                       #cal="scCalendar"
