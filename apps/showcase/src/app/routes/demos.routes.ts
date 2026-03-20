@@ -2553,6 +2553,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'zxcvbn-password-demo',
+        loadComponent: () =>
+          import('../pages/docs/password/demos/zxcvbn-password-demo').then(
+            (m) => m.ZxcvbnPasswordDemo,
+          ),
+      },
+      {
         path: 'requirements-password-demo',
         loadComponent: () =>
           import('../pages/docs/password/demos/requirements-password-demo').then(

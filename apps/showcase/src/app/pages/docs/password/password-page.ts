@@ -14,6 +14,7 @@ import { PasswordUsageDemoContainer } from './demos/password-usage-demo-containe
 import RequirementsPasswordDemoContainer from './demos/requirements-password-demo-container';
 import ShowDefaultPasswordDemoContainer from './demos/show-default-password-demo-container';
 import StrengthPasswordDemoContainer from './demos/strength-password-demo-container';
+import ZxcvbnPasswordDemoContainer from './demos/zxcvbn-password-demo-container';
 
 @Component({
   selector: 'app-password-page',
@@ -23,6 +24,7 @@ import StrengthPasswordDemoContainer from './demos/strength-password-demo-contai
     DisabledPasswordDemoContainer,
     NewPasswordDemoContainer,
     StrengthPasswordDemoContainer,
+    ZxcvbnPasswordDemoContainer,
     RequirementsPasswordDemoContainer,
     FullPasswordDemoContainer,
     PasswordUsageDemoContainer,
@@ -52,6 +54,7 @@ import StrengthPasswordDemoContainer from './demos/strength-password-demo-contai
         <app-disabled-password-demo-container />
         <app-new-password-demo-container />
         <app-strength-password-demo-container />
+        <app-zxcvbn-password-demo-container />
         <app-requirements-password-demo-container />
         <app-full-password-demo-container />
       </section>
