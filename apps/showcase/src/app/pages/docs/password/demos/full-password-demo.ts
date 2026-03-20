@@ -16,6 +16,8 @@ import {
   ScPasswordRequirementItem,
   ScPasswordRequirements,
   ScPasswordStrength,
+  ScPasswordStrengthBar,
+  ScPasswordStrengthLabel,
   ScPasswordToggle,
 } from '@semantic-components/ui';
 import {
@@ -34,6 +36,8 @@ import {
     ScPasswordInput,
     ScPasswordToggle,
     ScPasswordStrength,
+    ScPasswordStrengthBar,
+    ScPasswordStrengthLabel,
     ScPasswordRequirements,
     ScPasswordRequirementItem,
     ScInputGroup,
@@ -68,7 +72,20 @@ import {
             </div>
           </div>
         </div>
-        <div scPasswordStrength [value]="formModel().password"></div>
+        <div
+          scPasswordStrength
+          [value]="formModel().password"
+          #strength="scPasswordStrength"
+        >
+          <div class="flex gap-1">
+            @for (i of [0, 1, 2, 3]; track i) {
+              <div scPasswordStrengthBar [index]="i"></div>
+            }
+          </div>
+          <p scPasswordStrengthLabel>
+            {{ strengthLabels[strength.strength()] }}
+          </p>
+        </div>
         <ul scPasswordRequirements>
           @for (req of requirements; track req.label) {
             <li scPasswordRequirementItem [met]="req.test(password())">
@@ -93,6 +110,14 @@ export class FullPasswordDemo {
   readonly passwordForm = form(this.formModel);
 
   readonly password = computed(() => this.formModel().password);
+
+  readonly strengthLabels = [
+    'Very weak',
+    'Weak',
+    'Fair',
+    'Strong',
+    'Very strong',
+  ];
 
   readonly requirements = [
     { label: 'At least 8 characters', test: (v: string) => v.length >= 8 },

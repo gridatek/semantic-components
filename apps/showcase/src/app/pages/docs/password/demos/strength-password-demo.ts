@@ -13,6 +13,8 @@ import {
   ScPasswordInput,
   ScPasswordProvider,
   ScPasswordStrength,
+  ScPasswordStrengthBar,
+  ScPasswordStrengthLabel,
   ScPasswordToggle,
 } from '@semantic-components/ui';
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
@@ -26,6 +28,8 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     ScPasswordInput,
     ScPasswordToggle,
     ScPasswordStrength,
+    ScPasswordStrengthBar,
+    ScPasswordStrengthLabel,
     ScInputGroup,
     ScInputGroupAddon,
     ScLabel,
@@ -56,7 +60,20 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
         </div>
-        <div scPasswordStrength [value]="formModel().password"></div>
+        <div
+          scPasswordStrength
+          [value]="formModel().password"
+          #strength="scPasswordStrength"
+        >
+          <div class="flex gap-1">
+            @for (i of [0, 1, 2, 3]; track i) {
+              <div scPasswordStrengthBar [index]="i"></div>
+            }
+          </div>
+          <p scPasswordStrengthLabel>
+            {{ strengthLabels[strength.strength()] }}
+          </p>
+        </div>
       </div>
     </div>
   `,
@@ -67,4 +84,12 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 export class StrengthPasswordDemo {
   readonly formModel = signal({ password: '' });
   readonly passwordForm = form(this.formModel);
+
+  readonly strengthLabels = [
+    'Very weak',
+    'Weak',
+    'Fair',
+    'Strong',
+    'Very strong',
+  ];
 }

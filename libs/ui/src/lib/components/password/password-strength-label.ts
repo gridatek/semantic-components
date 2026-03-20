@@ -3,33 +3,26 @@ import { cn } from '../../utils';
 import { SC_PASSWORD_STRENGTH } from './password-strength';
 
 @Directive({
-  selector: 'div[scPasswordStrengthBar]',
+  selector: 'p[scPasswordStrengthLabel]',
   host: {
-    'data-slot': 'password-strength-bar',
+    'data-slot': 'password-strength-label',
     '[class]': 'class()',
   },
 })
-export class ScPasswordStrengthBar {
+export class ScPasswordStrengthLabel {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly index = input.required<number>();
 
   private readonly passwordStrength = inject(SC_PASSWORD_STRENGTH);
 
   protected readonly class = computed(() => {
     const strength = this.passwordStrength.strength();
-    const index = this.index();
     const colors = [
-      'bg-red-500',
-      'bg-orange-500',
-      'bg-yellow-500',
-      'bg-lime-500',
-      'bg-green-500',
+      'text-red-700',
+      'text-orange-700',
+      'text-yellow-700',
+      'text-lime-700',
+      'text-green-700',
     ];
-
-    return cn(
-      'h-1 flex-1 rounded-full transition-colors',
-      index <= strength ? colors[strength] : 'bg-muted',
-      this.classInput(),
-    );
+    return cn('text-xs', colors[strength], this.classInput());
   });
 }

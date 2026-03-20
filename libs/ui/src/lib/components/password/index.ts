@@ -3,5 +3,6 @@ export * from './password-input';
 export * from './password-toggle';
 export * from './password-strength-bar';
 export * from './password-strength';
+export * from './password-strength-label';
 export * from './password-requirements';
 export * from './password-requirement-item';
