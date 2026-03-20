@@ -38,7 +38,9 @@ import {
             placeholder="Enter password"
           />
           <div scInputGroupAddon align="inline-end">
-            <button scPasswordToggle></button>
+            <button scPasswordToggle>
+              <span class="sr-only">Toggle password visibility</span>
+            </button>
           </div>
         </div>
       </div>
