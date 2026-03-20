@@ -14,7 +14,7 @@ export class ScPasswordRequirementItem {
 
   protected readonly class = computed(() =>
     cn(
-      'flex items-center',
+      'flex items-center gap-1 [&>svg]:size-3 [&>svg]:shrink-0',
       this.met() ? 'text-green-600' : 'text-muted-foreground',
       this.classInput(),
     ),

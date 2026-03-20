@@ -70,17 +70,9 @@ import {
           @for (req of requirements; track req.label) {
             <li scPasswordRequirementItem [met]="req.test(password())">
               @if (req.test(password())) {
-                <svg
-                  siCheckIcon
-                  class="mr-1 inline size-3"
-                  aria-hidden="true"
-                ></svg>
+                <svg siCheckIcon></svg>
               } @else {
-                <svg
-                  siCircleIcon
-                  class="mr-1 inline size-3"
-                  aria-hidden="true"
-                ></svg>
+                <svg siCircleIcon></svg>
               }
               {{ req.label }}
             </li>
