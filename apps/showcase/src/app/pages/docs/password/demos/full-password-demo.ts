@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   signal,
 } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
@@ -12,6 +13,7 @@ import {
   ScLabel,
   ScPasswordInput,
   ScPasswordProvider,
+  ScPasswordRequirementItem,
   ScPasswordRequirements,
   ScPasswordStrength,
   ScPasswordToggle,
@@ -28,6 +30,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     ScPasswordToggle,
     ScPasswordStrength,
     ScPasswordRequirements,
+    ScPasswordRequirementItem,
     ScInputGroup,
     ScInputGroupAddon,
     ScLabel,
@@ -59,7 +62,21 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
         <div scPasswordStrength [value]="formModel().password"></div>
-        <div scPasswordRequirements [value]="formModel().password"></div>
+        <ul scPasswordRequirements>
+          <li scPasswordRequirementItem [met]="password().length >= 8">
+            At least 8 characters
+          </li>
+          <li scPasswordRequirementItem [met]="hasUppercase()">
+            Contains uppercase letter
+          </li>
+          <li scPasswordRequirementItem [met]="hasLowercase()">
+            Contains lowercase letter
+          </li>
+          <li scPasswordRequirementItem [met]="hasNumber()">Contains number</li>
+          <li scPasswordRequirementItem [met]="hasSpecial()">
+            Contains special character
+          </li>
+        </ul>
       </div>
     </div>
   `,
@@ -70,4 +87,12 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 export class FullPasswordDemo {
   readonly formModel = signal({ password: '' });
   readonly passwordForm = form(this.formModel);
+
+  readonly password = computed(() => this.formModel().password);
+  readonly hasUppercase = computed(() => /[A-Z]/.test(this.password()));
+  readonly hasLowercase = computed(() => /[a-z]/.test(this.password()));
+  readonly hasNumber = computed(() => /\d/.test(this.password()));
+  readonly hasSpecial = computed(() =>
+    /[!@#$%^&*(),.?":{}|<>]/.test(this.password()),
+  );
 }
