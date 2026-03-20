@@ -9,6 +9,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { SC_FIELD } from '../field';
 import { ScOtp } from './otp';
 import { ScOtpSlotCaret } from './otp-slot-caret';
 import { ScOtpSlotChar } from './otp-slot-char';
@@ -46,6 +47,7 @@ import { ScOtpSlotInput } from './otp-slot-input';
 })
 export class ScOtpSlot {
   readonly otp = inject(ScOtp);
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly inputComponent = viewChild.required(ScOtpSlotInput);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -56,7 +58,7 @@ export class ScOtpSlot {
   readonly char = computed(() => this.otp.getChar(this.index()));
   readonly ariaLabel = input<string>('', { alias: 'aria-label' });
   readonly ariaDescribedBy = computed(() => {
-    const ids = this.otp.descriptionIds();
+    const ids = this.field?.descriptionIds() ?? [];
     return ids.length ? ids.join(' ') : null;
   });
   readonly isActive = computed(() => this.focused() && !this.otp.disabled());
