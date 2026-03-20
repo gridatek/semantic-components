@@ -20,7 +20,7 @@ export const SC_PASSWORD = new InjectionToken<ScPassword>('SC_PASSWORD');
 })
 export class ScPassword {
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  protected readonly class = computed(() => cn('contents', this.classInput()));
 
   readonly visible = model(false);
 
