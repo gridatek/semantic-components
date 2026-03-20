@@ -1,43 +1,25 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
-  ElementRef,
   InjectionToken,
   computed,
-  inject,
   input,
   model,
   output,
-  signal,
 } from '@angular/core';
-import { SC_FIELD } from '../field';
 
 // Token for number context
 export const SC_NUMBER = new InjectionToken<ScNumber>('SC_NUMBER');
 
 @Directive({
-  selector: 'div[scNumber], label[scNumber]',
+  selector: 'div[scNumber]',
   exportAs: 'scNumber',
-  providers: [
-    { provide: SC_NUMBER, useExisting: ScNumber },
-    { provide: SC_FIELD, useExisting: ScNumber },
-  ],
+  providers: [{ provide: SC_NUMBER, useExisting: ScNumber }],
   host: {
-    '[attr.role]': 'role()',
     'data-slot': 'number',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })
 export class ScNumber {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
-  readonly id = input(inject(_IdGenerator).getId('sc-number-'));
-  readonly descriptionIds = signal<string[]>([]);
-
-  protected readonly role = computed(() => {
-    const tagName = this.elementRef.nativeElement.tagName;
-    return tagName === 'LABEL' ? null : 'group';
-  });
   readonly value = model<number | null>(null);
   readonly min = input<number | null>(null);
   readonly max = input<number | null>(null);

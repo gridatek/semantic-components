@@ -6,7 +6,7 @@ A one-time password (OTP) input component for Angular applications, built with a
 
 The component consists of seven directives:
 
-1. **ScOtp** - Parent directive managing value state, paste handling, and `FormValueControl<string>` integration
+1. **ScOtp** - Directive managing value state, paste handling, and `FormValueControl<string>` integration. Must be used inside an `ScField`
 2. **ScOtpSlotGroup** - Container for grouping slots (enables separator patterns like `123-456`)
 3. **ScOtpSlot** - Individual input slot component with caret animation and filled state
 4. **ScOtpSlotInput** - Hidden native input handling raw keyboard/focus events
@@ -43,11 +43,14 @@ The component consists of seven directives:
 
 ### ScOtp
 
-| Input      | Type      | Default        | Description                              |
-| ---------- | --------- | -------------- | ---------------------------------------- |
-| `value`    | `string`  | `''`           | Current OTP value (use with `[(value)]`) |
-| `disabled` | `boolean` | `false`        | Disable all input slots                  |
-| `id`       | `string`  | auto-generated | Unique identifier                        |
+**Selector:** `div[scOtp]`
+
+`ScOtp` is not a field — it must be used inside an `ScField`.
+
+| Input      | Type      | Default | Description                              |
+| ---------- | --------- | ------- | ---------------------------------------- |
+| `value`    | `string`  | `''`    | Current OTP value (use with `[(value)]`) |
+| `disabled` | `boolean` | `false` | Disable all input slots                  |
 
 ### ScOtpSlotGroup
 
