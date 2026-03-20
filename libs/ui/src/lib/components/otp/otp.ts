@@ -3,7 +3,6 @@ import {
   computed,
   contentChildren,
   effect,
-  inject,
   input,
   model,
 } from '@angular/core';
