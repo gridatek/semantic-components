@@ -265,8 +265,7 @@
     "description": "Select a range of dates with a calendar.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Dialog",
