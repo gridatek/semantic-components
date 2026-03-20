@@ -71,15 +71,16 @@ Button to toggle password visibility.
 
 ### ScPasswordStrength
 
-Password strength indicator.
+Purely presentational password strength indicator. The consumer computes the strength score and passes it in.
 
-**Selector:** `[scPasswordStrength]`
+**Selector:** `div[scPasswordStrength]`
+**Export As:** `scPasswordStrength`
 
 **Inputs:**
 
-| Input   | Type     | Default | Description              |
-| ------- | -------- | ------- | ------------------------ |
-| `value` | `string` | `''`    | Password value to assess |
+| Input      | Type     | Default | Description                               |
+| ---------- | -------- | ------- | ----------------------------------------- |
+| `strength` | `number` | `0`     | Strength score (0–4) computed by consumer |
 
 ### ScPasswordRequirements
 
@@ -147,7 +148,7 @@ Password requirements checklist.
       </div>
     </div>
   </div>
-  <div scPasswordStrength [value]="formModel().password"></div>
+  <div scPasswordStrength [strength]="strength()"></div>
 </div>
 ```
 

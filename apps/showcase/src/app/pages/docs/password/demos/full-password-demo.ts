@@ -72,18 +72,14 @@ import {
             </div>
           </div>
         </div>
-        <div
-          scPasswordStrength
-          [value]="formModel().password"
-          #strength="scPasswordStrength"
-        >
+        <div scPasswordStrength [strength]="strength()">
           <div class="flex gap-1">
             @for (i of [0, 1, 2, 3]; track i) {
               <div scPasswordStrengthBar [index]="i"></div>
             }
           </div>
           <p scPasswordStrengthLabel>
-            {{ strengthLabels[strength.strength()] }}
+            {{ strengthLabels[strength()] }}
           </p>
         </div>
         <ul scPasswordRequirements>
@@ -135,4 +131,12 @@ export class FullPasswordDemo {
       test: (v: string) => /[!@#$%^&*(),.?":{}|<>]/.test(v),
     },
   ];
+
+  readonly strength = computed(() => {
+    const password = this.password();
+    if (!password) return 0;
+
+    const score = this.requirements.filter((req) => req.test(password)).length;
+    return Math.round((score / this.requirements.length) * 4);
+  });
 }
