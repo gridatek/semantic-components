@@ -1799,48 +1799,48 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/otp-field',
+    path: 'demos/otp',
     children: [
       {
-        path: 'basic-otp-field-demo',
+        path: 'basic-otp-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/basic-otp-field-demo').then(
-            (m) => m.BasicOtpFieldDemo,
+          import('../pages/docs/otp/demos/basic-otp-demo').then(
+            (m) => m.BasicOtpDemo,
           ),
       },
       {
-        path: 'separator-otp-field-demo',
+        path: 'separator-otp-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/separator-otp-field-demo').then(
-            (m) => m.SeparatorOtpFieldDemo,
+          import('../pages/docs/otp/demos/separator-otp-demo').then(
+            (m) => m.SeparatorOtpDemo,
           ),
       },
       {
-        path: 'pin-otp-field-demo',
+        path: 'pin-otp-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/pin-otp-field-demo').then(
-            (m) => m.PinOtpFieldDemo,
+          import('../pages/docs/otp/demos/pin-otp-demo').then(
+            (m) => m.PinOtpDemo,
           ),
       },
       {
-        path: 'dot-separator-otp-field-demo',
+        path: 'dot-separator-otp-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/dot-separator-otp-field-demo').then(
-            (m) => m.DotSeparatorOtpFieldDemo,
+          import('../pages/docs/otp/demos/dot-separator-otp-demo').then(
+            (m) => m.DotSeparatorOtpDemo,
           ),
       },
       {
-        path: 'disabled-otp-field-demo',
+        path: 'disabled-otp-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/disabled-otp-field-demo').then(
-            (m) => m.DisabledOtpFieldDemo,
+          import('../pages/docs/otp/demos/disabled-otp-demo').then(
+            (m) => m.DisabledOtpDemo,
           ),
       },
       {
-        path: 'verification-otp-field-demo',
+        path: 'verification-otp-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/verification-otp-field-demo').then(
-            (m) => m.VerificationOtpFieldDemo,
+          import('../pages/docs/otp/demos/verification-otp-demo').then(
+            (m) => m.VerificationOtpDemo,
           ),
       },
     ],
@@ -2421,48 +2421,48 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/number-field',
+    path: 'demos/number',
     children: [
       {
-        path: 'basic-number-field-demo',
+        path: 'basic-number-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/basic-number-field-demo').then(
-            (m) => m.BasicNumberFieldDemo,
+          import('../pages/docs/number/demos/basic-number-demo').then(
+            (m) => m.BasicNumberDemo,
           ),
       },
       {
-        path: 'scrubbing-number-field-demo',
+        path: 'scrubbing-number-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/scrubbing-number-field-demo').then(
-            (m) => m.ScrubbingNumberFieldDemo,
+          import('../pages/docs/number/demos/scrubbing-number-demo').then(
+            (m) => m.ScrubbingNumberDemo,
           ),
       },
       {
-        path: 'price-number-field-demo',
+        path: 'price-number-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/price-number-field-demo').then(
-            (m) => m.PriceNumberFieldDemo,
+          import('../pages/docs/number/demos/price-number-demo').then(
+            (m) => m.PriceNumberDemo,
           ),
       },
       {
-        path: 'disabled-number-field-demo',
+        path: 'disabled-number-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/disabled-number-field-demo').then(
-            (m) => m.DisabledNumberFieldDemo,
+          import('../pages/docs/number/demos/disabled-number-demo').then(
+            (m) => m.DisabledNumberDemo,
           ),
       },
       {
-        path: 'without-label-number-field-demo',
+        path: 'without-label-number-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/without-label-number-field-demo').then(
-            (m) => m.WithoutLabelNumberFieldDemo,
+          import('../pages/docs/number/demos/without-label-number-demo').then(
+            (m) => m.WithoutLabelNumberDemo,
           ),
       },
       {
-        path: 'signal-forms-number-field-demo',
+        path: 'signal-forms-number-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/signal-forms-number-field-demo').then(
-            (m) => m.SignalFormsNumberFieldDemo,
+          import('../pages/docs/number/demos/signal-forms-number-demo').then(
+            (m) => m.SignalFormsNumberDemo,
           ),
       },
     ],
@@ -2515,62 +2515,62 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/password-field',
+    path: 'demos/password',
     children: [
       {
-        path: 'basic-password-field-demo',
+        path: 'basic-password-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/basic-password-field-demo').then(
-            (m) => m.BasicPasswordFieldDemo,
+          import('../pages/docs/password/demos/basic-password-demo').then(
+            (m) => m.BasicPasswordDemo,
           ),
       },
       {
-        path: 'show-default-password-field-demo',
+        path: 'show-default-password-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/show-default-password-field-demo').then(
-            (m) => m.ShowDefaultPasswordFieldDemo,
+          import('../pages/docs/password/demos/show-default-password-demo').then(
+            (m) => m.ShowDefaultPasswordDemo,
           ),
       },
       {
-        path: 'disabled-password-field-demo',
+        path: 'disabled-password-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/disabled-password-field-demo').then(
-            (m) => m.DisabledPasswordFieldDemo,
+          import('../pages/docs/password/demos/disabled-password-demo').then(
+            (m) => m.DisabledPasswordDemo,
           ),
       },
       {
-        path: 'new-password-field-demo',
+        path: 'new-password-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/new-password-field-demo').then(
-            (m) => m.NewPasswordFieldDemo,
+          import('../pages/docs/password/demos/new-password-demo').then(
+            (m) => m.NewPasswordDemo,
           ),
       },
       {
-        path: 'strength-password-field-demo',
+        path: 'strength-password-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/strength-password-field-demo').then(
-            (m) => m.StrengthPasswordFieldDemo,
+          import('../pages/docs/password/demos/strength-password-demo').then(
+            (m) => m.StrengthPasswordDemo,
           ),
       },
       {
-        path: 'requirements-password-field-demo',
+        path: 'requirements-password-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/requirements-password-field-demo').then(
-            (m) => m.RequirementsPasswordFieldDemo,
+          import('../pages/docs/password/demos/requirements-password-demo').then(
+            (m) => m.RequirementsPasswordDemo,
           ),
       },
       {
-        path: 'full-password-field-demo',
+        path: 'full-password-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/full-password-field-demo').then(
-            (m) => m.FullPasswordFieldDemo,
+          import('../pages/docs/password/demos/full-password-demo').then(
+            (m) => m.FullPasswordDemo,
           ),
       },
       {
-        path: 'signal-forms-password-field-demo',
+        path: 'signal-forms-password-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/signal-forms-password-field-demo').then(
-            (m) => m.SignalFormsPasswordFieldDemo,
+          import('../pages/docs/password/demos/signal-forms-password-demo').then(
+            (m) => m.SignalFormsPasswordDemo,
           ),
       },
     ],

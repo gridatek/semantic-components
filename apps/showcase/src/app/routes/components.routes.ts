@@ -293,9 +293,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/input-group/input-group-page'),
       },
       {
-        path: 'otp-field',
-        title: 'OTP Field - Semantic Components',
-        loadComponent: () => import('../pages/docs/otp-field/otp-field-page'),
+        path: 'otp',
+        title: 'OTP - Semantic Components',
+        loadComponent: () => import('../pages/docs/otp/otp-page'),
       },
       {
         path: 'kanban-board',
@@ -403,10 +403,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/notification-center/notification-center-page'),
       },
       {
-        path: 'number-field',
-        title: 'Number Field - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/number-field/number-field-page'),
+        path: 'number',
+        title: 'Number - Semantic Components',
+        loadComponent: () => import('../pages/docs/number/number-page'),
       },
       {
         path: 'org-chart',
@@ -419,10 +418,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/pagination/pagination-page'),
       },
       {
-        path: 'password-field',
-        title: 'Password Field - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/password-field/password-field-page'),
+        path: 'password',
+        title: 'Password - Semantic Components',
+        loadComponent: () => import('../pages/docs/password/password-page'),
       },
       {
         path: 'pdf-viewer',

@@ -10,7 +10,7 @@ The composable architecture breaks down monolithic components into smaller, comp
 
 Use the composable architecture for:
 
-- **Form Components**: Inputs, selects, number fields, password fields, etc.
+- **Form Components**: Inputs, selects, number fields, passwords, etc.
 - **Interactive Controls**: Components with multiple interactive elements (buttons, toggles, etc.)
 - **Complex Layouts**: Components where users need control over internal structure
 - **High Customization**: When users need to customize individual parts
@@ -86,7 +86,7 @@ export class ScComponentName {
 - Root only manages state and doesn't need a template
 - All rendering is done by child components
 - Maximum flexibility in DOM structure
-- **Examples**: NumberField, PasswordField, most form components
+- **Examples**: Number, Password, most form components
 
 **Use `@Component` when:**
 
@@ -251,10 +251,10 @@ component-name/
 
 ### Class Names
 
-- **Root**: `ScComponentName` (e.g., `ScNumberField`, `ScPasswordField`)
-- **Containers**: `ScComponentNameGroup` (e.g., `ScNumberFieldInputGroup`)
-- **Actions**: `ScComponentName[Action]` (e.g., `ScNumberFieldIncrement`, `ScPasswordFieldToggle`)
-- **Inputs**: `ScComponentNameInput` (e.g., `ScNumberFieldInput`)
+- **Root**: `ScComponentName` (e.g., `ScNumber`, `ScPassword`)
+- **Containers**: `ScComponentNameGroup` (e.g., `ScNumberInputGroup`)
+- **Actions**: `ScComponentName[Action]` (e.g., `ScNumberIncrement`, `ScPasswordToggle`)
+- **Inputs**: `ScComponentNameInput` (e.g., `ScNumberInput`)
 
 ### Selectors
 
@@ -318,10 +318,10 @@ export class ScPasswordInput {
 
 // Root directive
 @Directive({
-  selector: '[scPasswordField]',
-  providers: [{ provide: SC_PASSWORD_FIELD, useExisting: ScPasswordField }],
+  selector: '[scPassword]',
+  providers: [{ provide: SC_PASSWORD, useExisting: ScPassword }],
 })
-export class ScPasswordField {
+export class ScPassword {
   value = model<string>('');
   visible = signal(false);
   disabled = input(false);
@@ -333,36 +333,36 @@ export class ScPasswordField {
 
 // Group component
 @Component({
-  selector: '[scPasswordFieldInputGroup]',
+  selector: '[scPasswordInputGroup]',
   template: `
     <ng-content />
   `,
 })
-export class ScPasswordFieldInputGroup {
-  readonly passwordField = inject(SC_PASSWORD_FIELD);
+export class ScPasswordInputGroup {
+  readonly password = inject(SC_PASSWORD);
 }
 
 // Input component
 @Component({
-  selector: 'input[scPasswordFieldInput]',
+  selector: 'input[scPasswordInput]',
   template: ``,
 })
-export class ScPasswordFieldInput {
-  readonly passwordField = inject(SC_PASSWORD_FIELD);
+export class ScPasswordInput {
+  readonly password = inject(SC_PASSWORD);
 }
 
 // Toggle component
 @Component({
-  selector: 'button[scPasswordFieldToggle]',
+  selector: 'button[scPasswordToggle]',
   template: `
     <ng-content><svg>...</svg></ng-content>
   `,
 })
-export class ScPasswordFieldToggle {
-  readonly passwordField = inject(SC_PASSWORD_FIELD);
+export class ScPasswordToggle {
+  readonly password = inject(SC_PASSWORD);
 
   onClick(): void {
-    this.passwordField.toggle();
+    this.password.toggle();
   }
 }
 ```
@@ -371,38 +371,38 @@ export class ScPasswordFieldToggle {
 
 ```html
 <!-- Basic usage -->
-<div scPasswordField [(value)]="password">
-  <div scPasswordFieldInputGroup>
-    <input scPasswordFieldInput />
-    <button scPasswordFieldToggle></button>
+<div scPassword [(value)]="password">
+  <div scPasswordInputGroup>
+    <input scPasswordInput />
+    <button scPasswordToggle></button>
   </div>
 </div>
 
 <!-- With label -->
-<div scPasswordField [(value)]="password">
+<div scPassword [(value)]="password">
   <label scLabel>Password</label>
-  <div scPasswordFieldInputGroup>
-    <input scPasswordFieldInput placeholder="Enter password" />
-    <button scPasswordFieldToggle></button>
+  <div scPasswordInputGroup>
+    <input scPasswordInput placeholder="Enter password" />
+    <button scPasswordToggle></button>
   </div>
 </div>
 
 <!-- Custom icon -->
-<div scPasswordField [(value)]="password">
-  <div scPasswordFieldInputGroup>
-    <input scPasswordFieldInput />
-    <button scPasswordFieldToggle>
+<div scPassword [(value)]="password">
+  <div scPasswordInputGroup>
+    <input scPasswordInput />
+    <button scPasswordToggle>
       <span>{{ visible() ? 'Hide' : 'Show' }}</span>
     </button>
   </div>
 </div>
 
 <!-- With prefix icon -->
-<div scPasswordField [(value)]="password">
-  <div scPasswordFieldInputGroup>
+<div scPassword [(value)]="password">
+  <div scPasswordInputGroup>
     <svg class="ml-2"><!-- Lock icon --></svg>
-    <input scPasswordFieldInput class="pl-8" />
-    <button scPasswordFieldToggle></button>
+    <input scPasswordInput class="pl-8" />
+    <button scPasswordToggle></button>
   </div>
 </div>
 ```
@@ -415,21 +415,21 @@ export class ScPasswordFieldToggle {
 - ✅ Better composition
 - ✅ Individual styling control
 
-## Complete Example: Number Field
+## Complete Example: Number
 
 ```typescript
-// number-field.ts (Root)
-export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>('SC_NUMBER_FIELD');
+// number.ts (Root)
+export const SC_NUMBER = new InjectionToken<ScNumber>('SC_NUMBER');
 
 @Directive({
-  selector: '[scNumberField]',
-  providers: [{ provide: SC_NUMBER_FIELD, useExisting: ScNumberField }],
+  selector: '[scNumber]',
+  providers: [{ provide: SC_NUMBER, useExisting: ScNumber }],
   host: {
-    'data-slot': 'number-field',
+    'data-slot': 'number',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })
-export class ScNumberField {
+export class ScNumber {
   readonly value = model<number | null>(null);
   readonly min = input<number | null>(null);
   readonly max = input<number | null>(null);
@@ -455,85 +455,85 @@ export class ScNumberField {
   }
 }
 
-// number-field-group.ts (Container)
+// number-input-group.ts (Container)
 @Component({
-  selector: '[scNumberFieldGroup]',
+  selector: '[scNumberGroup]',
   template: `
     <ng-content />
   `,
   host: {
-    'data-slot': 'number-field-group',
+    'data-slot': 'number-group',
     '[class]': 'class()',
   },
 })
-export class ScNumberFieldInputGroup {
-  readonly numberField = inject(SC_NUMBER_FIELD);
+export class ScNumberInputGroup {
+  readonly number = inject(SC_NUMBER);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() => cn('inline-flex items-center border rounded-md', this.classInput()));
 }
 
-// number-field-input.ts (Input)
+// number-input.ts (Input)
 @Component({
-  selector: 'input[scNumberFieldInput]',
+  selector: 'input[scNumberInput]',
   template: ``,
   host: {
     type: 'text',
     inputmode: 'decimal',
-    '[value]': 'numberField.value()',
-    '[disabled]': 'numberField.disabled()',
+    '[value]': 'number.value()',
+    '[disabled]': 'number.disabled()',
     '(input)': 'onInput($event)',
   },
 })
-export class ScNumberFieldInput {
-  readonly numberField = inject(SC_NUMBER_FIELD);
+export class ScNumberInput {
+  readonly number = inject(SC_NUMBER);
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const value = parseFloat(input.value);
     if (!isNaN(value)) {
-      this.numberField.value.set(value);
+      this.number.value.set(value);
     }
   }
 }
 
-// number-field-increment.ts (Action)
+// number-increment.ts (Action)
 @Component({
-  selector: 'button[scNumberFieldIncrement]',
+  selector: 'button[scNumberIncrement]',
   template: `
     <ng-content><svg>+</svg></ng-content>
   `,
   host: {
     type: 'button',
-    '[disabled]': '!numberField.canIncrement()',
+    '[disabled]': '!number.canIncrement()',
     '(click)': 'onClick()',
   },
 })
-export class ScNumberFieldIncrement {
-  readonly numberField = inject(SC_NUMBER_FIELD);
+export class ScNumberIncrement {
+  readonly number = inject(SC_NUMBER);
 
   onClick(): void {
-    this.numberField.increment();
+    this.number.increment();
   }
 }
 
-// number-field-decrement.ts (Action)
+// number-decrement.ts (Action)
 @Component({
-  selector: 'button[scNumberFieldDecrement]',
+  selector: 'button[scNumberDecrement]',
   template: `
     <ng-content><svg>-</svg></ng-content>
   `,
   host: {
     type: 'button',
-    '[disabled]': '!numberField.canDecrement()',
+    '[disabled]': '!number.canDecrement()',
     '(click)': 'onClick()',
   },
 })
-export class ScNumberFieldDecrement {
-  readonly numberField = inject(SC_NUMBER_FIELD);
+export class ScNumberDecrement {
+  readonly number = inject(SC_NUMBER);
 
   onClick(): void {
-    this.numberField.decrement();
+    this.number.decrement();
   }
 }
 ```
@@ -541,13 +541,13 @@ export class ScNumberFieldDecrement {
 **Usage:**
 
 ```html
-<div scNumberField [(value)]="count" [min]="0" [max]="100">
+<div scNumber [(value)]="count" [min]="0" [max]="100">
   <label scLabel>Count</label>
 
-  <div scNumberFieldGroup>
-    <button scNumberFieldDecrement></button>
-    <input scNumberFieldInput />
-    <button scNumberFieldIncrement></button>
+  <div scNumberGroup>
+    <button scNumberDecrement></button>
+    <input scNumberInput />
+    <button scNumberIncrement></button>
   </div>
 </div>
 ```
@@ -626,20 +626,20 @@ get canSubmit() {
 
 ```typescript
 // Use specific types
-export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>('SC_NUMBER_FIELD');
+export const SC_NUMBER = new InjectionToken<ScNumber>('SC_NUMBER');
 
 // Type the injection
-readonly numberField = inject(SC_NUMBER_FIELD);
+readonly number = inject(SC_NUMBER);
 ```
 
 **DON'T:**
 
 ```typescript
 // Don't use any
-export const SC_NUMBER_FIELD = new InjectionToken<any>('SC_NUMBER_FIELD');
+export const SC_NUMBER = new InjectionToken<any>('SC_NUMBER');
 
 // Don't skip typing
-readonly numberField = inject(SC_NUMBER_FIELD) as any;
+readonly number = inject(SC_NUMBER) as any;
 ```
 
 ### 3. Naming
@@ -648,8 +648,8 @@ readonly numberField = inject(SC_NUMBER_FIELD) as any;
 
 ```typescript
 // Use descriptive, specific names
-ScPasswordFieldToggle;
-ScNumberFieldIncrement;
+ScPasswordToggle;
+ScNumberIncrement;
 ScDatePickerCalendar;
 ```
 
@@ -823,8 +823,8 @@ For each part of the template:
 
 ### ✅ Implemented
 
-- **NumberField**: Composable number input with increment/decrement
-- **PasswordField**: Composable password input with visibility toggle
+- **Number**: Composable number input with increment/decrement
+- **Password**: Composable password input with visibility toggle
 
 ### 🎯 Good Candidates for Migration
 
@@ -911,8 +911,8 @@ TestBed.configureTestingModule({
 
 ## Resources
 
-- [Number Field Implementation](../libs/ui/src/lib/components/number-field/)
-- [Password Field Implementation](../libs/ui/src/lib/components/password-field/)
+- [Number Implementation](../libs/ui/src/lib/components/number/)
+- [Password Implementation](../libs/ui/src/lib/components/password/)
 - [Angular Dependency Injection](https://angular.dev/guide/di)
 - [Angular Signals](https://angular.dev/guide/signals)
 

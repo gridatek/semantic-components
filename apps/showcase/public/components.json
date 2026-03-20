@@ -557,16 +557,16 @@
     "hidden": true
   },
   {
-    "name": "Number Field",
-    "path": "number-field",
+    "name": "Number",
+    "path": "number",
     "description": "A composable numeric input with scrubbing support.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
   },
   {
-    "name": "OTP Field",
-    "path": "otp-field",
+    "name": "OTP",
+    "path": "otp",
     "description": "An input for entering one-time passwords.",
     "status": "Experimental",
     "library": "ui",
@@ -598,8 +598,8 @@
     "category": "Navigation"
   },
   {
-    "name": "Password Field",
-    "path": "password-field",
+    "name": "Password",
+    "path": "password",
     "description": "A composable password input with visibility toggle.",
     "status": "Experimental",
     "library": "ui",

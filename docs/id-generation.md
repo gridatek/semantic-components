@@ -154,7 +154,7 @@ export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
 
 A minimal interface with a single `id` method. Any field component that provides `SC_FIELD` automatically connects to `ScLabel`.
 
-Each field also provides its own specific token (e.g. `SC_CHECKBOX_FIELD`, `SC_PASSWORD_FIELD`, `SC_NUMBER_FIELD`) for domain-specific children that need more than just `id`.
+Each field also provides its own specific token (e.g. `SC_CHECKBOX_FIELD`, `SC_PASSWORD`, `SC_NUMBER`) for domain-specific children that need more than just `id`.
 
 ## Implementing for New Field Components
 
