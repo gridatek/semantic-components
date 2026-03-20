@@ -4,3 +4,4 @@ export * from './password-toggle';
 export * from './password-strength-bar';
 export * from './password-strength';
 export * from './password-requirements';
+export * from './password-requirement-item';
