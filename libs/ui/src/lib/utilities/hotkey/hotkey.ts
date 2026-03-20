@@ -55,6 +55,8 @@ export class ScHotkey {
     const isMac = this.isMac;
 
     const handler = (e: KeyboardEvent) => {
+      if (!e.key) return;
+
       const parts = this.key().toLowerCase().split('+');
       const targetKey = parts.pop();
 
