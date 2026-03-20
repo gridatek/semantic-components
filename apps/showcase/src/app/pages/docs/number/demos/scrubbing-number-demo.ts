@@ -5,12 +5,12 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScButtonGroup,
   ScLabel,
   ScNumber,
   ScNumberDecrement,
   ScNumberIncrement,
   ScNumberInput,
-  ScNumberInputGroup,
   ScNumberScrubArea,
 } from '@semantic-components/ui';
 import {
@@ -24,7 +24,7 @@ import {
   imports: [
     ScNumber,
     ScNumberScrubArea,
-    ScNumberInputGroup,
+    ScButtonGroup,
     ScNumberDecrement,
     ScNumberInput,
     ScNumberIncrement,
@@ -46,7 +46,7 @@ import {
           <label scLabel>Opacity (%)</label>
         </div>
 
-        <div scNumberGroup>
+        <div scButtonGroup>
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease</span>
@@ -64,7 +64,7 @@ import {
           <label scLabel>Rotation (deg)</label>
         </div>
 
-        <div scNumberGroup>
+        <div scButtonGroup>
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease</span>

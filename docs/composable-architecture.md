@@ -252,7 +252,7 @@ component-name/
 ### Class Names
 
 - **Root**: `ScComponentName` (e.g., `ScNumber`, `ScPassword`)
-- **Containers**: `ScComponentNameGroup` (e.g., `ScNumberInputGroup`)
+- **Containers**: `ScInputGroup` for input grouping, `ScComponentNameGroup` for specialized grouping
 - **Actions**: `ScComponentName[Action]` (e.g., `ScNumberIncrement`, `ScPasswordToggle`)
 - **Inputs**: `ScComponentNameInput` (e.g., `ScNumberInput`)
 
@@ -455,23 +455,7 @@ export class ScNumber {
   }
 }
 
-// number-input-group.ts (Container)
-@Component({
-  selector: '[scNumberGroup]',
-  template: `
-    <ng-content />
-  `,
-  host: {
-    'data-slot': 'number-group',
-    '[class]': 'class()',
-  },
-})
-export class ScNumberInputGroup {
-  readonly number = inject(SC_NUMBER);
-  readonly classInput = input<string>('', { alias: 'class' });
-
-  protected readonly class = computed(() => cn('inline-flex items-center border rounded-md', this.classInput()));
-}
+// Uses ScInputGroup from the input-group component for grouping
 
 // number-input.ts (Input)
 @Component({
@@ -544,7 +528,7 @@ export class ScNumberDecrement {
 <div scNumber [(value)]="count" [min]="0" [max]="100">
   <label scLabel>Count</label>
 
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement></button>
     <input scNumberInput />
     <button scNumberIncrement></button>

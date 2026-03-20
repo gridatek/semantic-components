@@ -8,7 +8,7 @@ The Number component follows a composable pattern with multiple sub-components:
 
 - **ScNumber**: Directive that manages state and provides context. Must be used inside an `ScField`
 - **ScNumberScrubArea**: Interactive label area with mouse scrubbing to adjust values
-- **ScNumberInputGroup**: Container for input and stepper buttons
+- **ScButtonGroup**: Container for input and stepper buttons
 - **ScNumberInput**: The numeric input field
 - **ScNumberIncrement**: Button to increase value
 - **ScNumberDecrement**: Button to decrease value
@@ -21,7 +21,7 @@ The Number component follows a composable pattern with multiple sub-components:
     <label scLabel>Quantity</label>
   </div>
 
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement></button>
     <input scNumberInput />
     <button scNumberIncrement></button>
@@ -83,11 +83,11 @@ An interactive area (typically wrapping a label) that allows users to scrub (dra
 | ------- | -------- | ------- | ---------------------- |
 | `class` | `string` | `''`    | Additional CSS classes |
 
-### ScNumberInputGroup
+### ScButtonGroup
 
 Container for grouping the input field with increment/decrement buttons.
 
-**Selector:** `[scNumberGroup]`
+**Selector:** `[scButtonGroup]`
 
 **Inputs:**
 
@@ -160,7 +160,7 @@ Button to decrease the value by the step amount.
     <label scLabel>Count</label>
   </div>
 
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement></button>
     <input scNumberInput />
     <button scNumberIncrement></button>
@@ -176,7 +176,7 @@ Button to decrease the value by the step amount.
     <label scLabel>Price</label>
   </div>
 
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement></button>
     <input scNumberInput />
     <button scNumberIncrement></button>
@@ -192,7 +192,7 @@ Button to decrease the value by the step amount.
     <label scLabel>Amount ($)</label>
   </div>
 
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement></button>
     <input scNumberInput />
     <button scNumberIncrement></button>
@@ -208,7 +208,7 @@ Button to decrease the value by the step amount.
     <label scLabel>Opacity (%)</label>
   </div>
 
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement></button>
     <input scNumberInput />
     <button scNumberIncrement></button>
@@ -224,7 +224,7 @@ Button to decrease the value by the step amount.
     <label scLabel>Locked Value</label>
   </div>
 
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement></button>
     <input scNumberInput />
     <button scNumberIncrement></button>
@@ -236,7 +236,7 @@ Button to decrease the value by the step amount.
 
 ```html
 <div scNumber [(value)]="quantity" [min]="1" [max]="10">
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement></button>
     <input scNumberInput />
     <button scNumberIncrement></button>
@@ -252,7 +252,7 @@ Button to decrease the value by the step amount.
     <label scLabel>Volume</label>
   </div>
 
-  <div scNumberGroup>
+  <div scButtonGroup>
     <button scNumberDecrement>
       <svg><!-- Custom minus icon --></svg>
     </button>
@@ -273,7 +273,7 @@ Button to decrease the value by the step amount.
       <label scLabel>Age</label>
     </div>
 
-    <div scNumberGroup>
+    <div scButtonGroup>
       <button scNumberDecrement></button>
       <input scNumberInput />
       <button scNumberIncrement></button>

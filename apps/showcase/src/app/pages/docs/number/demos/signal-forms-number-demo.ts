@@ -6,12 +6,12 @@ import {
 } from '@angular/core';
 import { FormField, form, max, min, required } from '@angular/forms/signals';
 import {
+  ScButtonGroup,
   ScLabel,
   ScNumber,
   ScNumberDecrement,
   ScNumberIncrement,
   ScNumberInput,
-  ScNumberInputGroup,
   ScNumberScrubArea,
 } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
@@ -22,7 +22,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     FormField,
     ScNumber,
     ScNumberScrubArea,
-    ScNumberInputGroup,
+    ScButtonGroup,
     ScNumberDecrement,
     ScNumberInput,
     ScNumberIncrement,
@@ -45,7 +45,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
           </label>
         </div>
 
-        <div scNumberGroup>
+        <div scButtonGroup>
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease</span>

@@ -5,11 +5,11 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScButtonGroup,
   ScNumber,
   ScNumberDecrement,
   ScNumberIncrement,
   ScNumberInput,
-  ScNumberInputGroup,
 } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
@@ -17,7 +17,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-without-label-number-demo',
   imports: [
     ScNumber,
-    ScNumberInputGroup,
+    ScButtonGroup,
     ScNumberDecrement,
     ScNumberInput,
     ScNumberIncrement,
@@ -28,7 +28,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
     <div class="flex items-center gap-4">
       <span class="text-sm font-medium">Quantity:</span>
       <div scNumber [(value)]="quantity" [min]="1" [max]="10" class="w-28">
-        <div scNumberGroup>
+        <div scButtonGroup>
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease</span>

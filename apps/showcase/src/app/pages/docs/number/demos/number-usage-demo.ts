@@ -5,12 +5,12 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScButtonGroup,
   ScLabel,
   ScNumber,
   ScNumberDecrement,
   ScNumberIncrement,
   ScNumberInput,
-  ScNumberInputGroup,
   ScNumberScrubArea,
 } from '@semantic-components/ui';
 
@@ -19,7 +19,7 @@ import {
   imports: [
     ScNumber,
     ScNumberScrubArea,
-    ScNumberInputGroup,
+    ScButtonGroup,
     ScNumberDecrement,
     ScNumberInput,
     ScNumberIncrement,
@@ -31,7 +31,7 @@ import {
         <label scLabel>Quantity</label>
       </div>
 
-      <div scNumberGroup>
+      <div scButtonGroup>
         <button scNumberDecrement></button>
         <input scNumberInput aria-label="Quantity" />
         <button scNumberIncrement></button>
