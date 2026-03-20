@@ -17,7 +17,12 @@ import {
   ScPasswordRequirements,
   ScPasswordToggle,
 } from '@semantic-components/ui';
-import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiCheckIcon,
+  SiCircleIcon,
+  SiEyeIcon,
+  SiEyeOffIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-requirements-password-demo',
@@ -32,6 +37,8 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     ScInputGroup,
     ScInputGroupAddon,
     ScLabel,
+    SiCheckIcon,
+    SiCircleIcon,
     SiEyeIcon,
     SiEyeOffIcon,
   ],
@@ -60,19 +67,24 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
           </div>
         </div>
         <ul scPasswordRequirements>
-          <li scPasswordRequirementItem [met]="password().length >= 8">
-            At least 8 characters
-          </li>
-          <li scPasswordRequirementItem [met]="hasUppercase()">
-            Contains uppercase letter
-          </li>
-          <li scPasswordRequirementItem [met]="hasLowercase()">
-            Contains lowercase letter
-          </li>
-          <li scPasswordRequirementItem [met]="hasNumber()">Contains number</li>
-          <li scPasswordRequirementItem [met]="hasSpecial()">
-            Contains special character
-          </li>
+          @for (req of requirements; track req.label) {
+            <li scPasswordRequirementItem [met]="req.test(password())">
+              @if (req.test(password())) {
+                <svg
+                  siCheckIcon
+                  class="mr-1 inline size-3"
+                  aria-hidden="true"
+                ></svg>
+              } @else {
+                <svg
+                  siCircleIcon
+                  class="mr-1 inline size-3"
+                  aria-hidden="true"
+                ></svg>
+              }
+              {{ req.label }}
+            </li>
+          }
         </ul>
       </div>
     </div>
@@ -86,10 +98,21 @@ export class RequirementsPasswordDemo {
   readonly passwordForm = form(this.formModel);
 
   readonly password = computed(() => this.formModel().password);
-  readonly hasUppercase = computed(() => /[A-Z]/.test(this.password()));
-  readonly hasLowercase = computed(() => /[a-z]/.test(this.password()));
-  readonly hasNumber = computed(() => /\d/.test(this.password()));
-  readonly hasSpecial = computed(() =>
-    /[!@#$%^&*(),.?":{}|<>]/.test(this.password()),
-  );
+
+  readonly requirements = [
+    { label: 'At least 8 characters', test: (v: string) => v.length >= 8 },
+    {
+      label: 'Contains uppercase letter',
+      test: (v: string) => /[A-Z]/.test(v),
+    },
+    {
+      label: 'Contains lowercase letter',
+      test: (v: string) => /[a-z]/.test(v),
+    },
+    { label: 'Contains number', test: (v: string) => /\d/.test(v) },
+    {
+      label: 'Contains special character',
+      test: (v: string) => /[!@#$%^&*(),.?":{}|<>]/.test(v),
+    },
+  ];
 }
