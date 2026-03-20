@@ -5,6 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScField,
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
@@ -16,6 +17,7 @@ import {
 @Component({
   selector: 'app-password-usage-demo',
   imports: [
+    ScField,
     ScPassword,
     ScPasswordInput,
     ScPasswordToggle,
@@ -24,11 +26,11 @@ import {
     ScLabel,
   ],
   template: `
-    <div class="space-y-2">
-      <label scLabel for="password">Password</label>
+    <div scField class="space-y-2">
+      <label scLabel>Password</label>
       <div scPassword>
         <div scInputGroup>
-          <input scPasswordInput id="password" placeholder="Enter password" />
+          <input scPasswordInput placeholder="Enter password" />
           <div scInputGroupAddon align="inline-end">
             <button scPasswordToggle></button>
           </div>

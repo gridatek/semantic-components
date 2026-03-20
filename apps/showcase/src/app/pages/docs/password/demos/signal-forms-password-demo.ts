@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { FormField, form, minLength, required } from '@angular/forms/signals';
 import {
+  ScField,
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
@@ -19,6 +20,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-signal-forms-password-demo',
   imports: [
     FormField,
+    ScField,
     ScPassword,
     ScPasswordInput,
     ScPasswordToggle,
@@ -30,7 +32,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-sm space-y-4">
-      <div scPassword #passwordField="scPassword" class="space-y-2">
+      <div scField class="space-y-2">
         <label
           scLabel
           [class.text-destructive]="
@@ -39,24 +41,26 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         >
           Password
         </label>
-        <div scInputGroup>
-          <input
-            scPasswordInput
-            [formField]="loginForm.password"
-            placeholder="Enter password"
-            [class.border-destructive]="
-              loginForm.password().invalid() && loginForm.password().touched()
-            "
-          />
-          <div scInputGroupAddon align="inline-end">
-            <button scPasswordToggle>
-              @if (passwordField.visible()) {
-                <svg siEyeOffIcon></svg>
-              } @else {
-                <svg siEyeIcon></svg>
-              }
-              <span class="sr-only">Toggle password visibility</span>
-            </button>
+        <div scPassword #passwordField="scPassword">
+          <div scInputGroup>
+            <input
+              scPasswordInput
+              [formField]="loginForm.password"
+              placeholder="Enter password"
+              [class.border-destructive]="
+                loginForm.password().invalid() && loginForm.password().touched()
+              "
+            />
+            <div scInputGroupAddon align="inline-end">
+              <button scPasswordToggle>
+                @if (passwordField.visible()) {
+                  <svg siEyeOffIcon></svg>
+                } @else {
+                  <svg siEyeIcon></svg>
+                }
+                <span class="sr-only">Toggle password visibility</span>
+              </button>
+            </div>
           </div>
         </div>
         @if (loginForm.password().invalid() && loginForm.password().touched()) {

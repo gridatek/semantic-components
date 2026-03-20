@@ -5,6 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScField,
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
@@ -17,6 +18,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-new-password-demo',
   imports: [
+    ScField,
     ScPassword,
     ScPasswordInput,
     ScPasswordToggle,
@@ -28,23 +30,25 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-sm space-y-4">
-      <div scPassword #newPasswordField="scPassword" class="space-y-2">
+      <div scField class="space-y-2">
         <label scLabel>New Password</label>
-        <div scInputGroup>
-          <input
-            scPasswordInput
-            placeholder="Enter new password"
-            autocomplete="new-password"
-          />
-          <div scInputGroupAddon align="inline-end">
-            <button scPasswordToggle>
-              @if (newPasswordField.visible()) {
-                <svg siEyeOffIcon></svg>
-              } @else {
-                <svg siEyeIcon></svg>
-              }
-              <span class="sr-only">Toggle password visibility</span>
-            </button>
+        <div scPassword #newPasswordField="scPassword">
+          <div scInputGroup>
+            <input
+              scPasswordInput
+              placeholder="Enter new password"
+              autocomplete="new-password"
+            />
+            <div scInputGroupAddon align="inline-end">
+              <button scPasswordToggle>
+                @if (newPasswordField.visible()) {
+                  <svg siEyeOffIcon></svg>
+                } @else {
+                  <svg siEyeIcon></svg>
+                }
+                <span class="sr-only">Toggle password visibility</span>
+              </button>
+            </div>
           </div>
         </div>
         <p class="text-muted-foreground text-sm">
@@ -52,23 +56,25 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         </p>
       </div>
 
-      <div scPassword #confirmPasswordField="scPassword" class="space-y-2">
+      <div scField class="space-y-2">
         <label scLabel>Confirm Password</label>
-        <div scInputGroup>
-          <input
-            scPasswordInput
-            placeholder="Confirm new password"
-            autocomplete="new-password"
-          />
-          <div scInputGroupAddon align="inline-end">
-            <button scPasswordToggle>
-              @if (confirmPasswordField.visible()) {
-                <svg siEyeOffIcon></svg>
-              } @else {
-                <svg siEyeIcon></svg>
-              }
-              <span class="sr-only">Toggle password visibility</span>
-            </button>
+        <div scPassword #confirmPasswordField="scPassword">
+          <div scInputGroup>
+            <input
+              scPasswordInput
+              placeholder="Confirm new password"
+              autocomplete="new-password"
+            />
+            <div scInputGroupAddon align="inline-end">
+              <button scPasswordToggle>
+                @if (confirmPasswordField.visible()) {
+                  <svg siEyeOffIcon></svg>
+                } @else {
+                  <svg siEyeIcon></svg>
+                }
+                <span class="sr-only">Toggle password visibility</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

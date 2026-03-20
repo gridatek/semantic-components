@@ -5,6 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScField,
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
@@ -17,6 +18,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-password-demo',
   imports: [
+    ScField,
     ScPassword,
     ScPasswordInput,
     ScPasswordToggle,
@@ -28,24 +30,26 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-sm space-y-4">
-      <div scPassword #passwordField="scPassword" class="space-y-2">
+      <div scField class="space-y-2">
         <label scLabel>Password</label>
-        <div scInputGroup>
-          <input
-            scPasswordInput
-            placeholder="Enter password"
-            (input)="password.set(passwordInput.value)"
-            #passwordInput
-          />
-          <div scInputGroupAddon align="inline-end">
-            <button scPasswordToggle>
-              @if (passwordField.visible()) {
-                <svg siEyeOffIcon></svg>
-              } @else {
-                <svg siEyeIcon></svg>
-              }
-              <span class="sr-only">Toggle password visibility</span>
-            </button>
+        <div scPassword #passwordField="scPassword">
+          <div scInputGroup>
+            <input
+              scPasswordInput
+              placeholder="Enter password"
+              (input)="password.set(passwordInput.value)"
+              #passwordInput
+            />
+            <div scInputGroupAddon align="inline-end">
+              <button scPasswordToggle>
+                @if (passwordField.visible()) {
+                  <svg siEyeOffIcon></svg>
+                } @else {
+                  <svg siEyeIcon></svg>
+                }
+                <span class="sr-only">Toggle password visibility</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
