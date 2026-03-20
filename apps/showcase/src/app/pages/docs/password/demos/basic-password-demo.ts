@@ -28,15 +28,15 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-sm space-y-4">
-      <div
-        scPassword
-        #passwordField="scPassword"
-        [(value)]="password"
-        class="space-y-2"
-      >
+      <div scPassword #passwordField="scPassword" class="space-y-2">
         <label scLabel>Password</label>
         <div scInputGroup>
-          <input scPasswordInput placeholder="Enter password" />
+          <input
+            scPasswordInput
+            placeholder="Enter password"
+            (input)="password.set(passwordInput.value)"
+            #passwordInput
+          />
           <div scInputGroupAddon align="inline-end">
             <button scPasswordToggle>
               @if (passwordField.visible()) {

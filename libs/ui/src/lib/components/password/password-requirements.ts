@@ -3,12 +3,10 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  inject,
   input,
 } from '@angular/core';
 import { SiCheckIcon, SiCircleIcon } from '@semantic-icons/lucide-icons';
 import { cn } from '../../utils';
-import { SC_PASSWORD } from './password';
 
 export interface ScPasswordRequirement {
   label: string;
@@ -32,8 +30,8 @@ const DEFAULT_REQUIREMENTS: ScPasswordRequirement[] = [
   template: `
     <ul class="mt-2 space-y-1 text-xs">
       @for (req of requirements(); track req.label) {
-        <li [class]="requirementClass(req.test(password.value()))">
-          @if (req.test(password.value())) {
+        <li [class]="requirementClass(req.test(value()))">
+          @if (req.test(value())) {
             <svg
               siCheckIcon
               class="mr-1 inline size-3"
@@ -59,8 +57,8 @@ const DEFAULT_REQUIREMENTS: ScPasswordRequirement[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPasswordRequirements {
-  readonly password = inject(SC_PASSWORD);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly value = input<string>('');
   readonly requirements = input<ScPasswordRequirement[]>(DEFAULT_REQUIREMENTS);
 
   protected readonly class = computed(() => cn(this.classInput()));

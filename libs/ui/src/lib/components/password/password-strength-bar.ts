@@ -3,11 +3,9 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { SC_PASSWORD } from './password';
 
 @Component({
   selector: 'div[scPasswordStrengthBar]',
@@ -20,12 +18,12 @@ import { SC_PASSWORD } from './password';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPasswordStrengthBar {
-  readonly password = inject(SC_PASSWORD);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly value = input<string>('');
   readonly index = input.required<number>();
 
   protected readonly strength = computed(() => {
-    const password = this.password.value();
+    const password = this.value();
     if (!password) return 0;
 
     let score = 0;

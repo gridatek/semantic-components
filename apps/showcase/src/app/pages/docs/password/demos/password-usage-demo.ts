@@ -26,7 +26,7 @@ import {
   template: `
     <div class="space-y-2">
       <label scLabel for="password">Password</label>
-      <div scPassword [(value)]="password">
+      <div scPassword>
         <div scInputGroup>
           <input scPasswordInput id="password" placeholder="Enter password" />
           <div scInputGroupAddon align="inline-end">

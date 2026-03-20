@@ -9,7 +9,6 @@ import { SC_PASSWORD } from './password';
     'data-slot': 'password-toggle',
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'password.disabled()',
     '[attr.aria-label]':
       'password.visible() ? "Hide password" : "Show password"',
     '[attr.aria-pressed]': 'password.visible()',

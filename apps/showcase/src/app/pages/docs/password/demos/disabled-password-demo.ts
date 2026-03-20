@@ -27,16 +27,10 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-sm">
-      <div
-        scPassword
-        #passwordField="scPassword"
-        [value]="'********'"
-        [disabled]="true"
-        class="space-y-2"
-      >
+      <div scPassword #passwordField="scPassword" class="space-y-2">
         <label scLabel>Password (Disabled)</label>
         <div scInputGroup>
-          <input scPasswordInput />
+          <input scPasswordInput value="********" disabled />
           <div scInputGroupAddon align="inline-end">
             <button scPasswordToggle>
               @if (passwordField.visible()) {

@@ -32,18 +32,15 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-sm">
-      <div
-        scPassword
-        #passwordField="scPassword"
-        [(value)]="password"
-        class="space-y-2"
-      >
+      <div scPassword #passwordField="scPassword" class="space-y-2">
         <label scLabel>Create Password</label>
         <div scInputGroup>
           <input
             scPasswordInput
             placeholder="Enter a strong password"
             autocomplete="new-password"
+            (input)="password.set(passwordInput.value)"
+            #passwordInput
           />
           <div scInputGroupAddon align="inline-end">
             <button scPasswordToggle>
@@ -56,8 +53,8 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
             </button>
           </div>
         </div>
-        <div scPasswordStrength></div>
-        <div scPasswordRequirements></div>
+        <div scPasswordStrength [value]="password()"></div>
+        <div scPasswordRequirements [value]="password()"></div>
       </div>
     </div>
   `,

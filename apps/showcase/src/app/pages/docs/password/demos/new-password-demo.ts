@@ -28,12 +28,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-sm space-y-4">
-      <div
-        scPassword
-        #newPasswordField="scPassword"
-        [(value)]="newPassword"
-        class="space-y-2"
-      >
+      <div scPassword #newPasswordField="scPassword" class="space-y-2">
         <label scLabel>New Password</label>
         <div scInputGroup>
           <input
@@ -57,12 +52,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         </p>
       </div>
 
-      <div
-        scPassword
-        #confirmPasswordField="scPassword"
-        [(value)]="confirmPassword"
-        class="space-y-2"
-      >
+      <div scPassword #confirmPasswordField="scPassword" class="space-y-2">
         <label scLabel>Confirm Password</label>
         <div scInputGroup>
           <input

@@ -12,14 +12,11 @@ import { SC_PASSWORD } from './password';
     '[id]': 'field?.id()',
     '[type]': 'password.visible() ? "text" : "password"',
     '[class]': 'class()',
-    '[value]': 'password.value()',
-    '[disabled]': 'password.disabled()',
     '[attr.aria-invalid]': 'invalid() || null',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[readonly]': 'readonly()',
     '[placeholder]': 'placeholder()',
     '[autocomplete]': 'autocomplete()',
-    '(input)': 'onInput($event)',
   },
 })
 export class ScPasswordInput {
@@ -47,9 +44,4 @@ export class ScPasswordInput {
   );
 
   protected readonly class = computed(() => cn(inputStyles, this.classInput()));
-
-  onInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.password.setValue(input.value);
-  }
 }

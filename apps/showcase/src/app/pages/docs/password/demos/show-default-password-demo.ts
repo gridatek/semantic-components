@@ -31,13 +31,16 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
       <div
         scPassword
         #passwordField="scPassword"
-        [(value)]="apiKey"
-        [showByDefault]="true"
+        [(visible)]="visible"
         class="space-y-2"
       >
         <label scLabel>API Key</label>
         <div scInputGroup>
-          <input scPasswordInput placeholder="sk-..." />
+          <input
+            scPasswordInput
+            placeholder="sk-..."
+            value="sk-1234567890abcdef"
+          />
           <div scInputGroupAddon align="inline-end">
             <button scPasswordToggle>
               @if (passwordField.visible()) {
@@ -57,5 +60,5 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowDefaultPasswordDemo {
-  readonly apiKey = signal<string>('sk-1234567890abcdef');
+  readonly visible = signal(true);
 }
