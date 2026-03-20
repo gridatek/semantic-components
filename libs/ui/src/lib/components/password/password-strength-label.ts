@@ -15,6 +15,7 @@ export class ScPasswordStrengthLabel {
 
   private readonly passwordStrength = inject(SC_PASSWORD_STRENGTH);
 
+  // Hide label when strength is -1 (no evaluation)
   protected readonly hidden = computed(
     () => this.passwordStrength.strength() < 0,
   );

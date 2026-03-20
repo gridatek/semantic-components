@@ -78,9 +78,18 @@ Purely presentational password strength indicator. The consumer computes the str
 
 **Inputs:**
 
-| Input      | Type     | Default | Description                               |
-| ---------- | -------- | ------- | ----------------------------------------- |
-| `strength` | `number` | `0`     | Strength score (0–4) computed by consumer |
+| Input      | Type     | Default | Description                                         |
+| ---------- | -------- | ------- | --------------------------------------------------- |
+| `strength` | `number` | `-1`    | Strength score: `-1` = no evaluation, `0–4` = score |
+
+**Strength values:**
+
+- `-1` — No evaluation (bars muted, label hidden). Use when the field is empty and untouched.
+- `0` — Very weak (red)
+- `1` — Weak (orange)
+- `2` — Fair (yellow)
+- `3` — Strong (lime)
+- `4` — Very strong (green)
 
 ### ScPasswordRequirements
 
@@ -159,9 +168,11 @@ Since `ScPasswordStrength` is purely presentational, you can use any scoring alg
 ```typescript
 import zxcvbn from 'zxcvbn';
 
+// -1 = no evaluation (empty + untouched), 0–4 = strength score
 // zxcvbn returns a score from 0–4, which maps directly to the strength input
 readonly strength = computed(() => {
   const password = this.formModel().password;
+  if (!password && !this.passwordForm.password().touched()) return -1;
   if (!password) return 0;
   return zxcvbn(password).score;
 });

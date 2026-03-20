@@ -18,6 +18,8 @@ export const SC_PASSWORD_STRENGTH = new InjectionToken<ScPasswordStrength>(
 })
 export class ScPasswordStrength {
   readonly classInput = input<string>('', { alias: 'class' });
+
+  // -1 = no evaluation (bars muted, label hidden), 0–4 = strength score
   readonly strength = input<number>(-1);
 
   protected readonly class = computed(() =>

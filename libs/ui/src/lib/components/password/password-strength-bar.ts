@@ -28,6 +28,7 @@ export class ScPasswordStrengthBar {
 
     return cn(
       'h-1 flex-1 rounded-full transition-colors',
+      // -1 = no evaluation, all bars muted
       strength >= 0 && index <= strength ? colors[strength] : 'bg-muted',
       this.classInput(),
     );
