@@ -13,6 +13,7 @@ import {
   ScRatingGroup,
   ScRatingIcon,
   ScRatingItem,
+  ScTextarea,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
@@ -31,6 +32,7 @@ interface ReviewForm {
     ScButton,
     ScField,
     ScLabel,
+    ScTextarea,
     SiStarIcon,
     JsonPipe,
   ],
@@ -49,7 +51,17 @@ interface ReviewForm {
         </div>
       </div>
 
-      <button scButton (click)="onSubmit()" class="w-fit">Submit Rating</button>
+      <div scField>
+        <label scLabel>Comment</label>
+        <textarea
+          scTextarea
+          placeholder="Write your review..."
+          [value]="formModel().comment"
+          (input)="onCommentChange($event)"
+        ></textarea>
+      </div>
+
+      <button scButton (click)="onSubmit()" class="w-fit">Submit Review</button>
 
       @if (submitted) {
         <div class="bg-muted rounded-md p-4">
@@ -70,6 +82,11 @@ export class FormRatingDemo {
   });
 
   submitted = false;
+
+  onCommentChange(event: Event): void {
+    const value = (event.target as HTMLTextAreaElement).value;
+    this.formModel.update((m) => ({ ...m, comment: value }));
+  }
 
   onSubmit(): void {
     this.submitted = true;
