@@ -152,6 +152,32 @@ Password requirements checklist.
 </div>
 ```
 
+### With zxcvbn
+
+Since `ScPasswordStrength` is purely presentational, you can use any scoring algorithm. Here's an example using [zxcvbn](https://github.com/dropbox/zxcvbn):
+
+```typescript
+import zxcvbn from 'zxcvbn';
+
+// zxcvbn returns a score from 0–4, which maps directly to the strength input
+readonly strength = computed(() => {
+  const password = this.formModel().password;
+  if (!password) return 0;
+  return zxcvbn(password).score;
+});
+```
+
+```html
+<div scPasswordStrength [strength]="strength()">
+  <div class="flex gap-1">
+    @for (i of [0, 1, 2, 3]; track i) {
+    <div scPasswordStrengthBar [index]="i"></div>
+    }
+  </div>
+  <p scPasswordStrengthLabel>{{ strengthLabels[strength()] }}</p>
+</div>
+```
+
 ## Component Communication
 
 Components communicate through the `SC_PASSWORD_PROVIDER` injection token:
