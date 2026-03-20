@@ -85,6 +85,7 @@ export class ZxcvbnPasswordDemo {
 
   readonly strength = computed(() => {
     const password = this.formModel().password;
+    if (!password && !this.passwordForm.password().touched()) return -1;
     if (!password) return 0;
     return zxcvbn(password).score;
   });

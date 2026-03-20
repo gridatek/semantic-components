@@ -134,6 +134,7 @@ export class FullPasswordDemo {
 
   readonly strength = computed(() => {
     const password = this.password();
+    if (!password && !this.passwordForm.password().touched()) return -1;
     if (!password) return 0;
 
     const score = this.requirements.filter((req) => req.test(password)).length;

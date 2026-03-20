@@ -18,7 +18,7 @@ export const SC_PASSWORD_STRENGTH = new InjectionToken<ScPasswordStrength>(
 })
 export class ScPasswordStrength {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly strength = input<number>(0);
+  readonly strength = input<number>(-1);
 
   protected readonly class = computed(() =>
     cn('mt-2 space-y-1', this.classInput()),

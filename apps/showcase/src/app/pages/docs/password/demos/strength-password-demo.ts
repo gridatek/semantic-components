@@ -93,6 +93,7 @@ export class StrengthPasswordDemo {
 
   readonly strength = computed(() => {
     const password = this.formModel().password;
+    if (!password && !this.passwordForm.password().touched()) return -1;
     if (!password) return 0;
 
     const score = this.rules.filter((rule) => rule(password)).length;
