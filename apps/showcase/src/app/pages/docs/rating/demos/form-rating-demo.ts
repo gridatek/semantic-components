@@ -1,25 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FormRatingFieldDemo } from './form-rating-field-demo';
-
-@Component({
-  selector: 'app-form-rating-field-demo-container',
-  imports: [DemoContainer, FormRatingFieldDemo],
-  template: `
-    <app-demo-container title="Form Integration" [code]="code">
-      <app-form-rating-field-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class FormRatingFieldDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -28,11 +7,12 @@ import {
 } from '@angular/core';
 import {
   ScButton,
+  ScField,
   ScLabel,
-  ScRatingField,
-  ScRatingFieldGroup,
-  ScRatingFieldIcon,
-  ScRatingFieldItem,
+  ScRating,
+  ScRatingGroup,
+  ScRatingIcon,
+  ScRatingItem,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
@@ -42,26 +22,27 @@ interface ReviewForm {
 }
 
 @Component({
-  selector: 'app-form-rating-field-demo',
+  selector: 'app-form-rating-demo',
   imports: [
-    ScRatingField,
-    ScRatingFieldGroup,
-    ScRatingFieldItem,
-    ScRatingFieldIcon,
+    ScRating,
+    ScRatingGroup,
+    ScRatingItem,
+    ScRatingIcon,
     ScButton,
+    ScField,
     ScLabel,
     SiStarIcon,
     JsonPipe,
   ],
-  template: \`
+  template: `
     <div class="flex flex-col gap-4">
-      <div class="flex flex-col gap-2">
+      <div scField>
         <label scLabel>Product Rating</label>
-        <div scRatingField [(value)]="formModel().rating">
-          <div scRatingFieldGroup>
+        <div scRating [(value)]="formModel().rating">
+          <div scRatingGroup>
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span scRatingFieldItem [value]="i">
-                <svg siStarIcon scRatingFieldIcon></svg>
+              <span scRatingItem [value]="i">
+                <svg siStarIcon scRatingIcon></svg>
               </span>
             }
           </div>
@@ -77,12 +58,12 @@ interface ReviewForm {
         </div>
       }
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormRatingFieldDemo {
+export class FormRatingDemo {
   readonly formModel = signal<ReviewForm>({
     rating: 0,
     comment: '',
@@ -94,5 +75,4 @@ export class FormRatingFieldDemo {
     this.submitted = true;
     console.log('Form submitted:', this.formModel());
   }
-}`;
 }

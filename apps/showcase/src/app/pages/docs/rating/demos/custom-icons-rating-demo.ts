@@ -5,33 +5,27 @@ import {
   signal,
 } from '@angular/core';
 import {
-  ScRatingField,
-  ScRatingFieldGroup,
-  ScRatingFieldIcon,
-  ScRatingFieldItem,
+  ScRating,
+  ScRatingGroup,
+  ScRatingIcon,
+  ScRatingItem,
 } from '@semantic-components/ui';
 import { SiHeartIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-custom-icons-rating-field-demo',
-  imports: [
-    ScRatingField,
-    ScRatingFieldGroup,
-    ScRatingFieldItem,
-    ScRatingFieldIcon,
-    SiHeartIcon,
-  ],
+  selector: 'app-custom-icons-rating-demo',
+  imports: [ScRating, ScRatingGroup, ScRatingItem, ScRatingIcon, SiHeartIcon],
   template: `
     <div class="flex flex-col gap-2">
       <div
-        scRatingField
+        scRating
         [(value)]="rating"
         [style.--sc-rating-active-color]="'var(--color-red-500)'"
       >
-        <div scRatingFieldGroup>
+        <div scRatingGroup>
           @for (i of [1, 2, 3, 4, 5]; track i) {
-            <span scRatingFieldItem [value]="i">
-              <svg siHeartIcon scRatingFieldIcon></svg>
+            <span scRatingItem [value]="i">
+              <svg siHeartIcon scRatingIcon></svg>
             </span>
           }
         </div>
@@ -43,6 +37,6 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CustomIconsRatingFieldDemo {
+export class CustomIconsRatingDemo {
   readonly rating = signal(4);
 }

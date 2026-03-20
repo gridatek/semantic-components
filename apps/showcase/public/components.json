@@ -663,9 +663,9 @@
     "category": "Forms"
   },
   {
-    "name": "Rating Field",
-    "path": "rating-field",
-    "description": "A composable rating field for feedback and reviews.",
+    "name": "Rating",
+    "path": "rating",
+    "description": "A composable rating component for feedback and reviews.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

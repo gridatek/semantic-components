@@ -4,30 +4,24 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  ScRatingField,
-  ScRatingFieldGroup,
-  ScRatingFieldIcon,
-  ScRatingFieldItem,
+  ScRating,
+  ScRatingGroup,
+  ScRatingIcon,
+  ScRatingItem,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-readonly-rating-field-demo',
-  imports: [
-    ScRatingField,
-    ScRatingFieldGroup,
-    ScRatingFieldItem,
-    ScRatingFieldIcon,
-    SiStarIcon,
-  ],
+  selector: 'app-readonly-rating-demo',
+  imports: [ScRating, ScRatingGroup, ScRatingItem, ScRatingIcon, SiStarIcon],
   template: `
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-2">
-        <div scRatingField [value]="4" [readonly]="true">
-          <div scRatingFieldGroup>
+        <div scRating [value]="4" [readonly]="true">
+          <div scRatingGroup>
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span scRatingFieldItem [value]="i">
-                <svg siStarIcon scRatingFieldIcon></svg>
+              <span scRatingItem [value]="i">
+                <svg siStarIcon scRatingIcon></svg>
               </span>
             }
           </div>
@@ -36,12 +30,12 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
       </div>
 
       <div class="flex flex-col gap-2">
-        <div scRatingField [value]="3.5" [readonly]="true" [allowHalf]="true">
-          <div scRatingFieldGroup>
+        <div scRating [value]="3.5" [readonly]="true" [allowHalf]="true">
+          <div scRatingGroup>
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span scRatingFieldItem [value]="i">
-                <svg siStarIcon scRatingFieldIcon></svg>
-                <svg siStarIcon scRatingFieldIcon></svg>
+              <span scRatingItem [value]="i">
+                <svg siStarIcon scRatingIcon></svg>
+                <svg siStarIcon scRatingIcon></svg>
               </span>
             }
           </div>
@@ -54,4 +48,4 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReadonlyRatingFieldDemo {}
+export class ReadonlyRatingDemo {}

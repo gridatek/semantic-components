@@ -1,4 +1,3 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
@@ -8,26 +7,19 @@ import {
   inject,
   input,
   model,
-  signal,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { SC_FIELD } from '../field';
-import { ScRatingFieldItem } from './rating-field-item';
+import { ScRatingItem } from './rating-item';
 
-// Token for rating field context
-export const SC_RATING_FIELD = new InjectionToken<ScRatingField>(
-  'SC_RATING_FIELD',
-);
+// Token for rating context
+export const SC_RATING = new InjectionToken<ScRating>('SC_RATING');
 
 @Directive({
-  selector: 'div[scRatingField], label[scRatingField]',
-  providers: [
-    { provide: SC_RATING_FIELD, useExisting: ScRatingField },
-    { provide: SC_FIELD, useExisting: ScRatingField },
-  ],
+  selector: 'div[scRating], label[scRating]',
+  providers: [{ provide: SC_RATING, useExisting: ScRating }],
   host: {
     '[attr.role]': 'role()',
-    'data-slot': 'rating-field',
+    'data-slot': 'rating',
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel() || null',
     '[attr.aria-labelledby]': 'ariaLabelledby() || null',
@@ -37,11 +29,8 @@ export const SC_RATING_FIELD = new InjectionToken<ScRatingField>(
       '--sc-rating-active-color: var(--color-yellow-400); --sc-rating-inactive-color: var(--color-gray-300)',
   },
 })
-export class ScRatingField {
+export class ScRating {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
-
-  readonly id = input(inject(_IdGenerator).getId('sc-rating-field-'));
-  readonly descriptionIds = signal<string[]>([]);
 
   protected readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;
@@ -56,7 +45,7 @@ export class ScRatingField {
   readonly ariaLabel = input<string>('', { alias: 'aria-label' });
   readonly ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
 
-  private readonly items = contentChildren(ScRatingFieldItem, {
+  private readonly items = contentChildren(ScRatingItem, {
     descendants: true,
   });
 
@@ -64,7 +53,7 @@ export class ScRatingField {
     const allItems = this.items();
     if (allItems.length === 0) {
       throw new Error(
-        'ScRatingField: No rating items found. Add at least one [scRatingFieldItem] element.',
+        'ScRating: No rating items found. Add at least one [scRatingItem] element.',
       );
     }
     return Math.max(...allItems.map((item) => item.value()));

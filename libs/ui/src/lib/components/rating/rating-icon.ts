@@ -1,29 +1,29 @@
 import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from '../../utils';
-import { SC_RATING_FIELD_GROUP } from './rating-field-group';
+import { SC_RATING_GROUP } from './rating-group';
 
-export type ScRatingFieldIconRole = 'single' | 'background' | 'foreground';
+export type ScRatingIconRole = 'single' | 'background' | 'foreground';
 
 const ACTIVE_CLASSES =
   'fill-(--sc-rating-active-color) text-(--sc-rating-active-color)';
 const INACTIVE_CLASSES = 'text-(--sc-rating-inactive-color)';
 
 @Directive({
-  selector: 'svg[scRatingFieldIcon]',
+  selector: 'svg[scRatingIcon]',
   host: {
     '[class]': 'class()',
     '[style.clip-path]': 'clipPath()',
   },
 })
-export class ScRatingFieldIcon {
-  private readonly group = inject(SC_RATING_FIELD_GROUP);
+export class ScRatingIcon {
+  private readonly group = inject(SC_RATING_GROUP);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  /** Set by the parent ScRatingFieldItem via contentChildren resolution */
-  readonly role = signal<ScRatingFieldIconRole>('single');
+  /** Set by the parent ScRatingItem via contentChildren resolution */
+  readonly role = signal<ScRatingIconRole>('single');
 
-  /** Set by the parent ScRatingFieldItem so the icon can read state */
+  /** Set by the parent ScRatingItem so the icon can read state */
   readonly state = signal<'full' | 'half' | 'empty'>('empty');
 
   protected readonly class = computed(() => {

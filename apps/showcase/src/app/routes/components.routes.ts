@@ -463,10 +463,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/radio-group/radio-group-page'),
       },
       {
-        path: 'rating-field',
-        title: 'Rating Field - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/rating-field/rating-field-page'),
+        path: 'rating',
+        title: 'Rating - Semantic Components',
+        loadComponent: () => import('../pages/docs/rating/rating-page'),
       },
       {
         path: 'resizable',
