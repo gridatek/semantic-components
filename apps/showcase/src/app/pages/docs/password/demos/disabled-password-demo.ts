@@ -8,8 +8,8 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
-  ScPassword,
   ScPasswordInput,
+  ScPasswordProvider,
   ScPasswordToggle,
 } from '@semantic-components/ui';
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
@@ -18,7 +18,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-disabled-password-demo',
   imports: [
     ScField,
-    ScPassword,
+    ScPasswordProvider,
     ScPasswordInput,
     ScPasswordToggle,
     ScInputGroup,
@@ -31,7 +31,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     <div class="w-full max-w-sm">
       <div scField class="space-y-2">
         <label scLabel>Password (Disabled)</label>
-        <div scPassword #passwordField="scPassword">
+        <div scPasswordProvider #passwordField="scPasswordProvider">
           <div scInputGroup>
             <input scPasswordInput value="********" disabled />
             <div scInputGroupAddon align="inline-end">

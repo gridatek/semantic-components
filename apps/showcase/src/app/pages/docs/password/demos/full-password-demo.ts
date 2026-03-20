@@ -9,8 +9,8 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
-  ScPassword,
   ScPasswordInput,
+  ScPasswordProvider,
   ScPasswordRequirements,
   ScPasswordStrength,
   ScPasswordToggle,
@@ -21,7 +21,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-full-password-demo',
   imports: [
     ScField,
-    ScPassword,
+    ScPasswordProvider,
     ScPasswordInput,
     ScPasswordToggle,
     ScPasswordStrength,
@@ -36,7 +36,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     <div class="w-full max-w-sm">
       <div scField class="space-y-2">
         <label scLabel>Create Password</label>
-        <div scPassword #passwordField="scPassword">
+        <div scPasswordProvider #passwordField="scPasswordProvider">
           <div scInputGroup>
             <input
               scPasswordInput

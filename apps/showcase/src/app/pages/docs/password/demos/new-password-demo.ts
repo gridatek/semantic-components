@@ -9,8 +9,8 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
-  ScPassword,
   ScPasswordInput,
+  ScPasswordProvider,
   ScPasswordToggle,
 } from '@semantic-components/ui';
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
@@ -19,7 +19,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-new-password-demo',
   imports: [
     ScField,
-    ScPassword,
+    ScPasswordProvider,
     ScPasswordInput,
     ScPasswordToggle,
     ScInputGroup,
@@ -32,7 +32,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
     <div class="w-full max-w-sm space-y-4">
       <div scField class="space-y-2">
         <label scLabel>New Password</label>
-        <div scPassword #newPasswordField="scPassword">
+        <div scPasswordProvider #newPasswordField="scPasswordProvider">
           <div scInputGroup>
             <input
               scPasswordInput
@@ -58,7 +58,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 
       <div scField class="space-y-2">
         <label scLabel>Confirm Password</label>
-        <div scPassword #confirmPasswordField="scPassword">
+        <div scPasswordProvider #confirmPasswordField="scPasswordProvider">
           <div scInputGroup>
             <input
               scPasswordInput

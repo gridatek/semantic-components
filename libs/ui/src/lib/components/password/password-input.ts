@@ -3,7 +3,7 @@ import { FormField } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field/field';
 import { inputStyles } from '../input/input';
-import { SC_PASSWORD } from './password';
+import { SC_PASSWORD_PROVIDER } from './password';
 
 @Directive({
   selector: 'input[scPasswordInput]',
@@ -22,7 +22,7 @@ import { SC_PASSWORD } from './password';
 export class ScPasswordInput {
   readonly field = inject(SC_FIELD, { optional: true });
   private readonly formField = inject(FormField, { optional: true });
-  readonly password = inject(SC_PASSWORD);
+  readonly password = inject(SC_PASSWORD_PROVIDER);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly placeholder = input<string>('');

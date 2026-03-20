@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { buttonVariants } from '../button/button';
-import { SC_PASSWORD } from './password';
+import { SC_PASSWORD_PROVIDER } from './password';
 
 @Directive({
   selector: 'button[scPasswordToggle]',
@@ -16,7 +16,7 @@ import { SC_PASSWORD } from './password';
   },
 })
 export class ScPasswordToggle {
-  readonly password = inject(SC_PASSWORD);
+  readonly password = inject(SC_PASSWORD_PROVIDER);
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>

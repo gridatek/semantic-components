@@ -7,18 +7,22 @@ import {
 } from '@angular/core';
 import { cn } from '../../utils';
 
-export const SC_PASSWORD = new InjectionToken<ScPassword>('SC_PASSWORD');
+export const SC_PASSWORD_PROVIDER = new InjectionToken<ScPasswordProvider>(
+  'SC_PASSWORD_PROVIDER',
+);
 
 @Directive({
-  selector: 'div[scPassword]',
-  exportAs: 'scPassword',
-  providers: [{ provide: SC_PASSWORD, useExisting: ScPassword }],
+  selector: 'div[scPasswordProvider]',
+  exportAs: 'scPasswordProvider',
+  providers: [
+    { provide: SC_PASSWORD_PROVIDER, useExisting: ScPasswordProvider },
+  ],
   host: {
-    'data-slot': 'password',
+    'data-slot': 'password-provider',
     '[class]': 'class()',
   },
 })
-export class ScPassword {
+export class ScPasswordProvider {
   readonly classInput = input<string>('', { alias: 'class' });
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
