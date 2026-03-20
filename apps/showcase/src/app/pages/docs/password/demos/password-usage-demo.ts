@@ -5,10 +5,11 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScInputGroup,
+  ScInputGroupAddon,
   ScLabel,
   ScPassword,
   ScPasswordInput,
-  ScPasswordInputGroup,
   ScPasswordToggle,
 } from '@semantic-components/ui';
 
@@ -16,18 +17,21 @@ import {
   selector: 'app-password-usage-demo',
   imports: [
     ScPassword,
-    ScPasswordInputGroup,
     ScPasswordInput,
     ScPasswordToggle,
+    ScInputGroup,
+    ScInputGroupAddon,
     ScLabel,
   ],
   template: `
     <div class="space-y-2">
       <label scLabel for="password">Password</label>
       <div scPassword [(value)]="password">
-        <div scPasswordInputGroup>
+        <div scInputGroup>
           <input scPasswordInput id="password" placeholder="Enter password" />
-          <button scPasswordToggle></button>
+          <div scInputGroupAddon align="inline-end">
+            <button scPasswordToggle></button>
+          </div>
         </div>
       </div>
     </div>
