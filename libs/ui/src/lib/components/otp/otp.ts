@@ -1,40 +1,25 @@
-import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
-  ElementRef,
   computed,
   contentChildren,
   effect,
   inject,
   input,
   model,
-  signal,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
-import { SC_FIELD } from '../field';
 import { ScOtpSlot } from './otp-slot';
 
 @Directive({
-  selector: 'div[scOtp], label[scOtp]',
-  providers: [{ provide: SC_FIELD, useExisting: ScOtp }],
+  selector: 'div[scOtp]',
   host: {
-    '[attr.role]': 'role()',
     'data-slot': 'otp',
     '[class]': 'class()',
     '(paste)': 'onPaste($event)',
   },
 })
 export class ScOtp implements FormValueControl<string> {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
-
-  readonly id = input(inject(_IdGenerator).getId('sc-otp-'));
-  readonly descriptionIds = signal<string[]>([]);
-
-  protected readonly role = computed(() => {
-    const tagName = this.elementRef.nativeElement.tagName;
-    return tagName === 'LABEL' ? null : 'group';
-  });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = model<string>('');
   readonly disabled = input<boolean>(false);
