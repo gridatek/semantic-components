@@ -6,7 +6,7 @@ A composable numeric input component with scrubbing support, increment/decrement
 
 The Number component follows a composable pattern with multiple sub-components:
 
-- **ScNumber**: Root container that manages state and provides context
+- **ScNumber**: Directive that manages state and provides context. Must be used inside an `ScField`
 - **ScNumberScrubArea**: Interactive label area with mouse scrubbing to adjust values
 - **ScNumberInputGroup**: Container for input and stepper buttons
 - **ScNumberInput**: The numeric input field
@@ -33,9 +33,11 @@ The Number component follows a composable pattern with multiple sub-components:
 
 ### ScNumber
 
-Root container directive that manages the numeric state and provides context to child components.
+Directive that manages the numeric state and provides context to child components.
 
-**Selector:** `[scNumber]`
+**Selector:** `div[scNumber]`
+
+`ScNumber` is not a field — it must be used inside an `ScField`.
 
 **Inputs:**
 
