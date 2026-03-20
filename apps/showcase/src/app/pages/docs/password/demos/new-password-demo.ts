@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
   ScInputGroup,
@@ -18,6 +19,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-new-password-demo',
   imports: [
+    FormField,
     ScField,
     ScPasswordProvider,
     ScPasswordInput,
@@ -36,6 +38,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
           <div scInputGroup>
             <input
               scPasswordInput
+              [formField]="passwordForm.newPassword"
               placeholder="Enter new password"
               autocomplete="new-password"
             />
@@ -62,6 +65,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
           <div scInputGroup>
             <input
               scPasswordInput
+              [formField]="passwordForm.confirmPassword"
               placeholder="Confirm new password"
               autocomplete="new-password"
             />
@@ -85,6 +89,6 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewPasswordDemo {
-  readonly newPassword = signal<string>('');
-  readonly confirmPassword = signal<string>('');
+  readonly formModel = signal({ newPassword: '', confirmPassword: '' });
+  readonly passwordForm = form(this.formModel);
 }

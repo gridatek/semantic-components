@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
   ScInputGroup,
@@ -18,6 +19,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-password-demo',
   imports: [
+    FormField,
     ScField,
     ScPasswordProvider,
     ScPasswordInput,
@@ -36,9 +38,8 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
           <div scInputGroup>
             <input
               scPasswordInput
+              [formField]="passwordForm.password"
               placeholder="Enter password"
-              (input)="password.set(passwordInput.value)"
-              #passwordInput
             />
             <div scInputGroupAddon align="inline-end">
               <button scPasswordToggle>
@@ -55,7 +56,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
       </div>
 
       <p class="text-muted-foreground text-sm">
-        Value: {{ password() || '(empty)' }}
+        Value: {{ formModel().password || '(empty)' }}
       </p>
     </div>
   `,
@@ -64,5 +65,6 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicPasswordDemo {
-  readonly password = signal<string>('');
+  readonly formModel = signal({ password: '' });
+  readonly passwordForm = form(this.formModel);
 }

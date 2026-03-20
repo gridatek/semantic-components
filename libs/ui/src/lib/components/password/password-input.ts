@@ -3,7 +3,7 @@ import { FormField } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field/field';
 import { inputStyles } from '../input/input';
-import { SC_PASSWORD_PROVIDER } from './password';
+import { SC_PASSWORD_PROVIDER } from './password-provider';
 
 @Directive({
   selector: 'input[scPasswordInput]',

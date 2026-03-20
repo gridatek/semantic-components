@@ -1,66 +1,49 @@
 # Password
 
-A composable password input component with visibility toggle and optional strength indicator.
+A composable password input with visibility toggle, built on top of `ScField` and `ScInputGroup`.
 
 ## Architecture
 
-The Password component follows a composable pattern with multiple sub-components:
-
-- **ScPassword**: Root container that manages state and provides context
-- **ScPasswordInputGroup**: Container for input and toggle button
-- **ScPasswordInput**: The password input field
+- **ScPasswordProvider**: Provides visibility toggle context (`display: contents`, no layout impact)
+- **ScPasswordInput**: The password input field (auto-switches between password/text type)
 - **ScPasswordToggle**: Button to toggle password visibility
+- **ScPasswordStrength**: Password strength indicator
+- **ScPasswordRequirements**: Password requirements checklist
+
+`ScPasswordProvider` is not a field — it must be used inside a `ScField`.
 
 ## Basic Usage
 
 ```html
-<div scPassword [(value)]="password">
-  <div scPasswordInputGroup>
-    <input scPasswordInput placeholder="Enter password" />
-    <button scPasswordToggle></button>
+<div scField class="space-y-2">
+  <label scLabel>Password</label>
+  <div scPasswordProvider>
+    <div scInputGroup>
+      <input scPasswordInput [formField]="form.password" placeholder="Enter password" />
+      <div scInputGroupAddon align="inline-end">
+        <button scPasswordToggle>
+          <span class="sr-only">Toggle password visibility</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 ```
 
 ## Components
 
-### ScPassword
+### ScPasswordProvider
 
-Root container directive that manages the password state and visibility.
+Provider directive that manages visibility state. Uses `display: contents` so it has no effect on layout.
 
-**Selector:** `[scPassword]`
-
-**Inputs:**
-
-| Input           | Type      | Default | Description              |
-| --------------- | --------- | ------- | ------------------------ |
-| `disabled`      | `boolean` | `false` | Disabled state           |
-| `showByDefault` | `boolean` | `false` | Show password by default |
+**Selector:** `div[scPasswordProvider]`
+**Export As:** `scPasswordProvider`
 
 **Two-way Bindings:**
 
-| Binding | Type     | Default | Description   |
-| ------- | -------- | ------- | ------------- |
-| `value` | `string` | `''`    | Current value |
-
-**Outputs:**
-
-| Output             | Type      | Description                     |
-| ------------------ | --------- | ------------------------------- |
-| `valueChange`      | `string`  | Emitted when value changes      |
-| `visibilityChange` | `boolean` | Emitted when visibility toggles |
-
-### ScPasswordInputGroup
-
-Container for grouping the input field with the toggle button.
-
-**Selector:** `[scPasswordInputGroup]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+| Binding   | Type      | Default | Description      |
+| --------- | --------- | ------- | ---------------- |
+| `visible` | `boolean` | `false` | Visibility state |
 
 ### ScPasswordInput
 
@@ -70,18 +53,9 @@ The password input field.
 
 **Features:**
 
-- Auto-switches between password/text type
-- Supports placeholder, autocomplete
-- Respects disabled/readonly states
-
-**Inputs:**
-
-| Input          | Type      | Default              | Description            |
-| -------------- | --------- | -------------------- | ---------------------- |
-| `placeholder`  | `string`  | `''`                 | Placeholder text       |
-| `readonly`     | `boolean` | `false`              | Readonly state         |
-| `autocomplete` | `string`  | `'current-password'` | Autocomplete attribute |
-| `class`        | `string`  | `''`                 | Additional CSS classes |
+- Auto-switches between password/text type based on visibility
+- Supports `[formField]` for Signal Forms integration
+- Inherits `id` and `aria-describedby` from parent `ScField`
 
 ### ScPasswordToggle
 
@@ -91,51 +65,51 @@ Button to toggle password visibility.
 
 **Features:**
 
-- Auto-disables when field is disabled
-- Shows eye/eye-off icons
+- `aria-pressed` reflects visibility state
 - Custom icon support via content projection
-- Keyboard accessible
+- Use `<span class="sr-only">` for accessible label
+
+### ScPasswordStrength
+
+Password strength indicator.
+
+**Selector:** `[scPasswordStrength]`
 
 **Inputs:**
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+| Input   | Type     | Default | Description              |
+| ------- | -------- | ------- | ------------------------ |
+| `value` | `string` | `''`    | Password value to assess |
+
+### ScPasswordRequirements
+
+Password requirements checklist.
+
+**Selector:** `[scPasswordRequirements]`
+
+**Inputs:**
+
+| Input          | Type                      | Default              | Description         |
+| -------------- | ------------------------- | -------------------- | ------------------- |
+| `value`        | `string`                  | `''`                 | Password value      |
+| `requirements` | `ScPasswordRequirement[]` | Default requirements | Custom requirements |
 
 ## Examples
-
-### Basic
-
-```html
-<div scPassword [(value)]="password">
-  <div scPasswordInputGroup>
-    <input scPasswordInput placeholder="Enter password" />
-    <button scPasswordToggle></button>
-  </div>
-</div>
-```
-
-### With Label
-
-```html
-<div class="space-y-2">
-  <label scLabel for="password">Password</label>
-  <div scPassword [(value)]="password">
-    <div scPasswordInputGroup>
-      <input scPasswordInput id="password" placeholder="Enter password" />
-      <button scPasswordToggle></button>
-    </div>
-  </div>
-</div>
-```
 
 ### Show by Default
 
 ```html
-<div scPassword [(value)]="password" [showByDefault]="true">
-  <div scPasswordInputGroup>
-    <input scPasswordInput placeholder="API Key" />
-    <button scPasswordToggle></button>
+<div scField class="space-y-2">
+  <label scLabel>API Key</label>
+  <div scPasswordProvider [(visible)]="visible">
+    <div scInputGroup>
+      <input scPasswordInput value="sk-1234567890abcdef" />
+      <div scInputGroupAddon align="inline-end">
+        <button scPasswordToggle>
+          <span class="sr-only">Toggle visibility</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 ```
@@ -143,105 +117,49 @@ Button to toggle password visibility.
 ### Disabled
 
 ```html
-<div scPassword [value]="'********'" [disabled]="true">
-  <div scPasswordInputGroup>
-    <input scPasswordInput />
-    <button scPasswordToggle></button>
-  </div>
-</div>
-```
-
-### New Password
-
-```html
-<div scPassword [(value)]="newPassword">
-  <div scPasswordInputGroup>
-    <input scPasswordInput placeholder="New password" autocomplete="new-password" />
-    <button scPasswordToggle></button>
-  </div>
-</div>
-```
-
-### Custom Icons
-
-```html
-<div scPassword [(value)]="password">
-  <div scPasswordInputGroup>
-    <input scPasswordInput />
-    <button scPasswordToggle>
-      <!-- Custom icon content -->
-      @if (visible()) {
-      <span>Hide</span>
-      } @else {
-      <span>Show</span>
-      }
-    </button>
-  </div>
-</div>
-```
-
-### With Description
-
-```html
-<div class="space-y-2">
-  <label scLabel>Password</label>
-  <div scPassword [(value)]="password">
-    <div scPasswordInputGroup>
-      <input scPasswordInput />
-      <button scPasswordToggle></button>
+<div scField class="space-y-2">
+  <label scLabel>Password (Disabled)</label>
+  <div scPasswordProvider>
+    <div scInputGroup>
+      <input scPasswordInput value="********" disabled />
+      <div scInputGroupAddon align="inline-end">
+        <button scPasswordToggle>
+          <span class="sr-only">Toggle visibility</span>
+        </button>
+      </div>
     </div>
   </div>
-  <p class="text-muted-foreground text-sm">Must be at least 8 characters</p>
 </div>
 ```
 
-## Features
+### With Strength Indicator
 
-- **Visibility Toggle**: Show/hide password text
-- **Disabled State**: Full disabled support across all sub-components
-- **Autocomplete Support**: Proper autocomplete attributes
-- **Two-way Binding**: Sync with `[(value)]`
-- **Composable**: Mix and match sub-components as needed
-- **Accessible**: Proper ARIA labels and keyboard support
-
-## Accessibility
-
-- Proper `aria-label` on toggle button
-- `aria-pressed` state on toggle button
-- Labels properly associated with inputs
-- Disabled states properly communicated
-- Focus management within component
-- Screen reader friendly announcements
-
-## Styling
-
-All components accept a `class` input for custom styling. Default styles provide:
-
-- Consistent border and spacing
-- Focus states with ring
-- Hover states on toggle button
-- Disabled state opacity
-- Proper positioning for toggle button
+```html
+<div scField class="space-y-2">
+  <label scLabel>Password</label>
+  <div scPasswordProvider>
+    <div scInputGroup>
+      <input scPasswordInput [formField]="form.password" autocomplete="new-password" />
+      <div scInputGroupAddon align="inline-end">
+        <button scPasswordToggle>
+          <span class="sr-only">Toggle visibility</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div scPasswordStrength [value]="formModel().password"></div>
+</div>
+```
 
 ## Component Communication
 
-Components communicate through the `SC_PASSWORD` injection token:
+Components communicate through the `SC_PASSWORD_PROVIDER` injection token:
 
 ```typescript
-export const SC_PASSWORD = new InjectionToken<ScPassword>('SC_PASSWORD');
+export const SC_PASSWORD_PROVIDER = new InjectionToken<ScPasswordProvider>('SC_PASSWORD_PROVIDER');
 ```
 
-Child components inject the parent context to access:
+Child components inject the provider to access:
 
-- Current value
 - Visibility state
-- Disabled state
-- Toggle methods
-
-## Best Practices
-
-1. **Always provide a label** for accessibility
-2. **Use appropriate autocomplete** values (current-password, new-password)
-3. **Add password requirements** in description text
-4. **Consider password strength** indicators for new passwords
-5. **Test keyboard navigation** to ensure accessibility
+- Toggle method

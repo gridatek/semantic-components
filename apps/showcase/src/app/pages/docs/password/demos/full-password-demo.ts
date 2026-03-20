@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
   ScInputGroup,
@@ -20,6 +21,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-full-password-demo',
   imports: [
+    FormField,
     ScField,
     ScPasswordProvider,
     ScPasswordInput,
@@ -40,10 +42,9 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
           <div scInputGroup>
             <input
               scPasswordInput
+              [formField]="passwordForm.password"
               placeholder="Enter a strong password"
               autocomplete="new-password"
-              (input)="password.set(passwordInput.value)"
-              #passwordInput
             />
             <div scInputGroupAddon align="inline-end">
               <button scPasswordToggle>
@@ -57,8 +58,8 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
         </div>
-        <div scPasswordStrength [value]="password()"></div>
-        <div scPasswordRequirements [value]="password()"></div>
+        <div scPasswordStrength [value]="formModel().password"></div>
+        <div scPasswordRequirements [value]="formModel().password"></div>
       </div>
     </div>
   `,
@@ -67,5 +68,6 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FullPasswordDemo {
-  readonly password = signal<string>('');
+  readonly formModel = signal({ password: '' });
+  readonly passwordForm = form(this.formModel);
 }

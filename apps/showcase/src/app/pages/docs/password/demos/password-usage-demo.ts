@@ -4,6 +4,7 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
   ScInputGroup,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-password-usage-demo',
   imports: [
+    FormField,
     ScField,
     ScPasswordProvider,
     ScPasswordInput,
@@ -30,7 +32,11 @@ import {
       <label scLabel>Password</label>
       <div scPasswordProvider>
         <div scInputGroup>
-          <input scPasswordInput placeholder="Enter password" />
+          <input
+            scPasswordInput
+            [formField]="passwordForm.password"
+            placeholder="Enter password"
+          />
           <div scInputGroupAddon align="inline-end">
             <button scPasswordToggle></button>
           </div>
@@ -43,5 +49,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordUsageDemo {
-  readonly password = signal<string>('');
+  readonly formModel = signal({ password: '' });
+  readonly passwordForm = form(this.formModel);
 }
