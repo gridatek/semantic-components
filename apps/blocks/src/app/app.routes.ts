@@ -11,6 +11,10 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./pages/gallery/gallery.page'),
   },
   {
+    path: 'shadcn',
+    loadComponent: () => import('./pages/shadcn/shadcn.page'),
+  },
+  {
     path: 'data-table',
     loadComponent: () => import('./pages/data-table/data-table.page'),
   },
