@@ -215,20 +215,16 @@ export class ScPdfViewerCanvas {
 
   readonly editorPointerEvents = computed(() => {
     const mode = this.editorMode();
-    return mode === 'freetext' ||
-      mode === 'ink' ||
-      mode === 'stamp' ||
-      mode === 'signature'
-      ? 'auto'
-      : 'none';
+    return mode !== 'none' ? 'auto' : 'none';
   });
 
   readonly editorCursor = computed(() => {
     const mode = this.editorMode();
+    if (mode === 'highlight') return 'text';
     if (mode === 'freetext') return 'text';
     if (mode === 'ink') return 'crosshair';
     if (mode === 'stamp' || mode === 'signature') return 'copy';
-    return '';
+    return 'default';
   });
 
   // Reactive container dimensions — updated by ResizeObserver so that
