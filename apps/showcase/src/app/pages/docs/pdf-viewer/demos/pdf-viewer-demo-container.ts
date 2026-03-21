@@ -15,7 +15,7 @@ import { PdfViewerDemo } from './pdf-viewer-demo';
       demoUrl="/demos/pdf-viewer/pdf-viewer-demo"
       [code]="code"
     >
-      <app-pdf-viewer-demo />
+      <app-pdf-viewer-demo class="h-[800px]" />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },

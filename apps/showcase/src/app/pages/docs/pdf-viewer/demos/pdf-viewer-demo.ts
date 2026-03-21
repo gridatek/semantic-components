@@ -3,11 +3,14 @@ import {
   Component,
   DestroyRef,
   ViewEncapsulation,
+  computed,
   effect,
   inject,
+  input,
   signal,
   viewChild,
 } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import {
   ScPdfViewerCanvas,
   ScPdfViewerContainer,
@@ -81,17 +84,17 @@ interface ThumbnailData {
     SiZoomOutIcon,
   ],
   template: `
-    <div class="pdfjs-viewer h-[800px]">
+    <div class="pdfjs-viewer size-full">
       <div
         scPdfViewer
-        class="h-full"
+        class="size-full"
         [src]="pdfSrc()"
         [title]="pdfTitle()"
         #viewer="scPdfViewer"
       >
         <div
           scPdfViewerContainer
-          class="h-full overflow-visible rounded-none border-none"
+          class="size-full overflow-visible rounded-none border-none"
         >
           <!-- Toolbar -->
           <div
@@ -842,11 +845,18 @@ interface ThumbnailData {
       }
     }
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: {
+    '[class]': 'class()',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdfViewerDemo {
+  readonly classInput = input<string>('', { alias: 'class' });
+  protected readonly class = computed(() =>
+    cn('block h-dvh w-full', this.classInput()),
+  );
+
   private readonly destroyRef = inject(DestroyRef);
   private readonly viewerRef = viewChild<ScPdfViewerRoot>('viewer');
 
