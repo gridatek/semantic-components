@@ -1,2 +1,2 @@
 @import './marquee.css';
-@import './pdf-text-layer.css';
+@import url('pdfjs-dist/web/pdf_viewer.css');
