@@ -33,6 +33,7 @@ import {
   SiChevronRightIcon,
   SiDownloadIcon,
   SiMaximizeIcon,
+  SiMinimizeIcon,
   SiPrinterIcon,
   SiRotateCcwIcon,
   SiRotateCwIcon,
@@ -41,7 +42,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-basic-pdf-viewer-demo',
+  selector: 'app-pdf-viewer-demo',
   imports: [
     ScPdfViewerRoot,
     ScPdfViewerContainer,
@@ -70,6 +71,7 @@ import {
     SiChevronRightIcon,
     SiDownloadIcon,
     SiMaximizeIcon,
+    SiMinimizeIcon,
     SiPrinterIcon,
     SiRotateCcwIcon,
     SiRotateCwIcon,
@@ -77,16 +79,19 @@ import {
     SiZoomOutIcon,
   ],
   template: `
-    <div class="h-[600px]">
+    <div class="pdfjs-viewer h-[800px]">
       <div
         scPdfViewer
         class="h-full"
         src="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf"
-        title="Sample PDF"
+        title="tracemonkey"
+        #viewer="scPdfViewer"
       >
-        <div scPdfViewerContainer class="h-full">
-          <!-- Toolbar -->
-          <div scPdfViewerToolbar>
+        <div scPdfViewerContainer class="h-full rounded-none border-none">
+          <div
+            scPdfViewerToolbar
+            class="border-b-[#333] bg-[#474747] px-2 py-1"
+          >
             <!-- Navigation -->
             <div scPdfViewerNav>
               <button scPdfViewerPrevPage>
@@ -98,7 +103,7 @@ import {
               </button>
             </div>
 
-            <div scPdfViewerSeparator></div>
+            <div scPdfViewerSeparator class="bg-[#666]"></div>
 
             <!-- Zoom -->
             <div scPdfViewerZoom>
@@ -121,7 +126,7 @@ import {
               <svg siRotateCwIcon class="size-4"></svg>
             </button>
 
-            <div scPdfViewerSeparator></div>
+            <div scPdfViewerSeparator class="bg-[#666]"></div>
 
             <!-- Actions -->
             <button scPdfViewerDownload>
@@ -131,12 +136,16 @@ import {
               <svg siPrinterIcon class="size-4"></svg>
             </button>
             <button scPdfViewerFullscreen>
-              <svg siMaximizeIcon class="size-4"></svg>
+              @if (viewer.isFullscreen()) {
+                <svg siMinimizeIcon class="size-4"></svg>
+              } @else {
+                <svg siMaximizeIcon class="size-4"></svg>
+              }
             </button>
           </div>
 
           <!-- Content -->
-          <div scPdfViewerContent>
+          <div scPdfViewerContent class="bg-[#808080]">
             <div scPdfViewerLoading></div>
             <div scPdfViewerError></div>
             <div scPdfViewerEmpty></div>
@@ -147,8 +156,74 @@ import {
       </div>
     </div>
   `,
+  styles: `
+    .pdfjs-viewer {
+      /* Toolbar buttons */
+      [data-slot='pdf-viewer-toolbar'] button {
+        color: #d1d5db;
+        background: transparent;
+        border: none;
+        border-radius: 4px;
+        padding: 4px;
+        height: 28px;
+        width: 28px;
+
+        &:hover:not(:disabled) {
+          color: #fff;
+          background: rgba(255, 255, 255, 0.15);
+        }
+
+        &:disabled {
+          color: #6b7280;
+          opacity: 0.5;
+        }
+      }
+
+      /* Page info input */
+      [data-slot='pdf-viewer-page-info'] input {
+        background: #3d3d3d;
+        border-color: #5a5a5a;
+        color: #d1d5db;
+        width: 3rem;
+        height: 24px;
+        font-size: 13px;
+
+        &:focus {
+          border-color: #6b9edd;
+          box-shadow: none;
+        }
+      }
+
+      [data-slot='pdf-viewer-page-info'] span {
+        color: #bbb;
+        font-size: 13px;
+      }
+
+      /* Zoom select */
+      [data-slot='pdf-viewer-zoom-select'] {
+        background: #3d3d3d;
+        border-color: #5a5a5a;
+        color: #d1d5db;
+        height: 26px;
+        font-size: 13px;
+        padding: 0 4px;
+      }
+
+      /* Canvas content area */
+      [data-slot='pdf-viewer-content'] [role='document'] {
+        background: #808080;
+      }
+
+      /* Page canvas containers */
+      [data-slot='pdf-viewer-canvas'] [data-page] {
+        box-shadow:
+          0 1px 3px rgba(0, 0, 0, 0.3),
+          0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+    }
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicPdfViewerDemo {}
+export class PdfViewerDemo {}

@@ -6,22 +6,11 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicPdfViewerDemoContainer } from './demos/basic-pdf-viewer-demo-container';
-import { CustomToolbarPdfViewerDemoContainer } from './demos/custom-toolbar-pdf-viewer-demo-container';
-import { InteractivePdfViewerDemoContainer } from './demos/interactive-pdf-viewer-demo-container';
-import { MinimalPdfViewerDemoContainer } from './demos/minimal-pdf-viewer-demo-container';
+import { PdfViewerDemoContainer } from './demos/pdf-viewer-demo-container';
 
 @Component({
   selector: 'app-pdf-viewer-page',
-  imports: [
-    BasicPdfViewerDemoContainer,
-    MinimalPdfViewerDemoContainer,
-    CustomToolbarPdfViewerDemoContainer,
-    InteractivePdfViewerDemoContainer,
-    TocHeading,
-    ComponentBadges,
-    ScHeading,
-  ],
+  imports: [PdfViewerDemoContainer, TocHeading, ComponentBadges, ScHeading],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
@@ -35,10 +24,7 @@ import { MinimalPdfViewerDemoContainer } from './demos/minimal-pdf-viewer-demo-c
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
-        <app-basic-pdf-viewer-demo-container />
-        <app-minimal-pdf-viewer-demo-container />
-        <app-custom-toolbar-pdf-viewer-demo-container />
-        <app-interactive-pdf-viewer-demo-container />
+        <app-pdf-viewer-demo-container />
       </section>
     </div>
   `,

@@ -2654,31 +2654,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/pdf-viewer',
     children: [
       {
-        path: 'basic-pdf-viewer-demo',
+        path: 'pdf-viewer-demo',
         loadComponent: () =>
-          import('../pages/docs/pdf-viewer/demos/basic-pdf-viewer-demo').then(
-            (m) => m.BasicPdfViewerDemo,
-          ),
-      },
-      {
-        path: 'minimal-pdf-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/pdf-viewer/demos/minimal-pdf-viewer-demo').then(
-            (m) => m.MinimalPdfViewerDemo,
-          ),
-      },
-      {
-        path: 'custom-toolbar-pdf-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/pdf-viewer/demos/custom-toolbar-pdf-viewer-demo').then(
-            (m) => m.CustomToolbarPdfViewerDemo,
-          ),
-      },
-      {
-        path: 'interactive-pdf-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/pdf-viewer/demos/interactive-pdf-viewer-demo').then(
-            (m) => m.InteractivePdfViewerDemo,
+          import('../pages/docs/pdf-viewer/demos/pdf-viewer-demo').then(
+            (m) => m.PdfViewerDemo,
           ),
       },
     ],
