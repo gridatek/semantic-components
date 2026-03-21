@@ -806,14 +806,6 @@ interface AttachmentData {
         width: 4px;
       }
 
-      /* Editor layer */
-      .editorLayer {
-        position: absolute;
-        inset: 0;
-        z-index: 5;
-        pointer-events: none;
-      }
-
       /* Page info input */
       [data-slot='pdf-viewer-page-info'] input {
         background: #3d3d3d;

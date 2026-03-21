@@ -151,6 +151,7 @@ interface PageLayout {
           ></div>
           <div
             class="editorLayer"
+            style="position: absolute; inset: 0; z-index: 5; pointer-events: none"
             [attr.data-editorlayer-page]="page.pageNumber"
             (pointerdown)="onEditorPointerDown($event, page.pageNumber)"
             (pointermove)="onEditorPointerMove($event, page.pageNumber)"
@@ -311,22 +312,34 @@ export class ScPdfViewerCanvas {
       });
     });
 
-    // Update editor layer cursor based on mode
+    // Update editor layer cursor and pointer-events based on mode
     effect(() => {
       const mode = this.editorMode();
+      // Also react to layout changes so new pages get styled
+      this.pageLayouts();
+
       setTimeout(() => {
         const container = this.scrollContainer()?.nativeElement;
         if (!container) return;
         const layers = container.querySelectorAll('.editorLayer');
-        const cursor =
-          mode === 'freetext'
-            ? 'text'
-            : mode === 'ink'
-              ? 'crosshair'
-              : mode === 'stamp'
-                ? 'copy'
-                : '';
-        const pointerEvents = mode === 'none' ? 'none' : 'auto';
+
+        // highlight mode: layer stays pointer-events:none so text is selectable
+        // freetext/ink/stamp: layer captures pointer events
+        let cursor = '';
+        let pointerEvents = 'none';
+
+        if (mode === 'freetext') {
+          cursor = 'text';
+          pointerEvents = 'auto';
+        } else if (mode === 'ink') {
+          cursor = 'crosshair';
+          pointerEvents = 'auto';
+        } else if (mode === 'stamp') {
+          cursor = 'copy';
+          pointerEvents = 'auto';
+        }
+        // highlight + none => pointer-events: none (text layer receives events)
+
         layers.forEach((el) => {
           (el as HTMLElement).style.cursor = cursor;
           (el as HTMLElement).style.pointerEvents = pointerEvents;
@@ -564,7 +577,11 @@ export class ScPdfViewerCanvas {
       }
 
       // Render annotation layer for clickable links
-      await this.renderAnnotationLayer(page, pageNumber, container);
+      try {
+        await this.renderAnnotationLayer(page, pageNumber, container);
+      } catch (annErr) {
+        console.warn(`Annotation layer error on page ${pageNumber}:`, annErr);
+      }
     } catch (err) {
       if ((err as { name?: string })?.name !== 'RenderingCancelledException') {
         console.error(`Error rendering page ${pageNumber}:`, err);
