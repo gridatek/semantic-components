@@ -335,10 +335,15 @@ export class ScPdfViewerRoot {
         try {
           const page = await doc.getPage(i);
           const textContent = await page.getTextContent();
-          const text = (textContent.items as { str?: string }[])
-            .filter((item) => item.str !== undefined)
-            .map((item) => item.str)
-            .join('');
+          let text = '';
+          for (const item of textContent.items) {
+            if ('str' in item) {
+              text += (item as { str: string }).str;
+              if ((item as { hasEOL?: boolean }).hasEOL) {
+                text += '\n';
+              }
+            }
+          }
           this.pageTexts.push(text);
         } catch {
           this.pageTexts.push('');
