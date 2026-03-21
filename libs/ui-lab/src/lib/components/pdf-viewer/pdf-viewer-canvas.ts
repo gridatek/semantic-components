@@ -150,8 +150,9 @@ interface PageLayout {
             [attr.data-annotationlayer-page]="page.pageNumber"
           ></div>
           <div
-            class="editorLayer"
-            style="position: absolute; inset: 0; z-index: 5; pointer-events: none"
+            class="editorLayer absolute inset-0 z-[5]"
+            [style.pointer-events]="editorPointerEvents()"
+            [style.cursor]="editorCursor()"
             [attr.data-editorlayer-page]="page.pageNumber"
             (pointerdown)="onEditorPointerDown($event, page.pageNumber)"
             (pointermove)="onEditorPointerMove($event, page.pageNumber)"
@@ -211,6 +212,21 @@ export class ScPdfViewerCanvas {
   private inkCurrentStroke: { x: number; y: number }[] = [];
   private inkCurrentPage = 0;
   private inkDrawing = false;
+
+  readonly editorPointerEvents = computed(() => {
+    const mode = this.editorMode();
+    return mode === 'freetext' || mode === 'ink' || mode === 'stamp'
+      ? 'auto'
+      : 'none';
+  });
+
+  readonly editorCursor = computed(() => {
+    const mode = this.editorMode();
+    if (mode === 'freetext') return 'text';
+    if (mode === 'ink') return 'crosshair';
+    if (mode === 'stamp') return 'copy';
+    return '';
+  });
 
   // Reactive container dimensions — updated by ResizeObserver so that
   // scaledValue re-evaluates when the container is laid out.
@@ -309,41 +325,6 @@ export class ScPdfViewerCanvas {
 
       setTimeout(() => {
         this.renderEditorAnnotations(annotations, scale);
-      });
-    });
-
-    // Update editor layer cursor and pointer-events based on mode
-    effect(() => {
-      const mode = this.editorMode();
-      // Also react to layout changes so new pages get styled
-      this.pageLayouts();
-
-      setTimeout(() => {
-        const container = this.scrollContainer()?.nativeElement;
-        if (!container) return;
-        const layers = container.querySelectorAll('.editorLayer');
-
-        // highlight mode: layer stays pointer-events:none so text is selectable
-        // freetext/ink/stamp: layer captures pointer events
-        let cursor = '';
-        let pointerEvents = 'none';
-
-        if (mode === 'freetext') {
-          cursor = 'text';
-          pointerEvents = 'auto';
-        } else if (mode === 'ink') {
-          cursor = 'crosshair';
-          pointerEvents = 'auto';
-        } else if (mode === 'stamp') {
-          cursor = 'copy';
-          pointerEvents = 'auto';
-        }
-        // highlight + none => pointer-events: none (text layer receives events)
-
-        layers.forEach((el) => {
-          (el as HTMLElement).style.cursor = cursor;
-          (el as HTMLElement).style.pointerEvents = pointerEvents;
-        });
       });
     });
 
@@ -835,6 +816,8 @@ export class ScPdfViewerCanvas {
     const y = (event.clientY - rect.top) / rect.height;
 
     if (mode === 'freetext') {
+      event.preventDefault();
+      event.stopPropagation();
       this.createFreetextEditor(pageNumber, x, y, target);
     } else if (mode === 'ink') {
       this.inkDrawing = true;
@@ -948,8 +931,11 @@ export class ScPdfViewerCanvas {
     div.style.zIndex = '10';
     div.style.whiteSpace = 'pre-wrap';
     div.style.lineHeight = '1.2';
+    // Prevent clicks on the editor from creating new editors
+    div.addEventListener('pointerdown', (e) => e.stopPropagation());
     container.appendChild(div);
-    div.focus();
+    // Defer focus to after event processing completes
+    setTimeout(() => div.focus());
 
     const save = (): void => {
       const text = div.textContent?.trim() ?? '';
