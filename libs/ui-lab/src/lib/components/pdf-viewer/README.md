@@ -8,13 +8,13 @@ The PDF viewer follows a **composable directive** pattern. Instead of a single m
 
 ### Core Directives
 
-| Directive              | Selector                 | Description                                   |
-| ---------------------- | ------------------------ | --------------------------------------------- |
-| `ScPdfViewerRoot`      | `[scPdfViewer]`          | Root directive, manages PDF document state    |
-| `ScPdfViewerContainer` | `[scPdfViewerContainer]` | Layout wrapper (card-like container)          |
-| `ScPdfViewerToolbar`   | `[scPdfViewerToolbar]`   | Toolbar container (flex row)                  |
-| `ScPdfViewerContent`   | `[scPdfViewerContent]`   | Content area wrapping canvas + state overlays |
-| `ScPdfViewerCanvas`    | `sc-pdf-viewer-canvas`   | Renders PDF pages on canvas with text layer   |
+| Directive              | Selector                 | Description                                              |
+| ---------------------- | ------------------------ | -------------------------------------------------------- |
+| `ScPdfViewerRoot`      | `[scPdfViewer]`          | Root directive, manages PDF document state               |
+| `ScPdfViewerContainer` | `[scPdfViewerContainer]` | Layout wrapper (card-like container)                     |
+| `ScPdfViewerToolbar`   | `[scPdfViewerToolbar]`   | Toolbar container (flex row)                             |
+| `ScPdfViewerContent`   | `[scPdfViewerContent]`   | Content area wrapping canvas + state overlays            |
+| `ScPdfViewerCanvas`    | `sc-pdf-viewer-canvas`   | Renders PDF pages on canvas with text, annotation layers |
 
 ### Toolbar Controls
 
@@ -35,6 +35,17 @@ The PDF viewer follows a **composable directive** pattern. Instead of a single m
 | `ScPdfViewerFullscreen`  | Fullscreen toggle            |
 | `ScPdfViewerSeparator`   | Visual separator             |
 | `ScPdfViewerSpacer`      | Flexible spacer              |
+
+### Find Bar
+
+| Directive                    | Selector                          | Description                 |
+| ---------------------------- | --------------------------------- | --------------------------- |
+| `ScPdfViewerFindToggle`      | `button[scPdfViewerFindToggle]`   | Toggle find bar open/closed |
+| `ScPdfViewerFindbar`         | `[scPdfViewerFindbar]`            | Find bar container          |
+| `ScPdfViewerFindInput`       | `input[scPdfViewerFindInput]`     | Search text input           |
+| `ScPdfViewerFindNext`        | `button[scPdfViewerFindNext]`     | Next match button           |
+| `ScPdfViewerFindPrevious`    | `button[scPdfViewerFindPrevious]` | Previous match button       |
+| `ScPdfViewerFindResultsInfo` | `[scPdfViewerFindResultsInfo]`    | Match count display         |
 
 ### State Overlays
 
@@ -82,6 +93,8 @@ The PDF viewer follows a **composable directive** pattern. Instead of a single m
 
 - **PDF.js rendering** - Canvas-based rendering via pdfjs-dist
 - **Text selection** - Transparent text layer overlay for copy/paste
+- **Annotation layer** - Clickable links, internal page navigation, external URLs
+- **Find / search** - Built-in text search with highlight across pages
 - **Lazy page rendering** - Only visible pages are rendered (IntersectionObserver)
 - **Zoom** - Numeric scale, auto, page-fit, page-width presets
 - **Rotation** - 90-degree rotation in both directions
@@ -95,9 +108,7 @@ The PDF viewer follows a **composable directive** pattern. Instead of a single m
 
 ## Coming Soon
 
-- **Annotation layer** - Render PDF annotations (links, form fields, comments)
 - **Thumbnail sidebar** - Built-in sidebar component with page thumbnails
-- **Find / search** - Built-in text search with highlight across pages
 - **Outline / bookmarks** - Table of contents from PDF document outline
 - **Spread modes** - Side-by-side page display (odd, even spreads)
 - **Scroll modes** - Vertical, horizontal, and wrapped scroll layouts

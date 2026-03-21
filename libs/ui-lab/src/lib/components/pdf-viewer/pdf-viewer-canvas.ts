@@ -15,8 +15,102 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
-import { TextLayer, setLayerDimensions } from 'pdfjs-dist';
+import { AnnotationLayer, TextLayer, setLayerDimensions } from 'pdfjs-dist';
+import type { ScPdfViewerRoot } from './pdf-viewer-root';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
+
+/**
+ * Minimal link service for AnnotationLayer — handles external URLs
+ * and internal page navigation without importing pdf_viewer.mjs.
+ */
+class MinimalLinkService {
+  externalLinkEnabled = true;
+
+  constructor(private viewer: ScPdfViewerRoot) {}
+
+  addLinkAttributes(
+    link: HTMLAnchorElement,
+    url: string,
+    newWindow = false,
+  ): void {
+    if (this.externalLinkEnabled) {
+      link.href = link.title = url;
+    } else {
+      link.href = '';
+      link.title = `Disabled: ${url}`;
+      link.onclick = () => false;
+    }
+    link.target = newWindow ? '_blank' : '_blank';
+    link.rel = 'noopener noreferrer nofollow';
+  }
+
+  getDestinationHash(dest: unknown): string {
+    if (typeof dest === 'string' && dest.length > 0) {
+      return '#' + escape(dest);
+    }
+    if (Array.isArray(dest)) {
+      return '#' + escape(JSON.stringify(dest));
+    }
+    return '';
+  }
+
+  getAnchorUrl(anchor: string): string {
+    return anchor;
+  }
+
+  async goToDestination(dest: unknown): Promise<void> {
+    const doc = this.viewer.pdfDocument();
+    if (!doc) return;
+
+    let explicitDest: unknown[];
+    if (typeof dest === 'string') {
+      explicitDest = (await doc.getDestination(dest)) as unknown[];
+    } else {
+      explicitDest = dest as unknown[];
+    }
+
+    if (!Array.isArray(explicitDest)) return;
+
+    const [destRef] = explicitDest;
+    let pageNumber: number | undefined;
+
+    if (destRef && typeof destRef === 'object') {
+      try {
+        pageNumber =
+          (await doc.getPageIndex(destRef as { num: number; gen: number })) + 1;
+      } catch {
+        return;
+      }
+    } else if (typeof destRef === 'number') {
+      pageNumber = destRef + 1;
+    }
+
+    if (pageNumber && pageNumber >= 1) {
+      this.viewer.goToPage(pageNumber);
+    }
+  }
+
+  executeNamedAction(action: string): void {
+    switch (action) {
+      case 'NextPage':
+        this.viewer.goToNextPage();
+        break;
+      case 'PrevPage':
+        this.viewer.goToPrevPage();
+        break;
+      case 'FirstPage':
+        this.viewer.goToPage(1);
+        break;
+      case 'LastPage':
+        this.viewer.goToPage(this.viewer.totalPages());
+        break;
+    }
+  }
+
+  executeSetOCGState(): void {
+    // Not supported
+  }
+}
 
 interface PageLayout {
   pageNumber: number;
@@ -51,6 +145,10 @@ interface PageLayout {
             class="textLayer"
             [attr.data-textlayer-page]="page.pageNumber"
           ></div>
+          <div
+            class="annotationLayer"
+            [attr.data-annotationlayer-page]="page.pageNumber"
+          ></div>
         </div>
       }
     </div>
@@ -84,6 +182,8 @@ export class ScPdfViewerCanvas {
   private readonly zoom = this.pdfViewer.zoom;
   private readonly navigateTrigger = this.pdfViewer.navigateTrigger;
   private readonly findTrigger = this.pdfViewer.findTrigger;
+
+  private readonly linkService = new MinimalLinkService(this.pdfViewer);
 
   private activeRenderTasks = new Map<number, RenderTask>();
   private activeTextLayers = new Map<number, TextLayer>();
@@ -405,6 +505,9 @@ export class ScPdfViewerCanvas {
           );
         }
       }
+
+      // Render annotation layer for clickable links
+      await this.renderAnnotationLayer(page, pageNumber, container);
     } catch (err) {
       if ((err as { name?: string })?.name !== 'RenderingCancelledException') {
         console.error(`Error rendering page ${pageNumber}:`, err);
@@ -413,6 +516,45 @@ export class ScPdfViewerCanvas {
       this.activeTextLayers.delete(pageNumber);
       this.renderedPages.delete(pageNumber);
     }
+  }
+
+  private async renderAnnotationLayer(
+    page: PDFPageProxy,
+    pageNumber: number,
+    container: HTMLElement,
+  ): Promise<void> {
+    const annotationLayerDiv = container.querySelector(
+      `[data-annotationlayer-page="${pageNumber}"]`,
+    ) as HTMLDivElement;
+    if (!annotationLayerDiv) return;
+
+    annotationLayerDiv.innerHTML = '';
+    const scale = this.scaledValue();
+    const displayViewport = page.getViewport({ scale });
+
+    const annotations = await page.getAnnotations();
+    if (annotations.length === 0) return;
+
+    annotationLayerDiv.style.setProperty('--total-scale-factor', String(scale));
+    setLayerDimensions(annotationLayerDiv, displayViewport);
+
+    const annotationLayer = new AnnotationLayer({
+      div: annotationLayerDiv,
+      accessibilityManager: null,
+      annotationCanvasMap: null,
+      annotationEditorUIManager: null,
+      structTreeLayer: null,
+      commentManager: null,
+      page,
+      viewport: displayViewport,
+      linkService: this.linkService as never,
+      annotationStorage: null,
+    } as never);
+
+    await annotationLayer.render({
+      annotations,
+      renderForms: false,
+    } as never);
   }
 
   private cancelAllRenderTasks(): void {
