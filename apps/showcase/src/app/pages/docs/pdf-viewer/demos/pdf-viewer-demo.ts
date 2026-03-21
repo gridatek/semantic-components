@@ -89,11 +89,14 @@ interface ThumbnailData {
         [title]="pdfTitle()"
         #viewer="scPdfViewer"
       >
-        <div scPdfViewerContainer class="h-full rounded-none border-none">
+        <div
+          scPdfViewerContainer
+          class="h-full overflow-visible rounded-none border-none"
+        >
           <!-- Toolbar -->
           <div
             scPdfViewerToolbar
-            class="border-b-[#333] bg-[#474747] px-1 py-1"
+            class="relative z-50 border-b-[#333] bg-[#474747] px-1 py-1"
           >
             <!-- Left: Sidebar toggle -->
             <button
@@ -566,7 +569,7 @@ interface ThumbnailData {
   styles: `
     .pdfjs-viewer {
       /* Toolbar buttons (library + custom) */
-      [data-slot='pdf-viewer-toolbar'] button,
+      [data-slot='pdf-viewer-toolbar'] button:not(.pdfjs-menu-item),
       .pdfjs-btn {
         color: #d1d5db;
         background: transparent;
