@@ -42,6 +42,25 @@ export { ScPdfViewerFindNext } from './pdf-viewer-find-next';
 export { ScPdfViewerFindPrevious } from './pdf-viewer-find-previous';
 export { ScPdfViewerFindResultsInfo } from './pdf-viewer-find-results-info';
 
+// Editor param toolbars
+export { ScPdfViewerEditorHighlightParams } from './pdf-viewer-editor-highlight-params';
+export { ScPdfViewerEditorFreetextParams } from './pdf-viewer-editor-freetext-params';
+export { ScPdfViewerEditorInkParams } from './pdf-viewer-editor-ink-params';
+
+// Dialogs
+export { ScPdfViewerPasswordDialog } from './pdf-viewer-password-dialog';
+export { ScPdfViewerSignatureDialog } from './pdf-viewer-signature-dialog';
+export { ScPdfViewerAltTextDialog } from './pdf-viewer-alt-text-dialog';
+export { ScPdfViewerPrintProgress } from './pdf-viewer-print-progress';
+
+// Sidebar
+export { ScPdfViewerSidebarResizer } from './pdf-viewer-sidebar-resizer';
+export { ScPdfViewerLayersView } from './pdf-viewer-layers-view';
+export { ScPdfViewerCommentSidebar } from './pdf-viewer-comment-sidebar';
+
+// Editor undo bar
+export { ScPdfViewerEditorUndoBar } from './pdf-viewer-editor-undo-bar';
+
 // Types
 export { ZOOM_LEVELS } from './pdf-viewer-types';
 export type {
@@ -54,4 +73,6 @@ export type {
   PdfPageChangeEvent,
   PdfZoomChangeEvent,
   PdfErrorEvent,
+  PdfSignatureData,
+  PdfComment,
 } from './pdf-viewer-types';

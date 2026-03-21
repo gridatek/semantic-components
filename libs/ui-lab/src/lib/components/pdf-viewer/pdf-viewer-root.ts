@@ -15,6 +15,7 @@ import { cn } from '@semantic-components/ui';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
 import type {
+  PdfComment,
   PdfEditorAnnotation,
   PdfEditorMode,
   PdfErrorEvent,
@@ -22,6 +23,7 @@ import type {
   PdfLoadEvent,
   PdfPageChangeEvent,
   PdfPageMatchInfo,
+  PdfSignatureData,
   PdfZoomChangeEvent,
   PdfZoomLevel,
 } from './pdf-viewer-types';
@@ -98,13 +100,44 @@ export class ScPdfViewerRoot {
 
   // Editor params
   readonly highlightColor = signal('#FFFF00');
+  readonly highlightThickness = signal(12);
+  readonly highlightShowAll = signal(true);
   readonly freetextColor = signal('#000000');
   readonly freetextSize = signal(12);
   readonly inkColor = signal('#000000');
   readonly inkThickness = signal(1);
   readonly inkOpacity = signal(1);
 
+  // Password state
+  readonly passwordRequired = signal(false);
+  readonly passwordReason = signal<
+    'need-password' | 'incorrect-password' | null
+  >(null);
+  private passwordCallback: ((password: string | Error) => void) | null = null;
+
+  // Signature state
+  readonly signatureDialogOpen = signal(false);
+  readonly savedSignatures = signal<PdfSignatureData[]>([]);
+
+  // Comment state
+  readonly comments = signal<PdfComment[]>([]);
+
+  // Undo bar state
+  readonly undoBarVisible = signal(false);
+  readonly undoBarMessage = signal('');
+  private undoAction: (() => void) | null = null;
+  private undoTimeout: ReturnType<typeof setTimeout> | null = null;
+
+  // Print progress state
+  readonly printProgress = signal(0);
+  readonly printDialogOpen = signal(false);
+  private printCancelled = false;
+
+  // Sidebar
+  readonly sidebarWidth = signal(200);
+
   private editorIdCounter = 0;
+  private commentIdCounter = 0;
 
   readonly findResultsMessage = computed(() => {
     const total = this.findTotalMatches();
@@ -161,6 +194,9 @@ export class ScPdfViewerRoot {
     this.destroyRef.onDestroy(() => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
       this.pdfDocument()?.destroy();
+      if (this.undoTimeout) {
+        clearTimeout(this.undoTimeout);
+      }
     });
   }
 
@@ -176,17 +212,35 @@ export class ScPdfViewerRoot {
   private async loadDocument(url: string): Promise<void> {
     this.isLoading.set(true);
     this.error.set(null);
+    this.passwordRequired.set(false);
 
     try {
       // Destroy previous document if any
       this.pdfDocument()?.destroy();
 
-      const doc = await getDocument(url).promise;
+      const loadingTask = getDocument(url);
+
+      // Handle password-protected PDFs
+      loadingTask.onPassword = (
+        updateCallback: (password: string | Error) => void,
+        reason: number,
+      ) => {
+        this.isLoading.set(false);
+        this.passwordRequired.set(true);
+        this.passwordReason.set(
+          reason === 2 ? 'incorrect-password' : 'need-password',
+        );
+        this.passwordCallback = updateCallback;
+      };
+
+      const doc = await loadingTask.promise;
       this.pdfDocument.set(doc);
       this.totalPages.set(doc.numPages);
       this.isLoading.set(false);
+      this.passwordRequired.set(false);
       this.loaded.emit({ totalPages: doc.numPages });
     } catch (err) {
+      if (this.passwordRequired()) return;
       const message =
         err instanceof Error ? err.message : 'Unable to load the PDF document.';
       this.onError(message);
@@ -296,6 +350,73 @@ export class ScPdfViewerRoot {
     link.click();
   }
 
+  async printWithProgress(): Promise<void> {
+    const doc = this.pdfDocument();
+    if (!doc) {
+      this.print();
+      return;
+    }
+
+    this.printCancelled = false;
+    this.printDialogOpen.set(true);
+    this.printProgress.set(0);
+
+    const printContainer = document.createElement('div');
+    printContainer.style.display = 'none';
+    document.body.appendChild(printContainer);
+
+    try {
+      for (let i = 1; i <= doc.numPages; i++) {
+        if (this.printCancelled) break;
+
+        const page = await doc.getPage(i);
+        const viewport = page.getViewport({ scale: 1.5 });
+        const canvas = document.createElement('canvas');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        canvas.style.pageBreakAfter = 'always';
+
+        await page.render({ canvas, viewport }).promise;
+        printContainer.appendChild(canvas);
+
+        this.printProgress.set(Math.round((i / doc.numPages) * 100));
+      }
+
+      if (!this.printCancelled) {
+        this.printDialogOpen.set(false);
+        // Open print window with rendered pages
+        const printWindow = window.open('', '_blank');
+        if (printWindow) {
+          printWindow.document.write(
+            '<html><head><title>Print</title><style>' +
+              'body{margin:0}canvas{display:block;width:100%;page-break-after:always}' +
+              '@media print{canvas{page-break-after:always}}' +
+              '</style></head><body></body></html>',
+          );
+          const canvases = printContainer.querySelectorAll('canvas');
+          canvases.forEach((canvas) => {
+            printWindow!.document.body.appendChild(canvas);
+          });
+          printWindow.document.close();
+          printWindow.focus();
+          printWindow.print();
+          printWindow.close();
+        }
+      }
+    } catch (err) {
+      console.error('Print error:', err);
+    } finally {
+      printContainer.remove();
+      this.printDialogOpen.set(false);
+      this.printProgress.set(0);
+    }
+  }
+
+  cancelPrint(): void {
+    this.printCancelled = true;
+    this.printDialogOpen.set(false);
+  }
+
   print(): void {
     const source = this.src();
     if (!source) return;
@@ -323,6 +444,59 @@ export class ScPdfViewerRoot {
 
   setTotalPages(total: number): void {
     this.totalPages.set(total);
+  }
+
+  // Password methods
+  submitPassword(password: string): void {
+    if (this.passwordCallback) {
+      this.isLoading.set(true);
+      this.passwordRequired.set(false);
+      this.passwordCallback(password);
+      this.passwordCallback = null;
+    }
+  }
+
+  cancelPassword(): void {
+    if (this.passwordCallback) {
+      this.passwordCallback(new Error('Password dialog cancelled'));
+      this.passwordCallback = null;
+    }
+    this.passwordRequired.set(false);
+    this.onError('Password required to open this document.');
+  }
+
+  // Signature methods
+  openSignatureDialog(): void {
+    this.signatureDialogOpen.set(true);
+  }
+
+  closeSignatureDialog(): void {
+    this.signatureDialogOpen.set(false);
+  }
+
+  addSavedSignature(sig: Omit<PdfSignatureData, 'id'>): void {
+    const id = `sig-${Date.now()}`;
+    this.savedSignatures.update((list) => [...list, { ...sig, id }]);
+  }
+
+  removeSavedSignature(id: string): void {
+    this.savedSignatures.update((list) => list.filter((s) => s.id !== id));
+  }
+
+  // Comment methods
+  addComment(comment: Omit<PdfComment, 'id'>): void {
+    const id = `comment-${++this.commentIdCounter}`;
+    this.comments.update((list) => [...list, { ...comment, id }]);
+  }
+
+  removeComment(id: string): void {
+    this.comments.update((list) => list.filter((c) => c.id !== id));
+  }
+
+  updateComment(id: string, text: string): void {
+    this.comments.update((list) =>
+      list.map((c) => (c.id === id ? { ...c, text } : c)),
+    );
   }
 
   // Find methods
@@ -457,33 +631,22 @@ export class ScPdfViewerRoot {
     } else {
       // Find first match on or after current page
       const currentPageIdx = this.currentPage() - 1;
-      let globalIdx = 0;
       let found = false;
 
       for (let i = 0; i < allMatches.length; i++) {
         const pageIdx = (currentPageIdx + i) % allMatches.length;
         if (allMatches[pageIdx].matches.length > 0) {
-          this.findCurrentMatchIndex.set(globalIdx);
           this.goToPage(pageIdx + 1);
           found = true;
           break;
-        }
-        // Count matches in pages before this one (in order from currentPage)
-        if (!found) {
-          // Recalculate: count all matches before this page in document order
         }
       }
 
       // Compute correct global index
       if (found) {
-        let idx = 0;
-        const currentMatch = this.findCurrentMatchIndex();
-        // Recount to find the right global index
-        idx = 0;
         for (let p = 0; p < allMatches.length; p++) {
           const pageIdx = (currentPageIdx + p) % allMatches.length;
           if (allMatches[pageIdx].matches.length > 0) {
-            // Calculate global index for this page's first match
             let gi = 0;
             for (let j = 0; j < pageIdx; j++) {
               gi += allMatches[j].matches.length;
@@ -546,6 +709,16 @@ export class ScPdfViewerRoot {
 
   // Editor methods
   setEditorMode(mode: PdfEditorMode): void {
+    if (mode === 'signature') {
+      // Signature mode opens a dialog instead of toggling
+      if (this.editorMode() === 'signature') {
+        this.editorMode.set('none');
+      } else {
+        this.editorMode.set('signature');
+        this.signatureDialogOpen.set(true);
+      }
+      return;
+    }
     this.editorMode.set(this.editorMode() === mode ? 'none' : mode);
   }
 
@@ -556,12 +729,61 @@ export class ScPdfViewerRoot {
   }
 
   removeEditorAnnotation(id: string): void {
+    const removed = this.editorAnnotations().find((a) => a.id === id);
     this.editorAnnotations.update((list) => list.filter((a) => a.id !== id));
     this.editorTrigger.update((v) => v + 1);
+
+    // Show undo bar
+    if (removed) {
+      this.showUndoBar('Annotation deleted', () => {
+        this.editorAnnotations.update((list) => [...list, removed]);
+        this.editorTrigger.update((v) => v + 1);
+      });
+    }
   }
 
   clearEditorAnnotations(): void {
+    const prev = this.editorAnnotations();
     this.editorAnnotations.set([]);
     this.editorTrigger.update((v) => v + 1);
+
+    if (prev.length > 0) {
+      this.showUndoBar(`${prev.length} annotation(s) cleared`, () => {
+        this.editorAnnotations.set(prev);
+        this.editorTrigger.update((v) => v + 1);
+      });
+    }
+  }
+
+  // Undo bar
+  private showUndoBar(message: string, action: () => void): void {
+    if (this.undoTimeout) {
+      clearTimeout(this.undoTimeout);
+    }
+    this.undoBarMessage.set(message);
+    this.undoAction = action;
+    this.undoBarVisible.set(true);
+
+    this.undoTimeout = setTimeout(() => {
+      this.closeUndoBar();
+    }, 5000);
+  }
+
+  undoLastAction(): void {
+    if (this.undoAction) {
+      this.undoAction();
+      this.undoAction = null;
+    }
+    this.closeUndoBar();
+  }
+
+  closeUndoBar(): void {
+    this.undoBarVisible.set(false);
+    this.undoBarMessage.set('');
+    this.undoAction = null;
+    if (this.undoTimeout) {
+      clearTimeout(this.undoTimeout);
+      this.undoTimeout = null;
+    }
   }
 }

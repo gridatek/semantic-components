@@ -36,11 +36,17 @@ export interface PdfPageMatchInfo {
   matchesLength: number[];
 }
 
-export type PdfEditorMode = 'none' | 'highlight' | 'freetext' | 'ink' | 'stamp';
+export type PdfEditorMode =
+  | 'none'
+  | 'highlight'
+  | 'freetext'
+  | 'ink'
+  | 'stamp'
+  | 'signature';
 
 export interface PdfEditorAnnotation {
   id: string;
-  type: 'highlight' | 'freetext' | 'ink' | 'stamp';
+  type: 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature';
   pageNumber: number;
   // Highlight: array of rects relative to the page (0-1 normalized)
   rects?: { x: number; y: number; width: number; height: number }[];
@@ -55,10 +61,34 @@ export interface PdfEditorAnnotation {
   // Ink: array of strokes, each stroke is array of {x,y} points (0-1 normalized)
   strokes?: { x: number; y: number }[][];
   strokeWidth?: number;
-  // Stamp
+  // Stamp / Signature
   imageDataUrl?: string;
   width?: number;
   height?: number;
+  // Alt text
+  altText?: string;
+  isDecorative?: boolean;
+  // Description (for signatures)
+  description?: string;
+}
+
+export interface PdfSignatureData {
+  id: string;
+  dataUrl: string;
+  description: string;
+  width: number;
+  height: number;
+}
+
+export interface PdfComment {
+  id: string;
+  pageNumber: number;
+  x: number;
+  y: number;
+  text: string;
+  author: string;
+  date: string;
+  color: string;
 }
 
 export const ZOOM_LEVELS: { label: string; value: PdfZoomLevel }[] = [

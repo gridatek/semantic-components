@@ -12,10 +12,16 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
+  ScPdfViewerAltTextDialog,
   ScPdfViewerCanvas,
+  ScPdfViewerCommentSidebar,
   ScPdfViewerContainer,
   ScPdfViewerContent,
   ScPdfViewerDownload,
+  ScPdfViewerEditorFreetextParams,
+  ScPdfViewerEditorHighlightParams,
+  ScPdfViewerEditorInkParams,
+  ScPdfViewerEditorUndoBar,
   ScPdfViewerEmpty,
   ScPdfViewerError,
   ScPdfViewerFindInput,
@@ -24,14 +30,18 @@ import {
   ScPdfViewerFindResultsInfo,
   ScPdfViewerFindToggle,
   ScPdfViewerFindbar,
+  ScPdfViewerLayersView,
   ScPdfViewerLoading,
   ScPdfViewerNav,
   ScPdfViewerNextPage,
   ScPdfViewerPageInfo,
+  ScPdfViewerPasswordDialog,
   ScPdfViewerPrevPage,
-  ScPdfViewerPrint,
+  ScPdfViewerPrintProgress,
   ScPdfViewerRoot,
   ScPdfViewerSeparator,
+  ScPdfViewerSidebarResizer,
+  ScPdfViewerSignatureDialog,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
   ScPdfViewerZoom,
@@ -46,8 +56,10 @@ import {
   SiEllipsisVerticalIcon,
   SiHighlighterIcon,
   SiImageIcon,
+  SiMessageSquareIcon,
   SiPanelLeftIcon,
   SiPenIcon,
+  SiPenToolIcon,
   SiPrinterIcon,
   SiSearchIcon,
   SiTypeIcon,
@@ -86,7 +98,6 @@ interface AttachmentData {
     ScPdfViewerZoomOut,
     ScPdfViewerZoomSelect,
     ScPdfViewerDownload,
-    ScPdfViewerPrint,
     ScPdfViewerSeparator,
     ScPdfViewerSpacer,
     ScPdfViewerContent,
@@ -100,14 +111,27 @@ interface AttachmentData {
     ScPdfViewerFindNext,
     ScPdfViewerFindPrevious,
     ScPdfViewerFindResultsInfo,
+    ScPdfViewerEditorHighlightParams,
+    ScPdfViewerEditorFreetextParams,
+    ScPdfViewerEditorInkParams,
+    ScPdfViewerPasswordDialog,
+    ScPdfViewerSignatureDialog,
+    ScPdfViewerAltTextDialog,
+    ScPdfViewerPrintProgress,
+    ScPdfViewerSidebarResizer,
+    ScPdfViewerLayersView,
+    ScPdfViewerCommentSidebar,
+    ScPdfViewerEditorUndoBar,
     SiChevronUpIcon,
     SiChevronDownIcon,
     SiDownloadIcon,
     SiEllipsisVerticalIcon,
     SiHighlighterIcon,
     SiImageIcon,
+    SiMessageSquareIcon,
     SiPanelLeftIcon,
     SiPenIcon,
+    SiPenToolIcon,
     SiPrinterIcon,
     SiSearchIcon,
     SiTypeIcon,
@@ -182,38 +206,68 @@ interface AttachmentData {
 
             <div scPdfViewerSpacer></div>
 
-            <!-- Editor tools -->
+            <!-- Editor tools with param dropdowns -->
             <div class="flex items-center">
-              <button
-                type="button"
-                class="pdfjs-btn"
-                aria-label="Highlight"
-                [attr.aria-pressed]="viewer.editorMode() === 'highlight'"
-                [class.pdfjs-btn-active]="viewer.editorMode() === 'highlight'"
-                (click)="viewer.setEditorMode('highlight')"
-              >
-                <svg siHighlighterIcon class="size-4"></svg>
-              </button>
-              <button
-                type="button"
-                class="pdfjs-btn"
-                aria-label="Free Text"
-                [attr.aria-pressed]="viewer.editorMode() === 'freetext'"
-                [class.pdfjs-btn-active]="viewer.editorMode() === 'freetext'"
-                (click)="viewer.setEditorMode('freetext')"
-              >
-                <svg siTypeIcon class="size-4"></svg>
-              </button>
-              <button
-                type="button"
-                class="pdfjs-btn"
-                aria-label="Draw"
-                [attr.aria-pressed]="viewer.editorMode() === 'ink'"
-                [class.pdfjs-btn-active]="viewer.editorMode() === 'ink'"
-                (click)="viewer.setEditorMode('ink')"
-              >
-                <svg siPenIcon class="size-4"></svg>
-              </button>
+              <!-- Highlight -->
+              <div class="relative">
+                <button
+                  type="button"
+                  class="pdfjs-btn"
+                  aria-label="Highlight"
+                  [attr.aria-pressed]="viewer.editorMode() === 'highlight'"
+                  [class.pdfjs-btn-active]="viewer.editorMode() === 'highlight'"
+                  (click)="viewer.setEditorMode('highlight')"
+                >
+                  <svg siHighlighterIcon class="size-4"></svg>
+                </button>
+                @if (
+                  viewer.editorMode() === 'highlight' && editorParamsOpen()
+                ) {
+                  <div class="pdfjs-editor-params">
+                    <sc-pdf-viewer-editor-highlight-params />
+                  </div>
+                }
+              </div>
+
+              <!-- FreeText -->
+              <div class="relative">
+                <button
+                  type="button"
+                  class="pdfjs-btn"
+                  aria-label="Free Text"
+                  [attr.aria-pressed]="viewer.editorMode() === 'freetext'"
+                  [class.pdfjs-btn-active]="viewer.editorMode() === 'freetext'"
+                  (click)="viewer.setEditorMode('freetext')"
+                >
+                  <svg siTypeIcon class="size-4"></svg>
+                </button>
+                @if (viewer.editorMode() === 'freetext' && editorParamsOpen()) {
+                  <div class="pdfjs-editor-params">
+                    <sc-pdf-viewer-editor-freetext-params />
+                  </div>
+                }
+              </div>
+
+              <!-- Ink/Draw -->
+              <div class="relative">
+                <button
+                  type="button"
+                  class="pdfjs-btn"
+                  aria-label="Draw"
+                  [attr.aria-pressed]="viewer.editorMode() === 'ink'"
+                  [class.pdfjs-btn-active]="viewer.editorMode() === 'ink'"
+                  (click)="viewer.setEditorMode('ink')"
+                >
+                  <svg siPenIcon class="size-4"></svg>
+                </button>
+                @if (viewer.editorMode() === 'ink' && editorParamsOpen()) {
+                  <div class="pdfjs-editor-params">
+                    <sc-pdf-viewer-editor-ink-params />
+                  </div>
+                }
+              </div>
+
+              <!-- Stamp/Image -->
               <button
                 type="button"
                 class="pdfjs-btn"
@@ -224,12 +278,42 @@ interface AttachmentData {
               >
                 <svg siImageIcon class="size-4"></svg>
               </button>
+
+              <!-- Signature -->
+              <button
+                type="button"
+                class="pdfjs-btn"
+                aria-label="Signature"
+                [attr.aria-pressed]="viewer.editorMode() === 'signature'"
+                [class.pdfjs-btn-active]="viewer.editorMode() === 'signature'"
+                (click)="viewer.setEditorMode('signature')"
+              >
+                <svg siPenToolIcon class="size-4"></svg>
+              </button>
+
+              <!-- Toggle params -->
+              <button
+                type="button"
+                class="pdfjs-btn ml-0.5"
+                aria-label="Editor Settings"
+                [class.pdfjs-btn-active]="editorParamsOpen()"
+                (click)="editorParamsOpen.set(!editorParamsOpen())"
+              >
+                <svg viewBox="0 0 16 16" class="size-3" fill="currentColor">
+                  <path d="M8 12l-6-6h12z" />
+                </svg>
+              </button>
             </div>
 
             <div scPdfViewerSeparator class="bg-[#666]"></div>
 
             <!-- Right: Print, Download -->
-            <button scPdfViewerPrint>
+            <button
+              type="button"
+              class="pdfjs-btn"
+              aria-label="Print"
+              (click)="viewer.printWithProgress()"
+            >
               <svg siPrinterIcon class="size-4"></svg>
             </button>
             <button scPdfViewerDownload>
@@ -278,6 +362,18 @@ interface AttachmentData {
                     "
                   >
                     Presentation Mode
+                  </button>
+
+                  <!-- Print with progress -->
+                  <button
+                    type="button"
+                    class="pdfjs-menu-item"
+                    (click)="
+                      viewer.printWithProgress();
+                      secondaryToolbarOpen.set(false)
+                    "
+                  >
+                    Print
                   </button>
 
                   <!-- Current View Bookmark -->
@@ -536,12 +632,13 @@ interface AttachmentData {
             </div>
           }
 
-          <!-- Main area: sidebar + content -->
-          <div class="flex min-h-0 flex-1">
+          <!-- Main area: sidebar + resizer + content -->
+          <div class="relative flex min-h-0 flex-1">
             <!-- Sidebar -->
             @if (sidebarOpen()) {
               <div
-                class="flex w-[200px] shrink-0 flex-col border-r border-[#333] bg-[#404040]"
+                class="flex shrink-0 flex-col border-r border-[#333] bg-[#404040]"
+                [style.width.px]="viewer.sidebarWidth()"
               >
                 <!-- Sidebar tabs -->
                 <div class="flex border-b border-[#333]">
@@ -568,6 +665,22 @@ interface AttachmentData {
                     (click)="sidebarTab.set('attachments')"
                   >
                     Attach.
+                  </button>
+                  <button
+                    type="button"
+                    class="pdfjs-sidebar-tab"
+                    [attr.data-active]="sidebarTab() === 'layers'"
+                    (click)="sidebarTab.set('layers')"
+                  >
+                    Layers
+                  </button>
+                  <button
+                    type="button"
+                    class="pdfjs-sidebar-tab"
+                    [attr.data-active]="sidebarTab() === 'comments'"
+                    (click)="sidebarTab.set('comments')"
+                  >
+                    <svg siMessageSquareIcon class="size-3.5"></svg>
                   </button>
                 </div>
 
@@ -681,9 +794,18 @@ interface AttachmentData {
                         }
                       </div>
                     }
+                    @case ('layers') {
+                      <sc-pdf-viewer-layers-view />
+                    }
+                    @case ('comments') {
+                      <sc-pdf-viewer-comment-sidebar class="h-full" />
+                    }
                   }
                 </div>
               </div>
+
+              <!-- Sidebar resizer -->
+              <sc-pdf-viewer-sidebar-resizer />
             }
 
             <!-- Content -->
@@ -694,7 +816,20 @@ interface AttachmentData {
 
               <sc-pdf-viewer-canvas />
             </div>
+
+            <!-- Undo bar -->
+            <sc-pdf-viewer-editor-undo-bar />
           </div>
+
+          <!-- Dialogs -->
+          <sc-pdf-viewer-password-dialog />
+          <sc-pdf-viewer-signature-dialog />
+          <sc-pdf-viewer-print-progress />
+          <sc-pdf-viewer-alt-text-dialog
+            [open]="altTextDialogOpen()"
+            [annotationId]="altTextAnnotationId()"
+            (closed)="altTextDialogOpen.set(false)"
+          />
         </div>
       </div>
     </div>
@@ -784,6 +919,9 @@ interface AttachmentData {
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        transition:
+          background-color 0.15s,
+          color 0.15s;
 
         &:hover:not(:disabled) {
           color: #fff;
@@ -795,6 +933,11 @@ interface AttachmentData {
           opacity: 0.5;
           cursor: not-allowed;
         }
+
+        &:focus-visible {
+          outline: 2px solid #6b9edd;
+          outline-offset: -1px;
+        }
       }
 
       .pdfjs-btn-active {
@@ -804,6 +947,21 @@ interface AttachmentData {
 
       .pdfjs-btn-spacer {
         width: 4px;
+      }
+
+      /* Editor params dropdown */
+      .pdfjs-editor-params {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        margin-top: 4px;
+        min-width: 180px;
+        background: #474747;
+        border: 1px solid #333;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       }
 
       /* Page info input */
@@ -862,6 +1020,7 @@ interface AttachmentData {
         white-space: nowrap;
         height: auto;
         text-decoration: none;
+        transition: background-color 0.1s;
 
         &:hover {
           background: rgba(255, 255, 255, 0.1);
@@ -873,7 +1032,7 @@ interface AttachmentData {
           background: rgba(255, 255, 255, 0.08);
 
           &::before {
-            content: '✓ ';
+            content: '\\2713  ';
           }
         }
       }
@@ -971,6 +1130,12 @@ interface AttachmentData {
         border-bottom: 2px solid transparent;
         cursor: pointer;
         white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          color 0.15s,
+          border-color 0.15s;
 
         &:hover {
           color: #ccc;
@@ -1007,6 +1172,7 @@ interface AttachmentData {
         cursor: pointer;
         border-radius: 2px;
         line-height: 1.4;
+        transition: background-color 0.1s;
 
         &:hover {
           background: #4a4a4a;
@@ -1032,6 +1198,11 @@ interface AttachmentData {
           background: #5a5a5a;
           box-shadow: 0 0 0 2px #6b9edd;
         }
+      }
+
+      /* Range sliders */
+      input[type='range'] {
+        accent-color: #6b9edd;
       }
     }
 
@@ -1097,6 +1268,7 @@ interface AttachmentData {
       color: #d1d5db;
       font-size: 13px;
       cursor: pointer;
+      transition: background-color 0.15s;
 
       &:hover {
         background: #666;
@@ -1129,9 +1301,12 @@ export class PdfViewerDemo {
   readonly sidebarOpen = signal(false);
   readonly secondaryToolbarOpen = signal(false);
   readonly documentPropertiesOpen = signal(false);
-  readonly sidebarTab = signal<'thumbnails' | 'outline' | 'attachments'>(
-    'thumbnails',
-  );
+  readonly editorParamsOpen = signal(false);
+  readonly altTextDialogOpen = signal(false);
+  readonly altTextAnnotationId = signal<string | null>(null);
+  readonly sidebarTab = signal<
+    'thumbnails' | 'outline' | 'attachments' | 'layers' | 'comments'
+  >('thumbnails');
 
   // Thumbnails
   readonly thumbnails = signal<ThumbnailData[]>([]);

@@ -215,7 +215,10 @@ export class ScPdfViewerCanvas {
 
   readonly editorPointerEvents = computed(() => {
     const mode = this.editorMode();
-    return mode === 'freetext' || mode === 'ink' || mode === 'stamp'
+    return mode === 'freetext' ||
+      mode === 'ink' ||
+      mode === 'stamp' ||
+      mode === 'signature'
       ? 'auto'
       : 'none';
   });
@@ -224,7 +227,7 @@ export class ScPdfViewerCanvas {
     const mode = this.editorMode();
     if (mode === 'freetext') return 'text';
     if (mode === 'ink') return 'crosshair';
-    if (mode === 'stamp') return 'copy';
+    if (mode === 'stamp' || mode === 'signature') return 'copy';
     return '';
   });
 
@@ -1079,7 +1082,10 @@ export class ScPdfViewerCanvas {
             ctx.stroke();
           }
         }
-      } else if (ann.type === 'stamp' && ann.imageDataUrl) {
+      } else if (
+        (ann.type === 'stamp' || ann.type === 'signature') &&
+        ann.imageDataUrl
+      ) {
         const img = document.createElement('img');
         img.className = 'editor-annotation editor-stamp';
         img.style.position = 'absolute';
@@ -1088,7 +1094,11 @@ export class ScPdfViewerCanvas {
         img.style.width = `${(ann.width ?? 0.3) * 100}%`;
         img.style.pointerEvents = 'none';
         img.src = ann.imageDataUrl;
-        img.alt = 'Stamp annotation';
+        img.alt =
+          ann.description ||
+          (ann.type === 'signature'
+            ? 'Signature annotation'
+            : 'Stamp annotation');
         editorLayer.appendChild(img);
       }
     }
