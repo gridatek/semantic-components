@@ -1,221 +1,108 @@
 # PDF Viewer
 
-A document viewer component for displaying PDF files with navigation, zoom, and toolbar controls.
+A composable document viewer for displaying PDF files, built on [PDF.js](https://mozilla.github.io/pdf.js/). Provides navigation, zoom, rotation, text selection, and a fully customizable toolbar through standalone Angular directives.
 
-## Installation
+## Architecture
 
-Import the components from the pdf-viewer module:
+The PDF viewer follows a **composable directive** pattern. Instead of a single monolithic component, it's broken into small, focused directives that you assemble in your template. This gives full control over layout, styling, and which features to include.
 
-```typescript
-import { ScPdfViewer, ScPdfViewerToolbar } from '@/ui/pdf-viewer';
-```
+### Core Directives
+
+| Directive              | Selector                 | Description                                   |
+| ---------------------- | ------------------------ | --------------------------------------------- |
+| `ScPdfViewerRoot`      | `[scPdfViewer]`          | Root directive, manages PDF document state    |
+| `ScPdfViewerContainer` | `[scPdfViewerContainer]` | Layout wrapper (card-like container)          |
+| `ScPdfViewerToolbar`   | `[scPdfViewerToolbar]`   | Toolbar container (flex row)                  |
+| `ScPdfViewerContent`   | `[scPdfViewerContent]`   | Content area wrapping canvas + state overlays |
+| `ScPdfViewerCanvas`    | `sc-pdf-viewer-canvas`   | Renders PDF pages on canvas with text layer   |
+
+### Toolbar Controls
+
+| Directive                | Description                  |
+| ------------------------ | ---------------------------- |
+| `ScPdfViewerNav`         | Navigation button group      |
+| `ScPdfViewerPrevPage`    | Previous page button         |
+| `ScPdfViewerNextPage`    | Next page button             |
+| `ScPdfViewerPageInfo`    | Current page / total display |
+| `ScPdfViewerZoom`        | Zoom button group            |
+| `ScPdfViewerZoomIn`      | Zoom in button               |
+| `ScPdfViewerZoomOut`     | Zoom out button              |
+| `ScPdfViewerZoomSelect`  | Zoom level dropdown          |
+| `ScPdfViewerRotateLeft`  | Rotate left button           |
+| `ScPdfViewerRotateRight` | Rotate right button          |
+| `ScPdfViewerDownload`    | Download button              |
+| `ScPdfViewerPrint`       | Print button                 |
+| `ScPdfViewerFullscreen`  | Fullscreen toggle            |
+| `ScPdfViewerSeparator`   | Visual separator             |
+| `ScPdfViewerSpacer`      | Flexible spacer              |
+
+### State Overlays
+
+| Directive            | Description                      |
+| -------------------- | -------------------------------- |
+| `ScPdfViewerLoading` | Loading spinner                  |
+| `ScPdfViewerError`   | Error message display            |
+| `ScPdfViewerEmpty`   | Empty state (no PDF loaded)      |
+| `ScPdfViewerRetry`   | Retry button (used inside error) |
 
 ## Usage
 
-### Basic Usage
-
 ```html
-<sc-pdf-viewer [src]="pdfUrl" [title]="'My Document'" class="h-[600px]" />
-```
-
-### With Event Handlers
-
-```html
-<sc-pdf-viewer [src]="pdfUrl" (loaded)="onLoaded($event)" (pageChange)="onPageChange($event)" (zoomChange)="onZoomChange($event)" (errorEvent)="onError($event)" />
-```
-
-```typescript
-import type {
-  PdfLoadEvent,
-  PdfPageChangeEvent,
-  PdfZoomChangeEvent,
-  PdfErrorEvent,
-} from '@/ui/pdf-viewer';
-
-onLoaded(event: PdfLoadEvent): void {
-  console.log('PDF loaded, total pages:', event.totalPages);
-}
-
-onPageChange(event: PdfPageChangeEvent): void {
-  console.log('Page:', event.currentPage, '/', event.totalPages);
-}
-
-onZoomChange(event: PdfZoomChangeEvent): void {
-  console.log('Zoom level:', event.zoom, 'Scale:', event.scale);
-}
-
-onError(event: PdfErrorEvent): void {
-  console.error('Error loading PDF:', event.message);
-}
-```
-
-### Without Toolbar
-
-```html
-<sc-pdf-viewer [src]="pdfUrl" [showToolbar]="false" />
-```
-
-### Custom Toolbar Configuration
-
-```html
-<sc-pdf-viewer
-  [src]="pdfUrl"
-  [toolbarConfig]="{
-    showNavigation: true,
-    showPageInfo: true,
-    showZoom: true,
-    showRotate: false,
-    showDownload: true,
-    showPrint: false,
-    showFullscreen: true
-  }"
-/>
-```
-
-### Initial Page and Zoom
-
-```html
-<sc-pdf-viewer [src]="pdfUrl" [initialPage]="3" [initialZoom]="1.5" />
-```
-
-### Programmatic Control
-
-```typescript
-import { viewChild } from '@angular/core';
-import { ScPdfViewer } from '@/ui/pdf-viewer';
-
-readonly pdfViewer = viewChild(ScPdfViewer);
-
-goToPage(page: number): void {
-  this.pdfViewer()?.setPage(page);
-}
-
-setZoom(level: PdfZoomLevel): void {
-  this.pdfViewer()?.setZoom(level);
-}
-```
-
-## API Reference
-
-### ScPdfViewer
-
-The main PDF viewer component.
-
-#### Inputs
-
-| Input           | Type               | Default                  | Description                        |
-| --------------- | ------------------ | ------------------------ | ---------------------------------- |
-| `src`           | `string`           | `''`                     | URL of the PDF document            |
-| `title`         | `string`           | `''`                     | Document title for a11y & download |
-| `showToolbar`   | `boolean`          | `true`                   | Show or hide the toolbar           |
-| `toolbarConfig` | `PdfToolbarConfig` | `DEFAULT_TOOLBAR_CONFIG` | Configure toolbar controls         |
-| `initialPage`   | `number`           | `1`                      | Initial page to display            |
-| `initialZoom`   | `PdfZoomLevel`     | `'auto'`                 | Initial zoom level                 |
-| `class`         | `string`           | `''`                     | Additional CSS classes             |
-
-#### Outputs
-
-| Output       | Type                 | Description                |
-| ------------ | -------------------- | -------------------------- |
-| `loaded`     | `PdfLoadEvent`       | Emitted when PDF is loaded |
-| `pageChange` | `PdfPageChangeEvent` | Emitted when page changes  |
-| `zoomChange` | `PdfZoomChangeEvent` | Emitted when zoom changes  |
-| `errorEvent` | `PdfErrorEvent`      | Emitted on load error      |
-
-#### Public Methods
-
-| Method            | Parameters            | Description                 |
-| ----------------- | --------------------- | --------------------------- |
-| `setPage()`       | `page: number`        | Navigate to a specific page |
-| `setZoom()`       | `level: PdfZoomLevel` | Set the zoom level          |
-| `setTotalPages()` | `total: number`       | Set total page count        |
-
-### ScPdfViewerToolbar
-
-Standalone toolbar component (used internally or separately).
-
-## Type Definitions
-
-### PdfToolbarConfig
-
-```typescript
-interface PdfToolbarConfig {
-  showNavigation?: boolean; // Page navigation buttons
-  showZoom?: boolean; // Zoom controls
-  showDownload?: boolean; // Download button
-  showPrint?: boolean; // Print button
-  showFullscreen?: boolean; // Fullscreen toggle
-  showPageInfo?: boolean; // Page number display
-  showRotate?: boolean; // Rotate buttons
-}
-```
-
-### PdfZoomLevel
-
-```typescript
-type PdfZoomLevel = 'auto' | 'page-fit' | 'page-width' | number;
-```
-
-Available zoom presets:
-
-- `'auto'` - Automatic fit
-- `'page-fit'` - Fit entire page
-- `'page-width'` - Fit to page width
-- `number` - Specific scale (e.g., `1.5` for 150%)
-
-### Event Types
-
-```typescript
-interface PdfLoadEvent {
-  totalPages: number;
-}
-
-interface PdfPageChangeEvent {
-  currentPage: number;
-  totalPages: number;
-}
-
-interface PdfZoomChangeEvent {
-  zoom: PdfZoomLevel;
-  scale: number;
-}
-
-interface PdfErrorEvent {
-  error: Error;
-  message: string;
-}
+<div scPdfViewer [src]="pdfUrl" [title]="'My Document'" #viewer="scPdfViewer">
+  <div scPdfViewerContainer>
+    <div scPdfViewerToolbar>
+      <div scPdfViewerNav>
+        <button scPdfViewerPrevPage></button>
+        <button scPdfViewerNextPage></button>
+      </div>
+      <sc-pdf-viewer-page-info />
+      <sc-pdf-viewer-separator />
+      <div scPdfViewerZoom>
+        <button scPdfViewerZoomOut></button>
+        <button scPdfViewerZoomIn></button>
+      </div>
+      <sc-pdf-viewer-zoom-select />
+      <sc-pdf-viewer-spacer />
+      <button scPdfViewerDownload></button>
+      <button scPdfViewerPrint></button>
+    </div>
+    <div scPdfViewerContent>
+      <sc-pdf-viewer-loading />
+      <sc-pdf-viewer-error>
+        <button scPdfViewerRetry></button>
+      </sc-pdf-viewer-error>
+      <sc-pdf-viewer-empty />
+      <sc-pdf-viewer-canvas />
+    </div>
+  </div>
+</div>
 ```
 
 ## Features
 
-- **Native PDF Rendering**: Uses browser's built-in PDF viewer for maximum compatibility
-- **Page Navigation**: Previous/next buttons and direct page input
-- **Zoom Controls**: Zoom in/out, preset levels, and custom percentages
-- **Rotation**: Rotate document left or right
-- **Download**: Download the PDF file
-- **Print**: Print the document
-- **Fullscreen**: Toggle fullscreen viewing mode
-- **Loading State**: Shows spinner while PDF is loading
-- **Error Handling**: Displays error message with retry option
-- **Empty State**: Placeholder when no PDF is loaded
-- **Customizable Toolbar**: Show/hide individual controls
-- **Keyboard Accessible**: All controls are keyboard navigable
+- **PDF.js rendering** - Canvas-based rendering via pdfjs-dist
+- **Text selection** - Transparent text layer overlay for copy/paste
+- **Lazy page rendering** - Only visible pages are rendered (IntersectionObserver)
+- **Zoom** - Numeric scale, auto, page-fit, page-width presets
+- **Rotation** - 90-degree rotation in both directions
+- **Page navigation** - Prev/next buttons with smooth scroll
+- **Current page tracking** - Updates as user scrolls
+- **Download & print** - Built-in buttons
+- **Fullscreen** - Native fullscreen API
+- **Responsive** - ResizeObserver-based container-aware scaling
+- **Keyboard accessible** - All controls are keyboard navigable
+- **Composable** - Pick only the directives you need
 
-## Styling
+## Coming Soon
 
-The component uses Tailwind CSS classes and supports theming through CSS variables:
-
-- `--background` / `--foreground`: Base colors
-- `--muted` / `--muted-foreground`: Secondary colors
-- `--primary` / `--primary-foreground`: Accent colors
-- `--destructive`: Error colors
-- `--ring`: Focus ring color
-- `--border`: Border colors
-
-## Notes
-
-- **CORS**: PDF URLs must be served with appropriate CORS headers for cross-origin access
-- **Browser Support**: Uses native browser PDF rendering via `<object>` and `<iframe>` elements
-- **Page Count**: For accurate page count tracking, consider integrating PDF.js
-- **Print/Download**: Depends on browser permissions and PDF URL accessibility
-- **Security**: Be cautious with user-provided PDF URLs to prevent security issues
+- **Annotation layer** - Render PDF annotations (links, form fields, comments)
+- **Thumbnail sidebar** - Built-in sidebar component with page thumbnails
+- **Find / search** - Built-in text search with highlight across pages
+- **Outline / bookmarks** - Table of contents from PDF document outline
+- **Spread modes** - Side-by-side page display (odd, even spreads)
+- **Scroll modes** - Vertical, horizontal, and wrapped scroll layouts
+- **Hand tool / grab scroll** - Drag-to-scroll cursor mode
+- **Document properties** - Built-in dialog showing PDF metadata
+- **Page input** - Direct page number input for jump-to-page
+- **Keyboard shortcuts** - Configurable keyboard bindings for navigation and zoom
+- **Accessibility improvements** - Enhanced screen reader support and ARIA annotations

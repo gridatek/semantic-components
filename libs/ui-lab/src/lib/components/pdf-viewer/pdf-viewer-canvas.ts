@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
+import { TextLayer, setLayerDimensions } from 'pdfjs-dist';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 interface PageLayout {
@@ -34,7 +35,7 @@ interface PageLayout {
     >
       @for (page of pageLayouts(); track page.pageNumber) {
         <div
-          class="bg-background mx-auto mb-2 shadow-sm"
+          class="bg-background relative mx-auto mb-2 shadow-sm"
           [attr.data-page]="page.pageNumber"
           [style.width.px]="page.width * scaledValue()"
           [style.height.px]="page.height * scaledValue()"
@@ -46,6 +47,10 @@ interface PageLayout {
             [style.width.px]="page.width * scaledValue()"
             [style.height.px]="page.height * scaledValue()"
           ></canvas>
+          <div
+            class="textLayer"
+            [attr.data-textlayer-page]="page.pageNumber"
+          ></div>
         </div>
       }
     </div>
@@ -80,6 +85,7 @@ export class ScPdfViewerCanvas {
   private readonly navigateTrigger = this.pdfViewer.navigateTrigger;
 
   private activeRenderTasks = new Map<number, RenderTask>();
+  private activeTextLayers = new Map<number, TextLayer>();
   private renderedPages = new Set<number>();
   private observer: IntersectionObserver | null = null;
   private resizeObserver: ResizeObserver | null = null;
@@ -317,6 +323,7 @@ export class ScPdfViewerCanvas {
     if (!doc) return;
 
     this.activeRenderTasks.get(pageNumber)?.cancel();
+    this.activeTextLayers.get(pageNumber)?.cancel();
     this.renderedPages.add(pageNumber);
 
     try {
@@ -344,11 +351,33 @@ export class ScPdfViewerCanvas {
 
       await renderTask.promise;
       this.activeRenderTasks.delete(pageNumber);
+
+      // Render text layer for text selection
+      const textLayerDiv = container.querySelector(
+        `[data-textlayer-page="${pageNumber}"]`,
+      ) as HTMLDivElement;
+      if (textLayerDiv) {
+        textLayerDiv.innerHTML = '';
+        const displayViewport = page.getViewport({
+          scale: this.scaledValue(),
+        });
+        setLayerDimensions(textLayerDiv, displayViewport);
+        const textContent = await page.getTextContent();
+        const textLayer = new TextLayer({
+          textContentSource: textContent,
+          container: textLayerDiv,
+          viewport: displayViewport,
+        });
+        this.activeTextLayers.set(pageNumber, textLayer);
+        await textLayer.render();
+        this.activeTextLayers.delete(pageNumber);
+      }
     } catch (err) {
       if ((err as { name?: string })?.name !== 'RenderingCancelledException') {
         console.error(`Error rendering page ${pageNumber}:`, err);
       }
       this.activeRenderTasks.delete(pageNumber);
+      this.activeTextLayers.delete(pageNumber);
       this.renderedPages.delete(pageNumber);
     }
   }
@@ -358,5 +387,9 @@ export class ScPdfViewerCanvas {
       task.cancel();
     }
     this.activeRenderTasks.clear();
+    for (const [, layer] of this.activeTextLayers) {
+      layer.cancel();
+    }
+    this.activeTextLayers.clear();
   }
 }
