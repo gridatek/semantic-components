@@ -94,9 +94,9 @@ The PDF viewer follows a **composable directive** pattern. Instead of a single m
 - **PDF.js rendering** - Canvas-based rendering via pdfjs-dist
 - **Text selection** - Transparent text layer overlay for copy/paste
 - **Annotation layer** - Clickable links, internal page navigation, external URLs
-- **Find / search** - Built-in text search with highlight across pages
+- **Find / search** - Built-in text search with highlight, match case, diacritics, whole words
 - **Lazy page rendering** - Only visible pages are rendered (IntersectionObserver)
-- **Zoom** - Numeric scale, auto, page-fit, page-width presets
+- **Zoom** - Numeric scale, auto, actual size, page-fit, page-width presets
 - **Rotation** - 90-degree rotation in both directions
 - **Page navigation** - Prev/next buttons with smooth scroll
 - **Current page tracking** - Updates as user scrolls
@@ -108,8 +108,6 @@ The PDF viewer follows a **composable directive** pattern. Instead of a single m
 
 ## Coming Soon
 
-- **Thumbnail sidebar** - Built-in sidebar component with page thumbnails
-- **Outline / bookmarks** - Table of contents from PDF document outline
 - **Spread modes** - Side-by-side page display (odd, even spreads)
 - **Scroll modes** - Vertical, horizontal, and wrapped scroll layouts
 - **Hand tool / grab scroll** - Drag-to-scroll cursor mode

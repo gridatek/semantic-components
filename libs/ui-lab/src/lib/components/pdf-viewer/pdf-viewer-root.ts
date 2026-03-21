@@ -80,6 +80,7 @@ export class ScPdfViewerRoot {
   readonly findMatchCase = signal(false);
   readonly findHighlightAll = signal(true);
   readonly findEntireWord = signal(false);
+  readonly findMatchDiacritics = signal(false);
   readonly findState = signal<PdfFindState>('idle');
   readonly findCurrentMatchIndex = signal(0);
   readonly findTotalMatches = signal(0);
@@ -353,29 +354,75 @@ export class ScPdfViewerRoot {
 
     const matchCase = this.findMatchCase();
     const entireWord = this.findEntireWord();
+    const matchDiacritics = this.findMatchDiacritics();
     const allMatches: PdfPageMatchInfo[] = [];
     let total = 0;
+
+    // Strip diacritical marks: NFD splits accented chars, then remove combining marks
+    const stripDiacritics = (text: string): string =>
+      text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     for (const pageText of this.pageTexts) {
       const matches: number[] = [];
       const matchesLength: number[] = [];
-      const searchIn = matchCase ? pageText : pageText.toLowerCase();
-      const searchFor = matchCase ? query : query.toLowerCase();
+
+      // When ignoring diacritics, build a mapping from normalized positions
+      // back to original text positions, since lengths may differ.
+      let normToOrig: number[] | undefined;
+      let searchIn: string;
+      let searchFor: string;
+
+      if (!matchDiacritics) {
+        // Build per-character position mapping
+        normToOrig = [];
+        let normalized = '';
+        for (let i = 0; i < pageText.length; i++) {
+          const stripped = stripDiacritics(pageText[i]);
+          for (let c = 0; c < stripped.length; c++) {
+            normToOrig.push(i);
+          }
+          normalized += stripped;
+        }
+        // Add sentinel for end-of-string lookups
+        normToOrig.push(pageText.length);
+        searchIn = matchCase ? normalized : normalized.toLowerCase();
+        searchFor = matchCase
+          ? stripDiacritics(query)
+          : stripDiacritics(query).toLowerCase();
+      } else {
+        searchIn = matchCase ? pageText : pageText.toLowerCase();
+        searchFor = matchCase ? query : query.toLowerCase();
+      }
 
       if (entireWord) {
         const escaped = searchFor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const flags = matchCase ? 'g' : 'gi';
         const regex = new RegExp(`\\b${escaped}\\b`, flags);
         let m;
-        while ((m = regex.exec(pageText)) !== null) {
-          matches.push(m.index);
-          matchesLength.push(m[0].length);
+        const target = matchDiacritics ? pageText : searchIn;
+        while ((m = regex.exec(target)) !== null) {
+          if (normToOrig) {
+            const origStart = normToOrig[m.index];
+            const origEnd = normToOrig[m.index + m[0].length];
+            matches.push(origStart);
+            matchesLength.push(origEnd - origStart);
+          } else {
+            matches.push(m.index);
+            matchesLength.push(m[0].length);
+          }
         }
       } else {
         let idx = 0;
         while ((idx = searchIn.indexOf(searchFor, idx)) !== -1) {
-          matches.push(idx);
-          matchesLength.push(searchFor.length);
+          if (normToOrig) {
+            const origStart = normToOrig[idx];
+            const origEnd = normToOrig[idx + searchFor.length];
+            matches.push(origStart);
+            matchesLength.push(origEnd - origStart);
+          } else {
+            matches.push(idx);
+            matchesLength.push(searchFor.length);
+          }
           idx += searchFor.length;
         }
       }

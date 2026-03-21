@@ -213,6 +213,9 @@ export class ScPdfViewerCanvas {
     }
     const containerWidth = size.width - 32;
     const firstPage = layouts[0];
+    if (z === 'page-actual') {
+      return 1;
+    }
     if (z === 'page-width') {
       return containerWidth / firstPage.width;
     }

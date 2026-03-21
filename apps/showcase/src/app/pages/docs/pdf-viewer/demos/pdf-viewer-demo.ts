@@ -56,6 +56,17 @@ interface ThumbnailData {
   dataUrl: string;
 }
 
+interface OutlineItem {
+  title: string;
+  dest: string | unknown[] | null;
+  items: OutlineItem[];
+}
+
+interface AttachmentData {
+  filename: string;
+  content: Uint8Array;
+}
+
 @Component({
   selector: 'app-pdf-viewer-demo',
   imports: [
@@ -214,6 +225,17 @@ interface ThumbnailData {
                   >
                     Presentation Mode
                   </button>
+
+                  <!-- Current View Bookmark -->
+                  <a
+                    class="pdfjs-menu-item"
+                    [href]="bookmarkUrl()"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    (click)="secondaryToolbarOpen.set(false)"
+                  >
+                    Current View
+                  </a>
 
                   <div class="pdfjs-menu-separator"></div>
 
@@ -427,6 +449,14 @@ interface ThumbnailData {
                 <label class="pdfjs-findbar-label">
                   <input
                     type="checkbox"
+                    [checked]="viewer.findMatchDiacritics()"
+                    (change)="toggleMatchDiacritics()"
+                  />
+                  Match Diacritics
+                </label>
+                <label class="pdfjs-findbar-label">
+                  <input
+                    type="checkbox"
                     [checked]="viewer.findEntireWord()"
                     (change)="
                       viewer.findEntireWord.set(!viewer.findEntireWord());
@@ -454,28 +484,149 @@ interface ThumbnailData {
 
           <!-- Main area: sidebar + content -->
           <div class="flex min-h-0 flex-1">
-            <!-- Sidebar with page thumbnails -->
+            <!-- Sidebar -->
             @if (sidebarOpen()) {
               <div
-                class="w-[200px] shrink-0 overflow-y-auto border-r border-[#333] bg-[#404040]"
+                class="flex w-[200px] shrink-0 flex-col border-r border-[#333] bg-[#404040]"
               >
-                <div class="space-y-2 p-2">
-                  @for (thumb of thumbnails(); track thumb.page) {
-                    <button
-                      type="button"
-                      class="pdfjs-thumb"
-                      [attr.data-active]="viewer.currentPage() === thumb.page"
-                      (click)="viewer.goToPage(thumb.page)"
-                    >
-                      <img
-                        [src]="thumb.dataUrl"
-                        [alt]="'Page ' + thumb.page"
-                        class="mx-auto shadow"
-                      />
-                      <p class="mt-1 text-center text-xs text-[#bbb]">
-                        {{ thumb.page }}
-                      </p>
-                    </button>
+                <!-- Sidebar tabs -->
+                <div class="flex border-b border-[#333]">
+                  <button
+                    type="button"
+                    class="pdfjs-sidebar-tab"
+                    [attr.data-active]="sidebarTab() === 'thumbnails'"
+                    (click)="sidebarTab.set('thumbnails')"
+                  >
+                    Pages
+                  </button>
+                  <button
+                    type="button"
+                    class="pdfjs-sidebar-tab"
+                    [attr.data-active]="sidebarTab() === 'outline'"
+                    (click)="sidebarTab.set('outline')"
+                  >
+                    Outline
+                  </button>
+                  <button
+                    type="button"
+                    class="pdfjs-sidebar-tab"
+                    [attr.data-active]="sidebarTab() === 'attachments'"
+                    (click)="sidebarTab.set('attachments')"
+                  >
+                    Attach.
+                  </button>
+                </div>
+
+                <!-- Tab content -->
+                <div class="flex-1 overflow-y-auto">
+                  @switch (sidebarTab()) {
+                    @case ('thumbnails') {
+                      <div class="space-y-2 p-2">
+                        @for (thumb of thumbnails(); track thumb.page) {
+                          <button
+                            type="button"
+                            class="pdfjs-thumb"
+                            [attr.data-active]="
+                              viewer.currentPage() === thumb.page
+                            "
+                            (click)="viewer.goToPage(thumb.page)"
+                          >
+                            <img
+                              [src]="thumb.dataUrl"
+                              [alt]="'Page ' + thumb.page"
+                              class="mx-auto shadow"
+                            />
+                            <p class="mt-1 text-center text-xs text-[#bbb]">
+                              {{ thumb.page }}
+                            </p>
+                          </button>
+                        }
+                      </div>
+                    }
+                    @case ('outline') {
+                      <div class="p-2">
+                        @if (outline().length === 0) {
+                          <p class="text-center text-xs text-[#999]">
+                            No outline available.
+                          </p>
+                        } @else {
+                          <ul class="pdfjs-outline">
+                            @for (item of outline(); track item.title) {
+                              <li>
+                                <button
+                                  type="button"
+                                  class="pdfjs-outline-item"
+                                  (click)="navigateOutline(item)"
+                                >
+                                  {{ item.title }}
+                                </button>
+                                @if (item.items && item.items.length > 0) {
+                                  <ul class="pdfjs-outline-children">
+                                    @for (
+                                      child of item.items;
+                                      track child.title
+                                    ) {
+                                      <li>
+                                        <button
+                                          type="button"
+                                          class="pdfjs-outline-item"
+                                          (click)="navigateOutline(child)"
+                                        >
+                                          {{ child.title }}
+                                        </button>
+                                        @if (
+                                          child.items && child.items.length > 0
+                                        ) {
+                                          <ul class="pdfjs-outline-children">
+                                            @for (
+                                              sub of child.items;
+                                              track sub.title
+                                            ) {
+                                              <li>
+                                                <button
+                                                  type="button"
+                                                  class="pdfjs-outline-item"
+                                                  (click)="navigateOutline(sub)"
+                                                >
+                                                  {{ sub.title }}
+                                                </button>
+                                              </li>
+                                            }
+                                          </ul>
+                                        }
+                                      </li>
+                                    }
+                                  </ul>
+                                }
+                              </li>
+                            }
+                          </ul>
+                        }
+                      </div>
+                    }
+                    @case ('attachments') {
+                      <div class="p-2">
+                        @if (attachments().length === 0) {
+                          <p class="text-center text-xs text-[#999]">
+                            No attachments.
+                          </p>
+                        } @else {
+                          <ul class="space-y-1">
+                            @for (att of attachments(); track att.filename) {
+                              <li>
+                                <button
+                                  type="button"
+                                  class="pdfjs-outline-item"
+                                  (click)="downloadAttachment(att)"
+                                >
+                                  {{ att.filename }}
+                                </button>
+                              </li>
+                            }
+                          </ul>
+                        }
+                      </div>
+                    }
                   }
                 </div>
               </div>
@@ -651,6 +802,7 @@ interface ThumbnailData {
         cursor: pointer;
         white-space: nowrap;
         height: auto;
+        text-decoration: none;
 
         &:hover {
           background: rgba(255, 255, 255, 0.1);
@@ -746,6 +898,60 @@ interface ThumbnailData {
         }
         100% {
           transform: translateX(400%);
+        }
+      }
+
+      /* Sidebar tabs */
+      .pdfjs-sidebar-tab {
+        flex: 1;
+        padding: 6px 4px;
+        font-size: 11px;
+        color: #999;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+          color: #ccc;
+        }
+
+        &[data-active='true'] {
+          color: #fff;
+          border-bottom-color: #6b9edd;
+        }
+      }
+
+      /* Outline tree */
+      .pdfjs-outline {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .pdfjs-outline-children {
+        list-style: none;
+        padding-left: 12px;
+        margin: 0;
+      }
+
+      .pdfjs-outline-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 4px 6px;
+        color: #bbb;
+        font-size: 12px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        border-radius: 2px;
+        line-height: 1.4;
+
+        &:hover {
+          background: #4a4a4a;
+          color: #fff;
         }
       }
 
@@ -864,9 +1070,16 @@ export class PdfViewerDemo {
   readonly sidebarOpen = signal(false);
   readonly secondaryToolbarOpen = signal(false);
   readonly documentPropertiesOpen = signal(false);
+  readonly sidebarTab = signal<'thumbnails' | 'outline' | 'attachments'>(
+    'thumbnails',
+  );
 
   // Thumbnails
   readonly thumbnails = signal<ThumbnailData[]>([]);
+
+  // Outline / Attachments
+  readonly outline = signal<OutlineItem[]>([]);
+  readonly attachments = signal<AttachmentData[]>([]);
 
   // Secondary toolbar options (UI state)
   readonly cursorTool = signal<'select' | 'hand'>('select');
@@ -892,6 +1105,13 @@ export class PdfViewerDemo {
 
   private currentBlobUrl: string | null = null;
 
+  // Bookmark URL for current view
+  readonly bookmarkUrl = computed(() => {
+    const viewer = this.viewerRef();
+    if (!viewer) return '#';
+    return `#page=${viewer.currentPage()}`;
+  });
+
   constructor() {
     effect(() => {
       const viewer = this.viewerRef();
@@ -900,6 +1120,8 @@ export class PdfViewerDemo {
       const doc = viewer.pdfDocument();
       if (doc) {
         this.renderThumbnails();
+        this.loadOutline();
+        this.loadAttachments();
       }
     });
 
@@ -923,6 +1145,8 @@ export class PdfViewerDemo {
     this.pdfSrc.set(this.currentBlobUrl);
     this.pdfTitle.set(file.name.replace('.pdf', ''));
     this.thumbnails.set([]);
+    this.outline.set([]);
+    this.attachments.set([]);
     input.value = '';
   }
 
@@ -931,6 +1155,54 @@ export class PdfViewerDemo {
     if (!viewer) return;
     viewer.findHighlightAll.set(!viewer.findHighlightAll());
     viewer.findTrigger.update((v) => v + 1);
+  }
+
+  protected toggleMatchDiacritics(): void {
+    const viewer = this.viewerRef();
+    if (!viewer) return;
+    viewer.findMatchDiacritics.set(!viewer.findMatchDiacritics());
+    viewer.find(viewer.findQuery());
+  }
+
+  protected async navigateOutline(item: OutlineItem): Promise<void> {
+    const viewer = this.viewerRef();
+    if (!viewer || !item.dest) return;
+
+    const doc = viewer.pdfDocument();
+    if (!doc) return;
+
+    let dest = item.dest;
+    if (typeof dest === 'string') {
+      dest = (await doc.getDestination(dest)) as unknown[];
+    }
+    if (!Array.isArray(dest)) return;
+
+    const [ref] = dest;
+    let pageNumber: number | undefined;
+    if (ref && typeof ref === 'object') {
+      try {
+        pageNumber =
+          (await doc.getPageIndex(ref as { num: number; gen: number })) + 1;
+      } catch {
+        return;
+      }
+    } else if (typeof ref === 'number') {
+      pageNumber = ref + 1;
+    }
+
+    if (pageNumber && pageNumber >= 1) {
+      viewer.goToPage(pageNumber);
+    }
+  }
+
+  protected downloadAttachment(att: AttachmentData): void {
+    const blob = new Blob([att.content as unknown as BlobPart]);
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = att.filename;
+    link.click();
+    URL.revokeObjectURL(url);
   }
 
   protected openDocumentProperties(): void {
@@ -998,5 +1270,46 @@ export class PdfViewerDemo {
     }
 
     this.thumbnails.set(thumbs);
+  }
+
+  private async loadOutline(): Promise<void> {
+    const viewer = this.viewerRef();
+    if (!viewer) return;
+
+    const doc = viewer.pdfDocument();
+    if (!doc) return;
+
+    try {
+      const outline = await doc.getOutline();
+      this.outline.set((outline as OutlineItem[]) ?? []);
+    } catch {
+      this.outline.set([]);
+    }
+  }
+
+  private async loadAttachments(): Promise<void> {
+    const viewer = this.viewerRef();
+    if (!viewer) return;
+
+    const doc = viewer.pdfDocument();
+    if (!doc) return;
+
+    try {
+      const atts = await doc.getAttachments();
+      if (!atts) {
+        this.attachments.set([]);
+        return;
+      }
+      const list: AttachmentData[] = [];
+      for (const [filename, data] of Object.entries(atts)) {
+        list.push({
+          filename,
+          content: (data as { content: Uint8Array }).content,
+        });
+      }
+      this.attachments.set(list);
+    } catch {
+      this.attachments.set([]);
+    }
   }
 }
