@@ -46,6 +46,8 @@ export { ScPdfViewerFindResultsInfo } from './pdf-viewer-find-results-info';
 export { ZOOM_LEVELS } from './pdf-viewer-types';
 export type {
   PdfZoomLevel,
+  PdfEditorMode,
+  PdfEditorAnnotation,
   PdfFindState,
   PdfPageMatchInfo,
   PdfLoadEvent,

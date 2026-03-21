@@ -44,9 +44,13 @@ import {
   SiChevronUpIcon,
   SiDownloadIcon,
   SiEllipsisVerticalIcon,
+  SiHighlighterIcon,
+  SiImageIcon,
   SiPanelLeftIcon,
+  SiPenIcon,
   SiPrinterIcon,
   SiSearchIcon,
+  SiTypeIcon,
   SiZoomInIcon,
   SiZoomOutIcon,
 } from '@semantic-icons/lucide-icons';
@@ -100,9 +104,13 @@ interface AttachmentData {
     SiChevronDownIcon,
     SiDownloadIcon,
     SiEllipsisVerticalIcon,
+    SiHighlighterIcon,
+    SiImageIcon,
     SiPanelLeftIcon,
-    SiSearchIcon,
+    SiPenIcon,
     SiPrinterIcon,
+    SiSearchIcon,
+    SiTypeIcon,
     SiZoomInIcon,
     SiZoomOutIcon,
   ],
@@ -173,6 +181,52 @@ interface AttachmentData {
             <select scPdfViewerZoomSelect></select>
 
             <div scPdfViewerSpacer></div>
+
+            <!-- Editor tools -->
+            <div class="flex items-center">
+              <button
+                type="button"
+                class="pdfjs-btn"
+                aria-label="Highlight"
+                [attr.aria-pressed]="viewer.editorMode() === 'highlight'"
+                [class.pdfjs-btn-active]="viewer.editorMode() === 'highlight'"
+                (click)="viewer.setEditorMode('highlight')"
+              >
+                <svg siHighlighterIcon class="size-4"></svg>
+              </button>
+              <button
+                type="button"
+                class="pdfjs-btn"
+                aria-label="Free Text"
+                [attr.aria-pressed]="viewer.editorMode() === 'freetext'"
+                [class.pdfjs-btn-active]="viewer.editorMode() === 'freetext'"
+                (click)="viewer.setEditorMode('freetext')"
+              >
+                <svg siTypeIcon class="size-4"></svg>
+              </button>
+              <button
+                type="button"
+                class="pdfjs-btn"
+                aria-label="Draw"
+                [attr.aria-pressed]="viewer.editorMode() === 'ink'"
+                [class.pdfjs-btn-active]="viewer.editorMode() === 'ink'"
+                (click)="viewer.setEditorMode('ink')"
+              >
+                <svg siPenIcon class="size-4"></svg>
+              </button>
+              <button
+                type="button"
+                class="pdfjs-btn"
+                aria-label="Add Image"
+                [attr.aria-pressed]="viewer.editorMode() === 'stamp'"
+                [class.pdfjs-btn-active]="viewer.editorMode() === 'stamp'"
+                (click)="viewer.setEditorMode('stamp')"
+              >
+                <svg siImageIcon class="size-4"></svg>
+              </button>
+            </div>
+
+            <div scPdfViewerSeparator class="bg-[#666]"></div>
 
             <!-- Right: Print, Download -->
             <button scPdfViewerPrint>
@@ -743,8 +797,21 @@ interface AttachmentData {
         }
       }
 
+      .pdfjs-btn-active {
+        color: #fff !important;
+        background: rgba(255, 255, 255, 0.25) !important;
+      }
+
       .pdfjs-btn-spacer {
         width: 4px;
+      }
+
+      /* Editor layer */
+      .editorLayer {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        pointer-events: none;
       }
 
       /* Page info input */

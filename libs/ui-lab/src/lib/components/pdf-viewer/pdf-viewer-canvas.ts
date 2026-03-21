@@ -149,6 +149,13 @@ interface PageLayout {
             class="annotationLayer"
             [attr.data-annotationlayer-page]="page.pageNumber"
           ></div>
+          <div
+            class="editorLayer"
+            [attr.data-editorlayer-page]="page.pageNumber"
+            (pointerdown)="onEditorPointerDown($event, page.pageNumber)"
+            (pointermove)="onEditorPointerMove($event, page.pageNumber)"
+            (pointerup)="onEditorPointerUp($event, page.pageNumber)"
+          ></div>
         </div>
       }
     </div>
@@ -196,6 +203,13 @@ export class ScPdfViewerCanvas {
   private resizeObserver: ResizeObserver | null = null;
   private renderTimeout: ReturnType<typeof setTimeout> | null = null;
   private scrollHandler: (() => void) | null = null;
+
+  // Editor state
+  private readonly editorMode = this.pdfViewer.editorMode;
+  private readonly editorTrigger = this.pdfViewer.editorTrigger;
+  private inkCurrentStroke: { x: number; y: number }[] = [];
+  private inkCurrentPage = 0;
+  private inkDrawing = false;
 
   // Reactive container dimensions — updated by ResizeObserver so that
   // scaledValue re-evaluates when the container is laid out.
@@ -286,7 +300,47 @@ export class ScPdfViewerCanvas {
       });
     });
 
+    // Render editor annotations when they change
+    effect(() => {
+      this.editorTrigger();
+      const annotations = this.pdfViewer.editorAnnotations();
+      const scale = this.scaledValue();
+
+      setTimeout(() => {
+        this.renderEditorAnnotations(annotations, scale);
+      });
+    });
+
+    // Update editor layer cursor based on mode
+    effect(() => {
+      const mode = this.editorMode();
+      setTimeout(() => {
+        const container = this.scrollContainer()?.nativeElement;
+        if (!container) return;
+        const layers = container.querySelectorAll('.editorLayer');
+        const cursor =
+          mode === 'freetext'
+            ? 'text'
+            : mode === 'ink'
+              ? 'crosshair'
+              : mode === 'stamp'
+                ? 'copy'
+                : '';
+        const pointerEvents = mode === 'none' ? 'none' : 'auto';
+        layers.forEach((el) => {
+          (el as HTMLElement).style.cursor = cursor;
+          (el as HTMLElement).style.pointerEvents = pointerEvents;
+        });
+      });
+    });
+
+    // Listen for text selection in highlight mode
+    afterNextRender(() => {
+      document.addEventListener('mouseup', this.onHighlightMouseUp);
+    });
+
     this.destroyRef.onDestroy(() => {
+      document.removeEventListener('mouseup', this.onHighlightMouseUp);
       this.observer?.disconnect();
       this.resizeObserver?.disconnect();
       this.cancelAllRenderTasks();
@@ -695,6 +749,344 @@ export class ScPdfViewerCanvas {
 
         div.textContent = '';
         div.appendChild(frag);
+      }
+    }
+  }
+
+  // ── Editor methods ──
+
+  private readonly onHighlightMouseUp = (): void => {
+    if (this.editorMode() !== 'highlight') return;
+
+    const selection = document.getSelection();
+    if (!selection || selection.isCollapsed) return;
+
+    const range = selection.getRangeAt(0);
+    const container = this.scrollContainer()?.nativeElement;
+    if (!container) return;
+
+    // Find which page the selection is in
+    let pageEl: HTMLElement | null = null;
+    let node: Node | null = range.startContainer;
+    while (node && node !== container) {
+      if (node instanceof HTMLElement && node.classList.contains('textLayer')) {
+        pageEl = node.closest('[data-page]') as HTMLElement;
+        break;
+      }
+      node = node.parentNode;
+    }
+    if (!pageEl) return;
+
+    const pageNumber = parseInt(pageEl.getAttribute('data-page') || '0', 10);
+    if (!pageNumber) return;
+
+    const pageRect = pageEl.getBoundingClientRect();
+    const pageW = pageRect.width;
+    const pageH = pageRect.height;
+
+    // Get all client rects from the range
+    const clientRects = range.getClientRects();
+    const rects: { x: number; y: number; width: number; height: number }[] = [];
+    for (let i = 0; i < clientRects.length; i++) {
+      const r = clientRects[i];
+      rects.push({
+        x: (r.left - pageRect.left) / pageW,
+        y: (r.top - pageRect.top) / pageH,
+        width: r.width / pageW,
+        height: r.height / pageH,
+      });
+    }
+
+    if (rects.length === 0) return;
+
+    this.pdfViewer.addEditorAnnotation({
+      type: 'highlight',
+      pageNumber,
+      rects,
+      color: this.pdfViewer.highlightColor(),
+      opacity: 0.4,
+    });
+
+    selection.removeAllRanges();
+  };
+
+  onEditorPointerDown(event: PointerEvent, pageNumber: number): void {
+    const mode = this.editorMode();
+    const target = event.currentTarget as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+
+    if (mode === 'freetext') {
+      this.createFreetextEditor(pageNumber, x, y, target);
+    } else if (mode === 'ink') {
+      this.inkDrawing = true;
+      this.inkCurrentPage = pageNumber;
+      this.inkCurrentStroke = [{ x, y }];
+      target.setPointerCapture(event.pointerId);
+
+      // Start drawing preview
+      const canvas = this.getOrCreateInkCanvas(target);
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.strokeStyle = this.pdfViewer.inkColor();
+        ctx.lineWidth = this.pdfViewer.inkThickness() * this.scaledValue();
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.globalAlpha = this.pdfViewer.inkOpacity();
+        ctx.beginPath();
+        ctx.moveTo(event.clientX - rect.left, event.clientY - rect.top);
+      }
+    } else if (mode === 'stamp') {
+      this.openStampFileInput(pageNumber, x, y);
+    }
+  }
+
+  onEditorPointerMove(event: PointerEvent, _pageNumber: number): void {
+    if (!this.inkDrawing) return;
+
+    const target = event.currentTarget as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+
+    this.inkCurrentStroke.push({ x, y });
+
+    // Draw preview
+    const canvas = target.querySelector(
+      '.ink-preview-canvas',
+    ) as HTMLCanvasElement;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.lineTo(event.clientX - rect.left, event.clientY - rect.top);
+        ctx.stroke();
+      }
+    }
+  }
+
+  onEditorPointerUp(event: PointerEvent, _pageNumber: number): void {
+    if (!this.inkDrawing) return;
+    this.inkDrawing = false;
+
+    const target = event.currentTarget as HTMLElement;
+    target.releasePointerCapture(event.pointerId);
+
+    // Remove preview canvas
+    const canvas = target.querySelector('.ink-preview-canvas');
+    canvas?.remove();
+
+    if (this.inkCurrentStroke.length < 2) return;
+
+    this.pdfViewer.addEditorAnnotation({
+      type: 'ink',
+      pageNumber: this.inkCurrentPage,
+      strokes: [this.inkCurrentStroke],
+      color: this.pdfViewer.inkColor(),
+      strokeWidth: this.pdfViewer.inkThickness(),
+      opacity: this.pdfViewer.inkOpacity(),
+    });
+
+    this.inkCurrentStroke = [];
+  }
+
+  private getOrCreateInkCanvas(container: HTMLElement): HTMLCanvasElement {
+    let canvas = container.querySelector(
+      '.ink-preview-canvas',
+    ) as HTMLCanvasElement;
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.className = 'ink-preview-canvas';
+      canvas.style.position = 'absolute';
+      canvas.style.inset = '0';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      canvas.style.pointerEvents = 'none';
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+      container.appendChild(canvas);
+    }
+    return canvas;
+  }
+
+  private createFreetextEditor(
+    pageNumber: number,
+    x: number,
+    y: number,
+    container: HTMLElement,
+  ): void {
+    const div = document.createElement('div');
+    div.contentEditable = 'true';
+    div.className = 'editor-freetext';
+    div.style.position = 'absolute';
+    div.style.left = `${x * 100}%`;
+    div.style.top = `${y * 100}%`;
+    div.style.fontSize = `${this.pdfViewer.freetextSize() * this.scaledValue()}px`;
+    div.style.color = this.pdfViewer.freetextColor();
+    div.style.minWidth = '20px';
+    div.style.minHeight = '1em';
+    div.style.outline = '2px solid #6b9edd';
+    div.style.padding = '2px 4px';
+    div.style.background = 'rgba(255,255,255,0.8)';
+    div.style.zIndex = '10';
+    div.style.whiteSpace = 'pre-wrap';
+    div.style.lineHeight = '1.2';
+    container.appendChild(div);
+    div.focus();
+
+    const save = (): void => {
+      const text = div.textContent?.trim() ?? '';
+      div.remove();
+      if (!text) return;
+
+      this.pdfViewer.addEditorAnnotation({
+        type: 'freetext',
+        pageNumber,
+        x,
+        y,
+        text,
+        fontSize: this.pdfViewer.freetextSize(),
+        fontColor: this.pdfViewer.freetextColor(),
+      });
+    };
+
+    div.addEventListener('blur', save);
+    div.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        div.removeEventListener('blur', save);
+        div.remove();
+      } else if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        div.blur();
+      }
+    });
+  }
+
+  private openStampFileInput(pageNumber: number, x: number, y: number): void {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = () => {
+      const file = input.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          // Scale image to ~30% of page width
+          const maxW = 0.3;
+          const aspect = img.height / img.width;
+          const w = maxW;
+          const h = maxW * aspect;
+
+          this.pdfViewer.addEditorAnnotation({
+            type: 'stamp',
+            pageNumber,
+            x,
+            y,
+            imageDataUrl: reader.result as string,
+            width: w,
+            height: h,
+          });
+        };
+        img.src = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    };
+    input.click();
+  }
+
+  private renderEditorAnnotations(
+    annotations: import('./pdf-viewer-types').PdfEditorAnnotation[],
+    scale: number,
+  ): void {
+    const container = this.scrollContainer()?.nativeElement;
+    if (!container) return;
+
+    // Clear all existing editor annotations
+    container
+      .querySelectorAll('.editor-annotation')
+      .forEach((el) => el.remove());
+
+    for (const ann of annotations) {
+      const editorLayer = container.querySelector(
+        `[data-editorlayer-page="${ann.pageNumber}"]`,
+      ) as HTMLElement;
+      if (!editorLayer) continue;
+
+      if (ann.type === 'highlight' && ann.rects) {
+        for (const rect of ann.rects) {
+          const div = document.createElement('div');
+          div.className = 'editor-annotation editor-highlight';
+          div.style.position = 'absolute';
+          div.style.left = `${rect.x * 100}%`;
+          div.style.top = `${rect.y * 100}%`;
+          div.style.width = `${rect.width * 100}%`;
+          div.style.height = `${rect.height * 100}%`;
+          div.style.background = ann.color || '#FFFF00';
+          div.style.opacity = String(ann.opacity ?? 0.4);
+          div.style.mixBlendMode = 'multiply';
+          div.style.pointerEvents = 'none';
+          editorLayer.appendChild(div);
+        }
+      } else if (ann.type === 'freetext') {
+        const div = document.createElement('div');
+        div.className = 'editor-annotation editor-freetext-rendered';
+        div.style.position = 'absolute';
+        div.style.left = `${(ann.x ?? 0) * 100}%`;
+        div.style.top = `${(ann.y ?? 0) * 100}%`;
+        div.style.fontSize = `${(ann.fontSize ?? 12) * scale}px`;
+        div.style.color = ann.fontColor || '#000';
+        div.style.whiteSpace = 'pre-wrap';
+        div.style.lineHeight = '1.2';
+        div.style.pointerEvents = 'none';
+        div.textContent = ann.text || '';
+        editorLayer.appendChild(div);
+      } else if (ann.type === 'ink' && ann.strokes) {
+        const canvas = document.createElement('canvas');
+        canvas.className = 'editor-annotation editor-ink';
+        canvas.style.position = 'absolute';
+        canvas.style.inset = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.width = editorLayer.clientWidth;
+        canvas.height = editorLayer.clientHeight;
+        editorLayer.appendChild(canvas);
+
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.strokeStyle = ann.color || '#000';
+          ctx.lineWidth = (ann.strokeWidth ?? 1) * scale;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.globalAlpha = ann.opacity ?? 1;
+
+          for (const stroke of ann.strokes) {
+            if (stroke.length < 2) continue;
+            ctx.beginPath();
+            ctx.moveTo(stroke[0].x * canvas.width, stroke[0].y * canvas.height);
+            for (let i = 1; i < stroke.length; i++) {
+              ctx.lineTo(
+                stroke[i].x * canvas.width,
+                stroke[i].y * canvas.height,
+              );
+            }
+            ctx.stroke();
+          }
+        }
+      } else if (ann.type === 'stamp' && ann.imageDataUrl) {
+        const img = document.createElement('img');
+        img.className = 'editor-annotation editor-stamp';
+        img.style.position = 'absolute';
+        img.style.left = `${(ann.x ?? 0) * 100}%`;
+        img.style.top = `${(ann.y ?? 0) * 100}%`;
+        img.style.width = `${(ann.width ?? 0.3) * 100}%`;
+        img.style.pointerEvents = 'none';
+        img.src = ann.imageDataUrl;
+        img.alt = 'Stamp annotation';
+        editorLayer.appendChild(img);
       }
     }
   }

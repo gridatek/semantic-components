@@ -36,6 +36,31 @@ export interface PdfPageMatchInfo {
   matchesLength: number[];
 }
 
+export type PdfEditorMode = 'none' | 'highlight' | 'freetext' | 'ink' | 'stamp';
+
+export interface PdfEditorAnnotation {
+  id: string;
+  type: 'highlight' | 'freetext' | 'ink' | 'stamp';
+  pageNumber: number;
+  // Highlight: array of rects relative to the page (0-1 normalized)
+  rects?: { x: number; y: number; width: number; height: number }[];
+  color?: string;
+  opacity?: number;
+  // FreeText
+  text?: string;
+  x?: number;
+  y?: number;
+  fontSize?: number;
+  fontColor?: string;
+  // Ink: array of strokes, each stroke is array of {x,y} points (0-1 normalized)
+  strokes?: { x: number; y: number }[][];
+  strokeWidth?: number;
+  // Stamp
+  imageDataUrl?: string;
+  width?: number;
+  height?: number;
+}
+
 export const ZOOM_LEVELS: { label: string; value: PdfZoomLevel }[] = [
   { label: 'Auto', value: 'auto' },
   { label: 'Actual Size', value: 'page-actual' },

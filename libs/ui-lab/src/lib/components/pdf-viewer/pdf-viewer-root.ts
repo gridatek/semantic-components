@@ -15,6 +15,8 @@ import { cn } from '@semantic-components/ui';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
 import type {
+  PdfEditorAnnotation,
+  PdfEditorMode,
   PdfErrorEvent,
   PdfFindState,
   PdfLoadEvent,
@@ -88,6 +90,21 @@ export class ScPdfViewerRoot {
   readonly findTrigger = signal(0);
 
   private pageTexts: string[] = [];
+
+  // Editor state
+  readonly editorMode = signal<PdfEditorMode>('none');
+  readonly editorAnnotations = signal<PdfEditorAnnotation[]>([]);
+  readonly editorTrigger = signal(0);
+
+  // Editor params
+  readonly highlightColor = signal('#FFFF00');
+  readonly freetextColor = signal('#000000');
+  readonly freetextSize = signal(12);
+  readonly inkColor = signal('#000000');
+  readonly inkThickness = signal(1);
+  readonly inkOpacity = signal(1);
+
+  private editorIdCounter = 0;
 
   readonly findResultsMessage = computed(() => {
     const total = this.findTotalMatches();
@@ -525,5 +542,26 @@ export class ScPdfViewerRoot {
       }
       count += allMatches[p].matches.length;
     }
+  }
+
+  // Editor methods
+  setEditorMode(mode: PdfEditorMode): void {
+    this.editorMode.set(this.editorMode() === mode ? 'none' : mode);
+  }
+
+  addEditorAnnotation(annotation: Omit<PdfEditorAnnotation, 'id'>): void {
+    const id = `editor-${++this.editorIdCounter}`;
+    this.editorAnnotations.update((list) => [...list, { ...annotation, id }]);
+    this.editorTrigger.update((v) => v + 1);
+  }
+
+  removeEditorAnnotation(id: string): void {
+    this.editorAnnotations.update((list) => list.filter((a) => a.id !== id));
+    this.editorTrigger.update((v) => v + 1);
+  }
+
+  clearEditorAnnotations(): void {
+    this.editorAnnotations.set([]);
+    this.editorTrigger.update((v) => v + 1);
   }
 }
