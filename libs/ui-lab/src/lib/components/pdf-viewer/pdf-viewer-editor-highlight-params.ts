@@ -13,62 +13,184 @@ const HIGHLIGHT_COLORS = [
   '#FFFF00',
   '#00FF00',
   '#00FFFF',
-  '#FF00FF',
-  '#FF6600',
+  '#FF69B4',
   '#FF0000',
 ];
 
 @Component({
   selector: 'sc-pdf-viewer-editor-highlight-params',
   template: `
-    <div class="flex flex-col gap-2 p-2">
-      <label class="text-xs text-[#bbb]">Color</label>
-      <div class="flex gap-1">
-        @for (color of colors; track color) {
-          <button
-            type="button"
-            class="size-6 rounded-full border-2"
-            [style.background]="color"
-            [style.border-color]="
-              pdfViewer.highlightColor() === color ? '#fff' : 'transparent'
-            "
-            (click)="pdfViewer.highlightColor.set(color)"
-            [attr.aria-label]="'Color ' + color"
-          ></button>
-        }
-        <input
-          type="color"
-          class="size-6 cursor-pointer rounded border-0 bg-transparent p-0"
-          [value]="pdfViewer.highlightColor()"
-          (input)="pdfViewer.highlightColor.set($any($event.target).value)"
-          aria-label="Custom color"
-        />
+    <div class="flex flex-col gap-4 p-3">
+      <!-- Color picker -->
+      <div class="flex flex-col gap-2">
+        <span class="text-[13px] leading-[150%] font-normal">
+          Highlight color
+        </span>
+        <div class="flex items-center justify-between">
+          @for (color of colors; track color) {
+            <button
+              type="button"
+              class="highlight-color-swatch"
+              [class.highlight-color-swatch-active]="
+                pdfViewer.highlightColor() === color
+              "
+              [style.--swatch-color]="color"
+              (click)="pdfViewer.highlightColor.set(color)"
+              [attr.aria-label]="'Highlight color ' + color"
+              [attr.aria-pressed]="pdfViewer.highlightColor() === color"
+            ></button>
+          }
+        </div>
       </div>
 
-      <label class="text-xs text-[#bbb]">
-        Thickness: {{ pdfViewer.highlightThickness() }}
-      </label>
-      <input
-        type="range"
-        min="8"
-        max="24"
-        [value]="pdfViewer.highlightThickness()"
-        (input)="pdfViewer.highlightThickness.set(+$any($event.target).value)"
-        class="w-full"
-      />
+      <!-- Thickness -->
+      <div class="flex flex-col items-center gap-1 self-stretch">
+        <label
+          for="editorFreeHighlightThickness"
+          class="self-start text-[13px] leading-[150%] font-normal"
+        >
+          Thickness
+        </label>
+        <div class="flex items-center justify-between gap-2 self-stretch">
+          <span class="block size-2 rounded-full bg-[#80808e]"></span>
+          <input
+            id="editorFreeHighlightThickness"
+            type="range"
+            min="8"
+            max="24"
+            step="1"
+            [value]="pdfViewer.highlightThickness()"
+            (input)="
+              pdfViewer.highlightThickness.set(+$any($event.target).value)
+            "
+            class="highlight-thickness-slider h-3.5 flex-1"
+          />
+          <span class="block size-6 rounded-full bg-[#80808e]"></span>
+        </div>
+      </div>
 
-      <label class="flex items-center gap-2 text-xs text-[#bbb]">
-        <input
-          type="checkbox"
-          [checked]="pdfViewer.highlightShowAll()"
-          (change)="
+      <!-- Divider -->
+      <div class="h-px w-full bg-[#8f8f9d]"></div>
+
+      <!-- Show all toggle -->
+      <div class="flex items-center justify-between self-stretch">
+        <span class="text-[13px] leading-[150%] font-normal">Show all</span>
+        <button
+          type="button"
+          role="switch"
+          class="highlight-toggle"
+          [class.highlight-toggle-on]="pdfViewer.highlightShowAll()"
+          [attr.aria-checked]="pdfViewer.highlightShowAll()"
+          (click)="
             pdfViewer.highlightShowAll.set(!pdfViewer.highlightShowAll())
           "
-          class="accent-[#6b9edd]"
-        />
-        Show All
-      </label>
+        >
+          <span class="highlight-toggle-thumb"></span>
+        </button>
+      </div>
     </div>
+  `,
+  styles: `
+    .highlight-color-swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background-color: var(--swatch-color);
+      cursor: pointer;
+      outline: none;
+      padding: 0;
+      transition: border-color 0.15s;
+
+      &:hover {
+        border-color: rgba(0, 0, 0, 0.3);
+      }
+
+      &:focus-visible {
+        outline: 2px solid #0060df;
+        outline-offset: 2px;
+      }
+    }
+
+    .highlight-color-swatch-active {
+      border-color: #0060df !important;
+      box-shadow: 0 0 0 1px #0060df;
+    }
+
+    .highlight-thickness-slider {
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+
+      &::-webkit-slider-runnable-track {
+        height: 4px;
+        border-radius: 2px;
+        background: #80808e;
+      }
+
+      &::-moz-range-track {
+        height: 4px;
+        border-radius: 2px;
+        background: #80808e;
+      }
+
+      &::-webkit-slider-thumb {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #0060df;
+        margin-top: -6px;
+        border: none;
+      }
+
+      &::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #0060df;
+        border: none;
+      }
+    }
+
+    .highlight-toggle {
+      position: relative;
+      width: 32px;
+      height: 16px;
+      border-radius: 8px;
+      border: 1px solid #8f8f9d;
+      background: #80808e;
+      cursor: pointer;
+      padding: 0;
+      transition:
+        background-color 0.2s,
+        border-color 0.2s;
+
+      &:focus-visible {
+        outline: 2px solid #0060df;
+        outline-offset: 2px;
+      }
+    }
+
+    .highlight-toggle-on {
+      background: #0060df;
+      border-color: #0060df;
+    }
+
+    .highlight-toggle-thumb {
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.2s;
+
+      .highlight-toggle-on & {
+        transform: translateX(16px);
+      }
+    }
   `,
   host: {
     'data-slot': 'pdf-viewer-editor-highlight-params',

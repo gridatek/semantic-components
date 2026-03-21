@@ -214,15 +214,23 @@ interface AttachmentData {
                   type="button"
                   class="pdfjs-btn"
                   aria-label="Highlight"
+                  aria-haspopup="true"
                   [attr.aria-pressed]="viewer.editorMode() === 'highlight'"
+                  [attr.aria-expanded]="
+                    viewer.editorMode() === 'highlight' && editorParamsOpen()
+                  "
                   [class.pdfjs-btn-active]="viewer.editorMode() === 'highlight'"
-                  (click)="viewer.setEditorMode('highlight')"
+                  (click)="selectEditorTool('highlight')"
                 >
                   <svg siHighlighterIcon class="size-4"></svg>
                 </button>
                 @if (
                   viewer.editorMode() === 'highlight' && editorParamsOpen()
                 ) {
+                  <div
+                    class="fixed inset-0 z-40"
+                    (click)="editorParamsOpen.set(false)"
+                  ></div>
                   <div class="pdfjs-editor-params">
                     <sc-pdf-viewer-editor-highlight-params />
                   </div>
@@ -235,13 +243,21 @@ interface AttachmentData {
                   type="button"
                   class="pdfjs-btn"
                   aria-label="Free Text"
+                  aria-haspopup="true"
                   [attr.aria-pressed]="viewer.editorMode() === 'freetext'"
+                  [attr.aria-expanded]="
+                    viewer.editorMode() === 'freetext' && editorParamsOpen()
+                  "
                   [class.pdfjs-btn-active]="viewer.editorMode() === 'freetext'"
-                  (click)="viewer.setEditorMode('freetext')"
+                  (click)="selectEditorTool('freetext')"
                 >
                   <svg siTypeIcon class="size-4"></svg>
                 </button>
                 @if (viewer.editorMode() === 'freetext' && editorParamsOpen()) {
+                  <div
+                    class="fixed inset-0 z-40"
+                    (click)="editorParamsOpen.set(false)"
+                  ></div>
                   <div class="pdfjs-editor-params">
                     <sc-pdf-viewer-editor-freetext-params />
                   </div>
@@ -254,13 +270,21 @@ interface AttachmentData {
                   type="button"
                   class="pdfjs-btn"
                   aria-label="Draw"
+                  aria-haspopup="true"
                   [attr.aria-pressed]="viewer.editorMode() === 'ink'"
+                  [attr.aria-expanded]="
+                    viewer.editorMode() === 'ink' && editorParamsOpen()
+                  "
                   [class.pdfjs-btn-active]="viewer.editorMode() === 'ink'"
-                  (click)="viewer.setEditorMode('ink')"
+                  (click)="selectEditorTool('ink')"
                 >
                   <svg siPenIcon class="size-4"></svg>
                 </button>
                 @if (viewer.editorMode() === 'ink' && editorParamsOpen()) {
+                  <div
+                    class="fixed inset-0 z-40"
+                    (click)="editorParamsOpen.set(false)"
+                  ></div>
                   <div class="pdfjs-editor-params">
                     <sc-pdf-viewer-editor-ink-params />
                   </div>
@@ -289,19 +313,6 @@ interface AttachmentData {
                 (click)="viewer.setEditorMode('signature')"
               >
                 <svg siPenToolIcon class="size-4"></svg>
-              </button>
-
-              <!-- Toggle params -->
-              <button
-                type="button"
-                class="pdfjs-btn ml-0.5"
-                aria-label="Editor Settings"
-                [class.pdfjs-btn-active]="editorParamsOpen()"
-                (click)="editorParamsOpen.set(!editorParamsOpen())"
-              >
-                <svg viewBox="0 0 16 16" class="size-3" fill="currentColor">
-                  <path d="M8 12l-6-6h12z" />
-                </svg>
               </button>
             </div>
 
@@ -953,15 +964,16 @@ interface AttachmentData {
       .pdfjs-editor-params {
         position: absolute;
         top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 30;
+        right: -4px;
+        z-index: 50;
         margin-top: 4px;
-        min-width: 180px;
-        background: #474747;
-        border: 1px solid #333;
-        border-radius: 4px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        min-width: 220px;
+        width: max-content;
+        background: #fff;
+        color: #15141a;
+        border: 1px solid #cfcfd8;
+        border-radius: 6px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
       }
 
       /* Page info input */
@@ -1338,6 +1350,19 @@ export class PdfViewerDemo {
   } | null>(null);
 
   private currentBlobUrl: string | null = null;
+
+  selectEditorTool(mode: 'highlight' | 'freetext' | 'ink'): void {
+    const viewer = this.viewerRef();
+    if (!viewer) return;
+
+    if (viewer.editorMode() === mode) {
+      // Already active — toggle params
+      this.editorParamsOpen.set(!this.editorParamsOpen());
+    } else {
+      viewer.setEditorMode(mode);
+      this.editorParamsOpen.set(true);
+    }
+  }
 
   // Bookmark URL for current view
   readonly bookmarkUrl = computed(() => {
