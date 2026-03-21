@@ -10,6 +10,7 @@ import {
   inject,
   input,
   signal,
+  untracked,
   viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
@@ -145,7 +146,7 @@ export class ScPdfViewerCanvas {
     // Navigate to page when navigateTrigger changes
     effect(() => {
       this.navigateTrigger();
-      const page = this.pdfViewer.currentPage();
+      const page = untracked(() => this.pdfViewer.currentPage());
 
       setTimeout(() => {
         const container = this.scrollContainer()?.nativeElement;
