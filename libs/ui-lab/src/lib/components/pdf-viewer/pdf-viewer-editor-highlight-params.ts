@@ -34,7 +34,7 @@ const HIGHLIGHT_COLORS = [
               [class.highlight-color-swatch-active]="
                 pdfViewer.highlightColor() === color
               "
-              [style.--swatch-color]="color"
+              [style.background-color]="color"
               (click)="pdfViewer.highlightColor.set(color)"
               [attr.aria-label]="'Highlight color ' + color"
               [attr.aria-pressed]="pdfViewer.highlightColor() === color"
@@ -96,7 +96,7 @@ const HIGHLIGHT_COLORS = [
       height: 24px;
       border-radius: 50%;
       border: 2px solid transparent;
-      background-color: var(--swatch-color);
+      /* background-color set via [style.background-color] binding */
       cursor: pointer;
       outline: none;
       padding: 0;

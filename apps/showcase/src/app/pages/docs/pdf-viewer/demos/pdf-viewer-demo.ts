@@ -917,7 +917,8 @@ interface AttachmentData {
   styles: `
     .pdfjs-viewer {
       /* Toolbar buttons (library + custom) */
-      [data-slot='pdf-viewer-toolbar'] button:not(.pdfjs-menu-item),
+      [data-slot='pdf-viewer-toolbar']
+        button:not(.pdfjs-menu-item):not(.pdfjs-editor-params *),
       .pdfjs-btn {
         color: #d1d5db;
         background: transparent;
