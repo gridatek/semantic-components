@@ -16,8 +16,10 @@ import type { PDFDocumentProxy } from 'pdfjs-dist';
 import { GlobalWorkerOptions, getDocument, version } from 'pdfjs-dist';
 import type {
   PdfErrorEvent,
+  PdfFindState,
   PdfLoadEvent,
   PdfPageChangeEvent,
+  PdfPageMatchInfo,
   PdfZoomChangeEvent,
   PdfZoomLevel,
 } from './pdf-viewer-types';
@@ -71,6 +73,31 @@ export class ScPdfViewerRoot {
 
   // Navigation trigger — incremented to signal canvas to scroll to currentPage
   readonly navigateTrigger = signal(0);
+
+  // Find state
+  readonly findOpen = signal(false);
+  readonly findQuery = signal('');
+  readonly findMatchCase = signal(false);
+  readonly findHighlightAll = signal(true);
+  readonly findEntireWord = signal(false);
+  readonly findState = signal<PdfFindState>('idle');
+  readonly findCurrentMatchIndex = signal(0);
+  readonly findTotalMatches = signal(0);
+  readonly pageMatches = signal<PdfPageMatchInfo[]>([]);
+  readonly findTrigger = signal(0);
+
+  private pageTexts: string[] = [];
+
+  readonly findResultsMessage = computed(() => {
+    const total = this.findTotalMatches();
+    const current = this.findCurrentMatchIndex();
+    const state = this.findState();
+
+    if (state === 'idle' || !this.findQuery()) return '';
+    if (state === 'not-found') return 'Phrase not found';
+    if (total === 0) return 'Phrase not found';
+    return `${current + 1} of ${total}`;
+  });
 
   // Container element ref for fullscreen
   private containerElement: ElementRef<HTMLElement> | null = null;
@@ -278,5 +305,173 @@ export class ScPdfViewerRoot {
 
   setTotalPages(total: number): void {
     this.totalPages.set(total);
+  }
+
+  // Find methods
+  toggleFind(): void {
+    const open = !this.findOpen();
+    this.findOpen.set(open);
+    if (!open) {
+      this.clearFind();
+    }
+  }
+
+  async find(query: string): Promise<void> {
+    this.findQuery.set(query);
+    if (!query) {
+      this.clearFind();
+      return;
+    }
+
+    const doc = this.pdfDocument();
+    if (!doc) return;
+
+    this.findState.set('pending');
+
+    // Extract text if needed
+    if (this.pageTexts.length !== doc.numPages) {
+      this.pageTexts = [];
+      for (let i = 1; i <= doc.numPages; i++) {
+        try {
+          const page = await doc.getPage(i);
+          const textContent = await page.getTextContent();
+          const text = (textContent.items as { str?: string }[])
+            .filter((item) => item.str !== undefined)
+            .map((item) => item.str)
+            .join('');
+          this.pageTexts.push(text);
+        } catch {
+          this.pageTexts.push('');
+        }
+      }
+    }
+
+    const matchCase = this.findMatchCase();
+    const entireWord = this.findEntireWord();
+    const allMatches: PdfPageMatchInfo[] = [];
+    let total = 0;
+
+    for (const pageText of this.pageTexts) {
+      const matches: number[] = [];
+      const matchesLength: number[] = [];
+      const searchIn = matchCase ? pageText : pageText.toLowerCase();
+      const searchFor = matchCase ? query : query.toLowerCase();
+
+      if (entireWord) {
+        const escaped = searchFor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const flags = matchCase ? 'g' : 'gi';
+        const regex = new RegExp(`\\b${escaped}\\b`, flags);
+        let m;
+        while ((m = regex.exec(pageText)) !== null) {
+          matches.push(m.index);
+          matchesLength.push(m[0].length);
+        }
+      } else {
+        let idx = 0;
+        while ((idx = searchIn.indexOf(searchFor, idx)) !== -1) {
+          matches.push(idx);
+          matchesLength.push(searchFor.length);
+          idx += searchFor.length;
+        }
+      }
+
+      total += matches.length;
+      allMatches.push({ matches, matchesLength });
+    }
+
+    this.pageMatches.set(allMatches);
+    this.findTotalMatches.set(total);
+
+    if (total === 0) {
+      this.findState.set('not-found');
+      this.findCurrentMatchIndex.set(0);
+    } else {
+      // Find first match on or after current page
+      const currentPageIdx = this.currentPage() - 1;
+      let globalIdx = 0;
+      let found = false;
+
+      for (let i = 0; i < allMatches.length; i++) {
+        const pageIdx = (currentPageIdx + i) % allMatches.length;
+        if (allMatches[pageIdx].matches.length > 0) {
+          this.findCurrentMatchIndex.set(globalIdx);
+          this.goToPage(pageIdx + 1);
+          found = true;
+          break;
+        }
+        // Count matches in pages before this one (in order from currentPage)
+        if (!found) {
+          // Recalculate: count all matches before this page in document order
+        }
+      }
+
+      // Compute correct global index
+      if (found) {
+        let idx = 0;
+        const currentMatch = this.findCurrentMatchIndex();
+        // Recount to find the right global index
+        idx = 0;
+        for (let p = 0; p < allMatches.length; p++) {
+          const pageIdx = (currentPageIdx + p) % allMatches.length;
+          if (allMatches[pageIdx].matches.length > 0) {
+            // Calculate global index for this page's first match
+            let gi = 0;
+            for (let j = 0; j < pageIdx; j++) {
+              gi += allMatches[j].matches.length;
+            }
+            this.findCurrentMatchIndex.set(gi);
+            break;
+          }
+        }
+      }
+
+      this.findState.set('found');
+    }
+
+    this.findTrigger.update((v) => v + 1);
+  }
+
+  findNext(): void {
+    const total = this.findTotalMatches();
+    if (total === 0) return;
+
+    const next = (this.findCurrentMatchIndex() + 1) % total;
+    this.findCurrentMatchIndex.set(next);
+    this.scrollToMatch(next);
+    this.findState.set(next === 0 ? 'wrapped' : 'found');
+    this.findTrigger.update((v) => v + 1);
+  }
+
+  findPrevious(): void {
+    const total = this.findTotalMatches();
+    if (total === 0) return;
+
+    const prev = (this.findCurrentMatchIndex() - 1 + total) % total;
+    this.findCurrentMatchIndex.set(prev);
+    this.scrollToMatch(prev);
+    this.findState.set(prev === total - 1 ? 'wrapped' : 'found');
+    this.findTrigger.update((v) => v + 1);
+  }
+
+  clearFind(): void {
+    this.findQuery.set('');
+    this.findState.set('idle');
+    this.findCurrentMatchIndex.set(0);
+    this.findTotalMatches.set(0);
+    this.pageMatches.set([]);
+    this.pageTexts = [];
+    this.findTrigger.update((v) => v + 1);
+  }
+
+  private scrollToMatch(globalIndex: number): void {
+    const allMatches = this.pageMatches();
+    let count = 0;
+    for (let p = 0; p < allMatches.length; p++) {
+      if (count + allMatches[p].matches.length > globalIndex) {
+        this.goToPage(p + 1);
+        return;
+      }
+      count += allMatches[p].matches.length;
+    }
   }
 }

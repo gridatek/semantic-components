@@ -34,10 +34,20 @@ export { ScPdfViewerError } from './pdf-viewer-error';
 export { ScPdfViewerEmpty } from './pdf-viewer-empty';
 export { ScPdfViewerRetry } from './pdf-viewer-retry';
 
+// Find components
+export { ScPdfViewerFindToggle } from './pdf-viewer-find-toggle';
+export { ScPdfViewerFindbar } from './pdf-viewer-findbar';
+export { ScPdfViewerFindInput } from './pdf-viewer-find-input';
+export { ScPdfViewerFindNext } from './pdf-viewer-find-next';
+export { ScPdfViewerFindPrevious } from './pdf-viewer-find-previous';
+export { ScPdfViewerFindResultsInfo } from './pdf-viewer-find-results-info';
+
 // Types
 export { ZOOM_LEVELS } from './pdf-viewer-types';
 export type {
   PdfZoomLevel,
+  PdfFindState,
+  PdfPageMatchInfo,
   PdfLoadEvent,
   PdfPageChangeEvent,
   PdfZoomChangeEvent,

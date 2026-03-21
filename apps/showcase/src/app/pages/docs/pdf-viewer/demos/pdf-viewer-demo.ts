@@ -18,6 +18,12 @@ import {
   ScPdfViewerDownload,
   ScPdfViewerEmpty,
   ScPdfViewerError,
+  ScPdfViewerFindInput,
+  ScPdfViewerFindNext,
+  ScPdfViewerFindPrevious,
+  ScPdfViewerFindResultsInfo,
+  ScPdfViewerFindToggle,
+  ScPdfViewerFindbar,
   ScPdfViewerLoading,
   ScPdfViewerNav,
   ScPdfViewerNextPage,
@@ -73,6 +79,12 @@ interface ThumbnailData {
     ScPdfViewerError,
     ScPdfViewerEmpty,
     ScPdfViewerCanvas,
+    ScPdfViewerFindToggle,
+    ScPdfViewerFindbar,
+    ScPdfViewerFindInput,
+    ScPdfViewerFindNext,
+    ScPdfViewerFindPrevious,
+    ScPdfViewerFindResultsInfo,
     SiChevronUpIcon,
     SiChevronDownIcon,
     SiDownloadIcon,
@@ -115,13 +127,7 @@ interface ThumbnailData {
             <div class="pdfjs-btn-spacer"></div>
 
             <!-- Find toggle -->
-            <button
-              type="button"
-              class="pdfjs-btn"
-              [attr.aria-pressed]="findBarOpen()"
-              aria-label="Find in Document"
-              (click)="findBarOpen.set(!findBarOpen())"
-            >
+            <button scPdfViewerFindToggle class="pdfjs-btn">
               <svg siSearchIcon class="size-4"></svg>
             </button>
 
@@ -383,31 +389,18 @@ interface ThumbnailData {
           />
 
           <!-- Find bar -->
-          @if (findBarOpen()) {
-            <div class="pdfjs-findbar">
+          @if (viewer.findOpen()) {
+            <div scPdfViewerFindbar class="pdfjs-findbar">
               <div class="pdfjs-findbar-group">
                 <input
-                  #findInput
+                  scPdfViewerFindInput
                   type="text"
                   class="pdfjs-findbar-input"
-                  placeholder="Find in document…"
-                  (input)="onFindInput(findInput.value)"
-                  (keydown.enter)="findNext()"
                 />
-                <button
-                  type="button"
-                  class="pdfjs-btn"
-                  aria-label="Find Previous"
-                  (click)="findPrevious()"
-                >
+                <button scPdfViewerFindPrevious class="pdfjs-btn">
                   <svg siChevronUpIcon class="size-3.5"></svg>
                 </button>
-                <button
-                  type="button"
-                  class="pdfjs-btn"
-                  aria-label="Find Next"
-                  (click)="findNext()"
-                >
+                <button scPdfViewerFindNext class="pdfjs-btn">
                   <svg siChevronDownIcon class="size-3.5"></svg>
                 </button>
               </div>
@@ -415,18 +408,18 @@ interface ThumbnailData {
                 <label class="pdfjs-findbar-label">
                   <input
                     type="checkbox"
-                    [checked]="findHighlightAll()"
-                    (change)="findHighlightAll.set(!findHighlightAll())"
+                    [checked]="viewer.findHighlightAll()"
+                    (change)="toggleHighlightAll()"
                   />
                   Highlight All
                 </label>
                 <label class="pdfjs-findbar-label">
                   <input
                     type="checkbox"
-                    [checked]="findMatchCase()"
+                    [checked]="viewer.findMatchCase()"
                     (change)="
-                      findMatchCase.set(!findMatchCase());
-                      onFindInput(findInput.value)
+                      viewer.findMatchCase.set(!viewer.findMatchCase());
+                      viewer.find(viewer.findQuery())
                     "
                   />
                   Match Case
@@ -434,19 +427,20 @@ interface ThumbnailData {
                 <label class="pdfjs-findbar-label">
                   <input
                     type="checkbox"
-                    [checked]="findEntireWord()"
+                    [checked]="viewer.findEntireWord()"
                     (change)="
-                      findEntireWord.set(!findEntireWord());
-                      onFindInput(findInput.value)
+                      viewer.findEntireWord.set(!viewer.findEntireWord());
+                      viewer.find(viewer.findQuery())
                     "
                   />
                   Whole Words
                 </label>
               </div>
               <div class="pdfjs-findbar-group">
-                <span class="pdfjs-findbar-msg">
-                  {{ findResultsMessage() }}
-                </span>
+                <span
+                  scPdfViewerFindResultsInfo
+                  class="pdfjs-findbar-msg"
+                ></span>
               </div>
             </div>
           }
@@ -869,18 +863,10 @@ export class PdfViewerDemo {
   // UI state
   readonly sidebarOpen = signal(false);
   readonly secondaryToolbarOpen = signal(false);
-  readonly findBarOpen = signal(false);
   readonly documentPropertiesOpen = signal(false);
 
   // Thumbnails
   readonly thumbnails = signal<ThumbnailData[]>([]);
-
-  // Find state
-  readonly findMatchCase = signal(false);
-  readonly findHighlightAll = signal(false);
-  readonly findEntireWord = signal(false);
-  readonly findResultsCount = signal(0);
-  readonly findResultsMessage = signal('');
 
   // Secondary toolbar options (UI state)
   readonly cursorTool = signal<'select' | 'hand'>('select');
@@ -905,8 +891,6 @@ export class PdfViewerDemo {
   } | null>(null);
 
   private currentBlobUrl: string | null = null;
-  private pageTexts: string[] = [];
-  private findCurrentPageIndex = 0;
 
   constructor() {
     effect(() => {
@@ -916,7 +900,6 @@ export class PdfViewerDemo {
       const doc = viewer.pdfDocument();
       if (doc) {
         this.renderThumbnails();
-        this.extractText();
       }
     });
 
@@ -940,113 +923,20 @@ export class PdfViewerDemo {
     this.pdfSrc.set(this.currentBlobUrl);
     this.pdfTitle.set(file.name.replace('.pdf', ''));
     this.thumbnails.set([]);
-    this.pageTexts = [];
-    this.findResultsCount.set(0);
-    this.findResultsMessage.set('');
     input.value = '';
   }
 
-  protected onFindInput(query: string): void {
-    if (!query || this.pageTexts.length === 0) {
-      this.findResultsCount.set(0);
-      this.findResultsMessage.set('');
-      this.findCurrentPageIndex = 0;
-      return;
-    }
-
-    const matchCase = this.findMatchCase();
-    const entireWord = this.findEntireWord();
-    let totalMatches = 0;
-
-    for (const pageText of this.pageTexts) {
-      if (entireWord) {
-        const flags = matchCase ? 'g' : 'gi';
-        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const regex = new RegExp(`\\b${escaped}\\b`, flags);
-        const matches = pageText.match(regex);
-        totalMatches += matches ? matches.length : 0;
-      } else {
-        const searchIn = matchCase ? pageText : pageText.toLowerCase();
-        const searchFor = matchCase ? query : query.toLowerCase();
-        let idx = 0;
-        while ((idx = searchIn.indexOf(searchFor, idx)) !== -1) {
-          totalMatches++;
-          idx += searchFor.length;
-        }
-      }
-    }
-
-    this.findResultsCount.set(totalMatches);
-    this.findResultsMessage.set(
-      totalMatches > 0
-        ? `${totalMatches} match${totalMatches !== 1 ? 'es' : ''} found`
-        : 'Phrase not found',
-    );
-  }
-
-  protected findNext(): void {
-    this.navigateFind(1);
-  }
-
-  protected findPrevious(): void {
-    this.navigateFind(-1);
+  protected toggleHighlightAll(): void {
+    const viewer = this.viewerRef();
+    if (!viewer) return;
+    viewer.findHighlightAll.set(!viewer.findHighlightAll());
+    viewer.findTrigger.update((v) => v + 1);
   }
 
   protected openDocumentProperties(): void {
     this.secondaryToolbarOpen.set(false);
     this.loadDocumentProperties();
     this.documentPropertiesOpen.set(true);
-  }
-
-  private navigateFind(direction: number): void {
-    const viewer = this.viewerRef();
-    if (!viewer || this.pageTexts.length === 0) return;
-
-    const query =
-      (document.querySelector('.pdfjs-findbar-input') as HTMLInputElement)
-        ?.value || '';
-    if (!query) return;
-
-    const matchCase = this.findMatchCase();
-    const searchFor = matchCase ? query : query.toLowerCase();
-    const start = this.findCurrentPageIndex;
-
-    for (let i = 1; i <= this.pageTexts.length; i++) {
-      const idx =
-        (start + i * direction + this.pageTexts.length) % this.pageTexts.length;
-      const text = matchCase
-        ? this.pageTexts[idx]
-        : this.pageTexts[idx].toLowerCase();
-
-      if (text.includes(searchFor)) {
-        this.findCurrentPageIndex = idx;
-        viewer.goToPage(idx + 1);
-        return;
-      }
-    }
-  }
-
-  private async extractText(): Promise<void> {
-    const viewer = this.viewerRef();
-    if (!viewer) return;
-
-    const doc = viewer.pdfDocument();
-    if (!doc) return;
-
-    this.pageTexts = [];
-    for (let i = 1; i <= doc.numPages; i++) {
-      try {
-        const page = await doc.getPage(i);
-        const textContent = await page.getTextContent();
-        const text = (textContent.items as { str?: string }[])
-          .filter((item) => item.str !== undefined)
-          .map((item) => item.str)
-          .join(' ');
-        this.pageTexts.push(text);
-      } catch {
-        this.pageTexts.push('');
-      }
-    }
   }
 
   private async loadDocumentProperties(): Promise<void> {

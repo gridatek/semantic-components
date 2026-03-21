@@ -19,6 +19,18 @@ export interface PdfErrorEvent {
   message: string;
 }
 
+export type PdfFindState =
+  | 'idle'
+  | 'found'
+  | 'not-found'
+  | 'wrapped'
+  | 'pending';
+
+export interface PdfPageMatchInfo {
+  matches: number[];
+  matchesLength: number[];
+}
+
 export const ZOOM_LEVELS: { label: string; value: PdfZoomLevel }[] = [
   { label: 'Auto', value: 'auto' },
   { label: 'Page Fit', value: 'page-fit' },

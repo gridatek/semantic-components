@@ -83,10 +83,15 @@ export class ScPdfViewerCanvas {
   readonly rotation = this.pdfViewer.rotation;
   private readonly zoom = this.pdfViewer.zoom;
   private readonly navigateTrigger = this.pdfViewer.navigateTrigger;
+  private readonly findTrigger = this.pdfViewer.findTrigger;
 
   private activeRenderTasks = new Map<number, RenderTask>();
   private activeTextLayers = new Map<number, TextLayer>();
   private renderedPages = new Set<number>();
+  private textLayerData = new Map<
+    number,
+    { divs: HTMLElement[]; texts: string[] }
+  >();
   private observer: IntersectionObserver | null = null;
   private resizeObserver: ResizeObserver | null = null;
   private renderTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -163,6 +168,18 @@ export class ScPdfViewerCanvas {
         if (pageEl) {
           pageEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+      });
+    });
+
+    // Apply find highlights when find state changes
+    effect(() => {
+      this.findTrigger();
+      const allMatches = this.pdfViewer.pageMatches();
+      const highlightAll = this.pdfViewer.findHighlightAll();
+      const currentMatchIndex = this.pdfViewer.findCurrentMatchIndex();
+
+      setTimeout(() => {
+        this.applyHighlights(allMatches, highlightAll, currentMatchIndex);
       });
     });
 
@@ -371,6 +388,22 @@ export class ScPdfViewerCanvas {
         this.activeTextLayers.set(pageNumber, textLayer);
         await textLayer.render();
         this.activeTextLayers.delete(pageNumber);
+
+        // Store text layer data for find highlighting
+        this.textLayerData.set(pageNumber, {
+          divs: [...textLayer.textDivs],
+          texts: [...textLayer.textContentItemsStr],
+        });
+
+        // Apply highlights if a find query is active
+        const allMatches = this.pdfViewer.pageMatches();
+        if (allMatches.length > 0) {
+          this.applyHighlights(
+            allMatches,
+            this.pdfViewer.findHighlightAll(),
+            this.pdfViewer.findCurrentMatchIndex(),
+          );
+        }
       }
     } catch (err) {
       if ((err as { name?: string })?.name !== 'RenderingCancelledException') {
@@ -391,5 +424,133 @@ export class ScPdfViewerCanvas {
       layer.cancel();
     }
     this.activeTextLayers.clear();
+  }
+
+  private applyHighlights(
+    allMatches: import('./pdf-viewer-types').PdfPageMatchInfo[],
+    highlightAll: boolean,
+    currentMatchIndex: number,
+  ): void {
+    // Determine which page/match the current index refers to
+    let currentPage = -1;
+    let currentMatchOnPage = -1;
+    let count = 0;
+    for (let p = 0; p < allMatches.length; p++) {
+      if (count + allMatches[p].matches.length > currentMatchIndex) {
+        currentPage = p;
+        currentMatchOnPage = currentMatchIndex - count;
+        break;
+      }
+      count += allMatches[p].matches.length;
+    }
+
+    // Apply highlights to each rendered page
+    for (const [pageNumber, data] of this.textLayerData) {
+      const pageIdx = pageNumber - 1;
+      const pageMatchInfo = allMatches[pageIdx];
+
+      // Restore original text first
+      this.clearPageHighlights(data);
+
+      if (!pageMatchInfo || pageMatchInfo.matches.length === 0) continue;
+
+      const isSelectedPage = pageIdx === currentPage;
+
+      this.renderPageHighlights(
+        data,
+        pageMatchInfo,
+        highlightAll,
+        isSelectedPage,
+        currentMatchOnPage,
+      );
+    }
+
+    // Scroll selected highlight into view
+    if (currentPage >= 0) {
+      setTimeout(() => {
+        const container = this.scrollContainer()?.nativeElement;
+        if (!container) return;
+        const selected = container.querySelector(
+          '.highlight.selected',
+        ) as HTMLElement;
+        if (selected) {
+          selected.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 50);
+    }
+  }
+
+  private clearPageHighlights(data: {
+    divs: HTMLElement[];
+    texts: string[];
+  }): void {
+    for (let i = 0; i < data.divs.length; i++) {
+      const div = data.divs[i];
+      if (div.querySelector('.highlight')) {
+        div.textContent = data.texts[i];
+      }
+    }
+  }
+
+  private renderPageHighlights(
+    data: { divs: HTMLElement[]; texts: string[] },
+    matchInfo: import('./pdf-viewer-types').PdfPageMatchInfo,
+    highlightAll: boolean,
+    isSelectedPage: boolean,
+    selectedMatchOnPage: number,
+  ): void {
+    // Build a mapping from flat text offset to divIdx + offset within div
+    const divOffsets: { divIdx: number; start: number }[] = [];
+    let flatOffset = 0;
+    for (let i = 0; i < data.texts.length; i++) {
+      divOffsets.push({ divIdx: i, start: flatOffset });
+      flatOffset += data.texts[i].length;
+    }
+
+    // Convert flat match positions to div-relative coordinates
+    for (let m = 0; m < matchInfo.matches.length; m++) {
+      const isSelected = isSelectedPage && m === selectedMatchOnPage;
+      if (!highlightAll && !isSelected) continue;
+
+      const matchStart = matchInfo.matches[m];
+      const matchEnd = matchStart + matchInfo.matchesLength[m];
+
+      // Find which divs this match spans
+      for (let d = 0; d < divOffsets.length; d++) {
+        const divStart = divOffsets[d].start;
+        const divEnd = divStart + data.texts[divOffsets[d].divIdx].length;
+
+        if (matchEnd <= divStart || matchStart >= divEnd) continue;
+
+        const div = data.divs[divOffsets[d].divIdx];
+        const text = data.texts[divOffsets[d].divIdx];
+        const localStart = Math.max(0, matchStart - divStart);
+        const localEnd = Math.min(text.length, matchEnd - divStart);
+
+        // Build new content with highlight spans
+        const before = text.substring(0, localStart);
+        const matched = text.substring(localStart, localEnd);
+        const after = text.substring(localEnd);
+
+        const frag = document.createDocumentFragment();
+        if (before) {
+          frag.appendChild(document.createTextNode(before));
+        }
+
+        const highlightSpan = document.createElement('span');
+        highlightSpan.className = isSelected
+          ? 'highlight selected'
+          : 'highlight';
+        highlightSpan.textContent = matched;
+        frag.appendChild(highlightSpan);
+
+        if (after) {
+          frag.appendChild(document.createTextNode(after));
+        }
+
+        div.textContent = '';
+        div.appendChild(frag);
+      }
+    }
   }
 }
