@@ -358,9 +358,9 @@ export class ScPdfViewerCanvas {
       ) as HTMLDivElement;
       if (textLayerDiv) {
         textLayerDiv.innerHTML = '';
-        const displayViewport = page.getViewport({
-          scale: this.scaledValue(),
-        });
+        const scale = this.scaledValue();
+        const displayViewport = page.getViewport({ scale });
+        textLayerDiv.style.setProperty('--total-scale-factor', String(scale));
         setLayerDimensions(textLayerDiv, displayViewport);
         const textContent = await page.getTextContent();
         const textLayer = new TextLayer({
