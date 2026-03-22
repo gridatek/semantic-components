@@ -37,9 +37,7 @@ import {
   ScComboboxDialog,
   ScComboboxDisplayValue,
   ScComboboxEmpty,
-  ScComboboxIcon,
   ScComboboxInput,
-  ScComboboxInputGroup,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
@@ -48,9 +46,10 @@ import {
   ScComboboxOrigin,
   ScComboboxPopupContainer,
   ScComboboxSearchInput,
-  ScComboboxSearchInputGroup,
-  ScComboboxSearchInputIcon,
   ScComboboxSearchPanel,
+  ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -69,18 +68,17 @@ import {
     ScComboboxDialog,
     ScComboboxDisplayValue,
     ScComboboxEmpty,
-    ScComboboxSearchInputIcon,
     ScComboboxItem,
     ScComboboxItemIndicator,
     ScComboboxItemLabel,
     ScComboboxSearchInput,
-    ScComboboxSearchInputGroup,
-    ScComboboxInputGroup,
     ScComboboxOrigin,
-    ScComboboxIcon,
     ScComboboxList,
     ScComboboxPopupContainer,
     ScComboboxInput,
+    ScInput,
+    ScInputGroup,
+    ScInputGroupAddon,
     FormsModule,
     SiCheckIcon,
     SiChevronsUpDownIcon,
@@ -91,7 +89,7 @@ import {
   template: \`
     <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxOrigin>
-        <div scComboboxInputGroup>
+        <div scInputGroup>
           <span
             scComboboxDisplayValue
             [displayValueFn]="countryDisplayFn"
@@ -104,19 +102,26 @@ import {
           <button scComboboxClear aria-label="Clear selection">
             <svg siXIcon></svg>
           </button>
-          <svg siChevronsUpDownIcon scComboboxIcon></svg>
+          <div scInputGroupAddon align="inline-end">
+            <svg siChevronsUpDownIcon class="opacity-50"></svg>
+          </div>
         </div>
       </div>
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
           <div scComboboxSearchPanel>
-            <div scComboboxSearchInputGroup>
-              <svg siSearchIcon scComboboxSearchInputIcon></svg>
-              <input
-                scComboboxSearchInput
-                placeholder="Search..."
-                [(value)]="searchString"
-              />
+            <div class="p-1 pb-0">
+              <div scInputGroup>
+                <div scInputGroupAddon align="inline-start">
+                  <svg siSearchIcon></svg>
+                </div>
+                <input
+                  scInput
+                  scComboboxSearchInput
+                  placeholder="Search..."
+                  [(value)]="searchString"
+                />
+              </div>
             </div>
             <ng-template scComboboxListContainer>
               @if (options().length === 0) {
