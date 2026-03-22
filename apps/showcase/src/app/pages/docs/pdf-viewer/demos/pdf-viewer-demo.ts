@@ -298,19 +298,15 @@ interface AttachmentData {
                   class="pdfjs-btn"
                   aria-label="Add Image"
                   aria-haspopup="true"
-                  [attr.aria-pressed]="viewer.editorMode() === 'stamp'"
-                  [attr.aria-expanded]="
-                    viewer.editorMode() === 'stamp' && editorParamsOpen()
-                  "
-                  [class.pdfjs-btn-active]="viewer.editorMode() === 'stamp'"
-                  (click)="selectEditorTool('stamp')"
+                  [attr.aria-expanded]="stampDropdownOpen()"
+                  (click)="stampDropdownOpen.set(!stampDropdownOpen())"
                 >
                   <svg siImageIcon class="size-4"></svg>
                 </button>
-                @if (viewer.editorMode() === 'stamp' && editorParamsOpen()) {
+                @if (stampDropdownOpen()) {
                   <div
                     class="fixed inset-0 z-40"
-                    (click)="editorParamsOpen.set(false)"
+                    (click)="stampDropdownOpen.set(false)"
                   ></div>
                   <div class="pdfjs-editor-params">
                     <div class="p-3">
@@ -318,7 +314,7 @@ interface AttachmentData {
                         type="button"
                         class="pdfjs-stamp-add-btn"
                         (click)="
-                          stampImageInput.click(); editorParamsOpen.set(false)
+                          stampImageInput.click(); stampDropdownOpen.set(false)
                         "
                       >
                         Add Image
@@ -1431,7 +1427,9 @@ export class PdfViewerDemo {
 
   private currentBlobUrl: string | null = null;
 
-  selectEditorTool(mode: 'highlight' | 'freetext' | 'ink' | 'stamp'): void {
+  readonly stampDropdownOpen = signal(false);
+
+  selectEditorTool(mode: 'highlight' | 'freetext' | 'ink'): void {
     const viewer = this.viewerRef();
     if (!viewer) return;
 

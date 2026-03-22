@@ -247,7 +247,6 @@ export class ScPdfViewerCanvas {
     if (mode === 'highlight') return 'text';
     if (mode === 'freetext') return 'text';
     if (mode === 'ink') return 'crosshair';
-    if (mode === 'stamp' || mode === 'signature') return 'copy';
     return 'default';
   });
 
@@ -869,8 +868,6 @@ export class ScPdfViewerCanvas {
         ctx.beginPath();
         ctx.moveTo(event.clientX - rect.left, event.clientY - rect.top);
       }
-    } else if (mode === 'stamp') {
-      this.openStampFileInput(pageNumber, x, y);
     }
   }
 
@@ -995,41 +992,6 @@ export class ScPdfViewerCanvas {
         div.blur();
       }
     });
-  }
-
-  private openStampFileInput(pageNumber: number, x: number, y: number): void {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.onchange = () => {
-      const file = input.files?.[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const img = new Image();
-        img.onload = () => {
-          // Scale image to ~15% of page width
-          const maxW = 0.15;
-          const aspect = img.height / img.width;
-          const w = maxW;
-          const h = maxW * aspect;
-
-          this.pdfViewer.addEditorAnnotation({
-            type: 'stamp',
-            pageNumber,
-            x,
-            y,
-            imageDataUrl: reader.result as string,
-            width: w,
-            height: h,
-          });
-        };
-        img.src = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    };
-    input.click();
   }
 
   private renderEditorAnnotations(
