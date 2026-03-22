@@ -49,7 +49,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         <h4 class="text-sm font-semibold">Initially Open</h4>
         <button
           scCollapsibleTrigger
-          panelId="collapsible-open"
+          [panel]="colPanel.panel"
           [expanded]="true"
           #trigger="scCollapsibleTrigger"
           class="border-input bg-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border text-sm font-medium shadow-xs transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
@@ -62,7 +62,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <span class="sr-only">Toggle</span>
         </button>
       </div>
-      <div scCollapsiblePanel panelId="collapsible-open">
+      <div scCollapsiblePanel #colPanel="scCollapsiblePanel">
         <ng-template scCollapsibleContent>
           <sc-collapsible-body>
             <div class="rounded-md border px-4 py-3 text-sm">
