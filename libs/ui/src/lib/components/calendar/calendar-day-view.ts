@@ -306,20 +306,27 @@ export class ScCalendarDayView {
     const key = event.key;
 
     if (this.selectOutsideMonthDays() === 'keep') {
-      const isOutside = target.getAttribute('data-outside') !== null;
-      if (!isOutside) return;
-
       const buttons = this._dayButtons();
       const isFirst = buttons[0]?.element === target;
       const isLast = buttons[buttons.length - 1]?.element === target;
 
+      if (!(isFirst || isLast)) return;
+
+      const isOutside = target.getAttribute('data-outside') !== null;
+      const offset = key === 'ArrowLeft' || key === 'ArrowRight' ? 1 : 7;
+
       if (isFirst && (key === 'ArrowLeft' || key === 'ArrowUp')) {
-        const targetDay = key === 'ArrowLeft' ? day - 1 : day - 7;
-        this.scrollUpToDay(targetDay);
+        if (isOutside) {
+          this.scrollUpToDay(day - offset);
+        } else {
+          const prevMonthDays = this.viewDate()
+            .subtract({ months: 1 })
+            .with({ day: 1 }).daysInMonth;
+          this.scrollUpToDay(prevMonthDays - offset + 1);
+        }
       }
       if (isLast && (key === 'ArrowRight' || key === 'ArrowDown')) {
-        const targetDay = key === 'ArrowRight' ? day + 1 : day + 7;
-        this.scrollDownToDay(targetDay);
+        this.scrollDownToDay(isOutside ? day + offset : offset);
       }
       return;
     }
