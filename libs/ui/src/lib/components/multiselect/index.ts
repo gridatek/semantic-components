@@ -1,6 +1,5 @@
 export { ScMultiselect } from './multiselect';
 export { ScMultiselectDisplayValue } from './multiselect-display-value';
-export { ScMultiselectIcon } from './multiselect-icon';
 export { ScMultiselectInput } from './multiselect-input';
 export { ScMultiselectOrigin } from './multiselect-origin';
 export { ScMultiselectItem } from './multiselect-item';
