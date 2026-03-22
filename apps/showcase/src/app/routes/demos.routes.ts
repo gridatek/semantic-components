@@ -455,6 +455,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'hide-outside-days-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/hide-outside-days-calendar-demo').then(
+            (m) => m.HideOutsideDaysCalendarDemo,
+          ),
+      },
+      {
         path: 'birthday-calendar-demo',
         loadComponent: () =>
           import('../pages/docs/calendar/demos/birthday-calendar-demo').then(

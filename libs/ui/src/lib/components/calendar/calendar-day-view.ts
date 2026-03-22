@@ -54,7 +54,7 @@ interface DayInfo {
         @for (week of weeks(); track $index) {
           <tr ngGridRow class="mt-2 flex w-full">
             @for (day of week; track day?.date?.toString() ?? $index) {
-              @if (day) {
+              @if (day && !(day.isOutsideMonth && !showOutsideDays())) {
                 <td
                   ngGridCell
                   class="relative p-0 text-center text-sm"
@@ -91,7 +91,7 @@ interface DayInfo {
                   class="relative p-0 text-center text-sm"
                   disabled
                 >
-                  <span class="size-9"></span>
+                  <span class="inline-block size-9"></span>
                 </td>
               }
             }
@@ -115,6 +115,7 @@ export class ScCalendarDayView {
   readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
 
   readonly selectOutsideMonthDays = input<'change' | 'keep'>('change');
+  readonly showOutsideDays = input(true);
 
   readonly dateSelected = output<Temporal.PlainDate>();
   readonly monthScrollUp = output<void>();
