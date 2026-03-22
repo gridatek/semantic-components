@@ -344,14 +344,49 @@ export class ScPdfViewerRoot {
     this.rotation.update((r) => (r + 90) % 360);
   }
 
-  download(): void {
+  async download(): Promise<void> {
+    const doc = this.pdfDocument();
     const source = this.src();
     if (!source) return;
 
-    const link = document.createElement('a');
-    link.href = source;
-    link.download = this.title() || 'document.pdf';
-    link.click();
+    const filename = (this.title() || 'document') + '.pdf';
+
+    // Try to get raw data from the loaded document
+    if (doc) {
+      try {
+        const data = await doc.getData();
+        const blob = new Blob([data.buffer as ArrayBuffer], {
+          type: 'application/pdf',
+        });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+        return;
+      } catch {
+        // Fall through to fetch
+      }
+    }
+
+    // Fallback: fetch the source URL as blob
+    try {
+      const response = await fetch(source);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      // Last resort: direct link (may navigate instead of download)
+      const link = document.createElement('a');
+      link.href = source;
+      link.download = filename;
+      link.click();
+    }
   }
 
   async printWithProgress(): Promise<void> {
