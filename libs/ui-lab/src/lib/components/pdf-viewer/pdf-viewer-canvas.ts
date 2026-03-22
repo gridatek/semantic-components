@@ -1302,27 +1302,73 @@ export class ScPdfViewerCanvas {
         wrapper.appendChild(h);
       }
 
+      // Bottom toolbar (Alt text + Delete)
+      const toolbar = document.createElement('div');
+      toolbar.className = 'editor-stamp-toolbar';
+      toolbar.style.position = 'absolute';
+      toolbar.style.left = '0';
+      toolbar.style.top = '100%';
+      toolbar.style.marginTop = '6px';
+      toolbar.style.display = 'flex';
+      toolbar.style.gap = '4px';
+      toolbar.style.zIndex = '12';
+
+      // Alt text button
+      const altBtn = document.createElement('button');
+      altBtn.className = 'editor-stamp-alt-btn';
+      altBtn.style.display = 'flex';
+      altBtn.style.alignItems = 'center';
+      altBtn.style.gap = '4px';
+      altBtn.style.padding = '4px 10px';
+      altBtn.style.borderRadius = '20px';
+      altBtn.style.border = '1px solid #ccc';
+      altBtn.style.background = '#fff';
+      altBtn.style.color = '#15141a';
+      altBtn.style.fontSize = '12px';
+      altBtn.style.cursor = 'pointer';
+      altBtn.style.whiteSpace = 'nowrap';
+      altBtn.style.lineHeight = '1';
+
+      const hasAlt = !!(ann.altText || ann.isDecorative);
+      altBtn.textContent = hasAlt
+        ? ann.isDecorative
+          ? 'Decorative'
+          : ann.altText!
+        : '+ Alt text';
+      if (hasAlt) {
+        altBtn.style.maxWidth = '120px';
+        altBtn.style.overflow = 'hidden';
+        altBtn.style.textOverflow = 'ellipsis';
+      }
+
+      altBtn.setAttribute('aria-label', 'Edit alt text');
+      altBtn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      altBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.pdfViewer.altTextAnnotationId.set(ann.id);
+        this.pdfViewer.altTextDialogOpen.set(true);
+      });
+      toolbar.appendChild(altBtn);
+
       // Delete button
       const del = document.createElement('button');
       del.className = 'editor-stamp-delete';
-      del.style.position = 'absolute';
-      del.style.top = '-12px';
-      del.style.right = '-12px';
-      del.style.width = '22px';
-      del.style.height = '22px';
-      del.style.borderRadius = '50%';
-      del.style.background = '#e74c3c';
-      del.style.color = '#fff';
-      del.style.border = '2px solid #fff';
-      del.style.cursor = 'pointer';
       del.style.display = 'flex';
       del.style.alignItems = 'center';
       del.style.justifyContent = 'center';
-      del.style.fontSize = '13px';
-      del.style.lineHeight = '1';
-      del.style.zIndex = '12';
+      del.style.width = '28px';
+      del.style.height = '28px';
+      del.style.borderRadius = '50%';
+      del.style.border = '1px solid #ccc';
+      del.style.background = '#fff';
+      del.style.color = '#15141a';
+      del.style.cursor = 'pointer';
+      del.style.fontSize = '14px';
       del.style.padding = '0';
-      del.textContent = '✕';
+      del.innerHTML = '&#128465;'; // trash can
       del.setAttribute('aria-label', 'Delete annotation');
       del.addEventListener('pointerdown', (e) => {
         e.preventDefault();
@@ -1333,7 +1379,9 @@ export class ScPdfViewerCanvas {
         this.selectedAnnotationId = null;
         this.pdfViewer.removeEditorAnnotation(ann.id);
       });
-      wrapper.appendChild(del);
+      toolbar.appendChild(del);
+
+      wrapper.appendChild(toolbar);
     }
 
     // Click to select

@@ -873,9 +873,9 @@ interface AttachmentData {
           <sc-pdf-viewer-signature-dialog />
           <sc-pdf-viewer-print-progress />
           <sc-pdf-viewer-alt-text-dialog
-            [open]="altTextDialogOpen()"
-            [annotationId]="altTextAnnotationId()"
-            (closed)="altTextDialogOpen.set(false)"
+            [open]="viewer.altTextDialogOpen()"
+            [annotationId]="viewer.altTextAnnotationId()"
+            (closed)="viewer.altTextDialogOpen.set(false)"
           />
         </div>
       </div>
@@ -1387,8 +1387,6 @@ export class PdfViewerDemo {
   readonly secondaryToolbarOpen = signal(false);
   readonly documentPropertiesOpen = signal(false);
   readonly editorParamsOpen = signal(false);
-  readonly altTextDialogOpen = signal(false);
-  readonly altTextAnnotationId = signal<string | null>(null);
   readonly sidebarTab = signal<
     'thumbnails' | 'outline' | 'attachments' | 'layers' | 'comments'
   >('thumbnails');

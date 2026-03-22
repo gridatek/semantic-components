@@ -115,6 +115,10 @@ export class ScPdfViewerRoot {
   >(null);
   private passwordCallback: ((password: string | Error) => void) | null = null;
 
+  // Alt text state
+  readonly altTextDialogOpen = signal(false);
+  readonly altTextAnnotationId = signal<string | null>(null);
+
   // Signature state
   readonly signatureDialogOpen = signal(false);
   readonly savedSignatures = signal<PdfSignatureData[]>([]);
