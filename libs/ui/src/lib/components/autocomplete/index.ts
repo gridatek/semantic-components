@@ -2,6 +2,7 @@ export { ScAutocomplete } from './autocomplete';
 export { ScAutocompleteEmpty } from './autocomplete-empty';
 export { ScAutocompleteGroup } from './autocomplete-group';
 export { ScAutocompleteIcon } from './autocomplete-icon';
+export { ScAutocompleteOrigin } from './autocomplete-origin';
 export { ScAutocompleteInput } from './autocomplete-input';
 export { ScAutocompleteItem } from './autocomplete-item';
 export { ScAutocompleteItemIndicator } from './autocomplete-item-indicator';

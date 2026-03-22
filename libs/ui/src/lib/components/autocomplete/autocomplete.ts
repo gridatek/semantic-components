@@ -14,7 +14,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScAutocompleteGroup } from './autocomplete-group';
+import { ScAutocompleteOrigin } from './autocomplete-origin';
 import { ScAutocompletePortal } from './autocomplete-portal';
 
 @Component({
@@ -53,13 +53,13 @@ import { ScAutocompletePortal } from './autocomplete-portal';
 export class ScAutocomplete {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly group = contentChild(ScAutocompleteGroup);
+  private readonly trigger = contentChild(ScAutocompleteOrigin);
   private readonly listbox = contentChild(Listbox, { descendants: true });
   private readonly options = contentChildren(Option, { descendants: true });
   protected readonly autocompletePortal =
     contentChild.required(ScAutocompletePortal);
 
-  readonly origin = computed(() => this.group()?.elementRef);
+  readonly origin = computed(() => this.trigger()?.elementRef);
   protected readonly combobox = inject(Combobox);
 
   protected readonly class = computed(() => cn('relative', this.classInput()));

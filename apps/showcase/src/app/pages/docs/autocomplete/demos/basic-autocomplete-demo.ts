@@ -15,6 +15,7 @@ import {
   ScAutocompleteItem,
   ScAutocompleteItemIndicator,
   ScAutocompleteList,
+  ScAutocompleteOrigin,
   ScAutocompletePopup,
   ScAutocompletePortal,
 } from '@semantic-components/ui';
@@ -29,6 +30,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScAutocompleteGroup,
     ScAutocompleteIcon,
     ScAutocompleteInput,
+    ScAutocompleteOrigin,
     ScAutocompleteItem,
     ScAutocompleteItemIndicator,
     ScAutocompleteList,
@@ -39,14 +41,16 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scAutocomplete filterMode="auto-select" class="w-52">
-      <div scAutocompleteGroup>
-        <svg siSearchIcon scAutocompleteIcon></svg>
-        <input
-          scAutocompleteInput
-          aria-label="Select a country"
-          placeholder="Select a country"
-          [(ngModel)]="query"
-        />
+      <div scAutocompleteOrigin>
+        <div scAutocompleteGroup>
+          <svg siSearchIcon scAutocompleteIcon></svg>
+          <input
+            scAutocompleteInput
+            aria-label="Select a country"
+            placeholder="Select a country"
+            [(ngModel)]="query"
+          />
+        </div>
       </div>
       <ng-template scAutocompletePortal>
         <div scAutocompletePopup>
