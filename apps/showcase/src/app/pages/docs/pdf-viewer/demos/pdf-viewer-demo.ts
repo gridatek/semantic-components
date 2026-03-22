@@ -1420,8 +1420,9 @@ export class PdfViewerDemo {
     if (!viewer) return;
 
     if (viewer.editorMode() === mode) {
-      // Already active — toggle params
-      this.editorParamsOpen.set(!this.editorParamsOpen());
+      // Already active — deactivate editor mode
+      viewer.setEditorMode('none');
+      this.editorParamsOpen.set(false);
     } else {
       viewer.setEditorMode(mode);
       this.editorParamsOpen.set(true);
