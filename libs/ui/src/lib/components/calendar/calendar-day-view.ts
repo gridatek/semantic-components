@@ -307,26 +307,37 @@ export class ScCalendarDayView {
 
     if (this.selectOutsideMonthDays() === 'keep') {
       const buttons = this._dayButtons();
-      const isFirst = buttons[0]?.element === target;
-      const isLast = buttons[buttons.length - 1]?.element === target;
+      const idx = buttons.findIndex((b) => b.element === target);
+      if (idx === -1) return;
 
-      if (!(isFirst || isLast)) return;
+      const isFirst = idx === 0;
+      const isLast = idx === buttons.length - 1;
+      const inFirstRow = idx < 7;
+      const inLastRow = idx >= buttons.length - 7;
+
+      const goUp =
+        (key === 'ArrowLeft' && isFirst) || (key === 'ArrowUp' && inFirstRow);
+      const goDown =
+        (key === 'ArrowRight' && isLast) || (key === 'ArrowDown' && inLastRow);
+
+      if (!goUp && !goDown) return;
 
       const isOutside = target.getAttribute('data-outside') !== null;
       const offset = key === 'ArrowLeft' || key === 'ArrowRight' ? 1 : 7;
 
-      if (isFirst && (key === 'ArrowLeft' || key === 'ArrowUp')) {
-        if (isOutside) {
-          this.scrollUpToDay(day - offset);
-        } else {
-          const prevMonthDays = this.viewDate()
-            .subtract({ months: 1 })
-            .with({ day: 1 }).daysInMonth;
-          this.scrollUpToDay(prevMonthDays - offset + 1);
-        }
+      if (goUp) {
+        const prevMonthDays = this.viewDate()
+          .subtract({ months: 1 })
+          .with({ day: 1 }).daysInMonth;
+        const targetDay = isOutside
+          ? day - offset
+          : prevMonthDays + day - offset;
+        this.scrollUpToDay(targetDay);
       }
-      if (isLast && (key === 'ArrowRight' || key === 'ArrowDown')) {
-        this.scrollDownToDay(isOutside ? day + offset : offset);
+      if (goDown) {
+        const daysInMonth = this.viewDate().daysInMonth;
+        const targetDay = isOutside ? day + offset : day + offset - daysInMonth;
+        this.scrollDownToDay(targetDay);
       }
       return;
     }
