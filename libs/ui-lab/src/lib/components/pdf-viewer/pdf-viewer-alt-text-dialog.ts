@@ -1,12 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   ViewEncapsulation,
   computed,
+  effect,
   inject,
   input,
   output,
   signal,
+  viewChild,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
@@ -15,72 +18,82 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
   selector: 'sc-pdf-viewer-alt-text-dialog',
   template: `
     @if (open()) {
-      <div
-        class="absolute inset-0 z-50 flex items-center justify-center bg-black/50"
-        (click)="cancel()"
+      <div class="fixed inset-0 z-50" (click)="cancel()"></div>
+      <dialog
+        #dialogEl
+        open
+        class="fixed z-50 m-0 w-80 rounded-lg border border-gray-200 bg-white p-5 text-gray-900 shadow-xl"
+        [style.left.px]="dialogX()"
+        [style.top.px]="dialogY()"
+        (click)="$event.stopPropagation()"
       >
-        <dialog
-          open
-          class="relative w-96 rounded border border-[#333] bg-[#474747] p-5 text-[#d1d5db] shadow-lg"
-          (click)="$event.stopPropagation()"
-        >
-          <h2 class="mb-4 text-base font-semibold text-white">Alt Text</h2>
+        <h2 class="mb-1 text-base font-semibold">Choose an option</h2>
+        <p class="mb-4 text-sm text-gray-500">
+          Alt text (alternative text) helps when people can't see the image or
+          when it doesn't load.
+        </p>
 
-          <div class="mb-3 flex flex-col gap-2">
-            <label class="flex items-center gap-2 text-sm">
+        <div class="mb-3 flex flex-col gap-3">
+          <div>
+            <label class="flex items-center gap-2 text-sm font-medium">
               <input
                 type="radio"
                 name="altTextMode"
                 [checked]="!isDecorative()"
                 (change)="isDecorative.set(false)"
-                class="accent-[#6b9edd]"
+                class="accent-blue-600"
               />
-              Add description
+              Add a description
             </label>
-            <label class="flex items-center gap-2 text-sm">
+            <p class="mt-1 ml-6 text-xs text-gray-500">
+              Aim for 1-2 sentences that describe the subject, setting, or
+              actions.
+            </p>
+            @if (!isDecorative()) {
+              <textarea
+                class="mt-2 ml-6 w-[calc(100%-1.5rem)] resize-none rounded border border-gray-300 bg-white p-2 text-sm text-gray-900 outline-none focus:border-blue-500"
+                rows="3"
+                [placeholder]="'For example, “A young man sits down at a table to eat a meal”'"
+                [value]="altText()"
+                (input)="altText.set($any($event.target).value)"
+              ></textarea>
+            }
+          </div>
+
+          <div>
+            <label class="flex items-center gap-2 text-sm font-medium">
               <input
                 type="radio"
                 name="altTextMode"
                 [checked]="isDecorative()"
                 (change)="isDecorative.set(true)"
-                class="accent-[#6b9edd]"
+                class="accent-blue-600"
               />
               Mark as decorative
             </label>
-          </div>
-
-          @if (!isDecorative()) {
-            <textarea
-              class="mb-4 w-full resize-none rounded border border-[#5a5a5a] bg-[#3d3d3d] p-2 text-sm text-[#d1d5db] outline-none focus:border-[#6b9edd]"
-              rows="3"
-              placeholder="Describe the content of this annotation..."
-              [value]="altText()"
-              (input)="altText.set($any($event.target).value)"
-            ></textarea>
-          } @else {
-            <p class="mb-4 text-xs text-[#999]">
-              Decorative elements are ignored by screen readers.
+            <p class="mt-1 ml-6 text-xs text-gray-500">
+              This is used for ornamental images, like borders or watermarks.
             </p>
-          }
-
-          <div class="flex justify-end gap-2">
-            <button
-              type="button"
-              class="rounded border border-[#666] bg-[#5a5a5a] px-4 py-1.5 text-sm text-[#d1d5db] hover:bg-[#666] hover:text-white"
-              (click)="cancel()"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="rounded bg-[#6b9edd] px-4 py-1.5 text-sm text-white hover:bg-[#5a8ecc]"
-              (click)="save()"
-            >
-              Save
-            </button>
           </div>
-        </dialog>
-      </div>
+        </div>
+
+        <div class="flex justify-end gap-2">
+          <button
+            type="button"
+            class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            (click)="cancel()"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            (click)="save()"
+          >
+            Save
+          </button>
+        </div>
+      </dialog>
     }
   `,
   host: {
@@ -105,8 +118,60 @@ export class ScPdfViewerAltTextDialog {
     isDecorative: boolean;
   }>();
 
+  private readonly dialogEl =
+    viewChild<ElementRef<HTMLDialogElement>>('dialogEl');
+
   readonly altText = signal('');
   readonly isDecorative = signal(false);
+  readonly dialogX = signal(0);
+  readonly dialogY = signal(0);
+
+  constructor() {
+    effect(() => {
+      if (!this.open()) return;
+
+      const id = this.annotationId();
+      if (!id) return;
+
+      // Load existing alt text from annotation
+      const ann = this.pdfViewer.editorAnnotations().find((a) => a.id === id);
+      if (ann) {
+        this.altText.set(ann.altText || '');
+        this.isDecorative.set(ann.isDecorative || false);
+      }
+
+      // Position next to the stamp wrapper
+      setTimeout(() => {
+        const wrapper = document.querySelector(
+          `[data-annotation-id="${id}"]`,
+        ) as HTMLElement;
+        if (!wrapper) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const dialogWidth = 320;
+        const dialogHeight = 380;
+
+        let x = rect.right + 8;
+        let y = rect.top;
+
+        // If dialog would go off-screen right, position to the left
+        if (x + dialogWidth > window.innerWidth) {
+          x = rect.left - dialogWidth - 8;
+        }
+        // If still off-screen, center horizontally
+        if (x < 0) {
+          x = Math.max(8, (window.innerWidth - dialogWidth) / 2);
+        }
+        // Keep within vertical bounds
+        if (y + dialogHeight > window.innerHeight) {
+          y = Math.max(8, window.innerHeight - dialogHeight - 8);
+        }
+
+        this.dialogX.set(x);
+        this.dialogY.set(y);
+      });
+    });
+  }
 
   cancel(): void {
     this.altText.set('');
@@ -120,14 +185,10 @@ export class ScPdfViewerAltTextDialog {
 
     const text = this.isDecorative() ? '' : this.altText();
 
-    // Update the annotation's alt text
-    this.pdfViewer.editorAnnotations.update((list) =>
-      list.map((a) =>
-        a.id === id
-          ? { ...a, altText: text, isDecorative: this.isDecorative() }
-          : a,
-      ),
-    );
+    this.pdfViewer.updateEditorAnnotation(id, {
+      altText: text,
+      isDecorative: this.isDecorative(),
+    });
 
     this.saved.emit({
       annotationId: id,
