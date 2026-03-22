@@ -22,6 +22,7 @@ import {
   ScComboboxPopupContainer,
   ScComboboxSearchInput,
   ScComboboxSearchPanel,
+  ScInput,
   ScInputGroup,
   ScInputGroupAddon,
 } from '@semantic-components/ui';
@@ -50,6 +51,7 @@ import {
     ScComboboxList,
     ScComboboxPopupContainer,
     ScComboboxInput,
+    ScInput,
     ScInputGroup,
     ScInputGroupAddon,
     FormsModule,
@@ -83,15 +85,18 @@ import {
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
           <div scComboboxSearchPanel>
-            <div scInputGroup class="rounded-none border-x-0 border-t-0">
-              <div scInputGroupAddon align="inline-start">
-                <svg siSearchIcon class="opacity-50"></svg>
+            <div class="p-1 pb-0">
+              <div scInputGroup>
+                <div scInputGroupAddon align="inline-start">
+                  <svg siSearchIcon></svg>
+                </div>
+                <input
+                  scInput
+                  scComboboxSearchInput
+                  placeholder="Search..."
+                  [(value)]="searchString"
+                />
               </div>
-              <input
-                scComboboxSearchInput
-                placeholder="Search..."
-                [(value)]="searchString"
-              />
             </div>
             <ng-template scComboboxListContainer>
               @if (options().length === 0) {

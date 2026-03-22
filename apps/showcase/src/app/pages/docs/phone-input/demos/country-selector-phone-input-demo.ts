@@ -139,15 +139,21 @@ const COUNTRIES: Country[] = [
         <ng-template scComboboxPopupContainer>
           <dialog scComboboxDialog class="min-w-72">
             <div scComboboxSearchPanel>
-              <div scInputGroup class="rounded-none border-x-0 border-t-0">
-                <div scInputGroupAddon align="inline-start">
-                  <svg siSearchIcon class="opacity-50"></svg>
+              <div class="p-1 pb-0">
+                <div
+                  scInputGroup
+                  class="border-input/30 bg-input/30 h-8 rounded-lg shadow-none"
+                >
+                  <div scInputGroupAddon align="inline-start">
+                    <svg siSearchIcon class="opacity-50"></svg>
+                  </div>
+                  <input
+                    scInput
+                    scComboboxSearchInput
+                    placeholder="Search countries..."
+                    [(value)]="searchString"
+                  />
                 </div>
-                <input
-                  scComboboxSearchInput
-                  placeholder="Search countries..."
-                  [(value)]="searchString"
-                />
               </div>
               <ng-template scComboboxListContainer>
                 @if (filteredCountries().length === 0) {
