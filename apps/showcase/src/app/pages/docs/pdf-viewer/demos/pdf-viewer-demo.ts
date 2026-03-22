@@ -292,16 +292,50 @@ interface AttachmentData {
               </div>
 
               <!-- Stamp/Image -->
-              <button
-                type="button"
-                class="pdfjs-btn"
-                aria-label="Add Image"
-                [attr.aria-pressed]="viewer.editorMode() === 'stamp'"
-                [class.pdfjs-btn-active]="viewer.editorMode() === 'stamp'"
-                (click)="viewer.setEditorMode('stamp')"
-              >
-                <svg siImageIcon class="size-4"></svg>
-              </button>
+              <div class="relative">
+                <button
+                  type="button"
+                  class="pdfjs-btn"
+                  aria-label="Add Image"
+                  aria-haspopup="true"
+                  [attr.aria-pressed]="viewer.editorMode() === 'stamp'"
+                  [attr.aria-expanded]="
+                    viewer.editorMode() === 'stamp' && editorParamsOpen()
+                  "
+                  [class.pdfjs-btn-active]="viewer.editorMode() === 'stamp'"
+                  (click)="selectEditorTool('stamp')"
+                >
+                  <svg siImageIcon class="size-4"></svg>
+                </button>
+                @if (viewer.editorMode() === 'stamp' && editorParamsOpen()) {
+                  <div
+                    class="fixed inset-0 z-40"
+                    (click)="editorParamsOpen.set(false)"
+                  ></div>
+                  <div class="pdfjs-editor-params">
+                    <div class="p-3">
+                      <button
+                        type="button"
+                        class="pdfjs-stamp-add-btn"
+                        (click)="
+                          stampImageInput.click(); editorParamsOpen.set(false)
+                        "
+                      >
+                        Add Image
+                      </button>
+                    </div>
+                  </div>
+                }
+              </div>
+
+              <!-- Hidden file input for stamp images -->
+              <input
+                #stampImageInput
+                type="file"
+                accept="image/*"
+                class="hidden"
+                (change)="onStampImageSelected($event)"
+              />
 
               <!-- Signature -->
               <button
@@ -579,6 +613,12 @@ interface AttachmentData {
                   scPdfViewerFindInput
                   type="text"
                   class="pdfjs-findbar-input"
+                  [class.pdfjs-findbar-notfound]="
+                    viewer.findState() === 'not-found'
+                  "
+                  [attr.aria-invalid]="
+                    viewer.findState() === 'not-found' || null
+                  "
                 />
                 <button scPdfViewerFindPrevious class="pdfjs-btn">
                   <svg siChevronUpIcon class="size-3.5"></svg>
@@ -860,6 +900,10 @@ interface AttachmentData {
               <p>{{ props.fileName }}</p>
             </div>
             <div class="pdfjs-dialog-row">
+              <span>File Size:</span>
+              <p>{{ props.fileSize }}</p>
+            </div>
+            <div class="pdfjs-dialog-row">
               <span>Title:</span>
               <p>{{ props.title }}</p>
             </div>
@@ -898,6 +942,14 @@ interface AttachmentData {
             <div class="pdfjs-dialog-row">
               <span>Page Count:</span>
               <p>{{ props.pageCount }}</p>
+            </div>
+            <div class="pdfjs-dialog-row">
+              <span>Page Size:</span>
+              <p>{{ props.pageSize }}</p>
+            </div>
+            <div class="pdfjs-dialog-row">
+              <span>Linearized:</span>
+              <p>{{ props.linearized }}</p>
             </div>
           }
 
@@ -959,6 +1011,25 @@ interface AttachmentData {
 
       .pdfjs-btn-spacer {
         width: 4px;
+      }
+
+      /* Stamp add image button */
+      .pdfjs-stamp-add-btn {
+        display: block;
+        width: 100%;
+        padding: 6px 12px;
+        font-size: 13px;
+        color: #15141a;
+        background: transparent;
+        border: 1px solid #cfcfd8;
+        border-radius: 4px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color 0.15s;
+
+        &:hover {
+          background: #e8e8e8;
+        }
       }
 
       /* Editor params dropdown */
@@ -1101,6 +1172,11 @@ interface AttachmentData {
         input[type='checkbox'] {
           accent-color: #6b9edd;
         }
+      }
+
+      .pdfjs-findbar-notfound {
+        border-color: #e74c3c !important;
+        background: #4a2020 !important;
       }
 
       .pdfjs-findbar-msg {
@@ -1338,6 +1414,7 @@ export class PdfViewerDemo {
   // Document properties
   readonly documentProperties = signal<{
     fileName: string;
+    fileSize: string;
     title: string;
     author: string;
     subject: string;
@@ -1348,11 +1425,13 @@ export class PdfViewerDemo {
     producer: string;
     version: string;
     pageCount: string;
+    pageSize: string;
+    linearized: string;
   } | null>(null);
 
   private currentBlobUrl: string | null = null;
 
-  selectEditorTool(mode: 'highlight' | 'freetext' | 'ink'): void {
+  selectEditorTool(mode: 'highlight' | 'freetext' | 'ink' | 'stamp'): void {
     const viewer = this.viewerRef();
     if (!viewer) return;
 
@@ -1390,6 +1469,32 @@ export class PdfViewerDemo {
         URL.revokeObjectURL(this.currentBlobUrl);
       }
     });
+  }
+
+  protected onStampImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const viewer = this.viewerRef();
+      if (!viewer || !reader.result) return;
+
+      const img = new Image();
+      img.onload = () => {
+        viewer.addEditorAnnotation({
+          type: 'stamp',
+          pageNumber: viewer.currentPage(),
+          imageDataUrl: reader.result as string,
+          width: img.width,
+          height: img.height,
+        });
+      };
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+    input.value = '';
   }
 
   protected onFileSelected(event: Event): void {
@@ -1471,6 +1576,29 @@ export class PdfViewerDemo {
     this.documentPropertiesOpen.set(true);
   }
 
+  private parsePdfDate(dateStr: string): string {
+    if (!dateStr || dateStr === '-') return '-';
+    // PDF dates: D:YYYYMMDDHHmmSSOHH'mm'
+    const match = dateStr.match(/D:(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/);
+    if (!match) return dateStr;
+    const [, year, month, day, hour, minute, second] = match;
+    const date = new Date(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second),
+    );
+    return date.toLocaleString();
+  }
+
+  private formatFileSize(bytes: number): string {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  }
+
   private async loadDocumentProperties(): Promise<void> {
     const viewer = this.viewerRef();
     if (!viewer) return;
@@ -1482,18 +1610,52 @@ export class PdfViewerDemo {
       const metadata = await doc.getMetadata();
       const info = metadata.info as Record<string, string>;
 
+      // File size
+      let fileSize = '-';
+      try {
+        const downloadInfo = await (
+          doc as unknown as { getDownloadInfo(): Promise<{ length: number }> }
+        ).getDownloadInfo();
+        if (downloadInfo?.length > 0) {
+          fileSize = this.formatFileSize(downloadInfo.length);
+        }
+      } catch {
+        // Not available
+      }
+
+      // Page size from current page
+      let pageSize = '-';
+      try {
+        const page = await doc.getPage(viewer.currentPage());
+        const viewport = page.getViewport({ scale: 1 });
+        const wIn = (viewport.width / 72).toFixed(2);
+        const hIn = (viewport.height / 72).toFixed(2);
+        const wMm = ((viewport.width / 72) * 25.4).toFixed(0);
+        const hMm = ((viewport.height / 72) * 25.4).toFixed(0);
+        const orientation =
+          viewport.width > viewport.height ? 'landscape' : 'portrait';
+        pageSize = `${wIn} × ${hIn} in (${wMm} × ${hMm} mm) (${orientation})`;
+      } catch {
+        // Not available
+      }
+
+      const linearized = info?.['IsLinearized'] ? 'Yes' : 'No';
+
       this.documentProperties.set({
         fileName: this.pdfTitle() || '-',
+        fileSize,
         title: info?.['Title'] || '-',
         author: info?.['Author'] || '-',
         subject: info?.['Subject'] || '-',
         keywords: info?.['Keywords'] || '-',
-        creationDate: info?.['CreationDate'] || '-',
-        modificationDate: info?.['ModDate'] || '-',
+        creationDate: this.parsePdfDate(info?.['CreationDate'] || '-'),
+        modificationDate: this.parsePdfDate(info?.['ModDate'] || '-'),
         creator: info?.['Creator'] || '-',
         producer: info?.['Producer'] || '-',
         version: info?.['PDFFormatVersion'] || '-',
         pageCount: doc.numPages.toString(),
+        pageSize,
+        linearized,
       });
     } catch {
       this.documentProperties.set(null);
