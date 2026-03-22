@@ -355,6 +355,7 @@ export class ScPdfViewerCanvas {
       document.addEventListener('mouseup', this.onHighlightMouseUp);
       document.addEventListener('pointermove', this.onGlobalPointerMove);
       document.addEventListener('pointerup', this.onGlobalPointerUp);
+      document.addEventListener('pointerdown', this.onGlobalPointerDown);
       document.addEventListener('keydown', this.onAnnotationKeyDown);
     });
 
@@ -362,6 +363,7 @@ export class ScPdfViewerCanvas {
       document.removeEventListener('mouseup', this.onHighlightMouseUp);
       document.removeEventListener('pointermove', this.onGlobalPointerMove);
       document.removeEventListener('pointerup', this.onGlobalPointerUp);
+      document.removeEventListener('pointerdown', this.onGlobalPointerDown);
       document.removeEventListener('keydown', this.onAnnotationKeyDown);
       this.observer?.disconnect();
       this.resizeObserver?.disconnect();
@@ -843,9 +845,6 @@ export class ScPdfViewerCanvas {
     const x = (event.clientX - rect.left) / rect.width;
     const y = (event.clientY - rect.top) / rect.height;
 
-    // Deselect annotation when clicking on the editor layer background
-    this.handleEditorLayerClick(event);
-
     if (mode === 'freetext') {
       event.preventDefault();
       event.stopPropagation();
@@ -1232,6 +1231,16 @@ export class ScPdfViewerCanvas {
     editorLayer.appendChild(wrapper);
   }
 
+  private readonly onGlobalPointerDown = (e: PointerEvent): void => {
+    if (!this.selectedAnnotationId) return;
+    const target = e.target as HTMLElement;
+    if (!target.closest('.editor-stamp-wrapper')) {
+      this.selectedAnnotationId = null;
+      const annotations = this.pdfViewer.editorAnnotations();
+      this.renderEditorAnnotations(annotations, this.scaledValue());
+    }
+  };
+
   private readonly onGlobalPointerMove = (e: PointerEvent): void => {
     if (this.dragState) {
       const dx = (e.clientX - this.dragState.startX) / this.dragState.layerW;
@@ -1346,14 +1355,4 @@ export class ScPdfViewerCanvas {
       this.renderEditorAnnotations(annotations, this.scaledValue());
     }
   };
-
-  /** Deselect annotation when clicking outside */
-  private handleEditorLayerClick(e: PointerEvent): void {
-    const target = e.target as HTMLElement;
-    if (this.selectedAnnotationId && !target.closest('.editor-stamp-wrapper')) {
-      this.selectedAnnotationId = null;
-      const annotations = this.pdfViewer.editorAnnotations();
-      this.renderEditorAnnotations(annotations, this.scaledValue());
-    }
-  }
 }
