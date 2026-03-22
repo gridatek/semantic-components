@@ -65,6 +65,7 @@ export type ScCalendarValue =
                 [weekDays]="weekDays()"
                 [startOfWeek]="startOfWeek()"
                 [ariaLabel]="dayViewLabel()"
+                [selectOutsideMonthDays]="selectOutsideMonthDays()"
                 (dateSelected)="selectDate($event)"
                 (monthScrollUp)="previousMonth()"
                 (monthScrollDown)="nextMonth()"
@@ -112,6 +113,7 @@ export class ScCalendar {
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
   readonly numberOfMonths = input(1);
+  readonly selectOutsideMonthDays = input<'change' | 'keep'>('change');
 
   readonly value = model<ScCalendarValue>(undefined);
 

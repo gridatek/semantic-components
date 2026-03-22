@@ -114,6 +114,8 @@ export class ScCalendarDayView {
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);
 
+  readonly selectOutsideMonthDays = input<'change' | 'keep'>('change');
+
   readonly dateSelected = output<Temporal.PlainDate>();
   readonly monthScrollUp = output<void>();
   readonly monthScrollDown = output<void>();
@@ -278,7 +280,7 @@ export class ScCalendarDayView {
   protected handleDateClick(day: DayInfo): void {
     this.dateSelected.emit(day.date);
 
-    if (day.isOutsideMonth) {
+    if (day.isOutsideMonth && this.selectOutsideMonthDays() === 'change') {
       if (Temporal.PlainDate.compare(day.date, this.viewDate()) < 0) {
         this.monthScrollUp.emit();
       } else {

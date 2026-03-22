@@ -8,6 +8,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BirthdayCalendarDemoContainer } from './demos/birthday-calendar-demo-container';
 import { DisabledDatesCalendarDemoContainer } from './demos/disabled-dates-calendar-demo-container';
+import { KeepOutsideDaysCalendarDemoContainer } from './demos/keep-outside-days-calendar-demo-container';
 import { MinMaxCalendarDemoContainer } from './demos/min-max-calendar-demo-container';
 import { MultipleDateCalendarDemoContainer } from './demos/multiple-date-calendar-demo-container';
 import { RangeCalendarDemoContainer } from './demos/range-calendar-demo-container';
@@ -21,6 +22,7 @@ import { SingleDateCalendarDemoContainer } from './demos/single-date-calendar-de
     RangeCalendarDemoContainer,
     DisabledDatesCalendarDemoContainer,
     MinMaxCalendarDemoContainer,
+    KeepOutsideDaysCalendarDemoContainer,
     BirthdayCalendarDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -44,6 +46,7 @@ import { SingleDateCalendarDemoContainer } from './demos/single-date-calendar-de
         <app-range-calendar-demo-container />
         <app-disabled-dates-calendar-demo-container />
         <app-min-max-calendar-demo-container />
+        <app-keep-outside-days-calendar-demo-container />
         <app-birthday-calendar-demo-container />
       </section>
     </div>

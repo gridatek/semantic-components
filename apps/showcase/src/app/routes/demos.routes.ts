@@ -448,6 +448,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'keep-outside-days-calendar-demo',
+        loadComponent: () =>
+          import('../pages/docs/calendar/demos/keep-outside-days-calendar-demo').then(
+            (m) => m.KeepOutsideDaysCalendarDemo,
+          ),
+      },
+      {
         path: 'birthday-calendar-demo',
         loadComponent: () =>
           import('../pages/docs/calendar/demos/birthday-calendar-demo').then(
