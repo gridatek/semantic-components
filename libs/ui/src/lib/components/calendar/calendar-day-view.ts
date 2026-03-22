@@ -299,8 +299,30 @@ export class ScCalendarDayView {
   }
 
   protected handleKeyDown(event: KeyboardEvent): void {
-    const day = Number((event.target as Element).getAttribute('data-day'));
+    const target = event.target as Element;
+    const day = Number(target.getAttribute('data-day'));
     if (!day) return;
+
+    const key = event.key;
+
+    if (this.selectOutsideMonthDays() === 'keep') {
+      const isOutside = target.getAttribute('data-outside') !== null;
+      if (!isOutside) return;
+
+      const buttons = this._dayButtons();
+      const isFirst = buttons[0]?.element === target;
+      const isLast = buttons[buttons.length - 1]?.element === target;
+
+      if (isFirst && (key === 'ArrowLeft' || key === 'ArrowUp')) {
+        const targetDay = key === 'ArrowLeft' ? day - 1 : day - 7;
+        this.scrollUpToDay(targetDay);
+      }
+      if (isLast && (key === 'ArrowRight' || key === 'ArrowDown')) {
+        const targetDay = key === 'ArrowRight' ? day + 1 : day + 7;
+        this.scrollDownToDay(targetDay);
+      }
+      return;
+    }
 
     const viewDate = this.viewDate();
     const daysInMonth = viewDate.daysInMonth;
@@ -308,10 +330,10 @@ export class ScCalendarDayView {
     // Only handle edge cases where we need to scroll to prev/next month
     if (day > 7 && day <= daysInMonth - 7) return;
 
-    const arrowLeft = event.key === 'ArrowLeft';
-    const arrowRight = event.key === 'ArrowRight';
-    const arrowUp = event.key === 'ArrowUp';
-    const arrowDown = event.key === 'ArrowDown';
+    const arrowLeft = key === 'ArrowLeft';
+    const arrowRight = key === 'ArrowRight';
+    const arrowUp = key === 'ArrowUp';
+    const arrowDown = key === 'ArrowDown';
 
     if ((day === 1 && arrowLeft) || (day <= 7 && arrowUp)) {
       this.scrollUp();
@@ -343,6 +365,30 @@ export class ScCalendarDayView {
         .reverse()
         .find((b) => b.element.getAttribute('data-outside') === null);
       last?.element.focus();
+    });
+  }
+
+  private scrollDownToDay(targetDay: number): void {
+    this.monthScrollDown.emit();
+    setTimeout(() => {
+      const btn = this._dayButtons().find(
+        (b) =>
+          b.element.getAttribute('data-day') === String(targetDay) &&
+          b.element.getAttribute('data-outside') === null,
+      );
+      btn?.element.focus();
+    });
+  }
+
+  private scrollUpToDay(targetDay: number): void {
+    this.monthScrollUp.emit();
+    setTimeout(() => {
+      const btn = this._dayButtons().find(
+        (b) =>
+          b.element.getAttribute('data-day') === String(targetDay) &&
+          b.element.getAttribute('data-outside') === null,
+      );
+      btn?.element.focus();
     });
   }
 }
