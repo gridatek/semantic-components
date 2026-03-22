@@ -1483,12 +1483,17 @@ export class PdfViewerDemo {
 
       const img = new Image();
       img.onload = () => {
+        // Scale to ~15% of page width, maintain aspect ratio
+        const maxW = 0.15;
+        const aspect = img.height / img.width;
         viewer.addEditorAnnotation({
           type: 'stamp',
           pageNumber: viewer.currentPage(),
           imageDataUrl: reader.result as string,
-          width: img.width,
-          height: img.height,
+          width: maxW,
+          height: maxW * aspect,
+          x: 0.4,
+          y: 0.4,
         });
       };
       img.src = reader.result as string;

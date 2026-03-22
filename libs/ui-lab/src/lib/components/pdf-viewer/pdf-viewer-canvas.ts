@@ -213,6 +213,30 @@ export class ScPdfViewerCanvas {
   private inkCurrentPage = 0;
   private inkDrawing = false;
 
+  // Interactive annotation state
+  private selectedAnnotationId: string | null = null;
+  private dragState: {
+    annotationId: string;
+    startX: number;
+    startY: number;
+    origX: number;
+    origY: number;
+    layerW: number;
+    layerH: number;
+  } | null = null;
+  private resizeState: {
+    annotationId: string;
+    handle: string;
+    startX: number;
+    startY: number;
+    origX: number;
+    origY: number;
+    origW: number;
+    origH: number;
+    layerW: number;
+    layerH: number;
+  } | null = null;
+
   readonly editorPointerEvents = computed(() => {
     const mode = this.editorMode();
     return mode !== 'none' ? 'auto' : 'none';
@@ -330,10 +354,16 @@ export class ScPdfViewerCanvas {
     // Listen for text selection in highlight mode
     afterNextRender(() => {
       document.addEventListener('mouseup', this.onHighlightMouseUp);
+      document.addEventListener('pointermove', this.onGlobalPointerMove);
+      document.addEventListener('pointerup', this.onGlobalPointerUp);
+      document.addEventListener('keydown', this.onAnnotationKeyDown);
     });
 
     this.destroyRef.onDestroy(() => {
       document.removeEventListener('mouseup', this.onHighlightMouseUp);
+      document.removeEventListener('pointermove', this.onGlobalPointerMove);
+      document.removeEventListener('pointerup', this.onGlobalPointerUp);
+      document.removeEventListener('keydown', this.onAnnotationKeyDown);
       this.observer?.disconnect();
       this.resizeObserver?.disconnect();
       this.cancelAllRenderTasks();
@@ -814,6 +844,9 @@ export class ScPdfViewerCanvas {
     const x = (event.clientX - rect.left) / rect.width;
     const y = (event.clientY - rect.top) / rect.height;
 
+    // Deselect annotation when clicking on the editor layer background
+    this.handleEditorLayerClick(event);
+
     if (mode === 'freetext') {
       event.preventDefault();
       event.stopPropagation();
@@ -976,8 +1009,8 @@ export class ScPdfViewerCanvas {
       reader.onload = () => {
         const img = new Image();
         img.onload = () => {
-          // Scale image to ~30% of page width
-          const maxW = 0.3;
+          // Scale image to ~15% of page width
+          const maxW = 0.15;
           const aspect = img.height / img.width;
           const w = maxW;
           const h = maxW * aspect;
@@ -1082,21 +1115,283 @@ export class ScPdfViewerCanvas {
         (ann.type === 'stamp' || ann.type === 'signature') &&
         ann.imageDataUrl
       ) {
-        const img = document.createElement('img');
-        img.className = 'editor-annotation editor-stamp';
-        img.style.position = 'absolute';
-        img.style.left = `${(ann.x ?? 0) * 100}%`;
-        img.style.top = `${(ann.y ?? 0) * 100}%`;
-        img.style.width = `${(ann.width ?? 0.3) * 100}%`;
-        img.style.pointerEvents = 'none';
-        img.src = ann.imageDataUrl;
-        img.alt =
-          ann.description ||
-          (ann.type === 'signature'
-            ? 'Signature annotation'
-            : 'Stamp annotation');
-        editorLayer.appendChild(img);
+        this.createInteractiveStamp(ann, editorLayer);
       }
+    }
+  }
+
+  private createInteractiveStamp(
+    ann: import('./pdf-viewer-types').PdfEditorAnnotation,
+    editorLayer: HTMLElement,
+  ): void {
+    const isSelected = this.selectedAnnotationId === ann.id;
+
+    // Wrapper
+    const wrapper = document.createElement('div');
+    wrapper.className = 'editor-annotation editor-stamp-wrapper';
+    wrapper.dataset['annotationId'] = ann.id;
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = `${(ann.x ?? 0) * 100}%`;
+    wrapper.style.top = `${(ann.y ?? 0) * 100}%`;
+    wrapper.style.width = `${(ann.width ?? 0.15) * 100}%`;
+    wrapper.style.cursor = 'move';
+    wrapper.style.pointerEvents = 'auto';
+    wrapper.style.outline = isSelected ? '2px solid #6b9edd' : 'none';
+    wrapper.style.outlineOffset = '2px';
+    wrapper.style.zIndex = isSelected ? '10' : '5';
+    wrapper.tabIndex = 0;
+    wrapper.setAttribute('role', 'img');
+    wrapper.setAttribute(
+      'aria-label',
+      ann.description ||
+        (ann.type === 'signature'
+          ? 'Signature annotation'
+          : 'Stamp annotation'),
+    );
+
+    // Image
+    const img = document.createElement('img');
+    img.style.width = '100%';
+    img.style.display = 'block';
+    img.style.pointerEvents = 'none';
+    img.style.userSelect = 'none';
+    img.draggable = false;
+    img.src = ann.imageDataUrl!;
+    img.alt =
+      ann.description ||
+      (ann.type === 'signature' ? 'Signature annotation' : 'Stamp annotation');
+    wrapper.appendChild(img);
+
+    // Resize handles (only when selected)
+    if (isSelected) {
+      const handles = ['nw', 'ne', 'sw', 'se'];
+      for (const handle of handles) {
+        const h = document.createElement('div');
+        h.className = `editor-stamp-handle editor-stamp-handle-${handle}`;
+        h.dataset['handle'] = handle;
+        h.dataset['annotationId'] = ann.id;
+        h.style.position = 'absolute';
+        h.style.width = '10px';
+        h.style.height = '10px';
+        h.style.background = '#6b9edd';
+        h.style.border = '1px solid #fff';
+        h.style.borderRadius = '2px';
+        h.style.zIndex = '11';
+
+        if (handle.includes('n')) h.style.top = '-5px';
+        if (handle.includes('s')) h.style.bottom = '-5px';
+        if (handle.includes('w')) h.style.left = '-5px';
+        if (handle.includes('e')) h.style.right = '-5px';
+
+        if (handle === 'nw' || handle === 'se') h.style.cursor = 'nwse-resize';
+        if (handle === 'ne' || handle === 'sw') h.style.cursor = 'nesw-resize';
+
+        h.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const layerRect = editorLayer.getBoundingClientRect();
+          this.resizeState = {
+            annotationId: ann.id,
+            handle,
+            startX: e.clientX,
+            startY: e.clientY,
+            origX: ann.x ?? 0,
+            origY: ann.y ?? 0,
+            origW: ann.width ?? 0.15,
+            origH: ann.height ?? 0.15,
+            layerW: layerRect.width,
+            layerH: layerRect.height,
+          };
+        });
+
+        wrapper.appendChild(h);
+      }
+
+      // Delete button
+      const del = document.createElement('button');
+      del.className = 'editor-stamp-delete';
+      del.style.position = 'absolute';
+      del.style.top = '-12px';
+      del.style.right = '-12px';
+      del.style.width = '22px';
+      del.style.height = '22px';
+      del.style.borderRadius = '50%';
+      del.style.background = '#e74c3c';
+      del.style.color = '#fff';
+      del.style.border = '2px solid #fff';
+      del.style.cursor = 'pointer';
+      del.style.display = 'flex';
+      del.style.alignItems = 'center';
+      del.style.justifyContent = 'center';
+      del.style.fontSize = '13px';
+      del.style.lineHeight = '1';
+      del.style.zIndex = '12';
+      del.style.padding = '0';
+      del.textContent = '✕';
+      del.setAttribute('aria-label', 'Delete annotation');
+      del.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      del.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.selectedAnnotationId = null;
+        this.pdfViewer.removeEditorAnnotation(ann.id);
+      });
+      wrapper.appendChild(del);
+    }
+
+    // Click to select
+    wrapper.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (this.selectedAnnotationId !== ann.id) {
+        this.selectedAnnotationId = ann.id;
+        // Re-render to show handles
+        const annotations = this.pdfViewer.editorAnnotations();
+        this.renderEditorAnnotations(annotations, this.scaledValue());
+        return;
+      }
+
+      // Start drag
+      const layerRect = editorLayer.getBoundingClientRect();
+      this.dragState = {
+        annotationId: ann.id,
+        startX: e.clientX,
+        startY: e.clientY,
+        origX: ann.x ?? 0,
+        origY: ann.y ?? 0,
+        layerW: layerRect.width,
+        layerH: layerRect.height,
+      };
+    });
+
+    editorLayer.appendChild(wrapper);
+  }
+
+  private readonly onGlobalPointerMove = (e: PointerEvent): void => {
+    if (this.dragState) {
+      const dx = (e.clientX - this.dragState.startX) / this.dragState.layerW;
+      const dy = (e.clientY - this.dragState.startY) / this.dragState.layerH;
+      const newX = Math.max(0, Math.min(1, this.dragState.origX + dx));
+      const newY = Math.max(0, Math.min(1, this.dragState.origY + dy));
+
+      const wrapper = this.scrollContainer()?.nativeElement.querySelector(
+        `[data-annotation-id="${this.dragState.annotationId}"]`,
+      ) as HTMLElement;
+      if (wrapper) {
+        wrapper.style.left = `${newX * 100}%`;
+        wrapper.style.top = `${newY * 100}%`;
+      }
+    } else if (this.resizeState) {
+      const dx =
+        (e.clientX - this.resizeState.startX) / this.resizeState.layerW;
+      const dy =
+        (e.clientY - this.resizeState.startY) / this.resizeState.layerH;
+      const handle = this.resizeState.handle;
+      const aspect = this.resizeState.origH / this.resizeState.origW;
+
+      let newW = this.resizeState.origW;
+      let newX = this.resizeState.origX;
+      let newY = this.resizeState.origY;
+
+      if (handle.includes('e')) {
+        newW = Math.max(0.02, this.resizeState.origW + dx);
+      } else if (handle.includes('w')) {
+        newW = Math.max(0.02, this.resizeState.origW - dx);
+        newX = this.resizeState.origX + (this.resizeState.origW - newW);
+      }
+
+      const newH = newW * aspect;
+      if (handle.includes('n')) {
+        newY = this.resizeState.origY + (this.resizeState.origH - newH);
+      }
+
+      const wrapper = this.scrollContainer()?.nativeElement.querySelector(
+        `[data-annotation-id="${this.resizeState.annotationId}"]`,
+      ) as HTMLElement;
+      if (wrapper) {
+        wrapper.style.left = `${newX * 100}%`;
+        wrapper.style.top = `${newY * 100}%`;
+        wrapper.style.width = `${newW * 100}%`;
+      }
+    }
+  };
+
+  private readonly onGlobalPointerUp = (e: PointerEvent): void => {
+    if (this.dragState) {
+      const dx = (e.clientX - this.dragState.startX) / this.dragState.layerW;
+      const dy = (e.clientY - this.dragState.startY) / this.dragState.layerH;
+      const newX = Math.max(0, Math.min(1, this.dragState.origX + dx));
+      const newY = Math.max(0, Math.min(1, this.dragState.origY + dy));
+
+      if (Math.abs(dx) > 0.001 || Math.abs(dy) > 0.001) {
+        this.pdfViewer.updateEditorAnnotation(this.dragState.annotationId, {
+          x: newX,
+          y: newY,
+        });
+      }
+      this.dragState = null;
+    } else if (this.resizeState) {
+      const dx =
+        (e.clientX - this.resizeState.startX) / this.resizeState.layerW;
+      const handle = this.resizeState.handle;
+      const aspect = this.resizeState.origH / this.resizeState.origW;
+
+      let newW = this.resizeState.origW;
+      let newX = this.resizeState.origX;
+      let newY = this.resizeState.origY;
+
+      if (handle.includes('e')) {
+        newW = Math.max(0.02, this.resizeState.origW + dx);
+      } else if (handle.includes('w')) {
+        newW = Math.max(0.02, this.resizeState.origW - dx);
+        newX = this.resizeState.origX + (this.resizeState.origW - newW);
+      }
+
+      const newH = newW * aspect;
+      if (handle.includes('n')) {
+        newY = this.resizeState.origY + (this.resizeState.origH - newH);
+      }
+
+      this.pdfViewer.updateEditorAnnotation(this.resizeState.annotationId, {
+        x: newX,
+        y: newY,
+        width: newW,
+        height: newH,
+      });
+      this.resizeState = null;
+    }
+  };
+
+  private readonly onAnnotationKeyDown = (e: KeyboardEvent): void => {
+    if (!this.selectedAnnotationId) return;
+
+    if (e.key === 'Delete' || e.key === 'Backspace') {
+      // Don't delete if user is typing in an input/textarea
+      const tag = (e.target as HTMLElement)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if ((e.target as HTMLElement)?.isContentEditable) return;
+
+      e.preventDefault();
+      const id = this.selectedAnnotationId;
+      this.selectedAnnotationId = null;
+      this.pdfViewer.removeEditorAnnotation(id);
+    } else if (e.key === 'Escape') {
+      this.selectedAnnotationId = null;
+      const annotations = this.pdfViewer.editorAnnotations();
+      this.renderEditorAnnotations(annotations, this.scaledValue());
+    }
+  };
+
+  /** Deselect annotation when clicking outside */
+  private handleEditorLayerClick(e: PointerEvent): void {
+    const target = e.target as HTMLElement;
+    if (this.selectedAnnotationId && !target.closest('.editor-stamp-wrapper')) {
+      this.selectedAnnotationId = null;
+      const annotations = this.pdfViewer.editorAnnotations();
+      this.renderEditorAnnotations(annotations, this.scaledValue());
     }
   }
 }

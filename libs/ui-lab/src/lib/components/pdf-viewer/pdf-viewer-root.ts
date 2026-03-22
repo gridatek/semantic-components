@@ -728,6 +728,16 @@ export class ScPdfViewerRoot {
     this.editorTrigger.update((v) => v + 1);
   }
 
+  updateEditorAnnotation(
+    id: string,
+    changes: Partial<Omit<PdfEditorAnnotation, 'id'>>,
+  ): void {
+    this.editorAnnotations.update((list) =>
+      list.map((a) => (a.id === id ? { ...a, ...changes } : a)),
+    );
+    this.editorTrigger.update((v) => v + 1);
+  }
+
   removeEditorAnnotation(id: string): void {
     const removed = this.editorAnnotations().find((a) => a.id === id);
     this.editorAnnotations.update((list) => list.filter((a) => a.id !== id));
