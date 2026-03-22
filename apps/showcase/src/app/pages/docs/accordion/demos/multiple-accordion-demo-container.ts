@@ -54,11 +54,11 @@ import {
     <div scAccordionGroup [multiExpandable]="true" class="w-full max-w-lg">
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="item-a" [expanded]="true">
+          <button scAccordionTrigger [panel]="itemA.panel" [expanded]="true">
             Can I open multiple items?
           </button>
         </div>
-        <div scAccordionPanel panelId="item-a">
+        <div scAccordionPanel #itemA="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>
               Yes! When using multiExpandable, you can have multiple accordion
@@ -69,11 +69,11 @@ import {
       </div>
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="item-b" [expanded]="true">
+          <button scAccordionTrigger [panel]="itemB.panel" [expanded]="true">
             How does it work?
           </button>
         </div>
-        <div scAccordionPanel panelId="item-b">
+        <div scAccordionPanel #itemB="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>
               Each trigger has an expanded input that you can bind to with
@@ -84,11 +84,11 @@ import {
       </div>
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="item-c">
+          <button scAccordionTrigger [panel]="itemC.panel">
             What about accessibility?
           </button>
         </div>
-        <div scAccordionPanel panelId="item-c">
+        <div scAccordionPanel #itemC="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>
               Each item uses proper ARIA attributes including aria-expanded and

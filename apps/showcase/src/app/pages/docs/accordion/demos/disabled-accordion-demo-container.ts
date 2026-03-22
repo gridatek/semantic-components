@@ -54,11 +54,11 @@ import {
     <div scAccordionGroup [multiExpandable]="false" class="w-full max-w-lg">
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="enabled-1" [expanded]="true">
+          <button scAccordionTrigger [panel]="enabled1.panel" [expanded]="true">
             Enabled Item
           </button>
         </div>
-        <div scAccordionPanel panelId="enabled-1">
+        <div scAccordionPanel #enabled1="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>
               This item can be toggled normally.
@@ -68,11 +68,15 @@ import {
       </div>
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="disabled-1" [disabled]="true">
+          <button
+            scAccordionTrigger
+            [panel]="disabled1.panel"
+            [disabled]="true"
+          >
             Disabled Item
           </button>
         </div>
-        <div scAccordionPanel panelId="disabled-1">
+        <div scAccordionPanel #disabled1="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>This content won't be shown.</sc-accordion-body>
           </ng-template>
@@ -80,11 +84,11 @@ import {
       </div>
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="enabled-2">
+          <button scAccordionTrigger [panel]="enabled2.panel">
             Another Enabled Item
           </button>
         </div>
-        <div scAccordionPanel panelId="enabled-2">
+        <div scAccordionPanel #enabled2="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>
               This item also works normally.
