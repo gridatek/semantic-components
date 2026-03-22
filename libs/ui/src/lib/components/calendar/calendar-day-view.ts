@@ -308,13 +308,22 @@ export class ScCalendarDayView {
 
   private scrollDown(): void {
     this.monthScrollDown.emit();
-    setTimeout(() => this._dayButtons()[0]?.element.focus());
+    setTimeout(() => {
+      const first = this._dayButtons().find(
+        (b) => b.element.getAttribute('data-outside') === null,
+      );
+      first?.element.focus();
+    });
   }
 
   private scrollUp(): void {
     this.monthScrollUp.emit();
-    setTimeout(() =>
-      this._dayButtons()[this._dayButtons().length - 1]?.element.focus(),
-    );
+    setTimeout(() => {
+      const buttons = this._dayButtons();
+      const last = [...buttons]
+        .reverse()
+        .find((b) => b.element.getAttribute('data-outside') === null);
+      last?.element.focus();
+    });
   }
 }
