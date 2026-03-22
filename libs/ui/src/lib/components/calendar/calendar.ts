@@ -273,13 +273,11 @@ export class ScCalendar {
   }
 
   protected previousMonth(): void {
-    const step = this.numberOfMonths();
-    this.viewDate.update((d) => d.subtract({ months: step }).with({ day: 1 }));
+    this.viewDate.update((d) => d.subtract({ months: 1 }).with({ day: 1 }));
   }
 
   protected nextMonth(): void {
-    const step = this.numberOfMonths();
-    this.viewDate.update((d) => d.add({ months: step }).with({ day: 1 }));
+    this.viewDate.update((d) => d.add({ months: 1 }).with({ day: 1 }));
   }
 
   protected previousYear(): void {
