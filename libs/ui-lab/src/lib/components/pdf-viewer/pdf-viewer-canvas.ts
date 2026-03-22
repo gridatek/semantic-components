@@ -373,7 +373,10 @@ export class ScPdfViewerCanvas {
 
   readonly editorPointerEvents = computed(() => {
     const mode = this.editorMode();
-    return mode !== 'none' ? 'auto' : 'none';
+    if (mode !== 'none') return 'auto';
+    // When no editor mode, the layer itself passes through clicks,
+    // but children (annotations) with pointer-events:auto stay clickable
+    return 'none';
   });
 
   readonly editorCursor = computed(() => {
@@ -1146,20 +1149,7 @@ export class ScPdfViewerCanvas {
       if (!editorLayer) continue;
 
       if (ann.type === 'highlight' && ann.rects) {
-        for (const rect of ann.rects) {
-          const div = document.createElement('div');
-          div.className = 'editor-annotation editor-highlight';
-          div.style.position = 'absolute';
-          div.style.left = `${rect.x * 100}%`;
-          div.style.top = `${rect.y * 100}%`;
-          div.style.width = `${rect.width * 100}%`;
-          div.style.height = `${rect.height * 100}%`;
-          div.style.background = ann.color || '#FFFF00';
-          div.style.opacity = String(ann.opacity ?? 0.4);
-          div.style.mixBlendMode = 'multiply';
-          div.style.pointerEvents = 'none';
-          editorLayer.appendChild(div);
-        }
+        this.createInteractiveHighlight(ann, editorLayer);
       } else if (ann.type === 'freetext') {
         this.createInteractiveFreetext(ann, editorLayer, scale);
       } else if (ann.type === 'ink' && ann.strokes) {
@@ -1202,6 +1192,130 @@ export class ScPdfViewerCanvas {
         this.createInteractiveStamp(ann, editorLayer);
       }
     }
+  }
+
+  private createInteractiveHighlight(
+    ann: import('./pdf-viewer-types').PdfEditorAnnotation,
+    editorLayer: HTMLElement,
+  ): void {
+    const isSelected = this.selectedAnnotationId === ann.id;
+    const highlightColor = ann.color || '#FFFF00';
+
+    // Container wrapping all rects for this highlight annotation
+    const wrapper = document.createElement('div');
+    wrapper.className = 'editor-annotation editor-highlight-wrapper';
+    wrapper.dataset['annotationId'] = ann.id;
+    wrapper.style.position = 'absolute';
+    wrapper.style.inset = '0';
+    wrapper.style.pointerEvents = 'none';
+    wrapper.style.zIndex = isSelected ? '10' : '3';
+
+    for (const rect of ann.rects!) {
+      const div = document.createElement('div');
+      div.style.position = 'absolute';
+      div.style.left = `${rect.x * 100}%`;
+      div.style.top = `${rect.y * 100}%`;
+      div.style.width = `${rect.width * 100}%`;
+      div.style.height = `${rect.height * 100}%`;
+      div.style.background = highlightColor;
+      div.style.opacity = String(ann.opacity ?? 0.4);
+      div.style.mixBlendMode = 'multiply';
+      div.style.pointerEvents = 'auto';
+      div.style.cursor = 'pointer';
+      div.style.borderRadius = '2px';
+
+      if (isSelected) {
+        div.style.outline = '2px solid #6b9edd';
+        div.style.outlineOffset = '1px';
+      }
+
+      div.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        if (this.selectedAnnotationId !== ann.id) {
+          this.selectedAnnotationId = ann.id;
+          const annotations = this.pdfViewer.editorAnnotations();
+          this.renderEditorAnnotations(annotations, this.scaledValue());
+        }
+      });
+
+      wrapper.appendChild(div);
+    }
+
+    // Toolbar when selected (color picker + delete)
+    if (isSelected && ann.rects!.length > 0) {
+      const firstRect = ann.rects![0];
+      const toolbar = document.createElement('div');
+      toolbar.className = 'editor-highlight-toolbar';
+      toolbar.style.position = 'absolute';
+      toolbar.style.left = `${firstRect.x * 100}%`;
+      toolbar.style.top = `${firstRect.y * 100}%`;
+      toolbar.style.transform = 'translateY(calc(-100% - 6px))';
+      toolbar.style.display = 'flex';
+      toolbar.style.gap = '4px';
+      toolbar.style.zIndex = '12';
+      toolbar.style.pointerEvents = 'auto';
+      toolbar.style.padding = '4px';
+      toolbar.style.borderRadius = '6px';
+      toolbar.style.background = '#fff';
+      toolbar.style.border = '1px solid #ccc';
+      toolbar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+
+      // Color swatches
+      const colors = ['#FFFF00', '#00FF00', '#00FFFF', '#FF69B4', '#FFA500'];
+      for (const color of colors) {
+        const swatch = document.createElement('button');
+        swatch.style.width = '20px';
+        swatch.style.height = '20px';
+        swatch.style.borderRadius = '50%';
+        swatch.style.background = color;
+        swatch.style.border =
+          color === highlightColor ? '2px solid #333' : '1px solid #ccc';
+        swatch.style.cursor = 'pointer';
+        swatch.style.padding = '0';
+        swatch.setAttribute('aria-label', `Highlight color ${color}`);
+        swatch.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
+        swatch.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.pdfViewer.updateEditorAnnotation(ann.id, { color });
+        });
+        toolbar.appendChild(swatch);
+      }
+
+      // Delete button
+      const del = document.createElement('button');
+      del.style.display = 'flex';
+      del.style.alignItems = 'center';
+      del.style.justifyContent = 'center';
+      del.style.width = '20px';
+      del.style.height = '20px';
+      del.style.borderRadius = '50%';
+      del.style.border = '1px solid #ccc';
+      del.style.background = '#fff';
+      del.style.color = '#15141a';
+      del.style.cursor = 'pointer';
+      del.style.fontSize = '12px';
+      del.style.padding = '0';
+      del.style.marginLeft = '4px';
+      del.innerHTML = '&#128465;';
+      del.setAttribute('aria-label', 'Delete highlight');
+      del.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      del.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.selectedAnnotationId = null;
+        this.pdfViewer.removeEditorAnnotation(ann.id);
+      });
+      toolbar.appendChild(del);
+
+      wrapper.appendChild(toolbar);
+    }
+
+    editorLayer.appendChild(wrapper);
   }
 
   private createInteractiveStamp(
@@ -1563,7 +1677,8 @@ export class ScPdfViewerCanvas {
     const target = e.target as HTMLElement;
     if (
       !target.closest('.editor-stamp-wrapper') &&
-      !target.closest('.editor-freetext-wrapper')
+      !target.closest('.editor-freetext-wrapper') &&
+      !target.closest('.editor-highlight-wrapper')
     ) {
       this.selectedAnnotationId = null;
       const annotations = this.pdfViewer.editorAnnotations();

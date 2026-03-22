@@ -227,10 +227,6 @@ interface AttachmentData {
                 @if (
                   viewer.editorMode() === 'highlight' && editorParamsOpen()
                 ) {
-                  <div
-                    class="fixed inset-0 z-40"
-                    (click)="editorParamsOpen.set(false)"
-                  ></div>
                   <div class="pdfjs-editor-params">
                     <sc-pdf-viewer-editor-highlight-params />
                   </div>
@@ -254,10 +250,6 @@ interface AttachmentData {
                   <svg siTypeIcon class="size-4"></svg>
                 </button>
                 @if (viewer.editorMode() === 'freetext' && editorParamsOpen()) {
-                  <div
-                    class="fixed inset-0 z-40"
-                    (click)="editorParamsOpen.set(false)"
-                  ></div>
                   <div class="pdfjs-editor-params">
                     <sc-pdf-viewer-editor-freetext-params />
                   </div>
@@ -281,10 +273,6 @@ interface AttachmentData {
                   <svg siPenIcon class="size-4"></svg>
                 </button>
                 @if (viewer.editorMode() === 'ink' && editorParamsOpen()) {
-                  <div
-                    class="fixed inset-0 z-40"
-                    (click)="editorParamsOpen.set(false)"
-                  ></div>
                   <div class="pdfjs-editor-params">
                     <sc-pdf-viewer-editor-ink-params />
                   </div>
