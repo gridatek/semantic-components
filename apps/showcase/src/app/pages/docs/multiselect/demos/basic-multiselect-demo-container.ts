@@ -35,10 +35,11 @@ import {
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScField,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScLabel,
   ScMultiselect,
   ScMultiselectDisplayValue,
-  ScMultiselectIcon,
   ScMultiselectInput,
   ScMultiselectItem,
   ScMultiselectItemIndicator,
@@ -69,10 +70,11 @@ interface FormModel {
   selector: 'app-basic-multiselect-demo',
   imports: [
     ScField,
+    ScInputGroup,
+    ScInputGroupAddon,
     ScLabel,
     ScMultiselect,
     ScMultiselectDisplayValue,
-    ScMultiselectIcon,
     ScMultiselectInput,
     ScMultiselectOrigin,
     ScMultiselectItem,
@@ -103,21 +105,29 @@ interface FormModel {
           <label scLabel>Labels</label>
           <div scMultiselect class="w-full">
             <div scMultiselectOrigin>
-              <span scMultiselectDisplayValue>
-                @if (displayIcon(); as icon) {
-                  <ng-container
-                    *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-                  ></ng-container>
-                }
-                <span>{{ displayValue() }}</span>
-              </span>
-              <input
-                scMultiselectInput
-                [formField]="labelsForm.labels"
-                placeholder="Select a label"
-                aria-label="Label dropdown"
-              />
-              <svg scMultiselectIcon siChevronDownIcon aria-hidden="true"></svg>
+              <div scInputGroup>
+                <span scMultiselectDisplayValue>
+                  @if (displayIcon(); as icon) {
+                    <ng-container
+                      *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
+                    ></ng-container>
+                  }
+                  <span>{{ displayValue() }}</span>
+                </span>
+                <input
+                  scMultiselectInput
+                  [formField]="labelsForm.labels"
+                  placeholder="Select a label"
+                  aria-label="Label dropdown"
+                />
+                <div scInputGroupAddon align="inline-end">
+                  <svg
+                    siChevronDownIcon
+                    aria-hidden="true"
+                    class="opacity-50"
+                  ></svg>
+                </div>
+              </div>
             </div>
             <ng-template scMultiselectPortal>
               <div scMultiselectPopup>
