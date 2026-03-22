@@ -373,9 +373,12 @@ export class ScPdfViewerCanvas {
 
   readonly editorPointerEvents = computed(() => {
     const mode = this.editorMode();
-    if (mode !== 'none') return 'auto';
-    // When no editor mode, the layer itself passes through clicks,
-    // but children (annotations) with pointer-events:auto stay clickable
+    // Highlight mode needs pointer-events:none so the text layer underneath
+    // can handle text selection; onHighlightMouseUp captures via document listener.
+    // Freetext and ink need auto for direct interaction on the editor layer.
+    if (mode === 'freetext' || mode === 'ink') return 'auto';
+    // For 'none' and 'highlight', the layer passes through clicks,
+    // but children (annotations) with pointer-events:auto stay clickable.
     return 'none';
   });
 
