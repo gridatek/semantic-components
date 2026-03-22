@@ -9,8 +9,6 @@ import { FormsModule } from '@angular/forms';
 import {
   ScAutocomplete,
   ScAutocompleteEmpty,
-  ScAutocompleteGroup,
-  ScAutocompleteIcon,
   ScAutocompleteInput,
   ScAutocompleteItem,
   ScAutocompleteItemIndicator,
@@ -18,6 +16,9 @@ import {
   ScAutocompleteOrigin,
   ScAutocompletePopup,
   ScAutocompletePortal,
+  ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
@@ -27,8 +28,6 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     FormsModule,
     ScAutocomplete,
     ScAutocompleteEmpty,
-    ScAutocompleteGroup,
-    ScAutocompleteIcon,
     ScAutocompleteInput,
     ScAutocompleteOrigin,
     ScAutocompleteItem,
@@ -36,15 +35,21 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScAutocompleteList,
     ScAutocompletePopup,
     ScAutocompletePortal,
+    ScInput,
+    ScInputGroup,
+    ScInputGroupAddon,
     SiSearchIcon,
     SiCheckIcon,
   ],
   template: `
     <div scAutocomplete filterMode="auto-select" class="w-52">
       <div scAutocompleteOrigin>
-        <div scAutocompleteGroup>
-          <svg siSearchIcon scAutocompleteIcon></svg>
+        <div scInputGroup>
+          <div scInputGroupAddon align="inline-start">
+            <svg siSearchIcon></svg>
+          </div>
           <input
+            scInput
             scAutocompleteInput
             aria-label="Select a country"
             placeholder="Select a country"

@@ -13,10 +13,5 @@ import { cn } from '../../utils';
 export class ScAutocompleteInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      'border-input bg-background text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 h-9 w-full rounded-md border ps-9 pe-3 text-sm outline-none focus-visible:ring-3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn('', this.classInput()));
 }
