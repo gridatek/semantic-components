@@ -8,6 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { inputStyles } from '../input/input';
 import { ScCombobox } from './combobox';
 
 @Component({
@@ -16,7 +17,7 @@ import { ScCombobox } from './combobox';
     {{ displayValue() }}
   `,
   host: {
-    'data-slot': 'combobox-display-value',
+    'data-slot': 'control',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -42,7 +43,8 @@ export class ScComboboxDisplayValue {
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none flex flex-1 items-center gap-1.5 truncate [&_svg:not([class*=size-])]:size-4',
+      inputStyles,
+      'pointer-events-none flex items-center gap-1.5 truncate [&_svg:not([class*=size-])]:size-4',
       this.classInput(),
     ),
   );

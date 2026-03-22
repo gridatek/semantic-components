@@ -11,9 +11,7 @@ import {
   ScComboboxDialog,
   ScComboboxDisplayValue,
   ScComboboxEmpty,
-  ScComboboxIcon,
   ScComboboxInput,
-  ScComboboxInputGroup,
   ScComboboxItem,
   ScComboboxItemLabel,
   ScComboboxList,
@@ -21,10 +19,10 @@ import {
   ScComboboxOrigin,
   ScComboboxPopupContainer,
   ScComboboxSearchInput,
-  ScComboboxSearchInputGroup,
-  ScComboboxSearchInputIcon,
   ScComboboxSearchPanel,
   ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
@@ -97,20 +95,18 @@ const COUNTRIES: Country[] = [
     ScComboboxDialog,
     ScComboboxDisplayValue,
     ScComboboxInput,
-    ScComboboxInputGroup,
     ScComboboxItem,
     ScComboboxItemLabel,
     ScComboboxList,
     ScComboboxListContainer,
     ScComboboxPopupContainer,
     ScComboboxSearchInput,
-    ScComboboxSearchInputGroup,
-    ScComboboxSearchInputIcon,
     ScComboboxSearchPanel,
     ScComboboxEmpty,
-    ScComboboxIcon,
     ScComboboxOrigin,
     ScInput,
+    ScInputGroup,
+    ScInputGroupAddon,
     SiChevronDownIcon,
     SiSearchIcon,
   ],
@@ -121,13 +117,15 @@ const COUNTRIES: Country[] = [
           scComboboxOrigin
           class="border-input flex h-8 items-center rounded-lg border"
         >
-          <div scComboboxInputGroup class="w-auto shrink-0 border-0 pr-7">
+          <div scInputGroup class="w-auto shrink-0 border-0">
             <span
               scComboboxDisplayValue
               [displayValueFn]="countryDisplayFn"
             ></span>
             <input scComboboxInput />
-            <svg siChevronDownIcon scComboboxIcon></svg>
+            <div scInputGroupAddon align="inline-end">
+              <svg siChevronDownIcon class="opacity-50"></svg>
+            </div>
           </div>
           <div class="bg-border h-full w-px shrink-0"></div>
           <input
@@ -141,8 +139,10 @@ const COUNTRIES: Country[] = [
         <ng-template scComboboxPopupContainer>
           <dialog scComboboxDialog class="min-w-72">
             <div scComboboxSearchPanel>
-              <div scComboboxSearchInputGroup>
-                <svg siSearchIcon scComboboxSearchInputIcon></svg>
+              <div scInputGroup class="rounded-none border-x-0 border-t-0">
+                <div scInputGroupAddon align="inline-start">
+                  <svg siSearchIcon class="opacity-50"></svg>
+                </div>
                 <input
                   scComboboxSearchInput
                   placeholder="Search countries..."

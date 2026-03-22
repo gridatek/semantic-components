@@ -12,9 +12,7 @@ import {
   ScComboboxDialog,
   ScComboboxDisplayValue,
   ScComboboxEmpty,
-  ScComboboxIcon,
   ScComboboxInput,
-  ScComboboxInputGroup,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
@@ -23,9 +21,9 @@ import {
   ScComboboxOrigin,
   ScComboboxPopupContainer,
   ScComboboxSearchInput,
-  ScComboboxSearchInputGroup,
-  ScComboboxSearchInputIcon,
   ScComboboxSearchPanel,
+  ScInputGroup,
+  ScInputGroupAddon,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -44,18 +42,16 @@ import {
     ScComboboxDialog,
     ScComboboxDisplayValue,
     ScComboboxEmpty,
-    ScComboboxSearchInputIcon,
     ScComboboxItem,
     ScComboboxItemIndicator,
     ScComboboxItemLabel,
     ScComboboxSearchInput,
-    ScComboboxSearchInputGroup,
-    ScComboboxInputGroup,
     ScComboboxOrigin,
-    ScComboboxIcon,
     ScComboboxList,
     ScComboboxPopupContainer,
     ScComboboxInput,
+    ScInputGroup,
+    ScInputGroupAddon,
     FormsModule,
     SiCheckIcon,
     SiChevronsUpDownIcon,
@@ -66,7 +62,7 @@ import {
   template: `
     <div scCombobox [readonly]="true" class="w-60">
       <div scComboboxOrigin>
-        <div scComboboxInputGroup>
+        <div scInputGroup>
           <span
             scComboboxDisplayValue
             [displayValueFn]="countryDisplayFn"
@@ -79,14 +75,18 @@ import {
           <button scComboboxClear aria-label="Clear selection">
             <svg siXIcon></svg>
           </button>
-          <svg siChevronsUpDownIcon scComboboxIcon></svg>
+          <div scInputGroupAddon align="inline-end">
+            <svg siChevronsUpDownIcon class="opacity-50"></svg>
+          </div>
         </div>
       </div>
       <ng-template scComboboxPopupContainer>
         <dialog scComboboxDialog>
           <div scComboboxSearchPanel>
-            <div scComboboxSearchInputGroup>
-              <svg siSearchIcon scComboboxSearchInputIcon></svg>
+            <div scInputGroup class="rounded-none border-x-0 border-t-0">
+              <div scInputGroupAddon align="inline-start">
+                <svg siSearchIcon class="opacity-50"></svg>
+              </div>
               <input
                 scComboboxSearchInput
                 placeholder="Search..."
