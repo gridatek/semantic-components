@@ -1,3 +1,4 @@
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,6 +20,8 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
       >
         <dialog
           open
+          cdkTrapFocus
+          [cdkTrapFocusAutoCapture]="true"
           class="relative rounded border border-[#333] bg-[#474747] p-6 text-[#d1d5db] shadow-lg"
           (click)="$event.stopPropagation()"
         >
@@ -44,7 +47,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
               [value]="password()"
               (input)="password.set($any($event.target).value)"
               (keydown.enter)="submit()"
-              autofocus
             />
           </div>
 
@@ -68,6 +70,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
       </div>
     }
   `,
+  imports: [CdkTrapFocus],
   host: {
     'data-slot': 'pdf-viewer-password-dialog',
     '[class]': 'class()',
