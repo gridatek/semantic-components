@@ -19,20 +19,60 @@ import { AnnotationLayer, TextLayer, setLayerDimensions } from 'pdfjs-dist';
 import type { ScPdfViewerRoot } from './pdf-viewer-root';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
-/**
- * Minimal link service for AnnotationLayer — handles external URLs
- * and internal page navigation without importing pdf_viewer.mjs.
- */
-class MinimalLinkService {
+const DEFAULT_LINK_REL = 'noopener noreferrer nofollow';
+
+const enum LinkTarget {
+  NONE = 0,
+  SELF = 1,
+  BLANK = 2,
+  PARENT = 3,
+  TOP = 4,
+}
+
+class PdfLinkService {
   externalLinkEnabled = true;
 
+  private externalLinkTarget: LinkTarget = LinkTarget.BLANK;
+  private externalLinkRel: string = DEFAULT_LINK_REL;
+  private baseUrl: string | null = null;
+
   constructor(private viewer: ScPdfViewerRoot) {}
+
+  get pagesCount(): number {
+    return this.viewer.totalPages();
+  }
+
+  get page(): number {
+    return this.viewer.currentPage();
+  }
+
+  set page(value: number) {
+    this.viewer.goToPage(value);
+  }
+
+  get rotation(): number {
+    return this.viewer.rotation();
+  }
+
+  set rotation(value: number) {
+    // Rotation is managed by the viewer root
+  }
+
+  get isInPresentationMode(): boolean {
+    return this.viewer.isFullscreen();
+  }
+
+  setDocument(baseUrl: string | null = null): void {
+    this.baseUrl = baseUrl;
+  }
 
   addLinkAttributes(
     link: HTMLAnchorElement,
     url: string,
     newWindow = false,
   ): void {
+    if (!url || typeof url !== 'string') return;
+
     if (this.externalLinkEnabled) {
       link.href = link.title = url;
     } else {
@@ -40,22 +80,43 @@ class MinimalLinkService {
       link.title = `Disabled: ${url}`;
       link.onclick = () => false;
     }
-    link.target = newWindow ? '_blank' : '_blank';
-    link.rel = 'noopener noreferrer nofollow';
+
+    const target = newWindow ? LinkTarget.BLANK : this.externalLinkTarget;
+    switch (target) {
+      case LinkTarget.SELF:
+        link.target = '_self';
+        break;
+      case LinkTarget.BLANK:
+        link.target = '_blank';
+        break;
+      case LinkTarget.PARENT:
+        link.target = '_parent';
+        break;
+      case LinkTarget.TOP:
+        link.target = '_top';
+        break;
+      default:
+        break;
+    }
+
+    link.rel = this.externalLinkRel;
   }
 
   getDestinationHash(dest: unknown): string {
     if (typeof dest === 'string' && dest.length > 0) {
-      return '#' + escape(dest);
+      return this.getAnchorUrl('#' + escape(dest));
     }
     if (Array.isArray(dest)) {
-      return '#' + escape(JSON.stringify(dest));
+      const str = JSON.stringify(dest);
+      if (str.length > 0) {
+        return this.getAnchorUrl('#' + escape(str));
+      }
     }
-    return '';
+    return this.getAnchorUrl('');
   }
 
   getAnchorUrl(anchor: string): string {
-    return anchor;
+    return this.baseUrl ? this.baseUrl + anchor : anchor;
   }
 
   async goToDestination(dest: unknown): Promise<void> {
@@ -66,7 +127,7 @@ class MinimalLinkService {
     if (typeof dest === 'string') {
       explicitDest = (await doc.getDestination(dest)) as unknown[];
     } else {
-      explicitDest = dest as unknown[];
+      explicitDest = (await dest) as unknown[];
     }
 
     if (!Array.isArray(explicitDest)) return;
@@ -81,12 +142,79 @@ class MinimalLinkService {
       } catch {
         return;
       }
-    } else if (typeof destRef === 'number') {
-      pageNumber = destRef + 1;
+    } else if (Number.isInteger(destRef)) {
+      pageNumber = (destRef as number) + 1;
     }
 
-    if (pageNumber && pageNumber >= 1) {
+    if (pageNumber && pageNumber >= 1 && pageNumber <= this.pagesCount) {
       this.viewer.goToPage(pageNumber);
+    }
+  }
+
+  goToPage(val: number | string): void {
+    const doc = this.viewer.pdfDocument();
+    if (!doc) return;
+
+    const pageNumber = typeof val === 'string' ? parseInt(val, 10) : val | 0;
+    if (
+      Number.isInteger(pageNumber) &&
+      pageNumber > 0 &&
+      pageNumber <= this.pagesCount
+    ) {
+      this.viewer.goToPage(pageNumber);
+    }
+  }
+
+  setHash(hash: string): void {
+    const doc = this.viewer.pdfDocument();
+    if (!doc) return;
+
+    if (hash.includes('=')) {
+      const params = new URLSearchParams(hash);
+
+      if (params.has('page')) {
+        const pageNumber = parseInt(params.get('page')!, 10) || 1;
+        this.viewer.goToPage(pageNumber);
+      }
+
+      if (params.has('zoom')) {
+        const zoomArgs = params.get('zoom')!.split(',');
+        const zoomArg = zoomArgs[0];
+        const zoomArgNumber = parseFloat(zoomArg);
+
+        if (!zoomArg.includes('Fit') && zoomArgNumber) {
+          this.viewer.setZoom(zoomArgNumber / 100);
+        } else if (zoomArg === 'Fit' || zoomArg === 'FitB') {
+          this.viewer.setZoom('page-fit');
+        } else if (
+          zoomArg === 'FitH' ||
+          zoomArg === 'FitBH' ||
+          zoomArg === 'FitV' ||
+          zoomArg === 'FitBV'
+        ) {
+          this.viewer.setZoom('page-width');
+        }
+      }
+
+      if (params.has('nameddest')) {
+        this.goToDestination(params.get('nameddest')!);
+      }
+      return;
+    }
+
+    // Named (or explicit) destination
+    let dest: unknown = unescape(hash);
+    try {
+      dest = JSON.parse(dest as string);
+      if (!Array.isArray(dest)) {
+        dest = (dest as object).toString();
+      }
+    } catch {
+      // dest stays as string
+    }
+
+    if (typeof dest === 'string' || Array.isArray(dest)) {
+      this.goToDestination(dest);
     }
   }
 
@@ -104,11 +232,17 @@ class MinimalLinkService {
       case 'LastPage':
         this.viewer.goToPage(this.viewer.totalPages());
         break;
+      case 'GoBack':
+        history.back();
+        break;
+      case 'GoForward':
+        history.forward();
+        break;
     }
   }
 
-  executeSetOCGState(): void {
-    // Not supported
+  async executeSetOCGState(action: unknown): Promise<void> {
+    // OCG state changes are handled by the layers view component
   }
 }
 
@@ -192,7 +326,7 @@ export class ScPdfViewerCanvas {
   private readonly navigateTrigger = this.pdfViewer.navigateTrigger;
   private readonly findTrigger = this.pdfViewer.findTrigger;
 
-  private readonly linkService = new MinimalLinkService(this.pdfViewer);
+  private readonly linkService = new PdfLinkService(this.pdfViewer);
 
   private activeRenderTasks = new Map<number, RenderTask>();
   private activeTextLayers = new Map<number, TextLayer>();
