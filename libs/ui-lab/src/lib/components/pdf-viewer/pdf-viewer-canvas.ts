@@ -1161,18 +1161,7 @@ export class ScPdfViewerCanvas {
           editorLayer.appendChild(div);
         }
       } else if (ann.type === 'freetext') {
-        const div = document.createElement('div');
-        div.className = 'editor-annotation editor-freetext-rendered';
-        div.style.position = 'absolute';
-        div.style.left = `${(ann.x ?? 0) * 100}%`;
-        div.style.top = `${(ann.y ?? 0) * 100}%`;
-        div.style.fontSize = `${(ann.fontSize ?? 12) * scale}px`;
-        div.style.color = ann.fontColor || '#000';
-        div.style.whiteSpace = 'pre-wrap';
-        div.style.lineHeight = '1.2';
-        div.style.pointerEvents = 'none';
-        div.textContent = ann.text || '';
-        editorLayer.appendChild(div);
+        this.createInteractiveFreetext(ann, editorLayer, scale);
       } else if (ann.type === 'ink' && ann.strokes) {
         const canvas = document.createElement('canvas');
         canvas.className = 'editor-annotation editor-ink';
@@ -1413,10 +1402,169 @@ export class ScPdfViewerCanvas {
     editorLayer.appendChild(wrapper);
   }
 
+  private createInteractiveFreetext(
+    ann: import('./pdf-viewer-types').PdfEditorAnnotation,
+    editorLayer: HTMLElement,
+    scale: number,
+  ): void {
+    const isSelected = this.selectedAnnotationId === ann.id;
+    const fontSize = (ann.fontSize ?? 14) * scale;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'editor-annotation editor-freetext-wrapper';
+    wrapper.dataset['annotationId'] = ann.id;
+    wrapper.style.position = 'absolute';
+    wrapper.style.left = `${(ann.x ?? 0) * 100}%`;
+    wrapper.style.top = `${(ann.y ?? 0) * 100}%`;
+    wrapper.style.cursor = 'move';
+    wrapper.style.pointerEvents = 'auto';
+    wrapper.style.outline = isSelected ? '2px solid #6b9edd' : 'none';
+    wrapper.style.outlineOffset = '2px';
+    wrapper.style.zIndex = isSelected ? '10' : '5';
+    wrapper.style.padding = '2px 4px';
+    wrapper.style.whiteSpace = 'pre-wrap';
+    wrapper.style.lineHeight = '1.2';
+    wrapper.tabIndex = 0;
+
+    const textEl = document.createElement('div');
+    textEl.style.fontSize = `${fontSize}px`;
+    textEl.style.color = ann.fontColor || '#000';
+    textEl.style.pointerEvents = 'none';
+    textEl.style.userSelect = 'none';
+    textEl.textContent = ann.text || '';
+    wrapper.appendChild(textEl);
+
+    if (isSelected) {
+      // Delete button toolbar
+      const toolbar = document.createElement('div');
+      toolbar.className = 'editor-freetext-toolbar';
+      toolbar.style.position = 'absolute';
+      toolbar.style.left = '0';
+      toolbar.style.top = '100%';
+      toolbar.style.marginTop = '6px';
+      toolbar.style.display = 'flex';
+      toolbar.style.gap = '4px';
+      toolbar.style.zIndex = '12';
+
+      const del = document.createElement('button');
+      del.style.display = 'flex';
+      del.style.alignItems = 'center';
+      del.style.justifyContent = 'center';
+      del.style.width = '28px';
+      del.style.height = '28px';
+      del.style.borderRadius = '50%';
+      del.style.border = '1px solid #ccc';
+      del.style.background = '#fff';
+      del.style.color = '#15141a';
+      del.style.cursor = 'pointer';
+      del.style.fontSize = '14px';
+      del.style.padding = '0';
+      del.innerHTML = '&#128465;';
+      del.setAttribute('aria-label', 'Delete annotation');
+      del.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      del.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.selectedAnnotationId = null;
+        this.pdfViewer.removeEditorAnnotation(ann.id);
+      });
+      toolbar.appendChild(del);
+      wrapper.appendChild(toolbar);
+    }
+
+    // Click to select
+    wrapper.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (this.selectedAnnotationId !== ann.id) {
+        this.selectedAnnotationId = ann.id;
+        const annotations = this.pdfViewer.editorAnnotations();
+        this.renderEditorAnnotations(annotations, this.scaledValue());
+        return;
+      }
+
+      // Start drag
+      const layerRect = editorLayer.getBoundingClientRect();
+      this.dragState = {
+        annotationId: ann.id,
+        startX: e.clientX,
+        startY: e.clientY,
+        origX: ann.x ?? 0,
+        origY: ann.y ?? 0,
+        layerW: layerRect.width,
+        layerH: layerRect.height,
+      };
+    });
+
+    // Double-click to edit text inline
+    wrapper.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.selectedAnnotationId = ann.id;
+
+      textEl.style.pointerEvents = 'auto';
+      textEl.style.userSelect = 'text';
+      textEl.contentEditable = 'true';
+      textEl.style.outline = 'none';
+      textEl.style.cursor = 'text';
+      wrapper.style.cursor = 'text';
+      wrapper.style.outline = '2px solid #6b9edd';
+      textEl.focus();
+
+      // Select all text
+      const range = document.createRange();
+      range.selectNodeContents(textEl);
+      const sel = window.getSelection();
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+
+      const commitEdit = (): void => {
+        textEl.removeEventListener('blur', commitEdit);
+        const newText = textEl.textContent?.trim() ?? '';
+        textEl.contentEditable = 'false';
+        textEl.style.pointerEvents = 'none';
+        textEl.style.userSelect = 'none';
+        wrapper.style.cursor = 'move';
+
+        if (newText && newText !== ann.text) {
+          this.pdfViewer.updateEditorAnnotation(ann.id, { text: newText });
+        } else if (!newText) {
+          this.selectedAnnotationId = null;
+          this.pdfViewer.removeEditorAnnotation(ann.id);
+        }
+      };
+
+      textEl.addEventListener('blur', commitEdit);
+      textEl.addEventListener('keydown', (ke) => {
+        if (ke.key === 'Escape') {
+          textEl.removeEventListener('blur', commitEdit);
+          textEl.contentEditable = 'false';
+          textEl.style.pointerEvents = 'none';
+          textEl.style.userSelect = 'none';
+          wrapper.style.cursor = 'move';
+          // Re-render to restore original text
+          const annotations = this.pdfViewer.editorAnnotations();
+          this.renderEditorAnnotations(annotations, this.scaledValue());
+        } else if (ke.key === 'Enter' && !ke.shiftKey) {
+          ke.preventDefault();
+          textEl.blur();
+        }
+      });
+    });
+
+    editorLayer.appendChild(wrapper);
+  }
+
   private readonly onGlobalPointerDown = (e: PointerEvent): void => {
     if (!this.selectedAnnotationId) return;
     const target = e.target as HTMLElement;
-    if (!target.closest('.editor-stamp-wrapper')) {
+    if (
+      !target.closest('.editor-stamp-wrapper') &&
+      !target.closest('.editor-freetext-wrapper')
+    ) {
       this.selectedAnnotationId = null;
       const annotations = this.pdfViewer.editorAnnotations();
       this.renderEditorAnnotations(annotations, this.scaledValue());
