@@ -284,6 +284,15 @@ export class ScCalendarDayView {
       } else {
         this.monthScrollDown.emit();
       }
+
+      setTimeout(() => {
+        const btn = this._dayButtons().find(
+          (b) =>
+            b.element.getAttribute('data-day') === String(day.date.day) &&
+            b.element.getAttribute('data-outside') === null,
+        );
+        btn?.element.focus();
+      });
     }
   }
 
