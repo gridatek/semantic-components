@@ -353,15 +353,22 @@ export class ScCalendarDayView {
     const arrowUp = key === 'ArrowUp';
     const arrowDown = key === 'ArrowDown';
 
-    if ((day === 1 && arrowLeft) || (day <= 7 && arrowUp)) {
-      this.scrollUp();
+    if (day === 1 && arrowLeft) {
+      const prevMonthDays = viewDate
+        .subtract({ months: 1 })
+        .with({ day: 1 }).daysInMonth;
+      this.scrollUpToDay(prevMonthDays);
+    } else if (day <= 7 && arrowUp) {
+      const prevMonthDays = viewDate
+        .subtract({ months: 1 })
+        .with({ day: 1 }).daysInMonth;
+      this.scrollUpToDay(prevMonthDays + day - 7);
     }
 
-    if (
-      (day === daysInMonth && arrowRight) ||
-      (day > daysInMonth - 7 && arrowDown)
-    ) {
-      this.scrollDown();
+    if (day === daysInMonth && arrowRight) {
+      this.scrollDownToDay(1);
+    } else if (day > daysInMonth - 7 && arrowDown) {
+      this.scrollDownToDay(day + 7 - daysInMonth);
     }
   }
 
