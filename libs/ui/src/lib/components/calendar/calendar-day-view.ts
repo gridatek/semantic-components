@@ -58,7 +58,7 @@ interface DayInfo {
                 <td
                   ngGridCell
                   class="relative p-0 text-center text-sm"
-                  [disabled]="day.disabled || day.isOutsideMonth"
+                  [disabled]="day.disabled"
                   [(selected)]="day.selected"
                 >
                   <button
@@ -80,7 +80,7 @@ interface DayInfo {
                     [attr.data-range-end]="isRangeEnd(day.date) || null"
                     [attr.data-range-middle]="isRangeMiddle(day.date) || null"
                     [attr.data-day]="day.date.day"
-                    (click)="handleDateClick(day.date)"
+                    (click)="handleDateClick(day)"
                   >
                     {{ day.date.day }}
                   </button>
@@ -275,8 +275,16 @@ export class ScCalendarDayView {
     );
   }
 
-  protected handleDateClick(date: Temporal.PlainDate): void {
-    this.dateSelected.emit(date);
+  protected handleDateClick(day: DayInfo): void {
+    this.dateSelected.emit(day.date);
+
+    if (day.isOutsideMonth) {
+      if (Temporal.PlainDate.compare(day.date, this.viewDate()) < 0) {
+        this.monthScrollUp.emit();
+      } else {
+        this.monthScrollDown.emit();
+      }
+    }
   }
 
   protected handleKeyDown(event: KeyboardEvent): void {
