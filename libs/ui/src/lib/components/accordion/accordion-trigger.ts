@@ -20,7 +20,7 @@ import { cn } from '../../utils';
   hostDirectives: [
     {
       directive: AccordionTrigger,
-      inputs: ['panelId', 'disabled', 'expanded', 'id'],
+      inputs: ['panel', 'disabled', 'expanded', 'id'],
       outputs: ['expandedChange'],
     },
   ],

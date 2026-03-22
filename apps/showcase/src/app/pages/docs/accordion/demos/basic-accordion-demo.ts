@@ -29,11 +29,11 @@ import {
     <div scAccordionGroup [multiExpandable]="false" class="max-w-lg">
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="shipping" [expanded]="true">
+          <button scAccordionTrigger [panel]="shipping.panel" [expanded]="true">
             What are your shipping options?
           </button>
         </div>
-        <div scAccordionPanel panelId="shipping">
+        <div scAccordionPanel #shipping="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>
               We offer standard (5-7 days), express (2-3 days), and overnight
@@ -44,11 +44,11 @@ import {
       </div>
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="returns">
+          <button scAccordionTrigger [panel]="returns.panel">
             What is your return policy?
           </button>
         </div>
-        <div scAccordionPanel panelId="returns">
+        <div scAccordionPanel #returns="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>
               Returns accepted within 30 days. Items must be unused and in
@@ -59,11 +59,11 @@ import {
       </div>
       <div scAccordionItem>
         <div scAccordionHeader>
-          <button scAccordionTrigger panelId="support">
+          <button scAccordionTrigger [panel]="support.panel">
             How can I contact customer support?
           </button>
         </div>
-        <div scAccordionPanel panelId="support">
+        <div scAccordionPanel #support="scAccordionPanel">
           <ng-template scAccordionContent>
             <sc-accordion-body>
               Reach us via email, live chat, or phone. We respond within 24

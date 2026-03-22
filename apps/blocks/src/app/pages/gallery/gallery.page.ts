@@ -452,11 +452,15 @@ import {
             <div scAccordionGroup [multiExpandable]="false" class="max-w-lg">
               <div scAccordionItem>
                 <div scAccordionHeader>
-                  <button scAccordionTrigger panelId="faq-1" [expanded]="true">
+                  <button
+                    scAccordionTrigger
+                    [panel]="faq1.panel"
+                    [expanded]="true"
+                  >
                     Is it accessible?
                   </button>
                 </div>
-                <div scAccordionPanel panelId="faq-1">
+                <div scAccordionPanel #faq1="scAccordionPanel">
                   <ng-template scAccordionContent>
                     <sc-accordion-body>
                       Yes. It adheres to the WAI-ARIA design pattern.
@@ -466,11 +470,11 @@ import {
               </div>
               <div scAccordionItem>
                 <div scAccordionHeader>
-                  <button scAccordionTrigger panelId="faq-2">
+                  <button scAccordionTrigger [panel]="faq2.panel">
                     Is it styled?
                   </button>
                 </div>
-                <div scAccordionPanel panelId="faq-2">
+                <div scAccordionPanel #faq2="scAccordionPanel">
                   <ng-template scAccordionContent>
                     <sc-accordion-body>
                       Yes. It comes with default styles that match the other
@@ -481,11 +485,11 @@ import {
               </div>
               <div scAccordionItem>
                 <div scAccordionHeader>
-                  <button scAccordionTrigger panelId="faq-3">
+                  <button scAccordionTrigger [panel]="faq3.panel">
                     Is it animated?
                   </button>
                 </div>
-                <div scAccordionPanel panelId="faq-3">
+                <div scAccordionPanel #faq3="scAccordionPanel">
                   <ng-template scAccordionContent>
                     <sc-accordion-body>
                       Yes. It's animated by default, but you can disable it if

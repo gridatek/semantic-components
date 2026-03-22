@@ -4,18 +4,20 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
 
 @Component({
   selector: '[scAccordionPanel]',
+  exportAs: 'scAccordionPanel',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   hostDirectives: [
     {
       directive: AccordionPanel,
-      inputs: ['panelId', 'id'],
+      inputs: ['id'],
     },
   ],
   host: {
@@ -27,6 +29,8 @@ import { cn } from '../../utils';
   `,
 })
 export class ScAccordionPanel {
+  readonly panel = inject(AccordionPanel);
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly class = computed(() => cn('text-sm', this.classInput()));
 }

@@ -4,16 +4,18 @@ import {
   Component,
   ViewEncapsulation,
   computed,
+  inject,
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
 
 @Component({
   selector: '[scCollapsiblePanel]',
+  exportAs: 'scCollapsiblePanel',
   hostDirectives: [
     {
       directive: AccordionPanel,
-      inputs: ['panelId'],
+      inputs: ['id'],
     },
   ],
   template: `
@@ -27,6 +29,8 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCollapsiblePanel {
+  readonly panel = inject(AccordionPanel);
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() => cn('', this.classInput()));
