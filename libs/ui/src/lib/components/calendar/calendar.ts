@@ -187,6 +187,22 @@ export class ScCalendar {
       return date.year.toString();
     }
 
+    const n = this.numberOfMonths();
+    if (n > 1) {
+      const lastDate = date.add({ months: n - 1 });
+      const firstLabel = date.toLocaleString(this.locale, { month: 'long' });
+      const lastLabel = lastDate.toLocaleString(this.locale, {
+        month: 'long',
+        year: 'numeric',
+      });
+
+      if (date.year === lastDate.year) {
+        return `${firstLabel} – ${lastLabel}`;
+      }
+
+      return `${date.toLocaleString(this.locale, { month: 'long', year: 'numeric' })} – ${lastLabel}`;
+    }
+
     return date.toLocaleString(this.locale, { month: 'long', year: 'numeric' });
   });
 
