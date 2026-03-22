@@ -269,6 +269,7 @@ interface PageLayout {
           [style.height.px]="page.height * scaledValue()"
           [style.transform]="'rotate(' + rotation() + 'deg)'"
           [style.transform-origin]="'center center'"
+          [style.cursor]="pageCursor()"
         >
           <canvas
             [attr.data-page]="page.pageNumber"
@@ -384,10 +385,15 @@ export class ScPdfViewerCanvas {
 
   readonly editorCursor = computed(() => {
     const mode = this.editorMode();
-    if (mode === 'highlight') return 'text';
     if (mode === 'freetext') return 'text';
     if (mode === 'ink') return 'crosshair';
     return 'default';
+  });
+
+  readonly pageCursor = computed(() => {
+    const mode = this.editorMode();
+    if (mode === 'highlight') return 'text';
+    return '';
   });
 
   // Reactive container dimensions — updated by ResizeObserver so that
