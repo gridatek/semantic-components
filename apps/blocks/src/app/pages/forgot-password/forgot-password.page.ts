@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
+import { FormField, email, form, required } from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import {
   ScButton,
@@ -23,6 +25,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-forgot-password',
   imports: [
+    FormField,
     RouterLink,
     ScButton,
     ScCard,
@@ -54,9 +57,16 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
           <div scFieldGroup>
             <div scField>
               <label scLabel>Email</label>
-              <input scInput type="email" placeholder="name@example.com" />
+              <input
+                scInput
+                type="email"
+                [formField]="forgotPasswordForm.email"
+                placeholder="name@example.com"
+              />
             </div>
-            <button scButton class="w-full">Send Reset Link</button>
+            <button scButton class="w-full" type="submit">
+              Send Reset Link
+            </button>
           </div>
         </div>
         <div scCardFooter class="justify-center">
@@ -69,4 +79,13 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ForgotPasswordPage {}
+export default class ForgotPasswordPage {
+  private readonly formModel = signal({
+    email: '',
+  });
+
+  readonly forgotPasswordForm = form(this.formModel, (s) => {
+    required(s.email);
+    email(s.email);
+  });
+}
