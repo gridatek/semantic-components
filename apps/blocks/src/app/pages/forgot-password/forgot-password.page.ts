@@ -26,7 +26,7 @@ import {
   ScLabel,
   ScLink,
 } from '@semantic-components/ui';
-import { SiMailIcon } from '@semantic-icons/lucide-icons';
+import { Logo } from '../../components/logo/logo';
 
 @Component({
   selector: 'app-forgot-password',
@@ -46,14 +46,14 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
     ScInput,
     ScLabel,
     ScLink,
-    SiMailIcon,
+    Logo,
   ],
   template: `
     <div class="bg-muted/30 flex min-h-screen items-center justify-center">
       <div scCard class="w-full max-w-md">
         <div scCardHeader class="text-center">
           <div class="mb-2 flex justify-center">
-            <svg siMailIcon class="text-muted-foreground size-10"></svg>
+            <app-logo />
           </div>
           <h1 scCardTitle>Forgot your password?</h1>
           <p scCardDescription>
