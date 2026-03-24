@@ -12,8 +12,11 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScField,
+  ScFieldGroup,
   ScInput,
   ScLabel,
+  ScLink,
 } from '@semantic-components/ui';
 import { SiMailIcon } from '@semantic-icons/lucide-icons';
 
@@ -28,8 +31,11 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
     ScCardFooter,
     ScCardHeader,
     ScCardTitle,
+    ScField,
+    ScFieldGroup,
     ScInput,
     ScLabel,
+    ScLink,
     SiMailIcon,
   ],
   template: `
@@ -45,26 +51,16 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
           </p>
         </div>
         <div scCardBody>
-          <div class="space-y-4">
-            <div class="space-y-2">
-              <label scLabel for="email">Email</label>
-              <input
-                scInput
-                id="email"
-                type="email"
-                placeholder="name@example.com"
-              />
+          <div scFieldGroup>
+            <div scField>
+              <label scLabel>Email</label>
+              <input scInput type="email" placeholder="name@example.com" />
             </div>
             <button scButton class="w-full">Send Reset Link</button>
           </div>
         </div>
         <div scCardFooter class="justify-center">
-          <a
-            routerLink="/login"
-            class="text-muted-foreground text-sm hover:underline"
-          >
-            Back to login
-          </a>
+          <a scLink variant="link" routerLink="/login">Back to login</a>
         </div>
       </div>
     </div>
