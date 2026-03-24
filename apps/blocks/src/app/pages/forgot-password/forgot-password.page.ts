@@ -4,7 +4,13 @@ import {
   ViewEncapsulation,
   signal,
 } from '@angular/core';
-import { FormField, email, form, required } from '@angular/forms/signals';
+import {
+  FormField,
+  FormRoot,
+  email,
+  form,
+  required,
+} from '@angular/forms/signals';
 import { RouterLink } from '@angular/router';
 import {
   ScButton,
@@ -26,6 +32,7 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-forgot-password',
   imports: [
     FormField,
+    FormRoot,
     RouterLink,
     ScButton,
     ScCard,
@@ -54,20 +61,22 @@ import { SiMailIcon } from '@semantic-icons/lucide-icons';
           </p>
         </div>
         <div scCardBody>
-          <div scFieldGroup>
-            <div scField>
-              <label scLabel>Email</label>
-              <input
-                scInput
-                type="email"
-                [formField]="forgotPasswordForm.email"
-                placeholder="name@example.com"
-              />
+          <form [formRoot]="forgotPasswordForm">
+            <div scFieldGroup>
+              <div scField>
+                <label scLabel>Email</label>
+                <input
+                  scInput
+                  type="email"
+                  [formField]="forgotPasswordForm.email"
+                  placeholder="name@example.com"
+                />
+              </div>
+              <button scButton class="w-full" type="submit">
+                Send Reset Link
+              </button>
             </div>
-            <button scButton class="w-full" type="submit">
-              Send Reset Link
-            </button>
-          </div>
+          </form>
         </div>
         <div scCardFooter class="justify-center">
           <a scLink variant="link" routerLink="/login">Back to login</a>
