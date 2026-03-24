@@ -93,8 +93,18 @@ export default class ForgotPasswordPage {
     email: '',
   });
 
-  readonly forgotPasswordForm = form(this.formModel, (s) => {
-    required(s.email);
-    email(s.email);
-  });
+  readonly forgotPasswordForm = form(
+    this.formModel,
+    (s) => {
+      required(s.email);
+      email(s.email);
+    },
+    {
+      submission: {
+        action: async (formTree) => {
+          console.log('Submitting:', formTree().value());
+        },
+      },
+    },
+  );
 }
