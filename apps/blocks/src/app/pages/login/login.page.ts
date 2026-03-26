@@ -18,6 +18,7 @@ import {
   ScSeparator,
 } from '@semantic-components/ui';
 import { SiGithubIcon } from '@semantic-icons/lucide-icons';
+import { Logo } from '../../components/logo/logo';
 
 @Component({
   selector: 'app-login',
@@ -35,12 +36,16 @@ import { SiGithubIcon } from '@semantic-icons/lucide-icons';
     ScLabel,
     ScSeparator,
     SiGithubIcon,
+    Logo,
   ],
   host: { class: 'block' },
   template: `
     <div class="bg-muted/30 flex min-h-screen items-center justify-center p-4">
       <div scCard class="w-full max-w-md">
         <div scCardHeader class="text-center">
+          <div class="mb-2 flex justify-center">
+            <app-logo />
+          </div>
           <h1 scCardTitle class="text-2xl">Welcome back</h1>
           <p scCardDescription>Enter your credentials to access your account</p>
         </div>
