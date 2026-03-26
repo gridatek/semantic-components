@@ -59,23 +59,37 @@ function findClosingBacktick(content, startIndex) {
 }
 
 /**
- * Replace the content of `readonly code = \`...\`` in containerContent
- * with the new escaped value. Returns the updated string or null if not found.
+ * Replace the content of `readonly code = \`...\`` (or `'...'` / `"..."`)
+ * in containerContent with the new escaped value inside backticks.
+ * Returns the updated string or null if not found.
  */
 function replaceCodeProperty(containerContent, newEscapedContent) {
-  const propRegex = /readonly code\s*=\s*`/g;
-  const match = propRegex.exec(containerContent);
-  if (!match) return null;
+  // Try backtick first
+  const btRegex = /readonly code\s*=\s*`/g;
+  const btMatch = btRegex.exec(containerContent);
+  if (btMatch) {
+    const openBtPos = btMatch.index + btMatch[0].length - 1;
+    const closeBtPos = findClosingBacktick(containerContent, openBtPos);
+    if (closeBtPos === -1) return null;
 
-  // The opening backtick is the last char of the matched string
-  const openBtPos = match.index + match[0].length - 1;
-  const closeBtPos = findClosingBacktick(containerContent, openBtPos);
-  if (closeBtPos === -1) return null;
+    return (
+      containerContent.slice(0, openBtPos + 1) +
+      newEscapedContent +
+      containerContent.slice(closeBtPos)
+    );
+  }
+
+  // Fall back to single/double quoted strings
+  const strRegex = /readonly code\s*=\s*(['"])([^]*?)\1/g;
+  const strMatch = strRegex.exec(containerContent);
+  if (!strMatch) return null;
 
   return (
-    containerContent.slice(0, openBtPos + 1) +
+    containerContent.slice(0, strMatch.index) +
+    'readonly code = `' +
     newEscapedContent +
-    containerContent.slice(closeBtPos)
+    '`' +
+    containerContent.slice(strMatch.index + strMatch[0].length)
   );
 }
 
@@ -104,23 +118,33 @@ for (const containerPath of containerFiles) {
 
   const containerContent = readFileSync(containerPath, 'utf8');
 
-  // Extract current embedded content using the proper backtick scanner
-  const propRegex = /readonly code\s*=\s*`/g;
-  const m = propRegex.exec(containerContent);
-  if (!m) {
+  // Extract current embedded content (backtick, single-quote, or double-quote)
+  let currentEmbedded = null;
+
+  const btRegex = /readonly code\s*=\s*`/g;
+  const btMatch = btRegex.exec(containerContent);
+  if (btMatch) {
+    const openBt = btMatch.index + btMatch[0].length - 1;
+    const closeBt = findClosingBacktick(containerContent, openBt);
+    if (closeBt === -1) {
+      console.warn(`  UNCLOSED template literal in: ${containerPath}`);
+      skipped++;
+      continue;
+    }
+    currentEmbedded = containerContent.slice(openBt + 1, closeBt);
+  } else {
+    const strRegex = /readonly code\s*=\s*(['"])([^]*?)\1/g;
+    const strMatch = strRegex.exec(containerContent);
+    if (strMatch) {
+      currentEmbedded = strMatch[2];
+    }
+  }
+
+  if (currentEmbedded === null) {
     console.warn(`  NO code field found in: ${containerPath}`);
     skipped++;
     continue;
   }
-  const openBt = m.index + m[0].length - 1;
-  const closeBt = findClosingBacktick(containerContent, openBt);
-  if (closeBt === -1) {
-    console.warn(`  UNCLOSED template literal in: ${containerPath}`);
-    skipped++;
-    continue;
-  }
-
-  const currentEmbedded = containerContent.slice(openBt + 1, closeBt);
 
   if (currentEmbedded === escaped) {
     skipped++;
