@@ -1,8 +1,7 @@
 export { SC_DIFF_VIEWER, ScDiffViewer } from './diff-viewer';
 export type { DiffViewMode, DiffLine, DiffResult } from './diff-viewer';
 export { ScDiffViewerHeader } from './diff-viewer-header';
-export { ScDiffViewerToggle } from './diff-viewer-toggle';
-export { ScDiffViewerToggleButton } from './diff-viewer-toggle-button';
+export { ScDiffViewerModeSwitch } from './diff-viewer-mode-switch';
 export { ScDiffViewerContent } from './diff-viewer-content';
 export { ScDiffViewerSplit } from './diff-viewer-split';
 export { ScDiffViewerPane } from './diff-viewer-pane';

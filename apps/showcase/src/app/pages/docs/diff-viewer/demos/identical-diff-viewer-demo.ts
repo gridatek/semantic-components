@@ -4,6 +4,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  ScToolbar,
+  ScToolbarToggle,
+  ScToolbarToggleGroup,
+} from '@semantic-components/ui';
+import {
   ScDiffViewer,
   ScDiffViewerContent,
   ScDiffViewerEmpty,
@@ -13,10 +18,9 @@ import {
   ScDiffViewerLineNumber,
   ScDiffViewerLinePlaceholder,
   ScDiffViewerLineSign,
+  ScDiffViewerModeSwitch,
   ScDiffViewerPane,
   ScDiffViewerSplit,
-  ScDiffViewerToggle,
-  ScDiffViewerToggleButton,
 } from '@semantic-components/ui-lab';
 
 @Component({
@@ -24,8 +28,10 @@ import {
   imports: [
     ScDiffViewer,
     ScDiffViewerHeader,
-    ScDiffViewerToggle,
-    ScDiffViewerToggleButton,
+    ScDiffViewerModeSwitch,
+    ScToolbar,
+    ScToolbarToggle,
+    ScToolbarToggleGroup,
     ScDiffViewerContent,
     ScDiffViewerSplit,
     ScDiffViewerPane,
@@ -60,9 +66,11 @@ const y = 2;'"
               -{{ diff.diffResult().deletions }}
             </span>
           </div>
-          <div scDiffViewerToggle>
-            <button scDiffViewerToggleButton mode="split">Split</button>
-            <button scDiffViewerToggleButton mode="unified">Unified</button>
+          <div scToolbar scDiffViewerModeSwitch>
+            <div scToolbarToggleGroup>
+              <button scToolbarToggle value="split">Split</button>
+              <button scToolbarToggle value="unified">Unified</button>
+            </div>
           </div>
         </div>
       </div>

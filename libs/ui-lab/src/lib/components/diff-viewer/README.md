@@ -17,9 +17,11 @@ A composable set of directives for comparing text and code changes in split or u
         <span class="text-green-600 dark:text-green-400">+{{ diff.diffResult().additions }}</span>
         <span class="text-red-600 dark:text-red-400">-{{ diff.diffResult().deletions }}</span>
       </div>
-      <div scDiffViewerToggle>
-        <button scDiffViewerToggleButton mode="split">Split</button>
-        <button scDiffViewerToggleButton mode="unified">Unified</button>
+      <div scToolbar scDiffViewerModeSwitch>
+        <div scToolbarToggleGroup>
+          <button scToolbarToggle value="split">Split</button>
+          <button scToolbarToggle value="unified">Unified</button>
+        </div>
       </div>
     </div>
   </div>
@@ -128,23 +130,11 @@ Header bar container with flex layout.
 
 **Selector:** `div[scDiffViewerHeader]`
 
-### ScDiffViewerToggle
+### ScDiffViewerModeSwitch
 
-Container for view mode toggle buttons.
+Bridge directive that syncs `Toolbar` selection with the diff viewer's `viewMode` signal. Apply alongside `scToolbar` on a `<div>`. Use with `ScToolbarToggleGroup` and `ScToolbarToggle` from `@semantic-components/ui`.
 
-**Selector:** `div[scDiffViewerToggle]`
-
-### ScDiffViewerToggleButton
-
-Toggle button for switching between split/unified views.
-
-**Selector:** `button[scDiffViewerToggleButton]`
-
-**Inputs:**
-
-| Input  | Type                   | Description                |
-| ------ | ---------------------- | -------------------------- |
-| `mode` | `'split' \| 'unified'` | **(required)** Target mode |
+**Selector:** `div[scDiffViewerModeSwitch]`
 
 ### ScDiffViewerContent
 
