@@ -1,6 +1,6 @@
 {
   "name": "@semantic-components/ui-lab",
-  "version": "0.80.0",
+  "version": "0.81.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -20,9 +20,9 @@
     "@angular/aria": ">=21.1.1",
     "rxjs": ">=7.8.2",
     "@semantic-icons/lucide-icons": ">=0.56.0",
-    "@semantic-components/ui": "0.80.0",
+    "@semantic-components/ui": "0.81.0",
     "@js-temporal/polyfill": "^0.5.1",
-    "@semantic-components/carousel": "0.80.0",
+    "@semantic-components/carousel": "0.81.0",
     "uqr": ">=0.1.2",
     "emojibase-data": "^17.0.0",
     "pdfjs-dist": ">=4.0.0"
