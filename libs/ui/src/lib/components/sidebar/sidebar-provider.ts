@@ -24,7 +24,6 @@ const MOBILE_BREAKPOINT = 768;
   template: '<ng-content />',
   providers: [ScSidebarState],
   host: {
-    'data-slot': 'sidebar-wrapper',
     '[class]': 'class()',
     '[style.--sidebar-width]': '"16rem"',
     '[style.--sidebar-width-mobile]': '"18rem"',

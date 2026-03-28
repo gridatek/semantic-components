@@ -4,8 +4,6 @@ import { Directive } from '@angular/core';
 @Directive({
   selector: 'ng-template[scComboboxPopupContainer]',
   hostDirectives: [ComboboxPopupContainer],
-  host: {
-    'data-slot': 'combobox-popup-container',
-  },
+  host: {},
 })
 export class ScComboboxPopupContainer {}

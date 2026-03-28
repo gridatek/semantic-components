@@ -12,7 +12,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'combobox-search-input',
     '[class]': 'class()',
   },
 })

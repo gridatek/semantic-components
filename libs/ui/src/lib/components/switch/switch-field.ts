@@ -24,7 +24,6 @@ import { ScSwitchVisual } from './switch-visual';
     { provide: SC_FIELD, useExisting: ScSwitchField },
   ],
   host: {
-    'data-slot': 'switch-field',
     '[attr.role]': 'role()',
     '[class]': 'class()',
     '[attr.data-state]': 'dataState()',

@@ -7,7 +7,6 @@ import { ScPopoverProvider } from './popover-provider';
   selector: 'button[scPopoverTrigger]',
   hostDirectives: [CdkOverlayOrigin],
   host: {
-    'data-slot': 'popover-trigger',
     '[class]': 'class()',
     '[attr.aria-haspopup]': '"dialog"',
     '[attr.aria-expanded]': 'popover.open()',

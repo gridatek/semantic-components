@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'span[scAvatarBadge]',
   host: {
-    'data-slot': 'avatar-badge',
     '[class]': 'class()',
   },
 })

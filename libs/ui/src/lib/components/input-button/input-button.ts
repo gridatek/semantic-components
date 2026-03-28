@@ -5,7 +5,6 @@ import { buttonVariants } from '../button/button';
 @Directive({
   selector: 'button[scInputButton]',
   host: {
-    'data-slot': 'input-button',
     type: 'button',
     '[class]': 'class()',
   },

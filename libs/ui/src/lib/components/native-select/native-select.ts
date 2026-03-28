@@ -6,7 +6,6 @@ import { SC_FIELD } from '../field';
 @Directive({
   selector: 'select[scNativeSelect]',
   host: {
-    'data-slot': 'native-select',
     '[attr.id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.data-size]': 'size()',

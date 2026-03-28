@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'a[scBreadcrumbLink]',
   host: {
-    'data-slot': 'breadcrumb-link',
     '[class]': 'class()',
   },
 })

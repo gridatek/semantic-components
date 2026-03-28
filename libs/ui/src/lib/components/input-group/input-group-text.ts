@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'span[scInputGroupText]',
   host: {
-    'data-slot': 'input-group-text',
     '[class]': 'class()',
   },
 })

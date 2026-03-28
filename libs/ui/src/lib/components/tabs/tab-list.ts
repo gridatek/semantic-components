@@ -45,7 +45,6 @@ type ScTabListVariant = VariantProps<typeof tabsListVariants>['variant'];
     },
   ],
   host: {
-    'data-slot': 'tab-list',
     '[class]': 'class()',
     '[attr.data-variant]': 'variant()',
   },

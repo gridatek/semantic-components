@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scAccordionHeader]',
   host: {
-    'data-slot': 'accordion-header',
     '[class]': 'class()',
   },
 })

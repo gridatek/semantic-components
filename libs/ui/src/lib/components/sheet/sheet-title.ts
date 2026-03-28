@@ -5,7 +5,6 @@ import { ScSheet } from './sheet';
 @Directive({
   selector: 'h2[scSheetTitle]',
   host: {
-    'data-slot': 'sheet-title',
     '[id]': 'sheet.titleId',
     '[class]': 'class()',
   },

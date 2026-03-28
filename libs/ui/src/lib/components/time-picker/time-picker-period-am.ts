@@ -5,7 +5,6 @@ import { ScTimePickerPeriod } from './time-picker-period';
 @Directive({
   selector: 'button[scTimePickerPeriodAM]',
   host: {
-    'data-slot': 'time-picker-period-am',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'period.timePicker.disabled()',

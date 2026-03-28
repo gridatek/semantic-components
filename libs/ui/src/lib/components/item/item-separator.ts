@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scItemSeparator]',
   host: {
-    'data-slot': 'item-separator',
     role: 'none',
     '[class]': 'class()',
   },

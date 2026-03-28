@@ -30,7 +30,6 @@ export type ScInputGroupAddonVariants = VariantProps<
 @Directive({
   selector: 'div[scInputGroupAddon]',
   host: {
-    'data-slot': 'input-group-addon',
     role: 'group',
     '[attr.data-align]': 'align()',
     '[class]': 'class()',

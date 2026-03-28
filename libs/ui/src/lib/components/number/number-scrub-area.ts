@@ -15,7 +15,6 @@ import { SC_NUMBER } from './number';
 @Directive({
   selector: '[scNumberScrubArea]',
   host: {
-    'data-slot': 'number-scrub-area',
     '[class]': 'class()',
     '[attr.data-scrubbing]': 'isScrubbing() || null',
     '[attr.data-disabled]': 'number.disabled() || null',

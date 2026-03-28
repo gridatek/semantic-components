@@ -12,7 +12,6 @@ import { ScProgress } from './progress';
 @Component({
   selector: '[scProgressIndicator]',
   host: {
-    'data-slot': 'progress-indicator',
     '[class]': 'class()',
     '[style.transform]':
       '"translateX(-" + (100 - progress.percentage()) + "%)"',

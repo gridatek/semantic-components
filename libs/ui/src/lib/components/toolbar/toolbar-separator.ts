@@ -5,7 +5,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scToolbarSeparator]',
   host: {
-    'data-slot': 'toolbar-separator',
     role: 'separator',
     '[attr.aria-orientation]': 'separatorOrientation()',
     '[attr.data-orientation]': 'separatorOrientation()',

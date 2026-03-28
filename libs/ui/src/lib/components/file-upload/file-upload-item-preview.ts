@@ -25,7 +25,6 @@ import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
     }
   `,
   host: {
-    'data-slot': 'file-upload-item-preview',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

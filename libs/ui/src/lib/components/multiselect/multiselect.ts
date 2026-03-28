@@ -63,7 +63,6 @@ const positions = [
     </ng-template>
   `,
   host: {
-    'data-slot': 'multiselect',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

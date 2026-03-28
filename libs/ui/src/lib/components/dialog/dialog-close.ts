@@ -6,7 +6,6 @@ import { ScDialogProvider } from './dialog-provider';
 @Directive({
   selector: 'button[scDialogClose]',
   host: {
-    'data-slot': 'dialog-close',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'closeDialog()',

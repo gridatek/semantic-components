@@ -6,7 +6,6 @@ import { SC_FILE_UPLOAD } from './file-upload';
 @Directive({
   selector: 'label[scFileUploadTrigger]',
   host: {
-    'data-slot': 'file-upload-trigger',
     '[class]': 'class()',
     '[attr.data-disabled]': 'fileUpload.disabled() || null',
   },

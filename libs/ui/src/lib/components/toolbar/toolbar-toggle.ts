@@ -22,7 +22,6 @@ import { toggleVariants } from '../toggle/toggle';
     <ng-content />
   `,
   host: {
-    'data-slot': 'toolbar-toggle',
     type: 'button',
     '[attr.data-state]': 'widget.selected() ? "on" : "off"',
     '[class]': 'class()',

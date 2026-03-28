@@ -17,7 +17,6 @@ const MIN_THUMB_SIZE = 20;
 @Component({
   selector: 'div[scScrollBar]',
   host: {
-    'data-slot': 'scroll-bar',
     '[class]': 'class()',
     '[attr.data-state]': 'visible() ? "visible" : "hidden"',
     '[attr.data-orientation]': 'orientation()',
@@ -198,9 +197,6 @@ export class ScScrollBar {
   );
 
   protected readonly thumbClass = computed(() =>
-    cn(
-      'rounded-full bg-border',
-      this.isVertical() ? 'w-full' : 'h-full',
-    ),
+    cn('rounded-full bg-border', this.isVertical() ? 'w-full' : 'h-full'),
   );
 }

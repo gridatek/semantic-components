@@ -21,7 +21,6 @@ type ScAlertDialogState = 'idle' | 'open' | 'closed';
     <ng-content />
   `,
   host: {
-    'data-slot': 'alert-dialog',
     role: 'alertdialog',
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'titleId',

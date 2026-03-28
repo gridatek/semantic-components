@@ -6,7 +6,6 @@ import { SC_NUMBER } from './number';
 @Directive({
   selector: 'input[scNumberInput]',
   host: {
-    'data-slot': 'number-input',
     type: 'text',
     inputmode: 'decimal',
     role: 'spinbutton',

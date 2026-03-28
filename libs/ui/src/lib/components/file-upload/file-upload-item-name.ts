@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scFileUploadItemName]',
   host: {
-    'data-slot': 'file-upload-item-name',
     '[class]': 'class()',
   },
 })

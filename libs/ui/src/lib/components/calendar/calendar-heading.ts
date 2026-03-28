@@ -6,7 +6,6 @@ import { ScCalendar } from './calendar';
 @Directive({
   selector: 'button[scCalendarHeading]',
   host: {
-    'data-slot': 'calendar-heading',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-expanded]': 'calendar.viewMode() !== "day"',

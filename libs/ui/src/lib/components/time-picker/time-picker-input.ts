@@ -5,7 +5,6 @@ import { SC_TIME_PICKER } from './time-picker';
 @Directive({
   selector: 'input[scTimePickerInput]',
   host: {
-    'data-slot': 'time-picker-input',
     type: 'text',
     inputmode: 'numeric',
     '[class]': 'class()',

@@ -10,7 +10,6 @@ export const SC_FILE_UPLOAD_ITEM = new InjectionToken<ScFileUploadItem>(
   selector: '[scFileUploadItem]',
   providers: [{ provide: SC_FILE_UPLOAD_ITEM, useExisting: ScFileUploadItem }],
   host: {
-    'data-slot': 'file-upload-item',
     '[class]': 'class()',
     '[attr.data-status]': 'file().status',
   },

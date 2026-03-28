@@ -55,7 +55,6 @@ import { ScMenuBar } from './menu-bar';
     }
   `,
   host: {
-    'data-slot': 'menu-bar-item',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -11,9 +11,7 @@ import { Directive, inject } from '@angular/core';
     },
     CdkOverlayOrigin,
   ],
-  host: {
-    'data-slot': 'menu-trigger',
-  },
+  host: {},
 })
 export class ScMenuTrigger {
   readonly trigger = inject(MenuTrigger);

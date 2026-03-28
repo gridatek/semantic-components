@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scCommandInputGroup]',
   host: {
-    'data-slot': 'command-input-group',
     '[class]': 'class()',
   },
 })

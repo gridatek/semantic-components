@@ -62,7 +62,6 @@ const positions = [
     </ng-template>
   `,
   host: {
-    'data-slot': 'select',
     '[class]': 'class()',
     '[attr.aria-disabled]': 'combobox.disabled() || null',
   },

@@ -7,7 +7,6 @@ import { ScHoverCardProvider } from './hover-card-provider';
   selector: '[scHoverCardTrigger]',
   hostDirectives: [CdkOverlayOrigin],
   host: {
-    'data-slot': 'hover-card-trigger',
     '[class]': 'class()',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',

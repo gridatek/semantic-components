@@ -40,7 +40,6 @@ export type ScSheetSide = 'top' | 'right' | 'bottom' | 'left';
     </ng-template>
   `,
   host: {
-    'data-slot': 'sheet-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

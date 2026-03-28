@@ -15,7 +15,6 @@ export const SC_NUMBER = new InjectionToken<ScNumber>('SC_NUMBER');
   exportAs: 'scNumber',
   providers: [{ provide: SC_NUMBER, useExisting: ScNumber }],
   host: {
-    'data-slot': 'number',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })

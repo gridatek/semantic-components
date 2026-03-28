@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scButtonGroupText]',
   host: {
-    'data-slot': 'button-group-text',
     '[class]': 'class()',
   },
 })

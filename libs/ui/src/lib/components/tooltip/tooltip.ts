@@ -33,7 +33,6 @@ type ScTooltipSide = 'top' | 'right' | 'bottom' | 'left';
     ></span>
   `,
   host: {
-    'data-slot': 'tooltip',
     role: 'tooltip',
     'aria-live': 'polite',
     'aria-atomic': 'true',

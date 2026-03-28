@@ -5,7 +5,6 @@ import { SC_FILE_UPLOAD } from './file-upload';
 @Directive({
   selector: 'input[scFileUploadInput]',
   host: {
-    'data-slot': 'file-upload-input',
     type: 'file',
     '[class]': 'class()',
     '[multiple]': 'fileUpload.multiple()',

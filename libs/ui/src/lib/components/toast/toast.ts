@@ -15,7 +15,6 @@ import { ScToastPosition, ScToastVariant } from './toast.types';
     <ng-content />
   `,
   host: {
-    'data-slot': 'toast',
     role: 'status',
     'aria-live': 'polite',
     'aria-atomic': 'true',

@@ -21,7 +21,6 @@ type ScSheetState = 'idle' | 'open' | 'closed';
     <ng-content />
   `,
   host: {
-    'data-slot': 'sheet',
     role: 'dialog',
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'titleId',

@@ -18,7 +18,6 @@ export const SC_RATING_GROUP = new InjectionToken<ScRatingGroup>(
   selector: '[scRatingGroup]',
   providers: [{ provide: SC_RATING_GROUP, useExisting: ScRatingGroup }],
   host: {
-    'data-slot': 'rating-group',
     role: 'radiogroup',
     'aria-label': 'Rating',
     '[class]': 'class()',

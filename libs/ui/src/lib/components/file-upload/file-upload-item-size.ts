@@ -15,7 +15,6 @@ import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
     {{ formattedSize() }}
   `,
   host: {
-    'data-slot': 'file-upload-item-size',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scTimePickerSeparator]',
   host: {
-    'data-slot': 'time-picker-separator',
     '[class]': 'class()',
   },
 })

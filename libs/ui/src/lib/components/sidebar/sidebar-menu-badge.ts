@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scSidebarMenuBadge]',
   host: {
-    'data-slot': 'sidebar-menu-badge',
     '[class]': 'class()',
   },
 })

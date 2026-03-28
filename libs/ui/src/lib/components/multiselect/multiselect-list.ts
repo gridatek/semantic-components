@@ -24,7 +24,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'multiselect-list',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -9,7 +9,6 @@ const sizeStyles: Record<'sm' | 'md', string> = {
 @Directive({
   selector: 'a[scSidebarMenuSubButton], button[scSidebarMenuSubButton]',
   host: {
-    'data-slot': 'sidebar-menu-sub-button',
     '[class]': 'class()',
     '[attr.data-active]': 'isActive() || null',
     '[attr.data-size]': 'size()',

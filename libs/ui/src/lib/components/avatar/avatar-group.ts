@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scAvatarGroup]',
   host: {
-    'data-slot': 'avatar-group',
     '[class]': 'class()',
   },
 })

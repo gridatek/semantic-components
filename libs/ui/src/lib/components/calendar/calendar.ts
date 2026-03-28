@@ -35,7 +35,6 @@ export type ScCalendarValue =
   exportAs: 'scCalendar',
   imports: [ScCalendarDayView, ScCalendarMonthView, ScCalendarYearView],
   host: {
-    'data-slot': 'calendar',
     '[class]': 'class()',
     role: 'application',
     '[attr.aria-label]': 'ariaLabel()',

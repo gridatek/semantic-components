@@ -5,7 +5,6 @@ import { ScAvatar } from './avatar';
 @Directive({
   selector: 'img[scAvatarImage]',
   host: {
-    'data-slot': 'avatar-image',
     '[class]': 'class()',
     '(load)': 'onLoad()',
     '(error)': 'onError()',

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'span[scPaginationEllipsis]',
   host: {
-    'data-slot': 'pagination-ellipsis',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },

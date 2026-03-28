@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scMultiselectOrigin]',
   host: {
-    'data-slot': 'multiselect-origin',
     '[class]': 'class()',
   },
 })

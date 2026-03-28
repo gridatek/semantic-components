@@ -14,7 +14,6 @@ import { cn } from '../../utils';
   template: ``,
   hostDirectives: [ComboboxInput],
   host: {
-    'data-slot': 'multiselect-input',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

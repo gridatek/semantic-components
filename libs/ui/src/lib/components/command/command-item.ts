@@ -19,7 +19,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'command-item',
     '[attr.data-disabled]': 'disabled() || null',
     '[class]': 'class()',
     '(click)': 'onClick()',

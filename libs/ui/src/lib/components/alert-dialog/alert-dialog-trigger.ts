@@ -5,7 +5,6 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
 @Directive({
   selector: 'button[scAlertDialogTrigger]',
   host: {
-    'data-slot': 'alert-dialog-trigger',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-haspopup]': '"dialog"',

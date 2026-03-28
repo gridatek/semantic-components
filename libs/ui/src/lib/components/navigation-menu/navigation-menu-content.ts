@@ -15,7 +15,6 @@ import { ScNavigationMenuItem } from './navigation-menu-item';
     <ng-content />
   `,
   host: {
-    'data-slot': 'navigation-menu-content',
     '[class]': 'class()',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',

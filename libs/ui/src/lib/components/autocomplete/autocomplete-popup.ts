@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scAutocompletePopup]',
   host: {
-    'data-slot': 'autocomplete-popup',
     '[class]': 'class()',
   },
 })

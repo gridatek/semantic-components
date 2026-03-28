@@ -6,7 +6,6 @@ import { cn } from '../../utils';
   selector: 'input[scAutocompleteInput]',
   hostDirectives: [ComboboxInput],
   host: {
-    'data-slot': 'autocomplete-input',
     '[class]': 'class()',
   },
 })

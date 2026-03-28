@@ -22,7 +22,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'toolbar',
     '[attr.data-orientation]': 'toolbar.orientation()',
     '[class]': 'class()',
   },

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scCommandShortcut]',
   host: {
-    'data-slot': 'command-shortcut',
     '[class]': 'class()',
   },
 })

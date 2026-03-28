@@ -5,7 +5,6 @@ import { ScDialogProvider } from './dialog-provider';
 @Directive({
   selector: 'button[scDialogTrigger]',
   host: {
-    'data-slot': 'dialog-trigger',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-haspopup]': '"dialog"',

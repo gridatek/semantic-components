@@ -5,7 +5,6 @@ import { ScAvatar } from './avatar';
 @Directive({
   selector: 'span[scAvatarFallback]',
   host: {
-    'data-slot': 'avatar-fallback',
     '[class]': 'class()',
   },
 })

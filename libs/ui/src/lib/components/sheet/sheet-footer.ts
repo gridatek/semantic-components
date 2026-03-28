@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scSheetFooter]',
   host: {
-    'data-slot': 'sheet-footer',
     '[class]': 'class()',
   },
 })

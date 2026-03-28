@@ -49,7 +49,6 @@ const position: ConnectedPosition = {
     }
   `,
   host: {
-    'data-slot': 'navigation-menu-item',
     '[class]': 'class()',
     '(mouseenter)': 'onMouseEnter()',
     '(mouseleave)': 'onMouseLeave()',

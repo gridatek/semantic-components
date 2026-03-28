@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'fieldset[scFieldset]',
   host: {
-    'data-slot': 'fieldset',
     '[class]': 'class()',
   },
 })

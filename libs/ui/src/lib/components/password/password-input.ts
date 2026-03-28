@@ -8,7 +8,6 @@ import { SC_PASSWORD_PROVIDER } from './password-provider';
 @Directive({
   selector: 'input[scPasswordInput]',
   host: {
-    'data-slot': 'password-input',
     '[id]': 'field?.id()',
     '[type]': 'password.visible() ? "text" : "password"',
     '[class]': 'class()',

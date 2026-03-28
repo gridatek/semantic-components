@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'ol[scBreadcrumbList]',
   host: {
-    'data-slot': 'breadcrumb-list',
     '[class]': 'class()',
   },
 })

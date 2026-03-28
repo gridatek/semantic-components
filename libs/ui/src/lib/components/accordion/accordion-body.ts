@@ -12,7 +12,6 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    'data-slot': 'accordion-body',
     '[class]': 'class()',
     'animate.enter': 'animate-accordion-down',
     'animate.leave': 'animate-accordion-up',

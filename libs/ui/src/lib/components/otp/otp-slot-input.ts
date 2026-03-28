@@ -11,7 +11,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'input[scOtpSlotInput]',
   host: {
-    'data-slot': 'otp-slot-input',
     type: 'text',
     '[attr.inputmode]': 'inputMode()',
     autocomplete: 'one-time-code',

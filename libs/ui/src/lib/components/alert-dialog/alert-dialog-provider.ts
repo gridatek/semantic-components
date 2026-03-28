@@ -38,7 +38,6 @@ import { ScAlertDialogPortal } from './alert-dialog-portal';
     </ng-template>
   `,
   host: {
-    'data-slot': 'alert-dialog-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

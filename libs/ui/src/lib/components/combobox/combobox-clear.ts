@@ -5,7 +5,6 @@ import { ScCombobox } from './combobox';
 @Directive({
   selector: 'button[scComboboxClear]',
   host: {
-    'data-slot': 'combobox-clear',
     '[class]': 'class()',
     '[hidden]': '!hasValue()',
     type: 'button',

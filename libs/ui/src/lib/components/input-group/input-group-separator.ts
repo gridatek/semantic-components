@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scInputGroupSeparator]',
   host: {
-    'data-slot': 'input-group-separator',
     role: 'separator',
     '[attr.aria-orientation]': '"vertical"',
     '[class]': 'class()',

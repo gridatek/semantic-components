@@ -44,7 +44,6 @@ import { ScAutocompletePortal } from './autocomplete-portal';
     </ng-template>
   `,
   host: {
-    'data-slot': 'autocomplete',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

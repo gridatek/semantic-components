@@ -39,7 +39,6 @@ export type ScMenuSide = 'top' | 'bottom';
     }
   `,
   host: {
-    'data-slot': 'menu-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

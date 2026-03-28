@@ -13,7 +13,6 @@ import { ScOtpSlot } from './otp-slot';
 @Directive({
   selector: 'div[scOtp]',
   host: {
-    'data-slot': 'otp',
     '[class]': 'class()',
     '(paste)': 'onPaste($event)',
   },

@@ -12,7 +12,6 @@ import { ScSidebarState } from './sidebar-state';
   selector: 'button[scSidebarRail]',
   template: '',
   host: {
-    'data-slot': 'sidebar-rail',
     '[class]': 'class()',
     '(click)': 'state.toggle()',
     'aria-label': 'Toggle Sidebar',

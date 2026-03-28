@@ -40,7 +40,6 @@ export type ScDrawerDirection = 'top' | 'right' | 'bottom' | 'left';
     </ng-template>
   `,
   host: {
-    'data-slot': 'drawer-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

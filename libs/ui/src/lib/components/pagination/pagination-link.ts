@@ -13,7 +13,6 @@ import { ScPagination } from './pagination';
 @Directive({
   selector: 'a[scPaginationLink], button[scPaginationLink]',
   host: {
-    'data-slot': 'pagination-link',
     '[class]': 'class()',
     '[attr.aria-current]': 'isActive() ? "page" : null',
     '[attr.aria-disabled]': 'disabled() || null',

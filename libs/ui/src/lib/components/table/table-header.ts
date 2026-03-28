@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'thead[scTableHeader]',
   host: {
-    'data-slot': 'table-header',
     '[class]': 'class()',
   },
 })

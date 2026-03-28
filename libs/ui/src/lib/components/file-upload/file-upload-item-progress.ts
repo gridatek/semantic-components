@@ -5,7 +5,6 @@ import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
 @Directive({
   selector: '[scFileUploadItemProgress]',
   host: {
-    'data-slot': 'file-upload-item-progress',
     '[class]': 'class()',
   },
 })

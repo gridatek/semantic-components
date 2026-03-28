@@ -6,7 +6,6 @@ import { ScSheetProvider } from './sheet-provider';
 @Directive({
   selector: 'button[scSheetClose]',
   host: {
-    'data-slot': 'sheet-close',
     '[class]': 'class()',
     '(click)': 'closeSheet()',
   },

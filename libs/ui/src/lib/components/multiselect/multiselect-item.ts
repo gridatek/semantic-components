@@ -18,7 +18,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'multiselect-item',
     '[class]': 'class()',
   },
 })

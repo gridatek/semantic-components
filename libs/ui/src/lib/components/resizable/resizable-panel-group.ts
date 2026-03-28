@@ -7,7 +7,6 @@ import { ScResizableDirection } from './resizable.types';
 @Directive({
   selector: '[scResizablePanelGroup]',
   host: {
-    'data-slot': 'resizable-panel-group',
     '[class]': 'class()',
     '[attr.data-orientation]': 'direction()',
   },

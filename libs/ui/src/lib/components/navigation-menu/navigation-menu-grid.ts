@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'ul[scNavigationMenuGrid]',
   host: {
-    'data-slot': 'navigation-menu-grid',
     '[class]': 'class()',
   },
 })

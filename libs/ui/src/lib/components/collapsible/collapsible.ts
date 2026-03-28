@@ -20,7 +20,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'collapsible',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

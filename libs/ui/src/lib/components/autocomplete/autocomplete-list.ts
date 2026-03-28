@@ -6,7 +6,6 @@ import { cn } from '../../utils';
   selector: 'div[scAutocompleteList]',
   hostDirectives: [Listbox],
   host: {
-    'data-slot': 'autocomplete-list',
     '[class]': 'class()',
   },
 })

@@ -12,7 +12,6 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    'data-slot': 'collapsible-body',
     '[class]': 'class()',
     'animate.enter': 'animate-collapsible-down',
     'animate.leave': 'animate-collapsible-up',

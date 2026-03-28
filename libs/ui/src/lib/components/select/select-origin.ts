@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scSelectOrigin]',
   host: {
-    'data-slot': 'select-origin',
     '[class]': 'class()',
   },
 })

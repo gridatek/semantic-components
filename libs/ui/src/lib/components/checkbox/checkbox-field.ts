@@ -25,7 +25,6 @@ import { ScCheckboxVisual } from './checkbox-visual';
   ],
   host: {
     '[attr.role]': 'role()',
-    'data-slot': 'checkbox-field',
     '[class]': 'class()',
     '[attr.data-state]': 'dataState()',
     '[attr.data-disabled]': 'disabled() ? "" : null',

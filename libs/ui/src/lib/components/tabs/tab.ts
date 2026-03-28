@@ -11,7 +11,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'tabs-trigger',
     '[class]': 'class()',
   },
 })

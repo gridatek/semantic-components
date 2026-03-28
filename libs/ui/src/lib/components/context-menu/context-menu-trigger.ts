@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scContextMenuTrigger]',
   host: {
-    'data-slot': 'context-menu-trigger',
     '[class]': 'class()',
   },
 })

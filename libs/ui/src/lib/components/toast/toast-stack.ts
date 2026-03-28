@@ -100,7 +100,6 @@ import { ScToaster } from './toaster';
     }
   `,
   host: {
-    'data-slot': 'toast-stack',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

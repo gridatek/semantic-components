@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'ul[scNavigationMenuList]',
   host: {
-    'data-slot': 'navigation-menu-list',
     '[class]': 'class()',
   },
 })

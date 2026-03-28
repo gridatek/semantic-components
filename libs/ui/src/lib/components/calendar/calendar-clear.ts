@@ -6,7 +6,6 @@ import { ScCalendar } from './calendar';
 @Directive({
   selector: 'button[scCalendarClear]',
   host: {
-    'data-slot': 'calendar-clear',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'onClick()',

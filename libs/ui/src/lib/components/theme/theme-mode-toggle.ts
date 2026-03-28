@@ -11,7 +11,6 @@ import { ScThemeManager } from './theme-manager';
   selector: 'button[scThemeModeToggle]',
   exportAs: 'scThemeModeToggle',
   host: {
-    'data-slot': 'theme-mode-toggle',
     type: 'button',
     '[class]': 'classInput()',
     '(click)': 'toggle()',

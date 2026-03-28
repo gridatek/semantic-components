@@ -5,7 +5,6 @@ import { type ScButtonVariants, buttonVariants } from '../button';
 @Directive({
   selector: 'a[scLink]',
   host: {
-    'data-slot': 'link',
     '[attr.href]': 'href()',
     '[attr.aria-disabled]': 'disabled() || null',
     '[attr.tabindex]': 'disabled() ? -1 : null',

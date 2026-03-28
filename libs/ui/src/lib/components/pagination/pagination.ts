@@ -20,7 +20,6 @@ export interface ScPaginationChange {
   selector: 'nav[scPagination], div[scPagination]',
   exportAs: 'scPagination',
   host: {
-    'data-slot': 'pagination',
     role: 'navigation',
     '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',

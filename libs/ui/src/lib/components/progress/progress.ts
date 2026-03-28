@@ -15,7 +15,6 @@ import { ScProgressIndicator } from './progress-indicator';
   imports: [ScProgressIndicator],
   host: {
     role: 'progressbar',
-    'data-slot': 'progress',
     '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
     '[attr.aria-valuemin]': '0',

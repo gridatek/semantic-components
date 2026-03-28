@@ -13,7 +13,6 @@ import { ScCombobox } from './combobox';
     },
   ],
   host: {
-    'data-slot': 'combobox-input',
     '[class]': 'class()',
   },
 })

@@ -15,7 +15,6 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
   selector: '[scResizableHandle]',
   imports: [ScResizableHandleIndicator],
   host: {
-    'data-slot': 'resizable-handle',
     role: 'separator',
     '[class]': 'class()',
     '[attr.aria-orientation]':

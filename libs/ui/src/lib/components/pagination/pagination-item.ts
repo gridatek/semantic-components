@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'li[scPaginationItem]',
   host: {
-    'data-slot': 'pagination-item',
     '[class]': 'class()',
   },
 })

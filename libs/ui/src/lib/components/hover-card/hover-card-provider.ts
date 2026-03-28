@@ -40,7 +40,6 @@ export type ScHoverCardAlign = ScOverlayAlign;
     }
   `,
   host: {
-    'data-slot': 'hover-card-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

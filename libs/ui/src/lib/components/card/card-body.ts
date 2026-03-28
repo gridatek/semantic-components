@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scCardBody]',
   host: {
-    'data-slot': 'card-body',
     '[class]': 'class()',
   },
 })

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'svg[scAutocompleteItemIndicator]',
   host: {
-    'data-slot': 'autocomplete-item-indicator',
     '[class]': 'class()',
     'aria-hidden': 'true',
   },

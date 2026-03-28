@@ -16,7 +16,6 @@ import { ScCombobox } from './combobox';
   selector: 'dialog[scComboboxDialog]',
   hostDirectives: [ComboboxDialog],
   host: {
-    'data-slot': 'combobox-dialog',
     '[class]': 'class()',
   },
 })

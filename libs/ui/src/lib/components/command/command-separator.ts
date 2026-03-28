@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scCommandSeparator]',
   host: {
-    'data-slot': 'command-separator',
     role: 'none',
     '[class]': 'class()',
   },

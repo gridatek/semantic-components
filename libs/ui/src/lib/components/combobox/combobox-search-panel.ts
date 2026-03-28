@@ -18,7 +18,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'combobox-search-panel',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

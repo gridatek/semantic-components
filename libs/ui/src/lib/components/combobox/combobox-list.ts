@@ -20,7 +20,6 @@ import { ScComboboxItem } from './combobox-item';
     },
   ],
   host: {
-    'data-slot': 'combobox-list',
     '[class]': 'class()',
   },
 })

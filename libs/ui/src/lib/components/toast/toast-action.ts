@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'button[scToastAction]',
   host: {
-    'data-slot': 'toast-action',
     type: 'button',
     '[class]': 'class()',
   },

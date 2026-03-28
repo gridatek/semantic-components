@@ -18,7 +18,6 @@ type ScBackdropState = 'idle' | 'open' | 'closed';
   selector: 'div[scBackdrop]',
   template: '',
   host: {
-    'data-slot': 'backdrop',
     '[class]': 'class()',
     '[attr.data-idle]': 'state() === "idle" ? "" : null',
     '[attr.data-open]': 'state() === "open" ? "" : null',

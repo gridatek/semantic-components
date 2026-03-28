@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'button[scToastClose]',
   host: {
-    'data-slot': 'toast-close',
     type: 'button',
     '[class]': 'class()',
     'aria-label': 'Close',

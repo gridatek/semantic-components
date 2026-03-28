@@ -13,7 +13,6 @@ import { ScPagination } from './pagination';
 @Directive({
   selector: 'a[scPaginationNext], button[scPaginationNext]',
   host: {
-    'data-slot': 'pagination-next',
     '[class]': 'class()',
     'aria-label': 'Go to next page',
     '[attr.aria-disabled]': 'disabled() || null',

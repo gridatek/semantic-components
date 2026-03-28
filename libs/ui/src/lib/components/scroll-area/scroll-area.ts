@@ -16,7 +16,6 @@ import { SC_SCROLL_AREA, type ScScrollAreaContext } from './scroll-area-types';
   imports: [ScScrollBar],
   providers: [{ provide: SC_SCROLL_AREA, useExisting: ScScrollArea }],
   host: {
-    'data-slot': 'scroll-area',
     '[class]': 'class()',
   },
   template: `
@@ -47,8 +46,7 @@ import { SC_SCROLL_AREA, type ScScrollAreaContext } from './scroll-area-types';
 export class ScScrollArea implements ScScrollAreaContext {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly viewportRef =
-    viewChild<ElementRef<HTMLElement>>('viewport');
+  private readonly viewportRef = viewChild<ElementRef<HTMLElement>>('viewport');
 
   readonly viewport = computed(() => this.viewportRef()?.nativeElement);
 

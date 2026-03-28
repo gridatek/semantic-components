@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scComboboxItemLabel]',
   host: {
-    'data-slot': 'combobox-item-label',
     '[class]': 'class()',
   },
 })

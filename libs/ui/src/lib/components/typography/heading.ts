@@ -25,7 +25,6 @@ export type ScHeadingVariants = VariantProps<typeof headingVariants>;
 @Directive({
   selector: 'h1[scHeading], h2[scHeading], h3[scHeading], h4[scHeading]',
   host: {
-    'data-slot': 'heading',
     '[class]': 'class()',
   },
 })

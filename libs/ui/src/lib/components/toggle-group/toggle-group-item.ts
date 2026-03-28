@@ -6,7 +6,6 @@ import { ScToggleGroup } from './toggle-group';
 @Directive({
   selector: 'button[scToggleGroupItem]',
   host: {
-    'data-slot': 'toggle-group-item',
     type: 'button',
     '[attr.data-variant]': 'group.variant() || variant()',
     '[attr.data-size]': 'group.size() || size()',

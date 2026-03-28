@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scResizableHandleIndicator]',
   host: {
-    'data-slot': 'resizable-handle-indicator',
     '[class]': 'class()',
   },
 })

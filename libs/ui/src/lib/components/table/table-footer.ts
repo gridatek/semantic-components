@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'tfoot[scTableFooter]',
   host: {
-    'data-slot': 'table-footer',
     '[class]': 'class()',
   },
 })

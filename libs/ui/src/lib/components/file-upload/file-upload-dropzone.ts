@@ -5,7 +5,6 @@ import { SC_FILE_UPLOAD } from './file-upload';
 @Directive({
   selector: '[scFileUploadDropzone]',
   host: {
-    'data-slot': 'file-upload-dropzone',
     '[class]': 'class()',
     '[attr.data-dragging]': 'isDragging()',
     '[attr.data-disabled]': 'fileUpload.disabled() || null',

@@ -20,7 +20,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'toolbar-toggle-group',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

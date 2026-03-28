@@ -5,7 +5,6 @@ import { SC_TIME_PICKER } from './time-picker';
 @Directive({
   selector: '[scTimePickerPeriod]',
   host: {
-    'data-slot': 'time-picker-period',
     '[class]': 'class()',
     role: 'group',
     '[attr.aria-label]': '"Select AM or PM"',

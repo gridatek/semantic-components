@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scAlertTitle]',
   host: {
-    'data-slot': 'alert-title',
     '[class]': 'class()',
   },
 })

@@ -38,7 +38,6 @@ import { ScDialogPortal } from './dialog-portal';
     </ng-template>
   `,
   host: {
-    'data-slot': 'dialog-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

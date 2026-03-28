@@ -6,7 +6,6 @@ import { ScSidebarState } from './sidebar-state';
 @Directive({
   selector: 'button[scSidebarTrigger]',
   host: {
-    'data-slot': 'sidebar-trigger',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'onClick($event)',

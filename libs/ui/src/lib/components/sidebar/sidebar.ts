@@ -80,7 +80,6 @@ import { ScSidebarState } from './sidebar-state';
   `,
   host: {
     role: 'navigation',
-    'data-slot': 'sidebar',
     '[attr.data-state]': 'state.state()',
     '[attr.data-variant]': 'variant()',
     '[attr.data-side]': 'side()',

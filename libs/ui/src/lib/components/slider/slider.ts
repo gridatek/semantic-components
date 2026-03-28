@@ -8,7 +8,6 @@ import { SC_FIELD } from '../field';
   selector: 'input[scSlider]',
   host: {
     type: 'range',
-    'data-slot': 'slider',
     '[attr.id]': 'id()',
     '[min]': 'resolvedMin()',
     '[max]': 'resolvedMax()',

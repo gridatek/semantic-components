@@ -30,7 +30,6 @@ export type ScBadgeVariants = VariantProps<typeof badgeVariants>;
 @Directive({
   selector: 'div[scBadge], span[scBadge]',
   host: {
-    'data-slot': 'badge',
     '[class]': 'class()',
   },
 })

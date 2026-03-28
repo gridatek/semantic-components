@@ -22,7 +22,6 @@ export type ScEmptyMediaVariants = VariantProps<typeof emptyMediaVariants>;
 @Directive({
   selector: 'div[scEmptyMedia]',
   host: {
-    'data-slot': 'empty-icon',
     '[attr.data-variant]': 'variant()',
     '[class]': 'class()',
   },

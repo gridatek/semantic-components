@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scMultiselectItemLabel]',
   host: {
-    'data-slot': 'multiselect-item-label',
     '[class]': 'class()',
   },
 })

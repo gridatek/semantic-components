@@ -15,7 +15,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'autocomplete-item',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

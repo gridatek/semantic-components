@@ -7,7 +7,6 @@ import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
 @Directive({
   selector: 'button[scFileUploadItemDelete]',
   host: {
-    'data-slot': 'file-upload-item-delete',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'onClick()',

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scDrawerFooter]',
   host: {
-    'data-slot': 'drawer-footer',
     '[class]': 'class()',
   },
 })

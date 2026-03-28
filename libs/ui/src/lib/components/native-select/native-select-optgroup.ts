@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'optgroup[scNativeSelectOptgroup]',
   host: {
-    'data-slot': 'native-select-optgroup',
     '[class]': 'class()',
   },
 })

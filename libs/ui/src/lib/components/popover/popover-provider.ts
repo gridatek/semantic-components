@@ -46,7 +46,6 @@ export type ScPopoverAlign = ScOverlayAlign;
     }
   `,
   host: {
-    'data-slot': 'popover-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

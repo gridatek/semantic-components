@@ -16,7 +16,6 @@ import { ScRatingIcon } from './rating-icon';
   selector: '[scRatingItem]',
   exportAs: 'scRatingItem',
   host: {
-    'data-slot': 'rating-item',
     role: 'radio',
     '[class]': 'class()',
     '[attr.aria-checked]': 'isSelected()',

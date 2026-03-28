@@ -18,7 +18,6 @@ export const SC_PASSWORD_PROVIDER = new InjectionToken<ScPasswordProvider>(
     { provide: SC_PASSWORD_PROVIDER, useExisting: ScPasswordProvider },
   ],
   host: {
-    'data-slot': 'password-provider',
     '[class]': 'class()',
   },
 })

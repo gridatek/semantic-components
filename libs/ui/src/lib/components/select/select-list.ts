@@ -19,7 +19,6 @@ import { ScSelectItem } from './select-item';
   `,
   hostDirectives: [Listbox],
   host: {
-    'data-slot': 'select-list',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

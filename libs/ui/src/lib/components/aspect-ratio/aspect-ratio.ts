@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scAspectRatio]',
   host: {
-    'data-slot': 'aspect-ratio',
     '[class]': 'class()',
     '[style.aspect-ratio]': 'ratio()',
   },

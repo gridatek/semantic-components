@@ -6,7 +6,6 @@ export type ScSeparatorOrientation = 'horizontal' | 'vertical';
 @Directive({
   selector: 'div[scSeparator]',
   host: {
-    'data-slot': 'separator',
     '[attr.role]': 'decorative() ? "none" : "separator"',
     '[attr.aria-orientation]': 'decorative() ? null : orientation()',
     '[attr.aria-hidden]': 'decorative() ? "true" : null',

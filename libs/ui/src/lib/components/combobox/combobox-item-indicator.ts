@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'svg[scComboboxItemIndicator]',
   host: {
-    'data-slot': 'combobox-item-indicator',
     '[class]': 'class()',
     'aria-hidden': 'true',
   },

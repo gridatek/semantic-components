@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'svg[scSelectItemIndicator]',
   host: {
-    'data-slot': 'select-item-indicator',
     '[class]': 'class()',
   },
 })

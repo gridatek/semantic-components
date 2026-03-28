@@ -28,7 +28,6 @@ export type ScToggleVariants = VariantProps<typeof toggleVariants>;
 @Directive({
   selector: 'button[scToggle]',
   host: {
-    'data-slot': 'toggle',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-pressed]': 'pressed()',

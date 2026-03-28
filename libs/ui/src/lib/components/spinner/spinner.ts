@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'svg[scSpinner]',
   host: {
-    'data-slot': 'spinner',
     role: 'status',
     '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',

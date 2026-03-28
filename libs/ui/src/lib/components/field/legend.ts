@@ -6,7 +6,6 @@ export type ScLegendVariant = 'legend' | 'label';
 @Directive({
   selector: 'legend[scLegend]',
   host: {
-    'data-slot': 'legend',
     '[attr.data-variant]': 'variant()',
     '[class]': 'class()',
   },

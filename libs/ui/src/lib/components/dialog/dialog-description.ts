@@ -5,7 +5,6 @@ import { ScDialog } from './dialog';
 @Directive({
   selector: 'p[scDialogDescription]',
   host: {
-    'data-slot': 'dialog-description',
     '[id]': 'dialog.descriptionId',
     '[class]': 'class()',
   },

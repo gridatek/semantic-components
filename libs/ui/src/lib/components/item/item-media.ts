@@ -24,7 +24,6 @@ export type ScItemMediaVariants = VariantProps<typeof itemMediaVariants>;
 @Directive({
   selector: 'div[scItemMedia]',
   host: {
-    'data-slot': 'item-media',
     '[attr.data-variant]': 'variant()',
     '[class]': 'class()',
   },

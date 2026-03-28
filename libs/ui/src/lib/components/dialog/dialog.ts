@@ -21,7 +21,6 @@ type ScDialogState = 'idle' | 'open' | 'closed';
     <ng-content />
   `,
   host: {
-    'data-slot': 'dialog',
     role: 'dialog',
     'aria-modal': 'true',
     '[attr.aria-labelledby]': 'titleId',

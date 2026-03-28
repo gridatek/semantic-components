@@ -44,7 +44,6 @@ export type ScButtonVariants = VariantProps<typeof buttonVariants>;
 @Directive({
   selector: 'button[scButton]',
   host: {
-    'data-slot': 'button',
     '[attr.type]': 'type()',
     '[disabled]': 'disabled()',
     '[attr.aria-disabled]': 'disabled() || null',

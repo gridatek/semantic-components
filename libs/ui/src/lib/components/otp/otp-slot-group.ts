@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scOtpSlotGroup]',
   host: {
-    'data-slot': 'otp-slot-group',
     '[class]': 'class()',
   },
 })

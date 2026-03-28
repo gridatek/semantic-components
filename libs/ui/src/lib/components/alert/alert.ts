@@ -23,7 +23,6 @@ export type ScAlertVariants = VariantProps<typeof alertVariants>;
 @Directive({
   selector: '[scAlert]',
   host: {
-    'data-slot': 'alert',
     role: 'alert',
     '[class]': 'class()',
   },

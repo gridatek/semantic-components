@@ -7,7 +7,6 @@ import { ScPagination } from './pagination';
 @Directive({
   selector: 'select[scPaginationPageSizeSelect]',
   host: {
-    'data-slot': 'pagination-page-size-select',
     '[attr.id]': 'id()',
     '[value]': 'pagination.pageSize()',
     '[class]': 'class()',

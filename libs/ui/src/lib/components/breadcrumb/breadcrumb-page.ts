@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'span[scBreadcrumbPage]',
   host: {
-    'data-slot': 'breadcrumb-page',
     role: 'link',
     'aria-disabled': 'true',
     'aria-current': 'page',

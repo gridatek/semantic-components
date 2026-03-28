@@ -8,7 +8,6 @@ import { ScPopoverProvider } from '../popover';
   exportAs: 'scDatePickerTrigger',
   hostDirectives: [CdkOverlayOrigin],
   host: {
-    'data-slot': 'date-picker-trigger',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-haspopup]': '"dialog"',

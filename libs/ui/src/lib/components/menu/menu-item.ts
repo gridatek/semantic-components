@@ -50,7 +50,6 @@ import { ScMenuPortal } from './menu-portal';
     }
   `,
   host: {
-    'data-slot': 'menu-item',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

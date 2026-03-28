@@ -5,7 +5,6 @@ import { ScAlertDialog } from './alert-dialog';
 @Directive({
   selector: 'p[scAlertDialogDescription]',
   host: {
-    'data-slot': 'alert-dialog-description',
     '[id]': 'dialog.descriptionId',
     '[class]': 'class()',
   },

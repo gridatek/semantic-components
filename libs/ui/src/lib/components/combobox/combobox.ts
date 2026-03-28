@@ -20,7 +20,6 @@ import { ScComboboxOrigin } from './combobox-origin';
     },
   ],
   host: {
-    'data-slot': 'combobox',
     '[class]': 'class()',
   },
 })

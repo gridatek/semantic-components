@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scFieldTitle]',
   host: {
-    'data-slot': 'field-title',
     '[class]': 'class()',
   },
 })

@@ -18,7 +18,6 @@ import { SC_FIELD } from '../field/field';
   providers: [{ provide: SC_FIELD, useExisting: ScRadioField }],
   host: {
     '[attr.role]': 'role()',
-    'data-slot': 'radio-field',
     '[class]': 'class()',
   },
   template: `

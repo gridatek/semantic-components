@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'span[scOtpSlotChar]',
   host: {
-    'data-slot': 'otp-slot-char',
     '[class]': 'class()',
     '[textContent]': 'char()',
   },

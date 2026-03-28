@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scDialogHeader]',
   host: {
-    'data-slot': 'dialog-header',
     '[class]': 'class()',
   },
 })

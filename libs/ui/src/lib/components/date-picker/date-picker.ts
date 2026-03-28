@@ -8,7 +8,6 @@ import { ScPopoverProvider } from '../popover';
   selector: 'div[scDatePicker]',
   exportAs: 'scDatePicker',
   host: {
-    'data-slot': 'date-picker',
     '[class]': 'class()',
   },
 })

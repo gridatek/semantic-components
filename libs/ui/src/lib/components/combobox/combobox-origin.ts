@@ -16,7 +16,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'combobox-origin',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

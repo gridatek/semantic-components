@@ -18,7 +18,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'command-list',
     '[class]': 'class()',
   },
 })

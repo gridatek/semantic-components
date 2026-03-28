@@ -25,7 +25,6 @@ export interface ScFileUploadFile {
   selector: '[scFileUpload]',
   providers: [{ provide: SC_FILE_UPLOAD, useExisting: ScFileUpload }],
   host: {
-    'data-slot': 'file-upload',
     '[class]': 'class()',
   },
 })

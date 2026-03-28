@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'li[scBreadcrumbSeparator]',
   host: {
-    'data-slot': 'breadcrumb-separator',
     role: 'presentation',
     'aria-hidden': 'true',
     '[class]': 'class()',

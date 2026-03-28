@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scItemGroup]',
   host: {
-    'data-slot': 'item-group',
     '[class]': 'class()',
   },
 })

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'span[scBreadcrumbEllipsis]',
   host: {
-    'data-slot': 'breadcrumb-ellipsis',
     role: 'presentation',
     'aria-hidden': 'true',
     '[class]': 'class()',

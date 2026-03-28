@@ -10,7 +10,6 @@ import { cn } from '../../utils';
 @Component({
   selector: 'div[scOtpSlotCaret]',
   host: {
-    'data-slot': 'otp-slot-caret',
     '[class]': 'class()',
   },
   template: `

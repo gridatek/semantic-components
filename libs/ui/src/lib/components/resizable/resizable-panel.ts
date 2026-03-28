@@ -11,7 +11,6 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
 @Directive({
   selector: '[scResizablePanel]',
   host: {
-    'data-slot': 'resizable-panel',
     '[class]': 'class()',
     '[style.flex-grow]': 'size()',
     '[style.flex-shrink]': '1',

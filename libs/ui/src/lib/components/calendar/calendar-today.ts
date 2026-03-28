@@ -6,7 +6,6 @@ import { ScCalendar } from './calendar';
 @Directive({
   selector: 'button[scCalendarToday]',
   host: {
-    'data-slot': 'calendar-today',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'onClick()',

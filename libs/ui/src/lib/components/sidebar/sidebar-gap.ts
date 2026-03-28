@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scSidebarGap]',
   host: {
-    'data-slot': 'sidebar-gap',
     '[class]': 'class()',
   },
 })

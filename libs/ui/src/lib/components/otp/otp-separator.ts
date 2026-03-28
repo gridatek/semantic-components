@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scOtpSeparator]',
   host: {
-    'data-slot': 'otp-separator',
     role: 'separator',
     '[class]': 'class()',
   },

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scPopoverTitle]',
   host: {
-    'data-slot': 'popover-title',
     '[class]': 'class()',
   },
 })

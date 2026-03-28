@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scToastDescription]',
   host: {
-    'data-slot': 'toast-description',
     '[class]': 'class()',
   },
 })

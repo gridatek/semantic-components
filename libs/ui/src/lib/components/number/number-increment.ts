@@ -6,7 +6,6 @@ import { SC_NUMBER } from './number';
 @Directive({
   selector: 'button[scNumberIncrement]',
   host: {
-    'data-slot': 'number-increment',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!number.canIncrement()',

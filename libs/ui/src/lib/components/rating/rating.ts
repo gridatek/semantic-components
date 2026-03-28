@@ -19,7 +19,6 @@ export const SC_RATING = new InjectionToken<ScRating>('SC_RATING');
   providers: [{ provide: SC_RATING, useExisting: ScRating }],
   host: {
     '[attr.role]': 'role()',
-    'data-slot': 'rating',
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel() || null',
     '[attr.aria-labelledby]': 'ariaLabelledby() || null',

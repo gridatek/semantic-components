@@ -6,7 +6,6 @@ import { SC_PASSWORD_PROVIDER } from './password-provider';
 @Directive({
   selector: 'button[scPasswordToggle]',
   host: {
-    'data-slot': 'password-toggle',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-pressed]': 'password.visible()',

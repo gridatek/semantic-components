@@ -14,7 +14,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'select-group-label',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

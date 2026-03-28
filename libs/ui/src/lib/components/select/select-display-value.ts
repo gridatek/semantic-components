@@ -13,7 +13,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'select-display-value',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -31,7 +31,6 @@ export type ScSidebarMenuButtonVariants = VariantProps<
 @Directive({
   selector: 'button[scSidebarMenuButton], a[scSidebarMenuButton]',
   host: {
-    'data-slot': 'sidebar-menu-button',
     '[class]': 'class()',
     '[attr.data-active]': 'isActive() || null',
     '[attr.data-size]': 'size()',

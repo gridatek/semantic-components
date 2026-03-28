@@ -31,7 +31,6 @@ import { SC_FIELD } from './field';
     role: 'alert',
     '[attr.aria-live]': 'ariaLive()',
     '[attr.aria-atomic]': 'ariaAtomic()',
-    'data-slot': 'field-errors',
     '[attr.id]': 'id()',
     '[class]': 'class()',
     '[hidden]': '!errors().length',

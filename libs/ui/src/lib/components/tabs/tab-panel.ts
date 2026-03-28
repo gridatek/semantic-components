@@ -19,7 +19,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'tabs-content',
     '[class]': 'class()',
   },
   template: `

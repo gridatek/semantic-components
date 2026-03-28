@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'caption[scTableCaption]',
   host: {
-    'data-slot': 'table-caption',
     '[class]': 'class()',
   },
 })

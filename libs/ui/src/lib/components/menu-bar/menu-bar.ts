@@ -6,7 +6,6 @@ import { cn } from '../../utils';
   selector: '[scMenuBar]',
   hostDirectives: [MenuBar],
   host: {
-    'data-slot': 'menu-bar',
     '[class]': 'class()',
     '(focusin)': 'onFocusIn()',
   },

@@ -25,7 +25,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'accordion-trigger',
     '[class]': 'class()',
   },
   template: `

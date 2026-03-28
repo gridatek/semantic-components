@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scNativeSelectContainer]',
   host: {
-    'data-slot': 'native-select-container',
     '[class]': 'class()',
   },
 })

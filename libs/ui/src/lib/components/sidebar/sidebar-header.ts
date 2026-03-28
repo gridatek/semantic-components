@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scSidebarHeader]',
   host: {
-    'data-slot': 'sidebar-header',
     '[class]': 'class()',
   },
 })

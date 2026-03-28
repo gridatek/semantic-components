@@ -13,7 +13,6 @@ import { ScPagination } from './pagination';
 @Directive({
   selector: 'a[scPaginationLast], button[scPaginationLast]',
   host: {
-    'data-slot': 'pagination-last',
     '[class]': 'class()',
     'aria-label': 'Go to last page',
     '[attr.aria-disabled]': 'disabled() || null',

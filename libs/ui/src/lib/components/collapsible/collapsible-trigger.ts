@@ -23,7 +23,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'collapsible-trigger',
     type: 'button',
     '[attr.data-state]': 'trigger.expanded() ? "open" : "closed"',
     '[attr.disabled]': 'trigger.disabled() || null',

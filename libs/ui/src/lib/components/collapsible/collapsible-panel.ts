@@ -22,7 +22,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'collapsible-panel',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

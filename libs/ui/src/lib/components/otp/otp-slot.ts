@@ -19,7 +19,6 @@ import { ScOtpSlotInput } from './otp-slot-input';
   selector: 'div[scOtpSlot]',
   imports: [ScOtpSlotInput, ScOtpSlotCaret, ScOtpSlotChar],
   host: {
-    'data-slot': 'otp-slot',
     '[class]': 'class()',
     '[attr.data-active]': 'isActive() ? "" : null',
     '[attr.data-filled]': 'isFilled() ? "" : null',

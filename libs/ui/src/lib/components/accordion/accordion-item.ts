@@ -12,7 +12,6 @@ import { cn } from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    'data-slot': 'accordion-item',
     '[class]': 'class()',
   },
   template: `

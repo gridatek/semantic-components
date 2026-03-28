@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scEmpty]',
   host: {
-    'data-slot': 'empty',
     '[class]': 'class()',
   },
 })

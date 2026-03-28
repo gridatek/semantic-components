@@ -12,7 +12,6 @@ import { ScSkeleton } from '../skeleton';
   selector: 'div[scSidebarMenuSkeleton]',
   imports: [ScSkeleton],
   host: {
-    'data-slot': 'sidebar-menu-skeleton',
     '[class]': 'class()',
   },
   template: `

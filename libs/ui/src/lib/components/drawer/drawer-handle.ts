@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scDrawerHandle]',
   host: {
-    'data-slot': 'drawer-handle',
     '[class]': 'class()',
   },
 })

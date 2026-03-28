@@ -21,7 +21,6 @@ import { ScNavigationMenuTriggerIcon } from './navigation-menu-trigger-icon';
     <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
   `,
   host: {
-    'data-slot': 'navigation-menu-trigger',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-expanded]': 'menuItem.open()',

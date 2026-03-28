@@ -5,7 +5,6 @@ import { ScSheet } from './sheet';
 @Directive({
   selector: 'p[scSheetDescription]',
   host: {
-    'data-slot': 'sheet-description',
     '[id]': 'sheet.descriptionId',
     '[class]': 'class()',
   },

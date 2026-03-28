@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'td[scTableCell]',
   host: {
-    'data-slot': 'table-cell',
     '[class]': 'class()',
   },
 })

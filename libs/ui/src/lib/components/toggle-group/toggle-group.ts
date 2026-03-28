@@ -5,7 +5,6 @@ import { type ScToggleVariants } from '../toggle/toggle';
 @Directive({
   selector: 'div[scToggleGroup]',
   host: {
-    'data-slot': 'toggle-group',
     role: 'group',
     '[attr.data-variant]': 'variant()',
     '[attr.data-size]': 'size()',

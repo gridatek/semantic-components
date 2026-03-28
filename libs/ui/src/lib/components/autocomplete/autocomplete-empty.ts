@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scAutocompleteEmpty]',
   host: {
-    'data-slot': 'autocomplete-empty',
     '[class]': 'class()',
   },
 })

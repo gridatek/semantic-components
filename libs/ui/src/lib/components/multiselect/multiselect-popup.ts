@@ -14,7 +14,6 @@ import { cn } from '../../utils';
     <ng-content />
   `,
   host: {
-    'data-slot': 'multiselect-popup',
     '[class]': 'class()',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',
     'animate.leave': 'animate-out fade-out-0 zoom-out-95 duration-150',

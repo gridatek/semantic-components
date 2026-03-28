@@ -21,7 +21,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'accordion-panel',
     '[class]': 'class()',
   },
   template: `

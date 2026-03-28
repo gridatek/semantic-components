@@ -13,7 +13,6 @@ import { ScPagination } from './pagination';
 @Directive({
   selector: 'a[scPaginationFirst], button[scPaginationFirst]',
   host: {
-    'data-slot': 'pagination-first',
     '[class]': 'class()',
     'aria-label': 'Go to first page',
     '[attr.aria-disabled]': 'disabled() || null',

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'div[scComboboxEmpty]',
   host: {
-    'data-slot': 'combobox-empty',
     '[class]': 'class()',
   },
 })

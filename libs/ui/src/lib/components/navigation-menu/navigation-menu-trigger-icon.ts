@@ -5,7 +5,6 @@ import { ScNavigationMenuItem } from './navigation-menu-item';
 @Directive({
   selector: 'svg[scNavigationMenuTriggerIcon]',
   host: {
-    'data-slot': 'navigation-menu-trigger-icon',
     '[class]': 'class()',
   },
 })

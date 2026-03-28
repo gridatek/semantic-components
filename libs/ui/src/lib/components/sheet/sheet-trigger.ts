@@ -5,7 +5,6 @@ import { ScSheetProvider } from './sheet-provider';
 @Directive({
   selector: 'button[scSheetTrigger]',
   host: {
-    'data-slot': 'sheet-trigger',
     '[class]': 'class()',
     '[attr.aria-haspopup]': '"dialog"',
     '[attr.aria-expanded]': 'sheetProvider.open()',

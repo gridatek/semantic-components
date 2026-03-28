@@ -21,7 +21,6 @@ type ScHoverCardState = 'open' | 'closed';
     <ng-content />
   `,
   host: {
-    'data-slot': 'hover-card',
     '[class]': 'class()',
     '[attr.data-open]': 'state() === "open" ? true : null',
     '[attr.data-closed]': 'state() === "closed" ? true : null',

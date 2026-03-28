@@ -24,7 +24,6 @@ import { cn } from '../../utils';
     },
   ],
   host: {
-    'data-slot': 'select-item',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

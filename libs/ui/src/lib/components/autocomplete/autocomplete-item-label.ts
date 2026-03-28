@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'span[scAutocompleteItemLabel]',
   host: {
-    'data-slot': 'autocomplete-item-label',
     '[class]': 'class()',
   },
 })

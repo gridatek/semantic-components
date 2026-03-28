@@ -5,7 +5,6 @@ import { ScPopoverProvider } from './popover-provider';
 @Directive({
   selector: 'button[scPopoverClose]',
   host: {
-    'data-slot': 'popover-close',
     '[class]': 'class()',
     '(click)': 'closePopover()',
   },

@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scMenuSeparator]',
   host: {
-    'data-slot': 'menu-separator',
     role: 'separator',
     'aria-orientation': 'horizontal',
     '[class]': 'class()',

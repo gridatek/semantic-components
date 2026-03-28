@@ -5,7 +5,6 @@ import { ScDrawerProvider } from './drawer-provider';
 @Directive({
   selector: 'button[scDrawerTrigger]',
   host: {
-    'data-slot': 'drawer-trigger',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-expanded]': 'drawer.open()',

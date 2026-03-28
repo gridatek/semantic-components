@@ -4,7 +4,6 @@ import { cn } from '../../utils';
 @Directive({
   selector: '[scAutocompleteOrigin]',
   host: {
-    'data-slot': 'autocomplete-origin',
     '[class]': 'class()',
   },
 })

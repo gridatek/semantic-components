@@ -6,7 +6,6 @@ export type ButtonGroupSeparatorOrientation = 'horizontal' | 'vertical';
 @Directive({
   selector: 'div[scButtonGroupSeparator]',
   host: {
-    'data-slot': 'button-group-separator',
     role: 'separator',
     '[attr.aria-orientation]': 'orientation()',
     '[attr.data-orientation]': 'orientation()',
