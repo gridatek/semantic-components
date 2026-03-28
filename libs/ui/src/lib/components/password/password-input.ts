@@ -27,7 +27,9 @@ export class ScPasswordInput {
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly placeholder = input<string>('');
   readonly readonly = input<boolean>(false);
-  readonly autocomplete = input<string>('current-password');
+  readonly autocomplete = input<'current-password' | 'new-password' | 'off'>(
+    'current-password',
+  );
 
   readonly invalid = computed(
     () =>
