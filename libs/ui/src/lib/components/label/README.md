@@ -26,9 +26,9 @@ A directive applied to native `<label>` elements.
 
 #### Data Attributes
 
-| Attribute   | Value     | Description                             |
-| ----------- | --------- | --------------------------------------- |
-| `data-slot` | `"label"` | Identifies the element as a label slot. |
+| Attribute   | Value     | Description                                                          |
+| ----------- | --------- | -------------------------------------------------------------------- |
+| `data-slot` | `"label"` | Used by parent components (field, checkbox-field) for CSS targeting. |
 
 ### ScLabelText
 
@@ -44,9 +44,9 @@ A directive for label-like text that lives inside another `<label>` element, avo
 
 #### Data Attributes
 
-| Attribute   | Value          | Description                                  |
-| ----------- | -------------- | -------------------------------------------- |
-| `data-slot` | `"label-text"` | Identifies the element as a label-text slot. |
+| Attribute   | Value          | Description                                           |
+| ----------- | -------------- | ----------------------------------------------------- |
+| `data-slot` | `"label-text"` | Used by switch-field for CSS grid column positioning. |
 
 ## Examples
 

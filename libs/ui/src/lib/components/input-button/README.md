@@ -30,10 +30,6 @@ A directive applied to `<button>` elements to style them as input-like triggers.
 
 **Selector:** `button[scInputButton]`
 
-**Host data attributes:**
-
-- `data-slot="input-button"`
-
 ## Examples
 
 ### Command dialog trigger

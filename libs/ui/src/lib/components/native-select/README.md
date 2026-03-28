@@ -25,11 +25,10 @@ import { ScNativeSelect, ScNativeSelectContainer, ScNativeSelectIcon, ScNativeSe
 
 Wrapping container that provides relative positioning for the select and its icon.
 
-| Property       | Details                               |
-| -------------- | ------------------------------------- |
-| Selector       | `div[scNativeSelectContainer]`        |
-| Data attribute | `data-slot="native-select-container"` |
-| Inputs         | `class` — additional CSS classes      |
+| Property | Details                          |
+| -------- | -------------------------------- |
+| Selector | `div[scNativeSelectContainer]`   |
+| Inputs   | `class` — additional CSS classes |
 
 ### ScNativeSelect
 
@@ -38,7 +37,6 @@ Directive applied to a native `<select>` element to apply themed styling.
 | Property        | Details                                                                                           |
 | --------------- | ------------------------------------------------------------------------------------------------- |
 | Selector        | `select[scNativeSelect]`                                                                          |
-| Data attribute  | `data-slot="native-select"`                                                                       |
 | Inputs          | `class` — additional CSS classes                                                                  |
 |                 | `id` — element ID (auto-generated if not provided; inherits from parent `ScField` when available) |
 |                 | `aria-describedby` — linked description IDs (auto-inherited from parent `ScField` when available) |
@@ -49,31 +47,28 @@ Directive applied to a native `<select>` element to apply themed styling.
 
 Positions a decorative icon (typically a chevron) inside the container, overlaying the right side of the select.
 
-| Property       | Details                          |
-| -------------- | -------------------------------- |
-| Selector       | `[scNativeSelectIcon]`           |
-| Data attribute | `data-slot="native-select-icon"` |
-| Inputs         | `class` — additional CSS classes |
+| Property | Details                          |
+| -------- | -------------------------------- |
+| Selector | `[scNativeSelectIcon]`           |
+| Inputs   | `class` — additional CSS classes |
 
 ### ScNativeSelectOption
 
 Optional directive for styling individual `<option>` elements.
 
-| Property       | Details                            |
-| -------------- | ---------------------------------- |
-| Selector       | `option[scNativeSelectOption]`     |
-| Data attribute | `data-slot="native-select-option"` |
-| Inputs         | `class` — additional CSS classes   |
+| Property | Details                          |
+| -------- | -------------------------------- |
+| Selector | `option[scNativeSelectOption]`   |
+| Inputs   | `class` — additional CSS classes |
 
 ### ScNativeSelectOptGroup
 
 Optional directive for styling `<optgroup>` elements.
 
-| Property       | Details                              |
-| -------------- | ------------------------------------ |
-| Selector       | `optgroup[scNativeSelectOptgroup]`   |
-| Data attribute | `data-slot="native-select-optgroup"` |
-| Inputs         | `class` — additional CSS classes     |
+| Property | Details                            |
+| -------- | ---------------------------------- |
+| Selector | `optgroup[scNativeSelectOptgroup]` |
+| Inputs   | `class` — additional CSS classes   |
 
 ## Examples
 

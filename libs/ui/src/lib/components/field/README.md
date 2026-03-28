@@ -269,17 +269,11 @@ Errors are automatically read from the parent `ScField`'s `FormField` directive 
 
 ## Styling
 
-The component uses `data-slot` attributes for targeted styling:
+Some field components use `data-slot` for CSS-based layout detection by parent/sibling components. `data-slot` is not mandatory — it is only present when another component references it in its styles. See [DATA-SLOTS.md](../DATA-SLOTS.md) for details.
 
-- `data-slot="field"` - Main field container
-- `data-slot="fieldset"` - Fieldset container
-- `data-slot="legend"` - Legend element
-- `data-slot="field-group"` - Field group container
-- `data-slot="field-body"` - Content wrapper
-- `data-slot="field-label"` - Label element
-- `data-slot="field-title"` - Title element
-- `data-slot="field-description"` - Description text
-- `data-slot="field-separator"` - Separator element
-- `data-slot="field-errors"` - Error message
+Active data-slots in field components:
 
-Use these slots to customize styling or target specific elements in your CSS.
+- `data-slot="field"` — used by `label.ts`, `checkbox-field.ts`, `radio-field.ts`, `switch-field.ts` for layout detection
+- `data-slot="field-group"` — used by `field-group.ts` for nested group gap
+- `data-slot="field-body"` — used by `field.ts` to adjust alignment
+- `data-slot="field-description"` — used by `checkbox-field.ts`, `radio-field.ts`, `switch-field.ts` for bold label and grid positioning

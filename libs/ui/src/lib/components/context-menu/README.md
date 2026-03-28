@@ -35,9 +35,9 @@ Container component that listens for right-click events and manages the menu lif
 
 **Data attributes:**
 
-| Attribute   | Value          |
-| ----------- | -------------- |
-| `data-slot` | `context-menu` |
+| Attribute   | Value          | Description                                        |
+| ----------- | -------------- | -------------------------------------------------- |
+| `data-slot` | `context-menu` | Used internally for CSS positioning of menu panel. |
 
 ### ScContextMenuTrigger
 
@@ -47,12 +47,6 @@ Directive that marks the area where right-clicking opens the menu.
 | -------- | ------------------------ | -------------------------------------------------------------------------- |
 | Selector | `[scContextMenuTrigger]` | Attribute directive.                                                       |
 | `class`  | `input<string>`          | CSS classes merged with default styling (flex, border-dashed, rounded-md). |
-
-**Data attributes:**
-
-| Attribute   | Value                  |
-| ----------- | ---------------------- |
-| `data-slot` | `context-menu-trigger` |
 
 ### Menu components
 

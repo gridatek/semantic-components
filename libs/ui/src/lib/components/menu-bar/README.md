@@ -48,10 +48,6 @@ Directive applied to the menu bar container. Delegates to `@angular/aria/menu` `
 | -------- | -------- | ----------------------------------- |
 | `class`  | `string` | Additional CSS classes to merge in. |
 
-| Data Attribute | Value        |
-| -------------- | ------------ |
-| `data-slot`    | `"menu-bar"` |
-
 ### `scMenuBarItem`
 
 Component applied to each top-level menu bar item. Uses `MenuItem` and `CdkOverlayOrigin` as host directives and renders an attached CDK overlay for the submenu.
@@ -62,10 +58,6 @@ Component applied to each top-level menu bar item. Uses `MenuItem` and `CdkOverl
 | `id`       | `string`  | Forwarded to the underlying `MenuItem`. |
 | `value`    | `string`  | Identifies the menu item.               |
 | `disabled` | `boolean` | Disables the menu item.                 |
-
-| Data Attribute | Value             |
-| -------------- | ----------------- |
-| `data-slot`    | `"menu-bar-item"` |
 
 | Export As       | Description                         |
 | --------------- | ----------------------------------- |

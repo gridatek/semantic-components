@@ -31,12 +31,6 @@ A directive that styles `h1`-`h4` elements with consistent typography based on t
 | `class`     | `string`  | `''`    | Additional CSS classes to merge.        |
 | `underline` | `boolean` | `false` | Adds a bottom border and padding below. |
 
-**Data attributes:**
-
-| Attribute   | Value     |
-| ----------- | --------- |
-| `data-slot` | `heading` |
-
 **Heading level styles:**
 
 | Level | Styles                              |

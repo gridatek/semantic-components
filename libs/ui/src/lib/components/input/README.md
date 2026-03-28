@@ -35,9 +35,9 @@ export class MyComponent {}
 
 **Data attributes:**
 
-| Attribute   | Value       |
-| ----------- | ----------- |
-| `data-slot` | `'control'` |
+| Attribute   | Value       | Description                                                       |
+| ----------- | ----------- | ----------------------------------------------------------------- |
+| `data-slot` | `'control'` | Used by input-group to detect focus/invalid state on the control. |
 
 **Automatic behavior:**
 

@@ -26,7 +26,7 @@ Container directive that merges child borders and controls layout orientation.
 
 **Host attributes:**
 
-- `data-slot="button-group"`
+- `data-slot="button-group"` — used by button.ts to adjust border-radius for grouped buttons
 - `role="group"`
 
 ---
@@ -43,7 +43,6 @@ A visual separator placed between items in a button group.
 
 **Host attributes:**
 
-- `data-slot="button-group-separator"`
 - `role="separator"`
 - `aria-orientation` (bound to `orientation` input)
 - `data-orientation` (bound to `orientation` input)
@@ -58,10 +57,6 @@ A styled text/label slot for displaying static content alongside buttons.
 | ------------ | ------------------------ | ------- | ------------------------------- |
 | **Selector** | `div[scButtonGroupText]` |         |                                 |
 | `class`      | `string`                 | `''`    | Additional CSS classes to merge |
-
-**Host attributes:**
-
-- `data-slot="button-group-text"`
 
 ## Examples
 

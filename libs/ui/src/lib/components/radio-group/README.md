@@ -235,13 +235,12 @@ You can customize the radio button colors by setting CSS custom properties (vari
 
 ## Data Attributes
 
-All components have a `data-slot` attribute for styling purposes:
+Some components have a `data-slot` attribute used for CSS targeting by parent components. `data-slot` is not mandatory — it is only added when referenced by another component's styles. See [DATA-SLOTS.md](../DATA-SLOTS.md) for details.
 
-| Component    | data-slot     |
-| ------------ | ------------- |
-| ScRadioGroup | `radio-group` |
-| ScRadioField | `radio-field` |
-| ScRadio      | `radio`       |
+| Component    | data-slot     | Used by                             |
+| ------------ | ------------- | ----------------------------------- |
+| ScRadioGroup | `radio-group` | `fieldset.ts` — reduces gap         |
+| ScRadio      | `radio`       | `radio-field.ts` — grid positioning |
 
 ## Accessibility
 

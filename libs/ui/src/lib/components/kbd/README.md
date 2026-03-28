@@ -26,10 +26,6 @@ A directive applied to `<kbd>` elements to style them as keyboard key indicators
 
 **Selector:** `kbd[scKbd]`
 
-**Host data attributes:**
-
-- `data-slot="kbd"`
-
 ---
 
 ### ScKbdGroup
@@ -41,10 +37,6 @@ A directive applied to `<kbd>` elements to group multiple key indicators togethe
 | `class`  | `string` | `''`    | Additional CSS classes to merge with default styles. |
 
 **Selector:** `kbd[scKbdGroup]`
-
-**Host data attributes:**
-
-- `data-slot="kbd-group"`
 
 ## Examples
 

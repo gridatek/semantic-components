@@ -43,23 +43,20 @@ All directives accept a `class` input for merging additional CSS classes via the
 | Property        | Details                         |
 | --------------- | ------------------------------- |
 | Selector        | `table[scTable]`                |
-| Data attribute  | `data-slot="table"`             |
 | Default classes | `w-full caption-bottom text-sm` |
 
 ### ScTableHeader
 
-| Property        | Details                    |
-| --------------- | -------------------------- |
-| Selector        | `thead[scTableHeader]`     |
-| Data attribute  | `data-slot="table-header"` |
-| Default classes | `[&_tr]:border-b`          |
+| Property        | Details                |
+| --------------- | ---------------------- |
+| Selector        | `thead[scTableHeader]` |
+| Default classes | `[&_tr]:border-b`      |
 
 ### ScTableBody
 
 | Property        | Details                      |
 | --------------- | ---------------------------- |
 | Selector        | `tbody[scTableBody]`         |
-| Data attribute  | `data-slot="table-body"`     |
 | Default classes | `[&_tr:last-child]:border-0` |
 
 ### ScTableFooter
@@ -67,7 +64,6 @@ All directives accept a `class` input for merging additional CSS classes via the
 | Property        | Details                                                   |
 | --------------- | --------------------------------------------------------- |
 | Selector        | `tfoot[scTableFooter]`                                    |
-| Data attribute  | `data-slot="table-footer"`                                |
 | Default classes | `border-t bg-muted/50 font-medium [&>tr]:last:border-b-0` |
 
 ### ScTableRow
@@ -75,7 +71,6 @@ All directives accept a `class` input for merging additional CSS classes via the
 | Property        | Details                                                                       |
 | --------------- | ----------------------------------------------------------------------------- |
 | Selector        | `tr[scTableRow]`                                                              |
-| Data attribute  | `data-slot="table-row"`                                                       |
 | Default classes | `border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted` |
 
 Rows support a `data-state="selected"` attribute for highlighting selected rows.
@@ -85,7 +80,6 @@ Rows support a `data-state="selected"` attribute for highlighting selected rows.
 | Property        | Details                                                                                            |
 | --------------- | -------------------------------------------------------------------------------------------------- |
 | Selector        | `th[scTableHeaderCell]`                                                                            |
-| Data attribute  | `data-slot="table-header-cell"`                                                                    |
 | Default classes | `h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0` |
 
 ### ScTableCell
@@ -93,7 +87,6 @@ Rows support a `data-state="selected"` attribute for highlighting selected rows.
 | Property        | Details                                          |
 | --------------- | ------------------------------------------------ |
 | Selector        | `td[scTableCell]`                                |
-| Data attribute  | `data-slot="table-cell"`                         |
 | Default classes | `p-4 align-middle [&:has([role=checkbox])]:pr-0` |
 
 ### ScTableCaption
@@ -101,7 +94,6 @@ Rows support a `data-state="selected"` attribute for highlighting selected rows.
 | Property        | Details                              |
 | --------------- | ------------------------------------ |
 | Selector        | `caption[scTableCaption]`            |
-| Data attribute  | `data-slot="table-caption"`          |
 | Default classes | `mt-4 text-sm text-muted-foreground` |
 
 ## Examples

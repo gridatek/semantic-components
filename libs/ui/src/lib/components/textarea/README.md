@@ -31,9 +31,9 @@ import { ScTextarea } from '@semantic-components/ui';
 
 #### Data attributes
 
-| Attribute   | Value       |
-| ----------- | ----------- |
-| `data-slot` | `"control"` |
+| Attribute   | Value       | Description                                                       |
+| ----------- | ----------- | ----------------------------------------------------------------- |
+| `data-slot` | `"control"` | Used by input-group to detect focus/invalid state on the control. |
 
 #### Host bindings
 
