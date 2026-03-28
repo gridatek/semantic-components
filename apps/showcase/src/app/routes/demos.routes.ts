@@ -2560,34 +2560,6 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'strength-password-demo',
-        loadComponent: () =>
-          import('../pages/docs/password/demos/strength-password-demo').then(
-            (m) => m.StrengthPasswordDemo,
-          ),
-      },
-      {
-        path: 'zxcvbn-password-demo',
-        loadComponent: () =>
-          import('../pages/docs/password/demos/zxcvbn-password-demo').then(
-            (m) => m.ZxcvbnPasswordDemo,
-          ),
-      },
-      {
-        path: 'requirements-password-demo',
-        loadComponent: () =>
-          import('../pages/docs/password/demos/requirements-password-demo').then(
-            (m) => m.RequirementsPasswordDemo,
-          ),
-      },
-      {
-        path: 'full-password-demo',
-        loadComponent: () =>
-          import('../pages/docs/password/demos/full-password-demo').then(
-            (m) => m.FullPasswordDemo,
-          ),
-      },
-      {
         path: 'signal-forms-password-demo',
         loadComponent: () =>
           import('../pages/docs/password/demos/signal-forms-password-demo').then(

@@ -8,13 +8,9 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicPasswordDemoContainer from './demos/basic-password-demo-container';
 import DisabledPasswordDemoContainer from './demos/disabled-password-demo-container';
-import FullPasswordDemoContainer from './demos/full-password-demo-container';
 import NewPasswordDemoContainer from './demos/new-password-demo-container';
 import { PasswordUsageDemoContainer } from './demos/password-usage-demo-container';
-import RequirementsPasswordDemoContainer from './demos/requirements-password-demo-container';
 import ShowDefaultPasswordDemoContainer from './demos/show-default-password-demo-container';
-import StrengthPasswordDemoContainer from './demos/strength-password-demo-container';
-import ZxcvbnPasswordDemoContainer from './demos/zxcvbn-password-demo-container';
 
 @Component({
   selector: 'app-password-page',
@@ -23,10 +19,6 @@ import ZxcvbnPasswordDemoContainer from './demos/zxcvbn-password-demo-container'
     ShowDefaultPasswordDemoContainer,
     DisabledPasswordDemoContainer,
     NewPasswordDemoContainer,
-    StrengthPasswordDemoContainer,
-    ZxcvbnPasswordDemoContainer,
-    RequirementsPasswordDemoContainer,
-    FullPasswordDemoContainer,
     PasswordUsageDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -53,10 +45,6 @@ import ZxcvbnPasswordDemoContainer from './demos/zxcvbn-password-demo-container'
         <app-show-default-password-demo-container />
         <app-disabled-password-demo-container />
         <app-new-password-demo-container />
-        <app-strength-password-demo-container />
-        <app-zxcvbn-password-demo-container />
-        <app-requirements-password-demo-container />
-        <app-full-password-demo-container />
       </section>
     </div>
   `,

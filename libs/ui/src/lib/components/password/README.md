@@ -7,8 +7,6 @@ A composable password input with visibility toggle, built on top of `ScField` an
 - **ScPasswordProvider**: Provides visibility toggle context (`display: contents`, no layout impact)
 - **ScPasswordInput**: The password input field (auto-switches between password/text type)
 - **ScPasswordToggle**: Button to toggle password visibility
-- **ScPasswordStrength**: Password strength indicator
-- **ScPasswordRequirements**: Password requirements checklist
 
 `ScPasswordProvider` is not a field — it must be used inside a `ScField`.
 
@@ -69,41 +67,6 @@ Button to toggle password visibility.
 - Custom icon support via content projection
 - Use `<span class="sr-only">` for accessible label
 
-### ScPasswordStrength
-
-Purely presentational password strength indicator. The consumer computes the strength score and passes it in.
-
-**Selector:** `div[scPasswordStrength]`
-**Export As:** `scPasswordStrength`
-
-**Inputs:**
-
-| Input      | Type     | Default | Description                                         |
-| ---------- | -------- | ------- | --------------------------------------------------- |
-| `strength` | `number` | `-1`    | Strength score: `-1` = no evaluation, `0–4` = score |
-
-**Strength values:**
-
-- `-1` — No evaluation (bars muted, label hidden). Use when the field is empty and untouched.
-- `0` — Very weak (red)
-- `1` — Weak (orange)
-- `2` — Fair (yellow)
-- `3` — Strong (lime)
-- `4` — Very strong (green)
-
-### ScPasswordRequirements
-
-Password requirements checklist.
-
-**Selector:** `[scPasswordRequirements]`
-
-**Inputs:**
-
-| Input          | Type                      | Default              | Description         |
-| -------------- | ------------------------- | -------------------- | ------------------- |
-| `value`        | `string`                  | `''`                 | Password value      |
-| `requirements` | `ScPasswordRequirement[]` | Default requirements | Custom requirements |
-
 ## Examples
 
 ### Show by Default
@@ -139,53 +102,6 @@ Password requirements checklist.
       </div>
     </div>
   </div>
-</div>
-```
-
-### With Strength Indicator
-
-```html
-<div scField class="space-y-2">
-  <label scLabel>Password</label>
-  <div scPasswordProvider>
-    <div scInputGroup>
-      <input scPasswordInput [formField]="form.password" autocomplete="new-password" />
-      <div scInputGroupAddon align="inline-end">
-        <button scPasswordToggle>
-          <span class="sr-only">Toggle visibility</span>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div scPasswordStrength [strength]="strength()"></div>
-</div>
-```
-
-### With zxcvbn
-
-Since `ScPasswordStrength` is purely presentational, you can use any scoring algorithm. Here's an example using [zxcvbn](https://github.com/dropbox/zxcvbn):
-
-```typescript
-import zxcvbn from 'zxcvbn';
-
-// -1 = no evaluation (empty + untouched), 0–4 = strength score
-// zxcvbn returns a score from 0–4, which maps directly to the strength input
-readonly strength = computed(() => {
-  const password = this.formModel().password;
-  if (!password && !this.passwordForm.password().touched()) return -1;
-  if (!password) return 0;
-  return zxcvbn(password).score;
-});
-```
-
-```html
-<div scPasswordStrength [strength]="strength()">
-  <div class="flex gap-1">
-    @for (i of [0, 1, 2, 3]; track i) {
-    <div scPasswordStrengthBar [index]="i"></div>
-    }
-  </div>
-  <p scPasswordStrengthLabel>{{ strengthLabels[strength()] }}</p>
 </div>
 ```
 
