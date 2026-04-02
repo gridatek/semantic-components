@@ -27,7 +27,9 @@ export default class DisabledPasswordDemoContainer {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  signal,
 } from '@angular/core';
+import { FormField, disabled, form } from '@angular/forms/signals';
 import {
   ScField,
   ScInputGroup,
@@ -42,6 +44,7 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-disabled-password-demo',
   imports: [
+    FormField,
     ScField,
     ScPasswordProvider,
     ScPasswordInput,
@@ -58,7 +61,11 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
         <label scLabel>Password (Disabled)</label>
         <div scPasswordProvider #passwordField="scPasswordProvider">
           <div scInputGroup>
-            <input scPasswordInput value="********" disabled />
+            <input
+              scPasswordInput
+              [formField]="disabledForm.password"
+              placeholder="Enter password"
+            />
             <div scInputGroupAddon align="inline-end">
               <button scPasswordToggle>
                 @if (passwordField.visible()) {
@@ -78,5 +85,10 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DisabledPasswordDemo {}`;
+export class DisabledPasswordDemo {
+  readonly formModel = signal({ password: 'changeMe' });
+  readonly disabledForm = form(this.formModel, (s) => {
+    disabled(s.password);
+  });
+}`;
 }
