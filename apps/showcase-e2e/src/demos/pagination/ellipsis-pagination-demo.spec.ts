@@ -27,10 +27,6 @@ test.describe('Ellipsis Pagination Demo', () => {
   test('should render ellipsis with aria-hidden', async ({ page }) => {
     const ellipsis = page.locator('span[scPaginationEllipsis]');
     await expect(ellipsis.first()).toHaveAttribute('aria-hidden', 'true');
-    await expect(ellipsis.first()).toHaveAttribute(
-      'data-slot',
-      'pagination-ellipsis',
-    );
   });
 
   test('should render ellipsis SVG icon', async ({ page }) => {

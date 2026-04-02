@@ -13,6 +13,7 @@ import { SC_PASSWORD_PROVIDER } from './password-provider';
     '[class]': 'class()',
     '[attr.aria-invalid]': 'invalid() || null',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
+    '[disabled]': 'disabled()',
     '[readonly]': 'readonly()',
     '[placeholder]': 'placeholder()',
     '[autocomplete]': 'autocomplete()',
@@ -42,6 +43,10 @@ export class ScPasswordInput {
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
       null,
+  );
+
+  readonly disabled = computed(
+    () => this.formField?.state().disabled() ?? false,
   );
 
   protected readonly class = computed(() => cn(inputStyles, this.classInput()));
