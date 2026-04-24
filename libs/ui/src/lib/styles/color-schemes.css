@@ -1,0 +1,108 @@
+/* Color schemes for the /create customizer.
+   Each block overrides --primary, --primary-foreground, --ring and
+   --sidebar-primary so a single token swap produces a visible re-theme. */
+
+[data-theme='red'] {
+  --primary: oklch(0.58 0.22 27);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.58 0.22 27);
+  --sidebar-primary: oklch(0.58 0.22 27);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+[data-theme='red'].dark {
+  --primary: oklch(0.68 0.2 27);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.68 0.2 27);
+  --sidebar-primary: oklch(0.68 0.2 27);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+
+[data-theme='rose'] {
+  --primary: oklch(0.62 0.21 15);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.62 0.21 15);
+  --sidebar-primary: oklch(0.62 0.21 15);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+[data-theme='rose'].dark {
+  --primary: oklch(0.72 0.18 15);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.72 0.18 15);
+  --sidebar-primary: oklch(0.72 0.18 15);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+
+[data-theme='orange'] {
+  --primary: oklch(0.68 0.19 45);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.68 0.19 45);
+  --sidebar-primary: oklch(0.68 0.19 45);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+[data-theme='orange'].dark {
+  --primary: oklch(0.75 0.17 45);
+  --primary-foreground: oklch(0.2 0 0);
+  --ring: oklch(0.75 0.17 45);
+  --sidebar-primary: oklch(0.75 0.17 45);
+  --sidebar-primary-foreground: oklch(0.2 0 0);
+}
+
+[data-theme='green'] {
+  --primary: oklch(0.6 0.17 152);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.6 0.17 152);
+  --sidebar-primary: oklch(0.6 0.17 152);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+[data-theme='green'].dark {
+  --primary: oklch(0.72 0.17 152);
+  --primary-foreground: oklch(0.2 0 0);
+  --ring: oklch(0.72 0.17 152);
+  --sidebar-primary: oklch(0.72 0.17 152);
+  --sidebar-primary-foreground: oklch(0.2 0 0);
+}
+
+[data-theme='blue'] {
+  --primary: oklch(0.58 0.2 260);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.58 0.2 260);
+  --sidebar-primary: oklch(0.58 0.2 260);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+[data-theme='blue'].dark {
+  --primary: oklch(0.7 0.19 260);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.7 0.19 260);
+  --sidebar-primary: oklch(0.7 0.19 260);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+
+[data-theme='yellow'] {
+  --primary: oklch(0.85 0.17 90);
+  --primary-foreground: oklch(0.2 0 0);
+  --ring: oklch(0.85 0.17 90);
+  --sidebar-primary: oklch(0.85 0.17 90);
+  --sidebar-primary-foreground: oklch(0.2 0 0);
+}
+[data-theme='yellow'].dark {
+  --primary: oklch(0.88 0.17 90);
+  --primary-foreground: oklch(0.2 0 0);
+  --ring: oklch(0.88 0.17 90);
+  --sidebar-primary: oklch(0.88 0.17 90);
+  --sidebar-primary-foreground: oklch(0.2 0 0);
+}
+
+[data-theme='violet'] {
+  --primary: oklch(0.56 0.22 295);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.56 0.22 295);
+  --sidebar-primary: oklch(0.56 0.22 295);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}
+[data-theme='violet'].dark {
+  --primary: oklch(0.7 0.2 295);
+  --primary-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.7 0.2 295);
+  --sidebar-primary: oklch(0.7 0.2 295);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+}

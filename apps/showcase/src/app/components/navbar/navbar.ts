@@ -140,6 +140,10 @@ import { Logo } from '../logo/logo';
                   Documentation
                 </a>
               </li>
+
+              <li scNavigationMenuItem>
+                <a scNavigationMenuLink routerLink="/customize">Customize</a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -232,6 +236,15 @@ import { Logo } from '../logo/logo';
             [active]="mobileDocsRla.isActive"
           >
             Documentation
+          </a>
+          <a
+            scNavbarMobileLink
+            routerLink="/customize"
+            routerLinkActive="active"
+            #mobileCustomizeRla="routerLinkActive"
+            [active]="mobileCustomizeRla.isActive"
+          >
+            Customize
           </a>
         </div>
       </div>

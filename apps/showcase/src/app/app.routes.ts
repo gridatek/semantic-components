@@ -17,6 +17,11 @@ export const appRoutes: Route[] = [
         title: 'Semantic Components',
         loadComponent: () => import('./pages/home/home'),
       },
+      {
+        path: 'customize',
+        title: 'Customize - Semantic Components',
+        loadComponent: () => import('./pages/customize/customize-page'),
+      },
     ],
   },
 ];
