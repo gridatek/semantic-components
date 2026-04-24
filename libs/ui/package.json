@@ -29,6 +29,9 @@
   "exports": {
     "./styles": {
       "default": "./src/lib/styles/index.css"
+    },
+    "./styles/color-schemes.css": {
+      "default": "./src/lib/styles/color-schemes.css"
     }
   },
   "sideEffects": false

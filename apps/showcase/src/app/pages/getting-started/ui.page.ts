@@ -3,6 +3,7 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -20,6 +21,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
 @Component({
   selector: 'app-ui-page',
   imports: [
+    RouterLink,
     TocHeading,
     ScCodeViewer,
     ScCodeViewerContent,
@@ -142,6 +144,89 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <div scSeparator></div>
 
       <section class="space-y-4">
+        <h2 scHeading appToc>Optional: Preset color schemes</h2>
+        <p class="text-muted-foreground">
+          The UI library ships a small set of opt-in color schemes (
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">red</code>
+          ,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">rose</code>
+          ,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">orange</code>
+          ,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">green</code>
+          ,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">blue</code>
+          ,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">yellow</code>
+          ,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">violet</code>
+          ) that override
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--primary</code>
+          and related tokens. Import them in addition to the default styles:
+        </p>
+        <div scCodeViewer>
+          <div scCodeViewerHeader>
+            <span scCodeViewerLabel>css</span>
+            <button
+              scButton
+              variant="ghost"
+              size="icon"
+              [scCopyToClipboard]="colorSchemesCode"
+              #copyColorSchemes="scCopyToClipboard"
+              aria-label="Copy to clipboard"
+            >
+              @if (copyColorSchemes.copied()) {
+                <svg siCheckIcon></svg>
+              } @else {
+                <svg siCopyIcon></svg>
+              }
+            </button>
+          </div>
+          <div
+            scCodeViewerContent
+            [code]="colorSchemesCode"
+            language="css"
+          ></div>
+        </div>
+        <p class="text-muted-foreground">
+          Activate a scheme at runtime via
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+            ScThemeManager.setColorScheme('blue')
+          </code>
+          , or statically by setting
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+            data-theme="blue"
+          </code>
+          on
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+            &lt;html&gt;
+          </code>
+          . Try them live on the
+          <a scLink variant="link" routerLink="/customize">Customize page</a>
+          .
+        </p>
+        <p class="text-muted-foreground">
+          Use the shipped file as-is, or drop it and author your own — any CSS
+          rule matching
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+            [data-theme='my-scheme']
+          </code>
+          (and its
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+            [data-theme='my-scheme'].dark
+          </code>
+          variant) that overrides the token variables will work the same way.
+          This lets you add new palettes (e.g.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">teal</code>
+          ) or customize tokens beyond
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--primary</code>
+          without forking the library.
+        </p>
+      </section>
+
+      <div scSeparator></div>
+
+      <section class="space-y-4">
         <h2 scHeading appToc>3. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the library as a Tailwind source so its classes are included in
@@ -199,4 +284,7 @@ export default class UiPage {
     "@import url('@angular/cdk/overlay-prebuilt.css');";
 
   readonly sourceCode = '@source "../node_modules/@semantic-components/ui";';
+
+  readonly colorSchemesCode =
+    '@import "@semantic-components/ui/styles/color-schemes.css";';
 }
