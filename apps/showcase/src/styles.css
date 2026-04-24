@@ -1,5 +1,6 @@
 @import url('pdfjs-dist/web/pdf_viewer.css');
 @import '../../../libs/ui/src/lib/styles/index.css';
+@import '../../../libs/ui/src/lib/styles/color-schemes.css';
 @import '../../../libs/editor/src/lib/styles/index.css';
 @import '../../../libs/code/src/lib/styles/index.css';
 @import '../../../libs/ui-lab/src/lib/styles/index.css';
