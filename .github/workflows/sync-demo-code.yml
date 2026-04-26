@@ -33,6 +33,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git restore package-lock.json
           git add -A
           if git diff --cached --quiet; then
             echo "No changes to sync."
