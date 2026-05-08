@@ -21,9 +21,7 @@ import { ScPieChart } from './pie-chart';
     ></div>
   `,
   imports: [ScPieChart],
-  host: {
-    'data-slot': 'donut-chart',
-  },
+  host: {},
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

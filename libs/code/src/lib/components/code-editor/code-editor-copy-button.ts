@@ -20,7 +20,6 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
     }
   `,
   host: {
-    'data-slot': 'code-editor-copy-button',
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel()',
     type: 'button',

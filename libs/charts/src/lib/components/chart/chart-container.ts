@@ -9,7 +9,6 @@ export const SC_CHART = new InjectionToken<ScChartContainer>('SC_CHART');
   selector: '[scChartContainer]',
   providers: [{ provide: SC_CHART, useExisting: ScChartContainer }],
   host: {
-    'data-slot': 'chart-container',
     '[class]': 'class()',
   },
 })

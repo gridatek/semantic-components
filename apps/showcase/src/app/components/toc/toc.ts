@@ -37,7 +37,6 @@ import { TocItem } from './toc.service';
     }
   `,
   host: {
-    'data-slot': 'toc',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -11,7 +11,6 @@ import { cn } from '@semantic-components/ui';
     },
   ],
   host: {
-    'data-slot': 'editor-toolbar',
     '[class]': 'class()',
   },
 })

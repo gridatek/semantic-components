@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'div[scEditorHeader]',
   host: {
-    'data-slot': 'editor-header',
     '[class]': 'class()',
   },
 })

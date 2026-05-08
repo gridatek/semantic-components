@@ -42,7 +42,6 @@ export type ScCodeViewerLanguage =
     }
   `,
   host: {
-    'data-slot': 'code-viewer-content',
     '[class]': 'wrapperClass()',
   },
   encapsulation: ViewEncapsulation.None,

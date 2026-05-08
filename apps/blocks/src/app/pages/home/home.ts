@@ -30,7 +30,6 @@ import { HeroSection } from '../../components/hero-section/hero-section';
     </section>
   `,
   host: {
-    'data-slot': 'home-page',
     class: 'block',
   },
   encapsulation: ViewEncapsulation.None,

@@ -20,7 +20,6 @@ import { StackedLayout } from '../../components/stacked-layout/stacked-layout';
     </app-stacked-layout>
   `,
   host: {
-    'data-slot': 'main-layout',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

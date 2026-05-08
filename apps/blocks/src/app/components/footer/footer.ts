@@ -27,7 +27,6 @@ import { SiMountainIcon } from '@semantic-icons/lucide-icons';
     </footer>
   `,
   host: {
-    'data-slot': 'footer',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

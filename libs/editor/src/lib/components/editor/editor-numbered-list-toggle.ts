@@ -7,7 +7,6 @@ import { SC_EDITOR } from './editor';
   selector: 'button[scEditorNumberedListToggle]',
   hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
   host: {
-    'data-slot': 'editor-toggle',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',

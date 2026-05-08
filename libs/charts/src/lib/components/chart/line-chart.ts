@@ -120,7 +120,6 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
     </div>
   `,
   host: {
-    'data-slot': 'line-chart',
     '[class]': 'class()',
     class: 'relative block',
   },

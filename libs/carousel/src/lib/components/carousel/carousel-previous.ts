@@ -15,7 +15,6 @@ import { ScCarousel } from './carousel';
     <ng-content />
   `,
   host: {
-    'data-slot': 'carousel-previous',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!carousel.canScrollPrev()',

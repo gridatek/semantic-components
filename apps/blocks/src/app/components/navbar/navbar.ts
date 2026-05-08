@@ -257,7 +257,6 @@ import {
     </div>
   `,
   host: {
-    'data-slot': 'navbar',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

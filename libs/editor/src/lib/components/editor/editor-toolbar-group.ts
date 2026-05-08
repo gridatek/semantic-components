@@ -6,7 +6,6 @@ import { cn } from '@semantic-components/ui';
   selector: 'div[scEditorToolbarGroup]',
   hostDirectives: [ToolbarWidgetGroup],
   host: {
-    'data-slot': 'editor-toolbar-group',
     '[class]': 'class()',
   },
 })

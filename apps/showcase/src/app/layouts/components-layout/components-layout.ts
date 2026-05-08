@@ -67,7 +67,6 @@ import { ComponentsService } from '../../services/components.service';
     </div>
   `,
   host: {
-    'data-slot': 'components-layout',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -70,7 +70,6 @@ import {
     </section>
   `,
   host: {
-    'data-slot': 'feature-grid',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

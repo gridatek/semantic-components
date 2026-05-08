@@ -19,9 +19,7 @@ import {
       </div>
     }
   `,
-  host: {
-    'data-slot': 'chart-tooltip',
-  },
+  host: {},
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

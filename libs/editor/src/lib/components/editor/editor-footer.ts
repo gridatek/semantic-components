@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'div[scEditorFooter]',
   host: {
-    'data-slot': 'editor-footer',
     '[class]': 'class()',
   },
 })

@@ -37,7 +37,6 @@ import { cn } from '@semantic-components/ui';
     </section>
   `,
   host: {
-    'data-slot': 'hero-section',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

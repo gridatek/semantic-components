@@ -82,7 +82,6 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
     </div>
   `,
   host: {
-    'data-slot': 'pie-chart',
     '[class]': 'class()',
     class: 'relative block',
   },

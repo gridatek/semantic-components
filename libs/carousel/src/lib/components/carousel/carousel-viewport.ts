@@ -15,7 +15,6 @@ import { cn } from '@semantic-components/ui';
     <ng-content />
   `,
   host: {
-    'data-slot': 'carousel-viewport',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

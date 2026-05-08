@@ -17,7 +17,6 @@ import { SC_EDITOR } from './editor';
 @Directive({
   selector: 'div[scEditorContent]',
   host: {
-    'data-slot': 'editor-content',
     '[class]': 'class()',
   },
 })

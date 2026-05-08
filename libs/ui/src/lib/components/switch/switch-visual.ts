@@ -18,7 +18,7 @@ import { SC_SWITCH_FIELD } from './switch-types';
     '[attr.aria-hidden]': 'true',
   },
   template: `
-    <span data-slot="switch-thumb" [class]="thumbClass()"></span>
+    <span [class]="thumbClass()"></span>
   `,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

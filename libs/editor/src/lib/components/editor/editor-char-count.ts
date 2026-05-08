@@ -6,7 +6,6 @@ import { SC_EDITOR } from './editor';
   selector: 'span[scEditorCharCount]',
   exportAs: 'scEditorCharCount',
   host: {
-    'data-slot': 'editor-char-count',
     '[class]': 'class()',
   },
 })

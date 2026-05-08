@@ -21,7 +21,6 @@ export const SC_EDITOR = new InjectionToken<ScEditor>('SC_EDITOR');
   exportAs: 'scEditor',
   providers: [{ provide: SC_EDITOR, useExisting: ScEditor }],
   host: {
-    'data-slot': 'editor',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })

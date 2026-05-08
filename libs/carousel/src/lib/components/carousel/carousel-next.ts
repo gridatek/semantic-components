@@ -15,7 +15,6 @@ import { ScCarousel } from './carousel';
     <ng-content />
   `,
   host: {
-    'data-slot': 'carousel-next',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!carousel.canScrollNext()',

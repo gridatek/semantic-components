@@ -18,7 +18,6 @@ const HEADING_OPTIONS: { value: ScEditorHeadingLevel; label: string }[] = [
   exportAs: 'scEditorHeading',
   hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
   host: {
-    'data-slot': 'editor-heading',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'disabled()',

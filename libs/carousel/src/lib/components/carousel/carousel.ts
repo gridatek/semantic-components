@@ -32,7 +32,6 @@ export type ScCarouselPlugin = EmblaPluginType;
     <ng-content />
   `,
   host: {
-    'data-slot': 'carousel',
     role: 'region',
     'aria-roledescription': 'carousel',
     '[attr.aria-label]': 'ariaLabel()',

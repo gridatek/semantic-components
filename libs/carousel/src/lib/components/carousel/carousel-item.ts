@@ -5,7 +5,6 @@ import { ScCarousel } from './carousel';
 @Directive({
   selector: 'div[scCarouselItem]',
   host: {
-    'data-slot': 'carousel-item',
     role: 'group',
     'aria-roledescription': 'slide',
     '[class]': 'class()',

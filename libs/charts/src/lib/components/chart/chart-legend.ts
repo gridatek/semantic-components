@@ -29,7 +29,6 @@ import { CHART_COLORS } from './chart-types';
     </div>
   `,
   host: {
-    'data-slot': 'chart-legend',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

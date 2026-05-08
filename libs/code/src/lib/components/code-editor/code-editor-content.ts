@@ -213,7 +213,6 @@ export function detectLanguage(
     }
   `,
   host: {
-    'data-slot': 'code-editor-content',
     '[class]': 'wrapperClass()',
     '(click)': 'focusTextarea()',
   },
