@@ -38,6 +38,16 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
         <h1 scHeading>Emoji Picker</h1>
         <p class="text-muted-foreground">
           A searchable emoji picker with categories and recently used emojis.
+          Powered by
+          <a
+            href="https://emojibase.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            emojibase
+          </a>
+          under the hood.
         </p>
         <app-component-badges path="emoji-picker" />
       </div>

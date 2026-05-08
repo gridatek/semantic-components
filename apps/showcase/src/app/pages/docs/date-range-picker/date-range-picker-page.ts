@@ -34,7 +34,16 @@ import { PresetsDateRangePickerDemoContainer } from './demos/presets-date-range-
         <h1 scHeading>Date Range Picker</h1>
         <p class="text-muted-foreground">
           Select a range of dates with presets, min/max constraints, and various
-          display formats.
+          display formats. Powered by
+          <a
+            href="https://github.com/js-temporal/temporal-polyfill"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            @js-temporal/polyfill
+          </a>
+          under the hood.
         </p>
         <app-component-badges path="date-range-picker" />
       </div>

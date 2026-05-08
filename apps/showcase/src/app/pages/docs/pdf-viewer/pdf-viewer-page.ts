@@ -17,7 +17,16 @@ import { PdfViewerDemoContainer } from './demos/pdf-viewer-demo-container';
         <h1 scHeading>Pdf Viewer</h1>
         <p class="text-muted-foreground">
           A document viewer component for displaying PDF files with navigation,
-          zoom, and toolbar controls.
+          zoom, and toolbar controls. Powered by
+          <a
+            href="https://github.com/mozilla/pdf.js"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            pdf.js
+          </a>
+          under the hood.
         </p>
         <app-component-badges path="pdf-viewer" />
       </div>
