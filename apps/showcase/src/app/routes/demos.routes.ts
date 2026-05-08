@@ -2744,10 +2744,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/query-param-state',
     children: [
       {
-        path: 'basic-query-param-state-demo',
+        path: 'demo-query-param-state-demo',
         loadComponent: () =>
-          import('../pages/docs/query-param-state/demos/basic-query-param-state-demo').then(
-            (m) => m.BasicQueryParamStateDemo,
+          import('../pages/docs/query-param-state/demos/demo-query-param-state-demo').then(
+            (m) => m.DemoQueryParamStateDemo,
           ),
       },
     ],

@@ -6,12 +6,12 @@ import {
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicQueryParamStateDemoContainer } from './demos/basic-query-param-state-demo-container';
+import { DemoQueryParamStateDemoContainer } from './demos/demo-query-param-state-demo-container';
 
 @Component({
   selector: 'app-query-param-state-page',
   imports: [
-    BasicQueryParamStateDemoContainer,
+    DemoQueryParamStateDemoContainer,
     TocHeading,
     ComponentBadges,
     ScHeading,
@@ -29,7 +29,7 @@ import { BasicQueryParamStateDemoContainer } from './demos/basic-query-param-sta
 
       <section class="space-y-8">
         <h2 scHeading appToc>Examples</h2>
-        <app-basic-query-param-state-demo-container />
+        <app-demo-query-param-state-demo-container />
       </section>
     </div>
   `,

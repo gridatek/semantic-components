@@ -3,6 +3,32 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { DemoQueryParamStateDemo } from './demo-query-param-state-demo';
+
+@Component({
+  selector: 'app-demo-query-param-state-demo-container',
+  imports: [DemoContainer, DemoQueryParamStateDemo],
+  template: `
+    <app-demo-container
+      title="Demo"
+      description="When a parameter equals its declared default, it is stripped from the URL. Only deviations from defaults appear in the query string, so the URL stays short and canonical."
+      demoUrl="/demos/query-param-state/demo-query-param-state-demo"
+      [code]="code"
+    >
+      <app-demo-query-param-state-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class DemoQueryParamStateDemoContainer {
+  readonly code = `import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   injectQueryParam,
@@ -14,7 +40,7 @@ import {
 @Component({
   selector: 'app-basic-query-param-state-demo',
   imports: [FormsModule],
-  template: `
+  template: \`
     <div class="w-full max-w-md space-y-4">
       <div class="space-y-2">
         <label class="text-sm font-medium" for="search">Search</label>
@@ -68,7 +94,7 @@ import {
         Reset all
       </button>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -100,4 +126,5 @@ export class BasicQueryParamStateDemo {
     this.page.clear();
     this.sort.clear();
   }
+}`;
 }

@@ -57,10 +57,15 @@ export function injectQueryParam<T>(
 
   const sig = signal<T | null>(initialValue);
 
-  // If URL has no value for this key but we have a default, write it so the
-  // URL always reflects the full state.
-  if (rawInit === null && hasDefault && defaultValue !== null) {
-    sync.write(key, parser.serialize(defaultValue), parser._options);
+  const isDefault = (value: T | null): boolean => {
+    if (!hasDefault || value === null || defaultValue === null) return false;
+    return parser.serialize(value) === parser.serialize(defaultValue);
+  };
+
+  // If the URL carries the default value explicitly, strip it so the canonical
+  // URL only ever contains non-default state.
+  if (rawInit !== null && initialParsed !== null && isDefault(initialParsed)) {
+    sync.write(key, null, parser._options);
   }
 
   // Subscribe to route changes and keep signal in sync
@@ -80,7 +85,8 @@ export function injectQueryParam<T>(
     value: sig as WritableSignal<T>,
 
     set(value: T | null): void {
-      const raw = value === null ? null : parser.serialize(value);
+      const raw =
+        value === null || isDefault(value) ? null : parser.serialize(value);
       sync.write(key, raw, parser._options);
       // Optimistic local update for instant UI response
       sig.set(value ?? defaultValue);

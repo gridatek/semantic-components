@@ -3,31 +3,6 @@ import {
   Component,
   ViewEncapsulation,
 } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicQueryParamStateDemo } from './basic-query-param-state-demo';
-
-@Component({
-  selector: 'app-basic-query-param-state-demo-container',
-  imports: [DemoContainer, BasicQueryParamStateDemo],
-  template: `
-    <app-demo-container
-      title="Basic"
-      demoUrl="/demos/query-param-state/basic-query-param-state-demo"
-      [code]="code"
-    >
-      <app-basic-query-param-state-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class BasicQueryParamStateDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   injectQueryParam,
@@ -37,9 +12,9 @@ import {
 } from '@semantic-components/ui-lab';
 
 @Component({
-  selector: 'app-basic-query-param-state-demo',
+  selector: 'app-demo-query-param-state-demo',
   imports: [FormsModule],
-  template: \`
+  template: `
     <div class="w-full max-w-md space-y-4">
       <div class="space-y-2">
         <label class="text-sm font-medium" for="search">Search</label>
@@ -93,12 +68,12 @@ import {
         Reset all
       </button>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicQueryParamStateDemo {
+export class DemoQueryParamStateDemo {
   readonly search = injectQueryParam('q', parseAsString.withDefault(''));
 
   readonly page = injectQueryParam('page', parseAsInteger.withDefault(1));
@@ -125,5 +100,4 @@ export class BasicQueryParamStateDemo {
     this.page.clear();
     this.sort.clear();
   }
-}`;
 }
