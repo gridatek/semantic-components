@@ -57,6 +57,12 @@ export function injectQueryParam<T>(
 
   const sig = signal<T | null>(initialValue);
 
+  // If URL has no value for this key but we have a default, write it so the
+  // URL always reflects the full state.
+  if (rawInit === null && hasDefault && defaultValue !== null) {
+    sync.write(key, parser.serialize(defaultValue), parser._options);
+  }
+
   // Subscribe to route changes and keep signal in sync
   route.queryParamMap
     .pipe(takeUntilDestroyed(destroyRef))
