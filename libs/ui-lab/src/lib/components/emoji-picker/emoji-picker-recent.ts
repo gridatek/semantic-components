@@ -6,7 +6,6 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   selector: 'div[scEmojiPickerRecent]',
   exportAs: 'scEmojiPickerRecent',
   host: {
-    'data-slot': 'emoji-picker-recent',
     '[class]': 'class()',
     '[hidden]': '!visible()',
   },

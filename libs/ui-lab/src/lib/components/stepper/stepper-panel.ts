@@ -6,7 +6,6 @@ import { SC_STEPPER, SC_STEPPER_PANEL } from './stepper-types';
   selector: '[scStepperPanel]',
   providers: [{ provide: SC_STEPPER_PANEL, useExisting: ScStepperPanel }],
   host: {
-    'data-slot': 'stepper-panel',
     role: 'tabpanel',
     '[class]': 'class()',
     '[hidden]': '!isActive()',

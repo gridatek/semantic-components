@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scMarqueeFade]',
   host: {
-    'data-slot': 'marquee-fade',
     '[class]': 'class()',
     '[attr.data-direction]': 'direction()',
     '[style.mask-image]': 'maskImage()',

@@ -6,7 +6,6 @@ import { ScEmojiPickerState } from './emoji-picker-state';
 @Directive({
   selector: 'button[scEmojiPickerCategoryTab]',
   host: {
-    'data-slot': 'emoji-picker-category-tab',
     type: 'button',
     role: 'tab',
     '[class]': 'class()',

@@ -5,7 +5,6 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
 @Directive({
   selector: 'button[scSignaturePadClear]',
   host: {
-    'data-slot': 'signature-pad-clear',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'isDisabled()',

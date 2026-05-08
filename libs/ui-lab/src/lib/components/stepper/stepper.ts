@@ -6,7 +6,6 @@ import { SC_STEPPER, ScStepperOrientation } from './stepper-types';
   selector: '[scStepper]',
   providers: [{ provide: SC_STEPPER, useExisting: ScStepper }],
   host: {
-    'data-slot': 'stepper',
     '[class]': 'class()',
     '[attr.data-orientation]': 'orientation()',
   },

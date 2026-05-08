@@ -15,7 +15,6 @@ import { SC_IMAGE_COMPARE } from './image-compare';
     <ng-content />
   `,
   host: {
-    'data-slot': 'image-compare-label',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

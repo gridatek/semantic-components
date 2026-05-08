@@ -23,7 +23,6 @@ import {
     }
   `,
   host: {
-    'data-slot': 'image-cropper-grid',
     class: 'pointer-events-none absolute inset-0',
   },
   encapsulation: ViewEncapsulation.None,

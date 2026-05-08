@@ -15,7 +15,6 @@ import { TourService } from './tour-service';
   exportAs: 'scTourGuide',
   providers: [ScTourGuideState],
   host: {
-    'data-slot': 'tour-guide',
     '[class]': 'class()',
     tabindex: '-1',
     '(click)': 'onOverlayClick($event)',

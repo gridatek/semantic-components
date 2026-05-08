@@ -5,7 +5,6 @@ import type { StatCardTrend } from './stat-card-types';
 @Directive({
   selector: '[scStatCardChange]',
   host: {
-    'data-slot': 'stat-card-change',
     '[class]': 'class()',
   },
 })

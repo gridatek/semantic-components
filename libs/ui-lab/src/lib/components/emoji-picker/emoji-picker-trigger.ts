@@ -4,7 +4,6 @@ import { buttonVariants, cn } from '@semantic-components/ui';
 @Directive({
   selector: 'button[scEmojiPickerTrigger]',
   host: {
-    'data-slot': 'emoji-picker-trigger',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel()',

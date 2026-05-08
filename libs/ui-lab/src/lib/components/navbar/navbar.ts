@@ -17,7 +17,6 @@ import { cn } from '@semantic-components/ui';
     <ng-content />
   `,
   host: {
-    'data-slot': 'navbar',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

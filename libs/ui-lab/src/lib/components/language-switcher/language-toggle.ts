@@ -25,7 +25,6 @@ import { LanguageSwitcherSize, LanguageSwitcherVariant } from './styles';
 @Component({
   selector: 'button[scLanguageToggle]',
   host: {
-    'data-slot': 'language-toggle',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel()',

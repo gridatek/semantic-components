@@ -5,7 +5,6 @@ import { cn } from '@semantic-components/ui';
   selector: '[scColorPickerSwatches]',
   exportAs: 'scColorPickerSwatches',
   host: {
-    'data-slot': 'color-picker-swatches',
     '[class]': 'class()',
   },
 })

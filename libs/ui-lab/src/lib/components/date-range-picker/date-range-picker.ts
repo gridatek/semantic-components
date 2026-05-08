@@ -25,7 +25,6 @@ export interface ScDateRangePreset {
   selector: 'div[scDateRangePicker]',
   exportAs: 'scDateRangePicker',
   host: {
-    'data-slot': 'date-range-picker',
     '[class]': 'class()',
   },
 })

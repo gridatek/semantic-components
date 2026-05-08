@@ -13,7 +13,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   selector: 'button[scAudioPlayerRepeat]',
   template: '<ng-content />',
   host: {
-    'data-slot': 'audio-player-repeat',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-label]': "'Repeat: ' + player.repeat()",

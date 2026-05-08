@@ -15,7 +15,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     <ng-content />
   `,
   host: {
-    'data-slot': 'pdf-viewer-next-page',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!pdfViewer.canGoNext()',

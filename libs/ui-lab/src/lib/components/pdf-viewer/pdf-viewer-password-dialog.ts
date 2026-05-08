@@ -72,7 +72,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
   `,
   imports: [CdkTrapFocus],
   host: {
-    'data-slot': 'pdf-viewer-password-dialog',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

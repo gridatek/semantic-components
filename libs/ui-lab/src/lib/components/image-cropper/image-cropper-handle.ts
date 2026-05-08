@@ -36,7 +36,6 @@ const POSITION_CLASSES: Record<ScImageCropperHandlePosition, string> = {
 @Directive({
   selector: '[scImageCropperHandle]',
   host: {
-    'data-slot': 'image-cropper-handle',
     '[class]': 'hostClass()',
     '[style.cursor]': 'cursor()',
     '[attr.data-position]': 'position()',

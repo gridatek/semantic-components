@@ -43,7 +43,6 @@ import type { Annotation, AnnotationPoint } from './image-annotator-types';
     }
   `,
   host: {
-    'data-slot': 'image-annotator-canvas',
     '[class]': 'class()',
     '[style.width.px]': 'state.width()',
     '[style.height.px]': 'state.height()',

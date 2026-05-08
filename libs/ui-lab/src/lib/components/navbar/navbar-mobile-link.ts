@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'a[scNavbarMobileLink], button[scNavbarMobileLink]',
   host: {
-    'data-slot': 'navbar-mobile-link',
     '[class]': 'class()',
   },
 })

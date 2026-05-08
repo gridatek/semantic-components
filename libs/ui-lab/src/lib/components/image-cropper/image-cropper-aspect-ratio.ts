@@ -5,7 +5,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 @Directive({
   selector: 'button[scImageCropperAspectRatio]',
   host: {
-    'data-slot': 'image-cropper-aspect-ratio',
     '[class]': 'class()',
     '[attr.data-selected]': 'selected() || null',
     '[attr.aria-pressed]': 'selected()',

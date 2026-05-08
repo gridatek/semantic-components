@@ -17,7 +17,6 @@ import type {
   selector: 'div[scTransferList]',
   providers: [ScTransferListState],
   host: {
-    'data-slot': 'transfer-list',
     '[class]': 'class()',
   },
 })

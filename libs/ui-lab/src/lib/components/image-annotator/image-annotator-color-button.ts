@@ -5,7 +5,6 @@ import { ScImageAnnotatorState } from './image-annotator-state';
 @Directive({
   selector: 'button[scImageAnnotatorColorButton]',
   host: {
-    'data-slot': 'image-annotator-color-button',
     type: 'button',
     '[class]': 'class()',
     '[style.background-color]': 'color()',

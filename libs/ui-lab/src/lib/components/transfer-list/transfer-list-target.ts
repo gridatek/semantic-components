@@ -17,7 +17,6 @@ import type { TransferListItem } from './transfer-list-types';
     },
   ],
   host: {
-    'data-slot': 'transfer-list-target',
     '[class]': 'class()',
   },
 })

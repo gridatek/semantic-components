@@ -6,7 +6,6 @@ import { hslToRgb, parseHsl, parseOklch, parseRgb } from './color-utils';
 @Directive({
   selector: 'input[scColorPickerInput]',
   host: {
-    'data-slot': 'color-picker-input',
     type: 'text',
     '[class]': 'class()',
     '[value]': 'displayValue()',

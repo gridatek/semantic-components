@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'span[scDiffViewerLineSign]',
   host: {
-    'data-slot': 'diff-viewer-line-sign',
     '[class]': 'class()',
   },
 })

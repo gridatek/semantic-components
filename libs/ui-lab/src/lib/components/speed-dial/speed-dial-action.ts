@@ -5,7 +5,6 @@ import { SC_SPEED_DIAL } from './speed-dial-types';
 @Directive({
   selector: '[scSpeedDialAction]',
   host: {
-    'data-slot': 'speed-dial-action',
     role: 'menuitem',
     '[class]': 'class()',
     '[style.transition-delay]': 'transitionDelay()',

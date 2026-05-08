@@ -62,7 +62,6 @@ import { ScTransferListState } from './transfer-list-state';
     </button>
   `,
   host: {
-    'data-slot': 'transfer-list-actions',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

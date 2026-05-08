@@ -5,7 +5,6 @@ import { SC_TRANSFER_LIST_PANEL } from './transfer-list-panel-ref';
 @Directive({
   selector: '[scTransferListCount]',
   host: {
-    'data-slot': 'transfer-list-count',
     '[class]': 'class()',
     '[textContent]': 'countText()',
   },

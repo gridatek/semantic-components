@@ -5,7 +5,6 @@ import { SC_SIGNATURE_PAD } from './signature-pad';
 @Directive({
   selector: 'button[scSignaturePadUndo]',
   host: {
-    'data-slot': 'signature-pad-undo',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'isDisabled()',

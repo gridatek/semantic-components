@@ -27,7 +27,6 @@ import { SC_IMAGE_CROPPER, ScImageCropperResult } from './image-cropper';
     <canvas #canvasEl class="hidden"></canvas>
   `,
   host: {
-    'data-slot': 'image-cropper-canvas',
     '[class]': 'class()',
     '[style.height.px]': 'cropper.containerHeight()',
     '(wheel)': 'onWheel($event)',

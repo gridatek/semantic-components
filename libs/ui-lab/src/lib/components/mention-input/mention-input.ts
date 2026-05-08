@@ -23,7 +23,6 @@ export const SC_MENTION_INPUT = new InjectionToken<ScMentionInput>(
     { provide: SC_MENTION_INPUT, useExisting: ScMentionInput },
   ],
   host: {
-    'data-slot': 'mention-input',
     '[class]': 'class()',
   },
 })

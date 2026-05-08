@@ -5,7 +5,6 @@ import type { StatCardSize, StatCardVariant } from './stat-card-types';
 @Directive({
   selector: '[scStatCard]',
   host: {
-    'data-slot': 'stat-card',
     '[class]': 'class()',
   },
 })

@@ -33,7 +33,6 @@ export const SC_COLOR_PICKER = new InjectionToken<ScColorPicker>(
   exportAs: 'scColorPicker',
   providers: [{ provide: SC_COLOR_PICKER, useExisting: ScColorPicker }],
   host: {
-    'data-slot': 'color-picker',
     '[class]': 'class()',
   },
 })

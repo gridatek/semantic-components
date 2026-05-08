@@ -16,7 +16,6 @@ import { ScNavbarProvider } from './navbar-provider';
     <ng-content />
   `,
   host: {
-    'data-slot': 'navbar-mobile-trigger',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-expanded]': 'isMobileMenuOpen()',

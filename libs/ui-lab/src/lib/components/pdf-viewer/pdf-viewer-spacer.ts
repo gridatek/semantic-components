@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scPdfViewerSpacer]',
   host: {
-    'data-slot': 'pdf-viewer-spacer',
     '[class]': 'class()',
   },
 })

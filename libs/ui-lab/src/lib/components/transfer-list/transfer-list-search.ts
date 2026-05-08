@@ -5,7 +5,6 @@ import { SC_TRANSFER_LIST_PANEL } from './transfer-list-panel-ref';
 @Directive({
   selector: 'input[scTransferListSearch]',
   host: {
-    'data-slot': 'transfer-list-search',
     '[class]': 'class()',
     '[value]': 'panel.searchValue()',
     '(input)': 'onInput($event)',

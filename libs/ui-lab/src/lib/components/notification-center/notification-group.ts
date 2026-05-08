@@ -113,7 +113,6 @@ import type {
     }
   `,
   host: {
-    'data-slot': 'notification-group',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

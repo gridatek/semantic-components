@@ -7,7 +7,6 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   selector: 'div[scEmojiPickerGrid]',
   exportAs: 'scEmojiPickerGrid',
   host: {
-    'data-slot': 'emoji-picker-grid',
     '[class]': 'class()',
   },
 })

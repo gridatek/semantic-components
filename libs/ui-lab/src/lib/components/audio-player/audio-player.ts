@@ -36,7 +36,6 @@ export const SC_AUDIO_PLAYER = new InjectionToken<ScAudioPlayer>(
   exportAs: 'scAudioPlayer',
   providers: [{ provide: SC_AUDIO_PLAYER, useExisting: ScAudioPlayer }],
   host: {
-    'data-slot': 'audio-player',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

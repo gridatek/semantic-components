@@ -27,7 +27,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     </span>
   `,
   host: {
-    'data-slot': 'image-cropper-zoom-slider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

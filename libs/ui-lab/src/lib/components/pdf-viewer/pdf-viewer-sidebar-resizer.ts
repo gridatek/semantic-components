@@ -29,7 +29,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     </div>
   `,
   host: {
-    'data-slot': 'pdf-viewer-sidebar-resizer',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

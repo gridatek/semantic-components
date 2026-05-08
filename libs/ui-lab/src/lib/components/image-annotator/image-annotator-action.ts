@@ -5,7 +5,6 @@ import { ScImageAnnotatorState } from './image-annotator-state';
 @Directive({
   selector: 'button[scImageAnnotatorAction]',
   host: {
-    'data-slot': 'image-annotator-action',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'isDisabled()',

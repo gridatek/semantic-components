@@ -20,7 +20,6 @@ type ScNavbarMobileMenuState = 'open' | 'closed';
     <ng-content />
   `,
   host: {
-    'data-slot': 'navbar-mobile-menu',
     id: 'navbar-mobile-menu',
     role: 'navigation',
     '[attr.aria-label]': '"Mobile navigation"',

@@ -26,7 +26,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     }
   `,
   host: {
-    'data-slot': 'audio-player-track-info',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

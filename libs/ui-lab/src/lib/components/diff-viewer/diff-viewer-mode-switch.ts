@@ -4,9 +4,7 @@ import { DiffViewMode, SC_DIFF_VIEWER } from './diff-viewer';
 
 @Directive({
   selector: 'div[scDiffViewerModeSwitch]',
-  host: {
-    'data-slot': 'diff-viewer-mode-switch',
-  },
+  host: {},
 })
 export class ScDiffViewerModeSwitch {
   private readonly diffViewer = inject(SC_DIFF_VIEWER);

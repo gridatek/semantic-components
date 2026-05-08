@@ -16,7 +16,6 @@ import { SC_SIGNATURE_PAD, ScSignaturePoint } from './signature-pad';
 @Directive({
   selector: 'canvas[scSignaturePadCanvas]',
   host: {
-    'data-slot': 'signature-pad-canvas',
     '[class]': 'class()',
     role: 'img',
     '[attr.aria-label]': 'ariaLabel()',

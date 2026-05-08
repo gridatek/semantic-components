@@ -10,7 +10,6 @@ import {
 @Directive({
   selector: 'div[scColorPickerArea]',
   host: {
-    'data-slot': 'color-picker-area',
     role: 'slider',
     tabindex: '0',
     'aria-roledescription': '2d color picker',

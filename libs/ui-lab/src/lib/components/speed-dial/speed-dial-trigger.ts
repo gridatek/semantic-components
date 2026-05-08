@@ -5,7 +5,6 @@ import { SC_SPEED_DIAL } from './speed-dial-types';
 @Directive({
   selector: 'button[scSpeedDialTrigger]',
   host: {
-    'data-slot': 'speed-dial-trigger',
     type: 'button',
     '[attr.aria-expanded]': 'speedDial.open()',
     '[attr.aria-haspopup]': '"menu"',

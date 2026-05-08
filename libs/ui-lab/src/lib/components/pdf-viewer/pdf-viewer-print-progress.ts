@@ -51,7 +51,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     }
   `,
   host: {
-    'data-slot': 'pdf-viewer-print-progress',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

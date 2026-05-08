@@ -14,12 +14,11 @@ import { cn } from '@semantic-components/ui';
   template: `
     <ng-content select="[scSidebar]" />
 
-    <main data-slot="sidebar-layout-content" class="flex-1 overflow-auto">
+    <main class="flex-1 overflow-auto">
       <router-outlet />
     </main>
   `,
   host: {
-    'data-slot': 'sidebar-layout',
     '[class]': 'class()',
   },
   styles: ``,

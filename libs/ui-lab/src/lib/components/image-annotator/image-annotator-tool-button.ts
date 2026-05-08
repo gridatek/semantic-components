@@ -6,7 +6,6 @@ import type { AnnotationTool } from './image-annotator-types';
 @Directive({
   selector: 'button[scImageAnnotatorToolButton]',
   host: {
-    'data-slot': 'image-annotator-tool-button',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-pressed]': 'isActive()',

@@ -15,7 +15,6 @@ import { SC_TREE_ITEM } from './tree-item';
     <ng-content />
   `,
   host: {
-    'data-slot': 'tree-item-trigger',
     type: 'button',
     '[class]': 'class()',
     '[style.padding-left]': 'paddingLeft()',

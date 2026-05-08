@@ -5,7 +5,6 @@ import { SC_COLOR_PICKER } from './color-picker';
 @Directive({
   selector: '[scColorPickerPreview]',
   host: {
-    'data-slot': 'color-picker-preview',
     'aria-hidden': 'true',
     '[class]': 'class()',
     '[style.background-color]': 'colorPicker.hex()',

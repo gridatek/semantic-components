@@ -5,7 +5,6 @@ import { SC_DIFF_VIEWER } from './diff-viewer';
 @Directive({
   selector: 'div[scDiffViewerLine]',
   host: {
-    'data-slot': 'diff-viewer-line',
     '[class]': 'class()',
   },
 })

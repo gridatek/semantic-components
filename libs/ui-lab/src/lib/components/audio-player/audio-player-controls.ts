@@ -11,7 +11,6 @@ import { cn } from '@semantic-components/ui';
   selector: 'div[scAudioPlayerControls]',
   template: '<ng-content />',
   host: {
-    'data-slot': 'audio-player-controls',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

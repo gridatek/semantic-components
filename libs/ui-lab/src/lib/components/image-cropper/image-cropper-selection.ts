@@ -5,7 +5,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 @Directive({
   selector: '[scImageCropperSelection]',
   host: {
-    'data-slot': 'image-cropper-selection',
     '[class]': 'class()',
     '[style.left.px]': 'cropper.cropArea().x',
     '[style.top.px]': 'cropper.cropArea().y',

@@ -26,7 +26,6 @@ export const SC_COUNTDOWN = new InjectionToken<ScCountdown>('SC_COUNTDOWN');
   exportAs: 'scCountdown',
   providers: [{ provide: SC_COUNTDOWN, useExisting: ScCountdown }],
   host: {
-    'data-slot': 'countdown',
     '[class]': 'class()',
     role: 'timer',
     '[attr.aria-label]': 'ariaLabel()',

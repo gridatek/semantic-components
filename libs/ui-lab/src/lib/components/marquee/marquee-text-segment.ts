@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scMarqueeTextSegment]',
   host: {
-    'data-slot': 'marquee-text-segment',
     '[class]': 'class()',
   },
 })

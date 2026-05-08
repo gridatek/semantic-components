@@ -24,7 +24,6 @@ export const SC_KANBAN_BOARD = new InjectionToken<ScKanbanBoard>(
   exportAs: 'scKanbanBoard',
   providers: [{ provide: SC_KANBAN_BOARD, useExisting: ScKanbanBoard }],
   host: {
-    'data-slot': 'kanban-board',
     '[class]': 'class()',
     role: 'region',
     'aria-label': 'Kanban board',

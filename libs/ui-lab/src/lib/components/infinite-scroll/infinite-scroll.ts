@@ -29,7 +29,6 @@ export const SC_INFINITE_SCROLL = new InjectionToken<ScInfiniteScroll>(
     <div scInfiniteScrollSentinel></div>
   `,
   host: {
-    'data-slot': 'infinite-scroll',
     tabindex: '0',
     role: 'region',
     '[attr.aria-label]': 'ariaLabel()',

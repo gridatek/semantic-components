@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'div[scTransferListItems]',
   host: {
-    'data-slot': 'transfer-list-items',
     '[class]': 'class()',
   },
 })

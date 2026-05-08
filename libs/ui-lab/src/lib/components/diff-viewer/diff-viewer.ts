@@ -24,7 +24,6 @@ export const SC_DIFF_VIEWER = new InjectionToken<ScDiffViewer>('ScDiffViewer');
   exportAs: 'scDiffViewer',
   providers: [{ provide: SC_DIFF_VIEWER, useExisting: ScDiffViewer }],
   host: {
-    'data-slot': 'diff-viewer',
     '[class]': 'class()',
   },
 })

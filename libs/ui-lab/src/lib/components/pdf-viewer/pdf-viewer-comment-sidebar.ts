@@ -123,7 +123,6 @@ import type { PdfComment } from './pdf-viewer-types';
     </div>
   `,
   host: {
-    'data-slot': 'pdf-viewer-comment-sidebar',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

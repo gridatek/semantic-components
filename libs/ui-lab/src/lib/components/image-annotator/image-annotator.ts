@@ -7,7 +7,6 @@ import type { Annotation } from './image-annotator-types';
   selector: 'div[scImageAnnotator]',
   providers: [ScImageAnnotatorState],
   host: {
-    'data-slot': 'image-annotator',
     '[class]': 'class()',
   },
 })

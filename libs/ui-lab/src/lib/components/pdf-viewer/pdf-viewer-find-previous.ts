@@ -15,7 +15,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     <ng-content />
   `,
   host: {
-    'data-slot': 'pdf-viewer-find-previous',
     '[class]': 'class()',
     'aria-label': 'Find Previous',
     '(click)': 'pdfViewer.findPrevious()',

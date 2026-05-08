@@ -5,7 +5,6 @@ import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
 @Directive({
   selector: '[scStepperSeparator]',
   host: {
-    'data-slot': 'stepper-separator',
     '[class]': 'class()',
     '[attr.data-state]': 'state()',
   },

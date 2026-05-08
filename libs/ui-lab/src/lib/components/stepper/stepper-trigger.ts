@@ -6,7 +6,6 @@ import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
   selector: 'button[scStepperTrigger]',
   exportAs: 'scStepperTrigger',
   host: {
-    'data-slot': 'stepper-trigger',
     type: 'button',
     role: 'tab',
     '[class]': 'class()',

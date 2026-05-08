@@ -5,7 +5,6 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 @Directive({
   selector: 'img[scLightboxImage]',
   host: {
-    'data-slot': 'lightbox-image',
     '[class]': 'class()',
     '[src]': 'provider.currentImage().src',
     '[alt]': 'alt()',

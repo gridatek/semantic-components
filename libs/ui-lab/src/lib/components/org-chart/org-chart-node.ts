@@ -53,7 +53,6 @@ import { SC_ORG_CHART } from './org-chart-types';
     </div>
   `,
   host: {
-    'data-slot': 'org-chart-node',
     '[class]': 'hostClass()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -28,7 +28,6 @@ import type { TransferListItem } from './transfer-list-types';
     </div>
   `,
   host: {
-    'data-slot': 'transfer-list-item',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

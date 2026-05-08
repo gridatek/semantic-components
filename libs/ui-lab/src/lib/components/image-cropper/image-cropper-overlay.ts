@@ -43,7 +43,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     </svg>
   `,
   host: {
-    'data-slot': 'image-cropper-overlay',
     class: 'pointer-events-none absolute inset-0',
   },
   encapsulation: ViewEncapsulation.None,

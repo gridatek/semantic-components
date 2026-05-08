@@ -5,7 +5,6 @@ import { SC_BARCODE_SCANNER } from './barcode-scanner';
   selector: 'video[scBarcodeVideo]',
   exportAs: 'scBarcodeVideo',
   host: {
-    'data-slot': 'barcode-video',
     autoplay: '',
     playsinline: '',
     muted: '',

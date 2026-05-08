@@ -31,7 +31,6 @@ import { ScDateRangePicker } from './date-range-picker';
     </div>
   `,
   host: {
-    'data-slot': 'date-range-picker-footer',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

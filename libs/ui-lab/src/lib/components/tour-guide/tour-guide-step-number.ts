@@ -5,7 +5,6 @@ import { ScTourGuideState } from './tour-guide-state';
 @Directive({
   selector: '[scTourGuideStepNumber]',
   host: {
-    'data-slot': 'tour-guide-step-number',
     '[class]': 'class()',
     '[textContent]': 'stepNumber()',
   },

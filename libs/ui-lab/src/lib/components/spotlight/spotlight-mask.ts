@@ -41,7 +41,6 @@ import { ScSpotlightState } from './spotlight-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'data-slot': 'spotlight-mask',
     '[class]': 'class()',
   },
 })

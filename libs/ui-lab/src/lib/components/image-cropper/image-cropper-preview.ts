@@ -24,7 +24,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     }
   `,
   host: {
-    'data-slot': 'image-cropper-preview',
     '[class]': 'class()',
     '[style.width.px]': 'previewWidth()',
     '[style.height.px]': 'previewHeight()',

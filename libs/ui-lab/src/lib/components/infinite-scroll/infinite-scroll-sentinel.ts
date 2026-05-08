@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scInfiniteScrollSentinel]',
   host: {
-    'data-slot': 'infinite-scroll-sentinel',
     '[class]': 'class()',
   },
 })

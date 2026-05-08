@@ -43,7 +43,6 @@ interface LayerItem {
     }
   `,
   host: {
-    'data-slot': 'pdf-viewer-layers-view',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

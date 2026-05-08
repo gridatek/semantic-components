@@ -10,7 +10,6 @@ import {
 @Directive({
   selector: 'div[scColorPickerHue]',
   host: {
-    'data-slot': 'color-picker-hue',
     role: 'slider',
     tabindex: '0',
     'aria-label': 'Hue',

@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'div[scSignaturePadControls]',
   host: {
-    'data-slot': 'signature-pad-controls',
     '[class]': 'class()',
   },
 })

@@ -22,7 +22,6 @@ import { ScLanguageService } from './language.service';
 @Component({
   selector: 'sc-language-select',
   host: {
-    'data-slot': 'language-select',
     '[class]': 'class()',
   },
   template: `

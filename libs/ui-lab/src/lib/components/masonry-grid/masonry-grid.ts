@@ -23,7 +23,6 @@ import {
   exportAs: 'scMasonryGrid',
   providers: [{ provide: SC_MASONRY_GRID, useExisting: ScMasonryGrid }],
   host: {
-    'data-slot': 'masonry-grid',
     '[class]': 'class()',
     '[style.column-count]':
       "layoutMode() === 'columns' ? currentColumns() : null",

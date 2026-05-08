@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'div[scTourGuideNavigation]',
   host: {
-    'data-slot': 'tour-guide-navigation',
     '[class]': 'class()',
   },
 })

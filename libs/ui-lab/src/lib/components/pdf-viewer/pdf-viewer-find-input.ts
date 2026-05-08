@@ -13,7 +13,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
   selector: 'input[scPdfViewerFindInput]',
   template: ``,
   host: {
-    'data-slot': 'pdf-viewer-find-input',
     '[class]': 'class()',
     'aria-label': 'Find in document',
     placeholder: 'Find in document…',

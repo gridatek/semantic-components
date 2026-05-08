@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scStepperDescription]',
   host: {
-    'data-slot': 'stepper-description',
     '[class]': 'class()',
   },
 })

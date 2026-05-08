@@ -7,7 +7,6 @@ import type { KanbanCard, KanbanColumn } from './kanban-types';
   selector: '[scKanbanColumn]',
   exportAs: 'scKanbanColumn',
   host: {
-    'data-slot': 'kanban-column',
     '[class]': 'class()',
     '(dragover)': 'onDragOver($event)',
     '(dragleave)': 'onDragLeave($event)',

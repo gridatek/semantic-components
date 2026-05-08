@@ -7,7 +7,6 @@ import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
   exportAs: 'scStepperItem',
   providers: [{ provide: SC_STEPPER_ITEM, useExisting: ScStepperItem }],
   host: {
-    'data-slot': 'stepper-item',
     '[class]': 'class()',
     '[attr.data-state]': 'state()',
   },

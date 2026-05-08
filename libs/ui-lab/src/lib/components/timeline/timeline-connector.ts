@@ -11,7 +11,6 @@ import { cn } from '@semantic-components/ui';
   selector: '[scTimelineConnector]',
   template: ``,
   host: {
-    'data-slot': 'timeline-connector',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

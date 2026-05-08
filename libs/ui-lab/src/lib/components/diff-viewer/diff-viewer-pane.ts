@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'div[scDiffViewerPane]',
   host: {
-    'data-slot': 'diff-viewer-pane',
     '[class]': 'class()',
   },
 })

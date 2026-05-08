@@ -28,7 +28,6 @@ import { ScNavbarProvider } from './navbar-provider';
     </ng-template>
   `,
   host: {
-    'data-slot': 'navbar-mobile-portal',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

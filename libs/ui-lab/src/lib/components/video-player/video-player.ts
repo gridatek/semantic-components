@@ -26,7 +26,6 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
     <ng-content />
   `,
   host: {
-    'data-slot': 'video-player',
     '[class]': 'class()',
     role: 'region',
     '[attr.aria-label]': '"Video player"',

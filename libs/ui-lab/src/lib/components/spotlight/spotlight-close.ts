@@ -5,7 +5,6 @@ import { ScSpotlightState } from './spotlight-state';
 @Directive({
   selector: 'button[scSpotlightClose]',
   host: {
-    'data-slot': 'spotlight-close',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'state.close()',

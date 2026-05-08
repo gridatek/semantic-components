@@ -5,7 +5,6 @@ import { ScNativeDialogProvider } from './native-dialog-provider';
 @Directive({
   selector: 'button[scNativeDialogClose]',
   host: {
-    'data-slot': 'native-dialog-close',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'closeDialog()',

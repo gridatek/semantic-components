@@ -13,7 +13,6 @@ import { cn } from '@semantic-components/ui';
     <ng-content />
   `,
   host: {
-    'data-slot': 'timeline-item',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

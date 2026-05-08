@@ -5,7 +5,6 @@ import { SC_TAGS_INPUT } from './tags-input';
 @Directive({
   selector: '[scTagsInputCount]',
   host: {
-    'data-slot': 'tags-input-count',
     role: 'status',
     'aria-live': 'polite',
     'aria-atomic': 'true',

@@ -5,7 +5,6 @@ import { SC_COLOR_PICKER } from './color-picker';
 @Directive({
   selector: 'button[scColorPickerSwatch]',
   host: {
-    'data-slot': 'color-picker-swatch',
     type: 'button',
     '[class]': 'class()',
     '[style.background-color]': 'color()',

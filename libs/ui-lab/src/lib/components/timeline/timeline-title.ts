@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scTimelineTitle]',
   host: {
-    'data-slot': 'timeline-title',
     '[class]': 'class()',
   },
 })

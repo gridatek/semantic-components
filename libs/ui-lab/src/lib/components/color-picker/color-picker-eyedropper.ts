@@ -5,7 +5,6 @@ import { SC_COLOR_PICKER } from './color-picker';
 @Directive({
   selector: 'button[scColorPickerEyedropper]',
   host: {
-    'data-slot': 'color-picker-eyedropper',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'colorPicker.disabled() || !isSupported',

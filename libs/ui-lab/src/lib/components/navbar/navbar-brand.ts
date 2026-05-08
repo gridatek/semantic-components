@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scNavbarBrand]',
   host: {
-    'data-slot': 'navbar-brand',
     '[class]': 'class()',
   },
 })

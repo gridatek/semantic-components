@@ -9,7 +9,6 @@ export const SC_IMAGE_COMPARE = new InjectionToken<ScImageCompare>(
   exportAs: 'scImageCompare',
   providers: [{ provide: SC_IMAGE_COMPARE, useExisting: ScImageCompare }],
   host: {
-    'data-slot': 'image-compare',
     '[attr.data-orientation]': 'orientation()',
   },
 })

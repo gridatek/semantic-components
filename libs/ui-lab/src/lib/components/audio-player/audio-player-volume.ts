@@ -63,7 +63,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     </button>
   `,
   host: {
-    'data-slot': 'audio-player-volume',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

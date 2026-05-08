@@ -18,7 +18,6 @@ import { SC_ORG_CHART } from './org-chart-types';
   providers: [{ provide: SC_ORG_CHART, useExisting: ScOrgChart }],
   host: {
     role: 'tree',
-    'data-slot': 'org-chart',
     '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
   },

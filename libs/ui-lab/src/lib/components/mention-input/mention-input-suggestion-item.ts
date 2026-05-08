@@ -34,7 +34,6 @@ import type { MentionUser } from './mention-input-types';
     </div>
   `,
   host: {
-    'data-slot': 'mention-input-suggestion-item',
     type: 'button',
     role: 'option',
     '[class]': 'class()',

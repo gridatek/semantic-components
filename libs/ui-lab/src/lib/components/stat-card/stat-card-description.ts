@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scStatCardDescription]',
   host: {
-    'data-slot': 'stat-card-description',
     '[class]': 'class()',
   },
 })

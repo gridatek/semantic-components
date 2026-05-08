@@ -28,7 +28,6 @@ import { SC_IMAGE_COMPARE } from './image-compare';
     </div>
   `,
   host: {
-    'data-slot': 'image-compare-slider',
     '[class]': 'lineClass()',
     '[style]': 'lineStyle()',
   },

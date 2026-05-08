@@ -13,7 +13,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 @Directive({
   selector: 'img[scImageCropperImage]',
   host: {
-    'data-slot': 'image-cropper-image',
     class: 'max-w-none',
     '[style.width.px]': 'scaledWidth()',
     '[style.height.px]': 'scaledHeight()',

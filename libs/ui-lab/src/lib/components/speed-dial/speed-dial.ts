@@ -22,7 +22,6 @@ import {
   exportAs: 'scSpeedDial',
   providers: [{ provide: SC_SPEED_DIAL, useExisting: ScSpeedDial }],
   host: {
-    'data-slot': 'speed-dial',
     '[class]': 'class()',
     '(document:keydown.escape)': 'onEscape()',
   },

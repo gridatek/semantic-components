@@ -3,9 +3,7 @@ import { SC_INFINITE_SCROLL } from './infinite-scroll';
 
 @Directive({
   selector: '[scInfiniteScrollLoader]',
-  host: {
-    'data-slot': 'infinite-scroll-loader',
-  },
+  host: {},
 })
 export class ScInfiniteScrollLoader {
   readonly infiniteScroll = inject(SC_INFINITE_SCROLL);

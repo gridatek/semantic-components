@@ -19,7 +19,6 @@ export const SC_TAGS_INPUT_ITEM = new InjectionToken<ScTagsInputItem>(
   exportAs: 'scTagsInputItem',
   providers: [{ provide: SC_TAGS_INPUT_ITEM, useExisting: ScTagsInputItem }],
   host: {
-    'data-slot': 'tags-input-item',
     '[class]': 'class()',
     '[tabindex]': 'tabIndex()',
     '[attr.data-focused]': 'isFocused() || null',

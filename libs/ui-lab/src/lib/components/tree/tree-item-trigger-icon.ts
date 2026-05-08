@@ -5,7 +5,6 @@ import { SC_TREE_ITEM } from './tree-item';
 @Directive({
   selector: 'svg[scTreeItemTriggerIcon]',
   host: {
-    'data-slot': 'tree-item-trigger-icon',
     '[class]': 'class()',
   },
 })

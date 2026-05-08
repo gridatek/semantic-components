@@ -16,7 +16,6 @@ import { SC_IMAGE_COMPARE } from './image-compare';
     <ng-content />
   `,
   host: {
-    'data-slot': 'image-compare-area',
     '[class]': 'class()',
     tabindex: '0',
     role: 'slider',

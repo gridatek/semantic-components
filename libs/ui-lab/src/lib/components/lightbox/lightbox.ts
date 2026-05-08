@@ -6,7 +6,6 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
   selector: '[scLightbox]',
   exportAs: 'scLightbox',
   host: {
-    'data-slot': 'lightbox',
     '[class]': 'class()',
     role: 'dialog',
     'aria-modal': 'true',

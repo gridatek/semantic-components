@@ -14,7 +14,6 @@ import { cn } from '@semantic-components/ui';
     <ng-content />
   `,
   host: {
-    'data-slot': 'native-dialog-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -15,7 +15,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     <ng-content />
   `,
   host: {
-    'data-slot': 'pdf-viewer-print',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-label]': '"Print PDF"',

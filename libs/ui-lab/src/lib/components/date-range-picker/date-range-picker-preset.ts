@@ -5,7 +5,6 @@ import { ScDateRangePicker } from './date-range-picker';
 @Directive({
   selector: 'button[scDateRangePickerPreset]',
   host: {
-    'data-slot': 'date-range-picker-preset',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'selectPreset()',

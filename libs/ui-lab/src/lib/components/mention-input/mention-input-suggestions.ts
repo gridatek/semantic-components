@@ -34,7 +34,6 @@ import { ScMentionInputState } from './mention-input-state';
     }
   `,
   host: {
-    'data-slot': 'mention-input-suggestion-list',
     class: 'contents',
   },
   encapsulation: ViewEncapsulation.None,

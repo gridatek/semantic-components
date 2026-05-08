@@ -97,7 +97,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     }
   `,
   host: {
-    'data-slot': 'pdf-viewer-alt-text-dialog',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -39,7 +39,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     </span>
   `,
   host: {
-    'data-slot': 'audio-player-progress',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

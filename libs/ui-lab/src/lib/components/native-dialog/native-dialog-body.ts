@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'div[scNativeDialogBody]',
   host: {
-    'data-slot': 'native-dialog-body',
     '[class]': 'class()',
   },
 })

@@ -5,7 +5,6 @@ import { ScSpotlightState } from './spotlight-state';
 @Directive({
   selector: 'div[scSpotlightTooltip]',
   host: {
-    'data-slot': 'spotlight-tooltip',
     '[class]': 'class()',
     '[style]': 'state.tooltipStyle()',
     '(click)': '$event.stopPropagation()',

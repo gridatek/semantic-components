@@ -6,7 +6,6 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   selector: 'div[scEmojiPickerCategoryTabs]',
   exportAs: 'scEmojiPickerCategoryTabs',
   host: {
-    'data-slot': 'emoji-picker-category-tabs',
     role: 'tablist',
     '[class]': 'class()',
   },

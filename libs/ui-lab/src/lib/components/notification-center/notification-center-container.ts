@@ -176,7 +176,6 @@ import { ScNotificationItem } from './notification-item';
     </div>
   `,
   host: {
-    'data-slot': 'notification-center-container',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

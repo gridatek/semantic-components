@@ -29,7 +29,6 @@ export interface SpotlightOptions {
   exportAs: 'scSpotlight',
   providers: [ScSpotlightState],
   host: {
-    'data-slot': 'spotlight',
     '[class]': 'class()',
     tabindex: '-1',
     role: 'dialog',

@@ -31,7 +31,6 @@ export type ScQrCodeEcc = 'L' | 'M' | 'Q' | 'H';
     }
   `,
   host: {
-    'data-slot': 'qr-code',
     '[class]': 'class()',
     role: 'img',
     xmlns: 'http://www.w3.org/2000/svg',

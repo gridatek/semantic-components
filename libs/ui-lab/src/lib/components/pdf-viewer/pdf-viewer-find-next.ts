@@ -15,7 +15,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     <ng-content />
   `,
   host: {
-    'data-slot': 'pdf-viewer-find-next',
     '[class]': 'class()',
     'aria-label': 'Find Next',
     '(click)': 'pdfViewer.findNext()',

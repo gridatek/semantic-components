@@ -4,7 +4,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 @Directive({
   selector: 'input[scImageCropperFileInput]',
   host: {
-    'data-slot': 'image-cropper-file-input',
     type: 'file',
     '(change)': 'onFileChange($event)',
   },

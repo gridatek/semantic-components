@@ -13,7 +13,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   selector: 'button[scAudioPlayerPlay]',
   template: '<ng-content />',
   host: {
-    'data-slot': 'audio-player-play',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-label]': "player.isPlaying() ? 'Pause' : 'Play'",

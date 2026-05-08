@@ -37,7 +37,6 @@ export const SC_PDF_VIEWER = new InjectionToken<ScPdfViewerRoot>(
   exportAs: 'scPdfViewer',
   providers: [{ provide: SC_PDF_VIEWER, useExisting: ScPdfViewerRoot }],
   host: {
-    'data-slot': 'pdf-viewer',
     '[class]': 'class()',
     '[attr.data-loading]': 'isLoading() || null',
     '[attr.data-error]': 'error() ? true : null',

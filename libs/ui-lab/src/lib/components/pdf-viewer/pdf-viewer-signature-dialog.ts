@@ -219,7 +219,6 @@ type SignatureTab = 'type' | 'draw' | 'image';
     }
   `,
   host: {
-    'data-slot': 'pdf-viewer-signature-dialog',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

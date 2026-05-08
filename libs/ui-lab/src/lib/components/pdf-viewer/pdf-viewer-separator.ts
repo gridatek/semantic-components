@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scPdfViewerSeparator]',
   host: {
-    'data-slot': 'pdf-viewer-separator',
     role: 'separator',
     '[attr.aria-orientation]': '"vertical"',
     '[class]': 'class()',

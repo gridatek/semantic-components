@@ -15,7 +15,6 @@ import { SC_DOCK } from './dock';
     <ng-content />
   `,
   host: {
-    'data-slot': 'dock-items',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

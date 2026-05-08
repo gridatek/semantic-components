@@ -5,7 +5,6 @@ import { SC_ORG_CHART } from './org-chart-types';
 @Directive({
   selector: 'button[scOrgChartCard]',
   host: {
-    'data-slot': 'org-chart-card',
     type: 'button',
     '[class]': 'class()',
   },

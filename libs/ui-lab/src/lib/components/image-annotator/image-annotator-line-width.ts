@@ -5,7 +5,6 @@ import { ScImageAnnotatorState } from './image-annotator-state';
 @Directive({
   selector: 'input[type="range"][scImageAnnotatorLineWidth]',
   host: {
-    'data-slot': 'image-annotator-line-width',
     '[class]': 'class()',
     '[value]': 'state.lineWidth()',
     '(input)': 'onInput($event)',

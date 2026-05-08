@@ -5,7 +5,6 @@ import { SC_STEPPER } from './stepper-types';
 @Directive({
   selector: 'button[scStepperNext]',
   host: {
-    'data-slot': 'stepper-next',
     '[class]': 'class()',
     '(click)': 'stepper.nextStep()',
   },

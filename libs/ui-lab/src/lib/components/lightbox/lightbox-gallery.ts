@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scLightboxGallery]',
   host: {
-    'data-slot': 'lightbox-gallery',
     '[class]': 'class()',
   },
 })

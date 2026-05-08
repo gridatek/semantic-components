@@ -4,7 +4,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 @Directive({
   selector: 'button[scImageCropperRotateLeft]',
   host: {
-    'data-slot': 'image-cropper-rotate-left',
     '(click)': 'cropper.rotateLeft()',
   },
 })

@@ -4,7 +4,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 @Directive({
   selector: 'button[scImageCropperFlipV]',
   host: {
-    'data-slot': 'image-cropper-flip-v',
     '(click)': 'cropper.toggleFlipV()',
     '[attr.data-active]': 'cropper.flipV() || null',
   },

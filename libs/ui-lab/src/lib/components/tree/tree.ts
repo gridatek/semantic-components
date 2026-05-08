@@ -7,7 +7,6 @@ import { cn } from '@semantic-components/ui';
   hostDirectives: [Tree],
   exportAs: 'scTree',
   host: {
-    'data-slot': 'tree',
     '[class]': 'class()',
   },
 })

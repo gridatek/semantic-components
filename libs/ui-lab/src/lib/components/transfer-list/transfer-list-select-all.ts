@@ -25,7 +25,6 @@ import { SC_TRANSFER_LIST_PANEL } from './transfer-list-panel-ref';
     <ng-content />
   `,
   host: {
-    'data-slot': 'transfer-list-select-all',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

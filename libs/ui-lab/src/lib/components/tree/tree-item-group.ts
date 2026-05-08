@@ -19,7 +19,6 @@ import { SC_TREE_ITEM } from './tree-item';
     </ng-template>
   `,
   host: {
-    'data-slot': 'tree-item-group',
     role: 'group',
     '[class]': 'class()',
   },

@@ -13,7 +13,6 @@ import { SC_IMAGE_COMPARE } from './image-compare';
   selector: 'img[scImageCompareAfter]',
   template: '',
   host: {
-    'data-slot': 'image-compare-after',
     '[class]': 'class()',
     '[style.clip-path]': 'clipPath()',
     draggable: 'false',

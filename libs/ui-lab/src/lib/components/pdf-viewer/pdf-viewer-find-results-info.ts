@@ -15,7 +15,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     {{ pdfViewer.findResultsMessage() }}
   `,
   host: {
-    'data-slot': 'pdf-viewer-find-results-info',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

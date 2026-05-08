@@ -5,7 +5,6 @@ import { SC_SPEED_DIAL } from './speed-dial-types';
 @Directive({
   selector: 'button[scSpeedDialActionButton]',
   host: {
-    'data-slot': 'speed-dial-action-button',
     type: 'button',
     '[class]': 'class()',
   },

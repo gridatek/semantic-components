@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'div[scColorPickerAreaBrightness]',
   host: {
-    'data-slot': 'color-picker-area-brightness',
     '[class]': 'class()',
   },
 })

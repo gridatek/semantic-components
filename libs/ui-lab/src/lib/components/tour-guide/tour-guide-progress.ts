@@ -20,7 +20,6 @@ import { ScTourGuideState } from './tour-guide-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'data-slot': 'tour-guide-progress',
     '[class]': 'class()',
   },
 })

@@ -41,7 +41,6 @@ import { SC_DATA_TABLE, SortDirection } from './data-table';
     }
   `,
   host: {
-    'data-slot': 'data-table-head',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

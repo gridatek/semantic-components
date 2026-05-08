@@ -11,7 +11,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   selector: 'audio[scAudioPlayerAudio]',
   template: ``,
   host: {
-    'data-slot': 'audio-player-audio',
     '[src]': 'player.currentTrack()?.src',
     '(timeupdate)': 'player.onTimeUpdate()',
     '(loadedmetadata)': 'player.onLoadedMetadata()',

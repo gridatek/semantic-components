@@ -94,7 +94,6 @@ import { SC_DATA_TABLE } from './data-table';
     </div>
   `,
   host: {
-    'data-slot': 'data-table-pagination',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

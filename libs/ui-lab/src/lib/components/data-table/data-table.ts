@@ -40,7 +40,6 @@ export const SC_DATA_TABLE = new InjectionToken<ScDataTable<unknown>>(
   exportAs: 'scDataTable',
   providers: [{ provide: SC_DATA_TABLE, useExisting: ScDataTable }],
   host: {
-    'data-slot': 'data-table',
     '[class]': 'class()',
   },
 })

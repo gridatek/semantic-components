@@ -31,7 +31,6 @@ export const SC_IMAGE_CROPPER = new InjectionToken<ScImageCropper>(
   exportAs: 'scImageCropper',
   providers: [{ provide: SC_IMAGE_CROPPER, useExisting: ScImageCropper }],
   host: {
-    'data-slot': 'image-cropper',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-crop-shape]': 'cropShape()',
     '(document:mousemove)': 'onMouseMove($event)',

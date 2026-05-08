@@ -49,7 +49,6 @@ export const SC_LIGHTBOX_PROVIDER = new InjectionToken<ScLightboxProvider>(
     </ng-template>
   `,
   host: {
-    'data-slot': 'lightbox-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

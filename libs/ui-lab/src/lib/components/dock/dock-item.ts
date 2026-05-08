@@ -6,7 +6,6 @@ import type { DockItem } from './dock-types';
 @Directive({
   selector: 'button[scDockItem]',
   host: {
-    'data-slot': 'dock-item',
     type: 'button',
     '[class]': 'class()',
     '[style.transform]': 'transform()',

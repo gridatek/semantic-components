@@ -24,7 +24,6 @@ import { ScNativeDialogProvider } from './native-dialog-provider';
     }
   `,
   host: {
-    'data-slot': 'native-dialog',
     '[class]': 'class()',
     '[attr.aria-labelledby]': 'titleId',
     '[attr.aria-describedby]': 'descriptionId',

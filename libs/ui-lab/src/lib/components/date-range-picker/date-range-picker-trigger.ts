@@ -7,7 +7,6 @@ import { ScPopoverProvider, cn } from '@semantic-components/ui';
   exportAs: 'scDateRangePickerTrigger',
   hostDirectives: [CdkOverlayOrigin],
   host: {
-    'data-slot': 'date-range-picker-trigger',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-haspopup]': '"dialog"',

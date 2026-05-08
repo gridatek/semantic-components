@@ -17,7 +17,6 @@ export const SC_DOCK = new InjectionToken<ScDock>('SC_DOCK');
   exportAs: 'scDock',
   providers: [{ provide: SC_DOCK, useExisting: ScDock }],
   host: {
-    'data-slot': 'dock',
     role: 'navigation',
     '[attr.aria-label]': 'ariaLabel()',
     '(mouseleave)': 'onMouseLeave()',

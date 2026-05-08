@@ -19,7 +19,6 @@ import {
   selector: 'div[scEmojiPicker]',
   exportAs: 'scEmojiPicker',
   host: {
-    'data-slot': 'emoji-picker',
     '[class]': 'class()',
   },
   providers: [ScEmojiPickerState],

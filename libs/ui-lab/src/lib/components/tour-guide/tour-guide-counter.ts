@@ -5,7 +5,6 @@ import { ScTourGuideState } from './tour-guide-state';
 @Directive({
   selector: '[scTourGuideCounter]',
   host: {
-    'data-slot': 'tour-guide-counter',
     '[class]': 'class()',
     '[textContent]': 'counterText()',
   },

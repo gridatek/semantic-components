@@ -13,7 +13,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   selector: 'button[scAudioPlayerNext]',
   template: '<ng-content />',
   host: {
-    'data-slot': 'audio-player-next',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': '!player.canGoNext()',

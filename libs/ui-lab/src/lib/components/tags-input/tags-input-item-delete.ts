@@ -6,7 +6,6 @@ import { SC_TAGS_INPUT_ITEM } from './tags-input-item';
 @Directive({
   selector: 'button[scTagsInputItemDelete]',
   host: {
-    'data-slot': 'tags-input-item-delete',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel()',

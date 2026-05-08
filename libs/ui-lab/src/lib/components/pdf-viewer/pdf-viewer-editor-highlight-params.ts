@@ -193,7 +193,6 @@ const HIGHLIGHT_COLORS = [
     }
   `,
   host: {
-    'data-slot': 'pdf-viewer-editor-highlight-params',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -5,7 +5,6 @@ import { ScQrCode } from './qr-code';
 @Directive({
   selector: 'button[scQrCodeDownload]',
   host: {
-    'data-slot': 'qr-code-download',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'download()',

@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scSpeedDialActionLabel]',
   host: {
-    'data-slot': 'speed-dial-action-label',
     '[class]': 'class()',
   },
 })

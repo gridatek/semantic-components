@@ -27,7 +27,6 @@ export const SC_SIGNATURE_PAD = new InjectionToken<ScSignaturePad>(
   exportAs: 'scSignaturePad',
   providers: [{ provide: SC_SIGNATURE_PAD, useExisting: ScSignaturePad }],
   host: {
-    'data-slot': 'signature-pad',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })

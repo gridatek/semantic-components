@@ -5,7 +5,6 @@ import { ScEmojiPickerState } from './emoji-picker-state';
 @Directive({
   selector: 'input[scEmojiPickerSearch]',
   host: {
-    'data-slot': 'emoji-picker-search',
     type: 'text',
     placeholder: 'Search emoji...',
     '[class]': 'class()',

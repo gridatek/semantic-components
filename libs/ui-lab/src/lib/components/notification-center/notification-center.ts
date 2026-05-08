@@ -53,7 +53,6 @@ export const SC_NOTIFICATION_CENTER =
     },
   ],
   host: {
-    'data-slot': 'notification-center',
     role: 'region',
     'aria-live': 'polite',
     '[class]': 'class()',

@@ -5,7 +5,6 @@ import { ScTourGuideState } from './tour-guide-state';
 @Directive({
   selector: 'button[scTourGuideAction]',
   host: {
-    'data-slot': 'tour-guide-action',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'onClick()',

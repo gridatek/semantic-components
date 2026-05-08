@@ -47,7 +47,6 @@ import { SC_DATA_TABLE } from './data-table';
     }
   `,
   host: {
-    'data-slot': 'data-table-column-toggle',
     '[class]': 'class()',
     '(document:click)': 'onDocumentClick($event)',
   },

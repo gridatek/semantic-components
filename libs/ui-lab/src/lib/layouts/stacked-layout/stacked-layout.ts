@@ -12,18 +12,17 @@ import { cn } from '@semantic-components/ui';
   selector: 'sc-stacked-layout',
   imports: [RouterOutlet],
   template: `
-    <header data-slot="stacked-layout-header" class="sticky top-0 z-50">
+    <header class="sticky top-0 z-50">
       <ng-content select="[scNavbar]" />
     </header>
 
-    <main data-slot="stacked-layout-content" class="flex-1">
+    <main class="flex-1">
       <router-outlet />
     </main>
 
     <ng-content select="[scFooter]" />
   `,
   host: {
-    'data-slot': 'stacked-layout',
     '[class]': 'class()',
   },
   styles: ``,

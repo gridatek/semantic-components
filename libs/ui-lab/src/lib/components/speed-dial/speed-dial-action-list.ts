@@ -5,7 +5,6 @@ import { SC_SPEED_DIAL } from './speed-dial-types';
 @Directive({
   selector: '[scSpeedDialActionList]',
   host: {
-    'data-slot': 'speed-dial-action-list',
     role: 'menu',
     '[attr.aria-hidden]': '!speedDial.open()',
     '[class]': 'class()',

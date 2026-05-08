@@ -6,7 +6,6 @@ import { ScImageAnnotatorState } from './image-annotator-state';
   selector: 'div[scImageAnnotatorToolbar]',
   exportAs: 'scImageAnnotatorToolbar',
   host: {
-    'data-slot': 'image-annotator-toolbar',
     '[class]': 'class()',
   },
 })

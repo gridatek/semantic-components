@@ -5,7 +5,6 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 @Directive({
   selector: '[scLightboxTrigger]',
   host: {
-    'data-slot': 'lightbox-trigger',
     '[class]': 'class()',
     '(click)': 'onClick()',
   },

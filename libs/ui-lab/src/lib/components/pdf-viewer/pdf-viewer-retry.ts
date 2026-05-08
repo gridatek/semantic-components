@@ -15,7 +15,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     <ng-content>Retry</ng-content>
   `,
   host: {
-    'data-slot': 'pdf-viewer-retry',
     type: 'button',
     '[class]': 'class()',
     '(click)': 'pdfViewer.retry()',

@@ -25,7 +25,6 @@ import { ScSpotlightState } from './spotlight-state';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    'data-slot': 'spotlight-highlight',
     '[class]': 'class()',
     '[style.top.px]': 'top()',
     '[style.left.px]': 'left()',

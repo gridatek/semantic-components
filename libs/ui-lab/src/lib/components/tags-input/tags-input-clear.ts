@@ -5,7 +5,6 @@ import { SC_TAGS_INPUT } from './tags-input';
 @Directive({
   selector: 'button[scTagsInputClear]',
   host: {
-    'data-slot': 'tags-input-clear',
     type: 'button',
     '[class]': 'class()',
     '[disabled]': 'tagsInput.disabled() || tagsInput.tags().length === 0',

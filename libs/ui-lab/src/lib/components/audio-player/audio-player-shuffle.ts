@@ -13,7 +13,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   selector: 'button[scAudioPlayerShuffle]',
   template: '<ng-content />',
   host: {
-    'data-slot': 'audio-player-shuffle',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-pressed]': 'player.shuffle()',

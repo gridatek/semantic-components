@@ -17,7 +17,6 @@ export const SC_TAGS_INPUT = new InjectionToken<ScTagsInput>('ScTagsInput');
   exportAs: 'scTagsInput',
   providers: [{ provide: SC_TAGS_INPUT, useExisting: ScTagsInput }],
   host: {
-    'data-slot': 'tags-input',
     '[class]': 'class()',
     '[attr.data-disabled]': 'disabled() || null',
     '[attr.data-focused]': 'isFocused() || null',

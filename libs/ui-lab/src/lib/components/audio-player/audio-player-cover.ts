@@ -23,7 +23,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     }
   `,
   host: {
-    'data-slot': 'audio-player-cover',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

@@ -103,7 +103,6 @@ import { SC_TIME_PICKER } from '@semantic-components/ui';
     </div>
   `,
   host: {
-    'data-slot': 'time-picker-clock',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

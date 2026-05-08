@@ -116,7 +116,6 @@ import type { Notification, NotificationAction } from './notification-types';
     }
   `,
   host: {
-    'data-slot': 'notification-item',
     '[class]': 'class()',
     role: 'article',
     '[attr.aria-label]': 'notification().title',

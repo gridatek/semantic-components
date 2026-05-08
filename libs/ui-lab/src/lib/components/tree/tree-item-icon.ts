@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scTreeItemIcon]',
   host: {
-    'data-slot': 'tree-item-icon',
     '[class]': 'class()',
   },
 })

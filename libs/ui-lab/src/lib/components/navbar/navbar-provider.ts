@@ -22,7 +22,6 @@ import { ScNavbar } from './navbar';
     <ng-content />
   `,
   host: {
-    'data-slot': 'navbar-provider',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

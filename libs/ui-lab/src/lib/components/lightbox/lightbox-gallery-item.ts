@@ -5,7 +5,6 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 @Directive({
   selector: '[scLightboxGalleryItem]',
   host: {
-    'data-slot': 'lightbox-gallery-item',
     '[class]': 'class()',
     '(click)': 'onClick()',
   },

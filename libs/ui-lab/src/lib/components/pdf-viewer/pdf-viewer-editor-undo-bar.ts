@@ -40,7 +40,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     }
   `,
   host: {
-    'data-slot': 'pdf-viewer-editor-undo-bar',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

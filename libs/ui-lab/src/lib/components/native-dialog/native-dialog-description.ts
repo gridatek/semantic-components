@@ -5,7 +5,6 @@ import { ScNativeDialog } from './native-dialog';
 @Directive({
   selector: 'p[scNativeDialogDescription]',
   host: {
-    'data-slot': 'native-dialog-description',
     '[id]': 'dialog.descriptionId',
     '[class]': 'class()',
   },

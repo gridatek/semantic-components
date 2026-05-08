@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scMarqueeItem]',
   host: {
-    'data-slot': 'marquee-item',
     '[class]': 'class()',
   },
 })

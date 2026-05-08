@@ -29,7 +29,6 @@ import {
 @Component({
   selector: 'button[scLanguageButton], a[scLanguageButton]',
   host: {
-    'data-slot': 'language-button',
     '[class]': 'class()',
     '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'onClick($event)',

@@ -4,7 +4,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
 @Directive({
   selector: 'button[scImageCropperReset]',
   host: {
-    'data-slot': 'image-cropper-reset',
     '(click)': 'cropper.reset()',
   },
 })

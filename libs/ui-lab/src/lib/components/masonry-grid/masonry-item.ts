@@ -15,7 +15,6 @@ import { SC_MASONRY_GRID, SC_MASONRY_ITEM } from './masonry-types';
   selector: '[scMasonryItem]',
   providers: [{ provide: SC_MASONRY_ITEM, useExisting: ScMasonryItem }],
   host: {
-    'data-slot': 'masonry-item',
     '[class]': 'class()',
     '[style.margin-bottom.px]': 'masonryGrid.gap()',
   },

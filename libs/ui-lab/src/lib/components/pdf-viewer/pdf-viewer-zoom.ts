@@ -13,7 +13,6 @@ import { cn } from '@semantic-components/ui';
     <ng-content />
   `,
   host: {
-    'data-slot': 'pdf-viewer-zoom',
     role: 'group',
     '[attr.aria-label]': '"Zoom controls"',
     '[class]': 'class()',

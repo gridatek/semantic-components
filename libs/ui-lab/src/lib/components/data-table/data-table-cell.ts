@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scDataTableCell]',
   host: {
-    'data-slot': 'data-table-cell',
     '[class]': 'class()',
   },
 })

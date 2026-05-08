@@ -6,7 +6,6 @@ import type { Emoji } from './emoji-picker-state';
 @Directive({
   selector: 'button[scEmojiPickerItem]',
   host: {
-    'data-slot': 'emoji-picker-item',
     type: 'button',
     '[class]': 'class()',
     '[attr.aria-label]': 'emoji().name',

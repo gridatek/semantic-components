@@ -5,7 +5,6 @@ import { ScTourGuideState } from './tour-guide-state';
 @Directive({
   selector: 'div[scTourGuideTooltip]',
   host: {
-    'data-slot': 'tour-guide-tooltip',
     '[class]': 'class()',
     '[style]': 'state.tooltipStyle()',
     role: 'dialog',

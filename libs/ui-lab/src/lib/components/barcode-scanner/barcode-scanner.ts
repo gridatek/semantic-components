@@ -55,7 +55,6 @@ export const SC_BARCODE_SCANNER = new InjectionToken<ScBarcodeScanner>(
   exportAs: 'scBarcodeScanner',
   providers: [{ provide: SC_BARCODE_SCANNER, useExisting: ScBarcodeScanner }],
   host: {
-    'data-slot': 'barcode-scanner',
     '[class]': 'class()',
   },
 })

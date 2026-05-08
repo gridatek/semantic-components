@@ -30,7 +30,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     }
   `,
   host: {
-    'data-slot': 'pdf-viewer-empty',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,

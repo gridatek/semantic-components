@@ -5,7 +5,6 @@ import { SC_STEPPER } from './stepper-types';
 @Directive({
   selector: '[scStepperList]',
   host: {
-    'data-slot': 'stepper-list',
     role: 'tablist',
     '[class]': 'class()',
   },

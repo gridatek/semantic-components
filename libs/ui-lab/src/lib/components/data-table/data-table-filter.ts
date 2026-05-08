@@ -13,7 +13,6 @@ import { SC_DATA_TABLE } from './data-table';
   selector: 'input[scDataTableFilter]',
   template: ``,
   host: {
-    'data-slot': 'data-table-filter',
     type: 'text',
     '[class]': 'class()',
     '[value]': 'table.globalFilter()',

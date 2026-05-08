@@ -12,7 +12,6 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
     },
   ],
   host: {
-    'data-slot': 'lightbox-thumbnail',
     '[class]': 'class()',
     '[attr.aria-label]': "'Go to image ' + (index() + 1)",
   },

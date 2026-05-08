@@ -5,7 +5,6 @@ import { SC_COLOR_PICKER } from './color-picker';
 @Directive({
   selector: 'div[scColorPickerAreaCursor]',
   host: {
-    'data-slot': 'color-picker-area-cursor',
     'aria-hidden': 'true',
     '[class]': 'class()',
     '[style.left.%]': 'colorPicker.hsv().s',

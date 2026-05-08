@@ -4,7 +4,6 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: 'span[scDockBadge]',
   host: {
-    'data-slot': 'dock-badge',
     '[class]': 'class()',
   },
 })
