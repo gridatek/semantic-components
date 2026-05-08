@@ -12,15 +12,25 @@ import { ScLink, cn } from '@semantic-components/ui';
   selector: 'app-cta-section',
   imports: [RouterLink, ScLink],
   template: `
-    <section class="bg-muted/30 px-4 py-16 md:px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl space-y-6 text-center">
-        <h2 class="text-2xl font-bold md:text-3xl">Ready to get started?</h2>
-        <p class="text-muted-foreground">
+    <section
+      class="bg-muted/30 border-border/60 border-t px-4 py-24 md:px-6 md:py-32 lg:px-8"
+    >
+      <div class="mx-auto max-w-3xl space-y-8 text-center">
+        <h2
+          class="text-3xl leading-tight font-bold tracking-tight text-balance md:text-4xl"
+        >
+          Ready to get started?
+        </h2>
+        <p
+          class="text-muted-foreground mx-auto max-w-xl text-lg leading-relaxed text-pretty"
+        >
           Explore the docs, browse components, and start building.
         </p>
-        <a scLink size="lg" routerLink="/docs/getting-started">
-          Start Building Today
-        </a>
+        <div class="pt-2">
+          <a scLink size="lg" routerLink="/docs/getting-started">
+            Start Building Today
+          </a>
+        </div>
       </div>
     </section>
   `,

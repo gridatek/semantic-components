@@ -14,17 +14,28 @@ import { SiGithubIcon, SiStarIcon } from '@semantic-icons/lucide-icons';
   imports: [RouterLink, ScLink, SiGithubIcon, SiStarIcon],
   template: `
     <section
-      class="from-background to-muted/30 bg-linear-to-b px-4 py-20 md:px-6 lg:px-8"
+      class="from-background to-muted/30 bg-linear-to-b px-4 py-24 md:px-6 md:py-32 lg:px-8 lg:py-40"
     >
-      <div class="mx-auto max-w-4xl space-y-6 text-center">
-        <h1 class="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+      <div class="mx-auto max-w-4xl space-y-10 text-center">
+        <span
+          class="border-border/60 bg-background/60 text-muted-foreground inline-flex items-center rounded-full border px-4 py-1.5 text-xs font-medium tracking-wide uppercase backdrop-blur"
+        >
+          Built for modern Angular
+        </span>
+        <h1
+          class="text-4xl leading-[1.1] font-bold tracking-tight text-balance md:text-5xl lg:text-6xl"
+        >
           The Missing Piece in the Angular World
         </h1>
-        <p class="text-muted-foreground mx-auto max-w-2xl text-lg md:text-xl">
+        <p
+          class="text-muted-foreground mx-auto max-w-2xl text-lg leading-relaxed text-pretty md:text-xl"
+        >
           Beautifully crafted UI components for modern Angular, built with
           Tailwind CSS on top of Angular Aria and Angular CDK.
         </p>
-        <div class="flex flex-col justify-center gap-4 sm:flex-row">
+        <div
+          class="flex flex-col justify-center gap-3 pt-2 sm:flex-row sm:gap-4"
+        >
           <a scLink size="lg" routerLink="/docs/getting-started">Get Started</a>
           <a scLink variant="outline" size="lg" routerLink="/docs/components">
             View Components
