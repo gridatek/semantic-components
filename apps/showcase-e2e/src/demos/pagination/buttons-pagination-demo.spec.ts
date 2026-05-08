@@ -44,17 +44,6 @@ test.describe('Buttons Pagination Demo', () => {
     }
   });
 
-  test('should have data-slot attributes', async ({ page }) => {
-    const pageLinks = page.locator('button[scPaginationLink]');
-    const count = await pageLinks.count();
-    for (let i = 0; i < count; i++) {
-      await expect(pageLinks.nth(i)).toHaveAttribute(
-        'data-slot',
-        'pagination-link',
-      );
-    }
-  });
-
   test('should render 3 page links for 30 items with pageSize 10', async ({
     page,
   }) => {

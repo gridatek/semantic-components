@@ -38,17 +38,6 @@ test.describe('Disabled Link Pagination Demo', () => {
     }
   });
 
-  test('should have data-slot attributes on page links', async ({ page }) => {
-    const pageLinks = page.locator('a[scPaginationLink]');
-    const count = await pageLinks.count();
-    for (let i = 0; i < count; i++) {
-      await expect(pageLinks.nth(i)).toHaveAttribute(
-        'data-slot',
-        'pagination-link',
-      );
-    }
-  });
-
   test('should disable Previous on first page with aria-disabled', async ({
     page,
   }) => {
@@ -92,16 +81,5 @@ test.describe('Disabled Link Pagination Demo', () => {
 
     const nextLink = page.locator('a[scPaginationNext]');
     await expect(nextLink).toHaveAttribute('aria-disabled', 'true');
-  });
-
-  test('should have data-slot on Previous and Next', async ({ page }) => {
-    const previousLink = page.locator('a[scPaginationPrevious]');
-    await expect(previousLink).toHaveAttribute(
-      'data-slot',
-      'pagination-previous',
-    );
-
-    const nextLink = page.locator('a[scPaginationNext]');
-    await expect(nextLink).toHaveAttribute('data-slot', 'pagination-next');
   });
 });

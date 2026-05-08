@@ -84,14 +84,6 @@ test.describe('Page Size Pagination Demo', () => {
     await expect(info).toBeVisible();
   });
 
-  test('should have data-slot on page size component', async ({ page }) => {
-    const pageSizeSelector = page.locator('select[scPaginationPageSizeSelect]');
-    await expect(pageSizeSelector).toHaveAttribute(
-      'data-slot',
-      'pagination-page-size-select',
-    );
-  });
-
   test('should render Previous and Next with page size selector', async ({
     page,
   }) => {

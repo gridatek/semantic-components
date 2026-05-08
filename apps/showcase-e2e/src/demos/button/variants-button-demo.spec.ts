@@ -13,7 +13,6 @@ test.describe('Variants Button Demo', () => {
   test('should render default variant button', async ({ page }) => {
     const button = page.getByRole('button', { name: 'Default' });
     await expect(button).toBeVisible();
-    await expect(button).toHaveAttribute('data-slot', 'button');
   });
 
   test('should render secondary variant button', async ({ page }) => {

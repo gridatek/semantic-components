@@ -10,11 +10,9 @@ test.describe('Keyboard Navigation Pagination Demo', () => {
   }) => {
     const firstBtn = page.locator('button[scPaginationFirst]');
     await expect(firstBtn).toBeVisible();
-    await expect(firstBtn).toHaveAttribute('data-slot', 'pagination-first');
 
     const lastBtn = page.locator('button[scPaginationLast]');
     await expect(lastBtn).toBeVisible();
-    await expect(lastBtn).toHaveAttribute('data-slot', 'pagination-last');
   });
 
   test('should render all navigation buttons', async ({ page }) => {

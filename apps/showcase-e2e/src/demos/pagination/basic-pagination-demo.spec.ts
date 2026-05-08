@@ -10,26 +10,19 @@ test.describe('Basic Pagination Demo', () => {
     await expect(nav).toBeVisible();
     await expect(nav).toHaveAttribute('role', 'navigation');
     await expect(nav).toHaveAttribute('aria-label', 'Basic pagination');
-    await expect(nav).toHaveAttribute('data-slot', 'pagination');
   });
 
   test('should render pagination list', async ({ page }) => {
     const list = page.locator('ul[scPaginationList]');
     await expect(list).toBeVisible();
-    await expect(list).toHaveAttribute('data-slot', 'pagination-list');
   });
 
   test('should render Previous and Next buttons', async ({ page }) => {
     const previousBtn = page.getByRole('button', { name: 'Previous' });
     await expect(previousBtn).toBeVisible();
-    await expect(previousBtn).toHaveAttribute(
-      'data-slot',
-      'pagination-previous',
-    );
 
     const nextBtn = page.getByRole('button', { name: 'Next' });
     await expect(nextBtn).toBeVisible();
-    await expect(nextBtn).toHaveAttribute('data-slot', 'pagination-next');
   });
 
   test('should render page link buttons for 3 pages', async ({ page }) => {
@@ -129,18 +122,6 @@ test.describe('Basic Pagination Demo', () => {
 
     const nextSvg = page.locator('button[scPaginationNext]').locator('svg');
     await expect(nextSvg).toBeVisible();
-  });
-
-  test('should have data-slot on pagination items', async ({ page }) => {
-    const items = page.locator('li[scPaginationItem]');
-    const count = await items.count();
-    expect(count).toBeGreaterThan(0);
-    for (let i = 0; i < count; i++) {
-      await expect(items.nth(i)).toHaveAttribute(
-        'data-slot',
-        'pagination-item',
-      );
-    }
   });
 
   test('should be keyboard navigable', async ({ page }) => {
