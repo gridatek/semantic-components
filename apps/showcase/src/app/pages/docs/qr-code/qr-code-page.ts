@@ -35,7 +35,17 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
       <div class="space-y-2">
         <h1 scHeading>QR Code</h1>
         <p class="text-muted-foreground">
-          Generate QR codes from text or URLs with customizable styles.
+          Generate QR codes from text or URLs with customizable styles. Powered
+          by
+          <a
+            href="https://github.com/unjs/uqr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium underline underline-offset-4"
+          >
+            uqr
+          </a>
+          under the hood.
         </p>
         <app-component-badges path="qr-code" />
       </div>
