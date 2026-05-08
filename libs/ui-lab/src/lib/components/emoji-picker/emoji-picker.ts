@@ -6,9 +6,10 @@ import {
   input,
   model,
   output,
+  signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { DEFAULT_CATEGORIES } from './emoji-picker-data';
+import { loadDefaultCategories } from './emoji-picker-data';
 import {
   type Emoji,
   type EmojiCategory,
@@ -27,12 +28,14 @@ export class ScEmojiPicker {
   private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly categories = input<EmojiCategory[]>(DEFAULT_CATEGORIES);
+  readonly categories = input<EmojiCategory[]>([]);
   readonly maxRecent = input<number>(8);
   readonly columns = input<number>(8);
 
   readonly value = model<string>('');
   readonly emojiSelect = output<Emoji>();
+
+  private readonly defaultCategories = signal<EmojiCategory[]>([]);
 
   protected readonly class = computed(() =>
     cn(
@@ -43,12 +46,15 @@ export class ScEmojiPicker {
 
   constructor() {
     effect(() => {
-      this.state.categories.set(this.categories());
-      const cats = this.categories();
+      const provided = this.categories();
+      const cats = provided.length > 0 ? provided : this.defaultCategories();
+      this.state.categories.set(cats);
       if (cats.length > 0 && !this.state.activeCategory()) {
         this.state.activeCategory.set(cats[0].id);
       }
     });
+
+    loadDefaultCategories().then((cats) => this.defaultCategories.set(cats));
 
     effect(() => {
       this.state.maxRecent.set(this.maxRecent());

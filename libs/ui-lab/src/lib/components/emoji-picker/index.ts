@@ -1,7 +1,7 @@
 export { ScEmojiPicker } from './emoji-picker';
 export { ScEmojiPickerCategoryTab } from './emoji-picker-category-tab';
 export { ScEmojiPickerCategoryTabs } from './emoji-picker-category-tabs';
-export { DEFAULT_CATEGORIES } from './emoji-picker-data';
+export { loadDefaultCategories } from './emoji-picker-data';
 export { ScEmojiPickerGrid } from './emoji-picker-grid';
 export { ScEmojiPickerItem } from './emoji-picker-item';
 export { ScEmojiPickerRecent } from './emoji-picker-recent';

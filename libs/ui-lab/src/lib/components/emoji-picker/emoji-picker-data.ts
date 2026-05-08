@@ -1,5 +1,3 @@
-import data from 'emojibase-data/en/compact.json';
-import messages from 'emojibase-data/en/messages.json';
 import type { EmojiCategory } from './emoji-picker-state';
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -14,11 +12,37 @@ const CATEGORY_ICONS: Record<string, string> = {
   flags: '🏁',
 };
 
-function buildCategories(): EmojiCategory[] {
-  const grouped = new Map<
-    number,
-    { unicode: string; label: string; tags?: string[]; order?: number }[]
-  >();
+let cached: Promise<EmojiCategory[]> | null = null;
+
+export function loadDefaultCategories(): Promise<EmojiCategory[]> {
+  if (!cached) {
+    cached = Promise.all([
+      import('emojibase-data/en/compact.json'),
+      import('emojibase-data/en/messages.json'),
+    ]).then(([dataMod, messagesMod]) =>
+      buildCategories(dataMod.default, messagesMod.default),
+    );
+  }
+  return cached;
+}
+
+type CompactEmoji = {
+  unicode: string;
+  label: string;
+  tags?: string[];
+  order?: number;
+  group?: number;
+};
+
+type Messages = {
+  groups: { key: string; message: string; order: number }[];
+};
+
+function buildCategories(
+  data: CompactEmoji[],
+  messages: Messages,
+): EmojiCategory[] {
+  const grouped = new Map<number, CompactEmoji[]>();
 
   for (const emoji of data) {
     if (emoji.group === undefined || emoji.group === 2) continue;
@@ -50,5 +74,3 @@ function buildCategories(): EmojiCategory[] {
     })
     .filter((c) => c.emojis.length > 0);
 }
-
-export const DEFAULT_CATEGORIES: EmojiCategory[] = buildCategories();
