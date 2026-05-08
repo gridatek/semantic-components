@@ -273,7 +273,7 @@ export class ScCalendarDayView {
         !isRangeMiddleDay &&
         'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground',
       isRangeMiddleDay && 'bg-accent text-accent-foreground rounded-none',
-      day.isOutsideMonth && 'text-muted-foreground opacity-50',
+      day.isOutsideMonth && 'text-muted-foreground',
       day.disabled && 'text-muted-foreground opacity-50',
     );
   }
