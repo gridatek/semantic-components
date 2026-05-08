@@ -45,3 +45,7 @@ Thumbs.db
 
 __screenshots__/
 
+
+.claude/worktrees
+.nx/polygraph
+.nx/self-healing
