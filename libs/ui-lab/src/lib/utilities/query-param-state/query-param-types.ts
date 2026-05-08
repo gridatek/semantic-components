@@ -8,6 +8,13 @@ export interface Parser<T> {
 export interface QueryParamOptions {
   /** 'replace' (default) or 'push' — controls browser history behaviour */
   history?: 'replace' | 'push';
+  /**
+   * Debounce URL writes by this many milliseconds. The signal is still
+   * updated synchronously — only the navigation is delayed. Defaults to 0
+   * (writes flushed on the next microtask). Useful for inputs where the
+   * user types rapidly and you don't want a history entry per keystroke.
+   */
+  debounceMs?: number;
 }
 
 export interface ParserBuilder<T> extends Parser<T> {

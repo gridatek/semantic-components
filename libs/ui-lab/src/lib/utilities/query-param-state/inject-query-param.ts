@@ -1,4 +1,11 @@
-import { DestroyRef, WritableSignal, inject, signal } from '@angular/core';
+import {
+  DestroyRef,
+  WritableSignal,
+  debounced,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { QueryParamSyncService } from './query-param-sync';
@@ -68,7 +75,7 @@ export function injectQueryParam<T>(
     sync.write(key, null, parser._options);
   }
 
-  // Subscribe to route changes and keep signal in sync
+  // External URL changes (back/forward, manual edits) flow into the signal.
   route.queryParamMap
     .pipe(takeUntilDestroyed(destroyRef))
     .subscribe((params) => {
@@ -81,19 +88,32 @@ export function injectQueryParam<T>(
       }
     });
 
+  // Signal is the source of truth; URL is a derived view of it.
+  const debounceMs = parser._options?.debounceMs ?? 0;
+  const debouncedView = debounceMs > 0 ? debounced(sig, debounceMs) : null;
+  const read = debouncedView ? () => debouncedView.value() : () => sig();
+
+  let firstRun = true;
+  effect(() => {
+    const value = read();
+    if (firstRun) {
+      firstRun = false;
+      return;
+    }
+    const raw =
+      value === null || isDefault(value) ? null : parser.serialize(value);
+    if (raw === sync.getRaw(key)) return;
+    sync.write(key, raw, parser._options);
+  });
+
   return {
     value: sig as WritableSignal<T>,
 
     set(value: T | null): void {
-      const raw =
-        value === null || isDefault(value) ? null : parser.serialize(value);
-      sync.write(key, raw, parser._options);
-      // Optimistic local update for instant UI response
       sig.set(value ?? defaultValue);
     },
 
     clear(): void {
-      sync.write(key, null, parser._options);
       sig.set(defaultValue);
     },
   };
