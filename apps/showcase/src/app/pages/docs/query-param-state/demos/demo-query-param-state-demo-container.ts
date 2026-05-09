@@ -38,7 +38,7 @@ import {
 } from '@semantic-components/ui-lab';
 
 @Component({
-  selector: 'app-basic-query-param-state-demo',
+  selector: 'app-demo-query-param-state-demo',
   imports: [FormsModule],
   template: \`
     <div class="w-full max-w-md space-y-4">
@@ -99,7 +99,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicQueryParamStateDemo {
+export class DemoQueryParamStateDemo {
   readonly search = injectQueryParam('q', parseAsString.withDefault(''));
 
   readonly page = injectQueryParam('page', parseAsInteger.withDefault(1));
