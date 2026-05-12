@@ -19,3 +19,9 @@ ncu -u "/@angular*|@schematics\/angular|ng-packagr/"
 ```bash
 ncu -u "/@tiptap*/"
 ```
+
+## tailwindcss
+
+```bash
+ncu -u tailwindcss @tailwindcss/postcss postcss tailwind-merge
+```
