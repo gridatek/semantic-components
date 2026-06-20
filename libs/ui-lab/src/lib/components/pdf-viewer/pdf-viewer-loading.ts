@@ -38,6 +38,6 @@ export class ScPdfViewerLoading {
   protected readonly class = computed(() => cn('block', this.classInput()));
 
   protected readonly overlayClass = cn(
-    'absolute inset-0 flex items-center justify-center bg-background/80 z-10',
+    'absolute inset-0 flex items-center justify-center bg-background z-10',
   );
 }
