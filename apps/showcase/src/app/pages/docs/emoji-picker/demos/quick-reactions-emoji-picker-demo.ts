@@ -1,4 +1,9 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'app-quick-reactions-emoji-picker-demo',
@@ -25,6 +30,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
     }
   `,
   host: { class: 'flex w-full flex-col items-center' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class QuickReactionsEmojiPickerDemo {

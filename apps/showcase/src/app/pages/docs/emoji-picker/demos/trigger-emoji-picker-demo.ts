@@ -1,5 +1,10 @@
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  signal,
+} from '@angular/core';
 import {
   ScPopover,
   ScPopoverPortal,
@@ -110,6 +115,7 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
     }
   `,
   host: { class: 'flex w-full flex-col items-center' },
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class TriggerEmojiPickerDemo {

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -18,6 +19,7 @@ import { ScSidebarState } from './sidebar-state';
     tabindex: '-1',
     title: 'Toggle Sidebar',
   },
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebarRail {

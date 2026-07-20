@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   OnDestroy,
   OnInit,
@@ -29,6 +30,7 @@ const MOBILE_BREAKPOINT = 768;
     '[style.--sidebar-width-mobile]': '"18rem"',
     '[style.--sidebar-width-icon]': '"3rem"',
   },
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebarProvider implements OnInit, OnDestroy {

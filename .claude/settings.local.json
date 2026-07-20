@@ -5,7 +5,8 @@
       "Bash(gh api:*)",
       "Bash(gh run:*)",
       "WebSearch",
-      "WebFetch(domain:ark-ui.com)"
+      "WebFetch(domain:ark-ui.com)",
+      "Bash(git stash *)"
     ]
   }
 }
