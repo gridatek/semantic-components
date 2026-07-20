@@ -1,11 +1,5 @@
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
   ScPopover,
   ScPopoverPortal,
@@ -123,7 +117,6 @@ import { SiCirclePlusIcon } from '@semantic-icons/lucide-icons';
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
-  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageReactionsEmojiPickerDemo {

@@ -1,12 +1,6 @@
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
   ScInput,
   ScInputGroup,
@@ -136,7 +130,6 @@ import { SiSmileIcon } from '@semantic-icons/lucide-icons';
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
-  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class InputEmojiPickerDemo {

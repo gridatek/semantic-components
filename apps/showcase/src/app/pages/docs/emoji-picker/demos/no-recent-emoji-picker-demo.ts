@@ -1,9 +1,5 @@
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScEmojiPicker,
   ScEmojiPickerCategoryTab,
@@ -76,7 +72,6 @@ import {
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
-  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class NoRecentEmojiPickerDemo {}

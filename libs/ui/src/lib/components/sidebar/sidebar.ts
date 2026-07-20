@@ -1,6 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -86,7 +85,6 @@ import { ScSidebarState } from './sidebar-state';
     '[attr.data-side]': 'side()',
     '[attr.data-collapsible]': 'collapsible()',
   },
-  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebar {
