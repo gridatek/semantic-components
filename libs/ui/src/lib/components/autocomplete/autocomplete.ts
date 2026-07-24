@@ -1,4 +1,4 @@
-import { Combobox, ComboboxPopupContainer } from '@angular/aria/combobox';
+import { Combobox, ComboboxPopup } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
@@ -19,16 +19,15 @@ import { ScAutocompletePortal } from './autocomplete-portal';
 
 @Component({
   selector: 'div[scAutocomplete]',
-  imports: [ComboboxPopupContainer, OverlayModule, NgTemplateOutlet],
+  imports: [ComboboxPopup, OverlayModule, NgTemplateOutlet],
   hostDirectives: [
     {
       directive: Combobox,
-      inputs: ['filterMode'],
     },
   ],
   template: `
     <ng-content />
-    <ng-template ngComboboxPopupContainer>
+    <ng-template ngComboboxPopup [combobox]="combobox" popupType="listbox">
       @if (origin(); as origin) {
         <ng-template
           [cdkConnectedOverlay]="{

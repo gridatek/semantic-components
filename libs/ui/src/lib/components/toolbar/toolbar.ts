@@ -14,8 +14,14 @@ import { cn } from '../../utils';
   hostDirectives: [
     {
       directive: Toolbar,
-      inputs: ['orientation', 'disabled', 'wrap', 'values', 'softDisabled'],
-      outputs: ['valuesChange'],
+      inputs: [
+        'orientation',
+        'disabled',
+        'wrap',
+        'value: values',
+        'softDisabled',
+      ],
+      outputs: ['valueChange: valuesChange'],
     },
   ],
   template: `

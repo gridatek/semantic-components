@@ -87,7 +87,7 @@ import {
   ],
   host: { class: 'flex w-full justify-center' },
   template: \`
-    <div scCombobox [readonly]="true" class="w-60">
+    <div scCombobox #cb="scCombobox" class="w-60">
       <div scComboboxOrigin>
         <div scInputGroup>
           <span
@@ -107,9 +107,9 @@ import {
           </div>
         </div>
       </div>
-      <ng-template scComboboxPopupContainer>
+      <ng-template scComboboxPopupContainer [combobox]="cb.comboboxRef">
         <dialog scComboboxDialog>
-          <div scComboboxSearchPanel>
+          <div scComboboxSearchPanel #sp="scComboboxSearchPanel">
             <div class="p-1 pb-0">
               <div scInputGroup>
                 <div scInputGroupAddon align="inline-start">
@@ -123,7 +123,7 @@ import {
                 />
               </div>
             </div>
-            <ng-template scComboboxListContainer>
+            <ng-template scComboboxListContainer [combobox]="sp.comboboxRef">
               @if (options().length === 0) {
                 <div scComboboxEmpty>No results found</div>
               }

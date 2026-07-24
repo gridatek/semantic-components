@@ -11,10 +11,10 @@ export class ScDiffViewerModeSwitch {
   private readonly toolbar = inject(Toolbar);
 
   constructor() {
-    this.toolbar.values.set([this.diffViewer.viewMode()]);
+    this.toolbar.value.set([this.diffViewer.viewMode()]);
 
     effect(() => {
-      const values = this.toolbar.values() as DiffViewMode[];
+      const values = this.toolbar.value() as DiffViewMode[];
       if (values.length > 0) {
         this.diffViewer.viewMode.set(values[0]);
       }

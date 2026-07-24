@@ -90,8 +90,8 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsNumberDemo {
-  private readonly formModel = signal({
-    quantity: '10',
+  private readonly formModel = signal<{ quantity: number | null }>({
+    quantity: 10,
   });
 
   readonly quantityForm = form(this.formModel, (path) => {

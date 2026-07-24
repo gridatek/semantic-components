@@ -79,7 +79,6 @@ export class ScNotificationCenter implements ScNotificationCenterApi {
     action: NotificationAction;
   }>();
   readonly itemClick = output<Notification>();
-  readonly filterChange = output<NotificationFilter>();
 
   readonly filter = model<NotificationFilter>('all');
 
@@ -113,7 +112,6 @@ export class ScNotificationCenter implements ScNotificationCenterApi {
 
   setFilter(f: NotificationFilter): void {
     this.filter.set(f);
-    this.filterChange.emit(f);
   }
 
   onMarkRead(notification: Notification, read: boolean): void {

@@ -5,6 +5,7 @@ import { cn } from '../../utils';
 
 @Directive({
   selector: 'div[scCommand]',
+  exportAs: 'scCommand',
   hostDirectives: [
     {
       directive: Combobox,
@@ -17,6 +18,10 @@ import { cn } from '../../utils';
 })
 export class ScCommand {
   private readonly combobox = inject(Combobox);
+
+  /** The underlying aria combobox, for binding to `ngComboboxPopup`. */
+  readonly comboboxRef = this.combobox;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
@@ -27,7 +32,6 @@ export class ScCommand {
   );
 
   constructor() {
-    effect(() => signalSetFn(this.combobox.filterMode[SIGNAL], 'manual'));
     effect(() => signalSetFn(this.combobox.alwaysExpanded[SIGNAL], true));
   }
 }

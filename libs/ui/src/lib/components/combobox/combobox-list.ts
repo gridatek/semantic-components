@@ -1,12 +1,15 @@
+import { ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox } from '@angular/aria/listbox';
 import {
   Directive,
   afterRenderEffect,
   computed,
   contentChildren,
+  effect,
   inject,
   input,
 } from '@angular/core';
+import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
 import { ScComboboxItem } from './combobox-item';
 
@@ -15,9 +18,10 @@ import { ScComboboxItem } from './combobox-item';
   hostDirectives: [
     {
       directive: Listbox,
-      inputs: ['values'],
-      outputs: ['valuesChange'],
+      inputs: ['value: values'],
+      outputs: ['valueChange: valuesChange'],
     },
+    ComboboxWidget,
   ],
   host: {
     '[class]': 'class()',
@@ -27,11 +31,12 @@ export class ScComboboxList {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly listbox = inject(Listbox);
+  private readonly widget = inject(ComboboxWidget);
   private readonly items = contentChildren(ScComboboxItem, {
     descendants: true,
   });
 
-  readonly values = computed(() => this.listbox.values());
+  readonly values = computed(() => this.listbox.value());
 
   labelForValue(value: unknown): string {
     const item = this.items().find((i) => i.itemValue() === value);
@@ -44,5 +49,11 @@ export class ScComboboxList {
 
   constructor() {
     afterRenderEffect(() => this.listbox.scrollActiveItemIntoView());
+    effect(() =>
+      signalSetFn(
+        this.widget.activeDescendant[SIGNAL],
+        this.listbox.activeDescendant(),
+      ),
+    );
   }
 }

@@ -1,4 +1,3 @@
-import { ComboboxInput } from '@angular/aria/combobox';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,9 +11,9 @@ import { cn } from '../../utils';
   selector: 'input[scMultiselectInput]',
   imports: [],
   template: ``,
-  hostDirectives: [ComboboxInput],
   host: {
     '[class]': 'class()',
+    readonly: '',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

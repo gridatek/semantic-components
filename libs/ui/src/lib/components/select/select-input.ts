@@ -1,4 +1,4 @@
-import { ComboboxInput } from '@angular/aria/combobox';
+import { Combobox } from '@angular/aria/combobox';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,9 +13,9 @@ import { cn } from '../../utils';
   selector: 'input[scSelectInput]',
   imports: [],
   template: ``,
-  hostDirectives: [ComboboxInput],
   host: {
     '[class]': 'class()',
+    readonly: '',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,9 +23,9 @@ import { cn } from '../../utils';
 export class ScSelectInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly comboboxInput = inject(ComboboxInput);
+  private readonly combobox = inject(Combobox);
 
-  private readonly hasValue = computed(() => this.comboboxInput.value() !== '');
+  private readonly hasValue = computed(() => this.combobox.value() !== '');
 
   protected readonly class = computed(() =>
     cn(
