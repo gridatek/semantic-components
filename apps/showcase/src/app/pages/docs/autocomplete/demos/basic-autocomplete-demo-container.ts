@@ -63,7 +63,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: \`
-    <div scAutocomplete filterMode="auto-select" class="w-52">
+    <div scAutocomplete class="w-52">
       <div scAutocompleteOrigin>
         <div scInputGroup>
           <div scInputGroupAddon align="inline-start">

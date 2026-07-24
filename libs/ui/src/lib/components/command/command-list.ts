@@ -1,11 +1,14 @@
+import { ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox } from '@angular/aria/listbox';
 import {
   Directive,
   afterRenderEffect,
   computed,
+  effect,
   inject,
   input,
 } from '@angular/core';
+import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
 
 @Directive({
@@ -13,9 +16,10 @@ import { cn } from '../../utils';
   hostDirectives: [
     {
       directive: Listbox,
-      inputs: ['values'],
-      outputs: ['valuesChange'],
+      inputs: ['value: values'],
+      outputs: ['valueChange: valuesChange'],
     },
+    ComboboxWidget,
   ],
   host: {
     '[class]': 'class()',
@@ -32,8 +36,15 @@ export class ScCommandList {
   );
 
   private readonly listbox = inject(Listbox);
+  private readonly widget = inject(ComboboxWidget);
 
   constructor() {
     afterRenderEffect(() => this.listbox.scrollActiveItemIntoView());
+    effect(() =>
+      signalSetFn(
+        this.widget.activeDescendant[SIGNAL],
+        this.listbox.activeDescendant(),
+      ),
+    );
   }
 }

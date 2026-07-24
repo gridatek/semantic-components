@@ -1,9 +1,15 @@
-import { ComboboxPopupContainer } from '@angular/aria/combobox';
-import { Directive } from '@angular/core';
+import { ComboboxPopup } from '@angular/aria/combobox';
+import { Directive, inject } from '@angular/core';
+import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 
 @Directive({
   selector: 'ng-template[scComboboxPopupContainer]',
-  hostDirectives: [ComboboxPopupContainer],
-  host: {},
+  hostDirectives: [{ directive: ComboboxPopup, inputs: ['combobox'] }],
 })
-export class ScComboboxPopupContainer {}
+export class ScComboboxPopupContainer {
+  private readonly popup = inject(ComboboxPopup);
+
+  constructor() {
+    signalSetFn(this.popup.popupType[SIGNAL], 'dialog');
+  }
+}

@@ -1,10 +1,8 @@
-import { ComboboxInput } from '@angular/aria/combobox';
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Directive({
   selector: 'input[scAutocompleteInput]',
-  hostDirectives: [ComboboxInput],
   host: {
     '[class]': 'class()',
   },

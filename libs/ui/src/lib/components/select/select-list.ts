@@ -1,3 +1,4 @@
+import { ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox } from '@angular/aria/listbox';
 import {
   ChangeDetectionStrategy,
@@ -5,9 +6,11 @@ import {
   ViewEncapsulation,
   computed,
   contentChildren,
+  effect,
   inject,
   input,
 } from '@angular/core';
+import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
 import { ScSelectItem } from './select-item';
 
@@ -17,7 +20,7 @@ import { ScSelectItem } from './select-item';
   template: `
     <ng-content />
   `,
-  hostDirectives: [Listbox],
+  hostDirectives: [Listbox, ComboboxWidget],
   host: {
     '[class]': 'class()',
   },
@@ -26,16 +29,17 @@ import { ScSelectItem } from './select-item';
 })
 export class ScSelectList {
   private readonly listbox = inject(Listbox);
+  private readonly widget = inject(ComboboxWidget);
   private readonly items = contentChildren(ScSelectItem, { descendants: true });
-  readonly values = computed(() => this.listbox.values());
+  readonly values = computed(() => this.listbox.value());
   readonly classInput = input<string>('', { alias: 'class' });
 
   setValues(values: unknown[]) {
-    this.listbox.values.set(values as never);
+    this.listbox.value.set(values as never);
   }
 
   scrollToSelected() {
-    const value = this.listbox.values()?.[0];
+    const value = this.listbox.value()?.[0];
     if (value == null) return;
     const item = this.items().find((i) => i.itemValue() === value);
     item?.scrollIntoView();
@@ -52,4 +56,13 @@ export class ScSelectList {
       this.classInput(),
     ),
   );
+
+  constructor() {
+    effect(() =>
+      signalSetFn(
+        this.widget.activeDescendant[SIGNAL],
+        this.listbox.activeDescendant(),
+      ),
+    );
+  }
 }

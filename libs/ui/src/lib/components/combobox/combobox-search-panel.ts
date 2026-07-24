@@ -13,6 +13,7 @@ import { cn } from '../../utils';
 
 @Component({
   selector: 'div[scComboboxSearchPanel]',
+  exportAs: 'scComboboxSearchPanel',
   hostDirectives: [Combobox],
   template: `
     <ng-content />
@@ -25,6 +26,10 @@ import { cn } from '../../utils';
 })
 export class ScComboboxSearchPanel {
   private readonly combobox = inject(Combobox);
+
+  /** The underlying aria combobox, for binding to `ngComboboxPopup`. */
+  readonly comboboxRef = this.combobox;
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
@@ -35,7 +40,6 @@ export class ScComboboxSearchPanel {
   );
 
   constructor() {
-    effect(() => signalSetFn(this.combobox.filterMode[SIGNAL], 'manual'));
     effect(() => signalSetFn(this.combobox.alwaysExpanded[SIGNAL], true));
   }
 }

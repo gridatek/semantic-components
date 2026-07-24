@@ -1,5 +1,11 @@
 import { Combobox } from '@angular/aria/combobox';
-import { Directive, computed, contentChild, input } from '@angular/core';
+import {
+  Directive,
+  computed,
+  contentChild,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '../../utils';
 import { ScComboboxList } from './combobox-list';
 import { ScComboboxOrigin } from './combobox-origin';
@@ -10,13 +16,7 @@ import { ScComboboxOrigin } from './combobox-origin';
   hostDirectives: [
     {
       directive: Combobox,
-      inputs: [
-        'filterMode',
-        'disabled',
-        'readonly',
-        'firstMatch',
-        'alwaysExpanded',
-      ],
+      inputs: ['disabled', 'alwaysExpanded'],
     },
   ],
   host: {
@@ -25,6 +25,9 @@ import { ScComboboxOrigin } from './combobox-origin';
 })
 export class ScCombobox {
   readonly classInput = input<string>('', { alias: 'class' });
+
+  /** The underlying aria combobox, for binding to `ngComboboxPopup`. */
+  readonly comboboxRef = inject(Combobox);
 
   readonly selectedValue = computed(() => this.list()?.values()[0]);
 

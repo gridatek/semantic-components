@@ -1,4 +1,4 @@
-import { Combobox, ComboboxPopupContainer } from '@angular/aria/combobox';
+import { Combobox, ComboboxPopup } from '@angular/aria/combobox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
@@ -13,7 +13,6 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import { cn } from '../../utils';
 import { ScMultiselectList } from './multiselect-list';
 import { ScMultiselectOrigin } from './multiselect-origin';
@@ -38,7 +37,7 @@ const positions = [
 
 @Component({
   selector: 'div[scMultiselect]',
-  imports: [ComboboxPopupContainer, OverlayModule, NgTemplateOutlet],
+  imports: [ComboboxPopup, OverlayModule, NgTemplateOutlet],
   hostDirectives: [
     {
       directive: Combobox,
@@ -46,7 +45,7 @@ const positions = [
   ],
   template: `
     <ng-content />
-    <ng-template ngComboboxPopupContainer>
+    <ng-template ngComboboxPopup [combobox]="combobox" popupType="listbox">
       @if (origin(); as origin) {
         <ng-template
           [cdkConnectedOverlay]="{
@@ -93,8 +92,6 @@ export class ScMultiselect {
   protected readonly combobox = inject(Combobox);
 
   constructor() {
-    effect(() => signalSetFn(this.combobox.readonly[SIGNAL], true));
-
     // Store values when selection changes
     effect(() => {
       const list = this.list();

@@ -8,8 +8,8 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
   hostDirectives: [
     {
       directive: Listbox,
-      inputs: ['values'],
-      outputs: ['valuesChange'],
+      inputs: ['value: values'],
+      outputs: ['valueChange: valuesChange'],
     },
   ],
   host: {
@@ -31,7 +31,7 @@ export class ScLightboxThumbnailBar {
 
   constructor() {
     effect(() => {
-      const values = this.listbox.values();
+      const values = this.listbox.value();
       if (values.length > 0) {
         const index = Number(values[0]);
         if (!isNaN(index)) {

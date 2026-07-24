@@ -4,7 +4,6 @@ import {
   computed,
   input,
   model,
-  output,
 } from '@angular/core';
 
 // Token for number context
@@ -27,8 +26,6 @@ export class ScNumber {
   readonly allowEmpty = input<boolean>(true);
   readonly scrubSpeed = input<number>(1);
   readonly formatOptions = input<Intl.NumberFormatOptions>({});
-
-  readonly valueChange = output<number | null>();
 
   readonly canIncrement = computed(() => {
     if (this.disabled()) return false;
@@ -84,7 +81,6 @@ export class ScNumber {
     if (value === null) {
       if (this.allowEmpty()) {
         this.value.set(null);
-        this.valueChange.emit(null);
       }
       return;
     }
@@ -98,7 +94,6 @@ export class ScNumber {
 
     const rounded = this.roundToStep(clamped);
     this.value.set(rounded);
-    this.valueChange.emit(rounded);
   }
 
   formatValue(value: number | null): string {

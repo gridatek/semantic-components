@@ -133,7 +133,7 @@ const COUNTRIES: Country[] = [
   ],
   template: \`
     <div class="max-w-lg">
-      <div scCombobox [readonly]="true" class="w-full">
+      <div scCombobox #cb="scCombobox" class="w-full">
         <div
           scComboboxOrigin
           class="border-input flex h-8 items-center rounded-lg border"
@@ -157,9 +157,9 @@ const COUNTRIES: Country[] = [
             placeholder="Phone number"
           />
         </div>
-        <ng-template scComboboxPopupContainer>
+        <ng-template scComboboxPopupContainer [combobox]="cb.comboboxRef">
           <dialog scComboboxDialog class="min-w-72">
-            <div scComboboxSearchPanel>
+            <div scComboboxSearchPanel #sp="scComboboxSearchPanel">
               <div class="p-1 pb-0">
                 <div
                   scInputGroup
@@ -176,7 +176,7 @@ const COUNTRIES: Country[] = [
                   />
                 </div>
               </div>
-              <ng-template scComboboxListContainer>
+              <ng-template scComboboxListContainer [combobox]="sp.comboboxRef">
                 @if (filteredCountries().length === 0) {
                   <div scComboboxEmpty>No countries found</div>
                 }

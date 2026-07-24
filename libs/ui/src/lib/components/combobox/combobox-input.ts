@@ -1,19 +1,12 @@
-import { ComboboxInput } from '@angular/aria/combobox';
 import { Directive, computed, forwardRef, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScCombobox } from './combobox';
 
 @Directive({
   selector: 'input[scComboboxInput]',
-  hostDirectives: [
-    {
-      directive: ComboboxInput,
-      inputs: ['value'],
-      outputs: ['valueChange'],
-    },
-  ],
   host: {
     '[class]': 'class()',
+    readonly: '',
   },
 })
 export class ScComboboxInput {
