@@ -26,7 +26,7 @@ export class BasicAutocompleteDemoContainer {
   computed,
   signal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScAutocomplete,
   ScAutocompleteEmpty,
@@ -46,7 +46,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-autocomplete-demo',
   imports: [
-    FormsModule,
+    FormField,
     ScAutocomplete,
     ScAutocompleteEmpty,
     ScAutocompleteInput,
@@ -74,7 +74,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
             scAutocompleteInput
             aria-label="Select a country"
             placeholder="Select a country"
-            [(ngModel)]="query"
+            [formField]="searchForm.query"
           />
         </div>
       </div>
@@ -100,12 +100,15 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicAutocompleteDemo {
-  query = signal('');
-  countries = computed(() =>
-    ALL_COUNTRIES.filter((country) =>
-      country.toLowerCase().startsWith(this.query().toLowerCase()),
-    ),
-  );
+  readonly formModel = signal({ query: '' });
+  readonly searchForm = form(this.formModel);
+
+  readonly countries = computed(() => {
+    const query = this.searchForm.query().value().toLowerCase();
+    return ALL_COUNTRIES.filter((country) =>
+      country.toLowerCase().startsWith(query),
+    );
+  });
 }
 
 const ALL_COUNTRIES = [

@@ -35,7 +35,7 @@ A combobox-style autocomplete input with filtering, keyboard navigation, and ove
 <div scAutocomplete filterMode="auto-select" class="w-52">
   <div scAutocompleteGroup>
     <svg siSearchIcon scAutocompleteIcon></svg>
-    <input scAutocompleteInput aria-label="Select a country" placeholder="Select a country" [(ngModel)]="query" />
+    <input scAutocompleteInput aria-label="Select a country" placeholder="Select a country" [formField]="searchForm.query" />
   </div>
   <ng-template scAutocompletePortal>
     <div scAutocompletePopup>
@@ -59,18 +59,18 @@ A combobox-style autocomplete input with filtering, keyboard navigation, and ove
 
 ```typescript
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormField, form } from '@angular/forms/signals';
 import { ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteItemLabel, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal } from '@semantic-components/ui';
 import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-example',
-  imports: [FormsModule, ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteItemLabel, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal, SiSearchIcon, SiCheckIcon],
+  imports: [FormField, ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteItemLabel, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal, SiSearchIcon, SiCheckIcon],
   template: `
     <div scAutocomplete filterMode="auto-select" class="w-52">
       <div scAutocompleteGroup>
         <svg siSearchIcon scAutocompleteIcon></svg>
-        <input scAutocompleteInput aria-label="Select a country" placeholder="Select a country" [(ngModel)]="query" />
+        <input scAutocompleteInput aria-label="Select a country" placeholder="Select a country" [formField]="searchForm.query" />
       </div>
       <ng-template scAutocompletePortal>
         <div scAutocompletePopup>
@@ -92,9 +92,14 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Example {
-  query = signal('');
+  readonly formModel = signal({ query: '' });
+  readonly searchForm = form(this.formModel);
+
   allItems = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
-  items = computed(() => this.allItems.filter((item) => item.toLowerCase().startsWith(this.query().toLowerCase())));
+  items = computed(() => {
+    const query = this.searchForm.query().value().toLowerCase();
+    return this.allItems.filter((item) => item.toLowerCase().startsWith(query));
+  });
 }
 ```
 

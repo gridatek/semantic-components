@@ -2,8 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  effect,
+  linkedSignal,
+  untracked,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormField, form, min } from '@angular/forms/signals';
 import {
   injectQueryParam,
   parseAsInteger,
@@ -13,7 +16,7 @@ import {
 
 @Component({
   selector: 'app-demo-query-param-state-demo',
-  imports: [FormsModule],
+  imports: [FormField],
   template: `
     <div class="w-full max-w-md space-y-4">
       <div class="space-y-2">
@@ -23,8 +26,7 @@ import {
           type="text"
           class="bg-background focus:ring-ring w-full rounded-md border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
           placeholder="Type to search..."
-          [ngModel]="search.value()"
-          (ngModelChange)="search.set($event)"
+          [formField]="filtersForm.q"
         />
       </div>
 
@@ -34,10 +36,8 @@ import {
           <input
             id="page"
             type="number"
-            min="1"
             class="bg-background focus:ring-ring w-full rounded-md border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
-            [ngModel]="page.value()"
-            (ngModelChange)="page.set($event)"
+            [formField]="filtersForm.page"
           />
         </div>
 
@@ -46,8 +46,7 @@ import {
           <select
             id="sort"
             class="bg-background focus:ring-ring w-full rounded-md border px-3 py-2 text-sm focus:ring-2 focus:outline-none"
-            [ngModel]="sort.value()"
-            (ngModelChange)="sort.set($event)"
+            [formField]="filtersForm.sort"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -82,6 +81,29 @@ export class DemoQueryParamStateDemo {
     'sort',
     parseAsStringEnum(['asc', 'desc'] as const).withDefault('asc'),
   );
+
+  /** Resets whenever the URL changes, so the form always mirrors the query params. */
+  readonly formModel = linkedSignal(() => ({
+    q: this.search.value(),
+    page: this.page.value(),
+    sort: this.sort.value(),
+  }));
+
+  readonly filtersForm = form(this.formModel, (path) => {
+    min(path.page, 1, { message: 'Page must be at least 1' });
+  });
+
+  constructor() {
+    // Push edits made through the form back into the URL.
+    effect(() => {
+      const { q, page, sort } = this.formModel();
+      untracked(() => {
+        if (q !== this.search.value()) this.search.set(q);
+        if (page !== this.page.value()) this.page.set(page);
+        if (sort !== this.sort.value()) this.sort.set(sort);
+      });
+    });
+  }
 
   stateJson() {
     return JSON.stringify(

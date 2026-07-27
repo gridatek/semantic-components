@@ -171,9 +171,8 @@ Directive for styling native radio inputs. Apply to `input[type="radio"]` elemen
 
 **State Management:**
 
-- Use `[(ngModel)]` for template-driven forms
-- Use `[formControl]` or `formControlName` for reactive forms
-- All native input attributes are supported (`name`, `value`, `disabled`, `checked`, etc.)
+- Use `[formField]` from Signal Forms (`@angular/forms/signals`) to bind the group to a model field
+- All native input attributes are supported (`name`, `value`, `checked`, etc.); constraints such as `required` and `disabled` are declared in the `form()` schema rather than as template attributes
 
 ## Customization
 
@@ -182,7 +181,7 @@ The `ScRadio` directive styles the native radio input using CSS. You can customi
 ```html
 <div scRadioGroup>
   <label scRadioField>
-    <input type="radio" scRadio class="h-6 w-6 border-2" name="custom" value="option1" [(ngModel)]="selected" />
+    <input type="radio" scRadio class="h-6 w-6 border-2" value="option1" [formField]="myForm.selected" />
     Custom sized radio
   </label>
 </div>
@@ -193,7 +192,7 @@ For complete custom styling, you can omit the `sc-radio` directive and style the
 ```html
 <div scRadioGroup>
   <label scRadioField>
-    <input type="radio" class="your-custom-classes" name="custom" value="option1" [(ngModel)]="selected" />
+    <input type="radio" class="your-custom-classes" value="option1" [formField]="myForm.selected" />
     Fully custom radio
   </label>
 </div>
@@ -208,7 +207,7 @@ You can customize the radio button colors by setting CSS custom properties (vari
 <div style="--primary: oklch(0.6 0.25 280); --primary-foreground: oklch(0.985 0 0);">
   <div scRadioGroup>
     <label scRadioField>
-      <input type="radio" scRadio name="theme" value="option1" [(ngModel)]="selected" />
+      <input type="radio" scRadio value="option1" [formField]="myForm.selected" />
       Option 1
     </label>
   </div>
@@ -218,7 +217,7 @@ You can customize the radio button colors by setting CSS custom properties (vari
 <div style="--primary: oklch(0.5 0.18 145); --primary-foreground: oklch(0.985 0 0);">
   <div scRadioGroup>
     <label scRadioField>
-      <input type="radio" scRadio name="theme" value="option1" [(ngModel)]="selected" />
+      <input type="radio" scRadio value="option1" [formField]="myForm.selected" />
       Option 1
     </label>
   </div>
@@ -248,7 +247,7 @@ Some components have a `data-slot` attribute used for CSS targeting by parent co
 - Native radio inputs provide all semantic roles and ARIA attributes automatically
 - Container uses `role="radiogroup"` for group semantics
 - Keyboard accessible via native browser behavior (arrow keys navigate, space/enter to select)
-- Native radio grouping via `name` attribute ensures only one selection
+- Native radio grouping via the `name` attribute ensures only one selection — Signal Forms sets `name` from the bound field, so every radio bound to the same `[formField]` shares a group
 - Works seamlessly with associated `<label>` elements for click-to-focus
 - Full native form integration (submission, validation, autofill)
 - Supports `aria-label` for programmatic group labels (WCAG 4.1.2)
@@ -269,7 +268,7 @@ div[scRadioGroup] (container with role="radiogroup")
 This pattern provides:
 
 - **Simplicity**: Minimal abstraction over native HTML
-- **Flexibility**: Use native inputs with standard form integration (ngModel, reactive forms)
+- **Flexibility**: Use native inputs with standard form integration (Signal Forms `[formField]`)
 - **Accessibility**: Native radio buttons provide full keyboard and screen reader support
 - **Customization**: Direct access to native input attributes and styling
-- **No Magic**: State management is handled through standard Angular forms, not internal component state
+- **No Magic**: State management is handled through Angular Signal Forms, not internal component state

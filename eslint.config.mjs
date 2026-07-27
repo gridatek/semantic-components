@@ -37,6 +37,21 @@ export default [
       '**/*.mjs',
     ],
     // Override or add rules here
-    rules: {},
+    rules: {
+      // Signal Forms (`@angular/forms/signals`) is the only forms API used in
+      // this repo. Template-driven and reactive forms must not come back.
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@angular/forms',
+              message:
+                'Use Signal Forms from `@angular/forms/signals` instead of template-driven or reactive forms.',
+            },
+          ],
+        },
+      ],
+    },
   },
 ];
