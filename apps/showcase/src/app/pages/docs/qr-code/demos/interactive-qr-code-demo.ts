@@ -2,15 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
+  computed,
   signal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScInput } from '@semantic-components/ui';
 import { ScQrCode } from '@semantic-components/ui-lab';
 
 @Component({
   selector: 'app-interactive-qr-code-demo',
-  imports: [ScQrCode, ScInput, ScButton, FormsModule],
+  imports: [FormField, ScQrCode, ScInput, ScButton],
   template: `
     <div class="flex flex-col items-center gap-6">
       @if (value()) {
@@ -21,8 +22,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
         <input
           scInput
           type="text"
-          [ngModel]="value()"
-          (ngModelChange)="value.set($event)"
+          [formField]="qrCodeForm.text"
           placeholder="Enter text or URL..."
         />
 
@@ -31,7 +31,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
             scButton
             variant="secondary"
             size="sm"
-            (click)="value.set('https://angular.dev')"
+            (click)="setValue('https://angular.dev')"
           >
             URL
           </button>
@@ -39,7 +39,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
             scButton
             variant="secondary"
             size="sm"
-            (click)="value.set('mailto:hello@example.com')"
+            (click)="setValue('mailto:hello@example.com')"
           >
             Email
           </button>
@@ -47,7 +47,7 @@ import { ScQrCode } from '@semantic-components/ui-lab';
             scButton
             variant="secondary"
             size="sm"
-            (click)="value.set('WIFI:T:WPA;S:MyNetwork;P:pass123;;')"
+            (click)="setValue('WIFI:T:WPA;S:MyNetwork;P:pass123;;')"
           >
             WiFi
           </button>
@@ -60,5 +60,12 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InteractiveQrCodeDemo {
-  readonly value = signal('https://angular.dev');
+  readonly formModel = signal({ text: 'https://angular.dev' });
+  readonly qrCodeForm = form(this.formModel);
+
+  protected readonly value = computed(() => this.qrCodeForm.text().value());
+
+  protected setValue(value: string) {
+    this.qrCodeForm.text().value.set(value);
+  }
 }

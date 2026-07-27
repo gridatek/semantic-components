@@ -40,7 +40,8 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
 - Set `encapsulation: ViewEncapsulation.None` in `@Component` decorator
 - Prefer inline templates for small components
-- Prefer Signal forms (`@angular/forms/signals`) over Reactive forms and Template-driven forms
+- Use Signal forms (`@angular/forms/signals`) exclusively. Do NOT import from `@angular/forms` — no `FormsModule`/`ngModel`, no `ReactiveFormsModule`/`FormControl`/`FormGroup`. See [docs/signal-forms-migration.md](../docs/signal-forms-migration.md)
+- Constraints owned by Signal forms (`min`, `max`, `minlength`, `maxlength`, `pattern`, `required`, `disabled`, `name`) must be declared in the `form()` schema, not as static attributes on a `[formField]` element
 - Do NOT use `ngClass`, use `class` bindings instead
 - Do NOT use `ngStyle`, use `style` bindings instead
 - When using external templates/styles, use paths relative to the component TS file.

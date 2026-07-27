@@ -5,7 +5,6 @@ import {
   computed,
   signal,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import {
   ScCombobox,
   ScComboboxClear,
@@ -54,7 +53,6 @@ import {
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
-    FormsModule,
     SiCheckIcon,
     SiChevronsUpDownIcon,
     SiSearchIcon,
