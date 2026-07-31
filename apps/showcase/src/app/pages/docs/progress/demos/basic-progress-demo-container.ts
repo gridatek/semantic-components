@@ -14,7 +14,13 @@ import { BasicProgressDemo } from './basic-progress-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicProgressDemoContainer {
-  readonly code = `import { Component, OnDestroy, OnInit, ViewEncapsulation, signal } from '@angular/core';
+  readonly code = `import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+  signal,
+} from '@angular/core';
 import { ScProgress } from '@semantic-components/ui';
 
 @Component({

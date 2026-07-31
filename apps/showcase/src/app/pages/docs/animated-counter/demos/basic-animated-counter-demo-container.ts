@@ -14,7 +14,13 @@ import { BasicAnimatedCounterDemo } from './basic-animated-counter-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicAnimatedCounterDemoContainer {
-  readonly code = `import { Component, ElementRef, ViewEncapsulation, signal, viewChild } from '@angular/core';
+  readonly code = `import {
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { animate } from 'motion';
 

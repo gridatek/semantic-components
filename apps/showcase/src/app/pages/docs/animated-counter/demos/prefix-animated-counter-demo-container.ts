@@ -14,7 +14,13 @@ import { PrefixAnimatedCounterDemo } from './prefix-animated-counter-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PrefixAnimatedCounterDemoContainer {
-  readonly code = `import { Component, ElementRef, ViewEncapsulation, signal, viewChild } from '@angular/core';
+  readonly code = `import {
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { animate } from 'motion';
 

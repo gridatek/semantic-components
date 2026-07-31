@@ -14,7 +14,12 @@ import { EasingAnimatedCounterDemo } from './easing-animated-counter-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EasingAnimatedCounterDemoContainer {
-  readonly code = `import { Component, ElementRef, ViewEncapsulation, viewChildren } from '@angular/core';
+  readonly code = `import {
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  viewChildren,
+} from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { animate } from 'motion';
 

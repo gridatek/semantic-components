@@ -18,7 +18,17 @@ import { PdfViewerDemo } from './pdf-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PdfViewerDemoContainer {
-  readonly code = `import { Component, DestroyRef, ViewEncapsulation, computed, effect, inject, input, signal, viewChild } from '@angular/core';
+  readonly code = `import {
+  Component,
+  DestroyRef,
+  ViewEncapsulation,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
   ScPdfViewerAltTextDialog,
