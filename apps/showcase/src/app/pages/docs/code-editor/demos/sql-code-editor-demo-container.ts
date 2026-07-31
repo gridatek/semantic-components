@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SqlCodeEditorDemo } from './sql-code-editor-demo';
 
@@ -20,14 +16,9 @@ import { SqlCodeEditorDemo } from './sql-code-editor-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SqlCodeEditorDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeEditor,
   ScCodeEditorContent,
@@ -65,7 +56,6 @@ import {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SqlCodeEditorDemo {
   sqlCode = \`-- SQL Example

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -30,7 +29,6 @@ type ScHoverCardState = 'open' | 'closed';
     '(animationend)': 'onAnimationEnd($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScHoverCard {
   private readonly elementRef = inject(ElementRef);

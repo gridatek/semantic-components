@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { TextMarqueeDemo } from './text-marquee-demo';
 
@@ -16,14 +12,9 @@ import { TextMarqueeDemo } from './text-marquee-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextMarqueeDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMarqueeText,
   ScMarqueeTextSegment,
@@ -56,7 +47,6 @@ import {
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextMarqueeDemo {
   readonly repeats = [1, 2, 3, 4];

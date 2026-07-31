@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 
 @Component({
   selector: '[scChartTooltip]',
@@ -21,7 +16,6 @@ import {
   `,
   host: {},
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScChartTooltip {
   readonly visible = signal(false);

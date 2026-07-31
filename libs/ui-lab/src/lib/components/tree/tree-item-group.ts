@@ -1,6 +1,5 @@
 import { TreeItemGroup } from '@angular/aria/tree';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -23,7 +22,6 @@ import { SC_TREE_ITEM } from './tree-item';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTreeItemGroup {
   readonly item = inject(SC_TREE_ITEM);

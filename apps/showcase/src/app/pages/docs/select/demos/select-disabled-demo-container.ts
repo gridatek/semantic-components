@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SelectDisabledDemo } from './select-disabled-demo';
 
@@ -20,16 +16,9 @@ import { SelectDisabledDemo } from './select-disabled-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDisabledDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScInputGroup,
@@ -113,7 +102,6 @@ interface FormModel {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDisabledDemo {
   readonly formModel = signal<FormModel>({ fruit: '' });

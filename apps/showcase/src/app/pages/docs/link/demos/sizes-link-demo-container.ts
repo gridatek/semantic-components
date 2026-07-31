@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SizesLinkDemo } from './sizes-link-demo';
 
@@ -20,14 +16,9 @@ import { SizesLinkDemo } from './sizes-link-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SizesLinkDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 import { SiLinkIcon } from '@semantic-icons/lucide-icons';
 
@@ -46,7 +37,6 @@ import { SiLinkIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SizesLinkDemo {}`;
 }

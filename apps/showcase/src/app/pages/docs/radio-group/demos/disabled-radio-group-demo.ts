@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScRadio, ScRadioField, ScRadioGroup } from '@semantic-components/ui';
 
@@ -62,7 +57,6 @@ interface DisabledFormModel {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledRadioGroupDemo {
   readonly formModel = signal<DisabledFormModel>({

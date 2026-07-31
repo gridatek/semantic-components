@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { FormRatingDemo } from './form-rating-demo';
 
@@ -16,16 +12,10 @@ import { FormRatingDemo } from './form-rating-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormRatingDemoContainer {
   readonly code = `import { JsonPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScField,
@@ -94,7 +84,6 @@ interface ReviewForm {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormRatingDemo {
   readonly formModel = signal<ReviewForm>({

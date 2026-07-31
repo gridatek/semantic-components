@@ -1,7 +1,6 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -31,7 +30,6 @@ import { ScNativeDialogProvider } from './native-dialog-provider';
     '(click)': 'onBackdropClick($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNativeDialog {
   private readonly elementRef = inject(ElementRef<HTMLDialogElement>);

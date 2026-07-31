@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -116,7 +115,6 @@ import type {
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNotificationGroup {
   readonly classInput = input<string>('', { alias: 'class' });

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui';
 
 @Component({
@@ -20,6 +16,5 @@ import { ScAvatar, ScAvatarFallback } from '@semantic-components/ui';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FallbackAvatarDemo {}

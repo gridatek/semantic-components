@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 
 @Component({
@@ -14,7 +8,6 @@ import { cn } from '@semantic-components/ui';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTimelineConnector {
   readonly classInput = input<string>('', { alias: 'class' });

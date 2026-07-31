@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
   FormRoot,
@@ -86,7 +81,6 @@ import { Logo } from '../../components/logo/logo';
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ForgotPasswordPage {
   private readonly formModel = signal({

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { DisabledTabsDemo } from './disabled-tabs-demo';
 
@@ -20,14 +16,9 @@ import { DisabledTabsDemo } from './disabled-tabs-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledTabsDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
 
 @Component({
@@ -67,7 +58,6 @@ import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledTabsDemo {}`;
 }

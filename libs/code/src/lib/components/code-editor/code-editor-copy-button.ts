@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -26,7 +25,6 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
     '(click)': 'copyCode($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCodeEditorCopyButton {
   readonly code = input.required<string>();

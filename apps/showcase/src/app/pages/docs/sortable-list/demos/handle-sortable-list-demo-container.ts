@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { HandleSortableListDemo } from './handle-sortable-list-demo';
 
@@ -16,7 +12,6 @@ import { HandleSortableListDemo } from './handle-sortable-list-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HandleSortableListDemoContainer {
   readonly code = `import {
@@ -26,12 +21,7 @@ export class HandleSortableListDemoContainer {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -85,7 +75,6 @@ import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HandleSortableListDemo {
   readonly items = signal([

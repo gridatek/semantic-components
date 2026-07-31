@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { NoSearchEmojiPickerDemo } from './no-search-emoji-picker-demo';
 
@@ -20,7 +16,6 @@ import { NoSearchEmojiPickerDemo } from './no-search-emoji-picker-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoSearchEmojiPickerDemoContainer {
   readonly code = `import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';

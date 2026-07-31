@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -17,7 +16,6 @@ import { cn } from '@semantic-components/ui';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNativeDialogProvider {
   readonly classInput = input<string>('', { alias: 'class' });

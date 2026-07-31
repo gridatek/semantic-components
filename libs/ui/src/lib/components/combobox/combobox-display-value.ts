@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -21,7 +20,6 @@ import { ScCombobox } from './combobox';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComboboxDisplayValue {
   readonly classInput = input<string>('', { alias: 'class' });

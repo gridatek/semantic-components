@@ -2,7 +2,6 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   OnInit,
@@ -54,7 +53,6 @@ const position: ConnectedPosition = {
     '(mouseleave)': 'onMouseLeave()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavigationMenuItem implements OnInit {
   readonly navigationMenu = inject(ScNavigationMenu);

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BasicThemeToggleDemo } from './basic-theme-toggle-demo';
 
@@ -20,15 +16,9 @@ import { BasicThemeToggleDemo } from './basic-theme-toggle-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicThemeToggleDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScButton,
   ScThemeManager,
@@ -63,7 +53,6 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicThemeToggleDemo {
   protected readonly themeManager = inject(ScThemeManager);

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BasicBreadcrumbDemo } from './basic-breadcrumb-demo';
 
@@ -20,14 +16,9 @@ import { BasicBreadcrumbDemo } from './basic-breadcrumb-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicBreadcrumbDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBreadcrumb,
   ScBreadcrumbItem,
@@ -68,7 +59,6 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicBreadcrumbDemo {}`;
 }

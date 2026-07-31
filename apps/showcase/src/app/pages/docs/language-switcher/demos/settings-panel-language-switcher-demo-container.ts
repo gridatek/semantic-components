@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SettingsPanelLanguageSwitcherDemo } from './settings-panel-language-switcher-demo';
 
@@ -16,14 +12,9 @@ import { SettingsPanelLanguageSwitcherDemo } from './settings-panel-language-swi
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsPanelLanguageSwitcherDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLanguageSelect } from '@semantic-components/ui-lab';
 
 @Component({
@@ -46,7 +37,6 @@ import { ScLanguageSelect } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsPanelLanguageSwitcherDemo {}`;
 }

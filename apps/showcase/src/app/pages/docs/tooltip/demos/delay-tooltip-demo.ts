@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
 
 @Component({
@@ -37,6 +33,5 @@ import { ScButton, ScTooltipTrigger } from '@semantic-components/ui';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DelayTooltipDemo {}

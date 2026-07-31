@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SiMountainIcon } from '@semantic-icons/lucide-icons';
 
@@ -30,7 +24,6 @@ import { SiMountainIcon } from '@semantic-icons/lucide-icons';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Footer {
   readonly classInput = input<string>('', { alias: 'class' });

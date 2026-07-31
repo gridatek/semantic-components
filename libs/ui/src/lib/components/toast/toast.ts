@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -23,7 +22,6 @@ import { ScToastPosition, ScToastVariant } from './toast.types';
     '(pointerleave)': 'onPointerLeave()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToast {
   readonly classInput = input<string>('', { alias: 'class' });

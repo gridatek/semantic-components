@@ -1,6 +1,5 @@
 import { Combobox } from '@angular/aria/combobox';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -18,7 +17,6 @@ import { cn } from '../../utils';
     readonly: '',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelectInput {
   readonly classInput = input<string>('', { alias: 'class' });

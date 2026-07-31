@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { FormatsBarcodeScannerDemo } from './formats-barcode-scanner-demo';
 
@@ -21,14 +17,9 @@ import { FormatsBarcodeScannerDemo } from './formats-barcode-scanner-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormatsBarcodeScannerDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { BarcodeFormat } from '@semantic-components/ui-lab';
 
 @Component({
@@ -44,7 +35,6 @@ import { BarcodeFormat } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormatsBarcodeScannerDemo {
   readonly allFormats: BarcodeFormat[] = [

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -179,7 +178,6 @@ import { ScNotificationItem } from './notification-item';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNotificationCenterContainer {
   readonly center = inject(SC_NOTIFICATION_CENTER);

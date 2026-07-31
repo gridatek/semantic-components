@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -126,7 +125,6 @@ import type { PdfComment } from './pdf-viewer-types';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerCommentSidebar {
   readonly pdfViewer = inject(SC_PDF_VIEWER);

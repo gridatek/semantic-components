@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScFileUpload,
   ScFileUploadFile,
@@ -71,7 +66,6 @@ import {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonFileUploadDemo {
   readonly files = signal<ScFileUploadFile[]>([]);

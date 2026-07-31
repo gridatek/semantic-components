@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SizesLanguageSwitcherDemo } from './sizes-language-switcher-demo';
 
@@ -16,14 +12,9 @@ import { SizesLanguageSwitcherDemo } from './sizes-language-switcher-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SizesLanguageSwitcherDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLanguageToggle } from '@semantic-components/ui-lab';
 
 @Component({
@@ -56,7 +47,6 @@ import { ScLanguageToggle } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SizesLanguageSwitcherDemo {}`;
 }

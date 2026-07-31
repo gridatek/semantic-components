@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -19,7 +18,6 @@ import { SC_DATA_TABLE } from './data-table';
     '(input)': 'onInput($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDataTableFilter {
   readonly table = inject(SC_DATA_TABLE);

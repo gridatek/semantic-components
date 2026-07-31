@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -46,7 +45,6 @@ interface LayerItem {
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerLayersView {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);

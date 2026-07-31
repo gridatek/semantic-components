@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { TaskListSortableListDemo } from './task-list-sortable-list-demo';
 
@@ -16,7 +12,6 @@ import { TaskListSortableListDemo } from './task-list-sortable-list-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListSortableListDemoContainer {
   readonly code = `import {
@@ -26,12 +21,7 @@ export class TaskListSortableListDemoContainer {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
@@ -113,7 +103,6 @@ interface Task {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListSortableListDemo {
   readonly tasks = signal<Task[]>([

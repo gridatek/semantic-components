@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, disabled, form } from '@angular/forms/signals';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
@@ -36,7 +31,6 @@ value: "{{ disabledForm.text().value() }}"
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledInputDemo {
   readonly formModel = signal({ text: '' });

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
   ScAlertDialog,
@@ -58,6 +54,5 @@ import {
       </ng-template>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DestructiveAlertDialogDemo {}

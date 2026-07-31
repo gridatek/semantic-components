@@ -1,7 +1,6 @@
 import { ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox } from '@angular/aria/listbox';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -31,7 +30,6 @@ import { cn } from '../../utils';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMultiselectList {
   readonly classInput = input<string>('', { alias: 'class' });

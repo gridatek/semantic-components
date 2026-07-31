@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -30,7 +29,6 @@ import { ScContextMenuTrigger } from './context-menu-trigger';
     '(focusout)': 'onFocusOut($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScContextMenu {
   readonly classInput = input<string>('', { alias: 'class' });

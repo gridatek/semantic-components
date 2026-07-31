@@ -1,7 +1,6 @@
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -43,7 +42,6 @@ export type ScHoverCardAlign = ScOverlayAlign;
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScHoverCardProvider {
   readonly classInput = input<string>('', { alias: 'class' });

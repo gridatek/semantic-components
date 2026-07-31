@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { HorizontalScrollAreaDemo } from './horizontal-scroll-area-demo';
 
@@ -16,14 +12,9 @@ import { HorizontalScrollAreaDemo } from './horizontal-scroll-area-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HorizontalScrollAreaDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScScrollArea } from '@semantic-components/ui';
 
 @Component({
@@ -54,7 +45,6 @@ import { ScScrollArea } from '@semantic-components/ui';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HorizontalScrollAreaDemo {
   readonly artworks = [

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { CustomHeightVirtualListDemo } from './custom-height-virtual-list-demo';
 
@@ -20,7 +16,6 @@ import { CustomHeightVirtualListDemo } from './custom-height-virtual-list-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomHeightVirtualListDemoContainer {
   readonly code = `import {
@@ -28,12 +23,7 @@ export class CustomHeightVirtualListDemoContainer {
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 
 @Component({
   selector: 'app-custom-height-virtual-list-demo',
@@ -59,7 +49,6 @@ import {
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomHeightVirtualListDemo {
   readonly items = signal<string[]>(

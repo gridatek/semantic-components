@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { ScLink, cn } from '@semantic-components/ui';
 import { SiGithubIcon, SiHeartIcon } from '@semantic-icons/lucide-icons';
 import { Logo } from '../logo/logo';
@@ -50,7 +44,6 @@ import { Logo } from '../logo/logo';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Footer {
   readonly classInput = input<string>('', { alias: 'class' });

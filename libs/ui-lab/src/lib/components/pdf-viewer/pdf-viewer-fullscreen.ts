@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -23,7 +22,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     '(click)': 'pdfViewer.toggleFullscreen()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerFullscreen {
   readonly pdfViewer = inject(SC_PDF_VIEWER);

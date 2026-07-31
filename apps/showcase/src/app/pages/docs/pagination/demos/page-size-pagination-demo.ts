@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScPagination,
@@ -106,7 +101,6 @@ import {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageSizePaginationDemo {
   readonly currentPage = signal(1);

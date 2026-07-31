@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picker-demo';
 
@@ -20,7 +16,6 @@ import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picke
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageReactionsEmojiPickerDemoContainer {
   readonly code = `import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';

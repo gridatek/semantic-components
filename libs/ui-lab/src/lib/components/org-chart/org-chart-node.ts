@@ -1,6 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -56,7 +55,6 @@ import { SC_ORG_CHART } from './org-chart-types';
     '[class]': 'hostClass()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOrgChartNode {
   readonly orgChart = inject(SC_ORG_CHART);

@@ -2,7 +2,6 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   TemplateRef,
@@ -31,7 +30,6 @@ import { ScNavbarProvider } from './navbar-provider';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavbarMobilePortal {
   private readonly provider = inject(ScNavbarProvider);

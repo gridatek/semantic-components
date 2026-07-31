@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -26,7 +25,6 @@ import { ScProgressIndicator } from './progress-indicator';
     <div scProgressIndicator></div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScProgress implements FormValueControl<number | null> {
   readonly classInput = input<string>('', { alias: 'class' });

@@ -2,7 +2,6 @@ import { Menu, MenuItem } from '@angular/aria/menu';
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -53,7 +52,6 @@ import { ScMenuPortal } from './menu-portal';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMenuItem {
   readonly classInput = input<string>('', { alias: 'class' });

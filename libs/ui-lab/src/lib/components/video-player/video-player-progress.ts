@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -36,7 +35,6 @@ import { SC_VIDEO_PLAYER } from './video-player';
     '[style.--ring]': '"oklch(1 0 0 / 0.5)"',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVideoPlayerProgress {
   protected readonly player = inject(SC_VIDEO_PLAYER);

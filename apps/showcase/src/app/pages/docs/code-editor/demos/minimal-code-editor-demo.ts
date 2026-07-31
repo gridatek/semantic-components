@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCodeEditor, ScCodeEditorContent } from '@semantic-components/code';
 
 @Component({
@@ -20,7 +16,6 @@ import { ScCodeEditor, ScCodeEditorContent } from '@semantic-components/code';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinimalCodeEditorDemo {
   minimalCode = `const hello = "world";

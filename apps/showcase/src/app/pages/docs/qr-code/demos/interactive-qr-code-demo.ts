@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScInput } from '@semantic-components/ui';
 import { ScQrCode } from '@semantic-components/ui-lab';
@@ -57,7 +51,6 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InteractiveQrCodeDemo {
   readonly formModel = signal({ text: 'https://angular.dev' });

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SelectDemo } from './select-demo';
 
@@ -20,17 +16,10 @@ import { SelectDemo } from './select-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDemoContainer {
   readonly code = `import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScInputGroup,
@@ -174,7 +163,6 @@ interface FormModel {
   \`,
   host: { class: 'flex w-full flex-col items-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDemo {
   readonly formModel = signal<FormModel>({ category: '' });

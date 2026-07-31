@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -82,7 +81,6 @@ import { PackageManagerService } from './package-manager.service';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PackageManagerInstall {
   private readonly packageManagerService = inject(PackageManagerService);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -30,7 +29,6 @@ import { ComponentStatusBadge } from '../component-status-badge/component-status
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentBadges {
   private readonly componentsService = inject(ComponentsService);

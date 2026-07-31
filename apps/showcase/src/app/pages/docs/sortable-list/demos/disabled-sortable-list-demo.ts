@@ -1,9 +1,5 @@
 import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-disabled-sortable-list-demo',
@@ -29,7 +25,6 @@ import {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledSortableListDemo {
   readonly items = ['Item 1', 'Item 2', 'Item 3'];

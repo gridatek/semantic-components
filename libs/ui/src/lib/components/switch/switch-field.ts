@@ -1,6 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -34,7 +33,6 @@ import { ScSwitchVisual } from './switch-visual';
     <span scSwitchVisual></span>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSwitchField implements ScSwitchContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   InjectionToken,
@@ -39,7 +38,6 @@ export const SC_AUDIO_PLAYER = new InjectionToken<ScAudioPlayer>(
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAudioPlayer {
   private readonly destroyRef = inject(DestroyRef);

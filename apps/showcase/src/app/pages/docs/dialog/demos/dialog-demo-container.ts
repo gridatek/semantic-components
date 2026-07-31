@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ScDialogDemo } from './dialog-demo';
 
@@ -15,15 +15,9 @@ import { ScDialogDemo } from './dialog-demo';
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDialogDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScDialog,
@@ -107,7 +101,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDialogDemo {
   readonly isOpen = signal(false);

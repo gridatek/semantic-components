@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { VideoAspectRatioDemo } from './video-aspect-ratio-demo';
 
@@ -20,14 +16,9 @@ import { VideoAspectRatioDemo } from './video-aspect-ratio-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoAspectRatioDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio } from '@semantic-components/ui';
 import { SiPlayIcon } from '@semantic-icons/lucide-icons';
 
@@ -45,7 +36,6 @@ import { SiPlayIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoAspectRatioDemo {}`;
 }

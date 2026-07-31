@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -40,7 +39,6 @@ import { ScLanguageService } from './language.service';
     </select>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLanguageSelect {
   private readonly languageService = inject(ScLanguageService);

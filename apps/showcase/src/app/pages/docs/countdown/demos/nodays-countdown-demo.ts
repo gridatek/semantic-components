@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCountdown } from '@semantic-components/ui-lab';
 
 @Component({
@@ -41,7 +37,6 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NodaysCountdownDemo {
   readonly shortFuture = new Date(Date.now() + 2 * 60 * 60 * 1000);

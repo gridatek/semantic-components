@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { CustomOverlaySpotlightDemo } from './custom-overlay-spotlight-demo';
 
@@ -16,15 +12,9 @@ import { CustomOverlaySpotlightDemo } from './custom-overlay-spotlight-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomOverlaySpotlightDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  viewChild,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, viewChild } from '@angular/core';
 import {
   ScSpotlight,
   ScSpotlightActions,
@@ -108,7 +98,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomOverlaySpotlightDemo {
   private readonly spotlight = viewChild.required<ScSpotlight>('spotlight');

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScQrCode, ScQrCodeDownload } from '@semantic-components/ui-lab';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
@@ -32,6 +28,5 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DownloadQrCodeDemo {}

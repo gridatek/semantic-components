@@ -1,6 +1,5 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -20,7 +19,6 @@ import { cn } from '@semantic-components/ui';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavbar {
   readonly elementRef = inject(ElementRef);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -25,7 +24,6 @@ type ScBackdropState = 'idle' | 'open' | 'closed';
     '(animationend)': 'onAnimationEnd($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScBackdrop {
   private readonly elementRef = inject(ElementRef);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -51,7 +50,6 @@ import type { ScVideoSource, ScVideoTrack } from './video-player-types';
     '(volumechange)': 'onVolumeChange()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVideoPlayerVideo {
   protected readonly player = inject(SC_VIDEO_PLAYER);

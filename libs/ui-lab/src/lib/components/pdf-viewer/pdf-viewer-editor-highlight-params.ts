@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -196,7 +195,6 @@ const HIGHLIGHT_COLORS = [
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerEditorHighlightParams {
   readonly pdfViewer = inject(SC_PDF_VIEWER);

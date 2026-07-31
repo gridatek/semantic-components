@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BasicVirtualListDemo } from './basic-virtual-list-demo';
 
@@ -20,7 +16,6 @@ import { BasicVirtualListDemo } from './basic-virtual-list-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicVirtualListDemoContainer {
   readonly code = `import {
@@ -28,12 +23,7 @@ export class BasicVirtualListDemoContainer {
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 
 @Component({
   selector: 'app-basic-virtual-list-demo',
@@ -62,7 +52,6 @@ import {
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicVirtualListDemo {
   readonly items = signal<string[]>(

@@ -1,10 +1,5 @@
 import { Temporal } from '@js-temporal/polyfill';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
@@ -121,7 +116,6 @@ import {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledDatesCalendarDemo {
   readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);

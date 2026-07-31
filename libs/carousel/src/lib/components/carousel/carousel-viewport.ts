@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -18,7 +17,6 @@ import { cn } from '@semantic-components/ui';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarouselViewport {
   private readonly elementRef = inject(ElementRef<HTMLElement>);

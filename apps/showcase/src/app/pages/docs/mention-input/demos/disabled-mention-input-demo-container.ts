@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { DisabledMentionInputDemo } from './disabled-mention-input-demo';
 
@@ -16,14 +12,9 @@ import { DisabledMentionInputDemo } from './disabled-mention-input-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledMentionInputDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScMentionInput,
@@ -77,7 +68,6 @@ import type { MentionUser } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DisabledMentionInputDemo {
   readonly sampleUsers: MentionUser[] = [

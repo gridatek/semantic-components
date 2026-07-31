@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -124,7 +123,6 @@ import { CHART_COLORS, ChartDataPoint } from './chart-types';
     class: 'relative block',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLineChart {
   private readonly container = inject(SC_CHART, { optional: true });

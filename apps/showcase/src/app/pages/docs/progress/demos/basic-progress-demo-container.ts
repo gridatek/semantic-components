@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BasicProgressDemo } from './basic-progress-demo';
 
@@ -16,17 +12,9 @@ import { BasicProgressDemo } from './basic-progress-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicProgressDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, OnDestroy, OnInit, ViewEncapsulation, signal } from '@angular/core';
 import { ScProgress } from '@semantic-components/ui';
 
 @Component({
@@ -40,7 +28,6 @@ import { ScProgress } from '@semantic-components/ui';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicProgressDemo implements OnInit, OnDestroy {
   readonly progress = signal(13);

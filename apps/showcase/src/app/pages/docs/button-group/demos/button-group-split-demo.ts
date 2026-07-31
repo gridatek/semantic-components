@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScButtonGroup,
@@ -58,6 +54,5 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </ng-template>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupSplitDemo {}

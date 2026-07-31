@@ -1,6 +1,5 @@
 import { Temporal } from '@js-temporal/polyfill';
 import {
-  ChangeDetectionStrategy,
   Component,
   LOCALE_ID,
   ViewEncapsulation,
@@ -102,7 +101,6 @@ export type ScCalendarValue =
     <ng-content select="[scCalendarFooter]" />
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCalendar {
   private readonly locale = inject(LOCALE_ID);

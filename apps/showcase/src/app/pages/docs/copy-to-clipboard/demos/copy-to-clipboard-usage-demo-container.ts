@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -56,18 +51,13 @@ import { CopyToClipboardUsageDemo } from './copy-to-clipboard-usage-demo';
   `,
   host: { class: 'block w-full space-y-4' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyToClipboardUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
 
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
@@ -92,7 +82,6 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyToClipboardUsageDemo {
   readonly text = 'Hello, world!';

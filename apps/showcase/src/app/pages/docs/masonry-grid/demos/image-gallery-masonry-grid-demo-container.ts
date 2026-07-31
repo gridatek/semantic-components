@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ImageGalleryMasonryGridDemo } from './image-gallery-masonry-grid-demo';
 
@@ -16,15 +12,9 @@ import { ImageGalleryMasonryGridDemo } from './image-gallery-masonry-grid-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageGalleryMasonryGridDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
 
 @Component({
@@ -56,7 +46,6 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageGalleryMasonryGridDemo {
   readonly images = signal([

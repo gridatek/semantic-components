@@ -1,6 +1,5 @@
 import { Toolbar } from '@angular/aria/toolbar';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -32,7 +31,6 @@ import { cn } from '../../utils';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToolbar {
   protected readonly toolbar = inject(Toolbar);

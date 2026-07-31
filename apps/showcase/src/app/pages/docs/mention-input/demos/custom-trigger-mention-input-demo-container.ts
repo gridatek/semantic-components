@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { CustomTriggerMentionInputDemo } from './custom-trigger-mention-input-demo';
 
@@ -16,14 +12,9 @@ import { CustomTriggerMentionInputDemo } from './custom-trigger-mention-input-de
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomTriggerMentionInputDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScMentionInput,
@@ -81,7 +72,6 @@ import type { MentionUser } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomTriggerMentionInputDemo {
   readonly channelList: MentionUser[] = [

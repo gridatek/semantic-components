@@ -1,11 +1,5 @@
 import type { Table } from '@tanstack/angular-table';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
   ScPagination,
   type ScPaginationChange,
@@ -29,7 +23,6 @@ import {
 
 @Component({
   selector: 'app-data-table-pagination',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
     ScPagination,

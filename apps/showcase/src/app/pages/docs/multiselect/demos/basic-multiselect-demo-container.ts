@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BasicMultiselectDemo } from './basic-multiselect-demo';
 
@@ -20,18 +16,10 @@ import { BasicMultiselectDemo } from './basic-multiselect-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicMultiselectDemoContainer {
   readonly code = `import { JsonPipe, NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal, viewChild } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScField,
@@ -196,7 +184,6 @@ interface FormModel {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicMultiselectDemo {
   private readonly multiselect = viewChild.required(ScMultiselect);

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScColorPicker,
   ScColorPickerArea,
@@ -61,7 +56,6 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EyedropperColorPickerDemo {
   readonly color = signal('#8b5cf6');

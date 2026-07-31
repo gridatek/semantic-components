@@ -3,13 +3,7 @@ import {
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 
 @Component({
   selector: 'app-scroll-controls-virtual-list-demo',
@@ -69,7 +63,6 @@ import {
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollControlsVirtualListDemo {
   readonly viewport = viewChild(CdkVirtualScrollViewport);

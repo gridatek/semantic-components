@@ -1,6 +1,5 @@
 import { JsonPipe, NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -171,7 +170,6 @@ interface FormModel {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicMultiselectDemo {
   private readonly multiselect = viewChild.required(ScMultiselect);

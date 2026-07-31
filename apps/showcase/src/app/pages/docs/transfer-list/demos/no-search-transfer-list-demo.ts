@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTransferList,
   ScTransferListActions,
@@ -81,7 +76,6 @@ import type { TransferListItem } from '@semantic-components/ui-lab';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoSearchTransferListDemo {
   readonly sourceItems = signal<TransferListItem[]>([

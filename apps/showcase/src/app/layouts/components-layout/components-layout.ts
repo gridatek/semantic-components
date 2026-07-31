@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -70,7 +69,6 @@ import { ComponentsService } from '../../services/components.service';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentsLayout {
   readonly classInput = input<string>('', { alias: 'class' });

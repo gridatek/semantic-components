@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -37,7 +36,6 @@ export type ScQrCodeEcc = 'L' | 'M' | 'Q' | 'H';
     '[attr.viewBox]': 'viewBox()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScQrCode {
   readonly nativeElement = inject(ElementRef<SVGSVGElement>).nativeElement;

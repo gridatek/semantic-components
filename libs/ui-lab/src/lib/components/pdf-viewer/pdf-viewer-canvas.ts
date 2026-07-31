@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -302,7 +301,6 @@ interface PageLayout {
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerCanvas {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);

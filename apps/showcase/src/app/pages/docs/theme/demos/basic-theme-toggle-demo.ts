@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScButton,
   ScThemeManager,
@@ -38,7 +33,6 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicThemeToggleDemo {
   protected readonly themeManager = inject(ScThemeManager);

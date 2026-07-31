@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCountdown } from '@semantic-components/ui-lab';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
@@ -33,7 +29,6 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaleCountdownDemo {
   readonly shortFuture = new Date(Date.now() + 2 * 60 * 60 * 1000);

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SizesDockDemo } from './sizes-dock-demo';
 
@@ -16,15 +12,10 @@ import { SizesDockDemo } from './sizes-dock-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SizesDockDemoContainer {
   readonly code = `import { NgComponentOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScDock, ScDockItem, ScDockItems } from '@semantic-components/ui-lab';
 import type { DockItem } from '@semantic-components/ui-lab';
 import {
@@ -95,7 +86,6 @@ import {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SizesDockDemo {
   readonly items: DockItem[] = [

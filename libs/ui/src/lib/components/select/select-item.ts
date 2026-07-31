@@ -1,6 +1,5 @@
 import { Option } from '@angular/aria/listbox';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -27,7 +26,6 @@ import { cn } from '../../utils';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelectItem {
   readonly classInput = input<string>('', { alias: 'class' });

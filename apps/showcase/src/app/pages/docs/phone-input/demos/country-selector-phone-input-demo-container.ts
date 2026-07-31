@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { CountrySelectorPhoneInputDemo } from './country-selector-phone-input-demo';
 
@@ -16,17 +12,9 @@ import { CountrySelectorPhoneInputDemo } from './country-selector-phone-input-de
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountrySelectorPhoneInputDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  model,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, model, signal } from '@angular/core';
 import {
   ScCombobox,
   ScComboboxDialog,
@@ -204,7 +192,6 @@ const COUNTRIES: Country[] = [
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountrySelectorPhoneInputDemo {
   protected readonly searchString = signal('');

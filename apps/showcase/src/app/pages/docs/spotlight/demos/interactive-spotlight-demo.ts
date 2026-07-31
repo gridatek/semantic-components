@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, viewChild } from '@angular/core';
 import {
   ScSpotlight,
   ScSpotlightActions,
@@ -89,7 +84,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InteractiveSpotlightDemo {
   private readonly spotlight = viewChild.required<ScSpotlight>('spotlight');

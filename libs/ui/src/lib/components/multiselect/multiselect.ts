@@ -2,7 +2,6 @@ import { Combobox, ComboboxPopup } from '@angular/aria/combobox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -65,7 +64,6 @@ const positions = [
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMultiselect {
   readonly classInput = input<string>('', { alias: 'class' });

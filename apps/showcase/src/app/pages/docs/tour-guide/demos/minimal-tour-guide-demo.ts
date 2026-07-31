@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScTourGuide,
   ScTourGuideAction,
@@ -99,7 +94,6 @@ import type { TourOptions } from '@semantic-components/ui-lab';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinimalTourGuideDemo {
   protected readonly tourService = inject(TourService);

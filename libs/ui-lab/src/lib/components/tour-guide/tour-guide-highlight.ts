@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -15,7 +14,6 @@ import { ScTourGuideState } from './tour-guide-state';
     <div class="bg-primary/10 absolute inset-0 animate-pulse rounded-lg"></div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[class]': 'class()',
     '[style.top.px]': 'top()',

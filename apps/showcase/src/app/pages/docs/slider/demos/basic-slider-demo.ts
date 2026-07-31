@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
 
 @Component({
@@ -17,7 +12,6 @@ import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicSliderDemo {
   readonly value = signal(50);

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { FeaturedDataTableDemo } from './featured-data-table-demo';
 
@@ -16,16 +12,9 @@ import { FeaturedDataTableDemo } from './featured-data-table-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeaturedDataTableDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
 import {
   ColumnDef,
@@ -271,7 +260,6 @@ const SAMPLE_DATA: User[] = [
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeaturedDataTableDemo {
   readonly data = SAMPLE_DATA;

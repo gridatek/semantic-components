@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
 
 @Component({
@@ -43,7 +38,6 @@ import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsMasonryGridDemo {
   readonly cards = signal([

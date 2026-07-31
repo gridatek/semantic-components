@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -31,7 +30,6 @@ const MIN_THUMB_SIZE = 20;
     ></div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScScrollBar {
   private readonly scrollArea = inject(SC_SCROLL_AREA);

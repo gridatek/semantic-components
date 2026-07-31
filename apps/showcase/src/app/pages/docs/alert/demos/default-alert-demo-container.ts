@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { DefaultAlertDemo } from './default-alert-demo';
 
@@ -15,14 +15,9 @@ import { DefaultAlertDemo } from './default-alert-demo';
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultAlertDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,
   ScAlertDescription,
@@ -44,7 +39,6 @@ import { SiCircleAlertIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultAlertDemo {}`;
 }

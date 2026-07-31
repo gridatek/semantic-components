@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -56,19 +51,13 @@ import { PasswordUsageDemo } from './password-usage-demo';
   `,
   host: { class: 'block w-full space-y-4' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
 
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
@@ -113,7 +102,6 @@ import {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordUsageDemo {
   readonly formModel = signal({ password: '' });

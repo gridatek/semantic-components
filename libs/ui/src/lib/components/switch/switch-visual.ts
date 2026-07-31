@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -21,7 +20,6 @@ import { SC_SWITCH_FIELD } from './switch-types';
     <span [class]="thumbClass()"></span>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSwitchVisual {
   readonly switchField = inject(SC_SWITCH_FIELD);

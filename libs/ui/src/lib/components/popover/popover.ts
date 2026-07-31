@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -28,7 +27,6 @@ type ScPopoverState = 'open' | 'closed';
     '(animationend)': 'onAnimationEnd($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPopover {
   private readonly elementRef = inject(ElementRef<HTMLElement>);

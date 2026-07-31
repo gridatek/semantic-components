@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ButtonGroupSplitDemo } from './button-group-split-demo';
 
@@ -20,14 +16,9 @@ import { ButtonGroupSplitDemo } from './button-group-split-demo';
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupSplitDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScButtonGroup,
@@ -83,7 +74,6 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </ng-template>
     </div>
   \`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupSplitDemo {}`;
 }

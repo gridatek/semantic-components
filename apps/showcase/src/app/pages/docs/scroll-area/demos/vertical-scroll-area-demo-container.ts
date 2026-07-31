@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { VerticalScrollAreaDemo } from './vertical-scroll-area-demo';
 
@@ -16,14 +12,9 @@ import { VerticalScrollAreaDemo } from './vertical-scroll-area-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerticalScrollAreaDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScScrollArea } from '@semantic-components/ui';
 
 interface Tag {
@@ -51,7 +42,6 @@ interface Tag {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerticalScrollAreaDemo {
   readonly tags: Tag[] = Array.from({ length: 50 }, (_, i) => ({

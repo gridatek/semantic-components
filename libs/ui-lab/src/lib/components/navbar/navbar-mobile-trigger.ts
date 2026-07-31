@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -23,7 +22,6 @@ import { ScNavbarProvider } from './navbar-provider';
     '(click)': 'toggleMenu()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavbarMobileTrigger {
   readonly provider = inject(ScNavbarProvider);

@@ -1,10 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScButton } from '@semantic-components/ui';
 
@@ -33,7 +28,6 @@ import { ScButton } from '@semantic-components/ui';
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ServerErrorPage {
   private readonly document = inject(DOCUMENT);

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BasicToggleLanguageSwitcherDemo } from './basic-toggle-language-switcher-demo';
 
@@ -16,15 +12,9 @@ import { BasicToggleLanguageSwitcherDemo } from './basic-toggle-language-switche
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicToggleLanguageSwitcherDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScLanguageService,
   ScLanguageToggle,
@@ -43,7 +33,6 @@ import {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicToggleLanguageSwitcherDemo {
   protected readonly languageService = inject(ScLanguageService);

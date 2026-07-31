@@ -1,6 +1,5 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -27,7 +26,6 @@ import { ScNavigationMenuTriggerIcon } from './navigation-menu-trigger-icon';
     '[attr.data-state]': 'menuItem.open() ? "open" : "closed"',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavigationMenuTrigger {
   readonly menuItem = inject(ScNavigationMenuItem);

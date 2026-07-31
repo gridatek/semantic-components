@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
 import { DataTable } from './data-table';
 import { columns } from './data-table-columns';
 import type { User } from './user.service';
@@ -12,7 +6,6 @@ import { UserService } from './user.service';
 
 @Component({
   selector: 'app-data-table-page',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [DataTable],
   host: { class: 'block' },

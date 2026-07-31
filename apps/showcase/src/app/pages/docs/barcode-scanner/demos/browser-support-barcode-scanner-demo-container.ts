@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BrowserSupportBarcodeScannerDemo } from './browser-support-barcode-scanner-demo';
 
@@ -21,14 +17,9 @@ import { BrowserSupportBarcodeScannerDemo } from './browser-support-barcode-scan
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrowserSupportBarcodeScannerDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-browser-support-barcode-scanner-demo',
@@ -48,7 +39,6 @@ export class BrowserSupportBarcodeScannerDemoContainer {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BrowserSupportBarcodeScannerDemo {}`;
 }

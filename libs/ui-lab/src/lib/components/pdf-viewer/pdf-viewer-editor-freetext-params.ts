@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -38,7 +37,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerEditorFreetextParams {
   readonly pdfViewer = inject(SC_PDF_VIEWER);

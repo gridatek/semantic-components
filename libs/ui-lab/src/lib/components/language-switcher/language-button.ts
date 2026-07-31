@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -39,7 +38,6 @@ import {
     <svg siChevronDownIcon class="size-4" aria-hidden="true"></svg>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLanguageButton {
   private readonly languageService = inject(ScLanguageService);

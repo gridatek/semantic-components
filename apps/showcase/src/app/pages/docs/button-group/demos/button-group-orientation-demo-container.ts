@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ButtonGroupOrientationDemo } from './button-group-orientation-demo';
 
@@ -20,14 +16,9 @@ import { ButtonGroupOrientationDemo } from './button-group-orientation-demo';
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupOrientationDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScButtonGroup } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
@@ -46,7 +37,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
       </button>
     </div>
   \`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupOrientationDemo {}`;
 }

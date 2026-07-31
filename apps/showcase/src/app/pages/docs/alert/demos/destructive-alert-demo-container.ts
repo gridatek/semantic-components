@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { DestructiveAlertDemo } from './destructive-alert-demo';
 
@@ -15,14 +15,9 @@ import { DestructiveAlertDemo } from './destructive-alert-demo';
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DestructiveAlertDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,
   ScAlertDescription,
@@ -44,7 +39,6 @@ import { SiTriangleAlertIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DestructiveAlertDemo {}`;
 }

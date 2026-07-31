@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -27,7 +26,6 @@ import { SC_CHECKBOX_FIELD } from './checkbox-types';
     }
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCheckboxVisual {
   readonly checkbox = inject(SC_CHECKBOX_FIELD);

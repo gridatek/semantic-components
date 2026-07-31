@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -141,7 +137,6 @@ import { CodeViewerUsageDemoContainer } from '../docs/code-viewer/demos/code-vie
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CodeInstallPage {
   readonly stylesCode = '@import "@semantic-components/code/styles";';

@@ -3,7 +3,6 @@ import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   TemplateRef,
   ViewContainerRef,
@@ -41,7 +40,6 @@ import { ScAlertDialogPortal } from './alert-dialog-portal';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAlertDialogProvider {
   private readonly overlay = inject(Overlay);

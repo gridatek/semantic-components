@@ -1,11 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, inject } from '@angular/core';
 import { SC_IMAGE_CROPPER } from './image-cropper';
 
 @Component({
@@ -46,7 +40,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     class: 'pointer-events-none absolute inset-0',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCropperOverlay {
   protected readonly cropper = inject(SC_IMAGE_CROPPER);

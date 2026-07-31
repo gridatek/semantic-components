@@ -1,10 +1,5 @@
 import { Location } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScButton } from '@semantic-components/ui';
 
@@ -31,7 +26,6 @@ import { ScButton } from '@semantic-components/ui';
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class NotFoundPage {
   private readonly location = inject(Location);

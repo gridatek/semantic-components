@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 import { ScSkeleton } from '../skeleton';
 
@@ -25,7 +19,6 @@ import { ScSkeleton } from '../skeleton';
     ></div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSidebarMenuSkeleton {
   readonly classInput = input<string>('', { alias: 'class' });

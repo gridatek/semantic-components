@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { DuplicatesTagsInputDemo } from './duplicates-tags-input-demo';
 
@@ -16,15 +12,9 @@ import { DuplicatesTagsInputDemo } from './duplicates-tags-input-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DuplicatesTagsInputDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScTagsInput,
@@ -70,7 +60,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DuplicatesTagsInputDemo {
   readonly tags = signal<string[]>(['hello']);

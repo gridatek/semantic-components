@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -20,7 +19,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     '(pause)': 'player.isPlaying.set(false)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAudioPlayerAudio {
   readonly player = inject(SC_AUDIO_PLAYER);

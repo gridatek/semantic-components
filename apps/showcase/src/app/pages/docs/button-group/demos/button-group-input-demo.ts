@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScButtonGroup, ScInput } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 
@@ -28,6 +24,5 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
       </button>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupInputDemo {}

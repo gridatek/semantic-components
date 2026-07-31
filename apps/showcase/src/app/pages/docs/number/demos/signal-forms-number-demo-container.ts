@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SignalFormsNumberDemo } from './signal-forms-number-demo';
 
@@ -20,15 +16,9 @@ import { SignalFormsNumberDemo } from './signal-forms-number-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SignalFormsNumberDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, max, min, required } from '@angular/forms/signals';
 import {
   ScButtonGroup,
@@ -112,7 +102,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsNumberDemo {
   private readonly formModel = signal<{ quantity: number | null }>({

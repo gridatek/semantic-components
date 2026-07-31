@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -29,7 +28,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAudioPlayerTrackInfo {
   readonly player = inject(SC_AUDIO_PLAYER);

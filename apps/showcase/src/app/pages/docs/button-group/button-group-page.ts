@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -48,6 +44,5 @@ import { ButtonGroupSplitDemoContainer } from './demos/button-group-split-demo-c
       </section>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ButtonGroupPage {}

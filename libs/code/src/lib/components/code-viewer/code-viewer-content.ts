@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -45,7 +44,6 @@ export type ScCodeViewerLanguage =
     '[class]': 'wrapperClass()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCodeViewerContent {
   readonly code = input.required<string>();

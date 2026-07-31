@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -41,7 +40,6 @@ import { SC_SCROLL_AREA, type ScScrollAreaContext } from './scroll-area-types';
     }
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScScrollArea implements ScScrollAreaContext {
   readonly classInput = input<string>('', { alias: 'class' });

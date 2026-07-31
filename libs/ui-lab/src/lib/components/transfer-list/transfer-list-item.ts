@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -31,7 +30,6 @@ import type { TransferListItem } from './transfer-list-types';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTransferListItem {
   readonly classInput = input<string>('', { alias: 'class' });

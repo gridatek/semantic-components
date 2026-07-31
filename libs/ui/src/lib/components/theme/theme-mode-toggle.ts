@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject, input } from '@angular/core';
 import { ScThemeManager } from './theme-manager';
 
 @Component({
@@ -19,7 +13,6 @@ import { ScThemeManager } from './theme-manager';
     <ng-content />
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScThemeModeToggle {
   private readonly themeManager = inject(ScThemeManager);

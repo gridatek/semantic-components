@@ -1,10 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScTagsInput,
@@ -49,7 +44,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OutputTagsInputDemo {
   readonly tags = signal<string[]>(['Angular', 'TypeScript']);

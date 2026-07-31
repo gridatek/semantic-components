@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ButtonGroupSizeDemo } from './button-group-size-demo';
 
@@ -20,14 +16,9 @@ import { ButtonGroupSizeDemo } from './button-group-size-demo';
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupSizeDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScButtonGroup } from '@semantic-components/ui';
 import { SiPlusIcon } from '@semantic-icons/lucide-icons';
 
@@ -63,7 +54,6 @@ import { SiPlusIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupSizeDemo {}`;
 }

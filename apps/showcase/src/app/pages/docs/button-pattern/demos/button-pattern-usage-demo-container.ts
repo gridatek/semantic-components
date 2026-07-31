@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -56,18 +51,13 @@ import { ButtonPatternUsageDemo } from './button-pattern-usage-demo';
   `,
   host: { class: 'block w-full space-y-4' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonPatternUsageDemoContainer {
   private readonly config = inject(ConfigService);
 
   protected readonly devMode = this.config.devMode;
 
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButtonPattern } from '@semantic-components/ui-lab';
 
 @Component({
@@ -78,7 +68,6 @@ import { ScButtonPattern } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonPatternUsageDemo {
   handleClick() {

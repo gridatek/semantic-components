@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScLink, cn } from '@semantic-components/ui';
 
@@ -38,7 +32,6 @@ import { ScLink, cn } from '@semantic-components/ui';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CtaSection {
   readonly classInput = input<string>('', { alias: 'class' });

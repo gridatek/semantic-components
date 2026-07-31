@@ -1,16 +1,9 @@
 import { AccordionGroup } from '@angular/aria/accordion';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Component({
   selector: '[scAccordionGroup]',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   hostDirectives: [
     {

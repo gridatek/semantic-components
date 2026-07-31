@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ThemeSelectDemo } from './theme-select-demo';
 
@@ -20,15 +16,9 @@ import { ThemeSelectDemo } from './theme-select-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSelectDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScLabel,
   ScNativeSelect,
@@ -61,7 +51,6 @@ import {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSelectDemo {
   protected readonly themeManager = inject(ScThemeManager);

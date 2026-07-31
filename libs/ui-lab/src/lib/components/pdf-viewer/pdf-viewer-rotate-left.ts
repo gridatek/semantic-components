@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -21,7 +20,6 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
     '(click)': 'pdfViewer.rotateLeft()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerRotateLeft {
   readonly pdfViewer = inject(SC_PDF_VIEWER);

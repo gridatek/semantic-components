@@ -1,6 +1,5 @@
 import type { Table } from '@tanstack/angular-table';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -16,7 +15,6 @@ import {
 
 @Component({
   selector: 'app-data-table-toolbar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [ScButton, ScCheckbox, ScCheckboxField, ScInput],
   host: { class: 'mb-4 flex flex-wrap items-center gap-4' },

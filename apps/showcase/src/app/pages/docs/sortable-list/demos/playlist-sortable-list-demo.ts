@@ -5,12 +5,7 @@ import {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 interface PlaylistItem {
@@ -85,7 +80,6 @@ interface PlaylistItem {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlaylistSortableListDemo {
   readonly playlist = signal<PlaylistItem[]>([

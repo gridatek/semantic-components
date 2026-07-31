@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import { SiBoldIcon } from '@semantic-icons/lucide-icons';
 
@@ -17,7 +12,6 @@ import { SiBoldIcon } from '@semantic-icons/lucide-icons';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicToggleDemo {
   readonly bold = signal(false);

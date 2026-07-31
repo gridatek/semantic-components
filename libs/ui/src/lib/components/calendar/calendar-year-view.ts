@@ -1,7 +1,6 @@
 import { Temporal } from '@js-temporal/polyfill';
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -64,7 +63,6 @@ interface YearInfo {
     </table>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCalendarYearView {
   private readonly _yearButtons = viewChildren(GridCellWidget);
