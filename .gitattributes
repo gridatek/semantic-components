@@ -1,0 +1,15 @@
+# Normalize line endings to LF, both in the repository and in working trees on
+# every platform.
+#
+# Without this, `core.autocrlf=true` (the Git for Windows default) checks files
+# out with CRLF. Scripts that embed file contents into generated string
+# literals — scripts/sync-demo-code.mjs, which writes the `code` property of
+# every *-demo-container.ts — then bake the \r into those literals, so
+# scripts/validate-demo-code.mjs reports mismatches that do not exist for
+# contributors on LF platforms.
+#
+# `text=auto` still lets Git detect and leave binary files untouched.
+* text=auto eol=lf
+
+# Explicitly binary, so Git never attempts line-ending conversion on them.
+*.ico binary
