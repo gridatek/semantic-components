@@ -4,8 +4,8 @@ import {
   readFileSync,
   readdirSync,
   writeFileSync,
-} from 'fs';
-import { join, resolve } from 'path';
+} from 'node:fs';
+import { join, resolve } from 'node:path';
 
 interface ComponentMeta {
   name: string;

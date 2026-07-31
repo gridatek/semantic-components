@@ -1,11 +1,9 @@
 #!/usr/bin/env node
-import { existsSync, readFileSync, readdirSync } from 'fs';
-import { basename, dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { existsSync, globSync, readFileSync } from 'node:fs';
+import { basename, dirname, join } from 'node:path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 const DOCS_DIR = join(
-  __dirname,
+  import.meta.dirname,
   '..',
   'apps',
   'showcase',
@@ -16,13 +14,9 @@ const DOCS_DIR = join(
 );
 
 function findFiles(dir, pattern) {
-  const results = [];
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const fullPath = join(dir, entry.name);
-    if (entry.isDirectory()) results.push(...findFiles(fullPath, pattern));
-    else if (entry.isFile() && pattern.test(entry.name)) results.push(fullPath);
-  }
-  return results;
+  return globSync(pattern, { cwd: dir })
+    .sort()
+    .map((relativePath) => join(dir, relativePath));
 }
 
 function escapeForTemplateLiteral(str) {
@@ -47,7 +41,7 @@ function findClosingBacktick(content, startIndex) {
   return -1;
 }
 
-const containerFiles = findFiles(DOCS_DIR, /-demo-container\.ts$/);
+const containerFiles = findFiles(DOCS_DIR, '**/*-demo-container.ts');
 let mismatches = 0;
 
 for (const containerPath of containerFiles) {

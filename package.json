@@ -9,6 +9,9 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "private": true,
+  "engines": {
+    "node": ">=26.0.0"
+  },
   "dependencies": {
     "@angular/aria": "22.0.5",
     "@angular/cdk": "22.0.5",
@@ -68,7 +71,7 @@
     "@nx/playwright": "23.1.0",
     "@nx/web": "23.1.0",
     "@nx/workspace": "23.1.0",
-    "@playwright/test": "^1.36.0",
+    "@playwright/test": "^1.62.1",
     "@schematics/angular": "22.0.7",
     "@swc-node/register": "1.11.1",
     "@swc/core": "1.15.8",
@@ -79,7 +82,7 @@
     "@types/d3-scale": "^4.0.9",
     "@types/d3-shape": "^3.1.8",
     "@types/express": "^5.0.1",
-    "@types/node": "^20.17.19",
+    "@types/node": "^26.1.2",
     "@types/zxcvbn": "^4.4.5",
     "@typescript-eslint/utils": "8.65.0",
     "angular-eslint": "22.1.0",

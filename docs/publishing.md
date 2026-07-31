@@ -73,5 +73,6 @@ When `nx release` bumps versions, it automatically updates these peer dependency
 
 ## Prerequisites
 
+- Node.js 26 or later
 - `NPM_TOKEN` secret configured in GitHub repository settings (for CI)
 - npm account with publish access to the `@semantic-components` scope

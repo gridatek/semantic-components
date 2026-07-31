@@ -2,6 +2,10 @@
 
 A collection of accessible, customizable UI components for Angular applications.
 
+## Requirements
+
+- **Node.js 26 or later** (see `.nvmrc`)
+
 ## Features
 
 ### Modern Angular Architecture
