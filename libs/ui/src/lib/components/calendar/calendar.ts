@@ -24,10 +24,7 @@ export interface ScDateRange {
 }
 
 export type ScCalendarValue =
-  | Temporal.PlainDate
-  | Temporal.PlainDate[]
-  | ScDateRange
-  | undefined;
+  Temporal.PlainDate | Temporal.PlainDate[] | ScDateRange | undefined;
 
 @Component({
   selector: 'div[scCalendar]',

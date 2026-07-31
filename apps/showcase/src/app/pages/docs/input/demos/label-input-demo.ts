@@ -25,8 +25,7 @@ invalid: {{ emailForm.email().invalid() }}
 disabled: {{ emailForm.email().disabled() }}
 dirty: {{ emailForm.email().dirty() }}
 value: "{{ emailForm.email().value() }}"
-        </pre
-        >
+        </pre>
       </div>
     </div>
   `,

@@ -200,8 +200,7 @@ import {
                   rows="4"
                   (input)="onBioInput($event)"
                 >
-Product designer with 8+ years of experience in SaaS applications. Passionate about creating intuitive user experiences.</textarea
-                >
+Product designer with 8+ years of experience in SaaS applications. Passionate about creating intuitive user experiences.</textarea>
                 <p class="text-muted-foreground text-xs">
                   {{ bioLength() }}/300 characters
                 </p>

@@ -268,7 +268,7 @@ Access the Angular ARIA `TreeItem` instance to programmatically control expansio
         </ul>
       </li>
     </ul>
-    <button (click)="item.treeItem.expanded.update(v => !v)">Toggle Item</button>
+    <button (click)="item.treeItem.expanded.update((v) => !v)">Toggle Item</button>
   `,
 })
 export class MyComponent {}

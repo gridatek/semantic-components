@@ -24,8 +24,7 @@ invalid: {{ disabledForm.text().invalid() }}
 disabled: {{ disabledForm.text().disabled() }}
 dirty: {{ disabledForm.text().dirty() }}
 value: "{{ disabledForm.text().value() }}"
-        </pre
-        >
+        </pre>
       </div>
     </div>
   `,

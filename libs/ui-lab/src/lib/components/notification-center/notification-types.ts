@@ -1,9 +1,5 @@
 export type NotificationType =
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'message';
+  'info' | 'success' | 'warning' | 'error' | 'message';
 
 export interface Notification {
   id: string;
