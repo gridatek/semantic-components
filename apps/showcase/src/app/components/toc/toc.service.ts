@@ -1,4 +1,4 @@
-import { DestroyRef, Injectable, inject, signal } from '@angular/core';
+import { DestroyRef, Service, inject, signal } from '@angular/core';
 
 export interface TocItem {
   id: string;
@@ -6,9 +6,7 @@ export interface TocItem {
   level: number;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class TocService {
   private readonly destroyRef = inject(DestroyRef);
   private observer: IntersectionObserver | null = null;

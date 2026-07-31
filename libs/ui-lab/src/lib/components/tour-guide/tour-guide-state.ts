@@ -1,8 +1,8 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Service, computed, inject, signal } from '@angular/core';
 import type { TargetRect } from './tour-guide-types';
 import { TourService } from './tour-service';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ScTourGuideState {
   private readonly tourService = inject(TourService);
 

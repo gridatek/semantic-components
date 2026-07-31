@@ -1,7 +1,7 @@
-import { Injectable, type Signal, computed, signal } from '@angular/core';
+import { Service, type Signal, computed, signal } from '@angular/core';
 import type { Annotation, AnnotationTool } from './image-annotator-types';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ScImageAnnotatorState {
   src!: Signal<string>;
   width!: Signal<number>;

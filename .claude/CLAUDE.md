@@ -69,5 +69,6 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 ## Services
 
 - Design services around a single responsibility
-- Use the `providedIn: 'root'` option for singleton services
-- Use the `inject()` function instead of constructor injection
+- Use `@Service()` (Angular v22+) instead of `@Injectable({ providedIn: 'root' })` for singleton services
+- Use `@Service({ autoProvided: false })` instead of bare `@Injectable()` for services provided in a component's `providers` array
+- Use the `inject()` function instead of constructor injection. `@Service` classes MUST NOT use constructor DI — the compiler rejects it (`@Service class cannot use constructor dependency injection. Use the inject function instead.`)

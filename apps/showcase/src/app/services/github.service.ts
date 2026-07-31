@@ -1,9 +1,7 @@
 import { httpResource } from '@angular/common/http';
-import { Injectable, computed } from '@angular/core';
+import { Service, computed } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class GithubService {
   private readonly repoResource = httpResource<{ stargazers_count: number }>(
     () => 'https://api.github.com/repos/gridatek/semantic-components',

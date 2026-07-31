@@ -1,7 +1,7 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Service, computed, signal } from '@angular/core';
 import type { TourOptions, TourStep } from './tour-guide-types';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class TourService {
   private readonly _isActive = signal(false);
   private readonly _currentStep = signal(0);

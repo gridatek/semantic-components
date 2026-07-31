@@ -1,7 +1,7 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ElementRef,
-  Injectable,
+  Service,
   type Signal,
   type WritableSignal,
   computed,
@@ -10,7 +10,7 @@ import {
 import { getCaretOffset } from './mention-input-caret';
 import type { MentionUser } from './mention-input-types';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ScMentionInputState {
   users!: Signal<MentionUser[]>;
   trigger!: Signal<string>;

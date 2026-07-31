@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 
 export interface User {
   id: number;
@@ -438,7 +438,7 @@ const USERS: User[] = [
   },
 ];
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class UserService {
   getUsers(): User[] {
     return USERS;

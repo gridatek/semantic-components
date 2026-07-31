@@ -1,10 +1,4 @@
-import {
-  DestroyRef,
-  Injectable,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { DestroyRef, Service, computed, inject, signal } from '@angular/core';
 
 export interface TargetRect {
   top: number;
@@ -15,7 +9,7 @@ export interface TargetRect {
 
 let nextMaskId = 0;
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ScSpotlightState {
   private readonly destroyRef = inject(DestroyRef);
 

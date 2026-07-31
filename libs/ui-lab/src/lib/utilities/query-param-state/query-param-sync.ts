@@ -1,8 +1,8 @@
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import type { QueryParamOptions } from './query-param-types';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class QueryParamSyncService {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);

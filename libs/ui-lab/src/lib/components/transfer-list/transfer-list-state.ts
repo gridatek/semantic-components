@@ -1,12 +1,7 @@
-import {
-  Injectable,
-  type WritableSignal,
-  computed,
-  signal,
-} from '@angular/core';
+import { Service, type WritableSignal, computed, signal } from '@angular/core';
 import type { TransferListItem } from './transfer-list-types';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ScTransferListState {
   sourceItems!: WritableSignal<TransferListItem[]>;
   targetItems!: WritableSignal<TransferListItem[]>;
