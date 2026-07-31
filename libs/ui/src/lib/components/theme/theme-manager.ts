@@ -1,6 +1,6 @@
 import {
-  Injectable,
   InjectionToken,
+  Service,
   computed,
   effect,
   inject,
@@ -27,7 +27,7 @@ export const SC_THEME_CONFIG = new InjectionToken<Partial<ScThemeConfig>>(
   'SC_THEME_CONFIG',
 );
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ScThemeManager {
   private readonly config = {
     ...defaultConfig,

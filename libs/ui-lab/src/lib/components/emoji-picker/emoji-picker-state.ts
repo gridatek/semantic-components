@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Service, computed, signal } from '@angular/core';
 
 export interface Emoji {
   emoji: string;
@@ -13,7 +13,7 @@ export interface EmojiCategory {
   emojis: Emoji[];
 }
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ScEmojiPickerState {
   readonly categories = signal<EmojiCategory[]>([]);
   readonly searchQuery = signal<string>('');

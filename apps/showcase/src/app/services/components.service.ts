@@ -1,11 +1,9 @@
 import { httpResource } from '@angular/common/http';
-import { Injectable, computed, inject } from '@angular/core';
+import { Service, computed, inject } from '@angular/core';
 import { ComponentItem } from '../data/components';
 import { ConfigService } from './config.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ComponentsService {
   private readonly configService = inject(ConfigService);
 

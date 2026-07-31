@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import {
-  Injectable,
   InjectionToken,
+  Service,
   computed,
   inject,
   signal,
@@ -40,7 +40,7 @@ export const SC_LANGUAGE_CONFIG = new InjectionToken<LanguageConfig>(
   },
 );
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ScLanguageService {
   private readonly document = inject(DOCUMENT);
   private readonly config = inject(SC_LANGUAGE_CONFIG);

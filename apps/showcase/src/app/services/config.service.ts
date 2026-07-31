@@ -1,13 +1,11 @@
 import { httpResource } from '@angular/common/http';
-import { Injectable, computed } from '@angular/core';
+import { Service, computed } from '@angular/core';
 
 interface AppConfig {
   devMode: boolean;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ConfigService {
   private readonly configResource = httpResource<AppConfig>(
     () => 'config.json',

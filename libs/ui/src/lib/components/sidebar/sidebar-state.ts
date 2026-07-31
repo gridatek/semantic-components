@@ -1,6 +1,6 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Service, computed, signal } from '@angular/core';
 
-@Injectable()
+@Service({ autoProvided: false })
 export class ScSidebarState {
   // Signals for reactive state
   readonly open = signal(true);

@@ -3,9 +3,9 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import {
   ComponentRef,
   ElementRef,
-  Injectable,
   Injector,
   OutputRefSubscription,
+  Service,
   inject,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -85,7 +85,7 @@ export interface ScTooltipConfig {
   position: ScTooltipPosition;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class ScTooltipManager {
   private readonly overlay = inject(Overlay);
   private readonly injector = inject(Injector);
