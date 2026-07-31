@@ -1,6 +1,5 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -27,7 +26,6 @@ import { toggleVariants } from '../toggle/toggle';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToolbarToggle {
   protected readonly widget = inject(ToolbarWidget);

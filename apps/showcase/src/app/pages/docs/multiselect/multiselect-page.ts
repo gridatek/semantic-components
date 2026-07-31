@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { BasicMultiselectDemoContainer } from './demos/basic-multiselect-demo-container';
@@ -27,6 +23,5 @@ import { BasicMultiselectDemoContainer } from './demos/basic-multiselect-demo-co
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class MultiSelectPage {}

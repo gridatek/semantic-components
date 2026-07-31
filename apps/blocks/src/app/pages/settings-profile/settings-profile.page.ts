@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,
@@ -282,7 +277,6 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SettingsProfilePage {
   readonly bioLength = signal(120);

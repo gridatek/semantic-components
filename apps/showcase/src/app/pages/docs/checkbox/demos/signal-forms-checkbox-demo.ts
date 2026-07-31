@@ -1,10 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
 import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
@@ -53,7 +48,6 @@ interface CheckboxFormModel {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsCheckboxDemo {
   readonly formModel = signal<CheckboxFormModel>({

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { LabelInputDemo } from './label-input-demo';
 
@@ -20,15 +16,9 @@ import { LabelInputDemo } from './label-input-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabelInputDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import { ScField, ScFieldErrors, ScLabel } from '@semantic-components/ui';
 import { ScInput } from '@semantic-components/ui';
@@ -62,7 +52,6 @@ value: "{{ emailForm.email().value() }}"
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabelInputDemo {
   readonly formModel = signal({ email: '' });

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScToaster } from '@semantic-components/ui';
 
@@ -17,7 +12,6 @@ import { ScToaster } from '@semantic-components/ui';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DestructiveToastDemo {
   private readonly toastService = inject(ScToaster);

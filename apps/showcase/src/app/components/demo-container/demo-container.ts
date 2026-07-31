@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject, input } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -117,7 +111,6 @@ import { TocHeading } from '../toc/toc-heading';
     class: 'block',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoContainer {
   private readonly config = inject(ConfigService);

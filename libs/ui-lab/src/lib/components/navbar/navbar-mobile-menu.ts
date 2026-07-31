@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -29,7 +28,6 @@ type ScNavbarMobileMenuState = 'open' | 'closed';
     '(animationend)': 'onAnimationEnd($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavbarMobileMenu {
   private readonly elementRef = inject(ElementRef<HTMLElement>);

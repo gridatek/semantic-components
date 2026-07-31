@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { AvatarsMentionInputDemo } from './avatars-mention-input-demo';
 
@@ -16,14 +12,9 @@ import { AvatarsMentionInputDemo } from './avatars-mention-input-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarsMentionInputDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScMentionInput,
@@ -80,7 +71,6 @@ import type { MentionUser } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarsMentionInputDemo {
   readonly usersWithAvatars: MentionUser[] = [

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { HorizontalSortableListDemo } from './horizontal-sortable-list-demo';
 
@@ -16,7 +12,6 @@ import { HorizontalSortableListDemo } from './horizontal-sortable-list-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HorizontalSortableListDemoContainer {
   readonly code = `import {
@@ -25,12 +20,7 @@ export class HorizontalSortableListDemoContainer {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 
 @Component({
   selector: 'app-horizontal-sortable-list-demo',
@@ -85,7 +75,6 @@ import {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HorizontalSortableListDemo {
   readonly items = signal(['A', 'B', 'C', 'D', 'E', 'F']);

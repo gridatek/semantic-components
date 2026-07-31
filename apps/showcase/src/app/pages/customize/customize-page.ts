@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -245,7 +244,6 @@ import { COLOR_SCHEMES, RADIUS_OPTIONS } from './color-schemes';
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CustomizePage {
   private readonly themeManager = inject(ScThemeManager);

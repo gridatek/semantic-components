@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 @Component({
@@ -40,7 +34,6 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IndeterminateCheckboxDemo {
   readonly item1 = signal(true);

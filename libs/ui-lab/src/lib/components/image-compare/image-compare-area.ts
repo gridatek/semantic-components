@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -33,7 +32,6 @@ import { SC_IMAGE_COMPARE } from './image-compare';
     '(keydown)': 'onKeydown($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCompareArea {
   readonly imageCompare = inject(SC_IMAGE_COMPARE);

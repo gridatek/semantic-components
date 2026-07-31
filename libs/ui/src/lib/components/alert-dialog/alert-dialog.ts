@@ -1,6 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -34,7 +33,6 @@ type ScAlertDialogState = 'idle' | 'open' | 'closed';
     '(animationend)': 'onAnimationEnd($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAlertDialog {
   private readonly elementRef = inject(ElementRef<HTMLElement>);

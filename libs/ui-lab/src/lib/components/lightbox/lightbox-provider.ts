@@ -3,7 +3,6 @@ import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   InjectionToken,
   TemplateRef,
@@ -52,7 +51,6 @@ export const SC_LIGHTBOX_PROVIDER = new InjectionToken<ScLightboxProvider>(
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLightboxProvider {
   private readonly overlay = inject(Overlay);

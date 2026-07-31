@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { KeepOutsideDaysCalendarDemo } from './keep-outside-days-calendar-demo';
 
@@ -21,16 +17,10 @@ import { KeepOutsideDaysCalendarDemo } from './keep-outside-days-calendar-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KeepOutsideDaysCalendarDemoContainer {
   readonly code = `import { Temporal } from '@js-temporal/polyfill';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarClear,
@@ -149,7 +139,6 @@ import {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KeepOutsideDaysCalendarDemo {
   readonly selectedDate = signal<Temporal.PlainDate | undefined>(undefined);

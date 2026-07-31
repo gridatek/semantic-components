@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SignalFormsSwitchDemo } from './signal-forms-switch-demo';
 
@@ -20,16 +16,10 @@ import { SignalFormsSwitchDemo } from './signal-forms-switch-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsSwitchDemoContainer {
   readonly code = `import { JsonPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
 import {
@@ -91,7 +81,6 @@ interface SwitchFormModel {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsSwitchDemo {
   readonly formModel = signal<SwitchFormModel>({

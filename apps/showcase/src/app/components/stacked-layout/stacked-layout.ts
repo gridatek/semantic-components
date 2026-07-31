@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScStackedLayout } from '@semantic-components/ui-lab';
 import { Footer } from '../footer/footer';
@@ -23,7 +17,6 @@ import Navbar from '../navbar/navbar';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StackedLayout {
   readonly classInput = input<string>('', { alias: 'class' });

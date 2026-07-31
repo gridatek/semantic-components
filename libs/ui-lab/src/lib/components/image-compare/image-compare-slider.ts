@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -32,7 +31,6 @@ import { SC_IMAGE_COMPARE } from './image-compare';
     '[style]': 'lineStyle()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCompareSlider {
   readonly imageCompare = inject(SC_IMAGE_COMPARE);

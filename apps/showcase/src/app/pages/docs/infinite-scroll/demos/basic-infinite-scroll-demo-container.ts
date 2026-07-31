@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BasicInfiniteScrollDemo } from './basic-infinite-scroll-demo';
 
@@ -20,15 +16,9 @@ import { BasicInfiniteScrollDemo } from './basic-infinite-scroll-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicInfiniteScrollDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScInfiniteScroll,
   ScInfiniteScrollEnd,
@@ -98,7 +88,6 @@ interface Item {
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicInfiniteScrollDemo {
   readonly items = signal<Item[]>(this.generateItems(0, 10));

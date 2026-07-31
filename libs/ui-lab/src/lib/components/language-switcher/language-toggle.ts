@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -40,7 +39,6 @@ import { LanguageSwitcherSize, LanguageSwitcherVariant } from './styles';
     }
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLanguageToggle {
   private readonly languageService = inject(ScLanguageService);

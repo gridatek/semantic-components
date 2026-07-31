@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -19,7 +18,6 @@ import { cn } from '../../utils';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComboboxOrigin {
   readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

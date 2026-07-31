@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { InteractiveSpotlightDemo } from './interactive-spotlight-demo';
 
@@ -16,15 +12,9 @@ import { InteractiveSpotlightDemo } from './interactive-spotlight-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InteractiveSpotlightDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  viewChild,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, viewChild } from '@angular/core';
 import {
   ScSpotlight,
   ScSpotlightActions,
@@ -110,7 +100,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InteractiveSpotlightDemo {
   private readonly spotlight = viewChild.required<ScSpotlight>('spotlight');

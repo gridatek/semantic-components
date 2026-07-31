@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScCodeViewer,
@@ -275,7 +271,6 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UiPage {
   readonly stylesDefaultCode = '@import "@semantic-components/ui/styles";';

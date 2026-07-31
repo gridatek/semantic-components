@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, input } from '@angular/core';
 import { ChartDataPoint } from './chart-types';
 import { ScPieChart } from './pie-chart';
 
@@ -23,7 +18,6 @@ import { ScPieChart } from './pie-chart';
   imports: [ScPieChart],
   host: {},
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDonutChart {
   readonly classInput = input<string>('', { alias: 'class' });

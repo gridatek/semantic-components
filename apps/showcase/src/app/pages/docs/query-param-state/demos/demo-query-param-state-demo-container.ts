@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { DemoQueryParamStateDemo } from './demo-query-param-state-demo';
 
@@ -21,17 +17,9 @@ import { DemoQueryParamStateDemo } from './demo-query-param-state-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoQueryParamStateDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  effect,
-  linkedSignal,
-  untracked,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, effect, linkedSignal, untracked } from '@angular/core';
 import { FormField, form, min } from '@angular/forms/signals';
 import {
   injectQueryParam,
@@ -96,7 +84,6 @@ import {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DemoQueryParamStateDemo {
   readonly search = injectQueryParam('q', parseAsString.withDefault(''));

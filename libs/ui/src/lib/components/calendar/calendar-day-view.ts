@@ -1,7 +1,6 @@
 import { Temporal } from '@js-temporal/polyfill';
 import { Grid, GridCell, GridCellWidget, GridRow } from '@angular/aria/grid';
 import {
-  ChangeDetectionStrategy,
   Component,
   LOCALE_ID,
   ViewEncapsulation,
@@ -101,7 +100,6 @@ interface DayInfo {
     </table>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCalendarDayView {
   protected readonly locale = inject(LOCALE_ID);

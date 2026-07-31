@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SignalFormsCheckboxDemo } from './signal-forms-checkbox-demo';
 
@@ -20,16 +16,10 @@ import { SignalFormsCheckboxDemo } from './signal-forms-checkbox-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsCheckboxDemoContainer {
   readonly code = `import { JsonPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { required } from '@angular/forms/signals';
 import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
@@ -78,7 +68,6 @@ interface CheckboxFormModel {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsCheckboxDemo {
   readonly formModel = signal<CheckboxFormModel>({

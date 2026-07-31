@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -51,7 +50,6 @@ import { SC_DATA_TABLE } from './data-table';
     '(document:click)': 'onDocumentClick($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDataTableColumnToggle {
   readonly table = inject(SC_DATA_TABLE);

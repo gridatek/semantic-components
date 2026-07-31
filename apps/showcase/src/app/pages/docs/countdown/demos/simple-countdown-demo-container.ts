@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { SimpleCountdownDemo } from './simple-countdown-demo';
 
@@ -16,14 +12,9 @@ import { SimpleCountdownDemo } from './simple-countdown-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleCountdownDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCountdown } from '@semantic-components/ui-lab';
 
 @Component({
@@ -77,7 +68,6 @@ import { ScCountdown } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleCountdownDemo {
   readonly futureDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);

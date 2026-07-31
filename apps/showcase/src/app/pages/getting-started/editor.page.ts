@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -139,7 +135,6 @@ import { EditorUsageDemoContainer } from '../docs/editor/demos/editor-usage-demo
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class EditorInstallPage {
   readonly stylesCode = '@import "@semantic-components/editor/styles";';

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { PdfViewerDemo } from './pdf-viewer-demo';
 
@@ -20,21 +16,9 @@ import { PdfViewerDemo } from './pdf-viewer-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdfViewerDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  ViewEncapsulation,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-  viewChild,
-} from '@angular/core';
+  readonly code = `import { Component, DestroyRef, ViewEncapsulation, computed, effect, inject, input, signal, viewChild } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
   ScPdfViewerAltTextDialog,
@@ -1378,7 +1362,6 @@ interface AttachmentData {
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdfViewerDemo {
   readonly classInput = input<string>('', { alias: 'class' });

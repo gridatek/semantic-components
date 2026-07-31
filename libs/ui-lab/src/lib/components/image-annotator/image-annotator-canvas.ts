@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -49,7 +48,6 @@ import type { Annotation, AnnotationPoint } from './image-annotator-types';
     '[style.cursor]': 'state.cursor()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageAnnotatorCanvas {
   readonly classInput = input<string>('', { alias: 'class' });

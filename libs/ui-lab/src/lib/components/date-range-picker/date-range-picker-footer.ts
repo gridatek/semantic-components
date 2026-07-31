@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -34,7 +33,6 @@ import { ScDateRangePicker } from './date-range-picker';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDateRangePickerFooter {
   readonly picker = inject(ScDateRangePicker);

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScField, ScLabel } from '@semantic-components/ui';
 import {
   ScMentionInput,
@@ -74,7 +69,6 @@ import type { MentionUser } from '@semantic-components/ui-lab';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormMentionInputDemo {
   readonly commentValue = signal('');

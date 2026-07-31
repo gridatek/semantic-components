@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ViewEncapsulation,
@@ -39,7 +38,6 @@ export type ScCarouselPlugin = EmblaPluginType;
     '(keydown)': 'onKeyDown($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarousel {
   private readonly destroyRef = inject(DestroyRef);

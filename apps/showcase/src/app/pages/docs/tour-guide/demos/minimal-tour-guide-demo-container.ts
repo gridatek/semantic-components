@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { MinimalTourGuideDemo } from './minimal-tour-guide-demo';
 
@@ -16,15 +12,9 @@ import { MinimalTourGuideDemo } from './minimal-tour-guide-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinimalTourGuideDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScTourGuide,
   ScTourGuideAction,
@@ -120,7 +110,6 @@ import type { TourOptions } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinimalTourGuideDemo {
   protected readonly tourService = inject(TourService);

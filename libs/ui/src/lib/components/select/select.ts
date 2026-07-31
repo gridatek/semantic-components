@@ -2,7 +2,6 @@ import { Combobox, ComboboxPopup } from '@angular/aria/combobox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -64,7 +63,6 @@ const positions = [
     '[attr.aria-disabled]': 'combobox.disabled() || null',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSelect {
   readonly classInput = input<string>('', { alias: 'class' });

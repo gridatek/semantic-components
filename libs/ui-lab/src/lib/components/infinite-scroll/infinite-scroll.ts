@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -37,7 +36,6 @@ export const SC_INFINITE_SCROLL = new InjectionToken<ScInfiniteScroll>(
     '[attr.data-loading]': 'loading() || null',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScInfiniteScroll {
   private readonly destroyRef = inject(DestroyRef);

@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, inject } from '@angular/core';
 import {
   SiCircleCheckIcon,
   SiInfoIcon,
@@ -103,7 +97,6 @@ import { ScToaster } from './toaster';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScToastStack {
   protected readonly toastService = inject(ScToaster);

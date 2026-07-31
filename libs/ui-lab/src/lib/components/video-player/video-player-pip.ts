@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -19,7 +18,6 @@ import { SC_VIDEO_PLAYER } from './video-player';
     '(click)': 'player.togglePiP()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVideoPlayerPip {
   protected readonly player = inject(SC_VIDEO_PLAYER);

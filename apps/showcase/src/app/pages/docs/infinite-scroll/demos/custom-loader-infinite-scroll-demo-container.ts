@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { CustomLoaderInfiniteScrollDemo } from './custom-loader-infinite-scroll-demo';
 
@@ -20,15 +16,9 @@ import { CustomLoaderInfiniteScrollDemo } from './custom-loader-infinite-scroll-
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomLoaderInfiniteScrollDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScInfiniteScroll,
   ScInfiniteScrollEnd,
@@ -93,7 +83,6 @@ interface Item {
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomLoaderInfiniteScrollDemo {
   readonly items = signal<Item[]>(this.generateItems(0, 8));

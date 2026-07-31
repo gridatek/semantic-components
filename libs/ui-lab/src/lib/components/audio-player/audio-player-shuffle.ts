@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -20,7 +19,6 @@ import { SC_AUDIO_PLAYER } from './audio-player';
     '(click)': 'player.shuffle.set(!player.shuffle())',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAudioPlayerShuffle {
   readonly player = inject(SC_AUDIO_PLAYER);

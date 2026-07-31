@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScMarqueeText } from '@semantic-components/ui-lab';
 
 @Component({
@@ -41,6 +37,5 @@ import { ScMarqueeText } from '@semantic-components/ui-lab';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpeedMarqueeDemo {}

@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScMasonryGrid, ScMasonryItem } from '@semantic-components/ui-lab';
 
 interface DemoItem {
@@ -36,7 +31,6 @@ interface DemoItem {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicMasonryGridDemo {
   readonly items = signal<DemoItem[]>(

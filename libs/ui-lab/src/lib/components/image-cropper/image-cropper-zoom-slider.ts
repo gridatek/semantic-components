@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -30,7 +29,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCropperZoomSlider {
   protected readonly cropper = inject(SC_IMAGE_CROPPER);

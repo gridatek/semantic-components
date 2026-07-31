@@ -6,7 +6,6 @@ import {
 } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -58,7 +57,6 @@ import { ScMenuBar } from './menu-bar';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMenuBarItem {
   readonly classInput = input<string>('', { alias: 'class' });

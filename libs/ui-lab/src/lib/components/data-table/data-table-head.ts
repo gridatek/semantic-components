@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -44,7 +43,6 @@ import { SC_DATA_TABLE, SortDirection } from './data-table';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScDataTableHead {
   private readonly table = inject(SC_DATA_TABLE);

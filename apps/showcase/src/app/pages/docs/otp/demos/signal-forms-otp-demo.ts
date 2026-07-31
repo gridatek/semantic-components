@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, minLength, required } from '@angular/forms/signals';
 import {
   ScOtp,
@@ -64,7 +59,6 @@ interface OtpFormModel {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsOtpDemo {
   private readonly formModel = signal<OtpFormModel>({

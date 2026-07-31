@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScLink,
@@ -260,7 +254,6 @@ import {
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navbar {
   readonly classInput = input<string>('', { alias: 'class' });

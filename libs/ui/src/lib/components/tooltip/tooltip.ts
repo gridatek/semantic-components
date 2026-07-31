@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   InjectionToken,
@@ -44,7 +43,6 @@ type ScTooltipSide = 'top' | 'right' | 'bottom' | 'left';
     '(animationend)': 'onAnimationEnd($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTooltip {
   private readonly elementRef = inject(ElementRef);

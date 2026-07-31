@@ -1,6 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ViewEncapsulation,
@@ -25,7 +24,6 @@ import { SC_FIELD } from './field';
       </ul>
     }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     role: 'alert',

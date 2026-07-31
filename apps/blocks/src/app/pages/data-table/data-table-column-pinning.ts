@@ -1,16 +1,9 @@
 import type { ColumnPinningState } from '@tanstack/angular-table';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  input,
-  output,
-} from '@angular/core';
+import { Component, ViewEncapsulation, input, output } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-data-table-column-pinning',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [ScButton],
   host: { class: 'mt-4 flex flex-wrap gap-4 rounded-md border p-4' },

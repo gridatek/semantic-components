@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -42,7 +41,6 @@ import type { MentionUser } from './mention-input-types';
     '(mouseenter)': 'state.selectedIndex.set(index())',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMentionInputSuggestionItem {
   readonly classInput = input<string>('', { alias: 'class' });

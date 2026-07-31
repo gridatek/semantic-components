@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { TitleToastDemo } from './title-toast-demo';
 
@@ -16,15 +12,9 @@ import { TitleToastDemo } from './title-toast-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleToastDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScToaster } from '@semantic-components/ui';
 
@@ -36,7 +26,6 @@ import { ScToaster } from '@semantic-components/ui';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TitleToastDemo {
   private readonly toastService = inject(ScToaster);

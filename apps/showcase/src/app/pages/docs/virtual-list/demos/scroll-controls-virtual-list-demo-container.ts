@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ScrollControlsVirtualListDemo } from './scroll-controls-virtual-list-demo';
 
@@ -20,7 +16,6 @@ import { ScrollControlsVirtualListDemo } from './scroll-controls-virtual-list-de
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollControlsVirtualListDemoContainer {
   readonly code = `import {
@@ -28,13 +23,7 @@ export class ScrollControlsVirtualListDemoContainer {
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 
 @Component({
   selector: 'app-scroll-controls-virtual-list-demo',
@@ -94,7 +83,6 @@ import {
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollControlsVirtualListDemo {
   readonly viewport = viewChild(CdkVirtualScrollViewport);

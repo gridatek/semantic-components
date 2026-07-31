@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from '../../utils';
 
 @Component({
@@ -19,7 +13,6 @@ import { cn } from '../../utils';
     'animate.leave': 'animate-out fade-out-0 zoom-out-95 duration-150',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMultiselectPopup {
   readonly classInput = input<string>('', { alias: 'class' });

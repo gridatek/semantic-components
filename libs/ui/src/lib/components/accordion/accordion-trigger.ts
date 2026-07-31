@@ -1,11 +1,5 @@
 import { AccordionTrigger } from '@angular/aria/accordion';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
   SiChevronDownIcon,
   SiChevronUpIcon,
@@ -15,7 +9,6 @@ import { cn } from '../../utils';
 @Component({
   selector: '[scAccordionTrigger]',
   imports: [SiChevronDownIcon, SiChevronUpIcon],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   hostDirectives: [
     {

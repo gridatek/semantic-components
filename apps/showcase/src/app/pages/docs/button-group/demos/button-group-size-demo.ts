@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScButtonGroup } from '@semantic-components/ui';
 import { SiPlusIcon } from '@semantic-icons/lucide-icons';
 
@@ -38,6 +34,5 @@ import { SiPlusIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupSizeDemo {}

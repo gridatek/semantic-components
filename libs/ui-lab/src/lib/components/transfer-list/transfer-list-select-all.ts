@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -28,7 +27,6 @@ import { SC_TRANSFER_LIST_PANEL } from './transfer-list-panel-ref';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTransferListSelectAll {
   readonly classInput = input<string>('', { alias: 'class' });

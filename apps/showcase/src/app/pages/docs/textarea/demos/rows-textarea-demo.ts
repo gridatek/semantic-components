@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
 
@@ -34,7 +29,6 @@ import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RowsTextareaDemo {
   readonly formModel = signal({ small: '', large: '' });

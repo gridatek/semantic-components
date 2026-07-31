@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   InjectionToken,
@@ -37,7 +36,6 @@ export const SC_VIDEO_PLAYER = new InjectionToken<ScVideoPlayer>(
     '(document:fullscreenchange)': 'onFullscreenChange()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVideoPlayer {
   private readonly el = inject(ElementRef<HTMLElement>);

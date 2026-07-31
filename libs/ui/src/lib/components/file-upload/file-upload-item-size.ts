@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -18,7 +17,6 @@ import { SC_FILE_UPLOAD_ITEM } from './file-upload-item';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScFileUploadItemSize {
   private readonly item = inject(SC_FILE_UPLOAD_ITEM);

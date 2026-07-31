@@ -1,6 +1,5 @@
 import { TreeItem } from '@angular/aria/tree';
 import {
-  ChangeDetectionStrategy,
   Component,
   InjectionToken,
   ViewEncapsulation,
@@ -32,7 +31,6 @@ export const SC_TREE_ITEM = new InjectionToken<ScTreeItem>('SC_TREE_ITEM');
     '[attr.data-state]': 'treeItem.expanded() ? "open" : "closed"',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTreeItem {
   private readonly parentItem = inject(SC_TREE_ITEM, {

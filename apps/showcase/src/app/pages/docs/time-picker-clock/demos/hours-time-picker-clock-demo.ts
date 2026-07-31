@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTimePicker,
   ScTimePickerHoursInput,
@@ -63,7 +58,6 @@ import { ScTimePickerClock } from '@semantic-components/ui-lab';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HoursTimePickerClockDemo {
   readonly time = signal<ScTimeValue | null>({ hours: 10, minutes: 0 });

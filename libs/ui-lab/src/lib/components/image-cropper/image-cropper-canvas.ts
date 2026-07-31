@@ -1,6 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -32,7 +31,6 @@ import { SC_IMAGE_CROPPER, ScImageCropperResult } from './image-cropper';
     '(wheel)': 'onWheel($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCropperCanvas {
   readonly cropper = inject(SC_IMAGE_CROPPER);

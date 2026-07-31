@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -111,7 +107,6 @@ import { CarouselUsageDemoContainer } from '../docs/carousel/demos/carousel-usag
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CarouselInstallPage {
   readonly sourceCode =

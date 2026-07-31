@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -29,7 +28,6 @@ import { SC_IMAGE_CROPPER } from './image-cropper';
     '[style.height.px]': 'previewHeight()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScImageCropperPreview {
   private readonly cropper = inject(SC_IMAGE_CROPPER);

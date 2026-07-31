@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, max, min, required } from '@angular/forms/signals';
 import {
   ScButtonGroup,
@@ -87,7 +82,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalFormsNumberDemo {
   private readonly formModel = signal<{ quantity: number | null }>({

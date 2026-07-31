@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -18,7 +17,6 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScLightboxCounter {
   readonly provider = inject(SC_LIGHTBOX_PROVIDER);

@@ -18,7 +18,6 @@ import {
   getSortedRowModel,
 } from '@tanstack/angular-table';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   input,
@@ -53,7 +52,6 @@ import type { User } from './user.service';
 
 @Component({
   selector: 'app-data-table',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [
     ScBadge,

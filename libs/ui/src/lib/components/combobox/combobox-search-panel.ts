@@ -1,6 +1,5 @@
 import { Combobox } from '@angular/aria/combobox';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -22,7 +21,6 @@ import { cn } from '../../utils';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComboboxSearchPanel {
   private readonly combobox = inject(Combobox);

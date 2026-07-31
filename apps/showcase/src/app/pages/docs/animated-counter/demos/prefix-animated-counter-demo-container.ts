@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { PrefixAnimatedCounterDemo } from './prefix-animated-counter-demo';
 
@@ -16,17 +12,9 @@ import { PrefixAnimatedCounterDemo } from './prefix-animated-counter-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrefixAnimatedCounterDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  signal,
-  viewChild,
-} from '@angular/core';
+  readonly code = `import { Component, ElementRef, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { animate } from 'motion';
 
@@ -50,7 +38,6 @@ import { animate } from 'motion';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrefixAnimatedCounterDemo {
   private readonly counterEl =

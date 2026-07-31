@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { EasingAnimatedCounterDemo } from './easing-animated-counter-demo';
 
@@ -16,16 +12,9 @@ import { EasingAnimatedCounterDemo } from './easing-animated-counter-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EasingAnimatedCounterDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  viewChildren,
-} from '@angular/core';
+  readonly code = `import { Component, ElementRef, ViewEncapsulation, viewChildren } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { animate } from 'motion';
 
@@ -81,7 +70,6 @@ import { animate } from 'motion';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EasingAnimatedCounterDemo {
   private readonly counters = viewChildren<ElementRef<HTMLElement>>('counter');

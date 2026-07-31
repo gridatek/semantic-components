@@ -3,7 +3,6 @@ import { Listbox, Option } from '@angular/aria/listbox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   afterRenderEffect,
@@ -46,7 +45,6 @@ import { ScAutocompletePortal } from './autocomplete-portal';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScAutocomplete {
   readonly classInput = input<string>('', { alias: 'class' });

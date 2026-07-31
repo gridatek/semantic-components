@@ -1,6 +1,5 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -35,7 +34,6 @@ import { ScCheckboxVisual } from './checkbox-visual';
     <ng-content />
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCheckboxField implements ScCheckboxContext {
   private readonly elementRef = inject(ElementRef<HTMLElement>);

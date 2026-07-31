@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -21,7 +20,6 @@ import { SC_TREE_ITEM } from './tree-item';
     '(click)': 'onClick($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScTreeItemTrigger {
   readonly item = inject(SC_TREE_ITEM);

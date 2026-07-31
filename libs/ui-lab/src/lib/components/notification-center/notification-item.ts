@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -125,7 +124,6 @@ import type { Notification, NotificationAction } from './notification-types';
     '(keydown.space)': 'onItemClick(); $event.preventDefault()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNotificationItem {
   readonly classInput = input<string>('', { alias: 'class' });

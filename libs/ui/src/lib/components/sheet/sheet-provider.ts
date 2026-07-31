@@ -3,7 +3,6 @@ import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   TemplateRef,
   ViewContainerRef,
@@ -43,7 +42,6 @@ export type ScSheetSide = 'top' | 'right' | 'bottom' | 'left';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScSheetProvider {
   private readonly overlay = inject(Overlay);

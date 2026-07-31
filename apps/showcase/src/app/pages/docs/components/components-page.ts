@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -98,7 +97,6 @@ import { ComponentsService } from '../../../services/components.service';
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ComponentsPage {
   private readonly componentsService = inject(ComponentsService);

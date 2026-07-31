@@ -5,7 +5,6 @@ import {
   ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -37,7 +36,6 @@ import { ScMentionInputState } from './mention-input-state';
     class: 'contents',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMentionInputSuggestions {
   readonly classInput = input<string>('', { alias: 'class' });

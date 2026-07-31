@@ -37,7 +37,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Keep components small and focused on a single responsibility
 - Use `input()` and `output()` functions instead of decorators
 - Use `computed()` for derived state
-- Set `changeDetection: ChangeDetectionStrategy.OnPush` in `@Component` decorator
+- Do NOT set `changeDetection` in `@Component` — `OnPush` is the default in Angular v22+. Never use `ChangeDetectionStrategy.Eager` (or its deprecated alias `Default`)
 - Set `encapsulation: ViewEncapsulation.None` in `@Component` decorator
 - Prefer inline templates for small components
 - Use Signal forms (`@angular/forms/signals`) exclusively. Do NOT import from `@angular/forms` — no `FormsModule`/`ngModel`, no `ReactiveFormsModule`/`FormControl`/`FormGroup`. See [docs/signal-forms-migration.md](../docs/signal-forms-migration.md)

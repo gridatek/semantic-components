@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { InteractiveQrCodeDemo } from './interactive-qr-code-demo';
 
@@ -20,16 +16,9 @@ import { InteractiveQrCodeDemo } from './interactive-qr-code-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InteractiveQrCodeDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  computed,
-  signal,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScInput } from '@semantic-components/ui';
 import { ScQrCode } from '@semantic-components/ui-lab';
@@ -82,7 +71,6 @@ import { ScQrCode } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InteractiveQrCodeDemo {
   readonly formModel = signal({ text: 'https://angular.dev' });

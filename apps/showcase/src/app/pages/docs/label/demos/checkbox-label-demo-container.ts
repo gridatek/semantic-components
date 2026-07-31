@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { CheckboxLabelDemo } from './checkbox-label-demo';
 
@@ -20,14 +16,9 @@ import { CheckboxLabelDemo } from './checkbox-label-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxLabelDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
 
 @Component({
@@ -41,7 +32,6 @@ import { ScCheckbox, ScCheckboxField, ScLabel } from '@semantic-components/ui';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxLabelDemo {}`;
 }

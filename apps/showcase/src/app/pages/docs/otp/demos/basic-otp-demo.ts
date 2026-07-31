@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScOtp, ScOtpSlot, ScOtpSlotGroup } from '@semantic-components/ui';
 
 @Component({
@@ -26,7 +21,6 @@ import { ScOtp, ScOtpSlot, ScOtpSlotGroup } from '@semantic-components/ui';
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicOtpDemo {
   readonly otp = signal('');

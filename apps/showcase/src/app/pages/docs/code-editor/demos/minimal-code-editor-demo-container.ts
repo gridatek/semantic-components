@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { MinimalCodeEditorDemo } from './minimal-code-editor-demo';
 
@@ -20,14 +16,9 @@ import { MinimalCodeEditorDemo } from './minimal-code-editor-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinimalCodeEditorDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCodeEditor, ScCodeEditorContent } from '@semantic-components/code';
 
 @Component({
@@ -45,7 +36,6 @@ import { ScCodeEditor, ScCodeEditorContent } from '@semantic-components/code';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MinimalCodeEditorDemo {
   minimalCode = \`const hello = "world";

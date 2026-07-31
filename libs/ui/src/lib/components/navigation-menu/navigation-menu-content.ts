@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -20,7 +19,6 @@ import { ScNavigationMenuItem } from './navigation-menu-item';
     '(mouseleave)': 'onMouseLeave()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScNavigationMenuContent {
   private readonly menuItem = inject(ScNavigationMenuItem);

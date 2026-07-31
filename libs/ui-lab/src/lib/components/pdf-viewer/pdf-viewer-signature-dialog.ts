@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -222,7 +221,6 @@ type SignatureTab = 'type' | 'draw' | 'image';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerSignatureDialog {
   readonly pdfViewer = inject(SC_PDF_VIEWER);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -175,7 +174,6 @@ import { ComponentsService } from '../../services/components.service';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandPalette {
   readonly classInput = input<string>('', { alias: 'class' });

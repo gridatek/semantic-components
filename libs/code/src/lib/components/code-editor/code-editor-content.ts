@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -217,7 +216,6 @@ export function detectLanguage(
     '(click)': 'focusTextarea()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCodeEditorContent {
   // Two-way binding for value

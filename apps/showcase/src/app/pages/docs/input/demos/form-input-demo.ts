@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, email, form, required } from '@angular/forms/signals';
 import {
   ScCard,
@@ -78,7 +73,6 @@ interface CreateAccountForm {
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormInputDemo {
   readonly formModel = signal<CreateAccountForm>({

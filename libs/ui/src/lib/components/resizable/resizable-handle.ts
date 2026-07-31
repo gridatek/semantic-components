@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   ViewEncapsulation,
@@ -28,7 +27,6 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
     }
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScResizableHandle {
   readonly group = inject(ScResizablePanelGroup);

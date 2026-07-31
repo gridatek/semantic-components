@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -22,7 +21,6 @@ import { ScCarousel } from './carousel';
     '(click)': 'carousel.scrollNext()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCarouselNext {
   readonly carousel = inject(ScCarousel);

@@ -2,7 +2,6 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -49,7 +48,6 @@ export type ScPopoverAlign = ScOverlayAlign;
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPopoverProvider {
   readonly classInput = input<string>('', { alias: 'class' });

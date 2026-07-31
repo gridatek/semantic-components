@@ -1,10 +1,5 @@
 import { Temporal } from '@js-temporal/polyfill';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,
@@ -1135,7 +1130,6 @@ import {
   `,
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ShadcnPage {
   readonly basicDialogOpen = signal(false);

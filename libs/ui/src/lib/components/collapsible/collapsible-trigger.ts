@@ -1,6 +1,5 @@
 import { AccordionTrigger } from '@angular/aria/accordion';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -29,7 +28,6 @@ import { cn } from '../../utils';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCollapsibleTrigger {
   readonly trigger = inject(AccordionTrigger);

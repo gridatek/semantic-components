@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ErrorCorrectionQrCodeDemo } from './error-correction-qr-code-demo';
 
@@ -20,14 +16,9 @@ import { ErrorCorrectionQrCodeDemo } from './error-correction-qr-code-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorCorrectionQrCodeDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScQrCode, ScQrCodeEcc } from '@semantic-components/ui-lab';
 
 @Component({
@@ -51,7 +42,6 @@ import { ScQrCode, ScQrCodeEcc } from '@semantic-components/ui-lab';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ErrorCorrectionQrCodeDemo {
   readonly levels: { ecc: ScQrCodeEcc; label: string }[] = [

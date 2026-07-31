@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { KanbanSortableListDemo } from './kanban-sortable-list-demo';
 
@@ -16,7 +12,6 @@ import { KanbanSortableListDemo } from './kanban-sortable-list-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KanbanSortableListDemoContainer {
   readonly code = `import {
@@ -26,12 +21,7 @@ export class KanbanSortableListDemoContainer {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
 interface KanbanCard {
@@ -101,7 +91,6 @@ interface KanbanCard {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KanbanSortableListDemo {
   readonly cards = signal<KanbanCard[]>([

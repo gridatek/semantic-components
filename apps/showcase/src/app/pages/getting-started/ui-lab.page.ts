@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -103,7 +99,6 @@ import { ButtonPatternUsageDemoContainer } from '../docs/button-pattern/demos/bu
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UiLabPage {
   readonly sourceCode =

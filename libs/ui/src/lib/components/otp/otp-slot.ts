@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -42,7 +41,6 @@ import { ScOtpSlotInput } from './otp-slot-input';
     <span scOtpSlotChar [char]="char()"></span>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScOtpSlot {
   readonly otp = inject(ScOtp);

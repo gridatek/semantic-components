@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -409,7 +408,6 @@ import { ConfigService } from '../../services/config.service';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocsLayout {
   readonly classInput = input<string>('', { alias: 'class' });

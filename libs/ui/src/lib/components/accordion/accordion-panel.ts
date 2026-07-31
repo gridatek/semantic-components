@@ -1,6 +1,5 @@
 import { AccordionPanel } from '@angular/aria/accordion';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -12,7 +11,6 @@ import { cn } from '../../utils';
 @Component({
   selector: '[scAccordionPanel]',
   exportAs: 'scAccordionPanel',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   hostDirectives: [
     {

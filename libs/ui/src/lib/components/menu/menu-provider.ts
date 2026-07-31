@@ -1,7 +1,6 @@
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -42,7 +41,6 @@ export type ScMenuSide = 'top' | 'bottom';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScMenuProvider {
   readonly classInput = input<string>('', { alias: 'class' });

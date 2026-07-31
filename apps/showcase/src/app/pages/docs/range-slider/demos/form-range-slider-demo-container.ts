@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { FormRangeSliderDemo } from './form-range-slider-demo';
 
@@ -20,16 +16,10 @@ import { FormRangeSliderDemo } from './form-range-slider-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormRangeSliderDemoContainer {
   readonly code = `import { JsonPipe } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, max, min } from '@angular/forms/signals';
 import {
   ScField,
@@ -87,7 +77,6 @@ interface PriceRangeFormModel {
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormRangeSliderDemo {
   readonly formModel = signal<PriceRangeFormModel>({

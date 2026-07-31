@@ -1,6 +1,5 @@
 import { AccordionPanel } from '@angular/aria/accordion';
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -25,7 +24,6 @@ import { cn } from '../../utils';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScCollapsiblePanel {
   readonly panel = inject(AccordionPanel);

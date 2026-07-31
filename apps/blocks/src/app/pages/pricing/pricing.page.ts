@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
   ScButton,
@@ -179,7 +175,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     </div>
   `,
   host: { class: 'block' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export default class PricingPage {}

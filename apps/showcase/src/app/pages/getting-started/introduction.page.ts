@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  inject,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 import { TocHeading } from '../../components/toc/toc-heading';
 import { ConfigService } from '../../services/config.service';
@@ -114,7 +109,6 @@ import { ConfigService } from '../../services/config.service';
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class IntroductionPage {
   private readonly config = inject(ConfigService);

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeViewer,
   ScCodeViewerContent,
@@ -161,7 +157,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class PrerequisitesPage {
   readonly step3aCode = `{

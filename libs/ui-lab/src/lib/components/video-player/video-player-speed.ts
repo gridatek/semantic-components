@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -59,7 +58,6 @@ import { SC_VIDEO_PLAYER } from './video-player';
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScVideoPlayerSpeed {
   protected readonly player = inject(SC_VIDEO_PLAYER);

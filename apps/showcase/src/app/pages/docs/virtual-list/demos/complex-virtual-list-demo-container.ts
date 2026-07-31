@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { ComplexVirtualListDemo } from './complex-virtual-list-demo';
 
@@ -20,7 +16,6 @@ import { ComplexVirtualListDemo } from './complex-virtual-list-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComplexVirtualListDemoContainer {
   readonly code = `import {
@@ -28,12 +23,7 @@ export class ComplexVirtualListDemoContainer {
   CdkVirtualForOf,
   CdkVirtualScrollViewport,
 } from '@angular/cdk/scrolling';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 
 interface User {
   id: number;
@@ -80,7 +70,6 @@ interface User {
   \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComplexVirtualListDemo {
   readonly users = signal<User[]>(

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { WithIconsLinkDemo } from './with-icons-link-demo';
 
@@ -20,14 +16,9 @@ import { WithIconsLinkDemo } from './with-icons-link-demo';
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WithIconsLinkDemoContainer {
-  readonly code = `import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 import { SiExternalLinkIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
 
@@ -48,7 +39,6 @@ import { SiExternalLinkIcon, SiMailIcon } from '@semantic-icons/lucide-icons';
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WithIconsLinkDemo {}`;
 }

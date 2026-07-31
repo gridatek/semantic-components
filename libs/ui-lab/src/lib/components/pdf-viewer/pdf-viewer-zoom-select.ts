@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ViewEncapsulation,
   computed,
@@ -25,7 +24,6 @@ import { ZOOM_LEVELS } from './pdf-viewer-types';
     '(change)': 'onZoomSelect($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScPdfViewerZoomSelect {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
