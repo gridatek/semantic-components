@@ -14,7 +14,13 @@ import { CountrySelectorPhoneInputDemo } from './country-selector-phone-input-de
   encapsulation: ViewEncapsulation.None,
 })
 export class CountrySelectorPhoneInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, model, signal } from '@angular/core';
+  readonly code = `import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  model,
+  signal,
+} from '@angular/core';
 import {
   ScCombobox,
   ScComboboxDialog,

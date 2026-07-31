@@ -19,7 +19,13 @@ import { DemoQueryParamStateDemo } from './demo-query-param-state-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoQueryParamStateDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, effect, linkedSignal, untracked } from '@angular/core';
+  readonly code = `import {
+  Component,
+  ViewEncapsulation,
+  effect,
+  linkedSignal,
+  untracked,
+} from '@angular/core';
 import { FormField, form, min } from '@angular/forms/signals';
 import {
   injectQueryParam,

@@ -170,7 +170,6 @@ import {
 
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
-
 })
 export class ScMenuDemo {}`;
 }
