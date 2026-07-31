@@ -195,7 +195,7 @@ import {
 })
 export class LargeDiffViewerDemo {
   oldLarge = \`// User Service
-import { Injectable } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -205,13 +205,10 @@ export interface User {
   email: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class UserService {
-  private apiUrl = '/api/users';
-
-  constructor(private http: HttpClient) {}
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = '/api/users';
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
@@ -235,7 +232,7 @@ export class UserService {
 }\`;
 
   newLarge = \`// User Service - Updated
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, catchError, retry } from 'rxjs';
 import { environment } from '../environments/environment';
@@ -253,9 +250,7 @@ export interface UserFilters {
   search?: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class UserService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = environment.apiUrl + '/users';
