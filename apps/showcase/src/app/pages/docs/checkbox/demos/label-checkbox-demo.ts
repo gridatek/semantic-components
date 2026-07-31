@@ -29,8 +29,7 @@ import { ScCheckbox, ScCheckboxField } from '@semantic-components/ui';
         <pre class="mt-2 text-xs">
 option1: {{ option1() }}
 option2: {{ option2() }}
-option3: {{ option3() }}</pre
-        >
+option3: {{ option3() }}</pre>
       </div>
     </div>
   `,

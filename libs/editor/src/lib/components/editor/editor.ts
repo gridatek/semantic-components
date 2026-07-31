@@ -6,13 +6,7 @@ import { Directive, InjectionToken, input, signal } from '@angular/core';
 
 export type ScEditorAlignment = 'left' | 'center' | 'right' | 'justify';
 export type ScEditorHeadingLevel =
-  | 'p'
-  | 'h1'
-  | 'h2'
-  | 'h3'
-  | 'h4'
-  | 'h5'
-  | 'h6';
+  'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export const SC_EDITOR = new InjectionToken<ScEditor>('SC_EDITOR');
 
@@ -141,12 +135,7 @@ export class ScEditor {
           editor.chain().focus().toggleBlockquote().run();
         } else if (value && value !== 'p') {
           const level = parseInt(value.replace('h', '')) as
-            | 1
-            | 2
-            | 3
-            | 4
-            | 5
-            | 6;
+            1 | 2 | 3 | 4 | 5 | 6;
           editor.chain().focus().setHeading({ level }).run();
         } else {
           editor.chain().focus().setParagraph().run();

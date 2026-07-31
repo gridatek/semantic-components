@@ -92,8 +92,7 @@ import {
 
           <pre
             class="bg-muted overflow-x-auto rounded-lg p-4 font-mono text-sm"
-            >{{ codeExample }}</pre
-          >
+            >{{ codeExample }}</pre>
 
           <h2 class="text-2xl font-semibold tracking-tight">Getting Started</h2>
 

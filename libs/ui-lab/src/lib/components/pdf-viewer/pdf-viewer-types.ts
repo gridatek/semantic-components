@@ -1,9 +1,5 @@
 export type PdfZoomLevel =
-  | 'auto'
-  | 'page-actual'
-  | 'page-fit'
-  | 'page-width'
-  | number;
+  'auto' | 'page-actual' | 'page-fit' | 'page-width' | number;
 
 export interface PdfLoadEvent {
   totalPages: number;
@@ -25,11 +21,7 @@ export interface PdfErrorEvent {
 }
 
 export type PdfFindState =
-  | 'idle'
-  | 'found'
-  | 'not-found'
-  | 'wrapped'
-  | 'pending';
+  'idle' | 'found' | 'not-found' | 'wrapped' | 'pending';
 
 export interface PdfPageMatchInfo {
   matches: number[];
@@ -37,12 +29,7 @@ export interface PdfPageMatchInfo {
 }
 
 export type PdfEditorMode =
-  | 'none'
-  | 'highlight'
-  | 'freetext'
-  | 'ink'
-  | 'stamp'
-  | 'signature';
+  'none' | 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature';
 
 export interface PdfEditorAnnotation {
   id: string;

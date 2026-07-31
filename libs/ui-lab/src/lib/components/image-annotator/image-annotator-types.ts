@@ -1,11 +1,5 @@
 export type AnnotationTool =
-  | 'pen'
-  | 'line'
-  | 'rectangle'
-  | 'circle'
-  | 'arrow'
-  | 'text'
-  | 'eraser';
+  'pen' | 'line' | 'rectangle' | 'circle' | 'arrow' | 'text' | 'eraser';
 
 export interface AnnotationPoint {
   x: number;

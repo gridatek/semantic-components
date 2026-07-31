@@ -8,8 +8,7 @@ import {
 import { cn } from '../../utils';
 
 export type ScPaginationPage =
-  | { type: 'page'; value: number }
-  | { type: 'ellipsis'; value: string };
+  { type: 'page'; value: number } | { type: 'ellipsis'; value: string };
 
 export interface ScPaginationChange {
   page: number;
