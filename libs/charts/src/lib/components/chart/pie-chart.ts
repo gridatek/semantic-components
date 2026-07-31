@@ -195,7 +195,7 @@ export class ScPieChart {
 
   onSliceKeydown(event: KeyboardEvent, index: number): void {
     const slices = this.slices();
-    let nextIndex = index;
+    let nextIndex: number;
 
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
       event.preventDefault();
