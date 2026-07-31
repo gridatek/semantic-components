@@ -15,7 +15,7 @@ This repository uses **Angular Signal Forms** (`@angular/forms/signals`) exclusi
 Every form is a writable signal holding the model, wrapped by `form()`:
 
 ```typescript
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 
 @Component({
@@ -25,7 +25,6 @@ import { FormField, form } from '@angular/forms/signals';
     <input type="text" [formField]="profileForm.name" placeholder="Name" />
   `,
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Example {
   readonly formModel = signal({ name: '' });

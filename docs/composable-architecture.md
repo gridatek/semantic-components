@@ -132,7 +132,6 @@ Container components group related sub-components and apply layout styles.
     '[attr.data-disabled]': 'component.disabled() || null',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComponentNameGroup {
   readonly component = inject(SC_COMPONENT_NAME);
@@ -172,7 +171,6 @@ Components that perform actions (buttons, toggles, inputs).
     '(click)': 'onClick()',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComponentNameAction {
   readonly component = inject(SC_COMPONENT_NAME);
@@ -212,7 +210,6 @@ Input fields that sync with parent state.
     '(input)': 'onInput($event)',
   },
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComponentNameInput {
   readonly component = inject(SC_COMPONENT_NAME);

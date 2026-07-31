@@ -58,7 +58,7 @@ A combobox-style autocomplete input with filtering, keyboard navigation, and ove
 ### Component
 
 ```typescript
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteItemLabel, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal } from '@semantic-components/ui';
 import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
@@ -89,7 +89,6 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
       </ng-template>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Example {
   readonly formModel = signal({ query: '' });

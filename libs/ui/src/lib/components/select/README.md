@@ -106,7 +106,7 @@ Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize o
 ### Component
 
 ```typescript
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ScSelect, ScSelectInput, ScSelectItem, ScSelectItemIcon, ScSelectItemLabel, ScSelectList, ScSelectOrigin, ScSelectPopup, ScSelectPortal } from '@semantic-components/ui';
 
 @Component({
@@ -130,7 +130,6 @@ import { ScSelect, ScSelectInput, ScSelectItem, ScSelectItemIcon, ScSelectItemLa
       </ng-template>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Example {
   options = [

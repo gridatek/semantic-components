@@ -33,7 +33,7 @@ Each demo is a minimal standalone component isolating one behavior.
 **File:** `demos/basic-{component}-demo.ts`
 
 ```typescript
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ScAccordion, ScAccordionItem, ScAccordionPanel, ScAccordionTrigger } from '@semantic-components/ui';
 
 @Component({
@@ -51,7 +51,6 @@ import { ScAccordion, ScAccordionItem, ScAccordionPanel, ScAccordionTrigger } fr
       </div>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicAccordionDemo {}
 ```
@@ -69,7 +68,7 @@ Each demo gets a container that wraps it with a title and code viewer.
 **File:** `demos/basic-{component}-demo-container.ts`
 
 ```typescript
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 import { BasicAccordionDemo } from './basic-accordion-demo';
 
@@ -82,7 +81,6 @@ import { BasicAccordionDemo } from './basic-accordion-demo';
     </app-demo-container>
   `,
   host: { class: 'block' },
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BasicAccordionDemoContainer {
   readonly code = `// The exact content of basic-accordion-demo.ts goes here
@@ -103,7 +101,7 @@ The page imports all containers and displays them.
 **File:** `{component}-page.ts`
 
 ```typescript
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { BasicAccordionDemoContainer } from './demos/basic-accordion-demo-container';
 import { DisabledAccordionDemoContainer } from './demos/disabled-accordion-demo-container';
 import { MultipleAccordionDemoContainer } from './demos/multiple-accordion-demo-container';
@@ -126,7 +124,6 @@ import { MultipleAccordionDemoContainer } from './demos/multiple-accordion-demo-
       </section>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AccordionPage {}
 ```

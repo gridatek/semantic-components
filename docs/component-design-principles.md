@@ -203,7 +203,6 @@ import { cn } from '../../utils';
   template: `
     <ng-content />
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScComponentName {
   // Class input for custom styling

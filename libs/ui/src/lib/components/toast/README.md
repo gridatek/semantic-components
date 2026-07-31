@@ -36,7 +36,7 @@ ScToaster (Injectable)
 ### ScToaster
 
 ```typescript
-@Injectable({ providedIn: 'root' })
+@Service()
 class ScToaster {
   // Signal containing all active toasts
   readonly toasts: Signal<ToastData[]>;

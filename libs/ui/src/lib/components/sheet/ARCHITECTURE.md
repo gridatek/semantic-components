@@ -753,7 +753,7 @@ The animation system preserves accessibility:
 
 ### Efficient Rendering
 
-- Uses `ChangeDetectionStrategy.OnPush` everywhere
+- OnPush change detection throughout (the Angular v22+ default)
 - Effects only run when dependencies change
 - No manual subscriptions to manage
 - Single overlay instance reused
