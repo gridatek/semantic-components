@@ -196,7 +196,7 @@ export class ScPdfViewerRoot {
 
     this.destroyRef.onDestroy(() => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      this.pdfDocument()?.destroy();
+      this.pdfDocument()?.loadingTask.destroy();
       if (this.undoTimeout) {
         clearTimeout(this.undoTimeout);
       }
@@ -219,9 +219,9 @@ export class ScPdfViewerRoot {
 
     try {
       // Destroy previous document if any
-      this.pdfDocument()?.destroy();
+      this.pdfDocument()?.loadingTask.destroy();
 
-      const loadingTask = getDocument(url);
+      const loadingTask = getDocument({ url });
 
       // Handle password-protected PDFs
       loadingTask.onPassword = (
