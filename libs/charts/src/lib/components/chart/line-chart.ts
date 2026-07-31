@@ -246,7 +246,7 @@ export class ScLineChart {
 
   onPointKeydown(event: KeyboardEvent, index: number): void {
     const points = this.points();
-    let nextIndex = index;
+    let nextIndex: number;
 
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
       event.preventDefault();

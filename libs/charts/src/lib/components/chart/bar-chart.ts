@@ -217,7 +217,7 @@ export class ScBarChart {
 
   onBarKeydown(event: KeyboardEvent, index: number): void {
     const bars = this.bars();
-    let nextIndex = index;
+    let nextIndex: number;
 
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
       event.preventDefault();
