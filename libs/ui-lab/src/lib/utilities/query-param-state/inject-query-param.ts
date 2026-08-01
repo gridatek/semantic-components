@@ -1,6 +1,11 @@
-import { DestroyRef, WritableSignal, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import {
+  WritableSignal,
+  debounced,
+  effect,
+  inject,
+  linkedSignal,
+  untracked,
+} from '@angular/core';
 import { QueryParamSyncService } from './query-param-sync';
 import type {
   ParserBuilder,
@@ -42,20 +47,15 @@ export function injectQueryParam<T>(
   parser: ParserBuilder<T> | ParserBuilderWithDefault<T>,
 ): QueryParamState<T | null> {
   const sync = inject(QueryParamSyncService);
-  const route = inject(ActivatedRoute);
-  const destroyRef = inject(DestroyRef);
 
   const hasDefault = '_default' in parser && parser._default !== undefined;
   const defaultValue: T | null = hasDefault
     ? (parser as ParserBuilderWithDefault<T>)._default
     : null;
 
-  // Read initial value from URL snapshot
-  const rawInit = sync.getRaw(key);
-  const initialParsed = rawInit !== null ? parser.parse(rawInit) : null;
-  const initialValue: T | null = initialParsed ?? defaultValue;
-
-  const sig = signal<T | null>(initialValue);
+  // Shared per-key raw value. Every call site for `key` observes this same
+  // signal, and the service keeps it current from a single route subscription.
+  const raw = sync.raw(key);
 
   const isDefault = (value: T | null): boolean => {
     if (!hasDefault || value === null || defaultValue === null) return false;
@@ -64,36 +64,55 @@ export function injectQueryParam<T>(
 
   // If the URL carries the default value explicitly, strip it so the canonical
   // URL only ever contains non-default state.
+  const rawInit = untracked(raw);
+  const initialParsed = rawInit !== null ? parser.parse(rawInit) : null;
   if (rawInit !== null && initialParsed !== null && isDefault(initialParsed)) {
     sync.write(key, null, parser._options);
   }
 
-  // Subscribe to route changes and keep signal in sync
-  route.queryParamMap
-    .pipe(takeUntilDestroyed(destroyRef))
-    .subscribe((params) => {
-      const raw = params.has(key) ? params.get(key) : null;
-      if (raw === null) {
-        sig.set(defaultValue);
-      } else {
-        const parsed = parser.parse(raw);
-        sig.set(parsed ?? defaultValue);
-      }
-    });
+  // Typed view of the shared raw value, locally writable so `set` can update
+  // optimistically before the URL catches up. External changes (back/forward,
+  // hand-edited links, a sibling call site) reset it through `source`.
+  const sig = linkedSignal<string | null, T | null>({
+    source: raw,
+    computation: (value) =>
+      value === null ? defaultValue : (parser.parse(value) ?? defaultValue),
+  });
+
+  // Local writes publish to the shared raw value immediately, so sibling call
+  // sites for the same key converge in this tick rather than waiting on the URL
+  // round-trip — which `debounceMs` can defer for as long as the user keeps
+  // typing. No "skip the first run" guard here: `raw` is seeded from the URL,
+  // so the initial pass is already a no-op by equality, and skipping a run by
+  // counter would swallow a write made before the first change detection.
+  effect(() => {
+    const value = sig();
+    const next =
+      value === null || isDefault(value) ? null : parser.serialize(value);
+    if (next !== untracked(raw)) raw.set(next);
+  });
+
+  // The URL is a projection of the shared raw value, optionally debounced. The
+  // write is skipped when it already matches the live URL: that guard is what
+  // stops the URL → signal → URL cycle from sustaining itself.
+  const debounceMs = parser._options?.debounceMs ?? 0;
+  const debouncedRaw = debounceMs > 0 ? debounced(raw, debounceMs) : null;
+  const readRaw = debouncedRaw ? () => debouncedRaw.value() : () => raw();
+
+  effect(() => {
+    const next = readRaw();
+    if (next === sync.getRaw(key)) return;
+    sync.write(key, next, parser._options);
+  });
 
   return {
     value: sig as WritableSignal<T>,
 
     set(value: T | null): void {
-      const raw =
-        value === null || isDefault(value) ? null : parser.serialize(value);
-      sync.write(key, raw, parser._options);
-      // Optimistic local update for instant UI response
       sig.set(value ?? defaultValue);
     },
 
     clear(): void {
-      sync.write(key, null, parser._options);
       sig.set(defaultValue);
     },
   };

@@ -71,7 +71,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoQueryParamStateDemo {
-  readonly search = injectQueryParam('q', parseAsString.withDefault(''));
+  readonly search = injectQueryParam(
+    'q',
+    parseAsString.withDefault('').withOptions({ debounceMs: 300 }),
+  );
 
   readonly page = injectQueryParam('page', parseAsInteger.withDefault(1));
 
