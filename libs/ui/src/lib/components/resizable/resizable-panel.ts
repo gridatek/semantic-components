@@ -33,7 +33,16 @@ export class ScResizablePanel {
   readonly minSize = input<number>(0);
   readonly maxSize = input<number>(100);
 
-  readonly size = linkedSignal(() => this.defaultSize());
+  /**
+   * Clamping lives in the `set` interceptor rather than in `setSize`, so a
+   * direct `size.set(...)` from a consumer honours minSize/maxSize too.
+   */
+  readonly size = linkedSignal<number, number>({
+    source: () => this.defaultSize(),
+    computation: (defaultSize) => defaultSize,
+    set: (value, rawSet) =>
+      rawSet(Math.max(this.minSize(), Math.min(this.maxSize(), value))),
+  });
 
   protected readonly class = computed(() =>
     cn('overflow-hidden', this.classInput()),
@@ -43,7 +52,6 @@ export class ScResizablePanel {
   protected readonly maxSizePx = computed(() => `${this.maxSize()}%`);
 
   setSize(newSize: number): void {
-    const clamped = Math.max(this.minSize(), Math.min(this.maxSize(), newSize));
-    this.size.set(clamped);
+    this.size.set(newSize);
   }
 }

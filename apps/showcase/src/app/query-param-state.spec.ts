@@ -27,6 +27,13 @@ async function mount<T>(type: new () => T, url = '/'): Promise<T> {
   return TestBed.createComponent(type).componentInstance;
 }
 
+/** Run effects, then let the service's microtask batch and the router settle. */
+async function settle(): Promise<void> {
+  TestBed.tick();
+  for (let i = 0; i < 5; i++) await Promise.resolve();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+}
+
 describe('injectQueryParam', () => {
   it('seeds both call sites for a key from the URL', async () => {
     const c = await mount(TwoCallSites, '/?q=hello');
@@ -34,23 +41,30 @@ describe('injectQueryParam', () => {
     expect(c.b.value()).toBe('hello');
   });
 
-  it('propagates a write to a sibling call site in the same tick', async () => {
+  it('propagates a write to a sibling call site synchronously', async () => {
     const c = await mount(TwoCallSites, '/?q=hello');
 
     c.a.set('world');
-    TestBed.tick();
 
-    // Before the fix this stayed 'hello' until the router round-trip landed.
+    // No tick: the linkedSignal `set` interceptor publishes to the shared raw
+    // value during the write itself, not on the next change detection.
     expect(c.b.value()).toBe('world');
   });
 
-  it('propagates clear() to a sibling call site', async () => {
+  it('propagates clear() to a sibling call site synchronously', async () => {
     const c = await mount(TwoCallSites, '/?q=hello');
 
     c.a.clear();
-    TestBed.tick();
 
     expect(c.b.value()).toBe('');
+  });
+
+  it('propagates a write made through the exposed signal', async () => {
+    const c = await mount(TwoCallSites, '/?q=hello');
+
+    c.a.value.set('direct');
+
+    expect(c.b.value()).toBe('direct');
   });
 
   it('reflects external navigation into every call site', async () => {
@@ -63,11 +77,36 @@ describe('injectQueryParam', () => {
     expect(c.b.value()).toBe('external');
   });
 
+  it('projects the value onto the URL', async () => {
+    const c = await mount(TwoCallSites, '/?q=hello');
+
+    c.a.set('world');
+    await settle();
+
+    expect(c.router.url).toContain('q=world');
+  });
+
+  it('strips the param from the URL on clear()', async () => {
+    const c = await mount(TwoCallSites, '/?q=hello');
+
+    c.a.clear();
+    await settle();
+
+    expect(c.router.url).not.toContain('q=');
+  });
+
   it('corrects a value the parser cannot round-trip', async () => {
     const c = await mount(Truncating, '/?page=2');
 
     c.page.set(3.7);
-    TestBed.tick();
+
+    expect(c.page.value()).toBe(3);
+  });
+
+  it('corrects even when the serialised form already matches the URL', async () => {
+    const c = await mount(Truncating, '/?page=3');
+
+    c.page.set(3.7);
 
     expect(c.page.value()).toBe(3);
   });

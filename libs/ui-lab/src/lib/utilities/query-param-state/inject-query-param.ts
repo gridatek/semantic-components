@@ -70,26 +70,31 @@ export function injectQueryParam<T>(
     sync.write(key, null, parser._options);
   }
 
-  // Typed view of the shared raw value, locally writable so `set` can update
-  // optimistically before the URL catches up. External changes (back/forward,
-  // hand-edited links, a sibling call site) reset it through `source`.
+  const parseRaw = (value: string | null): T | null =>
+    value === null ? defaultValue : (parser.parse(value) ?? defaultValue);
+
+  const serializeValue = (value: T | null): string | null =>
+    value === null || isDefault(value) ? null : parser.serialize(value);
+
+  // Typed view of the shared raw value. External changes (back/forward,
+  // hand-edited links, another call site) reset it through `source`; local
+  // writes are intercepted by `set` and published to the shared raw value
+  // synchronously, so sibling call sites for the same key observe them in the
+  // same statement rather than on the next change detection. The URL write
+  // stays debounced downstream, independently of this.
   const sig = linkedSignal<string | null, T | null>({
     source: raw,
-    computation: (value) =>
-      value === null ? defaultValue : (parser.parse(value) ?? defaultValue),
-  });
-
-  // Local writes publish to the shared raw value immediately, so sibling call
-  // sites for the same key converge in this tick rather than waiting on the URL
-  // round-trip — which `debounceMs` can defer for as long as the user keeps
-  // typing. No "skip the first run" guard here: `raw` is seeded from the URL,
-  // so the initial pass is already a no-op by equality, and skipping a run by
-  // counter would swallow a write made before the first change detection.
-  effect(() => {
-    const value = sig();
-    const next =
-      value === null || isDefault(value) ? null : parser.serialize(value);
-    if (next !== untracked(raw)) raw.set(next);
+    computation: (value) => parseRaw(value),
+    set: (value, rawSet) => {
+      const next = serializeValue(value);
+      if (next !== untracked(raw)) {
+        // Changing the source re-runs `computation`, which canonicalises the
+        // value: page.set(3.7) with parseAsInteger settles on 3.
+        raw.set(next);
+      } else {
+        rawSet(parseRaw(next));
+      }
+    },
   });
 
   // The URL is a projection of the shared raw value, optionally debounced. The
