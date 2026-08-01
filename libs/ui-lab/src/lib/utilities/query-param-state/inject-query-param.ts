@@ -88,11 +88,18 @@ export function injectQueryParam<T>(
       }
     });
 
-  // Signal is the source of truth; URL is a derived view of it.
   const debounceMs = parser._options?.debounceMs ?? 0;
   const debouncedView = debounceMs > 0 ? debounced(sig, debounceMs) : null;
   const read = debouncedView ? () => debouncedView.value() : () => sig();
 
+  // The signal is the write origin: `set`/`clear` only touch the signal, and
+  // this effect projects it onto the URL. The URL round-trips back in via the
+  // queryParamMap subscription above, so this is a cycle — it converges because
+  // a write is skipped when the serialised value already matches the live URL.
+  // That guard is required, not an optimisation: parsers returning reference
+  // types (parseAsJson, parseAsArrayOf, the Date parsers) hand back a fresh
+  // object on every navigation, which re-notifies the signal and re-runs this
+  // effect. Without the guard each write would trigger the next.
   let firstRun = true;
   effect(() => {
     const value = read();
