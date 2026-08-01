@@ -19,13 +19,7 @@ import { DemoQueryParamStateDemo } from './demo-query-param-state-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoQueryParamStateDemoContainer {
-  readonly code = `import {
-  Component,
-  ViewEncapsulation,
-  effect,
-  linkedSignal,
-  untracked,
-} from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, linkedSignal } from '@angular/core';
 import { FormField, form, min } from '@angular/forms/signals';
 import {
   injectQueryParam,
@@ -104,28 +98,30 @@ export class DemoQueryParamStateDemo {
     parseAsStringEnum(['asc', 'desc'] as const).withDefault('asc'),
   );
 
-  /** Resets whenever the URL changes, so the form always mirrors the query params. */
-  readonly formModel = linkedSignal(() => ({
-    q: this.search.value(),
-    page: this.page.value(),
-    sort: this.sort.value(),
-  }));
+  /**
+   * Resets whenever the URL changes, so the form always mirrors the query
+   * params. The \`set\` interceptor pushes form edits straight back into the
+   * params — synchronously, and without an effect.
+   */
+  readonly formModel = linkedSignal(
+    () => ({
+      q: this.search.value(),
+      page: this.page.value(),
+      sort: this.sort.value(),
+    }),
+    {
+      set: ({ q, page, sort }, rawSet) => {
+        rawSet({ q, page, sort });
+        if (q !== this.search.value()) this.search.set(q);
+        if (page !== this.page.value()) this.page.set(page);
+        if (sort !== this.sort.value()) this.sort.set(sort);
+      },
+    },
+  );
 
   readonly filtersForm = form(this.formModel, (path) => {
     min(path.page, 1, { message: 'Page must be at least 1' });
   });
-
-  constructor() {
-    // Push edits made through the form back into the URL.
-    effect(() => {
-      const { q, page, sort } = this.formModel();
-      untracked(() => {
-        if (q !== this.search.value()) this.search.set(q);
-        if (page !== this.page.value()) this.page.set(page);
-        if (sort !== this.sort.value()) this.sort.set(sort);
-      });
-    });
-  }
 
   stateJson() {
     return JSON.stringify(
