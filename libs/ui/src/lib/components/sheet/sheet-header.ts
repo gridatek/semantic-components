@@ -11,6 +11,9 @@ export class ScSheetHeader {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex flex-col gap-2 text-center sm:text-start', this.classInput()),
+    cn(
+      'flex flex-col gap-0.5 p-4 text-center sm:text-start',
+      this.classInput(),
+    ),
   );
 }

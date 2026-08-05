@@ -12,7 +12,7 @@ export class ScSheetFooter {
 
   protected readonly class = computed(() =>
     cn(
-      'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end',
+      'flex flex-col-reverse gap-2 p-4 sm:flex-row sm:justify-end',
       this.classInput(),
     ),
   );

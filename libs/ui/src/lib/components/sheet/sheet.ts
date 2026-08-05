@@ -47,7 +47,7 @@ export class ScSheet {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-popover text-popover-foreground fixed z-50 flex flex-col gap-4 p-6 shadow-lg duration-200 ease-in-out transition',
+      'bg-popover text-popover-foreground fixed z-50 flex flex-col gap-4 bg-clip-padding text-sm shadow-lg duration-200 ease-in-out transition',
       // Position based on side
       'data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t',
       'data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-r data-[side=left]:sm:max-w-sm',
