@@ -15,6 +15,6 @@ export class ScDateRangePickerPresets {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex min-w-[140px] flex-col gap-1 border-r p-3', this.classInput()),
+    cn('flex min-w-[140px] flex-col gap-1 border-e p-3', this.classInput()),
   );
 }

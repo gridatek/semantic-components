@@ -15,7 +15,7 @@ export class ScSelectIcon {
 
   protected readonly class = computed(() =>
     cn(
-      'text-muted-foreground pointer-events-none ml-auto size-4 shrink-0 transition-transform duration-150',
+      'text-muted-foreground pointer-events-none ms-auto size-4 shrink-0 transition-transform duration-150',
       this.combobox.expanded() && 'rotate-180',
       this.classInput(),
     ),

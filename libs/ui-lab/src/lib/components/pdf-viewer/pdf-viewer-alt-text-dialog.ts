@@ -44,13 +44,13 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
               />
               Add a description
             </label>
-            <p class="mt-1 ml-6 text-xs text-gray-500">
+            <p class="ms-6 mt-1 text-xs text-gray-500">
               Aim for 1-2 sentences that describe the subject, setting, or
               actions.
             </p>
             @if (!isDecorative()) {
               <textarea
-                class="mt-2 ml-6 w-[calc(100%-1.5rem)] resize-none rounded border border-gray-300 bg-white p-2 text-sm text-gray-900 outline-none focus:border-blue-500"
+                class="ms-6 mt-2 w-[calc(100%-1.5rem)] resize-none rounded border border-gray-300 bg-white p-2 text-sm text-gray-900 outline-none focus:border-blue-500"
                 rows="3"
                 [placeholder]="'For example, “A young man sits down at a table to eat a meal”'"
                 [value]="altText()"
@@ -70,7 +70,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
               />
               Mark as decorative
             </label>
-            <p class="mt-1 ml-6 text-xs text-gray-500">
+            <p class="ms-6 mt-1 text-xs text-gray-500">
               This is used for ornamental images, like borders or watermarks.
             </p>
           </div>

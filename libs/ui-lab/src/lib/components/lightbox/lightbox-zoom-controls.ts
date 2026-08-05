@@ -13,6 +13,6 @@ export class ScLightboxZoomControls {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('ml-4 flex items-center gap-1', this.classInput()),
+    cn('ms-4 flex items-center gap-1', this.classInput()),
   );
 }

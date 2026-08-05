@@ -26,7 +26,7 @@ export class ScDateRangePickerPreset {
 
   protected readonly class = computed(() =>
     cn(
-      'text-left px-3 py-2 text-sm rounded-md',
+      'text-start px-3 py-2 text-sm rounded-md',
       'hover:bg-accent hover:text-accent-foreground',
       this.isActive() && 'bg-accent text-accent-foreground',
       this.classInput(),

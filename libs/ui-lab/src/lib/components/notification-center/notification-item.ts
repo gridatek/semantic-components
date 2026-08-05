@@ -36,7 +36,7 @@ import type { Notification, NotificationAction } from './notification-types';
     }
 
     <!-- Icon or Avatar -->
-    <div class="ml-4 shrink-0">
+    <div class="ms-4 shrink-0">
       @if (notification().avatar) {
         <img
           [src]="notification().avatar"
@@ -71,7 +71,7 @@ import type { Notification, NotificationAction } from './notification-types';
     </div>
 
     <!-- Content -->
-    <div class="ml-3 min-w-0 flex-1">
+    <div class="ms-3 min-w-0 flex-1">
       <div class="flex items-start justify-between gap-2">
         <p
           class="text-foreground truncate text-sm font-medium"
@@ -106,7 +106,7 @@ import type { Notification, NotificationAction } from './notification-types';
     @if (showDismiss()) {
       <button
         type="button"
-        class="hover:bg-muted text-muted-foreground hover:text-foreground ml-2 shrink-0 rounded-full p-1 opacity-0 transition-all group-hover:opacity-100"
+        class="hover:bg-muted text-muted-foreground hover:text-foreground ms-2 shrink-0 rounded-full p-1 opacity-0 transition-all group-hover:opacity-100"
         (click)="onDismiss($event)"
         aria-label="Dismiss notification"
       >
@@ -137,7 +137,7 @@ export class ScNotificationItem {
 
   protected readonly class = computed(() =>
     cn(
-      'group relative flex items-start p-3 pr-2 rounded-lg cursor-pointer',
+      'group relative flex items-start p-3 pe-2 rounded-lg cursor-pointer',
       'hover:bg-muted/50 transition-colors',
       'focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
       !this.notification().read && 'bg-primary/5',

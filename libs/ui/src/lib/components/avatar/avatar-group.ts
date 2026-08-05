@@ -12,7 +12,7 @@ export class ScAvatarGroup {
 
   protected readonly class = computed(() =>
     cn(
-      '*:data-[slot=avatar]:ring-background group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2',
+      '*:data-[slot=avatar]:ring-background group/avatar-group flex -space-x-2 rtl:space-x-reverse *:data-[slot=avatar]:ring-2',
       this.classInput(),
     ),
   );

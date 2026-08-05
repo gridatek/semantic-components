@@ -12,7 +12,7 @@ export class ScDrawerHeader {
 
   protected readonly class = computed(() =>
     cn(
-      'gap-0.5 p-4 group-data-[direction=bottom]/drawer:text-center group-data-[direction=top]/drawer:text-center md:gap-0.5 md:text-left flex flex-col',
+      'gap-0.5 p-4 group-data-[direction=bottom]/drawer:text-center group-data-[direction=top]/drawer:text-center md:gap-0.5 md:text-start flex flex-col',
       this.classInput(),
     ),
   );

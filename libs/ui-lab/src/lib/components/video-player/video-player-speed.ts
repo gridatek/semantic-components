@@ -69,7 +69,7 @@ export class ScVideoPlayerSpeed {
 
   protected getSpeedItemClass(speed: number): string {
     return cn(
-      'w-full cursor-default rounded-md px-3 py-1 text-left text-sm hover:bg-accent',
+      'w-full cursor-default rounded-md px-3 py-1 text-start text-sm hover:bg-accent',
       this.player.playbackRate() === speed && 'bg-accent',
     );
   }

@@ -12,7 +12,7 @@ export class ScDiffViewerLineNumber {
 
   protected readonly class = computed(() =>
     cn(
-      'text-muted-foreground inline-block w-12 border-r px-2 text-right select-none',
+      'text-muted-foreground inline-block w-12 border-e px-2 text-end select-none',
       this.classInput(),
     ),
   );

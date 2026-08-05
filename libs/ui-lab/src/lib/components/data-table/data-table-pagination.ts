@@ -33,8 +33,8 @@ import { SC_DATA_TABLE } from './data-table';
           {{ table.sortedData().length }} row(s) total.
         }
       </div>
-      <div class="flex items-center space-x-6 lg:space-x-8">
-        <div class="flex items-center space-x-2">
+      <div class="flex items-center space-x-6 lg:space-x-8 rtl:space-x-reverse">
+        <div class="flex items-center space-x-2 rtl:space-x-reverse">
           <p class="text-sm font-medium">Rows per page</p>
           <select
             class="border-input bg-background h-8 w-[70px] rounded-md border text-sm"
@@ -51,7 +51,7 @@ import { SC_DATA_TABLE } from './data-table';
         >
           Page {{ currentPage() }} of {{ totalPages() }}
         </div>
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 rtl:space-x-reverse">
           <button
             type="button"
             class="border-input bg-background hover:bg-accent inline-flex size-8 items-center justify-center rounded-md border disabled:opacity-50"

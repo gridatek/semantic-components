@@ -15,7 +15,7 @@ export class ScNavigationMenuTriggerIcon {
 
   protected readonly class = computed(() =>
     cn(
-      'relative top-px ml-1 size-3 transition duration-300',
+      'relative top-px ms-1 size-3 transition duration-300',
       this.menuItem.open() && 'rotate-180',
       this.classInput(),
     ),
