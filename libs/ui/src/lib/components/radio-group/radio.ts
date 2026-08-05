@@ -54,9 +54,11 @@ export class ScRadio {
     cn(
       'relative',
       'appearance-none',
-      'aspect-square h-4 w-4 rounded-full border border-primary text-primary shadow focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+      'aspect-square h-4 w-4 rounded-full border border-input dark:bg-input/30 transition-colors disabled:cursor-not-allowed disabled:opacity-50',
+      'checked:bg-primary checked:border-primary checked:text-primary-foreground',
+      'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-3',
       "[&::before]:content-['']",
-      '[&::before]:absolute [&::before]:top-1/2 [&::before]:left-1/2 [&::before]:-translate-x-1/2 [&::before]:-translate-y-1/2 [&::before]:size-2.5 [&::before]:rounded-full [&::before]:bg-primary [&::before]:opacity-0 [&::before]:transform [&::before]:scale-0 [&::before]:transition-all [&::before]:duration-200',
+      '[&::before]:absolute [&::before]:top-1/2 [&::before]:left-1/2 [&::before]:-translate-x-1/2 [&::before]:-translate-y-1/2 [&::before]:size-2 [&::before]:rounded-full [&::before]:bg-primary-foreground [&::before]:opacity-0 [&::before]:transform [&::before]:scale-0 [&::before]:transition-all [&::before]:duration-200',
       'checked:[&::before]:opacity-100 checked:[&::before]:scale-100',
       this.classInput(),
     ),
