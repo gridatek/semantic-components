@@ -12,7 +12,7 @@ export class ScNativeSelectIcon {
 
   protected readonly class = computed(() =>
     cn(
-      'text-muted-foreground top-1/2 right-2.5 size-4 -translate-y-1/2 pointer-events-none absolute select-none',
+      'text-muted-foreground top-1/2 end-2.5 size-4 -translate-y-1/2 pointer-events-none absolute select-none',
       this.classInput(),
     ),
   );

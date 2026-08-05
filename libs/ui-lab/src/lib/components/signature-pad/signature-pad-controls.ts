@@ -11,6 +11,6 @@ export class ScSignaturePadControls {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('absolute top-2 right-2 flex gap-1', this.classInput()),
+    cn('absolute top-2 end-2 flex gap-1', this.classInput()),
   );
 }

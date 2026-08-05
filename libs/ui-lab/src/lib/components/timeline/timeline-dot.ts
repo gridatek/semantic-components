@@ -20,7 +20,7 @@ export class ScTimelineDot {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute left-0 flex items-center justify-center rounded-full',
+      'absolute start-0 flex items-center justify-center rounded-full',
       // Size
       this.size() === 'sm' && 'size-4 top-1',
       this.size() === 'default' && 'size-6 top-0',

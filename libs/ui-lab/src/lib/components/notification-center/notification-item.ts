@@ -30,7 +30,7 @@ import type { Notification, NotificationAction } from './notification-types';
     <!-- Unread indicator -->
     @if (!notification().read) {
       <div
-        class="bg-primary absolute top-1/2 left-2 h-2 w-2 -translate-y-1/2 rounded-full"
+        class="bg-primary absolute start-2 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full"
         aria-label="Unread"
       ></div>
     }

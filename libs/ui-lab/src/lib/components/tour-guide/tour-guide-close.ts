@@ -16,6 +16,6 @@ export class ScTourGuideClose {
   protected readonly state = inject(ScTourGuideState);
 
   protected readonly class = computed(() =>
-    cn('hover:bg-accent absolute top-2 right-2 rounded p-1', this.classInput()),
+    cn('hover:bg-accent absolute top-2 end-2 rounded p-1', this.classInput()),
   );
 }

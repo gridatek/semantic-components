@@ -12,6 +12,6 @@ export class ScAlertAction {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('absolute top-2 right-2', this.classInput()),
+    cn('absolute top-2 end-2', this.classInput()),
   );
 }

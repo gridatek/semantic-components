@@ -21,7 +21,7 @@ export class ScCalendarNext {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'absolute right-1',
+      'absolute end-1',
       this.classInput(),
     ),
   );

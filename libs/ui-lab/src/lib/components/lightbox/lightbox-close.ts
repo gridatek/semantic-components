@@ -17,7 +17,7 @@ export class ScLightboxClose {
 
   protected readonly class = computed(() =>
     cn(
-      "absolute top-4 right-4 z-10 inline-flex size-10 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white [&_svg:not([class*='size-'])]:size-6",
+      "absolute top-4 end-4 z-10 inline-flex size-10 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white [&_svg:not([class*='size-'])]:size-6",
       this.classInput(),
     ),
   );

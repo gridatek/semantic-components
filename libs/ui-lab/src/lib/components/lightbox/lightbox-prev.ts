@@ -21,7 +21,7 @@ export class ScLightboxPrev {
 
   protected readonly class = computed(() =>
     cn(
-      "absolute top-1/2 left-4 z-10 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-30 [&_svg:not([class*='size-'])]:size-6",
+      "absolute top-1/2 start-4 z-10 inline-flex size-10 -translate-y-1/2 items-center justify-center rounded-full text-white/80 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-30 [&_svg:not([class*='size-'])]:size-6",
       this.classInput(),
     ),
   );
