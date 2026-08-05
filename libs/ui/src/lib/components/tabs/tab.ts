@@ -21,6 +21,7 @@ export class ScTab {
       'gap-1.5 rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium',
       'group-data-[variant=default]/tab-list:aria-selected:shadow-sm group-data-[variant=line]/tab-list:aria-selected:shadow-none',
       "[&_svg:not([class*='size-'])]:size-4",
+      'has-data-[icon=inline-end]:pe-1 has-data-[icon=inline-start]:ps-1',
       'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring',
       'text-foreground/60 hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground',
       'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center whitespace-nowrap transition-all',
