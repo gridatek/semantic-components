@@ -5,33 +5,35 @@ A set of directives for building accessible, styled data tables using native HTM
 ## Usage
 
 ```typescript
-import { ScTable, ScTableBody, ScTableCaption, ScTableCell, ScTableFooter, ScTableHeader, ScTableHeaderCell, ScTableRow } from '@semantic-components/ui';
+import { ScTable, ScTableBody, ScTableCaption, ScTableCell, ScTableContainer, ScTableFooter, ScTableHeader, ScTableHeaderCell, ScTableRow } from '@semantic-components/ui';
 ```
 
 ```html
-<table scTable>
-  <caption scTableCaption>A list of recent invoices.</caption>
-  <thead scTableHeader>
-    <tr scTableRow>
-      <th scTableHeaderCell>Invoice</th>
-      <th scTableHeaderCell>Status</th>
-      <th scTableHeaderCell>Amount</th>
-    </tr>
-  </thead>
-  <tbody scTableBody>
-    <tr scTableRow>
-      <td scTableCell>INV-001</td>
-      <td scTableCell>Paid</td>
-      <td scTableCell>$250.00</td>
-    </tr>
-  </tbody>
-  <tfoot scTableFooter>
-    <tr scTableRow>
-      <td scTableCell colspan="2">Total</td>
-      <td scTableCell>$250.00</td>
-    </tr>
-  </tfoot>
-</table>
+<div scTableContainer>
+  <table scTable>
+    <caption scTableCaption>A list of recent invoices.</caption>
+    <thead scTableHeader>
+      <tr scTableRow>
+        <th scTableHeaderCell>Invoice</th>
+        <th scTableHeaderCell>Status</th>
+        <th scTableHeaderCell>Amount</th>
+      </tr>
+    </thead>
+    <tbody scTableBody>
+      <tr scTableRow>
+        <td scTableCell>INV-001</td>
+        <td scTableCell>Paid</td>
+        <td scTableCell>$250.00</td>
+      </tr>
+    </tbody>
+    <tfoot scTableFooter>
+      <tr scTableRow>
+        <td scTableCell colspan="2">Total</td>
+        <td scTableCell>$250.00</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
 ```
 
 ## Components
@@ -44,6 +46,15 @@ All directives accept a `class` input for merging additional CSS classes via the
 | --------------- | ------------------------------- |
 | Selector        | `table[scTable]`                |
 | Default classes | `w-full caption-bottom text-sm` |
+
+### ScTableContainer
+
+| Property        | Details                           |
+| --------------- | --------------------------------- |
+| Selector        | `div[scTableContainer]`           |
+| Default classes | `relative w-full overflow-x-auto` |
+
+Wraps the table so it scrolls horizontally rather than widening its parent.
 
 ### ScTableHeader
 

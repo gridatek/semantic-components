@@ -60,6 +60,7 @@ export class TableUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
+  ScTableContainer,
   ScTableBody,
   ScTableCaption,
   ScTableCell,
@@ -73,6 +74,7 @@ import {
   selector: 'app-table-usage-demo',
   imports: [
     ScTable,
+    ScTableContainer,
     ScTableBody,
     ScTableCaption,
     ScTableCell,
@@ -82,29 +84,31 @@ import {
     ScTableRow,
   ],
   template: \`
-    <table scTable>
-      <caption scTableCaption>A list of your recent invoices.</caption>
-      <thead scTableHeader>
-        <tr scTableRow>
-          <th scTableHeaderCell>Invoice</th>
-          <th scTableHeaderCell>Status</th>
-          <th scTableHeaderCell class="text-right">Amount</th>
-        </tr>
-      </thead>
-      <tbody scTableBody>
-        <tr scTableRow>
-          <td scTableCell>INV001</td>
-          <td scTableCell>Paid</td>
-          <td scTableCell class="text-right">$250.00</td>
-        </tr>
-      </tbody>
-      <tfoot scTableFooter>
-        <tr scTableRow>
-          <td scTableCell colspan="2">Total</td>
-          <td scTableCell class="text-right">$250.00</td>
-        </tr>
-      </tfoot>
-    </table>
+    <div scTableContainer>
+      <table scTable>
+        <caption scTableCaption>A list of your recent invoices.</caption>
+        <thead scTableHeader>
+          <tr scTableRow>
+            <th scTableHeaderCell>Invoice</th>
+            <th scTableHeaderCell>Status</th>
+            <th scTableHeaderCell class="text-right">Amount</th>
+          </tr>
+        </thead>
+        <tbody scTableBody>
+          <tr scTableRow>
+            <td scTableCell>INV001</td>
+            <td scTableCell>Paid</td>
+            <td scTableCell class="text-right">$250.00</td>
+          </tr>
+        </tbody>
+        <tfoot scTableFooter>
+          <tr scTableRow>
+            <td scTableCell colspan="2">Total</td>
+            <td scTableCell class="text-right">$250.00</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
