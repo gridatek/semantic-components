@@ -20,9 +20,9 @@ import { SC_CHECKBOX_FIELD } from './checkbox-types';
   },
   template: `
     @if (checkbox.dataState() === 'indeterminate') {
-      <svg siMinusIcon class="size-4"></svg>
+      <svg siMinusIcon class="size-3.5"></svg>
     } @else if (checkbox.dataState() === 'checked') {
-      <svg siCheckIcon class="size-4"></svg>
+      <svg siCheckIcon class="size-3.5"></svg>
     }
   `,
   encapsulation: ViewEncapsulation.None,

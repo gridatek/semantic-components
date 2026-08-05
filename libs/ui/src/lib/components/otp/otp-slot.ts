@@ -63,8 +63,8 @@ export class ScOtpSlot {
 
   protected readonly class = computed(() =>
     cn(
-      'relative flex h-10 w-10 items-center justify-center border-y border-e border-input text-sm transition-all first:rounded-s-md first:border-s last:rounded-e-md',
-      this.isActive() && 'z-10 ring-2 ring-ring ring-offset-background',
+      'relative flex h-10 w-10 items-center justify-center dark:bg-input/30 border-y border-e border-input text-sm transition-all outline-none first:rounded-s-md first:border-s last:rounded-e-md',
+      this.isActive() && 'z-10 border-ring ring-ring/50 ring-3',
       this.classInput(),
     ),
   );
