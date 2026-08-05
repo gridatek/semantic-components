@@ -27,7 +27,9 @@ export const itemVariants = cva(
 export type ScItemVariants = VariantProps<typeof itemVariants>;
 
 @Directive({
-  selector: 'div[scItem]',
+  // `a` is included so the `[a]:hover:*` variants above can match: an item is
+  // only interactive when it is a link.
+  selector: 'div[scItem], a[scItem]',
   host: {
     '[attr.data-variant]': 'variant()',
     '[attr.data-size]': 'size()',
