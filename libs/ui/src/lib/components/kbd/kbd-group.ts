@@ -4,6 +4,7 @@ import { cn } from '../../utils';
 @Directive({
   selector: 'kbd[scKbdGroup]',
   host: {
+    'data-slot': 'kbd-group',
     '[class]': 'class()',
   },
 })
