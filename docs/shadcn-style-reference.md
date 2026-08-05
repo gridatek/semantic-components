@@ -39,13 +39,14 @@ So when comparing our styling to shadcn's, **read the CSS file**. Reading the
 
 All paths are under `https://github.com/shadcn-ui/ui/tree/main/`.
 
-| What you want                                      | Path                                            |
-| -------------------------------------------------- | ----------------------------------------------- |
-| **Styles** (class declarations)                    | `apps/v4/registry/styles/style-<theme>.css`     |
-| Component source (structure, slots, variant names) | `apps/v4/registry/bases/base/ui/*.tsx`          |
-| Usage examples / demos                             | `apps/v4/examples/base/*.tsx`                   |
-| Theme list and metadata                            | `apps/v4/registry/styles.tsx`                   |
-| Defaults                                           | `apps/v4/registry/config.ts` (`DEFAULT_CONFIG`) |
+| What you want                                      | Path                                                      |
+| -------------------------------------------------- | --------------------------------------------------------- |
+| **Styles** (class declarations)                    | `apps/v4/registry/styles/style-<theme>.css`               |
+| Component source (structure, slots, variant names) | `apps/v4/registry/bases/base/ui/*.tsx`                    |
+| Usage examples / demos                             | `apps/v4/examples/base/*.tsx`                             |
+| Theme list and metadata                            | `apps/v4/registry/styles.tsx`                             |
+| Defaults                                           | `apps/v4/registry/config.ts` (`DEFAULT_CONFIG`)           |
+| **RTL mapping table**                              | `packages/shadcn/src/utils/transformers/transform-rtl.ts` |
 
 > Historical note: the path `apps/v4/examples/base/ui` no longer exists. If you
 > find it referenced anywhere, it is stale.
@@ -98,6 +99,59 @@ The full set (8 themes, ~70KB each):
 
 They differ in real spacing and radius values, so make sure you are diffing
 against `nova` and not whichever file you opened first.
+
+## The styles you are reading are LTR-first
+
+This is the second thing that trips people up. `style-nova.css` is full of
+**physical** properties — 49 uses of `pr-*`/`pl-*`/`mr-*`/`ml-*`, against 2
+logical ones, and not a single `[dir=rtl]` or `:dir()` anywhere.
+
+That does **not** mean shadcn ignores RTL. RTL is a **build-time transform**, not
+something expressed in the CSS. The registry build generates a parallel
+`styles/<style>/ui-rtl/` tree by running every component through
+`transformDirection()`, which rewrites physical classes to logical ones. The RTL
+demos import from that tree:
+
+```tsx
+// examples/base/badge-rtl.tsx
+import { Badge } from '@/styles/base-nova/ui-rtl/badge';
+```
+
+**That tree is gitignored** — `apps/v4/styles/` contains only a README on GitHub.
+You cannot fetch the RTL output; you have to apply the mapping yourself (or
+generate it with `pnpm --filter=v4 registry:build --style all` in a clone).
+
+The same transform ships to consumers as `shadcn migrate rtl`.
+
+### Consequence for comparing
+
+**Apply the mapping before you diff, or every logical class in our code will look
+like a divergence when it is actually the correct transformed form.** Our
+`pe-2`/`ps-2` is exactly what `transformDirection` produces from upstream's
+`pr-2`/`pl-2` — same style, further along the pipeline.
+
+The table in `transform-rtl.ts` is the authority. Direct replacements:
+
+```
+-ml- → -ms-      pl-  → ps-      left-  → start-    rounded-l- → rounded-s-
+-mr- → -me-      pr-  → pe-      right- → end-      rounded-tl- → rounded-ss-
+ml-  → ms-       text-left  → text-start     border-l- → border-s-
+mr-  → me-       text-right → text-end       border-r- → border-e-
+scroll-pl- → scroll-ps-    float-left  → float-start    origin-left → origin-start
+```
+
+Four rules are not simple renames, and are the easiest to miss:
+
+| Case              | Rule                                                  |
+| ----------------- | ----------------------------------------------------- |
+| `translate-x-*`   | add an `rtl:` variant with the sign flipped           |
+| `space-x-*`       | add `rtl:space-x-reverse` (likewise `divide-x-*`)     |
+| `cn-rtl-flip`     | marker class → becomes `rtl:rotate-180`               |
+| `cursor-w-resize` | add `rtl:` variant with the value swapped (`w` ↔ `e`) |
+
+`cn-rtl-flip` is worth calling out: it is how upstream flips **directional
+icons** — chevrons and arrows in pagination, carousel and breadcrumb. Grep
+upstream for it to find every icon that must rotate in RTL.
 
 ## Fetching a file
 
@@ -159,13 +213,17 @@ stylesheet, so the comparison is per-class rather than file-to-file. For a given
 component: pull the `cn-*` block out of `nova.css`, then read the matching
 `libs/ui/src/lib/components/<name>/*.ts`.
 
+**Logical properties are not a divergence.** We write `pe-*`, `ms-*`,
+`border-e`, `text-start` inline, which is the _output_ of upstream's RTL
+transform. Run the mapping in the section above over the shadcn class before
+concluding anything differs. Where our code still uses a physical property, that
+is a bug, not a style choice — the repo is RTL-first by policy.
+
 Known deliberate divergences — do **not** "fix" these to match upstream:
 
 - **`--destructive`** is darkened to `oklch(0.52 0.245 27.325)` (shadcn ships
   `0.577`) so that the `bg-destructive/10 text-destructive` pairing clears the
   4.5:1 WCAG AA contrast minimum.
-- **RTL** — we use logical properties (`border-e`, `ms-*`, `pe-*`, `text-start`)
-  where upstream uses physical ones in places.
 - **Decomposition** — upstream ships one file per component; we split into
   composable directives, so one shadcn class often maps to several of our
   directives.
