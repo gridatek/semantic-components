@@ -12,6 +12,9 @@ export class ScComboboxItemIndicator {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('hidden size-4 shrink-0 group-aria-selected:block', this.classInput()),
+    cn(
+      'pointer-events-none absolute end-2 hidden size-4 shrink-0 group-aria-selected:block',
+      this.classInput(),
+    ),
   );
 }
