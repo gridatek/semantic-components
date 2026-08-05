@@ -36,7 +36,7 @@ export class ScCarouselNext {
       buttonVariants({ variant: this.variant(), size: this.size() }),
       'rounded-full absolute touch-manipulation',
       isHorizontal
-        ? '-end-12 top-1/2 -translate-y-1/2'
+        ? '-end-12 top-1/2 -translate-y-1/2 rtl:[&>svg]:rotate-180'
         : 'start-1/2 -bottom-12 -translate-x-1/2 rotate-90 rtl:translate-x-1/2',
       this.classInput(),
     );

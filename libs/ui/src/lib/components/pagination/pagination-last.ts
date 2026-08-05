@@ -49,6 +49,7 @@ export class ScPaginationLast {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
+      'rtl:[&>svg]:rotate-180',
       this.classInput(),
     ),
   );
