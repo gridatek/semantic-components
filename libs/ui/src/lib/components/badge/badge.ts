@@ -28,7 +28,9 @@ export const badgeVariants = cva(
 export type ScBadgeVariants = VariantProps<typeof badgeVariants>;
 
 @Directive({
-  selector: 'div[scBadge], span[scBadge]',
+  // `a` is included so the `[a]:hover:*` variants above can match: a badge is
+  // only interactive when it is a link.
+  selector: 'div[scBadge], span[scBadge], a[scBadge]',
   host: {
     '[class]': 'class()',
   },
