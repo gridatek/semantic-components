@@ -3,6 +3,7 @@ import {
   ScTable,
   ScTableBody,
   ScTableCell,
+  ScTableContainer,
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
@@ -12,6 +13,7 @@ import {
   selector: 'app-users-table-demo',
   imports: [
     ScTable,
+    ScTableContainer,
     ScTableBody,
     ScTableCell,
     ScTableHeaderCell,
@@ -20,81 +22,83 @@ import {
   ],
   template: `
     <div class="w-full max-w-2xl rounded-md border">
-      <table scTable>
-        <thead scTableHeader>
-          <tr scTableRow>
-            <th scTableHeaderCell>Name</th>
-            <th scTableHeaderCell>Email</th>
-            <th scTableHeaderCell>Role</th>
-            <th scTableHeaderCell class="text-right">Actions</th>
-          </tr>
-        </thead>
-        <tbody scTableBody>
-          <tr scTableRow>
-            <td scTableCell>
-              <div class="font-medium">John Doe</div>
-              <div class="text-muted-foreground text-sm">Engineer</div>
-            </td>
-            <td scTableCell>john&#64;example.com</td>
-            <td scTableCell>
-              <span
-                class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold"
-              >
-                Admin
-              </span>
-            </td>
-            <td scTableCell class="text-right">
-              <button
-                class="text-muted-foreground hover:text-foreground text-sm"
-              >
-                Edit
-              </button>
-            </td>
-          </tr>
-          <tr scTableRow>
-            <td scTableCell>
-              <div class="font-medium">Jane Smith</div>
-              <div class="text-muted-foreground text-sm">Designer</div>
-            </td>
-            <td scTableCell>jane&#64;example.com</td>
-            <td scTableCell>
-              <span
-                class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold"
-              >
-                Member
-              </span>
-            </td>
-            <td scTableCell class="text-right">
-              <button
-                class="text-muted-foreground hover:text-foreground text-sm"
-              >
-                Edit
-              </button>
-            </td>
-          </tr>
-          <tr scTableRow>
-            <td scTableCell>
-              <div class="font-medium">Bob Johnson</div>
-              <div class="text-muted-foreground text-sm">Manager</div>
-            </td>
-            <td scTableCell>bob&#64;example.com</td>
-            <td scTableCell>
-              <span
-                class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold"
-              >
-                Owner
-              </span>
-            </td>
-            <td scTableCell class="text-right">
-              <button
-                class="text-muted-foreground hover:text-foreground text-sm"
-              >
-                Edit
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div scTableContainer>
+        <table scTable>
+          <thead scTableHeader>
+            <tr scTableRow>
+              <th scTableHeaderCell>Name</th>
+              <th scTableHeaderCell>Email</th>
+              <th scTableHeaderCell>Role</th>
+              <th scTableHeaderCell class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody scTableBody>
+            <tr scTableRow>
+              <td scTableCell>
+                <div class="font-medium">John Doe</div>
+                <div class="text-muted-foreground text-sm">Engineer</div>
+              </td>
+              <td scTableCell>john&#64;example.com</td>
+              <td scTableCell>
+                <span
+                  class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold"
+                >
+                  Admin
+                </span>
+              </td>
+              <td scTableCell class="text-right">
+                <button
+                  class="text-muted-foreground hover:text-foreground text-sm"
+                >
+                  Edit
+                </button>
+              </td>
+            </tr>
+            <tr scTableRow>
+              <td scTableCell>
+                <div class="font-medium">Jane Smith</div>
+                <div class="text-muted-foreground text-sm">Designer</div>
+              </td>
+              <td scTableCell>jane&#64;example.com</td>
+              <td scTableCell>
+                <span
+                  class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold"
+                >
+                  Member
+                </span>
+              </td>
+              <td scTableCell class="text-right">
+                <button
+                  class="text-muted-foreground hover:text-foreground text-sm"
+                >
+                  Edit
+                </button>
+              </td>
+            </tr>
+            <tr scTableRow>
+              <td scTableCell>
+                <div class="font-medium">Bob Johnson</div>
+                <div class="text-muted-foreground text-sm">Manager</div>
+              </td>
+              <td scTableCell>bob&#64;example.com</td>
+              <td scTableCell>
+                <span
+                  class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold"
+                >
+                  Owner
+                </span>
+              </td>
+              <td scTableCell class="text-right">
+                <button
+                  class="text-muted-foreground hover:text-foreground text-sm"
+                >
+                  Edit
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
