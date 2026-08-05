@@ -2,12 +2,12 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
+  booleanAttribute,
   computed,
   effect,
   inject,
   input,
   model,
-  signal,
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
@@ -23,6 +23,7 @@ export const SC_CHECKBOX = 'SC_CHECKBOX';
     '[id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.aria-invalid]': 'ariaInvalid()',
+    '[attr.disabled]': 'disabled() || null',
     '[class]': 'class()',
     '[checked]': 'checked()',
     '(change)': 'onInputChange($event)',
@@ -64,25 +65,24 @@ export class ScCheckbox implements FormCheckboxControl {
     () => (this.touched() && this.invalid()) || null,
   );
 
-  // Expose disabled state as a signal
-  readonly disabledSignal = signal(false);
+  // Part of the FormUiControl contract, so the Field directive binds a
+  // disabled field straight to it.
+  readonly disabled = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
+
+  // Kept for ScCheckboxField, which derives its data-disabled from this.
+  readonly disabledSignal = computed(() => this.disabled());
 
   constructor() {
     // Sync indeterminate input to native property
     effect(() => {
       this.elementRef.nativeElement.indeterminate = this.indeterminate();
     });
-
-    // Track disabled state
-    effect(() => {
-      this.disabledSignal.set(this.elementRef.nativeElement.disabled);
-    });
   }
 
   protected onInputChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.checked.set(input.checked);
-    this.disabledSignal.set(input.disabled);
+    this.checked.set((event.target as HTMLInputElement).checked);
   }
 
   protected readonly class = computed(() =>

@@ -1,13 +1,11 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
-  ElementRef,
+  booleanAttribute,
   computed,
-  effect,
   inject,
   input,
   model,
-  signal,
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
@@ -24,6 +22,7 @@ export const SC_SWITCH = 'SC_SWITCH';
     '[id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.aria-invalid]': 'ariaInvalid()',
+    '[attr.disabled]': 'disabled() || null',
     '[class]': 'class()',
     '[checked]': 'checked()',
     '(change)': 'onInputChange($event)',
@@ -31,7 +30,6 @@ export const SC_SWITCH = 'SC_SWITCH';
   exportAs: SC_SWITCH,
 })
 export class ScSwitch implements FormCheckboxControl {
-  private readonly elementRef = inject(ElementRef<HTMLInputElement>);
   private readonly switchField = inject(SC_SWITCH_FIELD, { optional: true });
   protected readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-switch-');
@@ -40,7 +38,15 @@ export class ScSwitch implements FormCheckboxControl {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
   readonly checked = model<boolean>(false);
-  readonly disabledSignal = signal(false);
+
+  // Part of the FormUiControl contract, so the Field directive binds a
+  // disabled field straight to it.
+  readonly disabled = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
+
+  // Kept for ScSwitchField, which derives its data-disabled from this.
+  readonly disabledSignal = computed(() => this.disabled());
 
   readonly id = computed(
     () => this.idInput() || this.switchField?.id() || this.fallbackId,
@@ -62,16 +68,8 @@ export class ScSwitch implements FormCheckboxControl {
     () => (this.touched() && this.invalid()) || null,
   );
 
-  constructor() {
-    effect(() => {
-      this.disabledSignal.set(this.elementRef.nativeElement.disabled);
-    });
-  }
-
   protected onInputChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.checked.set(input.checked);
-    this.disabledSignal.set(input.disabled);
+    this.checked.set((event.target as HTMLInputElement).checked);
   }
 
   protected readonly class = computed(() =>
