@@ -15,6 +15,6 @@ export class ScTimelineItem {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('relative pb-8 pl-8 last:pb-0', this.classInput()),
+    cn('relative pb-8 ps-8 last:pb-0', this.classInput()),
   );
 }

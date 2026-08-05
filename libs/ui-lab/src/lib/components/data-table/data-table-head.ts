@@ -20,7 +20,7 @@ import { SC_DATA_TABLE, SortDirection } from './data-table';
     @if (sortable()) {
       <button
         type="button"
-        class="hover:text-foreground hover:bg-accent -ml-3 flex h-8 items-center gap-1 rounded-md px-3"
+        class="hover:text-foreground hover:bg-accent -ms-3 flex h-8 items-center gap-1 rounded-md px-3"
         (click)="onSort()"
       >
         <ng-content />
@@ -53,7 +53,7 @@ export class ScDataTableHead {
 
   protected readonly class = computed(() =>
     cn(
-      'h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 *:[[role=checkbox]]:translate-y-[2px]',
+      'h-10 px-2 text-start align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pe-0 *:[[role=checkbox]]:translate-y-[2px]',
       'group',
       this.classInput(),
     ),

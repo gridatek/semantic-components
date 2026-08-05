@@ -21,8 +21,8 @@ export class ScSpeedDialActionList {
       'flex',
       dir === 'up' && 'flex-col-reverse items-center gap-3 mb-3',
       dir === 'down' && 'flex-col items-center gap-3 mt-3',
-      dir === 'left' && 'flex-row-reverse items-center gap-3 mr-3',
-      dir === 'right' && 'flex-row items-center gap-3 ml-3',
+      dir === 'left' && 'flex-row-reverse items-center gap-3 me-3',
+      dir === 'right' && 'flex-row items-center gap-3 ms-3',
       this.classInput(),
     );
   });

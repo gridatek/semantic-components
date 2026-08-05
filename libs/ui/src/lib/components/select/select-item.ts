@@ -50,7 +50,7 @@ export class ScSelectItem {
 
   protected readonly class = computed(() =>
     cn(
-      'relative flex w-full cursor-default select-none items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden',
+      'relative flex w-full cursor-default select-none items-center gap-1.5 rounded-md py-1 pe-8 ps-1.5 text-sm outline-hidden',
       'data-[active=true]:bg-accent data-[active=true]:text-accent-foreground',
       'aria-selected:bg-accent/50 aria-selected:text-accent-foreground',
       'data-disabled:pointer-events-none data-disabled:opacity-50',

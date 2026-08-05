@@ -26,7 +26,7 @@ export class ScStepperSeparator {
     const isVertical = this.stepper.orientation() === 'vertical';
     return cn(
       'transition-colors',
-      isVertical ? 'ml-5 h-8 w-0.5' : 'mt-5 h-0.5 flex-1',
+      isVertical ? 'ms-5 h-8 w-0.5' : 'mt-5 h-0.5 flex-1',
       'data-[state=complete]:bg-primary data-[state=inactive]:bg-muted',
       this.classInput(),
     );

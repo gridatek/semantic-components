@@ -49,7 +49,7 @@ export class ScPaginationPrevious {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'pl-1.5',
+      'ps-1.5',
       this.classInput(),
     ),
   );

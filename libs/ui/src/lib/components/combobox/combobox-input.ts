@@ -16,7 +16,7 @@ export class ScComboboxInput {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent pl-2.5 outline-none placeholder:text-muted-foreground',
+      'absolute inset-0 h-full w-full cursor-pointer border-none bg-transparent ps-2.5 outline-none placeholder:text-muted-foreground',
       this.combobox.hasValue() && 'opacity-0',
       this.classInput(),
     ),

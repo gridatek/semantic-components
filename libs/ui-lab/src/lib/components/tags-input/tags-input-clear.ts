@@ -22,7 +22,7 @@ export class ScTagsInputClear {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: 'ghost', size: 'icon-xs' }),
-      'ml-auto text-muted-foreground',
+      'ms-auto text-muted-foreground',
       this.classInput(),
     ),
   );

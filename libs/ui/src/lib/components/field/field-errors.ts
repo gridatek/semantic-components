@@ -17,7 +17,7 @@ import { SC_FIELD } from './field';
     @if (errors().length === 1) {
       {{ errors()[0].message }}
     } @else if (errors().length > 1) {
-      <ul class="ml-4 flex list-disc flex-col gap-1">
+      <ul class="ms-4 flex list-disc flex-col gap-1">
         @for (error of errors(); track error.message) {
           <li>{{ error.message }}</li>
         }

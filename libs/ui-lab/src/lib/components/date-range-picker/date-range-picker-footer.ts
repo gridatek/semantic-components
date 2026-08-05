@@ -11,7 +11,7 @@ import { ScDateRangePicker } from './date-range-picker';
 @Component({
   selector: 'div[scDateRangePickerFooter]',
   template: `
-    <div class="ml-auto flex gap-2">
+    <div class="ms-auto flex gap-2">
       <button
         type="button"
         class="border-input hover:bg-accent inline-flex h-8 items-center justify-center rounded-md border px-3 text-sm font-medium"

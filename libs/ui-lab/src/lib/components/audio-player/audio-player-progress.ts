@@ -12,7 +12,7 @@ import { SC_AUDIO_PLAYER } from './audio-player';
   selector: 'div[scAudioPlayerProgress]',
   imports: [ScSlider],
   template: `
-    <span class="text-muted-foreground w-10 text-right text-xs">
+    <span class="text-muted-foreground w-10 text-end text-xs">
       {{ player.formatTime(player.currentTime()) }}
     </span>
     <div class="group relative h-3 flex-1">

@@ -17,7 +17,7 @@ export class ScTimePickerPeriod {
 
   protected readonly class = computed(() =>
     cn(
-      'ml-2 inline-flex rounded-md border border-input bg-background p-0.5',
+      'ms-2 inline-flex rounded-md border border-input bg-background p-0.5',
       this.classInput(),
     ),
   );
