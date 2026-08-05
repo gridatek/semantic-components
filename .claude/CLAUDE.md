@@ -16,6 +16,10 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Use `NgOptimizedImage` for all static images.
   - `NgOptimizedImage` does not work for inline base64 images.
 
+## Styling
+
+- Component styling tracks shadcn/ui. Upstream styles live in `registry/styles/style-nova.css` (`nova` is the default theme), NOT in the `.tsx` files. See [docs/shadcn-style-reference.md](../docs/shadcn-style-reference.md) for how to find and compare them, and for the divergences that are deliberate.
+
 ## Accessibility Requirements
 
 - It MUST pass all AXE checks.
