@@ -1,6 +1,7 @@
 export * from './attachment';
 export * from './audio-player';
 export * from './barcode-scanner';
+export * from './bubble';
 export * from './color-picker';
 export * from './countdown';
 export * from './data-table';

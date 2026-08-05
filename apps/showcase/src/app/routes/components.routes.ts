@@ -581,6 +581,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/attachment/attachment-page'),
       },
       {
+        path: 'bubble',
+        title: 'Bubble - Semantic Components',
+        loadComponent: () => import('../pages/docs/bubble/bubble-page'),
+      },
+      {
         path: 'marker',
         title: 'Marker - Semantic Components',
         loadComponent: () => import('../pages/docs/marker/marker-page'),
