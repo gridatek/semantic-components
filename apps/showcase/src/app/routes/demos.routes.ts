@@ -3715,6 +3715,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/marker',
+    children: [
+      {
+        path: 'basic-marker-demo',
+        loadComponent: () =>
+          import('../pages/docs/marker/demos/basic-marker-demo').then(
+            (m) => m.BasicMarkerDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/timeline',
     children: [
       {

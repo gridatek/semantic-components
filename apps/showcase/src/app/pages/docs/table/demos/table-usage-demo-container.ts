@@ -60,10 +60,10 @@ export class TableUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
-  ScTableContainer,
   ScTableBody,
   ScTableCaption,
   ScTableCell,
+  ScTableContainer,
   ScTableFooter,
   ScTableHeader,
   ScTableHeaderCell,
