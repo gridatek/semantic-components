@@ -21,11 +21,11 @@ anything up.
 
 ## Where we are
 
-| Pattern                                                          | Components                                                   |
-| ---------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Push** — declares `invalid` / `touched` / `disabled` as inputs | `checkbox`, `switch`, `input`, `textarea`, `password-input`  |
-| **Push, partial** — `invalid` / `touched` only                   | `radio` (see below)                                          |
-| **Pull via `SC_FIELD`**                                          | `field-errors` (reads `field.formField()?.state().errors()`) |
+| Pattern                                                          | Components                                                        |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **Push** — declares `invalid` / `touched` / `disabled` as inputs | `checkbox`, `switch`, `input`, `textarea`, `password-input`       |
+| **Push, partial** — `invalid` / `touched` only                   | `radio` (see below)                                               |
+| **Container** — queries the field with `contentChild(FormField)` | `field`, `password-provider`; `field-errors` reads via `SC_FIELD` |
 
 ### Radio is a special case
 
@@ -42,8 +42,8 @@ declares `invalid` and `touched` as inputs purely to surface that. It has no
 
 Push arrived with #1515 and #1516; the remaining controls followed. No control
 injects `FormField` any more. `ScPasswordProvider` is the one place that still
-reaches for it, and it queries rather than injects — see the password note under
-TODO.
+reaches for it, and it queries rather than injects — see "Controls versus
+containers" below.
 
 ### Why pull works
 
@@ -63,7 +63,7 @@ same-element case.
 - It is less code. The push version of checkbox/switch came out smaller than the
   pull version I wrote first.
 
-## TODO
+## Decisions
 
 - [x] **Decide** whether to unify on push, leave the split, or unify on pull.
       Push, chiefly for testability: a pushed control can be exercised by
@@ -88,14 +88,30 @@ same-element case.
       genuine gap was `aria-invalid`, now surfaced through `invalid`/`touched`
       inputs. No `FormValueControl` on the group is needed, which is what I had
       expected to write.
-- [ ] **Decide about `errors` and `disabledReasons`.** No component declares
-      either as an input. `ScFieldErrors` uses a third variant: it pulls through
-      the `SC_FIELD` context rather than injecting `FormField` directly —
-      `field.formField()?.state().errors()`, already gated on
-      `touched() && invalid()`. So the split is really three ways, not two.
-      Worth deciding whether that one stays as-is; reading from the field
-      context is arguably right for a component that renders _the field's_
-      errors rather than its own.
+- [x] **Decide about `errors` and `disabledReasons`.** Leave them as they are.
+      See "Controls versus containers" below — `ScFieldErrors` is not a third,
+      inconsistent pattern, it is the container one.
+
+## Controls versus containers
+
+Two roles, and they need different mechanisms.
+
+**Controls** declare inputs and let the `Field` directive push state in. This is
+everything in the first two rows of the table above.
+
+**Containers** query downward with `contentChild(FormField)`, because the field
+lives on a descendant and injection only walks up. `ScField` does this,
+`ScPasswordProvider` does it since #1519, and `ScFieldErrors` reads the result
+through `SC_FIELD`.
+
+Declaring `errors` as an input on `ScFieldErrors` would be **dead code**: it is
+not a form control, nothing binds `[formField]` to it, so the `Field` directive
+would never populate the input. That is the same trap the password toggle's
+`disabled` fell into.
+
+`apps/showcase/src/app/field-errors.spec.ts` pins this down, including a control
+nested inside an input group rather than sitting as a direct child — the case
+where a downward query could plausibly miss.
 
 ## Gotchas to carry into the work
 
