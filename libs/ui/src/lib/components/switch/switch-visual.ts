@@ -39,7 +39,7 @@ export class ScSwitchVisual {
     cn(
       'pointer-events-none block size-4 rounded-full bg-background ring-0 transition-transform',
       this.switchField.dataState() === 'checked'
-        ? 'translate-x-[calc(100%-2px)]'
+        ? 'translate-x-[calc(100%-2px)] rtl:-translate-x-[calc(100%-2px)]'
         : 'translate-x-0',
       this.switchField.dataState() === 'checked'
         ? 'dark:bg-primary-foreground'

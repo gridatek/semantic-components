@@ -33,11 +33,10 @@ export class ScCheckboxVisual {
 
   protected readonly class = computed(() =>
     cn(
-      'pointer-events-none inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-primary transition-colors',
-      'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
-      'data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground',
-      'ring-offset-background',
-      'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2',
+      'pointer-events-none inline-flex size-4 shrink-0 items-center justify-center rounded-sm border border-input dark:bg-input/30 transition-colors',
+      'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary',
+      'data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary',
+      'peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-3',
       'peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
       this.classInput(),
     ),
