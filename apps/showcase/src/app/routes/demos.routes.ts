@@ -3727,6 +3727,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/bubble',
+    children: [
+      {
+        path: 'basic-bubble-demo',
+        loadComponent: () =>
+          import('../pages/docs/bubble/demos/basic-bubble-demo').then(
+            (m) => m.BasicBubbleDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/marker',
     children: [
       {
