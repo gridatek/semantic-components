@@ -30,7 +30,7 @@ import { ScTransferListState } from './transfer-list-state';
       (click)="state.moveToTarget()"
       aria-label="Move selected to right"
     >
-      <svg siChevronRightIcon class="size-[18px]"></svg>
+      <svg siChevronRightIcon class="size-[18px] rtl:rotate-180"></svg>
     </button>
     <button
       type="button"
@@ -39,7 +39,7 @@ import { ScTransferListState } from './transfer-list-state';
       (click)="state.moveToSource()"
       aria-label="Move selected to left"
     >
-      <svg siChevronLeftIcon class="size-[18px]"></svg>
+      <svg siChevronLeftIcon class="size-[18px] rtl:rotate-180"></svg>
     </button>
     <button
       type="button"
@@ -48,7 +48,7 @@ import { ScTransferListState } from './transfer-list-state';
       (click)="state.moveAllToTarget()"
       aria-label="Move all to right"
     >
-      <svg siChevronsRightIcon class="size-[18px]"></svg>
+      <svg siChevronsRightIcon class="size-[18px] rtl:rotate-180"></svg>
     </button>
     <button
       type="button"
@@ -57,7 +57,7 @@ import { ScTransferListState } from './transfer-list-state';
       (click)="state.moveAllToSource()"
       aria-label="Move all to left"
     >
-      <svg siChevronsLeftIcon class="size-[18px]"></svg>
+      <svg siChevronsLeftIcon class="size-[18px] rtl:rotate-180"></svg>
     </button>
   `,
   host: {

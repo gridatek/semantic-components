@@ -50,6 +50,7 @@ export class ScPaginationPrevious {
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
       'ps-1.5',
+      'rtl:[&>svg]:rotate-180',
       this.classInput(),
     ),
   );

@@ -59,7 +59,7 @@ import { SC_DATA_TABLE } from './data-table';
             (click)="goToPage(1)"
             aria-label="First page"
           >
-            <svg siChevronsLeftIcon class="size-4"></svg>
+            <svg siChevronsLeftIcon class="size-4 rtl:rotate-180"></svg>
           </button>
           <button
             type="button"
@@ -68,7 +68,7 @@ import { SC_DATA_TABLE } from './data-table';
             (click)="goToPage(currentPage() - 1)"
             aria-label="Previous page"
           >
-            <svg siChevronLeftIcon class="size-4"></svg>
+            <svg siChevronLeftIcon class="size-4 rtl:rotate-180"></svg>
           </button>
           <button
             type="button"
@@ -77,7 +77,7 @@ import { SC_DATA_TABLE } from './data-table';
             (click)="goToPage(currentPage() + 1)"
             aria-label="Next page"
           >
-            <svg siChevronRightIcon class="size-4"></svg>
+            <svg siChevronRightIcon class="size-4 rtl:rotate-180"></svg>
           </button>
           <button
             type="button"
@@ -86,7 +86,7 @@ import { SC_DATA_TABLE } from './data-table';
             (click)="goToPage(totalPages())"
             aria-label="Last page"
           >
-            <svg siChevronsRightIcon class="size-4"></svg>
+            <svg siChevronsRightIcon class="size-4 rtl:rotate-180"></svg>
           </button>
         </div>
       </div>
