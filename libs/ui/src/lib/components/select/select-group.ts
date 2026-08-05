@@ -16,6 +16,6 @@ export class ScSelectGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex flex-col', this.classInput()),
+    cn('flex flex-col scroll-my-1 p-1', this.classInput()),
   );
 }

@@ -12,7 +12,7 @@ export class ScTableHeaderCell {
 
   protected readonly class = computed(() =>
     cn(
-      'h-12 px-4 text-start align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pe-0',
+      'text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pe-0',
       this.classInput(),
     ),
   );

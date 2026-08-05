@@ -11,6 +11,6 @@ export class ScBreadcrumbItem {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('inline-flex items-center gap-1.5', this.classInput()),
+    cn('inline-flex items-center gap-1', this.classInput()),
   );
 }
