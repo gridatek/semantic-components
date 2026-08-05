@@ -12,6 +12,9 @@ export class ScAttachmentTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('block max-w-full min-w-0 truncate font-medium', this.classInput()),
+    cn(
+      'block max-w-full min-w-0 truncate font-medium group-data-[state=processing]/attachment:shimmer group-data-[state=uploading]/attachment:shimmer',
+      this.classInput(),
+    ),
   );
 }

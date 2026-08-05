@@ -68,12 +68,6 @@ while the actions stay clickable above it.
 
 ### ScAttachmentGroup
 
-A horizontally scrolling, snapping row of attachments.
-
-## Differences from upstream
-
-Three utilities upstream uses are not defined in this workspace, so they are
-omitted rather than shipped as dead classes:
-
-- `shimmer` on the title during `uploading` and `processing`
-- `scroll-fade-x` and `scrollbar-none` on the group
+A horizontally scrolling, snapping row of attachments, with its scrollbar
+hidden and its edges faded via the `no-scrollbar` and `scroll-fade-x`
+utilities from `shadcn/tailwind.css`.
