@@ -20,7 +20,7 @@ export class ScTourGuideStepNumber {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-primary text-primary-foreground absolute -top-3 -left-3 flex size-6 items-center justify-center rounded-full text-xs font-medium',
+      'bg-primary text-primary-foreground absolute -top-3 -start-3 flex size-6 items-center justify-center rounded-full text-xs font-medium',
       this.classInput(),
     ),
   );

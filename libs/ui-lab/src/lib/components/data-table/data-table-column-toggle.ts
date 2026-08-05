@@ -25,7 +25,7 @@ import { SC_DATA_TABLE } from './data-table';
 
     @if (isOpen()) {
       <div
-        class="bg-popover absolute top-full right-0 z-50 mt-2 min-w-[150px] rounded-md border p-2 shadow-md"
+        class="bg-popover absolute end-0 top-full z-50 mt-2 min-w-[150px] rounded-md border p-2 shadow-md"
       >
         @for (column of table.columns(); track column.id) {
           @if (column.enableHiding !== false) {

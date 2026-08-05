@@ -184,8 +184,8 @@ export class ScScrollBar {
     cn(
       'absolute touch-none select-none transition-opacity',
       this.isVertical()
-        ? 'top-0 right-0 h-full w-2.5'
-        : 'bottom-0 left-0 w-full h-2.5',
+        ? 'top-0 end-0 h-full w-2.5'
+        : 'bottom-0 start-0 w-full h-2.5',
       this.dragging()
         ? '!opacity-100'
         : this.visible()

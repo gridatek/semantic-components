@@ -17,7 +17,7 @@ export class ScSpotlightClose {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-background/90 hover:bg-background text-foreground absolute top-4 right-4 z-10 rounded-full p-2 shadow-lg',
+      'bg-background/90 hover:bg-background text-foreground absolute top-4 end-4 z-10 rounded-full p-2 shadow-lg',
       this.classInput(),
     ),
   );

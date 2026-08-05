@@ -12,7 +12,7 @@ export class ScDockBadge {
 
   protected readonly class = computed(() =>
     cn(
-      'absolute -top-1 -right-1',
+      'absolute -top-1 -end-1',
       'min-w-[18px] h-[18px] px-1',
       'flex items-center justify-center',
       'text-[10px] font-medium',

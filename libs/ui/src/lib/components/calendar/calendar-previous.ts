@@ -21,7 +21,7 @@ export class ScCalendarPrevious {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'absolute left-1',
+      'absolute start-1',
       this.classInput(),
     ),
   );
