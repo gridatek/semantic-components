@@ -147,7 +147,7 @@ export class ScCalendar {
 
   protected readonly class = computed(() =>
     cn(
-      'flex flex-col gap-4 p-3',
+      'flex flex-col gap-4 p-2',
       this.numberOfMonths() > 1 ? 'w-auto' : 'w-[276px]',
       this.classInput(),
     ),
