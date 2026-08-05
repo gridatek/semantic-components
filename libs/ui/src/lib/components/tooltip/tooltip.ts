@@ -28,7 +28,7 @@ type ScTooltipSide = 'top' | 'right' | 'bottom' | 'left';
     {{ data.content }}
     <span
       [attr.data-side]="side()"
-      class="bg-primary absolute z-50 size-2.5 rotate-45 rounded-[2px] data-[side=bottom]:-top-[5px] data-[side=bottom]:left-1/2 data-[side=bottom]:-translate-x-1/2 data-[side=left]:top-1/2 data-[side=left]:-right-[5px] data-[side=left]:-translate-y-1/2 data-[side=right]:top-1/2 data-[side=right]:-left-[5px] data-[side=right]:-translate-y-1/2 data-[side=top]:-bottom-[5px] data-[side=top]:left-1/2 data-[side=top]:-translate-x-1/2"
+      class="bg-foreground absolute z-50 size-2.5 rotate-45 rounded-[2px] data-[side=bottom]:-top-[5px] data-[side=bottom]:left-1/2 data-[side=bottom]:-translate-x-1/2 data-[side=left]:top-1/2 data-[side=left]:-right-[5px] data-[side=left]:-translate-y-1/2 data-[side=right]:top-1/2 data-[side=right]:-left-[5px] data-[side=right]:-translate-y-1/2 data-[side=top]:-bottom-[5px] data-[side=top]:left-1/2 data-[side=top]:-translate-x-1/2"
     ></span>
   `,
   host: {
@@ -54,7 +54,9 @@ export class ScTooltip {
 
   protected readonly hostClass = computed(() =>
     cn(
-      'bg-primary text-primary-foreground z-50 rounded-md px-3 py-1.5 text-xs w-fit max-w-xs',
+      'bg-foreground text-background z-50 rounded-md px-3 py-1.5 text-xs w-fit max-w-xs',
+      'inline-flex items-center gap-1.5',
+      'has-data-[slot=kbd]:pe-1.5 **:data-[slot=kbd]:relative **:data-[slot=kbd]:isolate **:data-[slot=kbd]:z-50 **:data-[slot=kbd]:rounded-sm',
       'data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95',
       'data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
       'data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',

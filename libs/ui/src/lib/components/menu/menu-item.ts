@@ -66,6 +66,7 @@ export class ScMenuItem {
   protected readonly class = computed(() =>
     cn(
       'data-[active=true]:bg-accent data-[active=true]:text-accent-foreground gap-1.5 rounded-md px-1.5 py-1 text-sm relative flex cursor-default items-center outline-hidden select-none focus-visible:outline-2 focus-visible:outline-ring',
+      "[&_svg:not([class*='size-'])]:size-4",
       this.classInput(),
     ),
   );
