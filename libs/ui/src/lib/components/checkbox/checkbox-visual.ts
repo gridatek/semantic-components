@@ -37,6 +37,8 @@ export class ScCheckboxVisual {
       'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground data-[state=checked]:border-primary',
       'data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground data-[state=indeterminate]:border-primary',
       'peer-focus-visible:border-ring peer-focus-visible:ring-ring/50 peer-focus-visible:ring-3',
+      'peer-aria-invalid:border-destructive peer-aria-invalid:ring-destructive/20 peer-aria-invalid:ring-3',
+      'dark:peer-aria-invalid:border-destructive/50 dark:peer-aria-invalid:ring-destructive/40',
       'peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
       this.classInput(),
     ),

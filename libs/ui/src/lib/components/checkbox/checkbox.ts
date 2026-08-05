@@ -22,6 +22,7 @@ export const SC_CHECKBOX = 'SC_CHECKBOX';
     'data-slot': 'checkbox',
     '[id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
+    '[attr.aria-invalid]': 'ariaInvalid()',
     '[class]': 'class()',
     '[checked]': 'checked()',
     '(change)': 'onInputChange($event)',
@@ -52,6 +53,15 @@ export class ScCheckbox implements FormCheckboxControl {
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
       null,
+  );
+
+  // Bound automatically by the Field directive (FormUiControl contract).
+  readonly invalid = input<boolean>(false);
+  readonly touched = input<boolean>(false);
+
+  // Matches ScInput: do not surface invalid until the control is touched.
+  protected readonly ariaInvalid = computed(
+    () => (this.touched() && this.invalid()) || null,
   );
 
   // Expose disabled state as a signal
