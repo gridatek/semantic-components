@@ -34,7 +34,7 @@ export class ScDrawer {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-background flex h-auto flex-col text-sm fixed z-50 group/drawer',
+      'bg-popover text-popover-foreground flex h-auto flex-col text-sm fixed z-50 group/drawer',
       // Position and border based on direction
       'data-[direction=bottom]:inset-x-0 data-[direction=bottom]:bottom-0 data-[direction=bottom]:mt-24 data-[direction=bottom]:max-h-[80vh] data-[direction=bottom]:rounded-t-xl data-[direction=bottom]:border-t',
       'data-[direction=left]:inset-y-0 data-[direction=left]:left-0 data-[direction=left]:w-3/4 data-[direction=left]:rounded-r-xl data-[direction=left]:border-r',
