@@ -1,11 +1,7 @@
-# Signal Forms Control Integration — Open Work
+# Signal Forms Control Integration
 
-Status: **not decided.** This records what is true today and what the options
-are, so the decision can be made deliberately rather than one component at a
-time.
-
-Nothing here is broken. Both patterns below work. The issue is that we have two
-of them, and one component has neither.
+Status: **decided — push.** All form controls declare `invalid`, `touched` and
+`disabled` as inputs and let the `Field` directive bind them.
 
 ## The contract
 
@@ -27,12 +23,12 @@ anything up.
 
 | Pattern                                                          | Components                                                   |
 | ---------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Push** — declares `invalid` / `touched` / `disabled` as inputs | `checkbox`, `switch`                                         |
-| **Pull** — `inject(FormField)` + `computed`                      | `input`, `textarea`, `password-input`, `password-toggle`     |
+| **Push** — declares `invalid` / `touched` / `disabled` as inputs | `checkbox`, `switch`, `input`, `textarea`, `password-input`  |
 | **Pull via `SC_FIELD`**                                          | `field-errors` (reads `field.formField()?.state().errors()`) |
 | **Neither**                                                      | `radio` / `radio-group`                                      |
 
-Push arrived with #1515 and #1516. Pull predates it.
+Push arrived with #1515 and #1516; the remaining controls followed. No
+component injects `FormField` any more.
 
 ### Why pull works
 
@@ -54,16 +50,23 @@ same-element case.
 
 ## TODO
 
-- [ ] **Decide** whether to unify on push, leave the split, or unify on pull.
-- [ ] **Write tests for the four pull components first.** None of `input`,
-      `textarea`, `password-input` or `password-toggle` has any test for invalid
-      or disabled behaviour. Tests should be written against the _current_
-      implementation and pass, so that a later refactor is proven
-      behaviour-preserving rather than merely proven to run.
-      Model them on `apps/showcase/src/app/form-control-invalid.spec.ts`.
-- [ ] **Convert the four to push**, if that is the decision. Each needs
-      `invalid`/`touched`/`disabled` as inputs, the `FormField` injection
-      removed, and `aria-invalid` gated on `touched` (see below).
+- [x] **Decide** whether to unify on push, leave the split, or unify on pull.
+      Push, chiefly for testability: a pushed control can be exercised by
+      setting an input, where a pulling one needs a real `form()` and a
+      `markAsTouched()` call. Also because a consumer can then drive `invalid`
+      from outside Signal Forms — server errors, a wizard step — which pull
+      forbids outright (`Can't bind to 'invalid'`).
+- [x] **Write tests for the pull components first**, against the then-current
+      implementation, so the refactor could be shown to preserve behaviour.
+      See `apps/showcase/src/app/text-control-form-state.spec.ts`.
+- [x] **Convert them to push.** `input`, `textarea` and `password-input` now
+      declare the inputs; no component injects `FormField`.
+- [ ] **Publish the password field state to `ScPasswordToggle`.** The toggle is
+      a sibling of the input, so a `FormField` on the input was never in its
+      injector chain and its `disabled` always resolved to `false`. It now takes
+      a plain input, which is honest but still unbound by default. The real fix
+      is for `ScPasswordProvider` to carry the state — `ScPasswordInput`
+      injects the provider already but does not register with it.
 - [ ] **Give `radio` a Signal Forms integration.** `ScRadio` and `ScRadioGroup`
       have no `FormField`, no value binding, and implement no control contract,
       so a radio group cannot participate in a form at all. This is a feature

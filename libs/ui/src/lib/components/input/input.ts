@@ -6,7 +6,6 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { FormField } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { SC_FIELD } from '../field';
 
@@ -18,7 +17,7 @@ export const inputStyles =
   host: {
     'data-slot': 'control',
     '[attr.id]': 'id()',
-    '[attr.aria-invalid]': 'invalid() || null',
+    '[attr.aria-invalid]': 'ariaInvalid()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[attr.disabled]': 'disabled() || null',
     '[class]': 'class()',
@@ -26,14 +25,15 @@ export const inputStyles =
 })
 export class ScInput {
   protected readonly field = inject(SC_FIELD, { optional: true });
-  private readonly formField = inject(FormField, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-input-');
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
-  readonly disabledInput = input<boolean, unknown>(false, {
-    alias: 'disabled',
+  // Bound automatically by the Field directive (FormUiControl contract).
+  readonly invalid = input<boolean>(false);
+  readonly touched = input<boolean>(false);
+  readonly disabled = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
 
@@ -48,15 +48,9 @@ export class ScInput {
       null,
   );
 
-  readonly invalid = computed(
-    () =>
-      (this.formField?.state().touched() &&
-        this.formField?.state().invalid()) ??
-      false,
-  );
-
-  readonly disabled = computed(
-    () => this.formField?.state().disabled() ?? this.disabledInput(),
+  // Do not surface invalid until the control has been touched.
+  protected readonly ariaInvalid = computed(
+    () => (this.touched() && this.invalid()) || null,
   );
 
   protected readonly class = computed(() => cn(inputStyles, this.classInput()));
