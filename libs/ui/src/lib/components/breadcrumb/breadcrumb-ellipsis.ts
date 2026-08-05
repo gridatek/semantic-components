@@ -14,7 +14,7 @@ export class ScBreadcrumbEllipsis {
 
   protected readonly class = computed(() =>
     cn(
-      'flex size-9 items-center justify-center [&_svg]:size-4',
+      'flex size-5 items-center justify-center [&_svg]:size-4',
       this.classInput(),
     ),
   );

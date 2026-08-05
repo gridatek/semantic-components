@@ -36,7 +36,7 @@ export class ScToast {
 
   protected readonly class = computed(() =>
     cn(
-      'group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden rounded-md border p-4 pe-6 shadow-lg transition-all',
+      'group pointer-events-auto relative flex w-full items-center justify-between gap-4 overflow-hidden rounded-2xl border p-4 pe-6 shadow-lg transition-all',
       'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full',
       this.position().startsWith('bottom')
         ? 'data-[state=open]:slide-in-from-bottom-full'

@@ -14,6 +14,6 @@ export class ScSheetTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('text-lg font-semibold text-foreground', this.classInput()),
+    cn('text-base font-medium text-foreground', this.classInput()),
   );
 }
