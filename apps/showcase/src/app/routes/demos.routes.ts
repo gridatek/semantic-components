@@ -3739,6 +3739,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/message',
+    children: [
+      {
+        path: 'basic-message-demo',
+        loadComponent: () =>
+          import('../pages/docs/message/demos/basic-message-demo').then(
+            (m) => m.BasicMessageDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/marker',
     children: [
       {
