@@ -1,5 +1,10 @@
-import { Directive, computed, inject, input } from '@angular/core';
-import { FormField } from '@angular/forms/signals';
+import {
+  Directive,
+  booleanAttribute,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '../../utils';
 import { buttonVariants } from '../button/button';
 import { SC_PASSWORD_PROVIDER } from './password-provider';
@@ -16,12 +21,14 @@ import { SC_PASSWORD_PROVIDER } from './password-provider';
 })
 export class ScPasswordToggle {
   readonly password = inject(SC_PASSWORD_PROVIDER);
-  private readonly formField = inject(FormField, { optional: true });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly disabled = computed(
-    () => this.formField?.state().disabled() ?? false,
-  );
+  // The toggle is a sibling of the input, so a FormField on the input was
+  // never in its injector chain and this always resolved to false. Take it
+  // as an input until the provider can publish the password field state.
+  readonly disabled = input<boolean, unknown>(false, {
+    transform: booleanAttribute,
+  });
 
   protected readonly class = computed(() =>
     cn(
