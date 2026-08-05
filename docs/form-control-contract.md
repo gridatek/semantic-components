@@ -24,8 +24,21 @@ anything up.
 | Pattern                                                          | Components                                                   |
 | ---------------------------------------------------------------- | ------------------------------------------------------------ |
 | **Push** — declares `invalid` / `touched` / `disabled` as inputs | `checkbox`, `switch`, `input`, `textarea`, `password-input`  |
+| **Push, partial** — `invalid` / `touched` only                   | `radio` (see below)                                          |
 | **Pull via `SC_FIELD`**                                          | `field-errors` (reads `field.formField()?.state().errors()`) |
-| **Neither**                                                      | `radio` / `radio-group`                                      |
+
+### Radio is a special case
+
+`ScRadio` implements no control contract, and for a long time I assumed that
+meant a radio group could not participate in a form. **That was wrong.** A
+native `<input type="radio">` with `[formField]` is handled by Signal Forms'
+built-in native-input support: value, checked reflection and disabled all work
+with no contract on our side. `apps/showcase/src/app/radio-form.spec.ts` pins
+this down.
+
+The one thing that support does _not_ provide is `aria-invalid`, so `ScRadio`
+declares `invalid` and `touched` as inputs purely to surface that. It has no
+`value` model of its own and does not need one.
 
 Push arrived with #1515 and #1516; the remaining controls followed. No control
 injects `FormField` any more. `ScPasswordProvider` is the one place that still
@@ -70,11 +83,11 @@ same-element case.
       `contentChild(FormField)` and exposes `disabled`; the toggle ORs that with
       its own `disabled` input. Before this, the toggle's `disabled` was
       permanently `false`.
-- [ ] **Give `radio` a Signal Forms integration.** `ScRadio` and `ScRadioGroup`
-      have no `FormField`, no value binding, and implement no control contract,
-      so a radio group cannot participate in a form at all. This is a feature
-      gap, not a refactor, and it is why radio was excluded from #1515 and
-      #1516. Likely wants `FormValueControl` on the group rather than the item.
+- [x] **Give `radio` a Signal Forms integration.** It turned out to have one
+      already, via native-input support — see the radio section above. The only
+      genuine gap was `aria-invalid`, now surfaced through `invalid`/`touched`
+      inputs. No `FormValueControl` on the group is needed, which is what I had
+      expected to write.
 - [ ] **Decide about `errors` and `disabledReasons`.** No component declares
       either as an input. `ScFieldErrors` uses a third variant: it pulls through
       the `SC_FIELD` context rather than injecting `FormField` directly —
