@@ -27,8 +27,10 @@ anything up.
 | **Pull via `SC_FIELD`**                                          | `field-errors` (reads `field.formField()?.state().errors()`) |
 | **Neither**                                                      | `radio` / `radio-group`                                      |
 
-Push arrived with #1515 and #1516; the remaining controls followed. No
-component injects `FormField` any more.
+Push arrived with #1515 and #1516; the remaining controls followed. No control
+injects `FormField` any more. `ScPasswordProvider` is the one place that still
+reaches for it, and it queries rather than injects — see the password note under
+TODO.
 
 ### Why pull works
 
@@ -61,12 +63,13 @@ same-element case.
       See `apps/showcase/src/app/text-control-form-state.spec.ts`.
 - [x] **Convert them to push.** `input`, `textarea` and `password-input` now
       declare the inputs; no component injects `FormField`.
-- [ ] **Publish the password field state to `ScPasswordToggle`.** The toggle is
-      a sibling of the input, so a `FormField` on the input was never in its
-      injector chain and its `disabled` always resolved to `false`. It now takes
-      a plain input, which is honest but still unbound by default. The real fix
-      is for `ScPasswordProvider` to carry the state — `ScPasswordInput`
-      injects the provider already but does not register with it.
+- [x] **Publish the password field state to `ScPasswordToggle`.** The toggle is
+      a button beside the input, so the field on the input is neither in its
+      injector chain nor injectable from the provider above it — injection only
+      walks up, never down. `ScPasswordProvider` therefore _queries_ it with
+      `contentChild(FormField)` and exposes `disabled`; the toggle ORs that with
+      its own `disabled` input. Before this, the toggle's `disabled` was
+      permanently `false`.
 - [ ] **Give `radio` a Signal Forms integration.** `ScRadio` and `ScRadioGroup`
       have no `FormField`, no value binding, and implement no control contract,
       so a radio group cannot participate in a form at all. This is a feature

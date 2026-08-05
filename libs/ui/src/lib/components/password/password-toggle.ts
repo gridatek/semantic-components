@@ -23,12 +23,15 @@ export class ScPasswordToggle {
   readonly password = inject(SC_PASSWORD_PROVIDER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  // The toggle is a sibling of the input, so a FormField on the input was
-  // never in its injector chain and this always resolved to false. Take it
-  // as an input until the provider can publish the password field state.
-  readonly disabled = input<boolean, unknown>(false, {
+  readonly disabledInput = input<boolean, unknown>(false, {
+    alias: 'disabled',
     transform: booleanAttribute,
   });
+
+  // The field lives on the input, a sibling, so the provider reads it for us.
+  readonly disabled = computed(
+    () => this.disabledInput() || this.password.disabled(),
+  );
 
   protected readonly class = computed(() =>
     cn(

@@ -5,6 +5,7 @@ import {
   ScInput,
   ScPasswordInput,
   ScPasswordProvider,
+  ScPasswordToggle,
   ScTextarea,
 } from '@semantic-components/ui';
 
@@ -203,5 +204,46 @@ describe('password input and form state', () => {
     expect(
       control(mount(PasswordDisabledFormHost)).hasAttribute('disabled'),
     ).toBe(true);
+  });
+});
+
+@Component({
+  imports: [ScPasswordProvider, ScPasswordInput, ScPasswordToggle, FormField],
+  template: `
+    <div scPasswordProvider>
+      <input scPasswordInput [formField]="f.name" />
+      <button scPasswordToggle type="button">show</button>
+    </div>
+  `,
+})
+class PasswordToggleHost {
+  readonly off = signal(false);
+  readonly model = signal({ name: '' });
+  readonly f = form(this.model, (p) => {
+    disabled(p.name, { when: () => this.off() });
+  });
+}
+
+describe('password toggle disabled', () => {
+  function toggle(fixture: { nativeElement: unknown }): HTMLButtonElement {
+    const button = (fixture.nativeElement as HTMLElement).querySelector(
+      'button',
+    );
+    if (!button) throw new Error('no toggle button rendered');
+    return button;
+  }
+
+  it('is enabled while the field is enabled', () => {
+    expect(toggle(mount(PasswordToggleHost)).disabled).toBe(false);
+  });
+
+  it('follows the field into the disabled state', () => {
+    const fixture = mount(PasswordToggleHost);
+    fixture.componentInstance.off.set(true);
+    fixture.detectChanges();
+
+    // The toggle is a sibling of the input, so it cannot see the field
+    // directly; ScPasswordProvider queries it and passes the state along.
+    expect(toggle(fixture).disabled).toBe(true);
   });
 });
