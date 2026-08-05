@@ -71,7 +71,7 @@ export class ScMenuBarItem {
 
   protected readonly class = computed(() =>
     cn(
-      'flex items-center rounded-sm px-2 py-0.5 text-sm font-medium outline-hidden select-none cursor-default hover:bg-muted aria-expanded:bg-muted focus-visible:outline-2 focus-visible:outline-ring',
+      'flex items-center rounded-sm px-1.5 py-0.5 text-sm font-medium outline-hidden select-none cursor-default hover:bg-muted aria-expanded:bg-muted focus-visible:outline-2 focus-visible:outline-ring',
       this.classInput(),
     ),
   );
