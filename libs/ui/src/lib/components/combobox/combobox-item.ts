@@ -23,7 +23,8 @@ export class ScComboboxItem {
 
   protected readonly class = computed(() =>
     cn(
-      'group data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none',
+      'group data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary relative flex cursor-pointer items-center gap-2 rounded-md py-1 pe-8 ps-1.5 text-sm outline-none',
+      "[&_svg:not([class*='size-'])]:size-4",
       this.classInput(),
     ),
   );
