@@ -3715,6 +3715,18 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/attachment',
+    children: [
+      {
+        path: 'basic-attachment-demo',
+        loadComponent: () =>
+          import('../pages/docs/attachment/demos/basic-attachment-demo').then(
+            (m) => m.BasicAttachmentDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/marker',
     children: [
       {
