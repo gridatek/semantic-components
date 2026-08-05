@@ -11,6 +11,6 @@ export class ScCardBody {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('px-4 group-data-[size=sm]/card:px-3', this.classInput()),
+    cn('px-(--card-spacing)', this.classInput()),
   );
 }

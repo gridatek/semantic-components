@@ -13,7 +13,7 @@ export class ScCardFooter {
 
   protected readonly class = computed(() =>
     cn(
-      'bg-muted/50 rounded-b-xl border-t p-4 group-data-[size=sm]/card:p-3 flex items-center',
+      'bg-muted/50 rounded-b-xl border-t p-(--card-spacing) flex items-center',
       this.classInput(),
     ),
   );
