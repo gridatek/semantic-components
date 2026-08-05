@@ -16,6 +16,9 @@ import { ScCombobox } from './combobox';
 @Directive({
   selector: 'dialog[scComboboxDialog]',
   host: {
+    // Named for upstream's slot so input-group's
+    // in-data-[slot=combobox-content] rules apply.
+    'data-slot': 'combobox-content',
     '[class]': 'class()',
   },
 })
