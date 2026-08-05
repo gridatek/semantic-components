@@ -30,6 +30,8 @@ export class ScSwitchVisual {
       'pointer-events-none inline-flex h-[18.4px] w-[32px] shrink-0 items-center rounded-full border border-transparent transition-all',
       'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input dark:data-[state=unchecked]:bg-input/80',
       'peer-focus-visible:border-ring peer-focus-visible:ring-3 peer-focus-visible:ring-ring/50',
+      'peer-aria-invalid:border-destructive peer-aria-invalid:ring-destructive/20 peer-aria-invalid:ring-3',
+      'dark:peer-aria-invalid:border-destructive/50 dark:peer-aria-invalid:ring-destructive/40',
       'peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
       this.classInput(),
     ),

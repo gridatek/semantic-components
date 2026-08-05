@@ -23,6 +23,7 @@ export const SC_SWITCH = 'SC_SWITCH';
     role: 'switch',
     '[id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
+    '[attr.aria-invalid]': 'ariaInvalid()',
     '[class]': 'class()',
     '[checked]': 'checked()',
     '(change)': 'onInputChange($event)',
@@ -50,6 +51,15 @@ export class ScSwitch implements FormCheckboxControl {
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
       null,
+  );
+
+  // Bound automatically by the Field directive (FormUiControl contract).
+  readonly invalid = input<boolean>(false);
+  readonly touched = input<boolean>(false);
+
+  // Matches ScInput: do not surface invalid until the control is touched.
+  protected readonly ariaInvalid = computed(
+    () => (this.touched() && this.invalid()) || null,
   );
 
   constructor() {
