@@ -153,6 +153,45 @@ Four rules are not simple renames, and are the easiest to miss:
 icons** — chevrons and arrows in pagination, carousel and breadcrumb. Grep
 upstream for it to find every icon that must rotate in RTL.
 
+### What must stay physical
+
+The mapping is not universal. Four groups in this repo keep physical
+properties on purpose, and converting them is a regression, not a fix.
+
+**1. Centring: `left-1/2` paired with `-translate-x-1/2`.** This is the one that
+looks most like an oversight. `translate-x` has no logical form — it does not
+flip — so changing only the inset moves the element off-centre in RTL:
+
+```
+left-1/2  -translate-x-1/2   ✅ centred in both directions
+start-1/2 -translate-x-1/2   ❌ off-centre in RTL
+```
+
+Upstream's transform handles this by adding an `rtl:` variant with the sign
+flipped, rather than by touching the inset. If you convert the inset, you must
+do both. Affects tooltip, radio, the resizable handle and toast-stack's centre
+positions.
+
+**2. Explicitly physical APIs.** Where a component takes a side or position by
+name — `side="left"`, `direction="left"`, `'top-right'` — the caller means
+literally left. Its border or offset must sit on the matching physical edge, so
+a logical property puts it on the wrong side in RTL. Affects drawer, sheet,
+sidebar and toast-stack.
+
+**3. Spatial widgets.** Image cropper, image compare, image annotator and
+org-chart. Handle offsets pair with physical resize cursors (`w-resize`,
+`sw-resize`), and mirroring a crop box or a diagram is wrong regardless of
+writing direction. Flipping the position without the cursor is worse than
+leaving both.
+
+**4. Anything an overlay is coupled to.** The media progress fills are absolutely
+positioned over a slider. Flipping the overlay without confirming the slider's
+own thumb math would desync them.
+
+The general test: ask whether the edge is _the trailing one_ (flip it) or _a
+specific physical side_ (leave it). Close buttons, badges and indicators are the
+former; a `side="left"` drawer is the latter.
+
 ## Fetching a file
 
 Use `gh api` — the `contents` endpoint returns base64:
