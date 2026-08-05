@@ -111,3 +111,29 @@ describe('injectQueryParam', () => {
     expect(c.page.value()).toBe(3);
   });
 });
+
+@Component({ template: '' })
+class Debounced {
+  readonly q = injectQueryParam(
+    'q',
+    parseAsString.withDefault('').withOptions({ debounceMs: 300 }),
+  );
+  readonly router = inject(Router);
+}
+
+describe('debounce vs back navigation', () => {
+  it('does not resurrect a pending write after the URL changes', async () => {
+    const c = await mount(Debounced, '/?q=one');
+
+    // Type, then navigate before the debounce window closes.
+    c.q.set('typed');
+    await c.router.navigateByUrl('/?q=two');
+    TestBed.tick();
+
+    await new Promise((r) => setTimeout(r, 400));
+    await settle();
+
+    expect(c.router.url).toContain('q=two');
+    expect(c.q.value()).toBe('two');
+  });
+});
