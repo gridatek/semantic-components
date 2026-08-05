@@ -21,10 +21,10 @@ export default class CaptionTableDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
-  ScTableContainer,
   ScTableBody,
   ScTableCaption,
   ScTableCell,
+  ScTableContainer,
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,

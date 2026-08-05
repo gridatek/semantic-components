@@ -576,6 +576,11 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/time-picker-clock/time-picker-clock-page'),
       },
       {
+        path: 'marker',
+        title: 'Marker - Semantic Components',
+        loadComponent: () => import('../pages/docs/marker/marker-page'),
+      },
+      {
         path: 'timeline',
         title: 'Timeline - Semantic Components',
         loadComponent: () => import('../pages/docs/timeline/timeline-page'),

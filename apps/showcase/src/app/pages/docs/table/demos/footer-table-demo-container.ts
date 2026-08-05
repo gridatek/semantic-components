@@ -21,9 +21,9 @@ export default class FooterTableDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
-  ScTableContainer,
   ScTableBody,
   ScTableCell,
+  ScTableContainer,
   ScTableFooter,
   ScTableHeader,
   ScTableHeaderCell,

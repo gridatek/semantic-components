@@ -21,9 +21,9 @@ export default class BasicTableDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
-  ScTableContainer,
   ScTableBody,
   ScTableCell,
+  ScTableContainer,
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
