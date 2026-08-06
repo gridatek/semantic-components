@@ -30,6 +30,9 @@ jobs:
       - name: Lint
         run: npx nx run-many -t lint
 
+      - name: Unit tests
+        run: npx nx run-many -t test
+
       - name: Build
         run: npx nx run-many -t build
 
