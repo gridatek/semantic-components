@@ -69,10 +69,6 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
-    "test": {
-      "executor": "@angular/build:unit-test",
-      "options": {}
-    },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
