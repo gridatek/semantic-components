@@ -5,11 +5,11 @@ A right-click context menu built on top of the `ScMenu` component, positioned at
 ## Usage
 
 ```typescript
-import { ScContextMenu, ScContextMenuTrigger, ScMenu, ScMenuContent, ScMenuItem, ScMenuSeparator } from '@semantic-components/ui';
+import { ScContextMenuProvider, ScContextMenuTrigger, ScMenu, ScMenuContent, ScMenuItem, ScMenuSeparator } from '@semantic-components/ui';
 ```
 
 ```html
-<div scContextMenu class="h-[150px] w-[300px]">
+<div scContextMenuProvider class="h-[150px] w-[300px]">
   <div scContextMenuTrigger>Right click here</div>
 
   <div scMenu>
@@ -24,14 +24,14 @@ import { ScContextMenu, ScContextMenuTrigger, ScMenu, ScMenuContent, ScMenuItem,
 
 ## Components
 
-### ScContextMenu
+### ScContextMenuProvider
 
 Container component that listens for right-click events and manages the menu lifecycle.
 
-| Property | Type                 | Description                                        |
-| -------- | -------------------- | -------------------------------------------------- |
-| Selector | `div[scContextMenu]` | Must be placed on a `<div>` element.               |
-| `class`  | `input<string>`      | CSS classes merged with the default `block` class. |
+| Property | Type                         | Description                                        |
+| -------- | ---------------------------- | -------------------------------------------------- |
+| Selector | `div[scContextMenuProvider]` | Must be placed on a `<div>` element.               |
+| `class`  | `input<string>`              | CSS classes merged with the default `block` class. |
 
 **Data attributes:**
 
@@ -57,7 +57,7 @@ The context menu content uses the shared menu primitives (`ScMenu`, `ScMenuConte
 ### With keyboard shortcuts
 
 ```html
-<div scContextMenu class="h-[150px] w-[300px]">
+<div scContextMenuProvider class="h-[150px] w-[300px]">
   <div scContextMenuTrigger>Right click here</div>
 
   <div scMenu>

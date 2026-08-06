@@ -12,25 +12,25 @@ import { ScMenu } from '../menu';
 import { ScContextMenuTrigger } from './context-menu-trigger';
 
 @Component({
-  selector: 'div[scContextMenu]',
+  selector: 'div[scContextMenuProvider]',
   template: `
     <ng-content />
   `,
   styles: `
-    [data-slot='context-menu'] > [data-slot='menu'] {
+    [data-slot='context-menu-provider'] > [data-slot='menu'] {
       visibility: hidden;
       position: fixed;
     }
   `,
   host: {
-    'data-slot': 'context-menu',
+    'data-slot': 'context-menu-provider',
     '[class]': 'class()',
     '(contextmenu)': 'onContextMenu($event)',
     '(focusout)': 'onFocusOut($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScContextMenu {
+export class ScContextMenuProvider {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly elementRef = inject(ElementRef<HTMLElement>);

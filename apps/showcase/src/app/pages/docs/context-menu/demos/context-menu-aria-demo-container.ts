@@ -20,7 +20,7 @@ import { ContextMenuAriaDemo } from './context-menu-aria-demo';
 export class ContextMenuAriaDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenu,
+  ScContextMenuProvider,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
@@ -31,7 +31,7 @@ import {
 @Component({
   selector: 'app-context-menu-aria-demo',
   imports: [
-    ScContextMenu,
+    ScContextMenuProvider,
     ScContextMenuTrigger,
     ScMenu,
     ScMenuContent,
@@ -39,7 +39,7 @@ import {
     ScMenuSeparator,
   ],
   template: \`
-    <div scContextMenu class="h-[150px] w-[300px]">
+    <div scContextMenuProvider class="h-[150px] w-[300px]">
       <div scContextMenuTrigger>Right click here</div>
 
       <div scMenu>
