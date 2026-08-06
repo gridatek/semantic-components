@@ -14,7 +14,9 @@ import {
   ScButton,
   ScCopyToClipboard,
   ScTab,
+  ScTabContent,
   ScTabList,
+  ScTabPanel,
   ScTabs,
 } from '@semantic-components/ui';
 import { cn } from '@semantic-components/ui';
@@ -39,6 +41,8 @@ import { PackageManagerService } from './package-manager.service';
     ScTabs,
     ScTabList,
     ScTab,
+    ScTabPanel,
+    ScTabContent,
   ],
   template: `
     <div scTabs>
@@ -73,7 +77,17 @@ import { PackageManagerService } from './package-manager.service';
             }
           </button>
         </div>
-        <div scCodeViewerContent [code]="command()" language="bash"></div>
+        @for (entry of commands(); track entry.id) {
+          <div scTabPanel [value]="entry.id">
+            <ng-template scTabContent>
+              <div
+                scCodeViewerContent
+                [code]="entry.command"
+                language="bash"
+              ></div>
+            </ng-template>
+          </div>
+        }
       </div>
     </div>
   `,
@@ -91,14 +105,19 @@ export class PackageManagerInstall {
   protected readonly class = computed(() => cn('block', this.classInput()));
   protected readonly selected = this.packageManagerService.selected;
 
-  protected readonly command = computed(() => {
+  protected readonly commands = computed(() => {
     const pkg = this.packages();
-    const commands: Record<string, string> = {
-      npm: `npm install ${pkg}`,
-      yarn: `yarn add ${pkg}`,
-      pnpm: `pnpm add ${pkg}`,
-      bun: `bun add ${pkg}`,
-    };
-    return commands[this.selected()];
+    return [
+      { id: 'pnpm', command: `pnpm add ${pkg}` },
+      { id: 'npm', command: `npm install ${pkg}` },
+      { id: 'yarn', command: `yarn add ${pkg}` },
+      { id: 'bun', command: `bun add ${pkg}` },
+    ];
   });
+
+  protected readonly command = computed(
+    () =>
+      this.commands().find((entry) => entry.id === this.selected())?.command ??
+      '',
+  );
 }

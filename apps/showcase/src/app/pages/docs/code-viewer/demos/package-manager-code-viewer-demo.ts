@@ -8,7 +8,9 @@ import {
   ScButton,
   ScCopyToClipboard,
   ScTab,
+  ScTabContent,
   ScTabList,
+  ScTabPanel,
   ScTabs,
 } from '@semantic-components/ui';
 import {
@@ -31,6 +33,8 @@ import {
     ScTabs,
     ScTabList,
     ScTab,
+    ScTabPanel,
+    ScTabContent,
   ],
   template: `
     <div scTabs class="w-full max-w-lg">
@@ -65,7 +69,17 @@ import {
             }
           </button>
         </div>
-        <div scCodeViewerContent [code]="command()" language="bash"></div>
+        @for (entry of commands; track entry.id) {
+          <div scTabPanel [value]="entry.id">
+            <ng-template scTabContent>
+              <div
+                scCodeViewerContent
+                [code]="entry.command"
+                language="bash"
+              ></div>
+            </ng-template>
+          </div>
+        }
       </div>
     </div>
   `,
@@ -75,12 +89,16 @@ import {
 export class PackageManagerCodeViewerDemo {
   readonly selected = signal('pnpm');
 
-  private readonly commands: Record<string, string> = {
-    npm: 'npm install @semantic-components/code shiki',
-    yarn: 'yarn add @semantic-components/code shiki',
-    pnpm: 'pnpm add @semantic-components/code shiki',
-    bun: 'bun add @semantic-components/code shiki',
-  };
+  protected readonly commands = [
+    { id: 'pnpm', command: 'pnpm add @semantic-components/code shiki' },
+    { id: 'npm', command: 'npm install @semantic-components/code shiki' },
+    { id: 'yarn', command: 'yarn add @semantic-components/code shiki' },
+    { id: 'bun', command: 'bun add @semantic-components/code shiki' },
+  ];
 
-  readonly command = computed(() => this.commands[this.selected()]);
+  readonly command = computed(
+    () =>
+      this.commands.find((entry) => entry.id === this.selected())?.command ??
+      '',
+  );
 }
