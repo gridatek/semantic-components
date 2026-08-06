@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScContextMenu,
+  ScContextMenuProvider,
   ScContextMenuTrigger,
   ScMenu,
   ScMenuContent,
@@ -13,7 +13,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-context-menu-demo',
   imports: [
-    ScContextMenu,
+    ScContextMenuProvider,
     ScContextMenuTrigger,
     ScMenu,
     ScMenuContent,
@@ -23,7 +23,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     SiChevronRightIcon,
   ],
   template: `
-    <div scContextMenu class="h-[150px] w-[300px]">
+    <div scContextMenuProvider class="h-[150px] w-[300px]">
       <div scContextMenuTrigger>Right click here</div>
 
       <div scMenu>
