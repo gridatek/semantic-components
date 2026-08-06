@@ -10,6 +10,7 @@ import {
   ScButton,
   ScCopyToClipboard,
   ScTab,
+  ScTabContent,
   ScTabList,
   ScTabPanel,
   ScTabs,
@@ -29,6 +30,7 @@ import { TocHeading } from '../toc/toc-heading';
     ScTabList,
     ScTab,
     ScTabPanel,
+    ScTabContent,
     ScCodeViewer,
     ScCodeViewerHeader,
     ScCodeViewerLabel,
@@ -74,35 +76,39 @@ import { TocHeading } from '../toc/toc-heading';
           value="preview"
           class="flex min-h-40 items-center justify-center rounded-md border p-6"
         >
-          <ng-content />
+          <ng-template scTabContent>
+            <ng-content />
+          </ng-template>
         </div>
 
         <div scTabPanel value="code">
-          <div scCodeViewer>
-            <div scCodeViewerHeader>
-              <span scCodeViewerLabel>{{ language() }}</span>
-              <button
-                scButton
-                variant="ghost"
-                size="icon"
-                [scCopyToClipboard]="code()"
-                #copy="scCopyToClipboard"
-                aria-label="Copy to clipboard"
-              >
-                @if (copy.copied()) {
-                  <svg siCheckIcon></svg>
-                } @else {
-                  <svg siCopyIcon></svg>
-                }
-              </button>
+          <ng-template scTabContent>
+            <div scCodeViewer>
+              <div scCodeViewerHeader>
+                <span scCodeViewerLabel>{{ language() }}</span>
+                <button
+                  scButton
+                  variant="ghost"
+                  size="icon"
+                  [scCopyToClipboard]="code()"
+                  #copy="scCopyToClipboard"
+                  aria-label="Copy to clipboard"
+                >
+                  @if (copy.copied()) {
+                    <svg siCheckIcon></svg>
+                  } @else {
+                    <svg siCopyIcon></svg>
+                  }
+                </button>
+              </div>
+              <div
+                scCodeViewerContent
+                [code]="code()"
+                [language]="language()"
+                [showLineNumbers]="true"
+              ></div>
             </div>
-            <div
-              scCodeViewerContent
-              [code]="code()"
-              [language]="language()"
-              [showLineNumbers]="true"
-            ></div>
-          </div>
+          </ng-template>
         </div>
       </div>
     </div>

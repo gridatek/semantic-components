@@ -32,6 +32,7 @@ import {
   ScSpinner,
   ScSwitch,
   ScTab,
+  ScTabContent,
   ScTabList,
   ScTabPanel,
   ScTabs,
@@ -75,6 +76,7 @@ import {
     ScSpinner,
     ScSwitch,
     ScTab,
+    ScTabContent,
     ScTabList,
     ScTabPanel,
     ScTabs,
@@ -415,28 +417,34 @@ import {
                 <button scTab value="reports">Reports</button>
               </div>
               <div scTabPanel value="overview">
-                <div class="rounded-lg border p-4">
-                  <h3 class="text-lg font-medium">Overview</h3>
-                  <p class="text-muted-foreground text-sm">
-                    A high-level summary of your project's metrics.
-                  </p>
-                </div>
+                <ng-template scTabContent>
+                  <div class="rounded-lg border p-4">
+                    <h3 class="text-lg font-medium">Overview</h3>
+                    <p class="text-muted-foreground text-sm">
+                      A high-level summary of your project's metrics.
+                    </p>
+                  </div>
+                </ng-template>
               </div>
               <div scTabPanel value="analytics">
-                <div class="rounded-lg border p-4">
-                  <h3 class="text-lg font-medium">Analytics</h3>
-                  <p class="text-muted-foreground text-sm">
-                    Detailed analytics and performance data.
-                  </p>
-                </div>
+                <ng-template scTabContent>
+                  <div class="rounded-lg border p-4">
+                    <h3 class="text-lg font-medium">Analytics</h3>
+                    <p class="text-muted-foreground text-sm">
+                      Detailed analytics and performance data.
+                    </p>
+                  </div>
+                </ng-template>
               </div>
               <div scTabPanel value="reports">
-                <div class="rounded-lg border p-4">
-                  <h3 class="text-lg font-medium">Reports</h3>
-                  <p class="text-muted-foreground text-sm">
-                    Generated reports and exportable data.
-                  </p>
-                </div>
+                <ng-template scTabContent>
+                  <div class="rounded-lg border p-4">
+                    <h3 class="text-lg font-medium">Reports</h3>
+                    <p class="text-muted-foreground text-sm">
+                      Generated reports and exportable data.
+                    </p>
+                  </div>
+                </ng-template>
               </div>
             </div>
           </section>

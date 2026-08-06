@@ -5,6 +5,7 @@ import {
   ScInput,
   ScLabel,
   ScTab,
+  ScTabContent,
   ScTabList,
   ScTabPanel,
   ScTabs,
@@ -15,6 +16,7 @@ import {
   imports: [
     ScTabs,
     ScTabPanel,
+    ScTabContent,
     ScTabList,
     ScTab,
     ScField,
@@ -29,42 +31,46 @@ import {
         <button scTab value="password">Password</button>
       </div>
       <div scTabPanel value="account">
-        <div class="space-y-4 rounded-lg border p-4">
-          <div class="space-y-2">
-            <h3 class="text-lg font-medium">Account</h3>
-            <p class="text-muted-foreground text-sm">
-              Make changes to your account here. Click save when you're done.
-            </p>
+        <ng-template scTabContent>
+          <div class="space-y-4 rounded-lg border p-4">
+            <div class="space-y-2">
+              <h3 class="text-lg font-medium">Account</h3>
+              <p class="text-muted-foreground text-sm">
+                Make changes to your account here. Click save when you're done.
+              </p>
+            </div>
+            <div scField>
+              <label scLabel>Name</label>
+              <input scInput value="Pedro Duarte" />
+            </div>
+            <div scField>
+              <label scLabel>Username</label>
+              <input scInput value="@peduarte" />
+            </div>
+            <button scButton>Save changes</button>
           </div>
-          <div scField>
-            <label scLabel>Name</label>
-            <input scInput value="Pedro Duarte" />
-          </div>
-          <div scField>
-            <label scLabel>Username</label>
-            <input scInput value="@peduarte" />
-          </div>
-          <button scButton>Save changes</button>
-        </div>
+        </ng-template>
       </div>
       <div scTabPanel value="password">
-        <div class="space-y-4 rounded-lg border p-4">
-          <div class="space-y-2">
-            <h3 class="text-lg font-medium">Password</h3>
-            <p class="text-muted-foreground text-sm">
-              Change your password here. After saving, you'll be logged out.
-            </p>
+        <ng-template scTabContent>
+          <div class="space-y-4 rounded-lg border p-4">
+            <div class="space-y-2">
+              <h3 class="text-lg font-medium">Password</h3>
+              <p class="text-muted-foreground text-sm">
+                Change your password here. After saving, you'll be logged out.
+              </p>
+            </div>
+            <div scField>
+              <label scLabel>Current password</label>
+              <input scInput type="password" />
+            </div>
+            <div scField>
+              <label scLabel>New password</label>
+              <input scInput type="password" />
+            </div>
+            <button scButton>Save password</button>
           </div>
-          <div scField>
-            <label scLabel>Current password</label>
-            <input scInput type="password" />
-          </div>
-          <div scField>
-            <label scLabel>New password</label>
-            <input scInput type="password" />
-          </div>
-          <button scButton>Save password</button>
-        </div>
+        </ng-template>
       </div>
     </div>
   `,
