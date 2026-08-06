@@ -47,7 +47,6 @@ import { ScMenuBar } from './menu-bar';
             offsetY: 4,
           },
         ]"
-        cdkAttachPopoverAsChild
       >
         <ng-container [ngTemplateOutlet]="portal.templateRef" />
       </ng-template>

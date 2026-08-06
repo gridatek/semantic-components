@@ -46,7 +46,6 @@ import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
       }"
       (backdropClick)="close()"
       (overlayKeydown)="onOverlayKeydown($event)"
-      cdkAttachPopoverAsChild
     >
       <ng-content />
     </ng-template>
