@@ -1,6 +1,7 @@
 import { Menu } from '@angular/aria/menu';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
+import { SC_CONTEXT_MENU_PROVIDER } from '../context-menu/context-menu-types';
 import { ScMenuPortal } from './menu-portal';
 
 @Directive({
@@ -17,12 +18,26 @@ import { ScMenuPortal } from './menu-portal';
     'data-slot': 'menu',
     '[class]': 'class()',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',
-    'animate.leave': 'animate-out fade-out-0 zoom-out-95 duration-150',
+    '[animate.leave]': 'leaveAnimation()',
   },
 })
 export class ScMenu<V = string> {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly menu = inject<Menu<V>>(Menu);
+
+  /**
+   * A context menu tears its overlay down on close, so the leave animation
+   * never finishes and its classes stay on the element. The next open then
+   * reuses that element and fades in and out at once. Nothing is lost by
+   * skipping it: the pane is destroyed either way.
+   */
+  private readonly contextMenu = inject(SC_CONTEXT_MENU_PROVIDER, {
+    optional: true,
+  });
+
+  protected readonly leaveAnimation = computed(() =>
+    this.contextMenu ? '' : 'animate-out fade-out-0 zoom-out-95 duration-150',
+  );
   readonly visible = this.menu.visible;
 
   protected readonly class = computed(() =>
