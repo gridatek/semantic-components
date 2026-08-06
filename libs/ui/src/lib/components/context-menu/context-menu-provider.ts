@@ -1,74 +1,53 @@
 import {
   Component,
-  ElementRef,
   ViewEncapsulation,
   computed,
   contentChild,
-  inject,
   input,
+  signal,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScMenu } from '../menu';
+import { ScContextMenu } from './context-menu';
 import { ScContextMenuTrigger } from './context-menu-trigger';
+import { SC_CONTEXT_MENU_PROVIDER } from './context-menu-types';
 
+/**
+ * Catches the right-click and records where it happened. ScContextMenu reads
+ * that position to park its anchor, and the overlay does the rest.
+ */
 @Component({
   selector: 'div[scContextMenuProvider]',
+  providers: [
+    { provide: SC_CONTEXT_MENU_PROVIDER, useExisting: ScContextMenuProvider },
+  ],
   template: `
     <ng-content />
-  `,
-  styles: `
-    [data-slot='context-menu-provider'] > [data-slot='menu'] {
-      visibility: hidden;
-      position: fixed;
-    }
   `,
   host: {
     'data-slot': 'context-menu-provider',
     '[class]': 'class()',
     '(contextmenu)': 'onContextMenu($event)',
-    '(focusout)': 'onFocusOut($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScContextMenuProvider {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly trigger = contentChild(ScContextMenuTrigger);
-  private readonly scMenu = contentChild(ScMenu);
+  private readonly contextMenu = contentChild(ScContextMenu);
+
+  /** Viewport coordinates of the last right-click. */
+  readonly position = signal({ x: 0, y: 0 });
 
   protected readonly class = computed(() => cn('block', this.classInput()));
 
-  onContextMenu(event: MouseEvent) {
-    const triggerEl = this.trigger();
-    if (!triggerEl) {
+  protected onContextMenu(event: MouseEvent): void {
+    if (!this.trigger()) {
       return;
     }
 
     event.preventDefault();
-
-    const menu = this.scMenu()?.menu;
-    if (!menu) {
-      return;
-    }
-
-    menu._pattern.closeAll();
-    menu.element.style.visibility = 'visible';
-    menu.element.style.top = `${event.clientY}px`;
-    menu.element.style.left = `${event.clientX}px`;
-    setTimeout(() => menu._pattern.first());
-  }
-
-  onFocusOut(event: FocusEvent) {
-    const menu = this.scMenu()?.menu;
-    if (!menu) {
-      return;
-    }
-
-    const relatedTarget = event.relatedTarget as HTMLElement | null;
-    if (!this.elementRef.nativeElement.contains(relatedTarget)) {
-      menu.close();
-      menu.element.style.visibility = 'hidden';
-    }
+    this.position.set({ x: event.clientX, y: event.clientY });
+    this.contextMenu()?.open();
   }
 }
