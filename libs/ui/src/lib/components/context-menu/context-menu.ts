@@ -27,6 +27,7 @@ import { ScContextMenuTrigger } from './context-menu-trigger';
     '[class]': 'class()',
     '(contextmenu)': 'onContextMenu($event)',
     '(focusout)': 'onFocusOut($event)',
+    '(keydown.escape)': 'onEscape($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
@@ -91,6 +92,21 @@ export class ScContextMenu {
     element.style.top = `${fit(y, height, window.innerHeight)}px`;
   }
 
+  /**
+   * The Angular Aria demo gets this from `(overlayKeydown)` on its CDK
+   * overlay, which closes the trigger. There is no overlay or trigger here, so
+   * the key is handled directly.
+   */
+  onEscape(event: Event) {
+    const menu = this.scMenu()?.menu;
+    if (!menu) {
+      return;
+    }
+
+    event.preventDefault();
+    this.hide(menu);
+  }
+
   onFocusOut(event: FocusEvent) {
     const menu = this.scMenu()?.menu;
     if (!menu) {
@@ -99,8 +115,12 @@ export class ScContextMenu {
 
     const relatedTarget = event.relatedTarget as HTMLElement | null;
     if (!this.elementRef.nativeElement.contains(relatedTarget)) {
-      menu.close();
-      menu.element.style.visibility = 'hidden';
+      this.hide(menu);
     }
+  }
+
+  private hide(menu: { close: () => void; element: HTMLElement }): void {
+    menu.close();
+    menu.element.style.visibility = 'hidden';
   }
 }
