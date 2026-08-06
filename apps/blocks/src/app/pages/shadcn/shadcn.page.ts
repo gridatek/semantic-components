@@ -30,6 +30,7 @@ import {
   ScProgress,
   ScSeparator,
   ScTab,
+  ScTabContent,
   ScTabList,
   ScTabPanel,
   ScTabs,
@@ -78,6 +79,7 @@ import {
     ScProgress,
     ScSeparator,
     ScTab,
+    ScTabContent,
     ScTabList,
     ScTabPanel,
     ScTabs,
@@ -664,57 +666,69 @@ import {
                     <button scTab value="drinks">Drinks</button>
                   </div>
                   <div scTabPanel value="starters">
-                    <div class="space-y-4 pt-4">
-                      @for (item of menuStarters; track item.name) {
-                        <div
-                          class="flex items-start justify-between gap-4 rounded-lg border p-4"
-                        >
-                          <div class="flex-1 space-y-1">
-                            <div class="flex items-center gap-2">
-                              <span class="text-lg">{{ item.emoji }}</span>
-                              <h4 class="font-medium">{{ item.name }}</h4>
+                    <ng-template scTabContent>
+                      <div class="space-y-4 pt-4">
+                        @for (item of menuStarters; track item.name) {
+                          <div
+                            class="flex items-start justify-between gap-4 rounded-lg border p-4"
+                          >
+                            <div class="flex-1 space-y-1">
+                              <div class="flex items-center gap-2">
+                                <span class="text-lg">{{ item.emoji }}</span>
+                                <h4 class="font-medium">{{ item.name }}</h4>
+                              </div>
+                              <div class="flex gap-1">
+                                @for (tag of item.tags; track tag) {
+                                  <span
+                                    scBadge
+                                    variant="outline"
+                                    class="text-xs"
+                                  >
+                                    {{ tag }}
+                                  </span>
+                                }
+                              </div>
+                              <p class="text-muted-foreground text-sm">
+                                {{ item.description }}
+                              </p>
                             </div>
-                            <div class="flex gap-1">
-                              @for (tag of item.tags; track tag) {
-                                <span scBadge variant="outline" class="text-xs">
-                                  {{ tag }}
-                                </span>
-                              }
+                            <div class="flex flex-col items-end gap-2">
+                              <span class="font-semibold">
+                                \${{ item.price }}
+                              </span>
+                              <button scButton size="sm">Add</button>
                             </div>
-                            <p class="text-muted-foreground text-sm">
-                              {{ item.description }}
-                            </p>
                           </div>
-                          <div class="flex flex-col items-end gap-2">
-                            <span class="font-semibold">
-                              \${{ item.price }}
-                            </span>
-                            <button scButton size="sm">Add</button>
-                          </div>
-                        </div>
-                      }
-                    </div>
+                        }
+                      </div>
+                    </ng-template>
                   </div>
                   <div scTabPanel value="mains">
-                    <div
-                      class="text-muted-foreground flex h-32 items-center justify-center text-sm"
-                    >
-                      Main courses coming soon
-                    </div>
+                    <ng-template scTabContent>
+                      <div
+                        class="text-muted-foreground flex h-32 items-center justify-center text-sm"
+                      >
+                        Main courses coming soon
+                      </div>
+                    </ng-template>
                   </div>
                   <div scTabPanel value="desserts">
-                    <div
-                      class="text-muted-foreground flex h-32 items-center justify-center text-sm"
-                    >
-                      Desserts coming soon
-                    </div>
+                    <ng-template scTabContent>
+                      <div
+                        class="text-muted-foreground flex h-32 items-center justify-center text-sm"
+                      >
+                        Desserts coming soon
+                      </div>
+                    </ng-template>
                   </div>
                   <div scTabPanel value="drinks">
-                    <div
-                      class="text-muted-foreground flex h-32 items-center justify-center text-sm"
-                    >
-                      Drinks coming soon
-                    </div>
+                    <ng-template scTabContent>
+                      <div
+                        class="text-muted-foreground flex h-32 items-center justify-center text-sm"
+                      >
+                        Drinks coming soon
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </div>

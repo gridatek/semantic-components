@@ -1,9 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
+import {
+  ScTab,
+  ScTabContent,
+  ScTabList,
+  ScTabPanel,
+  ScTabs,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-disabled-tabs-demo',
-  imports: [ScTabs, ScTabPanel, ScTabList, ScTab],
+  imports: [ScTabs, ScTabPanel, ScTabContent, ScTabList, ScTab],
   template: `
     <div scTabs class="w-[500px]">
       <div scTabList [selectedTab]="'overview'">
@@ -15,24 +21,32 @@ import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
         </button>
       </div>
       <div scTabPanel value="overview">
-        <p class="text-muted-foreground text-sm">
-          Overview content. View your dashboard summary and key metrics.
-        </p>
+        <ng-template scTabContent>
+          <p class="text-muted-foreground text-sm">
+            Overview content. View your dashboard summary and key metrics.
+          </p>
+        </ng-template>
       </div>
       <div scTabPanel value="analytics">
-        <p class="text-muted-foreground text-sm">
-          Analytics content. Dive deep into your data and discover insights.
-        </p>
+        <ng-template scTabContent>
+          <p class="text-muted-foreground text-sm">
+            Analytics content. Dive deep into your data and discover insights.
+          </p>
+        </ng-template>
       </div>
       <div scTabPanel value="reports">
-        <p class="text-muted-foreground text-sm">
-          Reports content. Generate and download detailed reports.
-        </p>
+        <ng-template scTabContent>
+          <p class="text-muted-foreground text-sm">
+            Reports content. Generate and download detailed reports.
+          </p>
+        </ng-template>
       </div>
       <div scTabPanel value="notifications">
-        <p class="text-muted-foreground text-sm">
-          Notifications content. Manage your notification preferences.
-        </p>
+        <ng-template scTabContent>
+          <p class="text-muted-foreground text-sm">
+            Notifications content. Manage your notification preferences.
+          </p>
+        </ng-template>
       </div>
     </div>
   `,

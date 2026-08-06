@@ -1,9 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
+import {
+  ScTab,
+  ScTabContent,
+  ScTabList,
+  ScTabPanel,
+  ScTabs,
+} from '@semantic-components/ui';
 
 @Component({
   selector: 'app-tabs-usage-demo',
-  imports: [ScTabs, ScTabPanel, ScTabList, ScTab],
+  imports: [ScTabs, ScTabPanel, ScTabContent, ScTabList, ScTab],
   template: `
     <div scTabs class="w-[400px]">
       <div scTabList [selectedTab]="'account'" class="grid w-full grid-cols-2">
@@ -11,14 +17,18 @@ import { ScTab, ScTabList, ScTabPanel, ScTabs } from '@semantic-components/ui';
         <button scTab value="password">Password</button>
       </div>
       <div scTabPanel value="account">
-        <p class="text-muted-foreground p-4 text-sm">
-          Make changes to your account here.
-        </p>
+        <ng-template scTabContent>
+          <p class="text-muted-foreground p-4 text-sm">
+            Make changes to your account here.
+          </p>
+        </ng-template>
       </div>
       <div scTabPanel value="password">
-        <p class="text-muted-foreground p-4 text-sm">
-          Change your password here.
-        </p>
+        <ng-template scTabContent>
+          <p class="text-muted-foreground p-4 text-sm">
+            Change your password here.
+          </p>
+        </ng-template>
       </div>
     </div>
   `,
