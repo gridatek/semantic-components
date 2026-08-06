@@ -53,10 +53,42 @@ export class ScContextMenu {
     }
 
     menu._pattern.closeAll();
+    // Placed before it is revealed, so it never flashes at the previous
+    // position. A visibility-hidden element still reports its size.
+    this.place(menu.element, event.clientX, event.clientY);
     menu.element.style.visibility = 'visible';
-    menu.element.style.top = `${event.clientY}px`;
-    menu.element.style.left = `${event.clientX}px`;
     setTimeout(() => menu._pattern.first());
+  }
+
+  /**
+   * Opens away from the pointer in the reading direction, flips to the other
+   * side when there is no room, and finally clamps so the menu always lands
+   * inside the viewport. Assigning the pointer coordinates directly let the
+   * menu run off-screen near an edge.
+   */
+  private place(element: HTMLElement, clientX: number, clientY: number): void {
+    const margin = 8;
+    const { width, height } = element.getBoundingClientRect();
+    const rtl = getComputedStyle(element).direction === 'rtl';
+
+    const fit = (value: number, size: number, viewport: number) =>
+      Math.min(
+        Math.max(margin, value),
+        Math.max(margin, viewport - size - margin),
+      );
+
+    let x = rtl ? clientX - width : clientX;
+    if (rtl ? x < margin : x + width > window.innerWidth - margin) {
+      x = rtl ? clientX : clientX - width;
+    }
+
+    let y = clientY;
+    if (y + height > window.innerHeight - margin) {
+      y = clientY - height;
+    }
+
+    element.style.left = `${fit(x, width, window.innerWidth)}px`;
+    element.style.top = `${fit(y, height, window.innerHeight)}px`;
   }
 
   onFocusOut(event: FocusEvent) {
