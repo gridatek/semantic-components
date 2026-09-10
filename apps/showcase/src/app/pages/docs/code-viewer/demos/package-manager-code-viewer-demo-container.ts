@@ -118,7 +118,8 @@ export class PackageManagerCodeViewerDemo {
 
   readonly command = computed(
     () =>
-      this.commands.find((entry) => entry.id === this.selected())?.command ?? '',
+      this.commands.find((entry) => entry.id === this.selected())?.command ??
+      '',
   );
 }`;
 }
