@@ -1,5 +1,5 @@
-import { Toolbar } from '@angular/aria/toolbar';
 import { Directive, effect, inject } from '@angular/core';
+import { ScToolbar } from '@semantic-components/ui';
 import { DiffViewMode, SC_DIFF_VIEWER } from './diff-viewer';
 
 @Directive({
@@ -8,13 +8,13 @@ import { DiffViewMode, SC_DIFF_VIEWER } from './diff-viewer';
 })
 export class ScDiffViewerModeSwitch {
   private readonly diffViewer = inject(SC_DIFF_VIEWER);
-  private readonly toolbar = inject(Toolbar);
+  private readonly toolbar = inject(ScToolbar);
 
   constructor() {
-    this.toolbar.value.set([this.diffViewer.viewMode()]);
+    this.toolbar.values.set([this.diffViewer.viewMode()]);
 
     effect(() => {
-      const values = this.toolbar.value() as DiffViewMode[];
+      const values = this.toolbar.values() as DiffViewMode[];
       if (values.length > 0) {
         this.diffViewer.viewMode.set(values[0]);
       }

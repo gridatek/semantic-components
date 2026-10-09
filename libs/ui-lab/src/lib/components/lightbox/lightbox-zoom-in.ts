@@ -5,7 +5,7 @@ import { SC_LIGHTBOX_PROVIDER } from './lightbox-provider';
 
 @Directive({
   selector: 'button[scLightboxZoomIn]',
-  hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
+  hostDirectives: [ToolbarWidget],
   host: {
     '[class]': 'class()',
     type: 'button',

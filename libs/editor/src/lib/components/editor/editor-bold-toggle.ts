@@ -5,7 +5,7 @@ import { SC_EDITOR } from './editor';
 
 @Directive({
   selector: 'button[scEditorBoldToggle]',
-  hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
+  hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',

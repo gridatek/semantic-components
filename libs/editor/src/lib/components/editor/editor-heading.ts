@@ -16,7 +16,7 @@ const HEADING_OPTIONS: { value: ScEditorHeadingLevel; label: string }[] = [
 @Directive({
   selector: 'button[scEditorHeading]',
   exportAs: 'scEditorHeading',
-  hostDirectives: [{ directive: ToolbarWidget, inputs: ['value'] }],
+  hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',

@@ -5,6 +5,7 @@ import {
   computed,
   inject,
   input,
+  model,
 } from '@angular/core';
 import { cn } from '../../utils';
 
@@ -13,14 +14,7 @@ import { cn } from '../../utils';
   hostDirectives: [
     {
       directive: Toolbar,
-      inputs: [
-        'orientation',
-        'disabled',
-        'wrap',
-        'value: values',
-        'softDisabled',
-      ],
-      outputs: ['valueChange: valuesChange'],
+      inputs: ['orientation', 'disabled', 'wrap', 'softDisabled'],
     },
   ],
   template: `
@@ -34,6 +28,9 @@ import { cn } from '../../utils';
 })
 export class ScToolbar {
   protected readonly toolbar = inject(Toolbar);
+
+  /** Values of the currently pressed toggles. */
+  readonly values = model<string[]>([]);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
