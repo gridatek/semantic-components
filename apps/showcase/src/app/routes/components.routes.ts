@@ -293,6 +293,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/input-group/input-group-page'),
       },
       {
+        path: 'intersection-observer',
+        title: 'Intersection Observer - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/intersection-observer/intersection-observer-page'),
+      },
+      {
         path: 'otp',
         title: 'OTP - Semantic Components',
         loadComponent: () => import('../pages/docs/otp/otp-page'),

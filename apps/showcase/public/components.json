@@ -407,6 +407,14 @@
     "category": "Forms"
   },
   {
+    "name": "Intersection Observer",
+    "path": "intersection-observer",
+    "description": "A signal-based directive that tracks when an element enters or leaves the viewport or a scroll container.",
+    "status": "Experimental",
+    "library": "ui-lab",
+    "category": "Utilities"
+  },
+  {
     "name": "Item",
     "path": "item",
     "description": "A flexible layout component for displaying structured content.",

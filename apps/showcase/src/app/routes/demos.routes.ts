@@ -1724,6 +1724,25 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/intersection-observer',
+    children: [
+      {
+        path: 'basic-intersection-observer-demo',
+        loadComponent: () =>
+          import('../pages/docs/intersection-observer/demos/basic-intersection-observer-demo').then(
+            (m) => m.BasicIntersectionObserverDemo,
+          ),
+      },
+      {
+        path: 'once-intersection-observer-demo',
+        loadComponent: () =>
+          import('../pages/docs/intersection-observer/demos/once-intersection-observer-demo').then(
+            (m) => m.OnceIntersectionObserverDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/input-group',
     children: [
       {
