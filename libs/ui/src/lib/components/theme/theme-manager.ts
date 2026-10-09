@@ -54,10 +54,13 @@ export class ScThemeManager {
     ),
   );
 
+  // A signal so `resolvedMode` re-evaluates when the OS theme changes.
+  private readonly systemMode = signal(this.getSystemMode());
+
   readonly resolvedMode = computed(() => {
     const mode = this.mode();
     if (mode === 'system') {
-      return this.getSystemMode();
+      return this.systemMode();
     }
     return mode;
   });
@@ -75,9 +78,7 @@ export class ScThemeManager {
     });
 
     this.darkMediaQuery?.addEventListener('change', () => {
-      if (this.mode() === 'system') {
-        this.applyMode(this.getSystemMode());
-      }
+      this.systemMode.set(this.getSystemMode());
     });
   }
 
