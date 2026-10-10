@@ -61,7 +61,11 @@ export class ScComboboxPopup {
   protected readonly class = computed(() =>
     cn(
       'bg-popover text-popover-foreground ring-foreground/10 relative z-50 flex max-h-72 w-full min-w-36 flex-col overflow-hidden rounded-lg shadow-md ring-1',
-      '*:data-[slot=input-group]:bg-input/30 *:data-[slot=input-group]:border-input/30 *:data-[slot=input-group]:m-1 *:data-[slot=input-group]:mb-0 *:data-[slot=input-group]:h-8 *:data-[slot=input-group]:shadow-none',
+      '*:data-[slot=input-group]:bg-input/30 *:data-[slot=input-group]:border-input/30 *:data-[slot=input-group]:m-1 *:data-[slot=input-group]:w-auto *:data-[slot=input-group]:mb-0 *:data-[slot=input-group]:h-8 *:data-[slot=input-group]:shadow-none',
+      // The search box stays flat while focused, like upstream. The input
+      // group's own `in-data-[slot=combobox-content]:focus-within:ring-0` loses
+      // to its `has-[…:focus-visible]:ring-3` on specificity, so override here.
+      '*:data-[slot=input-group]:has-[[data-slot=control]:focus-visible]:border-input/30 *:data-[slot=input-group]:has-[[data-slot=control]:focus-visible]:ring-0',
       this.classInput(),
     ),
   );
