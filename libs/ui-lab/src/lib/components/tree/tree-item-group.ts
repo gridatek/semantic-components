@@ -22,6 +22,8 @@ import { SC_TREE_ITEM_GROUP, type ScTreeItemGroupContext } from './tree-tokens';
   `,
   host: {
     role: 'group',
+    'data-slot': 'tree-item-group',
+    '[attr.data-state]': 'item.treeItem.expanded() ? "open" : "closed"',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -49,8 +51,10 @@ export class ScTreeItemGroup implements ScTreeItemGroupContext {
 
   protected readonly class = computed(() =>
     cn(
-      'flex flex-col gap-1 overflow-hidden',
-      'data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down',
+      'flex flex-col gap-0.5',
+      // Children are rendered when the item opens, so animate their entrance.
+      // (They are removed on close, so there is nothing to animate out.)
+      'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-1 data-[state=open]:duration-150 motion-reduce:animate-none',
       this.classInput(),
     ),
   );

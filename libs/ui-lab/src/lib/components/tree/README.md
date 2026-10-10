@@ -1,359 +1,155 @@
 # Tree
 
-A hierarchical collapsible tree for displaying nested data. Built with Angular ARIA for full accessibility.
+A hierarchical, collapsible tree for nested data — file explorers, navigation, nested selection. Built on `@angular/aria`'s `Tree`, following the WAI-ARIA tree view pattern.
 
 ## Features
 
-- ✨ **Simple API** - Minimal boilerplate with automatic parent-child management
-- ♿ **Fully Accessible** - Built on Angular ARIA with complete keyboard navigation
-- 🎨 **Customizable** - Style items, icons, and indentation
-- 📁 **Unlimited Nesting** - Support for deeply nested structures
-- 🎬 **Animated** - Smooth expand/collapse transitions
-- 🎯 **Type-Safe** - Full TypeScript support
+- **One Tab stop** — arrows move between visible items (roving focus)
+- **Selection** — single or multiple, `[(value)]` two-way binding, explicit or follow-focus
+- **Navigation mode** — `nav` marks the current item with `aria-current` instead of `aria-selected`
+- **Correct hierarchy** — `aria-level`, `aria-expanded`, `role="group"`; items find their parent automatically
+- **Type-ahead** — jump to an item by typing its label
+- **Unlimited nesting**, indentation from the item's level (`padding-inline-start`, RTL-safe)
+- **Icons are yours** — every icon is an `<svg>` in your template
 
 ## Quick Start
 
 ```html
-<ul scTree>
-  <li scTreeItem value="folder">
-    <button scTreeItemTrigger>
-      <svg scTreeItemIcon><!-- folder icon --></svg>
-      <span>Folder</span>
-    </button>
+<ul scTree aria-label="Project files">
+  <li scTreeItem value="src" [expanded]="true">
+    <div scTreeItemTrigger>
+      <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
+      <svg scTreeItemIcon siFolderIcon></svg>
+      <span>src</span>
+    </div>
     <ul scTreeItemGroup>
-      <li scTreeItem value="file">
-        <button scTreeItemTrigger>
-          <svg scTreeItemIcon><!-- file icon --></svg>
-          <span>File.ts</span>
-        </button>
+      <li scTreeItem value="main.ts">
+        <div scTreeItemTrigger>
+          <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
+          <svg scTreeItemIcon siFileIcon></svg>
+          <span>main.ts</span>
+        </div>
       </li>
     </ul>
   </li>
 </ul>
 ```
 
-## Getting Started
+**Rules**
 
-To create a tree:
+- Give the tree an accessible name (`aria-label` or `aria-labelledby`).
+- `scTreeItemTrigger` is the **row**, not a button: use a `div` or `span`. The `li` is the focusable element and handles clicks and keys; a focusable element inside it would add a Tab stop per item.
+- Each item needs a `value` unique within the tree.
+- Nest children in `<ul scTreeItemGroup>` inside the parent `li`. No `[parent]` binding — items register with the enclosing group (or the tree) themselves.
 
-1. **Add the root tree**:
+## Selection
 
-   ```html
-   <ul scTree></ul>
-   ```
+```html
+<!-- Multiple selection -->
+<ul scTree multi [(value)]="selected" aria-label="Produce">
+  …
+</ul>
 
-2. **Add tree items** with a unique value:
+<!-- Navigation: the current page gets aria-current="page" -->
+<ul scTree nav [(value)]="current" aria-label="Documentation">
+  …
+</ul>
+```
 
-   ```html
-   <li scTreeItem value="unique-id"></li>
-   ```
+```typescript
+readonly selected = signal<string[]>(['apple']);
+readonly current = signal<string[]>(['installation']);
+```
 
-3. **Add a clickable trigger** to expand/collapse:
+`value` is always an array of item values. With `selectionMode="explicit"` (default) Enter/Space/click select; with `"follow"` the selection follows focus. Set `[selectable]="false"` on an item to make it expand-only.
 
-   ```html
-   <button scTreeItemTrigger>Item Label</button>
-   ```
+## Controlled Expansion
 
-4. **Wrap nested children** (no additional bindings needed):
-   ```html
-   <ul scTreeItemGroup>
-     <!-- Child items here -->
-   </ul>
-   ```
-
-**Key Points:**
-
-- Items find their parent automatically (the enclosing `scTreeItemGroup`, or the tree) — no `[parent]` binding
-- Each item needs a unique `value` attribute
-- `sc-tree-item-group` automatically connects to its parent item
-- The component handles all ARIA attributes and accessibility
+```html
+<li scTreeItem value="src" [(expanded)]="srcOpen">…</li>
+```
 
 ## Components
 
-### ScTree
+### ScTree — `ul[scTree]`
 
-Root container with tree role. Uses Angular ARIA's `Tree` directive.
+Root (`role="tree"`), hosts aria `Tree`.
 
-**Selector:** `ul[scTree]`
+| Input            | Type                         | Default      | Description                                       |
+| ---------------- | ---------------------------- | ------------ | ------------------------------------------------- |
+| `value`          | `V[]` (two-way)              | `[]`         | Selected item values                              |
+| `multi`          | `boolean`                    | `false`      | Allow several selected items                      |
+| `selectionMode`  | `'explicit' \| 'follow'`     | `'explicit'` | Select on Enter/Space/click, or follow focus      |
+| `nav`            | `boolean`                    | `false`      | Navigation tree: use `aria-current` for selection |
+| `currentType`    | `'page' \| 'step' \| …`      | `'page'`     | `aria-current` value in `nav` mode                |
+| `disabled`       | `boolean`                    | `false`      | Disable the whole tree                            |
+| `softDisabled`   | `boolean`                    | `true`       | Disabled items stay focusable                     |
+| `orientation`    | `'vertical' \| 'horizontal'` | `'vertical'` | Arrow-key axis                                    |
+| `wrap`           | `boolean`                    | `true`       | Wrap from last to first item                      |
+| `typeaheadDelay` | `number`                     | `500`        | Type-ahead buffer (ms)                            |
+| `class`          | `string`                     | `''`         | Additional CSS classes                            |
 
-**Inputs:**
+### ScTreeItem — `li[scTreeItem]`
 
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
+An item (`role="treeitem"`), hosts aria `TreeItem`. The focusable element.
 
-### ScTreeItem
+| Input        | Type                | Default | Description                                   |
+| ------------ | ------------------- | ------- | --------------------------------------------- |
+| `value`      | `V` (required)      | —       | Unique value                                  |
+| `expanded`   | `boolean` (two-way) | `false` | Whether the children are shown                |
+| `label`      | `string`            | text    | Type-ahead text (defaults to the item's text) |
+| `disabled`   | `boolean`           | `false` | Disable the item                              |
+| `selectable` | `boolean`           | `true`  | Whether the item can be selected              |
+| `class`      | `string`            | `''`    | Additional CSS classes                        |
 
-Individual tree item that can have children. Uses Angular ARIA's `TreeItem` directive.
+`level()` gives the item's depth, starting at 1 (same as `aria-level`).
 
-**Selector:** `li[scTreeItem]`
+### ScTreeItemTrigger — `div[scTreeItemTrigger]`, `span[scTreeItemTrigger]`
 
-**Required Inputs:**
+The visible row: indentation by level, hover, selected (`data-selected`) and disabled (`data-disabled`) styles. Shows the focus ring when its item has keyboard focus. Not focusable.
 
-| Input   | Type     | Description                     |
-| ------- | -------- | ------------------------------- |
-| `value` | `string` | Unique identifier for this item |
+### ScTreeItemTriggerIcon — `svg[scTreeItemTriggerIcon]`
 
-The item's Aria `parent` is resolved automatically — the enclosing `scTreeItemGroup`, else the tree — so nesting is reflected in `aria-level` and in keyboard navigation (ArrowLeft goes to the parent, ArrowRight into the children).
+The chevron. Rotates when expanded (mirrored in RTL), invisible on leaf items to keep alignment, `aria-hidden`.
 
-**Optional Inputs:**
+### ScTreeItemIcon — `[scTreeItemIcon]`
 
-| Input      | Type      | Default | Description                  |
-| ---------- | --------- | ------- | ---------------------------- |
-| `class`    | `string`  | `''`    | Additional CSS classes       |
-| `label`    | `string`  | -       | Accessible label (optional)  |
-| `disabled` | `boolean` | `false` | Whether the item is disabled |
-| `expanded` | `boolean` | `false` | Initial expanded state       |
+Decorative item icon (folder, file…), `aria-hidden`.
 
-**Properties:**
+### ScTreeItemGroup — `ul[scTreeItemGroup]`
 
-- `level`: Computed nesting level (0 for root items)
-- `hasChildren`: Computed based on presence of `sc-tree-item-group`
-- `treeItem`: Access to Angular ARIA's TreeItem instance
-  - `treeItem.expanded()`: Signal for expanded state
-  - `treeItem.selected()`: Signal for selected state
-  - `treeItem.disabled()`: Signal for disabled state
-
-### ScTreeItemTrigger
-
-Clickable button to expand/collapse the item.
-
-**Selector:** `button[scTreeItemTrigger]`
-
-Automatically includes:
-
-- Chevron icon that rotates when expanded
-- Proper indentation based on nesting level
-- Full keyboard navigation support via Angular ARIA
-
-### ScTreeItemGroup
-
-Container for nested child items. Uses Angular ARIA's `TreeItemGroup` directive internally.
-
-**Selector:** `ul[scTreeItemGroup]`
-
-**Inputs:**
-
-| Input   | Type     | Default | Description            |
-| ------- | -------- | ------- | ---------------------- |
-| `class` | `string` | `''`    | Additional CSS classes |
-
-Automatically connects to its parent tree item - no manual bindings required. Hidden when parent item is collapsed.
-
-### ScTreeItemIcon
-
-Optional icon slot for tree items.
-
-**Selector:** `[scTreeItemIcon]`
-
-## Examples
-
-### File Explorer with Icons
-
-```html
-<ul scTree>
-  <li scTreeItem value="src" [expanded]="true">
-    <button scTreeItemTrigger>
-      <svg scTreeItemIcon class="text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
-      </svg>
-      <span>src</span>
-    </button>
-    <ul scTreeItemGroup>
-      <li scTreeItem value="app" [expanded]="true">
-        <button scTreeItemTrigger>
-          <svg scTreeItemIcon class="text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
-          </svg>
-          <span>app</span>
-        </button>
-        <ul scTreeItemGroup>
-          <li scTreeItem value="main">
-            <button scTreeItemTrigger>
-              <svg scTreeItemIcon class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-              </svg>
-              <span>main.ts</span>
-            </button>
-          </li>
-          <li scTreeItem value="app-component">
-            <button scTreeItemTrigger>
-              <svg scTreeItemIcon class="text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-              </svg>
-              <span>app.component.ts</span>
-            </button>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-```
-
-### Navigation Tree
-
-```html
-<ul scTree>
-  <li scTreeItem value="getting-started" [expanded]="true">
-    <button scTreeItemTrigger>Getting Started</button>
-    <ul scTreeItemGroup>
-      <li scTreeItem value="intro">
-        <button scTreeItemTrigger>Introduction</button>
-      </li>
-      <li scTreeItem value="install">
-        <button scTreeItemTrigger>Installation</button>
-      </li>
-      <li scTreeItem value="config">
-        <button scTreeItemTrigger>Configuration</button>
-      </li>
-    </ul>
-  </li>
-  <li scTreeItem value="components">
-    <button scTreeItemTrigger>Components</button>
-    <ul scTreeItemGroup>
-      <li scTreeItem value="button">
-        <button scTreeItemTrigger>Button</button>
-      </li>
-      <li scTreeItem value="input">
-        <button scTreeItemTrigger>Input</button>
-      </li>
-    </ul>
-  </li>
-</ul>
-```
-
-### Simple Tree (No Icons)
-
-```html
-<ul scTree>
-  <li scTreeItem value="fruits">
-    <button scTreeItemTrigger>Fruits</button>
-    <ul scTreeItemGroup>
-      <li scTreeItem value="apple">
-        <button scTreeItemTrigger>Apple</button>
-      </li>
-      <li scTreeItem value="banana">
-        <button scTreeItemTrigger>Banana</button>
-      </li>
-    </ul>
-  </li>
-  <li scTreeItem value="vegetables">
-    <button scTreeItemTrigger>Vegetables</button>
-    <ul scTreeItemGroup>
-      <li scTreeItem value="carrot">
-        <button scTreeItemTrigger>Carrot</button>
-      </li>
-    </ul>
-  </li>
-</ul>
-```
-
-### Controlled Expansion
-
-Access the Angular ARIA `TreeItem` instance to programmatically control expansion:
-
-```typescript
-@Component({
-  imports: [ScTree, ScTreeItem, ScTreeItemTrigger, ScTreeItemGroup],
-  template: `
-    <ul scTree>
-      <li scTreeItem value="item" #item="scTreeItem">
-        <button scTreeItemTrigger>Item (Expanded: {{ item.treeItem.expanded() }})</button>
-        <ul scTreeItemGroup>
-          <li scTreeItem value="child">
-            <button scTreeItemTrigger>Child</button>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <button (click)="item.treeItem.expanded.update((v) => !v)">Toggle Item</button>
-  `,
-})
-export class MyComponent {}
-```
-
-Or access from a child component:
-
-```typescript
-export class MyTreeItemComponent {
-  readonly treeItem = inject(ScTreeItem);
-
-  toggleExpansion() {
-    this.treeItem.treeItem.expanded.update((v) => !v);
-  }
-}
-```
-
-## API Design
-
-This tree component uses a **simplified API** compared to traditional hierarchical implementations:
-
-- **No parent binding**: each item registers with the enclosing `scTreeItemGroup` (or the tree) on its own, so `aria-level` and keyboard navigation follow the nesting
-- **Automatic relationships**: `sc-tree-item-group` automatically connects to its parent item internally
-- **No manual wiring**: No need for `[ownedBy]` bindings or complex template reference chains
-
-This design prioritizes developer experience while maintaining full Angular ARIA accessibility features.
-
-## Styling & Customization
-
-All components accept a `class` input for custom styling:
-
-```html
-<ul scTree class="rounded-lg border p-4">
-  <li scTreeItem value="item" class="my-custom-item">
-    <button scTreeItemTrigger class="font-bold hover:bg-blue-100">Custom Styled Item</button>
-  </li>
-</ul>
-```
-
-**Built-in Features:**
-
-- Automatic indentation based on nesting level (12px per level)
-- Animated chevron icon rotation on expand/collapse
-- Hover and focus states for accessibility
-- Selected item highlighting (via `aria-selected`)
-
-**Customizing Icons:**
-
-Use the `sc-tree-item-icon` attribute on any SVG or icon element:
-
-```html
-<button scTreeItemTrigger>
-  <svg scTreeItemIcon class="text-blue-500">
-    <!-- Your custom icon -->
-  </svg>
-  <span>Item Label</span>
-</button>
-```
+The children of an item (`role="group"`). Rendered when the item opens (with a short entrance animation, off under `prefers-reduced-motion`), removed when it closes.
 
 ## Keyboard Navigation
 
-Angular ARIA provides comprehensive keyboard navigation:
+| Key                  | Action                                                  |
+| -------------------- | ------------------------------------------------------- |
+| `Tab`                | Into / out of the tree (one stop, on the active item)   |
+| `↓` / `↑`            | Next / previous visible item                            |
+| `→`                  | Closed item: expand. Open item: move to its first child |
+| `←`                  | Open item: collapse. Otherwise: move to the parent      |
+| `Home` / `End`       | First / last visible item                               |
+| `Enter` / `Space`    | Select (toggle in `multi`)                              |
+| Printable characters | Type-ahead to the next matching item                    |
 
-| Key             | Action                                    |
-| --------------- | ----------------------------------------- |
-| `Enter`/`Space` | Activate/select item                      |
-| `ArrowDown`     | Move to next visible item                 |
-| `ArrowUp`       | Move to previous visible item             |
-| `ArrowRight`    | Expand collapsed item/move to first child |
-| `ArrowLeft`     | Collapse expanded item/move to parent     |
-| `Home`          | Move to first item                        |
-| `End`           | Move to last visible item                 |
-| `a-z`           | Type-ahead to find items                  |
+## Styling
+
+All parts accept `class`. Useful hooks:
+
+- `li[scTreeItem]`: `data-state="open|closed"`, `aria-selected`, `aria-current` (nav), `aria-disabled`
+- `[scTreeItemTrigger]`: `data-selected`, `data-disabled`
+- `ul[scTreeItemGroup]`: `data-state="open|closed"`
 
 ## Accessibility
 
-Built with Angular ARIA for full accessibility:
+- `role="tree"` / `treeitem` / `group`, `aria-level`, `aria-expanded`, `aria-selected` or `aria-current`, `aria-multiselectable` — all managed by `@angular/aria`.
+- One Tab stop with roving focus; the focus ring is drawn on the focused item's own row only.
+- Decorative icons are `aria-hidden`.
 
-- `role="tree"` on root container (via Angular ARIA)
-- `role="treeitem"` on each item (via Angular ARIA)
-- `role="group"` on nested content (via Angular ARIA)
-- `aria-expanded` reflects expand state
-- `aria-selected` reflects selection state
-- `aria-disabled` for disabled items
-- Full keyboard navigation support
-- Focus management and roving tabindex
-- Screen reader announcements
+## How it works
+
+`@angular/aria`'s `TreeItem` needs its `parent` (the tree, or the enclosing `TreeItemGroup`) when it registers in `ngOnInit`, and that input is required. Nested items are projected content, so they are created and initialised before `ScTreeItemGroup`'s own view — where the aria `TreeItemGroup` lives — is built. A view query is too late, and binding `[parent]` by hand put every item at the root.
+
+- `ScAriaTreeItem` extends aria's `TreeItem` with `parent` made optional, so `ScTreeItem` can host it without re-exposing a required input (angular/angular#50510).
+- `ScTreeItem` resolves the parent itself: `SC_TREE_ITEM_GROUP.adopt(item)` for nested items, the root `Tree` otherwise.
+- `ScTreeItemGroup` queues adopted items until `ScTreeItemGroupRef` (on the `ngTreeItemGroup` template) hands it the aria group as soon as that is created. It also sets the group's `ownedBy` right away, since registration reads it before the view's bindings run.

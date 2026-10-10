@@ -8,16 +8,22 @@ import {
 import { cn } from '@semantic-components/ui';
 import { SC_TREE_ITEM } from './tree-item';
 
+/**
+ * The visible row of a tree item: indentation, chevron, icon and label.
+ * It is deliberately not focusable — the tree item (`li`) takes focus and
+ * handles clicks and keys — so use a `div` or `span`, not a `button`.
+ */
 @Component({
-  selector: 'button[scTreeItemTrigger], a[scTreeItemTrigger]',
+  selector: 'div[scTreeItemTrigger], span[scTreeItemTrigger]',
   template: `
     <ng-content />
   `,
   host: {
-    type: 'button',
+    'data-slot': 'tree-item-trigger',
+    '[attr.data-selected]': 'item.treeItem.selected() || null',
+    '[attr.data-disabled]': 'item.treeItem.disabled() || null',
+    '[style.padding-inline-start]': 'indent()',
     '[class]': 'class()',
-    '[style.padding-left]': 'paddingLeft()',
-    '(click)': 'onClick($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
@@ -28,21 +34,17 @@ export class ScTreeItemTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      'flex items-center gap-2 rounded-md px-2 py-1.5 text-sm w-full',
-      'cursor-pointer select-none outline-none',
+      'flex w-full cursor-pointer select-none items-center gap-2 rounded-md py-1.5 pe-2 text-sm',
       'hover:bg-accent hover:text-accent-foreground',
-      'focus-visible:bg-accent focus-visible:text-accent-foreground',
-      'aria-selected:bg-accent aria-selected:text-accent-foreground',
+      'data-selected:bg-accent data-selected:text-accent-foreground data-selected:font-medium',
+      'data-disabled:pointer-events-none data-disabled:opacity-50',
+      '[&_svg:not([class*=size-])]:size-4',
       this.classInput(),
     ),
   );
 
-  protected readonly paddingLeft = computed(() => {
-    const level = this.item.level();
-    return `${level * 12 + 8}px`;
-  });
-
-  protected onClick(event: Event): void {
-    event.preventDefault();
-  }
+  /** 0.5rem, plus 0.75rem per level below the root. */
+  protected readonly indent = computed(
+    () => `calc(${this.item.level() - 1} * 0.75rem + 0.5rem)`,
+  );
 }

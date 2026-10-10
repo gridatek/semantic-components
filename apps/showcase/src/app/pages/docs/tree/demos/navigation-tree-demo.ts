@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTree,
   ScTreeItem,
@@ -29,87 +29,98 @@ import {
     SiSettingsIcon,
   ],
   template: `
-    <div class="max-w-sm rounded-lg border p-4">
-      <ul scTree>
+    <div class="flex w-full max-w-sm flex-col gap-4">
+      <ul
+        scTree
+        nav
+        [(value)]="current"
+        aria-label="Documentation"
+        class="rounded-lg border p-4"
+      >
         <li scTreeItem value="getting-started" [expanded]="true">
-          <button scTreeItemTrigger>
+          <div scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <svg scTreeItemIcon siHouseIcon></svg>
             <span>Getting Started</span>
-          </button>
+          </div>
           <ul scTreeItemGroup>
             <li scTreeItem value="introduction">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Introduction</span>
-              </button>
+              </div>
             </li>
             <li scTreeItem value="installation">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Installation</span>
-              </button>
+              </div>
             </li>
             <li scTreeItem value="configuration">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Configuration</span>
-              </button>
+              </div>
             </li>
           </ul>
         </li>
         <li scTreeItem value="components">
-          <button scTreeItemTrigger>
+          <div scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <svg scTreeItemIcon siBookOpenIcon></svg>
             <span>Components</span>
-          </button>
+          </div>
           <ul scTreeItemGroup>
             <li scTreeItem value="button">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Button</span>
-              </button>
+              </div>
             </li>
             <li scTreeItem value="input">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Input</span>
-              </button>
+              </div>
             </li>
             <li scTreeItem value="select">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Select</span>
-              </button>
+              </div>
             </li>
           </ul>
         </li>
         <li scTreeItem value="api-reference">
-          <button scTreeItemTrigger>
+          <div scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <svg scTreeItemIcon siSettingsIcon></svg>
             <span>API Reference</span>
-          </button>
+          </div>
           <ul scTreeItemGroup>
             <li scTreeItem value="overview">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Overview</span>
-              </button>
+              </div>
             </li>
             <li scTreeItem value="hooks">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Hooks</span>
-              </button>
+              </div>
             </li>
           </ul>
         </li>
       </ul>
+      <div class="bg-muted rounded-md p-4 text-sm">
+        Current page: {{ current()[0] ?? 'none' }}
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class NavigationTreeDemo {}
+export class NavigationTreeDemo {
+  readonly current = signal<string[]>(['installation']);
+}

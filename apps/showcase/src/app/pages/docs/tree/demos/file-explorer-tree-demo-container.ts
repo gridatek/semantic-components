@@ -50,23 +50,23 @@ import {
   ],
   template: \`
     <div class="max-w-sm rounded-lg border p-4">
-      <ul scTree>
+      <ul scTree aria-label="Project files">
         <li scTreeItem value="src" [expanded]="true">
-          <button scTreeItemTrigger>
+          <div scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <svg scTreeItemIcon siFolderIcon class="text-blue-500"></svg>
             <span>src</span>
-          </button>
+          </div>
           <ul scTreeItemGroup>
             <li scTreeItem value="app" [expanded]="true">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <svg scTreeItemIcon siFolderIcon class="text-blue-500"></svg>
                 <span>app</span>
-              </button>
+              </div>
               <ul scTreeItemGroup>
                 <li scTreeItem value="components">
-                  <button scTreeItemTrigger>
+                  <div scTreeItemTrigger>
                     <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                     <svg
                       scTreeItemIcon
@@ -74,10 +74,10 @@ import {
                       class="text-blue-500"
                     ></svg>
                     <span>components</span>
-                  </button>
+                  </div>
                   <ul scTreeItemGroup>
                     <li scTreeItem value="button.ts">
-                      <button scTreeItemTrigger>
+                      <div scTreeItemTrigger>
                         <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                         <svg
                           scTreeItemIcon
@@ -85,10 +85,10 @@ import {
                           class="text-green-500"
                         ></svg>
                         <span>button.ts</span>
-                      </button>
+                      </div>
                     </li>
                     <li scTreeItem value="input.ts">
-                      <button scTreeItemTrigger>
+                      <div scTreeItemTrigger>
                         <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                         <svg
                           scTreeItemIcon
@@ -96,35 +96,35 @@ import {
                           class="text-green-500"
                         ></svg>
                         <span>input.ts</span>
-                      </button>
+                      </div>
                     </li>
                   </ul>
                 </li>
                 <li scTreeItem value="app.ts">
-                  <button scTreeItemTrigger>
+                  <div scTreeItemTrigger>
                     <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                     <svg scTreeItemIcon siFileIcon class="text-green-500"></svg>
                     <span>app.ts</span>
-                  </button>
+                  </div>
                 </li>
                 <li scTreeItem value="app.routes.ts">
-                  <button scTreeItemTrigger>
+                  <div scTreeItemTrigger>
                     <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                     <svg scTreeItemIcon siFileIcon class="text-green-500"></svg>
                     <span>app.routes.ts</span>
-                  </button>
+                  </div>
                 </li>
               </ul>
             </li>
             <li scTreeItem value="assets">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <svg scTreeItemIcon siFolderIcon class="text-blue-500"></svg>
                 <span>assets</span>
-              </button>
+              </div>
               <ul scTreeItemGroup>
                 <li scTreeItem value="logo.png">
-                  <button scTreeItemTrigger>
+                  <div scTreeItemTrigger>
                     <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                     <svg
                       scTreeItemIcon
@@ -132,16 +132,16 @@ import {
                       class="text-purple-500"
                     ></svg>
                     <span>logo.png</span>
-                  </button>
+                  </div>
                 </li>
               </ul>
             </li>
             <li scTreeItem value="main.ts">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <svg scTreeItemIcon siFileIcon class="text-green-500"></svg>
                 <span>main.ts</span>
-              </button>
+              </div>
             </li>
           </ul>
         </li>

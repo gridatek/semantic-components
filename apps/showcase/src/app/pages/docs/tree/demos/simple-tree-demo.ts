@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTree,
   ScTreeItem,
@@ -19,58 +19,69 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     SiChevronRightIcon,
   ],
   template: `
-    <div class="max-w-sm rounded-lg border p-4">
-      <ul scTree>
+    <div class="flex w-full max-w-sm flex-col gap-4">
+      <ul
+        scTree
+        multi
+        [(value)]="selected"
+        aria-label="Produce"
+        class="rounded-lg border p-4"
+      >
         <li scTreeItem value="fruits" [expanded]="true">
-          <button scTreeItemTrigger>
+          <div scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <span>Fruits</span>
-          </button>
+          </div>
           <ul scTreeItemGroup>
             <li scTreeItem value="apple">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Apple</span>
-              </button>
+              </div>
             </li>
             <li scTreeItem value="banana">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Banana</span>
-              </button>
+              </div>
             </li>
             <li scTreeItem value="orange">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Orange</span>
-              </button>
+              </div>
             </li>
           </ul>
         </li>
         <li scTreeItem value="vegetables">
-          <button scTreeItemTrigger>
+          <div scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <span>Vegetables</span>
-          </button>
+          </div>
           <ul scTreeItemGroup>
             <li scTreeItem value="carrot">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Carrot</span>
-              </button>
+              </div>
             </li>
             <li scTreeItem value="broccoli">
-              <button scTreeItemTrigger>
+              <div scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Broccoli</span>
-              </button>
+              </div>
             </li>
           </ul>
         </li>
       </ul>
+      <div class="bg-muted rounded-md p-4 text-sm">
+        Selected: {{ selected().join(', ') || 'none' }}
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SimpleTreeDemo {}
+export class SimpleTreeDemo {
+  readonly selected = signal<string[]>(['apple']);
+}

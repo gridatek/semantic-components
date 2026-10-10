@@ -4,6 +4,7 @@ import { cn } from '@semantic-components/ui';
 @Directive({
   selector: '[scTreeItemIcon]',
   host: {
+    'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
