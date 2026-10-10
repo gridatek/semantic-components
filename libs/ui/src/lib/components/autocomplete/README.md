@@ -1,41 +1,42 @@
 # Autocomplete Components
 
-A combobox-style autocomplete input with filtering, keyboard navigation, and overlay popup.
+A text input with a filtered suggestion list in an overlay popup. Built on the `@angular/aria` combobox pattern for an editable combobox: the `<input>` itself is the combobox, focus stays in it while typing, and the active suggestion is announced through `aria-activedescendant`.
 
 ## Features
 
-- Full keyboard navigation support
-- ARIA-compliant accessibility via `@angular/aria/combobox` and `@angular/aria/listbox`
+- Type to open and filter; full keyboard navigation
+- ARIA-compliant (`role="combobox"` + `aria-autocomplete="list"` input, `role="listbox"` popup)
+- Signal Forms control — bind `[formField]` on `scAutocomplete` (the input's text, `string`)
+- Picking a suggestion writes its label into the input and closes the popup
 - Automatic scroll-to-active on keyboard navigation
-- Scroll-to-top on close
-- Overlay positioning with CDK
-- Customizable styling via `class` input
+- Overlay positioning with CDK, matching the width of the `scAutocomplete` element
+- Customizable styling via `class` input on every part
 
 ## Components
 
-| Component                     | Selector                            | Type      | Responsibility                                                  |
-| ----------------------------- | ----------------------------------- | --------- | --------------------------------------------------------------- |
-| `ScAutocomplete`              | `div[scAutocomplete]`               | Component | Root container, wraps `Combobox`, owns overlay and scroll logic |
-| `ScAutocompleteGroup`         | `div[scAutocompleteGroup]`          | Component | Input group container, provides overlay origin                  |
-| `ScAutocompleteInput`         | `input[scAutocompleteInput]`        | Directive | Text input, wraps `ComboboxInput` from `@angular/aria`          |
-| `ScAutocompleteIcon`          | `svg[scAutocompleteIcon]`           | Directive | Search icon styling (sets `aria-hidden="true"` automatically)   |
-| `ScAutocompletePortal`        | `ng-template[scAutocompletePortal]` | Directive | Marks lazy content template for the overlay                     |
-| `ScAutocompletePopup`         | `div[scAutocompletePopup]`          | Directive | Popup container with styling                                    |
-| `ScAutocompleteList`          | `div[scAutocompleteList]`           | Directive | Listbox container, wraps `Listbox` from `@angular/aria`         |
-| `ScAutocompleteItem`          | `div[scAutocompleteItem]`           | Component | Option item, wraps `Option` from `@angular/aria`                |
-| `ScAutocompleteItemLabel`     | `span[scAutocompleteItemLabel]`     | Directive | Label text inside an item (applies `flex-1`)                    |
-| `ScAutocompleteItemIndicator` | `svg[scAutocompleteItemIndicator]`  | Directive | Check icon for selected state (sets `aria-hidden="true"`)       |
-| `ScAutocompleteEmpty`         | `div[scAutocompleteEmpty]`          | Directive | Empty state message when no results match                       |
+| Component                     | Selector                            | Aria Primitive               | Responsibility                                                |
+| ----------------------------- | ----------------------------------- | ---------------------------- | ------------------------------------------------------------- |
+| `ScAutocomplete`              | `div[scAutocomplete]`               | `ComboboxPopup` (template)   | Root; the form control (`FormValueControl<string>`), overlay  |
+| `ScAutocompleteInput`         | `input[scAutocompleteInput]`        | `Combobox` (hostDirective)   | The editable combobox                                         |
+| `ScAutocompletePortal`        | `ng-template[scAutocompletePortal]` | —                            | Marks the lazy popup content                                  |
+| `ScAutocompletePopup`         | `div[scAutocompletePopup]`          | —                            | Popup container with styling                                  |
+| `ScAutocompleteList`          | `div[scAutocompleteList]`           | `Listbox` + `ComboboxWidget` | Suggestion list                                               |
+| `ScAutocompleteItem`          | `div[scAutocompleteItem]`           | `Option` (hostDirective)     | Suggestion                                                    |
+| `ScAutocompleteItemLabel`     | `span[scAutocompleteItemLabel]`     | —                            | Label text inside an item (`flex-1`)                          |
+| `ScAutocompleteItemIndicator` | `svg[scAutocompleteItemIndicator]`  | —                            | Check icon for the selected suggestion (`aria-hidden="true"`) |
+| `ScAutocompleteEmpty`         | `div[scAutocompleteEmpty]`          | —                            | Empty state when nothing matches                              |
 
-## Basic Usage
+## Usage
 
-### Template
+The popup is anchored to the `scAutocomplete` element, so wrap the input in whatever chrome you need (e.g. an input group with a search icon) inside it.
 
 ```html
-<div scAutocomplete filterMode="auto-select" class="w-52">
-  <div scAutocompleteGroup>
-    <svg siSearchIcon scAutocompleteIcon></svg>
-    <input scAutocompleteInput aria-label="Select a country" placeholder="Select a country" [formField]="searchForm.query" />
+<div scAutocomplete class="w-52" [formField]="searchForm.query">
+  <div scInputGroup>
+    <div scInputGroupAddon align="inline-start">
+      <svg siSearchIcon></svg>
+    </div>
+    <input scInput scAutocompleteInput aria-label="Select a country" placeholder="Select a country" />
   </div>
   <ng-template scAutocompletePortal>
     <div scAutocompletePopup>
@@ -55,133 +56,94 @@ A combobox-style autocomplete input with filtering, keyboard navigation, and ove
 </div>
 ```
 
-### Component
+```typescript
+readonly formModel = signal({ query: '' });
+readonly searchForm = form(this.formModel);
+
+readonly countries = computed(() => {
+  const query = this.searchForm.query().value().toLowerCase();
+  return ALL_COUNTRIES.filter((c) => c.toLowerCase().startsWith(query));
+});
+```
+
+Filtering is yours: the form value is the input's text, so derive the suggestions from it. Without Signal Forms, use `[(value)]` on `scAutocomplete`.
+
+> Put `[formField]` on `scAutocomplete`, not on the `<input>`. The Aria combobox owns the input's text; binding the input directly would give it two writers.
+
+## Signal Forms
+
+`ScAutocomplete` implements `FormValueControl<string>`. Declare constraints in the `form()` schema:
 
 ```typescript
-import { Component, computed, signal } from '@angular/core';
-import { FormField, form } from '@angular/forms/signals';
-import { ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteItemLabel, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal } from '@semantic-components/ui';
-import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
-
-@Component({
-  selector: 'app-example',
-  imports: [FormField, ScAutocomplete, ScAutocompleteEmpty, ScAutocompleteGroup, ScAutocompleteIcon, ScAutocompleteInput, ScAutocompleteItem, ScAutocompleteItemIndicator, ScAutocompleteItemLabel, ScAutocompleteList, ScAutocompletePopup, ScAutocompletePortal, SiSearchIcon, SiCheckIcon],
-  template: `
-    <div scAutocomplete filterMode="auto-select" class="w-52">
-      <div scAutocompleteGroup>
-        <svg siSearchIcon scAutocompleteIcon></svg>
-        <input scAutocompleteInput aria-label="Select a country" placeholder="Select a country" [formField]="searchForm.query" />
-      </div>
-      <ng-template scAutocompletePortal>
-        <div scAutocompletePopup>
-          @if (items().length === 0) {
-            <div scAutocompleteEmpty>No results found</div>
-          }
-          <div scAutocompleteList>
-            @for (item of items(); track item) {
-              <div scAutocompleteItem [value]="item" [label]="item">
-                <span scAutocompleteItemLabel>{{ item }}</span>
-                <svg siCheckIcon scAutocompleteItemIndicator></svg>
-              </div>
-            }
-          </div>
-        </div>
-      </ng-template>
-    </div>
-  `,
-})
-export class Example {
-  readonly formModel = signal({ query: '' });
-  readonly searchForm = form(this.formModel);
-
-  allItems = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
-  items = computed(() => {
-    const query = this.searchForm.query().value().toLowerCase();
-    return this.allItems.filter((item) => item.toLowerCase().startsWith(query));
-  });
-}
+readonly searchForm = form(this.formModel, (p) => {
+  required(p.query);
+});
 ```
+
+`required` → `aria-required`, `invalid` (once touched) → `aria-invalid`, `disabled` → `aria-disabled` on the input. The control is marked touched when focus leaves the input.
 
 ## Keyboard Navigation
 
-| Key         | Action                        |
-| ----------- | ----------------------------- |
-| `ArrowDown` | Move focus to next option     |
-| `ArrowUp`   | Move focus to previous option |
-| `Enter`     | Select focused option         |
-| `Home`      | Move focus to first option    |
-| `End`       | Move focus to last option     |
-| `Escape`    | Close dropdown                |
-| `Tab`       | Close dropdown and move focus |
+Focus always stays in the input.
 
-When navigating with keyboard, the dropdown automatically scrolls to keep the active option visible.
-
-## Accessibility
-
-- Uses `@angular/aria/combobox` and `@angular/aria/listbox` for proper ARIA roles
-- `aria-label` on the input for screen reader support
-- `ScAutocompleteIcon` and `ScAutocompleteItemIndicator` set `aria-hidden="true"` automatically
-- Visual focus indicators for keyboard navigation
-- Selected state indicated via `aria-selected`
-
-### Required Accessibility Attributes
-
-```html
-<input scAutocompleteInput aria-label="Search items" placeholder="Search..." />
-```
+| Key                  | Closed               | Open                               |
+| -------------------- | -------------------- | ---------------------------------- |
+| Printable characters | Edit text, open      | Edit text, filter                  |
+| `ArrowDown`          | Open                 | Next suggestion                    |
+| `ArrowUp`            | —                    | Previous suggestion                |
+| `Home` / `End`       | Caret to start / end | First / last suggestion            |
+| `Enter`              | —                    | Write the active suggestion, close |
+| `Escape`             | —                    | Close, keep the text               |
+| `Tab`                | Move focus           | Close and move focus               |
 
 ## API Reference
 
 ### ScAutocomplete
 
-| Property     | Type     | Description                                    |
-| ------------ | -------- | ---------------------------------------------- |
-| `class`      | `string` | Additional CSS classes                         |
-| `filterMode` | `string` | Combobox filter mode (forwarded to `Combobox`) |
-
-### ScAutocompleteInput
-
-| Property | Type     | Description                                                    |
-| -------- | -------- | -------------------------------------------------------------- |
-| `class`  | `string` | Additional CSS classes (base includes input styles and `ps-9`) |
+| Member          | Type              | Description                                |
+| --------------- | ----------------- | ------------------------------------------ |
+| `value`         | `model<string>`   | The input's text                           |
+| `disabled`      | `input<boolean>`  | Disables the input                         |
+| `readonly`      | `input<boolean>`  | Makes the input read-only                  |
+| `required`      | `input<boolean>`  | Sets `aria-required` on the input          |
+| `invalid`       | `input<boolean>`  | Sets `aria-invalid` on the input           |
+| `touch`         | `output<void>`    | Emitted when focus leaves the input        |
+| `open()`        | `Signal<boolean>` | Whether the popup is open                  |
+| `select(value)` | `void`            | Write an option's label, close, keep focus |
+| `close()`       | `void`            | Close and refocus the input                |
+| `focus()`       | `void`            | Focus the input                            |
+| `class`         | `input<string>`   | Additional CSS classes                     |
 
 ### ScAutocompleteItem
 
-| Property | Type     | Description                        |
-| -------- | -------- | ---------------------------------- |
-| `value`  | `any`    | The value of the option            |
-| `label`  | `string` | The label displayed for the option |
-| `class`  | `string` | Additional CSS classes             |
+| Property   | Type      | Description                                                |
+| ---------- | --------- | ---------------------------------------------------------- |
+| `value`    | `string`  | The option's value                                         |
+| `label`    | `string`  | Text written into the input when picked (defaults to text) |
+| `disabled` | `boolean` | Disables the option                                        |
+| `class`    | `string`  | Additional CSS classes                                     |
 
-### All Components
-
-All components and directives accept a `class` input for custom styling:
-
-```html
-<div scAutocomplete class="w-64" filterMode="auto-select">
-  <div scAutocompleteGroup class="border-2">...</div>
-</div>
-```
+All other parts accept a `class` input only.
 
 ## Architecture
 
 ```
-ScAutocomplete (root, wraps Combobox, owns overlay + scroll logic)
-├── ScAutocompleteGroup (input group, overlay origin)
-│   ├── ScAutocompleteIcon (search icon, aria-hidden)
-│   └── ScAutocompleteInput (wraps ComboboxInput)
-└── ScAutocompletePortal (ng-template marking lazy overlay content)
-    └── ScAutocompletePopup (popup container with styling)
-        ├── ScAutocompleteEmpty (empty state message)
-        └── ScAutocompleteList (wraps Listbox)
-            └── ScAutocompleteItem (wraps Option)
-                ├── ScAutocompleteItemLabel (label text, flex-1)
-                └── ScAutocompleteItemIndicator (check icon, aria-hidden)
+ScAutocomplete (form control, exportAs: 'scAutocomplete', provides SC_AUTOCOMPLETE, overlay origin)
+├── ScAutocompleteInput (Combobox host, role=combobox) [projected]
+└── ScAutocompletePortal (ng-template, rendered inside ngComboboxPopup via ScSelectPortalOutlet)
+    └── ScAutocompletePopup
+        ├── ScAutocompleteEmpty
+        └── ScAutocompleteList (Listbox + ComboboxWidget; activedescendant focus, explicit selection)
+            └── ScAutocompleteItem (Option) → ScAutocompleteItemLabel, ScAutocompleteItemIndicator
 ```
+
+## Known issue
+
+`@angular/aria` 22.2.1 forwards navigation keys from the input to the list once per render (`Combobox` relays through an `afterRenderEffect`). Keys arriving within the same frame are coalesced and only the last one is applied. Text entry itself is unaffected.
 
 ## Dependencies
 
 - `@angular/aria/combobox` - Combobox behavior
 - `@angular/aria/listbox` - Listbox and option behavior
 - `@angular/cdk/overlay` - Overlay positioning
-- `@semantic-icons/lucide-icons` - Icon library (used with `ScAutocompleteIcon` and `ScAutocompleteItemIndicator`)
+- `@angular/forms/signals` - `FormValueControl` contract

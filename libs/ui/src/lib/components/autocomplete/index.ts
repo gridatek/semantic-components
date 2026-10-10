@@ -1,6 +1,10 @@
 export { ScAutocomplete } from './autocomplete';
+export {
+  SC_AUTOCOMPLETE,
+  SC_AUTOCOMPLETE_INPUT,
+  type ScAutocompleteInputContext,
+} from './autocomplete-tokens';
 export { ScAutocompleteEmpty } from './autocomplete-empty';
-export { ScAutocompleteOrigin } from './autocomplete-origin';
 export { ScAutocompleteInput } from './autocomplete-input';
 export { ScAutocompleteItem } from './autocomplete-item';
 export { ScAutocompleteItemIndicator } from './autocomplete-item-indicator';

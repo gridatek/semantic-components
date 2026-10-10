@@ -23,7 +23,6 @@ import {
   ScAutocompleteItem,
   ScAutocompleteItemIndicator,
   ScAutocompleteList,
-  ScAutocompleteOrigin,
   ScAutocompletePopup,
   ScAutocompletePortal,
   ScInput,
@@ -39,7 +38,6 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScAutocomplete,
     ScAutocompleteEmpty,
     ScAutocompleteInput,
-    ScAutocompleteOrigin,
     ScAutocompleteItem,
     ScAutocompleteItemIndicator,
     ScAutocompleteList,
@@ -52,20 +50,17 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: \`
-    <div scAutocomplete class="w-52">
-      <div scAutocompleteOrigin>
-        <div scInputGroup>
-          <div scInputGroupAddon align="inline-start">
-            <svg siSearchIcon></svg>
-          </div>
-          <input
-            scInput
-            scAutocompleteInput
-            aria-label="Select a country"
-            placeholder="Select a country"
-            [formField]="searchForm.query"
-          />
+    <div scAutocomplete class="w-52" [formField]="searchForm.query">
+      <div scInputGroup>
+        <div scInputGroupAddon align="inline-start">
+          <svg siSearchIcon></svg>
         </div>
+        <input
+          scInput
+          scAutocompleteInput
+          aria-label="Select a country"
+          placeholder="Select a country"
+        />
       </div>
       <ng-template scAutocompletePortal>
         <div scAutocompletePopup>

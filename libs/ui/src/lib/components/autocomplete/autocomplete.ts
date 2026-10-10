@@ -1,78 +1,111 @@
-import { Combobox, ComboboxPopup } from '@angular/aria/combobox';
-import { Listbox, Option } from '@angular/aria/listbox';
+import { ComboboxPopup } from '@angular/aria/combobox';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
+  ElementRef,
   ViewEncapsulation,
-  afterRenderEffect,
+  booleanAttribute,
   computed,
   contentChild,
-  contentChildren,
   inject,
   input,
+  model,
+  output,
+  signal,
 } from '@angular/core';
+import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
-import { ScAutocompleteOrigin } from './autocomplete-origin';
+import { ScSelectPortalOutlet } from '../select/select-portal-outlet';
 import { ScAutocompletePortal } from './autocomplete-portal';
+import { SC_AUTOCOMPLETE, SC_AUTOCOMPLETE_INPUT } from './autocomplete-tokens';
 
 @Component({
   selector: 'div[scAutocomplete]',
-  imports: [ComboboxPopup, OverlayModule, NgTemplateOutlet],
-  hostDirectives: [
-    {
-      directive: Combobox,
-    },
-  ],
+  exportAs: 'scAutocomplete',
+  imports: [ComboboxPopup, OverlayModule, ScSelectPortalOutlet],
+  providers: [{ provide: SC_AUTOCOMPLETE, useExisting: ScAutocomplete }],
   template: `
     <ng-content />
-    <ng-template ngComboboxPopup [combobox]="combobox" popupType="listbox">
-      @if (origin(); as origin) {
+    @if (control(); as control) {
+      <ng-template
+        ngComboboxPopup
+        [combobox]="control.combobox"
+        popupType="listbox"
+      >
         <ng-template
           [cdkConnectedOverlay]="{
-            origin,
+            origin: elementRef,
             usePopover: 'inline',
             matchWidth: true,
           }"
-          [cdkConnectedOverlayOpen]="combobox.expanded()"
+          [cdkConnectedOverlayOpen]="open()"
         >
-          <ng-container [ngTemplateOutlet]="autocompletePortal().templateRef" />
+          <ng-container [scSelectPortalOutlet]="autocompletePortal()" />
         </ng-template>
-      }
-    </ng-template>
+      </ng-template>
+    }
   `,
   host: {
+    'data-slot': 'autocomplete',
     '[class]': 'class()',
+    '[attr.data-disabled]': 'disabled() || null',
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScAutocomplete {
+export class ScAutocomplete implements FormValueControl<string> {
+  protected readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly trigger = contentChild(ScAutocompleteOrigin);
-  private readonly listbox = contentChild(Listbox, { descendants: true });
-  private readonly options = contentChildren(Option, { descendants: true });
+  /** The input's text. Bind with `[formField]` or `[(value)]`. */
+  readonly value = model('');
+  readonly disabled = input(false, { transform: booleanAttribute });
+  readonly readonly = input(false, { transform: booleanAttribute });
+  readonly required = input(false, { transform: booleanAttribute });
+  readonly invalid = input(false, { transform: booleanAttribute });
+  readonly touch = output<void>();
+
+  protected readonly control = contentChild(SC_AUTOCOMPLETE_INPUT);
   protected readonly autocompletePortal =
     contentChild.required(ScAutocompletePortal);
 
-  readonly origin = computed(() => this.trigger()?.elementRef);
-  protected readonly combobox = inject(Combobox);
+  readonly open = computed(() => this.control()?.combobox.expanded() ?? false);
+
+  /** Labels of options seen so far, written into the input on selection. */
+  private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
 
   protected readonly class = computed(() => cn('relative', this.classInput()));
 
-  constructor() {
-    afterRenderEffect(() => {
-      const option = this.options().find((opt) => opt.active());
-      setTimeout(
-        () => option?.element.scrollIntoView({ block: 'nearest' }),
-        50,
-      );
-    });
+  /** The value of the option whose label is `text`, if one has been seen. */
+  optionValueFor(text: string): string | undefined {
+    for (const [value, label] of this.labels()) {
+      if (label === text) return value;
+    }
+    return undefined;
+  }
 
-    afterRenderEffect(() => {
-      if (!this.combobox.expanded()) {
-        setTimeout(() => this.listbox()?.element.scrollTo(0, 0), 150);
-      }
-    });
+  labelFor(value: string): string {
+    return this.labels().get(value) || value;
+  }
+
+  registerLabel(value: string, label: string): void {
+    if (this.labels().get(value) === label) return;
+    this.labels.update((labels) => new Map(labels).set(value, label));
+  }
+
+  /** Writes the option's label into the input and closes the popup. */
+  select(value: string): void {
+    this.value.set(this.labelFor(value));
+    this.close();
+  }
+
+  close(): void {
+    const control = this.control();
+    if (!control) return;
+    control.combobox.expanded.set(false);
+    control.elementRef.nativeElement.focus();
+  }
+
+  focus(options?: FocusOptions): void {
+    this.control()?.elementRef.nativeElement.focus(options);
   }
 }
