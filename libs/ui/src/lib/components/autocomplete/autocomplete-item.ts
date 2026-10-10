@@ -50,7 +50,7 @@ export class ScAutocompleteItem {
 
   protected readonly class = computed(() =>
     cn(
-      'hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-accent-foreground aria-selected:bg-accent flex cursor-pointer items-center rounded-md px-2 py-1.5 text-sm outline-none select-none aria-selected:font-medium data-disabled:pointer-events-none data-disabled:opacity-50',
+      'hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-accent-foreground aria-selected:bg-accent flex cursor-pointer items-center rounded-md px-2 py-1 text-sm outline-none select-none aria-selected:font-medium data-disabled:pointer-events-none data-disabled:opacity-50',
       this.classInput(),
     ),
   );

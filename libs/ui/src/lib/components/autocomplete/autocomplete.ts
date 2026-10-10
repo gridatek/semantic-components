@@ -19,6 +19,23 @@ import { ScSelectPortalOutlet } from '../select/select-portal-outlet';
 import { ScAutocompletePortal } from './autocomplete-portal';
 import { SC_AUTOCOMPLETE, SC_AUTOCOMPLETE_INPUT } from './autocomplete-tokens';
 
+const positions = [
+  {
+    originX: 'start' as const,
+    originY: 'bottom' as const,
+    overlayX: 'start' as const,
+    overlayY: 'top' as const,
+    offsetY: 4,
+  },
+  {
+    originX: 'start' as const,
+    originY: 'top' as const,
+    overlayX: 'start' as const,
+    overlayY: 'bottom' as const,
+    offsetY: -4,
+  },
+];
+
 @Component({
   selector: 'div[scAutocomplete]',
   exportAs: 'scAutocomplete',
@@ -39,6 +56,7 @@ import { SC_AUTOCOMPLETE, SC_AUTOCOMPLETE_INPUT } from './autocomplete-tokens';
             matchWidth: true,
           }"
           [cdkConnectedOverlayOpen]="open()"
+          [cdkConnectedOverlayPositions]="positions"
         >
           <ng-container [scSelectPortalOutlet]="autocompletePortal()" />
         </ng-template>
@@ -64,6 +82,7 @@ export class ScAutocomplete implements FormValueControl<string> {
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touch = output<void>();
 
+  protected readonly positions = positions;
   protected readonly control = contentChild(SC_AUTOCOMPLETE_INPUT);
   protected readonly autocompletePortal =
     contentChild.required(ScAutocompletePortal);
