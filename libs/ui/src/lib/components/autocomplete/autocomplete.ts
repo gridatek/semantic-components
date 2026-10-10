@@ -98,6 +98,12 @@ export class ScAutocomplete implements FormValueControl<string> {
     this.close();
   }
 
+  /** Empties the input, closes the popup and keeps focus in the input. */
+  clear(): void {
+    this.value.set('');
+    this.close();
+  }
+
   close(): void {
     const control = this.control();
     if (!control) return;

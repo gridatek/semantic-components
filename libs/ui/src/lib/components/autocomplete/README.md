@@ -25,6 +25,7 @@ A text input with a filtered suggestion list in an overlay popup. Built on the `
 | `ScAutocompleteItemLabel`     | `span[scAutocompleteItemLabel]`     | —                            | Label text inside an item (`flex-1`)                          |
 | `ScAutocompleteItemIndicator` | `svg[scAutocompleteItemIndicator]`  | —                            | Check icon for the selected suggestion (`aria-hidden="true"`) |
 | `ScAutocompleteEmpty`         | `div[scAutocompleteEmpty]`          | —                            | Empty state when nothing matches                              |
+| `ScAutocompleteClear`         | `button[scAutocompleteClear]`       | —                            | Clears the text; hidden while empty                           |
 
 ## Usage
 
@@ -37,6 +38,9 @@ The popup is anchored to the `scAutocomplete` element, so wrap the input in what
       <svg siSearchIcon></svg>
     </div>
     <input scInput scAutocompleteInput aria-label="Select a country" placeholder="Select a country" />
+    <div scInputGroupAddon align="inline-end">
+      <button scAutocompleteClear aria-label="Clear"><svg siXIcon></svg></button>
+    </div>
   </div>
   <ng-template scAutocompletePortal>
     <div scAutocompletePopup>
@@ -67,6 +71,10 @@ readonly countries = computed(() => {
 ```
 
 Filtering is yours: the form value is the input's text, so derive the suggestions from it. Without Signal Forms, use `[(value)]` on `scAutocomplete`.
+
+### Clear button
+
+`ScAutocompleteClear` empties the text, closes the popup and returns focus to the input. It hides itself while the input is empty (or the autocomplete is disabled/readonly). The icon is yours — project any `<svg>` — and give the button an `aria-label`.
 
 > Put `[formField]` on `scAutocomplete`, not on the `<input>`. The Aria combobox owns the input's text; binding the input directly would give it two writers.
 
@@ -110,6 +118,7 @@ Focus always stays in the input.
 | `touch`         | `output<void>`    | Emitted when focus leaves the input        |
 | `open()`        | `Signal<boolean>` | Whether the popup is open                  |
 | `select(value)` | `void`            | Write an option's label, close, keep focus |
+| `clear()`       | `void`            | Empty the text, close, keep focus          |
 | `close()`       | `void`            | Close and refocus the input                |
 | `focus()`       | `void`            | Focus the input                            |
 | `class`         | `input<string>`   | Additional CSS classes                     |
@@ -130,6 +139,7 @@ All other parts accept a `class` input only.
 ```
 ScAutocomplete (form control, exportAs: 'scAutocomplete', provides SC_AUTOCOMPLETE, overlay origin)
 ├── ScAutocompleteInput (Combobox host, role=combobox) [projected]
+├── ScAutocompleteClear (clear button) [projected]
 └── ScAutocompletePortal (ng-template, rendered inside ngComboboxPopup via ScSelectPortalOutlet)
     └── ScAutocompletePopup
         ├── ScAutocompleteEmpty

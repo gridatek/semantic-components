@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScAutocomplete,
+  ScAutocompleteClear,
   ScAutocompleteEmpty,
   ScAutocompleteInput,
   ScAutocompleteItem,
@@ -13,13 +14,18 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
 } from '@semantic-components/ui';
-import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiCheckIcon,
+  SiSearchIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-basic-autocomplete-demo',
   imports: [
     FormField,
     ScAutocomplete,
+    ScAutocompleteClear,
     ScAutocompleteEmpty,
     ScAutocompleteInput,
     ScAutocompleteItem,
@@ -32,6 +38,7 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScInputGroupAddon,
     SiSearchIcon,
     SiCheckIcon,
+    SiXIcon,
   ],
   template: `
     <div scAutocomplete class="w-52" [formField]="searchForm.query">
@@ -45,6 +52,11 @@ import { SiCheckIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           aria-label="Select a country"
           placeholder="Select a country"
         />
+        <div scInputGroupAddon align="inline-end">
+          <button scAutocompleteClear aria-label="Clear">
+            <svg siXIcon></svg>
+          </button>
+        </div>
       </div>
       <ng-template scAutocompletePortal>
         <div scAutocompletePopup>

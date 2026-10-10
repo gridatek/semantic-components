@@ -4,6 +4,7 @@ export {
   SC_AUTOCOMPLETE_INPUT,
   type ScAutocompleteInputContext,
 } from './autocomplete-tokens';
+export { ScAutocompleteClear } from './autocomplete-clear';
 export { ScAutocompleteEmpty } from './autocomplete-empty';
 export { ScAutocompleteInput } from './autocomplete-input';
 export { ScAutocompleteItem } from './autocomplete-item';
