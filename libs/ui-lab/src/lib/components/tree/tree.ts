@@ -38,6 +38,6 @@ export class ScTree {
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() =>
-    cn('flex flex-col gap-0.5', this.classInput()),
+    cn('flex flex-col gap-1', this.classInput()),
   );
 }

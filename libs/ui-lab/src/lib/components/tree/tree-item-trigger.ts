@@ -34,9 +34,11 @@ export class ScTreeItemTrigger {
 
   protected readonly class = computed(() =>
     cn(
-      'flex w-full cursor-pointer select-none items-center gap-2 rounded-md py-1.5 pe-2 text-sm',
-      'hover:bg-accent hover:text-accent-foreground',
-      'data-selected:bg-accent data-selected:text-accent-foreground data-selected:font-medium',
+      'flex w-full cursor-pointer select-none items-center gap-2 rounded-md py-1.5 pe-2 text-sm transition-colors duration-100',
+      // Hover is lighter than selection, so a hovered row next to the selected
+      // one doesn't merge with it.
+      'hover:bg-accent/50 hover:text-accent-foreground',
+      'data-selected:bg-accent data-selected:hover:bg-accent data-selected:text-accent-foreground data-selected:font-medium',
       'data-disabled:pointer-events-none data-disabled:opacity-50',
       '[&_svg:not([class*=size-])]:size-4',
       this.classInput(),

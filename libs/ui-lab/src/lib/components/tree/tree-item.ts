@@ -54,7 +54,7 @@ export class ScTreeItem {
 
   protected readonly class = computed(() =>
     cn(
-      'flex flex-col outline-none',
+      'flex flex-col gap-1 outline-none',
       // Focus ring on this item's own row only (direct child), not on the rows
       // of nested items, which are descendants too.
       'focus-visible:*:data-[slot=tree-item-trigger]:ring-3 focus-visible:*:data-[slot=tree-item-trigger]:ring-ring/50',

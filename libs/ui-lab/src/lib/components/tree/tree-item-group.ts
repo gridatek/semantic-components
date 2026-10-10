@@ -51,7 +51,8 @@ export class ScTreeItemGroup implements ScTreeItemGroupContext {
 
   protected readonly class = computed(() =>
     cn(
-      'flex flex-col gap-0.5',
+      // Collapsed groups hold only comment anchors: take no space.
+      'flex flex-col gap-1 empty:hidden',
       // Children are rendered when the item opens, so animate their entrance.
       // (They are removed on close, so there is nothing to animate out.)
       'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-1 data-[state=open]:duration-150 motion-reduce:animate-none',
