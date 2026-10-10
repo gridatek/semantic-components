@@ -586,8 +586,7 @@
     "description": "Hierarchical organization visualization.",
     "status": "Experimental",
     "library": "ui-lab",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "PDF Viewer",
