@@ -39,7 +39,7 @@ import { ScIntersectionObserver } from '@semantic-components/ui-lab';
           once
           [root]="scroller"
           [threshold]="0.5"
-          class="bg-card translate-y-4 rounded-md border p-4 text-sm opacity-0 transition duration-700 motion-reduce:translate-y-0 motion-reduce:transition-none data-[intersecting=true]:translate-y-0 data-[intersecting=true]:opacity-100"
+          class="bg-card translate-y-4 rounded-md border p-4 text-sm opacity-0 transition duration-700 data-[intersecting=true]:translate-y-0 data-[intersecting=true]:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-none"
         >
           {{ item }}
         </div>
