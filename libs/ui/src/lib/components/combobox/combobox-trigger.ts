@@ -38,7 +38,7 @@ export class ScComboboxTrigger {
   readonly size = input<'default' | 'sm'>('default');
 
   protected readonly class = computed(() =>
-    cn(selectTriggerStyles, 'pe-8', this.classInput()),
+    cn(selectTriggerStyles, this.classInput()),
   );
 
   constructor() {

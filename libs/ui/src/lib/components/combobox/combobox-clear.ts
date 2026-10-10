@@ -25,7 +25,7 @@ export class ScComboboxClear {
   protected readonly combobox = inject(SC_COMBOBOX);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly visible = computed(
+  readonly visible = computed(
     () =>
       this.combobox.hasValue() &&
       !this.combobox.disabled() &&

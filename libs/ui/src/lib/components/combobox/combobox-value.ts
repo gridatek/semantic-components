@@ -35,6 +35,8 @@ export class ScComboboxValue {
   protected readonly class = computed(() =>
     cn(
       'flex flex-1 text-start data-placeholder:text-muted-foreground',
+      // Keep the text clear of the clear button, which sits before the icon.
+      this.combobox.clearVisible() && 'pe-6',
       this.classInput(),
     ),
   );

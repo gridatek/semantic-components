@@ -15,6 +15,7 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
 import { ScSelectPortalOutlet } from '../select/select-portal-outlet';
+import { ScComboboxClear } from './combobox-clear';
 import { ScComboboxPortal } from './combobox-portal';
 import { SC_COMBOBOX, SC_COMBOBOX_TRIGGER } from './combobox-tokens';
 
@@ -88,6 +89,12 @@ export class ScCombobox implements FormValueControl<string> {
   protected readonly positions = positions;
   readonly trigger = contentChild(SC_COMBOBOX_TRIGGER);
   protected readonly comboboxPortal = contentChild.required(ScComboboxPortal);
+  private readonly clearButton = contentChild(ScComboboxClear);
+
+  /** Whether a clear button is showing over the trigger's end. */
+  readonly clearVisible = computed(
+    () => this.clearButton()?.visible() ?? false,
+  );
 
   /** The search box's combobox inside the popup, once rendered. */
   readonly search = signal<Combobox | undefined>(undefined);
