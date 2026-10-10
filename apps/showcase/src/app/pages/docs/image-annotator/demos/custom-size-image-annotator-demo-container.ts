@@ -31,6 +31,7 @@ import {
   SiEraserIcon,
   SiMinusIcon,
   SiPencilIcon,
+  SiRedo2Icon,
   SiSquareIcon,
   SiTrash2Icon,
   SiUndo2Icon,
@@ -53,18 +54,24 @@ import {
     SiArrowRightIcon,
     SiEraserIcon,
     SiUndo2Icon,
+    SiRedo2Icon,
     SiTrash2Icon,
     SiDownloadIcon,
   ],
   template: \`
-    <div scImageAnnotator [src]="imageSrc()" [width]="400" [height]="300">
+    <div
+      scImageAnnotator
+      [src]="imageSrc()"
+      alt="Photo to annotate"
+      [width]="400"
+      [height]="300"
+    >
       <div scImageAnnotatorToolbar #toolbar="scImageAnnotatorToolbar">
         <div class="flex items-center gap-1 border-r pr-2">
-          @for (tool of toolbar.tools; track tool.id) {
+          @for (tool of toolbar.tools(); track tool.id) {
             <button
               scImageAnnotatorToolButton
               [tool]="tool.id"
-              [attr.aria-label]="tool.label"
               [title]="tool.label"
             >
               @switch (tool.id) {
@@ -92,8 +99,12 @@ import {
         </div>
 
         <div class="flex items-center gap-1 border-r pr-2">
-          @for (color of toolbar.colors; track color) {
-            <button scImageAnnotatorColorButton [color]="color"></button>
+          @for (color of toolbar.colors(); track color.value) {
+            <button
+              scImageAnnotatorColorButton
+              [color]="color.value"
+              [title]="color.label"
+            ></button>
           }
         </div>
 
@@ -107,7 +118,10 @@ import {
           <button scImageAnnotatorAction action="undo" title="Undo">
             <svg siUndo2Icon class="size-[18px]"></svg>
           </button>
-          <button scImageAnnotatorAction action="clear" title="Clear All">
+          <button scImageAnnotatorAction action="redo" title="Redo">
+            <svg siRedo2Icon class="size-[18px]"></svg>
+          </button>
+          <button scImageAnnotatorAction action="clear" title="Clear all">
             <svg siTrash2Icon class="size-[18px]"></svg>
           </button>
           <button scImageAnnotatorAction action="download" title="Download">

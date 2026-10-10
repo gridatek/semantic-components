@@ -1,32 +1,39 @@
 # Image Annotator
 
-A composable canvas-based image annotation component with drawing tools for adding annotations on top of images.
+A composable, canvas-based image annotator: pen, line, rectangle, circle, arrow and eraser tools, colors, stroke width, undo/redo, clear and download.
+
+## Features
+
+- **Mouse, touch and pen** (pointer events); the page doesn't scroll while drawing
+- **Responsive** — scales to its container, keeping the `width`/`height` ratio; annotations are stored in image coordinates, so they survive resizing
+- **Sharp on high-DPI screens** — both layers render at the device pixel ratio; downloads are exported at full `width` × `height`
+- **Undo / redo** for every change, including erasing (one step per eraser gesture)
+- **Accessible toolbar** — `role="toolbar"` (one Tab stop, arrow keys), named tools/colors/actions, a labelled width slider; the canvas is `role="img"` named by `alt`
+- **Configurable** colors and tools; icons are yours (projected `<svg>`s)
 
 ## Installation
 
 ```typescript
 import { ScImageAnnotator, ScImageAnnotatorAction, ScImageAnnotatorCanvas, ScImageAnnotatorColorButton, ScImageAnnotatorLineWidth, ScImageAnnotatorToolButton, ScImageAnnotatorToolbar } from '@semantic-components/ui-lab';
-import type { Annotation, AnnotationPoint, AnnotationTool } from '@semantic-components/ui-lab';
+import type { Annotation, AnnotatorColor, AnnotatorToolOption } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
 
-### Basic Usage
-
 ```html
-<div scImageAnnotator [src]="imageSrc()" [width]="800" [height]="600" (annotationsChange)="onAnnotationsChange($event)" (save)="onSave($event)">
+<div scImageAnnotator [src]="imageSrc()" [width]="700" [height]="450" alt="Person standing by a lake" (annotationsChange)="onAnnotationsChange($event)" (save)="onSave($event)">
   <div scImageAnnotatorToolbar #toolbar="scImageAnnotatorToolbar">
     <div class="flex items-center gap-1 border-r pr-2">
-      @for (tool of toolbar.tools; track tool.id) {
-      <button scImageAnnotatorToolButton [tool]="tool.id" [attr.aria-label]="tool.label" [title]="tool.label">
-        <!-- provide icon per tool -->
+      @for (tool of toolbar.tools(); track tool.id) {
+      <button scImageAnnotatorToolButton [tool]="tool.id" [title]="tool.label">
+        <!-- your icon for tool.id -->
       </button>
       }
     </div>
 
     <div class="flex items-center gap-1 border-r pr-2">
-      @for (color of toolbar.colors; track color) {
-      <button scImageAnnotatorColorButton [color]="color"></button>
+      @for (color of toolbar.colors(); track color.value) {
+      <button scImageAnnotatorColorButton [color]="color.value" [title]="color.label"></button>
       }
     </div>
 
@@ -37,15 +44,10 @@ import type { Annotation, AnnotationPoint, AnnotationTool } from '@semantic-comp
     </div>
 
     <div class="ml-auto flex items-center gap-1">
-      <button scImageAnnotatorAction action="undo" title="Undo">
-        <!-- undo icon -->
-      </button>
-      <button scImageAnnotatorAction action="clear" title="Clear All">
-        <!-- trash icon -->
-      </button>
-      <button scImageAnnotatorAction action="download" title="Download">
-        <!-- download icon -->
-      </button>
+      <button scImageAnnotatorAction action="undo"><svg siUndo2Icon></svg></button>
+      <button scImageAnnotatorAction action="redo"><svg siRedo2Icon></svg></button>
+      <button scImageAnnotatorAction action="clear"><svg siTrash2Icon></svg></button>
+      <button scImageAnnotatorAction action="download"><svg siDownloadIcon></svg></button>
     </div>
   </div>
 
@@ -53,136 +55,140 @@ import type { Annotation, AnnotationPoint, AnnotationTool } from '@semantic-comp
 </div>
 ```
 
-```typescript
-onAnnotationsChange(annotations: Annotation[]): void {
-  console.log('Annotations updated:', annotations);
-}
+Tool, color and action buttons get their accessible name automatically (the tool's label, the color's label, "Undo"…). Write a static `aria-label` to override it. Keep extra content (like a counter) **outside** the `scImageAnnotator` element or below it in a column layout — the annotator is `w-full` up to `width` px.
 
-onSave(dataUrl: string): void {
-  console.log('Image saved as data URL');
-}
-```
-
-### Programmatic Control
+### Custom colors and tools
 
 ```html
-<div scImageAnnotator #annotator="scImageAnnotator" [src]="imageSrc" />
+<div scImageAnnotator [src]="src" [colors]="brandColors" [tools]="tools">…</div>
 ```
 
 ```typescript
-@ViewChild('annotator') annotator!: ScImageAnnotator;
+readonly brandColors: AnnotatorColor[] = [
+  { value: '#e11d48', label: 'Rose' },
+  { value: '#0ea5e9', label: 'Sky' },
+];
+readonly tools: AnnotatorToolOption[] = [
+  { id: 'pen', label: 'Pen' },
+  { id: 'arrow', label: 'Arrow' },
+  { id: 'eraser', label: 'Eraser' },
+];
+```
 
-loadAnnotations(): void {
-  this.annotator.setAnnotations(savedAnnotations);
-}
+### Programmatic control
 
-getAnnotations(): Annotation[] {
-  return this.annotator.getAnnotations();
+```html
+<div scImageAnnotator #annotator="scImageAnnotator" [src]="src">…</div>
+```
+
+```typescript
+readonly annotator = viewChild.required(ScImageAnnotator);
+
+load(saved: Annotation[]) {
+  this.annotator().setAnnotations(saved); // resets undo history, emits nothing
 }
 ```
 
 ## API Reference
 
-### ScImageAnnotator
+### ScImageAnnotator — `div[scImageAnnotator]`
 
-Root directive. Provides shared state to all children.
+| Input    | Type                    | Default                    | Description                                      |
+| -------- | ----------------------- | -------------------------- | ------------------------------------------------ |
+| `src`    | `string` (required)     | —                          | Image URL (served with CORS headers to download) |
+| `width`  | `number`                | `600`                      | Image coordinate width and export width (px)     |
+| `height` | `number`                | `400`                      | Image coordinate height and export height (px)   |
+| `alt`    | `string`                | `'Annotated image'`        | Accessible name of the canvas (`role="img"`)     |
+| `colors` | `AnnotatorColor[]`      | `DEFAULT_ANNOTATOR_COLORS` | Color palette (value + accessible label)         |
+| `tools`  | `AnnotatorToolOption[]` | `DEFAULT_ANNOTATOR_TOOLS`  | Available tools                                  |
+| `class`  | `string`                | `''`                       | Additional CSS classes                           |
 
-| Input    | Type     | Default    | Description             |
-| -------- | -------- | ---------- | ----------------------- |
-| `src`    | `string` | (required) | Image source URL        |
-| `width`  | `number` | `600`      | Canvas width in pixels  |
-| `height` | `number` | `400`      | Canvas height in pixels |
-| `class`  | `string` | `''`       | Additional CSS classes  |
+| Output              | Type           | Description                                             |
+| ------------------- | -------------- | ------------------------------------------------------- |
+| `annotationsChange` | `Annotation[]` | After every user change: draw, erase, undo, redo, clear |
+| `save`              | `string`       | PNG data URL, when the image is downloaded              |
 
-| Output              | Type           | Description                               |
-| ------------------- | -------------- | ----------------------------------------- |
-| `annotationsChange` | `Annotation[]` | Emitted when annotations are modified     |
-| `save`              | `string`       | Emitted with data URL when image is saved |
+Methods: `getAnnotations()`, `setAnnotations(annotations)`.
 
-| Method                           | Description                      |
-| -------------------------------- | -------------------------------- |
-| `getAnnotations(): Annotation[]` | Get current annotations          |
-| `setAnnotations(annotations)`    | Set annotations programmatically |
+### ScImageAnnotatorToolbar — `div[scImageAnnotatorToolbar]`
 
-### ScImageAnnotatorToolbar
+`role="toolbar"` (aria `Toolbar`), named "Annotation tools" unless given an `aria-label`. Exposes `tools()`, `colors()`, `lineWidth()`, `hasAnnotations()` for the template (`exportAs: 'scImageAnnotatorToolbar'`).
 
-Container directive for toolbar controls. Exposes `tools`, `colors`, `lineWidth()`, and `hasAnnotations()` via `exportAs`.
+### ScImageAnnotatorToolButton — `button[scImageAnnotatorToolButton]`
 
-### ScImageAnnotatorToolButton
+| Input  | Type             | Description      |
+| ------ | ---------------- | ---------------- |
+| `tool` | `AnnotationTool` | Tool to activate |
 
-Directive on `button`. Auto-binds active styling, `aria-pressed`, and click to select the tool.
+`aria-pressed` reflects the active tool.
 
-| Input   | Type             | Description            |
-| ------- | ---------------- | ---------------------- |
-| `tool`  | `AnnotationTool` | Required               |
-| `class` | `string`         | Additional CSS classes |
+### ScImageAnnotatorColorButton — `button[scImageAnnotatorColorButton]`
 
-### ScImageAnnotatorColorButton
+| Input   | Type     | Description        |
+| ------- | -------- | ------------------ |
+| `color` | `string` | Color value to use |
 
-Directive on `button`. Auto-binds background color, ring styling, `aria-pressed`, and click to select the color.
+`aria-pressed` reflects the active color.
 
-| Input   | Type     | Description            |
-| ------- | -------- | ---------------------- |
-| `color` | `string` | Required               |
-| `class` | `string` | Additional CSS classes |
+### ScImageAnnotatorLineWidth — `input[type="range"][scImageAnnotatorLineWidth]`
 
-### ScImageAnnotatorLineWidth
+Stroke width. Named "Line width" unless given an `aria-label`. Its own Tab stop; its arrow keys change the value.
 
-Directive on `input[type="range"]`. Auto-binds value and input event for adjusting line width.
+### ScImageAnnotatorAction — `button[scImageAnnotatorAction]`
 
-### ScImageAnnotatorAction
+| Input    | Type                                        | Description   |
+| -------- | ------------------------------------------- | ------------- |
+| `action` | `'undo' \| 'redo' \| 'clear' \| 'download'` | Action to run |
 
-Directive on `button`. Auto-binds disabled state and click handler based on the action type.
+`aria-disabled` (still focusable) when there is nothing to undo, redo or clear, or before the image has loaded.
 
-| Input    | Type                              | Description            |
-| -------- | --------------------------------- | ---------------------- |
-| `action` | `'undo' \| 'clear' \| 'download'` | Required               |
-| `class`  | `string`                          | Additional CSS classes |
+### ScImageAnnotatorCanvas — `div[scImageAnnotatorCanvas]`
 
-### ScImageAnnotatorCanvas
+The drawing surface. `role="img"` named by `alt`; `data-state="loading" | "ready"`; aspect ratio from `width`/`height`.
 
-Component rendering the dual canvas layers (image + annotations). Handles mouse events, image loading, drawing, and download.
-
-## Type Definitions
+## Types
 
 ```typescript
-type AnnotationTool = 'pen' | 'line' | 'rectangle' | 'circle' | 'arrow' | 'text' | 'eraser';
-
-interface AnnotationPoint {
-  x: number;
-  y: number;
-}
+type AnnotationTool = 'pen' | 'line' | 'rectangle' | 'circle' | 'arrow' | 'eraser';
 
 interface Annotation {
   id: string;
-  tool: AnnotationTool;
-  points: AnnotationPoint[];
+  tool: Exclude<AnnotationTool, 'eraser'>;
+  points: AnnotationPoint[]; // image coordinates
   color: string;
-  lineWidth: number;
-  text?: string;
+  lineWidth: number; // image units
+}
+
+interface AnnotatorColor {
+  value: string;
+  label: string;
+}
+
+interface AnnotatorToolOption {
+  id: AnnotationTool;
+  label: string;
 }
 ```
 
-## Available Tools
+## Tools
 
-| Tool      | Description                      |
-| --------- | -------------------------------- |
-| Pen       | Freehand drawing                 |
-| Line      | Straight line between two points |
-| Rectangle | Rectangle shape                  |
-| Circle    | Circle/ellipse from center point |
-| Arrow     | Line with arrowhead              |
-| Eraser    | Remove annotations by proximity  |
+| Tool        | How to draw                                               |
+| ----------- | --------------------------------------------------------- |
+| `pen`       | Freehand; a click draws a dot                             |
+| `line`      | Drag from start to end                                    |
+| `rectangle` | Drag from one corner to the opposite one                  |
+| `circle`    | Drag from the center outwards                             |
+| `arrow`     | Drag from start to tip                                    |
+| `eraser`    | Click or drag over strokes to remove them (one undo step) |
 
-## Features
+## Accessibility
 
-- Fully composable directive-based architecture
-- Multiple drawing tools (pen, line, rectangle, circle, arrow)
-- Eraser tool for removing annotations
-- Color picker with preset colors
-- Adjustable line width
-- Undo and clear all functionality
-- Download annotated image as PNG
-- Cross-origin image support
-- Real-time annotation preview
-- Programmatic annotation control
+- Toolbar: one Tab stop, ←/→ between buttons, Home/End; the width slider is a separate Tab stop.
+- Every control has an accessible name; pressed/disabled states are exposed with `aria-pressed` / `aria-disabled`.
+- The canvas is `role="img"` with `alt` as its name.
+- Freehand drawing is path-dependent input, so it has no keyboard equivalent (WCAG 2.1.1 exception).
+
+## Notes
+
+- Downloading needs the image served with CORS headers (`crossorigin="anonymous"` is used); otherwise the browser blocks reading the canvas and `save` doesn't fire.
+- `width`/`height` define the coordinate space: changing them does not rescale existing annotations.
