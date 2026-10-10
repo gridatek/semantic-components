@@ -118,7 +118,16 @@ Decorative item icon (folder, file…), `aria-hidden`.
 
 ### ScTreeItemGroup — `ul[scTreeItemGroup]`
 
-The children of an item (`role="group"`). Rendered when the item opens (with a short entrance animation, off under `prefers-reduced-motion`), removed when it closes.
+The children of an item (`role="group"`). Rendered the first time the item opens and kept afterwards.
+
+**Animation.** Opening and closing animate the group's height (`auto` ↔ `0`, 200 ms ease-out) through a CSS transition — no Angular animation hooks:
+
+- Works in browsers that support `interpolate-size` (enabled globally in the theme); others open and close instantly.
+- Nothing animates on page load, only when an item's state changes.
+- A closed group is `height: 0` and `visibility: hidden` once the transition ends, so its rows are out of the accessibility tree and not focusable; keyboard navigation already skips them.
+- Off under `prefers-reduced-motion`.
+
+Why not `animate.enter` / `animate.leave` on the rows (as accordion does)? Tree rows are projected content of one view, and inserting a group's rows makes Angular run the enter animation on every row of the tree, not just the new ones.
 
 ## Keyboard Navigation
 
@@ -138,7 +147,7 @@ All parts accept `class`. Useful hooks:
 
 - `li[scTreeItem]`: `data-state="open|closed"`, `aria-selected`, `aria-current` (nav), `aria-disabled`
 - `[scTreeItemTrigger]`: `data-selected`, `data-disabled`
-- `ul[scTreeItemGroup]`: `data-state="open|closed"`
+- `ul[scTreeItemGroup]`: `data-state="open|closed"` (drives the height transition)
 
 ## Accessibility
 

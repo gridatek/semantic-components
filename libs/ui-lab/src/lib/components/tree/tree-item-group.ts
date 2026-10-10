@@ -51,11 +51,18 @@ export class ScTreeItemGroup implements ScTreeItemGroupContext {
 
   protected readonly class = computed(() =>
     cn(
-      // Collapsed groups hold only comment anchors: take no space.
-      'flex flex-col gap-1 empty:hidden',
-      // Children are rendered when the item opens, so animate their entrance.
-      // (They are removed on close, so there is nothing to animate out.)
-      'data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-top-1 data-[state=open]:duration-150 motion-reduce:animate-none',
+      'flex flex-col',
+      // Expand/collapse: height animates between auto and 0 (global
+      // `interpolate-size: allow-keywords`; other browsers switch instantly).
+      // Children stay rendered once opened (ScTreeItem preserves them), and a
+      // closed group — opened before or not — is 0 high and ends `invisible`
+      // (out of the accessibility tree, not focusable) after the transition.
+      // Padding + negative margin give the rows' focus ring room inside the
+      // clipped area; vertically only while open, so a closed group takes no
+      // space at all.
+      '-mx-1 overflow-hidden px-1 transition-[height,padding,margin,visibility] duration-200 ease-out motion-reduce:transition-none',
+      'data-[state=open]:-my-1 data-[state=open]:py-1',
+      'data-[state=closed]:invisible data-[state=closed]:h-0',
       this.classInput(),
     ),
   );

@@ -52,9 +52,11 @@ export class ScTreeItem {
 
   readonly hasChildren = computed(() => !!this.groupContent());
 
+  private readonly tree = inject(ScTree);
+
   protected readonly class = computed(() =>
     cn(
-      'flex flex-col gap-1 outline-none',
+      'flex flex-col outline-none',
       // Focus ring on this item's own row only (direct child), not on the rows
       // of nested items, which are descendants too.
       'focus-visible:*:data-[slot=tree-item-trigger]:ring-3 focus-visible:*:data-[slot=tree-item-trigger]:ring-ring/50',
@@ -63,10 +65,14 @@ export class ScTreeItem {
   );
 
   constructor() {
+    // Keep children rendered once opened, so collapsing can animate the group
+    // (ScTreeItemGroup) instead of the rows vanishing at once.
+    this.treeItem.preserveContent.set(true);
+
     // Nested items belong to the enclosing group, top-level items to the
     // tree. TreeItem reads `parent` in its ngOnInit to register.
     const group = inject(SC_TREE_ITEM_GROUP, { optional: true });
     if (group) group.adopt(this.treeItem);
-    else setInput(this.treeItem.parent, inject(ScTree).tree);
+    else setInput(this.treeItem.parent, this.tree.tree);
   }
 }
