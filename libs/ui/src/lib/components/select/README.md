@@ -2,52 +2,53 @@
 
 Displays a list of options for the user to pick from — mimics a native select.
 
+Built on the `@angular/aria` combobox pattern for a non-editable ("select-only") combobox: the trigger element itself is the combobox, focus stays on it, and the active option is announced through `aria-activedescendant`.
+
 ## Features
 
-- Full keyboard navigation support
-- ARIA-compliant accessibility
-- Automatic scroll-to-active on keyboard navigation
-- Overlay positioning with CDK (`usePopover: 'inline'`) with fallback (opens above when insufficient space below)
-- Value persistence across overlay open/close cycles
-- Enter/leave animations on popup
-- Customizable styling via `class` input
-- Signal forms support via `formField` on the input
+- Single tab stop; full keyboard navigation and typeahead
+- ARIA-compliant (`role="combobox"` trigger, `role="listbox"` popup)
+- Signal Forms control — bind `[formField]` directly on `scSelect`
+- Stores the option **value**, displays its **label**
+- Overlay positioning with CDK (`usePopover: 'inline'`), flips above when there is no room below
+- Enter/leave animations on the popup
+- Customizable styling via `class` input on every part
 - `exportAs: 'scSelect'` for direct template access
 
 ## Components
 
-| Component               | Selector                      | Responsibility                                                                      |
-| ----------------------- | ----------------------------- | ----------------------------------------------------------------------------------- |
-| `ScSelect`              | `div[scSelect]`               | Root container, wraps `Combobox`, owns overlay logic                                |
-| `ScSelectOrigin`        | `div[scSelectOrigin]`         | Styled container, serves as overlay positioning origin, projects consumer content   |
-| `ScSelectInput`         | `input[scSelectInput]`        | Visible input displaying selected value, wraps `ComboboxInput` from `@angular/aria` |
-| `ScSelectItemIcon`      | `svg[scSelectItemIcon]`       | Icon styling for items and value display (sets `aria-hidden="true"` automatically)  |
-| `ScSelectPortal`        | `ng-template[scSelectPortal]` | Marks lazy content template for the overlay                                         |
-| `ScSelectPopup`         | `div[scSelectPopup]`          | Popup container with styling and enter/leave animations                             |
-| `ScSelectList`          | `div[scSelectList]`           | Listbox container, wraps `Listbox` from `@angular/aria`                             |
-| `ScSelectItem`          | `div[scSelectItem]`           | Option item, wraps `Option`, internally renders check indicator                     |
-| `ScSelectGroup`         | `div[scSelectGroup]`          | Groups related options together with vertical layout                                |
-| `ScSelectGroupLabel`    | `div[scSelectGroupLabel]`     | Label for a group of options                                                        |
-| `ScSelectSeparator`     | `[scSelectSeparator]`         | Visual separator between groups or items                                            |
-| `ScSelectIcon`          | `svg[scSelectIcon]`           | Chevron icon styling in trigger                                                     |
-| `ScSelectItemIndicator` | `svg[scSelectItemIndicator]`  | Checkmark icon for selected state                                                   |
-| `ScSelectItemLabel`     | `[scSelectItemLabel]`         | Label text inside an item, applies `flex-1` for proper layout                       |
+| Component               | Selector                      | Responsibility                                                                |
+| ----------------------- | ----------------------------- | ----------------------------------------------------------------------------- |
+| `ScSelect`              | `div[scSelect]`               | Root; the form control (`FormValueControl<string>`), owns the overlay         |
+| `ScSelectTrigger`       | `[scSelectTrigger]`           | The focusable combobox (wraps `Combobox`), overlay origin                     |
+| `ScSelectValue`         | `[scSelectValue]`             | Shows the selected label, or the placeholder                                  |
+| `ScSelectIcon`          | `svg[scSelectIcon]`           | Chevron in the trigger, rotates while open                                    |
+| `ScSelectPortal`        | `ng-template[scSelectPortal]` | Marks the lazy popup content                                                  |
+| `ScSelectPopup`         | `div[scSelectPopup]`          | Popup container with styling and enter/leave animations                       |
+| `ScSelectList`          | `div[scSelectList]`           | Listbox (wraps `Listbox` + `ComboboxWidget`), syncs selection with `ScSelect` |
+| `ScSelectItem`          | `div[scSelectItem]`           | Option (wraps `Option`)                                                       |
+| `ScSelectItemLabel`     | `[scSelectItemLabel]`         | Label text inside an item (`flex-1`)                                          |
+| `ScSelectItemIcon`      | `svg[scSelectItemIcon]`       | Decorative icon in items or the value (`aria-hidden="true"`)                  |
+| `ScSelectItemIndicator` | `svg[scSelectItemIndicator]`  | Checkmark shown on the selected option                                        |
+| `ScSelectGroup`         | `div[scSelectGroup]`          | Groups related options                                                        |
+| `ScSelectGroupLabel`    | `div[scSelectGroupLabel]`     | Label for a group                                                             |
+| `ScSelectSeparator`     | `[scSelectSeparator]`         | Visual separator between groups or items                                      |
 
 ## Basic Usage
 
-### Template
-
 ```html
-<div scSelect>
-  <div scSelectOrigin>
-    <input scSelectInput placeholder="Select an option" aria-label="Select" />
+<div scSelect [formField]="form.fruit" placeholder="Select a fruit">
+  <div scSelectTrigger aria-label="Fruit">
+    <span scSelectValue></span>
+    <svg scSelectIcon siChevronDownIcon></svg>
   </div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
       <div scSelectList>
-        @for (option of options; track option.value) {
-        <div scSelectItem [value]="option.value" [label]="option.label">
-          <span scSelectItemLabel>{{ option.label }}</span>
+        @for (fruit of fruits; track fruit.value) {
+        <div scSelectItem [value]="fruit.value" [label]="fruit.label">
+          <span scSelectItemLabel>{{ fruit.label }}</span>
+          <svg scSelectItemIndicator siCheckIcon></svg>
         </div>
         }
       </div>
@@ -56,245 +57,131 @@ Displays a list of options for the user to pick from — mimics a native select.
 </div>
 ```
 
-### With Icons
+Without Signal Forms, use two-way binding: `<div scSelect [(value)]="fruit">`.
 
-Use `ScSelectItemIcon` for consistent icon styling in items and the trigger.
+### Custom value rendering
+
+`ScSelectValue` renders the selected option's label by default. Project content to render it yourself (shown only when a value is selected; the placeholder is used otherwise):
 
 ```html
-<!-- In the trigger: icon before the input -->
-<div scSelectOrigin>
-  <svg scSelectItemIcon siHomeIcon></svg>
-  <input scSelectInput placeholder="Select..." aria-label="Select" />
-</div>
-
-<!-- In items -->
-<div scSelectItem [value]="'home'" [label]="'Home'">
-  <svg scSelectItemIcon siHomeIcon></svg>
-  <span scSelectItemLabel>Home</span>
-</div>
+<span scSelectValue>
+  @if (selectedOption(); as option) {
+  <svg scSelectItemIcon [siIcon]="option.icon"></svg>
+  {{ option.label }} }
+</span>
 ```
+
+> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default `ScSelectValue` shows the raw value. If your initial value must show a label immediately, project the content as above.
 
 ### With Groups
 
-Use `ScSelectGroup`, `ScSelectGroupLabel`, and `ScSelectSeparator` to organize options into labeled groups.
-
 ```html
-<div scSelect>
-  <div scSelectOrigin>
-    <input scSelectInput placeholder="Select a food" aria-label="Food dropdown" />
+<div scSelectList>
+  <div scSelectGroup>
+    <div scSelectGroupLabel>Fruits</div>
+    <div scSelectItem value="apple" label="Apple"><span scSelectItemLabel>Apple</span></div>
   </div>
-  <ng-template scSelectPortal>
-    <div scSelectPopup>
-      <div scSelectList>
-        <div scSelectGroup>
-          <div scSelectGroupLabel>Fruits</div>
-          <div scSelectItem value="Apple" label="Apple"><span scSelectItemLabel>Apple</span></div>
-          <div scSelectItem value="Banana" label="Banana"><span scSelectItemLabel>Banana</span></div>
-        </div>
-        <div scSelectSeparator></div>
-        <div scSelectGroup>
-          <div scSelectGroupLabel>Vegetables</div>
-          <div scSelectItem value="Carrot" label="Carrot"><span scSelectItemLabel>Carrot</span></div>
-          <div scSelectItem value="Spinach" label="Spinach"><span scSelectItemLabel>Spinach</span></div>
-        </div>
-      </div>
-    </div>
-  </ng-template>
-</div>
-```
-
-### Component
-
-```typescript
-import { Component } from '@angular/core';
-import { ScSelect, ScSelectInput, ScSelectItem, ScSelectItemIcon, ScSelectItemLabel, ScSelectList, ScSelectOrigin, ScSelectPopup, ScSelectPortal } from '@semantic-components/ui';
-
-@Component({
-  selector: 'app-example',
-  imports: [ScSelect, ScSelectInput, ScSelectPopup, ScSelectItemIcon, ScSelectItemLabel, ScSelectList, ScSelectItem, ScSelectPortal, ScSelectOrigin],
-  template: `
-    <div scSelect>
-      <div scSelectOrigin>
-        <input scSelectInput placeholder="Select an option" aria-label="Select" />
-      </div>
-      <ng-template scSelectPortal>
-        <div scSelectPopup>
-          <div scSelectList>
-            @for (option of options; track option.value) {
-              <div scSelectItem [value]="option.value" [label]="option.label">
-                <span scSelectItemLabel>{{ option.label }}</span>
-              </div>
-            }
-          </div>
-        </div>
-      </ng-template>
-    </div>
-  `,
-})
-export class Example {
-  options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
-  ];
-}
-```
-
-## Template Access via `exportAs`
-
-Use `#select="scSelect"` to access `ScSelect` directly in the template when you need the value (e.g., for conditional icon rendering):
-
-```html
-<div scSelect>
-  ...
-  <span>Current value: {{ select.value() }}</span>
+  <div scSelectSeparator></div>
+  <div scSelectGroup>
+    <div scSelectGroupLabel>Vegetables</div>
+    <div scSelectItem value="carrot" label="Carrot"><span scSelectItemLabel>Carrot</span></div>
+  </div>
 </div>
 ```
 
 ## Signal Forms
 
-Use `[formField]` on the `<input scSelectInput>` to integrate with Angular signal forms:
+`ScSelect` implements `FormValueControl<string>`. Put `[formField]` on `scSelect`, and declare constraints in the `form()` schema — not as attributes:
 
-```html
-<input scSelectInput [formField]="fruitForm.fruit" placeholder="Select a fruit" aria-label="Fruit" />
+```typescript
+readonly fruitForm = form(this.model, (p) => {
+  required(p.fruit);
+  disabled(p.fruit, () => this.locked());
+});
 ```
+
+`required` → `aria-required`, `invalid` (once touched) → `aria-invalid`, `disabled` → `aria-disabled` on the trigger. The control is marked touched when focus leaves the trigger.
 
 ## Keyboard Navigation
 
-The select component supports full keyboard navigation:
+Focus always stays on the trigger.
 
-| Key               | Action                                |
-| ----------------- | ------------------------------------- |
-| `Enter` / `Space` | Open dropdown / Select focused option |
-| `ArrowDown`       | Move focus to next option             |
-| `ArrowUp`         | Move focus to previous option         |
-| `Home`            | Move focus to first option            |
-| `End`             | Move focus to last option             |
-| `Escape`          | Close dropdown                        |
-| `Tab`             | Close dropdown and move focus         |
+| Key                  | Closed     | Open                               |
+| -------------------- | ---------- | ---------------------------------- |
+| `Enter` / `Space`    | Open       | Select the active option and close |
+| `ArrowDown`          | Open       | Next option                        |
+| `ArrowUp`            | —          | Previous option                    |
+| `Home` / `End`       | —          | First / last option                |
+| Printable characters | —          | Typeahead to the matching option   |
+| `Escape`             | —          | Close without changing the value   |
+| `Tab`                | Move focus | Close and move focus               |
 
-When navigating with keyboard, the dropdown automatically scrolls to keep the active option visible.
+Picking the already-selected option keeps it selected (it does not toggle off).
 
 ## Accessibility
 
-The select components are built with accessibility in mind:
-
-- Uses `@angular/aria/combobox` and `@angular/aria/listbox` for proper ARIA roles
-- `aria-label` on the input for screen reader support
-- `ScSelectItemIcon` sets `aria-hidden="true"` automatically on decorative icons
-- Internal icons (chevron, checkmark) have `aria-hidden="true"` built in
-- Visual focus indicators for keyboard navigation
-- Selected state indicated via `aria-selected`
-
-### Required Accessibility Attributes
-
-```html
-<!-- Always provide an accessible label on the input -->
-<input scSelectInput aria-label="Select a fruit" placeholder="Select a fruit" />
-```
+- Give the trigger an accessible name (`aria-label` or `aria-labelledby`).
+- `ScSelectItemIcon` and `ScSelectIcon` set `aria-hidden="true"`.
+- Disabled selects stay focusable (`aria-disabled`, Aria's soft-disabled default) so screen-reader users can discover them.
 
 ## API Reference
 
 ### ScSelect
 
-| Property   | Type              | Description                                            |
-| ---------- | ----------------- | ------------------------------------------------------ |
-| `class`    | `string`          | Additional CSS classes                                 |
-| `disabled` | `boolean`         | Disables the select control                            |
-| `value()`  | `Signal<unknown>` | Computed selected value derived from listbox selection |
-| `label()`  | `Signal<string>`  | Returns the label for the selected value, or `''`      |
-| `exportAs` | `'scSelect'`      | Template reference for direct access                   |
+| Member            | Type              | Description                                     |
+| ----------------- | ----------------- | ----------------------------------------------- |
+| `value`           | `model<string>`   | Selected option value (`''` when none)          |
+| `placeholder`     | `input<string>`   | Shown by `ScSelectValue` when nothing is chosen |
+| `disabled`        | `input<boolean>`  | Disables the select                             |
+| `readonly`        | `input<boolean>`  | Prevents opening/changing                       |
+| `required`        | `input<boolean>`  | Sets `aria-required` on the trigger             |
+| `invalid`         | `input<boolean>`  | Sets `aria-invalid` on the trigger              |
+| `touch`           | `output<void>`    | Emitted when focus leaves the trigger           |
+| `open()`          | `Signal<boolean>` | Whether the popup is open                       |
+| `selectedLabel()` | `Signal<string>`  | Label of the selected option (or its value)     |
+| `select(value)`   | `void`            | Select a value, close, refocus the trigger      |
+| `close()`         | `void`            | Close and refocus the trigger                   |
+| `focus()`         | `void`            | Focus the trigger                               |
+| `class`           | `input<string>`   | Additional CSS classes                          |
 
-### ScSelectOrigin
+### ScSelectTrigger
 
-| Property | Type     | Description            |
-| -------- | -------- | ---------------------- |
-| `class`  | `string` | Additional CSS classes |
-
-### ScSelectInput
-
-| Property      | Type     | Description                                    |
-| ------------- | -------- | ---------------------------------------------- |
-| `class`       | `string` | Additional CSS classes                         |
-| `placeholder` | `string` | Native placeholder text (set on the `<input>`) |
-| `aria-label`  | `string` | Accessible label (set on the `<input>`)        |
-
-### ScSelectItemIcon
-
-| Property | Type     | Description                                                            |
-| -------- | -------- | ---------------------------------------------------------------------- |
-| `class`  | `string` | Additional CSS classes (base: `text-muted-foreground size-4 shrink-0`) |
-
-Sets `aria-hidden="true"` automatically.
+| Property | Type                | Description            |
+| -------- | ------------------- | ---------------------- |
+| `size`   | `'default' \| 'sm'` | Trigger height         |
+| `class`  | `string`            | Additional CSS classes |
 
 ### ScSelectItem
 
-| Property | Type     | Description                        |
-| -------- | -------- | ---------------------------------- |
-| `value`  | `any`    | The value of the option            |
-| `label`  | `string` | The label displayed for the option |
-| `class`  | `string` | Additional CSS classes             |
+| Property   | Type      | Description                                             |
+| ---------- | --------- | ------------------------------------------------------- |
+| `value`    | `string`  | The option's value                                      |
+| `label`    | `string`  | Label used for display and typeahead (defaults to text) |
+| `disabled` | `boolean` | Disables the option                                     |
+| `class`    | `string`  | Additional CSS classes                                  |
 
-### ScSelectItemLabel
-
-| Property | Type     | Description                             |
-| -------- | -------- | --------------------------------------- |
-| `class`  | `string` | Additional CSS classes (base: `flex-1`) |
-
-### ScSelectGroup
-
-| Property | Type     | Description            |
-| -------- | -------- | ---------------------- |
-| `class`  | `string` | Additional CSS classes |
-
-### ScSelectGroupLabel
-
-| Property | Type     | Description            |
-| -------- | -------- | ---------------------- |
-| `class`  | `string` | Additional CSS classes |
-
-### ScSelectSeparator
-
-| Property | Type     | Description            |
-| -------- | -------- | ---------------------- |
-| `class`  | `string` | Additional CSS classes |
-
-### All Components
-
-All components accept a `class` input for custom styling:
-
-```html
-<div scSelect class="w-64">
-  <div scSelectOrigin class="bg-slate-100">
-    <input scSelectInput placeholder="Choose..." aria-label="Choose" />
-  </div>
-</div>
-```
+All other parts accept a `class` input only.
 
 ## Architecture
 
 ```
-ScSelect (root, wraps Combobox, owns overlay, exportAs: 'scSelect')
-├── ScSelectOrigin (styled container, overlay origin)
-│   ├── ScSelectItemIcon (consumer icons) [projected content]
-│   ├── ScSelectInput (wraps ComboboxInput, displays selected value, placeholder, aria-label) [projected content]
-│   └── ScSelectIcon (chevron icon with expand/collapse rotation) [projected content]
-└── ScSelectPortal (ng-template marking lazy overlay content)
-    └── ScSelectPopup (popup container with styling and animation)
-        └── ScSelectList (wraps Listbox)
-            ├── ScSelectGroup (groups related options)
-            │   ├── ScSelectGroupLabel (label for the group)
-            │   └── ScSelectItem (wraps Option)
-            │       ├── ScSelectItemIcon (consumer icons) [projected content]
-            │       ├── ScSelectItemLabel (label text, flex-1) [projected content]
-            │       └── ScSelectItemIndicator (checkmark for selected state) [projected content]
-            ├── ScSelectSeparator (visual divider between groups)
-            └── ScSelectItem (ungrouped option)
+ScSelect (form control, exportAs: 'scSelect', provides SC_SELECT)
+├── ScSelectTrigger (Combobox host, role=combobox) [projected]
+│   ├── ScSelectValue (label or placeholder)
+│   └── ScSelectIcon (chevron)
+└── ScSelectPortal (ng-template, rendered inside ngComboboxPopup via ScSelectPortalOutlet)
+    └── ScSelectPopup
+        └── ScSelectList (Listbox + ComboboxWidget; activedescendant focus, explicit selection)
+            ├── ScSelectGroup → ScSelectGroupLabel, ScSelectItem…
+            ├── ScSelectSeparator
+            └── ScSelectItem (Option) → ScSelectItemIcon, ScSelectItemLabel, ScSelectItemIndicator
 ```
+
+`ScSelectPortalOutlet` renders the consumer's portal template with the popup's injector so `ComboboxWidget` can resolve `COMBOBOX_POPUP` — the consumer-declared template cannot see it otherwise.
 
 ## Dependencies
 
 - `@angular/aria/combobox` - Combobox behavior
 - `@angular/aria/listbox` - Listbox and option behavior
 - `@angular/cdk/overlay` - Overlay positioning
-- `@semantic-icons/lucide-icons` - Icon library (used internally and with `ScSelectItemIcon`)
+- `@angular/forms/signals` - `FormValueControl` contract

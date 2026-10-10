@@ -34,7 +34,7 @@ In Semantic Components, it's scTooltipTrigger:
 <button scTooltipTrigger="Save changes">Save</button>
 ```
 
-`scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectOrigin`, `ScSidebarBody` — you know exactly what each piece does before reading a single line of docs.
+`scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectTrigger`, `ScSidebarBody` — you know exactly what each piece does before reading a single line of docs.
 
 This principle extends to the **HTML elements themselves**. When possible, components/directives are applied to the right native element rather than a generic `<div>`.
 
@@ -83,12 +83,14 @@ Each component is a set of small, focused pieces that you assemble yourself. The
 The Select is a good example of how far this goes:
 
 ```html
-<div scSelect>
-  <div scSelectOrigin>
-    @if (displayIcon(); as icon) {
-    <svg scSelectItemIcon siTagIcon></svg>
-    }
-    <input scSelectInput placeholder="Select a label" aria-label="Label dropdown" />
+<div scSelect [formField]="form.label" placeholder="Select a label">
+  <div scSelectTrigger aria-label="Label">
+    <span scSelectValue>
+      @if (selected(); as item) {
+      <svg scSelectItemIcon siTagIcon></svg>
+      {{ item.label }} }
+    </span>
+    <svg scSelectIcon siChevronDownIcon></svg>
   </div>
   <ng-template scSelectPortal>
     <div scSelectPopup>
@@ -96,7 +98,7 @@ The Select is a good example of how far this goes:
         @for (item of items; track item.value) {
         <div scSelectItem [value]="item.value" [label]="item.label">
           <svg scSelectItemIcon siTagIcon></svg>
-          <span>{{ item.label }}</span>
+          <span scSelectItemLabel>{{ item.label }}</span>
         </div>
         }
       </div>

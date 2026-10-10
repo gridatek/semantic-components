@@ -25,16 +25,15 @@ import {
   ScInputGroup,
   ScInputGroupSeparator,
   ScSelect,
-  ScSelectDisplayValue,
   ScSelectIcon,
-  ScSelectInput,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemLabel,
   ScSelectList,
-  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
 } from '@semantic-components/ui';
 import {
   SiArrowRightIcon,
@@ -54,14 +53,13 @@ interface FormModel {
     ScInputGroup,
     ScInputGroupSeparator,
     ScSelect,
-    ScSelectDisplayValue,
     ScSelectItem,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectOrigin,
-    ScSelectInput,
     ScSelectIcon,
+    ScSelectTrigger,
+    ScSelectValue,
     ScSelectItemIndicator,
     ScSelectItemLabel,
     SiArrowRightIcon,
@@ -74,18 +72,19 @@ interface FormModel {
     <form [formRoot]="currencyForm">
       <div class="flex items-center gap-2">
         <div scInputGroup class="w-80">
-          <div scSelect class="w-10 min-w-10">
-            <div scSelectOrigin>
-              <div scInputGroup>
-                <span scSelectDisplayValue>{{ displayCurrency() }}</span>
-                <input
-                  scSelectInput
-                  [formField]="currencyForm.currency"
-                  placeholder=""
-                  aria-label="Currency dropdown"
-                />
-                <svg scSelectIcon siChevronDownIcon></svg>
-              </div>
+          <div
+            scSelect
+            class="w-14 min-w-14"
+            [formField]="currencyForm.currency"
+            placeholder="$"
+          >
+            <div
+              scSelectTrigger
+              class="h-auto border-0 bg-transparent px-0 dark:bg-transparent"
+              aria-label="Currency"
+            >
+              <span scSelectValue>{{ selectedCurrency()?.symbol }}</span>
+              <svg scSelectIcon siChevronDownIcon></svg>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -127,11 +126,11 @@ export class SelectCurrencyDemo {
   readonly formModel = signal<FormModel>({ currency: '', amount: '10.00' });
   readonly currencyForm = form(this.formModel);
 
-  displayCurrency = computed(() => {
-    const val = this.currencyForm.currency().value();
-    const currency = this.currencies.find((c) => c.label === val);
-    return currency ? currency.symbol : '$';
-  });
+  readonly selectedCurrency = computed(() =>
+    this.currencies.find(
+      (c) => c.value === this.currencyForm.currency().value(),
+    ),
+  );
 
   currencies = [
     { value: 'usd', label: 'USD', symbol: '$' },

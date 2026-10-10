@@ -9,20 +9,21 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { SC_SELECT } from './select-tokens';
 
 @Component({
   selector: 'div[scSelectItem]',
-  imports: [],
   template: `
     <ng-content />
   `,
   hostDirectives: [
     {
       directive: Option,
-      inputs: ['value', 'label'],
+      inputs: ['value', 'label', 'disabled'],
     },
   ],
   host: {
+    'data-slot': 'select-item',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -30,23 +31,9 @@ import { cn } from '../../utils';
 export class ScSelectItem {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly option = inject(Option);
+  private readonly select = inject(SC_SELECT);
+  private readonly option = inject<Option<string>>(Option);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-
-  readonly itemValue = computed(() => this.option.value());
-  readonly itemLabel = computed(() => this.option.label() || '');
-
-  scrollIntoView() {
-    this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
-  }
-
-  constructor() {
-    effect(() => {
-      if (this.option.active()) {
-        this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
-      }
-    });
-  }
 
   protected readonly class = computed(() =>
     cn(
@@ -58,4 +45,20 @@ export class ScSelectItem {
       this.classInput(),
     ),
   );
+
+  constructor() {
+    effect(() => {
+      const label =
+        this.option.label() ||
+        this.elementRef.nativeElement.textContent?.trim() ||
+        '';
+      this.select.registerLabel(this.option.value(), label);
+    });
+
+    effect(() => {
+      if (this.option.active()) {
+        this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  }
 }

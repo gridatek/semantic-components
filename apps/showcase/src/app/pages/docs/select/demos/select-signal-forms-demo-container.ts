@@ -19,24 +19,21 @@ import { SelectSignalFormsDemo } from './select-signal-forms-demo';
 })
 export class SelectSignalFormsDemoContainer {
   readonly code = `import { JsonPipe } from '@angular/common';
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScField,
-  ScInputGroup,
-  ScInputGroupAddon,
   ScLabel,
   ScSelect,
-  ScSelectDisplayValue,
   ScSelectIcon,
-  ScSelectInput,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemLabel,
   ScSelectList,
-  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -48,18 +45,15 @@ interface FormModel {
   selector: 'app-select-signal-forms-demo',
   imports: [
     ScField,
-    ScInputGroup,
-    ScInputGroupAddon,
     ScLabel,
     ScSelect,
-    ScSelectDisplayValue,
     ScSelectItem,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectOrigin,
-    ScSelectInput,
     ScSelectIcon,
+    ScSelectTrigger,
+    ScSelectValue,
     ScSelectItemIndicator,
     ScSelectItemLabel,
     SiChevronDownIcon,
@@ -73,20 +67,15 @@ interface FormModel {
       <div class="space-y-4">
         <div scField>
           <label scLabel>Fruit</label>
-          <div scSelect class="w-full">
-            <div scSelectOrigin>
-              <div scInputGroup>
-                <span scSelectDisplayValue>{{ displayValue() }}</span>
-                <input
-                  scSelectInput
-                  [formField]="fruitForm.fruit"
-                  placeholder="Select a fruit"
-                  aria-label="Fruit dropdown"
-                />
-                <div scInputGroupAddon align="inline-end">
-                  <svg scSelectIcon siChevronDownIcon></svg>
-                </div>
-              </div>
+          <div
+            scSelect
+            class="w-full"
+            [formField]="fruitForm.fruit"
+            placeholder="Select a fruit"
+          >
+            <div scSelectTrigger aria-label="Fruit">
+              <span scSelectValue></span>
+              <svg scSelectIcon siChevronDownIcon></svg>
             </div>
             <ng-template scSelectPortal>
               <div scSelectPopup>
@@ -114,8 +103,6 @@ interface FormModel {
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectSignalFormsDemo {
-  displayValue = computed(() => this.fruitForm.fruit().value());
-
   readonly fruits = ['Apple', 'Banana', 'Orange', 'Mango', 'Pineapple'];
 
   readonly formModel = signal<FormModel>({

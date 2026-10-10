@@ -22,20 +22,17 @@ export class SelectDemoContainer {
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
-  ScInputGroup,
-  ScInputGroupAddon,
   ScSelect,
-  ScSelectDisplayValue,
   ScSelectIcon,
-  ScSelectInput,
   ScSelectItem,
   ScSelectItemIcon,
   ScSelectItemIndicator,
   ScSelectItemLabel,
   ScSelectList,
-  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
 } from '@semantic-components/ui';
 import {
   SiBookIcon,
@@ -57,17 +54,12 @@ interface FormModel {
 @Component({
   selector: 'app-select-demo',
   imports: [
-    ScInputGroup,
-    ScInputGroupAddon,
     ScSelect,
-    ScSelectDisplayValue,
     ScSelectPopup,
     ScSelectItemIcon,
     ScSelectList,
     ScSelectItem,
     ScSelectPortal,
-    ScSelectOrigin,
-    ScSelectInput,
     SiBookIcon,
     SiBriefcaseIcon,
     SiClockIcon,
@@ -78,6 +70,8 @@ interface FormModel {
     SiUserIcon,
     NgTemplateOutlet,
     ScSelectIcon,
+    ScSelectTrigger,
+    ScSelectValue,
     ScSelectItemIndicator,
     ScSelectItemLabel,
     SiChevronDownIcon,
@@ -87,27 +81,22 @@ interface FormModel {
   ],
   template: \`
     <form [formRoot]="selectForm">
-      <div scSelect class="w-48">
-        <div scSelectOrigin>
-          <div scInputGroup>
-            @if (displayIcon(); as icon) {
-              <div scInputGroupAddon align="inline-start">
-                <ng-container
-                  *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-                ></ng-container>
-              </div>
+      <div
+        scSelect
+        class="w-48"
+        [formField]="selectForm.category"
+        placeholder="Select a category"
+      >
+        <div scSelectTrigger aria-label="Category">
+          <span scSelectValue>
+            @if (selectedOption(); as option) {
+              <ng-container
+                *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+              ></ng-container>
+              {{ option.label }}
             }
-            <span scSelectDisplayValue>{{ displayValue() }}</span>
-            <input
-              scSelectInput
-              [formField]="selectForm.category"
-              placeholder="Select a category"
-              aria-label="Category dropdown"
-            />
-            <div scInputGroupAddon align="inline-end">
-              <svg scSelectIcon siChevronDownIcon></svg>
-            </div>
-          </div>
+          </span>
+          <svg scSelectIcon siChevronDownIcon></svg>
         </div>
         <ng-template scSelectPortal>
           <div scSelectPopup>
@@ -158,7 +147,7 @@ interface FormModel {
 
     <div class="bg-muted mt-4 w-48 rounded-md p-4">
       <p class="text-sm">Selected value: {{ selectForm.category().value() }}</p>
-      <p class="text-sm">Display value: {{ displayValue() }}</p>
+      <p class="text-sm">Display value: {{ selectedOption()?.label }}</p>
     </div>
   \`,
   host: { class: 'flex w-full flex-col items-center' },
@@ -168,13 +157,9 @@ export class SelectDemo {
   readonly formModel = signal<FormModel>({ category: '' });
   readonly selectForm = form(this.formModel);
 
-  displayValue = computed(() => this.selectForm.category().value());
-
-  displayIcon = computed(() => {
-    const label = this.selectForm.category().value();
-    const option = this.options.find((o) => o.label === label);
-    return option ? option.icon : '';
-  });
+  readonly selectedOption = computed(() =>
+    this.options.find((o) => o.value === this.selectForm.category().value()),
+  );
 
   options = [
     { value: 'important', label: 'Important', icon: 'tag' },

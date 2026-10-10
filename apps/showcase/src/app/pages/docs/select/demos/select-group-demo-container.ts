@@ -18,25 +18,22 @@ import { SelectGroupDemo } from './select-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
-  ScInputGroup,
-  ScInputGroupAddon,
   ScSelect,
-  ScSelectDisplayValue,
   ScSelectGroup,
   ScSelectGroupLabel,
   ScSelectIcon,
-  ScSelectInput,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemLabel,
   ScSelectList,
-  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
   ScSelectSeparator,
+  ScSelectTrigger,
+  ScSelectValue,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -47,20 +44,17 @@ interface FormModel {
 @Component({
   selector: 'app-select-group-demo',
   imports: [
-    ScInputGroup,
-    ScInputGroupAddon,
     ScSelect,
-    ScSelectDisplayValue,
     ScSelectGroup,
     ScSelectGroupLabel,
     ScSelectItem,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectOrigin,
     ScSelectSeparator,
     ScSelectIcon,
-    ScSelectInput,
+    ScSelectTrigger,
+    ScSelectValue,
     ScSelectItemIndicator,
     ScSelectItemLabel,
     SiChevronDownIcon,
@@ -70,20 +64,10 @@ interface FormModel {
   ],
   template: \`
     <form [formRoot]="foodForm">
-      <div scSelect>
-        <div scSelectOrigin>
-          <div scInputGroup>
-            <span scSelectDisplayValue>{{ displayValue() }}</span>
-            <input
-              scSelectInput
-              [formField]="foodForm.food"
-              placeholder="Select a food"
-              aria-label="Food dropdown"
-            />
-            <div scInputGroupAddon align="inline-end">
-              <svg scSelectIcon siChevronDownIcon></svg>
-            </div>
-          </div>
+      <div scSelect [formField]="foodForm.food" placeholder="Select a food">
+        <div scSelectTrigger aria-label="Food">
+          <span scSelectValue></span>
+          <svg scSelectIcon siChevronDownIcon></svg>
         </div>
         <ng-template scSelectPortal>
           <div scSelectPopup>
@@ -131,7 +115,5 @@ interface FormModel {
 export class SelectGroupDemo {
   readonly formModel = signal<FormModel>({ food: '' });
   readonly foodForm = form(this.formModel);
-
-  displayValue = computed(() => this.foodForm.food().value());
 }`;
 }

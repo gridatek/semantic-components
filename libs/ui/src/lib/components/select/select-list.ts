@@ -4,47 +4,32 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  contentChildren,
+  effect,
   inject,
   input,
+  untracked,
 } from '@angular/core';
 import { bindInput, cn } from '../../utils';
-import { ScSelectItem } from './select-item';
+import { SC_SELECT } from './select-tokens';
 
 @Component({
   selector: 'div[scSelectList]',
-  imports: [],
   template: `
     <ng-content />
   `,
   hostDirectives: [Listbox, ComboboxWidget],
   host: {
+    'data-slot': 'select-list',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSelectList {
-  private readonly listbox = inject(Listbox);
+  private readonly select = inject(SC_SELECT);
+  private readonly listbox = inject<Listbox<string>>(Listbox);
   private readonly widget = inject(ComboboxWidget);
-  private readonly items = contentChildren(ScSelectItem, { descendants: true });
-  readonly values = computed(() => this.listbox.value());
+
   readonly classInput = input<string>('', { alias: 'class' });
-
-  setValues(values: unknown[]) {
-    this.listbox.value.set(values as never);
-  }
-
-  scrollToSelected() {
-    const value = this.listbox.value()?.[0];
-    if (value == null) return;
-    const item = this.items().find((i) => i.itemValue() === value);
-    item?.scrollIntoView();
-  }
-
-  labelForValue(value: unknown): string {
-    const item = this.items().find((i) => i.itemValue() === value);
-    return item?.itemLabel() ?? '';
-  }
 
   protected readonly class = computed(() =>
     cn(
@@ -54,6 +39,31 @@ export class ScSelectList {
   );
 
   constructor() {
+    // Focus stays on the trigger; the active option is announced through
+    // aria-activedescendant, and only Enter/Space/click selects.
+    bindInput(this.listbox.focusMode, 'activedescendant');
+    bindInput(this.listbox.selectionMode, 'explicit');
     bindInput(this.widget.activeDescendant, this.listbox.activeDescendant);
+
+    // select → listbox
+    effect(() => {
+      const value = this.select.value();
+      untracked(() => this.listbox.value.set(value === '' ? [] : [value]));
+    });
+
+    // listbox → select
+    effect(() => {
+      const [value] = this.listbox.value();
+      untracked(() => {
+        if (value !== undefined) {
+          if (value !== this.select.value()) this.select.select(value);
+        } else if (this.select.hasValue()) {
+          // Picking the current option toggles it off in a single-select
+          // listbox; a select keeps its value instead.
+          this.listbox.value.set([this.select.value()]);
+          this.select.close();
+        }
+      });
+    });
   }
 }

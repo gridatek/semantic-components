@@ -18,22 +18,19 @@ import { SelectDisabledDemo } from './select-disabled-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectDisabledDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { FormField, FormRoot, form } from '@angular/forms/signals';
+  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, FormRoot, disabled, form } from '@angular/forms/signals';
 import {
-  ScInputGroup,
-  ScInputGroupAddon,
   ScSelect,
-  ScSelectDisplayValue,
   ScSelectIcon,
-  ScSelectInput,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemLabel,
   ScSelectList,
-  ScSelectOrigin,
   ScSelectPopup,
   ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -44,17 +41,14 @@ interface FormModel {
 @Component({
   selector: 'app-select-disabled-demo',
   imports: [
-    ScInputGroup,
-    ScInputGroupAddon,
     ScSelect,
-    ScSelectDisplayValue,
     ScSelectItem,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
-    ScSelectOrigin,
     ScSelectIcon,
-    ScSelectInput,
+    ScSelectTrigger,
+    ScSelectValue,
     ScSelectItemIndicator,
     ScSelectItemLabel,
     SiChevronDownIcon,
@@ -64,20 +58,10 @@ interface FormModel {
   ],
   template: \`
     <form [formRoot]="fruitForm">
-      <div scSelect disabled>
-        <div scSelectOrigin>
-          <div scInputGroup>
-            <span scSelectDisplayValue>{{ displayValue() }}</span>
-            <input
-              scSelectInput
-              [formField]="fruitForm.fruit"
-              placeholder="Select a fruit"
-              aria-label="Fruit dropdown"
-            />
-            <div scInputGroupAddon align="inline-end">
-              <svg scSelectIcon siChevronDownIcon></svg>
-            </div>
-          </div>
+      <div scSelect [formField]="fruitForm.fruit" placeholder="Select a fruit">
+        <div scSelectTrigger aria-label="Fruit">
+          <span scSelectValue></span>
+          <svg scSelectIcon siChevronDownIcon></svg>
         </div>
         <ng-template scSelectPortal>
           <div scSelectPopup>
@@ -105,8 +89,8 @@ interface FormModel {
 })
 export class SelectDisabledDemo {
   readonly formModel = signal<FormModel>({ fruit: '' });
-  readonly fruitForm = form(this.formModel);
-
-  displayValue = computed(() => this.fruitForm.fruit().value());
+  readonly fruitForm = form(this.formModel, (schemaPath) => {
+    disabled(schemaPath.fruit);
+  });
 }`;
 }

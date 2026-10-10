@@ -1,9 +1,14 @@
 export { ScSelect } from './select';
-export { ScSelectDisplayValue } from './select-display-value';
+export {
+  SC_SELECT,
+  SC_SELECT_TRIGGER,
+  type ScSelectTriggerContext,
+} from './select-tokens';
+export { ScSelectTrigger } from './select-trigger';
+export { ScSelectValue } from './select-value';
 export { ScSelectItemIcon } from './select-item-icon';
-export { ScSelectOrigin } from './select-origin';
-export { ScSelectInput } from './select-input';
 export { ScSelectPortal } from './select-portal';
+export { ScSelectPortalOutlet } from './select-portal-outlet';
 export { ScSelectPopup } from './select-popup';
 export { ScSelectList } from './select-list';
 export { ScSelectItem } from './select-item';
