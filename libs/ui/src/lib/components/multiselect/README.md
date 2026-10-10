@@ -1,77 +1,47 @@
 # Multiselect
 
-Multi-selection dropdown with overlay popup. Built on `@angular/aria` primitives using a composable pattern with CDK overlay positioning.
+Multi-selection dropdown with an overlay popup. Built on the `@angular/aria` combobox pattern for a non-editable combobox: the trigger element itself is the combobox, focus stays on it, and the active option is announced through `aria-activedescendant`.
 
-## Architecture
+## Features
 
-1. **ScMultiselect** (root) — wraps `Combobox` (readonly), manages overlay via `ComboboxPopupContainer` + `cdkConnectedOverlay` with `usePopover: 'inline'`, exposes `values()` signal with persistence across overlay cycles
-2. **ScMultiselectOrigin** — styled container, serves as overlay positioning origin, projects consumer content
-3. **ScMultiselectPortal** — `ng-template` directive for projecting popup content into the overlay
-4. **ScMultiselectPopup** — popup container with enter/leave animations
-5. **ScMultiselectList** — wraps `Listbox` (hostDirective) with `multi` and `values` inputs
-6. **ScMultiselectItem** — wraps `Option` (hostDirective) with auto-scroll on active
+- Single tab stop; full keyboard navigation and typeahead
+- ARIA-compliant (`role="combobox"` trigger, `role="listbox"` + `aria-multiselectable` popup)
+- Signal Forms control — bind `[formField]` directly on `scMultiselect` (`string[]`)
+- The popup stays open while toggling options
+- Overlay positioning with CDK (`usePopover: 'inline'`), flips above when there is no room below
+- Customizable styling via `class` input on every part
+- `exportAs: 'scMultiselect'` for direct template access
 
 ## Components
 
-| Component                    | Selector                           | Aria Primitive             | Purpose                                             |
-| ---------------------------- | ---------------------------------- | -------------------------- | --------------------------------------------------- |
-| `ScMultiselect`              | `div[scMultiselect]`               | `Combobox` (hostDirective) | Root container + overlay wiring + value persistence |
-| `ScMultiselectOrigin`        | `div[scMultiselectOrigin]`         | —                          | Styled container, overlay positioning origin        |
-| `ScMultiselectInput`         | `input[scMultiselectInput]`        | `ComboboxInput`            | Hidden input for combobox integration               |
-| `ScMultiselectDisplayValue`  | `[scMultiselectDisplayValue]`      | —                          | Display area for selected value text                |
-| `ScMultiselectIcon`          | `svg[scMultiselectIcon]`           | —                          | Chevron icon styling in trigger                     |
-| `ScMultiselectPortal`        | `ng-template[scMultiselectPortal]` | —                          | Content projection into overlay                     |
-| `ScMultiselectPopup`         | `div[scMultiselectPopup]`          | —                          | Popup container with enter/leave animations         |
-| `ScMultiselectList`          | `div[scMultiselectList]`           | `Listbox` (hostDirective)  | Scrollable options list                             |
-| `ScMultiselectItem`          | `div[scMultiselectItem]`           | `Option` (hostDirective)   | Individual option with auto-scroll                  |
-| `ScMultiselectItemIndicator` | `svg[scMultiselectItemIndicator]`  | —                          | Checkmark (visible when selected)                   |
-| `ScMultiselectItemLabel`     | `[scMultiselectItemLabel]`         | —                          | Item label text styling                             |
-
-### ScMultiselect
-
-**Signals:**
-
-| Signal     | Type        | Description                            |
-| ---------- | ----------- | -------------------------------------- |
-| `values()` | `unknown[]` | Currently selected values from listbox |
-
-### ScMultiselectList
-
-Exposes from `Listbox` hostDirective:
-
-| Input/Output | Type        | Description               |
-| ------------ | ----------- | ------------------------- |
-| `[(values)]` | `unknown[]` | Selected values           |
-| `[multi]`    | `boolean`   | Enable multiple selection |
-
-### ScMultiselectItem
-
-Exposes from `Option` hostDirective:
-
-| Input        | Type      | Description                |
-| ------------ | --------- | -------------------------- |
-| `[value]`    | `unknown` | Option value (required)    |
-| `[label]`    | `string`  | Option label for typeahead |
-| `[disabled]` | `boolean` | Disable this option        |
+| Component                    | Selector                           | Aria Primitive                | Purpose                                                        |
+| ---------------------------- | ---------------------------------- | ----------------------------- | -------------------------------------------------------------- |
+| `ScMultiselect`              | `div[scMultiselect]`               | `ComboboxPopup` (in template) | Root; the form control (`FormValueControl<string[]>`), overlay |
+| `ScMultiselectTrigger`       | `[scMultiselectTrigger]`           | `Combobox` (hostDirective)    | The focusable combobox, overlay origin                         |
+| `ScMultiselectValue`         | `[scMultiselectValue]`             | —                             | Summary of the selection, or the placeholder                   |
+| `ScMultiselectIcon`          | `svg[scMultiselectIcon]`           | —                             | Chevron in the trigger, rotates while open                     |
+| `ScMultiselectPortal`        | `ng-template[scMultiselectPortal]` | —                             | Marks the lazy popup content                                   |
+| `ScMultiselectPopup`         | `div[scMultiselectPopup]`          | —                             | Popup container with enter/leave animations                    |
+| `ScMultiselectList`          | `div[scMultiselectList]`           | `Listbox` + `ComboboxWidget`  | Scrollable options list (always `multi`)                       |
+| `ScMultiselectItem`          | `div[scMultiselectItem]`           | `Option` (hostDirective)      | Individual option with auto-scroll                             |
+| `ScMultiselectItemIndicator` | `svg[scMultiselectItemIndicator]`  | —                             | Checkmark (visible when selected)                              |
+| `ScMultiselectItemLabel`     | `[scMultiselectItemLabel]`         | —                             | Item label text styling                                        |
 
 ## Usage
 
 ```html
-<div scMultiselect>
-  <div scMultiselectOrigin>
-    <span scMultiselectDisplayValue>
-      <span>{{ displayValue() }}</span>
-    </span>
-    <input scMultiselectInput placeholder="Select a label" aria-label="Label dropdown" />
-    <svg scMultiselectIcon siChevronDownIcon aria-hidden="true"></svg>
+<div scMultiselect [formField]="form.labels" placeholder="Select labels">
+  <div scMultiselectTrigger aria-label="Labels">
+    <span scMultiselectValue></span>
+    <svg scMultiselectIcon siChevronDownIcon></svg>
   </div>
   <ng-template scMultiselectPortal>
     <div scMultiselectPopup>
-      <div scMultiselectList multi>
+      <div scMultiselectList>
         @for (option of options; track option.value) {
         <div scMultiselectItem [value]="option.value" [label]="option.label">
           <span scMultiselectItemLabel>{{ option.label }}</span>
-          <svg scMultiselectItemIndicator siCheckIcon aria-hidden="true"></svg>
+          <svg scMultiselectItemIndicator siCheckIcon></svg>
         </div>
         }
       </div>
@@ -80,36 +50,104 @@ Exposes from `Option` hostDirective:
 </div>
 ```
 
-```typescript
-private readonly multiselect = viewChild.required(ScMultiselect);
+Without Signal Forms, use two-way binding: `<div scMultiselect [(value)]="labels">`.
 
-displayValue = computed(() => {
-  const values = this.multiselect().values();
-  if (values.length === 0) return 'Select...';
-  if (values.length === 1) return values[0];
-  return `${values[0]} + ${values.length - 1} more`;
+### Custom value rendering
+
+`ScMultiselectValue` shows `"<first label> + N more"` by default. Project content to render the selection yourself (shown only when something is selected; the placeholder is used otherwise):
+
+```html
+<span scMultiselectValue>
+  @for (label of multiselect.selectedLabels(); track label) {
+  <span scBadge>{{ label }}</span>
+  }
+</span>
+```
+
+> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default summary uses the raw values. If an initial selection must show labels immediately, project the content.
+
+## Signal Forms
+
+`ScMultiselect` implements `FormValueControl<string[]>`. Put `[formField]` on `scMultiselect` and declare constraints in the `form()` schema:
+
+```typescript
+interface FormModel {
+  labels: string[];
+}
+
+readonly labelsForm = form(this.model, (p) => {
+  required(p.labels);
 });
 ```
 
-## Consumer Responsibilities
+`required` → `aria-required`, `invalid` (once touched) → `aria-invalid`, `disabled` → `aria-disabled` on the trigger. The control is marked touched when focus leaves the trigger.
 
-- **Display text** — compute from `multiselect().values()` and your options array
-- **Selected values** — manage via `[(values)]` on `ScMultiselectList`
-- **Icons** — project custom icons into trigger value and items via `<ng-content>`
+## Keyboard Navigation
 
-## Features
+Focus always stays on the trigger.
 
-- Multiple selection via `Listbox` `multi` input
-- Overlay positioning with fallback (opens above when insufficient space below)
-- Value persistence across overlay open/close cycles
-- Active item auto-scroll into view
-- Enter/leave animations on popup
-- Checkmark indicator for selected options
-- Full keyboard navigation via `@angular/aria` primitives
+| Key                  | Closed     | Open                                  |
+| -------------------- | ---------- | ------------------------------------- |
+| `Enter` / `Space`    | Open       | Toggle the active option (stays open) |
+| `ArrowDown`          | Open       | Next option                           |
+| `ArrowUp`            | —          | Previous option                       |
+| `Home` / `End`       | —          | First / last option                   |
+| Printable characters | —          | Typeahead to the matching option      |
+| `Escape`             | —          | Close                                 |
+| `Tab`                | Move focus | Close and move focus                  |
 
-## Accessibility
+## API Reference
 
-- `@angular/aria` `Combobox`, `ComboboxInput`, `Listbox`, and `Option` handle all ARIA attributes
-- Keyboard navigation (arrow keys, enter, escape) managed by aria primitives
-- `aria-selected` on options, `aria-expanded` on trigger
-- Overlay uses CDK connected overlay with `usePopover: 'inline'` for proper positioning
+### ScMultiselect
+
+| Member             | Type               | Description                                      |
+| ------------------ | ------------------ | ------------------------------------------------ |
+| `value`            | `model<string[]>`  | Selected option values                           |
+| `placeholder`      | `input<string>`    | Shown by `ScMultiselectValue` when none selected |
+| `disabled`         | `input<boolean>`   | Disables the multiselect                         |
+| `readonly`         | `input<boolean>`   | Prevents opening/changing                        |
+| `required`         | `input<boolean>`   | Sets `aria-required` on the trigger              |
+| `invalid`          | `input<boolean>`   | Sets `aria-invalid` on the trigger               |
+| `touch`            | `output<void>`     | Emitted when focus leaves the trigger            |
+| `open()`           | `Signal<boolean>`  | Whether the popup is open                        |
+| `selectedLabels()` | `Signal<string[]>` | Labels of the selected options (or their values) |
+| `close()`          | `void`             | Close and refocus the trigger                    |
+| `focus()`          | `void`             | Focus the trigger                                |
+| `class`            | `input<string>`    | Additional CSS classes                           |
+
+### ScMultiselectTrigger
+
+| Property | Type                | Description            |
+| -------- | ------------------- | ---------------------- |
+| `size`   | `'default' \| 'sm'` | Trigger height         |
+| `class`  | `string`            | Additional CSS classes |
+
+### ScMultiselectItem
+
+| Property   | Type      | Description                                             |
+| ---------- | --------- | ------------------------------------------------------- |
+| `value`    | `string`  | The option's value                                      |
+| `label`    | `string`  | Label used for display and typeahead (defaults to text) |
+| `disabled` | `boolean` | Disables the option                                     |
+| `class`    | `string`  | Additional CSS classes                                  |
+
+All other parts accept a `class` input only.
+
+## Architecture
+
+```
+ScMultiselect (form control, exportAs: 'scMultiselect', provides SC_MULTISELECT)
+├── ScMultiselectTrigger (Combobox host, role=combobox) [projected]
+│   ├── ScMultiselectValue (summary or placeholder)
+│   └── ScMultiselectIcon (chevron)
+└── ScMultiselectPortal (ng-template, rendered inside ngComboboxPopup via ScSelectPortalOutlet)
+    └── ScMultiselectPopup
+        └── ScMultiselectList (Listbox multi + ComboboxWidget; activedescendant focus, explicit selection)
+            └── ScMultiselectItem (Option) → ScMultiselectItemLabel, ScMultiselectItemIndicator
+```
+
+The trigger shares its base styles with `ScSelectTrigger` (`selectTriggerStyles`), and the portal is rendered with the select's `ScSelectPortalOutlet` so `ComboboxWidget` can resolve `COMBOBOX_POPUP`.
+
+## Known issue
+
+`@angular/aria` 22.2.1 forwards keys from the trigger to the list once per render (`Combobox` relays through an `afterRenderEffect`). Keys arriving within the same frame are coalesced and only the last one is applied. This does not affect normal typing, but scripted input or barcode scanners can lose keystrokes. The same applies to `ScSelect`.

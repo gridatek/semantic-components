@@ -8,6 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
+import { SC_MULTISELECT } from './multiselect-tokens';
 
 @Directive({
   selector: 'div[scMultiselectItem]',
@@ -18,16 +19,26 @@ import { cn } from '../../utils';
     },
   ],
   host: {
+    'data-slot': 'multiselect-item',
     '[class]': 'class()',
   },
 })
 export class ScMultiselectItem {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly option = inject(Option);
+  private readonly multiselect = inject(SC_MULTISELECT);
+  private readonly option = inject<Option<string>>(Option);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   constructor() {
+    effect(() => {
+      const label =
+        this.option.label() ||
+        this.elementRef.nativeElement.textContent?.trim() ||
+        '';
+      this.multiselect.registerLabel(this.option.value(), label);
+    });
+
     effect(() => {
       if (this.option.active()) {
         this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
@@ -37,7 +48,7 @@ export class ScMultiselectItem {
 
   protected readonly class = computed(() =>
     cn(
-      'hover:bg-accent data-[active=true]:bg-accent aria-selected:bg-accent/50 aria-selected:text-accent-foreground flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 text-sm outline-none [&_svg:not([class*=size-])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+      'hover:bg-accent data-[active=true]:bg-accent aria-selected:bg-accent/50 aria-selected:text-accent-foreground flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 text-sm outline-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg:not([class*=size-])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0',
       this.classInput(),
     ),
   );

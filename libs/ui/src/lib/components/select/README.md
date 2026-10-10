@@ -185,3 +185,7 @@ ScSelect (form control, exportAs: 'scSelect', provides SC_SELECT)
 - `@angular/aria/listbox` - Listbox and option behavior
 - `@angular/cdk/overlay` - Overlay positioning
 - `@angular/forms/signals` - `FormValueControl` contract
+
+## Known issue
+
+`@angular/aria` 22.2.1 forwards keys from the trigger to the list once per render (`Combobox` relays through an `afterRenderEffect`). Keys arriving within the same frame are coalesced and only the last one is applied. This does not affect normal typing, but scripted input or barcode scanners can lose keystrokes.

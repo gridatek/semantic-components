@@ -19,29 +19,21 @@ import { BasicMultiselectDemo } from './basic-multiselect-demo';
 })
 export class BasicMultiselectDemoContainer {
   readonly code = `import { JsonPipe, NgTemplateOutlet } from '@angular/common';
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScField,
-  ScInputGroup,
-  ScInputGroupAddon,
   ScLabel,
   ScMultiselect,
-  ScMultiselectDisplayValue,
-  ScMultiselectInput,
+  ScMultiselectIcon,
   ScMultiselectItem,
   ScMultiselectItemIndicator,
   ScMultiselectItemLabel,
   ScMultiselectList,
-  ScMultiselectOrigin,
   ScMultiselectPopup,
   ScMultiselectPortal,
+  ScMultiselectTrigger,
+  ScMultiselectValue,
 } from '@semantic-components/ui';
 import {
   SiBookOpenIcon,
@@ -57,26 +49,24 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 interface FormModel {
-  labels: string;
+  labels: string[];
 }
 
 @Component({
   selector: 'app-basic-multiselect-demo',
   imports: [
     ScField,
-    ScInputGroup,
-    ScInputGroupAddon,
     ScLabel,
     ScMultiselect,
-    ScMultiselectDisplayValue,
-    ScMultiselectInput,
-    ScMultiselectOrigin,
+    ScMultiselectIcon,
     ScMultiselectItem,
     ScMultiselectItemIndicator,
     ScMultiselectItemLabel,
     ScMultiselectList,
     ScMultiselectPopup,
     ScMultiselectPortal,
+    ScMultiselectTrigger,
+    ScMultiselectValue,
     SiBookOpenIcon,
     SiBriefcaseIcon,
     SiCheckIcon,
@@ -97,35 +87,26 @@ interface FormModel {
       <div class="space-y-4">
         <div scField>
           <label scLabel>Labels</label>
-          <div scMultiselect class="w-full">
-            <div scMultiselectOrigin>
-              <div scInputGroup>
-                <span scMultiselectDisplayValue>
-                  @if (displayIcon(); as icon) {
-                    <ng-container
-                      *ngTemplateOutlet="iconTmpl; context: { icon: icon }"
-                    ></ng-container>
-                  }
-                  <span>{{ displayValue() }}</span>
-                </span>
-                <input
-                  scMultiselectInput
-                  [formField]="labelsForm.labels"
-                  placeholder="Select a label"
-                  aria-label="Label dropdown"
-                />
-                <div scInputGroupAddon align="inline-end">
-                  <svg
-                    siChevronDownIcon
-                    aria-hidden="true"
-                    class="opacity-50"
-                  ></svg>
-                </div>
-              </div>
+          <div
+            scMultiselect
+            class="w-full"
+            [formField]="labelsForm.labels"
+            placeholder="Select labels"
+          >
+            <div scMultiselectTrigger aria-label="Labels">
+              <span scMultiselectValue>
+                @if (firstOption(); as option) {
+                  <ng-container
+                    *ngTemplateOutlet="iconTmpl; context: { icon: option.icon }"
+                  ></ng-container>
+                  {{ summary() }}
+                }
+              </span>
+              <svg scMultiselectIcon siChevronDownIcon></svg>
             </div>
             <ng-template scMultiselectPortal>
               <div scMultiselectPopup>
-                <div scMultiselectList multi>
+                <div scMultiselectList>
                   @for (option of options; track option.value) {
                     <div
                       scMultiselectItem
@@ -192,32 +173,21 @@ interface FormModel {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicMultiselectDemo {
-  private readonly multiselect = viewChild.required(ScMultiselect);
-
-  displayIcon = computed(() => {
-    const values = this.multiselect().values();
-    const option = this.options.find((o) => o.value === values[0]);
-    return option ? option.icon : '';
-  });
-
-  displayValue = computed(() => {
-    const values = this.multiselect().values();
-    if (values.length === 0) {
-      return 'Select a label';
-    }
-    const firstLabel =
-      this.options.find((o) => o.value === values[0])?.label ?? values[0];
-    if (values.length === 1) {
-      return firstLabel;
-    }
-    return \`\${firstLabel} + \${values.length - 1} more\`;
-  });
-
   readonly formModel = signal<FormModel>({
-    labels: '',
+    labels: [],
   });
 
   readonly labelsForm = form(this.formModel);
+
+  readonly firstOption = computed(() =>
+    this.options.find((o) => o.value === this.labelsForm.labels().value()[0]),
+  );
+
+  readonly summary = computed(() => {
+    const count = this.labelsForm.labels().value().length;
+    const label = this.firstOption()?.label ?? '';
+    return count > 1 ? \`\${label} + \${count - 1} more\` : label;
+  });
 
   options = [
     { value: 'important', label: 'Important', icon: 'tag' },

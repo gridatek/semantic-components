@@ -1,25 +1,28 @@
 import {
   Directive,
   Injector,
+  type TemplateRef,
   ViewContainerRef,
   effect,
   inject,
   input,
 } from '@angular/core';
-import type { ScSelectPortal } from './select-portal';
 
 /**
- * Renders an `ScSelectPortal` inside the select's `ngComboboxPopup`.
+ * Renders a portal (`ScSelectPortal`, `ScMultiselectPortal`, …) inside a
+ * combobox's `ngComboboxPopup`.
  *
  * The portal template is declared by the consumer, so its element injector
  * never sees the popup. Passing this outlet's injector lets `ComboboxWidget`
- * (on `scSelectList`) resolve `COMBOBOX_POPUP`.
+ * (on the list) resolve `COMBOBOX_POPUP`.
  */
 @Directive({
   selector: 'ng-container[scSelectPortalOutlet]',
 })
 export class ScSelectPortalOutlet {
-  readonly portal = input.required<ScSelectPortal>({
+  readonly portal = input.required<{
+    readonly templateRef: TemplateRef<unknown>;
+  }>({
     alias: 'scSelectPortalOutlet',
   });
 
