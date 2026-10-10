@@ -1,24 +1,17 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  model,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCombobox,
-  ScComboboxDialog,
-  ScComboboxDisplayValue,
   ScComboboxEmpty,
-  ScComboboxInput,
+  ScComboboxIcon,
   ScComboboxItem,
   ScComboboxItemLabel,
   ScComboboxList,
   ScComboboxListContainer,
-  ScComboboxOrigin,
-  ScComboboxPopupContainer,
-  ScComboboxSearchInput,
-  ScComboboxSearchPanel,
+  ScComboboxPopup,
+  ScComboboxPortal,
+  ScComboboxSearch,
+  ScComboboxTrigger,
+  ScComboboxValue,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
@@ -91,18 +84,17 @@ const COUNTRIES: Country[] = [
   selector: 'app-country-selector-phone-input-demo',
   imports: [
     ScCombobox,
-    ScComboboxDialog,
-    ScComboboxDisplayValue,
-    ScComboboxInput,
+    ScComboboxEmpty,
+    ScComboboxIcon,
     ScComboboxItem,
     ScComboboxItemLabel,
     ScComboboxList,
     ScComboboxListContainer,
-    ScComboboxPopupContainer,
-    ScComboboxSearchInput,
-    ScComboboxSearchPanel,
-    ScComboboxEmpty,
-    ScComboboxOrigin,
+    ScComboboxPopup,
+    ScComboboxPortal,
+    ScComboboxSearch,
+    ScComboboxTrigger,
+    ScComboboxValue,
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
@@ -111,71 +103,71 @@ const COUNTRIES: Country[] = [
   ],
   template: `
     <div class="max-w-lg">
-      <div scCombobox #cb="scCombobox" class="w-full">
+      <div
+        scCombobox
+        class="border-input flex h-8 w-full items-center rounded-lg border"
+        [(value)]="country"
+      >
         <div
-          scComboboxOrigin
-          class="border-input flex h-8 items-center rounded-lg border"
+          scComboboxTrigger
+          class="w-auto shrink-0 rounded-e-none border-0"
+          aria-label="Country"
         >
-          <div scInputGroup class="w-auto shrink-0 border-0">
-            <span
-              scComboboxDisplayValue
-              [displayValueFn]="countryDisplayFn"
-            ></span>
-            <input scComboboxInput />
-            <div scInputGroupAddon align="inline-end">
-              <svg siChevronDownIcon class="opacity-50"></svg>
-            </div>
-          </div>
-          <div class="bg-border h-full w-px shrink-0"></div>
-          <input
-            scInput
-            class="rounded-l-none border-0"
-            type="tel"
-            inputmode="tel"
-            placeholder="Phone number"
-          />
+          <span scComboboxValue>
+            @if (selectedCountry(); as c) {
+              {{ c.code }} {{ c.dialCode }}
+            }
+          </span>
+          <svg scComboboxIcon siChevronDownIcon></svg>
         </div>
-        <ng-template scComboboxPopupContainer [combobox]="cb.comboboxRef">
-          <dialog scComboboxDialog class="min-w-72">
-            <div scComboboxSearchPanel #sp="scComboboxSearchPanel">
-              <div class="p-1 pb-0">
-                <div
-                  scInputGroup
-                  class="border-input/30 bg-input/30 h-8 rounded-lg shadow-none"
-                >
-                  <div scInputGroupAddon align="inline-start">
-                    <svg siSearchIcon class="opacity-50"></svg>
-                  </div>
-                  <input
-                    scInput
-                    scComboboxSearchInput
-                    placeholder="Search countries..."
-                    [(value)]="searchString"
-                  />
-                </div>
+        <div class="bg-border h-full w-px shrink-0"></div>
+        <input
+          scInput
+          class="rounded-s-none border-0"
+          type="tel"
+          inputmode="tel"
+          placeholder="Phone number"
+          aria-label="Phone number"
+        />
+        <ng-template scComboboxPortal>
+          <div scComboboxPopup class="min-w-72">
+            <div scInputGroup>
+              <div scInputGroupAddon align="inline-start">
+                <svg siSearchIcon class="opacity-50"></svg>
               </div>
-              <ng-template scComboboxListContainer [combobox]="sp.comboboxRef">
-                @if (filteredCountries().length === 0) {
-                  <div scComboboxEmpty>No countries found</div>
-                }
-                <div scComboboxList [(values)]="selectedCountries">
-                  @for (country of filteredCountries(); track country.code) {
-                    <div scComboboxItem [value]="country.code">
-                      <span scComboboxItemLabel class="flex items-center gap-2">
-                        <span class="text-muted-foreground w-7 text-xs">
-                          {{ country.code }}
-                        </span>
-                        <span class="flex-1 truncate">{{ country.name }}</span>
-                        <span class="text-muted-foreground text-xs">
-                          {{ country.dialCode }}
-                        </span>
-                      </span>
-                    </div>
-                  }
-                </div>
-              </ng-template>
+              <input
+                scInput
+                scComboboxSearch
+                aria-label="Search countries"
+                placeholder="Search countries..."
+                [(value)]="searchString"
+              />
             </div>
-          </dialog>
+            <ng-template scComboboxListContainer>
+              @if (filteredCountries().length === 0) {
+                <div scComboboxEmpty>No countries found</div>
+              }
+              <div scComboboxList>
+                @for (country of filteredCountries(); track country.code) {
+                  <div
+                    scComboboxItem
+                    [value]="country.code"
+                    [label]="country.name"
+                  >
+                    <span scComboboxItemLabel class="flex items-center gap-2">
+                      <span class="text-muted-foreground w-7 text-xs">
+                        {{ country.code }}
+                      </span>
+                      <span class="flex-1 truncate">{{ country.name }}</span>
+                      <span class="text-muted-foreground text-xs">
+                        {{ country.dialCode }}
+                      </span>
+                    </span>
+                  </div>
+                }
+              </div>
+            </ng-template>
+          </div>
         </ng-template>
       </div>
     </div>
@@ -185,13 +177,11 @@ const COUNTRIES: Country[] = [
 })
 export class CountrySelectorPhoneInputDemo {
   protected readonly searchString = signal('');
-  protected readonly selectedCountries = signal<string[]>([COUNTRIES[0].code]);
-  protected readonly phoneNumber = model<string>('');
+  protected readonly country = signal(COUNTRIES[0].code);
 
-  protected readonly countryDisplayFn = (value: unknown): string => {
-    const country = COUNTRIES.find((c) => c.code === value);
-    return country ? `${country.code} ${country.dialCode}` : '';
-  };
+  protected readonly selectedCountry = computed(() =>
+    COUNTRIES.find((c) => c.code === this.country()),
+  );
 
   protected readonly filteredCountries = computed(() => {
     const query = this.searchString().toLowerCase();

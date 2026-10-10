@@ -1,20 +1,20 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScCombobox,
   ScComboboxClear,
-  ScComboboxDialog,
-  ScComboboxDisplayValue,
   ScComboboxEmpty,
-  ScComboboxInput,
+  ScComboboxIcon,
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxItemLabel,
   ScComboboxList,
   ScComboboxListContainer,
-  ScComboboxOrigin,
-  ScComboboxPopupContainer,
-  ScComboboxSearchInput,
-  ScComboboxSearchPanel,
+  ScComboboxPopup,
+  ScComboboxPortal,
+  ScComboboxSearch,
+  ScComboboxTrigger,
+  ScComboboxValue,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
@@ -29,21 +29,21 @@ import {
 @Component({
   selector: 'app-combobox-demo',
   imports: [
+    FormField,
     ScCombobox,
-    ScComboboxSearchPanel,
-    ScComboboxListContainer,
     ScComboboxClear,
-    ScComboboxDialog,
-    ScComboboxDisplayValue,
     ScComboboxEmpty,
+    ScComboboxIcon,
     ScComboboxItem,
     ScComboboxItemIndicator,
     ScComboboxItemLabel,
-    ScComboboxSearchInput,
-    ScComboboxOrigin,
     ScComboboxList,
-    ScComboboxPopupContainer,
-    ScComboboxInput,
+    ScComboboxListContainer,
+    ScComboboxPopup,
+    ScComboboxPortal,
+    ScComboboxSearch,
+    ScComboboxTrigger,
+    ScComboboxValue,
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
@@ -54,75 +54,66 @@ import {
   ],
   host: { class: 'flex w-full justify-center' },
   template: `
-    <div scCombobox #cb="scCombobox" class="w-60">
-      <div scComboboxOrigin>
-        <div scInputGroup>
-          <span
-            scComboboxDisplayValue
-            [displayValueFn]="countryDisplayFn"
-          ></span>
-          <input
-            scComboboxInput
-            placeholder="Select a country..."
-            [value]="value()"
-          />
-          <button scComboboxClear aria-label="Clear selection">
-            <svg siXIcon></svg>
-          </button>
-          <div scInputGroupAddon align="inline-end">
-            <svg siChevronsUpDownIcon class="opacity-50"></svg>
-          </div>
-        </div>
+    <div
+      scCombobox
+      class="w-60"
+      [formField]="countryForm.country"
+      placeholder="Select a country..."
+    >
+      <div scComboboxTrigger aria-label="Country">
+        <span scComboboxValue></span>
+        <svg scComboboxIcon siChevronsUpDownIcon></svg>
       </div>
-      <ng-template scComboboxPopupContainer [combobox]="cb.comboboxRef">
-        <dialog scComboboxDialog>
-          <div scComboboxSearchPanel #sp="scComboboxSearchPanel">
-            <div class="p-1 pb-0">
-              <div scInputGroup>
-                <div scInputGroupAddon align="inline-start">
-                  <svg siSearchIcon></svg>
-                </div>
-                <input
-                  scInput
-                  scComboboxSearchInput
-                  placeholder="Search..."
-                  [(value)]="searchString"
-                />
-              </div>
+      <button scComboboxClear aria-label="Clear selection">
+        <svg siXIcon></svg>
+      </button>
+      <ng-template scComboboxPortal>
+        <div scComboboxPopup>
+          <div scInputGroup>
+            <div scInputGroupAddon align="inline-start">
+              <svg siSearchIcon></svg>
             </div>
-            <ng-template scComboboxListContainer [combobox]="sp.comboboxRef">
-              @if (options().length === 0) {
-                <div scComboboxEmpty>No results found</div>
-              }
-              <div scComboboxList [(values)]="selectedCountries">
-                @for (option of options(); track option.value) {
-                  <div scComboboxItem [value]="option" [label]="option.label">
-                    <span scComboboxItemLabel>{{ option.label }}</span>
-                    <svg siCheckIcon scComboboxItemIndicator></svg>
-                  </div>
-                }
-              </div>
-            </ng-template>
+            <input
+              scInput
+              scComboboxSearch
+              aria-label="Search countries"
+              placeholder="Search..."
+              [(value)]="searchString"
+            />
           </div>
-        </dialog>
+          <ng-template scComboboxListContainer>
+            @if (options().length === 0) {
+              <div scComboboxEmpty>No results found</div>
+            }
+            <div scComboboxList>
+              @for (option of options(); track option.value) {
+                <div
+                  scComboboxItem
+                  [value]="option.value"
+                  [label]="option.label"
+                >
+                  <span scComboboxItemLabel>{{ option.label }}</span>
+                  <svg siCheckIcon scComboboxItemIndicator></svg>
+                </div>
+              }
+            </div>
+          </ng-template>
+        </div>
       </ng-template>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
 export class ComboboxDemo {
-  value = signal('');
-  searchString = signal('');
-  selectedCountries = signal<unknown[]>([]);
-  options = computed(() =>
+  readonly formModel = signal({ country: '' });
+  readonly countryForm = form(this.formModel);
+
+  readonly searchString = signal('');
+  readonly options = computed(() =>
     ALL_COUNTRIES.filter((country) =>
       country.label.toLowerCase().startsWith(this.searchString().toLowerCase()),
     ),
   );
-
-  protected readonly countryDisplayFn = (value: unknown): string => {
-    return (value as { label: string }).label;
-  };
 }
 
 const ALL_COUNTRIES = [

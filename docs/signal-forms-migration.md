@@ -176,10 +176,10 @@ See [ScField + Signal Forms](./sc-field-signal-forms.md) for how `ScField`, `ScI
 
 ## Bindings That Are Not Forms
 
-Signal Forms covers form state. Component inputs that happen to be two-way (`model()` inputs such as `[(value)]` on `ScComboboxSearchInput`) are plain signal bindings and need no forms import at all:
+Signal Forms covers form state. Component inputs that happen to be two-way (`model()` inputs such as `[(value)]` on `ScComboboxSearch`) are plain signal bindings and need no forms import at all:
 
 ```html
-<input scComboboxSearchInput [(value)]="searchString" />
+<input scComboboxSearch [(value)]="searchString" />
 ```
 
 ```typescript
