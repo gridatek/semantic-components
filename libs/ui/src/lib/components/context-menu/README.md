@@ -95,7 +95,8 @@ Use `ScMenuPortal` inside a menu item to nest a submenu.
 
 ## Accessibility
 
-- The menu opens on the native `contextmenu` event (right-click or equivalent).
+- The menu opens on the native `contextmenu` event: right-click, or — for keyboard users — the Menu key or Shift+F10 on the focused trigger. `scContextMenuTrigger` is focusable (`tabindex="0"`, focus ring) for this; a keyboard-opened menu appears at the trigger's centre.
+- When the menu closes, focus returns to the element that had it when the menu opened (unless the user has moved focus elsewhere).
 - Focus is moved to the first menu item when the menu opens.
 - The menu closes when focus leaves the context menu container (`focusout`).
 - Keyboard navigation and ARIA roles are handled by the underlying `ScMenu` component.

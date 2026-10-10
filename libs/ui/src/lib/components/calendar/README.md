@@ -162,6 +162,9 @@ All views support full keyboard navigation powered by **Angular ARIA Grid**.
 
 - `←` `→` Navigate between days (auto-scrolls to prev/next month at edges)
 - `↑` `↓` Navigate between weeks
+- `Home` / `End` First / last day of the week
+- `PageUp` / `PageDown` Same day in the previous / next month (clamped to the month's length)
+- `Shift+PageUp` / `Shift+PageDown` Same day in the previous / next year
 - `Enter` / `Space` Select focused date
 - Click header to switch to Month View
 

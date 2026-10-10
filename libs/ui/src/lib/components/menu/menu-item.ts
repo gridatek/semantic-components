@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { cn, setInput } from '../../utils';
 import { ScMenuPortal } from './menu-portal';
+import { useDefaultSearchTerm } from './menu-search-term';
 
 @Component({
   selector: '[scMenuItem]',
@@ -71,6 +72,8 @@ export class ScMenuItem {
   );
 
   constructor() {
+    useDefaultSearchTerm(this.menuItem as MenuItem<unknown>);
+
     // Auto-connect submenu when ScMenu registers itself with the portal
     effect(() => {
       const menu = this.submenuPortal()?.menu();

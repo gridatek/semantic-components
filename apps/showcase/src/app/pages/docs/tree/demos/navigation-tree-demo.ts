@@ -30,32 +30,27 @@ import {
   ],
   template: `
     <div class="max-w-sm rounded-lg border p-4">
-      <ul scTree #tree="scTree">
-        <li
-          scTreeItem
-          [parent]="tree.tree"
-          value="getting-started"
-          [expanded]="true"
-        >
+      <ul scTree>
+        <li scTreeItem value="getting-started" [expanded]="true">
           <button scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <svg scTreeItemIcon siHouseIcon></svg>
             <span>Getting Started</span>
           </button>
           <ul scTreeItemGroup>
-            <li scTreeItem [parent]="tree.tree" value="introduction">
+            <li scTreeItem value="introduction">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Introduction</span>
               </button>
             </li>
-            <li scTreeItem [parent]="tree.tree" value="installation">
+            <li scTreeItem value="installation">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Installation</span>
               </button>
             </li>
-            <li scTreeItem [parent]="tree.tree" value="configuration">
+            <li scTreeItem value="configuration">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Configuration</span>
@@ -63,26 +58,26 @@ import {
             </li>
           </ul>
         </li>
-        <li scTreeItem [parent]="tree.tree" value="components">
+        <li scTreeItem value="components">
           <button scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <svg scTreeItemIcon siBookOpenIcon></svg>
             <span>Components</span>
           </button>
           <ul scTreeItemGroup>
-            <li scTreeItem [parent]="tree.tree" value="button">
+            <li scTreeItem value="button">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Button</span>
               </button>
             </li>
-            <li scTreeItem [parent]="tree.tree" value="input">
+            <li scTreeItem value="input">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Input</span>
               </button>
             </li>
-            <li scTreeItem [parent]="tree.tree" value="select">
+            <li scTreeItem value="select">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Select</span>
@@ -90,20 +85,20 @@ import {
             </li>
           </ul>
         </li>
-        <li scTreeItem [parent]="tree.tree" value="api-reference">
+        <li scTreeItem value="api-reference">
           <button scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <svg scTreeItemIcon siSettingsIcon></svg>
             <span>API Reference</span>
           </button>
           <ul scTreeItemGroup>
-            <li scTreeItem [parent]="tree.tree" value="overview">
+            <li scTreeItem value="overview">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Overview</span>
               </button>
             </li>
-            <li scTreeItem [parent]="tree.tree" value="hooks">
+            <li scTreeItem value="hooks">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Hooks</span>

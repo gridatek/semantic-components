@@ -304,6 +304,18 @@ export class ScCalendarDayView {
 
     const key = event.key;
 
+    // PageUp/PageDown: previous/next month; with Shift: previous/next year.
+    // Same day of the month, clamped to the target month's length.
+    if (key === 'PageUp' || key === 'PageDown') {
+      event.preventDefault();
+      const months = event.shiftKey ? 12 : 1;
+      const from = this.viewDate().with({ day });
+      const to =
+        key === 'PageUp' ? from.subtract({ months }) : from.add({ months });
+      this.pageToDay(key === 'PageUp' ? -months : months, to.day);
+      return;
+    }
+
     if (this.selectOutsideMonthDays() === 'keep') {
       const buttons = this._dayButtons();
       const idx = buttons.findIndex((b) => b.element === target);
@@ -369,6 +381,20 @@ export class ScCalendarDayView {
     } else if (day > daysInMonth - 7 && arrowDown) {
       this.scrollDownToDay(day + 7 - daysInMonth);
     }
+  }
+
+  /** Moves the view by `months` (negative = back) and focuses `day` there. */
+  private pageToDay(months: number, day: number): void {
+    const scroll = months < 0 ? this.monthScrollUp : this.monthScrollDown;
+    for (let i = 0; i < Math.abs(months); i++) scroll.emit();
+    setTimeout(() => {
+      const btn = this._dayButtons().find(
+        (b) =>
+          b.element.getAttribute('data-day') === String(day) &&
+          b.element.getAttribute('data-outside') === null,
+      );
+      btn?.element.focus();
+    });
   }
 
   private scrollDown(): void {

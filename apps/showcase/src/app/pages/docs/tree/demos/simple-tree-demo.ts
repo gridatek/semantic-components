@@ -20,26 +20,26 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="max-w-sm rounded-lg border p-4">
-      <ul scTree #tree="scTree">
-        <li scTreeItem [parent]="tree.tree" value="fruits" [expanded]="true">
+      <ul scTree>
+        <li scTreeItem value="fruits" [expanded]="true">
           <button scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <span>Fruits</span>
           </button>
           <ul scTreeItemGroup>
-            <li scTreeItem [parent]="tree.tree" value="apple">
+            <li scTreeItem value="apple">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Apple</span>
               </button>
             </li>
-            <li scTreeItem [parent]="tree.tree" value="banana">
+            <li scTreeItem value="banana">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Banana</span>
               </button>
             </li>
-            <li scTreeItem [parent]="tree.tree" value="orange">
+            <li scTreeItem value="orange">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Orange</span>
@@ -47,19 +47,19 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             </li>
           </ul>
         </li>
-        <li scTreeItem [parent]="tree.tree" value="vegetables">
+        <li scTreeItem value="vegetables">
           <button scTreeItemTrigger>
             <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
             <span>Vegetables</span>
           </button>
           <ul scTreeItemGroup>
-            <li scTreeItem [parent]="tree.tree" value="carrot">
+            <li scTreeItem value="carrot">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Carrot</span>
               </button>
             </li>
-            <li scTreeItem [parent]="tree.tree" value="broccoli">
+            <li scTreeItem value="broccoli">
               <button scTreeItemTrigger>
                 <svg scTreeItemTriggerIcon siChevronRightIcon></svg>
                 <span>Broccoli</span>

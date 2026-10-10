@@ -1,4 +1,3 @@
-import { TreeItem } from '@angular/aria/tree';
 import {
   Component,
   InjectionToken,
@@ -8,8 +7,11 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn, setInput } from '@semantic-components/ui';
+import { ScAriaTreeItem } from './aria-tree-item';
+import { ScTree } from './tree';
 import { ScTreeItemGroup } from './tree-item-group';
+import { SC_TREE_ITEM_GROUP } from './tree-tokens';
 
 // Token for tree item context
 export const SC_TREE_ITEM = new InjectionToken<ScTreeItem>('SC_TREE_ITEM');
@@ -18,8 +20,8 @@ export const SC_TREE_ITEM = new InjectionToken<ScTreeItem>('SC_TREE_ITEM');
   selector: 'li[scTreeItem]',
   hostDirectives: [
     {
-      directive: TreeItem,
-      inputs: ['value', 'parent', 'label', 'disabled', 'expanded'],
+      directive: ScAriaTreeItem,
+      inputs: ['value', 'label', 'disabled', 'expanded'],
     },
   ],
   providers: [{ provide: SC_TREE_ITEM, useExisting: ScTreeItem }],
@@ -38,7 +40,7 @@ export class ScTreeItem {
     skipSelf: true,
   });
 
-  readonly treeItem = inject(TreeItem);
+  readonly treeItem = inject(ScAriaTreeItem);
   readonly groupContent = contentChild(ScTreeItemGroup);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -48,7 +50,7 @@ export class ScTreeItem {
     let parent = this.parentItem;
     while (parent) {
       level++;
-      parent = (parent as any).parentItem;
+      parent = parent.parentItem;
     }
     return level;
   });
@@ -58,4 +60,12 @@ export class ScTreeItem {
   protected readonly class = computed(() =>
     cn('flex flex-col', this.classInput()),
   );
+
+  constructor() {
+    // Nested items belong to the enclosing group, top-level items to the
+    // tree. TreeItem reads `parent` in its ngOnInit to register.
+    const group = inject(SC_TREE_ITEM_GROUP, { optional: true });
+    if (group) group.adopt(this.treeItem);
+    else setInput(this.treeItem.parent, inject(ScTree).tree);
+  }
 }

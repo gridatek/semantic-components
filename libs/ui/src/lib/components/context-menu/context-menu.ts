@@ -1,10 +1,14 @@
 import { Menu, MenuTrigger } from '@angular/aria/menu';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
+  Injector,
   ViewEncapsulation,
+  afterNextRender,
   computed,
   contentChild,
+  effect,
   inject,
   input,
   viewChild,
@@ -73,7 +77,33 @@ export class ScContextMenu {
 
   protected readonly class = computed(() => cn('contents', this.classInput()));
 
+  private readonly document = inject(DOCUMENT);
+  private readonly injector = inject(Injector);
+  /** The element that had focus when the menu opened. */
+  private returnFocus: HTMLElement | null = null;
+
+  constructor() {
+    // Aria refocuses its trigger on close, but here that is the hidden anchor,
+    // so focus would drop to the page. Give it back to where it came from
+    // (the trigger area, for a keyboard user) — unless the user has moved it.
+    effect(() => {
+      if (this.cursorTrigger()?.expanded() !== false || !this.returnFocus) {
+        return;
+      }
+      const target = this.returnFocus;
+      this.returnFocus = null;
+      afterNextRender(
+        () => {
+          const active = this.document.activeElement;
+          if (!active || active === this.document.body) target.focus();
+        },
+        { injector: this.injector },
+      );
+    });
+  }
+
   open(): void {
+    this.returnFocus = this.document.activeElement as HTMLElement | null;
     this.cursorTrigger()?.open();
   }
 

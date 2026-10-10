@@ -17,6 +17,7 @@ import {
 } from '@angular/core';
 import { cn, setInput } from '../../utils';
 import { ScMenuPortal } from '../menu';
+import { useDefaultSearchTerm } from '../menu/menu-search-term';
 import { ScMenuBar } from './menu-bar';
 
 @Component({
@@ -76,6 +77,8 @@ export class ScMenuBarItem {
   );
 
   constructor() {
+    useDefaultSearchTerm(this.menuItem as MenuItem<unknown>);
+
     effect(() => {
       const menu = this.submenuPortal()?.menu();
       if (menu) {

@@ -136,11 +136,19 @@ This avoids a deadlock: the `Menu` instance only exists when the overlay is open
 
 The menu components use a push-based registration pattern to minimize boilerplate:
 
-- **`ScMenuProvider`** auto-connects `ScMenuTrigger` to `ScMenu` via `signalSetFn`.
+- **`ScMenuProvider`** auto-connects `ScMenuTrigger` to `ScMenu` (via `setInput`).
 - **`ScMenu`** registers itself with the nearest `ScMenuPortal` on creation.
 - **`ScMenuItem`** auto-connects a nested `ScMenuPortal`'s menu as its submenu.
 
 This means no manual `[menu]`, `[submenu]`, `[open]`, `[config]`, or `[positions]` bindings are needed in templates.
+
+## Keyboard
+
+On top of `@angular/aria`'s menu keyboard support (arrows, Home/End, Enter/Space, Escape, ArrowRight/Left for submenus):
+
+- **Type-ahead** works out of the box: each item's `searchTerm` defaults to its own text (text inside a nested submenu is ignored). Set `searchTerm` to override it.
+- **Tab** closes the whole menu chain and moves focus on from the trigger (or menubar item) that opened it, as in the WAI-ARIA menu button pattern. Aria has no Tab handling of its own.
+- In a **menubar**, Escape on a bar item closes its open menu (`ScMenuBar`).
 
 ## Inputs
 
@@ -173,13 +181,13 @@ This means no manual `[menu]`, `[submenu]`, `[open]`, `[config]`, or `[positions
 
 ### ScMenuItem
 
-| Input        | Type      | Description                       |
-| ------------ | --------- | --------------------------------- |
-| `id`         | `string`  | Unique ID for the item.           |
-| `value`      | `V`       | The value of the item.            |
-| `disabled`   | `boolean` | Whether the item is disabled.     |
-| `searchTerm` | `string`  | Custom search term for typeahead. |
-| `class`      | `string`  | Custom CSS classes.               |
+| Input        | Type      | Description                                   |
+| ------------ | --------- | --------------------------------------------- |
+| `id`         | `string`  | Unique ID for the item.                       |
+| `value`      | `V`       | The value of the item.                        |
+| `disabled`   | `boolean` | Whether the item is disabled.                 |
+| `searchTerm` | `string`  | Type-ahead term. Defaults to the item's text. |
+| `class`      | `string`  | Custom CSS classes.                           |
 
 ## Architecture
 
