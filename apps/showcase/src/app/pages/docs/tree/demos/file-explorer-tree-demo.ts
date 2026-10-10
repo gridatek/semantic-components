@@ -29,7 +29,7 @@ import {
     SiImageIcon,
   ],
   template: `
-    <div class="max-w-sm rounded-lg border p-4">
+    <div class="w-full max-w-sm rounded-lg border p-4">
       <ul scTree aria-label="Project files">
         <li scTreeItem value="src" [expanded]="true">
           <div scTreeItemTrigger>
