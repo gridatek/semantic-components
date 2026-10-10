@@ -71,16 +71,19 @@ interface FormModel {
   template: \`
     <form [formRoot]="currencyForm">
       <div class="flex items-center gap-2">
-        <div scInputGroup class="w-80">
+        <div
+          scInputGroup
+          class="has-[[data-slot=select-trigger]:focus-visible]:border-ring has-[[data-slot=select-trigger]:focus-visible]:ring-ring/50 w-80 has-[[data-slot=select-trigger]:focus-visible]:ring-3"
+        >
           <div
             scSelect
-            class="w-14 min-w-14"
+            class="w-12 min-w-12"
             [formField]="currencyForm.currency"
             placeholder="$"
           >
             <div
               scSelectTrigger
-              class="h-auto border-0 bg-transparent px-0 dark:bg-transparent"
+              class="h-full gap-1 border-0 bg-transparent ps-2.5 pe-0 focus-visible:ring-0 dark:bg-transparent"
               aria-label="Currency"
             >
               <span scSelectValue>{{ selectedCurrency()?.symbol }}</span>
@@ -123,7 +126,7 @@ interface FormModel {
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectCurrencyDemo {
-  readonly formModel = signal<FormModel>({ currency: '', amount: '10.00' });
+  readonly formModel = signal<FormModel>({ currency: 'usd', amount: '10.00' });
   readonly currencyForm = form(this.formModel);
 
   readonly selectedCurrency = computed(() =>
