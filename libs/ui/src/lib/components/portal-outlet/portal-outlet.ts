@@ -9,7 +9,8 @@ import {
 } from '@angular/core';
 
 /**
- * Renders a portal (`ScSelectPortal`, `ScMultiselectPortal`, …) inside a
+ * Renders a consumer-declared portal template (select, multiselect,
+ * autocomplete, combobox, command…) inside a
  * combobox's `ngComboboxPopup`.
  *
  * The portal template is declared by the consumer, so its element injector
@@ -17,13 +18,13 @@ import {
  * (on the list) resolve `COMBOBOX_POPUP`.
  */
 @Directive({
-  selector: 'ng-container[scSelectPortalOutlet]',
+  selector: 'ng-container[scPortalOutlet]',
 })
-export class ScSelectPortalOutlet {
+export class ScPortalOutlet {
   readonly portal = input.required<{
     readonly templateRef: TemplateRef<unknown>;
   }>({
-    alias: 'scSelectPortalOutlet',
+    alias: 'scPortalOutlet',
   });
 
   constructor() {

@@ -25,7 +25,7 @@ import {
   ScTreeItemGroup,
   ScTreeItemTrigger,
   ScTreeItemTriggerIcon,
-} from '@semantic-components/ui-lab';
+} from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

@@ -140,7 +140,7 @@ All other parts accept a `class` input only.
 ScAutocomplete (form control, exportAs: 'scAutocomplete', provides SC_AUTOCOMPLETE, overlay origin)
 ├── ScAutocompleteInput (Combobox host, role=combobox) [projected]
 ├── ScAutocompleteClear (clear button) [projected]
-└── ScAutocompletePortal (ng-template, rendered inside ngComboboxPopup via ScSelectPortalOutlet)
+└── ScAutocompletePortal (ng-template, rendered inside ngComboboxPopup via ScPortalOutlet)
     └── ScAutocompletePopup
         ├── ScAutocompleteEmpty
         └── ScAutocompleteList (Listbox + ComboboxWidget; activedescendant focus, explicit selection)

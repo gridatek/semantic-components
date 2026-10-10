@@ -140,13 +140,13 @@ ScMultiselect (form control, exportAs: 'scMultiselect', provides SC_MULTISELECT)
 ├── ScMultiselectTrigger (Combobox host, role=combobox) [projected]
 │   ├── ScMultiselectValue (summary or placeholder)
 │   └── ScMultiselectIcon (chevron)
-└── ScMultiselectPortal (ng-template, rendered inside ngComboboxPopup via ScSelectPortalOutlet)
+└── ScMultiselectPortal (ng-template, rendered inside ngComboboxPopup via ScPortalOutlet)
     └── ScMultiselectPopup
         └── ScMultiselectList (Listbox multi + ComboboxWidget; activedescendant focus, explicit selection)
             └── ScMultiselectItem (Option) → ScMultiselectItemLabel, ScMultiselectItemIndicator
 ```
 
-The trigger shares its base styles with `ScSelectTrigger` (`selectTriggerStyles`), and the portal is rendered with the select's `ScSelectPortalOutlet` so `ComboboxWidget` can resolve `COMBOBOX_POPUP`.
+The trigger shares its base styles with `ScSelectTrigger` (`selectTriggerStyles`), and the portal is rendered with the shared `ScPortalOutlet` so `ComboboxWidget` can resolve `COMBOBOX_POPUP`.
 
 ## Known issue
 

@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
-import { ScSelectPortalOutlet } from '../select/select-portal-outlet';
+import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScComboboxClear } from './combobox-clear';
 import { ScComboboxPortal } from './combobox-portal';
 import { SC_COMBOBOX, SC_COMBOBOX_TRIGGER } from './combobox-tokens';
@@ -43,7 +43,7 @@ const positions = [
 @Component({
   selector: 'div[scCombobox]',
   exportAs: 'scCombobox',
-  imports: [ComboboxPopup, OverlayModule, ScSelectPortalOutlet],
+  imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
   providers: [{ provide: SC_COMBOBOX, useExisting: ScCombobox }],
   template: `
     <ng-content />
@@ -62,7 +62,7 @@ const positions = [
           [cdkConnectedOverlayOpen]="open()"
           [cdkConnectedOverlayPositions]="positions"
         >
-          <ng-container [scSelectPortalOutlet]="comboboxPortal()" />
+          <ng-container [scPortalOutlet]="comboboxPortal()" />
         </ng-template>
       </ng-template>
     }

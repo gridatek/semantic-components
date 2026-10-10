@@ -74,7 +74,12 @@ interface FormModel {
                   <span scSelectItemLabel>Carrot</span>
                   <svg scSelectItemIndicator siCheckIcon></svg>
                 </div>
-                <div scSelectItem value="Broccoli" label="Broccoli">
+                <div
+                  scSelectItem
+                  value="Broccoli"
+                  label="Broccoli"
+                  [disabled]="true"
+                >
                   <span scSelectItemLabel>Broccoli</span>
                   <svg scSelectItemIndicator siCheckIcon></svg>
                 </div>

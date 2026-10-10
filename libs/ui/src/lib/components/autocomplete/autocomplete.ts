@@ -12,10 +12,11 @@ import {
   model,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
-import { ScSelectPortalOutlet } from '../select/select-portal-outlet';
+import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScAutocompletePortal } from './autocomplete-portal';
 import { SC_AUTOCOMPLETE, SC_AUTOCOMPLETE_INPUT } from './autocomplete-tokens';
 
@@ -39,7 +40,7 @@ const positions = [
 @Component({
   selector: 'div[scAutocomplete]',
   exportAs: 'scAutocomplete',
-  imports: [ComboboxPopup, OverlayModule, ScSelectPortalOutlet],
+  imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
   providers: [{ provide: SC_AUTOCOMPLETE, useExisting: ScAutocomplete }],
   template: `
     <ng-content />
@@ -58,7 +59,7 @@ const positions = [
           [cdkConnectedOverlayOpen]="open()"
           [cdkConnectedOverlayPositions]="positions"
         >
-          <ng-container [scSelectPortalOutlet]="autocompletePortal()" />
+          <ng-container [scPortalOutlet]="autocompletePortal()" />
         </ng-template>
       </ng-template>
     }
@@ -107,7 +108,8 @@ export class ScAutocomplete implements FormValueControl<string> {
   }
 
   registerLabel(value: string, label: string): void {
-    if (this.labels().get(value) === label) return;
+    // Untracked: items call this from an effect that must not depend on it.
+    if (untracked(this.labels).get(value) === label) return;
     this.labels.update((labels) => new Map(labels).set(value, label));
   }
 

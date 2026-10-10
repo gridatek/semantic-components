@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScSelectPortalOutlet } from '../select/select-portal-outlet';
+import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import type { ScCommandItem } from './command-item';
 import { ScCommandListContainer } from './command-list-container';
 import { SC_COMMAND, type ScCommandContext } from './command-tokens';
@@ -21,14 +21,14 @@ import { SC_COMMAND, type ScCommandContext } from './command-tokens';
 @Component({
   selector: 'div[scCommand]',
   exportAs: 'scCommand',
-  imports: [ComboboxPopup, ScSelectPortalOutlet],
+  imports: [ComboboxPopup, ScPortalOutlet],
   providers: [{ provide: SC_COMMAND, useExisting: ScCommand }],
   template: `
     <ng-content />
     @if (input(); as input) {
       <ng-template ngComboboxPopup [combobox]="input" popupType="listbox">
         @if (listContainer(); as listContainer) {
-          <ng-container [scSelectPortalOutlet]="listContainer" />
+          <ng-container [scPortalOutlet]="listContainer" />
         }
       </ng-template>
     }

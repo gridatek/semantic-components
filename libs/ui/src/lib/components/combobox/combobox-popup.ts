@@ -8,7 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from '../../utils';
-import { ScSelectPortalOutlet } from '../select/select-portal-outlet';
+import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScComboboxListContainer } from './combobox-list-container';
 import { SC_COMBOBOX } from './combobox-tokens';
 
@@ -22,14 +22,14 @@ import { SC_COMBOBOX } from './combobox-tokens';
  */
 @Component({
   selector: 'div[scComboboxPopup]',
-  imports: [ComboboxPopup, ScSelectPortalOutlet],
+  imports: [ComboboxPopup, ScPortalOutlet],
   hostDirectives: [ComboboxWidget],
   template: `
     <ng-content />
     @if (combobox.search(); as search) {
       <ng-template ngComboboxPopup [combobox]="search" popupType="listbox">
         @if (listContainer(); as listContainer) {
-          <ng-container [scSelectPortalOutlet]="listContainer" />
+          <ng-container [scPortalOutlet]="listContainer" />
         }
       </ng-template>
     }

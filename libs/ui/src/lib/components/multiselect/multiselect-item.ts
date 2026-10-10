@@ -48,7 +48,7 @@ export class ScMultiselectItem {
 
   protected readonly class = computed(() =>
     cn(
-      'hover:bg-accent hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:bg-accent/50 aria-selected:text-accent-foreground flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 text-sm outline-none data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg:not([class*=size-])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+      'transition-colors duration-100 hover:bg-accent/50 hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 text-sm outline-none aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg:not([class*=size-])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0',
       this.classInput(),
     ),
   );

@@ -147,7 +147,7 @@ This means no manual `[menu]`, `[submenu]`, `[open]`, `[config]`, or `[positions
 On top of `@angular/aria`'s menu keyboard support (arrows, Home/End, Enter/Space, Escape, ArrowRight/Left for submenus):
 
 - **Type-ahead** works out of the box: each item's `searchTerm` defaults to its own text (text inside a nested submenu is ignored). Set `searchTerm` to override it.
-- **Tab** closes the whole menu chain and moves focus on from the trigger (or menubar item) that opened it, as in the WAI-ARIA menu button pattern. Aria has no Tab handling of its own.
+- **Tab** / **Shift+Tab** close the whole menu chain and move focus on, as in the WAI-ARIA menu button and menubar patterns: from the trigger for a menu button, out of the menubar for a menubar menu. Aria has no Tab handling of its own.
 - In a **menubar**, Escape on a bar item closes its open menu (`ScMenuBar`).
 
 ## Inputs

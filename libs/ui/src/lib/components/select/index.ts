@@ -8,7 +8,6 @@ export { ScSelectTrigger } from './select-trigger';
 export { ScSelectValue } from './select-value';
 export { ScSelectItemIcon } from './select-item-icon';
 export { ScSelectPortal } from './select-portal';
-export { ScSelectPortalOutlet } from './select-portal-outlet';
 export { ScSelectPopup } from './select-popup';
 export { ScSelectList } from './select-list';
 export { ScSelectItem } from './select-item';

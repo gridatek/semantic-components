@@ -937,7 +937,7 @@
     "path": "tree",
     "description": "A hierarchical view of nested items.",
     "status": "Experimental",
-    "library": "ui-lab",
+    "library": "ui",
     "category": "Data Display",
     "hidden": true
   },

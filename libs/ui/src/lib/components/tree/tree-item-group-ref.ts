@@ -1,6 +1,6 @@
 import { TreeItemGroup } from '@angular/aria/tree';
 import { Directive, inject } from '@angular/core';
-import { setInput } from '@semantic-components/ui';
+import { setInput } from '../../utils';
 import { SC_TREE_ITEM_GROUP } from './tree-tokens';
 
 /**

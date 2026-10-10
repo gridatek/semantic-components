@@ -94,8 +94,15 @@ export class ScContextMenu {
       this.returnFocus = null;
       afterNextRender(
         () => {
+          // Restore unless the user moved focus somewhere else: focus may
+          // still sit on a menu item that is about to go, or already gone.
           const active = this.document.activeElement;
-          if (!active || active === this.document.body) target.focus();
+          const lost =
+            !active ||
+            active === this.document.body ||
+            !active.isConnected ||
+            !!this.menu()?.element.contains(active);
+          if (lost) target.focus();
         },
         { injector: this.injector },
       );

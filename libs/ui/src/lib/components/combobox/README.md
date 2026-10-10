@@ -157,7 +157,7 @@ All parts accept a `class` input.
 ScCombobox (form control, provides SC_COMBOBOX; ngComboboxPopup popupType="dialog" + CDK overlay)
 ├── ScComboboxTrigger (Combobox, role=combobox, aria-haspopup=dialog) → ScComboboxValue, ScComboboxIcon
 ├── ScComboboxClear
-└── ScComboboxPortal (rendered inside the dialog popup via ScSelectPortalOutlet)
+└── ScComboboxPortal (rendered inside the dialog popup via ScPortalOutlet)
     └── ScComboboxPopup (ComboboxWidget, role=dialog)
         ├── ScComboboxSearch (inner Combobox, alwaysExpanded; registers itself on SC_COMBOBOX)
         └── ScComboboxListContainer (rendered by the popup inside ngComboboxPopup [combobox]=search)

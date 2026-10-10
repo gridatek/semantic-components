@@ -10,11 +10,12 @@ import {
   model,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
+import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScSelectPortal } from './select-portal';
-import { ScSelectPortalOutlet } from './select-portal-outlet';
 import { SC_SELECT, SC_SELECT_TRIGGER } from './select-tokens';
 
 const positions = [
@@ -37,7 +38,7 @@ const positions = [
 @Component({
   selector: 'div[scSelect]',
   exportAs: 'scSelect',
-  imports: [ComboboxPopup, OverlayModule, ScSelectPortalOutlet],
+  imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
   providers: [{ provide: SC_SELECT, useExisting: ScSelect }],
   template: `
     <ng-content />
@@ -56,7 +57,7 @@ const positions = [
           [cdkConnectedOverlayOpen]="open()"
           [cdkConnectedOverlayPositions]="positions"
         >
-          <ng-container [scSelectPortalOutlet]="selectPortal()" />
+          <ng-container [scPortalOutlet]="selectPortal()" />
         </ng-template>
       </ng-template>
     }
@@ -103,7 +104,8 @@ export class ScSelect implements FormValueControl<string> {
   );
 
   registerLabel(value: string, label: string): void {
-    if (this.labels().get(value) === label) return;
+    // Untracked: items call this from an effect that must not depend on it.
+    if (untracked(this.labels).get(value) === label) return;
     this.labels.update((labels) => new Map(labels).set(value, label));
   }
 

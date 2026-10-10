@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { cn } from '../../utils';
 import { SC_TREE_ITEM } from './tree-item';
 
 /** The expand/collapse chevron. Rotates when open; kept (invisible) on leaves for alignment. */

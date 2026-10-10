@@ -169,7 +169,7 @@ ScSelect (form control, exportAs: 'scSelect', provides SC_SELECT)
 ├── ScSelectTrigger (Combobox host, role=combobox) [projected]
 │   ├── ScSelectValue (label or placeholder)
 │   └── ScSelectIcon (chevron)
-└── ScSelectPortal (ng-template, rendered inside ngComboboxPopup via ScSelectPortalOutlet)
+└── ScSelectPortal (ng-template, rendered inside ngComboboxPopup via ScPortalOutlet)
     └── ScSelectPopup
         └── ScSelectList (Listbox + ComboboxWidget; activedescendant focus, explicit selection)
             ├── ScSelectGroup → ScSelectGroupLabel, ScSelectItem…
@@ -177,7 +177,7 @@ ScSelect (form control, exportAs: 'scSelect', provides SC_SELECT)
             └── ScSelectItem (Option) → ScSelectItemIcon, ScSelectItemLabel, ScSelectItemIndicator
 ```
 
-`ScSelectPortalOutlet` renders the consumer's portal template with the popup's injector so `ComboboxWidget` can resolve `COMBOBOX_POPUP` — the consumer-declared template cannot see it otherwise.
+`ScPortalOutlet` renders the consumer's portal template with the popup's injector so `ComboboxWidget` can resolve `COMBOBOX_POPUP` — the consumer-declared template cannot see it otherwise.
 
 ## Dependencies
 

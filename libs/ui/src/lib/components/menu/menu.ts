@@ -1,4 +1,6 @@
 import { Menu, MenuBar, MenuItem, MenuTrigger } from '@angular/aria/menu';
+import { InteractivityChecker } from '@angular/cdk/a11y';
+import { DOCUMENT } from '@angular/common';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '../../utils';
 import { SC_CONTEXT_MENU_PROVIDER } from '../context-menu/context-menu-types';
@@ -19,7 +21,7 @@ import { ScMenuPortal } from './menu-portal';
     '[class]': 'class()',
     'animate.enter': 'animate-in fade-in-0 zoom-in-95 duration-150',
     '[animate.leave]': 'leaveAnimation()',
-    '(keydown.tab)': 'onTab()',
+    '(keydown.tab)': 'onTab($event)',
   },
 })
 export class ScMenu<V = string> {
@@ -55,11 +57,44 @@ export class ScMenu<V = string> {
    * and leave the menu open. Refocusing the top-level opener here, without
    * preventing the default, lets the browser's Tab continue from it.
    */
-  protected onTab(): void {
+  protected onTab(event: Event): void {
     const opener = topLevelOpener(this.menu as Menu<unknown>);
     if (!opener) return;
+
+    // In a menubar, aria refocuses the bar item after closing — after the
+    // browser's Tab would have moved on — so move focus out ourselves.
+    const menuBar = opener instanceof MenuItem ? opener.parent : null;
+    if (menuBar instanceof MenuBar) {
+      event.preventDefault();
+      menuBar.close();
+      this.focusOutside(menuBar.element, (event as KeyboardEvent).shiftKey);
+      return;
+    }
+
     opener.close();
     opener.element.focus();
+  }
+
+  private readonly interactivity = inject(InteractivityChecker);
+  private readonly document = inject(DOCUMENT);
+
+  /** Focuses the next (or previous) tabbable element outside `container`. */
+  private focusOutside(container: HTMLElement, backwards: boolean): void {
+    const candidates = Array.from(
+      this.document.querySelectorAll<HTMLElement>(
+        'a[href], button, input, select, textarea, [tabindex], [contenteditable]',
+      ),
+    ).filter(
+      (el) => !container.contains(el) && this.interactivity.isTabbable(el),
+    );
+    const after = (el: HTMLElement) =>
+      !!(
+        container.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING
+      );
+    const target = backwards
+      ? candidates.filter((el) => !after(el)).pop()
+      : candidates.find(after);
+    target?.focus();
   }
 
   constructor() {

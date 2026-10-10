@@ -10,10 +10,11 @@ import {
   model,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from '../../utils';
-import { ScSelectPortalOutlet } from '../select/select-portal-outlet';
+import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScMultiselectPortal } from './multiselect-portal';
 import { SC_MULTISELECT, SC_MULTISELECT_TRIGGER } from './multiselect-tokens';
 
@@ -37,7 +38,7 @@ const positions = [
 @Component({
   selector: 'div[scMultiselect]',
   exportAs: 'scMultiselect',
-  imports: [ComboboxPopup, OverlayModule, ScSelectPortalOutlet],
+  imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
   providers: [{ provide: SC_MULTISELECT, useExisting: ScMultiselect }],
   template: `
     <ng-content />
@@ -56,7 +57,7 @@ const positions = [
           [cdkConnectedOverlayOpen]="open()"
           [cdkConnectedOverlayPositions]="positions"
         >
-          <ng-container [scSelectPortalOutlet]="multiselectPortal()" />
+          <ng-container [scPortalOutlet]="multiselectPortal()" />
         </ng-template>
       </ng-template>
     }
@@ -104,7 +105,8 @@ export class ScMultiselect implements FormValueControl<string[]> {
   );
 
   registerLabel(value: string, label: string): void {
-    if (this.labels().get(value) === label) return;
+    // Untracked: items call this from an effect that must not depend on it.
+    if (untracked(this.labels).get(value) === label) return;
     this.labels.update((labels) => new Map(labels).set(value, label));
   }
 
