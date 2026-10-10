@@ -104,7 +104,7 @@ interface CommandItem {
       </button>
       <ng-template scDialogPortal>
         <div scDialog class="w-lg gap-0 p-0">
-          <div scCommand #cmd="scCommand">
+          <div scCommand>
             <div scCommandInputGroup>
               <svg
                 siSearchIcon
@@ -117,7 +117,7 @@ interface CommandItem {
                 [(value)]="searchString"
               />
             </div>
-            <ng-template scCommandListContainer [combobox]="cmd.comboboxRef">
+            <ng-template scCommandListContainer>
               <div scCommandList>
                 @if (
                   filteredSuggestions().length === 0 &&

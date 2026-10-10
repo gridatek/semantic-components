@@ -77,7 +77,7 @@ interface CommandItem {
   template: \`
     <div class="flex flex-col gap-8">
       <div class="w-full max-w-md">
-        <div scCommand #cmd="scCommand" class="rounded-lg border shadow-md">
+        <div scCommand class="rounded-lg border shadow-md">
           <div scCommandInputGroup>
             <svg
               siSearchIcon
@@ -90,7 +90,7 @@ interface CommandItem {
               [(value)]="searchString"
             />
           </div>
-          <ng-template scCommandListContainer [combobox]="cmd.comboboxRef">
+          <ng-template scCommandListContainer>
             <div scCommandList>
               @if (
                 filteredSuggestions().length === 0 &&

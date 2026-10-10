@@ -64,7 +64,7 @@ import { ComponentsService } from '../../services/components.service';
       ></span>
       <ng-template scDialogPortal>
         <div scDialog class="w-lg gap-0 p-0">
-          <div scCommand #cmd="scCommand">
+          <div scCommand>
             <div scCommandInputGroup>
               <svg
                 siSearchIcon
@@ -77,7 +77,7 @@ import { ComponentsService } from '../../services/components.service';
                 [(value)]="searchString"
               />
             </div>
-            <ng-template scCommandListContainer [combobox]="cmd.comboboxRef">
+            <ng-template scCommandListContainer>
               <div scCommandList>
                 @if (
                   filteredComponents().length === 0 &&

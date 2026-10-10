@@ -1,4 +1,5 @@
 export { ScCommand } from './command';
+export { SC_COMMAND, type ScCommandContext } from './command-tokens';
 export { ScCommandEmpty } from './command-empty';
 export { ScCommandGroup } from './command-group';
 export { ScCommandGroupLabel } from './command-group-label';

@@ -1,15 +1,13 @@
-import { ComboboxPopup } from '@angular/aria/combobox';
-import { Directive, inject } from '@angular/core';
-import { bindInput } from '../../utils';
+import { Directive, TemplateRef, inject } from '@angular/core';
 
+/**
+ * Marks the template holding the list inside `scCommand`. The command renders
+ * it after its other content, connected to `scCommandInput` so arrow keys
+ * typed there drive the list.
+ */
 @Directive({
   selector: 'ng-template[scCommandListContainer]',
-  hostDirectives: [{ directive: ComboboxPopup, inputs: ['combobox'] }],
 })
 export class ScCommandListContainer {
-  private readonly popup = inject(ComboboxPopup);
-
-  constructor() {
-    bindInput(this.popup.popupType, 'listbox');
-  }
+  readonly templateRef = inject(TemplateRef);
 }
