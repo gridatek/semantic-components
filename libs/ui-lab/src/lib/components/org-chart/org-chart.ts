@@ -47,8 +47,12 @@ export class ScOrgChart {
   protected readonly class = computed(() =>
     cn(
       'inline-flex overflow-auto p-4',
+      // Where horizontal connectors meet a card: half the card's height.
+      '[--sc-org-chart-anchor:2.25rem]',
+      // Safe centering: a chart wider than the box overflows to the end only,
+      // so all of it can be scrolled to.
       this.direction() === 'vertical'
-        ? 'flex-col items-center'
+        ? 'flex-col items-center-safe'
         : 'flex-row items-start',
       this.classInput(),
     ),

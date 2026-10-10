@@ -71,10 +71,7 @@ interface FormModel {
   template: \`
     <form [formRoot]="currencyForm">
       <div class="flex items-center gap-2">
-        <div
-          scInputGroup
-          class="w-80"
-        >
+        <div scInputGroup class="w-80">
           <div
             scSelect
             class="w-12 min-w-12"

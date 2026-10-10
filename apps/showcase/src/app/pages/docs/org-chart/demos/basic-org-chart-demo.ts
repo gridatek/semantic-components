@@ -19,7 +19,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: `
-    <div class="overflow-auto rounded-lg border">
+    <div class="max-w-full overflow-auto rounded-lg border">
       <div scOrgChart [collapsible]="true" (nodeExpand)="onNodeExpand($event)">
         <sc-org-chart-node [node]="orgData()" />
 
@@ -66,7 +66,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </p>
     }
   `,
-  host: { class: 'flex w-full flex-col items-center gap-2' },
+  host: { class: 'flex w-full flex-col items-center-safe gap-2' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicOrgChartDemo {

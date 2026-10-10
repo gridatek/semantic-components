@@ -27,7 +27,7 @@ import {
   selector: 'app-non-collapsible-org-chart-demo',
   imports: [ScOrgChart, ScOrgChartCard, ScOrgChartNode, ScOrgChartNodeDef],
   template: \`
-    <div class="overflow-auto rounded-lg border">
+    <div class="max-w-full overflow-auto rounded-lg border">
       <div scOrgChart [collapsible]="false">
         <sc-org-chart-node [node]="orgData()" />
 
@@ -53,7 +53,7 @@ import {
       </div>
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full justify-center-safe' },
   encapsulation: ViewEncapsulation.None,
 })
 export class NonCollapsibleOrgChartDemo {

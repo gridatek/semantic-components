@@ -163,6 +163,11 @@ interface ScOrgChartNodeDefContext {
 type ScOrgChartDirection = 'vertical' | 'horizontal';
 ```
 
+## Layout
+
+- A chart wider than its box is centered only while it fits; otherwise it starts at the left (start) edge and scrolls. Wrap it in an `overflow-auto` container with `max-w-full` if the page should not scroll.
+- In horizontal charts, connectors meet each card at `--sc-org-chart-anchor` from its top (default `2.25rem`, half the default card height). Set it on the chart if your cards are taller or shorter, e.g. `class="[--sc-org-chart-anchor:1.75rem]"`.
+
 ## Accessibility
 
 Built on `@angular/aria`'s `Tree`:

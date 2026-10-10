@@ -45,11 +45,13 @@ import { SC_ORG_CHART } from './org-chart-types';
                 let isFirst = $first;
                 let isLast = $last
               ) {
-                <div [class]="childNodeClass(isFirst, isLast)">
-                  <!-- Horizontal connector to child -->
-                  <div
-                    [class]="horizontalConnectorClass(isFirst, isLast)"
-                  ></div>
+                <div [class]="childNodeClass()">
+                  <!-- Stub from the sibling line down (or across) to the child -->
+                  <div [class]="stubClass()"></div>
+                  <!-- Sibling line, bridging the gap to the next sibling -->
+                  @if (!(isFirst && isLast)) {
+                    <div [class]="siblingLineClass(isFirst, isLast)"></div>
+                  }
 
                   <!-- Recursive child node -->
                   <sc-org-chart-node [node]="child" />
@@ -128,64 +130,59 @@ export class ScOrgChartNode implements OnInit {
     ),
   );
 
+  /** Line from a person's card to their reports' sibling line. */
   protected readonly connectorClass = computed(() =>
     cn(
-      'bg-border',
-      this.orgChart.direction() === 'vertical' ? 'w-px h-6' : 'h-px w-6',
+      'bg-border shrink-0',
+      this.orgChart.direction() === 'vertical'
+        ? 'h-4 w-px'
+        : 'mt-(--sc-org-chart-anchor) h-px w-4',
     ),
   );
 
   protected readonly childrenWrapperClass = computed(() =>
     cn(
-      'flex relative',
-      this.orgChart.direction() === 'vertical'
-        ? 'flex-row gap-4'
-        : 'flex-col gap-4',
+      'relative flex gap-4',
+      this.orgChart.direction() === 'vertical' ? 'flex-row' : 'flex-col',
     ),
   );
 
-  protected childNodeClass(isFirst: boolean, isLast: boolean): string {
-    return cn(
-      'flex relative',
+  /** One report's cell; its padding makes room for the stub. */
+  protected readonly childNodeClass = computed(() =>
+    cn(
+      'relative flex',
       this.orgChart.direction() === 'vertical'
-        ? 'flex-col items-center'
-        : 'flex-row items-start',
-    );
-  }
+        ? 'flex-col items-center pt-4'
+        : 'flex-row items-start ps-4',
+    ),
+  );
 
-  protected horizontalConnectorClass(
-    isFirst: boolean,
-    isLast: boolean,
-  ): string {
+  protected readonly stubClass = computed(() =>
+    cn(
+      'bg-border absolute',
+      this.orgChart.direction() === 'vertical'
+        ? 'start-1/2 top-0 h-4 w-px'
+        : 'top-(--sc-org-chart-anchor) start-0 h-px w-4',
+    ),
+  );
+
+  /**
+   * The line joining siblings: from the first report's stub to the last one's.
+   * Each cell draws its part, reaching half the gap-4 (0.5rem) into the gap.
+   */
+  protected siblingLineClass(isFirst: boolean, isLast: boolean): string {
     if (this.orgChart.direction() === 'vertical') {
       return cn(
-        'absolute top-0 h-6 bg-border',
-        'w-px',
-        !isFirst &&
-          !isLast &&
-          'before:absolute before:top-0 before:left-1/2 before:w-full before:h-px before:bg-border before:-translate-x-1/2',
-        isFirst &&
-          !isLast &&
-          'before:absolute before:top-0 before:left-1/2 before:w-[calc(50%+0.5rem)] before:h-px before:bg-border',
-        !isFirst &&
-          isLast &&
-          'before:absolute before:top-0 before:right-1/2 before:w-[calc(50%+0.5rem)] before:h-px before:bg-border',
-      );
-    } else {
-      return cn(
-        'absolute left-0 w-6 bg-border',
-        'h-px',
-        !isFirst &&
-          !isLast &&
-          'before:absolute before:left-0 before:top-1/2 before:h-full before:w-px before:bg-border before:-translate-y-1/2',
-        isFirst &&
-          !isLast &&
-          'before:absolute before:left-0 before:top-1/2 before:h-[calc(50%+0.5rem)] before:w-px before:bg-border',
-        !isFirst &&
-          isLast &&
-          'before:absolute before:left-0 before:bottom-1/2 before:h-[calc(50%+0.5rem)] before:w-px before:bg-border',
+        'bg-border absolute top-0 h-px',
+        isFirst ? 'start-1/2' : '-start-2',
+        isLast ? 'end-1/2' : '-end-2',
       );
     }
+    return cn(
+      'bg-border absolute start-0 w-px',
+      isFirst ? 'top-(--sc-org-chart-anchor)' : '-top-2',
+      isLast ? 'h-[calc(var(--sc-org-chart-anchor)+0.5rem)]' : '-bottom-2',
+    );
   }
 
   constructor() {

@@ -18,7 +18,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: `
-    <div class="overflow-auto rounded-lg border">
+    <div class="max-w-full overflow-auto rounded-lg border">
       <div scOrgChart direction="horizontal">
         <sc-org-chart-node [node]="orgData()" />
 
@@ -60,7 +60,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   `,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full justify-center-safe' },
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalOrgChartDemo {

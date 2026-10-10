@@ -34,7 +34,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: \`
-    <div class="max-h-[500px] overflow-auto rounded-lg border">
+    <div class="max-h-[500px] max-w-full overflow-auto rounded-lg border">
       <div scOrgChart>
         <sc-org-chart-node [node]="orgData()" />
 
@@ -76,7 +76,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
-  host: { class: 'flex w-full justify-center' },
+  host: { class: 'flex w-full justify-center-safe' },
   encapsulation: ViewEncapsulation.None,
 })
 export class LargeOrgChartDemo {

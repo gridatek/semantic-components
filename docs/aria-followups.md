@@ -24,6 +24,7 @@ Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 - `displayWith` on select, multiselect, combobox: labels for an initial value before the popup has opened.
 - Type-ahead on a closed select / multiselect opens the list at the first match (APG select-only combobox).
 - Decisions: autocomplete clear button stays a Tab stop; tree visible in the docs; every component stays `Experimental` for now.
+- Org chart: sibling connector lines drawn (they never rendered), and a chart wider than its box overflows to the end only (safe centering), so it can be scrolled in full.
 - Behaviour tests added for tabs, accordion, collapsible, lightbox, toolbar, stepper, speed dial, org chart, emoji picker, image annotator, PDF signature dialog, mention input.
 
 ## Bugs
@@ -40,21 +41,17 @@ Reported from a screenshot: a thin vertical line just right of a rounded input. 
 
 The PDF viewer toolbar is still a plain row of buttons. Making it an Aria `Toolbar` means first turning its hand-built dropdowns (highlight colour, image, Tools) into Aria `Menu`s — otherwise the toolbar's arrow keys fight the dropdowns'. A project of its own.
 
-### 3. Org chart connector lines — S/M
-
-Horizontal connectors between siblings are missing (pre-existing; vertical lines show). Visual only.
-
-### 4. Combobox: type-ahead on the closed trigger — S
+### 3. Combobox: type-ahead on the closed trigger — S
 
 A printable key on a closed `ScComboboxTrigger` could open the popup with that character in the search box. Today Enter/Space/↓ open it.
 
 ## Code health
 
-### 5. Demo icon mapping — S
+### 4. Demo icon mapping — S
 
 The select, multiselect and command demos store icon _names_ (`'tag'`, `'star'`…) and map them with a big `@switch` in an `<ng-template>`. Icons must stay in the consumer template (they do), but the mapping could be simpler. Revisit together.
 
-### 6. Drop the workarounds when Angular catches up — S each
+### 5. Drop the workarounds when Angular catches up — S each
 
 - `bindInput` / `setInput` (`utils/bind-input`) write to input signal nodes through `@angular/core/primitives/signals`. Replace with host-directive bindings once [angular/angular#50510](https://github.com/angular/angular/issues/50510) ships.
 - `ScComboboxListContainer` / `ScCommandListContainer` are plain template markers, and `ScAriaTreeItem` / `ScAriaOrgChartItem` / `ScAriaStepperTab` / `ScAriaStepperPanel` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
