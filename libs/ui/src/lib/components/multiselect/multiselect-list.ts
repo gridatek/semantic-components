@@ -5,12 +5,10 @@ import {
   ElementRef,
   ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
 } from '@angular/core';
-import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '../../utils';
+import { bindInput, cn } from '../../utils';
 
 @Component({
   selector: 'div[scMultiselectList]',
@@ -53,11 +51,6 @@ export class ScMultiselectList {
   );
 
   constructor() {
-    effect(() =>
-      signalSetFn(
-        this.widget.activeDescendant[SIGNAL],
-        this.listbox.activeDescendant(),
-      ),
-    );
+    bindInput(this.widget.activeDescendant, this.listbox.activeDescendant);
   }
 }

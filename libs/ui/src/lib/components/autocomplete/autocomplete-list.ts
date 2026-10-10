@@ -1,8 +1,7 @@
 import { ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox } from '@angular/aria/listbox';
-import { Directive, computed, effect, inject, input } from '@angular/core';
-import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '../../utils';
+import { Directive, computed, inject, input } from '@angular/core';
+import { bindInput, cn } from '../../utils';
 
 @Directive({
   selector: 'div[scAutocompleteList]',
@@ -22,11 +21,6 @@ export class ScAutocompleteList {
   );
 
   constructor() {
-    effect(() =>
-      signalSetFn(
-        this.widget.activeDescendant[SIGNAL],
-        this.listbox.activeDescendant(),
-      ),
-    );
+    bindInput(this.widget.activeDescendant, this.listbox.activeDescendant);
   }
 }

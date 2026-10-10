@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, toggleVariants } from '@semantic-components/ui';
+import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
@@ -28,6 +28,10 @@ export class ScEditorCodeToggle {
   protected readonly disabled = computed(
     () => this.disabledInput() || this.editor.disabled(),
   );
+
+  constructor() {
+    bindInput(inject(ToolbarWidget).disabled, this.disabled);
+  }
 
   onClick(): void {
     if (this.editor.disabled() || this.editor.readonly()) return;

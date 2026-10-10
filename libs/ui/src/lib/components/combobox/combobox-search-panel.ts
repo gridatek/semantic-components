@@ -3,12 +3,10 @@ import {
   Component,
   ViewEncapsulation,
   computed,
-  effect,
   inject,
   input,
 } from '@angular/core';
-import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '../../utils';
+import { bindInput, cn } from '../../utils';
 
 @Component({
   selector: 'div[scComboboxSearchPanel]',
@@ -38,6 +36,6 @@ export class ScComboboxSearchPanel {
   );
 
   constructor() {
-    effect(() => signalSetFn(this.combobox.alwaysExpanded[SIGNAL], true));
+    bindInput(this.combobox.alwaysExpanded, true);
   }
 }

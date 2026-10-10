@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, toggleVariants } from '@semantic-components/ui';
+import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR, type ScEditorHeadingLevel } from './editor';
 
 const HEADING_OPTIONS: { value: ScEditorHeadingLevel; label: string }[] = [
@@ -39,6 +39,10 @@ export class ScEditorHeading {
   protected readonly disabled = computed(
     () => this.disabledInput() || this.editor.disabled(),
   );
+
+  constructor() {
+    bindInput(inject(ToolbarWidget).disabled, this.disabled);
+  }
 
   readonly headingOptions = HEADING_OPTIONS;
 

@@ -10,8 +10,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '../../utils';
+import { cn, setInput } from '../../utils';
 import { ScMenuPortal } from './menu-portal';
 
 @Component({
@@ -76,7 +75,7 @@ export class ScMenuItem {
     effect(() => {
       const menu = this.submenuPortal()?.menu();
       if (menu) {
-        signalSetFn(this.menuItem.submenu[SIGNAL], menu);
+        setInput(this.menuItem.submenu, menu);
       }
     });
   }

@@ -1,7 +1,6 @@
 import { Combobox } from '@angular/aria/combobox';
-import { Directive, computed, effect, inject, input } from '@angular/core';
-import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
-import { cn } from '../../utils';
+import { Directive, computed, inject, input } from '@angular/core';
+import { bindInput, cn } from '../../utils';
 
 @Directive({
   selector: 'div[scCommand]',
@@ -32,6 +31,6 @@ export class ScCommand {
   );
 
   constructor() {
-    effect(() => signalSetFn(this.combobox.alwaysExpanded[SIGNAL], true));
+    bindInput(this.combobox.alwaysExpanded, true);
   }
 }

@@ -1,6 +1,6 @@
 import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { cn, toggleVariants } from '@semantic-components/ui';
+import { bindInput, cn, toggleVariants } from '@semantic-components/ui';
 import { SC_EDITOR } from './editor';
 
 @Directive({
@@ -29,6 +29,10 @@ export class ScEditorAlignJustifyToggle {
   protected readonly disabled = computed(
     () => this.disabledInput() || this.editor.disabled(),
   );
+
+  constructor() {
+    bindInput(inject(ToolbarWidget).disabled, this.disabled);
+  }
 
   onClick(): void {
     this.editor.execCommand('justifyFull');

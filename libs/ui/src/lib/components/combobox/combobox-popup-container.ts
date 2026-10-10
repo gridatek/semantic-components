@@ -1,6 +1,6 @@
 import { ComboboxPopup } from '@angular/aria/combobox';
 import { Directive, inject } from '@angular/core';
-import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
+import { bindInput } from '../../utils';
 
 @Directive({
   selector: 'ng-template[scComboboxPopupContainer]',
@@ -10,6 +10,6 @@ export class ScComboboxPopupContainer {
   private readonly popup = inject(ComboboxPopup);
 
   constructor() {
-    signalSetFn(this.popup.popupType[SIGNAL], 'dialog');
+    bindInput(this.popup.popupType, 'dialog');
   }
 }

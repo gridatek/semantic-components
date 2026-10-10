@@ -8,11 +8,11 @@ import {
   effect,
   input,
 } from '@angular/core';
-import { SIGNAL, signalSetFn } from '@angular/core/primitives/signals';
 import {
   type ScOverlayAlign,
   buildOverlayPositionsWithFallback,
   cn,
+  setInput,
 } from '../../utils';
 import { ScMenuPortal } from './menu-portal';
 import { ScMenuTrigger } from './menu-trigger';
@@ -76,7 +76,7 @@ export class ScMenuProvider {
       const trigger = this.triggerChild()?.trigger;
       const menu = this.menuPortal()?.menu();
       if (trigger && menu) {
-        signalSetFn(trigger.menu[SIGNAL], menu);
+        setInput(trigger.menu, menu);
       }
     });
   }
