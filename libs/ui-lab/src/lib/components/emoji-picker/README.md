@@ -6,8 +6,8 @@ A composable, searchable emoji picker built from directive primitives.
 
 - `ScEmojiPicker` - Root provider (manages state, provides `ScEmojiPickerState`)
 - `ScEmojiPickerSearch` - Search input directive
-- `ScEmojiPickerCategoryTabs` - Category tab bar (`exportAs: 'scEmojiPickerCategoryTabs'`)
-- `ScEmojiPickerCategoryTab` - Individual category tab button directive
+- `ScEmojiPickerCategoryTabs` - Category switcher (`exportAs: 'scEmojiPickerCategoryTabs'`): an aria toolbar named "Emoji categories" — one Tab stop, arrow keys between categories
+- `ScEmojiPickerCategoryTab` - Category toggle button (`aria-pressed` on the shown category)
 - `ScEmojiPickerGrid` - Emoji grid directive (`exportAs: 'scEmojiPickerGrid'`), exposes `emojis()` and `isEmpty()`
 - `ScEmojiPickerItem` - Individual emoji button directive
 - `ScEmojiPickerRecent` - Recently used section directive (`exportAs: 'scEmojiPickerRecent'`), exposes `visible()`

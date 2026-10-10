@@ -64,7 +64,7 @@ Without Signal Forms, use two-way binding: `<div scMultiselect [(value)]="labels
 </span>
 ```
 
-> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default summary uses the raw values. If an initial selection must show labels immediately, project the content.
+> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default summary uses the raw values. If an initial selection must show labels immediately, pass `[displayWith]="labelFor"` (a `(value: string) => string | undefined` function) or project the content.
 
 ## Signal Forms
 
@@ -86,34 +86,37 @@ readonly labelsForm = form(this.model, (p) => {
 
 Focus always stays on the trigger.
 
-| Key                  | Closed     | Open                                  |
-| -------------------- | ---------- | ------------------------------------- |
-| `Enter` / `Space`    | Open       | Toggle the active option (stays open) |
-| `ArrowDown`          | Open       | Next option                           |
-| `ArrowUp`            | —          | Previous option                       |
-| `Home` / `End`       | —          | First / last option                   |
-| Printable characters | —          | Typeahead to the matching option      |
-| `Escape`             | —          | Close                                 |
-| `Tab`                | Move focus | Close and move focus                  |
+| Key                  | Closed                            | Open                                  |
+| -------------------- | --------------------------------- | ------------------------------------- |
+| `Enter` / `Space`    | Open                              | Toggle the active option (stays open) |
+| `ArrowDown`          | Open                              | Next option                           |
+| `ArrowUp`            | —                                 | Previous option                       |
+| `Home` / `End`       | —                                 | First / last option                   |
+| Printable characters | Open at the first matching option | Typeahead to the matching option      |
+| `Escape`             | —                                 | Close                                 |
+| `Tab`                | Move focus                        | Close and move focus                  |
+
+The highlighted option follows the pointer too, so keyboard and mouse share one highlight.
 
 ## API Reference
 
 ### ScMultiselect
 
-| Member             | Type               | Description                                      |
-| ------------------ | ------------------ | ------------------------------------------------ |
-| `value`            | `model<string[]>`  | Selected option values                           |
-| `placeholder`      | `input<string>`    | Shown by `ScMultiselectValue` when none selected |
-| `disabled`         | `input<boolean>`   | Disables the multiselect                         |
-| `readonly`         | `input<boolean>`   | Prevents opening/changing                        |
-| `required`         | `input<boolean>`   | Sets `aria-required` on the trigger              |
-| `invalid`          | `input<boolean>`   | Sets `aria-invalid` on the trigger               |
-| `touch`            | `output<void>`     | Emitted when focus leaves the trigger            |
-| `open()`           | `Signal<boolean>`  | Whether the popup is open                        |
-| `selectedLabels()` | `Signal<string[]>` | Labels of the selected options (or their values) |
-| `close()`          | `void`             | Close and refocus the trigger                    |
-| `focus()`          | `void`             | Focus the trigger                                |
-| `class`            | `input<string>`    | Additional CSS classes                           |
+| Member             | Type                               | Description                                                                     |
+| ------------------ | ---------------------------------- | ------------------------------------------------------------------------------- |
+| `value`            | `model<string[]>`                  | Selected option values                                                          |
+| `placeholder`      | `input<string>`                    | Shown by `ScMultiselectValue` when none selected                                |
+| `displayWith`      | `input<(value: string) => string>` | Label for a value, used before options render (return `undefined` to fall back) |
+| `disabled`         | `input<boolean>`                   | Disables the multiselect                                                        |
+| `readonly`         | `input<boolean>`                   | Prevents opening/changing                                                       |
+| `required`         | `input<boolean>`                   | Sets `aria-required` on the trigger                                             |
+| `invalid`          | `input<boolean>`                   | Sets `aria-invalid` on the trigger                                              |
+| `touch`            | `output<void>`                     | Emitted when focus leaves the trigger                                           |
+| `open()`           | `Signal<boolean>`                  | Whether the popup is open                                                       |
+| `selectedLabels()` | `Signal<string[]>`                 | Labels of the selected options (or their values)                                |
+| `close()`          | `void`                             | Close and refocus the trigger                                                   |
+| `focus()`          | `void`                             | Focus the trigger                                                               |
+| `class`            | `input<string>`                    | Additional CSS classes                                                          |
 
 ### ScMultiselectTrigger
 

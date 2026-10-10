@@ -90,7 +90,7 @@ Project content into `ScComboboxValue` to render the selection yourself (shown o
 <span scComboboxValue>@if (selectedCountry(); as c) { {{ c.code }} {{ c.dialCode }} }</span>
 ```
 
-> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default `ScComboboxValue` shows the raw value — project content if an initial value must show its label.
+> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default `ScComboboxValue` shows the raw value — pass `[displayWith]="labelFor"` (a `(value: string) => string | undefined` function) or project content if an initial value must show its label.
 
 ## Signal Forms
 
@@ -115,25 +115,28 @@ readonly countryForm = form(this.model, (p) => {
 | Search  | `Escape`                  | Close, refocus the trigger                     |
 | Popup   | `Tab` out / click outside | Close                                          |
 
+The highlighted option follows the pointer too, so keyboard and mouse share one highlight.
+
 ## API Reference
 
 ### ScCombobox
 
-| Member            | Type              | Description                                      |
-| ----------------- | ----------------- | ------------------------------------------------ |
-| `value`           | `model<string>`   | Selected option value (`''` when none)           |
-| `placeholder`     | `input<string>`   | Shown by `ScComboboxValue` when nothing selected |
-| `disabled`        | `input<boolean>`  | Disables the combobox                            |
-| `readonly`        | `input<boolean>`  | Prevents opening/changing                        |
-| `required`        | `input<boolean>`  | Sets `aria-required` on the trigger              |
-| `invalid`         | `input<boolean>`  | Sets `aria-invalid` on the trigger               |
-| `touch`           | `output<void>`    | Emitted when focus leaves the trigger            |
-| `open()`          | `Signal<boolean>` | Whether the popup is open                        |
-| `selectedLabel()` | `Signal<string>`  | Label of the selected option (or its value)      |
-| `select(value)`   | `void`            | Select a value, close, refocus the trigger       |
-| `clear()`         | `void`            | Clear the selection, focus the trigger           |
-| `close()`         | `void`            | Close and refocus the trigger                    |
-| `focus()`         | `void`            | Focus the trigger                                |
+| Member            | Type                               | Description                                                                     |
+| ----------------- | ---------------------------------- | ------------------------------------------------------------------------------- |
+| `value`           | `model<string>`                    | Selected option value (`''` when none)                                          |
+| `placeholder`     | `input<string>`                    | Shown by `ScComboboxValue` when nothing selected                                |
+| `displayWith`     | `input<(value: string) => string>` | Label for a value, used before options render (return `undefined` to fall back) |
+| `disabled`        | `input<boolean>`                   | Disables the combobox                                                           |
+| `readonly`        | `input<boolean>`                   | Prevents opening/changing                                                       |
+| `required`        | `input<boolean>`                   | Sets `aria-required` on the trigger                                             |
+| `invalid`         | `input<boolean>`                   | Sets `aria-invalid` on the trigger                                              |
+| `touch`           | `output<void>`                     | Emitted when focus leaves the trigger                                           |
+| `open()`          | `Signal<boolean>`                  | Whether the popup is open                                                       |
+| `selectedLabel()` | `Signal<string>`                   | Label of the selected option (or its value)                                     |
+| `select(value)`   | `void`                             | Select a value, close, refocus the trigger                                      |
+| `clear()`         | `void`                             | Clear the selection, focus the trigger                                          |
+| `close()`         | `void`                             | Close and refocus the trigger                                                   |
+| `focus()`         | `void`                             | Focus the trigger                                                               |
 
 ### ScComboboxSearch
 

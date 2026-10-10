@@ -1,9 +1,11 @@
+import { Tabs } from '@angular/aria/tabs';
 import { Directive, computed, input, model } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_STEPPER, ScStepperOrientation } from './stepper-types';
 
 @Directive({
   selector: '[scStepper]',
+  hostDirectives: [Tabs],
   providers: [{ provide: SC_STEPPER, useExisting: ScStepper }],
   host: {
     '[class]': 'class()',

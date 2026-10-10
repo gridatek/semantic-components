@@ -5,7 +5,8 @@ import { SC_SPEED_DIAL } from './speed-dial-types';
 @Directive({
   selector: '[scSpeedDialAction]',
   host: {
-    role: 'menuitem',
+    // The menu item is the button inside; this wrapper only lays it out.
+    role: 'none',
     '[class]': 'class()',
     '[style.transition-delay]': 'transitionDelay()',
   },

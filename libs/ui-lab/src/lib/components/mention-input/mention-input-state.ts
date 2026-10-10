@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ElementRef,
@@ -5,6 +6,7 @@ import {
   type Signal,
   type WritableSignal,
   computed,
+  inject,
   signal,
 } from '@angular/core';
 import { getCaretOffset } from './mention-input-caret';
@@ -28,6 +30,13 @@ export class ScMentionInputState {
   readonly caretOffset = signal<{ x: number; y: number }>({ x: 0, y: 0 });
 
   private mentionStartIndex = -1;
+
+  /** Id of the suggestion listbox, for the textarea's aria-controls. */
+  readonly listboxId = inject(_IdGenerator).getId('sc-mention-suggestions-');
+
+  optionId(index: number): string {
+    return `${this.listboxId}-option-${index}`;
+  }
 
   readonly filteredUsers = computed(() => {
     const query = this.searchQuery().toLowerCase();

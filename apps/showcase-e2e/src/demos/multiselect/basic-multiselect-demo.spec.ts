@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { collectErrors, press } from '../../interaction';
+import { activeDescendantText, collectErrors, press } from '../../interaction';
 
 test.describe('Basic Multiselect Demo', () => {
   let errors: string[];
@@ -58,5 +58,15 @@ test.describe('Basic Multiselect Demo', () => {
       'aria-selected',
       'true',
     );
+  });
+
+  test('type-ahead on a closed multiselect opens it at the first match', async ({
+    page,
+  }) => {
+    const trigger = page.locator('[scMultiselectTrigger]');
+    await trigger.focus();
+    await press(page, 's');
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await expect.poll(() => activeDescendantText(trigger)).toBe('Starred');
   });
 });

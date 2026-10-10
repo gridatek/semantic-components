@@ -1,4 +1,5 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { Directionality } from '@angular/cdk/bidi';
 import { Overlay, OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
@@ -59,6 +60,7 @@ export class ScLightboxProvider {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly images = input<ScLightboxImageData[]>([]);
   readonly loop = input<boolean>(true);
+  private readonly dir = inject(Directionality);
   readonly closeOnEscape = input<boolean>(true);
 
   readonly isOpen = model<boolean>(false);
@@ -125,6 +127,36 @@ export class ScLightboxProvider {
     this.closed.emit();
   }
 
+  /** Next image (wraps when `loop` is on). */
+  next(): void {
+    this.step(1);
+  }
+
+  /** Previous image (wraps when `loop` is on). */
+  previous(): void {
+    this.step(-1);
+  }
+
+  private step(delta: number): void {
+    const count = this.images().length;
+    if (!count) return;
+    const target = this.currentIndex() + delta;
+    if (this.loop()) this.goTo((target + count) % count);
+    else if (target >= 0 && target < count) this.goTo(target);
+  }
+
+  /**
+   * ←/→ change the image (mirrored in RTL), except inside the toolbar, whose
+   * arrow keys move between its buttons.
+   */
+  private onArrow(event: KeyboardEvent): void {
+    if ((event.target as HTMLElement | null)?.closest('[role=toolbar]')) return;
+    event.preventDefault();
+    const forward = (event.key === 'ArrowRight') !== (this.dir.value === 'rtl');
+    if (forward) this.next();
+    else this.previous();
+  }
+
   goTo(index: number): void {
     this.currentIndex.set(index);
     this.zoomLevel.set(1);
@@ -172,6 +204,8 @@ export class ScLightboxProvider {
           if (this.closeOnEscape()) {
             this.close();
           }
+        } else if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+          this.onArrow(event);
         } else if (event.key === '+' || event.key === '=') {
           this.zoomIn();
         } else if (event.key === '-') {

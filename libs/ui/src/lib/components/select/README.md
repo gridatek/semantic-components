@@ -71,7 +71,15 @@ Without Signal Forms, use two-way binding: `<div scSelect [(value)]="fruit">`.
 </span>
 ```
 
-> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default `ScSelectValue` shows the raw value. If your initial value must show a label immediately, project the content as above.
+> The popup is rendered lazily, so an option's label is only known after the list has been opened once. Until then the default `ScSelectValue` shows the raw value. If your initial value must show a label immediately, pass `[displayWith]` or project the content as above:
+>
+> ```html
+> <div scSelect [formField]="form.fruit" [displayWith]="fruitLabel">…</div>
+> ```
+>
+> ```typescript
+> readonly fruitLabel = (value: string) => this.fruits.find((f) => f.value === value)?.label;
+> ```
 
 ### With Groups
 
@@ -106,17 +114,17 @@ readonly fruitForm = form(this.model, (p) => {
 
 Focus always stays on the trigger.
 
-| Key                  | Closed     | Open                               |
-| -------------------- | ---------- | ---------------------------------- |
-| `Enter` / `Space`    | Open       | Select the active option and close |
-| `ArrowDown`          | Open       | Next option                        |
-| `ArrowUp`            | —          | Previous option                    |
-| `Home` / `End`       | —          | First / last option                |
-| Printable characters | —          | Typeahead to the matching option   |
-| `Escape`             | —          | Close without changing the value   |
-| `Tab`                | Move focus | Close and move focus               |
+| Key                  | Closed                            | Open                               |
+| -------------------- | --------------------------------- | ---------------------------------- |
+| `Enter` / `Space`    | Open                              | Select the active option and close |
+| `ArrowDown`          | Open                              | Next option                        |
+| `ArrowUp`            | —                                 | Previous option                    |
+| `Home` / `End`       | —                                 | First / last option                |
+| Printable characters | Open at the first matching option | Typeahead to the matching option   |
+| `Escape`             | —                                 | Close without changing the value   |
+| `Tab`                | Move focus                        | Close and move focus               |
 
-Picking the already-selected option keeps it selected (it does not toggle off).
+Picking the already-selected option keeps it selected (it does not toggle off). The highlighted option follows the pointer too, so keyboard and mouse share one highlight.
 
 ## Accessibility
 
@@ -128,21 +136,22 @@ Picking the already-selected option keeps it selected (it does not toggle off).
 
 ### ScSelect
 
-| Member            | Type              | Description                                     |
-| ----------------- | ----------------- | ----------------------------------------------- |
-| `value`           | `model<string>`   | Selected option value (`''` when none)          |
-| `placeholder`     | `input<string>`   | Shown by `ScSelectValue` when nothing is chosen |
-| `disabled`        | `input<boolean>`  | Disables the select                             |
-| `readonly`        | `input<boolean>`  | Prevents opening/changing                       |
-| `required`        | `input<boolean>`  | Sets `aria-required` on the trigger             |
-| `invalid`         | `input<boolean>`  | Sets `aria-invalid` on the trigger              |
-| `touch`           | `output<void>`    | Emitted when focus leaves the trigger           |
-| `open()`          | `Signal<boolean>` | Whether the popup is open                       |
-| `selectedLabel()` | `Signal<string>`  | Label of the selected option (or its value)     |
-| `select(value)`   | `void`            | Select a value, close, refocus the trigger      |
-| `close()`         | `void`            | Close and refocus the trigger                   |
-| `focus()`         | `void`            | Focus the trigger                               |
-| `class`           | `input<string>`   | Additional CSS classes                          |
+| Member            | Type                               | Description                                                                     |
+| ----------------- | ---------------------------------- | ------------------------------------------------------------------------------- |
+| `value`           | `model<string>`                    | Selected option value (`''` when none)                                          |
+| `placeholder`     | `input<string>`                    | Shown by `ScSelectValue` when nothing is chosen                                 |
+| `displayWith`     | `input<(value: string) => string>` | Label for a value, used before options render (return `undefined` to fall back) |
+| `disabled`        | `input<boolean>`                   | Disables the select                                                             |
+| `readonly`        | `input<boolean>`                   | Prevents opening/changing                                                       |
+| `required`        | `input<boolean>`                   | Sets `aria-required` on the trigger                                             |
+| `invalid`         | `input<boolean>`                   | Sets `aria-invalid` on the trigger                                              |
+| `touch`           | `output<void>`                     | Emitted when focus leaves the trigger                                           |
+| `open()`          | `Signal<boolean>`                  | Whether the popup is open                                                       |
+| `selectedLabel()` | `Signal<string>`                   | Label of the selected option (or its value)                                     |
+| `select(value)`   | `void`                             | Select a value, close, refocus the trigger                                      |
+| `close()`         | `void`                             | Close and refocus the trigger                                                   |
+| `focus()`         | `void`                             | Focus the trigger                                                               |
+| `class`           | `input<string>`                    | Additional CSS classes                                                          |
 
 ### ScSelectTrigger
 

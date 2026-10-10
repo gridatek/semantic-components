@@ -103,7 +103,7 @@ The PDF viewer follows a **composable directive** pattern. Instead of a single m
 - **Download & print** - Built-in buttons
 - **Fullscreen** - Native fullscreen API
 - **Responsive** - ResizeObserver-based container-aware scaling
-- **Keyboard accessible** - All controls are keyboard navigable
+- **Keyboard accessible** - All controls are keyboard navigable; the signature dialog's Draw / Type / Upload switcher is an `@angular/aria` tab list (arrow keys, one Tab stop) with labelled thickness and description fields
 - **Composable** - Pick only the directives you need
 
 ## Coming Soon

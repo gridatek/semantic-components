@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, useActiveOption } from '../../utils';
 import { SC_COMBOBOX } from './combobox-tokens';
 
 @Directive({
@@ -21,6 +21,7 @@ import { SC_COMBOBOX } from './combobox-tokens';
   host: {
     'data-slot': 'combobox-item',
     '[class]': 'class()',
+    '(pointermove)': 'onPointerMove()',
   },
 })
 export class ScComboboxItem {
@@ -28,6 +29,7 @@ export class ScComboboxItem {
 
   private readonly combobox = inject(SC_COMBOBOX);
   private readonly option = inject<Option<string>>(Option);
+  protected readonly onPointerMove = useActiveOption(this.option);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   constructor() {
@@ -44,17 +46,11 @@ export class ScComboboxItem {
       this.combobox.setRendered(value, true);
       onCleanup(() => this.combobox.setRendered(value, false));
     });
-
-    effect(() => {
-      if (this.option.active()) {
-        this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
-      }
-    });
   }
 
   protected readonly class = computed(() =>
     cn(
-      'group transition-colors duration-100 hover:bg-accent/50 hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary relative flex cursor-pointer items-center gap-2 rounded-md py-1 pe-8 ps-1.5 text-sm outline-none aria-disabled:pointer-events-none aria-disabled:opacity-50',
+      'group transition-colors duration-100 data-[active=true]:bg-accent data-[active=true]:text-accent-foreground aria-selected:text-primary relative flex cursor-pointer items-center gap-2 rounded-md py-1 pe-8 ps-1.5 text-sm outline-none aria-disabled:pointer-events-none aria-disabled:opacity-50',
       "[&_svg:not([class*='size-'])]:size-4",
       this.classInput(),
     ),

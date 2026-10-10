@@ -26,7 +26,12 @@ import { ScMentionInputState } from './mention-input-state';
         [cdkConnectedOverlayPositions]="positions()"
         [cdkConnectedOverlayScrollStrategy]="scrollStrategy"
       >
-        <div role="listbox" [class]="listClass()">
+        <div
+          role="listbox"
+          [id]="state.listboxId"
+          [attr.aria-label]="label()"
+          [class]="listClass()"
+        >
           <ng-content />
         </div>
       </ng-template>
@@ -39,6 +44,7 @@ import { ScMentionInputState } from './mention-input-state';
 })
 export class ScMentionInputSuggestions {
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly label = input('Suggestions', { alias: 'aria-label' });
 
   protected readonly state = inject(ScMentionInputState);
   protected readonly scrollStrategy: ScrollStrategy = inject(

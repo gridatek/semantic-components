@@ -1,3 +1,4 @@
+import type { Menu } from '@angular/aria/menu';
 import {
   DestroyRef,
   Directive,
@@ -8,6 +9,7 @@ import {
   inject,
   input,
   model,
+  signal,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { ScSpeedDialAction } from './speed-dial-action';
@@ -37,6 +39,9 @@ export class ScSpeedDial {
   readonly open = model(false);
 
   readonly actions = contentChildren(ScSpeedDialAction);
+
+  /** The aria menu of the action list (registered by ScSpeedDialActionList). */
+  readonly menu = signal<Menu<unknown> | undefined>(undefined);
 
   protected readonly class = computed(() => {
     const dir = this.direction();

@@ -45,14 +45,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           let-hasChildren="hasChildren"
           let-toggle="toggle"
         >
-          <button
-            scOrgChartCard
-            [attr.aria-expanded]="hasChildren ? expanded : null"
-            [attr.aria-label]="
-              node.name + (node.title ? ', ' + node.title : '')
-            "
-            (click)="toggle()"
-          >
+          <div scOrgChartCard>
             @if (node.avatar) {
               <img
                 [src]="node.avatar"
@@ -86,7 +79,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                 "
               ></svg>
             }
-          </button>
+          </div>
         </ng-template>
       </div>
     </div>

@@ -51,10 +51,7 @@ interface FormModel {
   template: `
     <form [formRoot]="currencyForm">
       <div class="flex items-center gap-2">
-        <div
-          scInputGroup
-          class="has-[[data-slot=select-trigger]:focus-visible]:border-ring has-[[data-slot=select-trigger]:focus-visible]:ring-ring/50 w-80 has-[[data-slot=select-trigger]:focus-visible]:ring-3"
-        >
+        <div scInputGroup class="w-80">
           <div
             scSelect
             class="w-12 min-w-12"

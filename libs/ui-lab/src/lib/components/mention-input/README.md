@@ -116,7 +116,7 @@ const channels: MentionUser[] = [
 
 ## Accessibility
 
-- Dropdown has `role="listbox"` for screen readers
-- Options have `role="option"` and `aria-selected`
-- Keyboard navigation support (Arrow keys, Enter, Tab, Escape)
-- Focus management when selecting mentions
+- Focus stays in the text field: it has `aria-autocomplete="list"`, and while suggestions are shown `aria-controls` (the listbox) and `aria-activedescendant` (the highlighted option).
+- Suggestions are a `role="listbox"` named "Suggestions" of `role="option"`s with `aria-selected`.
+- ↑/↓ move the highlight, Enter or Tab inserts the mention, Escape closes the list.
+- Clicking a suggestion inserts it without moving focus out of the field.

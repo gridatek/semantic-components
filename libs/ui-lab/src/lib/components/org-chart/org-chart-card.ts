@@ -2,10 +2,15 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_ORG_CHART } from './org-chart-types';
 
+/**
+ * The visible card of a person. The node around it (`role="treeitem"`) takes
+ * focus and handles clicks and keys, so the card is plain content — use a
+ * `div`, not a button. It shows the focus ring while its node is focused.
+ */
 @Directive({
-  selector: 'button[scOrgChartCard]',
+  selector: '[scOrgChartCard]',
   host: {
-    type: 'button',
+    'data-slot': 'org-chart-card',
     '[class]': 'class()',
   },
 })
@@ -17,8 +22,7 @@ export class ScOrgChartCard {
   protected readonly class = computed(() =>
     cn(
       'flex items-center gap-3 p-3 rounded-lg border bg-card text-card-foreground',
-      'shadow-sm hover:shadow-md transition-shadow',
-      'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      'shadow-sm hover:shadow-md transition-shadow cursor-pointer select-none',
       this.orgChart.compact() ? 'min-w-[160px]' : 'min-w-[200px]',
       this.classInput(),
     ),

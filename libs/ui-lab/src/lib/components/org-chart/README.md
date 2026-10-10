@@ -18,7 +18,7 @@ import type { OrgChartNode, ScOrgChartNodeExpandEvent } from '@semantic-componen
   <sc-org-chart-node [node]="orgData()" />
 
   <ng-template scOrgChartNodeDef let-node let-expanded="expanded" let-hasChildren="hasChildren" let-toggle="toggle">
-    <button scOrgChartCard [attr.aria-expanded]="hasChildren ? expanded : null" [attr.aria-label]="node.name + (node.title ? ', ' + node.title : '')" (click)="toggle()">
+    <div scOrgChartCard>
       <div class="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
         <span class="text-primary text-lg font-semibold">{{ getInitials(node.name) }}</span>
       </div>
@@ -35,7 +35,7 @@ import type { OrgChartNode, ScOrgChartNodeExpandEvent } from '@semantic-componen
             : 'text-muted-foreground transition-transform duration-200'"
       ></svg>
       }
-    </button>
+    </div>
   </ng-template>
 </div>
 ```
@@ -116,9 +116,9 @@ Handles recursion and connector lines. Reads config from the root `ScOrgChart` d
 | ------ | -------------- | -------------------- |
 | `node` | `OrgChartNode` | Node data (required) |
 
-### ScOrgChartCard (`button[scOrgChartCard]`)
+### ScOrgChartCard (`[scOrgChartCard]`)
 
-Card button styling directive. Reads `compact` from root to toggle min-width.
+Card styling directive. Reads `compact` from root to toggle min-width. Use a `div`: the surrounding node (`role="treeitem"`) takes focus and handles clicks and keys, and is named from `node.name` and `node.title`.
 
 ## Type Definitions
 
@@ -165,17 +165,22 @@ type ScOrgChartDirection = 'vertical' | 'horizontal';
 
 ## Accessibility
 
-- Container has `role="tree"` for screen readers
-- Nodes support `aria-expanded` attribute when collapsible
-- Card buttons support accessible labels via `aria-label`
-- Focus indicators for keyboard navigation
-- Avatar images include proper alt text
-- Initials fallback for nodes without avatars
+Built on `@angular/aria`'s `Tree`:
+
+- The chart is `role="tree"` (named "Organization chart" unless given an `aria-label`); each person is a `role="treeitem"` with `aria-level`, `aria-expanded` (when it has reports) and a name from `node.name` + `node.title`.
+- Reports are rendered in a `role="group"`.
+- One Tab stop: focus moves between people with the arrow keys.
+- Avatar images include alt text; initials are the fallback.
 
 ## Keyboard Navigation
 
-| Key   | Action                                |
-| ----- | ------------------------------------- |
-| Tab   | Move focus between nodes              |
-| Enter | Toggle expand/collapse, trigger click |
-| Space | Toggle expand/collapse, trigger click |
+| Key               | Action                                        |
+| ----------------- | --------------------------------------------- |
+| `Tab`             | Into / out of the chart (one Tab stop)        |
+| `↓` / `↑`         | Next / previous visible person                |
+| `→`               | Expand; if expanded, move to the first report |
+| `←`               | Collapse; if collapsed, move to the manager   |
+| `Home` / `End`    | First / last visible person                   |
+| `Enter` / `Space` | Select the person                             |
+
+Clicking a person toggles their reports. With `[collapsible]="false"` everyone stays expanded.

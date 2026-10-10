@@ -32,12 +32,7 @@ import {
         <sc-org-chart-node [node]="orgData()" />
 
         <ng-template scOrgChartNodeDef let-node let-hasChildren="hasChildren">
-          <button
-            scOrgChartCard
-            [attr.aria-label]="
-              node.name + (node.title ? ', ' + node.title : '')
-            "
-          >
+          <div scOrgChartCard>
             <div
               class="bg-primary/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
             >
@@ -53,7 +48,7 @@ import {
                 </p>
               }
             </div>
-          </button>
+          </div>
         </ng-template>
       </div>
     </div>

@@ -938,8 +938,7 @@
     "description": "A hierarchical view of nested items.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "Typography",

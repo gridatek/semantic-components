@@ -49,7 +49,7 @@ import {
     SiTextAlignEndIcon,
   ],
   template: \`
-    <div scToolbar [values]="['bold']">
+    <div scToolbar [values]="['bold']" aria-label="Text formatting">
       <div scToolbarToggleGroup>
         <button scToolbarToggle value="bold" aria-label="Bold">
           <svg siBoldIcon></svg>

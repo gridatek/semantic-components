@@ -9,7 +9,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, useActiveOption } from '../../utils';
 import { SC_COMMAND } from './command-tokens';
 
 @Directive({
@@ -23,6 +23,7 @@ import { SC_COMMAND } from './command-tokens';
   host: {
     'data-slot': 'command-item',
     '[class]': 'class()',
+    '(pointermove)': 'onPointerMove()',
   },
 })
 export class ScCommandItem {
@@ -32,6 +33,7 @@ export class ScCommandItem {
   readonly select = output<void>();
 
   private readonly option = inject<Option<string>>(Option);
+  protected readonly onPointerMove = useActiveOption(this.option);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly value = computed(() => this.option.value());
@@ -44,19 +46,13 @@ export class ScCommandItem {
       onCleanup(() => command.unregisterItem(this));
     });
     inject(DestroyRef).onDestroy(() => command.unregisterItem(this));
-
-    effect(() => {
-      if (this.option.active()) {
-        this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
-      }
-    });
   }
 
   protected readonly class = computed(() =>
     cn(
       'group/command-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
       'aria-disabled:pointer-events-none aria-disabled:opacity-50',
-      'transition-colors duration-100 hover:bg-muted/50 hover:text-foreground data-[active=true]:bg-muted data-[active=true]:text-foreground',
+      'transition-colors duration-100 data-[active=true]:bg-muted data-[active=true]:text-foreground',
       '[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=size-])]:size-4',
       this.classInput(),
     ),

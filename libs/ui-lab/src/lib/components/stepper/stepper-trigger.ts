@@ -1,21 +1,20 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, type OnInit, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
+import { ScAriaStepperTab } from './aria-stepper-tab';
+import { SC_STEPPER_ITEM } from './stepper-types';
 
 @Directive({
   selector: 'button[scStepperTrigger]',
   exportAs: 'scStepperTrigger',
+  hostDirectives: [ScAriaStepperTab],
   host: {
     type: 'button',
-    role: 'tab',
     '[class]': 'class()',
-    '[attr.aria-selected]': 'stepperItem.state() === "active"',
     '[attr.data-state]': 'stepperItem.state()',
-    '(click)': 'onClick()',
   },
 })
-export class ScStepperTrigger {
-  private readonly stepper = inject(SC_STEPPER);
+export class ScStepperTrigger implements OnInit {
+  private readonly tab = inject(ScAriaStepperTab);
   readonly stepperItem = inject(SC_STEPPER_ITEM);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -32,7 +31,9 @@ export class ScStepperTrigger {
     ),
   );
 
-  onClick(): void {
-    this.stepper.goToStep(this.stepperItem.step());
+  ngOnInit(): void {
+    // The step is known now (the item's inputs are set), and aria only reads
+    // the tab's value later, lazily.
+    this.tab.setValue(String(this.stepperItem.step()));
   }
 }

@@ -1,21 +1,50 @@
-import { Directive, computed, inject, input } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { MenuTrigger } from '@angular/aria/menu';
+import {
+  Directive,
+  computed,
+  effect,
+  inject,
+  input,
+  untracked,
+} from '@angular/core';
+import { bindInput, cn } from '@semantic-components/ui';
 import { SC_SPEED_DIAL } from './speed-dial-types';
 
 @Directive({
   selector: 'button[scSpeedDialTrigger]',
+  // aria MenuTrigger: toggles on click/Enter/Space/ArrowDown, sets
+  // aria-expanded/aria-haspopup, focuses the first action on open.
+  hostDirectives: [MenuTrigger],
   host: {
     type: 'button',
-    '[attr.aria-expanded]': 'speedDial.open()',
-    '[attr.aria-haspopup]': '"menu"',
     '[class]': 'class()',
-    '(click)': 'speedDial.toggle()',
   },
 })
 export class ScSpeedDialTrigger {
   readonly speedDial = inject(SC_SPEED_DIAL);
 
+  private readonly trigger = inject(MenuTrigger);
+
   readonly classInput = input<string>('', { alias: 'class' });
+
+  constructor() {
+    bindInput(this.trigger.menu, this.speedDial.menu);
+
+    // trigger → speed dial
+    effect(() => {
+      const expanded = this.trigger.expanded();
+      untracked(() => this.speedDial.open.set(expanded));
+    });
+    // speed dial → trigger (programmatic open/close, outside click)
+    effect(() => {
+      const open = this.speedDial.open();
+      untracked(() => {
+        if (open === this.trigger.expanded()) return;
+        if (open) this.trigger.open();
+        else this.trigger.close();
+      });
+    });
+  }
 
   protected readonly class = computed(() =>
     cn(

@@ -1,18 +1,20 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directive, type OnInit, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { ScAriaStepperPanel } from './aria-stepper-panel';
 import { SC_STEPPER, SC_STEPPER_PANEL } from './stepper-types';
 
 @Directive({
   selector: '[scStepperPanel]',
+  hostDirectives: [ScAriaStepperPanel],
   providers: [{ provide: SC_STEPPER_PANEL, useExisting: ScStepperPanel }],
   host: {
-    role: 'tabpanel',
     '[class]': 'class()',
     '[hidden]': '!isActive()',
   },
 })
-export class ScStepperPanel {
+export class ScStepperPanel implements OnInit {
   private readonly stepper = inject(SC_STEPPER);
+  private readonly panel = inject(ScAriaStepperPanel);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly step = input.required<number>();
@@ -20,4 +22,8 @@ export class ScStepperPanel {
   readonly isActive = computed(() => this.stepper.isStepActive(this.step()));
 
   protected readonly class = computed(() => cn('mt-4', this.classInput()));
+
+  ngOnInit(): void {
+    this.panel.setValue(String(this.step()));
+  }
 }

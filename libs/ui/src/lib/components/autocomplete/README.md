@@ -104,6 +104,8 @@ Focus always stays in the input.
 | `Escape`             | —                    | Close, keep the text               |
 | `Tab`                | Move focus           | Close and move focus               |
 
+The highlighted option follows the pointer too, so keyboard and mouse share one highlight.
+
 ## API Reference
 
 ### ScAutocomplete

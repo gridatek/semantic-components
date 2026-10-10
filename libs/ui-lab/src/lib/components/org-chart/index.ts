@@ -1,3 +1,4 @@
+export { ScAriaOrgChartItem } from './aria-org-chart-item';
 export { ScOrgChart } from './org-chart';
 export { ScOrgChartCard } from './org-chart-card';
 export { ScOrgChartNode } from './org-chart-node';

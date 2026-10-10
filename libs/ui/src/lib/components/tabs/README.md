@@ -41,13 +41,26 @@ Built on `@angular/aria/tabs` directives with shadcn styling.
 
 ```html
 <div scTabs orientation="vertical">
-  <div scTabList selectedTab="profile" selectionMode="follow" orientation="vertical">...</div>
+  <div scTabList selectedTab="profile" selectionMode="follow">...</div>
   ...
 </div>
 ```
+
+The tab list follows the root's `orientation` (`aria-orientation`, ↑/↓ instead of ←/→) unless it sets its own.
 
 ### Disabled tab
 
 ```html
 <button scTab value="notifications" disabled>Notifications</button>
 ```
+
+A disabled tab stays focusable with the arrow keys (`aria-disabled`) but can't be selected.
+
+## Keyboard
+
+| Key                            | Action                                                                |
+| ------------------------------ | --------------------------------------------------------------------- |
+| `Tab`                          | Into the tab list (the selected tab), then into the panel             |
+| `←` / `→` (`↑` / `↓` vertical) | Previous / next tab (wraps); selects it with `selectionMode="follow"` |
+| `Home` / `End`                 | First / last tab                                                      |
+| `Enter` / `Space`              | Select the focused tab (`selectionMode="explicit"`)                   |

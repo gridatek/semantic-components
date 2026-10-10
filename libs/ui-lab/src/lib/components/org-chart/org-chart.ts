@@ -1,7 +1,9 @@
+import { Tree } from '@angular/aria/tree';
 import {
   Directive,
   computed,
   contentChild,
+  inject,
   input,
   output,
 } from '@angular/core';
@@ -13,16 +15,24 @@ import type {
 } from './org-chart-types';
 import { SC_ORG_CHART } from './org-chart-types';
 
+/**
+ * An organization chart. Built on `@angular/aria`'s `Tree` (`role="tree"`):
+ * one Tab stop, arrow keys between visible people, ArrowRight/Left and click
+ * to expand/collapse, Enter/Space to select.
+ */
 @Directive({
   selector: 'div[scOrgChart]',
+  hostDirectives: [Tree],
   providers: [{ provide: SC_ORG_CHART, useExisting: ScOrgChart }],
   host: {
-    role: 'tree',
+    'data-slot': 'org-chart',
     '[attr.aria-label]': 'ariaLabel()',
     '[class]': 'class()',
   },
 })
 export class ScOrgChart {
+  readonly tree = inject(Tree);
+
   readonly direction = input<ScOrgChartDirection>('vertical');
   readonly collapsible = input(true);
   readonly compact = input(false);

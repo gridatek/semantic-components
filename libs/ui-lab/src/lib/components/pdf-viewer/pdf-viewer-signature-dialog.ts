@@ -1,3 +1,4 @@
+import { Tab, TabContent, TabList, TabPanel, Tabs } from '@angular/aria/tabs';
 import {
   Component,
   ElementRef,
@@ -15,6 +16,7 @@ type SignatureTab = 'type' | 'draw' | 'image';
 
 @Component({
   selector: 'sc-pdf-viewer-signature-dialog',
+  imports: [Tabs, TabList, Tab, TabPanel, TabContent],
   template: `
     @if (pdfViewer.signatureDialogOpen()) {
       <div
@@ -23,6 +25,7 @@ type SignatureTab = 'type' | 'draw' | 'image';
       >
         <dialog
           open
+          ngTabs
           class="relative w-[570px] max-w-[95vw] rounded border border-[#333] bg-[#474747] p-0 text-[#d1d5db] shadow-lg"
           (click)="$event.stopPropagation()"
         >
@@ -30,128 +33,128 @@ type SignatureTab = 'type' | 'draw' | 'image';
             Add Signature
           </h2>
 
-          <!-- Tabs -->
-          <div class="mt-3 flex border-b border-[#555]" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              class="sig-tab"
-              [attr.aria-selected]="activeTab() === 'type'"
-              [class.sig-tab-active]="activeTab() === 'type'"
-              (click)="activeTab.set('type')"
-            >
-              Type
-            </button>
-            <button
-              type="button"
-              role="tab"
-              class="sig-tab"
-              [attr.aria-selected]="activeTab() === 'draw'"
-              [class.sig-tab-active]="activeTab() === 'draw'"
-              (click)="activeTab.set('draw')"
-            >
-              Draw
-            </button>
-            <button
-              type="button"
-              role="tab"
-              class="sig-tab"
-              [attr.aria-selected]="activeTab() === 'image'"
-              [class.sig-tab-active]="activeTab() === 'image'"
-              (click)="activeTab.set('image')"
-            >
-              Image
-            </button>
+          <!-- Tabs (aria: one Tab stop, arrow keys, linked panels) -->
+          <div
+            ngTabList
+            class="mt-3 flex border-b border-[#555]"
+            aria-label="Signature type"
+            [selectedTab]="activeTab()"
+            (selectedTabChange)="activeTab.set($any($event))"
+          >
+            @for (tab of tabs; track tab.value) {
+              <button
+                ngTab
+                [value]="tab.value"
+                class="sig-tab"
+                [class.sig-tab-active]="activeTab() === tab.value"
+              >
+                {{ tab.label }}
+              </button>
+            }
           </div>
 
           <!-- Tab panels -->
           <div class="px-4 py-3">
-            @switch (activeTab()) {
-              @case ('type') {
-                <div
-                  role="tabpanel"
-                  class="relative flex h-[200px] items-center justify-center rounded bg-[#3d3d3d]"
-                >
-                  <input
-                    type="text"
-                    class="absolute inset-0 size-full border-0 bg-transparent text-center text-[44px] text-white italic outline-none"
-                    style="font-family: 'Brush Script MT', 'Segoe Script', cursive, serif"
-                    placeholder="Type your signature"
-                    [value]="typedText()"
-                    (input)="typedText.set($any($event.target).value)"
-                  />
-                </div>
-              }
-              @case ('draw') {
-                <div
-                  role="tabpanel"
-                  class="relative h-[200px] rounded bg-[#3d3d3d]"
-                >
-                  @if (!hasDrawn()) {
-                    <span
-                      class="absolute inset-0 grid place-items-center text-sm text-[#999]"
-                    >
-                      Draw your signature here
-                    </span>
-                  }
-                  <canvas
-                    #drawCanvas
-                    class="absolute inset-0 size-full cursor-crosshair rounded"
-                    (pointerdown)="onDrawStart($event)"
-                    (pointermove)="onDrawMove($event)"
-                    (pointerup)="onDrawEnd($event)"
-                  ></canvas>
-                  <div
-                    class="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 rounded-b bg-[#474747] px-2 py-1"
+            <div
+              ngTabPanel
+              value="type"
+              [hidden]="activeTab() !== 'type'"
+              class="relative flex h-[200px] items-center justify-center rounded bg-[#3d3d3d]"
+            >
+              <ng-template ngTabContent>
+                <input
+                  type="text"
+                  class="absolute inset-0 size-full border-0 bg-transparent text-center text-[44px] text-white italic outline-none"
+                  style="font-family: 'Brush Script MT', 'Segoe Script', cursive, serif"
+                  placeholder="Type your signature"
+                  aria-label="Signature text"
+                  [value]="typedText()"
+                  (input)="typedText.set($any($event.target).value)"
+                />
+              </ng-template>
+            </div>
+            <div
+              ngTabPanel
+              value="draw"
+              [hidden]="activeTab() !== 'draw'"
+              class="relative h-[200px] rounded bg-[#3d3d3d]"
+            >
+              <ng-template ngTabContent>
+                @if (!hasDrawn()) {
+                  <span
+                    class="absolute inset-0 grid place-items-center text-sm text-[#999]"
                   >
-                    <label class="text-xs text-[#bbb]">Thickness</label>
-                    <input
-                      type="range"
-                      min="1"
-                      max="5"
-                      [value]="drawThickness()"
-                      (input)="drawThickness.set(+$any($event.target).value)"
-                      class="w-24"
-                    />
-                  </div>
-                </div>
-              }
-              @case ('image') {
+                    Draw your signature here
+                  </span>
+                }
+                <canvas
+                  #drawCanvas
+                  class="absolute inset-0 size-full cursor-crosshair rounded"
+                  (pointerdown)="onDrawStart($event)"
+                  (pointermove)="onDrawMove($event)"
+                  (pointerup)="onDrawEnd($event)"
+                ></canvas>
                 <div
-                  role="tabpanel"
-                  class="relative flex h-[200px] flex-col items-center justify-center gap-2 rounded bg-[#3d3d3d]"
+                  class="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 rounded-b bg-[#474747] px-2 py-1"
                 >
-                  @if (imagePreview()) {
-                    <img
-                      [src]="imagePreview()"
-                      alt="Signature preview"
-                      class="max-h-[180px] max-w-full object-contain"
-                    />
-                  } @else {
-                    <span class="text-sm text-[#999]">No image selected</span>
-                    <button
-                      type="button"
-                      class="rounded bg-[#6b9edd] px-3 py-1 text-sm text-white hover:bg-[#5a8ecc]"
-                      (click)="fileInput.click()"
-                    >
-                      Browse...
-                    </button>
-                  }
+                  <label class="text-xs text-[#bbb]" for="sc-sig-thickness">
+                    Thickness
+                  </label>
                   <input
-                    #fileInput
-                    type="file"
-                    accept="image/*"
-                    class="hidden"
-                    (change)="onImageSelected($event)"
+                    id="sc-sig-thickness"
+                    type="range"
+                    min="1"
+                    max="5"
+                    [value]="drawThickness()"
+                    (input)="drawThickness.set(+$any($event.target).value)"
+                    class="w-24"
                   />
                 </div>
-              }
-            }
+              </ng-template>
+            </div>
+            <div
+              ngTabPanel
+              value="image"
+              [hidden]="activeTab() !== 'image'"
+              class="relative flex h-[200px] flex-col items-center justify-center gap-2 rounded bg-[#3d3d3d]"
+            >
+              <ng-template ngTabContent>
+                @if (imagePreview()) {
+                  <img
+                    [src]="imagePreview()"
+                    alt="Signature preview"
+                    class="max-h-[180px] max-w-full object-contain"
+                  />
+                } @else {
+                  <span class="text-sm text-[#999]">No image selected</span>
+                  <button
+                    type="button"
+                    class="rounded bg-[#6b9edd] px-3 py-1 text-sm text-white hover:bg-[#5a8ecc]"
+                    (click)="fileInput.click()"
+                  >
+                    Browse...
+                  </button>
+                }
+                <input
+                  #fileInput
+                  type="file"
+                  accept="image/*"
+                  class="hidden"
+                  (change)="onImageSelected($event)"
+                />
+              </ng-template>
+            </div>
 
             <!-- Description -->
             <div class="mt-3">
-              <label class="mb-1 block text-xs text-[#bbb]">Description</label>
+              <label
+                class="mb-1 block text-xs text-[#bbb]"
+                for="sc-sig-description"
+              >
+                Description
+              </label>
               <input
+                id="sc-sig-description"
                 type="text"
                 class="w-full rounded border border-[#5a5a5a] bg-[#3d3d3d] px-2 py-1.5 text-sm text-[#d1d5db] outline-none focus:border-[#6b9edd]"
                 placeholder="Describe your signature"
@@ -232,6 +235,12 @@ export class ScPdfViewerSignatureDialog {
     viewChild<ElementRef<HTMLCanvasElement>>('drawCanvas');
 
   readonly activeTab = signal<SignatureTab>('type');
+
+  protected readonly tabs: { value: SignatureTab; label: string }[] = [
+    { value: 'type', label: 'Type' },
+    { value: 'draw', label: 'Draw' },
+    { value: 'image', label: 'Image' },
+  ];
   readonly typedText = signal('');
   readonly description = signal('');
   readonly drawThickness = signal(2);

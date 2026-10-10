@@ -84,4 +84,32 @@ test.describe('Select Demo', () => {
     await press(page, 'Enter');
     await expect(page.getByText('Selected value: travel')).toBeVisible();
   });
+
+  test('type-ahead on a closed select opens it at the first match', async ({
+    page,
+  }) => {
+    const trigger = page.locator('[scSelectTrigger]');
+    await trigger.focus();
+    await press(page, 'w');
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await expect.poll(() => activeDescendantText(trigger)).toBe('Work');
+    await press(page, 'Enter');
+    await expect(page.getByText('Selected value: work')).toBeVisible();
+  });
+
+  test('the highlight follows the pointer; keys continue from it', async ({
+    page,
+  }) => {
+    const trigger = page.locator('[scSelectTrigger]');
+    await trigger.click();
+    const work = page.getByRole('option', { name: 'Work' });
+    await work.hover();
+    await expect(work).toHaveAttribute('data-active', 'true');
+    await expect(page.locator('[role=option][data-active=true]')).toHaveCount(
+      1,
+    );
+    await press(page, 'ArrowDown');
+    await expect.poll(() => activeDescendantText(trigger)).toBe('Personal');
+    await expect(page.getByText('Selected value: work')).toHaveCount(0);
+  });
 });

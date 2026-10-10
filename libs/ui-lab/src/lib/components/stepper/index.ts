@@ -1,5 +1,7 @@
 export { SC_STEPPER, SC_STEPPER_ITEM, SC_STEPPER_PANEL } from './stepper-types';
 export type { ScStepperOrientation } from './stepper-types';
+export { ScAriaStepperPanel } from './aria-stepper-panel';
+export { ScAriaStepperTab } from './aria-stepper-tab';
 export { ScStepper } from './stepper';
 export { ScStepperList } from './stepper-list';
 export { ScStepperItem } from './stepper-item';

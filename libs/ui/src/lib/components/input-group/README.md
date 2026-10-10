@@ -4,7 +4,7 @@ A composable input group for combining inputs with addons, buttons, and text.
 
 ## Components
 
-- `ScInputGroup` - Root container with border, focus, and invalid state styling
+- `ScInputGroup` - Root container with border, focus, and invalid state styling. Shows the focus ring when its control — or an embedded select, multiselect or combobox trigger — has keyboard focus; stays flat inside a combobox popup
 - `ScInputGroupAddon` - Addon container with alignment variants
 - `ScInputGroupButton` - Button with size variants, ghost variant by default
 - `ScInputGroupText` - Text/icon wrapper with muted foreground styling

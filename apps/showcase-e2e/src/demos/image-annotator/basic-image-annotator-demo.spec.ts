@@ -13,7 +13,10 @@ const URL = '/demos/image-annotator/basic-image-annotator-demo';
 async function ready(page: Page): Promise<Locator> {
   await page.goto(URL);
   const canvas = page.locator('[scImageAnnotatorCanvas]');
-  await expect(canvas).toHaveAttribute('data-state', 'ready');
+  // The demo image is remote: allow for a slow load under parallel runs.
+  await expect(canvas).toHaveAttribute('data-state', 'ready', {
+    timeout: 15_000,
+  });
   return canvas;
 }
 

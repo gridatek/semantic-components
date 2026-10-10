@@ -1,7 +1,15 @@
 import { Combobox } from '@angular/aria/combobox';
-import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Injector,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { bindInput, cn } from '../../utils';
 import { SC_SELECT, SC_SELECT_TRIGGER } from './select-tokens';
+import { openOnTypeahead } from './select-typeahead';
 
 /** Base trigger styles, shared with `ScMultiselectTrigger`. */
 export const selectTriggerStyles = cn(
@@ -21,12 +29,14 @@ export const selectTriggerStyles = cn(
     '[attr.aria-required]': 'select.required() || null',
     '[class]': 'class()',
     '(focusout)': 'select.touch.emit()',
+    '(keydown)': 'onKeydown($event)',
   },
 })
 export class ScSelectTrigger {
   protected readonly select = inject(SC_SELECT);
   readonly combobox = inject(Combobox);
   readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');
@@ -38,5 +48,15 @@ export class ScSelectTrigger {
   constructor() {
     bindInput(this.combobox.disabled, this.select.disabled);
     bindInput(this.combobox.readonly, this.select.readonly);
+  }
+
+  /** Type-ahead while closed opens the list at the first match. */
+  protected onKeydown(event: KeyboardEvent): void {
+    openOnTypeahead(
+      event,
+      this.combobox,
+      this.elementRef.nativeElement,
+      this.injector,
+    );
   }
 }

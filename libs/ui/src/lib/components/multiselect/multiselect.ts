@@ -81,6 +81,13 @@ export class ScMultiselect implements FormValueControl<string[]> {
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touch = output<void>();
 
+  /**
+   * Label for a value. Optional: labels are otherwise taken from rendered
+   * options, which only exist once the popup has been opened — set this to
+   * show the label of an initial value straight away.
+   */
+  readonly displayWith = input<(value: string) => string | undefined>();
+
   protected readonly positions = positions;
   protected readonly trigger = contentChild(SC_MULTISELECT_TRIGGER);
   protected readonly multiselectPortal =
@@ -97,7 +104,10 @@ export class ScMultiselect implements FormValueControl<string[]> {
   private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
   readonly selectedLabels = computed(() => {
     const labels = this.labels();
-    return this.value().map((value) => labels.get(value) || value);
+    const displayWith = this.displayWith();
+    return this.value().map(
+      (value) => displayWith?.(value) || labels.get(value) || value,
+    );
   });
 
   protected readonly class = computed(() =>

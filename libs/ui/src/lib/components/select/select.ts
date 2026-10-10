@@ -81,6 +81,13 @@ export class ScSelect implements FormValueControl<string> {
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touch = output<void>();
 
+  /**
+   * Label for a value. Optional: labels are otherwise taken from rendered
+   * options, which only exist once the popup has been opened — set this to
+   * show the label of an initial value straight away.
+   */
+  readonly displayWith = input<(value: string) => string | undefined>();
+
   protected readonly positions = positions;
   protected readonly trigger = contentChild(SC_SELECT_TRIGGER);
   protected readonly selectPortal = contentChild.required(ScSelectPortal);
@@ -96,7 +103,7 @@ export class ScSelect implements FormValueControl<string> {
   private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
   readonly selectedLabel = computed(() => {
     const value = this.value();
-    return this.labels().get(value) || value;
+    return this.displayWith()?.(value) || this.labels().get(value) || value;
   });
 
   protected readonly class = computed(() =>

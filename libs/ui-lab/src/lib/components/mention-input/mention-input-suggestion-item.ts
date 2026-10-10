@@ -35,6 +35,10 @@ import type { MentionUser } from './mention-input-types';
   host: {
     type: 'button',
     role: 'option',
+    // Focus stays in the textarea (aria-activedescendant points here).
+    tabindex: '-1',
+    '[id]': 'state.optionId(index())',
+    '(mousedown)': '$event.preventDefault()',
     '[class]': 'class()',
     '[attr.aria-selected]': 'isSelected()',
     '(click)': 'state.selectUser(user())',

@@ -11,6 +11,13 @@ import { ScMentionInputState } from './mention-input-state';
     'data-slot': 'control',
     '[attr.id]': 'id()',
     '[attr.aria-describedby]': 'ariaDescribedBy()',
+    // The suggestion list is driven from the textarea (suggestions appear after
+    // the trigger; Enter still inserts a new line otherwise), so it is wired
+    // with aria-activedescendant rather than an aria combobox.
+    'aria-autocomplete': 'list',
+    '[attr.aria-controls]': 'open() ? state.listboxId : null',
+    '[attr.aria-activedescendant]':
+      'open() ? state.optionId(state.selectedIndex()) : null',
     '[class]': 'class()',
     '[value]': 'state.value()',
     '(input)': 'state.onInput($event)',
@@ -30,6 +37,10 @@ export class ScMentionInputControl {
 
   readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
+  );
+
+  protected readonly open = computed(
+    () => this.state.showSuggestions() && this.state.filteredUsers().length > 0,
   );
 
   readonly ariaDescribedBy = computed(

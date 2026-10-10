@@ -357,9 +357,8 @@ Directive for the next step button. Use with `scButton` for styling.
 
 ## Accessibility
 
-- Uses `role="tablist"` for step list
-- Uses `role="tab"` for step triggers
-- Uses `role="tabpanel"` for step panels
-- `aria-selected` indicates active step
-- `aria-disabled` on previous button when on first step
-- Keyboard navigation via Tab key
+Built on `@angular/aria`'s `Tabs`:
+
+- The step list is a `role="tablist"` (with `aria-orientation` from the stepper's orientation); step triggers are `role="tab"` with `aria-selected` and `aria-controls`; panels are `role="tabpanel"` labelled by their step.
+- One Tab stop for the step list: ←/→ (↑/↓ when vertical) move between steps, Home/End go to the first/last step.
+- Previous/Next buttons get `aria-disabled` at the ends.

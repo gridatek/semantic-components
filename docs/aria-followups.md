@@ -1,13 +1,13 @@
 # Angular Aria follow-ups
 
-Open tasks after migrating the `@angular/aria` 22.2 based components (select, multiselect, autocomplete, combobox, command, menu, menu bar, context menu, tree, calendar). Each item is independent; pick what is worth it.
+Open tasks after migrating the `@angular/aria` 22.2 based components (select, multiselect, autocomplete, combobox, command, menu, menu bar, context menu, tree, calendar, tabs, toolbar) and the ui-lab components moved onto Aria (stepper, speed dial, org chart, emoji picker, image annotator, PDF signature dialog). Each item is independent; pick what is worth it.
 
 Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 
 ## Done (2026-10-10)
 
 - Disabled options styled (`aria-disabled:`, not `data-disabled:`) in select, multiselect, autocomplete, combobox; disabled option in the select group demo.
-- Lighter hover than the active/selected row in every list (select, multiselect, autocomplete, combobox, command, tree), so adjacent rows no longer merge.
+- Lighter hover than the selected row in the tree, so adjacent rows no longer merge (the popup lists now go further, see below).
 - Shared portal outlet renamed `ScPortalOutlet` (`components/portal-outlet`).
 - `registerLabel` reads its map untracked in select, multiselect, autocomplete (as combobox already did).
 - Menu bar: Tab / Shift+Tab from an open menu leaves the menubar (aria refocused the bar item).
@@ -15,6 +15,16 @@ Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 - Tree production-ready and moved from `ui-lab` to `ui`: one Tab stop, selection API, nav mode, height animation, RTL-safe indentation.
 - Interaction e2e tests: `apps/showcase-e2e/src/demos/{select,multiselect,autocomplete,combobox,phone-input,command,menu,menu-bar,context-menu,tree,calendar}`, helpers in `src/interaction.ts`.
 - Tailwind no longer scans `apps/showcase-e2e` (`@source not` in the showcase stylesheet).
+- Hand-written ARIA replaced by Aria: stepper (`Tabs`), speed dial (`MenuTrigger`/`Menu`/`MenuItem`), org chart (`Tree`), emoji picker categories and image annotator (`Toolbar`), PDF signature dialog (`Tabs`). Mention input keeps its own listbox, now wired with `aria-controls`/`aria-activedescendant`.
+- Tabs: a vertical `ScTabs` makes its tab list vertical (`aria-orientation`, ↑/↓).
+- Lightbox: ←/→ (RTL-aware, wrapping with `loop`) handled by the provider, not only by the carousel.
+- Toolbar demo named (`aria-label="Text formatting"`).
+- Input group: the in-popup ring reset wins on specificity (override in `combobox-popup.ts` removed); an embedded select/multiselect/combobox trigger rings the group (currency demo classes removed).
+- Highlight follows the pointer in select, multiselect, autocomplete, combobox, command (`useActiveOption`, `utils/active-option`); separate `hover:` styles dropped; hovering doesn't scroll the list.
+- `displayWith` on select, multiselect, combobox: labels for an initial value before the popup has opened.
+- Type-ahead on a closed select / multiselect opens the list at the first match (APG select-only combobox).
+- Decisions: autocomplete clear button stays a Tab stop; tree visible in the docs; every component stays `Experimental` for now.
+- Behaviour tests added for tabs, accordion, collapsible, lightbox, toolbar, stepper, speed dial, org chart, emoji picker, image annotator, PDF signature dialog, mention input.
 
 ## Bugs
 
@@ -24,54 +34,30 @@ Reported from a screenshot: a thin vertical line just right of a rounded input. 
 
 - Needed: the page, the action that triggers it, the browser, and a wider screenshot.
 
-### 2. Input group: focus-ring override loses on specificity — S
+## Deferred
 
-`ScInputGroup` has `in-data-[slot=combobox-content]:focus-within:ring-0` to stay flat inside a popup, but `has-[[data-slot=control]:focus-visible]:ring-3` wins (Tailwind's `in-*` adds no specificity). `ScComboboxPopup` works around it locally.
+### 2. PDF viewer toolbar — L
 
-- File: `libs/ui/src/lib/components/input-group/input-group.ts`
-- Fix: make the in-popup reset win in the input group itself, then drop the override in `combobox-popup.ts`.
+The PDF viewer toolbar is still a plain row of buttons. Making it an Aria `Toolbar` means first turning its hand-built dropdowns (highlight colour, image, Tools) into Aria `Menu`s — otherwise the toolbar's arrow keys fight the dropdowns'. A project of its own.
 
-## UX
+### 3. Org chart connector lines — S/M
 
-### 3. Highlight follows the pointer — M
+Horizontal connectors between siblings are missing (pre-existing; vertical lines show). Visual only.
 
-Hover is now lighter than the keyboard-active row, so they no longer merge, but two rows can still be tinted at once. In shadcn the highlight follows the pointer.
+### 4. Combobox: type-ahead on the closed trigger — S
 
-- Fix: on `pointermove` over an item, make it the active option, and drop the separate `hover:` styles.
-- Applies to select, multiselect, autocomplete, combobox, command (tree keeps hover: it has a separate selection).
-
-### 4. Labels before the first open — M
-
-Popups render lazily, so `ScSelectValue` / `ScMultiselectValue` / `ScComboboxValue` show the raw value (e.g. `apple`) for an initial value until the list has been opened once. Consumers can project their own label today.
-
-- Option: an optional `[itemToLabel]` / `[labels]` input on the root, used before options have rendered.
-
-### 5. Type-ahead on a closed select — S/M
-
-A native `<select>` lets you type to change the value without opening it; the Aria combobox only handles type-ahead while open.
-
-### 6. Autocomplete clear button is a second tab stop — S
-
-Keeps it keyboard-reachable; some designs prefer `tabindex="-1"` (text can still be selected and deleted). Decide and document.
-
-### 7. Input group focus ring for an embedded trigger — S
-
-The currency demo adds `has-[[data-slot=select-trigger]:focus-visible]:…` classes so the input group shows a ring when the embedded select is focused. Could live in `ScInputGroup` (also covering `multiselect-trigger` / `combobox-trigger`).
-
-### 8. Tree: visibility and status in the docs — S (decision)
-
-The tree is in `ui` now but `apps/showcase/public/components.json` still lists it as `"status": "Experimental"`, `"hidden": true`. Decide whether to show it in the navigation and which status to give it.
+A printable key on a closed `ScComboboxTrigger` could open the popup with that character in the search box. Today Enter/Space/↓ open it.
 
 ## Code health
 
-### 9. Demo icon mapping — S
+### 5. Demo icon mapping — S
 
 The select, multiselect and command demos store icon _names_ (`'tag'`, `'star'`…) and map them with a big `@switch` in an `<ng-template>`. Icons must stay in the consumer template (they do), but the mapping could be simpler. Revisit together.
 
-### 10. Drop the workarounds when Angular catches up — S each
+### 6. Drop the workarounds when Angular catches up — S each
 
 - `bindInput` / `setInput` (`utils/bind-input`) write to input signal nodes through `@angular/core/primitives/signals`. Replace with host-directive bindings once [angular/angular#50510](https://github.com/angular/angular/issues/50510) ships.
-- `ScComboboxListContainer` / `ScCommandListContainer` are plain template markers, and `ScAriaTreeItem` makes `TreeItem.parent` optional, only because required inputs of host directives can't be hidden (same issue).
+- `ScComboboxListContainer` / `ScCommandListContainer` are plain template markers, and `ScAriaTreeItem` / `ScAriaOrgChartItem` / `ScAriaStepperTab` / `ScAriaStepperPanel` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
 - Menu bar Escape (`ScMenuBar`) and menu Tab (`ScMenu`) handling — see the upstream drafts.
 
 ## Upstream

@@ -8,7 +8,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '../../utils';
+import { cn, useActiveOption } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
 @Component({
@@ -25,6 +25,7 @@ import { SC_SELECT } from './select-tokens';
   host: {
     'data-slot': 'select-item',
     '[class]': 'class()',
+    '(pointermove)': 'onPointerMove()',
   },
   encapsulation: ViewEncapsulation.None,
 })
@@ -33,12 +34,13 @@ export class ScSelectItem {
 
   private readonly select = inject(SC_SELECT);
   private readonly option = inject<Option<string>>(Option);
+  protected readonly onPointerMove = useActiveOption(this.option);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   protected readonly class = computed(() =>
     cn(
       'relative flex w-full cursor-default select-none items-center gap-1.5 rounded-md py-1 pe-8 ps-1.5 text-sm outline-hidden',
-      'transition-colors duration-100 hover:bg-accent/50 hover:text-accent-foreground data-[active=true]:bg-accent data-[active=true]:text-accent-foreground',
+      'transition-colors duration-100 data-[active=true]:bg-accent data-[active=true]:text-accent-foreground',
       'aria-disabled:pointer-events-none aria-disabled:opacity-50',
       '[&_svg:not([class*=size-])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0',
       this.classInput(),
@@ -52,12 +54,6 @@ export class ScSelectItem {
         this.elementRef.nativeElement.textContent?.trim() ||
         '';
       this.select.registerLabel(this.option.value(), label);
-    });
-
-    effect(() => {
-      if (this.option.active()) {
-        this.elementRef.nativeElement.scrollIntoView({ block: 'nearest' });
-      }
     });
   }
 }

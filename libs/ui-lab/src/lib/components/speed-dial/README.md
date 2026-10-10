@@ -193,23 +193,21 @@ type SpeedDialDirection = 'up' | 'down' | 'left' | 'right';
 
 ## Accessibility
 
-The Speed Dial component follows accessibility best practices:
+Built on `@angular/aria`'s `MenuTrigger`, `Menu` and `MenuItem`:
 
-- Main button has `aria-expanded` indicating open/closed state
-- Main button has `aria-haspopup="true"` indicating a menu
-- Actions menu has `role="menu"` for screen readers
-- Each action has `aria-label` for clear identification
-- Pressing Escape closes the menu
-- Labels provide visual context and appear as tooltips
-- Disabled actions are properly indicated
+- The main button has `aria-haspopup="true"`, `aria-expanded` and `aria-controls`.
+- The actions are a `role="menu"` of `role="menuitem"`s; give each an `aria-label` (or visible text). The list is `inert` while closed.
+- Disabled actions stay focusable (`aria-disabled`) but do nothing.
+- Escape closes the menu and returns focus to the main button, as does running an action.
 
 ## Keyboard Navigation
 
-| Key    | Action                     |
-| ------ | -------------------------- |
-| Enter  | Toggle menu / Click action |
-| Space  | Toggle menu / Click action |
-| Escape | Close menu                 |
+| Key               | Action                                         |
+| ----------------- | ---------------------------------------------- |
+| `Enter` / `Space` | Open the menu (on the button) / run the action |
+| `↓` / `↑`         | Next / previous action                         |
+| `Home` / `End`    | First / last action                            |
+| `Escape`          | Close, focus returns to the main button        |
 
 ## Styling
 

@@ -21,7 +21,7 @@ State flows through the `SC_LIGHTBOX` injection token. Child directives inject i
 
 ### ScLightboxProvider
 
-Root component that owns all state and manages the CDK Overlay lifecycle (create/attach/detach), backdrop animation, focus trapping, and keyboard shortcuts (+, -, 0, Esc).
+Root component that owns all state and manages the CDK Overlay lifecycle (create/attach/detach), backdrop animation, focus trapping, and keyboard shortcuts (←, →, +, -, 0, Esc).
 
 **Selector:** `div[scLightboxProvider]` | **Export:** `scLightbox`
 
@@ -152,16 +152,16 @@ interface ScLightboxImageData {
 
 ## Keyboard Shortcuts
 
-| Key     | Action         |
-| ------- | -------------- |
-| `←`     | Previous image |
-| `→`     | Next image     |
-| `Esc`   | Close          |
-| `+`/`=` | Zoom in        |
-| `-`     | Zoom out       |
-| `0`     | Reset zoom     |
+| Key     | Action                       |
+| ------- | ---------------------------- |
+| `←`     | Previous image (next in RTL) |
+| `→`     | Next image (previous in RTL) |
+| `Esc`   | Close                        |
+| `+`/`=` | Zoom in                      |
+| `-`     | Zoom out                     |
+| `0`     | Reset zoom                   |
 
-Arrow keys are handled by the Carousel inside the container template. Esc/zoom keys are handled by the CDK Overlay keydown events in `ScLightboxProvider`.
+All shortcuts are handled by `ScLightboxProvider` (CDK Overlay keydown events), so they work wherever focus is in the dialog — except ←/→ inside a `role="toolbar"`, where they move between the toolbar's buttons. With `loop`, ←/→ wrap around at the ends.
 
 ## Notes
 
@@ -173,5 +173,5 @@ Arrow keys are handled by the Carousel inside the container template. Esc/zoom k
 - Dynamic `aria-label`: "Image gallery, showing image X of Y"
 - `cdkTrapFocus` with auto-capture in overlay
 - Thumbnail buttons have `aria-label`: "Go to image X"
-- Escape key closes lightbox
+- Escape key closes lightbox and focus returns to the element that opened it
 - Backdrop click closes lightbox

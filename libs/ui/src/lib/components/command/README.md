@@ -211,6 +211,8 @@ Focus always stays in the input.
 | `Home` / `End`          | First / last item    |
 | `Enter`                 | Run the active item  |
 
+The active item follows the pointer too, so keyboard and mouse share one highlight.
+
 ## ScCommandItem
 
 | Member     | Type           | Description                                  |
