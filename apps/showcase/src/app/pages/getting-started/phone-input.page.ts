@@ -36,7 +36,7 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
         <h1 scHeading>Phone Input</h1>
         <p class="text-muted-foreground">
           Install and configure the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+          <code class="bg-muted inline-block rounded px-1.5 py-0.5 text-sm">
             &#64;semantic-components/phone-input
           </code>
           package. Requires the ui library to be installed first.
@@ -46,11 +46,11 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
       <section class="space-y-4">
         <h2 scHeading appToc>1. Install the package</h2>
         <p class="text-muted-foreground">
-          Install the phone input library and its peer dependency
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+          Install the phone input library together with
+          <code class="bg-muted inline-block rounded px-1.5 py-0.5 text-sm">
             libphonenumber-js
           </code>
-          .
+          (its peer dependency)
         </p>
         <app-package-manager-install
           packages="@semantic-components/phone-input libphonenumber-js"
@@ -63,8 +63,10 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
         <h2 scHeading appToc>2. Configure Tailwind source</h2>
         <p class="text-muted-foreground">
           Add the phone input library as a Tailwind source in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          :
+          <code class="bg-muted inline-block rounded px-1.5 py-0.5 text-sm">
+            styles.css
+          </code>
+          file
         </p>
         <div scCodeViewer>
           <div scCodeViewerHeader>
@@ -88,7 +90,7 @@ import { CountrySelectorPhoneInputDemoContainer } from '../docs/phone-input/demo
         </div>
         <p class="text-muted-foreground text-sm">
           Adjust the path to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">
+          <code class="bg-muted inline-block rounded px-1.5 py-0.5 text-sm">
             node_modules
           </code>
           based on your project structure.
