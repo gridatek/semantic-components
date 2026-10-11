@@ -90,7 +90,11 @@ export class ScPdfViewerRoot {
   readonly pageMatches = signal<ScPdfPageMatchInfo[]>([]);
   readonly findTrigger = signal(0);
 
-  private pageTexts: string[] = [];
+  /** Each page's text, extracted once per document for find. */
+  private pageTexts: Promise<string[]> | null = null;
+  private pageTextsDocument: PDFDocumentProxy | null = null;
+  /** Increments with each search, so an older one can't overwrite a newer one. */
+  private findToken = 0;
 
   // Editor state
   readonly editorMode = signal<ScPdfEditorMode>('none');
@@ -245,6 +249,7 @@ export class ScPdfViewerRoot {
       };
 
       const doc = await loadingTask.promise;
+      this.clearFind();
       this.pdfDocument.set(doc);
       this.totalPages.set(doc.numPages);
       this.isLoading.set(false);
@@ -564,30 +569,11 @@ export class ScPdfViewerRoot {
     const doc = this.pdfDocument();
     if (!doc) return;
 
+    const token = ++this.findToken;
     this.findState.set('pending');
-
-    // Extract text if needed
-    if (this.pageTexts.length !== doc.numPages) {
-      this.pageTexts = [];
-      for (let i = 1; i <= doc.numPages; i++) {
-        try {
-          const page = await doc.getPage(i);
-          const textContent = await page.getTextContent();
-          let text = '';
-          for (const item of textContent.items) {
-            if ('str' in item) {
-              text += (item as { str: string }).str;
-              if ((item as { hasEOL?: boolean }).hasEOL) {
-                text += '\n';
-              }
-            }
-          }
-          this.pageTexts.push(text);
-        } catch {
-          this.pageTexts.push('');
-        }
-      }
-    }
+    const pageTexts = await this.documentTexts(doc);
+    // A newer search started, or the document changed, meanwhile.
+    if (token !== this.findToken || doc !== this.pdfDocument()) return;
 
     const matchCase = this.findMatchCase();
     const entireWord = this.findEntireWord();
@@ -599,7 +585,7 @@ export class ScPdfViewerRoot {
     const stripDiacritics = (text: string): string =>
       text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-    for (const pageText of this.pageTexts) {
+    for (const pageText of pageTexts) {
       const matches: number[] = [];
       const matchesLength: number[] = [];
 
@@ -732,13 +718,54 @@ export class ScPdfViewerRoot {
   }
 
   clearFind(): void {
+    this.findToken++;
     this.findQuery.set('');
     this.findState.set('idle');
     this.findCurrentMatchIndex.set(0);
     this.findTotalMatches.set(0);
     this.pageMatches.set([]);
-    this.pageTexts = [];
     this.findTrigger.update((v) => v + 1);
+  }
+
+  /**
+   * The text of every page, extracted once per document — a few pages at a
+   * time in parallel — and shared by the searches.
+   */
+  private documentTexts(doc: PDFDocumentProxy): Promise<string[]> {
+    if (this.pageTexts && this.pageTextsDocument === doc) {
+      return this.pageTexts;
+    }
+    this.pageTextsDocument = doc;
+    this.pageTexts = (async () => {
+      const texts: string[] = new Array(doc.numPages).fill('');
+      const batch = 8;
+      for (let start = 1; start <= doc.numPages; start += batch) {
+        const pages = Array.from(
+          { length: Math.min(batch, doc.numPages - start + 1) },
+          (_, i) => start + i,
+        );
+        await Promise.all(
+          pages.map(async (pageNumber) => {
+            try {
+              const page = await doc.getPage(pageNumber);
+              const content = await page.getTextContent();
+              let text = '';
+              for (const item of content.items) {
+                if ('str' in item) {
+                  text += item.str;
+                  if (item.hasEOL) text += '\n';
+                }
+              }
+              texts[pageNumber - 1] = text;
+            } catch {
+              // A page whose text can't be read just has no matches.
+            }
+          }),
+        );
+      }
+      return texts;
+    })();
+    return this.pageTexts;
   }
 
   private scrollToMatch(globalIndex: number): void {

@@ -13,12 +13,23 @@ import {
   viewChild,
 } from '@angular/core';
 import { buttonVariants, cn } from '@semantic-components/ui';
-import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
+import type { PDFDocumentProxy, PDFPageProxy, RenderTask } from 'pdfjs-dist';
 import { AnnotationLayer, TextLayer, setLayerDimensions } from 'pdfjs-dist';
 import type { ScPdfViewerRoot } from './pdf-viewer-root';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 const DEFAULT_LINK_REL = 'noopener noreferrer nofollow';
+
+/**
+ * Canvases bigger than this are drawn at a lower resolution: browsers refuse
+ * (blank page) or run out of memory beyond it (pdf.js uses the same limit).
+ */
+const MAX_CANVAS_PIXELS = 16_777_216;
+
+/** Pages within one viewport height above or below are kept rendered. */
+const RENDER_MARGIN = '100% 0px';
+
+const VISIBILITY_THRESHOLDS = Array.from({ length: 11 }, (_, i) => i / 10);
 
 const enum LinkTarget {
   NONE = 0,
@@ -271,6 +282,8 @@ interface PageLayout {
           [style.cursor]="pageCursor()"
         >
           <canvas
+            width="0"
+            height="0"
             [attr.data-page]="page.pageNumber"
             [style.width.px]="page.width * scaledValue()"
             [style.height.px]="page.height * scaledValue()"
@@ -314,8 +327,15 @@ export class ScPdfViewerCanvas {
   private readonly scrollContainer =
     viewChild<ElementRef<HTMLElement>>('scrollContainer');
 
-  private readonly dpr =
-    typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+  /** The screen's pixel density; updated when the window moves to another screen. */
+  private readonly dpr = signal(
+    typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1,
+  );
+  private dprQuery: MediaQueryList | null = null;
+  private readonly onDprChange = (): void => {
+    this.dpr.set(window.devicePixelRatio || 1);
+    this.watchDevicePixelRatio();
+  };
 
   readonly pageLayouts = signal<PageLayout[]>([]);
 
@@ -334,10 +354,17 @@ export class ScPdfViewerCanvas {
     number,
     { divs: HTMLElement[]; texts: string[] }
   >();
-  private observer: IntersectionObserver | null = null;
   private resizeObserver: ResizeObserver | null = null;
   private renderTimeout: ReturnType<typeof setTimeout> | null = null;
-  private scrollHandler: (() => void) | null = null;
+  /** Renders pages near the viewport and releases the others. */
+  private renderObserver: IntersectionObserver | null = null;
+  /** Tracks how much of each page is visible, for the current page. */
+  private visibilityObserver: IntersectionObserver | null = null;
+  /** Pages within the render margin of the viewport. */
+  private readonly nearPages = new Set<number>();
+  /** Visible height (px) of each page in the viewport. */
+  private readonly visibleHeights = new Map<number, number>();
+  private readonly pageCount = computed(() => this.pageLayouts().length);
 
   // Editor state
   private readonly editorMode = this.pdfViewer.editorMode;
@@ -430,28 +457,37 @@ export class ScPdfViewerCanvas {
   constructor() {
     afterNextRender(() => {
       this.setupResizeObserver();
-      this.setupIntersectionObserver();
+      this.setupObservers();
+      this.watchDevicePixelRatio();
     });
 
-    // When PDF document loads, compute page layouts
+    // A new document: forget the previous one's pages, then lay them out.
     effect(() => {
       const doc = this.pdfDocument();
-      if (doc) {
-        this.computePageLayouts(doc.numPages);
-      }
+      untracked(() => {
+        this.cancelAllRenderTasks();
+        this.renderedPages.clear();
+        this.nearPages.clear();
+        this.visibleHeights.clear();
+        this.textLayerData.clear();
+        this.pageLayouts.set([]);
+        if (doc) this.computePageLayouts(doc);
+      });
     });
 
-    // Re-render when zoom or rotation changes
+    // Redraw at the new scale, rotation or pixel density, and when the pages
+    // change — not when one page's size is corrected (see renderPage).
     effect(() => {
       this.scaledValue();
       this.rotation();
-      const layouts = this.pageLayouts();
+      this.dpr();
+      if (this.pageCount() === 0) return;
 
-      if (layouts.length > 0) {
+      untracked(() => {
         this.renderedPages.clear();
         this.cancelAllRenderTasks();
         this.scheduleRender();
-      }
+      });
     });
 
     // Navigate to page when navigateTrigger changes
@@ -509,15 +545,13 @@ export class ScPdfViewerCanvas {
       document.removeEventListener('pointerup', this.onGlobalPointerUp);
       document.removeEventListener('pointerdown', this.onGlobalPointerDown);
       document.removeEventListener('keydown', this.onAnnotationKeyDown);
-      this.observer?.disconnect();
+      this.renderObserver?.disconnect();
+      this.visibilityObserver?.disconnect();
       this.resizeObserver?.disconnect();
+      this.dprQuery?.removeEventListener('change', this.onDprChange);
       this.cancelAllRenderTasks();
       if (this.renderTimeout) {
         clearTimeout(this.renderTimeout);
-      }
-      const scrollEl = this.scrollContainer()?.nativeElement;
-      if (scrollEl && this.scrollHandler) {
-        scrollEl.removeEventListener('scroll', this.scrollHandler);
       }
     });
   }
@@ -526,30 +560,45 @@ export class ScPdfViewerCanvas {
     if (this.renderTimeout) {
       clearTimeout(this.renderTimeout);
     }
-    // Use requestAnimationFrame + setTimeout to ensure Angular has
-    // finished its render cycle and DOM elements exist
+    // After Angular has rendered the pages: (re)observe them. The observers
+    // then report every page, which renders the ones near the viewport.
     this.renderTimeout = setTimeout(() => {
-      requestAnimationFrame(() => {
-        this.renderVisiblePages();
-      });
+      requestAnimationFrame(() => this.observePages());
     }, 0);
   }
 
-  private async computePageLayouts(numPages: number): Promise<void> {
-    const doc = this.pdfDocument();
-    if (!doc) return;
+  /**
+   * Lays out every page at the first page's size, so the document shows at
+   * once instead of after fetching every page. A page whose size differs is
+   * corrected when it's rendered (as pdf.js's own viewer does).
+   */
+  private async computePageLayouts(doc: PDFDocumentProxy): Promise<void> {
+    const first = await doc.getPage(1);
+    if (doc !== this.pdfDocument()) return;
+    const { width, height } = first.getViewport({ scale: 1 });
+    this.pageLayouts.set(
+      Array.from({ length: doc.numPages }, (_, i) => ({
+        pageNumber: i + 1,
+        width,
+        height,
+      })),
+    );
+  }
 
-    const layouts: PageLayout[] = [];
-    for (let i = 1; i <= numPages; i++) {
-      const page = await doc.getPage(i);
-      const viewport = page.getViewport({ scale: 1 });
-      layouts.push({
-        pageNumber: i,
-        width: viewport.width,
-        height: viewport.height,
-      });
+  private correctPageLayout(
+    pageNumber: number,
+    width: number,
+    height: number,
+  ): void {
+    const layout = this.pageLayouts()[pageNumber - 1];
+    if (!layout || (layout.width === width && layout.height === height)) {
+      return;
     }
-    this.pageLayouts.set(layouts);
+    this.pageLayouts.update((layouts) =>
+      layouts.map((l) =>
+        l.pageNumber === pageNumber ? { ...l, width, height } : l,
+      ),
+    );
   }
 
   private setupResizeObserver(): void {
@@ -571,91 +620,116 @@ export class ScPdfViewerCanvas {
     this.resizeObserver.observe(container);
   }
 
-  private setupIntersectionObserver(): void {
+  /**
+   * Two observers instead of measuring every page on scroll: one renders the
+   * pages near the viewport and releases the others, one tracks how much of
+   * each page is visible to know the current page.
+   */
+  private setupObservers(): void {
     const container = this.scrollContainer()?.nativeElement;
     if (!container) return;
 
-    this.observer = new IntersectionObserver(
+    this.renderObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          const pageEl = entry.target as HTMLElement;
-          const pageNum = parseInt(pageEl.getAttribute('data-page') || '0', 10);
-
-          if (entry.isIntersecting && pageNum > 0) {
-            this.renderPage(pageNum);
+          const page = this.pageNumberOf(entry.target);
+          if (!page) continue;
+          if (entry.isIntersecting) {
+            this.nearPages.add(page);
+            this.renderPage(page);
+          } else if (this.nearPages.delete(page)) {
+            this.releasePage(page);
           }
         }
-
-        this.updateCurrentPageFromScroll(container);
       },
-      {
-        root: container,
-        rootMargin: '100px 0px',
-        threshold: [0, 0.25, 0.5, 0.75],
-      },
+      { root: container, rootMargin: RENDER_MARGIN },
     );
 
-    this.scrollHandler = () => {
-      this.updateCurrentPageFromScroll(container);
-    };
-    container.addEventListener('scroll', this.scrollHandler);
+    this.visibilityObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const page = this.pageNumberOf(entry.target);
+          if (!page) continue;
+          if (entry.isIntersecting) {
+            this.visibleHeights.set(page, entry.intersectionRect.height);
+          } else {
+            this.visibleHeights.delete(page);
+          }
+        }
+        this.updateCurrentPage();
+      },
+      { root: container, threshold: VISIBILITY_THRESHOLDS },
+    );
   }
 
-  private renderVisiblePages(): void {
+  private observePages(): void {
+    const container = this.scrollContainer()?.nativeElement;
+    if (!container || !this.renderObserver || !this.visibilityObserver) return;
+
+    this.renderObserver.disconnect();
+    this.visibilityObserver.disconnect();
+    this.nearPages.clear();
+    this.visibleHeights.clear();
+    for (const el of container.querySelectorAll(':scope > [data-page]')) {
+      this.renderObserver.observe(el);
+      this.visibilityObserver.observe(el);
+    }
+  }
+
+  private pageNumberOf(el: Element): number {
+    return parseInt(el.getAttribute('data-page') ?? '', 10) || 0;
+  }
+
+  /** The current page is the most visible one (the first, on a tie). */
+  private updateCurrentPage(): void {
+    let current = 0;
+    let best = 0;
+    for (const [page, height] of this.visibleHeights) {
+      if (height > best || (height === best && page < current)) {
+        best = height;
+        current = page;
+      }
+    }
+    if (current && current !== this.pdfViewer.currentPage()) {
+      this.pdfViewer.currentPage.set(current);
+    }
+  }
+
+  /** Frees a page that's far from the viewport; it's redrawn on return. */
+  private releasePage(pageNumber: number): void {
+    this.activeRenderTasks.get(pageNumber)?.cancel();
+    this.activeRenderTasks.delete(pageNumber);
+    this.activeTextLayers.get(pageNumber)?.cancel();
+    this.activeTextLayers.delete(pageNumber);
+    this.renderedPages.delete(pageNumber);
+    this.textLayerData.delete(pageNumber);
+
     const container = this.scrollContainer()?.nativeElement;
     if (!container) return;
-
-    // Re-observe for future scroll-based rendering
-    if (this.observer) {
-      this.observer.disconnect();
-      const pageElements = container.querySelectorAll(':scope > [data-page]');
-      pageElements.forEach((el) => this.observer!.observe(el));
+    const canvas = container.querySelector<HTMLCanvasElement>(
+      `canvas[data-page="${pageNumber}"]`,
+    );
+    if (canvas) {
+      canvas.width = 0;
+      canvas.height = 0;
     }
-
-    // Directly render pages that are currently visible
-    const containerRect = container.getBoundingClientRect();
-    const pageElements = container.querySelectorAll(':scope > [data-page]');
-
-    pageElements.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const isVisible =
-        rect.bottom > containerRect.top - 100 &&
-        rect.top < containerRect.bottom + 100;
-
-      if (isVisible) {
-        const pageNum = parseInt(el.getAttribute('data-page') || '0', 10);
-        if (pageNum > 0) {
-          this.renderPage(pageNum);
-        }
-      }
-    });
+    for (const layer of [
+      `[data-textlayer-page="${pageNumber}"]`,
+      `[data-annotationlayer-page="${pageNumber}"]`,
+    ]) {
+      const el = container.querySelector(layer);
+      if (el) el.textContent = '';
+    }
   }
 
-  private updateCurrentPageFromScroll(container: HTMLElement): void {
-    const pageElements = container.querySelectorAll(':scope > [data-page]');
-    let mostVisiblePage = 1;
-    let maxVisibleArea = 0;
-
-    const containerRect = container.getBoundingClientRect();
-
-    pageElements.forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const visibleTop = Math.max(rect.top, containerRect.top);
-      const visibleBottom = Math.min(rect.bottom, containerRect.bottom);
-      const visibleArea = Math.max(0, visibleBottom - visibleTop);
-
-      if (visibleArea > maxVisibleArea) {
-        maxVisibleArea = visibleArea;
-        mostVisiblePage = parseInt(el.getAttribute('data-page') || '1', 10);
-      }
-    });
-
-    if (
-      mostVisiblePage !== this.pdfViewer.currentPage() &&
-      maxVisibleArea > 0
-    ) {
-      this.pdfViewer.currentPage.set(mostVisiblePage);
-    }
+  /** Redraws when the window moves to a screen with another pixel density. */
+  private watchDevicePixelRatio(): void {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    this.dprQuery?.removeEventListener('change', this.onDprChange);
+    this.dprQuery = window.matchMedia(
+      `(resolution: ${window.devicePixelRatio}dppx)`,
+    );
+    this.dprQuery.addEventListener('change', this.onDprChange);
   }
 
   private async renderPage(pageNumber: number): Promise<void> {
@@ -670,8 +744,16 @@ export class ScPdfViewerCanvas {
 
     try {
       const page: PDFPageProxy = await doc.getPage(pageNumber);
-      const scale = this.scaledValue() * this.dpr;
-      const viewport = page.getViewport({ scale });
+      // Scrolled away (or another document) while the page was fetched.
+      if (doc !== this.pdfDocument() || !this.nearPages.has(pageNumber)) {
+        this.renderedPages.delete(pageNumber);
+        return;
+      }
+      const natural = page.getViewport({ scale: 1 });
+      this.correctPageLayout(pageNumber, natural.width, natural.height);
+      const viewport = page.getViewport({
+        scale: this.scaledValue() * this.outputScale(natural),
+      });
 
       const container = this.scrollContainer()?.nativeElement;
       if (!container) return;
@@ -745,6 +827,19 @@ export class ScPdfViewerCanvas {
       this.activeTextLayers.delete(pageNumber);
       this.renderedPages.delete(pageNumber);
     }
+  }
+
+  /**
+   * Canvas pixels per CSS pixel: the screen's density, lowered when the
+   * canvas would exceed MAX_CANVAS_PIXELS (high zoom on a dense screen).
+   */
+  private outputScale(natural: { width: number; height: number }): number {
+    const scale = this.scaledValue();
+    const cssPixels = natural.width * scale * (natural.height * scale);
+    const dpr = this.dpr();
+    return cssPixels * dpr * dpr > MAX_CANVAS_PIXELS
+      ? Math.sqrt(MAX_CANVAS_PIXELS / cssPixels)
+      : dpr;
   }
 
   private async renderAnnotationLayer(

@@ -146,6 +146,13 @@ The swatches come from `SC_PDF_HIGHLIGHT_COLORS` and `SC_PDF_INK_COLORS` (`ScPdf
 | `ScPdfViewerLayersView`     | `sc-pdf-viewer-layers-view`     | The document's optional content layers, as checkboxes.      |
 | `ScPdfViewerCommentSidebar` | `sc-pdf-viewer-comment-sidebar` | Add, edit and delete comments.                              |
 
+## Performance
+
+- The document shows as soon as its first page is read: every page is laid out at the first page's size, and a page whose size differs is corrected when it's drawn.
+- Only pages within about one screen of the viewport are drawn; the others are released (canvas, text and link layers) and redrawn when you scroll back, so memory stays flat on long documents.
+- Canvases are capped at 16.7 megapixels (high zoom on a dense screen), past which browsers draw nothing; pages redraw when the window moves to a screen with another pixel density.
+- Find extracts each page's text once per document, in parallel batches; later searches reuse it.
+
 ## Accessibility
 
 - Every control is a native, labelled button, input or select; icon-only buttons have names, toggles report `aria-pressed`, the page and zoom buttons are grouped.
