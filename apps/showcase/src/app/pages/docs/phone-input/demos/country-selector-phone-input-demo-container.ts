@@ -17,8 +17,8 @@ export class CountrySelectorPhoneInputDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
-  ScComboboxEmpty,
   ScCombobox,
+  ScComboboxEmpty,
   ScComboboxIcon,
   ScComboboxItem,
   ScComboboxItemLabel,
@@ -39,6 +39,7 @@ import {
 import {
   ScPhoneInput,
   ScPhoneInputCountry,
+  ScPhoneInputFlag,
   ScPhoneInputNumber,
   phoneCountries,
   phoneNumber,
@@ -69,6 +70,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScLabel,
     ScPhoneInput,
     ScPhoneInputCountry,
+    ScPhoneInputFlag,
     ScPhoneInputNumber,
     SiChevronDownIcon,
     SiSearchIcon,
@@ -86,7 +88,8 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           <div scCombobox scPhoneInputCountry>
             <div scComboboxTrigger aria-label="Country">
               <span scComboboxValue>
-                {{ phone.country() }} +{{ phone.callingCode() }}
+                <img scPhoneInputFlag alt="" />
+                +{{ phone.callingCode() }}
               </span>
               <svg scComboboxIcon siChevronDownIcon></svg>
             </div>
@@ -115,6 +118,11 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                         [value]="country.code"
                         [label]="country.name"
                       >
+                        <img
+                          scPhoneInputFlag
+                          [country]="country.code"
+                          alt=""
+                        />
                         <span scComboboxItemLabel>
                           {{ country.name }} +{{ country.callingCode }}
                         </span>

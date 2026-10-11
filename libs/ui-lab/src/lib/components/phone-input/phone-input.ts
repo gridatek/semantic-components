@@ -55,6 +55,14 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
   readonly country = model<ScPhoneCountryCode | undefined>(undefined);
   /** The country to start with when the value doesn't say. */
   readonly defaultCountry = input<ScPhoneCountryCode | undefined>(undefined);
+  /**
+   * Where `scPhoneInputFlag` images come from: `{XX}` / `{xx}` is replaced by
+   * the country code. Defaults to the `country-flag-icons` 3x2 SVGs; point it
+   * at your own copy to self-host.
+   */
+  readonly flagUrl = input(
+    'https://purecatamphetamine.github.io/country-flag-icons/3x2/{XX}.svg',
+  );
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly required = input(false, { transform: booleanAttribute });

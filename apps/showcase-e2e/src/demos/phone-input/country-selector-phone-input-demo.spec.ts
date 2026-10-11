@@ -15,12 +15,15 @@ test.describe('Country Selector Phone Input Demo', () => {
 
   test('picking a country updates the trigger', async ({ page }) => {
     const trigger = page.locator('[scComboboxTrigger]');
-    await expect(trigger).toContainText('US +1');
+    const flag = trigger.locator('img');
+    await expect(trigger).toContainText('+1');
+    await expect(flag).toHaveAttribute('src', /\/US\.svg$/);
 
     await trigger.click();
     await type(page, 'fra');
     await page.getByRole('option', { name: /France/ }).click();
-    await expect(trigger).toContainText('FR +33');
+    await expect(trigger).toContainText('+33');
+    await expect(flag).toHaveAttribute('src', /\/FR\.svg$/);
   });
 
   test('formats as you type; the value is the full number', async ({
@@ -47,7 +50,10 @@ test.describe('Country Selector Phone Input Demo', () => {
     const input = page.getByLabel('Phone number');
     await input.click();
     await type(page, '+33612345678');
-    await expect(page.locator('[scComboboxTrigger]')).toContainText('FR +33');
+    await expect(page.locator('[scComboboxTrigger] img')).toHaveAttribute(
+      'src',
+      /\/FR\.svg$/,
+    );
     await expect(page.getByText('Value: +33612345678')).toBeVisible();
   });
 

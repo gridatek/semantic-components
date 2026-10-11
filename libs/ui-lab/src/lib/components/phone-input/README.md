@@ -12,7 +12,10 @@ The value is the full international number (`+33612345678`), or `''` while nothi
   <div scPhoneInput [formField]="contactForm.phone" defaultCountry="US" #phone="scPhoneInput">
     <div scCombobox scPhoneInputCountry>
       <div scComboboxTrigger aria-label="Country">
-        <span scComboboxValue>{{ phone.country() }} +{{ phone.callingCode() }}</span>
+        <span scComboboxValue>
+          <img scPhoneInputFlag alt="" />
+          +{{ phone.callingCode() }}
+        </span>
         <svg scComboboxIcon siChevronDownIcon></svg>
       </div>
       <ng-template scComboboxPortal>
@@ -22,6 +25,7 @@ The value is the full international number (`+33612345678`), or `''` while nothi
             <div scComboboxList>
               @for (country of countries; track country.code) {
               <div scComboboxItem [value]="country.code" [label]="country.name">
+                <img scPhoneInputFlag [country]="country.code" alt="" />
                 <span scComboboxItemLabel>{{ country.name }} +{{ country.callingCode }}</span>
               </div>
               }
@@ -45,7 +49,22 @@ readonly contactForm = form(this.model, (s) => {
 });
 ```
 
-The country picker is a regular `scCombobox` (see Combobox): the trigger content, the list and its filtering are yours. Flags too — put them in your template (flag emoji don't render on Windows, so prefer images).
+The country picker is a regular `scCombobox` (see Combobox): the trigger content, the list and its filtering are yours.
+
+### Flags
+
+Like `react-phone-number-input`, flags are images, not code: `<img scPhoneInputFlag>` loads the country's flag from the phone input's `flagUrl`, so no flag is in your bundle and each loads only when shown (`loading="lazy"`). The default is the [`country-flag-icons`](https://gitlab.com/catamphetamine/country-flag-icons) 3x2 SVGs on their GitHub pages. To self-host, copy them into your assets and point `flagUrl` at them:
+
+```json
+// project.json → build options → assets
+{ "glob": "*.svg", "input": "node_modules/country-flag-icons/3x2", "output": "flags" }
+```
+
+```html
+<div scPhoneInput flagUrl="flags/{XX}.svg">…</div>
+```
+
+Any other flag set works the same way (`{XX}` is the upper-case code, `{xx}` the lower-case one).
 
 ## Parts
 
@@ -53,14 +72,15 @@ The country picker is a regular `scCombobox` (see Combobox): the trigger content
 
 Holds the state and draws the group (border, focus ring, invalid state). A Signal Forms control: bind it with `[formField]`, or `[(value)]`.
 
-| Input / model    | Type                              | Default | Description                   |
-| ---------------- | --------------------------------- | ------- | ----------------------------- |
-| `[(value)]`      | `string`                          | `''`    | The full international number |
-| `[(country)]`    | `ScPhoneCountryCode \| undefined` | —       | The selected country (`'FR'`) |
-| `defaultCountry` | `ScPhoneCountryCode`              | —       | The country to start with     |
-| `disabled`       | `boolean`                         | `false` | Bound by `[formField]`        |
-| `readonly`       | `boolean`                         | `false` | Bound by `[formField]`        |
-| `class`          | `string`                          | `''`    | Additional CSS classes        |
+| Input / model    | Type                              | Default                  | Description                            |
+| ---------------- | --------------------------------- | ------------------------ | -------------------------------------- |
+| `[(value)]`      | `string`                          | `''`                     | The full international number          |
+| `[(country)]`    | `ScPhoneCountryCode \| undefined` | —                        | The selected country (`'FR'`)          |
+| `defaultCountry` | `ScPhoneCountryCode`              | —                        | The country to start with              |
+| `flagUrl`        | `string`                          | `country-flag-icons` 3x2 | Flag image URL, `{XX}` / `{xx}` = code |
+| `disabled`       | `boolean`                         | `false`                  | Bound by `[formField]`                 |
+| `readonly`       | `boolean`                         | `false`                  | Bound by `[formField]`                 |
+| `class`          | `string`                          | `''`                     | Additional CSS classes                 |
 
 Signals: `callingCode()` (`'33'`), `text()` (the formatted number as shown).
 
@@ -75,6 +95,15 @@ Makes the combobox the country picker: its value is the country code, kept in sy
 ### ScPhoneInputNumber — `input[scPhoneInputNumber]`
 
 The number (`type="tel"`, `autocomplete="tel"`). Formats as you type — in the country's national format, or international after a `+` — and keeps the caret in place. Backspace or Delete next to a space or bracket removes the digit beyond it. Labelled by the field's label.
+
+### ScPhoneInputFlag — `img[scPhoneInputFlag]`
+
+A 3:2 flag image from `flagUrl`: the selected country, or `[country]`. Hidden while there's no country. Write `alt=""` when the country's name or code is beside it, a real `alt` when the flag stands alone.
+
+| Input     | Type                 | Default              | Description            |
+| --------- | -------------------- | -------------------- | ---------------------- |
+| `country` | `ScPhoneCountryCode` | the selected country | Whose flag             |
+| `class`   | `string`             | `''`                 | Additional CSS classes |
 
 ### phoneCountries(locale?)
 
