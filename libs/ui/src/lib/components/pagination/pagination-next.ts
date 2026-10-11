@@ -49,7 +49,8 @@ export class ScPaginationNext {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'pe-1.5',
+      // Balances a text button ("Next ›"); icon-only buttons stay centred.
+      !this.size()?.startsWith('icon') && 'pe-1.5',
       'rtl:[&>svg]:rotate-180',
       this.classInput(),
     ),

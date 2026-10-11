@@ -74,12 +74,7 @@ import type { User } from './user.service';
             </button>
           </li>
           <li scPaginationItem>
-            <button
-              scPaginationPrevious
-              variant="outline"
-              size="icon-sm"
-              class="pl-0"
-            >
+            <button scPaginationPrevious variant="outline" size="icon-sm">
               <svg siChevronLeftIcon></svg>
             </button>
           </li>
@@ -99,12 +94,7 @@ import type { User } from './user.service';
           }
 
           <li scPaginationItem>
-            <button
-              scPaginationNext
-              variant="outline"
-              size="icon-sm"
-              class="pr-0"
-            >
+            <button scPaginationNext variant="outline" size="icon-sm">
               <svg siChevronRightIcon></svg>
             </button>
           </li>

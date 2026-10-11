@@ -49,7 +49,8 @@ export class ScPaginationPrevious {
   protected readonly class = computed(() =>
     cn(
       buttonVariants({ variant: this.variant(), size: this.size() }),
-      'ps-1.5',
+      // Balances a text button ("‹ Previous"); icon-only buttons stay centred.
+      !this.size()?.startsWith('icon') && 'ps-1.5',
       'rtl:[&>svg]:rotate-180',
       this.classInput(),
     ),
