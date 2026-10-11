@@ -9,7 +9,17 @@ import { ScButton, ScInput } from '@semantic-components/ui';
   template: `
     <div class="flex flex-col items-center gap-6">
       @if (value()) {
-        <svg scQrCode [value]="value()" aria-label="QR Code"></svg>
+        <svg
+          scQrCode
+          #qr="scQrCode"
+          [value]="value()"
+          aria-label="QR code for the text below"
+        ></svg>
+        @if (qr.error()) {
+          <p class="text-destructive text-sm" role="alert">
+            Too long to fit in a QR code.
+          </p>
+        }
       }
 
       <div class="flex w-full max-w-sm flex-col gap-3">

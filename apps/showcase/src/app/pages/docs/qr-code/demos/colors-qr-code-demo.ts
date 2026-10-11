@@ -12,7 +12,7 @@ import { ScQrCode } from '@semantic-components/qr-code';
             scQrCode
             [value]="item.label"
             [class]="'size-36 rounded-md ' + item.class"
-            [attr.aria-label]="item.label + ' QR Code'"
+            [aria-label]="item.label + ' QR Code'"
           ></svg>
           <p class="text-muted-foreground text-xs">{{ item.label }}</p>
         </div>

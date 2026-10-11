@@ -13,7 +13,7 @@ import { ScQrCode, ScQrCodeEcc } from '@semantic-components/qr-code';
             [value]="'Error Correction'"
             [ecc]="item.ecc"
             class="size-36"
-            [attr.aria-label]="item.label"
+            [aria-label]="item.label"
           ></svg>
           <p class="text-muted-foreground text-xs">{{ item.label }}</p>
         </div>

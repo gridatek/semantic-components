@@ -20,8 +20,8 @@ import { InteractiveQrCodeDemo } from './interactive-qr-code-demo';
 export class InteractiveQrCodeDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScButton, ScInput } from '@semantic-components/ui';
 import { ScQrCode } from '@semantic-components/qr-code';
+import { ScButton, ScInput } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-interactive-qr-code-demo',
@@ -29,7 +29,17 @@ import { ScQrCode } from '@semantic-components/qr-code';
   template: \`
     <div class="flex flex-col items-center gap-6">
       @if (value()) {
-        <svg scQrCode [value]="value()" aria-label="QR Code"></svg>
+        <svg
+          scQrCode
+          #qr="scQrCode"
+          [value]="value()"
+          aria-label="QR code for the text below"
+        ></svg>
+        @if (qr.error()) {
+          <p class="text-destructive text-sm" role="alert">
+            Too long to fit in a QR code.
+          </p>
+        }
       }
 
       <div class="flex w-full max-w-sm flex-col gap-3">

@@ -6,14 +6,14 @@ import { ScQrCode } from '@semantic-components/qr-code';
   imports: [ScQrCode],
   template: `
     <div class="flex flex-wrap items-end gap-6">
-      @for (item of borders; track item.border) {
+      @for (item of zones; track item.quietZone) {
         <div class="flex flex-col items-center gap-1">
           <svg
             scQrCode
-            [value]="'Border demo'"
-            [border]="item.border"
-            [class]="'size-36' + (item.border === 0 ? ' border' : '')"
-            [attr.aria-label]="item.label"
+            [value]="'Quiet zone demo'"
+            [quietZone]="item.quietZone"
+            class="size-36 border"
+            [aria-label]="item.label"
           ></svg>
           <p class="text-muted-foreground text-xs">{{ item.label }}</p>
         </div>
@@ -24,10 +24,10 @@ import { ScQrCode } from '@semantic-components/qr-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class QuietZoneQrCodeDemo {
-  readonly borders = [
-    { border: 0, label: 'No quiet zone' },
-    { border: 1, label: '1 module' },
-    { border: 2, label: '2 modules (default)' },
-    { border: 4, label: '4 modules (standard)' },
+  readonly zones = [
+    { quietZone: 0, label: 'No quiet zone' },
+    { quietZone: 1, label: '1 module' },
+    { quietZone: 2, label: '2 modules' },
+    { quietZone: 4, label: '4 modules (default)' },
   ];
 }
