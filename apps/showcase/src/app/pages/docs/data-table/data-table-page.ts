@@ -33,9 +33,9 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
           >
             TanStack Table
           </a>
-          (v9) owns the logic and state; these parts render and wire it. Build
-          the table with TanStack, render it with the table primitives, and add
-          a part where you need behavior. Icons stay in your template.
+          owns the logic and state; these parts render and wire it. Build the
+          table with TanStack, render it with the table primitives, and add a
+          part where you need behavior. Icons stay in your template.
         </p>
         <ul class="text-muted-foreground list-inside list-disc text-sm">
           <li>

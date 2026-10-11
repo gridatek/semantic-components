@@ -26,7 +26,7 @@ import {
 } from '@tanstack/angular-table';
 
 /**
- * Every table feature the data table uses (v9 only exposes registered
+ * Every table feature the data table uses (TanStack only exposes registered
  * features). Prerequisites come before what depends on them.
  */
 export const features = tableFeatures({

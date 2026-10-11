@@ -4,14 +4,14 @@ const bodyRows = (page: Page) => page.locator('tbody tr');
 const firstCellText = (page: Page, column: number) =>
   bodyRows(page).first().locator('td').nth(column).innerText();
 
-test.describe('TanStack data table (v9)', () => {
+test.describe('TanStack data table', () => {
   let problems: string[];
 
   test.beforeEach(async ({ page }) => {
     problems = [];
     page.on('pageerror', (e) => problems.push(e.message));
     page.on('console', (m) => {
-      // v9 warns when a feature function is used but not registered.
+      // TanStack warns when a feature function is used but not registered.
       if (m.type() === 'error' || /not registered/.test(m.text())) {
         problems.push(m.text());
       }
@@ -95,7 +95,7 @@ test.describe('TanStack data table (v9)', () => {
 
     await headerBox.check();
     await expect(rowBoxes.nth(5)).toBeChecked();
-    // All selected: checked, not indeterminate (v9 "some" includes "all").
+    // All selected: checked, not indeterminate ("some" includes "all").
     await expect
       .poll(() => headerBox.evaluate((b: HTMLInputElement) => b.indeterminate))
       .toBe(false);

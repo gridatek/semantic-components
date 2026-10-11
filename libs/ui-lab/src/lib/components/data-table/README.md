@@ -1,6 +1,6 @@
 # Data Table
 
-Styled, accessible parts for data tables powered by [TanStack Table](https://tanstack.com/table) (v9). TanStack owns the logic and state (sorting, filtering, paging, selection, visibility, pinning…); these parts render and wire it. You compose them with the `scTable` primitives from `@semantic-components/ui`, and the icons stay in your template.
+Styled, accessible parts for data tables powered by [TanStack Table](https://tanstack.com/table). TanStack owns the logic and state (sorting, filtering, paging, selection, visibility, pinning…); these parts render and wire it. You compose them with the `scTable` primitives from `@semantic-components/ui`, and the icons stay in your template.
 
 The parts are **typed structurally**: each one only declares the few methods it calls, so this library has no dependency on TanStack and doesn't pin its version. Pass TanStack's own `table`, `column` and `row` objects.
 
@@ -18,7 +18,7 @@ import { ScDataTableCell, ScDataTableColumnToggle, ScDataTableColumnToggleConten
 
 ### 1. The table (TanStack)
 
-Register the features you use (v9 only exposes registered features), then build the table with `injectTable`:
+Register the features you use (TanStack only exposes registered features), then build the table with `injectTable`:
 
 ```typescript
 import { columnFilteringFeature, createColumnHelper, createFilteredRowModel, createPaginatedRowModel, createSortedRowModel, globalFilteringFeature, injectTable, rowPaginationFeature, rowSelectionFeature, rowSortingFeature, sortFn_alphanumeric, sortFn_text, tableFeatures } from '@tanstack/angular-table';
@@ -149,8 +149,8 @@ Exported for your own wrappers: `DataTableHeadColumn`, `DataTableSortableColumn`
 
 ## Notes
 
-- **Selection (TanStack v9):** `getIsSomePageRowsSelected()` is also true when all rows are selected; `scDataTableSelectAll` already shows indeterminate only for a partial selection.
-- **Pinning (TanStack v9):** positions are logical — `'start' | 'end'` — so sticky columns follow the writing direction (RTL-safe). Register `columnSizingFeature` for correct offsets when several columns are pinned to one side.
+- **Selection:** `getIsSomePageRowsSelected()` is also true when all rows are selected; `scDataTableSelectAll` already shows indeterminate only for a partial selection.
+- **Pinning:** positions are logical — `'start' | 'end'` — so sticky columns follow the writing direction (RTL-safe). Register `columnSizingFeature` for correct offsets when several columns are pinned to one side.
 - **Server-rendered apps:** interactions before hydration finishes are reset, as for any hydrated control.
 
 ## Accessibility

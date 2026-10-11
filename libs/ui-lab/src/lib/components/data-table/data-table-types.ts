@@ -1,6 +1,6 @@
 /**
  * The data table parts style and wire a headless table — built for
- * TanStack Table (v9), but typed structurally: each part only needs the few
+ * TanStack Table, but typed structurally: each part only needs the few
  * methods it calls, so this library has no dependency on TanStack. Pass
  * TanStack's own `table`, `column` and `row` objects.
  */

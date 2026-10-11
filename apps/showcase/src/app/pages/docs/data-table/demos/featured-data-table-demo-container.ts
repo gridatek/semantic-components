@@ -88,7 +88,7 @@ interface User {
   createdAt: Date;
 }
 
-/** TanStack v9: register the features the table uses. */
+/** Register the TanStack features the table uses. */
 const features = tableFeatures({
   columnFilteringFeature,
   globalFilteringFeature,

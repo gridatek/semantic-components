@@ -32,7 +32,7 @@ export class ScDataTableSelectAll {
       : this.table().getIsAllRowsSelected(),
   );
 
-  // TanStack v9: "some" also holds when all are selected.
+  // TanStack: "some" also holds when all are selected.
   protected readonly indeterminate = computed(
     () =>
       !this.allSelected() &&
