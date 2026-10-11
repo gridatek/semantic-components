@@ -16,10 +16,10 @@ import { AvatarsOrgChartDemo } from './avatars-org-chart-demo';
 export class AvatarsOrgChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type ScOrgChartNodeData,
   ScOrgChart,
   ScOrgChartCard,
   ScOrgChartNode,
+  type ScOrgChartNodeData,
   ScOrgChartNodeDef,
 } from '@semantic-components/ui-lab';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';

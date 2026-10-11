@@ -15,13 +15,20 @@ import {
   sortFn_text,
   tableFeatures,
 } from '@tanstack/angular-table';
-import { Component, ViewEncapsulation, computed } from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScBadge,
   ScButton,
   ScCheckbox,
   ScCheckboxField,
   ScInput,
+  ScMenu,
+  ScMenuContent,
+  ScMenuItem,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuSeparator,
+  ScMenuTrigger,
   ScPagination,
   ScPaginationFirst,
   ScPaginationItem,
@@ -60,7 +67,10 @@ import {
   SiChevronsRightIcon,
   SiChevronsUpDownIcon,
   SiColumns3Icon,
+  SiCopyIcon,
   SiEllipsisIcon,
+  SiEyeIcon,
+  SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
 
 interface User {
@@ -217,6 +227,13 @@ const SAMPLE_DATA: User[] = [
     ScCheckbox,
     ScCheckboxField,
     ScInput,
+    ScMenu,
+    ScMenuContent,
+    ScMenuItem,
+    ScMenuPortal,
+    ScMenuProvider,
+    ScMenuSeparator,
+    ScMenuTrigger,
     ScPagination,
     ScPaginationFirst,
     ScPaginationItem,
@@ -251,7 +268,10 @@ const SAMPLE_DATA: User[] = [
     SiChevronsRightIcon,
     SiChevronsUpDownIcon,
     SiColumns3Icon,
+    SiCopyIcon,
     SiEllipsisIcon,
+    SiEyeIcon,
+    SiTrash2Icon,
   ],
   template: `
     <div class="w-full max-w-4xl space-y-4">
@@ -384,14 +404,45 @@ const SAMPLE_DATA: User[] = [
                         {{ formatDate(row.original.createdAt) }}
                       }
                       @case ('actions') {
-                        <button
-                          scButton
-                          variant="ghost"
-                          size="icon-sm"
-                          [attr.aria-label]="'Actions for ' + row.original.name"
-                        >
-                          <svg siEllipsisIcon></svg>
-                        </button>
+                        <div scMenuProvider align=" end>
+                          <button
+                            scButton
+                            scMenuTrigger
+                            variant="ghost"
+                            size="icon-sm"
+                            [attr.aria-label]="
+                              'Actions for ' + row.original.name
+                            "
+                          >
+                            <svg siEllipsisIcon></svg>
+                          </button>
+                          <ng-template scMenuPortal>
+                            <div
+                              scMenu
+                              (itemSelected)="onAction($event, row.original)"
+                            >
+                              <ng-template scMenuContent>
+                                <div scMenuItem value="copy">
+                                  <svg siCopyIcon aria-hidden="true"></svg>
+                                  Copy email
+                                </div>
+                                <div scMenuItem value="view">
+                                  <svg siEyeIcon aria-hidden="true"></svg>
+                                  View details
+                                </div>
+                                <div scMenuSeparator></div>
+                                <div
+                                  scMenuItem
+                                  value="delete"
+                                  class="text-destructive"
+                                >
+                                  <svg siTrash2Icon aria-hidden="true"></svg>
+                                  Delete user
+                                </div>
+                              </ng-template>
+                            </div>
+                          </ng-template>
+                        </div>
                       }
                       @default {
                         {{ cell.getValue() }}
@@ -416,9 +467,12 @@ const SAMPLE_DATA: User[] = [
       </div>
 
       <div class="flex flex-wrap items-center justify-between gap-4">
-        <p class="text-muted-foreground text-sm">
-          {{ selectedCount() }} of {{ table.getRowCount() }} row(s) selected.
-        </p>
+        <div class="text-muted-foreground space-y-1 text-sm">
+          <p>
+            {{ selectedCount() }} of {{ table.getRowCount() }} row(s) selected.
+          </p>
+          <p aria-live="polite">{{ lastAction() }}</p>
+        </div>
 
         <nav
           scPagination
@@ -473,10 +527,13 @@ const SAMPLE_DATA: User[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class FeaturedDataTableDemo {
+  readonly users = signal<User[]>(SAMPLE_DATA);
+  readonly lastAction = signal('');
+
   readonly table = injectTable(() => ({
     features,
     columns,
-    data: SAMPLE_DATA,
+    data: this.users(),
     getRowId: (user) => String(user.id),
     initialState: { pagination: { pageIndex: 0, pageSize: 5 } },
   }));
@@ -484,6 +541,29 @@ export class FeaturedDataTableDemo {
   readonly selectedCount = computed(
     () => Object.keys(this.table.atoms.rowSelection.get()).length,
   );
+
+  onAction(action: unknown, user: User): void {
+    switch (action) {
+      case 'copy':
+        void navigator.clipboard?.writeText(user.email);
+        this.lastAction.set(`Copied ${user.email}`);
+        break;
+      case 'view':
+        this.lastAction.set(
+          `Viewing ${user.name} (${user.role}, ${user.status})`,
+        );
+        break;
+      case 'delete':
+        this.users.update((users) => users.filter((u) => u.id !== user.id));
+        this.table.setRowSelection((selection) => {
+          const next = { ...selection };
+          delete next[String(user.id)];
+          return next;
+        });
+        this.lastAction.set(`Deleted ${user.name}`);
+        break;
+    }
+  }
 
   roleVariant(role: string): 'default' | 'secondary' | 'outline' {
     return role === 'Admin'

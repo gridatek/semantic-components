@@ -77,4 +77,36 @@ test.describe('Featured Data Table Demo', () => {
     await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     await expect(toggle).toBeFocused();
   });
+
+  test('row actions menu opens with the keyboard; Escape returns focus', async ({
+    page,
+  }) => {
+    const trigger = page.getByRole('button', { name: 'Actions for John Doe' });
+    await trigger.focus();
+    await press(page, 'Enter');
+    const menu = page.getByRole('menu');
+    await expect(menu).toBeVisible();
+    await expect(menu.getByRole('menuitem')).toHaveText([
+      'Copy email',
+      'View details',
+      'Delete user',
+    ]);
+    await press(page, 'Escape');
+    await expect(menu).toBeHidden();
+    await expect(trigger).toBeFocused();
+  });
+
+  test('row actions run: view details, delete user', async ({ page }) => {
+    await page.getByRole('button', { name: 'Actions for John Doe' }).click();
+    await page.getByRole('menuitem', { name: 'View details' }).click();
+    await expect(
+      page.getByText('Viewing John Doe (Admin, active)'),
+    ).toBeVisible();
+
+    await page.getByRole('button', { name: 'Actions for John Doe' }).click();
+    await page.getByRole('menuitem', { name: 'Delete user' }).click();
+    await expect(page.getByText('Deleted John Doe')).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'John Doe' })).toHaveCount(0);
+    await expect(page.getByText('0 of 11 row(s) selected.')).toBeVisible();
+  });
 });

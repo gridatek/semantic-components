@@ -16,10 +16,10 @@ import { NonCollapsibleOrgChartDemo } from './non-collapsible-org-chart-demo';
 export class NonCollapsibleOrgChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type ScOrgChartNodeData,
   ScOrgChart,
   ScOrgChartCard,
   ScOrgChartNode,
+  type ScOrgChartNodeData,
   ScOrgChartNodeDef,
 } from '@semantic-components/ui-lab';
 

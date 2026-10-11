@@ -20,8 +20,8 @@ import { LineChartDemo } from './line-chart-demo';
 export class LineChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScChartDataPoint,
   ScChartContainer,
+  ScChartDataPoint,
   ScLineChart,
 } from '@semantic-components/charts';
 

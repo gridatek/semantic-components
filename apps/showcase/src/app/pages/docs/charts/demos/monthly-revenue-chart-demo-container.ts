@@ -20,9 +20,9 @@ import { MonthlyRevenueChartDemo } from './monthly-revenue-chart-demo';
 export class MonthlyRevenueChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScChartDataPoint,
   ScBarChart,
   ScChartContainer,
+  ScChartDataPoint,
 } from '@semantic-components/charts';
 
 @Component({

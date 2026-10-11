@@ -20,8 +20,8 @@ import { DonutChartDemo } from './donut-chart-demo';
 export class DonutChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScChartDataPoint,
   ScChartContainer,
+  ScChartDataPoint,
   ScChartLegend,
   ScDonutChart,
 } from '@semantic-components/charts';

@@ -20,8 +20,8 @@ import { AreaChartDemo } from './area-chart-demo';
 export class AreaChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScChartDataPoint,
   ScChartContainer,
+  ScChartDataPoint,
   ScLineChart,
 } from '@semantic-components/charts';
 

@@ -20,8 +20,8 @@ import { PieChartDemo } from './pie-chart-demo';
 export class PieChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScChartDataPoint,
   ScChartContainer,
+  ScChartDataPoint,
   ScChartLegend,
   ScPieChart,
 } from '@semantic-components/charts';

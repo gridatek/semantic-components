@@ -16,10 +16,10 @@ import { BasicOrgChartDemo } from './basic-org-chart-demo';
 export class BasicOrgChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type ScOrgChartNodeData,
   ScOrgChart,
   ScOrgChartCard,
   ScOrgChartNode,
+  type ScOrgChartNodeData,
   ScOrgChartNodeDef,
   type ScOrgChartNodeExpandEvent,
 } from '@semantic-components/ui-lab';

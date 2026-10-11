@@ -20,9 +20,9 @@ import { BarChartDemo } from './bar-chart-demo';
 export class BarChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScChartDataPoint,
   ScBarChart,
   ScChartContainer,
+  ScChartDataPoint,
   ScChartLegend,
 } from '@semantic-components/charts';
 

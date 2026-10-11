@@ -21,9 +21,9 @@ export class GroupedNotificationCenterDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScNotification,
-  type ScNotificationGroupData,
   ScNotificationCenter,
   ScNotificationCenterContainer,
+  type ScNotificationGroupData,
 } from '@semantic-components/ui-lab';
 
 @Component({

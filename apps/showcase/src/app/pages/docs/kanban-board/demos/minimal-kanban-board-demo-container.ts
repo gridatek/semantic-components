@@ -20,11 +20,11 @@ import { MinimalKanbanBoardDemo } from './minimal-kanban-board-demo';
 export class MinimalKanbanBoardDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type ScKanbanCardData,
-  type ScKanbanColumnData,
   ScKanbanBoard,
   ScKanbanCard,
+  type ScKanbanCardData,
   ScKanbanColumn,
+  type ScKanbanColumnData,
 } from '@semantic-components/ui-lab';
 
 @Component({

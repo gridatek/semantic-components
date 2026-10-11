@@ -20,12 +20,12 @@ import { BasicKanbanBoardDemo } from './basic-kanban-board-demo';
 export class BasicKanbanBoardDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type ScKanbanCardData,
-  type ScKanbanColumnData,
-  type ScKanbanDragEvent,
   ScKanbanBoard,
   ScKanbanCard,
+  type ScKanbanCardData,
   ScKanbanColumn,
+  type ScKanbanColumnData,
+  type ScKanbanDragEvent,
 } from '@semantic-components/ui-lab';
 import {
   SiChevronDownIcon,

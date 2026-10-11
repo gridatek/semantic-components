@@ -20,8 +20,8 @@ import { UserGrowthChartDemo } from './user-growth-chart-demo';
 export class UserGrowthChartDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScChartDataPoint,
   ScChartContainer,
+  ScChartDataPoint,
   ScLineChart,
 } from '@semantic-components/charts';
 
