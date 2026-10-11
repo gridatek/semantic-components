@@ -11,9 +11,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Component({
   selector: '[scPdfViewerContainer]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     'data-slot': 'pdf-viewer-container',
     '[class]': 'class()',

@@ -6,122 +6,118 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { ScButton, ScTextarea, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 import type { ScPdfComment } from './pdf-viewer-types';
 
+/** The document's comments: add one on the current page, edit, delete. */
 @Component({
   selector: 'sc-pdf-viewer-comment-sidebar',
+  imports: [ScButton, ScTextarea],
   template: `
-    <div class="flex h-full flex-col">
-      <div
-        class="flex items-center justify-between border-b border-[#555] px-3 py-2"
-      >
-        <span class="text-xs font-medium text-white">
-          Comments ({{ pdfViewer.comments().length }})
-        </span>
-        <button
-          type="button"
-          class="rounded bg-[#6b9edd] px-2 py-0.5 text-xs text-white hover:bg-[#5a8ecc]"
-          (click)="addingComment.set(true)"
-        >
+    <div class="flex items-center justify-between gap-2 border-b px-3 py-2">
+      <h3 class="text-sm font-medium">
+        Comments ({{ pdfViewer.comments().length }})
+      </h3>
+      @if (!adding()) {
+        <button scButton size="sm" variant="outline" (click)="adding.set(true)">
           Add
         </button>
-      </div>
-
-      <!-- Add comment form -->
-      @if (addingComment()) {
-        <div class="border-b border-[#555] p-3">
-          <textarea
-            class="w-full resize-none rounded border border-[#5a5a5a] bg-[#3d3d3d] p-2 text-xs text-[#d1d5db] outline-none focus:border-[#6b9edd]"
-            rows="3"
-            placeholder="Add a comment..."
-            [value]="newCommentText()"
-            (input)="newCommentText.set($any($event.target).value)"
-          ></textarea>
-          <div class="mt-2 flex justify-end gap-1">
-            <button
-              type="button"
-              class="rounded px-2 py-1 text-xs text-[#999] hover:text-white"
-              (click)="addingComment.set(false); newCommentText.set('')"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="rounded bg-[#6b9edd] px-2 py-1 text-xs text-white hover:bg-[#5a8ecc]"
-              [disabled]="!newCommentText().trim()"
-              (click)="submitComment()"
-            >
-              Post
-            </button>
-          </div>
-        </div>
       }
+    </div>
 
-      <!-- Comments list -->
-      <div class="flex-1 overflow-y-auto">
-        @for (comment of pdfViewer.comments(); track comment.id) {
-          <div
-            class="border-b border-[#444] p-3 transition-colors hover:bg-[#4a4a4a]"
+    @if (adding()) {
+      <form class="grid gap-2 border-b p-3" (submit)="submitComment($event)">
+        <textarea
+          scTextarea
+          rows="3"
+          [attr.aria-label]="'Comment on page ' + pdfViewer.currentPage()"
+          placeholder="Add a comment…"
+          [value]="newText()"
+          (input)="newText.set($any($event.target).value)"
+        ></textarea>
+        <div class="flex justify-end gap-2">
+          <button scButton size="sm" variant="ghost" (click)="cancelAdd()">
+            Cancel
+          </button>
+          <button
+            scButton
+            size="sm"
+            type="submit"
+            [disabled]="!newText().trim()"
           >
-            <div class="mb-1 flex items-center justify-between">
-              <span class="text-xs font-medium text-[#6b9edd]">
-                Page {{ comment.pageNumber }}
-              </span>
+            Post
+          </button>
+        </div>
+      </form>
+    }
+
+    <ul class="flex-1 overflow-y-auto">
+      @for (comment of pdfViewer.comments(); track comment.id) {
+        <li class="grid gap-1 border-b p-3">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-primary text-xs font-medium">
+              Page {{ comment.pageNumber }}
+            </span>
+            <span class="text-muted-foreground text-xs">
+              {{ comment.date }}
+            </span>
+          </div>
+          @if (editingId() === comment.id) {
+            <textarea
+              scTextarea
+              rows="2"
+              aria-label="Edit comment"
+              [value]="editText()"
+              (input)="editText.set($any($event.target).value)"
+            ></textarea>
+            <div class="flex justify-end gap-2">
               <button
-                type="button"
-                class="text-xs text-[#999] hover:text-red-400"
+                scButton
+                size="sm"
+                variant="ghost"
+                (click)="editingId.set(null)"
+              >
+                Cancel
+              </button>
+              <button scButton size="sm" (click)="saveEdit(comment.id)">
+                Save
+              </button>
+            </div>
+          } @else {
+            <p class="text-sm">{{ comment.text }}</p>
+            <div class="flex justify-end gap-1">
+              <button
+                scButton
+                size="sm"
+                variant="ghost"
+                (click)="startEdit(comment)"
+              >
+                Edit
+              </button>
+              <button
+                scButton
+                size="sm"
+                variant="ghost"
+                class="text-destructive"
                 (click)="pdfViewer.removeComment(comment.id)"
               >
                 Delete
               </button>
             </div>
-
-            @if (editingId() === comment.id) {
-              <textarea
-                class="w-full resize-none rounded border border-[#5a5a5a] bg-[#3d3d3d] p-1 text-xs text-[#d1d5db] outline-none focus:border-[#6b9edd]"
-                rows="2"
-                [value]="editText()"
-                (input)="editText.set($any($event.target).value)"
-              ></textarea>
-              <div class="mt-1 flex justify-end gap-1">
-                <button
-                  type="button"
-                  class="text-xs text-[#999] hover:text-white"
-                  (click)="editingId.set(null)"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  class="text-xs text-[#6b9edd] hover:text-[#8bb4ee]"
-                  (click)="saveEdit(comment.id)"
-                >
-                  Save
-                </button>
-              </div>
-            } @else {
-              <p
-                class="cursor-pointer text-xs text-[#bbb]"
-                (click)="startEdit(comment)"
-              >
-                {{ comment.text }}
-              </p>
-              <span class="mt-1 block text-[10px] text-[#777]">
-                {{ comment.date }}
-              </span>
-            }
-          </div>
+          }
+        </li>
+      } @empty {
+        @if (!adding()) {
+          <li class="text-muted-foreground p-4 text-center text-sm">
+            No comments yet.
+          </li>
         }
-
-        @if (pdfViewer.comments().length === 0 && !addingComment()) {
-          <p class="p-4 text-center text-xs text-[#999]">No comments yet.</p>
-        }
-      </div>
-    </div>
+      }
+    </ul>
   `,
   host: {
+    'data-slot': 'pdf-viewer-comment-sidebar',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -130,15 +126,18 @@ export class ScPdfViewerCommentSidebar {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('flex h-full flex-col', this.classInput()),
+  );
 
-  readonly addingComment = signal(false);
-  readonly newCommentText = signal('');
+  readonly adding = signal(false);
+  readonly newText = signal('');
   readonly editingId = signal<string | null>(null);
   readonly editText = signal('');
 
-  submitComment(): void {
-    const text = this.newCommentText().trim();
+  protected submitComment(event: Event): void {
+    event.preventDefault();
+    const text = this.newText().trim();
     if (!text) return;
 
     this.pdfViewer.addComment({
@@ -150,17 +149,20 @@ export class ScPdfViewerCommentSidebar {
       date: new Date().toLocaleString(),
       color: '#FFFF00',
     });
-
-    this.newCommentText.set('');
-    this.addingComment.set(false);
+    this.cancelAdd();
   }
 
-  startEdit(comment: ScPdfComment): void {
+  protected cancelAdd(): void {
+    this.newText.set('');
+    this.adding.set(false);
+  }
+
+  protected startEdit(comment: ScPdfComment): void {
     this.editingId.set(comment.id);
     this.editText.set(comment.text);
   }
 
-  saveEdit(id: string): void {
+  protected saveEdit(id: string): void {
     this.pdfViewer.updateComment(id, this.editText());
     this.editingId.set(null);
   }

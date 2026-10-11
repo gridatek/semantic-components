@@ -1,31 +1,31 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { ScButton, bindInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
-@Component({
+/**
+ * Zooms out by 25%; disabled at 25%. Use on a `scButton`, which it disables.
+ */
+@Directive({
   selector: 'button[scPdfViewerZoomOut]',
-  template: `
-    <ng-content />
-  `,
   host: {
-    type: 'button',
     '[class]': 'class()',
-    '[attr.aria-label]': '"Zoom out"',
+    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'pdfViewer.zoomOut()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerZoomOut {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
-  readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(buttonVariants({ variant: 'ghost', size: 'icon' }), this.classInput()),
-  );
+  readonly classInput = input<string>('', { alias: 'class' });
+  /** Accessible name — the button usually shows only an icon. */
+  readonly ariaLabel = input('Zoom out', { alias: 'aria-label' });
+
+  protected readonly class = computed(() => cn(this.classInput()));
+
+  constructor() {
+    bindInput(
+      inject(ScButton).disabled,
+      computed(() => !this.pdfViewer.canZoomOut()),
+    );
+  }
 }

@@ -19,7 +19,6 @@ export { ScPdfViewerRotateRight } from './pdf-viewer-rotate-right';
 export { ScPdfViewerDownload } from './pdf-viewer-download';
 export { ScPdfViewerPrint } from './pdf-viewer-print';
 export { ScPdfViewerFullscreen } from './pdf-viewer-fullscreen';
-export { ScPdfViewerSeparator } from './pdf-viewer-separator';
 export { ScPdfViewerSpacer } from './pdf-viewer-spacer';
 
 // Content
@@ -60,6 +59,13 @@ export { ScPdfViewerCommentSidebar } from './pdf-viewer-comment-sidebar';
 
 // Editor undo bar
 export { ScPdfViewerEditorUndoBar } from './pdf-viewer-editor-undo-bar';
+
+// Editor colors
+export {
+  SC_PDF_HIGHLIGHT_COLORS,
+  SC_PDF_INK_COLORS,
+} from './pdf-viewer-editor-colors';
+export type { ScPdfEditorColor } from './pdf-viewer-editor-colors';
 
 // Types
 export { ZOOM_LEVELS } from './pdf-viewer-types';

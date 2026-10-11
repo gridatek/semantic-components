@@ -1,28 +1,31 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { ScButton, bindInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
-@Component({
+/**
+ * Goes to the next match; disabled while there are none. Use on a `scButton`, which it disables.
+ */
+@Directive({
   selector: 'button[scPdfViewerFindNext]',
-  template: `
-    <ng-content />
-  `,
   host: {
     '[class]': 'class()',
-    'aria-label': 'Find Next',
+    '[attr.aria-label]': 'ariaLabel()',
     '(click)': 'pdfViewer.findNext()',
-    '[disabled]': 'pdfViewer.findTotalMatches() === 0',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerFindNext {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('', this.classInput()));
+  /** Accessible name — the button usually shows only an icon. */
+  readonly ariaLabel = input('Next match', { alias: 'aria-label' });
+
+  protected readonly class = computed(() => cn(this.classInput()));
+
+  constructor() {
+    bindInput(
+      inject(ScButton).disabled,
+      computed(() => this.pdfViewer.findTotalMatches() === 0),
+    );
+  }
 }

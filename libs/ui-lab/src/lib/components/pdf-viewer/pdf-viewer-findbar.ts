@@ -10,9 +10,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 @Component({
   selector: '[scPdfViewerFindbar]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     '[class]': 'class()',
   },

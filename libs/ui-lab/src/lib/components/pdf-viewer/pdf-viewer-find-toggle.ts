@@ -1,28 +1,25 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
-@Component({
+/**
+ * Opens and closes the find bar. Use on a `scButton`.
+ */
+@Directive({
   selector: 'button[scPdfViewerFindToggle]',
-  template: `
-    <ng-content />
-  `,
   host: {
     '[class]': 'class()',
+    '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-pressed]': 'pdfViewer.findOpen()',
-    'aria-label': 'Find in Document',
     '(click)': 'pdfViewer.toggleFind()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerFindToggle {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
+
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('', this.classInput()));
+  /** Accessible name — the button usually shows only an icon. */
+  readonly ariaLabel = input('Find in document', { alias: 'aria-label' });
+
+  protected readonly class = computed(() => cn(this.classInput()));
 }

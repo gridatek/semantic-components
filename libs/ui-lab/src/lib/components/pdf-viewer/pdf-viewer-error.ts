@@ -5,35 +5,46 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
-import { SiCircleXIcon } from '@semantic-icons/lucide-icons';
+import {
+  ScEmpty,
+  ScEmptyBody,
+  ScEmptyDescription,
+  ScEmptyHeader,
+  ScEmptyTitle,
+  cn,
+} from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
+/**
+ * Covers the content when the document can't be loaded, announced as an
+ * alert. Project an icon in a `scEmptyMedia` and actions (a
+ * `scPdfViewerRetry` button) as other content.
+ */
 @Component({
   selector: '[scPdfViewerError]',
-  imports: [SiCircleXIcon],
+  imports: [
+    ScEmpty,
+    ScEmptyHeader,
+    ScEmptyTitle,
+    ScEmptyDescription,
+    ScEmptyBody,
+  ],
   template: `
-    @if (pdfViewer.error()) {
-      <div [class]="overlayClass">
-        <ng-content>
-          <div class="flex flex-col items-center gap-3 px-4 text-center">
-            <div
-              class="bg-destructive/10 flex h-16 w-16 items-center justify-center rounded-full"
-            >
-              <svg siCircleXIcon class="text-destructive size-8"></svg>
-            </div>
-            <p class="text-foreground text-sm font-medium">
-              Failed to load PDF
-            </p>
-            <p class="text-muted-foreground max-w-xs text-sm">
-              {{ pdfViewer.error() }}
-            </p>
-          </div>
-        </ng-content>
+    @if (pdfViewer.error(); as error) {
+      <div scEmpty role="alert" class="bg-background absolute inset-0 z-10">
+        <div scEmptyHeader>
+          <ng-content select="[scEmptyMedia]" />
+          <div scEmptyTitle>{{ heading() }}</div>
+          <div scEmptyDescription>{{ error }}</div>
+        </div>
+        <div scEmptyBody>
+          <ng-content />
+        </div>
       </div>
     }
   `,
   host: {
+    'data-slot': 'pdf-viewer-error',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -41,10 +52,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
 export class ScPdfViewerError {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly heading = input("Couldn't load the document");
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
-
-  protected readonly overlayClass = cn(
-    'absolute inset-0 flex items-center justify-center bg-background z-10',
-  );
+  protected readonly class = computed(() => cn('contents', this.classInput()));
 }

@@ -13,10 +13,11 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
   selector: 'sc-pdf-viewer-sidebar-resizer',
   template: `
     <div
-      class="flex w-1.5 cursor-col-resize items-center justify-center hover:bg-[#6b9edd]/30"
-      [class.bg-[#6b9edd]/30]="resizing()"
+      class="hover:bg-primary/20 data-resizing:bg-primary/20 focus-visible:ring-ring/50 flex h-full w-1.5 cursor-col-resize touch-none items-center justify-center outline-none focus-visible:ring-3"
+      [attr.data-resizing]="resizing() || null"
       role="separator"
       tabindex="0"
+      aria-orientation="vertical"
       [attr.aria-valuenow]="pdfViewer.sidebarWidth()"
       aria-valuemin="150"
       aria-valuemax="500"
@@ -24,7 +25,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
       (pointerdown)="onPointerDown($event)"
       (keydown)="onKeyDown($event)"
     >
-      <div class="h-8 w-px bg-[#666]"></div>
+      <div class="bg-border h-8 w-px"></div>
     </div>
   `,
   host: {

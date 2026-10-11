@@ -4,9 +4,7 @@ import { cn } from '@semantic-components/ui';
 // Toolbar Container (Composable)
 @Component({
   selector: '[scPdfViewerToolbar]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     'data-slot': 'pdf-viewer-toolbar',
     role: 'toolbar',

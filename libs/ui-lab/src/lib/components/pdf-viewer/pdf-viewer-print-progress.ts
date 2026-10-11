@@ -5,51 +5,71 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScDialog,
+  ScDialogDescription,
+  ScDialogFooter,
+  ScDialogHeader,
+  ScDialogPortal,
+  ScDialogProvider,
+  ScDialogTitle,
+  ScProgress,
+  cn,
+} from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
+/**
+ * Shows the progress while pages are prepared for printing. Closing it
+ * (Cancel, Escape, clicking outside) cancels the print.
+ */
 @Component({
   selector: 'sc-pdf-viewer-print-progress',
+  imports: [
+    ScDialogProvider,
+    ScDialogPortal,
+    ScDialog,
+    ScDialogHeader,
+    ScDialogTitle,
+    ScDialogDescription,
+    ScDialogFooter,
+    ScProgress,
+    ScButton,
+  ],
   template: `
-    @if (pdfViewer.printDialogOpen()) {
-      <div
-        class="absolute inset-0 z-50 flex items-center justify-center bg-black/50"
-      >
-        <dialog
-          open
-          class="relative w-80 rounded border border-[#333] bg-[#474747] p-5 text-[#d1d5db] shadow-lg"
-          (click)="$event.stopPropagation()"
-        >
-          <h2 class="mb-3 text-sm font-semibold text-white">
-            Preparing to Print...
-          </h2>
-
-          <!-- Progress bar -->
-          <div class="mb-3 h-2 w-full overflow-hidden rounded bg-[#3d3d3d]">
-            <div
-              class="h-full bg-[#6b9edd] transition-[width] duration-200"
-              [style.width.%]="pdfViewer.printProgress()"
-            ></div>
+    <div
+      scDialogProvider
+      [open]="pdfViewer.printDialogOpen()"
+      (openChange)="onOpenChange($event)"
+    >
+      <ng-template scDialogPortal>
+        <div scDialog class="sm:w-sm">
+          <div scDialogHeader>
+            <h2 scDialogTitle>Preparing to print</h2>
+            <p scDialogDescription>
+              {{ pdfViewer.printProgress() }}% of the pages ready
+            </p>
           </div>
-
-          <p class="mb-4 text-center text-xs text-[#bbb]">
-            {{ pdfViewer.printProgress() }}% complete
-          </p>
-
-          <div class="flex justify-end">
+          <div
+            scProgress
+            [value]="pdfViewer.printProgress()"
+            aria-label="Print preparation"
+          ></div>
+          <div scDialogFooter>
             <button
-              type="button"
-              class="rounded border border-[#666] bg-[#5a5a5a] px-4 py-1.5 text-sm text-[#d1d5db] hover:bg-[#666] hover:text-white"
+              scButton
+              variant="outline"
               (click)="pdfViewer.cancelPrint()"
             >
               Cancel
             </button>
           </div>
-        </dialog>
-      </div>
-    }
+        </div>
+      </ng-template>
+    </div>
   `,
   host: {
+    'data-slot': 'pdf-viewer-print-progress',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -58,5 +78,10 @@ export class ScPdfViewerPrintProgress {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  protected readonly class = computed(() => cn('contents', this.classInput()));
+
+  /** Dismissed with Escape or a click outside. */
+  protected onOpenChange(open: boolean): void {
+    if (!open && this.pdfViewer.printDialogOpen()) this.pdfViewer.cancelPrint();
+  }
 }

@@ -3,9 +3,7 @@ import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: '[scPdfViewerNav]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     role: 'group',
     '[attr.aria-label]': '"Page navigation"',

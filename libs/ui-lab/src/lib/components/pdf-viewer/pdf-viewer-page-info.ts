@@ -5,23 +5,27 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { ScInput, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
+/** The current page (editable — Enter or leaving the field goes there) and the page count. */
 @Component({
   selector: '[scPdfViewerPageInfo]',
+  imports: [ScInput],
   template: `
     <input
+      scInput
       type="number"
+      inputmode="numeric"
+      class="w-14 [appearance:textfield] text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+      min="1"
+      [attr.max]="pdfViewer.totalPages()"
       [value]="pdfViewer.currentPage()"
+      [attr.aria-label]="ariaLabel()"
       (change)="onPageInput($event)"
       (keydown.enter)="onPageInput($event)"
-      class="bg-background focus:ring-ring w-12 rounded border px-2 py-1 text-center text-sm focus:ring-2 focus:outline-none"
-      [attr.min]="1"
-      [attr.max]="pdfViewer.totalPages()"
-      aria-label="Current page"
     />
-    <span class="text-muted-foreground text-sm">
+    <span class="text-muted-foreground text-sm whitespace-nowrap">
       / {{ pdfViewer.totalPages() }}
     </span>
   `,
@@ -34,9 +38,11 @@ import { SC_PDF_VIEWER } from './pdf-viewer-root';
 export class ScPdfViewerPageInfo {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
+  /** Accessible name of the page field. */
+  readonly ariaLabel = input('Page', { alias: 'aria-label' });
 
   protected readonly class = computed(() =>
-    cn('flex items-center gap-1 px-2', this.classInput()),
+    cn('flex items-center gap-1.5', this.classInput()),
   );
 
   protected onPageInput(event: Event): void {

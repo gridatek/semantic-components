@@ -159,6 +159,14 @@ export class ScPdfViewerRoot {
   // Computed values
   readonly canGoPrev = computed(() => this.currentPage() > 1);
   readonly canGoNext = computed(() => this.currentPage() < this.totalPages());
+  readonly canZoomIn = computed(() => {
+    const zoom = this.zoom();
+    return typeof zoom !== 'number' || zoom < 4;
+  });
+  readonly canZoomOut = computed(() => {
+    const zoom = this.zoom();
+    return typeof zoom !== 'number' || zoom > 0.25;
+  });
   readonly hasSource = computed(() => !!this.src());
   readonly showContent = computed(() => this.hasSource() && !this.error());
 

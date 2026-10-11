@@ -9,6 +9,10 @@ import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 import { ZOOM_LEVELS } from './pdf-viewer-types';
 
+/**
+ * The zoom levels as `<option>`s, bound to the viewer's zoom. Use on a
+ * `select[scNativeSelect]` (inside a `scNativeSelectContainer`).
+ */
 @Component({
   selector: 'select[scPdfViewerZoomSelect]',
   template: `
@@ -20,7 +24,7 @@ import { ZOOM_LEVELS } from './pdf-viewer-types';
     'data-slot': 'pdf-viewer-zoom-select',
     '[class]': 'class()',
     '[value]': 'zoomLevelValue()',
-    '[attr.aria-label]': '"Zoom level"',
+    '[attr.aria-label]': 'ariaLabel()',
     '(change)': 'onZoomSelect($event)',
   },
   encapsulation: ViewEncapsulation.None,
@@ -28,15 +32,12 @@ import { ZOOM_LEVELS } from './pdf-viewer-types';
 export class ScPdfViewerZoomSelect {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
+  /** Accessible name. */
+  readonly ariaLabel = input('Zoom', { alias: 'aria-label' });
 
   protected readonly zoomLevels = ZOOM_LEVELS;
 
-  protected readonly class = computed(() =>
-    cn(
-      'px-2 py-1.5 text-sm border rounded bg-background focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
   protected readonly zoomLevelValue = computed(() => {
     const z = this.pdfViewer.zoom();
@@ -44,16 +45,17 @@ export class ScPdfViewerZoomSelect {
   });
 
   protected onZoomSelect(event: Event): void {
-    const select = event.target as HTMLSelectElement;
-    const value = select.value;
-
-    if (value === 'auto' || value === 'page-fit' || value === 'page-width') {
+    const value = (event.target as HTMLSelectElement).value;
+    if (
+      value === 'auto' ||
+      value === 'page-fit' ||
+      value === 'page-width' ||
+      value === 'page-actual'
+    ) {
       this.pdfViewer.setZoom(value);
-    } else {
-      const numValue = parseFloat(value);
-      if (!isNaN(numValue)) {
-        this.pdfViewer.setZoom(numValue);
-      }
+      return;
     }
+    const numValue = parseFloat(value);
+    if (!isNaN(numValue)) this.pdfViewer.setZoom(numValue);
   }
 }

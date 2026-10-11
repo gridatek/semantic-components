@@ -12,7 +12,7 @@ import {
   untracked,
   viewChild,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { buttonVariants, cn } from '@semantic-components/ui';
 import type { PDFPageProxy, RenderTask } from 'pdfjs-dist';
 import { AnnotationLayer, TextLayer, setLayerDimensions } from 'pdfjs-dist';
 import type { ScPdfViewerRoot } from './pdf-viewer-root';
@@ -786,6 +786,25 @@ export class ScPdfViewerCanvas {
     } as never);
   }
 
+  /** The "Delete" button of a selected annotation's toolbar (ui button styles). */
+  private deleteButton(annotationId: string, label: string): HTMLButtonElement {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = buttonVariants({ variant: 'outline', size: 'xs' });
+    button.textContent = 'Delete';
+    button.setAttribute('aria-label', label);
+    button.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.selectedAnnotationId = null;
+      this.pdfViewer.removeEditorAnnotation(annotationId);
+    });
+    return button;
+  }
+
   private cancelAllRenderTasks(): void {
     for (const [, task] of this.activeRenderTasks) {
       task.cancel();
@@ -1291,33 +1310,7 @@ export class ScPdfViewerCanvas {
         toolbar.appendChild(swatch);
       }
 
-      // Delete button
-      const del = document.createElement('button');
-      del.style.display = 'flex';
-      del.style.alignItems = 'center';
-      del.style.justifyContent = 'center';
-      del.style.width = '20px';
-      del.style.height = '20px';
-      del.style.borderRadius = '50%';
-      del.style.border = '1px solid #ccc';
-      del.style.background = '#fff';
-      del.style.color = '#15141a';
-      del.style.cursor = 'pointer';
-      del.style.fontSize = '12px';
-      del.style.padding = '0';
-      del.style.marginLeft = '4px';
-      del.innerHTML = '&#128465;';
-      del.setAttribute('aria-label', 'Delete highlight');
-      del.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      del.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.selectedAnnotationId = null;
-        this.pdfViewer.removeEditorAnnotation(ann.id);
-      });
-      toolbar.appendChild(del);
+      toolbar.appendChild(this.deleteButton(ann.id, 'Delete highlight'));
 
       wrapper.appendChild(toolbar);
     }
@@ -1463,33 +1456,7 @@ export class ScPdfViewerCanvas {
       });
       toolbar.appendChild(altBtn);
 
-      // Delete button
-      const del = document.createElement('button');
-      del.className = 'editor-stamp-delete';
-      del.style.display = 'flex';
-      del.style.alignItems = 'center';
-      del.style.justifyContent = 'center';
-      del.style.width = '28px';
-      del.style.height = '28px';
-      del.style.borderRadius = '50%';
-      del.style.border = '1px solid #ccc';
-      del.style.background = '#fff';
-      del.style.color = '#15141a';
-      del.style.cursor = 'pointer';
-      del.style.fontSize = '14px';
-      del.style.padding = '0';
-      del.innerHTML = '&#128465;'; // trash can
-      del.setAttribute('aria-label', 'Delete annotation');
-      del.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      del.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.selectedAnnotationId = null;
-        this.pdfViewer.removeEditorAnnotation(ann.id);
-      });
-      toolbar.appendChild(del);
+      toolbar.appendChild(this.deleteButton(ann.id, 'Delete image'));
 
       wrapper.appendChild(toolbar);
     }
@@ -1567,31 +1534,7 @@ export class ScPdfViewerCanvas {
       toolbar.style.gap = '4px';
       toolbar.style.zIndex = '12';
 
-      const del = document.createElement('button');
-      del.style.display = 'flex';
-      del.style.alignItems = 'center';
-      del.style.justifyContent = 'center';
-      del.style.width = '28px';
-      del.style.height = '28px';
-      del.style.borderRadius = '50%';
-      del.style.border = '1px solid #ccc';
-      del.style.background = '#fff';
-      del.style.color = '#15141a';
-      del.style.cursor = 'pointer';
-      del.style.fontSize = '14px';
-      del.style.padding = '0';
-      del.innerHTML = '&#128465;';
-      del.setAttribute('aria-label', 'Delete annotation');
-      del.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-      del.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.selectedAnnotationId = null;
-        this.pdfViewer.removeEditorAnnotation(ann.id);
-      });
-      toolbar.appendChild(del);
+      toolbar.appendChild(this.deleteButton(ann.id, 'Delete text'));
       wrapper.appendChild(toolbar);
     }
 

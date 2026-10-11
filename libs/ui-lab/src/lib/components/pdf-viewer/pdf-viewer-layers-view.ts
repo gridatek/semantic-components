@@ -7,7 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import { ScCheckbox, ScCheckboxField, cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
 interface LayerItem {
@@ -18,21 +18,22 @@ interface LayerItem {
 
 @Component({
   selector: 'sc-pdf-viewer-layers-view',
+  imports: [ScCheckbox, ScCheckboxField],
   template: `
     @if (layers().length === 0) {
-      <p class="p-4 text-center text-xs text-[#999]">No layers available.</p>
+      <p class="text-muted-foreground p-4 text-center text-sm">
+        No layers in this document.
+      </p>
     } @else {
-      <ul class="space-y-0.5 p-2">
+      <ul class="grid gap-2 p-3" aria-label="Layers">
         @for (layer of layers(); track layer.id) {
           <li>
-            <label
-              class="flex cursor-pointer items-center gap-2 rounded px-2 py-1 text-xs text-[#bbb] hover:bg-[#4a4a4a] hover:text-white"
-            >
+            <label scCheckboxField>
               <input
                 type="checkbox"
+                scCheckbox
                 [checked]="layer.visible"
-                (change)="toggleLayer(layer.id)"
-                class="accent-[#6b9edd]"
+                (checkedChange)="toggleLayer(layer.id)"
               />
               {{ layer.name }}
             </label>

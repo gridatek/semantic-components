@@ -1,117 +1,154 @@
 # PDF Viewer
 
-A composable document viewer for displaying PDF files, built on [PDF.js](https://mozilla.github.io/pdf.js/). Provides navigation, zoom, rotation, text selection, and a fully customizable toolbar through standalone Angular directives.
+A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`pdfjs-dist`, a peer dependency): navigation, zoom, rotation, text selection, links, find, printing, and annotation tools (highlight, text, drawing, images, signatures, comments).
 
-## Architecture
-
-The PDF viewer follows a **composable directive** pattern. Instead of a single monolithic component, it's broken into small, focused directives that you assemble in your template. This gives full control over layout, styling, and which features to include.
-
-### Core Directives
-
-| Directive              | Selector                 | Description                                              |
-| ---------------------- | ------------------------ | -------------------------------------------------------- |
-| `ScPdfViewerRoot`      | `[scPdfViewer]`          | Root directive, manages PDF document state               |
-| `ScPdfViewerContainer` | `[scPdfViewerContainer]` | Layout wrapper (card-like container)                     |
-| `ScPdfViewerToolbar`   | `[scPdfViewerToolbar]`   | Toolbar container (flex row)                             |
-| `ScPdfViewerContent`   | `[scPdfViewerContent]`   | Content area wrapping canvas + state overlays            |
-| `ScPdfViewerCanvas`    | `sc-pdf-viewer-canvas`   | Renders PDF pages on canvas with text, annotation layers |
-
-### Toolbar Controls
-
-| Directive                | Description                  |
-| ------------------------ | ---------------------------- |
-| `ScPdfViewerNav`         | Navigation button group      |
-| `ScPdfViewerPrevPage`    | Previous page button         |
-| `ScPdfViewerNextPage`    | Next page button             |
-| `ScPdfViewerPageInfo`    | Current page / total display |
-| `ScPdfViewerZoom`        | Zoom button group            |
-| `ScPdfViewerZoomIn`      | Zoom in button               |
-| `ScPdfViewerZoomOut`     | Zoom out button              |
-| `ScPdfViewerZoomSelect`  | Zoom level dropdown          |
-| `ScPdfViewerRotateLeft`  | Rotate left button           |
-| `ScPdfViewerRotateRight` | Rotate right button          |
-| `ScPdfViewerDownload`    | Download button              |
-| `ScPdfViewerPrint`       | Print button                 |
-| `ScPdfViewerFullscreen`  | Fullscreen toggle            |
-| `ScPdfViewerSeparator`   | Visual separator             |
-| `ScPdfViewerSpacer`      | Flexible spacer              |
-
-### Find Bar
-
-| Directive                    | Selector                          | Description                 |
-| ---------------------------- | --------------------------------- | --------------------------- |
-| `ScPdfViewerFindToggle`      | `button[scPdfViewerFindToggle]`   | Toggle find bar open/closed |
-| `ScPdfViewerFindbar`         | `[scPdfViewerFindbar]`            | Find bar container          |
-| `ScPdfViewerFindInput`       | `input[scPdfViewerFindInput]`     | Search text input           |
-| `ScPdfViewerFindNext`        | `button[scPdfViewerFindNext]`     | Next match button           |
-| `ScPdfViewerFindPrevious`    | `button[scPdfViewerFindPrevious]` | Previous match button       |
-| `ScPdfViewerFindResultsInfo` | `[scPdfViewerFindResultsInfo]`    | Match count display         |
-
-### State Overlays
-
-| Directive            | Description                      |
-| -------------------- | -------------------------------- |
-| `ScPdfViewerLoading` | Loading spinner                  |
-| `ScPdfViewerError`   | Error message display            |
-| `ScPdfViewerEmpty`   | Empty state (no PDF loaded)      |
-| `ScPdfViewerRetry`   | Retry button (used inside error) |
+The chrome is built from `@semantic-components/ui`: the viewer's parts add behaviour, and ui components give them their look — `scButton` for every button, `scInput`, `scNativeSelect`, dialogs, tabs, toggle groups, sliders and so on. It follows your theme, light and dark.
 
 ## Usage
 
 ```html
-<div scPdfViewer [src]="pdfUrl" [title]="'My Document'" #viewer="scPdfViewer">
-  <div scPdfViewerContainer>
+<div scPdfViewer [src]="url" title="Report" #viewer="scPdfViewer">
+  <div scPdfViewerContainer class="flex h-[800px] flex-col">
     <div scPdfViewerToolbar>
       <div scPdfViewerNav>
-        <button scPdfViewerPrevPage></button>
-        <button scPdfViewerNextPage></button>
+        <button scButton variant="ghost" size="icon" scPdfViewerPrevPage [scTooltipTrigger]="'Previous page'">
+          <svg siChevronUpIcon></svg>
+        </button>
+        <button scButton variant="ghost" size="icon" scPdfViewerNextPage [scTooltipTrigger]="'Next page'">
+          <svg siChevronDownIcon></svg>
+        </button>
       </div>
-      <sc-pdf-viewer-page-info />
-      <sc-pdf-viewer-separator />
+      <div scPdfViewerPageInfo></div>
+      <div scSeparator orientation="vertical" class="h-5"></div>
       <div scPdfViewerZoom>
-        <button scPdfViewerZoomOut></button>
-        <button scPdfViewerZoomIn></button>
+        <button scButton variant="ghost" size="icon" scPdfViewerZoomOut><svg siZoomOutIcon></svg></button>
+        <button scButton variant="ghost" size="icon" scPdfViewerZoomIn><svg siZoomInIcon></svg></button>
       </div>
-      <sc-pdf-viewer-zoom-select />
-      <sc-pdf-viewer-spacer />
-      <button scPdfViewerDownload></button>
-      <button scPdfViewerPrint></button>
+      <div scNativeSelectContainer>
+        <select scNativeSelect size="sm" scPdfViewerZoomSelect></select>
+        <svg siChevronDownIcon scNativeSelectIcon></svg>
+      </div>
+      <div scPdfViewerSpacer></div>
+      <button scButton variant="ghost" size="icon" scPdfViewerPrint><svg siPrinterIcon></svg></button>
+      <button scButton variant="ghost" size="icon" scPdfViewerDownload><svg siDownloadIcon></svg></button>
     </div>
+
     <div scPdfViewerContent>
-      <sc-pdf-viewer-loading />
-      <sc-pdf-viewer-error>
-        <button scPdfViewerRetry></button>
-      </sc-pdf-viewer-error>
-      <sc-pdf-viewer-empty />
+      <div scPdfViewerLoading><svg scSpinner siLoaderCircleIcon></svg></div>
+      <div scPdfViewerError>
+        <button scButton scPdfViewerRetry>Try again</button>
+      </div>
+      <div scPdfViewerEmpty></div>
       <sc-pdf-viewer-canvas />
     </div>
+
+    <sc-pdf-viewer-password-dialog />
   </div>
 </div>
 ```
 
-## Features
+The demo (`apps/showcase/.../pdf-viewer-demo.ts`) shows everything: find bar, sidebar (pages, outline, attachments, layers, comments), annotation tools with their options in a popover, a "More" menu, and all dialogs.
 
-- **PDF.js rendering** - Canvas-based rendering via pdfjs-dist
-- **Text selection** - Transparent text layer overlay for copy/paste
-- **Annotation layer** - Clickable links, internal page navigation, external URLs
-- **Find / search** - Built-in text search with highlight, match case, diacritics, whole words
-- **Lazy page rendering** - Only visible pages are rendered (IntersectionObserver)
-- **Zoom** - Numeric scale, auto, actual size, page-fit, page-width presets
-- **Rotation** - 90-degree rotation in both directions
-- **Page navigation** - Prev/next buttons with smooth scroll
-- **Current page tracking** - Updates as user scrolls
-- **Download & print** - Built-in buttons
-- **Fullscreen** - Native fullscreen API
-- **Responsive** - ResizeObserver-based container-aware scaling
-- **Keyboard accessible** - All controls are keyboard navigable; the signature dialog's Draw / Type / Upload switcher is an `@angular/aria` tab list (arrow keys, one Tab stop) with labelled thickness and description fields
-- **Composable** - Pick only the directives you need
+### Fullscreen
 
-## Coming Soon
+Dialogs, menus, popovers and tooltips render in a CDK overlay attached to `<body>`, which is hidden while the viewer is fullscreen. Provide CDK's `FullscreenOverlayContainer` once in your app so they follow the fullscreen element:
 
-- **Spread modes** - Side-by-side page display (odd, even spreads)
-- **Scroll modes** - Vertical, horizontal, and wrapped scroll layouts
-- **Hand tool / grab scroll** - Drag-to-scroll cursor mode
-- **Document properties** - Built-in dialog showing PDF metadata
-- **Page input** - Direct page number input for jump-to-page
-- **Keyboard shortcuts** - Configurable keyboard bindings for navigation and zoom
-- **Accessibility improvements** - Enhanced screen reader support and ARIA annotations
+```typescript
+import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
+
+providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }];
+```
+
+## Parts
+
+### Root and layout
+
+| Part                   | Selector                 | Description                                                           |
+| ---------------------- | ------------------------ | --------------------------------------------------------------------- |
+| `ScPdfViewerRoot`      | `[scPdfViewer]`          | The document and all state (`exportAs: 'scPdfViewer'`). Inputs below. |
+| `ScPdfViewerContainer` | `[scPdfViewerContainer]` | The frame (border, rounded corners); the fullscreen element.          |
+| `ScPdfViewerToolbar`   | `[scPdfViewerToolbar]`   | The toolbar row.                                                      |
+| `ScPdfViewerNav`       | `[scPdfViewerNav]`       | Groups the page buttons (`role="group"`, "Page navigation").          |
+| `ScPdfViewerZoom`      | `[scPdfViewerZoom]`      | Groups the zoom buttons (`role="group"`, "Zoom controls").            |
+| `ScPdfViewerSpacer`    | `[scPdfViewerSpacer]`    | Pushes what follows to the end.                                       |
+| `ScPdfViewerContent`   | `[scPdfViewerContent]`   | The page area; holds the canvas and the state overlays.               |
+| `ScPdfViewerCanvas`    | `sc-pdf-viewer-canvas`   | Renders the pages lazily, with text, link and annotation layers.      |
+
+Root inputs: `src`, `title` (download file name), `initialPage`, `initialZoom`, `workerSrc`. Outputs: `loaded`, `pageChange`, `zoomChange`, `errorEvent`.
+
+### Buttons
+
+Each is a behaviour on a `scButton` — choose its `variant`/`size`, add an icon and a tooltip. Icon-only buttons have an accessible name by default; override it (e.g. to translate) with `aria-label`.
+
+| Part                      | Selector                          | Does                               | Disabled when            |
+| ------------------------- | --------------------------------- | ---------------------------------- | ------------------------ |
+| `ScPdfViewerPrevPage`     | `button[scPdfViewerPrevPage]`     | Previous page                      | on the first page        |
+| `ScPdfViewerNextPage`     | `button[scPdfViewerNextPage]`     | Next page                          | on the last page         |
+| `ScPdfViewerZoomIn`       | `button[scPdfViewerZoomIn]`       | Zoom in 25%                        | at 400%                  |
+| `ScPdfViewerZoomOut`      | `button[scPdfViewerZoomOut]`      | Zoom out 25%                       | at 25%                   |
+| `ScPdfViewerRotateLeft`   | `button[scPdfViewerRotateLeft]`   | Rotate counterclockwise            | —                        |
+| `ScPdfViewerRotateRight`  | `button[scPdfViewerRotateRight]`  | Rotate clockwise                   | —                        |
+| `ScPdfViewerPrint`        | `button[scPdfViewerPrint]`        | Print (with a progress dialog)     | until the document loads |
+| `ScPdfViewerDownload`     | `button[scPdfViewerDownload]`     | Download                           | until the document loads |
+| `ScPdfViewerFullscreen`   | `button[scPdfViewerFullscreen]`   | Toggle fullscreen (`aria-pressed`) | —                        |
+| `ScPdfViewerFindToggle`   | `button[scPdfViewerFindToggle]`   | Open/close the find bar            | —                        |
+| `ScPdfViewerFindPrevious` | `button[scPdfViewerFindPrevious]` | Previous match                     | while there are none     |
+| `ScPdfViewerFindNext`     | `button[scPdfViewerFindNext]`     | Next match                         | while there are none     |
+| `ScPdfViewerRetry`        | `button[scPdfViewerRetry]`        | Load again after an error          | —                        |
+
+### Fields
+
+| Part                         | Selector                        | Description                                                                      |
+| ---------------------------- | ------------------------------- | -------------------------------------------------------------------------------- |
+| `ScPdfViewerPageInfo`        | `[scPdfViewerPageInfo]`         | Editable page number (`scInput`) and the page count.                             |
+| `ScPdfViewerZoomSelect`      | `select[scPdfViewerZoomSelect]` | The zoom levels; use on a `scNativeSelect`.                                      |
+| `ScPdfViewerFindbar`         | `[scPdfViewerFindbar]`          | The find bar row.                                                                |
+| `ScPdfViewerFindInput`       | `input[scPdfViewerFindInput]`   | Searches as you type (Enter / Shift+Enter: next / previous); use on a `scInput`. |
+| `ScPdfViewerFindResultsInfo` | `[scPdfViewerFindResultsInfo]`  | "3 of 12" / "Phrase not found" (`role="status"`).                                |
+
+### States
+
+| Part                 | Selector               | Description                                                                                                        |
+| -------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `ScPdfViewerLoading` | `[scPdfViewerLoading]` | While loading (`role="status"`); project a spinner. Input: `label`.                                                |
+| `ScPdfViewerError`   | `[scPdfViewerError]`   | When loading fails (`role="alert"`, a `scEmpty`); project an icon in `scEmptyMedia` and actions. Input: `heading`. |
+| `ScPdfViewerEmpty`   | `[scPdfViewerEmpty]`   | While there's no `src` (a `scEmpty`); project an icon and actions. Inputs: `heading`, `description`.               |
+
+### Dialogs
+
+Built on `scDialog` (focus trap, Escape, focus return). Place them anywhere inside `scPdfViewer`.
+
+| Part                         | Selector                         | Description                                                                                 |
+| ---------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------- |
+| `ScPdfViewerPasswordDialog`  | `sc-pdf-viewer-password-dialog`  | Asks for a protected document's password; closing gives up on it.                           |
+| `ScPdfViewerPrintProgress`   | `sc-pdf-viewer-print-progress`   | Print preparation progress; closing cancels the print.                                      |
+| `ScPdfViewerSignatureDialog` | `sc-pdf-viewer-signature-dialog` | Type, draw or upload a signature and place it on the current page.                          |
+| `ScPdfViewerAltTextDialog`   | `sc-pdf-viewer-alt-text-dialog`  | Alt text for an image annotation. Inputs `open`, `annotationId`; outputs `closed`, `saved`. |
+
+### Annotation tools
+
+Set the tool with `viewer.editorMode` (`'none' | 'highlight' | 'freetext' | 'ink' | 'signature'`); the demo uses a `scToggleGroup`. Each tool's options are a part — show them in a popover:
+
+| Part                               | Selector                                | Options                                       |
+| ---------------------------------- | --------------------------------------- | --------------------------------------------- |
+| `ScPdfViewerEditorHighlightParams` | `sc-pdf-viewer-editor-highlight-params` | Color, thickness, show all                    |
+| `ScPdfViewerEditorFreetextParams`  | `sc-pdf-viewer-editor-freetext-params`  | Color, size                                   |
+| `ScPdfViewerEditorInkParams`       | `sc-pdf-viewer-editor-ink-params`       | Color, thickness, opacity                     |
+| `ScPdfViewerEditorUndoBar`         | `sc-pdf-viewer-editor-undo-bar`         | "Annotation deleted — Undo" (`role="status"`) |
+
+The swatches come from `SC_PDF_HIGHLIGHT_COLORS` and `SC_PDF_INK_COLORS` (`ScPdfEditorColor[]`). Annotations are an overlay on the viewer — they aren't written into the downloaded PDF.
+
+### Sidebar
+
+| Part                        | Selector                        | Description                                                 |
+| --------------------------- | ------------------------------- | ----------------------------------------------------------- |
+| `ScPdfViewerSidebarResizer` | `sc-pdf-viewer-sidebar-resizer` | Drag or ←/→ (Shift for bigger steps) to resize the sidebar. |
+| `ScPdfViewerLayersView`     | `sc-pdf-viewer-layers-view`     | The document's optional content layers, as checkboxes.      |
+| `ScPdfViewerCommentSidebar` | `sc-pdf-viewer-comment-sidebar` | Add, edit and delete comments.                              |
+
+## Accessibility
+
+- Every control is a native, labelled button, input or select; icon-only buttons have names, toggles report `aria-pressed`, the page and zoom buttons are grouped.
+- Loading is announced as a status, load errors as an alert, find results and the undo bar as statuses.
+- Dialogs trap focus, close with Escape and return focus.
+- The signature tabs are a tab list (arrow keys, one Tab stop).

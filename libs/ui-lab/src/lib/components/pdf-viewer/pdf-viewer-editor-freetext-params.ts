@@ -5,35 +5,56 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from '@semantic-components/ui';
+import {
+  ScField,
+  ScLabel,
+  ScSlider,
+  ScToggleGroup,
+  ScToggleGroupItem,
+  cn,
+} from '@semantic-components/ui';
+import { SC_PDF_INK_COLORS } from './pdf-viewer-editor-colors';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
+/** The text tool's options: color and size. */
 @Component({
   selector: 'sc-pdf-viewer-editor-freetext-params',
+  imports: [ScToggleGroup, ScToggleGroupItem, ScField, ScLabel, ScSlider],
   template: `
-    <div class="flex flex-col gap-2 p-2">
-      <label class="text-xs text-[#bbb]">Font Color</label>
+    <div
+      scToggleGroup
+      type="single"
+      size="sm"
+      aria-label="Text color"
+      [value]="pdfViewer.freetextColor()"
+      (valueChange)="setColor($event)"
+    >
+      @for (color of colors; track color.value) {
+        <button
+          scToggleGroupItem
+          [value]="color.value"
+          [attr.aria-label]="color.name"
+        >
+          <span
+            class="ring-foreground/20 size-4 rounded-full ring-1"
+            [style.background-color]="color.value"
+          ></span>
+        </button>
+      }
+    </div>
+    <div scField>
+      <label scLabel>Size — {{ pdfViewer.freetextSize() }}px</label>
       <input
-        type="color"
-        class="h-7 w-12 cursor-pointer rounded border border-[#5a5a5a] bg-transparent p-0"
-        [value]="pdfViewer.freetextColor()"
-        (input)="pdfViewer.freetextColor.set($any($event.target).value)"
-      />
-
-      <label class="text-xs text-[#bbb]">
-        Font Size: {{ pdfViewer.freetextSize() }}px
-      </label>
-      <input
-        type="range"
-        min="5"
-        max="100"
+        scSlider
+        [min]="5"
+        [max]="100"
         [value]="pdfViewer.freetextSize()"
         (input)="pdfViewer.freetextSize.set(+$any($event.target).value)"
-        class="w-full"
       />
     </div>
   `,
   host: {
+    'data-slot': 'pdf-viewer-editor-params',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
@@ -42,5 +63,13 @@ export class ScPdfViewerEditorFreetextParams {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  protected readonly class = computed(() =>
+    cn('flex w-60 flex-col gap-4', this.classInput()),
+  );
+
+  protected readonly colors = SC_PDF_INK_COLORS;
+
+  protected setColor(value: string | string[] | null): void {
+    if (typeof value === 'string') this.pdfViewer.freetextColor.set(value);
+  }
 }

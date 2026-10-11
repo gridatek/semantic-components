@@ -1,30 +1,19 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
-import { buttonVariants, cn } from '@semantic-components/ui';
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from '@semantic-components/ui';
 import { SC_PDF_VIEWER } from './pdf-viewer-root';
 
-@Component({
+/** Loads the document again after an error. Use on a `scButton`. */
+@Directive({
   selector: 'button[scPdfViewerRetry]',
-  template: `
-    <ng-content>Retry</ng-content>
-  `,
   host: {
-    type: 'button',
     '[class]': 'class()',
     '(click)': 'pdfViewer.retry()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerRetry {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
+
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(buttonVariants({ variant: 'default' }), 'mt-2', this.classInput()),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 }

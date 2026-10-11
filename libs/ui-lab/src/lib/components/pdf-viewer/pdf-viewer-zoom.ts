@@ -3,9 +3,7 @@ import { cn } from '@semantic-components/ui';
 
 @Component({
   selector: '[scPdfViewerZoom]',
-  template: `
-    <ng-content />
-  `,
+  template: ` <ng-content /> `,
   host: {
     role: 'group',
     '[attr.aria-label]': '"Zoom controls"',
