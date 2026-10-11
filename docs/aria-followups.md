@@ -25,6 +25,7 @@ Effort: **S** < 1h · **M** a few hours · **L** a day or more.
 - Type-ahead on a closed select / multiselect opens the list at the first match (APG select-only combobox).
 - Decisions: autocomplete clear button stays a Tab stop; tree visible in the docs; every component stays `Experimental` for now.
 - Org chart: sibling connector lines drawn (they never rendered), and a chart wider than its box overflows to the end only (safe centering), so it can be scrolled in full.
+- Stepper moved off Aria `Tabs` onto `@angular/cdk/stepper` alone (2026-10-11): the CDK's focus manager handles the keyboard, the parts set the tab roles, and panels need no content template.
 - Behaviour tests added for tabs, accordion, collapsible, lightbox, toolbar, stepper, speed dial, org chart, emoji picker, image annotator, PDF signature dialog, mention input.
 
 ## Bugs
@@ -54,7 +55,7 @@ The select, multiselect and command demos store icon _names_ (`'tag'`, `'star'`�
 ### 5. Drop the workarounds when Angular catches up — S each
 
 - `bindInput` / `setInput` (`utils/bind-input`) write to input signal nodes through `@angular/core/primitives/signals`. Replace with host-directive bindings once [angular/angular#50510](https://github.com/angular/angular/issues/50510) ships.
-- `ScComboboxListContainer` / `ScCommandListContainer` are plain template markers, and `ScAriaTreeItem` / `ScAriaOrgChartItem` / `ScAriaStepperTab` / `ScAriaStepperPanel` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
+- `ScComboboxListContainer` / `ScCommandListContainer` are plain template markers, and `ScAriaTreeItem` / `ScAriaOrgChartItem` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
 - Menu bar Escape (`ScMenuBar`) and menu Tab (`ScMenu`) handling — see the upstream drafts.
 
 ## Upstream

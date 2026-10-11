@@ -18,7 +18,6 @@ export class SimpleStepperDemoContainer {
 import { ScButton } from '@semantic-components/ui';
 import {
   ScStepper,
-  ScStepperContent,
   ScStepperIndicator,
   ScStepperItem,
   ScStepperList,
@@ -40,7 +39,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScStepperTrigger,
     ScStepperSeparator,
     ScStepperPanel,
-    ScStepperContent,
     ScStepperPrevious,
     ScStepperNext,
     SiCheckIcon,
@@ -101,11 +99,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
         @for (step of steps; track step) {
           <div scStepperPanel [step]="$index">
-            <ng-template scStepperContent>
-              <p class="text-muted-foreground text-center text-sm">
-                {{ step }}
-              </p>
-            </ng-template>
+            <p class="text-muted-foreground text-center text-sm">
+              {{ step }}
+            </p>
           </div>
         }
 

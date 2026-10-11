@@ -1,4 +1,3 @@
-import { Tabs } from '@angular/aria/tabs';
 import { CdkStepper } from '@angular/cdk/stepper';
 import {
   type AfterContentInit,
@@ -9,16 +8,17 @@ import {
   inject,
   input,
   signal,
+  untracked,
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { startWith } from 'rxjs';
 import { SC_STEPPER, ScStepperOrientation } from './stepper-types';
 
 /**
- * A stepper. `@angular/cdk/stepper` owns the state — `[(selectedIndex)]`,
- * `linear` mode, step validation (`stepControl`), completed/optional/editable
- * steps — and `@angular/aria` `Tabs` the semantics and keyboard of the step
- * list.
+ * A stepper, built on `@angular/cdk/stepper`: it owns the state —
+ * `[(selectedIndex)]`, `linear` mode, step validation (`stepControl`),
+ * completed/optional/editable steps — and the keyboard of the step list. The
+ * parts add the tab semantics (`tablist`, `tab`, `tabpanel`).
  */
 @Directive({
   selector: '[scStepper]',
@@ -29,7 +29,6 @@ import { SC_STEPPER, ScStepperOrientation } from './stepper-types';
       inputs: ['linear', 'selectedIndex'],
       outputs: ['selectedIndexChange', 'selectionChange'],
     },
-    Tabs,
   ],
   providers: [{ provide: SC_STEPPER, useExisting: ScStepper }],
   host: {
@@ -48,6 +47,8 @@ export class ScStepper implements AfterContentInit {
   readonly selectedIndex = computed(() => this.cdk.selectedIndex);
   /** Number of steps. */
   readonly stepCount = signal(0);
+  /** Index of the step whose trigger is the step list's one Tab stop. */
+  readonly focusIndex = signal(0);
 
   private readonly destroyRef = inject(DestroyRef);
 
@@ -57,6 +58,26 @@ export class ScStepper implements AfterContentInit {
 
   constructor() {
     effect(() => (this.cdk.orientation = this.orientation()));
+    // The CDK moves its focus manager along with the selection.
+    effect(() => {
+      this.selectedIndex();
+      untracked(() => this.syncFocusIndex());
+    });
+  }
+
+  /** Reads the CDK focus manager's position (it isn't reactive). */
+  syncFocusIndex(): void {
+    this.focusIndex.set(this.cdk._getFocusIndex() ?? this.selectedIndex());
+  }
+
+  /** Id of the trigger of step `index` (it labels the step's panel). */
+  triggerId(index: number): string {
+    return this.cdk._getStepLabelId(index);
+  }
+
+  /** Id of the panel of step `index`. */
+  panelId(index: number): string {
+    return this.cdk._getStepContentId(index);
   }
 
   ngAfterContentInit(): void {

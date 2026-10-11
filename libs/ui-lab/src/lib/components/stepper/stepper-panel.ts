@@ -1,24 +1,24 @@
-import { Directive, type OnInit, computed, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { ScAriaStepperPanel } from './aria-stepper-panel';
-import { SC_STEPPER, SC_STEPPER_PANEL } from './stepper-types';
+import { SC_STEPPER } from './stepper-types';
 
 /**
- * The content of step `step` (an aria tab panel), shown while it's current.
- * Its content goes in an `<ng-template scStepperContent>`.
+ * The content of step `step` (`role="tabpanel"`, labelled by its trigger),
+ * shown while it's current. Hidden panels keep their content.
  */
 @Directive({
   selector: '[scStepperPanel]',
-  hostDirectives: [ScAriaStepperPanel],
-  providers: [{ provide: SC_STEPPER_PANEL, useExisting: ScStepperPanel }],
   host: {
-    '[class]': 'class()',
+    role: 'tabpanel',
+    '[id]': 'stepper.panelId(step())',
+    '[attr.aria-labelledby]': 'stepper.triggerId(step())',
+    '[attr.tabindex]': 'isActive() ? 0 : null',
     '[hidden]': '!isActive()',
+    '[class]': 'class()',
   },
 })
-export class ScStepperPanel implements OnInit {
-  private readonly stepper = inject(SC_STEPPER);
-  private readonly panel = inject(ScAriaStepperPanel);
+export class ScStepperPanel {
+  protected readonly stepper = inject(SC_STEPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Index of the step this panel belongs to (0-based). */
@@ -26,9 +26,11 @@ export class ScStepperPanel implements OnInit {
 
   readonly isActive = computed(() => this.stepper.isStepActive(this.step()));
 
-  protected readonly class = computed(() => cn('mt-4', this.classInput()));
-
-  ngOnInit(): void {
-    this.panel.setValue(String(this.step()));
-  }
+  protected readonly class = computed(() =>
+    cn(
+      'mt-4 rounded-md outline-none',
+      'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      this.classInput(),
+    ),
+  );
 }

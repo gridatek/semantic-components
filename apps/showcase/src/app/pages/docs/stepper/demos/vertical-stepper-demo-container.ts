@@ -18,7 +18,6 @@ export class VerticalStepperDemoContainer {
 import { ScButton } from '@semantic-components/ui';
 import {
   ScStepper,
-  ScStepperContent,
   ScStepperDescription,
   ScStepperIndicator,
   ScStepperItem,
@@ -44,7 +43,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScStepperTitle,
     ScStepperDescription,
     ScStepperPanel,
-    ScStepperContent,
     ScStepperPrevious,
     ScStepperNext,
     SiCheckIcon,
@@ -112,11 +110,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         <div class="flex flex-1 flex-col">
           @for (step of steps; track step) {
             <div scStepperPanel [step]="$index">
-              <ng-template scStepperContent>
-                <div class="bg-muted rounded-lg p-4">
-                  <p class="text-sm">{{ step }}</p>
-                </div>
-              </ng-template>
+              <div class="bg-muted rounded-lg p-4">
+                <p class="text-sm">{{ step }}</p>
+              </div>
             </div>
           }
 

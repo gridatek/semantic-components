@@ -1,6 +1,6 @@
 # Stepper
 
-A multi-step wizard, built from directives. [`@angular/cdk/stepper`](https://material.angular.dev/cdk/stepper) owns the state — the current step, linear mode, validation, completed / optional / editable steps — and `@angular/aria`'s `Tabs` the semantics and keyboard of the step list.
+A multi-step wizard, built from directives on [`@angular/cdk/stepper`](https://material.angular.dev/cdk/stepper). The CDK owns the state — the current step, linear mode, validation, completed / optional / editable steps — and the keyboard of the step list; the parts add the tab semantics.
 
 ## Usage
 
@@ -30,13 +30,8 @@ A multi-step wizard, built from directives. [`@angular/cdk/stepper`](https://mat
     </div>
   </div>
 
-  <!-- Content exists only while its step is active -->
-  <div scStepperPanel [step]="0">
-    <ng-template scStepperContent>Account content</ng-template>
-  </div>
-  <div scStepperPanel [step]="1">
-    <ng-template scStepperContent>Profile content</ng-template>
-  </div>
+  <div scStepperPanel [step]="0">Account content</div>
+  <div scStepperPanel [step]="1">Profile content</div>
 
   <button scButton scStepperPrevious variant="outline">Previous</button>
   <button scButton scStepperNext>Next</button>
@@ -69,13 +64,11 @@ Give each step a `stepControl` (a Signal Forms field). In `linear` mode a step c
     </div>
 
     <div scStepperPanel [step]="0">
-      <ng-template scStepperContent>
-        <div scField>
-          <label scLabel>Email</label>
-          <input scInput type="email" [formField]="signupForm.account.email" />
-          <div scFieldErrors></div>
-        </div>
-      </ng-template>
+      <div scField>
+        <label scLabel>Email</label>
+        <input scInput type="email" [formField]="signupForm.account.email" />
+        <div scFieldErrors></div>
+      </div>
     </div>
     …
 
@@ -102,7 +95,7 @@ readonly signupForm = form(this.model, (s) => {
 
 ### ScStepper — `[scStepper]` (`exportAs: 'scStepper'`)
 
-Hosts the CDK's `CdkStepper` and aria `Tabs`.
+Hosts the CDK's `CdkStepper`.
 
 | Input         | Type                         | Default        | Description                      |
 | ------------- | ---------------------------- | -------------- | -------------------------------- |
@@ -119,7 +112,7 @@ Signals: `selectedIndex()`, `stepCount()`. Methods: `next()`, `previous()`, `goT
 
 ### ScStepperList — `[scStepperList]`
 
-The row of steps: `role="tablist"` (aria `TabList`), one Tab stop, arrow keys between steps.
+The row of steps: `role="tablist"`, one Tab stop, arrow keys between steps (the CDK's focus manager).
 
 ### ScStepperItem — `[scStepperItem]` (`exportAs: 'scStepperItem'`)
 
@@ -138,7 +131,7 @@ One step — a `CdkStep`, with its inputs. It's an attribute component (only com
 
 ### ScStepperTrigger — `button[scStepperTrigger]`
 
-The clickable step header (an aria tab). Disabled — still focusable — while the step can't be reached (linear mode, an earlier step incomplete). Holds the indicator and, ideally, the title (it names the tab).
+The clickable step header (`role="tab"`, a CDK `CdkStepHeader`). Disabled — still focusable — while the step can't be reached (linear mode, an earlier step incomplete). Holds the indicator and, ideally, the title (it names the tab).
 
 ### ScStepperIndicator — `[scStepperIndicator]` (`exportAs: 'scStepperIndicator'`)
 
@@ -150,11 +143,7 @@ The line after a step; filled once that step is completed. `[step]` when it's ou
 
 ### ScStepperPanel — `[scStepperPanel]`
 
-The content of step `[step]` (`role="tabpanel"`, labelled by its step), shown while that step is current. Its content goes in a `scStepperContent` template.
-
-### ScStepperContent — `ng-template[scStepperContent]`
-
-Required inside every panel (aria `TabContent`): the content is created when its step becomes active and destroyed when you leave it. Keep what the user enters in your model (e.g. a Signal Forms `form()`), not in the DOM.
+The content of step `[step]` (`role="tabpanel"`, labelled by its step), shown while that step is current. Hidden panels keep their content.
 
 ### ScStepperTitle / ScStepperDescription
 

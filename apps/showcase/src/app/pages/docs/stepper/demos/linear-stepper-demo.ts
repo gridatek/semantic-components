@@ -15,7 +15,6 @@ import {
 } from '@semantic-components/ui';
 import {
   ScStepper,
-  ScStepperContent,
   ScStepperIndicator,
   ScStepperItem,
   ScStepperList,
@@ -44,7 +43,6 @@ interface SignupModel {
     ScInput,
     ScLabel,
     ScStepper,
-    ScStepperContent,
     ScStepperIndicator,
     ScStepperItem,
     ScStepperList,
@@ -121,47 +119,41 @@ interface SignupModel {
         </div>
 
         <div scStepperPanel [step]="0">
-          <ng-template scStepperContent>
-            <div scField>
-              <label scLabel>Email</label>
-              <input
-                scInput
-                type="email"
-                [formField]="signupForm.account.email"
-                placeholder="you@example.com"
-              />
-              <div scFieldErrors></div>
-            </div>
-          </ng-template>
+          <div scField>
+            <label scLabel>Email</label>
+            <input
+              scInput
+              type="email"
+              [formField]="signupForm.account.email"
+              placeholder="you@example.com"
+            />
+            <div scFieldErrors></div>
+          </div>
         </div>
         <div scStepperPanel [step]="1">
-          <ng-template scStepperContent>
-            <div scField>
-              <label scLabel>Full name</label>
-              <input
-                scInput
-                [formField]="signupForm.profile.name"
-                placeholder="Ada Lovelace"
-              />
-              <div scFieldErrors></div>
-            </div>
-          </ng-template>
+          <div scField>
+            <label scLabel>Full name</label>
+            <input
+              scInput
+              [formField]="signupForm.profile.name"
+              placeholder="Ada Lovelace"
+            />
+            <div scFieldErrors></div>
+          </div>
         </div>
         <div scStepperPanel [step]="2">
-          <ng-template scStepperContent>
-            @if (created()) {
-              <p class="text-sm" role="status">
-                Account created for {{ model().profile.name }}.
-              </p>
-            } @else {
-              <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
-                <dt class="text-muted-foreground">Email</dt>
-                <dd>{{ model().account.email }}</dd>
-                <dt class="text-muted-foreground">Name</dt>
-                <dd>{{ model().profile.name }}</dd>
-              </dl>
-            }
-          </ng-template>
+          @if (created()) {
+            <p class="text-sm" role="status">
+              Account created for {{ model().profile.name }}.
+            </p>
+          } @else {
+            <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
+              <dt class="text-muted-foreground">Email</dt>
+              <dd>{{ model().account.email }}</dd>
+              <dt class="text-muted-foreground">Name</dt>
+              <dd>{{ model().profile.name }}</dd>
+            </dl>
+          }
         </div>
 
         <div class="mt-6 flex justify-between">

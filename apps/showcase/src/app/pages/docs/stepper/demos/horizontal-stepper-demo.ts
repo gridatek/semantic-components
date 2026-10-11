@@ -10,7 +10,6 @@ import {
 } from '@semantic-components/ui';
 import {
   ScStepper,
-  ScStepperContent,
   ScStepperDescription,
   ScStepperIndicator,
   ScStepperItem,
@@ -34,7 +33,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScStepperItem,
     ScStepperTrigger,
     ScStepperSeparator,
-    ScStepperContent,
     ScStepperPanel,
     ScStepperTitle,
     ScStepperDescription,
@@ -102,74 +100,67 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div scStepperPanel [step]="0">
-          <ng-template scStepperContent>
-            <div scFieldGroup>
-              <div scField>
-                <label scLabel>Email</label>
-                <input
-                  scInput
-                  type="email"
-                  [formField]="signupForm.email"
-                  placeholder="Enter your email"
-                />
-              </div>
-              <div scField>
-                <label scLabel>Password</label>
-                <input
-                  scInput
-                  type="password"
-                  [formField]="signupForm.password"
-                  placeholder="Create a password"
-                />
-              </div>
+          <div scFieldGroup>
+            <div scField>
+              <label scLabel>Email</label>
+              <input
+                scInput
+                type="email"
+                [formField]="signupForm.email"
+                placeholder="Enter your email"
+              />
             </div>
-          </ng-template>
+            <div scField>
+              <label scLabel>Password</label>
+              <input
+                scInput
+                type="password"
+                [formField]="signupForm.password"
+                placeholder="Create a password"
+              />
+            </div>
+          </div>
         </div>
 
         <div scStepperPanel [step]="1">
-          <ng-template scStepperContent>
-            <div scFieldGroup>
-              <div scField>
-                <label scLabel>Full Name</label>
-                <input
-                  scInput
-                  type="text"
-                  [formField]="signupForm.name"
-                  placeholder="Enter your name"
-                />
-              </div>
-              <div scField>
-                <label scLabel>Bio</label>
-                <textarea
-                  scTextarea
-                  [formField]="signupForm.bio"
-                  placeholder="Tell us about yourself"
-                  rows="3"
-                ></textarea>
-              </div>
+          <div scFieldGroup>
+            <div scField>
+              <label scLabel>Full Name</label>
+              <input
+                scInput
+                type="text"
+                [formField]="signupForm.name"
+                placeholder="Enter your name"
+              />
             </div>
-          </ng-template>
+            <div scField>
+              <label scLabel>Bio</label>
+              <textarea
+                scTextarea
+                [formField]="signupForm.bio"
+                placeholder="Tell us about yourself"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
         </div>
 
         <div scStepperPanel [step]="2">
-          <ng-template scStepperContent>
-            <div scFieldGroup>
-              <p class="text-muted-foreground text-sm">
-                Review your information and click submit to complete
-                registration.
-              </p>
-              <dl
-                class="bg-muted grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-lg p-4 text-sm"
-              >
-                <dt class="text-muted-foreground">Email</dt>
-                <dd>{{ model().email }}</dd>
-                <dt class="text-muted-foreground">Name</dt>
-                <dd>{{ model().name }}</dd>
-                <dt class="text-muted-foreground">Bio</dt>
-                <dd>{{ model().bio }}</dd>
-              </dl>
-            </div>
-          </ng-template>
+          <div scFieldGroup>
+            <p class="text-muted-foreground text-sm">
+              Review your information and click submit to complete registration.
+            </p>
+            <dl
+              class="bg-muted grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 rounded-lg p-4 text-sm"
+            >
+              <dt class="text-muted-foreground">Email</dt>
+              <dd>{{ model().email }}</dd>
+              <dt class="text-muted-foreground">Name</dt>
+              <dd>{{ model().name }}</dd>
+              <dt class="text-muted-foreground">Bio</dt>
+              <dd>{{ model().bio }}</dd>
+            </dl>
+          </div>
         </div>
 
         <div class="mt-6 flex justify-between">
@@ -189,8 +180,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 export class HorizontalStepperDemo {
   readonly selectedIndex = signal(0);
 
-  // Panels destroy their content when you leave a step, so the values live
-  // here, in the model.
   readonly model = signal({ email: '', password: '', name: '', bio: '' });
   readonly signupForm = form(this.model);
 }
