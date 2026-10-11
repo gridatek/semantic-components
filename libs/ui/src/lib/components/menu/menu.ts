@@ -46,6 +46,10 @@ export class ScMenu<V = string> {
   protected readonly class = computed(() =>
     cn(
       'bg-popover text-popover-foreground min-w-32 w-60 rounded-lg p-1 shadow-md ring-1 ring-foreground/10 z-50 overflow-x-hidden overflow-y-auto data-[visible=false]:hidden',
+      // Size icons here too, not only on the items: the menu is styled when
+      // the overlay measures it, its items not yet — unsized icons (300×150)
+      // would make it look too tall and open on the wrong side.
+      "[&_svg:not([class*='size-'])]:size-4",
       this.classInput(),
     ),
   );
