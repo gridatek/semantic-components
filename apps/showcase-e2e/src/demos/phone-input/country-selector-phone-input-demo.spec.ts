@@ -36,6 +36,21 @@ test.describe('Country Selector Phone Input Demo', () => {
     await expect(page.getByText('Value: +12015550123')).toBeVisible();
   });
 
+  test('a number typed without the trunk 0 is still grouped', async ({
+    page,
+  }) => {
+    const trigger = page.locator('[scComboboxTrigger]');
+    await trigger.click();
+    await type(page, 'fra');
+    await page.getByRole('option', { name: /France/ }).click();
+
+    const input = page.getByLabel('Phone number');
+    await input.click();
+    await type(page, '666006594');
+    await expect(input).toHaveValue('6 66 00 65 94');
+    await expect(page.getByText('Value: +33666006594')).toBeVisible();
+  });
+
   test('Backspace after formatting removes a digit', async ({ page }) => {
     const input = page.getByLabel('Phone number');
     await input.click();

@@ -109,7 +109,7 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
   /** Formats what was typed or pasted, and updates the value (and country). */
   type(raw: string): void {
     const typer = new AsYouType(this.country());
-    this.text.set(typer.input(raw));
+    this.text.set(this.withoutTrunkPrefix(typer.input(raw), typer));
     const detected = typer.getCountry();
     if (raw.trimStart().startsWith('+') && detected) {
       this.country.set(detected);
@@ -134,6 +134,23 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
   protected onFocusout(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (!next || !this.host.nativeElement.contains(next)) this.touch.emit();
+  }
+
+  /**
+   * National formats include the trunk prefix (`06 12 34 56 78` in France), so
+   * a number typed without it comes back as bare digits. Group those like the
+   * international format instead, minus the calling code the trigger shows
+   * (`6 12 34 56 78`).
+   */
+  private withoutTrunkPrefix(text: string, typer: AsYouType): string {
+    const country = this.country();
+    if (!country || typer.isInternational() || /\D/.test(text)) return text;
+    if (typer.getNationalNumber() !== text) return text;
+    const code = getCountryCallingCode(country);
+    return new AsYouType()
+      .input(`+${code}${text}`)
+      .slice(code.length + 1)
+      .trim();
   }
 
   private produce(value: string): void {
