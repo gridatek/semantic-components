@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { DataTableGlobalFilterTable } from './data-table-types';
+import type { ScDataTableGlobalFilterTable } from './data-table-types';
 
 /**
  * Filters the whole table as you type. Use with `scInput`; give it a name
@@ -20,7 +20,7 @@ import type { DataTableGlobalFilterTable } from './data-table-types';
   },
 })
 export class ScDataTableGlobalFilter {
-  readonly table = input.required<DataTableGlobalFilterTable>();
+  readonly table = input.required<ScDataTableGlobalFilterTable>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly value = computed(() =>

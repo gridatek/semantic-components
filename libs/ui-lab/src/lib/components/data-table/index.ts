@@ -1,6 +1,6 @@
 export * from './data-table-types';
 export { dataTablePinnedClasses } from './data-table-pinning';
-export { ScDataTableHead } from './data-table-head';
+export { ScDataTableHeaderCell } from './data-table-header-cell';
 export { ScDataTableCell } from './data-table-cell';
 export { ScDataTableRow } from './data-table-row';
 export { ScDataTableSortButton } from './data-table-sort-button';

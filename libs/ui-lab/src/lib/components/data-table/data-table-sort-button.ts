@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { DataTableSortableColumn } from './data-table-types';
+import type { ScDataTableSortableColumn } from './data-table-types';
 
 /**
  * Sorts its column on click (Shift+click adds to a multi-sort). The icons are
@@ -29,7 +29,7 @@ import type { DataTableSortableColumn } from './data-table-types';
   },
 })
 export class ScDataTableSortButton {
-  readonly column = input.required<DataTableSortableColumn>();
+  readonly column = input.required<ScDataTableSortableColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** `'asc'`, `'desc'` or `false`. */

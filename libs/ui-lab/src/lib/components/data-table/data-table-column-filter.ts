@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import type { DataTableFilterableColumn } from './data-table-types';
+import type { ScDataTableFilterableColumn } from './data-table-types';
 
 /**
  * Filters one column as you type (empty clears it). Use with `scInput`; give
@@ -19,7 +19,7 @@ import type { DataTableFilterableColumn } from './data-table-types';
   },
 })
 export class ScDataTableColumnFilter {
-  readonly column = input.required<DataTableFilterableColumn>();
+  readonly column = input.required<ScDataTableFilterableColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly value = computed(() =>

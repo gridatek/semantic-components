@@ -1,5 +1,5 @@
 import { type Signal, computed } from '@angular/core';
-import type { DataTableHeadColumn } from './data-table-types';
+import type { ScDataTableCellColumn } from './data-table-types';
 
 /** Classes for a pinned header or body cell (`data-pinned="start|end"`). */
 export const dataTablePinnedClasses =
@@ -11,7 +11,7 @@ export const dataTablePinnedClasses =
  * column sizing feature; without it, offsets are 0).
  */
 export function dataTablePinning(
-  column: Signal<DataTableHeadColumn | undefined>,
+  column: Signal<ScDataTableCellColumn | undefined>,
 ) {
   const pinned = computed(() => column()?.getIsPinned?.() || false);
   const offsetStart = computed(() =>

@@ -1,6 +1,6 @@
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { ScPagination, bindInput, cn } from '@semantic-components/ui';
-import type { DataTablePaginationTable } from './data-table-types';
+import type { ScDataTablePaginationTable } from './data-table-types';
 
 /**
  * Connects an `scPagination` to the table: page, page size and row count come
@@ -18,7 +18,7 @@ import type { DataTablePaginationTable } from './data-table-types';
   },
 })
 export class ScDataTablePagination {
-  readonly table = input.required<DataTablePaginationTable>();
+  readonly table = input.required<ScDataTablePaginationTable>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly state = computed(() => this.table().atoms.pagination.get());

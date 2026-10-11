@@ -40,7 +40,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
         <ul class="text-muted-foreground list-inside list-disc text-sm">
           <li>
             Sort state and pinning with
-            <code>scDataTableHead</code>
+            <code>scDataTableHeaderCell</code>
             and
             <code>scDataTableCell</code>
           </li>

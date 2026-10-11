@@ -11,7 +11,7 @@ npm install @tanstack/angular-table
 ```
 
 ```typescript
-import { ScDataTableCell, ScDataTableColumnToggle, ScDataTableColumnToggleContent, ScDataTableColumnToggleTrigger, ScDataTableColumnVisibility, ScDataTableGlobalFilter, ScDataTableHead, ScDataTablePagination, ScDataTableRow, ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableSortButton } from '@semantic-components/ui-lab';
+import { ScDataTableCell, ScDataTableColumnToggle, ScDataTableColumnToggleContent, ScDataTableColumnToggleTrigger, ScDataTableColumnVisibility, ScDataTableGlobalFilter, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableRow, ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableSortButton } from '@semantic-components/ui-lab';
 ```
 
 ## Usage
@@ -58,7 +58,7 @@ export class UsersTable {
     @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
     <tr scTableRow>
       @for (header of headerGroup.headers; track header.id) {
-      <th scTableHeaderCell scDataTableHead [column]="header.column">
+      <th scTableHeaderCell scDataTableHeaderCell [column]="header.column">
         @if (header.column.id === 'select') {
         <label scCheckboxField>
           <input type="checkbox" scCheckbox scDataTableSelectAll [table]="table" />
@@ -127,7 +127,7 @@ Set `enableHiding: false` on columns that shouldn't be listed (selection, action
 
 | Part                             | Selector                                            | Input                   | Does                                                                                                         |
 | -------------------------------- | --------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `ScDataTableHead`                | `th[scDataTableHead]`                               | `column`                | `aria-sort` on sortable columns; sticky when pinned (`data-pinned="start\|end"`, offsets with column sizing) |
+| `ScDataTableHeaderCell`          | `th[scDataTableHeaderCell]`                         | `column`                | `aria-sort` on sortable columns; sticky when pinned (`data-pinned="start\|end"`, offsets with column sizing) |
 | `ScDataTableCell`                | `td[scDataTableCell]`                               | `column`                | Sticky when its column is pinned                                                                             |
 | `ScDataTableRow`                 | `tr[scDataTableRow]`                                | `row`                   | `data-state="selected"` while selected                                                                       |
 | `ScDataTableSortButton`          | `button[scDataTableSortButton]`                     | `column`                | Click sorts, Shift+click multi-sorts; `direction()` for your icons (`exportAs`)                              |
@@ -145,7 +145,7 @@ The checkbox parts work alone or together with `scCheckbox` (they then drive its
 
 ### Structural types
 
-Exported for your own wrappers: `DataTableHeadColumn`, `DataTableSortableColumn`, `DataTableFilterableColumn`, `DataTableHideableColumn`, `DataTableSelectableRow`, `DataTableSelectAllTable`, `DataTableGlobalFilterTable`, `DataTablePaginationTable`, `DataTableColumnsTable`, plus `dataTableColumnLabel(column)` and `dataTablePinnedClasses`.
+Exported for your own wrappers: `ScDataTableCellColumn`, `ScDataTableSortableColumn`, `ScDataTableFilterableColumn`, `ScDataTableHideableColumn`, `ScDataTableSelectableRow`, `ScDataTableSelectAllTable`, `ScDataTableGlobalFilterTable`, `ScDataTablePaginationTable`, `ScDataTableColumnsTable`, plus `dataTableColumnLabel(column)` and `dataTablePinnedClasses`.
 
 ## Notes
 

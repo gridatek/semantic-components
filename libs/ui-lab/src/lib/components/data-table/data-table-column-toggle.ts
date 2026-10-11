@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import {
-  type DataTableColumnsTable,
-  type DataTableHideableColumn,
+  type ScDataTableColumnsTable,
+  type ScDataTableHideableColumn,
   dataTableColumnLabel,
 } from './data-table-types';
 
@@ -58,7 +58,7 @@ export const SC_DATA_TABLE_COLUMN_TOGGLE =
 export class ScDataTableColumnToggle {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  readonly table = input.required<DataTableColumnsTable>();
+  readonly table = input.required<ScDataTableColumnsTable>();
   readonly open = model(false);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -77,7 +77,7 @@ export class ScDataTableColumnToggle {
     cn('relative inline-block', this.classInput()),
   );
 
-  label(column: DataTableHideableColumn): string {
+  label(column: ScDataTableHideableColumn): string {
     return dataTableColumnLabel(column);
   }
 

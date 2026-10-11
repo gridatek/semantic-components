@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { dataTablePinnedClasses, dataTablePinning } from './data-table-pinning';
-import type { DataTableHeadColumn } from './data-table-types';
+import type { ScDataTableCellColumn } from './data-table-types';
 
 /**
  * A body cell bound to its column, for sticky pinned columns. Use with
@@ -21,7 +21,7 @@ import type { DataTableHeadColumn } from './data-table-types';
   },
 })
 export class ScDataTableCell {
-  readonly column = input<DataTableHeadColumn>();
+  readonly column = input<ScDataTableCellColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly pinning = dataTablePinning(this.column);

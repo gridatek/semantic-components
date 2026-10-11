@@ -60,7 +60,7 @@ import {
   ScDataTableColumnToggleTrigger,
   ScDataTableColumnVisibility,
   ScDataTableGlobalFilter,
-  ScDataTableHead,
+  ScDataTableHeaderCell,
   ScDataTablePagination,
   ScDataTableRow,
   ScDataTableSelectAll,
@@ -253,7 +253,7 @@ const SAMPLE_DATA: User[] = [
     ScDataTableColumnToggleTrigger,
     ScDataTableColumnVisibility,
     ScDataTableGlobalFilter,
-    ScDataTableHead,
+    ScDataTableHeaderCell,
     ScDataTablePagination,
     ScDataTableRow,
     ScDataTableSelectAll,
@@ -317,7 +317,7 @@ const SAMPLE_DATA: User[] = [
                 @for (header of headerGroup.headers; track header.id) {
                   <th
                     scTableHeaderCell
-                    scDataTableHead
+                    scDataTableHeaderCell
                     [column]="header.column"
                   >
                     @switch (header.column.id) {

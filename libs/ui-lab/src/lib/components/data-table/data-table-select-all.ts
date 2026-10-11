@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { syncDataTableCheckbox } from './data-table-checkbox';
-import type { DataTableSelectAllTable } from './data-table-types';
+import type { ScDataTableSelectAllTable } from './data-table-types';
 
 /**
  * "Select all" checkbox: checked when every row is selected, indeterminate
@@ -21,7 +21,7 @@ import type { DataTableSelectAllTable } from './data-table-types';
   },
 })
 export class ScDataTableSelectAll {
-  readonly table = input.required<DataTableSelectAllTable>();
+  readonly table = input.required<ScDataTableSelectAllTable>();
   readonly scope = input<'page' | 'all'>('page');
   readonly ariaLabel = input('Select all rows', { alias: 'aria-label' });
   readonly classInput = input<string>('', { alias: 'class' });

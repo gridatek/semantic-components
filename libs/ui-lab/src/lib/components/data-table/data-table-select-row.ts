@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { syncDataTableCheckbox } from './data-table-checkbox';
-import type { DataTableSelectableRow } from './data-table-types';
+import type { ScDataTableSelectableRow } from './data-table-types';
 
 /**
  * A row's selection checkbox; disabled when the row can't be selected. Give
@@ -20,7 +20,7 @@ import type { DataTableSelectableRow } from './data-table-types';
   },
 })
 export class ScDataTableSelectRow {
-  readonly row = input.required<DataTableSelectableRow>();
+  readonly row = input.required<ScDataTableSelectableRow>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly selected = computed(() => this.row().getIsSelected());

@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { syncDataTableCheckbox } from './data-table-checkbox';
-import type { DataTableHideableColumn } from './data-table-types';
+import type { ScDataTableHideableColumn } from './data-table-types';
 
 /**
  * Shows/hides a column. Works alone or with `scCheckbox`.
@@ -18,7 +18,7 @@ import type { DataTableHideableColumn } from './data-table-types';
   },
 })
 export class ScDataTableColumnVisibility {
-  readonly column = input.required<DataTableHideableColumn>();
+  readonly column = input.required<ScDataTableHideableColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly visible = computed(() => this.column().getIsVisible());

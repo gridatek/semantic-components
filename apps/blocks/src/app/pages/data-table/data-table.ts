@@ -37,7 +37,7 @@ import {
   ScButtonPattern,
   ScDataTableCell,
   ScDataTableColumnFilter,
-  ScDataTableHead,
+  ScDataTableHeaderCell,
   ScDataTableRow,
   ScDataTableSelectAll,
   ScDataTableSelectRow,
@@ -78,7 +78,7 @@ import type { User } from './user.service';
     ScButtonPattern,
     ScDataTableCell,
     ScDataTableColumnFilter,
-    ScDataTableHead,
+    ScDataTableHeaderCell,
     ScDataTableRow,
     ScDataTableSelectAll,
     ScDataTableSelectRow,
@@ -104,7 +104,7 @@ import type { User } from './user.service';
               @for (header of headerGroup.headers; track header.id) {
                 <th
                   scTableHeaderCell
-                  scDataTableHead
+                  scDataTableHeaderCell
                   [column]="header.column"
                   [attr.colSpan]="header.colSpan"
                 >

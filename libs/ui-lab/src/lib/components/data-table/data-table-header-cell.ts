@@ -1,18 +1,18 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { dataTablePinnedClasses, dataTablePinning } from './data-table-pinning';
-import type { DataTableHeadColumn } from './data-table-types';
+import type { ScDataTableCellColumn } from './data-table-types';
 
 /**
  * A header cell bound to its column: `aria-sort` for sortable columns and
  * sticky positioning for pinned ones. Use with `scTableHeaderCell`.
  *
  * ```html
- * <th scTableHeaderCell scDataTableHead [column]="header.column">…</th>
+ * <th scTableHeaderCell scDataTableHeaderCell [column]="header.column">…</th>
  * ```
  */
 @Directive({
-  selector: 'th[scDataTableHead]',
+  selector: 'th[scDataTableHeaderCell]',
   host: {
     '[attr.aria-sort]': 'ariaSort()',
     '[attr.data-pinned]': 'pinning.pinned() || null',
@@ -21,8 +21,8 @@ import type { DataTableHeadColumn } from './data-table-types';
     '[class]': 'class()',
   },
 })
-export class ScDataTableHead {
-  readonly column = input<DataTableHeadColumn>();
+export class ScDataTableHeaderCell {
+  readonly column = input<ScDataTableCellColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly pinning = dataTablePinning(this.column);
