@@ -3,6 +3,7 @@ import { ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { HorizontalStepperDemoContainer } from './demos/horizontal-stepper-demo-container';
+import { LinearStepperDemoContainer } from './demos/linear-stepper-demo-container';
 import { SimpleStepperDemoContainer } from './demos/simple-stepper-demo-container';
 import { VerticalStepperDemoContainer } from './demos/vertical-stepper-demo-container';
 
@@ -10,6 +11,7 @@ import { VerticalStepperDemoContainer } from './demos/vertical-stepper-demo-cont
   selector: 'app-stepper-page',
   imports: [
     HorizontalStepperDemoContainer,
+    LinearStepperDemoContainer,
     VerticalStepperDemoContainer,
     SimpleStepperDemoContainer,
     TocHeading,
@@ -31,6 +33,7 @@ import { VerticalStepperDemoContainer } from './demos/vertical-stepper-demo-cont
         <app-horizontal-stepper-demo-container />
         <app-vertical-stepper-demo-container />
         <app-simple-stepper-demo-container />
+        <app-linear-stepper-demo-container />
       </section>
     </div>
   `,

@@ -2,13 +2,14 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_STEPPER } from './stepper-types';
 
+/** Goes to the previous step; disabled on the first one. */
 @Directive({
   selector: 'button[scStepperPrevious]',
   host: {
+    type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'stepper.activeStep() === 0',
-    '[attr.aria-disabled]': 'stepper.activeStep() === 0 || null',
-    '(click)': 'stepper.prevStep()',
+    '[disabled]': 'stepper.isFirstStep()',
+    '(click)': 'stepper.previous()',
   },
 })
 export class ScStepperPrevious {

@@ -64,12 +64,12 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div class="w-full max-w-2xl rounded-lg border p-6">
-      <div scStepper [(activeStep)]="activeStep">
+      <div scStepper [(selectedIndex)]="selectedIndex">
         <div scStepperList>
-          <div scStepperItem [step]="0" #item0="scStepperItem">
+          <div scStepperItem #item0="scStepperItem">
             <button scStepperTrigger>
               <span scStepperIndicator>
-                @if (item0.state() === 'complete') {
+                @if (item0.status() === 'complete') {
                   <svg siCheckIcon></svg>
                 } @else {
                   1
@@ -82,10 +82,10 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
           <div scStepperSeparator [step]="0"></div>
-          <div scStepperItem [step]="1" #item1="scStepperItem">
+          <div scStepperItem #item1="scStepperItem">
             <button scStepperTrigger>
               <span scStepperIndicator>
-                @if (item1.state() === 'complete') {
+                @if (item1.status() === 'complete') {
                   <svg siCheckIcon></svg>
                 } @else {
                   2
@@ -98,10 +98,10 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
           <div scStepperSeparator [step]="1"></div>
-          <div scStepperItem [step]="2" #item2="scStepperItem">
+          <div scStepperItem #item2="scStepperItem">
             <button scStepperTrigger>
               <span scStepperIndicator>
-                @if (item2.state() === 'complete') {
+                @if (item2.status() === 'complete') {
                   <svg siCheckIcon></svg>
                 } @else {
                   3
@@ -116,33 +116,41 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         </div>
 
         <div scStepperPanel [step]="0">
-          <div scFieldGroup>
-            <div scField>
-              <label scLabel>Email</label>
-              <input scInput type="email" placeholder="Enter your email" />
+          <ng-template scStepperContent>
+            <div scFieldGroup>
+              <div scField>
+                <label scLabel>Email</label>
+                <input scInput type="email" placeholder="Enter your email" />
+              </div>
+              <div scField>
+                <label scLabel>Password</label>
+                <input
+                  scInput
+                  type="password"
+                  placeholder="Create a password"
+                />
+              </div>
             </div>
-            <div scField>
-              <label scLabel>Password</label>
-              <input scInput type="password" placeholder="Create a password" />
-            </div>
-          </div>
+          </ng-template>
         </div>
 
         <div scStepperPanel [step]="1">
-          <div scFieldGroup>
-            <div scField>
-              <label scLabel>Full Name</label>
-              <input scInput type="text" placeholder="Enter your name" />
+          <ng-template scStepperContent>
+            <div scFieldGroup>
+              <div scField>
+                <label scLabel>Full Name</label>
+                <input scInput type="text" placeholder="Enter your name" />
+              </div>
+              <div scField>
+                <label scLabel>Bio</label>
+                <textarea
+                  scTextarea
+                  placeholder="Tell us about yourself"
+                  rows="3"
+                ></textarea>
+              </div>
             </div>
-            <div scField>
-              <label scLabel>Bio</label>
-              <textarea
-                scTextarea
-                placeholder="Tell us about yourself"
-                rows="3"
-              ></textarea>
-            </div>
-          </div>
+          </ng-template>
         </div>
 
         <div scStepperPanel [step]="2">
@@ -164,7 +172,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             Previous
           </button>
           <button scButton scStepperNext size="lg">
-            {{ activeStep() === 2 ? 'Submit' : 'Next' }}
+            {{ selectedIndex() === 2 ? 'Submit' : 'Next' }}
           </button>
         </div>
       </div>
@@ -174,6 +182,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalStepperDemo {
-  readonly activeStep = signal(0);
+  readonly selectedIndex = signal(0);
 }`;
 }

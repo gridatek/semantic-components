@@ -12,7 +12,8 @@ import { SC_STEPPER } from './stepper-types';
 
 /**
  * The row of steps (`role="tablist"` via aria `TabList`): one Tab stop, arrow
- * keys (and Home/End) move between steps and activate them.
+ * keys (and Home/End) move between steps and activate them — as far as the
+ * CDK stepper allows (linear mode, validity).
  */
 @Directive({
   selector: '[scStepperList]',
@@ -41,21 +42,25 @@ export class ScStepperList {
 
     // stepper → tab list
     effect(() => {
-      const step = String(this.stepper.activeStep());
+      const step = String(this.stepper.selectedIndex());
       untracked(() => {
-        if (this.tabList.selectedTab() !== step)
+        if (this.tabList.selectedTab() !== step) {
           this.tabList.selectedTab.set(step);
+        }
       });
     });
-    // tab list → stepper (arrow keys, clicks)
+    // tab list → stepper (arrow keys, clicks). The CDK may refuse the move
+    // (linear mode); then the selected tab goes back to the current step.
     effect(() => {
       const selected = this.tabList.selectedTab();
       untracked(() => {
-        if (
-          selected !== undefined &&
-          Number(selected) !== this.stepper.activeStep()
-        ) {
-          this.stepper.goToStep(Number(selected));
+        if (selected === undefined) return;
+        const current = this.stepper.selectedIndex();
+        if (Number(selected) === current) return;
+        this.stepper.goToStep(Number(selected));
+        const now = String(this.stepper.selectedIndex());
+        if (this.tabList.selectedTab() !== now) {
+          this.tabList.selectedTab.set(now);
         }
       });
     });

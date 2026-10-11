@@ -2,9 +2,11 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from '@semantic-components/ui';
 import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
 
+/** The line after step `step`; filled once that step is completed. */
 @Directive({
   selector: '[scStepperSeparator]',
   host: {
+    'aria-hidden': 'true',
     '[class]': 'class()',
     '[attr.data-state]': 'state()',
   },
@@ -14,12 +16,13 @@ export class ScStepperSeparator {
   private readonly stepperItem = inject(SC_STEPPER_ITEM, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
+  /** The step before this line (0-based); defaults to the enclosing step. */
   readonly step = input<number | undefined>(undefined);
 
   protected readonly state = computed(() => {
-    const stepNum = this.step() ?? this.stepperItem?.step();
-    if (stepNum === undefined) return 'inactive';
-    return this.stepper.isStepComplete(stepNum) ? 'complete' : 'inactive';
+    const index = this.step() ?? this.stepperItem?.index();
+    if (index === undefined || index < 0) return 'inactive';
+    return this.stepper.isStepComplete(index) ? 'complete' : 'inactive';
   });
 
   protected readonly class = computed(() => {

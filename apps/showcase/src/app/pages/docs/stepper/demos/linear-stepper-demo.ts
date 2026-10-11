@@ -1,0 +1,202 @@
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  FormField,
+  FormRoot,
+  email,
+  form,
+  required,
+} from '@angular/forms/signals';
+import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScInput,
+  ScLabel,
+} from '@semantic-components/ui';
+import {
+  ScStepper,
+  ScStepperContent,
+  ScStepperIndicator,
+  ScStepperItem,
+  ScStepperList,
+  ScStepperNext,
+  ScStepperPanel,
+  ScStepperPrevious,
+  ScStepperSeparator,
+  ScStepperTitle,
+  ScStepperTrigger,
+} from '@semantic-components/ui-lab';
+import { SiCheckIcon, SiXIcon } from '@semantic-icons/lucide-icons';
+
+interface SignupModel {
+  account: { email: string };
+  profile: { name: string };
+}
+
+@Component({
+  selector: 'app-linear-stepper-demo',
+  imports: [
+    FormField,
+    FormRoot,
+    ScButton,
+    ScField,
+    ScFieldErrors,
+    ScInput,
+    ScLabel,
+    ScStepper,
+    ScStepperContent,
+    ScStepperIndicator,
+    ScStepperItem,
+    ScStepperList,
+    ScStepperNext,
+    ScStepperPanel,
+    ScStepperPrevious,
+    ScStepperSeparator,
+    ScStepperTitle,
+    ScStepperTrigger,
+    SiCheckIcon,
+    SiXIcon,
+  ],
+  template: `
+    <form [formRoot]="signupForm" class="w-full max-w-xl rounded-lg border p-6">
+      <div
+        scStepper
+        linear
+        [(selectedIndex)]="selectedIndex"
+        #stepper="scStepper"
+      >
+        <div scStepperList>
+          <div
+            scStepperItem
+            [stepControl]="signupForm.account"
+            #account="scStepperItem"
+          >
+            <button scStepperTrigger>
+              <span scStepperIndicator>
+                @switch (account.status()) {
+                  @case ('complete') {
+                    <svg siCheckIcon></svg>
+                  }
+                  @case ('error') {
+                    <svg siXIcon></svg>
+                  }
+                  @default {
+                    1
+                  }
+                }
+              </span>
+              <span scStepperTitle>Account</span>
+            </button>
+          </div>
+          <div scStepperSeparator [step]="0"></div>
+          <div
+            scStepperItem
+            [stepControl]="signupForm.profile"
+            #profile="scStepperItem"
+          >
+            <button scStepperTrigger>
+              <span scStepperIndicator>
+                @switch (profile.status()) {
+                  @case ('complete') {
+                    <svg siCheckIcon></svg>
+                  }
+                  @case ('error') {
+                    <svg siXIcon></svg>
+                  }
+                  @default {
+                    2
+                  }
+                }
+              </span>
+              <span scStepperTitle>Profile</span>
+            </button>
+          </div>
+          <div scStepperSeparator [step]="1"></div>
+          <div scStepperItem #review="scStepperItem">
+            <button scStepperTrigger>
+              <span scStepperIndicator>3</span>
+              <span scStepperTitle>Review</span>
+            </button>
+          </div>
+        </div>
+
+        <div scStepperPanel [step]="0">
+          <ng-template scStepperContent>
+            <div scField>
+              <label scLabel>Email</label>
+              <input
+                scInput
+                type="email"
+                [formField]="signupForm.account.email"
+                placeholder="you@example.com"
+              />
+              <div scFieldErrors></div>
+            </div>
+          </ng-template>
+        </div>
+        <div scStepperPanel [step]="1">
+          <ng-template scStepperContent>
+            <div scField>
+              <label scLabel>Full name</label>
+              <input
+                scInput
+                [formField]="signupForm.profile.name"
+                placeholder="Ada Lovelace"
+              />
+              <div scFieldErrors></div>
+            </div>
+          </ng-template>
+        </div>
+        <div scStepperPanel [step]="2">
+          <ng-template scStepperContent>
+            @if (created()) {
+              <p class="text-sm" role="status">
+                Account created for {{ model().profile.name }}.
+              </p>
+            } @else {
+              <dl class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
+                <dt class="text-muted-foreground">Email</dt>
+                <dd>{{ model().account.email }}</dd>
+                <dt class="text-muted-foreground">Name</dt>
+                <dd>{{ model().profile.name }}</dd>
+              </dl>
+            }
+          </ng-template>
+        </div>
+
+        <div class="mt-6 flex justify-between">
+          <button scButton scStepperPrevious variant="outline">Back</button>
+          @if (stepper.isLastStep()) {
+            <button
+              scButton
+              type="button"
+              [disabled]="created()"
+              (click)="created.set(true)"
+            >
+              Create account
+            </button>
+          } @else {
+            <button scButton scStepperNext>Next</button>
+          }
+        </div>
+      </div>
+    </form>
+  `,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class LinearStepperDemo {
+  readonly selectedIndex = signal(0);
+  readonly created = signal(false);
+
+  readonly model = signal<SignupModel>({
+    account: { email: '' },
+    profile: { name: '' },
+  });
+
+  readonly signupForm = form(this.model, (s) => {
+    required(s.account.email, { message: 'Email is required' });
+    email(s.account.email, { message: 'Enter a valid email' });
+    required(s.profile.name, { message: 'Name is required' });
+  });
+}

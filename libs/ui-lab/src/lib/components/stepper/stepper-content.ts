@@ -1,25 +1,12 @@
-import {
-  Directive,
-  TemplateRef,
-  ViewContainerRef,
-  effect,
-  inject,
-} from '@angular/core';
-import { SC_STEPPER_PANEL } from './stepper-types';
+import { TabContent } from '@angular/aria/tabs';
+import { Directive } from '@angular/core';
 
+/**
+ * A panel's content (aria `TabContent`): created the first time its step
+ * becomes active, then kept. Every `scStepperPanel` needs one.
+ */
 @Directive({
   selector: 'ng-template[scStepperContent]',
+  hostDirectives: [TabContent],
 })
-export class ScStepperContent {
-  private readonly panel = inject(SC_STEPPER_PANEL);
-  private readonly templateRef = inject(TemplateRef);
-  private readonly viewContainerRef = inject(ViewContainerRef);
-
-  constructor() {
-    effect(() => {
-      if (this.panel.isActive() && this.viewContainerRef.length === 0) {
-        this.viewContainerRef.createEmbeddedView(this.templateRef);
-      }
-    });
-  }
-}
+export class ScStepperContent {}

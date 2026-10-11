@@ -1,43 +1,121 @@
 import { Tabs } from '@angular/aria/tabs';
-import { Directive, computed, input, model } from '@angular/core';
+import { CdkStepper } from '@angular/cdk/stepper';
+import {
+  type AfterContentInit,
+  DestroyRef,
+  Directive,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
+import { startWith } from 'rxjs';
 import { SC_STEPPER, ScStepperOrientation } from './stepper-types';
 
+/**
+ * A stepper. `@angular/cdk/stepper` owns the state — `[(selectedIndex)]`,
+ * `linear` mode, step validation (`stepControl`), completed/optional/editable
+ * steps — and `@angular/aria` `Tabs` the semantics and keyboard of the step
+ * list.
+ */
 @Directive({
   selector: '[scStepper]',
-  hostDirectives: [Tabs],
+  exportAs: 'scStepper',
+  hostDirectives: [
+    {
+      directive: CdkStepper,
+      inputs: ['linear', 'selectedIndex'],
+      outputs: ['selectedIndexChange', 'selectionChange'],
+    },
+    Tabs,
+  ],
   providers: [{ provide: SC_STEPPER, useExisting: ScStepper }],
   host: {
     '[class]': 'class()',
     '[attr.data-orientation]': 'orientation()',
   },
 })
-export class ScStepper {
+export class ScStepper implements AfterContentInit {
+  /** The CDK stepper behind this one. */
+  readonly cdk = inject(CdkStepper);
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScStepperOrientation>('horizontal');
-  readonly activeStep = model<number>(0);
+
+  /** Index of the current step. */
+  readonly selectedIndex = computed(() => this.cdk.selectedIndex);
+  /** Number of steps. */
+  readonly stepCount = signal(0);
+
+  private readonly destroyRef = inject(DestroyRef);
 
   protected readonly class = computed(() =>
     cn('flex flex-col gap-4', this.classInput()),
   );
 
-  goToStep(step: number): void {
-    this.activeStep.set(step);
+  constructor() {
+    effect(() => (this.cdk.orientation = this.orientation()));
   }
 
-  nextStep(): void {
-    this.activeStep.update((s) => s + 1);
+  ngAfterContentInit(): void {
+    // The CDK has collected its steps by now (host directives initialise first).
+    const subscription = this.cdk.steps.changes
+      .pipe(startWith(null))
+      .subscribe(() => this.stepCount.set(this.cdk.steps.length));
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-  prevStep(): void {
-    this.activeStep.update((s) => Math.max(0, s - 1));
+  /** Goes to a step, if the CDK allows it (linear mode, validity, `editable`). */
+  goToStep(index: number): void {
+    if (index >= 0 && index < this.cdk.steps.length) {
+      this.cdk.selectedIndex = index;
+    }
   }
 
-  isStepComplete(step: number): boolean {
-    return step < this.activeStep();
+  /**
+   * Next step. When the CDK refuses (linear mode, invalid step), the step's
+   * form is marked as touched so its errors show.
+   */
+  next(): void {
+    const before = this.cdk.selectedIndex;
+    this.cdk.next();
+    if (this.cdk.selectedIndex === before && !this.isLastStep()) {
+      this.revealErrors(before);
+    }
   }
 
-  isStepActive(step: number): boolean {
-    return step === this.activeStep();
+  private revealErrors(index: number): void {
+    const control = this.cdk.steps.get(index)?.stepControl;
+    if (typeof control === 'function') control().markAsTouched();
+    else control?.markAllAsTouched();
+  }
+
+  previous(): void {
+    this.cdk.previous();
+  }
+
+  /** Back to the first step, with every step reset (and its form). */
+  reset(): void {
+    this.cdk.reset();
+  }
+
+  isFirstStep(): boolean {
+    return this.selectedIndex() === 0;
+  }
+
+  isLastStep(): boolean {
+    return this.selectedIndex() === this.stepCount() - 1;
+  }
+
+  /** Whether the step at `index` is completed (reactive). */
+  isStepComplete(index: number): boolean {
+    this.stepCount();
+    return this.cdk.steps.get(index)?.completed ?? false;
+  }
+
+  isStepActive(index: number): boolean {
+    return this.selectedIndex() === index;
   }
 }

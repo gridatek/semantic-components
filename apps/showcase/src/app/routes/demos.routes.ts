@@ -3356,6 +3356,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/stepper',
     children: [
       {
+        path: 'linear-stepper-demo',
+        loadComponent: () =>
+          import('../pages/docs/stepper/demos/linear-stepper-demo').then(
+            (m) => m.LinearStepperDemo,
+          ),
+      },
+      {
         path: 'horizontal-stepper-demo',
         loadComponent: () =>
           import('../pages/docs/stepper/demos/horizontal-stepper-demo').then(

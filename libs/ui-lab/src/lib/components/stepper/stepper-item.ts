@@ -1,26 +1,55 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { CdkStep } from '@angular/cdk/stepper';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from '@semantic-components/ui';
-import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
+import {
+  SC_STEPPER,
+  SC_STEPPER_ITEM,
+  type ScStepperState,
+} from './stepper-types';
 
-@Directive({
+/**
+ * One step. A `CdkStep`, so it takes the CDK's inputs: `stepControl` (a Signal
+ * Forms field — the step can't be left while it's invalid in `linear` mode),
+ * `optional`, `editable`, `completed`, `hasError`. Its index comes from the
+ * stepper.
+ *
+ * An attribute component rather than a directive only because `CdkStep` is a
+ * component, and Angular lets only components extend components. It's used
+ * like a directive and just projects its content.
+ */
+@Component({
   selector: '[scStepperItem]',
   exportAs: 'scStepperItem',
-  providers: [{ provide: SC_STEPPER_ITEM, useExisting: ScStepperItem }],
+  template: '<ng-content />',
+  providers: [
+    { provide: CdkStep, useExisting: ScStepperItem },
+    { provide: SC_STEPPER_ITEM, useExisting: ScStepperItem },
+  ],
   host: {
     '[class]': 'class()',
-    '[attr.data-state]': 'state()',
+    '[attr.data-state]': 'status()',
   },
+  encapsulation: ViewEncapsulation.None,
 })
-export class ScStepperItem {
+export class ScStepperItem extends CdkStep {
   private readonly stepper = inject(SC_STEPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly step = input.required<number>();
 
-  readonly state = computed(() => {
-    const stepNum = this.step();
-    if (this.stepper.isStepComplete(stepNum)) return 'complete';
-    if (this.stepper.isStepActive(stepNum)) return 'active';
+  /**
+   * The step's status, for styling and your indicator content. (Not `state`:
+   * that is CdkStep's own input.)
+   */
+  readonly status = computed((): ScStepperState => {
+    if (this.isSelected()) return 'active';
+    if (this.interacted && this.hasError) return 'error';
+    if (this.completed) return 'complete';
     return 'inactive';
   });
 

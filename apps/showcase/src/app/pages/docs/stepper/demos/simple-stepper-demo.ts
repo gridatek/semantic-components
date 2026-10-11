@@ -2,10 +2,12 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
   ScStepper,
+  ScStepperContent,
   ScStepperIndicator,
   ScStepperItem,
   ScStepperList,
   ScStepperNext,
+  ScStepperPanel,
   ScStepperPrevious,
   ScStepperSeparator,
   ScStepperTrigger,
@@ -21,6 +23,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScStepperItem,
     ScStepperTrigger,
     ScStepperSeparator,
+    ScStepperPanel,
+    ScStepperContent,
     ScStepperPrevious,
     ScStepperNext,
     SiCheckIcon,
@@ -28,12 +32,12 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="w-full max-w-2xl rounded-lg border p-6">
-      <div scStepper [(activeStep)]="activeStep">
+      <div scStepper [(selectedIndex)]="selectedIndex">
         <div scStepperList>
-          <div scStepperItem [step]="0" #item0="scStepperItem">
+          <div scStepperItem #item0="scStepperItem">
             <button scStepperTrigger>
               <span scStepperIndicator>
-                @if (item0.state() === 'complete') {
+                @if (item0.status() === 'complete') {
                   <svg siCheckIcon></svg>
                 } @else {
                   1
@@ -42,10 +46,10 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             </button>
           </div>
           <div scStepperSeparator [step]="0"></div>
-          <div scStepperItem [step]="1" #item1="scStepperItem">
+          <div scStepperItem #item1="scStepperItem">
             <button scStepperTrigger>
               <span scStepperIndicator>
-                @if (item1.state() === 'complete') {
+                @if (item1.status() === 'complete') {
                   <svg siCheckIcon></svg>
                 } @else {
                   2
@@ -54,10 +58,10 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             </button>
           </div>
           <div scStepperSeparator [step]="1"></div>
-          <div scStepperItem [step]="2" #item2="scStepperItem">
+          <div scStepperItem #item2="scStepperItem">
             <button scStepperTrigger>
               <span scStepperIndicator>
-                @if (item2.state() === 'complete') {
+                @if (item2.status() === 'complete') {
                   <svg siCheckIcon></svg>
                 } @else {
                   3
@@ -66,10 +70,10 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             </button>
           </div>
           <div scStepperSeparator [step]="2"></div>
-          <div scStepperItem [step]="3" #item3="scStepperItem">
+          <div scStepperItem #item3="scStepperItem">
             <button scStepperTrigger>
               <span scStepperIndicator>
-                @if (item3.state() === 'complete') {
+                @if (item3.status() === 'complete') {
                   <svg siCheckIcon></svg>
                 } @else {
                   4
@@ -78,6 +82,16 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             </button>
           </div>
         </div>
+
+        @for (step of steps; track step) {
+          <div scStepperPanel [step]="$index">
+            <ng-template scStepperContent>
+              <p class="text-muted-foreground text-center text-sm">
+                {{ step }}
+              </p>
+            </ng-template>
+          </div>
+        }
 
         <div class="mt-6 flex justify-center gap-2">
           <button scButton scStepperPrevious variant="outline" size="lg">
@@ -92,5 +106,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SimpleStepperDemo {
-  readonly activeStep = signal(0);
+  readonly selectedIndex = signal(0);
+  readonly steps = [
+    'Step 1 of 4: get started.',
+    'Step 2 of 4: add the details.',
+    'Step 3 of 4: check everything.',
+    'Step 4 of 4: all done.',
+  ];
 }

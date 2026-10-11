@@ -1,47 +1,41 @@
 # Stepper
 
-A multi-step wizard component for guiding users through a process.
+A multi-step wizard, built from directives. [`@angular/cdk/stepper`](https://material.angular.dev/cdk/stepper) owns the state — the current step, linear mode, validation, completed / optional / editable steps — and `@angular/aria`'s `Tabs` the semantics and keyboard of the step list.
 
 ## Usage
 
 ```html
-<div scStepper [(activeStep)]="currentStep">
+<div scStepper [(selectedIndex)]="step">
   <div scStepperList>
-    <div scStepperItem [step]="0" #item0="scStepperItem">
+    <div scStepperItem #account="scStepperItem">
       <button scStepperTrigger>
         <span scStepperIndicator>
-          @if (item0.state() === 'complete') {
+          @if (account.status() === 'complete') {
           <svg siCheckIcon></svg>
           } @else { 1 }
         </span>
+        <span scStepperTitle>Account</span>
       </button>
-      <div class="flex flex-col">
-        <span scStepperTitle>Step 1</span>
-        <span scStepperDescription>First step</span>
-      </div>
     </div>
     <div scStepperSeparator [step]="0"></div>
-    <div scStepperItem [step]="1" #item1="scStepperItem">
+    <div scStepperItem #profile="scStepperItem">
       <button scStepperTrigger>
         <span scStepperIndicator>
-          @if (item1.state() === 'complete') {
+          @if (profile.status() === 'complete') {
           <svg siCheckIcon></svg>
           } @else { 2 }
         </span>
+        <span scStepperTitle>Profile</span>
       </button>
-      <div class="flex flex-col">
-        <span scStepperTitle>Step 2</span>
-        <span scStepperDescription>Second step</span>
-      </div>
     </div>
   </div>
 
-  <!-- Eager: always in DOM, hidden when inactive -->
-  <div scStepperPanel [step]="0">Step 1 content</div>
-
-  <!-- Lazy: content only created when step is active -->
+  <!-- Content is created the first time its step becomes active, then kept -->
+  <div scStepperPanel [step]="0">
+    <ng-template scStepperContent>Account content</ng-template>
+  </div>
   <div scStepperPanel [step]="1">
-    <ng-template scStepperContent>Step 2 content (lazy)</ng-template>
+    <ng-template scStepperContent>Profile content</ng-template>
   </div>
 
   <button scButton scStepperPrevious variant="outline">Previous</button>
@@ -49,330 +43,129 @@ A multi-step wizard component for guiding users through a process.
 </div>
 ```
 
-## Components
+Steps are numbered by the stepper in DOM order — items take no index. Panels and separators outside an item say which step they belong to with `[step]`. Every step needs a panel (each tab controls one), and panels go outside `scStepperList`.
 
-### ScStepper
+### Linear, with validation
 
-Root container directive that manages step state.
-
-**Selector:** `[scStepper]`
-
-**Inputs:**
-
-| Input         | Type                         | Default        | Description            |
-| ------------- | ---------------------------- | -------------- | ---------------------- |
-| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout orientation     |
-| `class`       | `string`                     | `''`           | Additional CSS classes |
-
-**Two-way Bindings:**
-
-| Binding      | Type     | Default | Description         |
-| ------------ | -------- | ------- | ------------------- |
-| `activeStep` | `number` | `0`     | Current active step |
-
-**Methods:**
-
-| Method                   | Description                 |
-| ------------------------ | --------------------------- |
-| `goToStep(step: number)` | Navigate to a specific step |
-| `nextStep()`             | Go to next step             |
-| `prevStep()`             | Go to previous step         |
-| `isStepComplete(step)`   | Check if step is complete   |
-| `isStepActive(step)`     | Check if step is active     |
-
-### ScStepperList
-
-Container for step indicators.
-
-**Selector:** `[scStepperList]`
-
-### ScStepperItem
-
-Individual step indicator. Exposes its state for template use via `exportAs`.
-
-**Selector:** `[scStepperItem]`
-**Export As:** `scStepperItem`
-
-**Inputs:**
-
-| Input   | Type     | Required | Description          |
-| ------- | -------- | -------- | -------------------- |
-| `step`  | `number` | Yes      | Step index (0-based) |
-| `class` | `string` | No       | Additional CSS       |
-
-**Computed:**
-
-| Property | Type     | Description                            |
-| -------- | -------- | -------------------------------------- |
-| `state`  | `Signal` | `'complete' \| 'active' \| 'inactive'` |
-
-**Data Attributes:**
-
-| Attribute    | Values                                 |
-| ------------ | -------------------------------------- |
-| `data-state` | `'complete' \| 'active' \| 'inactive'` |
-
-### ScStepperTrigger
-
-The clickable step header (the Aria tab): focus ring and disabled state. Put a `scStepperIndicator` inside, and optionally the title.
-
-**Selector:** `button[scStepperTrigger]`
-**Export As:** `scStepperTrigger`
-
-**Data Attributes:**
-
-| Attribute    | Values                                 |
-| ------------ | -------------------------------------- |
-| `data-state` | `'complete' \| 'active' \| 'inactive'` |
-
-### ScStepperIndicator
-
-The step's circle: border and colors follow the step's state, and icons inside are sized for you. The content is yours — a number, a check, any icon — chosen from `state()` and `step()`.
-
-**Selector:** `[scStepperIndicator]`
-**Export As:** `scStepperIndicator`
-
-| Signal    | Type                                   | Description              |
-| --------- | -------------------------------------- | ------------------------ |
-| `state()` | `'complete' \| 'active' \| 'inactive'` | The step's state         |
-| `step()`  | `number`                               | The step index (0-based) |
-
-**Data Attributes:** `data-state` (same values).
-
-### ScStepperSeparator
-
-Visual line between steps. Automatically adapts to the stepper orientation.
-
-**Selector:** `[scStepperSeparator]`
-
-**Inputs:**
-
-| Input   | Type     | Required | Description                                            |
-| ------- | -------- | -------- | ------------------------------------------------------ |
-| `step`  | `number` | No       | Step index (for horizontal separators outside an item) |
-| `class` | `string` | No       | Additional CSS                                         |
-
-**Data Attributes:**
-
-| Attribute    | Values                     |
-| ------------ | -------------------------- |
-| `data-state` | `'complete' \| 'inactive'` |
-
-### ScStepperPanel
-
-Eager content panel for a step. Always in the DOM, hidden via `[hidden]` when not active.
-
-**Selector:** `[scStepperPanel]`
-
-**Inputs:**
-
-| Input   | Type     | Required | Description          |
-| ------- | -------- | -------- | -------------------- |
-| `step`  | `number` | Yes      | Step index (0-based) |
-| `class` | `string` | No       | Additional CSS       |
-
-### ScStepperContent
-
-Lazy content directive used inside `ScStepperPanel` with `ng-template`. Content is only created when the step becomes active and destroyed when navigating away.
-
-**Selector:** `ng-template[scStepperContent]`
-
-### ScStepperTitle
-
-Title text for a step.
-
-**Selector:** `[scStepperTitle]`
-
-### ScStepperDescription
-
-Description text for a step.
-
-**Selector:** `[scStepperDescription]`
-
-### ScStepperPrevious
-
-Directive for the previous step button. Auto-disables on first step. Use with `scButton` for styling.
-
-**Selector:** `button[scStepperPrevious]`
-
-### ScStepperNext
-
-Directive for the next step button. Use with `scButton` for styling.
-
-**Selector:** `button[scStepperNext]`
-
-## Examples
-
-### Horizontal Stepper with Content
+Give each step a `stepControl` (a Signal Forms field). In `linear` mode a step can't be left while it's invalid — neither with Next nor by clicking a later step — and a refused Next marks the step's fields as touched so their errors show.
 
 ```html
-<div scStepper [(activeStep)]="step">
-  <div scStepperList>
-    <div scStepperItem [step]="0" #item0="scStepperItem">
-      <button scStepperTrigger>
-        <span scStepperIndicator>
-          @if (item0.state() === 'complete') {
-          <svg siCheckIcon></svg>
-          } @else { 1 }
-        </span>
-      </button>
-      <div class="flex flex-col">
-        <span scStepperTitle>Account</span>
-        <span scStepperDescription>Create your account</span>
-      </div>
-    </div>
-    <div scStepperSeparator [step]="0"></div>
-    <div scStepperItem [step]="1" #item1="scStepperItem">
-      <button scStepperTrigger>
-        <span scStepperIndicator>
-          @if (item1.state() === 'complete') {
-          <svg siCheckIcon></svg>
-          } @else { 2 }
-        </span>
-      </button>
-      <div class="flex flex-col">
-        <span scStepperTitle>Profile</span>
-        <span scStepperDescription>Set up your profile</span>
-      </div>
-    </div>
-    <div scStepperSeparator [step]="1"></div>
-    <div scStepperItem [step]="2" #item2="scStepperItem">
-      <button scStepperTrigger>
-        <span scStepperIndicator>
-          @if (item2.state() === 'complete') {
-          <svg siCheckIcon></svg>
-          } @else { 3 }
-        </span>
-      </button>
-      <div class="flex flex-col">
-        <span scStepperTitle>Complete</span>
-        <span scStepperDescription>Review and submit</span>
-      </div>
-    </div>
-  </div>
-
-  <div scStepperPanel [step]="0">Account form...</div>
-  <div scStepperPanel [step]="1">Profile form...</div>
-
-  <div scStepperPanel [step]="2">
-    <ng-template scStepperContent>Review...</ng-template>
-  </div>
-
-  <div class="flex justify-between">
-    <button scButton scStepperPrevious variant="outline" size="lg">Previous</button>
-    <button scButton scStepperNext size="lg">Next</button>
-  </div>
-</div>
-```
-
-### Vertical Stepper
-
-```html
-<div scStepper orientation="vertical" [(activeStep)]="step">
-  <div scStepperList>
-    <div scStepperItem [step]="0" #item0="scStepperItem">
-      <div class="flex flex-col items-center">
+<form [formRoot]="signupForm">
+  <div scStepper linear [(selectedIndex)]="step" #stepper="scStepper">
+    <div scStepperList>
+      <div scStepperItem [stepControl]="signupForm.account" #account="scStepperItem">
         <button scStepperTrigger>
           <span scStepperIndicator>
-            @if (item0.state() === 'complete') {
+            @switch (account.status()) { @case ('complete') {
             <svg siCheckIcon></svg>
-            } @else { 1 }
+            } @case ('error') {
+            <svg siXIcon></svg>
+            } @default { 1 } }
           </span>
+          <span scStepperTitle>Account</span>
         </button>
-        <div scStepperSeparator></div>
       </div>
-      <div class="flex flex-col pb-4">
-        <span scStepperTitle>Step 1</span>
-        <span scStepperDescription>First step</span>
-        @if (step() === 0) {
-        <div class="bg-muted mt-4 rounded-lg p-4">
-          <p class="text-sm">Step 1 content</p>
+      …
+    </div>
+
+    <div scStepperPanel [step]="0">
+      <ng-template scStepperContent>
+        <div scField>
+          <label scLabel>Email</label>
+          <input scInput type="email" [formField]="signupForm.account.email" />
+          <div scFieldErrors></div>
         </div>
-        }
-      </div>
+      </ng-template>
     </div>
-    <div scStepperItem [step]="1" #item1="scStepperItem">
-      <div class="flex flex-col items-center">
-        <button scStepperTrigger>
-          <span scStepperIndicator>
-            @if (item1.state() === 'complete') {
-            <svg siCheckIcon></svg>
-            } @else { 2 }
-          </span>
-        </button>
-      </div>
-      <div class="flex flex-col">
-        <span scStepperTitle>Step 2</span>
-        <span scStepperDescription>Second step</span>
-      </div>
-    </div>
-  </div>
+    …
 
-  <div class="flex justify-between">
-    <button scButton scStepperPrevious variant="outline" size="lg">Previous</button>
-    <button scButton scStepperNext size="lg">Next</button>
+    <button scButton scStepperPrevious variant="outline">Back</button>
+    @if (stepper.isLastStep()) {
+    <button scButton type="button" (click)="submit()">Create account</button>
+    } @else {
+    <button scButton scStepperNext>Next</button>
+    }
   </div>
-</div>
+</form>
 ```
 
-### Simple Number Steps
-
-```html
-<div scStepper [(activeStep)]="step">
-  <div scStepperList>
-    <div scStepperItem [step]="0" #item0="scStepperItem">
-      <button scStepperTrigger>
-        <span scStepperIndicator>
-          @if (item0.state() === 'complete') {
-          <svg siCheckIcon></svg>
-          } @else { 1 }
-        </span>
-      </button>
-    </div>
-    <div scStepperSeparator [step]="0"></div>
-    <div scStepperItem [step]="1" #item1="scStepperItem">
-      <button scStepperTrigger>
-        <span scStepperIndicator>
-          @if (item1.state() === 'complete') {
-          <svg siCheckIcon></svg>
-          } @else { 2 }
-        </span>
-      </button>
-    </div>
-    <div scStepperSeparator [step]="1"></div>
-    <div scStepperItem [step]="2" #item2="scStepperItem">
-      <button scStepperTrigger>
-        <span scStepperIndicator>
-          @if (item2.state() === 'complete') {
-          <svg siCheckIcon></svg>
-          } @else { 3 }
-        </span>
-      </button>
-    </div>
-  </div>
-
-  <button scButton scStepperPrevious variant="outline">Back</button>
-  <button scButton scStepperNext>Continue</button>
-</div>
+```typescript
+readonly model = signal({ account: { email: '' }, profile: { name: '' } });
+readonly signupForm = form(this.model, (s) => {
+  required(s.account.email);
+  email(s.account.email);
+  required(s.profile.name);
+});
 ```
 
-## Features
+## Parts
 
-- **Horizontal/Vertical**: Supports both orientations
-- **Click Navigation**: Click any step trigger to navigate directly
-- **Step States**: Complete, active, and inactive visual states via `data-state`
-- **Auto-disable**: Previous button disabled on first step
-- **Composable Triggers**: Consumer provides trigger content (numbers, icons, custom elements)
-- **Composable Buttons**: Previous/Next are directives — combine with `scButton` for styling
-- **Two-way Binding**: Sync step state with `[(activeStep)]`
-- **Separator State**: Separator line changes color when its step is complete
-- **Lazy Content**: `ScStepperContent` inside `ScStepperPanel` uses `ng-template` to lazily render step content
-- **Eager Content**: `ScStepperPanel` keeps content in the DOM, toggling visibility
+### ScStepper — `[scStepper]` (`exportAs: 'scStepper'`)
+
+Hosts the CDK's `CdkStepper` and aria `Tabs`.
+
+| Input         | Type                         | Default        | Description                      |
+| ------------- | ---------------------------- | -------------- | -------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Layout and arrow keys            |
+| `linear`      | `boolean`                    | `false`        | Steps must be completed in order |
+| `class`       | `string`                     | `''`           | Additional CSS classes           |
+
+| Model / output      | Type                    | Description                                   |
+| ------------------- | ----------------------- | --------------------------------------------- |
+| `[(selectedIndex)]` | `number`                | Current step (0-based)                        |
+| `(selectionChange)` | `StepperSelectionEvent` | From the CDK: previous and new step and index |
+
+Signals: `selectedIndex()`, `stepCount()`. Methods: `next()`, `previous()`, `goToStep(index)`, `reset()` (first step, every step and its form reset), `isFirstStep()`, `isLastStep()`, `isStepComplete(index)`, `isStepActive(index)`. The CDK stepper itself is `cdk`.
+
+### ScStepperList — `[scStepperList]`
+
+The row of steps: `role="tablist"` (aria `TabList`), one Tab stop, arrow keys between steps.
+
+### ScStepperItem — `[scStepperItem]` (`exportAs: 'scStepperItem'`)
+
+One step — a `CdkStep`, with its inputs. It's an attribute component (only components can extend `CdkStep`), used like a directive: it just projects its content.
+
+| Input         | Type               | Default | Description                                            |
+| ------------- | ------------------ | ------- | ------------------------------------------------------ |
+| `stepControl` | Signal Forms field | —       | The step is complete when it's valid (and was visited) |
+| `optional`    | `boolean`          | `false` | Can be skipped in linear mode                          |
+| `editable`    | `boolean`          | `true`  | Can be revisited once completed                        |
+| `completed`   | `boolean`          | —       | Overrides the computed completion                      |
+| `hasError`    | `boolean`          | —       | Overrides the computed error                           |
+| `class`       | `string`           | `''`    | Additional CSS classes                                 |
+
+`status()`: `'active' | 'complete' | 'error' | 'inactive'` (also as `data-state`); `index()`: its position. (`status`, not `state`: `state` is a `CdkStep` input.)
+
+### ScStepperTrigger — `button[scStepperTrigger]`
+
+The clickable step header (an aria tab). Disabled — still focusable — while the step can't be reached (linear mode, an earlier step incomplete). Holds the indicator and, ideally, the title (it names the tab).
+
+### ScStepperIndicator — `[scStepperIndicator]` (`exportAs: 'scStepperIndicator'`)
+
+The step's circle: border and colors follow the step's status (including `error`), icons inside are sized for you. The content is yours — `state()` and `step()` help you choose it.
+
+### ScStepperSeparator — `[scStepperSeparator]`
+
+The line after a step; filled once that step is completed. `[step]` when it's outside the item. Hidden from assistive technology.
+
+### ScStepperPanel — `[scStepperPanel]`
+
+The content of step `[step]` (`role="tabpanel"`, labelled by its step), shown while that step is current. Its content goes in a `scStepperContent` template.
+
+### ScStepperContent — `ng-template[scStepperContent]`
+
+Required inside every panel (aria `TabContent`): creates the content the first time its step becomes active, and keeps it when you leave the step.
+
+### ScStepperTitle / ScStepperDescription
+
+Text for a step.
+
+### ScStepperPrevious / ScStepperNext — `button[scStepperPrevious]` / `button[scStepperNext]`
+
+Previous is disabled on the first step. Next respects linear mode and validation. Use with `scButton`.
 
 ## Accessibility
 
-Built on `@angular/aria`'s `Tabs`:
-
-- The step list is a `role="tablist"` (with `aria-orientation` from the stepper's orientation); step triggers are `role="tab"` with `aria-selected` and `aria-controls`; panels are `role="tabpanel"` labelled by their step.
-- One Tab stop for the step list: ←/→ (↑/↓ when vertical) move between steps, Home/End go to the first/last step.
-- Previous/Next buttons get `aria-disabled` at the ends.
+- The step list is a `role="tablist"` (`aria-orientation` from the orientation); triggers are `role="tab"` with `aria-selected` and `aria-controls`; panels are `role="tabpanel"` labelled by their step. Put the title inside the trigger so each tab has a name.
+- One Tab stop for the step list: ←/→ (↑/↓ when vertical) move between steps, Home/End go to the first/last step. Steps that can't be reached yet are `aria-disabled`.
+- In linear mode a refused Next shows the step's field errors; the indicator switches to the error state.
